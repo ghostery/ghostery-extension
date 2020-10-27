@@ -18,7 +18,7 @@ import ThemeContext from '../../contexts/ThemeContext';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
-import { renderKnownTrackerButtons, renderUnknownTrackerButtons } from './trackerButtonRenderHelpers';
+import { renderKnownTrackerButtons, renderUnidentifiedTrackerButtons } from './trackerButtonRenderHelpers';
 /**
  * @class Implement Tracker component which represents single tracker
  * in the Blocking view.
@@ -261,7 +261,7 @@ class Tracker extends React.Component {
 	}
 
 	/**
-	 * Implement handler for clicking on the trust or scrub SVGs for an unknown tracker
+	 * Implement handler for clicking on the trust or scrub SVGs for an unidentified tracker
 	 * Trigger actions which persist the new setting and notify user
 	 * that the page should be reloaded.
 	 */
@@ -327,7 +327,7 @@ class Tracker extends React.Component {
 	*/
 	render() {
 		const {
-			tracker, isUnknown, language, show_tracker_urls
+			tracker, isUnidentified, language, show_tracker_urls
 		} = this.props;
 		const {
 			trackerClasses,
@@ -353,7 +353,7 @@ class Tracker extends React.Component {
 			));
 		} else if (tracker.domains) {
 			sources = tracker.domains.map(domain => (
-				<p className="trk-src-link unknown" key={domain}>{domain}</p>
+				<p className="trk-src-link unidentified" key={domain}>{domain}</p>
 			));
 		}
 
@@ -377,14 +377,14 @@ class Tracker extends React.Component {
 						{!tracker.whitelisted && this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						{!isUnknown && renderKnownTrackerButtons(
+						{!isUnidentified && renderKnownTrackerButtons(
 							tracker.ss_allowed,
 							tracker.ss_blocked,
 							this.clickTrackerTrust,
 							this.clickTrackerRestrict,
 							this.clickTrackerStatus,
 						)}
-						{isUnknown && renderUnknownTrackerButtons(
+						{isUnidentified && renderUnidentifiedTrackerButtons(
 							this.handleCliqzTrackerWhitelist,
 							tracker.whitelisted,
 							tracker.siteRestricted,
@@ -396,7 +396,7 @@ class Tracker extends React.Component {
 				{showMoreInfo && (
 					<div className={`${!showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
 						<div className="columns">
-							{!isUnknown && (
+							{!isUnidentified && (
 								<div className="trk-description">
 									{description}
 									<div className={(!showTrackerLearnMore ? 'hide' : '')}>

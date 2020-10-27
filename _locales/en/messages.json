@@ -1507,7 +1507,7 @@
 		"message": "Choose which trackers to block"
 	},
 	"hub_setup_antisuite_description_antitracking": {
-		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
+		"message": "Anonymize unblocked and unidentified trackers for greater browsing protection."
 	},
 	"hub_setup_feature_already_active": {
 		"message": "This feature is already active in Cliqz by default. $LINK_LM_START$Learn More$LINK_LM_END$",
@@ -2324,11 +2324,11 @@
 	"OFFERS_ENDS": {
 		"message": ""
 	},
-	"unknown": {
-		"message": "Unknown"
+	"unidentified": {
+		"message": "Unidentified"
 	},
-	"unknown_description": {
-		"message": "Unknown trackers scrubbed by Anti-Tracking"
+	"unidentified_description": {
+		"message": "Unidentified trackers scrubbed by Anti-Tracking"
 	},
 	"ghostery_is_ready": {
 		"message": "Ghostery is Ready!"

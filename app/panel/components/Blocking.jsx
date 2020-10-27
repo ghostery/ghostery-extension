@@ -120,9 +120,9 @@ class Blocking extends React.Component {
 	* @param  {string} filterName
 	*/
 	setShow(filterName) {
-		const { actions, categories, unknownCategory } = this.props;
+		const { actions, categories, unidentifiedCategory } = this.props;
 		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
-		const updatedUnknownCategory = JSON.parse(JSON.stringify(unknownCategory)); // deep clone
+		const updatedUnidentifiedCategory = JSON.parse(JSON.stringify(unidentifiedCategory)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
@@ -141,9 +141,9 @@ class Blocking extends React.Component {
 			categoryEl.num_shown = (show) ? count : 0;
 		});
 
-		updatedUnknownCategory.hide = !(filterName === 'all' || filterName === 'unknown');
+		updatedUnidentifiedCategory.hide = !(filterName === 'all' || filterName === 'unidentified');
 		actions.updateCategories(updated_categories);
-		actions.updateUnknownCategoryHide(updatedUnknownCategory);
+		actions.updateUnidentifiedCategoryHide(updatedUnidentifiedCategory);
 	}
 
 	/**
@@ -316,7 +316,7 @@ class Blocking extends React.Component {
 		const {
 			actions,
 			categories,
-			unknownCategory,
+			unidentifiedCategory,
 			enable_anti_tracking,
 			expand_all_trackers,
 			is_expanded,
@@ -349,7 +349,7 @@ class Blocking extends React.Component {
 					<NotScanned />
 				) : (
 					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
-						{(categories.length > 0 || unknownCategory.unknownTrackers.length > 0) && (
+						{(categories.length > 0 || unidentifiedCategory.unidentifiedTrackers.length > 0) && (
 							<Categories
 								expandAll={expand_all_trackers}
 								categories={categories}
@@ -360,7 +360,7 @@ class Blocking extends React.Component {
 								language={language}
 								smartBrowseActive={smartBrowseActive}
 								smartBrowse={smartBrowse}
-								unknownCategory={unknownCategory}
+								unidentifiedCategory={unidentifiedCategory}
 								enable_anti_tracking={enable_anti_tracking}
 							/>
 						)}

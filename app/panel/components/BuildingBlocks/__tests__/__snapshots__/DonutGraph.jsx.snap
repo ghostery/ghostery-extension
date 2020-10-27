@@ -33,9 +33,9 @@ exports[`app/panel/components/DonutGraph.jsx Snapshot tests with react-test-rend
     </span>
     <span
       className="DonutGraph__tooltip tooltip top"
-      id="unknown_tooltip"
+      id="unidentified_tooltip"
     >
-      unknown
+      unidentified
     </span>
   </div>
   <div
@@ -110,9 +110,9 @@ exports[`app/panel/components/DonutGraph.jsx Snapshot tests with react-test-rend
     </span>
     <span
       className="DonutGraph__tooltip tooltip top"
-      id="unknown_tooltip"
+      id="unidentified_tooltip"
     >
-      unknown
+      unidentified
     </span>
   </div>
   <div

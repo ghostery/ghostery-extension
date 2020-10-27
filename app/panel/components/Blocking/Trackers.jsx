@@ -43,7 +43,7 @@ class Trackers extends React.Component {
 		const {
 			actions,
 			trackers,
-			isUnknown,
+			isUnidentified,
 			globalBlocking,
 			showToast,
 			language,
@@ -87,7 +87,7 @@ class Trackers extends React.Component {
 					language={language}
 					smartBrowseActive={smartBrowseActive}
 					smartBrowse={smartBrowse}
-					isUnknown={isUnknown}
+					isUnidentified={isUnidentified}
 				/>
 			));
 		}
