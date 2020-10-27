@@ -69,7 +69,7 @@ class PromoModal extends React.Component {
 		let url;
 		switch (product) {
 			case PLUS:
-				url = `${GHOSTERY_BASE_URL}/products/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `${GHOSTERY_BASE_URL}/pricing?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case PREMIUM:
 				url = `${GHOSTERY_BASE_URL}/midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
