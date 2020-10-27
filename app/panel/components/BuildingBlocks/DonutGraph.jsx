@@ -66,7 +66,7 @@ class DonutGraph extends React.Component {
 						return '#87d7ef';
 					case 'social_media':
 						return '#388ee8';
-					case 'unknown':
+					case 'unidentified':
 						return '#8459a5';
 					default:
 						return '#e8e8e8';
@@ -163,11 +163,11 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		if (!prevAntiTracking.unknownTrackerCount && !antiTracking.unknownTrackerCount
-			&& !prevAdBlock.unknownTrackerCount && !adBlock.unknownTrackerCount) { return; }
-		const prevUnknownDataPoints = prevAntiTracking.unknownTrackerCount + prevAdBlock.unknownTrackerCount;
-		const unknownDataPoints = antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
-		if (prevUnknownDataPoints !== unknownDataPoints) {
+		if (!prevAntiTracking.unidentifiedTrackerCount && !antiTracking.unidentifiedTrackerCount
+			&& !prevAdBlock.unidentifiedTrackerCount && !adBlock.unidentifiedTrackerCount) { return; }
+		const prevUnidentifiedDataPoints = prevAntiTracking.unidentifiedTrackerCount + prevAdBlock.unidentifiedTrackerCount;
+		const unidentifiedDataPoints = antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount;
+		if (prevUnidentifiedDataPoints !== unidentifiedDataPoints) {
 			this.nextPropsDonut(this.props);
 		}
 	}
@@ -213,7 +213,7 @@ class DonutGraph extends React.Component {
 		} = options;
 		const graphData = [];
 		const animationDuration = categories.length > 0 ? 500 : 0;
-		const categoryCount = categories.length + antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
+		const categoryCount = categories.length + antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount;
 
 		// Process categories into graphData
 		if (categoryCount === 0) {
@@ -233,11 +233,11 @@ class DonutGraph extends React.Component {
 			graphData.sort((a, b) => a.value < b.value);
 		}
 
-		if (antiTracking.unknownTrackerCount || adBlock.unknownTrackerCount) {
+		if (antiTracking.unidentifiedTrackerCount || adBlock.unidentifiedTrackerCount) {
 			graphData.push({
-				id: 'unknown',
-				name: 'Unknown',
-				value: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
+				id: 'unidentified',
+				name: 'Unidentified',
+				value: antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount,
 			});
 		}
 
@@ -252,9 +252,9 @@ class DonutGraph extends React.Component {
 				tooltip.classList.remove('DonutGraph__tooltip--show');
 			}
 		});
-		const unknown_tooltip = document.getElementById('unknown_tooltip');
-		if (unknown_tooltip) {
-			unknown_tooltip.classList.remove('DonutGraph__tooltip--show');
+		const unidentified_tooltip = document.getElementById('unidentified_tooltip');
+		if (unidentified_tooltip) {
+			unidentified_tooltip.classList.remove('DonutGraph__tooltip--show');
 		}
 
 		// CONNECT NEW DATA
@@ -382,13 +382,13 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
-					{(!!antiTracking.unknownTrackerCount || !!adBlock.unknownTrackerCount) && (
+					{(!!antiTracking.unidentifiedTrackerCount || !!adBlock.unidentifiedTrackerCount) && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
-							id="unknown_tooltip"
-							key="unknown"
+							id="unidentified_tooltip"
+							key="unidentified"
 						>
-							{t('unknown')}
+							{t('unidentified')}
 						</span>
 					)}
 				</div>
@@ -422,8 +422,8 @@ DonutGraph.propTypes = {
 
 DonutGraph.defaultProps = {
 	categories: [],
-	adBlock: { unknownTrackerCount: 0 },
-	antiTracking: { unknownTrackerCount: 0 },
+	adBlock: { unidentifiedTrackerCount: 0 },
+	antiTracking: { unidentifiedTrackerCount: 0 },
 	clickDonut: () => {},
 	isSmall: false,
 };
