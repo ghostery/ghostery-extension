@@ -802,7 +802,7 @@ class Debugger {
 	openIntroHub = (modal = '') => {
 		const showModal = modal.toLowerCase() === 'modal';
 		chrome.tabs.create({
-			url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showModal}`),
+			url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&pm=${showModal}`),
 			active: true
 		});
 		return THANKS;
