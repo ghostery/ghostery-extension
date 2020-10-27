@@ -282,7 +282,7 @@ class Metrics {
 			// Adblocking state
 			this._buildQueryPair('ab', conf.enable_ad_block ? '1' : '0') +
 			// Smartblocking state
-			this._buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
+			this._buildQueryPair('sm', conf.enable_smart_browse ? '1' : '0') +
 			// Antitracking state
 			this._buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
