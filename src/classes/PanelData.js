@@ -726,7 +726,7 @@ class PanelData {
 	 * @private
 	 * @param	{Object}	tracker
 	 * @param	{Object}	trackerState
-	 * @param	{Object}	smartBrowse		smart blocking stats for the active tab
+	 * @param	{Object}	smartBrowse		smart-browsing stats for the active tab
 	 * @return	{Object}	object of tracker data
 	 */
 	static _buildTracker(tracker, trackerState, smartBrowse) {

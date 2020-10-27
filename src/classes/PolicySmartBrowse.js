@@ -1,7 +1,7 @@
 /**
- * Smart Blocking Policy Class
+ * Smart-Browsing Policy Class
  *
- * Handles policy for Smart Blocking
+ * Handles policy for Smart-Browsing
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -21,7 +21,7 @@ import Policy from './Policy';
 import c2pDb from './Click2PlayDb';
 import { log } from '../utils/common';
 /**
- * Class for handling Smart Blocking site policy.
+ * Class for handling Smart-Browsing site policy.
  * @memberOf  BackgroundClasses
  * @todo  make it a Singelton
  */
@@ -65,7 +65,7 @@ class PolicySmartBrowse {
 		}
 
 		if (reason) {
-			log('Smart Blocking unblocked appId', appId, 'for reason:', reason);
+			log('Smart-Browsing unblocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBrowseAppInfo(tabId, appId, reason, false);
 			return true;
 		}
@@ -105,7 +105,7 @@ class PolicySmartBrowse {
 
 		const result = (reason === 'slow');
 		if (result) {
-			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
+			log('Smart-Browsing blocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBrowseAppInfo(tabId, appId, 'slow', true);
 		}
 
@@ -113,8 +113,8 @@ class PolicySmartBrowse {
 	}
 
 	/**
-	 * Check if Smart Block should proceed based on:
-	 * 1. Smart Block is enabled
+	 * Check if Smart-Browse should proceed based on:
+	 * 1. Smart-Browse is enabled
 	 * 2. Paused blocking is disabled
 	 * 3. Page is neither whitelisted or blacklisted
 	 * 4. Tracker is not site-specific unblocked

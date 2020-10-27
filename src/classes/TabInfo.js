@@ -15,7 +15,7 @@
  *		prefetched: 	{boolean}	indicates that the tab was prefetched and not part of the main window
  *		purplebox: 		{boolean}	indicates that the purplebox.js script has been loaded on this tab
  *		protocol: 		{string} 	request protocol
- *		smartBrowse: 	{Object}	smart blocking stats for this tab
+ *		smartBrowse: 	{Object}	smart-browsing stats for this tab
  * 		url: 			{string} 	full url
  * }
  *
@@ -128,10 +128,10 @@ class TabInfo {
 		}
 
 	/**
-	 * Set Smart Blocking counts for this tab
+	 * Set Smart-Browsing counts for this tab
 	 * @param {number} 	tabId 		tab id
 	 * @param {number} 	appId		tracker id
-	 * @param {string} 	rule   		smart blocking rule name
+	 * @param {string} 	rule   		smart-browsing rule name
 	 * @param {boolean} blocked		kind of policy to set
 	 */
 	setTabSmartBrowseAppInfo(tabId, appId, rule, blocked) {

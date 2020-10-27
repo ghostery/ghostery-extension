@@ -19,7 +19,7 @@ import { sendMessage } from './msg';
  * Dispatch action to SummaryActions to update trackerCounts.
  * @memberOf PanelUtils
  * @param {array}	 categories        		array of categories
- * @param {object} smartBrowse 	blocked and unblocked of Smart Blocking
+ * @param {object} smartBrowse 	blocked and unblocked of Smart-Browsing
  * @param {function} updateTrackerCounts 	from SummaryActions
  */
 export function updateSummaryBlockingCount(categories = [], smartBrowse, updateTrackerCounts) {
