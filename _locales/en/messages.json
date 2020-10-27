@@ -810,7 +810,7 @@
 		"message": "Ad-Block Lists"
 	},
 	"settings_adblocker_lists": {
-		"message": "Load the following Ad-Block filter lists:"
+		"message": "Load the following ad-block filter lists:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Ads only"
