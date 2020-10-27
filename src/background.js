@@ -21,6 +21,8 @@ import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
+import Rewards from './classes/Rewards';
+import GhosteryModule from './classes/Module';
 // static classes
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
@@ -37,11 +39,8 @@ import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
-import Rewards from './classes/Rewards';
 import account from './classes/Account';
-import GhosteryModule from './classes/Module';
 import promoModals from './classes/PromoModals';
-
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -1617,6 +1616,12 @@ function initializeGhosteryModules() {
 		conf.install_random_number = randomNumber;
 		conf.install_date = dateString;
 
+		// Set default search partners for Ghostery Desktop Browser. These can be removed
+		// by the user under Trusted Site settings.
+		if (BROWSER_INFO.name === 'ghostery_desktop') {
+			conf.site_whitelist.push('bing.com', 'search.yahoo.com', 'startpage.com');
+		}
+
 		metrics.setUninstallUrl();
 
 		metrics.ping('install');
@@ -1642,18 +1647,22 @@ function initializeGhosteryModules() {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
-				conf.enable_offers = !offers.isDisabled && !IS_ANDROID;
 
-				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_android') {
-					if (globals.JUST_INSTALLED) {
-						conf.enable_human_web = false;
-						conf.enable_offers = false;
-					} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
-						conf.enable_human_web = false;
-						conf.enable_offers = cliqz.prefs.get('myoffrz.opted_in') || false;
-						conf.cliqz_legacy_opt_in = true;
+				// Make sure that getBrowserInfo() has resolved before we set these properties
+				(async() => {
+					await globals.BROWSER_INFO_READY;
+					conf.enable_offers = !offers.isDisabled && !IS_ANDROID && BROWSER_INFO.name !== 'ghostery_desktop';
+					if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
+						if (globals.JUST_INSTALLED) {
+							conf.enable_human_web = false;
+							conf.enable_offers = false;
+						} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
+							conf.enable_human_web = false;
+							conf.enable_offers = cliqz.prefs.get('myoffrz.opted_in') || false;
+							conf.cliqz_legacy_opt_in = true;
+						}
 					}
-				}
+				})();
 
 				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
 				if (myoffrzShouldMigrate) {
@@ -1747,7 +1756,7 @@ function initializeGhosteryModules() {
 			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
 			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
-			if (globals.JUST_INSTALLED) {
+			if (globals.JUST_INSTALLED && BROWSER_INFO.name !== 'ghostery_desktop') {
 				const showAlternateHub = conf.hub_layout === 'alternate';
 				const route = showAlternateHub ? '#home' : '';
 				chrome.tabs.create({
