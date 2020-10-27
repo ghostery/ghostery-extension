@@ -134,7 +134,7 @@ See the complete GitHub [milestone](https://github.com/ghostery/ghostery-extensi
 + Add new counter for Requests Modified by Anti-Tracking (#392)
 + Show fingerprint, cookie and advertisement icons in Detail View tracker list (#394)
 + Improved Anti-Tracking integration (#377)
-+ Integrate Click2Play into SmartBrowsing (#388)
++ Integrate Click2Play into SmartBlocking (#388)
 + Respect pause state before displaying CMP and Rewards windows (Fixes #389)
 + Performance improvements (Fixes #12)
 + Improved Ad-Blocker filter rule injection (Fixes #381)
