@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "Hide Box"
-	},
-	"box_hide_expanded": {
-		"message": "Hide Purple Box"
-	},
 	"box_looking": {
 		"message": "Looking"
 	},
@@ -822,7 +816,7 @@
 		"message": "Ads + Trackers + Annoyances"
 	},
 	"settings_purple_box": {
-		"message": "Purple Box"
+		"message": "Tracker-Tally"
 	},
 	"settings_notifications": {
 		"message": "Notifications"
@@ -882,7 +876,7 @@
 		"message": "Block new trackers added to Ghostery by default"
 	},
 	"settings_show_purple_box": {
-		"message": "Show the purple box in the corner of my browser"
+		"message": "Show the tracker-tally in the corner of my browser"
 	},
 	"settings_dismiss_after": {
 		"message": "Dismiss After"
@@ -909,7 +903,7 @@
 		"message": "secs"
 	},
 	"settings_hide_alert_trusted": {
-		"message": "Hide the purple box on trusted websites"
+		"message": "Hide the tracker-tally on trusted websites"
 	},
 	"settings_notify_me": {
 		"message": "Notify me when Ghostery:"
@@ -1026,7 +1020,7 @@
 		"message": "For example, blocking a Facebook tracker on facebook.com might break the site."
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "The purple box is a real-time list of trackers that is displayed in the corner of your browser. This feature will help you see trackers as they are added onto a webpage."
+		"message": "The tracker-tally is a list in the corner of your browser that displays trackers as they load in real-time."
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Allow Ghostery to show messages in my browser related to new product features, updates, and customer feedback."
