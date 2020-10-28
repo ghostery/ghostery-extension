@@ -200,12 +200,13 @@ PromoModal.propTypes = {
 	type: PropTypes.string.isRequired,
 	location: PropTypes.string,
 	isPlus: PropTypes.bool,
-	tab_id: PropTypes.number.isRequired,
+	tab_id: PropTypes.number,
 };
 
 PromoModal.defaultProps = {
 	location: 'panel',
 	isPlus: false,
+	tab_id: null,
 };
 
 export default PromoModal;
