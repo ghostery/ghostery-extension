@@ -64,7 +64,7 @@ const SettingsMenu = ({ is_expanded }) => {
 			</li>
 			<li className="s-tabs-title">
 				<NavLink to="/settings/purplebox">
-					<span>{ t('settings_tracker_tally') }</span>
+					<span>{ t('settings_purple_box') }</span>
 				</NavLink>
 			</li>
 			<li className="s-tabs-title">

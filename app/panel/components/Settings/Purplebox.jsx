@@ -21,12 +21,12 @@ const Purplebox = ({ settingsData, toggleCheckbox, selectItem }) => (
 	<div className="s-tabs-panel">
 		<div className="row">
 			<div className="columns">
-				<h3>{ t('settings_tracker_tally') }</h3>
+				<h3>{ t('settings_purple_box') }</h3>
 				<div className="s-option-group">
 					<div className="s-square-checkbox">
 						<input type="checkbox" id="settings-show-tracker-tally" name="show_alert" defaultChecked={settingsData.show_alert} onClick={toggleCheckbox} />
-						<label htmlFor="settings-show-tracker-tally"><span>{ t('settings_show_tracker_tally') }</span></label>
-						<div className="s-tooltip-down" data-g-tooltip={t('settings_show_tracker_tally_tooltip')}>
+						<label htmlFor="settings-show-tracker-tally"><span>{ t('settings_show_purple_box') }</span></label>
+						<div className="s-tooltip-down" data-g-tooltip={t('settings_show_purple_box_tooltip')}>
 							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>
 					</div>

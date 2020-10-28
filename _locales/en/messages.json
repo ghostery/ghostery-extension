@@ -815,7 +815,7 @@
 	"settings_adblocker_list_3": {
 		"message": "Ads + Trackers + Annoyances"
 	},
-	"settings_tracker_tally": {
+	"settings_purple_box": {
 		"message": "Tracker-Tally"
 	},
 	"settings_notifications": {
@@ -875,7 +875,7 @@
 	"settings_block_trackers": {
 		"message": "Block new trackers added to Ghostery by default"
 	},
-	"settings_show_tracker_tally": {
+	"settings_show_purple_box": {
 		"message": "Show the tracker-tally in the corner of my browser"
 	},
 	"settings_dismiss_after": {
@@ -1019,7 +1019,7 @@
 	"settings_allow_trackers_tooltip": {
 		"message": "For example, blocking a Facebook tracker on facebook.com might break the site."
 	},
-	"settings_show_tracker_tally_tooltip": {
+	"settings_show_purple_box_tooltip": {
 		"message": "The tracker-tally is a list in the corner of your browser that displays trackers as they load in real-time."
 	},
 	"settings_notify_me_tooltip": {
