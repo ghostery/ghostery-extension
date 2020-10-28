@@ -911,7 +911,7 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `${globals.CHECKOUT_BASE_URL}/plus`;
+		let url = `${globals.GHOSTERY_BASE_URL}/pricing`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
