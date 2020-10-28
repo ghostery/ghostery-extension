@@ -2087,21 +2087,7 @@
 		"message": "No, Keep History"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus.$LINK_START$Learn More$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/pricing?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus."
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "Already a Ghostery Supporter?"
