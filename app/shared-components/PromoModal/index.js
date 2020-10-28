@@ -14,6 +14,7 @@
 import { connect } from 'react-redux';
 import PromoModalContainer from './PromoModalContainer';
 
-const mapStateToProps = state => ({ tab_id: state.panel.tab_id });
+// We may be in the Hub, where state.panel may be undefined
+const mapStateToProps = state => ({ tab_id: ((state.panel && state.panel.tab_id) || null) });
 
 export default connect(mapStateToProps, undefined)(PromoModalContainer);
