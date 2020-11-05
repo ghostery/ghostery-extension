@@ -164,6 +164,10 @@ class Account {
 				this._setAccountUserSettings(settings_json);
 				return settings_json;
 			})
+			// Fetching the settings from the account server failed,
+			// or they have simply never been synced to the account server yet
+			// In that case, just use the local settings
+			.catch(() => this.buildUserSettings())
 	)
 
 	/**
