@@ -11,11 +11,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { SET_TOAST } from './Constants';
+// TODO I think we can just use the Hub AppViewReducer
+
+import { SET_TOAST } from './AppViewConstants';
 
 const initialState = {};
 
-function GhosteryBrowserHubAppViewReducer(state = initialState, action) {
+function AppViewReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_TOAST: {
 			const { toastMessage, toastClass } = action.data;
@@ -31,4 +33,4 @@ function GhosteryBrowserHubAppViewReducer(state = initialState, action) {
 	}
 }
 
-export default GhosteryBrowserHubAppViewReducer;
+export default AppViewReducer;

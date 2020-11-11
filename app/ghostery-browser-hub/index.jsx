@@ -10,7 +10,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  *
- * @namespace HubGhosteryBrowserComponents
+ * @namespace GhosteryBrowserHubComponents
  */
 
 import React from 'react';
@@ -19,17 +19,17 @@ import { Provider } from 'react-redux';
 import createStore from './createStore';
 
 // Containers
-import HubGhosteryBrowserAppView from './Views/AppView';
-import HubGhosteryBrowserMainView from './Views/MainView';
+import AppView from './Views/AppView';
+import MainView from './Views/MainView';
 
 const store = createStore();
 
 ReactDOM.render(
 	(
 		<Provider store={store}>
-			<HubGhosteryBrowserAppView>
-				<HubGhosteryBrowserMainView />
-			</HubGhosteryBrowserAppView>
+			<AppView>
+				<MainView />
+			</AppView>
 		</Provider>
 	), document.getElementById('root'),
 );
