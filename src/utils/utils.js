@@ -790,17 +790,6 @@ export function injectNotifications(tab_id, importExport = false) {
 }
 
 /**
- * Checks if CMP data has the structure of a Cliqz offer.
- * @memberOf BackgroundUtils
- *
- * @param  {Object} 	offer   CMP object to check
- * @return {boolean} 			true means that this CMP data is actually a Cliqz Offer
- */
-export function isCliqzOffer(offer) {
-	return (offer && offer.origin === 'cliqz' && offer.type === 'offers' && offer.data);
-}
-
-/**
  * Compare semantic version strings
  * @param  {string} a 	semantic version (x.x.x)
  * @param  {string} b 	semantic version (x.x.x)

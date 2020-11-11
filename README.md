@@ -6,7 +6,7 @@
 Ghostery helps you browse smarter by giving you control over ads and tracking technologies to speed up page loads, eliminate clutter, and protect your data. This is the unified code repository for the Ghostery browser extensions in Chrome, Firefox, Opera and Edge.
 
 ## Downloads
-**Firefox / Cliqz** &ndash; [Download](https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
+**Firefox** &ndash; [Download](https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
 
 **Chrome** &ndash; [Download](https://chrome.google.com/webstore/detail/ghostery-%E2%80%93-privacy-ad-blo/mlomiejdfkolichcflejclcbmpeaniij)
 
@@ -126,9 +126,6 @@ Ghostery implements the following open-source products from Cliqz:
 
 [**Ad Blocker**](https://cliqz.com/en/whycliqz/adblocking)
 + [GitHub](https://github.com/cliqz-oss/adblocker)
-
-[**MyOffrz**](https://cliqz.com/en/cliqz-angebote)
-+ [GitHub](https://github.com/cliqz-oss/browser-core/blob/master/modules/offers-v2)
 
 ### Building Cliqz Modules for Ghostery
 Cliqz modules are pre-built and included under the `browser-core` NPM dependency in [package.json](package.json). To reproduce this build process, download the appropriate Ghostery release (v7.x.x) from the [browser-core](https://github.com/cliqz-oss/browser-core/releases) project.
