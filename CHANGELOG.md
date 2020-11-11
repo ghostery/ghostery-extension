@@ -1,7 +1,7 @@
 ### GHOSTERY 8.5.4 ()
 
 + Adds support for Ghostery Browser (#621, #622)
-+ Sunset Ghostery Rewards ()
++ Sunset Ghostery Rewards (#630)
 + Updated feature names (#613, #626, #627)
 + Shortened metrics uninstall URL (#615)
 + Fixes bug with initial account settings sync (#629)
