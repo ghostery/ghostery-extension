@@ -29,10 +29,11 @@ const { GHOSTERY_BASE_URL } = globals;
  * @return {JSX} JSX of the Navigation Menu Item
  */
 function _renderMenuItem(item, disableNav) {
-	// Disable the link that leads to a blank screen on custom setup page 4 in ticket GH-2216
-	const isSetupPageFour = window.location.href.indexOf('setup/4') > -1;
+	// Disable the sidebar link that leads to a blank screen on custom setup page 4 (GH-2216)
+	const shouldDisableSetupLink = window.location.href.indexOf('setup/4') > -1 && (item.href.substring(1) === 'setup');
+
 	const linkClassNames = ClassNames('flex-container align-middle', {
-		disabled: disableNav || (item.href.substring(1) === 'setup' && isSetupPageFour)
+		disabled: disableNav || shouldDisableSetupLink
 	});
 
 	return (
