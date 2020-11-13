@@ -29,11 +29,8 @@ const { GHOSTERY_BASE_URL } = globals;
  * @return {JSX} JSX of the Navigation Menu Item
  */
 function _renderMenuItem(item, disableNav) {
-	// Disable the sidebar link that leads to a blank screen on custom setup page 4 (GH-2216)
-	const shouldDisableSetupLink = (window.location.href.indexOf('setup/4') > -1) && (item.href.substring(1) === 'setup');
-
 	const linkClassNames = ClassNames('flex-container align-middle', {
-		disabled: disableNav || shouldDisableSetupLink
+		disabled: disableNav
 	});
 
 	return (
