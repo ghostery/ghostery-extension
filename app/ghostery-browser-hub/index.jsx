@@ -20,7 +20,7 @@ import createStore from './createStore';
 
 // Containers
 import AppView from './Views/AppView';
-import MainView from './Views/MainView';
+import OnboardingView from './Views/OnboardingView';
 
 const store = createStore();
 
@@ -28,7 +28,7 @@ ReactDOM.render(
 	(
 		<Provider store={store}>
 			<AppView>
-				<MainView />
+				<OnboardingView />
 			</AppView>
 		</Provider>
 	), document.getElementById('root'),

@@ -50,7 +50,7 @@ const initialState = Immutable({
 	},
 });
 
-describe('app/hub/Views/SetupView reducer', () => {
+describe('app/hub/Views/OnboardingView reducer', () => {
 	test('initial state is correct', () => {
 		expect(SetupViewReducer(undefined, {})).toEqual({});
 	});

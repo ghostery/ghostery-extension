@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import SetupBlockingView from '../SetupBlockingView';
 
-describe('app/hub/Views/SetupViews/SetupBlockingView component', () => {
+describe('app/hub/Views/OnboardingViews/SetupBlockingView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup blocking view is rendered correctly', () => {
 			const initialState = {

@@ -22,7 +22,7 @@ import {
 import thunk from 'redux-thunk';
 
 import { reducer as app } from './Views/AppView';
-import { reducer as main } from './Views/MainView';
+import { reducer as main } from './Views/OnboardingView';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 

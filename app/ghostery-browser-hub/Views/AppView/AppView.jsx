@@ -27,7 +27,7 @@ const AppView = (props) => {
 	 * Handle clicking to exit the Toast Message.
 	 */
 	const exitToast = () => {
-		const { actions } = this.props;
+		const { actions } = props;
 		actions.setToast({
 			toastMessage: '',
 			toastClass: '',
