@@ -30,7 +30,7 @@ const { GHOSTERY_BASE_URL } = globals;
  */
 function _renderMenuItem(item, disableNav) {
 	const linkClassNames = ClassNames('flex-container align-middle', {
-		disabled: disableNav
+		disabled: disableNav,
 	});
 
 	return (
