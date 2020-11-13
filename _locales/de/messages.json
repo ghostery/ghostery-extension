@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "Box verbergen"
-	},
-	"box_hide_expanded": {
-		"message": "Lila Box ausblenden"
-	},
 	"box_looking": {
 		"message": "Ansehen"
 	},
@@ -675,10 +669,10 @@
 		"message": "Der Tracker ist langsam"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Tracker von Smart Blocking blockiert"
+		"message": "Durch Intelligentes Surfen blockierter Tracker"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Tracker-Blockade von Smart Blocking aufgehoben"
+		"message": "Tracker durch Intelligentes Surfen entsperrt"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "Auf allen Websites blockieren"
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "Leistung"
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
 	"panel_detail_learn_more": {
 	  "message": "Weitere Informationen"
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Funktion demnächst verfügbar."
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "Funktion demnächst verfügbar."
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "Die Funktion ist im Cliqz MyOffrz-Bedienfeld bereits aktiv."
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Rewards werden geladen..."
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "Keine Rewards gefunden"
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery Rewards ist AUS"
 	},
 	"panel_detail_premium_text": {
 		"message": "Funktion demnächst verfügbar."
@@ -807,10 +783,10 @@
 		"message": "Diese Website ist bereits auf der Whitelist."
 	},
 	"settings_adblocker": {
-		"message": "Werbeblocker-Listen"
+		"message": "Listen zum Blockieren von Anzeigen"
 	},
 	"settings_adblocker_lists": {
-		"message": "Laden Sie die folgenden Filterlisten für Werbeblocker:"
+		"message": "Laden Sie die folgenden Anzeigenblock-Filterlisten:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Nur Werbungen"
@@ -822,7 +798,7 @@
 		"message": "Werbungen + Tracker + Störungen"
 	},
 	"settings_purple_box": {
-		"message": "Lila Box"
+		"message": "Tracker-Liste"
 	},
 	"settings_notifications": {
 		"message": "Benachrichtigungen"
@@ -882,7 +858,7 @@
 		"message": "Neue zu Ghostery hinzugefügte Tracker standardmäßig blockieren"
 	},
 	"settings_show_purple_box": {
-		"message": "Lila Box in der Ecke meines Browsers anzeigen"
+		"message": "Tracker-Tally in der Ecke meines Browsers anzeigen"
 	},
 	"settings_dismiss_after": {
 		"message": "Verwerfen nach"
@@ -909,7 +885,7 @@
 		"message": "Sek."
 	},
 	"settings_hide_alert_trusted": {
-		"message": "Lila Box auf vertrauenswürdigen Websites verbergen"
+		"message": " Tracker-Tally auf vertrauenswürdigen Websites ausblenden"
 	},
 	"settings_notify_me": {
 		"message": "Benachrichtigen Sie mich, wenn Ghostery:"
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "Austausch von Human-Web-Daten"
-	},
-	"settings_allow_offers": {
-		"message": "Teilnahme an Ghostery Rewards"
 	},
   	"settings_allow_abtests": {
 	  	"message": "Teilnahme an A/B-Tests"
@@ -1026,7 +999,7 @@
 		"message": "Einen Facebook-Tracker auf facebook.com zu blockieren, kann die Website unbenutzbar machen."
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "Die lila Box ist eine aktuelle Liste von Trackern, die in der Ecke des Browsers angezeigt wird. Diese Funktion hilft Ihnen, Tracker zu sehen, wenn sie auf einer Webseite hinzugefügt werden."
+		"message": "Der Tracker-Tally ist eine Liste in der Ecke Ihres Browsers, die Tracker anzeigt, während sie in Echtzeit geladen werden."
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Ghostery erlauben, in meinem Browser Meldungen zu neuen Produkt-Funktionen, Aktualisierungen und Kundenfeedbacks anzuzeigen."
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "Ghostery implementiert jetzt standardmäßig Human Web, eine revolutionäre Technologie, die das kollektive Wissen der Crowd nutzt, um ein privateres Internet aufzubauen"
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards ist eine Private-by-Design-Funktion, die Ihnen beim Browsen Rabatte und Sonderangebote unserer Partnerunternehmen liefert."
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "Die Teilnahme an randomisierten A/B-Tests hilft Ghostery zu verstehen, welche Version eines neuen Layouts oder einer neuen Funktion Benutzer wie Sie bevorzugen."
@@ -1065,7 +1035,7 @@
 		"message": "Geänderte Anfragen:"
 	},
 	"requests_modified_tooltip": {
-		"message": "Summe der durch Anti-Tracking und Ad-Blocking geänderten Verfolgungsanfragen und -elemente"
+		"message": "Gesamtzahl der durch Anti-Tracking und Ad-Blocking modifizierten Tracking-Anfragen und -Elemente"
 	},
 	"trackers_blocked": {
 		"message": "Blockierte Tracker:"
@@ -1134,22 +1104,22 @@
 		"message": "Ghostery-Erweiterung wird fortgesetzt."
 	},
 	"alert_anti_track_on": {
-		"message": "Erweitertes Anti-Tracking AN. Persönliche Daten werden anonymisiert."
+		"message": "Anti-Tracking EINGESCHALTET. Persönliche Daten werden anonymisiert."
 	},
 	"alert_anti_track_off": {
-		"message": "Erweitertes Anti-Tracking AUS. Persönliche Daten werden nicht anonymisiert."
+		"message": "Anti-Tracking AUSGESCHALTET. Persönliche Daten werden nicht ausgeschaltet."
 	},
 	"alert_ad_block_on": {
-		"message": "Erweiterter Werbeblocker AN. Werbung wird gesperrt."
+		"message": "Anzeigenblockierung EINGESCHALTET. Anzeigen werden blockiert."
 	},
 	"alert_ad_block_off": {
-		"message": "Erweiterter Werbeblocker AUS. Werbung wird nicht gesperrt."
+		"message": "Anzeigen-Blockierung AUSGESCHALTET. Anzeigen werden nicht blockiert."
 	},
 	"alert_smart_block_on": {
-		"message": "Smart Blocking AN. Tracker-Blockierung wird angepasst, um die Seitenleistung zu optimieren."
+		"message": "Intelligentes Surfen EINGESCHALTET. Die Tracker-Blockierung wird angepasst, um die Seitenleistung zu optimieren."
 	},
 	"alert_smart_block_off": {
-		"message": "Smart Blocking AUS. Tracker-Blockierung wird nicht automatisch angepasst."
+		"message": "Intelligentes Surfen AUSGESCHALTET. Die Tracker-Blockierung wird nicht automatisch angepasst."
 	},
 	"alert_reload": {
 		"message": "Neu laden, um Änderungen zu sehen."
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "Absolvieren Sie ein Tutorial"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "Ghostery Rewards versuchen"
-	},
 	"hub_side_navigation_products": {
 		"message": "Mehr Ghostery-Produkte ansehen"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "Weitere Analysedaten anonym teilen, um Ghostery noch leistungsstärker zu machen."
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "Neue Benutzer nehmen standardmäßig nicht an Ghostery Rewards und Human Web teil. Sie können diese empfohlenen Funktionen im benutzerdefinierten Setup oder in der Erweiterung aktivieren."
+		"message": "Neue Benutzer nehmen standardmäßig nicht an Human Web teil. Sie können diese empfohlenen Funktionen im benutzerdefinierten Setup oder in der Erweiterung aktivieren."
 	},
 	"hub_home_header_info": {
-		"message": "Neue Benutzer können sich für die Teilnahme an Human Web und Ghostery Rewards entscheiden. Sie können diese Einstellungen im benutzerdefinierten Setup oder in der Erweiterung ändern. "
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "Neue Benutzer nehmen an Human Web teil. Sie können diese Einstellungen im benutzerdefinierten Setup oder in der Erweiterung ändern. "
 	},
 	"hub_home_header_info_link": {
@@ -1507,7 +1471,7 @@
 		"message": "Wählen Sie, welche Tracker blockiert werden sollen."
 	},
 	"hub_setup_antisuite_description_antitracking": {
-		"message": "Anonymisieren Sie entsperrte und unbekannte Tracker für besseren Browsing-Schutz."
+		"message": "Anonymisieren Sie nicht blockierte und nicht identifizierte Tracker für einen besseren Browsing-Schutz."
 	},
 	"hub_setup_feature_already_active": {
 		"message": "Diese Funktion ist bereits standardmäßig in Cliqz aktiviert. $LINK_LM_START$Weitere Informationen$LINK_LM_END$",
@@ -1519,12 +1483,6 @@
 				"content": "</a>"
 			}
 		}
-	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "Schalten Sie Sonderangebote frei, während Sie stöbern, und kaufen Sie, ohne Daten zu teilen."
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Aktiviert"
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start-Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "Mit unserer neuen Tab-Funktion können Sie privat suchen, Tracker-Statistiken einsehen und Belohnungen verwalten. Demnächst verfügbar!"
+		"message": "Mit unserer neuen Tab-Funktion können Sie privat suchen und Tracker-Statistiken einsehen. Demnächst verfügbar!"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery Lite"
 	},
 	"hub_products_third_promo_description": {
 		"message": "Schützen Sie Ihre Online-Privatsphäre und schalten Sie Anzeigen mit unserem bisher leichtgewichtigsten Produkt ab, ausschließlich für Safari."
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery Hub - Rewards"
-	},
-	"hub_rewards_header_title": {
-		"message": "Versuchen Sie Ghostery Rewards!"
-	},
-	"hub_rewards_header_description": {
-		"message": "Unsere neue Reward-Funktion bietet eine leistungsstarke, völlig private neue Möglichkeit, online echte Rabatte zu erhalten. Aktivieren und ausprobieren!"
-	},
-	"hub_rewards_experience_title": {
-		"message": "Ein smarteres Einkaufserlebnis"
-	},
-	"hub_rewards_experience_description": {
-		"message": "Hochwertige Belohnungen, die Sie direkt beim Stöbern und Einkaufen erhalten."
-	},
-	"hub_rewards_privacy_title": {
-		"message": "Datenschutzorientiert"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "Es werden keine personenbezogenen Daten gesammelt, Profile erstellt oder Drittanbieter einbezogen."
-	},
-	"hub_rewards_relevant_title": {
-		"message": "Einzigartig und relevant"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "Spezialisierte Angebote sind zeitnah, relevant und exklusiv für unsere Nutzer."
-	},
-	"hub_rewards_closer": {
-		"message": "Sie können Ghostery Rewards in der Erweiterung oder über das benutzerdefinierte Setup aktivieren."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Hub - Ghostery Plus"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "Zu einer anderen Seite navigieren, um diese Funktion zu nutzen."
-	},
-	"rewards_new_text": {
-		"message": "Neuer Reward entdeckt!"
-	},
-	"rewards_copy_code": {
-		"message": "Code kopieren"
-	},
-	"rewards_code_copied": {
-		"message": "Code kopiert"
-	},
-	"rewards_expires_in_day": {
-		"message": "Läuft in 1 Tag ab"
-	},
-	"rewards_expires_in_days": {
-		"message": "Läuft in $COUNT$ Tagen ab",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "Läuft in 1 Stunde ab"
-	},
-	"rewards_expires_in_hours": {
-		"message": "Läuft in $COUNT$ Stunden ab",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "Läuft in 1 Minute ab"
-	},
-	"rewards_expires_in_mins": {
-		"message": "Läuft in $COUNT$ Minuten ab",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "Läuft in 1 Sekunde ab"
-	},
-	"rewards_expires_in_secs": {
-		"message": "Läuft in $COUNT$ Sekunden ab",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "Konditionen"
-	},
-	"rewards_disable": {
-		"message": "Rewards ausschalten"
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery Rewards deaktiviert. Schalten Sie es jederzeit in den Einstellungen oder im Rewards-Dashboard an."
-	},
-	"rewards_disable_confirm": {
-		"message": "OK, verstanden."
-	},
-	"rewards_about": {
-		"message": "Über Rewards"
-	},
-	"rewards_settings": {
-		"message": "Ghostery Rewards-Einstellungen"
-	},
-	"rewards_delete": {
-		"message": "Diesen Reward löschen"
-	},
-	"rewards_exclusive": {
-		"message": "exklusiv"
-	},
-	"rewards_best_offer": {
-		"message": "Bestes Angebot"
-	},
-	"rewards_first_prompt": {
-		"message": "Möchten Sie zu Ihrem Ghostery Reward weitergehen?"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "Möchten Sie jetzt Angebote und Rabatte von vertrauenswürdigen Ghostery-Partnern empfangen?"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "Neuer Reward entdeckt!"
-	},
-	"rewards_second_prompt": {
-		"message": "Möchten Sie sich von zukünftigen Ghostery Rewards abmelden?"
-	},
-	"rewards_yes": {
-		"message": "ja"
-	},
-	"rewards_no": {
-		"message": "nein"
-	},
-	"rewards_on": {
-		"message": "an"
-	},
-	"rewards_off": {
-		"message": "aus"
-	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery Rewards ist AN"
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery Rewards ist AUS"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Rewards-Code kopiert!"
-	},
-	"offers_hub_copy_btn": {
-		"message": "Code kopieren"
-	},
-	"offers_code_copied": {
-		"message": "Kopiert"
 	},
 	"popup_cancel_button": {
 		"message": "Abbrechen"
@@ -2087,21 +1896,7 @@
 		"message": "Nein, Chronik behalten"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Schalten Sie Ihre vergangenen Statistiken (und andere tolle Vorteile) frei, indem Sie Ihre Version auf Ghostery Plus hochstufen. $LINK_START$Mehr erfahren$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Schalten Sie Ihre historischen Statistiken (und andere coole Vergünstigungen) frei, indem Sie auf Ghostery Plus upgraden."
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "Bereits Ghostery-Unterstützer?"
@@ -2147,188 +1942,14 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "Ghostery Rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "Verbessertes Anti-Tracking"
+		"message": "Anti-Tracking"
 	},
-	"panel_rewards_view__reward": {
-		"message": "Reward"
+	"unidentified": {
+		"message": "Nicht identifiziert"
 	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "Affiliate-Link"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "Copy & Go"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "Ich habe das Angebot bereits genutzt."
-	},
-	"myoffrz_feedback_option2": {
-		"message": "Das ist kein gutes Geschäft."
-	},
-	"myoffrz_feedback_option3": {
-		"message": "Es spielt für mich keine Rolle."
-	},
-	"myoffrz_feedback_option4": {
-		"message": "Sonstige Gründe"
-	},
-	"myoffrz_feedback_title": {
-		"message": "Feedback"
-	},
-	"myoffrz_get_code": {
-		"message": "Code abrufen"
-	},
-	"myoffrz_offer_removed": {
-		"message": "Dieses Angebot wurde entfernt."
-	},
-	"myoffrz_optional": {
-		"message": "Optional"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "Auf Basis von MyOffrz"
-	},
-	"myoffrz_show_code": {
-		"message": "Code zeigen"
-	},
-	"myoffrz_show_more": {
-		"message": "Mehr anzeigen"
-	},
-	"myoffrz_skip": {
-		"message": "Überspringen"
-	},
-	"myoffrz_welcome_link": {
-		"message": "So funktioniert es"
-	},
-	"myoffrz_welcome_text": {
-		"message": "Während Sie im Internet surfen, suchen wir anhand Ihrer Interessen nach attraktiven Angeboten."
-	},
-	"myoffrz_welcome_title": {
-		"message": "Hallo!"
-	},
-	"myoffrz_why_offers_text": {
-		"message": "Es werden keine persönlichen Daten von Ihrem Gerät gespeichert. Ihr Browser erkennt aufgrund Ihrer bisherigen Nutzung automatisch, wofür Sie sich interessieren könnten. "
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "Warum kann ich diese Angebote sehen?"
-	},
-	"myoffrz_why_see_this": {
-		"message": "Warum kann ich dies sehen?"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "NEU"
-	},
-	"myoffrz_conditions": {
-		"message": "Bedingungen"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "Ghostery Rewards ausschalten"
-	},
-	"myoffrz_help": {
-		"message": "Hilfe"
-	},
-	"myoffrz_learn_more": {
-		"message": "Weitere Informationen"
-	},
-	"myoffrz_send": {
-		"message": "Senden"
-	},
-	"myoffrz_settings": {
-		"message": "Einstellungen"
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "Neuer Reward entdeckt!"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "Ghostery Rewards wurde deaktiviert. Sie können es jederzeit in den Einstellungen oder im Rewards-Dashboard wieder einschalten."
-	},
-	"myoffrz_optin_description": {
-		"message": "Möchten Sie Angebote und Rabatte von vertrauenswürdigen Ghostery-Partnern erhalten?"
-	},
-	"myoffrz_optin_title": {
-		"message": "Neuer Reward entdeckt!"
-	},
-	"myoffrz_no": {
-		"message": "nein"
-	},
-	"myoffrz_yes": {
-		"message": "ja"
-	},
-	"myoffrz_rewards_new": {
-		"message": "Neuer Reward entdeckt!"
-	},
-	"myoffrz_apply_code": {
-		"message": "Code anwenden"
-	},
-	"myoffrz_cancel": {
-		"message": "Abbrechen"
-	},
-	"myoffrz_copied": {
-		"message": "Kopiert"
-	},
-	"myoffrz_copy_code": {
-		"message": "Code kopieren"
-	},
-	"myoffrz_expires_in_day": {
-		"message": "Läuft in 1 Tag ab"
-	},
-	"myoffrz_expires_in_days": {
-		"message": "Läuft in $COUNT$ Tagen ab",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "Läuft in 1 Stunde ab"
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "Läuft in $COUNT$ Stunden ab",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "1 Minute verfügbar"
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "$COUNT$ Minuten verfügbar",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "Überprüfen Sie die folgenden Bedingungen"
-	},
-	"myoffrz_redeem_code": {
-		"message": "Code einlösen"
-	},
-	"myoffrz_voucher_found": {
-		"message": "Gutschein gefunden"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "Gutschein einlösen"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
-		"message": "Unbekannt"
-	},
-	"unknown_description": {
-		"message": "Von Anti-Tracking entfernte unbekannte Tracker"
+	"unidentified_description": {
+		"message": "Nicht identifizierte Tracker durch Anti-Tracking gesäubert"
 	},
 	"ghostery_is_ready": {
 		"message": "Ghostery ist bereit!"
@@ -2462,10 +2083,10 @@
 		"message": "Aus"
 	},
 	"enhanced_ad_blocking": {
-		"message": "Besserer Werbeblocker"
+		"message": "Werbeblocker"
 	},
 	"smart_blocking": {
-		"message": "Smart Blocking"
+		"message": "Intelligentes Surfen"
 	},
 	"smart_blocking_DESC": {
 		"message": "Tracker automatisch blockieren und entsperren, um die Seitenperformance zu optimieren."
