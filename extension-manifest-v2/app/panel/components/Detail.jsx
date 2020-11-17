@@ -16,7 +16,6 @@ import { Route } from 'react-router-dom';
 import ClassNames from 'classnames';
 import DetailMenu from './DetailMenu';
 import Blocking from '../containers/BlockingContainer';
-import Rewards from '../containers/RewardsContainer';
 /**
  * @class Implement wrapper of the detailed (expert) mode view.
  * @memberOf PanelClasses
@@ -28,17 +27,11 @@ class Detail extends React.Component {
 		// event bindings
 		this.toggleExpanded = this.toggleExpanded.bind(this);
 
-		// set default tab / route based on how we got to this view:
-		// did the user click the Rewards icon? Or the donut number / Detailed View tab in the header?
-		const location = props.history.location.pathname;
-		if (!location.includes('rewards')) {
-			props.history.push('/detail/blocking');
-		}
+		// set default tab / route based on how we got to this view
+		props.history.push('/detail/blocking');
 	}
 
 	BlockingComponent = () => (<Blocking />);
-
-	RewardsComponent = () => (<Rewards />);
 
 	/**
 	 * Click "expertTab" to enable detailed (expert) mode. Trigger action.
@@ -56,15 +49,14 @@ class Detail extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { is_expanded, user, history } = this.props;
+		const { is_expanded, user } = this.props;
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: is_expanded,
 		});
 
-		const activeTab = history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
+		const activeTab = 'blocking';
 		const contentDetailsClassNames = ClassNames({
 			expanded: is_expanded,
-			rewardsView: activeTab === 'rewards',
 		});
 
 		return (
@@ -74,9 +66,7 @@ class Detail extends React.Component {
 						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					</div>
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
-					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<DetailMenu
-						hasReward={false}
 						plusAccess={user && user.plusAccess}
 						activeTab={activeTab}
 					/>

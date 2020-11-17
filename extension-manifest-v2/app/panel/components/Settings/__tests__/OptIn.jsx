@@ -22,7 +22,6 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			const settingsData = {
 				enable_metrics: false,
 				enable_human_web: false,
-				enable_offers: false,
 			};
 
 			const component = renderer.create(
@@ -38,7 +37,6 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			const settingsData = {
 				enable_metrics: true,
 				enable_human_web: true,
-				enable_offers: true,
 			};
 
 			const component = renderer.create(
@@ -56,7 +54,6 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			const settingsData = {
 				enable_metrics: true,
 				enable_human_web: true,
-				enable_offers: true,
 			};
 			const toggleCheckbox = jest.fn();
 
@@ -70,8 +67,7 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			expect(toggleCheckbox.mock.calls.length).toBe(0);
 			component.find('#settings-share-usage').simulate('click');
 			component.find('#settings-share-human-web').simulate('click');
-			component.find('#settings-allow-offers').simulate('click');
-			expect(toggleCheckbox.mock.calls.length).toBe(3);
+			expect(toggleCheckbox.mock.calls.length).toBe(2);
 		});
 	});
 });

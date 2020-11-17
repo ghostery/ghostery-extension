@@ -627,26 +627,6 @@ const NotificationsContentScript = (function(win, doc) {
 		link.click();
 	};
 	/**
-	 * Determine if a DOM element is visible to user.
-	 * Used to find if popup is visible.
-	 * @memberOf NotificationsContentScript
-	 * @package
-	 *
-	 * @return {boolean}
-	 */
-	const _isElementInViewport = function(el) {
-		const rect = el.getBoundingClientRect();
-
-		return (
-			rect.top >= 0 &&
-			rect.left >= 0 &&
-			rect.bottom <= (window.innerHeight
-				|| document.documentElement.clientHeight)
-				&& rect.right/* or $(window).height() */
-				<= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
-		);
-	};
-	/**
 	 * Show popup. It is called in an onMessage handler
 	 * for messages coming from background.js.
 	 * @memberOf NotificationsContentScript
@@ -709,9 +689,6 @@ const NotificationsContentScript = (function(win, doc) {
 
 		const alert_div = createAlert();
 		appendChild(alert_div, alert_contents);
-		if (type === 'showCMPMessage' && _isElementInViewport(alert_div)) {
-			sendMessage('cmpMessageShown', { cmp_data: CMP_DATA, reason: 'offerShown' });
-		}
 	};
 	/**
 	 * Initialize functionality of this script. Set listener

@@ -17,7 +17,7 @@ import QueryString from 'query-string';
 import SideNavigationView from './SideNavigationView';
 import globals from '../../../../src/classes/Globals';
 
-const { IS_CLIQZ, BROWSER_INFO } = globals;
+const { BROWSER_INFO } = globals;
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 // Flag to display alternate hub view (used for A/B testing ticket GH-2097)
@@ -63,7 +63,6 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/setup', icon: 'setup', text: t('customize_setup') },
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
 			{ href: '/plus', icon: 'plus', text: t('get_ghostery_plus') },
-			...((IS_CLIQZ || IS_ANDROID) ? [] : [{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') }]),
 			...((IS_ANDROID) ? [] : [{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }])
 		];
 

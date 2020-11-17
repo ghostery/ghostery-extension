@@ -117,25 +117,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
       <a
         aria-current={null}
         className="flex-container align-middle"
-        href="/rewards"
-        onClick={[Function]}
-      >
-        <div
-          className="SideNavigation__menuIcon rewards"
-        />
-        <div
-          className="SideNavigation__menuText"
-        >
-          Rewards
-        </div>
-      </a>
-    </div>
-    <div
-      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
-    >
-      <a
-        aria-current={null}
-        className="flex-container align-middle"
         href="/products"
         onClick={[Function]}
       >
@@ -307,25 +288,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
           className="SideNavigation__menuText"
         >
           Plus
-        </div>
-      </a>
-    </div>
-    <div
-      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
-    >
-      <a
-        aria-current={null}
-        className="flex-container align-middle disabled"
-        href="/rewards"
-        onClick={[Function]}
-      >
-        <div
-          className="SideNavigation__menuIcon rewards"
-        />
-        <div
-          className="SideNavigation__menuText"
-        >
-          Rewards
         </div>
       </a>
     </div>

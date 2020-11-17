@@ -142,10 +142,6 @@ a .SideNavigation__menuIcon.plus,
 a.disabled.active .SideNavigation__menuIcon.plus {
 	background-image: buildIconPlus(#ffffff);
 }
-a .SideNavigation__menuIcon.rewards,
-a.disabled.active .SideNavigation__menuIcon.rewards {
-	background-image: buildIconRewards(#ffffff);
-}
 a .SideNavigation__menuIcon.products,
 a.disabled.active .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#ffffff);
@@ -168,9 +164,6 @@ a.disabled .SideNavigation__menuIcon.tutorial {
 }
 a.disabled .SideNavigation__menuIcon.plus {
 	background-image: buildIconPlus(#a9b9be);
-}
-a.disabled .SideNavigation__menuIcon.rewards {
-	background-image: buildIconRewards(#a9b9be);
 }
 a.disabled .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#a9b9be);

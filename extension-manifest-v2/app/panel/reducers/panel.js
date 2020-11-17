@@ -19,7 +19,6 @@ import {
 	TOGGLE_CLIQZ_FEATURE,
 	UPDATE_NOTIFICATION_STATUS,
 	TOGGLE_CHECKBOX,
-	TOGGLE_OFFERS_ENABLED,
 	TOGGLE_EXPANDED,
 	SET_THEME,
 	CLEAR_THEME,
@@ -356,15 +355,7 @@ export default (state = initialState, action) => {
 			return { ...state, ...updated };
 		}
 		case TOGGLE_CHECKBOX: {
-			if (action.data.event === 'enable_offers') {
-				const enable_offers = action.data.checked;
-				return { ...state, enable_offers };
-			}
 			return state;
-		}
-		case TOGGLE_OFFERS_ENABLED: {
-			const enable_offers = action.data.enabled;
-			return { ...state, enable_offers };
 		}
 		case TOGGLE_PROMO_MODAL: {
 			return {
