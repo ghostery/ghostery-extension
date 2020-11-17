@@ -72,26 +72,6 @@ export function sendMessage(name, message, origin = '', callback = defaultCallba
 }
 
 /**
- * Send a message to the handlers in src/background relating to rewards.
- * This should be used for messages that don't require a callback.
- * @memberOf PanelUtils
- *
- * @param  {string} 	name 		message name
- * @param  {Object} 	message 	message data
- * @param  {function} 	callback 	callback message
- * @return {Object}		response
- * @todo  runtime.sendMessage does not return any value.
- */
-export function sendRewardMessage(name, message, callback = defaultCallback()) {
-	log('Panel sendRewardMessage: sending to background', name);
-	return chrome.runtime.sendMessage({
-		name,
-		message,
-		origin: 'rewardsPanel',
-	}, callback);
-}
-
-/**
  * Handle clicks on links with a fixed destination
  */
 export function handleClickOnNewTabLink(e) {

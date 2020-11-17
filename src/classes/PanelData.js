@@ -2,7 +2,7 @@
  * Panel Data Class
  *
  * Coordinates the assembly and transmission
- * of bug / Cliqz / settings / rewards data to the extension panel
+ * of bug / Cliqz / settings data to the extension panel
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -22,7 +22,6 @@ import bugDb from './BugDb';
 import globals from './Globals';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
-import Rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
 import promoModals from './PromoModals';
@@ -51,7 +50,6 @@ const { IS_CLIQZ } = globals;
 const initMountedComponentsState = {
 	panel: false,
 	blocking: false,
-	rewards: false,
 	settings: false,
 	summary: false
 };
@@ -132,15 +130,6 @@ class PanelData {
 					break;
 				case 'BlockingComponentWillUnmount':
 					this._mountedComponents.blocking = false;
-					break;
-				case 'RewardsComponentDidMount':
-					this._mountedComponents.rewards = true;
-					this._panelPort.onDisconnect.addListener(Rewards.panelHubClosedListener);
-					this._postRewardsData();
-					break;
-				case 'RewardsComponentWillUnmount':
-					this._mountedComponents.rewards = false;
-					this._panelPort.onDisconnect.removeListener(Rewards.panelHubClosedListener);
 					break;
 				case 'SettingsComponentDidMount':
 					this._mountedComponents.settings = true;
@@ -351,8 +340,7 @@ class PanelData {
 		const { id: tab_id } = this._activeTab;
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
-			enable_offers, is_expanded, is_expert, language, reload_banner_status,
-			trackers_banner_status,
+			is_expanded, is_expert, language, reload_banner_status, trackers_banner_status,
 		} = conf;
 
 		return {
@@ -360,7 +348,6 @@ class PanelData {
 			enable_ad_block,
 			enable_anti_tracking,
 			enable_smart_block,
-			enable_offers,
 			is_expanded,
 			is_expert,
 			is_android: globals.BROWSER_INFO.os === 'android',
@@ -386,16 +373,6 @@ class PanelData {
 	}
 
 	/**
-	 * Get rewards data for the Rewards View
-	 * @return {Object} Rewards view data
-	 */
-	static _getRewardsData() {
-		return {
-			enable_offers: conf.enable_offers,
-		};
-	}
-
-	/**
 	 * Get conf and tracker data for Settings View.
 	 * Called when and only when the Settings component is mounted
 	 * @return	{Object}		Settings View data
@@ -407,13 +384,11 @@ class PanelData {
 		} = conf;
 
 		return {
-
 			bugs_last_updated,
 			bugs_last_checked,
 			categories: PanelData._buildGlobalCategories(),
 			language, // required for the setup page that does not have access to panelView data
 			new_app_ids,
-			offer_human_web: true,
 			settings_last_exported,
 			settings_last_imported,
 			...PanelData._getUserSettingsForSettingsView(conf),
@@ -432,7 +407,6 @@ class PanelData {
 		const { site_blacklist, site_whitelist } = conf;
 
 		return {
-
 			paused_blocking,
 			paused_blocking_timeout,
 			site_blacklist,
@@ -474,7 +448,7 @@ class PanelData {
 	static _getUserSettingsForPanelView(userSettings) {
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
-			enable_offers, is_expanded, is_expert, reload_banner_status, trackers_banner_status,
+			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
 
 		return {
@@ -482,7 +456,6 @@ class PanelData {
 			enable_ad_block,
 			enable_anti_tracking,
 			enable_smart_block,
-			enable_offers,
 			is_expanded,
 			is_expert,
 			reload_banner_status,
@@ -499,7 +472,7 @@ class PanelData {
 	static _getUserSettingsForSettingsView(userSettingsSource) {
 		const {
 			alert_bubble_pos, alert_bubble_timeout, block_by_default, cliqz_adb_mode, enable_autoupdate,
-			enable_click2play, enable_click2play_social, enable_human_web, enable_offers,
+			enable_click2play, enable_click2play_social, enable_human_web,
 			enable_metrics, enable_abtests, hide_alert_trusted, ignore_first_party, notify_library_updates,
 			notify_promotions, notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
 			show_cmp, show_tracker_urls, toggle_individual_trackers
@@ -514,7 +487,6 @@ class PanelData {
 			enable_click2play,
 			enable_click2play_social,
 			enable_human_web,
-			enable_offers,
 			enable_metrics,
 			enable_abtests,
 			hide_alert_trusted,
@@ -559,14 +531,6 @@ class PanelData {
 	}
 
 	/**
-	 * Legibility wrapper
-	 * @private
-	 */
-	_postRewardsData() {
-		this._postMessage('rewards', PanelData._getRewardsData());
-	}
-
-	/**
 	 * Perform a one-time refresh of panel data with settings retrieved from the account server
 	 * by the call to account.getUserSettings() in initPort
 	 * @param	{Object}	userSettings	the settings retrieved from the account server
@@ -600,7 +564,6 @@ class PanelData {
 
 		if (IS_CLIQZ) {
 			data.enable_human_web = false;
-			data.enable_offers = false;
 			data.enable_ad_block = false;
 			data.enable_anti_tracking = false;
 		}

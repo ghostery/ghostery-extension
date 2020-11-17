@@ -83,38 +83,6 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
       </div>
       <div
         className="s-option-group"
-        id="offers-section"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={false}
-            id="settings-allow-offers"
-            name="enable_offers"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-allow-offers"
-          >
-            <span>
-              settings_allow_offers
-            </span>
-          </label>
-          <div
-            className="s-tooltip-up"
-            data-g-tooltip="settings_offers_tooltip"
-          >
-            <img
-              className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
         id="abtests-section"
       >
         <div
@@ -222,38 +190,6 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           <div
             className="s-tooltip-up"
             data-g-tooltip="settings_human_web_tooltip"
-          >
-            <img
-              className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-        id="offers-section"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-allow-offers"
-            name="enable_offers"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-allow-offers"
-          >
-            <span>
-              settings_allow_offers
-            </span>
-          </label>
-          <div
-            className="s-tooltip-up"
-            data-g-tooltip="settings_offers_tooltip"
           >
             <img
               className="s-question"
