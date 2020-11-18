@@ -723,7 +723,7 @@ export function capitalize(phrase, separator = ' ') {
 
 /**
  * Inject content scripts and CSS into a given tabID (top-level frame only).
- * Note: Chrome 61 blocks content scripts on the new tab page (_/chrome/newtab). Be
+ * Note: Chrome 61 blocks content scripts on the new tab page. Be
  * sure to check the current URL before calling this function, otherwise Chrome will throw
  * a permission error
  *
@@ -774,8 +774,8 @@ export function injectNotifications(tab_id, importExport = false) {
 		return Promise.resolve(true);
 	}
 	const tab = tabInfo.getTabInfo(tab_id);
-	// check for prefetching, chrome new tab page and Firefox about:pages
-	if (tab && (tab.prefetched === true || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || (!importExport && globals.EXCLUDES.includes(tab.host)))) {
+	// check for prefetching, non http/s pages and legacy Chrome (< 75) new tab page
+	if (tab && (tab.prefetched === true || !tab.protocol.startsWith('http') || tab.path.includes('_/chrome/newtab') || (!importExport && globals.EXCLUDES.includes(tab.host)))) {
 		// return false to prevent sendMessage calls
 		return Promise.resolve(false);
 	}
