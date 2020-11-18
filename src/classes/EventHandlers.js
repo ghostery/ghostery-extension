@@ -652,7 +652,7 @@ class EventHandlers {
 
 	/**
 	 * Checks to see if the URL is valid. Also checks to make sure we
-	 * are not on the Chrome new tab page (_/chrome/newtab) or Firefox about:pages
+	 * are not on the legacy Chrome (< 75) new tab page (_/chrome/newtab).
 	 *
 	 * @private
 	 *
