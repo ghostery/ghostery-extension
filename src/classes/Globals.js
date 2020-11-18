@@ -104,7 +104,6 @@ class Globals {
 			'enable_click2play_social',
 			'enable_human_web',
 			'enable_metrics',
-			'enable_offers',
 			'enable_abtests',
 			'enable_smart_block',
 			'expand_all_trackers',

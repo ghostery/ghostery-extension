@@ -14,7 +14,6 @@
 import React from 'react';
 import { debounce } from 'underscore';
 import { Route } from 'react-router-dom';
-import { sendMessage } from '../utils/msg';
 import SettingsMenu from './Settings/SettingsMenu';
 import GlobalBlocking from './Settings/GlobalBlocking';
 import AdBlocker from './Settings/AdBlocker';
@@ -186,15 +185,6 @@ class Settings extends React.Component {
 	 */
 	toggleCheckbox(event) {
 		const { actions } = this.props;
-		if (event.currentTarget.name === 'enable_offers') {
-			const signal = {
-				actionId: !event.currentTarget.checked ? 'rewards_off' : 'rewards_on',
-				origin: 'rewards-hub',
-				type: 'action-signal',
-			};
-			sendMessage('setPanelData', { enable_offers: event.currentTarget.checked, signal }, 'rewardsPanel');
-			sendMessage('ping', event.currentTarget.checked ? 'rewards_on' : 'rewards_off');
-		}
 		actions.toggleCheckbox({
 			event: event.currentTarget.name,
 			checked: event.currentTarget.checked,

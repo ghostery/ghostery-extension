@@ -26,7 +26,6 @@ describe('app/hub/Views/SideNavigationView component', () => {
 					{ href: '/setup', icon: 'setup', text: 'Setup' },
 					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
 					{ href: '/plus', icon: 'plus', text: 'Plus' },
-					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
 					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [
@@ -53,7 +52,6 @@ describe('app/hub/Views/SideNavigationView component', () => {
 					{ href: '/setup', icon: 'setup', text: 'Setup' },
 					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
 					{ href: '/plus', icon: 'plus', text: 'Plus' },
-					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
 					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [
@@ -99,7 +97,6 @@ describe('app/hub/Views/SideNavigationView component', () => {
 					{ href: '/setup', icon: 'setup', text: 'Setup' },
 					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
 					{ href: '/plus', icon: 'plus', text: 'Plus' },
-					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
 					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [

@@ -15,8 +15,7 @@ import { log, sendMessageInPromise } from '../../../utils';
 import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
-	SET_SMART_BLOCK,
-	SET_GHOSTERY_REWARDS
+	SET_SMART_BLOCK
 } from '../../SetupView/SetupViewConstants';
 
 export function setAntiTracking(actionData) {
@@ -54,19 +53,6 @@ export function setSmartBlocking(actionData) {
 			});
 		}).catch((err) => {
 			log('setupBlocking Action setSmartBlocking Error', err);
-		});
-	};
-}
-
-export function setGhosteryRewards(actionData) {
-	return function(dispatch) {
-		return sendMessageInPromise(SET_GHOSTERY_REWARDS, actionData).then((data) => {
-			dispatch({
-				type: SET_GHOSTERY_REWARDS,
-				data,
-			});
-		}).catch((err) => {
-			log('setupBlocking Action setGhosteryRewards Error', err);
 		});
 	};
 }

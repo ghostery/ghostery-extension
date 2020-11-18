@@ -169,64 +169,16 @@ class EventHandlers {
 				'notification_upgrade_link_v8'
 			];
 
-			// If we have offers, we first look for a Cliqz offer with specified offer_urls,
-			// one of which matches to details.url. If none of those available
-			// we look for a cliqz offer which does not have urls specified (meaning good for any site)
-			// All Cliqz offers have Dismiss === 1, so the found one is injected and removed.
-			// Lastly we look for non-cliqz offers (classic CMPs)
-			if (cmp.CMP_DATA.length !== 0) {
-				const CMPS = cmp.CMP_DATA;
-				const numOffers = CMPS.length;
-				let cliqzOffer;
-				let nonCliqzOffer;
-				for (let i = 0; i < numOffers; i++) {
-					const CMP = CMPS[i];
-					if (utils.isCliqzOffer(CMP)) {
-						// If offer has urls specified and none of them matches current url
-						// this offer should not be displayed
-						const urls = CMP.data.offer_info.offer_urls;
-						if (urls instanceof Array) {
-							const numUrls = urls.length;
-							for (let j = 0; j < numUrls; j++) {
-								if (urls[j] === details.url) {
-									cliqzOffer = CMP;
-									cliqzOffer.index = i;
-									break;
-								}
-							}
-							if (cliqzOffer) {
-								break;
-							}
-						} else if (!cliqzOffer) { // the earliest Cliqz offer without urls specified
-							cliqzOffer = CMP;
-							cliqzOffer.index = i;
-						}
-					} else if (conf.show_cmp) {
-						if (!nonCliqzOffer) {
-							nonCliqzOffer = CMP;
-							nonCliqzOffer.index = i;
-						}
-					}
-				}
-
-				let finalOffer = cliqzOffer || (nonCliqzOffer || undefined);
-
-				if (!finalOffer) {
-					return;
-				}
-
-				const { index } = finalOffer;
-				finalOffer = cmp.CMP_DATA[index];
-
+			if (cmp.CMP_DATA.length !== 0 && conf.show_cmp) {
 				utils.injectNotifications(tab.id).then((result) => {
 					if (result) {
 						utils.sendMessage(tab_id, 'showCMPMessage', {
-							data: finalOffer
+							data: cmp.CMP_DATA[0]
 						}, () => {
 							// decrease dismiss count
-							finalOffer.Dismiss--;
-							if (finalOffer.Dismiss <= 0) {
-								cmp.CMP_DATA.splice(index, 1);
+							cmp.CMP_DATA[0].Dismiss--;
+							if (cmp.CMP_DATA[0].Dismiss <= 0) {
+								cmp.CMP_DATA.splice(0, 1);
 							}
 						});
 					}
@@ -700,7 +652,7 @@ class EventHandlers {
 
 	/**
 	 * Checks to see if the URL is valid. Also checks to make sure we
-	 * are not on the Chrome new tab page (_/chrome/newtab) or Firefox about:pages
+	 * are not on the legacy Chrome (< 75) new tab page (_/chrome/newtab).
 	 *
 	 * @private
 	 *

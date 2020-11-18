@@ -30,7 +30,6 @@ const MAX_DELAYED_PINGS = 100;
 // Set of conf keys used in constructing telemetry url
 const METRICS_URL_SET = new Set([
 	'enable_human_web',
-	'enable_offers',
 	'account',
 	'enable_metrics',
 	'show_alert',
@@ -140,14 +139,6 @@ class Metrics {
 			case 'viewchange_from_simple':
 				this._sendReq(type, ['all', 'daily']);
 				break;
-			case 'rewards_dash':
-				this._sendReq(type, ['all', 'daily', 'monthly']);
-				break;
-
-			case 'rewards_off':
-			case 'rewards_on':
-				this._sendReq(type, ['all', 'daily']);
-				break;
 
 			// Ghostery 8.3+
 			case 'sign_in_success':
@@ -246,8 +237,6 @@ class Metrics {
 			this._buildQueryPair('l', conf.language) +
 			// Browser version
 			this._buildQueryPair('bv', BROWSER_INFO.version) +
-			// Offers (former offers)
-			this._buildQueryPair('of', conf.enable_offers ? '1' : '0') +
 			// Date of install (former install_date)
 			this._buildQueryPair('id', conf.install_date) +
 			// Showing campaign messages (former show_cmp)

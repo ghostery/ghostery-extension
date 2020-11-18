@@ -42,11 +42,12 @@ class PurpleBox {
 	 */
 	createBox(tab_id) {
 		const tab = tabInfo.getTabInfo(tab_id);
-		// Skip in the event of pause, trust, prefetching, newtab page, or Firefox about:pages
+		// Skip in the event of pause, trust, prefetching, non http/s pages or legacy Chrome (< 75) new tab page
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
 			(conf.hide_alert_trusted && !!Policy.checkSiteWhitelist(tab.url)) ||
-			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host) ||
+			!tab || tab.purplebox || !tab.protocol.startsWith('http') || tab.path.includes('_/chrome/newtab') ||
+			globals.EXCLUDES.includes(tab.host) ||
 			globals.BROWSER_INFO.os === 'android') {
 			return Promise.resolve(false);
 		}

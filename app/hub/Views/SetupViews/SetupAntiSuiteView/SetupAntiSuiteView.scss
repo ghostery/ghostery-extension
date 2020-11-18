@@ -71,14 +71,6 @@
 	background-image: buildSmartBlockingActiveIcon(#1dafed);
 }
 
-// Ghostery Rewards Icon
-.SetupAntiSuite__feature .ghostery-rewards {
-	background-image: buildGhosteryRewardsIcon(#9f9f9f);
-}
-.SetupAntiSuite__feature .ghostery-rewards.active {
-	background-image: buildGhosteryRewardsActiveIcon(#1dafed);
-}
-
 @media only screen and (max-width: 960px) {
 	.SetupAntiSuite--alignOnMedium {
 		display: flex;

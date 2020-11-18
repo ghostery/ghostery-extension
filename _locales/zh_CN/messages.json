@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "隐藏方框"
-	},
-	"box_hide_expanded": {
-		"message": "隐藏紫色方框"
-	},
 	"box_looking": {
 		"message": "外观"
 	},
@@ -675,10 +669,10 @@
 		"message": "跟踪器降低网页加载速度"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "智能拦截功能拦截的跟踪器"
+		"message": "智能浏览功能拦截的跟踪器"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "智能拦截功能未拦截的跟踪器"
+		"message": "智能浏览功能未拦截的跟踪器"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "在所有网站上拦截"
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "性能"
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
 	"panel_detail_learn_more": {
 	  "message": "了解详情"
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "功能即将推出。"
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "功能即将推出。"
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "Cliqz MyOffrz 控制面板中已激活此功能。"
-	},
-	"panel_detail_rewards_loading": {
-		"message": "正在加载Rewards…"
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "找不到Rewards"
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery Rewards已关闭"
 	},
 	"panel_detail_premium_text": {
 		"message": "功能即将推出。"
@@ -822,7 +798,7 @@
 		"message": "广告 + 跟踪器 + 扰人内容"
 	},
 	"settings_purple_box": {
-		"message": "紫色方框"
+		"message": "跟踪器记录"
 	},
 	"settings_notifications": {
 		"message": "通知"
@@ -882,7 +858,7 @@
 		"message": "默认拦截添加到 Ghostery 的新跟踪器"
 	},
 	"settings_show_purple_box": {
-		"message": "在浏览器一角显示紫色方框"
+		"message": "在浏览器一角显示跟踪器记录"
 	},
 	"settings_dismiss_after": {
 		"message": "此时间后关闭："
@@ -909,7 +885,7 @@
 		"message": "秒"
 	},
 	"settings_hide_alert_trusted": {
-		"message": "在受信任网站上隐藏紫色方框"
+		"message": "在受信任网站上隐藏跟踪器记录"
 	},
 	"settings_notify_me": {
 		"message": "当 Ghostery 有以下动向时通知我："
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "分享 Human Web 数据"
-	},
-	"settings_allow_offers": {
-		"message": "已参与Ghostery Rewards"
 	},
   	"settings_allow_abtests": {
 	  	"message": "参与 A/B 测试"
@@ -1026,7 +999,7 @@
 		"message": "例如，拦截 facebook.com 上的 Facebook 跟踪器可能会导致该网站崩溃。"
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "紫色方框是一个实时跟踪器列表，显示在浏览器一角。利用此功能，您可以查看添加到网页的跟踪器。"
+		"message": "跟踪器记录是一个实时加载的跟踪器列表，显示在浏览器一角。"
 	},
 	"settings_notify_me_tooltip": {
 		"message": "允许 Ghostery 在浏览器中显示与新产品功能、更新和用户反馈有关的消息。"
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "Ghostery 现在默认实现了 Human Web，这是一项利用群体智慧打造更私密互联网的革命性技术"
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards是一个按私密原则设计的功能，能在您上网浏览时为您提供来自我们合作公司的折扣和特惠。"
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "参与随机 A/B 测试有助于 Ghostery 了解您这类用户喜欢哪种版本的新布局或功能。 "
@@ -1134,22 +1104,22 @@
 		"message": "Ghostery 扩展程序已恢复。"
 	},
 	"alert_anti_track_on": {
-		"message": "增强型反跟踪功能已开启。个人数据将匿名化。"
+		"message": "反跟踪功能已开启。个人数据将匿名化。"
 	},
 	"alert_anti_track_off": {
-		"message": "增强型反跟踪功能已关闭。个人数据不会匿名化。"
+		"message": "反跟踪功能已关闭。个人数据不会匿名化。"
 	},
 	"alert_ad_block_on": {
-		"message": "增强型广告拦截功能已开启。广告将被拦截。"
+		"message": "广告拦截功能已开启。广告将被拦截。"
 	},
 	"alert_ad_block_off": {
-		"message": "增强版广告拦截功能已关闭。广告不会被拦截。"
+		"message": "广告拦截功能已关闭。广告不会被拦截。"
 	},
 	"alert_smart_block_on": {
-		"message": "智能拦截功能已开启。将调整跟踪器拦截功能以优化页面性能。"
+		"message": "智能浏览功能已开启。将调整跟踪器拦截功能以优化页面性能。"
 	},
 	"alert_smart_block_off": {
-		"message": "智能拦截功能已关闭。跟踪器拦截功能将不会自动调整。"
+		"message": "智能浏览功能已关闭。跟踪器拦截功能将不会自动调整。"
 	},
 	"alert_reload": {
 		"message": "重新加载以查看更改。"
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "学习教程"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "试用Ghostery Rewards"
-	},
 	"hub_side_navigation_products": {
 		"message": "查看更多Ghostery产品"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "分享额外的匿名分析数据来提高Ghostery的性能。"
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "新用户默认选择退出 Ghostery Rewards 和 Human Web。您可以在自定义设置或扩展中选择使用这些推荐功能。"
+		"message": "新用户默认选择退出 Human Web。您可以在自定义设置或扩展中选择使用这些推荐功能。"
 	},
 	"hub_home_header_info": {
-		"message": "新用户默认选择加入Human Web和Ghostery Rewards。您可以在自定义设置或在扩展中更改相关设置。"
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "新用户默认选择加入 Human Web。您可在自定义设置或扩展中更改相关设置。"
 	},
 	"hub_home_header_info_link": {
@@ -1507,7 +1471,7 @@
 		"message": "选择要拦截的追踪器"
 	},
 	"hub_setup_antisuite_description_antitracking": {
-		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。"
+		"message": "对未拦截和未识别的跟踪器保持匿名，获得更好的浏览保护。"
 	},
 	"hub_setup_feature_already_active": {
 		"message": "Cliqz 中默认激活此功能。$LINK_LM_START$了解更多$LINK_LM_END$",
@@ -1519,12 +1483,6 @@
 				"content": "</a>"
 			}
 		}
-	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "浏览和购物时不分享任何数据即可解锁特惠。"
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "已启用"
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "借助我们全新的标签页功能以隐身模式搜索、查看追踪器统计数据，以及管理Rewards。即将推出，敬请期待！"
+		"message": "借助我们全新的标签页功能以隐身模式搜索、查看追踪器统计数据。即将推出，敬请期待！"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery Lite"
 	},
 	"hub_products_third_promo_description": {
 		"message": "利用我们有史以来最轻量的Safari专享产品，保护您的网络隐私并去除广告。"
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery Hub - Rewards"
-	},
-	"hub_rewards_header_title": {
-		"message": "试用Ghostery Rewards！"
-	},
-	"hub_rewards_header_description": {
-		"message": "我们的新Rewards功能提供了一种完全私密的强大新方法来获取真实的网上折扣。快打开这个功能试用一下吧！"
-	},
-	"hub_rewards_experience_title": {
-		"message": "更智能的购物体验"
-	},
-	"hub_rewards_experience_description": {
-		"message": "在您上网浏览和购物时向您直接发放高额奖励。"
-	},
-	"hub_rewards_privacy_title": {
-		"message": "以隐私为重"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "不收集个人数据，不创建档案，不使用第三方服务"
-	},
-	"hub_rewards_relevant_title": {
-		"message": "独特而贴合需求"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "特别优惠是符合我们用户需求的及时独家优惠"
-	},
-	"hub_rewards_closer": {
-		"message": "您可以在扩展中或通过自定义设置打开Ghostery Rewards。"
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Hub - Ghostery Plus"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "要使用此功能，请先转到另一个页面。"
-	},
-	"rewards_new_text": {
-		"message": "发现了新Reward！"
-	},
-	"rewards_copy_code": {
-		"message": "复制代码"
-	},
-	"rewards_code_copied": {
-		"message": "代码已复制"
-	},
-	"rewards_expires_in_day": {
-		"message": "1 天可用"
-	},
-	"rewards_expires_in_days": {
-		"message": "$COUNT$ 天可用",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "1 小时可用"
-	},
-	"rewards_expires_in_hours": {
-		"message": "$COUNT$ 小时可用",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "1 分钟可用"
-	},
-	"rewards_expires_in_mins": {
-		"message": "$COUNT$ 分钟可用",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "1 秒可用"
-	},
-	"rewards_expires_in_secs": {
-		"message": "$COUNT$ 秒可用",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "条款和条件"
-	},
-	"rewards_disable": {
-		"message": "关闭Rewards"
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery Rewards现已关闭。您可以随时在设置中或Rewards仪表板上重新打开。"
-	},
-	"rewards_disable_confirm": {
-		"message": "好，知道了！"
-	},
-	"rewards_about": {
-		"message": "关于Rewards"
-	},
-	"rewards_settings": {
-		"message": "Ghostery 奖励设置"
-	},
-	"rewards_delete": {
-		"message": "删除此奖励"
-	},
-	"rewards_exclusive": {
-		"message": "专属"
-	},
-	"rewards_best_offer": {
-		"message": "最优报价"
-	},
-	"rewards_first_prompt": {
-		"message": "您要继续前往Ghostery Rewards吗？"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "您希望接收可信 Ghostery 合作伙伴发送的优惠和折扣信息吗？"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "发现了新Reward！"
-	},
-	"rewards_second_prompt": {
-		"message": "您要停止接收将来的Ghostery Rewards吗？"
-	},
-	"rewards_yes": {
-		"message": "是"
-	},
-	"rewards_no": {
-		"message": "否"
-	},
-	"rewards_on": {
-		"message": "日期"
-	},
-	"rewards_off": {
-		"message": "关闭"
-	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery Rewards已打开"
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery Rewards已关闭"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Rewards代码已拷贝！"
-	},
-	"offers_hub_copy_btn": {
-		"message": "复制代码"
-	},
-	"offers_code_copied": {
-		"message": "已复制"
 	},
 	"popup_cancel_button": {
 		"message": "取消"
@@ -2087,21 +1896,7 @@
 		"message": "不，保留历史数据"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "升级为 Ghostery Plus，解锁您的历史统计数据（以及其他酷炫福利）。$LINK_START$了解详情$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "升级为 Ghostery Plus，解锁您的历史统计数据（以及其他酷炫福利）。"
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "已经是 Ghostery 支持者？"
@@ -2147,188 +1942,14 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "Ghostery Rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "增强型反跟踪"
+		"message": "反跟踪功能"
 	},
-	"panel_rewards_view__reward": {
-		"message": "Reward"
+	"unidentified": {
+		"message": "未识别"
 	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "关联链接"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "复制并前往"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "我已使用此优惠"
-	},
-	"myoffrz_feedback_option2": {
-		"message": "不划算"
-	},
-	"myoffrz_feedback_option3": {
-		"message": "与我无关"
-	},
-	"myoffrz_feedback_option4": {
-		"message": "其他原因"
-	},
-	"myoffrz_feedback_title": {
-		"message": "反馈"
-	},
-	"myoffrz_get_code": {
-		"message": "获取代码"
-	},
-	"myoffrz_offer_removed": {
-		"message": "此优惠已删除"
-	},
-	"myoffrz_optional": {
-		"message": "可选"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "由 MyOffrz 提供支持"
-	},
-	"myoffrz_show_code": {
-		"message": "显示代码"
-	},
-	"myoffrz_show_more": {
-		"message": "显示更多"
-	},
-	"myoffrz_skip": {
-		"message": "跳过"
-	},
-	"myoffrz_welcome_link": {
-		"message": "工作原理"
-	},
-	"myoffrz_welcome_text": {
-		"message": "浏览互联网时，我们会根据您的兴趣搜索最具吸引力的优惠。"
-	},
-	"myoffrz_welcome_title": {
-		"message": "您好！"
-	},
-	"myoffrz_why_offers_text": {
-		"message": "设备中的个人数据绝无泄露风险。您的浏览器会根据历史记录自动识别您可能感兴趣的领域。"
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "我为何会看到这些优惠？"
-	},
-	"myoffrz_why_see_this": {
-		"message": "我为何会看到这一内容？"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "新"
-	},
-	"myoffrz_conditions": {
-		"message": "条件"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "关闭 Ghostery Rewards"
-	},
-	"myoffrz_help": {
-		"message": "帮助"
-	},
-	"myoffrz_learn_more": {
-		"message": "了解详情"
-	},
-	"myoffrz_send": {
-		"message": "发送"
-	},
-	"myoffrz_settings": {
-		"message": "设置"
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "发现了新Reward！"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "Ghostery Rewards现已关闭。您可以随时在设置中或Rewards仪表板上重新打开。"
-	},
-	"myoffrz_optin_description": {
-		"message": "您希望接收可信 Ghostery 合作伙伴发送的优惠和折扣信息吗？"
-	},
-	"myoffrz_optin_title": {
-		"message": "发现了新Reward！"
-	},
-	"myoffrz_no": {
-		"message": "否"
-	},
-	"myoffrz_yes": {
-		"message": "是"
-	},
-	"myoffrz_rewards_new": {
-		"message": "发现了新Reward！"
-	},
-	"myoffrz_apply_code": {
-		"message": "应用代码"
-	},
-	"myoffrz_cancel": {
-		"message": "取消"
-	},
-	"myoffrz_copied": {
-		"message": "已复制"
-	},
-	"myoffrz_copy_code": {
-		"message": "复制代码"
-	},
-	"myoffrz_expires_in_day": {
-		"message": "1 天可用"
-	},
-	"myoffrz_expires_in_days": {
-		"message": "$COUNT$ 天可用",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "1 小时可用"
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "$COUNT$ 小时可用",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "限时 1 分钟"
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "限时 $COUNT$ 分钟",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "查看以下条件"
-	},
-	"myoffrz_redeem_code": {
-		"message": "兑换码"
-	},
-	"myoffrz_voucher_found": {
-		"message": "发现优惠券"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "兑换优惠券"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
-		"message": "未知"
-	},
-	"unknown_description": {
-		"message": "由 Anti-Tracking 清除的未知跟踪器"
+	"unidentified_description": {
+		"message": "由反跟踪功能清除的未识别跟踪器"
 	},
 	"ghostery_is_ready": {
 		"message": "Ghostery 已就绪！"
@@ -2462,10 +2083,10 @@
 		"message": "关闭"
 	},
 	"enhanced_ad_blocking": {
-		"message": "增强型广告屏蔽"
+		"message": "广告拦截"
 	},
 	"smart_blocking": {
-		"message": "智能拦截"
+		"message": "智能浏览功能"
 	},
 	"smart_blocking_DESC": {
 		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"

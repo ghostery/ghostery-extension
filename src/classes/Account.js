@@ -564,7 +564,6 @@ class Account {
 		log('SET USER SETTINGS', returnedSettings);
 		if (IS_CLIQZ) {
 			returnedSettings.enable_human_web = false;
-			returnedSettings.enable_offers = false;
 			returnedSettings.enable_ad_block = false;
 			returnedSettings.enable_anti_tracking = false;
 		}
