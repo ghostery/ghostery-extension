@@ -21,7 +21,6 @@ module.exports = {
 	extends: 'airbnb',
 	globals: {
 		chrome: true,
-		browser: true,
 		t: true,
 		Atomics: 'readonly',
 		SharedArrayBuffer: 'readonly',

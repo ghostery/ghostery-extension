@@ -310,9 +310,11 @@ class Metrics {
 		}
 
 		if (BROWSER_INFO.token === 'gd') {
-			metrics_url +=
-				// default search
-				this._buildQueryPair('ds', await Metrics._getDefaultSearchEngine());
+			// fetch metrics from the search extension and append them
+			const searchMetrics = await Metrics._getSearchExtensionMetrics();
+			Object.keys(searchMetrics).forEach((k) => {
+				metrics_url += this._buildQueryPair(k, searchMetrics[k]);
+			});
 		}
 
 		return metrics_url;
@@ -675,22 +677,12 @@ class Metrics {
 		}, FREQUENCIES.biweekly);
 	}
 
-	static async _getDefaultSearchEngine() {
-		// search API is only available in Ghostery browser where this permission is added to the manifest.
-		if (typeof browser !== 'undefined' && browser.search) {
-			// limit engines we can send to the specific set we're interested in from search choice screen
-			const searchEngines = {
-				'Ghostery Search': 'ghost',
-				Google: 'google',
-				Bing: 'bing',
-				StartPage: 'sp',
-				Yahoo: 'yahoo',
-			};
-			const engines = await browser.search.get();
-			const defaultSearchEngine = engines.find(s => s.isDefault).name;
-			return searchEngines[defaultSearchEngine] || 'other';
-		}
-		return '';
+	static async _getSearchExtensionMetrics() {
+		return new Promise((resolve) => {
+			chrome.runtime.sendMessage('search@ghostery.com', 'getMetrics', (response) => {
+				resolve(response || {});
+			});
+		});
 	}
 }
 
