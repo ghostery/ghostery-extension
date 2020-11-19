@@ -190,9 +190,9 @@ class Metrics {
 	 * Set uninstall url
 	 * @param  {string} 	conf key being changed
 	 */
-	setUninstallUrl(key) {
+	async setUninstallUrl(key) {
 		if (typeof chrome.runtime.setUninstallURL === 'function' && (!key || METRICS_URL_SET.has(key))) {
-			const metrics_url = this._buildMetricsUrl('uninstall');
+			const metrics_url = await this._buildMetricsUrl('uninstall');
 			if (metrics_url.length) {
 				chrome.runtime.setUninstallURL(metrics_url);
 			}
@@ -220,7 +220,7 @@ class Metrics {
 	 * @param  {string} frequency 	ping frequency
 	 * @return {string}          	complete telemetry url
 	 */
-	_buildMetricsUrl(type, frequency) {
+	async _buildMetricsUrl(type, frequency) {
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
 		let metrics_url = `${METRICS_BASE_URL}/${type}${frequencyString}?gr=-1`;
@@ -309,6 +309,12 @@ class Metrics {
 				this._buildQueryPair('uc', this.utm_campaign);
 		}
 
+		if (BROWSER_INFO.token === 'gd') {
+			metrics_url +=
+				// default search
+				this._buildQueryPair('ds', await Metrics._getDefaultSearchEngine());
+		}
+
 		return metrics_url;
 	}
 
@@ -335,10 +341,10 @@ class Metrics {
 			};
 		}
 
-		frequencies.forEach((frequency) => {
+		frequencies.forEach(async(frequency) => {
 			if (this._checkPing(type, frequency)) {
 				const timeNow = Number((new Date()).getTime());
-				const metrics_url = this._buildMetricsUrl(type, frequency);
+				const metrics_url = await this._buildMetricsUrl(type, frequency);
 				// update Conf timestamps for each ping type and frequency
 				const metrics = conf.metrics || {};
 				metrics[`${type}_${frequency}`] = timeNow;
@@ -667,6 +673,24 @@ class Metrics {
 			}
 			flag = !flag;
 		}, FREQUENCIES.biweekly);
+	}
+
+	static async _getDefaultSearchEngine() {
+		// search API is only available in Ghostery browser where this permission is added to the manifest.
+		if (typeof browser !== 'undefined' && browser.search) {
+			// limit engines we can send to the specific set we're interested in from search choice screen
+			const searchEngines = {
+				'Ghostery Search': 'ghost',
+				Google: 'google',
+				Bing: 'bing',
+				StartPage: 'sp',
+				Yahoo: 'yahoo',
+			};
+			const engines = await browser.search.get();
+			const defaultSearchEngine = engines.find(s => s.isDefault).name;
+			return searchEngines[defaultSearchEngine] || 'other';
+		}
+		return '';
 	}
 }
 
