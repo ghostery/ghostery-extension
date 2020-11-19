@@ -75,7 +75,8 @@
 				"https://*/*"
 			],
 			"exclude_matches": [
-				"*://*/_/chrome/newtab*"
+				"*://*/_/chrome/newtab*",
+				"*://ntp.msn.com/*"
 			],
 			"run_at": "document_start"
 		}
