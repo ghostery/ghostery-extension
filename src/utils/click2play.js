@@ -58,8 +58,12 @@ export function buildC2P(details, app_id) {
 	const { tab_id } = details;
 	const tab = tabInfo.getTabInfo(tab_id);
 
-	// If the tab is prefetched, non http/s page or legacy Chrome (< 75) new tab page, we can't add C2P to it
-	if (!tab || tab.prefetched || !tab.protocol.startsWith('http') || tab.path.includes('_/chrome/newtab') || globals.EXCLUDES.includes(tab.host)) {
+	// If the tab is prefetched, non http/s page, Chrome (< 75) or Edge new tab page, we can't add C2P to it
+	if (!tab || tab.prefetched ||
+		!tab.protocol.startsWith('http') ||
+		tab.path.includes('_/chrome/newtab') ||
+		tab.host.includes('ntp.msn.com') ||
+		globals.EXCLUDES.includes(tab.host)) {
 		return;
 	}
 

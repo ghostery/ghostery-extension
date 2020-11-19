@@ -774,8 +774,10 @@ export function injectNotifications(tab_id, importExport = false) {
 		return Promise.resolve(true);
 	}
 	const tab = tabInfo.getTabInfo(tab_id);
-	// check for prefetching, non http/s pages and legacy Chrome (< 75) new tab page
-	if (tab && (tab.prefetched === true || !tab.protocol.startsWith('http') || tab.path.includes('_/chrome/newtab') || (!importExport && globals.EXCLUDES.includes(tab.host)))) {
+	// check for prefetching, non http/s pages and Chrome (< 75) or Edge new tab page
+	if (tab && (tab.prefetched === true || !tab.protocol.startsWith('http') ||
+		tab.path.includes('_/chrome/newtab') || tab.host.includes('ntp.msn.com') ||
+		(!importExport && globals.EXCLUDES.includes(tab.host)))) {
 		// return false to prevent sendMessage calls
 		return Promise.resolve(false);
 	}
