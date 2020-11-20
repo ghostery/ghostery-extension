@@ -652,7 +652,7 @@ class EventHandlers {
 
 	/**
 	 * Checks to see if the URL is valid. Also checks to make sure we
-	 * are not on the legacy Chrome (< 75) new tab page (_/chrome/newtab).
+	 * are not on the Chrome (< 75) or Edge new tab page.
 	 *
 	 * @private
 	 *
@@ -660,7 +660,11 @@ class EventHandlers {
 	 * @return {Boolean}
 	 */
 	static _isValidUrl(parsedURL) {
-		if (parsedURL && parsedURL.protocol.startsWith('http') && parsedURL.isValidHost() && !parsedURL.pathname.includes('_/chrome/newtab')) {
+		if (parsedURL &&
+			parsedURL.isValidHost() &&
+			parsedURL.protocol.startsWith('http') &&
+			!parsedURL.pathname.includes('_/chrome/newtab') &&
+			!parsedURL.hostname.includes('ntp.msn.com')) {
 			return true;
 		}
 
