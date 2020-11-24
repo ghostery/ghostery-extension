@@ -1734,6 +1734,21 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"hub_plan_view_your_privacy_plan": {
+		"message": "Your Privacy Plan"
+	},
+	"hub_plan_view_based_on_your_privacy_preferences": {
+		"message": "Based on your privacy preferences"
+	},
+	"hub_plan_view_ad_free": {
+		"message": "Ad-free with Ghostery Plus subscription"
+	},
+	"hub_plan_view_ad_free_promo": {
+		"message": "40% off for the first 12 months"
+	},
+	"hub_plan_view_ad_free_promo_description": {
+		"message": "Get to what you want faster. A plus subscription gives Ghostery the support we need to provide YOU with an ad-free experience."
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
