@@ -78,4 +78,29 @@
 	border-radius: 3.5px;
 	text-align: center;
 	line-height: 2.05;
+	cursor: pointer;
+}
+
+.PlanView__seeAllPlans {
+	margin-top: 48px;
+	display: flex;
+	justify-content: center;
+	color: #00aef0;
+	font-size: 16px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.PlanView__plansContainer {
+	margin-top: 100px;
+}
+
+.PlanView__arrowDown {
+	margin: 15px auto 0 auto;
+	height: 12px;
+	width: 12px;
+	transform: rotate(45deg);
+	border-left: 2px solid #00aef0;
+	border-top: 2px solid #00aef0;
+	cursor: pointer;
 }
