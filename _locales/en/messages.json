@@ -1366,6 +1366,9 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"
 	},
+	"hub_upgrade_maximum_protection": {
+		"message": "Maximum Protection"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Browser Tracker Blocking"
 	},
@@ -1734,23 +1737,47 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
-	"hub_plan_view_your_privacy_plan": {
+	"hub_plan_your_privacy_plan": {
 		"message": "Your Privacy Plan"
 	},
-	"hub_plan_view_based_on_your_privacy_preferences": {
+	"hub_plan_based_on_your_privacy_preferences": {
 		"message": "Based on your privacy preferences"
 	},
-	"hub_plan_view_ad_free": {
+	"hub_plan_ad_free_with_ghostery_plus_subscription": {
 		"message": "Ad-free with Ghostery Plus subscription"
 	},
-	"hub_plan_view_ad_free_promo": {
+	"hub_plan_ad_free_promo": {
 		"message": "40% off for the first 12 months"
 	},
-	"hub_plan_view_ad_free_promo_description": {
+	"hub_plan_ad_free_promo_description": {
 		"message": "Get to what you want faster. A plus subscription gives Ghostery the support we need to provide YOU with an ad-free experience."
 	},
-	"hub_plan_view_see_all_plans": {
+	"hub_plan_start_trial": {
+		"message": "Start Trial"
+	},
+	"hub_plan_see_all_plans": {
 		"message": "See all plans"
+	},
+	"hub_plan_private_search": {
+		"message": "Private search"
+	},
+	"hub_plan_tracker_protection": {
+		"message": "Tracker protection"
+	},
+	"hub_plan_speedy_page_loads": {
+		"message": "Speedy page loads"
+	},
+	"hub_plan_intelligence_technology": {
+		"message": "Intelligence technology"
+	},
+	"hub_plan_ad_free": {
+		"message": "Ad free"
+	},
+	"hub_plan_supports_ghosterys_mission": {
+		"message": "Supports Ghostery's Mission"
+	},
+	"hub_plan_unlimited_bandwidth": {
+		"message": "Unlimited Bandwidth"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
