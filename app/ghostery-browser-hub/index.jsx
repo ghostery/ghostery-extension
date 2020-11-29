@@ -18,7 +18,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from './createStore';
 
-// Containers
+// Views
 import AppView from './Views/AppView';
 import OnboardingView from './Views/OnboardingView';
 

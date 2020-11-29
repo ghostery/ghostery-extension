@@ -1,5 +1,5 @@
 /**
- * Ghostery Browser Hub App View Constants
+ * Point of entry index.js file for Ghostery Browser Hub Choose Plan View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO I think we can just use the Hub AppViewConstants
+import ChoosePlanView from './ChoosePlanView';
 
-// Ghostery Browser Hub App View
-export const SET_TOAST = 'SET_TOAST';
+export default ChoosePlanView;

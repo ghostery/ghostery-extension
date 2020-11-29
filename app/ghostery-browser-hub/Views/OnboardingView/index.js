@@ -55,37 +55,9 @@ const mapDispatchToProps = dispatch => ({
 	}, dispatch),
 });
 
-export const reducer = MainViewReducer;
+export const reducer = OnboardingViewReducer;
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainViewContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OnboardingViewContainer));
 
-import LogInViewContainer from './LogInViewContainer';
-import { login, getUser, getUserSettings } from '../../../Account/AccountActions';
-import { getTheme } from '../../../panel/actions/PanelActions';
-import { setToast } from '../AppView/AppViewActions';
-
-/**
- * Map redux store state properties to the component's own properties.
- * @param  {Object} state    entire Redux store's state
- * @return {function}        this function returns a plain object, which will be merged into the component's props
- * @memberof HubContainers
- */
-const mapStateToProps = state => ({ ...state.account });
-
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- * @memberof SetupContainers
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators({
-		setToast,
-		login,
-		getUser,
-		getUserSettings,
-		getTheme
-	}, dispatch),
-});
 
 

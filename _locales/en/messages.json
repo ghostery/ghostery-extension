@@ -1734,6 +1734,21 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"ghostery_browser_hub_onboarding_page_title": {
+	  "message": "Ghostery Browser Hub - Welcome"
+	},
+  	"ghostery_browser_hub_onboarding_header_title_login": {
+	  "message": "Ghostery Browser Hub - Login"
+	},
+	"ghostery_browser_hub_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Browser Hub - Block Settings"
+	},
+	"ghostery_browser_hub_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Browser Hub - Search Choice"
+	},
+	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Browser Hub - Plan Choices"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},

@@ -1,5 +1,5 @@
 /**
- * Ghostery Browser Hub App View Constants
+ * Ghostery Browser Hub Choose Default Search View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,7 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO I think we can just use the Hub AppViewConstants
+import React from 'react';
 
-// Ghostery Browser Hub App View
-export const SET_TOAST = 'SET_TOAST';
+const ChooseDefaultSearchView = () => 'Step 3: Choose Default Search View';
+
+export default ChooseDefaultSearchView;

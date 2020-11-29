@@ -22,12 +22,13 @@ import {
 import thunk from 'redux-thunk';
 
 import { reducer as app } from './Views/AppView';
-import { reducer as main } from './Views/OnboardingView';
+import { reducer as onboarding } from './Views/OnboardingView';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
 const reducer = combineReducers({
 	app,
+	onboarding,
 	account,
 	settings,
 });
