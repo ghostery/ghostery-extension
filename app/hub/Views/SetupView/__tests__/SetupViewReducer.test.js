@@ -24,7 +24,6 @@ import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
 	SET_SMART_BLOCK,
-	SET_GHOSTERY_REWARDS,
 	SET_HUMAN_WEB
 } from '../SetupViewConstants';
 
@@ -45,7 +44,6 @@ const initialState = Immutable({
 		enable_anti_tracking: true,
 		enable_ad_block: true,
 		enable_smart_block: true,
-		enable_ghostery_rewards: true,
 		enable_human_web: true,
 	},
 });
@@ -169,29 +167,6 @@ describe('app/hub/Views/OnboardingView reducer', () => {
 				example: 'example-good-data',
 				enable_smart_block: data.enable_smart_block,
 			}
-		});
-	});
-
-	test('reducer correctly handles SET_GHOSTERY_REWARDS', () => {
-		const data = {
-			test: 'test-bad-data',
-			enable_ad_block: true, // Bad Data
-			enable_smart_block: false, // Bad Data
-			enable_ghostery_rewards: false,
-		};
-		const action = { data, type: SET_GHOSTERY_REWARDS };
-		const initSetupState = Immutable.merge(initialState.setup, {
-			test: 'test-good-data',
-			example: 'example-good-data',
-			enable_ad_block: false,
-		});
-
-		const updatedSetupState = Immutable.merge(initSetupState, {
-			enable_ghostery_rewards: data.enable_ghostery_rewards
-		});
-
-		expect(SetupViewReducer({ setup: initSetupState }, action)).toEqual({
-			setup: updatedSetupState
 		});
 	});
 

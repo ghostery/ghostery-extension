@@ -58,7 +58,6 @@ const handler = {
 		// altering settings by syncing and/or importing.
 		if (IS_CLIQZ) {
 			if (key === 'enable_human_web' ||
-				key === 'enable_offers' ||
 				key === 'enable_anti_tracking' ||
 				key === 'enable_ad_block') {
 				value = false;

@@ -15,15 +15,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import globals from '../../../../src/classes/Globals';
 
-const { IS_CLIQZ, BROWSER_INFO } = globals;
-const IS_ANDROID = (BROWSER_INFO.os === 'android');
+const { IS_CLIQZ } = globals;
 
 const TOOLTIP_SVG_FILEPATH = '../../app/images/panel/icon-information-tooltip.svg';
 
 /**
  * @class Implement Opt In subview as a React component.
  * The view opens from the left-side menu of the main Settings view.
- * It invites user to opt in for telemetry options, human web and offers
+ * It invites user to opt in for telemetry options and human web
  * @memberOf SettingsComponents
  */
 const OptIn = ({ settingsData, toggleCheckbox }) => {
@@ -79,12 +78,6 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 						tooltipSVG(t('settings_human_web_tooltip'), 'up'),
 						'human-web-section'
 					)}
-					{!IS_CLIQZ && !IS_ANDROID && option(
-						checkbox('allow-offers', 'enable_offers'),
-						labelFor('allow-offers', t('settings_allow_offers')),
-						tooltipSVG(t('settings_offers_tooltip'), 'up'),
-						'offers-section'
-					)}
 					{option(
 						checkbox('allow-abtests', 'enable_abtests'),
 						labelFor('allow-abtests', t('settings_allow_abtests')),
@@ -102,7 +95,6 @@ OptIn.propTypes = {
 	settingsData: PropTypes.shape({
 		enable_metrics: PropTypes.bool.isRequired,
 		enable_human_web: PropTypes.bool.isRequired,
-		enable_offers: PropTypes.bool.isRequired,
 		enable_abtests: PropTypes.bool.isRequired,
 	}).isRequired,
 };

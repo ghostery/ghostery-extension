@@ -56,7 +56,6 @@ class TabInfo {
 			partialScan: true,
 			prefetched: false,
 			purplebox: false,
-			rewards: false,
 			timestamp: Date.now(),
 			// assign only when smartBlock is enabled so avoid false positives
 			// when enabling smartBlock is enabled for the first time

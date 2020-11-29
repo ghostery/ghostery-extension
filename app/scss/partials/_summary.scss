@@ -170,8 +170,7 @@
 
 
 // Additional specificity needed to overwrite the position value of g-tooltip
-.Summary__statsNavicon.Summary__statsNavicon--absolutely-positioned,
-.Summary__rewardsNavicon.Summary__rewardsNavicon--absolutely-positioned {
+.Summary__statsNavicon.Summary__statsNavicon--absolutely-positioned {
 	position: absolute;
 	right: 0;
 	padding-top: 6px;
@@ -187,19 +186,6 @@
 	padding-right: 3px;
 	padding-left: 9px;
 	cursor: pointer;
-}
-.Summary__rewardsNavicon.Summary__rewardsNavicon--absolutely-positioned {
-	top: 85px;
-	padding-right: 6px;
-	padding-left: 10px;
-	text-transform: capitalize;
-	cursor: pointer;
-}
-// position the star SVG relative to the gift box SVG
-.Summary__rewardsNavicon__star {
-	position: absolute;
-	left: 3px;
-	top: 17px;
 }
 
 .Summary__spaceTaker {

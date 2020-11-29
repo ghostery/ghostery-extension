@@ -25,8 +25,6 @@ CLIQZ.config.default_prefs = {
 	// the following are enabled by default on non-android platforms
 	'modules.human-web.enabled': !IS_ANDROID,
 	'modules.hpnv2.enabled': !IS_ANDROID,
-	'modules.offers-v2.enabled': !IS_ANDROID,
-	'modules.offers-banner.enabled': !IS_ANDROID,
 	// the following are enabled for android only
 	'modules.human-web-lite.enabled': IS_ANDROID,
 	'modules.hpn-lite.enabled': IS_ANDROID,

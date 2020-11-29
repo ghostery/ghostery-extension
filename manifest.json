@@ -7,7 +7,6 @@
 	"version_name": "8.5.4",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
-	"debug": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -75,7 +74,8 @@
 				"https://*/*"
 			],
 			"exclude_matches": [
-				"*://*/_/chrome/newtab*"
+				"*://*/_/chrome/newtab*",
+				"*://ntp.msn.com/*"
 			],
 			"run_at": "document_start"
 		}
@@ -109,10 +109,6 @@
 	"minimum_chrome_version": "69",
 	"minimum_opera_version": "56",
 	"web_accessible_resources": [
-		"app/images/*",
-		"dist/css/rewards_styles.css",
-		"cliqz/offers-templates/reminder.html",
-		"cliqz/offers-templates/checkout.html",
-		"cliqz/offers-templates/control-center.html"
+		"app/images/*"
 	]
 }

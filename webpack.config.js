@@ -27,7 +27,6 @@ const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
 const HUB_DIR = path.resolve(__dirname, 'app/hub');
 const HUB_GHOSTERY_BROWSER_DIR = path.resolve(__dirname, 'app/ghostery-browser-hub');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
-const REWARDS_DIR = path.resolve(__dirname, 'app/rewards');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
@@ -123,7 +122,7 @@ module.exports = {
 				}
 			}, {
 				test: /\.(js|jsx)$/,
-				include: [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, HUB_DIR, HUB_GHOSTERY_BROWSER_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR, REWARDS_DIR],
+				include: [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, HUB_DIR, HUB_GHOSTERY_BROWSER_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
 				exclude: /node_modules/,
 				use: [
 					{

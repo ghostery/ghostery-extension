@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "Szövegdoboz elrejtése"
-	},
-	"box_hide_expanded": {
-		"message": "Lila szövegdoboz elrejtése"
-	},
 	"box_looking": {
 		"message": "Megtekintés"
 	},
@@ -675,10 +669,10 @@
 		"message": "A tracker lassú"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Tracker blokkolva az Okos Blokkolás (Smart Blocking) által"
+		"message": "Tracker blokkolva az Okos böngészés által"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Tracker feloldva az Okos Blokkolás (Smart Blocking) által"
+		"message": "Tracker feloldva az Okos böngészés által"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "Blokkolás az összes oldalon"
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "Teljesítmény"
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
 	"panel_detail_learn_more": {
 	  "message": "Tudjon meg többet"
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Ez a funkció hamarosan érkezik."
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "Ez a funkció hamarosan érkezik."
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "A funkció már aktív a Cliqz MyOffrz vezérlőpultjában."
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Rewards betöltése…"
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "Rewards nem található"
-	},
-	"panel_detail_rewards_off": {
-		"message": "A Ghostery Rewards KI van kapcsolva"
 	},
 	"panel_detail_premium_text": {
 		"message": "Ez a funkció hamarosan érkezik."
@@ -810,7 +786,7 @@
 		"message": "Hirdetésblokkolási listák"
 	},
 	"settings_adblocker_lists": {
-		"message": "Az alábbi hirdetésblokkolási szűrőlisták betöltése:"
+		"message": "Az alábbi hirdetésblokkolási listák betöltése:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Csak hirdetések"
@@ -822,7 +798,7 @@
 		"message": "Hirdetések + nyomkövetők + bosszantó dolgok"
 	},
 	"settings_purple_box": {
-		"message": "Lila szövegdoboz"
+		"message": "Trackerek száma"
 	},
 	"settings_notifications": {
 		"message": "Értesítések"
@@ -882,7 +858,7 @@
 		"message": "A Ghostery-hez hozzáadott új trackerek blokkolása alapértelmezés szerint"
 	},
 	"settings_show_purple_box": {
-		"message": "Jelenítse meg a lila szövegdobozt a böngészőm sarkában"
+		"message": "Trackerek számának megjelenítése a böngésző sarkában"
 	},
 	"settings_dismiss_after": {
 		"message": "Bezárás ezután:"
@@ -909,7 +885,7 @@
 		"message": "mp"
 	},
 	"settings_hide_alert_trusted": {
-		"message": "Rejtse el a lila szövegdobozt a megbízható oldalakon"
+		"message": "Trackerek számának elrejtése a megbízható webhelyeken"
 	},
 	"settings_notify_me": {
 		"message": "Értesítsen, ha a Ghostery:"
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "Human Web adatok megosztása"
-	},
-	"settings_allow_offers": {
-		"message": "Részvétel a Ghostery Rewards programban"
 	},
   	"settings_allow_abtests": {
 	  	"message": "Részvétel A/B-tesztekben"
@@ -1026,7 +999,7 @@
 		"message": "Például, a Facebook trackerének a facebook.com oldalon történő blokkolásával lehet, hogy használhatatlanná válik az oldal."
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "A böngészője sarkában megjelenő lila szövegdoboz egy valósidejű listát tartalmaz a trackerekről. Ez a funkció segíti Önt, hogy figyelemmel kísérje, mely trackerek adódtak hozzá a weboldalhoz."
+		"message": "A trackerek száma a böngésző sarkában látható lista, amely a valós időben betöltődő trackereket mutatja."
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Engedélyezés a Ghostery számára, hogy üzeneteket jelenítsen meg a böngészőmben új termékekkel, funkciókkal, frissítésekkel és ügyfelek általi visszajelzésekkel kapcsolatban."
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "A Ghostery alapértelmezés szerint alkalmazza a Human Web analitikát, egy forradalmian új technológiát, amely nagyszámú felhasználói tudással segít biztonságosabb internetet építeni"
-	},
-	"settings_offers_tooltip": {
-		"message": "A Ghostery Rewards olyan személyesre tervezett funkció, amely böngészés közben árengedményeket és akciókat szolgáltat önnek partnervállalainktól."
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "A véletlenszerű A/B-tesztekben való részvétellel segít a Ghostery vállalatnak, hogy megtudja, az új elrendezés vagy funkció melyik verziója tetszik Önnek."
@@ -1065,7 +1035,7 @@
 		"message": "Igénylések módosítva:"
 	},
 	"requests_modified_tooltip": {
-		"message": "Az Anti-Tracking és a Hirdetésblokkolás által módosított követési igénylések és elemek száma összesen"
+		"message": "A követési kérések és elemek teljes száma a Követés elleni védelem  és a Hirdetésblokkolás által módosítva"
 	},
 	"trackers_blocked": {
 		"message": "Blokkolt trackerek:"
@@ -1134,22 +1104,22 @@
 		"message": "Ghostery kiterjesztés visszakapcsolva."
 	},
 	"alert_anti_track_on": {
-		"message": "Fejlesztett Anti-Tracking BE van kapcsolva. A személyes adatpontok névtelenítve lesznek."
+		"message": "A Követés elleni védelem BE van kapcsolva. A személyes adatok anonim módon szerepelnek."
 	},
 	"alert_anti_track_off": {
-		"message": "Fejlesztett Anti-Tracking KI van kapcsolva. A személyes adatpontok nem lesznek névtelenítve."
+		"message": "A Követés elleni védelem KI van kapcsolva. A személyes adatok nem anonim módon szerepelnek."
 	},
 	"alert_ad_block_on": {
-		"message": "Fejlesztett hirdetésblokkolás BE van kapcsolva A hirdetések ki lesznek szűrve."
+		"message": "A Hirdetésblokkolás BE van kapcsolva. A hirdetések le vannak tiltva."
 	},
 	"alert_ad_block_off": {
-		"message": "Fejlesztett hirdetésblokkolás KI van kapcsolva A hirdetések nem lesznek kiszűrve."
+		"message": "A Hirdetésblokkolás KI van kapcsolva. A hirdetések nincsenek letiltva."
 	},
 	"alert_smart_block_on": {
-		"message": "Okos blokkolás BE van kapcsolva. A tracker-szűrés az oldal teljesítményének optimalizálására lesz beállítva."
+		"message": "Az Okos böngészés BE van kapcsolva. A trackerblokkolás az oldal optimális működését figyelembe véve korrigálódik."
 	},
 	"alert_smart_block_off": {
-		"message": "Okos blokkolás KI van kapcsolva. A tracker-szűrés nem lesz automatikusan beállítva."
+		"message": "Az Okos böngészés KI van kapcsolva. A trackerblokkolás nem korrigálódik automatikusan."
 	},
 	"alert_reload": {
 		"message": "Töltse újra az oldalt a változások megtekintéséhez."
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "Oktatás megtekintése"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "A Ghostery Rewards kipróbálása"
-	},
 	"hub_side_navigation_products": {
 		"message": "További Ghostery termékek megtekintése"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "További névtelen analitikai adatok megosztása a Ghostery teljesítményének fejlesztése érdekében."
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "Az új felhasználók esetében a Ghostery Rewards és a Human Web funkciók alapértelmezett módon nincsenek aktiválva. Az egyéni telepítésben vagy a bővítményben aktiválhatja ezeket az ajánlott funkciókat."
+		"message": "Az új felhasználók esetében a Human Web funkciók alapértelmezett módon nincsenek aktiválva. Az egyéni telepítésben vagy a bővítményben aktiválhatja ezeket az ajánlott funkciókat."
 	},
 	"hub_home_header_info": {
-		"message": "Az új felhasználók feliratkoznak a Human Web és Ghostery Rewards szolgáltatásokra. Ezeket a beállításokat egyedi telepítés során vagy a kiegészítőben változtathatja meg."
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "Az új felhasználók részt a Human Web programban. Ez a beállítás az egyéni konfigurációban vagy a bővítményben módosítható. "
 	},
 	"hub_home_header_info_link": {
@@ -1507,7 +1471,7 @@
 		"message": "Válassza ki, mely trackerek legyenek blokkolva"
 	},
 	"hub_setup_antisuite_description_antitracking": {
-		"message": "Névtelenítse a feloldott és ismeretlen trackereket a fokozottabb böngészési védelem érdekében."
+		"message": "Anonimmá teheti a nem blokkolt és azonosítatlan trackereket a hatékonyabb böngészővédelemhez."
 	},
 	"hub_setup_feature_already_active": {
 		"message": "Ez a funkció alapértelmezés szerint már aktív a Cliqzben. $LINK_LM_START$További tájékoztatás$LINK_LM_END$",
@@ -1519,12 +1483,6 @@
 				"content": "</a>"
 			}
 		}
-	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "Oldjon fel különleges ajánlatokat böngészés közben, és vásároljon a személyes adatainak megosztása nélkül."
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Engedélyezve"
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "Keressen adatvédetten, tekintse meg a tracker statisztikákat, és kezelje a Rewards szolgálatatást az új lapfül funkcióval! Hamarosan elérhető!"
+		"message": "Keressen adatvédetten és tekintse meg a tracker statisztikákat szolgálatatást az új lapfül funkcióval! Hamarosan elérhető!"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery Lite"
 	},
 	"hub_products_third_promo_description": {
 		"message": "Védje adatait online és szabaduljon meg a hirdetésektől az eddigi legegyszerűbb termékünkkel, kizárólag Safarira fejlesztve!"
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery Központ - Rewards (Jutalmak)"
-	},
-	"hub_rewards_header_title": {
-		"message": "Próbálja ki a Ghostery Rewards szolgáltatást!"
-	},
-	"hub_rewards_header_description": {
-		"message": "Az új Rewards funkció hatékony és teljesen adatvédett, innovatív megoldást kínál arra, hogy online árengedményeket kapjon. Kapcsolja be és próbálja ki!"
-	},
-	"hub_rewards_experience_title": {
-		"message": "Okosabb vásárlási élmény"
-	},
-	"hub_rewards_experience_description": {
-		"message": "Különös értékű jutalmakat kaphat miközben böngészik és vásárol"
-	},
-	"hub_rewards_privacy_title": {
-		"message": "Adatvédelem-központú"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "Nem kerül sor személyes adatok begyűjtésére, profilok építésére vagy harmadik fél általi adathasználatra"
-	},
-	"hub_rewards_relevant_title": {
-		"message": "Egyedi és releváns"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "A különleges ajánlatok időszerűek, relevánsak és exkluzívak felhasználóink számára"
-	},
-	"hub_rewards_closer": {
-		"message": "A Ghostery Rewards szolgáltatást a kiegészítőben vagy egyedi telepítés által kapcsolhatja be."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Központ - Ghostery Plus"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "E funkció használatához navigáljon egy másik weboldalra."
-	},
-	"rewards_new_text": {
-		"message": "Új Reward felfedezve!"
-	},
-	"rewards_copy_code": {
-		"message": "kód másolása"
-	},
-	"rewards_code_copied": {
-		"message": "kód másolva"
-	},
-	"rewards_expires_in_day": {
-		"message": "1 napig elérhető"
-	},
-	"rewards_expires_in_days": {
-		"message": "$COUNT$ napig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "1 óráig elérhető"
-	},
-	"rewards_expires_in_hours": {
-		"message": "$COUNT$ óráig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "1 percig elérhető"
-	},
-	"rewards_expires_in_mins": {
-		"message": "$COUNT$ percig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "1 másodpercig elérhető"
-	},
-	"rewards_expires_in_secs": {
-		"message": "$COUNT$ másodpercig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "Felhasználási Feltételek"
-	},
-	"rewards_disable": {
-		"message": "Rewards kikapcsolása"
-	},
-	"rewards_disable_notification": {
-		"message": "A Ghostery Rewards most ki van kapcsolva. Bármikor bekapcsolhatja a Beállításokban vagy a Rewards vezérlőpultban."
-	},
-	"rewards_disable_confirm": {
-		"message": "OK, értem."
-	},
-	"rewards_about": {
-		"message": "Néhány szó a Rewards szolgáltatásról"
-	},
-	"rewards_settings": {
-		"message": "Ghostery Rewards Beállítások"
-	},
-	"rewards_delete": {
-		"message": "Törölje ezt a jutalmat"
-	},
-	"rewards_exclusive": {
-		"message": "kizárólagos"
-	},
-	"rewards_best_offer": {
-		"message": "legjobb ajánlat"
-	},
-	"rewards_first_prompt": {
-		"message": "Kívánja folytatni a Ghostery Reward szolgáltatás használatával?"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "Szeretne ajánlatokat és kedvezményeket kapni a megbízható Ghostery partnerektől?"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "Új Reward felfedezve!"
-	},
-	"rewards_second_prompt": {
-		"message": "Szeretne leiratkozni a jövőben a Ghostery Rewards szolgáltatásról?"
-	},
-	"rewards_yes": {
-		"message": "igen"
-	},
-	"rewards_no": {
-		"message": "nem"
-	},
-	"rewards_on": {
-		"message": "be"
-	},
-	"rewards_off": {
-		"message": "ki"
-	},
-	"rewards_on_toast_notification": {
-		"message": "A Ghostery Rewards BE van kapcsolva"
-	},
-	"rewards_off_toast_notification": {
-		"message": "A Ghostery Rewards KI van kapcsolva"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Rewards kód másolva!"
-	},
-	"offers_hub_copy_btn": {
-		"message": "Kód másolása"
-	},
-	"offers_code_copied": {
-		"message": "Másolva"
 	},
 	"popup_cancel_button": {
 		"message": "Mégsem"
@@ -2087,21 +1896,7 @@
 		"message": "Nem, napló megtartása"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Oldja fel a naplózott statisztikáit (és egyéb hasznos szolgáltatásunkat) Ghostery Plusra történő fejlesztéssel.$LINK_START$Tudjon meg többet$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Használatba veheti a korábbi statisztikai adatokat (és az egyéb előnyöket) a Ghostery Plus alkalmazásra való frissítéssel."
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "Ön már támogatója a Ghosterynek?"
@@ -2147,188 +1942,14 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "Ghostery Rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "Fejlesztett Anti-Tracking"
+		"message": "Követés elleni védelem"
 	},
-	"panel_rewards_view__reward": {
-		"message": "Jutalom"
+	"unidentified": {
+		"message": "Azonosítatlan"
 	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "partnerhirdetés"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "másold és menj"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "Már felhasználtam az ajánlatot"
-	},
-	"myoffrz_feedback_option2": {
-		"message": "Ez nem jó ajánlat"
-	},
-	"myoffrz_feedback_option3": {
-		"message": "Számomra nem releváns"
-	},
-	"myoffrz_feedback_option4": {
-		"message": "Más okok"
-	},
-	"myoffrz_feedback_title": {
-		"message": "Visszajelzés"
-	},
-	"myoffrz_get_code": {
-		"message": "Megkapni a kódot"
-	},
-	"myoffrz_offer_removed": {
-		"message": "Ezt az ajánlatot eltávolították."
-	},
-	"myoffrz_optional": {
-		"message": "Választható"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "SZOLGÁLTATÓ: MyOffrz"
-	},
-	"myoffrz_show_code": {
-		"message": "Kód megjelenítése"
-	},
-	"myoffrz_show_more": {
-		"message": "Több megjelenítése"
-	},
-	"myoffrz_skip": {
-		"message": "Konténer"
-	},
-	"myoffrz_welcome_link": {
-		"message": "Így működik"
-	},
-	"myoffrz_welcome_text": {
-		"message": "Az Internet böngészése közben vonzó ajánlatokat keresünk az Ön érdekei alapján."
-	},
-	"myoffrz_welcome_title": {
-		"message": "Szia!"
-	},
-	"myoffrz_why_offers_text": {
-		"message": "A személyes adatokat nem távolítja el az eszközéről. Böngészője automatikusan meghatározza, hogy mi a legutóbbi felhasználása alapján."
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "Miért látom ezeket az ajánlatokat?"
-	},
-	"myoffrz_why_see_this": {
-		"message": "Miért látom ezt?"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "ÚJ"
-	},
-	"myoffrz_conditions": {
-		"message": "Feltételek"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "Kapcsolja ki a Ghostery Rewards szolgáltatást"
-	},
-	"myoffrz_help": {
-		"message": "Súgó"
-	},
-	"myoffrz_learn_more": {
-		"message": "Tudjon meg többet"
-	},
-	"myoffrz_send": {
-		"message": "Küldés"
-	},
-	"myoffrz_settings": {
-		"message": "Beállítások"
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "Új Reward felfedezve!"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "A Ghostery Rewards most ki van kapcsolva. Bármikor bekapcsolhatja a Beállításokban vagy a Rewards vezérlőpultban."
-	},
-	"myoffrz_optin_description": {
-		"message": "Szeretne ajánlatokat és kedvezményeket kapni a megbízható Ghostery partnerektől?"
-	},
-	"myoffrz_optin_title": {
-		"message": "Új Reward felfedezve!"
-	},
-	"myoffrz_no": {
-		"message": "nem"
-	},
-	"myoffrz_yes": {
-		"message": "igen"
-	},
-	"myoffrz_rewards_new": {
-		"message": "Új Reward felfedezve!"
-	},
-	"myoffrz_apply_code": {
-		"message": "Kód alkalmazása"
-	},
-	"myoffrz_cancel": {
-		"message": "Mégsem"
-	},
-	"myoffrz_copied": {
-		"message": "Másolva"
-	},
-	"myoffrz_copy_code": {
-		"message": "Kód másolása"
-	},
-	"myoffrz_expires_in_day": {
-		"message": "1 napig elérhető"
-	},
-	"myoffrz_expires_in_days": {
-		"message": "$COUNT$ napig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "1 óráig elérhető"
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "$COUNT$ óráig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "1 percig elérhető"
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "$COUNT$ percig elérhető",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "Ellenőrizze az alábbi feltételeket"
-	},
-	"myoffrz_redeem_code": {
-		"message": "Kód beváltása"
-	},
-	"myoffrz_voucher_found": {
-		"message": "A rendszer talált egy kupont"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "Kupon beváltása"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
-		"message": "Ismeretlen"
-	},
-	"unknown_description": {
-		"message": "Ismeretlen követőket távolított el a követőblokkoló"
+	"unidentified_description": {
+		"message": "Követés elleni védelem által törölt azonosítatlan trackerek"
 	},
 	"ghostery_is_ready": {
 		"message": "A Ghostery készen áll!"
@@ -2462,10 +2083,10 @@
 		"message": "Ki"
 	},
 	"enhanced_ad_blocking": {
-		"message": "Fejlesztett hirdetésblokkolás"
+		"message": "Hirdetésblokkolás"
 	},
 	"smart_blocking": {
-		"message": "Okos blokkolás"
+		"message": "Okos böngészés"
 	},
 	"smart_blocking_DESC": {
 		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."

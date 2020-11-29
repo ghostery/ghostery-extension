@@ -97,7 +97,6 @@ class ConfData {
 			(async() => {
 				await globals.BROWSER_INFO_READY;
 				_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
-				_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID && BROWSER_INFO.name !== 'ghostery_desktop');
 			})();
 
 			// simple props
@@ -137,8 +136,6 @@ class ConfData {
 			_initProperty('paid_subscription', false);
 			_initProperty('plus_promo_modal_last_seen', 0);
 			_initProperty('premium_promo_modal_last_seen', 0);
-			_initProperty('rewards_accepted', false);
-			_initProperty('rewards_opted_in', false); // Migrated to Cliqz pref myoffrz.opted_in
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
 			_initProperty('show_alert', !IS_ANDROID);

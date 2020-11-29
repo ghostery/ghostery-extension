@@ -89,7 +89,6 @@ class CMP {
 	static _buildUrl() {
 		return (`${CMP_BASE_URL}/check
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
-			&offers=${encodeURIComponent(conf.enable_offers ? '1' : '0')}
 			&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
 			&install_date=${encodeURIComponent(conf.install_date)}
 			&ir=${encodeURIComponent(conf.install_random_number)}

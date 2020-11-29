@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "Скрыть окно"
-	},
-	"box_hide_expanded": {
-		"message": "Скрыть фиолетовое окно"
-	},
 	"box_looking": {
 		"message": "Поиск"
 	},
@@ -675,10 +669,10 @@
 		"message": "Трекер медленный"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Трекер заблокирован Smart Blocking"
+		"message": "Трекер заблокирован Смарт-Браузингом"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Трекер разблокирован Smart Blocking"
+		"message": "Трекер разблокирован Смарт-Браузингом"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "Заблокировать на всех сайтах"
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "Активность"
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
 	"panel_detail_learn_more": {
 	  "message": "Подробнее"
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Функция скоро появится."
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "Функция скоро появится."
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "Функция уже активирована на контрольной панели Cliqz MyOffrz."
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Загрузка Rewards…"
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "Rewards не найдены"
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery Rewards отключены"
 	},
 	"panel_detail_premium_text": {
 		"message": "Функция скоро появится."
@@ -807,10 +783,10 @@
 		"message": "Этот сайт уже включен в белый список."
 	},
 	"settings_adblocker": {
-		"message": "Списки блоков рекламы"
+		"message": "Списки блокировки рекламы"
 	},
 	"settings_adblocker_lists": {
-		"message": "Загрузите следующие фильтровые списки блокировки рекламы:"
+		"message": "Загрузите следующие списки фильтров блокировки рекламы:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Только реклама"
@@ -822,7 +798,7 @@
 		"message": "Реклама + трекеры + раздражающие факторы"
 	},
 	"settings_purple_box": {
-		"message": "Фиолетовое окно"
+		"message": "Счетчик трекеров"
 	},
 	"settings_notifications": {
 		"message": "Уведомления"
@@ -882,7 +858,7 @@
 		"message": "Блокировать новые трекеры, добавленные в Ghostery по умолчанию"
 	},
 	"settings_show_purple_box": {
-		"message": "Показывать фиолетовое окно в углу браузера"
+		"message": "Показывать счетчик трекеров в углу браузера"
 	},
 	"settings_dismiss_after": {
 		"message": "Отклонить через"
@@ -909,7 +885,7 @@
 		"message": "сек"
 	},
 	"settings_hide_alert_trusted": {
-		"message": "Скрыть фиолетовое окно на доверенных веб-сайтах"
+		"message": "Скрыть счетчик трекеров на доверенных веб-сайтах"
 	},
 	"settings_notify_me": {
 		"message": "Уведомить меня, когда Ghostery:"
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "Поделиться данными Human Web"
-	},
-	"settings_allow_offers": {
-		"message": "Участие в Ghostery Rewards"
 	},
   	"settings_allow_abtests": {
 	  	"message": "Участие в тестировании А/B"
@@ -1026,7 +999,7 @@
 		"message": "Например, блокировка трекера Facebook на странице facebook.com может нарушить работу веб-сайта."
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "Фиолетовое окно - это список трекеров в реальном времени, отображаемый в углу браузера. Эта функция поможет вам увидеть трекеры, если они добавлены на веб-страницу."
+		"message": "Счетчик трекеров - это отображаемый в углу браузера список, в котором показаны  трекеры, если они загружены в реальном времени."
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Разрешить Ghostery отображать сообщения в моем браузере, связанные с новыми функциями продукта, обновлениями и отзывами клиентов."
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "Ghostery теперь реализует Human Web по умолчанию, революционную технологию, которая использует знания людей для создания более конфиденциального интернета"
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards - это конфиденциальная функция, которая предоставляет вам скидки и специальные предложения от наших компаний-партнеров."
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "Участие в случайных тестированиях A/B помогает Ghostery определить, какую версию новой схемы или функции предпочитают подобные вам пользователи."
@@ -1065,7 +1035,7 @@
 		"message": "Запросы изменены:"
 	},
 	"requests_modified_tooltip": {
-		"message": "Общее количество запросов на отслеживание и элементов, измененных программами анти-отслеживания и блокировки рекламы"
+		"message": "Общее количество запросов на отслеживание и элементов, измененных программами анти-трекинга и блокировки рекламы"
 	},
 	"trackers_blocked": {
 		"message": "Заблокированные трекеры:"
@@ -1134,22 +1104,22 @@
 		"message": "Работа расширения Ghostery возобновлена."
 	},
 	"alert_anti_track_on": {
-		"message": "Улучшенный анти-трекинг включен. Личные данные будут обезличены."
+		"message": "Анти-трекинг включен. Личные данные будут обезличены."
 	},
 	"alert_anti_track_off": {
-		"message": "Улучшенный анти-трекинг отключен. Личные данные не будут обезличены."
+		"message": "Анти-трекинг отключен. Личные данные не будут обезличены."
 	},
 	"alert_ad_block_on": {
-		"message": "Усовершенствованная блокировка рекламы включена. Реклама будет заблокирована."
+		"message": "Блокировка рекламы включена. Реклама будет заблокирована."
 	},
 	"alert_ad_block_off": {
-		"message": "Усовершенствованная блокировка рекламы отключена. Реклама не будет заблокирована."
+		"message": "Блокировка рекламы отключена. Реклама не будет заблокирована."
 	},
 	"alert_smart_block_on": {
-		"message": "Умная блокировка включена. Блокировка трекеров будет откорректирована для оптимизации работы страницы."
+		"message": "Смарт-Браузинг включен. Блокировка трекеров будет корректироваться для оптимизации работы страницы."
 	},
 	"alert_smart_block_off": {
-		"message": "Умная блокировка отключена. Блокировка трекеров не будет автоматически корректироваться."
+		"message": "Смарт-Браузинг отключен. Блокировка трекеров не будет автоматически корректироваться."
 	},
 	"alert_reload": {
 		"message": "Перезагрузите, чтобы увидеть изменения."
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "Пройти обучение"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "Попробуйте Ghostery Rewards"
-	},
 	"hub_side_navigation_products": {
 		"message": "Посмотреть другие продукты Ghostery"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "Делитесь дополнительными анонимными аналитическими данными, чтобы улучшить производительность Ghostery."
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "По умолчанию новые пользователи отказываются от участия в Ghostery Rewards и Human Web. Вы можете выбрать эти рекомендуемые функции в настройках пользователя или в расширении."
+		"message": "По умолчанию новые пользователи отказываются от участия в Human Web. Вы можете выбрать эти рекомендуемые функции в настройках пользователя или в расширении."
 	},
 	"hub_home_header_info": {
-		"message": "Новые пользователи решили принять участие в Human Web и Ghostery Rewards. Вы можете изменить эти параметры в пользовательских настройках или в расширении."
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "Новые пользователи принимают участие в Human Web. Вы можете изменить эти параметры в пользовательских настройках или в расширении."
 	},
 	"hub_home_header_info_link": {
@@ -1520,12 +1484,6 @@
 			}
 		}
 	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "Разблокируйте специальные возможности для работы в Интернете и совершайте покупки без предоставления данных."
-	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Включено"
 	},
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "Поиск в конфиденциальном режиме, просмотр статистики трекера и управление Rewards с помощью нашей новой функции вкладки. Будет доступно скоро!"
+		"message": "Поиск в конфиденциальном режиме и просмотр статистики трекера  с помощью нашей новой функции вкладки. Будет доступно скоро!"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery Lite"
 	},
 	"hub_products_third_promo_description": {
 		"message": "Обеспечивает конфиденциальность в Интернете и избавляет от рекламы с помощью самого простого нашего продукта, разработанного специально для Safari."
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery Hub - Rewards"
-	},
-	"hub_rewards_header_title": {
-		"message": "Попробуйте Ghostery Rewards!"
-	},
-	"hub_rewards_header_description": {
-		"message": "Наша новая функция Rewards предлагает мощный, полностью конфиденциальный новый способ получения настоящих скидок в Интернете. Включите ее и убедитесь сами!"
-	},
-	"hub_rewards_experience_title": {
-		"message": "Более эффективный шоппинг"
-	},
-	"hub_rewards_experience_description": {
-		"message": "Вам предоставляются ценные Rewards, когда вы работаете в Интернете и совершаете покупки"
-	},
-	"hub_rewards_privacy_title": {
-		"message": "Ориентированный на конфиденциальность"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "Без сбора личных данных, построения профилей и использования третьих сторон"
-	},
-	"hub_rewards_relevant_title": {
-		"message": "Уникальные и актуальные"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "Специализированные предложения являются своевременными, актуальными и эксклюзивными для наших пользователей."
-	},
-	"hub_rewards_closer": {
-		"message": "Вы можете включить Ghostery Rewards в расширении или через пользовательские настройки."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Hub - Ghostery Plus"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "Для использования этой функции перейдите на другую страницу."
-	},
-	"rewards_new_text": {
-		"message": "Открыт новый Reward!"
-	},
-	"rewards_copy_code": {
-		"message": "скопировать код"
-	},
-	"rewards_code_copied": {
-		"message": "код скопирован"
-	},
-	"rewards_expires_in_day": {
-		"message": "Доступно на 1 день"
-	},
-	"rewards_expires_in_days": {
-		"message": "Доступно на $COUNT$ дней",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "Доступно на 1 час"
-	},
-	"rewards_expires_in_hours": {
-		"message": "Доступно на $COUNT$ часа(ов)",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "Доступно на 1 минуту"
-	},
-	"rewards_expires_in_mins": {
-		"message": "Доступно на $COUNT$ минут(ы)",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "Доступно на 1 секунду"
-	},
-	"rewards_expires_in_secs": {
-		"message": "Доступно на $COUNT$ секунд(ы)",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "Условия и положения"
-	},
-	"rewards_disable": {
-		"message": "Отключить Rewards"
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery Rewards отключены. Вы всегда можете включить их в своих настройках или на панели инструментов Rewards."
-	},
-	"rewards_disable_confirm": {
-		"message": "Понятно."
-	},
-	"rewards_about": {
-		"message": "Информация о Rewards"
-	},
-	"rewards_settings": {
-		"message": "Настройки Ghostery Rewards"
-	},
-	"rewards_delete": {
-		"message": "Удалить это Reward"
-	},
-	"rewards_exclusive": {
-		"message": "эксклюзивный"
-	},
-	"rewards_best_offer": {
-		"message": "лучшее предложение"
-	},
-	"rewards_first_prompt": {
-		"message": "Желаете перейти к Ghostery Reward?"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "Хотите получать предложения и скидки от надежных партнеров Ghostery?"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "Открыт новый Reward!"
-	},
-	"rewards_second_prompt": {
-		"message": "Желаете отказаться от использования функции Ghostery Rewards?"
-	},
-	"rewards_yes": {
-		"message": "да"
-	},
-	"rewards_no": {
-		"message": "нет"
-	},
-	"rewards_on": {
-		"message": "вкл"
-	},
-	"rewards_off": {
-		"message": "выкл"
-	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery Rewards включены"
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery Rewards отключены"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Код Rewards скопирован!"
-	},
-	"offers_hub_copy_btn": {
-		"message": "Скопировать код"
-	},
-	"offers_code_copied": {
-		"message": "Скопировано"
 	},
 	"popup_cancel_button": {
 		"message": "Отмена"
@@ -2087,21 +1896,7 @@
 		"message": "Нет, сохранить историю"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Разблокируйте хронологическиую статистику (и другие отличные бонусы), обновив расширение браузера до Ghostery Plus.$LINK_START$Подробнее$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Разблокируйте хронологическиую статистику (и другие отличные бонусы), обновив расширение браузера до Ghostery Plus."
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "Уже поддерживаете Ghostery?"
@@ -2147,187 +1942,13 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "Ghostery Rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "Супер анти-трекинг"
+		"message": "Анти-трекинг"
 	},
-	"panel_rewards_view__reward": {
-		"message": "Вознаграждение"
+	"unidentified": {
+		"message": "Неизвестно"
 	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "партнерская ссылка"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "скоприровать и продолжить"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "Я уже использовал предложение"
-	},
-	"myoffrz_feedback_option2": {
-		"message": "Это не очень хорошая сделка"
-	},
-	"myoffrz_feedback_option3": {
-		"message": "Ко мне это не относится"
-	},
-	"myoffrz_feedback_option4": {
-		"message": "Другие причины"
-	},
-	"myoffrz_feedback_title": {
-		"message": "Отзывы"
-	},
-	"myoffrz_get_code": {
-		"message": "Получить код"
-	},
-	"myoffrz_offer_removed": {
-		"message": "Это предложение было удалено."
-	},
-	"myoffrz_optional": {
-		"message": "Необязательно"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "При поддержке MyOffrz"
-	},
-	"myoffrz_show_code": {
-		"message": "Показать код"
-	},
-	"myoffrz_show_more": {
-		"message": "Показать больше"
-	},
-	"myoffrz_skip": {
-		"message": "Пропустить"
-	},
-	"myoffrz_welcome_link": {
-		"message": "Как это работает"
-	},
-	"myoffrz_welcome_text": {
-		"message": "Пока вы работаете на интернете, мы ищем привлекательные предложения, основанные на ваших интересах."
-	},
-	"myoffrz_welcome_title": {
-		"message": "Здравствуйте!"
-	},
-	"myoffrz_why_offers_text": {
-		"message": "Ваши личные данные остаются на вашем устройстве. Ваш браузер автоматически определяет, что вас может заинтересовать, исходя из вашего предыдущего опыта использования."
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "Почему я вижу эти предложения?"
-	},
-	"myoffrz_why_see_this": {
-		"message": "Почему я вижу это?"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "НОВИНКА!"
-	},
-	"myoffrz_conditions": {
-		"message": "Условия"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "Отключить Ghostery Rewards"
-	},
-	"myoffrz_help": {
-		"message": "Помощь"
-	},
-	"myoffrz_learn_more": {
-		"message": "Подробнее"
-	},
-	"myoffrz_send": {
-		"message": "Отправить"
-	},
-	"myoffrz_settings": {
-		"message": "Настройки"
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "Открыт новый Reward!"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "Ghostery Rewards отключены. Вы всегда можете включить их в своих настройках или на панели инструментов Rewards."
-	},
-	"myoffrz_optin_description": {
-		"message": "Хотите получать предложения и скидки от надежных партнеров Ghostery?"
-	},
-	"myoffrz_optin_title": {
-		"message": "Открыт новый Reward!"
-	},
-	"myoffrz_no": {
-		"message": "нет"
-	},
-	"myoffrz_yes": {
-		"message": "да"
-	},
-	"myoffrz_rewards_new": {
-		"message": "Открыт новый Reward!"
-	},
-	"myoffrz_apply_code": {
-		"message": "Применить код"
-	},
-	"myoffrz_cancel": {
-		"message": "Отмена"
-	},
-	"myoffrz_copied": {
-		"message": "Скопировано"
-	},
-	"myoffrz_copy_code": {
-		"message": "Скопировать код"
-	},
-	"myoffrz_expires_in_day": {
-		"message": "Доступно на 1 день"
-	},
-	"myoffrz_expires_in_days": {
-		"message": "Доступно на $COUNT$ дней",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "Доступно на 1 час"
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "Доступно на $COUNT$ часа(ов)",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "Доступно в течение 1 минуты"
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "Доступно в течение $COUNT$ минут",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "Проверьте следующие условия"
-	},
-	"myoffrz_redeem_code": {
-		"message": "Активировать код"
-	},
-	"myoffrz_voucher_found": {
-		"message": "Найден ваучер"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "Ваучер для активации"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
-		"message": "Неизвестный"
-	},
-	"unknown_description": {
+	"unidentified_description": {
 		"message": "Неизвестные трекеры, очищенные анти-трекингом"
 	},
 	"ghostery_is_ready": {
@@ -2462,10 +2083,10 @@
 		"message": "Выкл"
 	},
 	"enhanced_ad_blocking": {
-		"message": "Рекламоблокер++"
+		"message": "Блокировка рекламы"
 	},
 	"smart_blocking": {
-		"message": "Умная блокировка"
+		"message": "Смарт-Браузинг"
 	},
 	"smart_blocking_DESC": {
 		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."

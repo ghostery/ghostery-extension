@@ -20,7 +20,6 @@ import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
 	SET_SMART_BLOCK,
-	SET_GHOSTERY_REWARDS,
 	SET_HUMAN_WEB
 } from './SetupViewConstants';
 
@@ -42,7 +41,6 @@ function SetupViewReducer(state = initialState, action) {
 				enable_anti_tracking,
 				enable_ad_block,
 				enable_smart_block,
-				enable_ghostery_rewards,
 				enable_human_web,
 			} = action.data;
 			const {
@@ -71,7 +69,6 @@ function SetupViewReducer(state = initialState, action) {
 					enable_anti_tracking,
 					enable_ad_block,
 					enable_smart_block,
-					enable_ghostery_rewards,
 					enable_human_web,
 				}
 			};
@@ -121,10 +118,6 @@ function SetupViewReducer(state = initialState, action) {
 		case SET_SMART_BLOCK: {
 			const { enable_smart_block } = action.data;
 			return { ...state, setup: { ...state.setup, enable_smart_block } };
-		}
-		case SET_GHOSTERY_REWARDS: {
-			const { enable_ghostery_rewards } = action.data;
-			return { ...state, setup: { ...state.setup, enable_ghostery_rewards } };
 		}
 
 		// Setup Human Web View

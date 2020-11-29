@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "상자 숨기기 "
-	},
-	"box_hide_expanded": {
-		"message": "보라색 상자 숨기기 "
-	},
 	"box_looking": {
 		"message": "찾기"
 	},
@@ -675,10 +669,10 @@
 		"message": "느린 "
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "스마트 차단 기능으로 트래커 차단됨"
+		"message": "스마트 브라우징 기능으로 트래커 차단됨"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "스마트 차단 기능으로 트래커 차단 해제됨"
+		"message": "스마트 브라우징 기능으로 트래커 차단 해제됨"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "모든 사이트에서 차단 "
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "성능 "
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
 	"panel_detail_learn_more": {
 	  "message": "자세히 알아보기 "
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "기능이 곧 제공됩니다."
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "기능이 곧 제공됩니다."
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "기능이 이미 Cliqz MyOffrz 제어판에서 활성화되었습니다."
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Rewards 로딩 중"
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "Rewards 없음"
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery Rewards 기능 끼기"
 	},
 	"panel_detail_premium_text": {
 		"message": "기능이 곧 제공됩니다."
@@ -822,7 +798,7 @@
 		"message": "광고, 트래커 및 기타 성가신 요소"
 	},
 	"settings_purple_box": {
-		"message": "보라색 상자 "
+		"message": "트래커 기록"
 	},
 	"settings_notifications": {
 		"message": "알림 "
@@ -882,7 +858,7 @@
 		"message": "기본적으로 Ghostery에 추가된 새로운 트래커 차단 "
 	},
 	"settings_show_purple_box": {
-		"message": "브라우저 구석에 보라색 상자 표시 "
+		"message": "브라우저 구석에 트래커 기록 표시"
 	},
 	"settings_dismiss_after": {
 		"message": "다음 기간 이후 없앰 "
@@ -909,7 +885,7 @@
 		"message": "초 "
 	},
 	"settings_hide_alert_trusted": {
-		"message": "신뢰할 수 있는 웹 사이트에서 보라색 상자 숨기기 "
+		"message": "신뢰할 수 있는 웹 사이트에서 트래커 기록 숨기기"
 	},
 	"settings_notify_me": {
 		"message": "다음과 같은 경우 알림:"
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "Human Web 데이터 공유"
-	},
-	"settings_allow_offers": {
-		"message": "Ghostery Rewards 기능 이용"
 	},
   	"settings_allow_abtests": {
 	  	"message": "A/B 테스트 기능 이용"
@@ -1026,7 +999,7 @@
 		"message": "예를 들어, facebook.com에서 Facebook 트래커를 차단하면 사이트가 깨질 수 있습니다."
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "브라우저 구석에 표시되는 보라색 상자는 실시간 트래커 목록입니다. 이 기능을 통해 웹 페이지에 추가되는 트래커를 볼 수 있습니다."
+		"message": "트래커 기록은  실시간으로 로드되는 트래커를 표시하는 브라우저 구석에 있는 목록입니다."
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Ghostery에서 새로운 제품 기능, 업데이트, 사용자 피드백과 관련된 메시지를 표시하도록 허용합니다."
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "현재 고스터리는 보다 맞춤화된 인터넷 경험을 구축하기 위해 크라우드 정보를 이용하는 혁신적인 기술인 Human Web을 자동으로 실행하고 있습습니다. "
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards는 사용자에게 당사 파트너 기업의 할인과 특별 혜택 정보를 제공하는 이용자 맞춤 기능입니다."
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "무작위 A/B 테스트에 참여하면 Ghostery가 사용자의 선호 새 레이아웃 또는 기능 버전을 이해하는 데 도움이 됩니다."
@@ -1134,22 +1104,22 @@
 		"message": "Ghostery 확장 프로그램이 다시 시작되었습니다."
 	},
 	"alert_anti_track_on": {
-		"message": "확장 추적 방지 켜짐. 개인 데이터가 익명화됩니다."
+		"message": "추적 방지 켜짐. 개인 데이터가 익명화됩니다."
 	},
 	"alert_anti_track_off": {
-		"message": "확장 추적 방지 꺼짐. 개인 데이터가 익명화되지 않습니다."
+		"message": "추적 방지 꺼짐. 개인 데이터가 익명화되지 않습니다."
 	},
 	"alert_ad_block_on": {
-		"message": "강화된 광고 차단 켜짐. 광고가 차단됩니다."
+		"message": "광고 차단 켜짐. 광고가 차단됩니다."
 	},
 	"alert_ad_block_off": {
-		"message": "강화된 광고 차단 꺼짐 광고가 차단되지 않습니다."
+		"message": "광고 차단 꺼짐. 광고가 차단되지 않습니다."
 	},
 	"alert_smart_block_on": {
-		"message": "스마트 차단 켜짐. 트래커 차단 기능이 페이지 성능을 최적화할 수 있도록 조정됩니다."
+		"message": "스마트 브라우징 켜짐. 트래커 차단 기능이 페이지 성능을 최적화할 수 있도록 조정됩니다."
 	},
 	"alert_smart_block_off": {
-		"message": "스마트 차단 꺼짐. 트래커 차단 기능이 자동으로 조정되지 않습니다."
+		"message": "스마트 브라우징 꺼짐. 트래커 차단 기능이 자동으로 조정되지 않습니다."
 	},
 	"alert_reload": {
 		"message": "변경 내용을 보려면 다시 로드하십시오."
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "튜토리얼 보기"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "Ghostery Rewards 이용"
-	},
 	"hub_side_navigation_products": {
 		"message": "다양한 고스터리 제품 보기"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "고스터리의 성능을 개선하기 위해 추가로 익명의 분석 데이터를 공유합니다."
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "새로운 이용자는 기본적으로 Human Web과 Ghostery Rewards 참여가 선택 해제되어 있습니다. 사용자 지정 설정 또는 확장 프로그램에서 이러한 권장 기능을 선택할 수 있습니다."
+		"message": "새로운 이용자는 기본적으로 Human Web 참여가 선택 해제되어 있습니다. 사용자 지정 설정 또는 확장 프로그램에서 이러한 권장 기능을 선택할 수 있습니다."
 	},
 	"hub_home_header_info": {
-		"message": "새로운 이용자는 Human Web과 Ghostery Rewards 기능을 이용하게 됩니다. 맞춤 설정 또는 확장자에서 이 설정을 변경하실 수 있습니다."
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "새로운 이용자는 Human Web에 참여합니다. 사용자 지정 설정 또는 확장 프로그램에서 이 설정을 변경하실 수 있습니다."
 	},
 	"hub_home_header_info_link": {
@@ -1507,7 +1471,7 @@
 		"message": "차단할 트래커 선택"
 	},
 	"hub_setup_antisuite_description_antitracking": {
-		"message": "브라우저 환경을 더 강력하게 보호할 수 있도록 차단 해제된 트래커와 알 수 없는 트래커를 익명화합니다.   "
+		"message": "브라우저 환경을 더 강력하게 보호할 수 있도록 차단 해제된 트래커와 알 수 없는 트래커를 익명화합니다."
 	},
 	"hub_setup_feature_already_active": {
 		"message": "해당 기능은 이미 Cliqz에 기본적으로 활성화되어 있습니다. $LINK_LM_START$더 알아보기$LINK_LM_END$",
@@ -1519,12 +1483,6 @@
 				"content": "</a>"
 			}
 		}
-	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "브라우저를 이용하고 온라인 쇼핑을 하면서 개인 데이터 공유 없이 특별 혜택 정보를 받아보실 수 있습니다."
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "활성화됨 "
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "새로운 탭 기능으로 안전하게 검색하고, 트래커 상태를 검토하고, Rewards를 관리하세요. 곧 이용 가능합니다!"
+		"message": "새로운 탭 기능으로 안전하게 검색하고  트래커 상태를 검토하고 관리하세요. 곧 이용 가능합니다!"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery Lite"
 	},
 	"hub_products_third_promo_description": {
 		"message": "Safari 전용으로 이용 가능한 최저 용량의 브라우저로 온라인상에서 개인정보를 보호하고 광고를 차단하세요."
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery 허브 - Rewards"
-	},
-	"hub_rewards_header_title": {
-		"message": "Ghostery Rewards를 이용하세요!"
-	},
-	"hub_rewards_header_description": {
-		"message": "새로운 Rewards 기능은 강력하고 완벽히 혁신적인 개인 맞춤 방식으로 온라인 할인 정보를 제공합니다. 지금 바로 새로운 기능을 확인해 보세요!"
-	},
-	"hub_rewards_experience_title": {
-		"message": "더욱 스마트한 쇼핑 경험"
-	},
-	"hub_rewards_experience_description": {
-		"message": "브라우저를 이용하고 온라인 구매를 할 때마다 유용한 리워드가 바로 제공됩니다"
-	},
-	"hub_rewards_privacy_title": {
-		"message": "개인정보 보호 강조"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "개인 데이터 수집, 프로필 작성 또는 제3자 이용이 전혀 없습니다."
-	},
-	"hub_rewards_relevant_title": {
-		"message": "독특한 사용자 맞춤 기능"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "사용자와 연관이 있는 맞춤형 특별 혜택 정보가 제때에 제공됩니다."
-	},
-	"hub_rewards_closer": {
-		"message": "확장자 또는 사용자 지정 설정에서 Ghostery Rewards 기능을 추가하실 수 있습니다."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery 허브 - Ghostery Plus"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "이 기능을 사용하려면 다른 페이지로 이동하십시오."
-	},
-	"rewards_new_text": {
-		"message": "새로운 Rewards 확인!"
-	},
-	"rewards_copy_code": {
-		"message": "코드 복사 "
-	},
-	"rewards_code_copied": {
-		"message": "코드 복사됨 "
-	},
-	"rewards_expires_in_day": {
-		"message": "1일 동안 사용 가능 "
-	},
-	"rewards_expires_in_days": {
-		"message": "$COUNT$일 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "1시간 동안 사용 가능 "
-	},
-	"rewards_expires_in_hours": {
-		"message": "$COUNT$시간 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "1분 동안 사용 가능 "
-	},
-	"rewards_expires_in_mins": {
-		"message": "$COUNT$분 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "1초 동안 사용 가능 "
-	},
-	"rewards_expires_in_secs": {
-		"message": "$COUNT$초 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "사용 약관 "
-	},
-	"rewards_disable": {
-		"message": "Rewards 기능 끄기"
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery Rewards 기능이 꺼졌습니다. 설정 또는 Rewards 대시보드에서 언제든지 기능을 다시 이용하실 수 있습니다."
-	},
-	"rewards_disable_confirm": {
-		"message": "예, 알겠습니다."
-	},
-	"rewards_about": {
-		"message": "Rewards 소개"
-	},
-	"rewards_settings": {
-		"message": "Ghostery Rewards 설정"
-	},
-	"rewards_delete": {
-		"message": "이 리워드 삭제"
-	},
-	"rewards_exclusive": {
-		"message": "특별한"
-	},
-	"rewards_best_offer": {
-		"message": "최고의 혜택 정보"
-	},
-	"rewards_first_prompt": {
-		"message": "Ghostery Rewards 기능을 계속 이용하시겠습니까?"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "신뢰할 수 있는 Ghostery 파트너로부터 혜택 정보와 할인을 받으시겠습니까?"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "새로운 Rewards 확인!"
-	},
-	"rewards_second_prompt": {
-		"message": "Ghostery Rewards 기능을 그만 이용하시겠습니까?"
-	},
-	"rewards_yes": {
-		"message": "예 "
-	},
-	"rewards_no": {
-		"message": "아니요 "
-	},
-	"rewards_on": {
-		"message": "사용 "
-	},
-	"rewards_off": {
-		"message": "끄기 "
-	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery Rewards 기능 켜기"
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery Rewards 기능 끼기"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Rewards 코드 복사!"
-	},
-	"offers_hub_copy_btn": {
-		"message": "코드 복사 "
-	},
-	"offers_code_copied": {
-		"message": "복사됨"
 	},
 	"popup_cancel_button": {
 		"message": "취소 "
@@ -2087,21 +1896,7 @@
 		"message": "아니요, 이력을 유지합니다"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ghostery Plus로 업그레이드하여 역사적 통계(및 기타 유용한 특전)를 이용하세요.$LINK_START$더 알아보기$LINK_END$ ",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Ghostery Plus로 업그레이드하여 역사적 통계(및 기타 유용한 특정)를 이용하세요"
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "이미 Ghostery 후원자입니까?"
@@ -2147,187 +1942,13 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "Ghostery Rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "확장 추적 방지 "
+		"message": "추적 방지 "
 	},
-	"panel_rewards_view__reward": {
-		"message": "Rewards"
+	"unidentified": {
+		"message": "알 수 없음"
 	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "제휴 링크"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "복사 후 이동"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "혜택을 이미 사용했습니다"
-	},
-	"myoffrz_feedback_option2": {
-		"message": "조건이 좋지 않습니다"
-	},
-	"myoffrz_feedback_option3": {
-		"message": "관련이 없습니다"
-	},
-	"myoffrz_feedback_option4": {
-		"message": "기타 이유"
-	},
-	"myoffrz_feedback_title": {
-		"message": "의견"
-	},
-	"myoffrz_get_code": {
-		"message": "코드 받기"
-	},
-	"myoffrz_offer_removed": {
-		"message": "이 혜택은 제거되었습니다."
-	},
-	"myoffrz_optional": {
-		"message": "선택 사항"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "MyOffrz 제공"
-	},
-	"myoffrz_show_code": {
-		"message": "코드 표시"
-	},
-	"myoffrz_show_more": {
-		"message": "자세히 표시"
-	},
-	"myoffrz_skip": {
-		"message": "건너뛰기"
-	},
-	"myoffrz_welcome_link": {
-		"message": "작동 방법"
-	},
-	"myoffrz_welcome_text": {
-		"message": "인터넷 검색에 따른 관심 분야를 기반으로 매력적인 헤택을 찾습니다."
-	},
-	"myoffrz_welcome_title": {
-		"message": "안녕하세요."
-	},
-	"myoffrz_why_offers_text": {
-		"message": "개인 데이터가 장치를 벗어나지 않습니다. 이전 사용 내역에 따라 흥미를 느낄만한 항목을 브라우저에서 자동으로 식별합니다."
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "이러한 혜택이 표시되는 이유는 무엇인가요?"
-	},
-	"myoffrz_why_see_this": {
-		"message": "이것이 표시되는 이유는 무엇인가요?"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "신규"
-	},
-	"myoffrz_conditions": {
-		"message": "조건"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "Ghostery Rewards 기능 끄기"
-	},
-	"myoffrz_help": {
-		"message": "도움말 "
-	},
-	"myoffrz_learn_more": {
-		"message": "자세히 알아보기"
-	},
-	"myoffrz_send": {
-		"message": "보내기 "
-	},
-	"myoffrz_settings": {
-		"message": "설정 "
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "새로운 Rewards 확인!"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "Ghostery Rewards 기능이 꺼졌습니다. 설정 또는 Rewards 대시보드에서 언제든지 기능을 다시 이용하실 수 있습니다."
-	},
-	"myoffrz_optin_description": {
-		"message": "신뢰할 수 있는 Ghostery 파트너로부터 혜택 정보와 할인을 받으시겠습니까?"
-	},
-	"myoffrz_optin_title": {
-		"message": "새로운 Rewards 확인!"
-	},
-	"myoffrz_no": {
-		"message": "아니요 "
-	},
-	"myoffrz_yes": {
-		"message": "예 "
-	},
-	"myoffrz_rewards_new": {
-		"message": "새로운 Rewards 확인!"
-	},
-	"myoffrz_apply_code": {
-		"message": "코드 적용"
-	},
-	"myoffrz_cancel": {
-		"message": "취소 "
-	},
-	"myoffrz_copied": {
-		"message": "복사됨"
-	},
-	"myoffrz_copy_code": {
-		"message": "코드 복사 "
-	},
-	"myoffrz_expires_in_day": {
-		"message": "1일 동안 사용 가능 "
-	},
-	"myoffrz_expires_in_days": {
-		"message": "$COUNT$일 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "1시간 동안 사용 가능 "
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "$COUNT$시간 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "1분 동안 사용 가능 "
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "$COUNT$분 동안 사용 가능 ",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "다음 조건을 확인하세요"
-	},
-	"myoffrz_redeem_code": {
-		"message": "코드 사용"
-	},
-	"myoffrz_voucher_found": {
-		"message": "쿠폰 확인됨"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "쿠폰 사용 중"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
-		"message": "알 수 없음 "
-	},
-	"unknown_description": {
+	"unidentified_description": {
 		"message": "추적 방지에서 제거한 알 수 없는 트래커"
 	},
 	"ghostery_is_ready": {
@@ -2462,10 +2083,10 @@
 		"message": "끄기 "
 	},
 	"enhanced_ad_blocking": {
-		"message": "강화된 광고 차단 "
+		"message": "광고 차단"
 	},
 	"smart_blocking": {
-		"message": "스마트 차단 "
+		"message": "스마트 브라우징"
 	},
 	"smart_blocking_DESC": {
 		"message": "트래커를 자동으로 차단 및 차단 해제하여 페이지 성능을 최적화합니다."
