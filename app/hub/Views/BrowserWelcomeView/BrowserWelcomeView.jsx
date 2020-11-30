@@ -23,6 +23,7 @@ const BrowserWelcomeView = () => (
 		<div className="BrowserWelcomeView__title">{t('hub_browser_welcome')}</div>
 		<div className="BrowserWelcomeView__subtitle">{t('hub_browser_begin')}</div>
 		<img className="BrowserWelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
+		<div className="BrowserWelcomeView__ctaButton">{t('hub_browser_lets_do_this')}</div>
 	</div>
 );
 

@@ -1740,6 +1740,9 @@
 	"hub_browser_begin": {
 		"message": "Let's begin by choosing your privacy settings. This will be quick, we promise!"
 	},
+	"hub_browser_lets_do_this": {
+		"message": "Let's do this"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
