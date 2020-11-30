@@ -38,7 +38,7 @@ const basicCard = (checked, handleClick) => {
 	});
 	return (
 		<div className="PlanView__cardOuter">
-			<div className={cardClassNames} data-equalizer-watch>
+			<div className={cardClassNames} onClick={handleClick} cdata-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
 					<RadioButton checked={checked} handleClick={handleClick} />
 				</div>
@@ -76,7 +76,7 @@ const plusCard = (checked, handleClick) => {
 	});
 	return (
 		<div className="PlanView__cardOuter">
-			<div className={cardClassNames} data-equalizer-watch>
+			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
 					<RadioButton checked={checked} handleClick={handleClick} />
 				</div>
@@ -128,7 +128,7 @@ const premiumCard = (checked, handleClick) => {
 	});
 	return (
 		<div className="PlanView__cardOuter">
-			<div className={cardClassNames} data-equalizer-watch>
+			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
 					<RadioButton checked={checked} handleClick={handleClick} />
 				</div>
@@ -171,8 +171,8 @@ const premiumCard = (checked, handleClick) => {
 					</div>
 					<div className="PlanView__cardSubCopy">
 						<span className="check blue" />
-					VPN
-				</div>
+						VPN
+					</div>
 					<div className="PlanView__cardSubCopy">
 						<span className="check blue" />
 						{t('hub_plan_unlimited_bandwidth')}
@@ -180,7 +180,7 @@ const premiumCard = (checked, handleClick) => {
 				</div>
 			</div>
 		</div>
-	)
+	);
 };
 
 class PlanView extends React.Component {

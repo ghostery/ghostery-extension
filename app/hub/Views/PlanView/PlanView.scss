@@ -133,17 +133,7 @@
 	padding-bottom: rem-calc(40);
 	border: 4px solid white;
 
-	.checked {
-		border: 4px solid #00aef0;
-		.ghostery-free-image-container,
-		.ghostery-plus-image-container,
-		.ghostery-premium-image-background {
-			width: 244px;
-			margin-left: -1px;
-		}
-	}
-
-	&:hover {
+	&:hover, &.checked {
 		border: 4px solid #00aef0;
 		.ghostery-free-image-container,
 		.ghostery-plus-image-container,
