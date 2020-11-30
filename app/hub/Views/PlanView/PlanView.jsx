@@ -37,7 +37,7 @@ const basicCard = (checked, handleClick) => {
 		<div className="PlanView__cardOuter">
 			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
-					<RadioButton checked={checked} handleClick={handleClick} />
+					<RadioButton checked={checked} handleClick={handleClick} altDesign />
 				</div>
 				<div className="card-header-background-free" />
 				<div className="ghostery-free-image-container">
@@ -75,7 +75,7 @@ const plusCard = (checked, handleClick) => {
 		<div className="PlanView__cardOuter">
 			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
-					<RadioButton checked={checked} handleClick={handleClick} />
+					<RadioButton checked={checked} handleClick={handleClick} altDesign />
 				</div>
 				<div className="ghostery-plus-image-container">
 					<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
@@ -127,7 +127,7 @@ const premiumCard = (checked, handleClick) => {
 		<div className="PlanView__cardOuter">
 			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
-					<RadioButton checked={checked} handleClick={handleClick} />
+					<RadioButton checked={checked} handleClick={handleClick} altDesign />
 				</div>
 				<div className="ghostery-premium-image-container">
 					<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />

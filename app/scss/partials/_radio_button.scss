@@ -40,6 +40,14 @@
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
+
+	&.altDesign {
+		height: 24px;
+		width: 24px;
+		&.checked {
+			background-color: #00aef0;
+		}
+	}
 	&.checked {
 		border: 2px solid #2092bf;
 	}
@@ -50,5 +58,15 @@
 		width: 8px;
 		background-color: #2092bf;
 		border-radius: 50%;
+	}
+
+	&.altDesign {
+		height: 14px;
+		width: 14px;
+		background-image: buildCheckIcon(#FFF);
+		border: none;
+		&.checked {
+			background-color: transparent;
+		}
 	}
 }
