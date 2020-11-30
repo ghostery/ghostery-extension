@@ -11,12 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Fragment, useRef, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import QueryString from 'query-string';
-import globals from '../../../../src/classes/Globals';
 import RadioButton from '../../../panel/components/BuildingBlocks/RadioButton';
 
 const BASIC = 0;
@@ -38,7 +35,7 @@ const basicCard = (checked, handleClick) => {
 	});
 	return (
 		<div className="PlanView__cardOuter">
-			<div className={cardClassNames} onClick={handleClick} cdata-equalizer-watch>
+			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 				<div className="PlanView__radioButtonContainer">
 					<RadioButton checked={checked} handleClick={handleClick} />
 				</div>
@@ -187,9 +184,26 @@ class PlanView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedPlan: 0
+			selectedPlan: -1
 		};
 		this.plansRef = React.createRef();
+		setTimeout(this.setDefaultPlan, 200);
+	}
+
+	setDefaultPlan = () => {
+		const { user } = this.props;
+		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
+
+		if (isPremium) {
+			this.selectPremiumPlan();
+			return;
+		}
+		if (isPlus) {
+			this.selectPlusPlan();
+			return;
+		}
+		this.selectBasicPlan();
 	}
 
 	isBasicPlanChecked = () => {
@@ -217,18 +231,33 @@ class PlanView extends React.Component {
 		this.plansRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
+	renderTitleText = () => false;
+
 	render() {
+		const shouldShowSearchPromo = false;
+		const { user } = this.props;
+		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
+
 		return (
 			<div>
 				<div className="PlanView__yourPrivacyPlan">{t('hub_plan_your_privacy_plan')}</div>
 				<div className="PlanView__subtitle">{t('hub_plan_based_on_your_privacy_preferences')}</div>
-				{searchPromo()}
-				<div className="PlanView__searchCTAButton">{t('hub_plan_start_trial')}</div>
-				<div className="PlanView__seeAllPlans" onClick={this.scrollToPlans}>{t('hub_plan_see_all_plans')}</div>
-				<div className="PlanView__arrowDown" onClick={this.scrollToPlans} />
+				{shouldShowSearchPromo && (
+					<Fragment>
+						{searchPromo()}
+						<div className="PlanView__searchCTAButton">{t('hub_plan_start_trial')}</div>
+						<div className="PlanView__seeAllPlans" onClick={this.scrollToPlans}>{t('hub_plan_see_all_plans')}</div>
+						<div className="PlanView__arrowDown" onClick={this.scrollToPlans} />
+					</Fragment>
+				)}
 				<div className="PlanView__plansContainer" ref={this.plansRef}>
-					{basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)}
-					{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
+					{!(isPlus || isPremium) && (
+						basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
+					)}
+					{!isPremium && (
+						plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)
+					)}
 					{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
 				</div>
 				<div className="PlanView__searchCTAButton">{t('hub_plan_start_trial')}</div>
