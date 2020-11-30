@@ -44,11 +44,12 @@
 	&.altDesign {
 		height: 24px;
 		width: 24px;
+		border: none;
 		&.checked {
 			background-color: #00aef0;
 		}
 	}
-	&.checked {
+	&.checked:not(.altDesign) {
 		border: 2px solid #2092bf;
 	}
 }
