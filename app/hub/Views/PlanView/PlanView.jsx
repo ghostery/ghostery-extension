@@ -231,7 +231,26 @@ class PlanView extends React.Component {
 		this.plansRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	renderTitleText = () => false;
+	renderTitleText = () => {
+		const { user } = this.props;
+		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
+
+		if (isPremium) return t('hub_plan_already_premium_subscriber');
+		if (isPlus) return t('hub_plan_already_plus_subscriber');
+		return t('hub_plan_your_privacy_plan');
+	};
+
+	renderSubtitleText = (fromSearchSelectionScreen) => {
+		const { user } = this.props;
+		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
+
+		if (fromSearchSelectionScreen) return t('hub_plan_based_on_your_privacy_preferences');
+		if (isPremium) return '';
+		if (isPlus) return t('hub_plan_keep_your_current_plan_or_upgrade');
+		return t('hub_plan_choose_an_option');
+	};
 
 	render() {
 		const shouldShowSearchPromo = false;
@@ -241,8 +260,8 @@ class PlanView extends React.Component {
 
 		return (
 			<div>
-				<div className="PlanView__yourPrivacyPlan">{t('hub_plan_your_privacy_plan')}</div>
-				<div className="PlanView__subtitle">{t('hub_plan_based_on_your_privacy_preferences')}</div>
+				<div className="PlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
+				<div className="PlanView__subtitle">{this.renderSubtitleText(shouldShowSearchPromo)}</div>
 				{shouldShowSearchPromo && (
 					<Fragment>
 						{searchPromo()}
