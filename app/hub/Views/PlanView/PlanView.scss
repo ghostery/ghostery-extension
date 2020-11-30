@@ -95,6 +95,7 @@
 	margin-top: 100px;
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 .PlanView__arrowDown {
@@ -110,15 +111,6 @@
 .PlanView__cardOuter {
 	flex-shrink: 3;
 	padding: 0 20px;
-
-	&-remove {
-		@include breakpoint(large up) {
-			padding-right: 0;
-		}
-		@include breakpoint($medium-large-breakpoint down) {
-			margin-top: rem-calc(90);
-		}
-	}
 }
 
 // Clean up unused CSS
@@ -143,22 +135,6 @@
 		}
 	}
 
-	@include breakpoint($medium-large-breakpoint down) {
-		box-shadow: none;
-		height: 425px;
-	}
-
-	@include breakpoint($medium-large-breakpoint down) {
-		&.basic {
-			height: 400px;
-		}
-		&.plus {
-			height: 498px;
-		}
-		&.premium {
-			height: 526px;
-		}
-	}
 	h2 {
 		color: $tundora;
 		font-family: "Roboto Condensed";

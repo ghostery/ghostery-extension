@@ -187,6 +187,7 @@ class PlanView extends React.Component {
 			selectedPlan: -1
 		};
 		this.plansRef = React.createRef();
+		// User object doesn't get populated immediately, let's delay the first render
 		setTimeout(this.setDefaultPlan, 200);
 	}
 
