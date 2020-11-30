@@ -1734,6 +1734,12 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"hub_browser_welcome": {
+		"message": "Welcome to Ghostery Browser"
+	},
+	"hub_browser_begin": {
+		"message": "Let's begin by choosing your privacy settings. This will be quick, we promise!"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},

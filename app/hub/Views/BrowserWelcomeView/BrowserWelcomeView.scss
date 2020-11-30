@@ -1,0 +1,27 @@
+.BrowserWelcomeView__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.BrowserWelcomeView__title {
+	margin-top: 125px;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 2.33;
+}
+
+.BrowserWelcomeView__subtitle {
+	margin-bottom: 20px;
+	width: 392px;
+	font-size: 18px;
+	line-height: 2.33;
+	text-align: center;
+}
+
+.BrowserWelcomeView__rocketShip {
+	margin-bottom: 84px;
+	height: 330px;
+	width: 545px;
+}
