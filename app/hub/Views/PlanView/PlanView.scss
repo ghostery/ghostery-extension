@@ -110,6 +110,7 @@
 .PlanView__cardOuter {
 	flex-shrink: 3;
 	padding: 0 20px;
+
 	&-remove {
 		@include breakpoint(large up) {
 			padding-right: 0;
@@ -122,7 +123,6 @@
 
 // Clean up unused CSS
 .PlanView__card {
-	padding-top: 150px;
 	height: 670px;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 	margin-bottom: rem-calc(40);
@@ -130,8 +130,29 @@
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	// padding-top: rem-calc(3);
 	padding-bottom: rem-calc(40);
+	border: 4px solid white;
+
+	.checked {
+		border: 4px solid #00aef0;
+		.ghostery-free-image-container,
+		.ghostery-plus-image-container,
+		.ghostery-premium-image-background {
+			width: 244px;
+			margin-left: -1px;
+		}
+	}
+
+	&:hover {
+		border: 4px solid #00aef0;
+		.ghostery-free-image-container,
+		.ghostery-plus-image-container,
+		.ghostery-premium-image-background {
+			width: 244px;
+			margin-left: -1px;
+		}
+	}
+
 	@include breakpoint($medium-large-breakpoint down) {
 		box-shadow: none;
 		height: 425px;
@@ -175,13 +196,14 @@
 		}
 	}
 	.ghostery-free-image-container {
-		margin-top: -3px;
+		margin: -3px 0 0 -4px;
 		width: 250px;
 		height: 85px;
 		background-color: rgba(0, 174, 240, .25);
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
 		@include breakpoint($medium-large-breakpoint down) {
 			background-color: #FFF;
 		}
@@ -194,7 +216,7 @@
 		}
 	}
 	.ghostery-plus-image-container {
-			margin-top: -3px;
+			margin: -3px 0 0 -4px;
 			width: 250px;
 			height: 85px;
 			background-image: linear-gradient(to right, rgba(240,174,133,.25), rgba(241,216,158,.25));
@@ -210,6 +232,7 @@
 		}
 	}
 	.ghostery-premium-image-container {
+		margin-left: -4px;
 		position: relative;
 	}
 	.ghostery-premium-image {
@@ -221,7 +244,7 @@
 		background-image: url('/app/images/hub/upgrade/ghostery-premium-card.svg');
 	}
 	.ghostery-premium-image-background {
-		margin-top: -3px;
+		margin: -3px 0 0 -4px;
 		width: 250px;
 		height: 85px;
 		background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
@@ -312,4 +335,11 @@
 	&.purple {
 		background-image: buildCheckIcon($price-purple);
 	}
+}
+
+.PlanView__radioButtonContainer {
+	padding: 11px;
+	margin-bottom: 84px;
+	display: flex;
+	justify-content: center;
 }
