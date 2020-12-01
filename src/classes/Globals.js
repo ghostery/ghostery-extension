@@ -194,12 +194,13 @@ class Globals {
 					this.BROWSER_INFO.name = 'ghostery_android';
 					this.BROWSER_INFO.token = 'ga';
 					this.BROWSER_INFO.os = 'android';
+					this.BROWSER_INFO.version = info.version;
 				} else {
 					this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
 					this.BROWSER_INFO.name = 'ghostery_desktop';
 					this.BROWSER_INFO.token = 'gd';
+					this.BROWSER_INFO.version = info.version.split('.').join('');
 				}
-				this.BROWSER_INFO.version = info.version;
 			}
 		});
 	}
