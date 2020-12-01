@@ -61,7 +61,7 @@ const BrowserCreateAccountView = (props) => {
 		faqRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	const [expanded, setExpanded] = useState(false);
+	const [expanded, setExpanded] = useState(true);
 
 	const arrowClassNames = ClassNames('BrowserCreateAccountView__arrow', {
 		up: expanded,
@@ -103,9 +103,11 @@ const BrowserCreateAccountView = (props) => {
 	];
 
 	const renderFAQListItem = (icon, label, description) => (
-		<div className="BrowserCreateAccountView__faqItemContainer">
-			<img className="BrowserCreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
-			<div className="BrowserCreateAccountView__faqItemTextContainer">
+		<div className="BrowserCreateAccountView__faqItemContainer row">
+			<div className="BrowserCreateAccountView__faqIconContainer columns small-12 medium-10 medium-offset-1 large-2 large-offset-1">
+				<img className="BrowserCreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
+			</div>
+			<div className="BrowserCreateAccountView__faqItemTextContainer columns small-12 medium-10 medium-offset-1 large-8 large-offset-0">
 				<div className="BrowserCreateAccountView__faqItemLabel">{label}</div>
 				<div className="BrowserCreateAccountView__faqItemDescription">{ description }</div>
 			</div>
