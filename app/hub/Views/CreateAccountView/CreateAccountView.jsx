@@ -17,6 +17,7 @@ import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { ToggleCheckbox } from '../../../shared-components';
 
+
 /**
  * A Functional React component for rendering the Create Account View
  * @return {JSX} JSX for rendering the Create Account View of the Hub app
@@ -145,7 +146,7 @@ const CreateAccountView = (props) => {
 				<div className="row align-center-middle">
 					<div className="columns small-12 medium-5">
 						<label htmlFor="create-account-password" className="CreateAccountView__inputLabel">
-							{t('password_colon')}
+							{t('confirm_password_colon')}
 						</label>
 						<input
 							id="create-account-password"
@@ -178,7 +179,7 @@ const CreateAccountView = (props) => {
 							<span
 								className={legalConsentCheckboxInputLabelClassNames}
 								onClick={handleLegalConsentCheckboxChange}
-								dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }}
+								dangerouslySetInnerHTML={{ __html: {  } }}
 							/>
 						</div>
 					</div>

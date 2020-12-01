@@ -1734,6 +1734,21 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"hub_browser_create_a_ghostery_account": {
+		"message": "Create a Ghostery Account"
+	},
+	"hub_browser_sync_settings": {
+		"message": "Allows you to sync settings across browsers and devices"
+	},
+	"hub_browser_already_have_account": {
+		"message": "I already have an account."
+	},
+	"hub_browser_send_me": {
+		"message": "Send me"
+	},
+	"hub_browser_updates_and_promotions": {
+		"message": "updates & promotions."
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
@@ -2052,6 +2067,9 @@
 		"message": "Start"
 	},
 	"password_colon": {
+		"message": "Password:"
+	},
+	"confirm_password_colon": {
 		"message": "Password:"
 	},
 	"please_enter_a_valid_email": {
