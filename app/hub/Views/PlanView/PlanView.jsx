@@ -266,7 +266,7 @@ class PlanView extends React.Component {
 				{shouldShowSearchPromo && (
 					<Fragment>
 						{searchPromo()}
-						<div className="PlanView__searchCTAButton">{t('hub_plan_start_trial')}</div>
+						<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_start_trial')}</button>
 						<div className="PlanView__seeAllPlans" onClick={this.scrollToPlans}>{t('hub_plan_see_all_plans')}</div>
 						<div className="PlanView__arrowDown" onClick={this.scrollToPlans} />
 					</Fragment>
@@ -280,7 +280,7 @@ class PlanView extends React.Component {
 					)}
 					{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
 				</div>
-				<div className="PlanView__searchCTAButton">{t('hub_plan_start_trial')}</div>
+				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_start_trial')}</button>
 			</div>
 		);
 	}
