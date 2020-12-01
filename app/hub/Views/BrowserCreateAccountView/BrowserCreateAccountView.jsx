@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
@@ -55,6 +55,24 @@ const BrowserCreateAccountView = (props) => {
 	const passwordInputClassNames = ClassNames('BrowserCreateAccountView__inputBox', {
 		error: passwordInvalidError || passwordLengthError,
 	});
+
+	const FAQRef = useRef(null);
+	const scrollToFAQ = () => {
+		FAQRef.current.scrollIntoView({ behavior: 'smooth' });
+	};
+
+	const [expanded, setExpanded] = useState(false);
+
+	const arrowClassNames = ClassNames('BrowserCreateAccountView__arrow', {
+		up: expanded,
+		down: !expanded,
+		error: passwordInvalidError || passwordLengthError,
+	});
+
+	const handleArrowClick = () => {
+		scrollToFAQ();
+		setExpanded(!expanded);
+	};
 
 	return (
 		<div className="BrowserCreateAccountView">
@@ -219,8 +237,12 @@ const BrowserCreateAccountView = (props) => {
 						<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
 					</div>
 				</div>
-				<div className="BrowserCreateAccountView__learnMoreContainer">
+				<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleArrowClick}>
 					<div className="BrowserCreateAccountView__learnMore">{t('hub_browser_we_take_your_privacy_very_seriously')}</div>
+				</div>
+				<div className={arrowClassNames} onClick={handleArrowClick} />
+				<div ref={FAQRef} className="BrowserCreateAccountView__FAQContainer">
+					{/* map here */}
 				</div>
 			</form>
 		</div>

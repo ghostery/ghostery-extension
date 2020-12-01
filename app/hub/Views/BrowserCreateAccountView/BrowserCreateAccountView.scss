@@ -162,6 +162,21 @@ $color-create-account-form-error-red: #e74055;
 	text-decoration: underline;
 	cursor: pointer;
 }
+.BrowserCreateAccountView__arrow {
+	margin: 15px auto 0 auto;
+	height: 12px;
+	width: 12px;
+	border-left: 2px solid #00aef0;
+	border-top: 2px solid #00aef0;
+	cursor: pointer;
+
+	&.up {
+		transform: rotate(45deg);
+	}
+	&.down {
+		transform: rotate(225deg);
+	}
+}
 @media only screen and (max-width: 740px)  {
 	.BrowserCreateAccountView {
 		padding-top: 20px;
