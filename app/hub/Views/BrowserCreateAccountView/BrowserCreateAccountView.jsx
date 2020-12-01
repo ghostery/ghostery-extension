@@ -18,6 +18,7 @@ import { NavLink } from 'react-router-dom';
 import { ToggleCheckbox } from '../../../shared-components';
 
 const promoString = `${t('hub_browser_send_me')} Ghostery ${t('hub_browser_updates_and_promotions')}`;
+
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
@@ -48,7 +49,7 @@ const BrowserCreateAccountView = (props) => {
 	const confirmInputClassNames = ClassNames('BrowserCreateAccountView__inputBox', {
 		error: confirmEmailError,
 	});
-	const updatesCheckboxInputLabelClassNames = ClassNames('BrowserCreateAccountView__inputLabel clickable', {
+	const updatesCheckboxInputLabelClassNames = ClassNames('BrowserCreateAccountView__promoString clickable', {
 		error: isUpdatesNotCheckedError,
 	});
 	const passwordInputClassNames = ClassNames('BrowserCreateAccountView__inputBox', {
@@ -168,7 +169,7 @@ const BrowserCreateAccountView = (props) => {
 					</div>
 					<div className="columns small-12 medium-5">
 						<label htmlFor="create-account-password" className="BrowserCreateAccountView__inputLabel">
-							{t('password_colon')}
+							{t('confirm_password_colon')}
 						</label>
 						<input
 							id="create-account-password"
@@ -201,7 +202,7 @@ const BrowserCreateAccountView = (props) => {
 								onChange={handleUpdatesCheckboxChange}
 							/>
 							<span
-								className="BrowserCreateAccountView__promoString"
+								className={updatesCheckboxInputLabelClassNames}
 								onClick={handleUpdatesCheckboxChange}
 								dangerouslySetInnerHTML={{ __html: promoString }}
 							/>
@@ -209,12 +210,17 @@ const BrowserCreateAccountView = (props) => {
 					</div>
 					<div className="columns small-12 medium-5" />
 				</div>
-				<div className="BrowserCreateAccountView--addPaddingTop row align-center">
-					<div className="BrowserCreateAccountView__submit columns small-12 medium-10 flex-container flex-dir-row-reverse">
-						<button type="submit" className="BrowserCreateAccountView__button button success">
-							{t('create_account')}
-						</button>
+				<div className="BrowserCreateAccountView__ctaButtonContainer">
+					<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('create_account')}</button>
+				</div>
+				<div className="row align-center-middle">
+					<div className="columns small-12 medium-5" />
+					<div className="columns small-12 medium-5">
+						<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
 					</div>
+				</div>
+				<div className="BrowserCreateAccountView__learnMoreContainer">
+					<div className="BrowserCreateAccountView__learnMore">{t('hub_browser_we_take_your_privacy_very_seriously')}</div>
 				</div>
 			</form>
 		</div>
