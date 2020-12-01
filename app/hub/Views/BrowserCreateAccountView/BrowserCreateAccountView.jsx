@@ -56,9 +56,9 @@ const BrowserCreateAccountView = (props) => {
 		error: passwordInvalidError || passwordLengthError,
 	});
 
-	const FAQRef = useRef(null);
+	const faqRef = useRef(null);
 	const scrollToFAQ = () => {
-		FAQRef.current.scrollIntoView({ behavior: 'smooth' });
+		faqRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	const [expanded, setExpanded] = useState(false);
@@ -69,10 +69,48 @@ const BrowserCreateAccountView = (props) => {
 		error: passwordInvalidError || passwordLengthError,
 	});
 
-	const handleArrowClick = () => {
-		scrollToFAQ();
+	const handleFAQLearnMoreClick = () => {
+		setTimeout(scrollToFAQ, 1);
 		setExpanded(!expanded);
 	};
+
+	const faqList = [
+		{
+			icon: 'ghosty-shield.svg',
+			label: t('hub_browser_private_by_design'),
+			description: t('hub_browser_private_by_design_description'),
+		},
+		{
+			icon: 'ghosty-letter.svg',
+			label: t('hub_browser_why_do_you_need_my_email'),
+			description: t('hub_browser_why_do_you_need_my_email_description'),
+		},
+		{
+			icon: 'ghosty-shield-letter.svg',
+			label: t('hub_browser_what_do_you_use_my_email_for'),
+			description: t('hub_browser_what_do_you_use_my_email_for_description'),
+		},
+		{
+			icon: 'ghosty-lock.svg',
+			label: `${t('hub_browser_how_secure_is_')} Ghostery?`,
+			description: t('hub_browser_how_secure_is_ghostery_description'),
+		},
+		{
+			icon: 'ghosty-box.svg',
+			label: t('hub_browser_can_i_remove_my_account'),
+			description: t('hub_browser_can_i_remove_my_account_description'),
+		}
+	];
+
+	const renderFAQListItem = (icon, label, description) => (
+		<div className="BrowserCreateAccountView__faqItemContainer">
+			<img className="BrowserCreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
+			<div className="BrowserCreateAccountView__faqItemTextContainer">
+				<div className="BrowserCreateAccountView__faqItemLabel">{label}</div>
+				<div className="BrowserCreateAccountView__faqItemDescription">{ description }</div>
+			</div>
+		</div>
+	);
 
 	return (
 		<div className="BrowserCreateAccountView">
@@ -237,12 +275,14 @@ const BrowserCreateAccountView = (props) => {
 						<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
 					</div>
 				</div>
-				<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleArrowClick}>
+				<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
 					<div className="BrowserCreateAccountView__learnMore">{t('hub_browser_we_take_your_privacy_very_seriously')}</div>
 				</div>
-				<div className={arrowClassNames} onClick={handleArrowClick} />
-				<div ref={FAQRef} className="BrowserCreateAccountView__FAQContainer">
-					{/* map here */}
+				<div className={arrowClassNames} onClick={handleFAQLearnMoreClick} />
+				<div ref={faqRef} className="BrowserCreateAccountView__FAQContainer">
+					{expanded &&
+						faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))
+					}
 				</div>
 			</form>
 		</div>

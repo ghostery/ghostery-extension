@@ -177,8 +177,37 @@ $color-create-account-form-error-red: #e74055;
 		transform: rotate(225deg);
 	}
 }
+.BrowserCreateAccountView__FAQContainer {
+	margin-top: 30px;
+}
+.BrowserCreateAccountView__faqItemContainer {
+	margin-bottom: 40px;
+	display: flex;
+	justify-content: center;
+}
+.BrowserCreateAccountView__faqIcon {
+	margin-right: 48px;
+	height: 71px;
+	width: 71px;
+}
+.BrowserCreateAccountView__faqItemTextContainer {
+	display: flex;
+	flex-direction: column;
+}
+.BrowserCreateAccountView__faqItemLabel {
+	font-size: 18px;
+	font-weight: 600;
+	color: #4a4a4a;
+}
+.BrowserCreateAccountView__faqItemDescription {
+	margin-top: 10px;
+	width: 607px;
+	font-size: 16px;
+	color: #4a4a4a;
+}
 @media only screen and (max-width: 740px)  {
 	.BrowserCreateAccountView {
+		margin-bottom: 40px;
 		padding-top: 20px;
 	}
 	.BrowserCreateAccountView__header {

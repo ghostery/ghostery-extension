@@ -1755,6 +1755,39 @@
 	"hub_browser_we_take_your_privacy_very_seriously": {
 		"message": "We take your privacy very seriously. Learn more"
 	},
+	"hub_browser_private_by_design": {
+		"message": "Private by design"
+	},
+	"hub_browser_private_by_design_description": {
+		"message": "Privacy is incredibly important to us at Ghostery and we've taken extra care to design our products that limits the amount of personal information collected."
+	},
+	"hub_browser_why_do_you_need_my_email": {
+		"message": "Why do you need my email?"
+	},
+	"hub_browser_why_do_you_need_my_email_description": {
+		"message": "We've found email is the simplest way to create and secure a unique account without sharing your information. It helps sync your custom settings across your devices."
+	},
+	"hub_browser_what_do_you_use_my_email_for": {
+		"message": "What do you use my email for?"
+	},
+	"hub_browser_what_do_you_use_my_email_for_description": {
+		"message": "We never share or sell your personal information. Your email address is used for account management, technical support, product-related communications, and some opt-in features."
+	},
+	"hub_browser_how_secure_is_": {
+		"message": "How secure is"
+	},
+	"hub_browser_how_secure_is_ghostery_description": {
+		"message": "We never share or sell your personal information. Your email address is used for account management, technical support, product-related communications, and some opt-in features."
+	},
+	"hub_browser_can_i_remove_my_account": {
+		"message": "Can I remove my account?"
+	},
+	"hub_browser_can_i_remove_my_account_description": {
+		"message": "We hope you enjoy using Ghostery, but if you do decide to leave we will remove all of your personal information within 90 days from the date of request."
+	},
+	"hub_browser_visit_our_privacy_policy": {
+		"message": "Visit our Privacy Policy for more information"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
