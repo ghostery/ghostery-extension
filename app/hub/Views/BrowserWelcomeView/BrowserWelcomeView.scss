@@ -27,6 +27,8 @@
 }
 
 .BrowserWelcomeView__ctaButton {
+	display: flex;
+	justify-content: center;
 	margin: 48px auto 0 auto;
 	height: 44px;
 	width: 162px;
