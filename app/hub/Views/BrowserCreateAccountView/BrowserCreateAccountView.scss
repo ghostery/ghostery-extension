@@ -25,6 +25,7 @@ $color-create-account-form-error-red: #e74055;
 	display: flex;
 	justify-content: center;
 	font-size: 18px;
+	text-align: center;
 }
 .BrowserCreateAccountView__alreadyHaveAccount {
 	margin-top: 38px;
@@ -211,6 +212,21 @@ $color-create-account-form-error-red: #e74055;
 	max-width: 607px;
 	font-size: 16px;
 	color: #4a4a4a;
+}
+.BrowserCreateAccountView__faqItemDescription {
+	margin-top: 10px;
+	max-width: 607px;
+	font-size: 16px;
+	color: #4a4a4a;
+}
+.BrowserCreateAccountView__privacyPolicyLink {
+	font-size: 16px;
+	color: $ghosty-blue;
+	text-decoration: underline;
+	cursor: pointer;
+	@include breakpoint(small down) {
+		text-align: center;
+	}
 }
 @media only screen and (max-width: 740px)  {
 	.BrowserCreateAccountView {

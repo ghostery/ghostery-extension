@@ -287,6 +287,9 @@ const BrowserCreateAccountView = (props) => {
 					}
 				</div>
 			</form>
+			<div className="BrowserCreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3">
+				{t('hub_browser_visit_our_privacy_policy')}
+			</div>
 		</div>
 	);
 };
