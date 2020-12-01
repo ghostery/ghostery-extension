@@ -252,7 +252,7 @@ const BrowserCreateAccountView = (props) => {
 					</div>
 				</div>
 				<div className="row align-center-middle">
-					<div className="columns small-12 medium-5">
+					<div className="columns small-12 medium-8">
 						<div className="BrowserCreateAccountView__checkboxContainer BrowserCreateAccountView--marginBottom flex-container">
 							<ToggleCheckbox
 								checked={isUpdatesChecked}
@@ -266,7 +266,7 @@ const BrowserCreateAccountView = (props) => {
 							/>
 						</div>
 					</div>
-					<div className="columns small-12 medium-5" />
+					<div className="columns small-12 medium-2" />
 				</div>
 				<div className="BrowserCreateAccountView__ctaButtonContainer">
 					<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('create_account')}</button>

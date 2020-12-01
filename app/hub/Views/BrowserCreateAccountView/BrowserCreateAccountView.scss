@@ -93,6 +93,9 @@ $color-create-account-form-error-red: #e74055;
 }
 .BrowserCreateAccountView__promoString {
 	margin-top: 15px;
+	@include breakpoint(small down) {
+		margin-top: 0;
+	}
 }
 .BrowserCreateAccountView__link {
 	font-size: 14px;
