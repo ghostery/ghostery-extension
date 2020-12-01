@@ -25,11 +25,7 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const {
-	METRICS_BASE_URL,
-	EXTENSION_VERSION,
-	BROWSER_INFO,
-} = globals;
+const { METRICS_BASE_URL, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const MAX_DELAYED_PINGS = 100;
 // Set of conf keys used in constructing telemetry url
 const METRICS_URL_SET = new Set([
@@ -351,7 +347,6 @@ class Metrics {
 			if (this._checkPing(type, frequency)) {
 				const timeNow = Number((new Date()).getTime());
 				const metrics_url = await this._buildMetricsUrl(type, frequency);
-				console.log('metrics_url: ', metrics_url);
 				// update Conf timestamps for each ping type and frequency
 				const metrics = conf.metrics || {};
 				metrics[`${type}_${frequency}`] = timeNow;
