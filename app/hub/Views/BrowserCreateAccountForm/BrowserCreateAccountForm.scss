@@ -26,6 +26,9 @@
 	margin-bottom: 8px;
 	border-color: $color-create-account-form-error-red;
 }
+.BrowserCreateAccountForm__inputError {
+	color: red;
+}
 .BrowserCreateAccountForm__promoString {
 	margin-top: 15px;
 	@include breakpoint(small down) {
