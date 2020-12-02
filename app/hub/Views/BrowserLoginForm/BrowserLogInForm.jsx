@@ -1,5 +1,5 @@
 /**
- * Browser LogIn View
+ * Browser Log In Form
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -17,8 +17,8 @@ import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 /**
- * A Functional React component for rendering the Login View
- * @return {JSX} JSX for rendering the Login View of the Hub app
+ * A Functional React component for rendering the Log In Form
+ * @return {JSX} JSX for rendering the Log In Form of the Browser Hub app
  * @memberof HubComponents
  */
 const BrowserLogInForm = (props) => {

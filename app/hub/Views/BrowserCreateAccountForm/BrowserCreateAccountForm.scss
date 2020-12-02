@@ -1,0 +1,74 @@
+.BrowserCreateAccountForm--addPaddingTop {
+	padding-top: 20px;
+}
+.BrowserCreateAccountForm__inputLabel {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 2.86;
+	text-transform: uppercase;
+	color: #4a4a4a;
+}
+.BrowserCreateAccountForm__inputBox {
+	font-size: 14;
+	line-height: 24px;
+	color: #4a4a4a;
+
+	// Foundation Overrides
+	border-radius: 6px;
+	box-shadow: none;
+	border: 1px solid #9b9b9b;
+
+	&::placeholder {
+		color: #c4ced1;
+	}
+}
+.BrowserCreateAccountForm__inputBox.error {
+	margin-bottom: 8px;
+	border-color: $color-create-account-form-error-red;
+}
+.BrowserCreateAccountForm__promoString {
+	margin-top: 15px;
+	@include breakpoint(small down) {
+		margin-top: 0;
+	}
+}
+.BrowserCreateAccountForm__ctaButtonContainer {
+	display: flex;
+	justify-content: center;
+
+	.BrowserCreateAccountForm__ctaButton {
+		margin: 48px auto 0 auto;
+		height: 44px;
+		width: 162px;
+		padding: 7.7px 14px;
+		line-height: 22px;
+		background: linear-gradient(
+			45deg,
+			#ff7e74 50%,
+			#00aef0
+		);
+		background-size: 200% 100%;
+		background-position: 100% 50%;
+		transition: 0.25s all;
+		border: none;
+		&:hover {
+			background-position: 0% 50%;
+			transition: 0.25s all;
+		}
+		color: #FFF;
+		font-size: 14.1px;
+		font-weight: 700;
+		border-radius: 3.5px;
+		text-align: center;
+		line-height: 2.05;
+		cursor: pointer;
+	}
+}
+@media only screen and (max-width: 740px) {
+	.BrowserCreateAccountForm__checkboxContainer {
+		display: flex;
+		align-items: center;
+		padding-right: 12px;
+		justify-content: center;
+	}
+}
