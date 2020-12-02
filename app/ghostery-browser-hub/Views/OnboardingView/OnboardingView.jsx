@@ -15,10 +15,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-// Components
-import SetupNavigation from '../SetupViews/SetupNavigation';
-import SetupHeader from '../SetupViews/SetupHeader';
-
 /**
  * A Functional React component for rendering the Onboarding View
  * @return {JSX} JSX for rendering the Onboarding View of the Ghostery Browser Hub app
@@ -36,22 +32,12 @@ const OnboardingView = (props) => {
 						path={step.path}
 						render={() => (
 							<div>
-								<SetupHeader title={step.headerProps.title} titleImage={step.headerProps.titleImage} />
 								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
 							</div>
 						)}
 					/>
 				))}
-				{extraRoutes.map(route => (
-					<Route
-						key={`extra-route-${route.name}`}
-						path={route.path}
-						render={() => <route.component sendMountActions={sendMountActions} />}
-					/>
-				))}
 			</div>
-
-			<SetupNavigation totalSteps={steps.length} />
 		</div>
 	);
 };
@@ -62,10 +48,6 @@ OnboardingView.propTypes = {
 		index: PropTypes.number.isRequired,
 		path: PropTypes.string.isRequired,
 		bodyComponent: PropTypes.shape.isRequired,
-		headerProps: PropTypes.shape({
-			title: PropTypes.string.isRequired,
-			titleImage: PropTypes.string.isRequired,
-		}).isRequired,
 	})).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };

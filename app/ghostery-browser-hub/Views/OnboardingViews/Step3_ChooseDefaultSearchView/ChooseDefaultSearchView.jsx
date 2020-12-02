@@ -13,6 +13,6 @@
 
 import React from 'react';
 
-const ChooseDefaultSearchView = () => 'Step 3: Choose Default Search View';
+const ChooseDefaultSearchView = () => <h1>Step 3: Choose Default Search View</h1>;
 
 export default ChooseDefaultSearchView;

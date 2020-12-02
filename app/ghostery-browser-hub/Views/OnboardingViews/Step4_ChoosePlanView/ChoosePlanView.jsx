@@ -13,6 +13,6 @@
 
 import React from 'react';
 
-const ChoosePlanView = () => 'Step 4: Choose Plan View';
+const ChoosePlanView = () => <h1>Step 4: Choose Plan View</h1>;
 
 export default ChoosePlanView;

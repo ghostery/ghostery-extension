@@ -13,37 +13,10 @@
  * @namespace GhosteryBrowserHubReactStore
  */
 
-import {
-	applyMiddleware,
-	compose,
-	combineReducers,
-	createStore
-} from 'redux';
-import thunk from 'redux-thunk';
-
+import createStoreFactory from '../shared-hub/utils/index';
 import { reducer as app } from './Views/AppView';
 import { reducer as onboarding } from './Views/OnboardingView';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
-const reducer = combineReducers({
-	app,
-	onboarding,
-	account,
-	settings,
-});
-
-/**
- * Build store using combined reducers and middleware
- * @return {Object}
- * @memberof HubReactStore
- */
-export default function() {
-	return createStore(
-		reducer,
-		compose(
-			applyMiddleware(thunk),
-			window.devToolsExtension ? window.devToolsExtension() : f => f
-		),
-	);
-}
+export default () => createStoreFactory({app, onboarding, account, settings});

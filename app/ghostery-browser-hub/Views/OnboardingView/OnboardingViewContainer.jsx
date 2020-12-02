@@ -66,7 +66,6 @@ class OnboardingViewContainer extends Component {
 		actions.setAntiTracking({ enable_anti_tracking: true });
 		actions.setAdBlock({ enable_ad_block: true });
 		actions.setSmartBlocking({ enable_smart_block: true });
-		actions.setHumanWeb({ enable_human_web: true });
 	}
 
 	/**
@@ -75,43 +74,26 @@ class OnboardingViewContainer extends Component {
 	 */
 	render() {
 		const { sendMountActions } = this.state;
-		// TODO set the correct title strings and titleImages
 		const steps = [
 			{
 				index: 1,
 				path: '/onboarding/1',
 				bodyComponent: LoginView,
-				headerProps: {
-					title: t('ghostery_browser_hub_onboarding_header_title_login'),
-					titleImage: '/app/images/hub/setup/ghosty-block-all.svg',
-				},
 			},
 			{
 				index: 2,
 				path: '/onboarding/2',
 				bodyComponent: BlockSettingsView,
-				headerProps: {
-					title: t('ghostery_browser_hub_onboarding_header_title_block_settings'),
-					titleImage: '/app/images/hub/setup/ghosty-shield-stop-lightbulb.svg',
-				},
 			},
 			{
 				index: 3,
 				path: '/onboarding/3',
 				bodyComponent: ChooseDefaultSearchView,
-				headerProps: {
-					title: t('ghostery_browser_hub_onboarding_header_title_search_choice'),
-					titleImage: '/app/images/hub/setup/ghosty-human-web.svg',
-				},
 			},
 			{
 				index: 4,
 				path: '/onboarding/4',
 				bodyComponent: ChoosePlanView,
-				headerProps: {
-					title: t('ghostery_browser_hub_onboarding_header_title_plan_choices'),
-					titleImage: '/app/images/hub/setup/ghosty-check-wrench.svg',
-				},
 			},
 		];
 

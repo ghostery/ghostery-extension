@@ -13,6 +13,6 @@
 
 import React from 'react';
 
-const LoginView = () => 'Step 1: Login View';
+const LoginView = () => <h1>Step 1: Login View</h1>;
 
 export default LoginView;

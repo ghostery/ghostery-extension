@@ -13,6 +13,6 @@
 
 import React from 'react';
 
-const BlockSettingsView = () => 'Step 2: Block Settings View';
+const BlockSettingsView = () => <h1>Step 2: Block Settings View</h1>;
 
 export default BlockSettingsView;

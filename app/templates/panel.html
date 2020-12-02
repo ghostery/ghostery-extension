@@ -22,15 +22,6 @@
 	<div id="ghostery-app">
 		<div id="ghostery-content"></div>
 	</div>
-	<script>
-		const body = document.getElementsByTagName('body')[0];
-		const js = document.createElement("script");
-
-		js.type = "text/javascript";
-		if (true) js.src = '../../dist/panel_react.js';
-		else js.src = '../../dist/panel_react.js'; //  TODO: update to point to hub
-
-		body.appendChild(js);
-	</script>
+	<script src="../../dist/panel_react.js"></script>
 </body>
 </html>

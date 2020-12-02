@@ -17,15 +17,12 @@ import { withRouter } from 'react-router-dom';
 
 import OnboardingViewContainer from './OnboardingViewContainer';
 import OnboardingViewReducer from './OnboardingViewReducer';
-import * as MainViewActions from './MainViewActions';
-import setBlockingPolicy from '../OnboardingViews/BlockingView/BlockingViewActions';
+import * as OnboardingViewActions from './OnboardingViewActions';
 import {
-	setAntiTracking,
 	setAdBlock,
+	setAntiTracking,
 	setSmartBlocking,
-	setGhosteryRewards
-} from '../OnboardingViews/AntiSuiteView/AntiSuiteViewActions';
-import setHumanWeb from '../OnboardingViews/SetupHumanWebView/SetupHumanWebViewActions';
+} from '../../../shared-hub/actions/AntiSuiteViewActions';
 import setSetupComplete from '../OnboardingViews/SetupDoneView/SetupDoneViewActions';
 
 /**
@@ -44,13 +41,11 @@ const mapStateToProps = state => ({ ...state.setup, ...state.account });
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators({
-		...SetupViewActions,
+		...OnboardingViewActions,
 		setBlockingPolicy,
 		setAntiTracking,
 		setAdBlock,
 		setSmartBlocking,
-		setGhosteryRewards,
-		setHumanWeb,
 		setSetupComplete
 	}, dispatch),
 });

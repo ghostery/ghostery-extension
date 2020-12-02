@@ -1,5 +1,5 @@
 /**
- * Reducer used throughout the Onboarding View's flow
+ * Reducer used throughout the Setup/Onboarding flow in the regular and Ghostery Browser Hubs
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -12,62 +12,37 @@
  */
 
 import {
-	SET_AD_BLOCK,
-	SET_TRACKER_BLOCKING_POLICY,
+	INIT_SETUP_PROPS,
+	SET_BLOCKING_POLICY,
 	SET_ANTI_TRACKING,
-	INIT_ONBOARDING_PROPS,
-	SET_ONBOARDING_NAVIGATION,
+	SET_AD_BLOCK,
 	SET_SMART_BLOCK,
-	SET_HUMAN_WEB
-} from './OnboardingViewConstants';
+} from '../constants/SetupConstants';
 
 const initialState = {};
 
-function OnboardingViewReducer(state = initialState, action) {
+function SetupReducer(state = initialState, action) {
 	switch (action.type) {
-		case INIT_ONBOARDING_PROPS: {
+		case INIT_SHARED_SETUP_PROPS: {
 			const {
-				navigation,
-				setup_show_warning_override,
 				blockingPolicy,
 				enable_anti_tracking,
 				enable_ad_block,
 				enable_smart_block,
-				enable_ghostery_rewards,
-				enable_human_web,
 			} = action.data;
-			const {
-				activeIndex,
-				hrefPrev,
-				hrefNext,
-				hrefDone,
-				textPrev,
-				textNext,
-				textDone,
-			} = navigation;
 			return {
 				...state,
 				setup: {
-					navigation: {
-						activeIndex,
-						hrefPrev,
-						hrefNext,
-						hrefDone,
-						textPrev,
-						textNext,
-						textDone,
-					},
 					setup_show_warning_override,
 					blockingPolicy,
 					enable_anti_tracking,
 					enable_ad_block,
 					enable_smart_block,
-					enable_ghostery_rewards,
 					enable_human_web,
 				}
 			};
 		}
-		case SET_ONBOARDING_NAVIGATION: {
+		case SET_SETUP_NAVIGATION: {
 			const {
 				activeIndex,
 				hrefPrev,
@@ -94,25 +69,34 @@ function OnboardingViewReducer(state = initialState, action) {
 			};
 		}
 
-		case SET_AD_BLOCK: {
-			const { enable_ad_block } = action.data;
-			return { ...state, setup: { ...state.setup, enable_ad_block } };
-		}
-		case SET_TRACKER_BLOCKING_POLICY: {
+		// Setup Blocking View
+		case SET_BLOCKING_POLICY: {
 			const { blockingPolicy } = action.data;
 			return { ...state, setup: { ...state.setup, blockingPolicy } };
 		}
+
+		// Setup Anti-Suite View
 		case SET_ANTI_TRACKING: {
 			const { enable_anti_tracking } = action.data;
 			return { ...state, setup: { ...state.setup, enable_anti_tracking } };
+		}
+		case SET_AD_BLOCK: {
+			const { enable_ad_block } = action.data;
+			return { ...state, setup: { ...state.setup, enable_ad_block } };
 		}
 		case SET_SMART_BLOCK: {
 			const { enable_smart_block } = action.data;
 			return { ...state, setup: { ...state.setup, enable_smart_block } };
 		}
 
+		// Setup Human Web View
+		case SET_HUMAN_WEB: {
+			const { enable_human_web } = action.data;
+			return { ...state, setup: { ...state.setup, enable_human_web } };
+		}
+
 		default: return state;
 	}
 }
 
-export default OnboardingViewReducer;
+export default SetupReducer;
