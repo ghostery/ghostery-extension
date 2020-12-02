@@ -71,7 +71,7 @@ const renderFAQListItem = (icon, label, description) => (
  */
 const BrowserCreateAccountView = () => {
 	const [expanded, setExpanded] = useState(false);
-	const [view, setView] = useState(CREATE_ACCOUNT);
+	const [view, setView] = useState(SIGN_IN);
 
 	const arrowClassNames = ClassNames('BrowserCreateAccountView__arrow', {
 		up: expanded,
@@ -90,7 +90,12 @@ const BrowserCreateAccountView = () => {
 
 	return (
 		<div className="BrowserCreateAccountView">
-			<div className="BrowserCreateAccountView__title">{ t('hub_browser_create_a_ghostery_account') }</div>
+			{view === CREATE_ACCOUNT && (
+				<div className="BrowserCreateAccountView__title">{t('hub_browser_create_a_ghostery_account')}</div>
+			)}
+			{view === SIGN_IN && (
+				<div className="BrowserCreateAccountView__title">{t('sign_in')}</div>
+			)}
 			<div className="BrowserCreateAccountView__subtitle">{ t('hub_browser_sync_settings') }</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (

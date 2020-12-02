@@ -94,7 +94,7 @@ const BrowserLogInForm = (props) => {
 				</div>
 			</div>
 			<div className="BrowserLogInForm__ctaButtonContainer">
-				<button type="submit" className="BrowserLogInForm__ctaButton">{t('create_account')}</button>
+				<button type="submit" className="BrowserLogInForm__ctaButton">{t('sign_in')}</button>
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-5" />

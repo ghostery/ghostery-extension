@@ -1,3 +1,46 @@
-import BrowserLoginForm from './BrowserLogInForm';
+/**
+ * Point of entry index.js file for Browser Log In Form
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
 
-export default BrowserLoginForm;
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import BrowserLogInFormContainer from './BrowserLogInFormContainer';
+import { login, getUser, getUserSettings } from '../../../Account/AccountActions';
+import { getTheme } from '../../../panel/actions/PanelActions';
+import { setToast } from '../AppView/AppViewActions';
+
+/**
+ * Map redux store state properties to the component's own properties.
+ * @param  {Object} state    entire Redux store's state
+ * @return {function}        this function returns a plain object, which will be merged into the component's props
+ * @memberof HubContainers
+ */
+const mapStateToProps = state => ({ ...state.account });
+
+/**
+ * Bind the component's action creators using Redux's bindActionCreators.
+ * @param  {function} dispatch redux store method which dispatches actions
+ * @return {function}          to be used as an argument in redux connect call
+ * @memberof SetupContainers
+ */
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators({
+		setToast,
+		login,
+		getUser,
+		getUserSettings,
+		getTheme
+	}, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrowserLogInFormContainer);
