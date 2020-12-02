@@ -11,19 +11,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { buildReduxHOC } from '../../../shared-hub/utils';
 
-import View from './AppView';
-import { setToast } from './AppViewActions';
-import Reducer from './AppViewReducer';
+import AppView from './AppView';
+import setToast from './AppViewActions';
+import AppViewReducer from './AppViewReducer';
 
-const mapStateToProps = state => ({ ...state.app });
+export const reducer = AppViewReducer;
 
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators({ setToast }, dispatch),
-});
-
-export const reducer = Reducer;
-
-export default connect(mapStateToProps, mapDispatchToProps)(View);
+export default buildReduxHOC(['app'], { setToast }, AppView);

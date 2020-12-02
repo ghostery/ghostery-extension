@@ -1,5 +1,5 @@
 /**
- * Ghostery Browser Hub App View Action creators
+ * Shared Hub Metrics Constants
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,11 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { SET_TOAST } from './AppViewConstants';
+const SEND_PING = 'SEND_PING';
 
-export default function setToast(data) {
-	return {
-		type: SET_TOAST,
-		data,
-	};
-}
+export default SEND_PING;

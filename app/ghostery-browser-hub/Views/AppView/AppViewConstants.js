@@ -11,8 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO I think we can just use the Hub AppViewConstants
+// TODO consider whether this should also be factored out
 
 // Ghostery Browser Hub App View
-export const SET_TOAST = 'SET_TOAST';
-export const SEND_PING = 'SEND_PING';
+const SET_TOAST = 'SET_TOAST';
+
+export default SET_TOAST;

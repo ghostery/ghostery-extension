@@ -13,10 +13,20 @@
  * @namespace GhosteryBrowserHubReactStore
  */
 
-import createStoreFactory from '../shared-hub/utils/index';
+import thunk from 'redux-thunk';
+
+import { createStoreFactory } from '../shared-hub/utils/index';
+
 import { reducer as app } from './Views/AppView';
 import { reducer as onboarding } from './Views/OnboardingView';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
-export default () => createStoreFactory({app, onboarding, account, settings});
+const reducers = {
+	app,
+	onboarding,
+	account,
+	settings
+};
+
+export default () => createStoreFactory(reducers, [thunk]);

@@ -11,9 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO I think we can just use the Hub AppViewReducer
+// TODO consider whether to factor out the reducer case implementations to shared-hub
 
-import { SET_TOAST } from './AppViewConstants';
+import SET_TOAST from './AppViewConstants';
 
 const initialState = {};
 
