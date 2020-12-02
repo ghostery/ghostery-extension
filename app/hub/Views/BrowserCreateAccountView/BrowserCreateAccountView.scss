@@ -87,9 +87,14 @@ $color-create-account-form-error-red: #e74055;
 }
 .BrowserCreateAccountView__alreadyHaveAccount {
 	margin-top: 38px;
+	font-size: 16px;
 	color: $ghosty-blue;
 	text-decoration: underline;
 	cursor: pointer;
+	@include breakpoint(small down) {
+		margin: 38px auto 0 auto;
+		text-align: center;
+	}
 }
 .BrowserCreateAccountView--addMarginSide {
 	margin-left: 10px;

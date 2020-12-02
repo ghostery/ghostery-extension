@@ -61,7 +61,7 @@ const BrowserCreateAccountForm = (props) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="BrowserCreateAccountForm--addPaddingTop row align-center-middle">
-				<div className="columns small-12 medium-5">
+				<div className="columns small-10 medium-5">
 					<label htmlFor="create-account-email" className="BrowserCreateAccountForm__inputLabel">
 						{t('email_colon')}
 					</label>
@@ -82,7 +82,7 @@ const BrowserCreateAccountForm = (props) => {
 						</div>
 					)}
 				</div>
-				<div className="columns small-12 medium-5">
+				<div className="columns small-10 medium-5">
 					<label htmlFor="create-account-confirmEmail" className="BrowserCreateAccountForm__inputLabel">
 						{t('confirm_email_colon')}
 					</label>
@@ -104,7 +104,7 @@ const BrowserCreateAccountForm = (props) => {
 				</div>
 			</div>
 			<div className="row align-center-middle">
-				<div className="columns small-12 medium-5">
+				<div className="columns small-10 medium-5">
 					<label htmlFor="create-account-firstName" className="BrowserCreateAccountForm__inputLabel">
 						{t('hub_create_account_label_first_name')}
 					</label>
@@ -119,7 +119,7 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 				</div>
-				<div className="columns small-12 medium-5">
+				<div className="columns small-10 medium-5">
 					<label htmlFor="create-account-lastName" className="BrowserCreateAccountForm__inputLabel">
 						{t('hub_create_account_label_email_last_name')}
 					</label>
@@ -136,7 +136,7 @@ const BrowserCreateAccountForm = (props) => {
 				</div>
 			</div>
 			<div className="row align-center-middle">
-				<div className="columns small-12 medium-5">
+				<div className="columns small-10 medium-5">
 					<label htmlFor="create-account-password" className="BrowserCreateAccountForm__inputLabel">
 						{t('password_colon')}
 					</label>
@@ -161,7 +161,7 @@ const BrowserCreateAccountForm = (props) => {
 						</div>
 					)}
 				</div>
-				<div className="columns small-12 medium-5">
+				<div className="columns small-10 medium-5">
 					<label htmlFor="create-account-password" className="BrowserCreateAccountForm__inputLabel">
 						{t('confirm_password_colon')}
 					</label>
@@ -188,7 +188,7 @@ const BrowserCreateAccountForm = (props) => {
 				</div>
 			</div>
 			<div className="row align-center-middle">
-				<div className="columns small-12 medium-8">
+				<div className="columns small-10 medium-8">
 					<div className="BrowserCreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
 						<ToggleCheckbox
 							checked={isUpdatesChecked}
@@ -202,10 +202,10 @@ const BrowserCreateAccountForm = (props) => {
 						/>
 					</div>
 				</div>
-				<div className="columns small-12 medium-2" />
+				<div className="columns small-10 medium-2" />
 			</div>
 			<div className="row align-center-middle">
-				<div className="columns small-12 medium-8">
+				<div className="columns small-10 medium-8">
 					<div className="BrowserCreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
 						<ToggleCheckbox
 							checked={legalConsentChecked}
@@ -219,7 +219,7 @@ const BrowserCreateAccountForm = (props) => {
 						/>
 					</div>
 				</div>
-				<div className="columns small-12 medium-2" />
+				<div className="columns small-10 medium-2" />
 			</div>
 			<div className="BrowserCreateAccountForm__ctaButtonContainer">
 				<button type="submit" className="BrowserCreateAccountForm__ctaButton">{t('create_account')}</button>
