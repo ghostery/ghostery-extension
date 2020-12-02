@@ -148,6 +148,11 @@ $color-create-account-form-error-red: #e74055;
 	color: $ghosty-blue;
 	text-decoration: underline;
 	cursor: pointer;
+	@include breakpoint(small down) {
+		margin: 39px auto 0 auto;
+		text-align: center;
+		float: none;
+	}
 }
 .BrowserCreateAccountView__learnMoreContainer {
 	margin: 25px auto 0 auto;

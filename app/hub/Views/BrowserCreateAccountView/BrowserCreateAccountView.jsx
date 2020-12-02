@@ -63,6 +63,15 @@ const renderFAQListItem = (icon, label, description) => (
 	</div>
 );
 
+const renderSkipLink = () => (
+	<div className="row align-center-middle">
+		<div className="columns small-10 medium-5" />
+		<div className="columns small-10 medium-5">
+			<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
+		</div>
+	</div>
+);
+
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
@@ -120,12 +129,7 @@ const BrowserCreateAccountView = (props) => {
 			{view === CREATE_ACCOUNT ? (
 				<Fragment>
 					<BrowserCreateAccountForm />
-					<div className="row align-center-middle">
-						<div className="columns small-12 medium-5" />
-						<div className="columns small-12 medium-5">
-							<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
-						</div>
-					</div>
+					{renderSkipLink()}
 					<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
 						<div className="BrowserCreateAccountView__learnMore">{t('hub_browser_we_take_your_privacy_very_seriously')}</div>
 					</div>
@@ -144,7 +148,10 @@ const BrowserCreateAccountView = (props) => {
 					)}
 				</Fragment>
 			) : (
-				<BrowserLogInForm />
+				<Fragment>
+					<BrowserLogInForm />
+					{renderSkipLink()}
+				</Fragment>
 			)}
 		</div>
 	));

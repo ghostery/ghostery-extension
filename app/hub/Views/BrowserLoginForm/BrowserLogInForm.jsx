@@ -97,12 +97,6 @@ const BrowserLogInForm = (props) => {
 			<div className="BrowserLogInForm__ctaButtonContainer">
 				<button type="submit" className="BrowserLogInForm__ctaButton">{t('sign_in')}</button>
 			</div>
-			<div className="row align-center-middle">
-				<div className="columns small-10 medium-5" />
-				<div className="columns small-10 medium-5">
-					<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
-				</div>
-			</div>
 		</form>
 	);
 };
