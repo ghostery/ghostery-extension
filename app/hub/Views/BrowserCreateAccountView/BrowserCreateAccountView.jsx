@@ -141,7 +141,7 @@ const BrowserCreateAccountView = (props) => {
 					</div>
 					{expanded && (
 						<div className="row">
-							<a className="BrowserCreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`}>
+							<a className="BrowserCreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
 								{t('hub_browser_visit_our_privacy_policy')}
 							</a>
 						</div>
