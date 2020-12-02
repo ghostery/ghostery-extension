@@ -15,7 +15,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import BrowserLogInFormContainer from './BrowserLogInFormContainer';
-import { login, getUser, getUserSettings } from '../../../Account/AccountActions';
+import {
+	login,
+	getUser,
+	getUserSettings,
+	resetPassword
+} from '../../../Account/AccountActions';
 import { getTheme } from '../../../panel/actions/PanelActions';
 import { setToast } from '../AppView/AppViewActions';
 
@@ -39,7 +44,8 @@ const mapDispatchToProps = dispatch => ({
 		login,
 		getUser,
 		getUserSettings,
-		getTheme
+		getTheme,
+		resetPassword
 	}, dispatch),
 });
 

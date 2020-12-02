@@ -13,9 +13,11 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { throttle } from 'underscore';
 import { validateEmail } from '../../../panel/utils/utils';
 import BrowserLogInForm from './BrowserLogInForm';
 import SignedInView from '../SignedInView';
+
 /**
  * @class Implement the Browser Log In Form for the Ghostery Hub
  * @extends Component
@@ -89,7 +91,7 @@ class BrowserLogInFormContainer extends Component {
 			return;
 		}
 
-		const { actions, history } = this.props;
+		const { actions } = this.props;
 		actions.setToast({
 			toastMessage: '',
 			toastClass: ''
@@ -119,6 +121,33 @@ class BrowserLogInFormContainer extends Component {
 		});
 	}
 
+	_unthrottledHandleForgotPassword = (e) => {
+		e.preventDefault();
+		const { email } = this.state;
+
+		// validate the email and password
+		if (!validateEmail(email)) {
+			this.setState({
+				emailError: true,
+			});
+			return;
+		}
+
+		const { actions } = this.props;
+		actions.resetPassword(email)
+			.then((success) => {
+				if (success) {
+					actions.setToast({
+						toastMessage: t('banner_check_your_email_title'),
+						toastClass: 'success',
+					});
+				}
+			});
+	}
+
+	// eslint-disable-next-line react/sort-comp
+	_handleForgotPassword = throttle(this._unthrottledHandleForgotPassword, 10000)
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Log In View of the Hub app
@@ -142,6 +171,7 @@ class BrowserLogInFormContainer extends Component {
 				passwordError={passwordError}
 				handleInputChange={this._handleInputChange}
 				handleSubmit={this._handleLoginAttempt}
+				handleForgotPassword={this._handleForgotPassword}
 			/>
 		);
 	}

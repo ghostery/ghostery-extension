@@ -64,6 +64,11 @@
 	font-size: 14px;
 	line-height: 30px;
 }
+.BrowserLogInForm__forgotPassword {
+	color: $ghosty-blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
 .BrowserLogInForm__button {
 	min-width: 180px;
 }

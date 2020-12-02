@@ -29,6 +29,7 @@ const BrowserLogInForm = (props) => {
 		passwordError,
 		handleSubmit,
 		handleInputChange,
+		handleForgotPassword,
 	} = props;
 
 	const emailInputClassNames = ClassNames('BrowserLogInForm__inputBox', {
@@ -86,10 +87,10 @@ const BrowserLogInForm = (props) => {
 			</div>
 			<div className="BrowserLogInForm__item row align-center-middle">
 				<div className="columns small-10">
-					<span className="BrowserLogInForm__link text-center">
-						<NavLink to="/forgot-password">
+					<span className="BrowserLogInForm__link">
+						<div className="BrowserLogInForm__forgotPassword" onClick={handleForgotPassword}>
 							{t('forgot_password')}
-						</NavLink>
+						</div>
 					</span>
 				</div>
 			</div>
