@@ -22,7 +22,6 @@ import globals from '../../../../src/classes/Globals';
 
 const SIGN_IN = 'SIGN_IN';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
-const ALREADY_SIGNED_IN = 'ALREADRY_SALREADY_SIGNED_IN';
 
 const faqList = [
 	{
@@ -74,7 +73,7 @@ const BrowserCreateAccountView = (props) => {
 	const email = user && user.email;
 
 	const [expanded, setExpanded] = useState(false);
-	const [view, setView] = useState(SIGN_IN);
+	const [view, setView] = useState(CREATE_ACCOUNT);
 
 	const arrowClassNames = ClassNames('BrowserCreateAccountView__arrow', {
 		up: expanded,
@@ -94,8 +93,9 @@ const BrowserCreateAccountView = (props) => {
 	return (user ? (
 		<div className="BrowserCreateAccountView__alreadySignedIn">
 			<div className="BrowserCreateAccountView__title">{t('hub_browser_you_are_signed_in_as')}</div>
-			<div className="BrowserCreateAccountView__email">{user.email}</div>
+			<div className="BrowserCreateAccountView__email">{email}</div>
 			<div className="BrowserCreateAccountView__ctaButtonContainer">
+				{/* Link to next page */}
 				<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('next')}</button>
 			</div>
 		</div>
