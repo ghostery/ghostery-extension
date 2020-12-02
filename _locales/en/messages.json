@@ -1788,6 +1788,9 @@
 	"hub_browser_visit_our_privacy_policy": {
 		"message": "Visit our Privacy Policy for more information"
 	},
+	"hub_browser_create_an_account": {
+		"message": "Create an account."
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},

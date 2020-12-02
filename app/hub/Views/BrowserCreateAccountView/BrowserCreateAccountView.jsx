@@ -16,7 +16,11 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { ToggleCheckbox } from '../../../shared-components';
+import BrowserLogInForm from '../BrowserLoginForm';
 
+const SIGN_IN = 'SIGN_IN';
+const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 const promoString = `${t('hub_browser_send_me')} Ghostery ${t('hub_browser_updates_and_promotions')}`;
 
 /**
@@ -61,7 +65,8 @@ const BrowserCreateAccountView = (props) => {
 		faqRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	const [expanded, setExpanded] = useState(true);
+	const [expanded, setExpanded] = useState(false);
+	const [view, setView] = useState(SIGN_IN);
 
 	const arrowClassNames = ClassNames('BrowserCreateAccountView__arrow', {
 		up: expanded,
@@ -119,180 +124,187 @@ const BrowserCreateAccountView = (props) => {
 			<div className="BrowserCreateAccountView__title">{ t('hub_browser_create_a_ghostery_account') }</div>
 			<div className="BrowserCreateAccountView__subtitle">{ t('hub_browser_sync_settings') }</div>
 			<div className="row align-center-middle">
-				{/* add onclick to sign in page */}
-				<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5">{t('hub_browser_already_have_account')}</div>
+				{view === CREATE_ACCOUNT && (
+					<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(SIGN_IN)}>{t('hub_browser_already_have_account')}</div>
+				)}
+				{view === SIGN_IN && (
+					<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(CREATE_ACCOUNT)}>{t('hub_browser_create_an_account')}</div>
+				)}
 				<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5" />
 			</div>
-			<form onSubmit={handleSubmit}>
-				<div className="BrowserCreateAccountView--addPaddingTop row align-center-middle">
-					<div className="columns small-12 medium-5">
-						<label htmlFor="create-account-email" className="BrowserCreateAccountView__inputLabel">
-							{t('email_colon')}
-						</label>
-						<input
-							id="create-account-email"
-							className={emailInputClassNames}
-							name="email"
-							type="text"
-							value={email}
-							onChange={handleInputChange}
-							pattern=".{1,}"
-							autoComplete="off"
-							placeholder="example@mail.com"
-						/>
-						{emailError && (
-							<div className="BrowserCreateAccountView__inputError">
-								{t('please_enter_a_valid_email')}
-							</div>
-						)}
-					</div>
-					<div className="columns small-12 medium-5">
-						<label htmlFor="create-account-confirmEmail" className="BrowserCreateAccountView__inputLabel">
-							{t('confirm_email_colon')}
-						</label>
-						<input
-							id="create-account-confirmEmail"
-							className={confirmInputClassNames}
-							name="confirmEmail"
-							type="text"
-							value={confirmEmail}
-							onChange={handleInputChange}
-							pattern=".{1,}"
-							autoComplete="off"
-						/>
-						{confirmEmailError && (
-							<div className="BrowserCreateAccountView__inputError">
-								{t('your_email_do_not_match')}
-							</div>
-						)}
-					</div>
-				</div>
-				<div className="row align-center-middle">
-					<div className="columns small-12 medium-5">
-						<label htmlFor="create-account-firstName" className="BrowserCreateAccountView__inputLabel">
-							{t('hub_create_account_label_first_name')}
-						</label>
-						<input
-							id="create-account-firstName"
-							className="BrowserCreateAccountView__inputBox"
-							name="firstName"
-							type="text"
-							value={firstName}
-							onChange={handleInputChange}
-							pattern=".{1,}"
-							autoComplete="off"
-						/>
-					</div>
-					<div className="columns small-12 medium-5">
-						<label htmlFor="create-account-lastName" className="BrowserCreateAccountView__inputLabel">
-							{t('hub_create_account_label_email_last_name')}
-						</label>
-						<input
-							id="create-account-lastName"
-							className="BrowserCreateAccountView__inputBox"
-							name="lastName"
-							type="text"
-							value={lastName}
-							onChange={handleInputChange}
-							pattern=".{1,}"
-							autoComplete="off"
-						/>
-					</div>
-				</div>
-				<div className="row align-center-middle">
-					<div className="columns small-12 medium-5">
-						<label htmlFor="create-account-password" className="BrowserCreateAccountView__inputLabel">
-							{t('password_colon')}
-						</label>
-						<input
-							id="create-account-password"
-							className={passwordInputClassNames}
-							name="password"
-							type="password"
-							value={password}
-							onChange={handleInputChange}
-							pattern=".{1,}"
-							autoComplete="off"
-						/>
-						{passwordInvalidError && (
-							<div className="BrowserCreateAccountView__inputError">
-								{t('hub_create_account_label_password_invalid')}
-							</div>
-						)}
-						{passwordLengthError && (
-							<div className="BrowserCreateAccountView__inputError">
-								{t('hub_create_account_label_password_invalid_length')}
-							</div>
-						)}
-					</div>
-					<div className="columns small-12 medium-5">
-						<label htmlFor="create-account-password" className="BrowserCreateAccountView__inputLabel">
-							{t('confirm_password_colon')}
-						</label>
-						<input
-							id="create-account-password"
-							className={passwordInputClassNames}
-							name="confirm password"
-							type="password"
-							value={confirmPassword}
-							onChange={handleInputChange}
-							pattern=".{1,}"
-							autoComplete="off"
-						/>
-						{passwordInvalidError && (
-							<div className="BrowserCreateAccountView__inputError">
-								{t('hub_create_account_label_password_invalid')}
-							</div>
-						)}
-						{passwordLengthError && (
-							<div className="BrowserCreateAccountView__inputError">
-								{t('hub_create_account_label_password_invalid_length')}
-							</div>
-						)}
-					</div>
-				</div>
-				<div className="row align-center-middle">
-					<div className="columns small-12 medium-8">
-						<div className="BrowserCreateAccountView__checkboxContainer BrowserCreateAccountView--marginBottom flex-container">
-							<ToggleCheckbox
-								checked={isUpdatesChecked}
-								className="ToggleCheckbox--flush-left"
-								onChange={handleUpdatesCheckboxChange}
+			{view === CREATE_ACCOUNT ? (
+				<form onSubmit={handleSubmit}>
+					<div className="BrowserCreateAccountView--addPaddingTop row align-center-middle">
+						<div className="columns small-12 medium-5">
+							<label htmlFor="create-account-email" className="BrowserCreateAccountView__inputLabel">
+								{t('email_colon')}
+							</label>
+							<input
+								id="create-account-email"
+								className={emailInputClassNames}
+								name="email"
+								type="text"
+								value={email}
+								onChange={handleInputChange}
+								pattern=".{1,}"
+								autoComplete="off"
+								placeholder="example@mail.com"
 							/>
-							<span
-								className={updatesCheckboxInputLabelClassNames}
-								onClick={handleUpdatesCheckboxChange}
-								dangerouslySetInnerHTML={{ __html: promoString }}
+							{emailError && (
+								<div className="BrowserCreateAccountView__inputError">
+									{t('please_enter_a_valid_email')}
+								</div>
+							)}
+						</div>
+						<div className="columns small-12 medium-5">
+							<label htmlFor="create-account-confirmEmail" className="BrowserCreateAccountView__inputLabel">
+								{t('confirm_email_colon')}
+							</label>
+							<input
+								id="create-account-confirmEmail"
+								className={confirmInputClassNames}
+								name="confirmEmail"
+								type="text"
+								value={confirmEmail}
+								onChange={handleInputChange}
+								pattern=".{1,}"
+								autoComplete="off"
+							/>
+							{confirmEmailError && (
+								<div className="BrowserCreateAccountView__inputError">
+									{t('your_email_do_not_match')}
+								</div>
+							)}
+						</div>
+					</div>
+					<div className="row align-center-middle">
+						<div className="columns small-12 medium-5">
+							<label htmlFor="create-account-firstName" className="BrowserCreateAccountView__inputLabel">
+								{t('hub_create_account_label_first_name')}
+							</label>
+							<input
+								id="create-account-firstName"
+								className="BrowserCreateAccountView__inputBox"
+								name="firstName"
+								type="text"
+								value={firstName}
+								onChange={handleInputChange}
+								pattern=".{1,}"
+								autoComplete="off"
+							/>
+						</div>
+						<div className="columns small-12 medium-5">
+							<label htmlFor="create-account-lastName" className="BrowserCreateAccountView__inputLabel">
+								{t('hub_create_account_label_email_last_name')}
+							</label>
+							<input
+								id="create-account-lastName"
+								className="BrowserCreateAccountView__inputBox"
+								name="lastName"
+								type="text"
+								value={lastName}
+								onChange={handleInputChange}
+								pattern=".{1,}"
+								autoComplete="off"
 							/>
 						</div>
 					</div>
-					<div className="columns small-12 medium-2" />
-				</div>
-				<div className="BrowserCreateAccountView__ctaButtonContainer">
-					<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('create_account')}</button>
-				</div>
-				<div className="row align-center-middle">
-					<div className="columns small-12 medium-5" />
-					<div className="columns small-12 medium-5">
-						<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
+					<div className="row align-center-middle">
+						<div className="columns small-12 medium-5">
+							<label htmlFor="create-account-password" className="BrowserCreateAccountView__inputLabel">
+								{t('password_colon')}
+							</label>
+							<input
+								id="create-account-password"
+								className={passwordInputClassNames}
+								name="password"
+								type="password"
+								value={password}
+								onChange={handleInputChange}
+								pattern=".{1,}"
+								autoComplete="off"
+							/>
+							{passwordInvalidError && (
+								<div className="BrowserCreateAccountView__inputError">
+									{t('hub_create_account_label_password_invalid')}
+								</div>
+							)}
+							{passwordLengthError && (
+								<div className="BrowserCreateAccountView__inputError">
+									{t('hub_create_account_label_password_invalid_length')}
+								</div>
+							)}
+						</div>
+						<div className="columns small-12 medium-5">
+							<label htmlFor="create-account-password" className="BrowserCreateAccountView__inputLabel">
+								{t('confirm_password_colon')}
+							</label>
+							<input
+								id="create-account-password"
+								className={passwordInputClassNames}
+								name="confirm password"
+								type="password"
+								value={confirmPassword}
+								onChange={handleInputChange}
+								pattern=".{1,}"
+								autoComplete="off"
+							/>
+							{passwordInvalidError && (
+								<div className="BrowserCreateAccountView__inputError">
+									{t('hub_create_account_label_password_invalid')}
+								</div>
+							)}
+							{passwordLengthError && (
+								<div className="BrowserCreateAccountView__inputError">
+									{t('hub_create_account_label_password_invalid_length')}
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
-				<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
-					<div className="BrowserCreateAccountView__learnMore">{t('hub_browser_we_take_your_privacy_very_seriously')}</div>
-				</div>
-				<div className={arrowClassNames} onClick={handleFAQLearnMoreClick} />
-				<div ref={faqRef} className="BrowserCreateAccountView__FAQContainer">
-					{expanded &&
-						faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))
-					}
-				</div>
-			</form>
-			<div className="row">
-				<div className="BrowserCreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3">
-					{t('hub_browser_visit_our_privacy_policy')}
-				</div>
-			</div>
-
+					<div className="row align-center-middle">
+						<div className="columns small-12 medium-8">
+							<div className="BrowserCreateAccountView__checkboxContainer BrowserCreateAccountView--marginBottom flex-container">
+								<ToggleCheckbox
+									checked={isUpdatesChecked}
+									className="ToggleCheckbox--flush-left"
+									onChange={handleUpdatesCheckboxChange}
+								/>
+								<span
+									className={updatesCheckboxInputLabelClassNames}
+									onClick={handleUpdatesCheckboxChange}
+									dangerouslySetInnerHTML={{ __html: promoString }}
+								/>
+							</div>
+						</div>
+						<div className="columns small-12 medium-2" />
+					</div>
+					<div className="BrowserCreateAccountView__ctaButtonContainer">
+						<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('create_account')}</button>
+					</div>
+					<div className="row align-center-middle">
+						<div className="columns small-12 medium-5" />
+						<div className="columns small-12 medium-5">
+							<div className="BrowserCreateAccountView__skip">{t('hub_browser_skip')}</div>
+						</div>
+					</div>
+					<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
+						<div className="BrowserCreateAccountView__learnMore">{t('hub_browser_we_take_your_privacy_very_seriously')}</div>
+					</div>
+					<div className={arrowClassNames} onClick={handleFAQLearnMoreClick} />
+					<div ref={faqRef} className="BrowserCreateAccountView__FAQContainer">
+						{expanded &&
+							faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))
+						}
+					</div>
+					<div className="row">
+						<div className="BrowserCreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3">
+							{t('hub_browser_visit_our_privacy_policy')}
+						</div>
+					</div>
+				</form>
+			) : (
+				<BrowserLogInForm />
+			)}
 		</div>
 	);
 };
