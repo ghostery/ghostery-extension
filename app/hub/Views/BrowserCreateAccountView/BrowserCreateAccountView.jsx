@@ -22,7 +22,6 @@ import BrowserCreateAccountForm from '../BrowserCreateAccountForm';
 const SIGN_IN = 'SIGN_IN';
 const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
-const promoString = `${t('hub_browser_send_me')} Ghostery ${t('hub_browser_updates_and_promotions')}`;
 
 const faqList = [
 	{

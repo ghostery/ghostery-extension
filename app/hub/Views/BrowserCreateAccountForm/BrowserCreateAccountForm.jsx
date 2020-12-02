@@ -16,11 +16,8 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { ToggleCheckbox } from '../../../shared-components';
-import BrowserLogInForm from '../BrowserLoginForm';
+import I18nWithLink from '../../../shared-components/I18nWithLink';
 
-const SIGN_IN = 'SIGN_IN';
-const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
-const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 const promoString = `${t('hub_browser_send_me')} Ghostery ${t('hub_browser_updates_and_promotions')}`;
 
 /**
@@ -40,12 +37,17 @@ const BrowserCreateAccountForm = (props) => {
 		confirmPassword,
 		passwordInvalidError,
 		passwordLengthError,
+		legalConsentChecked,
+		legalConsentNotCheckedError,
+		handleLegalConsentCheckboxChange,
 		isUpdatesChecked,
 		isUpdatesNotCheckedError,
 		handleInputChange,
 		handleUpdatesCheckboxChange,
 		handleSubmit,
 	} = props;
+
+	console.log('BrowserCreateAccountForm props: ', props);
 
 	const emailInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
 		error: emailError,
@@ -202,6 +204,26 @@ const BrowserCreateAccountForm = (props) => {
 							onClick={handleUpdatesCheckboxChange}
 							dangerouslySetInnerHTML={{ __html: promoString }}
 						/>
+					</div>
+				</div>
+				<div className="columns small-12 medium-2" />
+			</div>
+			<div className="row align-center-middle">
+				<div className="columns small-12 medium-8">
+					<div className="BrowserCreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
+						<ToggleCheckbox
+							checked={legalConsentChecked}
+							className="ToggleCheckbox--flush-left"
+							onChange={handleLegalConsentCheckboxChange}
+						/>
+						<label htmlFor="legalConsentChecked">
+							<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
+						</label>
+						{/* <span
+							className={updatesCheckboxInputLabelClassNames}
+							onClick={handleUpdatesCheckboxChange}
+							dangerouslySetInnerHTML={{ __html: promoString }}
+						/> */}
 					</div>
 				</div>
 				<div className="columns small-12 medium-2" />
