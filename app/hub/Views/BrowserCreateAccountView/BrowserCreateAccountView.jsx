@@ -21,8 +21,8 @@ import BrowserCreateAccountForm from '../BrowserCreateAccountForm';
 import globals from '../../../../src/classes/Globals';
 
 const SIGN_IN = 'SIGN_IN';
-const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
+const ALREADY_SIGNED_IN = 'ALREADRY_SALREADY_SIGNED_IN';
 
 const faqList = [
 	{

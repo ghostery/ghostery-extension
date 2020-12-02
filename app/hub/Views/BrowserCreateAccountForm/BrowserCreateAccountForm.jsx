@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { ToggleCheckbox } from '../../../shared-components';
-import I18nWithLink from '../../../shared-components/I18nWithLink';
 
 const promoString = `${t('hub_browser_send_me')} Ghostery ${t('hub_browser_updates_and_promotions')}`;
 
@@ -41,22 +40,16 @@ const BrowserCreateAccountForm = (props) => {
 		legalConsentNotCheckedError,
 		handleLegalConsentCheckboxChange,
 		isUpdatesChecked,
-		isUpdatesNotCheckedError,
 		handleInputChange,
 		handleUpdatesCheckboxChange,
 		handleSubmit,
 	} = props;
-
-	console.log('BrowserCreateAccountForm props: ', props);
 
 	const emailInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
 		error: emailError,
 	});
 	const confirmInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
 		error: confirmEmailError,
-	});
-	const updatesCheckboxInputLabelClassNames = ClassNames('BrowserCreateAccountForm__promoString clickable', {
-		error: isUpdatesNotCheckedError,
 	});
 	const passwordInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
 		error: passwordInvalidError || passwordLengthError,
@@ -203,7 +196,7 @@ const BrowserCreateAccountForm = (props) => {
 							onChange={handleUpdatesCheckboxChange}
 						/>
 						<span
-							className={updatesCheckboxInputLabelClassNames}
+							className="BrowserCreateAccountForm__promoString"
 							onClick={handleUpdatesCheckboxChange}
 							dangerouslySetInnerHTML={{ __html: promoString }}
 						/>

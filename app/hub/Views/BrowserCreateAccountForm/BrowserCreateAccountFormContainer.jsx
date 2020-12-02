@@ -201,6 +201,8 @@ class CreateAccountFormContainer extends Component {
 				handleInputChange={this._handleInputChange}
 				handleLegalConsentCheckboxChange={this._handleLegalConsentCheckboxChange}
 				handleSubmit={this._handleCreateAccountAttempt}
+				isUpdatesChecked={isUpdatesChecked}
+				handleUpdatesCheckboxChange={this._handleUpdatesCheckboxChange}
 			/>
 		);
 	}
