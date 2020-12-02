@@ -31,6 +31,7 @@ import CreateAccountView from './Views/CreateAccountView';
 import ForgotPasswordView from '../shared-components/ForgotPassword/ForgotPasswordContainer';
 import LogInView from './Views/LogInView';
 import UpgradePlanView from './Views/UpgradePlanView';
+import BrowserSuccessView from './Views/BrowserSuccessView';
 
 const store = createStore();
 
@@ -43,7 +44,7 @@ const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
  */
 const Hub = () => (
 	<AppView>
-		<Route exact path="/" component={UpgradePlanView} />
+		<Route exact path="/" component={BrowserSuccessView} />
 		<Route exact path="/home" component={ah ? UpgradePlanView : HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
