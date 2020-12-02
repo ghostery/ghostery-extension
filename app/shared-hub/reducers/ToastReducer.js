@@ -1,5 +1,5 @@
 /**
- * Reducer used in the Ghostery Browser Hub App View
+ * Toast reducer used by the Hubs
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,19 +11,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO consider whether to factor out the reducer case implementations to shared-hub
-
-import SET_TOAST from './AppViewConstants';
+import SET_TOAST from '../constants/ToastConstants';
 
 const initialState = {};
 
-function AppViewReducer(state = initialState, action) {
+function ToastReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_TOAST: {
 			const { toastMessage, toastClass } = action.data;
 			return {
 				...state,
-				app: {
+				toast: {
 					toastMessage,
 					toastClass
 				}
@@ -33,4 +31,4 @@ function AppViewReducer(state = initialState, action) {
 	}
 }
 
-export default AppViewReducer;
+export default ToastReducer;

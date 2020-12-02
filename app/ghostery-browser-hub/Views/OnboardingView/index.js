@@ -11,9 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+
+import { buildReduxHOC } from '../../../shared-hub/utils';
 
 import OnboardingViewContainer from './OnboardingViewContainer';
 import OnboardingViewReducer from './OnboardingViewReducer';
@@ -22,37 +22,21 @@ import {
 	setAdBlock,
 	setAntiTracking,
 	setSmartBlocking,
-} from '../../../shared-hub/actions/AntiSuiteViewActions';
+} from '../../../shared-hub/actions/AntiSuiteActions';
+
 import setSetupComplete from '../OnboardingViews/SetupDoneView/SetupDoneViewActions';
 
-/**
- * Map redux store state properties to the component's own properties.
- * @param  {Object} state    entire Redux store's state
- * @return {function}        this function returns a plain object, which will be merged into the component's props
- * @memberof HubContainers
- */
-const mapStateToProps = state => ({ ...state.setup, ...state.account });
+export const reducer = OnboardingViewReducer;
 
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- * @memberof SetupContainers
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators({
+export default withRouter(buildReduxHOC(
+	['setup', 'account'],
+	{
 		...OnboardingViewActions,
 		setBlockingPolicy,
 		setAntiTracking,
 		setAdBlock,
 		setSmartBlocking,
 		setSetupComplete
-	}, dispatch),
-});
-
-export const reducer = OnboardingViewReducer;
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OnboardingViewContainer));
-
-
-
+	},
+	OnboardingViewContainer
+));

@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Ghostery Browser Hub App View
+ * Ghostery Browser Hub Welcome View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,9 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { buildReduxHOC } from '../../../shared-hub/utils';
+import React from 'react';
 
-import AppView from './AppView';
-import setToast from '../../../shared-hub/actions/ToastActions';
+const WelcomeView = () => <h1>Step 5: Welcome View</h1>;
 
-export default buildReduxHOC(['toast'], { setToast }, AppView);
+export default WelcomeView;

@@ -1,5 +1,5 @@
 /**
- * Ghostery Browser Hub App View Constants
+ * Anti Suite Constants for use by both Hubs
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,9 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO consider whether this should also be factored out
-
-// Ghostery Browser Hub App View
-const SET_TOAST = 'SET_TOAST';
-
-export default SET_TOAST;
+export const SET_ANTI_TRACKING = 'SET_ANTI_TRACKING';
+export const SET_AD_BLOCK = 'SET_AD_BLOCK';
+export const SET_SMART_BLOCK = 'SET_SMART_BLOCK';

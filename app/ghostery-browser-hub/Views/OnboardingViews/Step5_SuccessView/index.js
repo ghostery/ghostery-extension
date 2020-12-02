@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Ghostery Browser Hub App View
+ * Point of entry index.js file for Ghostery Browser Hub Success View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,9 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { buildReduxHOC } from '../../../shared-hub/utils';
+import SuccessView from './SuccessView';
 
-import AppView from './AppView';
-import setToast from '../../../shared-hub/actions/ToastActions';
-
-export default buildReduxHOC(['toast'], { setToast }, AppView);
+export default SuccessView;

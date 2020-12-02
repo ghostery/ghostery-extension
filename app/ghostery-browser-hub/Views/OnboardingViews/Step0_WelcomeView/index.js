@@ -1,5 +1,5 @@
 /**
- * Ghostery Browser Hub App View Action creators
+ * Point of entry index.js file for Ghostery Browser Hub Welcome View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,11 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { SET_TOAST } from './AppViewConstants';
+import WelcomeView from './WelcomeView';
 
-export default function setToast(data) {
-	return {
-		type: SET_TOAST,
-		data,
-	};
-}
+export default WelcomesView;

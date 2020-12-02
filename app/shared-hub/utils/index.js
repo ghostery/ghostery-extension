@@ -66,6 +66,7 @@ const createStoreFactory = function(reducers, middlewares) {
  * @param {*}				baseComponent	The React component you want to wrap.
  *
  * @returns {*}								The created HOC.
+ *
  */
 function buildReduxHOC(stateKeys, actionCreators, baseComponent) {
 	const mapStateToProps = (stateKeys === null)

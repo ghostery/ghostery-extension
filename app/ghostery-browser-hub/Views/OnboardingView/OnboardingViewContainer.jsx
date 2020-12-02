@@ -63,9 +63,9 @@ class OnboardingViewContainer extends Component {
 		const { actions } = this.props;
 		actions.setSetupStep({ setup_step: 8 });
 		actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
-		actions.setAntiTracking({ enable_anti_tracking: true });
-		actions.setAdBlock({ enable_ad_block: true });
-		actions.setSmartBlocking({ enable_smart_block: true });
+		actions.setAntiTracking({ enable_anti_tracking: true }); // covered
+		actions.setAdBlock({ enable_ad_block: true }); // covered
+		actions.setSmartBlocking({ enable_smart_block: true }); // covered
 	}
 
 	/**
