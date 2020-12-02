@@ -61,6 +61,9 @@ const BrowserCreateAccountForm = (props) => {
 	const passwordInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
 		error: passwordInvalidError || passwordLengthError,
 	});
+	const legalConsentClassNames = ClassNames('BrowserCreateAccountForm__legalConsentCheckedLabel', {
+		error: legalConsentNotCheckedError
+	});
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -216,14 +219,11 @@ const BrowserCreateAccountForm = (props) => {
 							className="ToggleCheckbox--flush-left"
 							onChange={handleLegalConsentCheckboxChange}
 						/>
-						<label htmlFor="legalConsentChecked">
-							<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
-						</label>
-						{/* <span
-							className={updatesCheckboxInputLabelClassNames}
-							onClick={handleUpdatesCheckboxChange}
-							dangerouslySetInnerHTML={{ __html: promoString }}
-						/> */}
+						<span
+							className={legalConsentClassNames}
+							onClick={handleLegalConsentCheckboxChange}
+							dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }}
+						/>
 					</div>
 				</div>
 				<div className="columns small-12 medium-2" />

@@ -32,6 +32,13 @@
 		margin-top: 0;
 	}
 }
+.BrowserCreateAccountForm__legalConsentCheckedLabel {
+	font-size: 14px;
+
+	&.error {
+		color: red;
+	}
+}
 .BrowserCreateAccountForm__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
