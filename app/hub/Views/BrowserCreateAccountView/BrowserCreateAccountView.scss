@@ -221,6 +221,10 @@ $color-create-account-form-error-red: #e74055;
 	max-width: 607px;
 	font-size: 16px;
 	color: #4a4a4a;
+	@include breakpoint(small down) {
+		margin: 16px auto 0 auto;
+		width: 245px;
+	}
 }
 .BrowserCreateAccountView__privacyPolicyLink {
 	font-size: 16px;
@@ -228,6 +232,8 @@ $color-create-account-form-error-red: #e74055;
 	text-decoration: underline;
 	cursor: pointer;
 	@include breakpoint(small down) {
+		margin: auto;
+		max-width: 271px;
 		text-align: center;
 	}
 }
