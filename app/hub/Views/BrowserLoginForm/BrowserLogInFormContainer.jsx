@@ -146,7 +146,7 @@ class BrowserLogInFormContainer extends Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	_handleForgotPassword = throttle(this._unthrottledHandleForgotPassword, 10000)
+	_handleForgotPassword = throttle(this._unthrottledHandleForgotPassword, 3000)
 
 	/**
 	 * React's required render function. Returns JSX
