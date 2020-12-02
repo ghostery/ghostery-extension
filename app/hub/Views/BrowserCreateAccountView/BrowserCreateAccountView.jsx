@@ -69,7 +69,10 @@ const renderFAQListItem = (icon, label, description) => (
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof HubComponents
  */
-const BrowserCreateAccountView = () => {
+const BrowserCreateAccountView = (props) => {
+	const { user } = props;
+	const email = user && user.email;
+
 	const [expanded, setExpanded] = useState(false);
 	const [view, setView] = useState(SIGN_IN);
 
@@ -88,7 +91,15 @@ const BrowserCreateAccountView = () => {
 		setExpanded(!expanded);
 	};
 
-	return (
+	return (user ? (
+		<div className="BrowserCreateAccountView__alreadySignedIn">
+			<div className="BrowserCreateAccountView__title">{t('hub_browser_you_are_signed_in_as')}</div>
+			<div className="BrowserCreateAccountView__email">{user.email}</div>
+			<div className="BrowserCreateAccountView__ctaButtonContainer">
+				<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('next')}</button>
+			</div>
+		</div>
+	) : (
 		<div className="BrowserCreateAccountView">
 			{view === CREATE_ACCOUNT && (
 				<div className="BrowserCreateAccountView__title">{t('hub_browser_create_a_ghostery_account')}</div>
@@ -136,7 +147,7 @@ const BrowserCreateAccountView = () => {
 				<BrowserLogInForm />
 			)}
 		</div>
-	);
+	));
 };
 
 export default BrowserCreateAccountView;

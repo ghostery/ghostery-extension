@@ -1791,6 +1791,9 @@
 	"hub_browser_create_an_account": {
 		"message": "Create an account."
 	},
+	"hub_browser_you_are_signed_in_as": {
+		"message": "You are signed in as"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},

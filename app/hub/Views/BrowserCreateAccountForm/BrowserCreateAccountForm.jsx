@@ -237,7 +237,6 @@ BrowserCreateAccountForm.propTypes = {
 	firstName: PropTypes.string.isRequired,
 	lastName: PropTypes.string.isRequired,
 	isUpdatesChecked: PropTypes.bool.isRequired,
-	isUpdatesNotCheckedError: PropTypes.bool.isRequired,
 	password: PropTypes.string.isRequired,
 	confirmPassword: PropTypes.string.isRequired,
 	passwordInvalidError: PropTypes.bool.isRequired,
