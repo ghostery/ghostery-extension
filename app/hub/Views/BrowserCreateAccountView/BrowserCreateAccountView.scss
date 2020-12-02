@@ -94,6 +94,10 @@ $color-create-account-form-error-red: #e74055;
 	@include breakpoint(small down) {
 		margin: 38px auto 0 auto;
 		text-align: center;
+
+		&:nth-child(2) {
+			margin: 0;
+		}
 	}
 }
 .BrowserCreateAccountView--addMarginSide {
