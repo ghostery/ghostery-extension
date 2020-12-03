@@ -1,5 +1,5 @@
 /**
- * Setup LIfecycle Actions for the Hubs
+ * Setup Lifecycle Actions for the Hubs
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -15,11 +15,11 @@ import { makeDeferredDispatcher } from '../utils';
 import {
 	INIT_SETUP_PROPS,
 	SET_SETUP_STEP,
-	SET_SETUP_NAVIGATION
+	SET_SETUP_NAVIGATION,
+	SET_SETUP_COMPLETE
 } from '../constants/SetupLifecycleConstants';
-import { SET_SETUP_COMPLETE } from '../../hub/Views/SetupView/SetupViewConstants';
 
-export function initOnboardingProps(data) {
+export function initSetupProps(data) {
 	return {
 		type: INIT_SETUP_PROPS,
 		data,

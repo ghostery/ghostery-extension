@@ -1,5 +1,5 @@
 /**
- * Anti Suite reducer for the Hubs
+ * Reducer used throughout the Onboarding View's flow
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

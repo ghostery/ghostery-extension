@@ -16,21 +16,18 @@ import { withRouter } from 'react-router-dom';
 import { buildReduxHOC } from '../../../shared-hub/utils';
 
 import OnboardingViewContainer from './OnboardingViewContainer';
-import OnboardingViewReducer from './OnboardingViewReducer';
 import {
 	initSetupProps,
 	setSetupStep,
 	setSetupNavigation,
+	setSetupComplete
 } from '../../../shared-hub/actions/SetupLifecycleActions';
 import {
 	setAdBlock,
 	setAntiTracking,
-	setSmartBlocking,
+	setSmartBlocking
 } from '../../../shared-hub/actions/AntiSuiteActions';
 import setBlockingPolicy from '../../../shared-hub/actions/BlockingPolicyActions';
-import setSetupComplete from '../OnboardingViews/SetupDoneView/SetupDoneViewActions';
-
-export const reducer = OnboardingViewReducer;
 
 export default withRouter(buildReduxHOC(
 	['setup', 'account'],
@@ -38,11 +35,13 @@ export default withRouter(buildReduxHOC(
 		initSetupProps,
 		setSetupStep,
 		setSetupNavigation,
+		setSetupComplete,
+
 		setBlockingPolicy,
+
 		setAntiTracking,
 		setAdBlock,
 		setSmartBlocking,
-		setSetupComplete
 	},
 	OnboardingViewContainer
 ));

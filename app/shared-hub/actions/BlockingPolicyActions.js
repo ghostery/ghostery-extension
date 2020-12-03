@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Ghostery Browser Hub App View
+ * Blocking Policy Action Creators for the Hubs to use
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,9 +11,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { buildReduxHOC } from '../../../shared-hub/utils';
+import { makeDeferredDispatcher } from '../utils';
+import SET_BLOCKING_POLICY from '../constants/BlockingPolicyConstants';
 
-import AppView from './AppView';
-import setToast from '../../../shared-hub/actions/ToastActions';
+const setBlockingPolicy =
+	actionData => makeDeferredDispatcher(SET_BLOCKING_POLICY, actionData);
 
-export default buildReduxHOC(['app'], { setToast }, AppView);
+export default setBlockingPolicy;

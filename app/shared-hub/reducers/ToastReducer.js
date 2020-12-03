@@ -21,7 +21,7 @@ function ToastReducer(state = initialState, action) {
 			const { toastMessage, toastClass } = action.data;
 			return {
 				...state,
-				toast: {
+				app: {
 					toastMessage,
 					toastClass
 				}
