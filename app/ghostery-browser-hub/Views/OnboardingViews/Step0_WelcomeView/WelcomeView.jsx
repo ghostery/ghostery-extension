@@ -13,6 +13,18 @@
 
 import React from 'react';
 
-const WelcomeView = () => <h1>Step 5: Welcome View</h1>;
+/**
+ * A Functional React component for rendering the Browser Welcome View
+ * @return {JSX} JSX for rendering the Browser Welcome View of the Hub app
+ * @memberof HubComponents
+ */
+const WelcomeView = () => (
+	<div className="WelcomeView__container">
+		<div className="WelcomeView__title">{t('ghostery_browser_hub_onboarding_welcome')}</div>
+		<div className="WelcomeView__subtitle">{t('ghostery_browser_hub_onboarding_lets_begin')}</div>
+		<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
+		<button className="WelcomeView__ctaButton" type="button">{t('ghostery_browser_hub_onboarding_lets_do_this')}</button>
+	</div>
+);
 
 export default WelcomeView;

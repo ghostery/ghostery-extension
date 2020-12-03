@@ -13,4 +13,4 @@
 
 import WelcomeView from './WelcomeView';
 
-export default WelcomesView;
+export default WelcomeView;
