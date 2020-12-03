@@ -1,18 +1,18 @@
-.BrowserSuccessView__container {
+.SuccessView__container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 }
 
-.BrowserSuccessView__title {
+.SuccessView__title {
 	margin-top: 125px;
 	font-size: 24px;
 	font-weight: 600;
 	line-height: 2.33;
 }
 
-.BrowserSuccessView__subtitle {
+.SuccessView__subtitle {
 	margin-bottom: 47px;
 	width: 392px;
 	font-size: 18px;
@@ -20,13 +20,13 @@
 	text-align: center;
 }
 
-.BrowserSuccessView__ghosterySuite {
+.SuccessView__ghosterySuite {
 	margin-bottom: 77px;
 	height: 298px;
 	width: 545px;
 }
 
-.BrowserSuccessView__ctaButton {
+.SuccessView__ctaButton {
 	display: flex;
 	justify-content: center;
 	margin: auto;

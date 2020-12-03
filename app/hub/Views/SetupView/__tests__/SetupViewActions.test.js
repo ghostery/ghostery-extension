@@ -45,7 +45,7 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 	}
 }));
 
-describe('app/hub/Views/SetupView/ actions', () => {
+describe('app/hub/Views/OnboardingView/ actions', () => {
 	test('getSetupShowWarningOverride action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
