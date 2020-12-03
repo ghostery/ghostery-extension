@@ -377,7 +377,6 @@ class Metrics {
 	 * @return {string} The Product ID
 	 */
 	static _getProductID() {
-		// Return 'gd' if the user is using the Ghostery Browser, 'gbe' otherwise
 		if (BROWSER_INFO.token === 'gd') return 'gd';
 		return 'gbe';
 	}
