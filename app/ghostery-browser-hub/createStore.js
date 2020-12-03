@@ -15,7 +15,7 @@
 
 import thunk from 'redux-thunk';
 
-import { createStoreFactory } from '../shared-hub/utils/index';
+import { makeStoreCreator } from '../shared-hub/utils/index';
 
 import toast from '../shared-hub/reducers/ToastReducer';
 import antiSuite from '../shared-hub/reducers/AntiSuiteReducer';
@@ -31,4 +31,4 @@ const reducers = {
 	settings
 };
 
-export default () => createStoreFactory(reducers, [thunk]);
+export default makeStoreCreator(reducers, [thunk]);

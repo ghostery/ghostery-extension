@@ -11,34 +11,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { log, sendMessageInPromise } from '../utils';
+import { makeDeferredDispatcher } from '../utils';
 import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
 	SET_SMART_BLOCK
 } from '../constants/AntiSuiteConstants';
 
-function _smipFactory(action, actionData) {
-	return function(dispatch) {
-		return sendMessageInPromise(action, actionData).then((data) => {
-			dispatch({
-				type: action,
-				data,
-			});
-		}).catch((err) => {
-			log(`${action} action creator error`, err);
-		});
-	};
-}
+export const setAntiTracking =
+		actionData => makeDeferredDispatcher(SET_ANTI_TRACKING, actionData);
 
-export function setAntiTracking(actionData) {
-	return _smipFactory(SET_ANTI_TRACKING, actionData);
-}
+export const setAdBlock =
+		actionData => makeDeferredDispatcher(SET_AD_BLOCK, actionData);
 
-export function setAdBlock(actionData) {
-	return _smipFactory(SET_AD_BLOCK, actionData);
-}
-
-export function setSmartBlocking(actionData) {
-	return _smipFactory(SET_SMART_BLOCK, actionData);
-}
+export const setSmartBlocking =
+		actionData => makeDeferredDispatcher(SET_SMART_BLOCK, actionData);

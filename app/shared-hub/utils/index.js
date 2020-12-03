@@ -36,17 +36,17 @@ const sendMessage = function(name, message) {
 /**
  * @since 8.5.5
  *
- * Build store using provided reducers and middlewares.
+ * Create a function that uses redux's createStore to make a store with the supplied reducers and middlewares.
  *
  * @param	{Object} reducers			The reducers to combine.
  * @param	{Array}	 [middlewares]		(Optional) The middlewares to apply, in the order they should be applied.
- * @return 	{Object}					The store created by calling redux's createStore with the provided reducers and middlewares.
- * @memberof Utils
+ *
+ * @return 	{Function}					The function that will create the store when called.
  */
-const createStoreFactory = function(reducers, middlewares) {
+const makeStoreCreator = function(reducers, middlewares) {
 	const reducer = combineReducers(reducers);
 
-	return createStore(
+	return () => createStore(
 		reducer,
 		compose(
 			applyMiddleware(...middlewares),
@@ -54,6 +54,33 @@ const createStoreFactory = function(reducers, middlewares) {
 		),
 	);
 };
+
+/**
+ * @since 8.5.5
+ *
+ * Creates and returns a function that sends a Promise-wrapped message to the background,
+ * then dispatches the supplied action with the resolved data.
+ *
+ * @param {String} 	action			The action to dispatch when the Promise resolves.
+ * @param {*} 		actionData		The data to send to the background.
+ *
+ * @returns {Function}				Calling the returned function sends a message with the supplied
+ * 									action and actionData to the background in a Promise, and dispatches
+ * 									the action with the returned data if the Promise resolves. It prints
+ * 									an error if the Promise rejects.
+ */
+function makeDeferredDispatcher(action, actionData) {
+	return function(dispatch) {
+		return sendMessageInPromise(action, actionData).then((data) => {
+			dispatch({
+				type: action,
+				data,
+			});
+		}).catch((err) => {
+			log(`${action} action creator error`, err);
+		});
+	};
+}
 
 /**
  * @since 8.5.5
@@ -84,7 +111,8 @@ function buildReduxHOC(stateKeys, actionCreators, baseComponent) {
 
 export {
 	buildReduxHOC,
-	createStoreFactory,
+	makeStoreCreator,
+	makeDeferredDispatcher,
 	log,
 	sendMessage,
 	sendMessageInPromise

@@ -17,10 +17,12 @@ import OnboardingView from './OnboardingView';
 import { BLOCKING_POLICY_RECOMMENDED } from './OnboardingViewConstants';
 
 // Component Views
+import WelcomeView from '../OnboardingViews/Step0_WelcomeView';
 import LoginView from '../OnboardingViews/Step1_LoginView';
 import BlockSettingsView from '../OnboardingViews/Step2_BlockSettingsView';
 import ChooseDefaultSearchView from '../OnboardingViews/Step3_ChooseDefaultSearchView';
 import ChoosePlanView from '../OnboardingViews/Step4_ChoosePlanView';
+import SuccessView from '../OnboardingViews/Step5_SuccessView';
 
 /**
  * @class Implement the Onboarding View for the Ghostery Browser Hub
@@ -75,6 +77,11 @@ class OnboardingViewContainer extends Component {
 	render() {
 		const { sendMountActions } = this.state;
 		const steps = [
+			{
+				index: 0,
+				path: '/onboarding/0',
+				bodyComponent: WelcomeView,
+			}
 			{
 				index: 1,
 				path: '/onboarding/1',

@@ -14,7 +14,7 @@
 import {
 	SET_AD_BLOCK,
 	SET_ANTI_TRACKING,
-	SET_SMART_BLOCK,
+	SET_SMART_BLOCK
 } from '../constants/AntiSuiteConstants';
 
 const initialState = {};
