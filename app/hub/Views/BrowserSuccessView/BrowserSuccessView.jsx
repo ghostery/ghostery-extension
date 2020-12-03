@@ -22,7 +22,7 @@ const BrowserSuccessView = () => (
 	<div className="BrowserSuccessView__container">
 		<div className="BrowserSuccessView__title">{t('hub_browser_yay_youre_all_set')}</div>
 		<div className="BrowserSuccessView__subtitle">{`${t('hub_browser_start_browsing_the_web_with')} Ghostery`}</div>
-		<img className="BrowserSuccessView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
+		<img className="BrowserSuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
 		<button className="BrowserSuccessView__ctaButton" type="button">{t('hub_browser_lets_search')}</button>
 	</div>
 );
