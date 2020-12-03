@@ -22,7 +22,7 @@ import PlanView from './PlanView';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => ({ ...state.upgrade, ...state.account });
+const mapStateToProps = state => ({ ...state.account });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.

@@ -15,6 +15,7 @@ import React, { Fragment } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import RadioButton from '../../../panel/components/BuildingBlocks/RadioButton';
+import globals from '../../../../src/classes/Globals';
 
 const BASIC = 0;
 const PLUS = 1;
@@ -258,11 +259,15 @@ class PlanView extends React.Component {
 	};
 
 	render() {
-		const shouldShowSearchPromo = false;
-		const { user } = this.props;
+		// Case off of if ghostery search was chosen in previous step
+		const { user, shouldShowSearchPromo } = this.props;
+		const { selectedPlan } = this.state;
+
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
+		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus`;
+		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium`;
 		return (
 			<div>
 				<div className="PlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
@@ -270,7 +275,7 @@ class PlanView extends React.Component {
 				{shouldShowSearchPromo && (
 					<Fragment>
 						{searchPromo()}
-						<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_start_trial')}</button>
+						<a className="PlanView__searchCTAButton" href={`${globals.CHECKOUT_BASE_URL}/plus`} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
 						<div className="PlanView__seeAllPlans" onClick={this.scrollToPlans}>{t('hub_plan_see_all_plans')}</div>
 						<div className="PlanView__arrowDown" onClick={this.scrollToPlans} />
 					</Fragment>
@@ -284,16 +289,36 @@ class PlanView extends React.Component {
 					)}
 					{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
 				</div>
-				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_start_trial')}</button>
+				{(selectedPlan === BASIC || selectedPlan === -1) && (
+					// Change to route to next page
+					<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+				)}
+				{selectedPlan === PREMIUM && (
+					<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+				)}
+				{selectedPlan === PLUS && (
+					<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+				)}
 			</div>
 		);
 	}
 }
 
 // PropTypes ensure we pass required props of the correct type
-PlanView.propTypes = {};
+PlanView.propTypes = {
+	user: PropTypes.shape({
+		plusAccess: PropTypes.bool,
+		premiumAccess: PropTypes.bool,
+	}),
+	shouldShowSearchPromo: PropTypes.bool.isRequired,
+};
 
-// Default props used on the Home View
-PlanView.defaultProps = {};
+// Default props used in the Plus View
+PlanView.defaultProps = {
+	user: {
+		plusAccess: false,
+		premiumAccess: false,
+	},
+};
 
 export default PlanView;
