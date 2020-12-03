@@ -50,15 +50,19 @@ const basicCard = (checked, handleClick) => {
 				<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 				<div className="PlanView__valuePropList basic">
 					<div className="PlanView__cardSubCopy">
+						<span className="check blue" />
 						{t('hub_plan_private_search')}
 					</div>
 					<div className="PlanView__cardSubCopy">
+						<span className="check blue" />
 						{t('hub_plan_tracker_protection')}
 					</div>
 					<div className="PlanView__cardSubCopy">
+						<span className="check blue" />
 						{t('hub_plan_speedy_page_loads')}
 					</div>
 					<div className="PlanView__cardSubCopy">
+						<span className="check blue" />
 						{t('hub_plan_intelligence_technology')}
 					</div>
 				</div>

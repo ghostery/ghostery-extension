@@ -56,7 +56,7 @@
 .PlanView__searchCTAButton {
 	display: flex;
 	justify-content: center;
-	margin: 48px auto 0 auto;
+	margin: 48px auto 48px auto;
 	height: 44px;
 	width: 162px;
 	padding: 7.7px 14px;
@@ -172,9 +172,6 @@
 		justify-content: center;
 		align-items: center;
 
-		@include breakpoint($medium-large-breakpoint down) {
-			background-color: #FFF;
-		}
 		.ghostery-free-image {
 			width: 55px;
 			height: 65px;
@@ -188,10 +185,6 @@
 			width: 250px;
 			height: 85px;
 			background-image: linear-gradient(to right, rgba(240,174,133,.25), rgba(241,216,158,.25));
-			@include breakpoint($medium-large-breakpoint down) {
-				background-image: none;
-				background-color: #FFF;
-			}
 		.ghostery-plus-image {
 			margin: auto;
 			width: 225px;
@@ -216,9 +209,6 @@
 		width: 250px;
 		height: 85px;
 		background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
-		@include breakpoint($medium-large-breakpoint down) {
-			background-image: none;
-		}
 	}
 	.button {
 		margin-top: 10px;
@@ -279,7 +269,7 @@
 	width: 174px;
 
 	&.basic {
-		width: 124px;
+		width: 145px;
 	}
 }
 .PlanView__cardSubCopy {
