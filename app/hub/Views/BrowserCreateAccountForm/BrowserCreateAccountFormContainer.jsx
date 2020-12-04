@@ -153,7 +153,6 @@ class CreateAccountFormContainer extends Component {
 		});
 
 		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid || confirmPasswordError) {
-			console.log('password != confirm password');
 			return;
 		}
 		const { actions } = this.props;
@@ -163,14 +162,15 @@ class CreateAccountFormContainer extends Component {
 		});
 		actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 			if (success) {
-				actions.getUser();
+				actions.getUser().then(() => {
+					if (isUpdatesChecked) actions.handleEmailPreferencesCheckboxChange('global', isUpdatesChecked);
+				});
 				// Toggle legal consent checked here
 				actions.setToast({
 					toastMessage: t('hub_create_account_toast_success'),
 					toastClass: 'success'
 				});
 				// Route to next screen
-				if (isUpdatesChecked) actions.handleEmailPreferencesCheckboxChange();
 			} else {
 				actions.setToast({
 					toastMessage: t('hub_create_account_toast_error'),

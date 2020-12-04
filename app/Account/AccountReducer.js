@@ -120,15 +120,12 @@ export default (state = initialState, action) => {
 			};
 		}
 		case ACCOUNT_DATA_EMAIL_PREFERENCES_CHECKBOX_CHANGE: {
-			console.log('test');
 			const { name, checked } = action.payload;
 			let emailPreferences;
 			if (name === 'global') {
-				console.log('inside global');
 				emailPreferences = { ...state.user.emailPreferences, ...{ global: checked } };
 			}
 			const user = { ...state.user, ...{ emailPreferences } };
-			console.log('state user: ', { ...state, ...{ user } });
 			return { ...state, ...{ user } };
 		}
 
