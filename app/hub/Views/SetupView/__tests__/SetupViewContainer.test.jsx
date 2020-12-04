@@ -18,12 +18,12 @@ import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
 
 // Mock Necessary Imports
-jest.mock('../../SetupViews/SetupBlockingView', () => props => <div>Mock Setup Blocking View</div>);
-jest.mock('../../SetupViews/SetupBlockingDropdown', () => props => <div>Mock Setup Blocking Dropdown</div>);
-jest.mock('../../SetupViews/SetupAntiSuiteView', () => props => <div>Mock Setup Anti-Suite View</div>);
-jest.mock('../../SetupViews/SetupHumanWebView', () => props => <div>Mock Setup Human Web View</div>);
-jest.mock('../../SetupViews/SetupDoneView', () => props => <div>Mock Setup Done View</div>);
-jest.mock('../../SetupViews/SetupNavigation', () => props => <div>Mock Setup Navigation</div>);
+jest.mock('../../OnboardingViews/SetupBlockingView', () => props => <div>Mock Setup Blocking View</div>);
+jest.mock('../../OnboardingViews/SetupBlockingDropdown', () => props => <div>Mock Setup Blocking Dropdown</div>);
+jest.mock('../../OnboardingViews/SetupAntiSuiteView', () => props => <div>Mock Setup Anti-Suite View</div>);
+jest.mock('../../OnboardingViews/SetupHumanWebView', () => props => <div>Mock Setup Human Web View</div>);
+jest.mock('../../OnboardingViews/SetupDoneView', () => props => <div>Mock Setup Done View</div>);
+jest.mock('../../OnboardingViews/SetupNavigation', () => props => <div>Mock Setup Navigation</div>);
 
 // Import Components
 import SetupViewContainer from '../SetupViewContainer';
@@ -49,7 +49,7 @@ const actions = {
 	setSetupComplete: () => {},
 };
 
-describe('app/hub/Views/SetupView container', () => {
+describe('app/hub/Views/OnboardingView container', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup view container is rendered correctly on the Blocking step', () => {
 			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];

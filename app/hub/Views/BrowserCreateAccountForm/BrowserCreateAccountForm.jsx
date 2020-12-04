@@ -17,7 +17,7 @@ import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { ToggleCheckbox } from '../../../shared-components';
 
-const promoString = `${t('hub_browser_send_me')} Ghostery ${t('hub_browser_updates_and_promotions')}`;
+const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${t('ghostery_browser_hub_onboarding_updates_and_promotions')}`;
 
 /**
  * A Functional React component for rendering the Browser Create Account View

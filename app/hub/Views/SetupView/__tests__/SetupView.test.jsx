@@ -19,8 +19,8 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 
 // Mock Necessary Imports
-jest.mock('../../SetupViews/SetupHeader', () => props => <div>Mock Setup Header</div>);
-jest.mock('../../SetupViews/SetupNavigation', () => props => <div>Mock Setup Navigation</div>);
+jest.mock('../../OnboardingViews/SetupHeader', () => props => <div>Mock Setup Header</div>);
+jest.mock('../../OnboardingViews/SetupNavigation', () => props => <div>Mock Setup Navigation</div>);
 
 // Import Components
 import SetupView from '../SetupView';
@@ -33,7 +33,7 @@ const ExampleComponent = props => (
 	<div>example component</div>
 );
 
-describe('app/hub/Views/SetupView component', () => {
+describe('app/hub/Views/OnboardingView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup view is rendered correctly on first route', () => {
 			const initialState = {
