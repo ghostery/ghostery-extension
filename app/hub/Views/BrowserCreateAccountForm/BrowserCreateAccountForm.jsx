@@ -78,8 +78,10 @@ const BrowserCreateAccountForm = (props) => {
 						placeholder="example@mail.com"
 					/>
 					{emailError && (
-						<div className="BrowserCreateAccountForm__inputError">
-							{t('please_enter_a_valid_email')}
+						<div className="BrowserCreateAccountForm__inputErrorContainer">
+							<div className="BrowserCreateAccountForm__inputError">
+								{t('please_enter_a_valid_email')}
+							</div>
 						</div>
 					)}
 				</div>
@@ -98,8 +100,10 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 					{confirmEmailError && (
-						<div className="BrowserCreateAccountForm__inputError">
-							{t('your_email_do_not_match')}
+						<div className="BrowserCreateAccountForm__inputErrorContainer">
+							<div className="BrowserCreateAccountForm__inputError">
+								{t('your_email_do_not_match')}
+							</div>
 						</div>
 					)}
 				</div>
@@ -152,13 +156,17 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 					{passwordInvalidError && (
-						<div className="BrowserCreateAccountForm__inputError">
-							{t('hub_create_account_label_password_invalid')}
+						<div className="BrowserCreateAccountForm__inputErrorContainer">
+							<div className="BrowserCreateAccountForm__inputError">
+								{t('hub_create_account_label_password_invalid')}
+							</div>
 						</div>
 					)}
 					{passwordLengthError && (
-						<div className="BrowserCreateAccountForm__inputError">
-							{t('hub_create_account_label_password_invalid_length')}
+						<div className="BrowserCreateAccountForm__inputErrorContainer">
+							<div className="BrowserCreateAccountForm__inputError">
+								{t('hub_create_account_label_password_invalid_length')}
+							</div>
 						</div>
 					)}
 				</div>
@@ -177,8 +185,10 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 					{confirmPasswordError && (
-						<div className="BrowserCreateAccountForm__inputError">
-							{t('hub_create_account_confirm_password_do_not_match')}
+						<div className="BrowserCreateAccountForm__inputErrorContainer">
+							<div className="BrowserCreateAccountForm__inputError">
+								{t('hub_create_account_confirm_password_do_not_match')}
+							</div>
 						</div>
 					)}
 				</div>

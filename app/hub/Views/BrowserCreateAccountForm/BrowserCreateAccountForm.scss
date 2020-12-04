@@ -9,6 +9,7 @@
 	color: #4a4a4a;
 }
 .BrowserCreateAccountForm__inputBox {
+	margin-bottom: 20px;
 	font-size: 14;
 	line-height: 24px;
 	color: #4a4a4a;
@@ -23,11 +24,16 @@
 	}
 }
 .BrowserCreateAccountForm__inputBox.error {
-	margin-bottom: 8px;
 	border-color: $color-create-account-form-error-red;
 }
-.BrowserCreateAccountForm__inputError {
-	color: red;
+.BrowserCreateAccountForm__inputErrorContainer {
+	position: relative;
+
+	> .BrowserCreateAccountForm__inputError {
+		position: absolute;
+		margin-top: -15px;
+		color: red;
+	}
 }
 .BrowserCreateAccountForm__promoString {
 	font-size: 14px;
