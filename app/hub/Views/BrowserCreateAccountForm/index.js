@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import BrowserCreateAccountFormContainer from './BrowserCreateAccountFormContainer';
-import { register, getUser } from '../../../Account/AccountActions';
+import { register, getUser, handleEmailPreferencesCheckboxChange } from '../../../Account/AccountActions';
 import { setToast } from '../AppView/AppViewActions';
 
 /**
@@ -36,7 +36,8 @@ const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators({
 		setToast,
 		register,
-		getUser
+		getUser,
+		handleEmailPreferencesCheckboxChange
 	}, dispatch),
 });
 

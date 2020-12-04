@@ -17,7 +17,8 @@ import {
 	validateEmail,
 	validatePassword,
 	validateEmailsMatch,
-	validateConfirmEmail
+	validateConfirmEmail,
+	validatePasswordsMatch
 } from '../../../panel/utils/utils';
 import BrowserCreateAccountForm from './BrowserCreateAccountForm';
 
@@ -42,6 +43,8 @@ class CreateAccountFormContainer extends Component {
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
+			confirmPassword: '',
+			confirmPasswordError: '',
 			validateInput: false,
 		};
 
@@ -91,6 +94,14 @@ class CreateAccountFormContainer extends Component {
 				});
 				break;
 			}
+			case 'confirmPassword': {
+				const { password } = this.state;
+				const confirmPasswordIsValid = value && validatePasswordsMatch(password, value);
+				this.setState({
+					confirmPasswordError: !confirmPasswordIsValid,
+				});
+				break;
+			}
 			default: break;
 		}
 	}
@@ -122,12 +133,15 @@ class CreateAccountFormContainer extends Component {
 			lastName,
 			legalConsentChecked,
 			password,
+			confirmPassword,
+			isUpdatesChecked,
 		} = this.state;
 		const emailIsValid = email && validateEmail(email);
 		const confirmIsValid = confirmEmail && validateConfirmEmail(email, confirmEmail);
 		const passwordIsValid = password && validatePassword(password);
 		const invalidChars = !passwordIsValid && password.length >= 8 && password.length <= 50;
 		const invalidLength = !passwordIsValid && !invalidChars;
+		const confirmPasswordError = password !== confirmPassword;
 
 		this.setState({
 			emailError: !emailIsValid,
@@ -138,7 +152,8 @@ class CreateAccountFormContainer extends Component {
 			validateInput: true,
 		});
 
-		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid) {
+		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid || confirmPasswordError) {
+			console.log('password != confirm password');
 			return;
 		}
 		const { actions } = this.props;
@@ -155,6 +170,7 @@ class CreateAccountFormContainer extends Component {
 					toastClass: 'success'
 				});
 				// Route to next screen
+				if (isUpdatesChecked) actions.handleEmailPreferencesCheckboxChange();
 			} else {
 				actions.setToast({
 					toastMessage: t('hub_create_account_toast_error'),
@@ -183,6 +199,8 @@ class CreateAccountFormContainer extends Component {
 			password,
 			passwordInvalidError,
 			passwordLengthError,
+			confirmPassword,
+			confirmPasswordError
 		} = this.state;
 
 		return (
@@ -198,6 +216,8 @@ class CreateAccountFormContainer extends Component {
 				password={password}
 				passwordInvalidError={passwordInvalidError}
 				passwordLengthError={passwordLengthError}
+				confirmPassword={confirmPassword}
+				confirmPasswordError={confirmPasswordError}
 				handleInputChange={this._handleInputChange}
 				handleLegalConsentCheckboxChange={this._handleLegalConsentCheckboxChange}
 				handleSubmit={this._handleCreateAccountAttempt}

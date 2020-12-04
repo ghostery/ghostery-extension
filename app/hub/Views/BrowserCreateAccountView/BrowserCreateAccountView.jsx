@@ -15,7 +15,6 @@ import React, { Fragment, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { ToggleCheckbox } from '../../../shared-components';
 import BrowserLogInForm from '../BrowserLoginForm';
 import BrowserCreateAccountForm from '../BrowserCreateAccountForm';
 import globals from '../../../../src/classes/Globals';

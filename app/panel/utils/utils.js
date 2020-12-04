@@ -166,6 +166,20 @@ export function validatePassword(pwd) {
 }
 
 /**
+ * Check for confirm password equality to password
+ * @memberOf PanelUtils
+ * @param  {string} password 			password
+ * @param  {string} confirmPassword 	confirm password to validate
+ * @return {boolean}				true if equal, false otherwise
+ */
+export function validatePasswordsMatch(password, confirmPassword) {
+	if (!password || !confirmPassword) {
+		return false;
+	}
+	return password === confirmPassword;
+}
+
+/**
  * Helper method for making XHR requests
  * @memberOf PanelUtils
  * @param  {string} method 		request method

@@ -33,9 +33,10 @@ const BrowserCreateAccountForm = (props) => {
 		firstName,
 		lastName,
 		password,
-		confirmPassword,
 		passwordInvalidError,
 		passwordLengthError,
+		confirmPassword,
+		confirmPasswordError,
 		legalConsentChecked,
 		legalConsentNotCheckedError,
 		handleLegalConsentCheckboxChange,
@@ -168,21 +169,16 @@ const BrowserCreateAccountForm = (props) => {
 					<input
 						id="create-account-password"
 						className={passwordInputClassNames}
-						name="confirm password"
+						name="confirmPassword"
 						type="password"
 						value={confirmPassword}
 						onChange={handleInputChange}
 						pattern=".{1,}"
 						autoComplete="off"
 					/>
-					{passwordInvalidError && (
+					{confirmPasswordError && (
 						<div className="BrowserCreateAccountForm__inputError">
-							{t('hub_create_account_label_password_invalid')}
-						</div>
-					)}
-					{passwordLengthError && (
-						<div className="BrowserCreateAccountForm__inputError">
-							{t('hub_create_account_label_password_invalid_length')}
+							{t('hub_create_account_confirm_password_do_not_match')}
 						</div>
 					)}
 				</div>
@@ -208,6 +204,7 @@ const BrowserCreateAccountForm = (props) => {
 				<div className="columns small-10 medium-8">
 					<div className="BrowserCreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
 						<ToggleCheckbox
+							name="globals"
 							checked={legalConsentChecked}
 							className="ToggleCheckbox--flush-left"
 							onChange={handleLegalConsentCheckboxChange}
