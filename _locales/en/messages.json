@@ -1723,7 +1723,7 @@
 		"message": "Use between 8 and 50 characters."
 	},
 	"hub_create_account_confirm_password_do_not_match": {
-		"message": "Passwords do not match."
+		"message": "Your passwords do not match."
 	},
 	"hub_create_account_already_have_account": {
 		"message": "Already have a Ghostery Account?"
