@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import BrowserCreateAccountView from './BrowserCreateAccountView';
+import Step1_CreateAccountView from './Step1_CreateAccountView';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -32,4 +32,4 @@ const mapStateToProps = state => ({ ...state.account });
  */
 const mapDispatchToProps = dispatch => ({});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BrowserCreateAccountView));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Step1_CreateAccountView));

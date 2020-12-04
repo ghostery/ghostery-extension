@@ -24,7 +24,7 @@ const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof HubComponents
  */
-const BrowserCreateAccountForm = (props) => {
+const Step1_CreateAccountForm = (props) => {
 	const {
 		email,
 		emailError,
@@ -46,24 +46,24 @@ const BrowserCreateAccountForm = (props) => {
 		handleSubmit,
 	} = props;
 
-	const emailInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
+	const emailInputClassNames = ClassNames('Step1_CreateAccountForm__inputBox', {
 		error: emailError,
 	});
-	const confirmInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
+	const confirmInputClassNames = ClassNames('Step1_CreateAccountForm__inputBox', {
 		error: confirmEmailError,
 	});
-	const passwordInputClassNames = ClassNames('BrowserCreateAccountForm__inputBox', {
+	const passwordInputClassNames = ClassNames('Step1_CreateAccountForm__inputBox', {
 		error: passwordInvalidError || passwordLengthError,
 	});
-	const legalConsentClassNames = ClassNames('BrowserCreateAccountForm__legalConsentCheckedLabel', {
+	const legalConsentClassNames = ClassNames('Step1_CreateAccountForm__legalConsentCheckedLabel', {
 		error: legalConsentNotCheckedError
 	});
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<div className="BrowserCreateAccountForm--addPaddingTop row align-center-middle">
+			<div className="Step1_CreateAccountForm--addPaddingTop row align-center-middle">
 				<div className="columns small-10 medium-5">
-					<label htmlFor="create-account-email" className="BrowserCreateAccountForm__inputLabel">
+					<label htmlFor="create-account-email" className="Step1_CreateAccountForm__inputLabel">
 						{t('email_colon')}
 					</label>
 					<input
@@ -78,15 +78,15 @@ const BrowserCreateAccountForm = (props) => {
 						placeholder="example@mail.com"
 					/>
 					{emailError && (
-						<div className="BrowserCreateAccountForm__inputErrorContainer">
-							<div className="BrowserCreateAccountForm__inputError">
+						<div className="Step1_CreateAccountForm__inputErrorContainer">
+							<div className="Step1_CreateAccountForm__inputError">
 								{t('please_enter_a_valid_email')}
 							</div>
 						</div>
 					)}
 				</div>
 				<div className="columns small-10 medium-5">
-					<label htmlFor="create-account-confirmEmail" className="BrowserCreateAccountForm__inputLabel">
+					<label htmlFor="create-account-confirmEmail" className="Step1_CreateAccountForm__inputLabel">
 						{t('confirm_email_colon')}
 					</label>
 					<input
@@ -100,8 +100,8 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 					{confirmEmailError && (
-						<div className="BrowserCreateAccountForm__inputErrorContainer">
-							<div className="BrowserCreateAccountForm__inputError">
+						<div className="Step1_CreateAccountForm__inputErrorContainer">
+							<div className="Step1_CreateAccountForm__inputError">
 								{t('your_email_do_not_match')}
 							</div>
 						</div>
@@ -110,12 +110,12 @@ const BrowserCreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-5">
-					<label htmlFor="create-account-firstName" className="BrowserCreateAccountForm__inputLabel">
+					<label htmlFor="create-account-firstName" className="Step1_CreateAccountForm__inputLabel">
 						{t('hub_create_account_label_first_name')}
 					</label>
 					<input
 						id="create-account-firstName"
-						className="BrowserCreateAccountForm__inputBox"
+						className="Step1_CreateAccountForm__inputBox"
 						name="firstName"
 						type="text"
 						value={firstName}
@@ -125,12 +125,12 @@ const BrowserCreateAccountForm = (props) => {
 					/>
 				</div>
 				<div className="columns small-10 medium-5">
-					<label htmlFor="create-account-lastName" className="BrowserCreateAccountForm__inputLabel">
+					<label htmlFor="create-account-lastName" className="Step1_CreateAccountForm__inputLabel">
 						{t('hub_create_account_label_email_last_name')}
 					</label>
 					<input
 						id="create-account-lastName"
-						className="BrowserCreateAccountForm__inputBox"
+						className="Step1_CreateAccountForm__inputBox"
 						name="lastName"
 						type="text"
 						value={lastName}
@@ -142,7 +142,7 @@ const BrowserCreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-5">
-					<label htmlFor="create-account-password" className="BrowserCreateAccountForm__inputLabel">
+					<label htmlFor="create-account-password" className="Step1_CreateAccountForm__inputLabel">
 						{t('password_colon')}
 					</label>
 					<input
@@ -156,22 +156,22 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 					{passwordInvalidError && (
-						<div className="BrowserCreateAccountForm__inputErrorContainer">
-							<div className="BrowserCreateAccountForm__inputError">
+						<div className="Step1_CreateAccountForm__inputErrorContainer">
+							<div className="Step1_CreateAccountForm__inputError">
 								{t('hub_create_account_label_password_invalid')}
 							</div>
 						</div>
 					)}
 					{passwordLengthError && (
-						<div className="BrowserCreateAccountForm__inputErrorContainer">
-							<div className="BrowserCreateAccountForm__inputError">
+						<div className="Step1_CreateAccountForm__inputErrorContainer">
+							<div className="Step1_CreateAccountForm__inputError">
 								{t('hub_create_account_label_password_invalid_length')}
 							</div>
 						</div>
 					)}
 				</div>
 				<div className="columns small-10 medium-5">
-					<label htmlFor="create-account-password" className="BrowserCreateAccountForm__inputLabel">
+					<label htmlFor="create-account-password" className="Step1_CreateAccountForm__inputLabel">
 						{t('confirm_password_colon')}
 					</label>
 					<input
@@ -185,8 +185,8 @@ const BrowserCreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 					{confirmPasswordError && (
-						<div className="BrowserCreateAccountForm__inputErrorContainer">
-							<div className="BrowserCreateAccountForm__inputError">
+						<div className="Step1_CreateAccountForm__inputErrorContainer">
+							<div className="Step1_CreateAccountForm__inputError">
 								{t('hub_create_account_confirm_password_do_not_match')}
 							</div>
 						</div>
@@ -195,14 +195,14 @@ const BrowserCreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-8">
-					<div className="BrowserCreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
+					<div className="Step1_CreateAccountForm__checkboxContainer Step1_CreateAccountForm--marginBottom flex-container">
 						<ToggleCheckbox
 							checked={isUpdatesChecked}
 							className="ToggleCheckbox--flush-left"
 							onChange={handleUpdatesCheckboxChange}
 						/>
 						<span
-							className="BrowserCreateAccountForm__promoString"
+							className="Step1_CreateAccountForm__promoString"
 							onClick={handleUpdatesCheckboxChange}
 							dangerouslySetInnerHTML={{ __html: promoString }}
 						/>
@@ -212,7 +212,7 @@ const BrowserCreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-8">
-					<div className="BrowserCreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
+					<div className="Step1_CreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
 						<ToggleCheckbox
 							name="globals"
 							checked={legalConsentChecked}
@@ -228,15 +228,15 @@ const BrowserCreateAccountForm = (props) => {
 				</div>
 				<div className="columns small-10 medium-2" />
 			</div>
-			<div className="BrowserCreateAccountForm__ctaButtonContainer">
-				<button type="submit" className="BrowserCreateAccountForm__ctaButton">{t('create_account')}</button>
+			<div className="Step1_CreateAccountForm__ctaButtonContainer">
+				<button type="submit" className="Step1_CreateAccountForm__ctaButton">{t('create_account')}</button>
 			</div>
 		</form>
 	);
 };
 
 // PropTypes ensure we pass required props of the correct type
-BrowserCreateAccountForm.propTypes = {
+Step1_CreateAccountForm.propTypes = {
 	email: PropTypes.string.isRequired,
 	emailError: PropTypes.bool.isRequired,
 	confirmEmail: PropTypes.string.isRequired,
@@ -253,4 +253,4 @@ BrowserCreateAccountForm.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 };
 
-export default BrowserCreateAccountForm;
+export default Step1_CreateAccountForm;

@@ -1,14 +1,14 @@
-.BrowserCreateAccountForm--addPaddingTop {
+.Step1_CreateAccountForm--addPaddingTop {
 	padding-top: 20px;
 }
-.BrowserCreateAccountForm__inputLabel {
+.Step1_CreateAccountForm__inputLabel {
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 2.86;
 	text-transform: uppercase;
 	color: #4a4a4a;
 }
-.BrowserCreateAccountForm__inputBox {
+.Step1_CreateAccountForm__inputBox {
 	margin-bottom: 20px;
 	font-size: 14;
 	line-height: 24px;
@@ -23,26 +23,26 @@
 		color: #c4ced1;
 	}
 }
-.BrowserCreateAccountForm__inputBox.error {
+.Step1_CreateAccountForm__inputBox.error {
 	border-color: $color-create-account-form-error-red;
 }
-.BrowserCreateAccountForm__inputErrorContainer {
+.Step1_CreateAccountForm__inputErrorContainer {
 	position: relative;
 
-	> .BrowserCreateAccountForm__inputError {
+	> .Step1_CreateAccountForm__inputError {
 		position: absolute;
 		margin-top: -15px;
 		color: red;
 	}
 }
-.BrowserCreateAccountForm__promoString {
+.Step1_CreateAccountForm__promoString {
 	font-size: 14px;
 	margin-top: 15px;
 	@include breakpoint(small down) {
 		margin-top: 0;
 	}
 }
-.BrowserCreateAccountForm__legalConsentCheckedLabel {
+.Step1_CreateAccountForm__legalConsentCheckedLabel {
 	font-size: 14px;
 	@include breakpoint(small down) {
 		width: 258px;
@@ -52,11 +52,11 @@
 		color: red;
 	}
 }
-.BrowserCreateAccountForm__ctaButtonContainer {
+.Step1_CreateAccountForm__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
 
-	.BrowserCreateAccountForm__ctaButton {
+	.Step1_CreateAccountForm__ctaButton {
 		margin: 48px auto 0 auto;
 		height: 44px;
 		width: 162px;
@@ -85,7 +85,7 @@
 	}
 }
 @media only screen and (max-width: 740px) {
-	.BrowserCreateAccountForm__checkboxContainer {
+	.Step1_CreateAccountForm__checkboxContainer {
 		display: flex;
 		align-items: center;
 		padding-right: 12px;

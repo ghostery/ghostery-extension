@@ -14,26 +14,26 @@
 $color-create-account-form-error-red: #e74055;
 
 // Browser Create Account View
-.BrowserCreateAccountView {
+.Step1_CreateAccountView {
 	padding-top: 80px;
 	padding-bottom: 40px;
 }
-.BrowserCreateAccountView__alreadySignedIn {
+.Step1_CreateAccountView__alreadySignedIn {
 	margin-top: 245px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
-.BrowserCreateAccountView__email {
+.Step1_CreateAccountView__email {
 	font-size: 24px;
 	color: $ghosty-blue;
 }
-.BrowserCreateAccountView__ctaButtonContainer {
+.Step1_CreateAccountView__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
 
-	.BrowserCreateAccountView__ctaButton {
+	.Step1_CreateAccountView__ctaButton {
 		margin: 48px auto 0 auto;
 		height: 44px;
 		width: 162px;
@@ -61,7 +61,7 @@ $color-create-account-form-error-red: #e74055;
 		cursor: pointer;
 	}
 }
-.BrowserCreateAccountView__title {
+.Step1_CreateAccountView__title {
 	display: flex;
 	justify-content: center;
 	font-size: 24px;
@@ -72,7 +72,7 @@ $color-create-account-form-error-red: #e74055;
 		text-align: center;
 	}
 }
-.BrowserCreateAccountView__subtitle {
+.Step1_CreateAccountView__subtitle {
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
@@ -85,7 +85,7 @@ $color-create-account-form-error-red: #e74055;
 		line-height: 2.33;
 	}
 }
-.BrowserCreateAccountView__alreadyHaveAccount {
+.Step1_CreateAccountView__alreadyHaveAccount {
 	margin-top: 38px;
 	font-size: 16px;
 	color: $ghosty-blue;
@@ -100,52 +100,52 @@ $color-create-account-form-error-red: #e74055;
 		}
 	}
 }
-.BrowserCreateAccountView--addMarginSide {
+.Step1_CreateAccountView--addMarginSide {
 	margin-left: 10px;
 	margin-right: 10px;
 }
-.BrowserCreateAccountView--addMarginBottom {
+.Step1_CreateAccountView--addMarginBottom {
 	margin-bottom: 20px;
 }
-.BrowserCreateAccountView__headerImage {
+.Step1_CreateAccountView__headerImage {
 	max-width: 180px;
 }
-.BrowserCreateAccountView__headerTitle h3 {
+.Step1_CreateAccountView__headerTitle h3 {
 	font-size: 24px;
 	line-height: 1.75;
 	color: #4a4a4a;
 	margin: 0 25px;
 }
 
-.BrowserCreateAccountView__inputBox:focus {
+.Step1_CreateAccountView__inputBox:focus {
 	// Foundation Overrides
 	box-shadow: none;
 	border-color: $color-create-account-form-error-red;
 }
-.BrowserCreateAccountView__inputError {
+.Step1_CreateAccountView__inputError {
 	font-size: 12;
 	line-height: 14px;
 	color: $color-create-account-form-error-red;
 	margin-bottom: 13px;
 }
-.BrowserCreateAccountView__link {
+.Step1_CreateAccountView__link {
 	font-size: 14px;
 	line-height: 30px;
 }
-.BrowserCreateAccountView__termsStatement {
+.Step1_CreateAccountView__termsStatement {
 	font-size: 12px;
 }
-.BrowserCreateAccountView__button {
+.Step1_CreateAccountView__button {
 	min-width: 180px;
 }
-.BrowserCreateAccountView__inputLabel {
+.Step1_CreateAccountView__inputLabel {
 	flex-grow: 1; // ensure left-justify alignment in single column layout
 	padding-top: 10px; // align with checkbox top
 }
-.BrowserCreateAccountView__inputLabel.error{
+.Step1_CreateAccountView__inputLabel.error{
 	color: $color-create-account-form-error-red;
 }
-.BrowserCreateAccountView__skip {
+.Step1_CreateAccountView__skip {
 	margin-top: -37px;
 	float: right;
 	font-size: 16px;
@@ -158,18 +158,18 @@ $color-create-account-form-error-red: #e74055;
 		float: none;
 	}
 }
-.BrowserCreateAccountView__learnMoreContainer {
+.Step1_CreateAccountView__learnMoreContainer {
 	margin: 25px auto 0 auto;
 	width: 251px;
 	text-align: center;
 }
-.BrowserCreateAccountView__learnMore {
+.Step1_CreateAccountView__learnMore {
 	font-size: 16px;
 	color: $ghosty-blue;
 	text-decoration: underline;
 	cursor: pointer;
 }
-.BrowserCreateAccountView__arrow {
+.Step1_CreateAccountView__arrow {
 	margin: 15px auto 0 auto;
 	height: 12px;
 	width: 12px;
@@ -184,39 +184,39 @@ $color-create-account-form-error-red: #e74055;
 		transform: rotate(225deg);
 	}
 }
-.BrowserCreateAccountView__FAQContainer {
+.Step1_CreateAccountView__FAQContainer {
 	margin-top: 10px;
 	padding-top: 20px;
 	@include breakpoint(small down) {
 		text-align: center;
 	}
 }
-.BrowserCreateAccountView__faqItemContainer {
+.Step1_CreateAccountView__faqItemContainer {
 	margin-bottom: 30px;
 }
-.BrowserCreateAccountView__faqIcon {
+.Step1_CreateAccountView__faqIcon {
 	height: 71px;
 	width: 71px;
 	min-height: 71px;
 	min-width: 71px;
 	margin-bottom: 10px;
 }
-.BrowserCreateAccountView__faqItemTextContainer {
+.Step1_CreateAccountView__faqItemTextContainer {
 	display: flex;
 	flex-direction: column;
 }
-.BrowserCreateAccountView__faqItemLabel {
+.Step1_CreateAccountView__faqItemLabel {
 	font-size: 18px;
 	font-weight: 600;
 	color: #4a4a4a;
 }
-.BrowserCreateAccountView__faqItemDescription {
+.Step1_CreateAccountView__faqItemDescription {
 	margin-top: 10px;
 	max-width: 607px;
 	font-size: 16px;
 	color: #4a4a4a;
 }
-.BrowserCreateAccountView__faqItemDescription {
+.Step1_CreateAccountView__faqItemDescription {
 	margin-top: 10px;
 	max-width: 607px;
 	font-size: 16px;
@@ -226,7 +226,7 @@ $color-create-account-form-error-red: #e74055;
 		width: 245px;
 	}
 }
-.BrowserCreateAccountView__privacyPolicyLink {
+.Step1_CreateAccountView__privacyPolicyLink {
 	font-size: 16px;
 	color: $ghosty-blue;
 	text-decoration: underline;
@@ -238,27 +238,27 @@ $color-create-account-form-error-red: #e74055;
 	}
 }
 @media only screen and (max-width: 740px)  {
-	.BrowserCreateAccountView {
+	.Step1_CreateAccountView {
 		margin-bottom: 40px;
 		padding-top: 20px;
 	}
-	.BrowserCreateAccountView__header {
+	.Step1_CreateAccountView__header {
 		flex-direction: column;
 	}
-	.BrowserCreateAccountView__headerTitle {
+	.Step1_CreateAccountView__headerTitle {
 		padding-top: 30px;
 		text-align: center;
 	}
-	.BrowserCreateAccountView__submit {
+	.Step1_CreateAccountView__submit {
 		display: flex;
 		justify-content: center;
 	}
-	.BrowserCreateAccountView__linkContainer {
+	.Step1_CreateAccountView__linkContainer {
 		text-align: center;
 	}
 }
 @media only screen and (max-width: 500px)  {
-	.BrowserCreateAccountView__headerTitle h3 {
+	.Step1_CreateAccountView__headerTitle h3 {
 		font-size: 20px;
 		margin: 0 10px;
 	}

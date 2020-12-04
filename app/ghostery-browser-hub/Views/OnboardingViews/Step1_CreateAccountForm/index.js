@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import BrowserCreateAccountFormContainer from './BrowserCreateAccountFormContainer';
+import Step1_CreateAccountFormContainer from './Step1_CreateAccountFormContainer';
 import { register, getUser, handleEmailPreferencesCheckboxChange } from '../../../Account/AccountActions';
 import { setToast } from '../AppView/AppViewActions';
 
@@ -41,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
 	}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowserCreateAccountFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Step1_CreateAccountFormContainer);

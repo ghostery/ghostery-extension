@@ -14,16 +14,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'underscore';
-import { validateEmail } from '../../../panel/utils/utils';
-import BrowserLogInForm from './BrowserLogInForm';
-import SignedInView from '../SignedInView';
+import { validateEmail } from '../../../../panel/utils/utils';
+import Step1_LogInForm from './Step1_LogInForm';
 
 /**
  * @class Implement the Browser Log In Form for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
-class BrowserLogInFormContainer extends Component {
+class Step1_LogInFormContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -164,7 +163,8 @@ class BrowserLogInFormContainer extends Component {
 		return loggedIn ? (
 			<SignedInView email={(user && user.email) || 'email'} />
 		) : (
-			<BrowserLogInForm
+			// eslint-disable-next-line react/jsx-pascal-case
+			<Step1_LogInForm
 				email={email}
 				password={password}
 				emailError={emailError}
@@ -178,7 +178,7 @@ class BrowserLogInFormContainer extends Component {
 }
 
 // PropTypes ensure we pass required props of the correct type
-BrowserLogInFormContainer.propTypes = {
+Step1_LogInFormContainer.propTypes = {
 	actions: PropTypes.shape({
 		setToast: PropTypes.func.isRequired,
 		login: PropTypes.func.isRequired,
@@ -187,4 +187,4 @@ BrowserLogInFormContainer.propTypes = {
 	}).isRequired,
 };
 
-export default BrowserLogInFormContainer;
+export default Step1_LogInFormContainer;

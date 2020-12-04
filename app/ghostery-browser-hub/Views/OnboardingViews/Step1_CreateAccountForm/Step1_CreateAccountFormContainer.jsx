@@ -19,8 +19,8 @@ import {
 	validateEmailsMatch,
 	validateConfirmEmail,
 	validatePasswordsMatch
-} from '../../../panel/utils/utils';
-import BrowserCreateAccountForm from './BrowserCreateAccountForm';
+} from '../../../../panel/utils/utils';
+import BrowserCreateAccountForm from './Step1_CreateAccountForm';
 
 /**
  * @class Implement the Create Account View for the Ghostery Hub

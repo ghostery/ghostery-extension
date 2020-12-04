@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import BrowserLogInFormContainer from './BrowserLogInFormContainer';
+import Step1_LogInFormContainer from './Step1_LogInFormContainer';
 import {
 	login,
 	getUser,
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
 	}, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowserLogInFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Step1_LogInFormContainer);

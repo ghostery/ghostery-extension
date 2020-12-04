@@ -1,4 +1,5 @@
 /**
+
  * Log In Form Sass
  *
  * Ghostery Browser Extension
@@ -12,18 +13,18 @@
  */
 
 // Log In Form
-.BrowserLogInForm {
+.Step1_LogInForm {
 	margin-top: 40px;
 }
-.BrowserLogInForm__headerImage {
+.Step1_LogInForm__headerImage {
 	line-height: 1.5;
 	color: #4a4a4a;
 	margin: 20px 25px 0;
 }
-.BrowserLogInForm__inputContainer {
+.Step1_LogInForm__inputContainer {
 	margin: auto;
 }
-.BrowserLogInForm__inputLabel {
+.Step1_LogInForm__inputLabel {
 	text-align: left;
 	font-size: 14px;
 	font-weight: 500;
@@ -31,7 +32,7 @@
 	text-transform: uppercase;
 	color: #4a4a4a;
 }
-.BrowserLogInForm__inputBox {
+.Step1_LogInForm__inputBox {
 	line-height: 24px;
 	color: #4a4a4a;
 
@@ -44,38 +45,38 @@
 		color: #c4ced1;
 	}
 }
-.BrowserLogInForm__inputBox.error {
+.Step1_LogInForm__inputBox.error {
 	margin-bottom: 8px;
 	border: 2px solid #e74055;
 }
-.BrowserLogInForm__inputBox:focus {
+.Step1_LogInForm__inputBox:focus {
 	// Foundation Overrides
 	box-shadow: none;
 	border-color: #4a4a4a;
 }
-.BrowserLogInForm__inputError {
+.Step1_LogInForm__inputError {
 	font-size: 12;
 	line-height: 14px;
 	color: #e74055;
 	margin-bottom: 13px;
 }
-.BrowserLogInForm__link {
+.Step1_LogInForm__link {
 	font-size: 14px;
 	line-height: 30px;
 }
-.BrowserLogInForm__forgotPassword {
+.Step1_LogInForm__forgotPassword {
 	color: $ghosty-blue;
 	text-decoration: underline;
 	cursor: pointer;
 }
-.BrowserLogInForm__button {
+.Step1_LogInForm__button {
 	min-width: 180px;
 }
-.BrowserLogInForm__ctaButtonContainer {
+.Step1_LogInForm__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
 
-	.BrowserLogInForm__ctaButton {
+	.Step1_LogInForm__ctaButton {
 		margin: 48px auto 0 auto;
 		height: 44px;
 		width: 162px;
@@ -104,7 +105,7 @@
 	}
 }
 @media only screen and (max-width: 740px)  {
-	.BrowserLogInForm__header {
+	.Step1_LogInForm__header {
 		flex-direction: column;
 	}
 }

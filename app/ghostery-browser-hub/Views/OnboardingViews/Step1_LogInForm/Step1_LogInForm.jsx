@@ -21,7 +21,7 @@ import { NavLink } from 'react-router-dom';
  * @return {JSX} JSX for rendering the Log In Form of the Browser Hub app
  * @memberof HubComponents
  */
-const BrowserLogInForm = (props) => {
+const Step1_LogInForm = (props) => {
 	const {
 		email,
 		password,
@@ -32,18 +32,18 @@ const BrowserLogInForm = (props) => {
 		handleForgotPassword,
 	} = props;
 
-	const emailInputClassNames = ClassNames('BrowserLogInForm__inputBox', {
+	const emailInputClassNames = ClassNames('Step1_LogInForm__inputBox', {
 		error: emailError,
 	});
-	const passwordInputClassNames = ClassNames('BrowserLogInForm__inputBox', {
+	const passwordInputClassNames = ClassNames('Step1_LogInForm__inputBox', {
 		error: passwordError,
 	});
 
 	return (
-		<form className="BrowserLogInForm" onSubmit={handleSubmit}>
-			<div className="BrowserLogInForm__item row align-center-middle">
+		<form className="Step1_LogInForm" onSubmit={handleSubmit}>
+			<div className="Step1_LogInForm__item row align-center-middle">
 				<div className="columns small-10">
-					<label htmlFor="login-email" className="BrowserLogInForm__inputLabel">
+					<label htmlFor="login-email" className="Step1_LogInForm__inputLabel">
 						{t('email_colon')}
 					</label>
 					<input
@@ -58,15 +58,15 @@ const BrowserLogInForm = (props) => {
 						placeholder="example@mail.com"
 					/>
 					{emailError && (
-						<div className="BrowserLogInForm__inputError">
+						<div className="Step1_LogInForm__inputError">
 							{t('please_enter_a_valid_email')}
 						</div>
 					)}
 				</div>
 			</div>
-			<div className="BrowserLogInForm__item row align-center-middle">
+			<div className="Step1_LogInForm__item row align-center-middle">
 				<div className="columns small-10">
-					<label htmlFor="login-password" className="BrowserLogInForm__inputLabel">
+					<label htmlFor="login-password" className="Step1_LogInForm__inputLabel">
 						{t('password_colon')}
 					</label>
 					<input
@@ -79,30 +79,30 @@ const BrowserLogInForm = (props) => {
 						pattern=".{1,}"
 					/>
 					{passwordError && (
-						<div className="BrowserLogInForm__inputError">
+						<div className="Step1_LogInForm__inputError">
 							{t('hub_login_label_password_invalid')}
 						</div>
 					)}
 				</div>
 			</div>
-			<div className="BrowserLogInForm__item row align-center-middle">
+			<div className="Step1_LogInForm__item row align-center-middle">
 				<div className="columns small-10">
-					<span className="BrowserLogInForm__link">
-						<div className="BrowserLogInForm__forgotPassword" onClick={handleForgotPassword}>
+					<span className="Step1_LogInForm__link">
+						<div className="Step1_LogInForm__forgotPassword" onClick={handleForgotPassword}>
 							{t('forgot_password')}
 						</div>
 					</span>
 				</div>
 			</div>
-			<div className="BrowserLogInForm__ctaButtonContainer">
-				<button type="submit" className="BrowserLogInForm__ctaButton">{t('sign_in')}</button>
+			<div className="Step1_LogInForm__ctaButtonContainer">
+				<button type="submit" className="Step1_LogInForm__ctaButton">{t('sign_in')}</button>
 			</div>
 		</form>
 	);
 };
 
 // PropTypes ensure we pass required props of the correct type
-BrowserLogInForm.propTypes = {
+Step1_LogInForm.propTypes = {
 	email: PropTypes.string.isRequired,
 	password: PropTypes.string.isRequired,
 	emailError: PropTypes.bool.isRequired,
@@ -111,4 +111,4 @@ BrowserLogInForm.propTypes = {
 	handleInputChange: PropTypes.func.isRequired,
 };
 
-export default BrowserLogInForm;
+export default Step1_LogInForm;

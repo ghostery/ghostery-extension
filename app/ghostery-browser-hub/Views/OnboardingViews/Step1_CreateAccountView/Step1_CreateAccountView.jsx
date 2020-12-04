@@ -51,13 +51,13 @@ const faqList = [
 ];
 
 const renderFAQListItem = (icon, label, description) => (
-	<div className="BrowserCreateAccountView__faqItemContainer row">
-		<div className="BrowserCreateAccountView__faqIconContainer columns small-12 medium-10 medium-offset-1 large-2 large-offset-1">
-			<img className="BrowserCreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
+	<div className="Step1_CreateAccountView__faqItemContainer row">
+		<div className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 medium-offset-1 large-2 large-offset-1">
+			<img className="Step1_CreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
 		</div>
-		<div className="BrowserCreateAccountView__faqItemTextContainer columns small-12 medium-10 medium-offset-1 large-8 large-offset-0">
-			<div className="BrowserCreateAccountView__faqItemLabel">{label}</div>
-			<div className="BrowserCreateAccountView__faqItemDescription">{description}</div>
+		<div className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 medium-offset-1 large-8 large-offset-0">
+			<div className="Step1_CreateAccountView__faqItemLabel">{label}</div>
+			<div className="Step1_CreateAccountView__faqItemDescription">{description}</div>
 		</div>
 	</div>
 );
@@ -66,7 +66,7 @@ const renderSkipLink = () => (
 	<div className="row align-center-middle">
 		<div className="columns small-10 medium-5" />
 		<div className="columns small-10 medium-5">
-			<div className="BrowserCreateAccountView__skip">{t('ghostery_browser_hub_onboarding_skip')}</div>
+			<div className="Step1_CreateAccountView__skip">{t('ghostery_browser_hub_onboarding_skip')}</div>
 		</div>
 	</div>
 );
@@ -76,14 +76,14 @@ const renderSkipLink = () => (
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof HubComponents
  */
-const BrowserCreateAccountView = (props) => {
+const Step1_CreateAccountView = (props) => {
 	const { user } = props;
 	const email = user && user.email;
 
 	const [expanded, setExpanded] = useState(false);
 	const [view, setView] = useState(CREATE_ACCOUNT);
 
-	const arrowClassNames = ClassNames('BrowserCreateAccountView__arrow', {
+	const arrowClassNames = ClassNames('Step1_CreateAccountView__arrow', {
 		up: expanded,
 		down: !expanded,
 	});
@@ -99,48 +99,48 @@ const BrowserCreateAccountView = (props) => {
 	};
 
 	return (user ? (
-		<div className="BrowserCreateAccountView__alreadySignedIn">
-			<div className="BrowserCreateAccountView__title">{t('ghostery_browser_hub_onboarding_you_are_signed_in_as')}</div>
-			<div className="BrowserCreateAccountView__email">{email}</div>
-			<div className="BrowserCreateAccountView__ctaButtonContainer">
+		<div className="Step1_CreateAccountView__alreadySignedIn">
+			<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_you_are_signed_in_as')}</div>
+			<div className="Step1_CreateAccountView__email">{email}</div>
+			<div className="Step1_CreateAccountView__ctaButtonContainer">
 				{/* Link to next page */}
-				<button type="submit" className="BrowserCreateAccountView__ctaButton">{t('next')}</button>
+				<button type="submit" className="Step1_CreateAccountView__ctaButton">{t('next')}</button>
 			</div>
 		</div>
 	) : (
-		<div className="BrowserCreateAccountView">
+		<div className="Step1_CreateAccountView">
 			{view === CREATE_ACCOUNT && (
-				<div className="BrowserCreateAccountView__title">{t('ghostery_browser_hub_onboarding_create_a_ghostery_account')}</div>
+				<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_create_a_ghostery_account')}</div>
 			)}
 			{view === SIGN_IN && (
-				<div className="BrowserCreateAccountView__title">{t('sign_in')}</div>
+				<div className="Step1_CreateAccountView__title">{t('sign_in')}</div>
 			)}
-			<div className="BrowserCreateAccountView__subtitle">{ t('ghostery_browser_hub_onboarding_sync_settings') }</div>
+			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_browser_hub_onboarding_sync_settings') }</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (
-					<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
 				)}
 				{view === SIGN_IN && (
-					<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
 				)}
-				<div className="BrowserCreateAccountView__alreadyHaveAccount columns small-12 medium-5" />
+				<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-5" />
 			</div>
 			{view === CREATE_ACCOUNT ? (
 				<Fragment>
 					<BrowserCreateAccountForm />
 					{renderSkipLink()}
-					<div className="BrowserCreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
-						<div className="BrowserCreateAccountView__learnMore">{t('ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously')}</div>
+					<div className="Step1_CreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
+						<div className="Step1_CreateAccountView__learnMore">{t('ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously')}</div>
 					</div>
 					<div className={arrowClassNames} onClick={handleFAQLearnMoreClick} />
-					<div ref={faqRef} className="BrowserCreateAccountView__FAQContainer">
+					<div ref={faqRef} className="Step1_CreateAccountView__FAQContainer">
 						{expanded &&
 							faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))
 						}
 					</div>
 					{expanded && (
 						<div className="row">
-							<a className="BrowserCreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
+							<a className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
 								{t('ghostery_browser_hub_onboarding_visit_our_privacy_policy')}
 							</a>
 						</div>
@@ -156,4 +156,4 @@ const BrowserCreateAccountView = (props) => {
 	));
 };
 
-export default BrowserCreateAccountView;
+export default Step1_CreateAccountView;
