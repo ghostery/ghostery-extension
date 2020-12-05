@@ -2151,7 +2151,7 @@
 		"message": "Password:"
 	},
 	"confirm_password_colon": {
-		"message": "Password:"
+		"message": "Confirm Password:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "Please enter a valid email."
