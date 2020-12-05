@@ -1,5 +1,5 @@
 /**
- * Browser Create Account View
+ * Browser Create Account Form
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

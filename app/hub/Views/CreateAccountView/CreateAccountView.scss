@@ -56,7 +56,7 @@ $color-create-account-form-error-red: #e74055;
 }
 .CreateAccountView__inputBox.error {
 	margin-bottom: 8px;
-	border: 2px solid $color-create-account-form-error-red;
+	border-color: $color-create-account-form-error-red;
 }
 .CreateAccountView__inputBox:focus {
 	// Foundation Overrides

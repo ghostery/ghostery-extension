@@ -1,5 +1,5 @@
 /**
- * Browser Log In Form Container
+ * Step1_LogInFormContainer
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

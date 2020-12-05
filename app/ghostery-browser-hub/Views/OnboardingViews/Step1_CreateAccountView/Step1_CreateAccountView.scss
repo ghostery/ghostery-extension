@@ -1,5 +1,5 @@
 /**
- * Browser Create Account View Sass
+ * Step1_CreateAccountView Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -116,7 +116,11 @@ $color-create-account-form-error-red: #e74055;
 	color: #4a4a4a;
 	margin: 0 25px;
 }
-
+.Step1_CreateAccountView__inputBox.error {
+	// Foundation Overrides
+	box-shadow: none;
+	border-color: 2px solid $color-create-account-form-error-red;
+}
 .Step1_CreateAccountView__inputBox:focus {
 	// Foundation Overrides
 	box-shadow: none;
