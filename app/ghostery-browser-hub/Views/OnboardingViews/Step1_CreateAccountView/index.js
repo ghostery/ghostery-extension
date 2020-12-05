@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for UpgradePlanView
+ * Point of entry index.js file for Ghostery Browser Hub Create Account View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
