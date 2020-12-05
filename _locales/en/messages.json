@@ -1752,6 +1752,9 @@
 	"hub_plan_ad_free_promo_description": {
 		"message": "Get to what you want faster. A plus subscription gives Ghostery the support we need to provide YOU with an ad-free experience."
 	},
+	"hub_plan_or": {
+		"message": "OR"
+	},
 	"hub_plan_next_or_start_trial": {
 		"message": "Next or Start Trial"
 	},

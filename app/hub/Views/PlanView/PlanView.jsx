@@ -72,115 +72,125 @@ const basicCard = (checked, handleClick) => {
 	);
 };
 
-const plusCard = (checked, handleClick) => {
+const plusCard = (checked, handleClick, showCTAButton = false) => {
 	const cardClassNames = ClassNames('PlanView__card plus', {
 		checked
 	});
 	return (
-		<div className="PlanView__cardOuter">
-			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
-				<div className="PlanView__radioButtonContainer">
-					<RadioButton checked={checked} handleClick={handleClick} altDesign />
-				</div>
-				<div className="ghostery-plus-image-container">
-					<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
-				</div>
-				<h2>Ghostery Plus</h2>
-				<div className="PlanView__price">
-					<Fragment>
-						<p className="PlanView__price-gold font-size-36">$4.99</p>
-						<p className="PlanView__price-gold sub-text font-size-12">{t('per_month')}</p>
-					</Fragment>
-				</div>
-				<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
-				<div className="PlanView__valuePropList">
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_private_search')}
+		<div className="PlanView__cardButtonContainer">
+			<div className="PlanView__cardOuter">
+				<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
+					<div className="PlanView__radioButtonContainer">
+						<RadioButton checked={checked} handleClick={handleClick} altDesign />
 					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_tracker_protection')}
+					<div className="ghostery-plus-image-container">
+						<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_speedy_page_loads')}
+					<h2>Ghostery Plus</h2>
+					<div className="PlanView__price">
+						<Fragment>
+							<p className="PlanView__price-gold font-size-36">$4.99</p>
+							<p className="PlanView__price-gold sub-text font-size-12">{t('per_month')}</p>
+						</Fragment>
 					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_intelligence_technology')}
-					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_ad_free')}
-					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_supports_ghosterys_mission')}
+					<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
+					<div className="PlanView__valuePropList">
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_private_search')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_tracker_protection')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_speedy_page_loads')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_intelligence_technology')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_ad_free')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_supports_ghosterys_mission')}
+						</div>
 					</div>
 				</div>
 			</div>
+			{showCTAButton && (
+				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+			)}
 		</div>
 	);
 };
 
-const premiumCard = (checked, handleClick) => {
+const premiumCard = (checked, handleClick, showCTAButton = false) => {
 	const cardClassNames = ClassNames('PlanView__card premium', {
 		checked
 	});
 	return (
-		<div className="PlanView__cardOuter">
-			<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
-				<div className="PlanView__radioButtonContainer">
-					<RadioButton checked={checked} handleClick={handleClick} altDesign />
-				</div>
-				<div className="ghostery-premium-image-container">
-					<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-				</div>
-				<div className="ghostery-premium-image-background" />
-				<h2>Ghostery Premium</h2>
-				<div className="PlanView__price">
-					<Fragment>
-						<p className="PlanView__price-purple sub-text font-size-36">$11.99</p>
-						<p className="PlanView__price-purple sub-text font-size-12">{t('per_month')}</p>
-					</Fragment>
-				</div>
-				<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_protection')}</strong></p>
-				<div className="PlanView__valuePropList">
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_private_search')}
+		<div className="PlanView__cardButtonContainer">
+			<div className="PlanView__cardOuter">
+				<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
+					<div className="PlanView__radioButtonContainer">
+						<RadioButton checked={checked} handleClick={handleClick} altDesign />
 					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_tracker_protection')}
+					<div className="ghostery-premium-image-container">
+						<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
 					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_speedy_page_loads')}
+					<div className="ghostery-premium-image-background" />
+					<h2>Ghostery Premium</h2>
+					<div className="PlanView__price">
+						<Fragment>
+							<p className="PlanView__price-purple sub-text font-size-36">$11.99</p>
+							<p className="PlanView__price-purple sub-text font-size-12">{t('per_month')}</p>
+						</Fragment>
 					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_intelligence_technology')}
-					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_ad_free')}
-					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_supports_ghosterys_mission')}
-					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						VPN
-					</div>
-					<div className="PlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('hub_plan_unlimited_bandwidth')}
+					<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_protection')}</strong></p>
+					<div className="PlanView__valuePropList">
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_private_search')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_tracker_protection')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_speedy_page_loads')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_intelligence_technology')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_ad_free')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_supports_ghosterys_mission')}
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							VPN
+						</div>
+						<div className="PlanView__cardSubCopy">
+							<span className="check blue" />
+							{t('hub_plan_unlimited_bandwidth')}
+						</div>
 					</div>
 				</div>
 			</div>
+			{showCTAButton && (
+				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+			)}
 		</div>
 	);
 };
@@ -263,6 +273,7 @@ class PlanView extends React.Component {
 		const { user, shouldShowSearchPromo } = this.props;
 		const { selectedPlan } = this.state;
 
+		const isBasic = !user;
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
@@ -280,24 +291,41 @@ class PlanView extends React.Component {
 						<div className="PlanView__arrowDown" onClick={this.scrollToPlans} />
 					</Fragment>
 				)}
-				<div className="PlanView__plansContainer" ref={this.plansRef}>
-					{!(isPlus || isPremium) && (
-						basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
-					)}
-					{!isPremium && (
-						plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)
-					)}
-					{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
-				</div>
-				{(selectedPlan === BASIC || selectedPlan === -1) && (
-					// Change to route to next page
-					<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+				{(isPlus && !isPremium) ? (
+					<div className="PlanView__keepOrUpgradeContainer">
+						{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, (isPlus && !isPremium))}
+						<div className="PlanView__or">{t('hub_plan_or')}</div>
+						{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, (isPlus && !isPremium))}
+					</div>
+				) : (
+					<div className="PlanView__plansContainer" ref={this.plansRef}>
+						{isBasic && (
+							basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
+						)}
+						{!isPremium && (
+							<Fragment>
+								{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
+							</Fragment>
+						)}
+						{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
+					</div>
 				)}
-				{selectedPlan === PREMIUM && (
-					<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
-				)}
-				{selectedPlan === PLUS && (
-					<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+				{!(isPlus && !isPremium) && (
+					<div className="PlanView__ctaButtonContainer">
+						{(selectedPlan === BASIC || selectedPlan === -1) && (
+							// Change to route to next page
+							<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+						)}
+						{selectedPlan === PREMIUM && (
+							<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+						)}
+						{selectedPlan === PLUS && (
+							<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+						)}
+						{(isPlus && !isPremium) && (
+							<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+						)}
+					</div>
 				)}
 			</div>
 		);
