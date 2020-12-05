@@ -118,9 +118,8 @@
 	display: flex;
 	justify-content: center;
 }
-.PlanView__KeepOrUpgradeContainer {
-	display: flex;
-	justify-content: space-around;
+.PlanView__keepOrUpgradeContainer {
+	margin: 40px auto;
 }
 
 .PlanView__arrowDown {

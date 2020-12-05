@@ -123,7 +123,7 @@ const plusCard = (checked, handleClick, showCTAButton = false) => {
 				</div>
 			</div>
 			{showCTAButton && (
-				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_keep')}</button>
 			)}
 		</Fragment>
 	);
@@ -189,7 +189,7 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 				</div>
 			</div>
 			{showCTAButton && (
-				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
+				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_upgrade')}</button>
 			)}
 		</Fragment>
 	);
@@ -292,12 +292,12 @@ class PlanView extends React.Component {
 					</Fragment>
 				)}
 				{(isPlus && !isPremium) ? (
-					<div className="PlanView__keepOrUpgradeContainer row align-center">
-						<div className="columns small-12 medium-12 large-4">
+					<div className="PlanView__keepOrUpgradeContainer row align-center align-middle">
+						<div className="small-12 medium-12 large-4">
 							{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, (isPlus && !isPremium))}
 						</div>
-						<div className="PlanView__or columns small-12 large-2">{t('hub_plan_or')}</div>
-						<div className="columns small-12 medium-12 large-4">
+						<div className="PlanView__or small-12 large-2">{t('hub_plan_or')}</div>
+						<div className="small-12 medium-12 large-4">
 							{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, (isPlus && !isPremium))}
 						</div>
 					</div>

@@ -1755,6 +1755,12 @@
 	"hub_plan_or": {
 		"message": "OR"
 	},
+	"hub_plan_keep": {
+		"message": "Keep"
+	},
+	"hub_plan_upgrade": {
+		"message": "Upgrade"
+	},
 	"hub_plan_next_or_start_trial": {
 		"message": "Next or Start Trial"
 	},
