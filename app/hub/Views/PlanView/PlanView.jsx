@@ -77,7 +77,7 @@ const plusCard = (checked, handleClick, showCTAButton = false) => {
 		checked
 	});
 	return (
-		<div className="PlanView__cardButtonContainer">
+		<Fragment>
 			<div className="PlanView__cardOuter">
 				<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 					<div className="PlanView__radioButtonContainer">
@@ -125,7 +125,7 @@ const plusCard = (checked, handleClick, showCTAButton = false) => {
 			{showCTAButton && (
 				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
 			)}
-		</div>
+		</Fragment>
 	);
 };
 
@@ -134,7 +134,7 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 		checked
 	});
 	return (
-		<div className="PlanView__cardButtonContainer">
+		<Fragment>
 			<div className="PlanView__cardOuter">
 				<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
 					<div className="PlanView__radioButtonContainer">
@@ -191,7 +191,7 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 			{showCTAButton && (
 				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
 			)}
-		</div>
+		</Fragment>
 	);
 };
 
@@ -292,13 +292,17 @@ class PlanView extends React.Component {
 					</Fragment>
 				)}
 				{(isPlus && !isPremium) ? (
-					<div className="PlanView__keepOrUpgradeContainer">
-						{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, (isPlus && !isPremium))}
-						<div className="PlanView__or">{t('hub_plan_or')}</div>
-						{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, (isPlus && !isPremium))}
+					<div className="PlanView__keepOrUpgradeContainer row align-center">
+						<div className="columns small-12 medium-12 large-4">
+							{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, (isPlus && !isPremium))}
+						</div>
+						<div className="PlanView__or columns small-12 large-2">{t('hub_plan_or')}</div>
+						<div className="columns small-12 medium-12 large-4">
+							{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, (isPlus && !isPremium))}
+						</div>
 					</div>
 				) : (
-					<div className="PlanView__plansContainer" ref={this.plansRef}>
+					<div className="PlanView__plansContainer row align-spaced" ref={this.plansRef}>
 						{isBasic && (
 							basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
 						)}

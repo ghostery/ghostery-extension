@@ -56,7 +56,7 @@
 .PlanView__searchCTAButton {
 	display: flex;
 	justify-content: center;
-	margin: 48px auto 48px auto;
+	margin: auto;
 	height: 44px;
 	width: 162px;
 	padding: 7.7px 14px;
@@ -94,31 +94,25 @@
 }
 .PlanView__plansContainer {
 	margin-top: 100px;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+
+	.PlanView__cardOuter {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin: 0 15px;
+	}
 }
 .PlanView__orCardContainer {
 	display: flex;
-	@include breakpoint($large down) {
-		flex-direction: column;
-		height: 50px;
-	}
 }
 .PlanView__or {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	padding: 0 66px;
-	height: 670px;
+	height: 180px;
 	font-size: 24px;
 	color: #4a4a4a;
-}
-.PlanView__cardButtonContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-.PlanView__cardCTAButton {
 }
 .PlanView__ctaButtonContainer {
 	display: flex;
@@ -138,13 +132,6 @@
 	border-top: 2px solid #00aef0;
 	cursor: pointer;
 }
-
-.PlanView__cardOuter {
-	flex-shrink: 3;
-	padding: 0 20px;
-}
-
-// Clean up unused CSS
 .PlanView__card {
 	height: 670px;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
