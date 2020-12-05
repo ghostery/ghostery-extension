@@ -15,9 +15,9 @@ import React, { Fragment, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import BrowserLogInForm from '../BrowserLoginForm';
-import BrowserCreateAccountForm from '../BrowserCreateAccountForm';
-import globals from '../../../../src/classes/Globals';
+import Step1_LogInForm from '../Step1_LogInForm';
+import Step1_CreateAccountForm from '../Step1_CreateAccountForm';
+import globals from '../../../../../src/classes/Globals';
 
 const SIGN_IN = 'SIGN_IN';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
@@ -127,7 +127,8 @@ const Step1_CreateAccountView = (props) => {
 			</div>
 			{view === CREATE_ACCOUNT ? (
 				<Fragment>
-					<BrowserCreateAccountForm />
+					{/* eslint-disable-next-line react/jsx-pascal-case */}
+					<Step1_CreateAccountForm />
 					{renderSkipLink()}
 					<div className="Step1_CreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
 						<div className="Step1_CreateAccountView__learnMore">{t('ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously')}</div>
@@ -148,12 +149,27 @@ const Step1_CreateAccountView = (props) => {
 				</Fragment>
 			) : (
 				<Fragment>
-					<BrowserLogInForm />
+					{/* eslint-disable-next-line react/jsx-pascal-case */}
+					<Step1_LogInForm />
 					{renderSkipLink()}
 				</Fragment>
 			)}
 		</div>
 	));
+};
+
+// PropTypes ensure we pass required props of the correct type
+Step1_CreateAccountView.propTypes = {
+	user: PropTypes.shape({
+		email: PropTypes.string,
+	}),
+};
+
+// Default props used in the Plus View
+Step1_CreateAccountView.defaultProps = {
+	user: {
+		email: ''
+	},
 };
 
 export default Step1_CreateAccountView;

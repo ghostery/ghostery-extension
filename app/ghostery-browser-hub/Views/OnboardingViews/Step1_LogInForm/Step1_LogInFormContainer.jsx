@@ -152,7 +152,6 @@ class Step1_LogInFormContainer extends Component {
 	 * @return {JSX} JSX for rendering the Log In View of the Hub app
 	 */
 	render() {
-		const { loggedIn, user } = this.props;
 		const {
 			email,
 			password,
@@ -160,9 +159,7 @@ class Step1_LogInFormContainer extends Component {
 			passwordError,
 		} = this.state;
 
-		return loggedIn ? (
-			<SignedInView email={(user && user.email) || 'email'} />
-		) : (
+		return (
 			// eslint-disable-next-line react/jsx-pascal-case
 			<Step1_LogInForm
 				email={email}
