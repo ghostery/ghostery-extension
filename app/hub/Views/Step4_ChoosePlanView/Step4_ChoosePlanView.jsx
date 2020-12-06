@@ -14,7 +14,7 @@
 import React, { Fragment } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
-import RadioButton from '../../../panel/components/BuildingBlocks/RadioButton';
+import RadioButton from '../../../shared-components/RadioButton';
 import globals from '../../../../src/classes/Globals';
 
 const BASIC = 0;
