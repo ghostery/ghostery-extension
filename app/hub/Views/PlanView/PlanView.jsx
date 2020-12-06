@@ -339,7 +339,7 @@ class PlanView extends React.Component {
 									<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
 								)}
 								{selectedPlan === PREMIUM && (
-									<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+									<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
 								)}
 							</div>
 						))}
