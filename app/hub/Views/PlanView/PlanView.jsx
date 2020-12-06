@@ -329,22 +329,23 @@ class PlanView extends React.Component {
 								{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
 							</div>
 						)}
-						{isBasicOrPremium && (
+						{(isBasic && (
 							<div className="PlanView__ctaButtonContainer">
 								{(selectedPlan === BASIC) && (
 									// Change to route to next page
 									<button className="PlanView__searchCTAButton" type="button">{t('next')}</button>
 								)}
-								{selectedPlan === PREMIUM && (
-									<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
-								)}
 								{selectedPlan === PLUS && (
 									<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
 								)}
-								{(isPlus && !isPremium) && (
-									<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+								{selectedPlan === PREMIUM && (
+									<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
 								)}
 							</div>
+						))}
+						{isPremium && (
+							// Change to route to next page
+							<button className="PlanView__searchCTAButton" type="button">{t('next')}</button>
 						)}
 					</div>
 				)}
