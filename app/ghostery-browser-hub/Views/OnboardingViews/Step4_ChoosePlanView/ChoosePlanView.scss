@@ -18,7 +18,7 @@
 	height: 381px;
 	margin: 48px auto 0 auto;
 	border-radius: 4px;
-	border: solid 4px #00aef0;
+	border: solid 4px $ghosty-blue;
 }
 .ChoosePlanView__searchLogo {
 	height: 37px;
@@ -48,7 +48,7 @@
 	font-size: 16px;
 	line-height: 1.38;
 	text-align: center;
-	color: #4a4a4a;
+	color: $tundora;
 }
 .ChoosePlanView__searchCTAButton {
 	display: flex;
@@ -61,13 +61,13 @@
 	background: linear-gradient(
 		45deg,
 		#ff7e74 50%,
-		#00aef0
+		$ghosty-blue
 	);
 	background-size: 200% 100%;
 	background-position: 100% 50%;
 	transition: 0.25s all;
 	border: none;
-	color: #FFF;
+	color: $white;
 	font-size: 14.1px;
 	font-weight: 700;
 	border-radius: 3.5px;
@@ -80,7 +80,7 @@
 		transition: 0.25s all;
 	}
 	&:focus {
-		color: #FFF;
+		color: $white;
 	}
 }
 .ChoosePlanView__premiumCTAButton {
@@ -100,7 +100,7 @@
 	background-position: 100% 50%;
 	transition: 0.25s all;
 	border: none;
-	color: #FFF;
+	color: $white;
 	font-size: 14.1px;
 	font-weight: 700;
 	border-radius: 3.5px;
@@ -118,7 +118,7 @@
 	margin-top: 48px;
 	display: flex;
 	justify-content: center;
-	color: #00aef0;
+	color: $ghosty-blue;
 	font-size: 16px;
 	text-decoration: underline;
 	cursor: pointer;
@@ -144,7 +144,7 @@
 	padding: 0 66px;
 	height: 180px;
 	font-size: 24px;
-	color: #4a4a4a;
+	color: $tundora;
 }
 .ChoosePlanView__ctaButtonContainer {
 	display: flex;
@@ -157,8 +157,8 @@
 	margin: 15px auto 0 auto;
 	height: 12px;
 	width: 12px;
-	border-left: 2px solid #00aef0;
-	border-top: 2px solid #00aef0;
+	border-left: 2px solid $ghosty-blue;
+	border-top: 2px solid $ghosty-blue;
 	cursor: pointer;
 
 	&.down {
@@ -180,7 +180,7 @@
 	border: 4px solid white;
 
 	&:hover, &.checked {
-		border: 4px solid #00aef0;
+		border: 4px solid $ghosty-blue;
 		.ghostery-free-image-container,
 		.ghostery-plus-image-container,
 		.ghostery-premium-image-background {
