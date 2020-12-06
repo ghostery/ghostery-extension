@@ -1,3 +1,6 @@
+.PlanView {
+	padding-bottom: 20px;
+}
 .PlanView__yourPrivacyPlan {
 	margin: auto;
 	font-size: 24px;
@@ -124,7 +127,8 @@
 	cursor: pointer;
 }
 .PlanView__plansContainer {
-	margin-top: 100px;
+	margin-top: 20px;
+	padding-top: 20px;
 
 	.PlanView__cardOuter {
 		display: flex;
@@ -153,14 +157,20 @@
 	margin: 40px auto;
 }
 
-.PlanView__arrowDown {
+.PlanView__arrow {
 	margin: 15px auto 0 auto;
 	height: 12px;
 	width: 12px;
-	transform: rotate(45deg);
 	border-left: 2px solid #00aef0;
 	border-top: 2px solid #00aef0;
 	cursor: pointer;
+
+	&.down {
+		transform: rotate(45deg);
+	}
+	&.up {
+		transform: rotate(225deg);
+	}
 }
 .PlanView__card {
 	height: 670px;

@@ -203,9 +203,9 @@ class PlanView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedPlan: -1
+			selectedPlan: -1,
+			expanded: false
 		};
-		this.plansRef = React.createRef();
 		// User object doesn't get populated immediately, let's delay the first render
 		setTimeout(this.setDefaultPlan, 200);
 	}
@@ -247,8 +247,13 @@ class PlanView extends React.Component {
 
 	selectPremiumPlan = () => this.setState({ selectedPlan: PREMIUM });
 
-	scrollToPlans = () => {
-		this.plansRef.current.scrollIntoView({ behavior: 'smooth' });
+	toggleSection = () => {
+		const { expanded } = this.state;
+		if (expanded) {
+			this.setState({ expanded: !expanded });
+		} else {
+			this.setState({ expanded: !expanded });
+		}
 	};
 
 	renderTitleText = () => {
@@ -273,63 +278,74 @@ class PlanView extends React.Component {
 	};
 
 	render() {
-		// Case off of if ghostery search was chosen in previous step
+		// shouldShowSearchPromo should be true if the user did not select ghostery search in the previosu step
 		const { user, shouldShowSearchPromo } = this.props;
-		const { selectedPlan } = this.state;
+		const { expanded, selectedPlan } = this.state;
 
 		const isBasic = !user;
 		const isPlus = (user && user.plusAccess && !user.premiumAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
+		const isBasicOrPremium = isBasic || isPremium;
+
+		const arrowClassNames = ClassNames('PlanView__arrow', {
+			up: !expanded,
+			down: expanded
+		});
 
 		return (
-			<div>
+			<div className="PlanView">
 				<div className="PlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
 				<div className="PlanView__subtitle">{this.renderSubtitleText(shouldShowSearchPromo)}</div>
-				{shouldShowSearchPromo && (
+				{/* {shouldShowSearchPromo && ( */}
+				{true && isBasic && (
 					<Fragment>
 						{searchPromo()}
 						<a className="PlanView__searchCTAButton" href={`${globals.CHECKOUT_BASE_URL}/plus`} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
-						<div className="PlanView__seeAllPlans" onClick={this.scrollToPlans}>{t('hub_plan_see_all_plans')}</div>
-						<div className="PlanView__arrowDown" onClick={this.scrollToPlans} />
+						<div className="PlanView__seeAllPlans" onClick={this.toggleSection}>{t('hub_plan_see_all_plans')}</div>
+						<div className={arrowClassNames} onClick={this.toggleSection} />
 					</Fragment>
 				)}
-				{(isPlus && !isPremium) ? (
-					<div className="PlanView__keepOrUpgradeContainer row align-center align-middle">
-						<div className="small-12 medium-12 large-4">
-							{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, (isPlus && !isPremium))}
-						</div>
-						<div className="PlanView__or small-12 large-2">{t('hub_plan_or')}</div>
-						<div className="small-12 medium-12 large-4">
-							{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, (isPlus && !isPremium))}
-						</div>
-					</div>
-				) : (
-					<div className="PlanView__plansContainer row align-spaced" ref={this.plansRef}>
-						{isBasic && (
-							basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
+				{(expanded || isPlus || isPremium) && (
+					<div>
+						{(isPlus) ? (
+							<div className="PlanView__keepOrUpgradeContainer row align-center align-middle">
+								<div className="small-12 medium-12 large-4">
+									{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, isPlus)}
+								</div>
+								<div className="PlanView__or small-12 large-2">{t('hub_plan_or')}</div>
+								<div className="small-12 medium-12 large-4">
+									{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, isPlus)}
+								</div>
+							</div>
+						) : (
+							<div className="PlanView__plansContainer row align-spaced">
+								{isBasic && (
+									basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
+								)}
+								{!isPremium && (
+									<Fragment>
+										{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
+									</Fragment>
+								)}
+								{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
+							</div>
 						)}
-						{!isPremium && (
-							<Fragment>
-								{plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
-							</Fragment>
-						)}
-						{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
-					</div>
-				)}
-				{!(isPlus && !isPremium) && (
-					<div className="PlanView__ctaButtonContainer">
-						{(selectedPlan === BASIC) && (
-							// Change to route to next page
-							<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
-						)}
-						{selectedPlan === PREMIUM && (
-							<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
-						)}
-						{selectedPlan === PLUS && (
-							<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
-						)}
-						{(isPlus && !isPremium) && (
-							<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+						{isBasicOrPremium && (
+							<div className="PlanView__ctaButtonContainer">
+								{(selectedPlan === BASIC) && (
+									// Change to route to next page
+									<button className="PlanView__searchCTAButton" type="button">{t('next')}</button>
+								)}
+								{selectedPlan === PREMIUM && (
+									<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+								)}
+								{selectedPlan === PLUS && (
+									<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+								)}
+								{(isPlus && !isPremium) && (
+									<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+								)}
+							</div>
 						)}
 					</div>
 				)}
