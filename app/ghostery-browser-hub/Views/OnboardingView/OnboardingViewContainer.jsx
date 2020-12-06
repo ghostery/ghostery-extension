@@ -21,7 +21,7 @@ import WelcomeView from '../OnboardingViews/Step0_WelcomeView';
 import LoginView from '../OnboardingViews/Step1_LoginView';
 import BlockSettingsView from '../OnboardingViews/Step2_BlockSettingsView';
 import ChooseDefaultSearchView from '../OnboardingViews/Step3_ChooseDefaultSearchView';
-import ChoosePlanView from '../OnboardingViews/ChoosePlanView';
+import ChoosePlanView from '../OnboardingViews/Step4_ChoosePlanView';
 import SuccessView from '../OnboardingViews/Step5_SuccessView';
 
 /**

@@ -1,5 +1,5 @@
 /**
- * Plan View Component
+ * Ghostery Browser Hub Choose Plan View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -16,10 +16,7 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import RadioButton from '../../../../shared-components/RadioButton';
 import globals from '../../../../../src/classes/Globals';
-
-const BASIC = 0;
-const PLUS = 1;
-const PREMIUM = 2;
+import { BASIC, PLUS, PREMIUM } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
 
 const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
 const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
@@ -203,7 +200,7 @@ class ChoosePlanView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedPlan: -1,
+			selectedPlan: '',
 			expanded: false
 		};
 		// User object doesn't get populated immediately, let's delay the first render
