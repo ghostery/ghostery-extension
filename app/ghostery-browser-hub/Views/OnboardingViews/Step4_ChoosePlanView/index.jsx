@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for PlanView
+ * Point of entry index.js file for Ghostery Browser Hub Choose Plan View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Step4_ChoosePlanView from './Step4_ChoosePlanView';
+import ChoosePlanView from './ChoosePlanView';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -32,4 +32,4 @@ const mapStateToProps = state => ({ ...state.account });
  */
 const mapDispatchToProps = dispatch => ({});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Step4_ChoosePlanView));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChoosePlanView));

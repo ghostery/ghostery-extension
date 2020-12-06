@@ -1,32 +1,32 @@
-.Step4_ChoosePlanView {
+.ChoosePlanView {
 	padding-bottom: 20px;
 }
-.Step4_ChoosePlanView__yourPrivacyPlan {
+.ChoosePlanView__yourPrivacyPlan {
 	margin: auto;
 	font-size: 24px;
 	display: flex;
 	justify-content: center;
 }
-.Step4_ChoosePlanView__subtitle {
+.ChoosePlanView__subtitle {
 	margin-top: 12px;
 	display: flex;
 	justify-content: center;
 	font-size: 18px;
 }
-.Step4_ChoosePlanView__searchPromoContainer {
+.ChoosePlanView__searchPromoContainer {
 	width: 354px;
 	height: 381px;
 	margin: 48px auto 0 auto;
 	border-radius: 4px;
 	border: solid 4px #00aef0;
 }
-.Step4_ChoosePlanView__searchLogo {
+.ChoosePlanView__searchLogo {
 	height: 37px;
 	width: 193px;
 	margin: 65px auto 0 auto;
-	background-image: url('/app/images/hub/Step4_ChoosePlanView/search.svg');
+	background-image: url('/app/images/hub/ChoosePlanView/search.svg');
 }
-.Step4_ChoosePlanView__adFree {
+.ChoosePlanView__adFree {
 	margin: 16px auto 0 auto;
 	color: #b8860b;
 	font-size: 18px;
@@ -35,13 +35,13 @@
 	width: 220px;
 	text-align: center;
 }
-.Step4_ChoosePlanView__adFreePromo {
+.ChoosePlanView__adFreePromo {
 	margin: auto;
 	font-size: 18px;
 	line-height: 32px;
 	text-align: center;
 }
-.Step4_ChoosePlanView__adFreePromoDescription {
+.ChoosePlanView__adFreePromoDescription {
 	margin: 16px auto 0 auto;
 	height: 88px;
 	width: 250px;
@@ -50,7 +50,7 @@
 	text-align: center;
 	color: #4a4a4a;
 }
-.Step4_ChoosePlanView__searchCTAButton {
+.ChoosePlanView__searchCTAButton {
 	display: flex;
 	justify-content: center;
 	margin: 48px auto 0 auto;
@@ -83,7 +83,7 @@
 		color: #FFF;
 	}
 }
-.Step4_ChoosePlanView__premiumCTAButton {
+.ChoosePlanView__premiumCTAButton {
 	display: flex;
 	justify-content: center;
 	margin: 48px auto 0 auto;
@@ -114,7 +114,7 @@
 		transition: 0.25s all;
 	}
 }
-.Step4_ChoosePlanView__seeAllPlans {
+.ChoosePlanView__seeAllPlans {
 	margin-top: 48px;
 	display: flex;
 	justify-content: center;
@@ -123,21 +123,21 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
-.Step4_ChoosePlanView__plansContainer {
+.ChoosePlanView__plansContainer {
 	margin-top: 20px;
 	padding-top: 20px;
 
-	.Step4_ChoosePlanView__cardOuter {
+	.ChoosePlanView__cardOuter {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		margin: 0 15px;
 	}
 }
-.Step4_ChoosePlanView__orCardContainer {
+.ChoosePlanView__orCardContainer {
 	display: flex;
 }
-.Step4_ChoosePlanView__or {
+.ChoosePlanView__or {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -146,14 +146,14 @@
 	font-size: 24px;
 	color: #4a4a4a;
 }
-.Step4_ChoosePlanView__ctaButtonContainer {
+.ChoosePlanView__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
 }
-.Step4_ChoosePlanView__keepOrUpgradeContainer {
+.ChoosePlanView__keepOrUpgradeContainer {
 	margin: 40px auto;
 }
-.Step4_ChoosePlanView__arrow {
+.ChoosePlanView__arrow {
 	margin: 15px auto 0 auto;
 	height: 12px;
 	width: 12px;
@@ -168,7 +168,7 @@
 		transform: rotate(225deg);
 	}
 }
-.Step4_ChoosePlanView__card {
+.ChoosePlanView__card {
 	height: 670px;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 	margin-bottom: rem-calc(40);
@@ -254,7 +254,7 @@
 		font-size: 14px;
 	}
 }
-.Step4_ChoosePlanView__price {
+.ChoosePlanView__price {
 	min-height: 85px;
 	margin-bottom: rem-calc(20);
 	&-blue {
@@ -281,7 +281,7 @@
 		}
 	}
 }
-.Step4_ChoosePlanView__valuePropList {
+.ChoosePlanView__valuePropList {
 	margin: auto;
 	width: 174px;
 
@@ -289,7 +289,7 @@
 		width: 145px;
 	}
 }
-.Step4_ChoosePlanView__cardSubCopy {
+.ChoosePlanView__cardSubCopy {
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: 5px;
@@ -310,7 +310,7 @@
 		background-image: buildCheckIcon($price-purple);
 	}
 }
-.Step4_ChoosePlanView__radioButtonContainer {
+.ChoosePlanView__radioButtonContainer {
 	padding: 11px;
 	margin-bottom: 84px;
 	display: flex;
