@@ -21,8 +21,8 @@ const BASIC = 0;
 const PLUS = 1;
 const PREMIUM = 2;
 
-const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus`;
-const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium`;
+const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
+const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
 
 const searchPromo = () => (
 	<div className="PlanView__searchPromoContainer">
