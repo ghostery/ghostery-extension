@@ -21,6 +21,9 @@ const BASIC = 0;
 const PLUS = 1;
 const PREMIUM = 2;
 
+const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus`;
+const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium`;
+
 const searchPromo = () => (
 	<div className="PlanView__searchPromoContainer">
 		<div className="PlanView__searchLogo" />
@@ -123,6 +126,7 @@ const plusCard = (checked, handleClick, showCTAButton = false) => {
 				</div>
 			</div>
 			{showCTAButton && (
+				// Route to next screen
 				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_keep')}</button>
 			)}
 		</Fragment>
@@ -189,7 +193,7 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 				</div>
 			</div>
 			{showCTAButton && (
-				<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_upgrade')}</button>
+				<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_upgrade')}</a>
 			)}
 		</Fragment>
 	);
@@ -274,11 +278,9 @@ class PlanView extends React.Component {
 		const { selectedPlan } = this.state;
 
 		const isBasic = !user;
-		const isPlus = (user && user.plusAccess) || false;
+		const isPlus = (user && user.plusAccess && !user.premiumAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
-		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus`;
-		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium`;
 		return (
 			<div>
 				<div className="PlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
@@ -316,12 +318,12 @@ class PlanView extends React.Component {
 				)}
 				{!(isPlus && !isPremium) && (
 					<div className="PlanView__ctaButtonContainer">
-						{(selectedPlan === BASIC || selectedPlan === -1) && (
+						{(selectedPlan === BASIC) && (
 							// Change to route to next page
 							<button className="PlanView__searchCTAButton" type="button">{t('hub_plan_next_or_start_trial')}</button>
 						)}
 						{selectedPlan === PREMIUM && (
-							<a className="PlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+							<a className="PlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
 						)}
 						{selectedPlan === PLUS && (
 							<a className="PlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
