@@ -7,7 +7,6 @@
 	display: flex;
 	justify-content: center;
 }
-
 .PlanView__subtitle {
 	margin-top: 12px;
 	display: flex;
@@ -21,14 +20,12 @@
 	border-radius: 4px;
 	border: solid 4px #00aef0;
 }
-
 .PlanView__searchLogo {
 	height: 37px;
 	width: 193px;
 	margin: 65px auto 0 auto;
 	background-image: url('/app/images/hub/PlanView/search.svg');
 }
-
 .PlanView__adFree {
 	margin: 16px auto 0 auto;
 	color: #b8860b;
@@ -38,14 +35,12 @@
 	width: 220px;
 	text-align: center;
 }
-
 .PlanView__adFreePromo {
 	margin: auto;
 	font-size: 18px;
 	line-height: 32px;
 	text-align: center;
 }
-
 .PlanView__adFreePromoDescription {
 	margin: 16px auto 0 auto;
 	height: 88px;
@@ -55,7 +50,6 @@
 	text-align: center;
 	color: #4a4a4a;
 }
-
 .PlanView__searchCTAButton {
 	display: flex;
 	justify-content: center;
@@ -156,7 +150,6 @@
 .PlanView__keepOrUpgradeContainer {
 	margin: 40px auto;
 }
-
 .PlanView__arrow {
 	margin: 15px auto 0 auto;
 	height: 12px;
@@ -192,7 +185,6 @@
 			margin-left: -1px;
 		}
 	}
-
 	h2 {
 		color: $tundora;
 		font-family: "Roboto Condensed";
@@ -207,17 +199,6 @@
 	}
 	&-sub-header {
 		margin-bottom: rem-calc(15);
-	}
-	&-sub-copy {
-		display: flex;
-		align-items: center;
-		font-size: rem-calc(12);
-		margin-bottom: 8px;
-		text-align: left;
-		padding-left: rem-calc(35);
-		img {
-			padding-right: 10px;
-		}
 	}
 	.ghostery-free-image-container {
 		margin: -3px 0 0 -4px;
@@ -266,23 +247,10 @@
 		height: 85px;
 		background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
 	}
-	.button {
-		margin-top: 10px;
-		margin-bottom: rem-calc(20);
-		text-transform: none;
-		height: 38px;
-		line-height: 22px;
-		&.already-protected {
-			@include breakpoint($medium-large-breakpoint down) {
-				margin-top: 45px;
-			}
-		}
-	}
 	.card-sub-header {
 		font-size: 14px;
 	}
 }
-
 .PlanView__price {
 	min-height: 85px;
 	margin-bottom: rem-calc(20);
@@ -309,17 +277,7 @@
 			font-weight: 500;
 		}
 	}
-	.price-per-year {
-		position: relative;
-		width: 100%;
-		p {
-			position: absolute;
-			width: 100%;
-		}
-	}
 }
-
-
 .PlanView__valuePropList {
 	margin: auto;
 	width: 174px;
@@ -333,7 +291,6 @@
 	justify-content: flex-start;
 	margin-bottom: 5px;
 }
-
 .check {
 	display: inline-block;
 	width: 20px;
@@ -350,7 +307,6 @@
 		background-image: buildCheckIcon($price-purple);
 	}
 }
-
 .PlanView__radioButtonContainer {
 	padding: 11px;
 	margin-bottom: 84px;
