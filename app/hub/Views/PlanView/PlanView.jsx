@@ -296,8 +296,7 @@ class PlanView extends React.Component {
 			<div className="PlanView">
 				<div className="PlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
 				<div className="PlanView__subtitle">{this.renderSubtitleText(shouldShowSearchPromo)}</div>
-				{/* {shouldShowSearchPromo && ( */}
-				{true && isBasic && (
+				{shouldShowSearchPromo && isBasic && (
 					<Fragment>
 						{searchPromo()}
 						<a className="PlanView__searchCTAButton" href={`${globals.CHECKOUT_BASE_URL}/plus`} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
@@ -305,7 +304,7 @@ class PlanView extends React.Component {
 						<div className={arrowClassNames} onClick={this.toggleSection} />
 					</Fragment>
 				)}
-				{(expanded || isPlus || isPremium) && (
+				{((isBasic && !shouldShowSearchPromo) || expanded || isPlus || isPremium) && (
 					<div>
 						{(isPlus) ? (
 							<div className="PlanView__keepOrUpgradeContainer row align-center align-middle">
