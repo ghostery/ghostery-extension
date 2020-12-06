@@ -1737,68 +1737,101 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
-	"hub_plan_your_privacy_plan": {
+	"ghostery_browser_hub_onboarding_page_title": {
+	  "message": "Ghostery Browser Hub - Welcome"
+	},
+  	"ghostery_browser_hub_onboarding_header_title_login": {
+	  "message": "Ghostery Browser Hub - Login"
+	},
+	"ghostery_browser_hub_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Browser Hub - Block Settings"
+	},
+	"ghostery_browser_hub_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Browser Hub - Search Choice"
+	},
+	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Browser Hub - Plan Choices"
+	},
+	"ghostery_browser_hub_onboarding_welcome": {
+		"message": "Welcome to Ghostery Browser"
+	},
+	"ghostery_browser_hub_onboarding_lets_begin": {
+		"message": "Let's begin by choosing your privacy settings. This will be quick, we promise!"
+	},
+	"ghostery_browser_hub_onboarding_lets_do_this": {
+		"message": "Let's do this"
+	},
+	"ghostery_browser_hub_onboarding_your_privacy_plan": {
 		"message": "Your Privacy Plan"
 	},
-	"hub_plan_based_on_your_privacy_preferences": {
+	"ghostery_browser_hub_onboarding_based_on_your_privacy_preferences": {
 		"message": "Based on your privacy preferences"
 	},
-	"hub_plan_ad_free_with_ghostery_plus_subscription": {
+	"ghostery_browser_hub_onboarding_ad_free_with_ghostery_plus_subscription": {
 		"message": "Ad-free with Ghostery Plus subscription"
 	},
-	"hub_plan_ad_free_promo": {
+	"ghostery_browser_hub_onboarding_ad_free_promo": {
 		"message": "40% off for the first 12 months"
 	},
-	"hub_plan_ad_free_promo_description": {
+	"ghostery_browser_hub_onboarding_ad_free_promo_description": {
 		"message": "Get to what you want faster. A plus subscription gives Ghostery the support we need to provide YOU with an ad-free experience."
 	},
-	"hub_plan_or": {
+	"ghostery_browser_hub_onboarding_or": {
 		"message": "OR"
 	},
-	"hub_plan_keep": {
+	"ghostery_browser_hub_onboarding_keep": {
 		"message": "Keep"
 	},
-	"hub_plan_upgrade": {
+	"ghostery_browser_hub_onboarding_upgrade": {
 		"message": "Upgrade"
 	},
-	"hub_plan_start_trial": {
+	"ghostery_browser_hub_onboarding_start_trial": {
 		"message": "Start Trial"
 	},
-	"hub_plan_see_all_plans": {
+	"ghostery_browser_hub_onboarding_see_all_plans": {
 		"message": "See all plans"
 	},
-	"hub_plan_private_search": {
+	"ghostery_browser_hub_onboarding_private_search": {
 		"message": "Private search"
 	},
-	"hub_plan_tracker_protection": {
+	"ghostery_browser_hub_onboarding_tracker_protection": {
 		"message": "Tracker protection"
 	},
-	"hub_plan_speedy_page_loads": {
+	"ghostery_browser_hub_onboarding_speedy_page_loads": {
 		"message": "Speedy page loads"
 	},
-	"hub_plan_intelligence_technology": {
+	"ghostery_browser_hub_onboarding_intelligence_technology": {
 		"message": "Intelligence technology"
 	},
-	"hub_plan_ad_free": {
+	"ghostery_browser_hub_onboarding_ad_free": {
 		"message": "Ad free"
 	},
-	"hub_plan_supports_ghosterys_mission": {
+	"ghostery_browser_hub_onboarding_supports_ghosterys_mission": {
 		"message": "Supports Ghostery's Mission"
 	},
-	"hub_plan_unlimited_bandwidth": {
+	"ghostery_browser_hub_onboarding_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
 	},
-	"hub_plan_already_premium_subscriber": {
+	"ghostery_browser_hub_onboarding_already_premium_subscriber": {
 		"message": "You are already a premium subscriber"
 	},
-	"hub_plan_already_plus_subscriber": {
+	"ghostery_browser_hub_onboarding_already_plus_subscriber": {
 		"message": "You are already a plus subscriber"
 	},
-	"hub_plan_keep_your_current_plan_or_upgrade": {
+	"ghostery_browser_hub_onboarding_keep_your_current_plan_or_upgrade": {
 		"message": "Keep your current plan or upgrade"
 	},
-	"hub_plan_choose_an_option": {
+	"ghostery_browser_hub_onboarding_choose_an_option": {
 		"message": "Choose an option"
+	},
+	"ghostery_browser_hub_onboarding_yay_youre_all_set": {
+		"message": "Yay! You're all set."
+	},
+	"ghostery_browser_hub_onboarding_start_browsing_the_web_with": {
+		"message": "Start browsing the web with"
+	},
+	"ghostery_browser_hub_onboarding_lets_search": {
+		"message": "Let's search"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."

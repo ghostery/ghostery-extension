@@ -31,7 +31,7 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 	}
 }));
 
-describe('app/hub/Views/SetupViews/SetupHumanWebView actions', () => {
+describe('app/hub/Views/OnboardingViews/SetupHumanWebView actions', () => {
 	test('setHumanWeb action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);

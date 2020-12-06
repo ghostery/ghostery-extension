@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import SetupHeader from '../SetupHeader';
 
-describe('app/hub/Views/SetupViews/SetupHeader component', () => {
+describe('app/hub/Views/OnboardingViews/SetupHeader component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup header is rendered correctly', () => {
 			const initialState = {

@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import PlanView from './PlanView';
+import Step4_ChoosePlanView from './Step4_ChoosePlanView';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -32,4 +32,4 @@ const mapStateToProps = state => ({ ...state.account });
  */
 const mapDispatchToProps = dispatch => ({});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PlanView));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Step4_ChoosePlanView));

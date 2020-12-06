@@ -20,7 +20,7 @@ import { ToastMessage } from '../../../../../shared-components';
 // Mock Necessary Imports
 jest.mock('../../../../../panel/components/Settings/GlobalBlocking', () => props => <div>Mock Global Blocking</div>);
 
-describe('app/hub/Views/SetupViews/SetupBlockingDropdown component', () => {
+describe('app/hub/Views/OnboardingViews/SetupBlockingDropdown component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup blocking dropdown component is rendered correctly', () => {
 			const initialState = {

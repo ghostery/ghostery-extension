@@ -1,0 +1,57 @@
+.SuccessView__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.SuccessView__title {
+	margin-top: 125px;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 2.33;
+}
+
+.SuccessView__subtitle {
+	margin-bottom: 47px;
+	width: 392px;
+	font-size: 18px;
+	line-height: 2.33;
+	text-align: center;
+}
+
+.SuccessView__ghosterySuite {
+	margin-bottom: 77px;
+	height: 298px;
+	width: 545px;
+}
+
+.SuccessView__ctaButton {
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	height: 44px;
+	width: 162px;
+	padding: 7.7px 14px;
+	line-height: 22px;
+	background: linear-gradient(
+		45deg,
+		#ff7e74 50%,
+		#00aef0
+	);
+	background-size: 200% 100%;
+	background-position: 100% 50%;
+	transition: 0.25s all;
+	border: none;
+	&:hover {
+		background-position: 0% 50%;
+		transition: 0.25s all;
+	}
+	color: #FFF;
+	font-size: 14.1px;
+	font-weight: 700;
+	border-radius: 3.5px;
+	text-align: center;
+	line-height: 2.05;
+	cursor: pointer;
+}

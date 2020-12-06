@@ -1,4 +1,4 @@
-[![Ghostery](https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo_black.svg)](https://www.ghostery.com)
+[![Ghostery](https://www.ghostery.com/wp-content/themes/ghostery/assets/prod/images/github/ghostery_logo.svg)](https://www.ghostery.com)
 ---
 
 [![Build Status](https://travis-ci.com/ghostery/ghostery-extension.svg?branch=master)](https://travis-ci.com/ghostery/ghostery-extension) &nbsp; ![GitHub manifest version](https://img.shields.io/github/manifest-json/v/ghostery/ghostery-extension.svg?style=flat-square) &nbsp; [![Twitter Follow](https://img.shields.io/twitter/follow/ghostery.svg?style=social&maxAge=3600)](https://twitter.com/ghostery)
@@ -176,4 +176,4 @@ Ghostery's production tracker databases have been purposely excluded from this p
 
 The proprietary databases are the intellectual property of Ghostery, Inc. and are protected by copyright and other applicable laws. All rights to them are expressly reserved by Ghostery, Inc. You may not use these databases or any portion thereof for any purpose that is not expressly granted in writing by Ghostery, Inc. All inquires should be sent to [legal@ghostery.com](legal@ghostery.com).  Ghostery, Inc. retains the sole discretion in determining whether or not to grant permission to use the databases. Unauthorized use of the databases, or any portion of them, will cause irreparable harm to Ghostery, Inc. and may result in legal proceedings against you, seeking monetary damages and an injunction against you, including the payment of legal fees and costs.
 
-[![Ghostery](https://www.ghostery.com/wp-content/themes/ghostery/images/github/ghosty_coder.jpg)](https://www.ghostery.com)
+[![Ghostery](https://www.ghostery.com/wp-content/themes/ghostery/assets/prod/images/github/ghosty_coder.jpg)](https://www.ghostery.com)
