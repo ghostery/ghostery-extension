@@ -278,14 +278,12 @@ class PlanView extends React.Component {
 	};
 
 	render() {
-		// shouldShowSearchPromo should be true if the user did not select ghostery search in the previosu step
-		const { user, shouldShowSearchPromo } = this.props;
+		const { user, didNotSelectGhosterySearch } = this.props;
 		const { expanded, selectedPlan } = this.state;
 
 		const isBasic = !user;
 		const isPlus = (user && user.plusAccess && !user.premiumAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
-		const isBasicOrPremium = isBasic || isPremium;
 
 		const arrowClassNames = ClassNames('PlanView__arrow', {
 			up: !expanded,
@@ -295,16 +293,21 @@ class PlanView extends React.Component {
 		return (
 			<div className="PlanView">
 				<div className="PlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
-				<div className="PlanView__subtitle">{this.renderSubtitleText(shouldShowSearchPromo)}</div>
-				{shouldShowSearchPromo && isBasic && (
+				<div className="PlanView__subtitle">{this.renderSubtitleText(didNotSelectGhosterySearch)}</div>
+				{didNotSelectGhosterySearch && isBasic && (
 					<Fragment>
 						{searchPromo()}
-						<a className="PlanView__searchCTAButton" href={`${globals.CHECKOUT_BASE_URL}/plus`} target="_blank" rel="noreferrer">{t('hub_plan_start_trial')}</a>
+						{/* TODO: For the CTA button below,
+							1. If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
+								and move them to Step 5 if signed in
+							2. If user is signed out, clicking this should take them to Step 4b (linked)
+						*/}
+						<div className="PlanView__searchCTAButton">{t('hub_plan_start_trial')}</div>
 						<div className="PlanView__seeAllPlans" onClick={this.toggleSection}>{t('hub_plan_see_all_plans')}</div>
 						<div className={arrowClassNames} onClick={this.toggleSection} />
 					</Fragment>
 				)}
-				{((isBasic && !shouldShowSearchPromo) || expanded || isPlus || isPremium) && (
+				{((isBasic && !didNotSelectGhosterySearch) || expanded || isPlus || isPremium) && (
 					<div>
 						{(isPlus) ? (
 							<div className="PlanView__keepOrUpgradeContainer row align-center align-middle">
@@ -360,7 +363,7 @@ PlanView.propTypes = {
 		plusAccess: PropTypes.bool,
 		premiumAccess: PropTypes.bool,
 	}),
-	shouldShowSearchPromo: PropTypes.bool.isRequired,
+	didNotSelectGhosterySearch: PropTypes.bool.isRequired,
 };
 
 // Default props used in the Plus View
