@@ -1,0 +1,109 @@
+/**
+ * Step1_LogInForm Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.Step1_LogInForm {
+	margin-top: 40px;
+}
+.Step1_LogInForm__headerImage {
+	line-height: 1.5;
+	color: #4a4a4a;
+	margin: 20px 25px 0;
+}
+.Step1_LogInForm__inputContainer {
+	margin: auto;
+}
+.Step1_LogInForm__inputLabel {
+	text-align: left;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 2.86;
+	text-transform: uppercase;
+	color: #4a4a4a;
+}
+.Step1_LogInForm__inputBox {
+	line-height: 24px;
+	color: #4a4a4a;
+
+	// Foundation Overrides
+	border-radius: 6px;
+	box-shadow: none;
+	border: 1px solid #9b9b9b;
+
+	&::placeholder {
+		color: #c4ced1;
+	}
+}
+.Step1_LogInForm__inputBox.error {
+	margin-bottom: 8px;
+	border: 2px solid #e74055;
+}
+.Step1_LogInForm__inputBox:focus {
+	// Foundation Overrides
+	box-shadow: none;
+	border-color: #4a4a4a;
+}
+.Step1_LogInForm__inputError {
+	font-size: 12;
+	line-height: 14px;
+	color: #e74055;
+	margin-bottom: 13px;
+}
+.Step1_LogInForm__link {
+	font-size: 14px;
+	line-height: 30px;
+}
+.Step1_LogInForm__forgotPassword {
+	color: $ghosty-blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.Step1_LogInForm__button {
+	min-width: 180px;
+}
+.Step1_LogInForm__ctaButtonContainer {
+	display: flex;
+	justify-content: center;
+
+	.Step1_LogInForm__ctaButton {
+		margin: 48px auto 0 auto;
+		height: 44px;
+		width: 162px;
+		padding: 7.7px 14px;
+		line-height: 22px;
+		background: linear-gradient(
+			45deg,
+			#ff7e74 50%,
+			#00aef0
+		);
+		background-size: 200% 100%;
+		background-position: 100% 50%;
+		transition: 0.25s all;
+		border: none;
+		&:hover {
+			background-position: 0% 50%;
+			transition: 0.25s all;
+		}
+		color: #FFF;
+		font-size: 14.1px;
+		font-weight: 700;
+		border-radius: 3.5px;
+		text-align: center;
+		line-height: 2.05;
+		cursor: pointer;
+	}
+}
+@media only screen and (max-width: 740px)  {
+	.Step1_LogInForm__header {
+		flex-direction: column;
+	}
+}
