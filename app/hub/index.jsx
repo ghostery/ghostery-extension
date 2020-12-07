@@ -31,7 +31,6 @@ import CreateAccountView from './Views/CreateAccountView';
 import ForgotPasswordView from '../shared-components/ForgotPassword/ForgotPasswordContainer';
 import LogInView from './Views/LogInView';
 import UpgradePlanView from './Views/UpgradePlanView';
-import StepProgressBar from './Views/StepProgressBar';
 
 const store = createStore();
 
@@ -44,7 +43,7 @@ const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
  */
 const Hub = () => (
 	<AppView>
-		<Route exact path="/" render={() => <StepProgressBar currentStep={2} />} />
+		<Route exact path="/" render={UpgradePlanView} />
 		<Route exact path="/home" component={ah ? UpgradePlanView : HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />

@@ -35,6 +35,10 @@ const steps = [
 	}
 ];
 
+/** Example of usage:
+ *  <StepProgressBar currentStep={2} steps={steps} />
+*/
+
 /**
  * A React function component for rendering the Step Progress bar
  * @return {JSX} JSX for rendering the Step Progress bar of the ghostery-browser-intro-hub app
