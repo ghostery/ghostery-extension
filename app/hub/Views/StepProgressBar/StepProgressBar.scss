@@ -11,7 +11,52 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
- .StepProgressBarContainer {
+.StepProgressBarContainer {
 	display: flex;
 	justify-content: space-around;
- }
+}
+
+.StepProgressBar__Step {
+	height: 34px;
+	width: 32px;
+	&.step-1 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-1-current.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-2 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-2-current.svg');
+			background-repeat: no-repeat;
+		}
+		&.incomplete {
+			background: url('/app/images/hub/step-progress-bar/step-2-incomplete.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-3 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-3-current.svg');
+			background-repeat: no-repeat;
+		}
+		&.incomplete {
+			background: url('/app/images/hub/step-progress-bar/step-3-incomplete.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-4 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-4-current.svg');
+			background-repeat: no-repeat;
+		}
+		&.incomplete {
+			background: url('/app/images/hub/step-progress-bar/step-4-incomplete.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-completed {
+		background: url('/app/images/hub/step-progress-bar/step-completed.svg');
+		background-repeat: no-repeat;
+	}
+}

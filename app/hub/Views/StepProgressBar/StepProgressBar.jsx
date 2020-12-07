@@ -1,5 +1,5 @@
 /**
- * Upgrade Plan View Component
+ * Step Progress Bar Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -30,28 +30,28 @@ const StepProgressBar = (props) => {
 	const totalSteps = stepLabels.length;
 
 	const renderCompletedStep = value => (
-		<div>{`Completed Step: ${value}`}</div>
+		<div className="StepProgressBar__Step step-completed" />
 	);
 
 	const renderCurrentStep = value => (
-		<div>{`Current Step: ${value}`}</div>
+		<div className={`StepProgressBar__Step step-${value} current`} />
 	);
 
 	const renderIncompleteStep = value => (
-		<div>{`Incomplete Step: ${value}`}</div>
+		<div className={`StepProgressBar__Step step-${value} incomplete`} />
 	);
 
 	const renderProgressBar = () => (
 		stepLabels.map((value, index) => (
 			<div key={value}>
 				{(index + 1 < currentStep) && (
-					renderCompletedStep(index)
+					renderCompletedStep(index + 1)
 				)}
 				{(index + 1 === currentStep) && (
-					renderCurrentStep(index)
+					renderCurrentStep(index + 1)
 				)}
 				{(index + 1 > currentStep) && (
-					renderIncompleteStep(index)
+					renderIncompleteStep(index + 1)
 				)}
 			</div>
 		))
@@ -63,7 +63,6 @@ const StepProgressBar = (props) => {
 		</div>
 	);
 };
-
 // PropTypes ensure we pass required props of the correct type
 StepProgressBar.propTypes = {
 	// currentStep: PropTypes.number.isRequired
