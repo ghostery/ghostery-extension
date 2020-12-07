@@ -18,7 +18,7 @@ import { NavLink } from 'react-router-dom';
 import QueryString from 'query-string';
 import globals from '../../../../src/classes/Globals';
 
-const stepLabels = ['Sign In', 'Privacy', 'Search', 'Plan'];
+const stepLabels = [t('sign_in'), t('hub_onboarding_privacy'), t('hub_onboarding_search'), t('hub_onboarding_plan')];
 
 /**
  * A React function component for rendering the Step Progress bar
@@ -28,20 +28,6 @@ const stepLabels = ['Sign In', 'Privacy', 'Search', 'Plan'];
 const StepProgressBar = (props) => {
 	const currentStep = 2;
 	const totalSteps = stepLabels.length;
-
-	const getStepLabel = (step) => {
-		switch (step) {
-			case 1:
-				return t('sign_in');
-			case 2:
-				return t('privacy');
-			case 3:
-				return t('search');
-			case 4:
-				return t('plan');
-			default: return '';
-		}
-	};
 
 	const renderCompletedStep = label => (
 		<div className="StepProgressBar__column">
@@ -68,13 +54,13 @@ const StepProgressBar = (props) => {
 		stepLabels.map((value, index) => (
 			<div key={value}>
 				{(index + 1 < currentStep) && (
-					renderCompletedStep(getStepLabel(index + 1), index + 1)
+					renderCompletedStep(stepLabels[index])
 				)}
 				{(index + 1 === currentStep) && (
-					renderCurrentStep(value, index + 1)
+					renderCurrentStep(stepLabels[index], index + 1)
 				)}
 				{(index + 1 > currentStep) && (
-					renderIncompleteStep(value, index + 1)
+					renderIncompleteStep(stepLabels[index], index + 1)
 				)}
 			</div>
 		))
