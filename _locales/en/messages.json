@@ -1734,14 +1734,47 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
-	"hub_onboarding_privacy": {
+	"ghostery_browser_hub_onboarding_page_title": {
+	  "message": "Ghostery Browser Hub - Welcome"
+	},
+  	"ghostery_browser_hub_onboarding_header_title_login": {
+	  "message": "Ghostery Browser Hub - Login"
+	},
+	"ghostery_browser_hub_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Browser Hub - Block Settings"
+	},
+	"ghostery_browser_hub_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Browser Hub - Search Choice"
+	},
+	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Browser Hub - Plan Choices"
+	},
+	"ghostery_browser_hub_onboarding_privacy": {
 		"message": "Privacy"
 	},
-	"hub_onboarding_search": {
+	"ghostery_browser_hub_onboarding_search": {
 		"message": "Search"
 	},
-	"hub_onboarding_plan": {
+	"ghostery_browser_hub_onboarding_plan": {
 		"message": "Plan"
+	},
+	"ghostery_browser_hub_onboarding_welcome": {
+		"message": "Welcome to Ghostery Browser"
+	},
+	"ghostery_browser_hub_onboarding_lets_begin": {
+		"message": "Let's begin by choosing your privacy settings. This will be quick, we promise!"
+	},
+	"ghostery_browser_hub_onboarding_lets_do_this": {
+		"message": "Let's do this"
+	},
+	"ghostery_browser_hub_onboarding_yay_youre_all_set": {
+		"message": "Yay! You're all set."
+	},
+	"ghostery_browser_hub_onboarding_start_browsing_the_web_with": {
+		"message": "Start browsing the web with"
+	},
+	"ghostery_browser_hub_onboarding_lets_search": {
+		"message": "Let's search"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."

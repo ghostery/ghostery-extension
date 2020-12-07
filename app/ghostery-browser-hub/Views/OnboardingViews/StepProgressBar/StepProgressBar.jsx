@@ -22,15 +22,15 @@ const steps = [
 		route: 'LINK_TO_STEP_1'
 	},
 	{
-		label: t('hub_onboarding_privacy'),
+		label: t('ghostery_browser_hub_onboarding_privacy'),
 		route: 'LINK_TO_STEP_2'
 	},
 	{
-		label: t('hub_onboarding_search'),
+		label: t('ghostery_browser_hub_onboarding_search'),
 		route: 'LINK_TO_STEP_3'
 	},
 	{
-		label: t('hub_onboarding_plan'),
+		label: t('ghostery_browser_hub_onboarding_plan'),
 		route: 'LINK_TO_STEP_4'
 	}
 ];

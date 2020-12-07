@@ -17,7 +17,7 @@ import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import SetupDoneView from '../SetupDoneView';
 
-describe('app/hub/Views/SetupViews/SetupDoneView component', () => {
+describe('app/hub/Views/OnboardingViews/SetupDoneView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup human web view is rendered correctly', () => {
 			const initialState = {
