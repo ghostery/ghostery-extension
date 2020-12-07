@@ -1752,6 +1752,15 @@
 	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
 	  "message": "Ghostery Browser Hub - Plan Choices"
 	},
+	"ghostery_browser_hub_onboarding_privacy": {
+		"message": "Privacy"
+	},
+	"ghostery_browser_hub_onboarding_search": {
+		"message": "Search"
+	},
+	"ghostery_browser_hub_onboarding_plan": {
+		"message": "Plan"
+	},
 	"ghostery_browser_hub_onboarding_welcome": {
 		"message": "Welcome to Ghostery Browser"
 	},

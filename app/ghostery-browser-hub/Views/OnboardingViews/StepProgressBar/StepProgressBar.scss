@@ -1,0 +1,99 @@
+/**
+ * Step Progress Bar Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.StepProgressBarContainer {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.StepProgressBar__Step {
+	height: 34px;
+	width: 32px;
+	margin-left: 3px;
+
+	&.step-1 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-1-current.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-2 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-2-current.svg');
+			background-repeat: no-repeat;
+		}
+		&.incomplete {
+			background: url('/app/images/hub/step-progress-bar/step-2-incomplete.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-3 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-3-current.svg');
+			background-repeat: no-repeat;
+		}
+		&.incomplete {
+			background: url('/app/images/hub/step-progress-bar/step-3-incomplete.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-4 {
+		&.current {
+			background: url('/app/images/hub/step-progress-bar/step-4-current.svg');
+			background-repeat: no-repeat;
+		}
+		&.incomplete {
+			background: url('/app/images/hub/step-progress-bar/step-4-incomplete.svg');
+			background-repeat: no-repeat;
+		}
+	}
+	&.step-completed {
+		background: url('/app/images/hub/step-progress-bar/step-completed.svg');
+		background-repeat: no-repeat;
+	}
+}
+.StepProgressBar__column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 45px;
+	text-align: center;
+}
+.StepProgressBar__label {
+	margin-bottom: 14px;
+	width: 38px;
+	font-size: 12px;
+	color: $tundora;
+	&.currentStep {
+		font-weight: 700;
+	}
+}
+.StepProgressBar__line {
+	margin-top: 27px;
+	width: 100%;
+	&.completed {
+		border: solid 2px $ghosty-blue;
+	}
+	&.incompleted {
+		padding: 1em;
+		background-image:
+		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
+		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
+		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
+		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px);
+		background-position: top, right, bottom, left;
+		background-size: 12px 25px, 0px 0px;
+		background-repeat: repeat-x, repeat-y;
+	}
+}
