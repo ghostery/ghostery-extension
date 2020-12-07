@@ -43,7 +43,7 @@ const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
  */
 const Hub = () => (
 	<AppView>
-		<Route exact path="/" render={UpgradePlanView} />
+		<Route exact path="/" component={UpgradePlanView} />
 		<Route exact path="/home" component={ah ? UpgradePlanView : HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
