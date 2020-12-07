@@ -19,6 +19,8 @@
 .StepProgressBar__Step {
 	height: 34px;
 	width: 32px;
+	margin-left: 3px;
+
 	&.step-1 {
 		&.current {
 			background: url('/app/images/hub/step-progress-bar/step-1-current.svg');
@@ -66,6 +68,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 45px;
+	text-align: center;
 }
 .StepProgressBar__label {
 	margin-bottom: 14px;
@@ -90,7 +93,7 @@
 		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
 		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px);
 		background-position: top, right, bottom, left;
-		background-size: 14px 25px, 0px 0px;
+		background-size: 12px 25px, 0px 0px;
 		background-repeat: repeat-x, repeat-y;
 	}
 }

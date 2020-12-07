@@ -11,59 +11,80 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Fragment, useRef, useEffect } from 'react';
-import ClassNames from 'classnames';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import QueryString from 'query-string';
-import globals from '../../../../src/classes/Globals';
 
-const stepLabels = [t('sign_in'), t('hub_onboarding_privacy'), t('hub_onboarding_search'), t('hub_onboarding_plan')];
+// Refactor to pass in as props
+const steps = [
+	{
+		label: t('sign_in'),
+		route: 'onboarding-step-1'
+	},
+	{
+		label: t('hub_onboarding_privacy'),
+		route: 'onboarding-step-2'
+	},
+	{
+		label: t('hub_onboarding_search'),
+		route: 'onboarding-step-3'
+	},
+	{
+		label: t('hub_onboarding_plan'),
+		route: 'onboarding-step-4'
+	}
+];
 
 /**
  * A React function component for rendering the Step Progress bar
- * @return {JSX} JSX for rendering the Progress Progress bar of the ghostery-browser-intro-hub app
+ * @return {JSX} JSX for rendering the Step Progress bar of the ghostery-browser-intro-hub app
  * @memberof HubComponents
  */
 const StepProgressBar = (props) => {
-	const currentStep = 2;
-	const totalSteps = stepLabels.length;
+	const { currentStep } = props; // Add in steps as prop
+	const totalSteps = steps.length;
 
-	const renderCompletedStep = label => (
+	const renderCompletedStep = step => (
 		<div className="StepProgressBar__column">
-			<div className="StepProgressBar__label">{label}</div>
-			<div className="StepProgressBar__Step step-completed" />
+			<NavLink to={step.route}>
+				<div className="StepProgressBar__label">{step.label}</div>
+				<div className="StepProgressBar__Step step-completed" />
+			</NavLink>
 		</div>
 	);
 
-	const renderCurrentStep = (label, value) => (
+	const renderCurrentStep = (step, value) => (
 		<div className="StepProgressBar__column">
-			<div className="StepProgressBar__label currentStep">{label}</div>
-			<div className={`StepProgressBar__Step step-${value} current`} />
+			<NavLink to={step.route}>
+				<div className="StepProgressBar__label currentStep">{step.label}</div>
+				<div className={`StepProgressBar__Step step-${value} current`} />
+			</NavLink>
 		</div>
 	);
 
-	const renderIncompleteStep = (label, value) => (
+	const renderIncompleteStep = (step, value) => (
 		<div className="StepProgressBar__column">
-			<div className="StepProgressBar__label">{label}</div>
-			<div className={`StepProgressBar__Step step-${value} incomplete`} />
+			<NavLink to={step.route}>
+				<div className="StepProgressBar__label">{step.label}</div>
+				<div className={`StepProgressBar__Step step-${value} incomplete`} />
+			</NavLink>
 		</div>
 	);
 
 	const renderProgressBar = () => (
-		stepLabels.map((value, index) => (
+		steps.map((value, index) => (
 			<Fragment key={value}>
 				{(index + 1 < currentStep) && (
-					renderCompletedStep(stepLabels[index])
+					renderCompletedStep(steps[index])
 				)}
 				{(index + 1 === currentStep) && (
 					<Fragment>
-						{renderCurrentStep(stepLabels[index], index + 1)}
+						{renderCurrentStep(steps[index], index + 1)}
 					</Fragment>
 				)}
 				{(index + 1 > currentStep) && (
 					<Fragment>
-						{renderIncompleteStep(stepLabels[index], index + 1)}
+						{renderIncompleteStep(steps[index], index + 1)}
 					</Fragment>
 				)}
 				{(index + 1 !== totalSteps) && (
@@ -88,29 +109,11 @@ const StepProgressBar = (props) => {
 };
 // PropTypes ensure we pass required props of the correct type
 StepProgressBar.propTypes = {
-	// currentStep: PropTypes.number.isRequired
-	// protection_level: PropTypes.string.isRequired,
-	// show_yearly_prices: PropTypes.bool.isRequired,
-	// user: PropTypes.shape({
-	// 	email: PropTypes.string,
-	// 	plusAccess: PropTypes.bool,
-	// 	premiumAccess: PropTypes.bool,
-	// }),
-	// actions: PropTypes.shape({
-	// 	toggleMonthlyYearlyPrices: PropTypes.func.isRequired,
-	// 	setBasicProtection: PropTypes.func.isRequired,
-	// 	setPlusProtection: PropTypes.func.isRequired,
-	// 	setPremiumProtection: PropTypes.func.isRequired,
-	// }).isRequired,
-};
-
-// Default props used on the Home View
-StepProgressBar.defaultProps = {
-	// user: {
-	// 	email: '',
-	// 	plusAccess: false,
-	// 	premiumAccess: false,
-	// },
+	steps: PropTypes.shape({
+		label: PropTypes.string.isRequired,
+		route: PropTypes.string.isRequired,
+	}).isRequired,
+	currentStep: PropTypes.number.isRequired,
 };
 
 export default StepProgressBar;

@@ -44,7 +44,7 @@ const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
  */
 const Hub = () => (
 	<AppView>
-		<Route exact path="/" component={StepProgressBar} />
+		<Route exact path="/" render={() => <StepProgressBar currentStep={2} />} />
 		<Route exact path="/home" component={ah ? UpgradePlanView : HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
