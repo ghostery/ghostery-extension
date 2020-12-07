@@ -29,29 +29,52 @@ const StepProgressBar = (props) => {
 	const currentStep = 2;
 	const totalSteps = stepLabels.length;
 
-	const renderCompletedStep = value => (
-		<div className="StepProgressBar__Step step-completed" />
+	const getStepLabel = (step) => {
+		switch (step) {
+			case 1:
+				return t('sign_in');
+			case 2:
+				return t('privacy');
+			case 3:
+				return t('search');
+			case 4:
+				return t('plan');
+			default: return '';
+		}
+	};
+
+	const renderCompletedStep = label => (
+		<div className="StepProgressBar__column">
+			<div className="StepProgressBar__label">{label}</div>
+			<div className="StepProgressBar__Step step-completed" />
+		</div>
 	);
 
-	const renderCurrentStep = value => (
-		<div className={`StepProgressBar__Step step-${value} current`} />
+	const renderCurrentStep = (label, value) => (
+		<div className="StepProgressBar__column">
+			<div className="StepProgressBar__label">{label}</div>
+			<div className={`StepProgressBar__Step step-${value} current`} />
+		</div>
 	);
 
-	const renderIncompleteStep = value => (
-		<div className={`StepProgressBar__Step step-${value} incomplete`} />
+	const renderIncompleteStep = (label, value) => (
+		<div className="StepProgressBar__column">
+			<div className="StepProgressBar__label">{label}</div>
+			<div className={`StepProgressBar__Step step-${value} incomplete`} />
+		</div>
 	);
 
 	const renderProgressBar = () => (
 		stepLabels.map((value, index) => (
 			<div key={value}>
 				{(index + 1 < currentStep) && (
-					renderCompletedStep(index + 1)
+					renderCompletedStep(getStepLabel(index + 1), index + 1)
 				)}
 				{(index + 1 === currentStep) && (
-					renderCurrentStep(index + 1)
+					renderCurrentStep(value, index + 1)
 				)}
 				{(index + 1 > currentStep) && (
-					renderIncompleteStep(index + 1)
+					renderIncompleteStep(value, index + 1)
 				)}
 			</div>
 		))
