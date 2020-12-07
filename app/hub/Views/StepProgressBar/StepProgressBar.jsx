@@ -38,7 +38,7 @@ const StepProgressBar = (props) => {
 
 	const renderCurrentStep = (label, value) => (
 		<div className="StepProgressBar__column">
-			<div className="StepProgressBar__label">{label}</div>
+			<div className="StepProgressBar__label currentStep">{label}</div>
 			<div className={`StepProgressBar__Step step-${value} current`} />
 		</div>
 	);
@@ -52,17 +52,31 @@ const StepProgressBar = (props) => {
 
 	const renderProgressBar = () => (
 		stepLabels.map((value, index) => (
-			<div key={value}>
+			<Fragment key={value}>
 				{(index + 1 < currentStep) && (
 					renderCompletedStep(stepLabels[index])
 				)}
 				{(index + 1 === currentStep) && (
-					renderCurrentStep(stepLabels[index], index + 1)
+					<Fragment>
+						{renderCurrentStep(stepLabels[index], index + 1)}
+					</Fragment>
 				)}
 				{(index + 1 > currentStep) && (
-					renderIncompleteStep(stepLabels[index], index + 1)
+					<Fragment>
+						{renderIncompleteStep(stepLabels[index], index + 1)}
+					</Fragment>
 				)}
-			</div>
+				{(index + 1 !== totalSteps) && (
+					<Fragment>
+						{(index + 1 < currentStep) && (
+							<div className="StepProgressBar__line completed" />
+						)}
+						{(index + 1 >= currentStep) && (
+							<div className="StepProgressBar__line incompleted" />
+						)}
+					</Fragment>
+				)}
+			</Fragment>
 		))
 	);
 

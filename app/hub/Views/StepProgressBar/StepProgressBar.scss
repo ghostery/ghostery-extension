@@ -14,6 +14,7 @@
 .StepProgressBarContainer {
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 }
 .StepProgressBar__Step {
 	height: 34px;
@@ -63,9 +64,33 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	width: 45px;
 }
 .StepProgressBar__label {
 	margin-bottom: 14px;
+	width: 38px;
 	font-size: 12px;
 	color: $tundora;
+	&.currentStep {
+		font-weight: 700;
+	}
+}
+.StepProgressBar__line {
+	margin-top: 27px;
+	width: 100%;
+	&.completed {
+		border: solid 2px $ghosty-blue;
+	}
+	&.incompleted {
+		padding: 1em;
+		background-image:
+		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
+		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
+		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
+		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px);
+		background-position: top, right, bottom, left;
+		background-size: 14px 25px, 0px 0px;
+		background-repeat: repeat-x, repeat-y;
+	}
 }
