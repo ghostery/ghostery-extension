@@ -15,29 +15,25 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-// Refactor to pass in as props
+// TODO: Change routes
 const steps = [
 	{
 		label: t('sign_in'),
-		route: 'onboarding-step-1'
+		route: 'LINK_TO_STEP_1'
 	},
 	{
 		label: t('hub_onboarding_privacy'),
-		route: 'onboarding-step-2'
+		route: 'LINK_TO_STEP_2'
 	},
 	{
 		label: t('hub_onboarding_search'),
-		route: 'onboarding-step-3'
+		route: 'LINK_TO_STEP_3'
 	},
 	{
 		label: t('hub_onboarding_plan'),
-		route: 'onboarding-step-4'
+		route: 'LINK_TO_STEP_4'
 	}
 ];
-
-/** Example of usage:
- *  <StepProgressBar currentStep={2} steps={steps} />
-*/
 
 /**
  * A React function component for rendering the Step Progress bar
@@ -45,7 +41,7 @@ const steps = [
  * @memberof HubComponents
  */
 const StepProgressBar = (props) => {
-	const { currentStep } = props; // Add in steps as prop
+	const { currentStep } = props;
 	const totalSteps = steps.length;
 
 	const renderCompletedStep = step => (
@@ -113,10 +109,6 @@ const StepProgressBar = (props) => {
 };
 // PropTypes ensure we pass required props of the correct type
 StepProgressBar.propTypes = {
-	steps: PropTypes.shape({
-		label: PropTypes.string.isRequired,
-		route: PropTypes.string.isRequired,
-	}).isRequired,
 	currentStep: PropTypes.number.isRequired,
 };
 
