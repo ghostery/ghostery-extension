@@ -248,7 +248,7 @@ class Metrics {
 			// Subscription Interval
 			this._buildQueryPair('si', Metrics._getSubscriptionInterval().toString()) +
 			// Product ID Parameter
-			this._buildQueryPair('pi', 'gbe');
+			this._buildQueryPair('pi', Metrics._getProductID());
 
 		if (type !== 'uninstall') {
 			metrics_url +=
@@ -367,6 +367,18 @@ class Metrics {
 				}
 			}
 		});
+	}
+
+	/**
+	 * Get the product ID
+	 *
+	 * @private
+	 *
+	 * @return {string} The Product ID
+	 */
+	static _getProductID() {
+		if (BROWSER_INFO.token === 'gd') return 'gd';
+		return 'gbe';
 	}
 
 	/**
