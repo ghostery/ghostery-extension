@@ -20,7 +20,7 @@ import { makeStoreCreator } from '../shared-hub/utils/index';
 import toast from '../shared-hub/reducers/ToastReducer';
 import antiSuite from '../shared-hub/reducers/AntiSuiteReducer';
 import blockingPolicy from '../shared-hub/reducers/BlockingPolicyReducer';
-import { reducer as onboarding } from './Views/OnboardingView';
+import setupLifecycle from '../shared-hub/reducers/SetupLifecycleReducer';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
@@ -28,7 +28,7 @@ const reducers = {
 	toast,
 	antiSuite,
 	blockingPolicy,
-	onboarding,
+	setupLifecycle,
 	account,
 	settings
 };

@@ -12,7 +12,7 @@
  */
 
 import { makeDeferredDispatcher } from '../utils';
-import SET_BLOCKING_POLICY from '../constants/BlockingPolicyConstants';
+import { SET_BLOCKING_POLICY } from '../constants/BlockingPolicyConstants';
 
 const setBlockingPolicy =
 	actionData => makeDeferredDispatcher(SET_BLOCKING_POLICY, actionData);

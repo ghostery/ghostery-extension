@@ -14,7 +14,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import OnboardingView from './OnboardingView';
-import { BLOCKING_POLICY_RECOMMENDED } from './OnboardingViewConstants';
+import { BLOCKING_POLICY_RECOMMENDED } from '../../../shared-hub/constants/BlockingPolicyConstants';
 
 // Component Views
 import WelcomeView from '../OnboardingViews/Step0_WelcomeView';
