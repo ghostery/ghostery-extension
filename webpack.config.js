@@ -65,7 +65,7 @@ module.exports = {
 		foundation_hub: [`${SASS_DIR}/vendor/foundation_hub.scss`],
 		ghostery_dot_com_css: [`${SASS_DIR}/ghostery_dot_com.scss`],
 		hub: [`${SASS_DIR}/hub.scss`],
-		hub_ghostery_browser: [`${HUB_GHOSTERY_BROWSER_DIR}/hub_ghostery_browser.scss`],
+		hub_ghostery_browser: [`${SASS_DIR}/hub_ghostery_browser.scss`],
 		licenses: [`${SASS_DIR}/licenses.scss`],
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
