@@ -1839,6 +1839,48 @@
 	"ghostery_browser_hub_onboarding_lets_search": {
 		"message": "Let's search"
 	},
+	"ghostery_browser_hub_onboarding_which_privacy_plan": {
+		"message": "Which privacy plan is right for you?"
+	},
+	"ghostery_browser_hub_onboarding_tell_us_your_preferences": {
+		"message": "Tell us your preferences, we'll offer you our recommendation."
+	},
+	"ghostery_browser_hub_onboarding_recommended_choices": {
+		"message": "Recommended choices"
+	},
+	"ghostery_browser_hub_onboarding_question_block_ads": {
+		"message": "Do you want to block ads?"
+	},
+	"ghostery_browser_hub_onboarding_question_kinds_of_trackers": {
+		"message": "What kinds of trackers do you want to block?"
+	},
+	"ghostery_browser_hub_onboarding_kinds_of_trackers_all": {
+		"message": "All trackers"
+	},
+	"ghostery_browser_hub_onboarding_kinds_of_trackers_none": {
+		"message": "No trackers"
+	},
+	"ghostery_browser_hub_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "All ad and analytics trackers"
+	},
+	"ghostery_browser_hub_onboarding_question_anti_tracking": {
+		"message": "Do you want to turn on anti-tracking?"
+	},
+	"ghostery_browser_hub_onboarding_question_smart_browsing": {
+		"message": "Do you want to turn on smart-browsing?"
+	},
+	"ghostery_browser_hub_info_blocking_all": {
+		"message": "Blocking \"all trackers\" may cause some websites to break."
+	},
+	"ghostery_browser_hub_info_anti_tracking": {
+		"message": "Anti-tracking anonymizes uniquely identifiable data that trackers try to collect"
+	},
+	"ghostery_browser_hub_info_smart_browsing": {
+		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
+	},
+	"ghostery_browser_hub_toast_error": {
+		"message": "Please answer all questions"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
