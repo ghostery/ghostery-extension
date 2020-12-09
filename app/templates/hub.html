@@ -26,10 +26,9 @@
 		const js = document.createElement("script");
 
 		js.type = "text/javascript";
-		// if (true) js.src = '../../dist/hub_react.js';
-		// else js.src = '../../dist/hub_ghostery_browser_react.js'; //  TODO: update to point to hub
-
-		js.src = '../../dist/hub_ghostery_browser_react.js';
+		// TODO branch on actual user agent value
+		if (false) js.src = '../../dist/hub_react.js';
+		else js.src = '../../dist/hub_ghostery_browser_react.js';
 
 		body.appendChild(js);
 	</script>
