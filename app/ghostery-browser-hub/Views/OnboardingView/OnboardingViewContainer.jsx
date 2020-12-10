@@ -14,7 +14,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import OnboardingView from './OnboardingView';
-import { BLOCKING_POLICY_RECOMMENDED } from './OnboardingViewConstants';
+import { BLOCKING_POLICY_RECOMMENDED } from '../../../shared-hub/constants/BlockingPolicyConstants';
 
 // Component Views
 import WelcomeView from '../OnboardingViews/Step0_WelcomeView';
@@ -38,7 +38,7 @@ class OnboardingViewContainer extends Component {
 
 		const { history } = this.props;
 		if (!props.preventRedirect) {
-			history.push('/onboarding/1');
+			history.push('/onboarding/0');
 		}
 
 		// TODO verify what document title we should use
@@ -81,7 +81,7 @@ class OnboardingViewContainer extends Component {
 				index: 0,
 				path: '/onboarding/0',
 				bodyComponent: WelcomeView,
-			}
+			},
 			{
 				index: 1,
 				path: '/onboarding/1',
@@ -102,6 +102,11 @@ class OnboardingViewContainer extends Component {
 				path: '/onboarding/4',
 				bodyComponent: ChoosePlanView,
 			},
+			{
+				index: 5,
+				path: '/onboarding/5',
+				bodyComponent: SuccessView,
+			}
 		];
 
 		return (

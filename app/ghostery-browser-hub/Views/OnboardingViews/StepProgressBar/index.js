@@ -1,5 +1,5 @@
 /**
- * Blocking Policy Action Creators for the Hubs to use
+ * Point of entry index.js file for Ghostery Browser Hub Step Progress Bar
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,10 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { makeDeferredDispatcher } from '../utils';
-import { SET_BLOCKING_POLICY } from '../constants/BlockingPolicyConstants';
+import StepProgressBar from './StepProgressBar';
 
-const setBlockingPolicy =
-	actionData => makeDeferredDispatcher(SET_BLOCKING_POLICY, actionData);
-
-export default setBlockingPolicy;
+export default StepProgressBar;

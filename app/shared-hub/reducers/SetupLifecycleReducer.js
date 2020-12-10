@@ -1,5 +1,5 @@
 /**
- * Reducer used throughout the Onboarding View's flow
+ * Reducer for the setup flow's lifecycle events, for use by the Hubs
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -12,16 +12,15 @@
  */
 
 import {
-	SET_TRACKER_BLOCKING_POLICY,
-	INIT_ONBOARDING_PROPS,
-	SET_ONBOARDING_NAVIGATION,
-} from './OnboardingViewConstants';
+	INIT_SETUP_PROPS,
+	SET_SETUP_NAVIGATION,
+} from '../constants/SetupLifecycleConstants';
 
 const initialState = {};
 
-function OnboardingViewReducer(state = initialState, action) {
+function SetupLifecycleReducer(state = initialState, action) {
 	switch (action.type) {
-		case INIT_ONBOARDING_PROPS: {
+		case INIT_SETUP_PROPS: {
 			const {
 				navigation,
 				setup_show_warning_override,
@@ -29,7 +28,6 @@ function OnboardingViewReducer(state = initialState, action) {
 				enable_anti_tracking,
 				enable_ad_block,
 				enable_smart_block,
-				enable_ghostery_rewards,
 				enable_human_web,
 			} = action.data;
 			const {
@@ -58,12 +56,11 @@ function OnboardingViewReducer(state = initialState, action) {
 					enable_anti_tracking,
 					enable_ad_block,
 					enable_smart_block,
-					enable_ghostery_rewards,
 					enable_human_web,
 				}
 			};
 		}
-		case SET_ONBOARDING_NAVIGATION: {
+		case SET_SETUP_NAVIGATION: {
 			const {
 				activeIndex,
 				hrefPrev,
@@ -89,13 +86,9 @@ function OnboardingViewReducer(state = initialState, action) {
 				}
 			};
 		}
-		case SET_TRACKER_BLOCKING_POLICY: {
-			const { blockingPolicy } = action.data;
-			return { ...state, setup: { ...state.setup, blockingPolicy } };
-		}
 
 		default: return state;
 	}
 }
 
-export default OnboardingViewReducer;
+export default SetupLifecycleReducer;

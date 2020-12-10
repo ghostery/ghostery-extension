@@ -69,32 +69,15 @@ html, body, #root {
 @import './partials/_fonts';
 @import './partials/_loader';
 
-// Imports from ../hub directory
-@import '../hub/Views/SideNavigationView/SideNavigationView.scss';
-@import '../hub/Views/HomeView/HomeView.scss';
-@import '../hub/Views/SetupView/SetupView.scss';
-@import '../hub/Views/SetupViews/SetupHeader/SetupHeader.scss';
-@import '../hub/Views/SetupViews/SetupBlockingView/SetupBlockingView.scss';
-@import '../hub/Views/SetupViews/SetupBlockingDropdown/SetupBlockingDropdown.scss';
-@import '../hub/Views/SetupViews/SetupAntiSuiteView/SetupAntiSuiteView.scss';
-@import '../hub/Views/SetupViews/SetupHumanWebView/SetupHumanWebView.scss';
-@import '../hub/Views/SetupViews/SetupDoneView/SetupDoneView.scss';
-@import '../hub/Views/TutorialView/TutorialView.scss';
-@import '../hub/Views/PlusView/PlusView.scss';
-@import '../hub/Views/RewardsView/RewardsView.scss';
-@import '../hub/Views/ProductsView/ProductsView.scss';
-@import '../hub/Views/SignedInView/SignedInView.scss';
-@import '../hub/Views/LogInView/LogInView.scss';
-@import '../hub/Views/CreateAccountView/CreateAccountView.scss';
-@import '../hub/Views/UpgradePlanView/UpgradePlanView.scss';
+// Imports from ../ghostery-browser-hub directory
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step0_WelcomeView/WelcomeView.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/StepProgressbar/StepProgressbar.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/Step1_CreateAccountView/Step1_CreateAccountView.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/Step1_CreateAccountForm/Step1_CreateAccountForm.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/Step1_LogInForm/Step1_LogInForm.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/Step5_SuccessView/SuccessView.scss';
 
 // Imports from ../shared-components directory
-@import '../shared-components/ExitButton/ExitButton.scss';
-@import '../shared-components/Modal/Modal.scss';
-@import '../shared-components/ModalContent/PremiumPromoModalContent/PremiumPromoModalContent.scss';
-@import '../shared-components/SteppedNavigation/SteppedNavigation.scss';
 @import '../shared-components/ToastMessage/ToastMessage.scss';
 @import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';
-@import '../shared-components/ToggleSwitch/ToggleSwitch.scss';
-@import '../shared-components/ForgotPassword/ForgotPassword.scss';

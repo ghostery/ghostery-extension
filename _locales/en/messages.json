@@ -1725,6 +1725,9 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Use between 8 and 50 characters."
 	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "Your passwords do not match."
+	},
 	"hub_create_account_already_have_account": {
 		"message": "Already have a Ghostery Account?"
 	},
@@ -1751,6 +1754,15 @@
 	},
 	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
 	  "message": "Ghostery Browser Hub - Plan Choices"
+	},
+	"ghostery_browser_hub_onboarding_privacy": {
+		"message": "Privacy"
+	},
+	"ghostery_browser_hub_onboarding_search": {
+		"message": "Search"
+	},
+	"ghostery_browser_hub_onboarding_plan": {
+		"message": "Plan"
 	},
 	"ghostery_browser_hub_onboarding_welcome": {
 		"message": "Welcome to Ghostery Browser"
@@ -1823,6 +1835,66 @@
 	},
 	"ghostery_browser_hub_onboarding_choose_an_option": {
 		"message": "Choose an option"
+  },
+	"ghostery_browser_hub_onboarding_create_a_ghostery_account": {
+		"message": "Create a Ghostery Account"
+	},
+	"ghostery_browser_hub_onboarding_sync_settings": {
+		"message": "Allows you to sync settings across browsers and devices"
+	},
+	"ghostery_browser_hub_onboarding_already_have_account": {
+		"message": "I already have an account."
+	},
+	"ghostery_browser_hub_onboarding_send_me": {
+		"message": "Send me"
+	},
+	"ghostery_browser_hub_onboarding_updates_and_promotions": {
+		"message": "updates & promotions."
+	},
+	"ghostery_browser_hub_onboarding_skip": {
+		"message": "Skip"
+	},
+	"ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously": {
+		"message": "We take your privacy very seriously. Learn more"
+	},
+	"ghostery_browser_hub_onboarding_private_by_design": {
+		"message": "Private by design"
+	},
+	"ghostery_browser_hub_onboarding_private_by_design_description": {
+		"message": "Privacy is incredibly important to us at Ghostery and we've taken extra care to design our products that limits the amount of personal information collected."
+	},
+	"ghostery_browser_hub_onboarding_why_do_you_need_my_email": {
+		"message": "Why do you need my email?"
+	},
+	"ghostery_browser_hub_onboarding_why_do_you_need_my_email_description": {
+		"message": "We've found email is the simplest way to create and secure a unique account without sharing your information. It helps sync your custom settings across your devices."
+	},
+	"ghostery_browser_hub_onboarding_what_do_you_use_my_email_for": {
+		"message": "What do you use my email for?"
+	},
+	"ghostery_browser_hub_onboarding_what_do_you_use_my_email_for_description": {
+		"message": "We never share or sell your personal information. Your email address is used for account management, technical support, product-related communications, and some opt-in features."
+	},
+	"ghostery_browser_hub_onboarding_how_secure_is_": {
+		"message": "How secure is"
+	},
+	"ghostery_browser_hub_onboarding_how_secure_is_ghostery_description": {
+		"message": "We never share or sell your personal information. Your email address is used for account management, technical support, product-related communications, and some opt-in features."
+	},
+	"ghostery_browser_hub_onboarding_can_i_remove_my_account": {
+		"message": "Can I remove my account?"
+	},
+	"ghostery_browser_hub_onboarding_can_i_remove_my_account_description": {
+		"message": "We hope you enjoy using Ghostery, but if you do decide to leave we will remove all of your personal information within 90 days from the date of request."
+	},
+	"ghostery_browser_hub_onboarding_visit_our_privacy_policy": {
+		"message": "Visit our Privacy Policy for more information"
+	},
+	"ghostery_browser_hub_onboarding_create_an_account": {
+		"message": "Create an account."
+	},
+	"ghostery_browser_hub_onboarding_you_are_signed_in_as": {
+		"message": "You are signed in as"
 	},
 	"ghostery_browser_hub_onboarding_yay_youre_all_set": {
 		"message": "Yay! You're all set."
@@ -1832,6 +1904,48 @@
 	},
 	"ghostery_browser_hub_onboarding_lets_search": {
 		"message": "Let's search"
+	},
+	"ghostery_browser_hub_onboarding_which_privacy_plan": {
+		"message": "Which privacy plan is right for you?"
+	},
+	"ghostery_browser_hub_onboarding_tell_us_your_preferences": {
+		"message": "Tell us your preferences, we'll offer you our recommendation."
+	},
+	"ghostery_browser_hub_onboarding_recommended_choices": {
+		"message": "Recommended choices"
+	},
+	"ghostery_browser_hub_onboarding_question_block_ads": {
+		"message": "Do you want to block ads?"
+	},
+	"ghostery_browser_hub_onboarding_question_kinds_of_trackers": {
+		"message": "What kinds of trackers do you want to block?"
+	},
+	"ghostery_browser_hub_onboarding_kinds_of_trackers_all": {
+		"message": "All trackers"
+	},
+	"ghostery_browser_hub_onboarding_kinds_of_trackers_none": {
+		"message": "No trackers"
+	},
+	"ghostery_browser_hub_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "All ad and analytics trackers"
+	},
+	"ghostery_browser_hub_onboarding_question_anti_tracking": {
+		"message": "Do you want to turn on anti-tracking?"
+	},
+	"ghostery_browser_hub_onboarding_question_smart_browsing": {
+		"message": "Do you want to turn on smart-browsing?"
+	},
+	"ghostery_browser_hub_info_blocking_all": {
+		"message": "Blocking \"all trackers\" may cause some websites to break."
+	},
+	"ghostery_browser_hub_info_anti_tracking": {
+		"message": "Anti-tracking anonymizes uniquely identifiable data that trackers try to collect"
+	},
+	"ghostery_browser_hub_info_smart_browsing": {
+		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
+	},
+	"ghostery_browser_hub_toast_error": {
+		"message": "Please answer all questions"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -2152,6 +2266,9 @@
 	},
 	"password_colon": {
 		"message": "Password:"
+	},
+	"confirm_password_colon": {
+		"message": "Confirm Password:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "Please enter a valid email."

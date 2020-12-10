@@ -25,7 +25,12 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const { METRICS_BASE_URL, EXTENSION_VERSION, BROWSER_INFO } = globals;
+const {
+	BROWSER_INFO,
+	BROWSER_INFO_READY,
+	EXTENSION_VERSION,
+	METRICS_BASE_URL,
+} = globals;
 const MAX_DELAYED_PINGS = 100;
 // Set of conf keys used in constructing telemetry url
 const METRICS_URL_SET = new Set([
@@ -221,6 +226,11 @@ class Metrics {
 	 * @return {string}          	complete telemetry url
 	 */
 	async _buildMetricsUrl(type, frequency) {
+		// Make sure that Globals._checkBrowserInfo() has resolved before we proceed,
+		// so that we use the correct BROWSER_INFO values if we are in
+		// the Ghostery Desktop or Ghostery Android browsers
+		await BROWSER_INFO_READY;
+
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
 		let metrics_url = `${METRICS_BASE_URL}/${type}${frequencyString}?gr=-1`;
@@ -248,7 +258,7 @@ class Metrics {
 			// Subscription Interval
 			this._buildQueryPair('si', Metrics._getSubscriptionInterval().toString()) +
 			// Product ID Parameter
-			this._buildQueryPair('pi', 'gbe');
+			this._buildQueryPair('pi', await Metrics._getProductID());
 
 		if (type !== 'uninstall') {
 			metrics_url +=
@@ -367,6 +377,20 @@ class Metrics {
 				}
 			}
 		});
+	}
+
+	/**
+	 * Get the product ID
+	 *
+	 * @private
+	 *
+	 * @return {string} The Product ID
+	 */
+	static async _getProductID() {
+		// Make sure that Globals._checkBrowserInfo() has resolved before we proceed
+		await BROWSER_INFO_READY;
+		if (BROWSER_INFO.token === 'gd') return 'gd';
+		return 'gbe';
 	}
 
 	/**

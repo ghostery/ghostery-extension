@@ -11,31 +11,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import {
-	SET_AD_BLOCK,
-	SET_ANTI_TRACKING,
-	SET_SMART_BLOCK
-} from '../constants/AntiSuiteConstants';
+import { SET_BLOCKING_POLICY } from '../constants/BlockingPolicyConstants';
 
 const initialState = {};
 
-function AntiSuiteReducer(state = initialState, action) {
+function BlockingPolicyReducer(state = initialState, action) {
 	switch (action.type) {
-		case SET_AD_BLOCK: {
-			const { enable_ad_block } = action.data;
-			return { ...state, setup: { ...state.setup, enable_ad_block } };
-		}
-		case SET_ANTI_TRACKING: {
-			const { enable_anti_tracking } = action.data;
-			return { ...state, setup: { ...state.setup, enable_anti_tracking } };
-		}
-		case SET_SMART_BLOCK: {
-			const { enable_smart_block } = action.data;
-			return { ...state, setup: { ...state.setup, enable_smart_block } };
+		case SET_BLOCKING_POLICY: {
+			const { blockingPolicy } = action.data;
+			return { ...state, setup: { ...state.setup, blockingPolicy } };
 		}
 
 		default: return state;
 	}
 }
 
-export default AntiSuiteReducer;
+export default BlockingPolicyReducer;
