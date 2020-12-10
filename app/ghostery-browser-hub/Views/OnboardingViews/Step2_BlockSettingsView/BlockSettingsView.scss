@@ -1,0 +1,95 @@
+.BlockSettingsView__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 18px;
+	line-height: 2.33;
+	color: $tundora;
+	margin: 45px auto 83px auto;
+}
+
+.BlockSettingsView__title {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 2.33;
+	text-align: center;
+}
+
+.BlockSettingsView__subtitle {
+	margin-bottom: 47px;
+	text-align: center;
+}
+
+.BlockSettingsView_formBlock {
+	align-self: stretch;
+	text-align: left;
+}
+
+.BlockSettingsView__ctaButton {
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	height: 44px;
+	width: 162px;
+	padding: 7.7px 14px;
+	line-height: 22px;
+	background: linear-gradient(
+		45deg,
+		#ff7e74 50%,
+		#00aef0
+	);
+	background-size: 200% 100%;
+	background-position: 100% 50%;
+	transition: 0.25s all;
+	border: none;
+	&:hover {
+		background-position: 0% 50%;
+		transition: 0.25s all;
+	}
+	color: #FFF;
+	font-size: 14.1px;
+	font-weight: 700;
+	border-radius: 3.5px;
+	text-align: center;
+	line-height: 2.05;
+	cursor: pointer;
+}
+
+.BlockSettingsView_question {
+	font-weight: 500;
+}
+
+.BlockSettingsView__radioButtonContainer {
+	padding: 11px;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.BlockSettingsView_answerBlock {
+	display: flex;
+	align-items: center;
+}
+
+.BlockSettingsView_checkboxBlock {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+}
+
+.BlockSettingsView_checkbox {
+	width: 18px;
+	height: 18px;
+}
+
+.BlockSettingsView__infoIcon {
+	width: 18px;
+	background-repeat: no-repeat;
+	background-image: url('/app/images/hub/setup/info.svg');
+	margin-left: 8px;
+}
+
+.BlockSettingsView_questionBlock {
+	display: flex;
+}
