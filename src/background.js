@@ -70,7 +70,7 @@ const {
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
-const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4/version`;
+const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4/versions.json`;
 const REAL_ESTATE_ID = 'ghostery';
 const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;

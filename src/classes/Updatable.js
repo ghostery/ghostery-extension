@@ -130,7 +130,7 @@ class Updatable {
 	 */
 	_remoteFetcher(callback) {
 		log(`fetching ${this.type} from remote`);
-		const UPDATE_URL = `${CDN_BASE_URL}/update/v4/${this.type}`;
+		const UPDATE_URL = `${CDN_BASE_URL}/update/v4/${this.type}.json`;
 
 		getJson(UPDATE_URL).then((list) => {
 			callback(true, list);
