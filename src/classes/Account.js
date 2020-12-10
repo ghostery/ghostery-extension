@@ -164,6 +164,10 @@ class Account {
 				this._setAccountUserSettings(settings_json);
 				return settings_json;
 			})
+			// Fetching the settings from the account server failed,
+			// or they have simply never been synced to the account server yet
+			// In that case, just use the local settings
+			.catch(() => this.buildUserSettings())
 	)
 
 	/**
@@ -560,7 +564,6 @@ class Account {
 		log('SET USER SETTINGS', returnedSettings);
 		if (IS_CLIQZ) {
 			returnedSettings.enable_human_web = false;
-			returnedSettings.enable_offers = false;
 			returnedSettings.enable_ad_block = false;
 			returnedSettings.enable_anti_tracking = false;
 		}

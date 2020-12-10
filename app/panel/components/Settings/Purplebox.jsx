@@ -24,8 +24,8 @@ const Purplebox = ({ settingsData, toggleCheckbox, selectItem }) => (
 				<h3>{ t('settings_purple_box') }</h3>
 				<div className="s-option-group">
 					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-show-purple-box" name="show_alert" defaultChecked={settingsData.show_alert} onClick={toggleCheckbox} />
-						<label htmlFor="settings-show-purple-box"><span>{ t('settings_show_purple_box') }</span></label>
+						<input type="checkbox" id="settings-show-tracker-tally" name="show_alert" defaultChecked={settingsData.show_alert} onClick={toggleCheckbox} />
+						<label htmlFor="settings-show-tracker-tally"><span>{ t('settings_show_purple_box') }</span></label>
 						<div className="s-tooltip-down" data-g-tooltip={t('settings_show_purple_box_tooltip')}>
 							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>

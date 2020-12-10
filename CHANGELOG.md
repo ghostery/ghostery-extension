@@ -1,4 +1,16 @@
-### GHOSTERY 8.5.3 ()
+### GHOSTERY 8.5.4 (November 20, 2020)
+
++ Adds support for Ghostery Browser (#621, #622)
++ Remove Ghostery Rewards (#630)
++ Updated feature names (#613, #626, #627)
++ Shortened metrics uninstall URL (#615)
++ Fixes bug with initial account settings sync (#629)
++ Bug fixes (#617, #624, #625, #628)
++ Updated translations
+
+See the complete GitHub [milestone](https://github.com/ghostery/ghostery-extension/milestone/15?closed=1)
+
+### GHOSTERY 8.5.3 (October 8, 2020)
 
 + Updated Firefox Android extension panel UI and mobile optimizations (#587)
 + New console debugging interface for user troubleshooting (#568)

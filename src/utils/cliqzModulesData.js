@@ -30,10 +30,10 @@ const { adblocker, antitracking } = cliqz.modules;
  */
 export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	let totalUnsafeCount = 0;
-	let totalUnknownCount = 0;
+	let totalUnidentifiedCount = 0;
 	let trackerCount = 0;
-	let unknownTrackerCount = 0;
-	const unknownTrackers = [];
+	let unidentifiedTrackerCount = 0;
+	const unidentifiedTrackers = [];
 	const whitelistedUrls = conf.cliqz_module_whitelist;
 	const cliqzModule = antiTracking ? antitracking : adblocker;
 	const cliqzModuleEnabled = antiTracking ? conf.enable_anti_tracking : conf.enable_ad_block;
@@ -41,10 +41,10 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	if (!cliqzModuleEnabled || !cliqzModule.background) {
 		return {
 			totalUnsafeCount,
-			totalUnknownCount,
+			totalUnidentifiedCount,
 			trackerCount,
-			unknownTrackerCount,
-			unknownTrackers,
+			unidentifiedTrackerCount,
+			unidentifiedTrackers,
 			whitelistedUrls,
 		};
 	}
@@ -81,9 +81,9 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 
 		if (dataPoints) {
 			totalUnsafeCount += dataPoints;
-			totalUnknownCount += dataPoints;
+			totalUnidentifiedCount += dataPoints;
 			trackerCount++;
-			unknownTrackerCount++;
+			unidentifiedTrackerCount++;
 		}
 
 		if (dataPoints || whitelisted) {
@@ -92,7 +92,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 				name, domains, ads, cookies, fingerprints, wtm
 			} = other;
 
-			unknownTrackers.push({
+			unidentifiedTrackers.push({
 				name, domains, ads, cookies, fingerprints, whitelisted, type, wtm
 			});
 		}
@@ -100,10 +100,10 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 
 	return {
 		totalUnsafeCount,
-		totalUnknownCount,
+		totalUnidentifiedCount,
 		trackerCount,
-		unknownTrackerCount,
-		unknownTrackers,
+		unidentifiedTrackerCount,
+		unidentifiedTrackers,
 		whitelistedUrls,
 	};
 }

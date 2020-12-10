@@ -1,11 +1,10 @@
 {
-  	"debug": true,
 	"manifest_version": 2,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.5.3",
-	"version_name": "8.5.3",
+	"version": "8.5.4",
+	"version_name": "8.5.4",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"icons": {
@@ -75,7 +74,8 @@
 				"https://*/*"
 			],
 			"exclude_matches": [
-				"*://*/_/chrome/newtab*"
+				"*://*/_/chrome/newtab*",
+				"*://ntp.msn.com/*"
 			],
 			"run_at": "document_start"
 		}
@@ -109,11 +109,6 @@
 	"minimum_chrome_version": "69",
 	"minimum_opera_version": "56",
 	"web_accessible_resources": [
-		"app/images/*",
-		"dist/css/rewards_styles.css",
-		"cliqz/offers-templates/reminder.html",
-		"cliqz/offers-templates/checkout.html",
-		"cliqz/offers-templates/control-center.html"
-	],
-	"debug": true
+		"app/images/*"
+	]
 }

@@ -49,15 +49,10 @@ describe('app/hub/Views/HomeView reducer', () => {
 			enable_metrics: true,
 		};
 		const action = { data, type: SET_METRICS };
-		const initHomeState = Immutable.merge(initialState.home, {
-			enable_metrics: true,
-		});
 
-		const updatedHomeState = Immutable.merge(initHomeState, {
-			enable_ghostery_rewards: data.enable_ghostery_rewards
-		});
+		const updatedHomeState = Immutable.merge(initialState.home, data);
 
-		expect(HomeViewReducer({ home: initHomeState }, action)).toEqual({
+		expect(HomeViewReducer(initialState, action)).toEqual({
 			home: updatedHomeState
 		});
 	});

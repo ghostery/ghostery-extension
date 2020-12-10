@@ -42,11 +42,13 @@ class PurpleBox {
 	 */
 	createBox(tab_id) {
 		const tab = tabInfo.getTabInfo(tab_id);
-		// Skip in the event of pause, trust, prefetching, newtab page, or Firefox about:pages
+		// Skip in the event of pause, trust, prefetching, non http/s pages or Chrome (< 75)/Edge new tab page
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
 			(conf.hide_alert_trusted && !!Policy.checkSiteWhitelist(tab.url)) ||
-			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host) ||
+			!tab || tab.purplebox || !tab.protocol.startsWith('http') ||
+			tab.path.includes('_/chrome/newtab') || tab.host.includes('ntp.msn.com') ||
+			globals.EXCLUDES.includes(tab.host) ||
 			globals.BROWSER_INFO.os === 'android') {
 			return Promise.resolve(false);
 		}
@@ -68,10 +70,8 @@ class PurpleBox {
 				box_warning_slow: t('box_warning_slow'),
 				box_warning_nonsecure: t('box_warning_nonsecure'),
 				tracker: t('box_tracker'),
-				hide: t('box_hide'),
 				settings: t('box_settings'),
 				options_expanded: t('box_options_expanded'),
-				hide_expanded: t('box_hide_expanded'),
 				settings_expanded: t('box_settings_expanded'),
 				box_dismiss_0s: t('box_dismiss_0s'),
 				box_dismiss_5s: t('box_dismiss_5s'),

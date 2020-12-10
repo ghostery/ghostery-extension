@@ -19,7 +19,6 @@ import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
 	SET_SMART_BLOCK,
-	SET_GHOSTERY_REWARDS
 } from '../../../SetupView/SetupViewConstants';
 
 const middlewares = [thunk];
@@ -37,10 +36,6 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 			break;
 		}
 		case SET_SMART_BLOCK: {
-			resolve(message);
-			break;
-		}
-		case SET_GHOSTERY_REWARDS: {
 			resolve(message);
 			break;
 		}
@@ -83,19 +78,6 @@ describe('app/hub/Views/SetupViews/SetupAntiSuiteView actions', () => {
 		const expectedPayload = { data, type: SET_SMART_BLOCK };
 
 		return store.dispatch(SetupAntiSuiteViewActions.setSmartBlocking(data)).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
-	});
-
-	test('setGhosteryRewards action should return correctly', () => {
-		const initialState = {};
-		const store = mockStore(initialState);
-
-		const data = testData;
-		const expectedPayload = { data, type: SET_GHOSTERY_REWARDS };
-
-		return store.dispatch(SetupAntiSuiteViewActions.setGhosteryRewards(data)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});

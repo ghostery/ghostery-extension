@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "Hide Box"
-	},
-	"box_hide_expanded": {
-		"message": "Hide Purple Box"
-	},
 	"box_looking": {
 		"message": "Looking"
 	},
@@ -675,10 +669,10 @@
 		"message": "Tracker is slow"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Tracker blocked by Smart Blocking"
+		"message": "Tracker blocked by Smart-Browsing"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Tracker unblocked by Smart Blocking"
+		"message": "Tracker unblocked by Smart-Browsing"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "Block on all sites"
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "Performance"
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
 	"panel_detail_learn_more": {
 	  "message": "Learn More"
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Feature coming soon."
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "Feature coming soon."
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "Feature already active in the Cliqz MyOffrz control panel."
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Loading Rewards..."
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "No Rewards found"
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery Rewards is OFF"
 	},
 	"panel_detail_premium_text": {
 		"message": "Feature coming soon."
@@ -807,10 +783,10 @@
 		"message": "This site is already whitelisted."
 	},
 	"settings_adblocker": {
-		"message": "Ad Block Lists"
+		"message": "Ad-Block Lists"
 	},
 	"settings_adblocker_lists": {
-		"message": "Load the following Ad Block filter lists:"
+		"message": "Load the following ad-block filter lists:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Ads only"
@@ -822,7 +798,7 @@
 		"message": "Ads + Trackers + Annoyances"
 	},
 	"settings_purple_box": {
-		"message": "Purple Box"
+		"message": "Tracker-Tally"
 	},
 	"settings_notifications": {
 		"message": "Notifications"
@@ -882,7 +858,7 @@
 		"message": "Block new trackers added to Ghostery by default"
 	},
 	"settings_show_purple_box": {
-		"message": "Show the purple box in the corner of my browser"
+		"message": "Show the tracker-tally in the corner of my browser"
 	},
 	"settings_dismiss_after": {
 		"message": "Dismiss After"
@@ -909,7 +885,7 @@
 		"message": "secs"
 	},
 	"settings_hide_alert_trusted": {
-		"message": "Hide the purple box on trusted websites"
+		"message": "Hide the tracker-tally on trusted websites"
 	},
 	"settings_notify_me": {
 		"message": "Notify me when Ghostery:"
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "Sharing Human Web data"
-	},
-	"settings_allow_offers": {
-		"message": "Participating in Ghostery Rewards"
 	},
   	"settings_allow_abtests": {
 	  	"message": "Participating in A/B Tests"
@@ -1026,7 +999,7 @@
 		"message": "For example, blocking a Facebook tracker on facebook.com might break the site."
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "The purple box is a real-time list of trackers that is displayed in the corner of your browser. This feature will help you see trackers as they are added onto a webpage."
+		"message": "The tracker-tally is a list in the corner of your browser that displays trackers as they load in real-time."
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Allow Ghostery to show messages in my browser related to new product features, updates, and customer feedback."
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "Ghostery now implements the Human Web by default, a revolutionary technology that uses the wisdom of the crowd to build a more private internet"
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards is a private-by-design feature that delivers you discounts and special offers from our partner companies as you browse."
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "Participating in randomized A/B tests helps Ghostery understand which version of a new layout or feature users like you prefer."
@@ -1065,7 +1035,7 @@
 		"message": "Requests Modified:"
 	},
 	"requests_modified_tooltip": {
-		"message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad Blocking"
+		"message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad-Blocking"
 	},
 	"trackers_blocked": {
 		"message": "Trackers Blocked:"
@@ -1134,22 +1104,22 @@
 		"message": "Ghostery extension has been resumed."
 	},
 	"alert_anti_track_on": {
-		"message": "Enhanced Anti-Tracking ON. Personal data will be anonymized."
+		"message": "Anti-Tracking ON. Personal data will be anonymized."
 	},
 	"alert_anti_track_off": {
-		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
+		"message": "Anti-Tracking OFF. Personal data will not be anonymized."
 	},
 	"alert_ad_block_on": {
-		"message": "Enhanced Ad-Blocking ON. Advertisements will be blocked."
+		"message": "Ad-Blocking ON. Advertisements will be blocked."
 	},
 	"alert_ad_block_off": {
-		"message": "Enhanced Ad-Blocking OFF. Advertisements will not be blocked."
+		"message": "Ad-Blocking OFF. Advertisements will not be blocked."
 	},
 	"alert_smart_block_on": {
-		"message": "Smart Blocking ON. Tracker blocking will be adjusted to optimize page performance."
+		"message": "Smart-Browsing ON. Tracker blocking will be adjusted to optimize page performance."
 	},
 	"alert_smart_block_off": {
-		"message": "Smart Blocking OFF. Tracker blocking will not be automatically adjusted."
+		"message": "Smart-Browsing OFF. Tracker blocking will not be automatically adjusted."
 	},
 	"alert_reload": {
 		"message": "Reload to see changes."
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "Take a Tutorial"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "Try Ghostery Rewards"
-	},
 	"hub_side_navigation_products": {
 		"message": "See More Ghostery Products"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "Share additional anonymous analytics data to improve Ghostery’s performance."
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "New users are opted out of participating in Ghostery Rewards and Human Web by default. You may opt in to these recommended features in custom setup or in the extension. "
+		"message": "New users are opted out of participating in Human Web by default. You may opt in to this recommended feature in custom setup or in the extension. "
 	},
 	"hub_home_header_info": {
-		"message": "New users are opted in to participating in Human Web and Ghostery Rewards. You may change these settings in custom setup or in the extension. "
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "New users are opted in to participating in Human Web. You may change this setting in custom setup or in the extension. "
 	},
 	"hub_home_header_info_link": {
@@ -1507,7 +1471,7 @@
 		"message": "Choose which trackers to block"
 	},
 	"hub_setup_antisuite_description_antitracking": {
-		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
+		"message": "Anonymize unblocked and unidentified trackers for greater browsing protection."
 	},
 	"hub_setup_feature_already_active": {
 		"message": "This feature is already active in Cliqz by default. $LINK_LM_START$Learn More$LINK_LM_END$",
@@ -1519,12 +1483,6 @@
 				"content": "</a>"
 			}
 		}
-	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "Unlock special offers as you browse and make purchases without sharing any data."
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Enabled"
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "Search privately, view tracker stats, and manage Rewards with our new tab feature. Coming soon!"
+		"message": "Search privately and view tracker stats with our new tab feature. Coming soon!"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery Lite"
 	},
 	"hub_products_third_promo_description": {
 		"message": "Protect your online privacy and get rid of ads with our lightest product yet, exclusively for Safari."
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery Hub - Rewards"
-	},
-	"hub_rewards_header_title": {
-		"message": "Try Ghostery Rewards!"
-	},
-	"hub_rewards_header_description": {
-		"message": "Our new Rewards feature offers a powerful, completely private new way to receive real discounts online. Turn it on and check it out!"
-	},
-	"hub_rewards_experience_title": {
-		"message": "A Smarter Shopping Experience"
-	},
-	"hub_rewards_experience_description": {
-		"message": "High-value rewards delivered straight to you as you browse and make purchases"
-	},
-	"hub_rewards_privacy_title": {
-		"message": "Privacy-centric"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "No personal data collected, profiles built, or usage of third parties"
-	},
-	"hub_rewards_relevant_title": {
-		"message": "Unique and relevant"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "Specialized offers are timely, relevant, and exclusive for our users"
-	},
-	"hub_rewards_closer": {
-		"message": "You can turn on Ghostery Rewards in the extension or through custom setup."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Hub - Ghostery Plus"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "To use this function, navigate to another page."
-	},
-	"rewards_new_text": {
-		"message": "New Reward discovered!"
-	},
-	"rewards_copy_code": {
-		"message": "copy code"
-	},
-	"rewards_code_copied": {
-		"message": "code copied"
-	},
-	"rewards_expires_in_day": {
-		"message": "Available for 1 day"
-	},
-	"rewards_expires_in_days": {
-		"message": "Available for $COUNT$ days",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "Available for 1 hour"
-	},
-	"rewards_expires_in_hours": {
-		"message": "Available for $COUNT$ hours",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "Available for 1 min"
-	},
-	"rewards_expires_in_mins": {
-		"message": "Available for $COUNT$ mins",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "Available for 1 sec"
-	},
-	"rewards_expires_in_secs": {
-		"message": "Available for $COUNT$ secs",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "Terms & Conditions"
-	},
-	"rewards_disable": {
-		"message": "Turn off Rewards"
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery Rewards is now off. You can always turn it on in your Settings or the Rewards dashboard."
-	},
-	"rewards_disable_confirm": {
-		"message": "OK, got it."
-	},
-	"rewards_about": {
-		"message": "About Rewards"
-	},
-	"rewards_settings": {
-		"message": "Ghostery Rewards Settings"
-	},
-	"rewards_delete": {
-		"message": "Delete this reward"
-	},
-	"rewards_exclusive": {
-		"message": "exclusive"
-	},
-	"rewards_best_offer": {
-		"message": "best offer"
-	},
-	"rewards_first_prompt": {
-		"message": "Would you like to continue to your Ghostery Reward?"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "New Reward discovered!"
-	},
-	"rewards_second_prompt": {
-		"message": "Would you like to opt out of future Ghostery Rewards?"
-	},
-	"rewards_yes": {
-		"message": "yes"
-	},
-	"rewards_no": {
-		"message": "no"
-	},
-	"rewards_on": {
-		"message": "on"
-	},
-	"rewards_off": {
-		"message": "off"
-	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery Rewards is ON"
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery Rewards is OFF"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Rewards code copied!"
-	},
-	"offers_hub_copy_btn": {
-		"message": "Copy code"
-	},
-	"offers_code_copied": {
-		"message": "Copied"
 	},
 	"popup_cancel_button": {
 		"message": "Cancel"
@@ -2087,21 +1896,7 @@
 		"message": "No, Keep History"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus.$LINK_START$Learn More$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus."
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "Already a Ghostery Supporter?"
@@ -2147,188 +1942,14 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "ghostery rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "Enhanced Anti-Tracking"
+		"message": "Anti-Tracking"
 	},
-	"panel_rewards_view__reward": {
-		"message": "Reward"
+	"unidentified": {
+		"message": "Unidentified"
 	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "affiliate link"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "copy & go"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "I already used the offer"
-	},
-	"myoffrz_feedback_option2": {
-		"message": "It's not a good deal"
-	},
-	"myoffrz_feedback_option3": {
-		"message": "It's not relevant to me"
-	},
-	"myoffrz_feedback_option4": {
-		"message": "Other reasons"
-	},
-	"myoffrz_feedback_title": {
-		"message": "Feedback"
-	},
-	"myoffrz_get_code": {
-		"message": "Get code"
-	},
-	"myoffrz_offer_removed": {
-		"message": "This offer was removed."
-	},
-	"myoffrz_optional": {
-		"message": "Optional"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "POWERED BY MyOffrz"
-	},
-	"myoffrz_show_code": {
-		"message": "Show code"
-	},
-	"myoffrz_show_more": {
-		"message": "Show more"
-	},
-	"myoffrz_skip": {
-		"message": "Skip"
-	},
-	"myoffrz_welcome_link": {
-		"message": "How It Works"
-	},
-	"myoffrz_welcome_text": {
-		"message": "As you browse the Internet, we are searching for attractive offers based on your interests."
-	},
-	"myoffrz_welcome_title": {
-		"message": "Hello!"
-	},
-	"myoffrz_why_offers_text": {
-		"message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "Why do I see these offers?"
-	},
-	"myoffrz_why_see_this": {
-		"message": "Why do I see this?"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "NEW"
-	},
-	"myoffrz_conditions": {
-		"message": "Conditions"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "Turn off Ghostery Rewards"
-	},
-	"myoffrz_help": {
-		"message": "Help"
-	},
-	"myoffrz_learn_more": {
-		"message": "Learn more"
-	},
-	"myoffrz_send": {
-		"message": "Send"
-	},
-	"myoffrz_settings": {
-		"message": "Settings"
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "New Reward discovered!"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "Ghostery Rewards is now off. You can always turn it on in your Settings or the Rewards dashboard."
-	},
-	"myoffrz_optin_description": {
-		"message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
-	},
-	"myoffrz_optin_title": {
-		"message": "New Reward discovered!"
-	},
-	"myoffrz_no": {
-		"message": "no"
-	},
-	"myoffrz_yes": {
-		"message": "yes"
-	},
-	"myoffrz_rewards_new": {
-		"message": "New Reward discovered!"
-	},
-	"myoffrz_apply_code": {
-		"message": "Apply code"
-	},
-	"myoffrz_cancel": {
-		"message": "Cancel"
-	},
-	"myoffrz_copied": {
-		"message": "Copied"
-	},
-	"myoffrz_copy_code": {
-		"message": "Copy code"
-	},
-	"myoffrz_expires_in_day": {
-		"message": "Available for 1 day"
-	},
-	"myoffrz_expires_in_days": {
-		"message": "Available for $COUNT$ days",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "Available for 1 hour"
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "Available for $COUNT$ hours",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "Available for 1 minute"
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "Available for $COUNT$ minutes",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "Check the following conditions"
-	},
-	"myoffrz_redeem_code": {
-		"message": "Redeem code"
-	},
-	"myoffrz_voucher_found": {
-		"message": "Voucher found"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "Redeeming voucher"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
-		"message": "Unknown"
-	},
-	"unknown_description": {
-		"message": "Unknown trackers scrubbed by Anti-Tracking"
+	"unidentified_description": {
+		"message": "Unidentified trackers scrubbed by Anti-Tracking"
 	},
 	"ghostery_is_ready": {
 		"message": "Ghostery is Ready!"
@@ -2462,10 +2083,10 @@
 		"message": "Off"
 	},
 	"enhanced_ad_blocking": {
-		"message": "Enhanced Ad Blocking"
+		"message": "Ad-Blocking"
 	},
 	"smart_blocking": {
-		"message": "Smart Blocking"
+		"message": "Smart-Browsing"
 	},
 	"smart_blocking_DESC": {
 		"message": "Automatically block and unblock trackers to optimize page performance."

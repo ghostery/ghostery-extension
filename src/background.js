@@ -21,6 +21,7 @@ import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
+import GhosteryModule from './classes/Module';
 // static classes
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
@@ -37,11 +38,8 @@ import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
-import Rewards from './classes/Rewards';
 import account from './classes/Account';
-import GhosteryModule from './classes/Module';
 import promoModals from './classes/PromoModals';
-
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -65,7 +63,7 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
@@ -84,7 +82,6 @@ const moduleMock = {
 const humanweb = cliqz.modules[HUMANWEB_MODULE];
 const hpnv2 = cliqz.modules[HPN_MODULE];
 const { adblocker, antitracking } = cliqz.modules;
-const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
@@ -260,24 +257,6 @@ function getSiteData() {
 			});
 		});
 	}));
-}
-
-/**
- * Register/unregister real estate with Offers core module.
- * @memberOf Background
- * @param  {Object} offersModule offers module
- * @param  {Boolean} register    true - register, false - unregister
- */
-function registerWithOffers(offersModule, register) {
-	if (!offersModule.isEnabled) {
-		return Promise.resolve();
-	}
-
-	log('REGISTER WITH OFFERS CALLED', register);
-	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
-		.catch(() => {
-			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
-		});
 }
 
 /**
@@ -530,35 +509,6 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from dist/rewards.js content script.
- * @memberOf Background
- *
- * @param  {string} 	name 		message name
- * @param  {Object} 	message 	message data
- * @param  {number} 	tab_id 		tab id
- * @param  {function} 	callback 	function to call (at most once) when you have a response
- */
-function handleRewards(name, message, callback) {
-	switch (name) {
-		case 'rewardSignal': // e.g. hub_open | hub_closed
-			Rewards.sendSignal(message);
-			break;
-		case 'ping':
-			metrics.ping(message);
-			break;
-		case 'setPanelData':
-			if (message.hasOwnProperty('enable_offers')) {
-				Rewards.sendSignal(message.signal);
-				panelData.set({ enable_offers: message.enable_offers });
-			}
-			return callback();
-		default:
-			break;
-	}
-	return false;
-}
-
-/**
  * Handle messages sent from The Ghostery Hub: app/hub.
  * @param  {string}   name     message name
  * @param  {object}   message  message data
@@ -644,17 +594,6 @@ function handleGhosteryHub(name, message, callback) {
 				default: break;
 			}
 			callback({ blockingPolicy });
-			break;
-		}
-		case 'SET_GHOSTERY_REWARDS': {
-			const { enable_ghostery_rewards = true } = message;
-			Rewards.sendSignal({
-				actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}`,
-				origin: 'ghostery-setup-flow',
-				type: 'action-signal',
-			});
-			panelData.set({ enable_offers: enable_ghostery_rewards });
-			callback({ enable_ghostery_rewards });
 			break;
 		}
 		case 'SET_TUTORIAL_COMPLETE': {
@@ -751,9 +690,6 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
-	}
-	if (origin === 'rewards' || origin === 'rewardsPanel') {
-		return handleRewards(name, message, callback);
 	}
 	if (origin === 'ghostery-hub') {
 		return handleGhosteryHub(name, message, callback);
@@ -911,7 +847,7 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `${globals.CHECKOUT_BASE_URL}/plus`;
+		let url = `${globals.GHOSTERY_BASE_URL}/pricing`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
@@ -1168,24 +1104,6 @@ function initializeDispatcher() {
 			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
-	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
-		button.update();
-		const firstStep = Promise.resolve();
-		let enableOffers = enableOffersIn;
-		if (IS_CLIQZ) {
-			enableOffers = false;
-		} else if (!enableOffers && cliqz.modules['offers-v2'].isEnabled) {
-			cliqz.modules['offers-v2'].action('flushSignals');
-		}
-
-		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
-		const toggleConnection = () => registerWithOffers(offers, enableOffers);
-		if (enableOffers) {
-			firstStep.then(toggleModule).then(toggleConnection);
-		} else {
-			firstStep.then(toggleConnection).then(toggleModule);
-		}
-	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
@@ -1305,26 +1223,6 @@ antitracking.on('enabled', () => {
 adblocker.on('enabled', () => {
 	adblocker.isReady().then(() => {
 		adblocker.action('addWhiteListCheck', isWhitelisted);
-	});
-});
-
-/**
- * Set listener for 'enabled' event for Offers module
- * @memberOf Background
- */
-offers.on('enabled', () => {
-	offers.isReady().then(() => {
-		if (DEBUG) {
-			offers.action('setConfiguration', {
-				config_location: 'de',
-				triggersBE: 'https://offers-api-staging-myo.myoffrz.ninja',
-				showConsoleLogs: true,
-				offersLogsEnabled: true,
-				offersDevFlag: true,
-				offersTelemetryFreq: '10'
-			});
-		}
-		registerWithOffers(offers, true);
 	});
 });
 
@@ -1616,6 +1514,12 @@ function initializeGhosteryModules() {
 		conf.install_random_number = randomNumber;
 		conf.install_date = dateString;
 
+		// Set default search partners for Ghostery Desktop Browser. These can be removed
+		// by the user under Trusted Site settings.
+		if (BROWSER_INFO.name === 'ghostery_desktop') {
+			conf.site_whitelist.push('bing.com', 'search.yahoo.com', 'startpage.com');
+		}
+
 		metrics.setUninstallUrl();
 
 		metrics.ping('install');
@@ -1641,32 +1545,19 @@ function initializeGhosteryModules() {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
-				conf.enable_offers = !offers.isDisabled && !IS_ANDROID;
 
-				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_android') {
-					if (globals.JUST_INSTALLED) {
-						conf.enable_human_web = false;
-						conf.enable_offers = false;
-					} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
-						conf.enable_human_web = false;
-						conf.enable_offers = cliqz.prefs.get('myoffrz.opted_in') || false;
-						conf.cliqz_legacy_opt_in = true;
+				// Make sure that getBrowserInfo() has resolved before we set these properties
+				(async() => {
+					await globals.BROWSER_INFO_READY;
+					if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
+						if (globals.JUST_INSTALLED) {
+							conf.enable_human_web = false;
+						} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
+							conf.enable_human_web = false;
+							conf.cliqz_legacy_opt_in = true;
+						}
 					}
-				}
-
-				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
-				if (myoffrzShouldMigrate) {
-					cliqz.prefs.set('myoffrz.opted_in', conf.rewards_opted_in);
-					conf.rewards_opted_in = undefined;
-				}
-
-				cliqz.events.subscribe('myoffrz:turnoff', () => {
-					panelData.set({ enable_offers: false });
-					Rewards.sendSignal({
-						actionId: 'rewards_off',
-						type: 'action-signal',
-					});
-				});
+				})();
 			}
 		});
 	}).catch((e) => {
@@ -1678,7 +1569,6 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(antitracking, false);
 		setCliqzModuleEnabled(adblocker, false);
-		setCliqzModuleEnabled(offers, false);
 	}
 
 	// Disable purplebox for Android users
@@ -1746,11 +1636,11 @@ function initializeGhosteryModules() {
 			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
 			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
-			if (globals.JUST_INSTALLED) {
+			if (globals.JUST_INSTALLED && BROWSER_INFO.name !== 'ghostery_desktop') {
 				const showAlternateHub = conf.hub_layout === 'alternate';
 				const route = showAlternateHub ? '#home' : '';
 				chrome.tabs.create({
-					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&ah=${showAlternateHub}${route}`),
+					url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
 					active: true
 				});
 			}

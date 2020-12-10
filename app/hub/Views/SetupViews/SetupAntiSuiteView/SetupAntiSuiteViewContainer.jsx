@@ -17,8 +17,7 @@ import SetupAntiSuiteView from './SetupAntiSuiteView';
 import globals from '../../../../../src/classes/Globals';
 
 // simple consts
-const { IS_CLIQZ, BROWSER_INFO } = globals;
-const IS_ANDROID = (BROWSER_INFO.os === 'android');
+const { IS_CLIQZ } = globals;
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -48,13 +47,11 @@ class SetupAntiSuiteViewContainer extends Component {
 				enable_anti_tracking,
 				enable_ad_block,
 				enable_smart_block,
-				enable_ghostery_rewards
 			} = setup;
 			props.actions.setSetupStep({ setup_step: 9 });
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
 			props.actions.setSmartBlocking({ enable_smart_block });
-			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
 		}
 	}
 
@@ -80,11 +77,6 @@ class SetupAntiSuiteViewContainer extends Component {
 				actions.setSmartBlocking({ enable_smart_block });
 				break;
 			}
-			case 'ghostery-rewards': {
-				const enable_ghostery_rewards = !setup.enable_ghostery_rewards;
-				actions.setGhosteryRewards({ enable_ghostery_rewards });
-				break;
-			}
 			default: break;
 		}
 	}
@@ -99,7 +91,6 @@ class SetupAntiSuiteViewContainer extends Component {
 			enable_anti_tracking,
 			enable_ad_block,
 			enable_smart_block,
-			enable_ghostery_rewards,
 		} = setup;
 
 		const anti_tracking_enabled = IS_CLIQZ ? false : enable_anti_tracking;
@@ -134,16 +125,6 @@ class SetupAntiSuiteViewContainer extends Component {
 			}
 		];
 
-		if (!IS_CLIQZ && !IS_ANDROID) {
-			features.push({
-				id: 'ghostery-rewards',
-				name: t('hub_setup_ghosteryrewards_name_rewards'),
-				enabled: enable_ghostery_rewards,
-				toggle: () => this._handleToggle('ghostery-rewards'),
-				description: t('hub_setup_ghosteryrewards_description_rewards'),
-			});
-		}
-
 		return <SetupAntiSuiteView features={features} />;
 	}
 }
@@ -157,7 +138,6 @@ SetupAntiSuiteViewContainer.propTypes = {
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
 		setSmartBlocking: PropTypes.func.isRequired,
-		setGhosteryRewards: PropTypes.func.isRequired
 	}).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };

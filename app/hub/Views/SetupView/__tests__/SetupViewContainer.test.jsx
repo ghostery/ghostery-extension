@@ -45,7 +45,6 @@ const actions = {
 	setAntiTracking: () => {},
 	setAdBlock: () => {},
 	setSmartBlocking: () => {},
-	setGhosteryRewards: () => {},
 	setHumanWeb: () => {},
 	setSetupComplete: () => {},
 };

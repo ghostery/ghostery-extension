@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "ボックスを非表示にする"
-	},
-	"box_hide_expanded": {
-		"message": "紫色のボックスを非表示にする"
-	},
 	"box_looking": {
 		"message": "検索中"
 	},
@@ -675,10 +669,10 @@
 		"message": "トラッカーが遅いです"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "トラッカーがスマート・ブロッキングによってブロックされました"
+		"message": "トラッカーがスマート・ブラウジングによってブロックされました"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "トラッカーがスマート・ブロッキングによってブロック解除されました"
+		"message": "トラッカーがスマート・ブラウジングによってブロック解除されました"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "すべてのサイトでブロック"
@@ -701,9 +695,6 @@
 	"panel_detail_menu_performance_title": {
 		"message": "パフォーマンス"
 	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards（報酬）"
-	},
 	"panel_detail_learn_more": {
 	  "message": "詳細はこちら"
 	},
@@ -718,21 +709,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "近日開始する機能です。"
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "近日開始する機能です。"
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "既にCliqz MyOffrzコントロールパネルで有効になっている機能です。"
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Rewardsを読み込み中…"
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "Rewards（報酬）はありません"
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery Rewards機能が無効です"
 	},
 	"panel_detail_premium_text": {
 		"message": "近日開始する機能です。"
@@ -822,7 +798,7 @@
 		"message": "広告とトラッカーと迷惑行為"
 	},
 	"settings_purple_box": {
-		"message": "紫色のボックス"
+		"message": "総トラッカー"
 	},
 	"settings_notifications": {
 		"message": "通知"
@@ -882,7 +858,7 @@
 		"message": "Ghosteryにデフォルトで追加された新しいトラッカーをブロックします"
 	},
 	"settings_show_purple_box": {
-		"message": "ブラウザの隅に紫色のボックスを表示します"
+		"message": "ブラウザの隅に総トラッカーを表示します"
 	},
 	"settings_dismiss_after": {
 		"message": "後に却下"
@@ -909,7 +885,7 @@
 		"message": "秒"
 	},
 	"settings_hide_alert_trusted": {
-		"message": "信頼できるウェブサイトで紫色のボックスを非表示にする"
+		"message": "信頼できるウェブサイトで総トラッカーを非表示にする"
 	},
 	"settings_notify_me": {
 		"message": "Ghosteryが次のことを行うたびに通知します："
@@ -943,9 +919,6 @@
 	},
 	"settings_share_human_web": {
 		"message": "Human Webデータの共有"
-	},
-	"settings_allow_offers": {
-		"message": "Ghostery Rewardsに参加する"
 	},
   	"settings_allow_abtests": {
 	  	"message": "A/Bテストに参加する"
@@ -1026,7 +999,7 @@
 		"message": "たとえば、facebook.com上でFacebookトラッカーをブロックすると、サイトが区切られることがあります。"
 	},
 	"settings_show_purple_box_tooltip": {
-		"message": "紫色のボックスは、ブラウザの隅に表示されるトラッカーのリアルタイム・リストです。この機能は、ウェブページに追加されたトラッカーを確認するのに役立ちます。"
+		"message": "ブラウザの隅に表示される総トラッカーは、読み取られたトラッカーをリアルタイムに一覧表示します。"
 	},
 	"settings_notify_me_tooltip": {
 		"message": "Ghosteryが新しい製品機能、更新版、および顧客フィードバックに関連したメッセージをブラウザに表示できるようにします。"
@@ -1036,9 +1009,6 @@
 	},
 	"settings_human_web_tooltip": {
 		"message": "Ghosteryは、デフォルトでHuman Webを実装しています。これは、大衆の知恵を活用してよりプライベートなインターネットを構築する革新的な技術です"
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewardsは、ブラウジングの際にGhosteryのパートナー企業から割引やスペシャルオファーを受けられる、プライバシーバイデザインの機能です。"
 	},
   	"settings_abtests_tooltip": {
 	  	"message": "無作為のA/Bテストに参加していただくことで、Ghosteryはユーザーの好みの新しいレイアウトや機能がどのバージョンであるかを把握することができます。"
@@ -1134,22 +1104,22 @@
 		"message": "Ghostery拡張機能が再開されました。"
 	},
 	"alert_anti_track_on": {
-		"message": "強化された追跡防止がオンになりました。個人データは匿名化されます。"
+		"message": "追跡防止がオンになりました。個人データは匿名化されます。"
 	},
 	"alert_anti_track_off": {
-		"message": "強化された追跡防止がオフになりました。個人データは匿名化されません。"
+		"message": "追跡防止がオフになりました。個人データは匿名化されません。"
 	},
 	"alert_ad_block_on": {
-		"message": "強化された広告ブロッキングがオンになりました。広告はブロックされます。"
+		"message": "広告ブロッキングがオンになりました。広告はブロックされます。"
 	},
 	"alert_ad_block_off": {
-		"message": "強化された広告ブロッキングがオフになりました。広告はブロックされません。"
+		"message": "広告ブロッキングがオフになりました。広告はブロックされません。"
 	},
 	"alert_smart_block_on": {
-		"message": "スマート・ブロッキングがオンになりました。ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整します。"
+		"message": "スマート・ブラウジングがオンになりました。ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整します。"
 	},
 	"alert_smart_block_off": {
-		"message": "スマート・ブロッキングがオフになりました。トラッカー・ブロッキングは自動的に調整されません。"
+		"message": "スマート・ブラウジングがオフになりました。トラッカー・ブロッキングは自動的に調整されません。"
 	},
 	"alert_reload": {
 		"message": "変更を確認するには、リロードしてください。"
@@ -1294,9 +1264,6 @@
 	"hub_side_navigation_tutorial": {
 		"message": "チュートリアルを受ける"
 	},
-	"hub_side_navigation_rewards": {
-		"message": "Ghostery Rewardsを試す"
-	},
 	"hub_side_navigation_products": {
 		"message": "Ghosteryのほかの製品を見る"
 	},
@@ -1316,12 +1283,9 @@
 		"message": "Ghosteryのパフォーマンス向上のために、匿名分析データを追加し共有します。"
 	},
 	"hub_home_header_info_opted_out": {
-		"message": "新規ユーザーの方は、デフォルトでGhostery RewardsとHuman Webには参加しないように設定されています。カスタム設定または拡張機能で、これらの推奨機能にオプトインすることができます。"
+		"message": "新規ユーザーの方は、デフォルトでHuman Webには参加しないように設定されています。カスタム設定または拡張機能で、これらの推奨機能にオプトインすることができます。"
 	},
 	"hub_home_header_info": {
-		"message": "新規ユーザーの方は、Human WebとGhostery Rewardsに参加するように設定されています。カスタム・セットアップまたは拡張機能でこれらの設定を変更できます。"
-	},
-	"hub_home_header_info_cliqz": {
 		"message": "新規ユーザーがHuman Webにオプトインしました。カスタム設定あるいは拡張機能でこれらの変更を行うことができます。"
 	},
 	"hub_home_header_info_link": {
@@ -1520,12 +1484,6 @@
 			}
 		}
 	},
-	"hub_setup_ghosteryrewards_name_rewards": {
-		"message": "Rewards（報酬）"
-	},
-	"hub_setup_ghosteryrewards_description_rewards": {
-		"message": "データを共有せずにブラウジングやお買い物をすると、スペシャルオファーが届きます。"
-	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "有効になっています"
 	},
@@ -1661,43 +1619,13 @@
 		"message": "Ghostery Start Tab"
 	},
 	"hub_products_second_promo_description": {
-		"message": "新しいタブ機能で、トラッカー履歴を確認しながらプライベートに検索し、Rewards（報酬）を管理できます。近日公開予定、ご期待ください！"
+		"message": "新しいタブ機能で、トラッカー履歴を確認しながらプライベートに検索し、を管理できます。近日公開予定、ご期待ください！"
 	},
 	"hub_products_third_promo_title": {
 		"message": "Ghostery ライト"
 	},
 	"hub_products_third_promo_description": {
 		"message": "Safari専用の機能で、広告を表示せずにオンライン プライバシーを保護することができます。"
-	},
-	"hub_rewards_page_title": {
-		"message": "Ghostery ハブ - Rewards（報酬）"
-	},
-	"hub_rewards_header_title": {
-		"message": "Ghostery Rewardsをお試しください！"
-	},
-	"hub_rewards_header_description": {
-		"message": "新しいRewards（報酬）機能を使うと、パワフルで100％プライベートな、今までにないオンライン割引を利用できます。機能をオンにしてぜひお試しください！"
-	},
-	"hub_rewards_experience_title": {
-		"message": "よりスマートなショッピング体験を"
-	},
-	"hub_rewards_experience_description": {
-		"message": "ブラウズして購入した際に、高価値の報酬を直接お届けします。"
-	},
-	"hub_rewards_privacy_title": {
-		"message": "プライバシー優先"
-	},
-	"hub_rewards_privacy_description": {
-		"message": "個人情報の収集、プロファイルの作成および第三者の使用は行いません"
-	},
-	"hub_rewards_relevant_title": {
-		"message": "重要でありながら唯一の存在"
-	},
-	"hub_rewards_relevant_description": {
-		"message": "ユーザーの皆様だけにタイムリーで重要な特別オファーをお届けします"
-	},
-	"hub_rewards_closer": {
-		"message": "拡張機能またはカスタム設定で、Ghostery Rewardsを有効にしてください。"
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery ハブ - Ghostery プラス"
@@ -1817,125 +1745,6 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "この機能を使用するには、別のページに移動してください。"
-	},
-	"rewards_new_text": {
-		"message": "新しいReward（報酬）があります！"
-	},
-	"rewards_copy_code": {
-		"message": "コードをコピー"
-	},
-	"rewards_code_copied": {
-		"message": "コードがコピーされました"
-	},
-	"rewards_expires_in_day": {
-		"message": "1日間利用可能"
-	},
-	"rewards_expires_in_days": {
-		"message": "$COUNT$分間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_hour": {
-		"message": "1時間利用可能"
-	},
-	"rewards_expires_in_hours": {
-		"message": "$COUNT$時間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_min": {
-		"message": "1分間利用可能"
-	},
-	"rewards_expires_in_mins": {
-		"message": "$COUNT$分間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_expires_in_sec": {
-		"message": "1秒間利用可能"
-	},
-	"rewards_expires_in_secs": {
-		"message": "$COUNT$秒間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"rewards_terms_conditions": {
-		"message": "利用規約"
-	},
-	"rewards_disable": {
-		"message": "Rewards（報酬）機能を無効にする"
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery Rewardsが無効になりました。再度有効にする場合は、「設定」またはダッシュボードの「Rewards」で変更してください。"
-	},
-	"rewards_disable_confirm": {
-		"message": "はい、分かりました。"
-	},
-	"rewards_about": {
-		"message": "Rewards（報酬機能）について"
-	},
-	"rewards_settings": {
-		"message": "Ghostery Rewards設定"
-	},
-	"rewards_delete": {
-		"message": "このリワードを削除する"
-	},
-	"rewards_exclusive": {
-		"message": "除外"
-	},
-	"rewards_best_offer": {
-		"message": "ベストオファー"
-	},
-	"rewards_first_prompt": {
-		"message": "Ghostery Rewardsを続けますか？"
-	},
-	"rewards_first_prompt_extended": {
-		"message": "信頼できるGhosteryのパートナーからオファーとディスカウントを受け取りますか？"
-	},
-	"rewards_first_prompt_headline": {
-		"message": "新しいReward（報酬）があります！"
-	},
-	"rewards_second_prompt": {
-		"message": "Ghostery Rewardsを停止しますか？"
-	},
-	"rewards_yes": {
-		"message": "はい"
-	},
-	"rewards_no": {
-		"message": "いいえ"
-	},
-	"rewards_on": {
-		"message": "オン"
-	},
-	"rewards_off": {
-		"message": "オフ"
-	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery Rewards機能が有効です"
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery Rewards機能が無効です"
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Rewardsコードがコピーされました！"
-	},
-	"offers_hub_copy_btn": {
-		"message": "コードをコピー"
-	},
-	"offers_code_copied": {
-		"message": "コピーされました"
 	},
 	"popup_cancel_button": {
 		"message": "キャンセル"
@@ -2087,21 +1896,7 @@
 		"message": "いいえ、履歴を保持します"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ghostery Plusにアップグレードして、履歴統計やその他の便利な機能を是非お試しください。$LINK_START$詳細はこちら$LINK_END$",
-		"placeholders": {
-			"span_start": {
-				"content": "<span>"
-			},
-			"span_end": {
-				"content": "</span>"
-			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
-			}
-		}
+		"message": "Ghostery Plusにアップグレードして、履歴統計やその他の便利な機能を是非お試しください。"
 	},
 	"panel_stats_pitch_modal_already": {
 		"message": "Ghostery のサポーターですか？"
@@ -2147,187 +1942,13 @@
 			}
 		}
 	},
-	"ghostery_rewards": {
-		"message": "Ghostery Rewards"
-	},
 	"enhanced_anti_tracking": {
-		"message": "強化された追跡防止"
+		"message": "追跡防止"
 	},
-	"panel_rewards_view__reward": {
-		"message": "Reward（報酬）"
-	},
-	"panel_rewards_view__rewards": {
-		"message": "Rewards（報酬）"
-	},
-	"OFFERS_BEGIN": {
-		"message": ""
-	},
-	"myoffrz_affiliate_link": {
-		"message": "関連リンク"
-	},
-	"myoffrz_copy_and_go": {
-		"message": "コピーして移動"
-	},
-	"myoffrz_feedback_option1": {
-		"message": "オファーを既に使用しました"
-	},
-	"myoffrz_feedback_option2": {
-		"message": "良いオファーではありません"
-	},
-	"myoffrz_feedback_option3": {
-		"message": "自分とは関連性がありません"
-	},
-	"myoffrz_feedback_option4": {
-		"message": "その他の理由"
-	},
-	"myoffrz_feedback_title": {
-		"message": "フィードバック"
-	},
-	"myoffrz_get_code": {
-		"message": "コードを取得"
-	},
-	"myoffrz_offer_removed": {
-		"message": "このオファーは削除されました。"
-	},
-	"myoffrz_optional": {
-		"message": "オプション"
-	},
-	"myoffrz_powered_by_offrz": {
-		"message": "POWERED BY MyOffrz"
-	},
-	"myoffrz_show_code": {
-		"message": "コードを表示"
-	},
-	"myoffrz_show_more": {
-		"message": "詳細を表示"
-	},
-	"myoffrz_skip": {
-		"message": "スキップ"
-	},
-	"myoffrz_welcome_link": {
-		"message": "しくみ"
-	},
-	"myoffrz_welcome_text": {
-		"message": "インターネットを閲覧すると、お客様の関心に基づいて魅力的なオファーが表示されます。"
-	},
-	"myoffrz_welcome_title": {
-		"message": "こんにちは！"
-	},
-	"myoffrz_why_offers_text": {
-		"message": "デバイスから個人データが流出することはありません。お使いのブラウザは、以前の使用に基づいてお客様へのおすすめを自動的に識別します。"
-	},
-	"myoffrz_why_see_these_offers": {
-		"message": "これらのオファーが表示される理由"
-	},
-	"myoffrz_why_see_this": {
-		"message": "これが表示される理由"
-	},
-	"myoffrz_badge_text_new": {
-		"message": "新機能"
-	},
-	"myoffrz_conditions": {
-		"message": "条件"
-	},
-	"myoffrz_turnoff_rewards": {
-		"message": "Ghostery Rewardsを無効にする"
-	},
-	"myoffrz_help": {
-		"message": "ヘルプ"
-	},
-	"myoffrz_learn_more": {
-		"message": "詳細はこちら"
-	},
-	"myoffrz_send": {
-		"message": "送信"
-	},
-	"myoffrz_settings": {
-		"message": "設定"
-	},
-	"myoffrz_tooltip_new_offer": {
-		"message": "新しいReward（報酬）があります！"
-	},
-	"myoffrz_turnoff_notification": {
-		"message": "Ghostery Rewardsが無効になりました。再度有効にする場合は、「設定」またはダッシュボードの「Rewards」で変更してください。"
-	},
-	"myoffrz_optin_description": {
-		"message": "信頼できるGhosteryのパートナーからオファーとディスカウントを受け取りますか？"
-	},
-	"myoffrz_optin_title": {
-		"message": "新しいReward（報酬）があります！"
-	},
-	"myoffrz_no": {
-		"message": "いいえ"
-	},
-	"myoffrz_yes": {
-		"message": "はい"
-	},
-	"myoffrz_rewards_new": {
-		"message": "新しいReward（報酬）があります！"
-	},
-	"myoffrz_apply_code": {
-		"message": "コードを適用する"
-	},
-	"myoffrz_cancel": {
-		"message": "キャンセル"
-	},
-	"myoffrz_copied": {
-		"message": "コピーされました"
-	},
-	"myoffrz_copy_code": {
-		"message": "コードをコピー"
-	},
-	"myoffrz_expires_in_day": {
-		"message": "1日間利用可能"
-	},
-	"myoffrz_expires_in_days": {
-		"message": "$COUNT$分間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_hour": {
-		"message": "1時間利用可能"
-	},
-	"myoffrz_expires_in_hours": {
-		"message": "$COUNT$時間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_expires_in_minute": {
-		"message": "1分間利用可能"
-	},
-	"myoffrz_expires_in_minutes": {
-		"message": "$COUNT$分間利用可能",
-		"placeholders": {
-			"count": {
-				"content": "$1"
-			}
-		}
-	},
-	"myoffrz_check_conditions": {
-		"message": "以下の条件を確認してください"
-	},
-	"myoffrz_redeem_code": {
-		"message": "引き換えコード"
-	},
-	"myoffrz_voucher_found": {
-		"message": "クーポンが見つかりました"
-	},
-	"myoffrz_redeeming_voucher": {
-		"message": "クーポンと引き換えています"
-	},
-	"OFFERS_ENDS": {
-		"message": ""
-	},
-	"unknown": {
+	"unidentified": {
 		"message": "未知"
 	},
-	"unknown_description": {
+	"unidentified_description": {
 		"message": "未知のトラッカーが追跡防止によって削除されました"
 	},
 	"ghostery_is_ready": {
@@ -2462,10 +2083,10 @@
 		"message": "オフ"
 	},
 	"enhanced_ad_blocking": {
-		"message": "強化された広告ブロッキング"
+		"message": "広告ブロッキング"
 	},
 	"smart_blocking": {
-		"message": "スマート・ブロッキング"
+		"message": "スマート・ブラウジング"
 	},
 	"smart_blocking_DESC": {
 		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"

@@ -63,8 +63,8 @@ describe('app/panel/components/DonutGraph.jsx', () => {
 							num_total: 4
 						},
 					]}
-					adBlock={{ unknownTrackerCount: 8 }}
-					antiTracking={{ unknownTrackerCount: 8 }}
+					adBlock={{ unidentifiedTrackerCount: 8 }}
+					antiTracking={{ unidentifiedTrackerCount: 8 }}
 					renderRedscale
 					renderGreyscale={false}
 					totalCount={8}
@@ -101,8 +101,8 @@ describe('app/panel/components/DonutGraph.jsx', () => {
 							num_total: 4
 						},
 					]}
-					adBlock={{ unknownTrackerCount: 8 }}
-					antiTracking={{ unknownTrackerCount: 8 }}
+					adBlock={{ unidentifiedTrackerCount: 8 }}
+					antiTracking={{ unidentifiedTrackerCount: 8 }}
 					renderRedscale={false}
 					renderGreyscale
 					totalCount={38}

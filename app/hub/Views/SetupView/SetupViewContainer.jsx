@@ -29,7 +29,6 @@ import SetupDoneView from '../SetupViews/SetupDoneView';
 
 const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * @class Implement the Setup View for the Ghostery Hub
@@ -110,8 +109,7 @@ class SetupViewContainer extends Component {
 		actions.setAntiTracking({ enable_anti_tracking: true });
 		actions.setAdBlock({ enable_ad_block: true });
 		actions.setSmartBlocking({ enable_smart_block: true });
-		actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX && !IS_ANDROID });
-		actions.setHumanWeb({ enable_human_web: !IS_FIREFOX || BROWSER_INFO.name === 'ghostery_android' });
+		actions.setHumanWeb({ enable_human_web: !IS_FIREFOX || BROWSER_INFO.name === 'ghostery_desktop' || BROWSER_INFO.name === 'ghostery_android' });
 	}
 
 	/**
@@ -249,7 +247,6 @@ SetupViewContainer.propTypes = {
 		enable_anti_tracking: PropTypes.bool,
 		enable_ad_block: PropTypes.bool,
 		enable_smart_block: PropTypes.bool,
-		enable_ghostery_rewards: PropTypes.bool,
 		enable_human_web: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
@@ -262,7 +259,6 @@ SetupViewContainer.propTypes = {
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
 		setSmartBlocking: PropTypes.func.isRequired,
-		setGhosteryRewards: PropTypes.func.isRequired,
 		setHumanWeb: PropTypes.func.isRequired,
 		setSetupComplete: PropTypes.func.isRequired,
 	}).isRequired,
@@ -286,7 +282,6 @@ SetupViewContainer.defaultProps = {
 		enable_anti_tracking: true,
 		enable_ad_block: true,
 		enable_smart_block: true,
-		enable_ghostery_rewards: true,
 		enable_human_web: true,
 	},
 };

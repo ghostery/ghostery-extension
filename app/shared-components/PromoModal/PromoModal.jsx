@@ -63,20 +63,20 @@ class PromoModal extends React.Component {
 	 * Handle clicks on the download buttons
 	 */
 	_handlePromoTryProductClick = (product, utm_campaign) => {
-		const { actions } = this.props;
+		const { actions, tab_id } = this.props;
 		actions.togglePromoModal();
 
 		let url;
 		switch (product) {
 			case PLUS:
-				url = `${GHOSTERY_BASE_URL}/products/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `${GHOSTERY_BASE_URL}/pricing?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case PREMIUM:
 				url = `${GHOSTERY_BASE_URL}/midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case INSIGHTS:
 				sendMessage('ping', 'promo_modals_insights_upgrade_cta');
-				url = `${GHOSTERY_BASE_URL}/insights/?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `${GHOSTERY_BASE_URL}/insights?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			default:
 		}
@@ -84,6 +84,7 @@ class PromoModal extends React.Component {
 		sendMessage('openNewTab', {
 			url,
 			become_active: true,
+			tab_id, // Make sure we open the tab in the window with the open extension panel, even if another window is active
 		});
 	}
 
@@ -199,11 +200,13 @@ PromoModal.propTypes = {
 	type: PropTypes.string.isRequired,
 	location: PropTypes.string,
 	isPlus: PropTypes.bool,
+	tab_id: PropTypes.number,
 };
 
 PromoModal.defaultProps = {
 	location: 'panel',
 	isPlus: false,
+	tab_id: null,
 };
 
 export default PromoModal;

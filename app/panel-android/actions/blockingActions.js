@@ -73,17 +73,17 @@ export function anonymizeSiteTracker({ actionData, state }) {
 	const updatedcliqzModuleData = JSON.parse(JSON.stringify(state.cliqzModuleData));
 	const { antiTracking, adBlock } = state.cliqzModuleData;
 	const whitelistedUrls = { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls };
-	const { unknownTracker } = actionData;
+	const { unidentifiedTracker } = actionData;
 	const { pageHost } = state.summary;
 
 	const addToWhitelist = () => {
-		unknownTracker.sources.forEach((domain) => {
+		unidentifiedTracker.sources.forEach((domain) => {
 			if (whitelistedUrls.hasOwnProperty(domain)) {
-				whitelistedUrls[domain].name = unknownTracker.name;
+				whitelistedUrls[domain].name = unidentifiedTracker.name;
 				whitelistedUrls[domain].hosts.push(pageHost);
 			} else {
 				whitelistedUrls[domain] = {
-					name: unknownTracker.name,
+					name: unidentifiedTracker.name,
 					hosts: [pageHost],
 				};
 			}
@@ -102,11 +102,11 @@ export function anonymizeSiteTracker({ actionData, state }) {
 		}
 	};
 
-	if (unknownTracker.whitelisted) {
-		unknownTracker.sources.forEach(removeFromWhitelist);
+	if (unidentifiedTracker.whitelisted) {
+		unidentifiedTracker.sources.forEach(removeFromWhitelist);
 
 		Object.keys(whitelistedUrls).forEach((domain) => {
-			if (whitelistedUrls[domain].name === unknownTracker.name) {
+			if (whitelistedUrls[domain].name === unidentifiedTracker.name) {
 				removeFromWhitelist(domain);
 			}
 		});
@@ -115,14 +115,14 @@ export function anonymizeSiteTracker({ actionData, state }) {
 	}
 
 	// Update Ad Blocking trackers
-	updatedcliqzModuleData.adBlock.unknownTrackers.forEach((trackerEl) => {
-		if (trackerEl.name === unknownTracker.name) {
+	updatedcliqzModuleData.adBlock.unidentifiedTrackers.forEach((trackerEl) => {
+		if (trackerEl.name === unidentifiedTracker.name) {
 			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});
 	// Update Anti-Tracking trackers
-	updatedcliqzModuleData.antiTracking.unknownTrackers.forEach((trackerEl) => {
-		if (trackerEl.name === unknownTracker.name) {
+	updatedcliqzModuleData.antiTracking.unidentifiedTrackers.forEach((trackerEl) => {
+		if (trackerEl.name === unidentifiedTracker.name) {
 			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});

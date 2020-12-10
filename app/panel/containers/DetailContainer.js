@@ -28,7 +28,6 @@ const mapStateToProps = state => ({
 	...state.detail,
 	...state.account,
 	is_expanded: state.panel.is_expanded,
-	enable_offers: state.panel.enable_offers
 });
 /**
  * Bind Detailed view action creators using Redux's bindActionCreators

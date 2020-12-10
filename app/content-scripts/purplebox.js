@@ -448,10 +448,10 @@ const Ghostery = (function(win, doc) {
 
 		const style = createEl('style');
 
-		style.textContent = '@media print {#ghostery-purple-box {display:none !important}}';
+		style.textContent = '@media print {#ghostery-tracker-tally {display:none !important}}';
 		appendChild(doc.getElementsByTagName('head')[0], style);
 
-		ghostery.id = 'ghostery-purple-box';
+		ghostery.id = 'ghostery-tracker-tally';
 		ghostery.className = 'ghostery-bottom ghostery-right ghostery-none';
 		box.id = 'ghostery-box';
 		count.id = 'ghostery-count';

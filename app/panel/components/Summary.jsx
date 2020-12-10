@@ -56,7 +56,6 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
-		this.showRewardsListView = this.showRewardsListView.bind(this);
 		this.showStatsView = this.showStatsView.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
@@ -264,14 +263,6 @@ class Summary extends React.Component {
 		sendMessage('ping', 'plus_panel_from_badge');
 
 		history.push(this._hasPremiumAccess() || this._hasPlusAccess() ? '/subscription/info' : `/subscribe/${!!user}`);
-	}
-
-	/**
-	 * Show the Rewards view
-	 * Used to handle user clicking on the Rewards Navicon
-	 */
-	showRewardsListView() {
-		this.toggleExpert('rewards/list');
 	}
 
 	/**
@@ -759,29 +750,6 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Render helper for the rewards navicon that displays in the simple version of the view
-	 * @return {JSX} JSX for rendering the rewards navicon
-	 */
-	_renderRewardsNavicon() {
-		const { is_expert } = this.props;
-		const rewardsNaviconClassNames = ClassNames(
-			'Summary__rewardsNavicon',
-			'Summary__rewardsNavicon--absolutely-positioned',
-			'g-tooltip',
-			{
-				hide: is_expert,
-			}
-		);
-
-		return (
-			<div className={rewardsNaviconClassNames} onClick={this.showRewardsListView}>
-				<ReactSVG src="../../app/images/panel/rewards-icon.svg" />
-				<Tooltip body={t('ghostery_rewards')} position="left" />
-			</div>
-		);
-	}
-
-	/**
 	 * Render helper for the plus upgrade banner or subscriber icon
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
 	 */
@@ -831,7 +799,6 @@ class Summary extends React.Component {
 	*/
 	render() {
 		const {
-			enable_offers,
 			is_expert,
 			is_expanded,
 			current_theme
@@ -879,7 +846,6 @@ class Summary extends React.Component {
 						{this._renderCliqzSmartBlock()}
 					</div>
 					{this._renderStatsNavicon()}
-					{enable_offers && this._renderRewardsNavicon()}
 
 					{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 				</div>

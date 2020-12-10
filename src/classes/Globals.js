@@ -17,9 +17,10 @@ import parser from 'ua-parser-js';
 
 const manifest = chrome.runtime.getManifest();
 const isCliqzBrowser = !!(chrome.runtime.isCliqz);
+
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
- * Most of them (but not all) are const.
+ * Most of them (but not all) are constants.
  * @memberOf  BackgroundClasses
  */
 class Globals {
@@ -31,6 +32,7 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
+		this.BROWSER_INFO_READY = this.buildBrowserInfo();
 		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url) || isCliqzBrowser);
 
 		// flags
@@ -102,7 +104,6 @@ class Globals {
 			'enable_click2play_social',
 			'enable_human_web',
 			'enable_metrics',
-			'enable_offers',
 			'enable_abtests',
 			'enable_smart_block',
 			'expand_all_trackers',
@@ -132,13 +133,11 @@ class Globals {
 			abtests: {},
 			cmp_data: {}
 		};
-
-		this.buildBrowserInfo();
 	}
 
 	/**
 	 * Gets UA and Platform strings for current browser
-	 * @return {Object}
+	 * @return {Promise}
 	 */
 	buildBrowserInfo() {
 		const ua = parser(navigator.userAgent);
@@ -171,11 +170,6 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Yandex';
 			this.BROWSER_INFO.name = 'yandex';
 			this.BROWSER_INFO.token = 'yx';
-		} else if (navigator.userAgent.includes('Ghostery')) {
-			// ua-parser library doesn't parse the desktop browser UA properly
-			this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
-			this.BROWSER_INFO.name = 'ghostery_desktop';
-			this.BROWSER_INFO.token = 'gd';
 		}
 
 		// Set OS property
@@ -192,30 +186,35 @@ class Globals {
 		// Set version property
 		this.BROWSER_INFO.version = version;
 
-		// Check for the Ghostery Android browser
-		if (platform.includes('android')) {
-			this._checkForGhosteryAndroid();
-		}
-	}
-
-	/**
-	 * Check for Ghostery Android Browser and update BROWSER_INFO.
-	 * Note: This is asynchronous and not available at runtime.
-	 * @private
-	 * @return boolean
-	 */
-	_checkForGhosteryAndroid() {
-		if (typeof chrome.runtime.getBrowserInfo === 'function') {
-			chrome.runtime.getBrowserInfo().then((info) => {
-				if (info.name === 'Ghostery') {
+		// Check for Ghostery browsers
+		return Globals._checkBrowserInfo().then((info) => {
+			if (info && info.name === 'Ghostery') {
+				if (platform.includes('android')) {
 					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
 					this.BROWSER_INFO.name = 'ghostery_android';
 					this.BROWSER_INFO.token = 'ga';
 					this.BROWSER_INFO.os = 'android';
 					this.BROWSER_INFO.version = info.version;
+				} else {
+					this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
+					this.BROWSER_INFO.name = 'ghostery_desktop';
+					this.BROWSER_INFO.token = 'gd';
+					this.BROWSER_INFO.version = info.version.split('.').join('');
 				}
-			});
+			}
+		});
+	}
+
+	/**
+	* Check for information about this browser (FF only)
+	* @private
+	* @return {Promise}
+	*/
+	static _checkBrowserInfo() {
+		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			return chrome.runtime.getBrowserInfo();
 		}
+		return Promise.resolve(false);
 	}
 }
 

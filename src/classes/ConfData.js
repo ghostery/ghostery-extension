@@ -93,6 +93,12 @@ class ConfData {
 				_initProperty('trackers_banner_status', true);
 			}
 
+			// Make sure that getBrowserInfo() has resolved before we set these properties
+			(async() => {
+				await globals.BROWSER_INFO_READY;
+				_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
+			})();
+
 			// simple props
 			_initProperty('alert_bubble_pos', 'br');
 			_initProperty('alert_bubble_timeout', 15);
@@ -111,8 +117,6 @@ class ConfData {
 			_initProperty('enable_click2play', true);
 			_initProperty('enable_click2play_social', true);
 			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
-			_initProperty('enable_metrics', false);
-			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID);
 			_initProperty('enable_abtests', true);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);
@@ -132,8 +136,6 @@ class ConfData {
 			_initProperty('paid_subscription', false);
 			_initProperty('plus_promo_modal_last_seen', 0);
 			_initProperty('premium_promo_modal_last_seen', 0);
-			_initProperty('rewards_accepted', false);
-			_initProperty('rewards_opted_in', false); // Migrated to Cliqz pref myoffrz.opted_in
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
 			_initProperty('show_alert', !IS_ANDROID);
