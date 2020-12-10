@@ -1,0 +1,318 @@
+.ChoosePlanView {
+	padding-bottom: 20px;
+}
+.ChoosePlanView__yourPrivacyPlan {
+	margin: auto;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+}
+.ChoosePlanView__subtitle {
+	margin-top: 12px;
+	display: flex;
+	justify-content: center;
+	font-size: 18px;
+}
+.ChoosePlanView__searchPromoContainer {
+	width: 354px;
+	height: 381px;
+	margin: 48px auto 0 auto;
+	border-radius: 4px;
+	border: solid 4px $ghosty-blue;
+}
+.ChoosePlanView__searchLogo {
+	height: 37px;
+	width: 193px;
+	margin: 65px auto 0 auto;
+	background-image: url('/app/images/hub/ChoosePlanView/search.svg');
+}
+.ChoosePlanView__adFree {
+	margin: 16px auto 0 auto;
+	color: #b8860b;
+	font-size: 18px;
+	line-height: 32px;
+	font-weight: 600;
+	width: 220px;
+	text-align: center;
+}
+.ChoosePlanView__adFreePromo {
+	margin: auto;
+	font-size: 18px;
+	line-height: 32px;
+	text-align: center;
+}
+.ChoosePlanView__adFreePromoDescription {
+	margin: 16px auto 0 auto;
+	height: 88px;
+	width: 250px;
+	font-size: 16px;
+	line-height: 1.38;
+	text-align: center;
+	color: $tundora;
+}
+.ChoosePlanView__searchCTAButton {
+	display: flex;
+	justify-content: center;
+	margin: 48px auto 0 auto;
+	height: 44px;
+	width: 162px;
+	padding: 7.7px 14px;
+	line-height: 22px;
+	background: linear-gradient(
+		45deg,
+		#ff7e74 50%,
+		$ghosty-blue
+	);
+	background-size: 200% 100%;
+	background-position: 100% 50%;
+	transition: 0.25s all;
+	border: none;
+	color: $white;
+	font-size: 14.1px;
+	font-weight: 700;
+	border-radius: 3.5px;
+	text-align: center;
+	line-height: 2.05;
+	cursor: pointer;
+
+	&:hover {
+		background-position: 0% 50%;
+		transition: 0.25s all;
+	}
+	&:focus {
+		color: $white;
+	}
+}
+.ChoosePlanView__premiumCTAButton {
+	display: flex;
+	justify-content: center;
+	margin: 48px auto 0 auto;
+	height: 44px;
+	width: 162px;
+	padding: 7.7px 14px;
+	line-height: 22px;
+	background: linear-gradient(
+			45deg,
+ 			#6c097a 50%,
+ 			#03a9ec
+	);
+	background-size: 200% 100%;
+	background-position: 100% 50%;
+	transition: 0.25s all;
+	border: none;
+	color: $white;
+	font-size: 14.1px;
+	font-weight: 700;
+	border-radius: 3.5px;
+	text-align: center;
+	line-height: 2.05;
+	cursor: pointer;
+
+	&:hover {
+		color: $white;
+		background-position: 0% 50%;
+		transition: 0.25s all;
+	}
+}
+.ChoosePlanView__seeAllPlans {
+	margin-top: 48px;
+	display: flex;
+	justify-content: center;
+	color: $ghosty-blue;
+	font-size: 16px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.ChoosePlanView__plansContainer {
+	margin-top: 20px;
+	padding-top: 20px;
+
+	.ChoosePlanView__cardOuter {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin: 0 15px;
+	}
+}
+.ChoosePlanView__orCardContainer {
+	display: flex;
+}
+.ChoosePlanView__or {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 66px;
+	height: 180px;
+	font-size: 24px;
+	color: $tundora;
+}
+.ChoosePlanView__ctaButtonContainer {
+	display: flex;
+	justify-content: center;
+}
+.ChoosePlanView__keepOrUpgradeContainer {
+	margin: 40px auto;
+}
+.ChoosePlanView__arrow {
+	margin: 15px auto 0 auto;
+	height: 12px;
+	width: 12px;
+	border-left: 2px solid $ghosty-blue;
+	border-top: 2px solid $ghosty-blue;
+	cursor: pointer;
+
+	&.down {
+		transform: rotate(45deg);
+	}
+	&.up {
+		transform: rotate(225deg);
+	}
+}
+.ChoosePlanView__card {
+	height: 670px;
+	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
+	margin-bottom: rem-calc(40);
+	width: 250px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	padding-bottom: rem-calc(40);
+	border: 4px solid white;
+
+	&:hover, &.checked {
+		border: 4px solid $ghosty-blue;
+		.ghostery-free-image-container,
+		.ghostery-plus-image-container,
+		.ghostery-premium-image-background {
+			width: 244px;
+			margin-left: -1px;
+		}
+	}
+	h2 {
+		color: $tundora;
+		font-family: "Roboto Condensed";
+		font-size: 18px;
+		font-weight: 400;
+		margin-top: 22px;
+		margin-bottom: 6px;
+	}
+	&-image-top {
+		margin-top: -76px;
+		width: 100%;
+	}
+	&-sub-header {
+		margin-bottom: rem-calc(15);
+	}
+	.ghostery-free-image-container {
+		margin: -3px 0 0 -4px;
+		width: 250px;
+		height: 85px;
+		background-color: rgba(0, 174, 240, .25);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.ghostery-free-image {
+			width: 55px;
+			height: 65px;
+			background-image: url('/app/images/hub/upgrade/ghostery-basic-card.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+	}
+	.ghostery-plus-image-container {
+			margin: -3px 0 0 -4px;
+			width: 250px;
+			height: 85px;
+			background-image: linear-gradient(to right, rgba(240,174,133,.25), rgba(241,216,158,.25));
+		.ghostery-plus-image {
+			margin: auto;
+			width: 225px;
+			height: 87px;
+			background-image: url('/app/images/hub/upgrade/ghostery-plus-card.svg')
+		}
+	}
+	.ghostery-premium-image-container {
+		margin-left: -4px;
+		position: relative;
+	}
+	.ghostery-premium-image {
+		position: absolute;
+		margin-top: -79px;
+		margin-left: 9px;
+		width: 233px;
+		height: 161px;
+		background-image: url('/app/images/hub/upgrade/ghostery-premium-card.svg');
+	}
+	.ghostery-premium-image-background {
+		margin: -3px 0 0 -4px;
+		width: 250px;
+		height: 85px;
+		background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
+	}
+	.card-sub-header {
+		font-size: 14px;
+	}
+}
+.ChoosePlanView__price {
+	min-height: 85px;
+	margin-bottom: rem-calc(20);
+	&-blue {
+		color: $price-blue;
+	}
+	&-blue-alt {
+		color: $blue-alt;
+	}
+	&-gold {
+		color: $price-gold;
+	}
+	&-purple {
+		color: $price-purple;
+	}
+	p {
+		margin-bottom: 0;
+		@include breakpoint($medium-large-breakpoint down) {
+			&.sub-text:first-child {
+				margin-top: 4px;
+			}
+		}
+		&.sub-text {
+			font-weight: 500;
+		}
+	}
+}
+.ChoosePlanView__valuePropList {
+	margin: auto;
+	width: 174px;
+
+	&.basic {
+		width: 145px;
+	}
+}
+.ChoosePlanView__cardSubCopy {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 5px;
+}
+.check {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-repeat: no-repeat;
+	margin-top: 3px;
+	&.blue {
+		background-image: buildCheckIcon($price-blue);
+	}
+	&.yellow {
+		background-image: buildCheckIcon($price-gold);
+	}
+	&.purple {
+		background-image: buildCheckIcon($price-purple);
+	}
+}
+.ChoosePlanView__radioButtonContainer {
+	padding: 11px;
+	margin-bottom: 84px;
+	display: flex;
+	justify-content: center;
+}

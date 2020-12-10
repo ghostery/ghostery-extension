@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Ghostery Browser Hub Choose Plan View
+ * Point of entry index.js file for Radio Button
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,6 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import ChoosePlanView from './ChoosePlanView';
+import RadioButton from './RadioButton';
 
-export default ChoosePlanView;
+export default RadioButton;
