@@ -86,9 +86,6 @@ html, body, #root {
 @import '../hub/Views/LogInView/LogInView.scss';
 @import '../hub/Views/CreateAccountView/CreateAccountView.scss';
 @import '../hub/Views/UpgradePlanView/UpgradePlanView.scss';
-@import '../ghostery-browser-hub/Views/OnboardingViews/Step0_WelcomeView/WelcomeView.scss';
-@import '../ghostery-browser-hub/Views/OnboardingViews/ChoosePlanView/ChoosePlanView.scss';
-@import '../ghostery-browser-hub/Views/OnboardingViews/Step5_SuccessView/SuccessView.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/ExitButton/ExitButton.scss';

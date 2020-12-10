@@ -68,6 +68,7 @@ html, body, #root {
 @import './partials/_shared_components_svgs';
 @import './partials/_fonts';
 @import './partials/_loader';
+@import './partials/radio_button';
 
 // Imports from ../ghostery-browser-hub directory
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step0_WelcomeView/WelcomeView.scss';
@@ -76,8 +77,11 @@ html, body, #root {
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step1_CreateAccountForm/Step1_CreateAccountForm.scss';
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step1_LogInForm/Step1_LogInForm.scss';
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.scss';
+@import '../ghostery-browser-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.scss';
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step5_SuccessView/SuccessView.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/ToastMessage/ToastMessage.scss';
 @import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';
+
+
