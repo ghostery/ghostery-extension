@@ -18,4 +18,4 @@
  * @namespace CliqzContentScript
  */
 
-import 'browser-core/build/core/content-script';
+import 'ghostery-common/build/gbe/core/content-script';
