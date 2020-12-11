@@ -18,7 +18,7 @@ import { ToastMessage } from '../../../shared-components';
 /**
  * A functional React component that implements the App View for the Ghostery Browser Hub
  * @extends Component
- * @memberof GhosteryHubViews
+ * @memberof GhosteryBrowserHubViews
  */
 const AppView = (props) => {
 	const { app, children } = props;

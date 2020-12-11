@@ -16,7 +16,7 @@ import React from 'react';
 /**
  * A Functional React component for rendering the Browser Welcome View
  * @return {JSX} JSX for rendering the Browser Welcome View of the Hub app
- * @memberof HubComponents
+ * @memberof GhosteryBrowserHubViews
  */
 const WelcomeView = () => (
 	<div className="WelcomeView__container">

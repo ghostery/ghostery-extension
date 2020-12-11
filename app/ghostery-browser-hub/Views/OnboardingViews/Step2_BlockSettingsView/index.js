@@ -11,27 +11,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import BlockSettingsView from './BlockSettingsView';
+import { buildReduxHOC } from '../../../../shared-hub/utils';
 import { setAntiTracking, setAdBlock, setSmartBlocking } from '../../../../shared-hub/actions/AntiSuiteActions';
-import { setBlockingPolicy } from '../../../../shared-hub/actions/BlockingPolicyActions';
-import { setToast } from '../../../../shared-hub/actions/ToastActions';
+import setBlockingPolicy from '../../../../shared-hub/actions/BlockingPolicyActions';
+import setToast from '../../../../shared-hub/actions/ToastActions';
 
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators({
-		setAntiTracking,
-		setAdBlock,
-		setSmartBlocking,
-		setBlockingPolicy,
-		setToast,
-	}, dispatch),
-});
+const actionCreators = {
+	setAntiTracking,
+	setAdBlock,
+	setSmartBlocking,
+	setBlockingPolicy,
+	setToast,
+};
 
-export default connect(null, mapDispatchToProps)(BlockSettingsView);
+export default buildReduxHOC(null, actionCreators, BlockSettingsView);

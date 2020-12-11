@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,7 +25,7 @@ import BrowserCreateAccountForm from './Step1_CreateAccountForm';
 /**
  * @class Implement the Create Account View for the Ghostery Hub
  * @extends Component
- * @memberof HubContainers
+ * @memberof GhosteryBrowserHubContainers
  */
 class CreateAccountFormContainer extends Component {
 	constructor(props) {

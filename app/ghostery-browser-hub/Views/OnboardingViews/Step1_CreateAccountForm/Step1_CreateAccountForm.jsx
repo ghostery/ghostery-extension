@@ -4,25 +4,24 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { NavLink } from 'react-router-dom';
-import { ToggleCheckbox } from '../../../shared-components';
+import { ToggleCheckbox } from '../../../../shared-components/ToggleCheckbox';
 
 const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${t('ghostery_browser_hub_onboarding_updates_and_promotions')}`;
 
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
- * @memberof HubComponents
+ * @memberof GhosteryBrowserHubViews
  */
 const Step1_CreateAccountForm = (props) => {
 	const {

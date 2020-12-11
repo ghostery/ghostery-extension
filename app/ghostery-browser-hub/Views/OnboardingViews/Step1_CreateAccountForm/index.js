@@ -11,34 +11,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
+import { buildReduxHOC } from '../../../../shared-hub/utils';
 import Step1_CreateAccountFormContainer from './Step1_CreateAccountFormContainer';
 import { register, getUser, handleEmailPreferencesCheckboxChange } from '../../../../Account/AccountActions';
 import { setToast } from '../../../../hub/Views/AppView/AppViewActions';
 
-/**
- * Map redux store state properties to the component's own properties.
- * @param  {Object} state    entire Redux store's state
- * @return {function}        this function returns a plain object, which will be merged into the component's props
- * @memberof HubContainers
- */
-const mapStateToProps = state => ({ ...state.account });
+const stateSlices = ['account'];
+const actionCreators = {
+	setToast,
+	register,
+	getUser,
+	handleEmailPreferencesCheckboxChange
+};
 
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- * @memberof SetupContainers
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators({
-		setToast,
-		register,
-		getUser,
-		handleEmailPreferencesCheckboxChange
-	}, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Step1_CreateAccountFormContainer);
+export default buildReduxHOC(stateSlices, actionCreators, Step1_CreateAccountFormContainer);
