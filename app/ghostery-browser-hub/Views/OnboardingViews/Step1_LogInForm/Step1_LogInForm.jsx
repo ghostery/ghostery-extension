@@ -14,7 +14,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { NavLink } from 'react-router-dom';
 
 /**
  * A Functional React component for rendering the Log In Form

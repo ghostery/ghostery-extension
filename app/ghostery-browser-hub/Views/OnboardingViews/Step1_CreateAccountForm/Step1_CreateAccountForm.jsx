@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { ToggleCheckbox } from '../../../../shared-components/ToggleCheckbox';
+import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox';
 
 const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${t('ghostery_browser_hub_onboarding_updates_and_promotions')}`;
 
