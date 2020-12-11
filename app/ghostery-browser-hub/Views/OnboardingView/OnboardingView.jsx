@@ -15,7 +15,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import StepProgressBar from '../OnboardingViews/StepProgressBar'
+import StepProgressBar from '../OnboardingViews/StepProgressBar';
+import StepNavigator from '../OnboardingViews/StepNavigator';
 
 /**
  * A Functional React component for rendering the Onboarding View
@@ -35,7 +36,7 @@ const OnboardingView = (props) => {
 						render={() => (
 							<div>
 								<StepProgressBar currentStep={step.index} />
-								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
+								<StepNavigator step={step.index} components={step.bodyComponents} sendMountActions={sendMountActions} />
 							</div>
 						)}
 					/>
@@ -50,7 +51,7 @@ OnboardingView.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({
 		index: PropTypes.number.isRequired,
 		path: PropTypes.string.isRequired,
-		bodyComponent: PropTypes.shape.isRequired,
+		bodyComponents: PropTypes.arrayOf(PropTypes.element.isRequired).isRequired,
 	})).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };

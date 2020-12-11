@@ -101,6 +101,7 @@ class OnboardingViewContainer extends Component {
 				index: 4,
 				path: '/onboarding/4',
 				bodyComponent: ChoosePlanView,
+				// bodyComponents: [ChoosePlanView, LoginView]
 			},
 			{
 				index: 5,
