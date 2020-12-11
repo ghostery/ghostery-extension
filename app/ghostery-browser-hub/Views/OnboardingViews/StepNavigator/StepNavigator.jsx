@@ -34,7 +34,7 @@ class StepNavigator extends Component {
 
 	prev() {
 		const { components } = this.props;
-		this.setState({ screen: ((this.state.screen - 1) + components.length) % components.length });
+		this.setState(state => ({ screen: ((state.screen - 1) + components.length) % components.length }));
 	}
 
 	render() {

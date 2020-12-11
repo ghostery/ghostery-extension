@@ -80,33 +80,32 @@ class OnboardingViewContainer extends Component {
 			{
 				index: 0,
 				path: '/onboarding/0',
-				bodyComponent: WelcomeView,
+				bodyComponents: [WelcomeView],
 			},
 			{
 				index: 1,
 				path: '/onboarding/1',
-				bodyComponent: LoginView,
+				bodyComponents: [LoginView],
 			},
 			{
 				index: 2,
 				path: '/onboarding/2',
-				bodyComponent: BlockSettingsView,
+				bodyComponents: [BlockSettingsView],
 			},
 			{
 				index: 3,
 				path: '/onboarding/3',
-				bodyComponent: ChooseDefaultSearchView,
+				bodyComponents: [ChooseDefaultSearchView],
 			},
 			{
 				index: 4,
 				path: '/onboarding/4',
-				bodyComponent: ChoosePlanView,
-				// bodyComponents: [ChoosePlanView, LoginView]
+				bodyComponents: [ChoosePlanView, LoginView],
 			},
 			{
 				index: 5,
 				path: '/onboarding/5',
-				bodyComponent: SuccessView,
+				bodyComponents: [SuccessView],
 			}
 		];
 
