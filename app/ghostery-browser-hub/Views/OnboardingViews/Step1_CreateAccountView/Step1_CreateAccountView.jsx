@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,7 +14,6 @@
 import React, { Fragment, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { NavLink } from 'react-router-dom';
 import Step1_LogInForm from '../Step1_LogInForm';
 import Step1_CreateAccountForm from '../Step1_CreateAccountForm';
 import globals from '../../../../../src/classes/Globals';
@@ -74,7 +73,7 @@ const renderSkipLink = () => (
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
- * @memberof HubComponents
+ * @memberof GhosteryBrowserHubViews
  */
 const Step1_CreateAccountView = (props) => {
 	const { user } = props;

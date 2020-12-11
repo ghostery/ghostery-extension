@@ -101,6 +101,7 @@ class Step1_LogInFormContainer extends Component {
 				window.history.pushState({}, '', `${origin}${pathname}${hash}`);
 
 				actions.getUser();
+				// TODO investigate whether this is needed here
 				actions.getUserSettings()
 					.then((settings) => {
 						const { current_theme } = settings;
