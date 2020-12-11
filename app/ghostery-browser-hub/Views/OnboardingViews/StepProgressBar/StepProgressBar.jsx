@@ -72,33 +72,37 @@ const StepProgressBar = (props) => {
 	);
 
 	const renderProgressBar = () => (
-		steps.map((value, index) => (
-			<Fragment key={value}>
-				{(index + 1 < currentStep) && (
-					renderCompletedStep(steps[index])
-				)}
-				{(index + 1 === currentStep) && (
-					<Fragment>
-						{renderCurrentStep(steps[index], index + 1)}
-					</Fragment>
-				)}
-				{(index + 1 > currentStep) && (
-					<Fragment>
-						{renderIncompleteStep(steps[index], index + 1)}
-					</Fragment>
-				)}
-				{(index + 1 !== totalSteps) && (
-					<Fragment>
-						{(index + 1 < currentStep) && (
-							<div className="StepProgressBar__line completed" />
-						)}
-						{(index + 1 >= currentStep) && (
-							<div className="StepProgressBar__line incompleted" />
-						)}
-					</Fragment>
-				)}
-			</Fragment>
-		))
+		steps.map((value, index) => {
+			const step = index + 1;
+
+			return (
+				<Fragment key={value}>
+					{(step < currentStep) && (
+						renderCompletedStep(steps[index])
+					)}
+					{(step === currentStep) && (
+						<Fragment>
+							{renderCurrentStep(steps[index], index + 1)}
+						</Fragment>
+					)}
+					{(step > currentStep) && (
+						<Fragment>
+							{renderIncompleteStep(steps[index], index + 1)}
+						</Fragment>
+					)}
+					{(step !== totalSteps) && (
+						<Fragment>
+							{(index + 1 < currentStep) && (
+								<div className="StepProgressBar__line completed" />
+							)}
+							{(index + 1 >= currentStep) && (
+								<div className="StepProgressBar__line incompleted" />
+							)}
+						</Fragment>
+					)}
+				</Fragment>
+			);
+		})
 	);
 
 	return (

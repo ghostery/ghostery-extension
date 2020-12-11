@@ -15,6 +15,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
+import StepProgressBar from '../OnboardingViews/StepProgressBar'
+
 /**
  * A Functional React component for rendering the Onboarding View
  * @return {JSX} JSX for rendering the Onboarding View of the Ghostery Browser Hub app
@@ -32,6 +34,7 @@ const OnboardingView = (props) => {
 						path={step.path}
 						render={() => (
 							<div>
+								<StepProgressBar currentStep={step.index} />
 								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
 							</div>
 						)}
