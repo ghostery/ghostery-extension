@@ -29,23 +29,6 @@
 		{
 			"all_frames": false,
 			"js": [
-				"dist/ghostery_dot_com.js"
-			],
-			"css": [
-				"dist/css/ghostery_dot_com_css.css"
-			],
-			"matches": [
-				"https://www.ghostery.com/*",
-				"https://apps.ghostery.com/*",
-				"https://staging-apps.ghostery.com/*",
-				"https://gcache.ghostery.com/*",
-				"https://staging-gcache.ghostery.com/*"
-			],
-			"run_at": "document_idle"
-		},
-		{
-			"all_frames": false,
-			"js": [
 				"dist/account_pages.js"
 			],
 			"matches": [

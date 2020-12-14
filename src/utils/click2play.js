@@ -19,7 +19,12 @@ import globals from '../classes/Globals';
 import Policy from '../classes/Policy';
 import tabInfo from '../classes/TabInfo';
 import { log } from './common';
-import { sendMessage, processUrl, injectScript } from './utils';
+import {
+	sendMessage,
+	processUrl,
+	injectScript,
+	getJson
+} from './utils';
 import c2p_tpl from '../../app/templates/click2play.html';
 import c2p_images from '../../app/data-images/click2play';
 
@@ -176,7 +181,7 @@ export function buildC2P(details, app_id) {
  * @param  {Object}		redirectUrls	original url and redirect url as properties
  * @param  {number}		app_id 			tracker id
  *
- * @return {string}  					url of the internal template of the blocked redirect page
+ * @return {Promise}  					url of the internal template of the blocked redirect page
  */
 export function buildRedirectC2P(redirectUrls, app_id) {
 	const host_url = processUrl(redirectUrls.url).hostname;
@@ -188,19 +193,25 @@ export function buildRedirectC2P(redirectUrls, app_id) {
 	globals.BLOCKED_REDIRECT_DATA.url = redirectUrls.redirectUrl;
 	globals.BLOCKED_REDIRECT_DATA.blacklisted = !!Policy.blacklisted(host_url);
 
-	globals.BLOCKED_REDIRECT_DATA.translations = {
-		blocked_redirect_page_title: t('blocked_redirect_page_title'),
-		blocked_redirect_prevent: t(
-			'blocked_redirect_prevent',
-			// It is unlikely that apps pages will ever be translated
-			// [host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
-			[host_url, redirect_url, app_name, `${globals.APPS_BASE_URL}/en/apps/${encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())}`]
-		),
-		blocked_redirect_action_always_title: t('blocked_redirect_action_always_title'),
-		blocked_redirect_action_through_once_title: t('blocked_redirect_action_through_once_title'),
-		blocked_redirect_url_content: t('blocked_redirect_url_content', [redirectUrls.redirectUrl, app_name])
-	};
-	return chrome.extension.getURL('app/templates/blocked_redirect.html');
+	return getJson(`${globals.WTM_BASE_URL}/data/trackers/ghostery/${app_id}.json`).catch(() => {
+		log('Tracker not found on whotracks.me');
+	}).then((data) => {
+		let wtmURL = globals.WTM_BASE_URL;
+		if (data && data.id) {
+			wtmURL += `/trackers/${encodeURIComponent(data.id).toLowerCase()}`;
+		}
+		globals.BLOCKED_REDIRECT_DATA.translations = {
+			blocked_redirect_page_title: t('blocked_redirect_page_title'),
+			blocked_redirect_prevent: t(
+				'blocked_redirect_prevent',
+				[host_url, redirect_url, app_name, wtmURL]
+			),
+			blocked_redirect_action_always_title: t('blocked_redirect_action_always_title'),
+			blocked_redirect_action_through_once_title: t('blocked_redirect_action_through_once_title'),
+			blocked_redirect_url_content: t('blocked_redirect_url_content', [redirectUrls.redirectUrl, app_name])
+		};
+		return chrome.extension.getURL('app/templates/blocked_redirect.html');
+	});
 }
 
 /**
