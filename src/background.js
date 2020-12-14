@@ -759,10 +759,11 @@ function onMessageHandler(request, sender, callback) {
 		}
 		return true;
 	}
-	if (name === 'getTrackerDescription') {
+	if (name === 'getTrackerInfo') {
 		utils.getJson(message.url).then((result) => {
-			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
-			callback(description);
+			callback(result);
+		}).catch(() => {
+			callback(false);
 		});
 		return true;
 	}
