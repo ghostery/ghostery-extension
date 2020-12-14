@@ -12,7 +12,7 @@
  */
 
 /*  @memberOf  BackgroundClasses */
-import CLIQZ from 'browser-core';
+import CLIQZ from 'ghostery-common';
 import globals from './Globals';
 
 const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
