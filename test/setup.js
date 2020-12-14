@@ -65,7 +65,7 @@ jest.mock('../src/classes/Cliqz', () => ({
 }));
 
 // Create Mock for the Cliqz dependencies
-jest.mock('browser-core', () => ({ App: class App {} }));
+jest.mock('ghostery-common', () => ({ App: class App {} }));
 
 // Initialization for Globals.js
 Object.defineProperty(navigator, 'userAgent', {
