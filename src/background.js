@@ -48,7 +48,7 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
-// For debug purposes, provide Access to the internals of `browser-core`
+// For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
 

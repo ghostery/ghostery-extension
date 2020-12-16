@@ -25,7 +25,7 @@ checker.init({
 	production: true,
 	json: true,
 	direct: true, // get top-level only
-	excludePackages: 'browser-core',
+	excludePackages: 'ghostery-common',
 	customPath: 'licenseTemplate.json',
 }, (err, licenseJSON) => {
 	if (err) {
@@ -37,9 +37,9 @@ checker.init({
 		const packageNames = [];
 		const npmDependencies = jsonfile.readFileSync('./package.json').dependencies;
 
-		// Get all top-level dependencies from package.json (except browser-core)
+		// Get all top-level dependencies from package.json (except ghostery-common)
 		Object.keys(npmDependencies).forEach((packageName) => {
-			if (packageName !== 'browser-core') {
+			if (packageName !== 'ghostery-common') {
 				const packagePath = `./node_modules/${packageName}/package.json`;
 				if (fs.pathExistsSync(packagePath)) {
 					const { name, version } = jsonfile.readFileSync(packagePath);

@@ -118,17 +118,17 @@ Ghostery implements the following open-source products from Cliqz:
 
 [**Human Web**](https://cliqz.com/en/whycliqz/human-web)
 + [How it works](https://cliqz.com/en/magazine/techblog-human-web-reliably-removes-uids)
-+ [GitHub](https://github.com/cliqz-oss/browser-core/blob/master/modules/human-web/)
++ [GitHub](https://github.com/ghostery/common/tree/main/modules/human-web)
 
 [**Anti-Tracking**](https://cliqz.com/en/whycliqz/anti-tracking)
 + [How it works](https://cliqz.com/en/magazine/how-we-at-cliqz-protect-users-from-web-tracking)
-+ [GitHub](https://github.com/cliqz-oss/browser-core/blob/master/modules/antitracking)
++ [GitHub](https://github.com/ghostery/common/tree/main/modules/antitracking)
 
 [**Ad Blocker**](https://cliqz.com/en/whycliqz/adblocking)
-+ [GitHub](https://github.com/cliqz-oss/adblocker)
++ [GitHub](https://github.com/ghostery/common/tree/main/modules/adblocker)
 
-### Building Cliqz Modules for Ghostery
-Cliqz modules are pre-built and included under the `browser-core` NPM dependency in [package.json](package.json). To reproduce this build process, download the appropriate Ghostery release (v7.x.x) from the [browser-core](https://github.com/cliqz-oss/browser-core/releases) project.
+### Building Common Libraries for Ghostery
+Common libraries are pre-built and included under the `ghostery-common` NPM dependency in [package.json](package.json). To reproduce this build process, download the appropriate Ghostery release from the [ghostery-common](https://github.com/ghostery/common/releases) project.
 
 ```sh
 $ npm ci
