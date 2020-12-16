@@ -26,6 +26,8 @@ import StepNavigator from '../OnboardingViews/StepNavigator';
 const OnboardingView = (props) => {
 	const { sendMountActions, steps } = props;
 
+	console.log('in OnboardingView');
+
 	return (
 		<div className="full-height flex-container flex-dir-column android-relative">
 			<div className="flex-child-grow">
@@ -51,7 +53,7 @@ OnboardingView.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({
 		index: PropTypes.number.isRequired,
 		path: PropTypes.string.isRequired,
-		bodyComponents: PropTypes.arrayOf(PropTypes.element.isRequired).isRequired,
+		bodyComponents: PropTypes.arrayOf(PropTypes.elementType.isRequired).isRequired,
 	})).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };

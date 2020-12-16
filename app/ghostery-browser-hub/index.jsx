@@ -12,10 +12,11 @@
  *
  * @namespace GhosteryBrowserHubComponents
  */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
+
 import createStore from './createStore';
 
 // Views
@@ -24,12 +25,22 @@ import OnboardingView from './Views/OnboardingView';
 
 const store = createStore();
 
+/**
+ * Top-Level Component for the Ghostery Browser Hub
+ * @memberof GhosteryBrowserHubComponents
+ */
+const Hub = () => (
+	<AppView>
+		<Route path="/" component={OnboardingView} />
+	</AppView>
+);
+
 ReactDOM.render(
 	(
 		<Provider store={store}>
-			<AppView>
-				<OnboardingView />
-			</AppView>
+			<Router hashType="noslash">
+				<Hub />
+			</Router>
 		</Provider>
 	), document.getElementById('root'),
 );

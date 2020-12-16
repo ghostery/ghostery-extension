@@ -22,6 +22,7 @@ import { ToastMessage } from '../../../shared-components';
  */
 const AppView = (props) => {
 	const { app, children } = props;
+	const { toastMessage, toastClass } = app;
 
 	/**
 	 * Handle clicking to exit the Toast Message.
@@ -35,9 +36,9 @@ const AppView = (props) => {
 	};
 
 	return (
-		<div className="App full-height full-width flex-container">
+		<div className="Bananas__Foster App full-height full-width flex-container">
 			<div className="App__mainContent full-height full-width">
-				<ToastMessage toastTest={app.toastMessage} toastClass={app.toastClass} toastExit={exitToast} />
+				<ToastMessage toastText={toastMessage} toastClass={toastClass} toastExit={exitToast} />
 				{children}
 			</div>
 		</div>

@@ -53,21 +53,18 @@ class OnboardingViewContainer extends Component {
 		// TODO modify this as needed
 		const { origin, pathname, hash } = window.location;
 		window.history.pushState({}, '', `${origin}${pathname}${hash}`);
-		this._setDefaultSettings();
-	}
 
-	/**
-	 * Function to persist the default settings to background
-	 */
-	// TODO modify this as needed
-	_setDefaultSettings() {
-		this.setState({ sendMountActions: true });
-		const { actions } = this.props;
-		actions.setSetupStep({ setup_step: 8 });
-		actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
-		actions.setAntiTracking({ enable_anti_tracking: true }); // covered
-		actions.setAdBlock({ enable_ad_block: true }); // covered
-		actions.setSmartBlocking({ enable_smart_block: true }); // covered
+		// TODO only invoke if there are no existing settings
+		if (true) {
+			this.state = {
+				sendMountActions: true
+			};
+			actions.setSetupStep({ setup_step: 8 });
+			actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
+			actions.setAntiTracking({ enable_anti_tracking: true }); // covered
+			actions.setAdBlock({ enable_ad_block: true }); // covered
+			actions.setSmartBlocking({ enable_smart_block: true }); // covered
+		}
 	}
 
 	/**
@@ -149,25 +146,20 @@ OnboardingViewContainer.propTypes = {
 				PropTypes.string,
 			]),
 		}),
-		setup_show_warning_override: PropTypes.bool,
 		blockingPolicy: PropTypes.string,
 		enable_anti_tracking: PropTypes.bool,
 		enable_ad_block: PropTypes.bool,
 		enable_smart_block: PropTypes.bool,
-		enable_human_web: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
-		getSetupShowWarningOverride: PropTypes.func.isRequired,
-		setSetupShowWarningOverride: PropTypes.func.isRequired,
 		initSetupProps: PropTypes.func.isRequired,
 		setSetupStep: PropTypes.func.isRequired,
 		setSetupNavigation: PropTypes.func.isRequired,
+		setSetupComplete: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
 		setSmartBlocking: PropTypes.func.isRequired,
-		setHumanWeb: PropTypes.func.isRequired,
-		setSetupComplete: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
@@ -184,12 +176,10 @@ OnboardingViewContainer.defaultProps = {
 			textNext: false,
 			textDone: false,
 		},
-		setup_show_warning_override: true,
 		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
 		enable_smart_block: true,
-		enable_human_web: true,
 	},
 };
 
