@@ -17,16 +17,16 @@ set -e
 # Set directory paths for both projects
 GHOSTERY_SOURCE_ZIP=$(find . -name "ghostery-extension-*.zip")
 GHOSTERY_SOURCE_DIR="${GHOSTERY_SOURCE_ZIP%.zip*}"
-CLIQZ_SOURCE_ZIP=$(find . -name "browser-core-*.zip")
-CLIQZ_SOURCE_DIR="${CLIQZ_SOURCE_ZIP%.zip*}"
+COMMON_SOURCE_ZIP=$(find . -name "common-*.zip")
+COMMON_SOURCE_DIR="${COMMON_SOURCE_ZIP%.zip*}"
 
 # Extract
 if [ ! -d $GHOSTERY_SOURCE_DIR ]; then
 	unzip $GHOSTERY_SOURCE_ZIP
 fi
 
-if [ ! -d $CLIQZ_SOURCE_DIR ]; then
-	unzip $CLIQZ_SOURCE_ZIP
+if [ ! -d $COMMON_SOURCE_DIR ]; then
+	unzip $COMMON_SOURCE_ZIP
 fi
 
 #### REQUIREMENTS ####
@@ -61,8 +61,8 @@ fi
 nvm install lts/dubnium
 nvm use
 
-#### BROWSER CORE ####
-cd $CLIQZ_SOURCE_DIR
+#### GHOSTERY COMMON ####
+cd $COMMON_SOURCE_DIR
 
 # Clean any previous builds
 rm -rf build
@@ -73,10 +73,10 @@ rm -rf node_modules
 # Install the exact versions from package-lock.json
 npm ci
 
-# Build a production version of browser-core for Ghostery
+# Build a production version of Ghostery Common library
 ./fern.js build configs/ghostery.js --environment=production --no-debug
 
-echo "Browser Core build complete. Please see build/ directory."
+echo "Ghostery Common build complete. Please see build/ directory."
 
 cd ..
 
