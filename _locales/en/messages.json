@@ -476,8 +476,8 @@
 		"message": "Blocked"
 	},
 	"blocking_category_whitelisted": {
-		"description": "as in '5 (trackers) WHITELISTED'",
-		"message": "Whitelisted"
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "Trusted"
 	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Success! $BOLD_HTML_END$ An account verification email has been sent to $EMAIL$",
@@ -779,8 +779,8 @@
 		"message": "This site has been removed from your Restricted Sites list and added to your Trusted Sites list."
 	},
 	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "This site is already whitelisted."
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "This site is already trusted."
 	},
 	"settings_adblocker": {
 		"message": "Ad-Block Lists"
@@ -1125,16 +1125,16 @@
 		"message": "Reload to see changes."
 	},
 	"alert_site_trusted": {
-		"message": "Site whitelisted. Trackers will be allowed and Anti-Tracking disabled on this site."
+		"message": "Site trusted. Trackers will be allowed and Anti-Tracking disabled on this site."
 	},
 	"alert_site_trusted_off": {
-		"message": "Site no longer whitelisted."
+		"message": "Site no longer trusted."
 	},
 	"alert_site_restricted": {
-		"message": "Site blacklisted. Trackers will be blocked and Anti-Tracking enabled on this site."
+		"message": "Site restricted. Trackers will be blocked and Anti-Tracking enabled on this site."
 	},
 	"alert_site_restricted_off": {
-		"message": "Site no longer blacklisted."
+		"message": "Site no longer restricted."
 	},
 	"tooltip_anti_track_on": {
 		"message": "Personal data points anonymized."
@@ -1589,7 +1589,7 @@
 		"message": "Trust & Restrict Sites"
 	},
 	"hub_tutorial_trust_tagline": {
-		"message": "Whitelist or blacklist websites with one click."
+		"message": "Trust or restrict websites with one click."
 	},
 	"hub_tutorial_trust_trust_site": {
 		"message": "Always allow trackers on the site."
@@ -2374,7 +2374,7 @@
 		"message": "Built-in VPN"
 	},
 	"custom_whitelist_options": {
-		"message": "Custom whitelist options"
+		"message": "Custom trusted site options"
 	},
 	"historical_tracking_insights": {
 		"message": "Historical tracking insights"
