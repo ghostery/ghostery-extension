@@ -1107,7 +1107,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_autoupdate', (enableAutoUpdate) => {
 		if (!antitracking.isDisabled) {
-			antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+			antitracking.action('setConfigOption', 'networkFetchEnabled', enableAutoUpdate);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
