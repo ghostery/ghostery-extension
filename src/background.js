@@ -1099,6 +1099,7 @@ function initializeDispatcher() {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
+				setCliqzModuleEnabled(hpnv2, enableHumanWeb);
 			});
 		} else {
 			setCliqzModuleEnabled(humanweb, false);
