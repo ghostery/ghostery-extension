@@ -1104,6 +1104,11 @@ function initializeDispatcher() {
 			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
+	dispatcher.on('conf.save.enable_autoupdate', (enableAutoUpdate) => {
+		if (!antitracking.isDisabled) {
+			antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+		}
+	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
@@ -1545,6 +1550,10 @@ function initializeGhosteryModules() {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
+
+				if (!antitracking.isDisabled) {
+					antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+				}
 
 				// Make sure that getBrowserInfo() has resolved before we set these properties
 				(async() => {
