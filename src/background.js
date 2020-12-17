@@ -1109,6 +1109,9 @@ function initializeDispatcher() {
 		if (!antitracking.isDisabled) {
 			antitracking.action('setConfigOption', 'networkFetchEnabled', enableAutoUpdate);
 		}
+		if (!adblocker.isDisabled) {
+			adblocker.action('setNetworkFetchEnabled', enableAutoUpdate);
+		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
@@ -1554,6 +1557,9 @@ function initializeGhosteryModules() {
 
 				if (!antitracking.isDisabled) {
 					antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+				}
+				if (!adblocker.isDisabled) {
+					adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
 				}
 
 				// Make sure that getBrowserInfo() has resolved before we set these properties
