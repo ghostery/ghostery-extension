@@ -47,7 +47,7 @@
     "classnames": "^2.2.5",
     "d3": "^5.16.0",
     "foundation-sites": "^6.6.2",
-    "ghostery-common": "^1.0.1",
+    "ghostery-common": "^1.2.0",
     "history": "^4.10.1",
     "jquery": "3.5.0",
     "json-api-normalizer": "^1.0.0",
