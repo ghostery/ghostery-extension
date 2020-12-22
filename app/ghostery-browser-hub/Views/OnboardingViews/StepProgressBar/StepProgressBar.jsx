@@ -19,7 +19,7 @@ import { NavLink } from 'react-router-dom';
 const steps = [
 	{
 		label: t('sign_in'),
-		route: 'LINK_TO_STEP_1'
+		route: '/onboarding/'
 	},
 	{
 		label: t('ghostery_browser_hub_onboarding_privacy'),

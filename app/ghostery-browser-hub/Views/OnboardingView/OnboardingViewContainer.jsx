@@ -23,6 +23,16 @@ import BlockSettingsView from '../OnboardingViews/Step2_BlockSettingsView';
 import ChooseDefaultSearchView from '../OnboardingViews/Step3_ChooseDefaultSearchView';
 import ChoosePlanView from '../OnboardingViews/Step4_ChoosePlanView';
 import SuccessView from '../OnboardingViews/Step5_SuccessView';
+import {
+	ONBOARDING,
+	WELCOME,
+	LOGIN,
+	BLOCK_SETTINGS,
+	CHOOSE_DEFAULT_SEARCH,
+	CHOOSE_PLAN,
+	SUCCESS
+
+} from './OnboardingConstants';
 
 /**
  * @class Implement the Onboarding View for the Ghostery Browser Hub
@@ -76,32 +86,32 @@ class OnboardingViewContainer extends Component {
 		const steps = [
 			{
 				index: 0,
-				path: '/onboarding/0',
+				path: `${ONBOARDING}/${WELCOME}`,
 				bodyComponents: [WelcomeView],
 			},
 			{
 				index: 1,
-				path: '/onboarding/1',
+				path: `${ONBOARDING}/${LOGIN}`,
 				bodyComponents: [LoginView],
 			},
 			{
 				index: 2,
-				path: '/onboarding/2',
+				path: `${ONBOARDING}/${BLOCK_SETTINGS}`,
 				bodyComponents: [BlockSettingsView],
 			},
 			{
 				index: 3,
-				path: '/onboarding/3',
+				path: `${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`,
 				bodyComponents: [ChooseDefaultSearchView],
 			},
 			{
 				index: 4,
-				path: '/onboarding/4',
+				path: `${ONBOARDING}/${CHOOSE_PLAN}`,
 				bodyComponents: [ChoosePlanView, LoginView],
 			},
 			{
 				index: 5,
-				path: '/onboarding/5',
+				path: `${ONBOARDING}/${SUCCESS}`,
 				bodyComponents: [SuccessView],
 			}
 		];
