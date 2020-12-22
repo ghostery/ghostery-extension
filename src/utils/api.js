@@ -27,6 +27,10 @@ class Api {
 		}
 	}
 
+	refreshToken() {
+		return this._refreshToken().then(this.isRefreshing = false);
+	}
+
 	_refreshToken() {
 		if (this.isRefreshing) {
 			let bindedResolve;

@@ -40,6 +40,7 @@ import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import account from './classes/Account';
 import promoModals from './classes/PromoModals';
+import searchMessager from './classes/SearchMessager';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -1649,6 +1650,15 @@ function initializeGhosteryModules() {
 }
 
 /**
+ * Initialize Search Messaging.
+ * @memberOf Background
+ */
+function initializeSearchMessaging() {
+	const sm = new searchMessager();
+	sm.init()
+}
+
+/**
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
@@ -1659,6 +1669,7 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
+		initializeSearchMessaging();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			account.migrate()
 				.then(() => {
