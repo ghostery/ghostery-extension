@@ -12,26 +12,37 @@
  */
 
 import React, { Fragment } from 'react';
+import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import {
+	ONBOARDING,
+	LOGIN,
+	BLOCK_SETTINGS,
+	CHOOSE_DEFAULT_SEARCH,
+	CHOOSE_PLAN
+} from '../../OnboardingView/OnboardingConstants';
 
-// TODO: Change routes
 const steps = [
 	{
 		label: t('sign_in'),
-		route: '/onboarding/'
+		route: `/${ONBOARDING}/${LOGIN}`,
+		id: LOGIN
 	},
 	{
 		label: t('ghostery_browser_hub_onboarding_privacy'),
-		route: 'LINK_TO_STEP_2'
+		route: `/${ONBOARDING}/${BLOCK_SETTINGS}`,
+		id: BLOCK_SETTINGS
 	},
 	{
 		label: t('ghostery_browser_hub_onboarding_search'),
-		route: 'LINK_TO_STEP_3'
+		route: `/${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`,
+		id: CHOOSE_DEFAULT_SEARCH
 	},
 	{
 		label: t('ghostery_browser_hub_onboarding_plan'),
-		route: 'LINK_TO_STEP_4'
+		route: `/${ONBOARDING}/${CHOOSE_PLAN}`,
+		id: CHOOSE_PLAN
 	}
 ];
 
@@ -44,32 +55,29 @@ const StepProgressBar = (props) => {
 	const { currentStep } = props;
 	const totalSteps = steps.length;
 
-	const renderCompletedStep = step => (
-		<div className="StepProgressBar__column">
-			<NavLink to={step.route}>
-				<div className="StepProgressBar__label">{step.label}</div>
-				<div className="StepProgressBar__Step step-completed" />
-			</NavLink>
-		</div>
-	);
+	const renderStep = (step, isCurrent, stepClass) => {
+		const labelClasses = ClassNames('StepProgressBar__label', {
+			current: isCurrent,
+		});
+		const stepClasses = ClassNames('StepProgressBar__Step', stepClass, {
+			[`step-${step.id}`]: stepClass !== 'step-completed',
+		});
 
-	const renderCurrentStep = (step, value) => (
-		<div className="StepProgressBar__column">
-			<NavLink to={step.route}>
-				<div className="StepProgressBar__label currentStep">{step.label}</div>
-				<div className={`StepProgressBar__Step step-${value} current`} />
-			</NavLink>
-		</div>
-	);
+		return (
+			<div className="StepProgressBar__column">
+				<NavLink to={step.route}>
+					<div className={labelClasses}>{step.label}</div>
+					<div className={stepClasses} />
+				</NavLink>
+			</div>
+		);
+	};
 
-	const renderIncompleteStep = (step, value) => (
-		<div className="StepProgressBar__column">
-			<NavLink to={step.route}>
-				<div className="StepProgressBar__label">{step.label}</div>
-				<div className={`StepProgressBar__Step step-${value} incomplete`} />
-			</NavLink>
-		</div>
-	);
+	const renderCompletedStep = step => renderStep(step, false, 'step-completed');
+
+	const renderCurrentStep = step => renderStep(step, true, 'current');
+
+	const renderIncompleteStep = step => renderStep(step, false, 'incomplete');
 
 	const renderProgressBar = () => (
 		steps.map((value, index) => {
@@ -77,25 +85,15 @@ const StepProgressBar = (props) => {
 
 			return (
 				<Fragment key={value}>
-					{(step < currentStep) && (
-						renderCompletedStep(steps[index])
-					)}
-					{(step === currentStep) && (
-						<Fragment>
-							{renderCurrentStep(steps[index], index + 1)}
-						</Fragment>
-					)}
-					{(step > currentStep) && (
-						<Fragment>
-							{renderIncompleteStep(steps[index], index + 1)}
-						</Fragment>
-					)}
+					{(step < currentStep) && renderCompletedStep(steps[index])}
+					{(step === currentStep) && renderCurrentStep(steps[index])}
+					{(step > currentStep) && renderIncompleteStep(steps[index])}
 					{(step !== totalSteps) && (
 						<Fragment>
-							{(index + 1 < currentStep) && (
+							{(step < currentStep) && (
 								<div className="StepProgressBar__line completed" />
 							)}
-							{(index + 1 >= currentStep) && (
+							{(step >= currentStep) && (
 								<div className="StepProgressBar__line incompleted" />
 							)}
 						</Fragment>

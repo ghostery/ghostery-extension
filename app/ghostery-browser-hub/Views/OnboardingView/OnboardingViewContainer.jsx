@@ -31,7 +31,6 @@ import {
 	CHOOSE_DEFAULT_SEARCH,
 	CHOOSE_PLAN,
 	SUCCESS
-
 } from './OnboardingConstants';
 
 /**
@@ -86,32 +85,32 @@ class OnboardingViewContainer extends Component {
 		const steps = [
 			{
 				index: 0,
-				path: `${ONBOARDING}/${WELCOME}`,
+				path: `/${ONBOARDING}/${WELCOME}`,
 				bodyComponents: [WelcomeView],
 			},
 			{
 				index: 1,
-				path: `${ONBOARDING}/${LOGIN}`,
+				path: `/${ONBOARDING}/${LOGIN}`,
 				bodyComponents: [LoginView],
 			},
 			{
 				index: 2,
-				path: `${ONBOARDING}/${BLOCK_SETTINGS}`,
+				path: `/${ONBOARDING}/${BLOCK_SETTINGS}`,
 				bodyComponents: [BlockSettingsView],
 			},
 			{
 				index: 3,
-				path: `${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`,
+				path: `/${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`,
 				bodyComponents: [ChooseDefaultSearchView],
 			},
 			{
 				index: 4,
-				path: `${ONBOARDING}/${CHOOSE_PLAN}`,
+				path: `/${ONBOARDING}/${CHOOSE_PLAN}`,
 				bodyComponents: [ChoosePlanView, LoginView],
 			},
 			{
 				index: 5,
-				path: `${ONBOARDING}/${SUCCESS}`,
+				path: `/${ONBOARDING}/${SUCCESS}`,
 				bodyComponents: [SuccessView],
 			}
 		];
