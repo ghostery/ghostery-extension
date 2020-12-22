@@ -67,6 +67,7 @@ const {
 	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
+const IS_GHOSTERY_BROWSER = (BROWSER_INFO.name === 'ghostery_desktop');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
@@ -1650,10 +1651,10 @@ function initializeGhosteryModules() {
 }
 
 /**
- * Initialize Search Messaging.
+ * Initialize Search Message Handler.
  * @memberOf Background
  */
-function initializeSearchMessaging() {
+function initializeSearchMessageHandler() {
 	const sm = new searchMessager();
 	sm.init()
 }
@@ -1669,7 +1670,9 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		initializeSearchMessaging();
+		if (IS_GHOSTERY_BROWSER) {
+			initializeSearchMessageHandler();
+		}
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			account.migrate()
 				.then(() => {
