@@ -46,9 +46,7 @@ class OnboardingViewContainer extends Component {
 		};
 
 		const { history } = this.props;
-		if (!props.preventRedirect) {
-			history.push('/onboarding/0');
-		}
+		history.push(`/${ONBOARDING}/${WELCOME}`);
 
 		// TODO verify what document title we should use
 		const title = t('ghostery_browser_hub_onboarding_page_title');
@@ -126,35 +124,7 @@ class OnboardingViewContainer extends Component {
 // PropTypes ensure we pass required props of the correct type
 // Note: isRequired is not needed when a prop has a default value
 OnboardingViewContainer.propTypes = {
-	preventRedirect: PropTypes.bool,
 	setup: PropTypes.shape({
-		navigation: PropTypes.shape({
-			activeIndex: PropTypes.number,
-			hrefPrev: PropTypes.oneOfType([
-				PropTypes.bool,
-				PropTypes.string,
-			]),
-			hrefNext: PropTypes.oneOfType([
-				PropTypes.bool,
-				PropTypes.string,
-			]),
-			hrefDone: PropTypes.oneOfType([
-				PropTypes.bool,
-				PropTypes.string,
-			]),
-			textPrev: PropTypes.oneOfType([
-				PropTypes.bool,
-				PropTypes.string,
-			]),
-			textNext: PropTypes.oneOfType([
-				PropTypes.bool,
-				PropTypes.string,
-			]),
-			textDone: PropTypes.oneOfType([
-				PropTypes.bool,
-				PropTypes.string,
-			]),
-		}),
 		blockingPolicy: PropTypes.string,
 		enable_anti_tracking: PropTypes.bool,
 		enable_ad_block: PropTypes.bool,
@@ -163,7 +133,6 @@ OnboardingViewContainer.propTypes = {
 	actions: PropTypes.shape({
 		initSetupProps: PropTypes.func.isRequired,
 		setSetupStep: PropTypes.func.isRequired,
-		setSetupNavigation: PropTypes.func.isRequired,
 		setSetupComplete: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
@@ -174,17 +143,7 @@ OnboardingViewContainer.propTypes = {
 
 // Default props used throughout the Onboarding flow
 OnboardingViewContainer.defaultProps = {
-	preventRedirect: false,
 	setup: {
-		navigation: {
-			activeIndex: 0,
-			hrefPrev: false,
-			hrefNext: false,
-			hrefDone: false,
-			textPrev: false,
-			textNext: false,
-			textDone: false,
-		},
 		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
 		enable_ad_block: true,

@@ -19,7 +19,6 @@ import OnboardingViewContainer from './OnboardingViewContainer';
 import {
 	initSetupProps,
 	setSetupStep,
-	setSetupNavigation,
 	setSetupComplete
 } from '../../../shared-hub/actions/SetupLifecycleActions';
 import {
@@ -34,7 +33,6 @@ export default withRouter(buildReduxHOC(
 	{
 		initSetupProps,
 		setSetupStep,
-		setSetupNavigation,
 		setSetupComplete,
 
 		setBlockingPolicy,
