@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 /**
  * A Functional React component for rendering the Browser Welcome View
@@ -23,7 +24,9 @@ const WelcomeView = () => (
 		<div className="WelcomeView__title">{t('ghostery_browser_hub_onboarding_welcome')}</div>
 		<div className="WelcomeView__subtitle">{t('ghostery_browser_hub_onboarding_lets_begin')}</div>
 		<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
-		<button className="WelcomeView__ctaButton" type="button">{t('ghostery_browser_hub_onboarding_lets_do_this')}</button>
+		<NavLink className="WelcomeView__ctaButton" to="/onboarding/1">
+			<span>{ t('ghostery_browser_hub_onboarding_lets_do_this') }</span>
+		</NavLink>
 	</div>
 );
 

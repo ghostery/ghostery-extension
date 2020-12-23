@@ -1765,13 +1765,13 @@
 		"message": "Plan"
 	},
 	"ghostery_browser_hub_onboarding_welcome": {
-		"message": "Welcome to Ghostery Browser"
+		"message": "Welcome to Ghostery Browser!"
 	},
 	"ghostery_browser_hub_onboarding_lets_begin": {
-		"message": "Let's begin by choosing your privacy settings. This will be quick, we promise!"
+		"message": "We've centralized online privacy by integrating our signature as well as novel technologies."
 	},
 	"ghostery_browser_hub_onboarding_lets_do_this": {
-		"message": "Let's do this"
+		"message": "Set up My Browser"
 	},
 	"ghostery_browser_hub_onboarding_your_privacy_plan": {
 		"message": "Your Privacy Plan"
