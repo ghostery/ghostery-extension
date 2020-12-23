@@ -80,7 +80,7 @@
 			"run_at": "document_start"
 		}
 	],
-	"content_security_policy": "script-src 'self' 'sha256-601d136ee1c4f4ca17e5bc9cf55e4f126999dd986f1491ef23899721222b7d57'; object-src 'self'",
+	"content_security_policy": "script-src 'self' 'sha256-Acnr7AdCM0m5xUApOa3qWqxq0HwdT0Zy66d9fNAiaz0='; object-src 'self'",
 	"permissions": [
 		"webNavigation",
 		"webRequest",
