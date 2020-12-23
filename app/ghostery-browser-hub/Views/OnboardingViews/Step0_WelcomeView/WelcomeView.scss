@@ -29,7 +29,7 @@
 .WelcomeView__ctaButton {
 	display: flex;
 	justify-content: center;
-	margin: 48px auto 0 auto;
+	margin: 0 auto;
 	height: 44px;
 	width: 162px;
 	padding: 7.7px 14px;
@@ -37,7 +37,7 @@
 	background: linear-gradient(
 		45deg,
 		#ff7e74 50%,
-		#00aef0
+		$ghosty_blue
 	);
 	background-size: 200% 100%;
 	background-position: 100% 50%;
@@ -46,9 +46,9 @@
 	&:hover {
 		background-position: 0% 50%;
 		transition: 0.25s all;
-	  	color: #FFF;
+	  	color: $white;
 	}
-	color: #FFF;
+	color: $white;
 	font-size: 14.1px;
 	font-weight: 700;
 	border-radius: 3.5px;

@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import {
 	ONBOARDING,
+	WELCOME,
 	LOGIN,
 	BLOCK_SETTINGS,
 	CHOOSE_DEFAULT_SEARCH,
@@ -105,7 +106,7 @@ const StepProgressBar = (props) => {
 
 	return (
 		<div className="StepProgressBarContainer">
-			{renderProgressBar()}
+			{(currentStep !== parseInt(WELCOME, 10)) && renderProgressBar()}
 		</div>
 	);
 };
