@@ -16,6 +16,8 @@ import account from './Account';
 import { log } from '../utils/common';
 
 /**
+ * @since 8.5.5
+ *
  * Class for handling cross-extension messaging.
  * @memberOf  BackgroundClasses
  */
