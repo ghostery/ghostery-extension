@@ -15,7 +15,6 @@ import { makeDeferredDispatcher } from '../utils';
 import {
 	INIT_SETUP_PROPS,
 	SET_SETUP_STEP,
-	SET_SETUP_NAVIGATION,
 	SET_SETUP_COMPLETE
 } from '../constants/SetupLifecycleConstants';
 
@@ -28,13 +27,6 @@ export function initSetupProps(data) {
 
 export const setSetupStep =
 	actionData => makeDeferredDispatcher(SET_SETUP_STEP, actionData);
-
-export function setSetupNavigation(data) {
-	return {
-		type: SET_SETUP_NAVIGATION,
-		data,
-	};
-}
 
 export const setSetupComplete =
 	actionData => makeDeferredDispatcher(SET_SETUP_COMPLETE, actionData);

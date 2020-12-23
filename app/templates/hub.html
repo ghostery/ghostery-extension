@@ -17,8 +17,6 @@
 <meta content="utf-8" http-equiv="encoding">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="../../dist/css/foundation_hub.css" media="screen" rel="stylesheet" type="text/css">
-<link href="../../dist/css/hub.css" media="screen" rel="stylesheet" type="text/css">
-<link href="../../dist/css/hub_ghostery_browser.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="root"></div>
@@ -32,6 +30,17 @@
 		else js.src = '../../dist/hub_ghostery_browser_react.js';
 
 		body.appendChild(js);
+
+		const head = document.getElementsByTagName('head')[0];
+		const hubCSS = document.createElement("link");
+
+		hubCSS.type = "text/css";
+		hubCSS.rel = "stylesheet";
+		hubCSS.media = "screen";
+		// TODO branch on actual user agent value
+		hubCSS.href="../../dist/css/hub_ghosterY_browser.css";
+
+		head.appendChild(hubCSS);
 	</script>
 </body>
 </html>

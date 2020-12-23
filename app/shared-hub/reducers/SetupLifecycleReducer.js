@@ -12,77 +12,28 @@
  */
 
 import {
-	INIT_SETUP_PROPS,
-	SET_SETUP_NAVIGATION,
+	INIT_SETUP_PROPS
 } from '../constants/SetupLifecycleConstants';
 
 const initialState = {};
 
 function SetupLifecycleReducer(state = initialState, action) {
 	switch (action.type) {
+		// TODO add navigation, override warning, and human web props init as separate case to share this with original hub
 		case INIT_SETUP_PROPS: {
 			const {
-				navigation,
-				setup_show_warning_override,
 				blockingPolicy,
 				enable_anti_tracking,
 				enable_ad_block,
 				enable_smart_block,
-				enable_human_web,
 			} = action.data;
-			const {
-				activeIndex,
-				hrefPrev,
-				hrefNext,
-				hrefDone,
-				textPrev,
-				textNext,
-				textDone,
-			} = navigation;
 			return {
 				...state,
 				setup: {
-					navigation: {
-						activeIndex,
-						hrefPrev,
-						hrefNext,
-						hrefDone,
-						textPrev,
-						textNext,
-						textDone,
-					},
-					setup_show_warning_override,
 					blockingPolicy,
 					enable_anti_tracking,
 					enable_ad_block,
 					enable_smart_block,
-					enable_human_web,
-				}
-			};
-		}
-		case SET_SETUP_NAVIGATION: {
-			const {
-				activeIndex,
-				hrefPrev,
-				hrefNext,
-				hrefDone,
-				textPrev,
-				textNext,
-				textDone,
-			} = action.data;
-			return {
-				...state,
-				setup: {
-					...state.setup,
-					navigation: {
-						activeIndex,
-						hrefPrev,
-						hrefNext,
-						hrefDone,
-						textPrev,
-						textNext,
-						textDone,
-					}
 				}
 			};
 		}
