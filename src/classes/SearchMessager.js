@@ -35,17 +35,17 @@ export default class SearchMessager {
 
 	_messageHandler(message, sender, sendResponse) {
 		if (sender.id !== this.extensionId) {
-			return;
+			return false;
 		}
 
 		// allow search extension to refresh token
-		if (message === "refreshToken") {
+		if (message === 'refreshToken') {
 			account.refreshToken()
 				.then(() => sendResponse({ success: true }))
 				.catch(error => sendResponse({ success: false, error }));
-			return true
-		} else {
-			log('SearchMessager error: Unhandled message', message);
+			return true;
 		}
+		log('SearchMessager error: Unhandled message', message);
+		return false;
 	}
 }

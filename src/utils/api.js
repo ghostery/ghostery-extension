@@ -28,7 +28,7 @@ class Api {
 	}
 
 	refreshToken() {
-		return this._refreshToken().then(this.isRefreshing = false);
+		return this._refreshToken().then(this.isRefreshing = false); // eslint-disable-line no-return-assign
 	}
 
 	_refreshToken() {

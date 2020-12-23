@@ -40,7 +40,7 @@ import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import account from './classes/Account';
 import promoModals from './classes/PromoModals';
-import searchMessager from './classes/SearchMessager';
+import SearchMessager from './classes/SearchMessager';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -1655,8 +1655,8 @@ function initializeGhosteryModules() {
  * @memberOf Background
  */
 function initializeSearchMessageHandler() {
-	const sm = new searchMessager();
-	sm.init()
+	const sm = new SearchMessager();
+	sm.init();
 }
 
 /**
