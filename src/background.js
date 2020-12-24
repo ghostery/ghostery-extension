@@ -1651,12 +1651,15 @@ function initializeGhosteryModules() {
 }
 
 /**
- * Initialize Search Message Handler.
+ * Initialize Search Message Handler on Ghostery Browser.
  * @memberOf Background
  */
-function initializeSearchMessageHandler() {
-	const sm = new SearchMessager();
-	sm.init();
+async function initializeSearchMessageHandler() {
+	await globals.BROWSER_INFO_READY; // ensure browser info is set
+	if (IS_GHOSTERY_BROWSER) {
+		const sm = new SearchMessager();
+		sm.init();
+	}
 }
 
 /**
@@ -1670,9 +1673,7 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		if (IS_GHOSTERY_BROWSER) {
-			initializeSearchMessageHandler();
-		}
+		initializeSearchMessageHandler();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			account.migrate()
 				.then(() => {
