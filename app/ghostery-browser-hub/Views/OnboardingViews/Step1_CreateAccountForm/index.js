@@ -21,7 +21,7 @@ const actionCreators = {
 	setToast,
 	register,
 	getUser,
-	handleEmailPreferencesCheckboxChange
+	handleEmailPreferencesCheckboxChange,
 };
 
 export default buildReduxHOC(stateSlices, actionCreators, Step1_CreateAccountFormContainer);

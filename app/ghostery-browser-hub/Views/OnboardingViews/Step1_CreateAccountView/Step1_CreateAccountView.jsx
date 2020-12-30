@@ -12,6 +12,7 @@
  */
 
 import React, { Fragment, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Step1_LogInForm from '../Step1_LogInForm';
@@ -61,22 +62,14 @@ const renderFAQListItem = (icon, label, description) => (
 	</div>
 );
 
-const renderSkipLink = () => (
-	<div className="row align-center-middle">
-		<div className="columns small-10 medium-5" />
-		<div className="columns small-10 medium-5">
-			<div className="Step1_CreateAccountView__skip">{t('ghostery_browser_hub_onboarding_skip')}</div>
-		</div>
-	</div>
-);
-
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof GhosteryBrowserHubViews
  */
 const Step1_CreateAccountView = (props) => {
-	const { user } = props;
+	const { user, actions } = props;
+	const { setSetupStep } = actions;
 	const email = user && user.email;
 
 	const [expanded, setExpanded] = useState(false);
@@ -97,13 +90,25 @@ const Step1_CreateAccountView = (props) => {
 		setExpanded(!expanded);
 	};
 
+	const renderSkipLink = () => (
+		<div className="row align-center-middle">
+			<div className="columns small-10 medium-5" />
+			<div className="columns small-10 medium-5">
+				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: 2 })}>
+					<span>{t('ghostery_browser_hub_onboarding_skip')}</span>
+				</NavLink>
+			</div>
+		</div>
+	);
+
 	return (user ? (
 		<div className="Step1_CreateAccountView__alreadySignedIn">
 			<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				{/* Link to next page */}
-				<button type="submit" className="Step1_CreateAccountView__ctaButton">{t('next')}</button>
+				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: 2 })}>
+					<span>{t('next')}</span>
+				</NavLink>
 			</div>
 		</div>
 	) : (

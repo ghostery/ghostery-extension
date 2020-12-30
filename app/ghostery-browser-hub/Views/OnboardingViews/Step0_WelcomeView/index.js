@@ -11,6 +11,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { buildReduxHOC } from '../../../../shared-hub/utils';
 import WelcomeView from './WelcomeView';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
-export default WelcomeView;
+const actionCreators = {
+	setSetupStep,
+};
+
+export default buildReduxHOC([], actionCreators, WelcomeView);

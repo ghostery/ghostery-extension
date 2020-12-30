@@ -162,6 +162,7 @@ class CreateAccountFormContainer extends Component {
 		});
 		actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 			if (success) {
+				// User is automatically logged in, and redirected to the logged in view of BrowserCreateAccountForm
 				actions.getUser().then(() => {
 					if (isUpdatesChecked) actions.handleEmailPreferencesCheckboxChange('global', isUpdatesChecked);
 				});
@@ -170,7 +171,6 @@ class CreateAccountFormContainer extends Component {
 					toastMessage: t('hub_create_account_toast_success'),
 					toastClass: 'success'
 				});
-				// Route to next screen
 			} else {
 				actions.setToast({
 					toastMessage: t('hub_create_account_toast_error'),
