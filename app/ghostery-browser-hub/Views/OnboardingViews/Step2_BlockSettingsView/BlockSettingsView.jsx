@@ -65,9 +65,12 @@ class BlockSettingsView extends Component {
 
 		// Will only change user settings if all questions are answered
 		if (blockAds !== null && kindsOfTrackers !== null && antiTracking !== null && smartBrowsing !== null) {
+			const { actions } = this.props;
 			const {
-				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy
-			} = this.props;
+				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
+			} = actions;
+			// const { context } = this;
+			// const { history } = context;
 
 			setAdBlock(blockAds);
 			setAntiTracking(antiTracking);
@@ -88,6 +91,8 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
+			setSetupStep({ setup_step: 3 });
+			// history.push('/onboarding/3');
 		} else {
 			const { setToast } = this.props;
 

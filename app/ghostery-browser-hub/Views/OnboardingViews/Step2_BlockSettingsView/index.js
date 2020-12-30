@@ -16,6 +16,7 @@ import { buildReduxHOC } from '../../../../shared-hub/utils';
 import { setAntiTracking, setAdBlock, setSmartBlocking } from '../../../../shared-hub/actions/AntiSuiteActions';
 import setBlockingPolicy from '../../../../shared-hub/actions/BlockingPolicyActions';
 import setToast from '../../../../shared-hub/actions/ToastActions';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
 	setAntiTracking,
@@ -23,6 +24,7 @@ const actionCreators = {
 	setSmartBlocking,
 	setBlockingPolicy,
 	setToast,
+	setSetupStep,
 };
 
 export default buildReduxHOC(null, actionCreators, BlockSettingsView);
