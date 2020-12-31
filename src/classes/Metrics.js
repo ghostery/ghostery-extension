@@ -184,7 +184,7 @@ class Metrics {
 				this._sendReq(type, ['all']);
 				break;
 
-			// Ghostery Browser Hub - Ghostery 8.5.4+
+			// Ghostery Browser Hub - Ghostery 8.5.5+
 			case 'gb_onboarding':
 			case 'gb_onboarding_success':
 				this._sendReq(type, ['all']);
