@@ -557,6 +557,11 @@ function handleGhosteryHub(name, message, callback) {
 			} else {
 				({ setup_step } = setup_step);
 			}
+			const origin = message.origin || '';
+			if (origin === 'onboarding') {
+				conf.setup_step = message.setup_step;
+				metrics.ping('gb_onboarding');
+			}
 			callback({ setup_step });
 			break;
 		}

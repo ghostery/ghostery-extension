@@ -16,6 +16,7 @@ import React, { Component } from 'react';
 // import Tooltip from '../../../../panel/components/Tooltip';
 import RadioButton from '../../../../shared-components/RadioButton/RadioButton';
 import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox/ToggleCheckbox';
+import { CHOOSE_DEFAULT_SEARCH, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
 
 /**
  * @class Implement the Block Settings View for the Ghostery Browser Hub
@@ -69,8 +70,7 @@ class BlockSettingsView extends Component {
 			const {
 				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
 			} = actions;
-			// const { context } = this;
-			// const { history } = context;
+			const { history } = this.props;
 
 			setAdBlock(blockAds);
 			setAntiTracking(antiTracking);
@@ -91,8 +91,8 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
-			setSetupStep({ setup_step: 3 });
-			// history.push('/onboarding/3');
+			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
+			history.push('/onboarding/3');
 		} else {
 			const { setToast } = this.props;
 

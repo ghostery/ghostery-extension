@@ -55,7 +55,7 @@ class OnboardingViewContainer extends Component {
 
 		// TODO modify this as needed
 		const { actions, setup } = this.props;
-		actions.setSetupStep({ setup_step: 7 });
+		actions.setSetupStep({ setup_step: 7, origin: ONBOARDING });
 		actions.initSetupProps(setup);
 
 		// TODO modify this as needed
@@ -67,7 +67,7 @@ class OnboardingViewContainer extends Component {
 			this.state = {
 				sendMountActions: true
 			};
-			actions.setSetupStep({ setup_step: 8 });
+			actions.setSetupStep({ setup_step: 8, origin: ONBOARDING });
 			actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 			actions.setAntiTracking({ enable_anti_tracking: true }); // covered
 			actions.setAdBlock({ enable_ad_block: true }); // covered

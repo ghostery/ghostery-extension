@@ -18,6 +18,7 @@ import ClassNames from 'classnames';
 import Step1_LogInForm from '../Step1_LogInForm';
 import Step1_CreateAccountForm from '../Step1_CreateAccountForm';
 import globals from '../../../../../src/classes/Globals';
+import { BLOCK_SETTINGS, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
 
 const SIGN_IN = 'SIGN_IN';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
@@ -94,7 +95,7 @@ const Step1_CreateAccountView = (props) => {
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-5" />
 			<div className="columns small-10 medium-5">
-				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: 2 })}>
+				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: BLOCK_SETTINGS, origin: ONBOARDING })}>
 					<span>{t('ghostery_browser_hub_onboarding_skip')}</span>
 				</NavLink>
 			</div>
@@ -106,7 +107,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: 2 })}>
+				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: BLOCK_SETTINGS, origin: ONBOARDING })}>
 					<span>{t('next')}</span>
 				</NavLink>
 			</div>

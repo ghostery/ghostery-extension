@@ -12,5 +12,11 @@
  */
 
 import SuccessView from './SuccessView';
+import { buildReduxHOC } from '../../../../shared-hub/utils';
+import sendPing from '../../../../shared-hub/actions/MetricsActions';
 
-export default SuccessView;
+const actionCreators = {
+	sendPing
+};
+
+export default buildReduxHOC(null, actionCreators, SuccessView);

@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import RadioButton from '../../../../shared-components/RadioButton';
 import globals from '../../../../../src/classes/Globals';
 import { BASIC, PLUS, PREMIUM } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
+import { SUCCESS, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
 
 const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
 const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
@@ -270,7 +271,7 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: 5 })}>
+					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: SUCCESS, origin: ONBOARDING })}>
 						<span>{t('ghostery_browser_hub_onboarding_keep')}</span>
 					</NavLink>
 				)}
@@ -337,7 +338,7 @@ class ChoosePlanView extends React.Component {
 						{(isBasic && (
 							<div className="ChoosePlanView__ctaButtonContainer">
 								{(selectedPlan === BASIC) && (
-									<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: 5 })}>
+									<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: SUCCESS, origin: ONBOARDING })}>
 										<span>{t('next')}</span>
 									</NavLink>
 								)}
@@ -350,7 +351,7 @@ class ChoosePlanView extends React.Component {
 							</div>
 						))}
 						{isPremium && (
-							<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: 5 })}>
+							<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: SUCCESS, origin: ONBOARDING })}>
 								<span>{t('next')}</span>
 							</NavLink>
 						)}
