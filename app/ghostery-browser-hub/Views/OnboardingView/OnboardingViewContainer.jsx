@@ -19,7 +19,6 @@ import { BLOCKING_POLICY_RECOMMENDED } from '../../../shared-hub/constants/Block
 // Component Views
 import WelcomeView from '../OnboardingViews/Step0_WelcomeView';
 import Step1_CreateAccountView from '../OnboardingViews/Step1_CreateAccountView';
-import LoginView from '../OnboardingViews/Step1_LoginView';
 import BlockSettingsView from '../OnboardingViews/Step2_BlockSettingsView';
 import ChooseDefaultSearchView from '../OnboardingViews/Step3_ChooseDefaultSearchView';
 import ChoosePlanView from '../OnboardingViews/Step4_ChoosePlanView';
@@ -105,7 +104,7 @@ class OnboardingViewContainer extends Component {
 			{
 				index: 4,
 				path: `/${ONBOARDING}/${CHOOSE_PLAN}`,
-				bodyComponents: [ChoosePlanView, LoginView],
+				bodyComponents: [ChoosePlanView],
 			},
 			{
 				index: 5,
