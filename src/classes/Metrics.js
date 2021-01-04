@@ -184,6 +184,12 @@ class Metrics {
 				this._sendReq(type, ['all']);
 				break;
 
+			// Ghostery Browser Hub - Ghostery 8.5.5+
+			case 'gb_onboarding':
+			case 'gb_onboarding_success':
+				this._sendReq(type, ['all']);
+				break;
+
 			// Uncaught Pings
 			default:
 				log(`metrics ping() error: ping name ${type} not found`);
@@ -285,7 +291,7 @@ class Metrics {
 			// Antitracking state
 			this._buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
-			this._buildQueryPair('ss', (conf.metrics.install_complete_all || type === 'install_complete') ? conf.setup_step.toString() : '-1') +
+			this._buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
 			// The number of times the user has gone through setup
 			this._buildQueryPair('sl', conf.setup_number.toString()) +
 			// Type of blocking selected during setup
@@ -391,6 +397,22 @@ class Metrics {
 		await BROWSER_INFO_READY;
 		if (BROWSER_INFO.token === 'gd') return 'gd';
 		return 'gbe';
+	}
+
+	/**
+	 * Get the Setup step
+	 *
+	 * @private
+	 *
+	 * @return {number} The deepest setup page reached by user during setup
+	 */
+	static _getSetupStep(type) {
+		console.log('conf.setup_step', conf.setup_step);
+		if (conf.metrics.install_complete_all
+			|| type === 'install_complete'
+			|| type === 'gb_onboarding'
+			|| type === 'gb_onboarding_success') return conf.setup_step;
+		return -1;
 	}
 
 	/**

@@ -18,13 +18,17 @@ import React from 'react';
  * @return {JSX} JSX for rendering the Browser Success View of the Hub app
  * @memberof HubComponents
  */
-const SuccessView = () => (
-	<div className="SuccessView__container">
-		<div className="SuccessView__title">{t('ghostery_browser_hub_onboarding_yay_youre_all_set')}</div>
-		<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_start_browsing_the_web_with')} Ghostery`}</div>
-		<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
-		<button className="SuccessView__ctaButton" type="button">{t('ghostery_browser_hub_onboarding_lets_search')}</button>
-	</div>
-);
+const SuccessView = (props) => {
+	const { actions } = props;
+	const { sendPing } = actions;
+	return (
+		<div className="SuccessView__container">
+			<div className="SuccessView__title">{t('ghostery_browser_hub_onboarding_yay_youre_all_set')}</div>
+			<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_start_browsing_the_web_with')} Ghostery`}</div>
+			<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
+			<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_browser_hub_onboarding_lets_search')}</button>
+		</div>
+	);
+};
 
 export default SuccessView;

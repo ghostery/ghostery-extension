@@ -14,5 +14,10 @@
 import { withRouter } from 'react-router-dom';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import Step1_CreateAccountView from './Step1_CreateAccountView';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
-export default withRouter(buildReduxHOC(['account'], null, Step1_CreateAccountView));
+const actionCreators = {
+	setSetupStep,
+};
+
+export default withRouter(buildReduxHOC(['account'], actionCreators, Step1_CreateAccountView));

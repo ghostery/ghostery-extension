@@ -20,6 +20,7 @@ import {
 	bindActionCreators
 } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // Imports utilities from elsewhere in the codebase to reduce duplicate code
 import { log } from '../../../src/utils/common';
@@ -106,7 +107,7 @@ function buildReduxHOC(stateKeys, actionCreators, baseComponent) {
 			actions: bindActionCreators(actionCreators, dispatch)
 		});
 
-	return connect(mapStateToProps, mapDispatchToProps)(baseComponent);
+	return withRouter(connect(mapStateToProps, mapDispatchToProps)(baseComponent));
 }
 
 export {

@@ -13,21 +13,26 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { LOGIN, WELCOME } from '../../OnboardingView/OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Browser Welcome View
  * @return {JSX} JSX for rendering the Browser Welcome View of the Hub app
  * @memberof GhosteryBrowserHubViews
  */
-const WelcomeView = () => (
-	<div className="WelcomeView__container">
-		<div className="WelcomeView__title">{t('ghostery_browser_hub_onboarding_welcome')}</div>
-		<div className="WelcomeView__subtitle">{t('ghostery_browser_hub_onboarding_lets_begin')}</div>
-		<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
-		<NavLink className="WelcomeView__ctaButton" to="/onboarding/1">
-			<span>{ t('ghostery_browser_hub_onboarding_lets_do_this') }</span>
-		</NavLink>
-	</div>
-);
+const WelcomeView = (props) => {
+	const { actions } = props;
+	const { setSetupStep } = actions;
+	return (
+		<div className="WelcomeView__container">
+			<div className="WelcomeView__title">{t('ghostery_browser_hub_onboarding_welcome')}</div>
+			<div className="WelcomeView__subtitle">{t('ghostery_browser_hub_onboarding_lets_begin')}</div>
+			<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
+			<NavLink className="WelcomeView__ctaButton" to="/onboarding/1" onClick={() => setSetupStep({ setup_step: LOGIN, origin: WELCOME })}>
+				<span>{t('ghostery_browser_hub_onboarding_lets_do_this')}</span>
+			</NavLink>
+		</div>
+	);
+};
 
 export default WelcomeView;

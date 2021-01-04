@@ -13,6 +13,7 @@
 
 import React from 'react';
 
+// TODO: Add setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: WELCOME }) to next button
 const ChooseDefaultSearchView = () => <h1>Step 3: Choose Default Search View</h1>;
 
 export default ChooseDefaultSearchView;

@@ -18,7 +18,7 @@ import { BLOCKING_POLICY_RECOMMENDED } from '../../../shared-hub/constants/Block
 
 // Component Views
 import WelcomeView from '../OnboardingViews/Step0_WelcomeView';
-import LoginView from '../OnboardingViews/Step1_LoginView';
+import Step1_CreateAccountView from '../OnboardingViews/Step1_CreateAccountView';
 import BlockSettingsView from '../OnboardingViews/Step2_BlockSettingsView';
 import ChooseDefaultSearchView from '../OnboardingViews/Step3_ChooseDefaultSearchView';
 import ChoosePlanView from '../OnboardingViews/Step4_ChoosePlanView';
@@ -54,7 +54,7 @@ class OnboardingViewContainer extends Component {
 
 		// TODO modify this as needed
 		const { actions, setup } = this.props;
-		actions.setSetupStep({ setup_step: 7 });
+		actions.setSetupStep({ setup_step: 7, origin: ONBOARDING });
 		actions.initSetupProps(setup);
 
 		// TODO modify this as needed
@@ -66,7 +66,7 @@ class OnboardingViewContainer extends Component {
 			this.state = {
 				sendMountActions: true
 			};
-			actions.setSetupStep({ setup_step: 8 });
+			actions.setSetupStep({ setup_step: 8, origin: ONBOARDING });
 			actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 			actions.setAntiTracking({ enable_anti_tracking: true }); // covered
 			actions.setAdBlock({ enable_ad_block: true }); // covered
@@ -89,7 +89,7 @@ class OnboardingViewContainer extends Component {
 			{
 				index: 1,
 				path: `/${ONBOARDING}/${LOGIN}`,
-				bodyComponents: [LoginView],
+				bodyComponents: [Step1_CreateAccountView],
 			},
 			{
 				index: 2,
@@ -104,7 +104,7 @@ class OnboardingViewContainer extends Component {
 			{
 				index: 4,
 				path: `/${ONBOARDING}/${CHOOSE_PLAN}`,
-				bodyComponents: [ChoosePlanView, LoginView],
+				bodyComponents: [ChoosePlanView],
 			},
 			{
 				index: 5,

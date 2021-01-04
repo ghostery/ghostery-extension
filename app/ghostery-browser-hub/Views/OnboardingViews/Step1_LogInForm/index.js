@@ -22,6 +22,7 @@ import {
 } from '../../../../Account/AccountActions';
 import { getTheme } from '../../../../panel/actions/PanelActions';
 import setToast from '../../../../shared-hub/actions/ToastActions';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const stateSlices = ['account'];
 const actionCreators = {
@@ -30,7 +31,8 @@ const actionCreators = {
 	getUser,
 	getUserSettings,
 	getTheme,
-	resetPassword
+	resetPassword,
+	setSetupStep,
 };
 
 export default buildReduxHOC(stateSlices, actionCreators, Step1_LogInFormContainer);
