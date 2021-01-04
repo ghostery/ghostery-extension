@@ -12,5 +12,11 @@
  */
 
 import ChooseDefaultSearchView from './ChooseDefaultSearchView';
+import { buildReduxHOC } from '../../../../shared-hub/utils';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
-export default ChooseDefaultSearchView;
+const actionCreators = {
+	setSetupStep,
+};
+
+export default buildReduxHOC(null, actionCreators, ChooseDefaultSearchView);

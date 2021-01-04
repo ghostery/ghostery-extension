@@ -1,0 +1,57 @@
+.ChooseSearchView__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 18px;
+  line-height: 2.33;
+  color: $tundora;
+  margin: 45px auto 83px auto;
+}
+
+.ChooseSearchView__title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 2.33;
+  text-align: center;
+}
+
+.ChooseSearchView__subtitle {
+  margin-bottom: 47px;
+  text-align: center;
+}
+
+.ChooseSearchView__optionContainer {
+  width: 45%;
+  border: 2px black;
+}
+
+.ChooseSearchView__nextButton {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 44px;
+  width: 162px;
+  padding: 7.7px 14px;
+  line-height: 22px;
+  background: linear-gradient(
+	45deg,
+	#ff7e74 50%,
+	#00aef0
+  );
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  transition: 0.25s all;
+  border: none;
+  &:hover {
+	background-position: 0% 50%;
+	transition: 0.25s all;
+  }
+  color: #FFF;
+  font-size: 14.1px;
+  font-weight: 700;
+  border-radius: 3.5px;
+  text-align: center;
+  line-height: 2.05;
+  cursor: pointer;
+}

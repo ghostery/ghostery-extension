@@ -11,9 +11,41 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
 
-// TODO: Add setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: WELCOME }) to next button
-const ChooseDefaultSearchView = () => <h1>Step 3: Choose Default Search View</h1>;
+class ChooseDefaultSearchView extends Component {
+	handleSubmit = () => {
+		const { actions, history } = this.props;
+		const { setSetupStep } = actions;
+
+		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+
+		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+	}
+
+	render() {
+		return (
+			<div className="ChooseSearchView__container">
+				<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
+				<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
+				<div className="ChooseSearchView__optionsContainer">
+					<div className="ChooseSearchView__optionContainer">Ghostery Search</div>
+					<div className="ChooseSearchView__optionContainer">StartPage</div>
+					<div className="ChooseSearchView__optionContainer">Bing</div>
+					<div className="ChooseSearchView__optionContainer">Choose Your Own</div>
+					<div className="ChooseSearchView__optionContainer">Yahoo</div>
+				</div>
+				<button
+					className="ChooseSearchView__nextButton"
+					type="button"
+					onClick={() => this.handleSubmit()}
+				>
+					{t('next')}
+				</button>
+			</div>
+		);
+	}
+}
 
 export default ChooseDefaultSearchView;
