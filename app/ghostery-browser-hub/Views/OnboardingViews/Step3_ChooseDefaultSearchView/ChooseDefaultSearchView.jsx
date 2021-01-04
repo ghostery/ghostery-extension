@@ -15,6 +15,16 @@ import React, { Component } from 'react';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
 
 class ChooseDefaultSearchView extends Component {
+	// TODO update state on user choice and send choice on submit
+	// constructor(props) {
+	// 	super(props);
+	//
+	//
+	// 	this.state = {
+	// 		chosenSearch: "GhosterySearch",
+	// 	};
+	// }
+
 	handleSubmit = () => {
 		const { actions, history } = this.props;
 		const { setSetupStep } = actions;

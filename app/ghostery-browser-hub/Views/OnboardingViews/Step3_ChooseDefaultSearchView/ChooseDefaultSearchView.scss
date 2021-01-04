@@ -21,9 +21,15 @@
   text-align: center;
 }
 
+.ChooseSearchView__optionsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .ChooseSearchView__optionContainer {
-  width: 45%;
-  border: 2px black;
+  padding: 20px;
+  margin: 20px;
+  border: 2px solid black;
 }
 
 .ChooseSearchView__nextButton {

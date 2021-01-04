@@ -2397,7 +2397,7 @@
   	"choose_your_default_search": {
 		"message": "Choose your default search"
 	},
-  	"pick_a_default_search_enginge": {
+  	"pick_a_default_search_engine": {
 	  "message": "Pick a default engine for all your searches"
 	}
 }
