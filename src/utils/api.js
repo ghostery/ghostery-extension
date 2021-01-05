@@ -28,10 +28,6 @@ class Api {
 	}
 
 	refreshToken() {
-		return this._refreshToken().then(() => { this.isRefreshing = false; });
-	}
-
-	_refreshToken() {
 		if (this.isRefreshing) {
 			let bindedResolve;
 			const _processRefreshTokenEvent = (resolve, e) => {
@@ -48,7 +44,7 @@ class Api {
 		return fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
 			credentials: 'include',
-		});
+		}).finally(() => { this.isRefreshing = false; });
 	}
 
 	_sendReq(method, path, body) {
@@ -111,9 +107,8 @@ class Api {
 						});
 					}
 					if (shouldRefresh) {
-						this._refreshToken()
+						this.refreshToken()
 							.then((res) => {
-								this.isRefreshing = false;
 								window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
 									detail: res,
 								}));
