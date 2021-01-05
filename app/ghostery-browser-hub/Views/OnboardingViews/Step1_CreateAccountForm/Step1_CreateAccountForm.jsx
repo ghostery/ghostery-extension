@@ -61,7 +61,7 @@ const Step1_CreateAccountForm = (props) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="Step1_CreateAccountForm--addPaddingTop row align-center-middle">
-				<div className="columns small-10 medium-5">
+				<div className="columns small-10 medium-6">
 					<label htmlFor="create-account-email" className="Step1_CreateAccountForm__inputLabel">
 						{t('email_colon')}
 					</label>
@@ -84,7 +84,7 @@ const Step1_CreateAccountForm = (props) => {
 						</div>
 					)}
 				</div>
-				<div className="columns small-10 medium-5">
+				<div className="columns small-10 medium-6">
 					<label htmlFor="create-account-confirmEmail" className="Step1_CreateAccountForm__inputLabel">
 						{t('confirm_email_colon')}
 					</label>
@@ -108,7 +108,7 @@ const Step1_CreateAccountForm = (props) => {
 				</div>
 			</div>
 			<div className="row align-center-middle">
-				<div className="columns small-10 medium-5">
+				<div className="columns small-10 medium-6">
 					<label htmlFor="create-account-firstName" className="Step1_CreateAccountForm__inputLabel">
 						{t('hub_create_account_label_first_name')}
 					</label>
@@ -123,7 +123,7 @@ const Step1_CreateAccountForm = (props) => {
 						autoComplete="off"
 					/>
 				</div>
-				<div className="columns small-10 medium-5">
+				<div className="columns small-10 medium-6">
 					<label htmlFor="create-account-lastName" className="Step1_CreateAccountForm__inputLabel">
 						{t('hub_create_account_label_email_last_name')}
 					</label>
@@ -140,7 +140,7 @@ const Step1_CreateAccountForm = (props) => {
 				</div>
 			</div>
 			<div className="row align-center-middle">
-				<div className="columns small-10 medium-5">
+				<div className="columns small-10 medium-6">
 					<label htmlFor="create-account-password" className="Step1_CreateAccountForm__inputLabel">
 						{t('password_colon')}
 					</label>
@@ -169,7 +169,7 @@ const Step1_CreateAccountForm = (props) => {
 						</div>
 					)}
 				</div>
-				<div className="columns small-10 medium-5">
+				<div className="columns small-10 medium-6">
 					<label htmlFor="create-account-password" className="Step1_CreateAccountForm__inputLabel">
 						{t('confirm_password_colon')}
 					</label>

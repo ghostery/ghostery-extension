@@ -41,7 +41,7 @@ const Step1_LogInForm = (props) => {
 	return (
 		<form className="Step1_LogInForm" onSubmit={handleSubmit}>
 			<div className="Step1_LogInForm__item row align-center-middle">
-				<div className="columns small-10">
+				<div className="columns small-12">
 					<label htmlFor="login-email" className="Step1_LogInForm__inputLabel">
 						{t('email_colon')}
 					</label>
@@ -64,7 +64,7 @@ const Step1_LogInForm = (props) => {
 				</div>
 			</div>
 			<div className="Step1_LogInForm__item row align-center-middle">
-				<div className="columns small-10">
+				<div className="columns small-12">
 					<label htmlFor="login-password" className="Step1_LogInForm__inputLabel">
 						{t('password_colon')}
 					</label>
@@ -85,7 +85,7 @@ const Step1_LogInForm = (props) => {
 				</div>
 			</div>
 			<div className="Step1_LogInForm__item row align-center-middle">
-				<div className="columns small-10">
+				<div className="columns small-12">
 					<span className="Step1_LogInForm__link">
 						<div className="Step1_LogInForm__forgotPassword" onClick={handleForgotPassword}>
 							{t('forgot_password')}

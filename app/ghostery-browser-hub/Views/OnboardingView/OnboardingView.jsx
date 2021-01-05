@@ -26,8 +26,6 @@ import StepNavigator from '../OnboardingViews/StepNavigator';
 const OnboardingView = (props) => {
 	const { sendMountActions, steps } = props;
 
-	console.log('in OnboardingView');
-
 	return (
 		<div className="full-height flex-container flex-dir-column android-relative">
 			<div className="flex-child-grow">
@@ -36,7 +34,7 @@ const OnboardingView = (props) => {
 						key={`route-${step.index}`}
 						path={step.path}
 						render={() => (
-							<div>
+							<div className={step.index === 4 ? 'OnboardingView__screenContainer step4' : 'OnboardingView__screenContainer'}>
 								<StepProgressBar currentStep={step.index} />
 								<StepNavigator step={step.index} components={step.bodyComponents} sendMountActions={sendMountActions} />
 							</div>
