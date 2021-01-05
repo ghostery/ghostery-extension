@@ -28,10 +28,16 @@ class ChooseDefaultSearchView extends Component {
 
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
+			modal: null,
+			modalActive: false,
 		};
 	}
 
 	updateSelection = newSelection => this.setState({ chosenSearch: newSelection });
+
+	cancelSelection = () => this.setState({ modalActive: false, modal: null });
+
+	triggerConfirmationModal = selection => this.setState({ modalActive: true, modal: selection });
 
 	handleSubmit = () => {
 		const { actions, history } = this.props;
@@ -51,7 +57,7 @@ class ChooseDefaultSearchView extends Component {
 				<div className="ChooseSearchView__radioButtonContainer">
 					<RadioButton
 						checked={selected}
-						handleClick={() => this.updateSelection(optionName)}
+						handleClick={() => this.triggerConfirmationModal(optionName)}
 						altDesign
 					/>
 				</div>
@@ -62,7 +68,26 @@ class ChooseDefaultSearchView extends Component {
 		);
 	}
 
-	render() {
+	renderConfirmationModal = () => {
+		const { modal } = this.state;
+
+		return (
+			<div className="ChooseSearchView__confirmationModal">
+				<div className="ChooseSearchView__confirmationModalDescription">
+					Modal of type
+					{modal}
+				</div>
+				<button
+					onClick={this.cancelSelection}
+					type="button"
+				>
+					Cancel
+				</button>
+			</div>
+		);
+	}
+
+	renderSearchOptions = () => {
 		const { chosenSearch } = this.state;
 
 		return (
@@ -85,6 +110,14 @@ class ChooseDefaultSearchView extends Component {
 				</button>
 			</div>
 		);
+	}
+
+	render() {
+		const { modalActive } = this.state;
+
+		if (modalActive) return (this.renderConfirmationModal());
+
+		return (this.renderSearchOptions());
 	}
 }
 
