@@ -15,6 +15,7 @@ import React, { Component, Fragment } from 'react';
 import ClassNames from 'classnames';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
+import { Modal } from '../../../../shared-components';
 
 const SEARCH_GHOSTERY = 'Ghostery';
 const SEARCH_BING = 'Bing';
@@ -28,6 +29,7 @@ class ChooseDefaultSearchView extends Component {
 
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
+			customSearchURL: null,
 			modal: null,
 			modalActive: false,
 		};
@@ -40,12 +42,22 @@ class ChooseDefaultSearchView extends Component {
 	triggerConfirmationModal = selection => this.setState({ modalActive: true, modal: selection });
 
 	handleSubmit = () => {
+		const { chosenSearch, customSearchURL } = this.state;
 		const { actions, history } = this.props;
 		const { setSetupStep } = actions;
 
-		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		const payload = {
+			type: 'setDefaultSearch',
+			search: chosenSearch,
+			customSearchURL,
+		};
 
-		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
+			// TODO handle errors if needed
+			// TODO save user's search setting to redux / background if needed
+			setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+			history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+		});
 	}
 
 	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
@@ -72,7 +84,7 @@ class ChooseDefaultSearchView extends Component {
 		const { modal } = this.state;
 
 		return (
-			<div className="ChooseSearchView__confirmationModal">
+			<Modal show>
 				<div className="ChooseSearchView__confirmationModalDescription">
 					Modal of type
 					{modal}
@@ -83,7 +95,7 @@ class ChooseDefaultSearchView extends Component {
 				>
 					Cancel
 				</button>
-			</div>
+			</Modal>
 		);
 	}
 
