@@ -108,12 +108,14 @@ class BlockSettingsView extends Component {
 		const {
 			recommendedChoices, blockAds, kindsOfTrackers, antiTracking, smartBrowsing
 		} = this.state;
+		const { actions } = this.props;
+		const { logout } = actions;
 		return (
 			<Fragment>
 				<div className="BlockSettingsView__relativeContainer">
 					<div className="BlockSettingsView__backContainer">
 						<span className="BlockSettingsView__caret left" />
-						<NavLink to="/onboarding/1">
+						<NavLink to="/onboarding/1" onClick={() => logout()}>
 							<span className="BlockSettingsView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
 						</NavLink>
 					</div>
