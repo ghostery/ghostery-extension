@@ -118,6 +118,7 @@ class BugDb extends Updatable {
 				blocked,
 				shouldShow: true,
 				catId: category,
+				trackerID: db.apps[appId].trackerID,
 			});
 		}
 

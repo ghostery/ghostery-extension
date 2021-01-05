@@ -2,23 +2,28 @@
 	"apps": {
 		"1": {
 			"name": "DoubleClick",
-			"cat": "advertising"
+			"cat": "advertising",
+			"trackerID": "doubleclick"
 		},
 		"2": {
 			"name": "Google Analytics",
-			"cat": "site_analytics"
+			"cat": "site_analytics",
+			"trackerID": "google_analytics"
 		},
 		"3": {
 			"name": "Google Safeframe",
-			"cat": "advertising"
+			"cat": "advertising",
+			"trackerID": "google_safeframe"
 		},
 		"4": {
 			"name": "Google IMA",
-			"cat": "advertising"
+			"cat": "advertising",
+			"trackerID": "google_ima"
 		},
 		"5": {
 			"name": "Google Publisher Tags",
-			"cat": "advertising"
+			"cat": "advertising",
+			"trackerID": "google_publisher_tags"
 		}
 	},
 	"bugs": {

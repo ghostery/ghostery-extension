@@ -35,7 +35,6 @@ class Tracker extends React.Component {
 			showTrackerLearnMore: false,
 			trackerClasses: '',
 			warningImageTitle: '',
-			wtmID: null,
 		};
 
 		// click bindings
@@ -160,7 +159,6 @@ class Tracker extends React.Component {
 				const truncate = (data.description.length > 200) ? `${data.description.substr(0, 199)}...` : data.description;
 				this.setState({ description: truncate });
 				this.setState({ showTrackerLearnMore: true });
-				this.setState({ wtmID: data.id });
 			} else {
 				this.setState({ description: t('tracker_description_none_found') });
 			}
@@ -336,7 +334,6 @@ class Tracker extends React.Component {
 			warningImageTitle,
 			showMoreInfo,
 			showTrackerLearnMore,
-			wtmID,
 		} = this.state;
 
 		let sources;
@@ -402,7 +399,7 @@ class Tracker extends React.Component {
 								<div className="trk-description">
 									{description}
 									<div className={(!showTrackerLearnMore ? 'hide' : '')}>
-										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.WTM_BASE_URL}/trackers/${encodeURIComponent(wtmID).toLowerCase()}.html`}>
+										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.WTM_BASE_URL}/trackers/${encodeURIComponent(tracker.trackerID).toLowerCase()}.html`}>
 											{t('tracker_description_learn_more')}
 										</a>
 									</div>

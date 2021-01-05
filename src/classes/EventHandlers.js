@@ -638,11 +638,10 @@ class EventHandlers {
 				};
 			}
 		} else if (fromRedirect) {
-			buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId).then((url) => {
-				setTimeout(() => {
-					chrome.tabs.update(details.tabId, { url });
-				}, 0);
-			});
+			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId);
+			setTimeout(() => {
+				chrome.tabs.update(details.tabId, { url });
+			}, 0);
 		}
 		return {
 			// If true, the request is canceled. This prevents the request from being sent.
