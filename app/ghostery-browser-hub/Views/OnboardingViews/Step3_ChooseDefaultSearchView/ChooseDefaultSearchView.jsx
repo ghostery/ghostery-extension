@@ -11,19 +11,26 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
 
+const SEARCH_GHOSTERY = 'Ghostery';
+const SEARCH_BING = 'Bing';
+const SEARCH_YAHOO = 'Yahoo';
+const SEARCH_STARTPAGE = 'StartPage';
+const SEARCH_CUSTOM = 'Custom';
+
 class ChooseDefaultSearchView extends Component {
-	// TODO update state on user choice and send choice on submit
-	// constructor(props) {
-	// 	super(props);
-	//
-	//
-	// 	this.state = {
-	// 		chosenSearch: "GhosterySearch",
-	// 	};
-	// }
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			chosenSearch: SEARCH_GHOSTERY,
+		};
+	}
+
+	updateSelection = newSelection => this.setState({ chosenSearch: newSelection });
 
 	handleSubmit = () => {
 		const { actions, history } = this.props;
@@ -34,17 +41,30 @@ class ChooseDefaultSearchView extends Component {
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
+	renderOptionContainer = (chosenSearch, optionName, optionDesc) => (
+		<div className="ChooseSearchView__optionContainer">
+			<div className="ChooseSearchView__radioButtonContainer">
+				<RadioButton checked={chosenSearch === optionName} handleClick={() => this.updateSelection(optionName)} altDesign />
+			</div>
+			<div className="ChooseSearchView__optionContainerDescription">
+				{optionDesc}
+			</div>
+		</div>
+	);
+
 	render() {
+		const { chosenSearch } = this.state;
+
 		return (
 			<div className="ChooseSearchView__container">
 				<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
 				<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
 				<div className="ChooseSearchView__optionsContainer">
-					<div className="ChooseSearchView__optionContainer">Ghostery Search</div>
-					<div className="ChooseSearchView__optionContainer">StartPage</div>
-					<div className="ChooseSearchView__optionContainer">Bing</div>
+					{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY, 'Ghostery Search')}
+					{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE, 'StartPage')}
+					{this.renderOptionContainer(chosenSearch, SEARCH_BING, 'Bing')}
 					<div className="ChooseSearchView__optionContainer">Choose Your Own</div>
-					<div className="ChooseSearchView__optionContainer">Yahoo</div>
+					{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
 				</div>
 				<button
 					className="ChooseSearchView__nextButton"

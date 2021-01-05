@@ -26,10 +26,24 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.ChooseSearchView__radioButtonContainer {
+  padding: 11px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .ChooseSearchView__optionContainer {
+  display: flex;
+  width: 354px;
+  height: 125px;
   padding: 20px;
   margin: 20px;
-  border: 2px solid black;
+  border: solid 1px $tundora;
+
+  .selected {
+	border: solid 4px $ghosty-blue;
+  }
 }
 
 .ChooseSearchView__nextButton {
