@@ -1854,6 +1854,9 @@
 	"ghostery_browser_hub_onboarding_skip": {
 		"message": "Skip"
 	},
+	"ghostery_browser_hub_onboarding_back": {
+		"message": "Back"
+	},
 	"ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously": {
 		"message": "We take your privacy very seriously. Learn more"
 	},
