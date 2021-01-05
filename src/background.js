@@ -68,7 +68,7 @@ const {
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
-const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
+const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4/versions.json`;
 const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
@@ -116,9 +116,9 @@ function updateDBs() {
 		utils.getJson(VERSION_CHECK_URL).then((data) => {
 			log('Database version retrieval succeeded', data);
 
-			c2pDb.update(data.click2playVersion);
-			compDb.update(data.compatibilityVersion);
-			bugDb.update(data.bugsVersion, (result) => {
+			c2pDb.update(data.click2play);
+			compDb.update(data.compatibility);
+			bugDb.update(data.bugs, (result) => {
 				log('CHECK LIBRARY VERSION CALLED', result);
 				if (result.success) {
 					const nowTime = Number(new Date().getTime());
@@ -345,43 +345,6 @@ function handleCheckoutPages(name) {
 		default:
 			return false;
 	}
-}
-
-/**
- * Handle messages sent from dist/ghostery_dot_com.js content script.
- * @memberOf Background
- *
- * @param  {string} 	name 		message name
- * @param  {Object} 	message 	message data
- * @param  {number} 		tab_id 		tab id
- */
-function handleGhosteryDotCom(name, message, tab_id) {
-	if (name === 'appsPageLoaded') {
-		if (tab_id) {
-			sendMessage(tab_id, 'appsPageData', {
-				blocked: conf.selected_app_ids[message.id] === 1
-			});
-		} else {
-			utils.getActiveTab((tab) => {
-				if (tab) {
-					sendMessage(tab.id, 'appsPageData', {
-						blocked: conf.selected_app_ids[message.id] === 1
-					});
-				}
-			});
-		}
-	} else if (name === 'panelSelectedAppsUpdate') {
-		// This lets the user block trackers from https://apps.ghostery.com
-		const { selected_app_ids } = conf;
-		if (message.app_selected) {
-			selected_app_ids[message.app_id] = 1;
-		} else {
-			delete selected_app_ids[message.app_id];
-		}
-
-		conf.selected_app_ids = selected_app_ids;
-	}
-	return false;
 }
 
 /**
@@ -673,10 +636,6 @@ function onMessageHandler(request, sender, callback) {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
 	}
-	if (origin === 'ghostery_dot_com') {
-		// Ghostery.com and apps pages
-		return handleGhosteryDotCom(name, message, tab_id);
-	}
 	if (origin === 'page_performance' && name === 'recordPageInfo') {
 		tabInfo.setTabInfo(tab_id, 'pageTiming', message.performanceAPI);
 		panelData.postPageLoadTime(tab_id);
@@ -759,10 +718,11 @@ function onMessageHandler(request, sender, callback) {
 		}
 		return true;
 	}
-	if (name === 'getTrackerDescription') {
+	if (name === 'getTrackerInfo') {
 		utils.getJson(message.url).then((result) => {
-			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
-			callback(description);
+			callback(result);
+		}).catch(() => {
+			callback(false);
 		});
 		return true;
 	}
@@ -1347,11 +1307,9 @@ function initializeEventListeners() {
 	// Fires when a request is about to send headers
 	chrome.webRequest.onBeforeSendHeaders.addListener(Events.onBeforeSendHeaders.bind(events), {
 		urls: [
-			'https://l.ghostery.com/*',
 			'https://d.ghostery.com/*',
 			'https://cmp-cdn.ghostery.com/*',
 			'https://cdn.ghostery.com/*',
-			'https://apps.ghostery.com/*',
 			'https://gcache.ghostery.com/*'
 		]
 	}, ['requestHeaders', 'blocking']);

@@ -49,7 +49,6 @@ module.exports = {
 		checkout_pages: [`${CONTENT_SCRIPTS_DIR}/checkout_pages.js`],
 		click_to_play: [`${CONTENT_SCRIPTS_DIR}/click_to_play.js`],
 		content_script_bundle: [`${CONTENT_SCRIPTS_DIR}/content_script_bundle.js`],
-		ghostery_dot_com: [`${CONTENT_SCRIPTS_DIR}/ghostery_dot_com.js`],
 		hub_react: [`${HUB_DIR}/index.jsx`],
 		licenses_react: [`${LICENSES_DIR}/Licenses.jsx`, `${LICENSES_DIR}/License.jsx`],
 		notifications: [`${CONTENT_SCRIPTS_DIR}/notifications.js`],
@@ -61,7 +60,6 @@ module.exports = {
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
 		foundation_hub: [`${SASS_DIR}/vendor/foundation_hub.scss`],
-		ghostery_dot_com_css: [`${SASS_DIR}/ghostery_dot_com.scss`],
 		hub: [`${SASS_DIR}/hub.scss`],
 		licenses: [`${SASS_DIR}/licenses.scss`],
 		panel: [`${SASS_DIR}/panel.scss`],
@@ -88,7 +86,6 @@ module.exports = {
 			onBuildExit: [
 				`${RM} ./dist/foundation.js`,
 				`${RM} ./dist/foundation_hub.js`,
-				`${RM} ./dist/ghostery_dot_com_css.js`,
 				`${RM} ./dist/hub.js`,
 				`${RM} ./dist/licenses.js`,
 				`${RM} ./dist/panel.js`,
