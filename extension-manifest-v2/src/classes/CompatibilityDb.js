@@ -36,7 +36,7 @@ class CompatibilityDb extends Updatable {
 		log('processing comp...');
 
 		try {
-			db = CompatibilityDb._buildDb(comp.compatibility, comp.compatibilityVersion);
+			db = CompatibilityDb._buildDb(comp.compatibility, comp.version);
 		} catch (e) {
 			log('CompatibilityDb processList() error', e);
 			return false;

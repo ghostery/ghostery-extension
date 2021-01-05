@@ -704,6 +704,7 @@ class PanelData {
 			id,
 			name,
 			sources,
+			trackerID,
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
@@ -717,6 +718,7 @@ class PanelData {
 			shouldShow: true, // used for filtering tracker list
 			catId: cat,
 			sources,
+			trackerID,
 			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
