@@ -30,16 +30,22 @@ class ChooseDefaultSearchView extends Component {
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
 			customSearchURL: null,
-			modal: null,
+			searchBeingConsidered: null,
 			modalActive: false,
 		};
 	}
 
-	updateSelection = newSelection => this.setState({ chosenSearch: newSelection });
+	updateSelection = () => this.setState(prevState => (
+		{
+			chosenSearch: prevState.searchBeingConsidered,
+			searchBeingConsidered: null,
+			modalActive: false
+		}
+	));
 
-	cancelSelection = () => this.setState({ modalActive: false, modal: null });
+	cancelSelection = () => this.setState({ modalActive: false, searchBeingConsidered: null });
 
-	triggerConfirmationModal = selection => this.setState({ modalActive: true, modal: selection });
+	triggerConfirmationModal = selection => this.setState({ modalActive: true, searchBeingConsidered: selection });
 
 	handleSubmit = () => {
 		const { chosenSearch, customSearchURL } = this.state;
@@ -81,19 +87,25 @@ class ChooseDefaultSearchView extends Component {
 	}
 
 	renderConfirmationModal = () => {
-		const { modal } = this.state;
+		const { searchBeingConsidered } = this.state;
 
 		return (
 			<Modal show>
 				<div className="ChooseSearchView__confirmationModalDescription">
 					Modal of type
-					{modal}
+					{searchBeingConsidered}
 				</div>
 				<button
 					onClick={this.cancelSelection}
 					type="button"
 				>
 					Cancel
+				</button>
+				<button
+					onClick={this.updateSelection}
+					type="button"
+				>
+					Confirm
 				</button>
 			</Modal>
 		);
