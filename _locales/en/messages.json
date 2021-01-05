@@ -2405,5 +2405,11 @@
 	},
 	"too_many_failed_logins_text": {
 		"message": "Too many failed logins. Try again in one hour."
+	},
+  	"choose_your_default_search": {
+		"message": "Choose your default search"
+	},
+  	"pick_a_default_search_engine": {
+	  "message": "Pick a default engine for all your searches"
 	}
 }
