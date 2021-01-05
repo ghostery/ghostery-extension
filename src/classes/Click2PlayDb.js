@@ -41,7 +41,7 @@ class Click2PlayDb extends Updatable {
 		log('processing c2p...');
 
 		try {
-			db = Click2PlayDb._buildDb(data.click2play, data.click2playVersion);
+			db = Click2PlayDb._buildDb(data.click2play, data.version);
 		} catch (e) {
 			log('Click2PlayDb processList() error', e);
 			return false;

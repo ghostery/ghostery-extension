@@ -3,8 +3,8 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.5.4",
-	"version_name": "8.5.4",
+	"version": "8.5.5",
+	"version_name": "8.5.5",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"icons": {
@@ -25,23 +25,6 @@
 	},
 	"options_page": "app/templates/hub.html",
 	"content_scripts": [
-		{
-			"all_frames": false,
-			"js": [
-				"dist/ghostery_dot_com.js"
-			],
-			"css": [
-				"dist/css/ghostery_dot_com_css.css"
-			],
-			"matches": [
-				"https://www.ghostery.com/*",
-				"https://apps.ghostery.com/*",
-				"https://staging-apps.ghostery.com/*",
-				"https://gcache.ghostery.com/*",
-				"https://staging-gcache.ghostery.com/*"
-			],
-			"run_at": "document_idle"
-		},
 		{
 			"all_frames": false,
 			"js": [

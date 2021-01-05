@@ -8,9 +8,6 @@
 ## Data Images
 app/data-images/
 
-## Vendor Files
-app/content-scripts/vendor/
-
 ## Precompiled
 app/templates/
 build/

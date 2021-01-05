@@ -643,9 +643,8 @@ class EventHandlers {
 				chrome.tabs.update(details.tabId, { url });
 			}, 0);
 		}
-
 		return {
-			// If true, the request is cancelled. This prevents the request from being sent.
+			// If true, the request is canceled. This prevents the request from being sent.
 			cancel: true
 		};
 	}

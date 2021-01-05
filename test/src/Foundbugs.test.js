@@ -42,9 +42,9 @@ describe('src/classes/FoundBugs.js', () => {
 		conf.init().then(() => {
 			//Start init sequence for testing. Changing the fakeServer() response each time for the following fetchJson() call
 			const bugsJson = JSON.stringify({
-				"apps": {"13": {"name": "Google Analytics","cat": "site_analytics","tags": [48]},
-				"464": {"name": "Facebook Social Plugins","cat": "social_media","tags": [39]},
-				"614": {"name": "New Relic","cat": "site_analytics","tags": [48]}},
+				"apps": {"13": {"name": "Google Analytics","cat": "site_analytics","trackerID": "google_analytics","tags": [48]},
+				"464": {"name": "Facebook Social Plugins","cat": "social_media","trackerID": "facebook_social_plugins","tags": [39]},
+				"614": {"name": "New Relic","cat": "site_analytics","trackerID": "new_relic","tags": [48]}},
 				"bugs": {"2": {"aid": 13},"935": {"aid": 13},"1982": {"aid": 13},"719": {"aid": 464},"1009": {"aid": 614}},
 				"firstPartyExceptions": {'something': true},
 				"patterns": { regex: { 'something': true} },
