@@ -117,7 +117,8 @@ class Api {
 											.then(() => resolve(data3))
 											.catch(err => reject(err));
 									});
-							});
+							})
+							.catch(err => reject(err));
 					} else {
 						this._errorHandler(data.errors)
 							.then(() => resolve(data))
