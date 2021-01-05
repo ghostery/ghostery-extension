@@ -18,7 +18,7 @@ import ClassNames from 'classnames';
 import Step1_LogInForm from '../Step1_LogInForm';
 import Step1_CreateAccountForm from '../Step1_CreateAccountForm';
 import globals from '../../../../../src/classes/Globals';
-import { LOGIN, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
+import { LOGIN, ONBOARDING, BLOCK_SETTINGS } from '../../OnboardingView/OnboardingConstants';
 
 const SIGN_IN = 'SIGN_IN';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
@@ -70,7 +70,7 @@ const renderFAQListItem = (icon, label, description) => (
  */
 const Step1_CreateAccountView = (props) => {
 	const { user, actions } = props;
-	const { setSetupStep } = actions;
+	const { setSetupStep, setHighestSetupStepReached } = actions;
 	const email = user && user.email;
 
 	const [expanded, setExpanded] = useState(false);
@@ -91,11 +91,16 @@ const Step1_CreateAccountView = (props) => {
 		setExpanded(!expanded);
 	};
 
+	const handleSetupStep = () => {
+		setSetupStep({ setup_step: LOGIN, origin: ONBOARDING });
+		setHighestSetupStepReached({ setup_step: BLOCK_SETTINGS });
+	};
+
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
 			<div className="columns small-10 medium-6">
-				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
+				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSetupStep()}>
 					<span>{t('ghostery_browser_hub_onboarding_skip')}</span>
 				</NavLink>
 			</div>
@@ -107,7 +112,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
+				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSetupStep()}>
 					<span>{t('next')}</span>
 				</NavLink>
 			</div>

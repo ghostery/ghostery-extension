@@ -44,6 +44,7 @@ class OnboardingViewContainer extends Component {
 		this.state = {
 			sendMountActions: false,
 		};
+		console.log('props container: ', props);
 
 		const { history } = this.props;
 		history.push(`/${ONBOARDING}/${WELCOME}`);
@@ -56,6 +57,8 @@ class OnboardingViewContainer extends Component {
 		const { actions, setup } = this.props;
 		actions.setSetupStep({ setup_step: 7, origin: ONBOARDING });
 		actions.initSetupProps(setup);
+		actions.setHighestSetupStepReached({ setup_step: SUCCESS });
+		console.log('props after setup: ', props);
 
 		// TODO modify this as needed
 		const { origin, pathname, hash } = window.location;

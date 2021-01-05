@@ -53,7 +53,8 @@ const steps = [
  * @memberof HubComponents
  */
 const StepProgressBar = (props) => {
-	const { currentStep } = props;
+	const { currentStep, setup } = props;
+	console.log('setup: ', props);
 	const totalSteps = steps.length;
 
 	const logoutIfStepOne = (stepId) => {

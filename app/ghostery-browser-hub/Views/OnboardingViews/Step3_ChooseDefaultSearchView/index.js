@@ -13,10 +13,11 @@
 
 import ChooseDefaultSearchView from './ChooseDefaultSearchView';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
-import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
+import { setSetupStep, setHighestSetupStepReached } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
 	setSetupStep,
+	setHighestSetupStepReached
 };
 
 export default buildReduxHOC(null, actionCreators, ChooseDefaultSearchView);

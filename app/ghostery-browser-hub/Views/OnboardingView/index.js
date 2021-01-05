@@ -19,7 +19,8 @@ import OnboardingViewContainer from './OnboardingViewContainer';
 import {
 	initSetupProps,
 	setSetupStep,
-	setSetupComplete
+	setSetupComplete,
+	setHighestSetupStepReached
 } from '../../../shared-hub/actions/SetupLifecycleActions';
 import {
 	setAdBlock,
@@ -34,6 +35,7 @@ export default withRouter(buildReduxHOC(
 		initSetupProps,
 		setSetupStep,
 		setSetupComplete,
+		setHighestSetupStepReached,
 
 		setBlockingPolicy,
 

@@ -15,7 +15,8 @@ import { makeDeferredDispatcher } from '../utils';
 import {
 	INIT_SETUP_PROPS,
 	SET_SETUP_STEP,
-	SET_SETUP_COMPLETE
+	SET_SETUP_COMPLETE,
+	SET_HIGHEST_SETUP_STEP_REACHED
 } from '../constants/SetupLifecycleConstants';
 
 export function initSetupProps(data) {
@@ -30,3 +31,10 @@ export const setSetupStep =
 
 export const setSetupComplete =
 	actionData => makeDeferredDispatcher(SET_SETUP_COMPLETE, actionData);
+
+export function setHighestSetupStepReached(data) {
+	return {
+		type: SET_HIGHEST_SETUP_STEP_REACHED,
+		data,
+	};
+}

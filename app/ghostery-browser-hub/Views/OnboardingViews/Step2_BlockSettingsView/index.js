@@ -17,7 +17,7 @@ import { logout } from '../../../../Account/AccountActions';
 import { setAntiTracking, setAdBlock, setSmartBlocking } from '../../../../shared-hub/actions/AntiSuiteActions';
 import setBlockingPolicy from '../../../../shared-hub/actions/BlockingPolicyActions';
 import setToast from '../../../../shared-hub/actions/ToastActions';
-import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
+import { setSetupStep, setHighestSetupStepReached } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
 	logout,
@@ -27,6 +27,7 @@ const actionCreators = {
 	setBlockingPolicy,
 	setToast,
 	setSetupStep,
+	setHighestSetupStepReached,
 };
 
 export default buildReduxHOC(null, actionCreators, BlockSettingsView);

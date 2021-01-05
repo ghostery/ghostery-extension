@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LOGIN, WELCOME } from '../../OnboardingView/OnboardingConstants';
+import { LOGIN, WELCOME, BLOCK_SETTINGS } from '../../OnboardingView/OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Browser Welcome View
@@ -22,13 +22,19 @@ import { LOGIN, WELCOME } from '../../OnboardingView/OnboardingConstants';
  */
 const WelcomeView = (props) => {
 	const { actions } = props;
-	const { setSetupStep } = actions;
+	const { setSetupStep, setHighestSetupStepReached } = actions;
+
+	const handleSetupStep = () => {
+		setSetupStep({ setup_step: LOGIN, origin: WELCOME });
+		setHighestSetupStepReached({ setup_step: BLOCK_SETTINGS });
+	};
+
 	return (
 		<div className="WelcomeView__container">
 			<div className="WelcomeView__title">{t('ghostery_browser_hub_onboarding_welcome')}</div>
 			<div className="WelcomeView__subtitle">{t('ghostery_browser_hub_onboarding_lets_begin')}</div>
 			<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
-			<NavLink className="WelcomeView__ctaButton" to="/onboarding/1" onClick={() => setSetupStep({ setup_step: LOGIN, origin: WELCOME })}>
+			<NavLink className="WelcomeView__ctaButton" to="/onboarding/1" onClick={() => handleSetupStep()}>
 				<span>{t('ghostery_browser_hub_onboarding_lets_do_this')}</span>
 			</NavLink>
 		</div>
