@@ -16,7 +16,6 @@ export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e
 class Api {
 	constructor() {
 		this._refreshPromise = null;
-		this.tokenRefreshedEventType = 'tokenRefreshed';
 	}
 
 	init(config, opts) {
