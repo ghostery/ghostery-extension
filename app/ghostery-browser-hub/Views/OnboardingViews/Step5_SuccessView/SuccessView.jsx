@@ -11,7 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 
 /**
  * A Functional React component for rendering the Browser Success View
@@ -22,12 +23,23 @@ const SuccessView = (props) => {
 	const { actions } = props;
 	const { sendPing } = actions;
 	return (
-		<div className="SuccessView__container">
-			<div className="SuccessView__title">{t('ghostery_browser_hub_onboarding_yay_youre_all_set')}</div>
-			<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_start_browsing_the_web_with')} Ghostery`}</div>
-			<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
-			<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_browser_hub_onboarding_lets_search')}</button>
-		</div>
+		<Fragment>
+			<div className="SuccessView__relativeContainer">
+				<div className="SuccessView__backContainer">
+					<span className="SuccessView__caret left" />
+					<NavLink to="/onboarding/4">
+						<span className="SuccessView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+					</NavLink>
+				</div>
+			</div>
+			<div className="SuccessView__container">
+				<div className="SuccessView__title">{t('ghostery_browser_hub_onboarding_yay_youre_all_set')}</div>
+
+				<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_start_browsing_the_web_with')} Ghostery`}</div>
+				<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
+				<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_browser_hub_onboarding_lets_search')}</button>
+			</div>
+		</Fragment>
 	);
 };
 
