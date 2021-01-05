@@ -1917,16 +1917,46 @@
 	"ghostery_browser_hub_onboarding_question_smart_browsing": {
 		"message": "Do you want to turn on smart-browsing?"
 	},
-	"ghostery_browser_hub_info_blocking_all": {
+	"ghostery_browser_hub_onboarding_info_blocking_all": {
 		"message": "Blocking \"all trackers\" may cause some websites to break."
 	},
-	"ghostery_browser_hub_info_anti_tracking": {
+	"ghostery_browser_hub_onboarding_info_anti_tracking": {
 		"message": "Anti-tracking anonymizes uniquely identifiable data that trackers try to collect."
 	},
-	"ghostery_browser_hub_info_smart_browsing": {
+	"ghostery_browser_hub_onboarding_info_smart_browsing": {
 		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
 	},
-	"ghostery_browser_hub_toast_error": {
+	"ghostery_browser_hub__onboarding_choose_your_default_search": {
+		"message": "Choose your default search"
+	},
+	"ghostery_browser_hub_onboarding_pick_a_default_search_engine": {
+		"message": "Pick a default search engine for all your searches."
+	},
+	"ghostery_browser_hub_onboarding_ad_free_private_search": {
+		"message": "Ad-free private search"
+	},
+	"ghostery_browser_hub_onboarding_ad_supported_private_search": {
+		"message": "Ad-supported private search"
+	},
+	"ghostery_browser_hub_onboarding_type_in_search_domain": {
+		"message": "Type in search domain"
+	},
+	"ghostery_browser_hub_onboarding_just_so_you_know": {
+		"message": "Just so you know:"
+	},
+	"ghostery_browser_hub_onboarding_search_engine_will_log_your_data": {
+		"message": "search engine will log your data and use it to serve you targeted ads."
+	},
+	"ghostery_browser_hub_onboarding_go_back": {
+		"message": "Go Back"
+	},
+	"ghostery_browser_hub_onboarding_confirm": {
+		"message": "Confirm"
+	},
+	"ghostery_browser_hub_onboarding_other": {
+		"message": "Other"
+	},
+	"ghostery_browser_hub_onboarding_toast_error": {
 		"message": "Please answer all questions"
 	},
 	"enable_when_paused": {
