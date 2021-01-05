@@ -20,7 +20,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 5px;
+	margin-top: 52px;
 	@include breakpoint(small down) {
 		position: relative;
 	}

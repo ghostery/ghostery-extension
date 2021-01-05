@@ -11,13 +11,12 @@
 
 .ChooseSearchView__relativeContainer {
 	position: relative;
-	margin-left: -748px;
 	@include breakpoint(small down) {
 		margin-left: 0;
 	}
 }
 .ChooseSearchView__caret.left {
-	margin: 15px auto 0 auto;
+	margin: 7px auto 0 auto;
 	height: 10px;
   width: 10px;
   border-left: 2px solid $tundora;
@@ -30,9 +29,9 @@
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 5px;
+	margin-top: 61px;
 	@include breakpoint(small down) {
-		position: relative;
+		margin-top: 20px;
 	}
 	.ChooseSearchView__back {
 		margin-top: 8px;

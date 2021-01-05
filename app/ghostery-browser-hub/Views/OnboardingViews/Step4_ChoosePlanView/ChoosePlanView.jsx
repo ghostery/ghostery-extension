@@ -294,7 +294,7 @@ class ChoosePlanView extends React.Component {
 		});
 
 		return (
-			<div className="ChoosePlanView">
+			<Fragment>
 				<div className="ChoosePlanView__relativeContainer">
 					<div className="ChoosePlanView__backContainer">
 						<span className="ChoosePlanView__caret left" />
@@ -303,69 +303,72 @@ class ChoosePlanView extends React.Component {
 						</NavLink>
 					</div>
 				</div>
-				<div className="ChoosePlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
-				<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(didNotSelectGhosterySearch)}</div>
-				{didNotSelectGhosterySearch && isBasic && (
-					<Fragment>
-						{searchPromo()}
-						{/* TODO: For the CTA button below,
+				<div className="ChoosePlanView">
+
+					<div className="ChoosePlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
+					<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(didNotSelectGhosterySearch)}</div>
+					{didNotSelectGhosterySearch && isBasic && (
+						<Fragment>
+							{searchPromo()}
+							{/* TODO: For the CTA button below,
 							1. If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
 								and move them to Step 5 if signed in
 							2. If user is signed out, clicking this should take them to Step 4b (linked)
 						*/}
-						<div className="ChoosePlanView__searchCTAButton">{t('ghostery_browser_hub_onboarding_start_trial')}</div>
-						<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_browser_hub_onboarding_see_all_plans')}</div>
-						<div className={arrowClassNames} onClick={this.toggleSection} />
-					</Fragment>
-				)}
-				{((isBasic && !didNotSelectGhosterySearch) || expanded || isPlus || isPremium) && (
-					<div>
-						{(isPlus) ? (
-							<div className="ChoosePlanView__keepOrUpgradeContainer row align-center align-middle">
-								<div className="small-12 medium-12 large-4">
-									{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, isPlus)}
+							<div className="ChoosePlanView__searchCTAButton">{t('ghostery_browser_hub_onboarding_start_trial')}</div>
+							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_browser_hub_onboarding_see_all_plans')}</div>
+							<div className={arrowClassNames} onClick={this.toggleSection} />
+						</Fragment>
+					)}
+					{((isBasic && !didNotSelectGhosterySearch) || expanded || isPlus || isPremium) && (
+						<div>
+							{(isPlus) ? (
+								<div className="ChoosePlanView__keepOrUpgradeContainer row align-center align-middle">
+									<div className="small-12 medium-12 large-4">
+										{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, isPlus)}
+									</div>
+									<div className="ChoosePlanView__or small-12 large-2">{t('ghostery_browser_hub_onboarding_or')}</div>
+									<div className="small-12 medium-12 large-4">
+										{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, isPlus)}
+									</div>
 								</div>
-								<div className="ChoosePlanView__or small-12 large-2">{t('ghostery_browser_hub_onboarding_or')}</div>
-								<div className="small-12 medium-12 large-4">
-									{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, isPlus)}
+							) : (
+								<div className="ChoosePlanView__plansContainer row align-spaced">
+									{isBasic && (
+										basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
+									)}
+									{!isPremium && (
+										<Fragment>
+											{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
+										</Fragment>
+									)}
+									{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
 								</div>
-							</div>
-						) : (
-							<div className="ChoosePlanView__plansContainer row align-spaced">
-								{isBasic && (
-									basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
-								)}
-								{!isPremium && (
-									<Fragment>
-										{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
-									</Fragment>
-								)}
-								{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
-							</div>
-						)}
-						{(isBasic && (
-							<div className="ChoosePlanView__ctaButtonContainer">
-								{(selectedPlan === BASIC) && (
-									<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
-										<span>{t('next')}</span>
-									</NavLink>
-								)}
-								{selectedPlan === PLUS && (
-									<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
-								)}
-								{selectedPlan === PREMIUM && (
-									<a className="ChoosePlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
-								)}
-							</div>
-						))}
-						{isPremium && (
-							<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
-								<span>{t('next')}</span>
-							</NavLink>
-						)}
-					</div>
-				)}
-			</div>
+							)}
+							{(isBasic && (
+								<div className="ChoosePlanView__ctaButtonContainer">
+									{(selectedPlan === BASIC) && (
+										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
+											<span>{t('next')}</span>
+										</NavLink>
+									)}
+									{selectedPlan === PLUS && (
+										<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+									)}
+									{selectedPlan === PREMIUM && (
+										<a className="ChoosePlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+									)}
+								</div>
+							))}
+							{isPremium && (
+								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
+									<span>{t('next')}</span>
+								</NavLink>
+							)}
+						</div>
+					)}
+				</div>
+			</Fragment>
 		);
 	}
 }
