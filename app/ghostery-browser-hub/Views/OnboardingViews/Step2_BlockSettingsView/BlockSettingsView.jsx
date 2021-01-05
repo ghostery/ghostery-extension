@@ -13,7 +13,7 @@
 
 import React, { Component } from 'react';
 
-// import Tooltip from '../../../../panel/components/Tooltip';
+import Tooltip from '../../../../shared-components/Tooltip';
 import RadioButton from '../../../../shared-components/RadioButton/RadioButton';
 import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox/ToggleCheckbox';
 import { CHOOSE_DEFAULT_SEARCH, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
@@ -137,7 +137,9 @@ class BlockSettingsView extends Component {
 						<li className="BlockSettingsView_question">
 							<div className="BlockSettingsView_questionBlock">
 								{t('ghostery_browser_hub_onboarding_question_kinds_of_trackers')}
-								<div className="BlockSettingsView__infoIcon" />
+								<div className="BlockSettingsView__infoIcon g-tooltip">
+									<Tooltip header={t('ghostery_browser_hub_info_blocking_all')} position="top" isOnboardingHub />
+								</div>
 							</div>
 						</li>
 						<div className="BlockSettingsView_answerBlock">
@@ -159,8 +161,12 @@ class BlockSettingsView extends Component {
 							<div className="BlockSettingsView_answerText">{t('ghostery_browser_hub_onboarding_kinds_of_trackers_none')}</div>
 						</div>
 						<li className="BlockSettingsView_question">
-							{t('ghostery_browser_hub_onboarding_question_anti_tracking')}
-							<div className="BlockSettingsView__infoIcon" />
+							<div className="BlockSettingsView_questionBlock">
+								{t('ghostery_browser_hub_onboarding_question_anti_tracking')}
+								<div className="BlockSettingsView__infoIcon g-tooltip">
+									<Tooltip header={t('ghostery_browser_hub_info_anti_tracking')} position="top" isOnboardingHub />
+								</div>
+							</div>
 						</li>
 						<div className="BlockSettingsView_answerBlock">
 							<div className="BlockSettingsView__radioButtonContainer">
@@ -175,8 +181,12 @@ class BlockSettingsView extends Component {
 							<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_no')}</div>
 						</div>
 						<li className="BlockSettingsView_question">
-							{t('ghostery_browser_hub_onboarding_question_smart_browsing')}
-							<div className="BlockSettingsView__infoIcon" src="/app/images/hub/setup/info.svg" />
+							<div className="BlockSettingsView_questionBlock">
+								{t('ghostery_browser_hub_onboarding_question_smart_browsing')}
+								<div className="BlockSettingsView__infoIcon g-tooltip">
+									<Tooltip header={t('ghostery_browser_hub_info_smart_browsing')} position="top" isOnboardingHub />
+								</div>
+							</div>
 						</li>
 						<div className="BlockSettingsView_answerBlock">
 							<div className="BlockSettingsView__radioButtonContainer">

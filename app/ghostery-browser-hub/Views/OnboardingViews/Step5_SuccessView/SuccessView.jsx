@@ -23,8 +23,8 @@ const SuccessView = (props) => {
 	const { sendPing } = actions;
 	return (
 		<div className="SuccessView__container">
-			<div className="SuccessView__title">{t('ghostery_browser_hub_onboarding_yay_youre_all_set')}</div>
-			<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_start_browsing_the_web_with')} Ghostery`}</div>
+			<div className="SuccessView__title">{t('ghostery_browser_hub_onboarding_youve_successfully_set_up_your_browser')}</div>
+			<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_surf_with_ease')}`}</div>
 			<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
 			<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_browser_hub_onboarding_lets_search')}</button>
 		</div>

@@ -108,6 +108,19 @@
 			line-height: 1.5;
 		}
 	}
+	.onboarding .tooltip-content {
+		color: $white;
+		background-color: $black;
+		font-size: 14px;
+		opacity: .96;
+		border-radius: 4px;
+		&:after {
+			border-color: transparent transparent $black $black;
+		}
+		.tooltip-header {
+			font-weight: 500;
+		}
+	}
 	.dark-theme .tooltip-content {
 		background-color: #333333;
 		color: #ffffff;

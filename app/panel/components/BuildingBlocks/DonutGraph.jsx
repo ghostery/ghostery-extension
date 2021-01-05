@@ -23,7 +23,7 @@ import {
 	scaleLinear,
 	select
 } from 'd3';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../../shared-components/Tooltip';
 
 /**
  * @class Generate donut graph. Used to display tracker data in the Summary View.

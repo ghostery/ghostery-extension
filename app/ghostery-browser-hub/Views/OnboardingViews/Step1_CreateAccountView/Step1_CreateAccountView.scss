@@ -158,7 +158,8 @@ $color-create-account-form-error-red: #e74055;
 	cursor: pointer;
 	@include breakpoint(small down) {
 		margin: 39px auto 0 auto;
-		text-align: center;
+		display: flex;
+		justify-content: center;
 		float: none;
 	}
 }

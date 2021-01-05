@@ -30,21 +30,6 @@ const faqList = [
 		description: t('ghostery_browser_hub_onboarding_private_by_design_description'),
 	},
 	{
-		icon: 'ghosty-letter.svg',
-		label: t('ghostery_browser_hub_onboarding_why_do_you_need_my_email'),
-		description: t('ghostery_browser_hub_onboarding_why_do_you_need_my_email_description'),
-	},
-	{
-		icon: 'ghosty-shield-letter.svg',
-		label: t('ghostery_browser_hub_onboarding_what_do_you_use_my_email_for'),
-		description: t('ghostery_browser_hub_onboarding_what_do_you_use_my_email_for_description'),
-	},
-	{
-		icon: 'ghosty-lock.svg',
-		label: `${t('ghostery_browser_hub_onboarding_how_secure_is_')} Ghostery?`,
-		description: t('ghostery_browser_hub_onboarding_how_secure_is_ghostery_description'),
-	},
-	{
 		icon: 'ghosty-box.svg',
 		label: t('ghostery_browser_hub_onboarding_can_i_remove_my_account'),
 		description: t('ghostery_browser_hub_onboarding_can_i_remove_my_account_description'),
