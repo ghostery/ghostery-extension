@@ -1,12 +1,40 @@
 .BlockSettingsView__container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	font-size: 18px;
 	line-height: 2.33;
 	color: $tundora;
 	margin: 45px auto 83px auto;
+}
+
+.BlockSettingsView__relativeContainer {
+	position: relative;
+}
+
+.BlockSettingsView__caret.left {
+	margin: 15px auto 0 auto;
+    height: 10px;
+    width: 10px;
+    border-left: 2px solid $tundora;
+    border-top: 2px solid $tundora;
+	cursor: pointer;
+	transform: rotate(-45deg);
+}
+
+.BlockSettingsView__backContainer {
+	position: absolute;
+	display: flex;
+	width: 68px;
+	margin-top: 5px;
+	@include breakpoint(small down) {
+		position: relative;
+	}
+	.BlockSettingsView__back {
+		margin-top: 8px;
+		font-size: 16px;
+		color: $tundora;
+		text-decoration: underline;
+	}
 }
 
 .BlockSettingsView__title {

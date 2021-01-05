@@ -12,6 +12,7 @@
  */
 
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 // import Tooltip from '../../../../panel/components/Tooltip';
 import RadioButton from '../../../../shared-components/RadioButton/RadioButton';
@@ -109,6 +110,14 @@ class BlockSettingsView extends Component {
 		} = this.state;
 		return (
 			<div className="BlockSettingsView__container">
+				<div className="BlockSettingsView__relativeContainer">
+					<div className="BlockSettingsView__backContainer">
+						<span className="BlockSettingsView__caret left" />
+						<NavLink to="/onboarding/1">
+							<span className="BlockSettingsView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+						</NavLink>
+					</div>
+				</div>
 				<div className="BlockSettingsView__title">{t('ghostery_browser_hub_onboarding_which_privacy_plan')}</div>
 				<div className="BlockSettingsView__subtitle">{t('ghostery_browser_hub_onboarding_tell_us_your_preferences')}</div>
 				<div className="BlockSettingsView_formBlock">

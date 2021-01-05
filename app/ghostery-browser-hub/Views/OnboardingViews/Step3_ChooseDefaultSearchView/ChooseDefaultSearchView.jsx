@@ -12,6 +12,7 @@
  */
 
 import React, { Component, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
 
@@ -57,6 +58,14 @@ class ChooseDefaultSearchView extends Component {
 
 		return (
 			<div className="ChooseSearchView__container">
+				<div className="ChooseSearchView__relativeContainer">
+					<div className="ChooseSearchView__backContainer">
+						<span className="ChooseSearchView__caret left" />
+						<NavLink to="/onboarding/2">
+							<span className="ChooseSearchView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+						</NavLink>
+					</div>
+				</div>
 				<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
 				<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
 				<div className="ChooseSearchView__optionsContainer">

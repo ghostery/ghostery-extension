@@ -295,6 +295,14 @@ class ChoosePlanView extends React.Component {
 
 		return (
 			<div className="ChoosePlanView">
+				<div className="ChoosePlanView__relativeContainer">
+					<div className="ChoosePlanView__backContainer">
+						<span className="ChoosePlanView__caret left" />
+						<NavLink to="/onboarding/3">
+							<span className="ChoosePlanView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+						</NavLink>
+					</div>
+				</div>
 				<div className="ChoosePlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
 				<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(didNotSelectGhosterySearch)}</div>
 				{didNotSelectGhosterySearch && isBasic && (
