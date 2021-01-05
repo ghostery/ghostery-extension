@@ -29,15 +29,21 @@ class Api {
 
 	refreshToken() {
 		if (this.isRefreshing) {
-			let bindedResolve;
-			const _processRefreshTokenEvent = (resolve, e) => {
-				window.removeEventListener(this.tokenRefreshedEventType, bindedResolve, false);
-				resolve(e.detail);
-			};
-			return new Promise((resolve) => {
-				bindedResolve = _processRefreshTokenEvent.bind(null, resolve);
-				window.addEventListener(this.tokenRefreshedEventType, bindedResolve, false);
+			const deferedPromise = {};
+			deferedPromise.p = new Promise((resolve, reject) => {
+				deferedPromise.resolve = resolve;
+				deferedPromise.reject = reject;
 			});
+			const _processRefreshTokenEvent = (e) => {
+				window.removeEventListener(this.tokenRefreshedEventType, deferedPromise, false);
+				if (e.detail && e.detail.err) {
+					deferedPromise.reject(e.detail.err);
+				} else {
+					deferedPromise.resolve(e.detail);
+				}
+			};
+			window.addEventListener(this.tokenRefreshedEventType, _processRefreshTokenEvent, false);
+			return deferedPromise.p;
 		}
 
 		this.isRefreshing = true;
@@ -50,6 +56,12 @@ class Api {
 				detail: res,
 			}));
 			return res;
+		}).catch((err) => {
+			this.isRefreshing = false;
+			window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
+				detail: { err },
+			}));
+			throw err;
 		});
 	}
 
