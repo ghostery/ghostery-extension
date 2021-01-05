@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../../shared-components/Tooltip';
 
 /**
  * @class Implements the Pause button on the Summary view.

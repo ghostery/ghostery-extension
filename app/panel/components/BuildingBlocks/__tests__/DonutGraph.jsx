@@ -22,7 +22,7 @@ global.t = function(str) {
 };
 
 // Fake the Tooltip implementation
-jest.mock('../../Tooltip');
+jest.mock('../../../../shared-components/Tooltip');
 
 describe('app/panel/components/DonutGraph.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {

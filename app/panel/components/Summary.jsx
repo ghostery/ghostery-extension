@@ -14,7 +14,7 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
-import Tooltip from './Tooltip';
+import Tooltip from '../../shared-components/Tooltip';
 import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
