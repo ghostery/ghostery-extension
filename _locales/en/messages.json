@@ -2398,6 +2398,6 @@
 		"message": "Choose your default search"
 	},
   	"pick_a_default_search_engine": {
-	  "message": "Pick a default engine for all your searches"
+	  "message": "Pick a default engine for all your searches."
 	}
 }

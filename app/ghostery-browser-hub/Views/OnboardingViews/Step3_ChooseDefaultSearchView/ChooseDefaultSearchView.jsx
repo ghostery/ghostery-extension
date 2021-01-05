@@ -12,6 +12,7 @@
  */
 
 import React, { Component, Fragment } from 'react';
+import ClassNames from 'classnames';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
 
@@ -41,16 +42,25 @@ class ChooseDefaultSearchView extends Component {
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
-	renderOptionContainer = (chosenSearch, optionName, optionDesc) => (
-		<div className="ChooseSearchView__optionContainer">
-			<div className="ChooseSearchView__radioButtonContainer">
-				<RadioButton checked={chosenSearch === optionName} handleClick={() => this.updateSelection(optionName)} altDesign />
+	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
+		const selected = (chosenSearch === optionName);
+		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
+
+		return (
+			<div className={containerClasses}>
+				<div className="ChooseSearchView__radioButtonContainer">
+					<RadioButton
+						checked={selected}
+						handleClick={() => this.updateSelection(optionName)}
+						altDesign
+					/>
+				</div>
+				<div className="ChooseSearchView__optionContainerDescription">
+					{optionDesc}
+				</div>
 			</div>
-			<div className="ChooseSearchView__optionContainerDescription">
-				{optionDesc}
-			</div>
-		</div>
-	);
+		);
+	}
 
 	render() {
 		const { chosenSearch } = this.state;
