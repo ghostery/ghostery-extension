@@ -44,7 +44,13 @@ class Api {
 		return fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
 			credentials: 'include',
-		}).finally(() => { this.isRefreshing = false; });
+		}).then((res) => {
+			this.isRefreshing = false;
+			window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
+				detail: res,
+			}));
+			return res;
+		});
 	}
 
 	_sendReq(method, path, body) {
@@ -109,9 +115,6 @@ class Api {
 					if (shouldRefresh) {
 						this.refreshToken()
 							.then((res) => {
-								window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
-									detail: res,
-								}));
 								const { status } = res;
 								if (status >= 400) {
 									res.json().then(data2 => (
