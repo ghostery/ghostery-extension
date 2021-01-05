@@ -15,7 +15,7 @@ export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e
 
 class Api {
 	constructor() {
-		this.isRefreshing = false;
+		this._refreshPromise = null;
 		this.tokenRefreshedEventType = 'tokenRefreshed';
 	}
 
@@ -28,41 +28,16 @@ class Api {
 	}
 
 	refreshToken() {
-		if (this.isRefreshing) {
-			const deferedPromise = {};
-			deferedPromise.p = new Promise((resolve, reject) => {
-				deferedPromise.resolve = resolve;
-				deferedPromise.reject = reject;
-			});
-			const _processRefreshTokenEvent = (e) => {
-				window.removeEventListener(this.tokenRefreshedEventType, deferedPromise, false);
-				if (e.detail && e.detail.err) {
-					deferedPromise.reject(e.detail.err);
-				} else {
-					deferedPromise.resolve(e.detail);
-				}
-			};
-			window.addEventListener(this.tokenRefreshedEventType, _processRefreshTokenEvent, false);
-			return deferedPromise.p;
+		if (this._refreshPromise) {
+			return this._refreshPromise;
 		}
 
-		this.isRefreshing = true;
-		return fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
+		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
 			credentials: 'include',
-		}).then((res) => {
-			this.isRefreshing = false;
-			window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
-				detail: res,
-			}));
-			return res;
-		}).catch((err) => {
-			this.isRefreshing = false;
-			window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
-				detail: { err },
-			}));
-			throw err;
-		});
+		}).finally(() => { this._refreshPromise = null; });
+
+		return this._refreshPromise;
 	}
 
 	_sendReq(method, path, body) {
