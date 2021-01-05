@@ -15,6 +15,9 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+  	max-width: 800px;
+  	margin: auto;
+  	padding-top: 10px;
 }
 .StepProgressBar__Step {
 	height: 34px;
