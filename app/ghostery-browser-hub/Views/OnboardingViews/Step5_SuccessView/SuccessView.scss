@@ -24,6 +24,9 @@
 	display: flex;
 	width: 68px;
 	margin-top: 142px;
+	@include breakpoint(small down) {
+		margin-top: 90px;
+	}
 	.SuccessView__back {
 		margin-top: 8px;
 		font-size: 16px;
