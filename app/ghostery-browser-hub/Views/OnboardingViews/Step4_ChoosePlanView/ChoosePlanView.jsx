@@ -92,7 +92,7 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 					<h2>Ghostery Premium</h2>
 					<div className="ChoosePlanView__price">
 						<Fragment>
-							<p className="ChoosePlanView__price-purple sub-text font-size-36">$11.99</p>
+							<p className="ChoosePlanView__price-purple font-size-36">$11.99</p>
 							<p className="ChoosePlanView__price-purple sub-text font-size-12">{t('per_month')}</p>
 						</Fragment>
 					</div>

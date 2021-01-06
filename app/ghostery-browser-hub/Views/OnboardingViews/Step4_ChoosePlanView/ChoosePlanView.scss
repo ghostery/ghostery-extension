@@ -287,6 +287,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__price {
 	min-height: 85px;
 	margin-bottom: rem-calc(20);
+	font-size: 36px;
 	&-blue {
 		color: $price-blue;
 	}
@@ -307,6 +308,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 			}
 		}
 		&.sub-text {
+			font-size: 12px;
 			font-weight: 500;
 		}
 	}
