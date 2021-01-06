@@ -28,6 +28,7 @@ CLIQZ.config.default_prefs = {
 	// the following are enabled for android only
 	'modules.human-web-lite.enabled': IS_ANDROID,
 	'modules.hpn-lite.enabled': IS_ANDROID,
+	'modules.anolysis.enabled': IS_ANDROID,
 };
 if (IS_ANDROID) {
 	CLIQZ.config.settings.HW_CHANNEL = 'android';
