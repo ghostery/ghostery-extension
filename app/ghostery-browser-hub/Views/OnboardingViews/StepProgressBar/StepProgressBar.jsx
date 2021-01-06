@@ -70,9 +70,18 @@ const StepProgressBar = (props) => {
 			[`step-${step.id}`]: stepClass !== 'step-completed',
 		});
 
+		if (stepClass === 'incomplete') {
+			return (
+				<div className="StepProgressBar__column">
+					<div className={labelClasses}>{step.label}</div>
+					<div className={stepClasses} />
+				</div>
+			);
+		}
+
 		return (
 			<div className="StepProgressBar__column">
-				<NavLink to={step.route} onClick={() => logoutIfStepOne(step.id)}>
+				<NavLink class="test" to={step.route} onClick={() => logoutIfStepOne(step.id)}>
 					<div className={labelClasses}>{step.label}</div>
 					<div className={stepClasses} />
 				</NavLink>
