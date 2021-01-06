@@ -407,6 +407,7 @@ class Metrics {
 	 * @return {number} The deepest setup page reached by user during setup
 	 */
 	static _getSetupStep(type) {
+		console.log('conf.setup_step', conf.setup_step);
 		if (conf.metrics.install_complete_all
 			|| type === 'install_complete'
 			|| type === 'gb_onboarding'

@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import RadioButton from '../../../../shared-components/RadioButton';
 import globals from '../../../../../src/classes/Globals';
 import { BASIC, PLUS, PREMIUM } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
-import { CHOOSE_PLAN, ONBOARDING, SUCCESS } from '../../OnboardingView/OnboardingConstants';
+import { CHOOSE_PLAN, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
 
 const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
 const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
@@ -217,13 +217,6 @@ class ChoosePlanView extends React.Component {
 		if (isPlus) return t('ghostery_browser_hub_onboarding_keep_your_current_plan_or_upgrade');
 		return t('ghostery_browser_hub_onboarding_choose_an_option');
 	};
-
-	handleSetupStep = () => {
-		const { actions } = this.props;
-		const { setSetupStep, setHighestSetupStepReached } = actions;
-		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
-		setHighestSetupStepReached({ setup_step: SUCCESS });
-	}
 
 	plusCard = (checked, handleClick, showCTAButton = false) => {
 		const { actions } = this.props;

@@ -12,15 +12,10 @@
  */
 
 import {
-	INIT_SETUP_PROPS,
-	SET_HIGHEST_SETUP_STEP_REACHED
+	INIT_SETUP_PROPS
 } from '../constants/SetupLifecycleConstants';
 
-const initialState = {
-	setup_step: 0 // To be used in <StepProgressBar /> only. Prevents the user from navigating to a page they have not yet completed the previous steps for
-};
-
-// const initialState = {};
+const initialState = {};
 
 function SetupLifecycleReducer(state = initialState, action) {
 	switch (action.type) {
@@ -39,15 +34,6 @@ function SetupLifecycleReducer(state = initialState, action) {
 					enable_anti_tracking,
 					enable_ad_block,
 					enable_smart_block,
-					setup_step: 0
-				}
-			};
-		}
-		case SET_HIGHEST_SETUP_STEP_REACHED: {
-			return {
-				...state,
-				setup: {
-					...{ setup_step: action.data }
 				}
 			};
 		}

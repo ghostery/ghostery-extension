@@ -14,11 +14,10 @@
 import { withRouter } from 'react-router-dom';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import Step1_CreateAccountView from './Step1_CreateAccountView';
-import { setSetupStep, setHighestSetupStepReached } from '../../../../shared-hub/actions/SetupLifecycleActions';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
 	setSetupStep,
-	setHighestSetupStepReached
 };
 
 export default withRouter(buildReduxHOC(['account'], actionCreators, Step1_CreateAccountView));

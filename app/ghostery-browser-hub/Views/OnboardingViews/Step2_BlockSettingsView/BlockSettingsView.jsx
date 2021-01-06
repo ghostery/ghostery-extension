@@ -69,7 +69,7 @@ class BlockSettingsView extends Component {
 		if (blockAds !== null && kindsOfTrackers !== null && antiTracking !== null && smartBrowsing !== null) {
 			const { actions } = this.props;
 			const {
-				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep, setHighestSetupStepReached
+				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
 			} = actions;
 			const { history } = this.props;
 
@@ -93,7 +93,6 @@ class BlockSettingsView extends Component {
 			}
 			setBlockingPolicy({ blockingPolicy });
 			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
-			setHighestSetupStepReached({ setup_step: CHOOSE_DEFAULT_SEARCH });
 			history.push('/onboarding/3');
 		} else {
 			const { setToast } = this.props;

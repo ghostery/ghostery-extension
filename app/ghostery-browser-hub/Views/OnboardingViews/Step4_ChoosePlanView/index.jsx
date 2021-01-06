@@ -13,11 +13,10 @@
 
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import ChoosePlanView from './ChoosePlanView';
-import { setSetupStep, setHighestSetupStepReached } from '../../../../shared-hub/actions/SetupLifecycleActions';
+import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
 	setSetupStep,
-	setHighestSetupStepReached
 };
 
 export default buildReduxHOC(['account'], actionCreators, ChoosePlanView);

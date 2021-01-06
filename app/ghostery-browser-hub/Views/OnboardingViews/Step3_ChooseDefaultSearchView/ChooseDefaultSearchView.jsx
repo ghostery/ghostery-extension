@@ -35,10 +35,9 @@ class ChooseDefaultSearchView extends Component {
 
 	handleSubmit = () => {
 		const { actions, history } = this.props;
-		const { setSetupStep, setHighestSetupStepReached } = actions;
+		const { setSetupStep } = actions;
 
 		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
-		setHighestSetupStepReached({ setup_step: CHOOSE_PLAN });
 
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
