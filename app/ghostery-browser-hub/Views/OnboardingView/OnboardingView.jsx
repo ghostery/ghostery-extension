@@ -25,6 +25,7 @@ import StepNavigator from '../OnboardingViews/StepNavigator';
  */
 const OnboardingView = (props) => {
 	const { sendMountActions, steps } = props;
+	console.log('in OnboardingView');
 
 	return (
 		<div className="full-height flex-container flex-dir-column android-relative">
