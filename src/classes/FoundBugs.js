@@ -53,7 +53,8 @@ class FoundBugs {
 	 *					blocked: boolean,
 	 *					type: string,
 	 *					request_id: string
-	 *				}]
+	 *				}],
+	 *				trackerID: string
 	 *			}],
 	 *			appsMetadata: {
 	 *				appId: {
@@ -210,6 +211,7 @@ class FoundBugs {
 					cats_obj[cid].trackers.push({
 						id: appid,
 						name: db.apps[appid].name,
+						trackerID: db.apps[appid].trackerID,
 						blocked: bugs[id].blocked
 					});
 					if (bugs[id].blocked) {
@@ -227,6 +229,7 @@ class FoundBugs {
 					trackers: [{
 						id: appid,
 						name: db.apps[appid].name,
+						trackerID: db.apps[appid].trackerID,
 						blocked: bugs[id].blocked
 					}],
 					blocked: (bugs[id].blocked ? 1 : 0),
@@ -496,12 +499,13 @@ class FoundBugs {
 			appsMetadata[aid].needsCompatibilityCheck =
 				appsMetadata[aid].needsCompatibilityCheck && app.blocked;
 		} else {
-			const { name, cat } = db.apps[aid];
+			const { name, cat, trackerID } = db.apps[aid];
 
 			const apps_len = apps.push({
 				id: aid,
 				name,
 				cat,
+				trackerID,
 				blocked,
 				sources,
 				hasCompatibilityIssue: false,
