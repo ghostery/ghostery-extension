@@ -257,8 +257,7 @@ class Metrics {
 			this._buildQueryPair('id', conf.install_date) +
 			// Showing campaign messages (former show_cmp)
 			this._buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
-			// Subscription Type
-			this._buildQueryPair('st', Metrics._getSubscriptionType().toString()) +
+			// Subscription Typerics._getSubscriptionType().toString()) +
 
 			// New parameters for Ghostery 8.5.2
 			// Subscription Interval
