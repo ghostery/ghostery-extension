@@ -213,14 +213,14 @@ class BlockSettingsView extends Component {
 								</div>
 							</li>
 						</ol>
-						<button
-							className="BlockSettingsView__ctaButton"
-							type="button"
-							onClick={() => this.handleSubmit()}
-						>
-							{t('next')}
-						</button>
 					</div>
+					<button
+						className="BlockSettingsView__ctaButton"
+						type="button"
+						onClick={() => this.handleSubmit()}
+					>
+						{t('next')}
+					</button>
 				</div>
 			</Fragment>
 		);
