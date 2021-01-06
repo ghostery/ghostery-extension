@@ -47,8 +47,7 @@ function SetupLifecycleReducer(state = initialState, action) {
 			return {
 				...state,
 				setup: {
-					...state.setup,
-					setup_step: action.data
+					...{ setup_step: action.data }
 				}
 			};
 		}
