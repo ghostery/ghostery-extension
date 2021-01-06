@@ -257,8 +257,7 @@ class Metrics {
 			this._buildQueryPair('id', conf.install_date) +
 			// Showing campaign messages (former show_cmp)
 			this._buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
-			// Subscription Type
-			this._buildQueryPair('st', Metrics._getSubscriptionType().toString()) +
+			// Subscription Typerics._getSubscriptionType().toString()) +
 
 			// New parameters for Ghostery 8.5.2
 			// Subscription Interval
@@ -407,7 +406,6 @@ class Metrics {
 	 * @return {number} The deepest setup page reached by user during setup
 	 */
 	static _getSetupStep(type) {
-		console.log('conf.setup_step', conf.setup_step);
 		if (conf.metrics.install_complete_all
 			|| type === 'install_complete'
 			|| type === 'gb_onboarding'

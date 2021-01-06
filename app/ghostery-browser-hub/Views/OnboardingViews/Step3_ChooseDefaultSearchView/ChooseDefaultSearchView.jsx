@@ -13,8 +13,10 @@
 
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import ClassNames from 'classnames';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
+import { Modal } from '../../../../shared-components';
 
 const SEARCH_GHOSTERY = 'Ghostery';
 const SEARCH_BING = 'Bing';
@@ -28,32 +30,89 @@ class ChooseDefaultSearchView extends Component {
 
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
+			customSearchURL: null,
+			searchBeingConsidered: null,
+			modalActive: false,
 		};
 	}
 
-	updateSelection = newSelection => this.setState({ chosenSearch: newSelection });
+	updateSelection = () => this.setState(prevState => (
+		{
+			chosenSearch: prevState.searchBeingConsidered,
+			searchBeingConsidered: null,
+			modalActive: false
+		}
+	));
+
+	cancelSelection = () => this.setState({ modalActive: false, searchBeingConsidered: null });
+
+	triggerConfirmationModal = selection => this.setState({ modalActive: true, searchBeingConsidered: selection });
 
 	handleSubmit = () => {
+		const { chosenSearch, customSearchURL } = this.state;
 		const { actions, history } = this.props;
 		const { setSetupStep } = actions;
 
-		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		const payload = {
+			type: 'setDefaultSearch',
+			search: chosenSearch,
+			customSearchURL,
+		};
 
-		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
+			// TODO handle errors if needed
+			// TODO save user's search setting to redux / background if needed
+			setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+			history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+		});
 	}
 
-	renderOptionContainer = (chosenSearch, optionName, optionDesc) => (
-		<div className="ChooseSearchView__optionContainer">
-			<div className="ChooseSearchView__radioButtonContainer">
-				<RadioButton checked={chosenSearch === optionName} handleClick={() => this.updateSelection(optionName)} altDesign />
-			</div>
-			<div className="ChooseSearchView__optionContainerDescription">
-				{optionDesc}
-			</div>
-		</div>
-	);
+	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
+		const selected = (chosenSearch === optionName);
+		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
 
-	render() {
+		return (
+			<div className={containerClasses}>
+				<div className="ChooseSearchView__radioButtonContainer">
+					<RadioButton
+						checked={selected}
+						handleClick={() => this.triggerConfirmationModal(optionName)}
+						altDesign
+					/>
+				</div>
+				<div className="ChooseSearchView__optionContainerDescription">
+					{optionDesc}
+				</div>
+			</div>
+		);
+	}
+
+	renderConfirmationModal = () => {
+		const { searchBeingConsidered } = this.state;
+
+		return (
+			<Modal show>
+				<div className="ChooseSearchView__confirmationModalDescription">
+					Modal of type
+					{searchBeingConsidered}
+				</div>
+				<button
+					onClick={this.cancelSelection}
+					type="button"
+				>
+					Cancel
+				</button>
+				<button
+					onClick={this.updateSelection}
+					type="button"
+				>
+					Confirm
+				</button>
+			</Modal>
+		);
+	}
+
+	renderSearchOptions = () => {
 		const { chosenSearch } = this.state;
 
 		return (
@@ -86,6 +145,14 @@ class ChooseDefaultSearchView extends Component {
 				</div>
 			</Fragment>
 		);
+	}
+
+	render() {
+		const { modalActive } = this.state;
+
+		if (modalActive) return (this.renderConfirmationModal());
+
+		return (this.renderSearchOptions());
 	}
 }
 

@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../../shared-components/Tooltip';
 import globals from '../../../../src/classes/Globals';
 
 const { BLACKLISTED, WHITELISTED } = globals;

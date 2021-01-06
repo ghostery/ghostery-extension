@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import OverviewTab from '../OverviewTab';
 
-jest.mock('../../../../panel/components/Tooltip');
+jest.mock('../../../../shared-components/Tooltip');
 
 describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {

@@ -1819,7 +1819,7 @@
 		"message": "Ad free"
 	},
 	"ghostery_browser_hub_onboarding_supports_ghosterys_mission": {
-		"message": "Supports Ghostery's Mission"
+		"message": "Supports Ghostery's mission"
 	},
 	"ghostery_browser_hub_onboarding_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
@@ -1864,25 +1864,7 @@
 		"message": "Private by design"
 	},
 	"ghostery_browser_hub_onboarding_private_by_design_description": {
-		"message": "Privacy is incredibly important to us at Ghostery and we've taken extra care to design our products that limits the amount of personal information collected."
-	},
-	"ghostery_browser_hub_onboarding_why_do_you_need_my_email": {
-		"message": "Why do you need my email?"
-	},
-	"ghostery_browser_hub_onboarding_why_do_you_need_my_email_description": {
-		"message": "We've found email is the simplest way to create and secure a unique account without sharing your information. It helps sync your custom settings across your devices."
-	},
-	"ghostery_browser_hub_onboarding_what_do_you_use_my_email_for": {
-		"message": "What do you use my email for?"
-	},
-	"ghostery_browser_hub_onboarding_what_do_you_use_my_email_for_description": {
-		"message": "We never share or sell your personal information. Your email address is used for account management, technical support, product-related communications, and some opt-in features."
-	},
-	"ghostery_browser_hub_onboarding_how_secure_is_": {
-		"message": "How secure is"
-	},
-	"ghostery_browser_hub_onboarding_how_secure_is_ghostery_description": {
-		"message": "We never share or sell your personal information. Your email address is used for account management, technical support, product-related communications, and some opt-in features."
+		"message": "Privacy is incredibly important to us at Ghostery. That’s why we enforce a strict policy when it comes to your data. When you create an account at Ghostery, the only data we collect is your name and email. This information allows us to offer you a user experience wherein you can sync your settings across devices and hear from us about important updates. Under no circumstances do we share or sell this data with any kind of third party."
 	},
 	"ghostery_browser_hub_onboarding_can_i_remove_my_account": {
 		"message": "Can I remove my account?"
@@ -1899,11 +1881,11 @@
 	"ghostery_browser_hub_onboarding_you_are_signed_in_as": {
 		"message": "You are signed in as"
 	},
-	"ghostery_browser_hub_onboarding_yay_youre_all_set": {
-		"message": "Yay! You're all set."
+	"ghostery_browser_hub_onboarding_youve_successfully_set_up_your_browser": {
+		"message": "You've successfully set up your browser!"
 	},
-	"ghostery_browser_hub_onboarding_start_browsing_the_web_with": {
-		"message": "Start browsing the web with"
+	"ghostery_browser_hub_onboarding_surf_with_ease": {
+		"message": "Now you can surf with the greatest of ease."
 	},
 	"ghostery_browser_hub_onboarding_lets_search": {
 		"message": "Let's search"
@@ -1938,16 +1920,46 @@
 	"ghostery_browser_hub_onboarding_question_smart_browsing": {
 		"message": "Do you want to turn on smart-browsing?"
 	},
-	"ghostery_browser_hub_info_blocking_all": {
+	"ghostery_browser_hub_onboarding_info_blocking_all": {
 		"message": "Blocking \"all trackers\" may cause some websites to break."
 	},
-	"ghostery_browser_hub_info_anti_tracking": {
-		"message": "Anti-tracking anonymizes uniquely identifiable data that trackers try to collect"
+	"ghostery_browser_hub_onboarding_info_anti_tracking": {
+		"message": "Anti-tracking anonymizes uniquely identifiable data that trackers try to collect."
 	},
-	"ghostery_browser_hub_info_smart_browsing": {
+	"ghostery_browser_hub_onboarding_info_smart_browsing": {
 		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
 	},
-	"ghostery_browser_hub_toast_error": {
+	"ghostery_browser_hub__onboarding_choose_your_default_search": {
+		"message": "Choose your default search"
+	},
+	"ghostery_browser_hub_onboarding_pick_a_default_search_engine": {
+		"message": "Pick a default search engine for all your searches."
+	},
+	"ghostery_browser_hub_onboarding_ad_free_private_search": {
+		"message": "Ad-free private search"
+	},
+	"ghostery_browser_hub_onboarding_ad_supported_private_search": {
+		"message": "Ad-supported private search"
+	},
+	"ghostery_browser_hub_onboarding_type_in_search_domain": {
+		"message": "Type in search domain"
+	},
+	"ghostery_browser_hub_onboarding_just_so_you_know": {
+		"message": "Just so you know:"
+	},
+	"ghostery_browser_hub_onboarding_search_engine_will_log_your_data": {
+		"message": "search engine will log your data and use it to serve you targeted ads."
+	},
+	"ghostery_browser_hub_onboarding_go_back": {
+		"message": "Go Back"
+	},
+	"ghostery_browser_hub_onboarding_confirm": {
+		"message": "Confirm"
+	},
+	"ghostery_browser_hub_onboarding_other": {
+		"message": "Other"
+	},
+	"ghostery_browser_hub_onboarding_toast_error": {
 		"message": "Please answer all questions"
 	},
 	"enable_when_paused": {
@@ -2401,6 +2413,6 @@
 		"message": "Choose your default search"
 	},
   	"pick_a_default_search_engine": {
-	  "message": "Pick a default engine for all your searches"
+	  "message": "Pick a default engine for all your searches."
 	}
 }
