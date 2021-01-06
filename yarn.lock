@@ -4043,10 +4043,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-ghostery-common@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ghostery-common/-/ghostery-common-1.0.1.tgz#1512986b48de44b5948af190f74ea5320c3d4279"
-  integrity sha512-lrPTPB3tuQViyglzKPdUche9kxnm0hwZOFW7AuZF2RPiCD5oY90ZIUGFOyaN7rcJ7reVHnX3sgLf8unS0iDJVg==
+ghostery-common@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ghostery-common/-/ghostery-common-1.2.0.tgz#84d7bbe7c29fbf488e4668853ffeef76d394fee1"
+  integrity sha512-J/cSrlgXjrCUTqToroMihWwsKuuKGXhWvLg+n9p5sFr1HHUvOoe7hNRaXfWLzcCfjPIawIvnEf3eJYGlKrleTg==
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker-webextension" "^1.18.8"
