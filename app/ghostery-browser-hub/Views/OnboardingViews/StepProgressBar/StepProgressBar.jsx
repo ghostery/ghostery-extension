@@ -81,7 +81,7 @@ const StepProgressBar = (props) => {
 
 		return (
 			<div className="StepProgressBar__column">
-				<NavLink class="test" to={step.route} onClick={() => logoutIfStepOne(step.id)}>
+				<NavLink to={step.route} onClick={() => logoutIfStepOne(step.id)}>
 					<div className={labelClasses}>{step.label}</div>
 					<div className={stepClasses} />
 				</NavLink>
