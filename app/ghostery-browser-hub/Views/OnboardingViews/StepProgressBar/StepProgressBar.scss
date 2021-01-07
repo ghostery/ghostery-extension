@@ -12,6 +12,7 @@
  */
 
 .StepProgressBarContainer {
+	margin-top: 40px;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -19,6 +20,7 @@
   	margin: auto;
   	padding-top: 10px;
 }
+
 .StepProgressBar__Step {
 	height: 34px;
 	width: 32px;
@@ -78,7 +80,7 @@
 	width: 38px;
 	font-size: 12px;
 	color: $tundora;
-	&.currentStep {
+	&.current {
 		font-weight: 700;
 	}
 }

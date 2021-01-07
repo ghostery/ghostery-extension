@@ -12,6 +12,7 @@
  */
 
 import React, { Component, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
@@ -117,24 +118,34 @@ class ChooseDefaultSearchView extends Component {
 		const { chosenSearch } = this.state;
 
 		return (
-			<div className="ChooseSearchView__container">
-				<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
-				<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
-				<div className="ChooseSearchView__optionsContainer">
-					{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY, 'Ghostery Search')}
-					{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE, 'StartPage')}
-					{this.renderOptionContainer(chosenSearch, SEARCH_BING, 'Bing')}
-					<div className="ChooseSearchView__optionContainer">Choose Your Own</div>
-					{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
+			<Fragment>
+				<div className="ChooseSearchView__relativeContainer">
+					<div className="ChooseSearchView__backContainer">
+						<span className="ChooseSearchView__caret left" />
+						<NavLink to="/onboarding/2">
+							<span className="ChooseSearchView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+						</NavLink>
+					</div>
 				</div>
-				<button
-					className="ChooseSearchView__nextButton"
-					type="button"
-					onClick={() => this.handleSubmit()}
-				>
-					{t('next')}
-				</button>
-			</div>
+				<div className="ChooseSearchView__container">
+					<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
+					<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
+					<div className="ChooseSearchView__optionsContainer">
+						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY, 'Ghostery Search')}
+						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE, 'StartPage')}
+						{this.renderOptionContainer(chosenSearch, SEARCH_BING, 'Bing')}
+						<div className="ChooseSearchView__optionContainer">Choose Your Own</div>
+						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
+					</div>
+					<button
+						className="ChooseSearchView__nextButton"
+						type="button"
+						onClick={() => this.handleSubmit()}
+					>
+						{t('next')}
+					</button>
+				</div>
+			</Fragment>
 		);
 	}
 

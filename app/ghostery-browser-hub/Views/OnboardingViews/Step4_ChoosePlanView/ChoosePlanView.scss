@@ -1,7 +1,35 @@
 $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow to next line
 
 .ChoosePlanView {
+	margin: 45px auto 0 auto;
 	padding-bottom: 20px;
+}
+.ChoosePlanView__relativeContainer {
+	position: relative;
+}
+.ChoosePlanView__caret.left {
+	margin: 7px auto 0 auto;
+    height: 10px;
+    width: 10px;
+    border-left: 2px solid $tundora;
+    border-top: 2px solid $tundora;
+	cursor: pointer;
+	transform: rotate(-45deg);
+}
+.ChoosePlanView__backContainer {
+	position: absolute;
+	display: flex;
+	width: 68px;
+	margin-top: 52px;
+	@include breakpoint(small down) {
+		position: relative;
+	}
+	.ChoosePlanView__back {
+		margin-top: 8px;
+		font-size: 16px;
+		color: $tundora;
+		text-decoration: underline;
+	}
 }
 .ChoosePlanView__yourPrivacyPlan {
 	margin: auto;
@@ -259,6 +287,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__price {
 	min-height: 85px;
 	margin-bottom: rem-calc(20);
+	font-size: 36px;
 	&-blue {
 		color: $price-blue;
 	}
@@ -279,6 +308,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 			}
 		}
 		&.sub-text {
+			font-size: 12px;
 			font-weight: 500;
 		}
 	}

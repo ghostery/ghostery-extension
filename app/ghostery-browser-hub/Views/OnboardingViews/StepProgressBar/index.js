@@ -12,5 +12,11 @@
  */
 
 import StepProgressBar from './StepProgressBar';
+import { buildReduxHOC } from '../../../../shared-hub/utils';
+import { logout } from '../../../../Account/AccountActions';
 
-export default StepProgressBar;
+const actionCreators = {
+	logout
+};
+
+export default buildReduxHOC(null, actionCreators, StepProgressBar);

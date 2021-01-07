@@ -9,6 +9,39 @@
   margin: 45px auto 83px auto;
 }
 
+.ChooseSearchView__relativeContainer {
+	position: relative;
+	@include breakpoint(small down) {
+		margin-left: 0;
+	}
+}
+.ChooseSearchView__caret.left {
+	margin: 7px auto 0 auto;
+	height: 10px;
+  width: 10px;
+  border-left: 2px solid $tundora;
+	border-top: 2px solid $tundora;
+	cursor: pointer;
+	transform: rotate(-45deg);
+}
+
+.ChooseSearchView__backContainer {
+	position: absolute;
+	display: flex;
+	width: 68px;
+	margin-top: 61px;
+	@include breakpoint(small down) {
+		margin-top: 20px;
+	}
+	.ChooseSearchView__back {
+		margin-top: 8px;
+		font-size: 16px;
+		color: $tundora;
+		text-decoration: underline;
+	}
+}
+
+
 .ChooseSearchView__title {
   font-size: 24px;
   font-weight: 500;
