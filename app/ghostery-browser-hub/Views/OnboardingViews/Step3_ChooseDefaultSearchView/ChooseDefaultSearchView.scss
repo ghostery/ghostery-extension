@@ -79,3 +79,14 @@
   line-height: 2.05;
   cursor: pointer;
 }
+
+.ChooseSearchViewModal__content {
+  position: relative;
+  width: 901px;
+  min-height: 632px;
+  padding-top: 45px;
+  color: #4a4a4a;
+  background-color: #f7f7f7;
+  border: 1px solid $tundora;
+  z-index: 10;
+}
