@@ -3,6 +3,8 @@
 + Integrate new v4 tracker databases (#616)
 + Integrate tracker meta data from whotracks.me (#616)
 + Migrate from Cliqz browser-core to ghostery-common (#644)
++ Allow user to disable automatic updates for Anti-Tracking and Ad-Blocker (#646, #561)
++ New on-boarding hub for Ghostery Browser
 
 ### GHOSTERY 8.5.4 (November 20, 2020)
 
