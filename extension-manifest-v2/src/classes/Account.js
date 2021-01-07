@@ -142,6 +142,8 @@ class Account {
 		})
 	)
 
+	refreshToken = () => api.refreshToken()
+
 	// @TODO a 404 here should trigger a logout
 	getUser = () => (
 		this._getUserID()

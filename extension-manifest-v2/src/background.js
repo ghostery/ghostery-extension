@@ -40,6 +40,7 @@ import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import account from './classes/Account';
 import promoModals from './classes/PromoModals';
+import SearchMessager from './classes/SearchMessager';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -1623,6 +1624,18 @@ function initializeGhosteryModules() {
 }
 
 /**
+ * Initialize Search Message Handler on Ghostery Browser.
+ * @memberOf Background
+ */
+async function initializeSearchMessageHandler() {
+	await globals.BROWSER_INFO_READY; // ensure browser info is set
+	if (BROWSER_INFO.name === 'ghostery_desktop') {
+		const sm = new SearchMessager();
+		sm.init();
+	}
+}
+
+/**
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
@@ -1633,6 +1646,7 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
+		initializeSearchMessageHandler();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			account.migrate()
 				.then(() => {
