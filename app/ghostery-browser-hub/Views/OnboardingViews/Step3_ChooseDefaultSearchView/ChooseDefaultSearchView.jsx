@@ -92,22 +92,24 @@ class ChooseDefaultSearchView extends Component {
 
 		return (
 			<Modal show>
-				<div className="ChooseSearchView__confirmationModalDescription">
-					Modal of type
-					{searchBeingConsidered}
+				<div className="ChooseSearchViewModal__content">
+					<div className="ChooseSearchView__confirmationModalDescription">
+						Modal of type
+						{searchBeingConsidered}
+					</div>
+					<button
+						onClick={this.cancelSelection}
+						type="button"
+					>
+						Cancel
+					</button>
+					<button
+						onClick={this.updateSelection}
+						type="button"
+					>
+						Confirm
+					</button>
 				</div>
-				<button
-					onClick={this.cancelSelection}
-					type="button"
-				>
-					Cancel
-				</button>
-				<button
-					onClick={this.updateSelection}
-					type="button"
-				>
-					Confirm
-				</button>
 			</Modal>
 		);
 	}
@@ -150,9 +152,12 @@ class ChooseDefaultSearchView extends Component {
 	render() {
 		const { modalActive } = this.state;
 
-		if (modalActive) return (this.renderConfirmationModal());
-
-		return (this.renderSearchOptions());
+		return (
+			<div className="full-height">
+				{modalActive && this.renderConfirmationModal()}
+				{!modalActive && this.renderSearchOptions()}
+			</div>
+		);
 	}
 }
 
