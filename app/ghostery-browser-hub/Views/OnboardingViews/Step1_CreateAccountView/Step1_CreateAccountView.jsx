@@ -78,8 +78,8 @@ const Step1_CreateAccountView = (props) => {
 
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
-			<div className="columns small-10 medium-5" />
-			<div className="columns small-10 medium-5">
+			<div className="columns small-10 medium-6" />
+			<div className="columns small-10 medium-6">
 				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
 					<span>{t('ghostery_browser_hub_onboarding_skip')}</span>
 				</NavLink>
@@ -108,12 +108,12 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_browser_hub_onboarding_sync_settings') }</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
 				)}
 				{view === SIGN_IN && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-5" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
 				)}
-				<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-5" />
+				<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" />
 			</div>
 			{view === CREATE_ACCOUNT ? (
 				<Fragment>

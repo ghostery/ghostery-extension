@@ -30,9 +30,6 @@ html, body, #root {
 	overflow-x: hidden;
 }
 @media only screen and (max-width: 740px)  {
-	.App__mainContent {
-		margin-left: 54px;
-	}
 	.android-relative {position: relative;}
 }
 
@@ -70,6 +67,7 @@ html, body, #root {
 @import './partials/radio_button';
 
 // Imports from ../ghostery-browser-hub directory
+@import '../ghostery-browser-hub/Views/OnboardingView/OnboardingView.scss';
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step0_WelcomeView/WelcomeView.scss';
 @import '../ghostery-browser-hub/Views/OnboardingViews/StepProgressbar/StepProgressbar.scss';
 @import '../ghostery-browser-hub/Views/OnboardingViews/Step1_CreateAccountView/Step1_CreateAccountView.scss';
@@ -82,5 +80,6 @@ html, body, #root {
 
 // Imports from ../shared-components directory
 @import '../shared-components/ToastMessage/ToastMessage.scss';
+@import '../shared-components/Modal/Modal.scss';
 @import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';
 @import '../shared-components/Tooltip/Tooltip.scss';
