@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/Step1_CreateAccountForm component Shallow snapshot tests rendered with Enzyme the sad path of the component with errors 1`] = `ShallowWrapper {}`;
+
+exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with react-test-renderer create account view is rendered correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="Step1_CreateAccountForm--addPaddingTop row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-6"
+    >
+      <label
+        className="Step1_CreateAccountForm__inputLabel"
+        htmlFor="create-account-email"
+      >
+        email_colon
+      </label>
+      <input
+        autoComplete="off"
+        className="Step1_CreateAccountForm__inputBox"
+        id="create-account-email"
+        name="email"
+        onChange={[Function]}
+        pattern=".{1,}"
+        placeholder="example@mail.com"
+        type="text"
+        value="test@example.com"
+      />
+    </div>
+    <div
+      className="columns small-10 medium-6"
+    >
+      <label
+        className="Step1_CreateAccountForm__inputLabel"
+        htmlFor="create-account-confirmEmail"
+      >
+        confirm_email_colon
+      </label>
+      <input
+        autoComplete="off"
+        className="Step1_CreateAccountForm__inputBox"
+        id="create-account-confirmEmail"
+        name="confirmEmail"
+        onChange={[Function]}
+        pattern=".{1,}"
+        type="text"
+        value="test@example.com"
+      />
+    </div>
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-6"
+    >
+      <label
+        className="Step1_CreateAccountForm__inputLabel"
+        htmlFor="create-account-firstName"
+      >
+        hub_create_account_label_first_name
+      </label>
+      <input
+        autoComplete="off"
+        className="Step1_CreateAccountForm__inputBox"
+        id="create-account-firstName"
+        name="firstName"
+        onChange={[Function]}
+        pattern=".{1,}"
+        type="text"
+        value="First"
+      />
+    </div>
+    <div
+      className="columns small-10 medium-6"
+    >
+      <label
+        className="Step1_CreateAccountForm__inputLabel"
+        htmlFor="create-account-lastName"
+      >
+        hub_create_account_label_email_last_name
+      </label>
+      <input
+        autoComplete="off"
+        className="Step1_CreateAccountForm__inputBox"
+        id="create-account-lastName"
+        name="lastName"
+        onChange={[Function]}
+        pattern=".{1,}"
+        type="text"
+        value="Last"
+      />
+    </div>
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-6"
+    >
+      <label
+        className="Step1_CreateAccountForm__inputLabel"
+        htmlFor="create-account-password"
+      >
+        password_colon
+      </label>
+      <input
+        autoComplete="off"
+        className="Step1_CreateAccountForm__inputBox"
+        id="create-account-password"
+        name="password"
+        onChange={[Function]}
+        pattern=".{1,}"
+        type="password"
+        value=""
+      />
+    </div>
+    <div
+      className="columns small-10 medium-6"
+    >
+      <label
+        className="Step1_CreateAccountForm__inputLabel"
+        htmlFor="create-account-password"
+      >
+        confirm_password_colon
+      </label>
+      <input
+        autoComplete="off"
+        className="Step1_CreateAccountForm__inputBox"
+        id="create-account-password"
+        name="confirmPassword"
+        onChange={[Function]}
+        pattern=".{1,}"
+        type="password"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-8"
+    >
+      <div
+        className="Step1_CreateAccountForm__checkboxContainer Step1_CreateAccountForm--marginBottom flex-container"
+      >
+        <div />
+        <span
+          className="Step1_CreateAccountForm__promoString"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "ghostery_browser_hub_onboarding_send_me Ghostery ghostery_browser_hub_onboarding_updates_and_promotions",
+            }
+          }
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <div
+      className="columns small-10 medium-2"
+    />
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-8"
+    >
+      <div
+        className="Step1_CreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container"
+      >
+        <div />
+        <span
+          className="Step1_CreateAccountForm__legalConsentCheckedLabel"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "create_account_form_legal_consent_checkbox_label",
+            }
+          }
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <div
+      className="columns small-10 medium-2"
+    />
+  </div>
+  <div
+    className="Step1_CreateAccountForm__ctaButtonContainer"
+  >
+    <button
+      className="Step1_CreateAccountForm__ctaButton"
+      type="submit"
+    >
+      create_account
+    </button>
+  </div>
+</form>
+`;

@@ -23,7 +23,7 @@ const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof GhosteryBrowserHubViews
  */
-const Step1_CreateAccountForm = (props) => {
+export const Step1_CreateAccountForm = (props) => {
 	const {
 		email,
 		emailError,
