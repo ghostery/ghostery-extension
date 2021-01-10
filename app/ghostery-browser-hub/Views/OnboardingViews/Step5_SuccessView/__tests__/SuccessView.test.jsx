@@ -13,6 +13,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { MemoryRouter } from 'react-router';
 import SuccessView from '../SuccessView';
 
 const noop = () => {};
@@ -26,7 +27,9 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step0_SuccessView/Succe
 				}
 			};
 			const component = renderer.create(
-				<SuccessView  {...initialState} />
+				<MemoryRouter>
+					<SuccessView  {...initialState} />
+				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});

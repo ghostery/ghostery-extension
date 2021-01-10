@@ -1,29 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app/ghostery-browser-hub/Views/OnboardingViews/Step0_SuccessView/SuccessView.test.jsx Snapshot tests with react-test-renderer Welcome View is rendered correctly 1`] = `
-<div
-  className="SuccessView__container"
->
+exports[`app/ghostery-browser-hub/Views/OnboardingViews/Step0_SuccessView/SuccessView.test.jsx Snapshot tests with react-test-renderer Success View is rendered correctly 1`] = `
+Array [
   <div
-    className="SuccessView__title"
+    className="SuccessView__relativeContainer"
   >
-    ghostery_browser_hub_onboarding_youve_successfully_set_up_your_browser
-  </div>
+    <div
+      className="SuccessView__backContainer"
+    >
+      <span
+        className="SuccessView__caret left"
+      />
+      <a
+        aria-current={null}
+        href="/onboarding/4"
+        onClick={[Function]}
+      >
+        <span
+          className="SuccessView__back"
+        >
+          ghostery_browser_hub_onboarding_back
+        </span>
+      </a>
+    </div>
+  </div>,
   <div
-    className="SuccessView__subtitle"
+    className="SuccessView__container"
   >
-    ghostery_browser_hub_onboarding_surf_with_ease
-  </div>
-  <img
-    className="SuccessView__ghosterySuite"
-    src="/app/images/hub/success/ghostery-suite.png"
-  />
-  <button
-    className="SuccessView__ctaButton"
-    onClick={[Function]}
-    type="button"
-  >
-    ghostery_browser_hub_onboarding_lets_search
-  </button>
-</div>
+    <div
+      className="SuccessView__title"
+    >
+      ghostery_browser_hub_onboarding_youve_successfully_set_up_your_browser
+    </div>
+    <div
+      className="SuccessView__subtitle"
+    >
+      ghostery_browser_hub_onboarding_surf_with_ease Ghostery
+    </div>
+    <img
+      className="SuccessView__ghosterySuite"
+      src="/app/images/hub/success/ghostery-suite.png"
+    />
+    <button
+      className="SuccessView__ctaButton"
+      onClick={[Function]}
+      type="button"
+    >
+      ghostery_browser_hub_onboarding_lets_search
+    </button>
+  </div>,
+]
 `;

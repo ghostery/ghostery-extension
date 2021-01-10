@@ -37,7 +37,7 @@ const SuccessView = (props) => {
 
 				<div className="SuccessView__subtitle">{`${t('ghostery_browser_hub_onboarding_surf_with_ease')} Ghostery`}</div>
 				<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
-				<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_browser_hub_onboarding_lets_search')}</button>
+				<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_browser_hub_onboarding_start_browsing')}</button>
 			</div>
 		</Fragment>
 	);

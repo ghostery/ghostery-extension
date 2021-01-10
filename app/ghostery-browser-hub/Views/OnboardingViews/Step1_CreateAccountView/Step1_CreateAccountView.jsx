@@ -162,4 +162,4 @@ Step1_CreateAccountView.defaultProps = {
 	},
 };
 
-export default Step1_CreateAccountView;
+export default Step1_CreateAccountForm;
