@@ -53,7 +53,7 @@ const renderFAQListItem = (icon, label, description) => (
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof GhosteryBrowserHubViews
  */
-const Step1_CreateAccountView = (props) => {
+export const Step1_CreateAccountView = (props) => {
 	const { user, actions } = props;
 	const { setSetupStep } = actions;
 	const email = user && user.email;
@@ -162,4 +162,4 @@ Step1_CreateAccountView.defaultProps = {
 	},
 };
 
-export default Step1_CreateAccountForm;
+export default Step1_CreateAccountView;

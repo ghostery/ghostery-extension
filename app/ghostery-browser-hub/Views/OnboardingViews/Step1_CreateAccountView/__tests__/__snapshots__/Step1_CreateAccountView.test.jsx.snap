@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/Step1_CreateAccountView component Snapshot tests with react-test-renderer Create Account Form view is rendered correctly 1`] = `
+<div
+  className="Step1_CreateAccountView"
+>
+  <div
+    className="Step1_CreateAccountView__title"
+  >
+    ghostery_browser_hub_onboarding_create_a_ghostery_account
+  </div>
+  <div
+    className="Step1_CreateAccountView__subtitle"
+  >
+    ghostery_browser_hub_onboarding_sync_settings
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6"
+      onClick={[Function]}
+    >
+      ghostery_browser_hub_onboarding_already_have_account
+    </div>
+    <div
+      className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6"
+    />
+  </div>
+  <div />
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-6"
+    />
+    <div
+      className="columns small-10 medium-6"
+    >
+      <a
+        aria-current={null}
+        className="Step1_CreateAccountView__skip"
+        href="/onboarding/2"
+        onClick={[Function]}
+      >
+        <span>
+          ghostery_browser_hub_onboarding_skip
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    className="Step1_CreateAccountView__learnMoreContainer"
+    onClick={[Function]}
+  >
+    <div
+      className="Step1_CreateAccountView__learnMore"
+    >
+      ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously
+    </div>
+  </div>
+  <div
+    className="Step1_CreateAccountView__arrow down"
+    onClick={[Function]}
+  />
+  <div
+    className="Step1_CreateAccountView__FAQContainer"
+  />
+</div>
+`;
+
+exports[`app/hub/Views/Step1_CreateAccountView component Snapshot tests with react-test-renderer Login Form view is rendered correctly 1`] = `
+<div
+  className="Step1_CreateAccountView"
+>
+  <div
+    className="Step1_CreateAccountView__title"
+  >
+    ghostery_browser_hub_onboarding_create_a_ghostery_account
+  </div>
+  <div
+    className="Step1_CreateAccountView__subtitle"
+  >
+    ghostery_browser_hub_onboarding_sync_settings
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6"
+      onClick={[Function]}
+    >
+      ghostery_browser_hub_onboarding_already_have_account
+    </div>
+    <div
+      className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6"
+    />
+  </div>
+  <div />
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="columns small-10 medium-6"
+    />
+    <div
+      className="columns small-10 medium-6"
+    >
+      <a
+        aria-current={null}
+        className="Step1_CreateAccountView__skip"
+        href="/onboarding/2"
+        onClick={[Function]}
+      >
+        <span>
+          ghostery_browser_hub_onboarding_skip
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    className="Step1_CreateAccountView__learnMoreContainer"
+    onClick={[Function]}
+  >
+    <div
+      className="Step1_CreateAccountView__learnMore"
+    >
+      ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously
+    </div>
+  </div>
+  <div
+    className="Step1_CreateAccountView__arrow down"
+    onClick={[Function]}
+  />
+  <div
+    className="Step1_CreateAccountView__FAQContainer"
+  />
+</div>
+`;
