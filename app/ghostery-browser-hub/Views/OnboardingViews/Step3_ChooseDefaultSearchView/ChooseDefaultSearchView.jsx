@@ -72,11 +72,11 @@ class ChooseDefaultSearchView extends Component {
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
 
 		return (
-			<div className={containerClasses}>
+			<div onClick={() => this.triggerConfirmationModal(optionName)} className={containerClasses}>
 				<div className="ChooseSearchView__radioButtonContainer">
 					<RadioButton
 						checked={selected}
-						handleClick={() => this.triggerConfirmationModal(optionName)}
+						handleClick={() => {}}
 						altDesign
 					/>
 				</div>
