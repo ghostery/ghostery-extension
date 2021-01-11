@@ -46,6 +46,8 @@ class ChooseDefaultSearchView extends Component {
 
 	cancelSelection = () => this.setState({ modalActive: false, searchBeingConsidered: null });
 
+	handleInputChange = event => this.setState({ customSearchURL: event.target.value });
+
 	triggerConfirmationModal = selection => this.setState({ modalActive: true, searchBeingConsidered: selection });
 
 	handleSubmit = () => {
@@ -58,6 +60,8 @@ class ChooseDefaultSearchView extends Component {
 			search: chosenSearch,
 			customSearchURL,
 		};
+
+		console.log('Cross-extension payload: ', payload);
 
 		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 			// TODO handle errors if needed
@@ -84,6 +88,25 @@ class ChooseDefaultSearchView extends Component {
 					{optionDesc}
 				</div>
 			</div>
+		);
+	}
+
+	renderCustomURLContainer = () => {
+		const { chosenSearch, customSearchURL } = this.state;
+
+		const selected = (chosenSearch === SEARCH_CUSTOM);
+		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
+
+		return (
+			<div onClick={() => this.setState({ chosenSearch: SEARCH_CUSTOM })} className={containerClasses}>
+				<p>Choose Your Own</p>
+				<input
+					onChange={this.handleInputChange}
+					value={customSearchURL}
+					placeholder="Enter custom search URL"
+				/>
+			</div>
+
 		);
 	}
 
@@ -134,7 +157,7 @@ class ChooseDefaultSearchView extends Component {
 						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY, 'Ghostery Search')}
 						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE, 'StartPage')}
 						{this.renderOptionContainer(chosenSearch, SEARCH_BING, 'Bing')}
-						<div className="ChooseSearchView__optionContainer">Choose Your Own</div>
+						{this.renderCustomURLContainer()}
 						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
 					</div>
 					<button
