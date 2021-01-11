@@ -93,6 +93,31 @@
   width: 75%;
 }
 
+.ChooseSearchView__customURLTitle {
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.ChooseSearchView__customURLSubtitle {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.ChooseSearchView__customURLInput {
+  border: none;
+  box-shadow: none;
+  border-radius: 0px;
+  border-bottom: 1px solid $dark-silver;
+
+  &:focus {
+	border: none;
+	box-shadow: none;
+	border-radius: 0px;
+	border-bottom: 2px solid $tundora;
+  }
+}
+
 .ChooseSearchView__nextButton {
   display: flex;
   justify-content: center;

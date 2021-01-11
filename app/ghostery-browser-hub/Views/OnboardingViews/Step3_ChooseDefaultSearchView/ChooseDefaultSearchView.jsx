@@ -28,6 +28,8 @@ class ChooseDefaultSearchView extends Component {
 	constructor(props) {
 		super(props);
 
+		this.customURLInputRef = React.createRef();
+
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
 			customSearchURL: null,
@@ -39,12 +41,21 @@ class ChooseDefaultSearchView extends Component {
 	updateSelection = () => this.setState(prevState => (
 		{
 			chosenSearch: prevState.searchBeingConsidered,
+			customSearchURL: null,
 			searchBeingConsidered: null,
 			modalActive: false
 		}
 	));
 
 	cancelSelection = () => this.setState({ modalActive: false, searchBeingConsidered: null });
+
+	selectCustom = () => {
+		this.customURLInputRef.current.focus();
+
+		this.setState({
+			chosenSearch: SEARCH_CUSTOM,
+		});
+	}
 
 	handleInputChange = event => this.setState({ customSearchURL: event.target.value });
 
@@ -74,7 +85,7 @@ class ChooseDefaultSearchView extends Component {
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
-	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
+	renderOptionContainer = (chosenSearch, optionName) => {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
 		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase()}.svg`;
@@ -102,13 +113,25 @@ class ChooseDefaultSearchView extends Component {
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
 
 		return (
-			<div onClick={() => this.setState({ chosenSearch: SEARCH_CUSTOM })} className={containerClasses}>
-				<p>Choose Your Own</p>
-				<input
-					onChange={this.handleInputChange}
-					value={customSearchURL}
-					placeholder="Enter custom search URL"
-				/>
+			<div onClick={this.selectCustom} className={containerClasses}>
+				<div className="ChooseSearchView__radioButtonContainer">
+					<RadioButton
+						checked={selected}
+						handleClick={() => {}}
+						altDesign
+					/>
+				</div>
+				<div className="ChooseSearchView__optionContainerDescription">
+					<p className="ChooseSearchView__customURLTitle">Other</p>
+					<p className="ChooseSearchView__customURLSubtitle">Type in search domain</p>
+					<input
+						ref={this.customURLInputRef}
+						type="text"
+						className="ChooseSearchView__customURLInput"
+						onChange={this.handleInputChange}
+						value={customSearchURL}
+					/>
+				</div>
 			</div>
 
 		);
@@ -158,9 +181,9 @@ class ChooseDefaultSearchView extends Component {
 					<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
 					<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
 					<div className="ChooseSearchView__optionsContainer">
-						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY, 'Ghostery Search')}
-						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE, 'StartPage')}
-						{this.renderOptionContainer(chosenSearch, SEARCH_BING, 'Bing')}
+						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY)}
+						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE)}
+						{this.renderOptionContainer(chosenSearch, SEARCH_BING)}
 						{this.renderCustomURLContainer()}
 						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
 					</div>
