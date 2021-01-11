@@ -13,9 +13,6 @@
 
 import SET_TOAST from '../constants/ToastConstants';
 
-export default function setToast(data) {
-	return {
-		type: SET_TOAST,
-		data,
-	};
-}
+const setToast = data => ({ type: SET_TOAST, data });
+
+export default setToast;

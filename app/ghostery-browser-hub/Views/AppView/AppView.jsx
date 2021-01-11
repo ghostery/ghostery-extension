@@ -21,8 +21,8 @@ import { ToastMessage } from '../../../shared-components';
  * @memberof GhosteryBrowserHubViews
  */
 const AppView = (props) => {
-	const { app, children } = props;
-	const { toastMessage, toastClass } = app;
+	const { toast, children } = props;
+	const { toastMessage, toastClass } = toast;
 
 	/**
 	 * Handle clicking to exit the Toast Message.
@@ -36,9 +36,9 @@ const AppView = (props) => {
 	};
 
 	return (
-		<div className="Bananas__Foster App full-height full-width flex-container">
+		<div className="App full-height full-width flex-container">
 			<div className="App__mainContent full-height full-width">
-				<ToastMessage toastText={toastMessage} toastClass={toastClass} toastExit={exitToast} />
+				{<ToastMessage toastText={toastMessage} toastClass={toastClass} toastExit={exitToast} />}
 				{children}
 			</div>
 		</div>
@@ -49,7 +49,7 @@ AppView.propTypes = {
 	actions: PropTypes.shape({
 		setToast: PropTypes.func.isRequired,
 	}).isRequired,
-	app: PropTypes.shape({
+	toast: PropTypes.shape({
 		toastMessage: PropTypes.string,
 		toastClass: PropTypes.string,
 	}),
@@ -57,7 +57,7 @@ AppView.propTypes = {
 
 // Default props used in the App
 AppView.defaultProps = {
-	app: {
+	toast: {
 		toastMessage: '',
 		toastClass: '',
 	},

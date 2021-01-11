@@ -2414,5 +2414,8 @@
 	},
   	"pick_a_default_search_engine": {
 	  "message": "Pick a default engine for all your searches."
+	},
+  	"ghostery_browser_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Error: Please answer all questions"
 	}
 }

@@ -95,10 +95,11 @@ class BlockSettingsView extends Component {
 			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
 			history.push('/onboarding/3');
 		} else {
-			const { setToast } = this.props;
+			const { actions } = this.props;
+			const { setToast } = actions;
 
 			setToast({
-				toastMessage: t('ghostery_browser_hub_toast_error'),
+				toastMessage: t('ghostery_browser_hub_blocking_settings_view_toast_error_message'),
 				toastClass: 'error'
 			});
 		}

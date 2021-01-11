@@ -63,12 +63,15 @@ class ChooseDefaultSearchView extends Component {
 
 		console.log('Cross-extension payload: ', payload);
 
-		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
-			// TODO handle errors if needed
-			// TODO save user's search setting to redux / background if needed
-			setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
-			history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
-		});
+		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
+		// 	// TODO handle errors if needed
+		// 	// TODO save user's search setting to redux / background if needed
+		// 	setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		// 	history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+		// });
+
+		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
 	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
