@@ -59,18 +59,11 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.ChooseSearchView__radioButtonContainer {
-  padding: 11px;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
 
 .ChooseSearchView__optionContainer {
   display: flex;
   width: 354px;
   height: 125px;
-  padding: 20px;
   margin: 20px;
   border: solid 1px $tundora;
   border-radius: 4px;
@@ -82,6 +75,22 @@
   &:hover {
 	border: solid 4px $ghosty-blue;
   }
+}
+
+.ChooseSearchView__radioButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 25%;
+}
+
+.ChooseSearchView__optionContainerDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
 }
 
 .ChooseSearchView__nextButton {

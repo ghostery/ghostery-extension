@@ -74,6 +74,7 @@ class ChooseDefaultSearchView extends Component {
 	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase()}.svg`;
 
 		return (
 			<div onClick={() => this.triggerConfirmationModal(optionName)} className={containerClasses}>
@@ -85,7 +86,7 @@ class ChooseDefaultSearchView extends Component {
 					/>
 				</div>
 				<div className="ChooseSearchView__optionContainerDescription">
-					{optionDesc}
+					<img src={logoFilename} />
 				</div>
 			</div>
 		);
