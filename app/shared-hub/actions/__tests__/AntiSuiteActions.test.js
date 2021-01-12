@@ -15,39 +15,63 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as utils from '../../utils';
 import * as AntiSuiteActions from '../AntiSuiteActions';
-import { SET_ANTI_TRACKING, SET_AD_BLOCK, SET_SMART_BLOCK } from '../../constants/AntiSuiteConstants';
+import { SET_AD_BLOCK, SET_ANTI_TRACKING, SET_SMART_BLOCK } from '../../constants/AntiSuiteConstants';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 const testData = { test: true };
+
 utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, reject) => {
 	switch (name) {
-		case SET_ANTI_TRACKING: {
+		case 'SET_ANTI_TRACKING': {
 			resolve(testData);
 			break;
 		}
-		case SET_AD_BLOCK: {
-			console.log('going in send Message')
-			resolve(message);
-			break;
-		}
-		case SET_SMART_BLOCK: {
+		case 'SET_AD_BLOCK': {
 			resolve(testData);
 			break;
 		}
-		default: resolve(message);
+		case 'SET_SMART_BLOCK': {
+			resolve(testData);
+			break;
+		}
+		default: resolve(testData);
 	}
 }));
 
-describe('app/hub/Views/OnboardingView/ actions', () => {
-	test('getHomeProps action should return correctly', () => {
+describe('app/shared-hub/actions/AntiSuiteActions', () => {
+	test('setAdBlock action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
 		const data = testData;
 		const expectedPayload = { data, type: SET_AD_BLOCK };
 		return store.dispatch(AntiSuiteActions.setAdBlock()).then(() => {
+			const actions = store.getActions();
+			expect(actions).toEqual([expectedPayload]);
+		});
+	});
+
+	test('setAntiTracking action should return correctly', () => {
+		const initialState = {};
+		const store = mockStore(initialState);
+
+		const data = testData;
+		const expectedPayload = { data, type: SET_ANTI_TRACKING };
+		return store.dispatch(AntiSuiteActions.setAntiTracking()).then(() => {
+			const actions = store.getActions();
+			expect(actions).toEqual([expectedPayload]);
+		});
+	});
+
+	test('setSmartBlock action should return correctly', () => {
+		const initialState = {};
+		const store = mockStore(initialState);
+
+		const data = testData;
+		const expectedPayload = { data, type: SET_SMART_BLOCK };
+		return store.dispatch(AntiSuiteActions.setSmartBlocking()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});

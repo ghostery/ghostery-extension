@@ -26,6 +26,10 @@ import { withRouter } from 'react-router-dom';
 import { log } from '../../../src/utils/common';
 import { sendMessage as importedSM, sendMessageInPromise as importedSMIP } from '../../panel/utils/msg';
 
+// Self import this file so makeDeferredDispatcher can mock the sendMessageInPromise function within the same class
+// eslint-disable-next-line import/no-self-import
+import * as utils from './index';
+
 const sendMessageInPromise = function(name, message) {
 	return importedSMIP(name, message, 'ghostery-hub');
 };
@@ -72,7 +76,7 @@ const makeStoreCreator = function(reducers, middlewares) {
  */
 function makeDeferredDispatcher(action, actionData) {
 	return function(dispatch) {
-		return sendMessageInPromise(action, actionData).then((data) => {
+		return utils.sendMessageInPromise(action, actionData).then((data) => {
 			dispatch({
 				type: action,
 				data,
@@ -113,8 +117,8 @@ function buildReduxHOC(stateKeys, actionCreators, baseComponent) {
 export {
 	buildReduxHOC,
 	makeStoreCreator,
-	makeDeferredDispatcher,
 	log,
 	sendMessage,
-	sendMessageInPromise
+	sendMessageInPromise,
+	makeDeferredDispatcher
 };
