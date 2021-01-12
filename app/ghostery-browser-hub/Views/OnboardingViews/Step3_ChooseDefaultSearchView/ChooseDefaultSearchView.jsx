@@ -141,6 +141,7 @@ class ChooseDefaultSearchView extends Component {
 		return (
 			<Modal show>
 				<div className="ChooseSearchViewModal__content">
+					<img src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
 					<div className="ChooseSearchView__confirmationModalDescription">
 						Modal of type
 						{searchBeingConsidered}

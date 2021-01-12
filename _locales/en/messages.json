@@ -1740,20 +1740,23 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"ghostery_browser_hub_onboarding_install_heading": {
+		"message": "Ghostery Dawn now installing..."
+	},
 	"ghostery_browser_hub_onboarding_page_title": {
-	  "message": "Ghostery Browser Hub - Welcome"
+	  "message": "Ghostery Dawn Hub - Welcome"
 	},
   	"ghostery_browser_hub_onboarding_header_title_login": {
-	  "message": "Ghostery Browser Hub - Login"
+	  "message": "Ghostery Dawn Hub - Login"
 	},
 	"ghostery_browser_hub_onboarding_header_title_block_settings": {
-	  "message": "Ghostery Browser Hub - Block Settings"
+	  "message": "Ghostery Dawn Hub - Block Settings"
 	},
 	"ghostery_browser_hub_onboarding_header_title_search_choice": {
-	  "message": "Ghostery Browser Hub - Search Choice"
+	  "message": "Ghostery Dawn Hub - Search Choice"
 	},
 	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
-	  "message": "Ghostery Browser Hub - Plan Choices"
+	  "message": "Ghostery Dawn Hub - Plan Choices"
 	},
 	"ghostery_browser_hub_onboarding_privacy": {
 		"message": "Privacy"
@@ -1765,7 +1768,7 @@
 		"message": "Plan"
 	},
 	"ghostery_browser_hub_onboarding_welcome": {
-		"message": "Welcome to Ghostery Browser!"
+		"message": "Welcome to Ghostery Dawn!"
 	},
 	"ghostery_browser_hub_onboarding_lets_begin": {
 		"message": "We've centralized online privacy by integrating our signature as well as novel technologies."
