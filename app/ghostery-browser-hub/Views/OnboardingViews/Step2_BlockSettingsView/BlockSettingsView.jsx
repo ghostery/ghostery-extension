@@ -233,7 +233,7 @@ export default BlockSettingsView;
 
 // PropTypes ensure we pass required props of the correct type
 BlockSettingsView.propTypes = {
-	actions: {
+	actions: PropTypes.shape({
 		logout: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
@@ -241,19 +241,5 @@ BlockSettingsView.propTypes = {
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setToast: PropTypes.func.isRequired,
 		setSetupStep: PropTypes.func.isRequired,
-	}
-};
-
-const noop = () => {};
-BlockSettingsView.defaultProps = {
-	actions: {
-		logout: noop,
-		setAntiTracking: noop,
-		setAdBlock: noop,
-		setSmartBlocking: noop,
-		setBlockingPolicy: noop,
-		setToast: noop,
-		setSetupStep: noop,
-
-	}
+	}).isRequired,
 };

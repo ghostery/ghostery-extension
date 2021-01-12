@@ -25,6 +25,7 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView
 		test('BlockSettings View is rendered correctly', () => {
 			const initialState = {
 				actions: {
+					logout: noop,
 					setAntiTracking: noop,
 					setAdBlock: noop,
 					setSmartBlocking: noop,
@@ -46,6 +47,7 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView
 		test('BlockSettings View happy path', () => {
 			const initialState = {
 				actions: {
+					logout: noop,
 					setAntiTracking: jest.fn(),
 					setAdBlock: jest.fn(),
 					setSmartBlocking: jest.fn(),

@@ -6,8 +6,6 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProg
 
 exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 2 1`] = `ShallowWrapper {}`;
 
-exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 3 1`] = `ShallowWrapper {}`;
-
 exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 4 1`] = `ShallowWrapper {}`;
 
 exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 5 1`] = `ShallowWrapper {}`;

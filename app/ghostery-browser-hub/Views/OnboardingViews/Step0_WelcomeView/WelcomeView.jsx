@@ -40,14 +40,7 @@ export default WelcomeView;
 
 // PropTypes ensure we pass required props of the correct type
 WelcomeView.propTypes = {
-	actions: {
+	actions: PropTypes.shape({
 		setSetupStep: PropTypes.func.isRequired
-	}
-};
-
-const noop = () => {};
-WelcomeView.defaultProps = {
-	actions: {
-		setSetupStep: noop
-	}
+	}).isRequired,
 };
