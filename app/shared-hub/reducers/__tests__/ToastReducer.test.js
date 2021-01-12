@@ -16,7 +16,7 @@ import ToastReducer from '../ToastReducer';
 import SET_TOAST from '../../constants/ToastConstants';
 
 const initialState = Immutable({
-	app: {}
+	toast: {}
 });
 
 describe('app/shared-hub/reducers/ToastReducer', () => {
@@ -31,9 +31,9 @@ describe('app/shared-hub/reducers/ToastReducer', () => {
 		};
 		const action = { data, type: SET_TOAST };
 
-		const updatedToastReducerState = Immutable.merge(initialState.app, data);
+		const updatedToastReducerState = Immutable.merge(initialState.toast, data);
 		expect(ToastReducer(initialState, action)).toEqual({
-			app: updatedToastReducerState
+			toast: updatedToastReducerState
 		});
 	});
 });
