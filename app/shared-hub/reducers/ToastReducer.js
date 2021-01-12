@@ -21,10 +21,10 @@ function ToastReducer(state = initialState, action) {
 			const { toastMessage, toastClass } = action.data;
 			return {
 				...state,
-				app: {
+				toast: {
 					toastMessage,
-					toastClass
-				}
+					toastClass,
+				},
 			};
 		}
 		default: return state;

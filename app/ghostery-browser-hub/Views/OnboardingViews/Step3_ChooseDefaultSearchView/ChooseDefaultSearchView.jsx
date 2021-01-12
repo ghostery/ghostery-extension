@@ -28,6 +28,8 @@ class ChooseDefaultSearchView extends Component {
 	constructor(props) {
 		super(props);
 
+		this.customURLInputRef = React.createRef();
+
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
 			customSearchURL: null,
@@ -39,12 +41,23 @@ class ChooseDefaultSearchView extends Component {
 	updateSelection = () => this.setState(prevState => (
 		{
 			chosenSearch: prevState.searchBeingConsidered,
+			customSearchURL: null,
 			searchBeingConsidered: null,
 			modalActive: false
 		}
 	));
 
 	cancelSelection = () => this.setState({ modalActive: false, searchBeingConsidered: null });
+
+	selectCustom = () => {
+		this.customURLInputRef.current.focus();
+
+		this.setState({
+			chosenSearch: SEARCH_CUSTOM,
+		});
+	}
+
+	handleInputChange = event => this.setState({ customSearchURL: event.target.value });
 
 	triggerConfirmationModal = selection => this.setState({ modalActive: true, searchBeingConsidered: selection });
 
@@ -59,31 +72,68 @@ class ChooseDefaultSearchView extends Component {
 			customSearchURL,
 		};
 
-		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
-			// TODO handle errors if needed
-			// TODO save user's search setting to redux / background if needed
-			setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
-			history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
-		});
+		console.log('Cross-extension payload: ', payload);
+
+		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
+		// 	// TODO handle errors if needed
+		// 	// TODO save user's search setting to redux / background if needed
+		// 	setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		// 	history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
+		// });
+
+		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
-	renderOptionContainer = (chosenSearch, optionName, optionDesc) => {
+	renderOptionContainer = (chosenSearch, optionName) => {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase()}.svg`;
 
 		return (
-			<div className={containerClasses}>
+			<div onClick={() => this.triggerConfirmationModal(optionName)} className={containerClasses}>
 				<div className="ChooseSearchView__radioButtonContainer">
 					<RadioButton
 						checked={selected}
-						handleClick={() => this.triggerConfirmationModal(optionName)}
+						handleClick={() => {}}
 						altDesign
 					/>
 				</div>
 				<div className="ChooseSearchView__optionContainerDescription">
-					{optionDesc}
+					<img src={logoFilename} />
 				</div>
 			</div>
+		);
+	}
+
+	renderCustomURLContainer = () => {
+		const { chosenSearch, customSearchURL } = this.state;
+
+		const selected = (chosenSearch === SEARCH_CUSTOM);
+		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
+
+		return (
+			<div onClick={this.selectCustom} className={containerClasses}>
+				<div className="ChooseSearchView__radioButtonContainer">
+					<RadioButton
+						checked={selected}
+						handleClick={() => {}}
+						altDesign
+					/>
+				</div>
+				<div className="ChooseSearchView__optionContainerDescription">
+					<p className="ChooseSearchView__customURLTitle">Other</p>
+					<p className="ChooseSearchView__customURLSubtitle">Type in search domain</p>
+					<input
+						ref={this.customURLInputRef}
+						type="text"
+						className="ChooseSearchView__customURLInput"
+						onChange={this.handleInputChange}
+						value={customSearchURL}
+					/>
+				</div>
+			</div>
+
 		);
 	}
 
@@ -131,10 +181,10 @@ class ChooseDefaultSearchView extends Component {
 					<div className="ChooseSearchView__title">{t('choose_your_default_search')}</div>
 					<div className="ChooseSearchView__subtitle">{t('pick_a_default_search_engine')}</div>
 					<div className="ChooseSearchView__optionsContainer">
-						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY, 'Ghostery Search')}
-						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE, 'StartPage')}
-						{this.renderOptionContainer(chosenSearch, SEARCH_BING, 'Bing')}
-						<div className="ChooseSearchView__optionContainer">Choose Your Own</div>
+						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY)}
+						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE)}
+						{this.renderOptionContainer(chosenSearch, SEARCH_BING)}
+						{this.renderCustomURLContainer()}
 						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
 					</div>
 					<button

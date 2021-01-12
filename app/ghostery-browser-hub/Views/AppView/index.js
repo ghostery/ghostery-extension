@@ -16,4 +16,4 @@ import { buildReduxHOC } from '../../../shared-hub/utils';
 import AppView from './AppView';
 import setToast from '../../../shared-hub/actions/ToastActions';
 
-export default buildReduxHOC(['app'], { setToast }, AppView);
+export default buildReduxHOC(['toast'], { setToast }, AppView);

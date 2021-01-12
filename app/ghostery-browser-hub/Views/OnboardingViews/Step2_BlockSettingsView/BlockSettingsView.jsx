@@ -96,10 +96,11 @@ class BlockSettingsView extends Component {
 			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
 			history.push('/onboarding/3');
 		} else {
-			const { setToast } = this.props;
+			const { actions } = this.props;
+			const { setToast } = actions;
 
 			setToast({
-				toastMessage: t('ghostery_browser_hub_toast_error'),
+				toastMessage: t('ghostery_browser_hub_blocking_settings_view_toast_error_message'),
 				toastClass: 'error'
 			});
 		}
@@ -151,7 +152,7 @@ class BlockSettingsView extends Component {
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_browser_hub_onboarding_question_kinds_of_trackers')}
 									<div className="BlockSettingsView__infoIcon g-tooltip">
-										<Tooltip header={t('ghostery_browser_hub_onboarding_info_blocking_all')} position="top" isOnboardingHub />
+										<Tooltip header={t('ghostery_browser_hub_onboarding_info_blocking_all')} position="top" delay="300" isOnboardingHub />
 									</div>
 								</div>
 								<div className="BlockSettingsView_answerBlock">
@@ -176,7 +177,7 @@ class BlockSettingsView extends Component {
 									<div className="BlockSettingsView_questionBlock">
 										{t('ghostery_browser_hub_onboarding_question_anti_tracking')}
 										<div className="BlockSettingsView__infoIcon g-tooltip">
-											<Tooltip header={t('ghostery_browser_hub_onboarding_info_anti_tracking')} position="top" isOnboardingHub />
+											<Tooltip header={t('ghostery_browser_hub_onboarding_info_anti_tracking')} position="top" delay="300" isOnboardingHub />
 										</div>
 									</div>
 								</li>
@@ -196,7 +197,7 @@ class BlockSettingsView extends Component {
 									<div className="BlockSettingsView_questionBlock">
 										{t('ghostery_browser_hub_onboarding_question_smart_browsing')}
 										<div className="BlockSettingsView__infoIcon g-tooltip">
-											<Tooltip header={t('ghostery_browser_hub_onboarding_info_smart_browsing')} position="top" isOnboardingHub />
+											<Tooltip header={t('ghostery_browser_hub_onboarding_info_smart_browsing')} position="top" delay="300" isOnboardingHub />
 										</div>
 									</div>
 								</li>

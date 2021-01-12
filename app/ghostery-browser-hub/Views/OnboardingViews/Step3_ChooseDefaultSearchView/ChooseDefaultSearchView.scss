@@ -59,18 +59,11 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.ChooseSearchView__radioButtonContainer {
-  padding: 11px;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
 
 .ChooseSearchView__optionContainer {
   display: flex;
   width: 354px;
   height: 125px;
-  padding: 20px;
   margin: 20px;
   border: solid 1px $tundora;
   border-radius: 4px;
@@ -84,11 +77,55 @@
   }
 }
 
+.ChooseSearchView__radioButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 25%;
+}
+
+.ChooseSearchView__optionContainerDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+}
+
+.ChooseSearchView__customURLTitle {
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.ChooseSearchView__customURLSubtitle {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.ChooseSearchView__customURLInput {
+  border: none;
+  box-shadow: none;
+  border-radius: 0px;
+  border-bottom: 1px solid $dark-silver;
+  width: 70%;
+  margin-bottom: 0;
+
+  &:focus {
+	border: none;
+	box-shadow: none;
+	border-radius: 0px;
+	border-bottom: 2px solid $tundora;
+  }
+}
+
 .ChooseSearchView__nextButton {
   display: flex;
   justify-content: center;
   height: 44px;
   width: 162px;
+  cursor: pointer;
   padding: 7.7px 14px;
   line-height: 22px;
   background: linear-gradient(
