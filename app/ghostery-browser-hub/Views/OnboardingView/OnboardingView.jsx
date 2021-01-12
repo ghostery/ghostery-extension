@@ -50,7 +50,7 @@ const OnboardingView = (props) => {
 // PropTypes ensure we pass required props of the correct type
 OnboardingView.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({
-		index: PropTypes.number.isRequired,
+		index: PropTypes.string.isRequired,
 		path: PropTypes.string.isRequired,
 		bodyComponents: PropTypes.arrayOf(PropTypes.elementType.isRequired).isRequired,
 	})).isRequired,
