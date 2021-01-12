@@ -309,6 +309,11 @@ class ChoosePlanView extends React.Component {
 					{didNotSelectGhosterySearch && isBasic && (
 						<Fragment>
 							{searchPromo()}
+							{/* TODO: For the CTA button below,
+								1. If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
+									and move them to Step 5 if signed in
+								2. If user is signed out, clicking this should take them to Step 4b (linked)
+							*/}
 							<div className="ChoosePlanView__searchCTAButton">{t('ghostery_browser_hub_onboarding_start_trial')}</div>
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_browser_hub_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
