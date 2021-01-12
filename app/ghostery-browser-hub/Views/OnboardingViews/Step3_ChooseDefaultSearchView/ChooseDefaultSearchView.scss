@@ -90,7 +90,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 75%;
+	width: 75%;
+	padding-right: 15%;
 }
 
 .ChooseSearchView__customURLTitle {
@@ -154,7 +155,7 @@
   position: relative;
   width: 901px;
   min-height: 632px;
-  padding-top: 45px;
+  padding: 20px;
   color: #4a4a4a;
   background-color: #f7f7f7;
   border: 1px solid $tundora;
