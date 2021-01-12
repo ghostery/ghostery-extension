@@ -72,8 +72,6 @@ class ChooseDefaultSearchView extends Component {
 			customSearchURL,
 		};
 
-		console.log('Cross-extension payload: ', payload);
-
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 		// 	// TODO handle errors if needed
 		// 	// TODO save user's search setting to redux / background if needed
