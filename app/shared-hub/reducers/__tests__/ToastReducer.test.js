@@ -26,14 +26,12 @@ describe('app/shared-hub/reducers/ToastReducer', () => {
 
 	test('reducer correctly handles SET_TOAST', () => {
 		const data = {
-			toastMessage: 'hey',
+			toastMessage: 'Toaster',
 			toastClass: 'danger'
 		};
 		const action = { data, type: SET_TOAST };
 
 		const updatedToastReducerState = Immutable.merge(initialState.app, data);
-		console.log(ToastReducer(initialState, action));
-
 		expect(ToastReducer(initialState, action)).toEqual({
 			app: updatedToastReducerState
 		});
