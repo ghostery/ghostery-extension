@@ -12,6 +12,7 @@
  */
 
 import React, { Fragment, Component } from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import Tooltip from '../../../../shared-components/Tooltip';
@@ -228,3 +229,30 @@ class BlockSettingsView extends Component {
 }
 
 export default BlockSettingsView;
+
+// PropTypes ensure we pass required props of the correct type
+BlockSettingsView.propTypes = {
+	actions: {
+		logout: PropTypes.func.isRequired,
+		setAntiTracking: PropTypes.func.isRequired,
+		setAdBlock: PropTypes.func.isRequired,
+		setSmartBlocking: PropTypes.func.isRequired,
+		setBlockingPolicy: PropTypes.func.isRequired,
+		setToast: PropTypes.func.isRequired,
+		setSetupStep: PropTypes.func.isRequired,
+	}
+};
+
+const noop = () => {};
+BlockSettingsView.defaultProps = {
+	actions: {
+		logout: noop,
+		setAntiTracking: noop,
+		setAdBlock: noop,
+		setSmartBlocking: noop,
+		setBlockingPolicy: noop,
+		setToast: noop,
+		setSetupStep: noop,
+
+	}
+};

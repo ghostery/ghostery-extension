@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { LOGIN, WELCOME } from '../../OnboardingView/OnboardingConstants';
 
@@ -36,3 +37,17 @@ const WelcomeView = (props) => {
 };
 
 export default WelcomeView;
+
+// PropTypes ensure we pass required props of the correct type
+WelcomeView.propTypes = {
+	actions: {
+		setSetupStep: PropTypes.func.isRequired
+	}
+};
+
+const noop = () => {};
+WelcomeView.defaultProps = {
+	actions: {
+		setSetupStep: noop
+	}
+};
