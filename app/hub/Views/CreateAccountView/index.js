@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators({
 		setToast,
 		register,
-		getUser,
+		getUser
 	}, dispatch),
 });
 
