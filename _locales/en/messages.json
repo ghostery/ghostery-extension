@@ -1740,6 +1740,9 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"ghostery_browser_hub_onboarding_toast_fix_errors": {
+		"message": "Please fix errors before proceeding."
+	},
 	"ghostery_browser_hub_onboarding_install_heading": {
 		"message": "Ghostery Dawn now installing..."
 	},
