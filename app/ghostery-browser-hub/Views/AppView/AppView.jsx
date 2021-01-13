@@ -38,7 +38,7 @@ const AppView = (props) => {
 	return (
 		<div className="App full-height full-width flex-container">
 			<div className="App__mainContent full-height full-width">
-				{<ToastMessage toastText={toastMessage} toastClass={toastClass} toastExit={exitToast} />}
+				{<ToastMessage toastText={toastMessage} toastClass={toastClass} dawnHub toastExit={exitToast} />}
 				{children}
 			</div>
 		</div>

@@ -100,7 +100,7 @@ class BlockSettingsView extends Component {
 
 			setToast({
 				toastMessage: t('ghostery_browser_hub_blocking_settings_view_toast_error_message'),
-				toastClass: 'error'
+				toastClass: 'alert'
 			});
 		}
 	}
