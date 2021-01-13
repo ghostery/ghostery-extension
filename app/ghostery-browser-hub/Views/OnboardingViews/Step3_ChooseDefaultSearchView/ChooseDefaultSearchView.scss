@@ -67,6 +67,7 @@
   margin: 20px;
   border: solid 1px $tundora;
   border-radius: 4px;
+  cursor: pointer;
 
   &.selected {
 	border: solid 4px $ghosty-blue;
@@ -77,15 +78,14 @@
   }
 }
 
-.ChooseSearchView__radioButtonContainer {
+.ChooseSearchView__optionRadioButtonContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   width: 25%;
 }
 
-.ChooseSearchView__optionContainerDescription {
+.ChooseSearchView__optionDescriptionContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,31 +94,15 @@
 	padding-right: 15%;
 }
 
-.ChooseSearchView__customURLTitle {
-  margin-bottom: 0;
-  font-size: 18px;
+.ChooseSearchView__optionDescriptionTitle {
+  padding-top: 10px;
+  line-height: 0.8;
+  font-size: 14px;
   font-weight: 500;
 }
 
-.ChooseSearchView__customURLSubtitle {
-  margin-bottom: 0;
+.ChooseSearchView__optionDescriptionSubtitle {
   font-size: 14px;
-}
-
-.ChooseSearchView__customURLInput {
-  border: none;
-  box-shadow: none;
-  border-radius: 0px;
-  border-bottom: 1px solid $dark-silver;
-  width: 70%;
-  margin-bottom: 0;
-
-  &:focus {
-	border: none;
-	box-shadow: none;
-	border-radius: 0px;
-	border-bottom: 2px solid $tundora;
-  }
 }
 
 .ChooseSearchView__nextButton {

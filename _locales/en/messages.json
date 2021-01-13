@@ -1843,7 +1843,7 @@
 		"message": "Create a Ghostery Account"
 	},
 	"ghostery_browser_hub_onboarding_sync_settings": {
-		"message": "Allows you to sync settings across browsers and devices"
+		"message": "Allows you to sync settings across browsers and devices."
 	},
 	"ghostery_browser_hub_onboarding_already_have_account": {
 		"message": "I already have an account."
