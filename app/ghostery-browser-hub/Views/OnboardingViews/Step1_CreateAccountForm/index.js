@@ -13,7 +13,7 @@
 
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import Step1_CreateAccountFormContainer from './Step1_CreateAccountFormContainer';
-import { register, getUser, handleEmailPreferencesCheckboxChange } from '../../../../Account/AccountActions';
+import { register, getUser, subscribeToEmailList } from '../../../../Account/AccountActions';
 import { setToast } from '../../../../hub/Views/AppView/AppViewActions';
 
 const stateSlices = ['account'];
@@ -21,7 +21,7 @@ const actionCreators = {
 	setToast,
 	register,
 	getUser,
-	handleEmailPreferencesCheckboxChange
+	subscribeToEmailList
 };
 
 export default buildReduxHOC(stateSlices, actionCreators, Step1_CreateAccountFormContainer);
