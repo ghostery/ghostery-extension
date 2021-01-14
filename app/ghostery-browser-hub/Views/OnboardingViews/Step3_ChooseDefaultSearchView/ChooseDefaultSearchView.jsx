@@ -32,7 +32,6 @@ class ChooseDefaultSearchView extends Component {
 
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
-			customSearchURL: null,
 			searchBeingConsidered: null,
 			modalActive: false,
 		};
@@ -41,7 +40,6 @@ class ChooseDefaultSearchView extends Component {
 	updateSelection = () => this.setState(prevState => (
 		{
 			chosenSearch: prevState.searchBeingConsidered,
-			customSearchURL: null,
 			searchBeingConsidered: null,
 			modalActive: false
 		}
@@ -49,27 +47,16 @@ class ChooseDefaultSearchView extends Component {
 
 	cancelSelection = () => this.setState({ modalActive: false, searchBeingConsidered: null });
 
-	selectCustom = () => {
-		this.customURLInputRef.current.focus();
-
-		this.setState({
-			chosenSearch: SEARCH_CUSTOM,
-		});
-	}
-
-	handleInputChange = event => this.setState({ customSearchURL: event.target.value });
-
 	triggerConfirmationModal = selection => this.setState({ modalActive: true, searchBeingConsidered: selection });
 
 	handleSubmit = () => {
-		const { chosenSearch, customSearchURL } = this.state;
+		const { chosenSearch } = this.state;
 		const { actions, history } = this.props;
 		const { setSetupStep } = actions;
 
 		const payload = {
 			type: 'setDefaultSearch',
 			search: chosenSearch,
-			customSearchURL,
 		};
 
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
@@ -83,6 +70,17 @@ class ChooseDefaultSearchView extends Component {
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
+	renderGhosteryOptionDescription = () => (
+		<Fragment>
+			<div className="ChooseSearchView__optionDescriptionTitle">Ad-free private search</div>
+			<div className="ChooseSearchView__optionDescriptionSubtitle">(Recommended)</div>
+		</Fragment>
+	);
+
+	renderStartpageOptionDescription = () => (
+		<div className="ChooseSearchView__optionDescriptionTitle">Ad-supported private search</div>
+	)
+
 	renderOptionContainer = (chosenSearch, optionName) => {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
@@ -90,74 +88,54 @@ class ChooseDefaultSearchView extends Component {
 
 		return (
 			<div onClick={() => this.triggerConfirmationModal(optionName)} className={containerClasses}>
-				<div className="ChooseSearchView__radioButtonContainer">
+				<div className="ChooseSearchView__optionRadioButtonContainer">
 					<RadioButton
 						checked={selected}
 						handleClick={() => {}}
 						altDesign
 					/>
 				</div>
-				<div className="ChooseSearchView__optionContainerDescription">
+				<div className="ChooseSearchView__optionDescriptionContainer">
 					<img src={logoFilename} />
+					{(optionName === SEARCH_GHOSTERY) && this.renderGhosteryOptionDescription()}
+					{(optionName === SEARCH_STARTPAGE) && this.renderStartpageOptionDescription()}
 				</div>
 			</div>
-		);
-	}
-
-	renderCustomURLContainer = () => {
-		const { chosenSearch, customSearchURL } = this.state;
-
-		const selected = (chosenSearch === SEARCH_CUSTOM);
-		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
-
-		return (
-			<div onClick={this.selectCustom} className={containerClasses}>
-				<div className="ChooseSearchView__radioButtonContainer">
-					<RadioButton
-						checked={selected}
-						handleClick={() => {}}
-						altDesign
-					/>
-				</div>
-				<div className="ChooseSearchView__optionContainerDescription">
-					<p className="ChooseSearchView__customURLTitle">Other</p>
-					<p className="ChooseSearchView__customURLSubtitle">Type in search domain</p>
-					<input
-						ref={this.customURLInputRef}
-						type="text"
-						className="ChooseSearchView__customURLInput"
-						onChange={this.handleInputChange}
-						value={customSearchURL}
-					/>
-				</div>
-			</div>
-
 		);
 	}
 
 	renderConfirmationModal = () => {
 		const { searchBeingConsidered } = this.state;
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase()}.svg`;
 
 		return (
 			<Modal show>
-				<div className="ChooseSearchViewModal__content">
+				<div className="ChooseSearchView__modalContent">
 					<img src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
-					<div className="ChooseSearchView__confirmationModalDescription">
-						Modal of type
-						{searchBeingConsidered}
+					<div className="ChooseSearchView__modalMain">
+						<img className="ChooseSearchView__modalOptionLogo" src={logoFilename} />
+						<div className="ChooseSearchView__modalDescription">
+							{`Just so you know: ${searchBeingConsidered}'s search engine will log your data and use it to serve you targeted ads.`}
+						</div>
+						<div className="ChooseSearchView__modalButtonsContainer">
+							<button
+								className="ChooseSearchView__modalCancelButton"
+								type="button"
+								onClick={this.cancelSelection}
+							>
+								Go Back
+							</button>
+							<div className="ChooseSearchView__modalButtonDivider" />
+							<button
+								className="ChooseSearchView__modalConfirmButton"
+								type="button"
+								onClick={this.updateSelection}
+							>
+								Confirm
+							</button>
+						</div>
 					</div>
-					<button
-						onClick={this.cancelSelection}
-						type="button"
-					>
-						Cancel
-					</button>
-					<button
-						onClick={this.updateSelection}
-						type="button"
-					>
-						Confirm
-					</button>
+
 				</div>
 			</Modal>
 		);
@@ -183,8 +161,7 @@ class ChooseDefaultSearchView extends Component {
 						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY)}
 						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE)}
 						{this.renderOptionContainer(chosenSearch, SEARCH_BING)}
-						{this.renderCustomURLContainer()}
-						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO, 'Yahoo')}
+						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO)}
 					</div>
 					<button
 						className="ChooseSearchView__nextButton"
