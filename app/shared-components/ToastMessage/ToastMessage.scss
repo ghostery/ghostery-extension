@@ -17,6 +17,7 @@
 	top: 30px;
 	height: 0;
 	&.dawn-hub {
+		z-index: 1;
 		max-width: 700px;
 		margin: auto;
 		font-family: Roboto;
