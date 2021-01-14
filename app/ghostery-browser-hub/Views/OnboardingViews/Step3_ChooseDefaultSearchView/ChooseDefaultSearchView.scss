@@ -135,7 +135,72 @@
   cursor: pointer;
 }
 
-.ChooseSearchViewModal__content {
+.ChooseSearchView__modalCancelButton {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  width: 162px;
+  cursor: pointer;
+  padding: 7.7px 14px;
+  line-height: 22px;
+  background: linear-gradient(
+				  45deg,
+				  #ff7e74 50%,
+				  #00aef0
+  );
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  transition: 0.25s all;
+  border: none;
+  &:hover {
+	background-position: 0% 50%;
+	transition: 0.25s all;
+  }
+  color: #FFF;
+  font-size: 14.1px;
+  font-weight: 700;
+  border-radius: 3.5px;
+  text-align: center;
+  line-height: 2.05;
+  cursor: pointer;
+}
+
+.ChooseSearchView__modalConfirmButton {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  width: 162px;
+  cursor: pointer;
+  padding: 7.7px 14px;
+  line-height: 22px;
+  background: linear-gradient(
+				  45deg,
+				  #ff7e74 50%,
+				  #00aef0
+  );
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  transition: 0.25s all;
+  border: none;
+  &:hover {
+	background-position: 0% 50%;
+	transition: 0.25s all;
+  }
+  color: #FFF;
+  font-size: 14.1px;
+  font-weight: 700;
+  border-radius: 3.5px;
+  text-align: center;
+  line-height: 2.05;
+  cursor: pointer;
+}
+
+.ChooseSearchView__modalButtonsContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.ChooseSearchView__modalContent {
   position: relative;
   width: 901px;
   min-height: 632px;
@@ -144,4 +209,10 @@
   background-color: #f7f7f7;
   border: 1px solid $tundora;
   z-index: 10;
+}
+
+.ChooseSearchView__modalMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

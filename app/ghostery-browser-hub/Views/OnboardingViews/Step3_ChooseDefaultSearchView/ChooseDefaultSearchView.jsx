@@ -106,27 +106,36 @@ class ChooseDefaultSearchView extends Component {
 
 	renderConfirmationModal = () => {
 		const { searchBeingConsidered } = this.state;
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase()}.svg`;
 
 		return (
 			<Modal show>
-				<div className="ChooseSearchViewModal__content">
+				<div className="ChooseSearchView__modalContent">
 					<img src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
-					<div className="ChooseSearchView__confirmationModalDescription">
-						Modal of type
-						{searchBeingConsidered}
+					<div className="ChooseSearchView__modalMain">
+						<img src={logoFilename} />
+						<div className="ChooseSearchView__modalDescription">
+							{`Just so you know: ${searchBeingConsidered}'s search engine will log your data and use it to serve you targeted ads.`}
+							{searchBeingConsidered}
+						</div>
+						<div className="ChooseSearchView__modalButtonsContainer">
+							<button
+								className="ChooseSearchView__modalCancelButton"
+								type="button"
+								onClick={this.cancelSelection}
+							>
+								Cancel
+							</button>
+							<button
+								className="ChooseSearchView__modalConfirmButton"
+								type="button"
+								onClick={this.updateSelection}
+							>
+								Confirm
+							</button>
+						</div>
 					</div>
-					<button
-						onClick={this.cancelSelection}
-						type="button"
-					>
-						Cancel
-					</button>
-					<button
-						onClick={this.updateSelection}
-						type="button"
-					>
-						Confirm
-					</button>
+
 				</div>
 			</Modal>
 		);
