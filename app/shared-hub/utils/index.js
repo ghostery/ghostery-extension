@@ -20,15 +20,10 @@ import {
 	bindActionCreators
 } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 // Imports utilities from elsewhere in the codebase to reduce duplicate code
 import { log } from '../../../src/utils/common';
 import { sendMessage as importedSM, sendMessageInPromise as importedSMIP } from '../../panel/utils/msg';
-
-// Self import this file so makeDeferredDispatcher can mock the sendMessageInPromise function within the same class
-// eslint-disable-next-line import/no-self-import
-import * as utils from './index';
 
 const sendMessageInPromise = function(name, message) {
 	return importedSMIP(name, message, 'ghostery-hub');
@@ -76,7 +71,7 @@ const makeStoreCreator = function(reducers, middlewares) {
  */
 function makeDeferredDispatcher(action, actionData) {
 	return function(dispatch) {
-		return utils.sendMessageInPromise(action, actionData).then((data) => {
+		return sendMessageInPromise(action, actionData).then((data) => {
 			dispatch({
 				type: action,
 				data,
@@ -111,7 +106,7 @@ function buildReduxHOC(stateKeys, actionCreators, baseComponent) {
 			actions: bindActionCreators(actionCreators, dispatch)
 		});
 
-	return withRouter(connect(mapStateToProps, mapDispatchToProps)(baseComponent));
+	return connect(mapStateToProps, mapDispatchToProps)(baseComponent);
 }
 
 export {

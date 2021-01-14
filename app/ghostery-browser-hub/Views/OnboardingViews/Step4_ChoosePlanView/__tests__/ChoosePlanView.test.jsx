@@ -20,15 +20,15 @@ import ChoosePlanView from '../ChoosePlanView';
 const noop = () => {};
 
 describe('app/ghostery-browser-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx', () => {
+	const initialState = {
+		user: null,
+		didNotSelectGhosterySearch: false,
+		actions: {
+			setSetupStep: noop
+		}
+	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('ChoosePlanView is rendered correctly', () => {
-			const initialState = {
-				user: null,
-				didNotSelectGhosterySearch: false,
-				actions: {
-					setSetupStep: noop
-				}
-			};
 			const component = renderer.create(
 				<MemoryRouter>
 					<ChoosePlanView  {...initialState} />
@@ -40,17 +40,8 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step4_ChoosePlanView/Ch
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('ChoosePlanView View with user not logged in', () => {
-			const initialState = {
-				user: null,
-				didNotSelectGhosterySearch: false,
-				actions: {
-					setSetupStep: noop
-				},
-			};
-
 			const component = shallow(<ChoosePlanView {...initialState} />);
 
-			expect(component.find('.ChoosePlanView__card').length).toBe(3);
 			const instance = component.instance();
 
 			instance.selectBasicPlan();
@@ -66,56 +57,44 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step4_ChoosePlanView/Ch
 		});
 
 		test('ChoosePlanView View with basic user logged in', () => {
-			const initialState = {
+			const basicUserState = {
+				...initialState,
 				user: {
 					plusAccess: false,
 					premiumAccess: false
-				},
-				didNotSelectGhosterySearch: false,
-				actions: {
-					setSetupStep: noop
-				},
+				}
 			};
 
-			const component = shallow(<ChoosePlanView {...initialState} />);
+			const component = shallow(<ChoosePlanView {...basicUserState} />);
 
-			expect(component.find('.ChoosePlanView__card').length).toBe(3);
 			expect(component).toMatchSnapshot();
 		});
 
 		test('ChoosePlanView View with plus user logged in', () => {
-			const initialState = {
+			const plusUserState = {
+				...initialState,
 				user: {
 					plusAccess: true,
 					premiumAccess: false
 				},
-				didNotSelectGhosterySearch: false,
-				actions: {
-					setSetupStep: noop
-				},
 			};
 
-			const component = shallow(<ChoosePlanView {...initialState} />);
+			const component = shallow(<ChoosePlanView {...plusUserState} />);
 
-			expect(component.find('.ChoosePlanView__card').length).toBe(2);
 			expect(component).toMatchSnapshot();
 		});
 
 		test('ChoosePlanView View with premium user logged in', () => {
-			const initialState = {
+			const premiumUserState = {
+				...initialState,
 				user: {
 					plusAccess: true,
 					premiumAccess: true
-				},
-				didNotSelectGhosterySearch: false,
-				actions: {
-					setSetupStep: noop
-				},
+				}
 			};
 
-			const component = shallow(<ChoosePlanView {...initialState} />);
+			const component = shallow(<ChoosePlanView {...premiumUserState } />);
 
-			expect(component.find('.ChoosePlanView__card').length).toBe(1);
 			expect(component).toMatchSnapshot();
 		});
 	});

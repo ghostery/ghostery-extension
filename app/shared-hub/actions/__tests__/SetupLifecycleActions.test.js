@@ -22,7 +22,11 @@ const mockStore = configureStore(middlewares);
 
 const testData = { test: true };
 
-utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, reject) => {
+const mockSendMessageInPromise = jest.fn((dispatch, name, message) => new Promise((resolve, reject) => {
+	dispatch({
+		type: name,
+		testData
+	});
 	switch (name) {
 		case 'INIT_SETUP_PROPS': {
 			resolve(testData);
@@ -39,6 +43,13 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 		default: resolve(testData);
 	}
 }));
+
+utils.sendMessageInPromise = mockSendMessageInPromise;
+
+utils.makeDeferredDispatcher = jest.fn((action, actionData) => dispatch => {
+	return mockSendMessageInPromise(dispatch, action, actionData);
+})
+
 
 describe('app/shared-hub/actions/AntiSuiteActions', () => {
 	test('initSetupProps action should return correctly', () => {
@@ -57,7 +68,7 @@ describe('app/shared-hub/actions/AntiSuiteActions', () => {
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: SET_SETUP_STEP };
+		const expectedPayload = { testData, type: SET_SETUP_STEP };
 		return store.dispatch(SetupLifecycleActions.setSetupStep()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
@@ -69,7 +80,7 @@ describe('app/shared-hub/actions/AntiSuiteActions', () => {
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: SET_SETUP_COMPLETE };
+		const expectedPayload = { testData, type: SET_SETUP_COMPLETE };
 		return store.dispatch(SetupLifecycleActions.setSetupComplete()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);

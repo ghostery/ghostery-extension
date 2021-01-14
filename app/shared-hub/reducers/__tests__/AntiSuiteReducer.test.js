@@ -17,9 +17,9 @@ import { SET_AD_BLOCK, SET_ANTI_TRACKING, SET_SMART_BLOCK } from '../../constant
 
 const initialState = Immutable({
 	setup: {
-		enable_ad_block: true,
-		enable_anti_tracking: true,
-		enable_smart_block: true
+		enable_ad_block: false,
+		enable_anti_tracking: false,
+		enable_smart_block: false
 	}
 });
 

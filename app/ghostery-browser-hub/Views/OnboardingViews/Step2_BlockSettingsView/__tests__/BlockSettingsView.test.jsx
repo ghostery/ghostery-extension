@@ -21,19 +21,19 @@ const noop = () => {};
 jest.mock('../../../../../shared-components/Tooltip');
 
 describe('app/ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.test.jsx', () => {
+	const initialState = {
+		actions: {
+			logout: noop,
+			setAntiTracking: noop,
+			setAdBlock: noop,
+			setSmartBlocking: noop,
+			setBlockingPolicy: noop,
+			setToast: noop,
+			setSetupStep: noop,
+		}
+	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('BlockSettings View is rendered correctly', () => {
-			const initialState = {
-				actions: {
-					logout: noop,
-					setAntiTracking: noop,
-					setAdBlock: noop,
-					setSmartBlocking: noop,
-					setBlockingPolicy: noop,
-					setToast: noop,
-					setSetupStep: noop,
-				}
-			};
 			const component = renderer.create(
 				<MemoryRouter>
 					<BlockSettingsView  {...initialState} />
@@ -45,7 +45,8 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('BlockSettings View happy path', () => {
-			const initialState = {
+			const happyState = {
+				...initialState,
 				actions: {
 					logout: noop,
 					setAntiTracking: jest.fn(),
@@ -59,9 +60,7 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView
 					push: noop
 				}
 			};
-			const component = shallow(<BlockSettingsView {...initialState} />);
-			expect(component.find('.BlockSettingsView_checkbox').length).toBe(1);
-			expect(component.find('.BlockSettingsView__radioButtonContainer').length).toBe(9);
+			const component = shallow(<BlockSettingsView {...happyState } />);
 
 			const instance = component.instance();
 
@@ -75,11 +74,11 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/Step2_BlockSettingsView
 			expect(component.state('blockAds')).toBe(false);
 
 			instance.handleSubmit();
-			expect(initialState.actions.setAntiTracking.mock.calls.length).toBe(1);
-			expect(initialState.actions.setAdBlock.mock.calls.length).toBe(1);
-			expect(initialState.actions.setSmartBlocking.mock.calls.length).toBe(1);
-			expect(initialState.actions.setBlockingPolicy.mock.calls.length).toBe(1);
-			expect(initialState.actions.setSetupStep.mock.calls.length).toBe(1);
+			expect(happyState.actions.setAntiTracking.mock.calls.length).toBe(1);
+			expect(happyState.actions.setAdBlock.mock.calls.length).toBe(1);
+			expect(happyState.actions.setSmartBlocking.mock.calls.length).toBe(1);
+			expect(happyState.actions.setBlockingPolicy.mock.calls.length).toBe(1);
+			expect(happyState.actions.setSetupStep.mock.calls.length).toBe(1);
 
 			expect(component).toMatchSnapshot();
 		});

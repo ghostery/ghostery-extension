@@ -21,11 +21,14 @@ import { WELCOME, LOGIN, BLOCK_SETTINGS, CHOOSE_DEFAULT_SEARCH, CHOOSE_PLAN, SUC
 const noop = () => {};
 
 describe('app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx', () => {
+	const initialState = {
+		currentStep: LOGIN,
+		actions: {
+			logout: noop
+		}
+	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('StepProgressBar is rendered correctly', () => {
-			const initialState = {
-				currentStep: LOGIN,
-			};
 			const component = renderer.create(
 				<MemoryRouter>
 					<StepProgressBar {...initialState} />
@@ -37,81 +40,53 @@ describe('app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepPro
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('StepProgressBar View step 0', () => {
-			const initialState = {
+			const step_0_initialState = {
+				...initialState,
 				currentStep: WELCOME,
-				actions: {
-					logout: noop
-				}
 			};
 
-			const component = shallow(<StepProgressBar {...initialState} />);
+			const component = shallow(<StepProgressBar {...step_0_initialState } />);
 
-			expect(component.find('.StepProgressBar__line').length).toBe(0);
-			expect(component.find('.StepProgressBar__column').length).toBe(0);
 			expect(component).toMatchSnapshot();
 		});
 		test('StepProgressBar View step 1', () => {
-			const initialState = {
-				currentStep: LOGIN,
-				actions: {
-					logout: noop
-				}
+			const step_1_initialState = {
+				...initialState,
+				currentStep: LOGIN
 			};
 
-			const component = shallow(<StepProgressBar {...initialState} />);
+			const component = shallow(<StepProgressBar {...step_1_initialState } />);
 
-			expect(component.find('.StepProgressBar__line').length).toBe(3);
-			expect(component.find('.StepProgressBar__column').length).toBe(4);
-			expect(component.find('.current').length).toBe(2);
-			expect(component.find('.incomplete').length).toBe(3);
 			expect(component).toMatchSnapshot();
 		});
 
 		test('StepProgressBar View step 2', () => {
-			const initialState = {
-				currentStep: BLOCK_SETTINGS,
-				actions: {
-					logout: noop
-				}
+			const step_2_initialState = {
+				...initialState,
+				currentStep: BLOCK_SETTINGS
 			};
 
-			const component = shallow(<StepProgressBar {...initialState} />);
-
-			expect(component.find('.step-completed').length).toBe(1);
-			expect(component.find('.current').length).toBe(2);
-			expect(component.find('.incomplete').length).toBe(2);
-			expect(component).toMatchSnapshot();
+			const component = shallow(<StepProgressBar {...step_2_initialState } />);
 		});
 
 		test('StepProgressBar View step 4', () => {
-			const initialState = {
-				currentStep: CHOOSE_PLAN,
-				actions: {
-					logout: noop
-				}
+			const step_4_initialState = {
+				currentStep: CHOOSE_PLAN
 			};
 
-			const component = shallow(<StepProgressBar {...initialState} />);
+			const component = shallow(<StepProgressBar {...step_4_initialState} />);
 
-			expect(component.find('.step-completed').length).toBe(3);
-			expect(component.find('.current').length).toBe(2);
-			expect(component.find('.incomplete').length).toBe(0);
 			expect(component).toMatchSnapshot();
 		});
 
 		test('StepProgressBar View step 5', () => {
-			const initialState = {
-				currentStep: SUCCESS,
-				actions: {
-					logout: noop
-				}
+			const step_5_initialState = {
+				...initialState,
+				currentStep: SUCCESS
 			};
 
-			const component = shallow(<StepProgressBar {...initialState} />);
+			const component = shallow(<StepProgressBar {...step_5_initialState} />);
 
-			expect(component.find('.step-completed').length).toBe(4);
-			expect(component.find('.current').length).toBe(0);
-			expect(component.find('.incomplete').length).toBe(0);
 			expect(component).toMatchSnapshot();
 		});
 	});

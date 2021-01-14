@@ -25,27 +25,27 @@ jest.mock('../../../../../shared-components/ToggleCheckbox', () => {
 
 const noop = () => {};
 describe('app/hub/Views/Step1_CreateAccountForm component', () => {
+	const initialState = {
+		email: 'test@example.com',
+		emailError: false,
+		confirmEmail: 'test@example.com',
+		confirmEmailError: false,
+		firstName: 'First',
+		lastName: 'Last',
+		isUpdatesChecked: true,
+		legalConsentChecked: true,
+		password: '',
+		confirmPassword: '',
+		passwordInvalidError: false,
+		passwordLengthError: false,
+		handleInputChange: noop,
+		handleUpdatesCheckboxChange: noop,
+		handleLegalConsentCheckboxChange: noop,
+		handleSubmit: jest.fn(),
+	};
+
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('create account view is rendered correctly', () => {
-			const initialState = {
-				email: 'test@example.com',
-				emailError: false,
-				confirmEmail: 'test@example.com',
-				confirmEmailError: false,
-				firstName: 'First',
-				lastName: 'Last',
-				isUpdatesChecked: true,
-				legalConsentChecked: true,
-				password: '',
-				confirmPassword: '',
-				passwordInvalidError: false,
-				passwordLengthError: false,
-				handleInputChange: noop,
-				handleUpdatesCheckboxChange: noop,
-				handleLegalConsentCheckboxChange: noop,
-				handleSubmit: jest.fn(),
-			};
-
 			const component = renderer.create(
 				<MemoryRouter>
 					<Step1_CreateAccountForm {...initialState} />
@@ -57,29 +57,7 @@ describe('app/hub/Views/Step1_CreateAccountForm component', () => {
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const initialState = {
-				email: 'test@example.com',
-				emailError: false,
-				confirmEmail: 'test@example.com',
-				confirmEmailError: false,
-				firstName: 'First',
-				lastName: 'Last',
-				isUpdatesChecked: true,
-				legalConsentChecked: true,
-				password: '',
-				confirmPassword: '',
-				passwordInvalidError: false,
-				passwordLengthError: false,
-				handleInputChange: noop,
-				handleUpdatesCheckboxChange: noop,
-				handleLegalConsentCheckboxChange: noop,
-				handleSubmit: jest.fn(),
-			};
-
 			const component = shallow(<Step1_CreateAccountForm {...initialState} />);
-
-			expect(component.find('.Step1_CreateAccountForm__inputBox').length).toBe(6);
-			expect(component.find('.Step1_CreateAccountForm__ctaButton').length).toBe(1);
 
 			expect(initialState.handleSubmit.mock.calls.length).toBe(0);
 			component.find('form').simulate('submit');
@@ -87,26 +65,20 @@ describe('app/hub/Views/Step1_CreateAccountForm component', () => {
 		});
 
 		test('the sad path of the component with errors', () => {
-			const initialState = {
-				email: 'test@example.com',
+			const initialStateFail = {
+				...initialState,
 				emailError: true,
 				confirmEmail: 'badConfirmEmail@example.com',
 				confirmEmailError: true,
-				firstName: 'First',
-				lastName: 'Last',
 				isUpdatesChecked: false,
 				legalConsentChecked: false,
 				password: 'password',
-				confirmPassword: 'badPassword',
+				confirmPassword: 'password',
 				passwordInvalidError: true,
 				passwordLengthError: true,
-				handleInputChange: noop,
-				handleUpdatesCheckboxChange: noop,
-				handleLegalConsentCheckboxChange: noop,
-				handleSubmit: jest.fn(),
-			};
+			}
 
-			const component = shallow(<Step1_CreateAccountForm {...initialState} />);
+			const component = shallow(<Step1_CreateAccountForm {...initialStateFail} />);
 			component.find('form').simulate('submit');
 			expect(component.find('.Step1_CreateAccountForm__inputErrorContainer').length).toBe(4);
 			expect(component).toMatchSnapshot();

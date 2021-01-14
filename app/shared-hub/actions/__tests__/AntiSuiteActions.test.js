@@ -22,7 +22,11 @@ const mockStore = configureStore(middlewares);
 
 const testData = { test: true };
 
-utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, reject) => {
+const mockSendMessageInPromise = jest.fn((dispatch, name, message) => new Promise((resolve, reject) => {
+	dispatch({
+		type: name,
+		testData
+	});
 	switch (name) {
 		case 'SET_ANTI_TRACKING': {
 			resolve(testData);
@@ -40,13 +44,18 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 	}
 }));
 
+utils.sendMessageInPromise = mockSendMessageInPromise;
+
+utils.makeDeferredDispatcher = jest.fn((action, actionData) => dispatch => {
+	return mockSendMessageInPromise(dispatch, action, actionData);
+})
+
 describe('app/shared-hub/actions/AntiSuiteActions', () => {
 	test('setAdBlock action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
-		const data = testData;
-		const expectedPayload = { data, type: SET_AD_BLOCK };
+		const expectedPayload = { testData, type: SET_AD_BLOCK };
 		return store.dispatch(AntiSuiteActions.setAdBlock()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
@@ -58,7 +67,7 @@ describe('app/shared-hub/actions/AntiSuiteActions', () => {
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: SET_ANTI_TRACKING };
+		const expectedPayload = { testData, type: SET_ANTI_TRACKING };
 		return store.dispatch(AntiSuiteActions.setAntiTracking()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
@@ -70,7 +79,7 @@ describe('app/shared-hub/actions/AntiSuiteActions', () => {
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: SET_SMART_BLOCK };
+		const expectedPayload = { testData, type: SET_SMART_BLOCK };
 		return store.dispatch(AntiSuiteActions.setSmartBlocking()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);

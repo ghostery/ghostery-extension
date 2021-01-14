@@ -19,17 +19,17 @@ import Step1_LoginForm from '../Step1_LoginForm';
 
 const noop = () => {};
 describe('app/hub/Views/Step1_LoginForm component', () => {
+	const initialState = {
+		email: '',
+		password: '',
+		emailError: false,
+		passwordError: false,
+		handleSubmit: noop,
+		handleInputChange: noop,
+		handleForgotPassword: noop
+	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('Login Form view is rendered correctly', () => {
-			const initialState = {
-				email: '',
-				password: '',
-				emailError: false,
-				passwordError: false,
-				handleSubmit: noop,
-				handleInputChange: noop,
-				handleForgotPassword: noop
-			};
 
 			const component = renderer.create(
 				<MemoryRouter>
@@ -42,45 +42,34 @@ describe('app/hub/Views/Step1_LoginForm component', () => {
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const initialState = {
+			const happyState = {
+				...initialState,
 				email: 'test@example.com',
 				password: 'examplePassword',
-				emailError: false,
-				passwordError: false,
 				handleSubmit: jest.fn(),
-				handleInputChange: () => {},
-				handleForgotPassword: noop
-			};
+			}
 
-			const component = shallow(<Step1_LoginForm {...initialState} />);
-			expect(component.find('.Step1_LogInForm').length).toBe(1);
-			expect(component.find('.Step1_LogInForm__inputBox').length).toBe(2);
-			expect(component.find('.Step1_LogInForm__forgotPassword').length).toBe(1);
-			expect(component.find('.Step1_LogInForm__ctaButton').length).toBe(1);
-
-			expect(initialState.handleSubmit.mock.calls.length).toBe(0);
+			const component = shallow(<Step1_LoginForm {...happyState} />);
+			expect(happyState.handleSubmit.mock.calls.length).toBe(0);
 			component.find('form').simulate('submit');
-			expect(initialState.handleSubmit.mock.calls.length).toBe(1);
+			expect(happyState.handleSubmit.mock.calls.length).toBe(1);
 		});
 
 		test('the sad path of the component with errors', () => {
-			const initialState = {
+			const sadState = {
+				...initialState,
 				email: 'test@example.com',
 				password: 'examplePassword',
 				emailError: true,
 				passwordError: true,
 				handleSubmit: jest.fn(),
-				handleInputChange: () => {},
-				handleForgotPassword: noop
 			};
 
-			const component = shallow(<Step1_LoginForm {...initialState} />);
+			const component = shallow(<Step1_LoginForm {...sadState} />);
 
-			expect(initialState.handleSubmit.mock.calls.length).toBe(0);
+			expect(sadState.handleSubmit.mock.calls.length).toBe(0);
 			component.find('form').simulate('submit');
-			expect(initialState.handleSubmit.mock.calls.length).toBe(1);
-			expect(component.find('.Step1_LogInForm__inputError').length).toBe(2);
-
+			expect(sadState.handleSubmit.mock.calls.length).toBe(1);
 		})
 	});
 });

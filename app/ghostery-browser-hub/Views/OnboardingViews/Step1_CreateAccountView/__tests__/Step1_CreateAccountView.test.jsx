@@ -29,15 +29,14 @@ jest.mock('../../Step1_LogInForm', () => {
 
 const noop = () => {};
 describe('app/hub/Views/Step1_CreateAccountView component', () => {
+	const initialState = {
+		user: null,
+		actions: {
+			setSetupStep: noop
+		}
+	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('Create Account Form view is rendered correctly', () => {
-			const initialState = {
-				user: null,
-				actions: {
-					setSetupStep: noop
-				}
-			};
-
 			const component = renderer.create(
 				<MemoryRouter>
 					<Step1_CreateAccountView {...initialState} />
@@ -49,17 +48,14 @@ describe('app/hub/Views/Step1_CreateAccountView component', () => {
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('Create Account Form view is rendered correctly when user is logged in', () => {
-			const initialState = {
+			const plusUserState = {
+				...initialState,
 				user: {
 					plusAccess: true
-				},
-				actions: {
-					setSetupStep: noop
 				}
 			};
 
 			const component = shallow(<Step1_CreateAccountView {...initialState} />);
-			expect(component.find('.Step1_CreateAccountView__alreadySignedIn').length).toBe(1);
 		});
 	});
 });

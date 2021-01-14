@@ -22,7 +22,11 @@ const mockStore = configureStore(middlewares);
 
 const testData = { test: true };
 
-utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, reject) => {
+const mockSendMessageInPromise = jest.fn((dispatch, name, message) => new Promise((resolve, reject) => {
+	dispatch({
+		type: name,
+		testData
+	});
 	switch (name) {
 		case 'SET_BLOCKING_POLICY': {
 			resolve(testData);
@@ -32,13 +36,18 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 	}
 }));
 
+utils.sendMessageInPromise = mockSendMessageInPromise;
+
+utils.makeDeferredDispatcher = jest.fn((action, actionData) => dispatch => {
+	return mockSendMessageInPromise(dispatch, action, actionData);
+})
+
 describe('app/shared-hub/actions/BlockingPolicyActions', () => {
 	test('setBlockingPolicy action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
-		const data = testData;
-		const expectedPayload = { data, type: SET_BLOCKING_POLICY };
+		const expectedPayload = { testData, type: SET_BLOCKING_POLICY };
 		return store.dispatch(setBlockingPolicy()).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
