@@ -143,24 +143,16 @@
   cursor: pointer;
   padding: 7.7px 14px;
   line-height: 22px;
-  background: linear-gradient(
-				  45deg,
-				  #ff7e74 50%,
-				  #00aef0
-  );
-  background-size: 200% 100%;
-  background-position: 100% 50%;
-  transition: 0.25s all;
-  border: none;
+  border: solid 2px $tundora;
   &:hover {
-	background-position: 0% 50%;
-	transition: 0.25s all;
+	border: none;
+	background: $ghosty-blue;
+	color: $white;
   }
-  color: #FFF;
+  color: $tundora;
   font-size: 14.1px;
   font-weight: 700;
   border-radius: 3.5px;
-  text-align: center;
   line-height: 2.05;
   cursor: pointer;
 }
@@ -200,13 +192,30 @@
   flex-direction: row;
 }
 
+.ChooseSearchView__modalButtonDivider {
+  width: 24px;
+}
+
+.ChooseSearchView__modalOptionLogo {
+  padding: 70px 0;
+}
+
+.ChooseSearchView__modalDescription {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.75;
+  text-align: center;
+  color: $tundora;
+  width: 70%;
+  margin-bottom: 113px;
+}
+
 .ChooseSearchView__modalContent {
   position: relative;
   width: 901px;
   min-height: 632px;
   padding: 20px;
-  color: #4a4a4a;
-  background-color: #f7f7f7;
+  background-color: $white;
   border: 1px solid $tundora;
   z-index: 10;
 }

@@ -113,10 +113,9 @@ class ChooseDefaultSearchView extends Component {
 				<div className="ChooseSearchView__modalContent">
 					<img src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
 					<div className="ChooseSearchView__modalMain">
-						<img src={logoFilename} />
+						<img className="ChooseSearchView__modalOptionLogo" src={logoFilename} />
 						<div className="ChooseSearchView__modalDescription">
 							{`Just so you know: ${searchBeingConsidered}'s search engine will log your data and use it to serve you targeted ads.`}
-							{searchBeingConsidered}
 						</div>
 						<div className="ChooseSearchView__modalButtonsContainer">
 							<button
@@ -124,8 +123,9 @@ class ChooseDefaultSearchView extends Component {
 								type="button"
 								onClick={this.cancelSelection}
 							>
-								Cancel
+								Go Back
 							</button>
+							<div className="ChooseSearchView__modalButtonDivider" />
 							<button
 								className="ChooseSearchView__modalConfirmButton"
 								type="button"
