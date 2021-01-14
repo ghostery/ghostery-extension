@@ -22,8 +22,8 @@ import PropTypes from 'prop-types';
 const ToastMessage = ({
 	toastText, toastClass, toastExit, dawnHub
 }) => {
-	// These variables will determine whether the toast should display with Dawn onboarding styling
-	// or the default styling used in GBE
+	// These variables will be used to determine whether the toast should display with Dawn
+	// onboarding styling or the default styling used in GBE
 	const dawnHubClass = dawnHub ? 'dawn-hub' : '';
 	const dawnLayout = dawnHub ? 'align-justify align-middle' : 'align-center-middle';
 
