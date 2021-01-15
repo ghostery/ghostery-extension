@@ -70,6 +70,11 @@ class BlockSettingsView extends Component {
 
 		// Will only change user settings if all questions are answered
 		if (blockAds !== null && kindsOfTrackers !== null && antiTracking !== null && smartBrowsing !== null) {
+			setToast({
+				toastMessage: '',
+				toastClass: ''
+			});
+
 			const {
 				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
 			} = actions;
@@ -94,10 +99,7 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
-			setToast({
-				toastMessage: '',
-				toastClass: ''
-			});
+
 			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
 			history.push('/onboarding/3');
 		} else {
