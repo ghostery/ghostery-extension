@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -23,7 +23,7 @@ const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
  * @memberof GhosteryBrowserHubViews
  */
-const Step1_CreateAccountForm = (props) => {
+export const Step1_CreateAccountForm = (props) => {
 	const {
 		email,
 		emailError,

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,6 +17,7 @@ import { Route } from 'react-router-dom';
 
 import StepProgressBar from '../OnboardingViews/StepProgressBar';
 import StepNavigator from '../OnboardingViews/StepNavigator';
+import { CHOOSE_PLAN } from './OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Onboarding View
@@ -35,7 +36,7 @@ const OnboardingView = (props) => {
 						key={`route-${step.index}`}
 						path={step.path}
 						render={() => (
-							<div className={step.index === 4 ? 'OnboardingView__screenContainer step4' : 'OnboardingView__screenContainer'}>
+							<div className={step.index === CHOOSE_PLAN ? 'OnboardingView__screenContainer step4' : 'OnboardingView__screenContainer'}>
 								<StepProgressBar currentStep={step.index} />
 								<StepNavigator step={step.index} components={step.bodyComponents} sendMountActions={sendMountActions} />
 							</div>
@@ -50,7 +51,7 @@ const OnboardingView = (props) => {
 // PropTypes ensure we pass required props of the correct type
 OnboardingView.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({
-		index: PropTypes.number.isRequired,
+		index: PropTypes.string.isRequired,
 		path: PropTypes.string.isRequired,
 		bodyComponents: PropTypes.arrayOf(PropTypes.elementType.isRequired).isRequired,
 	})).isRequired,

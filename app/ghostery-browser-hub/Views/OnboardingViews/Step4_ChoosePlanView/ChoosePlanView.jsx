@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -284,7 +284,7 @@ class ChoosePlanView extends React.Component {
 		const { setSetupStep } = actions;
 		const { expanded, selectedPlan } = this.state;
 
-		const isBasic = !user;
+		const isBasic = !user || (user && !user.plusAccess && !user.premiumAccess);
 		const isPlus = (user && user.plusAccess && !user.premiumAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
@@ -294,7 +294,7 @@ class ChoosePlanView extends React.Component {
 		});
 
 		return (
-			<Fragment>
+			<div>
 				<div className="ChoosePlanView__relativeContainer">
 					<div className="ChoosePlanView__backContainer">
 						<span className="ChoosePlanView__caret left" />
@@ -304,17 +304,16 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				<div className="ChoosePlanView">
-
 					<div className="ChoosePlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
 					<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(didNotSelectGhosterySearch)}</div>
 					{didNotSelectGhosterySearch && isBasic && (
 						<Fragment>
 							{searchPromo()}
 							{/* TODO: For the CTA button below,
-							1. If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
-								and move them to Step 5 if signed in
-							2. If user is signed out, clicking this should take them to Step 4b (linked)
-						*/}
+								1. If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
+									and move them to Step 5 if signed in
+								2. If user is signed out, clicking this should take them to Step 4b (linked)
+							*/}
 							<div className="ChoosePlanView__searchCTAButton">{t('ghostery_browser_hub_onboarding_start_trial')}</div>
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_browser_hub_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
@@ -368,7 +367,7 @@ class ChoosePlanView extends React.Component {
 						</div>
 					)}
 				</div>
-			</Fragment>
+			</div>
 		);
 	}
 }

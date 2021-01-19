@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -16,8 +16,8 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import {
-	ONBOARDING,
 	WELCOME,
+	ONBOARDING,
 	LOGIN,
 	BLOCK_SETTINGS,
 	CHOOSE_DEFAULT_SEARCH,
@@ -54,6 +54,7 @@ const steps = [
  */
 const StepProgressBar = (props) => {
 	const { currentStep } = props;
+	const currentStepNumber = parseInt(currentStep, 10);
 	const totalSteps = steps.length;
 
 	const logoutIfStepOne = (stepId) => {
@@ -100,16 +101,16 @@ const StepProgressBar = (props) => {
 			const step = index + 1;
 
 			return (
-				<Fragment key={value}>
-					{(step < currentStep) && renderCompletedStep(steps[index])}
-					{(step === currentStep) && renderCurrentStep(steps[index])}
-					{(step > currentStep) && renderIncompleteStep(steps[index])}
+				<Fragment key={`value-${step}`}>
+					{(step < currentStepNumber) && renderCompletedStep(steps[index])}
+					{(step === currentStepNumber) && renderCurrentStep(steps[index])}
+					{(step > currentStepNumber) && renderIncompleteStep(steps[index])}
 					{(step !== totalSteps) && (
 						<Fragment>
-							{(step < currentStep) && (
+							{(step < currentStepNumber) && (
 								<div className="StepProgressBar__line completed" />
 							)}
-							{(step >= currentStep) && (
+							{(step >= currentStepNumber) && (
 								<div className="StepProgressBar__line incompleted" />
 							)}
 						</Fragment>
@@ -121,13 +122,13 @@ const StepProgressBar = (props) => {
 
 	return (
 		<div className="StepProgressBarContainer">
-			{(currentStep !== parseInt(WELCOME, 10)) && renderProgressBar()}
+			{(currentStep !== WELCOME) && renderProgressBar()}
 		</div>
 	);
 };
 // PropTypes ensure we pass required props of the correct type
 StepProgressBar.propTypes = {
-	currentStep: PropTypes.number.isRequired,
+	currentStep: PropTypes.string.isRequired,
 };
 
 export default StepProgressBar;

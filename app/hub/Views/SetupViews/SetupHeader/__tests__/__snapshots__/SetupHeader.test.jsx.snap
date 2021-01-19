@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app/hub/Views/SetupViews/SetupHeader component Snapshot tests with react-test-renderer setup header is rendered correctly 1`] = `
+exports[`app/hub/Views/OnboardingViews/SetupHeader component Snapshot tests with react-test-renderer setup header is rendered correctly 1`] = `
 <div
   className="row align-center"
 >

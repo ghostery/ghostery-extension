@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -82,32 +82,32 @@ class OnboardingViewContainer extends Component {
 		const { sendMountActions } = this.state;
 		const steps = [
 			{
-				index: 0,
+				index: WELCOME,
 				path: `/${ONBOARDING}/${WELCOME}`,
 				bodyComponents: [WelcomeView],
 			},
 			{
-				index: 1,
+				index: LOGIN,
 				path: `/${ONBOARDING}/${LOGIN}`,
 				bodyComponents: [Step1_CreateAccountView],
 			},
 			{
-				index: 2,
+				index: BLOCK_SETTINGS,
 				path: `/${ONBOARDING}/${BLOCK_SETTINGS}`,
 				bodyComponents: [BlockSettingsView],
 			},
 			{
-				index: 3,
+				index: CHOOSE_DEFAULT_SEARCH,
 				path: `/${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`,
 				bodyComponents: [ChooseDefaultSearchView],
 			},
 			{
-				index: 4,
+				index: CHOOSE_PLAN,
 				path: `/${ONBOARDING}/${CHOOSE_PLAN}`,
 				bodyComponents: [ChoosePlanView],
 			},
 			{
-				index: 5,
+				index: SUCCESS,
 				path: `/${ONBOARDING}/${SUCCESS}`,
 				bodyComponents: [SuccessView],
 			}
