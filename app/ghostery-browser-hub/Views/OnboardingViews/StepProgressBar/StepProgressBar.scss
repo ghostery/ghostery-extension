@@ -45,6 +45,8 @@
 		&.incomplete {
 			background: url('/app/images/hub/step-progress-bar/step-2-incomplete.svg');
 			background-repeat: no-repeat;
+			margin: 0 2px 3px 0;
+			height: 32px;
 		}
 	}
 	&.step-3 {
@@ -55,6 +57,8 @@
 		&.incomplete {
 			background: url('/app/images/hub/step-progress-bar/step-3-incomplete.svg');
 			background-repeat: no-repeat;
+			margin: 0 2px 3px 0;
+			height: 32px;
 		}
 	}
 	&.step-4 {
@@ -65,6 +69,8 @@
 		&.incomplete {
 			background: url('/app/images/hub/step-progress-bar/step-4-incomplete.svg');
 			background-repeat: no-repeat;
+			margin: 0 2px 3px 0;
+			height: 32px;
 		}
 	}
 	&.step-completed {
@@ -94,6 +100,7 @@
 	width: 100%;
 	&.completed {
 		border: solid 2px $ghosty-blue;
+		width: 110%;
 	}
 	&.incompleted {
 		padding: 13px;
