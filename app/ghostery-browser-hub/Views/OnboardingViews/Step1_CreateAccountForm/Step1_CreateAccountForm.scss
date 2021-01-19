@@ -48,13 +48,6 @@
 		color: red;
 	}
 }
-.Step1_CreateAccountForm__promoString {
-	font-size: 14px;
-	margin-top: 15px;
-	@include breakpoint(small down) {
-		margin-top: 0;
-	}
-}
 .Step1_CreateAccountForm__legalConsentCheckedLabel {
 	font-size: 14px;
 	@include breakpoint(small down) {

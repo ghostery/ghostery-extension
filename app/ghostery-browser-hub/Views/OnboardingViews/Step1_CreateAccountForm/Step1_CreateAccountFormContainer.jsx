@@ -114,13 +114,6 @@ class CreateAccountFormContainer extends Component {
 	}
 
 	/**
-	 * Update updates checkbox value by updating state
-	 */
-	_handleUpdatesCheckboxChange = () => {
-		this.setState(prevState => ({ isUpdatesChecked: !prevState.isUpdatesChecked }));
-	}
-
-	/**
 	 * Handle creating an account, but validate the data first.
 	 * @param  {Object} event the 'submit' event
 	 */
@@ -134,7 +127,6 @@ class CreateAccountFormContainer extends Component {
 			legalConsentChecked,
 			password,
 			confirmPassword,
-			isUpdatesChecked,
 		} = this.state;
 		const emailIsValid = email && validateEmail(email);
 		const confirmIsValid = confirmEmail && validateConfirmEmail(email, confirmEmail);
@@ -164,7 +156,7 @@ class CreateAccountFormContainer extends Component {
 			if (success) {
 				// User is automatically logged in, and redirected to the logged in view of BrowserCreateAccountForm
 				actions.getUser().then(() => {
-					if (isUpdatesChecked) actions.handleEmailPreferencesCheckboxChange('global', isUpdatesChecked);
+					actions.subscribeToEmailList('global');
 				});
 				// Toggle legal consent checked here
 				actions.setToast({
@@ -222,7 +214,6 @@ class CreateAccountFormContainer extends Component {
 				handleLegalConsentCheckboxChange={this._handleLegalConsentCheckboxChange}
 				handleSubmit={this._handleCreateAccountAttempt}
 				isUpdatesChecked={isUpdatesChecked}
-				handleUpdatesCheckboxChange={this._handleUpdatesCheckboxChange}
 			/>
 		);
 	}

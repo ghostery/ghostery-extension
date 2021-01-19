@@ -16,8 +16,6 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox';
 
-const promoString = `${t('ghostery_browser_hub_onboarding_send_me')} Ghostery ${t('ghostery_browser_hub_onboarding_updates_and_promotions')}`;
-
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Hub app
@@ -39,9 +37,7 @@ export const Step1_CreateAccountForm = (props) => {
 		legalConsentChecked,
 		legalConsentNotCheckedError,
 		handleLegalConsentCheckboxChange,
-		isUpdatesChecked,
 		handleInputChange,
-		handleUpdatesCheckboxChange,
 		handleSubmit,
 	} = props;
 
@@ -194,23 +190,6 @@ export const Step1_CreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-8">
-					<div className="Step1_CreateAccountForm__checkboxContainer Step1_CreateAccountForm--marginBottom flex-container">
-						<ToggleCheckbox
-							checked={isUpdatesChecked}
-							className="ToggleCheckbox--flush-left"
-							onChange={handleUpdatesCheckboxChange}
-						/>
-						<span
-							className="Step1_CreateAccountForm__promoString"
-							onClick={handleUpdatesCheckboxChange}
-							dangerouslySetInnerHTML={{ __html: promoString }}
-						/>
-					</div>
-				</div>
-				<div className="columns small-10 medium-2" />
-			</div>
-			<div className="row align-center-middle">
-				<div className="columns small-10 medium-8">
 					<div className="Step1_CreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container">
 						<ToggleCheckbox
 							name="globals"
@@ -242,13 +221,11 @@ Step1_CreateAccountForm.propTypes = {
 	confirmEmailError: PropTypes.bool.isRequired,
 	firstName: PropTypes.string.isRequired,
 	lastName: PropTypes.string.isRequired,
-	isUpdatesChecked: PropTypes.bool.isRequired,
 	password: PropTypes.string.isRequired,
 	confirmPassword: PropTypes.string.isRequired,
 	passwordInvalidError: PropTypes.bool.isRequired,
 	passwordLengthError: PropTypes.bool.isRequired,
 	handleInputChange: PropTypes.func.isRequired,
-	handleUpdatesCheckboxChange: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 };
 

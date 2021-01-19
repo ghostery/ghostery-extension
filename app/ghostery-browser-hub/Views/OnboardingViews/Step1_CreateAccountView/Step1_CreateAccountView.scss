@@ -174,26 +174,16 @@ $color-create-account-form-error-red: #e74055;
 	text-decoration: underline;
 	cursor: pointer;
 }
-.Step1_CreateAccountView__arrow {
-	margin: 15px auto 0 auto;
-	height: 12px;
-	width: 12px;
-	border-left: 2px solid #00aef0;
-	border-top: 2px solid #00aef0;
-	cursor: pointer;
-
-	&.up {
-		transform: rotate(45deg);
-	}
-	&.down {
-		transform: rotate(225deg);
-	}
-}
 .Step1_CreateAccountView__FAQContainer {
-	margin-top: 10px;
+	margin-top: 48px;
 	padding-top: 20px;
 	@include breakpoint(small down) {
+		margin-top: 42px;
 		text-align: center;
+	}
+	@include breakpoint(large up) {
+		width: 108%;
+		margin-left: -4%;
 	}
 }
 .Step1_CreateAccountView__faqItemContainer {
