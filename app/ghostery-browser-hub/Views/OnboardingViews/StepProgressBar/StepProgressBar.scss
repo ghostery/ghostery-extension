@@ -18,7 +18,12 @@
 	align-items: center;
   	max-width: 800px;
   	margin: auto;
-  	padding-top: 10px;
+	padding-top: 10px;
+
+	&.step4 {
+		max-width: 724px;
+		padding: 10px 20px 0 20px;
+	}
 }
 
 .StepProgressBar__Step {
@@ -91,7 +96,7 @@
 		border: solid 2px $ghosty-blue;
 	}
 	&.incompleted {
-		padding: 1em;
+		padding: 13px;
 		background-image:
 		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
 		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
