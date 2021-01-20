@@ -57,6 +57,10 @@ const StepProgressBar = (props) => {
 	const currentStepNumber = parseInt(currentStep, 10);
 	const totalSteps = steps.length;
 
+	const progressBarContainerClasses = ClassNames('StepProgressBarContainer', {
+		step4: currentStepNumber === 4
+	});
+
 	const logoutIfStepOne = (stepId) => {
 		const { actions } = props;
 		const { logout } = actions;
@@ -121,7 +125,7 @@ const StepProgressBar = (props) => {
 	);
 
 	return (
-		<div className="StepProgressBarContainer">
+		<div className={progressBarContainerClasses}>
 			{(currentStep !== WELCOME) && renderProgressBar()}
 		</div>
 	);
