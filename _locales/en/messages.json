@@ -1959,8 +1959,11 @@
 	"ghostery_browser_hub_onboarding_other": {
 		"message": "Other"
 	},
-	"ghostery_browser_hub_onboarding_toast_error": {
-		"message": "Please answer all questions"
+	"ghostery_browser_hub_onboarding_toast_success": {
+		"message": "Success: "
+	},
+	"ghostery_browser_hub_onboarding_toast_alert": {
+		"message": "Error: "
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."

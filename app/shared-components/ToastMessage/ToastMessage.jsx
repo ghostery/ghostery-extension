@@ -27,12 +27,7 @@ const ToastMessage = ({
 	const dawnHubClass = dawnHub ? 'dawn-hub' : '';
 	const dawnLayout = dawnHub ? 'align-justify align-middle' : 'align-center-middle';
 
-	let dawnToastText = '';
-	if (dawnHub && toastClass === 'alert') {
-		dawnToastText = 'Error: ';
-	} else if (dawnHub && toastClass === 'success') {
-		dawnToastText = 'Success: ';
-	}
+	const dawnToastText = dawnHub ? t(`ghostery_browser_hub_onboarding_toast_${toastClass}`) : '';
 
 	return (
 		<div className={`ToastMessage full-width ${dawnHubClass}`}>
