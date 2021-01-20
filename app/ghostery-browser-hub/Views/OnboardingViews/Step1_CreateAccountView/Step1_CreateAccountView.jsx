@@ -25,13 +25,13 @@ const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 const faqList = [
 	{
 		icon: 'ghosty-shield.svg',
-		label: t('ghostery_browser_hub_onboarding_private_by_design'),
-		description: t('ghostery_browser_hub_onboarding_private_by_design_description'),
+		label: t('ghostery_dawn_onboarding_private_by_design'),
+		description: t('ghostery_dawn_onboarding_private_by_design_description'),
 	},
 	{
 		icon: 'ghosty-box.svg',
-		label: t('ghostery_browser_hub_onboarding_can_i_remove_my_account'),
-		description: t('ghostery_browser_hub_onboarding_can_i_remove_my_account_description'),
+		label: t('ghostery_dawn_onboarding_can_i_remove_my_account'),
+		description: t('ghostery_dawn_onboarding_can_i_remove_my_account_description'),
 	}
 ];
 
@@ -64,7 +64,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="columns small-10 medium-6" />
 			<div className="columns small-10 medium-6">
 				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
-					<span>{t('ghostery_browser_hub_onboarding_skip')}</span>
+					<span>{t('ghostery_dawn_onboarding_skip')}</span>
 				</NavLink>
 			</div>
 		</div>
@@ -72,7 +72,7 @@ const Step1_CreateAccountView = (props) => {
 
 	return (user ? (
 		<div className="Step1_CreateAccountView__alreadySignedIn">
-			<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_you_are_signed_in_as')}</div>
+			<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
 				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
@@ -83,18 +83,18 @@ const Step1_CreateAccountView = (props) => {
 	) : (
 		<div className="Step1_CreateAccountView">
 			{view === CREATE_ACCOUNT && (
-				<div className="Step1_CreateAccountView__title">{t('ghostery_browser_hub_onboarding_create_a_ghostery_account')}</div>
+				<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_create_a_ghostery_account')}</div>
 			)}
 			{view === SIGN_IN && (
 				<div className="Step1_CreateAccountView__title">{t('sign_in')}</div>
 			)}
-			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_browser_hub_onboarding_sync_settings') }</div>
+			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_dawn_onboarding_sync_settings') }</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(SIGN_IN)}>{t('ghostery_dawn_onboarding_already_have_account')}</div>
 				)}
 				{view === SIGN_IN && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_dawn_onboarding_create_an_account')}</div>
 				)}
 				<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" />
 			</div>
@@ -108,7 +108,7 @@ const Step1_CreateAccountView = (props) => {
 					</div>
 					<div className="row">
 						<a className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
-							{t('ghostery_browser_hub_onboarding_visit_our_privacy_policy')}
+							{t('ghostery_dawn_onboarding_visit_our_privacy_policy')}
 						</a>
 					</div>
 				</Fragment>

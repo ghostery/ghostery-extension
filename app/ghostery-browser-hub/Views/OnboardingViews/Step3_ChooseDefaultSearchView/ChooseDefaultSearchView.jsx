@@ -22,13 +22,10 @@ const SEARCH_GHOSTERY = 'Ghostery';
 const SEARCH_BING = 'Bing';
 const SEARCH_YAHOO = 'Yahoo';
 const SEARCH_STARTPAGE = 'StartPage';
-const SEARCH_CUSTOM = 'Custom';
 
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
 		super(props);
-
-		this.customURLInputRef = React.createRef();
 
 		this.state = {
 			chosenSearch: SEARCH_GHOSTERY,
@@ -72,8 +69,8 @@ class ChooseDefaultSearchView extends Component {
 
 	renderGhosteryOptionDescription = () => (
 		<Fragment>
-			<div className="ChooseSearchView__optionDescriptionTitle">Ad-free private search</div>
-			<div className="ChooseSearchView__optionDescriptionSubtitle">(Recommended)</div>
+			<div className="ChooseSearchView__optionDescriptionTitle">{t('ghostery_dawn_onboarding_ad_free_private_search')}</div>
+			<div className="ChooseSearchView__optionDescriptionSubtitle">{t('ghostery_dawn_onboarding_recommended')}</div>
 		</Fragment>
 	);
 
@@ -150,7 +147,7 @@ class ChooseDefaultSearchView extends Component {
 					<div className="ChooseSearchView__backContainer">
 						<span className="ChooseSearchView__caret left" />
 						<NavLink to="/onboarding/2">
-							<span className="ChooseSearchView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+							<span className="ChooseSearchView__back">{t('ghostery_dawn_onboarding_back')}</span>
 						</NavLink>
 					</div>
 				</div>
