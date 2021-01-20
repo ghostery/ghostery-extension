@@ -31,17 +31,17 @@ const steps = [
 		id: LOGIN
 	},
 	{
-		label: t('ghostery_browser_hub_onboarding_privacy'),
+		label: t('ghostery_dawn_onboarding_privacy'),
 		route: `/${ONBOARDING}/${BLOCK_SETTINGS}`,
 		id: BLOCK_SETTINGS
 	},
 	{
-		label: t('ghostery_browser_hub_onboarding_search'),
+		label: t('ghostery_dawn_onboarding_search'),
 		route: `/${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`,
 		id: CHOOSE_DEFAULT_SEARCH
 	},
 	{
-		label: t('ghostery_browser_hub_onboarding_plan'),
+		label: t('ghostery_dawn_onboarding_plan'),
 		route: `/${ONBOARDING}/${CHOOSE_PLAN}`,
 		id: CHOOSE_PLAN
 	}

@@ -49,7 +49,7 @@ class OnboardingViewContainer extends Component {
 		history.push(`/${ONBOARDING}/${WELCOME}`);
 
 		// TODO verify what document title we should use
-		const title = t('ghostery_browser_hub_onboarding_page_title');
+		const title = t('ghostery_dawn_onboarding_page_title');
 		window.document.title = title;
 
 		// TODO modify this as needed

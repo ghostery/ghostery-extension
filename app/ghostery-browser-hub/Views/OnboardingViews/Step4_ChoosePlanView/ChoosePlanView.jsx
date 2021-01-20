@@ -26,9 +26,9 @@ const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
 const searchPromo = () => (
 	<div className="ChoosePlanView__searchPromoContainer">
 		<div className="ChoosePlanView__searchLogo" />
-		<div className="ChoosePlanView__adFree">{ t('ghostery_browser_hub_onboarding_ad_free_with_ghostery_plus_subscription') }</div>
-		<div className="ChoosePlanView__adFreePromo">{ t('ghostery_browser_hub_onboarding_ad_free_promo') }</div>
-		<div className="ChoosePlanView__adFreePromoDescription">{ t('ghostery_browser_hub_onboarding_ad_free_promo_description') }</div>
+		<div className="ChoosePlanView__adFree">{ t('ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription') }</div>
+		<div className="ChoosePlanView__adFreePromo">{ t('ghostery_dawn_onboarding_ad_free_promo') }</div>
+		<div className="ChoosePlanView__adFreePromoDescription">{ t('ghostery_dawn_onboarding_ad_free_promo_description') }</div>
 	</div>
 );
 
@@ -54,19 +54,19 @@ const basicCard = (checked, handleClick) => {
 				<div className="ChoosePlanView__valuePropList basic">
 					<div className="ChoosePlanView__cardSubCopy">
 						<span className="check blue" />
-						{t('ghostery_browser_hub_onboarding_private_search')}
+						{t('ghostery_dawn_onboarding_private_search')}
 					</div>
 					<div className="ChoosePlanView__cardSubCopy">
 						<span className="check blue" />
-						{t('ghostery_browser_hub_onboarding_tracker_protection')}
+						{t('ghostery_dawn_onboarding_tracker_protection')}
 					</div>
 					<div className="ChoosePlanView__cardSubCopy">
 						<span className="check blue" />
-						{t('ghostery_browser_hub_onboarding_speedy_page_loads')}
+						{t('ghostery_dawn_onboarding_speedy_page_loads')}
 					</div>
 					<div className="ChoosePlanView__cardSubCopy">
 						<span className="check blue" />
-						{t('ghostery_browser_hub_onboarding_intelligence_technology')}
+						{t('ghostery_dawn_onboarding_intelligence_technology')}
 					</div>
 				</div>
 			</div>
@@ -100,27 +100,27 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 					<div className="ChoosePlanView__valuePropList">
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_private_search')}
+							{t('ghostery_dawn_onboarding_private_search')}
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_tracker_protection')}
+							{t('ghostery_dawn_onboarding_tracker_protection')}
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_speedy_page_loads')}
+							{t('ghostery_dawn_onboarding_speedy_page_loads')}
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_intelligence_technology')}
+							{t('ghostery_dawn_onboarding_intelligence_technology')}
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_ad_free')}
+							{t('ghostery_dawn_onboarding_ad_free')}
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_supports_ghosterys_mission')}
+							{t('ghostery_dawn_onboarding_supports_ghosterys_mission')}
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
@@ -128,13 +128,13 @@ const premiumCard = (checked, handleClick, showCTAButton = false) => {
 						</div>
 						<div className="ChoosePlanView__cardSubCopy">
 							<span className="check blue" />
-							{t('ghostery_browser_hub_onboarding_unlimited_bandwidth')}
+							{t('ghostery_dawn_onboarding_unlimited_bandwidth')}
 						</div>
 					</div>
 				</div>
 			</div>
 			{showCTAButton && (
-				<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('ghostery_browser_hub_onboarding_upgrade')}</a>
+				<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('ghostery_dawn_onboarding_upgrade')}</a>
 			)}
 		</Fragment>
 	);
@@ -202,9 +202,9 @@ class ChoosePlanView extends React.Component {
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
-		if (isPremium) return t('ghostery_browser_hub_onboarding_already_premium_subscriber');
-		if (isPlus) return t('ghostery_browser_hub_onboarding_already_plus_subscriber');
-		return t('ghostery_browser_hub_onboarding_your_privacy_plan');
+		if (isPremium) return t('ghostery_dawn_onboarding_already_premium_subscriber');
+		if (isPlus) return t('ghostery_dawn_onboarding_already_plus_subscriber');
+		return t('ghostery_dawn_onboarding_your_privacy_plan');
 	};
 
 	renderSubtitleText = (fromSearchSelectionScreen) => {
@@ -212,10 +212,10 @@ class ChoosePlanView extends React.Component {
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
-		if (fromSearchSelectionScreen) return t('ghostery_browser_hub_onboarding_based_on_your_privacy_preferences');
+		if (fromSearchSelectionScreen) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
 		if (isPremium) return '';
-		if (isPlus) return t('ghostery_browser_hub_onboarding_keep_your_current_plan_or_upgrade');
-		return t('ghostery_browser_hub_onboarding_choose_an_option');
+		if (isPlus) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
+		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
 	plusCard = (checked, handleClick, showCTAButton = false) => {
@@ -245,34 +245,34 @@ class ChoosePlanView extends React.Component {
 						<div className="ChoosePlanView__valuePropList">
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
-								{t('ghostery_browser_hub_onboarding_private_search')}
+								{t('ghostery_dawn_onboarding_private_search')}
 							</div>
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
-								{t('ghostery_browser_hub_onboarding_tracker_protection')}
+								{t('ghostery_dawn_onboarding_tracker_protection')}
 							</div>
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
-								{t('ghostery_browser_hub_onboarding_speedy_page_loads')}
+								{t('ghostery_dawn_onboarding_speedy_page_loads')}
 							</div>
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
-								{t('ghostery_browser_hub_onboarding_intelligence_technology')}
+								{t('ghostery_dawn_onboarding_intelligence_technology')}
 							</div>
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
-								{t('ghostery_browser_hub_onboarding_ad_free')}
+								{t('ghostery_dawn_onboarding_ad_free')}
 							</div>
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
-								{t('ghostery_browser_hub_onboarding_supports_ghosterys_mission')}
+								{t('ghostery_dawn_onboarding_supports_ghosterys_mission')}
 							</div>
 						</div>
 					</div>
 				</div>
 				{showCTAButton && (
 					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
-						<span>{t('ghostery_browser_hub_onboarding_keep')}</span>
+						<span>{t('ghostery_dawn_onboarding_keep')}</span>
 					</NavLink>
 				)}
 			</Fragment>
@@ -299,7 +299,7 @@ class ChoosePlanView extends React.Component {
 					<div className="ChoosePlanView__backContainer">
 						<span className="ChoosePlanView__caret left" />
 						<NavLink to="/onboarding/3">
-							<span className="ChoosePlanView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+							<span className="ChoosePlanView__back">{t('ghostery_dawn_onboarding_back')}</span>
 						</NavLink>
 					</div>
 				</div>
@@ -314,8 +314,8 @@ class ChoosePlanView extends React.Component {
 									and move them to Step 5 if signed in
 								2. If user is signed out, clicking this should take them to Step 4b (linked)
 							*/}
-							<div className="ChoosePlanView__searchCTAButton">{t('ghostery_browser_hub_onboarding_start_trial')}</div>
-							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_browser_hub_onboarding_see_all_plans')}</div>
+							<div className="ChoosePlanView__searchCTAButton">{t('ghostery_dawn_onboarding_start_trial')}</div>
+							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
 						</Fragment>
 					)}
@@ -326,7 +326,7 @@ class ChoosePlanView extends React.Component {
 									<div className="small-12 medium-12 large-4">
 										{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, isPlus)}
 									</div>
-									<div className="ChoosePlanView__or small-12 large-2">{t('ghostery_browser_hub_onboarding_or')}</div>
+									<div className="ChoosePlanView__or small-12 large-2">{t('ghostery_dawn_onboarding_or')}</div>
 									<div className="small-12 medium-12 large-4">
 										{premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, isPlus)}
 									</div>

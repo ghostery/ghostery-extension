@@ -27,7 +27,7 @@ const ToastMessage = ({
 	const dawnHubClass = dawnHub ? 'dawn-hub' : '';
 	const dawnLayout = dawnHub ? 'align-justify align-middle' : 'align-center-middle';
 
-	const dawnToastText = dawnHub ? t(`ghostery_browser_hub_onboarding_toast_${toastClass}`) : '';
+	const dawnToastText = dawnHub ? t(`ghostery_dawn_onboarding_toast_${toastClass}`) : '';
 
 	return (
 		<div className={`ToastMessage full-width ${dawnHubClass}`}>

@@ -147,7 +147,7 @@ class CreateAccountFormContainer extends Component {
 		const { actions } = this.props;
 		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid || confirmPasswordError) {
 			actions.setToast({
-				toastMessage: t('ghostery_browser_hub_onboarding_toast_fix_errors'),
+				toastMessage: t('ghostery_dawn_onboarding_toast_fix_errors'),
 				toastClass: 'alert'
 			});
 			return;
