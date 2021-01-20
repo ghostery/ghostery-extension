@@ -28,7 +28,7 @@ import {
 	GET_USER_SETTINGS_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS,
-	ACCOUNT_DATA_EMAIL_PREFERENCES_CHECKBOX_CHANGE
+	SUBSCRIBE_TO_EMAIL_LIST
 } from './AccountConstants';
 import { SET_TOAST } from '../hub/Views/AppView/AppViewConstants';
 import { CLEAR_THEME } from '../panel/constants/constants';
@@ -203,9 +203,9 @@ export const resetPassword = email => dispatch => (
 		})
 );
 
-export const handleEmailPreferencesCheckboxChange = (name, checked) => dispatch => (
+export const subscribeToEmailList = name => dispatch => (
 	dispatch({
-		type: ACCOUNT_DATA_EMAIL_PREFERENCES_CHECKBOX_CHANGE,
-		payload: { name, checked },
+		type: SUBSCRIBE_TO_EMAIL_LIST,
+		payload: { name },
 	})
 );

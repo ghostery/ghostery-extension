@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with react-test-renderer setup human web view is rendered correctly 1`] = `
+exports[`app/hub/Views/OnboardingViews/SetupDoneView component Snapshot tests with react-test-renderer setup human web view is rendered correctly 1`] = `
 <div
   className="row align-center"
 >

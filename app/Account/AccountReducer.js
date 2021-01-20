@@ -21,7 +21,7 @@ import {
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS,
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL,
-	ACCOUNT_DATA_EMAIL_PREFERENCES_CHECKBOX_CHANGE
+	SUBSCRIBE_TO_EMAIL_LIST
 } from './AccountConstants';
 import { UPDATE_PANEL_DATA } from '../panel/constants/constants';
 
@@ -119,11 +119,11 @@ export default (state = initialState, action) => {
 				resetPasswordError: true
 			};
 		}
-		case ACCOUNT_DATA_EMAIL_PREFERENCES_CHECKBOX_CHANGE: {
-			const { name, checked } = action.payload;
+		case SUBSCRIBE_TO_EMAIL_LIST: {
+			const { name } = action.payload;
 			let emailPreferences;
 			if (name === 'global') {
-				emailPreferences = { ...state.user.emailPreferences, ...{ global: checked } };
+				emailPreferences = { ...state.user.emailPreferences, ...{ global: true } };
 			}
 			const user = { ...state.user, ...{ emailPreferences } };
 			return { ...state, ...{ user } };

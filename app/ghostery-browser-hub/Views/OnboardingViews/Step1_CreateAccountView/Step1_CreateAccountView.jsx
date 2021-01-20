@@ -4,17 +4,16 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ClassNames from 'classnames';
 import Step1_LogInForm from '../Step1_LogInForm';
 import Step1_CreateAccountForm from '../Step1_CreateAccountForm';
 import globals from '../../../../../src/classes/Globals';
@@ -38,10 +37,10 @@ const faqList = [
 
 const renderFAQListItem = (icon, label, description) => (
 	<div className="Step1_CreateAccountView__faqItemContainer row">
-		<div className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 medium-offset-1 large-2 large-offset-1">
+		<div className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2">
 			<img className="Step1_CreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
 		</div>
-		<div className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 medium-offset-1 large-8 large-offset-0">
+		<div className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 large-10">
 			<div className="Step1_CreateAccountView__faqItemLabel">{label}</div>
 			<div className="Step1_CreateAccountView__faqItemDescription">{description}</div>
 		</div>
@@ -58,23 +57,7 @@ const Step1_CreateAccountView = (props) => {
 	const { setSetupStep } = actions;
 	const email = user && user.email;
 
-	const [expanded, setExpanded] = useState(false);
 	const [view, setView] = useState(CREATE_ACCOUNT);
-
-	const arrowClassNames = ClassNames('Step1_CreateAccountView__arrow', {
-		up: expanded,
-		down: !expanded,
-	});
-
-	const faqRef = useRef(null);
-	const scrollToFAQ = () => {
-		faqRef.current.scrollIntoView({ behavior: 'smooth' });
-	};
-
-	const handleFAQLearnMoreClick = () => {
-		setTimeout(scrollToFAQ, 1);
-		setExpanded(!expanded);
-	};
 
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
@@ -120,22 +103,14 @@ const Step1_CreateAccountView = (props) => {
 					{/* eslint-disable-next-line react/jsx-pascal-case */}
 					<Step1_CreateAccountForm />
 					{renderSkipLink()}
-					<div className="Step1_CreateAccountView__learnMoreContainer" onClick={handleFAQLearnMoreClick}>
-						<div className="Step1_CreateAccountView__learnMore">{t('ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously')}</div>
+					<div className="Step1_CreateAccountView__FAQContainer">
+						{faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))}
 					</div>
-					<div className={arrowClassNames} onClick={handleFAQLearnMoreClick} />
-					<div ref={faqRef} className="Step1_CreateAccountView__FAQContainer">
-						{expanded &&
-							faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))
-						}
+					<div className="row">
+						<a className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
+							{t('ghostery_browser_hub_onboarding_visit_our_privacy_policy')}
+						</a>
 					</div>
-					{expanded && (
-						<div className="row">
-							<a className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
-								{t('ghostery_browser_hub_onboarding_visit_our_privacy_policy')}
-							</a>
-						</div>
-					)}
 				</Fragment>
 			) : (
 				<Fragment>
