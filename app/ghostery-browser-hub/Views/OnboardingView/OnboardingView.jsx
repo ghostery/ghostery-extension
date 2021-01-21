@@ -13,11 +13,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 import { Route } from 'react-router-dom';
 
 import StepProgressBar from '../OnboardingViews/StepProgressBar';
 import StepNavigator from '../OnboardingViews/StepNavigator';
-import { CHOOSE_PLAN } from './OnboardingConstants';
+import { BLOCK_SETTINGS, CHOOSE_DEFAULT_SEARCH, CHOOSE_PLAN } from './OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Onboarding View
@@ -28,6 +29,12 @@ const OnboardingView = (props) => {
 	const { sendMountActions, steps } = props;
 	console.log('in OnboardingView');
 
+	const getScreenContainerClassNames = index => ClassNames('OnboardingView__screenContainer', {
+		step2: index === BLOCK_SETTINGS,
+		step3: index === CHOOSE_DEFAULT_SEARCH,
+		step4: index === CHOOSE_PLAN
+	});
+
 	return (
 		<div className="full-height flex-container flex-dir-column android-relative">
 			<div className="flex-child-grow">
@@ -36,7 +43,7 @@ const OnboardingView = (props) => {
 						key={`route-${step.index}`}
 						path={step.path}
 						render={() => (
-							<div className={step.index === CHOOSE_PLAN ? 'OnboardingView__screenContainer step4' : 'OnboardingView__screenContainer'}>
+							<div className={getScreenContainerClassNames(step.index)}>
 								<StepProgressBar currentStep={step.index} />
 								<StepNavigator step={step.index} components={step.bodyComponents} sendMountActions={sendMountActions} />
 							</div>

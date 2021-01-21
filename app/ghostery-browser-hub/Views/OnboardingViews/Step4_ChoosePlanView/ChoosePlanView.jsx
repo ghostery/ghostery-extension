@@ -54,7 +54,9 @@ const basicCard = (checked, handleClick) => {
 				<div className="ChoosePlanView__valuePropList basic">
 					<div className="ChoosePlanView__cardSubCopy">
 						<span className="check blue" />
-						{t('ghostery_browser_hub_onboarding_private_search')}
+						<span>
+							{t('ghostery_browser_hub_onboarding_private_search')}
+						</span>
 					</div>
 					<div className="ChoosePlanView__cardSubCopy">
 						<span className="check blue" />

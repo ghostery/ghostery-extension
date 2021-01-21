@@ -24,7 +24,7 @@
 .StepProgressBar__Step {
 	height: 34px;
 	width: 32px;
-	margin-left: 3px;
+	margin: auto;
 
 	&.step-1 {
 		&.current {
@@ -77,9 +77,9 @@
 }
 .StepProgressBar__label {
 	margin-bottom: 14px;
-	width: 38px;
 	font-size: 12px;
 	color: $tundora;
+	white-space: nowrap;
 	&.current {
 		font-weight: 700;
 	}

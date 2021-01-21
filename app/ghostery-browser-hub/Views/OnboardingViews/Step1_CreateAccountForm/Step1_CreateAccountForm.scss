@@ -48,6 +48,9 @@
 		color: red;
 	}
 }
+.Step1_CreateAccountForm__checkboxContainer {
+	margin-top: 36px;
+}
 .Step1_CreateAccountForm__legalConsentCheckedLabel {
 	font-size: 14px;
 	@include breakpoint(small down) {
@@ -64,7 +67,7 @@
 
 	.Step1_CreateAccountForm__ctaButton {
 		margin: 48px auto 0 auto;
-		height: 44px;
+		min-height: 44px;
 		width: 162px;
 		padding: 7.7px 14px;
 		line-height: 22px;
