@@ -141,6 +141,7 @@ class CreateAccountFormContainer extends Component {
 			legalConsentNotCheckedError: !legalConsentChecked,
 			passwordInvalidError: invalidChars,
 			passwordLengthError: invalidLength,
+			confirmPasswordError,
 			validateInput: true,
 		});
 
