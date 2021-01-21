@@ -66,9 +66,16 @@ class BlockSettingsView extends Component {
 			blockAds, kindsOfTrackers, antiTracking, smartBrowsing
 		} = this.state;
 
+		const { actions } = this.props;
+		const { setToast } = actions;
+
 		// Will only change user settings if all questions are answered
 		if (blockAds !== null && kindsOfTrackers !== null && antiTracking !== null && smartBrowsing !== null) {
-			const { actions } = this.props;
+			setToast({
+				toastMessage: '',
+				toastClass: ''
+			});
+
 			const {
 				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
 			} = actions;
@@ -93,15 +100,13 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
+
 			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
 			history.push('/onboarding/3');
 		} else {
-			const { actions } = this.props;
-			const { setToast } = actions;
-
 			setToast({
-				toastMessage: t('ghostery_browser_hub_blocking_settings_view_toast_error_message'),
-				toastClass: 'error'
+				toastMessage: t('ghostery_dawn_hub_blocking_settings_view_toast_error_message'),
+				toastClass: 'alert'
 			});
 		}
 	}

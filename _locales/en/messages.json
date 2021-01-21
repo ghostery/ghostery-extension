@@ -1740,6 +1740,9 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "Please fix errors before proceeding."
+	},
 	"ghostery_dawn_onboarding_install_heading": {
 		"message": "Ghostery Dawn now installing..."
 	},
@@ -1926,7 +1929,7 @@
 	"ghostery_dawn_onboarding_info_smart_browsing": {
 		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
 	},
-	"ghostery_browser_hub__onboarding_choose_your_default_search": {
+	"ghostery_dawn_hub__onboarding_choose_your_default_search": {
 		"message": "Choose your default search"
 	},
 	"ghostery_dawn_onboarding_pick_a_default_search_engine": {
@@ -1959,8 +1962,11 @@
 	"ghostery_dawn_onboarding_other": {
 		"message": "Other"
 	},
-	"ghostery_dawn_onboarding_toast_error": {
-		"message": "Please answer all questions"
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "Success: "
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "Error: "
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -2415,7 +2421,7 @@
   	"pick_a_default_search_engine": {
 	  "message": "Pick a default engine for all your searches."
 	},
-  	"ghostery_browser_hub_blocking_settings_view_toast_error_message": {
-	  "message": "Error: Please answer all questions"
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Please answer all questions"
 	}
 }
