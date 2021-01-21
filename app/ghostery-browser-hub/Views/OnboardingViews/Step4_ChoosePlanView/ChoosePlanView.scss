@@ -18,6 +18,8 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	padding-bottom: 20px;
 }
 .ChoosePlanView__relativeContainer {
+	width: 724px;
+	margin: auto;
 	position: relative;
 }
 .ChoosePlanView__caret.left {
@@ -33,7 +35,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 10px;
+	margin-top: 7px;
 	.ChoosePlanView__back {
 		margin-top: 8px;
 		font-size: 16px;
