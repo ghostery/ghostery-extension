@@ -1846,7 +1846,7 @@
 		"message": "Create a Ghostery Account"
 	},
 	"ghostery_dawn_onboarding_sync_settings": {
-		"message": "Allows you to sync settings across browsers and devices."
+		"message": "Allows you to sync your privacy settings across devices."
 	},
 	"ghostery_dawn_onboarding_already_have_account": {
 		"message": "I already have an account."
@@ -2267,6 +2267,9 @@
 	"next": {
 		"message": "Next"
 	},
+	"next_or_start_trial": {
+		"message": "Next or Start Trial"
+	},
 	"previous": {
 		"message": "Previous"
 	},
@@ -2419,7 +2422,7 @@
 		"message": "Choose your default search"
 	},
   	"pick_a_default_search_engine": {
-	  "message": "Pick a default engine for all your searches."
+	  "message": "Choose a default search engine for all your searches."
 	},
   	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
 	  "message": "Please answer all questions"
