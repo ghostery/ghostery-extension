@@ -75,7 +75,7 @@ class ChooseDefaultSearchView extends Component {
 	);
 
 	renderStartpageOptionDescription = () => (
-		<div className="ChooseSearchView__optionDescriptionTitle">Ad-supported private search</div>
+		<div className="ChooseSearchView__optionDescriptionTitle">{t('ghostery_dawn_onboarding_ad_supported_private_search')}</div>
 	)
 
 	renderOptionContainer = (chosenSearch, optionName) => {
