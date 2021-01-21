@@ -118,6 +118,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	&:hover {
 		background-position: 0% 50%;
 		transition: 0.25s all;
+		color: $white;
 	}
 	&:focus {
 		color: $white;

@@ -66,9 +66,16 @@ class BlockSettingsView extends Component {
 			blockAds, kindsOfTrackers, antiTracking, smartBrowsing
 		} = this.state;
 
+		const { actions } = this.props;
+		const { setToast } = actions;
+
 		// Will only change user settings if all questions are answered
 		if (blockAds !== null && kindsOfTrackers !== null && antiTracking !== null && smartBrowsing !== null) {
-			const { actions } = this.props;
+			setToast({
+				toastMessage: '',
+				toastClass: ''
+			});
+
 			const {
 				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
 			} = actions;
@@ -93,15 +100,13 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
+
 			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
 			history.push('/onboarding/3');
 		} else {
-			const { actions } = this.props;
-			const { setToast } = actions;
-
 			setToast({
-				toastMessage: t('ghostery_browser_hub_blocking_settings_view_toast_error_message'),
-				toastClass: 'error'
+				toastMessage: t('ghostery_dawn_hub_blocking_settings_view_toast_error_message'),
+				toastClass: 'alert'
 			});
 		}
 	}
@@ -118,13 +123,13 @@ class BlockSettingsView extends Component {
 					<div className="BlockSettingsView__backContainer">
 						<span className="BlockSettingsView__caret left" />
 						<NavLink to="/onboarding/1" onClick={() => logout()}>
-							<span className="BlockSettingsView__back">{t('ghostery_browser_hub_onboarding_back')}</span>
+							<span className="BlockSettingsView__back">{t('ghostery_dawn_onboarding_back')}</span>
 						</NavLink>
 					</div>
 				</div>
 				<div className="BlockSettingsView__container">
-					<div className="BlockSettingsView__title">{t('ghostery_browser_hub_onboarding_which_privacy_plan')}</div>
-					<div className="BlockSettingsView__subtitle">{t('ghostery_browser_hub_onboarding_tell_us_your_preferences')}</div>
+					<div className="BlockSettingsView__title">{t('ghostery_dawn_onboarding_which_privacy_plan')}</div>
+					<div className="BlockSettingsView__subtitle">{t('ghostery_dawn_onboarding_tell_us_your_preferences')}</div>
 					<div className="BlockSettingsView_formBlock">
 						<div className="BlockSettingsView_checkboxBlock">
 							<ToggleCheckbox
@@ -132,10 +137,10 @@ class BlockSettingsView extends Component {
 								checked={recommendedChoices}
 								onChange={() => this.toggleRecommendedChoices(!recommendedChoices)}
 							/>
-							<div>{t('ghostery_browser_hub_onboarding_recommended_choices')}</div>
+							<div>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
 						</div>
 						<ol>
-							<li className="BlockSettingsView_question">{t('ghostery_browser_hub_onboarding_question_block_ads')}</li>
+							<li className="BlockSettingsView_question">{t('ghostery_dawn_onboarding_question_block_ads')}</li>
 							<div className="BlockSettingsView_answerBlock">
 								<div className="BlockSettingsView__radioButtonContainer">
 									<RadioButton checked={blockAds === true} handleClick={() => this.handleAnswerChange('blockAds', true)} altDesign />
@@ -150,34 +155,34 @@ class BlockSettingsView extends Component {
 							</div>
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
-									{t('ghostery_browser_hub_onboarding_question_kinds_of_trackers')}
+									{t('ghostery_dawn_onboarding_question_kinds_of_trackers')}
 									<div className="BlockSettingsView__infoIcon g-tooltip">
-										<Tooltip header={t('ghostery_browser_hub_onboarding_info_blocking_all')} position="top" delay="300" isOnboardingHub />
+										<Tooltip header={t('ghostery_dawn_onboarding_info_blocking_all')} position="top" delay="300" isOnboardingHub />
 									</div>
 								</div>
 								<div className="BlockSettingsView_answerBlock">
 									<div className="BlockSettingsView__radioButtonContainer">
 										<RadioButton checked={kindsOfTrackers === 0} handleClick={() => this.handleAnswerChange('kindsOfTrackers', 0)} altDesign />
 									</div>
-									<div className="BlockSettingsView_answerText">{t('ghostery_browser_hub_onboarding_kinds_of_trackers_all')}</div>
+									<div className="BlockSettingsView_answerText">{t('ghostery_dawn_onboarding_kinds_of_trackers_all')}</div>
 								</div>
 								<div className="BlockSettingsView_answerBlock">
 									<div className="BlockSettingsView__radioButtonContainer">
 										<RadioButton checked={kindsOfTrackers === 1} handleClick={() => this.handleAnswerChange('kindsOfTrackers', 1)} altDesign />
 									</div>
-									<div className="BlockSettingsView_answerText">{t('ghostery_browser_hub_onboarding_kinds_of_trackers_ad_and_analytics')}</div>
+									<div className="BlockSettingsView_answerText">{t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics')}</div>
 								</div>
 								<div className="BlockSettingsView_answerBlock">
 									<div className="BlockSettingsView__radioButtonContainer">
 										<RadioButton checked={kindsOfTrackers === 2} handleClick={() => this.handleAnswerChange('kindsOfTrackers', 2)} altDesign />
 									</div>
-									<div className="BlockSettingsView_answerText">{t('ghostery_browser_hub_onboarding_kinds_of_trackers_none')}</div>
+									<div className="BlockSettingsView_answerText">{t('ghostery_dawn_onboarding_kinds_of_trackers_none')}</div>
 								</div>
 								<li className="BlockSettingsView_question">
 									<div className="BlockSettingsView_questionBlock">
-										{t('ghostery_browser_hub_onboarding_question_anti_tracking')}
+										{t('ghostery_dawn_onboarding_question_anti_tracking')}
 										<div className="BlockSettingsView__infoIcon g-tooltip">
-											<Tooltip header={t('ghostery_browser_hub_onboarding_info_anti_tracking')} position="top" delay="300" isOnboardingHub />
+											<Tooltip header={t('ghostery_dawn_onboarding_info_anti_tracking')} position="top" delay="300" isOnboardingHub />
 										</div>
 									</div>
 								</li>
@@ -195,9 +200,9 @@ class BlockSettingsView extends Component {
 								</div>
 								<li className="BlockSettingsView_question">
 									<div className="BlockSettingsView_questionBlock">
-										{t('ghostery_browser_hub_onboarding_question_smart_browsing')}
+										{t('ghostery_dawn_onboarding_question_smart_browsing')}
 										<div className="BlockSettingsView__infoIcon g-tooltip">
-											<Tooltip header={t('ghostery_browser_hub_onboarding_info_smart_browsing')} position="top" delay="300" isOnboardingHub />
+											<Tooltip header={t('ghostery_dawn_onboarding_info_smart_browsing')} position="top" delay="300" isOnboardingHub />
 										</div>
 									</div>
 								</li>

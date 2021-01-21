@@ -1649,6 +1649,21 @@ function initializeGhosteryModules() {
 					active: true
 				});
 			}
+			if (globals.JUST_INSTALLED) {
+				if (BROWSER_INFO.name !== 'ghostery_desktop') {
+					const showAlternateHub = conf.hub_layout === 'alternate';
+					const route = showAlternateHub ? '#home' : '';
+					chrome.tabs.create({
+						url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
+						active: true
+					});
+				} else {
+					chrome.tabs.create({
+						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html'),
+						active: true
+					});
+				}
+			}
 		});
 	});
 }

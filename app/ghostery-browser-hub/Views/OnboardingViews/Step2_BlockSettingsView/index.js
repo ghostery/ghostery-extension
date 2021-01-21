@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { withRouter } from 'react-router-dom';
 import BlockSettingsView from './BlockSettingsView';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import { logout } from '../../../../Account/AccountActions';
@@ -29,4 +30,4 @@ const actionCreators = {
 	setSetupStep,
 };
 
-export default buildReduxHOC(null, actionCreators, BlockSettingsView);
+export default withRouter(buildReduxHOC(null, actionCreators, BlockSettingsView));

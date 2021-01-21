@@ -125,12 +125,16 @@
 }
 
 .BlockSettingsView_checkbox {
-	width: 18px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	margin-right: 14px;
 }
 
 .BlockSettingsView__infoIcon {
 	width: 18px;
+	height: 25px;
+	background-position: center;
 	background-repeat: no-repeat;
 	background-image: url('/app/images/hub/setup/info.svg');
 	margin-left: 8px;

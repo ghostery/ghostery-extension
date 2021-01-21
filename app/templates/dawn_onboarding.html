@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+ * Ghostery Hub
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../../dist/css/foundation_hub.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="root"></div>
+	<script>
+		const body = document.getElementsByTagName('body')[0];
+		const js = document.createElement("script");
+
+		js.type = "text/javascript";
+		// TODO branch on actual user agent value
+		if (false) js.src = '../../dist/hub_react.js';
+		else js.src = '../../dist/hub_ghostery_browser_react.js';
+
+		body.appendChild(js);
+
+		const head = document.getElementsByTagName('head')[0];
+		const hubCSS = document.createElement("link");
+
+		hubCSS.type = "text/css";
+		hubCSS.rel = "stylesheet";
+		hubCSS.media = "screen";
+		// TODO branch on actual user agent value
+		hubCSS.href="../../dist/css/hub_ghostery_browser.css";
+
+		head.appendChild(hubCSS);
+	</script>
+</body>
+</html>

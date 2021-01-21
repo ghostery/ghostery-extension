@@ -1740,224 +1740,233 @@
 	"hub_create_account_toast_error": {
 		"message": "That email address is already in use. Please choose another."
 	},
-	"ghostery_browser_hub_onboarding_install_heading": {
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "Please fix errors before proceeding."
+	},
+	"ghostery_dawn_onboarding_install_heading": {
 		"message": "Ghostery Dawn now installing..."
 	},
-	"ghostery_browser_hub_onboarding_page_title": {
+	"ghostery_dawn_onboarding_page_title": {
 	  "message": "Ghostery Dawn Hub - Welcome"
 	},
-  	"ghostery_browser_hub_onboarding_header_title_login": {
+  	"ghostery_dawn_onboarding_header_title_login": {
 	  "message": "Ghostery Dawn Hub - Login"
 	},
-	"ghostery_browser_hub_onboarding_header_title_block_settings": {
+	"ghostery_dawn_onboarding_header_title_block_settings": {
 	  "message": "Ghostery Dawn Hub - Block Settings"
 	},
-	"ghostery_browser_hub_onboarding_header_title_search_choice": {
+	"ghostery_dawn_onboarding_header_title_search_choice": {
 	  "message": "Ghostery Dawn Hub - Search Choice"
 	},
-	"ghostery_browser_hub_onboarding_header_title_plan_choices": {
+	"ghostery_dawn_onboarding_header_title_plan_choices": {
 	  "message": "Ghostery Dawn Hub - Plan Choices"
 	},
-	"ghostery_browser_hub_onboarding_privacy": {
+	"ghostery_dawn_onboarding_privacy": {
 		"message": "Privacy"
 	},
-	"ghostery_browser_hub_onboarding_search": {
+	"ghostery_dawn_onboarding_search": {
 		"message": "Search"
 	},
-	"ghostery_browser_hub_onboarding_plan": {
+	"ghostery_dawn_onboarding_plan": {
 		"message": "Plan"
 	},
-	"ghostery_browser_hub_onboarding_welcome": {
+	"ghostery_dawn_onboarding_welcome": {
 		"message": "Welcome to Ghostery Dawn!"
 	},
-	"ghostery_browser_hub_onboarding_lets_begin": {
+	"ghostery_dawn_onboarding_lets_begin": {
 		"message": "We've centralized online privacy by integrating our signature as well as novel technologies."
 	},
-	"ghostery_browser_hub_onboarding_lets_do_this": {
+	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Set up My Browser"
 	},
-	"ghostery_browser_hub_onboarding_your_privacy_plan": {
+	"ghostery_dawn_onboarding_your_privacy_plan": {
 		"message": "Your Privacy Plan"
 	},
-	"ghostery_browser_hub_onboarding_based_on_your_privacy_preferences": {
+	"ghostery_dawn_onboarding_based_on_your_privacy_preferences": {
 		"message": "Based on your privacy preferences"
 	},
-	"ghostery_browser_hub_onboarding_ad_free_with_ghostery_plus_subscription": {
+	"ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription": {
 		"message": "Ad-free with Ghostery Plus subscription"
 	},
-	"ghostery_browser_hub_onboarding_ad_free_promo": {
+	"ghostery_dawn_onboarding_ad_free_promo": {
 		"message": "40% off for the first 12 months"
 	},
-	"ghostery_browser_hub_onboarding_ad_free_promo_description": {
+	"ghostery_dawn_onboarding_ad_free_promo_description": {
 		"message": "Get to what you want faster. A plus subscription gives Ghostery the support we need to provide YOU with an ad-free experience."
 	},
-	"ghostery_browser_hub_onboarding_or": {
+	"ghostery_dawn_onboarding_or": {
 		"message": "OR"
 	},
-	"ghostery_browser_hub_onboarding_keep": {
+	"ghostery_dawn_onboarding_keep": {
 		"message": "Keep"
 	},
-	"ghostery_browser_hub_onboarding_upgrade": {
+	"ghostery_dawn_onboarding_upgrade": {
 		"message": "Upgrade"
 	},
-	"ghostery_browser_hub_onboarding_start_trial": {
+	"ghostery_dawn_onboarding_start_trial": {
 		"message": "Start Trial"
 	},
-	"ghostery_browser_hub_onboarding_see_all_plans": {
+	"ghostery_dawn_onboarding_see_all_plans": {
 		"message": "See all plans"
 	},
-	"ghostery_browser_hub_onboarding_private_search": {
+	"ghostery_dawn_onboarding_private_search": {
 		"message": "Private search"
 	},
-	"ghostery_browser_hub_onboarding_tracker_protection": {
+	"ghostery_dawn_onboarding_tracker_protection": {
 		"message": "Tracker protection"
 	},
-	"ghostery_browser_hub_onboarding_speedy_page_loads": {
+	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "Speedy page loads"
 	},
-	"ghostery_browser_hub_onboarding_intelligence_technology": {
+	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "Intelligence technology"
 	},
-	"ghostery_browser_hub_onboarding_ad_free": {
+	"ghostery_dawn_onboarding_ad_free": {
 		"message": "Ad free"
 	},
-	"ghostery_browser_hub_onboarding_supports_ghosterys_mission": {
+	"ghostery_dawn_onboarding_supports_ghosterys_mission": {
 		"message": "Supports Ghostery's mission"
 	},
-	"ghostery_browser_hub_onboarding_unlimited_bandwidth": {
+	"ghostery_dawn_onboarding_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
 	},
-	"ghostery_browser_hub_onboarding_already_premium_subscriber": {
+	"ghostery_dawn_onboarding_already_premium_subscriber": {
 		"message": "You are already a premium subscriber"
 	},
-	"ghostery_browser_hub_onboarding_already_plus_subscriber": {
+	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "You are already a plus subscriber"
 	},
-	"ghostery_browser_hub_onboarding_keep_your_current_plan_or_upgrade": {
+	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
 		"message": "Keep your current plan or upgrade"
 	},
-	"ghostery_browser_hub_onboarding_choose_an_option": {
+	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "Choose an option"
   },
-	"ghostery_browser_hub_onboarding_create_a_ghostery_account": {
+	"ghostery_dawn_onboarding_create_a_ghostery_account": {
 		"message": "Create a Ghostery Account"
 	},
-	"ghostery_browser_hub_onboarding_sync_settings": {
+	"ghostery_dawn_onboarding_sync_settings": {
 		"message": "Allows you to sync settings across browsers and devices."
 	},
-	"ghostery_browser_hub_onboarding_already_have_account": {
+	"ghostery_dawn_onboarding_already_have_account": {
 		"message": "I already have an account."
 	},
-	"ghostery_browser_hub_onboarding_skip": {
+	"ghostery_dawn_onboarding_skip": {
 		"message": "Skip"
 	},
-	"ghostery_browser_hub_onboarding_back": {
+	"ghostery_dawn_onboarding_back": {
 		"message": "Back"
 	},
-	"ghostery_browser_hub_onboarding_we_take_your_privacy_very_seriously": {
+	"ghostery_dawn_onboarding_we_take_your_privacy_very_seriously": {
 		"message": "We take your privacy very seriously. Learn more"
 	},
-	"ghostery_browser_hub_onboarding_private_by_design": {
+	"ghostery_dawn_onboarding_private_by_design": {
 		"message": "Private by design"
 	},
-	"ghostery_browser_hub_onboarding_private_by_design_description": {
+	"ghostery_dawn_onboarding_private_by_design_description": {
 		"message": "Privacy is incredibly important to us at Ghostery. That’s why we enforce a strict policy when it comes to your data. When you create an account at Ghostery, the only data we collect is your name and email. This information allows us to offer you a user experience wherein you can sync your settings across devices and hear from us about important updates. Under no circumstances do we share or sell this data with any kind of third party."
 	},
-	"ghostery_browser_hub_onboarding_can_i_remove_my_account": {
+	"ghostery_dawn_onboarding_can_i_remove_my_account": {
 		"message": "Can I remove my account?"
 	},
-	"ghostery_browser_hub_onboarding_can_i_remove_my_account_description": {
+	"ghostery_dawn_onboarding_can_i_remove_my_account_description": {
 		"message": "We hope you enjoy using Ghostery, but if you do decide to leave we will remove all of your personal information within 90 days from the date of request."
 	},
-	"ghostery_browser_hub_onboarding_visit_our_privacy_policy": {
+	"ghostery_dawn_onboarding_visit_our_privacy_policy": {
 		"message": "Visit our Privacy Policy for more information"
 	},
-	"ghostery_browser_hub_onboarding_create_an_account": {
+	"ghostery_dawn_onboarding_create_an_account": {
 		"message": "Create an account."
 	},
-	"ghostery_browser_hub_onboarding_you_are_signed_in_as": {
+	"ghostery_dawn_onboarding_you_are_signed_in_as": {
 		"message": "You are signed in as"
 	},
-	"ghostery_browser_hub_onboarding_youve_successfully_set_up_your_browser": {
+	"ghostery_dawn_onboarding_youve_successfully_set_up_your_browser": {
 		"message": "You've successfully set up your browser!"
 	},
-	"ghostery_browser_hub_onboarding_surf_with_ease": {
+	"ghostery_dawn_onboarding_surf_with_ease": {
 		"message": "Now you can surf with the greatest of ease."
 	},
-	"ghostery_browser_hub_onboarding_start_browsing": {
+	"ghostery_dawn_onboarding_start_browsing": {
 		"message": "Start Browsing"
 	},
-	"ghostery_browser_hub_onboarding_which_privacy_plan": {
+	"ghostery_dawn_onboarding_which_privacy_plan": {
 		"message": "Which privacy plan is right for you?"
 	},
-	"ghostery_browser_hub_onboarding_tell_us_your_preferences": {
+	"ghostery_dawn_onboarding_tell_us_your_preferences": {
 		"message": "Tell us your preferences, we'll offer you our recommendation."
 	},
-	"ghostery_browser_hub_onboarding_recommended_choices": {
+	"ghostery_dawn_onboarding_recommended_choices": {
 		"message": "Recommended choices"
 	},
-	"ghostery_browser_hub_onboarding_question_block_ads": {
+	"ghostery_dawn_onboarding_question_block_ads": {
 		"message": "Do you want to block ads?"
 	},
-	"ghostery_browser_hub_onboarding_question_kinds_of_trackers": {
+	"ghostery_dawn_onboarding_question_kinds_of_trackers": {
 		"message": "What kinds of trackers do you want to block?"
 	},
-	"ghostery_browser_hub_onboarding_kinds_of_trackers_all": {
+	"ghostery_dawn_onboarding_kinds_of_trackers_all": {
 		"message": "All trackers"
 	},
-	"ghostery_browser_hub_onboarding_kinds_of_trackers_none": {
+	"ghostery_dawn_onboarding_kinds_of_trackers_none": {
 		"message": "No trackers"
 	},
-	"ghostery_browser_hub_onboarding_kinds_of_trackers_ad_and_analytics": {
+	"ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics": {
 		"message": "All ad and analytics trackers"
 	},
-	"ghostery_browser_hub_onboarding_question_anti_tracking": {
+	"ghostery_dawn_onboarding_question_anti_tracking": {
 		"message": "Do you want to turn on anti-tracking?"
 	},
-	"ghostery_browser_hub_onboarding_question_smart_browsing": {
+	"ghostery_dawn_onboarding_question_smart_browsing": {
 		"message": "Do you want to turn on smart-browsing?"
 	},
-	"ghostery_browser_hub_onboarding_info_blocking_all": {
+	"ghostery_dawn_onboarding_info_blocking_all": {
 		"message": "Blocking \"all trackers\" may cause some websites to break."
 	},
-	"ghostery_browser_hub_onboarding_info_anti_tracking": {
+	"ghostery_dawn_onboarding_info_anti_tracking": {
 		"message": "Anti-tracking anonymizes uniquely identifiable data that trackers try to collect."
 	},
-	"ghostery_browser_hub_onboarding_info_smart_browsing": {
+	"ghostery_dawn_onboarding_info_smart_browsing": {
 		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
 	},
-	"ghostery_browser_hub__onboarding_choose_your_default_search": {
+	"ghostery_dawn_hub__onboarding_choose_your_default_search": {
 		"message": "Choose your default search"
 	},
-	"ghostery_browser_hub_onboarding_pick_a_default_search_engine": {
+	"ghostery_dawn_onboarding_pick_a_default_search_engine": {
 		"message": "Pick a default search engine for all your searches."
 	},
-	"ghostery_browser_hub_onboarding_ad_free_private_search": {
+	"ghostery_dawn_onboarding_ad_free_private_search": {
 		"message": "Ad-free private search"
 	},
-	"ghostery_browser_hub_onboarding_ad_supported_private_search": {
+	"ghostery_dawn_onboarding_recommended" : {
+	  "message": "(Recommended)"
+	},
+	"ghostery_dawn_onboarding_ad_supported_private_search": {
 		"message": "Ad-supported private search"
 	},
-	"ghostery_browser_hub_onboarding_type_in_search_domain": {
+	"ghostery_dawn_onboarding_type_in_search_domain": {
 		"message": "Type in search domain"
 	},
-	"ghostery_browser_hub_onboarding_just_so_you_know": {
+	"ghostery_dawn_onboarding_just_so_you_know": {
 		"message": "Just so you know:"
 	},
-	"ghostery_browser_hub_onboarding_search_engine_will_log_your_data": {
+	"ghostery_dawn_onboarding_search_engine_will_log_your_data": {
 		"message": "search engine will log your data and use it to serve you targeted ads."
 	},
-	"ghostery_browser_hub_onboarding_go_back": {
+	"ghostery_dawn_onboarding_go_back": {
 		"message": "Go Back"
 	},
-	"ghostery_browser_hub_onboarding_confirm": {
+	"ghostery_dawn_onboarding_confirm": {
 		"message": "Confirm"
 	},
-	"ghostery_browser_hub_onboarding_other": {
+	"ghostery_dawn_onboarding_other": {
 		"message": "Other"
 	},
-	"ghostery_browser_hub_onboarding_toast_error": {
-		"message": "Please answer all questions"
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "Success: "
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "Error: "
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -2412,7 +2421,7 @@
   	"pick_a_default_search_engine": {
 	  "message": "Pick a default engine for all your searches."
 	},
-  	"ghostery_browser_hub_blocking_settings_view_toast_error_message": {
-	  "message": "Error: Please answer all questions"
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Please answer all questions"
 	}
 }

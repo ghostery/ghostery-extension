@@ -17,7 +17,31 @@
 	top: 30px;
 	height: 0;
 	z-index: 30;
+	&.dawn-hub {
+		z-index: 1;
+		max-width: 700px;
+		margin: auto;
+		font-family: Roboto;
+		font-size: 14px;
+		font-weight: 500;
+		.alert {
+			background-color: #f8e6e6;
+			.callout-text {color: #9f4948;}
+		}
+		.success {
+			background-color: #dff0d8;
+			.callout-text {color: #417505;}
+		}
+		.ToastMessage__close {
+			background-image: buildIconX(#000000);
+		}
+	}
 }
+
+.ToastMessage_classIcon {
+	margin-right: 20px;
+}
+
 .ToastMessage__close {
 	height: 13px;
 	width: 13px;

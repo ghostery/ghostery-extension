@@ -144,10 +144,15 @@ class CreateAccountFormContainer extends Component {
 			validateInput: true,
 		});
 
+		const { actions } = this.props;
 		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid || confirmPasswordError) {
+			actions.setToast({
+				toastMessage: t('ghostery_dawn_onboarding_toast_fix_errors'),
+				toastClass: 'alert'
+			});
 			return;
 		}
-		const { actions } = this.props;
+
 		actions.setToast({
 			toastMessage: '',
 			toastClass: ''

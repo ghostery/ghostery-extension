@@ -18,7 +18,12 @@
 	align-items: center;
   	max-width: 800px;
   	margin: auto;
-  	padding-top: 10px;
+	padding-top: 10px;
+
+	&.step4 {
+		max-width: 724px;
+		padding: 10px 20px 0 20px;
+	}
 }
 
 .StepProgressBar__Step {
@@ -40,6 +45,8 @@
 		&.incomplete {
 			background: url('/app/images/hub/step-progress-bar/step-2-incomplete.svg');
 			background-repeat: no-repeat;
+			margin: 0 2px 3px 0;
+			height: 32px;
 		}
 	}
 	&.step-3 {
@@ -50,6 +57,8 @@
 		&.incomplete {
 			background: url('/app/images/hub/step-progress-bar/step-3-incomplete.svg');
 			background-repeat: no-repeat;
+			margin: 0 2px 3px 0;
+			height: 32px;
 		}
 	}
 	&.step-4 {
@@ -60,6 +69,8 @@
 		&.incomplete {
 			background: url('/app/images/hub/step-progress-bar/step-4-incomplete.svg');
 			background-repeat: no-repeat;
+			margin: 0 2px 3px 0;
+			height: 32px;
 		}
 	}
 	&.step-completed {
@@ -89,9 +100,10 @@
 	width: 100%;
 	&.completed {
 		border: solid 2px $ghosty-blue;
+		width: 110%;
 	}
 	&.incompleted {
-		padding: 1em;
+		padding: 13px;
 		background-image:
 		radial-gradient(circle at 2.5px, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
 		radial-gradient(circle, $ghosty-blue 1.25px, rgba(255,255,255,0) 2.5px),
