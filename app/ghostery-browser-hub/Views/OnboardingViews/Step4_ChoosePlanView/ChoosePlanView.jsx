@@ -348,14 +348,14 @@ class ChoosePlanView extends React.Component {
 								<div className="ChoosePlanView__ctaButtonContainer">
 									{(selectedPlan === BASIC) && (
 										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
-											<span>{t('next')}</span>
+											<span>{t('next_or_start_trial')}</span>
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+										<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+										<a className="ChoosePlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 								</div>
 							))}
