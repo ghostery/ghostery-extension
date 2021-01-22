@@ -22,6 +22,12 @@ import { NavLink } from 'react-router-dom';
 const SuccessView = (props) => {
 	const { actions } = props;
 	const { sendPing } = actions;
+
+	const handleCTAButtonClick = () => {
+		sendPing({ type: 'gb_onboarding_success' });
+		window.close();
+	};
+
 	return (
 		<Fragment>
 			<div className="SuccessView__relativeContainer">
@@ -37,7 +43,7 @@ const SuccessView = (props) => {
 
 				<div className="SuccessView__subtitle">{`${t('ghostery_dawn_onboarding_surf_with_ease')} Ghostery`}</div>
 				<img className="SuccessView__ghosterySuite" src="/app/images/hub/success/ghostery-suite.png" />
-				<button className="SuccessView__ctaButton" onClick={() => sendPing({ type: 'gb_onboarding_success' })} type="button">{t('ghostery_dawn_onboarding_start_browsing')}</button>
+				<button className="SuccessView__ctaButton" onClick={() => handleCTAButtonClick()} type="button">{t('ghostery_dawn_onboarding_start_browsing')}</button>
 			</div>
 		</Fragment>
 	);
