@@ -56,6 +56,8 @@ class ChooseDefaultSearchView extends Component {
 			search: chosenSearch,
 		};
 
+		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
+
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 		// 	// TODO handle errors if needed
 		// 	// TODO save user's search setting to redux / background if needed
@@ -112,7 +114,8 @@ class ChooseDefaultSearchView extends Component {
 					<div className="ChooseSearchView__modalMain">
 						<img className="ChooseSearchView__modalOptionLogo" src={logoFilename} />
 						<div className="ChooseSearchView__modalDescription">
-							{`Just so you know: ${searchBeingConsidered}'s search engine will log your data and use it to serve you targeted ads.`}
+							{searchBeingConsidered !== SEARCH_GHOSTERY && `Just so you know: ${searchBeingConsidered}'s search engine will log your data and use it to serve you targeted ads.`}
+							{searchBeingConsidered === SEARCH_GHOSTERY && 'With a Plus subscription, you can access the world’s first and only ad-free private search!  We use a special cookie-less login to keep your search absolutely private.'}
 						</div>
 						<div className="ChooseSearchView__modalButtonsContainer">
 							<button
