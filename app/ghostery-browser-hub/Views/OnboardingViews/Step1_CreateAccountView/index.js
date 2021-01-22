@@ -14,9 +14,11 @@
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import Step1_CreateAccountView from './Step1_CreateAccountView';
 import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
+import setToast from '../../../../shared-hub/actions/ToastActions';
 
 const actionCreators = {
 	setSetupStep,
+	setToast
 };
 
 export default buildReduxHOC(['account'], actionCreators, Step1_CreateAccountView);

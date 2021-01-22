@@ -54,16 +54,24 @@ const renderFAQListItem = (icon, label, description) => (
  */
 const Step1_CreateAccountView = (props) => {
 	const { user, actions } = props;
-	const { setSetupStep } = actions;
+	const { setSetupStep, setToast } = actions;
 	const email = user && user.email;
 
 	const [view, setView] = useState(CREATE_ACCOUNT);
+
+	const handleSkipButton = () => {
+		setSetupStep({ setup_step: LOGIN, origin: ONBOARDING });
+		setToast({
+			toastMessage: '',
+			toastClass: ''
+		});
+	};
 
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
 			<div className="columns small-10 medium-6">
-				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
+				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSkipButton()}>
 					<span>{t('ghostery_dawn_onboarding_skip')}</span>
 				</NavLink>
 			</div>
@@ -75,7 +83,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
+				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton()}>
 					<span>{t('next')}</span>
 				</NavLink>
 			</div>
