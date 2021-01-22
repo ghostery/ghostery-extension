@@ -40,7 +40,7 @@
 	display: flex;
 	width: 68px;
 	margin-top: 60px;
-	@include breakpoint(small down) {
+	@include breakpoint(xlarge down) {
 		margin-top: 22px;
 	}
 	.BlockSettingsView__back {
@@ -56,6 +56,10 @@
 	font-weight: 500;
 	line-height: 2.33;
 	text-align: center;
+	@include breakpoint(xxlarge down) {
+		max-width: 580px;
+		margin: auto;
+	}
 }
 
 .BlockSettingsView__subtitle {
@@ -72,7 +76,7 @@
 	display: flex;
 	justify-content: center;
 	margin: auto;
-	height: 44px;
+	min-height: 44px;
 	width: 162px;
 	padding: 7.7px 14px;
 	line-height: 22px;

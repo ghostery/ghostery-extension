@@ -91,12 +91,11 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_dawn_onboarding_sync_settings') }</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(SIGN_IN)}>{t('ghostery_dawn_onboarding_already_have_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
 				)}
 				{view === SIGN_IN && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_dawn_onboarding_create_an_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
 				)}
-				<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12 medium-6" />
 			</div>
 			{view === CREATE_ACCOUNT ? (
 				<Fragment>

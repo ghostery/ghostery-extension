@@ -23,6 +23,7 @@
 	font-size: 24px;
 	font-weight: 600;
 	line-height: 2.33;
+	text-align: center;
 }
 
 .WelcomeView__subtitle {
@@ -43,7 +44,7 @@
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
-	height: 44px;
+	min-height: 44px;
 	width: 162px;
 	padding: 7.7px 14px;
 	line-height: 22px;

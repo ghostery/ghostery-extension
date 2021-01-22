@@ -18,6 +18,8 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	padding-bottom: 20px;
 }
 .ChoosePlanView__relativeContainer {
+	width: 724px;
+	margin: auto;
 	position: relative;
 }
 .ChoosePlanView__caret.left {
@@ -33,10 +35,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 52px;
-	@include breakpoint(small down) {
-		position: relative;
-	}
+	margin-top: 7px;
 	.ChoosePlanView__back {
 		margin-top: 8px;
 		font-size: 16px;
@@ -176,6 +175,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 		flex-direction: column;
 		justify-content: center;
 		margin: 0 15px;
+		min-height: 670px;
 	}
 }
 .ChoosePlanView__orCardContainer {
@@ -213,7 +213,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	}
 }
 .ChoosePlanView__card {
-	height: 670px;
+	height: 100%;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 	margin-bottom: rem-calc(40);
 	width: 250px;
@@ -330,15 +330,12 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__valuePropList {
 	margin: auto;
 	width: 174px;
-
-	&.basic {
-		width: 145px;
-	}
 }
 .ChoosePlanView__cardSubCopy {
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: 5px;
+	text-align: left;
 }
 .check {
 	display: inline-block;
@@ -346,6 +343,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	height: 20px;
 	background-repeat: no-repeat;
 	margin-top: 3px;
+	padding-right: 20px;
 	&.blue {
 		background-image: buildCheckIcon($price-blue);
 	}

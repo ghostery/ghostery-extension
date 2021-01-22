@@ -37,8 +37,8 @@
 	display: flex;
 	width: 68px;
 	margin-top: 142px;
-	@include breakpoint(small down) {
-		margin-top: 90px;
+	@include breakpoint(medium down) {
+		margin-top: 100px;
 	}
 	.SuccessView__back {
 		margin-top: 8px;
@@ -52,7 +52,10 @@
 	margin-top: 125px;
 	font-size: 24px;
 	font-weight: 600;
+	max-width: 450px;
 	line-height: 2.33;
+	text-align: center;
+	max-width: 430px;
 }
 
 .SuccessView__subtitle {
@@ -73,7 +76,7 @@
 	display: flex;
 	justify-content: center;
 	margin: auto;
-	height: 44px;
+	min-height: 44px;
 	width: 162px;
 	padding: 7.7px 14px;
 	line-height: 22px;
