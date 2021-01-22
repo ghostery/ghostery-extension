@@ -140,35 +140,10 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
     </div>
   </div>
   <div
-    className="row align-center-middle"
+    className="row"
   >
     <div
-      className="columns small-10 medium-8"
-    >
-      <div
-        className="Step1_CreateAccountForm__checkboxContainer Step1_CreateAccountForm--marginBottom flex-container"
-      >
-        <div />
-        <span
-          className="Step1_CreateAccountForm__promoString"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "ghostery_browser_hub_onboarding_send_me Ghostery ghostery_browser_hub_onboarding_updates_and_promotions",
-            }
-          }
-          onClick={[Function]}
-        />
-      </div>
-    </div>
-    <div
-      className="columns small-10 medium-2"
-    />
-  </div>
-  <div
-    className="row align-center-middle"
-  >
-    <div
-      className="columns small-10 medium-8"
+      className="columns small-12 medium-10"
     >
       <div
         className="Step1_CreateAccountForm__checkboxContainer BrowserCreateAccountForm--marginBottom flex-container"
@@ -185,9 +160,6 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         />
       </div>
     </div>
-    <div
-      className="columns small-10 medium-2"
-    />
   </div>
   <div
     className="Step1_CreateAccountForm__ctaButtonContainer"

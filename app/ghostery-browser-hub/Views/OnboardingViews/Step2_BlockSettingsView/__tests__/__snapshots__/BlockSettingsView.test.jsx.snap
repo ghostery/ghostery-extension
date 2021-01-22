@@ -21,7 +21,7 @@ Array [
         <span
           className="BlockSettingsView__back"
         >
-          ghostery_browser_hub_onboarding_back
+          ghostery_dawn_onboarding_back
         </span>
       </a>
     </div>
@@ -32,12 +32,12 @@ Array [
     <div
       className="BlockSettingsView__title"
     >
-      ghostery_browser_hub_onboarding_which_privacy_plan
+      ghostery_dawn_onboarding_which_privacy_plan
     </div>
     <div
       className="BlockSettingsView__subtitle"
     >
-      ghostery_browser_hub_onboarding_tell_us_your_preferences
+      ghostery_dawn_onboarding_tell_us_your_preferences
     </div>
     <div
       className="BlockSettingsView_formBlock"
@@ -57,15 +57,18 @@ Array [
             />
           </svg>
         </div>
-        <div>
-          ghostery_browser_hub_onboarding_recommended_choices
+        <div
+          className="BlockSettingsView_checkboxLabel"
+          onClick={[Function]}
+        >
+          ghostery_dawn_onboarding_recommended_choices
         </div>
       </div>
       <ol>
         <li
           className="BlockSettingsView_question"
         >
-          ghostery_browser_hub_onboarding_question_block_ads
+          ghostery_dawn_onboarding_question_block_ads
         </li>
         <div
           className="BlockSettingsView_answerBlock"
@@ -119,7 +122,7 @@ Array [
           <div
             className="BlockSettingsView_questionBlock"
           >
-            ghostery_browser_hub_onboarding_question_kinds_of_trackers
+            ghostery_dawn_onboarding_question_kinds_of_trackers
             <div
               className="BlockSettingsView__infoIcon g-tooltip"
             />
@@ -144,7 +147,7 @@ Array [
             <div
               className="BlockSettingsView_answerText"
             >
-              ghostery_browser_hub_onboarding_kinds_of_trackers_all
+              ghostery_dawn_onboarding_kinds_of_trackers_all
             </div>
           </div>
           <div
@@ -167,7 +170,7 @@ Array [
             <div
               className="BlockSettingsView_answerText"
             >
-              ghostery_browser_hub_onboarding_kinds_of_trackers_ad_and_analytics
+              ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics
             </div>
           </div>
           <div
@@ -190,7 +193,7 @@ Array [
             <div
               className="BlockSettingsView_answerText"
             >
-              ghostery_browser_hub_onboarding_kinds_of_trackers_none
+              ghostery_dawn_onboarding_kinds_of_trackers_none
             </div>
           </div>
           <li
@@ -199,7 +202,7 @@ Array [
             <div
               className="BlockSettingsView_questionBlock"
             >
-              ghostery_browser_hub_onboarding_question_anti_tracking
+              ghostery_dawn_onboarding_question_anti_tracking
               <div
                 className="BlockSettingsView__infoIcon g-tooltip"
               />
@@ -257,7 +260,7 @@ Array [
             <div
               className="BlockSettingsView_questionBlock"
             >
-              ghostery_browser_hub_onboarding_question_smart_browsing
+              ghostery_dawn_onboarding_question_smart_browsing
               <div
                 className="BlockSettingsView__infoIcon g-tooltip"
               />

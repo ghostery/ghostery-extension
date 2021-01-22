@@ -137,7 +137,7 @@ class BlockSettingsView extends Component {
 								checked={recommendedChoices}
 								onChange={() => this.toggleRecommendedChoices(!recommendedChoices)}
 							/>
-							<div>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
+							<div className="BlockSettingsView_checkboxLabel" onClick={() => this.toggleRecommendedChoices(!recommendedChoices)}>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
 						</div>
 						<ol>
 							<li className="BlockSettingsView_question">{t('ghostery_dawn_onboarding_question_block_ads')}</li>
