@@ -128,7 +128,11 @@
 	width: 20px;
 	height: 20px;
 	padding: 0;
-	margin-right: 14px;
+	margin-left: -14px;
+}
+
+.BlockSettingsView_checkboxLabel {
+	cursor: pointer;
 }
 
 .BlockSettingsView__infoIcon {
