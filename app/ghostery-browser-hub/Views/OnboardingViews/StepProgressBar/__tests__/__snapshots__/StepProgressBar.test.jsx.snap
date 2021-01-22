@@ -4,8 +4,6 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProg
 
 exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 1 1`] = `ShallowWrapper {}`;
 
-exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 2 1`] = `ShallowWrapper {}`;
-
 exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 4 1`] = `ShallowWrapper {}`;
 
 exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProgressBar.test.jsx Shallow snapshot tests rendered with Enzyme StepProgressBar View step 5 1`] = `ShallowWrapper {}`;
@@ -41,7 +39,7 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProg
     <div
       className="StepProgressBar__label"
     >
-      ghostery_browser_hub_onboarding_privacy
+      ghostery_dawn_onboarding_privacy
     </div>
     <div
       className="StepProgressBar__Step incomplete step-2"
@@ -56,7 +54,7 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProg
     <div
       className="StepProgressBar__label"
     >
-      ghostery_browser_hub_onboarding_search
+      ghostery_dawn_onboarding_search
     </div>
     <div
       className="StepProgressBar__Step incomplete step-3"
@@ -71,7 +69,7 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/StepProgressBar/StepProg
     <div
       className="StepProgressBar__label"
     >
-      ghostery_browser_hub_onboarding_plan
+      ghostery_dawn_onboarding_plan
     </div>
     <div
       className="StepProgressBar__Step incomplete step-4"

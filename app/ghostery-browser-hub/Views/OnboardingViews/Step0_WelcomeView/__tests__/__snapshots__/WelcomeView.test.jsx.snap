@@ -7,12 +7,12 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/Step0_WelcomeView/Welcom
   <div
     className="WelcomeView__title"
   >
-    ghostery_browser_hub_onboarding_welcome
+    ghostery_dawn_onboarding_welcome
   </div>
   <div
     className="WelcomeView__subtitle"
   >
-    ghostery_browser_hub_onboarding_lets_begin
+    ghostery_dawn_onboarding_lets_begin
   </div>
   <img
     className="WelcomeView__rocketShip"
@@ -25,7 +25,7 @@ exports[`app/ghostery-browser-hub/Views/OnboardingViews/Step0_WelcomeView/Welcom
     onClick={[Function]}
   >
     <span>
-      ghostery_browser_hub_onboarding_lets_do_this
+      ghostery_dawn_onboarding_lets_do_this
     </span>
   </a>
 </div>

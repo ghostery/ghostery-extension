@@ -204,7 +204,6 @@ export const Step1_CreateAccountForm = (props) => {
 						/>
 					</div>
 				</div>
-				{/* <div className="columns small-10 medium-2" /> */}
 			</div>
 			<div className="Step1_CreateAccountForm__ctaButtonContainer">
 				<button type="submit" className="Step1_CreateAccountForm__ctaButton">{t('create_account')}</button>
