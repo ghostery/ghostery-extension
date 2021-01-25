@@ -14,9 +14,11 @@
 import { withRouter } from 'react-router-dom';
 import ChooseDefaultSearchView from './ChooseDefaultSearchView';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
+import setDefaultSearch from './ChooseDefaultSearchActions';
 import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
+	setDefaultSearch,
 	setSetupStep,
 };
 

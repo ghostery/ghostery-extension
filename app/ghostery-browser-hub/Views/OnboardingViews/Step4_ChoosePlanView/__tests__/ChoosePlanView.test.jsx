@@ -22,7 +22,7 @@ const noop = () => {};
 describe('app/ghostery-browser-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx', () => {
 	const initialState = {
 		user: null,
-		didNotSelectGhosterySearch: false,
+		selectedGhosteryGlow: true,
 		actions: {
 			setSetupStep: noop
 		}

@@ -19,4 +19,4 @@ const actionCreators = {
 	setSetupStep,
 };
 
-export default buildReduxHOC(['account'], actionCreators, ChoosePlanView);
+export default buildReduxHOC(['account', 'defaultSearch'], actionCreators, ChoosePlanView);

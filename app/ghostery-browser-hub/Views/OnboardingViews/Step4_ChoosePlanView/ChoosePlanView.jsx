@@ -19,6 +19,7 @@ import RadioButton from '../../../../shared-components/RadioButton';
 import globals from '../../../../../src/classes/Globals';
 import { BASIC, PLUS, PREMIUM } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
 import { CHOOSE_PLAN, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
+import { SEARCH_GHOSTERY } from '../Step3_ChooseDefaultSearchView/ChooseDefaultSearchConstants';
 
 const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
 const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
@@ -280,7 +281,7 @@ class ChoosePlanView extends React.Component {
 	};
 
 	render() {
-		const { user, didNotSelectGhosterySearch, actions } = this.props;
+		const { user, defaultSearch, actions } = this.props;
 		const { setSetupStep } = actions;
 		const { expanded, selectedPlan } = this.state;
 
@@ -292,6 +293,11 @@ class ChoosePlanView extends React.Component {
 			up: !expanded,
 			down: expanded
 		});
+
+		const selectedGhosteryGlow = (defaultSearch === SEARCH_GHOSTERY);
+
+		console.log('this.props in ChoosePlanView#render:');
+		console.log(this.props);
 
 		return (
 			<div>
@@ -305,8 +311,8 @@ class ChoosePlanView extends React.Component {
 				</div>
 				<div className="ChoosePlanView">
 					<div className="ChoosePlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
-					<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(didNotSelectGhosterySearch)}</div>
-					{didNotSelectGhosterySearch && isBasic && (
+					<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(!selectedGhosteryGlow)}</div>
+					{selectedGhosteryGlow && isBasic && (
 						<Fragment>
 							{searchPromo()}
 							{/* TODO: For the CTA button below,
@@ -319,7 +325,7 @@ class ChoosePlanView extends React.Component {
 							<div className={arrowClassNames} onClick={this.toggleSection} />
 						</Fragment>
 					)}
-					{((isBasic && !didNotSelectGhosterySearch) || expanded || isPlus || isPremium) && (
+					{((isBasic && !selectedGhosteryGlow) || expanded || isPlus || isPremium) && (
 						<div>
 							{(isPlus) ? (
 								<div className="ChoosePlanView__keepOrUpgradeContainer row align-center align-middle">
@@ -378,7 +384,7 @@ ChoosePlanView.propTypes = {
 		plusAccess: PropTypes.bool,
 		premiumAccess: PropTypes.bool,
 	}),
-	didNotSelectGhosterySearch: PropTypes.bool.isRequired,
+	defaultSearch: PropTypes.bool.isRequired,
 };
 
 // Default props used in the Plus View

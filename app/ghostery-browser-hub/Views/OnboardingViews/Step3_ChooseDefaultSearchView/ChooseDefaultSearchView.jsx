@@ -16,12 +16,13 @@ import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
+import {
+	SEARCH_GHOSTERY,
+	SEARCH_YAHOO,
+	SEARCH_STARTPAGE,
+	SEARCH_BING
+} from './ChooseDefaultSearchConstants';
 import { Modal } from '../../../../shared-components';
-
-const SEARCH_GHOSTERY = 'Ghostery';
-const SEARCH_BING = 'Bing';
-const SEARCH_YAHOO = 'Yahoo';
-const SEARCH_STARTPAGE = 'StartPage';
 
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
@@ -49,7 +50,7 @@ class ChooseDefaultSearchView extends Component {
 	handleSubmit = () => {
 		const { chosenSearch } = this.state;
 		const { actions, history } = this.props;
-		const { setSetupStep } = actions;
+		const { setSetupStep, setDefaultSearch } = actions;
 
 		// TODO comment this IN for builds for Dawn
 		// commented out for testing purposes, as trying to message search@ghostery.com
@@ -67,6 +68,7 @@ class ChooseDefaultSearchView extends Component {
 		// 	history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 		// });
 
+		setDefaultSearch(chosenSearch);
 		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
