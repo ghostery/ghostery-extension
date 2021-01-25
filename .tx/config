@@ -7,3 +7,4 @@ minimum_perc = 0
 source_file = _locales/en/messages.json
 source_lang = en
 type = CHROME
+

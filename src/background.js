@@ -1638,28 +1638,20 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
-			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
-			// We need to do this after running scheduledTasks for the first time
-			// because of an A/B test that determines which promo variant is shown in the Hub on install
-			if (globals.JUST_INSTALLED && BROWSER_INFO.name !== 'ghostery_desktop') {
-				const showAlternateHub = conf.hub_layout === 'alternate';
-				const route = showAlternateHub ? '#home' : '';
-				chrome.tabs.create({
-					url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
-					active: true
-				});
-			}
 			if (globals.JUST_INSTALLED) {
 				if (BROWSER_INFO.name !== 'ghostery_desktop') {
+					chrome.tabs.create({
+						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html'),
+						active: true
+					});
+				} else {
+					// Open the Ghostery Hub on install with justInstalled query parameter set to true.
+					// We need to do this after running scheduledTasks for the first time
+					// because of an A/B test that determines which promo variant is shown in the Hub on install
 					const showAlternateHub = conf.hub_layout === 'alternate';
 					const route = showAlternateHub ? '#home' : '';
 					chrome.tabs.create({
 						url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
-						active: true
-					});
-				} else {
-					chrome.tabs.create({
-						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html'),
 						active: true
 					});
 				}

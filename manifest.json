@@ -80,7 +80,7 @@
 			"run_at": "document_start"
 		}
 	],
-	"content_security_policy": "script-src 'self' 'sha256-iu+nxHOBLSMqKFuIk9bZIUxScKTqR9rnGxVunOSBJ5k='; object-src 'self'",
+	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"permissions": [
 		"webNavigation",
 		"webRequest",
