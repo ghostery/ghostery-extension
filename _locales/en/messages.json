@@ -1929,12 +1929,6 @@
 	"ghostery_dawn_onboarding_info_smart_browsing": {
 		"message": "Smart-browsing adjusts your blocking settings to decrease page breakage and accelerate page loads."
 	},
-	"ghostery_dawn_hub__onboarding_choose_your_default_search": {
-		"message": "Choose your default search"
-	},
-	"ghostery_dawn_onboarding_pick_a_default_search_engine": {
-		"message": "Pick a default search engine for all your searches."
-	},
 	"ghostery_dawn_onboarding_ad_free_private_search": {
 		"message": "Ad-free private search"
 	},
@@ -1946,12 +1940,6 @@
 	},
 	"ghostery_dawn_onboarding_type_in_search_domain": {
 		"message": "Type in search domain"
-	},
-	"ghostery_dawn_onboarding_just_so_you_know": {
-		"message": "Just so you know:"
-	},
-	"ghostery_dawn_onboarding_search_engine_will_log_your_data": {
-		"message": "search engine will log your data and use it to serve you targeted ads."
 	},
 	"ghostery_dawn_onboarding_go_back": {
 		"message": "Go Back"
@@ -2423,5 +2411,17 @@
 	},
   	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
 	  "message": "Please answer all questions"
+	},
+  	"ghostery_dawn_onboarding_startpage_warning": {
+	  "message": "Just so you know: Startpage's search engine will log your data and use it to serve you targeted ads."
+	},
+	"ghostery_dawn_onboarding_bing_warning": {
+	  "message": "Just so you know: Bing's search engine will log your data and use it to serve you targeted ads."
+	},
+	"ghostery_dawn_onboarding_yahoo_warning": {
+	  "message": "Just so you know: Yahoo's search engine will log your data and use it to serve you targeted ads."
+	},
+  	"ghostery_dawn_onboarding_glow_benefit": {
+	  "message": "With a Plus subscription, you can access the world’s first and only ad-free private search! We use a special cookie-less login to keep your search absolutely private."
 	}
 }

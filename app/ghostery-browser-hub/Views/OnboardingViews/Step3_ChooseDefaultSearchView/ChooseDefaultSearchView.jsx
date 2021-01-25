@@ -56,7 +56,8 @@ class ChooseDefaultSearchView extends Component {
 			search: chosenSearch,
 		};
 
-		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
+		// TODO comment this IN for builds for Dawn
+		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
 
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 		// 	// TODO handle errors if needed
@@ -114,8 +115,10 @@ class ChooseDefaultSearchView extends Component {
 					<div className="ChooseSearchView__modalMain">
 						<img className="ChooseSearchView__modalOptionLogo" src={logoFilename} />
 						<div className="ChooseSearchView__modalDescription">
-							{searchBeingConsidered !== SEARCH_GHOSTERY && `Just so you know: ${searchBeingConsidered}'s search engine will log your data and use it to serve you targeted ads.`}
-							{searchBeingConsidered === SEARCH_GHOSTERY && 'With a Plus subscription, you can access the world’s first and only ad-free private search!  We use a special cookie-less login to keep your search absolutely private.'}
+							{searchBeingConsidered === SEARCH_STARTPAGE && t('ghostery_dawn_onboarding_startpage_warning')}
+							{searchBeingConsidered === SEARCH_BING && t('ghostery_dawn_onboarding_bing_warning')}
+							{searchBeingConsidered === SEARCH_YAHOO && t('ghostery_dawn_onboarding_yahoo_warning')}
+							{searchBeingConsidered === SEARCH_GHOSTERY && t('ghostery_dawn_onboarding_glow_benefit')}
 						</div>
 						<div className="ChooseSearchView__modalButtonsContainer">
 							<button
@@ -123,7 +126,7 @@ class ChooseDefaultSearchView extends Component {
 								type="button"
 								onClick={this.cancelSelection}
 							>
-								Go Back
+								{t('ghostery_dawn_onboarding_go_back')}
 							</button>
 							<div className="ChooseSearchView__modalButtonDivider" />
 							<button
@@ -131,7 +134,7 @@ class ChooseDefaultSearchView extends Component {
 								type="button"
 								onClick={this.updateSelection}
 							>
-								Confirm
+								{t('ghostery_dawn_onboarding_confirm')}
 							</button>
 						</div>
 					</div>
