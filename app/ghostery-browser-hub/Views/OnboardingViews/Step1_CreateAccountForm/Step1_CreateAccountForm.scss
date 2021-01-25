@@ -53,8 +53,9 @@
 }
 .Step1_CreateAccountForm__legalConsentCheckedLabel {
 	font-size: 14px;
+	margin-top: 13px;
 	@include breakpoint(small down) {
-		width: 258px;
+		width: 290px;
 	}
 
 	&.error {

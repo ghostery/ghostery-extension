@@ -19,7 +19,7 @@ Array [
         <span
           className="SuccessView__back"
         >
-          ghostery_browser_hub_onboarding_back
+          ghostery_dawn_onboarding_back
         </span>
       </a>
     </div>
@@ -30,12 +30,12 @@ Array [
     <div
       className="SuccessView__title"
     >
-      ghostery_browser_hub_onboarding_youve_successfully_set_up_your_browser
+      ghostery_dawn_onboarding_youve_successfully_set_up_your_browser
     </div>
     <div
       className="SuccessView__subtitle"
     >
-      ghostery_browser_hub_onboarding_surf_with_ease Ghostery
+      ghostery_dawn_onboarding_surf_with_ease Ghostery
     </div>
     <img
       className="SuccessView__ghosterySuite"
@@ -46,7 +46,7 @@ Array [
       onClick={[Function]}
       type="button"
     >
-      ghostery_browser_hub_onboarding_start_browsing
+      ghostery_dawn_onboarding_start_browsing
     </button>
   </div>,
 ]

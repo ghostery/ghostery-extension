@@ -36,7 +36,7 @@ const faqList = [
 ];
 
 const renderFAQListItem = (icon, label, description) => (
-	<div className="Step1_CreateAccountView__faqItemContainer row">
+	<div key={label} className="Step1_CreateAccountView__faqItemContainer row">
 		<div className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2">
 			<img className="Step1_CreateAccountView__faqIcon" src={`/app/images/hub/browser-create-account-view/${icon}`} />
 		</div>
@@ -54,16 +54,24 @@ const renderFAQListItem = (icon, label, description) => (
  */
 const Step1_CreateAccountView = (props) => {
 	const { user, actions } = props;
-	const { setSetupStep } = actions;
+	const { setSetupStep, setToast } = actions;
 	const email = user && user.email;
 
 	const [view, setView] = useState(CREATE_ACCOUNT);
+
+	const handleSkipButton = () => {
+		setSetupStep({ setup_step: LOGIN, origin: ONBOARDING });
+		setToast({
+			toastMessage: '',
+			toastClass: ''
+		});
+	};
 
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
 			<div className="columns small-10 medium-6">
-				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
+				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSkipButton()}>
 					<span>{t('ghostery_dawn_onboarding_skip')}</span>
 				</NavLink>
 			</div>
@@ -75,7 +83,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => setSetupStep({ setup_step: LOGIN, origin: ONBOARDING })}>
+				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton()}>
 					<span>{t('next')}</span>
 				</NavLink>
 			</div>
@@ -91,10 +99,10 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_dawn_onboarding_sync_settings') }</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(SIGN_IN)}>{t('ghostery_browser_hub_onboarding_already_have_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(SIGN_IN)}>{t('ghostery_dawn_onboarding_already_have_account')}</div>
 				)}
 				{view === SIGN_IN && (
-					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_browser_hub_onboarding_create_an_account')}</div>
+					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(CREATE_ACCOUNT)}>{t('ghostery_dawn_onboarding_create_an_account')}</div>
 				)}
 			</div>
 			{view === CREATE_ACCOUNT ? (
