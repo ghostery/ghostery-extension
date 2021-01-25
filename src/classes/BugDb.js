@@ -12,7 +12,7 @@
  */
 
 import {
-	difference, each, every, keys, reduce, size
+	difference, each, every, keys, size
 } from 'underscore';
 import conf from './Conf';
 import Updatable from './Updatable';
@@ -118,6 +118,7 @@ class BugDb extends Updatable {
 				blocked,
 				shouldShow: true,
 				catId: category,
+				trackerID: db.apps[appId].trackerID,
 			});
 		}
 
@@ -194,34 +195,13 @@ class BugDb extends Updatable {
 		if (!fromMemory) {
 			const old_bugs = conf.bugs;
 			let	new_app_ids;
-			// if there is an older bugs object in storage,
-			// update newAppIds and apply block-by-default
-			if (old_bugs) {
-				if (old_bugs.hasOwnProperty('version') && bugs.version > old_bugs.version) {
-					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
+			// if there is an older bugs object in storage update newAppIds and apply block-by-default
+			if (old_bugs && old_bugs.hasOwnProperty('version') && (old_bugs.version !== bugs.version)) {
+				new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
 
-					if (new_app_ids.length) {
-						BugDb.applyBlockByDefault(new_app_ids);
-						db.JUST_UPDATED_WITH_NEW_TRACKERS = true;
-					}
-
-				// pre-trie/legacy db
-				} else if (old_bugs.hasOwnProperty('bugsVersion') && bugs.version !== old_bugs.bugsVersion) {
-					const old_apps = reduce(old_bugs.bugs, (acc, bug) => {
-						acc[bug.aid] = true;
-						return acc;
-					}, {});
-
-					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_apps);
-
-					if (new_app_ids.length) {
-						BugDb.applyBlockByDefault(new_app_ids);
-
-						// don't claim new trackers when db got downgraded by version
-						if (bugs.version > old_bugs.bugsVersion) {
-							db.JUST_UPDATED_WITH_NEW_TRACKERS = true;
-						}
-					}
+				if (new_app_ids.length) {
+					BugDb.applyBlockByDefault(new_app_ids);
+					db.JUST_UPDATED_WITH_NEW_TRACKERS = true;
 				}
 			}
 

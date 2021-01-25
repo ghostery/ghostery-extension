@@ -15,8 +15,7 @@ export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e
 
 class Api {
 	constructor() {
-		this.isRefreshing = false;
-		this.tokenRefreshedEventType = 'tokenRefreshed';
+		this._refreshPromise = null;
 	}
 
 	init(config, opts) {
@@ -27,24 +26,17 @@ class Api {
 		}
 	}
 
-	_refreshToken() {
-		if (this.isRefreshing) {
-			let bindedResolve;
-			const _processRefreshTokenEvent = (resolve, e) => {
-				window.removeEventListener(this.tokenRefreshedEventType, bindedResolve, false);
-				resolve(e.detail);
-			};
-			return new Promise((resolve) => {
-				bindedResolve = _processRefreshTokenEvent.bind(null, resolve);
-				window.addEventListener(this.tokenRefreshedEventType, bindedResolve, false);
-			});
+	refreshToken() {
+		if (this._refreshPromise) {
+			return this._refreshPromise;
 		}
 
-		this.isRefreshing = true;
-		return fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
+		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
 			credentials: 'include',
-		});
+		}).finally(() => { this._refreshPromise = null; });
+
+		return this._refreshPromise;
 	}
 
 	_sendReq(method, path, body) {
@@ -107,12 +99,8 @@ class Api {
 						});
 					}
 					if (shouldRefresh) {
-						this._refreshToken()
+						this.refreshToken()
 							.then((res) => {
-								this.isRefreshing = false;
-								window.dispatchEvent(new CustomEvent(this.tokenRefreshedEventType, {
-									detail: res,
-								}));
 								const { status } = res;
 								if (status >= 400) {
 									res.json().then(data2 => (
@@ -129,7 +117,8 @@ class Api {
 											.then(() => resolve(data3))
 											.catch(err => reject(err));
 									});
-							});
+							})
+							.catch(err => reject(err));
 					} else {
 						this._errorHandler(data.errors)
 							.then(() => resolve(data))

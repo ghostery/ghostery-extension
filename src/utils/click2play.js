@@ -181,7 +181,8 @@ export function buildC2P(details, app_id) {
 export function buildRedirectC2P(redirectUrls, app_id) {
 	const host_url = processUrl(redirectUrls.url).hostname;
 	const redirect_url = processUrl(redirectUrls.redirectUrl).hostname;
-	const app_name = bugDb.db.apps[app_id].name;
+	const { name, trackerID } = bugDb.db.apps[app_id];
+	const wtmURL = `${globals.WTM_BASE_URL}/trackers/${encodeURIComponent(trackerID).toLowerCase()}`;
 
 	globals.BLOCKED_REDIRECT_DATA = {};
 	globals.BLOCKED_REDIRECT_DATA.app_id = app_id;
@@ -192,13 +193,11 @@ export function buildRedirectC2P(redirectUrls, app_id) {
 		blocked_redirect_page_title: t('blocked_redirect_page_title'),
 		blocked_redirect_prevent: t(
 			'blocked_redirect_prevent',
-			// It is unlikely that apps pages will ever be translated
-			// [host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
-			[host_url, redirect_url, app_name, `${globals.APPS_BASE_URL}/en/apps/${encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())}`]
+			[host_url, redirect_url, name, wtmURL]
 		),
 		blocked_redirect_action_always_title: t('blocked_redirect_action_always_title'),
 		blocked_redirect_action_through_once_title: t('blocked_redirect_action_through_once_title'),
-		blocked_redirect_url_content: t('blocked_redirect_url_content', [redirectUrls.redirectUrl, app_name])
+		blocked_redirect_url_content: t('blocked_redirect_url_content', [redirectUrls.redirectUrl, name])
 	};
 	return chrome.extension.getURL('app/templates/blocked_redirect.html');
 }

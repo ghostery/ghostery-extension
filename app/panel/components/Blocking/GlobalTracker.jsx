@@ -43,10 +43,10 @@ class GlobalTracker extends React.Component {
 	/**
 	 * Implement handler for clicking on the tracker title
 	 * which shows/hides tracker description. On show it retrieves
-	 * description from https://apps.ghostery.com and sets it in state.
+	 * description from whotracks.me and sets it in state.
 	 */
 	toggleDescription() {
-		const { tracker, language } = this.props;
+		const { tracker } = this.props;
 		const { description } = this.state;
 		this.setState(prevState => ({ showMoreInfo: !prevState.showMoreInfo }));
 
@@ -56,12 +56,11 @@ class GlobalTracker extends React.Component {
 
 		this.setState({ description: t('tracker_description_getting') });
 
-		sendMessageInPromise('getTrackerDescription', {
-			url: `${globals.APPS_BASE_URL}/${language}/apps/${
-				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
+		sendMessageInPromise('getTrackerInfo', {
+			url: `${globals.WTM_BASE_URL}/data/trackers/ghostery/${tracker.id}.json`,
 		}).then((data) => {
-			if (data) {
-				const truncate = (data.length > 200) ? `${data.substr(0, 199)}...` : data;
+			if (data && data.description) {
+				const truncate = (data.description.length > 200) ? `${data.description.substr(0, 199)}...` : data.description;
 				this.setState({ description: truncate });
 				this.setState({ showTrackerLearnMore: true });
 			} else {
@@ -99,8 +98,12 @@ class GlobalTracker extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { tracker, language } = this.props;
-		const { showMoreInfo, description, showTrackerLearnMore } = this.state;
+		const { tracker } = this.props;
+		const {
+			showMoreInfo,
+			description,
+			showTrackerLearnMore,
+		} = this.state;
 		return (
 			<div className="global-blocking-trk">
 				<div className="row align-middle trk-header">
@@ -119,7 +122,7 @@ class GlobalTracker extends React.Component {
 								{
 									showTrackerLearnMore && (
 										<div className={(!showTrackerLearnMore ? 'hide' : '')}>
-											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_BASE_URL}/${language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.WTM_BASE_URL}/trackers/${encodeURIComponent(tracker.trackerID).toLowerCase()}.html`}>
 												{ t('tracker_description_learn_more') }
 											</a>
 										</div>

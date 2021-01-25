@@ -29,19 +29,23 @@ describe('src/classes/BugDb.js', () => {
 				"apps": {
 					"3": {
 						"name": "Clicky",
-						"cat": "site_analytics"
+						"cat": "site_analytics",
+						"trackerID": "clicky"
 					},
 					"5": {
 						"name": "Statisfy",
-						"cat": "site_analytics"
+						"cat": "site_analytics",
+						"trackerID": "statisfy"
 					},
 					"6": {
 						"name": "Google Widgets",
-						"cat": "customer_interaction"
+						"cat": "customer_interaction",
+						"trackerID": "google_widgets",
 					},
 					"8": {
 						"name": "Twitter Badge",
 						"cat": "social_media",
+						"trackerID": "twitter_badge",
 						"tags": [
 							39
 						]
