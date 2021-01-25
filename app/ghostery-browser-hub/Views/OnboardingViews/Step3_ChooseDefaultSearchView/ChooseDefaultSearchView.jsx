@@ -15,7 +15,7 @@ import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RadioButton from '../../../../shared-components/RadioButton';
-import { ONBOARDING, CHOOSE_PLAN, CHOOSE_DEFAULT_SEARCH } from '../../OnboardingView/OnboardingConstants';
+import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
 import { Modal } from '../../../../shared-components';
 
 const SEARCH_GHOSTERY = 'Ghostery';
@@ -51,12 +51,13 @@ class ChooseDefaultSearchView extends Component {
 		const { actions, history } = this.props;
 		const { setSetupStep } = actions;
 
-		const payload = {
-			type: 'setDefaultSearch',
-			search: chosenSearch,
-		};
-
 		// TODO comment this IN for builds for Dawn
+		// commented out for testing purposes, as trying to message search@ghostery.com
+		// outside of Dawn causes an error
+		// const payload = {
+		// 	type: 'setDefaultSearch',
+		// 	search: chosenSearch,
+		// };
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
 
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {

@@ -13,7 +13,9 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import QueryString from 'query-string';
 import OnboardingView from './OnboardingView';
+
 import { BLOCKING_POLICY_RECOMMENDED } from '../../../shared-hub/constants/BlockingPolicyConstants';
 
 // Component Views
@@ -32,6 +34,8 @@ import {
 	CHOOSE_PLAN,
 	SUCCESS
 } from './OnboardingConstants';
+
+const justInstalled = (QueryString.parse(window.location.search).justInstalled === 'true') || false;
 
 /**
  * @class Implement the Onboarding View for the Ghostery Browser Hub
@@ -61,12 +65,15 @@ class OnboardingViewContainer extends Component {
 		const { origin, pathname, hash } = window.location;
 		window.history.pushState({}, '', `${origin}${pathname}${hash}`);
 
-		// TODO only invoke if there are no existing settings
-		if (true) {
+		// Only set settings to defaults if the user has just installed the browser
+		if (justInstalled) {
 			this.state = {
 				sendMountActions: true
 			};
-			actions.setSetupStep({ setup_step: 8, origin: ONBOARDING });
+			actions.setSetupStep({
+				setup_step: 8,
+				origin: ONBOARDING
+			});
 			actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 			actions.setAntiTracking({ enable_anti_tracking: true }); // covered
 			actions.setAdBlock({ enable_ad_block: true }); // covered

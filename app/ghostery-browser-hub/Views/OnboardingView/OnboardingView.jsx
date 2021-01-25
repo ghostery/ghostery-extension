@@ -27,7 +27,6 @@ import { BLOCK_SETTINGS, CHOOSE_DEFAULT_SEARCH, CHOOSE_PLAN } from './Onboarding
  */
 const OnboardingView = (props) => {
 	const { sendMountActions, steps } = props;
-	console.log('in OnboardingView');
 
 	const getScreenContainerClassNames = index => ClassNames('OnboardingView__screenContainer', {
 		step2: index === BLOCK_SETTINGS,

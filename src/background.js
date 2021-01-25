@@ -1641,7 +1641,7 @@ function initializeGhosteryModules() {
 			if (globals.JUST_INSTALLED) {
 				if (BROWSER_INFO.name !== 'ghostery_desktop') {
 					chrome.tabs.create({
-						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html'),
+						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html?justInstalled=true'),
 						active: true
 					});
 				} else {

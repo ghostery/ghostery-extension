@@ -35,7 +35,7 @@ Array [
     <div
       className="SuccessView__subtitle"
     >
-      ghostery_dawn_onboarding_surf_with_ease Ghostery
+      ghostery_dawn_onboarding_surf_with_ease
     </div>
     <img
       className="SuccessView__ghosterySuite"
