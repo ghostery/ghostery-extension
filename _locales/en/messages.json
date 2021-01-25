@@ -2426,5 +2426,14 @@
 	},
   	"ghostery_dawn_onboarding_glow_benefit": {
 	  "message": "With a Plus subscription, you can access the world’s first and only ad-free private search! We use a special cookie-less login to keep your search absolutely private."
+	},
+  	"ghostery_dawn_onboarding_choose_alternate_search": {
+	  "message": "Choose alternate search"
+	},
+  	"ghostery_dawn_onboarding_select_option": {
+	  "message": "Select option"
+	},
+  	"ghostery_dawn_onboarding_you_have_selected_an_alternate_serach_engine": {
+	  "message": "You have selected an alternate search engine:"
 	}
 }
