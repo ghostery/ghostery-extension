@@ -27,12 +27,12 @@ class StepNavigator extends Component {
 		};
 	}
 
-	next() {
+	next = () => {
 		const { components } = this.props;
 		this.setState(state => ({ screen: (state.screen + 1) % components.length }));
 	}
 
-	prev() {
+	prev = () => {
 		const { components } = this.props;
 		this.setState(state => ({ screen: ((state.screen - 1) + components.length) % components.length }));
 	}

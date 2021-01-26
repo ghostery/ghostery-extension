@@ -53,7 +53,7 @@ const renderFAQListItem = (icon, label, description) => (
  * @memberof GhosteryBrowserHubViews
  */
 const Step1_CreateAccountView = (props) => {
-	const { user, actions } = props;
+	const { actions, step, user } = props;
 	const { setSetupStep, setToast } = actions;
 	const email = user && user.email;
 
@@ -67,6 +67,17 @@ const Step1_CreateAccountView = (props) => {
 		});
 	};
 
+	const handleNextOnSelectPlanStep = () => {
+		const { prev } = props;
+
+		setToast({
+			toastMessage: '',
+			toastClass: ''
+		});
+
+		prev();
+	};
+
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
@@ -78,25 +89,46 @@ const Step1_CreateAccountView = (props) => {
 		</div>
 	);
 
+	const subtitle = (step === LOGIN)
+		? t('ghostery_dawn_onboarding_sync_settings')
+		: t('ghostery_dawn_onboarding_create_account_for_trial');
+
 	return (user ? (
 		<div className="Step1_CreateAccountView__alreadySignedIn">
 			<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton()}>
-					<span>{t('next')}</span>
-				</NavLink>
+				{step === LOGIN && (
+					<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton()}>
+						<span>{t('next')}</span>
+					</NavLink>
+				)}
+				{step !== LOGIN && (
+					<div className="Step1_CreateAccountView__ctaButton" onClick={() => handleNextOnSelectPlanStep()}>
+						<span>{t('next')}</span>
+					</div>
+				)}
 			</div>
 		</div>
 	) : (
 		<div className="Step1_CreateAccountView">
+			{step !== LOGIN && (
+				<div className="CreateAccountView__relativeContainer">
+					<div className="CreateAccountView__backContainer">
+						<span className="CreateAccountView__caret left" />
+						<NavLink to="/onboarding/3">
+							<span className="CreateAccountView__back">{t('ghostery_dawn_onboarding_back_to_search_selection')}</span>
+						</NavLink>
+					</div>
+				</div>
+			)}
 			{view === CREATE_ACCOUNT && (
 				<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_create_a_ghostery_account')}</div>
 			)}
 			{view === SIGN_IN && (
 				<div className="Step1_CreateAccountView__title">{t('sign_in')}</div>
 			)}
-			<div className="Step1_CreateAccountView__subtitle">{ t('ghostery_dawn_onboarding_sync_settings') }</div>
+			<div className="Step1_CreateAccountView__subtitle">{subtitle}</div>
 			<div className="row align-center-middle">
 				{view === CREATE_ACCOUNT && (
 					<div className="Step1_CreateAccountView__alreadyHaveAccount columns small-12" onClick={() => setView(SIGN_IN)}>{t('ghostery_dawn_onboarding_already_have_account')}</div>
@@ -109,7 +141,7 @@ const Step1_CreateAccountView = (props) => {
 				<Fragment>
 					{/* eslint-disable-next-line react/jsx-pascal-case */}
 					<Step1_CreateAccountForm />
-					{renderSkipLink()}
+					{(step === LOGIN) && renderSkipLink()}
 					<div className="Step1_CreateAccountView__FAQContainer">
 						{faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))}
 					</div>
@@ -123,7 +155,7 @@ const Step1_CreateAccountView = (props) => {
 				<Fragment>
 					{/* eslint-disable-next-line react/jsx-pascal-case */}
 					<Step1_LogInForm />
-					{renderSkipLink()}
+					{(step === LOGIN) && renderSkipLink()}
 				</Fragment>
 			)}
 		</div>

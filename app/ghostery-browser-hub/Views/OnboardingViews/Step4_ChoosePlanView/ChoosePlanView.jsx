@@ -283,7 +283,13 @@ class ChoosePlanView extends React.Component {
 	};
 
 	render() {
-		const { user, defaultSearch, actions } = this.props;
+		const {
+			actions,
+			defaultSearch,
+			loggedIn,
+			next,
+			user,
+		} = this.props;
 		const { setSetupStep } = actions;
 		const { expanded, selectedPlan } = this.state;
 
@@ -297,9 +303,6 @@ class ChoosePlanView extends React.Component {
 		});
 
 		const selectedGhosteryGlow = (defaultSearch === SEARCH_GHOSTERY);
-
-		console.log('this.props in ChoosePlanView#render:');
-		console.log(this.props);
 
 		return (
 			<div>
@@ -318,11 +321,16 @@ class ChoosePlanView extends React.Component {
 						<Fragment>
 							{searchPromo()}
 							{/* TODO: For the CTA button below,
-								1. If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
+								1. WIP - what 7-day trial? If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
 									and move them to Step 5 if signed in
-								2. If user is signed out, clicking this should take them to Step 4b (linked)
+								2. DONE If user is signed out, clicking this should take them to Step 4b
 							*/}
-							<div className="ChoosePlanView__searchCTAButton">{t('ghostery_dawn_onboarding_start_trial')}</div>
+							{loggedIn && (
+								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('ghostery_dawn_onboarding_start_trial')}</a>
+							)}
+							{!loggedIn && (
+								<div className="ChoosePlanView__searchCTAButton" onClick={() => next()}>{t('ghostery_dawn_onboarding_start_trial')}</div>
+							)}
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
 						</Fragment>

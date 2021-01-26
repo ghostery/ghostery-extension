@@ -111,7 +111,7 @@ class OnboardingViewContainer extends Component {
 			{
 				index: CHOOSE_PLAN,
 				path: `/${ONBOARDING}/${CHOOSE_PLAN}`,
-				bodyComponents: [ChoosePlanView],
+				bodyComponents: [ChoosePlanView, Step1_CreateAccountView],
 			},
 			{
 				index: SUCCESS,

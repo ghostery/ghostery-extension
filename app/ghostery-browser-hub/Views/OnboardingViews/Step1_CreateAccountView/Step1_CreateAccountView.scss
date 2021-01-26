@@ -18,6 +18,38 @@ $color-create-account-form-error-red: #e74055;
 	padding-top: 80px;
 	padding-bottom: 40px;
 }
+
+.CreateAccountView__relativeContainer {
+  position: relative;
+  left: 30px;
+  top: -70px;
+}
+
+.CreateAccountView__caret.left {
+  margin: 7px auto 0 auto;
+  height: 10px;
+  width: 10px;
+  border-left: 2px solid $tundora;
+  border-top: 2px solid $tundora;
+  cursor: pointer;
+  transform: rotate(-45deg);
+}
+
+.CreateAccountView__backContainer {
+  position: absolute;
+  display: flex;
+  margin-top: 60px;
+  @include breakpoint(xlarge down) {
+	margin-top: 22px;
+  }
+  .CreateAccountView__back {
+	margin-top: 8px;
+	font-size: 16px;
+	color: $tundora;
+	text-decoration: underline;
+  }
+}
+
 .Step1_CreateAccountView__alreadySignedIn {
 	margin-top: 245px;
 	display: flex;
@@ -73,11 +105,12 @@ $color-create-account-form-error-red: #e74055;
 	}
 }
 .Step1_CreateAccountView__subtitle {
-	margin-top: 10px;
+	margin: 10px auto 0 auto;
 	display: flex;
 	justify-content: center;
 	font-size: 18px;
 	text-align: center;
+  	max-width: 600px;
 	@include breakpoint(small down) {
 		margin: auto;
 		max-width: 237px;
@@ -235,7 +268,7 @@ $color-create-account-form-error-red: #e74055;
 @media only screen and (max-width: 740px)  {
 	.Step1_CreateAccountView {
 		margin-bottom: 40px;
-		padding-top: 20px;
+		padding-top: 80px;
 	}
 	.Step1_CreateAccountView__header {
 		flex-direction: column;

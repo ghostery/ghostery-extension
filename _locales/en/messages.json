@@ -2435,5 +2435,11 @@
 	},
   	"ghostery_dawn_onboarding_you_have_selected_an_alternate_serach_engine": {
 	  "message": "You have selected an alternate search engine:"
+	},
+  	"ghostery_dawn_onboarding_create_account_for_trial": {
+	  "message": "To start your Ghostery Search free trial, you must create or log into an account. This allows you to sync your privacy settings across devices."
+	},
+  	"ghostery_dawn_onboarding_back_to_search_selection": {
+	  "message": "Back to search selection"
 	}
 }
