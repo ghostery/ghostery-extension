@@ -18,7 +18,12 @@ import { Route } from 'react-router-dom';
 
 import StepProgressBar from '../OnboardingViews/StepProgressBar';
 import StepNavigator from '../OnboardingViews/StepNavigator';
-import { BLOCK_SETTINGS, CHOOSE_DEFAULT_SEARCH, CHOOSE_PLAN } from './OnboardingConstants';
+import {
+	BLOCK_SETTINGS,
+	CHOOSE_DEFAULT_SEARCH,
+	CHOOSE_PLAN,
+	SUCCESS
+} from './OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Onboarding View
@@ -43,7 +48,7 @@ const OnboardingView = (props) => {
 						path={step.path}
 						render={() => (
 							<div className={getScreenContainerClassNames(step.index)}>
-								<StepProgressBar currentStep={step.index} />
+								{(step.index !== SUCCESS) && <StepProgressBar currentStep={step.index} />}
 								<StepNavigator step={step.index} components={step.bodyComponents} sendMountActions={sendMountActions} />
 							</div>
 						)}
