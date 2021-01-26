@@ -26,8 +26,18 @@ const WelcomeView = (props) => {
 	const { setSetupStep } = actions;
 	return (
 		<div className="WelcomeView__container">
+<<<<<<< Updated upstream
 			<div className="WelcomeView__title">{t('ghostery_dawn_onboarding_welcome')}</div>
 			<div className="WelcomeView__subtitle">{t('ghostery_dawn_onboarding_lets_begin')}</div>
+=======
+<<<<<<< Updated upstream
+			<div className="WelcomeView__title">{t('ghostery_browser_hub_onboarding_welcome')}</div>
+			<div className="WelcomeView__subtitle">{t('ghostery_browser_hub_onboarding_lets_begin')}</div>
+=======
+			<div className="WelcomeView__title">{t('ghostery_dawn_onboarding_welcome')}</div>
+			<div className="WelcomeView__subtitle">{t('ghostery_dawn_onboarding_welcome_message')}</div>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 			<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
 			<NavLink className="WelcomeView__ctaButton" to="/onboarding/1" onClick={() => setSetupStep({ setup_step: LOGIN, origin: WELCOME })}>
 				<span>{t('ghostery_dawn_onboarding_lets_do_this')}</span>
