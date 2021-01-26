@@ -75,11 +75,24 @@
 
   &.selected {
 	border: solid 4px $ghosty-blue;
+
+		& .ChooseSearchView__optionDropdownContainer {
+			top: 7px;
+		}
   }
 
   &:hover {
 	border: solid 4px $ghosty-blue;
-  }
+
+		& .ChooseSearchView__optionDropdownContainer {
+			top: 7px;
+		}
+	}
+
+	& .ChooseSearchView__optionDropdownContainer {
+		top: 10px;
+	}
+
 }
 
 .ChooseSearchView__optionRadioButtonContainer {
@@ -90,6 +103,7 @@
 }
 
 .ChooseSearchView__optionDescriptionContainer {
+	position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,8 +112,26 @@
 	padding-right: 15%;
 }
 
+.ChooseSearchView__optionDescriptionHeader {
+	position: absolute;
+	margin-top: -45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin option-font {
+  line-height: 0.8;
+  font-size: 16px;
+  font-weight: 500;
+}
+.ChooseSearchView__optionTitle {
+	@include option-font;
+}
+
 .ChooseSearchView__optionDescriptionTitle {
-  padding-top: 10px;
+	padding-top: 10px;
   line-height: 0.8;
   font-size: 14px;
   font-weight: 500;
@@ -107,6 +139,65 @@
 
 .ChooseSearchView__optionDescriptionSubtitle {
   font-size: 14px;
+}
+
+.ChooseSearchView__optionDropdownContainer {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+	width: 184px;
+  height: 50px;
+  border-radius: 4px;
+	border: solid 2px #4a4a4a;
+	background-color: rgba(255, 255, 255, 0.95);
+
+	&.expanded {
+		height: 330px;
+	}
+
+	&:hover {
+		border-color: #00aef0
+	}
+}
+
+.ChooseSearchView__optionDropdown {
+	position: absolute;
+	top: 18px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.ChooseSearchView__optionDropdownCaret {
+	position: relative;
+	left: 18px;
+	&.expanded {
+		transform: rotate(180deg);
+	}
+}
+
+.ChooseSearchView__optionDropdownItem {
+	@include option-font;
+	margin-bottom: 16px;
+	&:hover {
+		color: #00aef0;
+		text-decoration: underline;
+	}
+}
+
+.ChooseSearchView__caret {
+	height: 35px;
+	width: 25px;
+	padding-top: 21px;
+	padding-right: 0;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 9px 5px;
+	background-image: buildIconCaretDown(#4a4a4a);
 }
 
 .ChooseSearchView__nextButton {
@@ -211,7 +302,8 @@
   text-align: center;
   color: $tundora;
   width: 70%;
-  margin-bottom: 113px;
+	margin-bottom: 113px;
+	white-space: pre-line;
 }
 
 .ChooseSearchView__modalContent {
@@ -228,4 +320,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.ChooseSearchView__modalHeader {
+	font-size: 48px;
+	font-weight: 500;
+	margin-bottom: 110px;
 }
