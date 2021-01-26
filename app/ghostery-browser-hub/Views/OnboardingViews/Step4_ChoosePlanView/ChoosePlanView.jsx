@@ -28,7 +28,9 @@ const searchPromo = () => (
 	<div className="ChoosePlanView__searchPromoContainer">
 		<div className="ChoosePlanView__searchLogo" />
 		<div className="ChoosePlanView__adFree">{ t('ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription') }</div>
-		<div className="ChoosePlanView__adFreePromo">{ t('ghostery_dawn_onboarding_ad_free_promo') }</div>
+		<div className="ChoosePlanView__adFreePromo">
+			{ `(${t('ghostery_dawn_onboarding_ad_free_promo')})` }
+		</div>
 		<div className="ChoosePlanView__adFreePromoDescription">{ t('ghostery_dawn_onboarding_ad_free_promo_description') }</div>
 	</div>
 );
@@ -208,12 +210,12 @@ class ChoosePlanView extends React.Component {
 		return t('ghostery_dawn_onboarding_your_privacy_plan');
 	};
 
-	renderSubtitleText = (fromSearchSelectionScreen) => {
+	renderSubtitleText = (selectedGhosteryGlow) => {
 		const { user } = this.props;
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
-		if (fromSearchSelectionScreen) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
+		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
 		if (isPremium) return '';
 		if (isPlus) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
 		return t('ghostery_dawn_onboarding_choose_an_option');
@@ -311,7 +313,7 @@ class ChoosePlanView extends React.Component {
 				</div>
 				<div className="ChoosePlanView">
 					<div className="ChoosePlanView__yourPrivacyPlan">{this.renderTitleText()}</div>
-					<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(!selectedGhosteryGlow)}</div>
+					<div className="ChoosePlanView__subtitle">{this.renderSubtitleText(selectedGhosteryGlow)}</div>
 					{selectedGhosteryGlow && isBasic && (
 						<Fragment>
 							{searchPromo()}

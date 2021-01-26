@@ -48,6 +48,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	font-size: 24px;
 	display: flex;
 	justify-content: center;
+  	font-weight: 500;
 }
 .ChoosePlanView__subtitle {
 	margin-top: 12px;
@@ -63,8 +64,8 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	border: solid 4px $ghosty-blue;
 }
 .ChoosePlanView__searchLogo {
-	height: 37px;
-	width: 193px;
+	height: 36px;
+	width: 166px;
 	margin: 65px auto 0 auto;
 	background-image: url('/app/images/hub/ChooseDefaultSearchView/search-engine-logo-ghostery.svg');
 }
