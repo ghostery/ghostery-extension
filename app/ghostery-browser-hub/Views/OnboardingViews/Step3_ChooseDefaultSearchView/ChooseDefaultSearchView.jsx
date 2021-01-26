@@ -55,11 +55,11 @@ class ChooseDefaultSearchView extends Component {
 		// TODO comment this IN for builds for Dawn
 		// commented out for testing purposes, as trying to message search@ghostery.com
 		// outside of Dawn causes an error
-		const payload = {
-			type: 'setDefaultSearch',
-			search: chosenSearch,
-		};
-		chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
+		// const payload = {
+		// 	type: 'setDefaultSearch',
+		// 	search: chosenSearch,
+		// };
+		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
 
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 		// 	// TODO handle errors if needed
