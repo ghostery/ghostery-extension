@@ -2416,7 +2416,7 @@
 	  "message": "Please answer all questions"
 	},
   	"ghostery_dawn_onboarding_startpage_warning": {
-	  "message": "Just so you know: Startpage's search engine will log your data and use it to serve you targeted ads."
+	  "message": "Just so you know: Startpage's search engine does not collect your data. In order to keep privacy protection free though, it will serve you untargeted, private ads."
 	},
 	"ghostery_dawn_onboarding_bing_warning": {
 	  "message": "Just so you know: Bing's search engine will log your data and use it to serve you targeted ads."
