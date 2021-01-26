@@ -15,4 +15,4 @@ export const SET_DEFAULT_SEARCH = 'SET_DEFAULT_SEARCH';
 export const SEARCH_GHOSTERY = 'Ghostery';
 export const SEARCH_BING = 'Bing';
 export const SEARCH_YAHOO = 'Yahoo';
-export const SEARCH_STARTPAGE = 'StartPage';
+export const SEARCH_STARTPAGE = 'Startpage';
