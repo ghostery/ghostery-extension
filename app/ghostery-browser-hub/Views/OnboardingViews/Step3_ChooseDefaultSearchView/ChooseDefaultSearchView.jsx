@@ -52,14 +52,19 @@ class ChooseDefaultSearchView extends Component {
 		const { actions, history } = this.props;
 		const { setSetupStep, setDefaultSearch } = actions;
 
-		// TODO comment this IN for builds for Dawn
-		// commented out for testing purposes, as trying to message search@ghostery.com
-		// outside of Dawn causes an error
-		// const payload = {
-		// 	type: 'setDefaultSearch',
-		// 	search: chosenSearch,
-		// };
-		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {});
+		const payload = {
+			type: 'setDefaultSearch',
+			search: chosenSearch,
+		};
+
+		// The try/catch wrapper facilitates testing in non-Dawn browsers which have no search@ghostery.com extension
+		try {
+			chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
+			});
+		} catch (error) {
+			console.log('Ilya sez: If you are seeing the following error in Dawn, please report it as a bug. Outside of Dawn, it is expected.');
+			console.error(error);
+		}
 
 		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 		// 	// TODO handle errors if needed
