@@ -394,7 +394,7 @@ ChoosePlanView.propTypes = {
 		plusAccess: PropTypes.bool,
 		premiumAccess: PropTypes.bool,
 	}),
-	defaultSearch: PropTypes.bool.isRequired,
+	defaultSearch: PropTypes.string.isRequired,
 };
 
 // Default props used in the Plus View

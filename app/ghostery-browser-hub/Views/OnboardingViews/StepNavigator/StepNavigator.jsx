@@ -51,7 +51,7 @@ class StepNavigator extends Component {
 
 // PropTypes ensure we pass required props of the correct type
 StepNavigator.propTypes = {
-	step: PropTypes.number.isRequired,
+	step: PropTypes.string.isRequired,
 	components: PropTypes.arrayOf(PropTypes.elementType.isRequired).isRequired,
 };
 
