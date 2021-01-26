@@ -27,7 +27,7 @@ const WelcomeView = (props) => {
 	return (
 		<div className="WelcomeView__container">
 			<div className="WelcomeView__title">{t('ghostery_dawn_onboarding_welcome')}</div>
-			<div className="WelcomeView__subtitle">{t('ghostery_dawn_onboarding_lets_begin')}</div>
+			<div className="WelcomeView__subtitle">{t('ghostery_dawn_onboarding_welcome_message')}</div>
 			<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
 			<NavLink className="WelcomeView__ctaButton" to="/onboarding/1" onClick={() => setSetupStep({ setup_step: LOGIN, origin: WELCOME })}>
 				<span>{t('ghostery_dawn_onboarding_lets_do_this')}</span>
