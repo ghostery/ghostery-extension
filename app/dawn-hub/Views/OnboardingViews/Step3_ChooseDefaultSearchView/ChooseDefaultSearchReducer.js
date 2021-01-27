@@ -13,10 +13,7 @@
 
 import {
 	SET_DEFAULT_SEARCH,
-	SEARCH_GHOSTERY,
-	SEARCH_BING,
-	SEARCH_STARTPAGE,
-	SEARCH_YAHOO
+	SEARCH_GHOSTERY
 } from './ChooseDefaultSearchConstants';
 
 const initialState = {
@@ -26,16 +23,10 @@ const initialState = {
 function ChooseDefaultSearchReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_DEFAULT_SEARCH: {
-			const newDefault = action.data;
-
-			if ([SEARCH_GHOSTERY, SEARCH_BING, SEARCH_STARTPAGE, SEARCH_YAHOO].includes(newDefault)) {
-				return {
-					...state,
-					defaultSearch: newDefault
-				};
-			}
-
-			return state;
+			return {
+				...state,
+				defaultSearch: action.data
+			};
 		}
 
 		default: return state;

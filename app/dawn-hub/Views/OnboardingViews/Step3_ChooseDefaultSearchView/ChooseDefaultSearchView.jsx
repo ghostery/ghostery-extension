@@ -35,11 +35,43 @@ class ChooseDefaultSearchView extends Component {
 			otherSearchSelected: null,
 			otherListOpen: false,
 			modalActive: false,
+			searchEnginesFetched: false,
+			searchEngines: [],
 		};
+
+		this.fetchSearchEnginesAsync = this.fetchSearchEnginesAsync.bind(this);
+	}
+
+	async fetchSearchEnginesAsync() {
+		// eslint-disable-next-line no-undef
+		if (typeof browser === 'undefined') {
+			this.setState(state => ({
+				...state,
+				searchEnginesFetched: true,
+				searchEngines: []
+			}));
+			return;
+		}
+		// eslint-disable-next-line no-undef
+		const response = await browser.search.get();
+		console.log('chrome.search.get() response:');
+		console.log(response);
+
+		const otherOptions = response
+			.map(item => item.name)
+			.filter(name => ![SEARCH_YAHOO, SEARCH_STARTPAGE, SEARCH_BING].includes(name));
+
+		this.setState(state => ({
+			...state,
+			searchEnginesFetched: true,
+			otherSearchOptions: otherOptions
+		}));
 	}
 
 	componentDidMount() {
 		document.addEventListener('click', this.handleClickAway);
+
+		this.fetchSearchEnginesAsync();
 	}
 
 	componentWillUnmount() {
@@ -74,18 +106,18 @@ class ChooseDefaultSearchView extends Component {
 	}
 
 	handleSubmit = () => {
-		let { chosenSearch } = this.state;
-		const { otherSearchSelected } = this.state;
+		const { chosenSearch, otherSearchSelected } = this.state;
 		const { actions, history } = this.props;
 		const { setSetupStep, setDefaultSearch } = actions;
 
-		if (chosenSearch === SEARCH_OTHER && otherSearchSelected) {
-			chosenSearch = otherSearchSelected;
-		}
+		const chosenSearchName = chosenSearch === SEARCH_OTHER
+			? otherSearchSelected
+			: chosenSearch;
 
 		const payload = {
 			type: 'setDefaultSearch',
-			search: chosenSearch,
+			search: chosenSearchName,
+			isOther: chosenSearch === SEARCH_OTHER,
 		};
 
 		// The try/catch wrapper facilitates testing in non-Dawn browsers which have no search@ghostery.com extension
@@ -104,7 +136,7 @@ class ChooseDefaultSearchView extends Component {
 		// 	history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 		// });
 
-		setDefaultSearch(chosenSearch);
+		setDefaultSearch(chosenSearchName);
 		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
@@ -150,18 +182,7 @@ class ChooseDefaultSearchView extends Component {
 	}
 
 	renderOtherOptionsList = () => {
-		const otherSearchOptions = [
-			'DuckDuck Go',
-			'Ecosia',
-			'Ekoru',
-			'Gibiru',
-			'Google',
-			'OneSearch',
-			'Privado',
-			'Qwant',
-			'Search Encrypt',
-			'Tailcat',
-		];
+		const { otherSearchOptions } = this.state;
 
 		return (
 			<Fragment>
@@ -307,7 +328,9 @@ class ChooseDefaultSearchView extends Component {
 	}
 
 	render() {
-		const { modalActive } = this.state;
+		const { modalActive, searchEnginesFetched } = this.state;
+
+		if (!searchEnginesFetched) return null;
 
 		return (
 			<div className="full-height">
