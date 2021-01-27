@@ -18,13 +18,39 @@ import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
 import {
 	SEARCH_GHOSTERY,
+	SEARCH_BING,
 	SEARCH_YAHOO,
 	SEARCH_STARTPAGE,
-	SEARCH_BING,
+	SEARCH_DUCKDUCK_GO,
+	SEARCH_ECOSIA,
+	SEARCH_EKORU,
+	SEARCH_GIBIRU,
+	SEARCH_GOOGLE,
+	SEARCH_ONESEARCH,
+	SEARCH_PRIVADO,
+	SEARCH_QWANT,
+	SEARCH_ENCRYPT,
+	SEARCH_TAILCAT,
 	SEARCH_OTHER
 } from './ChooseDefaultSearchConstants';
 import { Modal } from '../../../../shared-components';
 
+const mapSearchToSetupNumber = {
+	Ghostery: 1,
+	Bing: 2,
+	Yahoo: 3,
+	Startpage: 4,
+	'DuckDuck Go': 6,
+	Ecosia: 7,
+	Ekoru: 8,
+	Gibiru: 9,
+	Google: 10,
+	OneSearch: 11,
+	Privado: 12,
+	Qwant: 13,
+	'Search Encrypt': 14,
+	Tailcat: 15,
+};
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
 		super(props);
@@ -79,7 +105,21 @@ class ChooseDefaultSearchView extends Component {
 		const { actions, history } = this.props;
 		const { setSetupStep, setDefaultSearch } = actions;
 
-		if (chosenSearch === SEARCH_OTHER && otherSearchSelected) {
+		if (otherSearchSelected &&
+			(
+				SEARCH_DUCKDUCK_GO ||
+				SEARCH_ECOSIA ||
+				SEARCH_EKORU ||
+				SEARCH_ECOSIA ||
+				SEARCH_GIBIRU ||
+				SEARCH_GOOGLE ||
+				SEARCH_ONESEARCH ||
+				SEARCH_PRIVADO ||
+				SEARCH_QWANT ||
+				SEARCH_ENCRYPT ||
+				SEARCH_TAILCAT
+			)
+		) {
 			chosenSearch = otherSearchSelected;
 		}
 
@@ -105,7 +145,11 @@ class ChooseDefaultSearchView extends Component {
 		// });
 
 		setDefaultSearch(chosenSearch);
-		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+		setSetupStep({
+			setup_step: CHOOSE_PLAN,
+			setup_number: mapSearchToSetupNumber[chosenSearch],
+			origin: ONBOARDING
+		});
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
@@ -151,16 +195,15 @@ class ChooseDefaultSearchView extends Component {
 
 	renderOtherOptionsList = () => {
 		const otherSearchOptions = [
-			'DuckDuck Go',
-			'Ecosia',
-			'Ekoru',
-			'Gibiru',
-			'Google',
-			'OneSearch',
-			'Privado',
-			'Qwant',
-			'Search Encrypt',
-			'Tailcat',
+			SEARCH_DUCKDUCK_GO,
+			SEARCH_ECOSIA,
+			SEARCH_EKORU,
+			SEARCH_GOOGLE,
+			SEARCH_ONESEARCH,
+			SEARCH_PRIVADO,
+			SEARCH_QWANT,
+			SEARCH_ENCRYPT,
+			SEARCH_TAILCAT,
 		];
 
 		return (
@@ -241,7 +284,7 @@ class ChooseDefaultSearchView extends Component {
 							{(searchBeingConsidered === SEARCH_OTHER) && (
 								<Fragment>
 									{
-										`${t('ghostery_dawn_onboarding_you_have_selected_an_alternate_serach_engine')} \n
+										`${t('ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine')} \n
 										${otherSearchSelected}`
 									}
 								</Fragment>

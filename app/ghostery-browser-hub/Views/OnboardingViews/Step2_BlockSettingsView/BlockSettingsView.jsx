@@ -75,7 +75,7 @@ class BlockSettingsView extends Component {
 		const partThree = (antiTracking) ? '1' : '2';
 		const partFour = (smartBrowsing) ? '1' : '2';
 
-		return partOne + partTwo + partThree + partFour;
+		return `${partOne}${partTwo}${partThree}${partFour}`;
 	}
 
 	handleSubmit = () => {
