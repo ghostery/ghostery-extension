@@ -114,7 +114,7 @@ class BlockSettingsView extends Component {
 	renderAnswerBlock = (checked, category, answer, label) => (
 		<div className="BlockSettingsView_answerBlock" onClick={() => this.handleAnswerChange(category, answer)}>
 			<div className="BlockSettingsView__radioButtonContainer">
-				<RadioButton checked={checked} altDesign onClick={() => {}} />
+				<RadioButton checked={checked} altDesign handleClick={() => {}} />
 			</div>
 			<div className="BlockSettingsView_answerText">{label}</div>
 		</div>

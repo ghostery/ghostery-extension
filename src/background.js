@@ -1616,23 +1616,26 @@ function initializeGhosteryModules() {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
 			if (globals.JUST_INSTALLED) {
-				// TODO comment in before 8.5.5 release (commented out to facilitate onboarding testing)
-				// if (BROWSER_INFO.name === 'ghostery_desktop') {
-				chrome.tabs.create({
-					url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html?justInstalled=true'),
-					active: true
-				});
-				// } else {
-				// 	// Open the Ghostery Hub on install with justInstalled query parameter set to true.
-				// 	// We need to do this after running scheduledTasks for the first time
-				// 	// because of an A/B test that determines which promo variant is shown in the Hub on install
-				// 	const showAlternateHub = conf.hub_layout === 'alternate';
-				// 	const route = showAlternateHub ? '#home' : '';
-				// 	chrome.tabs.create({
-				// 		url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
-				// 		active: true
-				// 	});
-				// }
+				(async() => {
+					await globals.BROWSER_INFO_READY;
+					// TODO comment in before 8.5.5 release (commented out to facilitate onboarding testing)
+					// if (BROWSER_INFO.name === 'ghostery_desktop') {
+					chrome.tabs.create({
+						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html?justInstalled=true'),
+						active: true
+					});
+					// } else {
+					// 	// Open the Ghostery Hub on install with justInstalled query parameter set to true.
+					// 	// We need to do this after running scheduledTasks for the first time
+					// 	// because of an A/B test that determines which promo variant is shown in the Hub on install
+					// 	const showAlternateHub = conf.hub_layout === 'alternate';
+					// 	const route = showAlternateHub ? '#home' : '';
+					// 	chrome.tabs.create({
+					// 		url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
+					// 		active: true
+					// 	});
+					// }
+				})();
 			}
 		});
 	});
