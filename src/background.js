@@ -958,7 +958,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'openHubPage') {
 		const hubUrl = (BROWSER_INFO.name === 'ghostery_desktop')
-			? chrome.runtime.getURL('./app/templates/dawn_onboarding.html')
+			? chrome.runtime.getURL('./app/templates/dawn_hub.html')
 			: chrome.runtime.getURL('./app/templates/hub.html');
 		metrics.ping('intro_hub_click');
 		utils.openNewTab({ url: hubUrl, become_active: true });
@@ -1621,7 +1621,7 @@ function initializeGhosteryModules() {
 					// TODO comment in before 8.5.5 release (commented out to facilitate onboarding testing)
 					// if (BROWSER_INFO.name === 'ghostery_desktop') {
 					chrome.tabs.create({
-						url: chrome.runtime.getURL('./app/templates/dawn_onboarding.html?justInstalled=true'),
+						url: chrome.runtime.getURL('./app/templates/dawn_hub.html?justInstalled=true'),
 						active: true
 					});
 					// } else {

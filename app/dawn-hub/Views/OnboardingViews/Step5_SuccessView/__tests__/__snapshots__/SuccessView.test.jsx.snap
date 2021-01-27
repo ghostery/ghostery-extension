@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/dawn-hub/Views/OnboardingViews/Step0_SuccessView/SuccessView.test.jsx Snapshot tests with react-test-renderer Success View is rendered correctly 1`] = `
+Array [
+  <div
+    className="SuccessView__relativeContainer"
+  >
+    <div
+      className="SuccessView__backContainer"
+    >
+      <span
+        className="SuccessView__caret left"
+      />
+      <a
+        aria-current={null}
+        href="/onboarding/4"
+        onClick={[Function]}
+      >
+        <span
+          className="SuccessView__back"
+        >
+          ghostery_dawn_onboarding_back
+        </span>
+      </a>
+    </div>
+  </div>,
+  <div
+    className="SuccessView__container"
+  >
+    <div
+      className="SuccessView__title"
+    >
+      ghostery_dawn_onboarding_youve_successfully_set_up_your_browser
+    </div>
+    <div
+      className="SuccessView__subtitle"
+    >
+      ghostery_dawn_onboarding_surf_with_ease
+    </div>
+    <img
+      className="SuccessView__ghosterySuite"
+      src="/app/images/hub/success/ghostery-suite.png"
+    />
+    <button
+      className="SuccessView__ctaButton"
+      onClick={[Function]}
+      type="button"
+    >
+      ghostery_dawn_onboarding_start_browsing
+    </button>
+  </div>,
+]
+`;
