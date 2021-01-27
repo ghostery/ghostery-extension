@@ -217,7 +217,7 @@ class ChoosePlanView extends React.Component {
 	};
 
 	premiumCard = (checked, handleClick, showCTAButton = false) => {
-		const { actions } = this.props;
+		const { actions, history } = this.props;
 		const { setSetupStep } = actions;
 		const cardClassNames = ClassNames('ChoosePlanView__card premium', {
 			checked
@@ -278,7 +278,7 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 6, origin: ONBOARDING })}>{t('ghostery_dawn_onboarding_upgrade')}</a>
+					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 6, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_upgrade')}</a>
 				)}
 			</Fragment>
 		);
@@ -289,7 +289,7 @@ class ChoosePlanView extends React.Component {
 			actions,
 			defaultSearch,
 			loggedIn,
-			next,
+			history,
 			user,
 		} = this.props;
 		const { setSetupStep } = actions;
@@ -327,11 +327,12 @@ class ChoosePlanView extends React.Component {
 									and move them to Step 5 if signed in
 								2. DONE If user is signed out, clicking this should take them to Step 4b
 							*/}
+							{/* May have to change the below links depending on GH-2248 */}
 							{loggedIn && (
-								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 2, origin: ONBOARDING })}>{t('ghostery_dawn_onboarding_start_trial')}</a>
+								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 2, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</a>
 							)}
 							{!loggedIn && (
-								<div className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 2, origin: ONBOARDING }); next(); }}>{t('ghostery_dawn_onboarding_start_trial')}</div>
+								<div className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 2, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</div>
 							)}
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
@@ -370,10 +371,10 @@ class ChoosePlanView extends React.Component {
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 3, origin: ONBOARDING })} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 3, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 4, origin: ONBOARDING })} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 4, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 								</div>
 							))}
