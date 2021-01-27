@@ -1,0 +1,329 @@
+.ChooseSearchView__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 18px;
+  line-height: 2.33;
+  color: $tundora;
+  margin: 45px auto 83px auto;
+}
+
+.ChooseSearchView__relativeContainer {
+	position: relative;
+	@include breakpoint(small down) {
+		margin-left: 0;
+	}
+}
+.ChooseSearchView__caret.left {
+	margin: 7px auto 0 auto;
+	height: 10px;
+  width: 10px;
+  border-left: 2px solid $tundora;
+	border-top: 2px solid $tundora;
+	cursor: pointer;
+	transform: rotate(-45deg);
+}
+
+.ChooseSearchView__backContainer {
+	position: absolute;
+	display: flex;
+	width: 68px;
+	margin-top: 15px;
+	@include breakpoint(small down) {
+		margin-top: -21px;
+	}
+	.ChooseSearchView__back {
+		margin-top: 8px;
+		font-size: 16px;
+		color: $tundora;
+		text-decoration: underline;
+	}
+}
+
+
+.ChooseSearchView__title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 2.33;
+  text-align: center;
+	@include breakpoint(xxlarge down) {
+		max-width: 400px;
+		margin: auto;
+	}
+}
+
+.ChooseSearchView__subtitle {
+  margin-bottom: 47px;
+  text-align: center;
+}
+
+.ChooseSearchView__optionsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.ChooseSearchView__optionContainer {
+  display: flex;
+  width: 354px;
+  height: 125px;
+  margin: 20px;
+  border: solid 1px $tundora;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.selected {
+	border: solid 4px $ghosty-blue;
+
+		& .ChooseSearchView__optionDropdownContainer {
+			top: 7px;
+		}
+  }
+
+  &:hover {
+	border: solid 4px $ghosty-blue;
+
+		& .ChooseSearchView__optionDropdownContainer {
+			top: 7px;
+		}
+	}
+
+	& .ChooseSearchView__optionDropdownContainer {
+		top: 10px;
+	}
+
+}
+
+.ChooseSearchView__optionRadioButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+
+.ChooseSearchView__optionDescriptionContainer {
+	position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+	width: 75%;
+	padding-right: 15%;
+}
+
+.ChooseSearchView__optionDescriptionHeader {
+	position: absolute;
+	margin-top: -45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin option-font {
+  line-height: 0.8;
+  font-size: 16px;
+  font-weight: 500;
+}
+.ChooseSearchView__optionTitle {
+	@include option-font;
+}
+
+.ChooseSearchView__optionDescriptionTitle {
+	padding-top: 10px;
+  line-height: 0.8;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ChooseSearchView__optionDescriptionSubtitle {
+  font-size: 14px;
+}
+
+.ChooseSearchView__optionDropdownContainer {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+	width: 184px;
+  height: 50px;
+  border-radius: 4px;
+	border: solid 2px #4a4a4a;
+	background-color: rgba(255, 255, 255, 0.95);
+
+	&.expanded {
+		height: 330px;
+	}
+
+	&:hover {
+		border-color: #00aef0
+	}
+}
+
+.ChooseSearchView__optionDropdown {
+	position: absolute;
+	top: 18px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.ChooseSearchView__optionDropdownCaret {
+	position: relative;
+	left: 18px;
+	&.expanded {
+		transform: rotate(180deg);
+	}
+}
+
+.ChooseSearchView__optionDropdownItem {
+	@include option-font;
+	margin-bottom: 16px;
+	&:hover {
+		color: #00aef0;
+		text-decoration: underline;
+	}
+}
+
+.ChooseSearchView__caret {
+	height: 35px;
+	width: 25px;
+	padding-top: 9px;
+	padding-right: 0;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 9px 5px;
+	background-image: buildIconCaretDown(#4a4a4a);
+}
+
+.ChooseSearchView__nextButton {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  width: 162px;
+  cursor: pointer;
+  padding: 7.7px 14px;
+  line-height: 22px;
+  background: linear-gradient(
+	45deg,
+	#ff7e74 50%,
+	#00aef0
+  );
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  transition: 0.25s all;
+  border: none;
+  &:hover {
+	background-position: 0% 50%;
+	transition: 0.25s all;
+  }
+  color: #FFF;
+  font-size: 14.1px;
+  font-weight: 700;
+  border-radius: 3.5px;
+  text-align: center;
+  line-height: 2.05;
+  cursor: pointer;
+}
+
+.ChooseSearchView__modalCancelButton {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  width: 162px;
+  cursor: pointer;
+  padding: 7.7px 14px;
+  line-height: 22px;
+  border: solid 2px $tundora;
+  &:hover {
+	border: none;
+	background: $ghosty-blue;
+	color: $white;
+  }
+  color: $tundora;
+  font-size: 14.1px;
+  font-weight: 700;
+  border-radius: 3.5px;
+  line-height: 2.05;
+  cursor: pointer;
+}
+
+.ChooseSearchView__modalConfirmButton {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  width: 162px;
+  cursor: pointer;
+  padding: 7.7px 14px;
+  line-height: 22px;
+  background: linear-gradient(
+				  45deg,
+				  #ff7e74 50%,
+				  #00aef0
+  );
+  background-size: 200% 100%;
+  background-position: 100% 50%;
+  transition: 0.25s all;
+  border: none;
+  &:hover {
+	background-position: 0% 50%;
+	transition: 0.25s all;
+  }
+  color: #FFF;
+  font-size: 14.1px;
+  font-weight: 700;
+  border-radius: 3.5px;
+  text-align: center;
+  line-height: 2.05;
+  cursor: pointer;
+}
+
+.ChooseSearchView__modalButtonsContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.ChooseSearchView__modalButtonDivider {
+  width: 24px;
+}
+
+.ChooseSearchView__modalOptionLogo {
+  padding: 70px 0;
+}
+
+.ChooseSearchView__modalDescription {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.75;
+  text-align: center;
+  color: $tundora;
+  width: 70%;
+	margin-bottom: 113px;
+	white-space: pre-line;
+}
+
+.ChooseSearchView__modalContent {
+  position: relative;
+  width: 901px;
+  min-height: 632px;
+  padding: 20px;
+  background-color: $white;
+  border: 1px solid $tundora;
+  z-index: 10;
+}
+
+.ChooseSearchView__modalMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ChooseSearchView__modalHeader {
+	font-size: 48px;
+	font-weight: 500;
+	margin-bottom: 110px;
+}

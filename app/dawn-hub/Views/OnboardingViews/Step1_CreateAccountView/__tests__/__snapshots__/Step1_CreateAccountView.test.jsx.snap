@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/Step1_CreateAccountView component Snapshot tests with react-test-renderer Create Account Form view is rendered correctly 1`] = `
+<div
+  className="Step1_CreateAccountView"
+>
+  <div
+    className="CreateAccountView__relativeContainer"
+  >
+    <div
+      className="CreateAccountView__backContainer"
+    >
+      <span
+        className="CreateAccountView__caret left"
+      />
+      <a
+        aria-current={null}
+        href="/onboarding/3"
+        onClick={[Function]}
+      >
+        <span
+          className="CreateAccountView__back"
+        >
+          ghostery_dawn_onboarding_back_to_search_selection
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    className="Step1_CreateAccountView__title"
+  >
+    ghostery_dawn_onboarding_create_a_ghostery_account
+  </div>
+  <div
+    className="Step1_CreateAccountView__subtitle"
+  >
+    ghostery_dawn_onboarding_create_account_for_trial
+  </div>
+  <div
+    className="row align-center-middle"
+  >
+    <div
+      className="Step1_CreateAccountView__alreadyHaveAccount columns small-12"
+      onClick={[Function]}
+    >
+      ghostery_dawn_onboarding_already_have_account
+    </div>
+  </div>
+  <div />
+  <div
+    className="Step1_CreateAccountView__FAQContainer"
+  >
+    <div
+      className="Step1_CreateAccountView__faqItemContainer row"
+    >
+      <div
+        className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2"
+      >
+        <img
+          className="Step1_CreateAccountView__faqIcon"
+          src="/app/images/hub/browser-create-account-view/ghosty-shield.svg"
+        />
+      </div>
+      <div
+        className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 large-10"
+      >
+        <div
+          className="Step1_CreateAccountView__faqItemLabel"
+        >
+          ghostery_dawn_onboarding_private_by_design
+        </div>
+        <div
+          className="Step1_CreateAccountView__faqItemDescription"
+        >
+          ghostery_dawn_onboarding_private_by_design_description
+        </div>
+      </div>
+    </div>
+    <div
+      className="Step1_CreateAccountView__faqItemContainer row"
+    >
+      <div
+        className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2"
+      >
+        <img
+          className="Step1_CreateAccountView__faqIcon"
+          src="/app/images/hub/browser-create-account-view/ghosty-box.svg"
+        />
+      </div>
+      <div
+        className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 large-10"
+      >
+        <div
+          className="Step1_CreateAccountView__faqItemLabel"
+        >
+          ghostery_dawn_onboarding_can_i_remove_my_account
+        </div>
+        <div
+          className="Step1_CreateAccountView__faqItemDescription"
+        >
+          ghostery_dawn_onboarding_can_i_remove_my_account_description
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <a
+      className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3"
+      href="https://ghosterystage.com/about-ghostery/ghostery-plans-and-products-privacy-policy/"
+      rel="noreferrer"
+      target="_blank"
+    >
+      ghostery_dawn_onboarding_visit_our_privacy_policy
+    </a>
+  </div>
+</div>
+`;
