@@ -198,6 +198,7 @@ class ChooseDefaultSearchView extends Component {
 			SEARCH_DUCKDUCK_GO,
 			SEARCH_ECOSIA,
 			SEARCH_EKORU,
+			SEARCH_GIBIRU,
 			SEARCH_GOOGLE,
 			SEARCH_ONESEARCH,
 			SEARCH_PRIVADO,

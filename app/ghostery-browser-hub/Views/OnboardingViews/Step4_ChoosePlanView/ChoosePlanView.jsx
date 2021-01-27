@@ -363,20 +363,20 @@ class ChoosePlanView extends React.Component {
 							{(isBasic && (
 								<div className="ChoosePlanView__ctaButtonContainer">
 									{(selectedPlan === BASIC) && (
-										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
+										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 1, origin: ONBOARDING })}>
 											<span>{t('next_or_start_trial')}</span>
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 4, origin: ONBOARDING })} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 5, origin: ONBOARDING })} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 								</div>
 							))}
 							{isPremium && (
-								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING })}>
+								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 5, origin: ONBOARDING })}>
 									<span>{t('next')}</span>
 								</NavLink>
 							)}
