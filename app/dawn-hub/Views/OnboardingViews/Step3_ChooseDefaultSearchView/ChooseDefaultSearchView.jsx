@@ -21,16 +21,6 @@ import {
 	SEARCH_BING,
 	SEARCH_YAHOO,
 	SEARCH_STARTPAGE,
-	SEARCH_DUCKDUCK_GO,
-	SEARCH_ECOSIA,
-	SEARCH_EKORU,
-	SEARCH_GIBIRU,
-	SEARCH_GOOGLE,
-	SEARCH_ONESEARCH,
-	SEARCH_PRIVADO,
-	SEARCH_QWANT,
-	SEARCH_ENCRYPT,
-	SEARCH_TAILCAT,
 	SEARCH_OTHER
 } from './ChooseDefaultSearchConstants';
 import { Modal } from '../../../../shared-components';
@@ -51,6 +41,7 @@ const mapSearchToSetupNumber = {
 	'Search Encrypt': 14,
 	Tailcat: 15,
 };
+
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
 		super(props);
@@ -66,6 +57,16 @@ class ChooseDefaultSearchView extends Component {
 		};
 
 		this.fetchSearchEnginesAsync = this.fetchSearchEnginesAsync.bind(this);
+	}
+
+	componentDidMount() {
+		document.addEventListener('click', this.handleClickAway);
+
+		this.fetchSearchEnginesAsync();
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('click', this.handleClickAway);
 	}
 
 	async fetchSearchEnginesAsync() {
@@ -93,16 +94,6 @@ class ChooseDefaultSearchView extends Component {
 			otherSearchOptionsFetched: true,
 			otherSearchOptions: otherOptions
 		}));
-	}
-
-	componentDidMount() {
-		document.addEventListener('click', this.handleClickAway);
-
-		this.fetchSearchEnginesAsync();
-	}
-
-	componentWillUnmount() {
-		document.removeEventListener('click', this.handleClickAway);
 	}
 
 	updateSelection = () => this.setState(prevState => (
@@ -166,7 +157,7 @@ class ChooseDefaultSearchView extends Component {
 		setDefaultSearch(chosenSearch);
 		setSetupStep({
 			setup_step: CHOOSE_PLAN,
-			setup_number: mapSearchToSetupNumber[chosenSearch],
+			setup_number: mapSearchToSetupNumber[chosenSearchName],
 			origin: ONBOARDING
 		});
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
