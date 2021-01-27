@@ -132,6 +132,15 @@ class BlockSettingsView extends Component {
 		}
 	}
 
+	renderAnswerBlock = (checked, category, answer, label) => (
+		<div className="BlockSettingsView_answerBlock" onClick={() => this.handleAnswerChange(category, answer)}>
+			<div className="BlockSettingsView__radioButtonContainer">
+				<RadioButton checked={checked} altDesign onClick={() => {}} />
+			</div>
+			<div className="BlockSettingsView_answerText">{label}</div>
+		</div>
+	);
+
 	render() {
 		const {
 			recommendedChoices, blockAds, kindsOfTrackers, antiTracking, smartBrowsing
@@ -162,18 +171,8 @@ class BlockSettingsView extends Component {
 						</div>
 						<ol>
 							<li className="BlockSettingsView_question">{t('ghostery_dawn_onboarding_question_block_ads')}</li>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={blockAds === true} handleClick={() => this.handleAnswerChange('blockAds', true)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_yes')}</div>
-							</div>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={blockAds === false} handleClick={() => this.handleAnswerChange('blockAds', false)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_no')}</div>
-							</div>
+							{this.renderAnswerBlock((blockAds === true), 'blockAds', true, t('hub_setup_modal_button_yes'))}
+							{this.renderAnswerBlock((blockAds === false), 'blockAds', false, t('hub_setup_modal_button_no'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_kinds_of_trackers')}
@@ -182,24 +181,9 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={kindsOfTrackers === 1} handleClick={() => this.handleAnswerChange('kindsOfTrackers', 1)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('ghostery_dawn_onboarding_kinds_of_trackers_all')}</div>
-							</div>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={kindsOfTrackers === 2} handleClick={() => this.handleAnswerChange('kindsOfTrackers', 2)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics')}</div>
-							</div>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={kindsOfTrackers === 3} handleClick={() => this.handleAnswerChange('kindsOfTrackers', 3)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('ghostery_dawn_onboarding_kinds_of_trackers_none')}</div>
-							</div>
+							{this.renderAnswerBlock((kindsOfTrackers === 0), 'kindsOfTrackers', 0, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_anti_tracking')}
@@ -208,18 +192,8 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={antiTracking === true} handleClick={() => this.handleAnswerChange('antiTracking', true)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_yes')}</div>
-							</div>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={antiTracking === false} handleClick={() => this.handleAnswerChange('antiTracking', false)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_no')}</div>
-							</div>
+							{this.renderAnswerBlock((antiTracking === true), 'antiTracking', true, t('hub_setup_modal_button_yes'))}
+							{this.renderAnswerBlock((antiTracking === false), 'antiTracking', false, t('hub_setup_modal_button_no'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_smart_browsing')}
@@ -228,18 +202,8 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={smartBrowsing === true} handleClick={() => this.handleAnswerChange('smartBrowsing', true)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_yes')}</div>
-							</div>
-							<div className="BlockSettingsView_answerBlock">
-								<div className="BlockSettingsView__radioButtonContainer">
-									<RadioButton checked={smartBrowsing === false} handleClick={() => this.handleAnswerChange('smartBrowsing', false)} altDesign />
-								</div>
-								<div className="BlockSettingsView_answerText">{t('hub_setup_modal_button_no')}</div>
-							</div>
+							{this.renderAnswerBlock((smartBrowsing === true), 'smartBrowsing', true, t('hub_setup_modal_button_yes'))}
+							{this.renderAnswerBlock((smartBrowsing === false), 'smartBrowsing', false, t('hub_setup_modal_button_no'))}
 						</ol>
 					</div>
 					<button

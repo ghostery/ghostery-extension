@@ -28,9 +28,6 @@ function ChooseDefaultSearchReducer(state = initialState, action) {
 		case SET_DEFAULT_SEARCH: {
 			const newDefault = action.data;
 
-			console.log('in SET_DEFAULT_SEARCH reducer switch case. newDefault:');
-			console.log(newDefault);
-
 			if ([SEARCH_GHOSTERY, SEARCH_BING, SEARCH_STARTPAGE, SEARCH_YAHOO].includes(newDefault)) {
 				return {
 					...state,
