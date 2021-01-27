@@ -16,3 +16,4 @@ export const SEARCH_GHOSTERY = 'Ghostery';
 export const SEARCH_BING = 'Bing';
 export const SEARCH_YAHOO = 'Yahoo';
 export const SEARCH_STARTPAGE = 'Startpage';
+export const SEARCH_OTHER = t('ghostery_dawn_onboarding_other');
