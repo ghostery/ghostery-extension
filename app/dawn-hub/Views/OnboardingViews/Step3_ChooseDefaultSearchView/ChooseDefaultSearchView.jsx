@@ -35,8 +35,8 @@ class ChooseDefaultSearchView extends Component {
 			otherSearchSelected: null,
 			otherListOpen: false,
 			modalActive: false,
-			searchEnginesFetched: false,
-			searchEngines: [],
+			otherSearchOptionsFetched: false,
+			otherSearchOptions: [],
 		};
 
 		this.fetchSearchEnginesAsync = this.fetchSearchEnginesAsync.bind(this);
@@ -44,26 +44,27 @@ class ChooseDefaultSearchView extends Component {
 
 	async fetchSearchEnginesAsync() {
 		// eslint-disable-next-line no-undef
-		if (typeof browser === 'undefined') {
+		if (typeof browser === 'undefined') { // we are not in Dawn (or Firefox)
 			this.setState(state => ({
 				...state,
-				searchEnginesFetched: true,
-				searchEngines: []
+				otherSearchOptionsFetched: true,
 			}));
 			return;
 		}
 		// eslint-disable-next-line no-undef
-		const response = await browser.search.get();
+		const response = await browser.search.get(); // we are in Dawn / Firefox, where this API is supported
 		console.log('chrome.search.get() response:');
 		console.log(response);
 
+		// a successful response is guaranteed to be an array of search engine objects
+		// see https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/search/get
 		const otherOptions = response
 			.map(item => item.name)
 			.filter(name => ![SEARCH_YAHOO, SEARCH_STARTPAGE, SEARCH_BING].includes(name));
 
 		this.setState(state => ({
 			...state,
-			searchEnginesFetched: true,
+			otherSearchOptionsFetched: true,
 			otherSearchOptions: otherOptions
 		}));
 	}
@@ -293,7 +294,10 @@ class ChooseDefaultSearchView extends Component {
 	}
 
 	renderSearchOptions = () => {
-		const { chosenSearch } = this.state;
+		const { chosenSearch, otherSearchOptions } = this.state;
+
+		// No sense showing dropdown if there are no other options
+		const showOtherOptionsDropdown = otherSearchOptions.length > 0;
 
 		return (
 			<Fragment>
@@ -312,7 +316,7 @@ class ChooseDefaultSearchView extends Component {
 						{this.renderOptionContainer(chosenSearch, SEARCH_GHOSTERY)}
 						{this.renderOptionContainer(chosenSearch, SEARCH_STARTPAGE)}
 						{this.renderOptionContainer(chosenSearch, SEARCH_BING)}
-						{this.renderOptionContainer(chosenSearch, SEARCH_OTHER)}
+						{showOtherOptionsDropdown && this.renderOptionContainer(chosenSearch, SEARCH_OTHER)}
 						{this.renderOptionContainer(chosenSearch, SEARCH_YAHOO)}
 					</div>
 					<button
@@ -328,9 +332,9 @@ class ChooseDefaultSearchView extends Component {
 	}
 
 	render() {
-		const { modalActive, searchEnginesFetched } = this.state;
+		const { modalActive, otherSearchOptionsFetched } = this.state;
 
-		if (!searchEnginesFetched) return null;
+		if (!otherSearchOptionsFetched) return null;
 
 		return (
 			<div className="full-height">
