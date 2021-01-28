@@ -181,9 +181,9 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							{this.renderAnswerBlock((kindsOfTrackers === 0), 'kindsOfTrackers', 0, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 3), 'kindsOfTrackers', 3, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_anti_tracking')}

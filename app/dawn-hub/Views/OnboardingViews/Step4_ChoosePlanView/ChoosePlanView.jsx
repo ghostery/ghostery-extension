@@ -18,7 +18,17 @@ import PropTypes from 'prop-types';
 import RadioButton from '../../../../shared-components/RadioButton';
 import globals from '../../../../../src/classes/Globals';
 import { BASIC, PLUS, PREMIUM } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
-import { CHOOSE_PLAN, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
+import {
+	CHOOSE_PLAN,
+	ONBOARDING,
+	FREE_USER_NO_TRIAL,
+	FREE_USER_PLUS_TRIAL,
+	FREE_USER_PLUS_SUBSCRIPTION,
+	FREE_USER_PREMIUM_SUBSCRIPTION,
+	PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION,
+	PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION,
+	PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION
+} from '../../OnboardingView/OnboardingConstants';
 import { SEARCH_GHOSTERY } from '../Step3_ChooseDefaultSearchView/ChooseDefaultSearchConstants';
 
 const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
@@ -208,7 +218,7 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 5, origin: ONBOARDING })}>
+					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
 						<span>{t('ghostery_dawn_onboarding_keep')}</span>
 					</NavLink>
 				)}
@@ -278,7 +288,7 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 6, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_upgrade')}</a>
+					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_upgrade')}</a>
 				)}
 			</Fragment>
 		);
@@ -329,10 +339,10 @@ class ChoosePlanView extends React.Component {
 							*/}
 							{/* May have to change the below links depending on GH-2248 */}
 							{loggedIn && (
-								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 2, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</a>
+								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PLUS_TRIAL, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</a>
 							)}
 							{!loggedIn && (
-								<div className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 2, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</div>
+								<div className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PLUS_TRIAL, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</div>
 							)}
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
@@ -366,20 +376,20 @@ class ChoosePlanView extends React.Component {
 							{(isBasic && (
 								<div className="ChoosePlanView__ctaButtonContainer">
 									{(selectedPlan === BASIC) && (
-										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 1, origin: ONBOARDING })}>
+										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_NO_TRIAL, origin: ONBOARDING })}>
 											<span>{t('next_or_start_trial')}</span>
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 3, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PLUS_SUBSCRIPTION, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 4, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PREMIUM_SUBSCRIPTION, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 								</div>
 							))}
 							{isPremium && (
-								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: 7, origin: ONBOARDING })}>
+								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
 									<span>{t('next')}</span>
 								</NavLink>
 							)}

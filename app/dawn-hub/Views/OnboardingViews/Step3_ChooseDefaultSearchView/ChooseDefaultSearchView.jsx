@@ -145,13 +145,6 @@ class ChooseDefaultSearchView extends Component {
 			console.error(error);
 		}
 
-		// chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
-		// 	// TODO handle errors if needed
-		// 	// TODO save user's search setting to redux / background if needed
-		// 	setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
-		// 	history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
-		// });
-
 		setDefaultSearch(chosenSearchName);
 		setSetupStep({
 			setup_step: CHOOSE_PLAN,
