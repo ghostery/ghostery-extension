@@ -65,10 +65,10 @@ const Step1_CreateAccountView = (props) => {
 
 	const [view, setView] = useState(CREATE_ACCOUNT);
 
-	const handleSkipButton = (setup_number) => {
+	const handleSkipButton = (dawn_setup_number) => {
 		setSetupStep({
 			setup_step: LOGIN,
-			setup_number,
+			dawn_setup_number,
 			origin: ONBOARDING,
 		});
 		setToast({
@@ -82,7 +82,7 @@ const Step1_CreateAccountView = (props) => {
 
 		setSetupStep({
 			setup_step: LOGIN,
-			setup_number: CREATE_ACCOUNT_SUCCESSFUL,
+			dawn_setup_number: CREATE_ACCOUNT_SUCCESSFUL,
 			origin: ONBOARDING,
 		});
 

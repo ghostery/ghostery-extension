@@ -148,7 +148,7 @@ class ChooseDefaultSearchView extends Component {
 		setDefaultSearch(chosenSearchName);
 		setSetupStep({
 			setup_step: CHOOSE_PLAN,
-			setup_number: mapSearchToSetupNumber[chosenSearchName],
+			dawn_setup_number: mapSearchToSetupNumber[chosenSearchName],
 			origin: ONBOARDING
 		});
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);

@@ -524,7 +524,7 @@ function handleGhosteryHub(name, message, callback) {
 			const origin = message.origin || '';
 			if (origin === 'onboarding') {
 				conf.setup_step = message.setup_step;
-				conf.setup_number = message.setup_number;
+				conf.dawn_setup_number = message.dawn_setup_number;
 				metrics.ping('gb_onboarding');
 			}
 			callback({ setup_step });

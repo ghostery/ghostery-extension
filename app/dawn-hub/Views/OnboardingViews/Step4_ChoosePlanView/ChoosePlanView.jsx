@@ -165,9 +165,9 @@ class ChoosePlanView extends React.Component {
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
-	setSetupStepAndMoveToSuccessView = (setup_number) => {
+	setSetupStepAndMoveToSuccessView = (dawn_setup_number) => {
 		const { setSetupStep, history } = this.props;
-		setSetupStep({ setup_step: CHOOSE_PLAN, setup_number, origin: ONBOARDING });
+		setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number, origin: ONBOARDING });
 		history.push('/onboarding/5');
 	}
 
@@ -224,7 +224,7 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
+					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
 						<span>{t('ghostery_dawn_onboarding_keep')}</span>
 					</NavLink>
 				)}
@@ -380,7 +380,7 @@ class ChoosePlanView extends React.Component {
 							{(isBasic && (
 								<div className="ChoosePlanView__ctaButtonContainer">
 									{(selectedPlan === BASIC) && (
-										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_NO_TRIAL, origin: ONBOARDING })}>
+										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: FREE_USER_NO_TRIAL, origin: ONBOARDING })}>
 											<span>{t('next_or_start_trial')}</span>
 										</NavLink>
 									)}
@@ -393,7 +393,7 @@ class ChoosePlanView extends React.Component {
 								</div>
 							))}
 							{isPremium && (
-								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
+								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
 									<span>{t('next')}</span>
 								</NavLink>
 							)}

@@ -117,10 +117,9 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
-
 			setSetupStep({
 				setup_step: CHOOSE_DEFAULT_SEARCH,
-				setup_number: this.buildSetupNumberString(),
+				dawn_setup_number: this.buildSetupNumberString(),
 				origin: ONBOARDING
 			});
 			history.push('/onboarding/3');
