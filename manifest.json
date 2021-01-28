@@ -74,8 +74,7 @@
 		"https://*/*",
 		"ws://*/*",
 		"wss://*/*",
-		"storage",
-	  	"search"
+		"storage"
 	],
 	"background": {
 		"scripts": [
