@@ -80,8 +80,6 @@ class ChooseDefaultSearchView extends Component {
 		}
 		// eslint-disable-next-line no-undef
 		const response = await browser.search.get(); // we are in Dawn / Firefox, where this API is supported
-		console.log('chrome.search.get() response:');
-		console.log(response);
 
 		// a successful response is guaranteed to be an array of search engine objects
 		// see https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/search/get
@@ -154,7 +152,7 @@ class ChooseDefaultSearchView extends Component {
 		// 	history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 		// });
 
-		setDefaultSearch(chosenSearch);
+		setDefaultSearch(chosenSearchName);
 		setSetupStep({
 			setup_step: CHOOSE_PLAN,
 			setup_number: mapSearchToSetupNumber[chosenSearchName],

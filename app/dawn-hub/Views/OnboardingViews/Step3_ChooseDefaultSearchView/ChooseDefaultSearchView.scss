@@ -148,15 +148,11 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 50px;
+  	padding-bottom: 5px;
 	width: 184px;
-  height: 50px;
-  border-radius: 4px;
+  	border-radius: 4px;
 	border: solid 2px #4a4a4a;
 	background-color: rgba(255, 255, 255, 0.95);
-
-	&.expanded {
-		height: 330px;
-	}
 
 	&:hover {
 		border-color: #00aef0
@@ -164,8 +160,8 @@
 }
 
 .ChooseSearchView__optionDropdown {
-	position: absolute;
-	top: 18px;
+	position: relative;
+	top: 12px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
