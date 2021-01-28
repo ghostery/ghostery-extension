@@ -71,7 +71,7 @@ class ChooseDefaultSearchView extends Component {
 
 	async fetchSearchEnginesAsync() {
 		// eslint-disable-next-line no-undef
-		if (typeof browser === 'undefined') { // we are not in Dawn (or Firefox)
+		if (typeof browser === 'undefined' || typeof browser.search === 'undefined') { // we are not in Dawn
 			this.setState(state => ({
 				...state,
 				otherSearchOptionsFetched: true,
@@ -79,7 +79,7 @@ class ChooseDefaultSearchView extends Component {
 			return;
 		}
 		// eslint-disable-next-line no-undef
-		const response = await browser.search.get(); // we are in Dawn / Firefox, where this API is supported
+		const response = await browser.search.get(); // we are in Dawn, where this API is supported (unlike Chrome), and where the necessary search permission is added at build time (unlike non-Dawn builds of GBE)
 
 		// a successful response is guaranteed to be an array of search engine objects
 		// see https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/search/get
