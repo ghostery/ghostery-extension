@@ -165,6 +165,12 @@ class ChoosePlanView extends React.Component {
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
+	setSetupStepAndMoveToSuccessView = (setup_number) => {
+		const { setSetupStep, history } = this.props;
+		setSetupStep({ setup_step: CHOOSE_PLAN, setup_number, origin: ONBOARDING });
+		history.push('/onboarding/5');
+	}
+
 	plusCard = (checked, handleClick, showCTAButton = false) => {
 		const { actions } = this.props;
 		const { setSetupStep } = actions;
@@ -227,8 +233,6 @@ class ChoosePlanView extends React.Component {
 	};
 
 	premiumCard = (checked, handleClick, showCTAButton = false) => {
-		const { actions, history } = this.props;
-		const { setSetupStep } = actions;
 		const cardClassNames = ClassNames('ChoosePlanView__card premium', {
 			checked
 		});
@@ -288,7 +292,7 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_upgrade')}</a>
+					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION)}>{t('ghostery_dawn_onboarding_upgrade')}</a>
 				)}
 			</Fragment>
 		);
@@ -339,10 +343,10 @@ class ChoosePlanView extends React.Component {
 							*/}
 							{/* May have to change the below links depending on GH-2248 */}
 							{loggedIn && (
-								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PLUS_TRIAL, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</a>
+								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</a>
 							)}
 							{!loggedIn && (
-								<div className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PLUS_TRIAL, origin: ONBOARDING }); history.push('/onboarding/5'); }}>{t('ghostery_dawn_onboarding_start_trial')}</div>
+								<div className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</div>
 							)}
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
@@ -381,10 +385,10 @@ class ChoosePlanView extends React.Component {
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PLUS_SUBSCRIPTION, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => { setSetupStep({ setup_step: CHOOSE_PLAN, setup_number: FREE_USER_PREMIUM_SUBSCRIPTION, origin: ONBOARDING }); history.push('/onboarding/5'); }} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PREMIUM_SUBSCRIPTION)} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
 									)}
 								</div>
 							))}
