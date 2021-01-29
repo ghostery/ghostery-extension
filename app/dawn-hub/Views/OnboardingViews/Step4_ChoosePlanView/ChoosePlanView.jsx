@@ -337,11 +337,6 @@ class ChoosePlanView extends React.Component {
 					{selectedGhosteryGlow && isBasic && (
 						<Fragment>
 							{searchPromo()}
-							{/* TODO: For the CTA button below,
-								1. WIP - what 7-day trial? If user is signed in, activate the user’s 7-day free trial for the Ghostery Search Plus plan
-									and move them to Step 5 if signed in
-								2. DONE If user is signed out, clicking this should take them to Step 4b
-							*/}
 							{/* May have to change the below links depending on GH-2248 */}
 							{loggedIn && (
 								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</a>
