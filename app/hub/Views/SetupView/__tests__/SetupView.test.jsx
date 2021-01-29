@@ -19,8 +19,8 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 
 // Mock Necessary Imports
-jest.mock('../../OnboardingViews/SetupHeader', () => props => <div>Mock Setup Header</div>);
-jest.mock('../../OnboardingViews/SetupNavigation', () => props => <div>Mock Setup Navigation</div>);
+jest.mock('../../SetupViews/SetupHeader', () => props => <div>Mock Setup Header</div>);
+jest.mock('../../SetupViews/SetupNavigation', () => props => <div>Mock Setup Navigation</div>);
 
 // Import Components
 import SetupView from '../SetupView';
