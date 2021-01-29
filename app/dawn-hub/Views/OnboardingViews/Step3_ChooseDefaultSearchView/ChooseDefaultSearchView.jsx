@@ -14,6 +14,7 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
+import { alwaysLog } from '../../../../../src/utils/common';
 import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
 import {
@@ -155,8 +156,7 @@ class ChooseDefaultSearchView extends Component {
 			chrome.runtime.sendMessage('search@ghostery.com', payload, () => {
 			});
 		} catch (error) {
-			console.log('Ilya sez: If you are seeing the following error in Dawn, please report it as a bug. Outside of Dawn, it is expected.');
-			console.error(error);
+			alwaysLog(['Ilya: If you are seeing this error in Dawn, please report it. In other browsers, it is expected', error]);
 		}
 
 		setDefaultSearch(chosenSearchName);
