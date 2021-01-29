@@ -303,7 +303,6 @@ class ChoosePlanView extends React.Component {
 		const {
 			actions,
 			defaultSearch,
-			loggedIn,
 			user,
 		} = this.props;
 		const { setSetupStep } = actions;
