@@ -17,7 +17,13 @@ import PropTypes from 'prop-types';
 import Step1_LogInForm from '../Step1_LogInForm';
 import Step1_CreateAccountForm from '../Step1_CreateAccountForm';
 import globals from '../../../../../src/classes/Globals';
-import { LOGIN, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
+import {
+	LOGIN,
+	ONBOARDING,
+	SIGN_IN_SUCCESSFUL,
+	CREATE_ACCOUNT_SUCCESSFUL,
+	SKIP_ACCOUNT_CREATION
+} from '../../OnboardingView/OnboardingConstants';
 
 const SIGN_IN = 'SIGN_IN';
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
@@ -59,8 +65,12 @@ const Step1_CreateAccountView = (props) => {
 
 	const [view, setView] = useState(CREATE_ACCOUNT);
 
-	const handleSkipButton = () => {
-		setSetupStep({ setup_step: LOGIN, origin: ONBOARDING });
+	const handleSkipButton = (dawn_setup_number) => {
+		setSetupStep({
+			setup_step: LOGIN,
+			dawn_setup_number,
+			origin: ONBOARDING,
+		});
 		setToast({
 			toastMessage: '',
 			toastClass: ''
@@ -69,6 +79,12 @@ const Step1_CreateAccountView = (props) => {
 
 	const handleNextOnSelectPlanStep = () => {
 		const { prev } = props;
+
+		setSetupStep({
+			setup_step: LOGIN,
+			dawn_setup_number: CREATE_ACCOUNT_SUCCESSFUL,
+			origin: ONBOARDING,
+		});
 
 		setToast({
 			toastMessage: '',
@@ -82,7 +98,7 @@ const Step1_CreateAccountView = (props) => {
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
 			<div className="columns small-10 medium-6">
-				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSkipButton()}>
+				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSkipButton(SKIP_ACCOUNT_CREATION)}>
 					<span>{t('ghostery_dawn_onboarding_skip')}</span>
 				</NavLink>
 			</div>
@@ -99,7 +115,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
 				{step === LOGIN && (
-					<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton()}>
+					<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton(SIGN_IN_SUCCESSFUL)}>
 						<span>{t('next')}</span>
 					</NavLink>
 				)}

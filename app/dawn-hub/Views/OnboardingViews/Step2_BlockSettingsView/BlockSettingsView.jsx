@@ -42,7 +42,7 @@ class BlockSettingsView extends Component {
 			this.setState({
 				recommendedChoices: true,
 				blockAds: true,
-				kindsOfTrackers: 1,
+				kindsOfTrackers: 2,
 				antiTracking: true,
 				smartBrowsing: true
 			});
@@ -59,6 +59,23 @@ class BlockSettingsView extends Component {
 
 	handleAnswerChange = (category, answer) => {
 		this.setState({ [category]: answer });
+	}
+
+	// Refer to https://ghostery.atlassian.net/wiki/spaces/BI/pages/488079383/Ghostery+Browser+-+Onboarding+Pings for setup_number string formatting
+	buildSetupNumberString = () => {
+		const {
+			blockAds,
+			kindsOfTrackers,
+			antiTracking,
+			smartBrowsing
+		} = this.state;
+
+		const partOne = (blockAds) ? '1' : '2';
+		const partTwo = kindsOfTrackers.toString();
+		const partThree = (antiTracking) ? '1' : '2';
+		const partFour = (smartBrowsing) ? '1' : '2';
+
+		return `${partOne}${partTwo}${partThree}${partFour}`;
 	}
 
 	handleSubmit = () => {
@@ -87,21 +104,24 @@ class BlockSettingsView extends Component {
 
 			let blockingPolicy;
 			switch (kindsOfTrackers) {
-				case 0:
+				case 1:
 					blockingPolicy = 'BLOCKING_POLICY_EVERYTHING';
 					break;
-				case 1:
+				case 2:
 					blockingPolicy = 'BLOCKING_POLICY_RECOMMENDED';
 					break;
-				case 2:
+				case 3:
 					blockingPolicy = 'BLOCKING_POLICY_NOTHING';
 					break;
 				default:
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
-
-			setSetupStep({ setup_step: CHOOSE_DEFAULT_SEARCH, origin: ONBOARDING });
+			setSetupStep({
+				setup_step: CHOOSE_DEFAULT_SEARCH,
+				dawn_setup_number: this.buildSetupNumberString(),
+				origin: ONBOARDING
+			});
 			history.push('/onboarding/3');
 		} else {
 			setToast({
@@ -160,9 +180,9 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							{this.renderAnswerBlock((kindsOfTrackers === 0), 'kindsOfTrackers', 0, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
+							{this.renderAnswerBlock((kindsOfTrackers === 3), 'kindsOfTrackers', 3, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_anti_tracking')}

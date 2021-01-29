@@ -18,12 +18,39 @@ import RadioButton from '../../../../shared-components/RadioButton';
 import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
 import {
 	SEARCH_GHOSTERY,
+	SEARCH_BING,
 	SEARCH_YAHOO,
 	SEARCH_STARTPAGE,
-	SEARCH_BING,
+	SEARCH_DUCKDUCK_GO,
+	SEARCH_ECOSIA,
+	SEARCH_EKORU,
+	SEARCH_GIBIRU,
+	SEARCH_GOOGLE,
+	SEARCH_ONESEARCH,
+	SEARCH_PRIVADO,
+	SEARCH_QWANT,
+	SEARCH_ENCRYPT,
+	SEARCH_TAILCAT,
 	SEARCH_OTHER
 } from './ChooseDefaultSearchConstants';
 import { Modal } from '../../../../shared-components';
+
+const searchSetupNumbers = [
+	{ name: SEARCH_GHOSTERY, dawn_setup_number: 1 },
+	{ name: SEARCH_BING, dawn_setup_number: 2 },
+	{ name: SEARCH_YAHOO, dawn_setup_number: 3 },
+	{ name: SEARCH_STARTPAGE, dawn_setup_number: 4 },
+	{ name: SEARCH_GOOGLE, dawn_setup_number: 5 },
+	{ name: SEARCH_DUCKDUCK_GO, dawn_setup_number: 6 },
+	{ name: SEARCH_ECOSIA, dawn_setup_number: 7 },
+	{ name: SEARCH_EKORU, dawn_setup_number: 8 },
+	{ name: SEARCH_GIBIRU, dawn_setup_number: 9 },
+	{ name: SEARCH_ONESEARCH, dawn_setup_number: 10 },
+	{ name: SEARCH_PRIVADO, dawn_setup_number: 11 },
+	{ name: SEARCH_QWANT, dawn_setup_number: 12 },
+	{ name: SEARCH_ENCRYPT, dawn_setup_number: 13 },
+	{ name: SEARCH_TAILCAT, dawn_setup_number: 14 },
+];
 
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
@@ -40,6 +67,16 @@ class ChooseDefaultSearchView extends Component {
 		};
 
 		this.fetchSearchEnginesAsync = this.fetchSearchEnginesAsync.bind(this);
+	}
+
+	componentDidMount() {
+		document.addEventListener('click', this.handleClickAway);
+
+		this.fetchSearchEnginesAsync();
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('click', this.handleClickAway);
 	}
 
 	async fetchSearchEnginesAsync() {
@@ -65,16 +102,6 @@ class ChooseDefaultSearchView extends Component {
 			otherSearchOptionsFetched: true,
 			otherSearchOptions: otherOptions
 		}));
-	}
-
-	componentDidMount() {
-		document.addEventListener('click', this.handleClickAway);
-
-		this.fetchSearchEnginesAsync();
-	}
-
-	componentWillUnmount() {
-		document.removeEventListener('click', this.handleClickAway);
 	}
 
 	updateSelection = () => this.setState(prevState => (
@@ -129,7 +156,12 @@ class ChooseDefaultSearchView extends Component {
 		}
 
 		setDefaultSearch(chosenSearchName);
-		setSetupStep({ setup_step: CHOOSE_PLAN, origin: ONBOARDING });
+
+		setSetupStep({
+			setup_step: CHOOSE_PLAN,
+			dawn_setup_number: searchSetupNumbers.find(elem => elem.name === chosenSearchName).dawn_setup_number,
+			origin: ONBOARDING
+		});
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
@@ -254,7 +286,7 @@ class ChooseDefaultSearchView extends Component {
 							{(searchBeingConsidered === SEARCH_OTHER) && (
 								<Fragment>
 									{
-										`${t('ghostery_dawn_onboarding_you_have_selected_an_alternate_serach_engine')} \n
+										`${t('ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine')} \n
 										${otherSearchSelected}`
 									}
 								</Fragment>

@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { withRouter } from 'react-router-dom';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import ChoosePlanView from './ChoosePlanView';
 import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
@@ -19,4 +20,4 @@ const actionCreators = {
 	setSetupStep,
 };
 
-export default buildReduxHOC(['account', 'defaultSearch'], actionCreators, ChoosePlanView);
+export default withRouter(buildReduxHOC(['account', 'defaultSearch'], actionCreators, ChoosePlanView));
