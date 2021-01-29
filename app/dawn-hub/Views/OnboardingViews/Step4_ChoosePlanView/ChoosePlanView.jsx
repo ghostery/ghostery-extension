@@ -31,8 +31,8 @@ import {
 } from '../../OnboardingView/OnboardingConstants';
 import { SEARCH_GHOSTERY } from '../Step3_ChooseDefaultSearchView/ChooseDefaultSearchConstants';
 
-const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/plus`;
-const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/en/premium`;
+const glowFreeTrialLink = `${globals.GLOWSTERY_BASE_URL}/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
+const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
 
 const searchPromo = () => (
 	<div className="ChoosePlanView__searchPromoContainer">
@@ -304,7 +304,6 @@ class ChoosePlanView extends React.Component {
 			actions,
 			defaultSearch,
 			loggedIn,
-			history,
 			user,
 		} = this.props;
 		const { setSetupStep } = actions;
@@ -337,13 +336,7 @@ class ChoosePlanView extends React.Component {
 					{selectedGhosteryGlow && isBasic && (
 						<Fragment>
 							{searchPromo()}
-							{/* May have to change the below links depending on GH-2248 */}
-							{loggedIn && (
-								<a className="ChoosePlanView__searchCTAButton" href={plusCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</a>
-							)}
-							{!loggedIn && (
-								<div className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</div>
-							)}
+							<a className="ChoosePlanView__searchCTAButton" href={glowFreeTrialLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</a>
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
 						</Fragment>
@@ -377,14 +370,14 @@ class ChoosePlanView extends React.Component {
 								<div className="ChoosePlanView__ctaButtonContainer">
 									{(selectedPlan === BASIC) && (
 										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: FREE_USER_NO_TRIAL, origin: ONBOARDING })}>
-											<span>{t('next_or_start_trial')}</span>
+											<span>{t('next')}</span>
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={glowFreeTrialLink} target="_blank" rel="noreferrer">{t('next')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PREMIUM_SUBSCRIPTION)} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next_or_start_trial')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PREMIUM_SUBSCRIPTION)} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
 									)}
 								</div>
 							))}
