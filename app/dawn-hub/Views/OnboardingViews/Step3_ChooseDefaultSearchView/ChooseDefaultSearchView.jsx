@@ -52,6 +52,9 @@ const searchSetupNumbers = [
 	{ name: SEARCH_TAILCAT, dawn_setup_number: 14 },
 ];
 
+const GLOW_BROWSER_SEARCH_GET_NAME = 'Ghostery Glow';
+const STARTPAGE_BROWSER_SEARCH_GET_NAME = 'StartPage';
+
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
 		super(props);
@@ -91,11 +94,16 @@ class ChooseDefaultSearchView extends Component {
 		// eslint-disable-next-line no-undef
 		const response = await browser.search.get(); // we are in Dawn, where this API is supported (unlike Chrome), and where the necessary search permission is added at build time (unlike non-Dawn builds of GBE)
 
+		console.log(response);
+
 		// a successful response is guaranteed to be an array of search engine objects
 		// see https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/search/get
 		const otherOptions = response
 			.map(item => item.name)
-			.filter(name => ![SEARCH_YAHOO, SEARCH_STARTPAGE, SEARCH_BING].includes(name));
+			// Two versions of the Startpage identifier are included for safety as it's unclear which version is / will be used
+			.filter(name => ![SEARCH_YAHOO, GLOW_BROWSER_SEARCH_GET_NAME, STARTPAGE_BROWSER_SEARCH_GET_NAME, SEARCH_STARTPAGE, SEARCH_BING].includes(name));
+
+		console.log(otherOptions);
 
 		this.setState(state => ({
 			...state,
