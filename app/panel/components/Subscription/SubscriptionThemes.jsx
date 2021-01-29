@@ -13,7 +13,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RadioButtonGroup } from '../BuildingBlocks';
+import RadioButtonGroup from '../../../shared-components/RadioButtonGroup/RadioButtonGroup';
 
 /**
  * @class Implement Themes subview as a React component.

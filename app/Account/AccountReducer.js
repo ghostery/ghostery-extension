@@ -20,7 +20,8 @@ import {
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS,
 	RESET_PASSWORD_SUCCESS,
-	RESET_PASSWORD_FAIL
+	RESET_PASSWORD_FAIL,
+	SUBSCRIBE_TO_EMAIL_LIST
 } from './AccountConstants';
 import { UPDATE_PANEL_DATA } from '../panel/constants/constants';
 
@@ -117,6 +118,15 @@ export default (state = initialState, action) => {
 				toastMessage: errorText,
 				resetPasswordError: true
 			};
+		}
+		case SUBSCRIBE_TO_EMAIL_LIST: {
+			const { name } = action.payload;
+			let emailPreferences;
+			if (name === 'global') {
+				emailPreferences = { ...state.user.emailPreferences, ...{ global: true } };
+			}
+			const user = { ...state.user, ...{ emailPreferences } };
+			return { ...state, ...{ user } };
 		}
 
 		default: return state;

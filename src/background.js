@@ -521,6 +521,12 @@ function handleGhosteryHub(name, message, callback) {
 			} else {
 				({ setup_step } = setup_step);
 			}
+			const origin = message.origin || '';
+			if (origin === 'onboarding') {
+				conf.setup_step = message.setup_step;
+				conf.dawn_setup_number = message.dawn_setup_number;
+				metrics.ping('gb_onboarding');
+			}
 			callback({ setup_step });
 			break;
 		}
@@ -952,7 +958,9 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'openHubPage') {
-		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+		const hubUrl = (BROWSER_INFO.name === 'ghostery_desktop')
+			? chrome.runtime.getURL('./app/templates/dawn_hub.html')
+			: chrome.runtime.getURL('./app/templates/hub.html');
 		metrics.ping('intro_hub_click');
 		utils.openNewTab({ url: hubUrl, become_active: true });
 		return false;
@@ -1608,16 +1616,26 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
-			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
-			// We need to do this after running scheduledTasks for the first time
-			// because of an A/B test that determines which promo variant is shown in the Hub on install
-			if (globals.JUST_INSTALLED && BROWSER_INFO.name !== 'ghostery_desktop') {
-				const showAlternateHub = conf.hub_layout === 'alternate';
-				const route = showAlternateHub ? '#home' : '';
-				chrome.tabs.create({
-					url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
-					active: true
-				});
+			if (globals.JUST_INSTALLED) {
+				(async() => {
+					await globals.BROWSER_INFO_READY;
+					if (BROWSER_INFO.name === 'ghostery_desktop') { // i.e., Dawn
+						chrome.tabs.create({
+							url: chrome.runtime.getURL('./app/templates/dawn_hub.html?justInstalled=true'),
+							active: true
+						});
+					} else {
+						// Open the Ghostery Hub on install with justInstalled query parameter set to true.
+						// We need to do this after running scheduledTasks for the first time
+						// because of an A/B test that determines which promo variant is shown in the Hub on install
+						const showAlternateHub = conf.hub_layout === 'alternate';
+						const route = showAlternateHub ? '#home' : '';
+						chrome.tabs.create({
+							url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
+							active: true
+						});
+					}
+				})();
 			}
 		});
 	});

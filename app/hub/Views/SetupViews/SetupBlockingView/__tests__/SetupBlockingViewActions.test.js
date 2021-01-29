@@ -31,7 +31,7 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 	}
 }));
 
-describe('app/hub/Views/SetupViews/SetupBlockingView actions', () => {
+describe('app/hub/Views/OnboardingViews/SetupBlockingView actions', () => {
 	test('setBlockingPolicy action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);

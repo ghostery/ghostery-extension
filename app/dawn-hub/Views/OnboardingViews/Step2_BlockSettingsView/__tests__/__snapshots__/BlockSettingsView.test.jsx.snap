@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.test.jsx Shallow snapshot tests rendered with Enzyme BlockSettings View happy path 1`] = `ShallowWrapper {}`;
+
+exports[`app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.test.jsx Snapshot tests with react-test-renderer BlockSettings View is rendered correctly 1`] = `
+Array [
+  <div
+    className="BlockSettingsView__relativeContainer"
+  >
+    <div
+      className="BlockSettingsView__backContainer"
+    >
+      <span
+        className="BlockSettingsView__caret left"
+      />
+      <a
+        aria-current={null}
+        href="/onboarding/1"
+        onClick={[Function]}
+      >
+        <span
+          className="BlockSettingsView__back"
+        >
+          ghostery_dawn_onboarding_back
+        </span>
+      </a>
+    </div>
+  </div>,
+  <div
+    className="BlockSettingsView__container"
+  >
+    <div
+      className="BlockSettingsView__title"
+    >
+      ghostery_dawn_onboarding_which_privacy_plan
+    </div>
+    <div
+      className="BlockSettingsView__subtitle"
+    >
+      ghostery_dawn_onboarding_tell_us_your_preferences
+    </div>
+    <div
+      className="BlockSettingsView_formBlock"
+    >
+      <div
+        className="BlockSettingsView_checkboxBlock"
+      >
+        <div
+          className="ToggleCheckbox BlockSettingsView_checkbox"
+          onClick={[Function]}
+        >
+          <svg
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+            />
+          </svg>
+        </div>
+        <div
+          className="BlockSettingsView_checkboxLabel"
+          onClick={[Function]}
+        >
+          ghostery_dawn_onboarding_recommended_choices
+        </div>
+      </div>
+      <ol>
+        <li
+          className="BlockSettingsView_question"
+        >
+          ghostery_dawn_onboarding_question_block_ads
+        </li>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            hub_setup_modal_button_yes
+          </div>
+        </div>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            hub_setup_modal_button_no
+          </div>
+        </div>
+        <li
+          className="BlockSettingsView_question"
+        >
+          <div
+            className="BlockSettingsView_questionBlock"
+          >
+            ghostery_dawn_onboarding_question_kinds_of_trackers
+            <div
+              className="BlockSettingsView__infoIcon g-tooltip"
+            />
+          </div>
+        </li>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            ghostery_dawn_onboarding_kinds_of_trackers_all
+          </div>
+        </div>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics
+          </div>
+        </div>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            ghostery_dawn_onboarding_kinds_of_trackers_none
+          </div>
+        </div>
+        <li
+          className="BlockSettingsView_question"
+        >
+          <div
+            className="BlockSettingsView_questionBlock"
+          >
+            ghostery_dawn_onboarding_question_anti_tracking
+            <div
+              className="BlockSettingsView__infoIcon g-tooltip"
+            />
+          </div>
+        </li>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            hub_setup_modal_button_yes
+          </div>
+        </div>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            hub_setup_modal_button_no
+          </div>
+        </div>
+        <li
+          className="BlockSettingsView_question"
+        >
+          <div
+            className="BlockSettingsView_questionBlock"
+          >
+            ghostery_dawn_onboarding_question_smart_browsing
+            <div
+              className="BlockSettingsView__infoIcon g-tooltip"
+            />
+          </div>
+        </li>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            hub_setup_modal_button_yes
+          </div>
+        </div>
+        <div
+          className="BlockSettingsView_answerBlock"
+          onClick={[Function]}
+        >
+          <div
+            className="BlockSettingsView__radioButtonContainer"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle altDesign"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle altDesign"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="BlockSettingsView_answerText"
+          >
+            hub_setup_modal_button_no
+          </div>
+        </div>
+      </ol>
+    </div>
+    <button
+      className="BlockSettingsView__ctaButton"
+      onClick={[Function]}
+      type="button"
+    >
+      next
+    </button>
+  </div>,
+]
+`;

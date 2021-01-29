@@ -49,7 +49,7 @@ const actions = {
 	setSetupComplete: () => {},
 };
 
-describe('app/hub/Views/SetupView container', () => {
+describe('app/hub/Views/OnboardingView container', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup view container is rendered correctly on the Blocking step', () => {
 			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];

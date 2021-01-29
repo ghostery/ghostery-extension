@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Anti-Suite step 1`] = `
+exports[`app/hub/Views/OnboardingView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Anti-Suite step 1`] = `
 <div
   className="full-height"
 >
@@ -52,7 +52,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
 </div>
 `;
 
-exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Blocking step 1`] = `
+exports[`app/hub/Views/OnboardingView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Blocking step 1`] = `
 <div
   className="full-height"
 >
@@ -104,7 +104,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
 </div>
 `;
 
-exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Custom Blocking step 1`] = `
+exports[`app/hub/Views/OnboardingView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Custom Blocking step 1`] = `
 <div
   className="full-height"
 >
@@ -159,7 +159,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
 </div>
 `;
 
-exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Done step 1`] = `
+exports[`app/hub/Views/OnboardingView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Done step 1`] = `
 <div
   className="full-height"
 >
@@ -211,7 +211,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
 </div>
 `;
 
-exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Human Web step 1`] = `
+exports[`app/hub/Views/OnboardingView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Human Web step 1`] = `
 <div
   className="full-height"
 >

@@ -1,0 +1,15 @@
+.OnboardingView__screenContainer {
+	max-width: 724px;
+	margin: 0 auto;
+	padding: 0 20px;
+
+	&.step2 {
+		max-width: 714px;
+	}
+	&.step3 {
+		max-width: 728px;
+	}
+	&.step4 {
+		max-width: 910px;
+	}
+}
