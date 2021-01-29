@@ -166,7 +166,8 @@ class ChoosePlanView extends React.Component {
 	};
 
 	setSetupStepAndMoveToSuccessView = (dawn_setup_number) => {
-		const { setSetupStep, history } = this.props;
+		const { actions, history } = this.props;
+		const { setSetupStep } = actions;
 		setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number, origin: ONBOARDING });
 		history.push('/onboarding/5');
 	}

@@ -21,26 +21,36 @@ import {
 	SEARCH_BING,
 	SEARCH_YAHOO,
 	SEARCH_STARTPAGE,
+	SEARCH_DUCKDUCK_GO,
+	SEARCH_ECOSIA,
+	SEARCH_EKORU,
+	SEARCH_GIBIRU,
+	SEARCH_GOOGLE,
+	SEARCH_ONESEARCH,
+	SEARCH_PRIVADO,
+	SEARCH_QWANT,
+	SEARCH_ENCRYPT,
+	SEARCH_TAILCAT,
 	SEARCH_OTHER
 } from './ChooseDefaultSearchConstants';
 import { Modal } from '../../../../shared-components';
 
-const mapSearchToSetupNumber = {
-	Ghostery: 1,
-	Bing: 2,
-	Yahoo: 3,
-	Startpage: 4,
-	'DuckDuck Go': 6,
-	Ecosia: 7,
-	Ekoru: 8,
-	Gibiru: 9,
-	Google: 10,
-	OneSearch: 11,
-	Privado: 12,
-	Qwant: 13,
-	'Search Encrypt': 14,
-	Tailcat: 15,
-};
+const searchSetupNumbers = [
+	{ name: SEARCH_GHOSTERY, dawn_setup_number: 1 },
+	{ name: SEARCH_BING, dawn_setup_number: 2 },
+	{ name: SEARCH_YAHOO, dawn_setup_number: 3 },
+	{ name: SEARCH_STARTPAGE, dawn_setup_number: 4 },
+	{ name: SEARCH_GOOGLE, dawn_setup_number: 5 },
+	{ name: SEARCH_DUCKDUCK_GO, dawn_setup_number: 6 },
+	{ name: SEARCH_ECOSIA, dawn_setup_number: 7 },
+	{ name: SEARCH_EKORU, dawn_setup_number: 8 },
+	{ name: SEARCH_GIBIRU, dawn_setup_number: 9 },
+	{ name: SEARCH_ONESEARCH, dawn_setup_number: 10 },
+	{ name: SEARCH_PRIVADO, dawn_setup_number: 11 },
+	{ name: SEARCH_QWANT, dawn_setup_number: 12 },
+	{ name: SEARCH_ENCRYPT, dawn_setup_number: 13 },
+	{ name: SEARCH_TAILCAT, dawn_setup_number: 14 },
+];
 
 class ChooseDefaultSearchView extends Component {
 	constructor(props) {
@@ -146,9 +156,10 @@ class ChooseDefaultSearchView extends Component {
 		}
 
 		setDefaultSearch(chosenSearchName);
+
 		setSetupStep({
 			setup_step: CHOOSE_PLAN,
-			dawn_setup_number: mapSearchToSetupNumber[chosenSearchName],
+			dawn_setup_number: searchSetupNumbers.find(elem => elem.name === chosenSearchName).dawn_setup_number,
 			origin: ONBOARDING
 		});
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
