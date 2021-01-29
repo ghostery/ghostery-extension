@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import SetupHumanWebView from '../SetupHumanWebView';
 
-describe('app/hub/Views/SetupViews/SetupHumanWebView component', () => {
+describe('app/hub/Views/OnboardingViews/SetupHumanWebView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup human web view is rendered correctly', () => {
 			const initialState = {

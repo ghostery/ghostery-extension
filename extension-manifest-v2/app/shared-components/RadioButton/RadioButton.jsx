@@ -21,12 +21,14 @@ import ClassNames from 'classnames';
  */
 
 const RadioButton = (props) => {
-	const { checked, handleClick } = props;
+	const { checked, handleClick, altDesign } = props;
 	const OuterCircleClassNames = ClassNames('RadioButton__outerCircle', {
 		checked,
+		altDesign
 	});
 	const InnerCircleClassNames = ClassNames('RadioButton__innerCircle', {
 		checked,
+		altDesign
 	});
 	return (
 		<span>

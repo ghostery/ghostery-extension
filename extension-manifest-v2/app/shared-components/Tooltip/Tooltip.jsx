@@ -87,11 +87,12 @@ class Tooltip extends React.Component {
 	 */
 	render() {
 		const {
-			theme, position, header, body
+			theme, position, header, body, isOnboardingHub
 		} = this.props;
 		const { show } = this.state;
 		const compClassNames = ClassNames({
 			'dark-theme': theme === 'dark',
+			onboarding: isOnboardingHub
 		});
 
 		return (

@@ -33,7 +33,7 @@ const ExampleComponent = props => (
 	<div>example component</div>
 );
 
-describe('app/hub/Views/SetupView component', () => {
+describe('app/hub/Views/OnboardingView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup view is rendered correctly on first route', () => {
 			const initialState = {

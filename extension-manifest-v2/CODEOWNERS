@@ -8,18 +8,22 @@
 # CMP / Metrics / WebRequest
 /src/classes/ABTest.js @wlycdgr
 /src/classes/CMP.js @christophertino
-/src/classes/EventHandlers.js @christophertino
-/src/classes/Metrics.js @wlycdgr
-/src/classes/PolicySmartBlock.js @christophertino
 /src/classes/Conf.js @christophertino
 /src/classes/ConfData.js @christophertino
+/src/classes/Debuggers.js @wlycdgr
+/src/classes/EventHandlers.js @christophertino
+/src/classes/Metrics.js @wlycdgr
 /src/classes/PanelData.js @wlycdgr
+/src/classes/PolicySmartBlock.js @christophertino
 
 # Background
 /src/background.js @christophertino
 
 # The Ghostery Hub
 /app/hub/ @benstrumeyer
+
+# Dawn Hub
+/app/dawn-hub @wlycdgr
 
 # Shared Components
 /app/shared-components @wlycdgr

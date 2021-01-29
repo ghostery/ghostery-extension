@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import SetupAntiSuiteView from '../SetupAntiSuiteView';
 
-describe('app/hub/Views/SetupViews/SetupAntiSuiteView component', () => {
+describe('app/hub/Views/OnboardingViews/SetupAntiSuiteView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup anti-suite view is rendered correctly', () => {
 			const initialState = {

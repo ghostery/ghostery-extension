@@ -1,0 +1,72 @@
+/**
+ * WelcomeView Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2021 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.WelcomeView__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.WelcomeView__title {
+	margin-top: 125px;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 2.33;
+	text-align: center;
+}
+
+.WelcomeView__subtitle {
+	margin-bottom: 20px;
+	max-width: 495px;
+	font-size: 18px;
+	line-height: 2.33;
+	text-align: center;
+}
+
+.WelcomeView__rocketShip {
+	margin-bottom: 84px;
+	height: 330px;
+	width: 545px;
+}
+
+.WelcomeView__ctaButton {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	min-height: 44px;
+	width: 162px;
+	padding: 7.7px 14px;
+	line-height: 22px;
+	background: linear-gradient(
+		45deg,
+		#ff7e74 50%,
+		$ghosty_blue
+	);
+	background-size: 200% 100%;
+	background-position: 100% 50%;
+	transition: 0.25s all;
+	border: none;
+	&:hover {
+		background-position: 0% 50%;
+		transition: 0.25s all;
+	  	color: $white;
+	}
+	color: $white;
+	font-size: 14.1px;
+	font-weight: 700;
+	border-radius: 3.5px;
+	text-align: center;
+	line-height: 2.05;
+	cursor: pointer;
+}

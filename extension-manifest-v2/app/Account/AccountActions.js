@@ -27,7 +27,8 @@ import {
 	GET_USER_SETTINGS_SUCCESS,
 	GET_USER_SETTINGS_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
-	GET_USER_SUBSCRIPTION_DATA_SUCCESS
+	GET_USER_SUBSCRIPTION_DATA_SUCCESS,
+	SUBSCRIBE_TO_EMAIL_LIST
 } from './AccountConstants';
 import { SET_TOAST } from '../hub/Views/AppView/AppViewConstants';
 import { CLEAR_THEME } from '../panel/constants/constants';
@@ -200,4 +201,11 @@ export const resetPassword = email => dispatch => (
 				},
 			});
 		})
+);
+
+export const subscribeToEmailList = name => dispatch => (
+	dispatch({
+		type: SUBSCRIBE_TO_EMAIL_LIST,
+		payload: { name },
+	})
 );

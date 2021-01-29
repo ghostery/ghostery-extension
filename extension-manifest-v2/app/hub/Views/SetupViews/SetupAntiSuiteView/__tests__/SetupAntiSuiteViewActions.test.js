@@ -43,7 +43,7 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 	}
 }));
 
-describe('app/hub/Views/SetupViews/SetupAntiSuiteView actions', () => {
+describe('app/hub/Views/OnboardingViews/SetupAntiSuiteView actions', () => {
 	test('setAntiTracking action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
