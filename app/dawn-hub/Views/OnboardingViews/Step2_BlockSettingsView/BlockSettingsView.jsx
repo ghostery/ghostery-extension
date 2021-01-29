@@ -30,10 +30,10 @@ class BlockSettingsView extends Component {
 		super(props);
 		this.state = {
 			recommendedChoices: false,
-			blockAds: null,
+			enable_ad_block: null,
 			kindsOfTrackers: null,
-			antiTracking: null,
-			smartBrowsing: null
+			enable_anti_tracking: null,
+			enable_smart_block: null
 		};
 	}
 
@@ -41,18 +41,18 @@ class BlockSettingsView extends Component {
 		if (value === true) {
 			this.setState({
 				recommendedChoices: true,
-				blockAds: true,
+				enable_ad_block: true,
 				kindsOfTrackers: 2,
-				antiTracking: true,
-				smartBrowsing: true
+				enable_anti_tracking: true,
+				enable_smart_block: true
 			});
 		} else {
 			this.setState({
 				recommendedChoices: false,
-				blockAds: null,
+				enable_ad_block: null,
 				kindsOfTrackers: null,
-				antiTracking: null,
-				smartBrowsing: null
+				enable_anti_tracking: null,
+				enable_smart_block: null
 			});
 		}
 	}
@@ -64,30 +64,30 @@ class BlockSettingsView extends Component {
 	// Refer to https://ghostery.atlassian.net/wiki/spaces/BI/pages/488079383/Ghostery+Browser+-+Onboarding+Pings for setup_number string formatting
 	buildSetupNumberString = () => {
 		const {
-			blockAds,
+			enable_ad_block,
 			kindsOfTrackers,
-			antiTracking,
-			smartBrowsing
+			enable_anti_tracking,
+			enable_smart_block
 		} = this.state;
 
-		const partOne = (blockAds) ? '1' : '2';
+		const partOne = (enable_ad_block) ? '1' : '2';
 		const partTwo = kindsOfTrackers.toString();
-		const partThree = (antiTracking) ? '1' : '2';
-		const partFour = (smartBrowsing) ? '1' : '2';
+		const partThree = (enable_anti_tracking) ? '1' : '2';
+		const partFour = (enable_smart_block) ? '1' : '2';
 
 		return `${partOne}${partTwo}${partThree}${partFour}`;
 	}
 
 	handleSubmit = () => {
 		const {
-			blockAds, kindsOfTrackers, antiTracking, smartBrowsing
+			enable_ad_block, kindsOfTrackers, enable_anti_tracking, enable_smart_block
 		} = this.state;
 
 		const { actions } = this.props;
 		const { setToast } = actions;
 
 		// Will only change user settings if all questions are answered
-		if (blockAds !== null && kindsOfTrackers !== null && antiTracking !== null && smartBrowsing !== null) {
+		if (enable_ad_block !== null && kindsOfTrackers !== null && enable_anti_tracking !== null && enable_smart_block !== null) {
 			setToast({
 				toastMessage: '',
 				toastClass: ''
@@ -98,9 +98,9 @@ class BlockSettingsView extends Component {
 			} = actions;
 			const { history } = this.props;
 
-			setAdBlock(blockAds);
-			setAntiTracking(antiTracking);
-			setSmartBlocking(smartBrowsing);
+			setAdBlock({ enable_ad_block });
+			setAntiTracking({ enable_anti_tracking });
+			setSmartBlocking({ enable_smart_block });
 
 			let blockingPolicy;
 			switch (kindsOfTrackers) {
@@ -117,6 +117,7 @@ class BlockSettingsView extends Component {
 					break;
 			}
 			setBlockingPolicy({ blockingPolicy });
+
 			setSetupStep({
 				setup_step: CHOOSE_DEFAULT_SEARCH,
 				dawn_setup_number: this.buildSetupNumberString(),
@@ -142,7 +143,7 @@ class BlockSettingsView extends Component {
 
 	render() {
 		const {
-			recommendedChoices, blockAds, kindsOfTrackers, antiTracking, smartBrowsing
+			recommendedChoices, enable_ad_block, kindsOfTrackers, enable_anti_tracking, enable_smart_block
 		} = this.state;
 		const { actions } = this.props;
 		const { logout } = actions;
@@ -170,8 +171,8 @@ class BlockSettingsView extends Component {
 						</div>
 						<ol>
 							<li className="BlockSettingsView_question">{t('ghostery_dawn_onboarding_question_block_ads')}</li>
-							{this.renderAnswerBlock((blockAds === true), 'blockAds', true, t('hub_setup_modal_button_yes'))}
-							{this.renderAnswerBlock((blockAds === false), 'blockAds', false, t('hub_setup_modal_button_no'))}
+							{this.renderAnswerBlock((enable_ad_block === true), 'enable_ad_block', true, t('hub_setup_modal_button_yes'))}
+							{this.renderAnswerBlock((enable_ad_block === false), 'enable_ad_block', false, t('hub_setup_modal_button_no'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_kinds_of_trackers')}
@@ -191,8 +192,8 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							{this.renderAnswerBlock((antiTracking === true), 'antiTracking', true, t('hub_setup_modal_button_yes'))}
-							{this.renderAnswerBlock((antiTracking === false), 'antiTracking', false, t('hub_setup_modal_button_no'))}
+							{this.renderAnswerBlock((enable_anti_tracking === true), 'enable_anti_tracking', true, t('hub_setup_modal_button_yes'))}
+							{this.renderAnswerBlock((enable_anti_tracking === false), 'enable_anti_tracking', false, t('hub_setup_modal_button_no'))}
 							<li className="BlockSettingsView_question">
 								<div className="BlockSettingsView_questionBlock">
 									{t('ghostery_dawn_onboarding_question_smart_browsing')}
@@ -201,8 +202,8 @@ class BlockSettingsView extends Component {
 									</div>
 								</div>
 							</li>
-							{this.renderAnswerBlock((smartBrowsing === true), 'smartBrowsing', true, t('hub_setup_modal_button_yes'))}
-							{this.renderAnswerBlock((smartBrowsing === false), 'smartBrowsing', false, t('hub_setup_modal_button_no'))}
+							{this.renderAnswerBlock((enable_smart_block === true), 'enable_smart_block', true, t('hub_setup_modal_button_yes'))}
+							{this.renderAnswerBlock((enable_smart_block === false), 'enable_smart_block', false, t('hub_setup_modal_button_no'))}
 						</ol>
 					</div>
 					<button

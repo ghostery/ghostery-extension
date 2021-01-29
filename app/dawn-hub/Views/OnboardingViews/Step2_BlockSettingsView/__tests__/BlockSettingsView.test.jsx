@@ -65,13 +65,13 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 			const instance = component.instance();
 
 			instance.toggleRecommendedChoices(true);
-			expect(component.state('blockAds')).toBe(true);
+			expect(component.state('enable_ad_block')).toBe(true);
 			expect(component.state('kindsOfTrackers')).toBe(1);
-			expect(component.state('antiTracking')).toBe(true);
-			expect(component.state('smartBrowsing')).toBe(true);
+			expect(component.state('enable_anti_tracking')).toBe(true);
+			expect(component.state('enable_smart_block')).toBe(true);
 
-			instance.handleAnswerChange('blockAds', false);
-			expect(component.state('blockAds')).toBe(false);
+			instance.handleAnswerChange('enable_ad_block', false);
+			expect(component.state('enable_ad_block')).toBe(false);
 
 			instance.handleSubmit();
 			expect(happyState.actions.setAntiTracking.mock.calls.length).toBe(1);
