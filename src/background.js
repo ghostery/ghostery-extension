@@ -308,7 +308,12 @@ function handleAccountPages(name, callback) {
 				.then(data => callback(data))
 				.catch(err => callback(err));
 			return true;
-
+		case 'accountPage.openSearchSelection':
+			utils.openNewTab({
+				url: chrome.runtime.getURL('./app/templates/dawn_hub.html#onboarding/3'),
+				become_active: true
+			});
+			return true;
 		default:
 			return false;
 	}
