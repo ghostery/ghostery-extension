@@ -269,6 +269,9 @@ class ChooseDefaultSearchView extends Component {
 	renderConfirmationModal = () => {
 		const { searchBeingConsidered, otherSearchSelected } = this.state;
 		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase()}.svg`;
+		const modalOptionLogoClassNames = ClassNames('ChooseSearchView__modalOptionLogo', {
+			ghostery: searchBeingConsidered === SEARCH_GHOSTERY
+		});
 
 		return (
 			<Modal show>
@@ -280,7 +283,7 @@ class ChooseDefaultSearchView extends Component {
 								{SEARCH_OTHER}
 							</div>
 						) :
-							<img className="ChooseSearchView__modalOptionLogo" src={logoFilename} />
+							<img className={modalOptionLogoClassNames} src={logoFilename} />
 						}
 						<div className="ChooseSearchView__modalDescription">
 							{searchBeingConsidered === SEARCH_STARTPAGE && t('ghostery_dawn_onboarding_startpage_warning')}

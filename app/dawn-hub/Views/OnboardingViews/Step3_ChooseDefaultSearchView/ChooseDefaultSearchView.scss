@@ -288,7 +288,11 @@
 }
 
 .ChooseSearchView__modalOptionLogo {
-  padding: 70px 0;
+	padding: 70px 0;
+
+	&.ghostery {
+		width: 266px;
+	}
 }
 
 .ChooseSearchView__modalDescription {
