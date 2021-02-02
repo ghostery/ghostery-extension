@@ -99,7 +99,8 @@ class ChoosePlanView extends React.Component {
 	}
 
 	setDefaultPlan = () => {
-		const { user } = this.props;
+		const { user, defaultSearch } = this.props;
+		const isBasic = !user || (user && !user.plusAccess && !user.premiumAccess);
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 
@@ -111,7 +112,12 @@ class ChoosePlanView extends React.Component {
 			this.selectPlusPlan();
 			return;
 		}
-		this.selectBasicPlan();
+		if (isBasic && defaultSearch === SEARCH_GHOSTERY) {
+			this.selectPlusPlan();
+			this.setState({ expanded: true });
+		} else {
+			this.selectBasicPlan();
+		}
 	}
 
 	isBasicPlanChecked = () => {
