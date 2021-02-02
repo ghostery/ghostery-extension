@@ -309,10 +309,15 @@ function handleAccountPages(name, callback) {
 				.catch(err => callback(err));
 			return true;
 		case 'accountPage.openSearchSelection':
-			utils.openNewTab({
-				url: chrome.runtime.getURL('./app/templates/dawn_hub.html#onboarding/3'),
-				become_active: true
-			});
+			(async() => {
+				await globals.BROWSER_INFO_READY;
+				if (BROWSER_INFO.name === 'ghostery_desktop') {
+					utils.openNewTab({
+						url: chrome.runtime.getURL('./app/templates/dawn_hub.html#onboarding/3'),
+						become_active: true
+					});
+				}
+			})();
 			return true;
 		default:
 			return false;
