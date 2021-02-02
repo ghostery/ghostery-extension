@@ -114,7 +114,6 @@ class ChoosePlanView extends React.Component {
 		}
 		if (isBasic && defaultSearch === SEARCH_GHOSTERY) {
 			this.selectPlusPlan();
-			this.setState({ expanded: true });
 		} else {
 			this.selectBasicPlan();
 		}
