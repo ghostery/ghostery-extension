@@ -110,6 +110,10 @@
   justify-content: center;
 	width: 75%;
 	padding-right: 15%;
+
+	&.ghostery {
+		margin-left: -14px;
+	}
 }
 
 .ChooseSearchView__optionDescriptionHeader {

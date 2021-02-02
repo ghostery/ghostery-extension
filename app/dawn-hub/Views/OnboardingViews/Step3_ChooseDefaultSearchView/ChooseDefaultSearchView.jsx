@@ -234,6 +234,9 @@ class ChooseDefaultSearchView extends Component {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
 		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase()}.svg`;
+		const optionDescriptionContainerClassNames = ClassNames('ChooseSearchView__optionDescriptionContainer', {
+			ghostery: optionName === SEARCH_GHOSTERY
+		});
 
 		return (
 			<div
@@ -254,7 +257,7 @@ class ChooseDefaultSearchView extends Component {
 					)
 					}
 				</div>
-				<div className="ChooseSearchView__optionDescriptionContainer">
+				<div className={optionDescriptionContainerClassNames}>
 					{(optionName !== SEARCH_OTHER) && (
 						<img src={logoFilename} />
 					)}
