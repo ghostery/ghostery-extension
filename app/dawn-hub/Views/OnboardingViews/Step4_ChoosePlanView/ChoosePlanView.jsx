@@ -32,6 +32,7 @@ import {
 import { SEARCH_GHOSTERY } from '../Step3_ChooseDefaultSearchView/ChooseDefaultSearchConstants';
 
 const glowFreeTrialLink = `${globals.GLOWSTERY_BASE_URL}/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
+const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
 const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
 
 const searchPromo = () => (
@@ -373,7 +374,7 @@ class ChoosePlanView extends React.Component {
 										</NavLink>
 									)}
 									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={glowFreeTrialLink} target="_blank" rel="noreferrer">{t('next')}</a>
+										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
 									)}
 									{selectedPlan === PREMIUM && (
 										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PREMIUM_SUBSCRIPTION)} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
