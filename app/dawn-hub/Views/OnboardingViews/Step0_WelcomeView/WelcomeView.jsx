@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { LOGIN, WELCOME } from '../../OnboardingView/OnboardingConstants';
+import { WELCOME } from '../../OnboardingView/OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Browser Welcome View
