@@ -18,7 +18,7 @@ import { NavLink } from 'react-router-dom';
 import Tooltip from '../../../../shared-components/Tooltip';
 import RadioButton from '../../../../shared-components/RadioButton/RadioButton';
 import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox/ToggleCheckbox';
-import { CHOOSE_DEFAULT_SEARCH, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
+import { BLOCK_SETTINGS, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
 
 /**
  * @class Implement the Block Settings View for the Dawn Hub onboarding flow
@@ -119,7 +119,7 @@ class BlockSettingsView extends Component {
 			setBlockingPolicy({ blockingPolicy });
 
 			setSetupStep({
-				setup_step: CHOOSE_DEFAULT_SEARCH,
+				setup_step: BLOCK_SETTINGS,
 				dawn_setup_number: this.buildSetupNumberString(),
 				origin: ONBOARDING
 			});

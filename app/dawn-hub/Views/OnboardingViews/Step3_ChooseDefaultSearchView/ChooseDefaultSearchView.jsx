@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import { alwaysLog } from '../../../../../src/utils/common';
 import RadioButton from '../../../../shared-components/RadioButton';
-import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
+import { ONBOARDING, CHOOSE_DEFAULT_SEARCH, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
 import {
 	SEARCH_GHOSTERY,
 	SEARCH_BING,
@@ -162,7 +162,7 @@ class ChooseDefaultSearchView extends Component {
 		setDefaultSearch(chosenSearchName);
 
 		setSetupStep({
-			setup_step: CHOOSE_PLAN,
+			setup_step: CHOOSE_DEFAULT_SEARCH,
 			dawn_setup_number: searchSetupNumbers.find(elem => elem.name === chosenSearchName).dawn_setup_number,
 			origin: ONBOARDING
 		});
