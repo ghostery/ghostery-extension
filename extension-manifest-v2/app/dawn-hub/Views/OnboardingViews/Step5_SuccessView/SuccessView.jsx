@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 /**
@@ -23,8 +23,11 @@ const SuccessView = (props) => {
 	const { actions } = props;
 	const { sendPing } = actions;
 
-	const handleCTAButtonClick = () => {
+	useEffect(() => {
 		sendPing({ type: 'gb_onboarding_success' });
+	}, []);
+
+	const handleCTAButtonClick = () => {
 		window.close();
 	};
 
