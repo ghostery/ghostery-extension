@@ -12,6 +12,7 @@
  */
 
 export const SET_DEFAULT_SEARCH = 'SET_DEFAULT_SEARCH';
+export const DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH = 0;
 export const SEARCH_GHOSTERY = 'Ghostery';
 export const SEARCH_BING = 'Bing';
 export const SEARCH_YAHOO = 'Yahoo';
@@ -27,3 +28,4 @@ export const SEARCH_QWANT = 'Qwant';
 export const SEARCH_ENCRYPT = 'TODO: Add Search Encrypt browser.search.get() string';
 export const SEARCH_TAILCAT = 'Tailcat';
 export const SEARCH_OTHER = t('ghostery_dawn_onboarding_other');
+
