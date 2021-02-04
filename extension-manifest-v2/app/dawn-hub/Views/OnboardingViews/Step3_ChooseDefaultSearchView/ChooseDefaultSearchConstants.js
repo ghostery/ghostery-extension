@@ -12,18 +12,19 @@
  */
 
 export const SET_DEFAULT_SEARCH = 'SET_DEFAULT_SEARCH';
+export const DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH = 0;
 export const SEARCH_GHOSTERY = 'Ghostery';
 export const SEARCH_BING = 'Bing';
 export const SEARCH_YAHOO = 'Yahoo';
-export const SEARCH_STARTPAGE = 'StartPage';
+export const SEARCH_STARTPAGE = 'Startpage';
 export const SEARCH_DUCKDUCK_GO = 'DuckDuckGo';
-export const SEARCH_ECOSIA = 'Ecosia Search';
-export const SEARCH_EKORU = 'ekoru';
-export const SEARCH_GIBIRU = 'Gibiru.com';
+export const SEARCH_ECOSIA = 'Ecosia';
+export const SEARCH_EKORU = 'Ekoru';
+export const SEARCH_GIBIRU = 'Gibiru';
 export const SEARCH_GOOGLE = 'Google';
 export const SEARCH_ONESEARCH = 'OneSearch';
 export const SEARCH_PRIVADO = 'Privado';
 export const SEARCH_QWANT = 'Qwant';
-export const SEARCH_ENCRYPT = 'TODO: Add Search Encrypt browser.search.get() string';
+export const SEARCH_ENCRYPT = 'SearchEncrypt'; // TODO this is just our best guess. Once Search Encrypt is added on the Dawn side, we should confirm, particularly if we start getting a lot of DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH pings
 export const SEARCH_TAILCAT = 'Tailcat';
 export const SEARCH_OTHER = t('ghostery_dawn_onboarding_other');
