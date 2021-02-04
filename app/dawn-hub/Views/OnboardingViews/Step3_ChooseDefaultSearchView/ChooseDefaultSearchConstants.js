@@ -28,4 +28,3 @@ export const SEARCH_QWANT = 'Qwant';
 export const SEARCH_ENCRYPT = 'SearchEncrypt'; // TODO this is just our best guess. Once Search Encrypt is added on the Dawn side, we should confirm, particularly if we start getting a lot of DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH pings
 export const SEARCH_TAILCAT = 'Tailcat';
 export const SEARCH_OTHER = t('ghostery_dawn_onboarding_other');
-
