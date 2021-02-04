@@ -162,7 +162,11 @@ class ChooseDefaultSearchView extends Component {
 
 		setDefaultSearch(chosenSearchName);
 
-		const chosenSearchNameIndex = searchSetupNumbers.indexOf(chosenSearchName);
+		const chosenSearchNameIndex = searchSetupNumbers.findIndex(el => el.name === chosenSearchName);
+
+		console.log('chosenSearchName:', chosenSearchName);
+		console.log('chosenSearchNameIndex:', chosenSearchNameIndex);
+
 		const dawn_setup_number = (chosenSearchNameIndex === -1)
 			? DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH
 			: searchSetupNumbers[chosenSearchNameIndex].dawn_setup_number;
