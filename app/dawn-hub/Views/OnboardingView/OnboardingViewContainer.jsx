@@ -36,6 +36,7 @@ import {
 } from './OnboardingConstants';
 
 const justInstalled = (QueryString.parse(window.location.search).justInstalled === 'true') || false;
+const dontReroute = (QueryString.parse(window.location.search).dontReroute === 'true') || false;
 
 /**
  * @class Wrap the root onboarding flow view of the Dawn Hub
@@ -48,6 +49,11 @@ class OnboardingViewContainer extends Component {
 		this.state = {
 			sendMountActions: false,
 		};
+
+		if (!dontReroute) {
+			const { history } = this.props;
+			history.push(`/${ONBOARDING}/${WELCOME}`);
+		}
 
 		// TODO verify what document title we should use
 		const title = t('ghostery_dawn_onboarding_page_title');

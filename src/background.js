@@ -318,7 +318,7 @@ function handleAccountPages(name, callback) {
 				await globals.BROWSER_INFO_READY;
 				if (BROWSER_INFO.name === 'ghostery_desktop') {
 					utils.openNewTab({
-						url: chrome.runtime.getURL(`./app/templates/dawn_hub.html#${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`),
+						url: chrome.runtime.getURL(`./app/templates/dawn_hub.html?dontReroute=true#${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`),
 						become_active: true
 					});
 				}
