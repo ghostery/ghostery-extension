@@ -1393,7 +1393,8 @@ function initializeEventListeners() {
 				globals.GHOSTERY_TAB_CHROME_PRERELEASE_ID,
 				globals.GHOSTERY_TAB_CHROME_TEST_ID,
 				globals.GHOSTERY_TAB_FIREFOX_PRODUCTION_ID,
-				globals.GHOSTERY_TAB_FIREFOX_TEST_ID
+				globals.GHOSTERY_TAB_FIREFOX_TEST_ID,
+				globals.DAWN_NEWTAB_PRODUCTION_ID,
 			].indexOf(sender.id) !== -1;
 
 			if (recognized && request.name === 'getStatsAndSettings') {
