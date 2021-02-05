@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import { alwaysLog } from '../../../../../src/utils/common';
 import RadioButton from '../../../../shared-components/RadioButton';
-import { ONBOARDING, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
+import { ONBOARDING, CHOOSE_DEFAULT_SEARCH, CHOOSE_PLAN } from '../../OnboardingView/OnboardingConstants';
 import {
 	SEARCH_GHOSTERY,
 	SEARCH_BING,
@@ -32,7 +32,8 @@ import {
 	SEARCH_QWANT,
 	SEARCH_ENCRYPT,
 	SEARCH_TAILCAT,
-	SEARCH_OTHER
+	SEARCH_OTHER,
+	DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH
 } from './ChooseDefaultSearchConstants';
 import { Modal } from '../../../../shared-components';
 
@@ -161,9 +162,15 @@ class ChooseDefaultSearchView extends Component {
 
 		setDefaultSearch(chosenSearchName);
 
+		const chosenSearchNameIndex = searchSetupNumbers.findIndex(el => el.name === chosenSearchName);
+
+		const dawn_setup_number = (chosenSearchNameIndex === -1)
+			? DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH
+			: searchSetupNumbers[chosenSearchNameIndex].dawn_setup_number;
+
 		setSetupStep({
-			setup_step: CHOOSE_PLAN,
-			dawn_setup_number: searchSetupNumbers.find(elem => elem.name === chosenSearchName).dawn_setup_number,
+			setup_step: CHOOSE_DEFAULT_SEARCH,
+			dawn_setup_number,
 			origin: ONBOARDING
 		});
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
