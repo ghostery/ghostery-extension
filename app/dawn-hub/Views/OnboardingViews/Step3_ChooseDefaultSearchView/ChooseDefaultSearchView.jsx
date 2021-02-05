@@ -275,7 +275,7 @@ class ChooseDefaultSearchView extends Component {
 
 	renderConfirmationModal = () => {
 		const { searchBeingConsidered, otherSearchSelected } = this.state;
-		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase()}.svg`;
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase().replace(' ', '')}.svg`;
 
 		return (
 			<Modal show>
