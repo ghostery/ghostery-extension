@@ -240,7 +240,7 @@ class ChooseDefaultSearchView extends Component {
 	renderOptionContainer = (chosenSearch, optionName) => {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
-		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase()}.svg`;
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase().replace(' ', '')}.svg`;
 
 		return (
 			<div
@@ -275,7 +275,7 @@ class ChooseDefaultSearchView extends Component {
 
 	renderConfirmationModal = () => {
 		const { searchBeingConsidered, otherSearchSelected } = this.state;
-		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase()}.svg`;
+		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase().replace(' ', '')}.svg`;
 
 		return (
 			<Modal show>
