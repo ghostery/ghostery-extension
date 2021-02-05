@@ -49,6 +49,11 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
+import {
+	ONBOARDING,
+	CHOOSE_DEFAULT_SEARCH
+} from '../app/dawn-hub/Views/OnboardingView/OnboardingConstants';
+
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
@@ -308,7 +313,17 @@ function handleAccountPages(name, callback) {
 				.then(data => callback(data))
 				.catch(err => callback(err));
 			return true;
-
+		case 'accountPage.openSearchSelection':
+			(async() => {
+				await globals.BROWSER_INFO_READY;
+				if (BROWSER_INFO.name === 'ghostery_desktop') {
+					utils.openNewTab({
+						url: chrome.runtime.getURL(`./app/templates/dawn_hub.html?dontReroute=true#${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`),
+						become_active: true
+					});
+				}
+			})();
+			return true;
 		default:
 			return false;
 	}
