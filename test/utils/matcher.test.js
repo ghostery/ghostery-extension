@@ -155,21 +155,48 @@ describe('src/utils/matcher.js', () => {
 	});
 
 	describe('testing fuzzyUrlMatcher()', () => {
-		const urls = ['google.com', 'ghostery.com/products', 'example.com/page*'];
+		const urls = [
+			'google.com',
+			'ghostery.com/products',
+			'example.com/page*',
+			'*atlassian.net',
+			'*twitter.com/ghostery',
+			'*jira.net/board*',
+		];
 
-		test('host match', () => {
+		test('host strict match', () => {
 			expect(fuzzyUrlMatcher('https://google.com/analytics', urls)).toBeTruthy();
 			expect(fuzzyUrlMatcher('https://analytics.google.com/something', urls)).toBeFalsy();
+			expect(fuzzyUrlMatcher('https://example.com/', urls)).toBeFalsy();
+		});
+
+		test('host and path strict match', () => {
+			expect(fuzzyUrlMatcher('https://ghostery.com/products', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://ghostery.com/products1', urls)).toBeFalsy();
+		});
+
+		test('host fuzzy match', () => {
+			expect(fuzzyUrlMatcher('https://ghostery.atlassian.net', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://ghostery.atlassian.net/board', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://ghostery.atlassian.com', urls)).toBeFalsy();
+		});
+
+		test('host fuzzy match and path strict match', () => {
+			expect(fuzzyUrlMatcher('https://page.twitter.com/ghostery', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://page.twitter.com/ghostery2', urls)).toBeFalsy();
+			expect(fuzzyUrlMatcher('https://page.twitter.com/geistery', urls)).toBeFalsy();
+		});
+
+		test('host strict match and path fuzzy match', () => {
+			expect(fuzzyUrlMatcher('https://example.com/page_anything', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://example.com/p', urls)).toBeFalsy();
+			expect(fuzzyUrlMatcher('https://page.example.com/page', urls)).toBeFalsy();
 		});
 
 		test('host and path fuzzy match', () => {
-			expect(fuzzyUrlMatcher('https://example.com/page_anything', urls)).toBeTruthy();
-			expect(fuzzyUrlMatcher('https://example.com/p', urls)).toBeFalsy();
-		});
-
-		test('host and path match', () => {
-			expect(fuzzyUrlMatcher('https://ghostery.com/products', urls)).toBeTruthy();
-			expect(fuzzyUrlMatcher('https://ghostery.com/products1', urls)).toBeFalsy();
+			expect(fuzzyUrlMatcher('https://ghostery.jira.net/board', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://ghostery.jira.net/b', urls)).toBeFalsy();
+			expect(fuzzyUrlMatcher('https://ghostery.jira.net/board100', urls)).toBeTruthy();
 		});
 	});
 });

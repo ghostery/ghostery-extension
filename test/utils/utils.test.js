@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { getJson, defineLazyProperty, processFpeUrl, semverCompare } from '../../src/utils/utils';
+import { getJson, defineLazyProperty, processTrackerUrl, semverCompare } from '../../src/utils/utils';
 
 describe('tests for getJson()', () => {
 	// Tests for getJson()
@@ -62,12 +62,12 @@ describe('tests for defineLazyProperty()', () => {
 	test('property function is still lazy', () => expect(neverCalledSpy).not.toHaveBeenCalled());
 });
 
-describe('test for processFpeUrl()', () => {
+describe('test for processTrackerUrl()', () => {
 	test('host only', () => {
-		expect(processFpeUrl('ghostery.com')).toMatchObject({host: 'ghostery.com', path: ''});
+		expect(processTrackerUrl('ghostery.com')).toMatchObject({host: 'ghostery.com', path: ''});
 	});
 	test('host and path', () => {
-		expect(processFpeUrl('ghostery.com/products')).toMatchObject({host: 'ghostery.com', path: 'products'});
+		expect(processTrackerUrl('ghostery.com/products')).toMatchObject({host: 'ghostery.com', path: 'products'});
 	});
 });
 

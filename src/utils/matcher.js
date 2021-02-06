@@ -13,14 +13,14 @@
 
 import bugDb from '../classes/BugDb';
 import conf from '../classes/Conf';
-import { processUrl, processFpeUrl } from './utils';
+import { processUrl, processTrackerUrl } from './utils';
 import { log } from './common';
 
 // ALL APIS IN THIS FILE ARE PERFORMANCE-CRITICAL
 
 /**
- * Determine if a url matches an entry in an array urls.
- * The matching is permissive.
+ * Determine if a url matches an entry in an array urls. The matching is
+ * permissive. Used for matching FirstPartyException and CompatibilityDB urls.
  * @memberOf BackgroundUtils
  *
  * @param {string} 	url		 	url to match
@@ -39,10 +39,10 @@ export function fuzzyUrlMatcher(url, urls) {
 	}
 
 	for (let i = 0; i < urls.length; i++) {
-		const { host, path } = processFpeUrl(urls[i]);
+		const { host, path } = processTrackerUrl(urls[i]);
 		if (host === tab_host) {
 			if (!path) {
-				log(`[fuzzyUrlMatcher] host (${host}) match`);
+				log(`[fuzzyUrlMatcher] host (${host}) strict match`);
 				return true;
 			}
 
@@ -52,8 +52,25 @@ export function fuzzyUrlMatcher(url, urls) {
 					return true;
 				}
 			} else if (path === tab_path) {
-				log(`[fuzzyUrlMatcher] host (${host}) and path (${path}) match`);
+				log(`[fuzzyUrlMatcher] host (${host}) and path (${path}) strict match`);
 				return true;
+			}
+		} else if (host.charAt(0) === '*') {
+			if (tab_host.endsWith(host.slice(1))) {
+				if (!path) {
+					log(`[fuzzyUrlMatcher] host (${host}) fuzzy match`);
+					return true;
+				}
+
+				if (path.slice(-1) === '*') {
+					if (tab_path.startsWith(path.slice(0, -1))) {
+						log(`[fuzzyUrlMatcher] host (${host}) and path (${path}) both fuzzy match`);
+						return true;
+					}
+				} else if (path === tab_path) {
+					log(`[fuzzyUrlMatcher] host (${host}) fuzzy match and path (${path}) strict match`);
+					return true;
+				}
 			}
 		}
 	}
