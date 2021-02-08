@@ -100,6 +100,7 @@ const Step1_CreateAccountView = (props) => {
 			<div className="columns small-10 medium-6">
 				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSkipButton(SKIP_ACCOUNT_CREATION)}>
 					<span>{t('ghostery_dawn_onboarding_skip')}</span>
+					<span className="Step1_CreateAccountView__arrow" />
 				</NavLink>
 			</div>
 		</div>
