@@ -22,6 +22,7 @@ jest.mock('../../../../../shared-components/Tooltip');
 
 describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.test.jsx', () => {
 	const initialState = {
+		setupLifecycle: noop,
 		actions: {
 			logout: noop,
 			setAntiTracking: noop,
@@ -30,7 +31,8 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 			setBlockingPolicy: noop,
 			setToast: noop,
 			setSetupStep: noop,
-		}
+			setBlockSetupSeen: noop,
+		},
 	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('BlockSettings View is rendered correctly', () => {
@@ -55,6 +57,7 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 					setBlockingPolicy: jest.fn(),
 					setToast: noop,
 					setSetupStep: jest.fn(),
+					setBlockSetupSeen: jest.fn(),
 				},
 				history: {
 					push: noop

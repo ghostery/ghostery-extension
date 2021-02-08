@@ -30,11 +30,68 @@ class BlockSettingsView extends Component {
 		super(props);
 		this.state = {
 			recommendedChoices: false,
-			enable_ad_block: null,
 			kindsOfTrackers: null,
+			enable_ad_block: null,
 			enable_anti_tracking: null,
 			enable_smart_block: null
 		};
+	}
+
+	componentDidMount() {
+		const { setupLifecycle: { blockSetupSeen } } = this.props;
+		if (blockSetupSeen) {
+			const {
+				antiSuite: {
+					enable_anti_tracking,
+					enable_ad_block,
+					enable_smart_block,
+				},
+				blockingPolicy
+			} = this.props;
+
+			const decodedPolicy = this.decodeBlockingPolicy(blockingPolicy);
+
+			this.setState({
+				kindsOfTrackers: decodedPolicy,
+				enable_ad_block,
+				enable_anti_tracking,
+				enable_smart_block
+			});
+		}
+	}
+
+	decodeBlockingPolicy = (blockingPolicy) => {
+		let decodedPolicy;
+		if (typeof blockingPolicy === 'number') {
+			switch (blockingPolicy) {
+				case 1:
+					decodedPolicy = 'BLOCKING_POLICY_EVERYTHING';
+					break;
+				case 2:
+					decodedPolicy = 'BLOCKING_POLICY_RECOMMENDED';
+					break;
+				case 3:
+					decodedPolicy = 'BLOCKING_POLICY_NOTHING';
+					break;
+				default:
+					break;
+			}
+		} else if (typeof blockingPolicy === 'string') {
+			switch (blockingPolicy) {
+				case 'BLOCKING_POLICY_EVERYTHING':
+					decodedPolicy = 1;
+					break;
+				case 'BLOCKING_POLICY_RECOMMENDED':
+					decodedPolicy = 2;
+					break;
+				case 'BLOCKING_POLICY_NOTHING':
+					decodedPolicy = 3;
+					break;
+				default:
+					break;
+			}
+		}
+		return decodedPolicy;
 	}
 
 	toggleRecommendedChoices = (value) => {
@@ -94,7 +151,7 @@ class BlockSettingsView extends Component {
 			});
 
 			const {
-				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep
+				setAdBlock, setAntiTracking, setSmartBlocking, setBlockingPolicy, setSetupStep, setBlockSetupSeen
 			} = actions;
 			const { history } = this.props;
 
@@ -102,27 +159,16 @@ class BlockSettingsView extends Component {
 			setAntiTracking({ enable_anti_tracking });
 			setSmartBlocking({ enable_smart_block });
 
-			let blockingPolicy;
-			switch (kindsOfTrackers) {
-				case 1:
-					blockingPolicy = 'BLOCKING_POLICY_EVERYTHING';
-					break;
-				case 2:
-					blockingPolicy = 'BLOCKING_POLICY_RECOMMENDED';
-					break;
-				case 3:
-					blockingPolicy = 'BLOCKING_POLICY_NOTHING';
-					break;
-				default:
-					break;
-			}
-			setBlockingPolicy({ blockingPolicy });
+			const decodedPolicy = this.decodeBlockingPolicy(kindsOfTrackers);
+
+			setBlockingPolicy({ blockingPolicy: decodedPolicy });
 
 			setSetupStep({
 				setup_step: BLOCK_SETTINGS,
 				dawn_setup_number: this.buildSetupNumberString(),
 				origin: ONBOARDING
 			});
+			setBlockSetupSeen(true);
 			history.push('/onboarding/3');
 		} else {
 			setToast({
@@ -231,5 +277,20 @@ BlockSettingsView.propTypes = {
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setToast: PropTypes.func.isRequired,
 		setSetupStep: PropTypes.func.isRequired,
+		setBlockSetupSeen: PropTypes.func.isRequired,
 	}).isRequired,
+	setupLifecycle: PropTypes.shape({
+		blockingPolicy: PropTypes.string.isRequired,
+		enable_anti_tracking: PropTypes.bool.isRequired,
+		enable_ad_block: PropTypes.bool.isRequired,
+		enable_smart_block: PropTypes.bool.isRequired,
+		blockSetupSeen: PropTypes.bool.isRequired,
+		searchSetupSeen: PropTypes.bool.isRequired,
+	}).isRequired,
+	antiSuite: PropTypes.shape({
+		enable_ad_block: PropTypes.bool.isRequired,
+		enable_anti_tracking: PropTypes.bool.isRequired,
+		enable_smart_block: PropTypes.bool.isRequired,
+	}).isRequired,
+	blockingPolicy: PropTypes.string.isRequired
 };

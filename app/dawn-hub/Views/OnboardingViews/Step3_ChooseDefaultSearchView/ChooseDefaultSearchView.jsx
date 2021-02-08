@@ -78,6 +78,24 @@ class ChooseDefaultSearchView extends Component {
 		document.addEventListener('click', this.handleClickAway);
 
 		this.fetchSearchEnginesAsync();
+
+		const { setupLifecycle: { searchSetupSeen } } = this.props;
+
+		if (searchSetupSeen) {
+			const { defaultSearch } = this.props;
+			const searchChoices = [
+				SEARCH_GHOSTERY,
+				SEARCH_BING,
+				SEARCH_YAHOO,
+				SEARCH_STARTPAGE,
+			];
+			const isOther = searchChoices.reduce((accum, choice) => {
+				if (accum === false) return false;
+				return choice !== defaultSearch;
+			}, false);
+			const prevChosenSearch = isOther ? SEARCH_OTHER : defaultSearch;
+			this.setState({ chosenSearch: prevChosenSearch, otherSearchSelected: isOther ? prevChosenSearch : null });
+		}
 	}
 
 	componentWillUnmount() {
@@ -140,7 +158,7 @@ class ChooseDefaultSearchView extends Component {
 	handleSubmit = () => {
 		const { chosenSearch, otherSearchSelected } = this.state;
 		const { actions, history } = this.props;
-		const { setSetupStep, setDefaultSearch } = actions;
+		const { setSetupStep, setDefaultSearch, setSearchSetupSeen } = actions;
 
 		const chosenSearchName = chosenSearch === SEARCH_OTHER
 			? otherSearchSelected
@@ -173,6 +191,7 @@ class ChooseDefaultSearchView extends Component {
 			dawn_setup_number,
 			origin: ONBOARDING
 		});
+		setSearchSetupSeen(true);
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
