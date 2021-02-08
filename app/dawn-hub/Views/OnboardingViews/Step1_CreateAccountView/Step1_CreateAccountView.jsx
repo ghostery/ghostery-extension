@@ -161,11 +161,14 @@ const Step1_CreateAccountView = (props) => {
 					{(step === LOGIN) && renderSkipLink()}
 					<div className="Step1_CreateAccountView__FAQContainer">
 						{faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))}
-					</div>
-					<div className="row">
-						<a className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
-							{t('ghostery_dawn_onboarding_visit_our_privacy_policy')}
-						</a>
+						<div className="row">
+							<div className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2" />
+							<div className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 large-10">
+								<a className="Step1_CreateAccountView__privacyPolicyLink" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
+									{t('ghostery_dawn_onboarding_visit_our_privacy_policy')}
+								</a>
+							</div>
+						</div>
 					</div>
 				</Fragment>
 			) : (
