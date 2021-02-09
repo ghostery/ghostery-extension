@@ -46,6 +46,13 @@ const searchPromo = () => (
 	</div>
 );
 
+const cardSubCopy = copy => (
+	<div className="ChoosePlanView__cardSubCopy">
+		<span className="check blue" />
+		{copy}
+	</div>
+);
+
 const basicCard = (checked, handleClick) => {
 	const cardClassNames = ClassNames('ChoosePlanView__card basic', {
 		checked
@@ -66,22 +73,10 @@ const basicCard = (checked, handleClick) => {
 				</div>
 				<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 				<div className="ChoosePlanView__valuePropList basic">
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_private_search')}
-					</div>
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_tracker_protection')}
-					</div>
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_speedy_page_loads')}
-					</div>
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_intelligence_technology')}
-					</div>
+					{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+					{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
+					{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+					{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
 				</div>
 			</div>
 		</div>
@@ -210,14 +205,8 @@ class ChoosePlanView extends React.Component {
 						</div>
 						<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 						<div className="ChoosePlanView__valuePropList">
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_private_search')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_tracker_protection')}
-							</div>
+							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
 							<div className="ChoosePlanView__cardSubCopy">
 								<span className="check blue" />
 								{t('ghostery_dawn_onboarding_speedy_page_loads')}
