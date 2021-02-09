@@ -476,8 +476,8 @@
 		"message": "Zablokowane"
 	},
 	"blocking_category_whitelisted": {
-		"description": "as in '5 (trackers) WHITELISTED'",
-		"message": "Dodano do białej listy"
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "Zaufane"
 	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Udało się! $BOLD_HTML_END$ E-mail z weryfikacją konta został przesłany na adres $EMAIL$",
@@ -779,8 +779,8 @@
 		"message": "Ta strona została usunięta z Twojej listy zastrzeżonych stron i dodana do Twojej listy zaufanych stron."
 	},
 	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "Ta strona znajduje się już na białej liście."
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "Ta strona jest już zaufana."
 	},
 	"settings_adblocker": {
 		"message": "Listy blokowania reklam"
@@ -1125,16 +1125,16 @@
 		"message": "Przeładuj, aby zobaczyć zmiany."
 	},
 	"alert_site_trusted": {
-		"message": "Strona dodana do białej listy. Działanie tropicieli będzie na tej stronie dozwolone, a ochrona przed śledzeniem wyłączona."
+		"message": "Strona zaufana. Działanie tropicieli będzie na tej stronie dozwolone, a ochrona przed śledzeniem wyłączona."
 	},
 	"alert_site_trusted_off": {
-		"message": "Strona nie jest już na białej liście."
+		"message": "Strona nie jest już zaufana."
 	},
 	"alert_site_restricted": {
-		"message": "Strona dodana do czarnej listy. Tropiciele będą na tej stronie blokowane, a ochrona przed śledzeniem aktywowana."
+		"message": "Strona zastrzeżona. Tropiciele będą na tej stronie blokowane, a ochrona przed śledzeniem włączona."
 	},
 	"alert_site_restricted_off": {
-		"message": "Strona nie jest już na czarnej liście."
+		"message": "Strona nie jest już zastrzeżona."
 	},
 	"tooltip_anti_track_on": {
 		"message": "Zanonimizowane punkty danych osobowych."
@@ -1366,6 +1366,9 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Dodatkowa ochrona"
 	},
+	"hub_upgrade_maximum_protection": {
+		"message": "Maksymalna ochrona"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Blokowanie tropicieli przeglądarki"
 	},
@@ -1586,7 +1589,7 @@
 		"message": "Zaufaj i zastrzeż strony"
 	},
 	"hub_tutorial_trust_tagline": {
-		"message": "Jednym kliknięciem dodawaj strony na białą lub czarną listę."
+		"message": "Jednym kliknięciem dodaj stronę do zaufanych lub zastrzeżonych."
 	},
 	"hub_tutorial_trust_trust_site": {
 		"message": "Zawsze zezwalaj na działanie tropicieli na tej stronie."
@@ -1722,6 +1725,9 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Użyj od 8 do 50 znaków."
 	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "Hasła nie są identyczne."
+	},
 	"hub_create_account_already_have_account": {
 		"message": "Masz już konto Ghostery?"
 	},
@@ -1733,6 +1739,225 @@
 	},
 	"hub_create_account_toast_error": {
 		"message": "Ten adres e-mail jest już używany.  Wybierz inny adres. "
+	},
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "Aby kontynuować, najpierw usuń błędy."
+	},
+	"ghostery_dawn_onboarding_install_heading": {
+		"message": "Trwa instalacja przeglądarki Ghostery Dawn..."
+	},
+	"ghostery_dawn_onboarding_page_title": {
+	  "message": "Hub Ghostery Dawn - Witamy"
+	},
+  	"ghostery_dawn_onboarding_header_title_login": {
+	  "message": "Hub Ghostery Dawn - Logowanie"
+	},
+	"ghostery_dawn_onboarding_header_title_block_settings": {
+	  "message": "Hub Ghostery Dawn - Blokada ustawień"
+	},
+	"ghostery_dawn_onboarding_header_title_search_choice": {
+	  "message": "Hub Ghostery Dawn - Opcje wyszukiwarki"
+	},
+	"ghostery_dawn_onboarding_header_title_plan_choices": {
+	  "message": "Hub Ghostery Dawn - Opcje planów"
+	},
+	"ghostery_dawn_onboarding_privacy": {
+		"message": "Prywatność"
+	},
+	"ghostery_dawn_onboarding_search": {
+		"message": "Wyszukiwarka"
+	},
+	"ghostery_dawn_onboarding_plan": {
+		"message": "Plan"
+	},
+	"ghostery_dawn_onboarding_welcome": {
+		"message": "Witamy w Ghostery Dawn!"
+	},
+	"ghostery_dawn_onboarding_lets_begin": {
+		"message": "Scentralizowaliśmy prywatność online poprzez integrację naszych kluczowych i nowatorskich technologii."
+	},
+	"ghostery_dawn_onboarding_welcome_message": {
+		"message": "Nasza przeglądarka chroni Twoje dane i blokuje oprogramowanie typu bloatware, dzięki czemu możesz przeglądać Internet, zachowując prywatność, i ponad trzy razy szybciej niż za pomocą przeglądarki Chrome."
+	},
+	"ghostery_dawn_onboarding_lets_do_this": {
+		"message": "Skonfiguruj przeglądarkę"
+	},
+	"ghostery_dawn_onboarding_your_privacy_plan": {
+		"message": "Plan ochrony prywatności"
+	},
+	"ghostery_dawn_onboarding_based_on_your_privacy_preferences": {
+		"message": "Na podstawie preferencji prywatności"
+	},
+	"ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription": {
+		"message": "Bez reklam w ramach subskrypcji Ghostery Plus"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo": {
+		"message": "40% taniej przez pierwsze 12 miesięcy"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo_description": {
+		"message": "Szybszy dostęp do przeglądanych treści. Dzięki subskrypcji Plus możemy zapewnić CI korzystanie z usług Ghostery bez reklam."
+	},
+	"ghostery_dawn_onboarding_or": {
+		"message": "LUB"
+	},
+	"ghostery_dawn_onboarding_keep": {
+		"message": "Zachowaj"
+	},
+	"ghostery_dawn_onboarding_upgrade": {
+		"message": "Uaktualnij"
+	},
+	"ghostery_dawn_onboarding_start_trial": {
+		"message": "Rozpocznij okres próbny"
+	},
+	"ghostery_dawn_onboarding_see_all_plans": {
+		"message": "Wyświetl wszystkie plany"
+	},
+	"ghostery_dawn_onboarding_private_search": {
+		"message": "Prywatne wyszukiwanie"
+	},
+	"ghostery_dawn_onboarding_tracker_protection": {
+		"message": "Ochrona przed śledzeniem"
+	},
+	"ghostery_dawn_onboarding_speedy_page_loads": {
+		"message": "Szybkie ładowanie stron"
+	},
+	"ghostery_dawn_onboarding_intelligence_technology": {
+		"message": "Technologia Intelligence"
+	},
+	"ghostery_dawn_onboarding_ad_free": {
+		"message": "Bez reklam"
+	},
+	"ghostery_dawn_onboarding_supports_ghosterys_mission": {
+		"message": "Wspiera misję Ghostery"
+	},
+	"ghostery_dawn_onboarding_unlimited_bandwidth": {
+		"message": "Nieograniczona przepustowość"
+	},
+	"ghostery_dawn_onboarding_already_premium_subscriber": {
+		"message": "Masz już subskrypcję Premium"
+	},
+	"ghostery_dawn_onboarding_already_plus_subscriber": {
+		"message": "Masz już subskrypcję Plus"
+	},
+	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
+		"message": "Zachowaj bieżący plan lub uaktualnij"
+	},
+	"ghostery_dawn_onboarding_choose_an_option": {
+		"message": "Wybierz opcję"
+  },
+	"ghostery_dawn_onboarding_create_a_ghostery_account": {
+		"message": "Utwórz konto Ghostery"
+	},
+	"ghostery_dawn_onboarding_sync_settings": {
+		"message": "Umożliwia synchronizację ustawień prywatności na wszystkich urządzeniach."
+	},
+	"ghostery_dawn_onboarding_already_have_account": {
+		"message": "Mam już konto."
+	},
+	"ghostery_dawn_onboarding_skip": {
+		"message": "Pomiń"
+	},
+	"ghostery_dawn_onboarding_back": {
+		"message": "Wstecz"
+	},
+	"ghostery_dawn_onboarding_we_take_your_privacy_very_seriously": {
+		"message": "Poważnie traktujemy Twoją prywatność. Dowiedz się więcej"
+	},
+	"ghostery_dawn_onboarding_private_by_design": {
+		"message": "Wbudowana ochrona prywatności"
+	},
+	"ghostery_dawn_onboarding_private_by_design_description": {
+		"message": "W Ghostery bardzo poważnie traktujemy prywatność danych. Dlatego stosujemy ścisłą politykę ochrony prywatności danych. Kiedy tworzysz konto w serwisie Ghostery, jedyne gromadzone przez nas dane to Twoje imię i nazwisko oraz adres e-mail. Dzięki tym informacjom możesz synchronizować swoje ustawienia na różnych urządzeniach i otrzymywać od nas informacje o ważnych aktualizacjach. W żadnym wypadku nie udostępniamy ani nie sprzedajemy tych danych osobom trzecim."
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account": {
+		"message": "Czy mogę usunąć konto?"
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account_description": {
+		"message": "Mamy nadzieję, że podoba Ci się serwis Ghostery. Jeśli jednak zrezygnujesz z naszych usług, usuniemy Twoje wszystkie dane osobowe w przeciągu 90 dni od daty anulowania."
+	},
+	"ghostery_dawn_onboarding_visit_our_privacy_policy": {
+		"message": "Przejdź do naszej Polityki prywatności, aby dowiedzieć się więcej"
+	},
+	"ghostery_dawn_onboarding_create_an_account": {
+		"message": "Utwórz konto."
+	},
+	"ghostery_dawn_onboarding_you_are_signed_in_as": {
+		"message": "Zalogowano jako"
+	},
+	"ghostery_dawn_onboarding_youve_successfully_set_up_your_browser": {
+		"message": "Udało się skonfigurować przeglądarkę."
+	},
+	"ghostery_dawn_onboarding_surf_with_ease": {
+		"message": "Można teraz bez przeszkód przeglądać Internet."
+	},
+	"ghostery_dawn_onboarding_start_browsing": {
+		"message": "Rozpocznij przeglądanie"
+	},
+	"ghostery_dawn_onboarding_which_privacy_plan": {
+		"message": "Który plan ochrony prywatności najbardziej Ci odpowiada?"
+	},
+	"ghostery_dawn_onboarding_tell_us_your_preferences": {
+		"message": "Podaj nam swoje preferencje, a my polecimy Ci najbardziej odpowiednią opcję."
+	},
+	"ghostery_dawn_onboarding_recommended_choices": {
+		"message": "Zalecane opcje"
+	},
+	"ghostery_dawn_onboarding_question_block_ads": {
+		"message": "Chcesz blokować reklamy?"
+	},
+	"ghostery_dawn_onboarding_question_kinds_of_trackers": {
+		"message": "Jakie tropiciele chcesz zablokować?"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_all": {
+		"message": "Wszystkie tropiciele"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_none": {
+		"message": "Żadne tropiciele"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "Wszystkie tropiciele reklam i analityczne"
+	},
+	"ghostery_dawn_onboarding_question_anti_tracking": {
+		"message": "Czy chcesz włączyć ochronę przed śledzeniem?"
+	},
+	"ghostery_dawn_onboarding_question_smart_browsing": {
+		"message": "Czy chcesz włączyć  inteligentne przeglądanie?"
+	},
+	"ghostery_dawn_onboarding_info_blocking_all": {
+		"message": "Blokowanie „wszystkich tropicieli” może spowodować zawieszenie niektórych stron."
+	},
+	"ghostery_dawn_onboarding_info_anti_tracking": {
+		"message": "Ochrona przed śledzeniem anonimizuje dane umożliwiające jednoznaczną identyfikację, które tropiciele starają się zgromadzić."
+	},
+	"ghostery_dawn_onboarding_info_smart_browsing": {
+		"message": "Dzięki inteligentnemu przeglądaniu ustawienia blokowania są odpowiednio dostosowywane, aby zmniejszyć ryzyko potencjalnego zawieszania strony, a także przyspieszać jej ładowanie."
+	},
+	"ghostery_dawn_onboarding_ad_free_private_search": {
+		"message": "Prywatne wyszukiwanie bez reklam"
+	},
+	"ghostery_dawn_onboarding_recommended" : {
+	  "message": "(Zalecane)"
+	},
+	"ghostery_dawn_onboarding_ad_supported_private_search": {
+		"message": "Prywatne wyszukiwanie z reklamami"
+	},
+	"ghostery_dawn_onboarding_type_in_search_domain": {
+		"message": "Wpisz w domenie wyszukiwania"
+	},
+	"ghostery_dawn_onboarding_go_back": {
+		"message": "Cofnij"
+	},
+	"ghostery_dawn_onboarding_confirm": {
+		"message": "Potwierdź"
+	},
+	"ghostery_dawn_onboarding_other": {
+		"message": "Inne"
+	},
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "Udało się:"
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "Błąd:"
 	},
 	"enable_when_paused": {
 		"message": "Aby użyć tej funkcji, wznów Ghostery."
@@ -2033,6 +2258,9 @@
 	"next": {
 		"message": "Dalej"
 	},
+	"next_or_start_trial": {
+		"message": "Dalej lub Rozpocznij okres próbny"
+	},
 	"previous": {
 		"message": "Wstecz"
 	},
@@ -2053,6 +2281,9 @@
 	},
 	"password_colon": {
 		"message": "Hasło:"
+	},
+	"confirm_password_colon": {
+		"message": "Potwierdź hasło:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "Wpisz prawidłowy adres e-mail."
@@ -2158,7 +2389,7 @@
 		"message": "Wbudowana sieć VPN"
 	},
 	"custom_whitelist_options": {
-		"message": "Niestandardowe ustawienia białej listy"
+		"message": "Opcje niestandardowe zaufanych stron"
 	},
 	"historical_tracking_insights": {
 		"message": "Informacje oparte o historię śledzenia"
@@ -2177,5 +2408,41 @@
 	},
 	"too_many_failed_logins_text": {
 		"message": "Zbyt wiele nieudanych prób logowania. Spróbuj ponownie za godzinę."
+	},
+  	"choose_your_default_search": {
+		"message": "Wybierz domyślną wyszukiwarkę"
+	},
+  	"pick_a_default_search_engine": {
+	  "message": "Wybierz domyślną wyszukiwarkę dla wszystkich wyszukiwań."
+	},
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Odpowiedz na wszystkie pytania"
+	},
+  	"ghostery_dawn_onboarding_startpage_warning": {
+	  "message": "Uwaga: wyszukiwarka StartPage nie gromadzi Twoich danych. Aby jednak utrzymać ochronę prywatności, będzie przesyłać Ci nieukierunkowane prywatne reklamy."
+	},
+	"ghostery_dawn_onboarding_bing_warning": {
+	  "message": "Uwaga: przeglądarka Bing będzie gromadzić Twoje dane w celu przesyłania Ci ukierunkowanych reklam."
+	},
+	"ghostery_dawn_onboarding_yahoo_warning": {
+	  "message": "Uwaga: przeglądarka Yahoo będzie gromadzić Twoje dane w celu przesyłania Ci ukierunkowanych reklam."
+	},
+  	"ghostery_dawn_onboarding_glow_benefit": {
+	  "message": "Dzięki subskrypcji Plus masz dostęp do pierwszej na świecie prywatnej wyszukiwarki bez reklam! Korzystamy z logowania bez użycia plików cookie, aby zapewnić prywatne wyszukiwanie."
+	},
+  	"ghostery_dawn_onboarding_choose_alternate_search": {
+	  "message": "Wybierz inną wyszukiwarkę"
+	},
+  	"ghostery_dawn_onboarding_select_option": {
+	  "message": "Wybierz opcję"
+	},
+  	"ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine": {
+	  "message": "Wybrano inną wyszukiwarkę:"
+	},
+  	"ghostery_dawn_onboarding_create_account_for_trial": {
+	  "message": "Aby rozpocząć okres próbny wyszukiwarki Ghostery, należy utworzyć konto lub się zalogować. Umożliwia to synchronizację ustawień prywatności na różnych urządzeniach."
+	},
+  	"ghostery_dawn_onboarding_back_to_search_selection": {
+	  "message": "Powrót do wyboru wyszukiwarki"
 	}
 }
