@@ -55,7 +55,7 @@ export function fuzzyUrlMatcher(url, urls) {
 				log(`[fuzzyUrlMatcher] host (${host}) and path (${path}) strict match`);
 				return true;
 			}
-		} else if (host.substr(0,2) == "*.") {
+		} else if (host.substr(0, 2) === '*.') {
 			if (tab_host.endsWith(host.slice(2))) {
 				if (!path) {
 					log(`[fuzzyUrlMatcher] host (${host}) fuzzy match`);
