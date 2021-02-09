@@ -93,9 +93,11 @@ class ChoosePlanView extends React.Component {
 		super(props);
 		this.state = {
 			selectedPlan: '',
-			expanded: false
+			expanded: false,
+			readyToRender: false, // setTimeout does not block
 		};
-		// User object doesn't get populated immediately, let's delay the first render
+		// TODO can we do this in a way that guarantees user object will be available when we need it?
+		// TODO we prob need to updated AccountReducer so we have a way to distinguish between 'no user' and 'user not fetched yet'
 		setTimeout(this.setDefaultPlan, 200);
 	}
 
@@ -115,8 +117,13 @@ class ChoosePlanView extends React.Component {
 		}
 		if (isBasic && defaultSearch === SEARCH_GHOSTERY) {
 			this.selectPlusPlan();
+			this.setState({
+				expanded: true,
+				readyToRender: true,
+			});
 		} else {
 			this.selectBasicPlan();
+			this.setState({ readyToRender: true });
 		}
 	}
 
@@ -306,6 +313,9 @@ class ChoosePlanView extends React.Component {
 	};
 
 	render() {
+		const { readyToRender } = this.state;
+		if (!readyToRender) return null;
+
 		const {
 			actions,
 			defaultSearch,
