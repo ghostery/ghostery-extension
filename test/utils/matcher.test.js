@@ -159,9 +159,10 @@ describe('src/utils/matcher.js', () => {
 			'google.com',
 			'ghostery.com/products',
 			'example.com/page*',
-			'*atlassian.net',
-			'*twitter.com/ghostery',
-			'*jira.net/board*',
+			'*.atlassian.net',
+			'*.twitter.com/ghostery',
+			'*.jira.net/board*',
+			'*facebook.com',
 		];
 
 		test('host strict match', () => {
@@ -179,6 +180,11 @@ describe('src/utils/matcher.js', () => {
 			expect(fuzzyUrlMatcher('https://ghostery.atlassian.net', urls)).toBeTruthy();
 			expect(fuzzyUrlMatcher('https://ghostery.atlassian.net/board', urls)).toBeTruthy();
 			expect(fuzzyUrlMatcher('https://ghostery.atlassian.com', urls)).toBeFalsy();
+		});
+
+		test('host fuzzy match rules require \'.\' ', () => {
+			expect(fuzzyUrlMatcher('https://something.facebook.com', urls)).toBeFalsy();
+			expect(fuzzyUrlMatcher('https://facebook.com', urls)).toBeFalsy();
 		});
 
 		test('host fuzzy match and path strict match', () => {
