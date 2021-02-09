@@ -282,7 +282,10 @@ class ChooseDefaultSearchView extends Component {
 		const { searchBeingConsidered, otherSearchSelected } = this.state;
 		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase().replace(' ', '')}.svg`;
 		const modalOptionLogoClassNames = ClassNames('ChooseSearchView__modalOptionLogo', {
-			ghostery: searchBeingConsidered === SEARCH_GHOSTERY
+			ghostery: searchBeingConsidered === SEARCH_GHOSTERY,
+			yahoo: searchBeingConsidered === SEARCH_YAHOO,
+			bing: searchBeingConsidered === SEARCH_BING,
+			startpage: searchBeingConsidered === SEARCH_STARTPAGE,
 		});
 
 		return (
