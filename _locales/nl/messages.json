@@ -476,8 +476,8 @@
 		"message": "Geblokkeerd"
 	},
 	"blocking_category_whitelisted": {
-		"description": "as in '5 (trackers) WHITELISTED'",
-		"message": "Op whitelist geplaatst"
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "Vertrouwd"
 	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Succes! $BOLD_HTML_END$ Een account verificatie e-mail is verstuurd naar $EMAIL$",
@@ -779,8 +779,8 @@
 		"message": "Deze website is verwijderd uit je lijst met Beperkte Websites en toegevoegd aan je lijst met Vertrouwde Websites"
 	},
 	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "Deze site is al toegestaan."
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "Deze site is al vertrouwd."
 	},
 	"settings_adblocker": {
 		"message": "Lijsten voor Advertentieblokkering"
@@ -1125,16 +1125,16 @@
 		"message": "Herladen om de wijzigingen te bekijken."
 	},
 	"alert_site_trusted": {
-		"message": "Website whitelisted. Trackers zullen worden toegestaan en Anti-tracking uitgezet op deze website."
+		"message": "Site vertrouwd. Trackers worden toegestaan en Anti-tracking wordt uitgeschakeld op deze site."
 	},
 	"alert_site_trusted_off": {
-		"message": "Site niet langer whitelisted."
+		"message": "Site niet langer vertrouwd."
 	},
 	"alert_site_restricted": {
-		"message": "Website blacklisted. Trackers zullen worden geblokkeerd en Anti-tracking aangezet op deze website."
+		"message": "Site beperkt. Trackers worden geblokkeerd en Anti-tracking wordt ingeschakeld op deze site."
 	},
 	"alert_site_restricted_off": {
-		"message": "Website niet langer blacklisted."
+		"message": "Site niet langer beperkt."
 	},
 	"tooltip_anti_track_on": {
 		"message": "Persoonlijke gegevenspunten geanonimiseerd."
@@ -1366,6 +1366,9 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Aanvullende bescherming"
 	},
+	"hub_upgrade_maximum_protection": {
+		"message": "Maximale bescherming"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Trackers blokkeren in browser"
 	},
@@ -1586,7 +1589,7 @@
 		"message": "Trust & Restrict-sites"
 	},
 	"hub_tutorial_trust_tagline": {
-		"message": "Whitelist of blacklist websites met één klik."
+		"message": "Vertrouw of beperk websites met één klik."
 	},
 	"hub_tutorial_trust_trust_site": {
 		"message": "Sta trackers op deze website altijd toe."
@@ -1722,6 +1725,9 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Gebruik tussen 8 en 50 karakters."
 	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "Je wachtwoorden komen niet overeen."
+	},
 	"hub_create_account_already_have_account": {
 		"message": "Heb je al een Ghostery Account?"
 	},
@@ -1733,6 +1739,225 @@
 	},
 	"hub_create_account_toast_error": {
 		"message": "Dat e-mailadres is al in gebruik.  Gelieve een ander te kiezen."
+	},
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "Verhelp de fouten voordat je doorgaat."
+	},
+	"ghostery_dawn_onboarding_install_heading": {
+		"message": "Ghostery Dawn wordt nu geïnstalleerd..."
+	},
+	"ghostery_dawn_onboarding_page_title": {
+	  "message": "Ghostery Dawn Hub - Welkom"
+	},
+  	"ghostery_dawn_onboarding_header_title_login": {
+	  "message": "Ghostery Dawn Hub - Login"
+	},
+	"ghostery_dawn_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Dawn Hub - Blokkeerinstellingen"
+	},
+	"ghostery_dawn_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Dawn Hub - Zoekmachine kiezen"
+	},
+	"ghostery_dawn_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Dawn Hub - Abonnementsopties"
+	},
+	"ghostery_dawn_onboarding_privacy": {
+		"message": "Privacy"
+	},
+	"ghostery_dawn_onboarding_search": {
+		"message": "Zoek"
+	},
+	"ghostery_dawn_onboarding_plan": {
+		"message": "Plan"
+	},
+	"ghostery_dawn_onboarding_welcome": {
+		"message": "Welkom bij Ghostery Dawn!"
+	},
+	"ghostery_dawn_onboarding_lets_begin": {
+		"message": "We hebben de online privacy gecentraliseerd door onze signatuur en nieuwe technologieën te integreren."
+	},
+	"ghostery_dawn_onboarding_welcome_message": {
+		"message": "Onze browser beschermt je gegevens en blokkeert bloatware zodat je privé kunt surfen, meer dan 3 keer sneller dan met Chrome."
+	},
+	"ghostery_dawn_onboarding_lets_do_this": {
+		"message": "Mijn browser instellen"
+	},
+	"ghostery_dawn_onboarding_your_privacy_plan": {
+		"message": "Je privacy-abonnement"
+	},
+	"ghostery_dawn_onboarding_based_on_your_privacy_preferences": {
+		"message": "Gebaseerd op je privacyvoorkeuren"
+	},
+	"ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription": {
+		"message": "Reclamevrij met Ghostery Plus-abonnement"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo": {
+		"message": "40% korting op de eerste 12 maanden"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo_description": {
+		"message": "Krijg sneller wat je wilt. Een Plus-abonnement geeft Ghostery de ondersteuning die we nodig hebben om JOU een reclamevrije ervaring te bieden."
+	},
+	"ghostery_dawn_onboarding_or": {
+		"message": "OF"
+	},
+	"ghostery_dawn_onboarding_keep": {
+		"message": "Behouden"
+	},
+	"ghostery_dawn_onboarding_upgrade": {
+		"message": "Upgraden"
+	},
+	"ghostery_dawn_onboarding_start_trial": {
+		"message": "Proefversie starten"
+	},
+	"ghostery_dawn_onboarding_see_all_plans": {
+		"message": "Alle abonnementen bekijken"
+	},
+	"ghostery_dawn_onboarding_private_search": {
+		"message": "Privé zoeken"
+	},
+	"ghostery_dawn_onboarding_tracker_protection": {
+		"message": "Bescherming tegen trackers"
+	},
+	"ghostery_dawn_onboarding_speedy_page_loads": {
+		"message": "Snel laden van pagina's"
+	},
+	"ghostery_dawn_onboarding_intelligence_technology": {
+		"message": "Intelligentietechnologie"
+	},
+	"ghostery_dawn_onboarding_ad_free": {
+		"message": "Reclamevrij"
+	},
+	"ghostery_dawn_onboarding_supports_ghosterys_mission": {
+		"message": "Ondersteunt de missie van Ghostery"
+	},
+	"ghostery_dawn_onboarding_unlimited_bandwidth": {
+		"message": "Onbeperkte bandbreedte"
+	},
+	"ghostery_dawn_onboarding_already_premium_subscriber": {
+		"message": "Je bent al een Premium-abonnee"
+	},
+	"ghostery_dawn_onboarding_already_plus_subscriber": {
+		"message": "Je bent al een Plus-abonnee"
+	},
+	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
+		"message": "Je huidige abonnement behouden of upgraden"
+	},
+	"ghostery_dawn_onboarding_choose_an_option": {
+		"message": "Een optie kiezen"
+  },
+	"ghostery_dawn_onboarding_create_a_ghostery_account": {
+		"message": "Een Ghostery-account aanmaken"
+	},
+	"ghostery_dawn_onboarding_sync_settings": {
+		"message": "Geeft je de mogelijkheid je privacyinstellingen op alle apparaten te synchroniseren."
+	},
+	"ghostery_dawn_onboarding_already_have_account": {
+		"message": "Ik heb al een account."
+	},
+	"ghostery_dawn_onboarding_skip": {
+		"message": "Overslaan"
+	},
+	"ghostery_dawn_onboarding_back": {
+		"message": "Terug"
+	},
+	"ghostery_dawn_onboarding_we_take_your_privacy_very_seriously": {
+		"message": "We nemen je privacy uiterst serieus. Ontdek meer"
+	},
+	"ghostery_dawn_onboarding_private_by_design": {
+		"message": "Door en door privé"
+	},
+	"ghostery_dawn_onboarding_private_by_design_description": {
+		"message": "Privacy vinden we ontzettend belangrijk bij Ghostery. Daarom handhaven we een strikt beleid voor jouw gegevens. Wanneer je een account aanmaakt bij Ghostery, verzamelen we alleen je naam en e-mailadres. Met deze informatie krijg je een gebruikerservaring waarmee je je instellingen op alle apparaten kunt synchroniseren en door ons wordt geïnformeerd over belangrijke updates. We zullen deze gegevens nooit delen met of verkopen aan derden."
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account": {
+		"message": "Kan ik mijn account verwijderen?"
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account_description": {
+		"message": "We hopen dat je het leuk vindt om Ghostery te gebruiken. Mocht je toch bij ons weggaan, verwijderen we binnen 90 dagen al je persoonlijke informatie vanaf de datum van het verzoek."
+	},
+	"ghostery_dawn_onboarding_visit_our_privacy_policy": {
+		"message": "Lees ons Privacybeleid voor meer informatie"
+	},
+	"ghostery_dawn_onboarding_create_an_account": {
+		"message": "Maak een account aan."
+	},
+	"ghostery_dawn_onboarding_you_are_signed_in_as": {
+		"message": "Je bent aangemeld als"
+	},
+	"ghostery_dawn_onboarding_youve_successfully_set_up_your_browser": {
+		"message": "Je hebt je browser met succes ingesteld!"
+	},
+	"ghostery_dawn_onboarding_surf_with_ease": {
+		"message": "Je kunt nu met het grootste gemak surfen."
+	},
+	"ghostery_dawn_onboarding_start_browsing": {
+		"message": "Begin met Browsen"
+	},
+	"ghostery_dawn_onboarding_which_privacy_plan": {
+		"message": "Welk privacyabonnement past bij jou?"
+	},
+	"ghostery_dawn_onboarding_tell_us_your_preferences": {
+		"message": "Laat ons weten wat je voorkeuren zijn, dan doen we je een aanbeveling."
+	},
+	"ghostery_dawn_onboarding_recommended_choices": {
+		"message": "Aanbevolen opties"
+	},
+	"ghostery_dawn_onboarding_question_block_ads": {
+		"message": "Wil je advertenties blokkeren?"
+	},
+	"ghostery_dawn_onboarding_question_kinds_of_trackers": {
+		"message": "Welke soorten trackers wil je blokkeren?"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_all": {
+		"message": "Alle trackers"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_none": {
+		"message": "Geen trackers"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "Alle advertentie- en analytics-trackers"
+	},
+	"ghostery_dawn_onboarding_question_anti_tracking": {
+		"message": "Wil je anti-tracking inschakelen?"
+	},
+	"ghostery_dawn_onboarding_question_smart_browsing": {
+		"message": "Wil je slim browsen inschakelen?"
+	},
+	"ghostery_dawn_onboarding_info_blocking_all": {
+		"message": "Het blokkeren van 'Alle trackers' kan ertoe leiden dat sommige websites vastlopen."
+	},
+	"ghostery_dawn_onboarding_info_anti_tracking": {
+		"message": "Anti-tracking anonimiseert unieke, identificeerbare gegevens die trackers proberen te verzamelen."
+	},
+	"ghostery_dawn_onboarding_info_smart_browsing": {
+		"message": "Slim browsen past je blokkeerinstellingen aan, zodat pagina's minder vaak crashen en sneller worden geladen."
+	},
+	"ghostery_dawn_onboarding_ad_free_private_search": {
+		"message": "Privé zoeken zonder advertenties"
+	},
+	"ghostery_dawn_onboarding_recommended" : {
+	  "message": "(Aanbevolen)"
+	},
+	"ghostery_dawn_onboarding_ad_supported_private_search": {
+		"message": "Privé zoeken met ondersteuning door advertenties"
+	},
+	"ghostery_dawn_onboarding_type_in_search_domain": {
+		"message": "Zoekdomein invoeren"
+	},
+	"ghostery_dawn_onboarding_go_back": {
+		"message": "Terug"
+	},
+	"ghostery_dawn_onboarding_confirm": {
+		"message": "Bevestigen"
+	},
+	"ghostery_dawn_onboarding_other": {
+		"message": "Overig"
+	},
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "Geslaagd: "
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "Fout: "
 	},
 	"enable_when_paused": {
 		"message": "Hervat Ghostery om deze functie te gebruiken."
@@ -2033,6 +2258,9 @@
 	"next": {
 		"message": "Volgende"
 	},
+	"next_or_start_trial": {
+		"message": "Volgende of Proefversie starten"
+	},
 	"previous": {
 		"message": "Vorige"
 	},
@@ -2053,6 +2281,9 @@
 	},
 	"password_colon": {
 		"message": "Wachtwoord:"
+	},
+	"confirm_password_colon": {
+		"message": "Wachtwoord bevestigen:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "Voer een geldig e-mailadres in."
@@ -2158,7 +2389,7 @@
 		"message": "Ingebouwd VPN"
 	},
 	"custom_whitelist_options": {
-		"message": "Aangepaste whitelist-opties"
+		"message": "Aangepaste, vertrouwde site-opties"
 	},
 	"historical_tracking_insights": {
 		"message": "Historische trackinginzichten"
@@ -2177,5 +2408,41 @@
 	},
 	"too_many_failed_logins_text": {
 		"message": "Te veel mislukte inlogpogingen. Probeer het over één uur opnieuw."
+	},
+  	"choose_your_default_search": {
+		"message": "Je standaard zoekmachine selecteren"
+	},
+  	"pick_a_default_search_engine": {
+	  "message": "Kies een standaard zoekmachine voor al je zoekopdrachten."
+	},
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Beantwoord alle vragen"
+	},
+  	"ghostery_dawn_onboarding_startpage_warning": {
+	  "message": "Goed om te weten: de Startpage-zoekmachine verzamelt geen gegevens van je. Om privacybescherming gratis te houden, worden echter ongerichte privé-advertenties aangeboden."
+	},
+	"ghostery_dawn_onboarding_bing_warning": {
+	  "message": "Goed om te weten: de Bing-zoekmachine slaat je gegevens op en gebruikt deze om je gerichte advertenties aan te bieden."
+	},
+	"ghostery_dawn_onboarding_yahoo_warning": {
+	  "message": "Goed om te weten: de Yahoo-zoekmachine slaat je gegevens op en gebruikt deze om je gerichte advertenties aan te bieden."
+	},
+  	"ghostery_dawn_onboarding_glow_benefit": {
+	  "message": "Met een Plus-abonnement heb je toegang tot 's werelds eerste en enige advertentievrije privé-zoekmachine! We gebruiken een speciale cookievrije login, zodat je absoluut privé kunt zoeken."
+	},
+  	"ghostery_dawn_onboarding_choose_alternate_search": {
+	  "message": "Andere zoekmachine kiezen"
+	},
+  	"ghostery_dawn_onboarding_select_option": {
+	  "message": "Optie selecteren"
+	},
+  	"ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine": {
+	  "message": "Je hebt een andere zoekmachine gekozen:"
+	},
+  	"ghostery_dawn_onboarding_create_account_for_trial": {
+	  "message": "Je moet een account maken of bij een account inloggen om je gratis proefversie van Ghostery Search te starten. Je kunt je privacy-instellingen dan tussen apparaten synchroniseren."
+	},
+  	"ghostery_dawn_onboarding_back_to_search_selection": {
+	  "message": "Terug naar zoekselectie"
 	}
 }
