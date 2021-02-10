@@ -22,6 +22,7 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			const settingsData = {
 				enable_metrics: false,
 				enable_human_web: false,
+				enable_abtests: false,
 			};
 
 			const component = renderer.create(
@@ -37,6 +38,7 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			const settingsData = {
 				enable_metrics: true,
 				enable_human_web: true,
+				enable_abtests: true,
 			};
 
 			const component = renderer.create(
@@ -54,6 +56,7 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 			const settingsData = {
 				enable_metrics: true,
 				enable_human_web: true,
+				enable_abtests: true,
 			};
 			const toggleCheckbox = jest.fn();
 
