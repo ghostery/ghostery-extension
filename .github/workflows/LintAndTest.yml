@@ -10,10 +10,10 @@ on:
 jobs:
   check-pr-title-format:
     runs-on: ubuntu-20.04
-    - uses: actions/setup-node@v2
-      with:
-      node-version: '10'
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '10'
       - name: Install Dependencies
         run: |
           yarn install --frozen-lockfile
