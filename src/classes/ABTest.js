@@ -19,7 +19,7 @@ import globals from './Globals';
 import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
-const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION } = globals;
+const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION, FAIL } = globals;
 
 /** Helper class for handling A/B tests.
  * @memberof  BackgroundClasses
