@@ -10,3 +10,9 @@ script:
   - node ./tools/licenses/fetchLicenses.js
   - yarn lint
   - yarn test
+
+# Only build on pushes or PRs to these branches
+branches:
+  only:
+  - master
+  - develop
