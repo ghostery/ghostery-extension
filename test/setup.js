@@ -19,8 +19,17 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-Enzyme.configure({ adapter: new Adapter() });
+// Disable logging
+jest.mock('../src/utils/common', () => {
+	const commonActual = jest.requireActual('../src/utils/common');
+	return {
+		...commonActual,
+		log: () => false,
+	};
+});
+
 enableFetchMocks();
+Enzyme.configure({ adapter: new Adapter() });
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
