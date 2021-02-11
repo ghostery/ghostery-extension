@@ -290,7 +290,12 @@
 }
 
 .ChooseSearchView__modalOptionLogo {
-  padding: 70px 0;
+  padding-bottom: 70px;
+}
+
+.ChooseSearchView__modalDawnLogo {
+  position: absolute;
+  top: 20px;
 }
 
 .ChooseSearchView__modalDescription {
@@ -300,11 +305,13 @@
   text-align: center;
   color: $tundora;
   width: 70%;
-	margin-bottom: 113px;
-	white-space: pre-line;
+  margin-bottom: 70px;
+  white-space: pre-line;
 }
 
 .ChooseSearchView__modalContent {
+  display: flex;
+  align-items: center;
   position: relative;
   width: 901px;
   min-height: 632px;
