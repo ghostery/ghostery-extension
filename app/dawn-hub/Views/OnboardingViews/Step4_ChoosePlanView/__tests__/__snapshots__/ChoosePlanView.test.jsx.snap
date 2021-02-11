@@ -67,15 +67,19 @@ Array [
         ghostery_dawn_onboarding_ad_free_promo_description
       </div>
     </div>
-    <a
-      className="ChoosePlanView__searchCTAButton"
-      href="https://staging.glowstery.com/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding"
-      onClick={[Function]}
-      rel="noreferrer"
-      target="_blank"
+    <div
+      className="ChoosePlanView__searchCTAButtonContainer"
     >
-      ghostery_dawn_onboarding_start_trial
-    </a>
+      <a
+        className="ChoosePlanView__searchCTAButton"
+        href="https://staging.glowstery.com/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding"
+        onClick={[Function]}
+        rel="noreferrer"
+        target="_blank"
+      >
+        ghostery_dawn_onboarding_start_trial
+      </a>
+    </div>
     <div
       className="ChoosePlanView__seeAllPlans"
       onClick={[Function]}

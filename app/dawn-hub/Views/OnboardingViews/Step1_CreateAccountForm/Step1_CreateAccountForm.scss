@@ -15,9 +15,12 @@
 	padding-top: 20px;
 }
 .Step1_CreateAccountForm__inputLabel {
+  	display: flex;
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 2.86;
+	line-height: 1.4;
+  	align-items: flex-end;
+  	height: 28px;
 	text-transform: uppercase;
 	color: #4a4a4a;
 }

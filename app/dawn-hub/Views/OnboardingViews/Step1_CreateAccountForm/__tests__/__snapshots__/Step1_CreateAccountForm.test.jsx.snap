@@ -16,7 +16,9 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         className="Step1_CreateAccountForm__inputLabel"
         htmlFor="create-account-email"
       >
-        email_colon
+        <span>
+          email_colon
+        </span>
       </label>
       <input
         autoComplete="off"
@@ -37,7 +39,9 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         className="Step1_CreateAccountForm__inputLabel"
         htmlFor="create-account-confirmEmail"
       >
-        confirm_email_colon
+        <span>
+          confirm_email_colon
+        </span>
       </label>
       <input
         autoComplete="off"
@@ -61,7 +65,9 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         className="Step1_CreateAccountForm__inputLabel"
         htmlFor="create-account-firstName"
       >
-        hub_create_account_label_first_name
+        <span>
+          hub_create_account_label_first_name
+        </span>
       </label>
       <input
         autoComplete="off"
@@ -81,7 +87,9 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         className="Step1_CreateAccountForm__inputLabel"
         htmlFor="create-account-lastName"
       >
-        hub_create_account_label_email_last_name
+        <span>
+          hub_create_account_label_email_last_name
+        </span>
       </label>
       <input
         autoComplete="off"
@@ -105,7 +113,9 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         className="Step1_CreateAccountForm__inputLabel"
         htmlFor="create-account-password"
       >
-        password_colon
+        <span>
+          password_colon
+        </span>
       </label>
       <input
         autoComplete="off"
@@ -125,7 +135,9 @@ exports[`app/hub/Views/Step1_CreateAccountForm component Snapshot tests with rea
         className="Step1_CreateAccountForm__inputLabel"
         htmlFor="create-account-password"
       >
-        confirm_password_colon
+        <span>
+          confirm_password_colon
+        </span>
       </label>
       <input
         autoComplete="off"
