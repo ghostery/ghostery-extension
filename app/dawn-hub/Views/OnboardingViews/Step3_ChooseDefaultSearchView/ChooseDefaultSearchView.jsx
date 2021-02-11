@@ -371,10 +371,10 @@ class ChooseDefaultSearchView extends Component {
 		if (!otherSearchOptionsFetched) return null;
 
 		return (
-			<div className="full-height">
+			<Fragment>
 				{modalActive && this.renderConfirmationModal()}
 				{!modalActive && this.renderSearchOptions()}
-			</div>
+			</Fragment>
 		);
 	}
 }

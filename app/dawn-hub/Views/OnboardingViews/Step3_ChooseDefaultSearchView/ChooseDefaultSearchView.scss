@@ -29,10 +29,8 @@
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 15px;
-	@include breakpoint(small down) {
-		margin-top: -21px;
-	}
+	margin-top: 22px;
+  
 	.ChooseSearchView__back {
 		margin-top: 8px;
 		font-size: 16px;
@@ -40,7 +38,6 @@
 		text-decoration: underline;
 	}
 }
-
 
 .ChooseSearchView__title {
   font-size: 24px;
