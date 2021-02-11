@@ -16,6 +16,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import ChoosePlanView from '../ChoosePlanView';
+import { SEARCH_GHOSTERY } from '../../Step3_ChooseDefaultSearchView/ChooseDefaultSearchConstants';
 
 const noop = () => {};
 
@@ -25,7 +26,8 @@ describe('app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView
 		selectedGhosteryGlow: true,
 		actions: {
 			setSetupStep: noop
-		}
+		},
+		defaultSearch: SEARCH_GHOSTERY,
 	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('ChoosePlanView is rendered correctly', () => {
