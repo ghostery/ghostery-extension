@@ -30,7 +30,7 @@
 	display: flex;
 	width: 68px;
 	margin-top: 22px;
-  
+
 	.ChooseSearchView__back {
 		margin-top: 8px;
 		font-size: 16px;
@@ -129,14 +129,18 @@
 }
 
 .ChooseSearchView__optionDescriptionTitle {
-	padding-top: 10px;
-  line-height: 0.8;
+  padding-top: 10px;
+  margin-bottom: 2px;
+  line-height: 1.0;
   font-size: 14px;
   font-weight: 500;
+  text-align: center;
 }
 
 .ChooseSearchView__optionDescriptionSubtitle {
   font-size: 14px;
+  line-height: 1.0;
+  text-align: center;
 }
 
 .ChooseSearchView__optionDropdownContainer {
