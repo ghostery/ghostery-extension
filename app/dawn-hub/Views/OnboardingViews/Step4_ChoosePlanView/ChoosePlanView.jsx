@@ -321,7 +321,7 @@ class ChoosePlanView extends React.Component {
 		const selectedGhosteryGlow = (defaultSearch === SEARCH_GHOSTERY);
 
 		return (
-			<div>
+			<Fragment>
 				<div className="ChoosePlanView__relativeContainer">
 					<div className="ChoosePlanView__backContainer">
 						<span className="ChoosePlanView__caret left" />
@@ -389,7 +389,7 @@ class ChoosePlanView extends React.Component {
 						</div>
 					)}
 				</div>
-			</div>
+			</Fragment>
 		);
 	}
 }

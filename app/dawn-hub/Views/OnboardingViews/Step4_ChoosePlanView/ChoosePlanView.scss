@@ -35,7 +35,8 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 7px;
+	margin-top: 22px;
+  	margin-left: 22px;
 	.ChoosePlanView__back {
 		margin-top: 8px;
 		font-size: 16px;
@@ -44,10 +45,11 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	}
 }
 .ChoosePlanView__yourPrivacyPlan {
-	margin: auto;
+	margin: 60px auto auto auto;
 	font-size: 24px;
 	display: flex;
 	justify-content: center;
+  	text-align: center;
   	font-weight: 500;
 }
 .ChoosePlanView__subtitle {
