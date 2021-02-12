@@ -16,7 +16,12 @@ import globals from './Globals';
 import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
-const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION } = globals;
+const {
+	BROWSER_INFO_READY,
+	BROWSER_INFO,
+	CMP_BASE_URL,
+	EXTENSION_VERSION
+} = globals;
 
 /**
  * Class for handling notification and/or marketing campaigns.
@@ -36,27 +41,26 @@ class CMP {
 			return Promise.resolve(false);
 		}
 
-		const URL = CMP._buildUrl();
-
-		return getJson(URL).then((data) => {
-			if (CMP._isNewData(data)) {
-				this._updateCampaigns(data);
-				return this.CMP_DATA;
-			}
-			// getJson() returned a 204, meaning no new campaigns available
-			log('No CMP data to fetch at this time');
-			globals.SESSION.cmp_data = [];
-			return false;
-		}).catch((err) => {
-			log('Error in fetchCMPData', err);
-			return false;
-		});
+		return CMP._buildUrl()
+			.then(url => getJson(url))
+			.then((data) => {
+				if (CMP._isNewData(data)) {
+					this._updateCampaigns(data);
+					return this.CMP_DATA;
+				}
+				// getJson() returned a 204, meaning no new campaigns available
+				log('No CMP data to fetch at this time');
+				globals.SESSION.cmp_data = [];
+				return false;
+			}).catch((err) => {
+				log('Error in fetchCMPData', err);
+				return false;
+			});
 	}
 
 	debugFetch() {
-		const URL = CMP._buildUrl();
-
-		return getJson(URL)
+		return CMP._buildUrl()
+			.then(url => getJson(url))
 			.then((data) => {
 				if (CMP._isNewData(data)) {
 					this._updateCampaigns(data);
@@ -86,7 +90,8 @@ class CMP {
 		this.CMP_DATA = data.Campaigns;
 	}
 
-	static _buildUrl() {
+	static async _buildUrl() {
+		await BROWSER_INFO_READY;
 		return (`${CMP_BASE_URL}/check
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
