@@ -280,7 +280,7 @@ class ChooseDefaultSearchView extends Component {
 		return (
 			<Modal show>
 				<div className="ChooseSearchView__modalContent">
-					<img src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
+					<img className="ChooseSearchView__modalDawnLogo" src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
 					<div className="ChooseSearchView__modalMain">
 						{searchBeingConsidered === SEARCH_OTHER ? (
 							<div className="ChooseSearchView__modalHeader">
@@ -371,10 +371,10 @@ class ChooseDefaultSearchView extends Component {
 		if (!otherSearchOptionsFetched) return null;
 
 		return (
-			<div className="full-height">
+			<Fragment>
 				{modalActive && this.renderConfirmationModal()}
 				{!modalActive && this.renderSearchOptions()}
-			</div>
+			</Fragment>
 		);
 	}
 }

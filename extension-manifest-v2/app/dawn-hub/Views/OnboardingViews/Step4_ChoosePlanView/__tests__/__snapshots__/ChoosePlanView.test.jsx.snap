@@ -9,7 +9,7 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with user not logged in 1`] = `ShallowWrapper {}`;
 
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Snapshot tests with react-test-renderer ChoosePlanView is rendered correctly 1`] = `
-<div>
+Array [
   <div
     className="ChoosePlanView__relativeContainer"
   >
@@ -31,7 +31,7 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.
         </span>
       </a>
     </div>
-  </div>
+  </div>,
   <div
     className="ChoosePlanView"
   >
@@ -67,15 +67,19 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.
         ghostery_dawn_onboarding_ad_free_promo_description
       </div>
     </div>
-    <a
-      className="ChoosePlanView__searchCTAButton"
-      href="https://staging.glowstery.com/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding"
-      onClick={[Function]}
-      rel="noreferrer"
-      target="_blank"
+    <div
+      className="ChoosePlanView__searchCTAButtonContainer"
     >
-      ghostery_dawn_onboarding_start_trial
-    </a>
+      <a
+        className="ChoosePlanView__searchCTAButton"
+        href="https://staging.glowstery.com/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding"
+        onClick={[Function]}
+        rel="noreferrer"
+        target="_blank"
+      >
+        ghostery_dawn_onboarding_start_trial
+      </a>
+    </div>
     <div
       className="ChoosePlanView__seeAllPlans"
       onClick={[Function]}
@@ -86,6 +90,6 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.
       className="ChoosePlanView__arrow up"
       onClick={[Function]}
     />
-  </div>
-</div>
+  </div>,
+]
 `;
