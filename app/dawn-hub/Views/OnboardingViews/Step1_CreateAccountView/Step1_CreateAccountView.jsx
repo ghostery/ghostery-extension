@@ -78,7 +78,6 @@ const Step1_CreateAccountView = (props) => {
 	};
 
 	const handleNextOnSelectPlanStep = () => {
-		console.log('test');
 		const { prev } = props;
 
 		setSetupStep({
