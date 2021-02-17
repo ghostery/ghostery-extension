@@ -16,7 +16,6 @@ module.exports = function(api) {
 	let plugins = [
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-proposal-object-rest-spread',
-		'@babel/plugin-transform-named-capturing-groups-regex',
 	];
 
 	switch (api.env()) {
@@ -26,6 +25,11 @@ module.exports = function(api) {
 		case 'src':
 			// Don't transpile the './src' dir
 			presets = [];
+			break;
+		case 'cliqz':
+			// Set plugins to run over @cliqz modules
+			presets = [];
+			plugins = ['@babel/plugin-transform-named-capturing-groups-regex'];
 			break;
 		case 'test':
 			// Calling Jest from package.json with `BABEL_ENV=test` set
