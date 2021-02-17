@@ -16,6 +16,7 @@ module.exports = function(api) {
 	let plugins = [
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-proposal-object-rest-spread',
+		'@babel/plugin-transform-named-capturing-groups-regex',
 	];
 
 	switch (api.env()) {
