@@ -35,7 +35,8 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 7px;
+	margin-top: 22px;
+  	margin-left: 22px;
 	.ChoosePlanView__back {
 		margin-top: 8px;
 		font-size: 16px;
@@ -44,16 +45,18 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	}
 }
 .ChoosePlanView__yourPrivacyPlan {
-	margin: auto;
+	margin: 60px auto auto auto;
 	font-size: 24px;
 	display: flex;
 	justify-content: center;
+  	text-align: center;
   	font-weight: 500;
 }
 .ChoosePlanView__subtitle {
 	margin-top: 12px;
 	display: flex;
 	justify-content: center;
+  	text-align: center;
 	font-size: 18px;
 }
 .ChoosePlanView__searchPromoContainer {
@@ -66,7 +69,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__searchLogo {
 	height: 36px;
 	width: 166px;
-	margin: 65px auto 0 auto;
+	margin: 50px auto 0 auto;
 	background-image: url('/app/images/hub/ChooseDefaultSearchView/search-engine-logo-ghosteryglow.svg');
 }
 .ChoosePlanView__adFree {
@@ -93,12 +96,17 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	text-align: center;
 	color: $tundora;
 }
+
+.ChoosePlanView__searchCTAButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .ChoosePlanView__searchCTAButton {
-	display: flex;
 	justify-content: center;
 	margin: 48px auto 0 auto;
-	height: 44px;
-	width: 162px;
+	min-height: 44px;
+	min-width: 162px;
 	padding: 7.7px 14px;
 	line-height: 22px;
 	background: linear-gradient(

@@ -37,7 +37,7 @@
 	display: flex;
 	width: 68px;
 	margin-top: 142px;
-	@include breakpoint(medium down) {
+	@include breakpoint(large down) {
 		margin-top: 100px;
 	}
 	.SuccessView__back {
