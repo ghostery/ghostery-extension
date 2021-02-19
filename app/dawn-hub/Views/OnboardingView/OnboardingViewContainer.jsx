@@ -78,9 +78,9 @@ class OnboardingViewContainer extends Component {
 				origin: ONBOARDING
 			});
 			actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
-			actions.setAntiTracking({ enable_anti_tracking: true }); // covered
-			actions.setAdBlock({ enable_ad_block: true }); // covered
-			actions.setSmartBlocking({ enable_smart_block: true }); // covered
+			actions.setAntiTracking({ enable_anti_tracking: true });
+			actions.setAdBlock({ enable_ad_block: false }); // GH-2283
+			actions.setSmartBlocking({ enable_smart_block: true });
 		}
 	}
 
