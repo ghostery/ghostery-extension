@@ -1548,6 +1548,9 @@ function initializeGhosteryModules() {
 				// Make sure that getBrowserInfo() has resolved before we set these properties
 				(async() => {
 					await globals.BROWSER_INFO_READY;
+					if (globals.JUST_INSTALLED && BROWSER_INFO.name === 'ghostery_desktop') { // i.e., Dawn
+						conf.enable_ad_block = false; // GH-2283
+					}
 					if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
 						if (globals.JUST_INSTALLED) {
 							conf.enable_human_web = false;
@@ -1636,7 +1639,6 @@ function initializeGhosteryModules() {
 				(async() => {
 					await globals.BROWSER_INFO_READY;
 					if (BROWSER_INFO.name === 'ghostery_desktop') { // i.e., Dawn
-						conf.enable_ad_block = false; // GH-2283
 						chrome.tabs.create({
 							url: chrome.runtime.getURL('./app/templates/dawn_hub.html?justInstalled=true'),
 							active: true
