@@ -39,13 +39,12 @@ class BlockSettingsView extends Component {
 
 	componentDidMount() {
 		const { setupLifecycle: { blockSetupSeen } } = this.props;
+
 		if (blockSetupSeen) {
 			const {
-				antiSuite: {
-					enable_anti_tracking,
-					enable_ad_block,
-					enable_smart_block,
-				},
+				enable_anti_tracking,
+				enable_ad_block,
+				enable_smart_block,
 				blockingPolicy
 			} = this.props;
 
@@ -57,6 +56,24 @@ class BlockSettingsView extends Component {
 				enable_anti_tracking,
 				enable_smart_block
 			});
+		}
+	}
+
+	componentDidUpdate() {
+		const {
+			recommendedChoices,
+			enable_anti_tracking,
+			enable_ad_block,
+			enable_smart_block,
+			kindsOfTrackers
+		} = this.state;
+
+		if (!recommendedChoices && kindsOfTrackers === 2 && enable_ad_block === true && enable_anti_tracking === true && enable_smart_block === true) {
+			// eslint-disable-next-line react/no-did-update-set-state
+			this.setState({ recommendedChoices: true });
+		} else if (recommendedChoices && (kindsOfTrackers !== 2 || enable_ad_block !== true || enable_anti_tracking !== true || enable_smart_block !== true)) {
+			// eslint-disable-next-line react/no-did-update-set-state
+			this.setState({ recommendedChoices: false });
 		}
 	}
 

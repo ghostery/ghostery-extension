@@ -18,26 +18,24 @@ import {
 } from '../constants/AntiSuiteConstants';
 
 const initialState = {
-	antiSuite: {
-		enable_ad_block: false,
-		enable_anti_tracking: false,
-		enable_smart_block: false
-	}
+	enable_ad_block: false,
+	enable_anti_tracking: false,
+	enable_smart_block: false
 };
 
 function AntiSuiteReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_AD_BLOCK: {
 			const { enable_ad_block } = action.data;
-			return { ...state, antiSuite: { ...state.antiSuite, enable_ad_block } };
+			return { ...state, enable_ad_block };
 		}
 		case SET_ANTI_TRACKING: {
 			const { enable_anti_tracking } = action.data;
-			return { ...state, antiSuite: { ...state.antiSuite, enable_anti_tracking } };
+			return { ...state, enable_anti_tracking };
 		}
 		case SET_SMART_BLOCK: {
 			const { enable_smart_block } = action.data;
-			return { ...state, antiSuite: { ...state.antiSuite, enable_smart_block } };
+			return { ...state, enable_smart_block };
 		}
 
 		default: return state;
