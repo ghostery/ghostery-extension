@@ -89,12 +89,9 @@ class ChooseDefaultSearchView extends Component {
 				SEARCH_YAHOO,
 				SEARCH_STARTPAGE,
 			];
-			const isOther = searchChoices.reduce((accum, choice) => {
-				if (accum === false) return false;
-				return choice !== defaultSearch;
-			}, false);
+			const isOther = !searchChoices.includes(defaultSearch);
 			const prevChosenSearch = isOther ? SEARCH_OTHER : defaultSearch;
-			this.setState({ chosenSearch: prevChosenSearch, otherSearchSelected: isOther ? prevChosenSearch : null });
+			this.setState({ chosenSearch: prevChosenSearch, otherSearchSelected: isOther ? defaultSearch : null });
 		}
 	}
 
