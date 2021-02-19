@@ -1636,6 +1636,7 @@ function initializeGhosteryModules() {
 				(async() => {
 					await globals.BROWSER_INFO_READY;
 					if (BROWSER_INFO.name === 'ghostery_desktop') { // i.e., Dawn
+						conf.enable_ad_block = false; // GH-2283
 						chrome.tabs.create({
 							url: chrome.runtime.getURL('./app/templates/dawn_hub.html?justInstalled=true'),
 							active: true
