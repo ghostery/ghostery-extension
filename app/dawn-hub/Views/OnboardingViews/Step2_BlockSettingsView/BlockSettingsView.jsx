@@ -19,6 +19,11 @@ import Tooltip from '../../../../shared-components/Tooltip';
 import RadioButton from '../../../../shared-components/RadioButton/RadioButton';
 import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox/ToggleCheckbox';
 import { BLOCK_SETTINGS, ONBOARDING } from '../../OnboardingView/OnboardingConstants';
+import {
+	BLOCKING_POLICY_RECOMMENDED,
+	BLOCKING_POLICY_NOTHING,
+	BLOCKING_POLICY_EVERYTHING
+} from '../../../../shared-hub/constants/BlockingPolicyConstants';
 
 /**
  * @class Implement the Block Settings View for the Dawn Hub onboarding flow
@@ -82,26 +87,26 @@ class BlockSettingsView extends Component {
 		if (typeof blockingPolicy === 'number') {
 			switch (blockingPolicy) {
 				case 1:
-					decodedPolicy = 'BLOCKING_POLICY_EVERYTHING';
+					decodedPolicy = BLOCKING_POLICY_EVERYTHING;
 					break;
 				case 2:
-					decodedPolicy = 'BLOCKING_POLICY_RECOMMENDED';
+					decodedPolicy = BLOCKING_POLICY_RECOMMENDED;
 					break;
 				case 3:
-					decodedPolicy = 'BLOCKING_POLICY_NOTHING';
+					decodedPolicy = BLOCKING_POLICY_NOTHING;
 					break;
 				default:
 					break;
 			}
 		} else if (typeof blockingPolicy === 'string') {
 			switch (blockingPolicy) {
-				case 'BLOCKING_POLICY_EVERYTHING':
+				case BLOCKING_POLICY_EVERYTHING:
 					decodedPolicy = 1;
 					break;
-				case 'BLOCKING_POLICY_RECOMMENDED':
+				case BLOCKING_POLICY_RECOMMENDED:
 					decodedPolicy = 2;
 					break;
-				case 'BLOCKING_POLICY_NOTHING':
+				case BLOCKING_POLICY_NOTHING:
 					decodedPolicy = 3;
 					break;
 				default:
