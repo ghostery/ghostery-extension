@@ -299,17 +299,10 @@ BlockSettingsView.propTypes = {
 		setBlockSetupSeen: PropTypes.func.isRequired,
 	}).isRequired,
 	setupLifecycle: PropTypes.shape({
-		blockingPolicy: PropTypes.string.isRequired,
-		enable_anti_tracking: PropTypes.bool.isRequired,
-		enable_ad_block: PropTypes.bool.isRequired,
-		enable_smart_block: PropTypes.bool.isRequired,
 		blockSetupSeen: PropTypes.bool.isRequired,
-		searchSetupSeen: PropTypes.bool.isRequired,
 	}).isRequired,
-	antiSuite: PropTypes.shape({
-		enable_ad_block: PropTypes.bool.isRequired,
-		enable_anti_tracking: PropTypes.bool.isRequired,
-		enable_smart_block: PropTypes.bool.isRequired,
-	}).isRequired,
+	enable_ad_block: PropTypes.bool.isRequired,
+	enable_anti_tracking: PropTypes.bool.isRequired,
+	enable_smart_block: PropTypes.bool.isRequired,
 	blockingPolicy: PropTypes.string.isRequired
 };

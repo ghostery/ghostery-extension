@@ -22,7 +22,13 @@ jest.mock('../../../../../shared-components/Tooltip');
 
 describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.test.jsx', () => {
 	const initialState = {
-		setupLifecycle: noop,
+		setupLifecycle: {
+			blockSetupSeen: false
+		},
+		blockingPolicy: '',
+		enable_ad_block: false,
+		enable_anti_tracking: false,
+		enable_smart_block: false,
 		actions: {
 			logout: noop,
 			setAntiTracking: noop,
