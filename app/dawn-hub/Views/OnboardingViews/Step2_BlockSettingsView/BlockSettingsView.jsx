@@ -195,6 +195,24 @@ class BlockSettingsView extends Component {
 		}
 	}
 
+	renderQuestion = (question, tooltip = null) => {
+		if (tooltip) {
+			return (
+				<li className="BlockSettingsView_question">
+					<div className="BlockSettingsView_questionBlock">
+						{question}
+						<div className="BlockSettingsView__infoIcon g-tooltip">
+							<Tooltip header={tooltip} position="top" delay="300" isOnboardingHub />
+						</div>
+					</div>
+				</li>
+			);
+		}
+		return (
+			<li className="BlockSettingsView_question">{question}</li>
+		);
+	}
+
 	renderAnswerBlock = (checked, category, answer, label) => (
 		<div className="BlockSettingsView_answerBlock" onClick={() => this.handleAnswerChange(category, answer)}>
 			<div className="BlockSettingsView__radioButtonContainer">
@@ -233,38 +251,17 @@ class BlockSettingsView extends Component {
 							<div className="BlockSettingsView_checkboxLabel" onClick={() => this.toggleRecommendedChoices(!recommendedChoices)}>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
 						</div>
 						<ol>
-							<li className="BlockSettingsView_question">{t('ghostery_dawn_onboarding_question_block_ads')}</li>
+							{this.renderQuestion(t('ghostery_dawn_onboarding_question_block_ads'))}
 							{this.renderAnswerBlock((enable_ad_block === true), 'enable_ad_block', true, t('hub_setup_modal_button_yes'))}
 							{this.renderAnswerBlock((enable_ad_block === false), 'enable_ad_block', false, t('hub_setup_modal_button_no'))}
-							<li className="BlockSettingsView_question">
-								<div className="BlockSettingsView_questionBlock">
-									{t('ghostery_dawn_onboarding_question_kinds_of_trackers')}
-									<div className="BlockSettingsView__infoIcon g-tooltip">
-										<Tooltip header={t('ghostery_dawn_onboarding_info_blocking_all')} position="top" delay="300" isOnboardingHub />
-									</div>
-								</div>
-							</li>
+							{this.renderQuestion(t('ghostery_dawn_onboarding_question_kinds_of_trackers'), t('ghostery_dawn_onboarding_info_blocking_all'))}
 							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
 							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
 							{this.renderAnswerBlock((kindsOfTrackers === 3), 'kindsOfTrackers', 3, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
-							<li className="BlockSettingsView_question">
-								<div className="BlockSettingsView_questionBlock">
-									{t('ghostery_dawn_onboarding_question_anti_tracking')}
-									<div className="BlockSettingsView__infoIcon g-tooltip">
-										<Tooltip header={t('ghostery_dawn_onboarding_info_anti_tracking')} position="top" delay="300" isOnboardingHub />
-									</div>
-								</div>
-							</li>
+							{this.renderQuestion(t('ghostery_dawn_onboarding_question_anti_tracking'), t('ghostery_dawn_onboarding_info_anti_tracking'))}
 							{this.renderAnswerBlock((enable_anti_tracking === true), 'enable_anti_tracking', true, t('hub_setup_modal_button_yes'))}
 							{this.renderAnswerBlock((enable_anti_tracking === false), 'enable_anti_tracking', false, t('hub_setup_modal_button_no'))}
-							<li className="BlockSettingsView_question">
-								<div className="BlockSettingsView_questionBlock">
-									{t('ghostery_dawn_onboarding_question_smart_browsing')}
-									<div className="BlockSettingsView__infoIcon g-tooltip">
-										<Tooltip header={t('ghostery_dawn_onboarding_info_smart_browsing')} position="top" delay="300" isOnboardingHub />
-									</div>
-								</div>
-							</li>
+							{this.renderQuestion(t('ghostery_dawn_onboarding_question_smart_browsing'), t('ghostery_dawn_onboarding_info_smart_browsing'))}
 							{this.renderAnswerBlock((enable_smart_block === true), 'enable_smart_block', true, t('hub_setup_modal_button_yes'))}
 							{this.renderAnswerBlock((enable_smart_block === false), 'enable_smart_block', false, t('hub_setup_modal_button_no'))}
 						</ol>
