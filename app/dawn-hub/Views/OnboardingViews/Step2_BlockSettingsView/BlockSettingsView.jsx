@@ -53,10 +53,8 @@ class BlockSettingsView extends Component {
 				blockingPolicy
 			} = this.props;
 
-			const decodedPolicy = this.decodeBlockingPolicy(blockingPolicy);
-
 			this.setState({
-				kindsOfTrackers: decodedPolicy,
+				kindsOfTrackers: blockingPolicy,
 				enable_ad_block,
 				enable_anti_tracking,
 				enable_smart_block
@@ -73,45 +71,29 @@ class BlockSettingsView extends Component {
 			kindsOfTrackers
 		} = this.state;
 
-		if (!recommendedChoices && kindsOfTrackers === 2 && enable_ad_block === true && enable_anti_tracking === true && enable_smart_block === true) {
+		if (!recommendedChoices && kindsOfTrackers === BLOCKING_POLICY_RECOMMENDED && enable_ad_block === true && enable_anti_tracking === true && enable_smart_block === true) {
 			// eslint-disable-next-line react/no-did-update-set-state
 			this.setState({ recommendedChoices: true });
-		} else if (recommendedChoices && (kindsOfTrackers !== 2 || enable_ad_block !== true || enable_anti_tracking !== true || enable_smart_block !== true)) {
+		} else if (recommendedChoices && (kindsOfTrackers !== BLOCKING_POLICY_RECOMMENDED || enable_ad_block !== true || enable_anti_tracking !== true || enable_smart_block !== true)) {
 			// eslint-disable-next-line react/no-did-update-set-state
 			this.setState({ recommendedChoices: false });
 		}
 	}
 
-	decodeBlockingPolicy = (blockingPolicy) => {
+	enumerateBlockingPolicy = (blockingPolicy) => {
 		let decodedPolicy;
-		if (typeof blockingPolicy === 'number') {
-			switch (blockingPolicy) {
-				case 1:
-					decodedPolicy = BLOCKING_POLICY_EVERYTHING;
-					break;
-				case 2:
-					decodedPolicy = BLOCKING_POLICY_RECOMMENDED;
-					break;
-				case 3:
-					decodedPolicy = BLOCKING_POLICY_NOTHING;
-					break;
-				default:
-					break;
-			}
-		} else if (typeof blockingPolicy === 'string') {
-			switch (blockingPolicy) {
-				case BLOCKING_POLICY_EVERYTHING:
-					decodedPolicy = 1;
-					break;
-				case BLOCKING_POLICY_RECOMMENDED:
-					decodedPolicy = 2;
-					break;
-				case BLOCKING_POLICY_NOTHING:
-					decodedPolicy = 3;
-					break;
-				default:
-					break;
-			}
+		switch (blockingPolicy) {
+			case BLOCKING_POLICY_EVERYTHING:
+				decodedPolicy = 1;
+				break;
+			case BLOCKING_POLICY_RECOMMENDED:
+				decodedPolicy = 2;
+				break;
+			case BLOCKING_POLICY_NOTHING:
+				decodedPolicy = 3;
+				break;
+			default:
+				break;
 		}
 		return decodedPolicy;
 	}
@@ -121,7 +103,7 @@ class BlockSettingsView extends Component {
 			this.setState({
 				recommendedChoices: true,
 				enable_ad_block: true,
-				kindsOfTrackers: 2,
+				kindsOfTrackers: BLOCKING_POLICY_RECOMMENDED,
 				enable_anti_tracking: true,
 				enable_smart_block: true
 			});
@@ -150,7 +132,7 @@ class BlockSettingsView extends Component {
 		} = this.state;
 
 		const partOne = (enable_ad_block) ? '1' : '2';
-		const partTwo = kindsOfTrackers.toString();
+		const partTwo = this.enumerateBlockingPolicy(kindsOfTrackers);
 		const partThree = (enable_anti_tracking) ? '1' : '2';
 		const partFour = (enable_smart_block) ? '1' : '2';
 
@@ -181,9 +163,7 @@ class BlockSettingsView extends Component {
 			setAntiTracking({ enable_anti_tracking });
 			setSmartBlocking({ enable_smart_block });
 
-			const decodedPolicy = this.decodeBlockingPolicy(kindsOfTrackers);
-
-			setBlockingPolicy({ blockingPolicy: decodedPolicy });
+			setBlockingPolicy({ blockingPolicy: kindsOfTrackers });
 
 			setSetupStep({
 				setup_step: BLOCK_SETTINGS,
@@ -260,9 +240,9 @@ class BlockSettingsView extends Component {
 							{this.renderAnswerBlock((enable_ad_block === true), 'enable_ad_block', true, t('hub_setup_modal_button_yes'))}
 							{this.renderAnswerBlock((enable_ad_block === false), 'enable_ad_block', false, t('hub_setup_modal_button_no'))}
 							{this.renderQuestion(t('ghostery_dawn_onboarding_question_kinds_of_trackers'), t('ghostery_dawn_onboarding_info_blocking_all'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 1), 'kindsOfTrackers', 1, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 2), 'kindsOfTrackers', 2, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
-							{this.renderAnswerBlock((kindsOfTrackers === 3), 'kindsOfTrackers', 3, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
+							{this.renderAnswerBlock((kindsOfTrackers === BLOCKING_POLICY_EVERYTHING), 'kindsOfTrackers', BLOCKING_POLICY_EVERYTHING, t('ghostery_dawn_onboarding_kinds_of_trackers_all'))}
+							{this.renderAnswerBlock((kindsOfTrackers === BLOCKING_POLICY_RECOMMENDED), 'kindsOfTrackers', BLOCKING_POLICY_RECOMMENDED, t('ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics'))}
+							{this.renderAnswerBlock((kindsOfTrackers === BLOCKING_POLICY_NOTHING), 'kindsOfTrackers', BLOCKING_POLICY_NOTHING, t('ghostery_dawn_onboarding_kinds_of_trackers_none'))}
 							{this.renderQuestion(t('ghostery_dawn_onboarding_question_anti_tracking'), t('ghostery_dawn_onboarding_info_anti_tracking'))}
 							{this.renderAnswerBlock((enable_anti_tracking === true), 'enable_anti_tracking', true, t('hub_setup_modal_button_yes'))}
 							{this.renderAnswerBlock((enable_anti_tracking === false), 'enable_anti_tracking', false, t('hub_setup_modal_button_no'))}

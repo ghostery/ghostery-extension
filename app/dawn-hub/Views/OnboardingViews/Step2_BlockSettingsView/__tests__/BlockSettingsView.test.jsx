@@ -16,6 +16,9 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import BlockSettingsView from '../BlockSettingsView';
+import {
+	BLOCKING_POLICY_RECOMMENDED,
+} from '../../../../../shared-hub/constants/BlockingPolicyConstants';
 
 const noop = () => {};
 jest.mock('../../../../../shared-components/Tooltip');
@@ -75,7 +78,7 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 
 			instance.toggleRecommendedChoices(true);
 			expect(component.state('enable_ad_block')).toBe(true);
-			expect(component.state('kindsOfTrackers')).toBe(2);
+			expect(component.state('kindsOfTrackers')).toBe(BLOCKING_POLICY_RECOMMENDED);
 			expect(component.state('enable_anti_tracking')).toBe(true);
 			expect(component.state('enable_smart_block')).toBe(true);
 
