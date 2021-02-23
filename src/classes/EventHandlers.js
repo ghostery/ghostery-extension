@@ -346,6 +346,11 @@ class EventHandlers {
 		}
 
 		const app_id = bugDb.db.bugs[bug_id].aid;
+
+		if (app_id === 67) { // Bing Ads - GH-2283
+			return { cancel: false };
+		}
+
 		const cat_id = bugDb.db.apps[app_id].cat;
 		const incognito = tabInfo.getTabInfo(tab_id, 'incognito');
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
