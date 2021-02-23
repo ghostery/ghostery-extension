@@ -156,7 +156,7 @@ OnboardingViewContainer.defaultProps = {
 	setup: {
 		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
-		enable_ad_block: true,
+		enable_ad_block: false,
 		enable_smart_block: true,
 	},
 };
