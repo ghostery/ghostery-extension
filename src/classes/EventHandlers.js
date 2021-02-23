@@ -347,7 +347,7 @@ class EventHandlers {
 
 		const app_id = bugDb.db.bugs[bug_id].aid;
 
-		if (app_id === 67) { // Bing Ads - GH-2283
+		if (app_id === 67) { // GH-2283
 			return { cancel: false };
 		}
 

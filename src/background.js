@@ -1538,6 +1538,8 @@ function initializeGhosteryModules() {
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
 
+				cliqz.prefs.set('modules.adblocker.enabled', conf.enable_ad_block); // GH-2283
+
 				if (!antitracking.isDisabled) {
 					antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
 				}

@@ -97,6 +97,7 @@ class ConfData {
 			(async() => {
 				await globals.BROWSER_INFO_READY;
 				_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
+				_initProperty('enable_ad_block', !IS_CLIQZ && BROWSER_INFO.name !== 'ghostery_desktop'); // GH-2283
 			})();
 
 			// simple props
@@ -111,7 +112,6 @@ class ConfData {
 			_initProperty('cliqz_import_state', 0);
 			_initProperty('cmp_version', 0);
 			_initProperty('current_theme', 'default');
-			_initProperty('enable_ad_block', !IS_CLIQZ);
 			_initProperty('enable_anti_tracking', !IS_CLIQZ);
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', true);
