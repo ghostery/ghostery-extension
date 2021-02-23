@@ -24,7 +24,6 @@ CLIQZ.config.default_prefs = {
 	...CLIQZ.config.default_prefs,
 	// the following are enabled by default on non-android platforms
 	'modules.human-web.enabled': !IS_ANDROID,
-	'modules.adblocker.enabled': false, // GH-2283
 	'modules.hpnv2.enabled': !IS_ANDROID,
 	// the following are enabled for android only
 	'modules.human-web-lite.enabled': IS_ANDROID,
@@ -33,6 +32,14 @@ CLIQZ.config.default_prefs = {
 };
 if (IS_ANDROID) {
 	CLIQZ.config.settings.HW_CHANNEL = 'android';
+}
+
+// GH-2283
+if (globals.JUST_INSTALLED) {
+	CLIQZ.config.default_prefs = {
+		...CLIQZ.config.default_prefs,
+		'modules.adblocker.enabled': false,
+	};
 }
 
 export default new (CLIQZ.App)({ debug: globals.DEBUG });
