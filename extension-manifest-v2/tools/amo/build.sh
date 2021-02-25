@@ -42,6 +42,8 @@ if ! type jq > /dev/null; then
 	exit 1
 fi
 
+echo "Checking for nvm. If the script exits here, manually run 'nvm install lts/dubnium' and re-run ./build.sh"
+
 # Source nvm.sh
 if [[ -f /usr/local/opt/nvm/nvm.sh ]]; then
 	# Homebrew
