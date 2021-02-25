@@ -1,4 +1,4 @@
-### GHOSTERY 8.5.5 (February 18, 2021)
+### GHOSTERY 8.5.5 (February 25, 2021)
 
 + Integrate new v4 tracker databases (#616)
 + Pull tracker meta data from whotracks.me (#616)
