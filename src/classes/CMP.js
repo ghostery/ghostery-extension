@@ -87,6 +87,20 @@ class CMP {
 	}
 
 	static _buildUrl() {
+		let subStatus = 'free';
+		if (conf.account && conf.account.subscriptionData) {
+			switch (conf.account.subscriptionData.productName) {
+				case 'Ghostery Plus':
+					subStatus = 'plus';
+					break;
+				case 'Ghostery Premium':
+					subStatus = 'premium';
+					break;
+				default:
+					break;
+			}
+		}
+
 		return (`${CMP_BASE_URL}/check
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
@@ -97,7 +111,8 @@ class CMP {
 			&ua=${encodeURIComponent(BROWSER_INFO.name)}
 			&lc=${encodeURIComponent(conf.last_cmp_date)}
 			&v=${encodeURIComponent(conf.cmp_version)}
-			&l=${encodeURIComponent(conf.language)}`
+			&l=${encodeURIComponent(conf.language)}
+			&ss=${encodeURIComponent(subStatus)}`
 		);
 	}
 
