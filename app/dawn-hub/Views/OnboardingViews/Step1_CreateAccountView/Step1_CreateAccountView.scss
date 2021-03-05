@@ -133,6 +133,21 @@ $color-create-account-form-error-red: #e74055;
 		}
 	}
 }
+.Step1_CreateAccountView__signOutContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 32px;
+	color: $ghosty-blue;
+	font-size: 16px;
+}
+.Step1_CreateAccountView__signOut {
+	text-decoration: underline;
+	&:hover {
+		color: $link-blue;
+		cursor: pointer;
+	}
+}
 .Step1_CreateAccountView--addMarginSide {
 	margin-left: 10px;
 	margin-right: 10px;

@@ -145,14 +145,12 @@ class BlockSettingsView extends Component {
 		const {
 			recommendedChoices, enable_ad_block, kindsOfTrackers, enable_anti_tracking, enable_smart_block
 		} = this.state;
-		const { actions } = this.props;
-		const { logout } = actions;
 		return (
 			<Fragment>
 				<div className="BlockSettingsView__relativeContainer">
 					<div className="BlockSettingsView__backContainer">
 						<span className="BlockSettingsView__caret left" />
-						<NavLink to="/onboarding/1" onClick={() => logout()}>
+						<NavLink to="/onboarding/1">
 							<span className="BlockSettingsView__back">{t('ghostery_dawn_onboarding_back')}</span>
 						</NavLink>
 					</div>
@@ -224,7 +222,6 @@ export default BlockSettingsView;
 // PropTypes ensure we pass required props of the correct type
 BlockSettingsView.propTypes = {
 	actions: PropTypes.shape({
-		logout: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
 		setSmartBlocking: PropTypes.func.isRequired,
