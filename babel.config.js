@@ -26,6 +26,11 @@ module.exports = function(api) {
 			// Don't transpile the './src' dir
 			presets = [];
 			break;
+		case 'cliqz':
+			// Set plugins to run over @cliqz modules
+			presets = [];
+			plugins = ['@babel/plugin-transform-named-capturing-groups-regex'];
+			break;
 		case 'test':
 			// Calling Jest from package.json with `BABEL_ENV=test` set
 			plugins.push('@babel/plugin-transform-modules-commonjs');

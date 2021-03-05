@@ -144,6 +144,17 @@ module.exports = {
 					'eslint-loader'
 				]
 			}, {
+				test: /\.js$/,
+				include: [path.resolve(__dirname, 'node_modules/@cliqz/adblocker-extended-selectors')],
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							envName: 'cliqz',
+						}
+					}
+				]
+			}, {
 				test: /\.scss$/,
 				resolve: {
 					extensions: ['.scss', '.sass']
