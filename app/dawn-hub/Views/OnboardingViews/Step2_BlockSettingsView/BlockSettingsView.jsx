@@ -62,24 +62,6 @@ class BlockSettingsView extends Component {
 		}
 	}
 
-	componentDidUpdate() {
-		const {
-			recommendedChoices,
-			enable_anti_tracking,
-			enable_ad_block,
-			enable_smart_block,
-			kindsOfTrackers
-		} = this.state;
-
-		if (!recommendedChoices && kindsOfTrackers === BLOCKING_POLICY_RECOMMENDED && enable_ad_block === true && enable_anti_tracking === true && enable_smart_block === true) {
-			// eslint-disable-next-line react/no-did-update-set-state
-			this.setState({ recommendedChoices: true });
-		} else if (recommendedChoices && (kindsOfTrackers !== BLOCKING_POLICY_RECOMMENDED || enable_ad_block !== true || enable_anti_tracking !== true || enable_smart_block !== true)) {
-			// eslint-disable-next-line react/no-did-update-set-state
-			this.setState({ recommendedChoices: false });
-		}
-	}
-
 	enumerateBlockingPolicy = (blockingPolicy) => {
 		let decodedPolicy;
 		switch (blockingPolicy) {
@@ -116,6 +98,19 @@ class BlockSettingsView extends Component {
 				enable_smart_block: null
 			});
 		}
+	}
+
+	recommendedChoicesActive = () => {
+		const {
+			enable_anti_tracking,
+			enable_ad_block,
+			enable_smart_block,
+			kindsOfTrackers
+		} = this.state;
+		if (kindsOfTrackers === BLOCKING_POLICY_RECOMMENDED && enable_ad_block === true && enable_anti_tracking === true && enable_smart_block === true) {
+			return true;
+		}
+		return false;
 	}
 
 	handleAnswerChange = (category, answer) => {
@@ -230,7 +225,7 @@ class BlockSettingsView extends Component {
 						<div className="BlockSettingsView_checkboxBlock">
 							<ToggleCheckbox
 								className="BlockSettingsView_checkbox"
-								checked={recommendedChoices}
+								checked={this.recommendedChoicesActive()}
 								onChange={() => this.toggleRecommendedChoices(!recommendedChoices)}
 							/>
 							<div className="BlockSettingsView_checkboxLabel" onClick={() => this.toggleRecommendedChoices(!recommendedChoices)}>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
