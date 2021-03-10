@@ -31,7 +31,6 @@ import {
 	SEARCH_PRIVADO,
 	SEARCH_QWANT,
 	SEARCH_ENCRYPT,
-	SEARCH_TAILCAT,
 	SEARCH_OTHER,
 	DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH
 } from './ChooseDefaultSearchConstants';
@@ -51,7 +50,6 @@ const searchSetupNumbers = [
 	{ name: SEARCH_PRIVADO, dawn_setup_number: 11 },
 	{ name: SEARCH_QWANT, dawn_setup_number: 12 },
 	{ name: SEARCH_ENCRYPT, dawn_setup_number: 13 },
-	{ name: SEARCH_TAILCAT, dawn_setup_number: 14 },
 ];
 
 const GLOW_BROWSER_SEARCH_GET_NAME = 'Ghostery Glow';
