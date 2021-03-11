@@ -16,6 +16,12 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import ToggleCheckbox from '../../../../shared-components/ToggleCheckbox';
 
+const renderLabel = (htmlFor, labelCopy) => (
+	<label htmlFor={htmlFor} className="Step1_CreateAccountForm__inputLabel">
+		<span>{labelCopy}</span>
+	</label>
+);
+
 /**
  * A Functional React component for rendering the Browser Create Account View
  * @return {JSX} JSX for rendering the Browser Create Account View of the Dawn Hub app
@@ -58,9 +64,7 @@ export const Step1_CreateAccountForm = (props) => {
 		<form onSubmit={handleSubmit}>
 			<div className="Step1_CreateAccountForm--addPaddingTop row align-center-middle">
 				<div className="columns small-10 medium-6">
-					<label htmlFor="create-account-email" className="Step1_CreateAccountForm__inputLabel">
-						{t('email_colon')}
-					</label>
+					{renderLabel('create-account-email', t('email_colon'))}
 					<input
 						id="create-account-email"
 						className={emailInputClassNames}
@@ -81,9 +85,7 @@ export const Step1_CreateAccountForm = (props) => {
 					)}
 				</div>
 				<div className="columns small-10 medium-6">
-					<label htmlFor="create-account-confirmEmail" className="Step1_CreateAccountForm__inputLabel">
-						{t('confirm_email_colon')}
-					</label>
+					{renderLabel('create-account-confirmEmail', t('confirm_email_colon'))}
 					<input
 						id="create-account-confirmEmail"
 						className={confirmInputClassNames}
@@ -105,9 +107,7 @@ export const Step1_CreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-6">
-					<label htmlFor="create-account-firstName" className="Step1_CreateAccountForm__inputLabel">
-						{t('hub_create_account_label_first_name')}
-					</label>
+					{renderLabel('create-account-firstName', t('hub_create_account_label_first_name'))}
 					<input
 						id="create-account-firstName"
 						className="Step1_CreateAccountForm__inputBox"
@@ -120,9 +120,7 @@ export const Step1_CreateAccountForm = (props) => {
 					/>
 				</div>
 				<div className="columns small-10 medium-6">
-					<label htmlFor="create-account-lastName" className="Step1_CreateAccountForm__inputLabel">
-						{t('hub_create_account_label_email_last_name')}
-					</label>
+					{renderLabel('create-account-lastName', t('hub_create_account_label_email_last_name'))}
 					<input
 						id="create-account-lastName"
 						className="Step1_CreateAccountForm__inputBox"
@@ -137,9 +135,7 @@ export const Step1_CreateAccountForm = (props) => {
 			</div>
 			<div className="row align-center-middle">
 				<div className="columns small-10 medium-6">
-					<label htmlFor="create-account-password" className="Step1_CreateAccountForm__inputLabel">
-						{t('password_colon')}
-					</label>
+					{renderLabel('create-account-password', t('password_colon'))}
 					<input
 						id="create-account-password"
 						className={passwordInputClassNames}
@@ -166,9 +162,7 @@ export const Step1_CreateAccountForm = (props) => {
 					)}
 				</div>
 				<div className="columns small-10 medium-6">
-					<label htmlFor="create-account-password" className="Step1_CreateAccountForm__inputLabel">
-						{t('confirm_password_colon')}
-					</label>
+					{renderLabel('create-account-password', t('confirm_password_colon'))}
 					<input
 						id="create-account-password"
 						className={passwordInputClassNames}

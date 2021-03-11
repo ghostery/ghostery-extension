@@ -29,10 +29,8 @@
 	position: absolute;
 	display: flex;
 	width: 68px;
-	margin-top: 15px;
-	@include breakpoint(small down) {
-		margin-top: -21px;
-	}
+	margin-top: 22px;
+
 	.ChooseSearchView__back {
 		margin-top: 8px;
 		font-size: 16px;
@@ -40,7 +38,6 @@
 		text-decoration: underline;
 	}
 }
-
 
 .ChooseSearchView__title {
   font-size: 24px;
@@ -119,6 +116,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+	width: 300px;
 }
 
 @mixin option-font {
@@ -131,14 +129,18 @@
 }
 
 .ChooseSearchView__optionDescriptionTitle {
-	padding-top: 10px;
-  line-height: 0.8;
+  padding-top: 10px;
+  margin-bottom: 2px;
+  line-height: 1.0;
   font-size: 14px;
   font-weight: 500;
+  text-align: center;
 }
 
 .ChooseSearchView__optionDescriptionSubtitle {
   font-size: 14px;
+  line-height: 1.0;
+  text-align: center;
 }
 
 .ChooseSearchView__optionDropdownContainer {
@@ -288,21 +290,28 @@
 }
 
 .ChooseSearchView__modalOptionLogo {
-  padding: 70px 0;
+  padding-bottom: 40px;
+}
+
+.ChooseSearchView__modalDawnLogo {
+  position: absolute;
+  top: 20px;
 }
 
 .ChooseSearchView__modalDescription {
   font-size: 24px;
   font-weight: 500;
-  line-height: 1.75;
+  line-height: 1.6;
   text-align: center;
   color: $tundora;
   width: 70%;
-	margin-bottom: 113px;
-	white-space: pre-line;
+  margin-bottom: 40px;
+  white-space: pre-line;
 }
 
 .ChooseSearchView__modalContent {
+  display: flex;
+  align-items: center;
   position: relative;
   width: 901px;
   min-height: 632px;

@@ -476,8 +476,8 @@
 		"message": "차단됨 "
 	},
 	"blocking_category_whitelisted": {
-		"description": "as in '5 (trackers) WHITELISTED'",
-		"message": "허용 목록에 추가됨"
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "신뢰할 수 있는 사이트"
 	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ 성공!$BOLD_HTML_END$ 계정 검증 이메일이 $EMAIL$으로 발송되었습니다.",
@@ -779,8 +779,8 @@
 		"message": "이 사이트는 제한된 사이트 목록에서 제거된 다음 신뢰할 수 있는 사이트 목록에 추가되었습니다."
 	},
 	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "이 사이트는 이미 허용 목록에 있습니다."
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "이 사이트는 이미 신뢰할 수 있는 사이트에 등록되어 있습니다."
 	},
 	"settings_adblocker": {
 		"message": "광고 차단 목록"
@@ -1125,16 +1125,16 @@
 		"message": "변경 내용을 보려면 다시 로드하십시오."
 	},
 	"alert_site_trusted": {
-		"message": "사이트가 허용 목록에 추가됨. 이 사이트에서 트래커가 허용되며 추적 방지가 활성화됩니다."
+		"message": "신뢰할 수 있는 사이트에 등록하였습니다. 이 사이트에서 추적 방지가 비활성화됩니다."
 	},
 	"alert_site_trusted_off": {
-		"message": "사이트가 허용 목록에서 제외됨."
+		"message": "신뢰할 수 있는 사이트 목록에서 제외되었습니다."
 	},
 	"alert_site_restricted": {
-		"message": "사이트가 블랙리스트에 추가되었습니다. 이 사이트에서 트래커가 차단되며 추적 방지가 활성화됩니다."
+		"message": "사이트 접근이 제한되었습니다. 이 사이트에서 트래커가 차단되며 추적 방지가 활성화됩니다."
 	},
 	"alert_site_restricted_off": {
-		"message": "사이트가 블랙리스트에서 제외됨."
+		"message": "사이트가 접근 제한 대상에서 제외되었습니다."
 	},
 	"tooltip_anti_track_on": {
 		"message": "개인 데이터 항목이 익명화되었습니다."
@@ -1366,6 +1366,9 @@
 	"hub_upgrade_additional_protection": {
 		"message": "추가 보호"
 	},
+	"hub_upgrade_maximum_protection": {
+		"message": "최대한의 보호"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "브라우저 트래커 차단"
 	},
@@ -1586,7 +1589,7 @@
 		"message": "신뢰 사이트 및 제한 사이트"
 	},
 	"hub_tutorial_trust_tagline": {
-		"message": "한 번의 클릭으로 화이트리스트 또는 블랙리스트 웹사이트 지정"
+		"message": "한 번의 클릭으로 신뢰할 수 있는 사이트 또는 접근 제한 웹사이트로 지정하십시오."
 	},
 	"hub_tutorial_trust_trust_site": {
 		"message": "이 사이트에서 항상 트래커를 허용합니다."
@@ -1722,6 +1725,9 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "8자에서 50자까지 사용할 수 있습니다."
 	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "입력한 암호가 일치하지 않습니다."
+	},
 	"hub_create_account_already_have_account": {
 		"message": "이미 Ghostery 계정이 있으십니까? "
 	},
@@ -1733,6 +1739,225 @@
 	},
 	"hub_create_account_toast_error": {
 		"message": "해당 이메일 주소는 이미 사용 중입니다.  다른 이메일을 선택하십시오. "
+	},
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "계속 진행하기 전에 오류를 수정해주십시오."
+	},
+	"ghostery_dawn_onboarding_install_heading": {
+		"message": "Ghostery Dawn을 설치하고 있습니다..."
+	},
+	"ghostery_dawn_onboarding_page_title": {
+	  "message": "Ghostery Dawn 허브 - 환영합니다"
+	},
+  	"ghostery_dawn_onboarding_header_title_login": {
+	  "message": "Ghostery Dawn 허브 - 로그인"
+	},
+	"ghostery_dawn_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Dawn 허브 - 차단 설정"
+	},
+	"ghostery_dawn_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Dawn 허브 - 검색 선택"
+	},
+	"ghostery_dawn_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Dawn 허브 - 요금제 선택"
+	},
+	"ghostery_dawn_onboarding_privacy": {
+		"message": "개인정보"
+	},
+	"ghostery_dawn_onboarding_search": {
+		"message": "검색"
+	},
+	"ghostery_dawn_onboarding_plan": {
+		"message": "계획"
+	},
+	"ghostery_dawn_onboarding_welcome": {
+		"message": "Ghostery Dawn에 오신 것을 환영합니다."
+	},
+	"ghostery_dawn_onboarding_lets_begin": {
+		"message": "시그니처 기술과 신기술을 통합하여 온라인 개인정보 보호를 중앙 집중화 했습니다."
+	},
+	"ghostery_dawn_onboarding_welcome_message": {
+		"message": "당사 브라우저는 이용자의 데이터를 보호하고 블로트웨어를 차단하므로 Chrome에서보다 3배 이상 빠르게 비공개 웹 서핑을 즐기실 수 있습니다."
+	},
+	"ghostery_dawn_onboarding_lets_do_this": {
+		"message": "내 브라우저 설정하기"
+	},
+	"ghostery_dawn_onboarding_your_privacy_plan": {
+		"message": "내 개인정보 보호 요금제"
+	},
+	"ghostery_dawn_onboarding_based_on_your_privacy_preferences": {
+		"message": "개인별 개인정보 보호 선호도에 기초"
+	},
+	"ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription": {
+		"message": "Ghostery Plus 구독으로 광고 제거"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo": {
+		"message": "첫 12개월 40% 할인"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo_description": {
+		"message": "더 빠르게 검색하세요. 광고 없는 쾌적한 환경을 제공해드릴 수 있도록 Plus 구독으로 Ghostery를 응원해주세요."
+	},
+	"ghostery_dawn_onboarding_or": {
+		"message": "원하지 않으신다면"
+	},
+	"ghostery_dawn_onboarding_keep": {
+		"message": "계속 사용하기"
+	},
+	"ghostery_dawn_onboarding_upgrade": {
+		"message": "업그레이드"
+	},
+	"ghostery_dawn_onboarding_start_trial": {
+		"message": "평가판 시작"
+	},
+	"ghostery_dawn_onboarding_see_all_plans": {
+		"message": "전체 요금제 보기"
+	},
+	"ghostery_dawn_onboarding_private_search": {
+		"message": "비공개 검색 기능"
+	},
+	"ghostery_dawn_onboarding_tracker_protection": {
+		"message": "트래커 보호"
+	},
+	"ghostery_dawn_onboarding_speedy_page_loads": {
+		"message": "빠른 페이지 로딩"
+	},
+	"ghostery_dawn_onboarding_intelligence_technology": {
+		"message": "지능형 기술"
+	},
+	"ghostery_dawn_onboarding_ad_free": {
+		"message": "광고 없는 환경"
+	},
+	"ghostery_dawn_onboarding_supports_ghosterys_mission": {
+		"message": "Ghostery 원하기"
+	},
+	"ghostery_dawn_onboarding_unlimited_bandwidth": {
+		"message": "무제한 대역폭"
+	},
+	"ghostery_dawn_onboarding_already_premium_subscriber": {
+		"message": "이미 Premium을 구독하고 계십니다"
+	},
+	"ghostery_dawn_onboarding_already_plus_subscriber": {
+		"message": "이미 Plus를 구독하고 계십니다"
+	},
+	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
+		"message": "현재 요금제 유지/업그레이드"
+	},
+	"ghostery_dawn_onboarding_choose_an_option": {
+		"message": "옵션 선택"
+  },
+	"ghostery_dawn_onboarding_create_a_ghostery_account": {
+		"message": "Ghostery 계정 만들기"
+	},
+	"ghostery_dawn_onboarding_sync_settings": {
+		"message": "여러 장치에서 개인정보 보호 설정을 동기화할 수 있습니다."
+	},
+	"ghostery_dawn_onboarding_already_have_account": {
+		"message": "이미 계정이 있습니다."
+	},
+	"ghostery_dawn_onboarding_skip": {
+		"message": "건너뛰기"
+	},
+	"ghostery_dawn_onboarding_back": {
+		"message": "뒤로"
+	},
+	"ghostery_dawn_onboarding_we_take_your_privacy_very_seriously": {
+		"message": "귀하의 개인정보 보호는 매우 중요합니다. 더보기"
+	},
+	"ghostery_dawn_onboarding_private_by_design": {
+		"message": "이용자 맞춤"
+	},
+	"ghostery_dawn_onboarding_private_by_design_description": {
+		"message": "Ghostery는 개인정보 보호를 매우 중요하게 생각합니다. 그것이 이용자의 데이터 관리에 대하여 강력한 정책을 시행하는 이유입니다. Ghostery에서 계정을 만드실 때 수집하는 개인정보는 이용자의 이름과 이메일 주소뿐입니다. 해당 정보를 통해 여러 장치에서 설정을 동기화하고 중요 업데이트에 관한 알림을 받을 수 있는 사용자 환경 제공이 가능합니다. 어떠한 경우에도 당사는 이러한 데이터를 제3자와 공유하거나 이를 판매하지 않습니다."
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account": {
+		"message": "계정을 삭제할 수도 있나요?"
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account_description": {
+		"message": "Ghostery를 즐겨 이용하시길 바라지만, 회원 탈퇴를 하신다면 요청일로부터 90일 이내에 모든 개인정보를 삭제해 드리겠습니다."
+	},
+	"ghostery_dawn_onboarding_visit_our_privacy_policy": {
+		"message": "자세한 내용은 개인정보 보호 정책을 참고"
+	},
+	"ghostery_dawn_onboarding_create_an_account": {
+		"message": "새 계정을 만듭니다."
+	},
+	"ghostery_dawn_onboarding_you_are_signed_in_as": {
+		"message": "로그인한 이용자명"
+	},
+	"ghostery_dawn_onboarding_youve_successfully_set_up_your_browser": {
+		"message": "성공적으로 브라우저 설정을 마쳤습니다!"
+	},
+	"ghostery_dawn_onboarding_surf_with_ease": {
+		"message": "이제 손쉬운 인터넷 서핑을 즐기실 수 있습니다."
+	},
+	"ghostery_dawn_onboarding_start_browsing": {
+		"message": "브라우징 시작 "
+	},
+	"ghostery_dawn_onboarding_which_privacy_plan": {
+		"message": "나에게 맞는 개인정보 보호 요금제는?"
+	},
+	"ghostery_dawn_onboarding_tell_us_your_preferences": {
+		"message": "선호도를 알려주시면 추천 요금제를 보여드리겠습니다."
+	},
+	"ghostery_dawn_onboarding_recommended_choices": {
+		"message": "추천 요금제"
+	},
+	"ghostery_dawn_onboarding_question_block_ads": {
+		"message": "광고를 차단하고 싶으십니까?"
+	},
+	"ghostery_dawn_onboarding_question_kinds_of_trackers": {
+		"message": "어떤 종류의 트래커를 차단하고 싶으십니까?"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_all": {
+		"message": "모든 트래커"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_none": {
+		"message": "트래커 차단 안 함"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "모든 광고 및 애널리틱스 트래커"
+	},
+	"ghostery_dawn_onboarding_question_anti_tracking": {
+		"message": "추적 방지 기능을 활성화할까요?"
+	},
+	"ghostery_dawn_onboarding_question_smart_browsing": {
+		"message": "스마트 브라우징을 활성화할까요?"
+	},
+	"ghostery_dawn_onboarding_info_blocking_all": {
+		"message": "\"모든 트래커\"를 차단하면 일부 웹 사이트가 깨질 수 있습니다."
+	},
+	"ghostery_dawn_onboarding_info_anti_tracking": {
+		"message": "추적 방지는 트래커가 수집하려고 하는 고유 식별 데이터를 익명화합니다."
+	},
+	"ghostery_dawn_onboarding_info_smart_browsing": {
+		"message": "스마트 브라우징은 페이지 깨짐을 줄이고 페이지 로딩을 빠르게 하기 위해 차단 설정을 조정합니다."
+	},
+	"ghostery_dawn_onboarding_ad_free_private_search": {
+		"message": "광고 제거 비공개 검색 기능"
+	},
+	"ghostery_dawn_onboarding_recommended" : {
+	  "message": "(권장)"
+	},
+	"ghostery_dawn_onboarding_ad_supported_private_search": {
+		"message": "광고 있는 비공개 검색 기능"
+	},
+	"ghostery_dawn_onboarding_type_in_search_domain": {
+		"message": "검색 도메인에서 입력"
+	},
+	"ghostery_dawn_onboarding_go_back": {
+		"message": "뒤로 가기"
+	},
+	"ghostery_dawn_onboarding_confirm": {
+		"message": "확인"
+	},
+	"ghostery_dawn_onboarding_other": {
+		"message": "기타"
+	},
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "성공:"
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "오류:"
 	},
 	"enable_when_paused": {
 		"message": "이 기능을 사용하려면 Ghostery를 다시 시작하십시오."
@@ -2033,6 +2258,9 @@
 	"next": {
 		"message": "다음 "
 	},
+	"next_or_start_trial": {
+		"message": "다음/평가판 시작"
+	},
 	"previous": {
 		"message": "이전 "
 	},
@@ -2053,6 +2281,9 @@
 	},
 	"password_colon": {
 		"message": "암호:"
+	},
+	"confirm_password_colon": {
+		"message": "암호 확인:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "유효한 이메일을 입력해 주십시오."
@@ -2158,7 +2389,7 @@
 		"message": "내장 VPN"
 	},
 	"custom_whitelist_options": {
-		"message": "사용자 지정 허용 목록 옵션"
+		"message": "신뢰할 수 있는 사이트 옵션 사용자 지정"
 	},
 	"historical_tracking_insights": {
 		"message": "추적 기록 서비스"
@@ -2177,5 +2408,41 @@
 	},
 	"too_many_failed_logins_text": {
 		"message": "로그인 실패 횟수가 너무 많습니다. 1시간 후에 다시 시도하십시오."
+	},
+  	"choose_your_default_search": {
+		"message": "기본 검색 기능 선택"
+	},
+  	"pick_a_default_search_engine": {
+	  "message": "검색을 수행할 기본 검색 엔진을 선택하세요."
+	},
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "모든 질문에 답변해주세요"
+	},
+  	"ghostery_dawn_onboarding_startpage_warning": {
+	  "message": "참고: StartPage 검색 엔진은 이용자의 데이터를 수집하지 않습니다. 하지만 개인정보 보호 기능을 무료로 제공해드리기 위해 임의의 개인 광고를 표시합니다."
+	},
+	"ghostery_dawn_onboarding_bing_warning": {
+	  "message": "참고: Bing의 검색 엔진은 이용자의 데이터를 기록하여 타깃 광고를 제공하는 데 사용합니다."
+	},
+	"ghostery_dawn_onboarding_yahoo_warning": {
+	  "message": "참고: Yahoo의 검색 엔진은 이용자의 데이터를 기록하여 타깃 광고를 제공하는 데 사용합니다."
+	},
+  	"ghostery_dawn_onboarding_glow_benefit": {
+	  "message": "Plus 구독을 하시면 세계에서 최초이자 유일한 광고 제거 비공개 검색을 이용하실 수 있습니다! 쿠키를 사용하지 않는 특별한 로그인 방식으로 이용자의 검색을 완전히 비공개 상태로 유지합니다."
+	},
+  	"ghostery_dawn_onboarding_choose_alternate_search": {
+	  "message": "대체 검색 기능 사용"
+	},
+  	"ghostery_dawn_onboarding_select_option": {
+	  "message": "옵션 선택하기"
+	},
+  	"ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine": {
+	  "message": "선택한 대체 검색 엔진:"
+	},
+  	"ghostery_dawn_onboarding_create_account_for_trial": {
+	  "message": "Ghostery 검색 체험판 사용을 시작하려면, 계정을 만들거나 계정에 로그인해야 합니다. 이를 통해 여러 장치에서 개인정보 보호 설정을 동기화할 수 있습니다."
+	},
+  	"ghostery_dawn_onboarding_back_to_search_selection": {
+	  "message": "검색 기능 선택으로 돌아가기"
 	}
 }

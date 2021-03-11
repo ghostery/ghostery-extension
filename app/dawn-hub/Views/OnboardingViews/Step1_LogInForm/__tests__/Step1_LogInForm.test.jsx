@@ -15,7 +15,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
-import Step1_LoginForm from '../Step1_LoginForm';
+import Step1_LogInForm from '../Step1_LogInForm';
 
 const noop = () => {};
 describe('app/hub/Views/Step1_LoginForm component', () => {
@@ -33,7 +33,7 @@ describe('app/hub/Views/Step1_LoginForm component', () => {
 
 			const component = renderer.create(
 				<MemoryRouter>
-					<Step1_LoginForm {...initialState} />
+					<Step1_LogInForm {...initialState} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
@@ -49,7 +49,7 @@ describe('app/hub/Views/Step1_LoginForm component', () => {
 				handleSubmit: jest.fn(),
 			}
 
-			const component = shallow(<Step1_LoginForm {...happyState} />);
+			const component = shallow(<Step1_LogInForm {...happyState} />);
 			expect(happyState.handleSubmit.mock.calls.length).toBe(0);
 			component.find('form').simulate('submit');
 			expect(happyState.handleSubmit.mock.calls.length).toBe(1);
@@ -65,7 +65,7 @@ describe('app/hub/Views/Step1_LoginForm component', () => {
 				handleSubmit: jest.fn(),
 			};
 
-			const component = shallow(<Step1_LoginForm {...sadState} />);
+			const component = shallow(<Step1_LogInForm {...sadState} />);
 
 			expect(sadState.handleSubmit.mock.calls.length).toBe(0);
 			component.find('form').simulate('submit');

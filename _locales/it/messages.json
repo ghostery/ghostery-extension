@@ -476,8 +476,8 @@
 		"message": "Bloccati"
 	},
 	"blocking_category_whitelisted": {
-		"description": "as in '5 (trackers) WHITELISTED'",
-		"message": "Inserito nella whitelist"
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "Considerati affidabili"
 	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Successo! $BOLD_HTML_END$ È stata inviata un'email di verifica dell'account all'indirizzo $EMAIL$",
@@ -779,8 +779,8 @@
 		"message": "Questo sito è stato rimosso dal tua lista dei Siti Limitati e aggiunto alla tua lista dei Siti Affidabili."
 	},
 	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "Questo sito è già stato inserito nella whitelist."
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "Questo sito è già stato considerato affidabile."
 	},
 	"settings_adblocker": {
 		"message": "Elenco blocchi pubblicità"
@@ -1125,16 +1125,16 @@
 		"message": "Ricarica per vedere le modifiche."
 	},
 	"alert_site_trusted": {
-		"message": "Il sito è stato inserito nella whitelist. Su questo sito i tracker saranno consentiti e l'Anti-Tracking verrà disattivato."
+		"message": "Il sito è stato considerato affidabile. Su questo sito i tracker saranno consentiti e l'Anti-Tracking verrà disattivato."
 	},
 	"alert_site_trusted_off": {
-		"message": "Il sito non è più inserito nella whitelist."
+		"message": "Il sito non è più considerato affidabile."
 	},
 	"alert_site_restricted": {
-		"message": "Il sito è stato inserito nella blacklist. Su questo sito i tracker verranno bloccati e l'Anti-Tracking verrà attivato."
+		"message": "Il sito è stato limitato. Su questo sito i tracker verranno bloccati e l'Anti-Tracking verrà attivato."
 	},
 	"alert_site_restricted_off": {
-		"message": "Il sito non è più inserito nella blacklist."
+		"message": "Il sito non è più limitato."
 	},
 	"tooltip_anti_track_on": {
 		"message": "Punti di dati personali anonimizzati."
@@ -1366,6 +1366,9 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Protezione aggiuntiva"
 	},
+	"hub_upgrade_maximum_protection": {
+		"message": "Massimo livello di protezione"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Blocco Tracker del browser"
 	},
@@ -1586,7 +1589,7 @@
 		"message": "Siti Affidabili e Limitati"
 	},
 	"hub_tutorial_trust_tagline": {
-		"message": "Inserisci i siti in una whitelist o in una blacklist con un clic."
+		"message": "Considera affidabili o limita i siti Web con un clic."
 	},
 	"hub_tutorial_trust_trust_site": {
 		"message": "Consenti sempre i tracker sul sito."
@@ -1722,6 +1725,9 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Utilizza tra 8 e 50 caratteri."
 	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "La password non corrisponde."
+	},
 	"hub_create_account_already_have_account": {
 		"message": "Hai già un Account Ghostery?"
 	},
@@ -1733,6 +1739,225 @@
 	},
 	"hub_create_account_toast_error": {
 		"message": "Indirizzo e-mail già in uso. Sceglierne un altro."
+	},
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "Correggi gli errori prima di procedere."
+	},
+	"ghostery_dawn_onboarding_install_heading": {
+		"message": "Installazione di Ghostery Dawn in corso..."
+	},
+	"ghostery_dawn_onboarding_page_title": {
+	  "message": "Ghostery Dawn Hub - Benvenuto"
+	},
+  	"ghostery_dawn_onboarding_header_title_login": {
+	  "message": "Ghostery Dawn Hub - Accesso"
+	},
+	"ghostery_dawn_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Dawn Hub - Impostazioni di blocco"
+	},
+	"ghostery_dawn_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Dawn Hub - Opzione di ricerca"
+	},
+	"ghostery_dawn_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Dawn Hub - Opzioni piano"
+	},
+	"ghostery_dawn_onboarding_privacy": {
+		"message": "Privacy"
+	},
+	"ghostery_dawn_onboarding_search": {
+		"message": "Ricerca"
+	},
+	"ghostery_dawn_onboarding_plan": {
+		"message": "Piano"
+	},
+	"ghostery_dawn_onboarding_welcome": {
+		"message": "Benvenuto in Ghostery Dawn!"
+	},
+	"ghostery_dawn_onboarding_lets_begin": {
+		"message": "Abbiamo centralizzato la privacy online integrando la nostra firma e una serie di tecnologie innovative."
+	},
+	"ghostery_dawn_onboarding_welcome_message": {
+		"message": "Il nostro browser protegge i tuoi dati e blocca il bloatware in modo da consentirti di navigare privatamente e tre volte più velocemente rispetto a Chrome."
+	},
+	"ghostery_dawn_onboarding_lets_do_this": {
+		"message": "Configura il browser"
+	},
+	"ghostery_dawn_onboarding_your_privacy_plan": {
+		"message": "Il tuo piano privacy"
+	},
+	"ghostery_dawn_onboarding_based_on_your_privacy_preferences": {
+		"message": "In base alle tue preferenze in termini di privacy"
+	},
+	"ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription": {
+		"message": "Scegli l'abbonamento Ghostery Plus senza pubblicità"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo": {
+		"message": "Sconto del 40% per i primi 12 mesi"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo_description": {
+		"message": "Accedi più rapidamente ai contenuti che stai cercando. Con l'abbonamento Plus, garantisci a Ghostery il supporto di cui ha bisogno per consentirti di navigare senza pubblicità."
+	},
+	"ghostery_dawn_onboarding_or": {
+		"message": "OPPURE"
+	},
+	"ghostery_dawn_onboarding_keep": {
+		"message": "Mantieni"
+	},
+	"ghostery_dawn_onboarding_upgrade": {
+		"message": "Aggiorna"
+	},
+	"ghostery_dawn_onboarding_start_trial": {
+		"message": "Inizia prova"
+	},
+	"ghostery_dawn_onboarding_see_all_plans": {
+		"message": "Scopri tutti i piani"
+	},
+	"ghostery_dawn_onboarding_private_search": {
+		"message": "Ricerca privata"
+	},
+	"ghostery_dawn_onboarding_tracker_protection": {
+		"message": "Protezione tracker"
+	},
+	"ghostery_dawn_onboarding_speedy_page_loads": {
+		"message": "Caricamento rapido delle pagine"
+	},
+	"ghostery_dawn_onboarding_intelligence_technology": {
+		"message": "Tecnologia di intelligence"
+	},
+	"ghostery_dawn_onboarding_ad_free": {
+		"message": "Nessuna pubblicità"
+	},
+	"ghostery_dawn_onboarding_supports_ghosterys_mission": {
+		"message": "Supporta la missione di Ghostery"
+	},
+	"ghostery_dawn_onboarding_unlimited_bandwidth": {
+		"message": "Larghezza di banda illimitata"
+	},
+	"ghostery_dawn_onboarding_already_premium_subscriber": {
+		"message": "Sei già iscritto a Ghostery Premium"
+	},
+	"ghostery_dawn_onboarding_already_plus_subscriber": {
+		"message": "Sei già iscritto a Ghostery Plus"
+	},
+	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
+		"message": "Mantieni il piano attuale o effettua l'upgrade"
+	},
+	"ghostery_dawn_onboarding_choose_an_option": {
+		"message": "Scegli un'opzione"
+  },
+	"ghostery_dawn_onboarding_create_a_ghostery_account": {
+		"message": "Crea un account Ghostery"
+	},
+	"ghostery_dawn_onboarding_sync_settings": {
+		"message": "Ti consente di sincronizzare le impostazioni relative alla privacy su tutti i dispositivi."
+	},
+	"ghostery_dawn_onboarding_already_have_account": {
+		"message": "Ho già un account."
+	},
+	"ghostery_dawn_onboarding_skip": {
+		"message": "Salta"
+	},
+	"ghostery_dawn_onboarding_back": {
+		"message": "Indietro"
+	},
+	"ghostery_dawn_onboarding_we_take_your_privacy_very_seriously": {
+		"message": "La tua privacy è molto importante per noi. Scopri di più"
+	},
+	"ghostery_dawn_onboarding_private_by_design": {
+		"message": "Privacy by design"
+	},
+	"ghostery_dawn_onboarding_private_by_design_description": {
+		"message": "La tutela della privacy è estremamente importante per Ghostery. Per tale motivo, applichiamo delle regole molto rigide in materia di trattamento dei dati personali degli utenti. Quando crei un account Ghostery, gli unici dati che raccogliamo sono il tuo nome e il tuo indirizzo e-mail. Queste informazioni ci consentono di offrirti un'esperienza utente ottimale, permettendoti di sincronizzare le impostazioni su più dispositivi e di ricevere aggiornamenti importanti da parte nostra. In nessun caso tali dati vengono venduti o condivisi con terze parti."
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account": {
+		"message": "Posso eliminare il mio account?"
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account_description": {
+		"message": "Ci auguriamo che la tua esperienza d'uso di Ghostery sia positiva, ma qualora decidessi di eliminare il tuo conto, tutti i tuoi dati personali verranno rimossi entro 90 giorni a decorrere dalla data della richiesta."
+	},
+	"ghostery_dawn_onboarding_visit_our_privacy_policy": {
+		"message": "Consulta la nostra Informativa sulla privacy per maggiori informazioni"
+	},
+	"ghostery_dawn_onboarding_create_an_account": {
+		"message": "Crea un account."
+	},
+	"ghostery_dawn_onboarding_you_are_signed_in_as": {
+		"message": "Hai effettuato l'accesso come"
+	},
+	"ghostery_dawn_onboarding_youve_successfully_set_up_your_browser": {
+		"message": "Hai completato la configurazione del tuo browser."
+	},
+	"ghostery_dawn_onboarding_surf_with_ease": {
+		"message": "Ora puoi iniziare a navigare in tutta semplicità."
+	},
+	"ghostery_dawn_onboarding_start_browsing": {
+		"message": "Inizia a navigare"
+	},
+	"ghostery_dawn_onboarding_which_privacy_plan": {
+		"message": "Qual è il piano di privacy più adatto a te?"
+	},
+	"ghostery_dawn_onboarding_tell_us_your_preferences": {
+		"message": "Indicaci le tue preferenze e ti consiglieremo la soluzione migliore."
+	},
+	"ghostery_dawn_onboarding_recommended_choices": {
+		"message": "Scelte consigliate"
+	},
+	"ghostery_dawn_onboarding_question_block_ads": {
+		"message": "Desideri bloccare la pubblicità?"
+	},
+	"ghostery_dawn_onboarding_question_kinds_of_trackers": {
+		"message": "Quali tipologie di tracker desideri bloccare?"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_all": {
+		"message": "Tutti i tracker"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_none": {
+		"message": "Nessun tracker"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "Tutti i tracker pubblicitari e analitici"
+	},
+	"ghostery_dawn_onboarding_question_anti_tracking": {
+		"message": "Desideri disattivare l'Anti-Tracking?"
+	},
+	"ghostery_dawn_onboarding_question_smart_browsing": {
+		"message": "Desideri attivare Smart-Browsing?"
+	},
+	"ghostery_dawn_onboarding_info_blocking_all": {
+		"message": "Bloccando \"tutti i tracker\", alcuni siti Web portebbero non funzionare correttamente."
+	},
+	"ghostery_dawn_onboarding_info_anti_tracking": {
+		"message": "L'Anti-Tracking rende anonimi i dati identificabili in modo univoco che i tracker cercano di raccogliere."
+	},
+	"ghostery_dawn_onboarding_info_smart_browsing": {
+		"message": "Smart-Browsing regola le impostazioni di blocco in modo da ridurre le interruzioni e accelerare il caricamento delle pagine."
+	},
+	"ghostery_dawn_onboarding_ad_free_private_search": {
+		"message": "Ricerca privata senza pubblicità"
+	},
+	"ghostery_dawn_onboarding_recommended" : {
+	  "message": "(Scelta consigliata)"
+	},
+	"ghostery_dawn_onboarding_ad_supported_private_search": {
+		"message": "Ricerca privata con pubblicità"
+	},
+	"ghostery_dawn_onboarding_type_in_search_domain": {
+		"message": "Digita nel dominio di ricerca"
+	},
+	"ghostery_dawn_onboarding_go_back": {
+		"message": "Indietro"
+	},
+	"ghostery_dawn_onboarding_confirm": {
+		"message": "Conferma"
+	},
+	"ghostery_dawn_onboarding_other": {
+		"message": "Altro"
+	},
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "Operazione riuscita:"
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "Errore:"
 	},
 	"enable_when_paused": {
 		"message": "Per utilizzare questa funzione, Riattiva Ghostery."
@@ -2033,6 +2258,9 @@
 	"next": {
 		"message": "Successivo"
 	},
+	"next_or_start_trial": {
+		"message": "Avanti o inizia prova:"
+	},
 	"previous": {
 		"message": "Precedente"
 	},
@@ -2053,6 +2281,9 @@
 	},
 	"password_colon": {
 		"message": "Password:"
+	},
+	"confirm_password_colon": {
+		"message": "Conferma password:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "Per favore, inserisci un indirizzo email valido"
@@ -2158,7 +2389,7 @@
 		"message": "VPN integrata"
 	},
 	"custom_whitelist_options": {
-		"message": "Personalizza opzioni whitelist"
+		"message": "Opzioni sito considerato affidabile personalizzate"
 	},
 	"historical_tracking_insights": {
 		"message": "Approfondimenti storici di Tracker"
@@ -2177,5 +2408,41 @@
 	},
 	"too_many_failed_logins_text": {
 		"message": "Troppi login non riusciti. Riprova tra un'ora."
+	},
+  	"choose_your_default_search": {
+		"message": "Scegli il tuo motore di ricerca predefinito"
+	},
+  	"pick_a_default_search_engine": {
+	  "message": "Scegli un motore di ricerca predefinito per tutte le ricerche."
+	},
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Rispondi a tutte le domande"
+	},
+  	"ghostery_dawn_onboarding_startpage_warning": {
+	  "message": "A titolo informativo: il motore di ricerca di StartPage non raccoglie i dati personali. Tuttavia, per continuare a offrirti gratuitamente la protezione della privacy, ti verranno mostrate pubblicità private non mirate."
+	},
+	"ghostery_dawn_onboarding_bing_warning": {
+	  "message": "A titolo informativo: il motore di ricerca di Bing registra i dati personali e li utilizza per mostrare pubblicità mirate."
+	},
+	"ghostery_dawn_onboarding_yahoo_warning": {
+	  "message": "A titolo informativo: il motore di ricerca di Yahoo registra i dati personali e li utilizza per mostrare pubblicità mirate."
+	},
+  	"ghostery_dawn_onboarding_glow_benefit": {
+	  "message": "Con l'abbonamento Plus, potrai accedere al primo e unico motore di ricerca privato senza pubblicità al mondo. Per garantirti una navigazione in completo anonimato, utilizziamo una speciale procedura di accesso senza cookie."
+	},
+  	"ghostery_dawn_onboarding_choose_alternate_search": {
+	  "message": "Scegli un altro motore di ricerca"
+	},
+  	"ghostery_dawn_onboarding_select_option": {
+	  "message": "Seleziona opzione"
+	},
+  	"ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine": {
+	  "message": "Hai selezionato un altro motore di ricerca:"
+	},
+  	"ghostery_dawn_onboarding_create_account_for_trial": {
+	  "message": "Per iniziare a utilizzare la versione di prova gratuita di Ghostery Search, dovresti creare o accedere a un account. In questo modo puoi sincronizzare le tue impostazioni per la privacy su vari dispositivi."
+	},
+  	"ghostery_dawn_onboarding_back_to_search_selection": {
+	  "message": "Torna alla selezione di ricerca"
 	}
 }
