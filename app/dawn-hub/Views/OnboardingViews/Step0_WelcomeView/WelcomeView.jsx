@@ -37,7 +37,7 @@ const WelcomeView = (props) => {
 
 	useEffect(() => {
 		actions.getUser();
-		const timer = setTimeout(() => setGetUserResolved(true), 500);
+		const timer = setTimeout(() => setGetUserResolved(true), 1000);
 
 		return () => {
 			clearTimeout(timer);

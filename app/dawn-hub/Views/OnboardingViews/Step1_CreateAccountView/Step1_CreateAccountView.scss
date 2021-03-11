@@ -51,7 +51,7 @@ $color-create-account-form-error-red: #e74055;
 }
 
 .Step1_CreateAccountView__alreadySignedIn {
-	margin-top: 245px;
+	margin-top: 146px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -60,13 +60,14 @@ $color-create-account-form-error-red: #e74055;
 .Step1_CreateAccountView__email {
 	font-size: 24px;
 	color: $ghosty-blue;
+	margin-top: 16px;
 }
 .Step1_CreateAccountView__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
+	margin-top: 32px;
 
 	.Step1_CreateAccountView__ctaButton {
-		margin: 48px auto 0 auto;
 		min-height: 44px;
 		width: 162px;
 		padding: 7.7px 14px;
