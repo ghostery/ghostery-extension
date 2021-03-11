@@ -34,7 +34,6 @@ class BlockSettingsView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			recommendedChoices: false,
 			kindsOfTrackers: null,
 			enable_ad_block: null,
 			enable_anti_tracking: null,
@@ -83,7 +82,6 @@ class BlockSettingsView extends Component {
 	toggleRecommendedChoices = (value) => {
 		if (value === true) {
 			this.setState({
-				recommendedChoices: true,
 				enable_ad_block: true,
 				kindsOfTrackers: BLOCKING_POLICY_RECOMMENDED,
 				enable_anti_tracking: true,
@@ -91,7 +89,6 @@ class BlockSettingsView extends Component {
 			});
 		} else {
 			this.setState({
-				recommendedChoices: false,
 				enable_ad_block: null,
 				kindsOfTrackers: null,
 				enable_anti_tracking: null,
@@ -204,10 +201,12 @@ class BlockSettingsView extends Component {
 
 	render() {
 		const {
-			recommendedChoices, enable_ad_block, kindsOfTrackers, enable_anti_tracking, enable_smart_block
+			enable_ad_block, kindsOfTrackers, enable_anti_tracking, enable_smart_block
 		} = this.state;
 		const { actions } = this.props;
 		const { logout } = actions;
+
+		const recommendedChoicesActive = this.recommendedChoicesActive();
 		return (
 			<Fragment>
 				<div className="BlockSettingsView__relativeContainer">
@@ -225,10 +224,10 @@ class BlockSettingsView extends Component {
 						<div className="BlockSettingsView_checkboxBlock">
 							<ToggleCheckbox
 								className="BlockSettingsView_checkbox"
-								checked={this.recommendedChoicesActive()}
-								onChange={() => this.toggleRecommendedChoices(!recommendedChoices)}
+								checked={recommendedChoicesActive}
+								onChange={() => this.toggleRecommendedChoices(!recommendedChoicesActive)}
 							/>
-							<div className="BlockSettingsView_checkboxLabel" onClick={() => this.toggleRecommendedChoices(!recommendedChoices)}>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
+							<div className="BlockSettingsView_checkboxLabel" onClick={() => this.toggleRecommendedChoices(!recommendedChoicesActive)}>{t('ghostery_dawn_onboarding_recommended_choices')}</div>
 						</div>
 						<ol>
 							{this.renderQuestion(t('ghostery_dawn_onboarding_question_block_ads'))}
