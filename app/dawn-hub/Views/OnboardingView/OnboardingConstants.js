@@ -22,6 +22,9 @@ export const SUCCESS = '5';
 
 // Setup Step Constants
 
+// Step 0
+export const SETUP_STARTED = '1';
+
 // Step 1
 export const SIGN_IN_SUCCESSFUL = '1';
 export const CREATE_ACCOUNT_SUCCESSFUL = '2';
