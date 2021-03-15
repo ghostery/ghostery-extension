@@ -12,10 +12,19 @@
  */
 
 import {
-	INIT_SETUP_PROPS
+	INIT_SETUP_PROPS, SET_BLOCK_SETUP_SEEN, SET_SEARCH_SETUP_SEEN
 } from '../constants/SetupLifecycleConstants';
 
-const initialState = {};
+const initialState = {
+	setupLifecycle: {
+		blockingPolicy: '',
+		enable_anti_tracking: false,
+		enable_ad_block: false,
+		enable_smart_block: false,
+		blockSetupSeen: false,
+		searchSetupSeen: false
+	}
+};
 
 function SetupLifecycleReducer(state = initialState, action) {
 	switch (action.type) {
@@ -29,13 +38,21 @@ function SetupLifecycleReducer(state = initialState, action) {
 			} = action.data;
 			return {
 				...state,
-				setup: {
+				setupLifecycle: {
 					blockingPolicy,
 					enable_anti_tracking,
 					enable_ad_block,
 					enable_smart_block,
+					blockSetupSeen: false,
+					searchSetupSeen: false
 				}
 			};
+		}
+		case SET_BLOCK_SETUP_SEEN: {
+			return { ...state, setupLifecycle: { ...state.setupLifecycle, blockSetupSeen: action.data } };
+		}
+		case SET_SEARCH_SETUP_SEEN: {
+			return { ...state, setupLifecycle: { ...state.setupLifecycle, searchSetupSeen: action.data } };
 		}
 
 		default: return state;
