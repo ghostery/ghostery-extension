@@ -16,16 +16,14 @@ import AntiSuiteReducer from '../AntiSuiteReducer';
 import { SET_AD_BLOCK, SET_ANTI_TRACKING, SET_SMART_BLOCK } from '../../constants/AntiSuiteConstants';
 
 const initialState = Immutable({
-	setup: {
-		enable_ad_block: false,
-		enable_anti_tracking: false,
-		enable_smart_block: false
-	}
+	enable_ad_block: false,
+	enable_anti_tracking: false,
+	enable_smart_block: false
 });
 
 describe('app/shared-hub/reducers/AntiSuiteReducer', () => {
 	test('initial state is correct', () => {
-		expect(AntiSuiteReducer(undefined, {})).toEqual({});
+		expect(AntiSuiteReducer(undefined, {})).toEqual({...initialState});
 	});
 
 	test('reducer correctly handles SET_AD_BLOCK', () => {
@@ -34,10 +32,10 @@ describe('app/shared-hub/reducers/AntiSuiteReducer', () => {
 		};
 		const action = { data, type: SET_AD_BLOCK };
 
-		const updatedAntiSuiteState = Immutable.merge(initialState.setup, data);
+		const updatedAntiSuiteState = Immutable.merge(initialState, data);
 
 		expect(AntiSuiteReducer(initialState, action)).toEqual({
-			setup: updatedAntiSuiteState
+			...updatedAntiSuiteState
 		});
 	});
 
@@ -47,10 +45,10 @@ describe('app/shared-hub/reducers/AntiSuiteReducer', () => {
 		};
 		const action = { data, type: SET_ANTI_TRACKING };
 
-		const updatedAntiSuiteState = Immutable.merge(initialState.setup, data);
+		const updatedAntiSuiteState = Immutable.merge(initialState, data);
 
 		expect(AntiSuiteReducer(initialState, action)).toEqual({
-			setup: updatedAntiSuiteState
+			...updatedAntiSuiteState
 		});
 	});
 
@@ -60,10 +58,10 @@ describe('app/shared-hub/reducers/AntiSuiteReducer', () => {
 		};
 		const action = { data, type: SET_SMART_BLOCK };
 
-		const updatedAntiSuiteState = Immutable.merge(initialState.setup, data);
+		const updatedAntiSuiteState = Immutable.merge(initialState, data);
 
 		expect(AntiSuiteReducer(initialState, action)).toEqual({
-			setup: updatedAntiSuiteState
+			...updatedAntiSuiteState
 		});
 	});
 });
