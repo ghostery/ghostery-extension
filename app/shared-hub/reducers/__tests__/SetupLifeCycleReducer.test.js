@@ -16,27 +16,36 @@ import SetupLifecycleReducer from '../SetupLifecycleReducer';
 import { INIT_SETUP_PROPS } from '../../constants/SetupLifecycleConstants';
 
 const initialState = Immutable({
-	setup: {}
+	setupLifecycle: {
+		blockingPolicy: '',
+		enable_anti_tracking: false,
+		enable_ad_block: false,
+		enable_smart_block: false,
+		blockSetupSeen: false,
+		searchSetupSeen: false
+	}
 });
 
 describe('app/shared-hub/reducers/SetupLifecycleReducer', () => {
 	test('initial state is correct', () => {
-		expect(SetupLifecycleReducer(undefined, {})).toEqual({});
+		expect(SetupLifecycleReducer(undefined, {})).toEqual({...initialState});
 	});
 
 	test('reducer correctly handles INIT_SETUP_PROPS', () => {
 		const data = {
-			blockingPolicy: true,
+			blockingPolicy: 'BLOCKING_POLICY_RECOMMENDED',
 			enable_anti_tracking: true,
 			enable_ad_block: true,
 			enable_smart_block: true,
+			blockSetupSeen: false,
+			searchSetupSeen: false
 		};
 		const action = { data, type: INIT_SETUP_PROPS };
 
-		const updatedSetupLifecycleState = Immutable.merge(initialState.setup, data);
+		const updatedSetupLifecycleState = Immutable.merge(initialState.setupLifecycle, data);
 
 		expect(SetupLifecycleReducer(initialState, action)).toEqual({
-			setup: updatedSetupLifecycleState
+			setupLifecycle: updatedSetupLifecycleState
 		});
 	});
 });

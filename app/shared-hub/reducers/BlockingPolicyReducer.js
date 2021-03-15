@@ -13,13 +13,15 @@
 
 import { SET_BLOCKING_POLICY } from '../constants/BlockingPolicyConstants';
 
-const initialState = {};
+const initialState = {
+	blockingPolicy: ''
+};
 
 function BlockingPolicyReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_BLOCKING_POLICY: {
 			const { blockingPolicy } = action.data;
-			return { ...state, setup: { ...state.setup, blockingPolicy } };
+			return { ...state, blockingPolicy };
 		}
 
 		default: return state;
