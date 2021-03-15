@@ -96,11 +96,45 @@ class ChoosePlanView extends React.Component {
 		setTimeout(this.setDefaultPlan, 200);
 	}
 
+	isBasicUser = () => {
+		const { user } = this.props;
+
+		return (!user || (user && !user.plusAccess && !user.premiumAccess));
+	}
+
+	isPlusUser = () => {
+		const { user } = this.props;
+
+		return (user && user.plusAccess && !user.premiumAccess) || false;
+	}
+
+	isPremiumUser = () => {
+		const { user } = this.props;
+
+		return (user && user.premiumAccess) || false;
+	}
+
+	isBasicPlanChecked = () => {
+		const { selectedPlan } = this.state;
+		return (selectedPlan === BASIC);
+	};
+
+	isPlusPlanChecked = () => {
+		const { selectedPlan } = this.state;
+		return (selectedPlan === PLUS);
+	};
+
+	isPremiumPlanChecked = () => {
+		const { selectedPlan } = this.state;
+		return (selectedPlan === PREMIUM);
+	};
+
 	setDefaultPlan = () => {
-		const { user, defaultSearch } = this.props;
-		const isBasic = !user || (user && !user.plusAccess && !user.premiumAccess);
-		const isPlus = (user && user.plusAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
+		const { defaultSearch } = this.props;
+
+		const isBasic = this.isBasicUser();
+		const isPlus = this.isPlusUser();
+		const isPremium = this.isPremiumUser();
 
 		if (isPremium) {
 			this.selectPremiumPlan();
@@ -122,21 +156,6 @@ class ChoosePlanView extends React.Component {
 		}
 	}
 
-	isBasicPlanChecked = () => {
-		const { selectedPlan } = this.state;
-		return (selectedPlan === BASIC);
-	};
-
-	isPlusPlanChecked = () => {
-		const { selectedPlan } = this.state;
-		return (selectedPlan === PLUS);
-	};
-
-	isPremiumPlanChecked = () => {
-		const { selectedPlan } = this.state;
-		return (selectedPlan === PREMIUM);
-	};
-
 	selectBasicPlan = () => this.setState({ selectedPlan: BASIC });
 
 	selectPlusPlan = () => this.setState({ selectedPlan: PLUS });
@@ -153,23 +172,15 @@ class ChoosePlanView extends React.Component {
 	};
 
 	renderTitleText = () => {
-		const { user } = this.props;
-		const isPlus = (user && user.plusAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
-
-		if (isPremium) return t('ghostery_dawn_onboarding_already_premium_subscriber');
-		if (isPlus) return t('ghostery_dawn_onboarding_already_plus_subscriber');
+		if (this.isPremiumUser()) return t('ghostery_dawn_onboarding_already_premium_subscriber');
+		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_already_plus_subscriber');
 		return t('ghostery_dawn_onboarding_your_privacy_plan');
 	};
 
 	renderSubtitleText = (selectedGhosteryGlow) => {
-		const { user } = this.props;
-		const isPlus = (user && user.plusAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
-
 		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
-		if (isPremium) return '';
-		if (isPlus) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
+		if (this.isPremiumUser()) return '';
+		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
@@ -272,14 +283,13 @@ class ChoosePlanView extends React.Component {
 		const {
 			actions,
 			defaultSearch,
-			user,
 		} = this.props;
 		const { setSetupStep } = actions;
 		const { expanded, selectedPlan } = this.state;
 
-		const isBasic = !user || (user && !user.plusAccess && !user.premiumAccess);
-		const isPlus = (user && user.plusAccess && !user.premiumAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
+		const isBasic = this.isBasicUser();
+		const isPlus = this.isPlusUser();
+		const isPremium = this.isPremiumUser();
 
 		const arrowClassNames = ClassNames('ChoosePlanView__arrow', {
 			up: !expanded,
