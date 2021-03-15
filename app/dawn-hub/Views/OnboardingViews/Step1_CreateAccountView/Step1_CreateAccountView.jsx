@@ -115,15 +115,15 @@ const Step1_CreateAccountView = (props) => {
 			<div className="Step1_CreateAccountView__title">{t('ghostery_dawn_onboarding_you_are_signed_in_as')}</div>
 			<div className="Step1_CreateAccountView__email">{email}</div>
 			<div className="Step1_CreateAccountView__ctaButtonContainer">
-				{step === LOGIN && (
+				{view === SIGN_IN && (
 					<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleSkipButton(SIGN_IN_SUCCESSFUL)}>
 						<span>{t('next')}</span>
 					</NavLink>
 				)}
-				{step !== LOGIN && (
-					<div className="Step1_CreateAccountView__ctaButton" onClick={() => handleNextOnSelectPlanStep()}>
+				{view === CREATE_ACCOUNT && (
+					<NavLink className="Step1_CreateAccountView__ctaButton" to="/onboarding/2" onClick={() => handleNextOnSelectPlanStep()}>
 						<span>{t('next')}</span>
-					</div>
+					</NavLink>
 				)}
 			</div>
 		</div>

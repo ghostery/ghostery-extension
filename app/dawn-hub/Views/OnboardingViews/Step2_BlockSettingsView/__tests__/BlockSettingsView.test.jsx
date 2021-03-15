@@ -16,12 +16,22 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import BlockSettingsView from '../BlockSettingsView';
+import {
+	BLOCKING_POLICY_RECOMMENDED,
+} from '../../../../../shared-hub/constants/BlockingPolicyConstants';
 
 const noop = () => {};
 jest.mock('../../../../../shared-components/Tooltip');
 
 describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettingsView.test.jsx', () => {
 	const initialState = {
+		setupLifecycle: {
+			blockSetupSeen: false
+		},
+		blockingPolicy: '',
+		enable_ad_block: false,
+		enable_anti_tracking: false,
+		enable_smart_block: false,
 		actions: {
 			logout: noop,
 			setAntiTracking: noop,
@@ -30,7 +40,8 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 			setBlockingPolicy: noop,
 			setToast: noop,
 			setSetupStep: noop,
-		}
+			setBlockSetupSeen: noop,
+		},
 	};
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('BlockSettings View is rendered correctly', () => {
@@ -55,6 +66,7 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 					setBlockingPolicy: jest.fn(),
 					setToast: noop,
 					setSetupStep: jest.fn(),
+					setBlockSetupSeen: jest.fn(),
 				},
 				history: {
 					push: noop
@@ -66,7 +78,7 @@ describe('app/dawn-hub/Views/OnboardingViews/Step2_BlockSettingsView/BlockSettin
 
 			instance.toggleRecommendedChoices(true);
 			expect(component.state('enable_ad_block')).toBe(true);
-			expect(component.state('kindsOfTrackers')).toBe(2);
+			expect(component.state('kindsOfTrackers')).toBe(BLOCKING_POLICY_RECOMMENDED);
 			expect(component.state('enable_anti_tracking')).toBe(true);
 			expect(component.state('enable_smart_block')).toBe(true);
 

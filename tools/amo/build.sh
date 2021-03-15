@@ -42,6 +42,8 @@ if ! type jq > /dev/null; then
 	exit 1
 fi
 
+echo "Checking for nvm. If the script exits here, manually run 'nvm install lts/dubnium' and re-run ./build.sh"
+
 # Source nvm.sh
 if [[ -f /usr/local/opt/nvm/nvm.sh ]]; then
 	# Homebrew
@@ -110,10 +112,10 @@ cat ${TMP_FILE} > $VERSION_FILE # copy into manifest.json
 rm -f ${TMP_FILE}
 
 # Download databases
-curl "https://cdn.ghostery.com/update/v4/bugs" -o $DB_DIR/bugs.json --compressed --fail
-curl "https://cdn.ghostery.com/update/v4/click2play" -o $DB_DIR/click2play.json --compressed --fail
-curl "https://cdn.ghostery.com/update/v4/compatibility" -o $DB_DIR/compatibility.json --compressed --fail
-curl "https://cdn.ghostery.com/update/v4/surrogates" -o $DB_DIR/surrogates.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/bugs.json" -o $DB_DIR/bugs.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/click2play.json" -o $DB_DIR/click2play.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/compatibility.json" -o $DB_DIR/compatibility.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/surrogates.json" -o $DB_DIR/surrogates.json --compressed --fail
 
 # Zip final build files
 echo "Zipping to $(pwd)/$BUILD_DIR/"
@@ -130,6 +132,8 @@ test -d $BUILD_DIR || mkdir $BUILD_DIR && \
 		app/licenses/\* \
 		app/Account/\* \
 		app/hub/\* \
+		app/dawn-hub/\* \
+		app/shared-hub/\* \
 		app/shared-components/\* \
 		build/\* \
 		databases/README.md \

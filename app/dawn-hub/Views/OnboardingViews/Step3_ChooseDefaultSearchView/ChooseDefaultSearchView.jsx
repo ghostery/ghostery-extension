@@ -31,7 +31,6 @@ import {
 	SEARCH_PRIVADO,
 	SEARCH_QWANT,
 	SEARCH_ENCRYPT,
-	SEARCH_TAILCAT,
 	SEARCH_OTHER,
 	DAWN_SETUP_NUMBER_FOR_UNLISTED_OR_RENAMED_SEARCH
 } from './ChooseDefaultSearchConstants';
@@ -51,7 +50,6 @@ const searchSetupNumbers = [
 	{ name: SEARCH_PRIVADO, dawn_setup_number: 11 },
 	{ name: SEARCH_QWANT, dawn_setup_number: 12 },
 	{ name: SEARCH_ENCRYPT, dawn_setup_number: 13 },
-	{ name: SEARCH_TAILCAT, dawn_setup_number: 14 },
 ];
 
 const GLOW_BROWSER_SEARCH_GET_NAME = 'Ghostery Glow';
@@ -78,6 +76,21 @@ class ChooseDefaultSearchView extends Component {
 		document.addEventListener('click', this.handleClickAway);
 
 		this.fetchSearchEnginesAsync();
+
+		const { setupLifecycle: { searchSetupSeen } } = this.props;
+
+		if (searchSetupSeen) {
+			const { defaultSearch } = this.props;
+			const searchChoices = [
+				SEARCH_GHOSTERY,
+				SEARCH_BING,
+				SEARCH_YAHOO,
+				SEARCH_STARTPAGE,
+			];
+			const isOther = !searchChoices.includes(defaultSearch);
+			const prevChosenSearch = isOther ? SEARCH_OTHER : defaultSearch;
+			this.setState({ chosenSearch: prevChosenSearch, otherSearchSelected: isOther ? defaultSearch : null });
+		}
 	}
 
 	componentWillUnmount() {
@@ -140,7 +153,7 @@ class ChooseDefaultSearchView extends Component {
 	handleSubmit = () => {
 		const { chosenSearch, otherSearchSelected } = this.state;
 		const { actions, history } = this.props;
-		const { setSetupStep, setDefaultSearch } = actions;
+		const { setSetupStep, setDefaultSearch, setSearchSetupSeen } = actions;
 
 		const chosenSearchName = chosenSearch === SEARCH_OTHER
 			? otherSearchSelected
@@ -173,6 +186,7 @@ class ChooseDefaultSearchView extends Component {
 			dawn_setup_number,
 			origin: ONBOARDING
 		});
+		setSearchSetupSeen(true);
 		history.push(`/${ONBOARDING}/${CHOOSE_PLAN}`);
 	}
 
@@ -280,7 +294,7 @@ class ChooseDefaultSearchView extends Component {
 		return (
 			<Modal show>
 				<div className="ChooseSearchView__modalContent">
-					<img src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
+					<img className="ChooseSearchView__modalDawnLogo" src="/app/images/hub/ChooseDefaultSearchView/ghostery-browser-logo.svg" />
 					<div className="ChooseSearchView__modalMain">
 						{searchBeingConsidered === SEARCH_OTHER ? (
 							<div className="ChooseSearchView__modalHeader">
@@ -371,10 +385,10 @@ class ChooseDefaultSearchView extends Component {
 		if (!otherSearchOptionsFetched) return null;
 
 		return (
-			<div className="full-height">
+			<Fragment>
 				{modalActive && this.renderConfirmationModal()}
 				{!modalActive && this.renderSearchOptions()}
-			</div>
+			</Fragment>
 		);
 	}
 }

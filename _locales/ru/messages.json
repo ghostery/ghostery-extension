@@ -476,8 +476,8 @@
 		"message": "Заблокированные"
 	},
 	"blocking_category_whitelisted": {
-		"description": "as in '5 (trackers) WHITELISTED'",
-		"message": "В белом списке"
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "Доверенный"
 	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Успешно! $BOLD_HTML_END$ Письмо для подтверждения учетной записи было отправлено на адрес $EMAIL$",
@@ -779,8 +779,8 @@
 		"message": "Этот сайт был удален из вашего списка \"Ограниченные сайты\" и добавлен в список \"Доверенные сайты\"."
 	},
 	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "Этот сайт уже включен в белый список."
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "Этот сайт уже в списке доверенных."
 	},
 	"settings_adblocker": {
 		"message": "Списки блокировки рекламы"
@@ -1125,16 +1125,16 @@
 		"message": "Перезагрузите, чтобы увидеть изменения."
 	},
 	"alert_site_trusted": {
-		"message": "Сайт включен в белый список. На этом веб-сайте трекеры будут разрешены и анти-трекинг отключен."
+		"message": "Сайт в списке доверенных. На этом веб-сайте трекеры будут разрешены и анти-трекинг отключен."
 	},
 	"alert_site_trusted_off": {
-		"message": "Сайт больше не включен в белый список."
+		"message": "Сайт больше не включен в список доверенных."
 	},
 	"alert_site_restricted": {
-		"message": "Сайт помещен в черный список. На этом веб-сайте будут заблокированы трекеры и включен анти-трекинг."
+		"message": "Сайт помещен в список ограниченных. На этом веб-сайте будут заблокированы трекеры и включен анти-трекинг."
 	},
 	"alert_site_restricted_off": {
-		"message": "Сайт удален из черного списка."
+		"message": "Сайт больше не включен в список ограниченных."
 	},
 	"tooltip_anti_track_on": {
 		"message": "Личные данные обезличены."
@@ -1366,6 +1366,9 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Дополнительная защита"
 	},
+	"hub_upgrade_maximum_protection": {
+		"message": "Максимальная защита"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Блокировка трекера браузера"
 	},
@@ -1586,7 +1589,7 @@
 		"message": "Разрешить и ограничить сайты"
 	},
 	"hub_tutorial_trust_tagline": {
-		"message": "Добавляйте веб-сайты в белый или черный список одним нажатием."
+		"message": "Добавляйте веб-сайты в список доверенных или запрещённых одним нажатием."
 	},
 	"hub_tutorial_trust_trust_site": {
 		"message": "Всегда разрешать трекеры на сайте."
@@ -1722,6 +1725,9 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Используйте от 8 до 50 символов."
 	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "Ваши пароли не совпадают."
+	},
 	"hub_create_account_already_have_account": {
 		"message": "Уже есть учетная запись Ghostery?"
 	},
@@ -1733,6 +1739,225 @@
 	},
 	"hub_create_account_toast_error": {
 		"message": "Этот адрес электронной почты уже используется. Выберите другой адрес электронной почты."
+	},
+	"ghostery_dawn_onboarding_toast_fix_errors": {
+		"message": "Исправьте ошибки перед тем, как продолжить."
+	},
+	"ghostery_dawn_onboarding_install_heading": {
+		"message": "Идет установка Ghostery Dawn..."
+	},
+	"ghostery_dawn_onboarding_page_title": {
+	  "message": "Ghostery Dawn Hub - Добро пожаловать"
+	},
+  	"ghostery_dawn_onboarding_header_title_login": {
+	  "message": "Ghostery Dawn Hub - Вход"
+	},
+	"ghostery_dawn_onboarding_header_title_block_settings": {
+	  "message": "Ghostery Dawn Hub - Настройки блокировки"
+	},
+	"ghostery_dawn_onboarding_header_title_search_choice": {
+	  "message": "Ghostery Dawn Hub - Вариант поиска"
+	},
+	"ghostery_dawn_onboarding_header_title_plan_choices": {
+	  "message": "Ghostery Dawn Hub - Варианты планов"
+	},
+	"ghostery_dawn_onboarding_privacy": {
+		"message": "Конфиденциальность"
+	},
+	"ghostery_dawn_onboarding_search": {
+		"message": "Поиск"
+	},
+	"ghostery_dawn_onboarding_plan": {
+		"message": "План"
+	},
+	"ghostery_dawn_onboarding_welcome": {
+		"message": "Добро пожаловать в Ghostery Dawn!"
+	},
+	"ghostery_dawn_onboarding_lets_begin": {
+		"message": "Мы централизовали конфиденциальность в Интернете, интегрировав нашу подпись, а также новые технологии."
+	},
+	"ghostery_dawn_onboarding_welcome_message": {
+		"message": "Наш браузер защищает ваши данные и блокирует вредоносное ПО, поэтому вы можете пользоваться Интернетом конфиденциально и более чем в 3 раза быстрее, чем в Chrome."
+	},
+	"ghostery_dawn_onboarding_lets_do_this": {
+		"message": "Настроить мой браузер"
+	},
+	"ghostery_dawn_onboarding_your_privacy_plan": {
+		"message": "Ваш план конфиденциальности"
+	},
+	"ghostery_dawn_onboarding_based_on_your_privacy_preferences": {
+		"message": "На основе ваших предпочтений конфиденциальности"
+	},
+	"ghostery_dawn_onboarding_ad_free_with_ghostery_plus_subscription": {
+		"message": "Без рекламы с подпиской Ghostery Plus"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo": {
+		"message": "Скидка 40% на первые 12 месяцев"
+	},
+	"ghostery_dawn_onboarding_ad_free_promo_description": {
+		"message": "Добивайтесь желаемого быстрее. Подписка Plus дает Ghostery необходимую поддержку, чтобы ВЫ могли заниматься своими делами, не отвлекаясь на рекламу."
+	},
+	"ghostery_dawn_onboarding_or": {
+		"message": "ИЛИ"
+	},
+	"ghostery_dawn_onboarding_keep": {
+		"message": "Сохранить"
+	},
+	"ghostery_dawn_onboarding_upgrade": {
+		"message": "Обновить"
+	},
+	"ghostery_dawn_onboarding_start_trial": {
+		"message": "Начать пробный период"
+	},
+	"ghostery_dawn_onboarding_see_all_plans": {
+		"message": "Просмотреть все планы"
+	},
+	"ghostery_dawn_onboarding_private_search": {
+		"message": "Конфиденциальный поиск"
+	},
+	"ghostery_dawn_onboarding_tracker_protection": {
+		"message": "Защита от трекеров"
+	},
+	"ghostery_dawn_onboarding_speedy_page_loads": {
+		"message": "Быстрая загрузка страницы"
+	},
+	"ghostery_dawn_onboarding_intelligence_technology": {
+		"message": "Интеллектуальные технологии"
+	},
+	"ghostery_dawn_onboarding_ad_free": {
+		"message": "Без рекламы"
+	},
+	"ghostery_dawn_onboarding_supports_ghosterys_mission": {
+		"message": "Поддерживает миссию Ghostery"
+	},
+	"ghostery_dawn_onboarding_unlimited_bandwidth": {
+		"message": "Пропускная способность без ограничений"
+	},
+	"ghostery_dawn_onboarding_already_premium_subscriber": {
+		"message": "Вы уже являетесь подписчиком Premium"
+	},
+	"ghostery_dawn_onboarding_already_plus_subscriber": {
+		"message": "Вы уже являетесь подписчиком Plus"
+	},
+	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
+		"message": "Сохраните текущий план или обновите"
+	},
+	"ghostery_dawn_onboarding_choose_an_option": {
+		"message": "Выберите вариант"
+  },
+	"ghostery_dawn_onboarding_create_a_ghostery_account": {
+		"message": "Создать учетную запись Ghostery"
+	},
+	"ghostery_dawn_onboarding_sync_settings": {
+		"message": "Позволяет синхронизировать настройки конфиденциальности на разных устройствах."
+	},
+	"ghostery_dawn_onboarding_already_have_account": {
+		"message": "У меня уже есть учетная запись."
+	},
+	"ghostery_dawn_onboarding_skip": {
+		"message": "Пропустить"
+	},
+	"ghostery_dawn_onboarding_back": {
+		"message": "Назад"
+	},
+	"ghostery_dawn_onboarding_we_take_your_privacy_very_seriously": {
+		"message": "Мы очень серьезно относимся к вашей конфиденциальности. Подробнее"
+	},
+	"ghostery_dawn_onboarding_private_by_design": {
+		"message": "Конфиденциальность по умолчанию"
+	},
+	"ghostery_dawn_onboarding_private_by_design_description": {
+		"message": "Мы в Ghostery очень ценим конфиденциальность. Вот почему мы придерживаемся строгой политики в отношении ваших данных. Когда вы создаете учетную запись в Ghostery, мы храним только ваши имя и адрес электронной почты. Эта информация позволяет нам предложить вам возможности для синхронизации ваших настроек на разных устройствах и получения сведений о важных обновлениях. Ни при каких обстоятельствах мы не передаем и не продаем эти данные третьим лицам."
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account": {
+		"message": "Могу ли я удалить свою учетную запись?"
+	},
+	"ghostery_dawn_onboarding_can_i_remove_my_account_description": {
+		"message": "Мы надеемся, что вам понравится пользоваться Ghostery, но если вы все же решите уйти, мы удалим всю вашу личную информацию в течение 90 дней с даты запроса."
+	},
+	"ghostery_dawn_onboarding_visit_our_privacy_policy": {
+		"message": "Для получения дополнительной информации см. Политику конфиденциальности"
+	},
+	"ghostery_dawn_onboarding_create_an_account": {
+		"message": "Создайте учетную запись."
+	},
+	"ghostery_dawn_onboarding_you_are_signed_in_as": {
+		"message": "Вы вошли как"
+	},
+	"ghostery_dawn_onboarding_youve_successfully_set_up_your_browser": {
+		"message": "Вы успешно настроили браузер!"
+	},
+	"ghostery_dawn_onboarding_surf_with_ease": {
+		"message": "Теперь вы можете работать в Интернете без всяких забот."
+	},
+	"ghostery_dawn_onboarding_start_browsing": {
+		"message": "Войти в Интернет"
+	},
+	"ghostery_dawn_onboarding_which_privacy_plan": {
+		"message": "Какой план конфиденциальности вам подходит?"
+	},
+	"ghostery_dawn_onboarding_tell_us_your_preferences": {
+		"message": "Расскажите нам о своих предпочтениях, и мы предложим вам подходящий вариант."
+	},
+	"ghostery_dawn_onboarding_recommended_choices": {
+		"message": "Рекомендуемый выбор"
+	},
+	"ghostery_dawn_onboarding_question_block_ads": {
+		"message": "Хотите блокировать рекламу?"
+	},
+	"ghostery_dawn_onboarding_question_kinds_of_trackers": {
+		"message": "Какие трекеры вы хотите заблокировать?"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_all": {
+		"message": "Все трекеры"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_none": {
+		"message": "Никакие трекеры"
+	},
+	"ghostery_dawn_onboarding_kinds_of_trackers_ad_and_analytics": {
+		"message": "Все трекеры рекламы и аналитики"
+	},
+	"ghostery_dawn_onboarding_question_anti_tracking": {
+		"message": "Хотите включить анти-трекинг?"
+	},
+	"ghostery_dawn_onboarding_question_smart_browsing": {
+		"message": "Вы хотите включить умную навигацию?"
+	},
+	"ghostery_dawn_onboarding_info_blocking_all": {
+		"message": "Блокировка «всех трекеров» может привести к неисправной работе некоторых веб-сайтов."
+	},
+	"ghostery_dawn_onboarding_info_anti_tracking": {
+		"message": "Анти-трекинг обезличивает идентифицируемые данные, которые трекеры пытаются собрать."
+	},
+	"ghostery_dawn_onboarding_info_smart_browsing": {
+		"message": "Умная навигация настраивает параметры блокировки, чтобы уменьшить количество неисправностей и ускорить загрузку страниц."
+	},
+	"ghostery_dawn_onboarding_ad_free_private_search": {
+		"message": "Конфиденциальный поиск без рекламы"
+	},
+	"ghostery_dawn_onboarding_recommended" : {
+	  "message": "(Рекомендуемое)"
+	},
+	"ghostery_dawn_onboarding_ad_supported_private_search": {
+		"message": "Конфиденциальный поиск с поддержкой рекламы"
+	},
+	"ghostery_dawn_onboarding_type_in_search_domain": {
+		"message": "Введите поисковый домен"
+	},
+	"ghostery_dawn_onboarding_go_back": {
+		"message": "Назад"
+	},
+	"ghostery_dawn_onboarding_confirm": {
+		"message": "Подтвердить"
+	},
+	"ghostery_dawn_onboarding_other": {
+		"message": "Другое"
+	},
+	"ghostery_dawn_onboarding_toast_success": {
+		"message": "Успешно:"
+	},
+	"ghostery_dawn_onboarding_toast_alert": {
+		"message": "Ошибка:"
 	},
 	"enable_when_paused": {
 		"message": "Для использования этой функции возобновите работу Ghostery."
@@ -2033,6 +2258,9 @@
 	"next": {
 		"message": "Далее"
 	},
+	"next_or_start_trial": {
+		"message": "Далее или испытать пробную версию"
+	},
 	"previous": {
 		"message": "Назад"
 	},
@@ -2053,6 +2281,9 @@
 	},
 	"password_colon": {
 		"message": "Пароль:"
+	},
+	"confirm_password_colon": {
+		"message": "Подтвердите пароль:"
 	},
 	"please_enter_a_valid_email": {
 		"message": "Введите действующий адрес электронной почты."
@@ -2158,7 +2389,7 @@
 		"message": "Встроенный VPN"
 	},
 	"custom_whitelist_options": {
-		"message": "Пользовательские параметры белого списка"
+		"message": "Пользовательские параметры доверенного сайта"
 	},
 	"historical_tracking_insights": {
 		"message": "Сведения истории наблюдения"
@@ -2177,5 +2408,41 @@
 	},
 	"too_many_failed_logins_text": {
 		"message": "Слишком много неудачных попыток входа. Повторите попытку через час."
+	},
+  	"choose_your_default_search": {
+		"message": "Выбрать поиск по умолчанию"
+	},
+  	"pick_a_default_search_engine": {
+	  "message": "Выберите поисковую систему по умолчанию для всех ваших поисков."
+	},
+  	"ghostery_dawn_hub_blocking_settings_view_toast_error_message": {
+	  "message": "Ответьте на все вопросы"
+	},
+  	"ghostery_dawn_onboarding_startpage_warning": {
+	  "message": "Внимание: поисковая система StartPage не собирает ваши данные. Однако, чтобы обеспечить бесплатную защиту конфиденциальности, она будет показывать вам нетаргетированную рекламу."
+	},
+	"ghostery_dawn_onboarding_bing_warning": {
+	  "message": "Внимание: поисковая система Bing будет записывать ваши данные и использовать их для показа вам таргетированной рекламы."
+	},
+	"ghostery_dawn_onboarding_yahoo_warning": {
+	  "message": "Внимание: поисковая система Yahoo будет записывать ваши данные и использовать их для показа вам таргетированной рекламы."
+	},
+  	"ghostery_dawn_onboarding_glow_benefit": {
+	  "message": "С подпиской Plus вы получите доступ к первому и единственному в мире конфиденциальному поиску без рекламы! Мы используем специальную систему входа без файлов cookie, чтобы ваш поиск оставался абсолютно конфиденциальным."
+	},
+  	"ghostery_dawn_onboarding_choose_alternate_search": {
+	  "message": "Выбрать альтернативный поиск"
+	},
+  	"ghostery_dawn_onboarding_select_option": {
+	  "message": "Выберите вариант"
+	},
+  	"ghostery_dawn_onboarding_you_have_selected_an_alternate_search_engine": {
+	  "message": "Вы выбрали альтернативную поисковую систему:"
+	},
+  	"ghostery_dawn_onboarding_create_account_for_trial": {
+	  "message": "Чтобы испытать бесплатную пробную версию Ghostery Search, вам необходимо создать учетную запись или войти в нее. Это позволит вам синхронизировать настройки конфиденциальности на разных устройствах."
+	},
+  	"ghostery_dawn_onboarding_back_to_search_selection": {
+	  "message": "Вернуться к выбору поиска"
 	}
 }
