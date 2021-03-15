@@ -15,7 +15,9 @@ import { makeDeferredDispatcher } from '../utils';
 import {
 	INIT_SETUP_PROPS,
 	SET_SETUP_STEP,
-	SET_SETUP_COMPLETE
+	SET_SETUP_COMPLETE,
+	SET_BLOCK_SETUP_SEEN,
+	SET_SEARCH_SETUP_SEEN
 } from '../constants/SetupLifecycleConstants';
 
 export function initSetupProps(data) {
@@ -24,6 +26,20 @@ export function initSetupProps(data) {
 		data,
 	};
 }
+
+export const setBlockSetupSeen = data => (
+	{
+		type: SET_BLOCK_SETUP_SEEN,
+		data,
+	}
+);
+
+export const setSearchSetupSeen = data => (
+	{
+		type: SET_SEARCH_SETUP_SEEN,
+		data,
+	}
+);
 
 export const setSetupStep =
 	actionData => makeDeferredDispatcher(SET_SETUP_STEP, actionData);

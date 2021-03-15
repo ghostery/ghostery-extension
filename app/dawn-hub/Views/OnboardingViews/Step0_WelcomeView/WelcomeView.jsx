@@ -14,7 +14,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { WELCOME } from '../../OnboardingView/OnboardingConstants';
+import { ONBOARDING, WELCOME, SETUP_STARTED } from '../../OnboardingView/OnboardingConstants';
 
 /**
  * A Functional React component for rendering the Browser Welcome View
@@ -29,7 +29,11 @@ const WelcomeView = (props) => {
 
 	const gateSetupStep = (e) => {
 		if (getUserResolved) {
-			setSetupStep({ setup_step: WELCOME, origin: WELCOME });
+			setSetupStep({
+				setup_step: WELCOME,
+				dawn_setup_number: SETUP_STARTED,
+				origin: ONBOARDING
+			});
 		} else {
 			e.preventDefault();
 		}
