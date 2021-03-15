@@ -89,11 +89,12 @@ class ChoosePlanView extends React.Component {
 		this.state = {
 			selectedPlan: '',
 			expanded: false,
-			readyToRender: false, // setTimeout does not block
+			readyToRender: false, // after the component mounts, we need to setDefaultPlan()
 		};
-		// TODO can we do this in a way that guarantees user object will be available when we need it?
-		// TODO we prob need to updated AccountReducer so we have a way to distinguish between 'no user' and 'user not fetched yet'
-		setTimeout(this.setDefaultPlan, 200);
+	}
+
+	componentDidMount() {
+		this.setDefaultPlan();
 	}
 
 	isBasicUser = () => {
