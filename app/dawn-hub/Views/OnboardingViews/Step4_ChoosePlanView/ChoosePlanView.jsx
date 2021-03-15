@@ -207,22 +207,10 @@ class ChoosePlanView extends React.Component {
 						<div className="ChoosePlanView__valuePropList">
 							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
 							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_speedy_page_loads')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_intelligence_technology')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_ad_free')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_supports_ghosterys_mission')}
-							</div>
+							{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
 						</div>
 					</div>
 				</div>
