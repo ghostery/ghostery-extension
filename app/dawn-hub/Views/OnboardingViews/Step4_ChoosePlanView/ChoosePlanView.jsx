@@ -247,38 +247,14 @@ class ChoosePlanView extends React.Component {
 						</div>
 						<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_protection')}</strong></p>
 						<div className="ChoosePlanView__valuePropList">
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_private_search')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_tracker_protection')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_speedy_page_loads')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_intelligence_technology')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_ad_free')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_supports_ghosterys_mission')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								VPN
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_unlimited_bandwidth')}
-							</div>
+							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
+							{cardSubCopy('VPN')}
+							{cardSubCopy(t('ghostery_dawn_onboarding_unlimited_bandwidth'))}
 						</div>
 					</div>
 				</div>
