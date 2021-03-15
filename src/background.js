@@ -1416,6 +1416,12 @@ function initializeEventListeners() {
 				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
 				return true;
 			}
+
+			if (recognized && request.name === 'getDashboardStats') {
+				insights.action('getDashboardStats', ...(request.args || [])).then(sendResponse);
+				return true;
+			}
+
 			return false;
 		});
 	}

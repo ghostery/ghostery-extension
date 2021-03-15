@@ -325,7 +325,7 @@ class ChoosePlanView extends React.Component {
 		const selectedGhosteryGlow = (defaultSearch === SEARCH_GHOSTERY);
 
 		return (
-			<div>
+			<Fragment>
 				<div className="ChoosePlanView__relativeContainer">
 					<div className="ChoosePlanView__backContainer">
 						<span className="ChoosePlanView__caret left" />
@@ -340,7 +340,9 @@ class ChoosePlanView extends React.Component {
 					{selectedGhosteryGlow && isBasic && (
 						<Fragment>
 							{searchPromo()}
-							<a className="ChoosePlanView__searchCTAButton" href={glowFreeTrialLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</a>
+							<div className="ChoosePlanView__searchCTAButtonContainer">
+								<a className="ChoosePlanView__searchCTAButton" href={glowFreeTrialLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_TRIAL)}>{t('ghostery_dawn_onboarding_start_trial')}</a>
+							</div>
 							<div className="ChoosePlanView__seeAllPlans" onClick={this.toggleSection}>{t('ghostery_dawn_onboarding_see_all_plans')}</div>
 							<div className={arrowClassNames} onClick={this.toggleSection} />
 						</Fragment>
@@ -393,7 +395,7 @@ class ChoosePlanView extends React.Component {
 						</div>
 					)}
 				</div>
-			</div>
+			</Fragment>
 		);
 	}
 }

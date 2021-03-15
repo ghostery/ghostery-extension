@@ -89,6 +89,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           className="s-square-checkbox"
         >
           <input
+            defaultChecked={false}
             id="settings-allow-abtests"
             name="enable_abtests"
             onClick={[Function]}
@@ -206,6 +207,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           className="s-square-checkbox"
         >
           <input
+            defaultChecked={true}
             id="settings-allow-abtests"
             name="enable_abtests"
             onClick={[Function]}
