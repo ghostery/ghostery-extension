@@ -14,14 +14,12 @@
 import { withRouter } from 'react-router-dom';
 import BlockSettingsView from './BlockSettingsView';
 import { buildReduxHOC } from '../../../../shared-hub/utils';
-import { logout } from '../../../../Account/AccountActions';
 import { setAntiTracking, setAdBlock, setSmartBlocking } from '../../../../shared-hub/actions/AntiSuiteActions';
 import setBlockingPolicy from '../../../../shared-hub/actions/BlockingPolicyActions';
 import setToast from '../../../../shared-hub/actions/ToastActions';
 import { setSetupStep, setBlockSetupSeen } from '../../../../shared-hub/actions/SetupLifecycleActions';
 
 const actionCreators = {
-	logout,
 	setAntiTracking,
 	setAdBlock,
 	setSmartBlocking,

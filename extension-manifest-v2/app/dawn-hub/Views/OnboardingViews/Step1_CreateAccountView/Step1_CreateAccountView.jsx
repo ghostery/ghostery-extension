@@ -60,7 +60,7 @@ const renderFAQListItem = (icon, label, description) => (
  */
 const Step1_CreateAccountView = (props) => {
 	const { actions, step, user } = props;
-	const { setSetupStep, setToast } = actions;
+	const { setSetupStep, setToast, logout } = actions;
 	const email = user && user.email;
 
 	const [view, setView] = useState(CREATE_ACCOUNT);
@@ -94,6 +94,16 @@ const Step1_CreateAccountView = (props) => {
 		prev();
 	};
 
+	const handleLogout = () => {
+		logout().then(() => {
+			setView(SIGN_IN);
+			setToast({
+				toastMessage: '',
+				toastClass: 'logout'
+			});
+		});
+	};
+
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
@@ -125,6 +135,12 @@ const Step1_CreateAccountView = (props) => {
 						<span>{t('next')}</span>
 					</NavLink>
 				)}
+			</div>
+			<div className="Step1_CreateAccountView__signOutContainer">
+				{t('ghostery_dawn_onboarding_or').toLocaleLowerCase()}
+				<div className="Step1_CreateAccountView__signOut" onClick={() => handleLogout()}>
+					<span>{t('sign_out')}</span>
+				</div>
 			</div>
 		</div>
 	) : (
