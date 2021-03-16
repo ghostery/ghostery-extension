@@ -96,11 +96,11 @@ const Step1_CreateAccountView = (props) => {
 
 	const handleLogout = () => {
 		logout().then(() => {
+			setView(SIGN_IN);
 			setToast({
 				toastMessage: '',
 				toastClass: 'logout'
 			});
-			setView(SIGN_IN);
 		});
 	};
 
