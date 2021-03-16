@@ -31,7 +31,7 @@ const ToastMessage = ({
 
 	return (
 		<div className={`ToastMessage full-width ${dawnHubClass}`}>
-			{toastText && (
+			{(toastText || dawnToastText) && (
 				<div className="callout-container">
 					<div className={`callout toast ${toastClass}`}>
 						<div className={`flex-container ${dawnLayout}`}>

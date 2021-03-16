@@ -19,10 +19,11 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step0_WelcomeView/WelcomeView.test.j
     src="/app/images/hub/welcome/rocketShip.png"
   />
   <a
-    aria-current={null}
-    className="WelcomeView__ctaButton"
-    href="/onboarding/1"
+    aria-current="page"
+    className="WelcomeView__ctaButton active"
+    href="/"
     onClick={[Function]}
+    style={Object {}}
   >
     <span>
       ghostery_dawn_onboarding_lets_do_this
