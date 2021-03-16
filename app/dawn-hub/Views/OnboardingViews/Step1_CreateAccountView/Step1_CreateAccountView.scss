@@ -201,6 +201,8 @@ $color-create-account-form-error-red: #e74055;
 .Step1_CreateAccountView__skip {
 	margin-top: -37px;
 	float: right;
+	display: flex;
+	align-items: center;
 	font-size: 16px;
 	color: $ghosty-blue;
 	text-decoration: underline;
@@ -211,6 +213,17 @@ $color-create-account-form-error-red: #e74055;
 		justify-content: center;
 		float: none;
 	}
+}
+.Step1_CreateAccountView__arrow {
+	margin-left: 5px;
+	float: right;
+    height: 10px;
+    width: 10px;
+    border-left: 2px solid $tundora;
+    border-top: 2px solid $tundora;
+	cursor: pointer;
+	border-color: $ghosty-blue;
+	transform: rotate(135deg);
 }
 .Step1_CreateAccountView__learnMoreContainer {
 	margin: 25px auto 0 auto;
