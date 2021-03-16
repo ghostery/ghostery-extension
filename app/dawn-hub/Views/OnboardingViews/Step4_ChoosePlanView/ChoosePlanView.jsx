@@ -136,25 +136,20 @@ class ChoosePlanView extends React.Component {
 		const isBasic = this.isBasicUser();
 		const isPlus = this.isPlusUser();
 		const isPremium = this.isPremiumUser();
+		const basicGlow = isBasic && defaultSearch === SEARCH_GHOSTERY;
 
 		if (isPremium) {
 			this.selectPremiumPlan();
-			return;
-		}
-		if (isPlus) {
+		} else if (isPlus || basicGlow) {
 			this.selectPlusPlan();
-			return;
-		}
-		if (isBasic && defaultSearch === SEARCH_GHOSTERY) {
-			this.selectPlusPlan();
-			this.setState({
-				expanded: true,
-				readyToRender: true,
-			});
 		} else {
 			this.selectBasicPlan();
-			this.setState({ readyToRender: true });
 		}
+
+		this.setState({
+			expanded: basicGlow,
+			readyToRender: true,
+		});
 	}
 
 	selectBasicPlan = () => this.setState({ selectedPlan: BASIC });
