@@ -255,6 +255,11 @@ class ChooseDefaultSearchView extends Component {
 		const selected = (chosenSearch === optionName);
 		const containerClasses = ClassNames('ChooseSearchView__optionContainer', { selected });
 		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${optionName.toLocaleLowerCase().replace(' ', '')}.svg`;
+		const optionDescriptionContainerClassNames = ClassNames('ChooseSearchView__optionDescriptionContainer', {
+			ghostery: optionName === SEARCH_GHOSTERY,
+			startpage: optionName === SEARCH_STARTPAGE,
+			yahoo: optionName === SEARCH_YAHOO,
+		});
 
 		return (
 			<div
@@ -275,7 +280,7 @@ class ChooseDefaultSearchView extends Component {
 					)
 					}
 				</div>
-				<div className="ChooseSearchView__optionDescriptionContainer">
+				<div className={optionDescriptionContainerClassNames}>
 					{(optionName !== SEARCH_OTHER) && (
 						<img src={logoFilename} />
 					)}
@@ -290,6 +295,12 @@ class ChooseDefaultSearchView extends Component {
 	renderConfirmationModal = () => {
 		const { searchBeingConsidered, otherSearchSelected } = this.state;
 		const logoFilename = `/app/images/hub/ChooseDefaultSearchView/search-engine-logo-${searchBeingConsidered.toLocaleLowerCase().replace(' ', '')}.svg`;
+		const modalOptionLogoClassNames = ClassNames('ChooseSearchView__modalOptionLogo', {
+			ghostery: searchBeingConsidered === SEARCH_GHOSTERY,
+			yahoo: searchBeingConsidered === SEARCH_YAHOO,
+			bing: searchBeingConsidered === SEARCH_BING,
+			startpage: searchBeingConsidered === SEARCH_STARTPAGE,
+		});
 
 		return (
 			<Modal show>
@@ -301,7 +312,7 @@ class ChooseDefaultSearchView extends Component {
 								{SEARCH_OTHER}
 							</div>
 						) :
-							<img className="ChooseSearchView__modalOptionLogo" src={logoFilename} />
+							<img className={modalOptionLogoClassNames} src={logoFilename} />
 						}
 						<div className="ChooseSearchView__modalDescription">
 							{searchBeingConsidered === SEARCH_STARTPAGE && t('ghostery_dawn_onboarding_startpage_warning')}
