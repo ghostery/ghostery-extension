@@ -107,6 +107,16 @@
   justify-content: center;
 	width: 75%;
 	padding-right: 15%;
+
+	&.ghostery {
+		margin-left: -14px;
+	}
+	&.startpage {
+		margin-left: -9px;
+	}
+	&.yahoo {
+		margin-left: -9px;
+	}
 }
 
 .ChooseSearchView__optionDescriptionHeader {
@@ -290,7 +300,23 @@
 }
 
 .ChooseSearchView__modalOptionLogo {
-  padding-bottom: 40px;
+	padding: 70px 0;
+
+	&.ghostery {
+		width: 266px;
+	}
+
+  	&.yahoo {
+		width: 256px;
+	}
+
+  	&.bing {
+	  	width: 325px;
+	}
+
+  	&.startpage {
+	  	width: 235px;
+	}
 }
 
 .ChooseSearchView__modalDawnLogo {
