@@ -222,9 +222,11 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
-						<span>{t('ghostery_dawn_onboarding_keep')}</span>
-					</NavLink>
+					<div className="ChoosePlanView__searchCTAButtonContainer">
+						<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
+							<span>{t('ghostery_dawn_onboarding_keep')}</span>
+						</NavLink>
+					</div>
 				)}
 			</Fragment>
 		);
@@ -266,7 +268,9 @@ class ChoosePlanView extends React.Component {
 					</div>
 				</div>
 				{showCTAButton && (
-					<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION)}>{t('ghostery_dawn_onboarding_upgrade')}</a>
+					<div className="ChoosePlanView__searchCTAButtonContainer">
+						<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION)}>{t('ghostery_dawn_onboarding_upgrade')}</a>
+					</div>
 				)}
 			</Fragment>
 		);
