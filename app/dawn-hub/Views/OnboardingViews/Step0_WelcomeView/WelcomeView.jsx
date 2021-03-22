@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { ONBOARDING, WELCOME, SETUP_STARTED } from '../../OnboardingView/OnboardingConstants';
@@ -24,12 +24,36 @@ import { ONBOARDING, WELCOME, SETUP_STARTED } from '../../OnboardingView/Onboard
 const WelcomeView = (props) => {
 	const { actions } = props;
 	const { setSetupStep } = actions;
+
+	const [getUserResolved, setGetUserResolved] = useState(false);
+
+	const gateSetupStep = (e) => {
+		if (getUserResolved) {
+			setSetupStep({
+				setup_step: WELCOME,
+				dawn_setup_number: SETUP_STARTED,
+				origin: ONBOARDING
+			});
+		} else {
+			e.preventDefault();
+		}
+	};
+
+	useEffect(() => {
+		actions.getUser();
+		const timer = setTimeout(() => setGetUserResolved(true), 1000);
+
+		return () => {
+			clearTimeout(timer);
+		};
+	}, []);
+
 	return (
 		<div className="WelcomeView__container">
 			<div className="WelcomeView__title">{t('ghostery_dawn_onboarding_welcome')}</div>
 			<div className="WelcomeView__subtitle">{t('ghostery_dawn_onboarding_welcome_message')}</div>
 			<img className="WelcomeView__rocketShip" src="/app/images/hub/welcome/rocketShip.png" />
-			<NavLink className="WelcomeView__ctaButton" to="/onboarding/1" onClick={() => setSetupStep({ setup_step: WELCOME, dawn_setup_number: SETUP_STARTED, origin: ONBOARDING })}>
+			<NavLink className="WelcomeView__ctaButton" to={getUserResolved ? '/onboarding/1' : '#'} onClick={gateSetupStep}>
 				<span>{t('ghostery_dawn_onboarding_lets_do_this')}</span>
 			</NavLink>
 		</div>

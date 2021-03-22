@@ -46,6 +46,13 @@ const searchPromo = () => (
 	</div>
 );
 
+const cardSubCopy = copy => (
+	<div className="ChoosePlanView__cardSubCopy">
+		<span className="check blue" />
+		{copy}
+	</div>
+);
+
 const basicCard = (checked, handleClick) => {
 	const cardClassNames = ClassNames('ChoosePlanView__card basic', {
 		checked
@@ -66,22 +73,10 @@ const basicCard = (checked, handleClick) => {
 				</div>
 				<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 				<div className="ChoosePlanView__valuePropList basic">
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_private_search')}
-					</div>
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_tracker_protection')}
-					</div>
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_speedy_page_loads')}
-					</div>
-					<div className="ChoosePlanView__cardSubCopy">
-						<span className="check blue" />
-						{t('ghostery_dawn_onboarding_intelligence_technology')}
-					</div>
+					{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+					{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
+					{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+					{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
 				</div>
 			</div>
 		</div>
@@ -93,26 +88,31 @@ class ChoosePlanView extends React.Component {
 		super(props);
 		this.state = {
 			selectedPlan: '',
-			expanded: false
+			expanded: false,
+			readyToRender: false, // after the component mounts, we need to setDefaultPlan()
 		};
-		// User object doesn't get populated immediately, let's delay the first render
-		setTimeout(this.setDefaultPlan, 200);
 	}
 
-	setDefaultPlan = () => {
-		const { user } = this.props;
-		const isPlus = (user && user.plusAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
+	componentDidMount() {
+		this.setDefaultPlan();
+	}
 
-		if (isPremium) {
-			this.selectPremiumPlan();
-			return;
-		}
-		if (isPlus) {
-			this.selectPlusPlan();
-			return;
-		}
-		this.selectBasicPlan();
+	isBasicUser = () => {
+		const { user } = this.props;
+
+		return (!user || (user && !user.plusAccess && !user.premiumAccess));
+	}
+
+	isPlusUser = () => {
+		const { user } = this.props;
+
+		return (user && user.plusAccess && !user.premiumAccess) || false;
+	}
+
+	isPremiumUser = () => {
+		const { user } = this.props;
+
+		return (user && user.premiumAccess) || false;
 	}
 
 	isBasicPlanChecked = () => {
@@ -130,6 +130,28 @@ class ChoosePlanView extends React.Component {
 		return (selectedPlan === PREMIUM);
 	};
 
+	setDefaultPlan = () => {
+		const { defaultSearch } = this.props;
+
+		const isBasic = this.isBasicUser();
+		const isPlus = this.isPlusUser();
+		const isPremium = this.isPremiumUser();
+		const basicGlow = isBasic && defaultSearch === SEARCH_GHOSTERY;
+
+		if (isPremium) {
+			this.selectPremiumPlan();
+		} else if (isPlus || basicGlow) {
+			this.selectPlusPlan();
+		} else {
+			this.selectBasicPlan();
+		}
+
+		this.setState({
+			expanded: basicGlow,
+			readyToRender: true,
+		});
+	}
+
 	selectBasicPlan = () => this.setState({ selectedPlan: BASIC });
 
 	selectPlusPlan = () => this.setState({ selectedPlan: PLUS });
@@ -146,23 +168,15 @@ class ChoosePlanView extends React.Component {
 	};
 
 	renderTitleText = () => {
-		const { user } = this.props;
-		const isPlus = (user && user.plusAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
-
-		if (isPremium) return t('ghostery_dawn_onboarding_already_premium_subscriber');
-		if (isPlus) return t('ghostery_dawn_onboarding_already_plus_subscriber');
+		if (this.isPremiumUser()) return t('ghostery_dawn_onboarding_already_premium_subscriber');
+		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_already_plus_subscriber');
 		return t('ghostery_dawn_onboarding_your_privacy_plan');
 	};
 
 	renderSubtitleText = (selectedGhosteryGlow) => {
-		const { user } = this.props;
-		const isPlus = (user && user.plusAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
-
 		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
-		if (isPremium) return '';
-		if (isPlus) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
+		if (this.isPremiumUser()) return '';
+		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
@@ -198,30 +212,12 @@ class ChoosePlanView extends React.Component {
 						</div>
 						<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 						<div className="ChoosePlanView__valuePropList">
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_private_search')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_tracker_protection')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_speedy_page_loads')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_intelligence_technology')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_ad_free')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_supports_ghosterys_mission')}
-							</div>
+							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
 						</div>
 					</div>
 				</div>
@@ -258,38 +254,14 @@ class ChoosePlanView extends React.Component {
 						</div>
 						<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_protection')}</strong></p>
 						<div className="ChoosePlanView__valuePropList">
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_private_search')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_tracker_protection')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_speedy_page_loads')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_intelligence_technology')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_ad_free')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_supports_ghosterys_mission')}
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								VPN
-							</div>
-							<div className="ChoosePlanView__cardSubCopy">
-								<span className="check blue" />
-								{t('ghostery_dawn_onboarding_unlimited_bandwidth')}
-							</div>
+							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
+							{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
+							{cardSubCopy('VPN')}
+							{cardSubCopy(t('ghostery_dawn_onboarding_unlimited_bandwidth'))}
 						</div>
 					</div>
 				</div>
@@ -301,17 +273,19 @@ class ChoosePlanView extends React.Component {
 	};
 
 	render() {
+		const { readyToRender } = this.state;
+		if (!readyToRender) return null;
+
 		const {
 			actions,
 			defaultSearch,
-			user,
 		} = this.props;
 		const { setSetupStep } = actions;
 		const { expanded, selectedPlan } = this.state;
 
-		const isBasic = !user || (user && !user.plusAccess && !user.premiumAccess);
-		const isPlus = (user && user.plusAccess && !user.premiumAccess) || false;
-		const isPremium = (user && user.premiumAccess) || false;
+		const isBasic = this.isBasicUser();
+		const isPlus = this.isPlusUser();
+		const isPremium = this.isPremiumUser();
 
 		const arrowClassNames = ClassNames('ChoosePlanView__arrow', {
 			up: !expanded,

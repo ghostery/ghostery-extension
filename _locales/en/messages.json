@@ -1959,6 +1959,9 @@
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Error: "
 	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "You are now signed out"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
