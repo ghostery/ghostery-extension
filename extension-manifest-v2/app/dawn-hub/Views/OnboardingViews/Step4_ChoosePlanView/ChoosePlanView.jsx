@@ -174,9 +174,10 @@ class ChoosePlanView extends React.Component {
 	};
 
 	renderSubtitleText = (selectedGhosteryGlow) => {
-		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
+		// Note that the order matters!
 		if (this.isPremiumUser()) return '';
 		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
+		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
@@ -362,9 +363,11 @@ class ChoosePlanView extends React.Component {
 								</div>
 							))}
 							{isPremium && (
-								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
-									<span>{t('next')}</span>
-								</NavLink>
+								<div className="ChoosePlanView__searchCTAButtonContainer">
+									<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
+										<span>{t('next')}</span>
+									</NavLink>
+								</div>
 							)}
 						</div>
 					)}
