@@ -174,9 +174,9 @@ class ChoosePlanView extends React.Component {
 	};
 
 	renderSubtitleText = (selectedGhosteryGlow) => {
-		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
 		if (this.isPremiumUser()) return '';
 		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
+		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
 
