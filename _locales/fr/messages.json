@@ -1777,7 +1777,7 @@
 		"message": "Nous avons centralisé la confidentialité en ligne en intégrant notre signature ainsi que des technologies innovantes."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Notre navigateur protège vos données et bloque les bloatwares afin que vous puissiez naviguer en toute confidentialité et trois fois plus vite qu'avec Chrome."
+		"message": "Ghostery Dawn protège vos données des mouchards afin que vous puissiez surfer en toute sécurité et jusqu'à 3 fois plus rapide qu'avec Chrome."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Configurer mon navigateur"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Erreur :"
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "Vous êtes maintenant déconnecté "
 	},
 	"enable_when_paused": {
 		"message": "Pour utiliser cette fonction, réactivez Ghostery."

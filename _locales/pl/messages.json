@@ -1777,7 +1777,7 @@
 		"message": "Scentralizowaliśmy prywatność online poprzez integrację naszych kluczowych i nowatorskich technologii."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Nasza przeglądarka chroni Twoje dane i blokuje oprogramowanie typu bloatware, dzięki czemu możesz przeglądać Internet, zachowując prywatność, i ponad trzy razy szybciej niż za pomocą przeglądarki Chrome."
+		"message": "Ghostery Dawn chroni Twoje dane przed tropiciele, dzięki czemu możesz surfować bezpiecznie i do 3 razy szybciej niż w Chrome."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Skonfiguruj przeglądarkę"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Błąd:"
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "Jesteś teraz wylogowany"
 	},
 	"enable_when_paused": {
 		"message": "Aby użyć tej funkcji, wznów Ghostery."
