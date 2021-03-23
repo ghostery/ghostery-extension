@@ -1777,7 +1777,7 @@
 		"message": "我们整合了签名和多种创新技术，加强了在线隐私保护。"
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "我们的浏览器可保护您的数据并拦截膨胀软件，提供无痕浏览，且速度超过 Chrome 两倍。"
+		"message": "Ghostery Dawn保护您的数据免受跟踪器的侵害，因此您可以安全地进行冲浪，并且速度比Chrome快3倍。"
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "设置我的浏览器"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "错误："
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "您现在已登出"
 	},
 	"enable_when_paused": {
 		"message": "要使用该功能，请恢复 Ghostery。"

@@ -1777,7 +1777,7 @@
 		"message": "A jól ismert technológiáinkat újakkal integrálva központosítottuk az online adatvédelmet."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "A böngésző megvédi az Ön adatait, és blokkolja a bloatware-eket, hogy biztonságosan több mint 3-szer olyan gyorsan böngészhessen, mintha Chrome-ot használna."
+		"message": "A Ghostery Dawn megvédi adatait a trackerek, hogy biztonságosan és akár háromszor gyorsabban szörfözhet, mintha Chrome-ot használna."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "A böngésző beállítása"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Hiba:"
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "Ön jelenleg úgy kijelentkezett"
 	},
 	"enable_when_paused": {
 		"message": "E funkció használatához térjen vissza a Ghostery-hez."
