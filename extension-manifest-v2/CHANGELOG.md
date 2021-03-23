@@ -1,3 +1,12 @@
+### GHOSTERY 8.5.6 ()
+
+This release is for Ghostery Dawn only.
+
++ Onboading improvements and bug fixes for Ghostery Dawn browser
++ Updated translations
+
+See the complete GitHub [milestone](https://github.com/ghostery/ghostery-extension/milestone/17?closed=1)
+
 ### GHOSTERY 8.5.5 (February 25, 2021)
 
 + Integrate new v4 tracker databases (#616)
