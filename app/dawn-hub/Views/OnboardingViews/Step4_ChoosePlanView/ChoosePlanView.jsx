@@ -362,9 +362,11 @@ class ChoosePlanView extends React.Component {
 								</div>
 							))}
 							{isPremium && (
-								<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
-									<span>{t('next')}</span>
-								</NavLink>
+								<div className="ChoosePlanView__searchCTAButtonContainer">
+									<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
+										<span>{t('next')}</span>
+									</NavLink>
+								</div>
 							)}
 						</div>
 					)}
