@@ -1422,6 +1422,11 @@ function initializeEventListeners() {
 				return true;
 			}
 
+			if (recognized && request.name === 'getUser') {
+				account.getUser().then(sendResponse);
+				return true;
+			}
+
 			return false;
 		});
 	}
