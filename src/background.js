@@ -1423,7 +1423,9 @@ function initializeEventListeners() {
 			}
 
 			if (recognized && request.name === 'getUser') {
-				account.getUser().then(sendResponse);
+				account.getUser()
+					.then(sendResponse)
+					.catch(() => sendResponse(null));
 				return true;
 			}
 
