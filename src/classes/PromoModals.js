@@ -109,14 +109,7 @@ class PromoModals {
 		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
 		const lastSeenPromo = Math.max(lastSeenPremiumPromo, lastSeenInsightsPromo);
 
-		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
-			return false;
-		}
-
-		// don't wait 30 days to show the first Insights promo if user meets the criteria before then
-		if (type === INSIGHTS && lastSeenInsightsPromo === 0) {
-			return true;
-		}
+		if (type === INSIGHTS) return false; // GH-2317: deactivate Insights promo
 
 		return (
 			(Date.now() - lastSeenPromo) >
