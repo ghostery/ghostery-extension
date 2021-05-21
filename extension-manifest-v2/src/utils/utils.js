@@ -144,13 +144,14 @@ export function defineLazyProperty(obj, prop, callback) {
 }
 
 /**
- * Process First Party Exception URLs to return host and path.
+ * Quickly process tracker URLs to return host and path. Used with fuzzyUrlMatcher()
+ * to parse FirstPartyException and CompatibilityDB URLs
  * @memberOf BackgroundUtils
  *
- * @param  {string} src 	the first party exception url
+ * @param  {string} src 	the tracker url
  * @return {Object} 		contains host, path as properties
  */
-export function processFpeUrl(src) {
+export function processTrackerUrl(src) {
 	const index = src.indexOf('/');
 	const host = (index === -1) ? src : src.substring(0, index);
 	const path = (index === -1) ? '' : src.substring(index + 1);
