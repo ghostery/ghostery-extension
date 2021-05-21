@@ -2,6 +2,8 @@
 
 + Remove promo modals for Insights and Midnight (#706)
 + Allow host name fuzzy matching for Compatibility URLs (#680)
++ Add subscription status to CMP fetch URL (#694)
++ Avoid possible race condition in ABTest & CMP on Dawn (#687)
 
 ### GHOSTERY 8.5.6 (April 12, 2021)
 
