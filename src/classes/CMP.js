@@ -103,7 +103,8 @@ class CMP {
 		return subStatus;
 	}
 
-	static _buildUrl() {
+	static async _buildUrl() {
+		await BROWSER_INFO_READY;
 		return (`${CMP_BASE_URL}/check
 			${buildQueryPair('os', BROWSER_INFO.os, true)}
 			${buildQueryPair('hw', conf.enable_human_web ? '1' : '0')}
