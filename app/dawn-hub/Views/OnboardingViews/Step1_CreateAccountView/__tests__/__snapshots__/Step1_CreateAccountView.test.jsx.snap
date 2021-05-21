@@ -102,18 +102,25 @@ exports[`app/hub/Views/Step1_CreateAccountView component Snapshot tests with rea
         </div>
       </div>
     </div>
-  </div>
-  <div
-    className="row"
-  >
-    <a
-      className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3"
-      href="https://ghosterystage.com/about-ghostery/ghostery-plans-and-products-privacy-policy/"
-      rel="noreferrer"
-      target="_blank"
+    <div
+      className="row"
     >
-      ghostery_dawn_onboarding_visit_our_privacy_policy
-    </a>
+      <div
+        className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2"
+      />
+      <div
+        className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 large-10"
+      >
+        <a
+          className="Step1_CreateAccountView__privacyPolicyLink"
+          href="https://ghosterystage.com/about-ghostery/ghostery-plans-and-products-privacy-policy/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          ghostery_dawn_onboarding_visit_our_privacy_policy
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 `;

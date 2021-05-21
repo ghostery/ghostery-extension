@@ -1777,7 +1777,7 @@
 		"message": "We hebben de online privacy gecentraliseerd door onze signatuur en nieuwe technologieën te integreren."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Onze browser beschermt je gegevens en blokkeert bloatware zodat je privé kunt surfen, meer dan 3 keer sneller dan met Chrome."
+		"message": "Ghostery Dawn beschermt je gegevens tegen trackers zodat je veilig kunt surfen, tot 3 keer sneller dan met Chrome."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Mijn browser instellen"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Fout: "
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "Je bent nu uitgelogd"
 	},
 	"enable_when_paused": {
 		"message": "Hervat Ghostery om deze functie te gebruiken."

@@ -16,26 +16,24 @@ import BlockingPolicyReducer from '../BlockingPolicyReducer';
 import { SET_BLOCKING_POLICY } from '../../constants/BlockingPolicyConstants';
 
 const initialState = Immutable({
-	setup: {
-		blockingPolicy: true
-	}
+		blockingPolicy: ''
 });
 
 describe('app/shared-hub/reducers/BlockingPolicy', () => {
 	test('initial state is correct', () => {
-		expect(BlockingPolicyReducer(undefined, {})).toEqual({});
+		expect(BlockingPolicyReducer(undefined, {})).toEqual({...initialState});
 	});
 
 	test('reducer correctly handles SET_BLOCKING_POLICY', () => {
 		const data = {
-			blockingPolicy: true,
+			blockingPolicy: 'BLOCKING_POLICY_RECOMMENDED',
 		};
 		const action = { data, type: SET_BLOCKING_POLICY };
 
-		const updatedBlockingPolicyState = Immutable.merge(initialState.setup, data);
+		const updatedBlockingPolicyState = Immutable.merge(initialState, data);
 
 		expect(BlockingPolicyReducer(initialState, action)).toEqual({
-			setup: updatedBlockingPolicyState
+			...updatedBlockingPolicyState
 		});
 	});
 });
