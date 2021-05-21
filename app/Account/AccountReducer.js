@@ -28,7 +28,7 @@ import { UPDATE_PANEL_DATA } from '../panel/constants/constants';
 const initialState = {
 	loggedIn: false,
 	userID: '',
-	user: null,
+	user: null, // TODO It would be better to have a way to distinguish between 'no user' and 'user not fetched yet'
 	userSettings: null,
 	subscriptionData: null,
 	toastMessage: '',

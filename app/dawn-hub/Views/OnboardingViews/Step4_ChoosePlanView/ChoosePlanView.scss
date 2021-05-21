@@ -12,6 +12,7 @@
  */
 
 $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow to next line
+$plan-card-width: 250px;
 
 .ChoosePlanView {
 	margin: 45px auto 0 auto;
@@ -62,7 +63,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__searchPromoContainer {
 	width: 354px;
 	height: 381px;
-	margin: 48px auto 0 auto;
+	margin: 48px auto;
 	border-radius: 4px;
 	border: solid 4px $ghosty-blue;
 }
@@ -103,10 +104,11 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 }
 
 .ChoosePlanView__searchCTAButton {
+  	display: flex;
 	justify-content: center;
-	margin: 48px auto 0 auto;
 	min-height: 44px;
 	min-width: 162px;
+  	max-width: $plan-card-width;
 	padding: 7.7px 14px;
 	line-height: 22px;
 	background: linear-gradient(
@@ -138,9 +140,9 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__premiumCTAButton {
 	display: flex;
 	justify-content: center;
-	margin: 48px auto 0 auto;
 	height: 44px;
-	width: 162px;
+	min-width: 162px;
+  	max-width: $plan-card-width;
 	padding: 7.7px 14px;
 	line-height: 22px;
 	background: linear-gradient(
@@ -205,6 +207,11 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 }
 .ChoosePlanView__keepOrUpgradeContainer {
 	margin: 40px auto;
+
+	.ChoosePlanView__cardOuter {
+		height: 680px;
+	  	margin-bottom: rem-calc(50);
+	}
 }
 .ChoosePlanView__arrow {
 	margin: 15px auto 0 auto;
@@ -224,7 +231,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__card {
 	height: 100%;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
-	margin-bottom: rem-calc(40);
+	margin-bottom: rem-calc(50);
 	width: 250px;
 	margin-left: auto;
 	margin-right: auto;
@@ -345,6 +352,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	justify-content: flex-start;
 	margin-bottom: 5px;
 	text-align: left;
+  	font-size: 75%;
 }
 .check {
 	display: inline-block;

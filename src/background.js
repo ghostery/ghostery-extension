@@ -39,7 +39,6 @@ import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import account from './classes/Account';
-import promoModals from './classes/PromoModals';
 import SearchMessager from './classes/SearchMessager';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
@@ -495,9 +494,6 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
-		case 'SET_PREMIUM_PROMO_MODAL_SEEN':
-			promoModals.recordPremiumPromoSighting();
-			break;
 		case 'SEND_PING': {
 			const { type } = message;
 			metrics.ping(type);
@@ -989,22 +985,6 @@ function onMessageHandler(request, sender, callback) {
 		}
 		return false;
 	}
-	if (name === 'promoModals.sawPremiumPromo') {
-		promoModals.recordPremiumPromoSighting();
-		return false;
-	}
-	if (name === 'promoModals.sawInsightsPromo') {
-		promoModals.recordInsightsPromoSighting();
-		return false;
-	}
-	if (name === 'promoModals.sawPlusPromo') {
-		promoModals.recordPlusPromoSighting();
-		return false;
-	}
-	if (name === 'promoModals.turnOffPromos') {
-		promoModals.turnOffPromos();
-		return false;
-	}
 	return false;
 }
 
@@ -1416,6 +1396,19 @@ function initializeEventListeners() {
 				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
 				return true;
 			}
+
+			if (recognized && request.name === 'getDashboardStats') {
+				insights.action('getDashboardStats', ...(request.args || [])).then(sendResponse);
+				return true;
+			}
+
+			if (recognized && request.name === 'getUser') {
+				account.getUser()
+					.then(sendResponse)
+					.catch(() => sendResponse(null));
+				return true;
+			}
+
 			return false;
 		});
 	}

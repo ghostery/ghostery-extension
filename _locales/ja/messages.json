@@ -1777,7 +1777,7 @@
 		"message": "各種の署名と技術を統合したことにより、オンライン・プライバシーを一元的に管理できるようになりました。"
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "当社のブラウザはお客様のデータを保護し、ブロートウェアをブロックします。ネット・サーフィンをプライベートにお楽しみいただけるほか、Chromeと比べて2倍以上も高速です。"
+		"message": "Ghostery Dawnはデータをトラッカーから保護するため、Chromeよりも安全かつ最大3倍高速にネットサーフィンできます。"
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "ブラウザをセットアップ"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "エラー："
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "サインアウトしました"
 	},
 	"enable_when_paused": {
 		"message": "この機能を使用するには、Ghosteryを再開してください。"

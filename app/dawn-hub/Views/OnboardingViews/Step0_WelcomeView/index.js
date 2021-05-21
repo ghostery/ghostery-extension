@@ -14,9 +14,11 @@
 import { buildReduxHOC } from '../../../../shared-hub/utils';
 import WelcomeView from './WelcomeView';
 import { setSetupStep } from '../../../../shared-hub/actions/SetupLifecycleActions';
+import { getUser } from '../../../../Account/AccountActions';
 
 const actionCreators = {
 	setSetupStep,
+	getUser
 };
 
 export default buildReduxHOC([], actionCreators, WelcomeView);

@@ -14,16 +14,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
-import PromoModal from '../../shared-components/PromoModal';
 import ThemeContext from '../contexts/ThemeContext';
 import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
 import { log } from '../../../src/utils/common';
-
-const INSIGHTS = 'insights';
-const PLUS = 'plus';
-const PREMIUM = 'premium';
 
 /**
  * @class Implement base view with functionality common to all views.
@@ -240,89 +235,6 @@ class Panel extends React.Component {
 	}
 
 	/**
-	 * @returns {JSX}
-	 * @private
-	 * Renders the Premium promo modal
-	 */
-	_renderPremiumPromoModal = () => {
-		if (this._hasPremiumAccess()) return null;
-
-		sendMessage('promoModals.sawPremiumPromo', {});
-
-		return (
-			<PromoModal
-				type={PREMIUM}
-				location="panel"
-				isPlus={this._hasPlusAccess()}
-				show
-			/>
-		);
-	}
-
-	/**
-	 * @returns {null|JSX}
-	 * @private
-	 * Renders the Insights promo modal if the user is not already an Insights subscriber
-	 */
-	_renderInsightsPromoModal = () => {
-		if (this._insightsSubscriber()) return null;
-
-		sendMessage('promoModals.sawInsightsPromo', {});
-		sendMessage('ping', 'promo_modals_show_insights');
-
-		return (
-			<PromoModal
-				type={INSIGHTS}
-				show
-			/>
-		);
-	}
-
-	/**
-	 * @returns {null|JSX}
-	 * @private
-	 * Renders the Plus promo modal if the user is not already a Plus subscriber
-	 */
-	_renderPlusPromoModal = () => {
-		if (this._hasPlusAccess() || this._hasPremiumAccess()) { return null; }
-
-		sendMessage('promoModals.sawPlusPromo', {});
-
-		const { loggedIn } = this.props;
-		return (
-			<PromoModal
-				type={PLUS}
-				loggedIn={loggedIn}
-				show
-			/>
-		);
-	}
-
-	/**
-	 * @returns {null|JSX}
-	 * @private
-	 * Renders either the Insights or the Premium promo modal
-	 */
-	_renderPromoModal = () => {
-		const {
-			promoModal,
-			isPromoModalHidden,
-		} = this.props;
-
-		if (isPromoModalHidden) return null;
-
-		if (promoModal === 'insights') {
-			return this._renderInsightsPromoModal();
-		}
-
-		if (promoModal === 'premium') {
-			return this._renderPremiumPromoModal();
-		}
-
-		return null;
-	}
-
-	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
 	 */
@@ -339,7 +251,6 @@ class Panel extends React.Component {
 		const { current_theme } = this.props;
 		return (
 			<div id="panel">
-				{this._renderPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">
@@ -358,7 +269,6 @@ class Panel extends React.Component {
 						{ children }
 					</DynamicUIPortContext.Provider>
 				</ThemeContext.Provider>
-
 			</div>
 		);
 	}

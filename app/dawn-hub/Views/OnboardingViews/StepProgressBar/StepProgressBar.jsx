@@ -61,12 +61,6 @@ const StepProgressBar = (props) => {
 		step4: currentStepNumber === 4
 	});
 
-	const logoutIfStepOne = (stepId) => {
-		const { actions } = props;
-		const { logout } = actions;
-		if (stepId === LOGIN) logout();
-	};
-
 	const renderStep = (step, isCurrent, stepClass) => {
 		const labelClasses = ClassNames('StepProgressBar__label', {
 			current: isCurrent,
@@ -86,7 +80,7 @@ const StepProgressBar = (props) => {
 
 		return (
 			<div className="StepProgressBar__column">
-				<NavLink to={step.route} onClick={() => logoutIfStepOne(step.id)}>
+				<NavLink to={step.route}>
 					<div className={labelClasses}>{step.label}</div>
 					<div className={stepClasses} />
 				</NavLink>

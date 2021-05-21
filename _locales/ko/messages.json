@@ -1777,7 +1777,7 @@
 		"message": "시그니처 기술과 신기술을 통합하여 온라인 개인정보 보호를 중앙 집중화 했습니다."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "당사 브라우저는 이용자의 데이터를 보호하고 블로트웨어를 차단하므로 Chrome에서보다 3배 이상 빠르게 비공개 웹 서핑을 즐기실 수 있습니다."
+		"message": "Ghostery Dawn은 트래커로부터 데이터를 보호하므로 Chrome보다 안전하고 최대 3 배 빠르게 서핑 할 수 있습니다."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "내 브라우저 설정하기"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "오류:"
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "이제 로그 아웃되었습니다."
 	},
 	"enable_when_paused": {
 		"message": "이 기능을 사용하려면 Ghostery를 다시 시작하십시오."

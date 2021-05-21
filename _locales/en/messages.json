@@ -519,29 +519,6 @@
 		"message": "Audit marketing tags on a page",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "Explore global digital trends",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "Try for free"
-	},
-	"panel_insights_promotion_header": {
-		"message": "Try Ghostery Insights",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "Speed up and clean up digital user experience with our professional tag analytics tool.",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "Trace sources of poor performance",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "Watch pings fire in real-time",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "About Ghostery Browser Extension"
 	},
@@ -1777,7 +1754,7 @@
 		"message": "We've centralized online privacy by integrating our signature as well as novel technologies."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Our browser protects your data and blocks bloatware so that you can surf privately and over 3x faster than with Chrome."
+		"message": "Ghostery Dawn protects your data from trackers so that you can surf securely and up to 3x faster than with Chrome."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Set up My Browser"
@@ -1958,6 +1935,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Error: "
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "You are now signed out"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -2200,22 +2180,6 @@
 	"per_year": {
 		"message": "per year"
 	},
-	"faster_cleaner_browsing": {
-		"message": "Faster, Cleaner Browsing",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "Ad-Blocking",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "Tracker Blocking",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "Data Protection",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
 	"select_basic": {
 		"message": "Select Basic"
 	},
@@ -2303,10 +2267,6 @@
 	"historical_stats": {
 		"message": "Historical Stats"
 	},
-	"priority_support": {
-		"message": "Priority Support",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
 	"on": {
 		"message": "On"
 	},
@@ -2330,38 +2290,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "All basic features, plus:",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "Historical Tracker Stats",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "New Color Themes",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only &#36;2 per month.",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Upgrade your Ghostery experience",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "Upgrade to Plus",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "No thanks, turn promos off",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "Already subscribed? Sign In",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "Promos turned off. You can turn them back on in",

@@ -1777,7 +1777,7 @@
 		"message": "我們透過整合簽章及創新科技來集中管理線上隱私。"
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "我們的瀏覽器能防護您的資料並封鎖膨脹軟體，這樣您就能隱私瀏覽並獲得比 Chrome 快超過 3 倍的瀏覽速度。"
+		"message": "Ghostery Dawn保護您的數據免受跟踪器的侵害，因此您可以安全地進行沖浪，並且速度比Chrome快3倍。"
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "設定瀏覽器"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "錯誤："
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "您現在已登出"
 	},
 	"enable_when_paused": {
 		"message": "欲使用此功能，請重啟Ghostery。"
