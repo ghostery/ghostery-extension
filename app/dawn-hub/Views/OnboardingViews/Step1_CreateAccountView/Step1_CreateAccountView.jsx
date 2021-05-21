@@ -60,7 +60,7 @@ const renderFAQListItem = (icon, label, description) => (
  */
 const Step1_CreateAccountView = (props) => {
 	const { actions, step, user } = props;
-	const { setSetupStep, setToast } = actions;
+	const { setSetupStep, setToast, logout } = actions;
 	const email = user && user.email;
 
 	const [view, setView] = useState(CREATE_ACCOUNT);
@@ -94,12 +94,23 @@ const Step1_CreateAccountView = (props) => {
 		prev();
 	};
 
+	const handleLogout = () => {
+		logout().then(() => {
+			setView(SIGN_IN);
+			setToast({
+				toastMessage: '',
+				toastClass: 'logout'
+			});
+		});
+	};
+
 	const renderSkipLink = () => (
 		<div className="row align-center-middle">
 			<div className="columns small-10 medium-6" />
 			<div className="columns small-10 medium-6">
 				<NavLink className="Step1_CreateAccountView__skip" to="/onboarding/2" onClick={() => handleSkipButton(SKIP_ACCOUNT_CREATION)}>
 					<span>{t('ghostery_dawn_onboarding_skip')}</span>
+					<span className="Step1_CreateAccountView__arrow" />
 				</NavLink>
 			</div>
 		</div>
@@ -124,6 +135,12 @@ const Step1_CreateAccountView = (props) => {
 						<span>{t('next')}</span>
 					</NavLink>
 				)}
+			</div>
+			<div className="Step1_CreateAccountView__signOutContainer">
+				{t('ghostery_dawn_onboarding_or').toLocaleLowerCase()}
+				<div className="Step1_CreateAccountView__signOut" onClick={() => handleLogout()}>
+					<span>{t('sign_out')}</span>
+				</div>
 			</div>
 		</div>
 	) : (
@@ -160,11 +177,14 @@ const Step1_CreateAccountView = (props) => {
 					{(step === LOGIN) && renderSkipLink()}
 					<div className="Step1_CreateAccountView__FAQContainer">
 						{faqList.map(item => renderFAQListItem(item.icon, item.label, item.description))}
-					</div>
-					<div className="row">
-						<a className="Step1_CreateAccountView__privacyPolicyLink columns small-12 medium-10 medium-offset-1 large-8 large-offset-3" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
-							{t('ghostery_dawn_onboarding_visit_our_privacy_policy')}
-						</a>
+						<div className="row">
+							<div className="Step1_CreateAccountView__faqIconContainer columns small-12 medium-10 large-2" />
+							<div className="Step1_CreateAccountView__faqItemTextContainer columns small-12 medium-10 large-10">
+								<a className="Step1_CreateAccountView__privacyPolicyLink" href={`${globals.GHOSTERY_BASE_URL}/about-ghostery/ghostery-plans-and-products-privacy-policy/`} target="_blank" rel="noreferrer">
+									{t('ghostery_dawn_onboarding_visit_our_privacy_policy')}
+								</a>
+							</div>
+						</div>
 					</div>
 				</Fragment>
 			) : (

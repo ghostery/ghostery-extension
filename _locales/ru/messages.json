@@ -1777,7 +1777,7 @@
 		"message": "Мы централизовали конфиденциальность в Интернете, интегрировав нашу подпись, а также новые технологии."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Наш браузер защищает ваши данные и блокирует вредоносное ПО, поэтому вы можете пользоваться Интернетом конфиденциально и более чем в 3 раза быстрее, чем в Chrome."
+		"message": "Ghostery Dawn защищает ваши данные от трекеров, чтобы вы могли безопасно пользоваться Интернетом до трех раз быстрее чем с Chrome."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Настроить мой браузер"
@@ -1958,6 +1958,9 @@
 	},
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Ошибка:"
+	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "Вы вышли из системы"
 	},
 	"enable_when_paused": {
 		"message": "Для использования этой функции возобновите работу Ghostery."
