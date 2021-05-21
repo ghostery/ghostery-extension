@@ -18,9 +18,8 @@ import confData from './ConfData';
 import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
-import PromoModals from './PromoModals';
 import { isLog, activateLog } from '../utils/common';
-import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
+import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -201,7 +200,6 @@ class Debugger {
 		getUserData: 'ghostery.getUserData()',
 		openIntroHub: 'ghostery.openIntroHub()',
 		openPanel: 'ghostery.openPanel()',
-		showPromoModal: 'ghostery.showPromoModal()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
@@ -239,7 +237,6 @@ class Debugger {
 		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
 		[`${this._helpFunctionNames.openIntroHub}`, 'Open the classic or Dawn Hub in a new tab for automation testing'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
-		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
 	]
 
 	/**
@@ -396,7 +393,6 @@ class Debugger {
 		[`${CSS_SUBHEADER}Arguments`, 'Description'],
 		['First: true / false', 'Required. True to open the Dawn Hub. False to open the classic Hub.'],
 		['Second: true / false', 'Required. True to simulate first on-install open (justInstalled=true). Second to simulate return visit.'],
-		["Third: 'modal' / [omitted]", 'Optional. Include to show Hub promo modals.'],
 	];
 
 	/**
@@ -414,22 +410,6 @@ class Debugger {
 		[`${CSS_SUBHEADER}When called with...`, 'Opens...'],
 		['No argument', 'The standard panel for desktop'],
 		['mobile', 'The mobile panel for Android'],
-	];
-
-	/**
-	 * @access private
-	 * @since 8.5.3
-	 *
-	 * The help text for the public `showPromoModal()` method.
-	 * Displayed after calling ghostery.help('showPromoModal').
-	 */
-	static helpShowPromoModal = [
-		`${CSS_MAINHEADER}${this._helpFunctionNames.showPromoModal}`,
-		'Force the specified promo modal to display at the next opportunity.',
-		'That may be, for example, the next time you open the extension panel.',
-		'Resets after one display. If you need to see the modal again, call this function again',
-		'',
-		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 	];
 
 	/**
@@ -525,7 +505,6 @@ class Debugger {
 			helpGetUserData,
 			helpOpenIntroHub,
 			helpOpenPanel,
-			helpShowPromoModal,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
 			helpSettingsToggleOutputStyle,
@@ -548,16 +527,7 @@ class Debugger {
 		else if (eeFnName === 'getuserdata')		helpStringArr.push(...helpGetUserData);
 		else if (eeFnName === 'openintrohub')		helpStringArr.push(...helpOpenIntroHub);
 		else if (eeFnName === 'openpanel')			helpStringArr.push(...helpOpenPanel);
-		else if (eeFnName === 'showpromomodal') {
-			helpStringArr.push(...helpShowPromoModal);
-			const activeModalTypes = PromoModals.getActiveModalTypes();
-			activeModalTypes.forEach((amt) => {
-				const { val: cappedAmt } = capitalize(amt.toLowerCase());
-				helpStringArr.push([
-					`'${amt}'`, `Open the ${cappedAmt} modal at the next opportunity`,
-				]);
-			});
-		} else if (eeFnName === 'show')				helpStringArr.push(...helpSettingsShow);
+		else if (eeFnName === 'show')				helpStringArr.push(...helpSettingsShow);
 		else if (eeFnName === 'togglelogging')		helpStringArr.push(...helpSettingsToggleLogging);
 		else if (eeFnName === 'toggleoutputstyle')	helpStringArr.push(...helpSettingsToggleOutputStyle);
 		else 										helpStringArr.push(...invalidArgumentError);
@@ -799,14 +769,12 @@ class Debugger {
 	 *
 	 * @param	{Boolean}	isDawnHub		True to open the Dawn Hub. False to open the classic Hub.
 	 * @param	{Boolean}	justInstalled	True to simulate first, on-install visit. False to simulate return visit.
-	 * @param  	{String} 	[modal=''] 		Trigger upgrade modal(s) in addition to opening the hub if the value is 'modal'.
 	 * @return 	{String}					A thank you message.
 	 */
-	openIntroHub = (isDawnHub, justInstalled, modal = '') => {
+	openIntroHub = (isDawnHub, justInstalled) => {
 		const template = isDawnHub ? 'dawn_hub' : 'hub';
-		const showModal = modal.toLowerCase() === 'modal';
 		chrome.tabs.create({
-			url: chrome.runtime.getURL(`./app/templates/${template}.html?justInstalled=${justInstalled}&pm=${showModal}`),
+			url: chrome.runtime.getURL(`./app/templates/${template}.html?justInstalled=${justInstalled}`),
 			active: true
 		});
 		return THANKS;
@@ -913,48 +881,6 @@ class Debugger {
 			.then(data => _printUserData(data))
 			.catch(error => _printError(error))
 			.finally(() => _printAccountEvents());
-	}
-
-	/**
-	 * @since 8.5.3
-	 *
-	 * Force the specified promo modal to trigger once, at the next opportunity.
-	 *
-	 * @param 	{String} modalType		The modal to trigger. The help output for this function shows currently valid values, which may vary over time as modals are added and removed. Valid values are also printed if an invalid one is supplied.
-	 * @return 	{String}				A thank you message.
-	 */
-	showPromoModal = (modalType) => {
-		const result = PromoModals.showOnce(modalType);
-
-		if (result === 'success') {
-			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
-			Debugger._printToConsole(
-				Debugger._typeset([
-					`${CSS_SUBHEADER}Success!`,
-					`The ${cappedModalType} modal will trigger at the next opportunity`,
-				])
-			);
-
-			return (THANKS);
-		}
-
-		if (result === 'failure') {
-			const noDice = [
-				`${CSS_SUBHEADER}No dice`,
-				'That was not a valid argument. Here are the valid ones:',
-				'',
-				...Debugger._assembleHelpStringArr('showPromoModal')
-			];
-			Debugger._printToConsole(Debugger._typeset(noDice));
-
-			return (THANKS);
-		}
-
-		Debugger._printToConsole(Debugger._typeset([
-			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
-		]));
-
-		return ('Welcome to the Twilight Zone');
 	}
 
 	// [[Main Actions]] public wrt to other background code, but intentionally not fully exposed to the console

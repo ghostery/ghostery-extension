@@ -1,4 +1,9 @@
-### GHOSTERY 8.5.6 ()
+### GHOSTERY 8.5.7 ()
+
++ Remove promo modals for Insights and Midnight (#706)
++ Allow host name fuzzy matching for Compatibility URLs (#680)
+
+### GHOSTERY 8.5.6 (April 12, 2021)
 
 This release is for Ghostery Dawn only.
 
