@@ -811,3 +811,14 @@ export function semverCompare(a, b) {
 	}
 	return 0;
 }
+
+/**
+ * Helper for building query string key value pairs
+ *
+ * @since 8.5.4
+ * @param  {string}  query		param to be included in string
+ * @param  {string}  value		number value to be passed on through qeury string
+ * @param  {boolean} queryStart	indicates whether the returned string is intended for start of a query
+ * @return {string}         	complete query component
+ */
+export const buildQueryPair = (query, value, queryStart = false) => `${queryStart ? '?' : '&'}${query}=${encodeURIComponent(value)}`;

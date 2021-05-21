@@ -13,7 +13,7 @@
 
 import conf from './Conf';
 import globals from './Globals';
-import { getJson } from '../utils/utils';
+import { getJson, buildQueryPair } from '../utils/utils';
 import { log } from '../utils/common';
 
 const {
@@ -90,19 +90,36 @@ class CMP {
 		this.CMP_DATA = data.Campaigns;
 	}
 
+	static _getSubStatus() {
+		let subStatus = 'free';
+		if (conf.account && conf.account.subscriptionData) {
+			switch (conf.account.subscriptionData.productName) {
+				case 'Ghostery Plus':
+					subStatus = 'plus';
+					break;
+				case 'Ghostery Premium':
+					subStatus = 'premium';
+					break;
+				default:
+					break;
+			}
+		}
+		return subStatus;
+	}
+
 	static async _buildUrl() {
 		await BROWSER_INFO_READY;
 		return (`${CMP_BASE_URL}/check
-			?os=${encodeURIComponent(BROWSER_INFO.os)}
-			&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
-			&install_date=${encodeURIComponent(conf.install_date)}
-			&ir=${encodeURIComponent(conf.install_random_number)}
-			&gv=${encodeURIComponent(EXTENSION_VERSION)}
-			&si=${encodeURIComponent(conf.account ? '1' : '0')}
-			&ua=${encodeURIComponent(BROWSER_INFO.name)}
-			&lc=${encodeURIComponent(conf.last_cmp_date)}
-			&v=${encodeURIComponent(conf.cmp_version)}
-			&l=${encodeURIComponent(conf.language)}`
+			${buildQueryPair('os', BROWSER_INFO.os, true)}
+			${buildQueryPair('hw', conf.enable_human_web ? '1' : '0')}
+			${buildQueryPair('install_date', conf.install_date)}
+			${buildQueryPair('ir', conf.install_random_number)}
+			${buildQueryPair('gv', EXTENSION_VERSION)}
+			${buildQueryPair('ua', BROWSER_INFO.name)}
+			${buildQueryPair('lc', conf.last_cmp_date)}
+			${buildQueryPair('v', conf.cmp_version)}
+			${buildQueryPair('l', conf.language)}
+			${buildQueryPair('ss', this._getSubStatus())}`
 		);
 	}
 
