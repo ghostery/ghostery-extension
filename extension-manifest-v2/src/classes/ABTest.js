@@ -19,7 +19,12 @@ import globals from './Globals';
 import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
-const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION } = globals;
+const {
+	BROWSER_INFO_READY,
+	BROWSER_INFO,
+	CMP_BASE_URL,
+	EXTENSION_VERSION
+} = globals;
 
 /** Helper class for handling A/B tests.
  * @memberof  BackgroundClasses
@@ -54,33 +59,34 @@ class ABTest {
 	fetch(irDebugOverride) {
 		log('A/B Tests: fetching...');
 
-		const URL = ABTest._buildURL(irDebugOverride);
-
-		return getJson(URL).then((data) => {
-			if (data && Array.isArray(data)) {
-				log('A/B Tests: fetched', JSON.stringify(data));
-				this._updateTests(data);
-				log('A/B Tests: tests updated to', this.getTests());
-			} else {
-				log('A/B Tests: no tests found.');
-			}
-		}).catch(() => {
-			log('A/B Tests: error fetching.');
-		});
+		return ABTest._buildURL(irDebugOverride)
+			.then(url => getJson(url))
+			.then((data) => {
+				if (data && Array.isArray(data)) {
+					log('A/B Tests: fetched', JSON.stringify(data));
+					this._updateTests(data);
+					log('A/B Tests: tests updated to', this.getTests());
+				} else {
+					log('A/B Tests: no tests found.');
+				}
+			}).catch(() => {
+				log('A/B Tests: error fetching.');
+			});
 	}
 
 	silentFetch(ir) {
-		const URL = ABTest._buildURL(ir);
-
-		return getJson(URL).then((data) => {
-			if (data && Array.isArray(data)) {
-				this._updateTests(data);
-			}
-			return 'resolved';
-		}).catch(() => 'rejected');
+		return ABTest._buildURL(ir)
+			.then(url => getJson(url))
+			.then((data) => {
+				if (data && Array.isArray(data)) {
+					this._updateTests(data);
+				}
+				return 'resolved';
+			}).catch(() => 'rejected');
 	}
 
-	static _buildURL(ir) {
+	static async _buildURL(ir) {
+		await BROWSER_INFO_READY;
 		return (`${CMP_BASE_URL}/abtestcheck
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&install_date=${encodeURIComponent(conf.install_date)}
