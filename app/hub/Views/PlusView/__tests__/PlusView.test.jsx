@@ -54,8 +54,8 @@ describe('app/hub/Views/PlusView component', () => {
 			const component = shallow(<PlusView {...initialState} />);
 			expect(component.find('.PlusView').length).toBe(1);
 			expect(component.find('.PlusView__headingImage').length).toBe(1);
-			expect(component.find('.PlusView__headingTitle').length).toBe(5);
-			expect(component.find('.PlusView__headingDescription').length).toBe(5);
+			expect(component.find('.PlusView__headingTitle').length).toBe(1);
+			expect(component.find('.PlusView__headingDescription').length).toBe(1);
 			expect(component.find('.PlusView__perk').length).toBe(3);
 			expect(component.find('.PlusView__perkIcon').length).toBe(3);
 			expect(component.find('.PlusView__perkTitle').length).toBe(3);
@@ -63,7 +63,6 @@ describe('app/hub/Views/PlusView component', () => {
 			expect(component.find('.PlusView__manifestoContainer').length).toBe(1);
 			expect(component.find('.PlusView__manifestoBackground').length).toBe(1);
 			expect(component.find('.PlusView__manifestoText').length).toBe(1);
-			expect(component.find('.PlusView__featureImage').length).toBe(5);
 
 			expect(initialState.onPlusClick.mock.calls.length).toBe(0);
 			component.find('.PlusView__button').first().simulate('click');
@@ -71,11 +70,11 @@ describe('app/hub/Views/PlusView component', () => {
 
 			expect(component.find('.PlusView__button').first().props().href).toBe('https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus')
 
-			expect(component.find('.PlusView__button').length).toBe(8);
+			expect(component.find('.PlusView__button').length).toBe(1);
 			expect(component.find('.PlusView__button.disabled').length).toBe(0);
 			component.setProps({ isPlus: true });
-			expect(component.find('.PlusView__button').length).toBe(8);
-			expect(component.find('.PlusView__button.disabled').length).toBe(8);
+			expect(component.find('.PlusView__button').length).toBe(1);
+			expect(component.find('.PlusView__button.disabled').length).toBe(1);
 		});
 	});
 });
