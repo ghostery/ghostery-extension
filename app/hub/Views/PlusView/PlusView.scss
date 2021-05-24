@@ -113,8 +113,8 @@
 .PlusView__perkIcon.dawnAndGlow {
 	background-image: buildPerkStatsIcon(#a8ca59, #0a0a0a); // TODO: update icon
 }
-.PlusView__perkIcon.support {
-	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a);
+.PlusView__perkIcon.analytics {
+	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a); // TODO: update icon
 }
 .PlusView__featureImage.theme {
 	max-width: 420px;

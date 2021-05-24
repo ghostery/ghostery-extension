@@ -1633,20 +1633,26 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "Custom Themes & More"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Customize the Ghostery colors - try our Leaf, Palm, and Dark Blue themes!"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Customize the Ghostery colors - try our Dark Blue theme!"
+	},
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "Advanced Tracker Analytics"
+	},
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "Access Ghostery Insights, our real-time tracker intelligence dashboard"
 	},
   	"hub_supporter_perk_dawn_and_glow_title": {
 	  "message": "Private Browser and Search"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
 	  "message": "Download Ghostery Dawn and Glow, our powerful private browser with built-in search engine"
-	},
-  "hub_supporter_perk_more_title": {
-		"message": "Priority Support & More"
-	},
-	"hub_supporter_perk_more_description": {
-		"message": "Resolve issues fast with our Priority help desk service - and more perks to come"
 	},
 	"hub_supporter_manifesto": {
 		"message": "We strive to deliver the best privacy protection services to our users free of cost. While we do not charge for our browser extension, you may choose to support us through a monthly subscription of &#36;4.99. Join us in our mission by upgrading to Ghostery Plus - and unlock cool perks along the way!"

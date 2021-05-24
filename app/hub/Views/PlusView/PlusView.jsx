@@ -68,12 +68,12 @@ class PlusView extends Component {
 				</div>
 				<div className="PlusView--addPaddingTop row small-up-1 large-up-3 align-center">
 					<div className="PlusView__perk columns text-center">
-						<div className="PlusView__perkIcon themes" />
+						<div className="PlusView__perkIcon analytics" />
 						<div className="PlusView__perkTitle">
-							{t('new_themes')}
+							{t('hub_supporter_perk_analytics_title')}
 						</div>
 						<div className="PlusView__perkDescription">
-							{t('hub_supporter_perk_themes_description')}
+							{t('hub_supporter_perk_analytics_description')}
 						</div>
 					</div>
 					<div className="PlusView__perk columns text-center">
@@ -86,12 +86,12 @@ class PlusView extends Component {
 						</div>
 					</div>
 					<div className="PlusView__perk columns text-center">
-						<div className="PlusView__perkIcon support" />
+						<div className="PlusView__perkIcon themes" />
 						<div className="PlusView__perkTitle">
-							{t('hub_supporter_perk_more_title')}
+							{t('hub_supporter_perk_themes_and_more_title')}
 						</div>
 						<div className="PlusView__perkDescription">
-							{t('hub_supporter_perk_more_description')}
+							{t('hub_supporter_perk_themes_and_more_description')}
 						</div>
 					</div>
 				</div>
