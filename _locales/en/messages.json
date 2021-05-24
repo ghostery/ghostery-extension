@@ -1614,7 +1614,7 @@
 		"message": "Upgrade to Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-		"message": "Show your support and unlock special perks!"
+	  "message": "Go beyond basic privacy and unlock our full product suite!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ per month",
@@ -1636,10 +1636,13 @@
 	"hub_supporter_perk_themes_description": {
 		"message": "Customize the Ghostery colors - try our Dark Blue theme!"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "View your blocking statistics and see how Ghostery is working for you"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "Private Browser and Search"
 	},
-	"hub_supporter_perk_more_title": {
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "Download Ghostery Dawn and Glow, our powerful private browser with built-in search engine"
+	},
+  "hub_supporter_perk_more_title": {
 		"message": "Priority Support & More"
 	},
 	"hub_supporter_perk_more_description": {

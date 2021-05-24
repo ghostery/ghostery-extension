@@ -77,12 +77,12 @@ class PlusView extends Component {
 						</div>
 					</div>
 					<div className="PlusView__perk columns text-center">
-						<div className="PlusView__perkIcon stats" />
+						<div className="PlusView__perkIcon dawnAndGlow" />
 						<div className="PlusView__perkTitle">
-							{t('historical_blocking_stats')}
+							{t('hub_supporter_perk_dawn_and_glow_title')}
 						</div>
 						<div className="PlusView__perkDescription">
-							{t('hub_supporter_perk_stats_description')}
+							{t('hub_supporter_perk_dawn_and_glow_description')}
 						</div>
 					</div>
 					<div className="PlusView__perk columns text-center">
