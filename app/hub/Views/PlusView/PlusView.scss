@@ -111,10 +111,10 @@
 	background-image: buildPerkThemeIcon(#a8ca59, #0a0a0a);
 }
 .PlusView__perkIcon.dawnAndGlow {
-	background-image: buildPerkStatsIcon(#a8ca59, #0a0a0a); // TODO: update icon
+	background-image: buildPerkDawnAndGlowIcon(#a8ca59, #0a0a0a); // TODO: update icon
 }
 .PlusView__perkIcon.analytics {
-	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a); // TODO: update icon
+	background-image: buildPerkAnalyticsIcon(#a8ca59, #0a0a0a);
 }
 .PlusView__featureImage.theme {
 	max-width: 420px;
