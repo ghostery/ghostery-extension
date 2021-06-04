@@ -1328,9 +1328,6 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "Advanced Device Protection"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "Maximum Browser Protection"
-	},
 	"hub_upgrade_to": {
 		"message": "Upgrade to"
 	},

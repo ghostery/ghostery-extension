@@ -16,7 +16,7 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import QueryString from 'query-string';
-import { BASIC, PLUS, PREMIUM } from './UpgradePlanViewConstants';
+import { BASIC, PLUS } from './UpgradePlanViewConstants';
 import globals from '../../../../src/classes/Globals';
 
 const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
@@ -108,12 +108,6 @@ const plusAlreadyProtectedButton = () => (
 	</NavLink>
 );
 
-const premiumAlreadyProtectedButton = () => (
-	<NavLink className="button button-premium" to="/home" title="Already Protected">
-		{t('hub_upgrade_already_protected')}
-	</NavLink>
-);
-
 // Whether we are displaying this Upgrade Plan view in the alternate or the default Hub layout (as per the A/B test in ticket GH-2097)
 const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
@@ -154,9 +148,6 @@ const UpgradePlanView = (props) => {
 	const tabsTitleGoldClassNames = ClassNames('tabs-title tabs-title-gold', {
 		'is-active': protection_level === PLUS
 	});
-	const tabsTitlePurpleClassNames = ClassNames('tabs-title tabs-title-purple', {
-		'is-active': protection_level === PREMIUM
-	});
 	const monthlyToggleLabel = ClassNames('toggle-label', {
 		active: !show_yearly_prices
 	});
@@ -192,25 +183,9 @@ const UpgradePlanView = (props) => {
 		);
 	};
 
-	const premiumCTAButton = (position) => {
-		const utm_campaign = (position === 'top' ? 'c_3' : 'c_4');
-		const utm_content = (ah ? '2' : '1');
-		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${params}&utm_campaign=intro_hub_${utm_campaign}&utm_content=${utm_content}`;
-
-		return (
-			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-				{`${t('hub_upgrade_to')} Premium`}
-			</a>
-		);
-	};
-
 	const plusButtonTop = () => (isPlus ? plusAlreadyProtectedButton() : plusCTAButton('top'));
 
 	const plusButtonBottom = () => (isPlus ? plusAlreadyProtectedButton() : plusCTAButton('bottom'));
-
-	const premiumButtonTop = () => (isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('top'));
-
-	const premiumButtonBottom = () => (isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('bottom'));
 
 	const toggleSwitch = (mobileView, secondToggle) => {
 		const toggleSwitchClassNames = ClassNames('small-12 text-center columns', {
@@ -269,51 +244,6 @@ const UpgradePlanView = (props) => {
 		</div>
 	);
 
-	const premiumCard = mobileView => (
-		<div className="card-outer card-outer-remove">
-			<div className="card premium" data-equalizer-watch>
-				<div className="ghostery-premium-image-container">
-					<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-				</div>
-				<div className="ghostery-premium-image-background" />
-				<h2>Ghostery Premium</h2>
-				<div className="price">
-					{show_yearly_prices ? (
-						<React.Fragment>
-							<p className="price-purple sub-text font-size-36">$8.99</p>
-							<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-							<div className="price-per-year">
-								<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
-							</div>
-						</React.Fragment>
-					) : (
-						<React.Fragment>
-							<p className="price-purple sub-text font-size-36">$11.99</p>
-							<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-						</React.Fragment>
-					)}
-				</div>
-				{mobileView && toggleSwitch(true)}
-				{premiumButtonTop()}
-				<p className="card-sub-header">
-					<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
-				</p>
-				<p className="card-sub-copy">
-					<span className="check blue" />
-					{t('hub_upgrade_basic_browser_protection')}
-				</p>
-				<p className="card-sub-copy">
-					<span className="check blue" />
-					{t('hub_upgrade_advanced_device_protection')}
-				</p>
-				<p className="card-sub-copy">
-					<span className="check blue" />
-					VPN
-				</p>
-			</div>
-		</div>
-	);
-
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-extra-large">
@@ -329,7 +259,6 @@ const UpgradePlanView = (props) => {
 				<div className="row align-center text-center" data-equalizer data-equalize-on="medium">
 					{basicCard()}
 					{plusCard()}
-					{premiumCard()}
 				</div>
 			</div>
 
@@ -344,14 +273,12 @@ const UpgradePlanView = (props) => {
 						<ul className="tiers-group tabs menu align-center" data-tabs id="price-tabs">
 							<li className={tabsTitleBlueClassNames} onClick={setBasicProtection}>{t('hub_upgrade_plan_free')}</li>
 							<li className={tabsTitleGoldClassNames} onClick={setPlusProtection}>Plus</li>
-							<li className={tabsTitlePurpleClassNames} onClick={setPremiumProtection}>Premium</li>
 						</ul>
 					</div>
 				</div>
 				<div className="tabs-content" data-tabs-content="price-tabs">
 					{protection_level === BASIC && basicCard()}
 					{protection_level === PLUS && plusCard(true)}
-					{protection_level === PREMIUM && premiumCard(true)}
 				</div>
 			</div>
 			<div className="row align-center module-editor text-center show-for-extra-large">
@@ -417,9 +344,6 @@ const UpgradePlanView = (props) => {
 										</td>
 										<td>
 											{plusButtonBottom()}
-										</td>
-										<td>
-											{premiumButtonBottom()}
 										</td>
 									</tr>
 								</tbody>
@@ -501,11 +425,6 @@ const UpgradePlanView = (props) => {
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
 								{plusButtonBottom()}
-							</span>
-						</div>
-						<div className="small-12 text-center columns">
-							<span className="col-premium">
-								{premiumButtonBottom()}
 							</span>
 						</div>
 					</div>

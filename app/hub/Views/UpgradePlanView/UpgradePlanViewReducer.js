@@ -15,10 +15,8 @@ import {
 	TOGGLE_MONTHLY_YEARLY_PRICES,
 	SET_BASIC_PROTECTION,
 	SET_PLUS_PROTECTION,
-	SET_PREMIUM_PROTECTION,
 	BASIC,
-	PLUS,
-	PREMIUM
+	PLUS
 } from './UpgradePlanViewConstants';
 
 const initialState = {
@@ -44,12 +42,6 @@ function UpgradePlanViewReducer(state = initialState, action) {
 			return {
 				...state,
 				protection_level: PLUS
-			};
-		}
-		case SET_PREMIUM_PROTECTION: {
-			return {
-				...state,
-				protection_level: PREMIUM
 			};
 		}
 		default: return state;
