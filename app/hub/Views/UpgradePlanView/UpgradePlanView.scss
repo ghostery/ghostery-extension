@@ -596,6 +596,9 @@ section.home-template .section.section-pricing {
 				tr:nth-child(2n+1) {
 					background-color: #FFF;
 				}
+			  	tr:last-child {
+				  background-color: #F7F7F7;
+				}
 			}
 			@include breakpoint ($medium-large-breakpoint down) {
 				tr:nth-child(4n), tr:nth-child(4n+3) {
@@ -680,4 +683,5 @@ section.home-template .section.section-pricing {
 .feature-matrix-table {
   position: relative;
   left: -100px;
+  margin-top: 60px;
 }
