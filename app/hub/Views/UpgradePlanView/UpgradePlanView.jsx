@@ -293,7 +293,7 @@ const UpgradePlanView = (props) => {
 									<button type="button">Ghostery Plus</button>
 								</li>
 							</ul>
-							<table>
+							<table className="feature-matrix-table">
 								<thead>
 									<tr>
 										<th className="hide" aria-label="hide" />
