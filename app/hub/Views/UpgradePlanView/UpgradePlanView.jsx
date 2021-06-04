@@ -19,13 +19,10 @@ import QueryString from 'query-string';
 import { BASIC, PLUS } from './UpgradePlanViewConstants';
 import globals from '../../../../src/classes/Globals';
 
-const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
+const featureMatrixRow = (label, isBasic, isPlus) => (
 	<tr>
 		<td>
 			{label}
-			{isSparkle &&
-				<span className="premium-sparkle" />
-			}
 		</td>
 		<td className="default">
 			{isBasic &&
@@ -37,44 +34,35 @@ const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
 				<span className="check yellow" />
 			}
 		</td>
-		<td>
-			<span className="check purple" />
-		</td>
 	</tr>
 );
 
-const mobileFeatureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
+const mobileFeatureMatrixRow = (label, isBasic, isPlus) => (
 	<Fragment>
 		<tr>
-			<td colSpan="3">
+			<td colSpan="4">
 				<span className="feature-title">{label}</span>
-				{isSparkle &&
-					<span className="premium-sparkle" />
-				}
 			</td>
 		</tr>
 		<tr className="border-bottom">
 			{isBasic ? (
-				<td className="col-free">
+				<td className="col-free" colSpan="2">
 					<span className="check blue" />
 				</td>
 			) : (
-				<td>
+				<td colSpan="2">
 					<span className="x-icon" />
 				</td>
 			)}
 			{isPlus ? (
-				<td className="col-plus">
+				<td className="col-plus" colSpan="2">
 					<span className="check yellow" />
 				</td>
 			) : (
-				<td>
+				<td colSpan="2">
 					<span className="x-icon" />
 				</td>
 			)}
-			<td className="col-premium">
-				<span className="check purple" />
-			</td>
 		</tr>
 	</Fragment>
 );
@@ -304,21 +292,13 @@ const UpgradePlanView = (props) => {
 								<li className="bg-gold">
 									<button type="button">Ghostery Plus</button>
 								</li>
-								<li className="bg-purple-blue">
-									<button type="button">Ghostery Premium</button>
-								</li>
 							</ul>
-							<div className="key-container">
-								<span className="premium-sparkle" />
-								<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
-							</div>
 							<table>
 								<thead>
 									<tr>
 										<th className="hide" aria-label="hide" />
 										<th className="bg-blue default">Ghostery</th>
 										<th className="bg-gold">Ghostery Plus</th>
-										<th className="bg-purple-blue">Ghostery Premium</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -327,14 +307,6 @@ const UpgradePlanView = (props) => {
 									{featureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
 									{featureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
 									{featureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
-									{featureMatrixRow(t('hub_upgrade_application_tracker_blocking'), false, true, true)}
-									{featureMatrixRow(t('hub_upgrade_application_ad_blocking'), false, true, true)}
-									{featureMatrixRow('VPN', false, false, true)}
-									{featureMatrixRow(t('hub_upgrade_no_vpn_logs'), false, false, true)}
-									{featureMatrixRow(`P2P ${t('support')}`, false, false, true)}
-									{featureMatrixRow(`IPv6 ${t('hub_upgrade_leak_protection')}`, false, false, true)}
-									{featureMatrixRow(t('hub_upgrade_physical_servers'), false, false, true)}
-									{featureMatrixRow(t('hub_upgrade_unlimited_bandwidth'), false, false, true)}
 									<tr>
 										<td />
 										<td className="default">
@@ -353,41 +325,26 @@ const UpgradePlanView = (props) => {
 				</div>
 			</div>
 
-			<div className="key-container mobile hide-for-extra-large">
-				<span className="premium-sparkle" />
-				<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
-			</div>
-
 			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-extra-large">
 				{toggleSwitch(true, true)}
 				<div className="mobile-table-header">
 					<div className="row align-top align-center">
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							<p className="protection-description blue">{t('ghostery_basic')}</p>
 						</div>
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							<p className="protection-description yellow">Plus</p>
-						</div>
-						<div className="small-4 text-center columns">
-							<p className="protection-description purple">Premium</p>
 						</div>
 					</div>
 					<div className="row align-top align-center">
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							<p className="protection-header protection-header-free price-blue"><strong>{t('hub_upgrade_plan_free')}</strong></p>
 						</div>
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							{show_yearly_prices ? (
 								<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active"><strong>$3.99</strong></span></p>
 							) : (
 								<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
-							)}
-						</div>
-						<div className="small-4 text-center columns">
-							{show_yearly_prices ? (
-								<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active"><strong>$8.99</strong></span></p>
-							) : (
-								<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
 							)}
 						</div>
 					</div>
@@ -402,14 +359,6 @@ const UpgradePlanView = (props) => {
 									{mobileFeatureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
 									{mobileFeatureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
 									{mobileFeatureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_application_tracker_blocking'), false, true, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_application_ad_blocking'), false, true, true)}
-									{mobileFeatureMatrixRow('VPN', false, false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_no_vpn_logs'), false, false, true)}
-									{mobileFeatureMatrixRow(`P2P ${t('support')}`, false, false, true)}
-									{mobileFeatureMatrixRow(`IPv6 ${t('hub_upgrade_leak_protection')}`, false, false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_physical_servers'), false, false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_unlimited_bandwidth'), false, false, true)}
 								</tbody>
 							</table>
 						</div>

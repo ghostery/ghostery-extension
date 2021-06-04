@@ -75,7 +75,6 @@ section.home-template .section.section-pricing {
 			}
 		}
 		&-gold {
-			border-right: 2px solid #6a6a6a;
 			&.is-active {
 				background-color: $price-gold;
 				color: #FFF;
@@ -348,15 +347,6 @@ section.home-template .section.section-pricing {
 		}
 	}
 
-	.premium-sparkle {
-		margin-left: 5px;
-		display: inline-block;
-		vertical-align: middle;
-		height: 14px;
-		width: 12px;
-		background-repeat: no-repeat;
-		background-image: url('/app/images/premium-sparkle.svg');
-	}
 	.check {
 		display: inline-block;
 		width: 20px;
@@ -476,26 +466,6 @@ section.home-template .section.section-pricing {
 		cursor: pointer
 	}
 
-	.key-container {
-		height: 70px;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-		&.mobile {
-			@include breakpoint($medium-large-breakpoint up) {
-				display: none
-			}
-		}
-		@include breakpoint($medium-large-breakpoint down) {
-			justify-content: center;
-		}
-		.midnight-note {
-			margin-left: 15px;
-			color: $price-purple-alt;
-		}
-	}
-
 	.button {
 		text-transform: none;
 		white-space: nowrap;
@@ -517,7 +487,7 @@ section.home-template .section.section-pricing {
 		padding-bottom: rem-calc(100);
 		margin-top: rem-calc(40);
 		@include breakpoint($medium-large-breakpoint down) {
-			margin-top: 0;
+			margin-top: rem-calc(40);
 			padding-top: 0;
 			background-color: $white;
 		}
@@ -655,9 +625,6 @@ section.home-template .section.section-pricing {
 		}
 		.bg-gold {
 			background-color: $price-gold;
-		}
-		.bg-purple-blue {
-			background-image: linear-gradient(120deg, #720174 0%, #5a258e 18%, #2a6ec2 57%, #0c9ce3 86%, #00aef0 100%);
 		}
 		.sep {
 			background:$alabaster;

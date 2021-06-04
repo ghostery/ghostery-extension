@@ -1334,9 +1334,6 @@
 	"hub_upgrade_scroll_down": {
 		"message": "See full list of features"
 	},
-	"hub_upgrade_midnight_note": {
-		"message": "Must have Ghostery Midnight installed"
-	},
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"
 	},
@@ -1357,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "Historical Extension Stats"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "Application Tracker Blocking"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "Application Ad Blocking"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "No VPN logs"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "Leak Protection"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "Physical Servers"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "Unlimited Bandwidth"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
