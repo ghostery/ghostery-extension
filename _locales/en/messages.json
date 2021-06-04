@@ -1290,7 +1290,7 @@
 		"message": "Custom Setup Complete"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "Go beyond basic privacy. Upgrade your Ghostery plan to receive device-level protection, VPN access, and more!"
+	  	"message": "Go beyond basic privacy. Upgrade to Ghostery Plus to access our powerful private browser, private search, and advanced tracker analytics!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Upgrade now"
