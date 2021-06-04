@@ -307,7 +307,8 @@ const UpgradePlanView = (props) => {
 									{featureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
 									{featureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
 									{featureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
-									{featureMatrixRow(t('hub_supporter_perk_analytics_title'), false, true)}
+									{featureMatrixRow(t('plus_subscriber_perk_insights'), false, true)}
+									{featureMatrixRow(t('plus_subscriber_perk_glow'), false, true)}
 									<tr>
 										<td />
 										<td className="default">
@@ -360,7 +361,8 @@ const UpgradePlanView = (props) => {
 									{mobileFeatureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
 									{mobileFeatureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
 									{mobileFeatureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
-									{mobileFeatureMatrixRow(t('hub_supporter_perk_analytics_title'), false, true)}
+									{mobileFeatureMatrixRow(t('plus_subscriber_perk_insights'), false, true)}
+									{mobileFeatureMatrixRow(t('plus_subscriber_perk_glow'), false, true)}
 								</tbody>
 							</table>
 						</div>
