@@ -121,11 +121,9 @@ const UpgradePlanView = (props) => {
 		toggleMonthlyYearlyPrices,
 		setBasicProtection,
 		setPlusProtection,
-		setPremiumProtection
 	} = actions;
 
 	const isPlus = (user && user.plusAccess) || false;
-	const isPremium = (user && user.premiumAccess) || false;
 
 	const sliderClassNames = ClassNames('switch-check', {
 		checked: show_yearly_prices
@@ -400,7 +398,6 @@ UpgradePlanView.propTypes = {
 		toggleMonthlyYearlyPrices: PropTypes.func.isRequired,
 		setBasicProtection: PropTypes.func.isRequired,
 		setPlusProtection: PropTypes.func.isRequired,
-		setPremiumProtection: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
