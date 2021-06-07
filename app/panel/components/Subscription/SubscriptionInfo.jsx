@@ -79,9 +79,12 @@ const SubscriptionInfo = ({ subscriptionData }) => {
 									</div>
 									<div className="list-row">
 										<ul>
-											<li className="list-item">{t('custom_themes')}</li>
+											<li className="list-item">{t('plus_subscriber_perk_insights')}</li>
+											<li className="list-item">{t('plus_subscriber_perk_dawn')}</li>
+											<li className="list-item">{t('plus_subscriber_perk_glow')}</li>
+											<li className="list-item">{t('plus_subscriber_perk_custom_color_themes')}</li>
 											<li className="list-item">{t('historical_stats')}</li>
-											<li className="list-item">{t('priority_support')}</li>
+											<li className="list-item">{t('plus_subscriber_perk_priority_support')}</li>
 										</ul>
 									</div>
 									<div className="manage-row">
