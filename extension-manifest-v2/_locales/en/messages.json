@@ -1290,7 +1290,7 @@
 		"message": "Custom Setup Complete"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "Go beyond basic privacy. Upgrade your Ghostery plan to receive device-level protection, VPN access, and more!"
+	  	"message": "Go beyond basic privacy. Upgrade to Ghostery Plus to access our powerful private browser, private search, and advanced tracker analytics!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Upgrade now"
@@ -1328,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "Advanced Device Protection"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "Maximum Browser Protection"
-	},
 	"hub_upgrade_to": {
 		"message": "Upgrade to"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "See full list of features"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Must have Ghostery Midnight installed"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"
@@ -1360,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "Historical Extension Stats"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "Application Tracker Blocking"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "Application Ad Blocking"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "No VPN logs"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "Leak Protection"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "Physical Servers"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "Unlimited Bandwidth"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
@@ -1976,7 +1952,7 @@
 		"message": "Themes"
 	},
 	"subscribe_pitch": {
-		"message": "While Ghostery is free, you can choose to support us through a monthly subscription of &#36;4.99 in exchange for special perks, like color themes, personal tracking statistics, and more. Join our mission and subscribe!"
+	  "message": "Upgrade to Ghostery Plus to unlock our full product suite! For just &#36;4.99 per month, get access to a powerful private browser with built-in private search, advanced tracker analytics, and other special perks."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus!"
@@ -2110,13 +2086,13 @@
 		"message": "No, Keep History"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus."
+		"message": "Unlock advanced tracker analytics and a powerful private browser with built-in private search by upgrading to Ghostery Plus."
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "Already a Ghostery Supporter?"
+		"message": "Already subscribed?"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "Sign in here"
+		"message": "Sign In"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Erase all statistics history up until this point in time."
@@ -2270,9 +2246,6 @@
 	"learn_more": {
 		"message": "Learn More"
 	},
-	"custom_themes": {
-		"message": "Custom Themes"
-	},
 	"historical_stats": {
 		"message": "Historical Stats"
 	},
@@ -2381,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "Back to search selection"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights (Advanced Tracker Analytics)"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn (Private Browser)"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow (Private, Ad-Free Search)"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "Custom Color Themes"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "Priority Support"
 	}
 }
