@@ -1948,6 +1948,9 @@
 	"subscription_themes_title": {
 		"message": "Themes"
 	},
+	"priority_support" : {
+		"message": "Priority Support"
+	},
 	"subscribe_pitch": {
 	  "message": "Upgrade to Ghostery Plus to unlock our full product suite! For just &#36;4.99 per month, get access to a powerful private browser with built-in private search, advanced tracker analytics, and other special perks."
 	},
@@ -1994,7 +1997,7 @@
 		"message": "Inactive"
 	},
 	"subscription_manage": {
-		"message": "Manage My Subscription"
+		"message": "Download Products and Manage My Subscription"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Change the color scheme of Ghostery!"
