@@ -1798,9 +1798,6 @@
 	"ghostery_dawn_onboarding_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
 	},
-	"ghostery_dawn_onboarding_already_premium_subscriber": {
-		"message": "You are already a Premium Subscriber"
-	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "You are already a Plus Subscriber"
 	},
