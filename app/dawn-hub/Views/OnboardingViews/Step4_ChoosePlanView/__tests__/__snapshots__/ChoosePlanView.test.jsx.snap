@@ -4,8 +4,6 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.
 
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with plus user logged in 1`] = `ShallowWrapper {}`;
 
-exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with premium user logged in 1`] = `ShallowWrapper {}`;
-
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with user not logged in 1`] = `ShallowWrapper {}`;
 
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Snapshot tests with react-test-renderer ChoosePlanView is rendered correctly 1`] = `
@@ -273,111 +271,7 @@ Array [
                 <span
                   className="check blue"
                 />
-                ghostery_dawn_onboarding_intelligence_technology
-              </div>
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                ghostery_dawn_onboarding_ad_free
-              </div>
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                ghostery_dawn_onboarding_supports_ghosterys_mission
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="ChoosePlanView__cardOuter"
-        >
-          <div
-            className="ChoosePlanView__card premium"
-            data-equalizer-watch={true}
-            onClick={[Function]}
-          >
-            <div
-              className="ChoosePlanView__radioButtonContainer"
-            >
-              <span>
-                <span
-                  className="RadioButton__outerCircle altDesign"
-                  onClick={[Function]}
-                >
-                  <span
-                    className="RadioButton__innerCircle altDesign"
-                  />
-                </span>
-              </span>
-            </div>
-            <div
-              className="ghostery-premium-image-container"
-            >
-              <div
-                alt="Ghostery Premium"
-                className="ghostery-premium-image card-image-top"
-                title="Ghostery Premium"
-              />
-            </div>
-            <div
-              className="ghostery-premium-image-background"
-            />
-            <h2>
-              Ghostery Premium
-            </h2>
-            <div
-              className="ChoosePlanView__price"
-            >
-              <p
-                className="ChoosePlanView__price-purple font-size-36"
-              >
-                $11.99
-              </p>
-              <p
-                className="ChoosePlanView__price-purple sub-text font-size-12"
-              >
-                per_month
-              </p>
-            </div>
-            <p
-              className="card-sub-header"
-            >
-              <strong>
-                hub_upgrade_maximum_protection
-              </strong>
-            </p>
-            <div
-              className="ChoosePlanView__valuePropList"
-            >
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                ghostery_dawn_onboarding_private_search
-              </div>
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                ghostery_dawn_onboarding_tracker_protection
-              </div>
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                ghostery_dawn_onboarding_speedy_page_loads
+                ghostery_dawn_onboarding_advanced_tracker_analytics
               </div>
               <div
                 className="ChoosePlanView__cardSubCopy"
@@ -402,22 +296,6 @@ Array [
                   className="check blue"
                 />
                 ghostery_dawn_onboarding_supports_ghosterys_mission
-              </div>
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                VPN
-              </div>
-              <div
-                className="ChoosePlanView__cardSubCopy"
-              >
-                <span
-                  className="check blue"
-                />
-                ghostery_dawn_onboarding_unlimited_bandwidth
               </div>
             </div>
           </div>

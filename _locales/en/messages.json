@@ -1783,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "Speedy page loads"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "Advanced tracker analytics"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "Intelligence technology"
 	},
@@ -1795,14 +1798,8 @@
 	"ghostery_dawn_onboarding_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
 	},
-	"ghostery_dawn_onboarding_already_premium_subscriber": {
-		"message": "You are already a Premium Subscriber"
-	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "You are already a Plus Subscriber"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "Keep your current plan or upgrade"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "Choose an option"

@@ -1833,9 +1833,6 @@
 	"ghostery_dawn_onboarding_unlimited_bandwidth": {
 		"message": "Пропускная способность без ограничений"
 	},
-	"ghostery_dawn_onboarding_already_premium_subscriber": {
-		"message": "Вы уже являетесь подписчиком Premium"
-	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "Вы уже являетесь подписчиком Plus"
 	},
