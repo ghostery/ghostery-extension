@@ -52,9 +52,6 @@ describe('app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView
 			instance.selectPlusPlan();
 			expect(component.state('selectedPlan')).toBe('PLUS');
 
-			instance.selectPremiumPlan();
-			expect(component.state('selectedPlan')).toBe('PREMIUM');
-
 			expect(component).toMatchSnapshot();
 		});
 
@@ -62,8 +59,7 @@ describe('app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView
 			const basicUserState = {
 				...initialState,
 				user: {
-					plusAccess: false,
-					premiumAccess: false
+					plusAccess: false
 				}
 			};
 
@@ -76,26 +72,11 @@ describe('app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView
 			const plusUserState = {
 				...initialState,
 				user: {
-					plusAccess: true,
-					premiumAccess: false
+					plusAccess: true
 				},
 			};
 
 			const component = shallow(<ChoosePlanView {...plusUserState} />);
-
-			expect(component).toMatchSnapshot();
-		});
-
-		test('ChoosePlanView View with premium user logged in', () => {
-			const premiumUserState = {
-				...initialState,
-				user: {
-					plusAccess: true,
-					premiumAccess: true
-				}
-			};
-
-			const component = shallow(<ChoosePlanView {...premiumUserState } />);
 
 			expect(component).toMatchSnapshot();
 		});

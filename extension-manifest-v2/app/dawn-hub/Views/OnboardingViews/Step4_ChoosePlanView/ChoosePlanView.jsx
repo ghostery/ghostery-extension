@@ -17,23 +17,19 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import RadioButton from '../../../../shared-components/RadioButton';
 import globals from '../../../../../src/classes/Globals';
-import { BASIC, PLUS, PREMIUM } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
+import { BASIC, PLUS } from '../../../../hub/Views/UpgradePlanView/UpgradePlanViewConstants';
 import {
 	CHOOSE_PLAN,
 	ONBOARDING,
 	FREE_USER_NO_TRIAL,
 	FREE_USER_PLUS_TRIAL,
 	FREE_USER_PLUS_SUBSCRIPTION,
-	FREE_USER_PREMIUM_SUBSCRIPTION,
-	PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION,
-	PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION,
-	PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION
+	PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION
 } from '../../OnboardingView/OnboardingConstants';
 import { SEARCH_GHOSTERY } from '../Step3_ChooseDefaultSearchView/ChooseDefaultSearchConstants';
 
 const glowFreeTrialLink = `${globals.GLOWSTERY_BASE_URL}/account?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
 const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
-const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding`;
 
 const searchPromo = () => (
 	<div className="ChoosePlanView__searchPromoContainer">
@@ -106,13 +102,7 @@ class ChoosePlanView extends React.Component {
 	isPlusUser = () => {
 		const { user } = this.props;
 
-		return (user && user.plusAccess && !user.premiumAccess) || false;
-	}
-
-	isPremiumUser = () => {
-		const { user } = this.props;
-
-		return (user && user.premiumAccess) || false;
+		return !!(user && user.plusAccess);
 	}
 
 	isBasicPlanChecked = () => {
@@ -125,22 +115,11 @@ class ChoosePlanView extends React.Component {
 		return (selectedPlan === PLUS);
 	};
 
-	isPremiumPlanChecked = () => {
-		const { selectedPlan } = this.state;
-		return (selectedPlan === PREMIUM);
-	};
-
 	setDefaultPlan = () => {
 		const { defaultSearch } = this.props;
 
-		const isBasic = this.isBasicUser();
-		const isPlus = this.isPlusUser();
-		const isPremium = this.isPremiumUser();
-		const basicGlow = isBasic && defaultSearch === SEARCH_GHOSTERY;
-
-		if (isPremium) {
-			this.selectPremiumPlan();
-		} else if (isPlus || basicGlow) {
+		const basicGlow = this.isBasicUser() && defaultSearch === SEARCH_GHOSTERY;
+		if (basicGlow || this.isPlusUser()) {
 			this.selectPlusPlan();
 		} else {
 			this.selectBasicPlan();
@@ -156,8 +135,6 @@ class ChoosePlanView extends React.Component {
 
 	selectPlusPlan = () => this.setState({ selectedPlan: PLUS });
 
-	selectPremiumPlan = () => this.setState({ selectedPlan: PREMIUM });
-
 	toggleSection = () => {
 		const { expanded } = this.state;
 		if (expanded) {
@@ -168,15 +145,13 @@ class ChoosePlanView extends React.Component {
 	};
 
 	renderTitleText = () => {
-		if (this.isPremiumUser()) return t('ghostery_dawn_onboarding_already_premium_subscriber');
 		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_already_plus_subscriber');
 		return t('ghostery_dawn_onboarding_your_privacy_plan');
 	};
 
 	renderSubtitleText = (selectedGhosteryGlow) => {
 		// Note that the order matters!
-		if (this.isPremiumUser()) return '';
-		if (this.isPlusUser()) return t('ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade');
+		if (this.isPlusUser()) return '';
 		if (selectedGhosteryGlow) return t('ghostery_dawn_onboarding_based_on_your_privacy_preferences');
 		return t('ghostery_dawn_onboarding_choose_an_option');
 	};
@@ -188,92 +163,39 @@ class ChoosePlanView extends React.Component {
 		history.push('/onboarding/5');
 	}
 
-	plusCard = (checked, handleClick, showCTAButton = false) => {
-		const { actions } = this.props;
-		const { setSetupStep } = actions;
+	plusCard = (checked, handleClick) => {
 		const cardClassNames = ClassNames('ChoosePlanView__card plus', {
 			checked
 		});
 		return (
-			<Fragment>
-				<div className="ChoosePlanView__cardOuter">
-					<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
-						<div className="ChoosePlanView__radioButtonContainer">
-							<RadioButton checked={checked} handleClick={handleClick} altDesign />
-						</div>
-						<div className="ghostery-plus-image-container">
-							<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
-						</div>
-						<h2>Ghostery Plus</h2>
-						<div className="ChoosePlanView__price">
-							<Fragment>
-								<p className="ChoosePlanView__price-gold font-size-36">$4.99</p>
-								<p className="ChoosePlanView__price-gold sub-text font-size-12">{t('per_month')}</p>
-							</Fragment>
-						</div>
-						<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
-						<div className="ChoosePlanView__valuePropList">
-							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
-						</div>
+			<div className="ChoosePlanView__cardOuter">
+				<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
+					<div className="ChoosePlanView__radioButtonContainer">
+						<RadioButton checked={checked} handleClick={handleClick} altDesign />
 					</div>
-				</div>
-				{showCTAButton && (
-					<div className="ChoosePlanView__searchCTAButtonContainer">
-						<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
-							<span>{t('ghostery_dawn_onboarding_keep')}</span>
-						</NavLink>
+					<div className="ghostery-plus-image-container">
+						<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 					</div>
-				)}
-			</Fragment>
-		);
-	};
+					<h2>Ghostery Plus</h2>
+					<div className="ChoosePlanView__price">
+						<Fragment>
+							<p className="ChoosePlanView__price-gold font-size-36">$4.99</p>
+							<p className="ChoosePlanView__price-gold sub-text font-size-12">{t('per_month')}</p>
+						</Fragment>
+					</div>
+					<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
+					<div className="ChoosePlanView__valuePropList">
+						{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
+						{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
+						{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
+						{cardSubCopy(t('ghostery_dawn_onboarding_advanced_tracker_analytics'))}
+						{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
+						{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
+						{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
 
-	premiumCard = (checked, handleClick, showCTAButton = false) => {
-		const cardClassNames = ClassNames('ChoosePlanView__card premium', {
-			checked
-		});
-		return (
-			<Fragment>
-				<div className="ChoosePlanView__cardOuter">
-					<div className={cardClassNames} onClick={handleClick} data-equalizer-watch>
-						<div className="ChoosePlanView__radioButtonContainer">
-							<RadioButton checked={checked} handleClick={handleClick} altDesign />
-						</div>
-						<div className="ghostery-premium-image-container">
-							<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-						</div>
-						<div className="ghostery-premium-image-background" />
-						<h2>Ghostery Premium</h2>
-						<div className="ChoosePlanView__price">
-							<Fragment>
-								<p className="ChoosePlanView__price-purple font-size-36">$11.99</p>
-								<p className="ChoosePlanView__price-purple sub-text font-size-12">{t('per_month')}</p>
-							</Fragment>
-						</div>
-						<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_protection')}</strong></p>
-						<div className="ChoosePlanView__valuePropList">
-							{cardSubCopy(t('ghostery_dawn_onboarding_private_search'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_tracker_protection'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_speedy_page_loads'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_intelligence_technology'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_ad_free'))}
-							{cardSubCopy(t('ghostery_dawn_onboarding_supports_ghosterys_mission'))}
-							{cardSubCopy('VPN')}
-							{cardSubCopy(t('ghostery_dawn_onboarding_unlimited_bandwidth'))}
-						</div>
 					</div>
 				</div>
-				{showCTAButton && (
-					<div className="ChoosePlanView__searchCTAButtonContainer">
-						<a className="ChoosePlanView__premiumCTAButton" href={premiumCheckoutLink} target="_blank" rel="noreferrer" onClick={() => this.setSetupStepAndMoveToSuccessView(PLUS_SUBSCRIBER_PREMIUM_SUBSCRIPTION)}>{t('ghostery_dawn_onboarding_upgrade')}</a>
-					</div>
-				)}
-			</Fragment>
+			</div>
 		);
 	};
 
@@ -290,7 +212,6 @@ class ChoosePlanView extends React.Component {
 
 		const isBasic = this.isBasicUser();
 		const isPlus = this.isPlusUser();
-		const isPremium = this.isPremiumUser();
 
 		const arrowClassNames = ClassNames('ChoosePlanView__arrow', {
 			up: !expanded,
@@ -322,52 +243,39 @@ class ChoosePlanView extends React.Component {
 							<div className={arrowClassNames} onClick={this.toggleSection} />
 						</Fragment>
 					)}
-					{((isBasic && !selectedGhosteryGlow) || expanded || isPlus || isPremium) && (
+					{((isBasic && !selectedGhosteryGlow) || expanded || isPlus) && (
 						<div>
-							{(isPlus) ? (
-								<div className="ChoosePlanView__keepOrUpgradeContainer row align-center align-middle">
-									<div className="small-12 medium-12 large-4">
-										{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan, isPlus)}
-									</div>
-									<div className="ChoosePlanView__or small-12 large-2">{t('ghostery_dawn_onboarding_or')}</div>
-									<div className="small-12 medium-12 large-4">
-										{this.premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan, isPlus)}
-									</div>
-								</div>
-							) : (
-								<div className="ChoosePlanView__plansContainer row align-spaced">
-									{isBasic && (
-										basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)
-									)}
-									{!isPremium && (
-										<Fragment>
+							{isPlus && (
+								<Fragment>
+									<div className="ChoosePlanView__keepOrUpgradeContainer row align-center align-middle">
+										<div className="small-12 medium-12 large-4">
 											{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
-										</Fragment>
-									)}
-									{this.premiumCard(this.isPremiumPlanChecked(), this.selectPremiumPlan)}
-								</div>
-							)}
-							{(isBasic && (
-								<div className="ChoosePlanView__ctaButtonContainer">
-									{(selectedPlan === BASIC) && (
-										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: FREE_USER_NO_TRIAL, origin: ONBOARDING })}>
+										</div>
+									</div>
+									<div className="ChoosePlanView__searchCTAButtonContainer">
+										<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PLUS_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
 											<span>{t('next')}</span>
 										</NavLink>
-									)}
-									{selectedPlan === PLUS && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
-									)}
-									{selectedPlan === PREMIUM && (
-										<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PREMIUM_SUBSCRIPTION)} href={premiumCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
-									)}
-								</div>
-							))}
-							{isPremium && (
-								<div className="ChoosePlanView__searchCTAButtonContainer">
-									<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: PREMIUM_SUBSCRIBER_KEEP_SUBSCRIPTION, origin: ONBOARDING })}>
-										<span>{t('next')}</span>
-									</NavLink>
-								</div>
+									</div>
+								</Fragment>
+							)}
+							{isBasic && (
+								<Fragment>
+									<div className="ChoosePlanView__plansContainer row align-spaced">
+										{basicCard(this.isBasicPlanChecked(), this.selectBasicPlan)}
+										{this.plusCard(this.isPlusPlanChecked(), this.selectPlusPlan)}
+									</div>
+									<div className="ChoosePlanView__ctaButtonContainer">
+										{(selectedPlan === BASIC) && (
+											<NavLink className="ChoosePlanView__searchCTAButton" to="/onboarding/5" onClick={() => setSetupStep({ setup_step: CHOOSE_PLAN, dawn_setup_number: FREE_USER_NO_TRIAL, origin: ONBOARDING })}>
+												<span>{t('next')}</span>
+											</NavLink>
+										)}
+										{selectedPlan === PLUS && (
+											<a className="ChoosePlanView__searchCTAButton" onClick={() => this.setSetupStepAndMoveToSuccessView(FREE_USER_PLUS_SUBSCRIPTION)} href={plusCheckoutLink} target="_blank" rel="noreferrer">{t('next')}</a>
+										)}
+									</div>
+								</Fragment>
 							)}
 						</div>
 					)}
@@ -380,8 +288,7 @@ class ChoosePlanView extends React.Component {
 // PropTypes ensure we pass required props of the correct type
 ChoosePlanView.propTypes = {
 	user: PropTypes.shape({
-		plusAccess: PropTypes.bool,
-		premiumAccess: PropTypes.bool,
+		plusAccess: PropTypes.bool
 	}),
 	defaultSearch: PropTypes.string.isRequired,
 };
@@ -389,8 +296,7 @@ ChoosePlanView.propTypes = {
 // Default props used in the Plus View
 ChoosePlanView.defaultProps = {
 	user: {
-		plusAccess: false,
-		premiumAccess: false,
+		plusAccess: false
 	},
 };
 
