@@ -4,6 +4,7 @@
 + Allow host name fuzzy matching for Compatibility URLs (#680)
 + Add subscription status to CMP fetch URL (#694)
 + Avoid possible race condition in ABTest & CMP on Dawn (#687)
++ Updates to intro hub (#711, #710, #708)
 
 ### GHOSTERY 8.5.6 (April 12, 2021)
 
