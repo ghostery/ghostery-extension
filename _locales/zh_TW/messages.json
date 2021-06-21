@@ -519,29 +519,6 @@
 		"message": "審查網頁上的行銷標籤",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "探索全球數位趨勢",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "免費試用"
-	},
-	"panel_insights_promotion_header": {
-		"message": "試用 Ghostery Insights",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "透過我們專業的標籤分析工具，加速並清理數位用戶體驗。",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "追溯不良性能的源頭",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "實時監測 Ping",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "關於 Ghostery 網頁瀏覽器增強功能"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "自定義設置完成"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "獲得更高等級的隱私防護。升級您的 Ghostery 計劃以獲得裝置等級的防護、VPN 存取及更多好處！"
+	  	"message": "獲得更高等級的隱私防護。升級到 Ghostery Plus 以取得功能強大的隱私瀏覽器、隱私搜尋和進階追蹤器分析！"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "立即升級"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "進階裝置防護"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "最大瀏覽器防護"
-	},
 	"hub_upgrade_to": {
 		"message": "升級至"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "查看完整功能列表"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "必須下載 Ghostery Midnight"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "額外防護"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "歷史擴充統計數據"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "應用程式跟蹤器封鎖"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "應用程式廣告封鎖"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "無 VPN 紀錄"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "洩漏防護"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "實體伺服器"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "無限頻寬"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery 中心 - 設置 "
@@ -1637,7 +1590,7 @@
 		"message": "升級至Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-		"message": "顯示您的支援并解鎖特別福利！"
+	  "message": "獲得更高等級的隱私防護並取得我們的完整產品套件！"
 	},
 	"hub_supporter_price": {
 		"message": "每月$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "自訂主題及更多"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "自訂 Ghostery 色彩——試試我們的樹葉、棕櫚和深藍色主題吧！"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "自訂 Ghostery 色彩——試試我們的深藍色主題吧！"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "查看您的組織統計數據，了解Ghostery如何為您工作"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "進階追蹤器分析"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "優先項支援及更多"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "取得 Ghostery Insights，我們的即時追蹤器智慧科技資料儀表板"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "用我們的優先幫助服務快速解決問題——還有更多福利"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "隱私瀏覽器和搜尋"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "下載 Ghostery Dawn 和 Ghostery Glow，我們具備內建搜尋引擎的強大隱私瀏覽器"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的瀏覽器擴充功能不收費，您可以選擇透過每月訂閱 &#36;4.99 支持我們。升級至 Ghostery Plus 加入我們，支持我們的使命——一路解鎖附帶福利！"
+		"message": "升級至 Ghostery Plus 以取得完整的產品套件！每月只要 &#36;4.99。享有內建隱私搜尋的強大隱私瀏覽器、進階追蹤器分析，以及其他特別好處。"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "自訂 Ghostery 色彩，獲得全新視覺體驗！使用者千呼萬喚的功能登場了。查看我們獨特的深藍色主題，更多內容即將推出。"
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "快速載入網頁"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "進階追蹤器分析"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "智慧科技"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "您已訂閱 Plus"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "繼續使用當前計劃或升級"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "選擇選項"
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "主題"
 	},
+	"priority_support" : {
+		"message": "優先支援"
+	},
 	"subscribe_pitch": {
-		"message": "Ghostery 是免費的，您可以選擇透過每月訂閱 &#36;4.99 支持我們，訂閱後可獲得特別福利，如顏色主題、個人追蹤統計數據以及更多。加入我們，支持我們的使命並訂閱！"
+	  "message": "升級至 Ghostery Plus 以取得完整的產品套件！每月只要 &#36;4.99。享有內建隱私搜尋的強大隱私瀏覽器、進階追蹤器分析，以及其他特別好處。"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜歡我們提供的服務嗎？您可以升級至 Ghostery Plus 來支援我們，並解鎖全新春日主題、個人追蹤資訊及其他特別的好處！"
@@ -2032,7 +1997,7 @@
 		"message": "不活躍"
 	},
 	"subscription_manage": {
-		"message": "管理我的訂閱"
+		"message": "下載產品及管理訂閱"
 	},
 	"subscription_themes_tooltip": {
 		"message": "更改Ghostery的顏色方案。"
@@ -2121,13 +2086,13 @@
 		"message": "不，保持歷史記錄"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "升級至 Ghostery Plus 以解鎖您的歷史統計數據（和其它驚喜福利）。"
+		"message": "升級至 Ghostery Plus 即能取得進階追蹤器分析和具有內建隱私搜尋的強大隱私瀏覽器。"
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "已是Ghostery Supporter？"
+		"message": "已訂閱？"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "在此登錄"
+		"message": "登入"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "及時清除到此點的所有統計歷史。"
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "每年"
-	},
-	"faster_cleaner_browsing": {
-		"message": "更快、更乾淨的瀏覽體驗",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "廣告封鎖",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "跟蹤器封鎖",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "資料保護",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "選擇 Basic"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "瞭解更多"
 	},
-	"custom_themes": {
-		"message": "自訂主題"
-	},
 	"historical_stats": {
 		"message": "歷史統計數據"
-	},
-	"priority_support": {
-		"message": "優先支援",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "啟動"
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "看來我們找不到這個電郵與密碼的組合。 再試一次。"
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "所有基本功能，外加：",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "歷史網頁跟蹤器統計",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "新彩色主題",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "每月只要 &#36;2 即可升級至 Ghostery Plus，您便可以解鎖歷史網頁跟蹤器資料、優先獲得支援和新色彩主題。",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "升級您的 Ghostery 體驗",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "升級至 Plus",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "不用了，謝謝，停用促銷",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "已訂閱？登入",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "已停用促銷。如欲重新啟用，請至",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "返回搜尋選擇"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights（進階追蹤器分析）"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn（隱私瀏覽器）"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow（無廣告隱私搜尋）"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "自訂顏色主題"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "優先支援"
 	}
 }

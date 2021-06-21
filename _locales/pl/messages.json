@@ -519,29 +519,6 @@
 		"message": "Sprawdź znaczniki marketingowe na stronie",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "Odkrywaj globalne trendy cyfrowe",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "Wypróbuj bezpłatnie"
-	},
-	"panel_insights_promotion_header": {
-		"message": "Wypróbuj Ghostery Insights",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "Przyspiesz i ulepsz komfort korzystania dzięki narzędziu analizy znaczników.",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "Znajdź źródła niskiej wydajności",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "Obserwuj pingi w czasie rzeczywistym",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "O rozszerzeniu Ghostery do przeglądarki"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "Konfiguracja niestandardowa zakończona"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "Wybierz więcej niż standardową prywatność. Zaktualizuj swój plan Ghostery, a otrzymasz ochronę na poziomie urządzenia, dostęp VPN i wiele więcej!"
+	  	"message": "Wzmocnij swoją ochronę prywatności. Uaktualnij plan do wersji Ghostery Plus, aby uzyskać dostęp do prywatnej przeglądarki, prywatnego wyszukiwania i zaawansowanej analizy tropicieli!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Uaktualnij teraz"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "Zaawansowana ochrona urządzeń"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "Maksymalna ochrona przeglądarki"
-	},
 	"hub_upgrade_to": {
 		"message": "Zaktualizuj do"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "Zobacz pełną listę funkcji"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Musisz mieć zainstalowany Ghostery Midnight"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "Dodatkowa ochrona"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "Statystyki archiwalne rozszerzenia"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "Blokowanie tropicieli aplikacji"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "Blokowanie reklam aplikacji"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "Bez dzienników VPN"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "Ochrona przed wyciekiem"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "Serwery fizyczne"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "Nieograniczona przepustowość"
 	},
 	"hub_setup_page_title": {
 		"message": "Hub Ghostery - Konfiguracja"
@@ -1637,7 +1590,7 @@
 		"message": "Zaktualizuj do Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-		"message": "Okaż wsparcie i odblokuj dodatki specjalne!"
+	  "message": "Wzmocnij swoją ochronę prywatności i uzyskaj dostęp do pełnego pakietu produktów!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ miesięcznie",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "Niestandardowe motywy i nie tylko"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Dostosuj kolorystykę Ghostery — wypróbuj motywy Leaf, Palm i Dark Blue!"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Dostosuj kolorystykę Ghostery — wypróbuj nasz temat Dark Blue!"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "Zobacz statystyki dotyczące blokowania oraz przekonaj się, jak Ghostery działa na Twoją korzyść"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "Zaawansowana analiza tropicieli"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "Priorytetowe wsparcie i wiele więcej"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "Dostęp do panelu Ghostery Insights zawierającego informacje o tropicielach na bieżąco"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "Rozwiązuj szybko problemy przy pomocy naszego działu wsparcia priorytetowego - i otrzymaj dodatkowe korzyści"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "Prywatna przeglądarka i wyszukiwarka"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "Pobierz Ghostery Dawn i Ghostery Glow – prywatną przeglądarkę oraz wbudowaną w nią wyszukiwarkę"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Staramy się dostarczać naszym użytkownikom najwyższej jakości bezpłatne usługi z zakresu ochrony prywatności. Chociaż nie pobieramy opłat za naszą wtyczkę do przeglądarki, możesz wesprzeć nas, decydując się na miesięczny abonament w cenie 4,99 USD. Przyłącz się do naszej misji, przechodząc do Ghostery Plus — i tym samym odblokuj super dodatki!"
+		"message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Dostosuj kolorystykę Ghostery, zyskując nowe wrażenia wizualne! Funkcja wprowadzona na prośbę użytkowników. Wypróbuj specjalny temat Dark Blue, a w przyszłości także i inne."
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "Szybkie ładowanie stron"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "Zaawansowana analiza tropicieli"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "Technologia Intelligence"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "Masz już subskrypcję Plus"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "Zachowaj bieżący plan lub uaktualnij"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "Wybierz opcję"
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "Tematy"
 	},
+	"priority_support" : {
+		"message": "Wsparcie priorytetowe"
+	},
 	"subscribe_pitch": {
-		"message": "Chociaż usługi Ghostery są bezpłatne, możesz wesprzeć nas, decydując się na miesięczny abonament w cenie 4,99 USD w zamian za super dodatki, takie jak kolorowe motywy, osobiste statystyki śledzenia i wiele innych. Przyłącz się do naszej misji i subskrybuj!"
+	  "message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Podoba Ci się to, co robimy? Wesprzyj nas i odblokuj nowe wiosenne motywy, osobiste analizy dotyczące śledzenia i inne specjalne dodatki, przechodząc do wersji Ghostery Plus!"
@@ -2032,7 +1997,7 @@
 		"message": "Nieaktywny"
 	},
 	"subscription_manage": {
-		"message": "Zarządzaj abonamentem"
+		"message": "Pobierz produkty i zarządzaj subskrypcją"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Zmień kolorystykę Ghostery!"
@@ -2121,13 +2086,13 @@
 		"message": "Nie, zachowaj historię"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Odblokuj swoje archiwalne statystyki (i inne fajne dodatki) poprzez przejście do wersji Ghostery Plus."
+		"message": "Odblokuj zaawansowaną analizę tropicieli i skuteczną prywatną przeglądarkę z wbudowaną wyszukiwarką po aktualizacji planu do wersji Ghostery Plus"
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "Wspierasz już Ghostery?"
+		"message": "Masz już subskrypcję?"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "Zaloguj się tutaj"
+		"message": "Zaloguj się"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Usuń całą historię danych statystycznych aż do teraz."
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "rocznie"
-	},
-	"faster_cleaner_browsing": {
-		"message": "Szybsze, łatwiejsze przeglądanie",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "Blokowanie reklam",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "Blokowanie tropicieli",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "Ochrona danych",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "Wybierz plan podstawowy"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "Dowiedz się więcej"
 	},
-	"custom_themes": {
-		"message": "Niestandardowe tematy"
-	},
 	"historical_stats": {
 		"message": "Statystyki archiwalne"
-	},
-	"priority_support": {
-		"message": "Wsparcie priorytetowe",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "Wł."
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "Wygląda na to, że nie możemy odnaleźć takiej kombinacji adresu e-mail i hasła. Wykonaj ponowną próbę."
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "Wszystkie funkcje podstawowe oraz:",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "Statystyki archiwalne tropicieli",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "Nowe tematy kolorystyczne",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "Odblokuj historię tropicieli, uzyskaj priorytetowy dostęp do pomocy i nowe motywy kolorów, wybierając plan Ghostery Plus za tylko 36;2 &# miesięcznie.",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Zoptymalizuj korzystanie z Ghostery",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "Wybierz plan Plus",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "Wyłącz promocje",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "Masz już subskrypcję? Zaloguj się",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "Wyłączono promocje. Można je włączyć w menu",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "Powrót do wyboru wyszukiwarki"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights (zaawansowana analiza tropicieli)"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn (prywatna przeglądarka)"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow (prywatna wyszukiwarka bez reklam)"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "Niestandardowe motywy kolorystyczne"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "Wsparcie priorytetowe"
 	}
 }

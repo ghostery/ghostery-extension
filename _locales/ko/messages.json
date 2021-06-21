@@ -519,29 +519,6 @@
 		"message": "페이지의 마케팅 태그를 감사하세요",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "글로벌 디지털 트렌드를 탐색해 보세요",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "무료로 사용해 보세요"
-	},
-	"panel_insights_promotion_header": {
-		"message": "Ghostery Insights를 사용해 보세요",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "전문 태그 분석 툴을 사용하여 디지털 사용자 이용 환경을 가속화하고 정리하세요.",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "성능 저하의 원인을 추적하세요",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "실시간으로 pings fire를 지켜보세요",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "Ghostery 브라우저 확장 프로그램 정보 "
 	},
@@ -1313,7 +1290,7 @@
 		"message": "사용자 지정 설정 완료"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "기본 개인정보 보호 이상을 경험해보세요. Ghostery 요금제를 업그레이드하면 장치 전반에 걸친 보호, VPN 연결 등 다양한 혜택이 제공됩니다,"
+	  	"message": "기본 개인정보 보호 이상을 경험해보세요. Ghostery Plus로 업그레이드하면 보안 브라우저, 보안 검색, 고급 트래커 분석 등의 강력한 기능을 사용할 수 있습니다."
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "지금 업그레이드"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "고급형 장치 보호"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "최대 브라우저 보호"
-	},
 	"hub_upgrade_to": {
 		"message": "다음으로 업그레이드"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "기능 전체 목록 보기"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Ghostery Midnight를 설치해야 합니다"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "추가 보호"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "확장 내역 통계"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "애플리케이션 트래커 차단"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "애플리케이션 광고 차단"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "VPN 로그 없음"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "유출 보호"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "물리 서버"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "무제한 대역폭"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery 허브 - 설정"
@@ -1637,7 +1590,7 @@
 		"message": "Ghostery Plus로 업그레이드"
 	},
 	"hub_supporter_header_description": {
-		"message": "고스터리를 후원하고 특별 기능을 새롭게 이용하세요!"
+	  "message": "기본 개인정보 보호 이상을 경험하고 모든 제품 기능을 활용하세요!"
 	},
 	"hub_supporter_price": {
 		"message": "매달 $SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "맞춤 테마 등"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Ghostery 컬러 사용자 지정 - Leaf, Palm, Dark Blue 테마를 사용해보세요!"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghostery 컬러 사용자 지정 - Dark Blue 테마를 사용해보세요!"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "귀하의 차단 통계를 열람하고, Ghostery가 귀하를 위해 기능하는 방법을 살펴보세요"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "고급 트래커 분석"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "우선적 지원 및 기타 혜택"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "실시간 트래커 지능형 대시보드인 Ghostery Insights 이용"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "우선 지원 데스크 서비스를 통해 빠르게 문제를 해결하고, 향후 더 많은 특전을 받으세요"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "보안 브라우저 및 검색 기능"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "내장 검색 엔진이 탑재된 강력한 보안 브라우저 Ghostery Dawn 및 Glow 다운로드"
 	},
 	"hub_supporter_manifesto": {
-		"message": "당사는 최고의 개인 정보 보호 서비스를 사용자에게 무료로 제공하기 위해 노력하고 있습니다. 브라우저 확장에 대한 비용은 청구하지 않지만, &#36;4.99의 월별 구독 요금을 지불하여 당사를 후원하실 수 있습니다. Ghostery Plus로 업그레이드하여 당사의 활동을 후원하고 계속해서 멋진 혜택을 받아보세요!"
+		"message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Ghostery 컬러를 사용자 지정하여 새로운 비주얼을 경험해보세요! 폭넓은 요청에 따라 선보입니다. 특별한 Dark Blue 테마를 확인하고 앞으로 소개될 다양한 테마도 기대해주세요."
@@ -1777,7 +1739,7 @@
 		"message": "시그니처 기술과 신기술을 통합하여 온라인 개인정보 보호를 중앙 집중화 했습니다."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Ghostery Dawn은 트래커로부터 데이터를 보호하므로 Chrome보다 안전하고 최대 3 배 빠르게 서핑 할 수 있습니다."
+		"message": "Ghostery Dawn은 트래커로부터 데이터를 보호하므로 안전하게 서핑할 수 있고 Chrome보다 최대 3배 빠른 성능을 누릴 수 있습니다."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "내 브라우저 설정하기"
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "빠른 페이지 로딩"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "고급 트래커 분석"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "지능형 기술"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "이미 Plus를 구독하고 계십니다"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "현재 요금제 유지/업그레이드"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "옵션 선택"
@@ -1957,7 +1919,7 @@
 		"message": "오류:"
 	},
 	"ghostery_dawn_onboarding_toast_logout": {
-		"message": "이제 로그 아웃되었습니다."
+		"message": "로그아웃했습니다"
 	},
 	"enable_when_paused": {
 		"message": "이 기능을 사용하려면 Ghostery를 다시 시작하십시오."
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "테마"
 	},
+	"priority_support" : {
+		"message": "우선 지원"
+	},
 	"subscribe_pitch": {
-		"message": "Ghostery는 무료로 이용이 가능하나 매달 &#36;4.99의 구독 요금으로 저희를 후원해 주시면 컬러 테마, 개인 추적 통계 등 특별 혜택이 제공됩니다. 저희를 후원하고 서비스에 가입해 주세요!"
+	  "message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
 	},
 	"subscribe_pitch_spring": {
 		"message": "현재 서비스가 마음에 드시나요? Ghostery Plus로 업그레이드하여 당사를 후원하고 새로운 봄 테마, 개인 추적 서비스, 기타 혜택을 받아보세요."
@@ -2032,7 +1997,7 @@
 		"message": "끄기"
 	},
 	"subscription_manage": {
-		"message": "서비스 가입 현황 관리"
+		"message": "제품 다운로드 및 내 구독 관리"
 	},
 	"subscription_themes_tooltip": {
 		"message": "고스터리 브라우저의 컬러 테마를 변경하세요!"
@@ -2121,13 +2086,13 @@
 		"message": "아니요, 이력을 유지합니다"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ghostery Plus로 업그레이드하여 역사적 통계(및 기타 유용한 특정)를 이용하세요"
+		"message": "Ghostery Plus로 업그레이드하고 고급 트래커 분석 및 내장형 보안 검색 기능이 탑재된 강력한 보안 브라우저를 이용하세요."
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "이미 Ghostery 후원자입니까?"
+		"message": "이미 구독 중이신가요?"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "여기에서 로그인하세요"
+		"message": "로그인 "
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "이 시점까지의 모든 통계 이력을 제때 삭제하세요."
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "매년"
-	},
-	"faster_cleaner_browsing": {
-		"message": "더욱 신속하고 깔끔한 브라우징",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "광고 차단",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "트래커 차단",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "데이터 보호",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "Basic 선택하기"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "자세히 알아보기 "
 	},
-	"custom_themes": {
-		"message": "맞춤 테마"
-	},
 	"historical_stats": {
 		"message": "역사적 통계"
-	},
-	"priority_support": {
-		"message": "우선 지원",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "켜기 "
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "해당 이메일과 암호 조합을 찾을 수 없습니다. 다시 시도해 보십시오."
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "모든 Basic 기능 이외 추가된 점:",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "트래커 기록 통계",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "새로운 컬러 테마 ",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "월 &#36;2으로 Ghostery Plus로 업그레이드해 트래커 기록 서비스와 우선순위 지원 액세스 및 새로운 색상 테마를 잠금 해제하세요.",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Ghostery 이용 환경을 업그레이드하세요",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "Plus로 업그레이드",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "괜찮습니다, 프로모션을 해제해 주세요",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "이미 구독 중이신가요? 여기에서 로그인하세요",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "프로모션이 해제되었습니다. 원하실 때 설정에서 다시 켤 수 있습니다.",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "검색 기능 선택으로 돌아가기"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights(고급 트래커 분석)"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn(보안 브라우저)"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow(광고 없는 보안 검색)"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "맞춤 컬러 테마"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "우선 지원"
 	}
 }

@@ -519,29 +519,6 @@
 		"message": "审查页面的营销标记",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "探索全球数字趋势",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "免费试用"
-	},
-	"panel_insights_promotion_header": {
-		"message": "试用 Ghostery Insights",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "使用我们的专业标记分析工具加速和清理数字用户体验。",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "追踪表现不佳的根源",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "实时监控 pings fire",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "关于 Ghostery 浏览器扩展程序"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "自定义设置完毕"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "不仅仅提供基本隐私服务。升级您的 Ghostery 套餐以获得覆盖整台设备的保护、VPN 访问等更多功能！"
+	  	"message": "不仅仅提供基本隐私服务。升级为 Ghostery Plus 以访问我们强大的无痕浏览器、无痕搜索和高级跟踪器分析！"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "立即升级"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "高级设备保护"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "全面浏览器保护"
-	},
 	"hub_upgrade_to": {
 		"message": "升级至"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "查看全部功能清单"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "必须安装 Ghostery Midnight"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "额外保护"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "历史扩展程序统计数据"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "应用程序跟踪器拦截"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "应用程序广告拦截"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "无 VPN 日志"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "泄露保护"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "物理服务器"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "无限带宽"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - 设置"
@@ -1637,7 +1590,7 @@
 		"message": "升级为Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-		"message": "展现您的支持，解锁特别福利！"
+	  "message": "不仅仅提供基本隐私服务，解锁我们的全产品套装！"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$/月",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "自定义主题及更多"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "定制 Ghostery 的颜色 - 试试我们的 Leaf、Palm 和 Dark Blue 主题吧！"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "定制 Ghostery 的颜色 - 试试我们的 Dark Blue 主题吧！"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "查看您的拦截数据，了解 Ghostery 如何为您服务"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "高级跟踪器分析"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "优先支持及更多特权"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "访问 Ghostery Insights，我们的实时跟踪器智能仪表板"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "使用我们的优先帮助台服务快速解决问题，更多特权即将推出"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "无痕浏览器和搜索"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "下载 Ghostery Dawn 和 Glow，我们强大的无痕浏览器，附带内置搜索引擎"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的浏览器扩展程序不收费，但是您可以选择通过价格为 &#36;4.99 的按月订阅来支持我们。升级为 Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
+		"message": "升级为 Ghostery Plus 以解锁我们的全产品套装！每月只需 &#36;4.99，即可访问一款强大的无痕浏览器，附带内置无痕搜索、高级跟踪器分析和其他特别福利。"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "定制 Ghostery 的颜色，获得全新的视觉体验！通过热门请求引入。快看看我们的特别版 Dark Blue 主题，更多主题敬请期待。"
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "极速页面加载"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "高级跟踪器分析"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "智能技术"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "您已经是 Plus 订阅用户"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "保留现有套餐或升级"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "选择一项"
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "主题"
 	},
+	"priority_support" : {
+		"message": "优先支持"
+	},
 	"subscribe_pitch": {
-		"message": "尽管 Ghostery 是免费的，但是您可以选择通过价格为 &#36;4.99 的按月订阅来支持我们，同时还能获得专属福利，例如彩色主题、个人追踪统计数据等等。加入我们的使命并订阅！"
+	  "message": "升级为 Ghostery Plus 以解锁我们的全产品套装！每月只需 &#36;4.99，即可访问一款强大的无痕浏览器，附带内置无痕搜索、高级跟踪器分析和其他的特别福利。"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜欢我们的创意？升级至 Ghostery Plus，解锁全新的春季主题、个人追踪洞察和其他特别福利！"
@@ -2032,7 +1997,7 @@
 		"message": "无效"
 	},
 	"subscription_manage": {
-		"message": "管理我的订阅"
+		"message": "下载产品和管理我的订阅"
 	},
 	"subscription_themes_tooltip": {
 		"message": "更改Ghostery的颜色主题！"
@@ -2121,13 +2086,13 @@
 		"message": "不，保留历史数据"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "升级为 Ghostery Plus，解锁您的历史统计数据（以及其他酷炫福利）。"
+		"message": "升级为 Ghostery Plus，解锁高级跟踪器分析和一款强大的无痕浏览器（附带内置无痕搜索）。"
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "已经是 Ghostery 支持者？"
+		"message": "已经订阅？"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "在此处登录\n"
+		"message": "登录"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "删除当前时间点之前的所有历史统计数据。"
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "每年"
-	},
-	"faster_cleaner_browsing": {
-		"message": "更快、更干净的浏览体验",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "广告拦截",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "跟踪器拦截",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "数据保护",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "选择 Basic"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "了解详情"
 	},
-	"custom_themes": {
-		"message": "自定义主题"
-	},
 	"historical_stats": {
 		"message": "历史统计数据"
-	},
-	"priority_support": {
-		"message": "优先支持",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "开启"
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "似乎无法找到此邮箱地址和密码的组合。 请重试。"
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "所有基础功能，另含：",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "历史追踪器统计数据",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "新颜色主题",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "升级到 Ghostery Plus，只需 &#36;2 每月，即可解锁历史跟踪器信息、优先支持访问权限和新的颜色主题。",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "升级 Ghostery 体验",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "升级到 Plus",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "不用了，关闭促销",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "已经订阅？登录",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "促销已关闭。要重新打开，请访问",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "返回到搜索选择"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights（高级跟踪器分析）"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn（无痕浏览器）"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow（无广告无痕搜索）"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "自定义颜色主题"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "优先支持"
 	}
 }

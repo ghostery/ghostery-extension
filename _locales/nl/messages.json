@@ -519,29 +519,6 @@
 		"message": "Tags marketing audit op pagina",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "Internationale digitale trends",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "Gratis proberen"
-	},
-	"panel_insights_promotion_header": {
-		"message": "Ghostery Insights proberen",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "Versnel en schoon uw digitale gebruikerservaring op met onze tool voor tag analytics.",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "Bron slechte prestaties opsporen",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "Pings in realtime bekijken",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "Over Ghostery Browser Extension"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "Aangepaste instelling voltooid"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "Kies voor meer dan standaardprivacy. Upgrade je Ghostery-abonnement voor bescherming op apparaatniveau, VPN-toegang en meer!"
+	  	"message": "Kies voor meer dan standaardprivacy. Upgrade naar Ghostery Plus om toegang te krijgen tot onze krachtige privébrowser, functie voor privé zoeken en geavanceerde trackeranalyse."
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Upgrade nu"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "Geavanceerde apparaatbescherming"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "Maximale browserbescherming"
-	},
 	"hub_upgrade_to": {
 		"message": "Upgraden naar"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "Bekijk de volledige lijst van functies"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Ghostery Midnight moet geïnstalleerd zijn"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "Aanvullende bescherming"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "Historische uitbreidingsstatistieken"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "Trackers blokkeren in toepassing"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "Ad Blocking in toepassing"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "Geen VPN-logboeken"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "Bescherming tegen lekken"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "Fysieke servers"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "Onbeperkte bandbreedte"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Instellen"
@@ -1637,7 +1590,7 @@
 		"message": "Upgraden naar Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-		"message": "Toon je steun en ontgrendel speciale extra's!"
+	  "message": "Kies voor meer dan standaardprivacy en ontgrendel onze volledige productsuite!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ per maand",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "Aangepaste thema's en meer"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Pas de Ghostery-kleuren aan: probeer onze Leaf-, Palm- en Dark Blue-thema's!"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghostery-kleuren aanpassen - test ons Dark Blue-thema!"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "Bekijk je blocking statistieken en zie wat Ghostery doet voor jou"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "Geavanceerde trackeranalyse"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "Priority Ondersteuning & Meer"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "Krijg toegang tot Ghostery Insights, ons dashboard met realtime trackerinformatie"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "Los problemen snel op met onze Priority Ondersteuning - en meer nog te komen extra's"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "Privé browsen en zoeken"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "Download Ghostery Dawn en Glow, onze krachtige privébrowser met ingebouwde zoekmachine"
 	},
 	"hub_supporter_manifesto": {
-		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze browserextensie, kun je ons ondersteunen via een maandelijks abonnement op &#36;4.99. Sluit je aan bij onze missie. Upgrade naar Ghostery Plus en ontgrendel coole extras!"
+		"message": "Upgrade naar Ghostery Plus om onze volledige productsuite te ontgrendelen! Voor slechts &#36;4.99 per maand krijg je toegang tot een krachtige privébrowser met ingebouwde functie voor privé zoeken, geavanceerde trackeranalyses, en andere speciale extra's."
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Pas de Ghostery-kleuren aan voor een nieuwe, visuele beleving! Ingevoerd na vele verzoeken. Test ons speciale Dark Blue-thema. Binnenkort volgen er meer."
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "Snel laden van pagina's"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "Geavanceerde trackeranalyse"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "Intelligentietechnologie"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "Je bent al een Plus-abonnee"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "Je huidige abonnement behouden of upgraden"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "Een optie kiezen"
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "Thema's"
 	},
+	"priority_support" : {
+		"message": "Priority-ondersteuning"
+	},
 	"subscribe_pitch": {
-		"message": "Ghostery is gratis, maar je kunt ervoor kiezen ons te steunen door een maandabonnement te nemen op &#36;4.99 in ruil voor coole extra's zoals kleurthema's, persoonlijke trackingstatistieken en meer. Sluit je aan bij onze missie en word lid!"
+	  "message": "Upgrade naar Ghostery Plus om onze volledige productsuite te ontgrendelen! Voor slechts &#36;4.99 per maand krijg je toegang tot een krachtige privébrowser met ingebouwde functie voor privé zoeken, geavanceerde trackeranalyses, en andere speciale extra's."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Vind je het leuk wat wij doen? Steun ons en ontgrendel nieuwe thema's voor de lente, persoonlijke trackinginzichten en andere speciale extra's door naar Ghostery Plus te upgraden!"
@@ -2032,7 +1997,7 @@
 		"message": "Inactief"
 	},
 	"subscription_manage": {
-		"message": "Mijn inschrijving beheren"
+		"message": "Producten downloaden en Mijn inschrijving beheren"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Wijzig kleurschema van Ghostery!"
@@ -2121,13 +2086,13 @@
 		"message": "Nee, Bewaar Geschiedenis"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ontsluit je historische statistieken (en andere coole extra's) door te upgraden naar Ghostery Plus."
+		"message": "Ontgrendel geavanceerde trackeranalyses en een krachtige privébrowser met ingebouwde functie voor privé zoeken door te upgraden naar Ghostery Plus."
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "Ben je al Ghostery Supporter?"
+		"message": "Al ingeschreven?"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "Hier aanmelden"
+		"message": "Inloggen "
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Wis alle statistiekengeschiedenis tot aan dit punt."
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "per jaar"
-	},
-	"faster_cleaner_browsing": {
-		"message": "Sneller, schoner browsen",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "Advertentieblokkering",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "Trackers blokkeren",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "Gegevensbescherming",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "Basic kiezen"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "Meer Weten"
 	},
-	"custom_themes": {
-		"message": "Aangepaste thema's"
-	},
 	"historical_stats": {
 		"message": "Historische Statistieken"
-	},
-	"priority_support": {
-		"message": "Priority-ondersteuning",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "Aan"
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "Het lijkt erop dat we deze e-mail/wachtwoord combinatie niet kunnen vinden. Probeer het nog een keer."
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "Alle basisfuncties, plus:",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "Historische trackerstatistieken",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "Nieuwe kleurthema's",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "Ontgrendel oude trackergegevens, VIP-ondersteuning en nieuwe kleurenthema's door te upgraden naar Ghostery Plus voor &#36;2 per maand.",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Je Ghostery-ervaring upgraden",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "Upgraden naar Plus",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "Nee, advert. uitschakelen",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "Al ingeschreven? Aanmelden",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "Advertenties uitschakelen. Je kunt ze opnieuw inschakelen in ",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "Terug naar zoekselectie"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights (geavanceerde trackeranalyse)"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn (privébrowser)"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow (privé en reclamevrij zoeken)"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "Aangepaste kleurthema's"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "Priority-ondersteuning"
 	}
 }
