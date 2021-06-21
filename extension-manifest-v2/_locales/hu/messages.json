@@ -519,29 +519,6 @@
 		"message": "Marketing címkék szerkesztése az oldalon",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "Ismerkedés a globális digitális trendekkel",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "Próbálja ki ingyenesen"
-	},
-	"panel_insights_promotion_header": {
-		"message": "A Ghostery Insights kipróbálása",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "Gyorsítsa fel és tegye átláthatóvá a digitális felhasználói élményt professzionális címkeelemző eszközünkkel.",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "Elégtelen teljesítmény forrásainak azonosítása",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "Értesítések valós időben való megtekintése",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "Néhány szó a Ghostery böngészőkiegészítőről"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "Egyéni telepítés kész"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "Ne elégedjen meg az alapszintű adatvédelemmel, hanem frissítse Ghostery-csomagját úgy, hogy igénybe vehesse az eszközszintű védelmet, a VPN-hozzáférést stb. "
+	  	"message": "Ez messze túlmutat az alapvető adatvédelmen. A Ghostery Plus szoftverre frissítve hozzáférhet hatékony  privát böngészőnkhöz, a privát kereséshez és a továbbfejlesztett követőelemzéshez."
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Frissítés most"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "Alapvető eszközvédelem"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "Maximális böngészővédelem"
-	},
 	"hub_upgrade_to": {
 		"message": "Frissítés erre:"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "Tekintse meg a funkciók teljes listáját"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Telepítenie kell a Ghostery Midnight alkalmazást"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "További védelem"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "Korábbi kiterjesztési adatok"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "Követés blokkolása az alkalmazásban"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "Hirdetések blokkolása az alkalmazásban"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "VPN-naplózás nélkül"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "Szivárgás elleni védelem"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "Fizikai szerverek"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "Korlátlan sávszélesség"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Központ - Beállítás"
@@ -1637,7 +1590,7 @@
 		"message": "Bővítés Ghostery Plusra"
 	},
 	"hub_supporter_header_description": {
-		"message": "Fejezze ki támogató szándékát és oldjon fel különleges extra funkciókat!"
+	  "message": "Ez messze túlmutat az alapvető adatvédelmen. Vegye igénybe a teljes termékcsomagot."
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ havonta",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "Egyedi témák és még sok más"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Tegye egyedivé a Ghostery színeit: próbálja ki a Leaf, a Palm és a Dark Blue témákat."
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Szabja testre kedve szerint a Ghostery színeit – próbálja ki a Dark Blue sablonunkat!"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "Tekintse meg a blokkolási statisztikákat és figyelje meg, hogyan vált be önnek a Ghostery"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": " Továbbfejlesztett követőelemzés"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "Kiemelt támogatás és további szolgáltatások"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "Igénybe veheti a valós idejű követőinformációs irányítópultot, a Ghostery Insights szolgáltatást"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "Hárítsa el a hibákat gyorsan az Elsőbbségi támogató szolgáltatásunkkal - és további szolgáltatások lesznek elérhetőek"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "Privát böngésző és keresés"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "Töltse le a beépített keresőmotorral rendelkező hatékony privát böngészőnket, a Ghostery Dawn and Glow-t"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Arra törekszünk, hogy a legjobb adatvédelmi szolgáltatást nyújtsuk felhasználóinknak költségek nélkül. Bár böngészőbővítményünk ingyenes, Ön dönthet úgy, hogy támogatja munkánkat egy alacsony, &#36;4,99 összegű havi előfizetési díjjal. Csatlakozzon Ön is a küldetésünkhöz, és válassza a Ghostery Plus verzióját, így nagyszerű extra funkciókhoz férhet hozzá!"
+		"message": "Frissítsen a Ghostery Plus szoftverre, hogy  igénybe vehesse a teljes termékcsomagot. &#36;4.99 havi díjért használatba veheti a beépített keresőmotorral rendelkező hatékony privát böngészőt, a továbbfejlesztett követőelemzést és az egyéb speciális funkciókat."
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Állítsa be egyénileg a Ghostery színeit egy új vizuális élményért! Népszerű kérés alapján bevezetve. Próbálja ki a különleges Dark Blue sablonunkat, amelyet még sok fog követni."
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "Gyors lapbetöltések"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": " Továbbfejlesztett követőelemzés"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "Intelligens technológia"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "Ön már Plus-előfizető"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "Tartsa meg vagy bővítse jelenlegi csomagját"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "Válasszon egy lehetőséget"
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "Sablonok"
 	},
+	"priority_support" : {
+		"message": "Kiemelt támogatás"
+	},
 	"subscribe_pitch": {
-		"message": "Bár a Ghostery ingyenes, Ön dönthet úgy, hogy támogatja munkánkat egy alacsony, &#36;4,99 összegű havi előfizetési díjjal, így cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, személyes követési statisztikák, és még sok minden más. Csatlakozzon küldetésünkhöz, és fizessen elő!"
+	  "message": "Frissítsen a Ghostery Plus szoftverre, hogy  igénybe vehesse a teljes termékcsomagot. &#36;4.99 havi díjért használatba veheti a beépített keresőmotorral rendelkező hatékony privát böngészőt, a továbbfejlesztett követőelemzést és az egyéb speciális funkciókat."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Tetszik a termékünk? Támogassunk bennünket, és fedezze fel az új tavaszi sablonokat, személyes nyomonkövetési lehetőségeket, és számos különleges előnyt a Ghostery Plus történő frissítéssel!"
@@ -2032,7 +1997,7 @@
 		"message": "Inaktív"
 	},
 	"subscription_manage": {
-		"message": "Feliratkozásom kezelése"
+		"message": "Termékek letöltése és az előfizetés kezelése"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Változtassa meg a Ghostery színsablonját!"
@@ -2121,13 +2086,13 @@
 		"message": "Nem, napló megtartása"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Használatba veheti a korábbi statisztikai adatokat (és az egyéb előnyöket) a Ghostery Plus alkalmazásra való frissítéssel."
+		"message": "Frissítsen a Ghostery Plus szoftverre, hogy igénybe vehesse a továbbfejlesztett követőelemzést és a beépített keresőmotorral rendelkező hatékony privát böngészőt."
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "Ön már támogatója a Ghosterynek?"
+		"message": "Már van előfizetése?"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "Jelentkezzen be itt"
+		"message": "Bejelentkezés"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Összes naplózott statisztika törlése eddig az időpontig."
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "évente"
-	},
-	"faster_cleaner_browsing": {
-		"message": "Gyorsabb, átláthatóbb böngészés",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "Hirdetések blokkolása",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "Nyomkövetők blokkolása",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "Adatvédelem",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "Alapvető kiválasztása"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "Tudjon meg többet"
 	},
-	"custom_themes": {
-		"message": "Egyéni témák"
-	},
 	"historical_stats": {
 		"message": "Naplózott statisztikák"
-	},
-	"priority_support": {
-		"message": "Kiemelt támogatás",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "Be"
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "Úgy tűnik, hogy rendszerünkben nem található ez az e-mail- és jelszó- kombináció. Próbálja meg újból."
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "Minden alapvető funkció, plusz:",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "Naplózott tracker statisztikák",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "Új színsablonok",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "Vegye igénybe a trackerinformációkat, a támogatáshoz való elsőbbségi hozzáférést és az új színtémákat. Ehhez frissítsen a Ghostery Plus alkalmazásra havi &#36;2 összegért.",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Még jobb Ghostery-élmény",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "Frissítés Plus csomagra",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "Köszönöm, nem. Kikapcsolom a promóciókat.",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "Már feliratkozott? Jelentkezzen be",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "A promóciókat kikapcsoltuk. Visszakapcsolhatja őket",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "Vissza a keresési lehetőségek kiválasztásához"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights (továbbfejlesztett követőelemzés)"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn (privát böngésző)"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow (privát, reklámmmentes keresés)"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "Egyedi színsablonok"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "Kiemelt támogatás"
 	}
 }

@@ -519,29 +519,6 @@
 		"message": "ページ上のマーケティングタグを検証する",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "グローバルなデジタルトレンドを検索",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "無料で試す"
-	},
-	"panel_insights_promotion_header": {
-		"message": "Ghostery Insightsを試す",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "本格的なタグ分析ツールを使用してデジタルユーザーエクスペリエンスを素早く整理する。",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "パフォーマンスが悪いソースを探知する",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "リアルタイムでネットワークトラフィックを確認する",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "Ghosteryブラウザ拡張について"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "カスタム設定完了"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "基本的なプライバシーを超えて。Ghosteryプランをアップグレードし、デバイスレベルの保護、VPNアクセスなどを利用しましょう！"
+	  	"message": "Ghostery Plusにアップグレードすると、基本的なプライバシー保護機能だけでなく、強力なプライベートブラウザ、プライベート検索機能、高度なトラッカー分析機能も使用できるようになります。"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "今すぐアップデート"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "高度なデバイス保護"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "最大限のブラウザ保護"
-	},
 	"hub_upgrade_to": {
 		"message": "アップグレード先"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "全機能のリストを見る"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Ghostery Midnightがインストールされている必要があります"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "追加の保護"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "履歴拡張統計"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "アプリケーショントラッカーのブロッキング"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "アプリケーション広告のブロッキング"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "VPNログはありません"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "漏えい保護"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "物理サーバー"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "無制限の帯域幅"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery ハブ - 設定"
@@ -1637,7 +1590,7 @@
 		"message": "「Ghostery プラス」にアップグレードする"
 	},
 	"hub_supporter_header_description": {
-		"message": "Ghosteryをサポートして特典をもらおう！"
+	  "message": "アップグレードすると、基本的なプライベート保護機能だけでなく、さまざまな機能を使用できるようになります"
 	},
 	"hub_supporter_price": {
 		"message": "1か月あたり$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "テーマを使用して色をカスタマイズ"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Leafテーマ、Palmテーマ、Dark Blueテーマを使用して、Ghosteryの色をカスタマイズすることができます"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghosteryのカラーはカスタマイズできます。Dark Blueもお試しください！"
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "過去のブロック履歴と Ghostery の対応履歴を見る"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "高度なトラッカー分析"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "優先サポート＆その他機能"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "リアルタイムの高度なトラッカーダッシュボードであるGhostery Insightsにアクセスすることができます"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "プライオリティ・ヘルプデスクが問題をすぐに解決。充実した特典が満載です"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "プライベート検索機能が組み込まれたプライベートブラウザ"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "検索エンジンが組み込まれた強力なプライベートブラウザであるGhostery DawnとGhostery Glowをダウンロードすることができます"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Ghosteryは、最高のプライバシー保護サービスをユーザーに無料で提供できるように努めています。ブラウザ拡張機能は無料ですが、一部のお客様からは毎月&#36;4.99のサブスクリプション料をいただくことで機能改善にご協力いただいております。「Ghostery Plus」にアップグレードして当社のミッションにご参加ください。そして、さらなるサービス特典をご利用ください！"
+		"message": "Ghostery Plusにアップグレードすれば、月額わずか&#36;4.99で、プライベート検索機能が組み込まれた強力なプライベートブラウザや高度なトラッカー分析など、各種の便利な機能を使用できるようになります。"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Ghosteryのカラーをカスタマイズして新しいビジュアル体験を！たくさんのご要望にお応えし、ついに実現。Dark Blueやその他の新着テーマをチェックしよう。"
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "高速なページ読み込み"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "高度なトラッカー分析"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "インテリジェンス・テクノロジー"
 	},
@@ -1835,9 +1800,6 @@
 	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "既にGhostery Plusに登録されています"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "現在のプランを引き続き使用することも、アップグレードすることもできます"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "オプションを選択"
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "テーマ"
 	},
+	"priority_support" : {
+		"message": "優先サポート"
+	},
 	"subscribe_pitch": {
-		"message": "Ghosteryは無料でもご利用いただけますが、毎月&#36;4.99のサブスクリプション料を通じてご協力いただくと、カラーテーマ、個人追跡履歴統計などの特典をご利用いただけます。ご登録いただき、当社のミッションにご参加ください！"
+	  "message": "Ghostery Plusにアップグレードすれば、月額わずか&#36;4.99で、プライベート検索機能が組み込まれた強力なプライベートブラウザや高度なトラッカー分析など、各種の便利な機能を使用できるようになります。"
 	},
 	"subscribe_pitch_spring": {
 		"message": "気に入っていただけましたか？Ghostery Plusにアップグレードして、新しい春のテーマ、個人追跡情報など、特別機能をご利用ください！"
@@ -2032,7 +1997,7 @@
 		"message": "非アクティブ"
 	},
 	"subscription_manage": {
-		"message": "登録管理"
+		"message": "製品のダウンロードとサブスクリプションの管理"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Ghosteryのカラースキームは変更できます！"
@@ -2121,13 +2086,13 @@
 		"message": "いいえ、履歴を保持します"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ghostery Plusにアップグレードして、履歴統計やその他の便利な機能を是非お試しください。"
+		"message": "Ghostery Plusにアップグレードすると、高度なトラッカー分析機能と、プライベート検索機能が組み込まれた強力なプライベートブラウザを使用できるようになります。"
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "Ghostery のサポーターですか？"
+		"message": "登録はお済みですか？"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "サインインはこちら"
+		"message": "サインイン"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "この時点までのすべての履歴統計を削除する"
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "/年"
-	},
-	"faster_cleaner_browsing": {
-		"message": "より早く、よりクリーンなブラウジング",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "広告ブロッキング",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "トラッカーブロッキング",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "データ保護",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "ベーシックを選択"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "詳細はこちら"
 	},
-	"custom_themes": {
-		"message": "カスタムテーマ"
-	},
 	"historical_stats": {
 		"message": "履歴統計"
-	},
-	"priority_support": {
-		"message": "優先サポート",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "オン"
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "ベーシックプランに付帯するすべての機能プラス、以下の機能: ",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "追跡履歴の統計",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "新しいカラー・テーマ",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "1ヵ月たったの&#36;2でGhostery Plusにアップグレードし、トラッカーの履歴、優先サポートアクセスおよび新しいテーマカラーを利用できます。",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Ghosteryでのエクスペリエンスをアップグレード",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "プラスにアップグレード",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "いいえ、結構です。プロモーションを無効にする",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "既にサブスクライブしていますか？サインイン",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "プロモーションを無効にしました。以下でいつでも有効化できます:",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "検索エンジンの選択画面に戻る"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights（高度なトラッカー分析機能）"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn（プライベートブラウザ）"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow（広告が表示されないプライベート検索機能）"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "カスタムカラーテーマ"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "優先サポート"
 	}
 }
