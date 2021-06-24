@@ -519,29 +519,6 @@
 		"message": "Аудит маркетинговых тегов на странице",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
-	"panel_insights_promotion_explore_trends": {
-		"message": "Исследовать мировые цифровые тенденции",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
-	"panel_insights_promotion_call_to_action": {
-		"message": "Попробуйте бесплатно"
-	},
-	"panel_insights_promotion_header": {
-		"message": "Попробуйте Ghostery Insights",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"panel_insights_promotion_description": {
-		"message": "Ускорьте и усовершенствуйте цифровое взаимодействие с нашим профессиональным инструментом анализа тегов.",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
-	},
-	"panel_insights_promotion_trace_poor_performance": {
-		"message": "Отследить источники плохой производительности",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
-	},
-	"panel_insights_promotion_watch_pings": {
-		"message": "Просматривать обработку проверки связи в режиме реального времени",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
-	},
 	"panel_about_panel_header": {
 		"message": "Информация о расширении для браузера Ghostery"
 	},
@@ -1313,7 +1290,7 @@
 		"message": "Пользовательская настройка завершена"
 	},
 	"hub_home_plus_upgrade_text": {
-		"message": "Расширьте рамки защиты конфиденциальности. Обновите свой план Ghostery, чтобы получить защиту на уровне устройства, доступ к VPN и многое другое!"
+	  	"message": "Расширьте рамки защиты конфиденциальности. Обновите свой план до Ghostery Plus, чтобы получить доступ к мощному приватному браузеру, приватному поиску и расширенной аналитике трекеров!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Обновить сейчас"
@@ -1351,17 +1328,11 @@
 	"hub_upgrade_advanced_device_protection": {
 		"message": "Расширенная защита устройства"
 	},
-	"hub_upgrade_maximum_browser_protection": {
-		"message": "Максимальная защита браузера"
-	},
 	"hub_upgrade_to": {
 		"message": "Обновить до"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "Просмотреть весь список функций"
-	},
-	"hub_upgrade_midnight_note": {
-		"message": "Должна быть установлена Ghostery Midnight"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "Дополнительная защита"
@@ -1383,24 +1354,6 @@
 	},
 	"hub_upgrade_historical_extension_stats": {
 		"message": "Историческая статистика расширений"
-	},
-	"hub_upgrade_application_tracker_blocking": {
-		"message": "Блокировка трекера приложений"
-	},
-	"hub_upgrade_application_ad_blocking": {
-		"message": "Блокировка рекламы в приложении"
-	},
-	"hub_upgrade_no_vpn_logs": {
-		"message": "Нет журналов VPN"
-	},
-	"hub_upgrade_leak_protection": {
-		"message": "Защита от утечки данных"
-	},
-	"hub_upgrade_physical_servers": {
-		"message": "Физические серверы"
-	},
-	"hub_upgrade_unlimited_bandwidth": {
-		"message": "Пропускная способность без ограничений"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Настройка"
@@ -1637,7 +1590,7 @@
 		"message": "Обновление до Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-		"message": "Поддержите нас и разблокируйте специальные функции!"
+	  "message": "Расширьте рамки защиты конфиденциальности и воспользуйтесь полным комплексом продуктов!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ в месяц",
@@ -1656,20 +1609,29 @@
 			}
 		}
 	},
+  	"hub_supporter_perk_themes_and_more_title": {
+	  "message": "Пользовательские темы и другое"
+	},
+  	"hub_supporter_perk_themes_and_more_description": {
+	  "message": "Настройте цвета Ghostery - попробуйте темы Leaf, Palm и Dark Blue!"
+	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Настройте цвета Ghostery - попобуйте нашу тему \"Dark Blue\"."
 	},
-	"hub_supporter_perk_stats_description": {
-		"message": "Просмотрите статистику блокировок и узнайте, как Ghostery помогает вам"
+  	"hub_supporter_perk_analytics_title": {
+	  "message": "Расширенная аналитика трекеров"
 	},
-	"hub_supporter_perk_more_title": {
-		"message": "Приоритетная поддержка и другое"
+  	"hub_supporter_perk_analytics_description": {
+	  "message": "Получите доступ к Ghostery Insights, нашей панели отслеживания трекеров в реальном времени"
 	},
-	"hub_supporter_perk_more_description": {
-		"message": "Быстро разрешайте проблемы с помощью нашей приоритетной службы поддержки - доп. функции ожидаются в ближайшее время"
+  	"hub_supporter_perk_dawn_and_glow_title": {
+	  "message": "Приватный браузер с поисковой системой"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+	  "message": "Загрузите Ghostery Dawn и Ghostery Glow, наш мощный приватный браузер со встроенной приватной поисковой системой"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Мы стремимся обеспечивать конфиденциальность для наших пользователей бесплатно. Хотя мы не взимаем плату за наше расширение браузера, вы можете поддержать нас, оформив ежемесячную подписку в размере &#36;4,99. Поддержите нас в нашей миссии, перейдя на Ghostery Plus, и получите отличные бонусы!"
+		"message": "Обновите свой план до Ghostery Plus, чтобы воспользоваться полным комплектом продуктов! Всего за &#36;4.99 в месяц вы получите доступ к мощному приватному браузеру со встроенным приватным поиском, расширенной аналитике трекеров и другим специальным привилегиям. "
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Настройте цвета Ghostery и получите новые впечатления! Добавлено в связи с популярным запросом. Попробуйте нашу специальную тему \"Dark Blue\" и многое другое."
@@ -1777,7 +1739,7 @@
 		"message": "Мы централизовали конфиденциальность в Интернете, интегрировав нашу подпись, а также новые технологии."
 	},
 	"ghostery_dawn_onboarding_welcome_message": {
-		"message": "Наш браузер защищает ваши данные и блокирует вредоносное ПО, поэтому вы можете пользоваться Интернетом конфиденциально и более чем в 3 раза быстрее, чем в Chrome."
+		"message": "Ghostery Dawn защищает ваши данные от трекеров, чтобы вы могли безопасно пользоваться Интернетом до трех раз быстрее чем с Chrome."
 	},
 	"ghostery_dawn_onboarding_lets_do_this": {
 		"message": "Настроить мой браузер"
@@ -1821,6 +1783,9 @@
 	"ghostery_dawn_onboarding_speedy_page_loads": {
 		"message": "Быстрая загрузка страницы"
 	},
+  	"ghostery_dawn_onboarding_advanced_tracker_analytics": {
+	  	"message": "Расширенная аналитика трекеров"
+	},
 	"ghostery_dawn_onboarding_intelligence_technology": {
 		"message": "Интеллектуальные технологии"
 	},
@@ -1833,14 +1798,8 @@
 	"ghostery_dawn_onboarding_unlimited_bandwidth": {
 		"message": "Пропускная способность без ограничений"
 	},
-	"ghostery_dawn_onboarding_already_premium_subscriber": {
-		"message": "Вы уже являетесь подписчиком Premium"
-	},
 	"ghostery_dawn_onboarding_already_plus_subscriber": {
 		"message": "Вы уже являетесь подписчиком Plus"
-	},
-	"ghostery_dawn_onboarding_keep_your_current_plan_or_upgrade": {
-		"message": "Сохраните текущий план или обновите"
 	},
 	"ghostery_dawn_onboarding_choose_an_option": {
 		"message": "Выберите вариант"
@@ -1959,6 +1918,9 @@
 	"ghostery_dawn_onboarding_toast_alert": {
 		"message": "Ошибка:"
 	},
+	"ghostery_dawn_onboarding_toast_logout": {
+		"message": "Вы вышли из системы"
+	},
 	"enable_when_paused": {
 		"message": "Для использования этой функции возобновите работу Ghostery."
 	},
@@ -1986,8 +1948,11 @@
 	"subscription_themes_title": {
 		"message": "Темы"
 	},
+	"priority_support" : {
+		"message": "Приоритетная поддержка"
+	},
 	"subscribe_pitch": {
-		"message": "Несмотря на то, что использование Ghostery бесплатно, вы можете поддержать нас, оформив ежемесячную подписку в размере &#36;4.99. После этого вам будут доступны специальные привилегии, такие как цветовые темы, личная статистика отслеживания и многое другое. Поддержите нас в нашей мисии и подпишитесь!"
+	  "message": "Обновите свой план до Ghostery Plus, чтобы воспользоваться полным комплектом продуктов! Всего за &#36;4.99 в месяц вы получите доступ к мощному приватному браузеру со встроенным приватным поиском, расширенной аналитике трекеров и другим специальным привилегиям. "
 	},
 	"subscribe_pitch_spring": {
 		"message": "Вам нравитя то, что мы делаем? Поддержите нас и откройте для себя новые весенние темы и личные сведения о трекинге, а также получите другие специальные привелегии, перейдя на Ghostery Plus!"
@@ -2032,7 +1997,7 @@
 		"message": "Неактивный"
 	},
 	"subscription_manage": {
-		"message": "Управлять подписками"
+		"message": "Загрузка продуктов и управление подпиской"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Измените цветовую схему Ghostery!"
@@ -2121,13 +2086,13 @@
 		"message": "Нет, сохранить историю"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Разблокируйте хронологическиую статистику (и другие отличные бонусы), обновив расширение браузера до Ghostery Plus."
+		"message": "Воспользуйтесь расширенной аналитикой трекеров и мощным приватным браузером со встроенным приватным поиском, обновив план до Ghostery Plus."
 	},
 	"panel_stats_pitch_modal_already": {
-		"message": "Уже поддерживаете Ghostery?"
+		"message": "Уже есть подписка?"
 	},
 	"panel_stats_pitch_modal_sign_in": {
-		"message": "Войти"
+		"message": "Вход"
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Стереть всю историю статистики до этого момента."
@@ -2199,22 +2164,6 @@
 	},
 	"per_year": {
 		"message": "в год"
-	},
-	"faster_cleaner_browsing": {
-		"message": "Более быстрая и эффективная работа в сети",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_ads": {
-		"message": "Блокировка рекламы",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"blocks_trackers": {
-		"message": "Блокировка трекеров",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"data_protection": {
-		"message": "Защита данных",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "Выбрать базовый"
@@ -2297,15 +2246,8 @@
 	"learn_more": {
 		"message": "Подробнее"
 	},
-	"custom_themes": {
-		"message": "Темы пользователя"
-	},
 	"historical_stats": {
 		"message": "Историческая статистика"
-	},
-	"priority_support": {
-		"message": "Приоритетная поддержка",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "Вкл"
@@ -2330,38 +2272,6 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля.  Попробуйте еще раз."
-	},
-	"all_basic_features_plus_COLON": {
-		"message": "Все базовые функции, а также:",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
-	},
-	"historical_tracker_stats": {
-		"message": "Статистика трекера истории",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"new_color_themes": {
-		"message": "Новые цветовые темы",
-		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
-	},
-	"upgrade_cta_TEXT": {
-		"message": "Разблокируйте исторические сведения о трекерах, доступ к приоритетной поддержке и новые цветовые темы, выполнив обновление до Ghostery Plus всего за &#36;2 в месяц.",
-		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
-	},
-	"upgrade_your_ghostery_experience": {
-		"message": "Обновите свой опыт использования Ghostery",
-		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
-	},
-	"upgrade_to_plus": {
-		"message": "Обновить до Plus",
-		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
-	},
-	"no_thanks_turn_promos_off": {
-		"message": "Нет, спасибо, отключить промоакции",
-		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
-	},
-	"already_subscribed_sign_in": {
-		"message": "Уже подписаны? Войдите в систему",
-		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "Промоакции отключены. Вы можете снова подключить их в",
@@ -2444,5 +2354,20 @@
 	},
   	"ghostery_dawn_onboarding_back_to_search_selection": {
 	  "message": "Вернуться к выбору поиска"
+	},
+  	"plus_subscriber_perk_insights" : {
+	  "message": "Ghostery Insights (расширенная аналитика трекеров)"
+	},
+	"plus_subscriber_perk_dawn" : {
+	  "message": "Ghostery Dawn (приватный браузер)"
+	},
+	"plus_subscriber_perk_glow" : {
+	  "message": "Ghostery Glow (приватный поиск без рекламы)"
+	},
+	"plus_subscriber_perk_custom_color_themes" : {
+	  "message": "Настраиваемые цвета фона"
+	},
+	"plus_subscriber_perk_priority_support" : {
+	  "message": "Приоритетная поддержка"
 	}
 }

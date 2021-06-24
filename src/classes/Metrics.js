@@ -14,7 +14,7 @@
 import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
-import { processUrlQuery } from '../utils/utils';
+import { processUrlQuery, buildQueryPair } from '../utils/utils';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -168,16 +168,6 @@ class Metrics {
 				this._sendReq(type, ['all']);
 				break;
 
-			// Promo Modals - Ghostery 8.4.4+
-			case 'promo_modals_insights_upgrade_cta':
-			case 'promo_modals_plus_upgrade_cta':
-			case 'promo_modals_decline_insights_upgrade':
-			case 'promo_modals_decline_plus_upgrade':
-			case 'promo_modals_show_upgrade_plus':
-			case 'promo_modals_show_insights':
-				this._sendReq(type, ['all']);
-				break;
-
 			// Onboarding Pings - Ghostery 8.5.2+
 			case 'intro_hub_click':
 			case 'intro_hub_home_upgrade':
@@ -211,18 +201,6 @@ class Metrics {
 	}
 
 	/**
-	 * Helper for building query string key value pairs
-	 *
-	 * @private
-	 *
-	 * @since 8.5.4
-	 * @param  {string} query   param to be included in string
-	 * @param  {string} value   number value to be passed on through qeury string
-	 * @return {string}         complete query component
-	 */
-	_buildQueryPair = (query, value) => `&${query}=${encodeURIComponent(value)}`;
-
-	/**
 	 * Build telemetry URL
 	 *
  	 * @private
@@ -244,92 +222,92 @@ class Metrics {
 			// Crucial parameters
 			// Always added for uninstall URL
 			// Extension version
-			this._buildQueryPair('v', EXTENSION_VERSION) +
+			buildQueryPair('v', EXTENSION_VERSION) +
 			// User agent - browser
-			this._buildQueryPair('ua', BROWSER_INFO.token) +
+			buildQueryPair('ua', BROWSER_INFO.token) +
 			// Operating system
-			this._buildQueryPair('os', BROWSER_INFO.os) +
+			buildQueryPair('os', BROWSER_INFO.os) +
 			// Browser language
-			this._buildQueryPair('l', conf.language) +
+			buildQueryPair('l', conf.language) +
 			// Browser version
-			this._buildQueryPair('bv', BROWSER_INFO.version) +
+			buildQueryPair('bv', BROWSER_INFO.version) +
 			// Date of install (former install_date)
-			this._buildQueryPair('id', conf.install_date) +
+			buildQueryPair('id', conf.install_date) +
 			// Showing campaign messages (former show_cmp)
-			this._buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
+			buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
 			// Subscription Type
-			this._buildQueryPair('st', Metrics._getSubscriptionType().toString()) +
+			buildQueryPair('st', Metrics._getSubscriptionType().toString()) +
 
 			// New parameters for Ghostery 8.5.2
 			// Subscription Interval
-			this._buildQueryPair('si', Metrics._getSubscriptionInterval().toString()) +
+			buildQueryPair('si', Metrics._getSubscriptionInterval().toString()) +
 			// Product ID Parameter
-			this._buildQueryPair('pi', await Metrics._getProductID());
+			buildQueryPair('pi', await Metrics._getProductID());
 
 		if (type !== 'uninstall') {
 			metrics_url +=
 			// Old parameters, old names
 			// Human web
-			this._buildQueryPair('hw', conf.enable_human_web ? '1' : '0') +
+			buildQueryPair('hw', conf.enable_human_web ? '1' : '0') +
 			// Old parameters, new names
 			// Random number, assigned at install (former install_rand)
-			this._buildQueryPair('ir', conf.install_random_number) +
+			buildQueryPair('ir', conf.install_random_number) +
 			// Login state (former signed_in)
-			this._buildQueryPair('sn', conf.account ? '1' : '0') +
+			buildQueryPair('sn', conf.account ? '1' : '0') +
 			// Noncritical ping (former noncritical)
-			this._buildQueryPair('nc', conf.enable_metrics ? '1' : '0') +
+			buildQueryPair('nc', conf.enable_metrics ? '1' : '0') +
 			// Purplebox state (former purplebox)
-			this._buildQueryPair('pb', conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0') +
+			buildQueryPair('pb', conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0') +
 
 			// New parameters, new names
 			// Extension_view - which view of the extension is the user in
-			this._buildQueryPair('ev', conf.is_expert ? (conf.is_expanded ? '3' : '2') : '1') +
+			buildQueryPair('ev', conf.is_expert ? (conf.is_expanded ? '3' : '2') : '1') +
 			// Adblocking state
-			this._buildQueryPair('ab', conf.enable_ad_block ? '1' : '0') +
+			buildQueryPair('ab', conf.enable_ad_block ? '1' : '0') +
 			// Smartblocking state
-			this._buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
+			buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
 			// Antitracking state
-			this._buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
+			buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
-			this._buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
+			buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
 			// The number of times the user has gone through setup in the regular hub, or the answer selection on each page of the dawn-hub
-			this._buildQueryPair('sl', Metrics._getSetupNumber(type).toString()) +
+			buildQueryPair('sl', Metrics._getSetupNumber(type).toString()) +
 			// Type of blocking selected during setup
-			this._buildQueryPair('sb', conf.setup_block.toString()) +
+			buildQueryPair('sb', conf.setup_block.toString()) +
 			// Recency, days since last active daily ping
-			this._buildQueryPair('rc', Metrics._getRecencyActive(type, frequency).toString()) +
+			buildQueryPair('rc', Metrics._getRecencyActive(type, frequency).toString()) +
 
 			// New parameters to Ghostery 8.3
 			// Whether the computer ever had a Paid Subscription
-			this._buildQueryPair('ps', conf.paid_subscription ? '1' : '0') +
+			buildQueryPair('ps', conf.paid_subscription ? '1' : '0') +
 			// Active Velocity
-			this._buildQueryPair('va', Metrics._getVelocityActive(type).toString()) +
+			buildQueryPair('va', Metrics._getVelocityActive(type).toString()) +
 			// Engaged Recency
-			this._buildQueryPair('re', Metrics._getRecencyEngaged(type, frequency).toString()) +
+			buildQueryPair('re', Metrics._getRecencyEngaged(type, frequency).toString()) +
 			// Engaged Velocity
-			this._buildQueryPair('ve', Metrics._getVelocityEngaged(type).toString()) +
+			buildQueryPair('ve', Metrics._getVelocityEngaged(type).toString()) +
 			// Theme
-			this._buildQueryPair('th', Metrics._getThemeValue().toString()) +
+			buildQueryPair('th', Metrics._getThemeValue().toString()) +
 
 			// New parameter for Ghostery 8.5.3
 			// AB tests enabled?
-			this._buildQueryPair('ts', conf.enable_abtests ? '1' : '0');
+			buildQueryPair('ts', conf.enable_abtests ? '1' : '0');
 		}
 
 		if (CAMPAIGN_METRICS.includes(type) || type === 'uninstall') {
 			// only send campaign attribution when necessary
 			metrics_url +=
 				// Marketing source (Former utm_source)
-				this._buildQueryPair('us', this.utm_source) +
+				buildQueryPair('us', this.utm_source) +
 				// Marketing campaign (Former utm_campaign)
-				this._buildQueryPair('uc', this.utm_campaign);
+				buildQueryPair('uc', this.utm_campaign);
 		}
 
 		if (BROWSER_INFO.token === 'gd') {
 			// fetch metrics from the search extension and append them
 			const searchMetrics = await Metrics._getSearchExtensionMetrics();
 			Object.keys(searchMetrics).forEach((k) => {
-				metrics_url += this._buildQueryPair(k, searchMetrics[k]);
+				metrics_url += buildQueryPair(k, searchMetrics[k]);
 			});
 		}
 

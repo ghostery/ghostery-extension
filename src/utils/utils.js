@@ -144,13 +144,14 @@ export function defineLazyProperty(obj, prop, callback) {
 }
 
 /**
- * Process First Party Exception URLs to return host and path.
+ * Quickly process tracker URLs to return host and path. Used with fuzzyUrlMatcher()
+ * to parse FirstPartyException and CompatibilityDB URLs
  * @memberOf BackgroundUtils
  *
- * @param  {string} src 	the first party exception url
+ * @param  {string} src 	the tracker url
  * @return {Object} 		contains host, path as properties
  */
-export function processFpeUrl(src) {
+export function processTrackerUrl(src) {
 	const index = src.indexOf('/');
 	const host = (index === -1) ? src : src.substring(0, index);
 	const path = (index === -1) ? '' : src.substring(index + 1);
@@ -810,3 +811,14 @@ export function semverCompare(a, b) {
 	}
 	return 0;
 }
+
+/**
+ * Helper for building query string key value pairs
+ *
+ * @since 8.5.4
+ * @param  {string}  query		param to be included in string
+ * @param  {string}  value		number value to be passed on through qeury string
+ * @param  {boolean} queryStart	indicates whether the returned string is intended for start of a query
+ * @return {string}         	complete query component
+ */
+export const buildQueryPair = (query, value, queryStart = false) => `${queryStart ? '?' : '&'}${query}=${encodeURIComponent(value)}`;

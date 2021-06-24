@@ -12,6 +12,7 @@
  */
 
 $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow to next line
+$plan-card-width: 250px;
 
 .ChoosePlanView {
 	margin: 45px auto 0 auto;
@@ -62,7 +63,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__searchPromoContainer {
 	width: 354px;
 	height: 381px;
-	margin: 48px auto 0 auto;
+	margin: 48px auto;
 	border-radius: 4px;
 	border: solid 4px $ghosty-blue;
 }
@@ -103,10 +104,11 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 }
 
 .ChoosePlanView__searchCTAButton {
+  	display: flex;
 	justify-content: center;
-	margin: 48px auto 0 auto;
 	min-height: 44px;
 	min-width: 162px;
+  	max-width: $plan-card-width;
 	padding: 7.7px 14px;
 	line-height: 22px;
 	background: linear-gradient(
@@ -135,37 +137,6 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 		color: $white;
 	}
 }
-.ChoosePlanView__premiumCTAButton {
-	display: flex;
-	justify-content: center;
-	margin: 48px auto 0 auto;
-	height: 44px;
-	width: 162px;
-	padding: 7.7px 14px;
-	line-height: 22px;
-	background: linear-gradient(
-			45deg,
- 			#6c097a 50%,
- 			#03a9ec
-	);
-	background-size: 200% 100%;
-	background-position: 100% 50%;
-	transition: 0.25s all;
-	border: none;
-	color: $white;
-	font-size: 14.1px;
-	font-weight: 700;
-	border-radius: 3.5px;
-	text-align: center;
-	line-height: 2.05;
-	cursor: pointer;
-
-	&:hover {
-		color: $white;
-		background-position: 0% 50%;
-		transition: 0.25s all;
-	}
-}
 .ChoosePlanView__seeAllPlans {
 	margin-top: 48px;
 	display: flex;
@@ -187,24 +158,17 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 		min-height: 670px;
 	}
 }
-.ChoosePlanView__orCardContainer {
-	display: flex;
-}
-.ChoosePlanView__or {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0 66px;
-	height: 180px;
-	font-size: 24px;
-	color: $tundora;
-}
 .ChoosePlanView__ctaButtonContainer {
 	display: flex;
 	justify-content: center;
 }
 .ChoosePlanView__keepOrUpgradeContainer {
 	margin: 40px auto;
+
+	.ChoosePlanView__cardOuter {
+		height: 680px;
+	  	margin-bottom: rem-calc(50);
+	}
 }
 .ChoosePlanView__arrow {
 	margin: 15px auto 0 auto;
@@ -224,7 +188,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 .ChoosePlanView__card {
 	height: 100%;
 	box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
-	margin-bottom: rem-calc(40);
+	margin-bottom: rem-calc(50);
 	width: 250px;
 	margin-left: auto;
 	margin-right: auto;
@@ -285,24 +249,6 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 			background-image: url('/app/images/hub/upgrade/ghostery-plus-card.svg')
 		}
 	}
-	.ghostery-premium-image-container {
-		margin-left: -4px;
-		position: relative;
-	}
-	.ghostery-premium-image {
-		position: absolute;
-		margin-top: -79px;
-		margin-left: 9px;
-		width: 233px;
-		height: 161px;
-		background-image: url('/app/images/hub/upgrade/ghostery-premium-card.svg');
-	}
-	.ghostery-premium-image-background {
-		margin: -3px 0 0 -4px;
-		width: 250px;
-		height: 85px;
-		background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
-	}
 	.card-sub-header {
 		font-size: 14px;
 	}
@@ -319,9 +265,6 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	}
 	&-gold {
 		color: $price-gold;
-	}
-	&-purple {
-		color: $price-purple;
 	}
 	p {
 		margin-bottom: 0;
@@ -345,6 +288,7 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	justify-content: flex-start;
 	margin-bottom: 5px;
 	text-align: left;
+  	font-size: 75%;
 }
 .check {
 	display: inline-block;
@@ -358,9 +302,6 @@ $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow t
 	}
 	&.yellow {
 		background-image: buildCheckIcon($price-gold);
-	}
-	&.purple {
-		background-image: buildCheckIcon($price-purple);
 	}
 }
 .ChoosePlanView__radioButtonContainer {

@@ -765,15 +765,7 @@ class Summary extends React.Component {
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{hasPremiumAccess && (
-					<div className="Summary__subscriberBadgeContainer">
-						<div className={`SubscriberBadge ${current_theme}`}>
-							<ReactSVG src="/app/images/panel/premium-badge-icon.svg" className="gold-plus-icon" />
-						</div>
-					</div>
-				)}
-
-				{hasPlusAccess && !hasPremiumAccess && (
+				{(hasPlusAccess || hasPremiumAccess) && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
 							<ReactSVG src="/app/images/panel/plus-badge-icon.svg" className="gold-plus-icon" />

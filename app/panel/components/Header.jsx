@@ -233,8 +233,7 @@ class Header extends React.Component {
 		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
 			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrSubscriberBadgeIcon}>
 				{
-					((hasPremiumAccess) && <ReactSVG src="/app/images/panel/premium-badge-icon-expanded-view.svg" />)
-					|| ((hasPlusAccess) && <ReactSVG src="/app/images/panel/plus-badge-icon-expanded-view.svg" />)
+					((hasPlusAccess || hasPremiumAccess) && <ReactSVG src="/app/images/panel/plus-badge-icon-expanded-view.svg" />)
 					|| <ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
 				}
 			</div>

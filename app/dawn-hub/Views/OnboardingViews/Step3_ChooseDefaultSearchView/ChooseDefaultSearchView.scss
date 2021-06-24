@@ -51,13 +51,14 @@
 }
 
 .ChooseSearchView__subtitle {
-  margin-bottom: 47px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
 .ChooseSearchView__optionsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 15px;
 }
 
 
@@ -107,6 +108,16 @@
   justify-content: center;
 	width: 75%;
 	padding-right: 15%;
+
+	&.ghostery {
+		margin-left: -14px;
+	}
+	&.startpage {
+		margin-left: -9px;
+	}
+	&.yahoo {
+		margin-left: -9px;
+	}
 }
 
 .ChooseSearchView__optionDescriptionHeader {
@@ -290,7 +301,23 @@
 }
 
 .ChooseSearchView__modalOptionLogo {
-  padding-bottom: 40px;
+	padding: 70px 0;
+
+	&.ghostery {
+		width: 266px;
+	}
+
+  	&.yahoo {
+		width: 256px;
+	}
+
+  	&.bing {
+	  	width: 325px;
+	}
+
+  	&.startpage {
+	  	width: 235px;
+	}
 }
 
 .ChooseSearchView__modalDawnLogo {
@@ -325,6 +352,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%
 }
 
 .ChooseSearchView__modalHeader {

@@ -14,8 +14,7 @@
 import {
 	TOGGLE_MONTHLY_YEARLY_PRICES,
 	SET_BASIC_PROTECTION,
-	SET_PLUS_PROTECTION,
-	SET_PREMIUM_PROTECTION
+	SET_PLUS_PROTECTION
 } from './UpgradePlanViewConstants';
 
 /**
@@ -45,15 +44,5 @@ export function setBasicProtection() {
 export function setPlusProtection() {
 	return {
 		type: SET_PLUS_PROTECTION,
-	};
-}
-
-/**
- * Set Premium protection on medium or smaller screen sizes
- * @return {Object}
- */
-export function setPremiumProtection() {
-	return {
-		type: SET_PREMIUM_PROTECTION,
 	};
 }

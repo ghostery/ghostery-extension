@@ -21,8 +21,7 @@ import {
 	TOGGLE_CHECKBOX,
 	TOGGLE_EXPANDED,
 	SET_THEME,
-	CLEAR_THEME,
-	TOGGLE_PROMO_MODAL
+	CLEAR_THEME
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
@@ -56,7 +55,6 @@ const initialState = {
 	email: '',
 	emailValidated: false,
 	current_theme: 'default',
-	isPromoModalHidden: false,
 };
 
 /**
@@ -356,12 +354,6 @@ export default (state = initialState, action) => {
 		}
 		case TOGGLE_CHECKBOX: {
 			return state;
-		}
-		case TOGGLE_PROMO_MODAL: {
-			return {
-				...state,
-				isPromoModalHidden: !state.isPromoModalHidden
-			};
 		}
 		default: return state;
 	}

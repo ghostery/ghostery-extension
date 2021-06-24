@@ -24,7 +24,6 @@ import Policy from './Policy';
 import tabInfo from './TabInfo';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import {
 	getTab,
@@ -352,7 +351,6 @@ class PanelData {
 			is_expert,
 			is_android: globals.BROWSER_INFO.os === 'android',
 			language,
-			promoModal: promoModals.whichPromoModalShouldWeDisplay(),
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,

@@ -16,16 +16,13 @@ import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import QueryString from 'query-string';
-import { BASIC, PLUS, PREMIUM } from './UpgradePlanViewConstants';
+import { BASIC, PLUS } from './UpgradePlanViewConstants';
 import globals from '../../../../src/classes/Globals';
 
-const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
+const featureMatrixRow = (label, isBasic, isPlus) => (
 	<tr>
 		<td>
 			{label}
-			{isSparkle &&
-				<span className="premium-sparkle" />
-			}
 		</td>
 		<td className="default">
 			{isBasic &&
@@ -37,44 +34,35 @@ const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
 				<span className="check yellow" />
 			}
 		</td>
-		<td>
-			<span className="check purple" />
-		</td>
 	</tr>
 );
 
-const mobileFeatureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
+const mobileFeatureMatrixRow = (label, isBasic, isPlus) => (
 	<Fragment>
 		<tr>
-			<td colSpan="3">
+			<td colSpan="4">
 				<span className="feature-title">{label}</span>
-				{isSparkle &&
-					<span className="premium-sparkle" />
-				}
 			</td>
 		</tr>
 		<tr className="border-bottom">
 			{isBasic ? (
-				<td className="col-free">
+				<td className="col-free" colSpan="2">
 					<span className="check blue" />
 				</td>
 			) : (
-				<td>
+				<td colSpan="2">
 					<span className="x-icon" />
 				</td>
 			)}
 			{isPlus ? (
-				<td className="col-plus">
+				<td className="col-plus" colSpan="2">
 					<span className="check yellow" />
 				</td>
 			) : (
-				<td>
+				<td colSpan="2">
 					<span className="x-icon" />
 				</td>
 			)}
-			<td className="col-premium">
-				<span className="check purple" />
-			</td>
 		</tr>
 	</Fragment>
 );
@@ -108,12 +96,6 @@ const plusAlreadyProtectedButton = () => (
 	</NavLink>
 );
 
-const premiumAlreadyProtectedButton = () => (
-	<NavLink className="button button-premium" to="/home" title="Already Protected">
-		{t('hub_upgrade_already_protected')}
-	</NavLink>
-);
-
 // Whether we are displaying this Upgrade Plan view in the alternate or the default Hub layout (as per the A/B test in ticket GH-2097)
 const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
@@ -139,11 +121,9 @@ const UpgradePlanView = (props) => {
 		toggleMonthlyYearlyPrices,
 		setBasicProtection,
 		setPlusProtection,
-		setPremiumProtection
 	} = actions;
 
 	const isPlus = (user && user.plusAccess) || false;
-	const isPremium = (user && user.premiumAccess) || false;
 
 	const sliderClassNames = ClassNames('switch-check', {
 		checked: show_yearly_prices
@@ -153,9 +133,6 @@ const UpgradePlanView = (props) => {
 	});
 	const tabsTitleGoldClassNames = ClassNames('tabs-title tabs-title-gold', {
 		'is-active': protection_level === PLUS
-	});
-	const tabsTitlePurpleClassNames = ClassNames('tabs-title tabs-title-purple', {
-		'is-active': protection_level === PREMIUM
 	});
 	const monthlyToggleLabel = ClassNames('toggle-label', {
 		active: !show_yearly_prices
@@ -192,25 +169,9 @@ const UpgradePlanView = (props) => {
 		);
 	};
 
-	const premiumCTAButton = (position) => {
-		const utm_campaign = (position === 'top' ? 'c_3' : 'c_4');
-		const utm_content = (ah ? '2' : '1');
-		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${params}&utm_campaign=intro_hub_${utm_campaign}&utm_content=${utm_content}`;
-
-		return (
-			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-				{`${t('hub_upgrade_to')} Premium`}
-			</a>
-		);
-	};
-
 	const plusButtonTop = () => (isPlus ? plusAlreadyProtectedButton() : plusCTAButton('top'));
 
 	const plusButtonBottom = () => (isPlus ? plusAlreadyProtectedButton() : plusCTAButton('bottom'));
-
-	const premiumButtonTop = () => (isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('top'));
-
-	const premiumButtonBottom = () => (isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('bottom'));
 
 	const toggleSwitch = (mobileView, secondToggle) => {
 		const toggleSwitchClassNames = ClassNames('small-12 text-center columns', {
@@ -269,51 +230,6 @@ const UpgradePlanView = (props) => {
 		</div>
 	);
 
-	const premiumCard = mobileView => (
-		<div className="card-outer card-outer-remove">
-			<div className="card premium" data-equalizer-watch>
-				<div className="ghostery-premium-image-container">
-					<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-				</div>
-				<div className="ghostery-premium-image-background" />
-				<h2>Ghostery Premium</h2>
-				<div className="price">
-					{show_yearly_prices ? (
-						<React.Fragment>
-							<p className="price-purple sub-text font-size-36">$8.99</p>
-							<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-							<div className="price-per-year">
-								<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
-							</div>
-						</React.Fragment>
-					) : (
-						<React.Fragment>
-							<p className="price-purple sub-text font-size-36">$11.99</p>
-							<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-						</React.Fragment>
-					)}
-				</div>
-				{mobileView && toggleSwitch(true)}
-				{premiumButtonTop()}
-				<p className="card-sub-header">
-					<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
-				</p>
-				<p className="card-sub-copy">
-					<span className="check blue" />
-					{t('hub_upgrade_basic_browser_protection')}
-				</p>
-				<p className="card-sub-copy">
-					<span className="check blue" />
-					{t('hub_upgrade_advanced_device_protection')}
-				</p>
-				<p className="card-sub-copy">
-					<span className="check blue" />
-					VPN
-				</p>
-			</div>
-		</div>
-	);
-
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-extra-large">
@@ -329,7 +245,6 @@ const UpgradePlanView = (props) => {
 				<div className="row align-center text-center" data-equalizer data-equalize-on="medium">
 					{basicCard()}
 					{plusCard()}
-					{premiumCard()}
 				</div>
 			</div>
 
@@ -344,14 +259,12 @@ const UpgradePlanView = (props) => {
 						<ul className="tiers-group tabs menu align-center" data-tabs id="price-tabs">
 							<li className={tabsTitleBlueClassNames} onClick={setBasicProtection}>{t('hub_upgrade_plan_free')}</li>
 							<li className={tabsTitleGoldClassNames} onClick={setPlusProtection}>Plus</li>
-							<li className={tabsTitlePurpleClassNames} onClick={setPremiumProtection}>Premium</li>
 						</ul>
 					</div>
 				</div>
 				<div className="tabs-content" data-tabs-content="price-tabs">
 					{protection_level === BASIC && basicCard()}
 					{protection_level === PLUS && plusCard(true)}
-					{protection_level === PREMIUM && premiumCard(true)}
 				</div>
 			</div>
 			<div className="row align-center module-editor text-center show-for-extra-large">
@@ -377,21 +290,13 @@ const UpgradePlanView = (props) => {
 								<li className="bg-gold">
 									<button type="button">Ghostery Plus</button>
 								</li>
-								<li className="bg-purple-blue">
-									<button type="button">Ghostery Premium</button>
-								</li>
 							</ul>
-							<div className="key-container">
-								<span className="premium-sparkle" />
-								<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
-							</div>
-							<table>
+							<table className="feature-matrix-table">
 								<thead>
 									<tr>
 										<th className="hide" aria-label="hide" />
 										<th className="bg-blue default">Ghostery</th>
 										<th className="bg-gold">Ghostery Plus</th>
-										<th className="bg-purple-blue">Ghostery Premium</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -400,14 +305,8 @@ const UpgradePlanView = (props) => {
 									{featureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
 									{featureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
 									{featureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
-									{featureMatrixRow(t('hub_upgrade_application_tracker_blocking'), false, true, true)}
-									{featureMatrixRow(t('hub_upgrade_application_ad_blocking'), false, true, true)}
-									{featureMatrixRow('VPN', false, false, true)}
-									{featureMatrixRow(t('hub_upgrade_no_vpn_logs'), false, false, true)}
-									{featureMatrixRow(`P2P ${t('support')}`, false, false, true)}
-									{featureMatrixRow(`IPv6 ${t('hub_upgrade_leak_protection')}`, false, false, true)}
-									{featureMatrixRow(t('hub_upgrade_physical_servers'), false, false, true)}
-									{featureMatrixRow(t('hub_upgrade_unlimited_bandwidth'), false, false, true)}
+									{featureMatrixRow(t('plus_subscriber_perk_insights'), false, true)}
+									{featureMatrixRow(t('plus_subscriber_perk_glow'), false, true)}
 									<tr>
 										<td />
 										<td className="default">
@@ -418,9 +317,6 @@ const UpgradePlanView = (props) => {
 										<td>
 											{plusButtonBottom()}
 										</td>
-										<td>
-											{premiumButtonBottom()}
-										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -429,41 +325,26 @@ const UpgradePlanView = (props) => {
 				</div>
 			</div>
 
-			<div className="key-container mobile hide-for-extra-large">
-				<span className="premium-sparkle" />
-				<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
-			</div>
-
 			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-extra-large">
 				{toggleSwitch(true, true)}
 				<div className="mobile-table-header">
 					<div className="row align-top align-center">
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							<p className="protection-description blue">{t('ghostery_basic')}</p>
 						</div>
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							<p className="protection-description yellow">Plus</p>
-						</div>
-						<div className="small-4 text-center columns">
-							<p className="protection-description purple">Premium</p>
 						</div>
 					</div>
 					<div className="row align-top align-center">
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							<p className="protection-header protection-header-free price-blue"><strong>{t('hub_upgrade_plan_free')}</strong></p>
 						</div>
-						<div className="small-4 text-center columns">
+						<div className="small-6 text-center columns">
 							{show_yearly_prices ? (
 								<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active"><strong>$3.99</strong></span></p>
 							) : (
 								<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
-							)}
-						</div>
-						<div className="small-4 text-center columns">
-							{show_yearly_prices ? (
-								<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active"><strong>$8.99</strong></span></p>
-							) : (
-								<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
 							)}
 						</div>
 					</div>
@@ -478,14 +359,8 @@ const UpgradePlanView = (props) => {
 									{mobileFeatureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
 									{mobileFeatureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
 									{mobileFeatureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_application_tracker_blocking'), false, true, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_application_ad_blocking'), false, true, true)}
-									{mobileFeatureMatrixRow('VPN', false, false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_no_vpn_logs'), false, false, true)}
-									{mobileFeatureMatrixRow(`P2P ${t('support')}`, false, false, true)}
-									{mobileFeatureMatrixRow(`IPv6 ${t('hub_upgrade_leak_protection')}`, false, false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_physical_servers'), false, false, true)}
-									{mobileFeatureMatrixRow(t('hub_upgrade_unlimited_bandwidth'), false, false, true)}
+									{mobileFeatureMatrixRow(t('plus_subscriber_perk_insights'), false, true)}
+									{mobileFeatureMatrixRow(t('plus_subscriber_perk_glow'), false, true)}
 								</tbody>
 							</table>
 						</div>
@@ -501,11 +376,6 @@ const UpgradePlanView = (props) => {
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
 								{plusButtonBottom()}
-							</span>
-						</div>
-						<div className="small-12 text-center columns">
-							<span className="col-premium">
-								{premiumButtonBottom()}
 							</span>
 						</div>
 					</div>
@@ -528,7 +398,6 @@ UpgradePlanView.propTypes = {
 		toggleMonthlyYearlyPrices: PropTypes.func.isRequired,
 		setBasicProtection: PropTypes.func.isRequired,
 		setPlusProtection: PropTypes.func.isRequired,
-		setPremiumProtection: PropTypes.func.isRequired,
 	}).isRequired,
 };
 

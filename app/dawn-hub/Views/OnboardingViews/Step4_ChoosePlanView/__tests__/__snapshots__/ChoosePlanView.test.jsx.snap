@@ -4,8 +4,6 @@ exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.
 
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with plus user logged in 1`] = `ShallowWrapper {}`;
 
-exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with premium user logged in 1`] = `ShallowWrapper {}`;
-
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Shallow snapshot tests rendered with Enzyme ChoosePlanView View with user not logged in 1`] = `ShallowWrapper {}`;
 
 exports[`app/dawn-hub/Views/OnboardingViews/Step4_ChoosePlanView/ChoosePlanView.test.jsx Snapshot tests with react-test-renderer ChoosePlanView is rendered correctly 1`] = `
@@ -87,9 +85,236 @@ Array [
       ghostery_dawn_onboarding_see_all_plans
     </div>
     <div
-      className="ChoosePlanView__arrow up"
+      className="ChoosePlanView__arrow down"
       onClick={[Function]}
     />
+    <div>
+      <div
+        className="ChoosePlanView__plansContainer row align-spaced"
+      >
+        <div
+          className="ChoosePlanView__cardOuter"
+        >
+          <div
+            className="ChoosePlanView__card basic"
+            data-equalizer-watch={true}
+            onClick={[Function]}
+          >
+            <div
+              className="ChoosePlanView__radioButtonContainer"
+            >
+              <span>
+                <span
+                  className="RadioButton__outerCircle altDesign"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="RadioButton__innerCircle altDesign"
+                  />
+                </span>
+              </span>
+            </div>
+            <div
+              className="card-header-background-free"
+            />
+            <div
+              className="ghostery-free-image-container"
+            >
+              <div
+                alt="Ghostery Free"
+                className="ghostery-free-image text-center"
+                title="Ghostery Free"
+              />
+            </div>
+            <h2>
+              Ghostery
+            </h2>
+            <div
+              className="ChoosePlanView__price"
+            >
+              <p
+                className="ChoosePlanView__price-blue-alt font-size-36"
+              >
+                hub_upgrade_plan_free
+              </p>
+            </div>
+            <p
+              className="card-sub-header"
+            >
+              <strong>
+                hub_upgrade_basic_protection
+              </strong>
+            </p>
+            <div
+              className="ChoosePlanView__valuePropList basic"
+            >
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_private_search
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_tracker_protection
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_speedy_page_loads
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_intelligence_technology
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="ChoosePlanView__cardOuter"
+        >
+          <div
+            className="ChoosePlanView__card plus checked"
+            data-equalizer-watch={true}
+            onClick={[Function]}
+          >
+            <div
+              className="ChoosePlanView__radioButtonContainer"
+            >
+              <span>
+                <span
+                  className="RadioButton__outerCircle checked altDesign"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="RadioButton__innerCircle checked altDesign"
+                  />
+                </span>
+              </span>
+            </div>
+            <div
+              className="ghostery-plus-image-container"
+            >
+              <div
+                alt="Ghostery Plus"
+                className="ghostery-plus-image"
+                title="Ghostery Plus"
+              />
+            </div>
+            <h2>
+              Ghostery Plus
+            </h2>
+            <div
+              className="ChoosePlanView__price"
+            >
+              <p
+                className="ChoosePlanView__price-gold font-size-36"
+              >
+                $4.99
+              </p>
+              <p
+                className="ChoosePlanView__price-gold sub-text font-size-12"
+              >
+                per_month
+              </p>
+            </div>
+            <p
+              className="card-sub-header"
+            >
+              <strong>
+                hub_upgrade_additional_protection
+              </strong>
+            </p>
+            <div
+              className="ChoosePlanView__valuePropList"
+            >
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_private_search
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_tracker_protection
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_speedy_page_loads
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_advanced_tracker_analytics
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_intelligence_technology
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_ad_free
+              </div>
+              <div
+                className="ChoosePlanView__cardSubCopy"
+              >
+                <span
+                  className="check blue"
+                />
+                ghostery_dawn_onboarding_supports_ghosterys_mission
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="ChoosePlanView__ctaButtonContainer"
+      >
+        <a
+          className="ChoosePlanView__searchCTAButton"
+          href="https://checkout.ghosterystage.com/plus?utm_source=dawn&utm_medium=introhub&utm_campaign=onboarding"
+          onClick={[Function]}
+          rel="noreferrer"
+          target="_blank"
+        >
+          next
+        </a>
+      </div>
+    </div>
   </div>,
 ]
 `;
