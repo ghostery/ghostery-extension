@@ -23,7 +23,6 @@ import { log } from '../utils/common';
  */
 export default class SearchMessager {
 	constructor() {
-		this.extensionId = 'search@ghostery.com';
 		this._messageHandler = this._messageHandler.bind(this);
 	}
 
