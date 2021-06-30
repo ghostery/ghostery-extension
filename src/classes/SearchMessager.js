@@ -36,7 +36,12 @@ export default class SearchMessager {
 	}
 
 	_messageHandler(message, sender, sendResponse) {
-		if (sender.id !== this.extensionId) {
+		const recognized = [
+			globals.GHOSTERY_SEARCH_CHROME_PRODUCTION_ID,
+			globals.GHOSTERY_SEARCH_FIREFOX_PRODUCTION_ID,
+		].indexOf(sender.id) !== -1;
+
+		if (!recognized) {
 			return false;
 		}
 
