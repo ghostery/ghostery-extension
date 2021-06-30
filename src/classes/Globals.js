@@ -74,6 +74,7 @@ class Globals {
 		this.GHOSTERY_TAB_FIREFOX_TEST_ID = '{0ea88bc4-03bd-4baa-8153-acc861589c1c}';
 		this.DAWN_NEWTAB_PRODUCTION_ID = 'newtab@ghostery.com';
 		this.GHOSTERY_SEARCH_CHROME_PRODUCTION_ID = 'nomidcdbhopffbhbpfnnlgnfimhgdman';
+		this.GHOSTERY_SEARCH_FIREFOX_PRODUCTION_ID = 'search@ghostery.com';
 
 		// Site Policy named constants
 		this.BLACKLISTED = 1;
