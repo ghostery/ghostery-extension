@@ -14,6 +14,7 @@
 import ExtMessenger from './ExtMessenger';
 import account from './Account';
 import { log } from '../utils/common';
+import globals from './Globals';
 
 /**
  * @since 8.5.5
@@ -34,6 +35,7 @@ export default class SearchMessager {
 		ExtMessenger.removeListener(this._messageHandler);
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	_messageHandler(message, sender, sendResponse) {
 		const recognized = [
 			globals.GHOSTERY_SEARCH_CHROME_PRODUCTION_ID,
