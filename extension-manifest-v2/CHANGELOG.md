@@ -1,3 +1,8 @@
+### GHOSTERY 8.5.8 (July 1, 2021)
+
++ Fixes panel header alignment in Chrome (#713)
++ Adds cross-extension messaging for Ghostery Search (#712)
+
 ### GHOSTERY 8.5.7 (June 24, 2021)
 
 + Remove promo modals for Insights and Midnight (#706)
