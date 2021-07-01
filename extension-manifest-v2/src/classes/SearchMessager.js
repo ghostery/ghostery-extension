@@ -14,6 +14,7 @@
 import ExtMessenger from './ExtMessenger';
 import account from './Account';
 import { log } from '../utils/common';
+import globals from './Globals';
 
 /**
  * @since 8.5.5
@@ -23,7 +24,6 @@ import { log } from '../utils/common';
  */
 export default class SearchMessager {
 	constructor() {
-		this.extensionId = 'search@ghostery.com';
 		this._messageHandler = this._messageHandler.bind(this);
 	}
 
@@ -35,8 +35,14 @@ export default class SearchMessager {
 		ExtMessenger.removeListener(this._messageHandler);
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	_messageHandler(message, sender, sendResponse) {
-		if (sender.id !== this.extensionId) {
+		const recognized = [
+			globals.GHOSTERY_SEARCH_CHROME_PRODUCTION_ID,
+			globals.GHOSTERY_SEARCH_FIREFOX_PRODUCTION_ID,
+		].indexOf(sender.id) !== -1;
+
+		if (!recognized) {
 			return false;
 		}
 
