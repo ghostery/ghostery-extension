@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "Points de données personnelles anonymisés."
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "Fonction active par défaut dans Cliqz."
-	},
 	"tooltip_ad_block_on": {
 		"message": "Les publicités ont été bloquées."
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Anonymiser les mouchards débloqués et non identifiés pour une protection renforcée au cours de votre navigation."
-	},
-	"hub_setup_feature_already_active": {
-		"message": "Cette fonction est active par défaut dans Cliqz. $LINK_LM_START$En savoir plus$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Activé"

@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "Persoonlijke gegevenspunten geanonimiseerd."
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "Optie is al standaard actief in Cliqz."
-	},
 	"tooltip_ad_block_on": {
 		"message": "Advertenties zijn geblokkeerd."
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
-	},
-	"hub_setup_feature_already_active": {
-		"message": "Deze functie is standaard actief in Cliqz. $LINK_LM_START$Meer informatie$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Geactiveerd"

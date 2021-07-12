@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "개인 데이터 항목이 익명화되었습니다."
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "기능이 Cliqz에서 기본적으로 활성화되어 있습니다."
-	},
 	"tooltip_ad_block_on": {
 		"message": "광고가 차단되었습니다."
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "브라우저 환경을 더 강력하게 보호할 수 있도록 차단 해제된 트래커와 알 수 없는 트래커를 익명화합니다."
-	},
-	"hub_setup_feature_already_active": {
-		"message": "해당 기능은 이미 Cliqz에 기본적으로 활성화되어 있습니다. $LINK_LM_START$더 알아보기$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "활성화됨 "
