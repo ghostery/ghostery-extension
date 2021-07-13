@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "个人数据点已匿名化。"
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "Cliqz 中默认激活此功能。"
-	},
 	"tooltip_ad_block_on": {
 		"message": "广告已被拦截。"
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "对未拦截和未识别的跟踪器保持匿名，获得更好的浏览保护。"
-	},
-	"hub_setup_feature_already_active": {
-		"message": "Cliqz 中默认激活此功能。$LINK_LM_START$了解更多$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "已启用"

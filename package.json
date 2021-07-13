@@ -65,7 +65,6 @@
     "redux-object": "^0.5.10",
     "redux-thunk": "^2.2.0",
     "rsvp": "^4.8.5",
-    "spanan": "^2.0.0",
     "ua-parser-js": "^0.7.21",
     "underscore": "^1.10.2"
   },

@@ -14,10 +14,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
-import globals from '../../../../../src/classes/Globals';
-
-// simple consts
-const { IS_CLIQZ } = globals;
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -93,28 +89,24 @@ class SetupAntiSuiteViewContainer extends Component {
 			enable_smart_block,
 		} = setup;
 
-		const anti_tracking_enabled = IS_CLIQZ ? false : enable_anti_tracking;
-		const ad_block_enabled = IS_CLIQZ ? false : enable_ad_block;
+		const anti_tracking_enabled = enable_anti_tracking;
+		const ad_block_enabled = enable_ad_block;
 		const features = [
 			{
 				id: 'anti-tracking',
 				name: t('enhanced_anti_tracking'),
 				enabled: anti_tracking_enabled,
-				locked: IS_CLIQZ,
-				toggle: IS_CLIQZ ?
-					() => {} :
-					() => this._handleToggle('anti-tracking'),
-				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('hub_setup_antisuite_description_antitracking')
+				locked: false,
+				toggle: () => this._handleToggle('anti-tracking'),
+				description: t('hub_setup_antisuite_description_antitracking')
 			},
 			{
 				id: 'ad-block',
 				name: t('enhanced_ad_blocking'),
 				enabled: ad_block_enabled,
-				locked: IS_CLIQZ,
-				toggle: IS_CLIQZ ?
-					() => {} :
-					() => this._handleToggle('ad-block'),
-				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('ad_blocking_DESC'),
+				locked: false,
+				toggle: () => this._handleToggle('ad-block'),
+				description: t('ad_blocking_DESC'),
 			},
 			{
 				id: 'smart-blocking',

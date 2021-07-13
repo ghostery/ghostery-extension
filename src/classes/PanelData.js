@@ -34,7 +34,6 @@ import {
 import { log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
-const { IS_CLIQZ } = globals;
 
 /**
  * PanelData coordinates the assembly and transmission of data to the extension panel
@@ -559,12 +558,6 @@ class PanelData {
 	set(d) {
 		const data = { ...d };
 		let syncSetDataChanged = false;
-
-		if (IS_CLIQZ) {
-			data.enable_human_web = false;
-			data.enable_ad_block = false;
-			data.enable_anti_tracking = false;
-		}
 
 		// Set the conf from data
 		const dataKeys = Object.keys(data);

@@ -8087,11 +8087,6 @@ source-map@^0.7.3:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
-spanan@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/spanan/-/spanan-2.1.0.tgz#a50f328d64a906dfe2ee13153bddf6119406bab8"
-  integrity sha512-SHCroSefdNPbvrMpN7IuDk46r9uJ3LqP2Jc4bySCQaPlz65tKAggTjb7OEdQ8U7ICt5Y7gj4Z4SK47ViNBRgjw==
-
 spdx-compare@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/spdx-compare/-/spdx-compare-1.0.0.tgz#2c55f117362078d7409e6d7b08ce70a857cd3ed7"
