@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "Личные данные обезличены."
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "Функция уже активирована в Cliqz по умолчанию."
-	},
 	"tooltip_ad_block_on": {
 		"message": "Реклама заблокирована."
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера."
-	},
-	"hub_setup_feature_already_active": {
-		"message": "Эта функция уже активна в Cliqz по умолчанию. $LINK_LM_START$Подробнее$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Включено"

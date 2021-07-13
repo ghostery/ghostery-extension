@@ -27,7 +27,6 @@ import {
 } from './BuildingBlocks';
 
 const {
-	IS_CLIQZ,
 	BLACKLISTED, WHITELISTED,
 } = globals;
 
@@ -448,7 +447,7 @@ class Summary extends React.Component {
 		const { paused_blocking, sitePolicy } = this.props;
 		const { disableBlocking } = this.state;
 
-		return paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ;
+		return paused_blocking || sitePolicy || disableBlocking;
 	}
 
 	_isSmartBlockingInactive() {

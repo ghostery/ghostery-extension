@@ -22,9 +22,6 @@ import OptIn from '../../../panel/components/Settings/OptIn';
 import ImportExport from '../../../panel/components/Settings/ImportExport';
 import Help from '../../../panel/components/Help';
 import About from '../../../panel/components/About';
-import globals from '../../../../src/classes/Globals';
-
-const { IS_CLIQZ } = globals;
 
 class Settings extends React.Component {
 	constructor(props) {
@@ -165,11 +162,9 @@ class Settings extends React.Component {
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-general' }); }}>
 						{ t('settings_general_settings') }
 					</div>
-					{!IS_CLIQZ && (
-						<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-adblocker' }); }}>
-							{ t('settings_adblocker') }
-						</div>
-					)}
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-adblocker' }); }}>
+						{ t('settings_adblocker') }
+					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-notifications' }); }}>
 						{ t('settings_notifications') }
 					</div>

@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "A személyes adatpontok névtelenítve."
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "Ez a funkció alapértelmezetten már aktív a Cliqz-en belül."
-	},
 	"tooltip_ad_block_on": {
 		"message": "A hirdetések ki lesznek kiszűrve."
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Anonimmá teheti a nem blokkolt és azonosítatlan trackereket a hatékonyabb böngészővédelemhez."
-	},
-	"hub_setup_feature_already_active": {
-		"message": "Ez a funkció alapértelmezés szerint már aktív a Cliqzben. $LINK_LM_START$További tájékoztatás$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "Engedélyezve"

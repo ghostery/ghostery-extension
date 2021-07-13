@@ -1116,9 +1116,6 @@
 	"tooltip_anti_track_on": {
 		"message": "個人資料作匿名處理"
 	},
-	"tooltip_body_in_cliqz": {
-		"message": "此功能在Cliqz瀏覽器中已在默認情況下啟動了。"
-	},
 	"tooltip_ad_block_on": {
 		"message": "廣告已被封鎖。"
 	},
@@ -1428,17 +1425,6 @@
 	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "匿名已解封及不明追蹤器以加強瀏覽防護。"
-	},
-	"hub_setup_feature_already_active": {
-		"message": "這個功能在 Cliqz 瀏覽器中已預設為啟用。$LINK_LM_START$瞭解詳情$LINK_LM_END$",
-		"placeholders": {
-			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-			},
-			"link_lm_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"hub_setup_antisuite_feature_enabled": {
 		"message": "已啟用"

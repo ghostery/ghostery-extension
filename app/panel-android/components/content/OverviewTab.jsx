@@ -24,7 +24,6 @@ import {
 import globals from '../../../../src/classes/Globals';
 
 const {
-	IS_CLIQZ,
 	WHITELISTED, BLACKLISTED
 } = globals;
 
@@ -324,7 +323,7 @@ class OverviewTab extends React.Component {
 						clickButton={this.handleCliqzFeatureClick}
 						type="anti_track"
 						active={enable_anti_tracking}
-						cliqzInactive={paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ}
+						cliqzInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
 				</div>
@@ -333,7 +332,7 @@ class OverviewTab extends React.Component {
 						clickButton={this.handleCliqzFeatureClick}
 						type="ad_block"
 						active={enable_ad_block}
-						cliqzInactive={paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ}
+						cliqzInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
 				</div>
