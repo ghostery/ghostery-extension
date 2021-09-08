@@ -132,7 +132,6 @@ test -d $BUILD_DIR || mkdir $BUILD_DIR && \
 		app/licenses/\* \
 		app/Account/\* \
 		app/hub/\* \
-		app/dawn-hub/\* \
 		app/shared-hub/\* \
 		app/shared-components/\* \
 		build/\* \

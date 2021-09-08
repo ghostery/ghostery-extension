@@ -270,8 +270,6 @@ class Metrics {
 			buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
 			buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
-			// The number of times the user has gone through setup in the regular hub, or the answer selection on each page of the dawn-hub
-			buildQueryPair('sl', Metrics._getSetupNumber(type).toString()) +
 			// Type of blocking selected during setup
 			buildQueryPair('sb', conf.setup_block.toString()) +
 			// Recency, days since last active daily ping
@@ -390,18 +388,6 @@ class Metrics {
 			|| type === 'gb_onboarding'
 			|| type === 'gb_onboarding_success') return conf.setup_step;
 		return -1;
-	}
-
-	/**
-	 * Get the Setup Number
-	 *
-	 * @private
-	 *
-	 * @return {number} The number of times the user has gone through setup in the regular hub, or the answer selection on each page of the dawn-hub
-	 */
-	static _getSetupNumber(type) {
-		const { setup_number, dawn_setup_number } = conf;
-		return (type === 'gb_onboarding') ? dawn_setup_number : setup_number;
 	}
 
 	/**

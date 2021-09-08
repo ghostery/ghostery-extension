@@ -235,7 +235,7 @@ class Debugger {
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
-		[`${this._helpFunctionNames.openIntroHub}`, 'Open the classic or Dawn Hub in a new tab for automation testing'],
+		[`${this._helpFunctionNames.openIntroHub}`, 'Open the Hub in a new tab for automation testing'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
 	]
 
@@ -388,10 +388,9 @@ class Debugger {
 	 */
 	static helpOpenIntroHub = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.openIntroHub}`,
-		'Open the classic or Dawn Hub in a new tab for automation testing',
+		'Open the Hub in a new tab for automation testing',
 		'',
 		[`${CSS_SUBHEADER}Arguments`, 'Description'],
-		['First: true / false', 'Required. True to open the Dawn Hub. False to open the classic Hub.'],
 		['Second: true / false', 'Required. True to simulate first on-install open (justInstalled=true). Second to simulate return visit.'],
 	];
 
@@ -767,12 +766,11 @@ class Debugger {
 	 *
 	 * Open the Ghostery Intro Hub in a new tab for automation testing.
 	 *
-	 * @param	{Boolean}	isDawnHub		True to open the Dawn Hub. False to open the classic Hub.
 	 * @param	{Boolean}	justInstalled	True to simulate first, on-install visit. False to simulate return visit.
 	 * @return 	{String}					A thank you message.
 	 */
-	openIntroHub = (isDawnHub, justInstalled) => {
-		const template = isDawnHub ? 'dawn_hub' : 'hub';
+	openIntroHub = (justInstalled) => {
+		const template = 'hub';
 		chrome.tabs.create({
 			url: chrome.runtime.getURL(`./app/templates/${template}.html?justInstalled=${justInstalled}`),
 			active: true
