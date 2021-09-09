@@ -270,6 +270,8 @@ class Metrics {
 			buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
 			buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
+			// The number of times the user has gone through setup in the regular hub, or the answer selection on each page of the dawn-hub
+			buildQueryPair('sl', conf.setup_number.toString()) +
 			// Type of blocking selected during setup
 			buildQueryPair('sb', conf.setup_block.toString()) +
 			// Recency, days since last active daily ping
