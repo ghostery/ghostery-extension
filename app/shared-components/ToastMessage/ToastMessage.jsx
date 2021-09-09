@@ -22,7 +22,7 @@ import PropTypes from 'prop-types';
 const ToastMessage = ({
 	toastText, toastClass, toastExit
 }) => (
-	<div className="ToastMessage full-width">
+	<div className="ToastMessage full-width ">
 		{(toastText) && (
 			<div className="callout-container">
 				<div className={`callout toast ${toastClass}`}>
