@@ -7,7 +7,6 @@
 			"app/licenses",
 			"app/panel",
 			"app/hub",
-		  	"app/dawn-hub",
 			"app/shared-components"
 		],
 		"includePattern": ".+\\.js(doc|x)?$",

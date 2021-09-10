@@ -11,7 +11,7 @@ exports[`app/hub/Views/AppView component Snapshot tests with react-test-renderer
     className="App__mainContent full-height full-width"
   >
     <div
-      className="ToastMessage full-width "
+      className="ToastMessage full-width"
     >
       <div
         className="callout-container"

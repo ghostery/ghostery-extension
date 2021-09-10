@@ -20,39 +20,27 @@ import PropTypes from 'prop-types';
  * @memberof SharedComponents
  */
 const ToastMessage = ({
-	toastText, toastClass, toastExit, dawnHub
-}) => {
-	// These variables will be used to determine whether the toast should display with Dawn
-	// onboarding styling or the default styling used in GBE
-	const dawnHubClass = dawnHub ? 'dawn-hub' : '';
-	const dawnLayout = dawnHub ? 'align-justify align-middle' : 'align-center-middle';
-
-	const dawnToastText = dawnHub ? t(`ghostery_dawn_onboarding_toast_${toastClass}`) : '';
-
-	return (
-		<div className={`ToastMessage full-width ${dawnHubClass}`}>
-			{(toastText || dawnToastText) && (
-				<div className="callout-container">
-					<div className={`callout toast ${toastClass}`}>
-						<div className={`flex-container ${dawnLayout}`}>
-							<div className="flex-container align-middle">
-								{dawnHub && (
-									<img className="ToastMessage_classIcon" src={`/app/images/hub/toast/toast-${toastClass}.svg`} />
-								)}
-								<div className="callout-text">
-									{`${dawnToastText}${toastText}`}
-								</div>
+	toastText, toastClass, toastExit
+}) => (
+	<div className="ToastMessage full-width">
+		{(toastText) && (
+			<div className="callout-container">
+				<div className={`callout toast ${toastClass}`}>
+					<div className="flex-container align-center-middle">
+						<div className="flex-container align-middle">
+							<div className="callout-text">
+								{`${toastText}`}
 							</div>
-							{toastExit && (
-								<div className="ToastMessage__close clickable" onClick={toastExit} />
-							)}
 						</div>
+						{toastExit && (
+							<div className="ToastMessage__close clickable" onClick={toastExit} />
+						)}
 					</div>
 				</div>
-			)}
-		</div>
-	);
-};
+			</div>
+		)}
+	</div>
+);
 
 // PropTypes ensure we pass required props of the correct type
 ToastMessage.propTypes = {
@@ -62,13 +50,11 @@ ToastMessage.propTypes = {
 		PropTypes.func,
 		PropTypes.bool,
 	]),
-	dawnHub: PropTypes.bool,
 };
 
 // Default props used in the Toast Message
 ToastMessage.defaultProps = {
 	toastExit: false,
-	dawnHub: false,
 };
 
 export default ToastMessage;

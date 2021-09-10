@@ -35,7 +35,6 @@ const AccountPagesContentScript = (function(window) {
 		'accountPage.getUser',
 		'accountPage.getUserSubscriptionData',
 		'accountPage.logout',
-		'accountPage.openSearchSelection'
 	];
 	const _initialize = function() {
 		_listeners.forEach(name => window.addEventListener(name, () => sendMessage(name)));
