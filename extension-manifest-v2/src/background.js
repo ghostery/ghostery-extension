@@ -48,11 +48,6 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
-import {
-	ONBOARDING,
-	CHOOSE_DEFAULT_SEARCH
-} from '../app/dawn-hub/Views/OnboardingView/OnboardingConstants';
-
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
@@ -312,17 +307,6 @@ function handleAccountPages(name, callback) {
 				.then(data => callback(data))
 				.catch(err => callback(err));
 			return true;
-		case 'accountPage.openSearchSelection':
-			(async() => {
-				await globals.BROWSER_INFO_READY;
-				if (BROWSER_INFO.name === 'ghostery_desktop') {
-					utils.openNewTab({
-						url: chrome.runtime.getURL(`./app/templates/dawn_hub.html?dontReroute=true#${ONBOARDING}/${CHOOSE_DEFAULT_SEARCH}`),
-						become_active: true
-					});
-				}
-			})();
-			return true;
 		default:
 			return false;
 	}
@@ -535,7 +519,6 @@ function handleGhosteryHub(name, message, callback) {
 			const origin = message.origin || '';
 			if (origin === 'onboarding') {
 				conf.setup_step = message.setup_step;
-				conf.dawn_setup_number = message.dawn_setup_number;
 				metrics.ping('gb_onboarding');
 			}
 			callback({ setup_step });
@@ -969,9 +952,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'openHubPage') {
-		const hubUrl = (BROWSER_INFO.name === 'ghostery_desktop')
-			? chrome.runtime.getURL('./app/templates/dawn_hub.html')
-			: chrome.runtime.getURL('./app/templates/hub.html');
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
 		metrics.ping('intro_hub_click');
 		utils.openNewTab({ url: hubUrl, become_active: true });
 		return false;
@@ -1628,12 +1609,7 @@ function initializeGhosteryModules() {
 			if (globals.JUST_INSTALLED) {
 				(async() => {
 					await globals.BROWSER_INFO_READY;
-					if (BROWSER_INFO.name === 'ghostery_desktop') { // i.e., Dawn
-						chrome.tabs.create({
-							url: chrome.runtime.getURL('./app/templates/dawn_hub.html?justInstalled=true'),
-							active: true
-						});
-					} else {
+					if (BROWSER_INFO.name !== 'ghostery_desktop') {
 						// Open the Ghostery Hub on install with justInstalled query parameter set to true.
 						// We need to do this after running scheduledTasks for the first time
 						// because of an A/B test that determines which promo variant is shown in the Hub on install
