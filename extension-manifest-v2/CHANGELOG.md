@@ -1,3 +1,7 @@
+### GHOSTERY 8.5.9 (September 10, 2021)
+
++ Remove Ghostery Dawn onboarding (#721)
+
 ### GHOSTERY 8.5.8 (July 1, 2021)
 
 + Fixes panel header alignment in Chrome (#713)
