@@ -1,0 +1,72 @@
+{
+  "manifest_version": 3,
+	"author": "Ghostery",
+	"name": "__MSG_name__",
+	"short_name": "Ghostery",
+	"version": "9.0.0",
+	"version_name": "9.0.0",
+	"debug": true,
+	"default_locale": "en",
+	"description": "__MSG_short_description__",
+	"icons": {
+		"16": "images/icon16.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
+	},
+	"action": {
+		"default_icon": {
+			"16": "images/icon16.png",
+			"24": "images/icon19.png",
+			"32": "images/icon38.png",
+			"48": "images/icon48.png",
+			"128": "images/icon128.png"
+		},
+		"default_title": "__MSG_default_title__",
+		"default_popup": "panel/index.html"
+	},
+	"options_page": "options/index.html",
+	"content_scripts": [],
+	"content_security_policy": {},
+	"permissions": [
+		"alarms",
+		"cookies",
+		"declarativeNetRequest",
+		"declarativeNetRequestFeedback",
+		"storage",
+		"tabs",
+		"webNavigation",
+		"webRequest"
+	],
+	"host_permissions": [
+		"http://*/*",
+		"https://*/*",
+		"ws://*/*",
+		"wss://*/*"
+	],
+	"background": {
+		"service_worker": "worker.js"
+	},
+	"declarative_net_request" : {
+		"rule_resources" : [
+      {
+        "id": "ads_COMMITHASH",
+        "enabled": true,
+        "path": "rule_resources/dnr-ads-network.json"
+		  },
+      {
+        "id": "tracking_COMMITHASH",
+        "enabled": true,
+        "path": "rule_resources/dnr-tracking-network.json"
+		  },
+      {
+        "id": "annoyances_COMMITHASH",
+        "enabled": true,
+        "path": "rule_resources/dnr-annoyances-network.json"
+		  }
+    ]
+	},
+	"minimum_edge_version": "79.0.309",
+	"minimum_chrome_version": "69",
+	"minimum_opera_version": "56",
+	"web_accessible_resources": []
+}

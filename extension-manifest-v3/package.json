@@ -1,0 +1,33 @@
+{
+  "name": "ghostery-dnr-extension",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "preinstall": "rimraf src/vendor src/rule_resources",
+    "postinstall": "vendor-copy",
+    "build": "web-ext build",
+    "start": "web-ext run --target=chromium"
+  },
+  "author": "",
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "vendor-copy": "^3.0.1",
+    "web-ext": "^6.4.0"
+  },
+  "dependencies": {
+    "hybrids": "^6.1.0"
+  },
+  "webExt": {
+    "sourceDir": "./src/"
+  },
+  "vendorCopy": [
+    {
+      "from": "node_modules/hybrids/src",
+      "to": "src/vendor/hybrids"
+    },
+    {
+      "from": "../ghostery-dnr-lists/build",
+      "to": "src/rule_resources"
+    }
+  ]
+}

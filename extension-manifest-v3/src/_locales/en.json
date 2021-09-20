@@ -1,0 +1,14 @@
+{
+  "name": {
+    "description": "The title of this extension (Ghostery). Required by manifest.json",
+    "message": "Ghostery – Privacy Ad Blocker"
+  },
+  "short_description": {
+    "description": "A short description of this extension (Ghostery). Required by manifest.json",
+    "message": "Ghostery is a powerful privacy extension. Block ads, stop trackers and speed up websites."
+  },
+  "default_title": {
+    "description": "Appears as a tooltip on the Ghostery toolbar icon. Required by manifest.json",
+    "message": "View Ghostery's findings"
+  }
+}

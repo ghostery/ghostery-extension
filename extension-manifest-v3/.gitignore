@@ -1,0 +1,4 @@
+node_modules
+build
+src/vendor
+src/rule_resources
