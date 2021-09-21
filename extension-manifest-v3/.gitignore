@@ -1,4 +1,5 @@
 node_modules
 build
+src/_metadata
 src/vendor
 src/rule_resources

@@ -26,7 +26,6 @@
 	},
 	"options_page": "options/index.html",
 	"content_scripts": [],
-	"content_security_policy": {},
 	"permissions": [
 		"alarms",
 		"cookies",
@@ -65,6 +64,7 @@
 		  }
     ]
 	},
+	"content_security_policy" : {},
 	"minimum_edge_version": "79.0.309",
 	"minimum_chrome_version": "69",
 	"minimum_opera_version": "56",
