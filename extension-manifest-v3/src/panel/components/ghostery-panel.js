@@ -1,17 +1,19 @@
 import { html, define, store } from '/hybrids.js';
 import Settings, { toggleBlocking } from '../store/settings.js';
 import Stats, { reloadStats } from '../store/stats.js';
+import Category from '../store/category.js';
 import { toggles } from '../../common/rulesets.js';
 
 define({
   tag: "ghostery-panel",
   settings: store(Settings),
   stats: store(Stats),
-  render: ({ settings, stats }) => html`
+  categories: store([Category]),
+  render: ({ settings, stats, categories }) => html`
     <div>
       <div>
         <h2>Page</h2>
-        <p>${store.ready(stats) ? (new URL(stats.url)).hostname : '&nbsp;'}</p>
+        <p>${store.ready(stats) ? (new URL(stats.url)).hostname : html`&nbsp;`}</p>
 
         <h2>Stats</h2>
 
@@ -36,7 +38,8 @@ define({
           <li>By tracker:</li>
           <ul>
             ${Object.keys(store.ready(stats) ? stats.byTracker : {}).map((tracker) => html`
-              <li>${tracker}: ${store.ready(stats) ? stats.byTracker[tracker] : 0}</li>
+              <li>
+                ${tracker}: ${store.ready(stats) ? stats.byTracker[tracker] : 0}</li>
             `)}
           </ul>
         </ul>

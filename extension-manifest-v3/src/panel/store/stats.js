@@ -1,13 +1,10 @@
 import { store } from '/hybrids.js';
+
+import Category from './category.js';
+import Tracker from './tracker.js';
 import { toggles, getRulesetType } from '../../common/rulesets.js';
 
 const BY_TOGGLE_FACTORY = () => toggles.reduce((all, toggle) => ({ ...all, [toggle]: 0 }), {});
-
-const Tracker = {
-  id: true,
-  category_id: 'unknown',
-  company_id: 'unknown',
-};
 
 const Stats = {
   url: '',
@@ -17,7 +14,7 @@ const Stats = {
   byCategory: ({ trackers }) => {
     return trackers.reduce((all, current) => ({
       ...all,
-      [current.category_id]: (all[current.category_id] || 0) + 1,
+      [current.category.name]: (all[current.category.name] || 0) + 1,
     }), {});
   },
   byTracker: ({ trackers }) => {
@@ -31,7 +28,7 @@ const Stats = {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
 
       const mappings = toggles.map(toggle => `${toggle}_mapping`);
-      const storage = await chrome.storage.local.get(['trackers', 'categories', ...mappings]);
+      const storage = await chrome.storage.local.get(['trackers', ...mappings]);
       const { rulesMatchedInfo } = await chrome.declarativeNetRequest.getMatchedRules({ tabId: currentTab.id });
 
       const url = currentTab.url;
@@ -39,20 +36,24 @@ const Stats = {
       const byToggle = BY_TOGGLE_FACTORY();
       const trackers = [];
 
+      await store.pending(store.get([Category]));
+
       rulesMatchedInfo.forEach(({ rule }) => {
         const type = getRulesetType(rule.rulesetId);
         const mapping = storage[`${type}_mapping`];
         const trackerId = mapping[rule.ruleId];
         const tracker = trackerId
           ? storage.trackers[trackerId]
-          : { id: 'unknown', category_id: 'unknown' };
+          : { id: 'unknown', category_id: '11' };
 
-        if (!trackerId) {
-          console.warn(`Unknown tracker - ruleId: ${rule.ruleId}, rulesetId: ${rule.rulesetId}`);
-        }
 
         byToggle[type] += 1;
-        trackers.push(tracker);
+
+        trackers.push({
+          id: tracker.id,
+          name: tracker.name,
+          category: tracker.category_id,
+        });
       });
 
       const stats = {

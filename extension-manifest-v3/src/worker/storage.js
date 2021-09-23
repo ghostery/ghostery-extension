@@ -6,7 +6,7 @@ async function cacheFile(filename, storageKey) {
   return json;
 }
 
-// cacheFile('rule_resources/categories.json', 'categories');
+cacheFile('rule_resources/categories.json', 'categories');
 cacheFile('rule_resources/companies.json', 'companies');
 cacheFile('rule_resources/trackers.json', 'trackers');
 cacheFile('rule_resources/dnr-ads-network-mapping.json', 'ads_mapping');
