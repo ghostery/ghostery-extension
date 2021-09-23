@@ -9,6 +9,7 @@ const BY_TOGGLE_FACTORY = () => toggles.reduce((all, toggle) => ({ ...all, [togg
 const Stats = {
   url: '',
   all: 0,
+  loadTime: 0,
   byToggle: BY_TOGGLE_FACTORY(),
   trackers: [Tracker],
   byCategory: ({ trackers }) => {
@@ -26,6 +27,15 @@ const Stats = {
   [store.connect] : {
     get: async () => {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
+      let pageStats = {};
+
+      const pageStatsPromise = new Promise((resolve, reject) => {
+        chrome.tabs.sendMessage(currentTab.id, { action: "getStats" }, (_pageStats) => {
+          console.warn(_pageStats);
+          pageStats = _pageStats;
+          resolve();
+        });
+      });
 
       const mappings = toggles.map(toggle => `${toggle}_mapping`);
       const storage = await chrome.storage.local.get(['trackers', ...mappings]);
@@ -56,8 +66,11 @@ const Stats = {
         });
       });
 
+      await pageStatsPromise;
+
       const stats = {
         url,
+        loadTime: pageStats.loadTime,
         all,
         byToggle,
         trackers,

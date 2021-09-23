@@ -14,7 +14,7 @@ define({
       <div>
         <h2>Page</h2>
         <p>${store.ready(stats) ? (new URL(stats.url)).hostname : html`&nbsp;`}</p>
-
+        <p>Load time: ${store.ready(stats) ? `${Math.round(stats.loadTime)}ms` : html`&nbsp;`}</p>
         <h2>Stats</h2>
 
         ${store.error(stats) && html`

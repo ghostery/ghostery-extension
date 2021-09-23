@@ -25,7 +25,12 @@
 		"default_popup": "panel/index.html"
 	},
 	"options_page": "options/index.html",
-	"content_scripts": [],
+	"content_scripts": [
+		{
+			"matches": ["*://*/*"],
+			"js": ["content_scripts/stats.js"]
+		}
+	],
 	"permissions": [
 		"alarms",
 		"cookies",
