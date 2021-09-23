@@ -1,13 +1,8 @@
 import { store } from '/hybrids.js';
-
-const rulesetIds = chrome.runtime.getManifest().declarative_net_request.rule_resources.map(r => r.id);
-
-function getRulesetType(rulesetId) {
-  return rulesetId.split("_")[0];
-}
+import { rulesetIds, toggles, getRulesetType } from '../../common/rulesets.js';
 
 const Settings = {
-  blockingStatus: rulesetIds.reduce((all, rulesetId) => ({ ...all, [getRulesetType(rulesetId)]: false }), {}),
+  blockingStatus: toggles.reduce((all, toggle) => ({ ...all, [toggle]: false }), {}),
   [store.connect] : {
     get: async () => {
       const enabledRulesetIds = await chrome.declarativeNetRequest.getEnabledRulesets();

@@ -1,37 +1,64 @@
 import { html, define, store } from '/hybrids.js';
 import Settings, { toggleBlocking } from '../store/settings.js';
-
-function increaseCount(host) {
-  host.count += 1;
-}
+import Stats, { reloadStats } from '../store/stats.js';
+import { toggles } from '../../common/rulesets.js';
 
 define({
-  tag: "simple-counter",
-  count: 0,
+  tag: "ghostery-panel",
   settings: store(Settings),
-  render: ({ settings }) => html`
+  stats: store(Stats),
+  render: ({ settings, stats }) => html`
     <div>
-      Settings:
-      ${store.pending(settings) && `Loading...`}
-      ${store.ready(settings) && html`
+      <div>
+        <h2>Page</h2>
+        <p>${store.ready(stats) ? (new URL(stats.url)).hostname : '&nbsp;'}</p>
+
+        <h2>Stats</h2>
+
+        ${store.error(stats) && html`
+          <button onclick=${reloadStats}>reload</button>
+        `}
+
         <ul>
-          <li>
-            <label>Block Ads:</label>
-            <span>${String(settings.blockingStatus.ads)}</span>
-            <button onclick=${() => toggleBlocking('ads')}>Toggle</button>
-          </li>
-          <li>
-            <label>Block Annoyances:</label>
-            <span>${String(settings.blockingStatus.annoyances)}</span>
-            <button onclick=${() => toggleBlocking('annoyances')}>Toggle</button>
-          </li>
-          <li>
-            <label>Block Tracking:</label>
-            <span>${String(settings.blockingStatus.tracking)}</span>
-            <button onclick=${() => toggleBlocking('tracking')}>Toggle</button>
-          </li>
+          <li>All: ${store.ready(stats) ? stats.all : 0}</li>
+          <li>By toggle:</li>
+          <ul>
+            ${toggles.map((toggle) => html`
+              <li>${toggle}: ${store.ready(stats) ? stats.byToggle[toggle] : 0}</li>
+            `)}
+          </ul>
+          <li>By category:</li>
+          <ul>
+            ${Object.keys(store.ready(stats) ? stats.byCategory : {}).map((category) => html`
+              <li>${category}: ${store.ready(stats) ? stats.byCategory[category] : 0}</li>
+            `)}
+          </ul>
+          <li>By tracker:</li>
+          <ul>
+            ${Object.keys(store.ready(stats) ? stats.byTracker : {}).map((tracker) => html`
+              <li>${tracker}: ${store.ready(stats) ? stats.byTracker[tracker] : 0}</li>
+            `)}
+          </ul>
         </ul>
-      `}
+
+      </div>
+      <div>
+        <h2>Global settings</h2>
+
+        ${store.pending(settings) && `Loading...`}
+
+        ${store.ready(settings) && html`
+          <ul>
+            ${toggles.map((toggle) => html`
+              <li>
+                <label>Block ${toggle}:</label>
+                <span>${String(settings.blockingStatus[toggle])}</span>
+                <button onclick=${() => toggleBlocking(toggle)}>Toggle</button>
+              </li>
+            `)}
+          </ul>
+        `}
+      </div>
     </div>
   `,
 });

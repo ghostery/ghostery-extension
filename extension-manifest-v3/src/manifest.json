@@ -43,7 +43,7 @@
 		"wss://*/*"
 	],
 	"background": {
-		"service_worker": "worker.js"
+		"service_worker": "worker/index.js"
 	},
 	"declarative_net_request" : {
 		"rule_resources" : [
