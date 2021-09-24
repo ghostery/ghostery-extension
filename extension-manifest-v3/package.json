@@ -1,21 +1,22 @@
 {
-  "name": "ghostery-dnr-extension",
+  "name": "@ghostery/dnr-extension",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
+    "download-cosmetics": "node scripts/download-cosmetics.js",
     "preinstall": "rimraf src/vendor src/rule_resources",
-    "postinstall": "vendor-copy",
+    "postinstall": "vendor-copy && npm run download-cosmetics",
     "build": "web-ext build",
     "start": "web-ext run --target=chromium"
   },
   "author": "",
   "devDependencies": {
+    "node-fetch": "^2.6.5",
     "rimraf": "^3.0.2",
     "vendor-copy": "^3.0.1",
     "web-ext": "^6.4.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.22.7",
+    "@cliqz/adblocker": "1.22.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
     "hybrids": "^6.1.0",
     "tldts": "^5.7.45"

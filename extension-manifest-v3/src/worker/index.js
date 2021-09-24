@@ -6,8 +6,6 @@ importScripts('./storage.js');
 chrome.declarativeNetRequest.setExtensionActionOptions({ displayActionCountAsBadgeText: true });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  const promises = [];
-
   if (sender.tab === undefined) {
     throw new Error('required "sender.tab" information is not available');
   }
@@ -20,9 +18,5 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     throw new Error('required "sender.frameId" information is not available');
   }
 
-  promises.push(...adblockerOnMessage(msg, sender, sendResponse));
-
-  if (promises.length > 0) {
-    return true;
-  }
+  adblockerOnMessage(msg, sender, sendResponse);
 });

@@ -2,4 +2,7 @@ node_modules
 build
 src/_metadata
 src/vendor
-src/rule_resources
+src/rule_resources/*
+!src/rule_resources/.gitkeep
+src/adblocker_engines/*
+!src/adblocker_engines/.gitkeep

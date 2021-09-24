@@ -31,7 +31,6 @@ const Stats = {
 
       const pageStatsPromise = new Promise((resolve, reject) => {
         chrome.tabs.sendMessage(currentTab.id, { action: "getStats" }, (_pageStats) => {
-          console.warn(_pageStats);
           pageStats = _pageStats;
           resolve();
         });
