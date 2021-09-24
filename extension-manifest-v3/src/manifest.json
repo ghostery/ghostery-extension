@@ -5,7 +5,6 @@
 	"short_name": "Ghostery",
 	"version": "9.0.0",
 	"version_name": "9.0.0",
-	"debug": true,
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"icons": {
@@ -29,6 +28,13 @@
 		{
 			"matches": ["*://*/*"],
 			"js": ["content_scripts/stats.js"]
+		},
+		{
+			"matches": ["*://*/*"],
+			"js": [
+				"vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
+				"content_scripts/cosmetics.js"
+			]
 		}
 	],
 	"permissions": [
@@ -38,8 +44,7 @@
 		"declarativeNetRequestFeedback",
 		"storage",
 		"tabs",
-		"webNavigation",
-		"webRequest"
+		"scripting"
 	],
 	"host_permissions": [
 		"http://*/*",
@@ -70,8 +75,5 @@
     ]
 	},
 	"content_security_policy" : {},
-	"minimum_edge_version": "79.0.309",
-	"minimum_chrome_version": "69",
-	"minimum_opera_version": "56",
 	"web_accessible_resources": []
 }

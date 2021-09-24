@@ -15,7 +15,10 @@
     "web-ext": "^6.4.0"
   },
   "dependencies": {
-    "hybrids": "^6.1.0"
+    "@cliqz/adblocker": "^1.22.7",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
+    "hybrids": "^6.1.0",
+    "tldts": "^5.7.45"
   },
   "webExt": {
     "sourceDir": "./src/"
@@ -24,6 +27,26 @@
     {
       "from": "node_modules/hybrids/src",
       "to": "src/vendor/hybrids"
+    },
+    {
+      "from": "node_modules/@cliqz/adblocker/dist/adblocker.umd.min.js",
+      "to": "src/vendor/@cliqz/adblocker/adblocker.umd.min.js"
+    },
+    {
+      "from": "node_modules/@cliqz/adblocker/dist/adblocker.umd.min.js.map",
+      "to": "src/vendor/@cliqz/adblocker/adblocker.umd.min.js.map"
+    },
+    {
+      "from": "node_modules/@cliqz/adblocker-webextension-cosmetics/dist/adblocker.umd.min.js",
+      "to": "src/vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js"
+    },
+    {
+      "from": "node_modules/@cliqz/adblocker-webextension-cosmetics/dist/adblocker.umd.min.js.map",
+      "to": "src/vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js.map"
+    },
+    {
+      "from": "node_modules/tldts/dist/index.umd.min.js",
+      "to": "src/vendor/tldts/index.umd.min.js"
     },
     {
       "from": "../ghostery-dnr-lists/build",
