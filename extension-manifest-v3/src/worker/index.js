@@ -1,9 +1,10 @@
-importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
+try {
+  importScripts('./adblocker.js');
+  importScripts('./storage.js');
+} catch (e) {
+}
 
-importScripts('./adblocker.js');
-importScripts('./storage.js');
-
-chrome.declarativeNetRequest.setExtensionActionOptions({ displayActionCountAsBadgeText: true });
+chrome.declarativeNetRequest.setExtensionActionOptions && chrome.declarativeNetRequest.setExtensionActionOptions({ displayActionCountAsBadgeText: true });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (sender.tab === undefined) {

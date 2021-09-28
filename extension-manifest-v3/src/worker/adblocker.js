@@ -1,5 +1,8 @@
-importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
-importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
+try {
+  importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
+  importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
+} catch (e) {
+}
 
 const { parse } = tldts;
 const { FiltersEngine } = adblocker;
@@ -34,21 +37,38 @@ async function adblockerInjectStylesWebExtension(
 
   // Proceed with stylesheet injection.
   return new Promise((resolve) => {
-    const target = {
-      tabId,
-    };
+    if (chrome.scripting && chrome.scripting.insertCSS) {
+      const target = {
+        tabId,
+      };
 
-    if (frameId) {
-      target.frameIds = [frameId];
+      if (frameId) {
+        target.frameIds = [frameId];
+      } else {
+        target.allFrames = allFrames;
+      }
+      chrome.scripting.insertCSS({
+        css: styles,
+        origin: 'USER',
+        target,
+      }, () => resolve);
     } else {
-      target.allFrames = allFrames;
+      const details = {
+        allFrames,
+        code: styles,
+        cssOrigin: 'user',
+        matchAboutBlank: true,
+        runAt: 'document_start',
+      };
+      if (frameId) {
+        details.frameId = frameId
+      }
+      chrome.tabs.insertCSS(
+        tabId,
+        details,
+        () => resolve,
+      );
     }
-
-    chrome.scripting.insertCSS({
-      css: styles,
-      origin: 'USER',
-      target,
-    }, () => resolve);
   });
 }
 

@@ -1,0 +1,88 @@
+{
+  "manifest_version": 2,
+	"author": "Ghostery",
+	"name": "__MSG_name__",
+	"short_name": "Ghostery",
+	"version": "9.0.0",
+	"version_name": "9.0.0",
+	"default_locale": "en",
+	"description": "__MSG_short_description__",
+	"icons": {
+		"16": "images/icon16.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
+	},
+	"browser_action": {
+		"default_icon": {
+			"16": "images/icon16.png",
+			"24": "images/icon19.png",
+			"32": "images/icon38.png",
+			"48": "images/icon48.png",
+			"128": "images/icon128.png"
+		},
+		"default_title": "__MSG_default_title__",
+		"default_popup": "panel/index.html"
+	},
+	"options_page": "options/index.html",
+	"content_scripts": [
+		{
+			"matches": ["*://*/*"],
+			"js": ["content_scripts/stats.js"]
+		},
+		{
+			"matches": ["*://*/*"],
+			"js": [
+				"vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
+				"content_scripts/cosmetics.js"
+			]
+		}
+	],
+	"permissions": [
+		"alarms",
+		"cookies",
+		"declarativeNetRequest",
+		"declarativeNetRequestFeedback",
+		"storage",
+		"tabs",
+		"scripting",
+		"activeTab"
+	],
+	"host_permissions": [
+		"http://*/*",
+		"https://*/*",
+		"ws://*/*",
+		"wss://*/*"
+	],
+	"background": {
+		"scripts": [
+			"vendor/tldts/index.umd.min.js",
+			"vendor/@cliqz/adblocker/adblocker.umd.min.js",
+			"worker/storage.js",
+			"worker/adblocker.js",
+			"worker/index.js"
+		],
+		"service_worker": "worker/index.js",
+		"persistent": false
+	},
+	"declarative_net_request" : {
+		"rule_resources" : [
+      {
+        "id": "ads_COMMITHASH",
+        "enabled": true,
+        "path": "rule_resources/dnr-ads-network.json"
+		  },
+      {
+        "id": "tracking_COMMITHASH",
+        "enabled": true,
+        "path": "rule_resources/dnr-tracking-network.json"
+		  },
+      {
+        "id": "annoyances_COMMITHASH",
+        "enabled": true,
+        "path": "rule_resources/dnr-annoyances-network.json"
+		  }
+    ]
+	},
+	"content_security_policy" : {},
+	"web_accessible_resources": []
+}
