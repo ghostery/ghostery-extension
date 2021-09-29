@@ -1,9 +1,3 @@
-try {
-  importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
-  importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
-} catch (e) {
-}
-
 const { parse } = tldts;
 const { FiltersEngine } = adblocker;
 

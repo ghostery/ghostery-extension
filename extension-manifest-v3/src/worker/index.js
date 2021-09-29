@@ -1,7 +1,10 @@
 try {
+  importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
+  importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
   importScripts('./adblocker.js');
   importScripts('./storage.js');
 } catch (e) {
+  // on Safari those have to be imported from manifest.json
 }
 
 chrome.declarativeNetRequest.setExtensionActionOptions && chrome.declarativeNetRequest.setExtensionActionOptions({ displayActionCountAsBadgeText: true });

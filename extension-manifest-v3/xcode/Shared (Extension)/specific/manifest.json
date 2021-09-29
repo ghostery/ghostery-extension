@@ -41,11 +41,8 @@
 		"alarms",
 		"cookies",
 		"declarativeNetRequest",
-		"declarativeNetRequestFeedback",
 		"storage",
-		"tabs",
-		"scripting",
-		"activeTab"
+		"tabs"
 	],
 	"host_permissions": [
 		"http://*/*",
@@ -57,11 +54,10 @@
 		"scripts": [
 			"vendor/tldts/index.umd.min.js",
 			"vendor/@cliqz/adblocker/adblocker.umd.min.js",
-			"worker/storage.js",
 			"worker/adblocker.js",
+			"worker/storage.js",
 			"worker/index.js"
 		],
-		"service_worker": "worker/index.js",
 		"persistent": false
 	},
 	"declarative_net_request" : {
