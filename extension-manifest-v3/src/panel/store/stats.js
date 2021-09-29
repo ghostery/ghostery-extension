@@ -3,6 +3,7 @@ import { store } from '/hybrids.js';
 import Category from './category.js';
 import Tracker from './tracker.js';
 import { toggles, getRulesetType } from '../../common/rulesets.js';
+import '../../vendor/tldts/index.umd.min.js'; // exports tldts
 
 const BY_TOGGLE_FACTORY = () => toggles.reduce((all, toggle) => ({ ...all, [toggle]: 0 }), {});
 
@@ -27,45 +28,61 @@ const Stats = {
   [store.connect] : {
     get: async () => {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
-      let pageStats = {};
-
-      const pageStatsPromise = new Promise((resolve, reject) => {
-        chrome.tabs.sendMessage(currentTab.id, { action: "getStats" }, (_pageStats) => {
-          pageStats = _pageStats;
-          resolve();
-        });
+      const pageStats = await new Promise((resolve) => {
+        chrome.tabs.sendMessage(currentTab.id, { action: "getStats" }, resolve);
       });
 
-      const mappings = toggles.map(toggle => `${toggle}_mapping`);
-      const storage = await chrome.storage.local.get(['trackers', ...mappings]);
-      const { rulesMatchedInfo } = await chrome.declarativeNetRequest.getMatchedRules({ tabId: currentTab.id });
-
       const url = currentTab.url;
-      const all = rulesMatchedInfo.length;
+      let all = 0;
       const byToggle = BY_TOGGLE_FACTORY();
       const trackers = [];
 
-      await store.pending(store.get([Category]));
+      if (chrome.declarativeNetRequest.getMatchedRules) {
+        const mappings = toggles.map(toggle => `${toggle}_mapping`);
+        const storage = await chrome.storage.local.get(['trackers', ...mappings]);
+        const { rulesMatchedInfo } = await chrome.declarativeNetRequest.getMatchedRules({ tabId: currentTab.id });
 
-      rulesMatchedInfo.forEach(({ rule }) => {
-        const type = getRulesetType(rule.rulesetId);
-        const mapping = storage[`${type}_mapping`];
-        const trackerId = mapping[rule.ruleId];
-        const tracker = trackerId
-          ? storage.trackers[trackerId]
-          : { id: 'unknown', category_id: '11' };
+        all = rulesMatchedInfo.length;
 
+        await store.pending(store.get([Category]));
 
-        byToggle[type] += 1;
+        rulesMatchedInfo.forEach(({ rule }) => {
+          const type = getRulesetType(rule.rulesetId);
+          const mapping = storage[`${type}_mapping`];
+          const trackerId = mapping[rule.ruleId];
+          const tracker = trackerId
+            ? storage.trackers[trackerId]
+            : { id: 'unknown', category_id: '11' };
 
-        trackers.push({
-          id: tracker.id,
-          name: tracker.name,
-          category: tracker.category_id,
+          byToggle[type] += 1;
+
+          trackers.push({
+            id: tracker.id,
+            name: tracker.name,
+            category: tracker.category_id,
+          });
         });
-      });
+      } else {
+        // Safari does not support any kind of DNR feedback
+        const storage = await chrome.storage.local.get(['trackers', 'tracker_domains']);
+        const { blockedUrls } = pageStats;
+        all = blockedUrls.length;
 
-      await pageStatsPromise;
+        blockedUrls.forEach(url => {
+          const { domain } = tldts.parse(url);
+          const trackerId = storage.tracker_domains[domain];
+
+          const tracker = trackerId
+            ? storage.trackers[trackerId]
+            : { id: 'unknown', category_id: '11' };
+
+          trackers.push({
+            id: tracker.id,
+            name: tracker.name,
+            category: tracker.category_id,
+          });
+        })
+      }
 
       const stats = {
         url,

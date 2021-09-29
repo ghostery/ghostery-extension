@@ -3,6 +3,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const perfEntries = performance.getEntriesByType("navigation");
     sendResponse({
       loadTime: perfEntries[0].loadEventEnd,
+      blockedUrls,
     });
     return;
   }

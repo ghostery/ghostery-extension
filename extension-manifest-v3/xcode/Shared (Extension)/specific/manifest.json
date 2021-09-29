@@ -27,7 +27,10 @@
 	"content_scripts": [
 		{
 			"matches": ["*://*/*"],
-			"js": ["content_scripts/stats.js"]
+			"js": [
+				"content_scripts/TrackingProtectionStats.js",
+				"content_scripts/stats.js"
+			]
 		},
 		{
 			"matches": ["*://*/*"],
