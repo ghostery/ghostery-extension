@@ -32,7 +32,6 @@
 		468E42E72701F84A008B5792 /* options in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DA2701F84A008B5792 /* options */; };
 		468E42E82701F84A008B5792 /* panel in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DB2701F84A008B5792 /* panel */; };
 		468E42E92701F84A008B5792 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DC2701F84A008B5792 /* images */; };
-		468E42EA2701F84A008B5792 /* _metadata in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DD2701F84A008B5792 /* _metadata */; };
 		468E42EB2701F84A008B5792 /* adblocker_engines in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DE2701F84A008B5792 /* adblocker_engines */; };
 		468E42EC2701F84A008B5792 /* common in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DF2701F84A008B5792 /* common */; };
 		468E42ED2701F84A008B5792 /* hybrids.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E02701F84A008B5792 /* hybrids.js */; };
@@ -44,7 +43,6 @@
 		468E42F42701F84A008B5792 /* options in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DA2701F84A008B5792 /* options */; };
 		468E42F52701F84A008B5792 /* panel in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DB2701F84A008B5792 /* panel */; };
 		468E42F62701F84A008B5792 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DC2701F84A008B5792 /* images */; };
-		468E42F72701F84A008B5792 /* _metadata in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DD2701F84A008B5792 /* _metadata */; };
 		468E42F82701F84A008B5792 /* adblocker_engines in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DE2701F84A008B5792 /* adblocker_engines */; };
 		468E42F92701F84A008B5792 /* common in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DF2701F84A008B5792 /* common */; };
 		468E42FA2701F84A008B5792 /* hybrids.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E02701F84A008B5792 /* hybrids.js */; };
@@ -126,7 +124,6 @@
 		468E42DA2701F84A008B5792 /* options */ = {isa = PBXFileReference; lastKnownFileType = folder; name = options; path = ../../src/options; sourceTree = "<group>"; };
 		468E42DB2701F84A008B5792 /* panel */ = {isa = PBXFileReference; lastKnownFileType = folder; name = panel; path = ../../src/panel; sourceTree = "<group>"; };
 		468E42DC2701F84A008B5792 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../src/images; sourceTree = "<group>"; };
-		468E42DD2701F84A008B5792 /* _metadata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _metadata; path = ../../src/_metadata; sourceTree = "<group>"; };
 		468E42DE2701F84A008B5792 /* adblocker_engines */ = {isa = PBXFileReference; lastKnownFileType = folder; name = adblocker_engines; path = ../../src/adblocker_engines; sourceTree = "<group>"; };
 		468E42DF2701F84A008B5792 /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = ../../src/common; sourceTree = "<group>"; };
 		468E42E02701F84A008B5792 /* hybrids.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = hybrids.js; path = ../../src/hybrids.js; sourceTree = "<group>"; };
@@ -271,7 +268,6 @@
 				468E42DA2701F84A008B5792 /* options */,
 				468E42DB2701F84A008B5792 /* panel */,
 				468E42DC2701F84A008B5792 /* images */,
-				468E42DD2701F84A008B5792 /* _metadata */,
 				468E42DE2701F84A008B5792 /* adblocker_engines */,
 				468E42DF2701F84A008B5792 /* common */,
 				468E42E02701F84A008B5792 /* hybrids.js */,
@@ -452,7 +448,6 @@
 				468E42F92701F84A008B5792 /* common in Resources */,
 				468E42FA2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42F62701F84A008B5792 /* images in Resources */,
-				468E42F72701F84A008B5792 /* _metadata in Resources */,
 				468E42FE2701F84A008B5792 /* worker in Resources */,
 				468E42F42701F84A008B5792 /* options in Resources */,
 				468E43002701F84A008B5792 /* content_scripts in Resources */,
@@ -472,7 +467,6 @@
 				468E42EC2701F84A008B5792 /* common in Resources */,
 				468E42ED2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42E92701F84A008B5792 /* images in Resources */,
-				468E42EA2701F84A008B5792 /* _metadata in Resources */,
 				468E42F12701F84A008B5792 /* worker in Resources */,
 				468E42E72701F84A008B5792 /* options in Resources */,
 				468E42F32701F84A008B5792 /* content_scripts in Resources */,

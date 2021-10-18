@@ -8,3 +8,5 @@ src/rule_resources/*
 src/adblocker_engines/*
 !src/adblocker_engines/.gitkeep
 *.xcuserstate
+xcuserdata
+web-ext-artifacts/
