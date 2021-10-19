@@ -1,8 +1,14 @@
+const start = Date.now();
+let loadTime = 0;
+
+window.addEventListener('load', () => {
+  loadTime = Date.now() - start;
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'getStats') {
-    const perfEntries = performance.getEntriesByType("navigation");
     sendResponse({
-      loadTime: perfEntries[0].loadEventEnd,
+      loadTime,
       blockedUrls,
     });
     return;
