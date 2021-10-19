@@ -16,7 +16,7 @@ import SafariServices
 typealias PlatformViewController = NSViewController
 #endif
 
-let extensionBundleIdentifier = "com.yourCompany.Ghostery---Privacy-Ad-Blocker.Extension"
+let extensionBundleIdentifier = "com.ghostery.lite.extension"
 
 class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
@@ -49,7 +49,7 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
             }
 
             DispatchQueue.main.async {
-                webView.evaluateJavaScript("show('mac', \(state.isEnabled)")
+                webView.evaluateJavaScript("show('mac', \(state.isEnabled))")
             }
         }
 #endif
