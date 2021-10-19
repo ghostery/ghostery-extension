@@ -2,18 +2,41 @@ const { parse } = tldts;
 const { FiltersEngine } = adblocker;
 
 const adblockerEngines = {
-  "ads": null,
-  "tracking": null,
-  "annoyances": null,
+  "ads": {
+    engine: null,
+    isEnabled: false,
+  },
+  "tracking": {
+    engine: null,
+    isEnabled: false,
+  },
+  "annoyances": {
+    engine: null,
+    isEnabled: false,
+  },
 };
+
+// TODO: share with frontend
+function getRulesetType(rulesetId) {
+  return rulesetId.split("_")[0];
+}
+
+async function updateAdblockerEngineStatuses() {
+  const enabledRulesetIds = await chrome.declarativeNetRequest.getEnabledRulesets();
+  const enabledRulesetTypes = enabledRulesetIds.map(getRulesetType);
+  Object.keys(adblockerEngines).map(engineName => {
+    adblockerEngines[engineName].isEnabled = enabledRulesetTypes.indexOf(engineName) > -1;
+  });
+}
 
 const adblockerStartupPromise = (async function () {
   await Promise.all(Object.keys(adblockerEngines).map(async (engineName) => {
     const response = await fetch(chrome.runtime.getURL(`adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`));
     const engineBytes = await response.arrayBuffer();
     const engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
-    adblockerEngines[engineName] = engine;
+    adblockerEngines[engineName].engine = engine;
   }));
+  await updateAdblockerEngineStatuses();
 })();
 
 async function adblockerInjectStylesWebExtension(
@@ -77,6 +100,12 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     const specificResponses = [];
 
     Object.keys(adblockerEngines).forEach(engineName => {
+      if (adblockerEngines[engineName].isEnabled === false) {
+        return;
+      }
+
+      const { engine } = adblockerEngines[engineName];
+
       // Extract hostname from sender's URL
       const { url = '', frameId } = sender;
       const parsed = parse(url);
@@ -88,7 +117,7 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
       // Because of this, we specify `allFrames: true` when injecting them so
       // that we do not need to perform this operation for sub-frames.
       if (frameId === 0 && msg.lifecycle === 'start') {
-        const { active, styles } = adblockerEngines.ads.getCosmeticsFilters({
+        const { active, styles } = engine.getCosmeticsFilters({
           domain,
           hostname,
           url,
@@ -118,7 +147,7 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
       // ids and hrefs observed in the DOM. MutationObserver is also used to
       // make sure we can react to changes.
       {
-        const { active, styles, scripts, extended } = adblockerEngines.ads.getCosmeticsFilters({
+        const { active, styles, scripts, extended } = engine.getCosmeticsFilters({
           domain,
           hostname,
           url,

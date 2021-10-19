@@ -34,6 +34,7 @@ export async function toggleBlocking(type) {
       enableRulesetIds: [rulesetId],
     });
   }
+  chrome.runtime.sendMessage({ action: 'dnrUpdate' });
 
   store.set(Settings, {
     ...settings,

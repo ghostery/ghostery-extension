@@ -29,7 +29,7 @@ const Stats = {
     get: async () => {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
       const pageStats = await new Promise((resolve) => {
-        chrome.tabs.sendMessage(currentTab.id, { action: "getStats" }, resolve);
+        chrome.runtime.sendMessage({ action: "getTabStats", args: [{ tabId: currentTab.id }] }, resolve);
       });
 
       const url = currentTab.url;
@@ -65,10 +65,10 @@ const Stats = {
       } else {
         // Safari does not support any kind of DNR feedback
         const storage = await chrome.storage.local.get(['trackers', 'tracker_domains']);
-        const { blockedUrls } = pageStats;
-        all = blockedUrls.length;
+        const { urls } = pageStats;
+        all = urls.length;
 
-        blockedUrls.forEach(url => {
+        urls.forEach(url => {
           const { domain } = tldts.parse(url);
           const trackerId = storage.tracker_domains[domain];
 

@@ -43,6 +43,7 @@
 	"permissions": [
 		"alarms",
 		"cookies",
+		"webNavigation",
 		"declarativeNetRequest",
 		"storage",
 		"tabs"
@@ -59,6 +60,7 @@
 			"vendor/@cliqz/adblocker/adblocker.umd.min.js",
 			"worker/adblocker.js",
 			"worker/storage.js",
+			"worker/tracker-wheel.js",
 			"worker/index.js"
 		],
 		"persistent": false

@@ -1,8 +1,11 @@
+const storage = new Map();
+
 async function cacheFile(filename, storageKey) {
   const url = chrome.runtime.getURL(filename);
   const request = await fetch(url);
   const json = await request.json();
   await chrome.storage.local.set({ [storageKey]: json });
+  storage.set(storageKey, json);
   return json;
 }
 

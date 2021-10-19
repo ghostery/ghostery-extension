@@ -5,7 +5,7 @@ const webkit = {
   messageHandlers: {
     trackingProtectionStats: {
       postMessage({ urls }) {
-        blockedUrls.push(...urls);
+        chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ urls }]});
       },
     },
   },

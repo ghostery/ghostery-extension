@@ -45,6 +45,7 @@
 		"cookies",
 		"declarativeNetRequest",
 		"declarativeNetRequestFeedback",
+		"webNavigation",
 		"storage",
 		"tabs",
 		"scripting"
