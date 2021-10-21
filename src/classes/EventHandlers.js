@@ -26,7 +26,7 @@ import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
 import panelData from './PanelData';
-import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
+import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH, BLOCK_REASON_GLOBAL_UNBLOCKED } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
 import surrogatedb from './SurrogateDb';
@@ -351,7 +351,7 @@ class EventHandlers {
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
 		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
-		if (!block && reason === BLOCK_REASON_SS_UNBLOCKED) {
+		if (!block && [BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED].indexOf(reason) > -1) {
 			// The way to pass this flag to Cliqz handlers
 			eventMutable.ghosteryWhitelisted = true;
 		}
