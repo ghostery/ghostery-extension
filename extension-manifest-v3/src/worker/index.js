@@ -64,7 +64,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     tabStats.set(tabId, stats);
 
-    chrome.browserAction.setIcon({
+    (chrome.browserAction || chrome.action).setIcon({
       tabId,
       imageData: offscreenImageData(128, stats.urls.map(trackerUrlToCategory)),
     });
