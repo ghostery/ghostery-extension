@@ -3,7 +3,7 @@ try {
   importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
   importScripts('./adblocker.js');
   importScripts('./storage.js');
-  importScripts('./tracker-wheel.js');
+  importScripts('../common/tracker-wheel.js');
 } catch (e) {
   // on Safari those have to be imported from manifest.json
 }
