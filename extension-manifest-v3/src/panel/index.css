@@ -116,12 +116,6 @@ panel-body section.stats main strong {
   color: var(--black);
 }
 
-panel-body section.stats .color {
-  display: inline-block;
-  height: 10px;
-  width: 25px;
-}
-
 /* FOOTER */
 
 panel-footer footer {
