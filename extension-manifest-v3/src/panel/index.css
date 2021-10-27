@@ -1,3 +1,148 @@
+:root {
+  --text: #B9BBBE;
+  --black: black;
+  --ghostery: #00AEF0;
+}
+
 body {
-  width: 600px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
+  width: 400px;
+  background-color: rgb(246, 246, 248);
+  color: var(--text);
+}
+
+/* HEADER */
+
+panel-header header {
+  background-color: var(--ghostery);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+panel-header header a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+panel-header .domain-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-grow: 1;
+  text-align: center;
+}
+
+panel-header .feather {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+/* BODY */
+
+panel-body > main {
+  padding: 5px;
+}
+
+panel-body h1 {
+  text-align: center;
+  color: var(--black);
+}
+
+panel-body section.toggles {
+  display: flex;
+  flex-direction: row;
+}
+
+panel-body section.toggles button {
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+  border: 1px solid gray;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+panel-body section.toggles button.disabled {
+  background: #999;
+}
+
+panel-body section.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+panel-body section.buttons a, panel-body section.buttons a:visited {
+  background: white;
+  color: var(--ghostery);
+  padding: 5px 10px;
+  flex: 1;
+  margin: 5px;
+  text-align: center;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+panel-body section.stats {
+  display: flex;
+  flex-direction: row;
+}
+
+
+panel-body section.stats main {
+  position: relative;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+panel-body section.stats main canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+panel-body section.stats main strong {
+  color: var(--black);
+}
+
+/* FOOTER */
+
+panel-footer footer {
+  border-top: 1px solid var(--text);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+
+panel-footer footer .dot {
+  margin: 0 5px;
+}
+
+panel-footer footer a, panel-footer footer a:visited {
+  text-decoration: none;
+  color: var(--text);
+}
+
+panel-footer footer .subscribe {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+panel-footer footer .subscribe svg {
+  margin-right: 5px;
 }
