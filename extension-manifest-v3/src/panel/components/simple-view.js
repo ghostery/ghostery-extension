@@ -20,7 +20,6 @@ define({
     const categories = store.ready(stats)
       ? stats.trackers.map(t => t.category)
       : ['unknown'];
-      console.warn("xx cat", categories)
     draw(context, categories);
 
     // return element
@@ -66,7 +65,7 @@ define({
       </section>
 
       <section class="buttons">
-        <a href="https://www.whotracks.me/websites/${stats.domain}.html" target="_blank">Statistics report</a>
+        <a href="https://www.whotracks.me/websites/${store.ready(stats) ? stats.domain : ''}.html" target="_blank">Statistics report</a>
         <a onclick="${toggleDetailedView}">Tracker list</a>
       </section>
 

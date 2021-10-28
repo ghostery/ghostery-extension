@@ -15,13 +15,22 @@ define({
     </header>
     <main>
       <ul>
-        ${Object.keys(store.ready(stats) ? stats.byCategory : {}).map((category) => html`
-          <li>
-            ${category}:
-            <category-bullet category=${category} size=${20}></category-bullet>
-            <strong>${store.ready(stats) ? stats.byCategory[category].count : 0}</strong>
-          </li>
-        `)}
+        ${store.ready(stats) && html`
+          ${Object.keys(stats.byCategory).map(category => html`
+            <li>
+              <label>${category}</label>
+              <category-bullet category=${category} size=${20}></category-bullet>
+              <strong>${stats.byCategory[category].count}</strong>
+              <ul>
+                ${stats.byCategory[category].trackers.map(tracker => html`
+                  <li>
+                    ${tracker}
+                  </li>
+                `)}
+              </ul>
+            </li>
+          `)}
+        `}
       </ul>
     </main>
   `.css`

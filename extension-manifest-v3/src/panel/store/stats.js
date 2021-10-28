@@ -26,7 +26,8 @@ const Stats = {
     get: async () => {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
       const storage = await chrome.storage.local.get(['tabStats:v1']);
-      return storage['tabStats:v1'].entries[currentTab.id];
+      const tabStats = storage['tabStats:v1'].entries[currentTab.id];
+      return tabStats;
     },
   },
 };

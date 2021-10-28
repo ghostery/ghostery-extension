@@ -7,7 +7,7 @@ define({
   settings: store(Settings),
   stats: store(Stats),
   content: ({ stats, settings }) => html`
-    <panel-header domain=${stats.domain}></panel-header>
+    <panel-header domain=${store.ready(stats) ? stats.domain : ''}></panel-header>
     <panel-body
       stats=${stats}
       settings=${settings}
