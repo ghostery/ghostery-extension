@@ -1,14 +1,16 @@
 try {
+  // The following import must be in sync with the
+  // background scripts in the Safari manifest
+  // (see ../xcode/Shared (Extension)/specific/manifest.json)
   importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
   importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
   importScripts('./adblocker.js');
   importScripts('./storage.js');
+  importScripts('./tab-stats.js');
   importScripts('../common/tracker-wheel.js');
 } catch (e) {
   // on Safari those have to be imported from manifest.json
 }
-
-const tabStats = new Map();
 
 function trackerUrlToCategory(url) {
   // TODO: ignore dataurls
@@ -27,6 +29,10 @@ chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId }) => {
     return;
   }
   tabStats.set(tabId, { urls: [], loadTime: 0 });
+});
+
+chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
+  tabStats.delete(tabId);
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {

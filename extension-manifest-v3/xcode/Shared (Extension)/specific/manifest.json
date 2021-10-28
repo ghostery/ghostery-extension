@@ -60,6 +60,7 @@
 			"vendor/@cliqz/adblocker/adblocker.umd.min.js",
 			"worker/adblocker.js",
 			"worker/storage.js",
+			"worker/tab-stats.js",
 			"common/tracker-wheel.js",
 			"worker/index.js"
 		],
