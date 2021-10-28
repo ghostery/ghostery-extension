@@ -18,6 +18,11 @@ function getTrackerFromUrl(url) {
     const trackerId = storage.get('tracker_domains')[domain];
     const tracker = storage.get('trackers')[trackerId];
     tracker.category = storage.get('categories')[tracker.category_id];
+
+    // TODO: sometimes the information is missing
+    const { name, description } = storage.get('companies')[trackerId] || {};
+    tracker.companyName = name;
+    tracker.companyDescription = description;
     return tracker;
   } catch (e) {
     return null;
