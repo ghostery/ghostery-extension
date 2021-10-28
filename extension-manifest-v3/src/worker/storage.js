@@ -1,18 +1,35 @@
+// This global will be asynchronously filled during startup,
+// and provides access to the resources.
+//
+// Note: The resources are shipped with the extension, so
+// loading from the local filesystem should be fast.
 const storage = new Map();
 
-async function cacheFile(filename, storageKey) {
+const RESOURCES = {
+  categories: 'rule_resources/categories.json',
+  companies: 'rule_resources/companies.json',
+  trackers: 'rule_resources/trackers.json',
+  tracker_domains: 'rule_resources/tracker_domains.json',
+  ads_mapping: 'rule_resources/dnr-ads-network-mapping.json',
+  tracking_mapping: 'rule_resources/dnr-tracking-network-mapping.json',
+  annoyances_mapping: 'rule_resources/dnr-annoyances-network-mapping.json',
+};
+
+async function loadResource(storageKey, filename) {
   const url = chrome.runtime.getURL(filename);
   const request = await fetch(url);
   const json = await request.json();
-  await chrome.storage.local.set({ [storageKey]: json });
   storage.set(storageKey, json);
-  return json;
+
+  // Note: for now, only keep it in memory
+  // await chrome.storage.local.set({ [storageKey]: json });
 }
 
-cacheFile('rule_resources/categories.json', 'categories');
-cacheFile('rule_resources/companies.json', 'companies');
-cacheFile('rule_resources/trackers.json', 'trackers');
-cacheFile('rule_resources/tracker_domains.json', 'tracker_domains');
-cacheFile('rule_resources/dnr-ads-network-mapping.json', 'ads_mapping');
-cacheFile('rule_resources/dnr-tracking-network-mapping.json', 'tracking_mapping');
-cacheFile('rule_resources/dnr-annoyances-network-mapping.json', 'annoyances_mapping');
+const pendingLoads = Promise.all(
+  Object.entries(RESOURCES).map(([key, resource]) => loadResource(key, resource))
+);
+
+// errors should not happen, as we are loading from the local filesystem
+pendingLoads
+  .then(() => console.debug('Finished loading:', storage))
+  .catch((e) => console.error('Unexpected error while loading resources', e));
