@@ -12,23 +12,24 @@ try {
   // on Safari those have to be imported from manifest.json
 }
 
-function trackerUrlToCategory(url) {
-  // TODO: ignore dataurls
+function getTrackerFromUrl(url) {
   try {
     const { domain } = tldts.parse(url);
     const trackerId = storage.get('tracker_domains')[domain];
     const tracker = storage.get('trackers')[trackerId];
-    return storage.get('categories')[tracker.category_id];
+    tracker.category = storage.get('categories')[tracker.category_id];
+    return tracker;
   } catch (e) {
-    return 'unknown';
+    return null;
   }
 }
 
-chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId }) => {
+chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
   }
-  tabStats.set(tabId, { urls: [], loadTime: 0 });
+  const { domain } = tldts.parse(url);
+  tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -38,11 +39,6 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === "dnrUpdate") {
     updateAdblockerEngineStatuses();
-    return;
-  }
-
-  if (msg.action === "getTabStats") {
-    sendResponse(tabStats.get(msg.args[0].tabId));
     return;
   }
 
@@ -62,17 +58,23 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   if (msg.action === "updateTabStats") {
     let stats = tabStats.get(tabId);
+    const urls = msg.args[0].urls
     if (msg.args[0].loadTime && sender.frameId === 0) {
       stats.loadTime = msg.args[0].loadTime;
     }
-    if (msg.args[0].urls) {
-      stats.urls.push(...msg.args[0].urls);
+    if (urls) {
+      urls.forEach(url => {
+        const tracker = getTrackerFromUrl(url);
+        if (tracker) {
+          stats.trackers.push(tracker);
+        }
+      });
     }
     tabStats.set(tabId, stats);
 
     (chrome.browserAction || chrome.action).setIcon({
       tabId,
-      imageData: offscreenImageData(128, stats.urls.map(trackerUrlToCategory)),
+      imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
     });
 
     return;

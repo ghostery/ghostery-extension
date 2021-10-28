@@ -10,7 +10,6 @@ define({
   tag: "simple-view",
   settings: null,
   stats: null,
-  domain: '',
   canvas: ({ stats }) => {
     const el = document.createElement("canvas");
     el.setAttribute('height', 200);
@@ -27,7 +26,7 @@ define({
     // return element
     return el;
   },
-  content: ({ domain, settings, stats, canvas }) => html`
+  content: ({ settings, stats, canvas }) => html`
     <main>
 
       <h1>Privacy protection on this site</h1>
@@ -41,8 +40,7 @@ define({
               onclick=${() => toggleBlocking(toggle)}
               class=${{ disabled: !settings.blockingStatus[toggle]}}
             >
-              <label>${toggle}:</label>
-              <span>${store.ready(stats) ? stats.byToggle[toggle] : 0}</span>
+              <label>${toggle}</label>
             </button>
           `)}
         `}
@@ -51,7 +49,7 @@ define({
       <section class="stats">
         <main>
           ${canvas}
-          <strong>${store.ready(stats) ? stats.all : 0}</strong>
+          <strong>${store.ready(stats) ? stats.trackers.length : 0}</strong>
         </main>
 
         <aside>
@@ -68,7 +66,7 @@ define({
       </section>
 
       <section class="buttons">
-        <a href="https://www.whotracks.me/websites/${domain}.html" target="_blank">Statistics report</a>
+        <a href="https://www.whotracks.me/websites/${stats.domain}.html" target="_blank">Statistics report</a>
         <a onclick="${toggleDetailedView}">Tracker list</a>
       </section>
 
