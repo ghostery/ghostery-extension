@@ -4,19 +4,26 @@ function toggleDetailedView(host) {
   host.showDetailedView = !host.showDetailedView;
 }
 
+const IS_SIMPLE_VIEW_DEFAULT = true;
+
 define({
   tag: "panel-body",
   settings: null,
   stats: null,
   domain: '',
   showDetailedView: {
-    set: ({ content }, value) => {
+    get: (_host, value) => {
+      if (typeof value === "undefined") {
+        return !IS_SIMPLE_VIEW_DEFAULT;
+      }
+      return value;
+    },
+    set: (host, value) => {
       if (value) {
-        const el = content();
-        const simpleView = el.querySelector('simple-view');
-        const detailedView = el.querySelector('detailed-view');
-        detailedView.style.width = `${simpleView.clientWidth}px`;
-        detailedView.style.height = `${simpleView.clientHeight}px`;
+        const simpleView = host.querySelector('simple-view');
+        host.style.display = 'block';
+        host.style.width = `${simpleView.clientWidth}px`;
+        host.style.height = `${simpleView.clientHeight}px`;
       }
       return value;
     }
