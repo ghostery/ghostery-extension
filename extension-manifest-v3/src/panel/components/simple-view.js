@@ -1,5 +1,6 @@
 import { html, define, store, dispatch } from '/hybrids.js';
-import { toggleBlocking } from '../store/settings.js';
+import "./simple-view/tracker-wheel.js";
+import "./simple-view/toggle-switch.js";
 import { toggles } from '../../common/rulesets.js';
 import { sortCategories, getCategoryName } from '../utils/categories.js';
 import { t } from '../utils/i18n.js';
@@ -12,22 +13,7 @@ define({
   tag: "simple-view",
   settings: null,
   stats: null,
-  canvas: ({ stats }) => {
-    const el = document.createElement("canvas");
-    el.setAttribute('height', 180);
-    el.setAttribute('width', 180);
-
-    const context = el.getContext('2d');
-
-    const categories = store.ready(stats)
-      ? stats.trackers.map(t => t.category)
-      : ['unknown'];
-    draw(context, categories);
-
-    // return element
-    return el;
-  },
-  content: ({ settings, stats, canvas }) => html`
+  content: ({ settings, stats }) => html`
     <main>
 
       <h1>${t('privacy_protection')}</h1>
@@ -35,22 +21,14 @@ define({
       <section class="toggles">
         ${store.pending(settings) && `Loading...`}
 
-        ${store.ready(settings) && html`
-          ${toggles.map((toggle) => html`
-            <button
-              onclick=${() => toggleBlocking(toggle)}
-              class=${{ disabled: !settings.blockingStatus[toggle]}}
-            >
-              <label>${t(`block_toggle_${toggle}`)}</label>
-            </button>
-          `)}
-        `}
+        ${store.ready(settings) && toggles.map((toggle) => html`
+          <toggle-switch toggle=${toggle} settings=${settings}></toggle-switch>
+        `)}
       </section>
 
       <section class="stats">
         <main>
-          ${canvas}
-          <strong>${store.ready(stats) ? stats.trackers.length : 0}</strong>
+          <tracker-wheel stats=${stats}></tracker-wheel>
         </main>
 
         <aside>
