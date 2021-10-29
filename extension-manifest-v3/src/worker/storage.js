@@ -10,9 +10,6 @@ const RESOURCES = {
   companies: 'rule_resources/companies.json',
   trackers: 'rule_resources/trackers.json',
   tracker_domains: 'rule_resources/tracker_domains.json',
-  ads_mapping: 'rule_resources/dnr-ads-network-mapping.json',
-  tracking_mapping: 'rule_resources/dnr-tracking-network-mapping.json',
-  annoyances_mapping: 'rule_resources/dnr-annoyances-network-mapping.json',
 };
 
 async function loadResource(storageKey, filename) {
