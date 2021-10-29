@@ -9,7 +9,6 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
-  width: 400px;
   background-color: rgb(246, 246, 248);
   color: var(--text);
 }
@@ -48,8 +47,10 @@ panel-header .feather {
 
 /* BODY */
 
-panel-body > main {
+panel-body simple-view, panel-body detailed-view {
   padding: 5px;
+  overflow: hidden;
+  box-sizing:border-box;
 }
 
 panel-body h1 {
@@ -71,6 +72,10 @@ panel-body section.toggles button {
   cursor: pointer;
 }
 
+panel-body section.toggles button label {
+  cursor: pointer;
+}
+
 panel-body section.toggles button.disabled {
   background: #999;
 }
@@ -89,6 +94,8 @@ panel-body section.buttons a, panel-body section.buttons a:visited {
   text-align: center;
   border: 1px solid gray;
   border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 panel-body section.stats {
@@ -102,6 +109,7 @@ panel-body section.stats main {
   display: flex;
   width: 200px;
   height: 200px;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
 }
