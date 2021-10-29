@@ -1,6 +1,7 @@
 import { html, define, store, dispatch } from '/hybrids.js';
 import { toggleBlocking } from '../store/settings.js';
 import { toggles } from '../../common/rulesets.js';
+import { sortCategories } from '../utils/categories.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
@@ -12,8 +13,8 @@ define({
   stats: null,
   canvas: ({ stats }) => {
     const el = document.createElement("canvas");
-    el.setAttribute('height', 200);
-    el.setAttribute('width', 200);
+    el.setAttribute('height', 180);
+    el.setAttribute('width', 180);
 
     const context = el.getContext('2d');
 
@@ -53,13 +54,15 @@ define({
 
         <aside>
           <ul>
-            ${Object.keys(store.ready(stats) ? stats.byCategory : {}).map((category) => html`
-              <li>
-                ${category}:
-                <category-bullet category=${category} size=${20}></category-bullet>
-                <strong>${store.ready(stats) ? stats.byCategory[category].count : 0}</strong>
-              </li>
-            `)}
+            ${store.ready(stats) && html`
+              ${sortCategories(Object.keys(stats.byCategory)).map((category) => html`
+                <li class="category">
+                  <category-bullet category=${category} size=${8}></category-bullet>
+                  <label>${category}</label>
+                  <strong>${stats.byCategory[category].count}</strong>
+                </li>
+              `)}
+            `}
           </ul>
         </aside>
       </section>

@@ -103,12 +103,11 @@ panel-body section.stats {
   flex-direction: row;
 }
 
-
 panel-body section.stats main {
   position: relative;
   display: flex;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
@@ -121,6 +120,32 @@ panel-body section.stats main canvas {
 }
 
 panel-body section.stats main strong {
+  color: var(--black);
+}
+
+panel-body section.stats ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  list-style-type: none;
+  list-style: none none inside;
+}
+
+panel-body section.stats .category {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+panel-body section.stats .category label {
+  margin: 0 5px;
+}
+
+panel-body section.stats .category strong {
   color: var(--black);
 }
 

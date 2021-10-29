@@ -1,5 +1,6 @@
 
 import { html, define, dispatch, store } from '/hybrids.js';
+import { sortCategories } from '../utils/categories.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
@@ -16,7 +17,7 @@ define({
     <main>
       <ul>
         ${store.ready(stats) && html`
-          ${Object.keys(stats.byCategory).map(category => html`
+          ${sortCategories(Object.keys(stats.byCategory)).map(category => html`
             <li>
               <label>${category}</label>
               <category-bullet category=${category} size=${20}></category-bullet>
