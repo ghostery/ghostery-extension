@@ -22,19 +22,7 @@ const Settings = {
 export async function toggleBlocking(type) {
   const settings = store.get(Settings);
   const rulesetId = rulesetIds.find(r => r.startsWith(type));
-
   const currentStatus = settings.blockingStatus[type];
-
-  if (currentStatus) {
-    await chrome.declarativeNetRequest.updateEnabledRulesets({
-      disableRulesetIds: [rulesetId],
-    });
-  } else {
-    await chrome.declarativeNetRequest.updateEnabledRulesets({
-      enableRulesetIds: [rulesetId],
-    });
-  }
-  chrome.runtime.sendMessage({ action: 'dnrUpdate' });
 
   store.set(Settings, {
     ...settings,
@@ -43,6 +31,11 @@ export async function toggleBlocking(type) {
       [type]: !currentStatus
     }
   });
+
+  await chrome.declarativeNetRequest.updateEnabledRulesets({
+    [currentStatus ? 'disableRulesetIds' : 'enableRulesetIds']: [rulesetId],
+  });
+  await chrome.runtime.sendMessage({ action: 'dnrUpdate' });
 }
 
 export default Settings;
