@@ -4,6 +4,7 @@ try {
   // (see ../xcode/Shared (Extension)/specific/manifest.json)
   importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
   importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
+  importScripts('../common/lodash-debounce.js');
   importScripts('./adblocker.js');
   importScripts('./storage.js');
   importScripts('./tab-stats.js');
@@ -29,12 +30,48 @@ function getTrackerFromUrl(url) {
   }
 }
 
+// Refreshing the tracker wheel:
+// * Immediately draw it when the first data comes in
+// * After that, switch to debounced mode
+//
+// "immediate mode" will also be reentered after navigation events.
+let updateIcon = updateIconNow;
+
+function updateIconNow(tabId, stats) {
+  (chrome.browserAction || chrome.action).setIcon({
+    tabId,
+    imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
+  });
+  resetUpdateIconDebounceMode();
+}
+
+function resetUpdateIconImmediateMode() {
+  if (updateIcon && updateIcon.cancel) {
+    updateIcon.cancel();
+  }
+  updateIcon = updateIconNow;
+}
+
+function resetUpdateIconDebounceMode() {
+  if (updateIcon && updateIcon.cancel) {
+    updateIcon.cancel();
+  }
+
+  // effect: refresh 250ms after the last event, but force a refresh every second
+  updateIcon = _.debounce((...args) => {
+    updateIconNow(...args);
+  }, 250, {
+    maxWait: 1000,
+  });
+}
+
 chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
   }
   const { domain } = tldts.parse(url);
   tabStats.set(tabId, { domain, trackers: [], loadTime: 0 });
+  resetUpdateIconImmediateMode();
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
@@ -62,8 +99,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   const tabId = sender.tab.id;
 
   if (msg.action === "updateTabStats") {
-    let stats = tabStats.get(tabId);
-    const urls = msg.args[0].urls
+    const stats = tabStats.get(tabId);
+    const urls = msg.args[0].urls;
     if (msg.args[0].loadTime && sender.frameId === 0) {
       stats.loadTime = msg.args[0].loadTime;
     }
@@ -77,11 +114,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     tabStats.set(tabId, stats);
 
-    (chrome.browserAction || chrome.action).setIcon({
-      tabId,
-      imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
-    });
-
+    // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).
+    // If we render the icon, it will be empty. The if-guard has the
+    // effect that in most cases, you will see Ghosty as the icon.
+    // For the moment, that looks better then an empty icon. :-)
+    if (stats.trackers.length > 0) {
+      updateIcon(tabId, stats);
+    }
     return;
   }
 
