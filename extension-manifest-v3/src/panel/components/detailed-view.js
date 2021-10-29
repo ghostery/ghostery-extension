@@ -14,22 +14,31 @@ define({
   tag: "category-with-trackers",
   category: '',
   stats: null,
-  shouldShowMore: false,
-  companies: ({ stats, category }) => {
+  shouldShowMore: true,
+  trackerCounts: ({ stats, category }) => {
     const { trackers } = stats.byCategory[category];
+    const _trackerCounts = trackers.reduce((all, current) => ({
+      ...all,
+      [current.id]: (all[current.id] || 0) + 1
+    }), {});
+    return Object.keys(_trackerCounts)
+      .sort()
+      .map(tracker => [tracker, _trackerCounts[tracker]]);
   },
-  render: ({ category, stats, shouldShowMore, companies }) => html`
+  render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
     <section>
       <category-bullet category=${category} size=${20}></category-bullet>
       <label>${category}</label>
-      <strong>${stats.byCategory[category].count}</strong>
+      <strong class="count">${stats.byCategory[category].count} DETECTED</strong>
       <buttom onclick="${toggleShowMore}">more</buttom>
     </section>
     ${shouldShowMore && html`
       <ul>
-        ${stats.byCategory[category].trackers.map(tracker => html`
+        ${trackerCounts.map(([tracker, count]) => html`
           <li>
-            ${tracker}
+            ${stats.byTracker[tracker].name}
+            <strong>${count}</strong>
+            <a href="https://whotracks.me/trackers/${tracker}.html" target="_blank">Details</a>
           </li>
         `)}
       </ul>
@@ -50,6 +59,10 @@ define({
     :host section button {
       justify-self: flex-end;
       align-self: flex-end;
+    }
+    .count {
+      flex: 1;
+      text-align: right;
     }
   `,
 });

@@ -19,7 +19,7 @@ const Stats = {
   byTracker: ({ trackers }) => {
     return trackers.reduce((all, current) => ({
       ...all,
-      [current.id]: (all[current.id] || 0) + 1,
+      [current.id]: current,
     }), {});
   },
   [store.connect] : {
