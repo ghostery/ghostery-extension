@@ -38,7 +38,12 @@ function degToRad(degree) {
 }
 
 function draw(ctx, categories) {
-  const sortedCategoties = categories.sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b))
+  // Group trackers by sorted category
+  // (JavaScript objects will preserve the order)
+  const groupedCategories = {};
+  CATEGORY_ORDER.forEach(c => groupedCategories[c] = 0);
+  categories.forEach(c => groupedCategories[c] += 1);
+
   const { canvas } = ctx;
   const { width } = canvas;
   const center = width / 2;
@@ -48,8 +53,9 @@ function draw(ctx, categories) {
   const radius = width / 2 - ctx.lineWidth;
 
   let position = -90;
-  sortedCategoties.forEach(category => {
-      const newPosition = position + increment;
+  for (const [category, numTrackers] of Object.entries(groupedCategories)) {
+    if (numTrackers > 0) {
+      const newPosition = position + numTrackers * increment;
       const color = CATEGORY_COLORS[category];
       ctx.strokeStyle = color;
       ctx.beginPath();
@@ -58,11 +64,12 @@ function draw(ctx, categories) {
         center,
         radius,
         degToRad(position),
-        degToRad(newPosition),
+        Math.min(degToRad(newPosition + 1), 2 * Math.PI),
       );
       ctx.stroke();
       position = newPosition;
-    });
+    }
+  }
 }
 
 function offscreenImageData(size, categories) {
