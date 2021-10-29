@@ -1,6 +1,7 @@
 
 import { html, define, dispatch, store } from '/hybrids.js';
-import { sortCategories } from '../utils/categories.js';
+import { sortCategories, getCategoryName } from '../utils/categories.js';
+import { t } from '../utils/i18n.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
@@ -28,8 +29,8 @@ define({
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
     <section>
       <category-bullet category=${category} size=${20}></category-bullet>
-      <label>${category}</label>
-      <strong class="count">${stats.byCategory[category].count} DETECTED</strong>
+      <label>${getCategoryName(category)}</label>
+      <strong class="count">${stats.byCategory[category].count} ${t('tracker_detected')}</strong>
       <buttom onclick="${toggleShowMore}">more</buttom>
     </section>
     ${shouldShowMore && html`
@@ -38,7 +39,9 @@ define({
           <li>
             ${stats.byTracker[tracker].name}
             <strong>${count}</strong>
-            <a href="https://whotracks.me/trackers/${tracker}.html" target="_blank">Details</a>
+            <a href="https://whotracks.me/trackers/${tracker}.html" target="_blank">
+              ${t('tracker_details')}
+            </a>
           </li>
         `)}
       </ul>
@@ -72,8 +75,8 @@ define({
   stats: null,
   render: ({ stats }) => html`
     <header>
-      <button onclick="${toggleDetailedView}">back</button>
-      <h1>Detailed View</h1>
+      <button onclick="${toggleDetailedView}">${t('back')}</button>
+      <h1>${t('detailed_view')}</h1>
     </header>
     <main>
       <ul>

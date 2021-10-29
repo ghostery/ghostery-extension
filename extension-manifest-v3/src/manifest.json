@@ -20,7 +20,7 @@
 			"48": "images/icon48.png",
 			"128": "images/icon128.png"
 		},
-		"default_title": "__MSG_default_title__",
+		"default_title": "Ghostery",
 		"default_popup": "panel/index.html"
 	},
 	"options_page": "options/index.html",
