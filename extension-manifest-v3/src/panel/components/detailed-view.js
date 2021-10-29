@@ -30,7 +30,7 @@ define({
     <section>
       <category-bullet category=${category} size=${20}></category-bullet>
       <label>${getCategoryName(category)}</label>
-      <strong class="count">${stats.byCategory[category].count} ${t('tracker_detected')}</strong>
+      <strong class="count">${stats.byCategory[category].count} ${t('trackers_detected')}</strong>
       <buttom onclick="${toggleShowMore}">more</buttom>
     </section>
     ${shouldShowMore && html`
