@@ -2122,7 +2122,7 @@
 	  "message": "Priority Support"
 	},
 	"privacy_protection": {
-		"message": "Privacy Protection on this site"
+		"message": "Privacy protection on this site"
 	},
 	"block_toggle_ads": {
 		"message": "Block Ads"
@@ -2131,7 +2131,7 @@
 		"message": "Block Trackers"
 	},
 	"block_toggle_annoyances": {
-		"message": "Block Annoyences"
+		"message": "Block Annoyances"
 	},
 	"statistical_report": {
 		"message": "Statistical Report"

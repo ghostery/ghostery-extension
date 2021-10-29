@@ -28,6 +28,11 @@ define({
       </ul>
     </main>
   `.css`
+    h1 {
+      color: var(--black);
+      text-align: center;
+    }
+
     header button {
       position: absolute;
     }
