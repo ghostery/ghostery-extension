@@ -1,16 +1,29 @@
 :root {
-  --text: #B9BBBE;
-  --black: black;
+  --text: #838B90;
+  --black: #252525;
   --ghostery: #00AEF0;
+  --deep-blue: #0D8FE7;
+}
+
+body, button {
+  font-family: "Roboto", "Open Sans", Arial, Helvetica, sans-serif !important;
 }
 
 body {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
-  background-color: rgb(246, 246, 248);
+  background-color: #F8F8F8;
+  font-size: 13px;
   color: var(--text);
+}
+
+canvas {
+  /* all four are needed to support the most browsers */
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 /* HEADER */
@@ -21,7 +34,19 @@ panel-header header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 10px;
+  padding: 9px 12px;
+  position: relative;
+}
+
+panel-header header .notch {
+  background-color: #F8F6F6;
+  border-radius: 3px;
+  transform: rotate(45deg);
+  width: 18px;
+  height: 18px;
+  bottom: -12px;
+  position: absolute;
+  left: calc(50% - 10px);
 }
 
 panel-header header a {
@@ -36,91 +61,75 @@ panel-header .domain-name {
   white-space: nowrap;
   overflow: hidden;
   flex-grow: 1;
+  font-size: 15px;
   text-align: center;
 }
 
 panel-header .feather {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   color: white;
 }
 
 /* BODY */
 
 panel-body simple-view, panel-body detailed-view {
-  padding: 5px;
+  padding: 12px;
   overflow: hidden;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 panel-body h1 {
+  font-size: 20px;
   text-align: center;
   color: var(--black);
+  white-space: nowrap;
+  font-weight: 600;
+  margin: 0 10px;
 }
 
 panel-body section.toggles {
-  display: flex;
-  flex-direction: row;
-}
-
-panel-body section.toggles button {
-  background-color: white;
-  border-radius: 15px;
-  padding: 10px;
-  border: 1px solid gray;
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-panel-body section.toggles button label {
-  cursor: pointer;
-}
-
-panel-body section.toggles button.disabled {
-  background: #999;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
 }
 
 panel-body section.buttons {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  margin-top: 10px;
 }
 
 panel-body section.buttons a, panel-body section.buttons a:visited {
-  background: white;
-  color: var(--ghostery);
-  padding: 5px 10px;
+  color: var(--deep-blue);
+  padding: 10px 17px;
   flex: 1;
-  margin: 5px;
   text-align: center;
-  border: 1px solid gray;
-  border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 7.4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+panel-body section.buttons a svg {
+  width: 10px;
+  height: 10px;
+  margin-left: 3px;
 }
 
 panel-body section.stats {
-  display: flex;
-  flex-direction: row;
-}
-
-panel-body section.stats main {
-  position: relative;
-  display: flex;
-  width: 180px;
-  height: 180px;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-}
-
-panel-body section.stats main canvas {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-
-panel-body section.stats main strong {
-  color: var(--black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
 }
 
 panel-body section.stats ul {
@@ -143,20 +152,30 @@ panel-body section.stats .category {
 
 panel-body section.stats .category label {
   margin: 0 5px;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 panel-body section.stats .category strong {
   color: var(--black);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
 }
 
 /* FOOTER */
 
 panel-footer footer {
-  border-top: 1px solid var(--text);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px;
+  padding: 9px 12px;
+  font-size: 11.5px;
+}
+
+panel-footer footer a {
+  white-space: nowrap;
 }
 
 panel-footer footer .dot {
@@ -177,5 +196,8 @@ panel-footer footer .subscribe {
 }
 
 panel-footer footer .subscribe svg {
-  margin-right: 5px;
+  margin-left: 10px;
+  margin-right: 3px;
+  width: 13px;
+  height: 13px;
 }

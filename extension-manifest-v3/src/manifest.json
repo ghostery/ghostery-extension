@@ -27,6 +27,7 @@
 	"content_scripts": [
 		{
 			"matches": ["*://*/*"],
+			"run_at": "document_start",
 			"js": [
 				"content_scripts/TrackingProtectionStats.js",
 				"content_scripts/stats.js"
@@ -34,6 +35,7 @@
 		},
 		{
 			"matches": ["*://*/*"],
+			"run_at": "document_start",
 			"js": [
 				"vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
 				"content_scripts/cosmetics.js"

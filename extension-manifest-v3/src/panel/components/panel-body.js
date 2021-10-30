@@ -21,9 +21,9 @@ define({
     set: (host, value) => {
       if (value) {
         const simpleView = host.querySelector('simple-view');
-        host.style.display = 'block';
-        host.style.width = `${simpleView.clientWidth}px`;
-        host.style.height = `${simpleView.clientHeight}px`;
+        const detailedView = host.querySelector('detailed-view');
+        detailedView.style.width = `${simpleView.clientWidth}px`;
+        detailedView.style.height = `${simpleView.clientHeight}px`;
       }
       return value;
     }

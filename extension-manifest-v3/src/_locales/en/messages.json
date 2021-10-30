@@ -2120,5 +2120,41 @@
 	},
 	"plus_subscriber_perk_priority_support" : {
 	  "message": "Priority Support"
+	},
+	"privacy_protection": {
+		"message": "Privacy protection on this site"
+	},
+	"block_toggle_ads": {
+		"message": "Block Ads"
+	},
+	"block_toggle_tracking": {
+		"message": "Block Trackers"
+	},
+	"block_toggle_annoyances": {
+		"message": "Block Annoyances"
+	},
+	"statistical_report": {
+		"message": "Statistical Report"
+	},
+	"subscribe": {
+		"message": "Subscribe"
+	},
+	"back": {
+		"message": "Back"
+	},
+	"trackers_detected": {
+		"message": "Detected"
+	},
+	"tracker_details": {
+		"message": "Tracker Details"
+	},
+	"category_misc": {
+		"message": "Miscellaneous"
+	},
+	"category_cdn": {
+		"message": "CDN"
+	},
+	"category_email": {
+		"message": "Email"
 	}
 }

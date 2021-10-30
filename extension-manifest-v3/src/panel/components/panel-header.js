@@ -35,6 +35,7 @@ define({
       >
         ${settings}
       </a>
+      <div class="notch"></div>
     </header>
   `,
 });

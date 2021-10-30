@@ -30,6 +30,16 @@ function getTrackerFromUrl(url) {
   }
 }
 
+
+let options = {};
+
+async function updateOptions() {
+  const storage = await chrome.storage.local.get(['options']);
+  options = storage.options || {};
+}
+
+updateOptions();
+
 // Refreshing the tracker wheel:
 // * Immediately draw it when the first data comes in
 // * After that, switch to debounced mode
@@ -98,6 +108,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   const tabId = sender.tab.id;
 
+  if (msg.action === "updateOptions") {
+    updateOptions();
+  }
+
   if (msg.action === "updateTabStats") {
     const stats = tabStats.get(tabId);
     const urls = msg.args[0].urls;
@@ -114,13 +128,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     tabStats.set(tabId, stats);
 
-    // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).
-    // If we render the icon, it will be empty. The if-guard has the
-    // effect that in most cases, you will see Ghosty as the icon.
-    // For the moment, that looks better then an empty icon. :-)
-    if (stats.trackers.length > 0) {
-      updateIcon(tabId, stats);
+    if (!options.trackerWheelDisabled) {
+      // TODO: tracker stats can be empty (e.g. https://www.whotracks.me/).
+      // If we render the icon, it will be empty. The if-guard has the
+      // effect that in most cases, you will see Ghosty as the icon.
+      // For the moment, that looks better then an empty icon. :-)
+      if (stats.trackers.length > 0) {
+        updateIcon(tabId, stats);
+      }
     }
+
     return;
   }
 
