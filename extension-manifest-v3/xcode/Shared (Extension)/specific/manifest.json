@@ -60,6 +60,7 @@
 		"scripts": [
 			"vendor/tldts/index.umd.min.js",
 			"vendor/@cliqz/adblocker/adblocker.umd.min.js",
+			"common/lodash-debounce.js",
 			"worker/adblocker.js",
 			"worker/storage.js",
 			"worker/tab-stats.js",
