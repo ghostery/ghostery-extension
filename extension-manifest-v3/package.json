@@ -8,7 +8,12 @@
     "build": "web-ext build",
     "start": "web-ext run --target=chromium"
   },
-  "author": "",
+  "author": {
+    "name": "Ghostery GmbH",
+    "email": "info@ghostery.com",
+    "url": "https://www.ghostery.com"
+  },
+  "license": "MPL-2.0",
   "devDependencies": {
     "node-fetch": "^2.6.5",
     "rimraf": "^3.0.2",
