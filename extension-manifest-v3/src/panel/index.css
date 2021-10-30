@@ -2,6 +2,7 @@
   --text: #838B90;
   --black: #252525;
   --ghostery: #00AEF0;
+  --deep-blue: #0D8FE7;
 }
 
 body, button {
@@ -75,7 +76,7 @@ panel-header .feather {
 panel-body simple-view, panel-body detailed-view {
   padding: 12px;
   overflow: hidden;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 panel-body h1 {
@@ -103,8 +104,8 @@ panel-body section.buttons {
 }
 
 panel-body section.buttons a, panel-body section.buttons a:visited {
-  color: var(--ghostery);
-  padding: 12px 17px;
+  color: var(--deep-blue);
+  padding: 10px 17px;
   flex: 1;
   text-align: center;
   cursor: pointer;

@@ -2,6 +2,7 @@
 import { html, define, dispatch, store } from '/hybrids.js';
 import { getCategoryName } from '../../utils/categories.js';
 import { t } from '../../utils/i18n.js';
+import { chavronDown, externalLink } from '../icons.js';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
@@ -11,7 +12,7 @@ define({
   tag: "category-with-trackers",
   category: '',
   stats: null,
-  shouldShowMore: true,
+  shouldShowMore: false,
   trackerCounts: ({ stats, category }) => {
     const { trackers } = stats.byCategory[category];
     const _trackerCounts = trackers.reduce((all, current) => ({
@@ -23,20 +24,20 @@ define({
       .map(tracker => [tracker, _trackerCounts[tracker]]);
   },
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
-    <section>
-      <category-bullet category=${category} size=${20}></category-bullet>
+    <main>
+      <category-bullet category=${category} size=${12}></category-bullet>
       <label>${getCategoryName(category)}</label>
       <strong class="count">${stats.byCategory[category].count} ${t('trackers_detected')}</strong>
-      <buttom onclick="${toggleShowMore}">more</buttom>
-    </section>
+      <button onclick="${toggleShowMore}" class="${{ more: shouldShowMore }}">${chavronDown}</button>
+    </main>
     ${shouldShowMore && html`
       <ul>
         ${trackerCounts.map(([tracker, count]) => html`
           <li>
-            ${stats.byTracker[tracker].name}
+            <label>${stats.byTracker[tracker].name}</label>
             <strong>${count}</strong>
             <a href="https://whotracks.me/trackers/${tracker}.html" target="_blank">
-              ${t('tracker_details')}
+              ${t('tracker_details')} ${externalLink}
             </a>
           </li>
         `)}
@@ -48,20 +49,88 @@ define({
       border-radius: 8px;
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      padding: 10px;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
     }
-    :host section {
+    main {
       display: flex;
       flex-direction: row;
       align-items: center;
     }
-    :host section button {
+    main button {
       justify-self: flex-end;
       align-self: flex-end;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      right: -5px;
+      padding: 5px;
+    }
+    main button svg {
+      height: 18px;
+    }
+    label {
+      margin: 0 7px;
+      font-size: 17px;
+      line-height: 20px;
+      color: var(--black);
+    }
+    strong {
+      text-transform: uppercase;
+      color: var(--deep-blue);
+      font-size: 11.5px;
+      font-weight: 500;
     }
     .count {
       flex: 1;
       text-align: right;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      list-style: none none inside;
+    }
+    li {
+      padding-left: 20px;
+      margin: 10px 0px;
+      display: flex;
+      flex-direction: row;
+    }
+    li label {
+      margin: 0 5px;
+      font-size: 13px;
+      line-height: 16px;
+    }
+    li strong {
+      color: var(--deep-blue);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 16px;
+    }
+    li a, li a:visited {
+      color: var(--text);
+      text-align: right;
+      flex: 1;
+      text-decoration: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    li a svg {
+      height: 10px;
+    }
+    button svg {
+      color: var(--deep-blue);
+    }
+    button.more svg {
+      transform: rotate(180deg);
     }
   `,
 });

@@ -3,6 +3,7 @@ import { html, define, dispatch, store } from '/hybrids.js';
 import './detailed-view/category-with-trackers.js';
 import { sortCategories } from '../utils/categories.js';
 import { t } from '../utils/i18n.js';
+import { chevronLeft } from './icons.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
@@ -12,29 +13,74 @@ define({
   tag: "detailed-view",
   stats: null,
   render: ({ stats }) => html`
-    <header>
-      <button onclick="${toggleDetailedView}">${t('back')}</button>
-      <h1>${t('detailed_view')}</h1>
-    </header>
-    <main>
-      <ul>
-        ${store.ready(stats) && html`
-          ${sortCategories(Object.keys(stats.byCategory)).map(category => html`
-            <li class="category">
-              <category-with-trackers category=${category} stats=${stats}></category-with-trackers>
-            </li>
-          `)}
-        `}
-      </ul>
-    </main>
+    <div class="wrapper">
+      <header>
+        <button onclick="${toggleDetailedView}">${chevronLeft} ${t('back')}</button>
+        <h1>${t('detailed_view')}</h1>
+        <div></div>
+      </header>
+      <main>
+        <ul>
+          ${store.ready(stats) && html`
+            ${sortCategories(Object.keys(stats.byCategory)).map(category => html`
+              <li class="category">
+                <category-with-trackers category=${category} stats=${stats}></category-with-trackers>
+              </li>
+            `)}
+          `}
+        </ul>
+      </main>
+    </div>
+
   `.css`
+    .wrapper {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: calc(100% + 10px);
+    }
     h1 {
       color: var(--black);
+    }
+    header {
+      display: flex;
+      position: relative;
+      margin-bottom: 20px;
+      margin-top: 7px;
+      align-items: center;
+    }
+
+    header h1 {
       text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0;
+      flex: 1;
     }
 
     header button {
+      background: #FFFFFF;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+      border-radius: 7.4px;
+      border: none;
+      display: flex;
+      align-items: center;
       position: absolute;
+      color: var(--deep-blue);
+      padding: 10px 8px;
+      cursor: pointer;
+    }
+
+    header button svg {
+      height: 18px;
+      margin-left: -6px;
+    }
+
+    main {
+      overflow: scroll;
+      width: 100%;
     }
 
     ul {

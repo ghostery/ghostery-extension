@@ -2147,5 +2147,14 @@
 	},
 	"tracker_details": {
 		"message": "Tracker Details"
+	},
+	"category_misc": {
+		"message": "Miscellaneous"
+	},
+	"category_cdn": {
+		"message": "CDN"
+	},
+	"category_email": {
+		"message": "Email"
 	}
 }

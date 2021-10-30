@@ -42,7 +42,6 @@ define({
       text-align: left;
       box-shadow: -2px -4px 6px rgba(255, 255, 255, 0.64), 0px 2px 4px rgba(0, 0, 0, 0.1);
       border: 0.5px solid #D0D0D0;
-      border-bottom-width: 0px;
       color: var(--black);
       display: flex;
       flex-direction: column;
@@ -62,7 +61,7 @@ define({
     }
 
     button svg {
-      color: var(--ghostery);
+      color: var(--deep-blue);
       margin-bottom: 5px;
     }
 
