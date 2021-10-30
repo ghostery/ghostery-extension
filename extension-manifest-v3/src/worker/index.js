@@ -29,6 +29,15 @@ function getTrackerFromUrl(url) {
   }
 }
 
+let options = {};
+
+async function updateOptions() {
+  const storage = await chrome.storage.local.get(['options']);
+  options = storage.options || {};
+}
+
+updateOptions();
+
 chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
@@ -61,6 +70,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   const tabId = sender.tab.id;
 
+  if (msg.action === "updateOptions") {
+    updateOptions();
+  }
+
   if (msg.action === "updateTabStats") {
     let stats = tabStats.get(tabId);
     const urls = msg.args[0].urls
@@ -77,10 +90,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     tabStats.set(tabId, stats);
 
-    (chrome.browserAction || chrome.action).setIcon({
-      tabId,
-      imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
-    });
+    if (!options.trackerWheelDisabled) {
+      (chrome.browserAction || chrome.action).setIcon({
+        tabId,
+        imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
+      });
+    }
 
     return;
   }

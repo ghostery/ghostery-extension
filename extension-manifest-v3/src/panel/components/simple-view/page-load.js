@@ -6,7 +6,6 @@ const cirle = svg`<svg width="73" height="72" viewBox="0 0 73 72" fill="none" xm
 </svg>`;
 
 function getStatsColor(stats) {
-  console.warn("XXX laod", stats.loadTime)
   if (stats.loadTime < 100) {
     return '#779D3E';
   } else if (stats.loadTime < 500) {
