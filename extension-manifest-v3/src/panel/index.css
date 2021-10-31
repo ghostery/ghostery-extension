@@ -176,6 +176,7 @@ panel-footer footer {
 
 panel-footer footer a {
   white-space: nowrap;
+  cursor: pointer;
 }
 
 panel-footer footer .dot {

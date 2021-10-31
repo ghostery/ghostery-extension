@@ -20,12 +20,12 @@ define({
   tag: "panel-footer",
   content: () => html`
     <footer>
-      <a href="mailto:support@ghostery.com?body=PLEASE%20INCLUDE%20A%20DESCRIPTION%20AND%20A%20PICTURE%20OF%20THE%20ISSUE%20YOU%20ARE%20EXPERIENCING&subject=Broken Page Report">
+      <a href="https://www.ghostery.com/support" target="_blank">
         ${t('panel_menu_report_broken_site')}
       </a>
       <span class="dot">&middot;</span>
-      <a href="https://www.ghostery.com/submit-a-tracker">${t('panel_menu_submit_tracker')}</a>
-      <a href="https://www.ghostery.com/" class="subscribe">${heart} <span>${t('subscribe')}</span></a>
+      <a href="https://www.ghostery.com/submit-a-tracker" target="_blank">${t('panel_menu_submit_tracker')}</a>
+      <a href="https://www.ghostery.com/" target="_blank" class="subscribe">${heart} <span>${t('subscribe')}</span></a>
     </footer>
   `,
 });

@@ -22,6 +22,37 @@ function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
 }
 
+function wtmLink(stats) {
+  const placeholder = html`<span></span>`;
+  if (!store.ready(stats)) {
+    return placeholder;
+  }
+  const { domain } = stats;
+  const siteListUrl = chrome.runtime.getURL('rule_resources/sites.json');
+  const url = `https://www.whotracks.me/websites/${domain}.html`;
+  const link = html`
+    <a href="${url}" target="_blank">
+      ${t('statistical_report')} ${externalLink}
+    </a>
+  `;
+  const promise = new Promise(async (resolve, reject) => {
+    const request = await fetch(siteListUrl);
+    const json = await request.json();
+    if (json.indexOf(domain) > -1) {
+      resolve();
+    } else {
+      reject();
+    }
+  }).then(
+    () => link,
+    () => placeholder,
+  );
+  return html.resolve(
+    promise,
+    placeholder,
+  );
+}
+
 define({
   tag: "simple-view",
   settings: null,
@@ -52,9 +83,9 @@ define({
       </section>
 
       <section class="buttons">
-        <a href="https://www.whotracks.me/websites/${store.ready(stats) ? stats.domain : ''}.html" target="_blank">
-          ${t('statistical_report')} ${externalLink}
-        </a>
+        <span>
+          ${wtmLink(stats)}
+        </span>
         <a onclick="${toggleDetailedView}">${t('detailed_view')} ${chevronRight}</a>
       </section>
 

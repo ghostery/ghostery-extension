@@ -25,7 +25,9 @@ define({
     context.imageSmoothingQuality = 'high';
 
     const categories = store.ready(stats)
-      ? stats.trackers.map(t => t.category)
+      ? stats.trackers.length > 0
+        ? stats.trackers.map(t => t.category)
+        : ['unknown']
       : ['unknown'];
     draw(context, categories);
 
