@@ -94,7 +94,7 @@ class HeaderMenu extends React.Component {
 	 */
 	clickSubmitTracker = () => {
 		sendMessage('openNewTab', {
-			url: 'https://www.ghostery.com/support/submit-tracker/',
+			url: 'https://www.ghostery.com/submit-a-tracker',
 			become_active: true,
 		});
 		window.close();
