@@ -10,13 +10,13 @@ First, you need to install JavaScript dependencies and download additional resou
 
 ```sh
 $ npm ci
-````
+```
 
 Now everything is ready. Change the code, and run it in Chrome:
 
 ```sh
 $ npm run start
-````
+```
 
 To test it in Safari, you will have to use Xcode. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
 
