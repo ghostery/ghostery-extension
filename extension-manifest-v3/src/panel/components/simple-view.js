@@ -10,13 +10,12 @@
  */
 
 import { html, define, store, dispatch } from '/hybrids.js';
-import "./simple-view/tracker-wheel.js";
+import "../../ui/components/wtm-stats/index.js";
 import "./simple-view/toggle-switch.js";
 import "./simple-view/page-load.js";
 import { toggles } from '../../common/rulesets.js';
-import { sortCategories, getCategoryName } from '../utils/categories.js';
-import { t } from '../utils/i18n.js';
-import { externalLink, chevronRight } from './icons.js';
+import { t } from '../../common/i18n.js';
+import { externalLink, chevronRight } from '../../ui/icons.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
@@ -68,19 +67,9 @@ define({
         `)}
       </section>
 
-      <section class="stats">
-        <tracker-wheel stats=${stats}></tracker-wheel>
-
-        <ul>
-          ${store.ready(stats) && sortCategories(Object.keys(stats.byCategory)).map((category) => html`
-            <li class="category">
-              <category-bullet category=${category} size=${7}></category-bullet>
-              <label>${getCategoryName(category)}</label>
-              <strong>${stats.byCategory[category].count}</strong>
-            </li>
-          `)}
-        </ul>
-      </section>
+      ${store.ready(stats) && html`
+        <wtm-stats categories=${stats.categories}></wtm-stats>
+      `}
 
       <section class="buttons">
         <span>

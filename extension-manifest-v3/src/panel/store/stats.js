@@ -33,6 +33,9 @@ const Stats = {
       [current.id]: current,
     }), {});
   },
+  categories: ({ trackers }) => {
+    return trackers.map(t => t.category);
+  },
   [store.connect] : {
     get: async () => {
       const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];

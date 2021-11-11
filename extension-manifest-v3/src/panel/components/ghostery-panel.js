@@ -12,17 +12,37 @@
 import { html, define, store } from '/hybrids.js';
 import Stats from '../store/stats.js';
 import Settings from '../store/settings.js';
+import { settingsIcon } from '../../ui/icons.js'
 
 define({
   tag: "ghostery-panel",
   settings: store(Settings),
   stats: store(Stats),
   content: ({ stats, settings }) => html`
-    <panel-header domain=${store.ready(stats) ? stats.domain : ''}></panel-header>
+    <panel-header domain=${store.ready(stats) ? stats.domain : ''}>
+      <a
+        target="_blank"
+        class="options-link"
+        href=${chrome.runtime.getURL(chrome.runtime.getManifest().options_page)}
+      >
+        ${settingsIcon}
+      </a>
+    </panel-header>
     <panel-body
       stats=${stats}
       settings=${settings}
     ></panel-body>
     <panel-footer></panel-footer>
+  `.css`
+    .options-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .options-link svg {
+      height: 16px;
+      width: 16px;
+    }
   `,
 });

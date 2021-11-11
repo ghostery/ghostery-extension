@@ -34,7 +34,6 @@ function updateOptions(host) {
   const shadowRoot = host.render();
   const options = { ...host.options };
   options.trackerWheelDisabled = shadowRoot.querySelector("#trackerWheelDisabled").checked;
-  console.warn('optios', options)
   store.set(Options, options);
 }
 
@@ -63,9 +62,11 @@ define({
     </main>
   `.css`
     :host {
+      height: 100%;
       max-width: 800px;
       display: block;
       margin: 0 auto;
+      background-color: #F8F8F8;
     }
     header {
       background: var(--ghostery);
@@ -77,7 +78,6 @@ define({
       margin: 0px;
     }
     main {
-      background-color: #F8F8F8;
       padding: 50px 12px;
     }
     h2 {

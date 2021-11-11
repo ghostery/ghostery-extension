@@ -19,7 +19,8 @@ try {
   importScripts('./adblocker.js');
   importScripts('./storage.js');
   importScripts('./tab-stats.js');
-  importScripts('../common/tracker-wheel.js');
+  importScripts('./wtm-report.js');
+  importScripts('../common/wtm-tracker-wheel.js');
 } catch (e) {
   // on Safari those have to be imported from manifest.json
 }
@@ -61,7 +62,7 @@ let updateIcon = updateIconNow;
 function updateIconNow(tabId, stats) {
   (chrome.browserAction || chrome.action).setIcon({
     tabId,
-    imageData: offscreenImageData(128, stats.trackers.map(t => t.category)),
+    imageData: WTMTrackerWheel.offscreenImageData(128, stats.trackers.map(t => t.category)),
   });
   resetUpdateIconDebounceMode();
 }
@@ -102,7 +103,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === "dnrUpdate") {
     updateAdblockerEngineStatuses();
-    return;
+    return false;
   }
 
   if (sender.tab === undefined) {
@@ -121,6 +122,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   if (msg.action === "updateOptions") {
     updateOptions();
+    return false;
   }
 
   if (msg.action === "updateTabStats") {
@@ -149,8 +151,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       }
     }
 
-    return;
+    return false;
+  }
+
+  if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
+    return false;
   }
 
   adblockerOnMessage(msg, sender, sendResponse);
+  return false;
 });

@@ -9,10 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, dispatch, store } from '/hybrids.js';
-import { getCategoryName } from '../../utils/categories.js';
-import { t } from '../../utils/i18n.js';
-import { chavronDown, externalLink } from '../icons.js';
+import { html, define } from '/hybrids.js';
+import { getCategoryName } from '../../../common/categories.js';
+import { t } from '../../../common/i18n.js';
+import { chavronDown, externalLink } from '../../../ui/icons.js';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;

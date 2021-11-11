@@ -23,7 +23,7 @@ define({
         style=${{
           width: sizePx,
           height: sizePx,
-          backgroundColor: CATEGORY_COLORS[category],
+          backgroundColor: WTMTrackerWheel.CATEGORY_COLORS[category],
           borderRadius: sizePx,
           display: 'inline-block',
         }}

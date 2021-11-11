@@ -10,7 +10,7 @@
  */
 
 import { html, define, store, svg } from '/hybrids.js';
-import { t } from '../../utils/i18n.js';
+import { t } from '../../../common/i18n.js';
 
 const cirle = svg`<svg width="73" height="72" viewBox="0 0 73 72" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="36.5003" cy="36.2249" r="30.7273" stroke="currentColor" stroke-width="10" stroke-dasharray="1 3"/>

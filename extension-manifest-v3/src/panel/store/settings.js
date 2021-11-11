@@ -46,7 +46,7 @@ export async function toggleBlocking(type) {
   await chrome.declarativeNetRequest.updateEnabledRulesets({
     [currentStatus ? 'disableRulesetIds' : 'enableRulesetIds']: [rulesetId],
   });
-  await chrome.runtime.sendMessage({ action: 'dnrUpdate' });
+  chrome.runtime.sendMessage({ action: 'dnrUpdate' });
 }
 
 export default Settings;

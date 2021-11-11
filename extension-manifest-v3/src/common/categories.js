@@ -12,8 +12,8 @@
 import { t } from './i18n.js';
 
 export function sortCategories(categories) {
-  // CATEGORY_ORDER is a global from tracker-wheel.js
-  return categories.sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b));
+  // WTMTrackerWheel.CATEGORY_ORDER is a global from wtm-tracker-wheel.js
+  return categories.slice().sort((a, b) => WTMTrackerWheel.CATEGORY_ORDER.indexOf(a) - WTMTrackerWheel.CATEGORY_ORDER.indexOf(b));
 }
 
 export function getCategoryName(category) {
