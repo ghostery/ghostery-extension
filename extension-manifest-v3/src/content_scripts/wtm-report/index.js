@@ -51,14 +51,20 @@ function renderWheel(anchor, stats) {
   const parent = anchor.parentElement;
   parent.style.position = 'relative';
   const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span');
-
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
   if (isMobile) {
     container.style.left = threeDotsElement.getBoundingClientRect().left - parent.getBoundingClientRect().left - 50 + 'px';
     container.style.top = 15 + 'px';
-  } else {
+  } else if (threeDotsElement) {
+    // default path on Safari (Desktop)
     container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 5 + 'px';
+  } else {
+    // default path in Chrome
+    const arrowDown = parent.querySelector('span.gTl8xb');
+    const elem = arrowDown || parent.querySelector('cite > span');
+    const offset = arrowDown ? 10 : 5;
+    container.style.left = elem.getBoundingClientRect().right - parent.getBoundingClientRect().left + offset + 'px';
   }
 
   container.addEventListener('click', (ev) => {
