@@ -18,13 +18,11 @@ define({
   categories: [],
   canvas: ({ categories }) => {
     const el = document.createElement("canvas");
-    el.setAttribute('height', SIZE);
-    el.setAttribute('width', SIZE);
 
     const context = el.getContext('2d');
     context.imageSmoothingQuality = 'high';
 
-    WTMTrackerWheel.draw(context, categories.length === 0 ? ['unknown'] : categories);
+    WTMTrackerWheel.draw(context, SIZE, categories.length === 0 ? ['unknown'] : categories);
 
     // return element
     return el;

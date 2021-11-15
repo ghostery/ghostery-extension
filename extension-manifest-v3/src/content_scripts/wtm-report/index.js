@@ -11,11 +11,17 @@
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 
-const isMobile = window.navigator.userAgent.match(/iPhone/i);
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 function closePopups() {
   [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
     popup.parentElement.removeChild(popup);
+  });
+}
+
+function resizePopup(height) {
+  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
+    popup.style.height = `${height}px`;
   });
 }
 
@@ -51,6 +57,12 @@ function renderWheel(anchor, stats) {
   const parent = anchor.parentElement;
   parent.style.position = 'relative';
   const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span');
+
+  if (!threeDotsElement) {
+    // that's not a "full" result
+    return;
+  }
+
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
   if (isMobile) {
@@ -82,10 +94,9 @@ function renderWheel(anchor, stats) {
 
   const canvas = document.createElement('canvas');
   canvas.classList.add('wtm-tracker-wheel');
-  canvas.setAttribute('width', '22px');
-  canvas.setAttribute('height', '22px');
   const ctx = canvas.getContext('2d');
-  WTMTrackerWheel.draw(ctx, stats.stats);
+  WTMTrackerWheel.setupCtx(ctx, 22);
+  WTMTrackerWheel.draw(ctx, 22, stats.stats);
 
   container.appendChild(canvas);
   container.appendChild(label);
@@ -103,7 +114,11 @@ chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
 
   elements.forEach((elem, i) => {
     if (response.wtmStats[i]) {
-      renderWheel(elem, response.wtmStats[i]);
+      try {
+        renderWheel(elem, response.wtmStats[i]);
+      } catch (e) {
+        // ignore errors
+      }
     }
   });
 });
@@ -115,6 +130,12 @@ window.addEventListener('message', (message) => {
 
   if (message.data === 'WTMReportClosePopups') {
     closePopups();
+    return;
+  }
+
+  if (message.data.startsWith('WTMReportResize')) {
+    const height = message.data.split(':')[1];
+    resizePopup(height);
     return;
   }
 });

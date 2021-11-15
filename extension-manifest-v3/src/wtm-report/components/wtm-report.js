@@ -32,9 +32,6 @@ function requestClose() {
 
 define({
   tag: "wtm-report",
-  domain: () => {
-    return html.resolve(Stats.then(stats => stats.domain));
-  },
   render: () => html`
     ${html.resolve(Stats.then(stats => html`
       <panel-header domain=${stats.domain}>
@@ -103,6 +100,8 @@ define({
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 22px;
+      width: 22px;
     }
 
     .svg-button svg {

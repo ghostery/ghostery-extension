@@ -60,9 +60,11 @@ updateOptions();
 let updateIcon = updateIconNow;
 
 function updateIconNow(tabId, stats) {
+  const categories = stats.trackers.map(t => t.category);
+  const imageData = WTMTrackerWheel.offscreenImageData(128, categories);
   (chrome.browserAction || chrome.action).setIcon({
     tabId,
-    imageData: WTMTrackerWheel.offscreenImageData(128, stats.trackers.map(t => t.category)),
+    imageData,
   });
   resetUpdateIconDebounceMode();
 }

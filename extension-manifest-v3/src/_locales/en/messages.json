@@ -2156,5 +2156,11 @@
 	},
 	"category_email": {
 		"message": "Email"
+	},
+  "category_hosting": {
+		"message": "Hosting"
+	},
+  "category_extensions": {
+		"message": "Extensions"
 	}
 }
