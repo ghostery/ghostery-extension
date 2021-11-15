@@ -61,7 +61,11 @@ function renderWheel(anchor, stats) {
     container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 5 + 'px';
   } else {
     // default path in Chrome
-    const arrowDown = parent.querySelector('span.gTl8xb');
+    let arrowDown = parent.querySelector('span.gTl8xb');
+    if (arrowDown) {
+      const translateNextToArrow = parent.querySelector('a.iUh30 > span');
+      arrowDown = translateNextToArrow || arrowDown;
+    }
     const elem = arrowDown || parent.querySelector('cite > span');
     const offset = arrowDown ? 10 : 5;
     container.style.left = elem.getBoundingClientRect().right - parent.getBoundingClientRect().left + offset + 'px';
