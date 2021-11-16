@@ -89,7 +89,7 @@ function resetUpdateIconDebounceMode() {
   });
 }
 
-chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, frameId, url }) => {
+chrome.webNavigation.onCommitted.addListener(({ tabId, frameId, url }) => {
   if (frameId !== 0) {
     return;
   }
