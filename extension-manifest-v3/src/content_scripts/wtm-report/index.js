@@ -102,7 +102,7 @@ function renderWheel(anchor, stats) {
   parent.appendChild(container);
 }
 
-const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a, div.mnr-c.xpd.O9g5cc.uUPGi a')];
+const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a, div.mnr-c.xpd.O9g5cc.uUPGi a.cz3goc')];
 const links = elements.map(x => x.href);
 
 chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
