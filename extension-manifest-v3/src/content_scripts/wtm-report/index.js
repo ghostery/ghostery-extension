@@ -58,11 +58,10 @@ function renderWheel(anchor, stats) {
   parent.style.position = 'relative';
   const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span');
 
-  if (!threeDotsElement) {
+  if (!threeDotsElement && isMobile) {
     // that's not a "full" result
     return;
   }
-
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
   if (isMobile) {
@@ -73,14 +72,14 @@ function renderWheel(anchor, stats) {
     container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 5 + 'px';
   } else {
     // default path in Chrome
-    let arrowDown = parent.querySelector('span.gTl8xb');
-    if (arrowDown) {
-      const translateNextToArrow = parent.querySelector('a.iUh30 > span');
-      arrowDown = translateNextToArrow || arrowDown;
+    const translate = 'a.iUh30 > span';
+    const arrowDown = 'span.gTl8xb';
+    const textEnd = 'cite > span';
+    const elem = parent.querySelector(translate) || parent.querySelector(arrowDown) || parent.querySelector(textEnd);
+    if (!elem) {
+      return;
     }
-    const elem = arrowDown || parent.querySelector('cite > span');
-    const offset = arrowDown ? 10 : 5;
-    container.style.left = elem.getBoundingClientRect().right - parent.getBoundingClientRect().left + offset + 'px';
+    container.style.left = elem.getBoundingClientRect().right - parent.getBoundingClientRect().left + 10 + 'px';
   }
 
   container.addEventListener('click', (ev) => {
