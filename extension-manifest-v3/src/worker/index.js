@@ -18,6 +18,7 @@ try {
   importScripts('../common/lodash-debounce.js');
   importScripts('./adblocker.js');
   importScripts('./storage.js');
+  importScripts('./bugs-matcher.js');
   importScripts('./tab-stats.js');
   importScripts('./wtm-report.js');
   importScripts('../common/wtm-tracker-wheel.js');
@@ -25,21 +26,36 @@ try {
   // on Safari those have to be imported from manifest.json
 }
 
-function getTrackerFromUrl(url) {
+function getTrackerFromUrl(url, origin) {
   try {
-    const { domain } = tldts.parse(url);
-    const trackerId = storage.get('tracker_domains')[domain];
-    const tracker = storage.get('trackers')[trackerId];
-    tracker.category = storage.get('categories')[tracker.category_id];
+    const bugId = isBug(url);
+    let trackerId = null;
 
-    // TODO: sometimes the information is missing
-    const { name, description } = storage.get('companies')[trackerId] || {};
-    tracker.companyName = name;
-    tracker.companyDescription = description;
-    return tracker;
+    if (bugId) {
+      const { bugs, apps } = storage.get('bugs');
+      const appId = bugs[bugId].aid;
+      trackerId = apps[appId].trackerID;
+    } else {
+      const { domain } = tldts.parse(url);
+
+      if (domain === origin) {
+        return null;
+      }
+
+      trackerId = storage.get('tracker_domains')[domain];
+    }
+
+    if (trackerId) {
+      const tracker = storage.get('trackers')[trackerId];
+      tracker.category = storage.get('categories')[tracker.category_id];
+
+      return tracker;
+    }
   } catch (e) {
     return null;
   }
+
+  return null;
 }
 
 
@@ -135,7 +151,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
     if (urls) {
       urls.forEach(url => {
-        const tracker = getTrackerFromUrl(url);
+        const tracker = getTrackerFromUrl(url, stats.domain);
         if (tracker) {
           stats.trackers.push(tracker);
         }

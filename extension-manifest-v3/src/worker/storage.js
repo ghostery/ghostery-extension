@@ -17,8 +17,8 @@
 const storage = new Map();
 
 const RESOURCES = {
+  bugs: 'rule_resources/bugs.json',
   categories: 'rule_resources/categories.json',
-  companies: 'rule_resources/companies.json',
   trackers: 'rule_resources/trackers.json',
   tracker_domains: 'rule_resources/tracker_domains.json',
 };

@@ -14,6 +14,4 @@ export default {
   name: '',
   company_id: 'unknown',
   category: 'unknown',
-  companyName: '',
-  companyDescription: '',
 };

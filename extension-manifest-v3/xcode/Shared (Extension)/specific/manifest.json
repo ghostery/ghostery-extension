@@ -470,6 +470,7 @@
       "common/lodash-debounce.js",
       "worker/adblocker.js",
       "worker/storage.js",
+      "worker/bugs-matcher.js",
       "worker/tab-stats.js",
       "worker/wtm-report.js",
       "common/wtm-tracker-wheel.js",
