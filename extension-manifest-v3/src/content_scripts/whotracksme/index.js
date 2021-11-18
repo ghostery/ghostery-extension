@@ -36,10 +36,7 @@ window.addEventListener('load', () => {
     if (!url || url.startsWith('data:')) {
       return;
     }
-
-    if (url) {
-      sendUrls.push(url)
-    }
+    sendUrls.push(url);
 
     // If already set, return
     if (sendUrlsTimeout) return;
@@ -109,7 +106,7 @@ window.addEventListener('load', () => {
     (document.head || document.documentElement).appendChild(script);
 
     window.addEventListener('message', (message) => {
-      if (!message.data.startsWith('GhosteryTrackingDetection:')) {
+      if (!message.isTrusted || !message.data.startsWith('GhosteryTrackingDetection:')) {
         return;
       }
       let url = decodeURIComponent(message.data.split(':')[1]);
