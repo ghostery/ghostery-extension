@@ -117,7 +117,7 @@ class PurpleBox {
 				});
 			}
 		}
-		return injectScript(tab_id, 'dist/purplebox.js', 'dist/css/purplebox_styles.css', 'document_start').then(() => {
+		return injectScript(tab_id, 'dist/purplebox.js', 'dist/css/purplebox_styles.css', 'document_end').then(() => {
 			if (!this.channelsSupported) {
 				sendMessage(tab_id, 'createBox', this.createBoxParams, () => {
 					if (chrome.runtime.lastError) {
