@@ -29,8 +29,7 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "content_scripts/TrackingProtectionStats.js",
-        "content_scripts/stats.js"
+        "content_scripts/whotracksme/index.js"
       ]
     },
     {
@@ -499,6 +498,7 @@
   },
   "content_security_policy" : {},
   "web_accessible_resources": [
+    "content_scripts/whotracksme/ghostery-whotracksme.js",
     "wtm-report/index.html"
   ]
 }
