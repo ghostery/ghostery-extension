@@ -30,11 +30,18 @@ function getTrackerFromUrl(url, origin) {
   try {
     const bugId = isBug(url);
     let trackerId = null;
+    let tracker = null;
 
     if (bugId) {
       const { bugs, apps } = storage.get('bugs');
       const appId = bugs[bugId].aid;
-      trackerId = apps[appId].trackerID;
+      const app = apps[appId];
+      trackerId = app.trackerID;
+      tracker = {
+        id: app.trackerID,
+        name: app.name,
+        category: app.cat,
+      };
     } else {
       const { domain } = tldts.parse(url);
 
@@ -46,9 +53,12 @@ function getTrackerFromUrl(url, origin) {
     }
 
     if (trackerId) {
-      const tracker = storage.get('trackers')[trackerId];
-      tracker.category = storage.get('categories')[tracker.category_id];
-
+      if (storage.get('trackers')[trackerId]) {
+        tracker = storage.get('trackers')[trackerId];
+      }
+      if (!tracker.category && tracker.category_id) {
+        tracker.category = storage.get('categories')[tracker.category_id];
+      }
       return tracker;
     }
   } catch (e) {
