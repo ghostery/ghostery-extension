@@ -10,6 +10,7 @@
  */
 
 import { html, define, store } from '/hybrids.js';
+import { t } from '../../common/i18n.js';
 
 const Options = {
   trackerWheelDisabled: false,
@@ -49,7 +50,7 @@ define({
       ${store.ready(options) && html`
         <ul>
           <li>
-            <label for="trackerWheelDisabled">Disable Tracker Wheel in browser toolbar</label>
+            <label for="trackerWheelDisabled">${t('options_tracker_wheel_disabled')}</label>
             <input
               type="checkbox"
               id="trackerWheelDisabled"
@@ -98,6 +99,7 @@ define({
       margin-bottom: 10px;
       padding: 10px;
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+      align-items: center;
     }
     li label {
       flex: 1;

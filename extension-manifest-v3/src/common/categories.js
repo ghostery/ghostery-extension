@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { t } from './i18n.js';
+import { t } from '../../common/i18n.js';
 
 export function sortCategories(categories) {
   // WTMTrackerWheel.CATEGORY_ORDER is a global from wtm-tracker-wheel.js

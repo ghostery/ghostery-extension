@@ -1,0 +1,2169 @@
+{
+	"account_creation_privacy_statement": {
+		"message": "Obowiązuje nasz ogólny $LINK_TERMS_START$Regulamin$LINK_TERMS_END$ oraz nasza $LINK_UA_START$Umowa licencyjna$LINK_UA_END$. Nasze zasady ochrony prywatności znajdują się $LINK_PS_START$tutaj$LINK_PS_END$.",
+		"placeholders": {
+			"link_ps_end": {
+				"content": "</a>"
+			},
+			"link_ps_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_ua_end": {
+				"content": "</a>"
+			},
+			"link_ua_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"banner_check_your_email_title": {
+		"message": "Sprawdź niedługo swoją pocztę e-mail, w której znajdziesz wiadomość z łączem do resetowania hasła."
+	},
+	"banner_email_not_in_system_message": {
+		"message": "Niestety, w naszym systemie nie ma tego adresu e-mail."
+	},
+	"blacklist_error_duplicate_url": {
+		"message": "Ta strona jest już zastrzeżona."
+	},
+	"blacklist_error_whitelist_url": {
+		"message": "Ta witryna została usunięta z Twojej listy zaufanych stron i dodana do Twojej listy zastrzeżonych stron"
+	},
+	"blocked_redirect_action_always_title": {
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
+		"message": "Zawsze zezwalaj i przeładuj stronę."
+	},
+	"blocked_redirect_action_through_once_title": {
+		"description": "Title for the 'Allow once' button on the blocked redirect page.",
+		"message": "Zezwól na tagi raz do momentu osiągnięcia miejsca docelowego."
+	},
+	"blocked_redirect_page_title": {
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked.",
+		"message": "Ghostery uniemożliwiło przekierowanie."
+	},
+	"blocked_redirect_prevent": {
+		"description": "Text appearing on block_redirect.html when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
+		"message": "Ghostery uniemożliwiło przekierowanie z $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ na $SP_D_START$$DESTINATION$$SP_END$, $BREAK$będącego częścią $A_START$$APP$$A_END$. $BREAK$",
+		"placeholders": {
+			"a_end": {
+				"content": "</a>"
+			},
+			"a_start": {
+				"content": "<a id=\"name\" href=\"$4\" target=\"_blank\">"
+			},
+			"app": {
+				"content": "$3",
+				"example": "DoubleClick"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"destination": {
+				"content": "$2"
+			},
+			"origin": {
+				"content": "$1"
+			},
+			"sp_d_start": {
+				"content": "<span id=\"destination\">"
+			},
+			"sp_end": {
+				"content": "</span>"
+			},
+			"sp_o_start": {
+				"content": "<span id=\"origin\">"
+			}
+		}
+	},
+	"blocked_redirect_url_content": {
+		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
+		"message": "Wydaje się, że ten tag przekierowuje na $BREAK$ $A_START$$REDIRECT_URL$$A_END$ Jeśli uważasz, że ten link wygląda na poprawny i chcesz kontynuować, kliknij poniższą ikonę, aby zezwolić na $APP$ i przeładuj stronę.",
+		"placeholders": {
+			"a_end": {
+				"content": "</a>"
+			},
+			"a_start": {
+				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
+			},
+			"app": {
+				"content": "$2",
+				"example": "DoubleClick"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"redirect_url": {
+				"content": "$1"
+			}
+		}
+	},
+	"box_dismiss_0s": {
+		"message": "Odwołuj $SPAN_START$nigdy$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_dismiss_15s": {
+		"message": "Odwołuj $SPAN_START$po 15 sekundach$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_dismiss_30s": {
+		"message": "Odwołuj $SPAN_START$po 30 sekundach$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_dismiss_5s": {
+		"message": "Odwołuj $SPAN_START$po 5 sekundach$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_bl": {
+		"message": "Wyświetl $SPAN_START$w lewym dolnym rogu$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_br": {
+		"message": "Wyświetl $SPAN_START$w prawym dolnym rogu$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_tl": {
+		"message": "Wyświetl $SPAN_START$w lewym górnym rogu$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_tr": {
+		"message": "Wyświetl $SPAN_START$w prawym górnym rogu$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_looking": {
+		"message": "Wygląd"
+	},
+	"box_options_expanded": {
+		"message": "Opcje"
+	},
+	"box_settings": {
+		"message": "Ustawienia"
+	},
+	"box_settings_expanded": {
+		"message": "Moje ustawienia Ghostery"
+	},
+	"box_tracker": {
+		"message": "Tropiciel"
+	},
+	"box_trackers": {
+		"message": "Tropiciele"
+	},
+	"box_warning_slow": {
+		"message": "Tropiciele spowalniające działanie"
+	},
+	"box_warning_nonsecure": {
+		"message": "Tropiciele bez zabezpieczeń"
+	},
+	"box_warning_compatibility": {
+		"message": "Tropiciele uszkodzonych stron"
+	},
+	"browser_button_tooltip": {
+		"description": "Ghostery's browser button tooltip.",
+		"message": "Przeglądaj wyniki wyszukana przez Ghostery"
+	},
+	"button_cancel": {
+		"description": "Part of a confirmation dialog. Clicking this cancels the action.",
+		"message": "Anuluj"
+	},
+	"category_advertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Reklama"
+	},
+	"category_advertising_desc": {
+		"description": "User-facing description for the Advertising tag category.",
+		"message": "Obejmuje usługi reklamowe, takie jak gromadzenie danych, analiza zachowań czy retargeting."
+	},
+	"category_audio_video_player": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Odtwarzacz audio/wideo"
+	},
+	"category_audio_video_player_desc": {
+		"description": "User-facing description for the Audio/Video Player tag category.",
+		"message": "Umożliwia stronom publikowanie, dystrybucję i optymalizację treści audio i wideo."
+	},
+	"category_cdn": {
+		"message": "CDN"
+	},
+	"category_comments": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Komentarze"
+	},
+	"category_comments_desc": {
+		"description": "User-facing description for the Comments tag category.",
+		"message": "Aktywuje sekcję komentarzy dla artykułów i recenzji produktów."
+	},
+	"category_customer_interaction": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Interakcja z klientem"
+	},
+	"category_customer_interaction_desc": {
+		"description": "User-facing description for the Customer Interaction tag category.",
+		"message": "Obejmuje chat, wiadomości e-mail, obsługę klienta oraz inne narzędzia do prowadzenia interakcji."
+	},
+	"category_email": {
+		"message": "E-mail"
+	},
+	"category_essential": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Istotne"
+	},
+	"category_essential_desc": {
+		"description": "User-facing description for the Essential tag category.",
+		"message": "Obejmuje tropiciele o krytycznym znaczeniu dla działania strony internetowej, takie jak menedżery tagów oraz informacje o polityce prywatności."
+	},
+	"category_extensions": {
+		"message": "Rozszerzenia"
+	},
+	"category_hosting": {
+		"message": "Hosting"
+	},
+	"category_misc": {
+		"message": "Różne"
+	},
+	"category_pornvertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Reklama dla dorosłych"
+	},
+	"category_pornvertising_desc": {
+		"description": "User-facing description for the Adult Advertising tag category.",
+		"message": "Obejmuje technologie reklamowe opracowane na potrzeby stron z treściami dla dorosłych."
+	},
+	"category_site_analytics": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Analiza statystyk strony"
+	},
+	"category_site_analytics_desc": {
+		"description": "User-facing description for the Site Analytics tag category.",
+		"message": "Obejmuje analizę danych, korzystania ze strony oraz tropicieli wydajności."
+	},
+	"category_social_media": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Media społecznościowe"
+	},
+	"category_social_media_desc": {
+		"description": "User-facing description for the Social Media tag category.",
+		"message": "Obejmuje funkcjonalności związane z platformami mediów społecznościowych."
+	},
+	"category_uncategorized": {
+		"message": "Bez kategorii"
+	},
+	"category_uncategorized_desc": {
+		"message": "Te tropiciele nie posiadają jeszcze swojej kategorii."
+	},
+	"click2play_allow_always_tooltip": {
+		"description": "Tooltip that appears over the 'allow always' click2play button.",
+		"message": "Zezwól i przeładuj stronę."
+	},
+	"click2play_allow_once_button_tooltip": {
+		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+		"message": "Ghostery zablokowało $APP_NAME$. Kliknij tutaj, aby zezwolić na jej jednorazowe załadowanie.",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "Twitter Button"
+			}
+		}
+	},
+	"click2play_allow_once_tooltip": {
+		"description": "Tooltip that appears over the 'allow once' click2play button.",
+		"message": "Zezwól jednorazowo i przeładuj stronę."
+	},
+	"click2play_blocked": {
+		"message": "Ghostery zablokowało $APP_NAME$.",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "SoundCloud"
+			}
+		}
+	},
+	"click2play_comment_form": {
+		"message": "Ghostery zablokowało komentarze obsługiwane przez $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_review_form": {
+		"message": "Ghostery zablokowało recenzje obsługiwane przez $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_survey_form": {
+		"message": "Ghostery zablokowało ankietę obsługiwaną przez $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_video_form": {
+		"message": "Ghostery zablokowało odtwarzacz wideo $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"error_email_forgot": {
+		"message": "Hmm... Nie mogę odnaleźć tego e-maila. Może spróbuj z innym?"
+	},
+	"first_name_field_label": {
+		"message": "Imię (opcjonalnie):"
+	},
+	"forgot_password_message": {
+		"message": "Nie pamiętasz hasła? Spokojnie, każdemu się może zdarzyć. Prześlemy Ci e-mailem instrukcje do zresetowania hasła"
+	},
+	"invalid_email_forgot": {
+		"message": "Przykro nam, musisz podać prawdziwy adres e-mail."
+	},
+	"invalid_email_login": {
+		"message": "Przykro nam, musisz podać prawdziwy adres e-mail."
+	},
+	"last_name_field_label": {
+		"message": "Nazwisko (opcjonalnie):"
+	},
+	"password_field_label_required": {
+		"message": "Wymagane hasło."
+	},
+	"name": {
+		"description": "The title of this extension (Ghostery).",
+		"message": "Ghostery – Bloker reklam chroniący prywatność"
+	},
+	"none": {
+		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
+		"message": "Żadna"
+	},
+	"summary_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "Zablokowane"
+	},
+	"summary_alert": {
+		"description": "as in '1 ALERT'",
+		"message": "Alert"
+	},
+	"summary_alerts": {
+		"description": "as in '5 ALERTS'",
+		"message": "Alertów"
+	},
+	"summary_page_not_scanned": {
+		"message": "Strona nie została przeskanowana"
+	},
+	"summary_description_not_scanned_1": {
+		"message": "Ghostery skanuje tylko strony \\„http\\” oraz \\„https\\”."
+	},
+	"summary_description_not_scanned_2": {
+		"message": "Jeśli przejdziesz na inną stronę, wszystko powinno zadziałać jak trzeba."
+	},
+	"summary_trust_site": {
+		"message": "Zaufaj stronie"
+	},
+	"summary_trust_site_active": {
+		"message": "Strona zaufana"
+	},
+	"summary_restrict_site": {
+		"message": "Zastrzeż stronę"
+	},
+	"summary_restrict_site_active": {
+		"message": "Strona zastrzeżona"
+	},
+	"summary_undo": {
+		"message": "Cofnij"
+	},
+	"summary_pause_ghostery": {
+		"message": "Wstrzymaj"
+	},
+	"summary_pause_ghostery_tooltip": {
+		"message": "Wstrzymaj rozszerzenie Ghostery."
+	},
+	"pause_30_min": {
+		"message": "na 30 min."
+	},
+	"pause_30_min_condensed": {
+		"message": "30 min."
+	},
+	"pause_1_hour": {
+		"message": "na 1 godzinę"
+	},
+	"pause_1_hour_condensed": {
+		"message": "1 godz."
+	},
+	"pause_24_hours": {
+		"message": "na 24 godziny"
+	},
+	"pause_24_hours_condensed": {
+		"message": "24 godz."
+	},
+	"summary_resume_ghostery": {
+		"message": "Wznów Ghostery"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Wstrzymano rozszerzenie Ghostery. Kliknij, aby wznowić."
+	},
+	"summary_show_menu": {
+		"message": "pokaż menu"
+	},
+	"blocking_trackers": {
+		"message": "Tropiciele"
+	},
+	"blocking_block_all": {
+		"message": "Zablokuj wszystkie"
+	},
+	"blocking_block_shown": {
+		"message": "Zablokuj wszystkie wyświetlone"
+	},
+	"blocking_category_tracker": {
+		"message": "Tropiciel"
+	},
+	"blocking_category_trackers": {
+		"message": "Tropiciele"
+	},
+	"blocking_category_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "Zablokowane"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) TRUSTED'",
+		"message": "Zaufane"
+	},
+	"panel_email_verification_sent": {
+		"message": "$BOLD_HTML_STARTS$ Udało się! $BOLD_HTML_END$ E-mail z weryfikacją konta został przesłany na adres $EMAIL$",
+		"placeholders": {
+			"bold_html_end": {
+				"content": "</strong>"
+			},
+			"bold_html_starts": {
+				"content": "<strong>"
+			},
+			"email": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"forgot_password": {
+		"message": "Nie pamiętasz hasła?"
+	},
+	"panel_help_panel_header": {
+		"message": "Pomoc do rozszerzenia Ghostery do przeglądarki"
+	},
+	"panel_help_contact_header": {
+		"message": "Jak się z nami skontaktować"
+	},
+	"panel_help_faq": {
+		"message": "Najczęściej zadawane pytania"
+	},
+	"panel_help_feedback": {
+		"message": "Weź udział w naszej ankiecie"
+	},
+	"panel_help_questions_header": {
+		"message": "Pytania i uwagi"
+	},
+	"panel_help_setup": {
+		"message": "Konfiguruj Ghostery"
+	},
+	"panel_insights_audit_tags": {
+		"message": "Sprawdź znaczniki marketingowe na stronie",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_about_panel_header": {
+		"message": "O rozszerzeniu Ghostery do przeglądarki"
+	},
+	"panel_about_version_header": {
+		"message": "Ghostery do $BROWSER$ w wersji $VERSION$",
+		"placeholders": {
+			"browser": {
+				"content": "$1",
+				"example": "Firefox"
+			},
+			"version": {
+				"content": "$2",
+				"example": "6.4"
+			}
+		}
+	},
+	"panel_about_release_notes": {
+		"message": "Zobacz informacje o wersji dla wszystkich aktualizacji"
+	},
+	"panel_about_license": {
+		"message": "Umowa licencji publicznej Mozilla"
+	},
+	"panel_about_privacy_statement": {
+		"message": "Oświadczenie o zachowaniu prywatności"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Warunki"
+	},
+	"panel_about_licenses": {
+		"message": "Licencje na oprogramowanie"
+	},
+	"panel_about_imprint": {
+		"message": "Stopka"
+	},
+	"panel_menu_settings": {
+		"message": "Ustawienia"
+	},
+	"panel_menu_report_broken_site": {
+		"message": "Zgłoś uszkodzoną stronę"
+	},
+	"panel_menu_submit_tracker": {
+		"message": "Zgłoś nowego tropiciela"
+	},
+	"panel_menu_help": {
+		"message": "Pomoc"
+	},
+	"panel_menu_about": {
+		"message": "O nas"
+	},
+	"global_settings_saved": {
+		"message": "Ustawienia globalne zapisane"
+	},
+	"global_settings_saved_tracker": {
+		"message": "Globalne ustawienia tropiciela zapisane"
+	},
+	"global_settings_saved_category": {
+		"message": "Globalne ustawienia kategorii zapisane"
+	},
+	"panel_needs_reload": {
+		"message": "Ghostery ma oczekujące aktualizacje."
+	},
+	"panel_click_to_reload": {
+		"message": "Kliknij, aby odświeżyć stronę i przejrzeć zmiany."
+	},
+	"panel_tracker_breaking_page": {
+		"message": "$COUNT$ zablokowanych $TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_breaking_page_end": {
+		"message": " uszkadzających stronę."
+	},
+	"panel_tracker_slow_non_secure": {
+		"message": "$COUNT$ $TRACKERS$ spowalniających działanie i/lub bez zabezpieczeń",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_slow_non_secure_end": {
+		"message": " na tej stronie."
+	},
+	"panel_tracker_total_tooltip": {
+		"message": "Suma odnalezionych tropicieli + zmodyfikowanych żądań."
+	},
+	"panel_signin_success": {
+		"message": "Jesteś teraz zalogowany/-a jako "
+	},
+	"panel_signin_premium_benefits": {
+		"message": "Twoje konto odblokowuje bezpłatny okres próbny naszych funkcji Premium, z których niektóre to: usługa VPN i ochrona prywatności na wielu urządzeniach, dostępne za pośrednictwem naszej aplikacji Ghostery Midnight."
+	},
+	"panel_view_trackers": {
+		"message": "Przejrzyj tropiciele"
+	},
+	"panel_signin_success_title": {
+		"message": "Gratulacje! Twoje konto Ghostery jest gotowe do pracy."
+	},
+	"panel_tracker_found_sources_title": {
+		"message": "Adresy URL wykrytego tropiciela:"
+	},
+	"panel_tracker_warning_compatibility_tooltip": {
+		"message": "Zablokowany tropiciel uszkadza stronę"
+	},
+	"panel_tracker_warning_slow_nonsecure_tooltip": {
+		"message": "Tropiciel spowalnia działanie i jest niezabezpieczony"
+	},
+	"panel_tracker_warning_nonsecure_tooltip": {
+		"message": "Tropiciel jest niezabezpieczony"
+	},
+	"panel_tracker_warning_slow_tooltip": {
+		"message": "Tropiciel spowalnia działanie"
+	},
+	"panel_tracker_warning_smartblock_tooltip": {
+		"message": "Tropiciel zablokowany przez Przeglądanie inteligentne"
+	},
+	"panel_tracker_warning_smartunblock_tooltip": {
+		"message": "Tropiciel odblokowany przez Przeglądanie inteligentne"
+	},
+	"panel_tracker_block_tooltip": {
+		"message": "Blokuj na wszystkich stronach"
+	},
+	"panel_tracker_restrict_tooltip": {
+		"message": "Zastrzeż na tej stronie"
+	},
+	"panel_tracker_trust_tooltip": {
+		"message": "Zaufaj na tej stronie"
+	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Zachowaj anonimowość w tej witrynie"
+	},
+	"panel_detail_menu_list_title": {
+		"message": "Widok listy"
+	},
+	"panel_detail_menu_history_title": {
+		"message": "Historia"
+	},
+	"panel_detail_menu_performance_title": {
+		"message": "Wydajność"
+	},
+	"panel_detail_learn_more": {
+		"message": "Dowiedz się więcej"
+	},
+	"panel_detail_history_title": {
+		"message": "Historia"
+	},
+	"panel_detail_history_text": {
+		"message": "Funkcja dostępna niebawem."
+	},
+	"panel_detail_performance_title": {
+		"message": "Wydajność strony www"
+	},
+	"panel_detail_performance_text": {
+		"message": "Funkcja dostępna niebawem."
+	},
+	"panel_detail_premium_text": {
+		"message": "Funkcja dostępna niebawem."
+	},
+	"notification_upgrade": {
+		"message": "Nasz oddany i niezwykle sympatyczny zespół ciężko pracował, aby wypuścić nową wersję oprogramowania Ghostery."
+	},
+	"notification_upgrade_link": {
+		"message": "Poznaj niesamowite nowe funkcje i poprawki błędów wprowadzone do tej wersji."
+	},
+	"notification_upgrade_title_v8": {
+		"message": "Przedstawiamy Ghostery 8!"
+	},
+	"notification_upgrade_v8": {
+		"message": "Aktywuj nasze nowe superfunkcje i dowiedz się więcej o naszej jak dotąd najważniejszej wersji."
+	},
+	"notification_upgrade_link_v8": {
+		"message": "Pokaż teraz!"
+	},
+	"notification_library_update": {
+		"message": "Ujawniliśmy kilka nowych tropicieli i dodaliśmy je do bazy danych Ghostery."
+	},
+	"notification_library_update_link": {
+		"message": "Sprawdź co nowego"
+	},
+	"panel_header_verify_account": {
+		"message": "Zweryfikuj konto"
+	},
+	"password_characters_requirements": {
+		"message": "Dozwolone są tylko te znaki specjalne: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"password_field_label": {
+		"message": "Hasło"
+	},
+	"password_requirements": {
+		"message": "Użyj od 8 do 50 znaków."
+	},
+	"send_button_label": {
+		"message": "Wyślij"
+	},
+	"server_error_message": {
+		"message": "Wygląda na to, że mamy problem techniczny. Spróbuj ponownie później."
+	},
+	"email_address_in_use": {
+		"message": "Ten adres e-mail jest już używany.  Wybierz inny adres. "
+	},
+	"short_description": {
+		"description": "A short description of this extension (Ghostery).",
+		"message": "Ghostery to potężne rozszerzenie do ochrony prywatności. Blokuje reklamy, wstrzymuje tropiciele i przyspiesza działanie stron internetowych."
+	},
+	"tracker_description_getting": {
+		"message": "Pobieram opis tropiciela…"
+	},
+	"tracker_description_learn_more": {
+		"message": "Przejdź dalej do pełnego profilu tropiciela"
+	},
+	"tracker_description_none_found": {
+		"message": "Nie odnaleziono opisu tropiciela."
+	},
+	"unblocked": {
+		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
+		"message": "odblokowano"
+	},
+	"white_black_list_error_invalid_url": {
+		"message": "Proszę wpisać prawidłowy adres URL lub wieloznacznik."
+	},
+	"whitelist_error_blacklist_url": {
+		"message": "Ta strona została usunięta z Twojej listy zastrzeżonych stron i dodana do Twojej listy zaufanych stron."
+	},
+	"whitelist_error_duplicate_url": {
+		"description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
+		"message": "Ta strona jest już zaufana."
+	},
+	"settings_adblocker": {
+		"message": "Listy blokowania reklam"
+	},
+	"settings_adblocker_lists": {
+		"message": "Załaduj następujące listy filtrów blokowania reklam:"
+	},
+	"settings_adblocker_list_1": {
+		"message": "Tylko reklamy"
+	},
+	"settings_adblocker_list_2": {
+		"message": "Reklamy + narzędzia śledzące"
+	},
+	"settings_adblocker_list_3": {
+		"message": "Reklamy + narzędzia śledzące + uciążliwe elementy"
+	},
+	"settings_purple_box": {
+		"message": "Licznik tropicieli"
+	},
+	"settings_notifications": {
+		"message": "Powiadomienia"
+	},
+	"settings_support_ghostery": {
+		"message": "Wesprzyj Ghostery"
+	},
+	"settings_account": {
+		"message": "Konto"
+	},
+	"settings_import_export": {
+		"message": "Importuj i eksportuj ustawienia"
+	},
+	"settings_trackers": {
+		"message": "Tropiciele"
+	},
+	"settings_auto_update": {
+		"message": "Włącz automatyczne aktualizacje z biblioteki tropicieli Ghostery"
+	},
+	"settings_last_update": {
+		"message": "Data ostatniej synchronizacji"
+	},
+	"settings_update_now": {
+		"message": "Aktualizuj teraz"
+	},
+	"settings_update_success": {
+		"message": "Udało się!"
+	},
+	"settings_update_up_to_date": {
+		"message": "Nadal aktualne"
+	},
+	"settings_update_failed": {
+		"message": "Aktualizacja nie powiodła się. Prosimy spróbować ponownie później"
+	},
+	"settings_show_patterns": {
+		"message": "Pokaż adresy URL tropiciela"
+	},
+	"settings_highlight_trackers": {
+		"message": "Wyróżnij tropiciele interaktywne"
+	},
+	"settings_required_trackers": {
+		"message": "Pokaż kiedy należy zezwolić tropicielowi na korzystanie z funkcji na stronie"
+	},
+	"settings_replace_social": {
+		"message": "Zamień zablokowane przyciski mediów społecznościowych na ikonkę Ghostery"
+	},
+	"settings_blocking": {
+		"message": "Blokowanie"
+	},
+	"settings_individual_trackers": {
+		"message": "Zaufaj i zastrzeż poszczególne tropiciele na stronie"
+	},
+	"settings_allow_trackers": {
+		"message": "Zezwól działanie tropicieli utworzonych przez właścicieli strony"
+	},
+	"settings_block_trackers": {
+		"message": "Blokuj nowe tropiciele dodane domyślnie do Ghostery"
+	},
+	"settings_show_purple_box": {
+		"message": "Wyświetlaj licznik tropicieli w rogu wyszukiwarki"
+	},
+	"settings_dismiss_after": {
+		"message": "Odwołaj po"
+	},
+	"settings_display_in": {
+		"message": "Wyświetl w"
+	},
+	"settings_bottom_right_corner": {
+		"message": "prawym dolnym rogu"
+	},
+	"settings_bottom_left_corner": {
+		"message": "lewym dolnym rogu"
+	},
+	"settings_top_right_corner": {
+		"message": "prawym górnym rogu"
+	},
+	"settings_top_left_corner": {
+		"message": "lewym górnym rogu"
+	},
+	"settings_never": {
+		"message": "Nigdy"
+	},
+	"settings_seconds": {
+		"message": "s"
+	},
+	"settings_hide_alert_trusted": {
+		"message": "Ukryj licznik tropicieli w zaufanych witrynach"
+	},
+	"settings_notify_me": {
+		"message": "Powiadom mnie gdy Ghostery:"
+	},
+	"settings_announcements": {
+		"message": "Opublikuje zapowiedzi"
+	},
+	"settings_new_features": {
+		"message": "Udostępni nowe funkcjonalności"
+	},
+	"settings_new_promotions": {
+		"message": "Zawiera promocje produktów"
+	},
+	"settings_new_trackers": {
+		"message": "Dodaje nowe tropiciele do biblioteki tropicieli"
+	},
+	"settings_show_reload_banner": {
+		"message": "Pokaż powiadomienia bannera przeładowania strony w górnej części rozszerzenia"
+	},
+	"settings_show_trackers_banner": {
+		"message": "Pokaż powiadomienia bannera alertu tropiciela w górnej części rozszerzenia"
+	},
+	"settings_show_tracker_count_badge": {
+		"message": "Pokaż etykietkę licznika tropicieli na ikonce Ghostery w pasku narzędziowym przeglądarki"
+	},
+	"settings_support_ghostery_by": {
+		"message": "Wesprzyj Ghostery poprzez"
+	},
+	"settings_share_usage": {
+		"message": "Udostępnienie analizy statystyk wykorzystania rozszerzenia"
+	},
+	"settings_share_human_web": {
+		"message": "Udostępnienie danych Human Web"
+	},
+	"settings_allow_abtests": {
+		"message": "Udział w testach A/B"
+	},
+	"settings_signin_create_header": {
+		"message": "Zaloguj się / Utwórz konto"
+	},
+	"settings_sign_create_text": {
+		"message": "Ustawienia z Twojego konta zostaną zsynchronizowane na tym urządzeniu. Utwórz konto, aby w łatwy sposób zsynchronizować swoje ustawienia Ghostery na wszystkich urządzeniach i platformach."
+	},
+	"settings_account_name": {
+		"message": "Nazwa"
+	},
+	"settings_account_email": {
+		"message": "E-mail"
+	},
+	"settings_edit_account": {
+		"message": "Edytuj konto"
+	},
+	"settings_export_header": {
+		"message": "Eksportuj ustawienia"
+	},
+	"settings_export_text": {
+		"message": "Zapisz kopię preferencji Ghostery i prześlij ją na inny komputer."
+	},
+	"settings_export_success": {
+		"message": "Twoje ustawienia zostały pomyślnie wyeksportowane do foldera Pobrane na"
+	},
+	"settings_export_error": {
+		"message": "Nie udało się pomyślnie wyeksportować Twoich ustawień. Proszę spróbować ponownie."
+	},
+	"settings_export_reserved_page_error": {
+		"message": "Ghostery nie może wyeksportować ustawień jeśli bieżąca strona jest jedną z zastrzeżonych stron przeglądarki. Proszę przejść na inną stronę i spróbować ponownie."
+	},
+	"settings_import_header": {
+		"message": "Importuj ustawienia"
+	},
+	"settings_import_text": {
+		"message": "Wybierz plik kopii zapasowej .ghost."
+	},
+	"settings_import_warning": {
+		"message": "OSTRZEŻENIE: Spowoduje to nadpisanie Twoich aktualnych ustawień Ghostery."
+	},
+	"settings_import_success": {
+		"message": "Twoje ustawienia zostały pomyślnie zaimportowane na"
+	},
+	"settings_import_dialog_error": {
+		"message": "Ghostery nie może wyświetlić okna wyszukiwania jeśli bieżąca strona jest jedną z zastrzeżonych stron przeglądarki. Proszę przejść na inną stronę i spróbować ponownie."
+	},
+	"settings_import_file_error": {
+		"message": "To nieprawidłowy typ pliku. Proszę wybrać plik .ghost i spróbować ponownie."
+	},
+	"browse_button_label": {
+		"message": "Przeglądaj..."
+	},
+	"select_file_for_import": {
+		"message": "Wybierz plik .ghost do zaimportowania"
+	},
+	"file_was_not_selected": {
+		"message": "Nie wybrano pliku"
+	},
+	"refresh_and_try_again": {
+		"message": "Odśwież stronę i spróbuj ponownie"
+	},
+	"not_http_page": {
+		"message": "Upewnij się, że aktualna zakładka ma otwartą stronę http lub https"
+	},
+	"settings_show_patterns_tooltip": {
+		"message": "Adresy URL tropiciela dostępne są pod opisem tropiciela po kliknięciu na danego tropiciela."
+	},
+	"settings_highlight_trackers_tooltip": {
+		"message": "Niekiedy takie funkcje jak udostępnianie w mediach społecznościowych, komentarze lub odtwarzacze wideo nie będą działały w razie zablokowania pewnego tropiciela. Jeśli chcesz aktywować jedną z zablokowanych funkcji, kliknij tę ikonkę na stronie:"
+	},
+	"settings_individual_trackers_tooltip": {
+		"message": "Wybierz które z poszczególnych tropicieli mają być zawsze blokowane lub mieć zawsze zezwolenie na działanie na danej witrynie."
+	},
+	"settings_allow_trackers_tooltip": {
+		"message": "Na przykład zablokowanie tropiciela Facebook na stronie facebook.com może ją uszkodzić."
+	},
+	"settings_show_purple_box_tooltip": {
+		"message": "Licznik tropicieli to aktualizowana w czasie rzeczywistym lista tropicieli wyświetlana w rogu przeglądarki."
+	},
+	"settings_notify_me_tooltip": {
+		"message": "Zezwól Ghostery na pokazywanie w przeglądarce komunikatów związanych z nowymi funkcjami produktu, aktualizacjami i informacjami zwrotnymi od użytkowników."
+	},
+	"settings_share_usage_tooltip": {
+		"message": "Gromadzimy dane analityczne dotyczące użytkowania w celu lepszego zrozumienia które z funkcji są najbardziej wykorzystywane przez użytkowników. Na przykład gdy naciśniesz przycisk Wstrzymaj, zarejestrujemy ping, dzięki któremu będziemy wiedzieli, że skorzystałeś/-aś z tej funkcji."
+	},
+	"settings_human_web_tooltip": {
+		"message": "Obecnie Ghostery wdraża domyślnie Human Web – rewolucyjną technologię, która wykorzystuje masową wiedzę i doświadczenie do stworzenia bardziej prywatnego internetu"
+	},
+	"settings_abtests_tooltip": {
+		"message": "Udział w losowych testach A/B pomaga zespołowi Ghostery zrozumieć, która wersja nowego układu lub funkcji bardziej Ci się podoba."
+	},
+	"settings_opt_in": {
+		"message": "Przyłącz się / Zrezygnuj"
+	},
+	"settings_global_blocking": {
+		"message": "Blokowanie globalne"
+	},
+	"settings_trust_and_restrict": {
+		"message": "Zaufaj i zastrzeż"
+	},
+	"settings_general_settings": {
+		"message": "Ustawienia ogólne"
+	},
+	"settings_searh_by_tracker": {
+		"message": "Wyszukaj według tropiciela"
+	},
+	"page_load": {
+		"message": "Ładowanie strony"
+	},
+	"requests_modified": {
+		"message": "Zmodyfikowane żądania:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Łączna liczba żądań śledzenia i elementów zmodyfikowanych przez Ochronę przed śledzeniem i Blokowanie reklam"
+	},
+	"trackers_blocked": {
+		"message": "Tropiciele zablokowane:"
+	},
+	"settings_trusted_restricted_sites": {
+		"message": "Zaufaj i zastrzeż"
+	},
+	"settings_trusted_sites": {
+		"message": "Zaufane strony"
+	},
+	"settings_sites_placeholder": {
+		"message": "przykład.com (wieloznaczniki są obsługiwane)"
+	},
+	"settings_restricted_sites": {
+		"message": "Zastrzeżone strony"
+	},
+	"settings_trusted_sites_description": {
+		"message": "Strony wymienione w tym miejscu będą zaufane dla wszystkich odblokowanych tropicieli."
+	},
+	"settings_restricted_sites_description": {
+		"message": "Strony wymienione w tym miejscu będą zastrzeżone dla wszystkich zablokowanych tropicieli."
+	},
+	"expand_all": {
+		"message": "Rozwiń wszystko"
+	},
+	"collapse_all": {
+		"message": "Zwiń wszystko"
+	},
+	"blocking_category_tracker_found": {
+		"message": "Odnaleziono"
+	},
+	"blocking_unblock_all": {
+		"message": "Odblokuj wszystkie"
+	},
+	"blocking_unblock_shown": {
+		"message": "Odblokuj wszystkie wyświetlone"
+	},
+	"settings_filter_all_label": {
+		"message": "Wszystkie"
+	},
+	"settings_filter_blocked_label": {
+		"message": "Zablokowane"
+	},
+	"settings_filter_unblocked_label": {
+		"message": "Odblokowane"
+	},
+	"settings_filter_new_label": {
+		"message": "Nowe"
+	},
+	"settings_filter_all": {
+		"message": "Wszystkie tropiciele"
+	},
+	"settings_filter_blocked": {
+		"message": "Zablokowane tropiciele"
+	},
+	"settings_filter_unblocked": {
+		"message": "Odblokowane tropiciele"
+	},
+	"settings_filter_new": {
+		"message": "Nowi tropiciele"
+	},
+	"alert_ghostery_paused": {
+		"message": "Rozszerzenie Ghostery zostało wstrzymane."
+	},
+	"alert_ghostery_resumed": {
+		"message": "Rozszerzenie Ghostery zostało wznowione."
+	},
+	"alert_anti_track_on": {
+		"message": "Ochrona przed śledzeniem WŁĄCZONA. Dane osobowe będą anonimizowane."
+	},
+	"alert_anti_track_off": {
+		"message": "Ochrona przed śledzeniem WYŁĄCZONA. Dane osobowe nie będą anonimizowane."
+	},
+	"alert_ad_block_on": {
+		"message": "Blokowanie reklam WŁĄCZONE. Reklamy będą blokowane."
+	},
+	"alert_ad_block_off": {
+		"message": "Blokowanie reklam WYŁĄCZONE. Reklamy nie będą blokowane."
+	},
+	"alert_smart_block_on": {
+		"message": "Przeglądanie inteligentne WŁĄCZONE. Blokowanie tropicieli będzie dostosowywane w celu zoptymalizowania wydajności strony."
+	},
+	"alert_smart_block_off": {
+		"message": "Przeglądanie inteligentne WYŁĄCZONE. Blokowanie tropicieli nie będzie dostosowywane automatycznie."
+	},
+	"alert_reload": {
+		"message": "Przeładuj, aby zobaczyć zmiany."
+	},
+	"alert_site_trusted": {
+		"message": "Strona zaufana. Działanie tropicieli będzie na tej stronie dozwolone, a ochrona przed śledzeniem wyłączona."
+	},
+	"alert_site_trusted_off": {
+		"message": "Strona nie jest już zaufana."
+	},
+	"alert_site_restricted": {
+		"message": "Strona zastrzeżona. Tropiciele będą na tej stronie blokowane, a ochrona przed śledzeniem włączona."
+	},
+	"alert_site_restricted_off": {
+		"message": "Strona nie jest już zastrzeżona."
+	},
+	"tooltip_anti_track_on": {
+		"message": "Zanonimizowane punkty danych osobowych."
+	},
+	"tooltip_body_in_cliqz": {
+		"message": "Funkcja jest już domyślnie aktywna w Cliqz."
+	},
+	"tooltip_ad_block_on": {
+		"message": "Zablokowano reklamy."
+	},
+	"tooltip_smart_block_on": {
+		"message": "Blokowanie tropicieli dostosowane w celu zoptymalizowania wydajności strony."
+	},
+	"tooltip_trust": {
+		"message": "Zawsze zezwalaj na działanie tropicieli na tej stronie."
+	},
+	"tooltip_trust_on": {
+		"message": "Działanie tropicieli jest na tej stronie dozwolone, a ochrona przed śledzeniem wyłączona. Kliknij, aby cofnąć."
+	},
+	"tooltip_restrict": {
+		"message": "Zawsze blokuj działanie tropicieli na tej stronie."
+	},
+	"tooltip_restrict_on": {
+		"message": "Tropiciele są na tej stronie blokowane, a ochrona przed śledzeniem włączona. Kliknij, aby cofnąć."
+	},
+	"tooltip_pause": {
+		"message": "Wstrzymaj"
+	},
+	"tooltip_resume": {
+		"message": "Wznów Ghostery"
+	},
+	"license_module": {
+		"message": "Moduł"
+	},
+	"license_repository": {
+		"message": "Repozytorium"
+	},
+	"license_information_missing": {
+		"message": "Brak informacji o repozytorium licencji"
+	},
+	"license_type": {
+		"message": "Rodzaj(e) licencji"
+	},
+	"license_publisher": {
+		"message": "Wydawca"
+	},
+	"license_url": {
+		"message": "Url"
+	},
+	"license_email": {
+		"message": "E-mail"
+	},
+	"license_text": {
+		"message": "Tekst licencji"
+	},
+	"license_unknown": {
+		"message": "nieznany"
+	},
+	"license_generic": {
+		"message": "Standardowy tekst licencji"
+	},
+	"license_licenses": {
+		"message": "Licencje"
+	},
+	"license_footer": {
+		"message": "Ghostery$COPY$; to firma należąca do Cliqz. Dowiedz się więcej o $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, filia będąca w pełni własnością Cliqz GmbH. Wszelkie prawa zastrzeżone.",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"copy": {
+				"content": "&copy;"
+			}
+		}
+	},
+	"android_tab_overview": {
+		"message": "Podsumowanie"
+	},
+	"android_tab_site_blocking": {
+		"message": "Blokowanie witryn"
+	},
+	"android_tab_global_blocking": {
+		"message": "Blokowanie globalne"
+	},
+	"android_site_blocking_header": {
+		"message": "Tropiciele na tej stronie"
+	},
+	"android_global_blocking_header": {
+		"message": "Globalne śledzenie"
+	},
+	"android_blocking_reset": {
+		"message": "Resetuj ustawienia"
+	},
+	"android_block": {
+		"message": "Blokuj"
+	},
+	"android_unblock": {
+		"message": "Odblokuj"
+	},
+	"android_restrict": {
+		"message": "Zastrzeż"
+	},
+	"android_unrestrict": {
+		"message": "Cofnij"
+	},
+	"android_trust": {
+		"message": "Ufaj"
+	},
+	"android_untrust": {
+		"message": "Cofnij"
+	},
+	"android_anonymize": {
+		"message": "Anonimizuj"
+	},
+	"android_anonymized": {
+		"message": "Zanonimizowane"
+	},
+	"hub_side_navigation_home": {
+		"message": "Strona główna"
+	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "Uaktualnij plan"
+	},
+	"hub_side_navigation_tutorial": {
+		"message": "Obejrzyj tutorial"
+	},
+	"hub_side_navigation_products": {
+		"message": "Zobacz więcej produktów Ghostery"
+	},
+	"hub_home_page_title": {
+		"message": "Hub Ghostery - Strona główna"
+	},
+	"hub_home_header_text": {
+		"message": "Ghostery jest gotowe!"
+	},
+	"hub_home_header_tagline": {
+		"message": "Obecnie jesteś chroniony/-a za pomocą ustawień domyślnych."
+	},
+	"hub_home_header_tagline_2": {
+		"message": "Rozpocznij przeglądanie!"
+	},
+	"hub_home_header_checkbox_label": {
+		"message": "Udostępnij dodatkowe anonimowe dane analityczne w celu poprawy wydajności Ghostery."
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "Funkcje Human Web są domyślnie wyłączone dla nowych użytkowników. Możesz włączyć te zalecane funkcje w niestandardowej konfiguracji lub w rozszerzeniu."
+	},
+	"hub_home_header_info": {
+		"message": "Nowi użytkownicy korzystają z rozwiązania Human Web. Możesz zmienić te ustawienia przy instalacji lub w rozszerzeniu. "
+	},
+	"hub_home_header_info_link": {
+		"message": "Dowiedz się więcej."
+	},
+	"hub_home_subheader_optimize": {
+		"message": "Zoptymalizuj korzystanie z Ghostery"
+	},
+	"hub_home_feature_tutorial_title": {
+		"message": "Obejrzyj tutorial"
+	},
+	"hub_home_feature_tutorial_text": {
+		"message": "Poznaj główne funkcje Ghostery."
+	},
+	"hub_home_feature_tutorial_button_alt": {
+		"message": "Tutorial ukończony"
+	},
+	"hub_home_feature_setup_text": {
+		"message": "Edytuj ustawienia i preferencje blokowania."
+	},
+	"hub_home_feature_setup_button": {
+		"message": "Edytuj konfigurację"
+	},
+	"hub_home_feature_setup_button_alt": {
+		"message": "Konfiguracja niestandardowa zakończona"
+	},
+	"hub_home_plus_upgrade_text": {
+		"message": "Wzmocnij swoją ochronę prywatności. Uaktualnij plan do wersji Ghostery Plus, aby uzyskać dostęp do prywatnej przeglądarki, prywatnego wyszukiwania i zaawansowanej analizy tropicieli!"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "Uaktualnij teraz"
+	},
+	"hub_home_plus_full_protection": {
+		"message": "Jesteś w pełni chroniony!"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub – Uaktualnij plan"
+	},
+	"hub_upgrade_your": {
+		"message": "Uaktualnij swój"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": " plan ochrony"
+	},
+	"hub_upgrade_yearly": {
+		"message": "Rocznie"
+	},
+	"hub_upgrade_monthly": {
+		"message": "Miesięcznie"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "Bezpłatne"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "Już chronione"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "Podstawowa ochrona"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "Podstawowa ochrona przeglądarki"
+	},
+	"hub_upgrade_advanced_device_protection": {
+		"message": "Zaawansowana ochrona urządzeń"
+	},
+	"hub_upgrade_to": {
+		"message": "Zaktualizuj do"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "Zobacz pełną listę funkcji"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "Dodatkowa ochrona"
+	},
+	"hub_upgrade_maximum_protection": {
+		"message": "Maksymalna ochrona"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "Blokowanie tropicieli przeglądarki"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "Blokowanie reklam przeglądarki"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "Niestandardowe preferencje blokowania"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "Tematy rozszerzeń"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "Statystyki archiwalne rozszerzenia"
+	},
+	"hub_setup_page_title": {
+		"message": "Hub Ghostery - Konfiguracja"
+	},
+	"hub_setup_page_title_blocking": {
+		"message": "Hub Ghostery - Konfiguracja Blokowanie"
+	},
+	"hub_setup_page_title_antisuite": {
+		"message": "Hub Ghostery - Konfiguracja Anti-Suite"
+	},
+	"hub_setup_page_title_humanweb": {
+		"message": "Hub Ghostery - Konfiguracja Human Web"
+	},
+	"hub_setup_page_title_done": {
+		"message": "Hub Ghostery - Konfiguracja zakończona"
+	},
+	"hub_setup_header_title_blocking": {
+		"message": "Ghostery może blokować tropicieli, dzięki czemu przeglądanie treści będzie bardziej przejrzyste, szybkie i bezpieczne.$NEW_LINE$Co chcesz blokować?",
+		"placeholders": {
+			"new_line": {
+				"content": "<br />"
+			}
+		}
+	},
+	"hub_setup_header_title_antisuite": {
+		"message": "Chcesz przeglądać przy użyciu inteligentnej technologii zawartej w rekomendowanych przez nas funkcjach?"
+	},
+	"hub_setup_header_title_humanweb": {
+		"message": "Czy chcesz pomóc w ulepszaniu Ghostery?"
+	},
+	"hub_setup_header_title_done": {
+		"message": "Konfiguracja niestandardowa zakończona!"
+	},
+	"hub_setup_exit_flow": {
+		"message": "Wyjdź z konfiguracji niestandardowej"
+	},
+	"hub_setup_enter_modal_text": {
+		"message": "Wprowadzenie konfiguracji niestandardowej spowoduje nadpisanie poprzednich ustawień Ghostery. Czy chcesz kontynuować?"
+	},
+	"hub_setup_modal_button_no": {
+		"message": "Nie"
+	},
+	"hub_setup_modal_button_yes": {
+		"message": "Tak"
+	},
+	"hub_setup_modal_button_ask_again": {
+		"message": "Nie pytaj ponownie"
+	},
+	"hub_setup_blocking_text_recommended": {
+		"message": "Blokuj domyślne"
+	},
+	"hub_setup_blocking_description_recommended": {
+		"message": "Zablokowane reklamy, analizy statystyk strony i tropiciele reklam dla dorosłych"
+	},
+	"hub_setup_blocking_text_nothing": {
+		"message": "Nie blokuj niczego"
+	},
+	"hub_setup_blocking_description_nothing": {
+		"message": "Brak zablokowanych tropicieli"
+	},
+	"hub_setup_blocking_text_everything": {
+		"message": "Blokuj wszystko"
+	},
+	"hub_setup_blocking_description_everything": {
+		"message": "Wszystkie tropiciele zablokowane"
+	},
+	"hub_setup_blocking_text_custom": {
+		"message": "Wybierz z listy"
+	},
+	"hub_setup_blocking_description_custom": {
+		"message": "Wybierz które tropiciele blokować"
+	},
+	"hub_setup_antisuite_description_antitracking": {
+		"message": "Anonimizuj odblokowane i niezidentyfikowane tropiciele, aby zapewnić lepszą ochronę przeglądania treści."
+	},
+	"hub_setup_feature_already_active": {
+		"message": "Ta funkcja jest domyślnie aktywna w przeglądarce Cliqz.$LINK_LM_START$Więcej informacji$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"hub_setup_antisuite_feature_enabled": {
+		"message": "Włączone"
+	},
+	"hub_setup_humanweb_header": {
+		"message": "Wykorzystujemy dane Human Web w celu poprawy wydajności Ghostery. Nigdy nie gromadzimy żadnych danych osobowych. $LINK_LM_START$Dowiedz się więcej$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"hub_setup_humanweb_label": {
+		"message": "Wesprzyj Ghostery udostępniając te informacje"
+	},
+	"hub_setup_ready_heading": {
+		"message": "Zoptymalizuj korzystanie z Ghostery"
+	},
+	"hub_setup_feature_tutorial_title": {
+		"message": "Obejrzyj tutorial"
+	},
+	"hub_setup_feature_tutorial_description": {
+		"message": "Poznaj główne funkcje Ghostery."
+	},
+	"hub_setup_feature_supporter_description": {
+		"message": "Wesprzyj Ghostery i odblokuj dodatki specjalne."
+	},
+	"hub_setup_feature_products_title": {
+		"message": "Zobacz więcej produktów Ghostery"
+	},
+	"hub_setup_feature_products_description": {
+		"message": "Chroń w pełni swoją prywatność dzięki naszemu pełnemu pakietowi ochrony prywatności!"
+	},
+	"hub_setup_feature_products_button": {
+		"message": "Tak, poproszę!"
+	},
+	"hub_tutorial_page_title": {
+		"message": "Hub Ghostery - Tutorial"
+	},
+	"hub_tutorial_page_title_video": {
+		"message": "Hub Ghostery - Tutorial Przegląd"
+	},
+	"hub_tutorial_page_title_trackerlist": {
+		"message": "Hub Ghostery - Tutorial Tropiciele"
+	},
+	"hub_tutorial_page_title_blocking": {
+		"message": "Hub Ghostery - Tutorial Blokowanie"
+	},
+	"hub_tutorial_page_title_layout": {
+		"message": "Hub Ghostery - Tutorial Układ wizualny"
+	},
+	"hub_tutorial_page_title_trust": {
+		"message": "Hub Ghostery - Tutorial Zaufaj i zastrzeż"
+	},
+	"hub_tutorial_page_title_anti_suite": {
+		"message": "Hub Ghostery - Tutorial Funkcje dodatkowe"
+	},
+	"hub_tutorial_exit_flow": {
+		"message": "Wyjdź z tutoriala"
+	},
+	"hub_tutorial_detailed_expanded_view": {
+		"message": "Widok szczegółowy rozszerzony"
+	},
+	"hub_tutorial_video_title": {
+		"message": "Co Ghostery może dla Ciebie zrobić"
+	},
+	"hub_tutorial_video_tagline": {
+		"message": "Blokuj tropicieli i reklamy, chroń swoją prywatność i przyspiesz ładowanie stron."
+	},
+	"hub_tutorial_trackerlist_title": {
+		"message": "Lista tropicieli"
+	},
+	"hub_tutorial_trackerlist_tagline": {
+		"message": "Ghostery pomaga w dostarczaniu informacji o śledzących Cię firmach, prezentując listy tropicieli aktywnych na każdej z odwiedzanych witryn."
+	},
+	"hub_tutorial_blocking_title": {
+		"message": "Wybierz co i jak chcesz blokować"
+	},
+	"hub_tutorial_blocking_tagline": {
+		"message": "Miej pod kontrolą swoją prywatność oraz przeglądanie treści, blokując lub odblokowując tropicieli z listy."
+	},
+	"hub_tutorial_blocking_allow": {
+		"message": "Zawsze zezwalaj na działanie tropiciela na bieżącej stronie."
+	},
+	"hub_tutorial_blocking_block": {
+		"message": "Zawsze blokuj działanie tropiciela na bieżącej stronie."
+	},
+	"hub_tutorial_blocking_block_always": {
+		"message": "Zawsze blokuj działanie tropiciela na każdej stronie."
+	},
+	"hub_tutorial_layout_title": {
+		"message": "Widok zwykły i szczegółowy"
+	},
+	"hub_tutorial_layout_tagline": {
+		"message": "Przełączaj się pomiędzy widokiem uproszczonym i szczegółowym w zależności od tego, co ma byś wyświetlane przez Ghostery."
+	},
+	"hub_tutorial_trust_title": {
+		"message": "Zaufaj i zastrzeż strony"
+	},
+	"hub_tutorial_trust_tagline": {
+		"message": "Jednym kliknięciem dodaj stronę do zaufanych lub zastrzeżonych."
+	},
+	"hub_tutorial_trust_trust_site": {
+		"message": "Zawsze zezwalaj na działanie tropicieli na tej stronie."
+	},
+	"hub_tutorial_trust_restrict_site": {
+		"message": "Zawsze blokuj działanie tropicieli na tej stronie."
+	},
+	"hub_tutorial_antisuite_title": {
+		"message": "Zyskaj dodatkową ochronę i zautomatyzowaną kontrolę dzięki naszym funkcjom wzmocnionej ochrony prywatności:"
+	},
+	"hub_tutorial_antisuite_antitracking_description": {
+		"message": "Usuwaj punkty danych, które mogą być wykorzystywane przez strony do Twojej identyfikacji."
+	},
+	"hub_products_page_title": {
+		"message": "Hub Ghostery - Wypróbuj inne produkty Ghostery"
+	},
+	"hub_products_header_title": {
+		"message": "Inteligentne przeglądanie z produktami Ghostery!"
+	},
+	"hub_products_header_description": {
+		"message": "Zapewnij sobie ochronę i ulepsz korzystanie online dzięki naszemu pełnemu pakietowi ochrony prywatności."
+	},
+	"hub_products_main_promo_title": {
+		"message": "Mobilna przeglądarka chroniąca prywatność"
+	},
+	"hub_products_main_promo_description": {
+		"message": "Przeglądaj treści na bieżąco bez reklam i działania tropicieli dzięki naszej zaktualizowanej i rozbudowanej przeglądarce mobilnej. Teraz jest ona wyposażona w prywatną wyszukiwarkę!"
+	},
+	"hub_products_second_promo_title": {
+		"message": "Ghostery Start Tab"
+	},
+	"hub_products_second_promo_description": {
+		"message": "Przeszukuj w trybie prywatnym i przeglądaj statystyki tropicieli z naszej funkcji nowej zakładki. Już wkrótce!"
+	},
+	"hub_products_third_promo_title": {
+		"message": "Ghostery Lite"
+	},
+	"hub_products_third_promo_description": {
+		"message": "Chroń swoją prywatność online i pozbądź się reklam dzięki naszemu najlżejszemu jak dotąd produktowi dostępnemu wyłącznie na Safari."
+	},
+	"hub_supporter_page_title": {
+		"message": "Hub Ghostery - Ghostery Plus"
+	},
+	"hub_supporter_header_title": {
+		"message": "Zaktualizuj do Ghostery Plus"
+	},
+	"hub_supporter_header_description": {
+		"message": "Wzmocnij swoją ochronę prywatności i uzyskaj dostęp do pełnego pakietu produktów!"
+	},
+	"hub_supporter_price": {
+		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ miesięcznie",
+		"placeholders": {
+			"sup_start": {
+				"content": "<sup>"
+			},
+			"sup_end": {
+				"content": "</sup>"
+			},
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			}
+		}
+	},
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "Niestandardowe motywy i nie tylko"
+	},
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Dostosuj kolorystykę Ghostery — wypróbuj motywy Leaf, Palm i Dark Blue!"
+	},
+	"hub_supporter_perk_themes_description": {
+		"message": "Dostosuj kolorystykę Ghostery — wypróbuj nasz temat Dark Blue!"
+	},
+	"hub_supporter_perk_analytics_title": {
+		"message": "Zaawansowana analiza tropicieli"
+	},
+	"hub_supporter_perk_analytics_description": {
+		"message": "Dostęp do panelu Ghostery Insights zawierającego informacje o tropicielach na bieżąco"
+	},
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "Prywatna przeglądarka i wyszukiwarka"
+	},
+	"hub_supporter_perk_dawn_and_glow_description": {
+		"message": "Pobierz Ghostery Dawn i Ghostery Glow – prywatną przeglądarkę oraz wbudowaną w nią wyszukiwarkę"
+	},
+	"hub_supporter_manifesto": {
+		"message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
+	},
+	"hub_supporter_feature_theme_description": {
+		"message": "Dostosuj kolorystykę Ghostery, zyskując nowe wrażenia wizualne! Funkcja wprowadzona na prośbę użytkowników. Wypróbuj specjalny temat Dark Blue, a w przyszłości także i inne."
+	},
+	"hub_supporter_feature_stats_description": {
+		"message": "Przeglądaj archiwalne wyniki blokowania za pomocą wykresów i statystyk, aby odkryć trendy i dowiedzieć się, jak Ghostery wpłynęło na sposób przeglądania przez Ciebie stron internetowych."
+	},
+	"hub_supporter_feature_support_description": {
+		"message": "Potrzebujesz wsparcia? Znalazłeś uszkodzoną stronę? Uzyskaj w szybki sposób odpowiedzi na swoje pytania i rozwiązania problemów przy pomocy naszego działu wsparcia priorytetowego, który dostępny jest po subskrypcji do konta Plus."
+	},
+	"hub_supporter_feature_more_title": {
+		"message": "...i wiele więcej!"
+	},
+	"hub_supporter_feature_more_description": {
+		"message": "Zaglądaj i sprawdzaj inne super funkcje i informacje, dzięki którym możemy sprawić, by korzystanie z Ghostery było jeszcze przyjemniejsze."
+	},
+	"hub_signedin_exit": {
+		"message": "Powrót do strony głównej"
+	},
+	"hub_signedin_header_title": {
+		"message": "Już jesteś zalogowany/-a"
+	},
+	"hub_signedin_as_email": {
+		"message": "Zalogowano jako"
+	},
+	"hub_login_header_title": {
+		"message": "Zaloguj się do swojego konta."
+	},
+	"hub_login_label_password_invalid": {
+		"message": "Użyj od 8 do 50 znaków."
+	},
+	"hub_login_link_dont_have_account": {
+		"message": "Nie masz konta?"
+	},
+	"hub_login_link_create_account": {
+		"message": "Zarejestruj się. "
+	},
+	"hub_login_toast_success": {
+		"message": "Logowanie powiodło się! Ustawienia Twojego konta zostały zaimportowane."
+	},
+	"hub_create_account_header_title": {
+		"message": "Czy chcesz utworzyć konto Ghostery do synchronizacji ustawień na wszystkich przeglądarkach i urządzeniach?"
+	},
+	"hub_create_account_label_first_name": {
+		"message": "Imię (opcjonalnie):"
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "Nazwisko (opcjonalnie):"
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "Dozwolone są tylko te znaki specjalne: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "Użyj od 8 do 50 znaków."
+	},
+	"hub_create_account_confirm_password_do_not_match": {
+		"message": "Hasła nie są identyczne."
+	},
+	"hub_create_account_already_have_account": {
+		"message": "Masz już konto Ghostery?"
+	},
+	"hub_create_account_link_login": {
+		"message": "Zaloguj się tutaj."
+	},
+	"hub_create_account_toast_success": {
+		"message": "Utworzenie konta powiodło się"
+	},
+	"hub_create_account_toast_error": {
+		"message": "Ten adres e-mail jest już używany.  Wybierz inny adres. "
+	},
+	"enable_when_paused": {
+		"message": "Aby użyć tej funkcji, wznów Ghostery."
+	},
+	"enable_when_whitelisted": {
+		"message": "Aby użyć tej funkcji, cofnij Zaufaj stronie"
+	},
+	"enable_when_blacklisted": {
+		"message": "Aby użyć tej funkcji, cofnij Zastrzeż stronę."
+	},
+	"enable_when_not_scanned": {
+		"message": "Aby użyć tej funkcji, przejdź na następną stronę."
+	},
+	"popup_cancel_button": {
+		"message": "Anuluj"
+	},
+	"popup_apply_code_button": {
+		"message": "Zastosuj kod"
+	},
+	"subscription_info": {
+		"message": "Szczegóły abonamentu"
+	},
+	"subscription_themes": {
+		"message": "Tematy Ghostery"
+	},
+	"subscription_themes_title": {
+		"message": "Tematy"
+	},
+	"priority_support": {
+		"message": "Wsparcie priorytetowe"
+	},
+	"subscribe_pitch": {
+		"message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
+	},
+	"subscribe_pitch_spring": {
+		"message": "Podoba Ci się to, co robimy? Wesprzyj nas i odblokuj nowe wiosenne motywy, osobiste analizy dotyczące śledzenia i inne specjalne dodatki, przechodząc do wersji Ghostery Plus!"
+	},
+	"subscribe_pitch_learn_more": {
+		"message": "Dowiedz się więcej"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "Uzyskaj Ghostery Plus!"
+	},
+	"subscribe_pitch_no_thanks": {
+		"message": "Może później"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "Masz już abonament? Zaloguj się tutaj"
+	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Masz już subskrypcję? Zaloguj się"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "Masz już subskrypcję? Zaloguj się"
+	},
+	"subscription_default_theme": {
+		"message": "Domyślne"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Temat Dark Blue"
+	},
+	"subscription_palm_theme": {
+		"message": "Temat Palm"
+	},
+	"subscription_leaf_theme": {
+		"message": "Temat Leaf"
+	},
+	"subscription_status": {
+		"message": "Status"
+	},
+	"subscription_active": {
+		"message": "Aktywny"
+	},
+	"subscription_inactive": {
+		"message": "Nieaktywny"
+	},
+	"subscription_manage": {
+		"message": "Pobierz produkty i zarządzaj subskrypcją"
+	},
+	"subscription_themes_tooltip": {
+		"message": "Zmień kolorystykę Ghostery!"
+	},
+	"subscription_charge_date": {
+		"message": "Data kolejnej płatności"
+	},
+	"subscription_expired": {
+		"message": "Konto wygasło"
+	},
+	"subscription_auto_renewal": {
+		"message": "Odnowienie automatyczne"
+	},
+	"subscription_plan": {
+		"message": "Plan"
+	},
+	"subscription_days_left": {
+		"message": "Pozostało $DAYS$ dni abonamentu.",
+		"placeholders": {
+			"days": {
+				"content": "$1"
+			}
+		}
+	},
+	"subscription_one_day_left": {
+		"message": "Twój abonament wygaśnie jutro."
+	},
+	"subscription_resubscribe": {
+		"message": "Odnów abonament"
+	},
+	"subscription_support": {
+		"message": "Znalazłeś/-aś uszkodzoną stronę? Potrzebujesz pomocy dotyczącej blokowania? Napisz do nas!"
+	},
+	"subscription_submit_issue": {
+		"message": "Zgłoś problem"
+	},
+	"subscription_upgrade_to": {
+		"message": "Zaktualizuj do"
+	},
+	"panel_stats_menu_cumulative": {
+		"message": "Całościowo"
+	},
+	"panel_stats_menu_monthly": {
+		"message": "Miesięcznie"
+	},
+	"panel_stats_menu_daily": {
+		"message": "Dziennie"
+	},
+	"panel_stats_header_title_monthly": {
+		"message": "Statystyki archiwalne tropicieli (Średnio na miesiąc)"
+	},
+	"panel_stats_header_title_daily": {
+		"message": "Statystyki archiwalne tropicieli (Średnio na dzień)"
+	},
+	"panel_stats_trackers_seen": {
+		"message": "Widoczni tropiciele"
+	},
+	"panel_stats_trackers_blocked": {
+		"message": "Tropiciele zablokowani"
+	},
+	"panel_stats_trackers_anonymized": {
+		"message": "Zanonimizowane punkty danych"
+	},
+	"panel_stats_ads_blocked": {
+		"message": "Zablokowane reklamy"
+	},
+	"panel_stats_cumulative": {
+		"message": "Całościowo"
+	},
+	"panel_stats_monthly": {
+		"message": "Miesięcznie"
+	},
+	"panel_stats_daily": {
+		"message": "Dziennie"
+	},
+	"panel_stats_reset": {
+		"message": "Resetuj"
+	},
+	"panel_stats_reset_modal_text": {
+		"message": "Twoje archiwalne statystyki zostaną wyzerowane. Brak możliwości odzyskanie tych danych. Chcesz kontynuować?"
+	},
+	"panel_stats_reset_modal_yes": {
+		"message": "Tak, wyzeruj"
+	},
+	"panel_stats_reset_modal_no": {
+		"message": "Nie, zachowaj historię"
+	},
+	"panel_stats_pitch_modal_text": {
+		"message": "Odblokuj zaawansowaną analizę tropicieli i skuteczną prywatną przeglądarkę z wbudowaną wyszukiwarką po aktualizacji planu do wersji Ghostery Plus"
+	},
+	"panel_stats_pitch_modal_already": {
+		"message": "Masz już subskrypcję?"
+	},
+	"panel_stats_pitch_modal_sign_in": {
+		"message": "Zaloguj się"
+	},
+	"panel_stats_pitch_modal_tooltip": {
+		"message": "Usuń całą historię danych statystycznych aż do teraz."
+	},
+	"cookie": {
+		"message": "plik cookie"
+	},
+	"cookies": {
+		"message": "pliki cookie"
+	},
+	"fingerprint": {
+		"message": "odcisk palca"
+	},
+	"fingerprints": {
+		"message": "odciski palca"
+	},
+	"ad": {
+		"message": "reklama"
+	},
+	"ads": {
+		"message": "reklamy"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Akceptuję $LINK_TERMS_START$warunki użytkowania$LINK_END$ i $LINK_LICENSE_START$umowę licencji publicznej$LINK_END$ oraz wyrażam zgodę na zasady ochrony danych zawarte w $LINK_PRIVACY_START$polityce prywatności$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"enhanced_anti_tracking": {
+		"message": "Ochrona przed śledzeniem"
+	},
+	"unidentified": {
+		"message": "Niezidentyfikowane"
+	},
+	"unidentified_description": {
+		"message": "Niezidentyfikowane tropiciele zostały usunięte przez funkcję ochrony przed śledzeniem"
+	},
+	"ghostery_is_ready": {
+		"message": "Ghostery jest gotowe!"
+	},
+	"choose_your_privacy_plan": {
+		"message": "Wybierz plan prywatności"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Wybierz plan prywatności Ghostery"
+	},
+	"ghostery_basic": {
+		"message": "Podstawowy"
+	},
+	"dollar_sign": {
+		"message": "&#36;"
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "miesięcznie"
+	},
+	"per_year": {
+		"message": "rocznie"
+	},
+	"select_basic": {
+		"message": "Wybierz plan podstawowy"
+	},
+	"select_plus": {
+		"message": "Wybierz plan Plus"
+	},
+	"recommended": {
+		"message": "Zalecane"
+	},
+	"get_ghostery_plus": {
+		"message": "Uzyskaj Ghostery Plus"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "Uzyskaj Ghostery Plus!"
+	},
+	"already_subscribed": {
+		"message": "Już zasubskrybowano"
+	},
+	"new_themes": {
+		"message": "Nowe tematy"
+	},
+	"historical_blocking_stats": {
+		"message": "Dane archiwalne dotyczące blokowania"
+	},
+	"sign_in": {
+		"message": "Zaloguj się"
+	},
+	"sign_out": {
+		"message": "Wyloguj się"
+	},
+	"create_account": {
+		"message": "Utwórz konto"
+	},
+	"email_colon": {
+		"message": "E-mail:"
+	},
+	"confirm_email_colon": {
+		"message": "Potwierdź e-mail:"
+	},
+	"next": {
+		"message": "Dalej"
+	},
+	"next_or_start_trial": {
+		"message": "Dalej lub Rozpocznij okres próbny"
+	},
+	"previous": {
+		"message": "Wstecz"
+	},
+	"done": {
+		"message": "Gotowe"
+	},
+	"simple_view": {
+		"message": "Widok uproszczony"
+	},
+	"detailed_view": {
+		"message": "Widok szczegółowy"
+	},
+	"support": {
+		"message": "Wsparcie"
+	},
+	"start": {
+		"message": "Start"
+	},
+	"password_colon": {
+		"message": "Hasło:"
+	},
+	"confirm_password_colon": {
+		"message": "Potwierdź hasło:"
+	},
+	"please_enter_a_valid_email": {
+		"message": "Wpisz prawidłowy adres e-mail."
+	},
+	"your_email_do_not_match": {
+		"message": "E-maile nie są identyczne."
+	},
+	"customize_setup": {
+		"message": "Dostosuj konfigurację"
+	},
+	"learn_more": {
+		"message": "Dowiedz się więcej"
+	},
+	"historical_stats": {
+		"message": "Statystyki archiwalne"
+	},
+	"on": {
+		"message": "Wł."
+	},
+	"off": {
+		"message": "Wył."
+	},
+	"enhanced_ad_blocking": {
+		"message": "Blokowanie reklam"
+	},
+	"smart_blocking": {
+		"message": "Przeglądanie inteligentne"
+	},
+	"smart_blocking_DESC": {
+		"message": "Automatycznie blokuj i odblokowuj tropiciele w celu zoptymalizowania wydajności strony."
+	},
+	"ad_blocking_DESC": {
+		"message": "Blokuj reklamy na odwiedzanych stronach."
+	},
+	"anti_tracking_DESC": {
+		"message": "Anonimizuj odblokowane i nieznane tropiciele aby zapewnić lepszą ochronę przeglądania treści."
+	},
+	"no_such_email_password_combo": {
+		"message": "Wygląda na to, że nie możemy odnaleźć takiej kombinacji adresu e-mail i hasła. Wykonaj ponowną próbę."
+	},
+	"promos_turned_off_notification": {
+		"message": "Wyłączono promocje. Można je włączyć w menu",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "Ustawienia"
+	},
+	"try_ghostery_midnight": {
+		"message": "Wypróbuj Ghostery Midnight"
+	},
+	"seven_day_free_trial": {
+		"message": "7-dniowy darmowy okres próbny"
+	},
+	"spring_is_here": {
+		"message": "Nadeszła wiosna!"
+	},
+	"full_coverage_protection_promise": {
+		"message": "Uzyskaj pełną ochronę we wszystkich przeglądarkach i aplikacjach na urządzeniu"
+	},
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "Blokowanie śledzenia i reklam w całym systemie"
+	},
+	"built_in_vpn": {
+		"message": "Wbudowana sieć VPN"
+	},
+	"custom_whitelist_options": {
+		"message": "Opcje niestandardowe zaufanych stron"
+	},
+	"historical_tracking_insights": {
+		"message": "Informacje oparte o historię śledzenia"
+	},
+	"download_for_free": {
+		"message": "Pobierz bezpłatnie"
+	},
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Wesprzyj Ghostery i wypróbuj wersję Plus"
+	},
+	"no_thanks_continue_with_basic": {
+		"message": "Nie, dziękuję. Kontynuuj z wersją podstawową"
+	},
+	"too_many_password_resets_text": {
+		"message": "Zbyt wiele żądań zresetowania hasła. Spróbuj ponownie za godzinę."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Zbyt wiele nieudanych prób logowania. Spróbuj ponownie za godzinę."
+	},
+	"choose_your_default_search": {
+		"message": "Wybierz domyślną wyszukiwarkę"
+	},
+	"pick_a_default_search_engine": {
+		"message": "Wybierz domyślną wyszukiwarkę dla wszystkich wyszukiwań."
+	},
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights (zaawansowana analiza tropicieli)"
+	},
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn (prywatna przeglądarka)"
+	},
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow (prywatna wyszukiwarka bez reklam)"
+	},
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "Niestandardowe motywy kolorystyczne"
+	},
+	"plus_subscriber_perk_priority_support": {
+		"message": "Wsparcie priorytetowe"
+	},
+	"privacy_protection": {
+		"message": "Ochrona prywatności w tej witrynie"
+	},
+	"block_toggle_ads": {
+		"message": "Blokuj reklamy"
+	},
+	"block_toggle_tracking": {
+		"message": "Blokuj tropiciele"
+	},
+	"block_toggle_annoyances": {
+		"message": "Blokuj irytujące elementy"
+	},
+	"statistical_report": {
+		"message": "Raport statystyk"
+	},
+	"subscribe": {
+		"message": "Subskrybuj"
+	},
+	"back": {
+		"message": "Wstecz"
+	},
+	"trackers_detected": {
+		"message": "Wykryto"
+	},
+	"tracker_details": {
+		"message": "Szczegóły tropiciela"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "Wyłącz licznik tropicieli na pasku narzędzi przeglądarki"
+	}
+}
