@@ -21,7 +21,6 @@ import { prefsGet } from '../utils/common';
 
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * Class for handling user configuration properties synchronously.
