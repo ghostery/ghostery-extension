@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
   "author": "Ghostery",
-  "name": "__MSG_name__",
+  "name": "Ghostery - Ad Blocker",
   "short_name": "Ghostery",
   "version": "9.1.0",
   "version_name": "9.1.0",
   "default_locale": "en",
-  "description": "__MSG_short_description__",
+  "description": "Block Ads, Trackers and Annoyances",
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
