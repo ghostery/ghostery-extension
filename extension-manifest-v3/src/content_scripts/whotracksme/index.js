@@ -14,6 +14,12 @@ function postMessage({ urls }) {
   chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ urls }]});
 }
 
+// Should only be needed on Safari:
+// the tabId of the initial chrome.webNavigation.onCommitted
+// is not reliable. When opening bookmarks, it can happen that
+// the event is associated with a tabId of 0.
+chrome.runtime.sendMessage({ action: "onCommitted" });
+
 const origin = (new URL(window.location.href)).origin;
 
 const start = Date.now();
@@ -55,7 +61,7 @@ window.addEventListener('load', () => {
     // Send back the sources of every script and image in the DOM back to the host application.
     [].slice.apply(document.scripts).forEach(function(el) { sendMessage(el.src, 'load script'); });
     [].slice.apply(document.images).forEach(function(el) { sendMessage(el.src, 'load image'); });
-    [].slice.apply(document.getElementsByTagName('iframe')).forEach(function(el) { sendMessage(el.src, 'load iframe'); })
+    [].slice.apply(document.getElementsByTagName('iframe')).forEach(function(el) { sendMessage(el.src, 'load iframe'); });
   }
 
   window.addEventListener("load", onLoadNativeCallback, false);
