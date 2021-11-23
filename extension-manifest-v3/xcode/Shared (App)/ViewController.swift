@@ -6,13 +6,13 @@
 //
 
 import WebKit
+import SafariServices
 
 #if os(iOS)
 import UIKit
 typealias PlatformViewController = UIViewController
 #elseif os(macOS)
 import Cocoa
-import SafariServices
 typealias PlatformViewController = NSViewController
 #endif
 
@@ -21,6 +21,12 @@ let extensionBundleIdentifier = "com.ghostery.lite.extension"
 class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
     @IBOutlet var webView: WKWebView!
+
+#if os(iOS)
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+#endif
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,19 +62,29 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-#if os(macOS)
-        if (message.body as! String != "open-preferences") {
-            return;
+
+        if (message.body as! String == "open-support") {
+            let url = URL(string: "https://www.ghostery.com/support")!
+#if os(iOS)
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true, completion: nil)
+#elseif os(macOS)
+            NSWorkspace.shared.open(url)
+#endif
         }
 
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
-            guard error == nil else {
-                // Insert code to inform the user that something went wrong.
-                return
-            }
 
-            DispatchQueue.main.async {
-                NSApplication.shared.terminate(nil)
+#if os(macOS)
+        if (message.body as! String == "open-preferences") {
+            SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
+                guard error == nil else {
+                    // Insert code to inform the user that something went wrong.
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    NSApplication.shared.terminate(nil)
+                }
             }
         }
 #endif

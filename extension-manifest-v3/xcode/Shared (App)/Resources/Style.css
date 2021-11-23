@@ -20,12 +20,13 @@ body {
     justify-content: center;
     flex-direction: column;
 
-    gap: var(--spacing);
-    margin: 0 calc(var(--spacing) * 2);
+    margin: 0 10px;
     height: 100%;
 
     font: -apple-system-short-body;
     text-align: center;
+    background-color: #2f3136;
+    color: #dad3d3;
 }
 
 body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) {
@@ -56,6 +57,30 @@ body.state-off :is(.state-on, .state-unknown) {
     display: none;
 }
 
+strong {
+    color: white;
+}
+
+img {
+    margin-bottom: 20px;
+}
+
 button {
-    font-size: 1em;
+    background-color: #00aef0;
+    padding: 16px 29px 14px 55px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    line-height: inherit;
+    margin: 15px 0px;
+}
+
+.help a, .help a:visited {
+    color: #00aef0;
+    text-decoration: none;
 }

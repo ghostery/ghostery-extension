@@ -15,3 +15,9 @@ function openPreferences() {
 }
 
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
+
+document.querySelector(".help a").addEventListener("click", (ev) => {
+    ev.preventDefault();
+    webkit.messageHandlers.controller.postMessage("open-support");
+    return false;
+});
