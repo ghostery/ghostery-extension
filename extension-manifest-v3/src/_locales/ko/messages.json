@@ -278,7 +278,7 @@
 		"message": "호스팅"
 	},
 	"category_misc": {
-		"message": "여러 가지 잡다한"
+		"message": "기타"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -2137,33 +2137,33 @@
 		"message": "우선 지원"
 	},
 	"privacy_protection": {
-		"message": "이 사이트의 개인 정보 보호"
+		"message": "이 사이트에서 개인 정보 보호"
 	},
 	"block_toggle_ads": {
 		"message": "광고 차단 "
 	},
 	"block_toggle_tracking": {
-		"message": "블록 추적기"
+		"message": "트래커 차단"
 	},
 	"block_toggle_annoyances": {
-		"message": "성가심 차단"
+		"message": "방해 차단"
 	},
 	"statistical_report": {
 		"message": "통계 보고서"
 	},
 	"subscribe": {
-		"message": "구독하다"
+		"message": "구독"
 	},
 	"back": {
 		"message": "뒤로"
 	},
 	"trackers_detected": {
-		"message": "감지됨"
+		"message": "탐지됨"
 	},
 	"tracker_details": {
-		"message": "추적기 세부 정보"
+		"message": "트래커 세부 정보"
 	},
 	"options_tracker_wheel_disabled": {
-		"message": "브라우저 툴바에서 트래커 휠 비활성화 "
+		"message": "브라우저 툴바에서 트래커 바퀴 비활성화"
 	}
 }

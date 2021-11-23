@@ -278,7 +278,7 @@
 		"message": "ホスティング"
 	},
 	"category_misc": {
-		"message": "ホスティング"
+		"message": "さまざまな"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -2143,16 +2143,16 @@
 		"message": "広告をブロック"
 	},
 	"block_toggle_tracking": {
-		"message": "ブロックトラッカー"
+		"message": "トラッカーをブロックする"
 	},
 	"block_toggle_annoyances": {
-		"message": "煩わしさをブロックする"
+		"message": "悩みの種をブロックする"
 	},
 	"statistical_report": {
 		"message": "統計レポート"
 	},
 	"subscribe": {
-		"message": "申し込む"
+		"message": "登録する"
 	},
 	"back": {
 		"message": "戻る"
