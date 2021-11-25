@@ -148,9 +148,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (sender.frameId === undefined) {
     throw new Error('required "sender.frameId" information is not available');
   }
-  if (sender.url === undefined) {
-    throw new Error('required "sender.url" information is not available');
-  }
 
   const tabId = sender.tab.id;
 
@@ -167,6 +164,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // (Perhaps it is a bug in Safari. It can be triggered by opening
   //  a bookmarked page from a new tab.)
   if (msg.action === "onCommitted") {
+    if (sender.url === undefined) {
+      throw new Error('required "sender.url" information is not available');
+    }
+
     userNavigatedToNewPage({
       tabId,
       frameId: sender.frameId,

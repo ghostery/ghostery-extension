@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		464B62C3274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
+		464B62C4274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
 		468E428F2701F84A008B5792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E428E2701F84A008B5792 /* AppDelegate.swift */; };
 		468E42912701F84A008B5792 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42902701F84A008B5792 /* SceneDelegate.swift */; };
 		468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42922701F84A008B5792 /* LaunchScreen.storyboard */; };
@@ -102,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		464B62C2274F9B1A00F4CD07 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../src/fonts; sourceTree = "<group>"; };
 		468E427F2701F849008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
 		468E42802701F849008B5792 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		468E42812701F849008B5792 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
@@ -275,6 +278,7 @@
 				468E42DE2701F84A008B5792 /* adblocker_engines */,
 				468E42DF2701F84A008B5792 /* common */,
 				468E42E62701F84A008B5792 /* content_scripts */,
+				464B62C2274F9B1A00F4CD07 /* fonts */,
 				468E42DC2701F84A008B5792 /* images */,
 				468E42DA2701F84A008B5792 /* options */,
 				468E42DB2701F84A008B5792 /* panel */,
@@ -455,6 +459,7 @@
 				46B8F84E270451BD009908CF /* manifest.json in Resources */,
 				46F66D2E273D4F410001EB30 /* ui in Resources */,
 				468E42F92701F84A008B5792 /* common in Resources */,
+				464B62C3274F9B1A00F4CD07 /* fonts in Resources */,
 				468E42FA2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42F62701F84A008B5792 /* images in Resources */,
 				468E42FE2701F84A008B5792 /* worker in Resources */,
@@ -476,6 +481,7 @@
 				46B8F84F270451BD009908CF /* manifest.json in Resources */,
 				46F66D2F273D4F410001EB30 /* ui in Resources */,
 				468E42EC2701F84A008B5792 /* common in Resources */,
+				464B62C4274F9B1A00F4CD07 /* fonts in Resources */,
 				468E42ED2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42E92701F84A008B5792 /* images in Resources */,
 				468E42F12701F84A008B5792 /* worker in Resources */,
@@ -691,7 +697,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -703,7 +709,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -722,7 +728,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -734,7 +740,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -757,7 +763,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
@@ -772,7 +778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -795,7 +801,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
@@ -810,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -832,7 +838,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -845,7 +851,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -864,7 +870,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -877,7 +883,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -899,7 +905,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -913,7 +919,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -936,7 +942,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -950,7 +956,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
