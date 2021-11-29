@@ -30,6 +30,7 @@ function safeLinkClick(event) {
     const directUrl = new URL(link.href).searchParams.get('url');
     if (directUrl) {
       console.debug('safeLinkClick changed:', link.href, '->', directUrl);
+      event.preventDefault();
       window.location = directUrl;
     }
   } catch (e) {
