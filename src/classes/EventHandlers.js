@@ -326,7 +326,6 @@ class EventHandlers {
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const page_domain = tabInfo.getTabInfo(tab_id, 'domain');
 		const bug_id = (page_url ? isBug(eventMutable.url, page_url) : isBug(eventMutable.url));
 
 		// allow if not a tracker
@@ -338,12 +337,6 @@ class EventHandlers {
 		}
 		// add the bugId to the eventMutable object. This can then be read by other handlers on this pipeline.
 		eventMutable.ghosteryBug = bug_id;
-
-		/* ** SMART BLOCKING - Breakage ** */
-		// allow first party trackers
-		if (PolicySmartBlock.isFirstPartyRequest(tab_id, page_domain, processed.generalDomain)) {
-			return { cancel: false };
-		}
 
 		const app_id = bugDb.db.bugs[bug_id].aid;
 		const cat_id = bugDb.db.apps[app_id].cat;

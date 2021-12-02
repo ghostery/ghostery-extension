@@ -140,19 +140,6 @@ class PolicySmartBlock {
 	}
 
 	/**
-	 * Check if request domain matches page domain
-	 * @param  {number} tabId			tab id
-	 * @param  {string} pageDomain		domain of the page
-	 * @param  {string} requestDomain	domain of the request
-	 * @return {boolean}
-	 */
-	static isFirstPartyRequest(tabId, pageDomain = '', requestDomain = '') {
-		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
-
-		return pageDomain === requestDomain;
-	}
-
-	/**
 	 * Check if tab was reloaded.
 	 * @param  {number} tabId		tab id
 	 * @return {boolean}
