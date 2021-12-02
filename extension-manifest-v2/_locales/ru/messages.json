@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "Позволяет веб-сайтам публиковать, распространять и оптимизировать аудио- и видеоконтент."
 	},
+	"category_cdn": {
+		"message": "СДД"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Комментарии"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "Включает чат, обмен сообщениями по электронной почте, поддержку клиентов и другие инструменты взаимодействия."
 	},
+	"category_email": {
+		"message": "Email"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Важное"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "Включает трекеры, критически важные для функциональности веб-сайта, такие как диспетчеры тегов и уведомления о конфиденциальности."
+	},
+	"category_extensions": {
+		"message": "Расширения"
+	},
+	"category_hosting": {
+		"message": "Хостинг"
+	},
+	"category_misc": {
+		"message": "Разное"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "Активность"
 	},
 	"panel_detail_learn_more": {
-	  "message": "Подробнее"
+		"message": "Подробнее"
 	},
 	"panel_detail_history_title": {
 		"message": "История"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "Поделиться данными Human Web"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "Участие в тестировании А/B"
+	"settings_allow_abtests": {
+		"message": "Участие в тестировании А/B"
 	},
 	"settings_signin_create_header": {
 		"message": "Войти / Создать учетную запись"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "Ghostery теперь реализует Human Web по умолчанию, революционную технологию, которая использует знания людей для создания более конфиденциального интернета"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "Участие в случайных тестированиях A/B помогает Ghostery определить, какую версию новой схемы или функции предпочитают подобные вам пользователи."
+	"settings_abtests_tooltip": {
+		"message": "Участие в случайных тестированиях A/B помогает Ghostery определить, какую версию новой схемы или функции предпочитают подобные вам пользователи."
 	},
 	"settings_opt_in": {
 		"message": "Принять участие / отказаться"
@@ -1290,7 +1305,7 @@
 		"message": "Пользовательская настройка завершена"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "Расширьте рамки защиты конфиденциальности. Обновите свой план до Ghostery Plus, чтобы получить доступ к мощному приватному браузеру, приватному поиску и расширенной аналитике трекеров!"
+		"message": "Расширьте рамки защиты конфиденциальности. Обновите свой план до Ghostery Plus, чтобы получить доступ к мощному приватному браузеру, приватному поиску и расширенной аналитике трекеров!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Обновить сейчас"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Удалите точки данных, которые веб-сайты могут использовать для вашей идентификации."
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery Hub - Попробуйте другие продукты Ghostery"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Пользуйтесь Интернетом с умом с помощью продуктов Ghostery!"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "Обновление до Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-	  "message": "Расширьте рамки защиты конфиденциальности и воспользуйтесь полным комплексом продуктов!"
+		"message": "Расширьте рамки защиты конфиденциальности и воспользуйтесь полным комплексом продуктов!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ в месяц",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "Пользовательские темы и другое"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "Пользовательские темы и другое"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "Настройте цвета Ghostery - попробуйте темы Leaf, Palm и Dark Blue!"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Настройте цвета Ghostery - попробуйте темы Leaf, Palm и Dark Blue!"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Настройте цвета Ghostery - попобуйте нашу тему \"Dark Blue\"."
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "Расширенная аналитика трекеров"
+	"hub_supporter_perk_analytics_title": {
+		"message": "Расширенная аналитика трекеров"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "Получите доступ к Ghostery Insights, нашей панели отслеживания трекеров в реальном времени"
+	"hub_supporter_perk_analytics_description": {
+		"message": "Получите доступ к Ghostery Insights, нашей панели отслеживания трекеров в реальном времени"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "Приватный браузер с поисковой системой"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "Приватный браузер с поисковой системой"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "Загрузите Ghostery Dawn и Ghostery Glow, наш мощный приватный браузер со встроенной приватной поисковой системой"
+		"message": "Загрузите Ghostery Dawn и Ghostery Glow, наш мощный приватный браузер со встроенной приватной поисковой системой"
 	},
 	"hub_supporter_manifesto": {
 		"message": "Обновите свой план до Ghostery Plus, чтобы воспользоваться полным комплектом продуктов! Всего за &#36;4.99 в месяц вы получите доступ к мощному приватному браузеру со встроенным приватным поиском, расширенной аналитике трекеров и другим специальным привилегиям. "
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "Темы"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "Приоритетная поддержка"
 	},
 	"subscribe_pitch": {
-	  "message": "Обновите свой план до Ghostery Plus, чтобы воспользоваться полным комплектом продуктов! Всего за &#36;4.99 в месяц вы получите доступ к мощному приватному браузеру со встроенным приватным поиском, расширенной аналитике трекеров и другим специальным привилегиям. "
+		"message": "Обновите свой план до Ghostery Plus, чтобы воспользоваться полным комплектом продуктов! Всего за &#36;4.99 в месяц вы получите доступ к мощному приватному браузеру со встроенным приватным поиском, расширенной аналитике трекеров и другим специальным привилегиям. "
 	},
 	"subscribe_pitch_spring": {
 		"message": "Вам нравитя то, что мы делаем? Поддержите нас и откройте для себя новые весенние темы и личные сведения о трекинге, а также получите другие специальные привелегии, перейдя на Ghostery Plus!"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Измените цветовую схему Ghostery!"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "Следующая дата оплаты"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "Весна уже наступила!"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "Получите полную защиту во всех браузерах и приложениях на вашем устройстве"
+	"full_coverage_protection_promise": {
+		"message": "Получите полную защиту во всех браузерах и приложениях на вашем устройстве"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "Блокировка рекламы и трекеров во всей системе"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "Слишком много неудачных попыток входа. Повторите попытку через час."
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "Выбрать поиск по умолчанию"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "Выберите поисковую систему по умолчанию для всех ваших поисков."
+	"pick_a_default_search_engine": {
+		"message": "Выберите поисковую систему по умолчанию для всех ваших поисков."
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights (расширенная аналитика трекеров)"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights (расширенная аналитика трекеров)"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn (приватный браузер)"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn (приватный браузер)"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow (приватный поиск без рекламы)"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow (приватный поиск без рекламы)"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "Настраиваемые цвета фона"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "Настраиваемые цвета фона"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "Приоритетная поддержка"
+	"plus_subscriber_perk_priority_support": {
+		"message": "Приоритетная поддержка"
+	},
+	"privacy_protection": {
+		"message": "Защита конфиденциальности на этом сайте"
+	},
+	"block_toggle_ads": {
+		"message": "Заблокировать рекламу"
+	},
+	"block_toggle_tracking": {
+		"message": "Блокировать трекеры"
+	},
+	"block_toggle_annoyances": {
+		"message": "Блокировать помехи"
+	},
+	"statistical_report": {
+		"message": "Статистический отчет"
+	},
+	"subscribe": {
+		"message": "Подписаться"
+	},
+	"back": {
+		"message": "Назад"
+	},
+	"trackers_detected": {
+		"message": "Обнаружено"
+	},
+	"tracker_details": {
+		"message": "Детали трекера"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "Отключить Tracker Wheel на панели инструментов браузера"
 	}
 }

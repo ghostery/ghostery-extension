@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "Engedélyezi a weboldalak számára, hogy zene- és filmtartalmakat tegyenek közzé, terjesszenek és optimalizáljanak."
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Hozzászólások"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "Beleértve a beszélgetést, email alapú üzenetváltást, ügyfélszolgálatot és egyéb kommunikációs eszközöket."
 	},
+	"category_email": {
+		"message": "E-mail-cím"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Alapvető"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "Beleértve a weboldalak működéséhez kritikus trackereket, mint például a címkekezelők és adatvédelmi értesítések."
+	},
+	"category_extensions": {
+		"message": "Kiterjesztések"
+	},
+	"category_hosting": {
+		"message": "Hosztolás"
+	},
+	"category_misc": {
+		"message": "Egyéb"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "Teljesítmény"
 	},
 	"panel_detail_learn_more": {
-	  "message": "Tudjon meg többet"
+		"message": "Tudjon meg többet"
 	},
 	"panel_detail_history_title": {
 		"message": "Előzmények"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "Human Web adatok megosztása"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "Részvétel A/B-tesztekben"
+	"settings_allow_abtests": {
+		"message": "Részvétel A/B-tesztekben"
 	},
 	"settings_signin_create_header": {
 		"message": "Bejelentkezés / Fiók létrehozása"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "A Ghostery alapértelmezés szerint alkalmazza a Human Web analitikát, egy forradalmian új technológiát, amely nagyszámú felhasználói tudással segít biztonságosabb internetet építeni"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "A véletlenszerű A/B-tesztekben való részvétellel segít a Ghostery vállalatnak, hogy megtudja, az új elrendezés vagy funkció melyik verziója tetszik Önnek."
+	"settings_abtests_tooltip": {
+		"message": "A véletlenszerű A/B-tesztekben való részvétellel segít a Ghostery vállalatnak, hogy megtudja, az új elrendezés vagy funkció melyik verziója tetszik Önnek."
 	},
 	"settings_opt_in": {
 		"message": "Feliratkozás / Leiratkozás"
@@ -1290,7 +1305,7 @@
 		"message": "Egyéni telepítés kész"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "Ez messze túlmutat az alapvető adatvédelmen. A Ghostery Plus szoftverre frissítve hozzáférhet hatékony  privát böngészőnkhöz, a privát kereséshez és a továbbfejlesztett követőelemzéshez."
+		"message": "Ez messze túlmutat az alapvető adatvédelmen. A Ghostery Plus szoftverre frissítve hozzáférhet hatékony  privát böngészőnkhöz, a privát kereséshez és a továbbfejlesztett követőelemzéshez."
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Frissítés most"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Adatpontok eltávolítása, amelyeket a weboldalak használnak, hogy azonosítsák önt."
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery Központ - Próbáljon ki más Ghostery termékeket"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Böngésszen okosabban a Ghostery termékek használatával!"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "Bővítés Ghostery Plusra"
 	},
 	"hub_supporter_header_description": {
-	  "message": "Ez messze túlmutat az alapvető adatvédelmen. Vegye igénybe a teljes termékcsomagot."
+		"message": "Ez messze túlmutat az alapvető adatvédelmen. Vegye igénybe a teljes termékcsomagot."
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ havonta",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "Egyedi témák és még sok más"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "Egyedi témák és még sok más"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "Tegye egyedivé a Ghostery színeit: próbálja ki a Leaf, a Palm és a Dark Blue témákat."
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Tegye egyedivé a Ghostery színeit: próbálja ki a Leaf, a Palm és a Dark Blue témákat."
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Szabja testre kedve szerint a Ghostery színeit – próbálja ki a Dark Blue sablonunkat!"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": " Továbbfejlesztett követőelemzés"
+	"hub_supporter_perk_analytics_title": {
+		"message": " Továbbfejlesztett követőelemzés"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "Igénybe veheti a valós idejű követőinformációs irányítópultot, a Ghostery Insights szolgáltatást"
+	"hub_supporter_perk_analytics_description": {
+		"message": "Igénybe veheti a valós idejű követőinformációs irányítópultot, a Ghostery Insights szolgáltatást"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "Privát böngésző és keresés"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "Privát böngésző és keresés"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "Töltse le a beépített keresőmotorral rendelkező hatékony privát böngészőnket, a Ghostery Dawn and Glow-t"
+		"message": "Töltse le a beépített keresőmotorral rendelkező hatékony privát böngészőnket, a Ghostery Dawn and Glow-t"
 	},
 	"hub_supporter_manifesto": {
 		"message": "Frissítsen a Ghostery Plus szoftverre, hogy  igénybe vehesse a teljes termékcsomagot. &#36;4.99 havi díjért használatba veheti a beépített keresőmotorral rendelkező hatékony privát böngészőt, a továbbfejlesztett követőelemzést és az egyéb speciális funkciókat."
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "Sablonok"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "Kiemelt támogatás"
 	},
 	"subscribe_pitch": {
-	  "message": "Frissítsen a Ghostery Plus szoftverre, hogy  igénybe vehesse a teljes termékcsomagot. &#36;4.99 havi díjért használatba veheti a beépített keresőmotorral rendelkező hatékony privát böngészőt, a továbbfejlesztett követőelemzést és az egyéb speciális funkciókat."
+		"message": "Frissítsen a Ghostery Plus szoftverre, hogy  igénybe vehesse a teljes termékcsomagot. &#36;4.99 havi díjért használatba veheti a beépített keresőmotorral rendelkező hatékony privát böngészőt, a továbbfejlesztett követőelemzést és az egyéb speciális funkciókat."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Tetszik a termékünk? Támogassunk bennünket, és fedezze fel az új tavaszi sablonokat, személyes nyomonkövetési lehetőségeket, és számos különleges előnyt a Ghostery Plus történő frissítéssel!"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Változtassa meg a Ghostery színsablonját!"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "Következő fizetési nap"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "Itt a tavasz!"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "Teljes védelmet élvezhet az eszköz összes böngészőjével és alkalmazásával"
+	"full_coverage_protection_promise": {
+		"message": "Teljes védelmet élvezhet az eszköz összes böngészőjével és alkalmazásával"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "Rendszeres követő és reklámblokkoló szoftver"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "Túl sok sikertelen bejelentkezés. Próbálja újra egy óra múlva."
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "Válassza ki az alapértelmezett keresőt"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "Válassza ki az alapértelmezett keresőmotort a kereséseihez."
+	"pick_a_default_search_engine": {
+		"message": "Válassza ki az alapértelmezett keresőmotort a kereséseihez."
 	},
-	"plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights (továbbfejlesztett követőelemzés)"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights (továbbfejlesztett követőelemzés)"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn (privát böngésző)"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn (privát böngésző)"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow (privát, reklámmmentes keresés)"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow (privát, reklámmmentes keresés)"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "Egyedi színsablonok"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "Egyedi színsablonok"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "Kiemelt támogatás"
+	"plus_subscriber_perk_priority_support": {
+		"message": "Kiemelt támogatás"
+	},
+	"privacy_protection": {
+		"message": "Adatvédelem ezen az oldalon"
+	},
+	"block_toggle_ads": {
+		"message": "Hirdetések blokkolása"
+	},
+	"block_toggle_tracking": {
+		"message": "Trackerek blokkolása"
+	},
+	"block_toggle_annoyances": {
+		"message": "Zavaró dolgok blokkolása"
+	},
+	"statistical_report": {
+		"message": "Statisztikai jelentés"
+	},
+	"subscribe": {
+		"message": "Feliratkozás"
+	},
+	"back": {
+		"message": "Vissza"
+	},
+	"trackers_detected": {
+		"message": "Észlelve"
+	},
+	"tracker_details": {
+		"message": "Tracker adatok"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "Tracker Kerék letiltása a böngésző eszköztárában"
 	}
 }

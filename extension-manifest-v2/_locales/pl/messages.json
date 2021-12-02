@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "Umożliwia stronom publikowanie, dystrybucję i optymalizację treści audio i wideo."
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Komentarze"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "Obejmuje chat, wiadomości e-mail, obsługę klienta oraz inne narzędzia do prowadzenia interakcji."
 	},
+	"category_email": {
+		"message": "E-mail"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Istotne"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "Obejmuje tropiciele o krytycznym znaczeniu dla działania strony internetowej, takie jak menedżery tagów oraz informacje o polityce prywatności."
+	},
+	"category_extensions": {
+		"message": "Rozszerzenia"
+	},
+	"category_hosting": {
+		"message": "Hosting"
+	},
+	"category_misc": {
+		"message": "Różne"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "Wydajność"
 	},
 	"panel_detail_learn_more": {
-	  "message": "Dowiedz się więcej"
+		"message": "Dowiedz się więcej"
 	},
 	"panel_detail_history_title": {
 		"message": "Historia"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "Udostępnienie danych Human Web"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "Udział w testach A/B"
+	"settings_allow_abtests": {
+		"message": "Udział w testach A/B"
 	},
 	"settings_signin_create_header": {
 		"message": "Zaloguj się / Utwórz konto"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "Obecnie Ghostery wdraża domyślnie Human Web – rewolucyjną technologię, która wykorzystuje masową wiedzę i doświadczenie do stworzenia bardziej prywatnego internetu"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "Udział w losowych testach A/B pomaga zespołowi Ghostery zrozumieć, która wersja nowego układu lub funkcji bardziej Ci się podoba."
+	"settings_abtests_tooltip": {
+		"message": "Udział w losowych testach A/B pomaga zespołowi Ghostery zrozumieć, która wersja nowego układu lub funkcji bardziej Ci się podoba."
 	},
 	"settings_opt_in": {
 		"message": "Przyłącz się / Zrezygnuj"
@@ -1290,7 +1305,7 @@
 		"message": "Konfiguracja niestandardowa zakończona"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "Wzmocnij swoją ochronę prywatności. Uaktualnij plan do wersji Ghostery Plus, aby uzyskać dostęp do prywatnej przeglądarki, prywatnego wyszukiwania i zaawansowanej analizy tropicieli!"
+		"message": "Wzmocnij swoją ochronę prywatności. Uaktualnij plan do wersji Ghostery Plus, aby uzyskać dostęp do prywatnej przeglądarki, prywatnego wyszukiwania i zaawansowanej analizy tropicieli!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Uaktualnij teraz"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Usuwaj punkty danych, które mogą być wykorzystywane przez strony do Twojej identyfikacji."
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Hub Ghostery - Wypróbuj inne produkty Ghostery"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Inteligentne przeglądanie z produktami Ghostery!"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "Zaktualizuj do Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-	  "message": "Wzmocnij swoją ochronę prywatności i uzyskaj dostęp do pełnego pakietu produktów!"
+		"message": "Wzmocnij swoją ochronę prywatności i uzyskaj dostęp do pełnego pakietu produktów!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ miesięcznie",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "Niestandardowe motywy i nie tylko"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "Niestandardowe motywy i nie tylko"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "Dostosuj kolorystykę Ghostery — wypróbuj motywy Leaf, Palm i Dark Blue!"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Dostosuj kolorystykę Ghostery — wypróbuj motywy Leaf, Palm i Dark Blue!"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Dostosuj kolorystykę Ghostery — wypróbuj nasz temat Dark Blue!"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "Zaawansowana analiza tropicieli"
+	"hub_supporter_perk_analytics_title": {
+		"message": "Zaawansowana analiza tropicieli"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "Dostęp do panelu Ghostery Insights zawierającego informacje o tropicielach na bieżąco"
+	"hub_supporter_perk_analytics_description": {
+		"message": "Dostęp do panelu Ghostery Insights zawierającego informacje o tropicielach na bieżąco"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "Prywatna przeglądarka i wyszukiwarka"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "Prywatna przeglądarka i wyszukiwarka"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "Pobierz Ghostery Dawn i Ghostery Glow – prywatną przeglądarkę oraz wbudowaną w nią wyszukiwarkę"
+		"message": "Pobierz Ghostery Dawn i Ghostery Glow – prywatną przeglądarkę oraz wbudowaną w nią wyszukiwarkę"
 	},
 	"hub_supporter_manifesto": {
 		"message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "Tematy"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "Wsparcie priorytetowe"
 	},
 	"subscribe_pitch": {
-	  "message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
+		"message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Podoba Ci się to, co robimy? Wesprzyj nas i odblokuj nowe wiosenne motywy, osobiste analizy dotyczące śledzenia i inne specjalne dodatki, przechodząc do wersji Ghostery Plus!"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Zmień kolorystykę Ghostery!"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "Data kolejnej płatności"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "Nadeszła wiosna!"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "Uzyskaj pełną ochronę we wszystkich przeglądarkach i aplikacjach na urządzeniu"
+	"full_coverage_protection_promise": {
+		"message": "Uzyskaj pełną ochronę we wszystkich przeglądarkach i aplikacjach na urządzeniu"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "Blokowanie śledzenia i reklam w całym systemie"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "Zbyt wiele nieudanych prób logowania. Spróbuj ponownie za godzinę."
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "Wybierz domyślną wyszukiwarkę"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "Wybierz domyślną wyszukiwarkę dla wszystkich wyszukiwań."
+	"pick_a_default_search_engine": {
+		"message": "Wybierz domyślną wyszukiwarkę dla wszystkich wyszukiwań."
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights (zaawansowana analiza tropicieli)"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights (zaawansowana analiza tropicieli)"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn (prywatna przeglądarka)"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn (prywatna przeglądarka)"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow (prywatna wyszukiwarka bez reklam)"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow (prywatna wyszukiwarka bez reklam)"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "Niestandardowe motywy kolorystyczne"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "Niestandardowe motywy kolorystyczne"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "Wsparcie priorytetowe"
+	"plus_subscriber_perk_priority_support": {
+		"message": "Wsparcie priorytetowe"
+	},
+	"privacy_protection": {
+		"message": "Ochrona prywatności w tej witrynie"
+	},
+	"block_toggle_ads": {
+		"message": "Blokuj reklamy"
+	},
+	"block_toggle_tracking": {
+		"message": "Blokuj tropiciele"
+	},
+	"block_toggle_annoyances": {
+		"message": "Blokuj irytujące elementy"
+	},
+	"statistical_report": {
+		"message": "Raport statystyk"
+	},
+	"subscribe": {
+		"message": "Subskrybuj"
+	},
+	"back": {
+		"message": "Wstecz"
+	},
+	"trackers_detected": {
+		"message": "Wykryto"
+	},
+	"tracker_details": {
+		"message": "Szczegóły tropiciela"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "Wyłącz licznik tropicieli na pasku narzędzi przeglądarki"
 	}
 }

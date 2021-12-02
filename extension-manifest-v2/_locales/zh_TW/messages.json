@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "容許網站發表、發佈及優化音訊和視訊內容。"
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "評論"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "包括聊天、電郵通訊、客戶支援及其他互動工具。"
 	},
+	"category_email": {
+		"message": "電郵"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "基本內容"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "包括對網站功能至關重要的網頁跟蹤器，例如標簽管理工具及隱私通知等。"
+	},
+	"category_extensions": {
+		"message": "擴展"
+	},
+	"category_hosting": {
+		"message": "託管"
+	},
+	"category_misc": {
+		"message": "各種各樣的"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "功效"
 	},
 	"panel_detail_learn_more": {
-	  "message": "瞭解更多"
+		"message": "瞭解更多"
 	},
 	"panel_detail_history_title": {
 		"message": "歷史"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "分享人文網 (Human Web ) 的資料"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "參加 A/B 測試"
+	"settings_allow_abtests": {
+		"message": "參加 A/B 測試"
 	},
 	"settings_signin_create_header": {
 		"message": "登錄/創建帳戶"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "Ghostery 現在默認地創設人文網 (Human Web)，那是一種採用群體智慧去建造一個更能保護隠私的互聯網的革命性科技。"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "參加隨機的 A/B 測試，協助 Ghostery 了解使用者偏好哪一版本的新版面佈局或功能。"
+	"settings_abtests_tooltip": {
+		"message": "參加隨機的 A/B 測試，協助 Ghostery 了解使用者偏好哪一版本的新版面佈局或功能。"
 	},
 	"settings_opt_in": {
 		"message": "選擇加入/退出"
@@ -1290,7 +1305,7 @@
 		"message": "自定義設置完成"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "獲得更高等級的隱私防護。升級到 Ghostery Plus 以取得功能強大的隱私瀏覽器、隱私搜尋和進階追蹤器分析！"
+		"message": "獲得更高等級的隱私防護。升級到 Ghostery Plus 以取得功能強大的隱私瀏覽器、隱私搜尋和進階追蹤器分析！"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "立即升級"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "刪除網站可用來確認您身份的數據。"
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery 中心 - 嘗試其它 Ghostery 產品"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Ghostery產品讓網頁瀏覽器變得更聰明!"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "升級至Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-	  "message": "獲得更高等級的隱私防護並取得我們的完整產品套件！"
+		"message": "獲得更高等級的隱私防護並取得我們的完整產品套件！"
 	},
 	"hub_supporter_price": {
 		"message": "每月$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "自訂主題及更多"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "自訂主題及更多"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "自訂 Ghostery 色彩——試試我們的樹葉、棕櫚和深藍色主題吧！"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "自訂 Ghostery 色彩——試試我們的樹葉、棕櫚和深藍色主題吧！"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "自訂 Ghostery 色彩——試試我們的深藍色主題吧！"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "進階追蹤器分析"
+	"hub_supporter_perk_analytics_title": {
+		"message": "進階追蹤器分析"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "取得 Ghostery Insights，我們的即時追蹤器智慧科技資料儀表板"
+	"hub_supporter_perk_analytics_description": {
+		"message": "取得 Ghostery Insights，我們的即時追蹤器智慧科技資料儀表板"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "隱私瀏覽器和搜尋"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "隱私瀏覽器和搜尋"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "下載 Ghostery Dawn 和 Ghostery Glow，我們具備內建搜尋引擎的強大隱私瀏覽器"
+		"message": "下載 Ghostery Dawn 和 Ghostery Glow，我們具備內建搜尋引擎的強大隱私瀏覽器"
 	},
 	"hub_supporter_manifesto": {
 		"message": "升級至 Ghostery Plus 以取得完整的產品套件！每月只要 &#36;4.99。享有內建隱私搜尋的強大隱私瀏覽器、進階追蹤器分析，以及其他特別好處。"
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "主題"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "優先支援"
 	},
 	"subscribe_pitch": {
-	  "message": "升級至 Ghostery Plus 以取得完整的產品套件！每月只要 &#36;4.99。享有內建隱私搜尋的強大隱私瀏覽器、進階追蹤器分析，以及其他特別好處。"
+		"message": "升級至 Ghostery Plus 以取得完整的產品套件！每月只要 &#36;4.99。享有內建隱私搜尋的強大隱私瀏覽器、進階追蹤器分析，以及其他特別好處。"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜歡我們提供的服務嗎？您可以升級至 Ghostery Plus 來支援我們，並解鎖全新春日主題、個人追蹤資訊及其他特別的好處！"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "更改Ghostery的顏色方案。"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "下一個付款日"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "春天到了！"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "全面防護您裝置上的所有瀏覽器和應用程式"
+	"full_coverage_protection_promise": {
+		"message": "全面防護您裝置上的所有瀏覽器和應用程式"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "全系統跟蹤器和廣告封鎖"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "登入失敗次數過多，請一小時後重試。"
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "選擇預設搜尋"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "為您所有的搜尋選擇預設的搜尋引擎。"
+	"pick_a_default_search_engine": {
+		"message": "為您所有的搜尋選擇預設的搜尋引擎。"
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights（進階追蹤器分析）"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights（進階追蹤器分析）"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn（隱私瀏覽器）"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn（隱私瀏覽器）"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow（無廣告隱私搜尋）"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow（無廣告隱私搜尋）"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "自訂顏色主題"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "自訂顏色主題"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "優先支援"
+	"plus_subscriber_perk_priority_support": {
+		"message": "優先支援"
+	},
+	"privacy_protection": {
+		"message": "本網站的隱私保護"
+	},
+	"block_toggle_ads": {
+		"message": "阻止廣告"
+	},
+	"block_toggle_tracking": {
+		"message": "塊跟踪器"
+	},
+	"block_toggle_annoyances": {
+		"message": "阻止煩惱"
+	},
+	"statistical_report": {
+		"message": "統計報表"
+	},
+	"subscribe": {
+		"message": "訂閱"
+	},
+	"back": {
+		"message": "返回"
+	},
+	"trackers_detected": {
+		"message": "檢測到"
+	},
+	"tracker_details": {
+		"message": "跟踪器詳細信息"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "在瀏覽器工具欄中禁用跟踪輪"
 	}
 }

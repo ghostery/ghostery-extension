@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "ウェブサイトにおけるオーディオおよびビデオ・コンテンツの発行、配布、および最適化を可能にします。"
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "コメント"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "チャット、メール・メッセージ交換、顧客サポート、およびその他の対話ツールがあります。"
 	},
+	"category_email": {
+		"message": "メール"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "必需"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "タグ・マネージャやプライバシーに関する通知などのウェブサイト機能に不可欠であるトラッカーが含まれています。"
+	},
+	"category_extensions": {
+		"message": "拡張機能"
+	},
+	"category_hosting": {
+		"message": "ホスティング"
+	},
+	"category_misc": {
+		"message": "さまざまな"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "パフォーマンス"
 	},
 	"panel_detail_learn_more": {
-	  "message": "詳細はこちら"
+		"message": "詳細はこちら"
 	},
 	"panel_detail_history_title": {
 		"message": "履歴"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "Human Webデータの共有"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "A/Bテストに参加する"
+	"settings_allow_abtests": {
+		"message": "A/Bテストに参加する"
 	},
 	"settings_signin_create_header": {
 		"message": "サインイン/アカウント作成"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "Ghosteryは、デフォルトでHuman Webを実装しています。これは、大衆の知恵を活用してよりプライベートなインターネットを構築する革新的な技術です"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "無作為のA/Bテストに参加していただくことで、Ghosteryはユーザーの好みの新しいレイアウトや機能がどのバージョンであるかを把握することができます。"
+	"settings_abtests_tooltip": {
+		"message": "無作為のA/Bテストに参加していただくことで、Ghosteryはユーザーの好みの新しいレイアウトや機能がどのバージョンであるかを把握することができます。"
 	},
 	"settings_opt_in": {
 		"message": "オプトイン／オプトアウト"
@@ -1290,7 +1305,7 @@
 		"message": "カスタム設定完了"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "Ghostery Plusにアップグレードすると、基本的なプライバシー保護機能だけでなく、強力なプライベートブラウザ、プライベート検索機能、高度なトラッカー分析機能も使用できるようになります。"
+		"message": "Ghostery Plusにアップグレードすると、基本的なプライバシー保護機能だけでなく、強力なプライベートブラウザ、プライベート検索機能、高度なトラッカー分析機能も使用できるようになります。"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "今すぐアップデート"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "サイトが個人を特定できるようなデータポイントを削除します。"
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery ハブ - その他のGhostery製品を試す"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Ghosteryの機能でよりスマートにブラウジング！"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "「Ghostery プラス」にアップグレードする"
 	},
 	"hub_supporter_header_description": {
-	  "message": "アップグレードすると、基本的なプライベート保護機能だけでなく、さまざまな機能を使用できるようになります"
+		"message": "アップグレードすると、基本的なプライベート保護機能だけでなく、さまざまな機能を使用できるようになります"
 	},
 	"hub_supporter_price": {
 		"message": "1か月あたり$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "テーマを使用して色をカスタマイズ"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "テーマを使用して色をカスタマイズ"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "Leafテーマ、Palmテーマ、Dark Blueテーマを使用して、Ghosteryの色をカスタマイズすることができます"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Leafテーマ、Palmテーマ、Dark Blueテーマを使用して、Ghosteryの色をカスタマイズすることができます"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghosteryのカラーはカスタマイズできます。Dark Blueもお試しください！"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "高度なトラッカー分析"
+	"hub_supporter_perk_analytics_title": {
+		"message": "高度なトラッカー分析"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "リアルタイムの高度なトラッカーダッシュボードであるGhostery Insightsにアクセスすることができます"
+	"hub_supporter_perk_analytics_description": {
+		"message": "リアルタイムの高度なトラッカーダッシュボードであるGhostery Insightsにアクセスすることができます"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "プライベート検索機能が組み込まれたプライベートブラウザ"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "プライベート検索機能が組み込まれたプライベートブラウザ"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "検索エンジンが組み込まれた強力なプライベートブラウザであるGhostery DawnとGhostery Glowをダウンロードすることができます"
+		"message": "検索エンジンが組み込まれた強力なプライベートブラウザであるGhostery DawnとGhostery Glowをダウンロードすることができます"
 	},
 	"hub_supporter_manifesto": {
 		"message": "Ghostery Plusにアップグレードすれば、月額わずか&#36;4.99で、プライベート検索機能が組み込まれた強力なプライベートブラウザや高度なトラッカー分析など、各種の便利な機能を使用できるようになります。"
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "テーマ"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "優先サポート"
 	},
 	"subscribe_pitch": {
-	  "message": "Ghostery Plusにアップグレードすれば、月額わずか&#36;4.99で、プライベート検索機能が組み込まれた強力なプライベートブラウザや高度なトラッカー分析など、各種の便利な機能を使用できるようになります。"
+		"message": "Ghostery Plusにアップグレードすれば、月額わずか&#36;4.99で、プライベート検索機能が組み込まれた強力なプライベートブラウザや高度なトラッカー分析など、各種の便利な機能を使用できるようになります。"
 	},
 	"subscribe_pitch_spring": {
 		"message": "気に入っていただけましたか？Ghostery Plusにアップグレードして、新しい春のテーマ、個人追跡情報など、特別機能をご利用ください！"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Ghosteryのカラースキームは変更できます！"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "次回のお支払日"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "春がやって来ました！"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "デバイス上のすべてのブラウザとアプリを包括的に保護しましょう"
+	"full_coverage_protection_promise": {
+		"message": "デバイス上のすべてのブラウザとアプリを包括的に保護しましょう"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "システム全体を対象としたトラッカーと広告ブロッキング"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "ログインの失敗回数が多すぎます。1時間後にもう一度お試しください。"
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "デフォルトの検索エンジンを選択"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "すべての検索で使用するデフォルトの検索エンジンを選択してください。"
+	"pick_a_default_search_engine": {
+		"message": "すべての検索で使用するデフォルトの検索エンジンを選択してください。"
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights（高度なトラッカー分析機能）"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights（高度なトラッカー分析機能）"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn（プライベートブラウザ）"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn（プライベートブラウザ）"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow（広告が表示されないプライベート検索機能）"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow（広告が表示されないプライベート検索機能）"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "カスタムカラーテーマ"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "カスタムカラーテーマ"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "優先サポート"
+	"plus_subscriber_perk_priority_support": {
+		"message": "優先サポート"
+	},
+	"privacy_protection": {
+		"message": "このサイトのプライバシー保護"
+	},
+	"block_toggle_ads": {
+		"message": "広告をブロック"
+	},
+	"block_toggle_tracking": {
+		"message": "トラッカーをブロックする"
+	},
+	"block_toggle_annoyances": {
+		"message": "悩みの種をブロックする"
+	},
+	"statistical_report": {
+		"message": "統計レポート"
+	},
+	"subscribe": {
+		"message": "登録する"
+	},
+	"back": {
+		"message": "戻る"
+	},
+	"trackers_detected": {
+		"message": "検出されました"
+	},
+	"tracker_details": {
+		"message": "トラッカーの詳細"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "ブラウザのツールバーでトラッカーホイールを無効にする"
 	}
 }
