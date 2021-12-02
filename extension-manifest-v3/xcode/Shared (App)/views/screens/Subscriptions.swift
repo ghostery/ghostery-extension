@@ -70,14 +70,12 @@ struct Subscriptions: View {
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 
-
-            Button("Terms of use") {
-                openInWebView(URL(string: "https://www.ghostery.com/")!)
+            Button("Privacy Policy") {
+                openInWebView(URL(string: "https://www.ghostery.com/privacy/ghostery-plans-and-products-privacy-policy")!)
             }
                 .buttonStyle(.borderless)
                 .foregroundColor(.blue)
                 .padding()
-
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(.horizontal)
