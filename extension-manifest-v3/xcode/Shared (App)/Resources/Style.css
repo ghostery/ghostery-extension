@@ -5,9 +5,12 @@
 }
 
 :root {
-    color-scheme: light dark;
+    color-scheme: dark;
+    --spacing: 5px;
+}
 
-    --spacing: 20px;
+* {
+    box-sizing: content-box;
 }
 
 html {
@@ -65,9 +68,18 @@ img {
     margin-bottom: 20px;
 }
 
+a {
+    cursor: pointer;
+}
+
+p {
+    margin: var(--spacing) 0px;
+    padding: 0px;
+}
+
 button {
     background-color: #00aef0;
-    padding: 16px 29px 14px 55px;
+    padding: 16px 29px 14px 29px;
     border-radius: 30px;
     font-size: 18px;
     font-weight: 700;
@@ -77,10 +89,27 @@ button {
     display: inline-block;
     cursor: pointer;
     line-height: inherit;
-    margin: 15px 0px;
+    margin: var(--spacing) 0px;
+    display: block;
 }
 
 .help a, .help a:visited {
     color: #00aef0;
     text-decoration: none;
+}
+
+.disabled {
+    color: #cc3333;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.subscription {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.subscription button {
+    text-transform: uppercase;
 }

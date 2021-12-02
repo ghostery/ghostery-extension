@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "468E428A2701F84A008B5792"
+               BlueprintIdentifier = "468E429C2701F84A008B5792"
                BuildableName = "Ghostery &#x2013; Privacy Ad Blocker.app"
-               BlueprintName = "Ghostery &#x2013; Privacy Ad Blocker (iOS)"
+               BlueprintName = "Ghostery &#x2013; Privacy Ad Blocker (macOS)"
                ReferencedContainer = "container:Ghostery.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "468E428A2701F84A008B5792"
+            BlueprintIdentifier = "468E429C2701F84A008B5792"
             BuildableName = "Ghostery &#x2013; Privacy Ad Blocker.app"
-            BlueprintName = "Ghostery &#x2013; Privacy Ad Blocker (iOS)"
+            BlueprintName = "Ghostery &#x2013; Privacy Ad Blocker (macOS)"
             ReferencedContainer = "container:Ghostery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -64,9 +64,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "468E428A2701F84A008B5792"
+            BlueprintIdentifier = "468E429C2701F84A008B5792"
             BuildableName = "Ghostery &#x2013; Privacy Ad Blocker.app"
-            BlueprintName = "Ghostery &#x2013; Privacy Ad Blocker (iOS)"
+            BlueprintName = "Ghostery &#x2013; Privacy Ad Blocker (macOS)"
             ReferencedContainer = "container:Ghostery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

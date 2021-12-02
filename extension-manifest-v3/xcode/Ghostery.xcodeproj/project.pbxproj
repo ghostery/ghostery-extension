@@ -7,14 +7,59 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462266412756DDFE00245D1E /* SubscriptionListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */; };
+		462266422756DE4B00245D1E /* SubscriptionListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */; };
+		462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
+		462266462756DF9000245D1E /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266452756DF9000245D1E /* PurchaseButton.swift */; };
+		462266472756DF9000245D1E /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266452756DF9000245D1E /* PurchaseButton.swift */; };
+		462266492756DFB800245D1E /* StoreErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266482756DFB800245D1E /* StoreErrorView.swift */; };
+		4622664A2756DFB800245D1E /* StoreErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266482756DFB800245D1E /* StoreErrorView.swift */; };
+		4622664C2756DFE800245D1E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664B2756DFE800245D1E /* BadgeView.swift */; };
+		4622664D2756DFE800245D1E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664B2756DFE800245D1E /* BadgeView.swift */; };
+		4622664F2756E06D00245D1E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664E2756E06D00245D1E /* PriceView.swift */; };
+		462266502756E06D00245D1E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664E2756E06D00245D1E /* PriceView.swift */; };
+		462266522756E09100245D1E /* PriveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266512756E09100245D1E /* PriveViewModel.swift */; };
+		462266532756E09100245D1E /* PriveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266512756E09100245D1E /* PriveViewModel.swift */; };
+		462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
+		462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
+		462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
 		464B62C3274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
 		464B62C4274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
-		468E428F2701F84A008B5792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E428E2701F84A008B5792 /* AppDelegate.swift */; };
-		468E42912701F84A008B5792 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42902701F84A008B5792 /* SceneDelegate.swift */; };
+		465E353F2754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
+		465E35402754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
+		465E35452754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */; };
+		465E35462754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */; };
+		465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E356127551D600032B8D2 /* GhosteryApp.swift */; };
+		465E35662755368B0032B8D2 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35652755368B0032B8D2 /* Subscriptions.swift */; };
+		465E35672755368B0032B8D2 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35652755368B0032B8D2 /* Subscriptions.swift */; };
+		465E356E27564A250032B8D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465E356D27564A250032B8D2 /* StoreKit.framework */; };
+		465E357027564A310032B8D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465E356F27564A310032B8D2 /* StoreKit.framework */; };
+		465E357227564A670032B8D2 /* Products.plist in Resources */ = {isa = PBXBuildFile; fileRef = 465E357127564A670032B8D2 /* Products.plist */; };
+		465E357327564A670032B8D2 /* Products.plist in Resources */ = {isa = PBXBuildFile; fileRef = 465E357127564A670032B8D2 /* Products.plist */; };
+		465E357527564ABB0032B8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357427564ABB0032B8D2 /* Configuration.swift */; };
+		465E357627564ABB0032B8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357427564ABB0032B8D2 /* Configuration.swift */; };
+		465E357827564AE80032B8D2 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357727564AE80032B8D2 /* StoreHelper.swift */; };
+		465E357927564AE80032B8D2 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357727564AE80032B8D2 /* StoreHelper.swift */; };
+		465E357D27564D910032B8D2 /* StoreLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357C27564D910032B8D2 /* StoreLog.swift */; };
+		465E357E27564D910032B8D2 /* StoreLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357C27564D910032B8D2 /* StoreLog.swift */; };
+		465E358027564DDB0032B8D2 /* StoreNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357F27564DDB0032B8D2 /* StoreNotification.swift */; };
+		465E358127564DDB0032B8D2 /* StoreNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357F27564DDB0032B8D2 /* StoreNotification.swift */; };
+		465E3584275673060032B8D2 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 465E3583275673060032B8D2 /* OrderedCollections */; };
+		465E3586275673520032B8D2 /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3585275673520032B8D2 /* SubscriptionHelper.swift */; };
+		465E3587275673520032B8D2 /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3585275673520032B8D2 /* SubscriptionHelper.swift */; };
+		465E3589275673FB0032B8D2 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 465E3588275673FB0032B8D2 /* OrderedCollections */; };
+		465E358B275674290032B8D2 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358A275674290032B8D2 /* KeychainHelper.swift */; };
+		465E358C275674290032B8D2 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358A275674290032B8D2 /* KeychainHelper.swift */; };
+		465E358E275674570032B8D2 /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358D275674570032B8D2 /* SubscriptionInfo.swift */; };
+		465E358F275674570032B8D2 /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358D275674570032B8D2 /* SubscriptionInfo.swift */; };
+		465E3591275674830032B8D2 /* PurchaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3590275674830032B8D2 /* PurchaseInfo.swift */; };
+		465E3592275674830032B8D2 /* PurchaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3590275674830032B8D2 /* PurchaseInfo.swift */; };
+		465E3598275679900032B8D2 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3597275679900032B8D2 /* SubscriptionViewModel.swift */; };
+		465E3599275679900032B8D2 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3597275679900032B8D2 /* SubscriptionViewModel.swift */; };
+		465E359C27567A000032B8D2 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E359B27567A000032B8D2 /* StoreConstants.swift */; };
+		465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E359B27567A000032B8D2 /* StoreConstants.swift */; };
 		468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42922701F84A008B5792 /* LaunchScreen.storyboard */; };
-		468E42972701F84A008B5792 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42952701F84A008B5792 /* Main.storyboard */; };
-		468E42A02701F84A008B5792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E429F2701F84A008B5792 /* AppDelegate.swift */; };
-		468E42A32701F84A008B5792 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42A12701F84A008B5792 /* Main.storyboard */; };
+		468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E429F2701F84A008B5792 /* GhosteryApp.swift */; };
 		468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		468E42BB2701F84A008B5792 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 468E427E2701F849008B5792 /* Main.html */; };
@@ -25,8 +70,6 @@
 		468E42C02701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C12701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
 		468E42C22701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
-		468E42C32701F84A008B5792 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42832701F849008B5792 /* ViewController.swift */; };
-		468E42C42701F84A008B5792 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42832701F849008B5792 /* ViewController.swift */; };
 		468E42C52701F84A008B5792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468E42842701F84A008B5792 /* Assets.xcassets */; };
 		468E42C62701F84A008B5792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468E42842701F84A008B5792 /* Assets.xcassets */; };
 		468E42C72701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
@@ -104,23 +147,45 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewRow.swift; sourceTree = "<group>"; };
+		462266432756DE6A00245D1E /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		462266452756DF9000245D1E /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
+		462266482756DFB800245D1E /* StoreErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreErrorView.swift; sourceTree = "<group>"; };
+		4622664B2756DFE800245D1E /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		4622664E2756E06D00245D1E /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		462266512756E09100245D1E /* PriveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriveViewModel.swift; sourceTree = "<group>"; };
+		462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewInfo.swift; sourceTree = "<group>"; };
 		464B62C2274F9B1A00F4CD07 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../src/fonts; sourceTree = "<group>"; };
+		465E353E2754EB870032B8D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWebView.swift; sourceTree = "<group>"; };
+		465E356127551D600032B8D2 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
+		465E35652755368B0032B8D2 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
+		465E356B27554CEB0032B8D2 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
+		465E356D27564A250032B8D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		465E356F27564A310032B8D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		465E357127564A670032B8D2 /* Products.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Products.plist; sourceTree = "<group>"; };
+		465E357427564ABB0032B8D2 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		465E357727564AE80032B8D2 /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
+		465E357C27564D910032B8D2 /* StoreLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreLog.swift; sourceTree = "<group>"; };
+		465E357F27564DDB0032B8D2 /* StoreNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreNotification.swift; sourceTree = "<group>"; };
+		465E3585275673520032B8D2 /* SubscriptionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHelper.swift; sourceTree = "<group>"; };
+		465E358A275674290032B8D2 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		465E358D275674570032B8D2 /* SubscriptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfo.swift; sourceTree = "<group>"; };
+		465E3590275674830032B8D2 /* PurchaseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInfo.swift; sourceTree = "<group>"; };
+		465E3597275679900032B8D2 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		465E359A275679AC0032B8D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		465E359B27567A000032B8D2 /* StoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConstants.swift; sourceTree = "<group>"; };
 		468E427F2701F849008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
 		468E42802701F849008B5792 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		468E42812701F849008B5792 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
 		468E42822701F849008B5792 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
-		468E42832701F849008B5792 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		468E42842701F84A008B5792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		468E428E2701F84A008B5792 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		468E42902701F84A008B5792 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		468E42932701F84A008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		468E42962701F84A008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		468E42982701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		468E429F2701F84A008B5792 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		468E42A22701F84A008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		468E429F2701F84A008B5792 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
 		468E42A42701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E42A52701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
 		468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +214,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				465E3584275673060032B8D2 /* OrderedCollections in Frameworks */,
+				465E356E27564A250032B8D2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +223,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				465E3589275673FB0032B8D2 /* OrderedCollections in Frameworks */,
+				465E357027564A310032B8D2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +245,93 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		465E356C27564A250032B8D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				465E356F27564A310032B8D2 /* StoreKit.framework */,
+				465E356D27564A250032B8D2 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		465E357A27564C9D0032B8D2 /* StoreHelper */ = {
+			isa = PBXGroup;
+			children = (
+				465E359A275679AC0032B8D2 /* README.md */,
+				465E357127564A670032B8D2 /* Products.plist */,
+				465E356B27554CEB0032B8D2 /* Products.storekit */,
+				465E359E27567A730032B8D2 /* Configuration */,
+				465E357B27564D850032B8D2 /* StoreHelper */,
+				465E3596275679730032B8D2 /* ViewModels */,
+			);
+			path = StoreHelper;
+			sourceTree = "<group>";
+		};
+		465E357B27564D850032B8D2 /* StoreHelper */ = {
+			isa = PBXGroup;
+			children = (
+				465E358A275674290032B8D2 /* KeychainHelper.swift */,
+				465E3590275674830032B8D2 /* PurchaseInfo.swift */,
+				465E359B27567A000032B8D2 /* StoreConstants.swift */,
+				465E357727564AE80032B8D2 /* StoreHelper.swift */,
+				465E357C27564D910032B8D2 /* StoreLog.swift */,
+				465E357F27564DDB0032B8D2 /* StoreNotification.swift */,
+				465E3585275673520032B8D2 /* SubscriptionHelper.swift */,
+				465E358D275674570032B8D2 /* SubscriptionInfo.swift */,
+			);
+			path = StoreHelper;
+			sourceTree = "<group>";
+		};
+		465E3593275678030032B8D2 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				465E3594275679400032B8D2 /* screens */,
+				465E353E2754EB870032B8D2 /* ContentView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		465E3594275679400032B8D2 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				465E3595275679500032B8D2 /* Subscriptions */,
+				465E35652755368B0032B8D2 /* Subscriptions.swift */,
+				465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		465E3595275679500032B8D2 /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				4622664B2756DFE800245D1E /* BadgeView.swift */,
+				4622664E2756E06D00245D1E /* PriceView.swift */,
+				462266452756DF9000245D1E /* PurchaseButton.swift */,
+				462266482756DFB800245D1E /* StoreErrorView.swift */,
+				462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */,
+				462266432756DE6A00245D1E /* SubscriptionView.swift */,
+				462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
+		465E3596275679730032B8D2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				465E3597275679900032B8D2 /* SubscriptionViewModel.swift */,
+				462266512756E09100245D1E /* PriveViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		465E359E27567A730032B8D2 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				465E357427564ABB0032B8D2 /* Configuration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		468E42772701F848008B5792 = {
 			isa = PBXGroup;
 			children = (
@@ -186,15 +342,17 @@
 				468E42AE2701F84A008B5792 /* iOS (Extension) */,
 				468E42B82701F84A008B5792 /* macOS (Extension) */,
 				468E428C2701F84A008B5792 /* Products */,
+				465E356C27564A250032B8D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		468E427C2701F849008B5792 /* Shared (App) */ = {
 			isa = PBXGroup;
 			children = (
-				468E42832701F849008B5792 /* ViewController.swift */,
 				468E42842701F84A008B5792 /* Assets.xcassets */,
 				468E427D2701F849008B5792 /* Resources */,
+				465E357A27564C9D0032B8D2 /* StoreHelper */,
+				465E3593275678030032B8D2 /* views */,
 			);
 			path = "Shared (App)";
 			sourceTree = "<group>";
@@ -234,11 +392,9 @@
 		468E428D2701F84A008B5792 /* iOS (App) */ = {
 			isa = PBXGroup;
 			children = (
-				468E428E2701F84A008B5792 /* AppDelegate.swift */,
-				468E42902701F84A008B5792 /* SceneDelegate.swift */,
-				468E42922701F84A008B5792 /* LaunchScreen.storyboard */,
-				468E42952701F84A008B5792 /* Main.storyboard */,
+				465E356127551D600032B8D2 /* GhosteryApp.swift */,
 				468E42982701F84A008B5792 /* Info.plist */,
+				468E42922701F84A008B5792 /* LaunchScreen.storyboard */,
 			);
 			path = "iOS (App)";
 			sourceTree = "<group>";
@@ -246,8 +402,7 @@
 		468E429E2701F84A008B5792 /* macOS (App) */ = {
 			isa = PBXGroup;
 			children = (
-				468E429F2701F84A008B5792 /* AppDelegate.swift */,
-				468E42A12701F84A008B5792 /* Main.storyboard */,
+				468E429F2701F84A008B5792 /* GhosteryApp.swift */,
 				468E42A42701F84A008B5792 /* Info.plist */,
 				468E42A52701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */,
 			);
@@ -319,6 +474,9 @@
 				468E42AD2701F84A008B5792 /* PBXTargetDependency */,
 			);
 			name = "Ghostery – Privacy Ad Blocker (iOS)";
+			packageProductDependencies = (
+				465E3583275673060032B8D2 /* OrderedCollections */,
+			);
 			productName = "Ghostery – Privacy Ad Blocker (iOS)";
 			productReference = 468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */;
 			productType = "com.apple.product-type.application";
@@ -338,6 +496,9 @@
 				468E42B72701F84A008B5792 /* PBXTargetDependency */,
 			);
 			name = "Ghostery – Privacy Ad Blocker (macOS)";
+			packageProductDependencies = (
+				465E3588275673FB0032B8D2 /* OrderedCollections */,
+			);
 			productName = "Ghostery – Privacy Ad Blocker (macOS)";
 			productReference = 468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */;
 			productType = "com.apple.product-type.application";
@@ -409,6 +570,9 @@
 				Base,
 			);
 			mainGroup = 468E42772701F848008B5792;
+			packageReferences = (
+				465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 468E428C2701F84A008B5792 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -426,12 +590,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				465E357227564A670032B8D2 /* Products.plist in Resources */,
 				468E42BD2701F84A008B5792 /* Icon.png in Resources */,
 				468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */,
 				468E42BB2701F84A008B5792 /* Main.html in Resources */,
 				468E42C12701F84A008B5792 /* Script.js in Resources */,
 				468E42C52701F84A008B5792 /* Assets.xcassets in Resources */,
-				468E42972701F84A008B5792 /* Main.storyboard in Resources */,
 				468E42BF2701F84A008B5792 /* Style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,8 +606,8 @@
 			files = (
 				468E42BE2701F84A008B5792 /* Icon.png in Resources */,
 				468E42C02701F84A008B5792 /* Style.css in Resources */,
-				468E42A32701F84A008B5792 /* Main.storyboard in Resources */,
 				468E42C22701F84A008B5792 /* Script.js in Resources */,
+				465E357327564A670032B8D2 /* Products.plist in Resources */,
 				468E42C62701F84A008B5792 /* Assets.xcassets in Resources */,
 				468E42BC2701F84A008B5792 /* Main.html in Resources */,
 			);
@@ -500,9 +664,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				468E42C32701F84A008B5792 /* ViewController.swift in Sources */,
-				468E428F2701F84A008B5792 /* AppDelegate.swift in Sources */,
-				468E42912701F84A008B5792 /* SceneDelegate.swift in Sources */,
+				465E353F2754EB870032B8D2 /* ContentView.swift in Sources */,
+				462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */,
+				465E359C27567A000032B8D2 /* StoreConstants.swift in Sources */,
+				465E358E275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
+				4622664F2756E06D00245D1E /* PriceView.swift in Sources */,
+				465E357D27564D910032B8D2 /* StoreLog.swift in Sources */,
+				465E357527564ABB0032B8D2 /* Configuration.swift in Sources */,
+				465E358B275674290032B8D2 /* KeychainHelper.swift in Sources */,
+				465E3598275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
+				462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
+				465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */,
+				462266522756E09100245D1E /* PriveViewModel.swift in Sources */,
+				465E357827564AE80032B8D2 /* StoreHelper.swift in Sources */,
+				465E35662755368B0032B8D2 /* Subscriptions.swift in Sources */,
+				465E3591275674830032B8D2 /* PurchaseInfo.swift in Sources */,
+				462266462756DF9000245D1E /* PurchaseButton.swift in Sources */,
+				465E3586275673520032B8D2 /* SubscriptionHelper.swift in Sources */,
+				4622664C2756DFE800245D1E /* BadgeView.swift in Sources */,
+				465E358027564DDB0032B8D2 /* StoreNotification.swift in Sources */,
+				462266412756DDFE00245D1E /* SubscriptionListViewRow.swift in Sources */,
+				465E35452754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */,
+				462266492756DFB800245D1E /* StoreErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,8 +693,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				468E42C42701F84A008B5792 /* ViewController.swift in Sources */,
-				468E42A02701F84A008B5792 /* AppDelegate.swift in Sources */,
+				465E35462754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */,
+				462266532756E09100245D1E /* PriveViewModel.swift in Sources */,
+				465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */,
+				4622664A2756DFB800245D1E /* StoreErrorView.swift in Sources */,
+				465E358F275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
+				462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */,
+				465E357E27564D910032B8D2 /* StoreLog.swift in Sources */,
+				465E357627564ABB0032B8D2 /* Configuration.swift in Sources */,
+				4622664D2756DFE800245D1E /* BadgeView.swift in Sources */,
+				462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
+				465E358C275674290032B8D2 /* KeychainHelper.swift in Sources */,
+				462266472756DF9000245D1E /* PurchaseButton.swift in Sources */,
+				465E3599275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
+				468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */,
+				465E357927564AE80032B8D2 /* StoreHelper.swift in Sources */,
+				465E35672755368B0032B8D2 /* Subscriptions.swift in Sources */,
+				465E3592275674830032B8D2 /* PurchaseInfo.swift in Sources */,
+				465E3587275673520032B8D2 /* SubscriptionHelper.swift in Sources */,
+				462266502756E06D00245D1E /* PriceView.swift in Sources */,
+				465E358127564DDB0032B8D2 /* StoreNotification.swift in Sources */,
+				462266422756DE4B00245D1E /* SubscriptionListViewRow.swift in Sources */,
+				465E35402754EB870032B8D2 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,22 +764,6 @@
 				468E42932701F84A008B5792 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		468E42952701F84A008B5792 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				468E42962701F84A008B5792 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		468E42A12701F84A008B5792 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				468E42A22701F84A008B5792 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -697,7 +884,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -728,7 +915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -763,14 +950,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -801,14 +987,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -838,7 +1023,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -870,7 +1055,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -905,7 +1090,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -942,7 +1127,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery – Privacy Ad Blocker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = HPY23A294X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1020,6 +1205,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		465E3583275673060032B8D2 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		465E3588275673FB0032B8D2 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 468E42782701F848008B5792 /* Project object */;
 }
