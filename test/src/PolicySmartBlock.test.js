@@ -38,29 +38,4 @@ describe('src/classes/PolicySmartBlock.js', () => {
 			return expect(policySmartBlock.allowedTypesList).toEqual(allowedTypesList);
 		});
 	});
-
-	describe('PolicySmartBlock isFirstPartyRequest tests', () => {
-		beforeAll(() => {
-			PolicySmartBlock.shouldCheck = jest.fn(() => true);
-		});
-
-		afterAll(() => {
-			policySmartBlock.mockClear();
-		});
-
-		test('PolicySmartBlock isFirstPartyRequest truthy assertion', () => {
-			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'example.com')).toBeTruthy();
-			// isFirstPartyRequest() expects pre-parsed domains, so we should parse the test urls
-			const parsedPage = processUrl('https://checkout.ghostery.com/insights');
-			const parsedRequest = processUrl('https://analytics.ghostery.com/piwik.js');
-			expect(PolicySmartBlock.isFirstPartyRequest('tabId', parsedPage.generalDomain, parsedRequest.generalDomain)).toBeTruthy();
-		});
-
-		test('PolicySmartBlock isFirstPartyRequest falsy assertion', () => {
-			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'example.com')).toBeFalsy();
-			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'sub.example.com', 'example.com')).toBeFalsy();
-			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'test.com')).toBeFalsy();
-			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'www.test.com')).toBeFalsy();
-		});
-	});
 });
