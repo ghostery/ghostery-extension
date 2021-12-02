@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "Ermöglicht Websites, Audio- und Videoinhalte zu veröffentlichen, zu verbreiten und zu optimieren."
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Kommentare"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "Hierzu gehören Chat, E-Mail-Benachrichtigung, Kundensupport und andere Interaktionstools."
 	},
+	"category_email": {
+		"message": "E-Mail-Adresse"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Essenziell"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "Hierzu gehören Tracker, die für das Funktionieren der Website unerlässlich sind, etwa Tag-Manager und Datenschutzhinweise."
+	},
+	"category_extensions": {
+		"message": "Erweiterungen"
+	},
+	"category_hosting": {
+		"message": "Hosting"
+	},
+	"category_misc": {
+		"message": "Sonstiges"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "Leistung"
 	},
 	"panel_detail_learn_more": {
-	  "message": "Weitere Informationen"
+		"message": "Weitere Informationen"
 	},
 	"panel_detail_history_title": {
 		"message": "Verlauf"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "Austausch von Human-Web-Daten"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "Teilnahme an A/B-Tests"
+	"settings_allow_abtests": {
+		"message": "Teilnahme an A/B-Tests"
 	},
 	"settings_signin_create_header": {
 		"message": "Anmelden/Konto erstellen"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "Ghostery implementiert jetzt standardmäßig Human Web, eine revolutionäre Technologie, die das kollektive Wissen der Crowd nutzt, um ein privateres Internet aufzubauen"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "Die Teilnahme an randomisierten A/B-Tests hilft Ghostery zu verstehen, welche Version eines neuen Layouts oder einer neuen Funktion Benutzer wie Sie bevorzugen."
+	"settings_abtests_tooltip": {
+		"message": "Die Teilnahme an randomisierten A/B-Tests hilft Ghostery zu verstehen, welche Version eines neuen Layouts oder einer neuen Funktion Benutzer wie Sie bevorzugen."
 	},
 	"settings_opt_in": {
 		"message": "Opt-in/-out"
@@ -1290,7 +1305,7 @@
 		"message": "Benutzerdefiniertes Setup abgeschlossen"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "Erhalten Sie mehr als nur grundlegenden Schutz. Führen Sie ein Upgrade auf Ghostery Plus durch, um auf unseren leistungsstarken privaten Browser, die private Suche und die erweiterte Tracker-Analyse zuzugreifen!"
+		"message": "Erhalten Sie mehr als nur grundlegenden Schutz. Führen Sie ein Upgrade auf Ghostery Plus durch, um auf unseren leistungsstarken privaten Browser, die private Suche und die erweiterte Tracker-Analyse zuzugreifen!"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "Jetzt Upgrade durchführen"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Entfernen Sie Datenpunkte, die Websites verwenden könnten, um Sie zu identifizieren."
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery Hub - Probieren Sie andere Ghostery-Produkte aus"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Jetzt mit Ghostery-Produkten smarter surfen!"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "Auf Ghostery Plus hochstufen"
 	},
 	"hub_supporter_header_description": {
-	  "message": "Erhalten Sie mehr als nur grundlegenden Schutz und schalten Sie unser komplettes Produktpaket frei!"
+		"message": "Erhalten Sie mehr als nur grundlegenden Schutz und schalten Sie unser komplettes Produktpaket frei!"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ pro Monat",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "Benutzerdefinierte Themes und mehr"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "Benutzerdefinierte Themes und mehr"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "Passen Sie die Ghostery-Farben an - Probieren Sie unsere Themes \"Leaf\", \"Palm\" und \"Dark Blue\"!"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Passen Sie die Ghostery-Farben an - Probieren Sie unsere Themes \"Leaf\", \"Palm\" und \"Dark Blue\"!"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Passen Sie die Ghostery-Farben an – Versuchen Sie es mit unserem dunkelblauen Thema"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "Erweiterte Tracker-Analyse"
+	"hub_supporter_perk_analytics_title": {
+		"message": "Erweiterte Tracker-Analyse"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "Greifen Sie auf Ghostery Insights zu – unser Dashboard für Tracker-Informationen in Echtzeit"
+	"hub_supporter_perk_analytics_description": {
+		"message": "Greifen Sie auf Ghostery Insights zu – unser Dashboard für Tracker-Informationen in Echtzeit"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "Geschützter Browser und geschützte Suche"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "Geschützter Browser und geschützte Suche"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "Laden Sie Ghostery Dawn und Glow herunter, unseren leistungsstarken privaten Browser mit integrierter Suchmaschine"
+		"message": "Laden Sie Ghostery Dawn und Glow herunter, unseren leistungsstarken privaten Browser mit integrierter Suchmaschine"
 	},
 	"hub_supporter_manifesto": {
 		"message": "Erwerben Sie ein Upgrade auf Ghostery Plus, um unser gesamtes Produktpaket freizuschalten! Für nur &#36;4,99 pro Monat erhalten Sie Zugang zu einem leistungsstarken privaten Browser mit integrierter geschützter Suche, erweiterter Tracker-Analyse und anderen besonderen Vorteilen."
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "Themes"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "Vorzugs-Support"
 	},
 	"subscribe_pitch": {
-	  "message": "Erwerben Sie ein Upgrade auf Ghostery Plus, um unser gesamtes Produktpaket freizuschalten! Für nur &#36;4,99 pro Monat erhalten Sie Zugang zu einem leistungsstarken privaten Browser mit integrierter geschützter Suche, erweiterter Tracker-Analyse und anderen besonderen Vorteilen."
+		"message": "Erwerben Sie ein Upgrade auf Ghostery Plus, um unser gesamtes Produktpaket freizuschalten! Für nur &#36;4,99 pro Monat erhalten Sie Zugang zu einem leistungsstarken privaten Browser mit integrierter geschützter Suche, erweiterter Tracker-Analyse und anderen besonderen Vorteilen."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Gefällt Ihnen, was wir tun? Unterstützen Sie uns und schalten Sie durch ein Upgrade auf Ghostery Plus neue Frühlingsthemen, persönliche Tracking-Informationen und weitere besondere Vergünstigungen frei!"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Farbschema von Ghostery ändern!"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "Nächster Zahlungstermin"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "Der Frühling ist da!"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "Holen Sie sich umfassenden Schutz für alle Browser und Apps auf Ihrem Gerät."
+	"full_coverage_protection_promise": {
+		"message": "Holen Sie sich umfassenden Schutz für alle Browser und Apps auf Ihrem Gerät."
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "Systemweiter Tracker und Werbeblocker"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "Zu viele fehlgeschlagene Anmeldeversuche. Versuchen Sie es in einer Stunde erneut."
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "Standard-Suche wählen"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "Wählen Sie eine Standard-Suchmaschine für Ihre Suchen."
+	"pick_a_default_search_engine": {
+		"message": "Wählen Sie eine Standard-Suchmaschine für Ihre Suchen."
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Dawn (Erweiterte  Tracker-Analyse)"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Dawn (Erweiterte  Tracker-Analyse)"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn (persönlicher Browser)"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn (persönlicher Browser)"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow (private, werbefreie Suche)"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow (private, werbefreie Suche)"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "Benutzerdefinierte Farbthemes"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "Benutzerdefinierte Farbthemes"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "Vorzugs-Support"
+	"plus_subscriber_perk_priority_support": {
+		"message": "Vorzugs-Support"
+	},
+	"privacy_protection": {
+		"message": "Schutz der Privatsphäre auf dieser Website"
+	},
+	"block_toggle_ads": {
+		"message": "Werbung blockieren"
+	},
+	"block_toggle_tracking": {
+		"message": "Tracker blockieren"
+	},
+	"block_toggle_annoyances": {
+		"message": "Belästigungen blockieren"
+	},
+	"statistical_report": {
+		"message": "Statistischer Bericht"
+	},
+	"subscribe": {
+		"message": "abonnieren"
+	},
+	"back": {
+		"message": "Zurück"
+	},
+	"trackers_detected": {
+		"message": "Erkannte"
+	},
+	"tracker_details": {
+		"message": "Tracker-Details"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "Tracker-Rad in der Browser-Symbolleiste deaktivieren"
 	}
 }

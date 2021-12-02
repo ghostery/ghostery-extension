@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "웹 사이트에서 오디오 및 비디오 콘텐츠를 게시, 배포, 최적화할 수 있도록 합니다."
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "댓글"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "채팅, 이메일 메시지, 고객 지원 및 기타 응대 도구가 포함됩니다."
 	},
+	"category_email": {
+		"message": "이메일 "
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "필수 "
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "태그 관리자 및 개인정보 고지사항과 같이 웹 사이트의 기능에 필수적인 트래커가 포함됩니다."
+	},
+	"category_extensions": {
+		"message": "확장"
+	},
+	"category_hosting": {
+		"message": "호스팅"
+	},
+	"category_misc": {
+		"message": "기타"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "성능 "
 	},
 	"panel_detail_learn_more": {
-	  "message": "자세히 알아보기 "
+		"message": "자세히 알아보기 "
 	},
 	"panel_detail_history_title": {
 		"message": "기록 "
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "Human Web 데이터 공유"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "A/B 테스트 기능 이용"
+	"settings_allow_abtests": {
+		"message": "A/B 테스트 기능 이용"
 	},
 	"settings_signin_create_header": {
 		"message": "로그인 / 계정 만들기 "
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "현재 고스터리는 보다 맞춤화된 인터넷 경험을 구축하기 위해 크라우드 정보를 이용하는 혁신적인 기술인 Human Web을 자동으로 실행하고 있습습니다. "
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "무작위 A/B 테스트에 참여하면 Ghostery가 사용자의 선호 새 레이아웃 또는 기능 버전을 이해하는 데 도움이 됩니다."
+	"settings_abtests_tooltip": {
+		"message": "무작위 A/B 테스트에 참여하면 Ghostery가 사용자의 선호 새 레이아웃 또는 기능 버전을 이해하는 데 도움이 됩니다."
 	},
 	"settings_opt_in": {
 		"message": "참여/미참여"
@@ -1290,7 +1305,7 @@
 		"message": "사용자 지정 설정 완료"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "기본 개인정보 보호 이상을 경험해보세요. Ghostery Plus로 업그레이드하면 보안 브라우저, 보안 검색, 고급 트래커 분석 등의 강력한 기능을 사용할 수 있습니다."
+		"message": "기본 개인정보 보호 이상을 경험해보세요. Ghostery Plus로 업그레이드하면 보안 브라우저, 보안 검색, 고급 트래커 분석 등의 강력한 기능을 사용할 수 있습니다."
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "지금 업그레이드"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "웹사이트에서 사용자 정보를 식별할 수 있는 데이터 포인트 삭제"
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery 허브 - Ghostery의 다른 제품 이용"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "고스터리 제품으로 더욱 효율적인 웹 브라우징을 즐겨보세요! "
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "Ghostery Plus로 업그레이드"
 	},
 	"hub_supporter_header_description": {
-	  "message": "기본 개인정보 보호 이상을 경험하고 모든 제품 기능을 활용하세요!"
+		"message": "기본 개인정보 보호 이상을 경험하고 모든 제품 기능을 활용하세요!"
 	},
 	"hub_supporter_price": {
 		"message": "매달 $SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "맞춤 테마 등"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "맞춤 테마 등"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "Ghostery 컬러 사용자 지정 - Leaf, Palm, Dark Blue 테마를 사용해보세요!"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "Ghostery 컬러 사용자 지정 - Leaf, Palm, Dark Blue 테마를 사용해보세요!"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghostery 컬러 사용자 지정 - Dark Blue 테마를 사용해보세요!"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "고급 트래커 분석"
+	"hub_supporter_perk_analytics_title": {
+		"message": "고급 트래커 분석"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "실시간 트래커 지능형 대시보드인 Ghostery Insights 이용"
+	"hub_supporter_perk_analytics_description": {
+		"message": "실시간 트래커 지능형 대시보드인 Ghostery Insights 이용"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "보안 브라우저 및 검색 기능"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "보안 브라우저 및 검색 기능"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "내장 검색 엔진이 탑재된 강력한 보안 브라우저 Ghostery Dawn 및 Glow 다운로드"
+		"message": "내장 검색 엔진이 탑재된 강력한 보안 브라우저 Ghostery Dawn 및 Glow 다운로드"
 	},
 	"hub_supporter_manifesto": {
 		"message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "테마"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "우선 지원"
 	},
 	"subscribe_pitch": {
-	  "message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
+		"message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
 	},
 	"subscribe_pitch_spring": {
 		"message": "현재 서비스가 마음에 드시나요? Ghostery Plus로 업그레이드하여 당사를 후원하고 새로운 봄 테마, 개인 추적 서비스, 기타 혜택을 받아보세요."
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "고스터리 브라우저의 컬러 테마를 변경하세요!"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "다음 결제 날짜"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "봄이 왔습니다!"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
+	"full_coverage_protection_promise": {
+		"message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "시스템 차원 트래커 및 광고 차단"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "로그인 실패 횟수가 너무 많습니다. 1시간 후에 다시 시도하십시오."
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "기본 검색 기능 선택"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "검색을 수행할 기본 검색 엔진을 선택하세요."
+	"pick_a_default_search_engine": {
+		"message": "검색을 수행할 기본 검색 엔진을 선택하세요."
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights(고급 트래커 분석)"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights(고급 트래커 분석)"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn(보안 브라우저)"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn(보안 브라우저)"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow(광고 없는 보안 검색)"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow(광고 없는 보안 검색)"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "맞춤 컬러 테마"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "맞춤 컬러 테마"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "우선 지원"
+	"plus_subscriber_perk_priority_support": {
+		"message": "우선 지원"
+	},
+	"privacy_protection": {
+		"message": "이 사이트에서 개인 정보 보호"
+	},
+	"block_toggle_ads": {
+		"message": "광고 차단 "
+	},
+	"block_toggle_tracking": {
+		"message": "트래커 차단"
+	},
+	"block_toggle_annoyances": {
+		"message": "방해 차단"
+	},
+	"statistical_report": {
+		"message": "통계 보고서"
+	},
+	"subscribe": {
+		"message": "구독"
+	},
+	"back": {
+		"message": "뒤로"
+	},
+	"trackers_detected": {
+		"message": "탐지됨"
+	},
+	"tracker_details": {
+		"message": "트래커 세부 정보"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "브라우저 툴바에서 트래커 바퀴 비활성화"
 	}
 }
