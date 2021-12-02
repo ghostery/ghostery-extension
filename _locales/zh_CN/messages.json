@@ -241,6 +241,9 @@
 		"description": "User-facing description for the Audio/Video Player tag category.",
 		"message": "使网站能够发布、分发和优化音频与视频内容。"
 	},
+	"category_cdn": {
+		"message": "CDN"
+	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "评论"
@@ -257,6 +260,9 @@
 		"description": "User-facing description for the Customer Interaction tag category.",
 		"message": "包括聊天、电子邮件、客户支持和其他交互工具。"
 	},
+	"category_email": {
+		"message": "电子邮件地址"
+	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "基本"
@@ -264,6 +270,15 @@
 	"category_essential_desc": {
 		"description": "User-facing description for the Essential tag category.",
 		"message": "包括对网站功能至关重要的跟踪器，如跟踪代码管理器和隐私权声明。"
+	},
+	"category_extensions": {
+		"message": "扩展"
+	},
+	"category_hosting": {
+		"message": "托管"
+	},
+	"category_misc": {
+		"message": "其他"
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -673,7 +688,7 @@
 		"message": "性能"
 	},
 	"panel_detail_learn_more": {
-	  "message": "了解详情"
+		"message": "了解详情"
 	},
 	"panel_detail_history_title": {
 		"message": "历史记录"
@@ -897,8 +912,8 @@
 	"settings_share_human_web": {
 		"message": "分享 Human Web 数据"
 	},
-  	"settings_allow_abtests": {
-	  	"message": "参与 A/B 测试"
+	"settings_allow_abtests": {
+		"message": "参与 A/B 测试"
 	},
 	"settings_signin_create_header": {
 		"message": "登录/创建帐户"
@@ -987,8 +1002,8 @@
 	"settings_human_web_tooltip": {
 		"message": "Ghostery 现在默认实现了 Human Web，这是一项利用群体智慧打造更私密互联网的革命性技术"
 	},
-  	"settings_abtests_tooltip": {
-	  	"message": "参与随机 A/B 测试有助于 Ghostery 了解您这类用户喜欢哪种版本的新布局或功能。 "
+	"settings_abtests_tooltip": {
+		"message": "参与随机 A/B 测试有助于 Ghostery 了解您这类用户喜欢哪种版本的新布局或功能。 "
 	},
 	"settings_opt_in": {
 		"message": "加入/退出"
@@ -1290,7 +1305,7 @@
 		"message": "自定义设置完毕"
 	},
 	"hub_home_plus_upgrade_text": {
-	  	"message": "不仅仅提供基本隐私服务。升级为 Ghostery Plus 以访问我们强大的无痕浏览器、无痕搜索和高级跟踪器分析！"
+		"message": "不仅仅提供基本隐私服务。升级为 Ghostery Plus 以访问我们强大的无痕浏览器、无痕搜索和高级跟踪器分析！"
 	},
 	"hub_home_plus_upgrade_button_text": {
 		"message": "立即升级"
@@ -1556,10 +1571,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "去除网站可用于识别您身份的数据点。"
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery Hub - 使用其他Ghostery产品"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "使用Ghostery产品，浏览更智能！"
 	},
 	"hub_products_header_description": {
@@ -1590,7 +1605,7 @@
 		"message": "升级为Ghostery Plus"
 	},
 	"hub_supporter_header_description": {
-	  "message": "不仅仅提供基本隐私服务，解锁我们的全产品套装！"
+		"message": "不仅仅提供基本隐私服务，解锁我们的全产品套装！"
 	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$/月",
@@ -1609,26 +1624,26 @@
 			}
 		}
 	},
-  	"hub_supporter_perk_themes_and_more_title": {
-	  "message": "自定义主题及更多"
+	"hub_supporter_perk_themes_and_more_title": {
+		"message": "自定义主题及更多"
 	},
-  	"hub_supporter_perk_themes_and_more_description": {
-	  "message": "定制 Ghostery 的颜色 - 试试我们的 Leaf、Palm 和 Dark Blue 主题吧！"
+	"hub_supporter_perk_themes_and_more_description": {
+		"message": "定制 Ghostery 的颜色 - 试试我们的 Leaf、Palm 和 Dark Blue 主题吧！"
 	},
 	"hub_supporter_perk_themes_description": {
 		"message": "定制 Ghostery 的颜色 - 试试我们的 Dark Blue 主题吧！"
 	},
-  	"hub_supporter_perk_analytics_title": {
-	  "message": "高级跟踪器分析"
+	"hub_supporter_perk_analytics_title": {
+		"message": "高级跟踪器分析"
 	},
-  	"hub_supporter_perk_analytics_description": {
-	  "message": "访问 Ghostery Insights，我们的实时跟踪器智能仪表板"
+	"hub_supporter_perk_analytics_description": {
+		"message": "访问 Ghostery Insights，我们的实时跟踪器智能仪表板"
 	},
-  	"hub_supporter_perk_dawn_and_glow_title": {
-	  "message": "无痕浏览器和搜索"
+	"hub_supporter_perk_dawn_and_glow_title": {
+		"message": "无痕浏览器和搜索"
 	},
 	"hub_supporter_perk_dawn_and_glow_description": {
-	  "message": "下载 Ghostery Dawn 和 Glow，我们强大的无痕浏览器，附带内置搜索引擎"
+		"message": "下载 Ghostery Dawn 和 Glow，我们强大的无痕浏览器，附带内置搜索引擎"
 	},
 	"hub_supporter_manifesto": {
 		"message": "升级为 Ghostery Plus 以解锁我们的全产品套装！每月只需 &#36;4.99，即可访问一款强大的无痕浏览器，附带内置无痕搜索、高级跟踪器分析和其他特别福利。"
@@ -1729,11 +1744,11 @@
 	"subscription_themes_title": {
 		"message": "主题"
 	},
-	"priority_support" : {
+	"priority_support": {
 		"message": "优先支持"
 	},
 	"subscribe_pitch": {
-	  "message": "升级为 Ghostery Plus 以解锁我们的全产品套装！每月只需 &#36;4.99，即可访问一款强大的无痕浏览器，附带内置无痕搜索、高级跟踪器分析和其他的特别福利。"
+		"message": "升级为 Ghostery Plus 以解锁我们的全产品套装！每月只需 &#36;4.99，即可访问一款强大的无痕浏览器，附带内置无痕搜索、高级跟踪器分析和其他的特别福利。"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜欢我们的创意？升级至 Ghostery Plus，解锁全新的春季主题、个人追踪洞察和其他特别福利！"
@@ -1783,7 +1798,7 @@
 	"subscription_themes_tooltip": {
 		"message": "更改Ghostery的颜色主题！"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "下次支付日期"
 	},
 	"subscription_expired": {
@@ -2070,8 +2085,8 @@
 	"spring_is_here": {
 		"message": "春季到了！"
 	},
-  	"full_coverage_protection_promise": {
-	  "message": "全面保护设备中的所有浏览器和应用程序"
+	"full_coverage_protection_promise": {
+		"message": "全面保护设备中的所有浏览器和应用程序"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "全系统追踪器和广告拦截"
@@ -2100,25 +2115,55 @@
 	"too_many_failed_logins_text": {
 		"message": "登录失败次数过多。请一小时后重试。"
 	},
-  	"choose_your_default_search": {
+	"choose_your_default_search": {
 		"message": "选择您的默认搜索"
 	},
-  	"pick_a_default_search_engine": {
-	  "message": "选择用于所有搜索的默认搜索引擎。"
+	"pick_a_default_search_engine": {
+		"message": "选择用于所有搜索的默认搜索引擎。"
 	},
-  "plus_subscriber_perk_insights" : {
-	  "message": "Ghostery Insights（高级跟踪器分析）"
+	"plus_subscriber_perk_insights": {
+		"message": "Ghostery Insights（高级跟踪器分析）"
 	},
-	"plus_subscriber_perk_dawn" : {
-	  "message": "Ghostery Dawn（无痕浏览器）"
+	"plus_subscriber_perk_dawn": {
+		"message": "Ghostery Dawn（无痕浏览器）"
 	},
-	"plus_subscriber_perk_glow" : {
-	  "message": "Ghostery Glow（无广告无痕搜索）"
+	"plus_subscriber_perk_glow": {
+		"message": "Ghostery Glow（无广告无痕搜索）"
 	},
-	"plus_subscriber_perk_custom_color_themes" : {
-	  "message": "自定义颜色主题"
+	"plus_subscriber_perk_custom_color_themes": {
+		"message": "自定义颜色主题"
 	},
-	"plus_subscriber_perk_priority_support" : {
-	  "message": "优先支持"
+	"plus_subscriber_perk_priority_support": {
+		"message": "优先支持"
+	},
+	"privacy_protection": {
+		"message": "此网站上的隐私保护"
+	},
+	"block_toggle_ads": {
+		"message": "拦截广告"
+	},
+	"block_toggle_tracking": {
+		"message": "拦截跟踪器"
+	},
+	"block_toggle_annoyances": {
+		"message": "拦截烦人的东西"
+	},
+	"statistical_report": {
+		"message": "统计报告"
+	},
+	"subscribe": {
+		"message": "订阅"
+	},
+	"back": {
+		"message": "返回"
+	},
+	"trackers_detected": {
+		"message": "已检测到"
+	},
+	"tracker_details": {
+		"message": "跟踪器详情"
+	},
+	"options_tracker_wheel_disabled": {
+		"message": "在浏览器工具栏中禁用跟踪器轮盘"
 	}
 }
