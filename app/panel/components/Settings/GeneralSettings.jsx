@@ -166,14 +166,6 @@ class GeneralSettings extends React.Component {
 								</div>
 							</div>
 						</div>
-						<div className="s-option-group">
-							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-block-trackers" name="block_by_default" defaultChecked={settingsData.block_by_default} onClick={toggleCheckbox} />
-								<label htmlFor="settings-block-trackers">
-									{ t('settings_block_trackers') }
-								</label>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -196,7 +188,6 @@ GeneralSettings.propTypes = {
 		enable_click2play_social: PropTypes.bool.isRequired,
 		toggle_individual_trackers: PropTypes.bool.isRequired,
 		ignore_first_party: PropTypes.bool.isRequired,
-		block_by_default: PropTypes.bool.isRequired,
 	}).isRequired,
 };
 

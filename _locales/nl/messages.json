@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Sta door website-eigenaren gemaakte trackers toe"
 	},
-	"settings_block_trackers": {
-		"message": "Blokkeer standaard nieuwe aan Ghostery toegevoegde trackers"
-	},
 	"settings_show_purple_box": {
 		"message": "De trackertelling in de hoek van mijn browser weergeven"
 	},

@@ -30,7 +30,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_click2play_social: false,
 				toggle_individual_trackers: false,
 				ignore_first_party: false,
-				block_by_default: false,
 			};
 			const actions = {
 				updateDatabase: () => {},
@@ -57,7 +56,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_click2play_social: true,
 				toggle_individual_trackers: true,
 				ignore_first_party: true,
-				block_by_default: true,
 			};
 			const actions = {
 				updateDatabase: () => {},
@@ -85,7 +83,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_click2play_social: false,
 				toggle_individual_trackers: false,
 				ignore_first_party: false,
-				block_by_default: false,
 			};
 			const actions = {
 				updateDatabase: jest.fn(),

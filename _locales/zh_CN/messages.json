@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "允许网站所有者创建的跟踪器"
 	},
-	"settings_block_trackers": {
-		"message": "默认拦截添加到 Ghostery 的新跟踪器"
-	},
 	"settings_show_purple_box": {
 		"message": "在浏览器一角显示跟踪器记录"
 	},
