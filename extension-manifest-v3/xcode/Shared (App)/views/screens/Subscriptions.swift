@@ -70,12 +70,29 @@ struct Subscriptions: View {
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 
-            Button("Privacy Policy") {
-                openInWebView(URL(string: "https://www.ghostery.com/privacy/ghostery-plans-and-products-privacy-policy")!)
+            HStack {
+                Button("EULA") {
+                    openInWebView(URL(string: "https://www.ghostery.com/privacy/ghostery-subscription-plans-and-products-end-user-license-agreement")!)
+                }
+                    .buttonStyle(.borderless)
+                    .foregroundColor(.blue)
+                    .padding()
+
+
+                Button("Terms of Use") {
+                    openInWebView(URL(string: "https://www.ghostery.com/privacy/ghostery-terms-and-conditions")!)
+                }
+                    .buttonStyle(.borderless)
+                    .foregroundColor(.blue)
+                    .padding()
+
+                Button("Privacy Policy") {
+                    openInWebView(URL(string: "https://www.ghostery.com/privacy/ghostery-plans-and-products-privacy-policy")!)
+                }
+                    .buttonStyle(.borderless)
+                    .foregroundColor(.blue)
+                    .padding()
             }
-                .buttonStyle(.borderless)
-                .foregroundColor(.blue)
-                .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(.horizontal)
