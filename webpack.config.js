@@ -37,7 +37,7 @@ module.exports = {
 	},
 	resolve: {
 		symlinks: false, // allow module resolution with `npm link`
-		extensions: ['.js', '.jsx'] // allow leaving off file extension when importing
+		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
 	},
 	watchOptions: {
 		ignored: /node_modules/
@@ -76,7 +76,10 @@ module.exports = {
 			verbose: false,
 		}),
 		// Ignore all locale files of moment.js
-		new webpack.IgnorePlugin(/locale/, /node_modules.+(moment)/),
+		new webpack.IgnorePlugin({
+			resourceRegExp: /locale/,
+			contextRegExp: /node_modules.+(moment)/,
+		}),
 		// Extract CSS into individual files
 		new MiniCssExtractPlugin({
 			filename: 'css/[name].css'

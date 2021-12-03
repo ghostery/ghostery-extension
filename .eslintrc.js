@@ -82,6 +82,7 @@ module.exports = {
 		'import/no-cycle': [0],
 
 		// Plugin: React
+		'react/destructuring-assignment': [0],
 		'react/static-property-placement': [0],
 		'react/jsx-curly-newline': [0],
 		'react/jsx-indent': [1, 'tab'],
