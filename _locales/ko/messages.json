@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "사이트 소유자가 만든 트래커 허용 "
 	},
-	"settings_block_trackers": {
-		"message": "기본적으로 Ghostery에 추가된 새로운 트래커 차단 "
-	},
 	"settings_show_purple_box": {
 		"message": "브라우저 구석에 트래커 기록 표시"
 	},

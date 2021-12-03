@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Zezwól działanie tropicieli utworzonych przez właścicieli strony"
 	},
-	"settings_block_trackers": {
-		"message": "Blokuj nowe tropiciele dodane domyślnie do Ghostery"
-	},
 	"settings_show_purple_box": {
 		"message": "Wyświetlaj licznik tropicieli w rogu wyszukiwarki"
 	},

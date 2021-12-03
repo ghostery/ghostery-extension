@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Oldaltulajdonosok által létrehozott trackerek engedélyezése"
 	},
-	"settings_block_trackers": {
-		"message": "A Ghostery-hez hozzáadott új trackerek blokkolása alapértelmezés szerint"
-	},
 	"settings_show_purple_box": {
 		"message": "Trackerek számának megjelenítése a böngésző sarkában"
 	},

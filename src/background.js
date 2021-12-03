@@ -167,17 +167,14 @@ function autoUpdateDBs(isAutoUpdateEnabled, bugsLastCheckedMsec) {
 	}
 }
 
-/**
- * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
- */
 function setGhosteryDefaultBlocking() {
-	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	const categoriesBlock = globals.CATEGORIES_BLOCKED_BY_DEFAULT;
 	log('Blocking all trackers in categories:', ...categoriesBlock);
 	const selected_app_ids = {};
 	const app_ids = Object.keys(bugDb.db.apps);
 	app_ids.forEach((app_id) => {
 		const category = bugDb.db.apps[app_id].cat;
-		if (categoriesBlock.indexOf(category) >= 0 &&
+		if (categoriesBlock.includes(category) &&
 		!selected_app_ids.hasOwnProperty(app_id)) {
 			selected_app_ids[app_id] = 1;
 		}

@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Von Websitebesitzern erstellte Tracker zulassen"
 	},
-	"settings_block_trackers": {
-		"message": "Neue zu Ghostery hinzugefügte Tracker standardmäßig blockieren"
-	},
 	"settings_show_purple_box": {
 		"message": "Tracker-Tally in der Ecke meines Browsers anzeigen"
 	},

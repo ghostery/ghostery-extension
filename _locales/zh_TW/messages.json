@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "准許由網站擁有者所創造的網頁跟縱器"
 	},
-	"settings_block_trackers": {
-		"message": "默認封鎖被加入 Ghostery 的新網頁跟蹤器"
-	},
 	"settings_show_purple_box": {
 		"message": "在瀏覽器角落顯示追蹤器紀錄"
 	},

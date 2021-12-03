@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "サイト所有者が作成したトラッカーを許可します"
 	},
-	"settings_block_trackers": {
-		"message": "Ghosteryにデフォルトで追加された新しいトラッカーをブロックします"
-	},
 	"settings_show_purple_box": {
 		"message": "ブラウザの隅に総トラッカーを表示します"
 	},

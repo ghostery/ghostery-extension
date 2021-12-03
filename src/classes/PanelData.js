@@ -469,7 +469,7 @@ class PanelData {
 	 */
 	static _getUserSettingsForSettingsView(userSettingsSource) {
 		const {
-			alert_bubble_pos, alert_bubble_timeout, block_by_default, cliqz_adb_mode, enable_autoupdate,
+			alert_bubble_pos, alert_bubble_timeout, cliqz_adb_mode, enable_autoupdate,
 			enable_click2play, enable_click2play_social, enable_human_web,
 			enable_metrics, enable_abtests, hide_alert_trusted, ignore_first_party, notify_library_updates,
 			notify_promotions, notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
@@ -479,7 +479,6 @@ class PanelData {
 		return {
 			alert_bubble_pos,
 			alert_bubble_timeout,
-			block_by_default,
 			cliqz_adb_mode,
 			enable_autoupdate,
 			enable_click2play,

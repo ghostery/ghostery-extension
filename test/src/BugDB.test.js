@@ -14,6 +14,7 @@
 import _ from 'underscore';
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
+import globals from '../../src/classes/Globals';
 import { prefsGet } from '../../src/utils/common';
 
 describe('src/classes/BugDb.js', () => {
@@ -109,7 +110,7 @@ describe('src/classes/BugDb.js', () => {
 
 		beforeAll(done => {
 			// Fake XMLHttpRequest for fetchJson(/databases/bugs.json)
-			global.mockFetchResponse(200, JSON.stringify(bugs))
+			global.mockFetchResponse(200, JSON.stringify(bugs));
 
 			chrome.storage.local.get.yields({ previousVersion: "8.0.8" });
 			conf.init().then(() => {
@@ -191,7 +192,7 @@ describe('src/classes/BugDb.js', () => {
 
 			describe('bugsDb gets initialized with some apps selected', () => {
 				beforeAll(done => {
-					conf.selected_app_ids[Object.keys(bugDb.db.apps)[0]] = true;
+					conf.selected_app_ids[Object.keys(bugDb.db.apps)[0]] = 1;
 					bugDb.init().then(() => {
 						done();
 					});
@@ -205,9 +206,10 @@ describe('src/classes/BugDb.js', () => {
 				beforeAll(done => {
 					conf.selected_app_ids = {};
 					conf.selected_app_ids = all_app_ids.reduce((memo, app_id) => {
-						memo[app_id] = true;
+						memo[app_id] = 1;
 						return memo;
 					}, {});
+
 					bugDb.init().then(() => {
 						done();
 					});
@@ -241,56 +243,81 @@ describe('src/classes/BugDb.js', () => {
 				return expect(_.keys(conf.selected_app_ids).length).toBe(0);
 			});
 
-			describe('test re-initialized values', () => {
-				let new_app_ids;
+			[false, true].forEach(startWithAllTrackersBlocked => {
+				describe(`test re-initialized values (startWithAllTrackersBlocked=${startWithAllTrackersBlocked}))`, () => {
+					let new_app_ids;
 
-				beforeAll(done => {
-					conf.block_by_default = true;
-					reloadDb(bugDb).then(result => {
-						new_app_ids = result;
-						done();
+					beforeAll(done => {
+						conf.selected_app_ids = {};
+
+						if (startWithAllTrackersBlocked) {
+							conf.selected_app_ids = all_app_ids.reduce((memo, app_id) => {
+								memo[app_id] = 1;
+								return memo;
+							}, {});
+						}
+
+						releaseNewSiteAnalyticsTracker(bugDb).then(result => {
+							new_app_ids = result;
+							done();
+						});
 					});
-				});
 
-				test('JUST_UPDATED_WITH_NEW_TRACKERS is now set to true', () => {
-					return expect(bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS).toBeTruthy();
-				});
-
-				test('newAppIds is now set', () => {
-					return expect(new_app_ids).not.toBeNull();
-				});
-
-				test('just_upgraded is true', () => {
-					return expect(bugDb.just_upgraded).toBeTruthy();
-				});
-
-				test('newAppIds were selected for blocking', () => {
-					return expect(_.keys(conf.selected_app_ids).map(Number)).toEqual(new_app_ids);
-				});
-
-				function reloadDb (bugDb) {
-					// fake an older bugs object
-					var old_bugs = Object.assign({}, bugs);
-
-					// by decrementing version
-					old_bugs.version--;
-
-					// and removing the last tracker
-					var new_app_ids = _.keys(old_bugs.apps).slice(-3);
-					old_bugs.apps = _.omit(old_bugs.apps, new_app_ids);
-
-					// update Conf
-					conf.bugs = old_bugs;
-
-					// Fake the xhr request again
-					global.mockFetchResponse(200, JSON.stringify(bugs))
-
-					// fake an upgrade so that we read the "newer" bugs from disk instead of localStorage
-					return bugDb.init(true).then(() => {
-						// newAppIds are integers
-						return new_app_ids.map(Number);
+					test('JUST_UPDATED_WITH_NEW_TRACKERS is now set to true', () => {
+						return expect(bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS).toBeTruthy();
 					});
-				};
+
+					test('newAppIds is now set', () => {
+						return expect(new_app_ids).not.toBeNull();
+					});
+
+					test('just_upgraded is true', () => {
+						return expect(bugDb.just_upgraded).toBeTruthy();
+					});
+
+					if (startWithAllTrackersBlocked) {
+						test('the new Site Analytics tracker should be blocked like all the existing ones', () => {
+							return expect(_.keys(conf.selected_app_ids).map(Number)).toEqual(new_app_ids);
+						});
+					} else {
+						test('the new Site Analytics tracker should not be blocked, as the others in the category were also not blocked', () => {
+							return expect(_.keys(conf.selected_app_ids).map(Number)).toEqual([]);
+						});
+					}
+
+					function releaseNewSiteAnalyticsTracker(bugDb) {
+						// fake an older bugs object
+						const old_bugs = Object.assign({}, bugs);
+						old_bugs.apps = Object.assign({}, old_bugs.apps);
+
+						// by decrementing version
+						old_bugs.version--;
+
+						const new_bugs = Object.assign({}, bugs);
+						new_bugs.apps = Object.assign({}, new_bugs.apps);
+
+						// simulate that one additional site_analytics trackers came with the new version
+						const new_tracker_id = '1000';
+						expect(new_bugs.apps).not.toHaveProperty(new_tracker_id);
+						new_bugs.apps[new_tracker_id] = {
+							name: 'New Tracker',
+							cat: 'site_analytics',
+						};
+						const new_app_ids = _.keys(new_bugs.apps);
+
+						// update Conf
+						conf.bugs = old_bugs;
+
+						// Fake the xhr request again
+						global.mockFetchResponse(200, JSON.stringify(new_bugs));
+
+						// fake an upgrade so that we read the "newer" bugs from disk instead of localStorage
+						return bugDb.init(true).then(() => {
+							// newAppIds are integers
+							return new_app_ids.map(Number);
+						});
+					};
+				});
 			});
 		});
 	});

@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Consenti i tracker creati dai titolari del sito"
 	},
-	"settings_block_trackers": {
-		"message": "Blocca i nuovi tracker aggiunti a Ghostery per impostazione predefinita"
-	},
 	"settings_show_purple_box": {
 		"message": "Mostra il conteggio tracker nell'angolo del browser in uso"
 	},

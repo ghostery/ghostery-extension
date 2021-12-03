@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Permitir rastreadores creados por los propietarios del sitio"
 	},
-	"settings_block_trackers": {
-		"message": "Bloquear por defecto los nuevos rastreadores agregados a Ghostery"
-	},
 	"settings_show_purple_box": {
 		"message": "Mostrar el recuento de rastreadores en la esquina de mi navegador"
 	},

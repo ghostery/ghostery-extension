@@ -102,7 +102,6 @@ class ConfData {
 			_initProperty('alert_bubble_pos', 'br');
 			_initProperty('alert_bubble_timeout', 15);
 			_initProperty('alert_expanded', false);
-			_initProperty('block_by_default', false);
 			_initProperty('bugs_last_checked', 0);
 			_initProperty('bugs_last_updated', nowTime);
 			_initProperty('cliqz_adb_mode', 2); // 2 == Ads + Trackers + Annoyances
