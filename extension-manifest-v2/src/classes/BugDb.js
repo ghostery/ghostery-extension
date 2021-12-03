@@ -12,12 +12,13 @@
  */
 
 import {
-	difference, each, every, keys, size
+	difference, every, keys, size
 } from 'underscore';
 import conf from './Conf';
 import Updatable from './Updatable';
 import { defineLazyProperty, flushChromeMemoryCache } from '../utils/utils';
 import { log } from '../utils/common';
+import globals from './Globals';
 
 /**
  * Class for handling the main Ghostery trackers database
@@ -45,21 +46,6 @@ class BugDb extends Updatable {
 		conf.new_app_ids = new_app_ids;
 
 		return new_app_ids;
-	}
-
-	/**
-	 * Apply block to all new trackers
-	 * @param  {Object} new_app_ids list of new trackers
-	 */
-	static applyBlockByDefault(new_app_ids) {
-		if (conf.block_by_default) {
-			log('applying block-by-default...');
-			const { selected_app_ids } = conf;
-			each(new_app_ids, (app_id) => {
-				selected_app_ids[app_id] = 1;
-			});
-			conf.selected_app_ids = selected_app_ids;
-		}
 	}
 
 	/**
@@ -193,14 +179,25 @@ class BugDb extends Updatable {
 		log('processed bugdb...');
 
 		if (!fromMemory) {
-			const old_bugs = conf.bugs;
-			let	new_app_ids;
 			// if there is an older bugs object in storage update newAppIds and apply block-by-default
+			const old_bugs = conf.bugs;
 			if (old_bugs && old_bugs.hasOwnProperty('version') && (old_bugs.version !== bugs.version)) {
-				new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
+				const new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
+				if (new_app_ids.length > 0) {
+					log(`${new_app_ids.length} new trackers have been added`);
+					const { selected_app_ids } = conf;
+					const newBlockedTrackers = BugDb._scanForNewTrackersToBlock(
+						bugs, old_bugs, new_app_ids, selected_app_ids
+					);
 
-				if (new_app_ids.length) {
-					BugDb.applyBlockByDefault(new_app_ids);
+					if (newBlockedTrackers.length > 0) {
+						newBlockedTrackers.forEach((app_id) => {
+							selected_app_ids[app_id] = 1;
+						});
+
+						// (triggers a persist)
+						conf.selected_app_ids = selected_app_ids;
+					}
 					db.JUST_UPDATED_WITH_NEW_TRACKERS = true;
 				}
 			}
@@ -218,6 +215,41 @@ class BugDb extends Updatable {
 
 		// return true for _loadList() callback
 		return true;
+	}
+
+	/**
+	 * When the extension learns of new trackers, it has to decide whether
+	 * to block them. The logic is to look at existing trackers in the same
+	 * category: if most of them were blocked, then it makes sense to also
+	 * block the new one (majority voting). As a tie-breaker, block it iff
+	 * the whole category is blocked by default.
+	 *
+	 * @private
+	 *
+	 * @param  {Object} new_apps          trackers in the new database
+	 * @param  {Object} old_apps          trackers in the original database
+	 * @param  {array}  new_app_ids       all new trackers
+	 * @param  {array}  selected_app_ids  all new trackers
+	 * @return {array}  new trackers that should be blocked
+	 */
+	static _scanForNewTrackersToBlock(bugs, old_bugs, new_app_ids, selected_app_ids) {
+		const majority = {};
+		globals.CATEGORIES_BLOCKED_BY_DEFAULT.forEach((category) => {
+			// Bias in favor of blocking if the category will be
+			// blocked by default in a new installtion. This is
+			// mostly relevant if new categories were introduced.
+			majority[category] = 0.5;
+		});
+		Object.entries(old_bugs.apps).forEach(([app_id, { cat: category }]) => {
+			const vote = selected_app_ids[app_id] ? 1 : -1;
+			majority[category] = (majority[category] || 0) + vote;
+		});
+
+		const newTrackerShouldBeBlocked = (app_id) => {
+			const { cat: category } = bugs.apps[app_id];
+			return majority[category] && majority[category] > 0;
+		};
+		return new_app_ids.filter(newTrackerShouldBeBlocked);
 	}
 }
 

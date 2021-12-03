@@ -98,7 +98,6 @@ class Globals {
 			'alert_bubble_pos',
 			'alert_bubble_timeout',
 			'alert_expanded',
-			'block_by_default',
 			'cliqz_adb_mode',
 			'cliqz_module_whitelist',
 			'current_theme',
@@ -130,6 +129,14 @@ class Globals {
 			'site_specific_unblocks',
 			'toggle_individual_trackers',
 			'trackers_banner_status',
+		];
+
+		// Relevant for a fresh installation: all trackers from the
+		// following categories will be blocked by default.
+		this.CATEGORIES_BLOCKED_BY_DEFAULT = [
+			'advertising',
+			'pornvertising',
+			'site_analytics',
 		];
 
 		this.SESSION = {

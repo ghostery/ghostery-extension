@@ -205,26 +205,6 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           </div>
         </div>
       </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={false}
-            id="settings-block-trackers"
-            name="block_by_default"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-block-trackers"
-          >
-            settings_block_trackers
-          </label>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -434,26 +414,6 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
               src="../../app/images/panel/icon-information-tooltip.svg"
             />
           </div>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-block-trackers"
-            name="block_by_default"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-block-trackers"
-          >
-            settings_block_trackers
-          </label>
         </div>
       </div>
     </div>
