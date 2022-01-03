@@ -155,7 +155,7 @@ class Globals {
 		const ua = parser(navigator.userAgent);
 		const browser = ua.browser.name.toLowerCase();
 		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
-		const platform = ua.os.name.toLowerCase();
+		const platform = ua.os?.name?.toLowerCase() || ''; // Make sure that undefined operating systems don't mess with stuff like .includes()
 
 		// Set name and token properties. CMP uses `name` value.  Metrics uses `token`
 		if (this.IS_CLIQZ) {
