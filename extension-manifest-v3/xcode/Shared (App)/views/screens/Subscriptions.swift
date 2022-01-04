@@ -58,7 +58,7 @@ struct Subscriptions: View {
             }
 
             Text("""
-            • By subscribing to Ghostery, your are supporting our mission. Thank you for believing in us!
+            • By subscribing to Ghostery, you are supporting our mission. Thank you for believing in us!
 
             • For now the subscription does not unlock any additional features but it helps us.
 
