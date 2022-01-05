@@ -14,13 +14,12 @@
 // loosing all/ stats when the browser terminates the execution
 // context (background script or service worker).
 const tabStats = (() => {
-
   class AutoSyncingMap {
     constructor({
       storageKey,
       softFlushIntervalInMs = 200,
       hardFlushIntervalInMs = 1000,
-      ttlInMs = 7 * 24 * 60 * 60 * 1000, /* 1 week */
+      ttlInMs = 7 * 24 * 60 * 60 * 1000 /* 1 week */,
       maxEntries = 5000,
     }) {
       if (!storageKey) {
@@ -105,8 +104,13 @@ const tabStats = (() => {
       // This should never trigger. Yet if the maps run full (perhaps
       // as a side-effect of a bug), better reset then continuing with
       // these huge maps.
-      if (this.inMemoryMap.size >= this.maxEntries || this._ttlMap.size >= this.maxEntries) {
-        console.warn('AutoSyncingMap: Maps are running full (maybe you found a bug?). Purging data to prevent performance impacts.');
+      if (
+        this.inMemoryMap.size >= this.maxEntries ||
+        this._ttlMap.size >= this.maxEntries
+      ) {
+        console.warn(
+          'AutoSyncingMap: Maps are running full (maybe you found a bug?). Purging data to prevent performance impacts.',
+        );
         this.inMemoryMap.clear();
         this._ttlMap.clear();
       }
@@ -134,7 +138,8 @@ const tabStats = (() => {
       this.inMemoryMap.clear();
       this._ttlMap.clear();
 
-      this._scheduleAction(new Promise((resolve, reject) => {
+      this._scheduleAction(
+        new Promise((resolve, reject) => {
           chrome.storage.local.remove(this.storageKey, () => {
             if (chrome.runtime.lastError) {
               reject(chrome.runtime.lastError);
@@ -142,7 +147,8 @@ const tabStats = (() => {
               resolve();
             }
           });
-      }));
+        }),
+      );
       this._dirty = false;
     }
 
@@ -175,7 +181,9 @@ const tabStats = (() => {
       if (typeof key === 'string') {
         return key;
       }
-      throw new Error(`Unexpected key type (type: ${typeof key}, value: ${key})`);
+      throw new Error(
+        `Unexpected key type (type: ${typeof key}, value: ${key})`,
+      );
     }
 
     _markAsDirty() {
@@ -203,27 +211,29 @@ const tabStats = (() => {
         return;
       }
 
-      this._scheduleAction(new Promise((resolve, reject) => {
-        if (!this._dirty) {
-          resolve();
-          return;
-        }
-
-        this._dirty = false;
-        const serialized = {
-          entries: Object.fromEntries(this.inMemoryMap),
-          ttl: Object.fromEntries(this._ttlMap),
-        };
-        chrome.storage.local.set({ [this.storageKey]: serialized }, () => {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError);
-          } else {
-            this._lastFlush = Date.now();
-            console.debug('AutoSyncingMap: flushed');
+      this._scheduleAction(
+        new Promise((resolve, reject) => {
+          if (!this._dirty) {
             resolve();
+            return;
           }
-        });
-      }));
+
+          this._dirty = false;
+          const serialized = {
+            entries: Object.fromEntries(this.inMemoryMap),
+            ttl: Object.fromEntries(this._ttlMap),
+          };
+          chrome.storage.local.set({ [this.storageKey]: serialized }, () => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError);
+            } else {
+              this._lastFlush = Date.now();
+              console.debug('AutoSyncingMap: flushed');
+              resolve();
+            }
+          });
+        }),
+      );
     }
 
     _scheduleAction(action) {

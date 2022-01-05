@@ -9,10 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export const rulesetIds = chrome.runtime.getManifest().declarative_net_request.rule_resources.map(r => r.id);
+export const rulesetIds = chrome.runtime
+  .getManifest()
+  .declarative_net_request.rule_resources.map((r) => r.id);
 
 export function getRulesetType(rulesetId) {
-  return rulesetId.split("_")[0];
+  return rulesetId.split('_')[0];
 }
 
 export const toggles = rulesetIds.map(getRulesetType);

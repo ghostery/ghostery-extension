@@ -14,7 +14,10 @@
     if (!url || url.startsWith('data:')) {
       return;
     }
-    window.postMessage(`GhosteryTrackingDetection:${encodeURIComponent(url)}`, '*');
+    window.postMessage(
+      `GhosteryTrackingDetection:${encodeURIComponent(url)}`,
+      '*',
+    );
   }
 
   let originalXHROpen = null;
@@ -31,12 +34,12 @@
 
   const _url = new WeakMap();
 
-  XMLHttpRequest.prototype.open = function(method, url) {
+  XMLHttpRequest.prototype.open = function (method, url) {
     _url.set(this, url);
     return originalXHROpen.apply(this, arguments);
   };
 
-  XMLHttpRequest.prototype.send = function(body) {
+  XMLHttpRequest.prototype.send = function () {
     sendMessage(_url.get(this));
     return originalXHRSend.apply(this, arguments);
   };
@@ -46,7 +49,7 @@
   // -------------------------------------------------
   originalFetch = window.fetch;
 
-  window.fetch = function(input, init) {
+  window.fetch = function (input) {
     if (typeof input === 'string') {
       sendMessage(input);
     } else if (input instanceof Request) {
@@ -64,20 +67,20 @@
 
   delete Image.prototype.src;
   Object.defineProperty(Image.prototype, 'src', {
-    get: function() {
+    get: function () {
       return originalImageSrc.get.call(this);
     },
-    set: function(value) {
+    set: function (value) {
       sendMessage(value);
       originalImageSrc.set.call(this, value);
-    }
+    },
   });
 
   // -------------------------------------------------
   // sendBeacon
   // -------------------------------------------------
   originalSendBeacon = window.Navigator.prototype.sendBeacon;
-  window.Navigator.prototype.sendBeacon = function(url, data) {
+  window.Navigator.prototype.sendBeacon = function (url) {
     sendMessage(url);
     return originalSendBeacon.apply(window.navigator, arguments);
   };

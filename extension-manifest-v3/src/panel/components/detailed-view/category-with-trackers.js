@@ -19,38 +19,51 @@ function toggleShowMore(host) {
 }
 
 define({
-  tag: "category-with-trackers",
+  tag: 'category-with-trackers',
   category: '',
   stats: null,
   shouldShowMore: false,
   trackerCounts: ({ stats, category }) => {
     const { trackers } = stats.byCategory[category];
-    const _trackerCounts = trackers.reduce((all, current) => ({
-      ...all,
-      [current.id]: (all[current.id] || 0) + 1
-    }), {});
+    const _trackerCounts = trackers.reduce(
+      (all, current) => ({
+        ...all,
+        [current.id]: (all[current.id] || 0) + 1,
+      }),
+      {},
+    );
     return Object.keys(_trackerCounts)
       .sort()
-      .map(tracker => [tracker, _trackerCounts[tracker]]);
+      .map((tracker) => [tracker, _trackerCounts[tracker]]);
   },
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
     <main>
       <category-bullet category=${category} size=${12}></category-bullet>
       <label>${getCategoryName(category)}</label>
-      <strong class="count">${stats.byCategory[category].count} ${t('trackers_detected')}</strong>
-      <button onclick="${toggleShowMore}" class="${{ more: shouldShowMore }}">${chavronDown}</button>
+      <strong class="count"
+        >${stats.byCategory[category].count} ${t('trackers_detected')}</strong
+      >
+      <button onclick="${toggleShowMore}" class="${{ more: shouldShowMore }}">
+        ${chavronDown}
+      </button>
     </main>
-    ${shouldShowMore && html`
+    ${shouldShowMore &&
+    html`
       <ul>
-        ${trackerCounts.map(([tracker, count]) => html`
-          <li>
-            <label>${stats.byTracker[tracker].name}</label>
-            <strong>${count}</strong>
-            <a href="https://whotracks.me/trackers/${tracker}.html" target="_blank">
-              ${t('tracker_details')} ${externalLink}
-            </a>
-          </li>
-        `)}
+        ${trackerCounts.map(
+          ([tracker, count]) => html`
+            <li>
+              <label>${stats.byTracker[tracker].name}</label>
+              <strong>${count}</strong>
+              <a
+                href="https://whotracks.me/trackers/${tracker}.html"
+                target="_blank"
+              >
+                ${t('tracker_details')} ${externalLink}
+              </a>
+            </li>
+          `,
+        )}
       </ul>
     `}
   `.css`

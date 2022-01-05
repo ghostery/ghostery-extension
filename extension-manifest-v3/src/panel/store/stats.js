@@ -19,26 +19,37 @@ const Stats = {
   loadTime: 0,
   trackers: [Tracker],
   byCategory: ({ trackers }) => {
-    return trackers.reduce((all, current) => ({
-      ...all,
-      [current.category]: {
-        count: (all[current.category] || { count: 0 }).count + 1,
-        trackers: [...(all[current.category] || { trackers: []}).trackers, current],
-      },
-    }), {});
+    return trackers.reduce(
+      (all, current) => ({
+        ...all,
+        [current.category]: {
+          count: (all[current.category] || { count: 0 }).count + 1,
+          trackers: [
+            ...(all[current.category] || { trackers: [] }).trackers,
+            current,
+          ],
+        },
+      }),
+      {},
+    );
   },
   byTracker: ({ trackers }) => {
-    return trackers.reduce((all, current) => ({
-      ...all,
-      [current.id]: current,
-    }), {});
+    return trackers.reduce(
+      (all, current) => ({
+        ...all,
+        [current.id]: current,
+      }),
+      {},
+    );
   },
   categories: ({ trackers }) => {
-    return trackers.map(t => t.category);
+    return trackers.map((t) => t.category);
   },
-  [store.connect] : {
+  [store.connect]: {
     get: async () => {
-      const currentTab = (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
+      const currentTab = (
+        await chrome.tabs.query({ active: true, currentWindow: true })
+      )[0];
       const storage = await chrome.storage.local.get(['tabStats:v1']);
       const tabStats = storage['tabStats:v1'].entries[currentTab.id];
       return tabStats;

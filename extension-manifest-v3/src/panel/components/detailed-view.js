@@ -20,28 +20,35 @@ function toggleDetailedView(host) {
 }
 
 define({
-  tag: "detailed-view",
+  tag: 'detailed-view',
   stats: null,
   render: ({ stats }) => html`
     <div class="wrapper">
       <header>
-        <button onclick="${toggleDetailedView}">${chevronLeft} ${t('back')}</button>
+        <button onclick="${toggleDetailedView}">
+          ${chevronLeft} ${t('back')}
+        </button>
         <h1>${t('detailed_view')}</h1>
         <div></div>
       </header>
       <main>
         <ul>
-          ${store.ready(stats) && html`
-            ${sortCategories(Object.keys(stats.byCategory)).map(category => html`
-              <li class="category">
-                <category-with-trackers category=${category} stats=${stats}></category-with-trackers>
-              </li>
-            `)}
+          ${store.ready(stats) &&
+          html`
+            ${sortCategories(Object.keys(stats.byCategory)).map(
+              (category) => html`
+                <li class="category">
+                  <category-with-trackers
+                    category=${category}
+                    stats=${stats}
+                  ></category-with-trackers>
+                </li>
+              `,
+            )}
           `}
         </ul>
       </main>
     </div>
-
   `.css`
     .wrapper {
       display: flex;

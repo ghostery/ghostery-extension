@@ -13,13 +13,18 @@ import { html, define } from '/hybrids.js';
 import { t } from '../../common/i18n.js';
 
 define({
-  tag: "panel-footer",
+  tag: 'panel-footer',
   content: () => html`
     <footer>
       <a href="https://www.ghostery.com/support" target="_blank">
         ${t('panel_menu_report_broken_site')}
       </a>
-      <a href="https://www.ghostery.com/submit-a-tracker" target="_blank" class="subscribe">${t('panel_menu_submit_tracker')}</a>
+      <a
+        href="https://www.ghostery.com/submit-a-tracker"
+        target="_blank"
+        class="subscribe"
+        >${t('panel_menu_submit_tracker')}</a
+      >
     </footer>
   `,
 });

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, property } from '/hybrids.js';
+import { html, define } from '/hybrids.js';
 
 function toggleDetailedView(host) {
   host.showDetailedView = !host.showDetailedView;
@@ -18,13 +18,13 @@ function toggleDetailedView(host) {
 const IS_SIMPLE_VIEW_DEFAULT = true;
 
 define({
-  tag: "panel-body",
+  tag: 'panel-body',
   settings: null,
   stats: null,
   domain: '',
   showDetailedView: {
     get: (_host, value) => {
-      if (typeof value === "undefined") {
+      if (typeof value === 'undefined') {
         return !IS_SIMPLE_VIEW_DEFAULT;
       }
       return value;
@@ -37,9 +37,9 @@ define({
         detailedView.style.height = `${simpleView.clientHeight}px`;
       }
       return value;
-    }
+    },
   },
-  content: ({ domain, settings, stats, showDetailedView}) => html`
+  content: ({ domain, settings, stats, showDetailedView }) => html`
     <simple-view
       domain=${domain}
       settings=${settings}

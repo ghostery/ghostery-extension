@@ -14,11 +14,11 @@ import { t } from '../../common/i18n.js';
 
 const Options = {
   trackerWheelDisabled: false,
-  [store.connect] : {
+  [store.connect]: {
     get: async () => {
       const storage = await chrome.storage.local.get(['options']);
-      const options =  storage.options || {};
-      if (typeof options.trackerWheelDisabled === "undefined") {
+      const options = storage.options || {};
+      if (typeof options.trackerWheelDisabled === 'undefined') {
         options.trackerWheelDisabled = false;
       }
       return options;
@@ -34,12 +34,14 @@ const Options = {
 function updateOptions(host) {
   const shadowRoot = host.render();
   const options = { ...host.options };
-  options.trackerWheelDisabled = shadowRoot.querySelector("#trackerWheelDisabled").checked;
+  options.trackerWheelDisabled = shadowRoot.querySelector(
+    '#trackerWheelDisabled',
+  ).checked;
   store.set(Options, options);
 }
 
 define({
-  tag: "ghostery-options",
+  tag: 'ghostery-options',
   options: store(Options),
   render: ({ options }) => html`
     <header>
@@ -47,10 +49,13 @@ define({
     </header>
     <main>
       <h2>User interface</h2>
-      ${store.ready(options) && html`
+      ${store.ready(options) &&
+      html`
         <ul>
           <li>
-            <label for="trackerWheelDisabled">${t('options_tracker_wheel_disabled')}</label>
+            <label for="trackerWheelDisabled"
+              >${t('options_tracker_wheel_disabled')}</label
+            >
             <input
               type="checkbox"
               id="trackerWheelDisabled"

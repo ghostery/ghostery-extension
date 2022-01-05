@@ -29,13 +29,13 @@ const icons = {
 };
 
 define({
-  tag: "toggle-switch",
+  tag: 'toggle-switch',
   toggle: '',
   settings: null,
   render: ({ toggle, settings }) => html`
     <button
       onclick=${() => toggleBlocking(toggle)}
-      class=${{ disabled: !settings.blockingStatus[toggle]}}
+      class=${{ disabled: !settings.blockingStatus[toggle] }}
     >
       ${icons[toggle]}
       <label>${t(`block_toggle_${toggle}`)}</label>

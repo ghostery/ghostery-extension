@@ -14,21 +14,22 @@ const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 function closePopups() {
-  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
+  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach((popup) => {
     popup.parentElement.removeChild(popup);
   });
 }
 
 function resizePopup(height) {
-  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach(popup => {
+  [...document.querySelectorAll(`.${WRAPPER_CLASS}`)].forEach((popup) => {
     popup.style.height = `${height}px`;
   });
 }
 
-const getTop = el => el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
+const getTop = (el) =>
+  el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
 
 function renderPopup(container, stats) {
-  closePopups()
+  closePopups();
 
   const wrapper = document.createElement('div');
   wrapper.classList.add(WRAPPER_CLASS);
@@ -36,12 +37,16 @@ function renderPopup(container, stats) {
     wrapper.style.width = window.innerWidth - 20 + 'px';
     wrapper.style.left = '10px';
   } else {
-    wrapper.style.left = container.getBoundingClientRect().left - (350/2) + 12 + 'px';
+    wrapper.style.left =
+      container.getBoundingClientRect().left - 350 / 2 + 12 + 'px';
   }
   wrapper.style.top = getTop(container) + 25 + 'px';
 
   const iframe = document.createElement('iframe');
-  iframe.setAttribute('src', chrome.runtime.getURL(`wtm-report/index.html?domain=${stats.domain}`));
+  iframe.setAttribute(
+    'src',
+    chrome.runtime.getURL(`wtm-report/index.html?domain=${stats.domain}`),
+  );
 
   wrapper.appendChild(iframe);
   document.body.appendChild(wrapper);
@@ -56,7 +61,9 @@ function renderWheel(anchor, stats) {
 
   const parent = anchor.parentElement;
   parent.style.position = 'relative';
-  const threeDotsElement = parent.querySelector('div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span');
+  const threeDotsElement = parent.querySelector(
+    'div[jsslot] div[aria-haspopup], div[jsaction] div[role=button] span',
+  );
 
   if (!threeDotsElement && isMobile) {
     // that's not a "full" result
@@ -65,21 +72,36 @@ function renderWheel(anchor, stats) {
   const container = document.createElement('div');
   container.classList.add('wtm-tracker-wheel-container');
   if (isMobile) {
-    container.style.left = threeDotsElement.getBoundingClientRect().left - parent.getBoundingClientRect().left - 50 + 'px';
+    container.style.left =
+      threeDotsElement.getBoundingClientRect().left -
+      parent.getBoundingClientRect().left -
+      50 +
+      'px';
     container.style.top = 15 + 'px';
   } else if (threeDotsElement) {
     // default path on Safari (Desktop)
-    container.style.left = threeDotsElement.getBoundingClientRect().right - parent.getBoundingClientRect().left + 5 + 'px';
+    container.style.left =
+      threeDotsElement.getBoundingClientRect().right -
+      parent.getBoundingClientRect().left +
+      5 +
+      'px';
   } else {
     // default path in Chrome
     const translate = 'a.iUh30 > span';
     const arrowDown = 'span.gTl8xb';
     const textEnd = 'cite > span';
-    const elem = parent.querySelector(translate) || parent.querySelector(arrowDown) || parent.querySelector(textEnd);
+    const elem =
+      parent.querySelector(translate) ||
+      parent.querySelector(arrowDown) ||
+      parent.querySelector(textEnd);
     if (!elem) {
       return;
     }
-    container.style.left = elem.getBoundingClientRect().right - parent.getBoundingClientRect().left + 10 + 'px';
+    container.style.left =
+      elem.getBoundingClientRect().right -
+      parent.getBoundingClientRect().left +
+      10 +
+      'px';
   }
 
   container.addEventListener('click', (ev) => {
@@ -102,12 +124,19 @@ function renderWheel(anchor, stats) {
   parent.appendChild(container);
 }
 
-const elements = [...window.document.querySelectorAll('#main div.g div.yuRUbf > a, div.mnr-c.xpd.O9g5cc.uUPGi a.cz3goc')];
-const links = elements.map(x => x.href);
+const elements = [
+  ...window.document.querySelectorAll(
+    '#main div.g div.yuRUbf > a, div.mnr-c.xpd.O9g5cc.uUPGi a.cz3goc',
+  ),
+];
+const links = elements.map((x) => x.href);
 
 chrome.runtime.sendMessage({ action: 'getWTMReport', links }, (response) => {
   if (chrome.runtime.lastError) {
-    console.error('Could not retrieve WTM information on URLs', chrome.runtime.lastError);
+    console.error(
+      'Could not retrieve WTM information on URLs',
+      chrome.runtime.lastError,
+    );
     return;
   }
 

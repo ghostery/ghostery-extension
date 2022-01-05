@@ -9,4 +9,4 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import "./components/ghostery-options.js";
+import './components/ghostery-options.js';

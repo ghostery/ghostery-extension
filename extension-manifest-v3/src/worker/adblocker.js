@@ -13,15 +13,15 @@ const { parse } = tldts;
 const { FiltersEngine } = adblocker;
 
 const adblockerEngines = {
-  "ads": {
+  'ads': {
     engine: null,
     isEnabled: false,
   },
-  "tracking": {
+  'tracking': {
     engine: null,
     isEnabled: false,
   },
-  "annoyances": {
+  'annoyances': {
     engine: null,
     isEnabled: false,
   },
@@ -29,34 +29,38 @@ const adblockerEngines = {
 
 // TODO: share with frontend
 function getRulesetType(rulesetId) {
-  return rulesetId.split("_")[0];
+  return rulesetId.split('_')[0];
 }
 
 async function updateAdblockerEngineStatuses() {
-  const enabledRulesetIds = await chrome.declarativeNetRequest.getEnabledRulesets();
+  const enabledRulesetIds =
+    await chrome.declarativeNetRequest.getEnabledRulesets();
   const enabledRulesetTypes = enabledRulesetIds.map(getRulesetType);
-  Object.keys(adblockerEngines).map(engineName => {
-    adblockerEngines[engineName].isEnabled = enabledRulesetTypes.indexOf(engineName) > -1;
+  Object.keys(adblockerEngines).map((engineName) => {
+    adblockerEngines[engineName].isEnabled =
+      enabledRulesetTypes.indexOf(engineName) > -1;
   });
 }
 
 const adblockerStartupPromise = (async function () {
-  await Promise.all(Object.keys(adblockerEngines).map(async (engineName) => {
-    const response = await fetch(chrome.runtime.getURL(`adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`));
-    const engineBytes = await response.arrayBuffer();
-    const engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
-    adblockerEngines[engineName].engine = engine;
-  }));
+  await Promise.all(
+    Object.keys(adblockerEngines).map(async (engineName) => {
+      const response = await fetch(
+        chrome.runtime.getURL(
+          `adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`,
+        ),
+      );
+      const engineBytes = await response.arrayBuffer();
+      const engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
+      adblockerEngines[engineName].engine = engine;
+    }),
+  );
   await updateAdblockerEngineStatuses();
 })();
 
 async function adblockerInjectStylesWebExtension(
   styles,
-  {
-    tabId,
-    frameId,
-    allFrames = false,
-  }
+  { tabId, frameId, allFrames = false },
 ) {
   // Abort if stylesheet is empty.
   if (styles.length === 0) {
@@ -75,11 +79,14 @@ async function adblockerInjectStylesWebExtension(
       } else {
         target.allFrames = allFrames;
       }
-      chrome.scripting.insertCSS({
-        css: styles,
-        origin: 'USER',
-        target,
-      }, () => resolve);
+      chrome.scripting.insertCSS(
+        {
+          css: styles,
+          origin: 'USER',
+          target,
+        },
+        () => resolve,
+      );
     } else {
       const details = {
         allFrames,
@@ -89,13 +96,9 @@ async function adblockerInjectStylesWebExtension(
         runAt: 'document_start',
       };
       if (frameId) {
-        details.frameId = frameId
+        details.frameId = frameId;
       }
-      chrome.tabs.insertCSS(
-        tabId,
-        details,
-        () => resolve,
-      );
+      chrome.tabs.insertCSS(tabId, details, () => resolve);
     }
   });
 }
@@ -110,7 +113,7 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     let specificFrameId = null;
     const specificResponses = [];
 
-    Object.keys(adblockerEngines).forEach(engineName => {
+    Object.keys(adblockerEngines).forEach((engineName) => {
       if (adblockerEngines[engineName].isEnabled === false) {
         return;
       }
@@ -158,24 +161,25 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
       // ids and hrefs observed in the DOM. MutationObserver is also used to
       // make sure we can react to changes.
       {
-        const { active, styles, scripts, extended } = engine.getCosmeticsFilters({
-          domain,
-          hostname,
-          url,
+        const { active, styles, scripts, extended } =
+          engine.getCosmeticsFilters({
+            domain,
+            hostname,
+            url,
 
-          classes: msg.classes,
-          hrefs: msg.hrefs,
-          ids: msg.ids,
+            classes: msg.classes,
+            hrefs: msg.hrefs,
+            ids: msg.ids,
 
-          // This needs to be done only once per frame
-          getBaseRules: false,
-          getInjectionRules: msg.lifecycle === 'start',
-          getExtendedRules: msg.lifecycle === 'start',
-          getRulesFromHostname: msg.lifecycle === 'start',
+            // This needs to be done only once per frame
+            getBaseRules: false,
+            getInjectionRules: msg.lifecycle === 'start',
+            getExtendedRules: msg.lifecycle === 'start',
+            getRulesFromHostname: msg.lifecycle === 'start',
 
-          // This will be done every time we get information about DOM mutation
-          getRulesFromDOM: msg.lifecycle === 'dom-update',
-        });
+            // This will be done every time we get information about DOM mutation
+            getRulesFromDOM: msg.lifecycle === 'dom-update',
+          });
 
         if (active === false) {
           return;
@@ -211,9 +215,9 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
 
     if (specificResponses.length > 0) {
       sendResponse({
-        active: specificResponses.map(r => r.active).some(a => a),
-        extended: specificResponses.map(r => r.extended).flat(),
-        scripts: specificResponses.map(r => r.scripts).flat(),
+        active: specificResponses.map((r) => r.active).some((a) => a),
+        extended: specificResponses.map((r) => r.extended).flat(),
+        scripts: specificResponses.map((r) => r.scripts).flat(),
         styles: '',
       });
     }

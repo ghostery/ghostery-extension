@@ -34,7 +34,9 @@ async function loadResource(storageKey, filename) {
 }
 
 const pendingLoads = Promise.all(
-  Object.entries(RESOURCES).map(([key, resource]) => loadResource(key, resource))
+  Object.entries(RESOURCES).map(([key, resource]) =>
+    loadResource(key, resource),
+  ),
 );
 
 // errors should not happen, as we are loading from the local filesystem

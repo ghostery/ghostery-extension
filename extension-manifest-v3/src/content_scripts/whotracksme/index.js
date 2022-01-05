@@ -11,23 +11,26 @@
  */
 
 function postMessage({ urls }) {
-  chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ urls }]});
+  chrome.runtime.sendMessage({ action: 'updateTabStats', args: [{ urls }] });
 }
 
 // Should only be needed on Safari:
 // the tabId of the initial chrome.webNavigation.onCommitted
 // is not reliable. When opening bookmarks, it can happen that
 // the event is associated with a tabId of 0.
-chrome.runtime.sendMessage({ action: "onCommitted" });
+chrome.runtime.sendMessage({ action: 'onCommitted' });
 
-const origin = (new URL(window.location.href)).origin;
+const origin = new URL(window.location.href).origin;
 
 const start = Date.now();
 let loadTime = 0;
 
 window.addEventListener('load', () => {
   loadTime = Date.now() - start;
-  chrome.runtime.sendMessage({ action: "updateTabStats", args: [{ loadTime }]});
+  chrome.runtime.sendMessage({
+    action: 'updateTabStats',
+    args: [{ loadTime }],
+  });
 });
 
 // Based on https://github.com/mozilla-mobile/firefox-ios/blob/1f3fd1640214b2b442c573ea7d2882d480f4f24c/content-blocker-lib-ios/js/TrackingProtectionStats.js
@@ -38,7 +41,7 @@ window.addEventListener('load', () => {
   let sendUrls = new Array();
   let sendUrlsTimeout = null;
 
-  function sendMessage(url, source) {
+  function sendMessage(url) {
     if (!url || url.startsWith('data:')) {
       return;
     }
@@ -59,29 +62,37 @@ window.addEventListener('load', () => {
 
   function onLoadNativeCallback() {
     // Send back the sources of every script and image in the DOM back to the host application.
-    [].slice.apply(document.scripts).forEach(function(el) { sendMessage(el.src, 'load script'); });
-    [].slice.apply(document.images).forEach(function(el) { sendMessage(el.src, 'load image'); });
-    [].slice.apply(document.getElementsByTagName('iframe')).forEach(function(el) { sendMessage(el.src, 'load iframe'); });
+    [].slice.apply(document.scripts).forEach(function (el) {
+      sendMessage(el.src, 'load script');
+    });
+    [].slice.apply(document.images).forEach(function (el) {
+      sendMessage(el.src, 'load image');
+    });
+    [].slice
+      .apply(document.getElementsByTagName('iframe'))
+      .forEach(function (el) {
+        sendMessage(el.src, 'load iframe');
+      });
   }
 
-  window.addEventListener("load", onLoadNativeCallback, false);
+  window.addEventListener('load', onLoadNativeCallback, false);
 
-  const mutationObserver = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      mutation.addedNodes.forEach(function(node) {
+  const mutationObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (node) {
         // `<script src="*">` elements.
-        if (node.tagName === "SCRIPT" && node.src) {
+        if (node.tagName === 'SCRIPT' && node.src) {
           sendMessage(node.src, 'mutation script');
           return;
         }
-        if (node.tagName === "IMG" && node.src) {
+        if (node.tagName === 'IMG' && node.src) {
           sendMessage(node.src, 'mutation image');
           return;
         }
 
         // `<iframe src="*">` elements where [src] is not "about:blank".
-        if (node.tagName === "IFRAME" && node.src) {
-          if (node.src === "about:blank") {
+        if (node.tagName === 'IFRAME' && node.src) {
+          if (node.src === 'about:blank') {
             return;
           }
 
@@ -90,7 +101,7 @@ window.addEventListener('load', () => {
         }
 
         // `<link href="*">` elements.
-        if (node.tagName === "LINK" && node.href) {
+        if (node.tagName === 'LINK' && node.href) {
           sendMessage(node.href, 'mutation link');
         }
       });
@@ -99,20 +110,25 @@ window.addEventListener('load', () => {
 
   mutationObserver.observe(document.documentElement, {
     childList: true,
-    subtree: true
+    subtree: true,
   });
 
   // fetch, XMLHTTPRequest and others must be injected in main world
   function injectMonkeyPatches() {
     const script = document.createElement('script');
-    script.src = chrome.runtime.getURL("content_scripts/whotracksme/ghostery-whotracksme.js");
-    script.onload = function() {
+    script.src = chrome.runtime.getURL(
+      'content_scripts/whotracksme/ghostery-whotracksme.js',
+    );
+    script.onload = function () {
       this.remove();
     };
     (document.head || document.documentElement).appendChild(script);
 
     window.addEventListener('message', (message) => {
-      if (!message.isTrusted || !message.data.startsWith('GhosteryTrackingDetection:')) {
+      if (
+        !message.isTrusted ||
+        !message.data.startsWith('GhosteryTrackingDetection:')
+      ) {
         return;
       }
       let url = decodeURIComponent(message.data.split(':')[1]);

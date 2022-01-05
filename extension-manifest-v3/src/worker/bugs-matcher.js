@@ -10,16 +10,16 @@
  */
 
 function processUrl(src) {
-	try {
-		const res = new URL(src);
-		return res;
-	} catch (e) {
-		return {
-			protocol: '',
-			hostname: '',
-			pathname: '',
-		};
-	}
+  try {
+    const res = new URL(src);
+    return res;
+  } catch (e) {
+    return {
+      protocol: '',
+      hostname: '',
+      pathname: '',
+    };
+  }
 }
 
 /**
@@ -33,7 +33,7 @@ function isBug(src) {
   const processedSrc = processUrl(src.toLowerCase());
   let found = false;
 
-  const path = processedSrc.pathname ? processedSrc.pathname.substring(1) : "";
+  const path = processedSrc.pathname ? processedSrc.pathname.substring(1) : '';
 
   found =
     // pattern classification 2: check host+path hash
@@ -65,7 +65,7 @@ function _matchesHostPath(roots, src_path) {
 
   for (i = 0; i < roots.length; i++) {
     root = roots[i];
-    if (root.hasOwnProperty("$")) {
+    if (root.hasOwnProperty('$')) {
       paths = root.$;
       for (j = 0; j < paths.length; j++) {
         if (src_path.startsWith(paths[j].path)) {
@@ -89,7 +89,7 @@ function _matchesHostPath(roots, src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function _matchesHost(root, src_host, src_path) {
-  const host_rev_arr = src_host.split(".").reverse();
+  const host_rev_arr = src_host.split('.').reverse();
   const nodes_with_paths = [];
   let host_part;
   let node = root;
@@ -101,11 +101,11 @@ function _matchesHost(root, src_host, src_path) {
     if (node.hasOwnProperty(host_part)) {
       // advance node
       node = node[host_part];
-      bug_id = node.hasOwnProperty("$") ? node.$ : bug_id;
+      bug_id = node.hasOwnProperty('$') ? node.$ : bug_id;
 
       // we store all traversed nodes that contained paths in case the final
       // node does not have the matching path
-      if (src_path !== undefined && node.hasOwnProperty("$")) {
+      if (src_path !== undefined && node.hasOwnProperty('$')) {
         nodes_with_paths.push(node);
       }
 

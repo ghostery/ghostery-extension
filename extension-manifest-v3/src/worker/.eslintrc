@@ -1,0 +1,17 @@
+{
+  "globals": {
+    "_": true,
+    "adblocker": true,
+    "isBug": true,
+    "tldts": true,
+    "tabStats": true,
+    "storage": true,
+    "updateAdblockerEngineStatuses": true,
+    "tryWTMReportOnMessageHandler": true,
+    "adblockerOnMessage": true
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "no-prototype-builtins": "off"
+  }
+}

@@ -68,7 +68,6 @@ function getTrackerFromUrl(url, origin) {
   return null;
 }
 
-
 let options = {};
 
 async function updateOptions() {
@@ -86,7 +85,7 @@ updateOptions();
 let updateIcon = updateIconNow;
 
 function updateIconNow(tabId, stats) {
-  const categories = stats.trackers.map(t => t.category);
+  const categories = stats.trackers.map((t) => t.category);
   const imageData = WTMTrackerWheel.offscreenImageData(128, categories);
   (chrome.browserAction || chrome.action).setIcon({
     tabId,
@@ -108,11 +107,15 @@ function resetUpdateIconDebounceMode() {
   }
 
   // effect: refresh 250ms after the last event, but force a refresh every second
-  updateIcon = _.debounce((...args) => {
-    updateIconNow(...args);
-  }, 250, {
-    maxWait: 1000,
-  });
+  updateIcon = _.debounce(
+    (...args) => {
+      updateIconNow(...args);
+    },
+    250,
+    {
+      maxWait: 1000,
+    },
+  );
 }
 
 function userNavigatedToNewPage({ tabId, frameId, url }) {
@@ -134,7 +137,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === "dnrUpdate") {
+  if (msg.action === 'dnrUpdate') {
     updateAdblockerEngineStatuses();
     return false;
   }
@@ -151,7 +154,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   const tabId = sender.tab.id;
 
-  if (msg.action === "updateOptions") {
+  if (msg.action === 'updateOptions') {
     updateOptions();
     return false;
   }
@@ -163,7 +166,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   //
   // (Perhaps it is a bug in Safari. It can be triggered by opening
   //  a bookmarked page from a new tab.)
-  if (msg.action === "onCommitted") {
+  if (msg.action === 'onCommitted') {
     if (sender.url === undefined) {
       throw new Error('required "sender.url" information is not available');
     }
@@ -176,14 +179,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (msg.action === "updateTabStats") {
+  if (msg.action === 'updateTabStats') {
     const stats = tabStats.get(tabId);
     const urls = msg.args[0].urls;
     if (msg.args[0].loadTime && sender.frameId === 0) {
       stats.loadTime = msg.args[0].loadTime;
     }
     if (urls) {
-      urls.forEach(url => {
+      urls.forEach((url) => {
         const tracker = getTrackerFromUrl(url, stats.domain);
         if (tracker) {
           stats.trackers.push(tracker);

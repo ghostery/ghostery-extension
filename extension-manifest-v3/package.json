@@ -6,7 +6,9 @@
     "preinstall": "rimraf src/vendor src/rule_resources",
     "postinstall": "vendor-copy && npm run download-cosmetics",
     "build": "web-ext build",
-    "start": "web-ext run --target=chromium"
+    "start": "web-ext run --target=chromium",
+    "lint": "eslint src/",
+    "test": "npm run lint"
   },
   "author": {
     "name": "Ghostery GmbH",
@@ -15,7 +17,11 @@
   },
   "license": "MPL-2.0",
   "devDependencies": {
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "node-fetch": "^2.6.5",
+    "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "vendor-copy": "^3.0.1",
     "web-ext": "^6.4.0"

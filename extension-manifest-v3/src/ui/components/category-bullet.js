@@ -12,8 +12,8 @@
 import { html, define } from '/hybrids.js';
 
 define({
-  tag: "category-bullet",
-  category: "unknown",
+  tag: 'category-bullet',
+  category: 'unknown',
   size: 0,
   render: ({ category, size }) => {
     const sizePx = `${size}px`;

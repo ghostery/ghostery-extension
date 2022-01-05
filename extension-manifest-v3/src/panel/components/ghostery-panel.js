@@ -12,10 +12,10 @@
 import { html, define, store } from '/hybrids.js';
 import Stats from '../store/stats.js';
 import Settings from '../store/settings.js';
-import { settingsIcon } from '../../ui/icons.js'
+import { settingsIcon } from '../../ui/icons.js';
 
 define({
-  tag: "ghostery-panel",
+  tag: 'ghostery-panel',
   settings: store(Settings),
   stats: store(Stats),
   content: ({ stats, settings }) => html`
@@ -28,10 +28,7 @@ define({
         ${settingsIcon}
       </a>
     </panel-header>
-    <panel-body
-      stats=${stats}
-      settings=${settings}
-    ></panel-body>
+    <panel-body stats=${stats} settings=${settings}></panel-body>
     <panel-footer></panel-footer>
   `.css`
     .options-link {

@@ -10,31 +10,35 @@
  */
 
 import { html, define } from '/hybrids.js';
-import "./tracker-wheel.js";
+import './tracker-wheel.js';
 import { sortCategories, getCategoryName } from '../../../common/categories.js';
 
 define({
-  tag: "wtm-stats",
+  tag: 'wtm-stats',
   categories: [],
   byCategory: ({ categories }) => {
-    return categories.reduce((all, current) => ({
-      ...all,
-      [current]: (all[current] || 0) + 1,
-    }), {});
+    return categories.reduce(
+      (all, current) => ({
+        ...all,
+        [current]: (all[current] || 0) + 1,
+      }),
+      {},
+    );
   },
   render: ({ categories, byCategory }) => html`
     <tracker-wheel categories=${categories}></tracker-wheel>
 
     <ul>
-      ${sortCategories(Object.keys(byCategory)).map((category) => html`
-        <li class="category">
-          <category-bullet category=${category} size=${7}></category-bullet>
-          <label>${getCategoryName(category)}</label>
-          <strong>${byCategory[category]}</strong>
-        </li>
-      `)}
+      ${sortCategories(Object.keys(byCategory)).map(
+        (category) => html`
+          <li class="category">
+            <category-bullet category=${category} size=${7}></category-bullet>
+            <label>${getCategoryName(category)}</label>
+            <strong>${byCategory[category]}</strong>
+          </li>
+        `,
+      )}
     </ul>
-
   `.css`
     :host {
       display: grid;

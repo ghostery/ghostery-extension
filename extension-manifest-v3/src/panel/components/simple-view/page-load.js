@@ -27,12 +27,10 @@ function getStatsColor(stats) {
 }
 
 define({
-  tag: "page-load",
+  tag: 'page-load',
   stats: null,
   render: ({ stats }) => html`
-    <div class="info">
-      ${t('page_load')}
-    </div>
+    <div class="info">${t('page_load')}</div>
     <div class="circle">
       ${cirle}
       <strong>${store.ready(stats) ? Math.round(stats.loadTime) : ''}</strong>

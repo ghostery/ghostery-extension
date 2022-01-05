@@ -14,8 +14,8 @@ class WTMTrackerWheel {
     // Group trackers by sorted category
     // (JavaScript objects will preserve the order)
     const groupedCategories = {};
-    this.CATEGORY_ORDER.forEach(c => groupedCategories[c] = 0);
-    categories.forEach(c => groupedCategories[c] += 1);
+    this.CATEGORY_ORDER.forEach((c) => (groupedCategories[c] = 0));
+    categories.forEach((c) => (groupedCategories[c] += 1));
 
     const center = size / 2;
     const increment = 360 / categories.length;
@@ -30,13 +30,7 @@ class WTMTrackerWheel {
     const radius = size / 2 - ctx.lineWidth;
     ctx.strokeStyle = 'blue';
     ctx.beginPath();
-    ctx.arc(
-      center,
-      center,
-      Math.floor(radius),
-      0,
-      2 * Math.PI
-    );
+    ctx.arc(center, center, Math.floor(radius), 0, 2 * Math.PI);
     ctx.stroke();
     /* Background END */
 
@@ -66,7 +60,7 @@ class WTMTrackerWheel {
     try {
       canvas = new OffscreenCanvas(size, size);
     } catch (e) {
-      canvas = document.createElement("canvas");
+      canvas = document.createElement('canvas');
       canvas.width = size;
       canvas.height = size;
     }
@@ -83,8 +77,8 @@ class WTMTrackerWheel {
   static setupCtx(ctx, size) {
     const { canvas } = ctx;
 
-    canvas.style.width = size + "px";
-    canvas.style.height = size + "px";
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
 
     // Set actual size in memory (scaled to account for extra pixel density).
     const scale = window.devicePixelRatio;

@@ -17,50 +17,61 @@ import { externalLink, close } from '../../ui/icons.js';
 const domain = new URLSearchParams(window.location.search).get('domain');
 
 const Stats = new Promise((resolve, reject) => {
-  chrome.runtime.sendMessage({ action: 'getWTMReport', links: [`https://${domain}`] }, (response) => {
-    if (chrome.runtime.lastError) {
-      reject(chrome.runtime.lastError);
-      return;
-    }
-    resolve(response.wtmStats[0]);
-  });
+  chrome.runtime.sendMessage(
+    { action: 'getWTMReport', links: [`https://${domain}`] },
+    (response) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+        return;
+      }
+      resolve(response.wtmStats[0]);
+    },
+  );
 });
 
 function requestClose() {
-  window.parent.postMessage("WTMReportClosePopups", "*");
+  window.parent.postMessage('WTMReportClosePopups', '*');
 }
 
 define({
-  tag: "wtm-report",
+  tag: 'wtm-report',
   render: () => html`
-    ${html.resolve(Stats.then(stats => html`
-      <panel-header domain=${stats.domain}>
-        <button class="svg-button" onclick="${requestClose}">
-          ${close}
-        </button>
-      </panel-header>
-    `))}
+    ${html.resolve(
+      Stats.then(
+        (stats) => html`
+          <panel-header domain=${stats.domain}>
+            <button class="svg-button" onclick="${requestClose}">
+              ${close}
+            </button>
+          </panel-header>
+        `,
+      ),
+    )}
 
     <main>
       <h1>${t('android_site_blocking_header')}</h1>
 
-      ${html.resolve(Stats.then(stats => html`
-        <wtm-stats categories=${stats.stats}></wtm-stats>
-      `))}
+      ${html.resolve(
+        Stats.then(
+          (stats) => html` <wtm-stats categories=${stats.stats}></wtm-stats> `,
+        ),
+      )}
 
       <section class="buttons">
-        ${html.resolve(Stats.then(stats => html`
-          <a
-            target="_blank"
-            href="https://whotracks.me/websites/${stats.domain}.html"
-          >
-            ${t('statistical_report')} ${externalLink}
-          </a>
-        `))}
+        ${html.resolve(
+          Stats.then(
+            (stats) => html`
+              <a
+                target="_blank"
+                href="https://whotracks.me/websites/${stats.domain}.html"
+              >
+                ${t('statistical_report')} ${externalLink}
+              </a>
+            `,
+          ),
+        )}
       </section>
     </main>
-
-
   `.css`
     :host {
       height: 100%;
