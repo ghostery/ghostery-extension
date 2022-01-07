@@ -23,6 +23,9 @@ tools/token_results
 ## Cliqz
 cliqz/
 
+## WhoTracksMe
+vendor
+
 ## Tools
 tools/amo/*.zip
 
