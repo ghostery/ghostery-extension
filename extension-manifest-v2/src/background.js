@@ -47,6 +47,7 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
+import { tryWTMReportOnMessageHandler } from './whotracksme/index';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -620,6 +621,10 @@ function onMessageHandler(request, sender, callback) {
 	} = request;
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
+
+	if (tryWTMReportOnMessageHandler(request, sender, callback)) {
+		return false;
+	}
 
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'account_pages') {

@@ -151,6 +151,11 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.14.5.tgz#5ac822ce97eec46741ab70a517971e443a70c5a9"
   integrity sha512-/37qQCE3K0vvZKwoK4XU/irIJQdIfCJuhU5eKnNxpFDsOkgFaUAwbv+RYw6eYgsC0E4hS7r5KqGULUogqui0fQ==
 
+"@babel/helper-plugin-utils@^7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.16.7.tgz#aa3a8ab4c3cceff8e65eb9e73d87dc4ff320b2f5"
+  integrity sha512-Qg3Nk7ZxpgMrsox6HreY1ZNKdBq7K72tDSliA6dCl5f007jR4ne8iD5UzuNnCJH2xBf2BEEVGr+/OL6Gdp7RxA==
+
 "@babel/helper-replace-supers@^7.16.0":
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-replace-supers/-/helper-replace-supers-7.16.0.tgz#73055e8d3cf9bcba8ddb55cad93fedc860f68f17"
@@ -165,6 +170,13 @@
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.16.0.tgz#21d6a27620e383e37534cf6c10bba019a6f90517"
   integrity sha512-o1rjBT/gppAqKsYfUdfHq5Rk03lMQrkPHG1OWzHWpLgVXRH4HnMM9Et9CVdIqwkCQlobnGHEJMsgWP/jE1zUiw==
+  dependencies:
+    "@babel/types" "^7.16.0"
+
+"@babel/helper-skip-transparent-expression-wrappers@^7.16.0":
+  version "7.16.0"
+  resolved "https://registry.yarnpkg.com/@babel/helper-skip-transparent-expression-wrappers/-/helper-skip-transparent-expression-wrappers-7.16.0.tgz#0ee3388070147c3ae051e487eca3ebb0e2e8bb09"
+  integrity sha512-+il1gTy0oHwUsBQZyJvukbB4vPMdcYBrFHa0Uc4AizLxbq6BOYC51Rv4tWocX9BLBDLZ4kc6qUFpQ6HRgL+3zw==
   dependencies:
     "@babel/types" "^7.16.0"
 
@@ -226,6 +238,15 @@
     "@babel/helper-plugin-utils" "^7.14.5"
     "@babel/plugin-syntax-object-rest-spread" "^7.8.3"
     "@babel/plugin-transform-parameters" "^7.16.0"
+
+"@babel/plugin-proposal-optional-chaining@^7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.16.7.tgz#7cd629564724816c0e8a969535551f943c64c39a"
+  integrity sha512-eC3xy+ZrUcBtP7x+sq62Q/HYd674pPTb/77XZMb5wbDPGWIdUbSr4Agr052+zaUPSb+gGRnjxXfKFvx5iMJ+DA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.16.7"
+    "@babel/helper-skip-transparent-expression-wrappers" "^7.16.0"
+    "@babel/plugin-syntax-optional-chaining" "^7.8.3"
 
 "@babel/plugin-syntax-async-generators@^7.8.4":
   version "7.8.4"
@@ -1259,6 +1280,11 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
+
+"@whotracksme/webextension-packages@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@whotracksme/webextension-packages/-/webextension-packages-0.0.2.tgz#2d6f23397ad091afbe9b8cf8ab9cb798b2b5ff80"
+  integrity sha512-iJIkqQ56i8q+ibqP54IrWwZSdLCslW5cYTziSZiBCjSAyTXR59I6TT8ZOG3pm0PE+9yA1wp/alduSgXl+7rkJw==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -4442,6 +4468,11 @@ human-signals@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
+
+hybrids@6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/hybrids/-/hybrids-6.1.0.tgz#ce349c285aa70726b3283eb9f7e7cae94960c664"
+  integrity sha512-y95TmbRy08XjY95Y2y1ZhNmhq1nmCLH6DM2fg47/FidIkuxK9l6OOnOiUiOBF9jeeO+luR+5oG1S2wddywiGyQ==
 
 iconv-lite@0.4, iconv-lite@0.4.24:
   version "0.4.24"
@@ -8818,12 +8849,24 @@ tldts-core@^5.7.53:
   resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-5.7.53.tgz#8dd49f0a0bc76b7a01a1ab1dff2c98865ad05764"
   integrity sha512-NRxa3yiIO/3PGD7J98au0+niwQNVCj8gfxJ1JyJrrF1HFAqvuWJfWdTiPq1q58N0+t/WXZuhtBbihU8tQSfxNg==
 
+tldts-core@^5.7.58:
+  version "5.7.58"
+  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-5.7.58.tgz#4bf77665285b44f67047050a1d59df29ac0c1cfb"
+  integrity sha512-jOVQQNiY8htqHYIi5QcS9hmxToRFIri6LsL327naiE4SQ0AGQXy4W/FuKGfNfYKtr1Zgpw39DyKHb8P5z+9r+Q==
+
 tldts-experimental@^5.3.1, tldts-experimental@^5.6.21, tldts-experimental@^5.6.74:
   version "5.7.53"
   resolved "https://registry.yarnpkg.com/tldts-experimental/-/tldts-experimental-5.7.53.tgz#7a15bcbd91f9c4194c4f4f4d4021a2c2c5585569"
   integrity sha512-jEELGKfquSKhVk6yo8HCfu9r9csV6qvzlyg5IZarX4gG1WM4XjOnrM+355T9Ub+nOUBG0NyniAzCEUEdASJR2w==
   dependencies:
     tldts-core "^5.7.53"
+
+tldts-experimental@^5.7.58:
+  version "5.7.58"
+  resolved "https://registry.yarnpkg.com/tldts-experimental/-/tldts-experimental-5.7.58.tgz#516b53f6e39c67587926019c0ec0300afbbfdc9c"
+  integrity sha512-zAU9nNkzUKhE6Uf72ODssNOsNSjE2WMRD7D2dhHlKCsQhnpyCmP5awEB4fyBJt5ToON6OuZsoj7HrN4y8azJrg==
+  dependencies:
+    tldts-core "^5.7.58"
 
 tmpl@1.0.5:
   version "1.0.5"
