@@ -15,13 +15,14 @@ try {
   // (see ../xcode/Shared (Extension)/specific/manifest.json)
   importScripts('../vendor/tldts/index.umd.min.js'); // exports `tldts`
   importScripts('../vendor/@cliqz/adblocker/adblocker.umd.min.js'); // exports `adblocker`
-  importScripts('../common/lodash-debounce.js');
+  importScripts('../vendor/@whotracksme/serp-report/src/background/data.js');
+  importScripts('../vendor/@whotracksme/serp-report/src/background/index.js');
+  importScripts('../vendor/@whotracksme/tracker-wheel/src/index.js');
+  importScripts('./lodash-debounce.js');
   importScripts('./adblocker.js');
   importScripts('./storage.js');
   importScripts('./bugs-matcher.js');
   importScripts('./tab-stats.js');
-  importScripts('./wtm-report.js');
-  importScripts('../common/wtm-tracker-wheel.js');
 } catch (e) {
   // on Safari those have to be imported from manifest.json
 }

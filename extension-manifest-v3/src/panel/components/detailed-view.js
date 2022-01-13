@@ -10,10 +10,10 @@
  */
 
 import { html, define, dispatch, store } from '/hybrids.js';
+import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
+import { chevronLeft } from '/vendor/@whotracksme/ui/src/components/icons.js';
+
 import './detailed-view/category-with-trackers.js';
-import { sortCategories } from '../../common/categories.js';
-import { t } from '../../common/i18n.js';
-import { chevronLeft } from '../../ui/icons.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');
@@ -35,7 +35,7 @@ define({
         <ul>
           ${store.ready(stats) &&
           html`
-            ${sortCategories(Object.keys(stats.byCategory)).map(
+            ${WTMTrackerWheel.sortCategories(Object.keys(stats.byCategory)).map(
               (category) => html`
                 <li class="category">
                   <category-with-trackers

@@ -10,9 +10,10 @@
  */
 
 import { html, define, store } from '/hybrids.js';
+import { settingsIcon } from '/vendor/@whotracksme/ui/src/components/icons.js';
+
 import Stats from '../store/stats.js';
 import Settings from '../store/settings.js';
-import { settingsIcon } from '../../ui/icons.js';
 
 define({
   tag: 'ghostery-panel',

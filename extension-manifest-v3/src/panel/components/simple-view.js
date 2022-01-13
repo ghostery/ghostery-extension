@@ -10,12 +10,16 @@
  */
 
 import { html, define, store, dispatch } from '/hybrids.js';
-import '../../ui/components/wtm-stats/index.js';
+import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
+import {
+  externalLink,
+  chevronRight,
+} from '/vendor/@whotracksme/ui/src/components/icons.js';
+import '/vendor/@whotracksme/ui/src/components/wtm-stats/index.js';
+
 import './simple-view/toggle-switch.js';
 import './simple-view/page-load.js';
-import { toggles } from '../../common/rulesets.js';
-import { t } from '../../common/i18n.js';
-import { externalLink, chevronRight } from '../../ui/icons.js';
+import { toggles } from '../utils/rulesets.js';
 
 function toggleDetailedView(host) {
   dispatch(host, 'toggle-detailed-view');

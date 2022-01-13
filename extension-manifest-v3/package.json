@@ -29,6 +29,7 @@
   "dependencies": {
     "@cliqz/adblocker": "1.22.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
+    "@whotracksme/webextension-packages": "0.0.2",
     "hybrids": "^6.1.0",
     "tldts": "^5.7.45"
   },
@@ -63,6 +64,18 @@
     {
       "from": "../ghostery-dnr-lists/build",
       "to": "src/rule_resources"
+    },
+    {
+      "from": "node_modules/@whotracksme/webextension-packages/packages/serp-report/src",
+      "to": "src/vendor/@whotracksme/serp-report/src"
+    },
+    {
+      "from": "node_modules/@whotracksme/webextension-packages/packages/ui/src",
+      "to": "src/vendor/@whotracksme/ui/src"
+    },
+    {
+      "from": "node_modules/@whotracksme/webextension-packages/packages/tracker-wheel/src",
+      "to": "src/vendor/@whotracksme/tracker-wheel/src"
     }
   ]
 }

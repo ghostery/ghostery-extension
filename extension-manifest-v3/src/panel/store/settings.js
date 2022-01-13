@@ -10,7 +10,7 @@
  */
 
 import { store } from '/hybrids.js';
-import { rulesetIds, toggles, getRulesetType } from '../../common/rulesets.js';
+import { rulesetIds, toggles, getRulesetType } from '../utils/rulesets.js';
 
 const Settings = {
   blockingStatus: toggles.reduce(

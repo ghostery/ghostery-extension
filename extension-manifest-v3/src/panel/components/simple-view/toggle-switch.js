@@ -10,8 +10,9 @@
  */
 
 import { html, define, svg } from '/hybrids.js';
+import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
+
 import { toggleBlocking } from '../../store/settings.js';
-import { t } from '../../../common/i18n.js';
 
 const icons = {
   'tracking': svg`<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

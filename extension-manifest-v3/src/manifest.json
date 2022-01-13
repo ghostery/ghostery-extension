@@ -36,7 +36,7 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
+        "/vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
         "content_scripts/cosmetics.js"
       ]
     },
@@ -239,11 +239,11 @@
       ],
       "run_at": "document_end",
       "css": [
-        "content_scripts/wtm-report/index.css"
+        "/vendor/@whotracksme/serp-report/src/content_scripts/index.css"
       ],
       "js": [
-        "common/wtm-tracker-wheel.js",
-        "content_scripts/wtm-report/index.js"
+        "/vendor/@whotracksme/tracker-wheel/src/index.js",
+        "/vendor/@whotracksme/serp-report/src/content_scripts/index.js"
       ]
     },
     {
@@ -501,7 +501,7 @@
     },
     {
       "resources": [
-        "wtm-report/index.html"
+        "/vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
       ],
       "all_frames": false,
       "matches": [

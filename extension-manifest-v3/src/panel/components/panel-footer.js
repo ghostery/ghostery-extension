@@ -10,7 +10,7 @@
  */
 
 import { html, define } from '/hybrids.js';
-import { t } from '../../common/i18n.js';
+import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 define({
   tag: 'panel-footer',

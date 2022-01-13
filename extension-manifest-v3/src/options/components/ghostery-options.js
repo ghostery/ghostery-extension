@@ -10,7 +10,7 @@
  */
 
 import { html, define, store } from '/hybrids.js';
-import { t } from '../../common/i18n.js';
+import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 const Options = {
   trackerWheelDisabled: false,
