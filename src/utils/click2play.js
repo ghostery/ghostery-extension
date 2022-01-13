@@ -44,6 +44,36 @@ function _getHubspotFormSelector(url) {
 }
 
 /**
+ * Ignore all tabs that are not normal web sites, as click-to-play
+ * can only be applied to elements that the user can interact with.
+ */
+function isTabRelevantForClick2Play(tab) {
+	if (!tab) {
+		return false;
+	}
+
+	// only http(s) requests initiated by the user
+	if (tab.prefetched) {
+		return false;
+	}
+	const isHttpRequest = tab.protocol?.startsWith('http');
+	if (!isHttpRequest) {
+		return false;
+	}
+
+	// exceptions for Chrome (< 75) or Edge new tab pages
+	if (tab.path.includes('_/chrome/newtab') ||
+		tab.host.includes('ntp.msn.com')) {
+		return false;
+	}
+	if (globals.EXCLUDES.includes(tab.host)) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Builds Click2Play templates for a given tab_id.
  *
  * Restricted Sites: Only show the "allow once" option, since blacklisting overrides
@@ -57,13 +87,7 @@ function _getHubspotFormSelector(url) {
 export function buildC2P(details, app_id) {
 	const { tab_id } = details;
 	const tab = tabInfo.getTabInfo(tab_id);
-
-	// If the tab is prefetched, non http/s page, Chrome (< 75) or Edge new tab page, we can't add C2P to it
-	if (!tab || tab.prefetched ||
-		!tab.protocol.startsWith('http') ||
-		tab.path.includes('_/chrome/newtab') ||
-		tab.host.includes('ntp.msn.com') ||
-		globals.EXCLUDES.includes(tab.host)) {
+	if (!isTabRelevantForClick2Play(tab)) {
 		return;
 	}
 
