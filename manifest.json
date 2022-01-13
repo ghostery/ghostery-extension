@@ -63,6 +63,13 @@
 			"run_at": "document_start"
 		},
 		{
+			"js": [
+				"/vendor/@whotracksme/tracker-wheel/src/index.js",
+				"/vendor/@whotracksme/serp-report/src/content_scripts/index.js"
+			],
+			"css": [
+				"/vendor/@whotracksme/serp-report/src/content_scripts/index.css"
+			],
 			"matches": [
 				"*://*.google.com/*",
 				"*://*.google.ad/*",
@@ -259,14 +266,7 @@
 				"*://*.google.cat/*",
 				"*://*.google.ng/*"
 			],
-			"run_at": "document_end",
-			"css": [
-				"/vendor/@whotracksme/serp-report/src/content_scripts/index.css"
-			],
-			"js": [
-				"/vendor/@whotracksme/tracker-wheel/src/index.js",
-				"/vendor/@whotracksme/serp-report/src/content_scripts/index.js"
-			]
+			"run_at": "document_end"
 		}
 	],
 	"content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'",
