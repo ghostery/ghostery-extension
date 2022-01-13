@@ -1,3 +1,12 @@
+### GHOSTERY 8.6.0 (January 13, 2022)
+
++ Smart Blocking: Disable the exception for first-party tracking, allowing Ghostery to block Google Beacons (#730)
++ WhoTrackMe tracker wheel shown on the the Google search page (#738)
++ Improved the logic to decide whether to block new trackers (#732)
++ Fixes site breakage related to the Tracker-Tally and changed it to be opt-in (#727)
++ Fix for WebAssembly in Chrome and Edge (#739)
++ Updated translations (#731)
+
 ### GHOSTERY 8.5.9 (September 10, 2021)
 
 + Remove Ghostery Dawn onboarding (#721)
