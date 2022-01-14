@@ -467,6 +467,7 @@
     "scripts": [
       "/vendor/tldts/index.umd.min.js",
       "/vendor/@cliqz/adblocker/adblocker.umd.min.js",
+      "/vendor/@whotracksme/serp-report/src/background/data.js",
       "/vendor/@whotracksme/serp-report/src/background/index.js",
       "/vendor/@whotracksme/tracker-wheel/src/index.js",
       "worker/lodash-debounce.js",

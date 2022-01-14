@@ -23,8 +23,6 @@
 		462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
 		462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
 		462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
-		464B62C3274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
-		464B62C4274F9B1A00F4CD07 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 464B62C2274F9B1A00F4CD07 /* fonts */; };
 		465E353F2754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
 		465E35402754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
 		465E35452754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */; };
@@ -98,8 +96,6 @@
 		468E43002701F84A008B5792 /* content_scripts in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E62701F84A008B5792 /* content_scripts */; };
 		46B8F84E270451BD009908CF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 46B8F84D270451BD009908CF /* manifest.json */; };
 		46B8F84F270451BD009908CF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 46B8F84D270451BD009908CF /* manifest.json */; };
-		46F66D2E273D4F410001EB30 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 46F66D2D273D4F410001EB30 /* ui */; };
-		46F66D2F273D4F410001EB30 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 46F66D2D273D4F410001EB30 /* ui */; };
 		46F66D31273D4F470001EB30 /* wtm-report in Resources */ = {isa = PBXBuildFile; fileRef = 46F66D30273D4F470001EB30 /* wtm-report */; };
 		46F66D32273D4F470001EB30 /* wtm-report in Resources */ = {isa = PBXBuildFile; fileRef = 46F66D30273D4F470001EB30 /* wtm-report */; };
 /* End PBXBuildFile section */
@@ -155,7 +151,6 @@
 		4622664E2756E06D00245D1E /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		462266512756E09100245D1E /* PriveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriveViewModel.swift; sourceTree = "<group>"; };
 		462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewInfo.swift; sourceTree = "<group>"; };
-		464B62C2274F9B1A00F4CD07 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../src/fonts; sourceTree = "<group>"; };
 		465E353E2754EB870032B8D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWebView.swift; sourceTree = "<group>"; };
 		465E356127551D600032B8D2 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
@@ -205,7 +200,6 @@
 		468E42E52701F84A008B5792 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = vendor; path = ../../src/vendor; sourceTree = "<group>"; };
 		468E42E62701F84A008B5792 /* content_scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content_scripts; path = ../../src/content_scripts; sourceTree = "<group>"; };
 		46B8F84D270451BD009908CF /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
-		46F66D2D273D4F410001EB30 /* ui */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ui; path = ../../src/ui; sourceTree = "<group>"; };
 		46F66D30273D4F470001EB30 /* wtm-report */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "wtm-report"; path = "../../src/wtm-report"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -433,12 +427,10 @@
 				468E42DE2701F84A008B5792 /* adblocker_engines */,
 				468E42DF2701F84A008B5792 /* common */,
 				468E42E62701F84A008B5792 /* content_scripts */,
-				464B62C2274F9B1A00F4CD07 /* fonts */,
 				468E42DC2701F84A008B5792 /* images */,
 				468E42DA2701F84A008B5792 /* options */,
 				468E42DB2701F84A008B5792 /* panel */,
 				468E42E12701F84A008B5792 /* rule_resources */,
-				46F66D2D273D4F410001EB30 /* ui */,
 				468E42E52701F84A008B5792 /* vendor */,
 				468E42E42701F84A008B5792 /* worker */,
 				46F66D30273D4F470001EB30 /* wtm-report */,
@@ -621,9 +613,7 @@
 				468E42FB2701F84A008B5792 /* rule_resources in Resources */,
 				468E42F82701F84A008B5792 /* adblocker_engines in Resources */,
 				46B8F84E270451BD009908CF /* manifest.json in Resources */,
-				46F66D2E273D4F410001EB30 /* ui in Resources */,
 				468E42F92701F84A008B5792 /* common in Resources */,
-				464B62C3274F9B1A00F4CD07 /* fonts in Resources */,
 				468E42FA2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42F62701F84A008B5792 /* images in Resources */,
 				468E42FE2701F84A008B5792 /* worker in Resources */,
@@ -643,9 +633,7 @@
 				468E42EE2701F84A008B5792 /* rule_resources in Resources */,
 				468E42EB2701F84A008B5792 /* adblocker_engines in Resources */,
 				46B8F84F270451BD009908CF /* manifest.json in Resources */,
-				46F66D2F273D4F410001EB30 /* ui in Resources */,
 				468E42EC2701F84A008B5792 /* common in Resources */,
-				464B62C4274F9B1A00F4CD07 /* fonts in Resources */,
 				468E42ED2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42E92701F84A008B5792 /* images in Resources */,
 				468E42F12701F84A008B5792 /* worker in Resources */,
