@@ -1,3 +1,7 @@
+### GHOSTERY 8.6.1 (January 137, 2022)
+
++ Settings: option to disable Trackers Preview on search results (#742) 
+
 ### GHOSTERY 8.6.0 (January 13, 2022)
 
 + Smart Blocking: Disable the exception for first-party tracking, allowing Ghostery to block Google Beacons (#730)
