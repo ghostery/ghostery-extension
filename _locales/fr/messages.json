@@ -975,6 +975,9 @@
 	"not_http_page": {
 		"message": "Assurez-vous que l'onglet ouvert affiche bien une page http ou https"
 	},
+	"settings_wtm_serp_report": {
+		"message": "Afficher l'aperçu der mouchards à côté des résultats"
+	},
 	"settings_show_patterns_tooltip": {
 		"message": "Cliquez sur le nom du mouchard pour voir son URL, affichée sous le descriptif"
 	},

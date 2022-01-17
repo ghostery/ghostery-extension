@@ -622,7 +622,7 @@ function onMessageHandler(request, sender, callback) {
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 
-	if (tryWTMReportOnMessageHandler(request, sender, callback)) {
+	if (conf.enable_wtm_serp_report && tryWTMReportOnMessageHandler(request, sender, callback)) {
 		return false;
 	}
 
