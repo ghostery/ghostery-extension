@@ -976,7 +976,7 @@
 		"message": "Vergewissern Sie sich, dass in Ihrer aktuellen Registerkarte eine http- oder https-Seite geöffnet ist"
 	},
 	"settings_wtm_serp_report": {
-		"message": "WhoTracks.Me Tracker-Rad neben den Suchergebnissen anzeigen"
+		"message": "Tracker-Vorschau in Suchergebnissen anzeigen"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Tracker-URLs finden Sie nach dem Klick auf einen Tracker unter der Beschreibung des Trackers."

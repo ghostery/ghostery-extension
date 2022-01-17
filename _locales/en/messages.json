@@ -976,7 +976,7 @@
 		"message": "Ensure that your current tab has http or https page opened"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Tracker URLs can be found below the tracker description after clicking on a tracker."
