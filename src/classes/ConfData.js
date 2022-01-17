@@ -144,6 +144,7 @@ class ConfData {
 			_initProperty('setup_block', 1);
 			_initProperty('setup_complete', false);
 			_initProperty('tutorial_complete', false);
+			_initProperty('enable_wtm_serp_report', true);
 
 			// Complex props
 			_initProperty('account', null);

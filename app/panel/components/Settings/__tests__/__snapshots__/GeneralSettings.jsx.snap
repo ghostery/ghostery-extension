@@ -11,6 +11,43 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
       className="columns"
     >
       <h3>
+        WhoTracks.Me
+      </h3>
+      <div
+        className="s-option-group"
+      >
+        <div
+          className="s-square-checkbox"
+        >
+          <input
+            id="settings-wtm-serp-report"
+            name="enable_wtm_serp_report"
+            onClick={[Function]}
+            type="checkbox"
+          />
+          <label
+            htmlFor="settings-wtm-serp-report"
+          >
+            settings_wtm_serp_report
+          </label>
+          <div
+            className="s-checkbox-label"
+          >
+            <span
+              id="last-updated-span"
+            >
+              <a
+                href="https://ghostery.com/blog/introducing-wtm-serp-report"
+                rel="noreferrer"
+                target="_blank"
+              >
+                panel_detail_learn_more
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <h3>
         settings_trackers
       </h3>
       <div
@@ -220,6 +257,43 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
     <div
       className="columns"
     >
+      <h3>
+        WhoTracks.Me
+      </h3>
+      <div
+        className="s-option-group"
+      >
+        <div
+          className="s-square-checkbox"
+        >
+          <input
+            id="settings-wtm-serp-report"
+            name="enable_wtm_serp_report"
+            onClick={[Function]}
+            type="checkbox"
+          />
+          <label
+            htmlFor="settings-wtm-serp-report"
+          >
+            settings_wtm_serp_report
+          </label>
+          <div
+            className="s-checkbox-label"
+          >
+            <span
+              id="last-updated-span"
+            >
+              <a
+                href="https://ghostery.com/blog/introducing-wtm-serp-report"
+                rel="noreferrer"
+                target="_blank"
+              >
+                panel_detail_learn_more
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
       <h3>
         settings_trackers
       </h3>
