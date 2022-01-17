@@ -94,6 +94,16 @@ class GeneralSettings extends React.Component {
 			<div className="s-tabs-panel">
 				<div className="row">
 					<div className="columns">
+						<h3>WhoTracks.Me</h3>
+						<div className="s-option-group">
+							<div className="s-square-checkbox">
+								<input type="checkbox" id="settings-wtm-serp-report" name="enable_wtm_serp_report" defaultChecked={settingsData.enable_wtm_serp_report} onClick={toggleCheckbox} />
+								<label htmlFor="settings-wtm-serp-report">{ t('settings_wtm_serp_report') }</label>
+								<div className="s-checkbox-label">
+									<span id="last-updated-span"><a href="https://ghostery.com/blog/introducing-wtm-serp-report" target="_blank" rel="noreferrer">{ t('panel_detail_learn_more') }</a></span>
+								</div>
+							</div>
+						</div>
 						<h3>{ t('settings_trackers') }</h3>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">

@@ -106,6 +106,7 @@ class Globals {
 			'enable_autoupdate',
 			'enable_click2play',
 			'enable_click2play_social',
+			'enable_wtm_serp_report',
 			'enable_human_web',
 			'enable_metrics',
 			'enable_abtests',
