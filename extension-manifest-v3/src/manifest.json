@@ -446,7 +446,7 @@
       "run_at": "document_start",
       "all_frames": true,
       "js": [
-        "content_scripts/prevent-serp-tracking/index.js"
+        "/vendor/@whotracksme/prevent-serp-tracking/src/index.js"
       ]
     }
   ],
