@@ -76,6 +76,10 @@
     {
       "from": "node_modules/@whotracksme/webextension-packages/packages/tracker-wheel/src",
       "to": "src/vendor/@whotracksme/tracker-wheel/src"
+    },
+    {
+      "from": "node_modules/@whotracksme/webextension-packages/packages/prevent-serp-tracking/src/index.js",
+      "to": "src/vendor/@whotracksme/prevent-serp-tracking/src/index.js"
     }
   ]
 }
