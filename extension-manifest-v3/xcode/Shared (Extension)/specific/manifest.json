@@ -239,11 +239,11 @@
       ],
       "run_at": "document_end",
       "css": [
-        "/vendor/@whotracksme/serp-report/src/content_scripts/index.css"
+        "vendor/@whotracksme/serp-report/src/content_scripts/index.css"
       ],
       "js": [
-        "/vendor/@whotracksme/tracker-wheel/src/index.js",
-        "/vendor/@whotracksme/serp-report/src/content_scripts/index.js"
+        "vendor/@whotracksme/tracker-wheel/src/index.js",
+        "vendor/@whotracksme/serp-report/src/content_scripts/index.js"
       ]
     },
     {
@@ -445,7 +445,7 @@
       ],
       "run_at": "document_start",
       "js": [
-        "/vendor/@whotracksme/prevent-serp-tracking/src/index.js"
+        "vendor/@whotracksme/prevent-serp-tracking/src/index.js"
       ]
     }
   ],
@@ -465,11 +465,11 @@
   ],
   "background": {
     "scripts": [
-      "/vendor/tldts/index.umd.min.js",
-      "/vendor/@cliqz/adblocker/adblocker.umd.min.js",
-      "/vendor/@whotracksme/serp-report/src/background/data.js",
-      "/vendor/@whotracksme/serp-report/src/background/index.js",
-      "/vendor/@whotracksme/tracker-wheel/src/index.js",
+      "vendor/tldts/index.umd.min.js",
+      "vendor/@cliqz/adblocker/adblocker.umd.min.js",
+      "vendor/@whotracksme/serp-report/src/background/data.js",
+      "vendor/@whotracksme/serp-report/src/background/index.js",
+      "vendor/@whotracksme/tracker-wheel/src/index.js",
       "worker/lodash-debounce.js",
       "worker/adblocker.js",
       "worker/storage.js",
@@ -501,6 +501,6 @@
   "content_security_policy" : {},
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
-    "/vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
+    "vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
   ]
 }
