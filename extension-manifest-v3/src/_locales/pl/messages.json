@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Zezwól działanie tropicieli utworzonych przez właścicieli strony"
 	},
-	"settings_block_trackers": {
-		"message": "Blokuj nowe tropiciele dodane domyślnie do Ghostery"
-	},
 	"settings_show_purple_box": {
 		"message": "Wyświetlaj licznik tropicieli w rogu wyszukiwarki"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Upewnij się, że aktualna zakładka ma otwartą stronę http lub https"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Wyświetlaj podgląd trackerów przy wynikach wyszukiwania"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Adresy URL tropiciela dostępne są pod opisem tropiciela po kliknięciu na danego tropiciela."

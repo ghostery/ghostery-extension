@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "准許由網站擁有者所創造的網頁跟縱器"
 	},
-	"settings_block_trackers": {
-		"message": "默認封鎖被加入 Ghostery 的新網頁跟蹤器"
-	},
 	"settings_show_purple_box": {
 		"message": "在瀏覽器角落顯示追蹤器紀錄"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "確保您當前的標簽打開了 http 或 https 網頁"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "在點擊一個網頁跟蹤器之後，可在網頁跟蹤器描述之下找到網頁跟蹤器的 URLs。"

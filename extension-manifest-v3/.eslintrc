@@ -1,6 +1,6 @@
 {
   "env": {
-    "es6": true,
+    "es2020": true,
     "browser": true,
     "node": true,
     "serviceworker": true,
@@ -11,7 +11,6 @@
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
-    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "globals": {

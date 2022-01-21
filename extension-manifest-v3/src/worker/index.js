@@ -69,6 +69,8 @@ function getTrackerFromUrl(url, origin) {
   return null;
 }
 
+// Storage "Options" initialization
+
 let options = {};
 
 async function updateOptions() {
@@ -209,7 +211,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
+  if (
+    (options.wtmSerpReport ?? true) &&
+    tryWTMReportOnMessageHandler(msg, sender, sendResponse)
+  ) {
     return false;
   }
 

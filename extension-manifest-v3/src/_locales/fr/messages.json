@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Autoriser les mouchards générés par les créateurs de sites."
 	},
-	"settings_block_trackers": {
-		"message": "Bloquer les nouveaux mouchards ajoutés à Ghostery par défaut"
-	},
 	"settings_show_purple_box": {
 		"message": "Afficher le mouchard Tally dans le coin du navigateur"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Assurez-vous que l'onglet ouvert affiche bien une page http ou https"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Afficher l'aperçu der mouchards à côté des résultats"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Cliquez sur le nom du mouchard pour voir son URL, affichée sous le descriptif"

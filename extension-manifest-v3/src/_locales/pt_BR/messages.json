@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Permitir rastreadores criados pelos criadores do site"
 	},
-	"settings_block_trackers": {
-		"message": "Bloquear novos rastreadores adicionados ao Ghostery por padrão"
-	},
 	"settings_show_purple_box": {
 		"message": "Mostrar a contagem de rastreamento no canto do meu navegador"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Certifique-se de que sua aba atual tenha uma página http ou https aberta"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "URLs de rastreadores podem ser encontrados abaixo da descrição do rastreador clicando no rastreador."

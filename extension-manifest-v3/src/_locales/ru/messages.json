@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Разрешить трекеры, созданные владельцами сайтов"
 	},
-	"settings_block_trackers": {
-		"message": "Блокировать новые трекеры, добавленные в Ghostery по умолчанию"
-	},
 	"settings_show_purple_box": {
 		"message": "Показывать счетчик трекеров в углу браузера"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Убедитесь, что на вашей текущей вкладке открыта страница http или https"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "URL-адреса трекера можно найти под описанием трекера после нажатия на трекер."

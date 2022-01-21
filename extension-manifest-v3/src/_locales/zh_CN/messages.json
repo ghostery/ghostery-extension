@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "允许网站所有者创建的跟踪器"
 	},
-	"settings_block_trackers": {
-		"message": "默认拦截添加到 Ghostery 的新跟踪器"
-	},
 	"settings_show_purple_box": {
 		"message": "在浏览器一角显示跟踪器记录"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "确保您当前的标签页中打开了 http 或 https 网页"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "点击跟踪器后，可以在跟踪器描述下方找到跟踪器网址。"

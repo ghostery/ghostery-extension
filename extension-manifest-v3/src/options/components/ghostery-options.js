@@ -14,31 +14,26 @@ import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 const Options = {
   trackerWheelDisabled: false,
+  wtmSerpReport: true,
   [store.connect]: {
-    get: async () => {
+    async get() {
       const storage = await chrome.storage.local.get(['options']);
-      const options = storage.options || {};
-      if (typeof options.trackerWheelDisabled === 'undefined') {
-        options.trackerWheelDisabled = false;
-      }
-      return options;
+      return storage.options || {};
     },
-    set: (_, options) => {
-      chrome.storage.local.set({ options });
+    async set(_, options, keys) {
+      const prevOptions = await this.get();
+      const nextOptions = {
+        ...prevOptions,
+        ...Object.fromEntries(keys.map((key) => [key, options[key]])),
+      };
+
+      chrome.storage.local.set({ options: nextOptions });
       chrome.runtime.sendMessage({ action: 'updateOptions' });
+
       return options;
     },
   },
 };
-
-function updateOptions(host) {
-  const shadowRoot = host.render();
-  const options = { ...host.options };
-  options.trackerWheelDisabled = shadowRoot.querySelector(
-    '#trackerWheelDisabled',
-  ).checked;
-  store.set(Options, options);
-}
 
 define({
   tag: 'ghostery-options',
@@ -53,15 +48,24 @@ define({
       html`
         <ul>
           <li>
-            <label for="trackerWheelDisabled"
-              >${t('options_tracker_wheel_disabled')}</label
-            >
-            <input
-              type="checkbox"
-              id="trackerWheelDisabled"
-              checked="${options.trackerWheelDisabled}"
-              onchange="${updateOptions}"
-            />
+            <label>
+              <span>${t('options_tracker_wheel_disabled')}</span>
+              <input
+                type="checkbox"
+                checked="${options.trackerWheelDisabled}"
+                onchange="${html.set(options, 'trackerWheelDisabled')}"
+              />
+            </label>
+          </li>
+          <li>
+            <label>
+              <span>${t('settings_wtm_serp_report')}</span>
+              <input
+                type="checkbox"
+                checked="${options.wtmSerpReport}"
+                onchange="${html.set(options, 'wtmSerpReport')}"
+              />
+            </label>
           </li>
         </ul>
       `}
@@ -107,6 +111,8 @@ define({
       align-items: center;
     }
     li label {
+      display: flex;
+      justify-content: space-between;
       flex: 1;
       cursor: pointer;
     }

@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Allow trackers created by site owners"
 	},
-	"settings_block_trackers": {
-		"message": "Block new trackers added to Ghostery by default"
-	},
 	"settings_show_purple_box": {
 		"message": "Show the tracker-tally in the corner of my browser"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Ensure that your current tab has http or https page opened"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Tracker URLs can be found below the tracker description after clicking on a tracker."

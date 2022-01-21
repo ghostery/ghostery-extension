@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Sta door website-eigenaren gemaakte trackers toe"
 	},
-	"settings_block_trackers": {
-		"message": "Blokkeer standaard nieuwe aan Ghostery toegevoegde trackers"
-	},
 	"settings_show_purple_box": {
 		"message": "De trackertelling in de hoek van mijn browser weergeven"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Controleer of je huidige tab een http of https pagina open heeft"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Tracker URLs kun je vinden onder de tracker-omschrijving nadat je op een tracker geklikt hebt."

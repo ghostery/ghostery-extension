@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "Oldaltulajdonosok által létrehozott trackerek engedélyezése"
 	},
-	"settings_block_trackers": {
-		"message": "A Ghostery-hez hozzáadott új trackerek blokkolása alapértelmezés szerint"
-	},
 	"settings_show_purple_box": {
 		"message": "Trackerek számának megjelenítése a böngésző sarkában"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "Ellenőrizze, hogy a jelenlegi lapfüle http vagy https oldalt nyitott-e meg"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "A trackerre történő kattintás után a tracker leírása alatt találhatók a tracker URL-jei."

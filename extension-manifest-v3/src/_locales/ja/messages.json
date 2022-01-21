@@ -846,9 +846,6 @@
 	"settings_allow_trackers": {
 		"message": "サイト所有者が作成したトラッカーを許可します"
 	},
-	"settings_block_trackers": {
-		"message": "Ghosteryにデフォルトで追加された新しいトラッカーをブロックします"
-	},
 	"settings_show_purple_box": {
 		"message": "ブラウザの隅に総トラッカーを表示します"
 	},
@@ -977,6 +974,9 @@
 	},
 	"not_http_page": {
 		"message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください"
+	},
+	"settings_wtm_serp_report": {
+		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "トラッカーをクリックすると、トラッカーのURLがトラッカーの説明の下に表示されます。"
