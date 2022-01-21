@@ -1,6 +1,6 @@
 {
   "name": "@ghostery/dnr-extension",
-  "version": "1.0.0",
+  "version": "9.2.0",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
     "preinstall": "rimraf src/vendor src/rule_resources",
