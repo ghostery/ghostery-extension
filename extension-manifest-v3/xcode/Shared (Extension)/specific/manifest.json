@@ -36,6 +36,13 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
+        "content_scripts/prevent-indexeddb-tracking/index.js"
+      ]
+    },
+    {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
         "vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
         "content_scripts/cosmetics.js"
       ]
@@ -501,6 +508,7 @@
   "content_security_policy" : {},
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
+    "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
     "vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
   ]
 }
