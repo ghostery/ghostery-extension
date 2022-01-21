@@ -77,7 +77,6 @@ define({
 
     button label {
       cursor: pointer;
-      width: 1px;
       white-space: wrap;
     }
 
