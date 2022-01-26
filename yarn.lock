@@ -1281,10 +1281,9 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@whotracksme/webextension-packages@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@whotracksme/webextension-packages/-/webextension-packages-0.0.2.tgz#2d6f23397ad091afbe9b8cf8ab9cb798b2b5ff80"
-  integrity sha512-iJIkqQ56i8q+ibqP54IrWwZSdLCslW5cYTziSZiBCjSAyTXR59I6TT8ZOG3pm0PE+9yA1wp/alduSgXl+7rkJw==
+"@whotracksme/webextension-packages@whotracksme/webextension-packages#feat-refactor":
+  version "0.0.3"
+  resolved "https://codeload.github.com/whotracksme/webextension-packages/tar.gz/53855b3148184308b0117b34f853f2accf24a213"
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"

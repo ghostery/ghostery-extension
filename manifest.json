@@ -64,11 +64,10 @@
 		},
 		{
 			"js": [
-				"/vendor/@whotracksme/tracker-wheel/src/index.js",
-				"/vendor/@whotracksme/serp-report/src/content_scripts/index.js"
+				"/vendor/@whotracksme/serp-report/src/content_scripts/serp-report.js"
 			],
 			"css": [
-				"/vendor/@whotracksme/serp-report/src/content_scripts/index.css"
+				"/vendor/@whotracksme/serp-report/src/content_scripts/serp-report.css"
 			],
 			"matches": [
 				"*://*.google.com/*",
@@ -284,8 +283,6 @@
 	],
 	"background": {
 		"scripts": [
-			"/vendor/@whotracksme/serp-report/src/background/data.js",
-			"/vendor/@whotracksme/serp-report/src/background/index.js",
 			"dist/background.js"
 		],
 		"persistent": true
@@ -301,6 +298,7 @@
 	"minimum_opera_version": "56",
 	"web_accessible_resources": [
 		"app/images/*",
-		"/vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
+		"vendor/@whotracksme/serp-report/src/pages/iframe/index.html",
+		"vendor/@whotracksme/ui/src/tracker-wheel.js"
 	]
 }
