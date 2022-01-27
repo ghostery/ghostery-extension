@@ -12,8 +12,5 @@
   ],
   "parserOptions": {
     "sourceType": "module"
-  },
-  "globals": {
-    "WTMTrackerWheel": true
   }
 }

@@ -1,7 +1,6 @@
 // source: https://www.npmjs.com/package/lodash.debounce
 // version: 4.0.8
 // eslint-disable-next-line no-unused-vars
-const _ = (function () {
   /**
    * lodash (Custom Build) <https://lodash.com/>
    * Build: `lodash modularize exports="npm" -o ./`
@@ -390,5 +389,4 @@ const _ = (function () {
       : +value;
   }
 
-  return { debounce };
-})();
+  export { debounce };

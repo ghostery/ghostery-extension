@@ -15,6 +15,7 @@
 // Note: The resources are shipped with the extension, so
 // loading from the local filesystem should be fast.
 const storage = new Map();
+export default storage;
 
 const RESOURCES = {
   bugs: 'rule_resources/bugs.json',

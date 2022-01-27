@@ -11,6 +11,7 @@
 
 import { html, define, dispatch, store } from '/hybrids.js';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
+import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 import { chevronLeft } from '/vendor/@whotracksme/ui/src/components/icons.js';
 
 import './detailed-view/category-with-trackers.js';

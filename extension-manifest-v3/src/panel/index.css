@@ -1,21 +1,6 @@
-:root {
-  --text: #838B90;
-  --black: #252525;
-  --ghostery: #00AEF0;
-  --deep-blue: #0D8FE7;
-}
-
-body, button {
-  font-family: "Roboto", "Open Sans", Arial, Helvetica, sans-serif !important;
-}
-
 body {
-  padding: 0;
-  margin: 0;
   overflow: hidden;
-  background-color: #F8F8F8;
-  font-size: 13px;
-  color: var(--text);
+  background-color: #f8f8f8;
 }
 
 canvas {
@@ -28,7 +13,8 @@ canvas {
 
 /* BODY */
 
-panel-body simple-view, panel-body detailed-view {
+panel-body simple-view,
+panel-body detailed-view {
   padding: 12px;
   overflow: hidden;
   box-sizing: border-box;
@@ -58,14 +44,15 @@ panel-body section.buttons {
   margin-top: 10px;
 }
 
-panel-body section.buttons a, panel-body section.buttons a:visited {
+panel-body section.buttons a,
+panel-body section.buttons a:visited {
   color: var(--deep-blue);
   padding: 10px 17px;
   flex: 1;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
   border-radius: 7.4px;
   display: flex;
@@ -101,7 +88,8 @@ panel-footer footer .dot {
   margin: 0 5px;
 }
 
-panel-footer footer a, panel-footer footer a:visited {
+panel-footer footer a,
+panel-footer footer a:visited {
   text-decoration: none;
   color: var(--text);
 }

@@ -29,7 +29,7 @@
   "dependencies": {
     "@cliqz/adblocker": "1.22.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@whotracksme/webextension-packages": "0.0.3",
+    "@whotracksme/webextension-packages": "^0.1.0",
     "hybrids": "^6.1.0",
     "tldts": "^5.7.45"
   },
@@ -39,7 +39,7 @@
   "vendorCopy": [
     {
       "from": "node_modules/hybrids/src",
-      "to": "src/vendor/hybrids"
+      "to": "src/vendor/hybrids/src"
     },
     {
       "from": "node_modules/@cliqz/adblocker/dist/adblocker.umd.min.js",
@@ -59,11 +59,15 @@
     },
     {
       "from": "node_modules/tldts/dist/index.umd.min.js",
-      "to": "src/vendor/tldts/index.umd.min.js"
+      "to": "src/vendor/tldts/dist/index.umd.min.js"
     },
     {
       "from": "../ghostery-dnr-lists/build",
       "to": "src/rule_resources"
+    },
+    {
+      "from": "node_modules/@whotracksme/webextension-packages/packages/prevent-serp-tracking/src",
+      "to": "src/vendor/@whotracksme/prevent-serp-tracking/src"
     },
     {
       "from": "node_modules/@whotracksme/webextension-packages/packages/serp-report/src",
@@ -72,14 +76,6 @@
     {
       "from": "node_modules/@whotracksme/webextension-packages/packages/ui/src",
       "to": "src/vendor/@whotracksme/ui/src"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/tracker-wheel/src",
-      "to": "src/vendor/@whotracksme/tracker-wheel/src"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/prevent-serp-tracking/src/index.js",
-      "to": "src/vendor/@whotracksme/prevent-serp-tracking/src/index.js"
     }
   ]
 }

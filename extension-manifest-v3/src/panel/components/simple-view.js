@@ -15,7 +15,7 @@ import {
   externalLink,
   chevronRight,
 } from '/vendor/@whotracksme/ui/src/components/icons.js';
-import '/vendor/@whotracksme/ui/src/components/wtm-stats/index.js';
+import '/vendor/@whotracksme/ui/src/components/wtm-stats.js';
 
 import './simple-view/toggle-switch.js';
 import './simple-view/page-load.js';

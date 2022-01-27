@@ -11,6 +11,7 @@
 
 import '/vendor/@whotracksme/ui/src/components/category-bullet.js';
 import '/vendor/@whotracksme/ui/src/components/panel-header.js';
+
 import './components/simple-view.js';
 import './components/detailed-view.js';
 import './components/panel-body.js';

@@ -237,13 +237,10 @@
         "*://*.google.cat/*",
         "*://*.google.ng/*"
       ],
-      "run_at": "document_end",
-      "css": [
-        "vendor/@whotracksme/serp-report/src/content_scripts/index.css"
-      ],
+      "run_at": "document_start",
+      "all_frames": true,
       "js": [
-        "vendor/@whotracksme/tracker-wheel/src/index.js",
-        "vendor/@whotracksme/serp-report/src/content_scripts/index.js"
+        "vendor/@whotracksme/prevent-serp-tracking/src/content_scripts/prevent-serp-tracking.js"
       ]
     },
     {
@@ -443,10 +440,12 @@
         "*://*.google.cat/*",
         "*://*.google.ng/*"
       ],
-      "run_at": "document_start",
-      "all_frames": true,
+      "run_at": "document_end",
+      "css": [
+        "vendor/@whotracksme/serp-report/src/content_scripts/serp-report.css"
+      ],
       "js": [
-        "vendor/@whotracksme/prevent-serp-tracking/src/index.js"
+        "vendor/@whotracksme/serp-report/src/content_scripts/serp-report.js"
       ]
     }
   ],
@@ -467,7 +466,8 @@
     "wss://*/*"
   ],
   "background": {
-    "service_worker": "worker/index.js"
+    "service_worker": "worker/index.js",
+    "type": "module"
   },
   "declarative_net_request" : {
     "rule_resources" : [
@@ -492,7 +492,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "content_scripts/whotracksme/ghostery-whotracksme.js"
+        "content_scripts/whotracksme/ghostery-whotracksme.js",
+        "vendor/@whotracksme/ui/src/tracker-wheel.js"
       ],
       "all_frames": true,
       "matches": [
@@ -501,7 +502,7 @@
     },
     {
       "resources": [
-        "vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
+        "vendor/@whotracksme/serp-report/src/pages/iframe/index.html"
       ],
       "all_frames": false,
       "matches": [

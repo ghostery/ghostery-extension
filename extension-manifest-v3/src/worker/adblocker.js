@@ -9,8 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-const { parse } = tldts;
-const { FiltersEngine } = adblocker;
+import '/vendor/@cliqz/adblocker/adblocker.umd.min.js';
+const { FiltersEngine } = globalThis.adblocker;
+
+// Here we have to load the tldts from the global scope
+const { parse } = globalThis.tldts;
 
 const adblockerEngines = {
   'ads': {
@@ -32,7 +35,7 @@ function getRulesetType(rulesetId) {
   return rulesetId.split('_')[0];
 }
 
-async function updateAdblockerEngineStatuses() {
+export async function updateAdblockerEngineStatuses() {
   const enabledRulesetIds =
     await chrome.declarativeNetRequest.getEnabledRulesets();
   const enabledRulesetTypes = enabledRulesetIds.map(getRulesetType);
@@ -104,7 +107,7 @@ async function adblockerInjectStylesWebExtension(
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-async function adblockerOnMessage(msg, sender, sendResponse) {
+export async function adblockerOnMessage(msg, sender, sendResponse) {
   if (msg.action === 'getCosmeticsFilters') {
     await adblockerStartupPromise;
 

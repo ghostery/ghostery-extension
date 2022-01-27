@@ -76,7 +76,6 @@
 		468E42E82701F84A008B5792 /* panel in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DB2701F84A008B5792 /* panel */; };
 		468E42E92701F84A008B5792 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DC2701F84A008B5792 /* images */; };
 		468E42EB2701F84A008B5792 /* adblocker_engines in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DE2701F84A008B5792 /* adblocker_engines */; };
-		468E42EC2701F84A008B5792 /* common in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DF2701F84A008B5792 /* common */; };
 		468E42ED2701F84A008B5792 /* hybrids.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E02701F84A008B5792 /* hybrids.js */; };
 		468E42EE2701F84A008B5792 /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E12701F84A008B5792 /* rule_resources */; };
 		468E42F02701F84A008B5792 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E32701F84A008B5792 /* _locales */; };
@@ -87,7 +86,6 @@
 		468E42F52701F84A008B5792 /* panel in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DB2701F84A008B5792 /* panel */; };
 		468E42F62701F84A008B5792 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DC2701F84A008B5792 /* images */; };
 		468E42F82701F84A008B5792 /* adblocker_engines in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DE2701F84A008B5792 /* adblocker_engines */; };
-		468E42F92701F84A008B5792 /* common in Resources */ = {isa = PBXBuildFile; fileRef = 468E42DF2701F84A008B5792 /* common */; };
 		468E42FA2701F84A008B5792 /* hybrids.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E02701F84A008B5792 /* hybrids.js */; };
 		468E42FB2701F84A008B5792 /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E12701F84A008B5792 /* rule_resources */; };
 		468E42FD2701F84A008B5792 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E32701F84A008B5792 /* _locales */; };
@@ -96,8 +94,6 @@
 		468E43002701F84A008B5792 /* content_scripts in Resources */ = {isa = PBXBuildFile; fileRef = 468E42E62701F84A008B5792 /* content_scripts */; };
 		46B8F84E270451BD009908CF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 46B8F84D270451BD009908CF /* manifest.json */; };
 		46B8F84F270451BD009908CF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 46B8F84D270451BD009908CF /* manifest.json */; };
-		46F66D31273D4F470001EB30 /* wtm-report in Resources */ = {isa = PBXBuildFile; fileRef = 46F66D30273D4F470001EB30 /* wtm-report */; };
-		46F66D32273D4F470001EB30 /* wtm-report in Resources */ = {isa = PBXBuildFile; fileRef = 46F66D30273D4F470001EB30 /* wtm-report */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,7 +188,6 @@
 		468E42DB2701F84A008B5792 /* panel */ = {isa = PBXFileReference; lastKnownFileType = folder; name = panel; path = ../../src/panel; sourceTree = "<group>"; };
 		468E42DC2701F84A008B5792 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../src/images; sourceTree = "<group>"; };
 		468E42DE2701F84A008B5792 /* adblocker_engines */ = {isa = PBXFileReference; lastKnownFileType = folder; name = adblocker_engines; path = ../../src/adblocker_engines; sourceTree = "<group>"; };
-		468E42DF2701F84A008B5792 /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = ../../src/common; sourceTree = "<group>"; };
 		468E42E02701F84A008B5792 /* hybrids.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = hybrids.js; path = ../../src/hybrids.js; sourceTree = "<group>"; };
 		468E42E12701F84A008B5792 /* rule_resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rule_resources; path = ../../src/rule_resources; sourceTree = "<group>"; };
 		468E42E32701F84A008B5792 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../src/_locales; sourceTree = "<group>"; };
@@ -200,7 +195,6 @@
 		468E42E52701F84A008B5792 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = vendor; path = ../../src/vendor; sourceTree = "<group>"; };
 		468E42E62701F84A008B5792 /* content_scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content_scripts; path = ../../src/content_scripts; sourceTree = "<group>"; };
 		46B8F84D270451BD009908CF /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
-		46F66D30273D4F470001EB30 /* wtm-report */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "wtm-report"; path = "../../src/wtm-report"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,7 +419,6 @@
 			children = (
 				468E42E32701F84A008B5792 /* _locales */,
 				468E42DE2701F84A008B5792 /* adblocker_engines */,
-				468E42DF2701F84A008B5792 /* common */,
 				468E42E62701F84A008B5792 /* content_scripts */,
 				468E42DC2701F84A008B5792 /* images */,
 				468E42DA2701F84A008B5792 /* options */,
@@ -433,7 +426,6 @@
 				468E42E12701F84A008B5792 /* rule_resources */,
 				468E42E52701F84A008B5792 /* vendor */,
 				468E42E42701F84A008B5792 /* worker */,
-				46F66D30273D4F470001EB30 /* wtm-report */,
 				468E42E02701F84A008B5792 /* hybrids.js */,
 			);
 			name = common;
@@ -613,13 +605,11 @@
 				468E42FB2701F84A008B5792 /* rule_resources in Resources */,
 				468E42F82701F84A008B5792 /* adblocker_engines in Resources */,
 				46B8F84E270451BD009908CF /* manifest.json in Resources */,
-				468E42F92701F84A008B5792 /* common in Resources */,
 				468E42FA2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42F62701F84A008B5792 /* images in Resources */,
 				468E42FE2701F84A008B5792 /* worker in Resources */,
 				468E42F42701F84A008B5792 /* options in Resources */,
 				468E43002701F84A008B5792 /* content_scripts in Resources */,
-				46F66D31273D4F470001EB30 /* wtm-report in Resources */,
 				468E42FD2701F84A008B5792 /* _locales in Resources */,
 				468E42F52701F84A008B5792 /* panel in Resources */,
 			);
@@ -633,13 +623,11 @@
 				468E42EE2701F84A008B5792 /* rule_resources in Resources */,
 				468E42EB2701F84A008B5792 /* adblocker_engines in Resources */,
 				46B8F84F270451BD009908CF /* manifest.json in Resources */,
-				468E42EC2701F84A008B5792 /* common in Resources */,
 				468E42ED2701F84A008B5792 /* hybrids.js in Resources */,
 				468E42E92701F84A008B5792 /* images in Resources */,
 				468E42F12701F84A008B5792 /* worker in Resources */,
 				468E42E72701F84A008B5792 /* options in Resources */,
 				468E42F32701F84A008B5792 /* content_scripts in Resources */,
-				46F66D32273D4F470001EB30 /* wtm-report in Resources */,
 				468E42F02701F84A008B5792 /* _locales in Resources */,
 				468E42E82701F84A008B5792 /* panel in Resources */,
 			);

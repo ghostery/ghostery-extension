@@ -244,13 +244,9 @@
         "*://*.google.cat/*",
         "*://*.google.ng/*"
       ],
-      "run_at": "document_end",
-      "css": [
-        "vendor/@whotracksme/serp-report/src/content_scripts/index.css"
-      ],
+      "run_at": "document_start",
       "js": [
-        "vendor/@whotracksme/tracker-wheel/src/index.js",
-        "vendor/@whotracksme/serp-report/src/content_scripts/index.js"
+        "vendor/@whotracksme/prevent-serp-tracking/src/content_scripts/prevent-serp-tracking.js"
       ]
     },
     {
@@ -450,9 +446,12 @@
         "*://*.google.cat/*",
         "*://*.google.ng/*"
       ],
-      "run_at": "document_start",
+      "run_at": "document_end",
+      "css": [
+        "vendor/@whotracksme/serp-report/src/content_scripts/serp-report.css"
+      ],
       "js": [
-        "vendor/@whotracksme/prevent-serp-tracking/src/index.js"
+        "vendor/@whotracksme/serp-report/src/content_scripts/serp-report.js"
       ]
     }
   ],
@@ -471,19 +470,7 @@
     "wss://*/*"
   ],
   "background": {
-    "scripts": [
-      "vendor/tldts/index.umd.min.js",
-      "vendor/@cliqz/adblocker/adblocker.umd.min.js",
-      "vendor/@whotracksme/serp-report/src/background/data.js",
-      "vendor/@whotracksme/serp-report/src/background/index.js",
-      "vendor/@whotracksme/tracker-wheel/src/index.js",
-      "worker/lodash-debounce.js",
-      "worker/adblocker.js",
-      "worker/storage.js",
-      "worker/bugs-matcher.js",
-      "worker/tab-stats.js",
-      "worker/index.js"
-    ],
+    "page": "worker/background.html",
     "persistent": false
   },
   "declarative_net_request" : {
@@ -509,6 +496,7 @@
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
-    "vendor/@whotracksme/serp-report/src/assets/iframe/index.html"
+    "vendor/@whotracksme/serp-report/src/pages/iframe/index.html",
+    "vendor/@whotracksme/ui/src/tracker-wheel.js"
   ]
 }

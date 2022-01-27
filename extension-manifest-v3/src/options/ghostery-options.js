@@ -35,7 +35,7 @@ const Options = {
   },
 };
 
-define({
+export default define({
   tag: 'ghostery-options',
   options: store(Options),
   render: ({ options }) => html`
