@@ -47,7 +47,11 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
-import { tryWTMReportOnMessageHandler } from './whotracksme/index';
+
+// @whotracksme/serp-report
+
+import './whotracksme/globals'; // loads tldts into the global scope
+import tryWTMReportOnMessageHandler from '../vendor/@whotracksme/serp-report/src/background/serp-report';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
