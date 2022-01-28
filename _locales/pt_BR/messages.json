@@ -976,7 +976,7 @@
 		"message": "Certifique-se de que sua aba atual tenha uma página http ou https aberta"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "URLs de rastreadores podem ser encontrados abaixo da descrição do rastreador clicando no rastreador."

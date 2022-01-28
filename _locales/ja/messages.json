@@ -976,7 +976,7 @@
 		"message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "トラッカーをクリックすると、トラッカーのURLがトラッカーの説明の下に表示されます。"
