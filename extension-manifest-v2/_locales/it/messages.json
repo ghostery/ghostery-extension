@@ -976,7 +976,7 @@
 		"message": "Verifica che la tua scheda attuale abbia una pagina http o https aperta"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Puoi trovare gli URL dei tracker sotto alla descrizione del tracker, dopo aver cliccato su un tracker."
