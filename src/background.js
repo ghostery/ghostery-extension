@@ -51,7 +51,7 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 // @whotracksme/serp-report
 
 import './whotracksme/globals'; // loads tldts into the global scope
-import tryWTMReportOnMessageHandler from '../vendor/@whotracksme/serp-report/src/background/serp-report';
+import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '../vendor/@whotracksme/serp-report/src/background/serp-report';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -626,8 +626,14 @@ function onMessageHandler(request, sender, callback) {
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 
-	if (conf.enable_wtm_serp_report && tryWTMReportOnMessageHandler(request, sender, callback)) {
-		return false;
+	if (conf.enable_wtm_serp_report) {
+		if (tryWTMReportOnMessageHandler(request, sender, callback)) {
+			return false;
+		}
+		if (isDisableWTMReportMessage(request)) {
+			conf.enable_wtm_serp_report = false;
+			return false;
+		}
 	}
 
 	// HANDLE PAGE EVENTS HERE
