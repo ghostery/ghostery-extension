@@ -976,7 +976,7 @@
 		"message": "Upewnij się, że aktualna zakładka ma otwartą stronę http lub https"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Wyświetlaj podgląd trackerów przy wynikach wyszukiwania"
+		"message": "Wyświetlaj podgląd trackerach przy wynikach wyszukiwania"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "Adresy URL tropiciela dostępne są pod opisem tropiciela po kliknięciu na danego tropiciela."

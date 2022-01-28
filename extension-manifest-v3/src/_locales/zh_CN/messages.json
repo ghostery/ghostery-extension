@@ -976,7 +976,7 @@
 		"message": "确保您当前的标签页中打开了 http 或 https 网页"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "点击跟踪器后，可以在跟踪器描述下方找到跟踪器网址。"
