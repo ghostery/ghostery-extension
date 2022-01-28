@@ -976,7 +976,7 @@
 		"message": "Убедитесь, что на вашей текущей вкладке открыта страница http или https"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "URL-адреса трекера можно найти под описанием трекера после нажатия на трекер."

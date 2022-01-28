@@ -976,7 +976,7 @@
 		"message": "確保您當前的標簽打開了 http 或 https 網頁"
 	},
 	"settings_wtm_serp_report": {
-		"message": "Show WhoTracks.Me Tracker Wheel next to search results"
+		"message": "Show Trackers Preview next to search results"
 	},
 	"settings_show_patterns_tooltip": {
 		"message": "在點擊一個網頁跟蹤器之後，可在網頁跟蹤器描述之下找到網頁跟蹤器的 URLs。"
