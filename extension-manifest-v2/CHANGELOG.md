@@ -1,4 +1,4 @@
-### GHOSTERY 8.6.1 (January 137, 2022)
+### GHOSTERY 8.6.1 (January 17, 2022)
 
 + Settings: option to disable Trackers Preview on search results (#742) 
 
