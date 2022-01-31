@@ -1282,9 +1282,9 @@
     "@xtuc/long" "4.2.2"
 
 "@whotracksme/webextension-packages@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@whotracksme/webextension-packages/-/webextension-packages-0.1.0.tgz#914b97734509a9e6f95908687e4d507f5bfc9abf"
-  integrity sha512-xJPEje/iUXHsoSbNsetYgc8DxUPD3GjDbrdLWhCN3phfvDQyDaXlJs69zkLxDbPPNWC3e06GBlmZT91L+B5VPA==
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@whotracksme/webextension-packages/-/webextension-packages-0.1.1.tgz#f54883cce4eeba2202b8b8d3116cf56ca63875ce"
+  integrity sha512-CpBENmNos94KjVCY4CM1pZ4LssRzgfKA3B1/bdEoQTzogj4fqRE3rfLMGr5std46ho0s8xXZf/4cz5ctoDix8w==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"

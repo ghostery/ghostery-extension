@@ -310,6 +310,9 @@
 	"category_uncategorized_desc": {
 		"message": "These trackers have not been categorized yet."
 	},
+	"category_unknown": {
+		"message": "Unknown"
+	},
 	"click2play_allow_always_tooltip": {
 		"description": "Tooltip that appears over the 'allow always' click2play button.",
 		"message": "Allow and reload."
@@ -2165,5 +2168,20 @@
 	},
 	"options_tracker_wheel_disabled": {
 		"message": "Disable Tracker Wheel in browser toolbar"
+	},
+	"wtm_trackers_preview_title": {
+		"message": "Trackers Preview"
+	},
+	"wtm_trackers_preview_disable_button": {
+		"message": "Disable Trackers Preview"
+	},
+	"wtm_trackers_preview_disable_confirm_msg": {
+		"message": "Are you sure?"
+	},
+	"wtm_trackers_preview_disable_confirm_button": {
+		"message": "Disable"
+	},
+	"wtm_trackers_preview_disable_confirm_cancel_button": {
+		"message": "Cancel"
 	}
 }
