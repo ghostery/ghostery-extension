@@ -13,7 +13,10 @@
 // especially for the `serp-report` module.
 import '/vendor/tldts/dist/index.umd.min.js';
 
-import tryWTMReportOnMessageHandler from '/vendor/@whotracksme/serp-report/src/background/serp-report.js';
+import {
+  tryWTMReportOnMessageHandler,
+  isDisableWTMReportMessage,
+} from '/vendor/@whotracksme/serp-report/src/background/serp-report.js';
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
 import * as _ from './lodash-debounce.js';
@@ -213,11 +216,21 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return false;
   }
 
-  if (
-    (options.wtmSerpReport ?? true) &&
-    tryWTMReportOnMessageHandler(msg, sender, sendResponse)
-  ) {
-    return false;
+  if (options.wtmSerpReport ?? true) {
+    if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
+      return false;
+    }
+    if (isDisableWTMReportMessage(msg)) {
+      // set false in options
+      options = {
+        ...options,
+        wtmSerpReport: false,
+      };
+
+      chrome.storage.local.set({ options });
+
+      return false;
+    }
   }
 
   adblockerOnMessage(msg, sender, sendResponse);
