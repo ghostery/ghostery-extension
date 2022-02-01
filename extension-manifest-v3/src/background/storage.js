@@ -18,10 +18,10 @@ const storage = new Map();
 export default storage;
 
 const RESOURCES = {
-  bugs: 'rule_resources/bugs.json',
-  categories: 'rule_resources/categories.json',
-  trackers: 'rule_resources/trackers.json',
-  tracker_domains: 'rule_resources/tracker_domains.json',
+  bugs: 'assets/rule_resources/bugs.json',
+  categories: 'assets/rule_resources/categories.json',
+  trackers: 'assets/rule_resources/trackers.json',
+  tracker_domains: 'assets/rule_resources/tracker_domains.json',
 };
 
 async function loadResource(storageKey, filename) {

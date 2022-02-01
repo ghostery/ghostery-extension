@@ -11,9 +11,10 @@
 
 const fs = require('fs');
 const fetch = require('node-fetch');
-const package = require('../package.json');
+const pkg = require('../package.json');
 
-const adblockerVersion = package.dependencies["@cliqz/adblocker"];
+const adblockerVersion = pkg.dependencies['@cliqz/adblocker'];
+const distPath = 'src/assets/adblocker_engines';
 
 (async () => {
   // Ad rules
@@ -24,9 +25,18 @@ const adblockerVersion = package.dependencies["@cliqz/adblocker"];
   ).json();
 
   // Ad Consmetic rules
-  const adConsmeticEngine = Object.values(adList.engines).find(e => e.url.startsWith(`https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`));
-  const adConsmeticRules = await (await fetch(adConsmeticEngine.url)).arrayBuffer();
-  fs.writeFileSync('src/adblocker_engines/dnr-ads-cosmetics.engine.bytes', new Uint8Array(adConsmeticRules));
+  const adConsmeticEngine = Object.values(adList.engines).find((e) =>
+    e.url.startsWith(
+      `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+    ),
+  );
+  const adConsmeticRules = await (
+    await fetch(adConsmeticEngine.url)
+  ).arrayBuffer();
+  fs.writeFileSync(
+    `${distPath}/dnr-ads-cosmetics.engine.bytes`,
+    new Uint8Array(adConsmeticRules),
+  );
 
   // Tracking rules
   const trackingList = await (
@@ -36,11 +46,19 @@ const adblockerVersion = package.dependencies["@cliqz/adblocker"];
   ).json();
 
   // Tracking Consmetic rules
-  const trackingConsmeticEngine = Object.values(trackingList.engines).find(e => e.url.startsWith(`https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`));
+  const trackingConsmeticEngine = Object.values(trackingList.engines).find(
+    (e) =>
+      e.url.startsWith(
+        `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+      ),
+  );
   const trackingConsmeticRules = await (
     await fetch(trackingConsmeticEngine.url)
   ).arrayBuffer();
-  fs.writeFileSync('src/adblocker_engines/dnr-tracking-cosmetics.engine.bytes', new Uint8Array(trackingConsmeticRules));
+  fs.writeFileSync(
+    `${distPath}/dnr-tracking-cosmetics.engine.bytes`,
+    new Uint8Array(trackingConsmeticRules),
+  );
 
   // Annoyances rules
   const annoyancesList = await (
@@ -50,9 +68,17 @@ const adblockerVersion = package.dependencies["@cliqz/adblocker"];
   ).json();
 
   // Tracking Consmetic rules
-  const annoyancesConsmeticEngine = Object.values(annoyancesList.engines).find(e => e.url.startsWith(`https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`));
+  const annoyancesConsmeticEngine = Object.values(annoyancesList.engines).find(
+    (e) =>
+      e.url.startsWith(
+        `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+      ),
+  );
   const annoyancesConsmeticRules = await (
     await fetch(annoyancesConsmeticEngine.url)
   ).arrayBuffer();
-  fs.writeFileSync('src/adblocker_engines/dnr-annoyances-cosmetics.engine.bytes', new Uint8Array(annoyancesConsmeticRules));
+  fs.writeFileSync(
+    `${distPath}/dnr-annoyances-cosmetics.engine.bytes`,
+    new Uint8Array(annoyancesConsmeticRules),
+  );
 })();

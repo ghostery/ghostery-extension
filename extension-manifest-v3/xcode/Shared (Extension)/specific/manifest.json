@@ -8,22 +8,22 @@
   "default_locale": "en",
   "description": "Block Ads, Trackers and Annoyances",
   "icons": {
-    "16": "images/icon16.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
   },
   "browser_action": {
     "default_icon": {
-      "16": "images/icon16.png",
-      "24": "images/icon19.png",
-      "32": "images/icon38.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
+      "16": "assets/images/icon16.png",
+      "24": "assets/images/icon19.png",
+      "32": "assets/images/icon38.png",
+      "48": "assets/images/icon48.png",
+      "128": "assets/images/icon128.png"
     },
     "default_title": "Ghostery",
-    "default_popup": "panel/index.html"
+    "default_popup": "pages/panel/index.html"
   },
-  "options_page": "options/index.html",
+  "options_page": "pages/options/index.html",
   "content_scripts": [
     {
       "matches": ["*://*/*"],
@@ -470,7 +470,7 @@
     "wss://*/*"
   ],
   "background": {
-    "page": "worker/background.html",
+    "page": "background.html",
     "persistent": false
   },
   "declarative_net_request" : {
@@ -478,17 +478,17 @@
       {
         "id": "ads_COMMITHASH",
         "enabled": true,
-        "path": "rule_resources/dnr-safari-ads-network.json"
+        "path": "assets/rule_resources/dnr-safari-ads-network.json"
       },
       {
         "id": "tracking_COMMITHASH",
         "enabled": true,
-        "path": "rule_resources/dnr-safari-tracking-network.json"
+        "path": "assets/rule_resources/dnr-safari-tracking-network.json"
       },
       {
         "id": "annoyances_COMMITHASH",
         "enabled": true,
-        "path": "rule_resources/dnr-safari-annoyances-network.json"
+        "path": "assets/rule_resources/dnr-safari-annoyances-network.json"
       }
     ]
   },

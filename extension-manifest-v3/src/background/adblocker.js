@@ -50,7 +50,7 @@ const adblockerStartupPromise = (async function () {
     Object.keys(adblockerEngines).map(async (engineName) => {
       const response = await fetch(
         chrome.runtime.getURL(
-          `adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`,
+          `assets/adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`,
         ),
       );
       const engineBytes = await response.arrayBuffer();

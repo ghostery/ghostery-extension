@@ -3,10 +3,10 @@ node_modules
 build
 src/_metadata
 src/vendor
-src/rule_resources/*
-!src/rule_resources/.gitkeep
-src/adblocker_engines/*
-!src/adblocker_engines/.gitkeep
+src/assets/rule_resources/*
+!src/assets/rule_resources/.gitkeep
+src/assets/adblocker_engines/*
+!src/assets/adblocker_engines/.gitkeep
 *.xcuserstate
 xcuserdata
 web-ext-artifacts/

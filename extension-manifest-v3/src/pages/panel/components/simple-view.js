@@ -31,7 +31,7 @@ function wtmLink(stats) {
     return placeholder;
   }
   const { domain } = stats;
-  const siteListUrl = chrome.runtime.getURL('rule_resources/sites.json');
+  const siteListUrl = chrome.runtime.getURL('assets/rule_resources/sites.json');
   const url = `https://www.whotracks.me/websites/${domain}.html`;
   const link = html`
     <a href="${url}" target="_blank">
