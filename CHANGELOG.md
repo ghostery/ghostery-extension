@@ -1,3 +1,7 @@
+### GHOSTERY 8.6.2 (February 2, 2022)
+
++  Add disable button on trackers preview iframe (#746) 
+
 ### GHOSTERY 8.6.1 (January 17, 2022)
 
 + Settings: option to disable Trackers Preview on search results (#742) 
