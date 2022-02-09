@@ -9,21 +9,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define } from '/hybrids.js';
+import { html, define, store } from '/hybrids.js';
 import { t, getCategoryName } from '/vendor/@whotracksme/ui/src/i18n.js';
 import {
   chavronDown,
   externalLink,
 } from '/vendor/@whotracksme/ui/src/components/icons.js';
+import Stats from '../store/stats.js';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
 }
 
 define({
-  tag: 'category-with-trackers',
+  tag: 'gh-panel-category-with-trackers',
   category: '',
-  stats: null,
+  stats: store(Stats),
   shouldShowMore: false,
   trackerCounts: ({ stats, category }) => {
     const { trackers } = stats.byCategory[category];
@@ -39,15 +40,13 @@ define({
       .map((tracker) => [tracker, _trackerCounts[tracker]]);
   },
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
-    <main>
+    <main onclick="${toggleShowMore}">
       <category-bullet category=${category} size=${12}></category-bullet>
       <label>${getCategoryName(category)}</label>
       <strong class="count"
         >${stats.byCategory[category].count} ${t('trackers_detected')}</strong
       >
-      <button onclick="${toggleShowMore}" class="${{ more: shouldShowMore }}">
-        ${chavronDown}
-      </button>
+      <button class="${{ more: shouldShowMore }}">${chavronDown}</button>
     </main>
     ${shouldShowMore &&
     html`
@@ -82,6 +81,7 @@ define({
       display: flex;
       flex-direction: row;
       align-items: center;
+      cursor: pointer;
     }
     main button {
       justify-self: flex-end;
@@ -99,9 +99,12 @@ define({
     main button svg {
       height: 18px;
     }
+    main label {
+      cursor: pointer;
+    }
     label {
       margin: 0 7px;
-      font-size: 17px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--black);
     }

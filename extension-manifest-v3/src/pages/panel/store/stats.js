@@ -51,6 +51,11 @@ const Stats = {
         await chrome.tabs.query({ active: true, currentWindow: true })
       )[0];
       const storage = await chrome.storage.local.get(['tabStats:v1']);
+
+      if (!storage['tabStats:v1']) {
+        throw Error('No stats found');
+      }
+
       const tabStats = storage['tabStats:v1'].entries[currentTab.id];
       return tabStats;
     },

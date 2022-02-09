@@ -29,8 +29,8 @@
   "dependencies": {
     "@cliqz/adblocker": "1.22.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@whotracksme/webextension-packages": "^0.1.1",
-    "hybrids": "^6.1.0",
+    "@whotracksme/webextension-packages": "^0.1.2",
+    "hybrids": "^7.0.5",
     "tldts": "^5.7.45"
   },
   "webExt": {

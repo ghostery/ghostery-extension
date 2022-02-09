@@ -9,12 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store, svg } from '/hybrids.js';
+import { html, define, store } from '/hybrids.js';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
-const cirle = svg`<svg width="73" height="72" viewBox="0 0 73 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="36.5003" cy="36.2249" r="30.7273" stroke="currentColor" stroke-width="10" stroke-dasharray="1 3"/>
-</svg>`;
+import Stats from '../store/stats.js';
 
 function getStatsColor(stats) {
   if (stats.loadTime < 100) {
@@ -27,12 +25,27 @@ function getStatsColor(stats) {
 }
 
 define({
-  tag: 'page-load',
-  stats: null,
+  tag: 'gh-panel-page-load',
+  stats: store(Stats),
   render: ({ stats }) => html`
     <div class="info">${t('page_load')}</div>
     <div class="circle">
-      ${cirle}
+      <svg
+        width="73"
+        height="72"
+        viewBox="0 0 73 72"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="36.5003"
+          cy="36.2249"
+          r="30.7273"
+          stroke="currentColor"
+          stroke-width="10"
+          stroke-dasharray="1 3"
+        />
+      </svg>
       <strong>${store.ready(stats) ? Math.round(stats.loadTime) : ''}</strong>
     </div>
     <div></div>
@@ -75,13 +88,13 @@ define({
     }
 
     strong {
-      color: var(--black);
-      font-size: 21px;
-      line-height: 25px;
-      font-weight: 500;
       display: block;
       position: absolute;
       top: calc(50% - 12px);
+      color: var(--black);
+      font-size: 18px;
+      line-height: 25px;
+      font-weight: 600;
       text-align: center;
     }
   `,

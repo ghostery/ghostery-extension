@@ -12,8 +12,10 @@
 import '/vendor/@whotracksme/ui/src/components/category-bullet.js';
 import '/vendor/@whotracksme/ui/src/components/panel-header.js';
 
-import './components/simple-view.js';
-import './components/detailed-view.js';
-import './components/panel-body.js';
-import './components/panel-footer.js';
-import './components/ghostery-panel.js';
+import './components/layout.js';
+
+import './components/page-load.js';
+import './components/toggle-switch.js';
+import './components/category-with-trackers.js';
+
+import './app.js';

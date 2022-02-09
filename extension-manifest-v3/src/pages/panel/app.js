@@ -9,28 +9,34 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store } from '/hybrids.js';
+import { html, define, store, router } from '/hybrids.js';
 import { settingsIcon } from '/vendor/@whotracksme/ui/src/components/icons.js';
 
-import Stats from '../store/stats.js';
-import Settings from '../store/settings.js';
+import Stats from './store/stats.js';
+import Simple from './views/simple.js';
 
 define({
-  tag: 'ghostery-panel',
-  settings: store(Settings),
+  tag: 'gh-panel-app',
   stats: store(Stats),
-  content: ({ stats, settings }) => html`
-    <panel-header domain=${store.ready(stats) ? stats.domain : ''}>
-      <a
-        target="_blank"
-        class="options-link"
-        href=${chrome.runtime.getURL(chrome.runtime.getManifest().options_page)}
+  views: router(Simple),
+  content: ({ stats, views }) => html`
+    <gh-panel-layout>
+      <panel-header
+        slot="header"
+        domain=${store.ready(stats) ? stats.domain : ''}
       >
-        ${settingsIcon}
-      </a>
-    </panel-header>
-    <panel-body stats=${stats} settings=${settings}></panel-body>
-    <panel-footer></panel-footer>
+        <a
+          target="_blank"
+          class="options-link"
+          href=${chrome.runtime.getURL(
+            chrome.runtime.getManifest().options_page,
+          )}
+        >
+          ${settingsIcon}
+        </a>
+      </panel-header>
+      ${views}
+    </gh-panel-layout>
   `.css`
     .options-link {
       display: flex;
@@ -38,9 +44,10 @@ define({
       align-items: center;
       justify-content: center;
     }
+
     .options-link svg {
       height: 16px;
       width: 16px;
     }
-  `,
+   `,
 });

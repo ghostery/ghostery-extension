@@ -9,76 +9,64 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, dispatch, store } from '/hybrids.js';
+import { html, define, store, router } from '/hybrids.js';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 import { chevronLeft } from '/vendor/@whotracksme/ui/src/components/icons.js';
 
-import './detailed-view/category-with-trackers.js';
+import Stats from '../store/stats.js';
 
-function toggleDetailedView(host) {
-  dispatch(host, 'toggle-detailed-view');
-}
-
-define({
-  tag: 'detailed-view',
-  stats: null,
+export default define({
+  tag: 'gh-panel-detailed-view',
+  stats: store(Stats),
   render: ({ stats }) => html`
-    <div class="wrapper">
-      <header>
-        <button onclick="${toggleDetailedView}">
-          ${chevronLeft} ${t('back')}
-        </button>
-        <h1>${t('detailed_view')}</h1>
-        <div></div>
-      </header>
-      <main>
-        <ul>
-          ${store.ready(stats) &&
-          html`
-            ${WTMTrackerWheel.sortCategories(Object.keys(stats.byCategory)).map(
-              (category) => html`
-                <li class="category">
-                  <category-with-trackers
-                    category=${category}
-                    stats=${stats}
-                  ></category-with-trackers>
-                </li>
-              `,
-            )}
-          `}
-        </ul>
-      </main>
-    </div>
+    <header>
+      <a href="${router.backUrl()}"> ${chevronLeft} ${t('back')} </a>
+      <h1>${t('detailed_view')}</h1>
+      <div></div>
+    </header>
+    <ul>
+      ${store.ready(stats) &&
+      html`
+        ${WTMTrackerWheel.sortCategories(Object.keys(stats.byCategory)).map(
+          (category) => html`
+            <li class="category">
+              <gh-panel-category-with-trackers
+                category=${category}
+              ></gh-panel-category-with-trackers>
+            </li>
+          `,
+        )}
+      `}
+    </ul>
   `.css`
-    .wrapper {
+    :host {
       display: flex;
       flex: 1;
       flex-direction: column;
       box-sizing: border-box;
       height: calc(100% + 10px);
     }
-    h1 {
-      color: var(--black);
-    }
+
     header {
       display: flex;
       position: relative;
       margin-bottom: 20px;
-      margin-top: 7px;
+      margin-top: 6px;
       align-items: center;
     }
 
     header h1 {
+      color: var(--black);
       text-align: center;
       font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 16px;
+      white-space: nowrap;
       margin: 0;
       flex: 1;
     }
 
-    header button {
+    header a {
       background: #FFFFFF;
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
       border-radius: 7.4px;
@@ -89,16 +77,12 @@ define({
       color: var(--deep-blue);
       padding: 10px 8px;
       cursor: pointer;
+      text-decoration: none;
     }
 
-    header button svg {
+    header a svg {
       height: 18px;
       margin-left: -6px;
-    }
-
-    main {
-      overflow: scroll;
-      width: 100%;
     }
 
     ul {
