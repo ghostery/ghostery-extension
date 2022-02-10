@@ -597,8 +597,10 @@ class PanelData {
 		}
 
 		if (syncSetDataChanged) {
-			// Push conf changes to the server
-			account.saveUserSettings().catch(err => log('PanelData saveUserSettings', err));
+			// TODO: skip it if the user is not logged in (to avoid errors in the debug logs)
+			account.saveUserSettings().catch((err) => {
+				log('Unable to sync settings (note: this is expected if the user is not logged it)', err);
+			});
 		}
 	}
 
