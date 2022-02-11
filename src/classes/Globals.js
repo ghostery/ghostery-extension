@@ -139,6 +139,7 @@ class Globals {
 			'pornvertising',
 			'site_analytics',
 		];
+		this.DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
 
 		this.SESSION = {
 			paused_blocking: false,
