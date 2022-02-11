@@ -22,6 +22,7 @@ export const HPN_MODULE = IS_ANDROID ? 'hpn-lite' : 'hpnv2';
 // Override the default prefs based on the platform
 CLIQZ.config.default_prefs = {
 	...CLIQZ.config.default_prefs,
+	cliqz_adb_mode: globals.DEFAULT_ADBLOCKER_MODE,
 	// the following are enabled by default on non-android platforms
 	'modules.human-web.enabled': !IS_ANDROID,
 	'modules.hpnv2.enabled': !IS_ANDROID,
