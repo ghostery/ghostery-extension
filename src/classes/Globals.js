@@ -220,6 +220,15 @@ class Globals {
 	}
 
 	/**
+	 * Checks if the current browser is Ghostery
+	 * @return {Promise}
+	 */
+	async isGhosteryBrowser() {
+		await this.BROWSER_INFO_READY;
+		return this.BROWSER_INFO.name.startsWith('ghostery');
+	}
+
+	/**
 	* Check for information about this browser (FF only)
 	* @private
 	* @return {Promise}
