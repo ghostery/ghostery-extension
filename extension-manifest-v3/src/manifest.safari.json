@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
   "author": "Ghostery",
-  "name": "Ghostery - Ad Blocker",
+  "name": "__MSG_name__",
   "short_name": "Ghostery",
   "version": "9.2.0",
   "version_name": "9.2.0",
   "default_locale": "en",
-  "description": "Block Ads, Trackers and Annoyances",
+  "description": "__MSG_short_description__",
   "icons": {
     "16": "assets/images/icon16.png",
     "48": "assets/images/icon48.png",
@@ -29,13 +29,6 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "content_scripts/whotracksme/index.js"
-      ]
-    },
-    {
-      "matches": ["*://*/*"],
-      "run_at": "document_start",
-      "js": [
         "content_scripts/prevent-indexeddb-tracking/index.js"
       ]
     },
@@ -43,7 +36,13 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
+        "content_scripts/whotracksme/index.js"
+      ]
+    },
+    {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
         "content_scripts/cosmetics.js"
       ]
     },
@@ -470,7 +469,7 @@
     "wss://*/*"
   ],
   "background": {
-    "page": "background.html",
+    "page": "background/background.html",
     "persistent": false
   },
   "declarative_net_request" : {
@@ -496,7 +495,7 @@
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
-    "vendor/@whotracksme/serp-report/src/pages/iframe/index.html",
-    "vendor/@whotracksme/ui/src/tracker-wheel.js"
+    "vendor/@whotracksme/ui/src/tracker-wheel.js",
+    "vendor/@whotracksme/serp-report/src/pages/iframe/index.html"
   ]
 }

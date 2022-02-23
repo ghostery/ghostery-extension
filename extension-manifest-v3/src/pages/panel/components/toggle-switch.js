@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store } from '/hybrids.js';
+import { html, define, store } from 'hybrids';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 import Settings, { toggleBlocking } from '../store/settings.js';

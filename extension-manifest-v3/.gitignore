@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 build
+dist
 src/_metadata
 src/vendor
 src/assets/rule_resources/*

@@ -36,7 +36,6 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "vendor/@cliqz/adblocker-webextension-cosmetics/adblocker.umd.min.js",
         "content_scripts/cosmetics.js"
       ]
     },
@@ -238,7 +237,6 @@
         "*://*.google.ng/*"
       ],
       "run_at": "document_start",
-      "all_frames": true,
       "js": [
         "vendor/@whotracksme/prevent-serp-tracking/src/content_scripts/prevent-serp-tracking.js"
       ]

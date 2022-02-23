@@ -8,10 +8,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
-// For now, we need to load "tldts" UMD module to get it in the global scope,
-// especially for the `serp-report` module.
-import '/vendor/tldts/dist/index.umd.min.js';
+import './tldts';
+import { parse } from 'tldts';
 
 import {
   tryWTMReportOnMessageHandler,
@@ -28,9 +26,6 @@ import {
   adblockerOnMessage,
   updateAdblockerEngineStatuses,
 } from './adblocker.js';
-
-// Here we have to load the tldts from the global scope
-const tldts = globalThis.tldts;
 
 function getTrackerFromUrl(url, origin) {
   try {
@@ -49,7 +44,7 @@ function getTrackerFromUrl(url, origin) {
         category: app.cat,
       };
     } else {
-      const { domain } = tldts.parse(url);
+      const { domain } = parse(url);
 
       if (domain === origin) {
         return null;
@@ -130,7 +125,7 @@ function userNavigatedToNewPage({ tabId, frameId, url }) {
   if (frameId !== 0) {
     return;
   }
-  const { domain } = tldts.parse(url);
+  const { domain } = parse(url);
   if (!domain) {
     return;
   }

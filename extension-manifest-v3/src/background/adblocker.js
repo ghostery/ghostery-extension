@@ -9,11 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '/vendor/@cliqz/adblocker/adblocker.umd.min.js';
-const { FiltersEngine } = globalThis.adblocker;
-
-// Here we have to load the tldts from the global scope
-const { parse } = globalThis.tldts;
+import { FiltersEngine } from '@cliqz/adblocker';
+import { parse } from 'tldts';
 
 const adblockerEngines = {
   'ads': {

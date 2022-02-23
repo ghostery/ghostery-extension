@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from '/hybrids.js';
+import { store } from 'hybrids';
 import { rulesetIds, toggles, getRulesetType } from '../utils/rulesets.js';
 
 const Settings = {

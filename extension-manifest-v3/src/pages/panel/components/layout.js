@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define } from '/hybrids.js';
+import { html, define } from 'hybrids';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 export default define({

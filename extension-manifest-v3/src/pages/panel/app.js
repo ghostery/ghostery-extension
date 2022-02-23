@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store, router } from '/hybrids.js';
+import { html, define, store, router } from 'hybrids';
 import { settingsIcon } from '/vendor/@whotracksme/ui/src/components/icons.js';
 
 import Stats from './store/stats.js';
