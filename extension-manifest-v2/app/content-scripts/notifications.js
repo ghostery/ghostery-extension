@@ -704,52 +704,59 @@ const NotificationsContentScript = (function(win, doc) {
 			if (request.source === 'cliqz-content-script') {
 				return false;
 			}
+			try {
+				const alertMessages = [
+					'showUpgradeAlert',
+					'showLibraryUpdateAlert',
+					'showCMPMessage',
+					'showBrowseWindow'
+				];
+				const { name, message } = request;
 
-			const alertMessages = [
-				'showUpgradeAlert',
-				'showLibraryUpdateAlert',
-				'showCMPMessage',
-				'showBrowseWindow'
-			];
-			const { name, message } = request;
+				log('notifications.js received message', name);
 
-			log('notifications.js received message', name);
-
-			if (alertMessages.includes(name)) {
-				if (!CSS_INJECTED) {
-					CSS_INJECTED = true;
-					injectCSS();
+				if (alertMessages.includes(name)) {
+					if (!CSS_INJECTED) {
+						CSS_INJECTED = true;
+						injectCSS();
+					}
 				}
+
+				if (name === 'showCMPMessage') {
+					CMP_DATA = message.data;
+					showAlert('showCMPMessage', {
+						campaign: CMP_DATA
+					});
+					ALERT_SHOWN = true;
+				} else if (name === 'showUpgradeAlert') {
+					NOTIFICATION_TRANSLATIONS = message.translations;
+					showAlert('showUpgradeAlert', message.major_upgrade);
+					ALERT_SHOWN = true;
+				} else if (name === 'showLibraryUpdateAlert') {
+					NOTIFICATION_TRANSLATIONS = message.translations;
+					showAlert('showLibraryUpdateAlert');
+					ALERT_SHOWN = true;
+				// Import/Export related messages
+				} else if (name === 'showBrowseWindow') {
+					showBrowseWindow(message.translations);
+					ALERT_SHOWN = true;
+				} else if (name === 'onFileImported') {
+					updateBrowseWindow(message);
+				} else if (name === 'exportFile') {
+					const { content, type } = message;
+					exportFile(content, type);
+				} else {
+					log('Unexpected message type (not handled):', request.name);
+					return false;
+				}
+			} catch (e) {
+				log('Failed to handle message from request:', request.name, e);
+				return false;
 			}
 
-			if (name === 'showCMPMessage') {
-				CMP_DATA = message.data;
-				showAlert('showCMPMessage', {
-					campaign: CMP_DATA
-				});
-				ALERT_SHOWN = true;
-			} else if (name === 'showUpgradeAlert') {
-				NOTIFICATION_TRANSLATIONS = message.translations;
-				showAlert('showUpgradeAlert', message.major_upgrade);
-				ALERT_SHOWN = true;
-			} else if (name === 'showLibraryUpdateAlert') {
-				NOTIFICATION_TRANSLATIONS = message.translations;
-				showAlert('showLibraryUpdateAlert');
-				ALERT_SHOWN = true;
-			// Import/Export related messages
-			} else if (name === 'showBrowseWindow') {
-				showBrowseWindow(message.translations);
-				ALERT_SHOWN = true;
-			} else if (name === 'onFileImported') {
-				updateBrowseWindow(message);
-			} else if (name === 'exportFile') {
-				const { content, type } = message;
-				exportFile(content, type);
-			}
-
-			// trigger a response callback to src/background so that we can handle errors properly
+			// message was successfully handled
 			sendResponse();
-			return true;
+			return undefined;
 		});
 	};
 

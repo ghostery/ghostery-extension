@@ -128,20 +128,18 @@ export function prefsGet(...args) {
  * @return {Promise} 		prefs object which has been set, or error
  */
 export function prefsSet(prefs) {
+	if (prefs === undefined || prefs === null) {
+		throw new Error('Bad argument');
+	}
 	return new Promise(((resolve, reject) => {
-		if (typeof prefs !== 'undefined') {
-			chrome.storage.local.set(prefs, () => {
-				if (chrome.runtime.lastError) {
-					log('prefsSet ERROR', chrome.runtime.lastError);
-					reject(new Error(chrome.runtime.lastError));
-				} else {
-					resolve(prefs);
-				}
-			});
-		} else {
-			log('prefsSet ERROR', chrome.runtime.lastError);
-			reject(new Error(chrome.runtime.lastError));
-		}
+		chrome.storage.local.set(prefs, () => {
+			if (chrome.runtime.lastError) {
+				alwaysLog('prefsSet ERROR', chrome.runtime.lastError);
+				reject(new Error(chrome.runtime.lastError));
+			} else {
+				resolve(prefs);
+			}
+		});
 	}));
 }
 
@@ -157,13 +155,9 @@ export function prefsSet(prefs) {
  */
 export function pref(key, value) {
 	if (typeof value === 'undefined') {
-		// call getter
 		return prefsGet(key);
 	}
-	// convert params to object and call setter
-	const valueObj = {};
-	valueObj[key] = value;
-	return prefsSet(valueObj);
+	return prefsSet({ [key]: value });
 }
 
 /**
