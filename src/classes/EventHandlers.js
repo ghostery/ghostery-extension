@@ -154,7 +154,7 @@ class EventHandlers {
 		}
 
 		// show CMP upgrade notifications
-		utils.getActiveTab((tab) => {
+		utils.getActiveTab(async(tab) => {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
 			}
@@ -168,6 +168,8 @@ class EventHandlers {
 				'notification_upgrade_v8',
 				'notification_upgrade_link_v8'
 			];
+
+			const isGhosteryBrowser = await globals.isGhosteryBrowser();
 
 			if (cmp.CMP_DATA.length !== 0 && conf.show_cmp) {
 				utils.injectNotifications(tab.id).then((result) => {
@@ -183,7 +185,7 @@ class EventHandlers {
 						});
 					}
 				});
-			} else if (globals.JUST_UPGRADED && !globals.HOTFIX && !globals.upgrade_alert_shown && conf.notify_upgrade_updates) {
+			} else if (!isGhosteryBrowser && globals.JUST_UPGRADED && !globals.HOTFIX && !globals.upgrade_alert_shown && conf.notify_upgrade_updates) {
 				utils.injectNotifications(tab.id).then((result) => {
 					if (result) {
 						utils.sendMessage(
