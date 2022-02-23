@@ -63,7 +63,7 @@ window.ghostery = ghosteryDebugger;
 // class instantiation
 const events = new Events();
 // function shortcuts
-const { log } = common;
+const { log, alwaysLog } = common;
 const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
@@ -1420,8 +1420,7 @@ function initializeVersioning() {
 		log('NEW INSTALL');
 		conf.previous_version = globals.EXTENSION_VERSION;
 
-		const version_history = [];
-		version_history.push(globals.EXTENSION_VERSION);
+		const version_history = [globals.EXTENSION_VERSION];
 		conf.version_history = version_history;
 
 		// if we get nothing back, then this is a fresh install
@@ -1435,7 +1434,12 @@ function initializeVersioning() {
 		if (globals.JUST_UPGRADED) {
 			log('THIS IS AN UPGRADE');
 			conf.previous_version = globals.EXTENSION_VERSION;
+
+			// Establish version history
 			const { version_history } = conf;
+			version_history.push(globals.EXTENSION_VERSION);
+			conf.version_history = version_history;
+
 			const versions = [...version_history].sort(utils.semverCompare);
 			const prevVersion = PREVIOUS_EXTENSION_VERSION.split('.');
 			const currentVersion = globals.EXTENSION_VERSION.split('.');
@@ -1457,10 +1461,6 @@ function initializeVersioning() {
 			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
 			}
-
-			// Establish version history
-			version_history.push(globals.EXTENSION_VERSION);
-			conf.version_history = version_history;
 		} else {
 			log('SAME VERSION OR NOT THE FIRST RUN');
 		}
@@ -1651,49 +1651,112 @@ async function initializeSearchMessageHandler() {
 }
 
 /**
+ * Old profiles may have leftovers created by code that no longer exists.
+ */
+function purgeObsoleteData() {
+	// Note: Afters some releases, it should be safe to remove this code again
+	// (e.g. if you see the code in 2024, it should be safe to remove it).
+	const obsoleteKeys = [
+		'storedOffers',
+		'hpn:localTemporalUniq',
+		'resource-loader:cliqz:hpn:routeTable.json',
+		'resource-loader:cliqz:hpn:sourcemap.json',
+		'hpn:userKey',
+		'resource-loader:cliqz:hpn:proxylist.json',
+		'cta_status',
+		'dbName',
+		'abtests',
+		'db_last_updated',
+		'evidon_bugs_last_checked',
+		'plus_promo_modal_last_seen',
+		'premium_promo_modal_last_seen',
+		'hub_promo_variant',
+		'ghostrank',
+		'enable_offers',
+		'fromSettings',
+		'ghostrank_dismissed',
+		'totalOffersSeen',
+		'unreadOfferIds',
+
+		// former locally cached images:
+		'ghosty_blocked_data',
+		'ghosty_blocked_big_data',
+		'ghostery_vkontakte_data',
+		'ghostery_twitter_data',
+		'ghostery_tumblr_data',
+		'ghostery_stumble_data',
+		'ghostery_plus_data',
+		'ghostery_pinterest_data',
+		'ghostery_linkedin_data',
+		'ghostery_hubspot_data',
+		'ghostery_facebook_data',
+		'allow_unblock_data',
+	];
+
+	log('Purging obsolete keys');
+	return new Promise((resolve, reject) => {
+		chrome.storage.local.remove(obsoleteKeys, () => {
+			if (chrome.runtime.lastError) {
+				reject(chrome.runtime.lastError);
+				return;
+			}
+			resolve();
+		});
+	}).catch((err) => {
+		alwaysLog('Unable to clean up old keys.', err);
+	});
+}
+
+/**
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
  * @memberOf Background
  */
-function init() {
-	return confData.init().then(() => {
+async function init() {
+	try {
+		await confData.init();
+
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		initializeSearchMessageHandler();
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			account.migrate()
-				.then(() => {
-					if (conf.account !== null) {
-						ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
-						return account.getUser()
-							.then(account.getUserSettings)
-							.then(() => {
-								if (conf.current_theme !== 'default') {
-									return account.getTheme(conf.current_theme);
-								}
-								return false;
-							});
-					}
-					ghosteryDebugger.addAccountEvent('app started', 'not signed in');
-					if (globals.JUST_INSTALLED) {
-						setGhosteryDefaultBlocking();
-					}
-					return true;
-				})
-				.catch(err => log(err));
-			// persist Conf properties to storage only after init has completed
-			common.prefsSet(globals.initProps);
-			globals.INIT_COMPLETE = true;
-			if (IS_CLIQZ) {
-				importCliqzSettings(cliqz, conf);
+		if (globals.JUST_UPGRADED) {
+			await purgeObsoleteData();
+		}
+
+		await initializeSearchMessageHandler();
+		await metrics.init(globals.JUST_INSTALLED);
+		await initializeGhosteryModules();
+
+		try {
+			await account.migrate();
+			if (conf.account !== null) {
+				ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
+				await account.getUser();
+				await account.getUserSettings();
+				if (conf.current_theme !== 'default') {
+					await account.getTheme(conf.current_theme);
+				}
 			}
-		}));
-	}).catch((err) => {
+			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
+			if (globals.JUST_INSTALLED) {
+				setGhosteryDefaultBlocking();
+			}
+		} catch (err) {
+			log(err);
+		}
+
+		// persist Conf properties to storage only after init has completed
+		await common.prefsSet(globals.initProps);
+
+		globals.INIT_COMPLETE = true;
+		if (IS_CLIQZ) {
+			importCliqzSettings(cliqz, conf);
+		}
+	} catch (err) {
 		log('Error in init()', err);
-		return Promise.reject(err);
-	});
+		throw err;
+	}
 }
 
 // Initialize the application.
