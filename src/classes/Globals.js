@@ -139,6 +139,7 @@ class Globals {
 			'pornvertising',
 			'site_analytics',
 		];
+		this.DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
 
 		this.SESSION = {
 			paused_blocking: false,
@@ -216,6 +217,15 @@ class Globals {
 				}
 			}
 		});
+	}
+
+	/**
+	 * Checks if the current browser is Ghostery
+	 * @return {Promise}
+	 */
+	async isGhosteryBrowser() {
+		await this.BROWSER_INFO_READY;
+		return this.BROWSER_INFO.name.startsWith('ghostery');
 	}
 
 	/**
