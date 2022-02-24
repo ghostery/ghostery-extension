@@ -37,7 +37,8 @@
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
     "@whotracksme/webextension-packages": "^0.1.5",
     "hybrids": "^7.0.5",
-    "tldts": "^5.7.45"
+    "lodash-es": "^4.17.21",
+    "tldts-experimental": "^5.7.66"
   },
   "webExt": {
     "sourceDir": "./dist/"

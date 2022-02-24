@@ -8,16 +8,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { parse } from 'tldts-experimental';
+import { debounce } from 'lodash-es';
+
 import './tldts';
-import { parse } from 'tldts';
 
 import {
   tryWTMReportOnMessageHandler,
   isDisableWTMReportMessage,
 } from '/vendor/@whotracksme/serp-report/src/background/serp-report.js';
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
-
-import * as _ from './lodash-debounce.js';
 
 import storage from './storage.js';
 import isBug from './bugs-matcher.js';
@@ -110,7 +110,7 @@ function resetUpdateIconDebounceMode() {
   }
 
   // effect: refresh 250ms after the last event, but force a refresh every second
-  updateIcon = _.debounce(
+  updateIcon = debounce(
     (...args) => {
       updateIconNow(...args);
     },

@@ -10,7 +10,7 @@
  */
 
 import { FiltersEngine } from '@cliqz/adblocker';
-import { parse } from 'tldts';
+import { parse } from 'tldts-experimental';
 
 const adblockerEngines = {
   'ads': {
