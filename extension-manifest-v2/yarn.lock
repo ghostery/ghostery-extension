@@ -1281,10 +1281,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@whotracksme/webextension-packages@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@whotracksme/webextension-packages/-/webextension-packages-0.1.1.tgz#f54883cce4eeba2202b8b8d3116cf56ca63875ce"
-  integrity sha512-CpBENmNos94KjVCY4CM1pZ4LssRzgfKA3B1/bdEoQTzogj4fqRE3rfLMGr5std46ho0s8xXZf/4cz5ctoDix8w==
+"@whotracksme/webextension-packages@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@whotracksme/webextension-packages/-/webextension-packages-0.2.0.tgz#e601e7497ec9b2fd59dedf8bfdcccb3f7af12b62"
+  integrity sha512-TsIihTmqJSecYPSAlIK52vzPMsk+rKZLeaTNm4Qsp/KibjPwsHFTzVsYSeWulu1wcGC+BjxCXTBLy71SNehyNg==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -4469,10 +4469,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-hybrids@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/hybrids/-/hybrids-6.1.0.tgz#ce349c285aa70726b3283eb9f7e7cae94960c664"
-  integrity sha512-y95TmbRy08XjY95Y2y1ZhNmhq1nmCLH6DM2fg47/FidIkuxK9l6OOnOiUiOBF9jeeO+luR+5oG1S2wddywiGyQ==
+hybrids@^7.0.0:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/hybrids/-/hybrids-7.0.5.tgz#670e1dae92854ff39d18fde9230dda1f1f917301"
+  integrity sha512-uQmRBImwJw8HI55x9R6T3vDKL3FdIm/KKGBfArjd7/rPYLFHpn33XrgBc1bzTZ32yh0jCOZQdzyED5g+2lhf+w==
 
 iconv-lite@0.4, iconv-lite@0.4.24:
   version "0.4.24"
