@@ -78,6 +78,7 @@ const config = {
     },
   ],
   resolve: {
+    preserveSymlinks: true,
     alias: [
       { find: '/hybrids.js', replacement: 'hybrids' },
       { find: '/vendor', replacement: '/src/vendor' },
