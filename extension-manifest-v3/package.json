@@ -35,7 +35,7 @@
   "dependencies": {
     "@cliqz/adblocker": "1.22.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@whotracksme/webextension-packages": "^0.1.5",
+    "@whotracksme/webextension-packages": "^0.2.0",
     "hybrids": "^7.0.5",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
