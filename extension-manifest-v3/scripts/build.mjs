@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 import { build } from 'vite';
 import shelljs from 'shelljs';
@@ -140,11 +140,23 @@ manifest.content_scripts?.forEach(({ js = [], css = [] }) => {
 
 // web-accessible resources
 manifest.web_accessible_resources?.forEach((entry) => {
+  const paths = [];
+
   if (typeof entry === 'string') {
-    source.push(entry);
+    paths.push(entry);
   } else {
-    entry.resources.forEach((src) => source.push(src));
+    entry.resources.forEach((src) => paths.push(src));
   }
+
+  paths.forEach((path) => {
+    if (!path.match(/\.(js|css|html)$/)) {
+      const dir = dirname(path);
+      shelljs.mkdir('-p', resolve(options.outDir, dir));
+      shelljs.cp('', path, resolve(options.outDir, dir));
+    } else {
+      source.push(path);
+    }
+  });
 });
 
 // background
