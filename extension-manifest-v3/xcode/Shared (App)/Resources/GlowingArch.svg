@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="309.242" height="145.701" viewBox="0 0 309.242 145.701">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0" r="0.492" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#00aef0" stop-opacity="0.251"/>
+      <stop offset="0.77" stop-color="#00aef0" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#00aef0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="glowing-arch" transform="translate(-33.352 -393)">
+    <path id="Path_2" data-name="Path 2" d="M221.689,0c50.687.518,118.058,8.063,152.13,19.982,3.729,10.309,2.946,33.6,2.79,51.4-.455,52.2-32.484,71.385-154.92,71.385S67.552,127.686,68.007,71.385c.147-18.241-1.866-40.762,1.5-51.5C131.328,3.091,166.323.518,221.689,0Z" transform="translate(-34.189 395.931)" fill="url(#radial-gradient)"/>
+    <path id="Subtraction_1" data-name="Subtraction 1" d="M846.482,22.97C798.179,10.382,746.876,4,694,4c-52.86,0-104.151,6.379-152.446,18.959a482.927,482.927,0,0,1,73.167-17,530.647,530.647,0,0,1,158.558,0,483.175,483.175,0,0,1,73.2,17.012Z" transform="translate(-506.518 393)" fill="#00aef0"/>
+  </g>
+</svg>

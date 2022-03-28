@@ -1,27 +1,31 @@
 function show(platform, enabled) {
-    document.body.classList.add(`platform-${platform}`);
+  const body = document.body;
 
-    if (typeof enabled === "boolean") {
-        document.body.classList.toggle(`state-on`, enabled);
-        document.body.classList.toggle(`state-off`, !enabled);
-    } else {
-        document.body.classList.remove(`state-on`);
-        document.body.classList.remove(`state-off`);
-    }
+  body.classList.add(`platform-${platform}`);
+
+  if (typeof enabled === 'boolean') {
+    body.classList.toggle('state-on', enabled);
+    body.classList.toggle('state-off', !enabled);
+  } else {
+    body.classList.remove('state-on');
+    body.classList.remove('state-off');
+    body.classList.add('state-unknown');
+  }
 }
 
-document.querySelector('.subscription button').addEventListener('click', function() {
-    webkit.messageHandlers.controller.postMessage("open-subscriptions");
-});
-
-function openPreferences() {
-    webkit.messageHandlers.controller.postMessage("open-preferences");
+function postMessage(name) {
+  webkit.messageHandlers.controller.postMessage(name);
 }
 
-document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
+document
+  .querySelector('#button-subscribe')
+  .addEventListener('click', () => postMessage('open-subscriptions'));
 
-document.querySelector(".help a").addEventListener("click", (ev) => {
-    ev.preventDefault();
-    webkit.messageHandlers.controller.postMessage("open-support");
-    return false;
+document
+  .querySelector('#button-preferences')
+  .addEventListener('click', () => postMessage('open-preferences'));
+
+document.querySelector('#button-help').addEventListener('click', (ev) => {
+  ev.preventDefault();
+  postMessage('open-support');
 });

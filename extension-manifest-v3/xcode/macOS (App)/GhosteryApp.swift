@@ -42,7 +42,7 @@ struct GhosteryApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(openInWebView: openInWebView)
-                .frame(width: 450, height: 550)
+                .frame(width: 400, height: 720)
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.willUpdateNotification), perform: { _ in
                     for window in NSApplication.shared.windows {
                         window.standardWindowButton(.zoomButton)?.isEnabled = false

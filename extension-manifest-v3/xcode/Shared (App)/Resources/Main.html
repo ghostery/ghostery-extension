@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./Style.css" />
+    <script src="./Script.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section>
+        <img class="logo" src="./GhosteryLogo.svg" alt="Ghostery Disabled" />
+        <h1>
+          Privacy Ad Blocker <br />
+          <span class="small">is a Safari Extension</span>
+        </h1>
+      </section>
+
+      <section class="platform-ios">
+        <p>To enable privacy protection, go to:</p>
+        <div id="ios-settings-path">
+          <div><img src="./Settings.svg" alt="Settings" /> Settings</div>
+          <div><img src="./Arrow.svg" alt="Arrow" /></div>
+          <div><img src="./Safari.svg" alt="Safari" /> Safari</div>
+          <div><img src="./Arrow.svg" alt="Arrow" /></div>
+          <div><img src="./Extensions.svg" alt="Extensions" /> Extensions</div>
+        </div>
+      </section>
+
+      <section class="platform-mac state-off">
+        <p>
+          Extension is currently disabled. <br />
+          You can enable it in Safari Preferences.
+        </p>
+        <button id="button-preferences" class="outline">
+          Open Safari Preferences
+        </button>
+      </section>
+
+      <section class="platform-mac state-on" id="protected">
+        <p><img src="./GreenCheck.svg" alt="Green Check" /></p>
+        <p>You are protected</p>
+      </section>
+
+      <section id="enjoying-ghostery">
+        <h2>
+          Enjoying Ghostery? <br />
+          <span class="small">Support what we do</span>
+        </h2>
+        <button id="button-subscribe">Subscribe now</button>
+      </section>
+
+      <section>
+        <h2><span class="small">Need help?</span></h2>
+        <button id="button-help" class="outline">
+          Here is a step-by-step tutorial
+        </button>
+      </section>
+    </main>
+  </body>
+</html>

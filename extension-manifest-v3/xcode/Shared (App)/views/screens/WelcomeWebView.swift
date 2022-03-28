@@ -26,12 +26,12 @@ struct WelcomeWebView {
         let userContentHelper = WebViewUserContentHelper(openInWebView: openInWebView, openSubscriptions: openSubscriptions)
 
         webView.navigationDelegate = navigationHelper
-
         webView.configuration.userContentController.add(userContentHelper, name: "controller")
 
 
         #if os(iOS)
             webView.scrollView.isScrollEnabled = false
+            webView.scrollView.contentInsetAdjustmentBehavior = .never
         #endif
 
 
@@ -51,7 +51,7 @@ class WebViewUserContentHelper: NSObject, WKScriptMessageHandler {
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.body as! String == "open-support") {
-            openInWebView(URL(string: "https://www.ghostery.com/support")!)
+            openInWebView(URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari")!)
         }
 
         if (message.body as! String == "open-subscriptions") {

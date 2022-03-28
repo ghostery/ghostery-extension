@@ -1,115 +1,151 @@
 * {
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-    cursor: default;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  cursor: default;
+  box-sizing: content-box;
 }
 
 :root {
-    color-scheme: dark;
-    --spacing: 5px;
+  color-scheme: dark;
 }
 
-* {
-    box-sizing: content-box;
-}
-
-html {
-    height: 100%;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    margin: 0 10px;
-    height: 100%;
-
-    font: -apple-system-short-body;
-    text-align: center;
-    background-color: #2f3136;
-    color: #dad3d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  font-family: 'Roboto Condensed', -apple-system-short-body, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  background: linear-gradient(162deg, #2f3136 10%, #0d1014 100%);
+  color: white;
 }
 
 body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) {
-    display: none;
+  display: none;
 }
 
-body.platform-ios .platform-mac {
-    display: none;
-}
-
-body.platform-mac .platform-ios {
-    display: none;
-}
-
-body.platform-ios .platform-mac {
-    display: none;
-}
-
-body:not(.state-on, .state-off) :is(.state-on, .state-off) {
-    display: none;
-}
-
-body.state-on :is(.state-off, .state-unknown) {
-    display: none;
-}
-
+body.platform-ios .platform-mac,
+body.platform-mac .platform-ios,
+body:not(.state-on, .state-off) :is(.state-on, .state-off),
+body.state-on :is(.state-off, .state-unknown),
 body.state-off :is(.state-on, .state-unknown) {
-    display: none;
+  display: none;
 }
 
-strong {
-    color: white;
+main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 720px;
+  height: 100%;
 }
 
-img {
-    margin-bottom: 20px;
-}
-
-a {
-    cursor: pointer;
-}
-
+h1,
+h2,
 p {
-    margin: var(--spacing) 0px;
-    padding: 0px;
+  margin: 0 0 8px;
+}
+
+img.logo {
+  padding: 36px 0 22px;
+}
+
+h1 {
+  font-size: 26px;
+  line-height: 24px;
+  font-weight: 300;
+  color: white;
+}
+
+h1 .small {
+  font-size: 18px;
+  font-weight: 400;
+  color: #aaa;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+h2 .small {
+  font-size: 16px;
+  font-weight: 400;
+  color: #aaa;
 }
 
 button {
-    background-color: #00aef0;
-    padding: 16px 29px 14px 29px;
-    border-radius: 30px;
-    font-size: 18px;
-    font-weight: 700;
-    white-space: nowrap;
-    color: #fff;
-    border: 0;
-    display: inline-block;
-    cursor: pointer;
-    line-height: inherit;
-    margin: var(--spacing) 0px;
-    display: block;
+  display: block;
+  margin: 18px auto;
+  padding: 14px 50px;
+  border: none;
+  border-radius: 50px;
+  background-color: #00aef0;
+  color: white;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
-.help a, .help a:visited {
-    color: #00aef0;
-    text-decoration: none;
+button.outline {
+  background: transparent url('./ArrowRight.svg') no-repeat right center;
+  color: #00aef0;
+  font-size: 18px;
+  padding: 2px 30px 2px 0px;
 }
 
-.disabled {
-    color: #cc3333;
-    font-weight: bold;
-    font-style: normal;
+section {
+  padding: 16px 0;
 }
 
-.subscription {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
+section:last-child {
+  padding-bottom: 24px;
 }
 
-.subscription button {
-    text-transform: uppercase;
+#enjoying-ghostery {
+  background: url('./GlowingArch.svg') no-repeat top center;
+  padding-top: 56px;
+}
+
+#ios-settings-path {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-transform: none;
+  font-weight: 300;
+}
+
+#ios-settings-path div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+}
+
+#ios-settings-path div img {
+  padding: 0 8px;
+}
+
+#protected {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+#button-help {
+  margin: -8px auto 20px;
 }

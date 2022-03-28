@@ -60,10 +60,6 @@
 		468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E429F2701F84A008B5792 /* GhosteryApp.swift */; };
 		468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		468E42BB2701F84A008B5792 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 468E427E2701F849008B5792 /* Main.html */; };
-		468E42BC2701F84A008B5792 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 468E427E2701F849008B5792 /* Main.html */; };
-		468E42BD2701F84A008B5792 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 468E42802701F849008B5792 /* Icon.png */; };
-		468E42BE2701F84A008B5792 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 468E42802701F849008B5792 /* Icon.png */; };
 		468E42BF2701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C02701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C12701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
@@ -72,6 +68,24 @@
 		468E42C62701F84A008B5792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468E42842701F84A008B5792 /* Assets.xcassets */; };
 		468E42C72701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
 		468E42C82701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
+		B430752627EB3AEC0042D537 /* GhosteryLogo.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752227EB3AEC0042D537 /* GhosteryLogo.svg */; };
+		B430752727EB3AEC0042D537 /* GhosteryLogo.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752227EB3AEC0042D537 /* GhosteryLogo.svg */; };
+		B430752827EB3AEC0042D537 /* ArrowRight.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752327EB3AEC0042D537 /* ArrowRight.svg */; };
+		B430752927EB3AEC0042D537 /* ArrowRight.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752327EB3AEC0042D537 /* ArrowRight.svg */; };
+		B430752A27EB3AEC0042D537 /* GreenCheck.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752427EB3AEC0042D537 /* GreenCheck.svg */; };
+		B430752B27EB3AEC0042D537 /* GreenCheck.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752427EB3AEC0042D537 /* GreenCheck.svg */; };
+		B430752C27EB3AEC0042D537 /* GlowingArch.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752527EB3AEC0042D537 /* GlowingArch.svg */; };
+		B430752D27EB3AEC0042D537 /* GlowingArch.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752527EB3AEC0042D537 /* GlowingArch.svg */; };
+		B44AE7B327D21E7D00F19705 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B44AE7B227D21E7D00F19705 /* Main.html */; };
+		B44AE7B427D21E7D00F19705 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B44AE7B227D21E7D00F19705 /* Main.html */; };
+		B456D51C27E094E40038964E /* Safari.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51827E094E30038964E /* Safari.svg */; };
+		B456D51D27E094E40038964E /* Safari.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51827E094E30038964E /* Safari.svg */; };
+		B456D51E27E094E40038964E /* Settings.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51927E094E30038964E /* Settings.svg */; };
+		B456D51F27E094E40038964E /* Settings.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51927E094E30038964E /* Settings.svg */; };
+		B456D52027E094E40038964E /* Arrow.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51A27E094E30038964E /* Arrow.svg */; };
+		B456D52127E094E40038964E /* Arrow.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51A27E094E30038964E /* Arrow.svg */; };
+		B456D52227E094E40038964E /* Extensions.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51B27E094E40038964E /* Extensions.svg */; };
+		B456D52327E094E40038964E /* Extensions.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51B27E094E40038964E /* Extensions.svg */; };
 		B469CA8A27BE924D00408C43 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* node_modules */; };
 		B469CA8B27BE924D00408C43 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* node_modules */; };
 		B469CA8C27BE924D00408C43 /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8327BE924D00408C43 /* vendor */; };
@@ -160,8 +174,6 @@
 		465E3597275679900032B8D2 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
 		465E359A275679AC0032B8D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		465E359B27567A000032B8D2 /* StoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConstants.swift; sourceTree = "<group>"; };
-		468E427F2701F849008B5792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
-		468E42802701F849008B5792 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		468E42812701F849008B5792 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
 		468E42822701F849008B5792 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
 		468E42842701F84A008B5792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -178,6 +190,15 @@
 		468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E42B92701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E42BA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
+		B430752227EB3AEC0042D537 /* GhosteryLogo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GhosteryLogo.svg; sourceTree = "<group>"; };
+		B430752327EB3AEC0042D537 /* ArrowRight.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArrowRight.svg; sourceTree = "<group>"; };
+		B430752427EB3AEC0042D537 /* GreenCheck.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenCheck.svg; sourceTree = "<group>"; };
+		B430752527EB3AEC0042D537 /* GlowingArch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GlowingArch.svg; sourceTree = "<group>"; };
+		B44AE7B227D21E7D00F19705 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
+		B456D51827E094E30038964E /* Safari.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Safari.svg; sourceTree = "<group>"; };
+		B456D51927E094E30038964E /* Settings.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.svg; sourceTree = "<group>"; };
+		B456D51A27E094E30038964E /* Arrow.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Arrow.svg; sourceTree = "<group>"; };
+		B456D51B27E094E40038964E /* Extensions.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Extensions.svg; sourceTree = "<group>"; };
 		B469CA8227BE924D00408C43 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = node_modules; path = ../../dist/node_modules; sourceTree = "<group>"; };
 		B469CA8327BE924D00408C43 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = vendor; path = ../../dist/vendor; sourceTree = "<group>"; };
 		B469CA8427BE924D00408C43 /* background */ = {isa = PBXFileReference; lastKnownFileType = folder; name = background; path = ../../dist/background; sourceTree = "<group>"; };
@@ -339,8 +360,15 @@
 		468E427D2701F849008B5792 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				468E427E2701F849008B5792 /* Main.html */,
-				468E42802701F849008B5792 /* Icon.png */,
+				B430752327EB3AEC0042D537 /* ArrowRight.svg */,
+				B430752227EB3AEC0042D537 /* GhosteryLogo.svg */,
+				B430752527EB3AEC0042D537 /* GlowingArch.svg */,
+				B430752427EB3AEC0042D537 /* GreenCheck.svg */,
+				B456D51A27E094E30038964E /* Arrow.svg */,
+				B456D51B27E094E40038964E /* Extensions.svg */,
+				B456D51827E094E30038964E /* Safari.svg */,
+				B456D51927E094E30038964E /* Settings.svg */,
+				B44AE7B227D21E7D00F19705 /* Main.html */,
 				468E42812701F849008B5792 /* Style.css */,
 				468E42822701F849008B5792 /* Script.js */,
 			);
@@ -554,12 +582,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B430752C27EB3AEC0042D537 /* GlowingArch.svg in Resources */,
+				B430752627EB3AEC0042D537 /* GhosteryLogo.svg in Resources */,
 				465E357227564A670032B8D2 /* Products.plist in Resources */,
-				468E42BD2701F84A008B5792 /* Icon.png in Resources */,
 				468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */,
-				468E42BB2701F84A008B5792 /* Main.html in Resources */,
+				B430752A27EB3AEC0042D537 /* GreenCheck.svg in Resources */,
 				468E42C12701F84A008B5792 /* Script.js in Resources */,
+				B456D52027E094E40038964E /* Arrow.svg in Resources */,
 				468E42C52701F84A008B5792 /* Assets.xcassets in Resources */,
+				B44AE7B327D21E7D00F19705 /* Main.html in Resources */,
+				B456D52227E094E40038964E /* Extensions.svg in Resources */,
+				B456D51C27E094E40038964E /* Safari.svg in Resources */,
+				B430752827EB3AEC0042D537 /* ArrowRight.svg in Resources */,
+				B456D51E27E094E40038964E /* Settings.svg in Resources */,
 				468E42BF2701F84A008B5792 /* Style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,12 +603,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				468E42BE2701F84A008B5792 /* Icon.png in Resources */,
+				B430752727EB3AEC0042D537 /* GhosteryLogo.svg in Resources */,
+				B456D52327E094E40038964E /* Extensions.svg in Resources */,
+				B456D51D27E094E40038964E /* Safari.svg in Resources */,
+				B430752B27EB3AEC0042D537 /* GreenCheck.svg in Resources */,
+				B430752D27EB3AEC0042D537 /* GlowingArch.svg in Resources */,
+				B456D52127E094E40038964E /* Arrow.svg in Resources */,
+				B44AE7B427D21E7D00F19705 /* Main.html in Resources */,
+				B456D51F27E094E40038964E /* Settings.svg in Resources */,
 				468E42C02701F84A008B5792 /* Style.css in Resources */,
 				468E42C22701F84A008B5792 /* Script.js in Resources */,
+				B430752927EB3AEC0042D537 /* ArrowRight.svg in Resources */,
 				465E357327564A670032B8D2 /* Products.plist in Resources */,
 				468E42C62701F84A008B5792 /* Assets.xcassets in Resources */,
-				468E42BC2701F84A008B5792 /* Main.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,14 +742,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		468E427E2701F849008B5792 /* Main.html */ = {
-			isa = PBXVariantGroup;
-			children = (
-				468E427F2701F849008B5792 /* Base */,
-			);
-			name = Main.html;
-			sourceTree = "<group>";
-		};
 		468E42922701F84A008B5792 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -907,7 +941,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -944,7 +978,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
