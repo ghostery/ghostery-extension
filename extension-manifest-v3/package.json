@@ -1,11 +1,12 @@
 {
   "name": "@ghostery/dnr-extension",
   "version": "9.2.1",
+  "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
     "preinstall": "rimraf src/vendor src/assets/rule_resources",
     "postinstall": "vendor-copy && npm run download-cosmetics",
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build.js",
     "build.chromium": "npm run build -- --target chromium",
     "build.safari": "npm run build -- --target safari",
     "dev": "npm run build.chromium -- --watch",
@@ -24,16 +25,16 @@
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "node-fetch": "^2.6.5",
-    "prettier": "2.5.1",
+    "node-fetch": "^3.2.3",
+    "prettier": "^2.6.1",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "vendor-copy": "^3.0.1",
     "vite": "^2.8.2",
-    "web-ext": "^6.4.0"
+    "web-ext": "^6.8.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "1.22.7",
+    "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
     "@whotracksme/webextension-packages": "^0.2.0",
     "hybrids": "^7.0.5",

@@ -8,77 +8,79 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { writeFileSync } from 'fs';
+import { readFile } from 'fs/promises';
+import fetch from 'node-fetch';
 
-const fs = require('fs');
-const fetch = require('node-fetch');
-const pkg = require('../package.json');
+const pkg = JSON.parse(
+  await readFile(new URL('../package-lock.json', import.meta.url)),
+);
 
-const adblockerVersion = pkg.dependencies['@cliqz/adblocker'];
+const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version;
 const distPath = 'src/assets/adblocker_engines';
 
-(async () => {
-  // Ad rules
-  const adList = await (
-    await fetch(
-      'https://cdn.cliqz.com/adblocker/configs/dnr-cosmetics-ads/allowed-lists.json',
-    )
-  ).json();
+// Ad rules
+const adList = await fetch(
+  'https://cdn.ghostery.com/adblocker/configs/dnr-cosmetics-ads/allowed-lists.json',
+).then((res) => res.json());
 
-  // Ad Consmetic rules
-  const adConsmeticEngine = Object.values(adList.engines).find((e) =>
+// Ad Cosmetic rules
+
+const adCosmeticEngine = Object.values(adList.engines).find((e) =>
+  e.url.startsWith(
+    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
+  ),
+);
+
+const adCosmeticRules = await fetch(adCosmeticEngine.url).then((res) =>
+  res.arrayBuffer(),
+);
+writeFileSync(
+  `${distPath}/dnr-ads-cosmetics.engine.bytes`,
+  new Uint8Array(adCosmeticRules),
+);
+
+// Tracking rules
+
+const trackingList = await fetch(
+  'https://cdn.ghostery.com/adblocker/configs/dnr-cosmetics-tracking/allowed-lists.json',
+).then((res) => res.json());
+
+// Tracking Consmetic rules
+const trackingConsmeticEngine = Object.values(trackingList.engines).find((e) =>
+  e.url.startsWith(
+    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
+  ),
+);
+
+const trackingCosmeticRules = await (
+  await fetch(trackingConsmeticEngine.url)
+).arrayBuffer();
+writeFileSync(
+  `${distPath}/dnr-tracking-cosmetics.engine.bytes`,
+  new Uint8Array(trackingCosmeticRules),
+);
+
+// Annoyances rules
+
+const annoyancesList = await fetch(
+  'https://cdn.ghostery.com/adblocker/configs/dnr-cosmetics-annoyances/allowed-lists.json',
+).then((res) => res.json());
+
+// Tracking Cosmetic rules
+
+const annoyancesCosmeticEngine = Object.values(annoyancesList.engines).find(
+  (e) =>
     e.url.startsWith(
-      `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
+      `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
     ),
-  );
-  const adConsmeticRules = await (
-    await fetch(adConsmeticEngine.url)
-  ).arrayBuffer();
-  fs.writeFileSync(
-    `${distPath}/dnr-ads-cosmetics.engine.bytes`,
-    new Uint8Array(adConsmeticRules),
-  );
+);
 
-  // Tracking rules
-  const trackingList = await (
-    await fetch(
-      'https://cdn.cliqz.com/adblocker/configs/dnr-cosmetics-tracking/allowed-lists.json',
-    )
-  ).json();
+const annoyancesCosmeticRules = await fetch(annoyancesCosmeticEngine.url).then(
+  (res) => res.arrayBuffer(),
+);
 
-  // Tracking Consmetic rules
-  const trackingConsmeticEngine = Object.values(trackingList.engines).find(
-    (e) =>
-      e.url.startsWith(
-        `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
-      ),
-  );
-  const trackingConsmeticRules = await (
-    await fetch(trackingConsmeticEngine.url)
-  ).arrayBuffer();
-  fs.writeFileSync(
-    `${distPath}/dnr-tracking-cosmetics.engine.bytes`,
-    new Uint8Array(trackingConsmeticRules),
-  );
-
-  // Annoyances rules
-  const annoyancesList = await (
-    await fetch(
-      'https://cdn.cliqz.com/adblocker/configs/dnr-cosmetics-annoyances/allowed-lists.json',
-    )
-  ).json();
-
-  // Tracking Consmetic rules
-  const annoyancesConsmeticEngine = Object.values(annoyancesList.engines).find(
-    (e) =>
-      e.url.startsWith(
-        `https://cdn.cliqz.com/adblocker/engines/${adblockerVersion}`,
-      ),
-  );
-  const annoyancesConsmeticRules = await (
-    await fetch(annoyancesConsmeticEngine.url)
-  ).arrayBuffer();
-  fs.writeFileSync(
-    `${distPath}/dnr-annoyances-cosmetics.engine.bytes`,
-    new Uint8Array(annoyancesConsmeticRules),
-  );
-})();
+writeFileSync(
+  `${distPath}/dnr-annoyances-cosmetics.engine.bytes`,
+  new Uint8Array(annoyancesCosmeticRules),
+);
