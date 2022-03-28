@@ -3,8 +3,6 @@
   "author": "Ghostery",
   "name": "__MSG_name__",
   "short_name": "Ghostery",
-  "version": "9.2.1",
-  "version_name": "9.2.1",
   "default_locale": "en",
   "description": "__MSG_short_description__",
   "icons": {

@@ -21,6 +21,7 @@ const argv = process.argv.slice(2).reduce((acc, arg, index, arr) => {
   return acc;
 }, {});
 
+const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
 const manifest = JSON.parse(
   readFileSync(
     resolve(options.srcDir, `manifest.${argv.target || 'chromium'}.json`),
@@ -109,7 +110,11 @@ options.assets.forEach((path) => {
   );
 });
 
-// Save manifest
+// --- Save manifest ---
+
+// set manifest version from package.json
+manifest.version = pkg.version;
+
 writeFileSync(
   resolve(options.outDir, 'manifest.json'),
   JSON.stringify(manifest, null, 2),

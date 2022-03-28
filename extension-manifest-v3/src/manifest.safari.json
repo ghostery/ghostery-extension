@@ -3,8 +3,6 @@
   "author": "Ghostery",
   "name": "Ghostery",
   "short_name": "Ghostery",
-  "version": "9.2.1",
-  "version_name": "9.2.1",
   "default_locale": "en",
   "description": "Block Ads, Trackers and Annoyances",
   "icons": {
