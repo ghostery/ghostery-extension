@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
-    "preinstall": "rimraf src/vendor src/assets/rule_resources",
-    "postinstall": "vendor-copy && npm run download-cosmetics",
+    "download-dnr-lists": "node scripts/download-dnr-lists.js",
+    "preinstall": "rimraf src/vendor",
+    "postinstall": "vendor-copy && npm run download-cosmetics && npm run download-dnr-lists",
     "build": "node scripts/build.js",
     "build.chromium": "npm run build -- --target chromium",
     "build.safari": "npm run build -- --target safari",
@@ -45,10 +46,6 @@
     "sourceDir": "./dist/"
   },
   "vendorCopy": [
-    {
-      "from": "../ghostery-dnr-lists/build",
-      "to": "src/assets/rule_resources"
-    },
     {
       "from": "node_modules/@whotracksme/webextension-packages/packages",
       "to": "src/vendor/@whotracksme"
