@@ -10,10 +10,10 @@
  */
 
 import { store } from 'hybrids';
-import { rulesetIds, toggles, getRulesetType } from '../utils/rulesets.js';
+import { rulesetIds } from '../utils/rulesets.js';
 
 const Settings = {
-  blockingStatus: toggles.reduce(
+  blockingStatus: rulesetIds.reduce(
     (all, toggle) => ({ ...all, [toggle]: false }),
     {},
   ),
@@ -21,11 +21,9 @@ const Settings = {
     get: async () => {
       const enabledRulesetIds =
         await chrome.declarativeNetRequest.getEnabledRulesets();
-      const enabledRulesetTypes = enabledRulesetIds.map(getRulesetType);
-      const settings = {
-        blockingStatus: {},
-      };
-      enabledRulesetTypes.forEach((type) => {
+      const settings = { blockingStatus: {} };
+
+      enabledRulesetIds.forEach((type) => {
         settings.blockingStatus[type] = true;
       });
       return settings;
@@ -34,16 +32,15 @@ const Settings = {
   },
 };
 
-export async function toggleBlocking(type) {
+export async function toggleBlocking(rulesetId) {
   const settings = store.get(Settings);
-  const rulesetId = rulesetIds.find((r) => r.startsWith(type));
-  const currentStatus = settings.blockingStatus[type];
+  const currentStatus = settings.blockingStatus[rulesetId];
 
   store.set(Settings, {
     ...settings,
     blockingStatus: {
       ...settings.blockingStatus,
-      [type]: !currentStatus,
+      [rulesetId]: !currentStatus,
     },
   });
 

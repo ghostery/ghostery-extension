@@ -18,39 +18,13 @@ import {
   chevronRight,
 } from '/vendor/@whotracksme/ui/src/components/icons.js';
 
-import { toggles } from '../utils/rulesets.js';
+import { rulesetIds } from '../utils/rulesets.js';
+import sites from '../../../rule_resources/sites.json';
 
 import Stats from '../store/stats.js';
 import Settings from '../store/settings.js';
 
 import Detailed from './detailed.js';
-
-function wtmLink(stats) {
-  const placeholder = html`<span></span>`;
-  if (!store.ready(stats)) {
-    return placeholder;
-  }
-  const { domain } = stats;
-  const siteListUrl = chrome.runtime.getURL('assets/rule_resources/sites.json');
-  const url = `https://www.whotracks.me/websites/${domain}.html`;
-  const link = html`
-    <a href="${url}" target="_blank">
-      ${t('statistical_report')} ${externalLink}
-    </a>
-  `;
-
-  const promise = fetch(siteListUrl)
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.indexOf(domain) > -1) {
-        return link;
-      }
-      throw Error('No domain entry found');
-    })
-    .catch(() => placeholder);
-
-  return html.resolve(promise, placeholder);
-}
 
 export default define({
   [router.connect]: { stack: [Detailed] },
@@ -62,7 +36,7 @@ export default define({
 
     <section class="toggles">
       ${store.ready(settings) &&
-      toggles.map(
+      rulesetIds.map(
         (toggle) =>
           html`<gh-panel-toggle-switch
             toggle=${toggle}
@@ -74,7 +48,18 @@ export default define({
     html` <wtm-stats categories=${stats.categories}></wtm-stats> `}
 
     <section class="buttons">
-      <span> ${wtmLink(stats)} </span>
+      <span>
+        ${store.ready(stats) &&
+        sites.indexOf(stats.domain) > -1 &&
+        html`
+          <a
+            href="https://www.whotracks.me/websites/${stats.domain}.html"
+            target="_blank"
+          >
+            ${t('statistical_report')} ${externalLink}
+          </a>
+        `}
+      </span>
       <a href="${router.url(Detailed)}">
         ${t('detailed_view')} ${chevronRight}
       </a>

@@ -164,6 +164,15 @@ manifest.web_accessible_resources?.forEach((entry) => {
   });
 });
 
+// declarative net request
+if (manifest.declarative_net_request?.rule_resources) {
+  manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
+    const dir = dirname(path);
+    shelljs.mkdir('-p', resolve(options.outDir, dir));
+    shelljs.cp(resolve(options.srcDir, path), resolve(options.outDir, dir));
+  });
+}
+
 // background
 if (manifest.background) {
   source.push(manifest.background.service_worker || manifest.background.page);

@@ -473,19 +473,19 @@
   "declarative_net_request" : {
     "rule_resources" : [
       {
-        "id": "ads_COMMITHASH",
+        "id": "ads",
         "enabled": true,
-        "path": "assets/rule_resources/dnr-safari-ads-network.json"
+        "path": "rule_resources/dnr-safari-ads-network.json"
       },
       {
-        "id": "tracking_COMMITHASH",
+        "id": "tracking",
         "enabled": true,
-        "path": "assets/rule_resources/dnr-safari-tracking-network.json"
+        "path": "rule_resources/dnr-safari-tracking-network.json"
       },
       {
-        "id": "annoyances_COMMITHASH",
+        "id": "annoyances",
         "enabled": true,
-        "path": "assets/rule_resources/dnr-safari-annoyances-network.json"
+        "path": "rule_resources/dnr-safari-annoyances-network.json"
       }
     ]
   },

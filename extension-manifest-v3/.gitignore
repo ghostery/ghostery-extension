@@ -5,8 +5,7 @@ tmp
 dist
 src/_metadata
 src/vendor
-src/assets/rule_resources/*
-!src/assets/rule_resources/.gitkeep
+src/rule_resources
 src/assets/adblocker_engines/*
 !src/assets/adblocker_engines/.gitkeep
 *.xcuserstate

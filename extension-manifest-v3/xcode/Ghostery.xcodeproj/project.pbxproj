@@ -102,6 +102,8 @@
 		B469CA9727BE924D00408C43 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8827BE924D00408C43 /* _locales */; };
 		B469CA9B27BE949000408C43 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B469CA9A27BE949000408C43 /* manifest.json */; };
 		B469CA9C27BE949000408C43 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B469CA9A27BE949000408C43 /* manifest.json */; };
+		B4FFD50227F73B830041049C /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = B4FFD50127F73B820041049C /* rule_resources */; };
+		B4FFD50327F73B830041049C /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = B4FFD50127F73B820041049C /* rule_resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +209,7 @@
 		B469CA8727BE924D00408C43 /* pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pages; path = ../../dist/pages; sourceTree = "<group>"; };
 		B469CA8827BE924D00408C43 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../dist/_locales; sourceTree = "<group>"; };
 		B469CA9A27BE949000408C43 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = ../../dist/manifest.json; sourceTree = "<group>"; };
+		B4FFD50127F73B820041049C /* rule_resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rule_resources; path = ../../dist/rule_resources; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,6 +438,7 @@
 		468E42D92701F84A008B5792 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				B4FFD50127F73B820041049C /* rule_resources */,
 				B469CA9A27BE949000408C43 /* manifest.json */,
 				B469CA8827BE924D00408C43 /* _locales */,
 				B469CA8527BE924D00408C43 /* assets */,
@@ -626,6 +630,7 @@
 				B469CA9027BE924D00408C43 /* assets in Resources */,
 				B469CA9427BE924D00408C43 /* pages in Resources */,
 				B469CA9627BE924D00408C43 /* _locales in Resources */,
+				B4FFD50227F73B830041049C /* rule_resources in Resources */,
 				B469CA8C27BE924D00408C43 /* vendor in Resources */,
 				B469CA9B27BE949000408C43 /* manifest.json in Resources */,
 				B469CA8A27BE924D00408C43 /* node_modules in Resources */,
@@ -641,6 +646,7 @@
 				B469CA9127BE924D00408C43 /* assets in Resources */,
 				B469CA9527BE924D00408C43 /* pages in Resources */,
 				B469CA9727BE924D00408C43 /* _locales in Resources */,
+				B4FFD50327F73B830041049C /* rule_resources in Resources */,
 				B469CA8D27BE924D00408C43 /* vendor in Resources */,
 				B469CA9C27BE949000408C43 /* manifest.json in Resources */,
 				B469CA8B27BE924D00408C43 /* node_modules in Resources */,

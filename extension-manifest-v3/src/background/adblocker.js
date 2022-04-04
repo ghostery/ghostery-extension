@@ -27,18 +27,12 @@ const adblockerEngines = {
   },
 };
 
-// TODO: share with frontend
-function getRulesetType(rulesetId) {
-  return rulesetId.split('_')[0];
-}
-
 export async function updateAdblockerEngineStatuses() {
   const enabledRulesetIds =
     await chrome.declarativeNetRequest.getEnabledRulesets();
-  const enabledRulesetTypes = enabledRulesetIds.map(getRulesetType);
   Object.keys(adblockerEngines).map((engineName) => {
     adblockerEngines[engineName].isEnabled =
-      enabledRulesetTypes.indexOf(engineName) > -1;
+      enabledRulesetIds.indexOf(engineName) > -1;
   });
 }
 

@@ -3,15 +3,14 @@ import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 
 const REPO_URL = 'git@github.com:ghostery/ghostery-dnr-lists.git';
+const DNR_LIST_DIR = resolve('src/rule_resources');
 
 shelljs.rm('-rf', 'tmp');
-shelljs.rm('-rf', 'src/assets/rule_resources/*.json');
+shelljs.rm('-rf', DNR_LIST_DIR);
+shelljs.mkdir('-p', DNR_LIST_DIR);
 
 function writeJSONPlaceholder(path, content) {
-  writeFileSync(
-    resolve('src/assets/rule_resources/', path),
-    JSON.stringify(content),
-  );
+  writeFileSync(resolve(DNR_LIST_DIR, path), JSON.stringify(content));
 }
 
 try {
@@ -22,7 +21,7 @@ try {
 
   shelljs.exec('cd tmp/dnr-lists && npm ci && npm start');
 
-  shelljs.cp('-R', 'tmp/dnr-lists/build/*.json', 'src/assets/rule_resources/');
+  shelljs.cp('-R', 'tmp/dnr-lists/build/*.json', DNR_LIST_DIR);
 } catch (e) {
   console.log('Generating placeholder DNR lists');
 
