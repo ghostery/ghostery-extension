@@ -27,6 +27,8 @@ import {
   updateAdblockerEngineStatuses,
 } from './adblocker.js';
 
+import './stats.js';
+
 function getTrackerFromUrl(url, origin) {
   try {
     const bugId = isBug(url);

@@ -47,8 +47,12 @@
   },
   "vendorCopy": [
     {
-      "from": "node_modules/@whotracksme/webextension-packages/packages",
-      "to": "src/vendor/@whotracksme"
+      "from": "node_modules/@whotracksme/webextension-packages/packages/serp-report",
+      "to": "src/vendor/@whotracksme/serp-report"
+    },
+    {
+      "from": "node_modules/@whotracksme/webextension-packages/packages/ui",
+      "to": "src/vendor/@whotracksme/ui"
     }
   ]
 }
