@@ -23,14 +23,18 @@ const STORAGE_KEY = 'anonymous-communication-stats';
 const HOUR = 1000 * 60 * 60;
 
 async function send(protocol) {
-  const now = getTrustedUtcTime();
-  const ts = getTimeAsYYYYMMDD(now);
-  const t = getTimeAsYYYYMMDDHH(now);
+  const trustedTime = getTrustedUtcTime();
+  const ts = getTimeAsYYYYMMDD(trustedTime);
+  const t = getTimeAsYYYYMMDDHH(trustedTime);
 
   const data = await chrome.storage.local.get([STORAGE_KEY]);
-  const sentAt = Date.now();
+  const now = Date.now();
 
-  if (data[STORAGE_KEY] && sentAt + HOUR <= data[STORAGE_KEY].sentAt) {
+  const updateSentAt = () =>
+    chrome.storage.local.set({ [STORAGE_KEY]: { sentAt: now } });
+
+  if (!data[STORAGE_KEY] || data[STORAGE_KEY].sentAt + HOUR > now) {
+    await updateSentAt();
     return;
   }
 
@@ -49,7 +53,7 @@ async function send(protocol) {
     payload: { t, ctry },
   });
 
-  await chrome.storage.local.set({ [STORAGE_KEY]: { sentAt } });
+  await updateSentAt();
 }
 
 (async function setupStats() {
@@ -68,7 +72,7 @@ async function send(protocol) {
     send(protocol);
 
     /* Send stats in every hour of activity */
-    setInterval(() => send(protocol), 1000 * 60 * 60);
+    setInterval(() => send(protocol), HOUR);
   } catch (e) {
     console.error(`Failed to send stats: ${e}`);
   }
