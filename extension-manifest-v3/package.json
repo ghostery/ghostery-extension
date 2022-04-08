@@ -1,6 +1,6 @@
 {
   "name": "@ghostery/dnr-extension",
-  "version": "9.3.0",
+  "version": "9.4.0",
   "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",

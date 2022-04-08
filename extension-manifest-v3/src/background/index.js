@@ -11,12 +11,11 @@
 import { parse } from 'tldts-experimental';
 import { debounce } from 'lodash-es';
 
-import './tldts';
-
 import {
   tryWTMReportOnMessageHandler,
   isDisableWTMReportMessage,
-} from '/vendor/@whotracksme/serp-report/src/background/serp-report.js';
+} from '@whotracksme/webextension-packages/packages/serp-report/src/background/serp-report.js';
+
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
 import storage from './storage.js';

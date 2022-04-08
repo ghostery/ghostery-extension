@@ -445,10 +445,10 @@
       ],
       "run_at": "document_end",
       "css": [
-        "vendor/@whotracksme/serp-report/src/content_scripts/serp-report.css"
+        "node_modules/@whotracksme/webextension-packages/packages/serp-report/src/content_scripts/serp-report.css"
       ],
       "js": [
-        "vendor/@whotracksme/serp-report/src/content_scripts/serp-report.js"
+        "node_modules/@whotracksme/webextension-packages/packages/serp-report/src/content_scripts/serp-report.js"
       ]
     }
   ],
