@@ -16,6 +16,8 @@
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
+import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/serp-report/src/background/serp-report';
+
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
@@ -47,11 +49,6 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
-
-// @whotracksme/serp-report
-
-import './whotracksme/globals'; // loads tldts into the global scope
-import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '../vendor/@whotracksme/serp-report/src/background/serp-report';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
