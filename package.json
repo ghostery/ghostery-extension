@@ -63,6 +63,7 @@
     "hybrids": "^7.0.0",
     "jquery": "3.5.0",
     "json-api-normalizer": "^1.0.4",
+    "linkedom": "^0.14.5",
     "moment": "^2.29.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.13.1",
