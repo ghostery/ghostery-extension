@@ -10,6 +10,7 @@
  */
 import { parse } from 'tldts-experimental';
 import { debounce } from 'lodash-es';
+import { store } from 'hybrids';
 
 import {
   tryWTMReportOnMessageHandler,
@@ -18,7 +19,9 @@ import {
 
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
-import storage from './storage.js';
+import Options from '/store/options.js';
+
+import trackers from './trackers.js';
 import isBug from './bugs-matcher.js';
 import tabStats from './tab-stats.js';
 import {
@@ -35,7 +38,7 @@ function getTrackerFromUrl(url, origin) {
     let tracker = null;
 
     if (bugId) {
-      const { bugs, apps } = storage.get('bugs');
+      const { bugs, apps } = trackers.get('bugs');
       const appId = bugs[bugId].aid;
       const app = apps[appId];
       trackerId = app.trackerID;
@@ -51,15 +54,15 @@ function getTrackerFromUrl(url, origin) {
         return null;
       }
 
-      trackerId = storage.get('tracker_domains')[domain];
+      trackerId = trackers.get('tracker_domains')[domain];
     }
 
     if (trackerId) {
-      if (storage.get('trackers')[trackerId]) {
-        tracker = storage.get('trackers')[trackerId];
+      if (trackers.get('trackers')[trackerId]) {
+        tracker = trackers.get('trackers')[trackerId];
       }
       if (!tracker.category && tracker.category_id) {
-        tracker.category = storage.get('categories')[tracker.category_id];
+        tracker.category = trackers.get('categories')[tracker.category_id];
       }
       return tracker;
     }
@@ -69,17 +72,6 @@ function getTrackerFromUrl(url, origin) {
 
   return null;
 }
-
-// Storage "Options" initialization
-
-let options = {};
-
-async function updateOptions() {
-  const storage = await chrome.storage.local.get(['options']);
-  options = storage.options || {};
-}
-
-updateOptions();
 
 // Refreshing the tracker wheel:
 // * Immediately draw it when the first data comes in
@@ -158,11 +150,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   const tabId = sender.tab.id;
 
-  if (msg.action === 'updateOptions') {
-    updateOptions();
-    return false;
-  }
-
   // Workaround for Safari:
   // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
   // with the correct tabId (sometimes it is correct, sometimes it is 0).
@@ -182,6 +169,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     });
     return false;
   }
+
+  const options = store.get(Options);
 
   if (msg.action === 'updateTabStats') {
     const stats = tabStats.get(tabId);
@@ -217,13 +206,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       return false;
     }
     if (isDisableWTMReportMessage(msg)) {
-      // set false in options
-      options = {
-        ...options,
-        wtmSerpReport: false,
-      };
-
-      chrome.storage.local.set({ options });
+      store.set(options, { wtmSerpReport: false });
 
       return false;
     }

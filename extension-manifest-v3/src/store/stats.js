@@ -11,13 +11,18 @@
 
 import { store } from 'hybrids';
 
-import Tracker from './tracker.js';
-
-const Stats = {
+export default {
   domain: '',
   all: 0,
   loadTime: 0,
-  trackers: [Tracker],
+  trackers: [
+    {
+      id: true,
+      name: '',
+      company_id: 'unknown',
+      category: 'unknown',
+    },
+  ],
   byCategory: ({ trackers }) => {
     return trackers.reduce(
       (all, current) => ({
@@ -46,7 +51,7 @@ const Stats = {
     return trackers.map((t) => t.category);
   },
   [store.connect]: {
-    get: async () => {
+    async get() {
       const currentTab = (
         await chrome.tabs.query({ active: true, currentWindow: true })
       )[0];
@@ -61,9 +66,3 @@ const Stats = {
     },
   },
 };
-
-export function reloadStats() {
-  store.clear(Stats);
-}
-
-export default Stats;

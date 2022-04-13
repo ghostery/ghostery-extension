@@ -13,11 +13,11 @@ import categories from '../rule_resources/categories.json';
 import trackers from '../rule_resources/trackers.json';
 import tracker_domains from '../rule_resources/tracker_domains.json';
 
-const storage = new Map();
+const rules = new Map();
 
-storage.set('bugs', bugs);
-storage.set('categories', categories);
-storage.set('trackers', trackers);
-storage.set('tracker_domains', tracker_domains);
+rules.set('bugs', bugs);
+rules.set('categories', categories);
+rules.set('trackers', trackers);
+rules.set('tracker_domains', tracker_domains);
 
-export default storage;
+export default rules;

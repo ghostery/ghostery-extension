@@ -15,13 +15,14 @@ import {
   chavronDown,
   externalLink,
 } from '/vendor/@whotracksme/ui/src/components/icons.js';
-import Stats from '../store/stats.js';
+
+import Stats from '/store/stats.js';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
 }
 
-define({
+export default define({
   tag: 'gh-panel-category-with-trackers',
   category: '',
   stats: store(Stats),

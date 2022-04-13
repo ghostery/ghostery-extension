@@ -9,25 +9,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store } from 'hybrids';
+import { html, define } from 'hybrids';
 import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
-import Stats from '../store/stats.js';
-
-function getStatsColor(stats) {
-  if (stats.loadTime < 100) {
-    return '#779D3E';
-  } else if (stats.loadTime < 500) {
-    return '#BB9556';
-  } else {
-    return '#8D4144';
-  }
-}
-
-define({
+export default define({
   tag: 'gh-panel-page-load',
-  stats: store(Stats),
-  render: ({ stats }) => html`
+  loadTime: {
+    get: (_, val = 0) => val,
+    set: (_, val) => Math.round(val),
+  },
+  color: ({ loadTime }) => {
+    if (loadTime < 100) {
+      return '#779D3E';
+    } else if (loadTime < 500) {
+      return '#BB9556';
+    } else {
+      return '#8D4144';
+    }
+  },
+  render: ({ loadTime, color }) => html`
     <div class="info">${t('page_load')}</div>
     <div class="circle">
       <svg
@@ -46,7 +46,7 @@ define({
           stroke-dasharray="1 3"
         />
       </svg>
-      <strong>${store.ready(stats) ? Math.round(stats.loadTime) : ''}</strong>
+      <strong>${loadTime}</strong>
     </div>
     <div></div>
   `.css`
@@ -73,7 +73,7 @@ define({
     }
 
     .circle {
-      color: ${store.ready(stats) ? getStatsColor(stats) : 'var(--text)'};
+      color: ${loadTime !== 0 ? color : 'var(--text)'};
     }
 
     .circle::after {

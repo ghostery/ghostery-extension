@@ -8,7 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import storage from './storage.js';
+import trackers from './trackers.js';
 
 function processUrl(src) {
   try {
@@ -30,7 +30,7 @@ function processUrl(src) {
  * @return {int|boolean} 		bug id or false
  */
 export default function isBug(src) {
-  const db = storage.get('bugs');
+  const db = trackers.get('bugs');
   const processedSrc = processUrl(src.toLowerCase());
   let found = false;
 
@@ -141,7 +141,7 @@ function matchesHost(root, src_host, src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function matchesPath(src_path) {
-  const paths = storage.get('bugs').patterns.path;
+  const paths = trackers.get('bugs').patterns.path;
 
   // NOTE: we re-add the "/" in order to match patterns that include "/"
   const srcPath = `/${src_path}`;
@@ -165,7 +165,7 @@ function matchesPath(src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function matchesRegex(src) {
-  const regexes = storage.get('bugs').patterns.regex;
+  const regexes = trackers.get('bugs').patterns.regex;
   const bug_ids = Object.keys(regexes);
   for (let i = 0; i < bug_ids.length; i++) {
     const bug_id = bug_ids[i];

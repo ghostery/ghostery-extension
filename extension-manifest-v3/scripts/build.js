@@ -82,7 +82,7 @@ const config = {
     preserveSymlinks: true,
     alias: [
       { find: '/hybrids.js', replacement: 'hybrids' },
-      { find: '/vendor', replacement: '/src/vendor' },
+      { find: '/', replacement: '/src/' },
     ],
   },
   build: {

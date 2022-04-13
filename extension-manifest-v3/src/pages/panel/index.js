@@ -11,11 +11,8 @@
 
 import '/vendor/@whotracksme/ui/src/components/category-bullet.js';
 import '/vendor/@whotracksme/ui/src/components/panel-header.js';
+import '/vendor/@whotracksme/ui/src/components/wtm-stats.js';
 
-import './components/layout.js';
+import '/ui/index.js';
 
-import './components/page-load.js';
-import './components/toggle-switch.js';
-import './components/category-with-trackers.js';
-
-import './app.js';
+import './views/app.js';

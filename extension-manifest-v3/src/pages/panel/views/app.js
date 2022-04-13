@@ -10,12 +10,13 @@
  */
 
 import { html, define, store, router } from 'hybrids';
+
 import { settingsIcon } from '/vendor/@whotracksme/ui/src/components/icons.js';
+import Stats from '/store/stats.js';
 
-import Stats from './store/stats.js';
-import Simple from './views/simple.js';
+import Simple from './simple.js';
 
-define({
+export default define({
   tag: 'gh-panel-app',
   stats: store(Stats),
   views: router(Simple),

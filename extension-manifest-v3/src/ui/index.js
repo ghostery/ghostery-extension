@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export const rulesetIds = chrome.runtime
-  .getManifest()
-  .declarative_net_request.rule_resources.map((r) => r.id);
+import './category-with-trackers.js';
+import './icon.js';
+import './layout.js';
+import './page-load.js';
+import './toggle-switch.js';

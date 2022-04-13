@@ -127,7 +127,8 @@ window.addEventListener('load', () => {
     window.addEventListener('message', (message) => {
       if (
         !message.isTrusted ||
-        !message.data.startsWith('GhosteryTrackingDetection:')
+        !(typeof message.data === 'string') ||
+        message.data.startsWith('GhosteryTrackingDetection:')
       ) {
         return;
       }
