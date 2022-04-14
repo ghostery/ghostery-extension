@@ -465,47 +465,47 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker-content@^1.23.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-1.23.0.tgz#4417a28d6018138956898efa141c9e6f52c9ec34"
-  integrity sha512-X1osDX8pWGE1wGFnJqdY4qnwHI9Kb48Tom8HeZWTYDsf8VN636xUB5e5s4YZCTSfn271tFHYSdXNx3+TZqkkkQ==
+"@cliqz/adblocker-content@^1.23.7":
+  version "1.23.7"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-1.23.7.tgz#21a1035e479d8f4dc4e7ecc2500cf8a4149eaace"
+  integrity sha512-tgCFcWhBty+WI3ObYBLDk56i1G7nScd5TBAOXlQf2EIbVJ+DC+G0YE91YHhQpzfy4ySI/wRGyEHrKzTRgmkuKQ==
   dependencies:
-    "@cliqz/adblocker-extended-selectors" "^1.23.0"
+    "@cliqz/adblocker-extended-selectors" "^1.23.7"
 
-"@cliqz/adblocker-extended-selectors@^1.23.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-extended-selectors/-/adblocker-extended-selectors-1.23.0.tgz#44e54a91ae6f4cbc24f76f5b0ce16ec03851c015"
-  integrity sha512-6Zl/wdGBuRd80ssmThOYS0L9u2t4lZElJXpxRB3Jp7uF6oL4LqSK4OKps4x8BktdQMgej6r5EhCh1avwu/13Bg==
+"@cliqz/adblocker-extended-selectors@^1.23.7":
+  version "1.23.7"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-extended-selectors/-/adblocker-extended-selectors-1.23.7.tgz#4782829c97b7ed229789a14d4e39b2339825077d"
+  integrity sha512-3y1eeHHZS3qvvv3dDZDjVVr6g03GeUBbDExCW/GOiHdo+qKYmM2K40EaLN+Upzc2ppuum9UKvzsHxG8Hs9R/kQ==
 
 "@cliqz/adblocker-webextension-cosmetics@^1.20.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-webextension-cosmetics/-/adblocker-webextension-cosmetics-1.23.0.tgz#6ce5a0ad8596bc4759e9146cec9aee6eb2ba0e66"
-  integrity sha512-bsyhbfoXCaHNYDyEU8b7Q/gHNJF+mkT6v7NKPkqOEfOr0IYdjukuHwEq/X7o9gVusJvvrjOPBsJOFE0Bf635KQ==
+  version "1.23.7"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-webextension-cosmetics/-/adblocker-webextension-cosmetics-1.23.7.tgz#947675b133eae8a82a7a0588cce222a23ecad38b"
+  integrity sha512-+deJAsWnxMvfjAQd4Ik5dR6oXeBQlr10s0RSrJ4q3OAsV4WbryuUFS3NG6A2gSojKpc09JCVNj1E5wikoJmyxw==
   dependencies:
-    "@cliqz/adblocker-content" "^1.23.0"
-    "@cliqz/adblocker-extended-selectors" "^1.23.0"
+    "@cliqz/adblocker-content" "^1.23.7"
+    "@cliqz/adblocker-extended-selectors" "^1.23.7"
 
 "@cliqz/adblocker-webextension@^1.20.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-webextension/-/adblocker-webextension-1.23.0.tgz#7a0d9a28ff64f99cd818609ac7ff7a60ef3c9664"
-  integrity sha512-XmsWAbN6DlRKfrcKtCQlzJZ+K60mE2bpwGctgJcyC3aiHXiW3feb5VBqR92Z3soZHKDvldJ75V/um6Eh1PBS8A==
+  version "1.23.7"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-webextension/-/adblocker-webextension-1.23.7.tgz#5962702bf7a0ca8eb8d8c62327563de794a88554"
+  integrity sha512-GlfO+n/7CYK7z7FqUHZadQNP0pNujBISUkcsFxe5oaVUF/Weuz2ocASa/+bMrAWZVumTjsSc/fpChI1ceS3oHA==
   dependencies:
-    "@cliqz/adblocker" "^1.23.0"
-    "@cliqz/adblocker-content" "^1.23.0"
+    "@cliqz/adblocker" "^1.23.7"
+    "@cliqz/adblocker-content" "^1.23.7"
     tldts-experimental "^5.6.21"
     webextension-polyfill-ts "^0.26.0"
 
-"@cliqz/adblocker@^1.23.0":
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-1.23.0.tgz#a970d1199d36161a6154e27654cd7eb59a10a497"
-  integrity sha512-SRgSqEzFSN99zBeW3Or7ZW1uiIn+O2/Ol6KmZnsTZ/Wrn2RAQsm4wEzxPi6BSC3HpdJh2JdKuAwISavpmhuuvA==
+"@cliqz/adblocker@^1.23.7":
+  version "1.23.7"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-1.23.7.tgz#d439fe8b62d2789c274b5e124cddb930de25f59a"
+  integrity sha512-HUvC7CcmNbcIftcRhFeuQhHSpyNdOVdXazXDL0+avvWR0cxlI9zcC8yHMRKjxeY6nsiOXdyEFby+V5KgJvfwaQ==
   dependencies:
-    "@cliqz/adblocker-content" "^1.23.0"
-    "@cliqz/adblocker-extended-selectors" "^1.23.0"
+    "@cliqz/adblocker-content" "^1.23.7"
+    "@cliqz/adblocker-extended-selectors" "^1.23.7"
     "@remusao/guess-url-type" "^1.1.2"
     "@remusao/small" "^1.1.2"
     "@remusao/smaz" "^1.7.1"
-    "@types/chrome" "^0.0.159"
+    "@types/chrome" "^0.0.180"
     "@types/firefox-webext-browser" "^94.0.0"
     tldts-experimental "^5.6.21"
 
@@ -894,10 +894,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/chrome@^0.0.159":
-  version "0.0.159"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.159.tgz#0c1125fbb6d1fd64713e35de9aafbfd5a1b7a33a"
-  integrity sha512-WZBkNJGAwZuRgv/an94DANdzFtJK0TvlO/evMpJD/TYnkjIxynIAU6RM7M78e8tyig/vD6weQ9T1Ba7v8nYjXQ==
+"@types/chrome@^0.0.180":
+  version "0.0.180"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.180.tgz#b7fb831848f6b6c49abffd85410b73037c02381e"
+  integrity sha512-A/CuuKAaHq2CHEpYBAtl0lp2ib7TTXK7VjJI4q+c+1U/HDvZLJ8IlsdEDzzHdvkNdh36bGONxrMnO9YZrKqbAw==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
@@ -922,9 +922,9 @@
   integrity sha512-BsPXH/irW0ht0Ji6iw/jJaK8Lj3FJemon2gvEqHKpCdDCeemHa+rI3WBGq5z7cDMZgoLjY40oninGxqk+8NzNQ==
 
 "@types/firefox-webext-browser@^94.0.0":
-  version "94.0.0"
-  resolved "https://registry.yarnpkg.com/@types/firefox-webext-browser/-/firefox-webext-browser-94.0.0.tgz#8a470475ab111e47d34e2599034e227feece09f9"
-  integrity sha512-DU6rySaklQlzc3tnVAFNgK2OGkOKCDze8ZlhQFtx+Ag4w2rzgNFoqlwQHrUqUogRJph7Gxf1M8e9n4mlYlragw==
+  version "94.0.1"
+  resolved "https://registry.yarnpkg.com/@types/firefox-webext-browser/-/firefox-webext-browser-94.0.1.tgz#52afb975253dc0fd350d5d58c7fe9fd1a01f64a1"
+  integrity sha512-I6iHRQJSTZ+gYt2IxdH2RRAMvcUyK8v5Ig7fHQR0IwUNYP7hz9+cziBVIKxLCO6XI7fiyRsNOWObfl3/4Js2Lg==
 
 "@types/glob@^7.1.1":
   version "7.2.0"
@@ -5952,9 +5952,9 @@ marked@^2.0.3:
   integrity sha512-/Q+7MGzaETqifOMWYEA7HVMaZb4XbcRfaOzcSsHZEith83KGlvaSG33u0SKu89Mj5h+T8V2hM+8O45Qc5XTgwA==
 
 math-expression-evaluator@^1.3.4:
-  version "1.3.8"
-  resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.3.8.tgz#320da3b2bc1512f4f50fc3020b2b1cd5c8e9d577"
-  integrity sha512-9FbRY3i6U+CbHgrdNbAUaisjWTozkm1ZfupYQJiZ87NtYHk2Zh9DvxMgp/fifxVhqTLpd5fCCLossUbpZxGeKw==
+  version "1.3.14"
+  resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.3.14.tgz#0ebeaccf65fea0f6f5a626f88df41814e5fcd9bf"
+  integrity sha512-M6AMrvq9bO8uL42KvQHPA2/SbAobA0R7gviUmPrcTcGfdwpaLitz4q2Euzx2lP9Oy88vxK3HOrsISgSwKsYS4A==
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -6517,9 +6517,9 @@ node-fetch@2.6.1:
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-fetch@^2.6.1:
-  version "2.6.6"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.6.tgz#1751a7c01834e8e1697758732e9efb6eeadfaf89"
-  integrity sha512-Z8/6vRlTUChSdIgMa51jxQ4lrw/Jy5SOW10ObaA47/RElsAN2c5Pn8bTgFGWn/ibwzXTE8qwr1Yzx28vsecXEA==
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
 
@@ -8868,12 +8868,24 @@ tldts-core@^5.7.74:
   resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-5.7.74.tgz#c80d0b18e8e86a9ffabc94867ab8121244b594c2"
   integrity sha512-NCv3WFmdZucNELOjNN/yVsqJLHVxMPOPKaXMCKswcoJgXr83OKXoUUIEULE+CNmzNBEdoETQ2bpm6dG6AW+Yrw==
 
-tldts-experimental@^5.3.1, tldts-experimental@^5.6.21, tldts-experimental@^5.6.74:
+tldts-core@^5.7.75:
+  version "5.7.75"
+  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-5.7.75.tgz#16d2b996c1911025689cd75b02f83efb77956ac1"
+  integrity sha512-DcRfgDO6HlNf9/2UaV4z/XYD0CmePMMqJbhnEq4ckdSzgZqTpQ5ycz6AR2Iz6udp/vqOzY/PsrELvfmgIXNj6Q==
+
+tldts-experimental@^5.3.1:
   version "5.7.53"
   resolved "https://registry.yarnpkg.com/tldts-experimental/-/tldts-experimental-5.7.53.tgz#7a15bcbd91f9c4194c4f4f4d4021a2c2c5585569"
   integrity sha512-jEELGKfquSKhVk6yo8HCfu9r9csV6qvzlyg5IZarX4gG1WM4XjOnrM+355T9Ub+nOUBG0NyniAzCEUEdASJR2w==
   dependencies:
     tldts-core "^5.7.53"
+
+tldts-experimental@^5.6.21, tldts-experimental@^5.6.74:
+  version "5.7.75"
+  resolved "https://registry.yarnpkg.com/tldts-experimental/-/tldts-experimental-5.7.75.tgz#3962164cd1352866e27cb24af8b8f98f2da387ec"
+  integrity sha512-Mcq7BHWn2do3J3S2NXil1CDV88OeK8feV4dMg57AcXUQVzgAq9csF5A2yCtXUU2hMCAaF0y1orCmqhK09UVoSQ==
+  dependencies:
+    tldts-core "^5.7.75"
 
 tldts-experimental@^5.7.58:
   version "5.7.58"
