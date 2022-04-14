@@ -1,14 +1,12 @@
 {
   "name": "ghostery-extension",
-  "version": "0.0.0",
-  "title": "Ghostery",
+  "private": true,
   "author": {
-    "name": "Ghostery, Inc",
-    "email": "info@ghostery.com",
+    "name": "Ghostery GmbH",
+    "email": "support@ghostery.com",
     "url": "https://www.ghostery.com"
   },
   "license": "MPL-2.0",
-  "main": "webpack.config.js",
   "scripts": {
     "build.dev": "webpack --mode development --display-error-details --progress",
     "build.prod": "webpack --mode production --display-error-details --progress",
