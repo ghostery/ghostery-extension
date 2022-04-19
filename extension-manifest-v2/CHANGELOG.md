@@ -1,3 +1,9 @@
+### GHOSTERY 8.7.0 (April 19, 2022)
+
+* Fixed: Memory leak in Chromium based browsers (#764)
+* Update: adblocker engine update (#765)
+* Improve: registration forms moved to ghostery.com (#769)
+
 ### GHOSTERY 8.6.3 (February 24, 2022)
 
 * Fixed: In a new installation, the AdBlocking engine started with the wrong block mode (#752)
