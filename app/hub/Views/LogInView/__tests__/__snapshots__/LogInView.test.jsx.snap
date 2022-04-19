@@ -91,9 +91,9 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             hub_login_link_dont_have_account
              
             <a
-              aria-current={null}
-              href="/create-account"
-              onClick={[Function]}
+              href="https://signon.ghosterystage.com/register"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               hub_login_link_create_account
             </a>
@@ -216,9 +216,9 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             hub_login_link_dont_have_account
              
             <a
-              aria-current={null}
-              href="/create-account"
-              onClick={[Function]}
+              href="https://signon.ghosterystage.com/register"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               hub_login_link_create_account
             </a>

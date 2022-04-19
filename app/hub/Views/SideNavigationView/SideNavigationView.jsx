@@ -56,7 +56,7 @@ function _renderBottomItem(item, disableNav) {
 		disabled: disableNav,
 	});
 
-	if (item.id === 'email') {
+	if (item.id === 'email' || item.id === 'create-account') {
 		return (
 			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 				<a href={item.href} target="_blank" rel="noopener noreferrer" className={linkClassNames}>
@@ -65,6 +65,7 @@ function _renderBottomItem(item, disableNav) {
 			</div>
 		);
 	}
+
 	if (item.id === 'logout') {
 		return (
 			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">

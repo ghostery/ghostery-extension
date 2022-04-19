@@ -37,6 +37,7 @@ const HomeView = (props) => {
 		sendPing,
 	} = props;
 	const accountHref = globals.ACCOUNT_BASE_URL;
+	const signonHref = globals.SIGNON_BASE_URL;
 
 	let headerInfoText = t('hub_home_header_info');
 	if (BROWSER_INFO.name === 'firefox') {
@@ -114,9 +115,9 @@ const HomeView = (props) => {
 							{email}
 						</a>
 					) : (
-						<NavLink to="/create-account">
+						<a href={`${signonHref}/register`} target="_blank" rel="noopener noreferrer">
 							{t('create_account')}
-						</NavLink>
+						</a>
 					)}
 				</div>
 				<div className="HomeView__onboarding row large-unstack align-center">

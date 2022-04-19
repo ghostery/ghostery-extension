@@ -15,6 +15,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
+import globals from '../../../src/classes/Globals';
 import { validateEmail } from '../utils/utils';
 import { log } from '../../../src/utils/common';
 import history from '../utils/history';
@@ -97,6 +98,7 @@ class Login extends React.Component {
 			email, password, emailError, passwordError, loading
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
+		const signonHref = globals.SIGNON_BASE_URL;
 		return (
 			<div id="signin-panel">
 				<div className="row align-center">
@@ -141,7 +143,9 @@ class Login extends React.Component {
 								<Link to="/forgot-password">{ t('forgot_password') }</Link>
 							</div>
 							<div className="small-6 columns text-center">
-								<Link to="/create-account">{ t('create_account') }</Link>
+								<a href={`${signonHref}/register`} target="_blank" rel="noopener noreferrer">
+									{t('create_account')}
+								</a>
 							</div>
 						</div>
 					</div>

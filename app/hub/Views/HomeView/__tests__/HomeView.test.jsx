@@ -92,8 +92,8 @@ describe('app/hub/Views/HomeView component', () => {
 			component.setProps({ setup_complete: true });
 			expect(component.find('.HomeView__featureButton.hollow').length).toBe(2);
 
-			expect(component.find('.HomeView__subHeader a').length).toBe(0);
-			expect(component.find('.HomeView__subHeader NavLink').length).toBe(1);
+			expect(component.find('.HomeView__subHeader a').length).toBe(1);
+			expect(component.find('.HomeView__subHeader NavLink').length).toBe(0);
 			component.setProps({ email: 'test@example.com' });
 			expect(component.find('.HomeView__subHeader a').length).toBe(1);
 			expect(component.find('.HomeView__subHeader NavLink').length).toBe(0);
