@@ -70,7 +70,7 @@ class SideNavigationViewContainer extends Component {
 			{ id: 'email', href: `${globals.ACCOUNT_BASE_URL}/`, text: user.email },
 			{ id: 'logout', text: t('sign_out'), clickHandler: this._handleLogoutClick },
 		] : [
-			{ id: 'create-account', href: '/create-account', text: t('create_account') },
+			{ id: 'create-account', href: `${globals.SIGNON_BASE_URL}/register`, text: t('create_account') },
 			{
 				id: 'log-id',
 				href: '/log-in',

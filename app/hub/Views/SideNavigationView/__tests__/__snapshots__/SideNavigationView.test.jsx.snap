@@ -138,10 +138,10 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
       className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
     >
       <a
-        aria-current={null}
         className=""
         href="/create-account"
-        onClick={[Function]}
+        rel="noopener noreferrer"
+        target="_blank"
       >
         <p
           className="SideNavigation__bottomText"
@@ -318,10 +318,10 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
       className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
     >
       <a
-        aria-current={null}
         className="disabled"
         href="/create-account"
-        onClick={[Function]}
+        rel="noopener noreferrer"
+        target="_blank"
       >
         <p
           className="SideNavigation__bottomText"

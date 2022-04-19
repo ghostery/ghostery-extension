@@ -54,6 +54,7 @@ class Globals {
 		this.GHOSTERY_BASE_URL = `https://${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.ACCOUNT_BASE_URL = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.CHECKOUT_BASE_URL = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.SIGNON_BASE_URL = `https://signon.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.GLOWSTERY_ROOT_DOMAIN = `${this.DEBUG ? 'staging.glowstery' : 'glowstery'}.com`;
 		this.GLOWSTERY_BASE_URL = `https://${this.GLOWSTERY_ROOT_DOMAIN}`;
 		this.METRICS_BASE_URL = `https://${this.DEBUG ? 'staging-d' : 'd'}.ghostery.com`;

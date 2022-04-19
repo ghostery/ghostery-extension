@@ -71,9 +71,9 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         hub_home_subheader_optimize
       </div>
       <a
-        aria-current={null}
-        href="/create-account"
-        onClick={[Function]}
+        href="https://signon.ghosterystage.com/register"
+        rel="noopener noreferrer"
+        target="_blank"
       >
         create_account
       </a>
