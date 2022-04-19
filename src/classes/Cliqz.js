@@ -1,5 +1,5 @@
 /**
- * Cliqz Import Class
+ * Ghostery Common Import Class
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -12,8 +12,14 @@
  */
 
 /*  @memberOf  BackgroundClasses */
+import { parseHtml } from 'ghostery-common/build/gbe/human-web/html-helpers';
 import CLIQZ from 'ghostery-common';
+import { DOMParser } from 'linkedom';
 import globals from './Globals';
+
+if (!navigator.userAgent.includes('Firefox')) {
+	parseHtml.domParser = new DOMParser();
+}
 
 const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
 export const HUMANWEB_MODULE = IS_ANDROID ? 'human-web-lite' : 'human-web';

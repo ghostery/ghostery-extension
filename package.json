@@ -1,14 +1,12 @@
 {
   "name": "ghostery-extension",
-  "version": "0.0.0",
-  "title": "Ghostery",
+  "private": true,
   "author": {
-    "name": "Ghostery, Inc",
-    "email": "info@ghostery.com",
+    "name": "Ghostery GmbH",
+    "email": "support@ghostery.com",
     "url": "https://www.ghostery.com"
   },
   "license": "MPL-2.0",
-  "main": "webpack.config.js",
   "scripts": {
     "build.dev": "webpack --mode development --display-error-details --progress",
     "build.prod": "webpack --mode production --display-error-details --progress",
@@ -56,15 +54,16 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/url-parser": "^1.1.4",
-    "@whotracksme/webextension-packages": "^0.1.0",
+    "@whotracksme/webextension-packages": "^0.2.0",
     "classnames": "^2.2.5",
     "d3": "^5.16.0",
     "foundation-sites": "^6.6.2",
     "ghostery-common": "^1.2.17",
     "history": "^4.10.1",
-    "hybrids": "6.1.0",
+    "hybrids": "^7.0.0",
     "jquery": "3.5.0",
     "json-api-normalizer": "^1.0.4",
+    "linkedom": "^0.14.5",
     "moment": "^2.29.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.13.1",

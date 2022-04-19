@@ -1,3 +1,8 @@
+### GHOSTERY 8.6.3 (February 24, 2022)
+
+* Fixed: In a new installation, the AdBlocking engine started with the wrong block mode (#752)
+* Free up space in chrome.storage.local by deleting obsolete keys (#750)
+
 ### GHOSTERY 8.6.2 (February 2, 2022)
 
 +  Add disable button on trackers preview iframe (#746) 
