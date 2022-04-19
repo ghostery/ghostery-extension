@@ -15,6 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import globals from '../../../../src/classes/Globals';
 
 /**
  * A Functional React component for rendering the Login View
@@ -101,9 +102,9 @@ const LogInView = (props) => {
 							<span className="LogInView__link text-center">
 								{ t('hub_login_link_dont_have_account') }
 								&nbsp;
-								<NavLink to="/create-account">
+								<a href={`${globals.SIGNON_BASE_URL}/register`} target="_blank" rel="noopener noreferrer">
 									{ t('hub_login_link_create_account') }
-								</NavLink>
+								</a>
 							</span>
 						</div>
 						<div className="LogInView--addPaddingTop flex-container align-center">
