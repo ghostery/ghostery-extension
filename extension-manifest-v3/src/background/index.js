@@ -19,7 +19,7 @@ import {
 
 import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
 
-import Options from '/store/options.js';
+import Options, { isUpdateOptionsMessage } from '/store/options.js';
 
 import trackers from './trackers.js';
 import isBug from './bugs-matcher.js';
@@ -132,8 +132,11 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
+// Initialize the value of the options upfront
+store.get(Options);
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === 'dnrUpdate') {
+  if (isUpdateOptionsMessage(msg)) {
     updateAdblockerEngineStatuses();
     return false;
   }
@@ -212,6 +215,5 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
   }
 
-  adblockerOnMessage(msg, sender, sendResponse);
-  return false;
+  return adblockerOnMessage(msg, sender, sendResponse);
 });

@@ -11,28 +11,22 @@
 
 import { FiltersEngine } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
+import { store } from 'hybrids';
+import Options, { DNR_RULES_LIST } from '/store/options.js';
 
-const adblockerEngines = {
-  'ads': {
+const adblockerEngines = DNR_RULES_LIST.reduce((map, name) => {
+  map[name] = {
     engine: null,
     isEnabled: false,
-  },
-  'tracking': {
-    engine: null,
-    isEnabled: false,
-  },
-  'annoyances': {
-    engine: null,
-    isEnabled: false,
-  },
-};
+  };
+  return map;
+}, {});
 
 export async function updateAdblockerEngineStatuses() {
-  const enabledRulesetIds =
-    await chrome.declarativeNetRequest.getEnabledRulesets();
-  Object.keys(adblockerEngines).map((engineName) => {
-    adblockerEngines[engineName].isEnabled =
-      enabledRulesetIds.indexOf(engineName) > -1;
+  const options = await store.resolve(store.get(Options));
+
+  DNR_RULES_LIST.forEach((key) => {
+    adblockerEngines[key].isEnabled = options.dnrRules[key];
   });
 }
 

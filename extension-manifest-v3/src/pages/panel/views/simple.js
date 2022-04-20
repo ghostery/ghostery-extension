@@ -20,14 +20,16 @@ import {
 import sites from '/rule_resources/sites.json';
 
 import Stats from '/store/stats.js';
-import Rulesets, { rulesetIds } from '/store/rulesets.js';
+import Options, { DNR_RULES_LIST } from '/store/options.js';
 
 import Detailed from './detailed.js';
 
 function toggleRuleset(ruleset) {
   return (host) => {
-    store.set(host.rulesets, {
-      [ruleset]: !host.rulesets[ruleset],
+    store.set(host.options, {
+      dnrRules: {
+        [ruleset]: !host.options.dnrRules[ruleset],
+      },
     });
   };
 }
@@ -35,22 +37,21 @@ function toggleRuleset(ruleset) {
 export default define({
   [router.connect]: { stack: [Detailed] },
   tag: 'gh-panel-simple-view',
-  rulesets: store(Rulesets),
+  options: store(Options),
   stats: store(Stats),
-  render: ({ rulesets, stats }) => html`
+  render: ({ options, stats }) => html`
     <h1>${t('privacy_protection')}</h1>
 
     <section class="toggles">
-      ${store.ready(rulesets) &&
-      rulesetIds.map(
+      ${store.ready(options) &&
+      DNR_RULES_LIST.map(
         (ruleset) =>
           html`<gh-panel-toggle-switch
             name="${ruleset}"
-            disabled="${!rulesets[ruleset]}"
+            disabled="${!options.dnrRules[ruleset]}"
             onclick=${toggleRuleset(ruleset)}
           ></gh-panel-toggle-switch>`,
       )}
-      ${store.error(rulesets) && html`<p>${store.error(rulesets)}</p>`}
     </section>
 
     ${store.ready(stats) &&
