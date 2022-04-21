@@ -14,7 +14,6 @@
 import {
 	LOGIN_SUCCESS,
 	LOGOUT_SUCCESS,
-	REGISTER_SUCCESS,
 	GET_USER_SUCCESS,
 	GET_USER_SETTINGS_SUCCESS,
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
@@ -54,7 +53,6 @@ export default (state = initialState, action) => {
 				subscriptionData
 			};
 		}
-		case REGISTER_SUCCESS:
 		case LOGIN_SUCCESS: {
 			return { ...state, loggedIn: true };
 		}
