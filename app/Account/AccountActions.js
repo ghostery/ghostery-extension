@@ -14,8 +14,6 @@
 import { sendMessageInPromise } from '../panel/utils/msg';
 import { log } from '../../src/utils/common';
 import {
-	REGISTER_SUCCESS,
-	REGISTER_FAIL,
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
@@ -121,35 +119,6 @@ export const login = (email, password) => dispatch => (
 			});
 			return false;
 		})
-);
-
-export const register = (email, confirmEmail, firstName, lastName, password) => dispatch => (
-	sendMessageInPromise('account.register', {
-		email, confirmEmail, firstName, lastName, password
-	}).then((res) => {
-		const { errors } = res;
-		if (errors) {
-			dispatch({
-				type: REGISTER_FAIL,
-				payload: { errors },
-			});
-			return false;
-		}
-		dispatch({
-			type: REGISTER_SUCCESS,
-			payload: { email },
-		});
-		return true;
-	}).catch((err) => {
-		const errors = [{ title: err.toString(), detail: err.toString() }];
-		dispatch({
-			type: REGISTER_FAIL,
-			payload: {
-				errors,
-			},
-		});
-		return false;
-	})
 );
 
 export const logout = () => dispatch => (
