@@ -27,7 +27,6 @@ import SetupView from './Views/SetupView';
 import TutorialView from './Views/TutorialView';
 import PlusView from './Views/PlusView';
 import ProductsView from './Views/ProductsView';
-import CreateAccountView from './Views/CreateAccountView';
 import ForgotPasswordView from '../shared-components/ForgotPassword/ForgotPasswordContainer';
 import LogInView from './Views/LogInView';
 import UpgradePlanView from './Views/UpgradePlanView';
@@ -49,7 +48,6 @@ const Hub = () => (
 		<Route path="/tutorial" component={TutorialView} />
 		<Route exact path="/plus" component={PlusView} />
 		<Route exact path="/products" component={ProductsView} />
-		<Route exact path="/create-account" component={CreateAccountView} />
 		<Route exact path="/forgot-password" render={() => <ForgotPasswordView hub />} />
 		<Route exact path="/log-in" component={LogInView} />
 	</AppView>

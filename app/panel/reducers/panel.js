@@ -27,8 +27,6 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
-	REGISTER_SUCCESS,
-	REGISTER_FAIL,
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL
 } from '../../Account/AccountConstants';
@@ -212,43 +210,6 @@ export default (state = initialState, action) => {
 						break;
 					case 'too_many_failed_logins':
 						errorText = t('too_many_failed_logins_text');
-						break;
-					default:
-						errorText = t('server_error_message');
-				}
-			});
-			const notificationAction = {
-				payload: {
-					text: errorText,
-					classes: 'alert',
-					overrideNotificationShown: true,
-				}
-			};
-			const updated = _showNotification(state, notificationAction);
-			return { ...state, ...updated };
-		}
-		case REGISTER_SUCCESS: {
-			const { email } = action.payload;
-			const notificationAction = {
-				payload: {
-					text: t('panel_email_verification_sent', email),
-					classes: 'success',
-					overrideNotificationShown: true,
-				}
-			};
-			const updated = _showNotification(state, notificationAction);
-			return { ...state, ...updated, email };
-		}
-		case REGISTER_FAIL: {
-			const { errors } = action.payload;
-			let errorText = t('server_error_message');
-			errors.forEach((err) => {
-				switch (err.code) {
-					case '10070':
-						errorText = t('email_address_in_use');
-						break;
-					case '10080':
-						errorText = t('your_email_do_not_match');
 						break;
 					default:
 						errorText = t('server_error_message');

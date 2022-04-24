@@ -98,6 +98,7 @@ module.exports = {
 		}),
 		// Create global `t` function for i18n
 		new webpack.DefinePlugin({
+			// eslint-disable-next-line object-shorthand
 			t: function(messageName, substitutions) {
 				return chrome.i18n.getMessage(messageName, substitutions);
 			}
