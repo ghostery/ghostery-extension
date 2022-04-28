@@ -91,7 +91,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             hub_login_link_dont_have_account
              
             <a
-              href="https://signon.ghosterystage.com/register"
+              href="https://signon.ghosterystage.com/register?utm_source=gbe"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -216,7 +216,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             hub_login_link_dont_have_account
              
             <a
-              href="https://signon.ghosterystage.com/register"
+              href="https://signon.ghosterystage.com/register?utm_source=gbe"
               rel="noopener noreferrer"
               target="_blank"
             >

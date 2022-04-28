@@ -115,7 +115,7 @@ const HomeView = (props) => {
 							{email}
 						</a>
 					) : (
-						<a href={`${signonHref}/register`} target="_blank" rel="noopener noreferrer">
+						<a href={`${signonHref}/register?utm_source=gbe`} target="_blank" rel="noopener noreferrer">
 							{t('create_account')}
 						</a>
 					)}
