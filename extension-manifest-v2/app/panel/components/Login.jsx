@@ -143,7 +143,7 @@ class Login extends React.Component {
 								<Link to="/forgot-password">{ t('forgot_password') }</Link>
 							</div>
 							<div className="small-6 columns text-center">
-								<a href={`${signonHref}/register`} target="_blank" rel="noopener noreferrer">
+								<a href={`${signonHref}/register?utm_source=gbe`} target="_blank" rel="noopener noreferrer">
 									{t('create_account')}
 								</a>
 							</div>
