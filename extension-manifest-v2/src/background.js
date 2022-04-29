@@ -46,6 +46,7 @@ import SearchMessager from './classes/SearchMessager';
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
+import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
@@ -1719,6 +1720,7 @@ async function init() {
 		initializeVersioning();
 		if (globals.JUST_UPGRADED) {
 			await purgeObsoleteData();
+			await freeSpaceIfNearQuota({ force: true }); // TODO: consider dropping "force" once all users upgraded
 		}
 
 		await initializeSearchMessageHandler();

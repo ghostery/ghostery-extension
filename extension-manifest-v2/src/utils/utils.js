@@ -822,3 +822,93 @@ export function semverCompare(a, b) {
  * @return {string}         	complete query component
  */
 export const buildQueryPair = (query, value, queryStart = false) => `${queryStart ? '?' : '&'}${query}=${encodeURIComponent(value)}`;
+
+/**
+ * Provides information about the amount of space used in chrome.storage.local.
+ * The result is browser specific: for Chrome-based browsers, it should be accurate,
+ * but for Firefox, it is only an estimation.
+ *
+ * bytesInUse:   the amount of bytes in used (or "undefined")
+ * quotaInBytes: the maximum about of bytes that can be used (or "undefined" if there is no limit)
+ * usage:        an approximation of the percentage of used space (a non-negative number,
+ *               where 1.0 means the extension is hitting the quota)
+ */
+export async function getChromeStorageUsage({ fastChecksOnly = false } = {}) {
+	const bytesInUse = await new Promise((resolve) => {
+		if (chrome.storage.local.getBytesInUse) {
+			chrome.storage.local.getBytesInUse(resolve);
+		} else if (fastChecksOnly) {
+			resolve(undefined);
+		} else {
+			// Note: Firefox does not implement the API
+			// (https://bugzilla.mozilla.org/show_bug.cgi?id=1385832)
+			chrome.storage.local.get((items) => {
+				resolve(JSON.stringify(items).length);
+			});
+		}
+	});
+	const quotaInBytes = chrome.storage.local.QUOTA_BYTES;
+	const chromeDefaultQuota = 5242880; // 5 MB
+	const targetQuotaInBytes = Math.min(quotaInBytes || chromeDefaultQuota, chromeDefaultQuota);
+	const usage = (bytesInUse || 0) / targetQuotaInBytes;
+	return {
+		bytesInUse,
+		quotaInBytes,
+		targetQuotaInBytes,
+		usage
+	};
+}
+
+/**
+ * Run checks to check whether persisting to chrome.storage.local works.
+ * It is intended to detect rare situations where the extension either filled up
+ * all the available space (a bug in the extension) or where the profile is
+ * corrupted (a bug in the browser).
+ *
+ * Hint: exposed in the debug console as "ghostery.checkStorage()" (see ../classes/Debugger.js)
+ */
+export async function runStorageSelfCheck({ timeoutInMs = 10000 } = {}) {
+	const tmpKeyPrefix = 'DELETE-ME:';
+	const selfCheck = async({ index = -1, payloadSize = 100 }) => new Promise((resolve, reject) => {
+		setTimeout(() => reject(new Error('test timed out')), timeoutInMs);
+		setTimeout(() => {
+			const key = `${tmpKeyPrefix}self-check-${index}:${Math.random()}`;
+			const payload = new Array(payloadSize).join('x');
+			const value = `test-value:${Math.random()}:${payload}`;
+			chrome.storage.local.set({ [key]: value }, () => {
+				if (chrome.runtime.lastError) {
+					reject(new Error(`Unable to set key: ${chrome.runtime.lastError}`));
+					return;
+				}
+				chrome.storage.local.get(key, (res) => {
+					if (chrome.runtime.lastError) {
+						reject(new Error(`Unable to get key: ${chrome.runtime.lastError}`));
+						return;
+					}
+					chrome.storage.local.remove(key, () => {
+						if (chrome.runtime.lastError) {
+							reject(new Error(`Unable to remove key: ${chrome.runtime.lastError}`));
+							return;
+						}
+						if (res[key] === value) {
+							resolve();
+						} else {
+							reject(new Error('Got wrong results'));
+						}
+					});
+				});
+			});
+		}, Math.ceil(100 * Math.random()));
+	}).catch(e => `FAILED (${e})`);
+
+	const checks = [];
+	for (let i = 0; i < 100; i += 1) {
+		checks.push(selfCheck({ index: i, payloadSize: 1 + Math.ceil(10000 * Math.random()) }));
+	}
+	const result = await Promise.all(checks);
+	chrome.storage.local.get(null, (res) => {
+		chrome.storage.local.remove(Object.keys(res).filter(x => x.startsWith(tmpKeyPrefix)));
+	});
+	const firstError = result.find(x => x);
+	return { ok: !firstError, message: firstError || 'PASSED' };
+}
