@@ -160,7 +160,3 @@ async function freeSpaceIfNearQuota({ force = false } = {}) {
 		alwaysLog('Unexpected error in freeSpaceIfNearQuota (it is safe to continue)', err);
 	}
 }
-
-// For testing purposes, allow to run it from the console
-// (an extension upgrade would run it with { force: true })
-window.freeSpaceIfNearQuota = freeSpaceIfNearQuota;
