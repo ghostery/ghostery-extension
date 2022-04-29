@@ -115,7 +115,7 @@ async function purgeIfTooMany({ keyPrefix, maxElems }) {
  * try is to run heuristics to recover from emergency situations when there is not enough
  * space left (e.g. by deleting caches).
  */
-async function freeSpaceIfNearQuota({ force = false } = {}) {
+export async function freeSpaceIfNearQuota({ force = false } = {}) {
 	const MB = 1024 * 1024;
 	if (!force) {
 		const { bytesInUse, quotaInBytes, usage } = await getChromeStorageUsage({ fastChecksOnly: true });
