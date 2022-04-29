@@ -12,6 +12,94 @@
 import { log, alwaysLog } from './common';
 import { getChromeStorageUsage } from './utils';
 
+// Chrome has an API to precisely estimate the amount of bytes used by a value
+// in chrome.local.storage. But for our purposes, an approximation is sufficient.
+// So, we can use an implementation that will work on Firefox, too.
+function estimateBytesUsedByValue(value) {
+	if (typeof value === 'string' || value instanceof String) {
+		return value.length;
+	}
+
+	// chrome.storage.local stores JSON representations
+	// (pitfall: JSON.stringify(undefined) === undefined)
+	return JSON.stringify(value || '').length;
+}
+
+function getKey(key) {
+	return new Promise((resolve, reject) => {
+		chrome.storage.local.get(key, (res) => {
+			if (chrome.runtime.lastError) {
+				reject(chrome.runtime.lastError);
+				return;
+			}
+			resolve(res[key]);
+		});
+	});
+}
+
+function getAllKeysWithSize() {
+	return new Promise((resolve, reject) => {
+		chrome.storage.local.get(null, (res) => {
+			if (chrome.runtime.lastError) {
+				reject(chrome.runtime.lastError);
+				return;
+			}
+
+			const result = Object.entries(res).map(([key, val]) => {
+				const bytesUsed = estimateBytesUsedByValue(val);
+				return ({ key, bytesUsed });
+			});
+			resolve(result);
+		});
+	});
+}
+
+async function getKeysByPrefix(keyPrefix) {
+	const mappings = await getAllKeysWithSize();
+	return mappings.filter(entry => entry.key.startsWith(keyPrefix));
+}
+
+async function getKeysBiggerThen(minSize) {
+	const mappings = await getAllKeysWithSize();
+	return mappings.filter(entry => entry.bytesUsed >= minSize);
+}
+
+async function purgeIfTooBig({ key, maxSize }) {
+	try {
+		const value = await getKey(key);
+		if (value) {
+			const usedSize = estimateBytesUsedByValue(value);
+			if (usedSize > maxSize) {
+				alwaysLog(`purge: ${key} takes ${usedSize} bytes, which exceeds the threshold of ${maxSize} bytes`);
+				await new Promise(done => chrome.storage.local.remove(key, done));
+			}
+		}
+	} catch (err) {
+		alwaysLog(`Unexpected error when purging ${key} (it is safe to continue)`, err);
+	}
+}
+
+async function purgeIfTooMany({ keyPrefix, maxElems }) {
+	try {
+		const matches = await getKeysByPrefix(keyPrefix);
+		if (matches.length > maxElems) {
+			const keys = matches.map(({ key }) => key);
+			await new Promise((resolve, reject) => {
+				chrome.storage.local.remove(keys, () => {
+					if (chrome.runtime.lastError) {
+						reject(chrome.runtime.lastError);
+						return;
+					}
+					alwaysLog(`Successfully cleaned up ${keys.length} entries with prefix "${keyPrefix}"`);
+					resolve();
+				});
+			});
+		}
+	} catch (err) {
+		alwaysLog(`Unexpected error when purging ${keyPrefix} prefixes (it is safe to continue)`, err);
+	}
+}
+
 /**
  * chrome.storage.local enforces size limits (5 MB on Chrome). Over the years, there is
  * the risk that the extension exceeds that limit:
@@ -36,91 +124,6 @@ async function freeSpaceIfNearQuota({ force = false } = {}) {
 			return;
 		}
 	}
-
-	// Chrome has an API to precisely estimate the amount of bytes used by a value
-	// in chrome.local.storage. But for our purposes, an approximation is sufficient.
-	// So, we can use an implementation that will work on Firefox, too.
-	const estimateBytesUsedByValue = (value) => {
-		if (typeof value === 'string' || value instanceof String) {
-			return value.length;
-		}
-
-		// chrome.storage.local stores JSON representations
-		// (pitfall: JSON.stringify(undefined) === undefined)
-		return JSON.stringify(value || '').length;
-	};
-
-	const getKey = key => new Promise((resolve, reject) => {
-		chrome.storage.local.get(key, (res) => {
-			if (chrome.runtime.lastError) {
-				reject(chrome.runtime.lastError);
-				return;
-			}
-			resolve(res[key]);
-		});
-	});
-
-	const getAllKeysWithSize = () => new Promise((resolve, reject) => {
-		chrome.storage.local.get(null, (res) => {
-			if (chrome.runtime.lastError) {
-				reject(chrome.runtime.lastError);
-				return;
-			}
-
-			const result = Object.entries(res).map(([key, val]) => {
-				const bytesUsed = estimateBytesUsedByValue(val);
-				return ({ key, bytesUsed });
-			});
-			resolve(result);
-		});
-	});
-
-	const getKeysByPrefix = async(keyPrefix) => {
-		const mappings = await getAllKeysWithSize();
-		return mappings.filter(entry => entry.key.startsWith(keyPrefix));
-	};
-
-	const getKeysBiggerThen = async(minSize) => {
-		const mappings = await getAllKeysWithSize();
-		return mappings.filter(entry => entry.bytesUsed >= minSize);
-	};
-
-	const purgeIfTooBig = async({ key, maxSize }) => {
-		try {
-			const value = await getKey(key);
-			if (value) {
-				const usedSize = estimateBytesUsedByValue(value);
-				if (usedSize > maxSize) {
-					alwaysLog(`purge: ${key} takes ${usedSize} bytes, which exceeds the threshold of ${maxSize} bytes`);
-					await new Promise(done => chrome.storage.local.remove(key, done));
-				}
-			}
-		} catch (err) {
-			alwaysLog(`Unexpected error when purging ${key} (it is safe to continue)`, err);
-		}
-	};
-
-	const purgeIfTooMany = async({ keyPrefix, maxElems }) => {
-		try {
-			const matches = await getKeysByPrefix(keyPrefix);
-			if (matches.length > maxElems) {
-				const keys = matches.map(({ key }) => key);
-				await new Promise((resolve, reject) => {
-					chrome.storage.local.remove(keys, () => {
-						if (chrome.runtime.lastError) {
-							reject(chrome.runtime.lastError);
-							return;
-						}
-						alwaysLog(`Successfully cleaned up ${keys.length} entries with prefix "${keyPrefix}"`);
-						resolve();
-					});
-				});
-			}
-		} catch (err) {
-			alwaysLog(`Unexpected error when purging ${keyPrefix} prefixes (it is safe to continue)`, err);
-		}
-	};
-
 	try {
 		// purging caches is an option if they become too big (they will be regenerated)
 		await purgeIfTooBig({ key: 'telemetry:bf', maxSize: 1.75 * MB });
