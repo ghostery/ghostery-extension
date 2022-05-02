@@ -1,3 +1,9 @@
+### GHOSTERY 8.7.1 (May 2, 2022)
+
+* Fixed: missing icons and descriptions for new categories (#778)
+* Fixed: cleanup extension storage (#776)
+* Update: sunset smart blocking (#779)
+
 ### GHOSTERY 8.7.0 (April 19, 2022)
 
 * Fixed: Memory leak in Chromium based browsers (#764)
@@ -11,11 +17,11 @@
 
 ### GHOSTERY 8.6.2 (February 2, 2022)
 
-+  Add disable button on trackers preview iframe (#746) 
++  Add disable button on trackers preview iframe (#746)
 
 ### GHOSTERY 8.6.1 (January 17, 2022)
 
-+ Settings: option to disable Trackers Preview on search results (#742) 
++ Settings: option to disable Trackers Preview on search results (#742)
 
 ### GHOSTERY 8.6.0 (January 13, 2022)
 
