@@ -13,12 +13,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import conf from './Conf';
 import tabInfo from './TabInfo';
 import compDb from './CompatibilityDb';
-import globals from './Globals';
-import Policy from './Policy';
-import c2pDb from './Click2PlayDb';
 import { log } from '../utils/common';
 /**
  * Class for handling Smart Blocking site policy.
@@ -49,27 +45,8 @@ class PolicySmartBlock {
 	 * @return {boolean} 			true if one of the conditions is met, false they are not
 	 *                           	applicable to this url, or none are met.
 	 */
-	shouldUnblock(appId, catId, tabId, pageURL, requestType) {
-		if (!PolicySmartBlock.shouldCheck(tabId, appId)) { return false; }
-
-		let reason;
-
-		if (PolicySmartBlock._appHasKnownIssue(tabId, appId, pageURL)) {
-			reason = 'hasIssue'; 		// allow if tracker is in compatibility list
-		} else if (this._allowedCategories(tabId, appId, catId)) {
-			reason = 'allowedCategory'; // allow if tracker is in breaking category
-		} else if (this._allowedTypes(tabId, appId, requestType)) {
-			reason = 'allowedType'; 	// allow if tracker is in breaking type
-		} else if (PolicySmartBlock._pageWasReloaded(tabId, appId)) {
-			reason = 'pageReloaded'; 	// allow if page has been reloaded recently
-		}
-
-		if (reason) {
-			log('Smart Blocking unblocked appId', appId, 'for reason:', reason);
-			tabInfo.setTabSmartBlockAppInfo(tabId, appId, reason, false);
-			return true;
-		}
-
+	// eslint-disable-next-line class-methods-use-this
+	shouldUnblock() {
 		return false;
 	}
 
@@ -126,17 +103,7 @@ class PolicySmartBlock {
 	 * @return {boolean}
 	 */
 	static shouldCheck(tabId, appId = false) {
-		const tabUrl = tabInfo.getTabInfo(tabId, 'url');
-		const tabHost = tabInfo.getTabInfo(tabId, 'host');
-
-		return (
-			conf.enable_smart_block &&
-			!globals.SESSION.paused_blocking &&
-			!Policy.getSitePolicy(tabUrl) &&
-			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
-			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
-			(c2pDb.db.apps && !c2pDb.db.apps.hasOwnProperty(appId))
-		);
+		return false;
 	}
 
 	/**
