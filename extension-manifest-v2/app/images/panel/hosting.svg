@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <style>.cls-1{isolation:isolate;}.cls-2{fill:#67ada9;stroke:#547b80;}.cls-3{fill:#fffdf6;}.cls-4{fill:#575755;}.cls-5{fill:#363635;}.cls-6{fill:#0271af;}.cls-7{fill:#c7c7c3;}.cls-8{fill:#f5a623;}.cls-9{opacity:0.15;mix-blend-mode:hard-light;}</style>
+  </defs>
+  <title>Hosting</title>
+  <g class="cls-1">
+    <g id="Layer_1" data-name="Layer 1">
+      <circle class="cls-2" cx="13" cy="13" r="11.86" />
+      <path class="cls-3" d="M17.07,5.61H16.9A4.48,4.48,0,0,0,8.63,6.74H8.37a2.77,2.77,0,1,0,0,5.54h8.7a3.33,3.33,0,0,0,0-6.66Z" />
+      <rect class="cls-4" x="8.79" y="20.32" width="8.42" height="0.77" />
+      <rect class="cls-4" x="8.79" y="12.15" width="8.42" height="1.23" />
+      <rect class="cls-4" x="8.79" y="16.24" width="8.42" height="1.23" />
+      <rect class="cls-5" x="8.79" y="10.91" width="8.42" height="1.24" />
+      <rect class="cls-5" x="8.79" y="13.38" width="8.42" height="2.86" />
+      <rect class="cls-5" x="8.79" y="17.46" width="8.42" height="2.86" />
+      <rect class="cls-6" x="7.58" y="8.67" width="10.84" height="2.86" rx="0.32" />
+      <rect class="cls-6" x="7.58" y="12.75" width="10.84" height="2.86" rx="0.32" />
+      <rect class="cls-6" x="7.58" y="16.84" width="10.84" height="2.86" rx="0.32" />
+      <rect class="cls-7" x="8.63" y="9.47" width="0.66" height="1.25" />
+      <rect class="cls-7" x="9.83" y="9.47" width="0.66" height="1.25" />
+      <rect class="cls-7" x="11.03" y="9.47" width="0.66" height="1.25" />
+      <rect class="cls-7" x="12.23" y="9.47" width="0.66" height="1.25" />
+      <rect class="cls-7" x="13.43" y="9.47" width="0.66" height="1.25" />
+      <rect class="cls-8" x="14.99" y="9.47" width="2.38" height="1.25" />
+      <rect class="cls-7" x="8.63" y="13.56" width="0.66" height="1.25" />
+      <rect class="cls-7" x="9.83" y="13.56" width="0.66" height="1.25" />
+      <rect class="cls-7" x="11.03" y="13.56" width="0.66" height="1.25" />
+      <rect class="cls-7" x="12.23" y="13.56" width="0.66" height="1.25" />
+      <rect class="cls-7" x="13.43" y="13.56" width="0.66" height="1.25" />
+      <rect class="cls-8" x="14.99" y="13.56" width="2.38" height="1.25" />
+      <rect class="cls-7" x="8.63" y="17.64" width="0.66" height="1.25" />
+      <rect class="cls-7" x="9.83" y="17.64" width="0.66" height="1.25" />
+      <rect class="cls-7" x="11.03" y="17.64" width="0.66" height="1.25" />
+      <rect class="cls-7" x="12.23" y="17.64" width="0.66" height="1.25" />
+      <rect class="cls-7" x="13.43" y="17.64" width="0.66" height="1.25" />
+      <rect class="cls-8" x="14.99" y="17.64" width="2.38" height="1.25" />
+      <g class="cls-9">
+        <path d="M20.4,8.94a3.33,3.33,0,0,0-3.33-3.33H16.9a4.46,4.46,0,0,0-3.74-2.29V21.09h4.05v-1.4h.89a.31.31,0,0,0,.32-.31V17.15a.31.31,0,0,0-.32-.31h-.89V15.61h.89a.32.32,0,0,0,.32-.32V13.07a.32.32,0,0,0-.32-.32h-.89v-.49A3.32,3.32,0,0,0,20.4,8.94Z" />
+      </g>
+    </g>
+  </g>
+</svg>
