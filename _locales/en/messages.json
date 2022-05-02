@@ -242,7 +242,12 @@
 		"message": "Enables websites to publish, distribute, and optimize audio and video content."
 	},
 	"category_cdn": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "CDN"
+	},
+	"category_cdn_desc": {
+		"description": "User-facing description for the CDN tag category.",
+		"message": "Content delivery networks distribute resources for different site utilities, collect user analytics and tracking data on network traffic."
 	},
 	"category_comments": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -251,6 +256,14 @@
 	"category_comments_desc": {
 		"description": "User-facing description for the Comments tag category.",
 		"message": "Enables comment sections for articles and product reviews."
+	},
+	"category_consent": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Consent Management"
+	},
+	"category_consent_desc": {
+		"description": "User-facing description for the Customer Interaction tag category.",
+		"message": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
 	},
 	"category_customer_interaction": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -261,7 +274,12 @@
 		"message": "Includes chat, email messaging, customer support, and other interaction tools."
 	},
 	"category_email": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Email"
+	},
+	"category_email_desc": {
+		"description": "User-facing description for the Email tag category.",
+		"message": "Includes tracking pixels used to measure email open rates."
 	},
 	"category_essential": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -272,13 +290,28 @@
 		"message": "Includes trackers critical to website functionality such as tag managers and privacy notices."
 	},
 	"category_extensions": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Extensions"
 	},
+	"category_extensions_desc": {
+		"description": "User-facing description for the Extensions tag category.",
+		"message": "Software on user-devices that can intercept and analyse browser traffic (man in the middle)."
+	},
 	"category_hosting": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Hosting"
 	},
+	"category_hosting_desc": {
+		"description": "User-facing description for the Hosting tag category.",
+		"message": "Services providing access to websites have access to server logs, including IP address and information about User Agent."
+	},
 	"category_misc": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
 		"message": "Miscellaneous"
+	},
+	"category_misc_desc": {
+		"description": "User-facing description for the Miscellaneous tag category.",
+		"message": "Contains different types of unclassified trackers."
 	},
 	"category_pornvertising": {
 		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -303,6 +336,14 @@
 	"category_social_media_desc": {
 		"description": "User-facing description for the Social Media tag category.",
 		"message": "Includes features related to social media platforms."
+	},
+	"category_telemetry": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Telemetry"
+	},
+	"category_telemetry_desc": {
+		"description": "User-facing description for the Telemetry tag category.",
+		"message": "Telemetry"
 	},
 	"category_uncategorized": {
 		"message": "Uncategorized"

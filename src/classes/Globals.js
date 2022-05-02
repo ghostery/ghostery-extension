@@ -139,6 +139,7 @@ class Globals {
 			'advertising',
 			'pornvertising',
 			'site_analytics',
+			'email',
 		];
 		this.DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
 
