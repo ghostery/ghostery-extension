@@ -853,9 +853,9 @@ class Debugger {
 			if (!ok) {
 				output.push(`${CSS_SUBHEADER}The extension is unable to persist values to chrome.storage.local. :-(`);
 				if (usage > 0.9) {
-					output.push('Looks like you found a bug in the Ghostery extension (chrome.storage.local is almost full). If you encounter problems, reinstalling the extension will fix it.');
+					output.push('Looks like you found a bug in the Ghostery extension (chrome.storage.local is almost full). If you encounter problems, reinstalling the extension will fix it (uninstall, restart the browser, then install again).');
 				} else {
-					output.push('Maybe it is the the browser\'s fault, but it is more likely that you found a bug in the Ghostery extension. If you encounter problems, reinstalling the extension might fix it.');
+					output.push('Maybe it is the the browser\'s fault, but it is more likely that you found a bug in the Ghostery extension. If you encounter problems, try to reinstall the extension (uninstall, restart the browser, then install again). It it does not fix it, it is likely a bug in the browser. You will have to create a new browser profile and install Ghostery to recover from that. For more information, see https://github.com/ghostery/ghostery-extension/issues/777');
 				}
 				output.push('If it keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
 			}
