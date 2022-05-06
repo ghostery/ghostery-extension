@@ -20,7 +20,7 @@
   },
   "license": "MPL-2.0",
   "dependencies": {
-    "hybrids": "^8.0.0"
+    "hybrids": "^8.0.3"
   },
   "devDependencies": {
     "auto": "^10.36.5",
