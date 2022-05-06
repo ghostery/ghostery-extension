@@ -10,7 +10,8 @@
     "./wheel": "./src/utils/wheel.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ./src",
+    "release": "auto shipit"
   },
   "author": {
     "name": "Ghostery GmbH",
@@ -22,6 +23,7 @@
     "hybrids": "^8.0.0"
   },
   "devDependencies": {
+    "auto": "^10.36.5",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
