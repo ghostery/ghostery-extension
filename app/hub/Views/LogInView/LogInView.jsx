@@ -102,7 +102,7 @@ const LogInView = (props) => {
 							<span className="LogInView__link text-center">
 								{ t('hub_login_link_dont_have_account') }
 								&nbsp;
-								<a href={`${globals.SIGNON_BASE_URL}/register`} target="_blank" rel="noopener noreferrer">
+								<a href={`${globals.SIGNON_BASE_URL}/register?utm_source=gbe`} target="_blank" rel="noopener noreferrer">
 									{ t('hub_login_link_create_account') }
 								</a>
 							</span>

@@ -71,7 +71,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         hub_home_subheader_optimize
       </div>
       <a
-        href="https://signon.ghosterystage.com/register"
+        href="https://signon.ghosterystage.com/register?utm_source=gbe"
         rel="noopener noreferrer"
         target="_blank"
       >

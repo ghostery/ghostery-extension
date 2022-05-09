@@ -19,7 +19,9 @@ import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import { isLog, activateLog } from '../utils/common';
-import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
+import {
+	getObjectSlice, pickRandomArrEl, getChromeStorageUsage, runStorageSelfCheck
+} from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -195,6 +197,7 @@ class Debugger {
 		fetchABTestsWithIr: 'ghostery.fetchABTestsWithIr()',
 		getABTests: 'ghostery.getABTests()',
 		getActiveTabInfo: 'ghostery.getActiveTabInfo()',
+		checkStorage: 'ghostery.checkStorage()',
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		getUserData: 'ghostery.getUserData()',
@@ -232,6 +235,7 @@ class Debugger {
 		[`${this._helpFunctionNames.fetchABTestsWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 		[`${this._helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
 		[`${this._helpFunctionNames.getActiveTabInfo}`, 'Shows TabInfo and FoundBugs data for any active tabs'],
+		[`${this._helpFunctionNames.checkStorage}`, 'Shows diagnostic information about the health of the storage'],
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
@@ -321,6 +325,13 @@ class Debugger {
 		['', "Example: ghostery.getActiveTabInfo('activeTabIds | foundBugs | tabInfo')"],
 		['Anything else', 'The whole ActiveTabInfo object. Also returned if there are no matching results'],
 	];
+
+  static helpCheckStorage = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.checkStorage}`,
+		'',
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
+		['No argument or any arguments', 'Information about the storage'],
+  ];
 
 	/**
 	 * @access private
@@ -499,6 +510,7 @@ class Debugger {
 			helpFetchABTestsWithIr,
 			helpGetABTests,
 			helpGetActiveTabInfo,
+			helpCheckStorage,
 			helpGetConfData,
 			helpGetGlobals,
 			helpGetUserData,
@@ -521,6 +533,7 @@ class Debugger {
 		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
 		else if (eeFnName === 'getactivetabinfo')	helpStringArr.push(...helpGetActiveTabInfo);
+		else if (eeFnName === 'checkstorage')	helpStringArr.push(...helpCheckStorage);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
 		else if (eeFnName === 'getuserdata')		helpStringArr.push(...helpGetUserData);
@@ -812,6 +825,43 @@ class Debugger {
 				}, slice, 'ActiveTabInfo');
 			}
 		});
+		return THANKS;
+	}
+
+	/**
+	 * Runs diagnostics to identify rare problems related to the persistance layer.
+	 *
+	 * @return 	{String}					A thank you message.
+	 */
+	checkStorage = () => {
+		(async() => {
+			const { bytesInUse, quotaInBytes, usage } = await getChromeStorageUsage();
+			const { ok, message } = await runStorageSelfCheck();
+
+			const output = [];
+			output.push(`${CSS_SUBHEADER} Results of diagnostics:`);
+			output.push(`bytesInUse: ${bytesInUse >= 0 ? bytesInUse : '<unavailable>'}`);
+			output.push(`quotaInBytes: ${quotaInBytes >= 0 ? quotaInBytes : 'unlimited'}`);
+			if (usage >= 0) {
+				output.push(`used: ${String(100 * usage).slice(0, 5)}%`);
+			}
+			if (usage > 0.9) {
+				output.push('WARNING: Getting near the quota!');
+			}
+			output.push(`selfCheckResult: ${message}`);
+
+			if (!ok) {
+				output.push(`${CSS_SUBHEADER}The extension is unable to persist values to chrome.storage.local. :-(`);
+				if (usage > 0.9) {
+					output.push('Looks like you found a bug in the Ghostery extension (chrome.storage.local is almost full). If you encounter problems, reinstalling the extension will fix it (uninstall, restart the browser, then install again).');
+				} else {
+					output.push('Maybe it is the the browser\'s fault, but it is more likely that you found a bug in the Ghostery extension. If you encounter problems, try to reinstall the extension (uninstall, restart the browser, then install again). It it does not fix it, it is likely a bug in the browser. You will have to create a new browser profile and install Ghostery to recover from that. For more information, see https://github.com/ghostery/ghostery-extension/issues/777');
+				}
+				output.push('If it keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
+			}
+
+			Debugger._printToConsole(Debugger._typeset(output));
+		})();
 		return THANKS;
 	}
 

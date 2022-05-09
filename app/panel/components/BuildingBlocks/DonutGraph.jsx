@@ -54,18 +54,32 @@ class DonutGraph extends React.Component {
 						return '#cb55cd';
 					case 'audio_video_player':
 						return '#ef671e';
+					case 'cdn':
+						return '#d3b6aa';
 					case 'comments':
 						return '#43b7c5';
+					case 'consent':
+						return '#becfb3';
 					case 'customer_interaction':
 						return '#fdc257';
+					case 'email':
+						return '#ff868f';
 					case 'essential':
 						return '#fc9734';
+					case 'extensions':
+						return '#f5a623';
+					case 'hosting':
+						return '#6c9493';
+					case 'misc':
+						return '#dd959d';
 					case 'pornvertising':
 						return '#ecafc2';
 					case 'site_analytics':
 						return '#87d7ef';
 					case 'social_media':
 						return '#388ee8';
+					case 'telemetry':
+						return '#b26859';
 					case 'unidentified':
 						return '#8459a5';
 					default:
