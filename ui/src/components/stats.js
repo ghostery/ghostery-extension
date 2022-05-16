@@ -9,12 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define } from '/hybrids.js';
+import { html, define } from 'hybrids';
 
 import { order, labels } from '../utils/categories.js';
-
-import './tracker-wheel.js';
-import './category-bullet.js';
 
 export default define({
   tag: 'ui-stats',
