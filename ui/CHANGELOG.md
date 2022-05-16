@@ -1,3 +1,15 @@
+# v0.1.0 (Mon May 16 2022)
+
+#### 🚀 Enhancement
+
+- Fix missing line [#3](https://github.com/ghostery/ghostery-ui/pull/3) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.0.3 (Mon May 16 2022)
 
 #### 🐛 Bug Fix
