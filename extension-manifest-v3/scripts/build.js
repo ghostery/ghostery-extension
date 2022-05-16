@@ -8,7 +8,7 @@ const pwd = process.cwd();
 const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
-  assets: ['_locales', 'assets', 'vendor/@whotracksme/ui/src/images'],
+  assets: ['_locales', 'assets'],
 };
 
 // Generate arguments from command line

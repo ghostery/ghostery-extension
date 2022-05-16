@@ -5,8 +5,7 @@
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
     "download-dnr-lists": "node scripts/download-dnr-lists.js",
-    "preinstall": "rimraf src/vendor",
-    "postinstall": "vendor-copy && npm run download-cosmetics && npm run download-dnr-lists",
+    "postinstall": "npm run download-cosmetics && npm run download-dnr-lists",
     "build": "node scripts/build.js",
     "build.chromium": "npm run build -- --target chromium",
     "build.safari": "npm run build -- --target safari",
@@ -14,7 +13,11 @@
     "release": "web-ext build",
     "start": "web-ext run --target=chromium",
     "lint": "eslint src/",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme ./src/_locales/en/messages.json",
+    "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./src/_locales/en/messages.json",
+    "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
+    "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src"
   },
   "author": {
     "name": "Ghostery GmbH",
@@ -37,22 +40,13 @@
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@whotracksme/webextension-packages": "^0.2.0",
-    "hybrids": "^7.0.5",
+    "@ghostery/ui": "^0.1.0",
+    "@whotracksme/webextension-packages": "^0.3.0",
+    "hybrids": "^8.0.3",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
   },
   "webExt": {
     "sourceDir": "./dist/"
-  },
-  "vendorCopy": [
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/serp-report",
-      "to": "src/vendor/@whotracksme/serp-report"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/ui",
-      "to": "src/vendor/@whotracksme/ui"
-    }
-  ]
+  }
 }

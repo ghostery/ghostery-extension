@@ -11,21 +11,17 @@
 
 import { html, define, store, router } from 'hybrids';
 
-import { settingsIcon } from '/vendor/@whotracksme/ui/src/components/icons.js';
 import Stats from '/store/stats.js';
 
 import Simple from './simple.js';
 
 export default define({
-  tag: 'gh-panel-app',
+  tag: 'panel-root',
   stats: store(Stats),
   views: router(Simple),
   content: ({ stats, views }) => html`
-    <gh-panel-layout>
-      <panel-header
-        slot="header"
-        domain=${store.ready(stats) ? stats.domain : ''}
-      >
+    <panel-layout>
+      <ui-header slot="header" domain=${store.ready(stats) ? stats.domain : ''}>
         <a
           target="_blank"
           class="options-link"
@@ -33,11 +29,11 @@ export default define({
             chrome.runtime.getManifest().options_page,
           )}
         >
-          ${settingsIcon}
+          <ui-icon name="settings"></ui-icon>
         </a>
-      </panel-header>
+      </ui-header>
       ${views}
-    </gh-panel-layout>
+    </panel-layout>
   `.css`
     .options-link {
       display: flex;
@@ -46,7 +42,7 @@ export default define({
       justify-content: center;
     }
 
-    .options-link svg {
+    .options-link ui-icon {
       height: 16px;
       width: 16px;
     }

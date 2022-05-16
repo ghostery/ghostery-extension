@@ -15,9 +15,9 @@ import { store } from 'hybrids';
 import {
   tryWTMReportOnMessageHandler,
   isDisableWTMReportMessage,
-} from '@whotracksme/webextension-packages/packages/serp-report/src/background/serp-report.js';
+} from '@whotracksme/webextension-packages/packages/trackers-preview/background';
 
-import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
+import { getOffscreenImageData } from '@ghostery/ui/wheel';
 
 import Options, { isUpdateOptionsMessage } from '/store/options.js';
 
@@ -82,7 +82,7 @@ let updateIcon = updateIconNow;
 
 function updateIconNow(tabId, stats) {
   const categories = stats.trackers.map((t) => t.category);
-  const imageData = WTMTrackerWheel.offscreenImageData(128, categories);
+  const imageData = getOffscreenImageData(128, categories);
   (chrome.browserAction || chrome.action).setIcon({
     tabId,
     imageData,

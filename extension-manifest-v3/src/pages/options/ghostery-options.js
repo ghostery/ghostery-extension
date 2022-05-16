@@ -10,7 +10,6 @@
  */
 
 import { html, define, store } from 'hybrids';
-import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 import Options from '/store/options.js';
 
@@ -28,7 +27,7 @@ export default define({
         <ul>
           <li>
             <label>
-              <span>${t('options_tracker_wheel_disabled')}</span>
+              <span>Disable Tracker Wheel in browser toolbar</span>
               <input
                 type="checkbox"
                 checked="${options.trackerWheelDisabled}"
@@ -38,7 +37,7 @@ export default define({
           </li>
           <li>
             <label>
-              <span>${t('settings_wtm_serp_report')}</span>
+              <span>Show Trackers Preview next to search results</span>
               <input
                 type="checkbox"
                 checked="${options.wtmSerpReport}"
@@ -58,7 +57,7 @@ export default define({
       background-color: #F8F8F8;
     }
     header {
-      background: var(--ghostery);
+      background: var(--ui-ghostery);
       color: white;
       padding: 10px 0px;
     }
@@ -90,6 +89,7 @@ export default define({
       align-items: center;
     }
     li label {
+      font-family: inherit;
       display: flex;
       justify-content: space-between;
       flex: 1;

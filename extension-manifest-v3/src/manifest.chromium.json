@@ -438,10 +438,10 @@
       ],
       "run_at": "document_end",
       "css": [
-        "node_modules/@whotracksme/webextension-packages/packages/serp-report/src/content_scripts/serp-report.css"
+        "node_modules/@whotracksme/webextension-packages/packages/trackers-preview/src/content_scripts/styles.css"
       ],
       "js": [
-        "node_modules/@whotracksme/webextension-packages/packages/serp-report/src/content_scripts/serp-report.js"
+        "content_scripts/trackers-preview.js"
       ]
     }
   ],
@@ -488,8 +488,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "content_scripts/whotracksme/ghostery-whotracksme.js",
-        "vendor/@whotracksme/ui/src/tracker-wheel.js"
+        "content_scripts/whotracksme/ghostery-whotracksme.js"
       ],
       "all_frames": true,
       "matches": [
@@ -498,7 +497,7 @@
     },
     {
       "resources": [
-        "vendor/@whotracksme/serp-report/src/pages/iframe/index.html"
+        "pages/trackers-preview/index.html"
       ],
       "all_frames": false,
       "matches": [

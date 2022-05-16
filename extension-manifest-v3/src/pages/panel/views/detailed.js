@@ -10,34 +10,34 @@
  */
 
 import { html, define, store, router } from 'hybrids';
-
-import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
-import WTMTrackerWheel from '/vendor/@whotracksme/ui/src/tracker-wheel.js';
-import { chevronLeft } from '/vendor/@whotracksme/ui/src/components/icons.js';
+import { order } from '@ghostery/ui/categories';
 
 import Stats from '/store/stats.js';
 
 export default define({
-  tag: 'gh-panel-detailed-view',
+  tag: 'panel-detailed-view',
   stats: store(Stats),
   render: ({ stats }) => html`
     <header>
-      <a href="${router.backUrl()}"> ${chevronLeft} ${t('back')} </a>
-      <h1>${t('detailed_view')}</h1>
-      <div></div>
+      <a href="${router.backUrl()}">
+        <ui-icon name="chevron-left"></ui-icon> <span>Back</span>
+      </a>
+      <h1>Detailed View</h1>
     </header>
     <ul>
       ${store.ready(stats) &&
       html`
-        ${WTMTrackerWheel.sortCategories(Object.keys(stats.byCategory)).map(
-          (category) => html`
-            <li class="category">
-              <gh-panel-category-with-trackers
-                category=${category}
-              ></gh-panel-category-with-trackers>
-            </li>
-          `,
-        )}
+        ${Object.keys(stats.byCategory)
+          .sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]))
+          .map(
+            (category) => html`
+              <li class="category">
+                <panel-category-with-trackers
+                  category=${category}
+                ></panel-category-with-trackers>
+              </li>
+            `,
+          )}
       `}
     </ul>
   `.css`
@@ -58,7 +58,7 @@ export default define({
     }
 
     header h1 {
-      color: var(--black);
+      color: var(--ui-black);
       text-align: center;
       font-weight: 600;
       font-size: 16px;
@@ -75,13 +75,13 @@ export default define({
       display: flex;
       align-items: center;
       position: absolute;
-      color: var(--deep-blue);
+      color: var(--ui-deep-blue);
       padding: 10px 8px;
       cursor: pointer;
       text-decoration: none;
     }
 
-    header a svg {
+    header a ui-icon {
       height: 18px;
       margin-left: -6px;
     }

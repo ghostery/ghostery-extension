@@ -12,7 +12,4 @@
 import '@ghostery/ui';
 import '@ghostery/ui/css';
 
-import './components/category-with-trackers.js';
-import './components/layout.js';
-
-import './views/root.js';
+import './ghostery-options.js';

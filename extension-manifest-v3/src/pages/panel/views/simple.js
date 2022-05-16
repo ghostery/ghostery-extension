@@ -9,16 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, store, router } from 'hybrids';
-import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
-
-import {
-  externalLink,
-  chevronRight,
-} from '/vendor/@whotracksme/ui/src/components/icons.js';
+import { html, define, store, msg, router } from 'hybrids';
 
 import sites from '/rule_resources/sites.json';
-
 import Stats from '/store/stats.js';
 import Options, { DNR_RULES_LIST } from '/store/options.js';
 
@@ -34,29 +27,42 @@ function toggleRuleset(ruleset) {
   };
 }
 
+const toggleLabels = {
+  get ads() {
+    return msg`Block Ads`;
+  },
+  get tracking() {
+    return msg`Block Trackers`;
+  },
+  get annoyances() {
+    return msg`Block Annoyances`;
+  },
+};
+
 export default define({
   [router.connect]: { stack: [Detailed] },
-  tag: 'gh-panel-simple-view',
+  tag: 'panel-simple-view',
   options: store(Options),
   stats: store(Stats),
   render: ({ options, stats }) => html`
-    <h1>${t('privacy_protection')}</h1>
+    <h1>Privacy protection on this site</h1>
 
     <section class="toggles">
       ${store.ready(options) &&
       DNR_RULES_LIST.map(
         (ruleset) =>
-          html`<gh-panel-toggle-switch
+          html`<ui-toggle-switch
             name="${ruleset}"
+            label="${toggleLabels[ruleset]}"
             disabled="${!options.dnrRules[ruleset]}"
             onclick=${toggleRuleset(ruleset)}
-          ></gh-panel-toggle-switch>`,
+          ></ui-toggle-switch>`,
       )}
     </section>
 
     ${store.ready(stats) &&
     html`
-      <wtm-stats categories=${stats.categories}></wtm-stats>
+      <ui-stats categories="${stats.categories}"></ui-stats>
       <section class="buttons">
         <span>
           ${store.ready(stats) &&
@@ -66,20 +72,20 @@ export default define({
               href="https://www.whotracks.me/websites/${stats.domain}.html"
               target="_blank"
             >
-              ${t('statistical_report')} ${externalLink}
+              Statistical Report <ui-icon name="external-link"></ui-icon>
             </a>
           `}
         </span>
         <a href="${router.url(Detailed)}">
-          ${t('detailed_view')} ${chevronRight}
+          Detailed View <ui-icon name="chevron-right"></ui-icon>
         </a>
       </section>
 
-      <gh-panel-page-load loadTime="${stats.loadTime}"></gh-panel-page-load>
+      <ui-page-load loadTime="${stats.loadTime}"></ui-page-load>
     `}
   `.css`
     h1 {
-      color: var(--black);
+      color: var(--ui-black);
       font-size: 16px;
       text-align: center;
       font-weight: 600;
@@ -103,7 +109,7 @@ export default define({
     
     section.buttons a,
     section.buttons a:visited {
-      color: var(--deep-blue);
+      color: var(--ui-deep-blue);
       padding: 10px 17px;
       flex: 1;
       text-align: center;
@@ -119,7 +125,7 @@ export default define({
       white-space: nowrap;
     }
     
-    section.buttons a svg {
+    section.buttons a ui-icon {
       width: 10px;
       height: 10px;
       margin-left: 3px;

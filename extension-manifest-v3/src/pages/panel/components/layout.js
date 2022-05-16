@@ -10,23 +10,23 @@
  */
 
 import { html, define } from 'hybrids';
-import { t } from '/vendor/@whotracksme/ui/src/i18n.js';
 
 export default define({
-  tag: 'gh-panel-layout',
+  tag: 'panel-layout',
   render: () => html`
     <slot name="header"></slot>
     <section id="content"><slot></slot></section>
     <footer>
       <a href="https://www.ghostery.com/support" target="_blank">
-        ${t('panel_menu_report_broken_site')}
+        Report a broken page
       </a>
       <a
         href="https://www.ghostery.com/submit-a-tracker"
         target="_blank"
         class="subscribe"
-        >${t('panel_menu_submit_tracker')}</a
       >
+        Submit a new tracker
+      </a>
     </footer>
   `.css`
     :host {
@@ -77,7 +77,7 @@ export default define({
     footer a,
     footer a:visited {
       text-decoration: none;
-      color: var(--text);
+      color: var(--ui-text);
     }
     
     footer .subscribe {

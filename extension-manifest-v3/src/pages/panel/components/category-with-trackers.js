@@ -8,22 +8,17 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
-import { html, define, store } from 'hybrids';
-import { t, getCategoryName } from '/vendor/@whotracksme/ui/src/i18n.js';
-import {
-  chavronDown,
-  externalLink,
-} from '/vendor/@whotracksme/ui/src/components/icons.js';
-
+import { define, html, store } from 'hybrids';
 import Stats from '/store/stats.js';
+
+import { labels } from '@ghostery/ui/categories';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
 }
 
 export default define({
-  tag: 'gh-panel-category-with-trackers',
+  tag: 'panel-category-with-trackers',
   category: '',
   stats: store(Stats),
   shouldShowMore: false,
@@ -42,12 +37,15 @@ export default define({
   },
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
     <main onclick="${toggleShowMore}">
-      <category-bullet category=${category} size=${12}></category-bullet>
-      <label>${getCategoryName(category)}</label>
-      <strong class="count"
-        >${stats.byCategory[category].count} ${t('trackers_detected')}</strong
-      >
-      <button class="${{ more: shouldShowMore }}">${chavronDown}</button>
+      <ui-category-bullet category=${category} size=${12}></ui-category-bullet>
+      <label>${labels[category]}</label>
+      <strong class="count">
+        <!-- Number of trackers detected by Ghostery -->
+        ${stats.byCategory[category].count} Detected
+      </strong>
+      <button class="${{ more: shouldShowMore }}">
+        <ui-icon name="chevron-down"></ui-icon>
+      </button>
     </main>
     ${shouldShowMore &&
     html`
@@ -61,7 +59,7 @@ export default define({
                 href="https://whotracks.me/trackers/${tracker}.html"
                 target="_blank"
               >
-                ${t('tracker_details')} ${externalLink}
+                Tracker Details <ui-icon name="external-link"></ui-icon>
               </a>
             </li>
           `,
@@ -106,12 +104,13 @@ export default define({
     label {
       margin: 0 7px;
       font-size: 14px;
+      font-family: inherit;
       line-height: 20px;
-      color: var(--black);
+      color: var(--ui-black);
     }
     strong {
       text-transform: uppercase;
-      color: var(--deep-blue);
+      color: var(--ui-deep-blue);
       font-size: 11.5px;
       font-weight: 500;
     }
@@ -137,13 +136,13 @@ export default define({
       line-height: 16px;
     }
     li strong {
-      color: var(--deep-blue);
+      color: var(--ui-deep-blue);
       font-size: 13px;
       font-weight: 500;
       line-height: 16px;
     }
     li a, li a:visited {
-      color: var(--text);
+      color: var(--ui-text);
       text-align: right;
       flex: 1;
       text-decoration: none;
@@ -156,7 +155,7 @@ export default define({
       height: 10px;
     }
     button svg {
-      color: var(--deep-blue);
+      color: var(--ui-deep-blue);
     }
     button.more svg {
       transform: rotate(180deg);

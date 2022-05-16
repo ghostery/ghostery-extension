@@ -4,7 +4,6 @@ build
 tmp
 dist
 src/_metadata
-src/vendor
 src/rule_resources
 src/assets/adblocker_engines/*
 !src/assets/adblocker_engines/.gitkeep

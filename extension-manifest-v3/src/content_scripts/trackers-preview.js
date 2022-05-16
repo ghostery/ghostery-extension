@@ -9,8 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import './category-with-trackers.js';
-import './icon.js';
-import './layout.js';
-import './page-load.js';
-import './toggle-switch.js';
+import setupTrackersPreview from '@whotracksme/webextension-packages/packages/trackers-preview/content_scripts';
+
+setupTrackersPreview(
+  chrome.runtime.getURL('pages/trackers-preview/index.html'),
+);
