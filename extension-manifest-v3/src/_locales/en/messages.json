@@ -69,14 +69,20 @@
   "hosting": {
     "message": "Hosting"
   },
+  "manifest_name": {
+    "message": "Ghostery – Privacy Ad Blocker"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery is a powerful privacy extension. Block ads, stop trackers and speed up websites."
+  },
   "miscellaneous": {
     "message": "Miscellaneous"
   },
   "off": {
-    "message": "off"
+    "message": "Off"
   },
   "on": {
-    "message": "on"
+    "message": "On"
   },
   "page_load_": {
     "message": "Page Load:"

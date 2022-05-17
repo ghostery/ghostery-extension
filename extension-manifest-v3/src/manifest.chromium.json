@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "author": "Ghostery",
-  "name": "__MSG_name__",
+  "name": "__MSG_manifest_name__",
   "short_name": "Ghostery",
   "default_locale": "en",
-  "description": "__MSG_short_description__",
+  "description": "__MSG_manifest_short_description__",
   "icons": {
     "16": "assets/images/icon16.png",
     "48": "assets/images/icon48.png",
