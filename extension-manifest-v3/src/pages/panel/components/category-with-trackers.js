@@ -151,13 +151,14 @@ export default define({
       align-items: center;
       justify-content: flex-end;
     }
-    li a svg {
+    li a ui-icon {
       height: 10px;
+      margin-left: 2px;
     }
-    button svg {
+    button ui-icon {
       color: var(--ui-deep-blue);
     }
-    button.more svg {
+    button.more ui-icon {
       transform: rotate(180deg);
     }
   `,

@@ -34,7 +34,8 @@ export default define({
       flex-flow: column nowrap;
       min-height: 100%;
       width: 100%;
-      min-width: 375px;
+      width: 375px;
+      max-width: 100%;
     }
 
     @media only screen and (min-height: 346px) {
