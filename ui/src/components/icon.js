@@ -72,14 +72,12 @@ export default define({
   tag: 'ui-icon',
   name: '',
   render: ({ name }) => (icons[name] || html``).css`
-    :host { display: inline-flex; }
+    :host { display: inline-flex; justify-content: center; align-items: center }
     :host([hidden]) { display: none; }
 
     svg {
       max-width: 100%;
       max-height: 100%;
-      width: 100%;
-      height: 100%;
     }
    `,
 });
