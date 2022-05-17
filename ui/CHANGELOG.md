@@ -1,3 +1,15 @@
+# v0.1.1 (Tue May 17 2022)
+
+#### 🐛 Bug Fix
+
+- Fix toggle switch text to match already translated strings [#4](https://github.com/ghostery/ghostery-ui/pull/4) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.1.0 (Mon May 16 2022)
 
 #### 🚀 Enhancement
