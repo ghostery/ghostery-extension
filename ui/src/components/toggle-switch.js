@@ -44,7 +44,7 @@ export default define({
     }
 
     button::before {
-      content: '${msg`on`}';
+      content: '${msg`On`}';
       display: block;
       text-transform: uppercase;
       color: var(--ui-deep-blue);
@@ -71,7 +71,7 @@ export default define({
 
     button.disabled::before {
       color: #C1C1C1;
-      content: '${msg`off`}';
+      content: '${msg`Off`}';
     }
   `,
 });
