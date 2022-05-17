@@ -1,3 +1,15 @@
+# v0.1.3 (Tue May 17 2022)
+
+#### 🐛 Bug Fix
+
+- Fix getMessage function to work in Safari [#6](https://github.com/ghostery/ghostery-ui/pull/6) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.1.2 (Tue May 17 2022)
 
 #### 🐛 Bug Fix
