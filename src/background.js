@@ -16,7 +16,7 @@
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/serp-report/src/background/serp-report';
+import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
 import ghosteryDebugger from './classes/Debugger';
