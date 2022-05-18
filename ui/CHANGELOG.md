@@ -1,3 +1,15 @@
+# v0.1.4 (Wed May 18 2022)
+
+#### 🐛 Bug Fix
+
+- Fix category names [#7](https://github.com/ghostery/ghostery-ui/pull/7) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.1.3 (Tue May 17 2022)
 
 #### 🐛 Bug Fix
