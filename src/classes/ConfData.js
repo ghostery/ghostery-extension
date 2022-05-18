@@ -16,14 +16,26 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { debounce } from 'underscore';
 import globals from './Globals';
-import { prefsGet } from '../utils/common';
+import { log, prefsGet, prefsSet } from '../utils/common';
 
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 
 /**
+ * ConfData will keep values in memory, but eventually write through
+ * to disk. This control how much time can elapse after the last
+ * write before there will be an implicit flush.
+ */
+const CACHE_WRITES_DURATION_IN_MS = 20;
+
+/**
  * Class for handling user configuration properties synchronously.
+ *
+ * NOTE: This class is not intended to be used directly.
+ * The canonical way to access is by using the proxy class
+ * defined in "./Conf.js"
  *
  * For persistence user settings are stored in Chrome Storage.
  * However, access to Storage is asynchronous. ConfData makes an
@@ -33,10 +45,27 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
  * @memberOf  BackgroundClasses
  */
 class ConfData {
+	#modifiedKeys;
+	#markAsDirty;
+
 	constructor() {
 		// language does not get persisted
 		this.language = ConfData._getDefaultLanguage();
 		this.SYNC_SET = new Set(globals.SYNC_ARRAY);
+
+		// We have to keep some state, but the class was written to be used
+		// like a normal object. To avoid unintended side-effects, the new
+		// properties should not be visible when iterating over the class.
+		this.#modifiedKeys = new Set();
+		this.#markAsDirty = debounce(this.flush.bind(this), CACHE_WRITES_DURATION_IN_MS);
+	}
+
+	setProperty(key, value) {
+		if (this[key] !== value) {
+			this[key] = value;
+			this.#modifiedKeys.add(key);
+			this.#markAsDirty();
+		}
 	}
 
 	/**
@@ -44,125 +73,104 @@ class ConfData {
 	 * prototyped properties of the ConfData object.
 	 * This method is called once on startup.
 	 */
-	init() {
-		return prefsGet().then((d) => {
-			const data = { ...d };
-			const nowTime = Number(new Date().getTime());
-			const _setProp = (name, value) => {
-				if (!globals.INIT_COMPLETE) {
-					globals.initProps[name] = value;
-				}
-			};
-			const _initProperty = (name, value) => {
-				if (data[name] === null || typeof (data[name]) === 'undefined') {
-					data[name] = value;
-					_setProp(name, value);
-				}
-				this[name] = data[name];
-			};
+	async init() {
+		const data = { ...await prefsGet() };
+		const nowTime = Date.now();
 
-			// Transfer legacy previous version property to new name
-			const { previous_version } = data;
-			if (data.previous_version === null || typeof (data.previous_version) === 'undefined') {
-				if (data.previousVersion) {
-					data.previous_version = data.previousVersion;
-					chrome.storage.local.remove('previousVersion');
-					delete data.previousVersion;
-				}
-			}
-			this.previous_version = data.previous_version || '';
+		const load = (name, defaultValue) => {
+			const isPresent = data[name] !== null && data[name] !== undefined;
+			this.setProperty(name, isPresent ? data[name] : defaultValue);
+		};
 
-			if (previous_version !== this.previous_version) {
-				_setProp('previous_version', this.previous_version);
-			}
+		// Make sure that getBrowserInfo() has resolved before we set these properties
+		await globals.BROWSER_INFO_READY;
+		load('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
 
-			// Transfer legacy banner statuses which used to be objects
-			const { reload_banner_status, trackers_banner_status } = data;
-			if (reload_banner_status && typeof reload_banner_status === 'object') {
-				this.reload_banner_status = !!reload_banner_status.show;
-				_setProp('reload_banner_status', this.reload_banner_status);
-			} else {
-				_initProperty('reload_banner_status', true);
-			}
+		// simple props
+		load('alert_bubble_pos', 'br');
+		load('alert_bubble_timeout', 15);
+		load('alert_expanded', false);
+		load('bugs_last_checked', 0);
+		load('bugs_last_updated', nowTime);
+		load('cliqz_adb_mode', globals.DEFAULT_ADBLOCKER_SETTING);
+		load('cliqz_legacy_opt_in', false);
+		load('cliqz_import_state', 0);
+		load('cmp_version', 0);
+		load('current_theme', 'default');
+		load('enable_ad_block', !IS_CLIQZ);
+		load('enable_anti_tracking', !IS_CLIQZ);
+		load('enable_autoupdate', true);
+		load('enable_click2play', true);
+		load('enable_click2play_social', true);
+		load('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
+		load('enable_abtests', true);
+		load('enable_smart_block', true);
+		load('expand_all_trackers', true);
+		load('hide_alert_trusted', false);
+		load('hub_layout', 'not_yet_set');
+		load('ignore_first_party', true);
+		load('import_callout_dismissed', true);
+		load('install_random_number', 0);
+		load('install_date', 0);
+		load('is_expanded', false);
+		load('is_expert', false);
+		load('last_cmp_date', 0);
+		load('notify_library_updates', false);
+		load('notify_promotions', true);
+		load('notify_upgrade_updates', true);
+		load('paid_subscription', false);
+		load('settings_last_imported', 0);
+		load('settings_last_exported', 0);
+		load('show_alert', false); // Tracker-Tally
+		load('show_badge', true);
+		load('show_cmp', true);
+		load('show_tracker_urls', true);
+		load('toggle_individual_trackers', true);
+		load('setup_step', 7);
+		load('setup_show_warning_override', true);
+		load('setup_number', 0);
+		load('setup_block', 1);
+		load('setup_complete', false);
+		load('tutorial_complete', false);
+		load('enable_wtm_serp_report', true);
 
-			if (trackers_banner_status && typeof trackers_banner_status === 'object') {
-				this.trackers_banner_status = !!trackers_banner_status.show;
-				_setProp('trackers_banner_status', this.trackers_banner_status);
-			} else {
-				_initProperty('trackers_banner_status', true);
-			}
+		// Complex props
+		load('account', null);
+		load('bugs', {});
+		load('click2play', {});
+		load('cmp_data', []);
+		load('compatibility', {});
+		load('metrics', {});
+		load('new_app_ids', []);
+		load('selected_app_ids', {});
+		load('site_blacklist', []);
+		load('site_specific_blocks', {});
+		load('site_specific_unblocks', {});
+		load('site_whitelist', []);
+		load('cliqz_module_whitelist', {});
+		load('surrogates', {});
+		load('version_history', []);
+	}
 
-			// Make sure that getBrowserInfo() has resolved before we set these properties
-			(async() => {
-				await globals.BROWSER_INFO_READY;
-				_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
-			})();
+	/**
+	 * Write pending changes to Storage.
+	 */
+	flush() {
+		if (this.#modifiedKeys.size > 0) {
+			const keys = [...this.#modifiedKeys];
+			this.#modifiedKeys.clear();
 
-			// simple props
-			_initProperty('alert_bubble_pos', 'br');
-			_initProperty('alert_bubble_timeout', 15);
-			_initProperty('alert_expanded', false);
-			_initProperty('bugs_last_checked', 0);
-			_initProperty('bugs_last_updated', nowTime);
-			_initProperty('cliqz_adb_mode', globals.DEFAULT_ADBLOCKER_SETTING);
-			_initProperty('cliqz_legacy_opt_in', false);
-			_initProperty('cliqz_import_state', 0);
-			_initProperty('cmp_version', 0);
-			_initProperty('current_theme', 'default');
-			_initProperty('enable_ad_block', !IS_CLIQZ);
-			_initProperty('enable_anti_tracking', !IS_CLIQZ);
-			_initProperty('enable_autoupdate', true);
-			_initProperty('enable_click2play', true);
-			_initProperty('enable_click2play_social', true);
-			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
-			_initProperty('enable_abtests', true);
-			_initProperty('enable_smart_block', true);
-			_initProperty('expand_all_trackers', true);
-			_initProperty('hide_alert_trusted', false);
-			_initProperty('hub_layout', 'not_yet_set');
-			_initProperty('ignore_first_party', true);
-			_initProperty('import_callout_dismissed', true);
-			_initProperty('install_random_number', 0);
-			_initProperty('install_date', 0);
-			_initProperty('is_expanded', false);
-			_initProperty('is_expert', false);
-			_initProperty('last_cmp_date', 0);
-			_initProperty('notify_library_updates', false);
-			_initProperty('notify_promotions', true);
-			_initProperty('notify_upgrade_updates', true);
-			_initProperty('paid_subscription', false);
-			_initProperty('settings_last_imported', 0);
-			_initProperty('settings_last_exported', 0);
-			_initProperty('show_alert', false); // Tracker-Tally
-			_initProperty('show_badge', true);
-			_initProperty('show_cmp', true);
-			_initProperty('show_tracker_urls', true);
-			_initProperty('toggle_individual_trackers', true);
-			_initProperty('setup_step', 7);
-			_initProperty('setup_show_warning_override', true);
-			_initProperty('setup_number', 0);
-			_initProperty('setup_block', 1);
-			_initProperty('setup_complete', false);
-			_initProperty('tutorial_complete', false);
-			_initProperty('enable_wtm_serp_report', true);
-
-			// Complex props
-			_initProperty('account', null);
-			_initProperty('bugs', {});
-			_initProperty('click2play', {});
-			_initProperty('cmp_data', []);
-			_initProperty('compatibility', {});
-			_initProperty('metrics', {});
-			_initProperty('new_app_ids', []);
-			_initProperty('selected_app_ids', {});
-			_initProperty('site_blacklist', []);
-			_initProperty('site_specific_blocks', {});
-			_initProperty('site_specific_unblocks', {});
-			_initProperty('site_whitelist', []);
-			_initProperty('cliqz_module_whitelist', {});
-			_initProperty('surrogates', {});
-			_initProperty('version_history', []);
-		});
+			const changes = Object.fromEntries(keys.map(key => [key, this[key]]));
+			log('Flushed config...', changes);
+			prefsSet(changes).then(() => {
+				log('Flushed config...DONE', changes);
+			}).catch((err) => {
+				// Retrying will most likely fail. To recover, remember the
+				// old keys, so they are not lost in later write operations.
+				log('Failed to write keys. Pushing failed updates back.', err);
+				keys.forEach(key => this.#modifiedKeys.add(key));
+			});
+		}
 	}
 
 	static _getDefaultLanguage() {

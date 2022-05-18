@@ -45,10 +45,6 @@ class Globals {
 		this.NOTIFICATIONS_LOADED = false;
 		this.upgrade_alert_shown = false;
 
-		// init
-		this.INIT_COMPLETE = false;
-		this.initProps = {};
-
 		// domains
 		this.GHOSTERY_ROOT_DOMAIN = `${this.DEBUG ? 'ghosterystage' : 'ghostery'}.com`;
 		this.GHOSTERY_BASE_URL = `https://${this.GHOSTERY_ROOT_DOMAIN}`;

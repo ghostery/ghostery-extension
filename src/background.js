@@ -1713,6 +1713,10 @@ function purgeObsoleteData() {
  */
 async function init() {
 	try {
+		// Avoid a pitfall: this is one of the few exceptions where
+		// the proxy should not be used. "conf.init()" would call
+		// ConfData#init, but during initialization that would set
+		// fields through the proxy, which would trigger events.
 		await confData.init();
 
 		initializePopup();
@@ -1736,19 +1740,16 @@ async function init() {
 				if (conf.current_theme !== 'default') {
 					await account.getTheme(conf.current_theme);
 				}
-			}
-			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
-			if (globals.JUST_INSTALLED) {
-				setGhosteryDefaultBlocking();
+			} else {
+				ghosteryDebugger.addAccountEvent('app started', 'not signed in');
+				if (globals.JUST_INSTALLED) {
+					setGhosteryDefaultBlocking();
+				}
 			}
 		} catch (err) {
 			log(err);
 		}
 
-		// persist Conf properties to storage only after init has completed
-		await common.prefsSet(globals.initProps);
-
-		globals.INIT_COMPLETE = true;
 		if (IS_CLIQZ) {
 			importCliqzSettings(cliqz, conf);
 		}
