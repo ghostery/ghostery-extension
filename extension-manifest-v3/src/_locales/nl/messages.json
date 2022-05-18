@@ -34,7 +34,8 @@
     "message": "Annuleren"
   },
   "cdn": {
-    "message": "CDN"
+    "message": "CDN",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "comments": {
     "message": "Opmerkingen",
@@ -54,20 +55,23 @@
     "message": "Disable Trackers Preview"
   },
   "email": {
-    "message": "E-mail"
+    "message": "E-mail",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "essential": {
     "message": "Essentieel",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "extensions": {
-    "message": "Extensies"
+    "message": "Extensies",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "ghostery_options": {
     "message": "Ghostery Options"
   },
   "hosting": {
-    "message": "Hosting"
+    "message": "Hosting",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "manifest_name": {
     "message": "Ghostery – Privacy Ad Blocker"
@@ -76,7 +80,8 @@
     "message": "Ghostery is een krachtige privacy extensie. Blokkeer ads, stop trackers en maak websites sneller,"
   },
   "miscellaneous": {
-    "message": "Diversen"
+    "message": "Diversen",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "off": {
     "message": "Uit"
@@ -96,6 +101,14 @@
   "show_trackers_preview_next_to_search_results": {
     "message": "Show Trackers Preview next to search results"
   },
+  "site_analytics": {
+    "message": "Website Analytics",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "social_media": {
+    "message": "Sociale Media",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
   "statistical_report": {
     "message": "Statistisch Verslag"
   },
@@ -111,6 +124,10 @@
   },
   "trackers_preview": {
     "message": "Trackers Preview"
+  },
+  "unknown": {
+    "message": "Onbekend",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
     "message": "User interface"

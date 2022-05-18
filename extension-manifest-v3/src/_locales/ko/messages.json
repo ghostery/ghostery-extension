@@ -34,7 +34,8 @@
     "message": "취소 "
   },
   "cdn": {
-    "message": "CDN"
+    "message": "CDN",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "comments": {
     "message": "댓글",
@@ -54,20 +55,23 @@
     "message": "Disable Trackers Preview"
   },
   "email": {
-    "message": "이메일 "
+    "message": "이메일 ",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "essential": {
     "message": "필수 ",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "extensions": {
-    "message": "확장"
+    "message": "확장",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "ghostery_options": {
     "message": "Ghostery Options"
   },
   "hosting": {
-    "message": "호스팅"
+    "message": "호스팅",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "manifest_name": {
     "message": "Ghostery – 개인정보 보호용 광고 차단기"
@@ -76,7 +80,8 @@
     "message": "Ghostery는 강력한 개인정보 보호 확장 프로그램입니다. 광고와 트래커를 차단하고 웹 사이트의 속도를 높여줍니다."
   },
   "miscellaneous": {
-    "message": "기타"
+    "message": "기타",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "off": {
     "message": "끄기 "
@@ -96,6 +101,14 @@
   "show_trackers_preview_next_to_search_results": {
     "message": "Show Trackers Preview next to search results"
   },
+  "site_analytics": {
+    "message": "사이트 분석 ",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "social_media": {
+    "message": "소셜 미디어 ",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
   "statistical_report": {
     "message": "통계 보고서"
   },
@@ -111,6 +124,10 @@
   },
   "trackers_preview": {
     "message": "Trackers Preview"
+  },
+  "unknown": {
+    "message": "알 수 없음 ",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
     "message": "User interface"

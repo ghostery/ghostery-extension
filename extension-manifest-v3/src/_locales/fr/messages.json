@@ -34,7 +34,8 @@
     "message": "Annuler"
   },
   "cdn": {
-    "message": "CDN"
+    "message": "CDN",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "comments": {
     "message": "Commentaires",
@@ -54,20 +55,23 @@
     "message": "Disable Trackers Preview"
   },
   "email": {
-    "message": "E-mail"
+    "message": "E-mail",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "essential": {
     "message": "Essentiels",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "extensions": {
-    "message": "Extensions"
+    "message": "Extensions",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "ghostery_options": {
     "message": "Ghostery Options"
   },
   "hosting": {
-    "message": "Hébergement"
+    "message": "Hébergement",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "manifest_name": {
     "message": "Ghostery – Bloqueur de publicité protégeant la vie privée"
@@ -76,7 +80,8 @@
     "message": "Ghostery est une puissante extension de protection de la vie privée. Bloquez les publicités, déjouez les outils de pistage et accélérez les sites Web."
   },
   "miscellaneous": {
-    "message": "Divers"
+    "message": "Divers",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "off": {
     "message": "désactivé"
@@ -96,6 +101,14 @@
   "show_trackers_preview_next_to_search_results": {
     "message": "Afficher l'aperçu der mouchards à côté des résultats"
   },
+  "site_analytics": {
+    "message": "Outils d'analyse de sites web",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "social_media": {
+    "message": "Réseaux sociaux",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
   "statistical_report": {
     "message": "Rapport statistique"
   },
@@ -111,6 +124,10 @@
   },
   "trackers_preview": {
     "message": "Trackers Preview"
+  },
+  "unknown": {
+    "message": "Inconnu",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
     "message": "User interface"

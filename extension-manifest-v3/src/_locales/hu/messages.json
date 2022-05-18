@@ -34,7 +34,8 @@
     "message": "Mégsem"
   },
   "cdn": {
-    "message": "CDN"
+    "message": "CDN",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "comments": {
     "message": "Hozzászólások",
@@ -54,20 +55,23 @@
     "message": "Disable Trackers Preview"
   },
   "email": {
-    "message": "E-mail-cím"
+    "message": "E-mail-cím",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "essential": {
     "message": "Alapvető",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "extensions": {
-    "message": "Kiterjesztések"
+    "message": "Kiterjesztések",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "ghostery_options": {
     "message": "Ghostery Options"
   },
   "hosting": {
-    "message": "Hosztolás"
+    "message": "Hosztolás",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "manifest_name": {
     "message": "Ghostery – Adatavédelmi Reklámblokkoló"
@@ -76,7 +80,8 @@
     "message": "Ennek a kiegészítőnek a rövid leírása. Blokkolja a reklámokat, leállítja a trackereket (követőalkalmazások) és felgyorsítja a weboldalakat."
   },
   "miscellaneous": {
-    "message": "Egyéb"
+    "message": "Egyéb",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "off": {
     "message": "Ki"
@@ -96,6 +101,14 @@
   "show_trackers_preview_next_to_search_results": {
     "message": "Show Trackers Preview next to search results"
   },
+  "site_analytics": {
+    "message": "Webanalitika",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "social_media": {
+    "message": "Közösségi média",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
   "statistical_report": {
     "message": "Statisztikai jelentés"
   },
@@ -111,6 +124,10 @@
   },
   "trackers_preview": {
     "message": "Trackers Preview"
+  },
+  "unknown": {
+    "message": "Ismeretlen",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
     "message": "User interface"

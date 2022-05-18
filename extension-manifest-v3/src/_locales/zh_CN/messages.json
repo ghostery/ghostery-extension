@@ -34,7 +34,8 @@
     "message": "取消"
   },
   "cdn": {
-    "message": "CDN"
+    "message": "CDN",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "comments": {
     "message": "评论",
@@ -54,20 +55,23 @@
     "message": "Disable Trackers Preview"
   },
   "email": {
-    "message": "电子邮件地址"
+    "message": "电子邮件地址",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "essential": {
     "message": "基本",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "extensions": {
-    "message": "扩展"
+    "message": "扩展",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "ghostery_options": {
     "message": "Ghostery Options"
   },
   "hosting": {
-    "message": "托管"
+    "message": "托管",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "manifest_name": {
     "message": "Ghostery – 隐私广告拦截工具"
@@ -76,7 +80,8 @@
     "message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。"
   },
   "miscellaneous": {
-    "message": "其他"
+    "message": "其他",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "off": {
     "message": "关闭"
@@ -96,6 +101,14 @@
   "show_trackers_preview_next_to_search_results": {
     "message": "Show Trackers Preview next to search results"
   },
+  "site_analytics": {
+    "message": "网站分析",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "social_media": {
+    "message": "社交媒体",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
   "statistical_report": {
     "message": "统计报告"
   },
@@ -111,6 +124,10 @@
   },
   "trackers_preview": {
     "message": "Trackers Preview"
+  },
+  "unknown": {
+    "message": "未知",
+    "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
     "message": "User interface"
