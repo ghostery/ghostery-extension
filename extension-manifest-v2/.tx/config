@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[ghostery-browser-extension.develop-en-messages-json]
+[o:ghostery-inc:p:ghostery-browser-extension:r:develop-en-messages-json]
 file_filter = _locales/<lang>/messages.json
 minimum_perc = 0
 source_file = _locales/en/messages.json

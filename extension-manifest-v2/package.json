@@ -27,20 +27,8 @@
   },
   "vendorCopy": [
     {
-      "from": "node_modules/hybrids/src",
-      "to": "vendor/hybrids/src"
-    },
-    {
       "from": "node_modules/ghostery-common/build/gbe/assets",
       "to": "cliqz"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/serp-report/src",
-      "to": "vendor/@whotracksme/serp-report/src"
-    },
-    {
-      "from": "node_modules/@whotracksme/webextension-packages/packages/ui/src",
-      "to": "vendor/@whotracksme/ui/src"
     }
   ],
   "repository": {
@@ -54,13 +42,12 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/url-parser": "^1.1.4",
-    "@whotracksme/webextension-packages": "^0.2.0",
+    "@whotracksme/webextension-packages": "^0.3.1",
     "classnames": "^2.2.5",
     "d3": "^5.16.0",
     "foundation-sites": "^6.6.2",
     "ghostery-common": "^1.2.17",
     "history": "^4.10.1",
-    "hybrids": "^7.0.0",
     "jquery": "3.5.0",
     "json-api-normalizer": "^1.0.4",
     "linkedom": "^0.14.5",

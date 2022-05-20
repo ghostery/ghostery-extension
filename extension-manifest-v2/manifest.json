@@ -64,10 +64,10 @@
 		},
 		{
 			"js": [
-				"/vendor/@whotracksme/serp-report/src/content_scripts/serp-report.js"
+				"/dist/trackers_preview_content_script.js"
 			],
 			"css": [
-				"/vendor/@whotracksme/serp-report/src/content_scripts/serp-report.css"
+				"/dist/css/trackers_preview_content_script.css"
 			],
 			"matches": [
 				"*://*.google.com/*",
@@ -298,7 +298,6 @@
 	"minimum_opera_version": "56",
 	"web_accessible_resources": [
 		"app/images/*",
-		"vendor/@whotracksme/serp-report/src/pages/iframe/index.html",
-		"vendor/@whotracksme/ui/src/tracker-wheel.js"
+		"app/trackers-preview/popup.html"
 	]
 }
