@@ -80,7 +80,7 @@ class Api {
 				} else {
 					resolve(data);
 				}
-			});
+			}).catch(err => reject(err));
 		});
 	}
 
@@ -97,7 +97,11 @@ class Api {
 								shouldRefresh = true;
 							}
 						});
+					} else {
+						reject(data);
+						return;
 					}
+
 					if (shouldRefresh) {
 						this.refreshToken()
 							.then((res) => {
