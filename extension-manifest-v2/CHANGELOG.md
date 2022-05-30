@@ -1,3 +1,9 @@
+### GHOSTERY 8.7.2 (May 30, 2022)
+
+* Fixed: Initialization could not finish which will prevent the extension from saving settings (#792)
+* Improve: Critical errors reporting (#791)
+* Improve: Vietnamese translations - thanks to @tachibana-shin (#773)
+
 ### GHOSTERY 8.7.1 (May 2, 2022)
 
 * Fixed: missing icons and descriptions for new categories (#778)
