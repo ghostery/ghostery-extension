@@ -42,6 +42,7 @@ import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import account from './classes/Account';
 import SearchMessager from './classes/SearchMessager';
+import ErrorReporter from './classes/ErrorReporter';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -1742,7 +1743,8 @@ async function init() {
 				setGhosteryDefaultBlocking();
 			}
 		} catch (err) {
-			log(err);
+			ErrorReporter.captureException(err);
+			alwaysLog(err);
 		}
 
 		// persist Conf properties to storage only after init has completed
@@ -1753,7 +1755,8 @@ async function init() {
 			importCliqzSettings(cliqz, conf);
 		}
 	} catch (err) {
-		log('Error in init()', err);
+		ErrorReporter.captureException(err);
+		alwaysLog('Error in init()', err);
 		throw err;
 	}
 }
