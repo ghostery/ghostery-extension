@@ -67,7 +67,7 @@
 				"/dist/trackers_preview_content_script.js"
 			],
 			"css": [
-				"/dist/css/trackers_preview_content_script.css"
+				"/dist/css/trackers_preview_content_script_styles.css"
 			],
 			"matches": [
 				"*://*.google.com/*",
@@ -298,6 +298,6 @@
 	"minimum_opera_version": "56",
 	"web_accessible_resources": [
 		"app/images/*",
-		"app/trackers-preview/popup.html"
+		"app/templates/trackers-preview.html"
 	]
 }
