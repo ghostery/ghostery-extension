@@ -28,7 +28,6 @@ const HUB_DIR = path.resolve(__dirname, 'app/hub');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
-const TRACKERS_PREVIEW_DIR = path.resolve(__dirname, 'app/trackers-preview');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
@@ -62,8 +61,8 @@ module.exports = {
 		panel_react: [`${PANEL_DIR}/index.jsx`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
-		trackers_preview_popup: [`${TRACKERS_PREVIEW_DIR}/popup.js`],
-		trackers_preview_content_script: [`${TRACKERS_PREVIEW_DIR}/content_script.js`],
+		trackers_preview_popup: [`${SRC_DIR}/trackers-preview/popup.js`],
+		trackers_preview_content_script: [`${CONTENT_SCRIPTS_DIR}/trackers-preview.js`],
 
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
@@ -73,6 +72,8 @@ module.exports = {
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
+		trackers_preview_popup_styles: [`${SASS_DIR}/trackers-preview_popup.scss`],
+		trackers_preview_content_script_styles: [`${SASS_DIR}/trackers-preview_content_script.scss`],
 	},
 	output: {
 		filename: '[name].js',
