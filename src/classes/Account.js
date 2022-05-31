@@ -122,7 +122,7 @@ class Account {
 				url: COOKIE_URL,
 				name: 'csrf_token',
 			}, (cookie) => {
-				if (cookie === null) { return reject(); }
+				if (!cookie) { return reject(); }
 				return fetch(`${AUTH_SERVER}/api/v2/logout`, {
 					method: 'POST',
 					credentials: 'include',
@@ -346,7 +346,7 @@ class Account {
 			// Checks if user is already logged in
 			// @TODO move this into an init() function
 				new Promise((resolve) => {
-					if (conf.account !== null) {
+					if (conf.account) {
 						resolve();
 						return;
 					}
@@ -354,7 +354,7 @@ class Account {
 						url: COOKIE_URL,
 						name: 'user_id',
 					}, (cookie) => {
-						if (cookie !== null) {
+						if (cookie) {
 							this._setAccountInfo(cookie.value);
 							this.getUserSubscriptionData();
 						}
@@ -377,10 +377,10 @@ class Account {
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
 	hasScopesUnverified = (...required) => {
-		if (conf.account === null) { return false; }
-		if (conf.account.user === null) { return false; }
+		if (!conf.account) { return false; }
+		if (!conf.account.user) { return false; }
 		const userScopes = conf.account.user.scopes;
-		if (userScopes === null) { return false; }
+		if (!userScopes) { return false; }
 		if (required.length === 0) { return false; }
 
 		// check scopes
@@ -449,7 +449,7 @@ class Account {
 				secure: true,
 				httpOnly,
 			}, (cookie) => {
-				if (chrome.runtime.lastError || cookie === null) {
+				if (chrome.runtime.lastError || !cookie) {
 					reject(new Error(`Error setting cookie ${JSON.stringify(details)}: ${chrome.runtime.lastError}`));
 					return;
 				}
@@ -460,7 +460,7 @@ class Account {
 
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
-			if (conf.account === null) {
+			if (!conf.account) {
 				return this._getUserIDFromCookie()
 					.then((userID) => {
 						this._setAccountInfo(userID);
@@ -479,16 +479,16 @@ class Account {
 			.then(userID => (
 				new Promise((resolve, reject) => {
 					const { user } = conf.account;
-					if (user === null) {
+					if (!user) {
 						return this.getUser()
 							.then((u) => {
-								if (u.emailValidated !== true) {
+								if (!u.emailValidated) {
 									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
 								}
 								return resolve(userID);
 							});
 					}
-					if (user.emailValidated !== true) {
+					if (!user.emailValidated) {
 						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
 					}
 					return resolve(userID);
@@ -527,7 +527,7 @@ class Account {
 	}
 
 	_setThemeData = (data) => {
-		if (conf.account.themeData === null) {
+		if (!conf.account.themeData) {
 			conf.account.themeData = {};
 		}
 		const { name } = data;
