@@ -1,3 +1,9 @@
+### GHOSTERY 8.7.3 (June 1, 2022)
+
+* Fixed: Ghostery onboarding and update popup should no longer be displayed on every startup #500 - fixed with following changes:
+* Fixed: Firefox first party cookie isolation was breaking Ghostery settings #795
+* Fixed: Ghostery account initialization could break extension startup #796
+
 ### GHOSTERY 8.7.2 (May 30, 2022)
 
 * Fixed: Initialization could not finish which will prevent the extension from saving settings (#792)
