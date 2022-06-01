@@ -1706,6 +1706,43 @@ function purgeObsoleteData() {
 	});
 }
 
+async function initializeAccount() {
+	const timeout = setTimeout(() => {
+		const error = new Error('account init timeout');
+		ErrorReporter.captureException(error);
+		alwaysLog(error);
+	}, 5000);
+
+	try {
+		await account.migrate();
+
+		if (!conf.account) {
+			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
+			if (globals.JUST_INSTALLED) {
+				setGhosteryDefaultBlocking();
+			}
+			return;
+		}
+
+		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
+
+		await account.getUser();
+
+		await account.getUserSettings();
+
+		if (conf.current_theme !== 'default') {
+			await account.getTheme(conf.current_theme);
+		}
+
+		alwaysLog('successfully signed in');
+	} catch (e) {
+		ErrorReporter.captureException(e);
+		alwaysLog(e);
+	} finally {
+		clearTimeout(timeout);
+	}
+}
+
 /**
  * Application Initializer
  * Called whenever the browser starts or the extension is
@@ -1728,24 +1765,7 @@ async function init() {
 		await metrics.init(globals.JUST_INSTALLED);
 		await initializeGhosteryModules();
 
-		try {
-			await account.migrate();
-			if (conf.account !== null) {
-				ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
-				await account.getUser();
-				await account.getUserSettings();
-				if (conf.current_theme !== 'default') {
-					await account.getTheme(conf.current_theme);
-				}
-			}
-			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
-			if (globals.JUST_INSTALLED) {
-				setGhosteryDefaultBlocking();
-			}
-		} catch (err) {
-			ErrorReporter.captureException(err);
-			alwaysLog(err);
-		}
+		initializeAccount();
 
 		// persist Conf properties to storage only after init has completed
 		await common.prefsSet(globals.initProps);
