@@ -471,7 +471,7 @@ class Account {
 					if (!user) {
 						return this.getUser()
 							.then((u) => {
-								if (!u.emailValidated) {
+								if (u.emailValidated !== true) {
 									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
 								}
 								return resolve(userID);
