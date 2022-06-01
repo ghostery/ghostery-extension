@@ -16,14 +16,14 @@
 import { isEqual } from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
-import RSVP from 'rsvp';
 import globals from './Globals';
 import conf from './Conf';
 import dispatcher from './Dispatcher';
-import { log } from '../utils/common';
+import { alwaysLog, log } from '../utils/common';
 import Api from '../utils/api';
 import metrics from './Metrics';
 import ghosteryDebugger from './Debugger';
+import { cookiesGet, cookiesSet, cookiesRemove } from '../utils/cookies';
 
 const api = new Api();
 const {
@@ -116,31 +116,28 @@ class Account {
 		});
 	}
 
-	logout = () => (
-		new RSVP.Promise((resolve, reject) => {
-			chrome.cookies.get({
-				url: COOKIE_URL,
-				name: 'csrf_token',
-			}, (cookie) => {
-				if (cookie === null) { return reject(); }
-				return fetch(`${AUTH_SERVER}/api/v2/logout`, {
-					method: 'POST',
-					credentials: 'include',
-					headers: { 'X-CSRF-Token': cookie.value },
-				}).then((res) => {
-					if (res.status < 400) {
-						ghosteryDebugger.addAccountEvent('logout', 'cookie set by fetch POST');
-						return resolve();
-					}
-					return res.json().then(json => reject(json));
-				}).catch(err => reject(err));
+	async logout() {
+		try {
+			const cookie = await cookiesGet({ name: 'csrf_token' });
+			if (!cookie) {
+				throw new Error('no cookie');
+			}
+			const res = await fetch(`${AUTH_SERVER}/api/v2/logout`, {
+				method: 'POST',
+				credentials: 'include',
+				headers: { 'X-CSRF-Token': cookie.value },
 			});
-		}).finally(() => {
+			if (res.status < 400) {
+				ghosteryDebugger.addAccountEvent('logout', 'cookie set by fetch POST');
+				return;
+			}
+			throw new Error(await res.json());
+		} finally {
 			// remove cookies in case fetch fails
 			this._removeCookies();
 			this._clearAccountInfo();
-		})
-	)
+		}
+	}
 
 	refreshToken = () => api.refreshToken()
 
@@ -342,26 +339,20 @@ class Account {
 				});
 			});
 		})
-			.then(() => (
-			// Checks if user is already logged in
-			// @TODO move this into an init() function
-				new Promise((resolve) => {
-					if (conf.account !== null) {
-						resolve();
-						return;
-					}
-					chrome.cookies.get({
-						url: COOKIE_URL,
-						name: 'user_id',
-					}, (cookie) => {
-						if (cookie !== null) {
-							this._setAccountInfo(cookie.value);
-							this.getUserSubscriptionData();
-						}
-						resolve();
-					});
-				})
-			))
+			.then(async function() {
+				// Checks if user is already logged in
+				// @TODO move this into an init() function
+				if (conf.account) {
+					return;
+				}
+				const cookie = await cookiesGet({ name: 'user_id' });
+				if (cookie) {
+					this._setAccountInfo(cookie.value);
+					this.getUserSubscriptionData();
+				}
+			})
+			// should not break the init path
+			.catch(e => alwaysLog(e))
 	)
 
 	/**
@@ -377,10 +368,10 @@ class Account {
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
 	hasScopesUnverified = (...required) => {
-		if (conf.account === null) { return false; }
-		if (conf.account.user === null) { return false; }
+		if (!conf.account) { return false; }
+		if (!conf.account.user) { return false; }
 		const userScopes = conf.account.user.scopes;
-		if (userScopes === null) { return false; }
+		if (!userScopes) { return false; }
 		if (required.length === 0) { return false; }
 
 		// check scopes
@@ -431,36 +422,34 @@ class Account {
 		return settings;
 	}
 
-	_setLoginCookie = details => (
-		new Promise((resolve, reject) => {
-			const {
-				name, value, expirationDate, httpOnly
-			} = details;
-			if (!name || !value) {
-				reject(new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`));
-				return;
-			}
-			chrome.cookies.set({
+	_setLoginCookie = async(details) => {
+		const {
+			name, value, expirationDate, httpOnly
+		} = details;
+		if (!name || !value) {
+			throw new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`);
+		}
+		try {
+			const cookie = await cookiesSet({
 				name,
 				value,
-				url: COOKIE_URL,
 				domain: COOKIE_DOMAIN,
 				expirationDate,
 				secure: true,
 				httpOnly,
-			}, (cookie) => {
-				if (chrome.runtime.lastError || cookie === null) {
-					reject(new Error(`Error setting cookie ${JSON.stringify(details)}: ${chrome.runtime.lastError}`));
-					return;
-				}
-				resolve(cookie);
 			});
-		})
-	)
+			if (!cookie) {
+				throw new Error('no cookie');
+			}
+			return cookie;
+		} catch (e) {
+			throw new Error(`Error setting cookie ${JSON.stringify(details)}: ${e}`);
+		}
+	}
 
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
-			if (conf.account === null) {
+			if (!conf.account) {
 				return this._getUserIDFromCookie()
 					.then((userID) => {
 						this._setAccountInfo(userID);
@@ -479,7 +468,7 @@ class Account {
 			.then(userID => (
 				new Promise((resolve, reject) => {
 					const { user } = conf.account;
-					if (user === null) {
+					if (!user) {
 						return this.getUser()
 							.then((u) => {
 								if (u.emailValidated !== true) {
@@ -488,7 +477,7 @@ class Account {
 								return resolve(userID);
 							});
 					}
-					if (user.emailValidated !== true) {
+					if (!user.emailValidated) {
 						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
 					}
 					return resolve(userID);
@@ -527,7 +516,7 @@ class Account {
 	}
 
 	_setThemeData = (data) => {
-		if (conf.account.themeData === null) {
+		if (!conf.account.themeData) {
 			conf.account.themeData = {};
 		}
 		const { name } = data;
@@ -540,20 +529,13 @@ class Account {
 		conf.current_theme = 'default';
 	}
 
-	_getUserIDFromCookie = () => (
-		new Promise((resolve, reject) => {
-			chrome.cookies.get({
-				url: COOKIE_URL,
-				name: 'user_id',
-			}, (cookie) => {
-				if (cookie) {
-					resolve(cookie.value);
-					return;
-				}
-				reject(new Error('err getting login user_id cookie'));
-			});
-		})
-	)
+	_getUserIDFromCookie = async() => {
+		const cookie = await cookiesGet({ name: 'user_id' });
+		if (!cookie) {
+			throw new Error('err getting login user_id cookie');
+		}
+		return cookie.value;
+	}
 
 	/**
 	 * GET user settings from ConsumerAPI
@@ -580,13 +562,13 @@ class Account {
 
 	_removeCookies = () => {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
-		cookies.forEach((name) => {
-			chrome.cookies.remove({
-				url: COOKIE_URL,
-				name,
-			}, () => {
+		cookies.forEach(async(name) => {
+			try {
+				await cookiesRemove({ name });
 				log(`Removed cookie with name: ${name}`);
-			});
+			} catch (e) {
+				log(`Could not remove cookie with a name: ${name}`, e);
+			}
 		});
 	}
 }

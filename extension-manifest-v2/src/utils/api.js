@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { cookiesGet } from './cookies';
+
 export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e.message || '', code: e.code || e.message || '' }];
 
 class Api {
@@ -132,14 +134,17 @@ class Api {
 		});
 	}
 
-	_getCsrfCookie = (cookieUrl = this.config.COOKIE_URL) => (
-		new Promise((resolve) => {
-			chrome.cookies.get({
-				url: cookieUrl,
-				name: 'csrf_token',
-			}, cookie => resolve((cookie !== null) ? cookie.value : ''));
-		})
-	)
+	_getCsrfCookie = async() => {
+		try {
+			const cookie = await cookiesGet({ name: 'csrf_token' });
+			if (!cookie) {
+				return '';
+			}
+			return cookie.value;
+		} catch (e) {
+			return '';
+		}
+	}
 
 	_errorHandler = errors => Promise.resolve(errors)
 
