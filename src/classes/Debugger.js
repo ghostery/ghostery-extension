@@ -22,6 +22,7 @@ import { isLog, activateLog } from '../utils/common';
 import {
 	getObjectSlice, pickRandomArrEl, getChromeStorageUsage, runStorageSelfCheck
 } from '../utils/utils';
+import { cookiesGetAll } from '../utils/cookies';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -874,14 +875,6 @@ class Debugger {
 	 * @return {Promise}		The Promise for the calls to the account server. When the Promise fulfills, it returns a thank you message.
 	 */
 	getUserData = () => {
-		function _getUserCookies() {
-			return new Promise((resolve) => {
-				chrome.cookies.getAll({
-					url: globals.COOKIE_URL,
-				}, resolve);
-			});
-		}
-
 		const _getUserSettings = () => new Promise(r => account.getUserSettings().catch(r).then(r));
 
 		const _getUserSubscriptionData = () => new Promise(r => account.getUserSubscriptionData().catch(r).then(r));
@@ -921,7 +914,7 @@ class Debugger {
 		};
 
 		return Promise.all([
-			_getUserCookies(),
+			cookiesGetAll(),
 			account.getUser(),
 			_getUserSettings(),
 			_getUserSubscriptionData(),
