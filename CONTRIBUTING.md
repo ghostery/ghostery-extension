@@ -16,6 +16,32 @@ Before you submit an issue, search the [issue tracker](../../issues) for a dupli
 
 You can also submit feature requests to the [issue tracker](../../issues). Before you submit a request, search to make sure a duplicate feature hasn't already been proposed.
 
+## Contributing Translations
+
+Good translations are hard. If you see specific areas for improvement, please let us know. Even better, send us a pull request.
+
+We also accept community contributions for missing languages, especially if you are a native speaker.
+Should you have problems with the setup, contact us and we can help you. You don't have to be a developer to get started.
+
+Current list of officially supported languages (maintained by Ghostery in Transifex):
+
++ English
++ German
++ French
++ Spanish
++ Italian
++ Polish
++ Dutch
++ Korean
++ Japanese
++ Hungarian
++ Chinese (simplified and traditional)
++ Russian
++ Brazilian
+
+Languages maintained by the community:
+* Vietnamese (thanks to Tachibana Shin!)
+
 ## Working With the Code
 
 + [Fork](https://help.github.com/articles/fork-a-repo/) the repository. Make sure to keep your fork [synced](https://help.github.com/articles/syncing-a-fork/) with the source repo
