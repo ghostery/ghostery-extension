@@ -114,6 +114,7 @@ class Api {
 											.then(() => resolve(data2))
 											.catch(err => reject(err))
 									)).catch(err => reject(err));
+									return;
 								}
 								this._sendReq(method, path, body)
 									.then(Api._processResponse)
