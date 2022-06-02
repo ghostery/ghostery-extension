@@ -339,7 +339,7 @@ class Account {
 				});
 			});
 		})
-			.then(async function() {
+			.then(async () => {
 				// Checks if user is already logged in
 				// @TODO move this into an init() function
 				if (conf.account) {
