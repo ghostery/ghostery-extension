@@ -76,7 +76,7 @@ module.exports = {
 		'no-unused-vars': [1],
 		'no-useless-escape': [1],
 		'operator-linebreak': [0],
-		'space-before-function-paren': [2, 'never'],
+		'space-before-function-paren': [2, { anonymous: 'never', named: 'never', asyncArrow: 'always' }],
 
 		// Plugin: Import
 		'import/no-cycle': [0],
