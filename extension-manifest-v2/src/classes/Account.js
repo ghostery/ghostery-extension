@@ -422,7 +422,7 @@ class Account {
 		return settings;
 	}
 
-	_setLoginCookie = async(details) => {
+	_setLoginCookie = async (details) => {
 		const {
 			name, value, expirationDate, httpOnly
 		} = details;
@@ -529,7 +529,7 @@ class Account {
 		conf.current_theme = 'default';
 	}
 
-	_getUserIDFromCookie = async() => {
+	_getUserIDFromCookie = async () => {
 		const cookie = await cookiesGet({ name: 'user_id' });
 		if (!cookie) {
 			throw new Error('err getting login user_id cookie');
@@ -562,7 +562,7 @@ class Account {
 
 	_removeCookies = () => {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
-		cookies.forEach(async(name) => {
+		cookies.forEach(async (name) => {
 			try {
 				await cookiesRemove({ name });
 				log(`Removed cookie with name: ${name}`);

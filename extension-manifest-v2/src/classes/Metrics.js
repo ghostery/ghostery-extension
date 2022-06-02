@@ -337,7 +337,7 @@ class Metrics {
 			};
 		}
 
-		frequencies.forEach(async(frequency) => {
+		frequencies.forEach(async (frequency) => {
 			if (this._checkPing(type, frequency)) {
 				const timeNow = Number((new Date()).getTime());
 				const metrics_url = await this._buildMetricsUrl(type, frequency);
