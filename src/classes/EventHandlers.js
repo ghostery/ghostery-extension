@@ -154,7 +154,7 @@ class EventHandlers {
 		}
 
 		// show CMP upgrade notifications
-		utils.getActiveTab(async(tab) => {
+		utils.getActiveTab(async (tab) => {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
 			}

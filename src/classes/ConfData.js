@@ -93,7 +93,7 @@ class ConfData {
 			}
 
 			// Make sure that getBrowserInfo() has resolved before we set these properties
-			(async() => {
+			(async () => {
 				await globals.BROWSER_INFO_READY;
 				_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
 			})();

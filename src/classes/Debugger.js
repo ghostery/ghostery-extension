@@ -835,7 +835,7 @@ class Debugger {
 	 * @return 	{String}					A thank you message.
 	 */
 	checkStorage = () => {
-		(async() => {
+		(async () => {
 			const { bytesInUse, quotaInBytes, usage } = await getChromeStorageUsage();
 			const { ok, message } = await runStorageSelfCheck();
 

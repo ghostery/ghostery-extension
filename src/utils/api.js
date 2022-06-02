@@ -134,7 +134,7 @@ class Api {
 		});
 	}
 
-	_getCsrfCookie = async() => {
+	_getCsrfCookie = async () => {
 		try {
 			const cookie = await cookiesGet({ name: 'csrf_token' });
 			if (!cookie) {

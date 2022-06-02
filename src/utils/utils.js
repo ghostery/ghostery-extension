@@ -869,7 +869,7 @@ export async function getChromeStorageUsage({ fastChecksOnly = false } = {}) {
  */
 export async function runStorageSelfCheck({ timeoutInMs = 10000 } = {}) {
 	const tmpKeyPrefix = 'DELETE-ME:';
-	const selfCheck = async({ index = -1, payloadSize = 100 }) => new Promise((resolve, reject) => {
+	const selfCheck = async ({ index = -1, payloadSize = 100 }) => new Promise((resolve, reject) => {
 		setTimeout(() => reject(new Error('test timed out')), timeoutInMs);
 		setTimeout(() => {
 			const key = `${tmpKeyPrefix}self-check-${index}:${Math.random()}`;

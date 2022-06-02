@@ -1531,7 +1531,7 @@ function initializeGhosteryModules() {
 				}
 
 				// Make sure that getBrowserInfo() has resolved before we set these properties
-				(async() => {
+				(async () => {
 					await globals.BROWSER_INFO_READY;
 					if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
 						if (globals.JUST_INSTALLED) {
@@ -1618,7 +1618,7 @@ function initializeGhosteryModules() {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
 			if (globals.JUST_INSTALLED) {
-				(async() => {
+				(async () => {
 					await globals.BROWSER_INFO_READY;
 					if (BROWSER_INFO.name !== 'ghostery_desktop') {
 						// Open the Ghostery Hub on install with justInstalled query parameter set to true.
