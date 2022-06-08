@@ -37,8 +37,20 @@ CLIQZ.config.default_prefs = {
 	'modules.hpn-lite.enabled': IS_ANDROID,
 	'modules.anolysis.enabled': IS_ANDROID,
 };
-if (IS_ANDROID) {
-	CLIQZ.config.settings.HW_CHANNEL = 'android';
-}
 
-export default new (CLIQZ.App)({ debug: globals.DEBUG });
+const cliqz = new (CLIQZ.App)({ debug: globals.DEBUG });
+const start = cliqz.start.bind(cliqz);
+
+cliqz.start = async (...args) => {
+	await globals.BROWSER_INFO_READY;
+	if (IS_ANDROID) {
+		CLIQZ.config.settings.HW_CHANNEL = 'android';
+	} else if (globals.BROWSER_INFO.token === 'gd') {
+		CLIQZ.config.settings.HW_CHANNEL = 'ghostery-browser';
+	} else if (globals.BROWSER_INFO.token === 'ga') {
+		CLIQZ.config.settings.HW_CHANNEL = 'ghostery-browser-android';
+	}
+	return start(...args);
+};
+
+export default cliqz;
