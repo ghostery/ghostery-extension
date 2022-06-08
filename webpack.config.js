@@ -31,7 +31,7 @@ const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
-	devtool: 'none', // source-maps
+	devtool: 'source-maps', // source-maps
 	performance: {
 		hints: false // notify of assets over 250kb
 	},

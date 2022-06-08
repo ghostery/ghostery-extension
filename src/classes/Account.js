@@ -274,7 +274,7 @@ class Account {
 			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
 				if (chrome.runtime.lastError) {
 					ghosteryDebugger.addAccountEvent('migrate', 'runtime error');
-					resolve(new Error(chrome.runtime.lastError));
+					resolve(chrome.runtime.lastError);
 					return;
 				}
 

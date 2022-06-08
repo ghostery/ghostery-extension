@@ -741,7 +741,7 @@ export function injectScript(tabId, scriptfile, cssfile, runAt) {
 		chrome.tabs.executeScript(tabId, { file: scriptfile, runAt }, () => {
 			if (chrome.runtime.lastError) {
 				log('injectScript error', chrome.runtime.lastError);
-				reject(new Error(chrome.runtime.lastError));
+				reject(chrome.runtime.lastError);
 				return;
 			}
 
@@ -749,7 +749,7 @@ export function injectScript(tabId, scriptfile, cssfile, runAt) {
 				chrome.tabs.insertCSS(tabId, { file: cssfile, runAt }, () => {
 					if (chrome.runtime.lastError) {
 						log('insertCSS error', chrome.runtime.lastError);
-						reject(new Error(chrome.runtime.lastError));
+						reject(chrome.runtime.lastError);
 						return;
 					}
 					resolve();

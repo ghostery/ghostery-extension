@@ -1707,14 +1707,16 @@ function purgeObsoleteData() {
 }
 
 async function initializeAccount() {
+	let lastStep = 'start';
 	const timeout = setTimeout(() => {
-		const error = new Error('account init timeout');
+		const error = new Error(`account init timeout after step: ${lastStep}`);
 		ErrorReporter.captureException(error);
 		alwaysLog(error);
 	}, 5000);
 
 	try {
 		await account.migrate();
+		lastStep = 'migrate';
 
 		if (!conf.account) {
 			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
@@ -1727,11 +1729,14 @@ async function initializeAccount() {
 		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
 
 		await account.getUser();
+		lastStep = 'getUser';
 
 		await account.getUserSettings();
+		lastStep = 'getUserSettings';
 
 		if (conf.current_theme !== 'default') {
 			await account.getTheme(conf.current_theme);
+			lastStep = 'getTheme';
 		}
 
 		alwaysLog('successfully signed in');
