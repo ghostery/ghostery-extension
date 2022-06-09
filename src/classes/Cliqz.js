@@ -14,6 +14,7 @@
 /*  @memberOf  BackgroundClasses */
 import { parseHtml } from 'ghostery-common/build/gbe/human-web/html-helpers';
 import CLIQZ from 'ghostery-common';
+import WTM from 'ghostery-common/build/gbe/human-web/human-web';
 import { DOMParser } from 'linkedom';
 import globals from './Globals';
 
@@ -42,14 +43,17 @@ const cliqz = new (CLIQZ.App)({ debug: globals.DEBUG });
 const start = cliqz.start.bind(cliqz);
 
 cliqz.start = async (...args) => {
+	let { HW_CHANNEL } = CLIQZ.config.settings;
 	await globals.BROWSER_INFO_READY;
 	if (IS_ANDROID) {
-		CLIQZ.config.settings.HW_CHANNEL = 'android';
+		HW_CHANNEL = 'android';
 	} else if (globals.BROWSER_INFO.token === 'gd') {
-		CLIQZ.config.settings.HW_CHANNEL = 'ghostery-browser';
+		HW_CHANNEL = 'ghostery-browser';
 	} else if (globals.BROWSER_INFO.token === 'ga') {
-		CLIQZ.config.settings.HW_CHANNEL = 'ghostery-browser-android';
+		HW_CHANNEL = 'ghostery-browser-android';
 	}
+	WTM.CHANNEL = HW_CHANNEL;
+	CLIQZ.config.settings.HW_CHANNEL = HW_CHANNEL;
 	return start(...args);
 };
 
