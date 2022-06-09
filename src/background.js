@@ -1541,6 +1541,9 @@ function initializeGhosteryModules() {
 							conf.cliqz_legacy_opt_in = true;
 						}
 					}
+					if (globals.JUST_INSTALLED && globals.isGhosteryBrowser()) {
+						conf.enable_human_web = true;
+					}
 				})();
 			}
 		});
