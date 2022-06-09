@@ -95,7 +95,7 @@ export function prefsGet(...args) {
 		chrome.storage.local.get(args.length ? args : null, (items) => {
 			if (chrome.runtime.lastError) {
 				log('prefsGet ERROR', chrome.runtime.lastError);
-				reject(new Error(chrome.runtime.lastError));
+				reject(chrome.runtime.lastError);
 			} else {
 				let result = null;
 				if (args.length <= 0) {
@@ -135,7 +135,7 @@ export function prefsSet(prefs) {
 		chrome.storage.local.set(prefs, () => {
 			if (chrome.runtime.lastError) {
 				alwaysLog('prefsSet ERROR', chrome.runtime.lastError);
-				reject(new Error(chrome.runtime.lastError));
+				reject(chrome.runtime.lastError);
 			} else {
 				resolve(prefs);
 			}

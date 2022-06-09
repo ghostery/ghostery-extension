@@ -1,3 +1,6 @@
+### GHOSTERY 8.7.4 (June 9, 2022)
+
+* Improve: better error reporting
 ### GHOSTERY 8.7.3 (June 1, 2022)
 
 * Fixed: Ghostery onboarding and update popup should no longer be displayed on every startup #500 - fixed with following changes:

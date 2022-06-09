@@ -399,7 +399,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 					return (data) ? JSON.parse(data) : {};
 				} catch (err) {
 					log('_fetchJson error', err);
-					return Promise.reject(new Error(err));
+					return Promise.reject(err);
 				}
 			} else {
 				// data is either false or actual application/json
@@ -407,7 +407,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			}
 		}).catch((err) => {
 			log(`_fetchJson Error: ${err}`);
-			return Promise.reject(new Error(err));
+			return Promise.reject(err);
 		});
 	}
 	return new Promise(((resolve, reject) => {
@@ -427,7 +427,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 						resolve((xhr.responseText) ? JSON.parse(xhr.responseText) : {});
 					} catch (err) {
 						log('_fetchJson error', err);
-						reject(new Error(err));
+						reject(err);
 					}
 				} else {
 					resolve(xhr.responseText);
@@ -521,7 +521,7 @@ export function fetchLocalJSONResource(url) {
 					resolve((xhr.responseText) ? JSON.parse(xhr.responseText) : {});
 				} catch (err) {
 					log('fetchLocalJSONResource error', err);
-					reject(new Error(err));
+					reject(err);
 				}
 			} else {
 				// Otherwise reject with the status text
@@ -741,7 +741,7 @@ export function injectScript(tabId, scriptfile, cssfile, runAt) {
 		chrome.tabs.executeScript(tabId, { file: scriptfile, runAt }, () => {
 			if (chrome.runtime.lastError) {
 				log('injectScript error', chrome.runtime.lastError);
-				reject(new Error(chrome.runtime.lastError));
+				reject(chrome.runtime.lastError);
 				return;
 			}
 
@@ -749,7 +749,7 @@ export function injectScript(tabId, scriptfile, cssfile, runAt) {
 				chrome.tabs.insertCSS(tabId, { file: cssfile, runAt }, () => {
 					if (chrome.runtime.lastError) {
 						log('insertCSS error', chrome.runtime.lastError);
-						reject(new Error(chrome.runtime.lastError));
+						reject(chrome.runtime.lastError);
 						return;
 					}
 					resolve();
