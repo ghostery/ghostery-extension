@@ -94,8 +94,11 @@ class ConfData {
 
 			// Make sure that getBrowserInfo() has resolved before we set these properties
 			(async () => {
-				await globals.BROWSER_INFO_READY;
-				_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
+				const isGhosteryBrowser = await globals.isGhosteryBrowser();
+				_initProperty('enable_metrics', isGhosteryBrowser);
+				if (isGhosteryBrowser) {
+					_initProperty('enable_human_web', true);
+				}
 			})();
 
 			// simple props
