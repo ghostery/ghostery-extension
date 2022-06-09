@@ -1782,6 +1782,7 @@ async function init() {
 	} catch (err) {
 		ErrorReporter.captureException(err);
 		alwaysLog('Error in init()', err);
+
 		throw err;
 	}
 }

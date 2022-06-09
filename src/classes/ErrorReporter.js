@@ -18,6 +18,7 @@ const config = {
 	autoSessionTracking: false,
 	defaultIntegrations: false,
 	sampleRate: 0.1,
+	attachStacktrace: true,
 };
 
 Sentry.init(config);
