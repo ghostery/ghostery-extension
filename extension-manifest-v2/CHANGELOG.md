@@ -1,3 +1,7 @@
+### GHOSTERY 8.7.5 (June 9, 2022)
+
+* Fixed: WTM default setting for Ghostery Browsers
+
 ### GHOSTERY 8.7.4 (June 9, 2022)
 
 * Improve: better error reporting
