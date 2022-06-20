@@ -17,7 +17,8 @@
     "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme ./src/_locales/en/messages.json",
     "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./src/_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
-    "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src"
+    "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src",
+    "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode"
   },
   "author": {
     "name": "Ghostery GmbH",

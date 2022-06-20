@@ -17,6 +17,16 @@ function postMessage(name) {
   webkit.messageHandlers.controller.postMessage(name);
 }
 
+function localize(messages) {
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const key =
+      element.dataset.i18n ||
+      element.innerHTML.trim().replace(/[\s\n\t]+/g, ' ');
+    const value = messages[key];
+    if (value) element.innerHTML = value;
+  });
+}
+
 document
   .querySelector('#button-subscribe')
   .addEventListener('click', () => postMessage('open-subscriptions'));

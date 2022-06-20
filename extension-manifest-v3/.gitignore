@@ -7,6 +7,10 @@ src/_metadata
 src/rule_resources
 src/assets/adblocker_engines/*
 !src/assets/adblocker_engines/.gitkeep
+
+web-ext-artifacts/
+
+# xcode
 *.xcuserstate
 xcuserdata
-web-ext-artifacts/
+*.xcloc

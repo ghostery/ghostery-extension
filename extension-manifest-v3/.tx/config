@@ -8,3 +8,8 @@ source_file = src/_locales/en/messages.json
 source_lang = en
 type = CHROME
 
+[o:ghostery-inc:p:ghostery-dnr-extension:r:xcode-develop-en]
+minimum_perc = 0
+source_file = xcode/en.xcloc/Localized Contents/en.xliff
+source_lang = en
+type = XLIFF

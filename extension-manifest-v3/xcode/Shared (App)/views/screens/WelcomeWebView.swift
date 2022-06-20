@@ -77,6 +77,24 @@ class WebViewUserContentHelper: NSObject, WKScriptMessageHandler {
 
 class WebViewHelper: NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("""
+            localize({
+                'Privacy Ad Blocker': '\(String(localized: "Privacy Ad Blocker"))',
+                'is a Safari Extension': '\(String(localized: "is a Safari Extension"))',
+                'To enable privacy protection, go to:': '\(String(localized: "To enable privacy protection, go to:"))',
+                'Settings': '\(String(localized: "Settings"))',
+                'Extensions': '\(String(localized: "Extensions"))',
+                'Extension is currently disabled. <br /> You can enable it in Safari Preferences.': '\(String(localized: "Extension is currently disabled. <br /> You can enable it in Safari Preferences."))',
+                'Open Safari Preferences': '\(String(localized: "Open Safari Preferences"))',
+                'You are protected': '\(String(localized: "You are protected"))',
+                'Enjoying Ghostery?': '\(String(localized: "Enjoying Ghostery?"))',
+                'Support what we do': '\(String(localized: "Support what we do"))',
+                'Subscribe now': '\(String(localized: "Subscribe now"))',
+                'Need help?': '\(String(localized: "Need help?"))',
+                'Here is a step-by-step tutorial': '\(String(localized: "Here is a step-by-step tutorial"))',
+            })
+        """)
+        
         #if os(iOS)
             webView.evaluateJavaScript("show('ios')")
         #elseif os(macOS)
