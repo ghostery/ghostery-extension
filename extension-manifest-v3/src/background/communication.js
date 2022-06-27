@@ -56,7 +56,7 @@ async function send(protocol) {
   await updateSentAt();
 }
 
-(async function setupStats() {
+(async function () {
   try {
     const storage = new Storage(PUBLIC_KEYS_INDEXED_DB);
     await storage.init();

@@ -8,7 +8,50 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import trackers from './trackers.js';
+import { parse } from 'tldts-experimental';
+import rules from './rules.js';
+
+export function getTrackerFromUrl(url, origin) {
+  try {
+    const bugId = isBug(url);
+    let trackerId = null;
+    let tracker = null;
+
+    if (bugId) {
+      const { bugs, apps } = rules.get('bugs');
+      const appId = bugs[bugId].aid;
+      const app = apps[appId];
+      trackerId = app.trackerID;
+      tracker = {
+        id: app.trackerID,
+        name: app.name,
+        category: app.cat,
+      };
+    } else {
+      const { domain } = parse(url);
+
+      if (domain === origin) {
+        return null;
+      }
+
+      trackerId = rules.get('tracker_domains')[domain];
+    }
+
+    if (trackerId) {
+      if (rules.get('trackers')[trackerId]) {
+        tracker = rules.get('trackers')[trackerId];
+      }
+      if (!tracker.category && tracker.category_id) {
+        tracker.category = rules.get('categories')[tracker.category_id];
+      }
+      return tracker;
+    }
+  } catch (e) {
+    return null;
+  }
+
+  return null;
+}
 
 function processUrl(src) {
   try {
@@ -29,8 +72,8 @@ function processUrl(src) {
  * @param {string} 	src		 	url of the request
  * @return {int|boolean} 		bug id or false
  */
-export default function isBug(src) {
-  const db = trackers.get('bugs');
+function isBug(src) {
+  const db = rules.get('bugs');
   const processedSrc = processUrl(src.toLowerCase());
   let found = false;
 
@@ -141,7 +184,7 @@ function matchesHost(root, src_host, src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function matchesPath(src_path) {
-  const paths = trackers.get('bugs').patterns.path;
+  const paths = rules.get('bugs').patterns.path;
 
   // NOTE: we re-add the "/" in order to match patterns that include "/"
   const srcPath = `/${src_path}`;
@@ -165,7 +208,7 @@ function matchesPath(src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function matchesRegex(src) {
-  const regexes = trackers.get('bugs').patterns.regex;
+  const regexes = rules.get('bugs').patterns.regex;
   const bug_ids = Object.keys(regexes);
   for (let i = 0; i < bug_ids.length; i++) {
     const bug_id = bug_ids[i];

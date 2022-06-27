@@ -8,10 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import bugs from '../rule_resources/bugs.json';
-import categories from '../rule_resources/categories.json';
-import trackers from '../rule_resources/trackers.json';
-import tracker_domains from '../rule_resources/tracker_domains.json';
+import bugs from '../../rule_resources/bugs.json';
+import categories from '../../rule_resources/categories.json';
+import trackers from '../../rule_resources/trackers.json';
+import tracker_domains from '../../rule_resources/tracker_domains.json';
 
 const rules = new Map();
 

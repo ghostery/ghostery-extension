@@ -467,7 +467,7 @@
     "wss://*/*"
   ],
   "background": {
-    "page": "background/background.html",
+    "page": "background/index.html",
     "persistent": false
   },
   "declarative_net_request" : {
