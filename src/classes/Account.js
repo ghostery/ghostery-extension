@@ -94,28 +94,6 @@ class Account {
 		});
 	}
 
-	register = (email, confirmEmail, password, firstName, lastName) => {
-		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
-		return fetch(`${AUTH_SERVER}/api/v2/register`, {
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-			credentials: 'include',
-		}).then((res) => {
-			if (res.status >= 400) {
-				ghosteryDebugger.addAccountEvent('register', 'cookie set by fetch POST');
-				return res.json();
-			}
-			this._getUserIDFromCookie().then((userID) => {
-				this._setAccountInfo(userID);
-			});
-			return {};
-		});
-	}
-
 	async logout() {
 		try {
 			const cookie = await cookiesGet({ name: 'csrf_token' });
