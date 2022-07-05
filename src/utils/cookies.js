@@ -1,6 +1,6 @@
 import globals from '../classes/Globals';
 
-let IS_FIRST_PARTY_ISOLATION_SUPPORTED = false;
+let IS_FIRST_PARTY_ISOLATION_ENABLED = false;
 let IS_FIRST_PARTY_ISOLATION_TESTED = false;
 
 function testForFirstPartyIsolation() {
@@ -9,12 +9,10 @@ function testForFirstPartyIsolation() {
 	}
 	try {
 		chrome.cookies.getAll({
-			url: globals.COOKIE_URL,
-			firstPartyDomain: globals.GHOSTERY_ROOT_DOMAIN,
+			domain: '',
 		});
-		IS_FIRST_PARTY_ISOLATION_SUPPORTED = true;
 	} catch (e) {
-		// first party isolation is not supported
+		IS_FIRST_PARTY_ISOLATION_ENABLED = e.message.indexOf('firstPartyDomain') > -1;
 	} finally {
 		IS_FIRST_PARTY_ISOLATION_TESTED = true;
 	}
@@ -31,7 +29,7 @@ function wrapDetails(args) {
 		newArgs.url = globals.COOKIE_URL;
 	}
 
-	if (IS_FIRST_PARTY_ISOLATION_SUPPORTED) {
+	if (IS_FIRST_PARTY_ISOLATION_ENABLED) {
 		newArgs.firstPartyDomain = globals.GHOSTERY_ROOT_DOMAIN;
 	}
 
