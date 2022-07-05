@@ -437,6 +437,7 @@ class Account {
 				expirationDate,
 				secure: true,
 				httpOnly,
+				sameSite: 'None',
 			});
 			if (!cookie) {
 				throw new Error('no cookie');

@@ -35,24 +35,26 @@ class Api {
 
 		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
-			credentials: 'include',
+			credentials: 'omit',
 		}).finally(() => { this._refreshPromise = null; });
 
 		return this._refreshPromise;
 	}
 
-	_sendReq(method, path, body) {
-		return this._getCsrfCookie()
-			.then(cookie => fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
-				method,
-				headers: {
-					'Content-Type': Api.JSONAPI_CONTENT_TYPE,
-					'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-					'X-CSRF-Token': cookie,
-				},
-				body: JSON.stringify(body),
-				credentials: 'include',
-			}));
+	async _sendReq(method, path, body) {
+		const { value: access_token } = await cookiesGet({ name: 'access_token' });
+		const csrfToken = await this._getCsrfCookie();
+		return fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
+			method,
+			headers: {
+				'Content-Type': Api.JSONAPI_CONTENT_TYPE,
+				'Content-Length': Buffer.byteLength(JSON.stringify(body)),
+				Authorization: `Bearer ${access_token}`,
+				'X-CSRF-Token': csrfToken,
+			},
+			credentials: 'omit',
+			body: JSON.stringify(body),
+		});
 	}
 
 	static _processResponse(res) {
