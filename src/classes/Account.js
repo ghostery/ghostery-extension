@@ -96,14 +96,18 @@ class Account {
 
 	async logout() {
 		try {
-			const cookie = await cookiesGet({ name: 'csrf_token' });
-			if (!cookie) {
+			const csrfCookie = await cookiesGet({ name: 'csrf_token' });
+			const accessTokenCookie = await cookiesGet({ name: 'access_token' });
+			if (!csrfCookie || !accessTokenCookie) {
 				throw new Error('no cookie');
 			}
 			const res = await fetch(`${AUTH_SERVER}/api/v2/logout`, {
 				method: 'POST',
-				credentials: 'include',
-				headers: { 'X-CSRF-Token': cookie.value },
+				credentials: 'omit',
+				headers: {
+					'X-CSRF-Token': csrfCookie.value,
+					Authorization: `Bearer ${accessTokenCookie.value}`,
+				},
 			});
 			if (res.status < 400) {
 				ghosteryDebugger.addAccountEvent('logout', 'cookie set by fetch POST');

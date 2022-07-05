@@ -42,15 +42,18 @@ class Api {
 	}
 
 	async _sendReq(method, path, body) {
-		const { value: access_token } = await cookiesGet({ name: 'access_token' });
-		const csrfToken = await this._getCsrfCookie();
+		const	accessTokenCookie = await cookiesGet({ name: 'access_token' });
+		const	csrfTokenCookie = await cookiesGet({ name: 'csrf_token' });
+		if (!accessTokenCookie || !csrfTokenCookie) {
+			throw new Error('no cookie');
+		}
 		return fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
 			method,
 			headers: {
 				'Content-Type': Api.JSONAPI_CONTENT_TYPE,
 				'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-				Authorization: `Bearer ${access_token}`,
-				'X-CSRF-Token': csrfToken,
+				Authorization: `Bearer ${accessTokenCookie.value}`,
+				'X-CSRF-Token': csrfTokenCookie.value,
 			},
 			credentials: 'omit',
 			body: JSON.stringify(body),
@@ -135,18 +138,6 @@ class Api {
 					}
 				});
 		});
-	}
-
-	_getCsrfCookie = async () => {
-		try {
-			const cookie = await cookiesGet({ name: 'csrf_token' });
-			if (!cookie) {
-				return '';
-			}
-			return cookie.value;
-		} catch (e) {
-			return '';
-		}
 	}
 
 	_errorHandler = errors => Promise.resolve(errors)
