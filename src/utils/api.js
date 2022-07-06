@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { cookiesGet } from './cookies';
+import { cookiesGet, setAllLoginCookies } from './cookies';
 
 export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e.message || '', code: e.code || e.message || '' }];
 
@@ -36,7 +36,17 @@ class Api {
 		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
 			credentials: 'omit',
-		}).finally(() => { this._refreshPromise = null; });
+		}).then((res) => {
+			if (res.status > 400) {
+				throw res.json();
+			}
+			return res.json();
+		}).then(response => setAllLoginCookies({
+			accessToken: response.access_token,
+			refreshToken: response.refresh_token,
+			csrfToken: response.csrf_token,
+			userId: response.user_id,
+		})).finally(() => { this._refreshPromise = null; });
 
 		return this._refreshPromise;
 	}
@@ -44,16 +54,13 @@ class Api {
 	async _sendReq(method, path, body) {
 		const	accessTokenCookie = await cookiesGet({ name: 'access_token' });
 		const	csrfTokenCookie = await cookiesGet({ name: 'csrf_token' });
-		if (!accessTokenCookie || !csrfTokenCookie) {
-			throw new Error('no cookie');
-		}
 		return fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
 			method,
 			headers: {
 				'Content-Type': Api.JSONAPI_CONTENT_TYPE,
 				'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-				Authorization: `Bearer ${accessTokenCookie.value}`,
-				'X-CSRF-Token': csrfTokenCookie.value,
+				Authorization: `Bearer ${accessTokenCookie ? accessTokenCookie.value : ''}`,
+				'X-CSRF-Token': csrfTokenCookie ? csrfTokenCookie.value : '',
 			},
 			credentials: 'omit',
 			body: JSON.stringify(body),

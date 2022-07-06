@@ -23,11 +23,11 @@ import { alwaysLog, log } from '../utils/common';
 import Api from '../utils/api';
 import metrics from './Metrics';
 import ghosteryDebugger from './Debugger';
-import { cookiesGet, cookiesSet, cookiesRemove } from '../utils/cookies';
+import { cookiesGet, setAllLoginCookies, cookiesRemove } from '../utils/cookies';
 
 const api = new Api();
 const {
-	COOKIE_DOMAIN, COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
+	COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
 } = globals;
 
 const SYNC_SET = new Set(SYNC_ARRAY);
@@ -80,17 +80,27 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-			credentials: 'include',
+			credentials: 'omit',
 		}).then((res) => {
 			if (res.status >= 400) {
-				return res.json();
+				throw res.json();
 			}
+			return res.json();
+		}).then(response => setAllLoginCookies({
+			accessToken: response.access_token,
+			refreshToken: response.refresh_token,
+			csrfToken: response.csrf_token,
+			userId: response.user_id,
+		})).then(() => {
 			ghosteryDebugger.addAccountEvent('login', 'cookie set by fetch POST');
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
 				this.getUserSubscriptionData({ calledFrom: 'login' });
 			});
 			return {};
+		}).catch((err) => {
+			alwaysLog(err);
+			return err;
 		});
 	}
 
@@ -284,32 +294,13 @@ class Account {
 				}
 
 				// set cookies
-				Promise.all([
-					this._setLoginCookie({
-						name: 'refresh_token',
-						value: RefreshToken,
-						expirationDate: exp + 604800, // + 7 days
-						httpOnly: true,
-					}),
-					this._setLoginCookie({
-						name: 'access_token',
-						value: user_token,
-						expirationDate: exp,
-						httpOnly: true,
-					}),
-					this._setLoginCookie({
-						name: 'csrf_token',
-						value: csrf_token,
-						expirationDate: exp,
-						httpOnly: false,
-					}),
-					this._setLoginCookie({
-						name: 'user_id',
-						value: UserId,
-						expirationDate: 1893456000, // Tue Jan 1 2030 00:00:00 GMT. @TODO is this the best way of hanlding this?
-						httpOnly: false,
-					})
-				]).then(() => {
+				this._setAllLoginCookies({
+					refreshToken: RefreshToken,
+					accessToken: user_token,
+					csrfToken: csrf_token,
+					userId: UserId,
+					expirationDate: exp,
+				}).then(() => {
 					// login
 					this._setAccountInfo(UserId);
 					this.getUserSubscriptionData();
@@ -402,32 +393,6 @@ class Account {
 			}
 		});
 		return settings;
-	}
-
-	_setLoginCookie = async (details) => {
-		const {
-			name, value, expirationDate, httpOnly
-		} = details;
-		if (!name || !value) {
-			throw new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`);
-		}
-		try {
-			const cookie = await cookiesSet({
-				name,
-				value,
-				domain: COOKIE_DOMAIN,
-				expirationDate,
-				secure: true,
-				httpOnly,
-				sameSite: 'None',
-			});
-			if (!cookie) {
-				throw new Error('no cookie');
-			}
-			return cookie;
-		} catch (e) {
-			throw new Error(`Error setting cookie ${JSON.stringify(details)}: ${e}`);
-		}
 	}
 
 	_getUserID = () => (
