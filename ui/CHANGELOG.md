@@ -1,3 +1,15 @@
+# v0.2.0 (Wed Jul 06 2022)
+
+#### 🚀 Enhancement
+
+- Feat onboarding [#8](https://github.com/ghostery/ghostery-ui/pull/8) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.1.4 (Wed May 18 2022)
 
 #### 🐛 Bug Fix
