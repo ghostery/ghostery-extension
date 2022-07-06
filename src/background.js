@@ -49,7 +49,6 @@ import * as common from './utils/common';
 import * as utils from './utils/utils';
 import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
-import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
@@ -67,7 +66,7 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ
+	CDN_BASE_URL, BROWSER_INFO,
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
@@ -1052,14 +1051,10 @@ function initializeDispatcher() {
 		button.update();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
-				setCliqzModuleEnabled(hpnv2, enableHumanWeb);
-			});
-		} else {
-			setCliqzModuleEnabled(humanweb, false);
-		}
+		setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
+			setCliqzAntitrackingConfig(conf.enable_anti_tracking);
+			setCliqzModuleEnabled(hpnv2, enableHumanWeb);
+		});
 	});
 	dispatcher.on('conf.save.enable_autoupdate', (enableAutoUpdate) => {
 		if (!antitracking.isDisabled) {
@@ -1070,27 +1065,17 @@ function initializeDispatcher() {
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
-				// enable_human_web could have been toggled while antitracking was off,
-				// so we want to make sure to update the antitracking telemetry option
-				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
-			});
-		} else {
-			setCliqzModuleEnabled(antitracking, false);
-		}
+		setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
+			// enable_human_web could have been toggled while antitracking was off,
+			// so we want to make sure to update the antitracking telemetry option
+			setCliqzAntitrackingConfig(conf.enable_anti_tracking);
+		});
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(adblocker, enableAdBlock);
-		} else {
-			setCliqzModuleEnabled(adblocker, false);
-		}
+		setCliqzModuleEnabled(adblocker, enableAdBlock);
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
-		if (!IS_CLIQZ) {
-			cliqz.prefs.set('cliqz_adb_mode', val);
-		}
+		cliqz.prefs.set('cliqz_adb_mode', val);
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
@@ -1518,45 +1503,36 @@ function initializeGhosteryModules() {
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			if (!IS_CLIQZ) {
-				conf.enable_ad_block = !adblocker.isDisabled;
-				conf.enable_anti_tracking = !antitracking.isDisabled;
-				conf.enable_human_web = !humanweb.isDisabled;
+			conf.enable_ad_block = !adblocker.isDisabled;
+			conf.enable_anti_tracking = !antitracking.isDisabled;
+			conf.enable_human_web = !humanweb.isDisabled;
 
-				if (!antitracking.isDisabled) {
-					antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
-				}
-				if (!adblocker.isDisabled) {
-					adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
-				}
-
-				// Make sure that getBrowserInfo() has resolved before we set these properties
-				(async () => {
-					await globals.BROWSER_INFO_READY;
-					if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
-						if (globals.JUST_INSTALLED) {
-							conf.enable_human_web = false;
-						} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
-							conf.enable_human_web = false;
-							conf.cliqz_legacy_opt_in = true;
-						}
-					}
-					if (globals.JUST_INSTALLED && globals.isGhosteryBrowser()) {
-						conf.enable_human_web = true;
-					}
-				})();
+			if (!antitracking.isDisabled) {
+				antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
 			}
+			if (!adblocker.isDisabled) {
+				adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
+			}
+
+			// Make sure that getBrowserInfo() has resolved before we set these properties
+			(async () => {
+				await globals.BROWSER_INFO_READY;
+				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
+					if (globals.JUST_INSTALLED) {
+						conf.enable_human_web = false;
+					} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
+						conf.enable_human_web = false;
+						conf.cliqz_legacy_opt_in = true;
+					}
+				}
+				if (globals.JUST_INSTALLED && globals.isGhosteryBrowser()) {
+					conf.enable_human_web = true;
+				}
+			})();
 		});
 	}).catch((e) => {
 		log('cliqzStartup error', e);
 	});
-
-	if (IS_CLIQZ) {
-		setCliqzModuleEnabled(hpnv2, false);
-		setCliqzModuleEnabled(humanweb, false);
-		setCliqzModuleEnabled(antitracking, false);
-		setCliqzModuleEnabled(adblocker, false);
-	}
 
 	// Disable purplebox for Android users
 	if (IS_ANDROID) {
@@ -1569,7 +1545,7 @@ function initializeGhosteryModules() {
 			// auto-fetch from CMP
 			cmp.fetchCMPData();
 
-			if (!IS_CLIQZ && conf.enable_abtests) {
+			if (conf.enable_abtests) {
 				abtest.fetch()
 					.then(() => {
 						setupABTests();
@@ -1779,9 +1755,6 @@ async function init() {
 		await common.prefsSet(globals.initProps);
 
 		globals.INIT_COMPLETE = true;
-		if (IS_CLIQZ) {
-			importCliqzSettings(cliqz, conf);
-		}
 	} catch (err) {
 		ErrorReporter.captureException(err);
 		alwaysLog('Error in init()', err);

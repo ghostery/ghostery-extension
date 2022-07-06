@@ -917,17 +917,6 @@
   "hub_setup_exit_flow": {
     "message": "退出自定义设置"
   },
-  "hub_setup_feature_already_active": {
-    "message": "Cliqz 中默认激活此功能。$LINK_LM_START$了解更多$LINK_LM_END$",
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    }
-  },
   "hub_setup_feature_products_button": {
     "message": "好的！"
   },

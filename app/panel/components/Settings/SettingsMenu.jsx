@@ -14,9 +14,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
-import globals from '../../../../src/classes/Globals';
-
-const { IS_CLIQZ } = globals;
 
 /**
  * @const Implement left pane of the main Settings view as a
@@ -45,13 +42,11 @@ const SettingsMenu = ({ is_expanded }) => {
 					<span>{ t('settings_general_settings') }</span>
 				</NavLink>
 			</li>
-			{!IS_CLIQZ && (
-				<li className="s-tabs-title">
-					<NavLink to="/settings/adblocker">
-						<span>{ t('settings_adblocker') }</span>
-					</NavLink>
-				</li>
-			)}
+			<li className="s-tabs-title">
+				<NavLink to="/settings/adblocker">
+					<span>{ t('settings_adblocker') }</span>
+				</NavLink>
+			</li>
 			<li className="s-tabs-title">
 				<NavLink to="/settings/notifications">
 					<span>{ t('settings_notifications') }</span>

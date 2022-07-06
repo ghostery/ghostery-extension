@@ -19,7 +19,7 @@
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
-const { IS_CLIQZ, BROWSER_INFO } = globals;
+const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 
 /**
@@ -109,15 +109,14 @@ class ConfData {
 			_initProperty('bugs_last_updated', nowTime);
 			_initProperty('cliqz_adb_mode', globals.DEFAULT_ADBLOCKER_SETTING);
 			_initProperty('cliqz_legacy_opt_in', false);
-			_initProperty('cliqz_import_state', 0);
 			_initProperty('cmp_version', 0);
 			_initProperty('current_theme', 'default');
-			_initProperty('enable_ad_block', !IS_CLIQZ);
-			_initProperty('enable_anti_tracking', !IS_CLIQZ);
+			_initProperty('enable_ad_block', true);
+			_initProperty('enable_anti_tracking', true);
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', true);
 			_initProperty('enable_click2play_social', true);
-			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
+			_initProperty('enable_human_web', !IS_FIREFOX);
 			_initProperty('enable_abtests', true);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);

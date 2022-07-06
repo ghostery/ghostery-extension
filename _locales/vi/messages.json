@@ -1110,17 +1110,6 @@
   "forgot_password": {
     "message": "Quên mật khẩu?"
   },
-  "hub_setup_feature_already_active": {
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    },
-    "message": "Tính năng này đã hoạt động trong Cliqz theo mặc định. $LINK_LM_START$ Tìm hiểu thêm $LINK_LM_END$"
-  },
   "subscription_default_theme": {
     "message": "Mặc định"
   },

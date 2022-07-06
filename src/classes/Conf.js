@@ -30,8 +30,6 @@ import dispatcher from './Dispatcher';
 import metrics from './Metrics';
 import globals from './Globals';
 
-const { IS_CLIQZ } = globals;
-
 /**
  * Proxy Handler
  *
@@ -53,16 +51,6 @@ const handler = {
 	set(confMutable, key, v) {
 		let value = v;
 		log('Setting update value for', key);
-		// Ghostery, while running as an extension in the Cliqz browser
-		// has these functionalities disabled. This is protection from
-		// altering settings by syncing and/or importing.
-		if (IS_CLIQZ) {
-			if (key === 'enable_human_web' ||
-				key === 'enable_anti_tracking' ||
-				key === 'enable_ad_block') {
-				value = false;
-			}
-		}
 
 		// Adjust banner statuses, as they used to be objects
 		// while now they are booleans. This filter covers syncing.
