@@ -14,6 +14,7 @@ import './components/header.js';
 import './components/icon.js';
 import './components/page-load.js';
 import './components/stats.js';
+import './components/text.js';
 import './components/toggle-switch.js';
 import './components/tracker-wheel.js';
 
