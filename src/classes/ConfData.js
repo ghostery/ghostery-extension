@@ -108,17 +108,16 @@ class ConfData {
 			_initProperty('bugs_last_checked', 0);
 			_initProperty('bugs_last_updated', nowTime);
 			_initProperty('cliqz_adb_mode', globals.DEFAULT_ADBLOCKER_SETTING);
-			_initProperty('cliqz_legacy_opt_in', false);
 			_initProperty('cmp_version', 0);
 			_initProperty('current_theme', 'default');
-			_initProperty('enable_ad_block', true);
-			_initProperty('enable_anti_tracking', true);
+			_initProperty('enable_ad_block', false);
+			_initProperty('enable_anti_tracking', false);
 			_initProperty('enable_autoupdate', true);
-			_initProperty('enable_click2play', true);
-			_initProperty('enable_click2play_social', true);
-			_initProperty('enable_human_web', !IS_FIREFOX);
-			_initProperty('enable_abtests', true);
-			_initProperty('enable_smart_block', true);
+			_initProperty('enable_click2play', false);
+			_initProperty('enable_click2play_social', false);
+			_initProperty('enable_human_web', false);
+			_initProperty('enable_abtests', false);
+			_initProperty('enable_smart_block', false);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
 			_initProperty('hub_layout', 'not_yet_set');
@@ -137,7 +136,7 @@ class ConfData {
 			_initProperty('settings_last_exported', 0);
 			_initProperty('show_alert', false); // Tracker-Tally
 			_initProperty('show_badge', true);
-			_initProperty('show_cmp', true);
+			_initProperty('show_cmp', false);
 			_initProperty('show_tracker_urls', true);
 			_initProperty('toggle_individual_trackers', true);
 			_initProperty('setup_step', 7);

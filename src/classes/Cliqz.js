@@ -17,6 +17,7 @@ import CLIQZ from 'ghostery-common';
 import WTM from 'ghostery-common/build/gbe/human-web/human-web';
 import { DOMParser } from 'linkedom';
 import globals from './Globals';
+import conf from './Conf';
 
 if (!navigator.userAgent.includes('Firefox')) {
 	parseHtml.domParser = new DOMParser();
@@ -37,12 +38,13 @@ CLIQZ.config.default_prefs = {
 	'modules.human-web-lite.enabled': IS_ANDROID,
 	'modules.hpn-lite.enabled': IS_ANDROID,
 	'modules.anolysis.enabled': IS_ANDROID,
+	'modules.insights.enabled': true,
 };
 
 const cliqz = new (CLIQZ.App)({ debug: globals.DEBUG });
 const start = cliqz.start.bind(cliqz);
 
-cliqz.start = async (...args) => {
+cliqz.start = async () => {
 	let { HW_CHANNEL } = CLIQZ.config.settings;
 	await globals.BROWSER_INFO_READY;
 	if (IS_ANDROID) {
@@ -54,7 +56,11 @@ cliqz.start = async (...args) => {
 	}
 	WTM.CHANNEL = HW_CHANNEL;
 	CLIQZ.config.settings.HW_CHANNEL = HW_CHANNEL;
-	return start(...args);
+
+	CLIQZ.config.default_prefs['modules.adblocker.enabled'] = conf.enable_ad_block;
+	CLIQZ.config.default_prefs['modules.antitracking.enabled'] = conf.enable_anti_tracking;
+	CLIQZ.config.default_prefs['modules.human-web.enabled'] = conf.enable_human_web;
+	return start();
 };
 
 export default cliqz;

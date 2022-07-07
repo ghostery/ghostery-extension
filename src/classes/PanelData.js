@@ -628,9 +628,9 @@ class PanelData {
 
 			if (categories.hasOwnProperty(cat)) {
 				categories[cat].num_total++;
-				if (PanelData._addsUpToBlocked(trackerState)) { categories[cat].num_blocked++; }
+				if (PanelData._addsUpToBlocked(tracker)) { categories[cat].num_blocked++; }
 			} else {
-				categories[cat] = PanelData._buildCategory(cat, trackerState);
+				categories[cat] = PanelData._buildCategory(cat, tracker);
 			}
 			categories[cat].trackers.push(PanelData._buildTracker(tracker, trackerState, smartBlock));
 		});
@@ -648,22 +648,19 @@ class PanelData {
 
 	/**
 	 * _buildCategories helper
-	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
 	 * @return	{boolean}	is the tracker blocked in one of the possible ways?
 	 */
-	static _addsUpToBlocked({
-		ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed
-	}) {
-		return (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed));
+	static _addsUpToBlocked({ blocked }) {
+		return !!blocked;
 	}
 
 	/**
 	 * _buildCategories helper
 	 * @param	{string}	category		the category of a tracker
-	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
+	 * @param	{Object}	tracker	a tracker
 	 * @return	{Object}	an object with data for a new category
 	 */
-	static _buildCategory(category, trackerState) {
+	static _buildCategory(category, tracker) {
 		return {
 			id: category,
 			name: t(`category_${category}`),
@@ -671,7 +668,7 @@ class PanelData {
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 			num_total: 1,
-			num_blocked: PanelData._addsUpToBlocked(trackerState) ? 1 : 0,
+			num_blocked: PanelData._addsUpToBlocked(tracker) ? 1 : 0,
 			trackers: []
 		};
 	}
@@ -698,6 +695,7 @@ class PanelData {
 			name,
 			sources,
 			trackerID,
+			blocked: actually_blocked,
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
@@ -705,6 +703,7 @@ class PanelData {
 			id,
 			name,
 			description: '',
+			actually_blocked,
 			blocked,
 			ss_allowed,
 			ss_blocked,

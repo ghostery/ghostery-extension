@@ -832,8 +832,8 @@ class Summary extends React.Component {
 						{this._renderPauseButton()}
 					</div>
 					<div className="Summary__cliqzFeaturesContainer">
-						{this._renderCliqzAntiTracking()}
 						{this._renderCliqzAdBlock()}
+						{this._renderCliqzAntiTracking()}
 						{this._renderCliqzSmartBlock()}
 					</div>
 					{this._renderStatsNavicon()}

@@ -1496,43 +1496,19 @@ function initializeGhosteryModules() {
 		metrics.ping('install_complete');
 	}
 	// start cliqz app
-	const cliqzStartup = cliqz.start().then(() => {
-		// enable historical stats
-		setCliqzModuleEnabled(insights, true);
+	const cliqzStartup = async () => {
+		await cliqz.start();
 		// run wrapper tasks which set up base integrations between ghostery and these modules
-		Promise.all([
-			initialiseWebRequestPipeline(),
-		]).then(() => {
-			conf.enable_ad_block = !adblocker.isDisabled;
-			conf.enable_anti_tracking = !antitracking.isDisabled;
-			conf.enable_human_web = !humanweb.isDisabled;
+		await initialiseWebRequestPipeline();
 
-			if (!antitracking.isDisabled) {
-				antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
-			}
-			if (!adblocker.isDisabled) {
-				adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
-			}
+		if (!antitracking.isDisabled) {
+			antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+		}
 
-			// Make sure that getBrowserInfo() has resolved before we set these properties
-			(async () => {
-				await globals.BROWSER_INFO_READY;
-				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
-					if (globals.JUST_INSTALLED) {
-						conf.enable_human_web = false;
-					} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
-						conf.enable_human_web = false;
-						conf.cliqz_legacy_opt_in = true;
-					}
-				}
-				if (globals.JUST_INSTALLED && globals.isGhosteryBrowser()) {
-					conf.enable_human_web = true;
-				}
-			})();
-		});
-	}).catch((e) => {
-		log('cliqzStartup error', e);
-	});
+		if (!adblocker.isDisabled) {
+			adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
+		}
+	};
 
 	// Disable purplebox for Android users
 	if (IS_ANDROID) {
@@ -1543,7 +1519,9 @@ function initializeGhosteryModules() {
 	function scheduledTasks() {
 		return new Promise((resolve) => {
 			// auto-fetch from CMP
-			cmp.fetchCMPData();
+			if (conf.show_cmp) {
+				cmp.fetchCMPData();
+			}
 
 			if (conf.enable_abtests) {
 				abtest.fetch()
@@ -1592,7 +1570,7 @@ function initializeGhosteryModules() {
 		c2pDb.init(globals.JUST_UPGRADED),
 		compDb.init(globals.JUST_UPGRADED),
 		surrogatedb.init(globals.JUST_UPGRADED),
-		cliqzStartup,
+		cliqzStartup(),
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
@@ -1699,9 +1677,7 @@ async function initializeAccount() {
 
 		if (!conf.account) {
 			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
-			if (globals.JUST_INSTALLED) {
-				setGhosteryDefaultBlocking();
-			}
+			setGhosteryDefaultBlocking();
 			return;
 		}
 
@@ -1738,15 +1714,20 @@ async function init() {
 		await confData.init();
 
 		initializePopup();
+
 		initializeEventListeners();
+
 		initializeVersioning();
+
 		if (globals.JUST_UPGRADED) {
 			await purgeObsoleteData();
 			await freeSpaceIfNearQuota({ force: true }); // TODO: consider dropping "force" once all users upgraded
 		}
 
 		await initializeSearchMessageHandler();
+
 		await metrics.init(globals.JUST_INSTALLED);
+
 		await initializeGhosteryModules();
 
 		initializeAccount();
@@ -1763,5 +1744,4 @@ async function init() {
 	}
 }
 
-// Initialize the application.
 init();

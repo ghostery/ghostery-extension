@@ -365,9 +365,6 @@ class EventHandlers {
 			};
 		}
 
-		const smartBlocked = !block ? this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, eventMutable.type, eventMutable.timeStamp) : false;
-		const smartUnblocked = block ? this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, eventMutable.type) : false;
-
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
 		setTimeout(() => {
@@ -376,15 +373,15 @@ class EventHandlers {
 				app_id,
 				type: eventMutable.type,
 				url: eventMutable.url,
-				block,
-				smartBlocked,
+				block: conf.enable_ad_block && block,
+				smartBlocked: false,
 				tab_id,
 				from_frame: eventMutable.parentFrameId !== -1,
 				request_id
 			});
 		}, 1);
 
-		if ((block && !smartUnblocked) || smartBlocked) {
+		if (block && conf.enable_ad_block) {
 			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 
