@@ -19,9 +19,6 @@
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
-const { BROWSER_INFO } = globals;
-const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-
 /**
  * Class for handling user configuration properties synchronously.
  *
