@@ -1,5 +1,5 @@
 /**
- * Cliqz Features Component
+ * Common Features Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -17,14 +17,14 @@ import ClassNames from 'classnames';
 import Tooltip from '../../../shared-components/Tooltip';
 
 /**
- * @class Implements rendering and interaction for Cliqz feature icon toggles
+ * @class Implements rendering and interaction for Common feature icon toggles
  * @memberof PanelBuildingBlocks
  */
-class CliqzFeature extends React.Component {
+class CommonFeature extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
+		this.clickCommonFeature = this.clickCommonFeature.bind(this);
 	}
 
 	static _getStatus(active) {
@@ -81,17 +81,17 @@ class CliqzFeature extends React.Component {
 	}
 
 	/**
-	 * Handles clicks on the Cliqz feature icon, toggling it on/off
+	 * Handles clicks on the Common feature icon, toggling it on/off
 	 */
-	clickCliqzFeature() {
+	clickCommonFeature() {
 		const {
 			active,
 			clickButton,
-			cliqzInactive,
+			commonInactive,
 			type
 		} = this.props;
 
-		if (cliqzInactive) {
+		if (commonInactive) {
 			return;
 		}
 
@@ -100,18 +100,18 @@ class CliqzFeature extends React.Component {
 		clickButton({
 			feature: `enable_${featureType}`,
 			status: active,
-			text: CliqzFeature._getAlertText(active, type),
+			text: CommonFeature._getAlertText(active, type),
 		});
 	}
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering a Cliqz Feature icon toggle
+	 * @return {JSX} JSX for rendering a Common Feature icon toggle
 	 */
 	render() {
 		const {
 			active,
-			cliqzInactive,
+			commonInactive,
 			isSmaller,
 			isCondensed,
 			isTiny,
@@ -121,18 +121,18 @@ class CliqzFeature extends React.Component {
 			type,
 		} = this.props;
 
-		const cliqzFeatureClassNames = ClassNames('CliqzFeature', {
-			'CliqzFeature--normal': !isSmaller && !isCondensed,
-			'CliqzFeature--smaller': isSmaller,
-			'CliqzFeature--condensed': isCondensed,
-			'CliqzFeature--tiny': isTiny,
-			'CliqzFeature--active': active,
-			'CliqzFeature--inactive': !active,
-			clickable: !cliqzInactive,
-			'not-clickable': cliqzInactive,
+		const commonFeatureClassNames = ClassNames('CommonFeature', {
+			'CommonFeature--normal': !isSmaller && !isCondensed,
+			'CommonFeature--smaller': isSmaller,
+			'CommonFeature--condensed': isCondensed,
+			'CommonFeature--tiny': isTiny,
+			'CommonFeature--active': active,
+			'CommonFeature--inactive': !active,
+			clickable: !commonInactive,
+			'not-clickable': commonInactive,
 		});
-		const cssTypeName = `CliqzFeature__icon--${type.replace('_', '-')}`;
-		const iconClassNames = ClassNames('CliqzFeature__icon', cssTypeName, 'g-tooltip');
+		const cssTypeName = `CommonFeature__icon--${type.replace('_', '-')}`;
+		const iconClassNames = ClassNames('CommonFeature__icon', cssTypeName, 'g-tooltip');
 
 		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
 		let featureName;
@@ -145,17 +145,17 @@ class CliqzFeature extends React.Component {
 		}
 
 		return (
-			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
-				<div className="CliqzFeature__status">{CliqzFeature._getStatus(active)}</div>
+			<div className={commonFeatureClassNames} onClick={this.clickCommonFeature}>
+				<div className="CommonFeature__status">{CommonFeature._getStatus(active)}</div>
 				<div className={iconClassNames}>
 					<Tooltip
-						header={CliqzFeature._getTooltipHeaderText(isTooltipHeader, type)}
-						body={CliqzFeature._getTooltipBodyText(active, isTooltipBody, type)}
+						header={CommonFeature._getTooltipHeaderText(isTooltipHeader, type)}
+						body={CommonFeature._getTooltipBodyText(active, isTooltipBody, type)}
 						position={tooltipPosition}
-						// className={isTiny ? 'CliqzFeature--tooltipUp' : ''}
+						// className={isTiny ? 'CommonFeature--tooltipUp' : ''}
 					/>
 				</div>
-				<div className="CliqzFeature__feature-name">
+				<div className="CommonFeature__feature-name">
 					{featureName}
 				</div>
 			</div>
@@ -163,7 +163,7 @@ class CliqzFeature extends React.Component {
 	}
 }
 
-CliqzFeature.propTypes = {
+CommonFeature.propTypes = {
 	clickButton: PropTypes.func.isRequired,
 	type: PropTypes.oneOf([
 		'anti_track',
@@ -171,7 +171,7 @@ CliqzFeature.propTypes = {
 		'smart_block',
 	]).isRequired,
 	active: PropTypes.bool,
-	cliqzInactive: PropTypes.oneOfType([
+	commonInactive: PropTypes.oneOfType([
 		PropTypes.bool,
 		PropTypes.number,
 	]).isRequired,
@@ -182,7 +182,7 @@ CliqzFeature.propTypes = {
 	tooltipPosition: PropTypes.string,
 };
 
-CliqzFeature.defaultProps = {
+CommonFeature.defaultProps = {
 	active: true,
 	isCondensed: false,
 	isTooltipHeader: false,
@@ -190,4 +190,4 @@ CliqzFeature.defaultProps = {
 	tooltipPosition: '',
 };
 
-export default CliqzFeature;
+export default CommonFeature;

@@ -19,7 +19,7 @@ import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
-	CliqzFeature,
+	CommonFeature,
 	DonutGraph,
 	GhosteryFeature,
 	NotScanned,
@@ -34,7 +34,7 @@ const {
  * @class Implements the Summary View, which is displayed as the entire panel
  * as the Simple View or condensed as part of the Detailed View. Summary View
  * displays site information, aggregate tracker data, and options for toggling
- * Ghostery and Cliqz features.
+ * Ghostery and Common features.
  * @memberof PanelClasses
  */
 class Summary extends React.Component {
@@ -48,7 +48,7 @@ class Summary extends React.Component {
 		};
 
 		// Event Bindings
-		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
+		this.clickCommonFeature = this.clickCommonFeature.bind(this);
 		this.clickDonut = this.clickDonut.bind(this);
 		this.clickPauseButton = this.clickPauseButton.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
@@ -141,13 +141,13 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Cliqz Features: AntiTracking, AdBlocking, SmartBlocking
+	 * Handles clicking on Common Features: AntiTracking, AdBlocking, SmartBlocking
 	 * @param {Object} options options including:
 	 * 													feature: enable_anti_tracking, enable_ad_block, enable_smart_block
 	 * 													status: whether the feature should be turned on or off
 	 * 													text: the text for the notification.
 	 */
-	clickCliqzFeature(options) {
+	clickCommonFeature(options) {
 		const { actions } = this.props;
 		const { feature, status, text } = options;
 		actions.showNotification({
@@ -155,7 +155,7 @@ class Summary extends React.Component {
 			reload: true,
 			text,
 		});
-		actions.toggleCliqzFeature(feature, status);
+		actions.toggleCommonFeature(feature, status);
 	}
 
 	/**
@@ -319,7 +319,7 @@ class Summary extends React.Component {
 		const { body } = msg;
 
 		if (body.adBlock || body.antiTracking) {
-			actions.updateCliqzModuleData(body);
+			actions.updateCommonModuleData(body);
 		} else {
 			actions.updateSummaryData(body);
 		}
@@ -443,7 +443,7 @@ class Summary extends React.Component {
 		return !this._isPageLoadFast() && !this._isPageLoadSlow();
 	}
 
-	_isCliqzInactive() {
+	_isCommonInactive() {
 		const { paused_blocking, sitePolicy } = this.props;
 		const { disableBlocking } = this.state;
 
@@ -647,7 +647,7 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderCliqzAntiTracking() {
+	_renderCommonAntiTracking() {
 		const {
 			enable_anti_tracking,
 			is_expert,
@@ -656,12 +656,12 @@ class Summary extends React.Component {
 		const isCondensed = this._isCondensed();
 
 		return (
-			<div className="Summary__cliqzFeatureContainer">
-				<CliqzFeature
-					clickButton={this.clickCliqzFeature}
+			<div className="Summary__commonFeatureContainer">
+				<CommonFeature
+					clickButton={this.clickCommonFeature}
 					type="anti_track"
 					active={enable_anti_tracking}
-					cliqzInactive={this._isCliqzInactive()}
+					commonInactive={this._isCommonInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
@@ -673,7 +673,7 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderCliqzAdBlock() {
+	_renderCommonAdBlock() {
 		const {
 			enable_ad_block,
 			is_expert,
@@ -682,12 +682,12 @@ class Summary extends React.Component {
 		const isCondensed = this._isCondensed();
 
 		return (
-			<div className="Summary__cliqzFeatureContainer">
-				<CliqzFeature
-					clickButton={this.clickCliqzFeature}
+			<div className="Summary__commonFeatureContainer">
+				<CommonFeature
+					clickButton={this.clickCommonFeature}
 					type="ad_block"
 					active={enable_ad_block}
-					cliqzInactive={this._isCliqzInactive()}
+					commonInactive={this._isCommonInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={is_expert && isCondensed}
 					isTooltipHeader={is_expert}
@@ -699,7 +699,7 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderCliqzSmartBlock() {
+	_renderCommonSmartBlock() {
 		const {
 			enable_smart_block,
 			is_expert,
@@ -708,12 +708,12 @@ class Summary extends React.Component {
 		const isCondensed = this._isCondensed();
 
 		return (
-			<div className="Summary__cliqzFeatureContainer">
-				<CliqzFeature
-					clickButton={this.clickCliqzFeature}
+			<div className="Summary__commonFeatureContainer">
+				<CommonFeature
+					clickButton={this.clickCommonFeature}
 					type="smart_block"
 					active={enable_smart_block}
-					cliqzInactive={this._isSmartBlockingInactive()}
+					commonInactive={this._isSmartBlockingInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
@@ -831,10 +831,10 @@ class Summary extends React.Component {
 						{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
 						{this._renderPauseButton()}
 					</div>
-					<div className="Summary__cliqzFeaturesContainer">
-						{this._renderCliqzAdBlock()}
-						{this._renderCliqzAntiTracking()}
-						{this._renderCliqzSmartBlock()}
+					<div className="Summary__commonFeaturesContainer">
+						{this._renderCommonAdBlock()}
+						{this._renderCommonAntiTracking()}
+						{this._renderCommonSmartBlock()}
 					</div>
 					{this._renderStatsNavicon()}
 

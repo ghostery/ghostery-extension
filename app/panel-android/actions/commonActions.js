@@ -1,5 +1,5 @@
 /**
- * Cliqz Action creators
+ * Common Action creators
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -13,8 +13,8 @@
 
 import { sendMessageInPromise } from '../../panel/utils/msg';
 
-export default function getCliqzModuleData(tabId) {
-	return sendMessageInPromise('getCliqzModuleData', {
+export default function getCommonModuleData(tabId) {
+	return sendMessageInPromise('getCommonModuleData', {
 		tabId,
 	});
 }

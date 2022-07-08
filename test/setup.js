@@ -53,8 +53,8 @@ chrome.runtime.getManifest.returns({
 	debug: true
 });
 
-// Create Mock for Cliqz modules
-jest.mock('../src/classes/Cliqz', () => ({
+// Create Mock for Common modules
+jest.mock('../src/classes/Common', () => ({
 	modules: {
 		adblocker: {
 			background: {
@@ -73,7 +73,7 @@ jest.mock('../src/classes/Cliqz', () => ({
 	}
 }));
 
-// Create Mock for the Cliqz dependencies
+// Create Mock for the Common dependencies
 jest.mock('ghostery-common', () => ({ App: class App {} }));
 
 // Initialization for Globals.js

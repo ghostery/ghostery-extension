@@ -31,7 +31,7 @@
 				color: #00AEF0;
 			}
 		}
-		.trk-cliqz-stats-outer-container {
+		.trk-common-stats-outer-container {
 			// prevent jitter from breaking to new line
 			// if all three of cookies fingerprints and ads are present
 			// and we hover over the ad icon while the cookies & fingerprints section is expanded
@@ -41,7 +41,7 @@
 			font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif;
 			font-weight: 600;
 		}
-		.trk-cliqz-stats-icon {
+		.trk-common-stats-icon {
 			// vertical alignment with text label
 			position: relative;
 			top: -2px;
@@ -62,7 +62,7 @@
 				fill: #FFF;
 			}
 		}
-		.trk-cliqz-stat {
+		.trk-common-stat {
 			color: #1dafed;
 			text-transform: capitalize;
 			display: inline-block;
@@ -73,10 +73,10 @@
 			overflow-x: hidden;
 			white-space: nowrap;
 		}
-		.trk-cliqz-stats-container {
+		.trk-common-stats-container {
 			display: inline-block;
 		}
-		.trk-cliqz-stats-container:hover .trk-cliqz-stat {
+		.trk-common-stats-container:hover .trk-common-stat {
 			max-width: 100px;
 			padding-right: 4px;
 		}
@@ -158,7 +158,7 @@
 
 
 		&:not(.whitelisted) {
-			.cliqz-tracker-trust {
+			.common-tracker-trust {
 				visibility: hidden;
 				cursor: pointer;
 				.border { stroke: #d8d8d8; }
@@ -166,22 +166,22 @@
 				.trust-circle { stroke: #9B9B9B; }
 			}
 
-			.cliqz-tracker-trust > g > path:nth-child(1) {
+			.common-tracker-trust > g > path:nth-child(1) {
 				stroke: #d8d8d8;
 			}
-			.cliqz-tracker-trust > g > path:nth-child(2) {
+			.common-tracker-trust > g > path:nth-child(2) {
 				fill: #f7f7f7;
 			}
-			.cliqz-tracker-scrub > g > .border {
+			.common-tracker-scrub > g > .border {
 				fill: #FFF;
 				stroke: #00AEF0;
 			}
-			.cliqz-tracker-scrub > g > .background {
+			.common-tracker-scrub > g > .background {
 				fill: #00AEF0;
 				stroke: #FFF;
 			}
 
-			.cliqz-tracker-scrub {
+			.common-tracker-scrub {
 				pointer-events: none;
 				.background.protected {
 					fill: #00AEF0;
@@ -195,10 +195,10 @@
 		&.whitelisted {
 			flex-direction: row-reverse;
 
-			.cliqz-tracker-trust {
+			.common-tracker-trust {
 				pointer-events: none;
 			}
-			.cliqz-tracker-scrub {
+			.common-tracker-scrub {
 				visibility: hidden;
 				pointer-events: auto;
 				cursor: pointer;
@@ -209,13 +209,13 @@
 		}
 
 		&:hover {
-			.cliqz-tracker-trust {
+			.common-tracker-trust {
 				visibility: visible;
 			}
 		}
 
 		&.whitelisted:hover {
-			.cliqz-tracker-scrub {
+			.common-tracker-scrub {
 				visibility: visible;
 			}
 		}

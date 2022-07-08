@@ -347,7 +347,7 @@ class EventHandlers {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
 		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
 		if (!block && [BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED].indexOf(reason) > -1) {
-			// The way to pass this flag to Cliqz handlers
+			// The way to pass this flag to Common handlers
 			eventMutable.ghosteryWhitelisted = true;
 		}
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.

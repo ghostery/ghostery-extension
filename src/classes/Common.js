@@ -13,7 +13,7 @@
 
 /*  @memberOf  BackgroundClasses */
 import { parseHtml } from 'ghostery-common/build/gbe/human-web/html-helpers';
-import CLIQZ from 'ghostery-common';
+import COMMON from 'ghostery-common';
 import WTM from 'ghostery-common/build/gbe/human-web/human-web';
 import { DOMParser } from 'linkedom';
 import globals from './Globals';
@@ -26,10 +26,10 @@ if (!navigator.userAgent.includes('Firefox')) {
 const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
 export const HUMANWEB_MODULE = IS_ANDROID ? 'human-web-lite' : 'human-web';
 export const HPN_MODULE = IS_ANDROID ? 'hpn-lite' : 'hpnv2';
-
+COMMON.config.baseURL = '/common/';
 // Override the default prefs based on the platform
-CLIQZ.config.default_prefs = {
-	...CLIQZ.config.default_prefs,
+COMMON.config.default_prefs = {
+	...COMMON.config.default_prefs,
 	cliqz_adb_mode: globals.DEFAULT_ADBLOCKER_MODE,
 	// the following are enabled by default on non-android platforms
 	'modules.human-web.enabled': !IS_ANDROID,
@@ -41,11 +41,11 @@ CLIQZ.config.default_prefs = {
 	'modules.insights.enabled': true,
 };
 
-const cliqz = new (CLIQZ.App)({ debug: globals.DEBUG });
-const start = cliqz.start.bind(cliqz);
+const common = new (COMMON.App)({ debug: globals.DEBUG });
+const start = common.start.bind(common);
 
-cliqz.start = async () => {
-	let { HW_CHANNEL } = CLIQZ.config.settings;
+common.start = async () => {
+	let { HW_CHANNEL } = COMMON.config.settings;
 	await globals.BROWSER_INFO_READY;
 	if (IS_ANDROID) {
 		HW_CHANNEL = 'android';
@@ -55,12 +55,12 @@ cliqz.start = async () => {
 		HW_CHANNEL = 'ghostery-browser-android';
 	}
 	WTM.CHANNEL = HW_CHANNEL;
-	CLIQZ.config.settings.HW_CHANNEL = HW_CHANNEL;
+	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
 
-	CLIQZ.config.default_prefs['modules.adblocker.enabled'] = conf.enable_ad_block;
-	CLIQZ.config.default_prefs['modules.antitracking.enabled'] = conf.enable_anti_tracking;
-	CLIQZ.config.default_prefs['modules.human-web.enabled'] = conf.enable_human_web;
+	COMMON.config.default_prefs['modules.adblocker.enabled'] = conf.enable_ad_block;
+	COMMON.config.default_prefs['modules.antitracking.enabled'] = conf.enable_anti_tracking;
+	COMMON.config.default_prefs['modules.human-web.enabled'] = conf.enable_human_web;
 	return start();
 };
 
-export default cliqz;
+export default common;

@@ -14,7 +14,7 @@
 import { URL } from '@cliqz/url-parser';
 import {
 	UPDATE_SUMMARY_DATA,
-	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_COMMON_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	UPDATE_TRACKER_COUNTS
@@ -138,7 +138,7 @@ const _updateSitePolicy = (state, action) => {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_SUMMARY_DATA:
-		case UPDATE_CLIQZ_MODULE_DATA: {
+		case UPDATE_COMMON_MODULE_DATA: {
 			return { ...state, ...action.data };
 		}
 		case UPDATE_GHOSTERY_PAUSED: {

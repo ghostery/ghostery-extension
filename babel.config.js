@@ -27,8 +27,8 @@ module.exports = function(api) {
 			// Don't transpile the './src' dir
 			presets = [];
 			break;
-		case 'cliqz':
-			// Set plugins to run over @cliqz modules
+		case 'common':
+			// Set plugins to run over @common modules
 			presets = [];
 			plugins = ['@babel/plugin-transform-named-capturing-groups-regex'];
 			break;

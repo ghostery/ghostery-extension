@@ -72,9 +72,9 @@ class Categories extends React.Component {
 							description: '',
 							id: unidentifiedTracker.name + unidentifiedTracker.domains[0],
 							shouldShow: true,
-							cliqzAdCount: unidentifiedTracker.ads,
-							cliqzCookieCount: unidentifiedTracker.cookies,
-							cliqzFingerprintCount: unidentifiedTracker.fingerprints,
+							commonAdCount: unidentifiedTracker.ads,
+							commonCookieCount: unidentifiedTracker.cookies,
+							commonFingerprintCount: unidentifiedTracker.fingerprints,
 						};
 					}),
 					whitelistedTotal,

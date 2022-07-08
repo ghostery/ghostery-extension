@@ -1,5 +1,5 @@
 /**
- * Cliqz Feature Test Component
+ * Common Feature Test Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,7 +14,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
-import CliqzFeature from '../CliqzFeature';
+import CommonFeature from '../CommonFeature';
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
@@ -24,34 +24,34 @@ global.t = function(str) {
 // Fake the Tooltip implementation
 jest.mock('../../../../shared-components/Tooltip');
 
-describe('app/panel/components/CliqzFeature.jsx', () => {
+describe('app/panel/components/CommonFeature.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
-		test('CliqzFeature is rendered correctly with falsy props', () => {
+		test('CommonFeature is rendered correctly with falsy props', () => {
 			const component = renderer.create(
 				<div>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="anti_track"
 						active={false}
-						cliqzInactive={false}
+						commonInactive={false}
 						isSmaller={false}
 					/>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="ad_block"
 						active={false}
-						cliqzInactive={false}
+						commonInactive={false}
 						isSmaller={false}
 						isCondensed={false}
 						isTooltipHeader={false}
 						isTooltipBody={false}
 						tooltipPosition=""
 					/>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="smart_block"
 						active={false}
-						cliqzInactive={false}
+						commonInactive={false}
 						isSmaller={false}
 						isCondensed={false}
 						isTooltipHeader={false}
@@ -63,32 +63,32 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 			expect(component).toMatchSnapshot();
 		});
 
-		test('CliqzFeature is rendered correctly with some truthy props', () => {
+		test('CommonFeature is rendered correctly with some truthy props', () => {
 			const component = renderer.create(
 				<div>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="anti_track"
 						active
-						cliqzInactive={false}
+						commonInactive={false}
 						isSmaller={false}
 					/>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="ad_block"
 						active
-						cliqzInactive
+						commonInactive
 						isSmaller={false}
 						isCondensed={false}
 						isTooltipHeader={false}
 						isTooltipBody={false}
 						tooltipPosition=""
 					/>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="smart_block"
 						active
-						cliqzInactive
+						commonInactive
 						isSmaller={false}
 						isCondensed
 						isTooltipHeader
@@ -100,36 +100,36 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 			expect(component).toMatchSnapshot();
 		});
 
-		test('CliqzFeature is rendered correctly with all truthy props', () => {
+		test('CommonFeature is rendered correctly with all truthy props', () => {
 			const component = renderer.create(
 				<div>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="anti_track"
 						active
-						cliqzInactive
+						commonInactive
 						isSmaller
 						isCondensed
 						isTooltipHeader
 						isTooltipBody
 						tooltipPosition="right"
 					/>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="ad_block"
 						active
-						cliqzInactive
+						commonInactive
 						isSmaller
 						isCondensed
 						isTooltipHeader
 						isTooltipBody
 						tooltipPosition="top"
 					/>
-					<CliqzFeature
+					<CommonFeature
 						clickButton={() => {}}
 						type="smart_block"
 						active
-						cliqzInactive
+						commonInactive
 						isSmaller
 						isCondensed
 						isTooltipHeader
@@ -143,26 +143,26 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
-		test('CliqzFeature handles clicks correctly', () => {
+		test('CommonFeature handles clicks correctly', () => {
 			const clickButton = jest.fn();
 			const component = shallow(
-				<CliqzFeature
+				<CommonFeature
 					clickButton={clickButton}
 					type="smart_block"
 					active
-					cliqzInactive
+					commonInactive
 					isSmaller
 				/>
 			);
 			expect(clickButton.mock.calls.length).toBe(0);
-			component.find('.CliqzFeature').simulate('click');
+			component.find('.CommonFeature').simulate('click');
 			expect(clickButton.mock.calls.length).toBe(0);
 
-			component.setProps({ cliqzInactive: false });
-			component.find('.CliqzFeature').simulate('click');
+			component.setProps({ commonInactive: false });
+			component.find('.CommonFeature').simulate('click');
 
 			component.setProps({ active: false });
-			component.find('.CliqzFeature').simulate('click');
+			component.find('.CommonFeature').simulate('click');
 			expect(clickButton.mock.calls.length).toBe(2);
 			expect(clickButton.mock.calls[0][0].status).toBe(true);
 			expect(clickButton.mock.calls[1][0].status).toBe(false);

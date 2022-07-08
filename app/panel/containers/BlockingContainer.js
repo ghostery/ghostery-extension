@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 import Blocking from '../components/Blocking';
 import * as blockingActions from '../actions/BlockingActions';
 import { updateTrackerCounts } from '../actions/SummaryActions';
-import { showNotification, toggleCliqzFeature } from '../actions/PanelActions';
+import { showNotification, toggleCommonFeature } from '../actions/PanelActions';
 /**
  * Map redux store state properties to Blocking view component own properties.
  * @memberOf PanelContainers
@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch => ({
 		Object.assign(blockingActions, {
 			updateTrackerCounts,
 			showNotification,
-			toggleCliqzFeature
+			toggleCommonFeature
 		}),
 		dispatch
 	)

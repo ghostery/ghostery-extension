@@ -14,7 +14,7 @@
  * @namespace  PanelAndroidUtils
  */
 
-import { apps } from '../../../cliqz/core/tracker_db_v2.json';
+import { apps } from '../../../common/core/tracker_db_v2.json';
 
 /**
  * Look up WhoTracksMe url slug

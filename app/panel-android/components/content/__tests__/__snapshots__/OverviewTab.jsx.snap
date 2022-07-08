@@ -159,70 +159,70 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
     </div>
   </div>
   <div
-    className="OverviewTab__CliqzFeaturesContainer"
+    className="OverviewTab__CommonFeaturesContainer"
   >
     <div>
       <div
-        className="OverviewTab__CliqzFeature"
+        className="OverviewTab__CommonFeature"
       >
         <div
-          className="CliqzFeature CliqzFeature--smaller CliqzFeature--inactive not-clickable"
+          className="CommonFeature CommonFeature--smaller CommonFeature--inactive not-clickable"
           onClick={[Function]}
         >
           <div
-            className="CliqzFeature__status"
+            className="CommonFeature__status"
           >
             off
           </div>
           <div
-            className="CliqzFeature__icon CliqzFeature__icon--anti-track g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--anti-track g-tooltip"
           />
           <div
-            className="CliqzFeature__feature-name"
+            className="CommonFeature__feature-name"
           >
             enhanced_anti_tracking
           </div>
         </div>
       </div>
       <div
-        className="OverviewTab__CliqzFeature"
+        className="OverviewTab__CommonFeature"
       >
         <div
-          className="CliqzFeature CliqzFeature--smaller CliqzFeature--inactive not-clickable"
+          className="CommonFeature CommonFeature--smaller CommonFeature--inactive not-clickable"
           onClick={[Function]}
         >
           <div
-            className="CliqzFeature__status"
+            className="CommonFeature__status"
           >
             off
           </div>
           <div
-            className="CliqzFeature__icon CliqzFeature__icon--ad-block g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--ad-block g-tooltip"
           />
           <div
-            className="CliqzFeature__feature-name"
+            className="CommonFeature__feature-name"
           >
             enhanced_ad_blocking
           </div>
         </div>
       </div>
       <div
-        className="OverviewTab__CliqzFeature"
+        className="OverviewTab__CommonFeature"
       >
         <div
-          className="CliqzFeature CliqzFeature--smaller CliqzFeature--inactive not-clickable"
+          className="CommonFeature CommonFeature--smaller CommonFeature--inactive not-clickable"
           onClick={[Function]}
         >
           <div
-            className="CliqzFeature__status"
+            className="CommonFeature__status"
           >
             off
           </div>
           <div
-            className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--smart-block g-tooltip"
           />
           <div
-            className="CliqzFeature__feature-name"
+            className="CommonFeature__feature-name"
           >
             smart_blocking
           </div>
@@ -334,7 +334,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
       >
         <span>
           trackers_blocked
-           
+
         </span>
         <span
           className="OverviewTab__PageStat--red"
@@ -347,7 +347,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
       >
         <span>
           requests_modified
-           
+
         </span>
         <span
           className="OverviewTab__PageStat--blue"
@@ -434,70 +434,70 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
     </div>
   </div>
   <div
-    className="OverviewTab__CliqzFeaturesContainer"
+    className="OverviewTab__CommonFeaturesContainer"
   >
     <div>
       <div
-        className="OverviewTab__CliqzFeature"
+        className="OverviewTab__CommonFeature"
       >
         <div
-          className="CliqzFeature CliqzFeature--smaller CliqzFeature--active not-clickable"
+          className="CommonFeature CommonFeature--smaller CommonFeature--active not-clickable"
           onClick={[Function]}
         >
           <div
-            className="CliqzFeature__status"
+            className="CommonFeature__status"
           >
             on
           </div>
           <div
-            className="CliqzFeature__icon CliqzFeature__icon--anti-track g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--anti-track g-tooltip"
           />
           <div
-            className="CliqzFeature__feature-name"
+            className="CommonFeature__feature-name"
           >
             enhanced_anti_tracking
           </div>
         </div>
       </div>
       <div
-        className="OverviewTab__CliqzFeature"
+        className="OverviewTab__CommonFeature"
       >
         <div
-          className="CliqzFeature CliqzFeature--smaller CliqzFeature--active not-clickable"
+          className="CommonFeature CommonFeature--smaller CommonFeature--active not-clickable"
           onClick={[Function]}
         >
           <div
-            className="CliqzFeature__status"
+            className="CommonFeature__status"
           >
             on
           </div>
           <div
-            className="CliqzFeature__icon CliqzFeature__icon--ad-block g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--ad-block g-tooltip"
           />
           <div
-            className="CliqzFeature__feature-name"
+            className="CommonFeature__feature-name"
           >
             enhanced_ad_blocking
           </div>
         </div>
       </div>
       <div
-        className="OverviewTab__CliqzFeature"
+        className="OverviewTab__CommonFeature"
       >
         <div
-          className="CliqzFeature CliqzFeature--smaller CliqzFeature--active not-clickable"
+          className="CommonFeature CommonFeature--smaller CommonFeature--active not-clickable"
           onClick={[Function]}
         >
           <div
-            className="CliqzFeature__status"
+            className="CommonFeature__status"
           >
             on
           </div>
           <div
-            className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--smart-block g-tooltip"
           />
           <div
-            className="CliqzFeature__feature-name"
+            className="CommonFeature__feature-name"
           >
             smart_blocking
           </div>

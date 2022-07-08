@@ -15,7 +15,7 @@ import Immutable from 'seamless-immutable';
 import summaryReducer from '../summary';
 import {
 	UPDATE_SUMMARY_DATA,
-	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_COMMON_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY
@@ -66,7 +66,7 @@ describe('app/panel/reducers/summary.js', () => {
 		expect(summaryReducer(initState, action)).toEqual(data);
 	});
 
-	test('reducer correctly handles UPDATE_CLIQZ_MODULE_DATA', () => {
+	test('reducer correctly handles UPDATE_COMMON_MODULE_DATA', () => {
 		const data = {
 			adBlock: {
 				totalUnsafeCount: 3,
@@ -78,7 +78,7 @@ describe('app/panel/reducers/summary.js', () => {
 				trackerCount: 1
 			}
 		};
-		const action = { data, type: UPDATE_CLIQZ_MODULE_DATA };
+		const action = { data, type: UPDATE_COMMON_MODULE_DATA };
 		const initState = Immutable({
 			tab_id: 0,
 			adBlock: {

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Merge Cliqz language strings into Ghostery _locales
+# Merge Common language strings into Ghostery _locales
 #
 # Ghostery Browser Extension
 # http://www.ghostery.com/
@@ -11,10 +11,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0
 
-for lang in `ls ./cliqz/static/locale`
+for lang in `ls ./common/static/locale`
 do
 	# filter out only language folder
-	if [ ! -d "./cliqz/static/locale/$lang" ]; then
+	if [ ! -d "./common/static/locale/$lang" ]; then
 		continue;
 	fi
 
@@ -24,6 +24,6 @@ do
 	fi
 
 	echo "Merging language file: $lang"
-	jq -s '.[0] + .[1]' "cliqz/static/locale/$lang/messages.json" "_locales/$lang/messages.json" > "_locales/$lang/messages.temp.json"
+	jq -s '.[0] + .[1]' "common/static/locale/$lang/messages.json" "_locales/$lang/messages.json" > "_locales/$lang/messages.temp.json"
 	mv "_locales/$lang/messages.temp.json" "_locales/$lang/messages.json"
 done

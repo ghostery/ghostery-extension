@@ -16,7 +16,6 @@
 import parser from 'ua-parser-js';
 
 const manifest = chrome.runtime.getManifest();
-const isCliqzBrowser = !!(chrome.runtime.isCliqz);
 
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.

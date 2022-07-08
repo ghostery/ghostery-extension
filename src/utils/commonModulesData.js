@@ -1,5 +1,5 @@
 /**
- * Methods for retrieving antitracking and adblocking data from Cliqz modules
+ * Methods for retrieving antitracking and adblocking data from Common modules
  * Used by BrowserButton and PanelData
  *
  * Ghostery Browser Extension
@@ -16,9 +16,9 @@
 
 import { extend } from 'underscore';
 import conf from '../classes/Conf';
-import cliqz from '../classes/Cliqz';
+import common from '../classes/Common';
 
-const { adblocker, antitracking } = cliqz.modules;
+const { adblocker, antitracking } = common.modules;
 
 /**
  * Get the totalUnsafeCount of trackers found by Anti-Tracking on this tabId
@@ -28,17 +28,17 @@ const { adblocker, antitracking } = cliqz.modules;
  * @param  {boolean} antiTracking 	Fetch data from the anti-tracking module
  * @return {object}
  */
-export function getCliqzData(tabId, tabHostUrl, antiTracking) {
+export function getCommonData(tabId, tabHostUrl, antiTracking) {
 	let totalUnsafeCount = 0;
 	let totalUnidentifiedCount = 0;
 	let trackerCount = 0;
 	let unidentifiedTrackerCount = 0;
 	const unidentifiedTrackers = [];
 	const whitelistedUrls = conf.cliqz_module_whitelist;
-	const cliqzModule = antiTracking ? antitracking : adblocker;
-	const cliqzModuleEnabled = antiTracking ? conf.enable_anti_tracking : conf.enable_ad_block;
+	const commonModule = antiTracking ? antitracking : adblocker;
+	const commonModuleEnabled = antiTracking ? conf.enable_anti_tracking : conf.enable_ad_block;
 
-	if (!cliqzModuleEnabled || !cliqzModule.background) {
+	if (!commonModuleEnabled || !commonModule.background) {
 		return {
 			totalUnsafeCount,
 			totalUnidentifiedCount,
@@ -50,7 +50,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	}
 
 	// Count up number of fingerprints and cookies found
-	const { bugs, others } = cliqzModule.background.actions.getGhosteryStats(tabId);
+	const { bugs, others } = commonModule.background.actions.getGhosteryStats(tabId);
 	const bugsValues = Object.values(bugs);
 	const othersValues = Object.values(others);
 	const getDataPoints = (tracker) => {
@@ -115,7 +115,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
  * @param  {number} 	tabId
  * @return {object}
  */
-export function getCliqzGhosteryBugs(tabId) {
+export function getCommonGhosteryBugs(tabId) {
 	// Merge Ad-Block stats into Anti-Track Stats
 	const antiTrackingStats = (conf.enable_anti_tracking) ? antitracking.background.actions.getGhosteryStats(tabId) : { bugs: {}, others: {} };
 	const adBlockingStats = (conf.enable_ad_block) ? adblocker.background.actions.getGhosteryStats(tabId) : { bugs: {}, others: {} };
@@ -134,10 +134,10 @@ export function getCliqzGhosteryBugs(tabId) {
  * @param  {string} 	tabHostUrl
  * @param  {Function} 	callback
  */
-export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
+export function sendCommonModuleCounts(tabId, tabHostUrl, callback) {
 	const modules = { adBlock: {}, antiTracking: {} };
 
-	modules.adBlock = getCliqzData(tabId, tabHostUrl);
-	modules.antiTracking = getCliqzData(tabId, tabHostUrl, true);
+	modules.adBlock = getCommonData(tabId, tabHostUrl);
+	modules.antiTracking = getCommonData(tabId, tabHostUrl, true);
 	callback(modules);
 }

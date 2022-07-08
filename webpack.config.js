@@ -159,7 +159,7 @@ module.exports = {
 					{
 						loader: 'babel-loader',
 						options: {
-							envName: 'cliqz',
+							envName: 'common',
 						}
 					}
 				]

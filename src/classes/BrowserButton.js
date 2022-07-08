@@ -16,7 +16,7 @@
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import Policy from './Policy';
-import { getCliqzData } from '../utils/cliqzModulesData';
+import { getCommonData } from '../utils/commonModulesData';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
@@ -142,8 +142,8 @@ class BrowserButton {
 		}
 
 		const { appsCount, appsAlertCount } = BrowserButton._getTrackerCount(tabId);
-		const adBlockingCount = getCliqzData(tabId, tabHostUrl).trackerCount;
-		const antiTrackingCount = getCliqzData(tabId, tabHostUrl, true).trackerCount;
+		const adBlockingCount = getCommonData(tabId, tabHostUrl).trackerCount;
+		const antiTrackingCount = getCommonData(tabId, tabHostUrl, true).trackerCount;
 
 		alert = (appsAlertCount > 0);
 		trackerCount = (appsCount + antiTrackingCount + adBlockingCount).toString();

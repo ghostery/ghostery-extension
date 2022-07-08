@@ -184,7 +184,7 @@ class BlockingTracker extends React.Component {
 
 	renderTrackerModified() {
 		const { type, tracker } = this.props;
-		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
+		const { commonAdCount, commonCookieCount, commonFingerprintCount } = tracker;
 
 		if (type === 'global') {
 			return null;
@@ -192,19 +192,19 @@ class BlockingTracker extends React.Component {
 
 		return (
 			<div>
-				{cliqzAdCount > 0 && (
+				{commonAdCount > 0 && (
 					<span className="RequestModified RequestModified--ad">
-						{`${cliqzAdCount} ${cliqzAdCount === 1 ? t('ad') : t('ads')}`}
+						{`${commonAdCount} ${commonAdCount === 1 ? t('ad') : t('ads')}`}
 					</span>
 				)}
-				{cliqzCookieCount > 0 && (
+				{commonCookieCount > 0 && (
 					<span className="RequestModified RequestModified--cookie">
-						{`${cliqzCookieCount} ${cliqzCookieCount === 1 ? t('cookie') : t('cookies')}`}
+						{`${commonCookieCount} ${commonCookieCount === 1 ? t('cookie') : t('cookies')}`}
 					</span>
 				)}
-				{cliqzFingerprintCount > 0 && (
+				{commonFingerprintCount > 0 && (
 					<span className="RequestModified RequestModified--fingerprint">
-						{`${cliqzFingerprintCount} ${cliqzFingerprintCount === 1 ? t('fingerprint') : t('fingerprints')}`}
+						{`${commonFingerprintCount} ${commonFingerprintCount === 1 ? t('fingerprint') : t('fingerprints')}`}
 					</span>
 				)}
 			</div>
@@ -244,7 +244,7 @@ class BlockingTracker extends React.Component {
 
 		return (
 			<div className={svgContainerClasses}>
-				<svg className="cliqz-tracker-trust" width="20px" height="20px" viewBox="0 0 20 20">
+				<svg className="common-tracker-trust" width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 						<path className="border" stroke="#96C761" d="M-.5-.5h18.3v18.217H-.5z" />
 						<path className="background" stroke="#FFF" fill="#96C761" d="M.5.5h16.3v16.217H.5z" />
@@ -253,7 +253,7 @@ class BlockingTracker extends React.Component {
 						</svg>
 					</g>
 				</svg>
-				<svg className="cliqz-tracker-scrub" width="20px" height="20px" viewBox="0 0 20 20">
+				<svg className="common-tracker-scrub" width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 						<path className={borderClassNames} d="M-.5-.5h18.3v18.217H-.5z" />
 						<path className={backgroundClassNames} d="M.5.5h16.3v16.217H.5z" />

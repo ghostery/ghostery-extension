@@ -548,11 +548,6 @@ const Ghostery = (function(win, doc) {
 	 * @return {boolean}
 	 */
 	const handleMessages = function(request, sender, sendResponse) {
-		// Filter out messages coming from Cliqz context script bundle
-		if (request.source === 'cliqz-content-script') {
-			return false;
-		}
-
 		const	{ name } = request;
 		const reqMsg = request.message;
 		if (name === 'createBox') {

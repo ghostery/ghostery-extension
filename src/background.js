@@ -18,7 +18,7 @@ import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 
-import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
+import common, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
@@ -45,15 +45,17 @@ import SearchMessager from './classes/SearchMessager';
 import ErrorReporter from './classes/ErrorReporter';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
-import * as common from './utils/common';
+import {
+	log, alwaysLog, hashCode, prefsSet
+} from './utils/common';
 import * as utils from './utils/utils';
 import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
-import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
+import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
-window.CLIQZ = cliqz;
+window.COMMON = common;
 
 // For debug purposes, provide access to Ghostery's internal data.
 window.ghostery = ghosteryDebugger;
@@ -61,7 +63,6 @@ window.ghostery = ghosteryDebugger;
 // class instantiation
 const events = new Events();
 // function shortcuts
-const { log, alwaysLog } = common;
 const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
@@ -77,32 +78,32 @@ const ONE_HOUR_MSEC = 3600000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
-// Cliqz Modules
+// Common Modules
 const moduleMock = {
 	isEnabled: false,
 	on: () => {},
 };
-const humanweb = cliqz.modules[HUMANWEB_MODULE];
-const hpnv2 = cliqz.modules[HPN_MODULE];
-const { adblocker, antitracking } = cliqz.modules;
-const insights = cliqz.modules.insights || moduleMock;
-// add ghostery module to expose ghostery state to cliqz
-cliqz.modules.ghostery = new GhosteryModule();
+const humanweb = common.modules[HUMANWEB_MODULE];
+const hpnv2 = common.modules[HPN_MODULE];
+const { adblocker, antitracking } = common.modules;
+const insights = common.modules.insights || moduleMock;
+// add ghostery module to expose ghostery state to common
+common.modules.ghostery = new GhosteryModule();
 
 /**
  * Enable or disable specified module.
  * @memberOf Background
- * @param {Object} module  Cliqz module
+ * @param {Object} module  Common module
  * @param {boolean} enabled true - enable, false - disable
  * @return {Promise}
  */
-function setCliqzModuleEnabled(module, enabled) {
+function setCommonModuleEnabled(module, enabled) {
 	if (enabled) {
-		log('SET CLIQZ MODULE ENABLED', module);
-		return cliqz.enableModule(module.name);
+		log('SET Common MODULE ENABLED', module);
+		return common.enableModule(module.name);
 	}
-	log('SET CLIQZ MODULE DISABLED', module);
-	cliqz.disableModule(module.name);
+	log('SET Common MODULE DISABLED', module);
+	common.disableModule(module.name);
 	return Promise.resolve();
 }
 
@@ -374,7 +375,7 @@ function handleNotifications(name, message, tab_id, callback) {
 		try {
 			const backup = JSON.parse(message);
 
-			if (backup.hash !== common.hashCode(JSON.stringify(backup.settings))) {
+			if (backup.hash !== hashCode(JSON.stringify(backup.settings))) {
 				throw new Error('Invalid hash');
 			}
 
@@ -605,7 +606,7 @@ function handlePurplebox(name, message) {
  * Aggregated handler for <b>runtime.onMessage</b>
  *
  * All callbacks are used synchronously.
- * Some of messages come from Cliqz content script
+ * Some of messages come from Common content script
  * bundle, we should filter those out.
  * @memberOf Background
  *
@@ -615,9 +616,6 @@ function handlePurplebox(name, message) {
  * @return {boolean}            denotes async (true) or sync (false)
  */
 function onMessageHandler(request, sender, callback) {
-	if (request.source === 'cliqz-content-script') {
-		return false;
-	}
 	const {
 		name, message, origin
 	} = request;
@@ -715,16 +713,16 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	}
-	if (name === 'getCliqzModuleData') { // panel-android only
+	if (name === 'getCommonModuleData') { // panel-android only
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const pageHost = (activeTab.url && utils.processUrl(activeTab.url).hostname) || '';
-				sendCliqzModuleCounts(activeTab.id, pageHost, callback);
+				sendCommonModuleCounts(activeTab.id, pageHost, callback);
 			});
 		} else {
 			chrome.tabs.get(+message.tabId, (messageTab) => {
 				const pageHost = (messageTab.url && utils.processUrl(messageTab.url).hostname) || '';
-				sendCliqzModuleCounts(messageTab.id, pageHost, callback);
+				sendCommonModuleCounts(messageTab.id, pageHost, callback);
 			});
 		}
 		return true;
@@ -899,7 +897,7 @@ function onMessageHandler(request, sender, callback) {
 		settings.site_blacklist = conf.site_blacklist;
 		settings.site_whitelist = conf.site_whitelist;
 
-		const hash = common.hashCode(JSON.stringify({ conf: settings }));
+		const hash = hashCode(JSON.stringify({ conf: settings }));
 		const backup = JSON.stringify({ hash, settings: { conf: settings } });
 		const msg = { type: 'Ghostery-Backup', content: backup };
 		callback(msg);
@@ -915,7 +913,7 @@ function onMessageHandler(request, sender, callback) {
 				settings.site_whitelist = conf.site_whitelist;
 
 				try {
-					const hash = common.hashCode(JSON.stringify({ conf: settings }));
+					const hash = hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
 					const msg = { type: 'Ghostery-Backup', content: backup };
 					utils.injectNotifications(activeTab.id, true).then(() => {
@@ -1008,12 +1006,12 @@ function setupABTests() {
 /**
  * @since 8.5.3
  *
- * Update config options for the Cliqz antitracking module to match the current human web setting.
+ * Update config options for the Common antitracking module to match the current human web setting.
  * Log out the updates. Returns without doing anything if antitracking is disabled.
  *
  * @param {Boolean} isAntitrackingEnabled		Whether antitracking is currently enabled.
  */
-function setCliqzAntitrackingConfig(isAntitrackingEnabled) {
+function setCommonAntitrackingConfig(isAntitrackingEnabled) {
 	if (!isAntitrackingEnabled) return;
 
 	const antitrackingConfig = {
@@ -1045,15 +1043,15 @@ function initializeDispatcher() {
 		// TODO debounce with below
 		button.update();
 		utils.flushChromeMemoryCache();
-		cliqz.modules.core.action('refreshAppState');
+		common.modules.core.action('refreshAppState');
 	});
 	dispatcher.on('conf.save.site_blacklist', () => {
 		button.update();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-			setCliqzAntitrackingConfig(conf.enable_anti_tracking);
-			setCliqzModuleEnabled(hpnv2, enableHumanWeb);
+		setCommonModuleEnabled(humanweb, enableHumanWeb).then(() => {
+			setCommonAntitrackingConfig(conf.enable_anti_tracking);
+			setCommonModuleEnabled(hpnv2, enableHumanWeb);
 		});
 	});
 	dispatcher.on('conf.save.enable_autoupdate', (enableAutoUpdate) => {
@@ -1065,31 +1063,31 @@ function initializeDispatcher() {
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
+		setCommonModuleEnabled(antitracking, enableAntitracking).then(() => {
 			// enable_human_web could have been toggled while antitracking was off,
 			// so we want to make sure to update the antitracking telemetry option
-			setCliqzAntitrackingConfig(conf.enable_anti_tracking);
+			setCommonAntitrackingConfig(conf.enable_anti_tracking);
 		});
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		setCliqzModuleEnabled(adblocker, enableAdBlock);
+		setCommonModuleEnabled(adblocker, enableAdBlock);
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
-		cliqz.prefs.set('cliqz_adb_mode', val);
+		common.prefs.set('cliqz_adb_mode', val);
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// update content script state when blocking is paused/unpaused
-		cliqz.modules.core.action('refreshAppState');
+		common.modules.core.action('refreshAppState');
 	});
 }
 
 /**
- * WebRequest pipeline initialization: find which Cliqz modules are enabled,
+ * WebRequest pipeline initialization: find which Common modules are enabled,
  * add their handlers, then put Ghostery event handlers before them all.
- * If Cliqz modules are subsequently enabled, their event handlers will always
+ * If Common modules are subsequently enabled, their event handlers will always
  * be added after Ghostery's.
  * @memberOf Background
  *
@@ -1098,7 +1096,7 @@ function initializeDispatcher() {
  *                        	or one of the webRequestPipeline actions rejects.
  */
 function initialiseWebRequestPipeline() {
-	const webRequestPipeline = cliqz.modules['webrequest-pipeline'];
+	const webRequestPipeline = common.modules['webrequest-pipeline'];
 	if (webRequestPipeline.isDisabled) {
 		// no pipeline... this shouldn't happen
 		return Promise.reject(new Error('cannot initialise webrequest pipeline: module disabled'));
@@ -1156,7 +1154,7 @@ function isWhitelisted(state) {
  * Set listener for 'enabled' event for Antitracking module which replaces
  * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
  * The reason: if site is whitelisted by Ghostery, it should be whitelisted by
- * any Cliqz module which may block/alter tracker requests.
+ * any Common module which may block/alter tracker requests.
  * @memberOf Background
  */
 antitracking.on('enabled', () => {
@@ -1182,7 +1180,7 @@ adblocker.on('enabled', () => {
  */
 insights.on('enabled', () => {
 	events.addPageListener((tab_id, info, apps, bugs) => {
-		cliqz.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
+		common.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
 	});
 });
 insights.on('disabled', () => {
@@ -1241,7 +1239,7 @@ function addCommonGhosteryAndAntitrackingListeners() {
 	let urlFilters = ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'];
 	if (IS_EDGE || IS_FIREFOX) {
 		// Prevent Firefox from asking users to re-validate permissions on upgrade
-		// TODO: Allow websocket filters on Edge via Cliqz pipeline
+		// TODO: Allow websocket filters on Edge via Common pipeline
 		urlFilters = urlFilters.reduce((accumulator, currentValue) => {
 			if (!currentValue.match(/^wss?:\/\//)) {
 				accumulator.push(currentValue);
@@ -1453,7 +1451,7 @@ function initializeVersioning() {
 
 /**
  * Ghostery Module Initializer.
- * Init all Ghostery and Cliqz modules.
+ * Init all Ghostery and Common modules.
  * @memberOf Background
  *
  * @return {Promise}
@@ -1495,9 +1493,9 @@ function initializeGhosteryModules() {
 		metrics.ping('install');
 		metrics.ping('install_complete');
 	}
-	// start cliqz app
-	const cliqzStartup = async () => {
-		await cliqz.start();
+	// start common app
+	const commonStartup = async () => {
+		await common.start();
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		await initialiseWebRequestPipeline();
 
@@ -1570,7 +1568,7 @@ function initializeGhosteryModules() {
 		c2pDb.init(globals.JUST_UPGRADED),
 		compDb.init(globals.JUST_UPGRADED),
 		surrogatedb.init(globals.JUST_UPGRADED),
-		cliqzStartup(),
+		commonStartup(),
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
@@ -1733,7 +1731,7 @@ async function init() {
 		initializeAccount();
 
 		// persist Conf properties to storage only after init has completed
-		await common.prefsSet(globals.initProps);
+		await prefsSet(globals.initProps);
 
 		globals.INIT_COMPLETE = true;
 	} catch (err) {

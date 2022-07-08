@@ -2,7 +2,7 @@
  * Panel Data Class
  *
  * Coordinates the assembly and transmission
- * of bug / Cliqz / settings data to the extension panel
+ * of bug / Common / settings data to the extension panel
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -24,7 +24,7 @@ import Policy from './Policy';
 import tabInfo from './TabInfo';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
+import { getCommonGhosteryBugs, sendCommonModuleCounts } from '../utils/commonModulesData';
 import {
 	getTab,
 	getActiveTab,
@@ -138,7 +138,7 @@ class PanelData {
 					break;
 				case 'SummaryComponentDidMount':
 					this._mountedComponents.summary = true;
-					this._postCliqzModulesData();
+					this._postCommonModulesData();
 					this.postPageLoadTime(tab.id);
 					break;
 				case 'SummaryComponentWillUnmount':
@@ -191,7 +191,7 @@ class PanelData {
 	}
 
 	/**
-	 * Wrapper helper passed as callback to utils/cliqzModuleData#sendCliqzModuleCounts
+	 * Wrapper helper passed as callback to utils/commonModuleData#sendCommonModuleCounts
 	 */
 	postMessageToSummary = ((message) => {
 		this._postMessage('summary', message);
@@ -234,7 +234,7 @@ class PanelData {
 
 		if (summary) {
 			this._postMessage('summary', this._getDynamicSummaryData());
-			this._postCliqzModulesData();
+			this._postCommonModulesData();
 		}
 
 		this._postMessage('panel', this._getDynamicPanelData());
@@ -503,10 +503,10 @@ class PanelData {
 	/**
 	 * Retrieves antitracking and adblock counts and sends it to the panel
 	 */
-	_postCliqzModulesData() {
+	_postCommonModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		sendCliqzModuleCounts(
+		sendCommonModuleCounts(
 			this._activeTab.id,
 			this._activeTab.pageHost,
 			this.postMessageToSummary,
@@ -685,9 +685,9 @@ class PanelData {
 	static _buildTracker(tracker, trackerState, smartBlock) {
 		const {
 			cat,
-			cliqzAdCount,
-			cliqzCookieCount,
-			cliqzFingerprintCount,
+			commonAdCount,
+			commonCookieCount,
+			commonFingerprintCount,
 			hasCompatibilityIssue,
 			hasInsecureIssue,
 			hasLatencyIssue,
@@ -715,9 +715,9 @@ class PanelData {
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
 			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
-			cliqzAdCount,
-			cliqzCookieCount,
-			cliqzFingerprintCount,
+			commonAdCount,
+			commonCookieCount,
+			commonFingerprintCount,
 		};
 	}
 
@@ -779,7 +779,7 @@ class PanelData {
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
 
-		const ghosteryBugs = getCliqzGhosteryBugs(id);
+		const ghosteryBugs = getCommonGhosteryBugs(id);
 
 		if (ghosteryBugs && ghosteryBugs.bugs) {
 			const { bugs } = ghosteryBugs;
@@ -793,9 +793,9 @@ class PanelData {
 				const trackerListIndex = appsById[trackerId.aid];
 				if (!trackerListIndex) return;
 
-				this._trackerList[trackerListIndex].cliqzCookieCount = bugs[bugsId].cookies;
-				this._trackerList[trackerListIndex].cliqzFingerprintCount = bugs[bugsId].fingerprints;
-				this._trackerList[trackerListIndex].cliqzAdCount = bugs[bugsId].ads;
+				this._trackerList[trackerListIndex].commonCookieCount = bugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].commonFingerprintCount = bugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].commonAdCount = bugs[bugsId].ads;
 			});
 		}
 
