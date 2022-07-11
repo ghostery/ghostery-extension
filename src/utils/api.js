@@ -52,16 +52,21 @@ class Api {
 	}
 
 	async _sendReq(method, path, body) {
-		const	accessTokenCookie = await cookiesGet({ name: 'access_token' });
+		const headers = {
+			'Content-Type': Api.JSONAPI_CONTENT_TYPE,
+			'Content-Length': Buffer.byteLength(JSON.stringify(body)),
+		};
 		const	csrfTokenCookie = await cookiesGet({ name: 'csrf_token' });
+		if (csrfTokenCookie) {
+			headers['X-CSRF-Token'] = csrfTokenCookie.value;
+		}
+		const	accessTokenCookie = await cookiesGet({ name: 'access_token' });
+		if (accessTokenCookie) {
+			headers.Authorization = `Bearer ${accessTokenCookie.value}`;
+		}
 		return fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
 			method,
-			headers: {
-				'Content-Type': Api.JSONAPI_CONTENT_TYPE,
-				'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-				Authorization: `Bearer ${accessTokenCookie ? accessTokenCookie.value : ''}`,
-				'X-CSRF-Token': csrfTokenCookie ? csrfTokenCookie.value : '',
-			},
+			headers,
 			credentials: 'omit',
 			body: JSON.stringify(body),
 		});
