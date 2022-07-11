@@ -23,11 +23,11 @@ import { alwaysLog, log } from '../utils/common';
 import Api from '../utils/api';
 import metrics from './Metrics';
 import ghosteryDebugger from './Debugger';
-import { cookiesGet, cookiesSet, cookiesRemove } from '../utils/cookies';
+import { cookiesGet, setAllLoginCookies, cookiesRemove } from '../utils/cookies';
 
 const api = new Api();
 const {
-	COOKIE_DOMAIN, COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
+	COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
 } = globals;
 
 const SYNC_SET = new Set(SYNC_ARRAY);
@@ -80,52 +80,44 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-			credentials: 'include',
+			credentials: 'omit',
 		}).then((res) => {
 			if (res.status >= 400) {
-				return res.json();
+				throw res.json();
 			}
+			return res.json();
+		}).then(response => setAllLoginCookies({
+			accessToken: response.access_token,
+			refreshToken: response.refresh_token,
+			csrfToken: response.csrf_token,
+			userId: response.user_id,
+		})).then(() => {
 			ghosteryDebugger.addAccountEvent('login', 'cookie set by fetch POST');
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
 				this.getUserSubscriptionData({ calledFrom: 'login' });
 			});
 			return {};
-		});
-	}
-
-	register = (email, confirmEmail, password, firstName, lastName) => {
-		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
-		return fetch(`${AUTH_SERVER}/api/v2/register`, {
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-			credentials: 'include',
-		}).then((res) => {
-			if (res.status >= 400) {
-				ghosteryDebugger.addAccountEvent('register', 'cookie set by fetch POST');
-				return res.json();
-			}
-			this._getUserIDFromCookie().then((userID) => {
-				this._setAccountInfo(userID);
-			});
-			return {};
+		}).catch((err) => {
+			alwaysLog(err);
+			return err;
 		});
 	}
 
 	async logout() {
 		try {
-			const cookie = await cookiesGet({ name: 'csrf_token' });
-			if (!cookie) {
+			const csrfCookie = await cookiesGet({ name: 'csrf_token' });
+			const accessTokenCookie = await cookiesGet({ name: 'access_token' });
+			if (!csrfCookie || !accessTokenCookie) {
 				throw new Error('no cookie');
 			}
 			const res = await fetch(`${AUTH_SERVER}/api/v2/logout`, {
 				method: 'POST',
-				credentials: 'include',
-				headers: { 'X-CSRF-Token': cookie.value },
+				credentials: 'omit',
+				headers: {
+					'X-CSRF-Token': csrfCookie.value,
+					Authorization: `Bearer ${accessTokenCookie.value}`,
+				},
 			});
 			if (res.status < 400) {
 				ghosteryDebugger.addAccountEvent('logout', 'cookie set by fetch POST');
@@ -302,32 +294,13 @@ class Account {
 				}
 
 				// set cookies
-				Promise.all([
-					this._setLoginCookie({
-						name: 'refresh_token',
-						value: RefreshToken,
-						expirationDate: exp + 604800, // + 7 days
-						httpOnly: true,
-					}),
-					this._setLoginCookie({
-						name: 'access_token',
-						value: user_token,
-						expirationDate: exp,
-						httpOnly: true,
-					}),
-					this._setLoginCookie({
-						name: 'csrf_token',
-						value: csrf_token,
-						expirationDate: exp,
-						httpOnly: false,
-					}),
-					this._setLoginCookie({
-						name: 'user_id',
-						value: UserId,
-						expirationDate: 1893456000, // Tue Jan 1 2030 00:00:00 GMT. @TODO is this the best way of hanlding this?
-						httpOnly: false,
-					})
-				]).then(() => {
+				this._setAllLoginCookies({
+					refreshToken: RefreshToken,
+					accessToken: user_token,
+					csrfToken: csrf_token,
+					userId: UserId,
+					expirationDate: exp,
+				}).then(() => {
 					// login
 					this._setAccountInfo(UserId);
 					this.getUserSubscriptionData();
@@ -420,31 +393,6 @@ class Account {
 			}
 		});
 		return settings;
-	}
-
-	_setLoginCookie = async (details) => {
-		const {
-			name, value, expirationDate, httpOnly
-		} = details;
-		if (!name || !value) {
-			throw new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`);
-		}
-		try {
-			const cookie = await cookiesSet({
-				name,
-				value,
-				domain: COOKIE_DOMAIN,
-				expirationDate,
-				secure: true,
-				httpOnly,
-			});
-			if (!cookie) {
-				throw new Error('no cookie');
-			}
-			return cookie;
-		} catch (e) {
-			throw new Error(`Error setting cookie ${JSON.stringify(details)}: ${e}`);
-		}
 	}
 
 	_getUserID = () => (
