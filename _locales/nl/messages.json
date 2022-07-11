@@ -1230,18 +1230,7 @@
     "message": "E-mail"
   },
   "license_footer": {
-    "message": "Ghostery$COPY$; is een Cliqz company. Kom meer te weten over $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, een dochtermaatschappij van Cliqz GmbH. Alle rechten voorbehouden.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$; is een Cliqz company. Kom meer te weten over $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, een dochtermaatschappij van Cliqz GmbH. Alle rechten voorbehouden."
   },
   "license_generic": {
     "message": "Standaard licentietekst"

@@ -1230,18 +1230,7 @@
     "message": "Email"
   },
   "license_footer": {
-    "message": "Ghostery$COPY$; - это компания Cliqz. Подробнее о $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, дочерняя компания, находящаяся в полной собственности материнской компании Cliqz GmbH. Все права защищены.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$; - это компания Cliqz. Подробнее о $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, дочерняя компания, находящаяся в полной собственности материнской компании Cliqz GmbH. Все права защищены."
   },
   "license_generic": {
     "message": "Стандартный текст лицензии"

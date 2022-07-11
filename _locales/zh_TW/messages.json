@@ -1230,18 +1230,7 @@
     "message": "電郵："
   },
   "license_footer": {
-    "message": "Ghostery$COPY$; 是 Cliqz 屬下的一家公司。瞭解更多關於$LINK_START$Cliqz$LINK_END$。$COPY$Cliqz International GmbH，是 Cliqz GmbH 全資擁有的子公司。版權所有。",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$; 是 Cliqz 屬下的一家公司。瞭解更多關於$LINK_START$Cliqz$LINK_END$。$COPY$Cliqz International GmbH，是 Cliqz GmbH 全資擁有的子公司。版權所有。"
   },
   "license_generic": {
     "message": "標準的准許證文本"

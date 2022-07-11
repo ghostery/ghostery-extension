@@ -1230,18 +1230,7 @@
     "message": "E-Mail-Adresse"
   },
   "license_footer": {
-    "message": "Ghostery$COPY$ ist ein Cliqz-Unternehmen. Erfahren Sie mehr über $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, eine hundertprozentige Tochtergesellschaft der Cliqz GmbH. Alle Rechte vorbehalten.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$ ist ein Cliqz-Unternehmen. Erfahren Sie mehr über $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, eine hundertprozentige Tochtergesellschaft der Cliqz GmbH. Alle Rechte vorbehalten."
   },
   "license_generic": {
     "message": "Standard-Lizenztext"

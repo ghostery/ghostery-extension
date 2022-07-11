@@ -1230,18 +1230,7 @@
     "message": "이메일 "
   },
   "license_footer": {
-    "message": "Ghostery$COPY$;는 Cliqz 자회사입니다. $LINK_START$Cliqz$LINK_END$에 대해 자세히 알아보기. $COPY$Cliqz International GmbH는 Cliqz GmbH의 전액출자 자회사입니다. All rights reserved.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$;는 Cliqz 자회사입니다. $LINK_START$Cliqz$LINK_END$에 대해 자세히 알아보기. $COPY$Cliqz International GmbH는 Cliqz GmbH의 전액출자 자회사입니다. All rights reserved."
   },
   "license_generic": {
     "message": "표준 라이선스 텍스트 "

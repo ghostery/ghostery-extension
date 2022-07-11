@@ -1230,18 +1230,7 @@
     "message": "E-mail"
   },
   "license_footer": {
-    "message": "Ghostery$COPY$; to firma należąca do Cliqz. Dowiedz się więcej o $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, filia będąca w pełni własnością Cliqz GmbH. Wszelkie prawa zastrzeżone.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$; to firma należąca do Cliqz. Dowiedz się więcej o $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, filia będąca w pełni własnością Cliqz GmbH. Wszelkie prawa zastrzeżone."
   },
   "license_generic": {
     "message": "Standardowy tekst licencji"

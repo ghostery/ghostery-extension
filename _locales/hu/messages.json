@@ -1230,18 +1230,7 @@
     "message": "Emailcím"
   },
   "license_footer": {
-    "message": "Ghostery$COPY$; egy Cliqz-vállalat. Tudjon meg többet a $LINK_START$Cliqz$LINK_END$-ről. A $COPY$Cliqz International GmbH, a Cliqz GmbH teljes tulajdonú alvállalata. Minden jog fenntartva.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$; egy Cliqz-vállalat. Tudjon meg többet a $LINK_START$Cliqz$LINK_END$-ről. A $COPY$Cliqz International GmbH, a Cliqz GmbH teljes tulajdonú alvállalata. Minden jog fenntartva."
   },
   "license_generic": {
     "message": "Szabványos licenc szöveg"

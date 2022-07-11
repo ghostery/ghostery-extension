@@ -223,17 +223,6 @@
     "message": "Trang web không còn bị hạn chế."
   },
   "license_footer": {
-    "placeholders": {
-      "copy": {
-        "content": "©"
-      },
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      }
-    },
     "message": "Ghostery $COPY$ là một công ty của Cliqz. Tìm hiểu thêm về $LINK_START$ Cliqz $LINK_END$. $COPY$ Cliqz International GmbH, một công ty con thuộc sở hữu hoàn toàn của Cliqz GmbH. Đã đăng ký Bản quyền."
   },
   "account_creation_privacy_statement": {

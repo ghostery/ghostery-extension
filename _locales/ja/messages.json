@@ -1230,18 +1230,7 @@
     "message": "メール"
   },
   "license_footer": {
-    "message": "Ghostery$COPY$はCliqz会社です。$LINK_START$Cliqz$LINK_END$についてもっとよく知る。$COPY$Cliqz国際有限責任会社（Cliqz有限責任会社の完全所有子会社）。著作権所有。",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery$COPY$はCliqz会社です。$LINK_START$Cliqz$LINK_END$についてもっとよく知る。$COPY$Cliqz国際有限責任会社（Cliqz有限責任会社の完全所有子会社）。著作権所有。"
   },
   "license_generic": {
     "message": "標準ライセンス・テキスト"

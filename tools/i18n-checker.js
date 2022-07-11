@@ -16,6 +16,7 @@
 
 console.time('i18n-checker');
 
+const { local } = require('d3');
 const fs = require('fs-extra');
 const jsonfile = require('jsonfile');
 const oboe = require('oboe');
@@ -23,6 +24,7 @@ const oboe = require('oboe');
 // Constants
 const LOCALES_FOLDER = './_locales';
 const GATHER_FILE_PATHS_EXCEPTIONS = ['.DS_Store'];
+const COMMUNITY_LOCALES = ['vi'];
 const LANG_FILES_COUNT = 14;
 const DEFAULT_LOCALE_PATH = './_locales/en/messages.json';
 const DUPLICATE_TOKENS_FILE = './tools/i18n_results/duplicate_tokens.txt';
@@ -55,6 +57,9 @@ function gatherFilePaths() {
 					if (GATHER_FILE_PATHS_EXCEPTIONS.indexOf(locale) === -1) {
 						console.log('Error: "%s" is not a valid locale', locale);
 					}
+					return;
+				}
+				if (COMMUNITY_LOCALES.indexOf(locale) >= 0) {
 					return;
 				}
 				langFilesCounted += 1;
