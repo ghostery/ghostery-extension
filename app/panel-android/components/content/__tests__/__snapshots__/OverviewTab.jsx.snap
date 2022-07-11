@@ -334,7 +334,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
       >
         <span>
           trackers_blocked
-
+           
         </span>
         <span
           className="OverviewTab__PageStat--red"
@@ -347,7 +347,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
       >
         <span>
           requests_modified
-
+           
         </span>
         <span
           className="OverviewTab__PageStat--blue"
