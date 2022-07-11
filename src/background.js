@@ -472,117 +472,6 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from The Ghostery Hub: app/hub.
- * @param  {string}   name     message name
- * @param  {object}   message  message data
- * @param  {function} callback function to call when you have a response
- */
-function handleGhosteryHub(name, message, callback) {
-	switch (name) {
-		case 'SEND_PING': {
-			const { type } = message;
-			metrics.ping(type);
-			callback();
-			break;
-		}
-		case 'GET_HOME_PROPS': {
-			const {
-				setup_complete,
-				tutorial_complete,
-				enable_metrics,
-			} = conf;
-			callback({
-				setup_complete,
-				tutorial_complete,
-				enable_metrics,
-			});
-			break;
-		}
-		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
-			const { setup_show_warning_override } = conf;
-			callback({ setup_show_warning_override });
-			break;
-		}
-		case 'SET_SETUP_STEP': {
-			let { setup_step } = message;
-			if (setup_step === 7) {
-				panelData.set({ setup_step });
-			} else if (setup_step > conf.setup_step) {
-				panelData.set({ setup_step });
-				if (setup_step === 8) {
-					const { setup_number } = conf;
-					panelData.set({ setup_number: setup_number ? 2 : 1 });
-					metrics.ping('setup_start');
-				}
-			} else {
-				({ setup_step } = setup_step);
-			}
-			const origin = message.origin || '';
-			if (origin === 'onboarding') {
-				conf.setup_step = message.setup_step;
-				metrics.ping('gb_onboarding');
-			}
-			callback({ setup_step });
-			break;
-		}
-		case 'SET_BLOCKING_POLICY': {
-			const { blockingPolicy } = message;
-			switch (blockingPolicy) {
-				case 'BLOCKING_POLICY_RECOMMENDED': {
-					panelData.set({ setup_block: 5 });
-					setGhosteryDefaultBlocking();
-					break;
-				}
-				case 'BLOCKING_POLICY_NOTHING': {
-					panelData.set({ setup_block: 1 });
-					const selected_app_ids = {};
-					panelData.set({ selected_app_ids });
-					break;
-				}
-				case 'BLOCKING_POLICY_EVERYTHING': {
-					panelData.set({ setup_block: 3 });
-					const selected_app_ids = {};
-					const app_ids = Object.keys(bugDb.db.apps);
-					app_ids.forEach((app_id) => {
-						if (!selected_app_ids.hasOwnProperty(app_id)) {
-							selected_app_ids[app_id] = 1;
-						}
-					});
-					panelData.set({ selected_app_ids });
-					break;
-				}
-				case 'BLOCKING_POLICY_CUSTOM': {
-					panelData.set({ setup_block: 4 });
-					// Blocking app_ids is handled by Global Blocking blocking.js
-					break;
-				}
-				default: break;
-			}
-			callback({ blockingPolicy });
-			break;
-		}
-		case 'SET_TUTORIAL_COMPLETE': {
-			panelData.set(message);
-			metrics.ping('tutorial_complete');
-			callback(message);
-			break;
-		}
-		case 'SET_METRICS':
-		case 'SET_SETUP_SHOW_WARNING_OVERRIDE':
-		case 'SET_ANTI_TRACKING':
-		case 'SET_AD_BLOCK':
-		case 'SET_SMART_BLOCK':
-		case 'SET_HUMAN_WEB':
-		case 'SET_SETUP_COMPLETE': {
-			panelData.set(message);
-			callback(message);
-			break;
-		}
-		default: break;
-	}
-}
-
-/**
  * Handle messages sent from dist/purplebox.js content script.
  * @memberOf Background
  *
@@ -659,12 +548,9 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	}
-	if (origin === 'ghostery-hub') {
-		return handleGhosteryHub(name, message, callback);
-	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	if (name === 'getPanelData') { // Used by panel-android and the intro hub
+	if (name === 'getPanelData') { // Used by panel-android
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const data = panelData.get(message.view, activeTab);
@@ -959,18 +845,11 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
-	if (name === 'openHubPage') {
-		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
-		metrics.ping('intro_hub_click');
-		utils.openNewTab({ url: hubUrl, become_active: true });
-		return false;
-	}
 	if (name === 'openAccountAndroid') {
 		if (confData.account) {
 			utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/`, become_active: true });
 		} else {
-			const hubUrl = chrome.runtime.getURL('./app/templates/hub.html#log-in');
-			utils.openNewTab({ url: hubUrl, become_active: true });
+			utils.openNewTab({ url: `${globals.SIGNON_BASE_URL}/`, become_active: true });
 		}
 		return false;
 	}
@@ -978,29 +857,10 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Set option for Hub Layout A/B test based
- * on the results returned from the abtest endpoint.
- * @memberOf Background
- */
-function setupHubLayoutABTest() {
-	if (
-		!abtest.hasBeenFetched
-		|| conf.hub_layout !== 'not_yet_set'
-	) { return; }
-
-	if (abtest.hasTest('hub_alternate')) {
-		conf.hub_layout = 'alternate';
-	} else {
-		conf.hub_layout = 'default';
-	}
-}
-
-/**
  * Configure A/B tests based on data fetched from the A/B server
  * @memberOf Background
  */
 function setupABTests() {
-	setupHubLayoutABTest();
 }
 
 /**
@@ -1571,22 +1431,13 @@ function initializeGhosteryModules() {
 		commonStartup(),
 	]).then(() => {
 		// run scheduledTasks on init
-		scheduledTasks().then(() => {
+		scheduledTasks().then(async () => {
 			if (globals.JUST_INSTALLED) {
-				(async () => {
-					await globals.BROWSER_INFO_READY;
-					if (BROWSER_INFO.name !== 'ghostery_desktop') {
-						// Open the Ghostery Hub on install with justInstalled query parameter set to true.
-						// We need to do this after running scheduledTasks for the first time
-						// because of an A/B test that determines which promo variant is shown in the Hub on install
-						const showAlternateHub = conf.hub_layout === 'alternate';
-						const route = showAlternateHub ? '#home' : '';
-						chrome.tabs.create({
-							url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
-							active: true
-						});
-					}
-				})();
+				// TODO: open onboarding
+				// chrome.tabs.create({
+				// 	url: chrome.runtime.getURL('./app/templates/onboarding.html'),
+				// 	active: true
+				// });
 			}
 		});
 	});
@@ -1624,7 +1475,6 @@ function purgeObsoleteData() {
 		'evidon_bugs_last_checked',
 		'plus_promo_modal_last_seen',
 		'premium_promo_modal_last_seen',
-		'hub_promo_variant',
 		'ghostrank',
 		'enable_offers',
 		'fromSettings',

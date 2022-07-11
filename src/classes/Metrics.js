@@ -151,7 +151,6 @@ class Metrics {
 			case 'tutorial_start':
 			case 'tutorial_complete':
 			case 'setup_start':
-			case 'plus_cta_hub':
 			case 'plus_cta_extension':
 			case 'products_cta_android':
 			case 'products_cta_ios':
@@ -165,18 +164,6 @@ class Metrics {
 			case 'priority_support_submit':
 			case 'theme_change':
 			case 'manage_subscription':
-				this._sendReq(type, ['all']);
-				break;
-
-			// Onboarding Pings - Ghostery 8.5.2+
-			case 'intro_hub_click':
-			case 'intro_hub_home_upgrade':
-				this._sendReq(type, ['all']);
-				break;
-
-			// Ghostery Browser Hub - Ghostery 8.5.5+
-			case 'gb_onboarding':
-			case 'gb_onboarding_success':
 				this._sendReq(type, ['all']);
 				break;
 
@@ -270,8 +257,6 @@ class Metrics {
 			buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
 			buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
-			// The number of times the user has gone through setup in the regular hub, or the answer selection on each page of the dawn-hub
-			buildQueryPair('sl', conf.setup_number.toString()) +
 			// Type of blocking selected during setup
 			buildQueryPair('sb', conf.setup_block.toString()) +
 			// Recency, days since last active daily ping

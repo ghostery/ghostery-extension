@@ -131,8 +131,6 @@ test -d $BUILD_DIR || mkdir $BUILD_DIR && \
 		app/scss/\* \
 		app/licenses/\* \
 		app/Account/\* \
-		app/hub/\* \
-		app/shared-hub/\* \
 		app/shared-components/\* \
 		build/\* \
 		databases/README.md \
