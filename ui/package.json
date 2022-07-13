@@ -7,7 +7,8 @@
     ".": "./src/index.js",
     "./css": "./src/index.css",
     "./categories": "./src/utils/categories.js",
-    "./wheel": "./src/utils/wheel.js"
+    "./wheel": "./src/utils/wheel.js",
+    "./onboarding": "./src/modules/onboarding/index.js"
   },
   "scripts": {
     "lint": "eslint ./src",
