@@ -1,3 +1,15 @@
+# v0.3.0 (Wed Jul 13 2022)
+
+#### 🚀 Enhancement
+
+- Add onboading module [#9](https://github.com/ghostery/ghostery-ui/pull/9) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.2.0 (Wed Jul 06 2022)
 
 #### 🚀 Enhancement
