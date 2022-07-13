@@ -22,6 +22,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
 const SHARED_COMP_DIR = path.resolve(__dirname, 'app/shared-components');
+const ONBOARDING_DIR = path.resolve(__dirname, 'app/onboarding');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');
 const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
@@ -57,6 +58,7 @@ module.exports = {
 		page_performance: [`${CONTENT_SCRIPTS_DIR}/page_performance.js`],
 		panel_android_react: [`${PANEL_ANDROID_DIR}/index.jsx`],
 		panel_react: [`${PANEL_DIR}/index.jsx`],
+		onboarding: [`${ONBOARDING_DIR}/index.js`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
 		trackers_preview_popup: [`${SRC_DIR}/trackers-preview/popup.js`],
@@ -122,7 +124,7 @@ module.exports = {
 				}
 			}, {
 				test: /\.(js|jsx)$/,
-				include: [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
+				include: [SHARED_COMP_DIR, ONBOARDING_DIR, PANEL_ANDROID_DIR, PANEL_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
 				exclude: /node_modules/,
 				use: [
 					{

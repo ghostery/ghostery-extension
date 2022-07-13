@@ -255,10 +255,6 @@ class Metrics {
 			buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
 			// Antitracking state
 			buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
-			// The deepest setup page reached by user during setup
-			buildQueryPair('ss', Metrics._getSetupStep(type).toString()) +
-			// Type of blocking selected during setup
-			buildQueryPair('sb', conf.setup_block.toString()) +
 			// Recency, days since last active daily ping
 			buildQueryPair('rc', Metrics._getRecencyActive(type, frequency).toString()) +
 
@@ -360,21 +356,6 @@ class Metrics {
 		await BROWSER_INFO_READY;
 		if (BROWSER_INFO.token === 'gd') return 'gd';
 		return 'gbe';
-	}
-
-	/**
-	 * Get the Setup step
-	 *
-	 * @private
-	 *
-	 * @return {number} The deepest setup page reached by user during setup
-	 */
-	static _getSetupStep(type) {
-		if (conf.metrics.install_complete_all
-			|| type === 'install_complete'
-			|| type === 'gb_onboarding'
-			|| type === 'gb_onboarding_success') return conf.setup_step;
-		return -1;
 	}
 
 	/**

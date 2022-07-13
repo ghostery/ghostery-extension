@@ -526,6 +526,16 @@ function onMessageHandler(request, sender, callback) {
 		// Account pages
 		return handleAccountPages(name, callback);
 	}
+	if (origin === 'onboarding') {
+		if (name === 'setup_complete') {
+			conf.setup_complete = true;
+			chrome.tabs.remove(tab_id);
+			chrome.tabs.create({
+				active: true,
+			});
+		}
+		return false;
+	}
 	if (origin === 'checkout_pages') {
 		// Checkout pages
 		return handleCheckoutPages(name, callback);
@@ -1432,12 +1442,11 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(async () => {
-			if (globals.JUST_INSTALLED) {
-				// TODO: open onboarding
-				// chrome.tabs.create({
-				// 	url: chrome.runtime.getURL('./app/templates/onboarding.html'),
-				// 	active: true
-				// });
+			if (conf.setup_complete) {
+				chrome.tabs.create({
+					url: chrome.runtime.getURL('./app/templates/onboarding.html'),
+					active: true
+				});
 			}
 		});
 	});
