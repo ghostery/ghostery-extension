@@ -14,6 +14,12 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
+
+// We need to add eslint alias resolver (from webpack configuration)
+// as we had to add aliases, webpack 4.x does not support "exports" field
+// eslint-disable-next-line
+import '@ghostery/ui';
+
 import Tooltip from '../../shared-components/Tooltip';
 import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
@@ -25,7 +31,6 @@ import {
 	NotScanned,
 	PauseButton
 } from './BuildingBlocks';
-import OnboardingCover from './OnboardingCover';
 
 const {
 	BLACKLISTED, WHITELISTED,
@@ -828,7 +833,8 @@ class Summary extends React.Component {
 						<div className="Summary__spaceTaker" />
 					)}
 
-					<OnboardingCover isEnabled={!setup_complete}>
+					{/* react does not support properly boolean attributes, so for now it is always in "disabled" state */}
+					<ui-onboarding-state disabled={!setup_complete}>
 						<div className="Summary__ghosteryFeaturesContainer">
 							{this._renderGhosteryFeature('trust')}
 							{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
@@ -839,7 +845,7 @@ class Summary extends React.Component {
 							{this._renderCommonAntiTracking()}
 							{this._renderCommonSmartBlock()}
 						</div>
-					</OnboardingCover>
+					</ui-onboarding-state>
 
 					{setup_complete && (
 						<React.Fragment>

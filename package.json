@@ -42,6 +42,7 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/url-parser": "^1.1.4",
+    "@ghostery/ui": "^0.3.1",
     "@sentry/browser": "7.1.1",
     "@whotracksme/webextension-packages": "^0.3.1",
     "classnames": "^2.2.5",
