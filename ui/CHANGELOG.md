@@ -1,3 +1,15 @@
+# v0.3.1 (Thu Jul 14 2022)
+
+#### 🐛 Bug Fix
+
+- Add ui-onboarding-state component [#10](https://github.com/ghostery/ghostery-ui/pull/10) ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.3.0 (Wed Jul 13 2022)
 
 #### 🚀 Enhancement
