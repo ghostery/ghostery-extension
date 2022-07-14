@@ -25,6 +25,7 @@ import {
 	NotScanned,
 	PauseButton
 } from './BuildingBlocks';
+import OnboardingCover from './OnboardingCover';
 
 const {
 	BLACKLISTED, WHITELISTED,
@@ -792,7 +793,8 @@ class Summary extends React.Component {
 		const {
 			is_expert,
 			is_expanded,
-			current_theme
+			current_theme,
+			setup_complete,
 		} = this.props;
 		const { disableBlocking } = this.state;
 		const isCondensed = this._isCondensed();
@@ -826,19 +828,26 @@ class Summary extends React.Component {
 						<div className="Summary__spaceTaker" />
 					)}
 
-					<div className="Summary__ghosteryFeaturesContainer">
-						{this._renderGhosteryFeature('trust')}
-						{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
-						{this._renderPauseButton()}
-					</div>
-					<div className="Summary__commonFeaturesContainer">
-						{this._renderCommonAdBlock()}
-						{this._renderCommonAntiTracking()}
-						{this._renderCommonSmartBlock()}
-					</div>
-					{this._renderStatsNavicon()}
+					<OnboardingCover isEnabled={!setup_complete}>
+						<div className="Summary__ghosteryFeaturesContainer">
+							{this._renderGhosteryFeature('trust')}
+							{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
+							{this._renderPauseButton()}
+						</div>
+						<div className="Summary__commonFeaturesContainer">
+							{this._renderCommonAdBlock()}
+							{this._renderCommonAntiTracking()}
+							{this._renderCommonSmartBlock()}
+						</div>
+					</OnboardingCover>
 
-					{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
+					{setup_complete && (
+						<React.Fragment>
+							{this._renderStatsNavicon()}
+
+							{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
+						</React.Fragment>
+					)}
 				</div>
 			</div>
 		);

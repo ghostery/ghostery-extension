@@ -53,6 +53,7 @@ const initialState = {
 	email: '',
 	emailValidated: false,
 	current_theme: 'default',
+	setup_complete: false,
 };
 
 /**

@@ -32,11 +32,11 @@ COMMON.config.default_prefs = {
 	...COMMON.config.default_prefs,
 	cliqz_adb_mode: globals.DEFAULT_ADBLOCKER_MODE,
 	// the following are enabled by default on non-android platforms
-	'modules.human-web.enabled': !IS_ANDROID,
-	'modules.hpnv2.enabled': !IS_ANDROID,
+	'modules.human-web.enabled': false,
+	'modules.hpnv2.enabled': false,
 	// the following are enabled for android only
-	'modules.human-web-lite.enabled': IS_ANDROID,
-	'modules.hpn-lite.enabled': IS_ANDROID,
+	'modules.human-web-lite.enabled': false,
+	'modules.hpn-lite.enabled': false,
 	'modules.anolysis.enabled': IS_ANDROID,
 	'modules.insights.enabled': true,
 };
@@ -56,6 +56,14 @@ common.start = async () => {
 	}
 	WTM.CHANNEL = HW_CHANNEL;
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
+
+	if (!IS_ANDROID) {
+		COMMON.config.default_prefs['modules.human-web.enabled'] = conf.enable_human_web;
+		COMMON.config.default_prefs['modules.hpnv2.enabled'] = conf.enable_human_web;
+	} else {
+		COMMON.config.default_prefs['modules.human-web-lite.enabled'] = conf.enable_human_web;
+		COMMON.config.default_prefs['modules.hpn-lite.enabled'] = conf.enable_human_web;
+	}
 
 	COMMON.config.default_prefs['modules.adblocker.enabled'] = conf.enable_ad_block;
 	COMMON.config.default_prefs['modules.antitracking.enabled'] = conf.enable_anti_tracking;

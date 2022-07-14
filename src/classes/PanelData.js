@@ -339,6 +339,7 @@ class PanelData {
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
 			is_expanded, is_expert, language, reload_banner_status, trackers_banner_status,
+			setup_complete,
 		} = conf;
 
 		return {
@@ -351,6 +352,7 @@ class PanelData {
 			is_android: globals.BROWSER_INFO.os === 'android',
 			language,
 			reload_banner_status,
+			setup_complete,
 			tab_id,
 			trackers_banner_status,
 			...this._getDynamicPanelData(tab_id)

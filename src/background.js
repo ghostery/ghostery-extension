@@ -147,6 +147,13 @@ function updateDBs() {
 	}));
 }
 
+function openOnboarding() {
+	chrome.tabs.create({
+		url: chrome.runtime.getURL('./app/templates/onboarding.html'),
+		active: true
+	});
+}
+
 /**
  * Call updateDBs if auto updating is enabled and enough time has passed since the last check.
  * Debug log that the function was called and when. Called at browser startup and at regular intervals thereafter.
@@ -529,11 +536,26 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'onboarding') {
 		if (name === 'setup_complete') {
 			conf.setup_complete = true;
+			conf.enable_human_web = true;
+			conf.enable_ad_block = true;
+			conf.enable_anti_tracking = true;
+			conf.enable_smart_block = true;
 			chrome.tabs.remove(tab_id);
 			chrome.tabs.create({
 				active: true,
 			});
 		}
+		if (name === 'setup_skip') {
+			conf.setup_complete = true;
+			chrome.tabs.remove(tab_id);
+			chrome.tabs.create({
+				active: true,
+			});
+		}
+		return false;
+	}
+	if (origin === 'panel' && name === 'trigger_onboarding') {
+		openOnboarding();
 		return false;
 	}
 	if (origin === 'checkout_pages') {
@@ -1442,11 +1464,8 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(async () => {
-			if (conf.setup_complete) {
-				chrome.tabs.create({
-					url: chrome.runtime.getURL('./app/templates/onboarding.html'),
-					active: true
-				});
+			if (globals.JUST_INSTALLED) {
+				openOnboarding();
 			}
 		});
 	});
