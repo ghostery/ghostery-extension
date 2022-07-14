@@ -248,9 +248,11 @@ class PanelData {
 		const {
 			expand_all_trackers, selected_app_ids, show_tracker_urls,
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
+			setup_complete,
 		} = conf;
 
 		return {
+			setup_complete,
 			expand_all_trackers,
 			selected_app_ids,
 			show_tracker_urls,

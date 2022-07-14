@@ -227,6 +227,7 @@ class Category extends React.Component {
 			language,
 			smartBlockActive,
 			smartBlock,
+			setup_complete,
 		} = this.props;
 		const {
 			totalShownBlocked,
@@ -293,7 +294,7 @@ class Category extends React.Component {
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
 							{ this._renderCaret() }
-							{!isUnidentified && (
+							{setup_complete && !isUnidentified && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
 									<span className={index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
@@ -338,6 +339,7 @@ class Category extends React.Component {
 						smartBlockActive={smartBlockActive}
 						smartBlock={smartBlock}
 						isUnidentified={isUnidentified}
+						setup_complete={setup_complete}
 					/>
 				)}
 			</div>

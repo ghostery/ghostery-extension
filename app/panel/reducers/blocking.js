@@ -32,6 +32,7 @@ import { updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 
 const initialState = {
+	setup_complete: false,
 	categories: [],
 	expand_all_trackers: true,
 	filter: {

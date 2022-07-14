@@ -326,7 +326,7 @@ class Tracker extends React.Component {
 	*/
 	render() {
 		const {
-			tracker, isUnidentified, language, show_tracker_urls
+			tracker, isUnidentified, language, show_tracker_urls, setup_complete,
 		} = this.props;
 		const {
 			trackerClasses,
@@ -376,19 +376,23 @@ class Tracker extends React.Component {
 						{!tracker.whitelisted && this._renderCommonStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						{!isUnidentified && renderKnownTrackerButtons(
-							tracker.ss_allowed,
-							tracker.ss_blocked,
-							this.clickTrackerTrust,
-							this.clickTrackerRestrict,
-							this.clickTrackerStatus,
-						)}
-						{isUnidentified && renderUnidentifiedTrackerButtons(
-							this.handleCommonTrackerWhitelist,
-							tracker.whitelisted,
-							tracker.siteRestricted,
-							tracker.type,
-							this.context
+						{setup_complete && (
+							<React.Fragment>
+								{!isUnidentified && renderKnownTrackerButtons(
+									tracker.ss_allowed,
+									tracker.ss_blocked,
+									this.clickTrackerTrust,
+									this.clickTrackerRestrict,
+									this.clickTrackerStatus,
+								)}
+								{isUnidentified && renderUnidentifiedTrackerButtons(
+									this.handleCommonTrackerWhitelist,
+									tracker.whitelisted,
+									tracker.siteRestricted,
+									tracker.type,
+									this.context
+								)}
+							</React.Fragment>
 						)}
 					</div>
 				</div>
