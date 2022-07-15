@@ -19,11 +19,11 @@ export default define({
     ${disabled &&
     html`
       <header>
-        <ui-text type="label-s" color="primary-500">
+        <ui-text type="label-m" color="primary-500">
           <ui-icon name="warning"></ui-icon>
           Additional Permissions Required
         </ui-text>
-        <ui-text class="button" type="label-s" color="white">
+        <ui-text class="button" type="label-m" color="white">
           Enable Ghostery
         </ui-text>
       </header>
