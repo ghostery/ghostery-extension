@@ -117,11 +117,13 @@ function updateDBs() {
 	}));
 }
 
-function openOnboarding() {
-	chrome.tabs.create({
-		url: chrome.runtime.getURL('./app/templates/onboarding.html'),
-		active: true
-	});
+function tryOpenOnboarding() {
+	if (globals.JUST_INSTALLED) {
+		chrome.tabs.create({
+			url: chrome.runtime.getURL('./app/templates/onboarding.html'),
+			active: true
+		});
+	}
 }
 
 /**
@@ -510,17 +512,9 @@ function onMessageHandler(request, sender, callback) {
 			conf.enable_ad_block = true;
 			conf.enable_anti_tracking = true;
 			conf.enable_smart_block = true;
-			chrome.tabs.remove(tab_id);
-			chrome.tabs.create({
-				active: true,
-			});
 		}
 		if (name === 'setup_skip') {
 			conf.setup_complete = true;
-			chrome.tabs.remove(tab_id);
-			chrome.tabs.create({
-				active: true,
-			});
 		}
 		return false;
 	}
@@ -1426,14 +1420,9 @@ function initializeGhosteryModules() {
 		compDb.init(globals.JUST_UPGRADED),
 		surrogatedb.init(globals.JUST_UPGRADED),
 		commonStartup(),
-	]).then(() => {
-		// run scheduledTasks on init
-		scheduledTasks().then(async () => {
-			if (globals.JUST_INSTALLED) {
-				openOnboarding();
-			}
-		});
-	});
+	])
+		.then(() => scheduledTasks())
+		.then(() => tryOpenOnboarding());
 }
 
 /**

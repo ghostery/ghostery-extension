@@ -11,7 +11,15 @@ function complete() {
 	});
 }
 
+function skip() {
+	chrome.runtime.sendMessage({
+		name: 'setup_skip',
+		message: null,
+		origin: 'onboarding',
+	});
+}
+
 define({
 	tag: 'gh-onboarding',
-	content: () => html`<ui-onboarding onsuccess="${complete}"></ui-onboarding>`,
+	content: () => html`<ui-onboarding onsuccess="${complete}" onskip="${skip}"></ui-onboarding>`,
 });
