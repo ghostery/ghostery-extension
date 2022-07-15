@@ -118,7 +118,13 @@ function updateDBs() {
 }
 
 function tryOpenOnboarding() {
-	if (globals.JUST_INSTALLED) {
+	if (conf.setup_complete) {
+		return;
+	}
+
+	const now = Date.now();
+	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > ONE_DAY_MSEC)) {
+		conf.setup_timestamp = now;
 		chrome.tabs.create({
 			url: chrome.runtime.getURL('./app/templates/onboarding.html'),
 			active: true
