@@ -554,10 +554,6 @@ function onMessageHandler(request, sender, callback) {
 		}
 		return false;
 	}
-	if (origin === 'panel' && name === 'trigger_onboarding') {
-		openOnboarding();
-		return false;
-	}
 	if (origin === 'checkout_pages') {
 		// Checkout pages
 		return handleCheckoutPages(name, callback);

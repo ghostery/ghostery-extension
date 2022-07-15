@@ -1,3 +1,8 @@
+import { define, html } from 'hybrids';
+
+import '@ghostery/ui';
+import '@ghostery/ui/onboarding';
+
 function complete() {
 	chrome.runtime.sendMessage({
 		name: 'setup_complete',
@@ -6,13 +11,7 @@ function complete() {
 	});
 }
 
-function skip() {
-	chrome.runtime.sendMessage({
-		name: 'setup_skip',
-		message: null,
-		origin: 'onboarding',
-	});
-}
-
-document.getElementById('complete').addEventListener('click', complete);
-document.getElementById('skip').addEventListener('click', skip);
+define({
+	tag: 'gh-onboarding',
+	content: () => html`<ui-onboarding onsuccess="${complete}"></ui-onboarding>`,
+});

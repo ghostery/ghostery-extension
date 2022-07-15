@@ -14,10 +14,6 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
-
-// We need to add eslint alias resolver (from webpack configuration)
-// as we had to add aliases, webpack 4.x does not support "exports" field
-// eslint-disable-next-line
 import '@ghostery/ui';
 
 import Tooltip from '../../shared-components/Tooltip';
@@ -833,8 +829,7 @@ class Summary extends React.Component {
 						<div className="Summary__spaceTaker" />
 					)}
 
-					{/* react does not support properly boolean attributes, so for now it is always in "disabled" state */}
-					<ui-onboarding-state disabled={!setup_complete}>
+					<ui-onboarding-state ref={(el) => { if (el) { el.disabled = !setup_complete; } }} href={chrome.runtime.getURL('/app/templates/onboarding.html')}>
 						<div className="Summary__ghosteryFeaturesContainer">
 							{this._renderGhosteryFeature('trust')}
 							{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}

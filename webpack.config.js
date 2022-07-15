@@ -40,6 +40,7 @@ module.exports = {
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
 		alias: {
 			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
+			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
 		},
 	},
@@ -67,6 +68,7 @@ module.exports = {
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
 		licenses: [`${SASS_DIR}/licenses.scss`],
+		onboarding_styles: [`${SASS_DIR}/onboarding.scss`],
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
@@ -187,7 +189,7 @@ module.exports = {
 				use: {
 					loader: 'url-loader',
 					options: {
-						limit: 100000
+						limit: 200000
 					}
 				}
 			}
