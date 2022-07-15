@@ -150,6 +150,14 @@ class Account {
 			.then((res) => {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
 				const { settings_json } = settings;
+
+				// if not onboarded do not let sync toggle the ONBOARDED_FEATURES features
+				if (!conf.setup_complete) {
+					globals.ONBOARDED_FEATURES.forEach((confName) => {
+						delete settings_json[confName];
+					});
+				}
+
 				// @TODO setConfUserSettings settings.settingsJson
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);

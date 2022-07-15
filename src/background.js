@@ -514,10 +514,9 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'onboarding') {
 		if (name === 'setup_complete') {
 			conf.setup_complete = true;
-			conf.enable_human_web = true;
-			conf.enable_ad_block = true;
-			conf.enable_anti_tracking = true;
-			conf.enable_smart_block = true;
+			globals.ONBOARDED_FEATURES.forEach((confName) => {
+				conf[confName] = true;
+			});
 		}
 		if (name === 'setup_skip') {
 			conf.setup_complete = true;

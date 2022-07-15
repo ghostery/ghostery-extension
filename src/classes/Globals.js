@@ -131,6 +131,13 @@ class Globals {
 			'trackers_banner_status',
 		];
 
+		this.ONBOARDED_FEATURES = [
+			'enable_ad_block',
+			'enable_smart_block',
+			'enable_human_web',
+			'enable_anti_tracking',
+		];
+
 		// Relevant for a fresh installation: all trackers from the
 		// following categories will be blocked by default.
 		this.CATEGORIES_BLOCKED_BY_DEFAULT = [
