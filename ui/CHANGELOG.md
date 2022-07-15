@@ -1,3 +1,15 @@
+# v0.3.2 (Fri Jul 15 2022)
+
+#### ⚠️ Pushed to `main`
+
+- Fix onboarding-state styles ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.3.1 (Thu Jul 14 2022)
 
 #### 🐛 Bug Fix
