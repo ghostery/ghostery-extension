@@ -59,7 +59,7 @@ export default define({
               )
               .catch(
                 () =>
-                  html`<ui-text type="body-s">For more information read our full <a href="${PRIVACY_POLICY_URL}" target="_blank">privacy policy</a>.</div>`,
+                  html`<ui-text type="body-s">For more information read our full <a href="${PRIVACY_POLICY_URL}" target="_blank">privacy policy</a>.</ui-text>`,
               ),
           )}
         </div>
