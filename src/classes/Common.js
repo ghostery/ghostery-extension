@@ -25,17 +25,14 @@ if (!navigator.userAgent.includes('Firefox')) {
 }
 
 const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
-export const HUMANWEB_MODULE = IS_ANDROID ? 'human-web-lite' : 'human-web';
-export const HPN_MODULE = IS_ANDROID ? 'hpn-lite' : 'hpnv2';
+
 COMMON.config.baseURL = '/common/';
 // Override the default prefs based on the platform
 COMMON.config.default_prefs = {
 	...COMMON.config.default_prefs,
 	cliqz_adb_mode: globals.DEFAULT_ADBLOCKER_MODE,
-	// the following are enabled by default on non-android platforms
 	'modules.human-web.enabled': false,
 	'modules.hpnv2.enabled': false,
-	// the following are enabled for android only
 	'modules.human-web-lite.enabled': false,
 	'modules.hpn-lite.enabled': false,
 	'modules.anolysis.enabled': IS_ANDROID,
