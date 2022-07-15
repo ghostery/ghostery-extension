@@ -21,7 +21,6 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 		test('OptIn is rendered correctly with falsy props', () => {
 			const settingsData = {
 				enable_metrics: false,
-				enable_human_web: false,
 				enable_abtests: false,
 			};
 
@@ -37,7 +36,6 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 		test('OptIn is rendered correctly with truthy props', () => {
 			const settingsData = {
 				enable_metrics: true,
-				enable_human_web: true,
 				enable_abtests: true,
 			};
 
@@ -55,7 +53,6 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 		test('OptIn functions correctly', () => {
 			const settingsData = {
 				enable_metrics: true,
-				enable_human_web: true,
 				enable_abtests: true,
 			};
 			const toggleCheckbox = jest.fn();
@@ -69,8 +66,7 @@ describe('app/panel/Settings/OptIn.jsx', () => {
 
 			expect(toggleCheckbox.mock.calls.length).toBe(0);
 			component.find('#settings-share-usage').simulate('click');
-			component.find('#settings-share-human-web').simulate('click');
-			expect(toggleCheckbox.mock.calls.length).toBe(2);
+			expect(toggleCheckbox.mock.calls.length).toBe(1);
 		});
 	});
 });
