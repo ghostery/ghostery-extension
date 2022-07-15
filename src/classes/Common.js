@@ -18,6 +18,7 @@ import WTM from 'ghostery-common/build/gbe/human-web/human-web';
 import { DOMParser } from 'linkedom';
 import globals from './Globals';
 import conf from './Conf';
+import GhosteryModule from './Module';
 
 if (!navigator.userAgent.includes('Firefox')) {
 	parseHtml.domParser = new DOMParser();
@@ -42,9 +43,20 @@ COMMON.config.default_prefs = {
 };
 
 const common = new (COMMON.App)({ debug: globals.DEBUG });
-const start = common.start.bind(common);
 
+// add ghostery module to expose ghostery state to common
+common.modules.ghostery = new GhosteryModule();
+
+const setPref = (pref, value) => {
+	COMMON.config.default_prefs[pref] = value;
+	common.prefs.set(pref, value);
+};
+
+const start = common.start.bind(common);
 common.start = async () => {
+	// ensures that prefs.set is present
+	common.injectHelpers();
+
 	let { HW_CHANNEL } = COMMON.config.settings;
 	await globals.BROWSER_INFO_READY;
 	if (IS_ANDROID) {
@@ -58,17 +70,43 @@ common.start = async () => {
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
 
 	if (!IS_ANDROID) {
-		COMMON.config.default_prefs['modules.human-web.enabled'] = conf.enable_human_web;
-		COMMON.config.default_prefs['modules.hpnv2.enabled'] = conf.enable_human_web;
+		setPref('modules.human-web.enabled', conf.enable_human_web);
+		setPref('modules.hpnv2.enabled', conf.enable_human_web);
 	} else {
-		COMMON.config.default_prefs['modules.human-web-lite.enabled'] = conf.enable_human_web;
-		COMMON.config.default_prefs['modules.hpn-lite.enabled'] = conf.enable_human_web;
+		setPref('modules.human-web-lite.enabled', conf.enable_human_web);
+		setPref('modules.hpn-lite.enabled', conf.enable_human_web);
 	}
 
-	COMMON.config.default_prefs['modules.adblocker.enabled'] = conf.enable_ad_block;
-	COMMON.config.default_prefs['modules.antitracking.enabled'] = conf.enable_anti_tracking;
-	COMMON.config.default_prefs['modules.human-web.enabled'] = conf.enable_human_web;
-	return start();
+	setPref('modules.adblocker.enabled', conf.enable_ad_block);
+	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
+	setPref('modules.human-web.enabled', conf.enable_human_web);
+
+	const startPromise = await start();
+	// force prefs saving after startup
+	setPref('timestamp', Date.now());
+	return startPromise;
+};
+
+const setModuleState = (moduleName, enabled) => {
+	if (enabled) {
+		return common.enableModule(moduleName);
+	}
+	common.disableModule(moduleName);
+	return Promise.resolve();
+};
+
+export const setAdblockerState = async enabled => setModuleState('adblocker', enabled);
+
+export const setAntitrackingState = async enabled => setModuleState('antitracking', enabled);
+
+export const setWhotracksmeState = async (enabled) => {
+	if (!IS_ANDROID) {
+		await setModuleState('hpnv2', enabled);
+		await setModuleState('human-web', enabled);
+	} else {
+		await setModuleState('hpn-lite', enabled);
+		await setModuleState('human-web-lite', enabled);
+	}
 };
 
 export default common;

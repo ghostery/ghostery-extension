@@ -1098,9 +1098,6 @@
   "android_trust": {
     "message": "Tin tưởng"
   },
-  "settings_human_web_tooltip": {
-    "message": "Ghostery hiện cài đặt Human Web theo mặc định, một công nghệ mang tính cách mạng sử dụng trí tuệ của đám đông để xây dựng một mạng internet riêng tư hơn"
-  },
   "panel_about_privacy_statement": {
     "message": "Cam kết bảo mật"
   },

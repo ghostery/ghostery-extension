@@ -1357,9 +1357,6 @@
   "settings_highlight_trackers_tooltip": {
     "message": "Sometimes features like social media sharing, comments, or video players won't work when a certain tracker is blocked. If you want to enable one of these blocked features, click this icon on the page:"
   },
-  "settings_human_web_tooltip": {
-    "message": "Ghostery now implements the Human Web by default, a revolutionary technology that uses the wisdom of the crowd to build a more private internet"
-  },
   "settings_import_dialog_error": {
     "message": "Ghostery cannot display browse dialog when the current page is one of the reserved browser pages. Please navigate to a different page and try again."
   },

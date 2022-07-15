@@ -70,12 +70,6 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 						tooltipSVG(t('settings_share_usage_tooltip'), 'down')
 					)}
 					{option(
-						checkbox('share-human-web', 'enable_human_web'),
-						labelFor('share-human-web', t('settings_share_human_web')),
-						tooltipSVG(t('settings_human_web_tooltip'), 'up'),
-						'human-web-section'
-					)}
-					{option(
 						checkbox('allow-abtests', 'enable_abtests'),
 						labelFor('allow-abtests', t('settings_allow_abtests')),
 						tooltipSVG(t('settings_abtests_tooltip'), 'up'),

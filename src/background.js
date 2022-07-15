@@ -18,12 +18,11 @@ import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 
-import common, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Common';
+import common, { setAdblockerState, setAntitrackingState, setWhotracksmeState } from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
-import GhosteryModule from './classes/Module';
 // static classes
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
@@ -77,35 +76,6 @@ const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
-
-// Common Modules
-const moduleMock = {
-	isEnabled: false,
-	on: () => {},
-};
-const humanweb = common.modules[HUMANWEB_MODULE];
-const hpnv2 = common.modules[HPN_MODULE];
-const { adblocker, antitracking } = common.modules;
-const insights = common.modules.insights || moduleMock;
-// add ghostery module to expose ghostery state to common
-common.modules.ghostery = new GhosteryModule();
-
-/**
- * Enable or disable specified module.
- * @memberOf Background
- * @param {Object} module  Common module
- * @param {boolean} enabled true - enable, false - disable
- * @return {Promise}
- */
-function setCommonModuleEnabled(module, enabled) {
-	if (enabled) {
-		log('SET Common MODULE ENABLED', module);
-		return common.enableModule(module.name);
-	}
-	log('SET Common MODULE DISABLED', module);
-	common.disableModule(module.name);
-	return Promise.resolve();
-}
 
 /**
  * Pulls down latest version.json and triggers
@@ -594,14 +564,14 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'getStats') {
-		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
+		common.modules.insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
 			callback(data);
 		});
 		return true;
 	}
 	if (name === 'getAllStats') {
-		insights.action('getAllDays').then((dataDays) => {
-			insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
+		common.modules.insights.action('getAllDays').then((dataDays) => {
+			common.modules.insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
 				callback(dataTimeline);
 			});
 		});
@@ -609,7 +579,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'resetStats') {
 		metrics.ping('hist_reset_stats');
-		insights.action('clearData');
+		common.modules.insights.action('clearData');
 		return false;
 	}
 	if (name === 'setPanelData') {
@@ -909,7 +879,7 @@ function setCommonAntitrackingConfig(isAntitrackingEnabled) {
 
 	Object.entries(antitrackingConfig).forEach(([opt, val]) => {
 		log('antitracking', 'set config option', opt, val);
-		antitracking.action('setConfigOption', opt, val);
+		common.modules.antitracking.action('setConfigOption', opt, val);
 	});
 }
 
@@ -937,28 +907,27 @@ function initializeDispatcher() {
 		button.update();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		setCommonModuleEnabled(humanweb, enableHumanWeb).then(() => {
+		setWhotracksmeState(enableHumanWeb).then(() => {
 			setCommonAntitrackingConfig(conf.enable_anti_tracking);
-			setCommonModuleEnabled(hpnv2, enableHumanWeb);
 		});
 	});
 	dispatcher.on('conf.save.enable_autoupdate', (enableAutoUpdate) => {
-		if (!antitracking.isDisabled) {
-			antitracking.action('setConfigOption', 'networkFetchEnabled', enableAutoUpdate);
+		if (!common.modules.antitracking.isDisabled) {
+			common.modules.antitracking.action('setConfigOption', 'networkFetchEnabled', enableAutoUpdate);
 		}
-		if (!adblocker.isDisabled) {
-			adblocker.action('setNetworkFetchEnabled', enableAutoUpdate);
+		if (!common.modules.adblocker.isDisabled) {
+			common.modules.adblocker.action('setNetworkFetchEnabled', enableAutoUpdate);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		setCommonModuleEnabled(antitracking, enableAntitracking).then(() => {
+		setAntitrackingState(enableAntitracking).then(() => {
 			// enable_human_web could have been toggled while antitracking was off,
 			// so we want to make sure to update the antitracking telemetry option
 			setCommonAntitrackingConfig(conf.enable_anti_tracking);
 		});
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		setCommonModuleEnabled(adblocker, enableAdBlock);
+		setAdblockerState(enableAdBlock);
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
 		common.prefs.set('cliqz_adb_mode', val);
@@ -995,11 +964,11 @@ function initialiseWebRequestPipeline() {
 
 	// look for steps from other modules which we need to be before
 	const existingSteps = { onBeforeRequest: [], onHeadersReceived: [] };
-	if (antitracking.isEnabled) {
-		existingSteps.onBeforeRequest.push('antitracking.onBeforeRequest');
-		existingSteps.onHeadersReceived.push('antitracking.onHeadersReceived');
+	if (common.modules.antitracking.isEnabled) {
+		existingSteps.onBeforeRequest.push('common.modules.antitracking.onBeforeRequest');
+		existingSteps.onHeadersReceived.push('common.modules.antitracking.onHeadersReceived');
 	}
-	if (adblocker.isEnabled) {
+	if (common.modules.adblocker.isEnabled) {
 		existingSteps.onBeforeRequest.push('adblocker');
 	}
 	return Promise.all([
@@ -1045,9 +1014,9 @@ function isWhitelisted(state) {
  * any Common module which may block/alter tracker requests.
  * @memberOf Background
  */
-antitracking.on('enabled', () => {
-	antitracking.isReady().then(() => {
-		antitracking.action('setWhiteListCheck', isWhitelisted);
+common.modules.antitracking.on('enabled', () => {
+	common.modules.antitracking.isReady().then(() => {
+		common.modules.antitracking.action('setWhiteListCheck', isWhitelisted);
 	});
 });
 
@@ -1056,9 +1025,9 @@ antitracking.on('enabled', () => {
  * which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
  * @memberOf Background
  */
-adblocker.on('enabled', () => {
-	adblocker.isReady().then(() => {
-		adblocker.action('addWhiteListCheck', isWhitelisted);
+common.modules.adblocker.on('enabled', () => {
+	common.modules.adblocker.isReady().then(() => {
+		common.modules.adblocker.action('addWhiteListCheck', isWhitelisted);
 	});
 });
 
@@ -1066,12 +1035,12 @@ adblocker.on('enabled', () => {
  * Add page listeners for insights stats.
  * @memberOf Background
  */
-insights.on('enabled', () => {
+common.modules.insights.on('enabled', () => {
 	events.addPageListener((tab_id, info, apps, bugs) => {
 		common.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
 	});
 });
-insights.on('disabled', () => {
+common.modules.insights.on('disabled', () => {
 	events.clearPageListeners();
 });
 
@@ -1081,8 +1050,8 @@ insights.on('disabled', () => {
  */
 function getDataForGhosteryTab(callback) {
 	const passedData = {};
-	insights.action('getAllDays').then((dataDays) => {
-		insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
+	common.modules.insights.action('getAllDays').then((dataDays) => {
+		common.modules.insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
 			const cumulativeData = {
 				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
 			};
@@ -1261,7 +1230,7 @@ function initializeEventListeners() {
 			}
 
 			if (recognized && request.name === 'getDashboardStats') {
-				insights.action('getDashboardStats', ...(request.args || [])).then(sendResponse);
+				common.modules.insights.action('getDashboardStats', ...(request.args || [])).then(sendResponse);
 				return true;
 			}
 
@@ -1387,12 +1356,12 @@ function initializeGhosteryModules() {
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		await initialiseWebRequestPipeline();
 
-		if (!antitracking.isDisabled) {
-			antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+		if (!common.modules.antitracking.isDisabled) {
+			common.modules.antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
 		}
 
-		if (!adblocker.isDisabled) {
-			adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
+		if (!common.modules.adblocker.isDisabled) {
+			common.modules.adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
 		}
 	};
 
