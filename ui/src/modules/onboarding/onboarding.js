@@ -9,8 +9,8 @@ export default define({
   views: router([Main, OutroSuccess, OutroSkip]),
   state: {
     value: '',
-    connect: (host, key, invalidate) => {
-      const cb = (event) => {
+    connect: (host) => {
+      function cb(event) {
         switch (event.detail.entry.id) {
           case OutroSkip.tag:
             dispatch(host, 'skip');
@@ -24,6 +24,7 @@ export default define({
       }
 
       host.addEventListener('navigate', cb);
+
       return () => host.removeEventListener('navigate', cb);
     },
   },
