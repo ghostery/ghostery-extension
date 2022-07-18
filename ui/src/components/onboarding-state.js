@@ -33,6 +33,7 @@ export default define({
   `.css`
     :host {
       display: block;
+      padding: 8px;
       position: relative;
     }
 
@@ -50,20 +51,22 @@ export default define({
       width: 100%;
       height: 100%;
       backdrop-filter: blur(1px);
-      background: linear-gradient(180deg, rgba(191, 191, 191, 0.05) 0%, rgba(190, 190, 190, 0.4) 100%);
+      background: linear-gradient(180deg, #FFFFFF 30px, rgba(230, 230, 230, 0.5) 60.42%);
     }
 
     header {
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 2;
       display: flex;
       flex-flow: row wrap;
       padding: 8px;
-      border-bottom: 1px dashed #C8C7C2;
     }
 
     header ui-text {
-      flex: 5 1 300px;
+      flex: 5 1 250px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -89,7 +92,6 @@ export default define({
 
     :host([disabled]) #content {
       z-index: 0;
-      padding: 8px;
     }
   `,
 });
