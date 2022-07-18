@@ -8,6 +8,7 @@
   },
   "license": "MPL-2.0",
   "scripts": {
+    "start": "web-ext run --target=chromium",
     "build.dev": "webpack --mode development --display-error-details --progress",
     "build.prod": "webpack --mode production --display-error-details --progress",
     "build.watch": "webpack --mode development --display-error-details --progress --watch",
@@ -117,6 +118,7 @@
     "underscore-template-loader": "^1.1.0",
     "url-loader": "^4.1.1",
     "vendor-copy": "^3.0.1",
+    "web-ext": "^7.1.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-shell-plugin": "^0.5.0"
