@@ -7,16 +7,24 @@ import OutroSuccess from './views/outro-success.js';
 export default define({
   tag: 'ui-onboarding',
   views: router([Main, OutroSuccess, OutroSkip]),
-  success: {
-    get: (host, lastValue) => {
-      return lastValue || router.active(OutroSuccess);
-    },
+  state: {
+    value: '',
     connect: (host, key, invalidate) => {
-      host.addEventListener('navigate', invalidate);
-      return () => host.removeEventListener('navigate', invalidate);
-    },
-    observe(host, value, lastValue) {
-      if (lastValue !== undefined) dispatch(host, 'success');
+      const cb = (event) => {
+        switch (event.detail.entry.id) {
+          case OutroSkip.tag:
+            dispatch(host, 'skip');
+            break;
+          case OutroSuccess.tag:
+            dispatch(host, 'success');
+            break;
+          default:
+            break;
+        }
+      }
+
+      host.addEventListener('navigate', cb);
+      return () => host.removeEventListener('navigate', cb);
     },
   },
   render: ({ views }) => html`${views}`.css`
