@@ -1,3 +1,18 @@
+# v0.3.3 (Mon Jul 18 2022)
+
+#### ⚠️ Pushed to `main`
+
+- Fix code styling ([@smalluban](https://github.com/smalluban))
+- Fix styling issues ([@smalluban](https://github.com/smalluban))
+- Add skip event to onboarding module ([@smalluban](https://github.com/smalluban))
+- Fix closing tag in privacy policy dialog ([@smalluban](https://github.com/smalluban))
+
+#### Authors: 1
+
+- Dominik Lubański ([@smalluban](https://github.com/smalluban))
+
+---
+
 # v0.3.2 (Fri Jul 15 2022)
 
 #### ⚠️ Pushed to `main`
