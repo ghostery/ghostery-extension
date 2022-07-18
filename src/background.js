@@ -118,7 +118,7 @@ function updateDBs() {
 }
 
 function tryOpenOnboarding() {
-	if (conf.setup_complete) {
+	if (conf.setup_complete || conf.setup_skip) {
 		return;
 	}
 
@@ -519,7 +519,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		if (name === 'setup_skip') {
-			conf.setup_complete = true;
+			conf.setup_skip = true;
 		}
 		return false;
 	}

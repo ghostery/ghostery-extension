@@ -136,6 +136,7 @@ class ConfData {
 			_initProperty('show_tracker_urls', true);
 			_initProperty('toggle_individual_trackers', true);
 			_initProperty('setup_complete', false);
+			_initProperty('setup_skip', false);
 			_initProperty('setup_timestamp', null);
 			_initProperty('tutorial_complete', false);
 			_initProperty('enable_wtm_serp_report', true);

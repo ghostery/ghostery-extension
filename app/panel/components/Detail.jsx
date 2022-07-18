@@ -62,9 +62,11 @@ class Detail extends React.Component {
 		return (
 			<div className="detail-wrap">
 				<div id="content-detail" className={contentDetailsClassNames}>
-					<div className="toggle-bar">
-						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
-					</div>
+					{setup_complete && (
+						<div className="toggle-bar">
+							<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
+						</div>
+					)}
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<DetailMenu
 						plusAccess={user && user.plusAccess}

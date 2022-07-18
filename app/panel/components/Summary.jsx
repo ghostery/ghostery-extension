@@ -829,7 +829,7 @@ class Summary extends React.Component {
 						<div className="Summary__spaceTaker" />
 					)}
 
-					<ui-onboarding-state ref={(el) => { if (el) { el.disabled = !setup_complete; } }} href={chrome.runtime.getURL('/app/templates/onboarding.html')}>
+					<ui-onboarding-state class="Summary__onboardingState" ref={(el) => { if (el) { el.disabled = !setup_complete; } }} href={chrome.runtime.getURL('/app/templates/onboarding.html')}>
 						<div className="Summary__ghosteryFeaturesContainer">
 							{this._renderGhosteryFeature('trust')}
 							{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
