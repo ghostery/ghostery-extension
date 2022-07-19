@@ -24,7 +24,11 @@
     "docs": "jsdoc -c jsdoc.json -d docs -r",
     "leet": "node ./tools/leet/leet-en.js",
     "leet.reset": "node ./tools/leet/leet-reset.js",
-    "postinstall": "vendor-copy"
+    "postinstall": "vendor-copy",
+    "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme/webextension-packages/packages ./_locales/en/messages.json",
+    "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./_locales/en/messages.json",
+    "locales.src": "hybrids extract -c --format=chrome.i18n ./app ./_locales/en/messages.json",
+    "locales": "yarn run locales.wtm && yarn run locales.ui && yarn run locales.src"
   },
   "vendorCopy": [
     {

@@ -584,17 +584,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@ghostery/ui@^0.3.1":
+"@ghostery/ui@^0.3.1", "@ghostery/ui@^0.3.2":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@ghostery/ui/-/ui-0.3.3.tgz#90aa953567ffa9895388409d7ac11f386c469061"
   integrity sha512-DDE+FEV4KektmXKTm29C6HaJOIahTEkwc9Ev7yl0hS64I9OWqEwWTF/6auRoXygCUiPWlec0WXTMqdDIbjUipQ==
-  dependencies:
-    hybrids "^8.0.3"
-
-"@ghostery/ui@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@ghostery/ui/-/ui-0.3.2.tgz#6a708f31cbd4f1cb246c3dd75953a405abd287c3"
-  integrity sha512-919Dpw6a5bwQlqwEjqZhIn/xqJqeookEV4wVegzzVBU0xTTWyJOq4BSvZu/BKZBlmQUP3udWKWr+pmk7yitMEw==
   dependencies:
     hybrids "^8.0.3"
 
