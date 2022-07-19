@@ -206,7 +206,7 @@ export function buildRedirectC2P(redirectUrls, app_id) {
 	const host_url = processUrl(redirectUrls.url).hostname;
 	const redirect_url = processUrl(redirectUrls.redirectUrl).hostname;
 	const { name, trackerID } = bugDb.db.apps[app_id];
-	const wtmURL = `${globals.WTM_BASE_URL}/trackers/${encodeURIComponent(trackerID).toLowerCase()}`;
+	const wtmURL = `${globals.WTM_BASE_URL}/trackers/${encodeURIComponent(trackerID).toLowerCase()}.html`;
 
 	globals.BLOCKED_REDIRECT_DATA = {};
 	globals.BLOCKED_REDIRECT_DATA.app_id = app_id;
