@@ -16,6 +16,8 @@ import {
   getTrustedUtcTime,
 } from '@whotracksme/webextension-packages/packages/anonymous-communication/timestamps';
 
+import { observe } from '/store/options.js';
+
 const SERVER_URL = 'https://anonymous-communication.ghostery.net';
 const CONFIG_URL = 'https://api.ghostery.net/api/v1/config';
 const PUBLIC_KEYS_INDEXED_DB = 'anonymous-communication-public-keys';
@@ -56,24 +58,26 @@ async function send(protocol) {
   await updateSentAt();
 }
 
-(async function () {
+observe('terms', async (terms) => {
   try {
-    const storage = new Storage(PUBLIC_KEYS_INDEXED_DB);
-    await storage.init();
+    if (terms) {
+      const storage = new Storage(PUBLIC_KEYS_INDEXED_DB);
+      await storage.init();
 
-    const protocol = new AnonymousCommunication({
-      config: {
-        COLLECTOR_DIRECT_URL: SERVER_URL,
-        COLLECTOR_PROXY_URL: SERVER_URL,
-      },
-      storage,
-    });
+      const protocol = new AnonymousCommunication({
+        config: {
+          COLLECTOR_DIRECT_URL: SERVER_URL,
+          COLLECTOR_PROXY_URL: SERVER_URL,
+        },
+        storage,
+      });
 
-    send(protocol);
+      send(protocol);
 
-    /* Send stats in every hour of activity */
-    setInterval(() => send(protocol), HOUR);
+      /* Send stats in every hour of activity */
+      setInterval(() => send(protocol), HOUR);
+    }
   } catch (e) {
     console.error(`Failed to send stats: ${e}`);
   }
-})();
+});

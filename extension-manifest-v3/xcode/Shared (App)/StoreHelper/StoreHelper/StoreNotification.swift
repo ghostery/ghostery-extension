@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 /// StoreHelper exceptions
 public enum StoreException: Error, Equatable {
@@ -14,7 +13,7 @@ public enum StoreException: Error, Equatable {
     case purchaseInProgressException
     case transactionVerificationFailed
 
-    public func shortDescription() -> LocalizedStringKey {
+    public func shortDescription() -> String {
         switch self {
         case .purchaseException:                    return "Exception. StoreKit throw an exception while processing a purchase"
         case .purchaseInProgressException:          return "Exception. You can't start another purchase yet, one is already in progress"
@@ -57,7 +56,7 @@ public enum StoreNotification: Error, Equatable {
 
     /// A short description of the notification.
     /// - Returns: Returns a short description of the notification.
-    public func shortDescription() -> LocalizedStringKey {
+    public func shortDescription() -> String {
         switch self {
 
         case .configurationNotFound:           return "Configuration file not found in the main bundle"

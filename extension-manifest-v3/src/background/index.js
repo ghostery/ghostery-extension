@@ -9,6 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import './onboarding.js';
 import './tab-stats.js';
 import './cosmetics.js';
 import './trackers-preview.js';

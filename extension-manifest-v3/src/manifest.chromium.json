@@ -469,17 +469,17 @@
     "rule_resources" : [
       {
         "id": "ads",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-ads-network.json"
       },
       {
         "id": "tracking",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-tracking-network.json"
       },
       {
         "id": "annoyances",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-annoyances-network.json"
       }
     ]
@@ -488,7 +488,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "content_scripts/whotracksme/ghostery-whotracksme.js"
+        "content_scripts/whotracksme/ghostery-whotracksme.js",
+        "pages/onboarding/index.html"
       ],
       "all_frames": true,
       "matches": [

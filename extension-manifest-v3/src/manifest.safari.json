@@ -474,17 +474,17 @@
     "rule_resources" : [
       {
         "id": "ads",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-safari-ads-network.json"
       },
       {
         "id": "tracking",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-safari-tracking-network.json"
       },
       {
         "id": "annoyances",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-safari-annoyances-network.json"
       }
     ]
@@ -493,6 +493,7 @@
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
-    "pages/trackers-preview/index.html"
+    "pages/trackers-preview/index.html",
+    "pages/onboarding/index.html"
   ]
 }

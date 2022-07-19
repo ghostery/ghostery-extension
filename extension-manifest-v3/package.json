@@ -1,6 +1,6 @@
 {
   "name": "@ghostery/dnr-extension",
-  "version": "9.4.0",
+  "version": "9.5.0",
   "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
@@ -41,7 +41,7 @@
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@ghostery/ui": "^0.1.0",
+    "@ghostery/ui": "^0.3.0",
     "@whotracksme/webextension-packages": "^0.3.0",
     "hybrids": "^8.0.3",
     "lodash-es": "^4.17.21",

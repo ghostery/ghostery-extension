@@ -45,21 +45,26 @@ export default define({
   options: store(Options),
   stats: store(Stats),
   render: ({ options, stats }) => html`
-    <h1>Privacy protection on this site</h1>
-
-    <section class="toggles">
-      ${store.ready(options) &&
-      DNR_RULES_LIST.map(
-        (ruleset) =>
-          html`<ui-toggle-switch
-            name="${ruleset}"
-            label="${toggleLabels[ruleset]}"
-            disabled="${!options.dnrRules[ruleset]}"
-            onclick=${toggleRuleset(ruleset)}
-          ></ui-toggle-switch>`,
-      )}
-    </section>
-
+    ${store.ready(options) &&
+    html`
+      <ui-onboarding-state
+        disabled="${!options.terms}"
+        href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
+      >
+        <h1>Privacy protection on this site</h1>
+        <section class="toggles">
+          ${DNR_RULES_LIST.map(
+            (ruleset) =>
+              html`<ui-toggle-switch
+                name="${ruleset}"
+                label="${toggleLabels[ruleset]}"
+                disabled="${!options.dnrRules[ruleset]}"
+                onclick=${toggleRuleset(ruleset)}
+              ></ui-toggle-switch>`,
+          )}
+        </section>
+      </ui-onboarding-state>
+    `}
     ${store.ready(stats) &&
     html`
       <ui-stats categories="${stats.categories}"></ui-stats>
@@ -94,7 +99,6 @@ export default define({
     }
     
     section.toggles {
-      margin: 10px 0;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 10px;

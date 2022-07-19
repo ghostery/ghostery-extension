@@ -33,7 +33,7 @@ export default define({
       display: flex;
       flex-flow: column nowrap;
       min-height: 100%;
-      min-width: 320px;
+      min-width: 375px;
       width: 100%;
     }
 

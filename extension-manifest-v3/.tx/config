@@ -10,6 +10,7 @@ type = CHROME
 
 [o:ghostery-inc:p:ghostery-dnr-extension:r:xcode-develop-en]
 minimum_perc = 0
+file_filter = xcode/en.xcloc/Localized Contents/<lang>.xliff
 source_file = xcode/en.xcloc/Localized Contents/en.xliff
 source_lang = en
 type = XLIFF

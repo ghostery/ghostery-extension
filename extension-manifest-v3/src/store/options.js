@@ -19,12 +19,13 @@ const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 
 const Options = {
   dnrRules: DNR_RULES_LIST.reduce(
-    (all, rule) => ({ ...all, [rule]: true }),
+    (all, rule) => ({ ...all, [rule]: false }),
     {},
   ),
   trackerWheelDisabled: false,
   wtmSerpReport: true,
-  version: '',
+  terms: false,
+  onboarding: { done: false, shownAt: 0 },
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);
@@ -34,10 +35,17 @@ const Options = {
       await chrome.storage.local.set({ options });
 
       // Send update message to another contexts (background page / panel / options)
-      await chrome.runtime.sendMessage({
-        action: UPDATE_OPTIONS_ACTION_NAME,
-        options,
-      });
+      try {
+        chrome.runtime.sendMessage({
+          action: UPDATE_OPTIONS_ACTION_NAME,
+          options,
+        });
+      } catch (e) {
+        console.error(
+          `Error while sending update options to other contexts: `,
+          e,
+        );
+      }
 
       return options;
     },
