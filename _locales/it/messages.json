@@ -1,4 +1,7 @@
 {
+  "accept_terms": {
+    "message": "Accept terms"
+  },
   "account_creation_privacy_statement": {
     "message": "Si applicano le nostre $LINK_TERMS_START$condizioni generali$LINK_TERMS_END$ e il nostro $LINK_UA_START$contratto di licenza$LINK_UA_END$. Troverai la nostra dichiarazione sulla tutela della privacy $LINK_PS_START$qui$LINK_PS_END$.",
     "placeholders": {
@@ -27,6 +30,9 @@
   },
   "ad_blocking_DESC": {
     "message": "Blocca le pubblicità sulle pagine che visiti."
+  },
+  "additional_permissions_required": {
+    "message": "Additional Permissions Required"
   },
   "ads": {
     "message": "pubblicità"
@@ -78,6 +84,12 @@
   "alert_smart_block_on": {
     "message": "Smart-Browsing ATTIVATO. Il blocco dei tracker verrà regolato per ottimizzare le prestazioni della pagina."
   },
+  "all_popups": {
+    "message": "All Popups"
+  },
+  "all_set__go_with_ghosty_": {
+    "message": "All set! go with ghosty!"
+  },
   "already_subscribed": {
     "message": "Già Abbonato"
   },
@@ -126,8 +138,14 @@
   "anti_tracking_DESC": {
     "message": "Rendi anonimi i tracker sbloccati e sconosciuti, per una maggior protezione della navigazione."
   },
+  "any_questions__anytime_": {
+    "message": "Any questions? Anytime!"
+  },
   "are_you_sure_": {
     "message": "Are you sure?"
+  },
+  "are_you_sure_you_want_to_skip_enabling_ghostery_": {
+    "message": "Are you sure you want to skip enabling Ghostery?"
   },
   "audio_video_player": {
     "message": "Lettore Audio/Video",
@@ -156,6 +174,9 @@
   },
   "block_toggle_tracking": {
     "message": "Blocca i tracker"
+  },
+  "blocked": {
+    "message": "Bloccati"
   },
   "blocked_redirect_action_always_title": {
     "description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -522,6 +543,9 @@
     "message": "CDN",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
+    "message": "Check out <a href=\"$${0}\" target=\"_blank\">FAQs</a> or drop us a line at <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. We'll be more than happy to talk to you!"
+  },
   "choose_your_default_search": {
     "message": "Scegli il tuo motore di ricerca predefinito"
   },
@@ -607,6 +631,9 @@
   "confirm_password_colon": {
     "message": "Conferma password:"
   },
+  "continue": {
+    "message": "Continue"
+  },
   "cookie": {
     "message": "cookie"
   },
@@ -668,6 +695,12 @@
   "email_colon": {
     "message": "Email:"
   },
+  "enable_ghostery": {
+    "message": "Enable Ghostery"
+  },
+  "enable_ghostery_to_get_started": {
+    "message": "Enable Ghostery to get started"
+  },
   "enable_when_blacklisted": {
     "message": "Per utilizzare questa funzione, annulla Sito Limitato."
   },
@@ -712,6 +745,9 @@
   "first_name_field_label": {
     "message": "Nome (Opzionale):"
   },
+  "for_more_information_read_our_full": {
+    "message": "For more information read our full"
+  },
   "forgot_password": {
     "message": "Hai dimenticato la password?"
   },
@@ -730,8 +766,23 @@
   "ghostery_basic": {
     "message": "Base"
   },
+  "ghostery_disabled": {
+    "message": "Ghostery disabled"
+  },
+  "ghostery_enabled": {
+    "message": "Ghostery enabled"
+  },
   "ghostery_is_ready": {
     "message": "Ghostery è pronto!"
+  },
+  "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
+    "message": "Ghostery is set up to stop trackers in their tracks and protect your privacy while browsing!"
+  },
+  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
+    "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers for their own profit."
+  },
+  "ghostery_privacy_policy": {
+    "message": "Ghostery Privacy Policy"
   },
   "global_settings_saved": {
     "message": "Impostazioni Globali Salvate"
@@ -755,11 +806,17 @@
     "message": "Hosting",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
+    "message": "I agree to send non-personal information to <a href=\"$${0}\">WhoTracks.Me</a> and I accept the Ghostery <a href=\"$${1}\">Privacy Policy</a>"
+  },
   "invalid_email_forgot": {
     "message": "Spiacenti, devi inserire un vero indirizzo email."
   },
   "invalid_email_login": {
     "message": "Spiacenti, devi inserire un vero indirizzo email."
+  },
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
+    "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send tracker information to whotracks.me. The tracker input enables Ghostery to provide real-time intel on trackers and protection to the entire Ghostery user community."
   },
   "last_name_field_label": {
     "message": "Cognome (Opzionale):"
@@ -806,6 +863,9 @@
   "miscellaneous": {
     "message": "Varie",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "more_information_on_@_0__": {
+    "message": "More information on $${0}."
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
@@ -1206,6 +1266,9 @@
   "priority_support": {
     "message": "Assistenza prioritaria"
   },
+  "privacy_policy": {
+    "message": "privacy policy"
+  },
   "privacy_protection": {
     "message": "Protezione della privacy su questo sito"
   },
@@ -1356,9 +1419,6 @@
   },
   "settings_highlight_trackers_tooltip": {
     "message": "A volte, quando un determinato tracker è stato bloccato, funzioni come la condivisione sui social media, i commenti o i lettori video non funzionano . Se vuoi attivare una di queste funzioni bloccate, clicca su questa icona nella pagina:"
-  },
-  "settings_human_web_tooltip": {
-    "message": "Ora Ghostery implementa Human Web come impostazione predefinita, una tecnologia rivoluzionaria che utilizza la saggezza della gente per creare un'Internet più riservata."
   },
   "settings_import_dialog_error": {
     "message": "Ghostery non può mostrare una finestra di dialogo quando la pagina attuale è una delle pagine riservate del browser. Per favore, vai su una pagina diversa e riprova."
@@ -1535,6 +1595,9 @@
   "site_analytics": {
     "message": "Analisi dei siti",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "skip": {
+    "message": "Salta"
   },
   "smart_blocking": {
     "message": "Smart-Browsing"
@@ -1713,6 +1776,9 @@
   "system_wide_tracker_and_ad_blocking": {
     "message": "Tracker e bocco delle pubblicità per tutto il sistema"
   },
+  "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
+    "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
+  },
   "too_many_failed_logins_text": {
     "message": "Troppi login non riusciti. Riprova tra un'ora."
   },
@@ -1761,6 +1827,9 @@
   "tracker_details": {
     "message": "Dettagli dei tracker"
   },
+  "trackers": {
+    "message": "Tracker"
+  },
   "trackers_blocked": {
     "message": "Tracker Bloccati:"
   },
@@ -1774,7 +1843,6 @@
     "message": "Prova Ghostery Midnight"
   },
   "unblocked": {
-    "description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
     "message": "sbloccati"
   },
   "unidentified": {
@@ -1787,6 +1855,12 @@
     "message": "Sconosciuto",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "welcome_to": {
+    "message": "Welcome to"
+  },
+  "what_is_whotracks_me_": {
+    "message": "What is whotracks.me?"
+  },
   "white_black_list_error_invalid_url": {
     "message": "Inserisci un URL o un carattere jolly valido."
   },
@@ -1796,6 +1870,21 @@
   "whitelist_error_duplicate_url": {
     "description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
     "message": "Questo sito è già stato considerato affidabile."
+  },
+  "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.me, operated by Ghostery, is the most comprehensive global resource on trackers, bringing transparency to web tracking."
+  },
+  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
+    "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+  },
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
+    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
+  },
+  "you_chose_to_skip_enabling_ghostery_": {
+    "message": "You chose to skip enabling Ghostery!"
+  },
+  "you_re_all_set__ghosterian_": {
+    "message": "You're all set, Ghosterian!"
   },
   "your_email_do_not_match": {
     "message": "I tuo indirizzi email non coincidono."
