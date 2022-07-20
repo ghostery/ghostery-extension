@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { cookiesGet } from './cookies';
+import { cookiesGet, setAllLoginCookies } from './cookies';
 
 export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e.message || '', code: e.code || e.message || '' }];
 
@@ -35,24 +35,41 @@ class Api {
 
 		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 			method: 'POST',
-			credentials: 'include',
-		}).finally(() => { this._refreshPromise = null; });
+			credentials: 'omit',
+		}).then((res) => {
+			if (res.status > 400) {
+				throw res.json();
+			}
+			return res.json();
+		}).then(response => setAllLoginCookies({
+			accessToken: response.access_token,
+			refreshToken: response.refresh_token,
+			csrfToken: response.csrf_token,
+			userId: response.user_id,
+		})).finally(() => { this._refreshPromise = null; });
 
 		return this._refreshPromise;
 	}
 
-	_sendReq(method, path, body) {
-		return this._getCsrfCookie()
-			.then(cookie => fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
-				method,
-				headers: {
-					'Content-Type': Api.JSONAPI_CONTENT_TYPE,
-					'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-					'X-CSRF-Token': cookie,
-				},
-				body: JSON.stringify(body),
-				credentials: 'include',
-			}));
+	async _sendReq(method, path, body) {
+		const headers = {
+			'Content-Type': Api.JSONAPI_CONTENT_TYPE,
+			'Content-Length': Buffer.byteLength(JSON.stringify(body)),
+		};
+		const	csrfTokenCookie = await cookiesGet({ name: 'csrf_token' });
+		if (csrfTokenCookie) {
+			headers['X-CSRF-Token'] = csrfTokenCookie.value;
+		}
+		const	accessTokenCookie = await cookiesGet({ name: 'access_token' });
+		if (accessTokenCookie) {
+			headers.Authorization = `Bearer ${accessTokenCookie.value}`;
+		}
+		return fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
+			method,
+			headers,
+			credentials: 'omit',
+			body: JSON.stringify(body),
+		});
 	}
 
 	static _processResponse(res) {
@@ -133,18 +150,6 @@ class Api {
 					}
 				});
 		});
-	}
-
-	_getCsrfCookie = async () => {
-		try {
-			const cookie = await cookiesGet({ name: 'csrf_token' });
-			if (!cookie) {
-				return '';
-			}
-			return cookie.value;
-		} catch (e) {
-			return '';
-		}
 	}
 
 	_errorHandler = errors => Promise.resolve(errors)

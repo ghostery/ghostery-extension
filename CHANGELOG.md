@@ -1,3 +1,7 @@
+### GHOSTERY 8.7.6 (July 11, 2022)
+
+* Fixed: Ghostery Account login problems on Firefox
+
 ### GHOSTERY 8.7.5 (June 9, 2022)
 
 * Fixed: WTM default setting for Ghostery Browsers
