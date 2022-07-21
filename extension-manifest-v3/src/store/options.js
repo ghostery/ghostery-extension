@@ -29,6 +29,15 @@ const Options = {
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);
+
+      // Set default value for keys, which type does no match the current one
+      Object.entries(options).forEach(([key, value]) => {
+        if (typeof value !== typeof Options[key]) {
+          delete options[key];
+          console.warn(`Saved options "${key}" key has wrong type, deleted`);
+        }
+      });
+
       return options;
     },
     async set(_, options) {
