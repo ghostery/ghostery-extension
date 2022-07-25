@@ -45,7 +45,7 @@ jest.mock('../../src/classes/Conf', () => {
 			'www.tmz.com': [41, 50],
 		},
 		site_blacklist: ['tmz.com'],
-		site_whitelist: ['ghostery.com', 'cliqz.com'],
+		site_whitelist: ['ghostery.com'],
 	}
 });
 jest.mock('../../src/classes/Globals', () => {

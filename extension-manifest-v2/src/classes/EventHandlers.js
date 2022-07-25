@@ -347,7 +347,7 @@ class EventHandlers {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
 		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
 		if (!block && [BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED].indexOf(reason) > -1) {
-			// The way to pass this flag to Cliqz handlers
+			// The way to pass this flag to Common handlers
 			eventMutable.ghosteryWhitelisted = true;
 		}
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.
@@ -373,14 +373,14 @@ class EventHandlers {
 				app_id,
 				type: eventMutable.type,
 				url: eventMutable.url,
-				block,
+				block: conf.enable_ad_block && block,
 				tab_id,
 				from_frame: eventMutable.parentFrameId !== -1,
 				request_id
 			});
 		}, 1);
 
-		if (block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
+		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
 			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 

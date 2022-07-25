@@ -21,7 +21,7 @@ import BlockingTab from './content/BlockingTab';
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
-import getCliqzModuleData from '../actions/cliqzActions';
+import getCommonModuleData from '../actions/commonActions';
 import handleAllActions from '../actions/handler';
 import { sendMessage, openAccountPageAndroid } from '../../panel/utils/msg';
 
@@ -53,7 +53,7 @@ class PanelAndroid extends React.Component {
 				pageUrl: '',
 				categories: [],
 			},
-			cliqzModuleData: {
+			commonModuleData: {
 				adBlock: { trackerCount: 0, unidentifiedTrackers: [] },
 				antiTracking: { trackerCount: 0, unidentifiedTrackers: [] },
 			},
@@ -66,7 +66,7 @@ class PanelAndroid extends React.Component {
 		this.setSummaryState(tabId);
 		this.setSettingsState();
 		this.setBlockingState(tabId);
-		this.setCliqzDataState(tabId);
+		this.setCommonDataState(tabId);
 	}
 
 	get siteProps() {
@@ -128,9 +128,9 @@ class PanelAndroid extends React.Component {
 		});
 	}
 
-	setCliqzDataState = (tabId) => {
-		getCliqzModuleData(tabId).then((data) => {
-			this.setState({ cliqzModuleData: data });
+	setDataState = (tabId) => {
+		getCommonModuleData(tabId).then((data) => {
+			this.setState({ commonModuleData: data });
 		});
 	}
 
@@ -164,12 +164,12 @@ class PanelAndroid extends React.Component {
 		this.setState({ view: newView });
 	}
 
-	massageCliqzTrackers = tracker => ({
+	massageCommonTrackers = tracker => ({
 		id: tracker.name,
 		catId: tracker.type,
-		cliqzAdCount: tracker.ads,
-		cliqzCookieCount: tracker.cookies,
-		cliqzFingerprintCount: tracker.fingerprints,
+		commonAdCount: tracker.ads,
+		commonCookieCount: tracker.cookies,
+		commonFingerprintCount: tracker.fingerprints,
 		name: tracker.name,
 		sources: tracker.domains,
 		whitelisted: tracker.whitelisted,
@@ -202,14 +202,14 @@ class PanelAndroid extends React.Component {
 			blocking,
 			summary,
 			settings,
-			cliqzModuleData,
+			commonModuleData,
 		} = this.state;
 		const { categories, toggle_individual_trackers } = blocking;
-		const { adBlock, antiTracking } = cliqzModuleData;
+		const { adBlock, antiTracking } = commonModuleData;
 
 		const unidentifiedTrackers = Array.from(new Set([
-			...antiTracking.unidentifiedTrackers.map(this.massageCliqzTrackers),
-			...adBlock.unidentifiedTrackers.map(this.massageCliqzTrackers),
+			...antiTracking.unidentifiedTrackers.map(this.massageCommonTrackers),
+			...adBlock.unidentifiedTrackers.map(this.massageCommonTrackers),
 		])).sort((a, b) => {
 			const nameA = a.name.toLowerCase();
 			const nameB = b.name.toLowerCase();
@@ -238,7 +238,7 @@ class PanelAndroid extends React.Component {
 						panel={panel}
 						summary={summary}
 						blocking={blocking}
-						cliqzModuleData={cliqzModuleData}
+						commonModuleData={commonModuleData}
 						clickAccount={openAccountPageAndroid}
 						clickSettings={() => { this.changeView('settings'); }}
 						callGlobalAction={this.callGlobalAction}

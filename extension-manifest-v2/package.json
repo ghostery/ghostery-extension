@@ -8,6 +8,7 @@
   },
   "license": "MPL-2.0",
   "scripts": {
+    "start": "web-ext run --target=chromium",
     "build.dev": "webpack --mode development --display-error-details --progress",
     "build.prod": "webpack --mode production --display-error-details --progress",
     "upload-sentry": "webpack --mode production --display-error-details --progress --devtool source-maps && ./tools/upload-sentry.sh",
@@ -24,12 +25,16 @@
     "docs": "jsdoc -c jsdoc.json -d docs -r",
     "leet": "node ./tools/leet/leet-en.js",
     "leet.reset": "node ./tools/leet/leet-reset.js",
-    "postinstall": "vendor-copy"
+    "postinstall": "vendor-copy",
+    "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme/webextension-packages/packages ./_locales/en/messages.json",
+    "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./_locales/en/messages.json",
+    "locales.src": "hybrids extract -c --format=chrome.i18n ./app ./_locales/en/messages.json",
+    "locales": "yarn run locales.wtm && yarn run locales.ui && yarn run locales.src"
   },
   "vendorCopy": [
     {
       "from": "node_modules/ghostery-common/build/gbe/assets",
-      "to": "cliqz"
+      "to": "common"
     }
   ],
   "repository": {
@@ -43,6 +48,7 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/url-parser": "^1.1.4",
+    "@ghostery/ui": "^0.3.1",
     "@sentry/browser": "7.1.1",
     "@whotracksme/webextension-packages": "^0.3.1",
     "classnames": "^2.2.5",
@@ -50,6 +56,7 @@
     "foundation-sites": "^6.6.2",
     "ghostery-common": "^1.2.17",
     "history": "^4.10.1",
+    "hybrids": "^8.0.10",
     "jquery": "3.5.0",
     "json-api-normalizer": "^1.0.4",
     "linkedom": "^0.14.5",
@@ -89,6 +96,7 @@
     "enzyme-adapter-react-16": "^1.15.3",
     "eslint": "^7.6.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
@@ -115,6 +123,7 @@
     "underscore-template-loader": "^1.1.0",
     "url-loader": "^4.1.1",
     "vendor-copy": "^3.0.1",
+    "web-ext": "^7.1.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-shell-plugin": "^0.5.0"

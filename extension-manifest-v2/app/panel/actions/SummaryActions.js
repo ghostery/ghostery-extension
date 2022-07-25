@@ -12,7 +12,7 @@
  */
 
 import {
-	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_COMMON_MODULE_DATA,
 	UPDATE_SUMMARY_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
@@ -22,12 +22,12 @@ import {
 import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Fetch Cliqz Modules data from background
+ * Fetch Common Modules data from background
  * @return {Object}
  */
-export function updateCliqzModuleData(data) {
+export function updateCommonModuleData(data) {
 	return {
-		type: UPDATE_CLIQZ_MODULE_DATA,
+		type: UPDATE_COMMON_MODULE_DATA,
 		data
 	};
 }

@@ -13,9 +13,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import globals from '../../../../src/classes/Globals';
-
-const { IS_CLIQZ } = globals;
 
 const TOOLTIP_SVG_FILEPATH = '../../app/images/panel/icon-information-tooltip.svg';
 
@@ -71,12 +68,6 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 						checkbox('share-usage', 'enable_metrics'),
 						labelFor('share-usage', t('settings_share_usage')),
 						tooltipSVG(t('settings_share_usage_tooltip'), 'down')
-					)}
-					{!IS_CLIQZ && option(
-						checkbox('share-human-web', 'enable_human_web'),
-						labelFor('share-human-web', t('settings_share_human_web')),
-						tooltipSVG(t('settings_human_web_tooltip'), 'up'),
-						'human-web-section'
 					)}
 					{option(
 						checkbox('allow-abtests', 'enable_abtests'),

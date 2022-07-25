@@ -175,6 +175,7 @@ class Header extends React.Component {
 			language,
 			tab_id,
 			history,
+			setup_complete,
 		} = this.props;
 		const { dropdownOpen } = this.state;
 		const { pathname } = location;
@@ -271,14 +272,18 @@ class Header extends React.Component {
 				<div className="top-bar">
 					{ backArrowAndGhostieLogo }
 					<div>
-						<div className="row align-middle collapse">
-							<div className="columns shrink">
-								{accountLogolink}
-							</div>
-							{((is_expert && is_expanded) || !showTabs) && plusUpgradeBannerOrSubscriberBadgeLogolink }
-							{headerMenuKebab}
-						</div>
-						{ dropdownOpen && headerMenu }
+						{setup_complete && (
+							<React.Fragment>
+								<div className="row align-middle collapse">
+									<div className="columns shrink">
+										{accountLogolink}
+									</div>
+									{((is_expert && is_expanded) || !showTabs) && plusUpgradeBannerOrSubscriberBadgeLogolink }
+									{headerMenuKebab}
+								</div>
+								{ dropdownOpen && headerMenu }
+							</React.Fragment>
+						)}
 					</div>
 				</div>
 			</header>

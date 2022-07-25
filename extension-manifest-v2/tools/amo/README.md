@@ -26,13 +26,13 @@ After running `build.sh`, you should see the production files in the `common-X.X
 
 After running `build.sh`, you should see the production build archive in the `ghostery-extension-X.X.X/build/` directory. This file should match the archive that was submitted to AMO.
 
-Compiled assets live in the `ghostery-extension-X.X.X/dist/` folder. Assets from Ghostery Common (see above) are copied into the `ghostery-extension-X.X.X/cliqz/` directory from `node_modules/ghostery-common/build/assets` using the `vendor-copy` npm package. That copy is triggered when running `yarn install`. See `package.json`:
+Compiled assets live in the `ghostery-extension-X.X.X/dist/` folder. Assets from Ghostery Common (see above) are copied into the `ghostery-extension-X.X.X/common/` directory from `node_modules/ghostery-common/build/assets` using the `vendor-copy` npm package. That copy is triggered when running `yarn install`. See `package.json`:
 
 ```json
 "vendorCopy": [
    {
       "from": "node_modules/ghostery-common/build/assets",
-      "to": "cliqz"
+      "to": "common"
     }
 ]
 ```

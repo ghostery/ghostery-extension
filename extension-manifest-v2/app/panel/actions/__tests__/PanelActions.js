@@ -14,22 +14,22 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as panelActions from '../PanelActions';
-import { TOGGLE_CLIQZ_FEATURE } from '../../constants/constants';
+import { TOGGLE_COMMON_FEATURE } from '../../constants/constants';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('app/panel/actions/PanelActions.js', () => {
-	test('toggleCliqzFeature action should resolve correctly', () => {
+	test('toggleCommonFeature action should resolve correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 		const data = {
 			featureName: 'enable_ad_block',
 			isEnabled: true
 		};
-		const expectedPayload = { data, type: TOGGLE_CLIQZ_FEATURE };
+		const expectedPayload = { data, type: TOGGLE_COMMON_FEATURE };
 
-		store.dispatch(panelActions.toggleCliqzFeature(data.featureName, data.isEnabled));
+		store.dispatch(panelActions.toggleCommonFeature(data.featureName, data.isEnabled));
 
 		const actions = store.getActions();
 		expect(actions).toEqual([expectedPayload]);

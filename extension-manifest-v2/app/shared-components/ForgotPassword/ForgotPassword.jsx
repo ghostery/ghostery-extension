@@ -16,7 +16,7 @@ import { withRouter, Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import { validateEmail } from '../../panel/utils/utils';
 /**
- * @class Implement shared Forgot Password view which opens from the link on Sign In page inside the panel and hub
+ * @class Implement shared Forgot Password view which opens from the link on Sign In page inside the panel
  * @memberof PanelClasses
  */
 class ForgotPassword extends React.Component {
@@ -46,8 +46,6 @@ class ForgotPassword extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const { email } = this.state;
-			const { hub } = this.props;
-			const panel = !hub;
 
 			// validate the email and password
 			if (!validateEmail(email)) {
@@ -62,14 +60,7 @@ class ForgotPassword extends React.Component {
 			actions.resetPassword(email)
 				.then((success) => {
 					this.setState({ loading: false });
-					if (success && hub) {
-						this.navigateToLogIn();
-
-						actions.setToast({
-							toastMessage: t('banner_check_your_email_title'),
-							toastClass: 'success',
-						});
-					} else if (success && panel) {
+					if (success) {
 						history.push('/login');
 					}
 				});
@@ -87,45 +78,35 @@ class ForgotPassword extends React.Component {
 	 */
 	render() {
 		const { email, loading, emailError } = this.state;
-		const { hub } = this.props;
-		const panel = !hub;
 		const buttonClasses = ClassNames('button ghostery-button', {
 			loading,
-			success: hub
+			success: false,
 		});
 		const ContainerClassNames = ClassNames('', {
-			'forgot-password-panel': panel,
-			ForgotPasswordView: hub,
+			'forgot-password-panel': true,
 		});
 		const MessageClassNames = ClassNames('', {
-			'forgot-password-message': panel,
-			ForgotPasswordMessage: hub,
+			'forgot-password-message': true,
+			ForgotPasswordMessage: false,
 		});
 		const EmailClassNames = ClassNames('', {
-			'forgot-input-email': panel,
-			ForgotPasswordEmail: hub,
+			'forgot-input-email': true,
+			ForgotPasswordEmail: false,
 		});
 		const ButtonsContainerClassNames = ClassNames('row', {
-			'buttons-container': panel,
+			'buttons-container': true,
 		});
 		const loaderClassNames = ClassNames('loader', {
-			success: hub
+			success: false
 		});
 		return (
 			<div id={ContainerClassNames}>
 				<div className="row align-center">
 					<div className="columns small-12">
 						<form className="ForgotPasswordForm" onSubmit={this.handleSubmit}>
-							{panel && (
-								<h4 id={MessageClassNames}>
-									{t('forgot_password_message')}
-								</h4>
-							)}
-							{hub && (
-								<h3 id={MessageClassNames} className="text-center">
-									{t('forgot_password_message')}
-								</h3>
-							)}
+							<h4 id={MessageClassNames}>
+								{t('forgot_password_message')}
+							</h4>
 							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
 								<label htmlFor={EmailClassNames}>
 									{t('email_colon')}
@@ -141,16 +122,9 @@ class ForgotPassword extends React.Component {
 							</div>
 							<div className={ButtonsContainerClassNames}>
 								<div className="small-6 columns text-center">
-									{panel && (
-										<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
-											{t('button_cancel')}
-										</Link>
-									)}
-									{hub && (
-										<div id="forgot-password-cancel" className="cancel button hollow success" onClick={this.navigateToLogIn}>
-											{t('button_cancel')}
-										</div>
-									)}
+									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
+										{t('button_cancel')}
+									</Link>
 								</div>
 								<div className="small-6 columns text-center">
 									<button type="submit" id="send-button" className={buttonClasses}>

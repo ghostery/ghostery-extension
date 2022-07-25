@@ -18,12 +18,11 @@ import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 
-import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
+import common, { setAdblockerState, setAntitrackingState, setWhotracksmeState } from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
-import GhosteryModule from './classes/Module';
 // static classes
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
@@ -45,16 +44,17 @@ import SearchMessager from './classes/SearchMessager';
 import ErrorReporter from './classes/ErrorReporter';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
-import * as common from './utils/common';
+import {
+	log, alwaysLog, hashCode, prefsSet
+} from './utils/common';
 import * as utils from './utils/utils';
 import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
-import importCliqzSettings from './utils/cliqzSettingImport';
-import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
+import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
-window.CLIQZ = cliqz;
+window.COMMON = common;
 
 // For debug purposes, provide access to Ghostery's internal data.
 window.ghostery = ghosteryDebugger;
@@ -62,12 +62,11 @@ window.ghostery = ghosteryDebugger;
 // class instantiation
 const events = new Events();
 // function shortcuts
-const { log, alwaysLog } = common;
 const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ
+	CDN_BASE_URL, BROWSER_INFO,
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
@@ -77,35 +76,6 @@ const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
-
-// Cliqz Modules
-const moduleMock = {
-	isEnabled: false,
-	on: () => {},
-};
-const humanweb = cliqz.modules[HUMANWEB_MODULE];
-const hpnv2 = cliqz.modules[HPN_MODULE];
-const { adblocker, antitracking } = cliqz.modules;
-const insights = cliqz.modules.insights || moduleMock;
-// add ghostery module to expose ghostery state to cliqz
-cliqz.modules.ghostery = new GhosteryModule();
-
-/**
- * Enable or disable specified module.
- * @memberOf Background
- * @param {Object} module  Cliqz module
- * @param {boolean} enabled true - enable, false - disable
- * @return {Promise}
- */
-function setCliqzModuleEnabled(module, enabled) {
-	if (enabled) {
-		log('SET CLIQZ MODULE ENABLED', module);
-		return cliqz.enableModule(module.name);
-	}
-	log('SET CLIQZ MODULE DISABLED', module);
-	cliqz.disableModule(module.name);
-	return Promise.resolve();
-}
 
 /**
  * Pulls down latest version.json and triggers
@@ -145,6 +115,21 @@ function updateDBs() {
 			reject(failed);
 		});
 	}));
+}
+
+function tryOpenOnboarding() {
+	if (conf.setup_complete || conf.setup_skip) {
+		return;
+	}
+
+	const now = Date.now();
+	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > ONE_DAY_MSEC)) {
+		conf.setup_timestamp = now;
+		chrome.tabs.create({
+			url: chrome.runtime.getURL('./app/templates/onboarding.html'),
+			active: true
+		});
+	}
 }
 
 /**
@@ -375,7 +360,7 @@ function handleNotifications(name, message, tab_id, callback) {
 		try {
 			const backup = JSON.parse(message);
 
-			if (backup.hash !== common.hashCode(JSON.stringify(backup.settings))) {
+			if (backup.hash !== hashCode(JSON.stringify(backup.settings))) {
 				throw new Error('Invalid hash');
 			}
 
@@ -472,117 +457,6 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from The Ghostery Hub: app/hub.
- * @param  {string}   name     message name
- * @param  {object}   message  message data
- * @param  {function} callback function to call when you have a response
- */
-function handleGhosteryHub(name, message, callback) {
-	switch (name) {
-		case 'SEND_PING': {
-			const { type } = message;
-			metrics.ping(type);
-			callback();
-			break;
-		}
-		case 'GET_HOME_PROPS': {
-			const {
-				setup_complete,
-				tutorial_complete,
-				enable_metrics,
-			} = conf;
-			callback({
-				setup_complete,
-				tutorial_complete,
-				enable_metrics,
-			});
-			break;
-		}
-		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
-			const { setup_show_warning_override } = conf;
-			callback({ setup_show_warning_override });
-			break;
-		}
-		case 'SET_SETUP_STEP': {
-			let { setup_step } = message;
-			if (setup_step === 7) {
-				panelData.set({ setup_step });
-			} else if (setup_step > conf.setup_step) {
-				panelData.set({ setup_step });
-				if (setup_step === 8) {
-					const { setup_number } = conf;
-					panelData.set({ setup_number: setup_number ? 2 : 1 });
-					metrics.ping('setup_start');
-				}
-			} else {
-				({ setup_step } = setup_step);
-			}
-			const origin = message.origin || '';
-			if (origin === 'onboarding') {
-				conf.setup_step = message.setup_step;
-				metrics.ping('gb_onboarding');
-			}
-			callback({ setup_step });
-			break;
-		}
-		case 'SET_BLOCKING_POLICY': {
-			const { blockingPolicy } = message;
-			switch (blockingPolicy) {
-				case 'BLOCKING_POLICY_RECOMMENDED': {
-					panelData.set({ setup_block: 5 });
-					setGhosteryDefaultBlocking();
-					break;
-				}
-				case 'BLOCKING_POLICY_NOTHING': {
-					panelData.set({ setup_block: 1 });
-					const selected_app_ids = {};
-					panelData.set({ selected_app_ids });
-					break;
-				}
-				case 'BLOCKING_POLICY_EVERYTHING': {
-					panelData.set({ setup_block: 3 });
-					const selected_app_ids = {};
-					const app_ids = Object.keys(bugDb.db.apps);
-					app_ids.forEach((app_id) => {
-						if (!selected_app_ids.hasOwnProperty(app_id)) {
-							selected_app_ids[app_id] = 1;
-						}
-					});
-					panelData.set({ selected_app_ids });
-					break;
-				}
-				case 'BLOCKING_POLICY_CUSTOM': {
-					panelData.set({ setup_block: 4 });
-					// Blocking app_ids is handled by Global Blocking blocking.js
-					break;
-				}
-				default: break;
-			}
-			callback({ blockingPolicy });
-			break;
-		}
-		case 'SET_TUTORIAL_COMPLETE': {
-			panelData.set(message);
-			metrics.ping('tutorial_complete');
-			callback(message);
-			break;
-		}
-		case 'SET_METRICS':
-		case 'SET_SETUP_SHOW_WARNING_OVERRIDE':
-		case 'SET_ANTI_TRACKING':
-		case 'SET_AD_BLOCK':
-		case 'SET_SMART_BLOCK':
-		case 'SET_HUMAN_WEB':
-		case 'SET_SETUP_COMPLETE': {
-			panelData.set(message);
-			callback(message);
-			break;
-		}
-		default: break;
-	}
-}
-
-/**
  * Handle messages sent from dist/purplebox.js content script.
  * @memberOf Background
  *
@@ -606,7 +480,7 @@ function handlePurplebox(name, message) {
  * Aggregated handler for <b>runtime.onMessage</b>
  *
  * All callbacks are used synchronously.
- * Some of messages come from Cliqz content script
+ * Some of messages come from Common content script
  * bundle, we should filter those out.
  * @memberOf Background
  *
@@ -616,9 +490,6 @@ function handlePurplebox(name, message) {
  * @return {boolean}            denotes async (true) or sync (false)
  */
 function onMessageHandler(request, sender, callback) {
-	if (request.source === 'cliqz-content-script') {
-		return false;
-	}
 	const {
 		name, message, origin
 	} = request;
@@ -639,6 +510,18 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
+	}
+	if (origin === 'onboarding') {
+		if (name === 'setup_complete') {
+			conf.setup_complete = true;
+			globals.ONBOARDED_FEATURES.forEach((confName) => {
+				conf[confName] = true;
+			});
+		}
+		if (name === 'setup_skip') {
+			conf.setup_skip = true;
+		}
+		return false;
 	}
 	if (origin === 'checkout_pages') {
 		// Checkout pages
@@ -662,12 +545,9 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	}
-	if (origin === 'ghostery-hub') {
-		return handleGhosteryHub(name, message, callback);
-	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	if (name === 'getPanelData') { // Used by panel-android and the intro hub
+	if (name === 'getPanelData') { // Used by panel-android
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const data = panelData.get(message.view, activeTab);
@@ -683,14 +563,14 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'getStats') {
-		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
+		common.modules.insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
 			callback(data);
 		});
 		return true;
 	}
 	if (name === 'getAllStats') {
-		insights.action('getAllDays').then((dataDays) => {
-			insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
+		common.modules.insights.action('getAllDays').then((dataDays) => {
+			common.modules.insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
 				callback(dataTimeline);
 			});
 		});
@@ -698,7 +578,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'resetStats') {
 		metrics.ping('hist_reset_stats');
-		insights.action('clearData');
+		common.modules.insights.action('clearData');
 		return false;
 	}
 	if (name === 'setPanelData') {
@@ -716,16 +596,16 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	}
-	if (name === 'getCliqzModuleData') { // panel-android only
+	if (name === 'getCommonModuleData') { // panel-android only
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const pageHost = (activeTab.url && utils.processUrl(activeTab.url).hostname) || '';
-				sendCliqzModuleCounts(activeTab.id, pageHost, callback);
+				sendCommonModuleCounts(activeTab.id, pageHost, callback);
 			});
 		} else {
 			chrome.tabs.get(+message.tabId, (messageTab) => {
 				const pageHost = (messageTab.url && utils.processUrl(messageTab.url).hostname) || '';
-				sendCliqzModuleCounts(messageTab.id, pageHost, callback);
+				sendCommonModuleCounts(messageTab.id, pageHost, callback);
 			});
 		}
 		return true;
@@ -900,7 +780,7 @@ function onMessageHandler(request, sender, callback) {
 		settings.site_blacklist = conf.site_blacklist;
 		settings.site_whitelist = conf.site_whitelist;
 
-		const hash = common.hashCode(JSON.stringify({ conf: settings }));
+		const hash = hashCode(JSON.stringify({ conf: settings }));
 		const backup = JSON.stringify({ hash, settings: { conf: settings } });
 		const msg = { type: 'Ghostery-Backup', content: backup };
 		callback(msg);
@@ -916,7 +796,7 @@ function onMessageHandler(request, sender, callback) {
 				settings.site_whitelist = conf.site_whitelist;
 
 				try {
-					const hash = common.hashCode(JSON.stringify({ conf: settings }));
+					const hash = hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
 					const msg = { type: 'Ghostery-Backup', content: backup };
 					utils.injectNotifications(activeTab.id, true).then(() => {
@@ -962,18 +842,11 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
-	if (name === 'openHubPage') {
-		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
-		metrics.ping('intro_hub_click');
-		utils.openNewTab({ url: hubUrl, become_active: true });
-		return false;
-	}
 	if (name === 'openAccountAndroid') {
 		if (confData.account) {
 			utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/`, become_active: true });
 		} else {
-			const hubUrl = chrome.runtime.getURL('./app/templates/hub.html#log-in');
-			utils.openNewTab({ url: hubUrl, become_active: true });
+			utils.openNewTab({ url: `${globals.SIGNON_BASE_URL}/`, become_active: true });
 		}
 		return false;
 	}
@@ -981,40 +854,21 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Set option for Hub Layout A/B test based
- * on the results returned from the abtest endpoint.
- * @memberOf Background
- */
-function setupHubLayoutABTest() {
-	if (
-		!abtest.hasBeenFetched
-		|| conf.hub_layout !== 'not_yet_set'
-	) { return; }
-
-	if (abtest.hasTest('hub_alternate')) {
-		conf.hub_layout = 'alternate';
-	} else {
-		conf.hub_layout = 'default';
-	}
-}
-
-/**
  * Configure A/B tests based on data fetched from the A/B server
  * @memberOf Background
  */
 function setupABTests() {
-	setupHubLayoutABTest();
 }
 
 /**
  * @since 8.5.3
  *
- * Update config options for the Cliqz antitracking module to match the current human web setting.
+ * Update config options for the Common antitracking module to match the current human web setting.
  * Log out the updates. Returns without doing anything if antitracking is disabled.
  *
  * @param {Boolean} isAntitrackingEnabled		Whether antitracking is currently enabled.
  */
-function setCliqzAntitrackingConfig(isAntitrackingEnabled) {
+function setCommonAntitrackingConfig(isAntitrackingEnabled) {
 	if (!isAntitrackingEnabled) return;
 
 	const antitrackingConfig = {
@@ -1024,7 +878,7 @@ function setCliqzAntitrackingConfig(isAntitrackingEnabled) {
 
 	Object.entries(antitrackingConfig).forEach(([opt, val]) => {
 		log('antitracking', 'set config option', opt, val);
-		antitracking.action('setConfigOption', opt, val);
+		common.modules.antitracking.action('setConfigOption', opt, val);
 	});
 }
 
@@ -1046,65 +900,50 @@ function initializeDispatcher() {
 		// TODO debounce with below
 		button.update();
 		utils.flushChromeMemoryCache();
-		cliqz.modules.core.action('refreshAppState');
+		common.modules.core.action('refreshAppState');
 	});
 	dispatcher.on('conf.save.site_blacklist', () => {
 		button.update();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
-				setCliqzModuleEnabled(hpnv2, enableHumanWeb);
-			});
-		} else {
-			setCliqzModuleEnabled(humanweb, false);
-		}
+		setWhotracksmeState(enableHumanWeb).then(() => {
+			setCommonAntitrackingConfig(conf.enable_anti_tracking);
+		});
 	});
 	dispatcher.on('conf.save.enable_autoupdate', (enableAutoUpdate) => {
-		if (!antitracking.isDisabled) {
-			antitracking.action('setConfigOption', 'networkFetchEnabled', enableAutoUpdate);
+		if (!common.modules.antitracking.isDisabled) {
+			common.modules.antitracking.action('setConfigOption', 'networkFetchEnabled', enableAutoUpdate);
 		}
-		if (!adblocker.isDisabled) {
-			adblocker.action('setNetworkFetchEnabled', enableAutoUpdate);
+		if (!common.modules.adblocker.isDisabled) {
+			common.modules.adblocker.action('setNetworkFetchEnabled', enableAutoUpdate);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
-				// enable_human_web could have been toggled while antitracking was off,
-				// so we want to make sure to update the antitracking telemetry option
-				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
-			});
-		} else {
-			setCliqzModuleEnabled(antitracking, false);
-		}
+		setAntitrackingState(enableAntitracking).then(() => {
+			// enable_human_web could have been toggled while antitracking was off,
+			// so we want to make sure to update the antitracking telemetry option
+			setCommonAntitrackingConfig(conf.enable_anti_tracking);
+		});
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(adblocker, enableAdBlock);
-		} else {
-			setCliqzModuleEnabled(adblocker, false);
-		}
+		setAdblockerState(enableAdBlock);
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
-		if (!IS_CLIQZ) {
-			cliqz.prefs.set('cliqz_adb_mode', val);
-		}
+		common.prefs.set('cliqz_adb_mode', val);
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// update content script state when blocking is paused/unpaused
-		cliqz.modules.core.action('refreshAppState');
+		common.modules.core.action('refreshAppState');
 	});
 }
 
 /**
- * WebRequest pipeline initialization: find which Cliqz modules are enabled,
+ * WebRequest pipeline initialization: find which Common modules are enabled,
  * add their handlers, then put Ghostery event handlers before them all.
- * If Cliqz modules are subsequently enabled, their event handlers will always
+ * If Common modules are subsequently enabled, their event handlers will always
  * be added after Ghostery's.
  * @memberOf Background
  *
@@ -1113,7 +952,7 @@ function initializeDispatcher() {
  *                        	or one of the webRequestPipeline actions rejects.
  */
 function initialiseWebRequestPipeline() {
-	const webRequestPipeline = cliqz.modules['webrequest-pipeline'];
+	const webRequestPipeline = common.modules['webrequest-pipeline'];
 	if (webRequestPipeline.isDisabled) {
 		// no pipeline... this shouldn't happen
 		return Promise.reject(new Error('cannot initialise webrequest pipeline: module disabled'));
@@ -1124,11 +963,11 @@ function initialiseWebRequestPipeline() {
 
 	// look for steps from other modules which we need to be before
 	const existingSteps = { onBeforeRequest: [], onHeadersReceived: [] };
-	if (antitracking.isEnabled) {
-		existingSteps.onBeforeRequest.push('antitracking.onBeforeRequest');
-		existingSteps.onHeadersReceived.push('antitracking.onHeadersReceived');
+	if (common.modules.antitracking.isEnabled) {
+		existingSteps.onBeforeRequest.push('common.modules.antitracking.onBeforeRequest');
+		existingSteps.onHeadersReceived.push('common.modules.antitracking.onHeadersReceived');
 	}
-	if (adblocker.isEnabled) {
+	if (common.modules.adblocker.isEnabled) {
 		existingSteps.onBeforeRequest.push('adblocker');
 	}
 	return Promise.all([
@@ -1171,12 +1010,12 @@ function isWhitelisted(state) {
  * Set listener for 'enabled' event for Antitracking module which replaces
  * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
  * The reason: if site is whitelisted by Ghostery, it should be whitelisted by
- * any Cliqz module which may block/alter tracker requests.
+ * any Common module which may block/alter tracker requests.
  * @memberOf Background
  */
-antitracking.on('enabled', () => {
-	antitracking.isReady().then(() => {
-		antitracking.action('setWhiteListCheck', isWhitelisted);
+common.modules.antitracking.on('enabled', () => {
+	common.modules.antitracking.isReady().then(() => {
+		common.modules.antitracking.action('setWhiteListCheck', isWhitelisted);
 	});
 });
 
@@ -1185,9 +1024,9 @@ antitracking.on('enabled', () => {
  * which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
  * @memberOf Background
  */
-adblocker.on('enabled', () => {
-	adblocker.isReady().then(() => {
-		adblocker.action('addWhiteListCheck', isWhitelisted);
+common.modules.adblocker.on('enabled', () => {
+	common.modules.adblocker.isReady().then(() => {
+		common.modules.adblocker.action('addWhiteListCheck', isWhitelisted);
 	});
 });
 
@@ -1195,12 +1034,12 @@ adblocker.on('enabled', () => {
  * Add page listeners for insights stats.
  * @memberOf Background
  */
-insights.on('enabled', () => {
+common.modules.insights.on('enabled', () => {
 	events.addPageListener((tab_id, info, apps, bugs) => {
-		cliqz.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
+		common.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
 	});
 });
-insights.on('disabled', () => {
+common.modules.insights.on('disabled', () => {
 	events.clearPageListeners();
 });
 
@@ -1210,8 +1049,8 @@ insights.on('disabled', () => {
  */
 function getDataForGhosteryTab(callback) {
 	const passedData = {};
-	insights.action('getAllDays').then((dataDays) => {
-		insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
+	common.modules.insights.action('getAllDays').then((dataDays) => {
+		common.modules.insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
 			const cumulativeData = {
 				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
 			};
@@ -1256,7 +1095,7 @@ function addCommonGhosteryAndAntitrackingListeners() {
 	let urlFilters = ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'];
 	if (IS_EDGE || IS_FIREFOX) {
 		// Prevent Firefox from asking users to re-validate permissions on upgrade
-		// TODO: Allow websocket filters on Edge via Cliqz pipeline
+		// TODO: Allow websocket filters on Edge via Common pipeline
 		urlFilters = urlFilters.reduce((accumulator, currentValue) => {
 			if (!currentValue.match(/^wss?:\/\//)) {
 				accumulator.push(currentValue);
@@ -1390,7 +1229,7 @@ function initializeEventListeners() {
 			}
 
 			if (recognized && request.name === 'getDashboardStats') {
-				insights.action('getDashboardStats', ...(request.args || [])).then(sendResponse);
+				common.modules.insights.action('getDashboardStats', ...(request.args || [])).then(sendResponse);
 				return true;
 			}
 
@@ -1468,7 +1307,7 @@ function initializeVersioning() {
 
 /**
  * Ghostery Module Initializer.
- * Init all Ghostery and Cliqz modules.
+ * Init all Ghostery and Common modules.
  * @memberOf Background
  *
  * @return {Promise}
@@ -1510,53 +1349,20 @@ function initializeGhosteryModules() {
 		metrics.ping('install');
 		metrics.ping('install_complete');
 	}
-	// start cliqz app
-	const cliqzStartup = cliqz.start().then(() => {
-		// enable historical stats
-		setCliqzModuleEnabled(insights, true);
+	// start common app
+	const commonStartup = async () => {
+		await common.start();
 		// run wrapper tasks which set up base integrations between ghostery and these modules
-		Promise.all([
-			initialiseWebRequestPipeline(),
-		]).then(() => {
-			if (!IS_CLIQZ) {
-				conf.enable_ad_block = !adblocker.isDisabled;
-				conf.enable_anti_tracking = !antitracking.isDisabled;
-				conf.enable_human_web = !humanweb.isDisabled;
+		await initialiseWebRequestPipeline();
 
-				if (!antitracking.isDisabled) {
-					antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
-				}
-				if (!adblocker.isDisabled) {
-					adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
-				}
+		if (!common.modules.antitracking.isDisabled) {
+			common.modules.antitracking.action('setConfigOption', 'networkFetchEnabled', !!conf.enable_autoupdate);
+		}
 
-				// Make sure that getBrowserInfo() has resolved before we set these properties
-				(async () => {
-					await globals.BROWSER_INFO_READY;
-					if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
-						if (globals.JUST_INSTALLED) {
-							conf.enable_human_web = false;
-						} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
-							conf.enable_human_web = false;
-							conf.cliqz_legacy_opt_in = true;
-						}
-					}
-					if (globals.JUST_INSTALLED && globals.isGhosteryBrowser()) {
-						conf.enable_human_web = true;
-					}
-				})();
-			}
-		});
-	}).catch((e) => {
-		log('cliqzStartup error', e);
-	});
-
-	if (IS_CLIQZ) {
-		setCliqzModuleEnabled(hpnv2, false);
-		setCliqzModuleEnabled(humanweb, false);
-		setCliqzModuleEnabled(antitracking, false);
-		setCliqzModuleEnabled(adblocker, false);
-	}
+		if (!common.modules.adblocker.isDisabled) {
+			common.modules.adblocker.action('setNetworkFetchEnabled', !!conf.enable_autoupdate);
+		}
+	};
 
 	// Disable purplebox for Android users
 	if (IS_ANDROID) {
@@ -1567,9 +1373,11 @@ function initializeGhosteryModules() {
 	function scheduledTasks() {
 		return new Promise((resolve) => {
 			// auto-fetch from CMP
-			cmp.fetchCMPData();
+			if (conf.show_cmp) {
+				cmp.fetchCMPData();
+			}
 
-			if (!IS_CLIQZ && conf.enable_abtests) {
+			if (conf.enable_abtests) {
 				abtest.fetch()
 					.then(() => {
 						setupABTests();
@@ -1616,28 +1424,10 @@ function initializeGhosteryModules() {
 		c2pDb.init(globals.JUST_UPGRADED),
 		compDb.init(globals.JUST_UPGRADED),
 		surrogatedb.init(globals.JUST_UPGRADED),
-		cliqzStartup,
-	]).then(() => {
-		// run scheduledTasks on init
-		scheduledTasks().then(() => {
-			if (globals.JUST_INSTALLED) {
-				(async () => {
-					await globals.BROWSER_INFO_READY;
-					if (BROWSER_INFO.name !== 'ghostery_desktop') {
-						// Open the Ghostery Hub on install with justInstalled query parameter set to true.
-						// We need to do this after running scheduledTasks for the first time
-						// because of an A/B test that determines which promo variant is shown in the Hub on install
-						const showAlternateHub = conf.hub_layout === 'alternate';
-						const route = showAlternateHub ? '#home' : '';
-						chrome.tabs.create({
-							url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&ah=${showAlternateHub}${route}`),
-							active: true
-						});
-					}
-				})();
-			}
-		});
-	});
+		commonStartup(),
+	])
+		.then(() => scheduledTasks())
+		.then(() => tryOpenOnboarding());
 }
 
 /**
@@ -1672,7 +1462,6 @@ function purgeObsoleteData() {
 		'evidon_bugs_last_checked',
 		'plus_promo_modal_last_seen',
 		'premium_promo_modal_last_seen',
-		'hub_promo_variant',
 		'ghostrank',
 		'enable_offers',
 		'fromSettings',
@@ -1723,9 +1512,7 @@ async function initializeAccount() {
 
 		if (!conf.account) {
 			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
-			if (globals.JUST_INSTALLED) {
-				setGhosteryDefaultBlocking();
-			}
+			setGhosteryDefaultBlocking();
 			return;
 		}
 
@@ -1762,26 +1549,28 @@ async function init() {
 		await confData.init();
 
 		initializePopup();
+
 		initializeEventListeners();
+
 		initializeVersioning();
+
 		if (globals.JUST_UPGRADED) {
 			await purgeObsoleteData();
 			await freeSpaceIfNearQuota({ force: true }); // TODO: consider dropping "force" once all users upgraded
 		}
 
 		await initializeSearchMessageHandler();
+
 		await metrics.init(globals.JUST_INSTALLED);
+
 		await initializeGhosteryModules();
 
 		initializeAccount();
 
 		// persist Conf properties to storage only after init has completed
-		await common.prefsSet(globals.initProps);
+		await prefsSet(globals.initProps);
 
 		globals.INIT_COMPLETE = true;
-		if (IS_CLIQZ) {
-			importCliqzSettings(cliqz, conf);
-		}
 	} catch (err) {
 		ErrorReporter.captureException(err);
 		alwaysLog('Error in init()', err);
@@ -1790,5 +1579,4 @@ async function init() {
 	}
 }
 
-// Initialize the application.
 init();

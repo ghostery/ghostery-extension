@@ -19,7 +19,7 @@ import {
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	UPDATE_CLIQZ_MODULE_WHITELIST,
+	UPDATE_COMMON_MODULE_WHITELIST,
 	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
 
@@ -119,16 +119,16 @@ export function updateTrackerTrustRestrict(data) {
 }
 
 /**
- * Called from Tracker.handleCliqzTrackerWhitelist()
+ * Called from Tracker.handleCommonTrackerWhitelist()
  * @param  {Object} data
  * @return {Object} dispatch
  */
-export function updateCliqzModuleWhitelist(unidentifiedTracker) {
+export function updateCommonModuleWhitelist(unidentifiedTracker) {
 	return function(dispatch, getState) {
 		// use redux-thunk to get pageHost from summary
 		const { pageHost } = getState().summary;
 		dispatch({
-			type: UPDATE_CLIQZ_MODULE_WHITELIST,
+			type: UPDATE_COMMON_MODULE_WHITELIST,
 			data: { unidentifiedTracker, pageHost },
 		});
 	};

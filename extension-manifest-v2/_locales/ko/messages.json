@@ -1,4 +1,7 @@
 {
+  "accept_terms": {
+    "message": "Accept terms"
+  },
   "account_creation_privacy_statement": {
     "message": "당사의 일반적 $LINK_TERMS_START$약관$LINK_TERMS_END$ 및 $LINK_UA_START$라이선스 계약$LINK_UA_END$이 적용됩니다. 당사의 개인정보 처리방침은 $LINK_PS_START$여기$LINK_PS_END$에서 확인하실 수 있습니다.",
     "placeholders": {
@@ -27,6 +30,9 @@
   },
   "ad_blocking_DESC": {
     "message": "방문하는 웹 페이지의 광고를 차단합니다."
+  },
+  "additional_permissions_required": {
+    "message": "Additional Permissions Required"
   },
   "ads": {
     "message": "광고"
@@ -78,6 +84,12 @@
   "alert_smart_block_on": {
     "message": "스마트 브라우징 켜짐. 트래커 차단 기능이 페이지 성능을 최적화할 수 있도록 조정됩니다."
   },
+  "all_popups": {
+    "message": "All Popups"
+  },
+  "all_set__go_with_ghosty_": {
+    "message": "All set! go with ghosty!"
+  },
   "already_subscribed": {
     "message": "이미 가입함"
   },
@@ -126,8 +138,14 @@
   "anti_tracking_DESC": {
     "message": "브라우저 환경을 더 강력하게 보호할 수 있도록 차단 해제된 트래커와 알 수 없는 트래커를 익명화합니다.   "
   },
+  "any_questions__anytime_": {
+    "message": "Any questions? Anytime!"
+  },
   "are_you_sure_": {
     "message": "Are you sure?"
+  },
+  "are_you_sure_you_want_to_skip_enabling_ghostery_": {
+    "message": "Are you sure you want to skip enabling Ghostery?"
   },
   "audio_video_player": {
     "message": "오디오/비디오 플레이어 ",
@@ -156,6 +174,9 @@
   },
   "block_toggle_tracking": {
     "message": "트래커 차단"
+  },
+  "blocked": {
+    "message": "차단됨 "
   },
   "blocked_redirect_action_always_title": {
     "description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -522,6 +543,9 @@
     "message": "CDN",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
+    "message": "Check out <a href=\"$${0}\" target=\"_blank\">FAQs</a> or drop us a line at <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. We'll be more than happy to talk to you!"
+  },
   "choose_your_default_search": {
     "message": "기본 검색 기능 선택"
   },
@@ -607,6 +631,9 @@
   "confirm_password_colon": {
     "message": "암호 확인:"
   },
+  "continue": {
+    "message": "Continue"
+  },
   "cookie": {
     "message": "쿠키"
   },
@@ -668,6 +695,12 @@
   "email_colon": {
     "message": "이메일:"
   },
+  "enable_ghostery": {
+    "message": "Enable Ghostery"
+  },
+  "enable_ghostery_to_get_started": {
+    "message": "Enable Ghostery to get started"
+  },
   "enable_when_blacklisted": {
     "message": "이 기능을 사용하려면 사이트 제한을 실행 취소하십시오."
   },
@@ -712,6 +745,9 @@
   "first_name_field_label": {
     "message": "이름(옵션):"
   },
+  "for_more_information_read_our_full": {
+    "message": "For more information read our full"
+  },
   "forgot_password": {
     "message": "암호를 잊으셨습니까?"
   },
@@ -730,8 +766,23 @@
   "ghostery_basic": {
     "message": "Basic"
   },
+  "ghostery_disabled": {
+    "message": "Ghostery disabled"
+  },
+  "ghostery_enabled": {
+    "message": "Ghostery enabled"
+  },
   "ghostery_is_ready": {
     "message": "Ghostery 이용이 가능합니다!"
+  },
+  "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
+    "message": "Ghostery is set up to stop trackers in their tracks and protect your privacy while browsing!"
+  },
+  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
+    "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers for their own profit."
+  },
+  "ghostery_privacy_policy": {
+    "message": "Ghostery Privacy Policy"
   },
   "global_settings_saved": {
     "message": "전역 설정 저장됨"
@@ -755,481 +806,17 @@
     "message": "호스팅",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "hub_create_account_already_have_account": {
-    "message": "이미 Ghostery 계정이 있으십니까? "
-  },
-  "hub_create_account_confirm_password_do_not_match": {
-    "message": "입력한 암호가 일치하지 않습니다."
-  },
-  "hub_create_account_header_title": {
-    "message": "브라우저와 장치 모두에서 설정을 동기화할 수 있도록 Ghostery 계정을 만드시겠습니까? "
-  },
-  "hub_create_account_label_email_last_name": {
-    "message": "성(옵션):"
-  },
-  "hub_create_account_label_first_name": {
-    "message": "이름(옵션):"
-  },
-  "hub_create_account_label_password_invalid": {
-    "message": "사용 가능한 특수 문자: !@#$%^&*=+()<>{}[];:,./?"
-  },
-  "hub_create_account_label_password_invalid_length": {
-    "message": "8자에서 50자까지 사용할 수 있습니다."
-  },
-  "hub_create_account_link_login": {
-    "message": "여기에서 로그인하세요."
-  },
-  "hub_create_account_toast_error": {
-    "message": "해당 이메일 주소는 이미 사용 중입니다.  다른 이메일을 선택하십시오. "
-  },
-  "hub_create_account_toast_success": {
-    "message": "계정 만들기가 완료되었습니다."
-  },
-  "hub_home_feature_setup_button": {
-    "message": "설정 변경"
-  },
-  "hub_home_feature_setup_button_alt": {
-    "message": "사용자 지정 설정 완료"
-  },
-  "hub_home_feature_setup_text": {
-    "message": "설정과 트래커 차단 정보를 수정하세요."
-  },
-  "hub_home_feature_tutorial_button_alt": {
-    "message": "튜토리얼 완료"
-  },
-  "hub_home_feature_tutorial_text": {
-    "message": "고스터리 브라우저의 주요 기능을 알아보세요."
-  },
-  "hub_home_feature_tutorial_title": {
-    "message": "튜토리얼 보기"
-  },
-  "hub_home_header_checkbox_label": {
-    "message": "고스터리의 성능을 개선하기 위해 추가로 익명의 분석 데이터를 공유합니다."
-  },
-  "hub_home_header_info": {
-    "message": "새로운 이용자는 Human Web에 참여합니다. 사용자 지정 설정 또는 확장 프로그램에서 이 설정을 변경하실 수 있습니다."
-  },
-  "hub_home_header_info_link": {
-    "message": "자세히 알아보기"
-  },
-  "hub_home_header_info_opted_out": {
-    "message": "새로운 이용자는 기본적으로 Human Web 참여가 선택 해제되어 있습니다. 사용자 지정 설정 또는 확장 프로그램에서 이러한 권장 기능을 선택할 수 있습니다."
-  },
-  "hub_home_header_tagline": {
-    "message": "임의 설정 환경으로 보호되고 있습니다."
-  },
-  "hub_home_header_tagline_2": {
-    "message": "브라우징 시작!"
-  },
-  "hub_home_header_text": {
-    "message": "고스터리 이용이 가능합니다!"
-  },
-  "hub_home_page_title": {
-    "message": "Ghostery 허브 - 홈"
-  },
-  "hub_home_plus_full_protection": {
-    "message": "완벽하게 보호됩니다."
-  },
-  "hub_home_plus_upgrade_button_text": {
-    "message": "지금 업그레이드"
-  },
-  "hub_home_plus_upgrade_text": {
-    "message": "기본 개인정보 보호 이상을 경험해보세요. Ghostery Plus로 업그레이드하면 보안 브라우저, 보안 검색, 고급 트래커 분석 등의 강력한 기능을 사용할 수 있습니다."
-  },
-  "hub_home_subheader_optimize": {
-    "message": "고스터리 이용 환경을 최적화하세요"
-  },
-  "hub_login_header_title": {
-    "message": "계정에 로그인하세요."
-  },
-  "hub_login_label_password_invalid": {
-    "message": "8자에서 50자까지 사용할 수 있습니다."
-  },
-  "hub_login_link_create_account": {
-    "message": "어울리다"
-  },
-  "hub_login_link_dont_have_account": {
-    "message": "계정이 있으신가요?회원 가입"
-  },
-  "hub_login_toast_success": {
-    "message": "로그인되었습니다!계정 설정을 가져왔습니다."
-  },
-  "hub_products_header_description": {
-    "message": "완벽한 개인정보 보호 서비스를 통해 개인정보 보호를 지속하고 온라인 이용 경험을 향상하세요."
-  },
-  "hub_products_header_title": {
-    "message": "고스터리 제품으로 더욱 효율적인 웹 브라우징을 즐겨보세요! "
-  },
-  "hub_products_main_promo_description": {
-    "message": "업데이트로 기능이 향상된 모바일용 브라우저와 함께 광고와 트래커가 없는 브라우징을 즐기세요!전용 검색 엔진 기능이 추가되었습니다!"
-  },
-  "hub_products_main_promo_title": {
-    "message": "모바일 개인정보 보호 브라우저"
-  },
-  "hub_products_page_title": {
-    "message": "Ghostery 허브 - Ghostery의 다른 제품 이용"
-  },
-  "hub_products_second_promo_description": {
-    "message": "새로운 탭 기능으로 안전하게 검색하고  트래커 상태를 검토하고 관리하세요. 곧 이용 가능합니다!"
-  },
-  "hub_products_second_promo_title": {
-    "message": "Ghostery Start Tab"
-  },
-  "hub_products_third_promo_description": {
-    "message": "Safari 전용으로 이용 가능한 최저 용량의 브라우저로 온라인상에서 개인정보를 보호하고 광고를 차단하세요."
-  },
-  "hub_products_third_promo_title": {
-    "message": "Ghostery Lite"
-  },
-  "hub_setup_antisuite_description_antitracking": {
-    "message": "브라우저 환경을 더 강력하게 보호할 수 있도록 차단 해제된 트래커와 알 수 없는 트래커를 익명화합니다."
-  },
-  "hub_setup_antisuite_feature_enabled": {
-    "message": "활성화됨 "
-  },
-  "hub_setup_blocking_description_custom": {
-    "message": "차단할 트래커 선택"
-  },
-  "hub_setup_blocking_description_everything": {
-    "message": "모든 트래커 차단"
-  },
-  "hub_setup_blocking_description_nothing": {
-    "message": "차단된 트래커 없음"
-  },
-  "hub_setup_blocking_description_recommended": {
-    "message": "광고, 사이트 분석 및 성인 광고 트래커 차단"
-  },
-  "hub_setup_blocking_text_custom": {
-    "message": "리스트에서 선택"
-  },
-  "hub_setup_blocking_text_everything": {
-    "message": "모두 차단 "
-  },
-  "hub_setup_blocking_text_nothing": {
-    "message": "전혀 차단하지 않음"
-  },
-  "hub_setup_blocking_text_recommended": {
-    "message": "임의 차단"
-  },
-  "hub_setup_enter_modal_text": {
-    "message": "사용자 지정 설정을 입력하면 기존의 고스터리 설정이 변경됩니다. 계속하시겠습니까?"
-  },
-  "hub_setup_exit_flow": {
-    "message": "사용자 지정 종료"
-  },
-  "hub_setup_feature_already_active": {
-    "message": "해당 기능은 이미 Cliqz에 기본적으로 활성화되어 있습니다. $LINK_LM_START$더 알아보기$LINK_LM_END$",
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    }
-  },
-  "hub_setup_feature_products_button": {
-    "message": "부탁드립니다!"
-  },
-  "hub_setup_feature_products_description": {
-    "message": "완벽한 개인정보 보호 서비스로 여러분의 개인정보를 보호하세요!"
-  },
-  "hub_setup_feature_products_title": {
-    "message": "다양한 고스터리 제품 보기"
-  },
-  "hub_setup_feature_supporter_description": {
-    "message": "고스터리를 후원하고 특별 기능을 새롭게 이용하세요!"
-  },
-  "hub_setup_feature_tutorial_description": {
-    "message": "고스터리 브라우저의 주요 기능을 알아보세요."
-  },
-  "hub_setup_feature_tutorial_title": {
-    "message": "튜토리얼 보기"
-  },
-  "hub_setup_header_title_antisuite": {
-    "message": "권장 기능을 적용하여 더 효율적으로 브라우저를 활용하시겠습니까? "
-  },
-  "hub_setup_header_title_blocking": {
-    "message": "고스터리는 트래커를 차단하여 더욱 깔끔하고, 빠르고, 안전한 브라우징 환경을 제공합니다.$NEW_LINE$어떤 트래커를 차단하시겠습니까?",
-    "placeholders": {
-      "new_line": {
-        "content": "<br />"
-      }
-    }
-  },
-  "hub_setup_header_title_done": {
-    "message": "사용자 지정 설정이 완료되었습니다!"
-  },
-  "hub_setup_header_title_humanweb": {
-    "message": "Ghostery의 기능 개선을 도와주시겠습니까? "
-  },
-  "hub_setup_humanweb_header": {
-    "message": "고스터리 기능 향상을 위해 익명의 Human Web 데이터를 사용합니다. 개인 데이터는 절대 수집되지 않습니다.$LINK_LM_START$자세히 알아보기$LINK_LM_END$",
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    }
-  },
-  "hub_setup_humanweb_label": {
-    "message": "해당 정보를 공유하여 고스터리를 후원합니다."
-  },
-  "hub_setup_modal_button_ask_again": {
-    "message": "다시 묻지 않기"
-  },
-  "hub_setup_modal_button_no": {
-    "message": "아니요"
-  },
-  "hub_setup_modal_button_yes": {
-    "message": "예 "
-  },
-  "hub_setup_page_title": {
-    "message": "Ghostery 허브 - 설정"
-  },
-  "hub_setup_page_title_antisuite": {
-    "message": "Ghostery 허브 - 안티스위트"
-  },
-  "hub_setup_page_title_blocking": {
-    "message": "Ghostery 허브 - 차단 설정"
-  },
-  "hub_setup_page_title_done": {
-    "message": "Ghostery 허브 - 설정 완료"
-  },
-  "hub_setup_page_title_humanweb": {
-    "message": "Ghostery 허브 - Human Web 설정"
-  },
-  "hub_setup_ready_heading": {
-    "message": "고스터리 이용 환경을 최적화하세요."
-  },
-  "hub_side_navigation_home": {
-    "message": "홈"
-  },
-  "hub_side_navigation_products": {
-    "message": "다양한 고스터리 제품 보기"
-  },
-  "hub_side_navigation_tutorial": {
-    "message": "튜토리얼 보기"
-  },
-  "hub_side_navigation_upgrade_plan": {
-    "message": "요금제 업그레이드"
-  },
-  "hub_signedin_as_email": {
-    "message": "다음 ID로 로그인됨 "
-  },
-  "hub_signedin_exit": {
-    "message": "홈으로 돌아가기"
-  },
-  "hub_signedin_header_title": {
-    "message": "이미 로그인하셨습니다."
-  },
-  "hub_supporter_feature_more_description": {
-    "message": "더욱 만족스러운 고스터리 브라우저를 만들기 위해 지속적으로 업데이트가 진행되므로 기타 멋진 기능과 서비스에 대한 소식을 받아보세요."
-  },
-  "hub_supporter_feature_more_title": {
-    "message": "더 많은 기능이 추가될 예정입니다!"
-  },
-  "hub_supporter_feature_stats_description": {
-    "message": "동향을 파악하고, Ghostery가 귀하의 브라우징에 영향을 미치는 방법을 알아보기 위해서 그래프 및 통계가 구비된 역사적 차단 결과를 열람하세요."
-  },
-  "hub_supporter_feature_support_description": {
-    "message": "도움이 필요하십니까?브로큰 페이지를 찾으십니까?Plus 계정으로 로그인한 경우에만 이용 가능한 우선 지원 데스크 서비스를 통해서 신속하게 질문에 대한 답변과 문제 해결을 제공받으세요."
-  },
-  "hub_supporter_feature_theme_description": {
-    "message": "Ghostery 컬러를 사용자 지정하여 새로운 비주얼을 경험해보세요! 폭넓은 요청에 따라 선보입니다. 특별한 Dark Blue 테마를 확인하고 앞으로 소개될 다양한 테마도 기대해주세요."
-  },
-  "hub_supporter_header_description": {
-    "message": "기본 개인정보 보호 이상을 경험하고 모든 제품 기능을 활용하세요!"
-  },
-  "hub_supporter_header_title": {
-    "message": "Ghostery Plus로 업그레이드"
-  },
-  "hub_supporter_manifesto": {
-    "message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
-  },
-  "hub_supporter_page_title": {
-    "message": "Ghostery 허브 - Ghostery Plus"
-  },
-  "hub_supporter_perk_analytics_description": {
-    "message": "실시간 트래커 지능형 대시보드인 Ghostery Insights 이용"
-  },
-  "hub_supporter_perk_analytics_title": {
-    "message": "고급 트래커 분석"
-  },
-  "hub_supporter_perk_dawn_and_glow_description": {
-    "message": "내장 검색 엔진이 탑재된 강력한 보안 브라우저 Ghostery Dawn 및 Glow 다운로드"
-  },
-  "hub_supporter_perk_dawn_and_glow_title": {
-    "message": "보안 브라우저 및 검색 기능"
-  },
-  "hub_supporter_perk_themes_and_more_description": {
-    "message": "Ghostery 컬러 사용자 지정 - Leaf, Palm, Dark Blue 테마를 사용해보세요!"
-  },
-  "hub_supporter_perk_themes_and_more_title": {
-    "message": "맞춤 테마 등"
-  },
-  "hub_supporter_perk_themes_description": {
-    "message": "Ghostery 컬러 사용자 지정 - Dark Blue 테마를 사용해보세요!"
-  },
-  "hub_supporter_price": {
-    "message": "매달 $SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
-    "placeholders": {
-      "sup_start": {
-        "content": "<sup>"
-      },
-      "sup_end": {
-        "content": "</sup>"
-      },
-      "span_start": {
-        "content": "<span>"
-      },
-      "span_end": {
-        "content": "</span>"
-      }
-    }
-  },
-  "hub_tutorial_antisuite_antitracking_description": {
-    "message": "웹사이트에서 사용자 정보를 식별할 수 있는 데이터 포인트 삭제"
-  },
-  "hub_tutorial_antisuite_title": {
-    "message": "향상된 개인정보 보호 기능으로 추가 보호와 자동 관리 서비스를 이용하세요:"
-  },
-  "hub_tutorial_blocking_allow": {
-    "message": " 현재 사이트에서 항상 트래커를 허용합니다."
-  },
-  "hub_tutorial_blocking_block": {
-    "message": " 현재 사이트에서 항상 트래커를 차단합니다."
-  },
-  "hub_tutorial_blocking_block_always": {
-    "message": " 모든 사이트에서 항상 트래커를 차단합니다."
-  },
-  "hub_tutorial_blocking_tagline": {
-    "message": "리스트에 있는 트래커를 차단하거나 차단 해제하여 개인정보와 브라우징 경험을 관리하세요."
-  },
-  "hub_tutorial_blocking_title": {
-    "message": "차단할 트래커와 차단 방식을 선택하세요."
-  },
-  "hub_tutorial_detailed_expanded_view": {
-    "message": "확대하여 자세히 보기 "
-  },
-  "hub_tutorial_exit_flow": {
-    "message": "튜토리얼 종료"
-  },
-  "hub_tutorial_layout_tagline": {
-    "message": "고스터리 브라우저 디스플레이를 간단한 보기 또는 세부 보기 중에 선택하여 토글합니다."
-  },
-  "hub_tutorial_layout_title": {
-    "message": "간편 보기 또는 세부 보기 기능"
-  },
-  "hub_tutorial_page_title": {
-    "message": "Ghostery 허브 - 튜토리얼"
-  },
-  "hub_tutorial_page_title_anti_suite": {
-    "message": "Ghostery 허브 - 튜토리얼 추가 기능"
-  },
-  "hub_tutorial_page_title_blocking": {
-    "message": "Ghostery 허브 - 튜토리얼 차단"
-  },
-  "hub_tutorial_page_title_layout": {
-    "message": "Ghostery 허브 - 튜토리얼 레이아웃"
-  },
-  "hub_tutorial_page_title_trackerlist": {
-    "message": "Ghostery 허브 - 튜토리얼 트래커"
-  },
-  "hub_tutorial_page_title_trust": {
-    "message": "Ghostery 허브 - 튜토리얼 신뢰 및 차단 사이트"
-  },
-  "hub_tutorial_page_title_video": {
-    "message": "Ghostery 허브 - 튜토리얼 개요"
-  },
-  "hub_tutorial_trackerlist_tagline": {
-    "message": "고스터리는 여러분이 방문하시는 각 사이트에 대한 트래커 리스트를 제공하여 어떤 기업이 여러분을 트래킹하는지 안내하고 있습니다."
-  },
-  "hub_tutorial_trackerlist_title": {
-    "message": "트래커 리스리스트"
-  },
-  "hub_tutorial_trust_restrict_site": {
-    "message": "이 사이트에서 항상 트래커를 차단합니다."
-  },
-  "hub_tutorial_trust_tagline": {
-    "message": "한 번의 클릭으로 신뢰할 수 있는 사이트 또는 접근 제한 웹사이트로 지정하십시오."
-  },
-  "hub_tutorial_trust_title": {
-    "message": "신뢰 사이트 및 제한 사이트"
-  },
-  "hub_tutorial_trust_trust_site": {
-    "message": "이 사이트에서 항상 트래커를 허용합니다."
-  },
-  "hub_tutorial_video_tagline": {
-    "message": "트래커와 광고를 차단하고, 개인정보를 보호하고, 페이지 로딩 속도를 올리세요."
-  },
-  "hub_tutorial_video_title": {
-    "message": "고스터리의 기능과 혜택"
-  },
-  "hub_upgrade_additional_protection": {
-    "message": "추가 보호"
-  },
-  "hub_upgrade_advanced_device_protection": {
-    "message": "고급형 장치 보호"
-  },
-  "hub_upgrade_already_protected": {
-    "message": "이미 보호되고 있음"
-  },
-  "hub_upgrade_basic_browser_protection": {
-    "message": "기본 브라우저 보호"
-  },
-  "hub_upgrade_basic_protection": {
-    "message": "기본 보호"
-  },
-  "hub_upgrade_browser_ad_blocking": {
-    "message": "브라우저 광고 차단"
-  },
-  "hub_upgrade_browser_tracker_blocking": {
-    "message": "브라우저 트래커 차단"
-  },
-  "hub_upgrade_custom_blocking_preferences": {
-    "message": "차단 정보 맞춤 설정"
-  },
-  "hub_upgrade_extension_themes": {
-    "message": "확장 테마"
-  },
-  "hub_upgrade_historical_extension_stats": {
-    "message": "확장 내역 통계"
-  },
-  "hub_upgrade_maximum_protection": {
-    "message": "최대한의 보호"
-  },
-  "hub_upgrade_monthly": {
-    "message": "매월"
-  },
-  "hub_upgrade_page_title": {
-    "message": "Ghostery Hub - 플랜 업그레이드"
-  },
-  "hub_upgrade_plan_free": {
-    "message": "무료"
-  },
-  "hub_upgrade_protection_plan": {
-    "message": "업그레이드"
-  },
-  "hub_upgrade_scroll_down": {
-    "message": "기능 전체 목록 보기"
-  },
-  "hub_upgrade_to": {
-    "message": "다음으로 업그레이드"
-  },
-  "hub_upgrade_yearly": {
-    "message": "매년"
-  },
-  "hub_upgrade_your": {
-    "message": "보호 서비스"
+  "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
+    "message": "I agree to send non-personal information to <a href=\"$${0}\">WhoTracks.Me</a> and I accept the Ghostery <a href=\"$${1}\">Privacy Policy</a>"
   },
   "invalid_email_forgot": {
     "message": "죄송하지만 실제 이메일 주소를 입력해야 합니다."
   },
   "invalid_email_login": {
     "message": "죄송하지만 실제 이메일 주소를 입력해야 합니다."
+  },
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
+    "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send tracker information to whotracks.me. The tracker input enables Ghostery to provide real-time intel on trackers and protection to the entire Ghostery user community."
   },
   "last_name_field_label": {
     "message": "성(옵션):"
@@ -1241,18 +828,7 @@
     "message": "이메일 "
   },
   "license_footer": {
-    "message": "Ghostery$COPY$;는 Cliqz 자회사입니다. $LINK_START$Cliqz$LINK_END$에 대해 자세히 알아보기. $COPY$Cliqz International GmbH는 Cliqz GmbH의 전액출자 자회사입니다. All rights reserved.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery GmbH. All rights reserved."
   },
   "license_generic": {
     "message": "표준 라이선스 텍스트 "
@@ -1287,6 +863,9 @@
   "miscellaneous": {
     "message": "기타",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "more_information_on_@_0__": {
+    "message": "More information on $${0}."
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
@@ -1687,6 +1266,9 @@
   "priority_support": {
     "message": "우선 지원"
   },
+  "privacy_policy": {
+    "message": "privacy policy"
+  },
   "privacy_protection": {
     "message": "이 사이트에서 개인 정보 보호"
   },
@@ -1837,9 +1419,6 @@
   },
   "settings_highlight_trackers_tooltip": {
     "message": "경우에 따라 특정 트래커를 차단했을 때 소셜 미디어 공유, 댓글, 비디오 플레이어와 같은 기능이 작동하지 않을 수 있습니다. 차단된 기능 중 하나를 사용하려면, 다음 페이지에서 이 아이콘을 클릭하십시오."
-  },
-  "settings_human_web_tooltip": {
-    "message": "현재 고스터리는 보다 맞춤화된 인터넷 경험을 구축하기 위해 크라우드 정보를 이용하는 혁신적인 기술인 Human Web을 자동으로 실행하고 있습습니다. "
   },
   "settings_import_dialog_error": {
     "message": "현재 페이지가 예약된 브라우저 페이지 중 하나이므로 Ghostery에서 찾아보기 대화 상자를 표시할 수 없습니다. 다른 페이지로 이동하여 다시 시도해 보십시오."
@@ -2016,6 +1595,9 @@
   "site_analytics": {
     "message": "사이트 분석 ",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "skip": {
+    "message": "건너뛰기"
   },
   "smart_blocking": {
     "message": "스마트 브라우징"
@@ -2194,6 +1776,9 @@
   "system_wide_tracker_and_ad_blocking": {
     "message": "시스템 차원 트래커 및 광고 차단"
   },
+  "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
+    "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
+  },
   "too_many_failed_logins_text": {
     "message": "로그인 실패 횟수가 너무 많습니다. 1시간 후에 다시 시도하십시오."
   },
@@ -2242,6 +1827,9 @@
   "tracker_details": {
     "message": "트래커 세부 정보"
   },
+  "trackers": {
+    "message": "트래커 "
+  },
   "trackers_blocked": {
     "message": "차단된 트래커:"
   },
@@ -2255,7 +1843,6 @@
     "message": "Ghostery Midnight를 사용해 보세요"
   },
   "unblocked": {
-    "description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
     "message": "차단되지 않음 "
   },
   "unidentified": {
@@ -2268,6 +1855,12 @@
     "message": "알 수 없음 ",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "welcome_to": {
+    "message": "Welcome to"
+  },
+  "what_is_whotracks_me_": {
+    "message": "What is whotracks.me?"
+  },
   "white_black_list_error_invalid_url": {
     "message": "유효한 URL 또는 와일드카드를 입력하세요."
   },
@@ -2277,6 +1870,21 @@
   "whitelist_error_duplicate_url": {
     "description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
     "message": "이 사이트는 이미 신뢰할 수 있는 사이트에 등록되어 있습니다."
+  },
+  "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.me, operated by Ghostery, is the most comprehensive global resource on trackers, bringing transparency to web tracking."
+  },
+  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
+    "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+  },
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
+    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
+  },
+  "you_chose_to_skip_enabling_ghostery_": {
+    "message": "You chose to skip enabling Ghostery!"
+  },
+  "you_re_all_set__ghosterian_": {
+    "message": "You're all set, Ghosterian!"
   },
   "your_email_do_not_match": {
     "message": "이메일이 일치하지 않습니다."

@@ -54,7 +54,7 @@ export const renderKnownTrackerButtons = (
 );
 
 export const renderUnidentifiedTrackerButtons = (
-	handleCliqzTrackerWhitelist, whitelisted, siteRestricted, type, contextType
+	handleCommonTrackerWhitelist, whitelisted, siteRestricted, type, contextType
 ) => {
 	const svgContainerClasses = ClassNames('unidentified-svg-container', {
 		whitelisted: whitelisted && !siteRestricted,
@@ -77,7 +77,7 @@ export const renderUnidentifiedTrackerButtons = (
 		<div className={svgContainerClasses}>
 			{/* USE INLINE SVG FOR TRUST CIRCLE TO CHANGE COLORS WITH CSS */}
 			<span className="t-tooltip-up-left" data-g-tooltip={t('panel_tracker_trust_tooltip')}>
-				<svg className="cliqz-tracker-trust" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
+				<svg className="common-tracker-trust" onClick={handleCommonTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 						<path className="border" stroke="#96C761" d="M-.5-.5h18.3v18.217H-.5z" />
 						<path className="background" stroke="#FFF" fill="#96C761" d="M.5.5h16.3v16.217H.5z" />
@@ -90,7 +90,7 @@ export const renderUnidentifiedTrackerButtons = (
 
 			{/* USE INLINE SVG FOR ANTI-TRACKING SHIELD TO CHANGE COLORS WITH CSS */}
 			<span className="t-tooltip-up-left" data-g-tooltip={type === 'antiTracking' ? t('panel_tracker_scrub_tooltip') : t('panel_tracker_restrict_tooltip')}>
-				<svg className="cliqz-tracker-scrub" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
+				<svg className="common-tracker-scrub" onClick={handleCommonTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 						<path className={borderClassNames} d="M-.5-.5h18.3v18.217H-.5z" />
 						<path className={backgroundClassNames} d="M.5.5h16.3v16.217H.5z" />

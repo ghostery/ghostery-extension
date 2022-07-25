@@ -274,7 +274,7 @@ class BlockingHeader extends React.Component {
 	*/
 	render() {
 		const {
-			globalBlocking, categories, expandAll, filterText
+			globalBlocking, categories, expandAll, filterText, setup_complete,
 		} = this.props;
 		const {
 			allBlocked, filtered, searchValue, filterMenuOpened
@@ -290,11 +290,13 @@ class BlockingHeader extends React.Component {
 						<div className="title">
 							{ globalBlockingBool ? t('settings_global_blocking') : t('blocking_trackers') }
 							{' '}
-							<Link to="/settings/globalblocking" className="gear-icon" />
+							{setup_complete && (
+								<Link to="/settings/globalblocking" className="gear-icon" />
+							)}
 						</div>
 					</div>
 					<div className="shrink columns align-self-justify text-right">
-						{categories && categories.length > 0 && (
+						{setup_complete && categories && categories.length > 0 && (
 							<div
 								className="block-text"
 								onClick={this.clickBlockAll}

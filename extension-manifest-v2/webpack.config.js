@@ -22,9 +22,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
 const SHARED_COMP_DIR = path.resolve(__dirname, 'app/shared-components');
+const ONBOARDING_DIR = path.resolve(__dirname, 'app/onboarding');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');
 const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
-const HUB_DIR = path.resolve(__dirname, 'app/hub');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
@@ -40,6 +40,7 @@ module.exports = {
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
 		alias: {
 			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
+			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
 		},
 	},
@@ -53,12 +54,12 @@ module.exports = {
 		checkout_pages: [`${CONTENT_SCRIPTS_DIR}/checkout_pages.js`],
 		click_to_play: [`${CONTENT_SCRIPTS_DIR}/click_to_play.js`],
 		content_script_bundle: [`${CONTENT_SCRIPTS_DIR}/content_script_bundle.js`],
-		hub_react: [`${HUB_DIR}/index.jsx`],
 		licenses_react: [`${LICENSES_DIR}/Licenses.jsx`, `${LICENSES_DIR}/License.jsx`],
 		notifications: [`${CONTENT_SCRIPTS_DIR}/notifications.js`],
 		page_performance: [`${CONTENT_SCRIPTS_DIR}/page_performance.js`],
 		panel_android_react: [`${PANEL_ANDROID_DIR}/index.jsx`],
 		panel_react: [`${PANEL_DIR}/index.jsx`],
+		onboarding: [`${ONBOARDING_DIR}/index.js`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
 		trackers_preview_popup: [`${SRC_DIR}/trackers-preview/popup.js`],
@@ -66,9 +67,8 @@ module.exports = {
 
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
-		foundation_hub: [`${SASS_DIR}/vendor/foundation_hub.scss`],
-		hub: [`${SASS_DIR}/hub.scss`],
 		licenses: [`${SASS_DIR}/licenses.scss`],
+		onboarding_styles: [`${SASS_DIR}/onboarding.scss`],
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
@@ -97,8 +97,6 @@ module.exports = {
 		new WebpackShellPlugin({
 			onBuildExit: [
 				`${RM} ./dist/foundation.js`,
-				`${RM} ./dist/foundation_hub.js`,
-				`${RM} ./dist/hub.js`,
 				`${RM} ./dist/licenses.js`,
 				`${RM} ./dist/panel.js`,
 				`${RM} ./dist/panel_android.js`,
@@ -128,7 +126,7 @@ module.exports = {
 				}
 			}, {
 				test: /\.(js|jsx)$/,
-				include: [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, HUB_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
+				include: [SHARED_COMP_DIR, ONBOARDING_DIR, PANEL_ANDROID_DIR, PANEL_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
 				exclude: /node_modules/,
 				use: [
 					{
@@ -159,7 +157,7 @@ module.exports = {
 					{
 						loader: 'babel-loader',
 						options: {
-							envName: 'cliqz',
+							envName: 'common',
 						}
 					}
 				]
@@ -191,7 +189,7 @@ module.exports = {
 				use: {
 					loader: 'url-loader',
 					options: {
-						limit: 100000
+						limit: 200000
 					}
 				}
 			}

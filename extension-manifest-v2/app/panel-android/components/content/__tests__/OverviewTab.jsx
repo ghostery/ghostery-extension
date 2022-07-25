@@ -40,7 +40,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				siteNotScanned: true,
 				pageUrl: '',
 			};
-			const cliqzModuleData = {
+			const commonModuleData = {
 				adBlock: { trackerCount: 0 },
 				antiTracking: { trackerCount: 0 },
 			};
@@ -50,7 +50,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 					panel={panel}
 					summary={summary}
 					blocking={blocking}
-					cliqzModuleData={cliqzModuleData}
+					commonModuleData={commonModuleData}
 					clickAccount={() => {}}
 					clickSettings={() => {}}
 					callGlobalAction={() => {}}
@@ -79,7 +79,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				siteNotScanned: false,
 				pageUrl: 'http://example.com',
 			};
-			const cliqzModuleData = {
+			const commonModuleData = {
 				adBlock: { trackerCount: 8 },
 				antiTracking: { trackerCount: 13 },
 			};
@@ -89,7 +89,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 					panel={panel}
 					summary={summary}
 					blocking={blocking}
-					cliqzModuleData={cliqzModuleData}
+					commonModuleData={commonModuleData}
 					clickAccount={() => {}}
 					clickSettings={() => {}}
 					callGlobalAction={() => {}}
@@ -120,7 +120,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				siteNotScanned: true,
 				pageUrl: '',
 			};
-			const cliqzModuleData = {
+			const commonModuleData = {
 				adBlock: { trackerCount: 0 },
 				antiTracking: { trackerCount: 0 },
 			};
@@ -133,7 +133,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 					panel={panel}
 					summary={summary}
 					blocking={blocking}
-					cliqzModuleData={cliqzModuleData}
+					commonModuleData={commonModuleData}
 					clickAccount={clickAccount}
 					clickSettings={clickSettings}
 					callGlobalAction={() => {}}

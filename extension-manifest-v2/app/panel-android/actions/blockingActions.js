@@ -68,10 +68,10 @@ function calculateDelta(oldState, newState) {
 	return 0;
 }
 
-// Modified version of _updateCliqzModuleWhitelist from app/panel/reducers/blocking.js
+// Modified version of _updateCommonModuleWhitelist from app/panel/reducers/blocking.js
 export function anonymizeSiteTracker({ actionData, state }) {
-	const updatedcliqzModuleData = JSON.parse(JSON.stringify(state.cliqzModuleData));
-	const { antiTracking, adBlock } = state.cliqzModuleData;
+	const updatedcommonModuleData = JSON.parse(JSON.stringify(state.commonModuleData));
+	const { antiTracking, adBlock } = state.commonModuleData;
 	const whitelistedUrls = { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls };
 	const { unidentifiedTracker } = actionData;
 	const { pageHost } = state.summary;
@@ -115,20 +115,20 @@ export function anonymizeSiteTracker({ actionData, state }) {
 	}
 
 	// Update Ad Blocking trackers
-	updatedcliqzModuleData.adBlock.unidentifiedTrackers.forEach((trackerEl) => {
+	updatedcommonModuleData.adBlock.unidentifiedTrackers.forEach((trackerEl) => {
 		if (trackerEl.name === unidentifiedTracker.name) {
 			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});
 	// Update Anti-Tracking trackers
-	updatedcliqzModuleData.antiTracking.unidentifiedTrackers.forEach((trackerEl) => {
+	updatedcommonModuleData.antiTracking.unidentifiedTrackers.forEach((trackerEl) => {
 		if (trackerEl.name === unidentifiedTracker.name) {
 			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});
 	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
 	return {
-		cliqzModuleData: updatedcliqzModuleData,
+		commonModuleData: updatedcommonModuleData,
 	};
 }
 

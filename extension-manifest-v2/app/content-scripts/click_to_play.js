@@ -150,10 +150,6 @@ const Click2PlayContentScript = (function(win, doc) {
 	 */
 	const _initialize = function() {
 		onMessage.addListener((request, sender, sendResponse) => {
-			if (request.source === 'cliqz-content-script') {
-				return false;
-			}
-
 			const { name, message } = request;
 			log('click_to_play.js received message', name);
 

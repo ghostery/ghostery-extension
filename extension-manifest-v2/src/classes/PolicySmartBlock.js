@@ -102,7 +102,7 @@ class PolicySmartBlock {
 	 * @param  {string | boolean} 	appId 	tracker id
 	 * @return {boolean}
 	 */
-	static shouldCheck(tabId, appId = false) {
+	static shouldCheck() {
 		return false;
 	}
 

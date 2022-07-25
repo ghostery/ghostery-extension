@@ -19,12 +19,11 @@ import {
 	DonutGraph,
 	GhosteryFeature,
 	PauseButton,
-	CliqzFeature
+	CommonFeature
 } from '../../../panel/components/BuildingBlocks';
 import globals from '../../../../src/classes/Globals';
 
 const {
-	IS_CLIQZ,
 	WHITELISTED, BLACKLISTED
 } = globals;
 
@@ -52,17 +51,17 @@ class OverviewTab extends React.Component {
 	}
 
 	get adBlockBlocked() {
-		const { panel, cliqzModuleData } = this.props;
+		const { panel, commonModuleData } = this.props;
 		const { enable_ad_block } = panel;
-		const { adBlock } = cliqzModuleData;
+		const { adBlock } = commonModuleData;
 
 		return (enable_ad_block && adBlock.trackerCount) || 0;
 	}
 
 	get antiTrackUnsafe() {
-		const { panel, cliqzModuleData } = this.props;
+		const { panel, commonModuleData } = this.props;
 		const { enable_anti_tracking } = panel;
-		const { antiTracking } = cliqzModuleData;
+		const { antiTracking } = commonModuleData;
 
 		return (enable_anti_tracking && antiTracking.trackerCount) || 0;
 	}
@@ -156,11 +155,11 @@ class OverviewTab extends React.Component {
 		});
 	}
 
-	handleCliqzFeatureClick = ({ feature, status }) => {
+	handleCommonFeatureClick = ({ feature, status }) => {
 		const { callGlobalAction } = this.props;
 
 		callGlobalAction({
-			actionName: 'cliqzFeatureToggle',
+			actionName: 'commonFeatureToggle',
 			actionData: {
 				currentState: status,
 				type: feature,
@@ -206,11 +205,11 @@ class OverviewTab extends React.Component {
 	_renderDonut() {
 		const {
 			blocking,
-			cliqzModuleData,
+			commonModuleData,
 			summary,
 		} = this.props;
 		const { categories } = blocking;
-		const { adBlock, antiTracking } = cliqzModuleData;
+		const { adBlock, antiTracking } = commonModuleData;
 		const { sitePolicy, paused_blocking } = summary;
 
 		return (
@@ -311,7 +310,7 @@ class OverviewTab extends React.Component {
 		);
 	}
 
-	_renderCliqzFeatures() {
+	_renderCommonFeatures() {
 		const { panel, summary } = this.props;
 		const { enable_anti_tracking, enable_ad_block, enable_smart_block } = panel;
 		const { paused_blocking, sitePolicy } = summary;
@@ -319,30 +318,30 @@ class OverviewTab extends React.Component {
 
 		return (
 			<div>
-				<div className="OverviewTab__CliqzFeature">
-					<CliqzFeature
-						clickButton={this.handleCliqzFeatureClick}
+				<div className="OverviewTab__CommonFeature">
+					<CommonFeature
+						clickButton={this.handleCommonFeatureClick}
 						type="anti_track"
 						active={enable_anti_tracking}
-						cliqzInactive={paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ}
+						commonInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
 				</div>
-				<div className="OverviewTab__CliqzFeature">
-					<CliqzFeature
-						clickButton={this.handleCliqzFeatureClick}
+				<div className="OverviewTab__CommonFeature">
+					<CommonFeature
+						clickButton={this.handleCommonFeatureClick}
 						type="ad_block"
 						active={enable_ad_block}
-						cliqzInactive={paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ}
+						commonInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
 				</div>
-				<div className="OverviewTab__CliqzFeature">
-					<CliqzFeature
-						clickButton={this.handleCliqzFeatureClick}
+				<div className="OverviewTab__CommonFeature">
+					<CommonFeature
+						clickButton={this.handleCommonFeatureClick}
 						type="smart_block"
 						active={enable_smart_block}
-						cliqzInactive={paused_blocking || sitePolicy || disableBlocking}
+						commonInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
 				</div>
@@ -380,8 +379,8 @@ class OverviewTab extends React.Component {
 					{this._renderGhosteryFeatures()}
 				</div>
 
-				<div className="OverviewTab__CliqzFeaturesContainer">
-					{this._renderCliqzFeatures()}
+				<div className="OverviewTab__CommonFeaturesContainer">
+					{this._renderCommonFeatures()}
 				</div>
 			</div>
 		);
@@ -415,7 +414,7 @@ OverviewTab.propTypes = {
 		siteNotScanned: PropTypes.bool.isRequired,
 		pageUrl: PropTypes.string.isRequired,
 	}).isRequired,
-	cliqzModuleData: PropTypes.shape({
+	commonModuleData: PropTypes.shape({
 		adBlock: PropTypes.shape({
 			trackerCount: PropTypes.number.isRequired,
 		}).isRequired,

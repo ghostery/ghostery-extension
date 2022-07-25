@@ -12,7 +12,7 @@
  */
 
 import {
-	updateSitePolicy, handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle
+	updateSitePolicy, handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, commonFeatureToggle
 } from './summaryActions';
 import {
 	anonymizeSiteTracker, trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
@@ -38,8 +38,8 @@ export default function handleAllActions({ actionName, actionData, state }) {
 			updated = handlePauseButtonClick({ actionData, state });
 			break;
 
-		case 'cliqzFeatureToggle':
-			updated = cliqzFeatureToggle({ actionData });
+		case 'commonFeatureToggle':
+			updated = commonFeatureToggle({ actionData });
 			break;
 
 		case 'trustRestrictBlockSiteTracker':
