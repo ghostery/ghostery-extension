@@ -3,6 +3,7 @@
 exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-renderer GeneralSettings is rendered correctly with falsy props 1`] = `
 <div
   className="s-tabs-panel"
+  id="general-settings-panel"
 >
   <div
     className="row"
@@ -242,6 +243,36 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           </div>
         </div>
       </div>
+      <div
+        className="s-option-group"
+      >
+        <div
+          className="s-square-checkbox"
+        >
+          <input
+            id="settings-show-redirect-tracking-dialogs"
+            name="show_redirect_tracking_dialogs"
+            onClick={[Function]}
+            type="checkbox"
+          />
+          <label
+            htmlFor="settings-show-redirect-tracking-dialogs"
+          >
+            <span>
+              settings_show_redirect_tracking_dialogs
+            </span>
+          </label>
+          <div
+            className="s-tooltip-up"
+            data-g-tooltip="settings_show_redirect_tracking_dialogs_tooltip"
+          >
+            <img
+              className="s-question"
+              src="../../app/images/panel/icon-information-tooltip.svg"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -250,6 +281,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
 exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-renderer GeneralSettings is rendered correctly with truthy props 1`] = `
 <div
   className="s-tabs-panel"
+  id="general-settings-panel"
 >
   <div
     className="row"
@@ -482,6 +514,36 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           <div
             className="s-tooltip-up"
             data-g-tooltip="settings_allow_trackers_tooltip"
+          >
+            <img
+              className="s-question"
+              src="../../app/images/panel/icon-information-tooltip.svg"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="s-option-group"
+      >
+        <div
+          className="s-square-checkbox"
+        >
+          <input
+            id="settings-show-redirect-tracking-dialogs"
+            name="show_redirect_tracking_dialogs"
+            onClick={[Function]}
+            type="checkbox"
+          />
+          <label
+            htmlFor="settings-show-redirect-tracking-dialogs"
+          >
+            <span>
+              settings_show_redirect_tracking_dialogs
+            </span>
+          </label>
+          <div
+            className="s-tooltip-up"
+            data-g-tooltip="settings_show_redirect_tracking_dialogs_tooltip"
           >
             <img
               className="s-question"

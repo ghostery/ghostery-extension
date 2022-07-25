@@ -28,7 +28,6 @@
 	padding: 0;
 	text-size-adjust: 100%;
 	box-sizing: content-box;
-	overflow: hidden;
 
 	@import './partials/_settings_menu';
 
@@ -288,6 +287,11 @@
 			height: 1px;
 		}
 	}
+
+	#general-settings-panel {
+	  overflow-y: scroll;
+	}
+
 	// TRUST / RESTRICT
 	$itemWrapper: 0 13px 0 13px;
 	$itemHeight: 32px;

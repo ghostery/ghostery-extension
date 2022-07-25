@@ -473,7 +473,8 @@ class PanelData {
 			enable_click2play, enable_click2play_social, enable_human_web,
 			enable_metrics, enable_abtests, hide_alert_trusted, ignore_first_party, notify_library_updates,
 			notify_promotions, notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
-			show_cmp, show_tracker_urls, toggle_individual_trackers, enable_wtm_serp_report
+			show_cmp, show_tracker_urls, toggle_individual_trackers, enable_wtm_serp_report,
+			show_redirect_tracking_dialogs
 		} = userSettingsSource;
 
 		return {
@@ -496,6 +497,7 @@ class PanelData {
 			show_alert,
 			show_badge,
 			show_cmp,
+			show_redirect_tracking_dialogs,
 			show_tracker_urls,
 			toggle_individual_trackers
 		};
