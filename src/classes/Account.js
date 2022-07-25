@@ -27,7 +27,7 @@ import { cookiesGet, setAllLoginCookies, cookiesRemove } from '../utils/cookies'
 
 const api = new Api();
 const {
-	COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
+	COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY
 } = globals;
 
 const SYNC_SET = new Set(SYNC_ARRAY);
@@ -150,6 +150,14 @@ class Account {
 			.then((res) => {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
 				const { settings_json } = settings;
+
+				// if not onboarded do not let sync toggle the ONBOARDED_FEATURES features
+				if (!conf.setup_complete) {
+					globals.ONBOARDED_FEATURES.forEach((confName) => {
+						delete settings_json[confName];
+					});
+				}
+
 				// @TODO setConfUserSettings settings.settingsJson
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);
@@ -494,11 +502,6 @@ class Account {
 	_setConfUserSettings = (settings) => {
 		const returnedSettings = { ...settings };
 		log('SET USER SETTINGS', returnedSettings);
-		if (IS_CLIQZ) {
-			returnedSettings.enable_human_web = false;
-			returnedSettings.enable_ad_block = false;
-			returnedSettings.enable_anti_tracking = false;
-		}
 		SYNC_SET.forEach((key) => {
 			if (returnedSettings[key] !== undefined &&
 				!isEqual(conf[key], returnedSettings[key])) {

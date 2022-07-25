@@ -167,7 +167,7 @@ export function handlePauseButtonClick({ actionData }) {
 	};
 }
 
-export function cliqzFeatureToggle({ actionData }) {
+export function commonFeatureToggle({ actionData }) {
 	const { currentState, type } = actionData;
 	const key = type;
 

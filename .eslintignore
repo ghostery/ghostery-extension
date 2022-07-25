@@ -11,7 +11,7 @@ app/data-images/
 ## Precompiled
 app/templates/
 build/
-cliqz/
+common/
 dist/
 docs/
 vendor/

@@ -53,6 +53,7 @@ class Trackers extends React.Component {
 			paused_blocking,
 			smartBlockActive,
 			smartBlock,
+			setup_complete,
 		} = this.props;
 		let trackerList;
 		if (globalBlocking) {
@@ -88,6 +89,7 @@ class Trackers extends React.Component {
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
 					isUnidentified={isUnidentified}
+					setup_complete={setup_complete}
 				/>
 			));
 		}

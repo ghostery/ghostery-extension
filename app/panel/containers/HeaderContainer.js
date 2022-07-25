@@ -32,7 +32,8 @@ const mapStateToProps = state => ({
 	is_expanded: state.panel.is_expanded,
 	is_expert: state.panel.is_expert,
 	language: state.panel.language,
-	tab_id: state.panel.tab_id
+	tab_id: state.panel.tab_id,
+	setup_complete: state.panel.setup_complete,
 });
 /**
  * Bind Header component action creators using Redux's bindActionCreators. Pass updated match, location, and history props to the wrapped component.

@@ -28,7 +28,6 @@ import {
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS,
 	SUBSCRIBE_TO_EMAIL_LIST
 } from './AccountConstants';
-import { SET_TOAST } from '../hub/Views/AppView/AppViewConstants';
 import { CLEAR_THEME } from '../panel/constants/constants';
 
 export const getUserSettings = () => dispatch => (
@@ -147,14 +146,6 @@ export const resetPassword = email => dispatch => (
 				dispatch({
 					type: RESET_PASSWORD_FAIL,
 					payload: { errors },
-				});
-				// Hub toast message
-				dispatch({
-					type: SET_TOAST,
-					data: {
-						toastMessage: t('banner_email_not_in_system_message'),
-						toastClass: 'alert',
-					},
 				});
 				return false;
 			}

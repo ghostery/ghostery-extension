@@ -327,8 +327,8 @@ class Blocking extends React.Component {
 			sitePolicy,
 			smartBlock,
 			smartBlockActive,
+			setup_complete,
 		} = this.props;
-
 		const {
 			blockingClasses,
 			disableBlocking
@@ -344,6 +344,7 @@ class Blocking extends React.Component {
 					selected_app_ids={selected_app_ids}
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
+					setup_complete={setup_complete}
 				/>
 				{(disableBlocking && is_expanded) ? (
 					<NotScanned />
@@ -362,6 +363,7 @@ class Blocking extends React.Component {
 								smartBlock={smartBlock}
 								unidentifiedCategory={unidentifiedCategory}
 								enable_anti_tracking={enable_anti_tracking}
+								setup_complete={setup_complete}
 							/>
 						)}
 					</div>

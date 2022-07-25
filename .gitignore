@@ -20,8 +20,8 @@ tools/i18n_results
 tools/leet/*.json
 tools/token_results
 
-## Cliqz
-cliqz/
+## Common
+common/
 
 ## Tools
 tools/amo/*.zip

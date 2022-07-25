@@ -701,9 +701,6 @@ const NotificationsContentScript = (function(win, doc) {
 	 */
 	const _initialize = function() {
 		onMessage.addListener((request, sender, sendResponse) => {
-			if (request.source === 'cliqz-content-script') {
-				return false;
-			}
 			try {
 				const alertMessages = [
 					'showUpgradeAlert',

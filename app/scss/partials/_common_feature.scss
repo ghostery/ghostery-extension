@@ -1,0 +1,142 @@
+/**
+ * Common Features Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+$common-feature--darker-blue: #0093bd;
+$common-feature--blue: #1dafed;
+$common-feature--pale-blue: #a4d4f2;
+$common-feature--gray: #c8c7c2;
+$common-feature--light-gray: #dedede;
+$common-feature--darker-gray: #a4a4a4;
+
+// Default styling for the elements of the CommonFeature BEM block
+.CommonFeature__status {
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	transition: color 0.25s ease-out;
+	transition: background-image 0.25s ease-out;
+}
+
+.CommonFeature__icon {
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	transition: background-image 0.25s ease-out;
+}
+
+.CommonFeature__feature-name {
+	text-align: center;
+	font-size: 11px;
+	line-height: 21px;
+	font-weight: 600;
+	transition: color 0.25s ease-out;
+
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+
+// Modifications to element styling based on size-related block-level modifiers
+// The CommonFeature block is always one of normal, smaller, or condensed
+.CommonFeature--normal,
+.CommonFeature--smaller {
+	.CommonFeature__status { line-height: 28px; }
+	.CommonFeature__icon {
+		height: 50px;
+		width: 50px;
+		background-size: 50px 50px;
+	}
+}
+
+.CommonFeature--smaller {
+	.CommonFeature__feature-name { display: none; }
+}
+
+.CommonFeature--condensed {
+	.CommonFeature__status { line-height: 14px; }
+	.CommonFeature__icon {
+		height: 40px;
+		width: 40px;
+		background-size: 30px 30px;
+	}
+	.CommonFeature__feature-name { display: none; }
+}
+
+.CommonFeature--tiny {
+	.CommonFeature__status {
+		line-height: 17px;
+		font-size: 9px;
+	}
+	.CommonFeature__icon {
+		height: 28px;
+		width: 28px;
+		background-size: 26px 26px;
+	}
+	.CommonFeature__feature-name { display: none; }
+}
+
+// Modifications to element styling based on state-related block-level modifiers
+// The CommonFeature block is always either active or inactive
+// and always either clickable or not-clickable
+.CommonFeature--active.clickable {
+	.CommonFeature__status {
+		color: $common-feature--blue;
+		background: none;
+	}
+	.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--blue); }
+	.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--blue); }
+	.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--blue); }
+	.CommonFeature__feature-name { color: $common-feature--blue; }
+
+	&:hover {
+		.CommonFeature__status { color: $common-feature--darker-blue; }
+		.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--darker-blue); }
+		.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--darker-blue); }
+		.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--darker-blue); }
+		.CommonFeature__feature-name { color: $common-feature--darker-blue; }
+	}
+}
+
+.CommonFeature--active.not-clickable {
+	.CommonFeature__status { color: $common-feature--pale-blue; }
+	.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--pale-blue); }
+	.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--pale-blue); }
+	.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--pale-blue); }
+	.CommonFeature__feature-name { color: $common-feature--pale-blue; }
+
+}
+
+.CommonFeature--inactive.clickable {
+	.CommonFeature__status { color: $common-feature--gray; }
+	.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--gray); }
+	.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--gray); }
+	.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--gray); }
+	.CommonFeature__feature-name { color: $common-feature--gray; }
+
+	&:hover {
+		.CommonFeature__status { color: $common-feature--darker-gray; }
+		.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--darker-gray); }
+		.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--darker-gray); }
+		.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--darker-gray); }
+		.CommonFeature__feature-name { color: $common-feature--darker-gray; }
+	}
+}
+
+.CommonFeature--inactive.not-clickable {
+	.CommonFeature__status { color: $common-feature--light-gray; }
+	.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--light-gray); }
+	.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--light-gray); }
+	.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--light-gray); }
+	.CommonFeature__feature-name { color: $common-feature--light-gray; }
+}

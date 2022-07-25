@@ -49,7 +49,7 @@ class Detail extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { is_expanded, user } = this.props;
+		const { is_expanded, user, setup_complete } = this.props;
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: is_expanded,
 		});
@@ -62,13 +62,16 @@ class Detail extends React.Component {
 		return (
 			<div className="detail-wrap">
 				<div id="content-detail" className={contentDetailsClassNames}>
-					<div className="toggle-bar">
-						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
-					</div>
+					{setup_complete && (
+						<div className="toggle-bar">
+							<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
+						</div>
+					)}
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<DetailMenu
 						plusAccess={user && user.plusAccess}
 						activeTab={activeTab}
+						setup_complete={setup_complete}
 					/>
 				</div>
 			</div>

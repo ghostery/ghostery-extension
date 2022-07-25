@@ -113,20 +113,6 @@ $ tx pull -a
 $ node tools/transifex.js
 ```
 
-## Cliqz Source Code
-Ghostery implements the following open-source products from Cliqz:
-
-[**Human Web**](https://cliqz.com/en/whycliqz/human-web)
-+ [How it works](https://cliqz.com/en/magazine/techblog-human-web-reliably-removes-uids)
-+ [GitHub](https://github.com/ghostery/common/tree/main/modules/human-web)
-
-[**Anti-Tracking**](https://cliqz.com/en/whycliqz/anti-tracking)
-+ [How it works](https://cliqz.com/en/magazine/how-we-at-cliqz-protect-users-from-web-tracking)
-+ [GitHub](https://github.com/ghostery/common/tree/main/modules/antitracking)
-
-[**Ad Blocker**](https://cliqz.com/en/whycliqz/adblocking)
-+ [GitHub](https://github.com/ghostery/common/tree/main/modules/adblocker)
-
 ### Building Common Libraries for Ghostery
 Common libraries are pre-built and included under the `ghostery-common` NPM dependency in [package.json](package.json). To reproduce this build process, download the appropriate Ghostery release from the [ghostery-common](https://github.com/ghostery/common/releases) project.
 

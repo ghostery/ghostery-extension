@@ -44,6 +44,7 @@ class Categories extends React.Component {
 			language,
 			smartBlockActive,
 			smartBlock,
+			setup_complete,
 		} = this.props;
 		const globalBlockingBool = !!globalBlocking;
 		const filteredBool = !!filtered;
@@ -72,9 +73,9 @@ class Categories extends React.Component {
 							description: '',
 							id: unidentifiedTracker.name + unidentifiedTracker.domains[0],
 							shouldShow: true,
-							cliqzAdCount: unidentifiedTracker.ads,
-							cliqzCookieCount: unidentifiedTracker.cookies,
-							cliqzFingerprintCount: unidentifiedTracker.fingerprints,
+							commonAdCount: unidentifiedTracker.ads,
+							commonCookieCount: unidentifiedTracker.cookies,
+							commonFingerprintCount: unidentifiedTracker.fingerprints,
 						};
 					}),
 					whitelistedTotal,
@@ -99,6 +100,7 @@ class Categories extends React.Component {
 					smartBlock={smartBlock}
 					enable_anti_tracking={enable_anti_tracking}
 					isUnidentified={isUnidentified}
+					setup_complete={setup_complete}
 				/>
 			);
 		};

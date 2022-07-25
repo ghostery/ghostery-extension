@@ -12,7 +12,7 @@
  */
 import {
 	UPDATE_PANEL_DATA,
-	TOGGLE_CLIQZ_FEATURE,
+	TOGGLE_COMMON_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
@@ -22,16 +22,16 @@ import {
 import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Update Cliqz Features.
+ * Update Common Features.
  * @return {Object}
  */
-export function toggleCliqzFeature(featureName, isEnabled) {
+export function toggleCommonFeature(featureName, isEnabled) {
 	const data = {
 		featureName,
 		isEnabled,
 	};
 	return {
-		type: TOGGLE_CLIQZ_FEATURE,
+		type: TOGGLE_COMMON_FEATURE,
 		data,
 	};
 }

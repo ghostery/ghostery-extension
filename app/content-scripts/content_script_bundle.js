@@ -1,8 +1,8 @@
 /**
- * Cliqz Content Scripts
+ * Common Content Scripts
  *
- * This file compiles content scripts for Cliqz modules
- * (Ad-Blocker, HPN, Human Web)
+ * This file compiles content scripts for Common modules
+ * (Ad-Blocker, HPN, WhoTracks.Me)
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -15,7 +15,7 @@
  */
 
 /**
- * @namespace CliqzContentScript
+ * @namespace CommonContentScript
  */
 
 import 'ghostery-common/build/gbe/core/content-script';

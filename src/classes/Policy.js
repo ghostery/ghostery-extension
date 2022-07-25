@@ -48,7 +48,7 @@ class Policy {
 		if (Policy.blacklisted(hostUrl)) {
 			return globals.BLACKLISTED;
 		}
-		if (Policy.checkSiteWhitelist(hostUrl) || Policy.checkCliqzModuleWhitelist(hostUrl, trackerUrl)) {
+		if (Policy.checkSiteWhitelist(hostUrl) || Policy.checkCommonModuleWhitelist(hostUrl, trackerUrl)) {
 			return globals.WHITELISTED;
 		}
 		return false;
@@ -86,7 +86,7 @@ class Policy {
 	 * @param  {string} url 		site url
 	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
 	 */
-	static checkCliqzModuleWhitelist(hostUrl, trackerUrl) {
+	static checkCommonModuleWhitelist(hostUrl, trackerUrl) {
 		let isWhitelisted = false;
 		const processedHostUrl = processUrl(hostUrl).host;
 		const processedTrackerUrl = processUrl(trackerUrl).host;

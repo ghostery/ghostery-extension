@@ -16,7 +16,6 @@
 import parser from 'ua-parser-js';
 
 const manifest = chrome.runtime.getManifest();
-const isCliqzBrowser = !!(chrome.runtime.isCliqz);
 
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
@@ -33,7 +32,6 @@ class Globals {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
 		this.BROWSER_INFO_READY = this.buildBrowserInfo();
-		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url) || isCliqzBrowser);
 
 		// flags
 		this.JUST_INSTALLED = false;
@@ -134,6 +132,13 @@ class Globals {
 			'trackers_banner_status',
 		];
 
+		this.ONBOARDED_FEATURES = [
+			'enable_ad_block',
+			'enable_smart_block',
+			'enable_human_web',
+			'enable_anti_tracking',
+		];
+
 		// Relevant for a fresh installation: all trackers from the
 		// following categories will be blocked by default.
 		this.CATEGORIES_BLOCKED_BY_DEFAULT = [
@@ -163,11 +168,7 @@ class Globals {
 		const platform = ua.os?.name?.toLowerCase() || ''; // Make sure that undefined operating systems don't mess with stuff like .includes()
 
 		// Set name and token properties. CMP uses `name` value.  Metrics uses `token`
-		if (this.IS_CLIQZ) {
-			this.BROWSER_INFO.displayName = 'Cliqz';
-			this.BROWSER_INFO.name = 'cliqz';
-			this.BROWSER_INFO.token = 'cl';
-		} else if (browser.includes('edge')) {
+		if (browser.includes('edge')) {
 			this.BROWSER_INFO.displayName = 'Edge';
 			this.BROWSER_INFO.name = 'edge';
 			this.BROWSER_INFO.token = 'ed';

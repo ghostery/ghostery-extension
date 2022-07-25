@@ -15,7 +15,7 @@
  * @namespace  PanelBuildingBlocks
  */
 import ClickOutside from './ClickOutside';
-import CliqzFeature from './CliqzFeature';
+import CommonFeature from './CommonFeature';
 import DonutGraph from './DonutGraph';
 import GhosteryFeature from './GhosteryFeature';
 import NotScanned from './NotScanned';
@@ -25,7 +25,7 @@ import ModalExitButton from './ModalExitButton';
 
 export {
 	ClickOutside,
-	CliqzFeature,
+	CommonFeature,
 	DonutGraph,
 	GhosteryFeature,
 	NotScanned,

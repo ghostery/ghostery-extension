@@ -17,7 +17,6 @@ import Help from '../Help';
 
 jest.mock('../../utils/msg', () => ({
 	openSupportPage: () => {},
-	openHubPage: () => {},
 }));
 
 describe('app/panel/components/Help.jsx', () => {

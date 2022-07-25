@@ -18,9 +18,6 @@
   "confirm_password_colon": {
     "message": "Xác nhận mật khẩu:"
   },
-  "hub_tutorial_blocking_block_always": {
-    "message": "Luôn chặn trình theo dõi trên mọi trang web."
-  },
   "panel_stats_reset_modal_no": {
     "message": "Không, giữ lịch sử"
   },
@@ -53,9 +50,6 @@
   "statistical_report": {
     "message": "Báo cáo thống kê"
   },
-  "hub_create_account_toast_success": {
-    "message": "Tạo tài khoản thành công"
-  },
   "click2play_allow_once_button_tooltip": {
     "description": "Chú giải công cụ xuất hiện trên click2play thay thế cho các nút 'xã hội'.",
     "placeholders": {
@@ -69,9 +63,6 @@
   "detailed_view": {
     "message": "Xem chi tiết"
   },
-  "hub_upgrade_browser_tracker_blocking": {
-    "message": "Chặn trình theo dõi trình duyệt"
-  },
   "click2play_allow_once_tooltip": {
     "description": "Chú giải công cụ xuất hiện trên nút click2play 'cho phép một lần'.",
     "message": "Cho phép một lần và tải lại."
@@ -82,37 +73,11 @@
   "email_colon": {
     "message": "E-mail:"
   },
-  "hub_supporter_price": {
-    "placeholders": {
-      "sup_start": {
-        "content": "<sup>"
-      },
-      "span_end": {
-        "content": "</span>"
-      },
-      "span_start": {
-        "content": "<span>"
-      },
-      "sup_end": {
-        "content": "</sup>"
-      }
-    },
-    "message": "$SUP_START$$$SUP_END$$SPAN_START$1 $SPAN_END$ mỗi tháng"
-  },
   "settings_trusted_restricted_sites": {
     "message": "Tin cậy & Hạn chế"
   },
-  "hub_home_header_info_opted_out": {
-    "message": "Người dùng mới được chọn không tham gia vào Human Web theo mặc định. Bạn có thể chọn tham gia tính năng được đề xuất này trong thiết lập tùy chỉnh hoặc trong tiện ích mở rộng."
-  },
-  "hub_upgrade_page_title": {
-    "message": "Ghostery Hub - Kế hoạch nâng cấp"
-  },
   "android_restrict": {
     "message": "Hạn chế"
-  },
-  "hub_supporter_perk_themes_description": {
-    "message": "Tùy chỉnh màu sắc của Ghostery - hãy thử chủ đề Màu xanh đậm của chúng tôi!"
   },
   "license_email": {
     "message": "E-mail"
@@ -144,9 +109,6 @@
   "tooltip_anti_track_on": {
     "message": "Điểm dữ liệu cá nhân được ẩn danh."
   },
-  "hub_side_navigation_tutorial": {
-    "message": "Thực hiện một hướng dẫn"
-  },
   "subscription_plan": {
     "message": "Kế hoạch"
   },
@@ -156,9 +118,6 @@
   },
   "panel_stats_trackers_seen": {
     "message": "Người theo dõi đã nhìn thấy"
-  },
-  "hub_home_header_tagline_2": {
-    "message": "Bắt đầu duyệt!"
   },
   "click2play_blocked": {
     "placeholders": {
@@ -223,17 +182,6 @@
     "message": "Trang web không còn bị hạn chế."
   },
   "license_footer": {
-    "placeholders": {
-      "copy": {
-        "content": "©"
-      },
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      }
-    },
     "message": "Ghostery $COPY$ là một công ty của Cliqz. Tìm hiểu thêm về $LINK_START$ Cliqz $LINK_END$. $COPY$ Cliqz International GmbH, một công ty con thuộc sở hữu hoàn toàn của Cliqz GmbH. Đã đăng ký Bản quyền."
   },
   "account_creation_privacy_statement": {
@@ -262,9 +210,6 @@
   "android_anonymize": {
     "message": "Giấu danh tính"
   },
-  "hub_tutorial_blocking_allow": {
-    "message": "Luôn cho phép trình theo dõi trên trang web hiện tại."
-  },
   "none": {
     "message": "Không có",
     "description": "Được sử dụng để nói rằng mục này không thuộc bất kỳ nhóm nào, như trong \"Nhóm: Không có\" (trái ngược với \"Nhóm: Nhóm A, Nhóm B, Nhóm C\")."
@@ -290,23 +235,11 @@
   "support_ghostery_and_try_plus_instead": {
     "message": "Hỗ trợ Ghostery và thử Plus thay thế"
   },
-  "hub_tutorial_exit_flow": {
-    "message": "Hướng dẫn thoát"
-  },
   "subscription_resubscribe": {
     "message": "Đăng ký lại"
   },
-  "hub_tutorial_blocking_tagline": {
-    "message": "Kiểm soát quyền riêng tư và trải nghiệm duyệt web của bạn bằng cách chặn hoặc bỏ chặn trình theo dõi trong danh sách."
-  },
   "no_such_email_password_combo": {
     "message": "Có vẻ như chúng tôi không thể tìm thấy tổ hợp email và mật khẩu này. Hãy thử một lần nữa."
-  },
-  "hub_setup_feature_products_button": {
-    "message": "Vâng, làm ơn!"
-  },
-  "hub_home_header_text": {
-    "message": "Ghostery đã sẵn sàng!"
   },
   "summary_description_not_scanned_2": {
     "message": "Điều hướng đến một trang khác và tôi hứa tôi sẽ giao hàng."
@@ -320,9 +253,6 @@
   },
   "blocking_category_tracker_found": {
     "message": "Tìm"
-  },
-  "hub_setup_header_title_antisuite": {
-    "message": "Bạn có muốn duyệt thông minh hơn với các tính năng được đề xuất của chúng tôi không?"
   },
   "panel_insights_audit_tags": {
     "message": "Kiểm tra các thẻ tiếp thị trên một trang",
@@ -364,12 +294,6 @@
     "message": "Truyền thông xã hội",
     "description": "Ghostery sắp xếp các thẻ theo danh mục. Đây là một trong số các danh mục thẻ."
   },
-  "hub_supporter_feature_support_description": {
-    "message": "Cần sự trợ giúp? Tìm một trang bị hỏng? Để câu hỏi của bạn được trả lời và các vấn đề được giải quyết nhanh chóng với dịch vụ bàn trợ giúp Ưu tiên của chúng tôi, chỉ có thể truy cập khi đăng nhập bằng tài khoản Plus."
-  },
-  "hub_create_account_toast_error": {
-    "message": "Địa chỉ email đó đã được sử dụng. Vui lòng chọn cái khác."
-  },
   "invalid_email_login": {
     "message": "Xin lỗi, bạn phải nhập một địa chỉ email thực."
   },
@@ -394,9 +318,6 @@
   "tooltip_resume": {
     "message": "Tiếp tục Ghostery"
   },
-  "hub_create_account_label_email_last_name": {
-    "message": "Họ (Tùy chọn):"
-  },
   "panel_help_setup": {
     "message": "Thiết lập Ghostery"
   },
@@ -410,9 +331,6 @@
       }
     },
     "message": "Hiển thị $SPAN_START$ ở trên cùng bên phải $SPAN_END$"
-  },
-  "hub_upgrade_to": {
-    "message": "Nâng cấp lên"
   },
   "last_name_field_label": {
     "message": "Họ (Tùy chọn):"
@@ -454,9 +372,6 @@
     },
     "message": "Loại bỏ $SPAN_START$ sau 30 giây $SPAN_END$"
   },
-  "hub_tutorial_page_title_layout": {
-    "message": "Ghostery Hub - Bố cục Hướng dẫn"
-  },
   "settings_trusted_sites_description": {
     "message": "Các trang web được liệt kê ở đây sẽ được tin cậy với tất cả các trình theo dõi được bỏ chặn."
   },
@@ -470,15 +385,6 @@
       }
     },
     "message": "Loại bỏ $SPAN_START$ sau 5 giây $SPAN_END$"
-  },
-  "hub_home_feature_tutorial_text": {
-    "message": "Đi qua các tính năng chính của Ghostery."
-  },
-  "hub_setup_feature_tutorial_title": {
-    "message": "Thực hiện một hướng dẫn"
-  },
-  "hub_supporter_header_title": {
-    "message": "Nâng cấp lên Ghostery Plus"
   },
   "summary_trust_site_active": {
     "message": "Trang web đáng tin cậy"
@@ -496,14 +402,8 @@
     "description": "Tiêu đề trang cho block_redirect.html xuất hiện khi chuyển hướng bị chặn.",
     "message": "Ghostery đã ngăn chặn một chuyển hướng."
   },
-  "hub_upgrade_extension_themes": {
-    "message": "Chủ đề mở rộng"
-  },
   "settings_sign_create_text": {
     "message": "Cài đặt từ tài khoản của bạn sẽ đồng bộ hóa với thiết bị này. Tạo tài khoản để dễ dàng đồng bộ hóa cài đặt Ghostery của bạn trên tất cả các thiết bị và nền tảng."
-  },
-  "hub_supporter_feature_stats_description": {
-    "message": "Xem kết quả chặn lịch sử với biểu đồ và thống kê để tiết lộ xu hướng và tìm hiểu cách Ghostery đã ảnh hưởng đến quá trình duyệt web của bạn."
   },
   "panel_detail_menu_history_title": {
     "message": "Môn lịch sử"
@@ -523,47 +423,18 @@
   "settings_edit_account": {
     "message": "Chỉnh sửa tài khoản"
   },
-  "hub_login_link_create_account": {
-    "message": "Đăng ký."
-  },
   "settings_show_purple_box_tooltip": {
     "message": "Tracker-tally là một danh sách ở góc trình duyệt của bạn hiển thị các trình theo dõi khi chúng tải trong thời gian thực."
-  },
-  "hub_setup_modal_button_ask_again": {
-    "message": "Đừng hỏi tôi nữa"
-  },
-  "hub_side_navigation_home": {
-    "message": "Nhà"
   },
   "category_audio_video_player": {
     "message": "Trình phát âm thanh / video",
     "description": "Ghostery sắp xếp các thẻ theo danh mục. Đây là một trong số các danh mục thẻ."
-  },
-  "hub_tutorial_trackerlist_tagline": {
-    "message": "Ghostery giúp bạn cập nhật thông tin về những công ty đang theo dõi bạn bằng cách liệt kê các công cụ theo dõi trên mỗi trang web bạn truy cập."
-  },
-  "hub_create_account_already_have_account": {
-    "message": "Đã có Tài khoản Ghostery?"
-  },
-  "hub_setup_feature_products_title": {
-    "message": "Xem thêm các sản phẩm ma quái"
   },
   "category_extensions": {
     "message": "Tiện ích mở rộng"
   },
   "android_unblock": {
     "message": "Mở khóa"
-  },
-  "hub_setup_humanweb_header": {
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    },
-    "message": "Chúng tôi sử dụng dữ liệu Web của con người ẩn danh để cải thiện hiệu suất của Ghostery. Không có dữ liệu cá nhân nào được thu thập. $LINK_LM_START$ Tìm hiểu thêm $LINK_LM_END$"
   },
   "subscribe_pitch_no_thanks": {
     "message": "Không, cảm ơn, có thể sau"
@@ -575,23 +446,11 @@
     "message": "Bao gồm các dịch vụ quảng cáo như thu thập dữ liệu, phân tích hành vi hoặc nhắm mục tiêu lại.",
     "description": "Mô tả trực diện người dùng cho danh mục Thẻ quảng cáo."
   },
-  "hub_tutorial_page_title_anti_suite": {
-    "message": "Ghostery Hub - Các tính năng bổ sung hướng dẫn"
-  },
   "global_settings_saved": {
     "message": "Cài đặt chung đã được lưu"
   },
-  "hub_signedin_header_title": {
-    "message": "Bạn đã đăng nhập"
-  },
   "subscribe_pitch_button_label": {
     "message": "Tải xuống Ghostery Plus!"
-  },
-  "hub_supporter_manifesto": {
-    "message": "Nâng cấp lên Ghostery Plus để mở khóa bộ sản phẩm đầy đủ của chúng tôi! Chỉ với $1,99 mỗi tháng, có quyền truy cập vào một trình duyệt riêng mạnh mẽ với tính năng tìm kiếm riêng tư được tích hợp sẵn, phân tích trình theo dõi nâng cao và các đặc quyền đặc biệt khác."
-  },
-  "hub_supporter_perk_dawn_and_glow_description": {
-    "message": "Tải xuống Ghostery Dawn and Glow, trình duyệt riêng tư mạnh mẽ của chúng tôi với công cụ tìm kiếm tích hợp"
   },
   "panel_tracker_warning_compatibility_tooltip": {
     "message": "Trang ngắt trang của trình theo dõi bị chặn"
@@ -636,9 +495,6 @@
     "message": "Hủy bỏ",
     "description": "Một phần của hộp thoại xác nhận. Nhấp vào này sẽ hủy hành động."
   },
-  "hub_setup_blocking_description_custom": {
-    "message": "Chọn trình theo dõi để chặn"
-  },
   "tooltip_smart_block_on": {
     "message": "Đã điều chỉnh chặn trình theo dõi để tối ưu hóa hiệu suất trang."
   },
@@ -662,9 +518,6 @@
   "settings_update_up_to_date": {
     "message": "Vẫn cập nhật"
   },
-  "hub_create_account_link_login": {
-    "message": "Đăng nhập tại đây."
-  },
   "category_site_analytics": {
     "description": "Ghostery sắp xếp các thẻ theo danh mục. Đây là một trong số các danh mục thẻ.",
     "message": "Phân tích trang web"
@@ -681,9 +534,6 @@
   "subscribe_pitch_sign_in": {
     "message": "Đã đăng ký? Đăng nhập"
   },
-  "hub_products_main_promo_title": {
-    "message": "Trình duyệt quyền riêng tư trên thiết bị di động"
-  },
   "box_display_br": {
     "placeholders": {
       "span_start": {
@@ -695,22 +545,8 @@
     },
     "message": "Hiển thị $SPAN_START$ ở dưới cùng bên phải $SPAN_END$"
   },
-  "hub_setup_header_title_blocking": {
-    "placeholders": {
-      "new_line": {
-        "content": "<br />"
-      }
-    },
-    "message": "Ghostery có thể chặn các trình theo dõi để giúp duyệt web của bạn sạch hơn, nhanh hơn và an toàn hơn. $NEW_LINE$ Bạn muốn chặn điều gì?"
-  },
-  "hub_create_account_label_password_invalid": {
-    "message": "Chỉ cho phép các ký tự đặc biệt sau:! @ # $% ^ & * = + () <> {} [];:,. /?"
-  },
   "android_global_blocking_header": {
     "message": "Theo dõi toàn cầu"
-  },
-  "hub_side_navigation_products": {
-    "message": "Xem thêm các sản phẩm ma quái"
   },
   "settings_filter_unblocked": {
     "message": "Trình theo dõi được mở khóa"
@@ -729,9 +565,6 @@
   },
   "settings_new_trackers": {
     "message": "Thêm trình theo dõi mới vào thư viện trình theo dõi của nó"
-  },
-  "hub_create_account_header_title": {
-    "message": "Bạn có muốn tạo tài khoản Ghostery để đồng bộ cài đặt trên các trình duyệt và thiết bị không?"
   },
   "settings_adblocker_lists": {
     "message": "Tải các danh sách bộ lọc khối quảng cáo sau:"
@@ -777,9 +610,6 @@
     "description": "Mô tả trực diện người dùng cho danh mục thẻ Truyền thông xã hội.",
     "message": "Bao gồm các tính năng liên quan đến các nền tảng truyền thông xã hội."
   },
-  "hub_home_feature_setup_button": {
-    "message": "Chỉnh sửa thiết lập"
-  },
   "license_publisher": {
     "message": "Nhà xuất bản"
   },
@@ -797,9 +627,6 @@
   },
   "summary_page_not_scanned": {
     "message": "Trang không được quét"
-  },
-  "hub_supporter_header_description": {
-    "message": "Vượt ra ngoài quyền riêng tư cơ bản và mở khóa bộ sản phẩm đầy đủ của chúng tôi!"
   },
   "settings_export_header": {
     "message": "Xuất Cài đặt"
@@ -823,12 +650,6 @@
   "subscription_info": {
     "message": "Chi tiết Đăng ký"
   },
-  "hub_create_account_label_first_name": {
-    "message": "Tên (Tùy chọn):"
-  },
-  "hub_tutorial_video_tagline": {
-    "message": "Chặn trình theo dõi và quảng cáo, bảo vệ quyền riêng tư của bạn và tăng tốc độ tải trang."
-  },
   "get_ghostery_plus_bang": {
     "message": "Tải xuống Ghostery Plus!"
   },
@@ -845,9 +666,6 @@
   "password_colon": {
     "message": "Mật khẩu:"
   },
-  "hub_login_header_title": {
-    "message": "Đăng nhập vào tài khoản của bạn."
-  },
   "settings_announcements": {
     "message": "Đưa ra thông báo"
   },
@@ -857,14 +675,8 @@
   "not_http_page": {
     "message": "Đảm bảo rằng tab hiện tại của bạn đã mở trang http hoặc https"
   },
-  "hub_home_plus_upgrade_button_text": {
-    "message": "Nâng cấp ngay bây giờ"
-  },
   "panel_tracker_warning_smartblock_tooltip": {
     "message": "Trình theo dõi bị chặn bởi Duyệt web thông minh"
-  },
-  "hub_supporter_perk_dawn_and_glow_title": {
-    "message": "Trình duyệt riêng tư và tìm kiếm"
   },
   "box_dismiss_15s": {
     "message": "Loại bỏ $SPAN_START$ sau 15 giây $SPAN_END$",
@@ -903,20 +715,11 @@
     "description": "Văn bản xuất hiện trên block_redirect.html khi chuyển hướng bị chặn và URL 'đích' cuối cùng được tìm thấy thành công.",
     "message": "Thẻ này dường như chuyển hướng đến $BREAK$ $A_START$$REDIRECT_URL$$A_END$ Nếu liên kết này hiển thị đúng và bạn muốn tiếp tục, hãy nhấp vào biểu tượng bên dưới để cho phép $APP$ và tải lại."
   },
-  "hub_products_page_title": {
-    "message": "Ghostery Hub - Thử các sản phẩm Ghostery khác"
-  },
   "settings_import_file_error": {
     "message": "Đó là loại tệp không chính xác. Vui lòng chọn tệp .ghost và thử lại."
   },
   "settings_share_usage": {
     "message": "Chia sẻ phân tích sử dụng tiện ích mở rộng"
-  },
-  "hub_login_label_password_invalid": {
-    "message": "Sử dụng từ 8 đến 50 ký tự."
-  },
-  "hub_supporter_feature_theme_description": {
-    "message": "Tùy chỉnh màu sắc của Ghostery để có trải nghiệm hình ảnh mới! Được giới thiệu thông qua yêu cầu phổ biến. Xem chủ đề Xanh đậm đặc biệt của chúng tôi và nhiều hơn thế nữa."
   },
   "box_warning_slow": {
     "message": "Máy theo dõi chậm"
@@ -930,23 +733,11 @@
   "summary_restrict_site_active": {
     "message": "Trang web bị hạn chế"
   },
-  "hub_home_feature_tutorial_button_alt": {
-    "message": "Hướng dẫn hoàn thành"
-  },
   "license_licenses": {
     "message": "Giấy phép"
   },
   "settings_individual_trackers": {
     "message": "Tin tưởng và Hạn chế các trình theo dõi riêng lẻ trên một trang web"
-  },
-  "hub_tutorial_antisuite_title": {
-    "message": "Được bảo vệ thêm và kiểm soát tự động với các tính năng bảo mật nâng cao của chúng tôi:"
-  },
-  "hub_create_account_label_password_invalid_length": {
-    "message": "Sử dụng từ 8 đến 50 ký tự."
-  },
-  "hub_products_main_promo_description": {
-    "message": "Duyệt qua không có quảng cáo và trình theo dõi khi đang di chuyển với trình duyệt di động được cập nhật và nâng cao của chúng tôi. Bây giờ được trang bị một công cụ tìm kiếm riêng!"
   },
   "server_error_message": {
     "message": "Chúng tôi dường như đang gặp sự cố kỹ thuật. Thử lại sau."
@@ -982,29 +773,14 @@
   "start": {
     "message": "Khởi đầu"
   },
-  "hub_tutorial_trackerlist_title": {
-    "message": "Danh sách theo dõi"
-  },
   "get_ghostery_plus": {
     "message": "Tải xuống Ghostery Plus"
-  },
-  "hub_upgrade_scroll_down": {
-    "message": "Xem danh sách đầy đủ các tính năng"
   },
   "trackers_detected": {
     "message": "Đã phát hiện"
   },
   "panel_help_contact_header": {
     "message": "Liên lạc với chúng tôi bằng cách nào"
-  },
-  "hub_tutorial_page_title_video": {
-    "message": "Ghostery Hub - Tổng quan về Hướng dẫn"
-  },
-  "hub_tutorial_video_title": {
-    "message": "Ghostery có thể làm gì cho bạn"
-  },
-  "hub_setup_feature_tutorial_description": {
-    "message": "Đi qua các tính năng chính của Ghostery."
   },
   "blocking_category_tracker": {
     "message": "Máy theo dõi"
@@ -1027,14 +803,8 @@
   "password_requirements": {
     "message": "Sử dụng từ 8 đến 50 ký tự."
   },
-  "hub_login_link_dont_have_account": {
-    "message": "Không có tài khoản?"
-  },
   "alert_site_restricted": {
     "message": "Trang web bị hạn chế. Trình theo dõi sẽ bị chặn và tính năng Chống theo dõi được bật trên trang web này."
-  },
-  "hub_tutorial_trust_restrict_site": {
-    "message": "Luôn chặn các trình theo dõi trên trang web."
   },
   "settings_new_promotions": {
     "message": "Có khuyến mãi sản phẩm"
@@ -1071,9 +841,6 @@
   "android_untrust": {
     "message": "Hoàn tác"
   },
-  "hub_setup_enter_modal_text": {
-    "message": "Nhập thiết lập tùy chỉnh sẽ ghi đè cài đặt Ghostery trước đó của bạn. Bạn có muốn tiếp tục?"
-  },
   "tooltip_restrict": {
     "message": "Luôn chặn trình theo dõi và bảo vệ dữ liệu cá nhân của tôi trên trang web này."
   },
@@ -1085,15 +852,6 @@
   },
   "panel_detail_learn_more": {
     "message": "Tìm hiểu thêm"
-  },
-  "hub_supporter_perk_analytics_description": {
-    "message": "Truy cập Ghostery Insights, bảng điều khiển thông minh theo dõi thời gian thực của chúng tôi"
-  },
-  "hub_supporter_perk_analytics_title": {
-    "message": "Phân tích trình theo dõi nâng cao"
-  },
-  "hub_upgrade_historical_extension_stats": {
-    "message": "Số liệu thống kê về Tiện ích mở rộng Lịch sử"
   },
   "send_button_label": {
     "message": "Gửi"
@@ -1110,22 +868,8 @@
   "forgot_password": {
     "message": "Quên mật khẩu?"
   },
-  "hub_setup_feature_already_active": {
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    },
-    "message": "Tính năng này đã hoạt động trong Cliqz theo mặc định. $LINK_LM_START$ Tìm hiểu thêm $LINK_LM_END$"
-  },
   "subscription_default_theme": {
     "message": "Mặc định"
-  },
-  "hub_upgrade_additional_protection": {
-    "message": "Bảo vệ bổ sung"
   },
   "settings_top_left_corner": {
     "message": "Góc trên bên trái"
@@ -1142,17 +886,11 @@
   "settings_seconds": {
     "message": "giây"
   },
-  "hub_setup_blocking_description_everything": {
-    "message": "Tất cả trình theo dõi bị chặn"
-  },
   "wtm_trackers_preview_disable_confirm_msg": {
     "message": "Bạn có chắc không?"
   },
   "settings_account_name": {
     "message": "Tên"
-  },
-  "hub_supporter_feature_more_title": {
-    "message": ".. và Nhiều hơn nữa sẽ đến!"
   },
   "settings_adblocker_list_3": {
     "message": "Quảng cáo + Trình theo dõi + Sự phiền phức"
@@ -1173,9 +911,6 @@
     "description": "Mô tả hướng tới người dùng cho danh mục thẻ Trình phát âm thanh / video.",
     "message": "Cho phép các trang web xuất bản, phân phối và tối ưu hóa nội dung âm thanh và video."
   },
-  "hub_signedin_as_email": {
-    "message": "Đăng ký với tư cách là"
-  },
   "forgot_password_message": {
     "message": "Quên mật khẩu? Này, nó xảy ra với tất cả mọi người. Chúng tôi sẽ gửi email cho bạn hướng dẫn để đặt lại mật khẩu của bạn."
   },
@@ -1192,9 +927,6 @@
     "description": "Mô tả trực diện người dùng cho danh mục thẻ Quảng cáo dành cho người lớn.",
     "message": "Bao gồm các công nghệ quảng cáo được thiết kế cho các trang web có nội dung người lớn."
   },
-  "hub_upgrade_maximum_protection": {
-    "message": "Sự bảo vệ tối đa"
-  },
   "learn_more": {
     "message": "Tìm hiểu thêm"
   },
@@ -1203,9 +935,6 @@
   },
   "support": {
     "message": "Ủng hộ"
-  },
-  "hub_upgrade_protection_plan": {
-    "message": "kế hoạch bảo vệ"
   },
   "box_warning_nonsecure": {
     "message": "Trình theo dõi không an toàn"
@@ -1225,17 +954,11 @@
   "tracker_description_learn_more": {
     "message": "Tiếp tục đến hồ sơ đầy đủ của trình theo dõi"
   },
-  "hub_products_second_promo_title": {
-    "message": "Tab Bắt đầu Ghostery"
-  },
   "try_ghostery_midnight": {
     "message": "Dùng thử Ghostery Midnight"
   },
   "already_subscribed": {
     "message": "Đã đăng ký"
-  },
-  "hub_create_account_confirm_password_do_not_match": {
-    "message": "Mật khẩu của bạn không phù hợp."
   },
   "settings_allow_trackers": {
     "message": "Cho phép trình theo dõi do chủ sở hữu trang web tạo"
@@ -1260,9 +983,6 @@
     "message": "Quảng cáo",
     "description": "Ghostery sắp xếp các thẻ theo danh mục. Đây là một trong số các danh mục thẻ."
   },
-  "hub_home_header_info": {
-    "message": "Người dùng mới được chọn tham gia vào Human Web. Bạn có thể thay đổi cài đặt này trong thiết lập tùy chỉnh hoặc trong tiện ích mở rộng."
-  },
   "subscription_charge_date": {
     "message": "Ngày thanh toán tiếp theo"
   },
@@ -1285,15 +1005,9 @@
   "next_or_start_trial": {
     "message": "Tiếp theo hoặc Bắt đầu dùng thử"
   },
-  "hub_setup_modal_button_no": {
-    "message": "Không"
-  },
   "summary_alert": {
     "message": "Báo động",
     "description": "như trong '1 ALERT'"
-  },
-  "hub_home_feature_tutorial_title": {
-    "message": "Thực hiện một hướng dẫn"
   },
   "browse_button_label": {
     "message": "Duyệt qua ..."
@@ -1304,15 +1018,6 @@
   "category_pornvertising": {
     "message": "Quảng cáo dành cho người lớn",
     "description": "Ghostery sắp xếp các thẻ theo danh mục. Đây là một trong số các danh mục thẻ."
-  },
-  "hub_tutorial_layout_tagline": {
-    "message": "Chuyển đổi giữa chế độ xem đơn giản hoặc chi tiết tùy thuộc vào những gì bạn muốn Ghostery hiển thị."
-  },
-  "hub_tutorial_trust_title": {
-    "message": "Tin cậy & Hạn chế Trang web"
-  },
-  "hub_setup_page_title_antisuite": {
-    "message": "Ghostery Hub - Thiết lập Anti-Suite"
   },
   "fingerprint": {
     "message": "dấu vân tay"
@@ -1326,9 +1031,6 @@
   "no_thanks_continue_with_basic": {
     "message": "Không, cảm ơn, hãy tiếp tục với phần cơ bản"
   },
-  "hub_products_third_promo_description": {
-    "message": "Bảo vệ quyền riêng tư trực tuyến của bạn và loại bỏ quảng cáo bằng sản phẩm nhẹ nhất của chúng tôi, dành riêng cho Safari."
-  },
   "subscription_upgrade_to": {
     "message": "Nâng cấp lên"
   },
@@ -1337,9 +1039,6 @@
   },
   "full_coverage_protection_promise": {
     "message": "Được bảo vệ toàn diện trên tất cả các trình duyệt và ứng dụng trên thiết bị của bạn"
-  },
-  "hub_setup_exit_flow": {
-    "message": "Thoát thiết lập tùy chỉnh"
   },
   "simple_view": {
     "message": "Chế độ xem đơn giản"
@@ -1359,9 +1058,6 @@
   },
   "settings_notify_me_tooltip": {
     "message": "Cho phép Ghostery hiển thị các thông báo trong trình duyệt của tôi liên quan đến các tính năng, bản cập nhật của sản phẩm mới và phản hồi của khách hàng."
-  },
-  "hub_setup_humanweb_label": {
-    "message": "Hỗ trợ Ghostery bằng cách chia sẻ thông tin này"
   },
   "android_tab_global_blocking": {
     "message": "Chặn toàn cầu"
@@ -1384,14 +1080,8 @@
   "choose_your_ghostery_privacy_plan": {
     "message": "Chọn gói bảo mật Ghostery của bạn"
   },
-  "hub_upgrade_already_protected": {
-    "message": "Đã được bảo vệ"
-  },
   "select_plus": {
     "message": "Chọn dấu cộng"
-  },
-  "hub_home_plus_full_protection": {
-    "message": "Bạn được bảo vệ đầy đủ!"
   },
   "settings_allow_trackers_tooltip": {
     "message": "Ví dụ: chặn một trình theo dõi Facebook trên facebook.com có thể phá vỡ trang web."
@@ -1408,17 +1098,11 @@
   "android_trust": {
     "message": "Tin tưởng"
   },
-  "settings_human_web_tooltip": {
-    "message": "Ghostery hiện cài đặt Human Web theo mặc định, một công nghệ mang tính cách mạng sử dụng trí tuệ của đám đông để xây dựng một mạng internet riêng tư hơn"
-  },
   "panel_about_privacy_statement": {
     "message": "Cam kết bảo mật"
   },
   "panel_stats_menu_monthly": {
     "message": "Hàng tháng"
-  },
-  "hub_setup_page_title_done": {
-    "message": "Ghostery Hub - Hoàn tất thiết lập"
   },
   "blocking_unblock_all": {
     "message": "Bỏ chặn tất cả"
@@ -1429,9 +1113,6 @@
   "click2play_allow_always_tooltip": {
     "description": "Chú giải công cụ xuất hiện trên nút click2play 'cho phép luôn luôn'.",
     "message": "Cho phép và tải lại."
-  },
-  "hub_tutorial_blocking_title": {
-    "message": "Chọn những gì và cách bạn muốn chặn"
   },
   "cookies": {
     "message": "bánh quy"
@@ -1451,23 +1132,11 @@
   "panel_detail_menu_list_title": {
     "message": "Xem danh sách"
   },
-  "hub_upgrade_your": {
-    "message": "Nâng cấp của bạn"
-  },
   "category_unknown": {
     "message": "không xác định"
   },
-  "hub_products_header_description": {
-    "message": "Luôn được bảo vệ và nâng cao trải nghiệm trực tuyến của bạn với bộ quyền riêng tư đầy đủ của chúng tôi."
-  },
-  "hub_tutorial_trust_tagline": {
-    "message": "Tin tưởng hoặc hạn chế các trang web bằng một cú nhấp chuột."
-  },
   "sign_in": {
     "message": "Đăng nhập"
-  },
-  "hub_upgrade_basic_browser_protection": {
-    "message": "Bảo vệ trình duyệt cơ bản"
   },
   "settings_replace_social": {
     "message": "Thay thế các nút mạng xã hội bị chặn bằng biểu tượng Ghostery"
@@ -1477,9 +1146,6 @@
   },
   "settings_blocking": {
     "message": "Chặn"
-  },
-  "hub_setup_blocking_text_nothing": {
-    "message": "Không có gì chặn"
   },
   "invalid_email_forgot": {
     "message": "Xin lỗi, bạn phải nhập một địa chỉ email thực."
@@ -1496,9 +1162,6 @@
   "panel_stats_monthly": {
     "message": "Hàng tháng"
   },
-  "hub_setup_blocking_text_recommended": {
-    "message": "Khối mặc định"
-  },
   "panel_stats_ads_blocked": {
     "message": "Quảng cáo bị chặn"
   },
@@ -1511,29 +1174,17 @@
   "panel_detail_menu_performance_title": {
     "message": "Màn biểu diễn"
   },
-  "hub_upgrade_monthly": {
-    "message": "Hàng tháng"
-  },
-  "hub_home_header_checkbox_label": {
-    "message": "Chia sẻ dữ liệu phân tích ẩn danh bổ sung để cải thiện hiệu suất của Ghostery."
-  },
   "license_information_missing": {
     "message": "Thiếu thông tin về kho lưu trữ giấy phép"
   },
   "settings_filter_all": {
     "message": "Tất cả các trình theo dõi"
   },
-  "hub_tutorial_page_title_trackerlist": {
-    "message": "Ghostery Hub - Trình theo dõi hướng dẫn"
-  },
   "popup_apply_code_button": {
     "message": "Áp dụng mã"
   },
   "settings_filter_blocked": {
     "message": "Trình theo dõi bị chặn"
-  },
-  "hub_home_feature_setup_button_alt": {
-    "message": "Hoàn tất thiết lập tùy chỉnh"
   },
   "alert_smart_block_off": {
     "message": "Duyệt web thông minh TẮT. Tính năng chặn của trình theo dõi sẽ không được tự động điều chỉnh."
@@ -1556,9 +1207,6 @@
   "panel_about_imprint": {
     "message": "Dấu ấn"
   },
-  "hub_upgrade_custom_blocking_preferences": {
-    "message": "Tùy chọn chặn tùy chỉnh"
-  },
   "settings_update_failed": {
     "message": "Cập nhật không thành công. Vui lòng thử lại sau"
   },
@@ -1580,9 +1228,6 @@
   "settings_filter_all_label": {
     "message": "Tất cả các"
   },
-  "hub_setup_page_title_humanweb": {
-    "message": "Ghostery Hub - Thiết lập web của con người"
-  },
   "trackers_blocked": {
     "message": "Trình theo dõi bị chặn:"
   },
@@ -1595,9 +1240,6 @@
   },
   "fingerprints": {
     "message": "dấu vân tay"
-  },
-  "hub_setup_page_title_blocking": {
-    "message": "Ghostery Hub - Thiết lập chặn"
   },
   "settings_allow_abtests": {
     "message": "Tham gia thử nghiệm A / B"
@@ -1623,20 +1265,11 @@
   "block_toggle_ads": {
     "message": "Chặn quảng cáo"
   },
-  "hub_home_plus_upgrade_text": {
-    "message": "Vượt ra ngoài quyền riêng tư cơ bản. Nâng cấp lên Ghostery Plus để truy cập trình duyệt riêng tư mạnh mẽ, tìm kiếm riêng tư và phân tích trình theo dõi nâng cao của chúng tôi!"
-  },
-  "hub_setup_feature_supporter_description": {
-    "message": "Hỗ trợ Ghostery và mở khóa các đặc quyền."
-  },
   "alert_ad_block_off": {
     "message": "Chặn quảng cáo TẮT. Quảng cáo sẽ không bị chặn."
   },
   "panel_stats_menu_cumulative": {
     "message": "Tích lũy"
-  },
-  "hub_products_second_promo_description": {
-    "message": "Tìm kiếm một cách riêng tư và xem số liệu thống kê của trình theo dõi với tính năng tab mới của chúng tôi. Sắp có!"
   },
   "settings_notify_me": {
     "message": "Thông báo cho tôi khi Ghostery:"
@@ -1656,9 +1289,6 @@
   "android_site_blocking_header": {
     "message": "Theo dõi trên trang web này"
   },
-  "hub_home_subheader_optimize": {
-    "message": "Tối ưu hóa trải nghiệm Ghostery của bạn"
-  },
   "notification_upgrade_v8": {
     "message": "Thiết lập các tính năng mới thú vị của chúng tôi và tìm hiểu về bản phát hành lớn nhất của chúng tôi."
   },
@@ -1667,9 +1297,6 @@
   },
   "blacklist_error_duplicate_url": {
     "message": "Trang web này đã bị hạn chế."
-  },
-  "hub_supporter_perk_themes_and_more_description": {
-    "message": "Tùy chỉnh màu sắc của Ghostery - hãy thử các chủ đề Lá, Cọ và Xanh đậm của chúng tôi!"
   },
   "plus_subscriber_perk_custom_color_themes": {
     "message": "Chủ đề màu tùy chỉnh"
@@ -1698,17 +1325,8 @@
   "category_misc": {
     "message": "Điều khoản khác"
   },
-  "hub_setup_feature_products_description": {
-    "message": "Bảo vệ bạn hoàn toàn với bộ quyền riêng tư đầy đủ của chúng tôi!"
-  },
   "settings_signin_create_header": {
     "message": "Đăng nhập / Tạo tài khoản"
-  },
-  "hub_tutorial_blocking_block": {
-    "message": "Luôn chặn trình theo dõi trên trang web hiện tại."
-  },
-  "hub_home_feature_setup_text": {
-    "message": "Chỉnh sửa cài đặt và tùy chọn chặn của bạn."
   },
   "subscribe_pitch_learn_more": {
     "message": "Tìm hiểu thêm"
@@ -1725,9 +1343,6 @@
   "android_block": {
     "message": "Khối"
   },
-  "hub_login_toast_success": {
-    "message": "Đăng nhập thành công! Cài đặt tài khoản của bạn đã được nhập."
-  },
   "banner_email_not_in_system_message": {
     "message": "Xin lỗi, email đó không có trong hệ thống của chúng tôi."
   },
@@ -1736,9 +1351,6 @@
   },
   "panel_stats_trackers_anonymized": {
     "message": "Điểm dữ liệu được ẩn danh"
-  },
-  "hub_tutorial_page_title_trust": {
-    "message": "Ghostery Hub - Tin cậy và Hạn chế Hướng dẫn"
   },
   "settings_purple_box": {
     "message": "Tracker-Tally"
@@ -1753,32 +1365,14 @@
   "choose_your_privacy_plan": {
     "message": "Chọn gói bảo mật của bạn"
   },
-  "hub_tutorial_trust_trust_site": {
-    "message": "Luôn cho phép người theo dõi trên trang web."
-  },
-  "hub_upgrade_advanced_device_protection": {
-    "message": "Bảo vệ thiết bị nâng cao"
-  },
   "notification_library_update": {
     "message": "Chúng tôi đã khai quật một số trình theo dõi mới và thêm chúng vào Cơ sở dữ liệu Ghostery."
-  },
-  "hub_setup_blocking_description_nothing": {
-    "message": "Không có trình theo dõi nào bị chặn"
-  },
-  "hub_home_header_info_link": {
-    "message": "Tìm hiểu thêm."
   },
   "panel_menu_about": {
     "message": "Về"
   },
-  "hub_setup_antisuite_description_antitracking": {
-    "message": "Ẩn danh các trình theo dõi không bị chặn và không xác định để bảo vệ duyệt web tốt hơn."
-  },
   "unidentified": {
     "message": "Không xác định"
-  },
-  "hub_setup_page_title": {
-    "message": "Ghostery Hub - Thiết lập"
   },
   "settings_searh_by_tracker": {
     "message": "Tìm kiếm bằng trình theo dõi"
@@ -1788,12 +1382,6 @@
   },
   "global_settings_saved_category": {
     "message": "Đã lưu cài đặt danh mục chung"
-  },
-  "hub_setup_header_title_done": {
-    "message": "Đã hoàn tất thiết lập tùy chỉnh!"
-  },
-  "hub_tutorial_antisuite_antitracking_description": {
-    "message": "Xóa các điểm dữ liệu mà các trang web có thể sử dụng để nhận dạng bạn."
   },
   "enable_when_paused": {
     "message": "Để sử dụng chức năng này, Tiếp tục Ghostery."
@@ -1810,9 +1398,6 @@
   "blocking_unblock_shown": {
     "message": "Bỏ chặn tất cả được hiển thị"
   },
-  "hub_products_header_title": {
-    "message": "Duyệt qua Thông minh hơn với Sản phẩm của Ghostery!"
-  },
   "tooltip_ad_block_on": {
     "message": "Quảng cáo đã bị chặn."
   },
@@ -1827,9 +1412,6 @@
   },
   "confirm_email_colon": {
     "message": "Xác nhận Email:"
-  },
-  "hub_home_header_tagline": {
-    "message": "Bây giờ bạn được bảo vệ với cài đặt mặc định của chúng tôi."
   },
   "previous": {
     "message": "Trước"
@@ -1870,9 +1452,6 @@
   "choose_your_default_search": {
     "message": "Chọn tìm kiếm mặc định của bạn"
   },
-  "hub_tutorial_layout_title": {
-    "message": "Chế độ xem đơn giản và chi tiết"
-  },
   "panel_tracker_warning_slow_nonsecure_tooltip": {
     "message": "Trình theo dõi chậm và không an toàn"
   },
@@ -1883,20 +1462,11 @@
     "description": "Ghostery sắp xếp các thẻ theo danh mục. Đây là một trong số các danh mục thẻ.",
     "message": "Thiết yếu"
   },
-  "hub_tutorial_page_title_blocking": {
-    "message": "Ghostery Hub - Chặn hướng dẫn"
-  },
   "summary_undo": {
     "message": "Hoàn tác"
   },
   "settings_show_purple_box": {
     "message": "Hiển thị bảng kiểm đếm ở góc trình duyệt của tôi"
-  },
-  "hub_signedin_exit": {
-    "message": "Trở về nhà"
-  },
-  "hub_setup_antisuite_feature_enabled": {
-    "message": "Đã bật"
   },
   "subscribe_pitch_sign_in_plus": {
     "message": "Đã là một người đăng ký? Đăng nhập"
@@ -1910,9 +1480,6 @@
   "android_blocking_reset": {
     "message": "Đặt lại cài đặt"
   },
-  "hub_tutorial_page_title": {
-    "message": "Ghostery Hub - Hướng dẫn"
-  },
   "notification_upgrade_link_v8": {
     "message": "Cho tôi xem ngay!"
   },
@@ -1924,9 +1491,6 @@
   },
   "wtm_trackers_preview_disable_confirm_button": {
     "message": "Vô hiệu"
-  },
-  "hub_setup_ready_heading": {
-    "message": "Tối ưu hóa trải nghiệm Ghostery của bạn"
   },
   "subscribe_pitch_spring": {
     "message": "Giống như những gì chúng tôi làm? Hỗ trợ chúng tôi và mở khóa các chủ đề mùa xuân mới, thông tin chi tiết về theo dõi cá nhân và các đặc quyền đặc biệt khác bằng cách nâng cấp lên Ghostery Plus!"
@@ -1942,9 +1506,6 @@
   },
   "your_email_do_not_match": {
     "message": "Email của bạn không khớp."
-  },
-  "hub_home_page_title": {
-    "message": "Ghostery Hub - Trang chủ"
   },
   "settings_trusted_sites": {
     "message": "Các trang web đáng tin cậy"
@@ -1967,9 +1528,6 @@
   "settings_global_blocking": {
     "message": "Chặn toàn cầu"
   },
-  "hub_upgrade_browser_ad_blocking": {
-    "message": "Chặn quảng cáo trình duyệt"
-  },
   "panel_stats_header_title_monthly": {
     "message": "Thống kê Lịch sử của Trình theo dõi (Trung bình Hàng tháng)"
   },
@@ -1985,9 +1543,6 @@
   "tooltip_body_in_cliqz": {
     "message": "Tính năng đã hoạt động trong Cliqz theo mặc định."
   },
-  "hub_setup_header_title_humanweb": {
-    "message": "Bạn có muốn giúp cải thiện Ghostery không?"
-  },
   "subscription_expired": {
     "message": "Tài khoản đã hết hạn"
   },
@@ -2002,12 +1557,6 @@
   },
   "license_type": {
     "message": "(Các) loại giấy phép"
-  },
-  "hub_setup_blocking_text_custom": {
-    "message": "Chọn từ danh sách"
-  },
-  "hub_supporter_perk_themes_and_more_title": {
-    "message": "Chủ đề tùy chỉnh và hơn thế nữa"
   },
   "panel_detail_history_title": {
     "message": "Môn lịch sử"
@@ -2039,9 +1588,6 @@
   "summary_pause_ghostery_tooltip": {
     "message": "Tạm dừng tiện ích mở rộng Ghostery."
   },
-  "hub_products_third_promo_title": {
-    "message": "Ghostery Lite"
-  },
   "settings_import_header": {
     "message": "Nhập cài đặt"
   },
@@ -2066,9 +1612,6 @@
   "tracker_details": {
     "message": "Thông tin chi tiết về trình theo dõi"
   },
-  "hub_upgrade_basic_protection": {
-    "message": "Bảo vệ cơ bản"
-  },
   "blocking_category_blocked": {
     "description": "như trong '5 (trình theo dõi) ĐÃ CHẶN'",
     "message": "Bị chặn"
@@ -2076,29 +1619,14 @@
   "plus_subscriber_perk_insights": {
     "message": "Ghostery Insights (Phân tích trình theo dõi nâng cao)"
   },
-  "hub_setup_blocking_description_recommended": {
-    "message": "Trình theo dõi Quảng cáo, Phân tích Trang web và Quảng cáo Người lớn bị chặn"
-  },
-  "hub_side_navigation_upgrade_plan": {
-    "message": "Kế hoạch nâng cấp"
-  },
-  "hub_tutorial_detailed_expanded_view": {
-    "message": "Chế độ xem chi tiết được mở rộng"
-  },
   "settings_import_warning": {
     "message": "CẢNH BÁO: Thao tác này sẽ ghi đè cài đặt Ghostery hiện tại của bạn."
   },
   "enable_when_whitelisted": {
     "message": "Để sử dụng chức năng này, hãy hoàn tác Trang tin cậy"
   },
-  "hub_supporter_feature_more_description": {
-    "message": "Hãy theo dõi các tính năng và thông tin chi tiết thú vị khác khi chúng tôi tiếp tục làm cho trải nghiệm Ghostery của bạn trở nên thú vị."
-  },
   "cookie": {
     "message": "bánh quy"
-  },
-  "hub_upgrade_yearly": {
-    "message": "Hàng năm"
   },
   "settings_required_trackers": {
     "message": "Chỉ cho tôi khi nào tôi cần cho phép trình theo dõi sử dụng các tính năng của trang web"
@@ -2157,29 +1685,17 @@
   "panel_stats_reset": {
     "message": "Cài lại"
   },
-  "hub_supporter_page_title": {
-    "message": "Ghostery Hub - Ghostery Plus"
-  },
   "block_toggle_tracking": {
     "message": "Trình theo dõi khối"
   },
   "box_tracker": {
     "message": "Máy theo dõi"
   },
-  "hub_setup_blocking_text_everything": {
-    "message": "Chặn mọi thứ"
-  },
   "settings_filter_new": {
     "message": "Trình theo dõi mới"
   },
-  "hub_upgrade_plan_free": {
-    "message": "Miễn phí"
-  },
   "panel_help_faq": {
     "message": "Các câu hỏi thường gặp"
-  },
-  "hub_setup_modal_button_yes": {
-    "message": "Có"
   },
   "sign_out": {
     "message": "Đăng xuất"

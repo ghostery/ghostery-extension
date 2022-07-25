@@ -16,16 +16,6 @@ exports[`app/panel/components/Help.jsx Snapshot tests with react-test-renderer H
       <div
         className="support-section"
       >
-        <a
-          href="#"
-          onClick={[Function]}
-        >
-          panel_help_setup
-        </a>
-      </div>
-      <div
-        className="support-section"
-      >
         <h3>
           panel_help_questions_header
         </h3>

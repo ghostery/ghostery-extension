@@ -2,7 +2,7 @@
  * Panel Data Class
  *
  * Coordinates the assembly and transmission
- * of bug / Cliqz / settings data to the extension panel
+ * of bug / Common / settings data to the extension panel
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -24,7 +24,7 @@ import Policy from './Policy';
 import tabInfo from './TabInfo';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
+import { getCommonGhosteryBugs, sendCommonModuleCounts } from '../utils/commonModulesData';
 import {
 	getTab,
 	getActiveTab,
@@ -34,7 +34,6 @@ import {
 import { log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
-const { IS_CLIQZ } = globals;
 
 /**
  * PanelData coordinates the assembly and transmission of data to the extension panel
@@ -139,7 +138,7 @@ class PanelData {
 					break;
 				case 'SummaryComponentDidMount':
 					this._mountedComponents.summary = true;
-					this._postCliqzModulesData();
+					this._postCommonModulesData();
 					this.postPageLoadTime(tab.id);
 					break;
 				case 'SummaryComponentWillUnmount':
@@ -192,7 +191,7 @@ class PanelData {
 	}
 
 	/**
-	 * Wrapper helper passed as callback to utils/cliqzModuleData#sendCliqzModuleCounts
+	 * Wrapper helper passed as callback to utils/commonModuleData#sendCommonModuleCounts
 	 */
 	postMessageToSummary = ((message) => {
 		this._postMessage('summary', message);
@@ -235,7 +234,7 @@ class PanelData {
 
 		if (summary) {
 			this._postMessage('summary', this._getDynamicSummaryData());
-			this._postCliqzModulesData();
+			this._postCommonModulesData();
 		}
 
 		this._postMessage('panel', this._getDynamicPanelData());
@@ -249,9 +248,11 @@ class PanelData {
 		const {
 			expand_all_trackers, selected_app_ids, show_tracker_urls,
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
+			setup_complete,
 		} = conf;
 
 		return {
+			setup_complete,
 			expand_all_trackers,
 			selected_app_ids,
 			show_tracker_urls,
@@ -340,6 +341,7 @@ class PanelData {
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
 			is_expanded, is_expert, language, reload_banner_status, trackers_banner_status,
+			setup_complete,
 		} = conf;
 
 		return {
@@ -352,6 +354,7 @@ class PanelData {
 			is_android: globals.BROWSER_INFO.os === 'android',
 			language,
 			reload_banner_status,
+			setup_complete,
 			tab_id,
 			trackers_banner_status,
 			...this._getDynamicPanelData(tab_id)
@@ -506,10 +509,10 @@ class PanelData {
 	/**
 	 * Retrieves antitracking and adblock counts and sends it to the panel
 	 */
-	_postCliqzModulesData() {
+	_postCommonModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		sendCliqzModuleCounts(
+		sendCommonModuleCounts(
 			this._activeTab.id,
 			this._activeTab.pageHost,
 			this.postMessageToSummary,
@@ -561,12 +564,6 @@ class PanelData {
 	set(d) {
 		const data = { ...d };
 		let syncSetDataChanged = false;
-
-		if (IS_CLIQZ) {
-			data.enable_human_web = false;
-			data.enable_ad_block = false;
-			data.enable_anti_tracking = false;
-		}
 
 		// Set the conf from data
 		const dataKeys = Object.keys(data);
@@ -637,9 +634,9 @@ class PanelData {
 
 			if (categories.hasOwnProperty(cat)) {
 				categories[cat].num_total++;
-				if (PanelData._addsUpToBlocked(trackerState)) { categories[cat].num_blocked++; }
+				if (PanelData._addsUpToBlocked(tracker)) { categories[cat].num_blocked++; }
 			} else {
-				categories[cat] = PanelData._buildCategory(cat, trackerState);
+				categories[cat] = PanelData._buildCategory(cat, tracker);
 			}
 			categories[cat].trackers.push(PanelData._buildTracker(tracker, trackerState, smartBlock));
 		});
@@ -657,22 +654,19 @@ class PanelData {
 
 	/**
 	 * _buildCategories helper
-	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
 	 * @return	{boolean}	is the tracker blocked in one of the possible ways?
 	 */
-	static _addsUpToBlocked({
-		ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed
-	}) {
-		return (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed));
+	static _addsUpToBlocked({ blocked }) {
+		return !!blocked;
 	}
 
 	/**
 	 * _buildCategories helper
 	 * @param	{string}	category		the category of a tracker
-	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
+	 * @param	{Object}	tracker	a tracker
 	 * @return	{Object}	an object with data for a new category
 	 */
-	static _buildCategory(category, trackerState) {
+	static _buildCategory(category, tracker) {
 		return {
 			id: category,
 			name: t(`category_${category}`),
@@ -680,7 +674,7 @@ class PanelData {
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 			num_total: 1,
-			num_blocked: PanelData._addsUpToBlocked(trackerState) ? 1 : 0,
+			num_blocked: PanelData._addsUpToBlocked(tracker) ? 1 : 0,
 			trackers: []
 		};
 	}
@@ -697,9 +691,9 @@ class PanelData {
 	static _buildTracker(tracker, trackerState, smartBlock) {
 		const {
 			cat,
-			cliqzAdCount,
-			cliqzCookieCount,
-			cliqzFingerprintCount,
+			commonAdCount,
+			commonCookieCount,
+			commonFingerprintCount,
 			hasCompatibilityIssue,
 			hasInsecureIssue,
 			hasLatencyIssue,
@@ -707,6 +701,7 @@ class PanelData {
 			name,
 			sources,
 			trackerID,
+			blocked: actually_blocked,
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
@@ -714,6 +709,7 @@ class PanelData {
 			id,
 			name,
 			description: '',
+			actually_blocked,
 			blocked,
 			ss_allowed,
 			ss_blocked,
@@ -725,9 +721,9 @@ class PanelData {
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
 			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
-			cliqzAdCount,
-			cliqzCookieCount,
-			cliqzFingerprintCount,
+			commonAdCount,
+			commonCookieCount,
+			commonFingerprintCount,
 		};
 	}
 
@@ -789,7 +785,7 @@ class PanelData {
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
 
-		const ghosteryBugs = getCliqzGhosteryBugs(id);
+		const ghosteryBugs = getCommonGhosteryBugs(id);
 
 		if (ghosteryBugs && ghosteryBugs.bugs) {
 			const { bugs } = ghosteryBugs;
@@ -803,9 +799,9 @@ class PanelData {
 				const trackerListIndex = appsById[trackerId.aid];
 				if (!trackerListIndex) return;
 
-				this._trackerList[trackerListIndex].cliqzCookieCount = bugs[bugsId].cookies;
-				this._trackerList[trackerListIndex].cliqzFingerprintCount = bugs[bugsId].fingerprints;
-				this._trackerList[trackerListIndex].cliqzAdCount = bugs[bugsId].ads;
+				this._trackerList[trackerListIndex].commonCookieCount = bugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].commonFingerprintCount = bugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].commonAdCount = bugs[bugsId].ads;
 			});
 		}
 

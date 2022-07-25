@@ -130,11 +130,9 @@
 			.trk-name {
 				color: #9b9b9b;
 				font-style: italic;
-				text-decoration: line-through;
 			}
 			.trk-src-link {
 				font-style: italic;
-				text-decoration: line-through;
 			}
 		}
 		&.paused {
@@ -169,11 +167,9 @@
 			.trk-name {
 				color: #9b9b9b;
 				font-style: italic;
-				text-decoration: line-through;
 			}
 			.trk-src-link {
 				font-style: italic;
-				text-decoration: line-through;
 			}
 		}
 		.blocking-trk.blocked {
@@ -245,11 +241,9 @@
 			.trk-name {
 				color: #9b9b9b;
 				font-style: italic;
-				text-decoration: line-through;
 			}
 			.trk-src-link {
 				font-style: italic;
-				text-decoration: line-through;
 			}
 			&:not(:hover) {
 				svg.status {display: none;}

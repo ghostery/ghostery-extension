@@ -36,7 +36,7 @@ export function updateSummaryBlockingCount(categories = [], smartBlock, updateTr
 			const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
 			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
 
-			if (trackerEl.ss_blocked || sbBlocked || (trackerEl.blocked && !trackerEl.ss_allowed && !sbUnblocked)) {
+			if (trackerEl.ss_blocked || sbBlocked || (trackerEl.actually_blocked && !trackerEl.ss_allowed && !sbUnblocked)) {
 				numTotalBlocked++;
 			}
 			if (trackerEl.ss_blocked) {

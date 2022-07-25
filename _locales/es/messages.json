@@ -1,4 +1,7 @@
 {
+  "accept_terms": {
+    "message": "Accept terms"
+  },
   "account_creation_privacy_statement": {
     "message": "Se aplican nuestros $LINK_TERMS_START$Términos y condiciones$LINK_TERMS_END$ generales y nuestro $LINK_UA_START$Acuerdo de licencia$LINK_UA_END$. Puedes ver nuestra Política de privacidad $LINK_PS_START$aquí$LINK_PS_END$.",
     "placeholders": {
@@ -27,6 +30,9 @@
   },
   "ad_blocking_DESC": {
     "message": "Bloquea anuncios en las páginas web que visites."
+  },
+  "additional_permissions_required": {
+    "message": "Additional Permissions Required"
   },
   "ads": {
     "message": "anuncios"
@@ -78,6 +84,12 @@
   "alert_smart_block_on": {
     "message": "Navegación inteligente SÍ. Se ajustará el bloqueador de rastreadores para optimizar el rendimiento de la página."
   },
+  "all_popups": {
+    "message": "All Popups"
+  },
+  "all_set__go_with_ghosty_": {
+    "message": "All set! go with ghosty!"
+  },
   "already_subscribed": {
     "message": "Ya te has suscrito"
   },
@@ -126,8 +138,14 @@
   "anti_tracking_DESC": {
     "message": "Anonimiza los rastreadores desbloqueados y desconocidos para una mayor protección de navegación."
   },
+  "any_questions__anytime_": {
+    "message": "Any questions? Anytime!"
+  },
   "are_you_sure_": {
     "message": "Are you sure?"
+  },
+  "are_you_sure_you_want_to_skip_enabling_ghostery_": {
+    "message": "Are you sure you want to skip enabling Ghostery?"
   },
   "audio_video_player": {
     "message": "Reproductor de audio/vídeo",
@@ -156,6 +174,9 @@
   },
   "block_toggle_tracking": {
     "message": "Bloquear rastreadores"
+  },
+  "blocked": {
+    "message": "Bloqueado"
   },
   "blocked_redirect_action_always_title": {
     "description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -522,6 +543,9 @@
     "message": "CDN",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
+    "message": "Check out <a href=\"$${0}\" target=\"_blank\">FAQs</a> or drop us a line at <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. We'll be more than happy to talk to you!"
+  },
   "choose_your_default_search": {
     "message": "Elige tu búsqueda predeterminada"
   },
@@ -607,6 +631,9 @@
   "confirm_password_colon": {
     "message": "Confirmar contraseña:"
   },
+  "continue": {
+    "message": "Continue"
+  },
   "cookie": {
     "message": "cookie"
   },
@@ -668,6 +695,12 @@
   "email_colon": {
     "message": "Correo electrónico:"
   },
+  "enable_ghostery": {
+    "message": "Enable Ghostery"
+  },
+  "enable_ghostery_to_get_started": {
+    "message": "Enable Ghostery to get started"
+  },
   "enable_when_blacklisted": {
     "message": "Para usar esta función, anula Restringir sitio."
   },
@@ -712,6 +745,9 @@
   "first_name_field_label": {
     "message": "Nombre (opcional):"
   },
+  "for_more_information_read_our_full": {
+    "message": "For more information read our full"
+  },
   "forgot_password": {
     "message": "¿Contraseña  olvidada?"
   },
@@ -730,8 +766,23 @@
   "ghostery_basic": {
     "message": "Básico"
   },
+  "ghostery_disabled": {
+    "message": "Ghostery disabled"
+  },
+  "ghostery_enabled": {
+    "message": "Ghostery enabled"
+  },
   "ghostery_is_ready": {
     "message": "¡Ghostery está listo!"
+  },
+  "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
+    "message": "Ghostery is set up to stop trackers in their tracks and protect your privacy while browsing!"
+  },
+  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
+    "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers for their own profit."
+  },
+  "ghostery_privacy_policy": {
+    "message": "Ghostery Privacy Policy"
   },
   "global_settings_saved": {
     "message": "Ajustes globales guardados"
@@ -755,481 +806,17 @@
     "message": "Hosting",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "hub_create_account_already_have_account": {
-    "message": "¿Ya tienes una cuenta de Ghostery?"
-  },
-  "hub_create_account_confirm_password_do_not_match": {
-    "message": "Tus contraseñas no coinciden."
-  },
-  "hub_create_account_header_title": {
-    "message": "¿Te gustaría crear una cuenta de Ghostery para sincronizar la configuración entre tus navegadores y dispositivos?"
-  },
-  "hub_create_account_label_email_last_name": {
-    "message": "Apellidos (opcional):"
-  },
-  "hub_create_account_label_first_name": {
-    "message": "Nombre (opcional):"
-  },
-  "hub_create_account_label_password_invalid": {
-    "message": "Solo se permiten estos caracteres especiales: !@#$%^&*=+()<>{}[];:,./?"
-  },
-  "hub_create_account_label_password_invalid_length": {
-    "message": "Usa entre 8 y 50 caracteres."
-  },
-  "hub_create_account_link_login": {
-    "message": "Accede aquí."
-  },
-  "hub_create_account_toast_error": {
-    "message": "Esa dirección de correo electrónico ya está en uso.  Por favor, elige otra."
-  },
-  "hub_create_account_toast_success": {
-    "message": "Cuenta creada con éxito"
-  },
-  "hub_home_feature_setup_button": {
-    "message": "Editar configuración"
-  },
-  "hub_home_feature_setup_button_alt": {
-    "message": "Instalación personalizada completa"
-  },
-  "hub_home_feature_setup_text": {
-    "message": "Edita tus ajustes y preferencias de bloqueo."
-  },
-  "hub_home_feature_tutorial_button_alt": {
-    "message": "Tutorial completo"
-  },
-  "hub_home_feature_tutorial_text": {
-    "message": "Recorrido por las principales características de Ghostery."
-  },
-  "hub_home_feature_tutorial_title": {
-    "message": "Realizar un tutorial"
-  },
-  "hub_home_header_checkbox_label": {
-    "message": "Compartir datos estadísticos adicionales para mejorar el rendimiento de Ghostery."
-  },
-  "hub_home_header_info": {
-    "message": "Los nuevos usuarios participan por defecto en Human Web. Puedes cambiar esta configuración en los ajustes personalizados o la extensión."
-  },
-  "hub_home_header_info_link": {
-    "message": "Más información."
-  },
-  "hub_home_header_info_opted_out": {
-    "message": "Los nuevos usuarios no participan por defecto en Human Web. Puedes optar por participar en estas funciones recomendadas en la instalación personalizada o en la extensión. "
-  },
-  "hub_home_header_tagline": {
-    "message": "Te hemos protegido con nuestros ajustes predeterminados."
-  },
-  "hub_home_header_tagline_2": {
-    "message": "¡Comienza a navegar!"
-  },
-  "hub_home_header_text": {
-    "message": "¡Ghostery está listo!"
-  },
-  "hub_home_page_title": {
-    "message": "Centro de Ghostery: inicio"
-  },
-  "hub_home_plus_full_protection": {
-    "message": "¡Estás totalmente protegido!"
-  },
-  "hub_home_plus_upgrade_button_text": {
-    "message": "Mejorar ahora"
-  },
-  "hub_home_plus_upgrade_text": {
-    "message": "Ve más allá de la privacidad básica. ¡Mejora a Ghostery Plus para acceder a nuestros potentes navegador privado, búsqueda privada y análisis avanzados de rastreadores!"
-  },
-  "hub_home_subheader_optimize": {
-    "message": "Optimiza tu experiencia Ghostery"
-  },
-  "hub_login_header_title": {
-    "message": "Inicia sesión en tu cuenta."
-  },
-  "hub_login_label_password_invalid": {
-    "message": "Usa entre 8 y 50 caracteres."
-  },
-  "hub_login_link_create_account": {
-    "message": "Registro."
-  },
-  "hub_login_link_dont_have_account": {
-    "message": "¿No tienes una cuenta?"
-  },
-  "hub_login_toast_success": {
-    "message": "¡Sesión iniciada con éxito! Ya se han importado los ajustes de tu cuenta."
-  },
-  "hub_products_header_description": {
-    "message": "Mejora tu protección y tu experiencia en línea con nuestra completa suite de privacidad."
-  },
-  "hub_products_header_title": {
-    "message": "¡Navega de forma más inteligente con los productos de Ghostery!"
-  },
-  "hub_products_main_promo_description": {
-    "message": "Navega sin anuncios ni rastreadores donde estés con nuestro navegador móvil actualizado y mejorado. ¡Ahora equipado con un buscador privado!"
-  },
-  "hub_products_main_promo_title": {
-    "message": "Navegador privado móvil"
-  },
-  "hub_products_page_title": {
-    "message": "Centro de Ghostery: prueba otros productos de Ghostery"
-  },
-  "hub_products_second_promo_description": {
-    "message": "Realiza búsquedas privadas y ve estadísticas del rastreador con nuestra nueva función de pestaña. ¡Próximamente!"
-  },
-  "hub_products_second_promo_title": {
-    "message": "Ghostery Start Tab"
-  },
-  "hub_products_third_promo_description": {
-    "message": "Protege tu privacidad en línea y líbrate de los anuncios con nuestro producto más ligero hasta el momento, en exclusiva para Safari."
-  },
-  "hub_products_third_promo_title": {
-    "message": "Ghostery Lite"
-  },
-  "hub_setup_antisuite_description_antitracking": {
-    "message": "Anonimiza los rastreadores desbloqueados y no identificados para una mayor protección de navegación."
-  },
-  "hub_setup_antisuite_feature_enabled": {
-    "message": "Habilitado"
-  },
-  "hub_setup_blocking_description_custom": {
-    "message": "Elige qué rastreadores bloquear"
-  },
-  "hub_setup_blocking_description_everything": {
-    "message": "Todos los rastreadores bloqueados"
-  },
-  "hub_setup_blocking_description_nothing": {
-    "message": "No hay rastreadores bloqueados"
-  },
-  "hub_setup_blocking_description_recommended": {
-    "message": "Publicidad, análisis del sitio y rastreadores de publicidad para adultos bloqueados"
-  },
-  "hub_setup_blocking_text_custom": {
-    "message": "Elige de la lista"
-  },
-  "hub_setup_blocking_text_everything": {
-    "message": "Bloquear todo"
-  },
-  "hub_setup_blocking_text_nothing": {
-    "message": "No bloquear nada"
-  },
-  "hub_setup_blocking_text_recommended": {
-    "message": "Bloquear por defecto"
-  },
-  "hub_setup_enter_modal_text": {
-    "message": "Realizar la instalación personalizada anulará tus ajustes anteriores de Ghostery. ¿Quieres continuar?"
-  },
-  "hub_setup_exit_flow": {
-    "message": "Salir de instalación personalizada"
-  },
-  "hub_setup_feature_already_active": {
-    "message": "Esta función ya está activada por defecto en Cliqz. $LINK_LM_START$Más información$LINK_LM_END$",
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    }
-  },
-  "hub_setup_feature_products_button": {
-    "message": "¡Sí, por favor!"
-  },
-  "hub_setup_feature_products_description": {
-    "message": "¡Protégete completamente con nuestra completa suite de privacidad!"
-  },
-  "hub_setup_feature_products_title": {
-    "message": "Ver más productos de Ghostery"
-  },
-  "hub_setup_feature_supporter_description": {
-    "message": "Apoya a Ghostery y desbloquea beneficios especiales."
-  },
-  "hub_setup_feature_tutorial_description": {
-    "message": "Recorrido por las principales características de Ghostery."
-  },
-  "hub_setup_feature_tutorial_title": {
-    "message": "Realizar un tutorial"
-  },
-  "hub_setup_header_title_antisuite": {
-    "message": "¿Te gustaría navegar de forma más inteligente con nuestras funciones recomendadas?"
-  },
-  "hub_setup_header_title_blocking": {
-    "message": "Ghostery puede bloquear los rastreadores para que tu navegación sea más limpia, rápida y segura.$NEW_LINE$¿Qué quieres bloquear?",
-    "placeholders": {
-      "new_line": {
-        "content": "<br />"
-      }
-    }
-  },
-  "hub_setup_header_title_done": {
-    "message": "¡Instalación personalizada completa!"
-  },
-  "hub_setup_header_title_humanweb": {
-    "message": "¿Te gustaría ayudar a mejorar Ghostery?"
-  },
-  "hub_setup_humanweb_header": {
-    "message": "Usamos datos estadísticos de Human Web para mejorar el rendimiento de Ghostery. No se recopilan datos personales. $LINK_LM_START$Más información$LINK_LM_END$",
-    "placeholders": {
-      "link_lm_start": {
-        "content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
-      },
-      "link_lm_end": {
-        "content": "</a>"
-      }
-    }
-  },
-  "hub_setup_humanweb_label": {
-    "message": "Ayuda a Ghostery compartiendo esta información"
-  },
-  "hub_setup_modal_button_ask_again": {
-    "message": "No preguntarme de nuevo"
-  },
-  "hub_setup_modal_button_no": {
-    "message": "No"
-  },
-  "hub_setup_modal_button_yes": {
-    "message": "Sí"
-  },
-  "hub_setup_page_title": {
-    "message": "Centro de Ghostery: instalación"
-  },
-  "hub_setup_page_title_antisuite": {
-    "message": "Centro de Ghostery: instalar la antisuite"
-  },
-  "hub_setup_page_title_blocking": {
-    "message": "Centro de Ghostery: ajustar el bloqueo"
-  },
-  "hub_setup_page_title_done": {
-    "message": "Centro de Ghostery: instalación completa"
-  },
-  "hub_setup_page_title_humanweb": {
-    "message": "Centro de Ghostery: instalación de Human Web"
-  },
-  "hub_setup_ready_heading": {
-    "message": "Optimiza tu experiencia Ghostery"
-  },
-  "hub_side_navigation_home": {
-    "message": "Inicio"
-  },
-  "hub_side_navigation_products": {
-    "message": "Ver más productos de Ghostery"
-  },
-  "hub_side_navigation_tutorial": {
-    "message": "Realizar un tutorial"
-  },
-  "hub_side_navigation_upgrade_plan": {
-    "message": "Mejorar plan"
-  },
-  "hub_signedin_as_email": {
-    "message": "Sesión iniciada como"
-  },
-  "hub_signedin_exit": {
-    "message": "Volver a inicio"
-  },
-  "hub_signedin_header_title": {
-    "message": "Ya has iniciado sesión"
-  },
-  "hub_supporter_feature_more_description": {
-    "message": "Mantente al tanto de otras características e información interesantes mientras seguimos mejorando tu experiencia con Ghostery."
-  },
-  "hub_supporter_feature_more_title": {
-    "message": "... ¡y más por venir!"
-  },
-  "hub_supporter_feature_stats_description": {
-    "message": "Mira los resultados históricos de bloqueo con gráficos y estadísticas para detectar tendencias y saber cómo Ghostery afecta a tu navegación."
-  },
-  "hub_supporter_feature_support_description": {
-    "message": "¿Necesitas ayuda? ¿Has encontrado una página web rota? Resuelve tus preguntas y problemas rápidamente con nuestro servicio de ayuda prioritario, solo accesible creando una cuenta Plus."
-  },
-  "hub_supporter_feature_theme_description": {
-    "message": "¡Personaliza los colores de Ghostery para una nueva experiencia visual! Introducido por petición popular. Echa un vistazo a nuestro tema especial Dark Blue. Hay muchos más por venir."
-  },
-  "hub_supporter_header_description": {
-    "message": "¡Ve más allá de la privacidad básica y desbloquea nuestra completa suite de productos!"
-  },
-  "hub_supporter_header_title": {
-    "message": "Mejorar a Ghostery Plus"
-  },
-  "hub_supporter_manifesto": {
-    "message": "¡Mejora a Ghostery Plus para desbloquear toda nuestra suite de productos! Por solo 4,99 &#36; al mes, obtén acceso a un potente navegador privado con búsqueda privada integrada, análisis avanzados de rastreadores y otros beneficios especiales."
-  },
-  "hub_supporter_page_title": {
-    "message": "Centro de Ghostery: Ghostery Plus"
-  },
-  "hub_supporter_perk_analytics_description": {
-    "message": "Accede a Ghostery Insights, nuestro panel de inteligencia de rastreadores en tiempo real"
-  },
-  "hub_supporter_perk_analytics_title": {
-    "message": "Análisis avanzados de rastreadores"
-  },
-  "hub_supporter_perk_dawn_and_glow_description": {
-    "message": "Descarga Ghostery Dawn y Glow, nuestro potente navegador privado con motor de búsqueda integrado"
-  },
-  "hub_supporter_perk_dawn_and_glow_title": {
-    "message": "Navegador y búsqueda privados"
-  },
-  "hub_supporter_perk_themes_and_more_description": {
-    "message": "Personaliza los colores de Ghostery - ¡Prueba nuestros temas Leaf, Palm y Dark Blue!"
-  },
-  "hub_supporter_perk_themes_and_more_title": {
-    "message": "Temas personalizados y más"
-  },
-  "hub_supporter_perk_themes_description": {
-    "message": "Personaliza los colores de Ghostery. ¡Prueba nuestro tema Dark Blue!"
-  },
-  "hub_supporter_price": {
-    "message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ al mes",
-    "placeholders": {
-      "sup_start": {
-        "content": "<sup>"
-      },
-      "sup_end": {
-        "content": "</sup>"
-      },
-      "span_start": {
-        "content": "<span>"
-      },
-      "span_end": {
-        "content": "</span>"
-      }
-    }
-  },
-  "hub_tutorial_antisuite_antitracking_description": {
-    "message": "Eliminar los puntos de datos que los sitios web pueden usar para identificarte."
-  },
-  "hub_tutorial_antisuite_title": {
-    "message": "Obtén protección adicional y control automatizado con nuestras funciones de privacidad mejoradas:"
-  },
-  "hub_tutorial_blocking_allow": {
-    "message": "Permitir siempre rastreadores en este sitio."
-  },
-  "hub_tutorial_blocking_block": {
-    "message": "Bloquear siempre el rastreador en el sitio actual."
-  },
-  "hub_tutorial_blocking_block_always": {
-    "message": "Bloquear siempre rastreadores en todos los sitios."
-  },
-  "hub_tutorial_blocking_tagline": {
-    "message": "Toma el control de tu privacidad y experiencia de navegación bloqueando o desbloqueando los rastreadores de la lista."
-  },
-  "hub_tutorial_blocking_title": {
-    "message": "Elige qué y cómo quieres bloquearlo."
-  },
-  "hub_tutorial_detailed_expanded_view": {
-    "message": "Vista detallada expandida"
-  },
-  "hub_tutorial_exit_flow": {
-    "message": "Salir del tutorial"
-  },
-  "hub_tutorial_layout_tagline": {
-    "message": "Alterna entre una vista simplificada o detallada en función de lo que deseas que Ghostery muestre."
-  },
-  "hub_tutorial_layout_title": {
-    "message": "Vistas sencillas y detalladas"
-  },
-  "hub_tutorial_page_title": {
-    "message": "Centro de Ghostery: tutorial"
-  },
-  "hub_tutorial_page_title_anti_suite": {
-    "message": "Centro de Ghostery: tutorial de características adicionales"
-  },
-  "hub_tutorial_page_title_blocking": {
-    "message": "Centro de Ghostery: tutorial de bloqueo"
-  },
-  "hub_tutorial_page_title_layout": {
-    "message": "Centro de Ghostery: tutorial de diseño"
-  },
-  "hub_tutorial_page_title_trackerlist": {
-    "message": "Centro de Ghostery: tutorial de rastreadores"
-  },
-  "hub_tutorial_page_title_trust": {
-    "message": "Centro de Ghostery: tutorial de confianza y restricción"
-  },
-  "hub_tutorial_page_title_video": {
-    "message": "Centro de Ghostery: tutorial de vista general"
-  },
-  "hub_tutorial_trackerlist_tagline": {
-    "message": "Ghostery te permite mantenerte al tanto de las compañías que te rastrean indicando los rastreadores de cada sitio web que visitas."
-  },
-  "hub_tutorial_trackerlist_title": {
-    "message": "Lista de rastreadores"
-  },
-  "hub_tutorial_trust_restrict_site": {
-    "message": "Bloquear siempre rastreadores en este sitio."
-  },
-  "hub_tutorial_trust_tagline": {
-    "message": "Permite o restringe sitios web con un clic."
-  },
-  "hub_tutorial_trust_title": {
-    "message": "Confiar y restringir sitios"
-  },
-  "hub_tutorial_trust_trust_site": {
-    "message": "Permitir siempre rastreadores en el sitio."
-  },
-  "hub_tutorial_video_tagline": {
-    "message": "Bloquea rastreadores y anuncios, protege tu privacidad y acelera la carga de páginas."
-  },
-  "hub_tutorial_video_title": {
-    "message": "Qué puede hacer Ghostery por ti"
-  },
-  "hub_upgrade_additional_protection": {
-    "message": "Protección adicional"
-  },
-  "hub_upgrade_advanced_device_protection": {
-    "message": "Protección de dispositivo avanzada"
-  },
-  "hub_upgrade_already_protected": {
-    "message": "Ya protegido"
-  },
-  "hub_upgrade_basic_browser_protection": {
-    "message": "Protección de navegador básica"
-  },
-  "hub_upgrade_basic_protection": {
-    "message": "Protección básica"
-  },
-  "hub_upgrade_browser_ad_blocking": {
-    "message": "Bloqueador de anuncios de navegador"
-  },
-  "hub_upgrade_browser_tracker_blocking": {
-    "message": "Bloqueador de rastreadores de navegador"
-  },
-  "hub_upgrade_custom_blocking_preferences": {
-    "message": "Preferencias de bloqueo personalizadas"
-  },
-  "hub_upgrade_extension_themes": {
-    "message": "Temas de extensiones"
-  },
-  "hub_upgrade_historical_extension_stats": {
-    "message": "Estadísticas históricas de extensiones"
-  },
-  "hub_upgrade_maximum_protection": {
-    "message": "Protección máxima"
-  },
-  "hub_upgrade_monthly": {
-    "message": "Mensual"
-  },
-  "hub_upgrade_page_title": {
-    "message": "Ghostery Hub - Mejorar plan"
-  },
-  "hub_upgrade_plan_free": {
-    "message": "Gratis"
-  },
-  "hub_upgrade_protection_plan": {
-    "message": "plan de protección"
-  },
-  "hub_upgrade_scroll_down": {
-    "message": "Ver lista completa de funciones"
-  },
-  "hub_upgrade_to": {
-    "message": "Mejorar a"
-  },
-  "hub_upgrade_yearly": {
-    "message": "Anual"
-  },
-  "hub_upgrade_your": {
-    "message": "Mejora tu"
+  "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
+    "message": "I agree to send non-personal information to <a href=\"$${0}\">WhoTracks.Me</a> and I accept the Ghostery <a href=\"$${1}\">Privacy Policy</a>"
   },
   "invalid_email_forgot": {
     "message": "Lo sentimos, pero debes indicar una dirección de correo electrónico real."
   },
   "invalid_email_login": {
     "message": "Lo sentimos, pero debes indicar una dirección de correo electrónico real."
+  },
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
+    "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send tracker information to whotracks.me. The tracker input enables Ghostery to provide real-time intel on trackers and protection to the entire Ghostery user community."
   },
   "last_name_field_label": {
     "message": "Apellidos (opcional):"
@@ -1241,18 +828,7 @@
     "message": "Correo electrónico"
   },
   "license_footer": {
-    "message": "Ghostery $COPY$; es una empresa de Cliqz. Consulta más información sobre $LINK_START$ Cliqz $LINK_END$. $COPY$ Cliqz International GmbH es una subsidiaria de propiedad total de Cliqz GmbH. Todos los derechos reservados.",
-    "placeholders": {
-      "link_start": {
-        "content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
-      },
-      "link_end": {
-        "content": "</a>"
-      },
-      "copy": {
-        "content": "&copy;"
-      }
-    }
+    "message": "Ghostery GmbH. Todos los derechos reservados."
   },
   "license_generic": {
     "message": "Texto de licencia estándar"
@@ -1287,6 +863,9 @@
   "miscellaneous": {
     "message": "Miscelánea",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "more_information_on_@_0__": {
+    "message": "More information on $${0}."
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
@@ -1687,6 +1266,9 @@
   "priority_support": {
     "message": "Asistencia prioritaria"
   },
+  "privacy_policy": {
+    "message": "privacy policy"
+  },
   "privacy_protection": {
     "message": "Protección de la privacidad en este sitio"
   },
@@ -1837,9 +1419,6 @@
   },
   "settings_highlight_trackers_tooltip": {
     "message": "Ciertas funciones, como compartir en redes sociales, los comentarios o los reproductores de vídeo podrían no funcionar al bloquear un rastreador determinado. Si quieres volver a habilitar una función bloqueada, haz clic en este icono de la página:"
-  },
-  "settings_human_web_tooltip": {
-    "message": "Ahora, Ghostery implementa de forma predeterminada la Human Web, que es una revolucionaria tecnología que utiliza el conocimiento de la multitud para construir una Internet más privada."
   },
   "settings_import_dialog_error": {
     "message": "Ghostery no puede mostrar el diálogo de examinar si la página actual es una de las páginas reservadas del navegador. Por favor, navega a otra página y vuelve a probar."
@@ -2016,6 +1595,9 @@
   "site_analytics": {
     "message": "Estadísticas de sitios",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "skip": {
+    "message": "Omitir"
   },
   "smart_blocking": {
     "message": "Navegación inteligente"
@@ -2194,6 +1776,9 @@
   "system_wide_tracker_and_ad_blocking": {
     "message": "Rastreador y bloqueo de anuncios en todo el sistema"
   },
+  "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
+    "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
+  },
   "too_many_failed_logins_text": {
     "message": "Demasiados inicios de sesión fallidos. Vuelve a intentarlo dentro de una hora."
   },
@@ -2242,6 +1827,9 @@
   "tracker_details": {
     "message": "Detalles del rastreador"
   },
+  "trackers": {
+    "message": "Rastreadores"
+  },
   "trackers_blocked": {
     "message": "Rastreadores bloqueados:"
   },
@@ -2255,7 +1843,6 @@
     "message": "Prueba Ghostery Midnight"
   },
   "unblocked": {
-    "description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
     "message": "desbloqueado"
   },
   "unidentified": {
@@ -2268,6 +1855,12 @@
     "message": "Desconocido",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "welcome_to": {
+    "message": "Welcome to"
+  },
+  "what_is_whotracks_me_": {
+    "message": "What is whotracks.me?"
+  },
   "white_black_list_error_invalid_url": {
     "message": "Introduce un URL o comodín válidos."
   },
@@ -2277,6 +1870,21 @@
   "whitelist_error_duplicate_url": {
     "description": "Options page site trust error message shown when trusting a URL that is already in the trusted sites list.",
     "message": "Este ya es un sitio de confianza."
+  },
+  "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.me, operated by Ghostery, is the most comprehensive global resource on trackers, bringing transparency to web tracking."
+  },
+  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
+    "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+  },
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
+    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
+  },
+  "you_chose_to_skip_enabling_ghostery_": {
+    "message": "You chose to skip enabling Ghostery!"
+  },
+  "you_re_all_set__ghosterian_": {
+    "message": "You're all set, Ghosterian!"
   },
   "your_email_do_not_match": {
     "message": "Tus correos no coinciden."

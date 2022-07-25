@@ -16,7 +16,7 @@ import {
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
-	TOGGLE_CLIQZ_FEATURE,
+	TOGGLE_COMMON_FEATURE,
 	UPDATE_NOTIFICATION_STATUS,
 	TOGGLE_CHECKBOX,
 	TOGGLE_EXPANDED,
@@ -53,6 +53,7 @@ const initialState = {
 	email: '',
 	emailValidated: false,
 	current_theme: 'default',
+	setup_complete: false,
 };
 
 /**
@@ -266,7 +267,7 @@ export default (state = initialState, action) => {
 			const updated = _showNotification(state, notificationAction);
 			return { ...state, ...updated };
 		}
-		case TOGGLE_CLIQZ_FEATURE: {
+		case TOGGLE_COMMON_FEATURE: {
 			let pingName = '';
 			switch (action.data.featureName) {
 				case 'enable_anti_tracking':

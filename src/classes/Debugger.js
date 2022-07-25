@@ -202,7 +202,6 @@ class Debugger {
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		getUserData: 'ghostery.getUserData()',
-		openIntroHub: 'ghostery.openIntroHub()',
 		openPanel: 'ghostery.openPanel()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
@@ -240,7 +239,6 @@ class Debugger {
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
-		[`${this._helpFunctionNames.openIntroHub}`, 'Open the Hub in a new tab for automation testing'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
 	]
 
@@ -395,21 +393,6 @@ class Debugger {
 	 * @access private
 	 * @since 8.5.3
 	 *
-	 * The help text for the public `openIntroHub()` method.
-	 * Displayed after calling ghostery.help('openIntroHub').
-	 */
-	static helpOpenIntroHub = [
-		`${CSS_MAINHEADER}${this._helpFunctionNames.openIntroHub}`,
-		'Open the Hub in a new tab for automation testing',
-		'',
-		[`${CSS_SUBHEADER}Arguments`, 'Description'],
-		['Second: true / false', 'Required. True to simulate first on-install open (justInstalled=true). Second to simulate return visit.'],
-	];
-
-	/**
-	 * @access private
-	 * @since 8.5.3
-	 *
 	 * The help text for the public `openPanel()` method.
 	 * Displayed after calling ghostery.help('openPanel').
 	 */
@@ -515,7 +498,6 @@ class Debugger {
 			helpGetConfData,
 			helpGetGlobals,
 			helpGetUserData,
-			helpOpenIntroHub,
 			helpOpenPanel,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
@@ -538,7 +520,6 @@ class Debugger {
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
 		else if (eeFnName === 'getuserdata')		helpStringArr.push(...helpGetUserData);
-		else if (eeFnName === 'openintrohub')		helpStringArr.push(...helpOpenIntroHub);
 		else if (eeFnName === 'openpanel')			helpStringArr.push(...helpOpenPanel);
 		else if (eeFnName === 'show')				helpStringArr.push(...helpSettingsShow);
 		else if (eeFnName === 'togglelogging')		helpStringArr.push(...helpSettingsToggleLogging);
@@ -771,23 +752,6 @@ class Debugger {
 					active: true
 				});
 			}
-		});
-		return THANKS;
-	}
-
-	/**
-	 * @since 8.5.3
-	 *
-	 * Open the Ghostery Intro Hub in a new tab for automation testing.
-	 *
-	 * @param	{Boolean}	justInstalled	True to simulate first, on-install visit. False to simulate return visit.
-	 * @return 	{String}					A thank you message.
-	 */
-	openIntroHub = (justInstalled) => {
-		const template = 'hub';
-		chrome.tabs.create({
-			url: chrome.runtime.getURL(`./app/templates/${template}.html?justInstalled=${justInstalled}`),
-			active: true
 		});
 		return THANKS;
 	}

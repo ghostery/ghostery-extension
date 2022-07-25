@@ -20,9 +20,9 @@ import {
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	UPDATE_CLIQZ_MODULE_WHITELIST,
+	UPDATE_COMMON_MODULE_WHITELIST,
 	TOGGLE_EXPAND_ALL,
-	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_COMMON_MODULE_DATA,
 	UPDATE_SUMMARY_DATA
 } from '../constants/constants';
 import {
@@ -32,6 +32,7 @@ import { updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 
 const initialState = {
+	setup_complete: false,
 	categories: [],
 	expand_all_trackers: true,
 	filter: {
@@ -125,7 +126,7 @@ const _updateTrackerTrustRestrict = (state, action) => {
  * @param  {Object} action 		action which provides data
  * @return {Object}        		updated categories and site-specific blocking counters
  */
-const _updateCliqzModuleWhitelist = (state, action) => {
+const _updateCommonModuleWhitelist = (state, action) => {
 	const updatedUnidentifiedCategory = JSON.parse(JSON.stringify(state.unidentifiedCategory));
 	const { whitelistedUrls } = updatedUnidentifiedCategory;
 	const { unidentifiedTracker, pageHost } = action.data;
@@ -225,11 +226,11 @@ export default (state = initialState, action) => {
 			const updated = _updateTrackerTrustRestrict(state, action);
 			return { ...state, ...updated };
 		}
-		case UPDATE_CLIQZ_MODULE_WHITELIST: {
-			const unidentifiedCategory = _updateCliqzModuleWhitelist(state, action);
+		case UPDATE_COMMON_MODULE_WHITELIST: {
+			const unidentifiedCategory = _updateCommonModuleWhitelist(state, action);
 			return { ...state, unidentifiedCategory };
 		}
-		case UPDATE_CLIQZ_MODULE_DATA:
+		case UPDATE_COMMON_MODULE_DATA:
 		case UPDATE_SUMMARY_DATA: {
 			if (action.data.antiTracking && action.data.adBlock) {
 				const { antiTracking, adBlock } = action.data;
