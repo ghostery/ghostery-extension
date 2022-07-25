@@ -374,14 +374,13 @@ class EventHandlers {
 				type: eventMutable.type,
 				url: eventMutable.url,
 				block: conf.enable_ad_block && block,
-				smartBlocked: false,
 				tab_id,
 				from_frame: eventMutable.parentFrameId !== -1,
 				request_id
 			});
 		}, 1);
 
-		if (block && conf.enable_ad_block) {
+		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
 			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 
@@ -536,14 +535,14 @@ class EventHandlers {
 	 */
 	_processBug(details) {
 		const {
-			bug_id, app_id, type, url, block, smartBlocked, tab_id, request_id
+			bug_id, app_id, type, url, block, tab_id, request_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
 		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
 
 		let num_apps_old;
 
-		log((block || smartBlocked ? 'Blocked' : 'Found'), type, url);
+		log((block ? 'Blocked' : 'Found'), type, url);
 		log(`^^^ Pattern ID ${bug_id} on tab ID ${tab_id}`);
 
 		if (conf.show_alert) {
@@ -557,7 +556,7 @@ class EventHandlers {
 		// throttled in PanelData
 		panelData.updatePanelUI();
 
-		if ((block || smartBlocked) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
+		if (block && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
 			buildC2P(details, app_id);
 		}
 

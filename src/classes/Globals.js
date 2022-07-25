@@ -124,6 +124,7 @@ class Globals {
 			'show_alert',
 			'show_badge',
 			'show_cmp',
+			'show_redirect_tracking_dialogs',
 			'show_tracker_urls',
 			'site_specific_blocks',
 			'site_specific_unblocks',

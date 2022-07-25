@@ -140,6 +140,7 @@ class ConfData {
 			_initProperty('setup_timestamp', null);
 			_initProperty('tutorial_complete', false);
 			_initProperty('enable_wtm_serp_report', true);
+			_initProperty('show_redirect_tracking_dialogs', true);
 
 			// Complex props
 			_initProperty('account', null);

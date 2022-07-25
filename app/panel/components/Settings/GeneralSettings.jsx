@@ -91,7 +91,7 @@ class GeneralSettings extends React.Component {
 		const { dbLastUpdated } = this.state;
 
 		return (
-			<div className="s-tabs-panel">
+			<div id="general-settings-panel" className="s-tabs-panel">
 				<div className="row">
 					<div className="columns">
 						<h3>WhoTracks.Me</h3>
@@ -172,6 +172,17 @@ class GeneralSettings extends React.Component {
 									<span>{ t('settings_allow_trackers') }</span>
 								</label>
 								<div className="s-tooltip-up" data-g-tooltip={t('settings_allow_trackers_tooltip')}>
+									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+								</div>
+							</div>
+						</div>
+						<div className="s-option-group">
+							<div className="s-square-checkbox">
+								<input type="checkbox" id="settings-show-redirect-tracking-dialogs" name="show_redirect_tracking_dialogs" defaultChecked={settingsData.show_redirect_tracking_dialogs} onClick={toggleCheckbox} />
+								<label htmlFor="settings-show-redirect-tracking-dialogs">
+									<span>{ t('settings_show_redirect_tracking_dialogs') }</span>
+								</label>
+								<div className="s-tooltip-up" data-g-tooltip={t('settings_show_redirect_tracking_dialogs_tooltip')}>
 									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 								</div>
 							</div>
