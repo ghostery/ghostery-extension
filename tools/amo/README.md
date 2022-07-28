@@ -11,10 +11,7 @@ Use this script to install dependencies and build production code for the Ghoste
 This build script was tested on macOS Mojave with the following configuration:
 
 + [Homebrew](https://brew.sh/)
-+ [nvm](https://github.com/nvm-sh/nvm")
-	+ `brew install nvm`
-+ [Yarn](https://yarnpkg.com/)
-	+ `brew install yarn`
++ [asdf](https://github.com/asdf-vm/asdf")
 + [jq](https://stedolan.github.io/jq/)
 	+ `brew install jq`
 
@@ -26,7 +23,7 @@ After running `build.sh`, you should see the production files in the `common-X.X
 
 After running `build.sh`, you should see the production build archive in the `ghostery-extension-X.X.X/build/` directory. This file should match the archive that was submitted to AMO.
 
-Compiled assets live in the `ghostery-extension-X.X.X/dist/` folder. Assets from Ghostery Common (see above) are copied into the `ghostery-extension-X.X.X/common/` directory from `node_modules/ghostery-common/build/assets` using the `vendor-copy` npm package. That copy is triggered when running `yarn install`. See `package.json`:
+Compiled assets live in the `ghostery-extension-X.X.X/dist/` folder. Assets from Ghostery Common (see above) are copied into the `ghostery-extension-X.X.X/common/` directory from `node_modules/ghostery-common/build/assets` using the `vendor-copy` npm package. That copy is triggered when running `npm install`. See `package.json`:
 
 ```json
 "vendorCopy": [

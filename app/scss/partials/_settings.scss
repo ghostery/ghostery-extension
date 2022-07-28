@@ -394,9 +394,9 @@
 				.s-site-x-container {
 					@extend %pointer;
 					background: url('../../app/images/panel/icon-trust-restrict-x.svg') no-repeat center center;
-					background-size: $itemHeight/4 $itemHeight/4;
+					background-size: calc($itemHeight/4) calc($itemHeight/4);
 					height: $itemHeight;
-					width: $itemHeight/4;
+					width: calc($itemHeight/4);
 				}
 			}
 			&:last-child {border-bottom:  1px solid #ccc;}

@@ -16,35 +16,25 @@ Ghostery helps you browse smarter by giving you control over ads and tracking te
 
 ## Installation
 
-#### Install yarn
-**https://yarnpkg.com/en/docs/install**
-
 #### Install local npm packages
 ```sh
-$ yarn install --frozen-lockfile
-```
-
-#### Upgrade packages
-```sh
-# Upgrade packages according to package.json version range
-# https://yarnpkg.com/en/docs/cli/upgrade/
-$ yarn upgrade
+$ npm ci
 ```
 
 ## Building
 ```sh
 # Build all sources
-$ yarn build.dev
+$ npm run build.dev
 ```
 
 ```sh
 # Build for production
-$ yarn build.prod
+$ npm run build.prod
 ```
 
 ```sh
 # Build and watch for changes
-$ yarn build.watch
+$ npm run build.watch
 ```
 
 ## Enable Debugging / Logging
@@ -56,35 +46,35 @@ $ yarn build.watch
 ## Testing and Linting
 ```sh
 # Update Jest snapshot artifacts
-$ yarn test.snapshot
+$ npm run test.snapshot
 ```
 
 ```sh
 # Run unit tests
-$ yarn test
+$ npm run test
 ```
 
 ```sh
 # Run linter over the ./app and ./src folders
-$ yarn lint
+$ npm run lint
 ```
 
 ```sh
 # Lint a specific file
-$ yarn lint.raw src/utils/matcher.js
+$ npm run lint.raw src/utils/matcher.js
 ```
 
 ```sh
 # Test i18n string lengths for panel UI
-$ yarn leet
+$ npm run leet
 # Reset back to original en language file
-$ yarn leet.reset
+$ npm run leet.reset
 ```
 
 ## Build Docs
 ```sh
 # Build JSDoc files to ./docs
-$ yarn docs
+$ npm run docs
 ```
 
 ## Internationalization

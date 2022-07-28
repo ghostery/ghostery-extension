@@ -124,7 +124,7 @@ $max-width: 150px;
 %g-tooltip-up {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 	    bottom: 19px;
 	    left: 50%;
 	    transform: translateX(-50%);
@@ -139,13 +139,13 @@ $max-width: 150px;
 %g-tooltip-down {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 		top: 21px;
 		left: 50%;
 	    transform: translateX(-50%);
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
+		@extend %g-tooltip;
 		border-width: 0 6px 6px 6px;
 	    bottom: -3px;
 	    right: -1px;
@@ -168,12 +168,12 @@ $max-width: 150px;
 %g-tooltip-up-right {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 	    left: -15px;
 	    bottom: 26px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
+		@extend %g-tooltip;
 		border-width: 6px 6px 0 6px;
 	    left: 20%;
 	    bottom: 20px;
@@ -183,12 +183,12 @@ $max-width: 150px;
 %g-tooltip-down-left {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 	    right: -100%;
 	    top: 20px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
+		@extend %g-tooltip;
 		border-width: 0 6px 6px 6px;
 	    left: 20%;
 	    top: 14px;
@@ -198,12 +198,12 @@ $max-width: 150px;
 %g-tooltip-down-right {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 	    left: -100%;
 	    top: 20px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
+		@extend %g-tooltip;
 		border-width: 0 6px 6px 6px;
 	    left: 20%;
 	    top: 14px;

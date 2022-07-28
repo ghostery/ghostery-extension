@@ -135,12 +135,12 @@
 %g-tooltip-down-left {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 		right: -100%;
 		top: 20px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
+		@extend %g-tooltip;
 		border-width: 0 6px 6px 6px;
 		left: 20%;
 		top: 14px;
@@ -150,12 +150,12 @@
 %g-tooltip-down-right {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
+		@extend %g-tooltip;
 		left: -100%;
 		top: 20px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
+		@extend %g-tooltip;
 		border-width: 0 6px 6px 6px;
 		left: 20%;
 		top: 14px;
