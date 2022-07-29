@@ -1,5 +1,6 @@
 {
-  "name": "@ghostery/dnr-extension",
+  "name": "@ghostery/extension-manifest-v3",
+  "private": true,
   "version": "9.5.0",
   "type": "module",
   "scripts": {
@@ -41,7 +42,7 @@
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@ghostery/ui": "^0.3.0",
+    "@ghostery/ui": "../ui",
     "@whotracksme/webextension-packages": "^0.3.0",
     "hybrids": "^8.0.3",
     "lodash-es": "^4.17.21",

@@ -1,6 +1,7 @@
 {
   "name": "@ghostery/ui",
-  "version": "0.3.3",
+  "private": true,
+  "version": "1.0.0",
   "description": "",
   "type": "module",
   "exports": {
@@ -24,19 +25,9 @@
     "hybrids": "^8.0.3"
   },
   "devDependencies": {
-    "auto": "^10.36.5",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2"
-  },
-  "auto": {
-    "baseBranch": "main",
-    "plugins": [
-      "npm"
-    ]
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

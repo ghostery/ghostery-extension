@@ -1,6 +1,7 @@
 {
-  "name": "ghostery-extension",
+  "name": "@ghostery/extension-manifest-v2",
   "private": true,
+  "version": "1.0.0",
   "author": {
     "name": "Ghostery GmbH",
     "email": "support@ghostery.com",
@@ -47,8 +48,8 @@
   },
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
+    "@ghostery/ui": "../ui",
     "@cliqz/url-parser": "^1.1.4",
-    "@ghostery/ui": "^0.3.1",
     "@sentry/browser": "7.1.1",
     "@whotracksme/webextension-packages": "^0.3.1",
     "classnames": "^2.2.5",
