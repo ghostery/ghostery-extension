@@ -128,7 +128,7 @@ class PanelAndroid extends React.Component {
 		});
 	}
 
-	setDataState = (tabId) => {
+	setCommonDataState = (tabId) => {
 		getCommonModuleData(tabId).then((data) => {
 			this.setState({ commonModuleData: data });
 		});
