@@ -123,27 +123,6 @@ $ ./fern.js build configs/ghostery.js --environment=production --no-debug
 
 See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 
-## Links
-+ [Website](https://ghostery.com/)
-+ [Support](https://ghostery.com/support)
-+ [Twitter (@ghostery)](https://twitter.com/ghostery)
-+ [Facebook](https://www.facebook.com/ghostery)
-+ [Privacy Policy](https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/)
-
-## Additional Open Source Ghostery Projects
-+ [Ghostery Lite for Safari](https://github.com/ghostery/GhosterySafari)
-+ [Ghostery iOS Browser](https://github.com/ghostery/user-agent-ios)
-+ [Ghostery Android Browser](https://github.com/ghostery/user-agent-android)
-+ [Ghostery Desktop Browser](https://github.com/ghostery/user-agent-desktop)
-
-## Ghostery Team
-Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people.
-
-## License
-[MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Copyright 2019 Ghostery, Inc. All rights reserved.
-
-See [LICENSE](LICENSE)
-
 ## Tracker Databases
 The [databases](/databases) folder contains JSON skeletons to show the schema expected by the extension pattern [matcher](/src/utils/matcher.js). See the [Database README](/databases/README.md) for more information.
 Ghostery's production tracker databases have been purposely excluded from this project, as they remain proprietary to Ghostery, Inc. Which leads us to this grim, yet obligatory...
