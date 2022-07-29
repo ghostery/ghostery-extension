@@ -1,18 +1,23 @@
-name: Tests
+name: Test UI
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
-  test:
+  test-ui:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ui
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: ./ui/package-lock.json
       - run: npm ci
       - run: npm run lint

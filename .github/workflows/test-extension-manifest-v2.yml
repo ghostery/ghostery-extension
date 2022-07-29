@@ -1,21 +1,24 @@
-name: Lint & Test
+name: Test Extenision Manifest V2
 
 on:
+  push:
+    branches: [main]
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-    branches:
-      - master
-      - develop
+    branches: [main]
 
 jobs:
-  lint-and-test:
-    runs-on: ubuntu-20.04
+  test-mv2:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension-manifest-v2
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           cache: 'npm'
           node-version: '18'
+          cache-dependency-path: ./extension-manifest-v2/package-lock.json
       - name: Install Dependencies
         run: |
           npm ci
