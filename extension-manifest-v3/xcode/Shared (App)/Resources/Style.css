@@ -1,0 +1,151 @@
+* {
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  cursor: default;
+  box-sizing: content-box;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  font-family: 'Roboto Condensed', -apple-system-short-body, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  background: linear-gradient(162deg, #2f3136 10%, #0d1014 100%);
+  color: white;
+}
+
+body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) {
+  display: none;
+}
+
+body.platform-ios .platform-mac,
+body.platform-mac .platform-ios,
+body:not(.state-on, .state-off) :is(.state-on, .state-off),
+body.state-on :is(.state-off, .state-unknown),
+body.state-off :is(.state-on, .state-unknown) {
+  display: none;
+}
+
+main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 720px;
+  height: 100%;
+}
+
+h1,
+h2,
+p {
+  margin: 0 0 8px;
+}
+
+img.logo {
+  padding: 36px 0 22px;
+}
+
+h1 {
+  font-size: 26px;
+  line-height: 24px;
+  font-weight: 300;
+  color: white;
+}
+
+h1 .small {
+  font-size: 18px;
+  font-weight: 400;
+  color: #aaa;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+h2 .small {
+  font-size: 16px;
+  font-weight: 400;
+  color: #aaa;
+}
+
+button {
+  display: block;
+  margin: 18px auto;
+  padding: 14px 50px;
+  border: none;
+  border-radius: 50px;
+  background-color: #00aef0;
+  color: white;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button.outline {
+  background: transparent url('./ArrowRight.svg') no-repeat right center;
+  color: #00aef0;
+  font-size: 18px;
+  padding: 2px 30px 2px 0px;
+}
+
+section {
+  padding: 16px 0;
+}
+
+section:last-child {
+  padding-bottom: 24px;
+}
+
+#enjoying-ghostery {
+  background: url('./GlowingArch.svg') no-repeat top center;
+  padding-top: 56px;
+}
+
+#ios-settings-path {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-transform: none;
+  font-weight: 300;
+}
+
+#ios-settings-path div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+}
+
+#ios-settings-path div img {
+  padding: 0 8px;
+}
+
+#protected {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+#button-help {
+  margin: -8px auto 20px;
+}

@@ -1,0 +1,1237 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		462266412756DDFE00245D1E /* SubscriptionListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */; };
+		462266422756DE4B00245D1E /* SubscriptionListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */; };
+		462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
+		462266462756DF9000245D1E /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266452756DF9000245D1E /* PurchaseButton.swift */; };
+		462266472756DF9000245D1E /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266452756DF9000245D1E /* PurchaseButton.swift */; };
+		462266492756DFB800245D1E /* StoreErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266482756DFB800245D1E /* StoreErrorView.swift */; };
+		4622664A2756DFB800245D1E /* StoreErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266482756DFB800245D1E /* StoreErrorView.swift */; };
+		4622664C2756DFE800245D1E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664B2756DFE800245D1E /* BadgeView.swift */; };
+		4622664D2756DFE800245D1E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664B2756DFE800245D1E /* BadgeView.swift */; };
+		4622664F2756E06D00245D1E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664E2756E06D00245D1E /* PriceView.swift */; };
+		462266502756E06D00245D1E /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622664E2756E06D00245D1E /* PriceView.swift */; };
+		462266522756E09100245D1E /* PriveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266512756E09100245D1E /* PriveViewModel.swift */; };
+		462266532756E09100245D1E /* PriveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266512756E09100245D1E /* PriveViewModel.swift */; };
+		462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266432756DE6A00245D1E /* SubscriptionView.swift */; };
+		462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
+		462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */; };
+		465E353F2754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
+		465E35402754EB870032B8D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E353E2754EB870032B8D2 /* ContentView.swift */; };
+		465E35452754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */; };
+		465E35462754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */; };
+		465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E356127551D600032B8D2 /* GhosteryApp.swift */; };
+		465E35662755368B0032B8D2 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35652755368B0032B8D2 /* Subscriptions.swift */; };
+		465E35672755368B0032B8D2 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E35652755368B0032B8D2 /* Subscriptions.swift */; };
+		465E356E27564A250032B8D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465E356D27564A250032B8D2 /* StoreKit.framework */; };
+		465E357027564A310032B8D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465E356F27564A310032B8D2 /* StoreKit.framework */; };
+		465E357227564A670032B8D2 /* Products.plist in Resources */ = {isa = PBXBuildFile; fileRef = 465E357127564A670032B8D2 /* Products.plist */; };
+		465E357327564A670032B8D2 /* Products.plist in Resources */ = {isa = PBXBuildFile; fileRef = 465E357127564A670032B8D2 /* Products.plist */; };
+		465E357527564ABB0032B8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357427564ABB0032B8D2 /* Configuration.swift */; };
+		465E357627564ABB0032B8D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357427564ABB0032B8D2 /* Configuration.swift */; };
+		465E357827564AE80032B8D2 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357727564AE80032B8D2 /* StoreHelper.swift */; };
+		465E357927564AE80032B8D2 /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357727564AE80032B8D2 /* StoreHelper.swift */; };
+		465E357D27564D910032B8D2 /* StoreLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357C27564D910032B8D2 /* StoreLog.swift */; };
+		465E357E27564D910032B8D2 /* StoreLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357C27564D910032B8D2 /* StoreLog.swift */; };
+		465E358027564DDB0032B8D2 /* StoreNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357F27564DDB0032B8D2 /* StoreNotification.swift */; };
+		465E358127564DDB0032B8D2 /* StoreNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E357F27564DDB0032B8D2 /* StoreNotification.swift */; };
+		465E3584275673060032B8D2 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 465E3583275673060032B8D2 /* OrderedCollections */; };
+		465E3586275673520032B8D2 /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3585275673520032B8D2 /* SubscriptionHelper.swift */; };
+		465E3587275673520032B8D2 /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3585275673520032B8D2 /* SubscriptionHelper.swift */; };
+		465E3589275673FB0032B8D2 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 465E3588275673FB0032B8D2 /* OrderedCollections */; };
+		465E358B275674290032B8D2 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358A275674290032B8D2 /* KeychainHelper.swift */; };
+		465E358C275674290032B8D2 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358A275674290032B8D2 /* KeychainHelper.swift */; };
+		465E358E275674570032B8D2 /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358D275674570032B8D2 /* SubscriptionInfo.swift */; };
+		465E358F275674570032B8D2 /* SubscriptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E358D275674570032B8D2 /* SubscriptionInfo.swift */; };
+		465E3591275674830032B8D2 /* PurchaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3590275674830032B8D2 /* PurchaseInfo.swift */; };
+		465E3592275674830032B8D2 /* PurchaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3590275674830032B8D2 /* PurchaseInfo.swift */; };
+		465E3598275679900032B8D2 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3597275679900032B8D2 /* SubscriptionViewModel.swift */; };
+		465E3599275679900032B8D2 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E3597275679900032B8D2 /* SubscriptionViewModel.swift */; };
+		465E359C27567A000032B8D2 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E359B27567A000032B8D2 /* StoreConstants.swift */; };
+		465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E359B27567A000032B8D2 /* StoreConstants.swift */; };
+		468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42922701F84A008B5792 /* LaunchScreen.storyboard */; };
+		468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E429F2701F84A008B5792 /* GhosteryApp.swift */; };
+		468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		468E42BF2701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
+		468E42C02701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
+		468E42C12701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
+		468E42C22701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
+		468E42C52701F84A008B5792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468E42842701F84A008B5792 /* Assets.xcassets */; };
+		468E42C62701F84A008B5792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468E42842701F84A008B5792 /* Assets.xcassets */; };
+		468E42C72701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
+		468E42C82701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
+		B430752627EB3AEC0042D537 /* GhosteryLogo.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752227EB3AEC0042D537 /* GhosteryLogo.svg */; };
+		B430752727EB3AEC0042D537 /* GhosteryLogo.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752227EB3AEC0042D537 /* GhosteryLogo.svg */; };
+		B430752827EB3AEC0042D537 /* ArrowRight.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752327EB3AEC0042D537 /* ArrowRight.svg */; };
+		B430752927EB3AEC0042D537 /* ArrowRight.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752327EB3AEC0042D537 /* ArrowRight.svg */; };
+		B430752A27EB3AEC0042D537 /* GreenCheck.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752427EB3AEC0042D537 /* GreenCheck.svg */; };
+		B430752B27EB3AEC0042D537 /* GreenCheck.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752427EB3AEC0042D537 /* GreenCheck.svg */; };
+		B430752C27EB3AEC0042D537 /* GlowingArch.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752527EB3AEC0042D537 /* GlowingArch.svg */; };
+		B430752D27EB3AEC0042D537 /* GlowingArch.svg in Resources */ = {isa = PBXBuildFile; fileRef = B430752527EB3AEC0042D537 /* GlowingArch.svg */; };
+		B44AE7B327D21E7D00F19705 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B44AE7B227D21E7D00F19705 /* Main.html */; };
+		B44AE7B427D21E7D00F19705 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B44AE7B227D21E7D00F19705 /* Main.html */; };
+		B456D51C27E094E40038964E /* Safari.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51827E094E30038964E /* Safari.svg */; };
+		B456D51D27E094E40038964E /* Safari.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51827E094E30038964E /* Safari.svg */; };
+		B456D51E27E094E40038964E /* Settings.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51927E094E30038964E /* Settings.svg */; };
+		B456D51F27E094E40038964E /* Settings.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51927E094E30038964E /* Settings.svg */; };
+		B456D52027E094E40038964E /* Arrow.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51A27E094E30038964E /* Arrow.svg */; };
+		B456D52127E094E40038964E /* Arrow.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51A27E094E30038964E /* Arrow.svg */; };
+		B456D52227E094E40038964E /* Extensions.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51B27E094E40038964E /* Extensions.svg */; };
+		B456D52327E094E40038964E /* Extensions.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51B27E094E40038964E /* Extensions.svg */; };
+		B469CA8A27BE924D00408C43 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* node_modules */; };
+		B469CA8B27BE924D00408C43 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* node_modules */; };
+		B469CA8E27BE924D00408C43 /* background in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8427BE924D00408C43 /* background */; };
+		B469CA8F27BE924D00408C43 /* background in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8427BE924D00408C43 /* background */; };
+		B469CA9027BE924D00408C43 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8527BE924D00408C43 /* assets */; };
+		B469CA9127BE924D00408C43 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8527BE924D00408C43 /* assets */; };
+		B469CA9227BE924D00408C43 /* content_scripts in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8627BE924D00408C43 /* content_scripts */; };
+		B469CA9327BE924D00408C43 /* content_scripts in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8627BE924D00408C43 /* content_scripts */; };
+		B469CA9427BE924D00408C43 /* pages in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8727BE924D00408C43 /* pages */; };
+		B469CA9527BE924D00408C43 /* pages in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8727BE924D00408C43 /* pages */; };
+		B469CA9627BE924D00408C43 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8827BE924D00408C43 /* _locales */; };
+		B469CA9727BE924D00408C43 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8827BE924D00408C43 /* _locales */; };
+		B469CA9B27BE949000408C43 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B469CA9A27BE949000408C43 /* manifest.json */; };
+		B469CA9C27BE949000408C43 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B469CA9A27BE949000408C43 /* manifest.json */; };
+		B4D49C7028045EFC00277CCA /* store in Resources */ = {isa = PBXBuildFile; fileRef = B4D49C6F28045EFC00277CCA /* store */; };
+		B4D49C7128045EFC00277CCA /* store in Resources */ = {isa = PBXBuildFile; fileRef = B4D49C6F28045EFC00277CCA /* store */; };
+		B4DA09B3283CEBAE0052F343 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4DA09B6283CEBAE0052F343 /* Localizable.strings */; };
+		B4DA09B4283CEBAE0052F343 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4DA09B6283CEBAE0052F343 /* Localizable.strings */; };
+		B4FFD50227F73B830041049C /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = B4FFD50127F73B820041049C /* rule_resources */; };
+		B4FFD50327F73B830041049C /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = B4FFD50127F73B820041049C /* rule_resources */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		468E42AC2701F84A008B5792 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 468E42782701F848008B5792 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 468E42A92701F84A008B5792;
+			remoteInfo = "Ghostery – Privacy Ad Blocker Extension (iOS)";
+		};
+		468E42B62701F84A008B5792 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 468E42782701F848008B5792 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 468E42B32701F84A008B5792;
+			remoteInfo = "Ghostery – Privacy Ad Blocker Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		468E42CE2701F84A008B5792 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42D52701F84A008B5792 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewRow.swift; sourceTree = "<group>"; };
+		462266432756DE6A00245D1E /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		462266452756DF9000245D1E /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
+		462266482756DFB800245D1E /* StoreErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreErrorView.swift; sourceTree = "<group>"; };
+		4622664B2756DFE800245D1E /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		4622664E2756E06D00245D1E /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		462266512756E09100245D1E /* PriveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriveViewModel.swift; sourceTree = "<group>"; };
+		462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewInfo.swift; sourceTree = "<group>"; };
+		465E353E2754EB870032B8D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWebView.swift; sourceTree = "<group>"; };
+		465E356127551D600032B8D2 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
+		465E35652755368B0032B8D2 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
+		465E356B27554CEB0032B8D2 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
+		465E356D27564A250032B8D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		465E356F27564A310032B8D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		465E357127564A670032B8D2 /* Products.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Products.plist; sourceTree = "<group>"; };
+		465E357427564ABB0032B8D2 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		465E357727564AE80032B8D2 /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
+		465E357C27564D910032B8D2 /* StoreLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreLog.swift; sourceTree = "<group>"; };
+		465E357F27564DDB0032B8D2 /* StoreNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreNotification.swift; sourceTree = "<group>"; };
+		465E3585275673520032B8D2 /* SubscriptionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHelper.swift; sourceTree = "<group>"; };
+		465E358A275674290032B8D2 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		465E358D275674570032B8D2 /* SubscriptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfo.swift; sourceTree = "<group>"; };
+		465E3590275674830032B8D2 /* PurchaseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInfo.swift; sourceTree = "<group>"; };
+		465E3597275679900032B8D2 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
+		465E359A275679AC0032B8D2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		465E359B27567A000032B8D2 /* StoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConstants.swift; sourceTree = "<group>"; };
+		468E42812701F849008B5792 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		468E42822701F849008B5792 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		468E42842701F84A008B5792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E42982701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E429F2701F84A008B5792 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
+		468E42A42701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		468E42A52701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
+		468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E42AF2701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E42B92701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		468E42BA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
+		B430752227EB3AEC0042D537 /* GhosteryLogo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GhosteryLogo.svg; sourceTree = "<group>"; };
+		B430752327EB3AEC0042D537 /* ArrowRight.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArrowRight.svg; sourceTree = "<group>"; };
+		B430752427EB3AEC0042D537 /* GreenCheck.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenCheck.svg; sourceTree = "<group>"; };
+		B430752527EB3AEC0042D537 /* GlowingArch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GlowingArch.svg; sourceTree = "<group>"; };
+		B44AE7B227D21E7D00F19705 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
+		B456D51827E094E30038964E /* Safari.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Safari.svg; sourceTree = "<group>"; };
+		B456D51927E094E30038964E /* Settings.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.svg; sourceTree = "<group>"; };
+		B456D51A27E094E30038964E /* Arrow.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Arrow.svg; sourceTree = "<group>"; };
+		B456D51B27E094E40038964E /* Extensions.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Extensions.svg; sourceTree = "<group>"; };
+		B469CA8227BE924D00408C43 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = node_modules; path = ../../dist/node_modules; sourceTree = "<group>"; };
+		B469CA8427BE924D00408C43 /* background */ = {isa = PBXFileReference; lastKnownFileType = folder; name = background; path = ../../dist/background; sourceTree = "<group>"; };
+		B469CA8527BE924D00408C43 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../dist/assets; sourceTree = "<group>"; };
+		B469CA8627BE924D00408C43 /* content_scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content_scripts; path = ../../dist/content_scripts; sourceTree = "<group>"; };
+		B469CA8727BE924D00408C43 /* pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pages; path = ../../dist/pages; sourceTree = "<group>"; };
+		B469CA8827BE924D00408C43 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../dist/_locales; sourceTree = "<group>"; };
+		B469CA9A27BE949000408C43 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = ../../dist/manifest.json; sourceTree = "<group>"; };
+		B4D0FE45283B9CE80036C80F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B4D49C6F28045EFC00277CCA /* store */ = {isa = PBXFileReference; lastKnownFileType = folder; name = store; path = ../../dist/store; sourceTree = "<group>"; };
+		B4DA09B5283CEBAE0052F343 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4FFD50127F73B820041049C /* rule_resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rule_resources; path = ../../dist/rule_resources; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		468E42882701F84A008B5792 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465E3584275673060032B8D2 /* OrderedCollections in Frameworks */,
+				465E356E27564A250032B8D2 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E429A2701F84A008B5792 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465E3589275673FB0032B8D2 /* OrderedCollections in Frameworks */,
+				465E357027564A310032B8D2 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42A72701F84A008B5792 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42B12701F84A008B5792 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		465E356C27564A250032B8D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				465E356F27564A310032B8D2 /* StoreKit.framework */,
+				465E356D27564A250032B8D2 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		465E357A27564C9D0032B8D2 /* StoreHelper */ = {
+			isa = PBXGroup;
+			children = (
+				465E359A275679AC0032B8D2 /* README.md */,
+				465E357127564A670032B8D2 /* Products.plist */,
+				465E356B27554CEB0032B8D2 /* Products.storekit */,
+				465E359E27567A730032B8D2 /* Configuration */,
+				465E357B27564D850032B8D2 /* StoreHelper */,
+				465E3596275679730032B8D2 /* ViewModels */,
+			);
+			path = StoreHelper;
+			sourceTree = "<group>";
+		};
+		465E357B27564D850032B8D2 /* StoreHelper */ = {
+			isa = PBXGroup;
+			children = (
+				465E358A275674290032B8D2 /* KeychainHelper.swift */,
+				465E3590275674830032B8D2 /* PurchaseInfo.swift */,
+				465E359B27567A000032B8D2 /* StoreConstants.swift */,
+				465E357727564AE80032B8D2 /* StoreHelper.swift */,
+				465E357C27564D910032B8D2 /* StoreLog.swift */,
+				465E357F27564DDB0032B8D2 /* StoreNotification.swift */,
+				465E3585275673520032B8D2 /* SubscriptionHelper.swift */,
+				465E358D275674570032B8D2 /* SubscriptionInfo.swift */,
+			);
+			path = StoreHelper;
+			sourceTree = "<group>";
+		};
+		465E3593275678030032B8D2 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				465E3594275679400032B8D2 /* screens */,
+				465E353E2754EB870032B8D2 /* ContentView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		465E3594275679400032B8D2 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				465E3595275679500032B8D2 /* Subscriptions */,
+				465E35652755368B0032B8D2 /* Subscriptions.swift */,
+				465E35442754F6CB0032B8D2 /* WelcomeWebView.swift */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		465E3595275679500032B8D2 /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				4622664B2756DFE800245D1E /* BadgeView.swift */,
+				4622664E2756E06D00245D1E /* PriceView.swift */,
+				462266452756DF9000245D1E /* PurchaseButton.swift */,
+				462266482756DFB800245D1E /* StoreErrorView.swift */,
+				462266402756DDFE00245D1E /* SubscriptionListViewRow.swift */,
+				462266432756DE6A00245D1E /* SubscriptionView.swift */,
+				462266552756E1FE00245D1E /* SubscriptionViewInfo.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
+		465E3596275679730032B8D2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				465E3597275679900032B8D2 /* SubscriptionViewModel.swift */,
+				462266512756E09100245D1E /* PriveViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		465E359E27567A730032B8D2 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				465E357427564ABB0032B8D2 /* Configuration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		468E42772701F848008B5792 = {
+			isa = PBXGroup;
+			children = (
+				468E427C2701F849008B5792 /* Shared (App) */,
+				468E42852701F84A008B5792 /* Shared (Extension) */,
+				468E428D2701F84A008B5792 /* iOS (App) */,
+				468E429E2701F84A008B5792 /* macOS (App) */,
+				468E42AE2701F84A008B5792 /* iOS (Extension) */,
+				468E42B82701F84A008B5792 /* macOS (Extension) */,
+				468E428C2701F84A008B5792 /* Products */,
+				465E356C27564A250032B8D2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		468E427C2701F849008B5792 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				468E42842701F84A008B5792 /* Assets.xcassets */,
+				468E427D2701F849008B5792 /* Resources */,
+				465E357A27564C9D0032B8D2 /* StoreHelper */,
+				465E3593275678030032B8D2 /* views */,
+				B4DA09B6283CEBAE0052F343 /* Localizable.strings */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		468E427D2701F849008B5792 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B430752327EB3AEC0042D537 /* ArrowRight.svg */,
+				B430752227EB3AEC0042D537 /* GhosteryLogo.svg */,
+				B430752527EB3AEC0042D537 /* GlowingArch.svg */,
+				B430752427EB3AEC0042D537 /* GreenCheck.svg */,
+				B456D51A27E094E30038964E /* Arrow.svg */,
+				B456D51B27E094E40038964E /* Extensions.svg */,
+				B456D51827E094E30038964E /* Safari.svg */,
+				B456D51927E094E30038964E /* Settings.svg */,
+				B44AE7B227D21E7D00F19705 /* Main.html */,
+				468E42812701F849008B5792 /* Style.css */,
+				468E42822701F849008B5792 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		468E42852701F84A008B5792 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				468E42D92701F84A008B5792 /* common */,
+				468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		468E428C2701F84A008B5792 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */,
+				468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */,
+				468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */,
+				468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		468E428D2701F84A008B5792 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				465E356127551D600032B8D2 /* GhosteryApp.swift */,
+				468E42982701F84A008B5792 /* Info.plist */,
+				468E42922701F84A008B5792 /* LaunchScreen.storyboard */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		468E429E2701F84A008B5792 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				468E429F2701F84A008B5792 /* GhosteryApp.swift */,
+				468E42A42701F84A008B5792 /* Info.plist */,
+				468E42A52701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		468E42AE2701F84A008B5792 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				468E42AF2701F84A008B5792 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		468E42B82701F84A008B5792 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				468E42B92701F84A008B5792 /* Info.plist */,
+				468E42BA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		468E42D92701F84A008B5792 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				B4D49C6F28045EFC00277CCA /* store */,
+				B4FFD50127F73B820041049C /* rule_resources */,
+				B469CA9A27BE949000408C43 /* manifest.json */,
+				B469CA8827BE924D00408C43 /* _locales */,
+				B469CA8527BE924D00408C43 /* assets */,
+				B469CA8427BE924D00408C43 /* background */,
+				B469CA8627BE924D00408C43 /* content_scripts */,
+				B469CA8227BE924D00408C43 /* node_modules */,
+				B469CA8727BE924D00408C43 /* pages */,
+			);
+			name = common;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		468E428A2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (iOS)" */;
+			buildPhases = (
+				468E42872701F84A008B5792 /* Sources */,
+				468E42882701F84A008B5792 /* Frameworks */,
+				468E42892701F84A008B5792 /* Resources */,
+				468E42CE2701F84A008B5792 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				468E42AD2701F84A008B5792 /* PBXTargetDependency */,
+			);
+			name = "Ghostery – Privacy Ad Blocker (iOS)";
+			packageProductDependencies = (
+				465E3583275673060032B8D2 /* OrderedCollections */,
+			);
+			productName = "Ghostery – Privacy Ad Blocker (iOS)";
+			productReference = 468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		468E429C2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (macOS)" */;
+			buildPhases = (
+				468E42992701F84A008B5792 /* Sources */,
+				468E429A2701F84A008B5792 /* Frameworks */,
+				468E429B2701F84A008B5792 /* Resources */,
+				468E42D52701F84A008B5792 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				468E42B72701F84A008B5792 /* PBXTargetDependency */,
+			);
+			name = "Ghostery – Privacy Ad Blocker (macOS)";
+			packageProductDependencies = (
+				465E3588275673FB0032B8D2 /* OrderedCollections */,
+			);
+			productName = "Ghostery – Privacy Ad Blocker (macOS)";
+			productReference = 468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		468E42A92701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 468E42CB2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (iOS)" */;
+			buildPhases = (
+				468E42A62701F84A008B5792 /* Sources */,
+				468E42A72701F84A008B5792 /* Frameworks */,
+				468E42A82701F84A008B5792 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Ghostery – Privacy Ad Blocker Extension (iOS)";
+			productName = "Ghostery – Privacy Ad Blocker Extension (iOS)";
+			productReference = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		468E42B32701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 468E42D22701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (macOS)" */;
+			buildPhases = (
+				468E42B02701F84A008B5792 /* Sources */,
+				468E42B12701F84A008B5792 /* Frameworks */,
+				468E42B22701F84A008B5792 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Ghostery – Privacy Ad Blocker Extension (macOS)";
+			productName = "Ghostery – Privacy Ad Blocker Extension (macOS)";
+			productReference = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		468E42782701F848008B5792 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					468E428A2701F84A008B5792 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					468E429C2701F84A008B5792 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					468E42A92701F84A008B5792 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					468E42B32701F84A008B5792 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+				};
+			};
+			buildConfigurationList = 468E427B2701F848008B5792 /* Build configuration list for PBXProject "Ghostery" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 468E42772701F848008B5792;
+			packageReferences = (
+				465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
+			productRefGroup = 468E428C2701F84A008B5792 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				468E428A2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (iOS) */,
+				468E429C2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (macOS) */,
+				468E42A92701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (iOS) */,
+				468E42B32701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		468E42892701F84A008B5792 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B430752C27EB3AEC0042D537 /* GlowingArch.svg in Resources */,
+				B430752627EB3AEC0042D537 /* GhosteryLogo.svg in Resources */,
+				465E357227564A670032B8D2 /* Products.plist in Resources */,
+				468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */,
+				B430752A27EB3AEC0042D537 /* GreenCheck.svg in Resources */,
+				468E42C12701F84A008B5792 /* Script.js in Resources */,
+				B456D52027E094E40038964E /* Arrow.svg in Resources */,
+				468E42C52701F84A008B5792 /* Assets.xcassets in Resources */,
+				B44AE7B327D21E7D00F19705 /* Main.html in Resources */,
+				B456D52227E094E40038964E /* Extensions.svg in Resources */,
+				B4DA09B3283CEBAE0052F343 /* Localizable.strings in Resources */,
+				B456D51C27E094E40038964E /* Safari.svg in Resources */,
+				B430752827EB3AEC0042D537 /* ArrowRight.svg in Resources */,
+				B456D51E27E094E40038964E /* Settings.svg in Resources */,
+				468E42BF2701F84A008B5792 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E429B2701F84A008B5792 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B430752727EB3AEC0042D537 /* GhosteryLogo.svg in Resources */,
+				B456D52327E094E40038964E /* Extensions.svg in Resources */,
+				B456D51D27E094E40038964E /* Safari.svg in Resources */,
+				B4DA09B4283CEBAE0052F343 /* Localizable.strings in Resources */,
+				B430752B27EB3AEC0042D537 /* GreenCheck.svg in Resources */,
+				B430752D27EB3AEC0042D537 /* GlowingArch.svg in Resources */,
+				B456D52127E094E40038964E /* Arrow.svg in Resources */,
+				B44AE7B427D21E7D00F19705 /* Main.html in Resources */,
+				B456D51F27E094E40038964E /* Settings.svg in Resources */,
+				468E42C02701F84A008B5792 /* Style.css in Resources */,
+				468E42C22701F84A008B5792 /* Script.js in Resources */,
+				B430752927EB3AEC0042D537 /* ArrowRight.svg in Resources */,
+				465E357327564A670032B8D2 /* Products.plist in Resources */,
+				468E42C62701F84A008B5792 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42A82701F84A008B5792 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B469CA9027BE924D00408C43 /* assets in Resources */,
+				B469CA9427BE924D00408C43 /* pages in Resources */,
+				B469CA9627BE924D00408C43 /* _locales in Resources */,
+				B4FFD50227F73B830041049C /* rule_resources in Resources */,
+				B469CA9B27BE949000408C43 /* manifest.json in Resources */,
+				B469CA8A27BE924D00408C43 /* node_modules in Resources */,
+				B469CA8E27BE924D00408C43 /* background in Resources */,
+				B4D49C7028045EFC00277CCA /* store in Resources */,
+				B469CA9227BE924D00408C43 /* content_scripts in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42B22701F84A008B5792 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B469CA9127BE924D00408C43 /* assets in Resources */,
+				B469CA9527BE924D00408C43 /* pages in Resources */,
+				B469CA9727BE924D00408C43 /* _locales in Resources */,
+				B4FFD50327F73B830041049C /* rule_resources in Resources */,
+				B469CA9C27BE949000408C43 /* manifest.json in Resources */,
+				B469CA8B27BE924D00408C43 /* node_modules in Resources */,
+				B469CA8F27BE924D00408C43 /* background in Resources */,
+				B4D49C7128045EFC00277CCA /* store in Resources */,
+				B469CA9327BE924D00408C43 /* content_scripts in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		468E42872701F84A008B5792 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465E353F2754EB870032B8D2 /* ContentView.swift in Sources */,
+				462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */,
+				465E359C27567A000032B8D2 /* StoreConstants.swift in Sources */,
+				465E358E275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
+				4622664F2756E06D00245D1E /* PriceView.swift in Sources */,
+				465E357D27564D910032B8D2 /* StoreLog.swift in Sources */,
+				465E357527564ABB0032B8D2 /* Configuration.swift in Sources */,
+				465E358B275674290032B8D2 /* KeychainHelper.swift in Sources */,
+				465E3598275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
+				462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
+				465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */,
+				462266522756E09100245D1E /* PriveViewModel.swift in Sources */,
+				465E357827564AE80032B8D2 /* StoreHelper.swift in Sources */,
+				465E35662755368B0032B8D2 /* Subscriptions.swift in Sources */,
+				465E3591275674830032B8D2 /* PurchaseInfo.swift in Sources */,
+				462266462756DF9000245D1E /* PurchaseButton.swift in Sources */,
+				465E3586275673520032B8D2 /* SubscriptionHelper.swift in Sources */,
+				4622664C2756DFE800245D1E /* BadgeView.swift in Sources */,
+				465E358027564DDB0032B8D2 /* StoreNotification.swift in Sources */,
+				462266412756DDFE00245D1E /* SubscriptionListViewRow.swift in Sources */,
+				465E35452754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */,
+				462266492756DFB800245D1E /* StoreErrorView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42992701F84A008B5792 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				465E35462754F6CB0032B8D2 /* WelcomeWebView.swift in Sources */,
+				462266532756E09100245D1E /* PriveViewModel.swift in Sources */,
+				465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */,
+				4622664A2756DFB800245D1E /* StoreErrorView.swift in Sources */,
+				465E358F275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
+				462266542756E1CF00245D1E /* SubscriptionView.swift in Sources */,
+				465E357E27564D910032B8D2 /* StoreLog.swift in Sources */,
+				465E357627564ABB0032B8D2 /* Configuration.swift in Sources */,
+				4622664D2756DFE800245D1E /* BadgeView.swift in Sources */,
+				462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
+				465E358C275674290032B8D2 /* KeychainHelper.swift in Sources */,
+				462266472756DF9000245D1E /* PurchaseButton.swift in Sources */,
+				465E3599275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
+				468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */,
+				465E357927564AE80032B8D2 /* StoreHelper.swift in Sources */,
+				465E35672755368B0032B8D2 /* Subscriptions.swift in Sources */,
+				465E3592275674830032B8D2 /* PurchaseInfo.swift in Sources */,
+				465E3587275673520032B8D2 /* SubscriptionHelper.swift in Sources */,
+				462266502756E06D00245D1E /* PriceView.swift in Sources */,
+				465E358127564DDB0032B8D2 /* StoreNotification.swift in Sources */,
+				462266422756DE4B00245D1E /* SubscriptionListViewRow.swift in Sources */,
+				465E35402754EB870032B8D2 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42A62701F84A008B5792 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				468E42C72701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		468E42B02701F84A008B5792 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				468E42C82701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		468E42AD2701F84A008B5792 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 468E42A92701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (iOS) */;
+			targetProxy = 468E42AC2701F84A008B5792 /* PBXContainerItemProxy */;
+		};
+		468E42B72701F84A008B5792 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 468E42B32701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (macOS) */;
+			targetProxy = 468E42B62701F84A008B5792 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		468E42922701F84A008B5792 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4D0FE45283B9CE80036C80F /* en */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B4DA09B6283CEBAE0052F343 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4DA09B5283CEBAE0052F343 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		468E42C92701F84A008B5792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		468E42CA2701F84A008B5792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		468E42CC2701F84A008B5792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite.extension;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		468E42CD2701F84A008B5792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite.extension;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		468E42D02701F84A008B5792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		468E42D12701F84A008B5792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		468E42D32701F84A008B5792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Ghostery – Privacy Ad Blocker.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite.extension;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		468E42D42701F84A008B5792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Ghostery – Privacy Ad Blocker.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite.extension;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		468E42D72701F84A008B5792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery – Privacy Ad Blocker.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 46;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		468E42D82701F84A008B5792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Ghostery – Privacy Ad Blocker.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 46;
+				DEVELOPMENT_TEAM = HPY23A294X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 2.5.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.lite;
+				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		468E427B2701F848008B5792 /* Build configuration list for PBXProject "Ghostery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				468E42C92701F84A008B5792 /* Debug */,
+				468E42CA2701F84A008B5792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		468E42CB2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				468E42CC2701F84A008B5792 /* Debug */,
+				468E42CD2701F84A008B5792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				468E42D02701F84A008B5792 /* Debug */,
+				468E42D12701F84A008B5792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		468E42D22701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				468E42D32701F84A008B5792 /* Debug */,
+				468E42D42701F84A008B5792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				468E42D72701F84A008B5792 /* Debug */,
+				468E42D82701F84A008B5792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		465E3583275673060032B8D2 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		465E3588275673FB0032B8D2 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 465E3582275673060032B8D2 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 468E42782701F848008B5792 /* Project object */;
+}
