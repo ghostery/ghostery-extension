@@ -29,7 +29,7 @@
     "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme/webextension-packages/packages ./_locales/en/messages.json",
     "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./app ./_locales/en/messages.json",
-    "locales": "yarn run locales.wtm && yarn run locales.ui && yarn run locales.src"
+    "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src"
   },
   "vendorCopy": [
     {
@@ -57,7 +57,6 @@
     "ghostery-common": "^1.2.17",
     "history": "^4.10.1",
     "hybrids": "^8.0.10",
-    "jquery": "3.5.0",
     "json-api-normalizer": "^1.0.4",
     "linkedom": "^0.14.5",
     "moment": "^2.29.1",
@@ -80,14 +79,14 @@
     "underscore": "^1.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.18.0",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/plugin-transform-named-capturing-groups-regex": "^7.12.13",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-react": "^7.18.6",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -111,13 +110,13 @@
     "jsonfile": "^6.1.0",
     "license-checker": "^25.0.1",
     "mini-css-extract-plugin": "^0.10.0",
-    "node-sass": "^5.0.0",
     "oboe": "^2.1.5",
     "path": "^0.12.7",
     "react-router": "^5.2.0",
     "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
-    "sass-loader": "^10.1.1",
+    "sass": "^1.54.0",
+    "sass-loader": "^10.3.1",
     "seamless-immutable": "^7.1.3",
     "sinon-chrome": "^3.0.1",
     "svg-url-loader": "^6.0.0",

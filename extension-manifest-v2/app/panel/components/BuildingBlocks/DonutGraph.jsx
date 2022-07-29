@@ -423,7 +423,7 @@ class DonutGraph extends React.Component {
 }
 
 DonutGraph.propTypes = {
-	categories: PropTypes.arrayOf(PropTypes.object),
+	categories: PropTypes.arrayOf(PropTypes.shape({})),
 	adBlock: PropTypes.shape({}),
 	antiTracking: PropTypes.shape({}),
 	renderRedscale: PropTypes.bool.isRequired,

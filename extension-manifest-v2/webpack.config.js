@@ -17,6 +17,14 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const sass = require('sass');
+const crypto = require('crypto');
+
+// Webpack uses obsolete hash algorithm which is no longer provided
+// by the node crypto package. This walkaround can be removed after
+// Webpack version is updated.
+const crypto_orig_createHash = crypto.createHash;
+crypto.createHash = algorithm => crypto_orig_createHash(algorithm === 'md4' ? 'sha256' : algorithm);
 
 // constants
 const BUILD_DIR = path.resolve(__dirname, 'dist');
@@ -36,6 +44,7 @@ module.exports = {
 		hints: false // notify of assets over 250kb
 	},
 	resolve: {
+		mainFields: ['main'],
 		symlinks: false, // allow module resolution with `npm link`
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
 		alias: {
@@ -77,7 +86,8 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: BUILD_DIR
+		path: BUILD_DIR,
+		hashFunction: 'sha256',
 	},
 	plugins: [
 		// Clear './dist' folder
@@ -172,6 +182,7 @@ module.exports = {
 					{
 						loader: 'sass-loader',
 						options: {
+							implementation: sass,
 							sassOptions: {
 								includePaths: [
 									path.resolve(__dirname, 'node_modules/foundation-sites/scss'),

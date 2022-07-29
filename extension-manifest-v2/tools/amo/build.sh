@@ -30,11 +30,6 @@ if [ ! -d $COMMON_SOURCE_DIR ]; then
 fi
 
 #### REQUIREMENTS ####
-# Check for yarn
-if ! type yarn > /dev/null; then
-	echo "Please install yarn: https://yarnpkg.com/lang/en/docs/install/"
-	exit 1
-fi
 
 # Check for jq
 if ! type jq > /dev/null; then
@@ -101,10 +96,10 @@ rm -rf build
 rm -rf node_modules
 
 # Install local npm packages
-yarn install --frozen-lockfile
+npm ci
 
 # Build for production
-yarn build.prod
+npm run build.prod
 
 # Clean up properties from manifest.json
 cat $VERSION_FILE | jq 'del(.version_name, .debug, .log, .options_page, .minimum_edge_version, .minimum_chrome_version, .minimum_opera_version, .permissions[7,8], .background.persistent)' > ${TMP_FILE}
@@ -150,7 +145,6 @@ test -d $BUILD_DIR || mkdir $BUILD_DIR && \
 		jsdoc.json \
 		package.json \
 		package-lock.json \
-		yarn.lock \
 		webpack.* \
 		*.DS_Store*
 echo "Zipped successfully into $BUILD_DIR/$ZIP_FILE"

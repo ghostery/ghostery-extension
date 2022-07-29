@@ -79,52 +79,53 @@ $max-width: 150px;
 }
 
 %g-tooltip-body {
-	@extend %g-tooltip-animation;
-	pointer-events:none;
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-	font-size: 12px;
-	font-weight: 400;
-	-webkit-font-smoothing: antialiased;
-	text-align: center;
-	white-space: nowrap;
-    background: #333;
-    background: rgba(0,0,0,.8);
-    border-radius: 1px;
-    color: #fff;
-    padding: 3px 5px;
-    position: absolute;
-    z-index: 10;
-    font-size: 12px;
-	-webkit-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
-	-moz-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
-	box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	&:hover:before {
+		@extend %g-tooltip-animation;
+		pointer-events:none;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-size: 12px;
+		font-weight: 400;
+		-webkit-font-smoothing: antialiased;
+		text-align: center;
+		white-space: nowrap;
+			background: #333;
+			background: rgba(0,0,0,.8);
+			border-radius: 1px;
+			color: #fff;
+			padding: 3px 5px;
+			position: absolute;
+			z-index: 10;
+			font-size: 12px;
+		-webkit-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+		-moz-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+		box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	}
 }
 %g-tip-body {
-	@extend %g-tooltip-animation;
+	&:hover:after {
+		@extend %g-tooltip-animation;
     border-style: solid;
     border-color: #333 transparent;
     content: "";
     position: absolute;
     z-index: 11;
+	}
 }
 
 %g-tooltip {
     display: inline;
     position: relative;
+		@extend %g-tooltip-body;
+		@extend %g-tip-body;
 
 	&:hover:before {
-		@extend %g-tooltip-body;
 		content: attr(data-g-tooltip);
-	}
-	&:hover:after {
-		@extend %g-tip-body;
 	}
 }
 
 %g-tooltip-up {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
 	    bottom: 19px;
 	    left: 50%;
 	    transform: translateX(-50%);
@@ -139,13 +140,11 @@ $max-width: 150px;
 %g-tooltip-down {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
 		top: 21px;
 		left: 50%;
 	    transform: translateX(-50%);
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
 		border-width: 0 6px 6px 6px;
 	    bottom: -3px;
 	    right: -1px;
@@ -168,12 +167,10 @@ $max-width: 150px;
 %g-tooltip-up-right {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
 	    left: -15px;
 	    bottom: 26px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
 		border-width: 6px 6px 0 6px;
 	    left: 20%;
 	    bottom: 20px;
@@ -183,12 +180,10 @@ $max-width: 150px;
 %g-tooltip-down-left {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
 	    right: -100%;
 	    top: 20px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
 		border-width: 0 6px 6px 6px;
 	    left: 20%;
 	    top: 14px;
@@ -198,12 +193,10 @@ $max-width: 150px;
 %g-tooltip-down-right {
 	@extend %g-tooltip;
 	&:hover:before {
-		@extend %g-tooltip:hover:before;
 	    left: -100%;
 	    top: 20px;
 	}
 	&:hover:after {
-		@extend %g-tooltip:hover:after;
 		border-width: 0 6px 6px 6px;
 	    left: 20%;
 	    top: 14px;
