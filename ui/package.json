@@ -1,0 +1,42 @@
+{
+  "name": "@ghostery/ui",
+  "version": "0.3.3",
+  "description": "",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./css": "./src/index.css",
+    "./categories": "./src/utils/categories.js",
+    "./wheel": "./src/utils/wheel.js",
+    "./onboarding": "./src/modules/onboarding/index.js"
+  },
+  "scripts": {
+    "lint": "eslint ./src",
+    "release": "auto shipit"
+  },
+  "author": {
+    "name": "Ghostery GmbH",
+    "email": "info@ghostery.com",
+    "url": "https://www.ghostery.com"
+  },
+  "license": "MPL-2.0",
+  "dependencies": {
+    "hybrids": "^8.0.3"
+  },
+  "devDependencies": {
+    "auto": "^10.36.5",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
+  },
+  "auto": {
+    "baseBranch": "main",
+    "plugins": [
+      "npm"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,169 @@
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url('./fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url('./fonts/Roboto-Medium.ttf');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Medium.ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: local('Roboto Condensed'), url('./fonts/RobotoCondensed-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: local('Roboto Condensed'), url('./fonts/RobotoCondensed-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  /* Legacy colors */
+  
+  --ui-text: #838b90;
+  --ui-black: #252525;
+  --ui-ghostery: #00aef0;
+  --ui-deep-blue: #0d8fe7;
+
+  /* Current colors */
+
+  --ui-color-gray-900: #12121C;
+  --ui-color-gray-800: #202225;
+  --ui-color-gray-700: #2F3136;
+  --ui-color-gray-600: #3F4146;
+  --ui-color-gray-500: #636468;
+  --ui-color-gray-400: #88898C;
+  --ui-color-gray-300: #B9BBBE;
+  --ui-color-white: white;
+
+  --ui-color-primary-700: #0077CC;
+  --ui-color-primary-500: #00AEF0;
+  --ui-color-secondary-500: #00B0FF;
+
+  --ui-color-newsletter-500: #AC59B5;
+
+  --ui-color-success-500: #43AC3C;
+  --ui-color-warning-500: #FFBB00;
+  --ui-color-error-500: #FF4500;
+  --ui-color-error-400: #FF5D35;
+
+  /* Fonts */
+
+  --ui-font-family-display: "Roboto Condensed", sans-serif;
+  --ui-font-family-headline: var(--ui-font-family-display);
+  --ui-font-family-button: var(--ui-font-family-display);
+
+  --ui-font-family-body: "Roboto", sans-serif;
+  --ui-font-family-label: var(--ui-font-family-body);
+
+  --ui-font-display-2xl: 40px / 40px var(--ui-font-family-display);
+  --ui-font-display-xl: 32px / 32px var(--ui-font-family-display);
+  --ui-font-display-l: 24px / 24px var(--ui-font-family-display);
+  --ui-font-display-m: 20px / 20px var(--ui-font-family-display);
+  --ui-font-display-s: 16px / 16px var(--ui-font-family-display);
+  --ui-font-display-xs: 16px / 16px var(--ui-font-family-display);
+
+  --ui-font-headline-xl: 32px / 38px var(--ui-font-family-headline);
+  --ui-font-headline-l: 24px / 28px var(--ui-font-family-headline);
+  --ui-font-headline-m: 24px / 28px var(--ui-font-family-headline);
+  --ui-font-headline-s: 20px / 24px var(--ui-font-family-headline);
+  --ui-font-headline-xs: 20px / 24px var(--ui-font-family-headline);
+  --ui-font-headline-2xs: 16px / 20px var(--ui-font-family-headline);
+
+  --ui-font-button-m: 18px / 20px var(--ui-font-family-button);
+  --ui-font-button-s: 18px / 20px var(--ui-font-family-button);
+
+  --ui-font-label-2xl: 20px / 24px var(--ui-font-family-label);
+  --ui-font-label-xl: 18px / 22px var(--ui-font-family-label);
+  --ui-font-label-l: 16px / 20px var(--ui-font-family-label);
+  --ui-font-label-m: 14px / 18px var(--ui-font-family-label);
+  --ui-font-label-s: 12px / 16px var(--ui-font-family-label);
+  --ui-font-label-xs: 12px / 16px var(--ui-font-family-label);
+
+  --ui-font-body-2xl: 20px / 28px var(--ui-font-family-body);
+  --ui-font-body-xl: 18px / 26px var(--ui-font-family-body);
+  --ui-font-body-l: 16px / 24px var(--ui-font-family-body);
+  --ui-font-body-m: 14px / 20px var(--ui-font-family-body);
+  --ui-font-body-s: 12px / 18px var(--ui-font-family-body);
+  --ui-font-body-xs: 12px / 18px var(--ui-font-family-body);
+
+  /* Global overwrites */
+  -webkit-font-smoothing: antialiased; 
+  -moz-font-smoothing: antialiased; 
+  -o-font-smoothing: antialiased;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    --ui-font-display-2xl: 72px / 72px var(--ui-font-family-display);
+    --ui-font-display-xl: 58px / 58px var(--ui-font-family-display);
+    --ui-font-display-l: 40px / 40px var(--ui-font-family-display);
+    --ui-font-display-m: 32px / 32px var(--ui-font-family-display);
+    --ui-font-display-s: 24px / 24px var(--ui-font-family-display);
+    --ui-font-display-xs: 16px / 16px var(--ui-font-family-display);
+
+    --ui-font-headline-xl: 58px / 64px var(--ui-font-family-headline);
+    --ui-font-headline-l: 40px / 48px var(--ui-font-family-headline);
+    --ui-font-headline-m: 32px / 38px var(--ui-font-family-headline);
+    --ui-font-headline-s: 24px / 28px var(--ui-font-family-headline);
+    --ui-font-headline-xs: 20px / 24px var(--ui-font-family-headline);
+    --ui-font-headline-2xs: 16px / 20px var(--ui-font-family-headline);
+
+    --ui-font-button-m: 22px / 24px var(--ui-font-family-button);
+    --ui-font-button-s: 18px / 20px var(--ui-font-family-button);
+
+    --ui-font-label-2xl: 22px / 26px var(--ui-font-family-label);
+    --ui-font-label-xl: 20px / 24px var(--ui-font-family-label);
+    --ui-font-label-l: 18px / 22px var(--ui-font-family-label);
+    --ui-font-label-m: 16px / 20px var(--ui-font-family-label);
+    --ui-font-label-s: 14px / 18px var(--ui-font-family-label);
+    --ui-font-label-xs: 12px / 16px var(--ui-font-family-label);
+
+    --ui-font-body-2xl: 22px / 30px var(--ui-font-family-body);
+    --ui-font-body-xl: 20px / 28px var(--ui-font-family-body);
+    --ui-font-body-l: 18px / 26px var(--ui-font-family-body);
+    --ui-font-body-m: 16px / 24px var(--ui-font-family-body);
+    --ui-font-body-s: 14px / 20px var(--ui-font-family-body);
+    --ui-font-body-xs: 12px / 18px var(--ui-font-family-body);
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Open Sans', Arial,
+    Helvetica, sans-serif;
+  font-size: 13px;
+  color: var(--ui-text);
+}
+
+button,
+label,
+input {
+  font-family: inherit !important;
+}
