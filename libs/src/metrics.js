@@ -79,8 +79,18 @@ const METRICS_URL_SET = new Set([
  * @memberOf  BackgroundClasses
  */
 class Metrics {
-  constructor({ globals, conf, log, prefsSet, prefsGet }) {
-    this.globals = globals;
+  constructor({
+    getBrowserInfo,
+    conf,
+    log,
+    prefsSet,
+    prefsGet,
+    EXTENSION_VERSION,
+    METRICS_BASE_URL,
+  }) {
+    this.getBrowserInfo = getBrowserInfo;
+    this.EXTENSION_VERSION = EXTENSION_VERSION;
+    this.METRICS_BASE_URL = METRICS_BASE_URL;
     this.conf = conf;
     this.log = log;
     this.prefsGet = prefsGet;
@@ -246,24 +256,24 @@ class Metrics {
     // Make sure that Globals._checkBrowserInfo() has resolved before we proceed,
     // so that we use the correct BROWSER_INFO values if we are in
     // the Ghostery Desktop or Ghostery Android browsers
-    await this.globals.BROWSER_INFO_READY;
+    const browserInfo = await this.getBrowserInfo();
 
     const frequencyString = type !== 'uninstall' ? `/${frequency}` : '';
 
-    let metrics_url = `${this.globals.METRICS_BASE_URL}/${type}${frequencyString}?gr=-1`;
+    let metrics_url = `${this.METRICS_BASE_URL}/${type}${frequencyString}?gr=-1`;
     metrics_url +=
       // Crucial parameters
       // Always added for uninstall URL
       // Extension version
-      buildQueryPair('v', this.globals.EXTENSION_VERSION) +
+      buildQueryPair('v', this.EXTENSION_VERSION) +
       // User agent - browser
-      buildQueryPair('ua', this.globals.BROWSER_INFO.token) +
+      buildQueryPair('ua', browserInfo.token) +
       // Operating system
-      buildQueryPair('os', this.globals.BROWSER_INFO.os) +
+      buildQueryPair('os', browserInfo.os) +
       // Browser language
       buildQueryPair('l', this.conf.language) +
       // Browser version
-      buildQueryPair('bv', this.globals.BROWSER_INFO.version) +
+      buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
       buildQueryPair('id', this.conf.install_date) +
       // Showing campaign messages (former show_cmp)
@@ -274,7 +284,7 @@ class Metrics {
       // Subscription Interval
       buildQueryPair('si', this._getSubscriptionInterval().toString()) +
       // Product ID Parameter
-      buildQueryPair('pi', await this._getProductID());
+      buildQueryPair('pi', browserInfo.token === 'gd' ? 'gd' : 'gbe');
 
     if (type !== 'uninstall') {
       metrics_url +=
@@ -338,7 +348,7 @@ class Metrics {
         buildQueryPair('uc', this.utm_campaign);
     }
 
-    if (this.globals.BROWSER_INFO.token === 'gd') {
+    if (browserInfo.token === 'gd') {
       // fetch metrics from the search extension and append them
       const searchMetrics = await Metrics._getSearchExtensionMetrics();
       Object.keys(searchMetrics).forEach((k) => {
@@ -396,20 +406,6 @@ class Metrics {
         }
       }
     });
-  }
-
-  /**
-   * Get the product ID
-   *
-   * @private
-   *
-   * @return {string} The Product ID
-   */
-  async _getProductID() {
-    // Make sure that Globals._checkBrowserInfo() has resolved before we proceed
-    await this.globals.BROWSER_INFO_READY;
-    if (this.globals.BROWSER_INFO.token === 'gd') return 'gd';
-    return 'gbe';
   }
 
   /**

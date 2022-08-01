@@ -19,7 +19,9 @@ import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 
 const metrics = new Metrics({
-	globals,
+	getBrowserInfo: globals.getBrowserInfo,
+	METRICS_BASE_URL: globals.METRICS_BASE_URL,
+	EXTENSION_VERSION: globals.EXTENSION_VERSION,
 	conf,
 	log,
 	prefsGet,

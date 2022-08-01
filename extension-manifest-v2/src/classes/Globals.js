@@ -232,6 +232,11 @@ class Globals {
 		return this.BROWSER_INFO.name.startsWith('ghostery');
 	}
 
+	getBrowserInfo = async () => {
+		await this.BROWSER_INFO_READY;
+		return this.BROWSER_INFO;
+	}
+
 	/**
 	* Check for information about this browser (FF only)
 	* @private
