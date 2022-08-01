@@ -384,7 +384,7 @@ class Account {
 	 */
 	buildUserSettings = () => {
 		const settings = {};
-		const now = Number(new Date().getTime());
+		const now = Date.now();
 		SYNC_SET.forEach((key) => {
 			// Whenever we prepare data to be sent out
 			// we have to convert these two parameters to objects

@@ -95,7 +95,7 @@ function updateDBs() {
 			bugDb.update(data.bugs, (result) => {
 				log('CHECK LIBRARY VERSION CALLED', result);
 				if (result.success) {
-					const nowTime = Number(new Date().getTime());
+					const nowTime = Date.now();
 					conf.bugs_last_checked = nowTime;
 					if (result.updated) {
 						log('BUGS LAST UPDATED UPDATED', new Date());
@@ -366,7 +366,7 @@ function handleNotifications(name, message, tab_id, callback) {
 
 			const data = (backup.settings || {}).conf || {};
 			data.alert_bubble_timeout = (data.alert_bubble_timeout > 30) ? 30 : data.alert_bubble_timeout;
-			data.settings_last_imported = Number((new Date()).getTime());
+			data.settings_last_imported = Date.now();
 			panelData.set(data);
 			utils.getActiveTab((tab) => {
 				const tabId = tab ? tab.id : tab_id;
@@ -1318,7 +1318,7 @@ function initializeGhosteryModules() {
 		log('JUST UPGRADED');
 		metrics.ping('upgrade');
 		// We don't want install_complete pings for upgrade
-		conf.metrics.install_complete_all = Number(new Date().getTime());
+		conf.metrics.install_complete_all = Date.now();
 	} else if (globals.JUST_INSTALLED) {
 		log('JUST INSTALLED');
 		const date = new Date();

@@ -369,7 +369,7 @@ class Metrics {
 
     frequencies.forEach(async (frequency) => {
       if (this._checkPing(type, frequency)) {
-        const timeNow = Number(new Date().getTime());
+        const timeNow = Date.now();
         const metrics_url = await this._buildMetricsUrl(type, frequency);
         // update Conf timestamps for each ping type and frequency
         const metrics = this.conf.metrics || {};
@@ -407,7 +407,7 @@ class Metrics {
       frequency === 'daily'
     ) {
       return Math.floor(
-        (Number(new Date().getTime()) - this.conf.metrics.active_daily) /
+        (Date.now() - this.conf.metrics.active_daily) /
           86400000,
       );
     }
@@ -428,7 +428,7 @@ class Metrics {
       frequency === 'daily'
     ) {
       return Math.floor(
-        (Number(new Date().getTime()) - this.conf.metrics.engaged_daily) /
+        (Date.now() - this.conf.metrics.engaged_daily) /
           86400000,
       );
     }
@@ -445,7 +445,7 @@ class Metrics {
       return -1;
     }
     const active_daily_velocity = this.conf.metrics.active_daily_velocity || [];
-    const today = Math.floor(Number(new Date().getTime()) / 86400000);
+    const today = Math.floor(Date.now() / 86400000);
     return active_daily_velocity.filter((el) => el > today - 7).length;
   }
 
@@ -460,7 +460,7 @@ class Metrics {
     }
     const engaged_daily_velocity =
       this.conf.metrics.engaged_daily_velocity || [];
-    const today = Math.floor(Number(new Date().getTime()) / 86400000);
+    const today = Math.floor(Date.now() / 86400000);
     return engaged_daily_velocity.filter((el) => el > today - 7).length;
   }
 
@@ -535,7 +535,7 @@ class Metrics {
     }
     const result = this.conf.metrics[`${type}_${frequency}`];
     const last = result === undefined ? 0 : result;
-    const now = Number(new Date().getTime());
+    const now = Date.now();
     const frequency_ago = now - FREQUENCIES[frequency];
     return last === null ? 0 : last - frequency_ago;
   }
@@ -606,7 +606,7 @@ class Metrics {
   _recordUpgrade() {
     // set install_all on upgrade too
     const { metrics } = conf;
-    metrics.install_all = Number(new Date().getTime());
+    metrics.install_all = Date.now();
     this.conf.metrics = metrics;
     this._sendReq('upgrade');
   }
@@ -617,7 +617,7 @@ class Metrics {
    */
   _recordActive() {
     const active_daily_velocity = this.conf.metrics.active_daily_velocity || [];
-    const today = Math.floor(Number(new Date().getTime()) / 86400000);
+    const today = Math.floor(Date.now() / 86400000);
     active_daily_velocity.sort();
     if (!active_daily_velocity.includes(today)) {
       active_daily_velocity.push(today);
@@ -689,7 +689,7 @@ class Metrics {
       this.conf.metrics.engaged_daily_count ||
       new Array(engaged_daily_velocity.length).fill(0);
 
-    const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
+    const today = Math.floor(Date.now() / 86400000); // Today's time
 
     engaged_daily_velocity.sort();
     if (!engaged_daily_velocity.includes(today)) {
