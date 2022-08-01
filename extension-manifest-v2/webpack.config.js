@@ -51,10 +51,8 @@ module.exports = {
 			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
 			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
+			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
 		},
-	},
-	watchOptions: {
-		ignored: /node_modules/
 	},
 	entry: {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],

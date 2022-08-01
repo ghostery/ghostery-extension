@@ -38,7 +38,7 @@ import foundBugs from './classes/FoundBugs';
 import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
-import metrics from './classes/Metrics';
+import metrics from './classes/MetricsWrapper';
 import account from './classes/Account';
 import SearchMessager from './classes/SearchMessager';
 import ErrorReporter from './classes/ErrorReporter';
@@ -933,6 +933,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
+		metrics.setUninstallUrl(key);
 	}, 200));
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// update content script state when blocking is paused/unpaused

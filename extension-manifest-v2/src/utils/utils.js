@@ -181,28 +181,6 @@ export function processUrl(src) {
 }
 
 /**
- * Process URLs and returns the query string as an object.
- * @memberOf BackgroundUtils
- * @param  {string} src 	the source url
- * @return {Object}			contains parts of parsed query as its properties
- */
-export function processUrlQuery(src) {
-	if (!src) {
-		return {};
-	}
-
-	try {
-		const res = {};
-		for (const [key, value] of new URL(src).searchParams.entries()) { // eslint-disable-line no-restricted-syntax
-			res[key] = value;
-		}
-		return res;
-	} catch (e) {
-		return {};
-	}
-}
-
-/**
  * Get a tab by ID. Will throw an error if the
  * tab_id is a prefetched tab (or otherwise not found).
  * @memberOf BackgroundUtils

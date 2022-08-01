@@ -23,11 +23,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import { debounce } from 'underscore';
 import confData from './ConfData';
 import { pref, log } from '../utils/common';
 import dispatcher from './Dispatcher';
-import metrics from './Metrics';
 import globals from './Globals';
 
 /**
@@ -77,8 +75,6 @@ const handler = {
 		if (confMutable.SYNC_SET.has(key) || key === 'bugs_last_checked') {
 			dispatcher.trigger('conf.changed.settings', key);
 		}
-
-		debounce(metrics.setUninstallUrl.bind(metrics), 200)(key);
 
 		return true;
 	},
