@@ -83,8 +83,6 @@ class Metrics {
     getBrowserInfo,
     conf,
     log,
-    prefsSet,
-    prefsGet,
     EXTENSION_VERSION,
     METRICS_BASE_URL,
   }) {
@@ -93,60 +91,47 @@ class Metrics {
     this.METRICS_BASE_URL = METRICS_BASE_URL;
     this.conf = conf;
     this.log = log;
-    this.prefsGet = prefsGet;
-    this.prefsSet = prefsSet;
+
     this.utm_source = '';
     this.utm_campaign = '';
     this.ping_set = new Set();
   }
 
-  /**
-   * Set UTM parameters.
-   *
-   * On JUST_INSTALLED, from ghostery.com/products install URL if present.
-   * Otherwise, tries to pull them from prefs.
-   * This method is called once on startup.
-   */
-  init(JUST_INSTALLED) {
-    if (JUST_INSTALLED) {
-      return new Promise((resolve) => {
-        let foundUTM = false;
-        chrome.tabs.query(
-          {
-            url: ['https://www.ghostery.com/*'],
-          },
-          (tabs) => {
-            tabs.forEach((tab) => {
-              if (foundUTM) {
-                return;
-              }
+  async detectUTMs() {
+    await new Promise((resolve) => {
+      let foundUTM = false;
+      chrome.tabs.query(
+        {
+          url: ['https://www.ghostery.com/*'],
+        },
+        (tabs) => {
+          tabs.forEach((tab) => {
+            if (foundUTM) {
+              return;
+            }
 
-              const query = processUrlQuery(tab.url);
-              if (!query.utm_source || !query.utm_campaign) {
-                return;
-              }
+            const query = processUrlQuery(tab.url);
+            if (!query.utm_source || !query.utm_campaign) {
+              return;
+            }
 
-              this.utm_source = query.utm_source;
-              this.utm_campaign = query.utm_campaign;
-              foundUTM = true;
-              this.prefsSet({
-                utm_source: this.utm_source,
-                utm_campaign: this.utm_campaign,
-              });
-            });
-            resolve();
-          },
-        );
-      });
-    }
-    return this.prefsGet('utm_source', 'utm_campaign')
-      .then((prefs) => {
-        this.utm_source = prefs.utm_source || '';
-        this.utm_campaign = prefs.utm_campaign || '';
-      })
-      .catch((error) => {
-        this.log('Metrics init() error', error);
-      });
+            this.setUTMs(query);
+            foundUTM = true;
+          });
+          resolve();
+        },
+      );
+    });
+
+    return {
+      utm_source: this.utm_source,
+      utm_campaign: this.utm_campaign,
+    };
+  }
+
+  setUTMs(utms) {
+    this.utm_source = utms.utm_source;
+    this.utm_campaign = utms.utm_campaign;
   }
 
   /**

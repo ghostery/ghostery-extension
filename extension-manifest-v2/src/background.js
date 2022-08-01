@@ -45,7 +45,7 @@ import ErrorReporter from './classes/ErrorReporter';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import {
-	log, alwaysLog, hashCode, prefsSet
+	log, alwaysLog, hashCode, prefsSet, prefsGet
 } from './utils/common';
 import * as utils from './utils/utils';
 import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
@@ -1539,6 +1539,20 @@ async function initializeAccount() {
 	}
 }
 
+async function recordUTMs() {
+	try {
+		if (globals.JUST_INSTALLED) {
+			const utms = await metrics.detectUTMs();
+			prefsSet(utms);
+			return;
+		}
+		const utms = await prefsGet('utm_source', 'utm_campaign');
+		metrics.setUTMs(utms);
+	} catch (error) {
+		alwaysLog('Metrics init() error', error);
+	}
+}
+
 /**
  * Application Initializer
  * Called whenever the browser starts or the extension is
@@ -1562,7 +1576,7 @@ async function init() {
 
 		await initializeSearchMessageHandler();
 
-		await metrics.init(globals.JUST_INSTALLED);
+		await recordUTMs();
 
 		await initializeGhosteryModules();
 

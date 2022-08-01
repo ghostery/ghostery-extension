@@ -16,7 +16,7 @@ import { Metrics } from '@ghostery/libs';
 
 import globals from './Globals';
 import conf from './Conf';
-import { log, prefsSet, prefsGet } from '../utils/common';
+import { log } from '../utils/common';
 
 const metrics = new Metrics({
 	getBrowserInfo: globals.getBrowserInfo,
@@ -24,8 +24,6 @@ const metrics = new Metrics({
 	EXTENSION_VERSION: globals.EXTENSION_VERSION,
 	conf,
 	log,
-	prefsGet,
-	prefsSet,
 });
 
 export default metrics;
