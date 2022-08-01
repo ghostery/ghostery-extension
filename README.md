@@ -2,7 +2,7 @@
 
 # Ghostery Browser Extension
 
-This repository is a home of all Ghostery Browser Extensions for various platforms.
+This repository is home to all Ghostery Browser Extensions for various platforms.
 
 ## Folder structure
 
