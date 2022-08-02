@@ -23,6 +23,10 @@ const metrics = new Metrics({
 	EXTENSION_VERSION: globals.EXTENSION_VERSION,
 	conf,
 	log,
+	storage: conf.metrics,
+	saveStorage: (storage) => {
+		conf.metrics = storage;
+	},
 });
 
 export default metrics;

@@ -86,6 +86,8 @@ class Metrics {
     log,
     EXTENSION_VERSION,
     METRICS_BASE_URL,
+    saveStorage,
+    storage,
   }) {
     this.EXTENSION_VERSION = EXTENSION_VERSION;
     this.METRICS_BASE_URL = METRICS_BASE_URL;
@@ -95,6 +97,8 @@ class Metrics {
     this.utm_source = '';
     this.utm_campaign = '';
     this.ping_set = new Set();
+    this.saveStorage = saveStorage;
+    this.storage = storage || {};
   }
 
   async detectUTMs() {
@@ -372,9 +376,8 @@ class Metrics {
         const timeNow = Date.now();
         const metrics_url = await this._buildMetricsUrl(type, frequency);
         // update Conf timestamps for each ping type and frequency
-        const metrics = this.conf.metrics || {};
-        metrics[`${type}_${frequency}`] = timeNow;
-        this.conf.metrics = metrics;
+        this.storage[`${type}_${frequency}`] = timeNow;
+        this.saveStorage(this.storage);
 
         this.log(`sending ${type} ping with ${frequency} frequency`);
 
@@ -402,12 +405,12 @@ class Metrics {
    */
   _getRecencyActive(type, frequency) {
     if (
-      this.conf.metrics.active_daily &&
+      this.storage.active_daily &&
       (type === 'active' || type === 'engaged') &&
       frequency === 'daily'
     ) {
       return Math.floor(
-        (Date.now() - this.conf.metrics.active_daily) /
+        (Date.now() - this.storage.active_daily) /
           86400000,
       );
     }
@@ -423,12 +426,12 @@ class Metrics {
    */
   _getRecencyEngaged(type, frequency) {
     if (
-      this.conf.metrics.engaged_daily &&
+      this.storage.engaged_daily &&
       (type === 'active' || type === 'engaged') &&
       frequency === 'daily'
     ) {
       return Math.floor(
-        (Date.now() - this.conf.metrics.engaged_daily) /
+        (Date.now() - this.storage.engaged_daily) /
           86400000,
       );
     }
@@ -444,7 +447,7 @@ class Metrics {
     if (type !== 'active' && type !== 'engaged') {
       return -1;
     }
-    const active_daily_velocity = this.conf.metrics.active_daily_velocity || [];
+    const active_daily_velocity = this.storage.active_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
     return active_daily_velocity.filter((el) => el > today - 7).length;
   }
@@ -459,7 +462,7 @@ class Metrics {
       return -1;
     }
     const engaged_daily_velocity =
-      this.conf.metrics.engaged_daily_velocity || [];
+      this.storage.engaged_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
     return engaged_daily_velocity.filter((el) => el > today - 7).length;
   }
@@ -533,7 +536,7 @@ class Metrics {
     if (frequency === 'all') {
       return 0;
     }
-    const result = this.conf.metrics[`${type}_${frequency}`];
+    const result = this.storage[`${type}_${frequency}`];
     const last = result === undefined ? 0 : result;
     const now = Date.now();
     const frequency_ago = now - FREQUENCIES[frequency];
@@ -560,7 +563,7 @@ class Metrics {
     if (this.conf.enable_metrics) {
       return true;
     }
-    if (this.conf.metrics.install_complete_all) {
+    if (this.storage.install_complete_all) {
       return false;
     }
     if (this.ping_set && this.ping_set.size < MAX_DELAYED_PINGS) {
@@ -577,7 +580,7 @@ class Metrics {
    */
   _recordInstall() {
     // We don't want to record 'install' twice
-    if (this.conf.metrics.install_all) {
+    if (this.storage.install_all) {
       return;
     }
     this._sendReq('install');
@@ -589,7 +592,7 @@ class Metrics {
    */
   _recordInstallComplete() {
     // We don't want to record 'install' twice
-    if (this.conf.metrics.install_complete_all) {
+    if (this.storage.install_complete_all) {
       return;
     }
     this._sendReq('install_complete');
@@ -605,9 +608,8 @@ class Metrics {
    */
   _recordUpgrade() {
     // set install_all on upgrade too
-    const { metrics } = conf;
-    metrics.install_all = Date.now();
-    this.conf.metrics = metrics;
+    this.storage.install_all = Date.now();
+    this.saveStorage(this.storage);
     this._sendReq('upgrade');
   }
 
@@ -616,7 +618,7 @@ class Metrics {
    * @private
    */
   _recordActive() {
-    const active_daily_velocity = this.conf.metrics.active_daily_velocity || [];
+    const active_daily_velocity = this.storage.active_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
     active_daily_velocity.sort();
     if (!active_daily_velocity.includes(today)) {
@@ -625,7 +627,8 @@ class Metrics {
         active_daily_velocity.shift();
       }
     }
-    this.conf.metrics.active_daily_velocity = active_daily_velocity;
+    this.storage.active_daily_velocity = active_daily_velocity;
+    this.saveStorage(this.storage);
 
     const daily = this._timeToExpired('active', 'daily');
     if (daily > 0) {
@@ -684,9 +687,9 @@ class Metrics {
    */
   _recordEngaged() {
     const engaged_daily_velocity =
-      this.conf.metrics.engaged_daily_velocity || [];
+      this.storage.engaged_daily_velocity || [];
     const engaged_daily_count =
-      this.conf.metrics.engaged_daily_count ||
+      this.storage.engaged_daily_count ||
       new Array(engaged_daily_velocity.length).fill(0);
 
     const today = Math.floor(Date.now() / 86400000); // Today's time
@@ -703,8 +706,9 @@ class Metrics {
       engaged_daily_count[engaged_daily_velocity.indexOf(today)]++;
     }
 
-    this.conf.metrics.engaged_daily_count = engaged_daily_count;
-    this.conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
+    this.storage.engaged_daily_count = engaged_daily_count;
+    this.storage.engaged_daily_velocity = engaged_daily_velocity;
+    this.saveStorage(this.storage);
     this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
   }
 
