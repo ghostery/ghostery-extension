@@ -199,6 +199,7 @@ await build({
     ...config.build,
     target: 'esnext',
     rollupOptions: {
+      external: EXTERNAL_NODE_MODULES,
       input: mapPaths(source),
       preserveEntrySignatures: 'exports-only',
       output: {

@@ -56,7 +56,11 @@ const FREQUENCIES = {
   biweekly: 1209600000,
   monthly: 2419200000,
 };
-const CRITICAL_METRICS = [
+export const FREQUENCY_TYPES = [
+  'all',
+  ...Object.keys(FREQUENCIES),
+];
+export const CRITICAL_METRICS = [
   'install',
   'install_complete',
   'upgrade',
@@ -739,5 +743,8 @@ class Metrics {
     });
   }
 }
+
+Metrics.CRITICAL_TYPES = CRITICAL_METRICS;
+Metrics.FREQUENCY_TYPES = FREQUENCY_TYPES;
 
 export default Metrics;

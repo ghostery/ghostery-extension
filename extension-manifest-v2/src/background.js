@@ -1544,7 +1544,7 @@ async function recordUTMs() {
 	try {
 		if (globals.JUST_INSTALLED) {
 			const utms = await metrics.detectUTMs();
-			prefsSet(utms);
+			await prefsSet(utms);
 			return;
 		}
 		const utms = await prefsGet('utm_source', 'utm_campaign');
