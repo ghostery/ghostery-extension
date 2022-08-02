@@ -42,6 +42,7 @@
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
+    "@ghostery/libs": "../libs",
     "@ghostery/ui": "../ui",
     "@whotracksme/webextension-packages": "^0.3.0",
     "hybrids": "^8.0.3",
