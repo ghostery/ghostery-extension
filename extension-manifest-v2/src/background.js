@@ -48,6 +48,7 @@ import {
 	log, alwaysLog, hashCode, prefsSet, prefsGet
 } from './utils/common';
 import * as utils from './utils/utils';
+import { injectNotifications } from './utils/inject';
 import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
@@ -799,7 +800,7 @@ function onMessageHandler(request, sender, callback) {
 					const hash = hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
 					const msg = { type: 'Ghostery-Backup', content: backup };
-					utils.injectNotifications(activeTab.id, true).then(() => {
+					injectNotifications(activeTab.id, true).then(() => {
 						sendMessage(activeTab.id, 'exportFile', msg);
 					});
 					callback(true);
@@ -819,7 +820,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'showBrowseWindow') {
 		utils.getActiveTab((activeTab) => {
 			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
-				utils.injectNotifications(activeTab.id, true).then((result) => {
+				injectNotifications(activeTab.id, true).then((result) => {
 					if (result) {
 						sendMessage(activeTab.id, 'showBrowseWindow', {
 							translations: {
