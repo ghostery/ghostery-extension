@@ -89,7 +89,6 @@ class ConfData {
 				_initProperty('trackers_banner_status', true);
 			}
 
-			// Make sure that getBrowserInfo() has resolved before we set these properties
 			(async () => {
 				const isGhosteryBrowser = await globals.isGhosteryBrowser();
 				_initProperty('enable_metrics', isGhosteryBrowser);

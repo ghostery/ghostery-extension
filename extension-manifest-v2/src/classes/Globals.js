@@ -13,7 +13,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import parser from 'ua-parser-js';
+// eslint-disable-next-line import/no-unresolved
+import { getBrowserInfo } from '@ghostery/libs';
 
 const manifest = chrome.runtime.getManifest();
 
@@ -31,7 +32,9 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
-		this.BROWSER_INFO_READY = this.buildBrowserInfo();
+		this.BROWSER_INFO_READY = getBrowserInfo().then((info) => {
+			this.BROWSER_INFO = info;
+		});
 
 		// flags
 		this.JUST_INSTALLED = false;
@@ -158,95 +161,12 @@ class Globals {
 	}
 
 	/**
-	 * Gets UA and Platform strings for current browser
-	 * @return {Promise}
-	 */
-	buildBrowserInfo() {
-		const ua = parser(navigator.userAgent);
-		const browser = ua.browser.name.toLowerCase();
-		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
-		const platform = ua.os?.name?.toLowerCase() || ''; // Make sure that undefined operating systems don't mess with stuff like .includes()
-
-		// Set name and token properties. CMP uses `name` value.  Metrics uses `token`
-		if (browser.includes('edge')) {
-			this.BROWSER_INFO.displayName = 'Edge';
-			this.BROWSER_INFO.name = 'edge';
-			this.BROWSER_INFO.token = 'ed';
-		} else if (browser.includes('opera')) {
-			this.BROWSER_INFO.displayName = 'Opera';
-			this.BROWSER_INFO.name = 'opera';
-			this.BROWSER_INFO.token = 'op';
-		} else if (browser.includes('chrome')) {
-			this.BROWSER_INFO.displayName = 'Chrome';
-			this.BROWSER_INFO.name = 'chrome';
-			this.BROWSER_INFO.token = 'ch';
-		} else if (browser.includes('firefox')) {
-			this.BROWSER_INFO.displayName = 'Firefox';
-			this.BROWSER_INFO.name = 'firefox';
-			this.BROWSER_INFO.token = 'ff';
-		} else if (browser.includes('yandex')) {
-			this.BROWSER_INFO.displayName = 'Yandex';
-			this.BROWSER_INFO.name = 'yandex';
-			this.BROWSER_INFO.token = 'yx';
-		}
-
-		// Set OS property
-		if (platform.includes('mac')) {
-			this.BROWSER_INFO.os = 'mac';
-		} else if (platform.includes('win')) {
-			this.BROWSER_INFO.os = 'win';
-		} else if (platform.includes('linux')) {
-			this.BROWSER_INFO.os = 'linux';
-		} else if (platform.includes('android')) {
-			this.BROWSER_INFO.os = 'android';
-		}
-
-		// Set version property
-		this.BROWSER_INFO.version = version;
-
-		// Check for Ghostery browsers
-		return Globals._checkBrowserInfo().then((info) => {
-			if (info && info.name === 'Ghostery') {
-				if (platform.includes('android')) {
-					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
-					this.BROWSER_INFO.name = 'ghostery_android';
-					this.BROWSER_INFO.token = 'ga';
-					this.BROWSER_INFO.os = 'android';
-					this.BROWSER_INFO.version = info.version;
-				} else {
-					this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
-					this.BROWSER_INFO.name = 'ghostery_desktop';
-					this.BROWSER_INFO.token = 'gd';
-					this.BROWSER_INFO.version = info.version.split('.').join('');
-				}
-			}
-		});
-	}
-
-	/**
 	 * Checks if the current browser is Ghostery
 	 * @return {Promise}
 	 */
 	async isGhosteryBrowser() {
 		await this.BROWSER_INFO_READY;
 		return this.BROWSER_INFO.name.startsWith('ghostery');
-	}
-
-	getBrowserInfo = async () => {
-		await this.BROWSER_INFO_READY;
-		return this.BROWSER_INFO;
-	}
-
-	/**
-	* Check for information about this browser (FF only)
-	* @private
-	* @return {Promise}
-	*/
-	static _checkBrowserInfo() {
-		if (typeof chrome.runtime.getBrowserInfo === 'function') {
-			return chrome.runtime.getBrowserInfo();
-		}
-		return Promise.resolve(false);
 	}
 }
 

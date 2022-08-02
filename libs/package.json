@@ -7,5 +7,8 @@
   "license": "MPL-2.0",
   "exports": {
     ".": "./src/index.js"
+  },
+  "dependencies": {
+    "ua-parser-js": "^1.0.2"
   }
 }

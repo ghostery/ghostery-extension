@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import getBrowserInfo from "./browser-info";
+
 /**
  * Helper for building query string key value pairs
  *
@@ -80,13 +82,11 @@ const METRICS_URL_SET = new Set([
  */
 class Metrics {
   constructor({
-    getBrowserInfo,
     conf,
     log,
     EXTENSION_VERSION,
     METRICS_BASE_URL,
   }) {
-    this.getBrowserInfo = getBrowserInfo;
     this.EXTENSION_VERSION = EXTENSION_VERSION;
     this.METRICS_BASE_URL = METRICS_BASE_URL;
     this.conf = conf;
@@ -241,7 +241,7 @@ class Metrics {
     // Make sure that Globals._checkBrowserInfo() has resolved before we proceed,
     // so that we use the correct BROWSER_INFO values if we are in
     // the Ghostery Desktop or Ghostery Android browsers
-    const browserInfo = await this.getBrowserInfo();
+    const browserInfo = await getBrowserInfo();
 
     const frequencyString = type !== 'uninstall' ? `/${frequency}` : '';
 

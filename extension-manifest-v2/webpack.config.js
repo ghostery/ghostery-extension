@@ -133,6 +133,23 @@ module.exports = {
 					loader: 'underscore-template-loader'
 				}
 			}, {
+				test: /\.js$/,
+				include: [
+					path.resolve(__dirname, 'node_modules/@ghostery/libs'),
+				],
+				exclude: [
+					path.resolve(__dirname, 'node_modules/@ghostery/libs/node_modules'),
+				],
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							envName: 'src',
+						}
+					},
+					'eslint-loader'
+				],
+			}, {
 				test: /\.(js|jsx)$/,
 				include: [SHARED_COMP_DIR, ONBOARDING_DIR, PANEL_ANDROID_DIR, PANEL_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
 				exclude: /node_modules/,
