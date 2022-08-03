@@ -5,10 +5,6 @@ import shelljs from 'shelljs';
 
 const pwd = process.cwd();
 
-const EXTERNAL_NODE_MODULES = [
-  'ua-parser-js', // from @ghostery/libs
-];
-
 const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
@@ -199,7 +195,6 @@ await build({
     ...config.build,
     target: 'esnext',
     rollupOptions: {
-      external: EXTERNAL_NODE_MODULES,
       input: mapPaths(source),
       preserveEntrySignatures: 'exports-only',
       output: {
