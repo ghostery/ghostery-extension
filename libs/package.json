@@ -8,7 +8,7 @@
   "exports": {
     ".": "./src/index.js"
   },
-  "peerDependencies": {
+  "dependencies": {
     "ua-parser-js": "^1.0.2"
   }
 }
