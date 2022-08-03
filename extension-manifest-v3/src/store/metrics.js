@@ -15,7 +15,7 @@ const Metrics = {
       VELOCITIES.forEach((velocity) => {
         if (
           (metrics[velocity] &&
-            metrics[velocity].length === 0 &&
+            metrics[velocity].length === 1 &&
             metrics[velocity][0] === 0) ||
           !metrics[velocity]
         ) {

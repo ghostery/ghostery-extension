@@ -38,7 +38,7 @@ async function recordUTMs(telemetry, JUST_INSTALLED) {
   const JUST_INSTALLED = metrics.install_all === 0;
 
   try {
-    await recordUTMs(telemetry);
+    await recordUTMs(telemetry, JUST_INSTALLED);
   } catch (error) {
     log('Telemetry recordUTMs() error', error);
   }
