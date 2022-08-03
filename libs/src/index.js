@@ -1,4 +1,4 @@
-import Metrics from './metrics';
-import getBrowserInfo from './browser-info';
+import Metrics from './metrics.js';
+import getBrowserInfo from './browser-info.js';
 
 export { Metrics, getBrowserInfo };

@@ -5,6 +5,10 @@ import shelljs from 'shelljs';
 
 const pwd = process.cwd();
 
+const EXTERNAL_NODE_MODULES = [
+  'ua-parser-js', // from @ghostery/libs
+];
+
 const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),

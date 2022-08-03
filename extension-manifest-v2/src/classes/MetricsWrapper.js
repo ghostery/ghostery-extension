@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// eslint-disable-next-line import/no-unresolved
 import { Metrics } from '@ghostery/libs';
 
 import globals from './Globals';

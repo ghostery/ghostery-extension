@@ -49,7 +49,7 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/url-parser": "^1.1.4",
-    "@ghostery/libs": "../libs",
+    "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "../ui",
     "@sentry/browser": "7.1.1",
     "@whotracksme/webextension-packages": "^0.3.1",
@@ -104,7 +104,8 @@
     "eslint-plugin-react": "^7.20.5",
     "find-in-files": "^0.5.0",
     "fs-extra": "^9.0.1",
-    "jest": "^26.3.0",
+    "jest": "^28.1.3",
+    "jest-environment-jsdom": "^28.1.3",
     "jest-fetch-mock": "^3.0.3",
     "jest-when": "^2.7.2",
     "jsdoc": "^3.6.7",

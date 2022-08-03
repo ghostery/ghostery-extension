@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import getBrowserInfo from "./browser-info";
+import getBrowserInfo from "./browser-info.js";
 
 /**
  * Helper for building query string key value pairs
