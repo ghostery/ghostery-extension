@@ -8,7 +8,13 @@
   "exports": {
     ".": "./src/index.js"
   },
+  "scripts": {
+    "postinstall": "patch-package"
+  },
   "dependencies": {
     "ua-parser-js": "^1.0.2"
+  },
+  "devDependencies": {
+    "patch-package": "^6.4.7"
   }
 }
