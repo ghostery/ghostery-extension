@@ -12,6 +12,17 @@ function _checkBrowserInfo() {
   return Promise.resolve(false);
 }
 
+function _checkPlatformInfo() {
+  if (typeof chrome.runtime.getPlatformInfo === 'function') {
+    return new Promise((resolve) => {
+      chrome.runtime.getPlatformInfo((info) => {
+        resolve(info);
+      })
+    });
+  }
+  return Promise.resolve(false);
+}
+
 const getBrowserInfo = async () => {
   const ua = parser(navigator.userAgent);
   const browser = ua.browser.name.toLowerCase();
@@ -41,6 +52,10 @@ const getBrowserInfo = async () => {
     BROWSER_INFO.displayName = 'Yandex';
     BROWSER_INFO.name = 'yandex';
     BROWSER_INFO.token = 'yx';
+  } else if (browser.includes('safari')) {
+    BROWSER_INFO.displayName = 'Safari';
+    BROWSER_INFO.name = 'safari';
+    BROWSER_INFO.token = 'sf';
   }
 
   // Set OS property
@@ -52,29 +67,36 @@ const getBrowserInfo = async () => {
     BROWSER_INFO.os = 'linux';
   } else if (platform.includes('android')) {
     BROWSER_INFO.os = 'android';
+  } else if (platform.includes('iOS')) {
+    BROWSER_INFO.os = 'ios';
   }
 
   // Set version property
   BROWSER_INFO.version = version;
 
   // Check for Ghostery browsers
-  return _checkBrowserInfo().then((info) => {
-    if (info && info.name === 'Ghostery') {
-      if (platform.includes('android')) {
-        BROWSER_INFO.displayName = 'Ghostery Android Browser';
-        BROWSER_INFO.name = 'ghostery_android';
-        BROWSER_INFO.token = 'ga';
-        BROWSER_INFO.os = 'android';
-        BROWSER_INFO.version = info.version;
-      } else {
-        BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
-        BROWSER_INFO.name = 'ghostery_desktop';
-        BROWSER_INFO.token = 'gd';
-        BROWSER_INFO.version = info.version.split('.').join('');
-      }
+  const browserInfo = await _checkBrowserInfo();
+  if (browserInfo && browserInfo.name === 'Ghostery') {
+    if (platform.includes('android')) {
+      BROWSER_INFO.displayName = 'Ghostery Android Browser';
+      BROWSER_INFO.name = 'ghostery_android';
+      BROWSER_INFO.token = 'ga';
+      BROWSER_INFO.os = 'android';
+      BROWSER_INFO.version = browserInfo.version;
+    } else {
+      BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
+      BROWSER_INFO.name = 'ghostery_desktop';
+      BROWSER_INFO.token = 'gd';
+      BROWSER_INFO.version = browserInfo.version.split('.').join('');
     }
-    return BROWSER_INFO;
-  });
+  }
+
+  const platformInfo = await _checkPlatformInfo();
+  if (platformInfo && platformInfo.os === 'ios' && BROWSER_INFO.os === 'mac') {
+    BROWSER_INFO.os = 'ipados';
+  }
+
+  return BROWSER_INFO;
 }
 
 export default getBrowserInfo;
