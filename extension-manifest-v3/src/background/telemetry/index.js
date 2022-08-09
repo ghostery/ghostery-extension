@@ -2,8 +2,9 @@ import { Metrics as Telemetry } from '@ghostery/libs';
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
-import Metrics from '/store/metrics.js';
 import UTMs from '/store/utms.js';
+
+import { loadStorage, saveStorage } from './storage';
 
 const log = console.log.bind(console, '[telemetry]');
 
@@ -21,21 +22,20 @@ async function recordUTMs(telemetry, JUST_INSTALLED) {
 
 (async () => {
   const options = await store.resolve(store.get(Options));
-  const metrics = await store.resolve(store.get(Metrics));
+  const storage = await loadStorage();
 
   const telemetry = new Telemetry({
     METRICS_BASE_URL: 'https://d.ghostery.com',
     EXTENSION_VERSION: chrome.runtime.getManifest().version,
     conf: options,
     log,
-    // object copy as hybrics arrays are not extensible
-    storage: JSON.parse(JSON.stringify(metrics)),
-    saveStorage: async (_storage) => {
-      await store.set(metrics, _storage);
+    storage,
+    saveStorage: (metrics) => {
+      saveStorage(storage, metrics);
     },
   });
 
-  const JUST_INSTALLED = metrics.install_all === 0;
+  const JUST_INSTALLED = storage.install_all === 0;
 
   try {
     await recordUTMs(telemetry, JUST_INSTALLED);

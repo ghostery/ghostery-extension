@@ -11,21 +11,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { Metrics } from '@ghostery/libs';
+import { Metrics as Telemetry } from '@ghostery/libs';
 
 import globals from './Globals';
 import conf from './Conf';
 import { log } from '../utils/common';
 
-const metrics = new Metrics({
+const telemetry = new Telemetry({
 	METRICS_BASE_URL: globals.METRICS_BASE_URL,
 	EXTENSION_VERSION: globals.EXTENSION_VERSION,
 	conf,
 	log,
 	storage: conf.metrics,
-	saveStorage: (storage) => {
-		conf.metrics = storage;
+	saveStorage: (metrics) => {
+		conf.metrics = metrics;
 	},
 });
 
-export default metrics;
+export default telemetry;
