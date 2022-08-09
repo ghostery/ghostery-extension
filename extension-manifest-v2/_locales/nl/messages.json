@@ -1,6 +1,6 @@
 {
   "accept_terms": {
-    "message": "Accept terms"
+    "message": "Accepteer voorwaarden"
   },
   "account_creation_privacy_statement": {
     "message": "Onze algemene $LINK_TERMS_START$Voorwaarden$LINK_TERMS_END$ en onze $LINK_UA_START$Licentie Overeenkomst$LINK_UA_END$ zijn van toepassing. Je vindt onze Privacy verklaring $LINK_PS_START$hier$LINK_PS_END$.",
@@ -32,10 +32,13 @@
     "message": "Blokkeer advertenties op de websites die je bezoekt."
   },
   "additional_permissions_required": {
-    "message": "Additional Permissions Required"
+    "message": "Extra vereiste toestemmingen"
   },
   "ads": {
     "message": "ads"
+  },
+  "ads___onboarding": {
+    "message": "Ads"
   },
   "adult_advertising": {
     "message": "Adult Advertising",
@@ -85,10 +88,10 @@
     "message": "Slim browsen AAN. Trackers blokkeren wordt aangepast om paginaprestaties te optimaliseren."
   },
   "all_popups": {
-    "message": "All Popups"
+    "message": "Alle popups"
   },
   "all_set__go_with_ghosty_": {
-    "message": "All set! go with ghosty!"
+    "message": "Alles klaar! ga met ghosty!"
   },
   "already_subscribed": {
     "message": "Reeds ingeschreven"
@@ -139,13 +142,13 @@
     "message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
   },
   "any_questions__anytime_": {
-    "message": "Any questions? Anytime!"
+    "message": "Nog vragen? Altijd!"
   },
   "are_you_sure_": {
-    "message": "Are you sure?"
+    "message": "Weet je het zeker?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
-    "message": "Are you sure you want to skip enabling Ghostery?"
+    "message": "Weet u zeker dat u Ghostery niet wilt inschakelen?"
   },
   "audio_video_player": {
     "message": "Audio-/Videospeler",
@@ -432,7 +435,7 @@
   },
   "category_cdn_desc": {
     "description": "User-facing description for the CDN tag category.",
-    "message": "Content delivery networks distribute resources for different site utilities, collect user analytics and tracking data on network traffic."
+    "message": "Content delivery-netwerken verdelen middelen voor verschillende site-utilities, verzamelen gebruikersanalyses en traceren gegevens over het netwerkverkeer."
   },
   "category_comments": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -444,11 +447,11 @@
   },
   "category_consent": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
-    "message": "Consent Management"
+    "message": "Toestemmingsbeheer"
   },
   "category_consent_desc": {
     "description": "User-facing description for the Customer Interaction tag category.",
-    "message": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
+    "message": "Omvat trackers die worden gebruikt voor het beheer van de toestemming voor cookies, waardoor websites de activiteit van de gebruiker op verschillende niveaus kunnen volgen"
   },
   "category_customer_interaction": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -464,7 +467,7 @@
   },
   "category_email_desc": {
     "description": "User-facing description for the Email tag category.",
-    "message": "Includes tracking pixels used to measure email open rates."
+    "message": "Omvat trackingpixels die worden gebruikt om het aantal geopende e-mails te meten."
   },
   "category_essential": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -480,7 +483,7 @@
   },
   "category_extensions_desc": {
     "description": "User-facing description for the Extensions tag category.",
-    "message": "Software on user-devices that can intercept and analyse browser traffic (man in the middle)."
+    "message": "Software op gebruikersapparatuur die browserverkeer kan onderscheppen en analyseren (man in the middle)."
   },
   "category_hosting": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -488,7 +491,7 @@
   },
   "category_hosting_desc": {
     "description": "User-facing description for the Hosting tag category.",
-    "message": "Services providing access to websites have access to server logs, including IP address and information about User Agent."
+    "message": "Diensten die toegang verlenen tot websites hebben toegang tot serverlogs, met inbegrip van het IP-adres en informatie over de gebruikersagenten."
   },
   "category_misc": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -496,7 +499,7 @@
   },
   "category_misc_desc": {
     "description": "User-facing description for the Miscellaneous tag category.",
-    "message": "Contains different types of unclassified trackers."
+    "message": "Bevat verschillende soorten niet-geclassificeerde trackers."
   },
   "category_pornvertising": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -524,11 +527,11 @@
   },
   "category_telemetry": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
-    "message": "Telemetry"
+    "message": "Telemetrie"
   },
   "category_telemetry_desc": {
     "description": "User-facing description for the Telemetry tag category.",
-    "message": "Telemetry"
+    "message": "Telemetrie"
   },
   "category_uncategorized": {
     "message": "Ongecategoriseerd"
@@ -544,7 +547,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "Check out <a href=\"$${0}\" target=\"_blank\">FAQs</a> or drop us a line at <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. We'll be more than happy to talk to you!"
+    "message": "Kijk op <a href=\"$${0}\" target=\"_blank\">FAQs</a> of stuur ons een berichtje <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. Wij staan u graag te woord!"
   },
   "choose_your_default_search": {
     "message": "Je standaard zoekmachine selecteren"
@@ -632,7 +635,7 @@
     "message": "Wachtwoord bevestigen:"
   },
   "continue": {
-    "message": "Continue"
+    "message": "Ga door"
   },
   "cookie": {
     "message": "cookie"
@@ -674,7 +677,7 @@
     "message": "Gedetailleerd Overzicht"
   },
   "disable_trackers_preview": {
-    "message": "Disable Trackers Preview"
+    "message": "Preview trackers uitschakelen"
   },
   "dollar_sign": {
     "message": "&#36;"
@@ -696,10 +699,10 @@
     "message": "E-mail:"
   },
   "enable_ghostery": {
-    "message": "Enable Ghostery"
+    "message": "Ghostery inschakelen"
   },
   "enable_ghostery_to_get_started": {
-    "message": "Enable Ghostery to get started"
+    "message": "Activeer Ghostery om te beginnen"
   },
   "enable_when_blacklisted": {
     "message": "Maak Beperk Website ongedaan om deze functie te gebruiken."
@@ -746,7 +749,7 @@
     "message": "Voornaam (Optioneel):"
   },
   "for_more_information_read_our_full": {
-    "message": "For more information read our full"
+    "message": "Voor meer informatie lees onze volledige"
   },
   "forgot_password": {
     "message": "Wachtwoord Vergeten?"
@@ -767,22 +770,22 @@
     "message": "Basic"
   },
   "ghostery_disabled": {
-    "message": "Ghostery disabled"
+    "message": "Ghostery uitgeschakeld"
   },
   "ghostery_enabled": {
-    "message": "Ghostery enabled"
+    "message": "Ghostery ingeschakeld"
   },
   "ghostery_is_ready": {
     "message": "Ghostery is klaar!"
   },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery is set up to stop trackers in their tracks and protect your privacy while browsing!"
+    "message": "Ghostery is ingesteld om trackers in hun sporen te stoppen en uw privacy te beschermen tijdens het surfen!"
   },
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
-    "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers for their own profit."
+    "message": "Ghostery stopt trackers in hun sporen en voorkomt dat u wordt geprofileerd en uw persoonlijke informatie wordt verkocht aan data brokers voor hun eigen winst."
   },
   "ghostery_privacy_policy": {
-    "message": "Ghostery Privacy Policy"
+    "message": "Privacybeleid van Ghostery"
   },
   "global_settings_saved": {
     "message": "Algemene Instellingen Opgeslagen"
@@ -807,7 +810,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
-    "message": "I agree to send non-personal information to <a href=\"$${0}\">WhoTracks.Me</a> and I accept the Ghostery <a href=\"$${1}\">Privacy Policy</a>"
+    "message": "Ik ga akkoord met het verzenden van niet-persoonlijke informatie naar <a href=\"$${0}\">WhoTracks.Me</a> en ik accepteer het Ghostery <a href=\"$${1}\">Privacybeleid</a>"
   },
   "invalid_email_forgot": {
     "message": "Sorry, je moet een echt e-mailadres invoeren."
@@ -816,7 +819,7 @@
     "message": "Sorry, je moet een echt e-mailadres invoeren."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
-    "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send tracker information to whotracks.me. The tracker input enables Ghostery to provide real-time intel on trackers and protection to the entire Ghostery user community."
+    "message": "Het bestaat dankzij micro-bijdragen van elke Ghostery gebruiker die ervoor kiest om tracker informatie te sturen naar whotracks.me. De tracker input stelt Ghostery in staat om real-time informatie over trackers en bescherming te bieden aan de gehele Ghostery gebruikersgemeenschap."
   },
   "last_name_field_label": {
     "message": "Achternaam (Optioneel):"
@@ -865,7 +868,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "more_information_on_@_0__": {
-    "message": "More information on $${0}."
+    "message": "Meer informatie over $${0}."
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
@@ -1267,7 +1270,7 @@
     "message": "Priority-ondersteuning"
   },
   "privacy_policy": {
-    "message": "privacy policy"
+    "message": "Privacybeleid"
   },
   "privacy_protection": {
     "message": "Privacybescherming op deze website"
@@ -1516,6 +1519,12 @@
   "settings_show_purple_box_tooltip": {
     "message": "De trackertelling is een lijst in de hoek van je browser waarin trackers worden weergegeven terwijl ze in real time worden geladen."
   },
+  "settings_show_redirect_tracking_dialogs": {
+    "message": "Vraag me om bevestiging voordat ik een site bezoek die me via een tracker doorstuurt"
+  },
+  "settings_show_redirect_tracking_dialogs_tooltip": {
+    "message": "Redirect tracking betekent dat u, in plaats van een website rechtstreeks te bezoeken, eerst wordt omgeleid via een andere site die kan proberen u te volgen (bv. door een cookie te plaatsen). In tegenstelling tot normale tracking, kunt u het verzoek niet blokkeren zonder de functionaliteit te verbreken."
+  },
   "settings_show_reload_banner": {
     "message": "Toon pagina herlaad banner-mededelingen bovenaan de extensie"
   },
@@ -1574,7 +1583,7 @@
     "message": "Nog steeds up-to-date"
   },
   "settings_wtm_serp_report": {
-    "message": "Show Trackers Preview next to search results"
+    "message": "Trackers weergeven naast zoekresultaten"
   },
   "seven_day_free_trial": {
     "message": "Gratis proefversie van 7 dagen"
@@ -1777,7 +1786,7 @@
     "message": "Systeembrede blokkering van trackers en reclame"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
-    "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
+    "message": "De Ghostery Browser Extensie is geïnstalleerd in uw browser maar Ghostery doet een klein dutje."
   },
   "too_many_failed_logins_text": {
     "message": "Te veel mislukte inlogpogingen. Probeer het over één uur opnieuw."
@@ -1837,7 +1846,7 @@
     "message": "Gedetecteerd"
   },
   "trackers_preview": {
-    "message": "Trackers Preview"
+    "message": "Preview trackers"
   },
   "try_ghostery_midnight": {
     "message": "Ghostery Midnight proberen"
@@ -1856,10 +1865,10 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "welcome_to": {
-    "message": "Welcome to"
+    "message": "Welkom bij"
   },
   "what_is_whotracks_me_": {
-    "message": "What is whotracks.me?"
+    "message": "Wat is whotracks.me?"
   },
   "white_black_list_error_invalid_url": {
     "message": "Voer een geldige URL of wildcard in."
@@ -1872,19 +1881,19 @@
     "message": "Deze site is al vertrouwd."
   },
   "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.me, operated by Ghostery, is the most comprehensive global resource on trackers, bringing transparency to web tracking."
+    "message": "WhoTracks.me, beheerd door Ghostery, is de meest uitgebreide wereldwijde bron op trackers, het brengen van transparantie in web tracking."
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
-    "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+    "message": "Met Ghostery ingeschakeld bladert u direct veiliger, sneller en met minder vervelende advertenties over het web."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
+    "message": "U kunt op elk moment van gedachten veranderen en Ghostery inschakelen om de trackers voor u te gaan volgen in Ghostery instellingen."
   },
   "you_chose_to_skip_enabling_ghostery_": {
-    "message": "You chose to skip enabling Ghostery!"
+    "message": "U koos ervoor om Ghostery niet in te schakelen!"
   },
   "you_re_all_set__ghosterian_": {
-    "message": "You're all set, Ghosterian!"
+    "message": "U bent er klaar voor, Ghosterian!"
   },
   "your_email_do_not_match": {
     "message": "Je e-mailadressen komen niet overeen."
