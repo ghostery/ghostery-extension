@@ -83,7 +83,7 @@ export default define({
               </div>
               <div>
                 <ui-icon name="ads"></ui-icon>
-                <ui-text type="headline-s">Ads</ui-text>
+                <ui-text type="headline-s"><!-- | onboarding -->Ads</ui-text>
                 <ui-text type="display-s" class="badge">
                   ${form.protection ? html`Blocked` : html`Unblocked`}
                 </ui-text>

@@ -37,6 +37,9 @@
   "ads": {
     "message": "ads"
   },
+  "ads___onboarding": {
+    "message": "Ads"
+  },
   "adult_advertising": {
     "message": "Adult Advertising",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -1477,12 +1480,6 @@
   "settings_purple_box": {
     "message": "Tracker-Tally"
   },
-  "settings_show_redirect_tracking_dialogs": {
-    "message": "Ask me to confirm before visiting a site that redirects me through a tracker"
-  },
-  "settings_show_redirect_tracking_dialogs_tooltip": {
-    "message": "Redirect tracking means that instead of visiting a website directly, you are first redirected through another site that may try to track you (e.g. by placing a cookie). In contrast to normal tracking, you cannot block the request without breaking the functionality."
-  },
   "settings_replace_social": {
     "message": "Replace blocked social media buttons with a Ghostery icon"
   },
@@ -1521,6 +1518,12 @@
   },
   "settings_show_purple_box_tooltip": {
     "message": "The tracker-tally is a list in the corner of your browser that displays trackers as they load in real-time."
+  },
+  "settings_show_redirect_tracking_dialogs": {
+    "message": "Ask me to confirm before visiting a site that redirects me through a tracker"
+  },
+  "settings_show_redirect_tracking_dialogs_tooltip": {
+    "message": "Redirect tracking means that instead of visiting a website directly, you are first redirected through another site that may try to track you (e.g. by placing a cookie). In contrast to normal tracking, you cannot block the request without breaking the functionality."
   },
   "settings_show_reload_banner": {
     "message": "Show page reload banner notifications at the top of the extension"
