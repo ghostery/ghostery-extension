@@ -1,0 +1,20 @@
+{
+  "name": "@ghostery/libs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "license": "MPL-2.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "ua-parser-js": "^1.0.2"
+  },
+  "devDependencies": {
+    "patch-package": "^6.4.7"
+  }
+}

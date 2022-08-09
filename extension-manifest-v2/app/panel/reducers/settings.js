@@ -61,7 +61,7 @@ const _exportSettings = (state, action) => {
 	let updated_actionSuccess = state.actionSuccess;
 	let updated_exportResultText = state.exportResultText;
 	if (result && result !== 'RESERVED_PAGE') {
-		updated_settings_last_exported = Number((new Date()).getTime());
+		updated_settings_last_exported = Date.now();
 		moment.locale(state.language).toLowerCase().replace('_', '-');
 		updated_exportResultText = `${t('settings_export_success')} ${moment(updated_settings_last_exported).format('LLL')}`;
 		updated_actionSuccess = true;
@@ -123,7 +123,7 @@ const _importSettingsNative = (state, action) => {
 		updated_state.alert_bubble_timeout = Math.min(30, updated_state.alert_bubble_timeout);
 	}
 
-	updated_state.settings_last_imported = Number((new Date()).getTime());
+	updated_state.settings_last_imported = Date.now();
 	updated_state.importResultText = `${t('settings_import_success')} ${moment(updated_state.settings_last_imported).format('LLL')}`;
 	updated_state.actionSuccess = true;
 

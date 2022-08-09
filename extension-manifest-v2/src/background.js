@@ -38,16 +38,17 @@ import foundBugs from './classes/FoundBugs';
 import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
-import metrics from './classes/Metrics';
+import metrics from './classes/MetricsWrapper';
 import account from './classes/Account';
 import SearchMessager from './classes/SearchMessager';
 import ErrorReporter from './classes/ErrorReporter';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import {
-	log, alwaysLog, hashCode, prefsSet
+	log, alwaysLog, hashCode, prefsSet, prefsGet
 } from './utils/common';
 import * as utils from './utils/utils';
+import { injectNotifications } from './utils/inject';
 import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
@@ -95,7 +96,7 @@ function updateDBs() {
 			bugDb.update(data.bugs, (result) => {
 				log('CHECK LIBRARY VERSION CALLED', result);
 				if (result.success) {
-					const nowTime = Number(new Date().getTime());
+					const nowTime = Date.now();
 					conf.bugs_last_checked = nowTime;
 					if (result.updated) {
 						log('BUGS LAST UPDATED UPDATED', new Date());
@@ -366,7 +367,7 @@ function handleNotifications(name, message, tab_id, callback) {
 
 			const data = (backup.settings || {}).conf || {};
 			data.alert_bubble_timeout = (data.alert_bubble_timeout > 30) ? 30 : data.alert_bubble_timeout;
-			data.settings_last_imported = Number((new Date()).getTime());
+			data.settings_last_imported = Date.now();
 			panelData.set(data);
 			utils.getActiveTab((tab) => {
 				const tabId = tab ? tab.id : tab_id;
@@ -799,7 +800,7 @@ function onMessageHandler(request, sender, callback) {
 					const hash = hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
 					const msg = { type: 'Ghostery-Backup', content: backup };
-					utils.injectNotifications(activeTab.id, true).then(() => {
+					injectNotifications(activeTab.id, true).then(() => {
 						sendMessage(activeTab.id, 'exportFile', msg);
 					});
 					callback(true);
@@ -819,7 +820,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'showBrowseWindow') {
 		utils.getActiveTab((activeTab) => {
 			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
-				utils.injectNotifications(activeTab.id, true).then((result) => {
+				injectNotifications(activeTab.id, true).then((result) => {
 					if (result) {
 						sendMessage(activeTab.id, 'showBrowseWindow', {
 							translations: {
@@ -933,6 +934,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
+		metrics.setUninstallUrl(key);
 	}, 200));
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// update content script state when blocking is paused/unpaused
@@ -1317,7 +1319,7 @@ function initializeGhosteryModules() {
 		log('JUST UPGRADED');
 		metrics.ping('upgrade');
 		// We don't want install_complete pings for upgrade
-		conf.metrics.install_complete_all = Number(new Date().getTime());
+		conf.metrics.install_complete_all = Date.now();
 	} else if (globals.JUST_INSTALLED) {
 		log('JUST INSTALLED');
 		const date = new Date();
@@ -1538,6 +1540,20 @@ async function initializeAccount() {
 	}
 }
 
+async function recordUTMs() {
+	try {
+		if (globals.JUST_INSTALLED) {
+			const utms = await metrics.detectUTMs();
+			await prefsSet(utms);
+			return;
+		}
+		const utms = await prefsGet('utm_source', 'utm_campaign');
+		metrics.setUTMs(utms);
+	} catch (error) {
+		alwaysLog('Metrics init() error', error);
+	}
+}
+
 /**
  * Application Initializer
  * Called whenever the browser starts or the extension is
@@ -1561,7 +1577,7 @@ async function init() {
 
 		await initializeSearchMessageHandler();
 
-		await metrics.init(globals.JUST_INSTALLED);
+		await recordUTMs();
 
 		await initializeGhosteryModules();
 

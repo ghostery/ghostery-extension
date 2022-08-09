@@ -21,7 +21,7 @@ import conf from './Conf';
 import dispatcher from './Dispatcher';
 import { alwaysLog, log } from '../utils/common';
 import Api from '../utils/api';
-import metrics from './Metrics';
+import metrics from './MetricsWrapper';
 import ghosteryDebugger from './Debugger';
 import { cookiesGet, setAllLoginCookies, cookiesRemove } from '../utils/cookies';
 
@@ -384,7 +384,7 @@ class Account {
 	 */
 	buildUserSettings = () => {
 		const settings = {};
-		const now = Number(new Date().getTime());
+		const now = Date.now();
 		SYNC_SET.forEach((key) => {
 			// Whenever we prepare data to be sent out
 			// we have to convert these two parameters to objects

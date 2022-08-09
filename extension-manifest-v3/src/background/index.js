@@ -14,3 +14,4 @@ import './tab-stats.js';
 import './cosmetics.js';
 import './trackers-preview.js';
 import './communication.js';
+import './telemetry.js';

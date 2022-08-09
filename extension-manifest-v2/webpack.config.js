@@ -51,10 +51,8 @@ module.exports = {
 			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
 			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
+			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
 		},
-	},
-	watchOptions: {
-		ignored: /node_modules/
 	},
 	entry: {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],
@@ -134,6 +132,23 @@ module.exports = {
 				use: {
 					loader: 'underscore-template-loader'
 				}
+			}, {
+				test: /\.js$/,
+				include: [
+					path.resolve(__dirname, 'node_modules/@ghostery/libs'),
+				],
+				exclude: [
+					path.resolve(__dirname, 'node_modules/@ghostery/libs/node_modules'),
+				],
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							envName: 'src',
+						}
+					},
+					'eslint-loader'
+				],
 			}, {
 				test: /\.(js|jsx)$/,
 				include: [SHARED_COMP_DIR, ONBOARDING_DIR, PANEL_ANDROID_DIR, PANEL_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],

@@ -18,7 +18,8 @@ import Policy from './Policy';
 import globals from './Globals';
 import account from './Account';
 import { log } from '../utils/common';
-import { sendMessage, injectScript } from '../utils/utils';
+import { sendMessage } from '../utils/utils';
+import { injectScript } from '../utils/inject';
 
 const t = chrome.i18n.getMessage;
 /**
