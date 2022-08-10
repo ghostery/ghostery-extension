@@ -1,3 +1,9 @@
+### GHOSTERY 8.8.0 (August 10, 2022)
+
+* New onboarding
+* Adblocker toggle controls all blocking
+* Ability to disable redirect protection
+
 ### GHOSTERY 8.7.6 (July 11, 2022)
 
 * Fixed: Ghostery Account login problems on Firefox
