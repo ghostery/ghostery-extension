@@ -4,13 +4,13 @@
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
-    "message": "Accept terms"
+    "message": "Bedingungen akzeptieren"
   },
   "additional_permissions_required": {
-    "message": "Additional Permissions Required"
+    "message": "Zusätzliche Berechtigungen erforderlich"
   },
-  "ads": {
-    "message": "Ads"
+  "ads___onboarding": {
+    "message": "Werbungen"
   },
   "adult_advertising": {
     "message": "Erwachsenenwerbung",
@@ -21,19 +21,19 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "all_popups": {
-    "message": "All Popups"
+    "message": "Alle Popups"
   },
   "all_set__go_with_ghosty_": {
-    "message": "All set! go with ghosty!"
+    "message": "Alles bereit! Geh mit Ghosty!"
   },
   "any_questions__anytime_": {
-    "message": "Any questions? Anytime!"
+    "message": "Haben Sie Fragen? Wir sind immer für Sie da!"
   },
   "are_you_sure_": {
-    "message": "Are you sure?"
+    "message": "Sind Sie sicher?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
-    "message": "Are you sure you want to skip enabling Ghostery?"
+    "message": "Sind Sie sicher, dass Sie Ghostery nicht aktivieren wollen?"
   },
   "audio_video_player": {
     "message": "Audio/Video-Player",
@@ -62,14 +62,14 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "Check out <a href=\"$${0}\" target=\"_blank\">FAQs</a> or drop us a line at <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. We'll be more than happy to talk to you!"
+    "message": "Sehen Sie sich die <a href=\"$${0}\" target=\"_blank\">FAQs</a> an oder schreiben Sie uns an <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. Wir helfen Ihnen gerne weiter!"
   },
   "comments": {
     "message": "Kommentare",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "continue": {
-    "message": "Continue"
+    "message": "Weiter"
   },
   "customer_interaction": {
     "message": "Kundeninteraktion",
@@ -82,7 +82,7 @@
     "message": "Tracker-Rad in der Browser-Symbolleiste deaktivieren"
   },
   "disable_trackers_preview": {
-    "message": "Disable Trackers Preview"
+    "message": "Tracker-Vorschau deaktivieren"
   },
   "done": {
     "message": "Erledigt"
@@ -92,10 +92,10 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "enable_ghostery": {
-    "message": "Enable Ghostery"
+    "message": "Ghostery aktivieren"
   },
   "enable_ghostery_to_get_started": {
-    "message": "Enable Ghostery to get started"
+    "message": "Aktivieren Sie Ghostery, um loszulegen"
   },
   "essential": {
     "message": "Essenziell",
@@ -106,35 +106,35 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "for_more_information_read_our_full": {
-    "message": "For more information read our full"
+    "message": "Für weitere Informationen lesen Sie bitte unsere vollständigen"
   },
   "ghostery_disabled": {
-    "message": "Ghostery disabled"
+    "message": "Ghostery deaktiviert"
   },
   "ghostery_enabled": {
-    "message": "Ghostery enabled"
+    "message": "Ghostery aktiviert"
   },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery is set up to stop trackers in their tracks and protect your privacy while browsing!"
+    "message": "Ghostery ist so eingestellt, dass es Tracker stoppt und Ihre Privatsphäre beim Browsen schützt!"
   },
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
-    "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers for their own profit."
+    "message": "Ghostery stoppt Tracker und verhindert, dass Sie profiliert werden und Ihre persönlichen Informationen an Datenmakler für deren eigenen Profit verkauft werden."
   },
   "ghostery_options": {
     "message": "Ghostery Options"
   },
   "ghostery_privacy_policy": {
-    "message": "Ghostery Privacy Policy"
+    "message": "Ghostery-Datenschutzrichtlinie"
   },
   "hosting": {
     "message": "Hosting",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
-    "message": "I agree to send non-personal information to <a href=\"$${0}\">WhoTracks.Me</a> and I accept the Ghostery <a href=\"$${1}\">Privacy Policy</a>"
+    "message": "Ich stimme zu, nicht-personenbezogene Daten an <a href=\"$${0}\">WhoTracks.Me</a> zu senden und akzeptiere die Ghostery<a href=\"$${1}\">-Datenschutzbestimmungen</a>"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
-    "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send tracker information to whotracks.me. The tracker input enables Ghostery to provide real-time intel on trackers and protection to the entire Ghostery user community."
+    "message": "Es existiert dank der Mikro-Beiträge jedes Ghostery-Nutzers, der sich entscheidet, Tracker-Informationen an whotracks.me zu senden. Der Tracker-Input ermöglicht es Ghostery, Echtzeit-Informationen über Tracker und Schutz für die gesamte Ghostery-Nutzergemeinschaft zu bieten."
   },
   "manifest_name": {
     "message": "Ghostery – Datenschutzorientierter Werbeblocker"
@@ -147,7 +147,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "more_information_on_@_0__": {
-    "message": "More information on $${0}."
+    "message": "Mehr Informationen über $${0}."
   },
   "off": {
     "message": "Aus"
@@ -159,7 +159,7 @@
     "message": "Laden der Seite"
   },
   "privacy_policy": {
-    "message": "privacy policy"
+    "message": "Datenschutzrichtlinie"
   },
   "privacy_protection_on_this_site": {
     "message": "Schutz der Privatsphäre auf dieser Website"
@@ -192,7 +192,7 @@
     "message": "Neuen Tracker senden"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
-    "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
+    "message": "Die Ghostery-Browsererweiterung ist in Ihrem Browser installiert, aber Ghosty macht gerade eine kleine Pause."
   },
   "tracker_details": {
     "message": "Tracker-Details"
@@ -201,7 +201,7 @@
     "message": "Tracker"
   },
   "trackers_preview": {
-    "message": "Trackers Preview"
+    "message": "Tracker-Vorschau"
   },
   "unblocked": {
     "message": "Entsperrt"
@@ -214,24 +214,24 @@
     "message": "User interface"
   },
   "welcome_to": {
-    "message": "Welcome to"
+    "message": "Willkommen bei"
   },
   "what_is_whotracks_me_": {
-    "message": "What is whotracks.me?"
+    "message": "Was ist whotracks.me?"
   },
   "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.me, operated by Ghostery, is the most comprehensive global resource on trackers, bringing transparency to web tracking."
+    "message": "WhoTracks.me wird von Ghostery betrieben und ist die umfassendste globale Ressource für Tracker, die Transparenz in das Web-Tracking bringt."
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
-    "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+    "message": "Wenn Ghostery aktiviert ist, können Sie sofort sicherer, schneller und mit weniger lästiger Werbung im Internet surfen."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
+    "message": "Sie können Ihre Meinung jederzeit ändern und Ghostery in den Ghostery-Einstellungen aktivieren, um Tracker für Sie zu verfolgen."
   },
   "you_chose_to_skip_enabling_ghostery_": {
-    "message": "You chose to skip enabling Ghostery!"
+    "message": "Sie haben sich entschieden, Ghostery nicht zu aktivieren!"
   },
   "you_re_all_set__ghosterian_": {
-    "message": "You're all set, Ghosterian!"
+    "message": "Sie sind bereit, Ghosterianer!"
   }
 }
