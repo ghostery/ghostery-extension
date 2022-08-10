@@ -11,7 +11,7 @@
 
 import { msg } from 'hybrids';
 
-export const colors = {
+const colors = {
   advertising: '#cb55cd',
   audio_video_player: '#ef671e',
   cdn: '#43b7c5',
@@ -24,6 +24,7 @@ export const colors = {
   pornvertising: '#fb5b8b',
   extensions: '#e2e781',
   comments: '#b0a8ff',
+  consent: '#becfb3',
   unknown: '#959595',
   default: '#ffffff30',
   no_tracker: '#94c59e',
@@ -42,10 +43,11 @@ export const order = [
   'pornvertising',
   'extensions',
   'comments',
+  'consent',
   'unknown',
 ];
 
-export const labels = {
+const labels = {
   get advertising() {
     return msg`Advertising | Ghostery organizes tags by category. This is one of several tag categories.`;
   },
@@ -57,6 +59,9 @@ export const labels = {
   },
   get comments() {
     return msg`Comments | Ghostery organizes tags by category. This is one of several tag categories.`;
+  },
+  get consent() {
+    return msg`Consent Management | Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity.`;
   },
   get customer_interaction() {
     return msg`Customer Interaction | Ghostery organizes tags by category. This is one of several tag categories.`;
@@ -88,4 +93,25 @@ export const labels = {
   get unknown() {
     return msg`Unknown | Ghostery organizes tags by category. This is one of several tag categories.`;
   },
+};
+
+export const getCategoryKey = (category) => {
+  return colors[category] ? category : 'unknown';
+};
+
+export const getCategoryColor = (category) => {
+  return colors[getCategoryKey(category)];
+};
+
+export const getCategoryLabel = (category) => {
+  return labels[getCategoryKey(category)];
+};
+
+export const sortCategories = (_resolveCategoryName) => {
+  const resolveCategoryName = _resolveCategoryName || ((a) => a);
+  return (a, b) => {
+    const a1 = getCategoryKey(resolveCategoryName(a));
+    const b1 = getCategoryKey(resolveCategoryName(b));
+    return order.indexOf(a1) - order.indexOf(b1);
+  };
 };

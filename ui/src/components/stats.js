@@ -11,7 +11,7 @@
 
 import { html, define } from 'hybrids';
 
-import { order, labels } from '../utils/categories.js';
+import { sortCategories, getCategoryLabel } from '../utils/categories.js';
 
 export default define({
   tag: 'ui-stats',
@@ -25,7 +25,7 @@ export default define({
         }),
         {},
       ),
-    ).sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
+    ).sort(sortCategories((a) => a[0]));
   },
   render: ({ categories, entries }) => html`
     <ui-tracker-wheel categories="${categories}"></ui-tracker-wheel>
@@ -38,7 +38,7 @@ export default define({
               category="${category}"
               size="7"
             ></ui-category-bullet>
-            <span>${labels[category]}</span>
+            <span>${getCategoryLabel(category)}</span>
             <strong>${value}</strong>
           </li>
         `,
@@ -51,7 +51,7 @@ export default define({
        column-gap: 10px;
        padding: 10px 0px;
      }
- 
+
      ul {
        display: flex;
        flex-direction: column;
@@ -61,19 +61,19 @@ export default define({
        list-style-type: none;
        list-style: none none inside;
      }
- 
+
      .category {
        display: grid;
        grid-template-columns: min-content max-content 1fr;
        grid-gap: 5px;
        margin-bottom: 5px;
      }
- 
+
      .category span {
        font-size: 13px;
        line-height: 16px;
      }
- 
+
      .category strong {
        color: var(--ui-black);
        font-size: 13px;

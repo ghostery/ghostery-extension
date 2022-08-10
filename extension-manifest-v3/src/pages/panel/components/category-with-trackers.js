@@ -11,7 +11,7 @@
 import { define, html, store } from 'hybrids';
 import Stats from '/store/stats.js';
 
-import { labels } from '@ghostery/ui/categories';
+import { getCategoryLabel } from '@ghostery/ui/categories';
 
 function toggleShowMore(host) {
   host.shouldShowMore = !host.shouldShowMore;
@@ -38,7 +38,7 @@ export default define({
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
     <main onclick="${toggleShowMore}">
       <ui-category-bullet category=${category} size=${12}></ui-category-bullet>
-      <label>${labels[category]}</label>
+      <label>${getCategoryLabel(category)}</label>
       <strong class="count">
         <!-- Number of trackers detected by Ghostery -->
         ${stats.byCategory[category].count} Detected

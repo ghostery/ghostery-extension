@@ -11,7 +11,7 @@
 
 import { html, define } from 'hybrids';
 
-import { colors } from '../utils/categories.js';
+import { getCategoryColor } from '../utils/categories.js';
 
 export default define({
   tag: 'ui-category-bullet',
@@ -24,7 +24,7 @@ export default define({
         style=${{
           width: sizePx,
           height: sizePx,
-          backgroundColor: colors[category],
+          backgroundColor: getCategoryColor(category),
           borderRadius: sizePx,
           display: 'inline-block',
         }}
