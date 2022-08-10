@@ -127,7 +127,7 @@ export function selectItem({ actionData }) {
 export function exportSettings({ state }) {
 	return sendMessageInPromise('getAndroidSettingsForExport').then((result) => {
 		const { needsReload } = state;
-		const settings_last_exported = Number((new Date()).getTime());
+		const settings_last_exported = Date.now();
 		const exportResultText = `${t('settings_export_success')} ${moment(settings_last_exported).format('LLL')}`;
 
 		_saveToFile(result);
@@ -146,7 +146,7 @@ export function exportSettings({ state }) {
 export function importSettingsNative({ actionData, state }) {
 	return new Promise((resolve) => {
 		const { needsReload } = state;
-		const settings_last_imported = Number((new Date()).getTime());
+		const settings_last_imported = Date.now();
 		const importResultText = `${t('settings_import_success')} ${moment(settings_last_imported).format('LLL')}`;
 
 		_importFromFile(actionData).then((settings) => {
@@ -156,7 +156,7 @@ export function importSettingsNative({ actionData, state }) {
 				imported_settings.alert_bubble_timeout = Math.min(30, imported_settings.alert_bubble_timeout);
 			}
 
-			imported_settings.settings_last_imported = Number((new Date()).getTime());
+			imported_settings.settings_last_imported = Date.now();
 			imported_settings.importResultText = `${t('settings_import_success')} ${moment(imported_settings.settings_last_imported).format('LLL')}`;
 			imported_settings.actionSuccess = true;
 

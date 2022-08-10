@@ -35,6 +35,7 @@ import { buildC2P, buildRedirectC2P } from '../utils/click2play';
 import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
+import { injectScript, injectNotifications } from '../utils/inject';
 
 /**
  * This class is a collection of handlers for
@@ -172,7 +173,7 @@ class EventHandlers {
 			const isGhosteryBrowser = await globals.isGhosteryBrowser();
 
 			if (cmp.CMP_DATA.length !== 0 && conf.show_cmp) {
-				utils.injectNotifications(tab.id).then((result) => {
+				injectNotifications(tab.id).then((result) => {
 					if (result) {
 						utils.sendMessage(tab_id, 'showCMPMessage', {
 							data: cmp.CMP_DATA[0]
@@ -186,7 +187,7 @@ class EventHandlers {
 					}
 				});
 			} else if (!isGhosteryBrowser && globals.JUST_UPGRADED && !globals.HOTFIX && !globals.upgrade_alert_shown && conf.notify_upgrade_updates) {
-				utils.injectNotifications(tab.id).then((result) => {
+				injectNotifications(tab.id).then((result) => {
 					if (result) {
 						utils.sendMessage(
 							tab_id, 'showUpgradeAlert', {
@@ -204,7 +205,7 @@ class EventHandlers {
 				});
 			} else if (bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS) {
 				if (conf.notify_library_updates) {
-					utils.injectNotifications(tab.id).then((result) => {
+					injectNotifications(tab.id).then((result) => {
 						if (result) {
 							utils.sendMessage(
 								tab_id, 'showLibraryUpdateAlert', {
@@ -241,7 +242,7 @@ class EventHandlers {
 
 		// inject page_performance script to display page latency on Summary view
 		if (EventHandlers._isValidUrl(utils.processUrl(details.url))) {
-			utils.injectScript(details.tabId, 'dist/page_performance.js', '', 'document_idle').catch((err) => {
+			injectScript(details.tabId, 'dist/page_performance.js', '', 'document_idle').catch((err) => {
 				log('onNavigationCompleted injectScript error', err);
 			});
 		}

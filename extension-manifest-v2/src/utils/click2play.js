@@ -19,7 +19,8 @@ import globals from '../classes/Globals';
 import Policy from '../classes/Policy';
 import tabInfo from '../classes/TabInfo';
 import { log } from './common';
-import { sendMessage, processUrl, injectScript } from './utils';
+import { sendMessage, processUrl } from './utils';
+import { injectScript } from './inject';
 import c2p_tpl from '../../app/templates/click2play.html';
 import c2p_images from '../../app/data-images/click2play';
 

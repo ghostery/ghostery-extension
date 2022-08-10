@@ -44,7 +44,7 @@ class ConfData {
 	init() {
 		return prefsGet().then((d) => {
 			const data = { ...d };
-			const nowTime = Number(new Date().getTime());
+			const nowTime = Date.now();
 			const _setProp = (name, value) => {
 				if (!globals.INIT_COMPLETE) {
 					globals.initProps[name] = value;
@@ -89,7 +89,6 @@ class ConfData {
 				_initProperty('trackers_banner_status', true);
 			}
 
-			// Make sure that getBrowserInfo() has resolved before we set these properties
 			(async () => {
 				const isGhosteryBrowser = await globals.isGhosteryBrowser();
 				_initProperty('enable_metrics', isGhosteryBrowser);

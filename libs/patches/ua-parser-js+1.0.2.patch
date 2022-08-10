@@ -1,0 +1,151 @@
+diff --git a/node_modules/ua-parser-js/package.json b/node_modules/ua-parser-js/package.json
+index c5fb46e..8518025 100644
+--- a/node_modules/ua-parser-js/package.json
++++ b/node_modules/ua-parser-js/package.json
+@@ -140,7 +140,12 @@
+     "Yun Young-jin <yupmin@yupmin-office-macmini.local>",
+     "Zach Bjornson <zbbjornson@gmail.com>"
+   ],
+-  "main": "src/ua-parser.js",
++  "main": "src/index.js",
++  "module": "src/index.mjs",
++  "exports": {
++    "require": "./src/index.js",
++    "import": "./src/index.mjs"
++  },
+   "scripts": {
+     "build": "uglifyjs src/ua-parser.js -o dist/ua-parser.min.js --comments '/^ UA/' && uglifyjs src/ua-parser.js -o dist/ua-parser.pack.js --comments '/^ UA/' --compress --mangle",
+     "test": "jshint src/ua-parser.js && mocha -R nyan test/test.js",
+diff --git a/node_modules/ua-parser-js/src/index.js b/node_modules/ua-parser-js/src/index.js
+new file mode 100644
+index 0000000..b71f065
+--- /dev/null
++++ b/node_modules/ua-parser-js/src/index.js
+@@ -0,0 +1,48 @@
++const getUAParser = require('./ua-parser');
++
++const UAParser = getUAParser();
++
++(function (window, undefined) {
++    var UNDEF_TYPE  = 'undefined';
++
++    // check js environment
++    if (typeof(exports) !== UNDEF_TYPE) {
++      // nodejs env
++      if (typeof module !== UNDEF_TYPE && module.exports) {
++          exports = module.exports = UAParser;
++      }
++      exports.UAParser = UAParser;
++  } else {
++      // requirejs env (optional)
++      if (typeof(define) === FUNC_TYPE && define.amd) {
++          define(function () {
++              return UAParser;
++          });
++      } else if (typeof window !== UNDEF_TYPE) {
++          // browser env
++          window.UAParser = UAParser;
++      }
++  }
++
++  // jQuery/Zepto specific (optional)
++  // Note:
++  //   In AMD env the global scope should be kept clean, but jQuery is an exception.
++  //   jQuery always exports to global scope, unless jQuery.noConflict(true) is used,
++  //   and we should catch that.
++  var $ = typeof window !== UNDEF_TYPE && (window.jQuery || window.Zepto);
++  if ($ && !$.ua) {
++      var parser = new UAParser();
++      $.ua = parser.getResult();
++      $.ua.get = function () {
++          return parser.getUA();
++      };
++      $.ua.set = function (ua) {
++          parser.setUA(ua);
++          var result = parser.getResult();
++          for (var prop in result) {
++              $.ua[prop] = result[prop];
++          }
++      };
++  }
++
++})(typeof window === 'object' ? window : this);
+\ No newline at end of file
+diff --git a/node_modules/ua-parser-js/src/index.mjs b/node_modules/ua-parser-js/src/index.mjs
+new file mode 100644
+index 0000000..35a7c49
+--- /dev/null
++++ b/node_modules/ua-parser-js/src/index.mjs
+@@ -0,0 +1,5 @@
++import getUAParser from "./ua-parser.js";
++
++const UAParser = getUAParser();
++
++export default UAParser;
+\ No newline at end of file
+diff --git a/node_modules/ua-parser-js/src/ua-parser.js b/node_modules/ua-parser-js/src/ua-parser.js
+index 216aac0..4c1ac34 100755
+--- a/node_modules/ua-parser-js/src/ua-parser.js
++++ b/node_modules/ua-parser-js/src/ua-parser.js
+@@ -8,7 +8,7 @@
+    Source : https://github.com/faisalman/ua-parser-js */
+ /////////////////////////////////////////////////////////////////////////////////
+ 
+-(function (window, undefined) {
++function getUAParser() {
+ 
+     'use strict';
+ 
+@@ -826,49 +826,7 @@
+     UAParser.CPU = enumerize([ARCHITECTURE]);
+     UAParser.DEVICE = enumerize([MODEL, VENDOR, TYPE, CONSOLE, MOBILE, SMARTTV, TABLET, WEARABLE, EMBEDDED]);
+     UAParser.ENGINE = UAParser.OS = enumerize([NAME, VERSION]);
++    return UAParser;
++};
+ 
+-    ///////////
+-    // Export
+-    //////////
+-
+-    // check js environment
+-    if (typeof(exports) !== UNDEF_TYPE) {
+-        // nodejs env
+-        if (typeof module !== UNDEF_TYPE && module.exports) {
+-            exports = module.exports = UAParser;
+-        }
+-        exports.UAParser = UAParser;
+-    } else {
+-        // requirejs env (optional)
+-        if (typeof(define) === FUNC_TYPE && define.amd) {
+-            define(function () {
+-                return UAParser;
+-            });
+-        } else if (typeof window !== UNDEF_TYPE) {
+-            // browser env
+-            window.UAParser = UAParser;
+-        }
+-    }
+-
+-    // jQuery/Zepto specific (optional)
+-    // Note:
+-    //   In AMD env the global scope should be kept clean, but jQuery is an exception.
+-    //   jQuery always exports to global scope, unless jQuery.noConflict(true) is used,
+-    //   and we should catch that.
+-    var $ = typeof window !== UNDEF_TYPE && (window.jQuery || window.Zepto);
+-    if ($ && !$.ua) {
+-        var parser = new UAParser();
+-        $.ua = parser.getResult();
+-        $.ua.get = function () {
+-            return parser.getUA();
+-        };
+-        $.ua.set = function (ua) {
+-            parser.setUA(ua);
+-            var result = parser.getResult();
+-            for (var prop in result) {
+-                $.ua[prop] = result[prop];
+-            }
+-        };
+-    }
+-
+-})(typeof window === 'object' ? window : this);
++module.exports = getUAParser;

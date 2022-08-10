@@ -11,6 +11,7 @@
     "build.chromium": "npm run build -- --target chromium",
     "build.safari": "npm run build -- --target safari",
     "dev": "npm run build.chromium -- --watch",
+    "dev.safari": "npm run build.safari -- --watch",
     "release": "web-ext build",
     "start": "web-ext run --target=chromium",
     "lint": "eslint src/",
@@ -42,7 +43,8 @@
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@ghostery/ui": "../ui",
+    "@ghostery/libs": "file:../libs",
+    "@ghostery/ui": "file:../ui",
     "@whotracksme/webextension-packages": "^0.3.0",
     "hybrids": "^8.0.3",
     "lodash-es": "^4.17.21",

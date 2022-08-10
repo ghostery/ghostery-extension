@@ -20,5 +20,8 @@ module.exports = {
 		'<rootDir>/test/',
 		'<rootDir>/app/'
 	],
-	testURL: 'http://localhost',
+	testEnvironment: 'jsdom',
+	testEnvironmentOptions: {
+		url: 'http://localhost',
+	}
 };

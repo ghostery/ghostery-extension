@@ -18,6 +18,7 @@ import globals from '../../src/classes/Globals';
 import conf from '../../src/classes/Conf';
 import c2p_tpl from '../../app/templates/click2play.html';
 import * as utils from '../../src/utils/utils';
+import * as inject from '../../src/utils/inject';
 
 // Mock imports for dependencies
 jest.mock('../../app/templates/click2play.html', () => {
@@ -104,7 +105,7 @@ tabInfo.setTabInfo = jest.fn().mockImplementation((tab_id, property, value) => {
 
 // Mock utils functions
 utils.sendMessage = jest.fn();
-utils.injectScript = jest.fn(() => Promise.resolve());
+inject.injectScript = jest.fn(() => Promise.resolve());
 utils.processUrl = jest.requireActual('../../src/utils/utils').processUrl;
 
 describe('src/utils/click2play.js', () => {
@@ -118,7 +119,7 @@ describe('src/utils/click2play.js', () => {
 			beforeAll(() => {
 				tabInfo.c2pStatus = 'none';
 				utils.sendMessage.mockClear();
-				utils.injectScript.mockClear();
+				inject.injectScript.mockClear();
 			});
 
 			test('c2pStatus defaults to "none"', () => {
@@ -127,7 +128,7 @@ describe('src/utils/click2play.js', () => {
 
 			test('injectScript() is called', () => {
 				buildC2P(details, 464);
-				expect(utils.injectScript).toHaveBeenCalledWith(details.tab_id, 'dist/click_to_play.js', '', 'document_idle');
+				expect(inject.injectScript).toHaveBeenCalledWith(details.tab_id, 'dist/click_to_play.js', '', 'document_idle');
 			});
 
 			test('c2pApp and c2pHtml data added to c2pQueue', () => {
@@ -153,13 +154,13 @@ describe('src/utils/click2play.js', () => {
 		describe('c2pStatus is "loading"', () => {
 			beforeAll(() => {
 				utils.sendMessage.mockClear();
-				utils.injectScript.mockClear();
+				inject.injectScript.mockClear();
 				tabInfo.c2pStatus = 'loading';
 				buildC2P(details, 464);
 			});
 
 			test('injectScript() and sendMessage() are not called', () => {
-				expect(utils.injectScript).not.toHaveBeenCalled();
+				expect(inject.injectScript).not.toHaveBeenCalled();
 				expect(utils.sendMessage).not.toHaveBeenCalled();
 			});
 
@@ -171,14 +172,14 @@ describe('src/utils/click2play.js', () => {
 		describe('c2pStatus is "done"', () => {
 			beforeAll(() => {
 				utils.sendMessage.mockClear();
-				utils.injectScript.mockClear();
+				inject.injectScript.mockClear();
 				tabInfo.c2pStatus = 'done';
 				tabInfo.c2pQueue = {};
 				buildC2P(details, 464);
 			});
 
 			test('injectScript() is not called. sendMessage() is called', () => {
-				expect(utils.injectScript).not.toHaveBeenCalled();
+				expect(inject.injectScript).not.toHaveBeenCalled();
 				expect(utils.sendMessage).toHaveBeenCalled();
 			});
 
