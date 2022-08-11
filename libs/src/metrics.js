@@ -83,7 +83,7 @@ const METRICS_URL_SET = new Set([
  */
 class Metrics {
   constructor({
-    conf,
+    getConf,
     log,
     EXTENSION_VERSION,
     METRICS_BASE_URL,
@@ -92,7 +92,7 @@ class Metrics {
   }) {
     this.EXTENSION_VERSION = EXTENSION_VERSION;
     this.METRICS_BASE_URL = METRICS_BASE_URL;
-    this.conf = conf;
+    this.getConf = getConf;
     this.log = log;
 
     this.utm_source = '';
@@ -247,6 +247,7 @@ class Metrics {
     // so that we use the correct BROWSER_INFO values if we are in
     // the Ghostery Desktop or Ghostery Android browsers
     const browserInfo = await getBrowserInfo();
+    const conf = await this.getConf();
 
     const frequencyString = type !== 'uninstall' ? `/${frequency}` : '';
 
@@ -261,15 +262,15 @@ class Metrics {
       // Operating system
       buildQueryPair('os', browserInfo.os) +
       // Browser language
-      buildQueryPair('l', this.conf.language) +
+      buildQueryPair('l', conf.language) +
       // Browser version
       buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
-      buildQueryPair('id', this.conf.install_date) +
+      buildQueryPair('id', conf.install_date) +
       // Showing campaign messages (former show_cmp)
-      buildQueryPair('sc', this.conf.show_cmp ? '1' : '0') +
+      buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
       // Subscription Type
-      buildQueryPair('st', this._getSubscriptionType().toString()) +
+      buildQueryPair('st', this._getSubscriptionType(conf).toString()) +
       // New parameters for Ghostery 8.5.2
       // Subscription Interval
       buildQueryPair('si', this._getSubscriptionInterval().toString()) +
@@ -280,31 +281,31 @@ class Metrics {
       metrics_url +=
         // Old parameters, old names
         // Human web
-        buildQueryPair('hw', this.conf.enable_human_web ? '1' : '0') +
+        buildQueryPair('hw', conf.enable_human_web ? '1' : '0') +
         // Old parameters, new names
         // Random number, assigned at install (former install_rand)
-        buildQueryPair('ir', this.conf.install_random_number) +
+        buildQueryPair('ir', conf.install_random_number) +
         // Login state (former signed_in)
-        buildQueryPair('sn', this.conf.account ? '1' : '0') +
+        buildQueryPair('sn', conf.account ? '1' : '0') +
         // Noncritical ping (former noncritical)
-        buildQueryPair('nc', this.conf.enable_metrics ? '1' : '0') +
+        buildQueryPair('nc', conf.enable_metrics ? '1' : '0') +
         // Purplebox state (former purplebox)
         buildQueryPair(
           'pb',
-          this.conf.show_alert ? (this.conf.alert_expanded ? '1' : '2') : '0',
+          conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0',
         ) +
         // New parameters, new names
         // Extension_view - which view of the extension is the user in
         buildQueryPair(
           'ev',
-          this.conf.is_expert ? (this.conf.is_expanded ? '3' : '2') : '1',
+          conf.is_expert ? (conf.is_expanded ? '3' : '2') : '1',
         ) +
         // Adblocking state
-        buildQueryPair('ab', this.conf.enable_ad_block ? '1' : '0') +
+        buildQueryPair('ab', conf.enable_ad_block ? '1' : '0') +
         // Smartblocking state
-        buildQueryPair('sm', this.conf.enable_smart_block ? '1' : '0') +
+        buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
         // Antitracking state
-        buildQueryPair('at', this.conf.enable_anti_tracking ? '1' : '0') +
+        buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
         // Recency, days since last active daily ping
         buildQueryPair(
           'rc',
@@ -312,7 +313,7 @@ class Metrics {
         ) +
         // New parameters to Ghostery 8.3
         // Whether the computer ever had a Paid Subscription
-        buildQueryPair('ps', this.conf.paid_subscription ? '1' : '0') +
+        buildQueryPair('ps', conf.paid_subscription ? '1' : '0') +
         // Active Velocity
         buildQueryPair('va', this._getVelocityActive(type).toString()) +
         // Engaged Recency
@@ -323,10 +324,10 @@ class Metrics {
         // Engaged Velocity
         buildQueryPair('ve', this._getVelocityEngaged(type).toString()) +
         // Theme
-        buildQueryPair('th', this._getThemeValue().toString()) +
+        buildQueryPair('th', this._getThemeValue(conf).toString()) +
         // New parameter for Ghostery 8.5.3
         // AB tests enabled?
-        buildQueryPair('ts', this.conf.enable_abtests ? '1' : '0');
+        buildQueryPair('ts', conf.enable_abtests ? '1' : '0');
     }
 
     if (CAMPAIGN_METRICS.includes(type) || type === 'uninstall') {
@@ -357,8 +358,9 @@ class Metrics {
    * @param {string} 		type 				ping type
    * @param {array} 		[frequencies = ['all']] 	array of ping frequencies
    */
-  _sendReq(type, frequencies = ['all']) {
+  async _sendReq(type, frequencies = ['all']) {
     let options = {};
+    const conf = await this.getConf();
 
     if (typeof fetch === 'function') {
       const headers = new Headers();
@@ -373,7 +375,7 @@ class Metrics {
     }
 
     frequencies.forEach(async (frequency) => {
-      if (this._checkPing(type, frequency)) {
+      if (this._checkPing(conf, type, frequency)) {
         const timeNow = Date.now();
         const metrics_url = await this._buildMetricsUrl(type, frequency);
         // update Conf timestamps for each ping type and frequency
@@ -465,11 +467,11 @@ class Metrics {
    * Get the Subscription Type
    * @return {string} Subscription Name
    */
-  _getSubscriptionType() {
-    if (!this.conf.account) {
+  _getSubscriptionType(conf) {
+    if (!conf.account) {
       return -1;
     }
-    const subscriptions = this.conf.account.subscriptionData;
+    const subscriptions = conf.account.subscriptionData;
     if (!subscriptions) {
       return -1;
     }
@@ -481,8 +483,8 @@ class Metrics {
    * @private
    * @return {number} value associated with the Current Theme
    */
-  _getThemeValue() {
-    const { current_theme } = this.conf;
+  _getThemeValue(conf) {
+    const { current_theme } = conf;
     switch (current_theme) {
       case 'midnight-theme':
         return 1;
@@ -500,12 +502,12 @@ class Metrics {
    * @private
    * @return {number} String associated with the users subscription interval
    */
-  _getSubscriptionInterval() {
+  _getSubscriptionInterval(conf) {
     const subscriptionInterval =
-      this.conf &&
-      this.conf.account &&
-      this.conf.account.subscriptionData &&
-      this.conf.account.subscriptionData.planInterval;
+      conf &&
+      conf.account &&
+      conf.account.subscriptionData &&
+      conf.account.subscriptionData.planInterval;
 
     switch (subscriptionInterval) {
       case 'month':
@@ -546,7 +548,7 @@ class Metrics {
    * @param {string} frequency 	one of 'all', 'daily', 'weekly'
    * @return {boolean} 			true/false
    */
-  _checkPing(type, frequency) {
+  _checkPing(conf, type, frequency) {
     const result = this._timeToExpired(type, frequency);
     if (result > 0) {
       return false;
@@ -554,7 +556,7 @@ class Metrics {
     if (CRITICAL_METRICS.includes(type)) {
       return true;
     }
-    if (this.conf.enable_metrics) {
+    if (conf.enable_metrics) {
       return true;
     }
     if (this.storage.install_complete_all) {

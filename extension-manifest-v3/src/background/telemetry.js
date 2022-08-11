@@ -40,13 +40,12 @@ const loadStorage = async () => {
 };
 
 (async () => {
-  const options = await store.resolve(store.get(Options));
   const storage = await loadStorage();
 
   const telemetry = new Telemetry({
     METRICS_BASE_URL: 'https://d.ghostery.com',
     EXTENSION_VERSION: chrome.runtime.getManifest().version,
-    conf: options,
+    getConf: () => store.resolve(store.get(Options)),
     log,
     storage,
     saveStorage: (metrics) => {
