@@ -1325,21 +1325,6 @@
   "settings_account_name": {
     "message": "名字"
   },
-  "settings_adblocker": {
-    "message": "廣告封鎖列表"
-  },
-  "settings_adblocker_list_1": {
-    "message": "僅廣告"
-  },
-  "settings_adblocker_list_2": {
-    "message": "廣告 + 跟蹤器"
-  },
-  "settings_adblocker_list_3": {
-    "message": "廣告 + 跟蹤器 + 惱人內容"
-  },
-  "settings_adblocker_lists": {
-    "message": "載入以下廣告封鎖篩選條件列表："
-  },
   "settings_allow_abtests": {
     "message": "參加 A/B 測試"
   },

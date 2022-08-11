@@ -635,7 +635,7 @@
     "message": "암호 확인:"
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "동의 관리",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
@@ -1324,21 +1324,6 @@
   },
   "settings_account_name": {
     "message": "이름 "
-  },
-  "settings_adblocker": {
-    "message": "광고 차단 목록"
-  },
-  "settings_adblocker_list_1": {
-    "message": "광고만"
-  },
-  "settings_adblocker_list_2": {
-    "message": "광고 및 트래커"
-  },
-  "settings_adblocker_list_3": {
-    "message": "광고, 트래커 및 기타 성가신 요소"
-  },
-  "settings_adblocker_lists": {
-    "message": "다음 광고 차단 필터 목록 로드:"
   },
   "settings_allow_abtests": {
     "message": "A/B 테스트 기능 이용"

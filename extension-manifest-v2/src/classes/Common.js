@@ -24,13 +24,14 @@ if (!navigator.userAgent.includes('Firefox')) {
 	parseHtml.domParser = new DOMParser();
 }
 
+const DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
 const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
 
 COMMON.config.baseURL = '/common/';
 // Override the default prefs based on the platform
 COMMON.config.default_prefs = {
 	...COMMON.config.default_prefs,
-	cliqz_adb_mode: globals.DEFAULT_ADBLOCKER_MODE,
+	cliqz_adb_mode: DEFAULT_ADBLOCKER_MODE,
 	'modules.human-web.enabled': false,
 	'modules.hpnv2.enabled': false,
 	'modules.human-web-lite.enabled': false,
@@ -74,6 +75,7 @@ common.start = async () => {
 		setPref('modules.hpn-lite.enabled', conf.enable_human_web);
 	}
 
+	setPref('cliqz_adb_mode', DEFAULT_ADBLOCKER_MODE);
 	setPref('modules.adblocker.enabled', conf.enable_ad_block);
 	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
 	setPref('modules.human-web.enabled', conf.enable_human_web);

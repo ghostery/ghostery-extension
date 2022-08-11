@@ -635,7 +635,7 @@
     "message": "Potwierdź hasło:"
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "Zarządzanie zgodami",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
@@ -1324,21 +1324,6 @@
   },
   "settings_account_name": {
     "message": "Nazwa"
-  },
-  "settings_adblocker": {
-    "message": "Listy blokowania reklam"
-  },
-  "settings_adblocker_list_1": {
-    "message": "Tylko reklamy"
-  },
-  "settings_adblocker_list_2": {
-    "message": "Reklamy + narzędzia śledzące"
-  },
-  "settings_adblocker_list_3": {
-    "message": "Reklamy + narzędzia śledzące + uciążliwe elementy"
-  },
-  "settings_adblocker_lists": {
-    "message": "Załaduj następujące listy filtrów blokowania reklam:"
   },
   "settings_allow_abtests": {
     "message": "Udział w testach A/B"

@@ -635,7 +635,7 @@
     "message": "パスワードを確認："
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "同意の管理",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
@@ -1324,21 +1324,6 @@
   },
   "settings_account_name": {
     "message": "名前"
-  },
-  "settings_adblocker": {
-    "message": "広告ブロック・リスト"
-  },
-  "settings_adblocker_list_1": {
-    "message": "広告のみ"
-  },
-  "settings_adblocker_list_2": {
-    "message": "広告とトラッカー"
-  },
-  "settings_adblocker_list_3": {
-    "message": "広告とトラッカーと迷惑行為"
-  },
-  "settings_adblocker_lists": {
-    "message": "以下の広告ブロック・フィルター・リストをロードしてください："
   },
   "settings_allow_abtests": {
     "message": "A/Bテストに参加する"

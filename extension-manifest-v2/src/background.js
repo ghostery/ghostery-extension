@@ -929,9 +929,6 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
 		setAdblockerState(enableAdBlock);
 	});
-	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
-		common.prefs.set('cliqz_adb_mode', val);
-	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 		metrics.setUninstallUrl(key);
