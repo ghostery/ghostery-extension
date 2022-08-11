@@ -31,7 +31,7 @@ const getBrowserInfo = async () => {
 
   const BROWSER_INFO = {};
 
-  // Set name and token properties. CMP uses `name` value.  Metrics uses `token`
+  // Set name and token properties. CMvP uses `name` value.  Metrics uses `token`
   if (browser.includes('edge')) {
     BROWSER_INFO.displayName = 'Edge';
     BROWSER_INFO.name = 'edge';
@@ -67,7 +67,7 @@ const getBrowserInfo = async () => {
     BROWSER_INFO.os = 'linux';
   } else if (platform.includes('android')) {
     BROWSER_INFO.os = 'android';
-  } else if (platform.includes('iOS')) {
+  } else if (platform.includes('ios')) {
     BROWSER_INFO.os = 'ios';
   }
 
