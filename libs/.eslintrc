@@ -1,0 +1,16 @@
+{
+  "env": {
+    "es2020": true,
+    "browser": true,
+    "serviceworker": true,
+    "webextensions": true,
+    "mocha": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

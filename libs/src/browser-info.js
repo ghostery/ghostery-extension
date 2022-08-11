@@ -1,10 +1,10 @@
 import parser from 'ua-parser-js';
 
 /**
-	* Check for information about this browser (FF only)
-	* @private
-	* @return {Promise}
-	*/
+ * Check for information about this browser (FF only)
+ * @private
+ * @return {Promise}
+ */
 function _checkBrowserInfo() {
   if (typeof chrome.runtime.getBrowserInfo === 'function') {
     return chrome.runtime.getBrowserInfo();
@@ -17,7 +17,7 @@ function _checkPlatformInfo() {
     return new Promise((resolve) => {
       chrome.runtime.getPlatformInfo((info) => {
         resolve(info);
-      })
+      });
     });
   }
   return Promise.resolve(false);
@@ -97,6 +97,6 @@ const getBrowserInfo = async () => {
   }
 
   return BROWSER_INFO;
-}
+};
 
 export default getBrowserInfo;

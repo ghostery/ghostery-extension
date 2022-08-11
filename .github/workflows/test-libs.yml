@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test-ui:
+  test-libs:
     runs-on: ubuntu-latest
     defaults:
       run:
