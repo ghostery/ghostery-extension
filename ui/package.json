@@ -12,8 +12,7 @@
     "./onboarding": "./src/modules/onboarding/index.js"
   },
   "scripts": {
-    "lint": "eslint ./src",
-    "release": "auto shipit"
+    "lint": "eslint ./src"
   },
   "author": {
     "name": "Ghostery GmbH",

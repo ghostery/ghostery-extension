@@ -9,12 +9,17 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "ua-parser-js": "^1.0.2"
   },
   "devDependencies": {
-    "patch-package": "^6.4.7"
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "patch-package": "^6.4.7",
+    "prettier": "^2.7.1"
   }
 }

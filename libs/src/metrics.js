@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import getBrowserInfo from "./browser-info.js";
+import getBrowserInfo from './browser-info.js';
 
 /**
  * Helper for building query string key value pairs
@@ -56,10 +56,7 @@ const FREQUENCIES = {
   biweekly: 1209600000,
   monthly: 2419200000,
 };
-export const FREQUENCY_TYPES = [
-  'all',
-  ...Object.keys(FREQUENCIES),
-];
+export const FREQUENCY_TYPES = ['all', ...Object.keys(FREQUENCIES)];
 export const CRITICAL_METRICS = [
   'install',
   'install_complete',
@@ -413,10 +410,7 @@ class Metrics {
       (type === 'active' || type === 'engaged') &&
       frequency === 'daily'
     ) {
-      return Math.floor(
-        (Date.now() - this.storage.active_daily) /
-          86400000,
-      );
+      return Math.floor((Date.now() - this.storage.active_daily) / 86400000);
     }
     return -1;
   }
@@ -434,10 +428,7 @@ class Metrics {
       (type === 'active' || type === 'engaged') &&
       frequency === 'daily'
     ) {
-      return Math.floor(
-        (Date.now() - this.storage.engaged_daily) /
-          86400000,
-      );
+      return Math.floor((Date.now() - this.storage.engaged_daily) / 86400000);
     }
     return -1;
   }
@@ -465,8 +456,7 @@ class Metrics {
     if (type !== 'active' && type !== 'engaged') {
       return -1;
     }
-    const engaged_daily_velocity =
-      this.storage.engaged_daily_velocity || [];
+    const engaged_daily_velocity = this.storage.engaged_daily_velocity || [];
     const today = Math.floor(Date.now() / 86400000);
     return engaged_daily_velocity.filter((el) => el > today - 7).length;
   }
@@ -690,8 +680,7 @@ class Metrics {
    * @private
    */
   _recordEngaged() {
-    const engaged_daily_velocity =
-      this.storage.engaged_daily_velocity || [];
+    const engaged_daily_velocity = this.storage.engaged_daily_velocity || [];
     const engaged_daily_count =
       this.storage.engaged_daily_count ||
       new Array(engaged_daily_velocity.length).fill(0);
