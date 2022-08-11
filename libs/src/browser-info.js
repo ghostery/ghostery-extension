@@ -67,7 +67,7 @@ const getBrowserInfo = async () => {
     BROWSER_INFO.os = 'linux';
   } else if (platform.includes('android')) {
     BROWSER_INFO.os = 'android';
-  } else if (platform.includes('iOS')) {
+  } else if (platform.includes('ios')) {
     BROWSER_INFO.os = 'ios';
   }
 

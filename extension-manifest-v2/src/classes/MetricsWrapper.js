@@ -20,7 +20,7 @@ import { log } from '../utils/common';
 const telemetry = new Telemetry({
 	METRICS_BASE_URL: globals.METRICS_BASE_URL,
 	EXTENSION_VERSION: globals.EXTENSION_VERSION,
-	conf,
+	getConf: () => conf,
 	log,
 	storage: conf.metrics,
 	saveStorage: (metrics) => {
