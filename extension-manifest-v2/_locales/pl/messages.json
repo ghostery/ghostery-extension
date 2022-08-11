@@ -634,6 +634,10 @@
   "confirm_password_colon": {
     "message": "Potwierdź hasło:"
   },
+  "consent_management": {
+    "message": "Consent Management",
+    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+  },
   "continue": {
     "message": "Kontynuuj"
   },

@@ -97,20 +97,20 @@ export default define({
       white-space: nowrap;
       margin: 6px 0px 16px;
     }
-    
+
     section.toggles {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 10px;
     }
-    
+
     section.buttons {
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 10px;
       margin-top: 10px;
     }
-    
+
     section.buttons a,
     section.buttons a:visited {
       color: var(--ui-deep-blue);
@@ -128,7 +128,7 @@ export default define({
       justify-content: center;
       white-space: nowrap;
     }
-    
+
     section.buttons a ui-icon {
       width: 10px;
       height: 10px;

@@ -68,6 +68,10 @@
     "message": "댓글",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "consent_management": {
+    "message": "동의 관리",
+    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+  },
   "continue": {
     "message": "계속"
   },

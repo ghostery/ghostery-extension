@@ -10,7 +10,7 @@
  */
 
 import { html, define, store, router } from 'hybrids';
-import { order } from '@ghostery/ui/categories';
+import { sortCategories } from '@ghostery/ui/categories';
 
 import Stats from '/store/stats.js';
 
@@ -28,7 +28,7 @@ export default define({
       ${store.ready(stats) &&
       html`
         ${Object.keys(stats.byCategory)
-          .sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]))
+          .sort(sortCategories())
           .map(
             (category) => html`
               <li class="category">

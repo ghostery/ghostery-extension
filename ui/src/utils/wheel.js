@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { colors, order } from './categories.js';
+import { getCategoryColor, order, getCategoryKey } from './categories.js';
 
 function degToRad(degree) {
   const factor = Math.PI / 180;
@@ -20,8 +20,8 @@ export function drawWheel(ctx, size, categories) {
   // Group trackers by sorted category
   // (JavaScript objects will preserve the order)
   const groupedCategories = {};
-  order.forEach((c) => (groupedCategories[c] = 0));
-  categories.forEach((c) => (groupedCategories[c] += 1));
+  order.forEach((c) => (groupedCategories[getCategoryKey(c)] = 0));
+  categories.forEach((c) => (groupedCategories[getCategoryKey(c)] += 1));
 
   const center = size / 2;
   const increment = 360 / categories.length;
@@ -45,7 +45,7 @@ export function drawWheel(ctx, size, categories) {
   for (const [category, numTrackers] of Object.entries(groupedCategories)) {
     if (numTrackers > 0) {
       const newPosition = position + numTrackers * increment;
-      const color = colors[category];
+      const color = getCategoryColor(category);
       ctx.strokeStyle = color;
       ctx.beginPath();
       ctx.arc(
