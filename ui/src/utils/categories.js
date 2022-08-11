@@ -107,7 +107,7 @@ export const getCategoryLabel = (category) => {
   return labels[getCategoryKey(category)];
 };
 
-export const sortCategories = (resolveCategoryName = ((a) => a)) => {
+export const sortCategories = (resolveCategoryName = (a) => a) => {
   return (a, b) => {
     const a1 = getCategoryKey(resolveCategoryName(a));
     const b1 = getCategoryKey(resolveCategoryName(b));
