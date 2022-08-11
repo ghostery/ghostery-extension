@@ -1,4 +1,4 @@
-{
+module.exports = {
   "semi": true,
   "useTabs": false,
   "singleQuote": true,
@@ -6,4 +6,4 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "quoteProps": "preserve"
-}
+};
