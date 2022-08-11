@@ -39,13 +39,25 @@ const loadStorage = async () => {
   return storage;
 };
 
+const getConf = async () => {
+  const options = await store.resolve(store.get(Options));
+  const install_date = new Date(options.onboarding.shownAt)
+    .toISOString()
+    .split('T')[0];
+  return {
+    enable_ad_block: Object.values(options.dnr).some((enabled) => enabled),
+    enable_human_web: options.terms,
+    install_date,
+  };
+};
+
 (async () => {
   const storage = await loadStorage();
 
   const telemetry = new Telemetry({
     METRICS_BASE_URL: 'https://d.ghostery.com',
     EXTENSION_VERSION: chrome.runtime.getManifest().version,
-    getConf: () => store.resolve(store.get(Options)),
+    getConf,
     log,
     storage,
     saveStorage: (metrics) => {

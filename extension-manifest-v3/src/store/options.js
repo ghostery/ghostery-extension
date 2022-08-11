@@ -26,10 +26,6 @@ const Options = {
   wtmSerpReport: true,
   terms: false,
   onboarding: { done: false, shownAt: 0 },
-
-  // Aliases for telemetry
-  enable_human_web: ({ onboarding }) => onboarding.done,
-
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);
