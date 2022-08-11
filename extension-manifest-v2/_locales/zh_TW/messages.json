@@ -37,6 +37,9 @@
   "ads": {
     "message": "廣告"
   },
+  "ads___onboarding": {
+    "message": "Ads"
+  },
   "adult_advertising": {
     "message": "成人廣告",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -630,6 +633,10 @@
   },
   "confirm_password_colon": {
     "message": "確認密碼："
+  },
+  "consent_management": {
+    "message": "Consent Management",
+    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
     "message": "Continue"
@@ -1515,6 +1522,12 @@
   },
   "settings_show_purple_box_tooltip": {
     "message": "位於瀏覽器角落的追蹤器紀錄列表會顯示實時載入的追蹤器。"
+  },
+  "settings_show_redirect_tracking_dialogs": {
+    "message": "Ask me to confirm before visiting a site that redirects me through a tracker"
+  },
+  "settings_show_redirect_tracking_dialogs_tooltip": {
+    "message": "Redirect tracking means that instead of visiting a website directly, you are first redirected through another site that may try to track you (e.g. by placing a cookie). In contrast to normal tracking, you cannot block the request without breaking the functionality."
   },
   "settings_show_reload_banner": {
     "message": "在附加功能圖標上方顯示網頁重新載入通告條"
