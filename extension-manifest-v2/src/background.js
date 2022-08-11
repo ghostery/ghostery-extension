@@ -756,7 +756,8 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'update_database') {
-		updateDBs().then((result) => {
+		updateDBs().then(async (result) => {
+			await common.modules.adblocker.background.adblocker.update();
 			callback(result);
 		});
 		return true;
