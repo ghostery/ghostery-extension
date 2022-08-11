@@ -43,11 +43,6 @@ const SettingsMenu = ({ is_expanded }) => {
 				</NavLink>
 			</li>
 			<li className="s-tabs-title">
-				<NavLink to="/settings/adblocker">
-					<span>{ t('settings_adblocker') }</span>
-				</NavLink>
-			</li>
-			<li className="s-tabs-title">
 				<NavLink to="/settings/notifications">
 					<span>{ t('settings_notifications') }</span>
 				</NavLink>

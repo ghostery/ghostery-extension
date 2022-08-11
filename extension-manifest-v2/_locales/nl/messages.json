@@ -635,7 +635,7 @@
     "message": "Wachtwoord bevestigen:"
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "Toestemmingsbeheer",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
@@ -1324,21 +1324,6 @@
   },
   "settings_account_name": {
     "message": "Naam"
-  },
-  "settings_adblocker": {
-    "message": "Lijsten voor Advertentieblokkering"
-  },
-  "settings_adblocker_list_1": {
-    "message": "Alleen advertenties"
-  },
-  "settings_adblocker_list_2": {
-    "message": "Advertenties en trackers"
-  },
-  "settings_adblocker_list_3": {
-    "message": "Advertenties, trackers en storende elementen"
-  },
-  "settings_adblocker_lists": {
-    "message": "De volgende filterlijsten voor Advertentieblokkering laden:"
   },
   "settings_allow_abtests": {
     "message": "Deelnemen aan A/B-tests"

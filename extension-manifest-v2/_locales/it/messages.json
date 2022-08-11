@@ -635,7 +635,7 @@
     "message": "Conferma password:"
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "Gestione del consenso",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
@@ -1324,21 +1324,6 @@
   },
   "settings_account_name": {
     "message": "Nome"
-  },
-  "settings_adblocker": {
-    "message": "Elenco blocchi pubblicità"
-  },
-  "settings_adblocker_list_1": {
-    "message": "Solo pubblicità"
-  },
-  "settings_adblocker_list_2": {
-    "message": "Pubblicità + Tracker"
-  },
-  "settings_adblocker_list_3": {
-    "message": "Pubblicità + Tracker + Disguidi"
-  },
-  "settings_adblocker_lists": {
-    "message": "Carica i seguenti elenchi di filtri di blocco pubblicità:"
   },
   "settings_allow_abtests": {
     "message": "Partecipare a test A/B"

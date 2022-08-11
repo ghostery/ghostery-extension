@@ -103,7 +103,6 @@ class ConfData {
 			_initProperty('alert_expanded', false);
 			_initProperty('bugs_last_checked', 0);
 			_initProperty('bugs_last_updated', nowTime);
-			_initProperty('cliqz_adb_mode', globals.DEFAULT_ADBLOCKER_SETTING);
 			_initProperty('cmp_version', 0);
 			_initProperty('current_theme', 'default');
 			_initProperty('enable_ad_block', false);

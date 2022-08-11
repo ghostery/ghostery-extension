@@ -99,7 +99,6 @@ class Globals {
 			'alert_bubble_pos',
 			'alert_bubble_timeout',
 			'alert_expanded',
-			'cliqz_adb_mode',
 			'cliqz_module_whitelist',
 			'current_theme',
 			'enable_ad_block',
@@ -149,7 +148,6 @@ class Globals {
 			'site_analytics',
 			'email',
 		];
-		this.DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
 
 		this.SESSION = {
 			paused_blocking: false,

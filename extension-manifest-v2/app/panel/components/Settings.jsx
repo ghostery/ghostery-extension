@@ -16,7 +16,6 @@ import { debounce } from 'underscore';
 import { Route } from 'react-router-dom';
 import SettingsMenu from './Settings/SettingsMenu';
 import GlobalBlocking from './Settings/GlobalBlocking';
-import AdBlocker from './Settings/AdBlocker';
 import TrustAndRestrict from './Settings/TrustAndRestrict';
 import GeneralSettings from './Settings/GeneralSettings';
 import Notifications from './Settings/Notifications';
@@ -108,16 +107,6 @@ class Settings extends React.Component {
 		return (
 			<GeneralSettings
 				toggleCheckbox={this.toggleCheckbox}
-				settingsData={this.props}
-				actions={actions}
-			/>
-		);
-	}
-
-	AdBlockerComponent = () => {
-		const { actions } = this.props;
-		return (
-			<AdBlocker
 				settingsData={this.props}
 				actions={actions}
 			/>
@@ -233,7 +222,6 @@ class Settings extends React.Component {
 					<Route path="/settings/globalblocking" render={this.GlobalBlockingComponent} />
 					<Route path="/settings/trustandrestrict" render={this.TrustAndRestrictComponent} />
 					<Route path="/settings/generalsettings" render={this.GeneralSettingsComponent} />
-					<Route path="/settings/adblocker" render={this.AdBlockerComponent} />
 					<Route path="/settings/notifications" render={this.NotificationsComponent} />
 					<Route path="/settings/optin" render={this.OptInComponent} />
 					<Route path="/settings/purplebox" render={this.PurpleboxComponent} />

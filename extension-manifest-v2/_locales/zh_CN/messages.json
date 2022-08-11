@@ -635,7 +635,7 @@
     "message": "确认密码："
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "意见征求管理",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
@@ -1324,21 +1324,6 @@
   },
   "settings_account_name": {
     "message": "姓名"
-  },
-  "settings_adblocker": {
-    "message": "广告拦截列表"
-  },
-  "settings_adblocker_list_1": {
-    "message": "仅广告"
-  },
-  "settings_adblocker_list_2": {
-    "message": "广告 + 跟踪器"
-  },
-  "settings_adblocker_list_3": {
-    "message": "广告 + 跟踪器 + 扰人内容"
-  },
-  "settings_adblocker_lists": {
-    "message": "加载以下广告拦截过滤器列表："
   },
   "settings_allow_abtests": {
     "message": "参与 A/B 测试"

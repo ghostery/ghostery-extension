@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import { ReactSVG } from 'react-svg';
 import TrustAndRestrict from '../../../panel/components/Settings/TrustAndRestrict';
 import GeneralSettings from '../../../panel/components/Settings/GeneralSettings';
-import AdBlocker from '../../../panel/components/Settings/AdBlocker';
 import Notifications from '../../../panel/components/Settings/Notifications';
 import OptIn from '../../../panel/components/Settings/OptIn';
 import ImportExport from '../../../panel/components/Settings/ImportExport';
@@ -118,9 +117,6 @@ class Settings extends React.Component {
 			case 'settings-general':
 				headerText = t('settings_general_settings');
 				break;
-			case 'settings-adblocker':
-				headerText = t('settings_adblocker');
-				break;
 			case 'settings-notifications':
 				headerText = t('settings_notifications');
 				break;
@@ -161,9 +157,6 @@ class Settings extends React.Component {
 					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-general' }); }}>
 						{ t('settings_general_settings') }
-					</div>
-					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-adblocker' }); }}>
-						{ t('settings_adblocker') }
 					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-notifications' }); }}>
 						{ t('settings_notifications') }
@@ -211,20 +204,6 @@ class Settings extends React.Component {
 			<GeneralSettings
 				actions={actions}
 				toggleCheckbox={this.toggleCheckbox}
-				settingsData={settings}
-			/>
-		);
-	}
-
-	_renderSettingsAdBlocker() {
-		const { settings } = this.props;
-		const actions = {
-			selectItem: this.selectItem,
-		};
-
-		return (
-			<AdBlocker
-				actions={actions}
 				settingsData={settings}
 			/>
 		);
@@ -295,7 +274,6 @@ class Settings extends React.Component {
 				{view === 'settings-home' && this._renderSettingsHome()}
 				{view === 'settings-trust-restrict' && this._renderSettingsTrustRestrict()}
 				{view === 'settings-general' && this._renderSettingsGeneral()}
-				{view === 'settings-adblocker' && this._renderSettingsAdBlocker()}
 				{view === 'settings-notifications' && this._renderSettingsNotification()}
 				{view === 'settings-opt-in' && this._renderSettingsOptIn()}
 				{view === 'settings-import-export' && this._renderSettingsImportExport()}
