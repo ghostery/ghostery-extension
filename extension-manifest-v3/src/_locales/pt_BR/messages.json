@@ -68,6 +68,10 @@
     "message": "Comentários",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
+  "consent_management": {
+    "message": "Gerenciamento de consentimento",
+    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+  },
   "continue": {
     "message": "Continuar"
   },
