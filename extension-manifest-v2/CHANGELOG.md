@@ -3,6 +3,7 @@
 * New onboarding
 * Adblocker toggle controls all blocking
 * Ability to disable redirect protection
+* Fixed: error message on recent Chrome versions (#806)
 
 ### GHOSTERY 8.7.6 (July 11, 2022)
 
