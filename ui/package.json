@@ -20,13 +20,13 @@
     "url": "https://www.ghostery.com"
   },
   "license": "MPL-2.0",
-  "dependencies": {
-    "hybrids": "^8.0.3"
-  },
   "devDependencies": {
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "hybrids": "^8.0.10"
   }
 }

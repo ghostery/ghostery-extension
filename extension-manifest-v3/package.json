@@ -46,7 +46,7 @@
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
     "@whotracksme/webextension-packages": "^0.3.0",
-    "hybrids": "^8.0.3",
+    "hybrids": "^8.0.10",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
   },
