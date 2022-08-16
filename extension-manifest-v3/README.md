@@ -15,6 +15,7 @@ $ npm ci
 Now everything is ready. Change the code, and run it in Chrome:
 
 ```sh
+$ npm run build
 $ npm run start
 ```
 
