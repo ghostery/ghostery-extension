@@ -45,7 +45,7 @@ const getConf = async () => {
     .toISOString()
     .split('T')[0];
   return {
-    enable_ad_block: Object.values(options.dnr).some((enabled) => enabled),
+    enable_ad_block: Object.values(options.dnrRules).some((enabled) => enabled),
     enable_human_web: options.terms,
     install_date,
   };
