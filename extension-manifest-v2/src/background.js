@@ -18,7 +18,9 @@ import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 
-import common, { setAdblockerState, setAntitrackingState, setWhotracksmeState } from './classes/Common';
+import common, {
+	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState
+} from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
@@ -902,6 +904,7 @@ function initializeDispatcher() {
 		// TODO debounce with below
 		button.update();
 		utils.flushChromeMemoryCache();
+		syncTrustedSites();
 		common.modules.core.action('refreshAppState');
 	});
 	dispatcher.on('conf.save.site_blacklist', () => {
@@ -937,6 +940,9 @@ function initializeDispatcher() {
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// update content script state when blocking is paused/unpaused
 		common.modules.core.action('refreshAppState');
+	});
+	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
+		setAdblockerState(enableAdBlock);
 	});
 }
 
