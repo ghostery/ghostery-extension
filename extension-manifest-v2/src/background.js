@@ -941,9 +941,6 @@ function initializeDispatcher() {
 		// update content script state when blocking is paused/unpaused
 		common.modules.core.action('refreshAppState');
 	});
-	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		setAdblockerState(enableAdBlock);
-	});
 }
 
 /**
