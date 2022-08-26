@@ -474,7 +474,7 @@ class PanelData {
 		const {
 			alert_bubble_pos, alert_bubble_timeout, enable_autoupdate,
 			enable_click2play, enable_click2play_social, enable_human_web,
-			enable_metrics, enable_abtests, hide_alert_trusted, ignore_first_party, notify_library_updates,
+			enable_metrics, enable_abtests, hide_alert_trusted, ignore_first_party,
 			notify_promotions, notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
 			show_cmp, show_tracker_urls, toggle_individual_trackers, enable_wtm_serp_report,
 			show_redirect_tracking_dialogs
@@ -492,7 +492,6 @@ class PanelData {
 			enable_wtm_serp_report,
 			hide_alert_trusted,
 			ignore_first_party,
-			notify_library_updates,
 			notify_promotions,
 			notify_upgrade_updates,
 			selected_app_ids,

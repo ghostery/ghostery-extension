@@ -23,7 +23,6 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 				show_cmp: false,
 				notify_upgrade_updates: false,
 				notify_promotions: false,
-				notify_library_updates: false,
 				reload_banner_status: false,
 				trackers_banner_status: false,
 				show_badge: false,
@@ -43,7 +42,6 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 				show_cmp: true,
 				notify_upgrade_updates: true,
 				notify_promotions: true,
-				notify_library_updates: true,
 				reload_banner_status: true,
 				trackers_banner_status: true,
 				show_badge: true,
@@ -65,7 +63,6 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 				show_cmp: false,
 				notify_upgrade_updates: false,
 				notify_promotions: false,
-				notify_library_updates: false,
 				reload_banner_status: false,
 				trackers_banner_status: false,
 				show_badge: false,
@@ -83,11 +80,10 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 			component.find('#settings-announcements').simulate('click');
 			component.find('#settings-new-features').simulate('click');
 			component.find('#settings-new-promotions').simulate('click');
-			component.find('#settings-new-trackers').simulate('click');
 			component.find('#settings-show-reload-banner').simulate('click');
 			component.find('#settings-show-trackers-banner').simulate('click');
 			component.find('#settings-show-count-badge').simulate('click');
-			expect(toggleCheckbox.mock.calls.length).toBe(7);
+			expect(toggleCheckbox.mock.calls.length).toBe(6);
 		});
 	});
 });

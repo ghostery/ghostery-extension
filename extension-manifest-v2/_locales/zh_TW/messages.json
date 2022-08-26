@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "確保您當前的標簽打開了 http 或 https 網頁"
   },
-  "notification_library_update": {
-    "message": "我們已發現一些新的網頁跟縱器，並把它們加入 Ghostery 的數據庫。"
-  },
-  "notification_library_update_link": {
-    "message": "查看新消息"
-  },
   "notification_upgrade": {
     "message": "我們的團隊又敬業又可愛非凡，一直努力工作好釋出新版的 Ghostery。"
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "擁有產品促銷活動"
-  },
-  "settings_new_trackers": {
-    "message": "添加新的網頁跟蹤器到其網頁跟蹤器文庫"
   },
   "settings_notifications": {
     "message": "通知"

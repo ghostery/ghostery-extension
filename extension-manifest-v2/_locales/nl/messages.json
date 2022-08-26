@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "Controleer of je huidige tab een http of https pagina open heeft"
   },
-  "notification_library_update": {
-    "message": "We hebben een paar nieuwe trackers opgediept en aan de Ghostery Database toegevoegd."
-  },
-  "notification_library_update_link": {
-    "message": "Kijk snel wat er nieuw is"
-  },
   "notification_upgrade": {
     "message": "Ons toegewijd en ongelooflijk aantrekkelijk team heeft keihard gewerkt aan een nieuwe versie van Ghostery."
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "Heeft productaanbiedingen"
-  },
-  "settings_new_trackers": {
-    "message": "Nieuwe trackers aan de tracker bibliotheek toevoegt."
   },
   "settings_notifications": {
     "message": "Mededelingen"

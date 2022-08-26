@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "Убедитесь, что на вашей текущей вкладке открыта страница http или https"
   },
-  "notification_library_update": {
-    "message": "Мы обнаружили некоторые новые трекеры и добавили их в базу данных Ghostery."
-  },
-  "notification_library_update_link": {
-    "message": "Узнайте, что нового"
-  },
   "notification_upgrade": {
     "message": "Наша трудолюбивая и блестящая команда хорошо потрудилась, чтобы выпустить новую версию Ghostery."
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "Содержит продвижение продукта"
-  },
-  "settings_new_trackers": {
-    "message": "Добавляет новые трекеры в свою библиотеку трекеров"
   },
   "settings_notifications": {
     "message": "Уведомления"

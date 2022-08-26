@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "Certifique-se de que sua aba atual tenha uma página http ou https aberta"
   },
-  "notification_library_update": {
-    "message": "Descobrimos alguns novos rastreadores e os adicionamos à base de dados do Ghostery."
-  },
-  "notification_library_update_link": {
-    "message": "Veja o que há de novo"
-  },
   "notification_upgrade": {
     "message": "Nossa equipe dedicada - e extraordinariamente atraente - trabalhou duro para lançar a nova versão do Ghostery."
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "Inclui promoção de produtos"
-  },
-  "settings_new_trackers": {
-    "message": "Adiciona novos rastreadores para sua biblioteca de rastreadores"
   },
   "settings_notifications": {
     "message": "Notificações"

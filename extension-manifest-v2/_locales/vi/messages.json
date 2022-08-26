@@ -563,9 +563,6 @@
   "blocking_category_trackers": {
     "message": "Người theo dõi"
   },
-  "settings_new_trackers": {
-    "message": "Thêm trình theo dõi mới vào thư viện trình theo dõi của nó"
-  },
   "settings_adblocker_lists": {
     "message": "Tải các danh sách bộ lọc khối quảng cáo sau:"
   },
@@ -1365,9 +1362,6 @@
   "choose_your_privacy_plan": {
     "message": "Chọn gói bảo mật của bạn"
   },
-  "notification_library_update": {
-    "message": "Chúng tôi đã khai quật một số trình theo dõi mới và thêm chúng vào Cơ sở dữ liệu Ghostery."
-  },
   "panel_menu_about": {
     "message": "Về"
   },
@@ -1630,9 +1624,6 @@
   },
   "settings_required_trackers": {
     "message": "Chỉ cho tôi khi nào tôi cần cho phép trình theo dõi sử dụng các tính năng của trang web"
-  },
-  "notification_library_update_link": {
-    "message": "Kiểm tra những gì mới"
   },
   "historical_tracking_insights": {
     "message": "Thông tin chi tiết về theo dõi lịch sử"

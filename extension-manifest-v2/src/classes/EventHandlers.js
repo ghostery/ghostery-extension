@@ -161,8 +161,6 @@ class EventHandlers {
 			}
 
 			const alert_messages = [
-				'notification_library_update',
-				'notification_library_update_link',
 				'notification_upgrade',
 				'notification_upgrade_link',
 				'notification_upgrade_title_v8',
@@ -204,23 +202,7 @@ class EventHandlers {
 					}
 				});
 			} else if (bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS) {
-				if (conf.notify_library_updates) {
-					injectNotifications(tab.id).then((result) => {
-						if (result) {
-							utils.sendMessage(
-								tab_id, 'showLibraryUpdateAlert', {
-									translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
-									language: conf.language
-								},
-								() => {
-									bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS = false;
-								}
-							);
-						}
-					});
-				} else {
-					bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS = false;
-				}
+				bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS = false;
 			}
 		});
 	}

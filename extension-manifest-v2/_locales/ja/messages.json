@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください"
   },
-  "notification_library_update": {
-    "message": "新しいトラッカーが発見され、Ghosteryデータベースに追加されました。"
-  },
-  "notification_library_update_link": {
-    "message": "最新情報を確認"
-  },
   "notification_upgrade": {
     "message": "私たちの献身的で魅力的なチームが一生懸命に働いて Ghostery の新しいバージョンをリリースしました。"
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "プロモーション有り"
-  },
-  "settings_new_trackers": {
-    "message": "トラッカー・ライブラリに新しいトラッカーを追加"
   },
   "settings_notifications": {
     "message": "通知"
