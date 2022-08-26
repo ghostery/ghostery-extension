@@ -123,21 +123,21 @@ export default define({
                   </label>
                   ${form.terms &&
                   html`
-                    <ui-onboarding-button id="submit-button">
+                    <ui-button id="submit-button">
                       <button type="submit">
-                        <ui-icon name="ghosty"></ui-icon> All set! go with
-                        ghosty!
+                        <ui-icon name="ghosty"></ui-icon>
+                        All set! go with ghosty!
                       </button>
-                    </ui-onboarding-button>
+                    </ui-button>
                   `}
                 </div>
               </ui-onboarding-card>
             `
           : html`
               <ui-onboarding-card id="skip" type="transparent">
-                <ui-onboarding-button type="secondary">
+                <ui-button type="secondary">
                   <a href="${router.url(Skip)}">Skip</a>
-                </ui-onboarding-button>
+                </ui-button>
               </ui-onboarding-card>
             `}
       </form>
@@ -248,7 +248,7 @@ export default define({
         padding: var(--ui-onboarding-layout-padding) 0 0;
       }
 
-      #accept-terms ui-onboarding-button {
+      #accept-terms ui-button {
         justify-self: flex-end;
       }
 

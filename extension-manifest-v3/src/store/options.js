@@ -22,6 +22,11 @@ const Options = {
     (all, rule) => ({ ...all, [rule]: false }),
     {},
   ),
+  autoconsent: {
+    all: false,
+    allowed: [''],
+    disallowed: [''],
+  },
   trackerWheelDisabled: false,
   wtmSerpReport: true,
   terms: false,

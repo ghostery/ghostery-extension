@@ -38,6 +38,14 @@
       ]
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/autoconsent.js"
+      ],
+      "all_frames": true
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
@@ -489,6 +497,7 @@
     {
       "resources": [
         "content_scripts/whotracksme/ghostery-whotracksme.js",
+        "pages/autoconsent/index.html",
         "pages/onboarding/index.html"
       ],
       "all_frames": true,

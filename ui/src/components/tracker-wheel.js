@@ -42,6 +42,7 @@ export default define({
        align-self: center;
        position: relative;
        display: flex;
+       overflow: hidden;
        width: ${size}px;
        height: ${size}px;
        flex-shrink: 0;
@@ -64,7 +65,7 @@ export default define({
      strong {
        color: var(--ui-black);
        font-weight: 500;
-       font-size: 40px;
+       font-size: ${Math.round(size / 3.5)}px;
      }
    `,
 });

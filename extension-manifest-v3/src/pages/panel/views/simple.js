@@ -12,7 +12,7 @@
 import { html, define, store, msg, router } from 'hybrids';
 
 import sites from '/rule_resources/sites.json';
-import Stats from '/store/stats.js';
+import { statsFactory } from '/store/stats.js';
 import Options, { DNR_RULES_LIST } from '/store/options.js';
 
 import Detailed from './detailed.js';
@@ -29,13 +29,13 @@ function toggleRuleset(ruleset) {
 
 const toggleLabels = {
   get ads() {
-    return msg`Block Ads`;
+    return msg`Ad-blocker`;
   },
   get tracking() {
-    return msg`Block Trackers`;
+    return msg`Anti-tracking`;
   },
   get annoyances() {
-    return msg`Block Annoyances`;
+    return msg`Never-consent`;
   },
 };
 
@@ -43,7 +43,7 @@ export default define({
   [router.connect]: { stack: [Detailed] },
   tag: 'panel-simple-view',
   options: store(Options),
-  stats: store(Stats),
+  stats: statsFactory(),
   render: ({ options, stats }) => html`
     ${store.ready(options) &&
     html`
@@ -51,7 +51,6 @@ export default define({
         disabled="${!options.terms}"
         href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
       >
-        <h1>Privacy protection on this site</h1>
         <section class="toggles">
           ${DNR_RULES_LIST.map(
             (ruleset) =>

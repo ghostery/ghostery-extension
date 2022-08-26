@@ -45,6 +45,13 @@
       ]
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/autoconsent.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
@@ -494,6 +501,7 @@
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
     "pages/trackers-preview/index.html",
-    "pages/onboarding/index.html"
+    "pages/onboarding/index.html",
+    "pages/autoconsent/index.html"
   ]
 }
