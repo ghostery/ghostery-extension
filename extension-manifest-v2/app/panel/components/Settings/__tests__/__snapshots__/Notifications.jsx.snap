@@ -96,27 +96,6 @@ exports[`app/panel/Settings/Notifications.jsx Snapshot tests with react-test-ren
         >
           <input
             defaultChecked={false}
-            id="settings-new-trackers"
-            name="notify_library_updates"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-new-trackers"
-            id="settings-new-trackers-label"
-          >
-            settings_new_trackers
-          </label>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={false}
             id="settings-show-reload-banner"
             name="reload_banner_status"
             onClick={[Function]}
@@ -262,27 +241,6 @@ exports[`app/panel/Settings/Notifications.jsx Snapshot tests with react-test-ren
             id="settings-new-promotions-label"
           >
             settings_new_promotions
-          </label>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-new-trackers"
-            name="notify_library_updates"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-new-trackers"
-            id="settings-new-trackers-label"
-          >
-            settings_new_trackers
           </label>
         </div>
       </div>

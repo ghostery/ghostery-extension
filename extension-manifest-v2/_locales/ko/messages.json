@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "현재 탭에 http 또는 https 페이지가 열려 있는지 확인하십시오 "
   },
-  "notification_library_update": {
-    "message": "몇 가지 새로운 트래커를 발견하여 Ghostery 데이터베이스에 추가했습니다."
-  },
-  "notification_library_update_link": {
-    "message": "새로운 기능 알아보기 "
-  },
   "notification_upgrade": {
     "message": "매사 최선을 다하는 Ghostery 팀이 Ghostery의 새 버전 출시를 위해 열심히 노력해왔습니다."
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "제품 프로모션이 있습니다"
-  },
-  "settings_new_trackers": {
-    "message": "트래커 라이브러리에 새로운 트래커 추가 "
   },
   "settings_notifications": {
     "message": "알림 "

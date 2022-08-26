@@ -48,12 +48,6 @@ const Notifications = ({ settingsData, toggleCheckbox }) => (
 				</div>
 				<div className="s-option-group">
 					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-new-trackers" name="notify_library_updates" defaultChecked={settingsData.notify_library_updates} onClick={toggleCheckbox} />
-						<label id="settings-new-trackers-label" htmlFor="settings-new-trackers">{ t('settings_new_trackers') }</label>
-					</div>
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
 						<input type="checkbox" id="settings-show-reload-banner" name="reload_banner_status" defaultChecked={settingsData.reload_banner_status} onClick={toggleCheckbox} />
 						<label id="settings-show-reload-banner-label" htmlFor="settings-show-reload-banner">{ t('settings_show_reload_banner') }</label>
 					</div>
@@ -81,7 +75,6 @@ Notifications.propTypes = {
 		show_cmp: PropTypes.bool.isRequired,
 		notify_upgrade_updates: PropTypes.bool.isRequired,
 		notify_promotions: PropTypes.bool.isRequired,
-		notify_library_updates: PropTypes.bool.isRequired,
 		reload_banner_status: PropTypes.bool,
 		trackers_banner_status: PropTypes.bool,
 		show_badge: PropTypes.bool.isRequired,
