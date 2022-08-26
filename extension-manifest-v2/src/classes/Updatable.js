@@ -15,7 +15,7 @@ import { bind, isFunction } from 'underscore';
 import globals from './Globals';
 import conf from './Conf';
 import { getJson, fetchLocalJSONResource } from '../utils/utils';
-import { log } from '../utils/common';
+import { getISODate, log } from '../utils/common';
 
 const { CDN_BASE_URL } = globals;
 /**
@@ -130,7 +130,7 @@ class Updatable {
 	 */
 	_remoteFetcher(callback) {
 		log(`fetching ${this.type} from remote`);
-		const UPDATE_URL = `${CDN_BASE_URL}/update/v4.1/${this.type}.json`;
+		const UPDATE_URL = `${CDN_BASE_URL}/update/v4.1/${this.type}.json?d=${getISODate()}`;
 
 		getJson(UPDATE_URL).then((list) => {
 			callback(true, list);
