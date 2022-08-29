@@ -676,15 +676,6 @@ const NotificationsContentScript = (function(win, doc) {
 					}
 				);
 			}
-		} else if (type === 'showLibraryUpdateAlert') {
-			alert_contents = createNotificationContent(
-				NOTIFICATION_TRANSLATIONS.notification_library_update,
-				false, // TODO: this used to link to the new trackers in extension-web
-				NOTIFICATION_TRANSLATIONS.notification_library_update_link,
-				() => {
-					removeAlert();
-				}
-			);
 		}
 
 		const alert_div = createAlert();
@@ -704,7 +695,6 @@ const NotificationsContentScript = (function(win, doc) {
 			try {
 				const alertMessages = [
 					'showUpgradeAlert',
-					'showLibraryUpdateAlert',
 					'showCMPMessage',
 					'showBrowseWindow'
 				];
@@ -729,11 +719,6 @@ const NotificationsContentScript = (function(win, doc) {
 					NOTIFICATION_TRANSLATIONS = message.translations;
 					showAlert('showUpgradeAlert', message.major_upgrade);
 					ALERT_SHOWN = true;
-				} else if (name === 'showLibraryUpdateAlert') {
-					NOTIFICATION_TRANSLATIONS = message.translations;
-					showAlert('showLibraryUpdateAlert');
-					ALERT_SHOWN = true;
-				// Import/Export related messages
 				} else if (name === 'showBrowseWindow') {
 					showBrowseWindow(message.translations);
 					ALERT_SHOWN = true;

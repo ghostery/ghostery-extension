@@ -117,7 +117,6 @@ class Globals {
 			'import_callout_dismissed',
 			'is_expanded',
 			'is_expert',
-			'notify_library_updates',
 			'notify_promotions',
 			'notify_upgrade_updates',
 			'reload_banner_status',

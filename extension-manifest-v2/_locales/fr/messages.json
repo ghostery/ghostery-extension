@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "Assurez-vous que l'onglet ouvert affiche bien une page http ou https"
   },
-  "notification_library_update": {
-    "message": "Nous avons détecté de nouveaux mouchards et les avons ajoutés à la base de données Ghostery."
-  },
-  "notification_library_update_link": {
-    "message": "Découvrez les nouvelles fonctionnalités disponibles"
-  },
   "notification_upgrade": {
     "message": "Notre équipe dévouée et singulièrement attirante a travaillé dur pour lancer une nouvelle version de Ghostery."
   },
@@ -1450,9 +1444,6 @@
   },
   "settings_new_promotions": {
     "message": "Contient des promotions de produits"
-  },
-  "settings_new_trackers": {
-    "message": "Ajoute de nouveaux mouchards à sa bibliothèque de mouchards"
   },
   "settings_notifications": {
     "message": "Notifications"

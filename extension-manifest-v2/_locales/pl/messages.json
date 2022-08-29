@@ -900,12 +900,6 @@
   "not_http_page": {
     "message": "Upewnij się, że aktualna zakładka ma otwartą stronę http lub https"
   },
-  "notification_library_update": {
-    "message": "Ujawniliśmy kilka nowych tropicieli i dodaliśmy je do bazy danych Ghostery."
-  },
-  "notification_library_update_link": {
-    "message": "Sprawdź co nowego"
-  },
   "notification_upgrade": {
     "message": "Nasz oddany i niezwykle sympatyczny zespół ciężko pracował, aby wypuścić nową wersję oprogramowania Ghostery."
   },
@@ -1450,10 +1444,7 @@
   },
   "settings_new_promotions": {
     "message": "Zawiera promocje produktów"
-  },
-  "settings_new_trackers": {
-    "message": "Dodaje nowe tropiciele do biblioteki tropicieli"
-  },
+	},
   "settings_notifications": {
     "message": "Powiadomienia"
   },

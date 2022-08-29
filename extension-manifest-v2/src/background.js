@@ -45,7 +45,7 @@ import ErrorReporter from './classes/ErrorReporter';
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import {
-	log, alwaysLog, hashCode, prefsSet, prefsGet
+	log, alwaysLog, hashCode, prefsSet, prefsGet, getISODate
 } from './utils/common';
 import * as utils from './utils/utils';
 import { injectNotifications } from './utils/inject';
@@ -88,7 +88,7 @@ const { onHeadersReceived } = Events;
 function updateDBs() {
 	return new Promise(((resolve, reject) => {
 		const failed = { success: false, updated: false };
-		utils.getJson(VERSION_CHECK_URL).then((data) => {
+		utils.getJson(`${VERSION_CHECK_URL}?d=${getISODate()}`).then((data) => {
 			log('Database version retrieval succeeded', data);
 
 			c2pDb.update(data.click2play);
@@ -1320,11 +1320,7 @@ function initializeGhosteryModules() {
 		conf.metrics.install_complete_all = Date.now();
 	} else if (globals.JUST_INSTALLED) {
 		log('JUST INSTALLED');
-		const date = new Date();
-		const year = date.getFullYear().toString();
-		const month = (`0${date.getMonth() + 1}`).slice(-2).toString();
-		const day = (`0${date.getDate()}`).slice(-2).toString();
-		const dateString = `${year}-${month}-${day}`;
+		const dateString = getISODate();
 		const randomNumber = (Math.floor(Math.random() * 100) + 1);
 
 		conf.install_random_number = randomNumber;

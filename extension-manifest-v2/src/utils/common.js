@@ -240,3 +240,7 @@ export function decodeJwt(token) {
 		signature: signatureSeg
 	};
 }
+
+export function getISODate() {
+	return new Date().toISOString().split('T')[0];
+}
