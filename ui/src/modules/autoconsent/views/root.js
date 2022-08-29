@@ -45,7 +45,12 @@ export default define({
               <ui-text type="body-xs" color="gray-600">
                 By using Never-Consent you let website owners know that you’re
                 against tracking!
-                <a href="#" target="_blank">Learn more</a>
+                <a
+                  href="https://www.ghostery.com/blog/never-consent-by-ghostery-new-feature-removing-annoying-cookie-pop-ups-automates-interaction-with-consent-dialogs"
+                  target="_blank"
+                >
+                  Learn more
+                </a>
               </ui-text>
             </div>
           </section>
