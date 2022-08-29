@@ -77,8 +77,9 @@ async function evalCode(code, id, tabId, frameId) {
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action !== 'autoconsent') return;
+  if (!sender.tab) return;
 
-  const tabId = sender.tab?.id;
+  const tabId = sender.tab.id;
   const frameId = sender.frameId;
 
   switch (msg.type) {
