@@ -19,10 +19,11 @@ import Detailed from './detailed.js';
 
 function toggleRuleset(ruleset) {
   return (host) => {
+    const enabled = !host.options.dnrRules[ruleset];
+
     store.set(host.options, {
-      dnrRules: {
-        [ruleset]: !host.options.dnrRules[ruleset],
-      },
+      dnrRules: { [ruleset]: enabled },
+      autoconsent: ruleset === 'annoyances' && !enabled ? null : {},
     });
   };
 }
