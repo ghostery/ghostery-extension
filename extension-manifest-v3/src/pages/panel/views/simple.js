@@ -30,7 +30,7 @@ function toggleRuleset(ruleset) {
 
 const toggleLabels = {
   get ads() {
-    return msg`Ad-blocker`;
+    return msg`Ad-blocking`;
   },
   get tracking() {
     return msg`Anti-tracking`;

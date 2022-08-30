@@ -6,8 +6,8 @@
   "accept_terms": {
     "message": "Accept terms"
   },
-  "ad_blocker": {
-    "message": "Ad-blocker"
+  "ad_blocking": {
+    "message": "Ad-blocking"
   },
   "additional_permissions_required": {
     "message": "Additional Permissions Required"
