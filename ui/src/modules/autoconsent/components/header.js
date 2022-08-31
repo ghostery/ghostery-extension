@@ -21,7 +21,7 @@ export default define({
         layout="row gap items:center margin"
       >
         <ui-icon name="ghosty" layout="block width:16px height:16px"></ui-icon>
-        Never-consent
+        Never-Consent
       </ui-text>
     </template>
   `.css`
