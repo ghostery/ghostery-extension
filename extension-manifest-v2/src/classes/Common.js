@@ -50,6 +50,10 @@ const setPref = (pref, value) => {
 	common.prefs.set(pref, value);
 };
 
+export const syncTrustedSites = () => {
+	setPref('adb-trusted-sites', conf.site_whitelist || []);
+};
+
 const start = common.start.bind(common);
 common.start = async () => {
 	// ensures that prefs.set is present
@@ -76,6 +80,8 @@ common.start = async () => {
 	}
 
 	setPref('cliqz_adb_mode', DEFAULT_ADBLOCKER_MODE);
+	syncTrustedSites();
+
 	setPref('modules.adblocker.enabled', conf.enable_ad_block);
 	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
 	setPref('modules.human-web.enabled', conf.enable_human_web);
