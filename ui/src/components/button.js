@@ -16,9 +16,9 @@ export default define({
   type: 'primary',
   size: 'medium',
   render: ({ size }) => html`
-    <ui-text type="button-${size === 'small' ? 's' : 'm'}"
-      ><slot></slot
-    ></ui-text>
+    <ui-text type="button-${size === 'small' ? 's' : 'm'}">
+      <slot></slot>
+    </ui-text>
   `.css`
       :host {
         box-sizing: border-box;
