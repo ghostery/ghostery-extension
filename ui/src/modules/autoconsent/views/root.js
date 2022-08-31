@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, router } from 'hybrids';
+import { define, html, msg, router } from 'hybrids';
 
 import Home from './home.js';
 import Confirm from './confirm.js';
@@ -39,8 +39,8 @@ export default define({
             </div>
             <div layout="column grow shrink gap">
               <ui-text type="label-s" color="gray-700">
-                Trackers detected by Ghostery on this website:
-                ${categories.length}
+                ${msg.html`Trackers detected by Ghostery on this
+                website:&nbsp;${categories.length}`}
               </ui-text>
               <ui-text type="body-xs" color="gray-600">
                 By using Never-Consent you let website owners know that you’re

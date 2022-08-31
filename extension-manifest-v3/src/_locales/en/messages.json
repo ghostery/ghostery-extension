@@ -233,8 +233,8 @@
   "trackers": {
     "message": "Trackers"
   },
-  "trackers_detected_by_ghostery_on_this_website__@_0_": {
-    "message": "Trackers detected by Ghostery on this website: $${0}"
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Trackers detected by Ghostery on this website:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Trackers Preview"
