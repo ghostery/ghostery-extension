@@ -39,7 +39,7 @@ export default define({
         </div>
         <div layout="column items:center gap">
           <ui-text type="display-xs" color="gray-800">
-            Enable Never-consent?
+            Enable Never-Consent?
           </ui-text>
           <ui-text type="body-s" color="gray-700">
             Apply optimal privacy settings:
