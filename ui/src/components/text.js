@@ -32,6 +32,10 @@ export default define({
     }
 
     ::slotted(a) {
+      color: inherit;
+    }
+
+    :host([color="gray-300"]) ::slotted(a) {
       color: white;
     }
   `,

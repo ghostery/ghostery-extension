@@ -37,9 +37,9 @@ export default define({
           >`}.
         </ui-text>
 
-        <ui-onboarding-button slot="footer">
+        <ui-button slot="footer">
           <a href="${router.backUrl()}">Done</a>
-        </ui-onboarding-button>
+        </ui-button>
       </ui-onboarding-dialog>
     `,
 });

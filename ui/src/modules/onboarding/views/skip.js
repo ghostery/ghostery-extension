@@ -31,12 +31,12 @@ export default define({
           With Ghostery enabled you instantly browser the web safer, faster and
           with less annoying ads.
         </ui-text>
-        <ui-onboarding-button type="outline" slot="footer">
+        <ui-button type="outline" slot="footer">
           <a href="${router.backUrl()}">Back</a>
-        </ui-onboarding-button>
-        <ui-onboarding-button type="outline" slot="footer">
+        </ui-button>
+        <ui-button type="outline" slot="footer">
           <a href="${router.url(OutroSkip)}">Continue</a>
-        </ui-onboarding-button>
+        </ui-button>
       </ui-onboarding-dialog>
     `,
 });

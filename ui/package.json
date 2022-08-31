@@ -9,7 +9,8 @@
     "./css": "./src/index.css",
     "./categories": "./src/utils/categories.js",
     "./wheel": "./src/utils/wheel.js",
-    "./onboarding": "./src/modules/onboarding/index.js"
+    "./onboarding": "./src/modules/onboarding/index.js",
+    "./autoconsent": "./src/modules/autoconsent/index.js"
   },
   "scripts": {
     "lint": "eslint ./src"
@@ -25,8 +26,5 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2"
-  },
-  "dependencies": {
-    "hybrids": "^8.0.10"
   }
 }

@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-export default {
+const Stats = {
   domain: '',
   all: 0,
   loadTime: 0,
@@ -66,3 +66,17 @@ export default {
     },
   },
 };
+
+export default Stats;
+
+export function statsFactory(interval = 1000) {
+  return {
+    get: () => store.get(Stats),
+    connect: () => {
+      const id = setInterval(async () => {
+        store.clear(Stats, false);
+      }, interval);
+      return () => clearInterval(id);
+    },
+  };
+}

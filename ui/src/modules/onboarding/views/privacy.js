@@ -68,9 +68,9 @@ export default define({
               ),
           )}
         </div>
-        <ui-onboarding-button slot="footer">
+        <ui-button slot="footer">
           <a href="${router.backUrl()}">Done</a>
-        </ui-onboarding-button>
+        </ui-button>
       </ui-onboarding-dialog>
     `.css`
       :host { color: var(--ui-color-gray-300); }
