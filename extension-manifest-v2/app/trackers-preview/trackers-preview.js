@@ -26,13 +26,13 @@ updateIframeHeight();
 export default define({
 	tag: 'gh-trackers-preview',
 	content: () => html`
-       <template layout="block">
-         <ui-trackers-preview
-           stats="${stats}"
-           domain="${domain}"
-           onclose="${close}"
-           ondisable="${disable}"
-         ></ui-trackers-preview>
-       </template>
-     `,
+	<template layout="block">
+		<ui-trackers-preview
+			stats="${stats}"
+			domain="${domain}"
+			onclose="${close}"
+			ondisable="${disable}"
+		></ui-trackers-preview>
+	</template>
+  `,
 });
