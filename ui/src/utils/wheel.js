@@ -17,6 +17,21 @@ function degToRad(degree) {
 }
 
 export function drawWheel(ctx, size, categories) {
+  if (typeof window !== 'undefined') {
+    const { canvas } = ctx;
+
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
+
+    // Set actual size in memory (scaled to account for extra pixel density).
+    const scale = window.devicePixelRatio;
+    canvas.width = Math.floor(size * scale);
+    canvas.height = Math.floor(size * scale);
+
+    // Normalize coordinate system to use css pixels.
+    ctx.scale(scale, scale);
+  }
+
   // Group trackers by sorted category
   // (JavaScript objects will preserve the order)
   const groupedCategories = {};
@@ -74,19 +89,4 @@ export function getOffscreenImageData(size, categories) {
   drawWheel(ctx, size, categories);
 
   return ctx.getImageData(0, 0, size, size);
-}
-
-export function setupCtx(ctx, size) {
-  const { canvas } = ctx;
-
-  canvas.style.width = size + 'px';
-  canvas.style.height = size + 'px';
-
-  // Set actual size in memory (scaled to account for extra pixel density).
-  const scale = window.devicePixelRatio;
-  canvas.width = Math.floor(size * scale);
-  canvas.height = Math.floor(size * scale);
-
-  // Normalize coordinate system to use css pixels.
-  ctx.scale(scale, scale);
 }
