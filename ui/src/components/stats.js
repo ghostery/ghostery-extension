@@ -11,7 +11,7 @@
 
 import { html, define } from 'hybrids';
 
-import { sortCategories, getCategoryLabel } from '../utils/categories.js';
+import { sortCategories } from '../utils/categories.js';
 
 export default define({
   tag: 'ui-stats',
@@ -34,12 +34,11 @@ export default define({
       ${entries.map(
         ([category, value]) => html`
           <li class="category">
-            <ui-category-bullet
-              category="${category}"
-              size="7"
-            ></ui-category-bullet>
-            <span>${getCategoryLabel(category)}</span>
-            <strong>${value}</strong>
+            <ui-category
+              name="${category}"
+              bullet="7"
+              count="${value}"
+            ></ui-category>
           </li>
         `,
       )}
@@ -69,16 +68,14 @@ export default define({
        margin-bottom: 5px;
      }
 
-     .category span {
+     .category {
        font-size: 13px;
        line-height: 16px;
      }
 
      .category strong {
        color: var(--ui-black);
-       font-size: 13px;
        font-weight: 500;
-       line-height: 16px;
      }
     `,
 });
