@@ -121,6 +121,10 @@ function updateDBs() {
 }
 
 function tryOpenOnboarding() {
+	if (globals.JUST_UPGRADED) {
+		conf.setup_complete = true;
+	}
+
 	if (conf.setup_complete || conf.setup_skip) {
 		return;
 	}

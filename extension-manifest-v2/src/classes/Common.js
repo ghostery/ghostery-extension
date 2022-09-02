@@ -84,7 +84,6 @@ common.start = async () => {
 
 	setPref('modules.adblocker.enabled', conf.enable_ad_block);
 	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
-	setPref('modules.human-web.enabled', conf.enable_human_web);
 
 	const startPromise = await start();
 	// force prefs saving after startup
