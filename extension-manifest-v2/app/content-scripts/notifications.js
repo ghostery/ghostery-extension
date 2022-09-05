@@ -654,7 +654,7 @@ const NotificationsContentScript = (function(win, doc) {
 			);
 		} else if (type === 'showUpgradeAlert') {
 			// major version upgrade
-			if (options) {
+			if (options.major_upgrade) {
 				alert_contents = createUpgradeNotificationContent(
 					bigLogoImage,
 					NOTIFICATION_TRANSLATIONS.notification_upgrade_title_v8,
@@ -669,7 +669,7 @@ const NotificationsContentScript = (function(win, doc) {
 				// minor version upgrade
 				alert_contents = createNotificationContent(
 					NOTIFICATION_TRANSLATIONS.notification_upgrade,
-					'https://www.ghostery.com/release-notes',
+					`https://github.com/ghostery/ghostery-extension/releases/tag/v${options.version}`,
 					NOTIFICATION_TRANSLATIONS.notification_upgrade_link,
 					() => {
 						removeAlert();
@@ -717,7 +717,10 @@ const NotificationsContentScript = (function(win, doc) {
 					ALERT_SHOWN = true;
 				} else if (name === 'showUpgradeAlert') {
 					NOTIFICATION_TRANSLATIONS = message.translations;
-					showAlert('showUpgradeAlert', message.major_upgrade);
+					showAlert('showUpgradeAlert', {
+						version: message.version,
+						major_upgrade: message.major_upgrade,
+					});
 					ALERT_SHOWN = true;
 				} else if (name === 'showBrowseWindow') {
 					showBrowseWindow(message.translations);

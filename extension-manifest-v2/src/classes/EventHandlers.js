@@ -191,7 +191,8 @@ class EventHandlers {
 							tab_id, 'showUpgradeAlert', {
 								translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 								language: conf.language,
-								major_upgrade: globals.JUST_UPGRADED_FROM_7
+								major_upgrade: globals.JUST_UPGRADED_FROM_7,
+								version: globals.EXTENSION_VERSION,
 							},
 							() => {
 							// not all tabs will have content scripts loaded, so better wait for confirmation first
