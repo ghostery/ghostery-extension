@@ -37,7 +37,8 @@ const mapStateToProps = state => ({
 	site_blacklist: state.summary.site_blacklist,
 	site_whitelist: state.summary.site_whitelist,
 	trackers_banner_status: state.panel.trackers_banner_status,
-	trackerCounts: state.summary.trackerCounts
+	trackerCounts: state.summary.trackerCounts,
+	setup_complete: state.panel.setup_complete,
 });
 /**
  * Bind Settings view component action creators using Redux's bindActionCreators

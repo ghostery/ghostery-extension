@@ -269,7 +269,7 @@ class BlockingHeader extends React.Component {
 	}
 
 	/**
-	* Render appropriate Blocking Header to be part of Blocking or Global Blblocking view.
+	* Render appropriate Blocking Header to be part of Blocking or Global Blocking view.
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
