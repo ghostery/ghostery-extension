@@ -45,7 +45,7 @@ class ForgotPassword extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
-			const { email } = this.state;
+			const email = this.state.email?.trim();
 
 			// validate the email and password
 			if (!validateEmail(email)) {

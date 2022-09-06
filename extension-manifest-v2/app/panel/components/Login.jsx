@@ -52,7 +52,8 @@ class Login extends React.Component {
 	handleSubmit = (e) => {
 		const { actions, is_expert } = this.props;
 		e.preventDefault();
-		const { email, password } = this.state;
+		const { email: emailRaw, password } = this.state;
+		const email = emailRaw?.trim();
 		const emailIsValid = email && validateEmail(email);
 
 		this.setState({
