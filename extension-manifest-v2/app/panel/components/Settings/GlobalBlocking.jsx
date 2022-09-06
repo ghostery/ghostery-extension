@@ -46,6 +46,7 @@ class GlobalBlocking extends React.Component {
 			showToast,
 			filtered,
 			language,
+			setup_complete,
 		} = this.props;
 		const categories = settingsData ? settingsData.categories : [];
 		const filterText = settingsData ? settingsData.filterText : t('settings_filter_all_label');
@@ -66,6 +67,7 @@ class GlobalBlocking extends React.Component {
 					paused_blocking={settingsData.paused_blocking}
 					selected_app_ids={settingsData.selected_app_ids}
 					globalBlocking
+					setup_complete={setup_complete}
 				/>
 				<div className="blocking-trackers">
 					{ categories && categories.length > 0 && (
@@ -77,6 +79,7 @@ class GlobalBlocking extends React.Component {
 							showToast={showToast}
 							language={language}
 							globalBlocking
+							setup_complete={setup_complete}
 						/>
 					)}
 				</div>

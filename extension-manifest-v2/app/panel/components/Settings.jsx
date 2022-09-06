@@ -78,7 +78,7 @@ class Settings extends React.Component {
 	}
 
 	GlobalBlockingComponent = () => {
-		const { actions, language } = this.props;
+		const { actions, language, setup_complete } = this.props;
 		return (
 			<GlobalBlocking
 				toggleCheckbox={this.toggleCheckbox}
@@ -86,6 +86,7 @@ class Settings extends React.Component {
 				actions={actions}
 				showToast={this.showToast}
 				language={language}
+				setup_complete={setup_complete}
 			/>
 		);
 	}
@@ -103,12 +104,13 @@ class Settings extends React.Component {
 	}
 
 	GeneralSettingsComponent = () => {
-		const { actions } = this.props;
+		const { actions, setup_complete } = this.props;
 		return (
 			<GeneralSettings
 				toggleCheckbox={this.toggleCheckbox}
 				settingsData={this.props}
 				actions={actions}
+				setup_complete={setup_complete}
 			/>
 		);
 	}
