@@ -1515,7 +1515,9 @@ async function initializeAccount() {
 
 		if (!conf.account) {
 			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
-			setGhosteryDefaultBlocking();
+			if (globals.JUST_INSTALLED) {
+				setGhosteryDefaultBlocking();
+			}
 			return;
 		}
 
