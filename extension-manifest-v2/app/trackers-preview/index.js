@@ -10,7 +10,6 @@
  */
 
 import '@ghostery/ui';
-import '@ghostery/ui/css';
 import '@ghostery/ui/trackers-preview';
 
-import './trackers-preview.js';
+import './trackers-preview';

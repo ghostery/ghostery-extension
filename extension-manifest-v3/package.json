@@ -46,7 +46,7 @@
     "@duckduckgo/autoconsent": "^2.1.2",
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
-    "@whotracksme/webextension-packages": "^0.3.0",
+    "@whotracksme/webextension-packages": "^0.4.3",
     "hybrids": "^8.1.0",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"

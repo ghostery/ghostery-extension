@@ -10,7 +10,7 @@
  */
 
 import './components/button.js';
-import './components/category-bullet.js';
+import './components/category.js';
 import './components/header.js';
 import './components/icon.js';
 import './components/onboarding-state.js';

@@ -1,6 +1,6 @@
 /**
- * Ghostery Browser Extension
- * https://www.ghostery.com/
+ * WhoTracks.Me
+ * https://whotracks.me/
  *
  * Copyright 2017-present Ghostery GmbH. All rights reserved.
  *
@@ -9,5 +9,4 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// shorthand module for nicer imports until importmaps will be supported
-export * from '/vendor/hybrids/src/index.js';
+import './trackers-preview.js';

@@ -10,7 +10,8 @@
     "./categories": "./src/utils/categories.js",
     "./wheel": "./src/utils/wheel.js",
     "./onboarding": "./src/modules/onboarding/index.js",
-    "./autoconsent": "./src/modules/autoconsent/index.js"
+    "./autoconsent": "./src/modules/autoconsent/index.js",
+    "./trackers-preview": "./src/modules/trackers-preview/index.js"
   },
   "scripts": {
     "lint": "eslint ./src"

@@ -36,6 +36,7 @@ const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
+const TRACKERS_PREVIEW_DIR = path.resolve(__dirname, 'app/trackers-preview');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
@@ -50,6 +51,7 @@ module.exports = {
 		alias: {
 			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
 			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
+			'@ghostery/ui/trackers-preview$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/trackers-preview/index.js'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
 			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
 		},
@@ -69,7 +71,7 @@ module.exports = {
 		onboarding: [`${ONBOARDING_DIR}/index.js`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
-		trackers_preview_popup: [`${SRC_DIR}/trackers-preview/popup.js`],
+		trackers_preview_popup: [`${TRACKERS_PREVIEW_DIR}/index.js`],
 		trackers_preview_content_script: [`${CONTENT_SCRIPTS_DIR}/trackers-preview.js`],
 
 		// Sass
