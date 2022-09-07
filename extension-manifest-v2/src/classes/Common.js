@@ -54,8 +54,8 @@ export const syncTrustedSites = () => {
 	setPref('adb-trusted-sites', conf.site_whitelist || []);
 };
 
-const start = common.start.bind(common);
-common.start = async () => {
+const load = common.load.bind(common);
+common.load = async () => {
 	// ensures that prefs.set is present
 	common.injectHelpers();
 
@@ -85,10 +85,7 @@ common.start = async () => {
 	setPref('modules.adblocker.enabled', conf.enable_ad_block);
 	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
 
-	const startPromise = await start();
-	// force prefs saving after startup
-	setPref('timestamp', Date.now());
-	return startPromise;
+	return load();
 };
 
 const setModuleState = (moduleName, enabled) => {
