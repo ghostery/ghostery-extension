@@ -59,7 +59,7 @@ async function disable(_, event) {
   });
 }
 
-const Autoconsent = define({
+export default define({
   tag: 'gh-autoconsent',
   stats: statsFactory(),
   content: ({ stats }) =>
@@ -73,18 +73,3 @@ const Autoconsent = define({
       </template>
     `,
 });
-
-(function updateIframeHeight() {
-  const resizeObserver = new ResizeObserver(() => {
-    window.parent.postMessage(
-      {
-        type: 'ghostery-autoconsent-resize-iframe',
-        height: document.body.clientHeight,
-      },
-      '*',
-    );
-  });
-  resizeObserver.observe(document.querySelector(Autoconsent.tag), {
-    box: 'border-box',
-  });
-})();

@@ -15,24 +15,24 @@ import { showIframe } from '@ghostery/ui/autoconsent/iframe';
 let watchMode = false;
 
 const consent = new AutoConsent((msg) => {
-  if (watchMode && msg.type === 'popupFound') {
-    watchMode = false;
-    showIframe(chrome.runtime.getURL('pages/autoconsent/index.html'));
-  }
+	if (watchMode && msg.type === 'popupFound') {
+		watchMode = false;
+		showIframe(chrome.runtime.getURL('app/templates/autoconsent.html'));
+	}
 
-  return chrome.runtime.sendMessage(
-    Object.assign({}, msg, { action: 'autoconsent' }),
-  );
+	return chrome.runtime.sendMessage(
+		{ ...msg, action: 'autoconsent' },
+	);
 });
 
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action === 'autoconsent') {
-    if (msg.type === 'initResp') {
-      watchMode = !msg.config.autoAction;
-    }
+	if (msg.action === 'autoconsent') {
+		if (msg.type === 'initResp') {
+			watchMode = !msg.config.autoAction;
+		}
 
-    return Promise.resolve(consent.receiveMessageCallback(msg));
-  }
+		return Promise.resolve(consent.receiveMessageCallback(msg));
+	}
 
-  return false;
+	return false;
 });

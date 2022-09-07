@@ -55,6 +55,8 @@ import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
 
+import './modules/autoconsent';
+
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
 window.COMMON = common;
@@ -555,6 +557,8 @@ function onMessageHandler(request, sender, callback) {
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
 	if (name === 'getPanelData') { // Used by panel-android
+		// eslint-disable-next-line
+		debugger;
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const data = panelData.get(message.view, activeTab);

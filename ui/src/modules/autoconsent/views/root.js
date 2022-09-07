@@ -14,7 +14,7 @@ import { define, html, msg, router } from 'hybrids';
 import Home from './home.js';
 import Confirm from './confirm.js';
 
-export default define({
+const Autoconsent = define({
   tag: 'ui-autoconsent',
   stack: router([Home, Confirm]),
   categories: {
@@ -59,3 +59,20 @@ export default define({
     </template>
   `,
 });
+
+export default Autoconsent;
+
+(function updateIframeHeight() {
+  const resizeObserver = new ResizeObserver(() => {
+    window.parent.postMessage(
+      {
+        type: 'ghostery-autoconsent-resize-iframe',
+        height: document.body.clientHeight,
+      },
+      '*',
+    );
+  });
+  resizeObserver.observe(document.body, {
+    box: 'border-box',
+  });
+})();
