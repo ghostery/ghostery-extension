@@ -22,6 +22,36 @@ async function disable(_, event) {
 	// TODO
 }
 
+async function getCategories() {
+	const tab = await new Promise(resolve => chrome.tabs.getCurrent(resolve));
+
+	const { summary } = await new Promise(
+		resolve => chrome.runtime.sendMessage({
+			name: 'getPanelData',
+			message: { view: 'panel', tabId: tab.id },
+		}, resolve),
+	);
+	const { antiTracking } = await new Promise(
+		resolve => chrome.runtime.sendMessage({
+			name: 'getCommonModuleData',
+			message: { tabId: tab.id },
+		}, resolve),
+	);
+
+	const result = summary.categories.reduce((acc, c) => {
+		for (let i = 0; i < c.num_total; i += 1) {
+			acc.push(c.id);
+		}
+		return acc;
+	}, []);
+
+	for (let i = 0; i < antiTracking.trackerCount; i += 1) {
+		result.push('advertising');
+	}
+
+	return result;
+}
+
 export default define({
 	tag: 'gh-autoconsent',
 	categories: {
@@ -29,25 +59,9 @@ export default define({
 		connect: (host, key) => {
 			let id;
 
-			const cb = () => {
-				chrome.tabs.getCurrent((tab) => {
-					chrome.runtime.sendMessage({
-						name: 'getPanelData',
-						message: { view: 'panel', tabId: tab.id },
-					}, (response) => {
-						console.log(response);
-						// host[key] = response.categories.reduce((acc, c) => {
-						// 	for (let i = 0; i < c.num_total; i += 1) {
-						// 		acc.push(c.id);
-						// 	}
-						// 	return acc;
-						// }, []);
-
-						console.log(host[key]);
-
-						id = setTimeout(cb, 1000);
-					});
-				});
+			const cb = async () => {
+				host[key] = await getCategories();
+				id = setTimeout(cb, 1000);
 			};
 
 			id = setTimeout(cb, 1000);
@@ -56,12 +70,12 @@ export default define({
 		},
 	},
 	content: ({ categories }) => html`
-       <template layout="block">
-         <ui-autoconsent
-           categories="${categories}"
-           onenable=${enable}
-           ondisable=${disable}
-         ></ui-autoconsent>
-       </template>
-     `,
+		<template layout="block">
+			<ui-autoconsent
+				categories="${categories}"
+				onenable=${enable}
+				ondisable=${disable}
+			></ui-autoconsent>
+		</template>
+	`,
 });
