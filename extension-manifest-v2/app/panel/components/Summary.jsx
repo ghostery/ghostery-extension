@@ -452,13 +452,6 @@ class Summary extends React.Component {
 		return paused_blocking || sitePolicy || disableBlocking;
 	}
 
-	_isSmartBlockingInactive() {
-		const { paused_blocking, sitePolicy } = this.props;
-		const { disableBlocking } = this.state;
-
-		return paused_blocking || sitePolicy || disableBlocking;
-	}
-
 	/**
 	 * Render helper for the donut
 	 * @return {JSX} JSX for rendering the donut
@@ -701,9 +694,9 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderCommonSmartBlock() {
+	_renderCommonAutoconsent() {
 		const {
-			enable_smart_block,
+			enable_autoconsent,
 			is_expert,
 			current_theme,
 		} = this.props;
@@ -713,9 +706,9 @@ class Summary extends React.Component {
 			<div className="Summary__commonFeatureContainer">
 				<CommonFeature
 					clickButton={this.clickCommonFeature}
-					type="smart_block"
-					active={enable_smart_block}
-					commonInactive={this._isSmartBlockingInactive()}
+					type="autoconsent"
+					active={enable_autoconsent}
+					commonInactive={this._isCommonInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
@@ -838,7 +831,7 @@ class Summary extends React.Component {
 						<div className="Summary__commonFeaturesContainer">
 							{this._renderCommonAdBlock()}
 							{this._renderCommonAntiTracking()}
-							{this._renderCommonSmartBlock()}
+							{this._renderCommonAutoconsent()}
 						</div>
 					</ui-onboarding-state>
 

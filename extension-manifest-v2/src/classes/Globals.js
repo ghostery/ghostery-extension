@@ -99,10 +99,13 @@ class Globals {
 			'alert_bubble_pos',
 			'alert_bubble_timeout',
 			'alert_expanded',
+			'autoconsent_whitelist',
+			'autoconsent_blacklist',
 			'cliqz_module_whitelist',
 			'current_theme',
 			'enable_ad_block',
 			'enable_anti_tracking',
+			'enable_autoconsent',
 			'enable_autoupdate',
 			'enable_click2play',
 			'enable_click2play_social',
@@ -134,6 +137,7 @@ class Globals {
 
 		this.ONBOARDED_FEATURES = [
 			'enable_ad_block',
+			'enable_autoconsent',
 			'enable_smart_block',
 			'enable_human_web',
 			'enable_anti_tracking',

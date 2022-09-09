@@ -11,13 +11,27 @@
 
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
 
+import globals from '../classes/Globals';
+import conf from '../classes/Conf';
+
 async function initialize(msg, tabId, frameId) {
 	const url = new URL(msg.url);
+	const {
+		enable_autoconsent,
+		autoconsent_whitelist,
+		autoconsent_blacklist,
+		site_whitelist,
+	} = conf;
 
-	// dnrRules.annoyances && !autoconsent.disallowed.includes(url.hostname)
-	if (true) {
-		// autoconsent.all || autoconsent.allowed.includes(url.hostname)
-		const optOut = false;
+	if (
+		enable_autoconsent &&
+		!globals.SESSION.paused_blocking &&
+		!autoconsent_blacklist.includes(url.hostname) &&
+		!site_whitelist.includes(url.hostname.replace(/^www\./, ''))
+	) {
+		const optOut =
+			(!autoconsent_whitelist.length && !autoconsent_blacklist.length) ||
+			autoconsent_whitelist.includes(url.hostname);
 
 		chrome.tabs.sendMessage(
 			tabId,
@@ -70,8 +84,6 @@ async function evalCode(code, id, tabId, frameId) {
 chrome.runtime.onMessage.addListener((msg, sender) => {
 	if (msg.action !== 'autoconsent') return false;
 	if (!sender.tab) return false;
-
-	console.log('[autoconsent]', msg.type, msg);
 
 	const tabId = sender.tab.id;
 	const { frameId } = sender;

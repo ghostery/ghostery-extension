@@ -219,12 +219,12 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
             off
           </div>
           <div
-            className="CommonFeature__icon CommonFeature__icon--smart-block g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--autoconsent g-tooltip"
           />
           <div
             className="CommonFeature__feature-name"
           >
-            smart_blocking
+            enhanced_autoconsent
           </div>
         </div>
       </div>
@@ -494,12 +494,12 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
             on
           </div>
           <div
-            className="CommonFeature__icon CommonFeature__icon--smart-block g-tooltip"
+            className="CommonFeature__icon CommonFeature__icon--autoconsent g-tooltip"
           />
           <div
             className="CommonFeature__feature-name"
           >
-            smart_blocking
+            enhanced_autoconsent
           </div>
         </div>
       </div>

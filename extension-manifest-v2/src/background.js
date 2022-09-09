@@ -131,6 +131,8 @@ function tryOpenOnboarding() {
 		return;
 	}
 
+	conf.enable_autoconsent = false;
+
 	const now = Date.now();
 	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > ONE_DAY_MSEC)) {
 		conf.setup_timestamp = now;
@@ -554,11 +556,33 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	}
+	if (origin === 'autoconsent') {
+		if (name === 'enable') {
+			conf.enable_autoconsent = true;
+			if (message.url) {
+				conf.autoconsent_whitelist = conf.autoconsent_whitelist.concat(message.url);
+			} else {
+				conf.autoconsent_whitelist = [];
+				conf.autoconsent_blacklist = [];
+			}
+
+			return false;
+		}
+		if (name === 'disable') {
+			if (message.url) {
+				conf.autoconsent_blacklist = conf.autoconsent_blacklist.concat(message.url);
+			} else {
+				conf.enable_autoconsent = false;
+				conf.autoconsent_whitelist = [''];
+				conf.autoconsent_blacklist = [''];
+			}
+
+			return false;
+		}
+	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
 	if (name === 'getPanelData') { // Used by panel-android
-		// eslint-disable-next-line
-		debugger;
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const data = panelData.get(message.view, activeTab);

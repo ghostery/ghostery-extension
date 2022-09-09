@@ -14,12 +14,26 @@ import '@ghostery/ui/autoconsent';
 
 import { define, html } from 'hybrids';
 
+const hostname = new URLSearchParams(window.location.search).get('host');
+
 async function enable(_, event) {
-	// TODO
+	const { all } = event.detail;
+
+	chrome.runtime.sendMessage({
+		name: 'enable',
+		origin: 'autoconsent',
+		message: { url: all ? undefined : hostname },
+	});
 }
 
 async function disable(_, event) {
-	// TODO
+	const { all } = event.detail;
+
+	chrome.runtime.sendMessage({
+		name: 'disable',
+		origin: 'autoconsent',
+		message: { url: all ? undefined : hostname },
+	});
 }
 
 async function getCategories() {

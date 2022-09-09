@@ -339,7 +339,7 @@ class PanelData {
 
 		const { id: tab_id } = this._activeTab;
 		const {
-			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
+			current_theme, enable_ad_block, enable_autoconsent, enable_anti_tracking, enable_smart_block,
 			is_expanded, is_expert, language, reload_banner_status, trackers_banner_status,
 			setup_complete,
 		} = conf;
@@ -347,6 +347,7 @@ class PanelData {
 		return {
 			current_theme,
 			enable_ad_block,
+			enable_autoconsent,
 			enable_anti_tracking,
 			enable_smart_block,
 			is_expanded,
@@ -448,13 +449,14 @@ class PanelData {
 	 */
 	static _getUserSettingsForPanelView(userSettings) {
 		const {
-			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
+			current_theme, enable_ad_block, enable_autoconsent, enable_anti_tracking, enable_smart_block,
 			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
 
 		return {
 			current_theme,
 			enable_ad_block,
+			enable_autoconsent,
 			enable_anti_tracking,
 			enable_smart_block,
 			is_expanded,
@@ -591,6 +593,12 @@ class PanelData {
 
 		if (data.needsReload && this._activeTab) {
 			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
+		}
+
+		if (data.enable_autoconsent === false) {
+			conf.autoconsent_whitelist = [''];
+			conf.autoconsent_blacklist = [''];
+			syncSetDataChanged = true;
 		}
 
 		if (syncSetDataChanged) {

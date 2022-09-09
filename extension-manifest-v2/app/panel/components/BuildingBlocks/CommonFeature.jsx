@@ -38,6 +38,8 @@ class CommonFeature extends React.Component {
 			switch (type) {
 				case 'ad_block':
 					return t('tooltip_ad_block_on');
+				case 'autoconsent':
+					return t('tooltip_autoconsent_on');
 				case 'anti_track':
 					return t('tooltip_anti_track_on');
 				case 'smart_block':
@@ -49,6 +51,8 @@ class CommonFeature extends React.Component {
 			switch (type) {
 				case 'ad_block':
 					return t('ad_blocking_DESC');
+				case 'autoconsent':
+					return t('autoconsent_DESC');
 				case 'anti_track':
 					return t('anti_tracking_DESC');
 				case 'smart_block':
@@ -65,6 +69,8 @@ class CommonFeature extends React.Component {
 		switch (type) {
 			case 'ad_block':
 				return t('enhanced_ad_blocking');
+			case 'autoconsent':
+				return t('enhanced_autoconsent');
 			case 'anti_track':
 				return t('enhanced_anti_tracking');
 			case 'smart_block':
@@ -140,6 +146,8 @@ class CommonFeature extends React.Component {
 			featureName = t('enhanced_anti_tracking');
 		} else if (featureType === 'ad_block') {
 			featureName = t('enhanced_ad_blocking');
+		} if (featureType === 'autoconsent') {
+			featureName = t('enhanced_autoconsent');
 		} else if (featureType === 'smart_block') {
 			featureName = t('smart_blocking');
 		}

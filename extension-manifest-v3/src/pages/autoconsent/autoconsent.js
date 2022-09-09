@@ -14,6 +14,8 @@ import { define, html, store } from 'hybrids';
 import Options from '/store/options.js';
 import { statsFactory } from '/store/stats.js';
 
+const hostname = new URLSearchParams(window.location.search).get('host');
+
 async function enable(_, event) {
   const options = await store.resolve(store.get(Options));
   const { all } = event.detail;
@@ -24,7 +26,6 @@ async function enable(_, event) {
     allowed = [];
     disallowed = [];
   } else {
-    const hostname = new URLSearchParams(window.location.search).get('host');
     allowed = allowed.includes(hostname) ? allowed : allowed.concat(hostname);
   }
 
@@ -47,7 +48,6 @@ async function disable(_, event) {
     disallowed = [];
     allowed = [];
   } else {
-    const hostname = new URLSearchParams(window.location.search).get('host');
     disallowed = disallowed.includes(hostname)
       ? disallowed
       : disallowed.concat(hostname);

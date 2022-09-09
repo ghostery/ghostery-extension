@@ -35,6 +35,7 @@ import { setTheme } from '../utils/utils';
 
 const initialState = {
 	enable_ad_block: true,
+	enable_autoconsent: true,
 	enable_anti_tracking: true,
 	enable_smart_block: true,
 	initialized: false, // prevent rendering subviews before UPDATE_PANEL_DATA resolves
@@ -272,6 +273,9 @@ export default (state = initialState, action) => {
 			switch (action.data.featureName) {
 				case 'enable_anti_tracking':
 					pingName = action.data.isEnabled ? 'antitrack_off' : 'antitrack_on';
+					break;
+				case 'enable_autoconsent':
+					pingName = action.data.isEnabled ? 'autoconsent_off' : 'autoconsent_on';
 					break;
 				case 'enable_ad_block':
 					pingName = action.data.isEnabled ? 'adblock_off' : 'adblock_on';

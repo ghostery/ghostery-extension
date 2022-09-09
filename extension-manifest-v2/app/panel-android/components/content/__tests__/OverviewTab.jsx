@@ -23,6 +23,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 		test('OverviewTab component with falsy props and SiteNotScanned', () => {
 			const panel = {
 				enable_ad_block: false,
+				enable_autoconsent: false,
 				enable_anti_tracking: false,
 				enable_smart_block: false,
 				smartBlock: { blocked: {}, unblocked: {} },
@@ -62,6 +63,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 		test('OverviewTab component with truthy props and no SiteNotScanned', () => {
 			const panel = {
 				enable_ad_block: true,
+				enable_autoconsent: true,
 				enable_anti_tracking: true,
 				enable_smart_block: true,
 				smartBlock: { blocked: { 1: true }, unblocked: { 2: true, 3: true } },
@@ -103,6 +105,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 		test('OverviewTab component clicks work', () => {
 			const panel = {
 				enable_ad_block: false,
+				enable_autoconsent: false,
 				enable_anti_tracking: false,
 				enable_smart_block: false,
 				smartBlock: { blocked: {}, unblocked: {} },

@@ -1,4 +1,13 @@
 {
+  "tooltip_autoconsent_on": {
+    "message": "tooltip_autoconsent_on"
+  },
+  "autoconsent_DESC": {
+    "message": "autoconsent_DESC"
+  },
+  "enhanced_autoconsent": {
+    "message": "Never-consent"
+  },
   "accept_terms": {
     "message": "Accept terms"
   },
@@ -53,6 +62,12 @@
   },
   "alert_ad_block_on": {
     "message": "Ad-Blocking ON. Advertisements will be blocked."
+  },
+  "alert_autoconsent_off": {
+    "message": "alert_autoconsent_off"
+  },
+  "alert_autoconsent_on": {
+    "message": "alert_autoconsent_on"
   },
   "alert_anti_track_off": {
     "message": "Anti-Tracking OFF. Personal data will not be anonymized."
