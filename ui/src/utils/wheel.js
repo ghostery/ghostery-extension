@@ -16,8 +16,8 @@ function degToRad(degree) {
   return degree * factor;
 }
 
-export function drawWheel(ctx, size, categories) {
-  if (typeof window !== 'undefined') {
+export function drawWheel(ctx, size, categories, useScale = true) {
+  if (useScale && typeof window !== 'undefined') {
     const { canvas } = ctx;
 
     canvas.style.width = size + 'px';
@@ -86,7 +86,7 @@ export function getOffscreenImageData(size, categories) {
     canvas.height = size;
   }
   const ctx = canvas.getContext('2d');
-  drawWheel(ctx, size, categories);
+  drawWheel(ctx, size, categories, false);
 
   return ctx.getImageData(0, 0, size, size);
 }
