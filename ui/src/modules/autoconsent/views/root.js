@@ -14,7 +14,7 @@ import { define, html, msg, router } from 'hybrids';
 import Home from './home.js';
 import Confirm from './confirm.js';
 
-const Autoconsent = define({
+export default define({
   tag: 'ui-autoconsent',
   stack: router([Home, Confirm]),
   categories: {
@@ -59,8 +59,6 @@ const Autoconsent = define({
     </template>
   `,
 });
-
-export default Autoconsent;
 
 (function updateIframeHeight() {
   const resizeObserver = new ResizeObserver(() => {
