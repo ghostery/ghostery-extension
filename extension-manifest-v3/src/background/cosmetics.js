@@ -14,6 +14,8 @@ import { parse } from 'tldts-experimental';
 
 import { DNR_RULES_LIST, observe } from '/store/options.js';
 
+const DEBUG_SCRIPLETS = false;
+
 const adblockerEngines = DNR_RULES_LIST.reduce((map, name) => {
   map[name] = {
     engine: null,
@@ -209,7 +211,7 @@ async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   let debugMarker;
-  if (false) {
+  if (DEBUG_SCRIPLETS) {
     debugMarker = (text) =>
       `console.log('[ADBLOCKER-DEBUG]:', ${JSON.stringify(text)});`;
   } else {
