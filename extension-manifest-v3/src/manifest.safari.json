@@ -465,6 +465,7 @@
     "webNavigation",
     "declarativeNetRequest",
     "storage",
+    "scripting",
     "tabs"
   ],
   "host_permissions": [
