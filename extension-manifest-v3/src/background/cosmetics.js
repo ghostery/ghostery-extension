@@ -168,7 +168,7 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
         return;
       }
 
-      specificStyles.push(styles, { tabId: sender.tab.id, frameId });
+      specificStyles.push(styles);
       specificFrameId = frameId;
 
       // Inject scripts from content script
