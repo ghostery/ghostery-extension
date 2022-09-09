@@ -1,13 +1,4 @@
 {
-  "tooltip_autoconsent_on": {
-    "message": "tooltip_autoconsent_on"
-  },
-  "autoconsent_DESC": {
-    "message": "autoconsent_DESC"
-  },
-  "enhanced_autoconsent": {
-    "message": "Never-consent"
-  },
   "accept_terms": {
     "message": "Accept terms"
   },
@@ -63,17 +54,17 @@
   "alert_ad_block_on": {
     "message": "Ad-Blocking ON. Advertisements will be blocked."
   },
-  "alert_autoconsent_off": {
-    "message": "alert_autoconsent_off"
-  },
-  "alert_autoconsent_on": {
-    "message": "alert_autoconsent_on"
-  },
   "alert_anti_track_off": {
     "message": "Anti-Tracking OFF. Personal data will not be anonymized."
   },
   "alert_anti_track_on": {
     "message": "Anti-Tracking ON. Personal data will be anonymized."
+  },
+  "alert_autoconsent_off": {
+    "message": "alert_autoconsent_off"
+  },
+  "alert_autoconsent_on": {
+    "message": "alert_autoconsent_on"
   },
   "alert_ghostery_paused": {
     "message": "Ghostery extension has been paused."
@@ -159,6 +150,9 @@
   "any_questions__anytime_": {
     "message": "Any questions? Anytime!"
   },
+  "apply_optimal_privacy_settings_": {
+    "message": "Apply optimal privacy settings:"
+  },
   "are_you_sure_": {
     "message": "Are you sure?"
   },
@@ -168,6 +162,9 @@
   "audio_video_player": {
     "message": "Audio/Video Player",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
+  },
+  "autoconsent_DESC": {
+    "message": "autoconsent_DESC"
   },
   "back": {
     "message": "Back"
@@ -424,6 +421,9 @@
   "button_cancel": {
     "description": "Part of a confirmation dialog. Clicking this cancels the action.",
     "message": "Cancel"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "By using Never-Consent you let website owners know that you’re against tracking!"
   },
   "cancel": {
     "message": "Cancel"
@@ -723,6 +723,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Enable Ghostery to get started"
   },
+  "enable_never_consent_": {
+    "message": "Enable Never-Consent?"
+  },
   "enable_when_blacklisted": {
     "message": "To use this function, undo Restrict Site."
   },
@@ -740,6 +743,9 @@
   },
   "enhanced_anti_tracking": {
     "message": "Anti-Tracking"
+  },
+  "enhanced_autoconsent": {
+    "message": "Never-consent"
   },
   "error_email_forgot": {
     "message": "Hmm, I can’t find that email. Maybe try another?"
@@ -846,6 +852,9 @@
   "learn_more": {
     "message": "Learn More"
   },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Let Ghostery be your complete privacy advocate and reject all popups and tracking for you, or do it yourself!"
+  },
   "license_email": {
     "message": "Email"
   },
@@ -893,6 +902,15 @@
     "description": "The title of this extension (Ghostery).",
     "message": "Ghostery – Privacy Ad Blocker"
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Never-Consent is Disabled"
+  },
+  "never_consent_is_enabled": {
+    "message": "Never-Consent is Enabled"
+  },
   "new_themes": {
     "message": "New Themes"
   },
@@ -901,6 +919,9 @@
   },
   "next_or_start_trial": {
     "message": "Next or Start Trial"
+  },
+  "no": {
+    "message": "No"
   },
   "no_such_email_password_combo": {
     "message": "Looks like we can't find this email and password combo. Give it another shot."
@@ -933,8 +954,17 @@
   "off": {
     "message": "Off"
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "On"
+  },
+  "on_all_websites": {
+    "message": "on all websites"
+  },
+  "on_this_website": {
+    "message": "on this website"
   },
   "options_tracker_wheel_disabled": {
     "message": "Disable Tracker Wheel in browser toolbar"
@@ -1783,6 +1813,9 @@
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
   },
+  "tired_of_cookie_popups_": {
+    "message": "TIRED OF COOKIE POPUPS?"
+  },
   "too_many_failed_logins_text": {
     "message": "Too many failed logins. Try again in one hour."
   },
@@ -1794,6 +1827,9 @@
   },
   "tooltip_anti_track_on": {
     "message": "Personal data points anonymized."
+  },
+  "tooltip_autoconsent_on": {
+    "message": "tooltip_autoconsent_on"
   },
   "tooltip_body_in_cliqz": {
     "message": "Feature already active in Cliqz by default."
@@ -1840,6 +1876,9 @@
   "trackers_detected": {
     "message": "Detected"
   },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Trackers detected by Ghostery on this website:&nbsp;$${0}"
+  },
   "trackers_preview": {
     "message": "Trackers Preview"
   },
@@ -1880,6 +1919,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+  },
+  "yes": {
+    "message": "Yes"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
