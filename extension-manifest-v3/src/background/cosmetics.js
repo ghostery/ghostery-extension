@@ -200,11 +200,97 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     sendResponse({
       active: specificResponses.map((r) => r.active).some((a) => a),
       extended: specificResponses.map((r) => r.extended).flat(),
-      scripts: specificResponses.map((r) => r.scripts).flat(),
       styles: '',
     });
   }
 }
+
+async function executeScriptlets(tabId, scripts) {
+  // Dynamically injected scripts scripts can be difficult to find later in
+  // the debugger. Console logs simplifies setting up breakpoints if needed.
+  let debugMarker;
+  if (false) {
+    debugMarker = (text) =>
+      `console.log('[ADBLOCKER-DEBUG]:', ${JSON.stringify(text)});`;
+  } else {
+    debugMarker = () => '';
+  }
+
+  // the scriptlet code that contains patches for the website
+  const codeRunningInPage = `(function(){
+${debugMarker('run scriptlets (executing in "page world")')}
+${scripts.join('\n\n')}}
+)()`;
+
+  // wrapper to break the "isolated world" so that the patching operates
+  // on the website, not on the content script's isolated environment.
+  function codeRunningInContentScript(code) {
+    var script;
+    try {
+      script = document.createElement('script');
+      script.appendChild(document.createTextNode(decodeURIComponent(code)));
+      (document.head || document.documentElement).appendChild(script);
+    } catch (ex) {
+      console.error('Failed to run script', ex);
+    }
+    if (script) {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+      script.textContent = '';
+    }
+  }
+
+  chrome.scripting.executeScript(
+    {
+      injectImmediately: true,
+      world: 'MAIN',
+      target: {
+        tabId,
+        allFrames: true,
+      },
+      func: codeRunningInContentScript,
+      args: [encodeURIComponent(codeRunningInPage)],
+    },
+    () => {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError);
+      }
+    },
+  );
+}
+
+chrome.webNavigation.onCommitted.addListener((details) => {
+  const { hostname, domain } = parse(details.url);
+  if (!hostname) {
+    return;
+  }
+
+  Object.keys(adblockerEngines).forEach((engineName) => {
+    if (adblockerEngines[engineName].isEnabled === false) {
+      return;
+    }
+
+    const { engine } = adblockerEngines[engineName];
+
+    const { active, scripts } = engine.getCosmeticsFilters({
+      url: details.url,
+      hostname,
+      domain: domain || '',
+      getBaseRules: false,
+      getInjectionRules: true,
+      getExtendedRules: false,
+      getRulesFromDOM: false,
+      getRulesFromHostname: true,
+    });
+    if (active === false) {
+      return;
+    }
+    if (scripts.length > 0) {
+      executeScriptlets(details.tabId, scripts);
+    }
+  });
+});
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getCosmeticsFilters') {
