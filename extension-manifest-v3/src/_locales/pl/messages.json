@@ -6,6 +6,9 @@
   "accept_terms": {
     "message": "Akceptowanie warunków"
   },
+  "ad_blocking": {
+    "message": "Blokowanie reklam"
+  },
   "additional_permissions_required": {
     "message": "Wymagane dodatkowe uprawnienia"
   },
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "Gotowe! Wybierz ghosty!"
   },
+  "anti_tracking": {
+    "message": "Ochrona przed śledzeniem"
+  },
   "any_questions__anytime_": {
     "message": "Masz pytanie? Skontaktuj się z nami!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "Zastosuj optymalne ustawienia prywatności:"
   },
   "are_you_sure_": {
     "message": "Jesteś pewny?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "Wstecz"
   },
-  "block_ads": {
-    "message": "Blokuj reklamy"
-  },
-  "block_annoyances": {
-    "message": "Blokuj irytujące elementy"
-  },
-  "block_trackers": {
-    "message": "Blokuj tropiciele"
-  },
   "blocked": {
     "message": "Zablokowane"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "Używając Never-Consent, informujesz właścicieli stron, że sprzeciwiasz się trackerom!"
   },
   "cancel": {
     "message": "Anuluj"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Aktywuj Ghostery, aby rozpocząć"
   },
+  "enable_never_consent_": {
+    "message": "Chcesz włączyć Never-Consent?"
+  },
   "essential": {
     "message": "Istotne",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "Istniejemy dzięki mikrowkładom każdego użytkownika Ghostery, który zdecyduje się wysłać informacje o trackerach do whotracks.me. Dostęp do trackerów umożliwia firmie Ghostery dostarczanie w czasie rzeczywistym informacji o trackerach i zapewnienie ochrony dla całej społeczności użytkowników Ghostery."
   },
+  "learn_more": {
+    "message": "Dowiedz się więcej"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Pozwól, aby wtyczka Ghostery pełniła funkcję Twojego obrońcy prywatności i odrzucała wszystkie popupy i trackery, lub zajmij się tym sam!"
+  },
   "manifest_name": {
     "message": "Ghostery – Bloker reklam chroniący prywatność"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "Więcej informacji na temat $${0}."
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Never-Consent jest nieaktywny"
+  },
+  "never_consent_is_enabled": {
+    "message": "Never-Consent jest aktywny"
+  },
+  "no": {
+    "message": "Nie"
+  },
   "off": {
     "message": "Wył."
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "Wł."
+  },
+  "on_all_websites": {
+    "message": "dla wszystkich stron"
+  },
+  "on_this_website": {
+    "message": "na tej stronie"
   },
   "page_load_": {
     "message": "Ładowanie strony"
   },
   "privacy_policy": {
     "message": "polityka prywatności"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "Ochrona prywatności w tej witrynie"
   },
   "report_a_broken_page": {
     "message": "Zgłoś uszkodzoną stronę"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "Raport statystyk"
   },
-  "statistical_report___context": {
-    "message": "Raport statystyk",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "Zgłoś nowego tropiciela"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "Wtyczka Ghostery Browser jest zainstalowana na twojej przeglądarce, ale Ghosty ucina sobie małą drzemkę."
   },
+  "tired_of_cookie_popups_": {
+    "message": "MASZ JUŻ DOŚĆ PYTAŃ O CIASTECZKA?"
+  },
   "tracker_details": {
     "message": "Szczegóły tropiciela"
   },
   "trackers": {
     "message": "Tropiciele"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Ghostery wykrył trackery śledzące na tej stronie:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Podgląd trackerów"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Z aktywną wtyczką Ghostery możesz od razu przeglądać strony internetowe bezpieczniej, szybciej i z mniejszą ilością irytujących reklam."
+  },
+  "yes": {
+    "message": "Tak"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "Ustawienia te zawsze możesz zmienić w&nbsp;<strong>Panelu sterowania Ghostery</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "W każdej chwili możesz zmienić zdanie i zezwolić Ghostery na rozpoczęcie śledzenia trackerów w Twoim imieniu z poziomu ustawień Ghostery."

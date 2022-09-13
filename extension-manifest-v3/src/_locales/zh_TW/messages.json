@@ -6,6 +6,9 @@
   "accept_terms": {
     "message": "Accept terms"
   },
+  "ad_blocking": {
+    "message": "廣告封鎖"
+  },
   "additional_permissions_required": {
     "message": "Additional Permissions Required"
   },
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "All set! go with ghosty!"
   },
+  "anti_tracking": {
+    "message": "反跟蹤"
+  },
   "any_questions__anytime_": {
     "message": "Any questions? Anytime!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "Apply optimal privacy settings:"
   },
   "are_you_sure_": {
     "message": "Are you sure?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "返回"
   },
-  "block_ads": {
-    "message": "阻止廣告"
-  },
-  "block_annoyances": {
-    "message": "阻止煩惱"
-  },
-  "block_trackers": {
-    "message": "塊跟踪器"
-  },
   "blocked": {
     "message": "已封鎖"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "By using Never-Consent you let website owners know that you’re against tracking!"
   },
   "cancel": {
     "message": "取消"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Enable Ghostery to get started"
   },
+  "enable_never_consent_": {
+    "message": "Enable Never-Consent?"
+  },
   "essential": {
     "message": "基本內容",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send tracker information to whotracks.me. The tracker input enables Ghostery to provide real-time intel on trackers and protection to the entire Ghostery user community."
   },
+  "learn_more": {
+    "message": "瞭解更多"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Let Ghostery be your complete privacy advocate and reject all popups and tracking for you, or do it yourself!"
+  },
   "manifest_name": {
     "message": "Ghostery – 隱私廣告攔截器"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "More information on $${0}."
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Never-Consent is Disabled"
+  },
+  "never_consent_is_enabled": {
+    "message": "Never-Consent is Enabled"
+  },
+  "no": {
+    "message": "否"
+  },
   "off": {
     "message": "關閉"
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "啟動"
+  },
+  "on_all_websites": {
+    "message": "on all websites"
+  },
+  "on_this_website": {
+    "message": "on this website"
   },
   "page_load_": {
     "message": "網頁載入"
   },
   "privacy_policy": {
     "message": "privacy policy"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "本網站的隱私保護"
   },
   "report_a_broken_page": {
     "message": "報告已損毀的網頁"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "統計報表"
   },
-  "statistical_report___context": {
-    "message": "統計報表",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "提交一個新的網頁跟蹤器"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
   },
+  "tired_of_cookie_popups_": {
+    "message": "TIRED OF COOKIE POPUPS?"
+  },
   "tracker_details": {
     "message": "跟踪器詳細信息"
   },
   "trackers": {
     "message": "網頁跟蹤器"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Trackers detected by Ghostery on this website:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Trackers Preview"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+  },
+  "yes": {
+    "message": "是"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."

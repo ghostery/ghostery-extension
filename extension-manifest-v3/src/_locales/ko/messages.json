@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "$${0} 탐지됨",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "약관 동의"
+  },
+  "ad_blocking": {
+    "message": "광고 차단"
   },
   "additional_permissions_required": {
     "message": "추가 권한 필요"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "모두 설정되었습니다! Ghosty와 함께 시작해볼까요!"
   },
+  "anti_tracking": {
+    "message": "추적 방지 "
+  },
   "any_questions__anytime_": {
     "message": "질문이 있으십니까? 언제든지요!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "최적의 개인 정보 설정 적용:"
   },
   "are_you_sure_": {
     "message": "계속하시겠습니까?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "뒤로"
   },
-  "block_ads": {
-    "message": "광고 차단 "
-  },
-  "block_annoyances": {
-    "message": "방해 차단"
-  },
-  "block_trackers": {
-    "message": "트래커 차단"
-  },
   "blocked": {
     "message": "차단됨 "
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "동의하지 않음을 사용하면 웹사이트 소유자에게 추적에 반대한다는 것을 알릴 수 있습니다!"
   },
   "cancel": {
     "message": "취소 "
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "시작하려면 Ghostery를 활성화하십시오"
   },
+  "enable_never_consent_": {
+    "message": "동의하지 않음을 활성화하시겠습니까?"
+  },
   "essential": {
     "message": "필수 ",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "Ghostery는 트래커의 추적을 중단하고 사용자가 프로파일링되는 것을 방지하여 트래커가 사용자 개인정보를 데이터 브로커에게 판매하여 이익을 추구하지 못하게 합니다."
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Ghostery 옵션"
   },
   "ghostery_privacy_policy": {
     "message": "Ghostery 개인정보 취급방침"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "Ghostery는 트래커 정보를 whotracks.me로 전송하기로 결정한 모든 Ghostery 사용자의 작은 기여 덕분에 존재합니다 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 전체 Ghostery 사용자 커뮤니티를 보호할 수 있습니다."
   },
+  "learn_more": {
+    "message": "자세히 알아보기"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Ghostery가 귀하의 완전한 개인 정보 보호를 지원할 수 있게 하고 모든 팝업 및 추적을 거부하십시오. 또는 직접 실행할 수도 있습니다!"
+  },
   "manifest_name": {
     "message": "Ghostery – 개인정보 보호용 광고 차단기"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "자세한 내용은 $${0}(을)를 참조하십시오."
   },
+  "never_consent": {
+    "message": "동의하지 않음"
+  },
+  "never_consent_is_disabled": {
+    "message": "동의하지 않음이 비활성화됨"
+  },
+  "never_consent_is_enabled": {
+    "message": "동의하지 않음이 활성화됨"
+  },
+  "no": {
+    "message": "아니요"
+  },
   "off": {
     "message": "끄기 "
   },
+  "ok": {
+    "message": "확인 "
+  },
   "on": {
     "message": "켜기 "
+  },
+  "on_all_websites": {
+    "message": "모든 웹사이트에서"
+  },
+  "on_this_website": {
+    "message": "이 웹사이트에서"
   },
   "page_load_": {
     "message": "페이지 로드 "
   },
   "privacy_policy": {
     "message": "개인정보 취급방침"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "이 사이트에서 개인 정보 보호"
   },
   "report_a_broken_page": {
     "message": "깨진 페이지 보고 "
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "통계 보고서"
   },
-  "statistical_report___context": {
-    "message": "통계 보고서",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "새로운 트래커 제출 "
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "브라우저에 Ghostery 브라우저 확장이 설치되어 있지만 Ghosty가 낮잠을 자고 있군요."
   },
+  "tired_of_cookie_popups_": {
+    "message": "쿠키 팝업이 너무 많습니까?"
+  },
   "tracker_details": {
     "message": "트래커 세부 정보"
   },
   "trackers": {
     "message": "트래커 "
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "이 웹사이트에서 Ghostery가 탐지한 추적기:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "트래커 미리보기"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "사용자 인터페이스"
   },
   "welcome_to": {
     "message": "환영합니다"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Ghostery를 사용하면 웹을 즉시 보다 안전하고 빠르게 탐색할 수 있으며 성가신 광고도 줄어듭니다."
+  },
+  "yes": {
+    "message": "예 "
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "해당 설정은&nbsp;<strong>Ghostery 제어판</strong>에서 언제든지 변경할 수 있습니다."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "언제든지 마음을 바꾸어 Ghostery가 Ghostery 설정에서 트래커 추적을 시작하도록 할 수 있습니다."

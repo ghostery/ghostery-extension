@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "检测到 $${0} 个",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "接受条款"
+  },
+  "ad_blocking": {
+    "message": "广告拦截"
   },
   "additional_permissions_required": {
     "message": "需要额外的权限"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "一切就绪！ 使用 Ghosty！"
   },
+  "anti_tracking": {
+    "message": "反跟踪功能"
+  },
   "any_questions__anytime_": {
     "message": "有疑问？ 随时为您解答！"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "应用最佳隐私设置："
   },
   "are_you_sure_": {
     "message": "确定吗？"
@@ -42,17 +51,11 @@
   "back": {
     "message": "返回"
   },
-  "block_ads": {
-    "message": "拦截广告"
-  },
-  "block_annoyances": {
-    "message": "拦截烦人的东西"
-  },
-  "block_trackers": {
-    "message": "拦截跟踪器"
-  },
   "blocked": {
     "message": "已拦截"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "通过使用 Never-Consent，您可以让网站所有者知道您反对跟踪！"
   },
   "cancel": {
     "message": "取消"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "启用 Ghostery 以开始使用"
   },
+  "enable_never_consent_": {
+    "message": "启用 Never-Consent？"
+  },
   "essential": {
     "message": "基本",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "Ghostery 正在阻止跟踪器，防止他人分析您的用户特征并将您的个人信息出售给数据中介来牟利。"
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Ghostery 选项"
   },
   "ghostery_privacy_policy": {
     "message": "Ghostery 隐私政策"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "它的存在要归功于每个选择将跟踪器信息发送给 whotracks.me 的 Ghostery 用户的微小贡献。 跟踪器输入使 Ghostery 能够为整个 Ghostery 用户社区提供有关跟踪器的实时情报和保护。"
   },
+  "learn_more": {
+    "message": "了解详情"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "让 Ghostery 成为您的全面隐私权倡导者，并为您拒绝所有弹出窗口和跟踪，或者由您自己做主！"
+  },
   "manifest_name": {
     "message": "Ghostery – 隐私广告拦截工具"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "关于 ${0} 的更多信息。"
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Never-Consent 已禁用"
+  },
+  "never_consent_is_enabled": {
+    "message": "Never-Consent 已启用"
+  },
+  "no": {
+    "message": "否"
+  },
   "off": {
     "message": "关闭"
   },
+  "ok": {
+    "message": "确定"
+  },
   "on": {
     "message": "开启"
+  },
+  "on_all_websites": {
+    "message": "在所有网站上"
+  },
+  "on_this_website": {
+    "message": "在此网站上"
   },
   "page_load_": {
     "message": "网页加载"
   },
   "privacy_policy": {
     "message": "隐私政策"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "此网站上的隐私保护"
   },
   "report_a_broken_page": {
     "message": "报告崩溃页面"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "统计报告"
   },
-  "statistical_report___context": {
-    "message": "统计报告",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "提交新跟踪器"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "Ghostery 浏览器扩展程序已安装在您的浏览器中，但 Ghosty 暂未工作。"
   },
+  "tired_of_cookie_popups_": {
+    "message": "厌烦了 Cookie 弹出窗口？"
+  },
   "tracker_details": {
     "message": "跟踪器详情"
   },
   "trackers": {
     "message": "跟踪器"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Ghostery 在此网站上检测到的跟踪器：$${0}"
   },
   "trackers_preview": {
     "message": "跟踪器预览"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "用户界面"
   },
   "welcome_to": {
     "message": "欢迎使用"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "启用 Ghostery 后，您可以立即更安全、更快速地浏览网页，并减少恼人的广告。"
+  },
+  "yes": {
+    "message": "是"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "您可以随时在&nbsp;<strong>Ghostery 控制面板</strong>中更改这些设置。"
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "您可以随时改变主意，在 Ghostery 设置中启用 Ghostery 开始追踪跟踪器。"
