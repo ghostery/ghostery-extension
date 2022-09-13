@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "$${0} Gedetecteerd",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "Accepteer voorwaarden"
+  },
+  "ad_blocking": {
+    "message": "Advertentieblokkering"
   },
   "additional_permissions_required": {
     "message": "Extra vereiste toestemmingen"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "Alles klaar! ga met ghosty!"
   },
+  "anti_tracking": {
+    "message": "Anti-tracking"
+  },
   "any_questions__anytime_": {
     "message": "Nog vragen? Altijd!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "Pas optimale privacy-instellingen toe:"
   },
   "are_you_sure_": {
     "message": "Weet je het zeker?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "Terug"
   },
-  "block_ads": {
-    "message": "Blokkeer Ads"
-  },
-  "block_annoyances": {
-    "message": "Blokkeer Ergernissen"
-  },
-  "block_trackers": {
-    "message": "Blokkeer Trackers"
-  },
   "blocked": {
     "message": "Geblokkeerd"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "Door Nooit-Toestemming te gebruiken laat je website-eigenaren weten dat je tegen tracking bent!"
   },
   "cancel": {
     "message": "Annuleren"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Activeer Ghostery om te beginnen"
   },
+  "enable_never_consent_": {
+    "message": "Nooit-Toestemming inschakelen?"
+  },
   "essential": {
     "message": "Essentieel",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "Ghostery stopt trackers in hun sporen en voorkomt dat u wordt geprofileerd en uw persoonlijke informatie wordt verkocht aan data brokers voor hun eigen winst."
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Ghostery Opties"
   },
   "ghostery_privacy_policy": {
     "message": "Privacybeleid van Ghostery"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "Het bestaat dankzij micro-bijdragen van elke Ghostery gebruiker die ervoor kiest om tracker informatie te sturen naar whotracks.me. De tracker input stelt Ghostery in staat om real-time informatie over trackers en bescherming te bieden aan de gehele Ghostery gebruikersgemeenschap."
   },
+  "learn_more": {
+    "message": "Meer Weten"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Laat Ghostery je volledige privacy beschermer zijn en alle popups en tracking voor je weigeren, of doe het zelf!"
+  },
   "manifest_name": {
     "message": "Ghostery – Privacy Ad Blocker"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "Meer informatie over $${0}."
   },
+  "never_consent": {
+    "message": "Nooit-Toestemming"
+  },
+  "never_consent_is_disabled": {
+    "message": "Nooit-Toestemming is Uitgeschakeld"
+  },
+  "never_consent_is_enabled": {
+    "message": "Nooit-Toestemming is Ingeschakeld"
+  },
+  "no": {
+    "message": "Nee"
+  },
   "off": {
     "message": "Uit"
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "Aan"
+  },
+  "on_all_websites": {
+    "message": "op alle websites"
+  },
+  "on_this_website": {
+    "message": "op deze website"
   },
   "page_load_": {
     "message": "Pagina Laden"
   },
   "privacy_policy": {
     "message": "Privacybeleid"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "Privacybescherming op deze website"
   },
   "report_a_broken_page": {
     "message": "Meld een verbroken pagina"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "Statistisch Verslag"
   },
-  "statistical_report___context": {
-    "message": "Statistisch Verslag",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "Geef een nieuwe tracker door"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "De Ghostery Browser Extensie is geïnstalleerd in uw browser maar Ghostery doet een klein dutje."
   },
+  "tired_of_cookie_popups_": {
+    "message": "MOE VAN COOKIE POPUPS?"
+  },
   "tracker_details": {
     "message": "Tracker Details"
   },
   "trackers": {
     "message": "Trackers"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Trackers gedetecteerd door Ghostery op deze website:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Preview trackers"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "Gebruikersinterface"
   },
   "welcome_to": {
     "message": "Welkom bij"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Met Ghostery ingeschakeld bladert u direct veiliger, sneller en met minder vervelende advertenties over het web."
+  },
+  "yes": {
+    "message": "Ja"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "Je kunt deze instellingen altijd wijzigen in het&nbsp;<strong>Ghostery configuratiescherm</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "U kunt op elk moment van gedachten veranderen en Ghostery inschakelen om de trackers voor u te gaan volgen in Ghostery instellingen."

@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "$${0} detectados",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "Aceptar términos"
+  },
+  "ad_blocking": {
+    "message": "Bloqueador de anuncios"
   },
   "additional_permissions_required": {
     "message": "Se requieren permisos adicionales"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "¡Todo listo! vamos con ghosty!"
   },
+  "anti_tracking": {
+    "message": "Antirrastreadores"
+  },
   "any_questions__anytime_": {
     "message": "¿Preguntas? ¡Cuando quieras!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "Aplicar ajustes de privacidad óptimos:"
   },
   "are_you_sure_": {
     "message": "¿Seguro?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "Atrás"
   },
-  "block_ads": {
-    "message": "Bloquear anuncios"
-  },
-  "block_annoyances": {
-    "message": "Bloquear distracciones"
-  },
-  "block_trackers": {
-    "message": "Bloquear rastreadores"
-  },
   "blocked": {
     "message": "Bloqueado"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "Al usar Never-Consent, les haces saber a los propietarios de sitios web que te opones al seguimiento."
   },
   "cancel": {
     "message": "Cancelar"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Activa Ghostery para empezar"
   },
+  "enable_never_consent_": {
+    "message": "¿Habilitar Never-Consent?"
+  },
   "essential": {
     "message": "Esencial",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "Ghostery les para los pies a los rastreadores evitando que realicen perfiles sobre ti y que tu información personal se venda a intermediarios de datos para su propio beneficio."
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Opciones de Ghostery"
   },
   "ghostery_privacy_policy": {
     "message": "Política de privacidad de Ghostery"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "Existe gracias a las microcontribuciones de aquellos usuarios de Ghostery que eligen enviar información de seguimiento a whotracks.me. La entrada del rastreador permite a Ghostery proporcionar información en tiempo real sobre rastreadores y protección a toda la comunidad de usuarios de Ghostery."
   },
+  "learn_more": {
+    "message": "Más información"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Permite que Ghostery sea tu defensor de la privacidad y rechace todas las ventanas emergentes y el seguimiento... ¡o hazlo tú personalmente!"
+  },
   "manifest_name": {
     "message": "Ghostery – Bloqueador de anuncios para privacidad"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "Más información sobre $${0}."
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Never-Consent está desactivado"
+  },
+  "never_consent_is_enabled": {
+    "message": "Never-Consent está activado"
+  },
+  "no": {
+    "message": "No"
+  },
   "off": {
     "message": "No"
   },
+  "ok": {
+    "message": "Vale"
+  },
   "on": {
     "message": "Sí"
+  },
+  "on_all_websites": {
+    "message": "en todos los sitios web"
+  },
+  "on_this_website": {
+    "message": "en este sitio web"
   },
   "page_load_": {
     "message": "Carga de página"
   },
   "privacy_policy": {
     "message": "política de privacidad"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "Protección de la privacidad en este sitio"
   },
   "report_a_broken_page": {
     "message": "Informar página rota"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "Informe estadístico"
   },
-  "statistical_report___context": {
-    "message": "Informe estadístico",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "Enviar nuevo rastreador"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "La extensión del navegador Ghostery está instalada en su navegador, pero Ghosty se está echando una siestecita."
   },
+  "tired_of_cookie_popups_": {
+    "message": "¿TE HAS CANSADO DE LAS VENTANAS SOBRE LAS COOKIES?"
+  },
   "tracker_details": {
     "message": "Detalles del rastreador"
   },
   "trackers": {
     "message": "Rastreadores"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Rastreadores detectados por Ghostery en esta página web:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Vista previa de rastreadores"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "Interfaz de usuario"
   },
   "welcome_to": {
     "message": "Te damos la bienvenida a"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Al habilitar Ghostery, puedes navegar por la web de manera más segura, más rápida y con anuncios menos molestos instantáneamente."
+  },
+  "yes": {
+    "message": "Sí"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "Siempre puedes cambiar estos ajustes en el&nbsp;<strong>panel de control de Ghostery</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "Si cambias de opinión en cualquier momento, también puedes hacer que Ghostery comience a vigilar a los rastreadores por ti en la configuración de Ghostery."

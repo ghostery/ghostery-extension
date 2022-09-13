@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "Обнаружено $${0}",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "Принять условия"
+  },
+  "ad_blocking": {
+    "message": "Блокировка рекламы"
   },
   "additional_permissions_required": {
     "message": "Требуются дополнительные разрешения"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "Все готово! использовать призрака!"
   },
+  "anti_tracking": {
+    "message": "Анти-трекинг"
+  },
   "any_questions__anytime_": {
     "message": "Есть вопросы? Всегда пожалуйста!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "Применить оптимальные настройки конфиденциальности:"
   },
   "are_you_sure_": {
     "message": "Вы уверены?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "Назад"
   },
-  "block_ads": {
-    "message": "Заблокировать рекламу"
-  },
-  "block_annoyances": {
-    "message": "Блокировать помехи"
-  },
-  "block_trackers": {
-    "message": "Блокировать трекеры"
-  },
   "blocked": {
     "message": "Заблокированные"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "Используя функцию Never-Consent, вы сообщаете владельцам веб-сайтов, что вы против отслеживания!"
   },
   "cancel": {
     "message": "Отмена"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Включите Ghostery, чтобы начать работу"
   },
+  "enable_never_consent_": {
+    "message": "Активировать функцию Never-Consent?"
+  },
   "essential": {
     "message": "Важное",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "Ghostery блокирует трекеры и предотвращает профилирование и продажу ваших данных брокерам в коммерческих целях."
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Настройки Ghostery"
   },
   "ghostery_privacy_policy": {
     "message": "Политика конфиденциальности Ghostery"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего информацию о трекере на сайт whotracks.me. Данные с трекеров позволяют Ghostery оперативно предоставлять информацию о трекерах и защите всему сообществу Ghostery."
   },
+  "learn_more": {
+    "message": "Подробнее"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Позвольте Ghostery стать вашим комплексным защитником конфиденциальности и отклонять за вас все всплывающие окна и отслеживание или делайте это самостоятельно!"
+  },
   "manifest_name": {
     "message": "Ghostery – Конфиденциальный Блокировщик Рекламы"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "Дополнительная информация о $${0}."
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Функция Never-Consent отключена"
+  },
+  "never_consent_is_enabled": {
+    "message": "Функция Never-Consent включена"
+  },
+  "no": {
+    "message": "Нет"
+  },
   "off": {
     "message": "Выкл"
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "Вкл"
+  },
+  "on_all_websites": {
+    "message": "на всех веб-сайтах"
+  },
+  "on_this_website": {
+    "message": "на этом веб-сайте"
   },
   "page_load_": {
     "message": "Загрузка страницы"
   },
   "privacy_policy": {
     "message": "политика конфиденциальности"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "Защита конфиденциальности на этом сайте"
   },
   "report_a_broken_page": {
     "message": "Сообщить о поврежденной странице"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "Статистический отчет"
   },
-  "statistical_report___context": {
-    "message": "Статистический отчет",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "Отправить новый трекер"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "Расширение Ghostery Browser Extension установлено в вашем браузере, но Ghosty пока дремлет."
   },
+  "tired_of_cookie_popups_": {
+    "message": "УСТАЛИ ОТ ВСПЛЫВАЮЩИХ УВЕДОМЛЕНИЙ О ФАЙЛАХ COOKIE?"
+  },
   "tracker_details": {
     "message": "Детали трекера"
   },
   "trackers": {
     "message": "Трекеры"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Трекеры, обнаруженные Ghostery на этом сайте:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Предварительный просмотр трекеров"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "Интерфейс пользователя"
   },
   "welcome_to": {
     "message": "Добро пожаловать в"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "С включенным Ghostery вы мгновенно переходите на более безопасный, быстрый и менее раздражающий рекламой веб-браузер."
+  },
+  "yes": {
+    "message": "Да"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "Вы всегда можете изменить эти настройки в&nbsp;<strong>панели управления Ghostery</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "Вы можете передумать в любое время и разрешить Ghostery начать отслеживать трекеры за вас в настройках Ghostery."

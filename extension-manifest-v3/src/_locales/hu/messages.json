@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "$${0} észlelve",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "Feltételek elfogadása"
+  },
+  "ad_blocking": {
+    "message": "Hirdetésblokkolás"
   },
   "additional_permissions_required": {
     "message": "További engedélyek szükségesek"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "Minden kész! Legyen a Ghostly az ön társa!"
   },
+  "anti_tracking": {
+    "message": "Követés elleni védelem"
+  },
   "any_questions__anytime_": {
     "message": "Kérdése van? Csak bátran!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "Optimális adatvédelmi beállítások alkalmazása:"
   },
   "are_you_sure_": {
     "message": "Biztos benne?"
@@ -42,17 +51,11 @@
   "back": {
     "message": "Vissza"
   },
-  "block_ads": {
-    "message": "Hirdetések blokkolása"
-  },
-  "block_annoyances": {
-    "message": "Zavaró dolgok blokkolása"
-  },
-  "block_trackers": {
-    "message": "Trackerek blokkolása"
-  },
   "blocked": {
     "message": "Blokkolva"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "A Never-Consent (sohe nem egyezek bele) használatával tudatja a weboldal tulajdonosokkal, hogy ön ellenzi a nyomon követést!"
   },
   "cancel": {
     "message": "Mégsem"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Engedélyezze a Ghostery-t a kezdéshez"
   },
+  "enable_never_consent_": {
+    "message": "Engedélyezi a Never-Consent használatát?"
+  },
   "essential": {
     "message": "Alapvető",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "A Ghostery hatástalanítja a nyomkövetőket, és megakadályozza, hogy profilozzák önt és személyes adatait eladják adatbrókereknek a saját profitjuk érdekében."
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Ghostery lehetőségek"
   },
   "ghostery_privacy_policy": {
     "message": "Ghostery Adatvédelmi Szabályzat"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "A Ghostery minden olyan Ghostery-felhasználó mikro-hozzájárulásának köszönhetően létezik, aki úgy dönt, hogy nyomonkövető információkat küld a whotracks.me-nek. A nyomonkövető adatok átadása lehetővé teszi a Ghostery számára, hogy valós idejű információkat szolgáltasson a nyomonkövetőkről és a védelemről a teljes Ghostery felhasználói közösség számára."
   },
+  "learn_more": {
+    "message": "Tudjon meg többet"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Hagyja, hogy a Ghostery legyen az ön teljeskörű adatvédelmi szószólója, és utasítson el minden felugró ablakot és nyomkövetést ön helyett, vagy tegye meg ön manuálisan!"
+  },
   "manifest_name": {
     "message": "Ghostery – Adatavédelmi Reklámblokkoló"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "További információ a $$${0}-ról."
   },
+  "never_consent": {
+    "message": "Never-Consent"
+  },
+  "never_consent_is_disabled": {
+    "message": "Never-Consent letiltva"
+  },
+  "never_consent_is_enabled": {
+    "message": "Never-Consent engedélyezve"
+  },
+  "no": {
+    "message": "Nem"
+  },
   "off": {
     "message": "Ki"
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "Be"
+  },
+  "on_all_websites": {
+    "message": "az összes oldalon"
+  },
+  "on_this_website": {
+    "message": "ezen az oldalon"
   },
   "page_load_": {
     "message": "Oldal betöltése"
   },
   "privacy_policy": {
     "message": "Adatvédelmi Szabályzat"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "Adatvédelem ezen az oldalon"
   },
   "report_a_broken_page": {
     "message": "Hibás oldal jelentése"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "Statisztikai jelentés"
   },
-  "statistical_report___context": {
-    "message": "Statisztikai jelentés",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "Új tracker beküldése"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "A Ghostery böngészőbővítmény telepítve van a böngészőjébe, de Ghosty éppen szundikál."
   },
+  "tired_of_cookie_popups_": {
+    "message": "ELEGE VAN A COOKIE FELUGRÓ ABLAKAIBÓL?"
+  },
   "tracker_details": {
     "message": "Tracker adatok"
   },
   "trackers": {
     "message": "Trackerek"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "A Ghostery által észlelt nyomkövetők ezen a weboldalon:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "Nyomonkövetők előnézete"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "Felhasználói kezelőfelület"
   },
   "welcome_to": {
     "message": "Üdvözöljük"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "A Ghostery engedélyezésével azonnal biztonságosabban, gyorsabban és kevesebb idegesítő hirdetéssel böngészhet a weben."
+  },
+  "yes": {
+    "message": "Igen"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "Ezeket a beállításokat bármikor megváltoztathatja a&nbsp;<strong>Ghostery vezérlőpultban</strong>."
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "Bármikor meggondolhatja magát, és engedélyezheti a Ghostery beállításaiban, hogy a Ghostery elkezdje a nyomonkövetők követését."

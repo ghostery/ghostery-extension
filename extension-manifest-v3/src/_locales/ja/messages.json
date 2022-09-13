@@ -1,10 +1,13 @@
 {
   "@_0__detected": {
-    "message": "$${0} Detected",
+    "message": "$${0}が検出されました",
     "description": "Number of trackers detected by Ghostery"
   },
   "accept_terms": {
     "message": "条件を受け入れる"
+  },
+  "ad_blocking": {
+    "message": "広告ブロッキング"
   },
   "additional_permissions_required": {
     "message": "必要な追加パーミッション"
@@ -26,8 +29,14 @@
   "all_set__go_with_ghosty_": {
     "message": "準備万端! ゴーストと立ち向かいましょう！"
   },
+  "anti_tracking": {
+    "message": "追跡防止"
+  },
   "any_questions__anytime_": {
     "message": "何か質問は？ いつでもOK!"
+  },
+  "apply_optimal_privacy_settings_": {
+    "message": "最適なプライバシー設定を適用:"
   },
   "are_you_sure_": {
     "message": "本当に行いますか？"
@@ -42,17 +51,11 @@
   "back": {
     "message": "戻る"
   },
-  "block_ads": {
-    "message": "広告をブロック"
-  },
-  "block_annoyances": {
-    "message": "悩みの種をブロックする"
-  },
-  "block_trackers": {
-    "message": "トラッカーをブロックする"
-  },
   "blocked": {
     "message": "ブロックされた対象"
+  },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "決して同意しないを用いることで、皆さんは追跡に同意しないことをウェブサイトのオーナーに伝えることができます!"
   },
   "cancel": {
     "message": "キャンセル"
@@ -101,6 +104,9 @@
   "enable_ghostery_to_get_started": {
     "message": "Ghosteryを有効にして開始する"
   },
+  "enable_never_consent_": {
+    "message": "決して同意しないを有効化しますか?"
+  },
   "essential": {
     "message": "必需",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
@@ -125,7 +131,7 @@
     "message": "Ghosteryはトラッカーの追跡を止め、あなたがプロファイリングされ、あなたの個人情報がデータブローカーに売られ、利益を得ることを防いでいます。"
   },
   "ghostery_options": {
-    "message": "Ghostery Options"
+    "message": "Ghosteryのオプション"
   },
   "ghostery_privacy_policy": {
     "message": "Ghosteryプライバシー・ポリシー"
@@ -140,6 +146,12 @@
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
     "message": "これは、whotracks.meにトラッカー情報を送信することを選択したGhosteryユーザー全員による、少額の寄付のおかげで存在しています。 トラッカーの入力により、Ghosteryはトラッカーと保護に関するリアルタイムの情報をGhosteryのユーザーコミュニティ全体に提供することができます。"
   },
+  "learn_more": {
+    "message": "詳細はこちら"
+  },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Ghosteryをプライバシーの完璧な守護者にして、ポップアップやお客様の追跡を全て拒否するか、ご自身で手動設定しましょう!"
+  },
   "manifest_name": {
     "message": "Ghostery – プライバシー広告ブロッカー"
   },
@@ -153,20 +165,38 @@
   "more_information_on_@_0__": {
     "message": "詳細は$${0}で。"
   },
+  "never_consent": {
+    "message": "決して同意しない"
+  },
+  "never_consent_is_disabled": {
+    "message": "決して同意しないが無効化されています"
+  },
+  "never_consent_is_enabled": {
+    "message": "決して同意しないが有効化されています"
+  },
+  "no": {
+    "message": "いいえ"
+  },
   "off": {
     "message": "オフ"
   },
+  "ok": {
+    "message": "OK"
+  },
   "on": {
     "message": "オン"
+  },
+  "on_all_websites": {
+    "message": "すべてのウェブサイトに対して"
+  },
+  "on_this_website": {
+    "message": "このウェブサイトに対して"
   },
   "page_load_": {
     "message": "ページのロード"
   },
   "privacy_policy": {
     "message": "プライバシー・ポリシー"
-  },
-  "privacy_protection_on_this_site": {
-    "message": "このサイトのプライバシー保護"
   },
   "report_a_broken_page": {
     "message": "区切られたページを報告"
@@ -188,21 +218,23 @@
   "statistical_report": {
     "message": "統計レポート"
   },
-  "statistical_report___context": {
-    "message": "統計レポート",
-    "description": "desc"
-  },
   "submit_a_new_tracker": {
     "message": "新しいトラッカーを提出"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "Ghostery Browser Extensionはブラウザにインストールされていますが、Ghostyは休止中です。"
   },
+  "tired_of_cookie_popups_": {
+    "message": "クッキーのポップアップにうんざりですか?"
+  },
   "tracker_details": {
     "message": "トラッカーの詳細"
   },
   "trackers": {
     "message": "トラッカー"
+  },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "このウェブサイト上でGhosteryがトラッカーを検出:&nbsp;$${0}"
   },
   "trackers_preview": {
     "message": "トラッカーのプレビュー"
@@ -215,7 +247,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "user_interface": {
-    "message": "User interface"
+    "message": "ユーザーインターフェース"
   },
   "welcome_to": {
     "message": "ようこそ！"
@@ -228,6 +260,12 @@
   },
   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Ghosteryを有効にすると、より安全に、より速く、そして迷惑な広告をより減らす形で、ウェブを瞬時にブラウズすることができます。"
+  },
+  "yes": {
+    "message": "はい"
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "&nbsp;<strong>Ghostery制御パネル</strong>でこれら設定をいつでも変更できます。"
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
     "message": "お客様はいつでも考えが変わったときに、Ghosteryの設定によって、お客様へのトラッカーの追跡開始を有効にすることができます。"
