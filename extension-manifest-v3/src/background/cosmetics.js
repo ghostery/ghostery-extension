@@ -100,7 +100,10 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
   const specificResponses = [];
 
   Object.keys(adblockerEngines).forEach((engineName) => {
-    if (adblockerEngines[engineName].isEnabled === false) {
+    if (
+      adblockerEngines[engineName].isEnabled === false ||
+      engineName === 'annoyances' // Ensure Never-Consent has a chance to opt-out from tracking
+    ) {
       return;
     }
 
