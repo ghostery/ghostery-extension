@@ -14,7 +14,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import Tooltip from '../../../shared-components/Tooltip';
 
 /**
  * @class Implements rendering and interaction for Common feature icon toggles
@@ -29,55 +28,6 @@ class CommonFeature extends React.Component {
 
 	static _getStatus(active) {
 		return active ? t('on') : t('off');
-	}
-
-	static _getTooltipBodyText(active, isTooltipBody, type) {
-		if (!isTooltipBody) return false;
-
-		if (active) {
-			switch (type) {
-				case 'ad_block':
-					return t('tooltip_ad_block_on');
-				case 'autoconsent':
-					return t('tooltip_autoconsent_on');
-				case 'anti_track':
-					return t('tooltip_anti_track_on');
-				case 'smart_block':
-					return t('tooltip_smart_block_on');
-				default:
-					return false;
-			}
-		} else {
-			switch (type) {
-				case 'ad_block':
-					return t('ad_blocking_DESC');
-				case 'autoconsent':
-					return t('autoconsent_DESC');
-				case 'anti_track':
-					return t('anti_tracking_DESC');
-				case 'smart_block':
-					return t('smart_blocking_DESC');
-				default:
-					return false;
-			}
-		}
-	}
-
-	static _getTooltipHeaderText(isTooltipHeader, type) {
-		if (!isTooltipHeader) return false;
-
-		switch (type) {
-			case 'ad_block':
-				return t('enhanced_ad_blocking');
-			case 'autoconsent':
-				return t('enhanced_autoconsent');
-			case 'anti_track':
-				return t('enhanced_anti_tracking');
-			case 'smart_block':
-				return t('smart_blocking');
-			default:
-				return false;
-		}
 	}
 
 	static _getAlertText(active, type) {
@@ -121,9 +71,6 @@ class CommonFeature extends React.Component {
 			isSmaller,
 			isCondensed,
 			isTiny,
-			isTooltipBody,
-			isTooltipHeader,
-			tooltipPosition,
 			type,
 		} = this.props;
 
@@ -155,14 +102,7 @@ class CommonFeature extends React.Component {
 		return (
 			<div className={commonFeatureClassNames} onClick={this.clickCommonFeature}>
 				<div className="CommonFeature__status">{CommonFeature._getStatus(active)}</div>
-				<div className={iconClassNames}>
-					<Tooltip
-						header={CommonFeature._getTooltipHeaderText(isTooltipHeader, type)}
-						body={CommonFeature._getTooltipBodyText(active, isTooltipBody, type)}
-						position={tooltipPosition}
-						// className={isTiny ? 'CommonFeature--tooltipUp' : ''}
-					/>
-				</div>
+				<div className={iconClassNames} />
 				<div className="CommonFeature__feature-name">
 					{featureName}
 				</div>
@@ -177,6 +117,7 @@ CommonFeature.propTypes = {
 		'anti_track',
 		'ad_block',
 		'smart_block',
+		'autoconsent',
 	]).isRequired,
 	active: PropTypes.bool,
 	commonInactive: PropTypes.oneOfType([
@@ -185,17 +126,11 @@ CommonFeature.propTypes = {
 	]).isRequired,
 	isSmaller: PropTypes.bool.isRequired,
 	isCondensed: PropTypes.bool,
-	isTooltipHeader: PropTypes.bool,
-	isTooltipBody: PropTypes.bool,
-	tooltipPosition: PropTypes.string,
 };
 
 CommonFeature.defaultProps = {
 	active: true,
 	isCondensed: false,
-	isTooltipHeader: false,
-	isTooltipBody: false,
-	tooltipPosition: '',
 };
 
 export default CommonFeature;

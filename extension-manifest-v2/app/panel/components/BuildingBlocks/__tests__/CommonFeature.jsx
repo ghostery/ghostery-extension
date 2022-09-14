@@ -43,9 +43,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive={false}
 						isSmaller={false}
 						isCondensed={false}
-						isTooltipHeader={false}
-						isTooltipBody={false}
-						tooltipPosition=""
 					/>
 					<CommonFeature
 						clickButton={() => {}}
@@ -54,9 +51,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive={false}
 						isSmaller={false}
 						isCondensed={false}
-						isTooltipHeader={false}
-						isTooltipBody={false}
-						tooltipPosition=""
 					/>
 				</div>
 			).toJSON();
@@ -80,9 +74,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive
 						isSmaller={false}
 						isCondensed={false}
-						isTooltipHeader={false}
-						isTooltipBody={false}
-						tooltipPosition=""
 					/>
 					<CommonFeature
 						clickButton={() => {}}
@@ -91,9 +82,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive
 						isSmaller={false}
 						isCondensed
-						isTooltipHeader
-						isTooltipBody
-						tooltipPosition="top"
 					/>
 				</div>
 			).toJSON();
@@ -110,9 +98,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive
 						isSmaller
 						isCondensed
-						isTooltipHeader
-						isTooltipBody
-						tooltipPosition="right"
 					/>
 					<CommonFeature
 						clickButton={() => {}}
@@ -121,9 +106,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive
 						isSmaller
 						isCondensed
-						isTooltipHeader
-						isTooltipBody
-						tooltipPosition="top"
 					/>
 					<CommonFeature
 						clickButton={() => {}}
@@ -132,9 +114,6 @@ describe('app/panel/components/CommonFeature.jsx', () => {
 						commonInactive
 						isSmaller
 						isCondensed
-						isTooltipHeader
-						isTooltipBody
-						tooltipPosition="top"
 					/>
 				</div>
 			).toJSON();

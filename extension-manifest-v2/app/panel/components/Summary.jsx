@@ -659,9 +659,6 @@ class Summary extends React.Component {
 					commonInactive={this._isCommonInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
-					isTooltipHeader={is_expert}
-					isTooltipBody={!isCondensed}
-					tooltipPosition={isCondensed ? 'right' : 'top'}
 					current_theme={current_theme}
 				/>
 			</div>
@@ -685,9 +682,6 @@ class Summary extends React.Component {
 					commonInactive={this._isCommonInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={is_expert && isCondensed}
-					isTooltipHeader={is_expert}
-					isTooltipBody={!isCondensed}
-					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
 					current_theme={current_theme}
 				/>
 			</div>
@@ -711,9 +705,6 @@ class Summary extends React.Component {
 					commonInactive={this._isCommonInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
-					isTooltipHeader={is_expert}
-					isTooltipBody={!isCondensed}
-					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
 					current_theme={current_theme}
 				/>
 			</div>
