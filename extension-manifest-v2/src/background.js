@@ -763,7 +763,14 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'update_database') {
 		updateDBs().then(async (result) => {
-			await common.modules.adblocker.background.adblocker.update();
+			if (common.modules.adblocker.isEnabled) {
+				await common.modules.adblocker.background.adblocker.update();
+			} else {
+				// Note: Adblocking is disabled in the UI. We cannot force an update when
+				// the module is not loaded. Once the user enables adblocking, the adblocker
+				// will automatically fetch the latest lists, so it will "lazily" update.
+				log('Cannot force adblocker list update since the adblocker is disable (it will check updates once reenabled).');
+			}
 			callback(result);
 		});
 		return true;
