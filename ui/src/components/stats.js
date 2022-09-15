@@ -59,6 +59,7 @@ export default define({
        padding: 0;
        list-style-type: none;
        list-style: none none inside;
+       white-space: nowrap;
      }
 
      .category {
