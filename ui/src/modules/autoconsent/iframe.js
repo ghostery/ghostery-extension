@@ -15,9 +15,7 @@ export function showIframe(url) {
   const template = document.createElement('template');
 
   template.innerHTML = `
-    <iframe src="${`${url}?host=${encodeURIComponent(
-      window.location.host,
-    )}`}" frameborder="0"></iframe>
+    <iframe src="${url}" frameborder="0"></iframe>
     <style>
       :host {
         all: initial;

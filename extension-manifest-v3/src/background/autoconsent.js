@@ -15,12 +15,13 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 
 async function initialize(msg, tabId, frameId) {
-  const { dnrRules, autoconsent } = await store.resolve(store.get(Options));
+  const { dnrRules, autoconsent } = await store.resolve(Options);
   const url = new URL(msg.url);
 
   if (dnrRules.annoyances && !autoconsent.disallowed.includes(url.hostname)) {
     const optOut =
-      autoconsent.all || autoconsent.allowed.includes(url.hostname);
+      autoconsent.all ||
+      autoconsent.allowed.some((h) => url.hostname.includes(h));
 
     chrome.tabs.sendMessage(
       tabId,
@@ -75,6 +76,22 @@ async function evalCode(code, id, tabId, frameId) {
   );
 }
 
+async function openIframe(msg, tabId) {
+  const url = new URL(msg.url);
+  const { autoconsent } = await store.resolve(Options);
+
+  if (
+    !autoconsent.all &&
+    autoconsent.allowed.every((h) => !url.hostname.includes(h))
+  ) {
+    chrome.tabs.sendMessage(
+      tabId,
+      { action: 'autoconsent', type: 'openIframe' },
+      { frameId: 0 },
+    );
+  }
+}
+
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action !== 'autoconsent') return;
   if (!sender.tab) return;
@@ -87,6 +104,9 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       return initialize(msg, tabId, frameId);
     case 'eval':
       return evalCode(msg.code, msg.id, tabId, frameId);
+    case 'cmpDetected':
+      openIframe(msg, tabId);
+      return false;
     default:
       break;
   }

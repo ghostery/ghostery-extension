@@ -29,7 +29,7 @@ async function initialize(msg, tabId, frameId) {
 		!autoconsent_blacklist?.includes(url.hostname) &&
 		!site_whitelist.includes(url.hostname.replace(/^www\./, ''))
 	) {
-		const optOut = autoconsent_whitelist?.includes(url.hostname) ?? true;
+		const optOut = autoconsent_whitelist?.some(h => url.hostname.includes(h)) ?? true;
 
 		chrome.tabs.sendMessage(
 			tabId,
@@ -79,6 +79,19 @@ async function evalCode(code, id, tabId, frameId) {
 	);
 }
 
+function openIframe(msg, tabId) {
+	const url = new URL(msg.url);
+	const { autoconsent_whitelist } = conf;
+
+	if (autoconsent_whitelist?.every(h => !url.hostname.includes(h))) {
+		chrome.tabs.sendMessage(
+			tabId,
+			{ action: 'autoconsent', type: 'openIframe' },
+			{ frameId: 0 },
+		);
+	}
+}
+
 chrome.runtime.onMessage.addListener((msg, sender) => {
 	if (msg.action !== 'autoconsent') return false;
 	if (!sender.tab) return false;
@@ -91,6 +104,9 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 			return initialize(msg, tabId, frameId);
 		case 'eval':
 			return evalCode(msg.code, msg.id, tabId, frameId);
+		case 'cmpDetected':
+			openIframe(msg, tabId);
+			return false;
 		default:
 			return false;
 	}

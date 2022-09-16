@@ -14,7 +14,7 @@ import Options from '/store/options.js';
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 (async function onboarding() {
-  const options = await store.resolve(store.get(Options));
+  const options = await store.resolve(Options);
   const now = Date.now();
 
   if (

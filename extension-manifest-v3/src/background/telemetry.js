@@ -51,7 +51,7 @@ const loadStorage = async () => {
 };
 
 const getConf = async () => {
-  const options = await store.resolve(store.get(Options));
+  const options = await store.resolve(Options);
   const install_date = new Date(options.onboarding.shownAt)
     .toISOString()
     .split('T')[0];

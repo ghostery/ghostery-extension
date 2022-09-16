@@ -12,23 +12,24 @@
 import AutoConsent from '@duckduckgo/autoconsent';
 import { showIframe } from '@ghostery/ui/autoconsent/iframe';
 
-let watchMode = false;
+const consent = new AutoConsent(msg => chrome.runtime.sendMessage(
+	{ ...msg, action: 'autoconsent' },
+));
 
-const consent = new AutoConsent((msg) => {
-	if (watchMode && msg.type === 'popupFound') {
-		watchMode = false;
-		showIframe(chrome.runtime.getURL('app/templates/autoconsent.html'));
-	}
-
-	return chrome.runtime.sendMessage(
-		{ ...msg, action: 'autoconsent' },
-	);
-});
-
+let shownIframe = false;
 chrome.runtime.onMessage.addListener((msg) => {
 	if (msg.action === 'autoconsent') {
-		if (msg.type === 'initResp') {
-			watchMode = !msg.config.autoAction;
+		if (msg.type === 'openIframe') {
+			if (shownIframe) return false;
+
+			showIframe(chrome.runtime.getURL(
+				`app/templates/autoconsent.html?host=${encodeURIComponent(
+					window.location.host.replace(/^www\./, ''),
+				)}`
+			));
+			shownIframe = true;
+
+			return false;
 		}
 
 		return Promise.resolve(consent.receiveMessageCallback(msg));

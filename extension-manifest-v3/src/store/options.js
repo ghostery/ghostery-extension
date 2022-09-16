@@ -24,8 +24,8 @@ const Options = {
   ),
   autoconsent: {
     all: false,
-    allowed: [''],
-    disallowed: [''],
+    allowed: [String],
+    disallowed: [String],
   },
   trackerWheelDisabled: false,
   wtmSerpReport: true,
@@ -111,7 +111,7 @@ export async function observe(property, fn) {
   observers.add(wrapperFn);
 
   // Run for the first time with the current options
-  const options = await store.resolve(store.get(Options));
+  const options = await store.resolve(Options);
   wrapperFn(options);
 
   // Return unobserve function
