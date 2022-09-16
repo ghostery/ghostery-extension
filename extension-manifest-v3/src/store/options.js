@@ -11,11 +11,62 @@
 
 import { store } from 'hybrids';
 
-export const DNR_RULES_LIST = chrome.runtime
-  .getManifest()
-  .declarative_net_request.rule_resources.map((r) => r.id);
+const manifest = chrome.runtime.getManifest();
 
+export const DNR_RULES_LIST =
+  manifest.declarative_net_request.rule_resources.map((r) => r.id);
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+
+async function migrateOptions() {
+  const options = {};
+
+  try {
+    // Only Chrome uses version 3 in the manifest,
+    // so it is a good condition to check if we are in Chrome
+    if (manifest.version === 3) {
+      const storage = await chrome.storage.local.get(null);
+
+      // Proceed if the storage contains data from v2
+      if ('version_history' in storage) {
+        options.dnrRules = {};
+        options.dnrRules.ads = storage.enable_ad_block || false;
+        options.dnrRules.tracking = storage.enable_anti_tracking || false;
+        options.dnrRules.annoyances = storage.enable_autoconsent || false;
+
+        options.onboarding = {
+          done: storage.setup_complete || storage.setup_skip || false,
+          shownAt: storage.setup_timestamp || 0,
+        };
+        options.terms = storage.setup_complete || false;
+        options.wtmSerpReport = storage.enable_wtm_serp_report || false;
+
+        options.autoconsent = {
+          all: !storage.autoconsent_whitelist,
+          allowed: storage.autoconsent_whitelist || [],
+          disallowed: storage.autoconsent_blacklist || [],
+        };
+
+        // TODO: 'site_whitelist', 'site_blacklist', etc. (generally user's custom rules)
+        // TODO: migrate account when it is implemented for v3
+
+        await Promise.all([
+          chrome.storage.local.clear(),
+          indexedDB
+            .databases()
+            .then((dbs) =>
+              Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name))),
+            ),
+        ]);
+      }
+    }
+  } catch (e) {
+    console.error(`Error while migrating data`, e);
+    return options;
+  }
+
+  await chrome.storage.local.set({ options });
+  return options;
+}
 
 const Options = {
   dnrRules: DNR_RULES_LIST.reduce(
@@ -24,8 +75,8 @@ const Options = {
   ),
   autoconsent: {
     all: false,
-    allowed: [''],
-    disallowed: [''],
+    allowed: [String],
+    disallowed: [String],
   },
   trackerWheelDisabled: false,
   wtmSerpReport: true,
@@ -33,7 +84,8 @@ const Options = {
   onboarding: { done: false, shownAt: 0 },
   [store.connect]: {
     async get() {
-      const { options = {} } = await chrome.storage.local.get(['options']);
+      const { options = await migrateOptions() } =
+        await chrome.storage.local.get(['options']);
 
       // Set default value for keys, which type does no match the current one
       Object.entries(options).forEach(([key, value]) => {
@@ -111,7 +163,7 @@ export async function observe(property, fn) {
   observers.add(wrapperFn);
 
   // Run for the first time with the current options
-  const options = await store.resolve(store.get(Options));
+  const options = await store.resolve(Options);
   wrapperFn(options);
 
   // Return unobserve function
