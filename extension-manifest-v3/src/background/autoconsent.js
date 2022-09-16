@@ -15,7 +15,7 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 
 async function initialize(msg, tabId, frameId) {
-  const { dnrRules, autoconsent } = await store.resolve(store.get(Options));
+  const { dnrRules, autoconsent } = await store.resolve(Options);
   const url = new URL(msg.url);
 
   if (dnrRules.annoyances && !autoconsent.disallowed.includes(url.hostname)) {

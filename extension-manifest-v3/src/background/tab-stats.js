@@ -48,7 +48,7 @@ async function updateTabStats(msg, sender) {
 
   tabStats.set(tabId, stats);
 
-  const { trackerWheelDisabled } = await store.resolve(store.get(Options));
+  const { trackerWheelDisabled } = await store.resolve(Options);
 
   if (!trackerWheelDisabled && stats.trackers.length > 0) {
     setIcon(tabId, stats);

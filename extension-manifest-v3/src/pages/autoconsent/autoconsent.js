@@ -15,7 +15,7 @@ import Options from '/store/options.js';
 import { statsFactory } from '/store/stats.js';
 
 async function enable(_, event) {
-  const options = await store.resolve(store.get(Options));
+  const options = await store.resolve(Options);
   const { all } = event.detail;
 
   let { allowed, disallowed } = options.autoconsent;
@@ -38,7 +38,7 @@ async function enable(_, event) {
 }
 
 async function disable(_, event) {
-  const options = await store.resolve(store.get(Options));
+  const options = await store.resolve(Options);
   const { all } = event.detail;
 
   let { disallowed, allowed } = options.autoconsent;
