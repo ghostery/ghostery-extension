@@ -131,8 +131,6 @@ function tryOpenOnboarding() {
 		return;
 	}
 
-	conf.enable_autoconsent = false;
-
 	const now = Date.now();
 	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > ONE_DAY_MSEC)) {
 		conf.setup_timestamp = now;
@@ -1340,6 +1338,10 @@ function initializeVersioning() {
 			// Check if the earliest version is < 8.4.2
 			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
+			}
+
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') < 0) {
+				conf.enable_autoconsent = true;
 			}
 		} else {
 			log('SAME VERSION OR NOT THE FIRST RUN');

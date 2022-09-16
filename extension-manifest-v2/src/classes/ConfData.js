@@ -107,7 +107,7 @@ class ConfData {
 			_initProperty('current_theme', 'default');
 			_initProperty('enable_ad_block', false);
 			_initProperty('enable_anti_tracking', false);
-			_initProperty('enable_autoconsent', true);
+			_initProperty('enable_autoconsent', false);
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', false);
 			_initProperty('enable_click2play_social', false);
