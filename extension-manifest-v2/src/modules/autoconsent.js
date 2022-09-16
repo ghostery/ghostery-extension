@@ -26,12 +26,10 @@ async function initialize(msg, tabId, frameId) {
 	if (
 		enable_autoconsent &&
 		!globals.SESSION.paused_blocking &&
-		!autoconsent_blacklist.includes(url.hostname) &&
+		!autoconsent_blacklist?.includes(url.hostname) &&
 		!site_whitelist.includes(url.hostname.replace(/^www\./, ''))
 	) {
-		const optOut =
-			(!autoconsent_whitelist.length && !autoconsent_blacklist.length) ||
-			autoconsent_whitelist.includes(url.hostname);
+		const optOut = autoconsent_whitelist?.includes(url.hostname) ?? true;
 
 		chrome.tabs.sendMessage(
 			tabId,
