@@ -312,7 +312,7 @@ class OverviewTab extends React.Component {
 
 	_renderCommonFeatures() {
 		const { panel, summary } = this.props;
-		const { enable_anti_tracking, enable_ad_block, enable_smart_block } = panel;
+		const { enable_anti_tracking, enable_ad_block, enable_autoconsent } = panel;
 		const { paused_blocking, sitePolicy } = summary;
 		const disableBlocking = this.siteNotScanned;
 
@@ -339,8 +339,8 @@ class OverviewTab extends React.Component {
 				<div className="OverviewTab__CommonFeature">
 					<CommonFeature
 						clickButton={this.handleCommonFeatureClick}
-						type="smart_block"
-						active={enable_smart_block}
+						type="autoconsent"
+						active={enable_autoconsent}
 						commonInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
@@ -390,6 +390,7 @@ class OverviewTab extends React.Component {
 OverviewTab.propTypes = {
 	panel: PropTypes.shape({
 		enable_ad_block: PropTypes.bool.isRequired,
+		enable_autoconsent: PropTypes.bool.isRequired,
 		enable_anti_tracking: PropTypes.bool.isRequired,
 		enable_smart_block: PropTypes.bool.isRequired,
 		smartBlock: PropTypes.shape({

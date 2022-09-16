@@ -55,6 +55,8 @@ import freeSpaceIfNearQuota from './utils/freeSpaceIfNearQuota';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
 
+import './modules/autoconsent';
+
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
 window.COMMON = common;
@@ -551,6 +553,30 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
+	}
+	if (origin === 'autoconsent') {
+		if (name === 'enable') {
+			conf.enable_autoconsent = true;
+			if (message.url) {
+				conf.autoconsent_whitelist = conf.autoconsent_whitelist.concat(message.url);
+			} else {
+				conf.autoconsent_whitelist = null;
+				conf.autoconsent_blacklist = null;
+			}
+
+			return false;
+		}
+		if (name === 'disable') {
+			if (message.url) {
+				conf.autoconsent_blacklist = conf.autoconsent_blacklist.concat(message.url);
+			} else {
+				conf.enable_autoconsent = false;
+				conf.autoconsent_whitelist = [];
+				conf.autoconsent_blacklist = [];
+			}
+
+			return false;
+		}
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
@@ -1312,6 +1338,10 @@ function initializeVersioning() {
 			// Check if the earliest version is < 8.4.2
 			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
+			}
+
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') < 0) {
+				conf.enable_autoconsent = true;
 			}
 		} else {
 			log('SAME VERSION OR NOT THE FIRST RUN');

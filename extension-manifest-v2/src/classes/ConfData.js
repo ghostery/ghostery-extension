@@ -107,6 +107,7 @@ class ConfData {
 			_initProperty('current_theme', 'default');
 			_initProperty('enable_ad_block', false);
 			_initProperty('enable_anti_tracking', false);
+			_initProperty('enable_autoconsent', false);
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', false);
 			_initProperty('enable_click2play_social', false);
@@ -141,6 +142,8 @@ class ConfData {
 
 			// Complex props
 			_initProperty('account', null);
+			_initProperty('autoconsent_whitelist', []);
+			_initProperty('autoconsent_blacklist', []);
 			_initProperty('bugs', {});
 			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);
