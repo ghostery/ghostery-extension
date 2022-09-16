@@ -19,3 +19,4 @@
  */
 
 import 'ghostery-common/build/gbe/core/content-script';
+import './autoconsent';

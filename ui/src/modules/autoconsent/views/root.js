@@ -59,3 +59,18 @@ export default define({
     </template>
   `,
 });
+
+(function updateIframeHeight() {
+  const resizeObserver = new ResizeObserver(() => {
+    window.parent.postMessage(
+      {
+        type: 'ghostery-autoconsent-resize-iframe',
+        height: document.body.clientHeight,
+      },
+      '*',
+    );
+  });
+  resizeObserver.observe(document.body, {
+    box: 'border-box',
+  });
+})();

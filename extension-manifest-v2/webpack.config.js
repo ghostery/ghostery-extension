@@ -29,6 +29,7 @@ crypto.createHash = algorithm => crypto_orig_createHash(algorithm === 'md4' ? 's
 // constants
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
+const APP_DIR = path.resolve(__dirname, 'app');
 const SHARED_COMP_DIR = path.resolve(__dirname, 'app/shared-components');
 const ONBOARDING_DIR = path.resolve(__dirname, 'app/onboarding');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');
@@ -37,6 +38,7 @@ const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const TRACKERS_PREVIEW_DIR = path.resolve(__dirname, 'app/trackers-preview');
+const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
@@ -50,6 +52,8 @@ module.exports = {
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
 		alias: {
 			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
+			'@ghostery/ui/autoconsent$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/index.js'),
+			'@ghostery/ui/autoconsent/iframe$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/iframe.js'),
 			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
 			'@ghostery/ui/trackers-preview$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/trackers-preview/index.js'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
@@ -73,6 +77,7 @@ module.exports = {
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
 		trackers_preview_popup: [`${TRACKERS_PREVIEW_DIR}/index.js`],
 		trackers_preview_content_script: [`${CONTENT_SCRIPTS_DIR}/trackers-preview.js`],
+		autoconsent_popup: [`${AUTOCONSENT_DIR}/index.js`],
 
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
@@ -81,7 +86,7 @@ module.exports = {
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
-		trackers_preview_popup_styles: [`${SASS_DIR}/trackers-preview_popup.scss`],
+		ghostery_ui: [`${SASS_DIR}/ghostery_ui.scss`],
 		trackers_preview_content_script_styles: [`${SASS_DIR}/trackers-preview_content_script.scss`],
 	},
 	output: {
@@ -138,6 +143,8 @@ module.exports = {
 				test: /\.js$/,
 				include: [
 					path.resolve(__dirname, 'node_modules/@ghostery/libs'),
+					path.resolve(__dirname, 'node_modules/@ghostery/ui'),
+					path.resolve(__dirname, 'node_modules/@duckduckgo/autoconsent'),
 				],
 				exclude: [
 					path.resolve(__dirname, 'node_modules/@ghostery/libs/node_modules'),
@@ -153,7 +160,7 @@ module.exports = {
 				],
 			}, {
 				test: /\.(js|jsx)$/,
-				include: [SHARED_COMP_DIR, ONBOARDING_DIR, PANEL_ANDROID_DIR, PANEL_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR],
+				include: [APP_DIR],
 				exclude: /node_modules/,
 				use: [
 					{

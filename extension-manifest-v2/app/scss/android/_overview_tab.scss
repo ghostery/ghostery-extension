@@ -114,6 +114,7 @@
 				.CommonFeature__status { color: $common-feature--blue; }
 				.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--blue); }
 				.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--blue); }
+				.CommonFeature__icon--autoconsent { background-image: buildIconAutoconsent($common-feature--blue); }
 				.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--blue); }
 				.CommonFeature__feature-name { color: $common-feature--blue; }
 			}
@@ -124,6 +125,7 @@
 				.CommonFeature__status { color: $common-feature--gray; }
 				.CommonFeature__icon--anti-track { background-image: buildIconAntiTracking($common-feature--gray); }
 				.CommonFeature__icon--ad-block { background-image: buildIconAdBlocking($common-feature--gray); }
+				.CommonFeature__icon--autoconsent { background-image: buildIconAutoconsent($common-feature--gray); }
 				.CommonFeature__icon--smart-block { background-image: buildIconSmartBlocking($common-feature--gray); }
 				.CommonFeature__feature-name { color: $common-feature--gray; }
 			}
