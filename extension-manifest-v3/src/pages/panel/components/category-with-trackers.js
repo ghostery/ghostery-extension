@@ -35,7 +35,7 @@ export default define({
   },
   render: ({ category, stats, shouldShowMore, trackerCounts }) => html`
     <main onclick="${toggleShowMore}">
-      <label><ui-category name="${category}" bullet="12"></ui-category></label>
+      <ui-category name="${category}" bullet="12"></ui-category>
       <strong class="count">
         <!-- Number of trackers detected by Ghostery -->
         ${stats.byCategory[category].count} Detected
@@ -95,13 +95,10 @@ export default define({
     main button svg {
       height: 18px;
     }
-    main label {
+    ui-category {
       cursor: pointer;
-    }
-    label {
       margin: 0 7px;
       font-size: 14px;
-      font-family: inherit;
       line-height: 20px;
       color: var(--ui-black);
     }
@@ -129,6 +126,7 @@ export default define({
     }
     li label {
       margin: 0 5px;
+      color: var(--ui-black);
       font-size: 13px;
       line-height: 16px;
     }
