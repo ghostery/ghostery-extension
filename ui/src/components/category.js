@@ -68,11 +68,11 @@ export default define({
   },
   bullet: 0,
   count: 0,
-  content: ({ name, bullet, count }) => {
+  render: ({ name, bullet, count }) => {
     const sizePx = `${bullet}px`;
 
     return html`
-      <template layout="row items:center gap">
+      <template layout="row items:center gap shrink:0">
         ${!!bullet &&
         html`<div
           layout="shrink:0"
@@ -83,9 +83,21 @@ export default define({
             borderRadius: sizePx,
           }}
         ></div>`}
-        <div layout="grow">${labels[name]}</div>
-        ${!!count && html`<div><strong>${count}</strong></div>`}
+        <div layout="grow">
+          ${labels[name]} ${!!count && html`<strong>${count}</strong>`}
+        </div>
       </template>
+    `.css`
+      :host {
+        font-size: 13px;
+        line-height: 16px;
+        white-space: nowrap;
+      }
+
+      strong {
+        color: var(--ui-black);
+        font-weight: 500;
+      }
     `;
   },
 });
