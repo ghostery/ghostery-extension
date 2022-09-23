@@ -72,7 +72,7 @@ common.start = async () => {
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
 
 	setPref('modules.anolysis.enabled', !IS_ANDROID);
-	
+
 	if (!IS_ANDROID) {
 		setPref('modules.human-web.enabled', conf.enable_human_web);
 		setPref('modules.hpnv2.enabled', conf.enable_human_web);
