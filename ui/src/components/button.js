@@ -28,23 +28,16 @@ export default define({
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
         border-radius: 24px;
         color: white;
+        white-space: nowrap;
       }
 
-      :host([type^="outline"]) {
-        background: transparent;
-        border: 2px solid var(--ui-color-gray-600);
+      :host([type="outline"]) {
+        background: var(--ui-color-white);
+        color: var(--ui-color-gray-700);
+        border: 1px solid var(--ui-color-gray-200);
       }
 
       :host([type="outline"]:hover) {
-        border-color: white;
-      }
-      
-      :host([type="outline-light"]) {
-        color: var(--ui-color-gray-700);
-        border-color: var(--ui-color-gray-300);
-      }
-
-      :host([type="outline-light"]:hover) {
         border-color: var(--ui-color-gray-400);
       }
 
@@ -62,12 +55,6 @@ export default define({
 
       :host([size="small"]) {
         height: 40px;
-      }
-
-      :host([type^="outline"]) ::slotted(*) {
-        margin: -2px;
-        height: calc(100% + 4px);
-        width: calc(100% + 4px);
       }
 
       ::slotted(*) {

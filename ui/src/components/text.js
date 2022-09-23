@@ -7,8 +7,17 @@ export default define({
   render: ({ type, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
-      font: var(--ui-font-${type});
-      color: ${color ? `var(--ui-color-${color})` : 'inherit'};
+      font: var(--ui-font-${type});;
+    }
+
+    :host([type^="display"]), 
+    :host([type^="headline"]),
+    :host([type^="label"]) {
+      color: ${color ? `var(--ui-color-${color})` : 'var(--ui-color-gray-800)'};
+    }
+
+    :host([type^="body"]) {
+      color: ${color ? `var(--ui-color-${color})` : 'var(--ui-color-gray-600)'}
     }
 
     :host([type^="display"]), :host([type^="button"]) {
@@ -32,11 +41,12 @@ export default define({
     }
 
     ::slotted(a) {
-      color: inherit;
+      color: ${color ? `var(--ui-color-${color})` : 'var(--ui-color-gray-800)'};
+      font-weight: 500;
     }
 
-    :host([color="gray-300"]) ::slotted(a) {
-      color: white;
+    ::slotted(a:hover) {
+      color: var(--ui-color-primary-500);
     }
   `,
 });

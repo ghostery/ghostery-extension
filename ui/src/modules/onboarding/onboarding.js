@@ -28,10 +28,9 @@ export default define({
       return () => host.removeEventListener('navigate', cb);
     },
   },
-  render: ({ views }) => html`${views}`.css`
-    :host { 
-      display: block;
-      height: 100%;
-    }
+  render: ({ views }) => html`
+    <template layout="grid height::100%">
+      <ui-onboarding-layout>${views}</ui-onboarding-layout>
+    </template>
   `,
 });

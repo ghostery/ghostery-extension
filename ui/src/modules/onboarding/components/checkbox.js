@@ -48,9 +48,9 @@ export default define({
       height: 100%;
       appearance: none;
       box-sizing: border-box;
-      background: var(--ui-color-gray-800);
+      background: var(--ui-color-white);
       border: 2px solid var(--ui-color-primary-500);
-      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 22px;
       padding: 0;
       margin: 0;
@@ -63,6 +63,7 @@ export default define({
     }
 
     ui-icon {
+      color: var(--ui-color-white);
       z-index: 1;
     }
   `,

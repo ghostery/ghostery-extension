@@ -29,21 +29,15 @@ export default define({
     html`
       <template layout="column margin:3 gap:4">
         <div layout="column items:center gap">
-          <ui-text type="display-s" color="gray-800">
-            TIRED OF COOKIE POPUPS?
-          </ui-text>
-          <ui-text color="gray-700" type="body-s" layout="block:center">
+          <ui-text type="display-s"> TIRED OF COOKIE POPUPS? </ui-text>
+          <ui-text layout="block:center">
             Let Ghostery be your complete privacy advocate and reject all popups
             and tracking for you, or do it yourself!
           </ui-text>
         </div>
         <div layout="column items:center gap">
-          <ui-text type="display-xs" color="gray-800">
-            Enable Never-Consent?
-          </ui-text>
-          <ui-text type="body-s" color="gray-700">
-            Apply optimal privacy settings:
-          </ui-text>
+          <ui-text type="display-2xs"> Enable Never-Consent? </ui-text>
+          <ui-text>Apply optimal privacy settings:</ui-text>
           <div layout="column gap:0.5">
             <label layout="row items:center gap">
               <input
@@ -55,7 +49,7 @@ export default define({
                 layout="margin:0"
                 style="accent-color: var(--ui-color-primary-700)"
               />
-              <ui-text type="body-s" color="gray-700">on this website</ui-text>
+              <ui-text>on this website</ui-text>
             </label>
             <label layout="row items:center gap">
               <input
@@ -66,12 +60,12 @@ export default define({
                 layout="margin:0"
                 style="accent-color: var(--ui-color-primary-700)"
               />
-              <ui-text type="body-s" color="gray-700">on all websites</ui-text>
+              <ui-text>on all websites</ui-text>
             </label>
           </div>
         </div>
         <div layout="grid:2 gap:2">
-          <ui-button type="outline-light" size="small">
+          <ui-button type="outline" size="small">
             <a
               href="${router.url(Confirm, { enabled: false })}"
               onclick="${onConfirm('disable')}"

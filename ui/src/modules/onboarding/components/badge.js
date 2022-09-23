@@ -12,27 +12,26 @@
 import { define, html } from 'hybrids';
 
 export default define({
-  tag: 'ui-autoconsent-header',
+  tag: 'ui-onboarding-badge',
+  enabled: false,
   render: () => html`
-    <template layout="row center">
-      <ui-text
-        type="display-2xs"
-        color="primary-500"
-        layout="row gap items:center margin"
-      >
-        <ui-icon name="ghosty" layout="block width:16px height:16px"></ui-icon>
-        Never-Consent
-      </ui-text>
+    <template layout="block">
+      <ui-text type="display-s" color="white"><slot></slot></ui-text>
     </template>
   `.css`
     :host {
-      background: rgba(0, 174, 240, 0.15);
+      background: var(--ui-color-error-400);
+      padding: 4px;
+      border-radius: 4px;
     }
-    
+
     ui-text {
-      background: white;
-      border-radius: 16px;
-      padding: 4px 10px;
+      font-size: 16px;
+      line-height: 16px;
+    }
+
+    :host([enabled]) {
+      background: var(--ui-color-success-500);
     }
   `,
 });
