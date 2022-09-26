@@ -29,7 +29,9 @@ export default define({
     html`
       <template layout="column margin:3 gap:4">
         <div layout="column items:center gap">
-          <ui-text type="display-s"> TIRED OF COOKIE POPUPS? </ui-text>
+          <ui-text type="display-s" layout="block:center">
+            TIRED OF COOKIE POPUPS?
+          </ui-text>
           <ui-text layout="block:center">
             Let Ghostery be your complete privacy advocate and reject all popups
             and tracking for you, or do it yourself!
