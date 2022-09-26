@@ -1,3 +1,14 @@
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 import { define, dispatch, html, router } from 'hybrids';
 
 import Main from './views/main.js';
@@ -28,7 +39,7 @@ export default define({
       return () => host.removeEventListener('navigate', cb);
     },
   },
-  render: ({ views }) => html`
+  content: ({ views }) => html`
     <template layout="grid height::100%">
       <ui-onboarding-layout>${views}</ui-onboarding-layout>
     </template>
