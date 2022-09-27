@@ -39,6 +39,9 @@
 // Import shared helpers
 @import 'shared_helper_classes';
 
+// ghostery-ui
+@import "@ghostery/ui/src/index.css";
+
 // NeedsReload Header
 .NeedsReload {
 	height: 0;
