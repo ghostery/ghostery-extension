@@ -17,6 +17,7 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
+import { getBrowserInfo } from '@ghostery/libs';
 
 import common, {
 	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState
@@ -73,9 +74,9 @@ const { onMessage } = chrome.runtime;
 const {
 	CDN_BASE_URL, BROWSER_INFO,
 } = globals;
-const IS_EDGE = (BROWSER_INFO.name === 'edge');
-const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const IS_ANDROID = (BROWSER_INFO.os === 'android');
+const IS_EDGE = getBrowserInfo.isEdge();
+const IS_FIREFOX = getBrowserInfo.isFirefox();
+const IS_ANDROID = getBrowserInfo.isAndroid();
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
 const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;

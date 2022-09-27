@@ -15,6 +15,8 @@
  */
 
 import { isEqual, throttle } from 'underscore';
+import { getBrowserInfo } from '@ghostery/libs';
+
 import button from './BrowserButton';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
@@ -352,7 +354,7 @@ class PanelData {
 			enable_smart_block,
 			is_expanded,
 			is_expert,
-			is_android: globals.BROWSER_INFO.os === 'android',
+			is_android: getBrowserInfo.isAndroid(),
 			language,
 			reload_banner_status,
 			setup_complete,
