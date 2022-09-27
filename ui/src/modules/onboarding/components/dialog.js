@@ -23,7 +23,8 @@ export default define({
     </div>
   `.css`
     :host {
-      background: rgba(32, 34, 37, 0.95);
+      background: rgba(18, 18, 28, 0.4);
+      backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -42,11 +43,12 @@ export default define({
       flex-flow: column;
       position: relative;
       box-sizing: border-box;
-      background: var(--ui-color-gray-700);
-      border-radius: 8px;
+      background: var(--ui-color-white);
+      border-radius: 16px;
       width: 100%;
       max-width: 600px;
       max-height: 100%;
+      box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.2);
     }
 
     #content {
@@ -78,8 +80,8 @@ export default define({
       display: block;
       position: absolute;
       inset: 0;
-      border-radius: 8px;
-      background: linear-gradient(0deg, var(--ui-color-gray-700) 0%, rgba(47, 49, 54, 0) 100%);
+      border-radius: 16px;
+      background: linear-gradient(0deg, var(--ui-color-white) 0%, rgba(47, 49, 54, 0) 100%);
     }
 
     footer ::slotted(*) {
@@ -91,10 +93,6 @@ export default define({
     @media screen and (min-width: 768px) {
       :host {
         --ui-onboarding-dialog-spacing: 40px;
-      }
-
-      #dialog {
-        box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.4);
       }
 
       footer {

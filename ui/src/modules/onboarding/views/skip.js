@@ -16,27 +16,25 @@ import OutroSkip from './outro-skip.js';
 export default define({
   [router.connect]: { dialog: true },
   tag: 'ui-onboarding-skip-dialog',
-  content: () =>
-    html`
-      <ui-onboarding-dialog>
-        <ui-text slot="header" type="headline-m" color="white">
-          Are you sure you want to skip enabling Ghostery?
-        </ui-text>
-        <ui-text type="body-s">
-          Ghostery is stopping trackers in their tracks and preventing you from
-          being profiled and your personal information sold to data brokers for
-          their own profit.
-        </ui-text>
-        <ui-text type="body-s">
-          With Ghostery enabled you instantly browser the web safer, faster and
-          with less annoying ads.
-        </ui-text>
-        <ui-button type="outline" slot="footer">
-          <a href="${router.backUrl()}">Back</a>
-        </ui-button>
-        <ui-button type="outline" slot="footer">
-          <a href="${router.url(OutroSkip)}">Continue</a>
-        </ui-button>
-      </ui-onboarding-dialog>
-    `,
+  content: () => html`
+    <ui-onboarding-dialog>
+      <ui-text slot="header" type="headline-m">
+        Are you sure you want to skip enabling Ghostery?
+      </ui-text>
+      <ui-text>
+        Ghostery is stopping trackers in their tracks and preventing you from
+        being profiled and your personal information sold to data brokers.
+      </ui-text>
+      <ui-text>
+        With Ghostery enabled you instantly browser the web safer, faster and
+        with less annoying ads.
+      </ui-text>
+      <ui-button type="outline" slot="footer">
+        <a href="${router.backUrl()}">Back</a>
+      </ui-button>
+      <ui-button type="outline" slot="footer">
+        <a href="${router.url(OutroSkip)}">Continue</a>
+      </ui-button>
+    </ui-onboarding-dialog>
+  `,
 });

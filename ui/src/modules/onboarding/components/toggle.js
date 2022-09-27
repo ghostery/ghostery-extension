@@ -35,8 +35,7 @@ export default define({
       box-sizing: border-box;
       width: 80px;
       height: 44px;
-      background: var(--ui-color-gray-800);
-      box-shadow: inset 0px 0px 0px 2px var(--ui-color-error-400), inset 4px 4px 8px rgba(0, 0, 0, 0.3);
+      background: var(--ui-color-error-400);
       border-radius: 22px;
       transition: all 0.2s ease-in-out;
     }

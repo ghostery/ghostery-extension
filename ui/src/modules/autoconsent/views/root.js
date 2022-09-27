@@ -38,11 +38,11 @@ export default define({
               ></ui-tracker-wheel>
             </div>
             <div layout="column grow shrink gap">
-              <ui-text type="label-s" color="gray-700">
+              <ui-text type="label-m">
                 ${msg.html`Trackers detected by Ghostery on this
                 website:&nbsp;${categories.length}`}
               </ui-text>
-              <ui-text type="body-xs" color="gray-600">
+              <ui-text type="body-s">
                 By using Never-Consent you let website owners know that you’re
                 against tracking!
                 <a
