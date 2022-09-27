@@ -18,11 +18,11 @@
  */
 import { debounce } from 'underscore';
 import { URL } from '@cliqz/url-parser';
-import globals from '../classes/Globals';
+import { getBrowserInfo } from '@ghostery/libs';
+
 import { log } from './common';
 
-const { BROWSER_INFO } = globals;
-const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_FIREFOX = getBrowserInfo.isFirefox();
 
 /**
  * Handle chrome.runtime.lastError messages

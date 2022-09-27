@@ -12,6 +12,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { getBrowserInfo } from '@ghostery/libs';
 
 import conf from './Conf';
 import foundBugs from './FoundBugs';
@@ -21,7 +22,7 @@ import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
 
-const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
+const IS_ANDROID = getBrowserInfo.isAndroid();
 
 /**
  * @class for handling Ghostery button.
