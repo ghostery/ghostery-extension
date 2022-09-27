@@ -141,5 +141,9 @@ const cachedGetBrowserInfo = async () => {
 cachedGetBrowserInfo.isAndroid = isAndroid;
 cachedGetBrowserInfo.isFirefox = isFirefox;
 cachedGetBrowserInfo.isEdge = isEdge;
+cachedGetBrowserInfo.isGhosteryBrowser = async () => {
+  const browserInfo = await cachedGetBrowserInfo();
+  return browserInfo.name.includes('ghostery');
+};
 
 export default cachedGetBrowserInfo;
