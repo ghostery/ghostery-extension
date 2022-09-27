@@ -155,15 +155,6 @@ class Globals {
 			cmp_data: {}
 		};
 	}
-
-	/**
-	 * Checks if the current browser is Ghostery
-	 * @return {Promise}
-	 */
-	async isGhosteryBrowser() {
-		await this.BROWSER_INFO_READY;
-		return this.BROWSER_INFO.name.startsWith('ghostery');
-	}
 }
 
 // return the class as a singleton
