@@ -25,9 +25,7 @@ export default define({
         display: grid;
         grid: 1fr / 1fr;
         height: 48px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
         border-radius: 24px;
-        color: white;
         white-space: nowrap;
       }
 
@@ -38,10 +36,12 @@ export default define({
       }
 
       :host([type="outline"]:hover) {
-        border-color: var(--ui-color-gray-400);
+        color: var(--ui-color-primary-500);
+        border-color: var(--ui-color-primary-500);
       }
 
       :host([type="primary"]) {
+        color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
       }
 
