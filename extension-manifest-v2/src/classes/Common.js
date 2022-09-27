@@ -16,6 +16,8 @@ import { parseHtml } from 'ghostery-common/build/gbe/human-web/html-helpers';
 import COMMON from 'ghostery-common';
 import WTM from 'ghostery-common/build/gbe/human-web/human-web';
 import { DOMParser } from 'linkedom';
+import { getBrowserInfo } from '@ghostery/libs';
+
 import globals from './Globals';
 import conf from './Conf';
 import GhosteryModule from './Module';
@@ -25,7 +27,7 @@ if (!navigator.userAgent.includes('Firefox')) {
 }
 
 const DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
-const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
+const IS_ANDROID = getBrowserInfo.isAndroid();
 
 COMMON.config.baseURL = '/common/';
 // Override the default prefs based on the platform
@@ -61,12 +63,12 @@ common.start = async () => {
 
 	let { HW_CHANNEL } = COMMON.config.settings;
 	await globals.BROWSER_INFO_READY;
-	if (IS_ANDROID) {
-		HW_CHANNEL = 'android';
-	} else if (globals.BROWSER_INFO.token === 'gd') {
+	if (globals.BROWSER_INFO.token === 'gd') {
 		HW_CHANNEL = 'ghostery-browser';
 	} else if (globals.BROWSER_INFO.token === 'ga') {
 		HW_CHANNEL = 'ghostery-browser-android';
+	} else 	if (IS_ANDROID) {
+		HW_CHANNEL = 'android';
 	}
 	WTM.CHANNEL = HW_CHANNEL;
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
