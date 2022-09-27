@@ -17,6 +17,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '@ghostery/ui';
+
 import PanelAndroid from './components/PanelAndroid';
 
 ReactDOM.render(
