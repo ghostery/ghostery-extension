@@ -14,7 +14,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
-import '@ghostery/ui';
 
 import {
 	NotScanned,
