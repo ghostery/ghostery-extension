@@ -17,6 +17,7 @@
 import {
 	map, object, reduce, throttle
 } from 'underscore';
+import { getBrowserInfo } from '@ghostery/libs';
 import bugDb from './BugDb';
 import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
@@ -168,7 +169,7 @@ class EventHandlers {
 				'notification_upgrade_link_v8'
 			];
 
-			const isGhosteryBrowser = await globals.isGhosteryBrowser();
+			const isGhosteryBrowser = await getBrowserInfo.isGhosteryBrowser();
 
 			if (cmp.CMP_DATA.length !== 0 && conf.show_cmp) {
 				injectNotifications(tab.id).then((result) => {
