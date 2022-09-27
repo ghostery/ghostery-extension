@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <style>.cls-1{isolation:isolate;}.cls-2{fill:#b26859;stroke:#994737;}.cls-3{fill:#fffdf6;}.cls-4{fill:#4a4a4a;}.cls-5{fill:#2d2e2b;}.cls-6{mix-blend-mode:multiply;}.cls-7{fill:#e4e4e0;}.cls-8{fill:#43b7c5;}</style>
+  </defs>
+  <title>Telemetry</title>
+  <g class="cls-1">
+    <g id="Layer_1" data-name="Layer 1">
+      <circle class="cls-2" cx="13" cy="13" r="11.86" />
+      <path class="cls-3" d="M20.89,9A1.36,1.36,0,0,0,19.53,7.6H6.47A1.36,1.36,0,0,0,5.11,9v8.16H20.89Z" />
+      <path class="cls-4" d="M5.11,17.12v.13a1.36,1.36,0,0,0,1.36,1.36H19.53a1.36,1.36,0,0,0,1.36-1.36v-.13Z" />
+      <rect class="cls-4" x="11.42" y="18.32" width="3.16" height="2.08" />
+      <rect class="cls-5" x="6.74" y="9.89" width="5.46" height="0.59" />
+      <rect class="cls-5" x="6.74" y="11.34" width="3.11" height="0.59" />
+      <rect class="cls-5" x="6.74" y="12.79" width="4.28" height="0.59" />
+      <rect class="cls-5" x="6.74" y="14.25" width="3.11" height="0.59" />
+      <g class="cls-6">
+        <path class="cls-7" d="M19.53,7.6H13V20.4h1.58V18.61h5a1.36,1.36,0,0,0,1.36-1.36V9A1.36,1.36,0,0,0,19.53,7.6Z" />
+      </g>
+      <circle class="cls-8" cx="12.25" cy="14.66" r="0.51" />
+      <circle class="cls-8" cx="14.61" cy="12.39" r="0.51" />
+      <circle class="cls-8" cx="15.96" cy="13.57" r="0.51" />
+      <circle class="cls-8" cx="19.52" cy="10.06" r="0.51" />
+      <polygon class="cls-8" points="12.32 15 11.94 14.62 14.64 11.92 15.96 13.24 19.33 9.87 19.71 10.25 15.96 14 14.64 12.68 12.32 15" />
+    </g>
+  </g>
+</svg>
