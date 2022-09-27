@@ -19,6 +19,10 @@ import { enableFetchMocks } from 'jest-fetch-mock';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+// Fix libs/browser-info
+// https://github.com/acvetkov/sinon-chrome/issues/111
+delete chrome.runtime.getPlatformInfo;
+
 // Disable logging
 jest.mock('../src/utils/common', () => {
 	const commonActual = jest.requireActual('../src/utils/common');

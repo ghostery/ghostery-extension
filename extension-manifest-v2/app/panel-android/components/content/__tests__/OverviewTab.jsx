@@ -109,6 +109,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				enable_anti_tracking: false,
 				enable_smart_block: false,
 				smartBlock: { blocked: {}, unblocked: {} },
+				setup_complete: true,
 			};
 			const summary = {
 				categories: [],
