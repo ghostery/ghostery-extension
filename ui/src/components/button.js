@@ -59,7 +59,9 @@ export default define({
       }
 
       :host([disabled]) {
-        opacity: 0.5;
+        background: var(--ui-color-gray-200);
+        color: var(--ui-color-gray-400);
+        border-color: var(--ui-color-gray-200);
         pointer-events: none;
       }
 

@@ -31,28 +31,28 @@ export default define({
       </div>
     </template>
   `.css`
-     :host {
-       background: var(--ui-color-white);
-       border-radius: 16px;
-       box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
-       border: 1px solid var(--ui-color-gray-200);
-     }
- 
-     :host([type="transparent"]) {
-       background: none;
-       box-shadow: none;
-       border: none;
-     }
- 
-     :host([type="highlight"]) {
-       background: var(--ui-color-gray-100);
-       border-radius: 8px;
-       border: none;
-       box-shadow: none;
-     }
- 
-     #illustration ::slotted(*) {
-       margin-bottom: 24px;
-     }
-   `,
+    :host {
+      background: var(--ui-color-white);
+      border-radius: 16px;
+      box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--ui-color-gray-200);
+    }
+
+    :host([type="transparent"]) {
+      background: none;
+      box-shadow: none;
+      border: none;
+    }
+
+    :host([type="highlight"]) {
+      background: var(--ui-color-gray-100);
+      border-radius: 8px;
+      border: none;
+      box-shadow: none;
+    }
+
+    #illustration ::slotted(*) {
+      margin-bottom: 24px;
+    }
+    `,
 });
