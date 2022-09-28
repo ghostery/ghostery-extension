@@ -12,7 +12,7 @@
 import { define, html } from 'hybrids';
 
 export default define({
-  tag: 'ui-onboarding-card',
+  tag: 'ui-card',
   type: '',
   render: ({ type }) => html`
     <template layout="column">
@@ -20,7 +20,7 @@ export default define({
         class="${{ [type]: type }}"
         layout="margin:3"
         layout@768px="margin:5"
-        layout.terms="margin:left:3 margin:right:3"
+        layout.narrow="margin:left:3 margin:right:3"
         layout.highlight="margin:2"
         layout.highlight@768px="margin:3"
       >
@@ -54,5 +54,5 @@ export default define({
     #illustration ::slotted(*) {
       margin-bottom: 24px;
     }
-  `,
+    `,
 });

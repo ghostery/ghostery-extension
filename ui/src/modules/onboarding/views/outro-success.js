@@ -20,7 +20,7 @@ export default define({
   tag: 'ui-onboarding-outro-success-view',
   content: () => html`
     <template layout="block">
-      <ui-onboarding-card>
+      <ui-card>
         <div slot="illustration">${protection}</div>
         <section layout="block:center column gap:2" layout@768px="margin:0:6">
           <ui-text type="display-l">You're all set, Ghosterian!</ui-text>
@@ -29,7 +29,7 @@ export default define({
             privacy while browsing!
           </ui-text>
         </section>
-        <ui-onboarding-card type="highlight" layout="margin:top:5">
+        <ui-card type="highlight" layout="margin:top:5">
           <section layout="column gap">
             <ui-text type="label-xl">Any questions? Anytime!</ui-text>
             <ui-text type="body-l">
@@ -39,8 +39,8 @@ export default define({
               `}
             </ui-text>
           </section>
-        </ui-onboarding-card>
-      </ui-onboarding-card>
+        </ui-card>
+      </ui-card>
     </template>
   `,
 });

@@ -15,6 +15,7 @@ export default define({
   tag: 'ui-button',
   type: 'primary',
   size: 'medium',
+  disabled: false,
   render: ({ size }) => html`
     <ui-text type="button-${size === 'small' ? 's' : 'm'}">
       <slot></slot>
@@ -55,6 +56,13 @@ export default define({
 
       :host([size="small"]) {
         height: 40px;
+      }
+
+      :host([disabled]) {
+        background: var(--ui-color-gray-200);
+        color: var(--ui-color-gray-400);
+        border-color: var(--ui-color-gray-200);
+        pointer-events: none;
       }
 
       ::slotted(*) {

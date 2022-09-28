@@ -17,7 +17,7 @@ export default define({
   tag: 'ui-onboarding-outro-skip-view',
   content: () => html`
     <template layout="block">
-      <ui-onboarding-card>
+      <ui-card>
         <div slot="illustration">${sleep}</div>
         <section layout="block:center column gap:2" layout@768px="margin:0:4">
           <ui-text type="display-l">
@@ -28,13 +28,13 @@ export default define({
             Ghosty is taking a light nap.
           </ui-text>
         </section>
-        <ui-onboarding-card type="highlight" layout="margin:top:5">
+        <ui-card type="highlight" layout="margin:top:5">
           <ui-text type="body-l">
             You can change your mind anytime and enable Ghostery to start
             tracking the trackers for you in Ghostery settings.
           </ui-text>
-        </ui-onboarding-card>
-      </ui-onboarding-card>
+        </ui-card>
+      </ui-card>
     </template>
   `,
 });

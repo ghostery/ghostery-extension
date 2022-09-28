@@ -41,7 +41,7 @@ export default define({
   },
   content: ({ views }) => html`
     <template layout="grid height::100%">
-      <ui-onboarding-layout>${views}</ui-onboarding-layout>
+      <ui-page-layout>${views}</ui-page-layout>
     </template>
   `,
 });
