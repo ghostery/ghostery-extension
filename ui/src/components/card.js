@@ -12,7 +12,7 @@
 import { define, html } from 'hybrids';
 
 export default define({
-  tag: 'ui-onboarding-card',
+  tag: 'ui-card',
   type: '',
   render: ({ type }) => html`
     <template layout="column">
@@ -20,7 +20,7 @@ export default define({
         class="${{ [type]: type }}"
         layout="margin:3"
         layout@768px="margin:5"
-        layout.terms="margin:left:3 margin:right:3"
+        layout.narrow="margin:left:3 margin:right:3"
         layout.highlight="margin:2"
         layout.highlight@768px="margin:3"
       >
@@ -31,28 +31,28 @@ export default define({
       </div>
     </template>
   `.css`
-    :host {
-      background: var(--ui-color-white);
-      border-radius: 16px;
-      box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
-      border: 1px solid var(--ui-color-gray-200);
-    }
-
-    :host([type="transparent"]) {
-      background: none;
-      box-shadow: none;
-      border: none;
-    }
-
-    :host([type="highlight"]) {
-      background: var(--ui-color-gray-100);
-      border-radius: 8px;
-      border: none;
-      box-shadow: none;
-    }
-
-    #illustration ::slotted(*) {
-      margin-bottom: 24px;
-    }
-  `,
+     :host {
+       background: var(--ui-color-white);
+       border-radius: 16px;
+       box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
+       border: 1px solid var(--ui-color-gray-200);
+     }
+ 
+     :host([type="transparent"]) {
+       background: none;
+       box-shadow: none;
+       border: none;
+     }
+ 
+     :host([type="highlight"]) {
+       background: var(--ui-color-gray-100);
+       border-radius: 8px;
+       border: none;
+       box-shadow: none;
+     }
+ 
+     #illustration ::slotted(*) {
+       margin-bottom: 24px;
+     }
+   `,
 });

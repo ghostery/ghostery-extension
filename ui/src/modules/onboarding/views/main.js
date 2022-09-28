@@ -53,7 +53,7 @@ export default define({
         action="${router.url(OutroSuccess)}"
         layout="grow column gap"
       >
-        <ui-onboarding-card type="full-desktop" id="form">
+        <ui-card id="form">
           <div layout="column gap:5">
             <section layout="block:center">
               <ui-text type="body-xl" layout="margin:bottom:2">
@@ -119,10 +119,10 @@ export default define({
               </div>
             </ui-onboarding-protection>
           </div>
-        </ui-onboarding-card>
+        </ui-card>
         ${form.protection
           ? html`
-              <ui-onboarding-card type="terms">
+              <ui-card type="narrow">
                 <div layout="column gap:3">
                   <label layout="grid:min|1:min|min gap:2:0.5 items:start">
                     <ui-onboarding-checkbox layout="area::2">
@@ -155,17 +155,17 @@ export default define({
                     </ui-button>
                   `}
                 </div>
-              </ui-onboarding-card>
+              </ui-card>
             `
           : html`
-              <ui-onboarding-card
+              <ui-card
                 type="transparent"
                 layout="grow row items:end content:end"
               >
                 <ui-button type="outline">
                   <a href="${router.url(Skip)}">Skip</a>
                 </ui-button>
-              </ui-onboarding-card>
+              </ui-card>
             `}
       </form>
     </template>
