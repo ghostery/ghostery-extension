@@ -9,7 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { define, html, store } from 'hybrids';
+import Options from '/store/options.js';
 
 const VERSION = chrome.runtime.getManifest().version;
 
@@ -35,7 +36,17 @@ async function asyncAction(event, fn, complete = '') {
 }
 
 function clearStorage(host, event) {
-  asyncAction(event, () => chrome.storage.local.clear(), 'Storage cleared');
+  asyncAction(
+    event,
+    async () => {
+      // Restore options to default values
+      await store.set(Options, null);
+
+      // Clear main local storage
+      chrome.storage.local.clear();
+    },
+    'Storage cleared',
+  );
 }
 
 export default define({

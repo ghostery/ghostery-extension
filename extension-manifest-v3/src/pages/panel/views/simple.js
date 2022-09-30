@@ -17,17 +17,6 @@ import Options, { DNR_RULES_LIST } from '/store/options.js';
 
 import Detailed from './detailed.js';
 
-function toggleRuleset(ruleset) {
-  return (host) => {
-    const enabled = !host.options.dnrRules[ruleset];
-
-    store.set(host.options, {
-      dnrRules: { [ruleset]: enabled },
-      autoconsent: ruleset === 'annoyances' && !enabled ? null : {},
-    });
-  };
-}
-
 const toggleLabels = {
   get ads() {
     return msg`Ad-Blocking`;
@@ -39,6 +28,32 @@ const toggleLabels = {
     return msg`Never-Consent`;
   },
 };
+
+function toggleRuleset(ruleset) {
+  return (host) => {
+    const enabled = !host.options.dnrRules[ruleset];
+
+    store.set(host.options, {
+      dnrRules: { [ruleset]: enabled },
+      autoconsent: ruleset === 'annoyances' && !enabled ? null : {},
+    });
+  };
+}
+
+async function pause(host) {
+  store.set(host.options, {
+    paused: [
+      ...host.options.paused,
+      { id: host.stats.domain, revokeAt: Date.now() + 60 * 1000 },
+    ],
+  });
+}
+
+async function resume(host) {
+  store.set(host.options, {
+    paused: host.options.paused.filter((p) => p.id !== host.stats.domain),
+  });
+}
 
 export default define({
   [router.connect]: { stack: [Detailed] },
@@ -63,6 +78,23 @@ export default define({
               ></ui-toggle-switch>`,
           )}
         </section>
+        ${options.paused &&
+        store.ready(stats) &&
+        html`
+          <section class="pause">
+            ${options.paused.some(({ id }) => id === stats.domain)
+              ? html`
+                  <ui-button onclick="${resume}" type="outline">
+                    <button>Resume</button>
+                  </ui-button>
+                `
+              : html`
+                  <ui-button onclick="${pause}" type="outline">
+                    <button>Pause for a minute</button>
+                  </ui-button>
+                `}
+          </section>
+        `}
       </ui-onboarding-state>
     `}
     ${store.ready(stats) &&
@@ -102,6 +134,10 @@ export default define({
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 10px;
+    }
+
+    section.pause {
+      margin: 16px 0;
     }
 
     section.buttons {
