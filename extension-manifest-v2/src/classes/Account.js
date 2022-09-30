@@ -430,28 +430,17 @@ class Account {
 		return userID;
 	}
 
-
-	_getUserIDIfEmailIsValidated = () => (
-		this._getUserID()
-			.then(userID => (
-				new Promise((resolve, reject) => {
-					const { user } = conf.account;
-					if (!user) {
-						return this.getUser()
-							.then((u) => {
-								if (u.emailValidated !== true) {
-									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
-								}
-								return resolve(userID);
-							});
-					}
-					if (!user.emailValidated) {
-						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
-					}
-					return resolve(userID);
-				})
-			))
-	)
+	async _getUserIDIfEmailIsValidated() {
+		const userID = await this._getUserID();
+		let { user } = conf.account;
+		if (!user) {
+			user = await this.getUser();
+		}
+		if (user?.emailValidated) {
+			return userID;
+		}
+		return new Error('_getUserIDIfEmailIsValidated(): email not validated');
+	}
 
 	_setAccountInfo = (userID) => {
 		conf.account = {
