@@ -53,6 +53,8 @@ const Options = {
       return options;
     },
     async set(_, options) {
+      if (options === null) options = {};
+
       await chrome.storage.local.set({ options });
 
       // Send update message to another contexts (background page / panel / options)
@@ -94,9 +96,84 @@ const Options = {
           disableRulesetIds,
         });
       }
+
+      // Ensure paused domains are reflected in dynamic rule
+      if (options.paused) {
+        const [rule] = await chrome.declarativeNetRequest.getDynamicRules();
+        const pausedDomains = options.paused.map(String);
+
+        const initiatorDomains = rule?.condition.initiatorDomains || [];
+        if (pausedDomains.length) {
+          if (
+            pausedDomains.some(
+              (domain, index) => initiatorDomains[index] !== domain,
+            )
+          ) {
+            chrome.declarativeNetRequest.updateDynamicRules({
+              addRules: [
+                {
+                  id: 1,
+                  priority: 10000,
+                  action: {
+                    type: 'allowAllRequests',
+                  },
+                  condition: {
+                    requestDomains: pausedDomains,
+                    resourceTypes: ['main_frame'],
+                  },
+                },
+              ],
+              removeRuleIds: rule ? [1] : undefined,
+            });
+          }
+        } else if (rule) {
+          chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds: [rule.id],
+          });
+        }
+
+        const alarms = await chrome.alarms.getAll();
+        const revokeDomains = options.paused.filter(({ revokeAt }) => revokeAt);
+
+        // Clear alarms for removed domains
+        alarms.forEach(({ name }) => {
+          if (!revokeDomains.find(({ id }) => name === `revoke:${id}`)) {
+            chrome.alarms.clear(name);
+          }
+        });
+
+        // Add alarms for new domains
+        if (revokeDomains.length) {
+          revokeDomains
+            .filter(({ id }) => !alarms.some(({ name }) => name === id))
+            .forEach(({ id, revokeAt }) => {
+              chrome.alarms.create(`revoke:${id}`, { when: revokeAt });
+            });
+        }
+      }
     },
   },
 };
+
+if (chrome.declarativeNetRequest.getDynamicRules) {
+  // Define `paused` property for keeping paused sites
+  Options.paused = [{ id: true, revokeAt: 0 }];
+
+  // Remove paused domains from dynamic rule when alarm is triggered
+  chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm.name.startsWith('revoke:')) {
+      console.log('Revoke paused domain', alarm.name);
+
+      store.resolve(Options).then((options) => {
+        store.set(options, {
+          paused: options.paused.filter(
+            ({ id }) => `revoke:${id}` !== alarm.name,
+          ),
+        });
+      });
+    }
+  });
+}
 
 export default Options;
 
@@ -136,10 +213,10 @@ chrome.runtime.onMessage.addListener((msg) => {
       store.get(Options);
     }
 
+    const resolvedOptions = store.resolve(options);
+
     observers.forEach((fn) => {
-      fn(msg.options);
+      resolvedOptions.then(fn);
     });
   }
-
-  return false;
 });
