@@ -33,22 +33,27 @@ class Api {
 			return this._refreshPromise;
 		}
 
-		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
-			method: 'POST',
-			credentials: 'omit',
-		}).then((res) => {
-			if (res.status > 400) {
-				throw res.json();
+		const pending = (async () => {
+			const response = await fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
+				method: 'POST',
+				credentials: 'omit',
+			});
+			if (response.ok) {
+				const data = await response.json();
+				setAllLoginCookies({
+					accessToken: data.access_token,
+					refreshToken: data.refresh_token,
+					csrfToken: data.csrf_token,
+					userId: data.user_id,
+				});
 			}
-			return res.json();
-		}).then(response => setAllLoginCookies({
-			accessToken: response.access_token,
-			refreshToken: response.refresh_token,
-			csrfToken: response.csrf_token,
-			userId: response.user_id,
-		})).finally(() => { this._refreshPromise = null; });
-
-		return this._refreshPromise;
+			return response;
+		})();
+		this._refreshPromise = pending;
+		pending.finally(() => {
+			this._refreshPromise = null;
+		});
+		return pending;
 	}
 
 	async _sendReq(method, path, body) {
