@@ -89,15 +89,22 @@ export const setAllLoginCookies = ({
 	userId,
 	expirationDate,
 } = {}) => {
-	let exp = expirationDate;
-
-	if (!exp) {
-		const decodedAccessToken = decodeJwt(accessToken);
-		exp = decodedAccessToken.payload.exp;
+	if (!accessToken) {
+		throw new Error('login response incomplete (access token missing)');
+	}
+	if (!csrfToken) {
+		throw new Error('login response incomplete (csrf token missing)');
+	}
+	if (!refreshToken) {
+		throw new Error('login response incomplete (refresh token missing)');
+	}
+	if (!userId) {
+		throw new Error('login response incomplete (userId missing)');
 	}
 
-	if (!accessToken || !csrfToken || !refreshToken || !userId || !exp) {
-		throw new Error('login response incomplete');
+	const exp = expirationDate || decodeJwt(accessToken)?.payload?.exp;
+	if (!exp) {
+		throw new Error('login response incomplete (expiration date missing; neither in exp nor as part of the accessToken');
 	}
 
 	return Promise.all([
