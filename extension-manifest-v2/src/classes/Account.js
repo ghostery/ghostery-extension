@@ -138,6 +138,14 @@ class Account {
 		this._getUserID()
 			.then(userID => api.get('users', userID))
 			.then((res) => {
+				if (Array.isArray(res?.errors) && res.errors.length > 0) {
+					log('We have a userID but we are not able to get data from the server. Force a logout. Errors:', res.errors);
+					throw new Error('Unable to fetch the user acount (forcing logout)');
+				}
+				if (!res.data?.id) {
+					alwaysLog('Unexpected case: the server sent missing data:', res);
+					throw new Error('User not properly logged in (got corrupted response)');
+				}
 				const user = build(normalize(res), 'users', res.data.id);
 				this._setAccountUserInfo(user);
 				return user;
@@ -403,21 +411,25 @@ class Account {
 		return settings;
 	}
 
-	_getUserID = () => (
-		new Promise((resolve, reject) => {
-			if (!conf.account) {
-				return this._getUserIDFromCookie()
-					.then((userID) => {
-						this._setAccountInfo(userID);
-						resolve(conf.account.userID);
-					})
-					.catch(() => {
-						reject(new Error('_getUserID() Not logged in'));
-					});
+	async _getUserID() {
+		if (!conf.account) {
+			try {
+				const userID = await this._getUserIDFromCookie();
+				if (userID) {
+					log('Found user ID', userID, 'in cookies');
+					this._setAccountInfo(userID);
+				}
+			} catch (e) {
+				log('Unable to get userID from cookie');
 			}
-			return resolve(conf.account.userID);
-		})
-	)
+		}
+		const userID = conf.account?.userID;
+		if (!userID) {
+			throw new Error('_getUserID: cannot find userID (neither in account or cookies)');
+		}
+		return userID;
+	}
+
 
 	_getUserIDIfEmailIsValidated = () => (
 		this._getUserID()
