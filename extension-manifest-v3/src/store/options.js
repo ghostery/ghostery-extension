@@ -11,9 +11,10 @@
 
 import { store } from 'hybrids';
 
-export const DNR_RULES_LIST = chrome.runtime
-  .getManifest()
-  .declarative_net_request.rule_resources.map((r) => r.id);
+const manifest = chrome.runtime.getManifest();
+
+export const DNR_RULES_LIST =
+  manifest.declarative_net_request.rule_resources.map((r) => r.id);
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 
@@ -52,10 +53,66 @@ const Options = {
 
       return options;
     },
-    async set(_, options) {
+    async set(_, options, keys) {
       if (options === null) options = {};
 
       await chrome.storage.local.set({ options });
+
+      if (keys.includes('paused')) {
+        const alarms = await chrome.alarms.getAll();
+        const revokeDomains = options.paused.filter(({ revokeAt }) => revokeAt);
+
+        // Clear alarms for removed domains
+        alarms.forEach(({ name }) => {
+          if (!revokeDomains.find(({ id }) => name === `revoke:${id}`)) {
+            chrome.alarms.clear(name);
+          }
+        });
+
+        // Add alarms for new domains
+        if (revokeDomains.length) {
+          revokeDomains
+            .filter(({ id }) => !alarms.some(({ name }) => name === id))
+            .forEach(({ id, revokeAt }) => {
+              chrome.alarms.create(`revoke:${id}`, { when: revokeAt });
+            });
+        }
+
+        // Ensure paused domains are reflected in dynamic rules
+        if (options.paused.length) {
+          chrome.declarativeNetRequest.updateDynamicRules({
+            addRules: [
+              {
+                id: 1,
+                priority: 10000,
+                ...(manifest.manifest_version === 3
+                  ? {
+                      action: { type: 'allowAllRequests' },
+                      condition: {
+                        requestDomains: options.paused.map(String),
+                        resourceTypes: ['main_frame', 'sub_frame'],
+                      },
+                    }
+                  : {
+                      action: { type: 'allow' },
+                      condition: {
+                        urlFilter: '*',
+                        domains: options.paused
+                          .map(String)
+                          .map((d) => [d, `www.${d}`])
+                          .flat(),
+                      },
+                    }),
+              },
+            ],
+            removeRuleIds: [1],
+          });
+        } else {
+          chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds: [1],
+          });
+        }
+      }
 
       // Send update message to another contexts (background page / panel / options)
       try {
@@ -78,7 +135,7 @@ const Options = {
       // to the value from the manifest.
 
       const enabledRulesetIds =
-        await chrome.declarativeNetRequest.getEnabledRulesets();
+        (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
 
       const enableRulesetIds = [];
       const disableRulesetIds = [];
@@ -91,65 +148,10 @@ const Options = {
       });
 
       if (enableRulesetIds.length || disableRulesetIds.length) {
-        chrome.declarativeNetRequest.updateEnabledRulesets({
+        await chrome.declarativeNetRequest.updateEnabledRulesets({
           enableRulesetIds,
           disableRulesetIds,
         });
-      }
-
-      // Ensure paused domains are reflected in dynamic rule
-      if (options.paused) {
-        const [rule] = await chrome.declarativeNetRequest.getDynamicRules();
-        const pausedDomains = options.paused.map(String);
-
-        const initiatorDomains = rule?.condition.initiatorDomains || [];
-        if (pausedDomains.length) {
-          if (
-            pausedDomains.some(
-              (domain, index) => initiatorDomains[index] !== domain,
-            )
-          ) {
-            chrome.declarativeNetRequest.updateDynamicRules({
-              addRules: [
-                {
-                  id: 1,
-                  priority: 10000,
-                  action: {
-                    type: 'allowAllRequests',
-                  },
-                  condition: {
-                    requestDomains: pausedDomains,
-                    resourceTypes: ['main_frame'],
-                  },
-                },
-              ],
-              removeRuleIds: rule ? [1] : undefined,
-            });
-          }
-        } else if (rule) {
-          chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds: [rule.id],
-          });
-        }
-
-        const alarms = await chrome.alarms.getAll();
-        const revokeDomains = options.paused.filter(({ revokeAt }) => revokeAt);
-
-        // Clear alarms for removed domains
-        alarms.forEach(({ name }) => {
-          if (!revokeDomains.find(({ id }) => name === `revoke:${id}`)) {
-            chrome.alarms.clear(name);
-          }
-        });
-
-        // Add alarms for new domains
-        if (revokeDomains.length) {
-          revokeDomains
-            .filter(({ id }) => !alarms.some(({ name }) => name === id))
-            .forEach(({ id, revokeAt }) => {
-              chrome.alarms.create(`revoke:${id}`, { when: revokeAt });
-            });
-        }
       }
     },
   },
@@ -159,11 +161,9 @@ if (chrome.declarativeNetRequest.getDynamicRules) {
   // Define `paused` property for keeping paused sites
   Options.paused = [{ id: true, revokeAt: 0 }];
 
-  // Remove paused domains from dynamic rule when alarm is triggered
+  // Remove paused domains from options when alarm is triggered
   chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name.startsWith('revoke:')) {
-      console.log('Revoke paused domain', alarm.name);
-
       store.resolve(Options).then((options) => {
         store.set(options, {
           paused: options.paused.filter(
