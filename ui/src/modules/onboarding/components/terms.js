@@ -28,6 +28,7 @@ export default define({
 
     ::slotted(a):after {
       display: inline-block;
+      vertical-align: text-top;
       content: '';
       width: 16px;
       height: 16px;

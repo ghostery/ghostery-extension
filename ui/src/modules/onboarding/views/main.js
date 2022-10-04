@@ -34,7 +34,7 @@ export default define({
       if (form.terms) {
         return content().querySelector('button[type="submit"]');
       } else if (form.protection) {
-        return content().querySelector('ui-onboarding-checkbox');
+        return content().querySelector('#terms-card');
       }
       return null;
     },
@@ -122,7 +122,7 @@ export default define({
         </ui-card>
         ${form.protection
           ? html`
-              <ui-card type="narrow">
+              <ui-card type="narrow" id="terms-card">
                 <div layout="column gap:3">
                   <label layout="grid:min|1:min|min gap:2:0.5 items:start">
                     <ui-onboarding-checkbox layout="area::2">
