@@ -13,7 +13,7 @@ import { define, html } from 'hybrids';
 
 function setupChecked(host, event) {
   const slot = event.target;
-  const elements = slot.assignedNodes();
+  const elements = slot.assignedElements();
 
   host.checked = elements[0].checked;
 }
