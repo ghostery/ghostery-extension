@@ -16,7 +16,7 @@ export default define({
   tag: 'ui-onboarding-whotracksme-dialog',
   content: () => html`
     <ui-onboarding-dialog>
-      <ui-text slot="header" type="headline-m">What is whotracks.me?</ui-text>
+      <ui-text slot="header" type="headline-m">What is WhoTracks.Me?</ui-text>
       <ui-text>
         WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s AI
         anti-tracking technology. It is a comprehensive global resource on
