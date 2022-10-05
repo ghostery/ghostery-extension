@@ -31,7 +31,7 @@ export default define({
         <ui-card type="highlight" layout="margin:top:5">
           <ui-text type="body-l">
             You can change your mind anytime and enable Ghostery to start
-            tracking the trackers for you in Ghostery settings.
+            tracking the trackers for you in Ghostery panel.
           </ui-text>
         </ui-card>
       </ui-card>
