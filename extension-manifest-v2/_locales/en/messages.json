@@ -1881,7 +1881,7 @@
     "message": "Welcome to Ghostery"
   },
   "what_is_whotracks_me_": {
-    "message": "What is whotracks.me?"
+    "message": "What is WhoTracks.Me?"
   },
   "white_black_list_error_invalid_url": {
     "message": "Please enter a valid URL or wildcard."
@@ -1896,8 +1896,8 @@
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s AI anti-tracking technology. It is a comprehensive global resource on trackers, bringing transparency to web tracking."
   },
-  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
-    "message": "With Ghostery enabled you instantly browser the web safer, faster and with less annoying ads."
+  "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
+    "message": "With Ghostery enabled you instantly browse the web safer, faster and with less annoying ads."
   },
   "yes": {
     "message": "Yes"
@@ -1905,8 +1905,8 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>."
   },
-  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery settings."
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
+    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery panel."
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "You chose to skip enabling Ghostery!"
