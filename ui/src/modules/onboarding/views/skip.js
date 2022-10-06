@@ -26,7 +26,7 @@ export default define({
         being profiled and your personal information sold to data brokers.
       </ui-text>
       <ui-text>
-        With Ghostery enabled you instantly browser the web safer, faster and
+        With Ghostery enabled you instantly browse the web safer, faster and
         with less annoying ads.
       </ui-text>
       <ui-button type="outline" slot="footer">
