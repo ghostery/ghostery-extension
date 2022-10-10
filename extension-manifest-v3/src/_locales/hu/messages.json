@@ -26,9 +26,6 @@
   "all_popups": {
     "message": "Minden felugró ablak"
   },
-  "all_set__go_with_ghosty_": {
-    "message": "Minden kész! Legyen a Ghostly az ön társa!"
-  },
   "anti_tracking": {
     "message": "Követés elleni védelem"
   },
@@ -64,8 +61,8 @@
     "message": "CDN",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "Tekintse meg a <a href=\"$${0}\" target=\"_blank\">FAQ-kat</a> weboldalt, vagy írjon nekünk a <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a> címre! Örömmel állunk rendelkezésére!"
+  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
+    "message": "Tekintse meg a <a href=\"$${0}\" target=\"_blank\">GYIK</a> oldalunkat vagy írjon nekünk e-mail-t: <a href=\"mailto:$${1}\">$${2}</a>. <br/> Örömmel állunk rendelkezésére!"
   },
   "comments": {
     "message": "Hozzászólások",
@@ -85,14 +82,14 @@
   "detailed_view": {
     "message": "Részletes nézet"
   },
-  "disable_tracker_wheel_in_browser_toolbar": {
-    "message": "Tracker Kerék letiltása a böngésző eszköztárában"
-  },
   "disable_trackers_preview": {
     "message": "Nyomonkövetők előnézetének letiltása"
   },
   "done": {
     "message": "Kész"
+  },
+  "done__go_with_ghosty_": {
+    "message": "Kész! Legyen a Ghosty az ön társa!"
   },
   "email": {
     "message": "E-mail-cím",
@@ -127,8 +124,8 @@
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "A Ghostery úgy van beállítva, hogy hatástalanítsa a nyomkövetőket, és megvédje a magánéletét böngészés közben!"
   },
-  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
-    "message": "A Ghostery hatástalanítja a nyomkövetőket, és megakadályozza, hogy profilozzák önt és személyes adatait eladják adatbrókereknek a saját profitjuk érdekében."
+  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
+    "message": "A Ghostery hatástalanítja a nyomkövetőket, és megakadályozza, hogy profilozzák önt és személyes adatait eladják adatbrókereknek."
   },
   "ghostery_options": {
     "message": "Ghostery lehetőségek"
@@ -140,11 +137,11 @@
     "message": "Hosztolás",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
-    "message": "Hozzájárulok, hogy a nem személyes adataimat elküldjék a <a href=\"$${0}\">WhoTracks.Me</a> részére, és elfogadom a Ghostery <a href=\"$${1}\">Adatvédelmi Szabályzatát</a>."
+  "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
+    "message": "Hozzájárulok, hogy a nem személyes adataimat elküldjék a <a href=\"$${0}\">Ghostery WhoTracks.Me</a> részére, és elfogadom a <a href=\"$${1}\">Ghostery Adatvédelmi Szabályzatát</a>."
   },
-  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
-    "message": "A Ghostery minden olyan Ghostery-felhasználó mikro-hozzájárulásának köszönhetően létezik, aki úgy dönt, hogy nyomonkövető információkat küld a whotracks.me-nek. A nyomonkövető adatok átadása lehetővé teszi a Ghostery számára, hogy valós idejű információkat szolgáltasson a nyomonkövetőkről és a védelemről a teljes Ghostery felhasználói közösség számára."
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
+    "message": "A Ghostery minden olyan Ghostery-felhasználó mikro-hozzájárulásának köszönhetően létezik, aki úgy dönt, hogy nem személyes információkat küld a WhoTracks.Me részére. Az adatok átadása lehetővé teszi a Ghostery számára, hogy valós idejű információkat szolgáltasson a nyomonkövetőkről, amely ennek következtében védelmet nyújt a teljes Ghostery felhasználói közösség számára."
   },
   "learn_more": {
     "message": "Tudjon meg többet"
@@ -162,8 +159,8 @@
     "message": "Egyéb",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "more_information_on_@_0__": {
-    "message": "További információ a $$${0}-ról."
+  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
+    "message": "További információ a $${0} módszertanról a Ghostery kiáltványában található."
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -183,6 +180,9 @@
   "ok": {
     "message": "OK"
   },
+  "ok__i_understand": {
+    "message": "Ok, értem."
+  },
   "on": {
     "message": "Be"
   },
@@ -200,6 +200,9 @@
   },
   "report_a_broken_page": {
     "message": "Hibás oldal jelentése"
+  },
+  "show_tracker_wheel_in_the_browser_toolbar": {
+    "message": "Show Tracker Wheel in the browser toolbar"
   },
   "show_trackers_preview_next_to_search_results": {
     "message": "Nyomonkövetők előnézetének megjelenítése a keresési eredmények mellett"
@@ -249,16 +252,16 @@
   "user_interface": {
     "message": "Felhasználói kezelőfelület"
   },
-  "welcome_to": {
-    "message": "Üdvözöljük"
+  "welcome_to_ghostery": {
+    "message": "Üdvözli Önt a Ghostery"
   },
   "what_is_whotracks_me_": {
-    "message": "Mi az a whotracks.me?"
+    "message": "Mi az a WhoTracks.Me?"
   },
-  "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "A Ghostery által üzemeltetett WhoTracks.me a legátfogóbb globális adatforrás a nyomonkövetőkről, átláthatóvá téve a webes nyomkövetést."
+  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "A Ghostery által üzemeltetett WhoTracks.Me a Ghostery mesterséges intelligencia alapú nyomkövetés elleni technológiájának szerves részét képezi. Ez egy átfogó globális adatforrás a nyomonkövetőkről, amely átláthatóvá teszi a webes nyomkövetést."
   },
-  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
+  "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "A Ghostery engedélyezésével azonnal biztonságosabban, gyorsabban és kevesebb idegesítő hirdetéssel böngészhet a weben."
   },
   "yes": {
@@ -267,8 +270,8 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "Ezeket a beállításokat bármikor megváltoztathatja a&nbsp;<strong>Ghostery vezérlőpultban</strong>."
   },
-  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-    "message": "Bármikor meggondolhatja magát, és engedélyezheti a Ghostery beállításaiban, hogy a Ghostery elkezdje a nyomonkövetők követését."
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
+    "message": "Bármikor meggondolhatja magát, és engedélyezheti a Ghostery panelen, hogy a Ghostery elkezdje a nyomonkövetők követését."
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "Úgy döntött, hogy kihagyja a Ghostery engedélyezését!"
