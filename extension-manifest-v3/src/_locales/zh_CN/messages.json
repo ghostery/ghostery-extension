@@ -26,9 +26,6 @@
   "all_popups": {
     "message": "所有弹出窗口"
   },
-  "all_set__go_with_ghosty_": {
-    "message": "一切就绪！ 使用 Ghosty！"
-  },
   "anti_tracking": {
     "message": "反跟踪功能"
   },
@@ -64,8 +61,8 @@
     "message": "CDN",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "请查看<a href=\"${0}\" target=\"_blank\">常见问题解答</a>或给我们留言：<a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>。 我们将非常乐意与您交谈！"
+  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
+    "message": "查看<a href=\"$${0}\" target=\"_blank\">常见问题解答</a>或发送邮件至 <a href=\"mailto:$${1}\">$${2}< /a>。 <br/>我们非常乐意与您交谈！"
   },
   "comments": {
     "message": "评论",
@@ -85,14 +82,14 @@
   "detailed_view": {
     "message": "详细视图"
   },
-  "disable_tracker_wheel_in_browser_toolbar": {
-    "message": "在浏览器工具栏中禁用跟踪器轮盘"
-  },
   "disable_trackers_preview": {
     "message": "禁用跟踪器预览"
   },
   "done": {
     "message": "完成"
+  },
+  "done__go_with_ghosty_": {
+    "message": "完成！ 和幽灵一起消失吧！"
   },
   "email": {
     "message": "电子邮件地址",
@@ -127,8 +124,8 @@
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery 是为了在浏览时阻止跟踪器并保护您的隐私！"
   },
-  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
-    "message": "Ghostery 正在阻止跟踪器，防止他人分析您的用户特征并将您的个人信息出售给数据中介来牟利。"
+  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
+    "message": "Ghostery 正在阻止跟踪器的踪迹，并防止他人分析您的特征并将您的个人信息出售给数据中介。"
   },
   "ghostery_options": {
     "message": "Ghostery 选项"
@@ -140,11 +137,11 @@
     "message": "托管",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
-    "message": "我同意向 <a href=\"${0}\">WhoTracks.Me</a> 发送非个人信息，我接受 Ghostery <a href=\"${1}\">隐私政策</a>。"
+  "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
+    "message": "我同意将非个人信息发送到 <a href=\"$${0}\">Ghostery 的 WhoTracks.Me</a>，并且接受 <a href=\"$${1}\">Ghostery 隐私政策</a>"
   },
-  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
-    "message": "它的存在要归功于每个选择将跟踪器信息发送给 whotracks.me 的 Ghostery 用户的微小贡献。 跟踪器输入使 Ghostery 能够为整个 Ghostery 用户社区提供有关跟踪器的实时情报和保护。"
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
+    "message": "它的存在要归功于每个选择将非个人信息给 WhoTracks.Me 的 Ghostery 用户的微小贡献。 这些输入使 Ghostery 能够提供有关跟踪器的实时情报，从而为整个 Ghostery 社区提供保护。"
   },
   "learn_more": {
     "message": "了解详情"
@@ -162,8 +159,8 @@
     "message": "其他",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "more_information_on_@_0__": {
-    "message": "关于 ${0} 的更多信息。"
+  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
+    "message": "如需了解有关 $${0} 方法的更多信息，请参见 Ghostery 的宣言。"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -183,6 +180,9 @@
   "ok": {
     "message": "确定"
   },
+  "ok__i_understand": {
+    "message": "好的，我明白"
+  },
   "on": {
     "message": "开启"
   },
@@ -200,6 +200,9 @@
   },
   "report_a_broken_page": {
     "message": "报告崩溃页面"
+  },
+  "show_tracker_wheel_in_the_browser_toolbar": {
+    "message": "Show Tracker Wheel in the browser toolbar"
   },
   "show_trackers_preview_next_to_search_results": {
     "message": "在搜索结果旁显示跟踪器预览"
@@ -249,16 +252,16 @@
   "user_interface": {
     "message": "用户界面"
   },
-  "welcome_to": {
-    "message": "欢迎使用"
+  "welcome_to_ghostery": {
+    "message": "欢迎使用 Ghostery"
   },
   "what_is_whotracks_me_": {
-    "message": "什么是 whotracks.me？"
+    "message": "什么是 WhoTracks.Me？"
   },
-  "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.me 由 Ghostery 运营，是全球最全面的跟踪器资源，为网络跟踪带来透明度。"
+  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"
   },
-  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
+  "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "启用 Ghostery 后，您可以立即更安全、更快速地浏览网页，并减少恼人的广告。"
   },
   "yes": {
@@ -267,8 +270,8 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "您可以随时在&nbsp;<strong>Ghostery 控制面板</strong>中更改这些设置。"
   },
-  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-    "message": "您可以随时改变主意，在 Ghostery 设置中启用 Ghostery 开始追踪跟踪器。"
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
+    "message": "您可以随时改变主意，在 Ghostery 面板中启用 Ghostery 开始追踪跟踪器。"
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "您选择跳过启用 Ghostery！"
