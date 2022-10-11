@@ -34,13 +34,26 @@ class Api {
 		}
 
 		const pending = (async () => {
+			const fromCookie = async (name) => {
+				const { value } = await cookiesGet({ name });
+				if (!value) {
+					throw new Error(`Unable to refreshToken without "${name}"`);
+				}
+				return value;
+			};
+			const headers = {
+				UserId: await fromCookie('user_id'),
+				RefreshToken: await fromCookie('refresh_token'),
+			};
+
 			const response = await fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
 				method: 'POST',
 				credentials: 'omit',
+				headers,
 			});
 			if (response.ok) {
 				const data = await response.json();
-				setAllLoginCookies({
+				await setAllLoginCookies({
 					accessToken: data.access_token,
 					refreshToken: data.refresh_token,
 					csrfToken: data.csrf_token,
