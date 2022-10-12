@@ -33,22 +33,40 @@ class Api {
 			return this._refreshPromise;
 		}
 
-		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
-			method: 'POST',
-			credentials: 'omit',
-		}).then((res) => {
-			if (res.status > 400) {
-				throw res.json();
-			}
-			return res.json();
-		}).then(response => setAllLoginCookies({
-			accessToken: response.access_token,
-			refreshToken: response.refresh_token,
-			csrfToken: response.csrf_token,
-			userId: response.user_id,
-		})).finally(() => { this._refreshPromise = null; });
+		const pending = (async () => {
+			const fromCookie = async (name) => {
+				const { value } = await cookiesGet({ name });
+				if (!value) {
+					throw new Error(`Unable to refreshToken without "${name}"`);
+				}
+				return value;
+			};
+			const headers = {
+				UserId: await fromCookie('user_id'),
+				RefreshToken: await fromCookie('refresh_token'),
+			};
 
-		return this._refreshPromise;
+			const response = await fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
+				method: 'POST',
+				credentials: 'omit',
+				headers,
+			});
+			if (response.ok) {
+				const data = await response.json();
+				await setAllLoginCookies({
+					accessToken: data.access_token,
+					refreshToken: data.refresh_token,
+					csrfToken: data.csrf_token,
+					userId: data.user_id,
+				});
+			}
+			return response;
+		})();
+		this._refreshPromise = pending;
+		pending.finally(() => {
+			this._refreshPromise = null;
+		});
+		return pending;
 	}
 
 	async _sendReq(method, path, body) {
