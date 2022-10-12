@@ -11,7 +11,7 @@
 
 import { define, html, router } from 'hybrids';
 
-const PRIVACY_POLICY_URL = 'https://ghostery.com/privacy-policy';
+const PRIVACY_POLICY_URL = 'https://www.ghostery.com/privacy-policy';
 
 function scrollToAnchor(host, event) {
   let anchor = event.target;

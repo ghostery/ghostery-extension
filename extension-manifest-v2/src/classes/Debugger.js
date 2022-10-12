@@ -203,6 +203,7 @@ class Debugger {
 		getGlobals: 'ghostery.getGlobals()',
 		getUserData: 'ghostery.getUserData()',
 		openPanel: 'ghostery.openPanel()',
+		refreshToken: 'ghostery.refreshToken()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
@@ -240,6 +241,7 @@ class Debugger {
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
+		[`${this._helpFunctionNames.refreshToken}`, 'Forces a refresh of the token (you have to be logged in)'],
 	]
 
 	/**
@@ -405,6 +407,13 @@ class Debugger {
 		['No argument', 'The standard panel for desktop'],
 		['mobile', 'The mobile panel for Android'],
 	];
+
+  static helpRefreshToken = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.refreshToken}`,
+		'',
+		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
+		['No argument or any arguments', 'Refreshes the access token (need to be logged in)'],
+  ];
 
 	/**
 	 * @access private
@@ -886,6 +895,30 @@ class Debugger {
 			.then(data => _printUserData(data))
 			.catch(error => _printError(error))
 			.finally(() => _printAccountEvents());
+	}
+
+	/**
+	 * Forces a token refresh for troubleshooting situations where you get logged out.
+	 *
+	 * @return 	{String}					A thank you message.
+	 */
+	refreshToken = () => {
+		(async () => {
+			const output = [];
+			output.push(`${CSS_SUBHEADER} Results of token refresh:`);
+			try {
+				const response = await account.refreshToken();
+				if (response.ok) {
+					output.push('Successfully refreshed token');
+				} else {
+					output.push(`Unable to refresh token (status: ${response.status})`);
+				}
+			} catch (e) {
+				output.push(`Unable to refresh the token: ${e}`);
+			}
+			Debugger._printToConsole(Debugger._typeset(output));
+		})();
+		return THANKS;
 	}
 
 	// [[Main Actions]] public wrt to other background code, but intentionally not fully exposed to the console
