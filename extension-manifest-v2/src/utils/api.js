@@ -130,7 +130,13 @@ class Api {
 					let shouldRefresh = false;
 					if (data && data.errors) {
 						data.errors.forEach((e) => {
-							if (e.code === '10021' || e.code === '10022') { // token is expired or missing
+							if (e.code === '10020' || e.code === '10021' || e.code === '10022') {
+								// The access_token was rejected, but we can get a new one because it is
+								// one of the retryable cases (not valid, expired, or missing).
+								//
+								// Note: "not valid" ('10020') is somewhat misleading: it does not
+								// necessarily mean that the access_token is ill-formed; the server
+								// will also return that code in situations where the token expired.
 								shouldRefresh = true;
 							}
 						});
