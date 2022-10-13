@@ -22,7 +22,7 @@ export default define({
       <ui-page-layout>
         <ui-card>
           <ui-text type="display-s" layout="block:center margin:bottom:4">
-            Ghostery Options
+            Ghostery settings
           </ui-text>
           <section layout="column gap:3">
             ${store.ready(options) &&
