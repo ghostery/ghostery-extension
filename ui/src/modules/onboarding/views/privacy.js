@@ -72,6 +72,7 @@ export default define({
     </ui-onboarding-dialog>
   `.css`
     #policy { min-height: 100vh; }
+    #policy h1 { display: none }
     #policy h3, #policy .side-menu .cap { font: var(--ui-font-headline-s); font-weight: 400; color: var(--ui-color-gray-800); margin: 16px 0; }
     #policy .side-menu .cap { font: var(--ui-font-headline-s); }
     #policy ul { list-style: none; padding: 0; margin: 16px 0; }
@@ -79,6 +80,7 @@ export default define({
     #policy ul li a { text-decoration: none }
     #policy p { font: var(--ui-font-body-m); margin: 16px 0; }
     #policy a { color: var(--ui-color-gray-800); font-weight: bold; }
+    #policy code { white-space: initial; }
 
     #policy .breadcrumb, #policy h2, #policy ul li.child { display: none }
   `,
