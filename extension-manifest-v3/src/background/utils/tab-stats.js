@@ -11,7 +11,7 @@
 
 // This global provides an API like an ES Map but will sync
 // with local storage from time to time. That is done to prevent
-// loosing all/ stats when the browser terminates the execution
+// the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
 class AutoSyncingMap {
   constructor({
