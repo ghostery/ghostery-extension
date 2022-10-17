@@ -16,7 +16,6 @@
 
 console.time('i18n-checker');
 
-const { local } = require('d3');
 const fs = require('fs-extra');
 const jsonfile = require('jsonfile');
 const oboe = require('oboe');
