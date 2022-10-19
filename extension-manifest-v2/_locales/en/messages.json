@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Get full-coverage protection across all browsers & apps on your device"
   },
-  "get_ghostery_plus": {
-    "message": "Get Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Get Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -1646,30 +1640,6 @@
   "subscribe": {
     "message": "Subscribe"
   },
-  "subscribe_pitch": {
-    "message": "Upgrade to Ghostery Plus to unlock our full product suite! For just &#36;4.99 per month, get access to a powerful private browser with built-in private search, advanced tracker analytics, and other special perks."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Get Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Learn more"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "No thanks, maybe later"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Already a subscriber? Sign in here"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Already subscribed? Sign in"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Already a subscriber? Sign in"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus!"
-  },
   "subscription_active": {
     "message": "Active"
   },
@@ -1739,7 +1709,10 @@
     "message": "Change the color scheme of Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Upgrade to"
+    "message": "Become a Contributor"
+  },
+  "subscription_for_contributors": {
+    "message": "For contributors"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

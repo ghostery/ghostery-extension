@@ -733,7 +733,7 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `${globals.GHOSTERY_BASE_URL}/pricing`;
+		let url = `${globals.GHOSTERY_BASE_URL}/become-a-contributor`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;

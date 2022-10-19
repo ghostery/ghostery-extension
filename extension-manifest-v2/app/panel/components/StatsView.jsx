@@ -198,11 +198,11 @@ const StatsView = (props) => {
 						<div className="modal-text-container">
 							<div className="modal-title-text">{ t('panel_stats_pitch_modal_text') }</div>
 						</div>
-						<PanelToTabLink href={`${GHOSTERY_BASE_URL}/pricing?utm_source=gbe&utm_campaign=in_app_hstats_lm`}>
+						<PanelToTabLink href={`${GHOSTERY_BASE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=in_app_hstats_lm`}>
 							<span className="pitch-learn-more">{t('learn_more')}</span>
 						</PanelToTabLink>
 						<div className="modal-buttons-container">
-							<div className="modal-filled-button" onClick={subscribe}>{t('get_ghostery_plus_bang')}</div>
+							<div className="modal-filled-button" onClick={subscribe}>{t('subscription_upgrade_to')}</div>
 						</div>
 						{ !loggedIn && (
 							<div className="modal-text-container">
