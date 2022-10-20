@@ -1605,6 +1605,8 @@ async function init() {
 	try {
 		await confData.init();
 
+		metrics.init();
+
 		initializePopup();
 
 		initializeEventListeners();
