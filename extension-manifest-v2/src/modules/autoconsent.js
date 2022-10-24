@@ -15,41 +15,42 @@ import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 
 async function initialize(msg, tabId, frameId) {
-	const url = new URL(msg.url);
 	const {
 		enable_autoconsent,
 		autoconsent_whitelist,
 		autoconsent_blacklist,
 		site_whitelist,
 	} = conf;
-
-	if (
-		enable_autoconsent &&
-		!globals.SESSION.paused_blocking &&
-		!autoconsent_blacklist?.includes(url.hostname) &&
-		!site_whitelist.includes(url.hostname.replace(/^www\./, ''))
-	) {
-		const optOut = autoconsent_whitelist?.some(h => url.hostname.includes(h)) ?? true;
-
-		chrome.tabs.sendMessage(
-			tabId,
-			{
-				action: 'autoconsent',
-				type: 'initResp',
-				rules,
-				config: {
-					enabled: true,
-					autoAction: optOut ? 'optOut' : '',
-					disabledCmps: [],
-					enablePrehide: optOut,
-					detectRetries: 20,
-				},
-			},
-			{
-				frameId,
-			},
-		);
+	if (!enable_autoconsent || globals.SESSION.paused_blocking) {
+		return;
 	}
+
+	const url = new URL(msg.url);
+	const site = url.hostname.replace(/^www\./, '');
+	if (autoconsent_blacklist?.includes(site) || site_whitelist.includes(site)) {
+		return;
+	}
+
+	const globallyEnabled = !autoconsent_whitelist;
+	const optOut = globallyEnabled || autoconsent_whitelist.includes(site);
+	chrome.tabs.sendMessage(
+		tabId,
+		{
+			action: 'autoconsent',
+			type: 'initResp',
+			rules,
+			config: {
+				enabled: true,
+				autoAction: optOut ? 'optOut' : '',
+				disabledCmps: [],
+				enablePrehide: optOut,
+				detectRetries: 20,
+			},
+		},
+		{
+			frameId,
+		},
+	);
 }
 
 async function evalCode(code, id, tabId, frameId) {
