@@ -39,7 +39,6 @@ const StatsView = (props) => {
 		loggedIn,
 		doReset,
 		cancelReset,
-		subscribe,
 		signIn,
 	} = props;
 
@@ -198,16 +197,15 @@ const StatsView = (props) => {
 						<div className="modal-text-container">
 							<div className="modal-title-text">{ t('panel_stats_pitch_modal_text') }</div>
 						</div>
-						<PanelToTabLink href={`${GHOSTERY_BASE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=in_app_hstats_lm`}>
+						<PanelToTabLink href={`${GHOSTERY_BASE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=in_app_hstats_lm#donate`}>
 							<span className="pitch-learn-more">{t('learn_more')}</span>
 						</PanelToTabLink>
 						<div className="modal-buttons-container">
-							<div className="modal-filled-button" onClick={subscribe}>{t('subscription_upgrade_to')}</div>
+							<a href={`${globals.GHOSTERY_BASE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=in_app_plus_lm`} target="_blank" className="modal-filled-button" rel="noreferrer">{t('subscription_upgrade_to')}</a>
 						</div>
 						{ !loggedIn && (
 							<div className="modal-text-container">
 								<div className="modal-text">
-									<span>{`${t('panel_stats_pitch_modal_already')} `}</span>
 									<span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={signIn}>{t('panel_stats_pitch_modal_sign_in')}</span>
 								</div>
 							</div>

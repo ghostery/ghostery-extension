@@ -14,7 +14,7 @@
 import React from 'react';
 import moment from 'moment/min/moment-with-locales.min';
 import StatsView from './StatsView';
-import { sendMessage, sendMessageInPromise, openCheckoutPage } from '../utils/msg';
+import { sendMessage, sendMessageInPromise } from '../utils/msg';
 
 /**
  * @class the parent component of Historical Stats View and Graph
@@ -269,17 +269,6 @@ class Stats extends React.Component {
 	cancelReset = () => {
 		// Do nothing, just close the modal
 		this.setState({ showResetModal: false });
-	}
-
-	/**
-	 * Helper function to handle clicking on the Become a Subscriber button on modal
-	 */
-	subscribe = () => {
-		sendMessage('ping', 'hist_plus_cta');
-		openCheckoutPage({
-			utm_source: 'gbe',
-			utm_campaign: 'in_app_hstats'
-		});
 	}
 
 	/**
@@ -544,7 +533,6 @@ class Stats extends React.Component {
 				resetStats={this.resetStats}
 				doReset={this.doReset}
 				cancelReset={this.cancelReset}
-				subscribe={this.subscribe}
 				signIn={this.signIn}
 			/>
 		);

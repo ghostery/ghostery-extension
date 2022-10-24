@@ -17,7 +17,7 @@ import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from '../../shared-components/Tooltip';
 import HeaderMenu from './HeaderMenu';
-import { sendMessage, sendMessageInPromise } from '../utils/msg';
+import { sendMessageInPromise } from '../utils/msg';
 import { log } from '../../../src/utils/common';
 /**
  * @class Implements header component which is common to all panel views

@@ -1121,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Monthly"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Already subscribed?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Sign In"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Unlock advanced tracker analytics and a powerful private browser with built-in private search by upgrading to Ghostery Plus."
+    "message": "Become a Contributor to unlock Advanced Tracker Analytics and a further line of Ghostery extras."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Erase all statistics history up until this point in time."
