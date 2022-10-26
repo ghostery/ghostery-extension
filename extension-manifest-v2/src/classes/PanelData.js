@@ -600,8 +600,11 @@ class PanelData {
 		if (data.enable_autoconsent === false) {
 			conf.autoconsent_whitelist = [];
 			conf.autoconsent_blacklist = [];
-			conf.autoconsent_interactions = 0;
 			syncSetDataChanged = true;
+		}
+
+		if (data.hasOwnProperty('enable_autoconsent')) {
+			conf.autoconsent_interactions = 0;
 		}
 
 		if (syncSetDataChanged) {

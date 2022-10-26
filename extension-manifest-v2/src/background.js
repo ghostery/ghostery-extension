@@ -564,6 +564,7 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				conf.autoconsent_whitelist = null;
 				conf.autoconsent_blacklist = null;
+				conf.autoconsent_interactions = 0;
 			}
 
 			return false;
@@ -576,6 +577,7 @@ function onMessageHandler(request, sender, callback) {
 				conf.enable_autoconsent = false;
 				conf.autoconsent_whitelist = [];
 				conf.autoconsent_blacklist = [];
+				conf.autoconsent_interactions = 0;
 			}
 
 			return false;

@@ -29,7 +29,7 @@ function onConfirm(type) {
 export default define({
   tag: 'ui-autoconsent-home-view',
   scope: defaultChoice === 'all' ? 'all' : 'selected',
-  content: ({ scope }) =>
+  content: () =>
     html`
       <template layout="column margin:3 gap:4">
         <div layout="column items:center gap">
@@ -51,7 +51,7 @@ export default define({
                 name="scope"
                 value="selected"
                 onchange="${html.set('scope')}"
-                checked="${scope === 'selected'}"
+                checked="${defaultChoice !== 'all'}"
                 layout="margin:0"
                 style="accent-color: var(--ui-color-primary-700)"
               />
@@ -63,7 +63,7 @@ export default define({
                 name="scope"
                 value="all"
                 onchange="${html.set('scope')}"
-                checked="${scope === 'all'}"
+                checked="${defaultChoice === 'all'}"
                 layout="margin:0"
                 style="accent-color: var(--ui-color-primary-700)"
               />
