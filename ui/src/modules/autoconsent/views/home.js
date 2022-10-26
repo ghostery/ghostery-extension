@@ -28,7 +28,7 @@ export default define({
   tag: 'ui-autoconsent-home-view',
   scope: defaultChoice === 'all' ? 'all' : 'selected',
   defaultAll: defaultChoice === 'all',
-  content: ({ defaultAll }) =>
+  content: ({ scope }) =>
     html`
       <template layout="column margin:3 gap:4">
         <div layout="column items:center gap">
