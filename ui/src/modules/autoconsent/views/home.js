@@ -50,7 +50,7 @@ export default define({
                 name="scope"
                 value="selected"
                 onchange="${html.set('scope')}"
-                checked="${!defaultAll}"
+                checked="${scope === 'selected'}"
                 layout="margin:0"
                 style="accent-color: var(--ui-color-primary-700)"
               />
