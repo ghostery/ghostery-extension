@@ -26,7 +26,7 @@ function onConfirm(type) {
 
 export default define({
   tag: 'ui-autoconsent-home-view',
-  scope: 'selected',
+  scope: defaultChoice === 'all' ? 'all' : 'selected',
   defaultAll: defaultChoice === 'all',
   content: ({ defaultAll }) =>
     html`
