@@ -89,7 +89,7 @@ async function evalCode(code, id, tabId, frameId) {
 }
 
 async function openIframe(msg, tabId) {
-	const { autoconsent_whitelist, never_consent_interactions } = conf;
+	const { autoconsent_whitelist, autoconsent_interactions } = conf;
 	if (!autoconsent_whitelist) return;
 
 	const domain = await getTabDomain(tabId);
@@ -104,7 +104,7 @@ async function openIframe(msg, tabId) {
 			action: 'autoconsent',
 			type: 'openIframe',
 			domain,
-			defaultForAll: never_consent_interactions >= 2,
+			defaultForAll: autoconsent_interactions >= 2,
 		},
 		{ frameId: 0 },
 	);

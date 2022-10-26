@@ -135,7 +135,7 @@ class ConfData {
 			_initProperty('account', null);
 			_initProperty('autoconsent_whitelist', []);
 			_initProperty('autoconsent_blacklist', []);
-			_initProperty('never_consent_interactions', 0);
+			_initProperty('autoconsent_interactions', 0);
 			_initProperty('bugs', {});
 			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);

@@ -13,7 +13,9 @@ import { define, html, router, dispatch } from 'hybrids';
 
 import Confirm from './confirm.js';
 
-const defaultChoice = new URLSearchParams(window.location.search).get('default');
+const defaultChoice = new URLSearchParams(window.location.search).get(
+  'default',
+);
 
 function onConfirm(type) {
   return (host) => {
@@ -27,7 +29,6 @@ function onConfirm(type) {
 export default define({
   tag: 'ui-autoconsent-home-view',
   scope: defaultChoice === 'all' ? 'all' : 'selected',
-  defaultAll: defaultChoice === 'all',
   content: ({ scope }) =>
     html`
       <template layout="column margin:3 gap:4">

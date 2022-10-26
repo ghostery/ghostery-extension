@@ -21,7 +21,7 @@ export default define({
     get: (host, value = []) => value,
     set: (host, value) => value || [],
   },
-  content: ({ stack, categories, defaultChoice, }) => html`
+  content: ({ stack, categories }) => html`
     <template layout="grid::min|1|min">
       <ui-autoconsent-card>
         <ui-autoconsent-header></ui-autoconsent-header>
