@@ -21,6 +21,7 @@ import { getBrowserInfo } from '@ghostery/libs';
 import globals from './Globals';
 import conf from './Conf';
 import GhosteryModule from './Module';
+import { alwaysLog } from '../utils/common';
 
 if (!navigator.userAgent.includes('Firefox')) {
 	parseHtml.domParser = new DOMParser();
@@ -56,6 +57,12 @@ export const syncTrustedSites = () => {
 	setPref('adb-trusted-sites', conf.site_whitelist || []);
 };
 
+const dataMigrations = [];
+
+export function addMigration(dataMigration) {
+	dataMigrations.push(dataMigration);
+}
+
 const load = common.load.bind(common);
 common.load = async () => {
 	// ensures that prefs.set is present
@@ -88,6 +95,16 @@ common.load = async () => {
 
 	setPref('modules.adblocker.enabled', conf.enable_ad_block);
 	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
+
+	// eslint-disable-next-line no-await-in-loop, no-restricted-syntax
+	for (const dataMigration of dataMigrations) {
+		try {
+			// eslint-disable-next-line no-await-in-loop
+			await dataMigration(common);
+		} catch (e) {
+			alwaysLog('Problem with Common migration', e);
+		}
+	}
 
 	return load();
 };

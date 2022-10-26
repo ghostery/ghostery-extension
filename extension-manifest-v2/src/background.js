@@ -20,7 +20,7 @@ import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotra
 import { getBrowserInfo } from '@ghostery/libs';
 
 import common, {
-	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState
+	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState, addMigration
 } from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
@@ -1347,6 +1347,13 @@ function initializeVersioning() {
 
 			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') < 0) {
 				conf.enable_autoconsent = true;
+			}
+
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.4') < 0) {
+				addMigration((app) => {
+					alwaysLog('ONE-TIME MIGRATION: removing "developer" flag if present');
+					app.prefs.clear('developer');
+				});
 			}
 		} else {
 			log('SAME VERSION OR NOT THE FIRST RUN');
