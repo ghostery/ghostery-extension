@@ -10,9 +10,15 @@
  */
 
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { parse } from 'tldts-experimental';
 
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
+
+async function getTabDomain(tabId) {
+	const tab = await new Promise(resolve => chrome.tabs.get(tabId, resolve));
+	return parse(tab.url).domain;
+}
 
 async function initialize(msg, tabId, frameId) {
 	const {
@@ -21,18 +27,20 @@ async function initialize(msg, tabId, frameId) {
 		autoconsent_blacklist,
 		site_whitelist,
 	} = conf;
+
 	if (!enable_autoconsent || globals.SESSION.paused_blocking) {
 		return;
 	}
 
-	const url = new URL(msg.url);
-	const site = url.hostname.replace(/^www\./, '');
-	if (autoconsent_blacklist?.includes(site) || site_whitelist.includes(site)) {
+	const domain = await getTabDomain(tabId);
+
+	if (autoconsent_blacklist?.includes(domain) || site_whitelist.some(s => s.includes(domain))) {
 		return;
 	}
 
 	const globallyEnabled = !autoconsent_whitelist;
-	const optOut = globallyEnabled || autoconsent_whitelist.includes(site);
+	const optOut = globallyEnabled || autoconsent_whitelist.includes(domain);
+
 	chrome.tabs.sendMessage(
 		tabId,
 		{
@@ -80,17 +88,21 @@ async function evalCode(code, id, tabId, frameId) {
 	);
 }
 
-function openIframe(msg, tabId) {
-	const url = new URL(msg.url);
+async function openIframe(msg, tabId) {
 	const { autoconsent_whitelist } = conf;
+	if (!autoconsent_whitelist) return;
 
-	if (autoconsent_whitelist?.every(h => !url.hostname.includes(h))) {
-		chrome.tabs.sendMessage(
-			tabId,
-			{ action: 'autoconsent', type: 'openIframe' },
-			{ frameId: 0 },
-		);
+	const domain = await getTabDomain(tabId);
+
+	if (autoconsent_whitelist.includes(domain)) {
+		return;
 	}
+
+	chrome.tabs.sendMessage(
+		tabId,
+		{ action: 'autoconsent', type: 'openIframe', domain },
+		{ frameId: 0 },
+	);
 }
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
