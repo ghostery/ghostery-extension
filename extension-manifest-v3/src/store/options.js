@@ -26,6 +26,7 @@ const Options = {
     all: false,
     allowed: [String],
     disallowed: [String],
+    interactions: 0,
   },
   trackerWheel: true,
   wtmSerpReport: true,

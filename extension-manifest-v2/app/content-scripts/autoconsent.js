@@ -23,7 +23,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 			if (shownIframe) return false;
 
 			showIframe(chrome.runtime.getURL(
-				`app/templates/autoconsent.html?host=${encodeURIComponent(msg.domain)}`
+				`app/templates/autoconsent.html?host=${encodeURIComponent(msg.domain)}&default=${msg.defaultForAll ? 'all' : ''}`
 			));
 			shownIframe = true;
 
