@@ -89,7 +89,7 @@ async function evalCode(code, id, tabId, frameId) {
 }
 
 async function openIframe(msg, tabId) {
-	const { autoconsent_whitelist } = conf;
+	const { autoconsent_whitelist, autoconsent_interactions } = conf;
 	if (!autoconsent_whitelist) return;
 
 	const domain = await getTabDomain(tabId);
@@ -100,7 +100,12 @@ async function openIframe(msg, tabId) {
 
 	chrome.tabs.sendMessage(
 		tabId,
-		{ action: 'autoconsent', type: 'openIframe', domain },
+		{
+			action: 'autoconsent',
+			type: 'openIframe',
+			domain,
+			defaultForAll: autoconsent_interactions >= 2,
+		},
 		{ frameId: 0 },
 	);
 }

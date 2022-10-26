@@ -560,9 +560,11 @@ function onMessageHandler(request, sender, callback) {
 			conf.enable_autoconsent = true;
 			if (message.url) {
 				conf.autoconsent_whitelist = conf.autoconsent_whitelist.concat(message.url);
+				conf.autoconsent_interactions += 1;
 			} else {
 				conf.autoconsent_whitelist = null;
 				conf.autoconsent_blacklist = null;
+				conf.autoconsent_interactions = 0;
 			}
 
 			return false;
@@ -570,10 +572,12 @@ function onMessageHandler(request, sender, callback) {
 		if (name === 'disable') {
 			if (message.url) {
 				conf.autoconsent_blacklist = conf.autoconsent_blacklist.concat(message.url);
+				conf.autoconsent_interactions += 1;
 			} else {
 				conf.enable_autoconsent = false;
 				conf.autoconsent_whitelist = [];
 				conf.autoconsent_blacklist = [];
+				conf.autoconsent_interactions = 0;
 			}
 
 			return false;

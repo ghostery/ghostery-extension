@@ -91,7 +91,12 @@ async function openIframe(msg, tabId) {
 
   chrome.tabs.sendMessage(
     tabId,
-    { action: 'autoconsent', type: 'openIframe', domain },
+    {
+      action: 'autoconsent',
+      type: 'openIframe',
+      domain,
+      defaultForAll: autoconsent.interactions >= 2,
+    },
     { frameId: 0 },
   );
 }
