@@ -67,7 +67,7 @@ export default define({
                 layout="margin:0"
                 style="accent-color: var(--ui-color-primary-700)"
               />
-              <ui-text>on all websites</ui-text>
+              <ui-text><strong>on all websites</strong></ui-text>
             </label>
           </div>
         </div>
