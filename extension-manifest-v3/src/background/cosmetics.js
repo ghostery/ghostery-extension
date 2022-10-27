@@ -45,7 +45,7 @@ const adblockerStartupPromise = (async function () {
   );
 })();
 
-async function adblockerInjectStylesWebExtension(
+function adblockerInjectStylesWebExtension(
   styles,
   { tabId, frameId, allFrames = false },
 ) {
@@ -54,40 +54,34 @@ async function adblockerInjectStylesWebExtension(
     return;
   }
 
-  // Proceed with stylesheet injection.
-  return new Promise((resolve) => {
-    if (chrome.scripting && chrome.scripting.insertCSS) {
-      const target = {
-        tabId,
-      };
+  if (chrome.scripting && chrome.scripting.insertCSS) {
+    const target = {
+      tabId,
+    };
 
-      if (frameId) {
-        target.frameIds = [frameId];
-      } else {
-        target.allFrames = allFrames;
-      }
-      chrome.scripting.insertCSS(
-        {
-          css: styles,
-          origin: 'USER',
-          target,
-        },
-        () => resolve,
-      );
+    if (frameId) {
+      target.frameIds = [frameId];
     } else {
-      const details = {
-        allFrames,
-        code: styles,
-        cssOrigin: 'user',
-        matchAboutBlank: true,
-        runAt: 'document_start',
-      };
-      if (frameId) {
-        details.frameId = frameId;
-      }
-      chrome.tabs.insertCSS(tabId, details, () => resolve);
+      target.allFrames = allFrames;
     }
-  });
+    chrome.scripting.insertCSS({
+      css: styles,
+      origin: 'USER',
+      target,
+    });
+  } else {
+    const details = {
+      allFrames,
+      code: styles,
+      cssOrigin: 'user',
+      matchAboutBlank: true,
+      runAt: 'document_start',
+    };
+    if (frameId) {
+      details.frameId = frameId;
+    }
+    chrome.tabs.insertCSS(tabId, details);
+  }
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
@@ -205,13 +199,13 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     sendResponse({
       active: specificResponses.map((r) => r.active).some((a) => a),
       extended: specificResponses.map((r) => r.extended).flat(),
-      styles: '',
+      scripts: specificResponses.map((r) => r.scripts).flat(),
     });
   }
 }
 
 async function executeScriptlets(tabId, scripts) {
-  // Dynamically injected scripts scripts can be difficult to find later in
+  // Dynamically injected scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   let debugMarker;
   if (DEBUG_SCRIPLETS) {
