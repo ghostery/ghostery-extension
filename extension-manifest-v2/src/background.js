@@ -562,8 +562,8 @@ function onMessageHandler(request, sender, callback) {
 				conf.autoconsent_whitelist = conf.autoconsent_whitelist.concat(message.url);
 				conf.autoconsent_interactions += 1;
 			} else {
-				conf.autoconsent_whitelist = null;
-				conf.autoconsent_blacklist = null;
+				conf.autoconsent_whitelist = false;
+				conf.autoconsent_blacklist = false;
 				conf.autoconsent_interactions = 0;
 			}
 

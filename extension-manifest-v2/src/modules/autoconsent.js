@@ -34,7 +34,7 @@ async function initialize(msg, tabId, frameId) {
 
 	const domain = await getTabDomain(tabId);
 
-	if (autoconsent_blacklist?.includes(domain) || site_whitelist.some(s => s.includes(domain))) {
+	if ((autoconsent_blacklist && autoconsent_blacklist.includes(domain)) || site_whitelist.some(s => s.includes(domain))) {
 		return;
 	}
 
