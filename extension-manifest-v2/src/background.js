@@ -567,6 +567,8 @@ function onMessageHandler(request, sender, callback) {
 				conf.autoconsent_interactions = 0;
 			}
 
+			account.saveUserSettings().catch(err => log('Background autoconsent', err));
+
 			return false;
 		}
 		if (name === 'disable') {
@@ -579,6 +581,8 @@ function onMessageHandler(request, sender, callback) {
 				conf.autoconsent_blacklist = [];
 				conf.autoconsent_interactions = 0;
 			}
+
+			account.saveUserSettings().catch(err => log('Background autoconsent', err));
 
 			return false;
 		}
