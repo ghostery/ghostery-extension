@@ -24,7 +24,7 @@ const adblockerEngines = DNR_RULES_LIST.reduce((map, name) => {
   return map;
 }, {});
 
-const adblockerStartupPromise = (async function () {
+let adblockerStartupPromise = (async function () {
   await observe('dnrRules', (dnrRules) => {
     DNR_RULES_LIST.forEach((key) => {
       adblockerEngines[key].isEnabled = dnrRules[key];
@@ -43,6 +43,8 @@ const adblockerStartupPromise = (async function () {
       adblockerEngines[engineName].engine = engine;
     }),
   );
+
+  adblockerStartupPromise = null;
 })();
 
 function adblockerInjectStylesWebExtension(
@@ -85,13 +87,14 @@ function adblockerInjectStylesWebExtension(
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-async function adblockerOnMessage(msg, sender, sendResponse) {
-  await adblockerStartupPromise;
+async function adblockerOnMessage(msg, sender) {
+  if (adblockerStartupPromise) {
+    await adblockerStartupPromise;
+  }
 
   const genericStyles = [];
   const specificStyles = [];
   let specificFrameId = null;
-  const specificResponses = [];
 
   Object.keys(adblockerEngines).forEach((engineName) => {
     if (
@@ -108,6 +111,7 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     const parsed = parse(url);
     const hostname = parsed.hostname || '';
     const domain = parsed.domain || '';
+
     // Once per tab/page load we inject base stylesheets. These are always
     // the same for all frames of a given page because they do not depend on
     // a particular domain and cannot be cancelled using unhide rules.
@@ -144,7 +148,7 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     // ids and hrefs observed in the DOM. MutationObserver is also used to
     // make sure we can react to changes.
     {
-      const { active, styles, scripts, extended } = engine.getCosmeticsFilters({
+      const { active, styles } = engine.getCosmeticsFilters({
         domain,
         hostname,
         url,
@@ -169,15 +173,6 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
 
       specificStyles.push(styles);
       specificFrameId = frameId;
-
-      // Inject scripts from content script
-      if (scripts.length !== 0) {
-        specificResponses.push({
-          active,
-          extended,
-          scripts,
-        });
-      }
     }
   });
 
@@ -192,14 +187,6 @@ async function adblockerOnMessage(msg, sender, sendResponse) {
     adblockerInjectStylesWebExtension(specificStyles.join('\n'), {
       tabId: sender.tab.id,
       frameId: specificFrameId,
-    });
-  }
-
-  if (specificResponses.length > 0) {
-    sendResponse({
-      active: specificResponses.map((r) => r.active).some((a) => a),
-      extended: specificResponses.map((r) => r.extended).flat(),
-      scripts: specificResponses.map((r) => r.scripts).flat(),
     });
   }
 }
@@ -291,9 +278,9 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   });
 });
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
-    return adblockerOnMessage(msg, sender, sendResponse);
+    adblockerOnMessage(msg, sender);
   }
 
   return false;

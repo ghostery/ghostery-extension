@@ -10,18 +10,13 @@
  */
 import { injectCosmetics } from '@cliqz/adblocker-webextension-cosmetics';
 
-async function getCosmeticsFilters(args) {
-  try {
-    const result = await chrome.runtime.sendMessage({
-      action: 'getCosmeticsFilters',
-      ...args,
-    });
+function getCosmeticsFilters(args) {
+  chrome.runtime.sendMessage({
+    action: 'getCosmeticsFilters',
+    ...args,
+  });
 
-    return result || {};
-  } catch (e) {
-    console.error('Error while getting cosmetic filters:', e);
-    return {};
-  }
+  return {};
 }
 
 injectCosmetics(window, true, getCosmeticsFilters);
