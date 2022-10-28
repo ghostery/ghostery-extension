@@ -66,11 +66,13 @@ function adblockerInjectStylesWebExtension(
     } else {
       target.allFrames = allFrames;
     }
-    chrome.scripting.insertCSS({
-      css: styles,
-      origin: 'USER',
-      target,
-    });
+    chrome.scripting
+      .insertCSS({
+        css: styles,
+        origin: 'USER',
+        target,
+      })
+      .catch((e) => console.error('Failed to inject CSS', e));
   } else {
     const details = {
       allFrames,
@@ -82,7 +84,9 @@ function adblockerInjectStylesWebExtension(
     if (frameId) {
       details.frameId = frameId;
     }
-    chrome.tabs.insertCSS(tabId, details);
+    chrome.tabs
+      .insertCSS(tabId, details)
+      .catch((e) => console.error('Failed to inject CSS', e));
   }
 }
 
