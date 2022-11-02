@@ -16,7 +16,7 @@ function getCosmeticsFilters(args) {
     ...args,
   });
 
-  return {};
+  return Promise.resolve({});
 }
 
 injectCosmetics(window, true, getCosmeticsFilters);
