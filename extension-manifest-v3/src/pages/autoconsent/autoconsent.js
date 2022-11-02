@@ -28,9 +28,11 @@ async function enable(_, event) {
   } else {
     interactions += 1;
     allowed = allowed.includes(hostname) ? allowed : allowed.concat(hostname);
+    disallowed = disallowed.filter((h) => h !== hostname);
   }
 
   store.set(options, {
+    dnrRules: { annoyances: true },
     autoconsent: {
       all,
       allowed,

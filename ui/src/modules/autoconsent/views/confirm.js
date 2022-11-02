@@ -9,14 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router } from 'hybrids';
+import { define, html, msg, router, dispatch } from 'hybrids';
 import Home from './home.js';
 
-function closeIframe(reload) {
-  window.parent.postMessage(
-    { type: 'ghostery-autoconsent-close-iframe', reload },
-    '*',
-  );
+function closeIframe(host) {
+  dispatch(host, 'closeiframe', {
+    bubbles: true,
+    detail: { reload: host.enabled },
+  });
 }
 
 export default define({
@@ -39,7 +39,7 @@ export default define({
           <a href="${router.url(Home)}">Back</a>
         </ui-button>
         <ui-button type="primary" size="small">
-          <button onclick="${() => closeIframe(enabled)}">OK</button>
+          <button onclick="${closeIframe}">OK</button>
         </ui-button>
       </div>
     </template>
