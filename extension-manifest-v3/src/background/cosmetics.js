@@ -281,7 +281,9 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
-    adblockerOnMessage(msg, sender);
+    adblockerOnMessage(msg, sender).catch((e) =>
+      console.error(`Error while processing cosmetics filters: ${e}`),
+    );
   }
 
   return false;
