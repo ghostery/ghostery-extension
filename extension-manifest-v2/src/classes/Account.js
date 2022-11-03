@@ -166,6 +166,10 @@ class Account {
 					});
 				}
 
+				// clean up the autoconsent whitelist/blacklist
+				delete settings_json.autoconsent_whitelist;
+				delete settings_json.autoconsent_blacklist;
+
 				// @TODO setConfUserSettings settings.settingsJson
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);
