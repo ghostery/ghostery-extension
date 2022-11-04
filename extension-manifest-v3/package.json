@@ -29,7 +29,7 @@
   },
   "license": "MPL-2.0",
   "devDependencies": {
-    "eslint": "^8.6.0",
+    "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "node-fetch": "^3.2.3",
@@ -37,13 +37,13 @@
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "vendor-copy": "^3.0.1",
-    "vite": "^2.8.2",
-    "web-ext": "^6.8.0"
+    "vite": "^3.2.0",
+    "web-ext": "^7.3.1"
   },
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@duckduckgo/autoconsent": "^2.1.2",
+    "@duckduckgo/autoconsent": "^3.0.1",
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
     "@whotracksme/webextension-packages": "^0.4.3",

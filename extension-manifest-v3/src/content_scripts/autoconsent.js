@@ -27,8 +27,8 @@ chrome.runtime.onMessage.addListener((msg) => {
       showIframe(
         chrome.runtime.getURL(
           `pages/autoconsent/index.html?host=${encodeURIComponent(
-            window.location.host.replace(/^www\./, ''),
-          )}`,
+            msg.domain,
+          )}&default=${msg.defaultForAll ? 'all' : ''}`,
         ),
       );
       shownIframe = true;

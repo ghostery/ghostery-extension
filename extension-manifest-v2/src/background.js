@@ -20,7 +20,7 @@ import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotra
 import { getBrowserInfo } from '@ghostery/libs';
 
 import common, {
-	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState
+	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState, addMigration
 } from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
@@ -560,9 +560,11 @@ function onMessageHandler(request, sender, callback) {
 			conf.enable_autoconsent = true;
 			if (message.url) {
 				conf.autoconsent_whitelist = conf.autoconsent_whitelist.concat(message.url);
+				conf.autoconsent_interactions += 1;
 			} else {
-				conf.autoconsent_whitelist = null;
-				conf.autoconsent_blacklist = null;
+				conf.autoconsent_whitelist = false;
+				conf.autoconsent_blacklist = false;
+				conf.autoconsent_interactions = 0;
 			}
 
 			return false;
@@ -570,10 +572,12 @@ function onMessageHandler(request, sender, callback) {
 		if (name === 'disable') {
 			if (message.url) {
 				conf.autoconsent_blacklist = conf.autoconsent_blacklist.concat(message.url);
+				conf.autoconsent_interactions += 1;
 			} else {
 				conf.enable_autoconsent = false;
 				conf.autoconsent_whitelist = [];
 				conf.autoconsent_blacklist = [];
+				conf.autoconsent_interactions = 0;
 			}
 
 			return false;
@@ -581,6 +585,10 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	if (name === 'getTabInfo') {
+		utils.getActiveTab(callback);
+		return true;
+	}
 	if (name === 'getPanelData') { // Used by panel-android
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
@@ -1344,6 +1352,13 @@ function initializeVersioning() {
 			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') < 0) {
 				conf.enable_autoconsent = true;
 			}
+
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.4') < 0) {
+				addMigration((app) => {
+					alwaysLog('ONE-TIME MIGRATION: removing "developer" flag if present');
+					app.prefs.clear('developer');
+				});
+			}
 		} else {
 			log('SAME VERSION OR NOT THE FIRST RUN');
 		}
@@ -1604,6 +1619,8 @@ async function recordUTMs() {
 async function init() {
 	try {
 		await confData.init();
+
+		metrics.init();
 
 		initializePopup();
 

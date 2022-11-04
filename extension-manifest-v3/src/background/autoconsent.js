@@ -10,18 +10,21 @@
  */
 
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
 
+async function getTabDomain(tabId) {
+  return parse((await chrome.tabs.get(tabId)).url).domain;
+}
+
 async function initialize(msg, tabId, frameId) {
   const { dnrRules, autoconsent } = await store.resolve(Options);
-  const url = new URL(msg.url);
+  const domain = await getTabDomain(tabId);
 
-  if (dnrRules.annoyances && !autoconsent.disallowed.includes(url.hostname)) {
-    const optOut =
-      autoconsent.all ||
-      autoconsent.allowed.some((h) => url.hostname.includes(h));
+  if (dnrRules.annoyances && !autoconsent.disallowed.includes(domain)) {
+    const optOut = autoconsent.all || autoconsent.allowed.includes(domain);
 
     chrome.tabs.sendMessage(
       tabId,
@@ -77,19 +80,25 @@ async function evalCode(code, id, tabId, frameId) {
 }
 
 async function openIframe(msg, tabId) {
-  const url = new URL(msg.url);
   const { autoconsent } = await store.resolve(Options);
+  if (autoconsent.all) return;
 
-  if (
-    !autoconsent.all &&
-    autoconsent.allowed.every((h) => !url.hostname.includes(h))
-  ) {
-    chrome.tabs.sendMessage(
-      tabId,
-      { action: 'autoconsent', type: 'openIframe' },
-      { frameId: 0 },
-    );
+  const domain = await getTabDomain(tabId);
+
+  if (autoconsent.allowed.includes(domain)) {
+    return;
   }
+
+  chrome.tabs.sendMessage(
+    tabId,
+    {
+      action: 'autoconsent',
+      type: 'openIframe',
+      domain,
+      defaultForAll: autoconsent.interactions >= 2,
+    },
+    { frameId: 0 },
+  );
 }
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
