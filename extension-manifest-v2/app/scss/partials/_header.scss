@@ -163,6 +163,9 @@
 					fill: #DEDEDE;
 				}
 			}
+			.contributor {
+				color: #DEDEDE;
+			}
 			&:hover {
 				span {color: $ghosty-blue}
 				.menu-icon {fill: $ghosty-blue; stroke: none;}
@@ -177,28 +180,19 @@
 				.premium > g > g {
 					fill: $ghosty-blue;
 				}
+				.contributor { color: $ghosty-blue; }
 			}
 			span {
 				color: #ffffff;
 			}
 		}
 
-		.menu-option-non-subscriber {
+		.menu-option-contributor {
 			@extend .menu-option-base;
-			.non-subscriber {
-				width: 18px;
-				height: 16px;
-				path {fill: $gold;}
-				path.text {fill: #4a4a4a;}
-			}
+			span, .menu-icon-container { color: #6DAD30; }
 			&:hover {
-				.non-subscriber {
-					path {fill: $bright-gold;}
-					path.text {fill: #4a4a4a;}
-				}
-				span {color: $bright_gold}
+				span, .menu-icon-container { color: #97ea49; }
 			}
-			span {color: $gold;}
 		}
 
 		.account-info {

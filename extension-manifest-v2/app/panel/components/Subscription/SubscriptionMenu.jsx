@@ -21,11 +21,6 @@ import { NavLink } from 'react-router-dom';
 const SubscriptionMenu = () => (
 	<ul className="content-settings-menu menu vertical no-bullet">
 		<li className="s-tabs-title">
-			<NavLink to="/subscription/info">
-				<span>{ t('subscription_info') }</span>
-			</NavLink>
-		</li>
-		<li className="s-tabs-title">
 			<NavLink to="/subscription/themes">
 				<span>{ t('subscription_themes') }</span>
 			</NavLink>
@@ -41,6 +36,12 @@ const SubscriptionMenu = () => (
 			<NavLink to="/stats">
 				<span>{ t('historical_stats') }</span>
 			</NavLink>
+		</li>
+
+		<li className="s-tabs-title">
+			<a href="https://account.ghostery.com/subscription" target="_blank" rel="noreferrer">
+				<span>{ t('subscription_info') }</span>
+			</a>
 		</li>
 	</ul>
 );

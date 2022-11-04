@@ -17,7 +17,6 @@ import moment from 'moment';
 import { sendMessage } from '../utils/msg';
 
 import SubscriptionMenu from './Subscription/SubscriptionMenu';
-import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
 
@@ -39,9 +38,8 @@ class Subscription extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		const { actions, history } = this.props;
-		history.push('/subscription/info');
-		actions.getUserSubscriptionData();
+		const { history } = this.props;
+		history.replace('/subscription/themes');
 	}
 
 	/**
@@ -91,8 +89,6 @@ class Subscription extends React.Component {
 		});
 	}
 
-	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
-
 	SubscriptionThemesComponent = () => {
 		const { theme } = this.state;
 		return (
@@ -111,7 +107,6 @@ class Subscription extends React.Component {
 			<div>
 				<div id="content-settings">
 					<SubscriptionMenu />
-					<Route path="/subscription/info" render={this.SubscriptionInfoComponent} />
 					<Route path="/subscription/themes" render={this.SubscriptionThemesComponent} />
 					<Route path="/subscription/prioritysupport" render={this.PrioritySupportComponent} />
 				</div>

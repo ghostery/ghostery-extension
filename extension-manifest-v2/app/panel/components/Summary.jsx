@@ -56,7 +56,6 @@ class Summary extends React.Component {
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
-		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
 		this.showStatsView = this.showStatsView.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
@@ -254,16 +253,6 @@ class Summary extends React.Component {
 	clickTrackersCount() {
 		const { actions } = this.props;
 		actions.filterTrackers({ type: 'trackers', name: 'all' });
-	}
-
-	/**
-	 * Handles clicking on the green upgrade banner or gold subscriber badge
-	 */
-	clickUpgradeBannerOrGoldPlusIcon() {
-		const { history, user } = this.props;
-		sendMessage('ping', 'plus_panel_from_badge');
-
-		history.push(this._hasPremiumAccess() || this._hasPlusAccess() ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
@@ -739,7 +728,7 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
 	 */
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
-		const { is_expert, current_theme, user } = this.props;
+		const { is_expert, user } = this.props;
 
 		const hasPremiumAccess = user && user.premiumAccess;
 		const hasPlusAccess = user && user.plusAccess;
@@ -748,25 +737,12 @@ class Summary extends React.Component {
 			'UpgradeBanner--small': is_expert,
 		});
 
-		return (
-			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{(hasPlusAccess || hasPremiumAccess) && (
-					<div className="Summary__subscriberBadgeContainer">
-						<div className={`SubscriberBadge ${current_theme}`}>
-							<ReactSVG src="/app/images/panel/plus-badge-icon.svg" className="gold-plus-icon" />
-						</div>
-					</div>
-				)}
-
-				{(!hasPlusAccess && !hasPremiumAccess) && (
-					<div className="Summary__upgradeBannerContainer">
-						<div className={upgradeBannerClassNames}>
-							<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
-							<ReactSVG src="/app/images/panel/upgrade-banner-plus.svg" className="UpgradeBanner__plus" />
-						</div>
-					</div>
-				)}
-			</div>
+		return (!hasPlusAccess && !hasPremiumAccess) && (
+			<a href={`${globals.GHOSTERY_BASE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=in_app_plus_lm`} target="_blank" className="Summary__upgradeBannerContainer" rel="noreferrer">
+				<div className={upgradeBannerClassNames}>
+					<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
+				</div>
+			</a>
 		);
 	}
 
