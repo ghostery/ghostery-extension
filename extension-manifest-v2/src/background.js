@@ -589,6 +589,10 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	if (name === 'getTabInfo') {
+		utils.getActiveTab(callback);
+		return true;
+	}
 	if (name === 'getPanelData') { // Used by panel-android
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
