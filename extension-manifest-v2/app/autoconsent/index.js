@@ -37,7 +37,9 @@ async function disable(_, event) {
 }
 
 async function getCategories() {
-	const tab = await new Promise(resolve => chrome.tabs.getCurrent(resolve));
+	const tab = await new Promise(
+		resolve => chrome.runtime.sendMessage({ name: 'getTabInfo' }, resolve)
+	);
 
 	const { summary } = await new Promise(
 		resolve => chrome.runtime.sendMessage({
@@ -45,7 +47,7 @@ async function getCategories() {
 			message: { view: 'panel', tabId: tab.id },
 		}, resolve),
 	);
-	const { antiTracking } = await new Promise(
+	const { antiTracking, adBlock } = await new Promise(
 		resolve => chrome.runtime.sendMessage({
 			name: 'getCommonModuleData',
 			message: { tabId: tab.id },
@@ -58,6 +60,10 @@ async function getCategories() {
 		}
 		return acc;
 	}, []);
+
+	for (let i = 0; i < adBlock.unidentifiedTrackerCount; i += 1) {
+		result.push('unknown');
+	}
 
 	for (let i = 0; i < antiTracking.trackerCount; i += 1) {
 		result.push('advertising');
