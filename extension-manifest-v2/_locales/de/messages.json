@@ -411,7 +411,7 @@
     "message": "Abbrechen"
   },
   "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "Durch Never-Consent erklären Sie Website-Besitzern, Tracking abzulehnen!"
+    "message": "Durch die Nutzung von Never-Consent teilen Sie Website-Besitzern mit, dass Sie Tracking ablehnen!"
   },
   "cancel": {
     "message": "Abbrechen"
@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Holen Sie sich umfassenden Schutz für alle Browser und Apps auf Ihrem Gerät."
   },
-  "get_ghostery_plus": {
-    "message": "Holen Sie sich Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Holen Sie sich Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Monatlich"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Bereits abonniert?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Anmelden"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Schalten Sie erweiterte Tracker-Analysen und einen leistungsstarken privaten Browser mit integrierter privater Suche frei, indem Sie auf Ghostery Plus upgraden."
+    "message": "Werde Ghostery-Förderer und genieße die Vorteile."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Löschen Sie die gesamte Chronik bis zu diesem Zeitpunkt."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "abonnieren"
   },
-  "subscribe_pitch": {
-    "message": "Erwerben Sie ein Upgrade auf Ghostery Plus, um unser gesamtes Produktpaket freizuschalten! Für nur &#36;4,99 pro Monat erhalten Sie Zugang zu einem leistungsstarken privaten Browser mit integrierter geschützter Suche, erweiterter Tracker-Analyse und anderen besonderen Vorteilen."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Holen Sie sich Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Weitere Informationen"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Nein danke, vielleicht später"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Sind Sie schon Abonnent? Hier anmelden"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Bereits abonniert? Anmelden"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Sie sind bereits ein Abonnent? Anmelden"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Gefällt Ihnen, was wir tun? Unterstützen Sie uns und schalten Sie durch ein Upgrade auf Ghostery Plus neue Frühlingsthemen, persönliche Tracking-Informationen und weitere besondere Vergünstigungen frei!"
-  },
   "subscription_active": {
     "message": "Aktiv"
   },
@@ -1739,7 +1706,10 @@
     "message": "Farbschema von Ghostery ändern!"
   },
   "subscription_upgrade_to": {
-    "message": "Upgrade auf"
+    "message": "Werde Ghostery-Förderer"
+  },
+  "subscription_for_contributors": {
+    "message": "Für Förderer"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

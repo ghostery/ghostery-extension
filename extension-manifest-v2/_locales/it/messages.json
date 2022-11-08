@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Ottieni la protezione completa per tutti i browser e le app sul tuo dispositivo"
   },
-  "get_ghostery_plus": {
-    "message": "Passa a Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Passa a Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Base"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Mensilmente"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Possiedi già un abbonamento?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Accedi"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Sblocca l'analisi del tracker avanzata e il potente browser privato con funzione di ricerca privata integrata effettuando l'upgrade a Ghostery Plus."
+    "message": "Diventa un Collaboratore per sbloccare una serie di extra di Ghostery."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Cancella tutta la cronologia statistica fino a questo momento."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Iscriviti"
   },
-  "subscribe_pitch": {
-    "message": "Effettua l'upgrade a Ghostery Plus per sbloccare la nostra suite di prodotti completa! Con soli &#36;4,99 al mese, puoi accedere al nostro potente browser privato con funzionalità di ricerca privata integrata, analisi del tracker avanzata e tanti altri fantastici extra."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Passa a Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Ulteriori informazioni"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "No grazie, forse in seguito"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Sei già un abbonato? Accedi qui"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Sei già abbonato? Accedi"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Sei già abbonato? Accedi"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Ti piace quello che facciamo? Sostienici e passa a Ghostery Plus per sbloccare nuovi temi primaverili, approfondimenti sul tracciamento personale e altri extra speciali."
-  },
   "subscription_active": {
     "message": "Attivo"
   },
@@ -1739,7 +1706,10 @@
     "message": "Modifica lo schema colore di Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Aggiorna a"
+    "message": "Diventa un collaboratore"
+  },
+  "subscription_for_contributors": {
+    "message": "Per i collaboratori"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

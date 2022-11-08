@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Obtén protección de cobertura completa en todos los navegadores y aplicaciones de tu dispositivo"
   },
-  "get_ghostery_plus": {
-    "message": "Conseguir Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "¡Consigue Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Básico"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Mensual"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "¿Ya tienes una suscripción?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Conectarse"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Desbloquea análisis avanzados de rastreadores y un potente navegador privado con búsqueda privada integrada mejorando a Ghostery Plus."
+    "message": "Conviértete en Contribuyente para desbloquear una serie de extras de Ghostery."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Borrar el historial de estadísticas hasta ahora."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Suscribirse"
   },
-  "subscribe_pitch": {
-    "message": "¡Mejora a Ghostery Plus para desbloquear toda nuestra suite de productos! Por solo 4,99 &#36; al mes, obtén acceso a un potente navegador privado con búsqueda privada integrada, análisis avanzados de rastreadores y otros beneficios especiales."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "¡Consigue Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Más información"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "No, quizás más tarde"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "¿Ya tienes suscripción? Accede aquí"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "¿Ya estás suscrito? Inicia sesión"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "¿Ya estás suscrito? Inicia sesión"
-  },
-  "subscribe_pitch_spring": {
-    "message": "¿Te gusta lo que hacemos? Apóyanos y desbloquea nuevos temas primaverales, información de rastreo personal y otras funciones especiales al mejorar a Ghostery Plus."
-  },
   "subscription_active": {
     "message": "Activo"
   },
@@ -1739,7 +1706,10 @@
     "message": "¡Cambia el esquema de color de Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Mejorar a"
+    "message": "Conviértete en Contribuyente"
+  },
+  "subscription_for_contributors": {
+    "message": "Para los contribuyentes"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

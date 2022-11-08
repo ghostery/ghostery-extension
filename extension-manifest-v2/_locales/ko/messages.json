@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
   },
-  "get_ghostery_plus": {
-    "message": "Ghostery Plus 이용"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Ghostery Plus를 이용하세요!"
-  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "매월"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "이미 구독 중이신가요?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "로그인 "
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Ghostery Plus로 업그레이드하고 고급 트래커 분석 및 내장형 보안 검색 기능이 탑재된 강력한 보안 브라우저를 이용하세요."
+    "message": "기부자가 되어 Ghostery 엑스트라 서비스를 잠금 해제하세요."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "이 시점까지의 모든 통계 이력을 제때 삭제하세요."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "구독"
   },
-  "subscribe_pitch": {
-    "message": "Ghostery Plus로 업그레이드하고 모든 제품 기능을 활용하세요! 매월 &#36;4.99만 지불하면, 내장형 보안 검색, 고급 트래커 분석 및 기타 특별한 기능이 탑재된 강력한 보안 브라우저를 이용할 수 있습니다."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Ghostery Plus를 이용하세요!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "자세히 알아보기"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "괜찮습니다, 다음에 알려주세요"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "이미 가입하셨나요?여기에서 로그인하세요"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "이미 구독 중이신가요? 여기에서 로그인하세요"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "이미 구독 중이신가요? 여기에서 로그인하세요"
-  },
-  "subscribe_pitch_spring": {
-    "message": "현재 서비스가 마음에 드시나요? Ghostery Plus로 업그레이드하여 당사를 후원하고 새로운 봄 테마, 개인 추적 서비스, 기타 혜택을 받아보세요."
-  },
   "subscription_active": {
     "message": "켜기"
   },
@@ -1739,7 +1706,10 @@
     "message": "고스터리 브라우저의 컬러 테마를 변경하세요!"
   },
   "subscription_upgrade_to": {
-    "message": "다음으로 업그레이드"
+    "message": "기부자가 되세요."
+  },
+  "subscription_for_contributors": {
+    "message": "기부자를 위해"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

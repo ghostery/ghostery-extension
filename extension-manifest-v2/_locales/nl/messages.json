@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Profiteer van volledige dekking voor alle browsers en apps op je apparaat"
   },
-  "get_ghostery_plus": {
-    "message": "Abonneren op Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Haal Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Maandelijks"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Al ingeschreven?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Inloggen "
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Ontgrendel geavanceerde trackeranalyses en een krachtige privébrowser met ingebouwde functie voor privé zoeken door te upgraden naar Ghostery Plus."
+    "message": "Word Contributor om een reeks Ghostery extra's vrij te spelen."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Wis alle statistiekengeschiedenis tot aan dit punt."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Aanmelden"
   },
-  "subscribe_pitch": {
-    "message": "Upgrade naar Ghostery Plus om onze volledige productsuite te ontgrendelen! Voor slechts &#36;4.99 per maand krijg je toegang tot een krachtige privébrowser met ingebouwde functie voor privé zoeken, geavanceerde trackeranalyses, en andere speciale extra's."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Haal Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Meer Weten"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Nee bedankt, misschien later"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Al ingeschreven? Hier inschrijven"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Al ingeschreven? Aanmelden"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Ben je al ingeschreven? Aanmelden"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Vind je het leuk wat wij doen? Steun ons en ontgrendel nieuwe thema's voor de lente, persoonlijke trackinginzichten en andere speciale extra's door naar Ghostery Plus te upgraden!"
-  },
   "subscription_active": {
     "message": "Actief"
   },
@@ -1739,7 +1706,10 @@
     "message": "Wijzig kleurschema van Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Upgraden naar"
+    "message": "Word Contributor"
+  },
+  "subscription_for_contributors": {
+    "message": "Voor contributors"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

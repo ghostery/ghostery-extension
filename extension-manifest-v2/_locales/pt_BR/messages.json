@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Obtenha proteção completa para todos os navegadores e aplicativos do seu dispositivo"
   },
-  "get_ghostery_plus": {
-    "message": "Obter o Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Obtenha o Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Básico"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Mensal"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Já tem assinatura?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Entrar"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Atualize para o Ghostery Plus e desbloqueie a análise de rastreadores avançada e nosso poderoso navegador privado com ferramenta de buscas integrada."
+    "message": "Seja um colaborador para desbloquear uma linha de extras do Ghostery."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Apague todo o histórico de estatísticas até o presente momento."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Inscrever-se"
   },
-  "subscribe_pitch": {
-    "message": "Atualize para o Ghostery Plus para desbloquear nosso pacote de produtos completo! Por apenas &#36;4.99 por mês, tenha acesso a nosso poderoso navegador privado com ferramenta de buscas integrada, análise de rastreadores avançada e outras vantagens especiais. "
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Obtenha o Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Saiba mais"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Não, obrigado. Talvez mais tarde"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Já é assinante? Entre aqui"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Já é assinante? Entre aqui"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Já é assinante? Entre aqui"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Gosta do que fazemos? Nos apoie e desbloqueie novos temas de primavera, insights pessoais de acompanhamento e outras vantagens especiais atualizando para o Ghostery Plus!"
-  },
   "subscription_active": {
     "message": "Ativo"
   },
@@ -1739,7 +1706,10 @@
     "message": "Mude o esquema de cores do Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Atualizar para"
+    "message": "Seja um colaborador"
+  },
+  "subscription_for_contributors": {
+    "message": "Para colaboradores"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

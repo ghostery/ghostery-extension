@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "デバイス上のすべてのブラウザとアプリを包括的に保護しましょう"
   },
-  "get_ghostery_plus": {
-    "message": "Ghostery Plusを取得"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "「Ghostery プラス」にアップグレード！"
-  },
   "ghostery_basic": {
     "message": "ベーシック"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "毎月"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "登録はお済みですか？"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "サインイン"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Ghostery Plusにアップグレードすると、高度なトラッカー分析機能と、プライベート検索機能が組み込まれた強力なプライベートブラウザを使用できるようになります。"
+    "message": "Contributorになると、Ghosteryの特典ラインナップがアンロックされます。"
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "この時点までのすべての履歴統計を削除する"
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "登録する"
   },
-  "subscribe_pitch": {
-    "message": "Ghostery Plusにアップグレードすれば、月額わずか&#36;4.99で、プライベート検索機能が組み込まれた強力なプライベートブラウザや高度なトラッカー分析など、各種の便利な機能を使用できるようになります。"
-  },
-  "subscribe_pitch_button_label": {
-    "message": "「Ghostery プラス」にアップグレード！"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "詳細はこちら"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "いいえ、後でします"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "ご登録済みですか？こちらでサインイン"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "すでにサブスクライブしていますか？サインイン"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "すでにサブスクライブしていますか？サインイン"
-  },
-  "subscribe_pitch_spring": {
-    "message": "気に入っていただけましたか？Ghostery Plusにアップグレードして、新しい春のテーマ、個人追跡情報など、特別機能をご利用ください！"
-  },
   "subscription_active": {
     "message": "アクティブ"
   },
@@ -1739,7 +1706,10 @@
     "message": "Ghosteryのカラースキームは変更できます！"
   },
   "subscription_upgrade_to": {
-    "message": "アップグレード先"
+    "message": "Contributorになる"
+  },
+  "subscription_for_contributors": {
+    "message": "Contributorに向け"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",
