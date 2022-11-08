@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Получите полную защиту во всех браузерах и приложениях на вашем устройстве"
   },
-  "get_ghostery_plus": {
-    "message": "Получить Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Получить Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Базовый"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Ежемесячно"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Уже есть подписка?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Вход"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Воспользуйтесь расширенной аналитикой трекеров и мощным приватным браузером со встроенным приватным поиском, обновив план до Ghostery Plus."
+    "message": "Станьте участником, чтобы разблокировать ряд дополнительных функций Ghostery."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Стереть всю историю статистики до этого момента."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Подписаться"
   },
-  "subscribe_pitch": {
-    "message": "Обновите свой план до Ghostery Plus, чтобы воспользоваться полным комплектом продуктов! Всего за &#36;4.99 в месяц вы получите доступ к мощному приватному браузеру со встроенным приватным поиском, расширенной аналитике трекеров и другим специальным привилегиям. "
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Получить Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Подробнее"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Нет, спасибо, возможно, позже"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Уже подписаны? Войти"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Уже подписаны? Войдите в систему"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Уже подписаны? Войдите в систему"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Вам нравитя то, что мы делаем? Поддержите нас и откройте для себя новые весенние темы и личные сведения о трекинге, а также получите другие специальные привелегии, перейдя на Ghostery Plus!"
-  },
   "subscription_active": {
     "message": "Активный"
   },
@@ -1739,7 +1706,10 @@
     "message": "Измените цветовую схему Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Обновить до"
+    "message": "Стать участником"
+  },
+  "subscription_for_contributors": {
+    "message": "Для участников"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

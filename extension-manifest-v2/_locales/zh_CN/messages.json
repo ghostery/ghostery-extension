@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "全面保护设备中的所有浏览器和应用程序"
   },
-  "get_ghostery_plus": {
-    "message": "获取 Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "获取Ghostery Plus！"
-  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "每月"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "已经订阅？"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "登录"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "升级为 Ghostery Plus，解锁高级跟踪器分析和一款强大的无痕浏览器（附带内置无痕搜索）。"
+    "message": "成为贡献者，解锁一系列 Ghostery 附加功能。"
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "删除当前时间点之前的所有历史统计数据。"
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "订阅"
   },
-  "subscribe_pitch": {
-    "message": "升级为 Ghostery Plus 以解锁我们的全产品套装！每月只需 &#36;4.99，即可访问一款强大的无痕浏览器，附带内置无痕搜索、高级跟踪器分析和其他的特别福利。"
-  },
-  "subscribe_pitch_button_label": {
-    "message": "获取Ghostery Plus！"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "了解详情"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "不用了，稍后再说"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "已经订阅了？在此登录"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "已经订阅？登录"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "已经订阅？登录"
-  },
-  "subscribe_pitch_spring": {
-    "message": "喜欢我们的创意？升级至 Ghostery Plus，解锁全新的春季主题、个人追踪洞察和其他特别福利！"
-  },
   "subscription_active": {
     "message": "有效"
   },
@@ -1739,7 +1706,10 @@
     "message": "更改Ghostery的颜色主题！"
   },
   "subscription_upgrade_to": {
-    "message": "升级至"
+    "message": "成为贡献者"
+  },
+  "subscription_for_contributors": {
+    "message": "对于贡献者"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

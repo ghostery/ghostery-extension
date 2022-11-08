@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "全面防護您裝置上的所有瀏覽器和應用程式"
   },
-  "get_ghostery_plus": {
-    "message": "獲取 Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "獲取Ghostery Plus！"
-  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "每月"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "已訂閱？"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "登入"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "升級至 Ghostery Plus 即能取得進階追蹤器分析和具有內建隱私搜尋的強大隱私瀏覽器。"
+    "message": "Become a Contributor to unlock a line of Ghostery extras."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "及時清除到此點的所有統計歷史。"
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "訂閱"
   },
-  "subscribe_pitch": {
-    "message": "升級至 Ghostery Plus 以取得完整的產品套件！每月只要 &#36;4.99。享有內建隱私搜尋的強大隱私瀏覽器、進階追蹤器分析，以及其他特別好處。"
-  },
-  "subscribe_pitch_button_label": {
-    "message": "獲取Ghostery Plus！"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "瞭解更多"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "不用了，謝謝，稍後再說"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "已訂閱？在此註冊"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "已訂閱？登入"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "已訂閱？登入"
-  },
-  "subscribe_pitch_spring": {
-    "message": "喜歡我們提供的服務嗎？您可以升級至 Ghostery Plus 來支援我們，並解鎖全新春日主題、個人追蹤資訊及其他特別的好處！"
-  },
   "subscription_active": {
     "message": "活躍"
   },
@@ -1739,7 +1706,10 @@
     "message": "更改Ghostery的顏色方案。"
   },
   "subscription_upgrade_to": {
-    "message": "升級至"
+    "message": "Become a Contributor"
+  },
+  "subscription_for_contributors": {
+    "message": "For contributors"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

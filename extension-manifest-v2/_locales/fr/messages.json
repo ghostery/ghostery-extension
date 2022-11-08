@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Bénéficiez d'une protection complète sur tous les navigateurs et toutes les applications sur votre appareil"
   },
-  "get_ghostery_plus": {
-    "message": "Passer à Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Passez à Ghostery Plus !"
-  },
   "ghostery_basic": {
     "message": "Version de base"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Mensuel"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Déjà abonné ?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Connexion"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Découvrez une analyse des mouchards avancée et un navigateur privé puissant avec recherche intégrée en passant à Ghostery Plus."
+    "message": "Devenez donateur pour débloquer un lot de suppléments Ghostery."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Supprimer tous les historiques des stats connus à ce jour."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "s’abonner"
   },
-  "subscribe_pitch": {
-    "message": "Passez à Ghostery Plus pour découvrir l'ensemble de notre suite de produits ! Pour seulement &#36;4.99 par mois, accédez à notre puissant navigateur privé avec moteur de recherche intégré, notre outil d'analyse des mouchards et d'autres avantages spéciaux."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Passez à Ghostery Plus !"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "En savoir plus"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Non merci, peut-être plus tard"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Déjà abonné/e ? Connectez-vous ici"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Déjà abonné/e ? Connectez-vous"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Vous êtes déjà abonné ? Connectez-vous"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Vous appréciez notre travail ? Soutenez-nous et débloquez de nouveaux thèmes de printemps, des informations de suivi personnalisées et d'autres avantages spéciaux en passant à Ghostery Plus !"
-  },
   "subscription_active": {
     "message": "ACTIF"
   },
@@ -1739,7 +1706,10 @@
     "message": "Changez la couleur du thème de Ghostery !"
   },
   "subscription_upgrade_to": {
-    "message": "Passe à"
+    "message": "Devenez donateur"
+  },
+  "subscription_for_contributors": {
+    "message": "Pour les donateurs"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

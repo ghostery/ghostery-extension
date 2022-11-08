@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Uzyskaj pełną ochronę we wszystkich przeglądarkach i aplikacjach na urządzeniu"
   },
-  "get_ghostery_plus": {
-    "message": "Uzyskaj Ghostery Plus"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Uzyskaj Ghostery Plus!"
-  },
   "ghostery_basic": {
     "message": "Podstawowy"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Miesięcznie"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Masz już subskrypcję?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Zaloguj się"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Odblokuj zaawansowaną analizę tropicieli i skuteczną prywatną przeglądarkę z wbudowaną wyszukiwarką po aktualizacji planu do wersji Ghostery Plus"
+    "message": "Zostań Kontrybutorem aby odblokować szereg dodatków Ghostery."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Usuń całą historię danych statystycznych aż do teraz."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Subskrybuj"
   },
-  "subscribe_pitch": {
-    "message": "Uaktualnij plan do wersji Ghostery Plus, aby odblokować pełen pakiet produktów. Za cenę 4,99 USD miesięcznie otrzymasz dostęp do prywatnej przeglądarki z wbudowaną wyszukiwarką, zaawansowanej analizy tropicieli i innych korzyści."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Uzyskaj Ghostery Plus!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Dowiedz się więcej"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Może później"
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Masz już abonament? Zaloguj się tutaj"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Masz już subskrypcję? Zaloguj się"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Masz już subskrypcję? Zaloguj się"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Podoba Ci się to, co robimy? Wesprzyj nas i odblokuj nowe wiosenne motywy, osobiste analizy dotyczące śledzenia i inne specjalne dodatki, przechodząc do wersji Ghostery Plus!"
-  },
   "subscription_active": {
     "message": "Aktywny"
   },
@@ -1739,7 +1706,10 @@
     "message": "Zmień kolorystykę Ghostery!"
   },
   "subscription_upgrade_to": {
-    "message": "Zaktualizuj do"
+    "message": "Zostań Kontrybutorem"
+  },
+  "subscription_for_contributors": {
+    "message": "Dla Kontrybutorów"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",

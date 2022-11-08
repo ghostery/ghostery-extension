@@ -776,12 +776,6 @@
   "full_coverage_protection_promise": {
     "message": "Teljes védelmet élvezhet az eszköz összes böngészőjével és alkalmazásával"
   },
-  "get_ghostery_plus": {
-    "message": "Ghostery Plus beszerzése"
-  },
-  "get_ghostery_plus_bang": {
-    "message": "Szerezze be a Ghostery Plust!"
-  },
   "ghostery_basic": {
     "message": "Alapvető"
   },
@@ -1127,14 +1121,11 @@
   "panel_stats_monthly": {
     "message": "Havi"
   },
-  "panel_stats_pitch_modal_already": {
-    "message": "Már van előfizetése?"
-  },
   "panel_stats_pitch_modal_sign_in": {
     "message": "Bejelentkezés"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Frissítsen a Ghostery Plus szoftverre, hogy igénybe vehesse a továbbfejlesztett követőelemzést és a beépített keresőmotorral rendelkező hatékony privát böngészőt."
+    "message": "Legyen ön is Adakozó, hogy feloldja a Ghostery extrákat."
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "Összes naplózott statisztika törlése eddig az időpontig."
@@ -1646,30 +1637,6 @@
   "subscribe": {
     "message": "Feliratkozás"
   },
-  "subscribe_pitch": {
-    "message": "Frissítsen a Ghostery Plus szoftverre, hogy  igénybe vehesse a teljes termékcsomagot. &#36;4.99 havi díjért használatba veheti a beépített keresőmotorral rendelkező hatékony privát böngészőt, a továbbfejlesztett követőelemzést és az egyéb speciális funkciókat."
-  },
-  "subscribe_pitch_button_label": {
-    "message": "Szerezze be a Ghostery Plust!"
-  },
-  "subscribe_pitch_learn_more": {
-    "message": "Tudjon meg többet"
-  },
-  "subscribe_pitch_no_thanks": {
-    "message": "Köszönöm, nem. Talán később."
-  },
-  "subscribe_pitch_sign_here": {
-    "message": "Ön már feliratkozott? Jelentkezzen be itt"
-  },
-  "subscribe_pitch_sign_in": {
-    "message": "Már feliratkozott? Jelentkezzen be"
-  },
-  "subscribe_pitch_sign_in_plus": {
-    "message": "Már feliratkozott? Jelentkezzen be"
-  },
-  "subscribe_pitch_spring": {
-    "message": "Tetszik a termékünk? Támogassunk bennünket, és fedezze fel az új tavaszi sablonokat, személyes nyomonkövetési lehetőségeket, és számos különleges előnyt a Ghostery Plus történő frissítéssel!"
-  },
   "subscription_active": {
     "message": "Aktív"
   },
@@ -1739,7 +1706,10 @@
     "message": "Változtassa meg a Ghostery színsablonját!"
   },
   "subscription_upgrade_to": {
-    "message": "Frissítés erre:"
+    "message": "Legyen ön is Adakozó"
+  },
+  "subscription_for_contributors": {
+    "message": "Adakozók számára"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",
