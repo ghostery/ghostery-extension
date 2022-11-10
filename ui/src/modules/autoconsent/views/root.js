@@ -57,8 +57,8 @@ export default define({
           <section layout="row margin:2 gap:2">
             <div layout="area:1:2">
               <ui-tracker-wheel
-                size="64"
                 categories="${categories}"
+                layout="size:8"
               ></ui-tracker-wheel>
             </div>
             <div layout="column grow shrink gap">

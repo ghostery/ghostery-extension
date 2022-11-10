@@ -11,60 +11,27 @@
 
 import { html, define } from 'hybrids';
 
-import './icon.js';
-
 export default define({
   tag: 'ui-header',
-  domain: '',
-  render: ({ domain }) => html`
-    <a target="_blank" href="https://www.ghostery.com">
-      <ui-icon name="logo"></ui-icon>
-    </a>
-    <span class="domain-name">${domain}</span>
-    <slot></slot>
-    <div class="notch"></div>
+  render: () => html`
+    <template layout="grid:max|1|max items:center gap:2 height:7">
+      <div layout="row center width:3">
+        <slot name="icon"></slot>
+      </div>
+      <ui-text type="label-m"><slot></slot></ui-text>
+      <div layout="row center width::3 gap">
+        <slot name="actions"></slot>
+      </div>
+    </template>
   `.css`
-     :host {
-       flex-shrink: 0;
-       background-color: var(--ui-ghostery);
-       color: white;
-       display: flex;
-       flex-direction: row;
-       align-items: center;
-       padding: 9px 12px;
-       position: relative;
-       overflow: hidden;
-     }
- 
-     .notch {
-       background-color: #F8F6F6;
-       border-radius: 3px;
-       transform: rotate(45deg);
-       width: 18px;
-       height: 18px;
-       bottom: -12px;
-       position: absolute;
-       left: calc(50% - 10px);
-     }
- 
-     a {
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       text-decoration: none;
-     }
- 
-     .domain-name {
-       text-overflow: ellipsis;
-       white-space: nowrap;
-       overflow: hidden;
-       flex-grow: 1;
-       font-size: 15px;
-       text-align: center;
-     }
- 
-     ::slotted(a) {
-       color: white;
-     }
+    :host {
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+      padding: 16px;
+      background: var(--ui-color-white);
+      border-bottom: 1px solid var(--ui-color-gray-300);
+      box-shadow: 0px 4px 16px rgba(32, 44, 68, 0.1);
+    }
    `,
 });

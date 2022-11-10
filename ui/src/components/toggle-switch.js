@@ -37,7 +37,7 @@ export default define({
       white-space: wrap;
       box-shadow: -2px -4px 6px rgba(255, 255, 255, 0.64), 0px 2px 4px rgba(0, 0, 0, 0.1);
       border: 0.5px solid #D0D0D0;
-      color: var(--ui-black);
+      color: var(--ui-color-gray-900);
       display: flex;
       flex-direction: column;
       position: relative;
@@ -47,14 +47,14 @@ export default define({
       content: '${msg`On`}';
       display: block;
       text-transform: uppercase;
-      color: var(--ui-deep-blue);
+      color: var(--ui-primary-700);
       position: absolute;
       top: 10px;
       right: 8px;
     }
 
     button ui-icon {
-      color: var(--ui-deep-blue);
+      color: var(--ui-primary-700);
       margin-bottom: 5px;
     }
 

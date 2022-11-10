@@ -10,9 +10,14 @@
  */
 
 import '@ghostery/ui';
-import '@ghostery/ui/css';
 
-import './components/category-with-trackers.js';
-import './components/layout.js';
+import './components/action.js';
+import './components/alert.js';
+import './components/button.js';
+import './components/menu.js';
+import './components/menu-item.js';
+import './components/notification.js';
+import './components/options.js';
+import './components/options-item.js';
 
-import './views/root.js';
+import './panel.js';

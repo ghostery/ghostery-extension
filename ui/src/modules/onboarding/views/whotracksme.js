@@ -30,11 +30,11 @@ export default define({
       </ui-text>
       <ui-text>
         More information on
-        ${html`<a
+        ${html`<ui-link
           href="https://www.ghostery.com/ghostery-manifesto#whotracks-me-methodology"
-          target="_blank"
+          external
           translate="no"
-          >WhoTracks.Me</a
+          >WhoTracks.Me</ui-link
         >`}
         methodology in Ghostery’s Manifesto.
       </ui-text>

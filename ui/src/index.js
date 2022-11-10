@@ -9,17 +9,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// i18n wrapper
+import './localize.js';
+
+// Components
+import './components/action.js';
 import './components/button.js';
 import './components/card.js';
-import './components/category.js';
 import './components/header.js';
 import './components/icon.js';
+import './components/link.js';
 import './components/onboarding-state.js';
 import './components/page-layout.js';
 import './components/page-load.js';
 import './components/stats.js';
 import './components/text.js';
 import './components/toggle-switch.js';
+import './components/tooltip.js';
 import './components/tracker-wheel.js';
-
-import './localize.js';

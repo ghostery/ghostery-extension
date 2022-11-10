@@ -39,53 +39,46 @@
 }
 
 html {
-  /* Legacy colors */
-
-  --ui-text: #838b90;
-  --ui-black: #252525;
-  --ui-ghostery: #00aef0;
-  --ui-deep-blue: #0d8fe7;
-
-  /* Current colors */
-
-  --ui-color-gray-900: #12121C;
+  /* Colors */
+  --ui-color-gray-900: #12121c;
   --ui-color-gray-800: #202225;
-  --ui-color-gray-700: #2F3136;
-  --ui-color-gray-600: #3F4146;
+  --ui-color-gray-700: #2f3136;
+  --ui-color-gray-600: #3f4146;
   --ui-color-gray-500: #636468;
-  --ui-color-gray-400: #88898C;
-  --ui-color-gray-300: #B9BBBE;
-  --ui-color-gray-200: #D4D6D9;
-  --ui-color-gray-100: #F2F4F7;
+  --ui-color-gray-400: #88898c;
+  --ui-color-gray-300: #b9bbbe;
+  --ui-color-gray-200: #d4d6d9;
+  --ui-color-gray-100: #f2f4f7;
   --ui-color-white: white;
 
-  --ui-color-primary-700: #0077CC;
-  --ui-color-primary-500: #00AEF0;
-  --ui-color-secondary-500: #00B0FF;
+  --ui-color-primary-100: #ebf7fd;
+  --ui-color-primary-700: #0077cc;
+  --ui-color-primary-500: #00aef0;
+  --ui-color-secondary-500: #00b0ff;
 
-  --ui-color-newsletter-500: #AC59B5;
+  --ui-color-newsletter-500: #ac59b5;
 
-  --ui-color-success-500: #43AC3C;
-  --ui-color-warning-500: #FFBB00;
-  --ui-color-error-500: #FF4500;
-  --ui-color-error-400: #FF5D35;
+  --ui-color-success-500: #43ac3c;
+  --ui-color-warning-500: #ffbb00;
+  --ui-color-error-500: #ff4500;
+  --ui-color-error-400: #ff5d35;
 
   /* Fonts */
 
-  --ui-font-family-display: "Roboto Condensed", sans-serif;
+  --ui-font-family-display: 'Roboto Condensed', sans-serif;
   --ui-font-family-headline: var(--ui-font-family-display);
   --ui-font-family-button: var(--ui-font-family-display);
 
-  --ui-font-family-body: "Roboto", sans-serif;
+  --ui-font-family-body: 'Roboto', sans-serif;
   --ui-font-family-label: var(--ui-font-family-body);
 
-  --ui-font-display-2xl: 40px / 40px var(--ui-font-family-display);
-  --ui-font-display-xl: 32px / 32px var(--ui-font-family-display);
-  --ui-font-display-l: 32px / 32px var(--ui-font-family-display);
-  --ui-font-display-m: 24px / 24px var(--ui-font-family-display);
-  --ui-font-display-s: 20px / 20px var(--ui-font-family-display);
-  --ui-font-display-xs: 18px / 18px var(--ui-font-family-display);
-  --ui-font-display-2xs: 16px / 16px var(--ui-font-family-display);
+  --ui-font-display-2xl: 700 40px / 40px var(--ui-font-family-display);
+  --ui-font-display-xl: 700 32px / 32px var(--ui-font-family-display);
+  --ui-font-display-l: 700 32px / 32px var(--ui-font-family-display);
+  --ui-font-display-m: 700 24px / 24px var(--ui-font-family-display);
+  --ui-font-display-s: 700 20px / 20px var(--ui-font-family-display);
+  --ui-font-display-xs: 700 18px / 18px var(--ui-font-family-display);
+  --ui-font-display-2xs: 700 16px / 16px var(--ui-font-family-display);
 
   --ui-font-headline-xl: 32px / 38px var(--ui-font-family-headline);
   --ui-font-headline-l: 24px / 28px var(--ui-font-family-headline);
@@ -94,15 +87,15 @@ html {
   --ui-font-headline-xs: 20px / 24px var(--ui-font-family-headline);
   --ui-font-headline-2xs: 16px / 20px var(--ui-font-family-headline);
 
-  --ui-font-button-m: 18px / 20px var(--ui-font-family-button);
-  --ui-font-button-s: 18px / 20px var(--ui-font-family-button);
+  --ui-font-button-m: 700 18px / 20px var(--ui-font-family-button);
+  --ui-font-button-s: 700 18px / 20px var(--ui-font-family-button);
 
-  --ui-font-label-2xl: 20px / 24px var(--ui-font-family-label);
-  --ui-font-label-xl: 18px / 22px var(--ui-font-family-label);
-  --ui-font-label-l: 16px / 20px var(--ui-font-family-label);
-  --ui-font-label-m: 14px / 18px var(--ui-font-family-label);
-  --ui-font-label-s: 12px / 16px var(--ui-font-family-label);
-  --ui-font-label-xs: 12px / 16px var(--ui-font-family-label);
+  --ui-font-label-2xl: 500 20px / 24px var(--ui-font-family-label);
+  --ui-font-label-xl: 500 18px / 22px var(--ui-font-family-label);
+  --ui-font-label-l: 500 16px / 20px var(--ui-font-family-label);
+  --ui-font-label-m: 500 14px / 18px var(--ui-font-family-label);
+  --ui-font-label-s: 500 12px / 16px var(--ui-font-family-label);
+  --ui-font-label-xs: 500 12px / 16px var(--ui-font-family-label);
 
   --ui-font-body-2xl: 20px / 28px var(--ui-font-family-body);
   --ui-font-body-xl: 18px / 26px var(--ui-font-family-body);
@@ -119,13 +112,13 @@ html {
 
 @media screen and (min-width: 768px) {
   html {
-    --ui-font-display-2xl: 72px / 72px var(--ui-font-family-display);
-    --ui-font-display-xl: 58px / 58px var(--ui-font-family-display);
-    --ui-font-display-l: 40px / 40px var(--ui-font-family-display);
-    --ui-font-display-m: 32px / 32px var(--ui-font-family-display);
-    --ui-font-display-s: 24px / 24px var(--ui-font-family-display);
-    --ui-font-display-xs: 20px / 20px var(--ui-font-family-display);
-    --ui-font-display-2xs: 16px / 16px var(--ui-font-family-display);
+    --ui-font-display-2xl: 700 72px / 72px var(--ui-font-family-display);
+    --ui-font-display-xl: 700 58px / 58px var(--ui-font-family-display);
+    --ui-font-display-l: 700 40px / 40px var(--ui-font-family-display);
+    --ui-font-display-m: 700 32px / 32px var(--ui-font-family-display);
+    --ui-font-display-s: 700 24px / 24px var(--ui-font-family-display);
+    --ui-font-display-xs: 700 20px / 20px var(--ui-font-family-display);
+    --ui-font-display-2xs: 700 16px / 16px var(--ui-font-family-display);
 
     --ui-font-headline-xl: 58px / 64px var(--ui-font-family-headline);
     --ui-font-headline-l: 40px / 48px var(--ui-font-family-headline);
@@ -134,15 +127,15 @@ html {
     --ui-font-headline-xs: 20px / 24px var(--ui-font-family-headline);
     --ui-font-headline-2xs: 16px / 20px var(--ui-font-family-headline);
 
-    --ui-font-button-m: 22px / 24px var(--ui-font-family-button);
-    --ui-font-button-s: 18px / 20px var(--ui-font-family-button);
+    --ui-font-button-m: 700 22px / 24px var(--ui-font-family-button);
+    --ui-font-button-s: 700 18px / 20px var(--ui-font-family-button);
 
-    --ui-font-label-2xl: 22px / 26px var(--ui-font-family-label);
-    --ui-font-label-xl: 20px / 24px var(--ui-font-family-label);
-    --ui-font-label-l: 18px / 22px var(--ui-font-family-label);
-    --ui-font-label-m: 16px / 20px var(--ui-font-family-label);
-    --ui-font-label-s: 14px / 18px var(--ui-font-family-label);
-    --ui-font-label-xs: 12px / 16px var(--ui-font-family-label);
+    --ui-font-label-2xl: 500 22px / 26px var(--ui-font-family-label);
+    --ui-font-label-xl: 500 20px / 24px var(--ui-font-family-label);
+    --ui-font-label-l: 500 18px / 22px var(--ui-font-family-label);
+    --ui-font-label-m: 500 16px / 20px var(--ui-font-family-label);
+    --ui-font-label-s: 500 14px / 18px var(--ui-font-family-label);
+    --ui-font-label-xs: 500 12px / 16px var(--ui-font-family-label);
 
     --ui-font-body-2xl: 22px / 30px var(--ui-font-family-body);
     --ui-font-body-xl: 20px / 28px var(--ui-font-family-body);
