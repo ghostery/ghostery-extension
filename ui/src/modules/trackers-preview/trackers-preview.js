@@ -11,33 +11,37 @@
 
 import { html, define, dispatch } from 'hybrids';
 
+import { sortCategories } from '@ghostery/ui/categories';
+const sort = sortCategories();
+
 export default define({
   tag: 'ui-trackers-preview',
   confirmDisabled: false,
   stats: undefined,
   domain: '',
   render: ({ domain, confirmDisabled, stats }) => html`
-    <ui-header domain=${domain}>
-      <button class="svg-button" onclick="${(host) => dispatch(host, 'close')}">
+    <ui-header>
+      <ui-text type="label-m">${domain}</ui-text>
+      <button
+        class="svg-button"
+        onclick="${(host) => dispatch(host, 'close')}"
+        slot="actions"
+      >
         <ui-icon name="close"></ui-icon>
       </button>
     </ui-header>
 
     <main>
-      <h1>Trackers Preview</h1>
-
       ${stats &&
       html.resolve(
         stats.then(
-          (data) => html`<ui-stats categories=${data.stats}></ui-stats>`,
+          (data) => html`
+            <ui-stats domain="${domain}" categories="${data.stats.sort(sort)}">
+              <ui-text type="label-m">Trackers Preview</ui-text>
+            </ui-stats>
+          `,
         ),
       )}
-
-      <section class="buttons">
-        <a target="_blank" href="https://whotracks.me/websites/${domain}.html">
-          Statistical Report <ui-icon name="external-link"></ui-icon>
-        </a>
-      </section>
     </main>
     <footer>
       ${confirmDisabled
@@ -64,22 +68,15 @@ export default define({
        background-color: #F8F8F8;
      }
  
-     panel-header {
-       position: fixed;
-       top: 0px;
-       width: 100%;
-       box-sizing: border-box;
-     }
- 
      main {
        padding: 12px;
-       background-color: #F8F8F8;
+       background-color: white;
      }
  
      h1 {
        font-size: 16px;
        text-align: center;
-       color: var(--ui-black);
+       color: var(--ui-color-gray-900);
        white-space: nowrap;
        font-weight: 600;
        margin: 6px 0;
@@ -87,7 +84,7 @@ export default define({
  
      .svg-button {
        padding: 0;
-       color: white;
+       color: var(--ui-color-gray-900);
        background: none;
        border: 0;
        cursor: pointer;
@@ -112,7 +109,7 @@ export default define({
      }
  
      .buttons a {
-       color: var(--ui-deep-blue);
+       color: var(--ui-primary-700);
        padding: 10px 17px;
        flex: 1;
        text-align: center;
@@ -145,7 +142,7 @@ export default define({
      footer button, footer span {
        background: none;
        border: none;
-       color: var(--ui-text);
+       color: var(--ui-color-gray-500);
        padding: 0;
        margin: 0;
        font-size: 11.5px;

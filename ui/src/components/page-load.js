@@ -60,7 +60,7 @@ export default define({
        align-items: center;
        justify-content: center;
        text-transform: uppercase;
-       color: var(--ui-black);
+       color: var(--ui-color-gray-900);
        font-size: 13px;
      }
  
@@ -72,7 +72,7 @@ export default define({
      }
  
      .circle {
-       color: ${loadTime !== 0 ? color : 'var(--ui-text)'};
+       color: ${loadTime !== 0 ? color : 'var(--ui-color-gray-500)'};
      }
  
      .circle::after {
@@ -83,14 +83,14 @@ export default define({
        font-size: 13px;
        line-height: 13px;
        right: -6px;
-       color: var(--ui-black);
+       color: var(--ui-color-gray-900);
      }
  
      strong {
        display: block;
        position: absolute;
        top: calc(50% - 12px);
-       color: var(--ui-black);
+       color: var(--ui-color-gray-900);
        font-size: 18px;
        line-height: 25px;
        font-weight: 600;

@@ -114,7 +114,7 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
-  Object.values(adblockerEngines).forEach(([{ engine, isEnabled }]) => {
+  Object.values(adblockerEngines).forEach(({ engine, isEnabled }) => {
     if (!isEnabled) {
       return;
     }

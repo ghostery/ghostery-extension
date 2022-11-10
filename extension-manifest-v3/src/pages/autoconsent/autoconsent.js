@@ -12,7 +12,7 @@
 import { define, html, store } from 'hybrids';
 
 import Options from '/store/options.js';
-import { statsFactory } from '/store/stats.js';
+import Stats from '/store/stats.js';
 
 const hostname = new URLSearchParams(window.location.search).get('host');
 
@@ -67,7 +67,7 @@ async function disable(_, event) {
 
 export default define({
   tag: 'gh-autoconsent',
-  stats: statsFactory(),
+  stats: store(Stats),
   content: ({ stats }) =>
     html`
       <template layout="block">

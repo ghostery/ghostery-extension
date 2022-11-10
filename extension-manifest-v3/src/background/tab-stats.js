@@ -12,6 +12,7 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 import { throttle } from 'lodash-es';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
+import { getCategoryKey, order } from '@ghostery/ui/categories';
 
 import Options from '/store/options.js';
 import { getTrackerFromUrl } from './utils/bugs.js';
@@ -30,21 +31,20 @@ const setIcon = throttle((tabId, stats) => {
 async function updateTabStats(msg, sender) {
   const tabId = sender.tab.id;
   const stats = tabStats.get(tabId);
-  const urls = msg.args[0].urls;
-  const loadTime = msg.args[0].loadTime;
 
-  if (loadTime && sender.frameId === 0) {
-    stats.loadTime = loadTime;
-  }
+  msg.urls.forEach((url) => {
+    const tracker = getTrackerFromUrl(url, stats.domain);
+    if (tracker) {
+      stats.trackers.push({
+        ...tracker,
+        category: getCategoryKey(tracker.category),
+      });
+    }
+  });
 
-  if (urls) {
-    urls.forEach((url) => {
-      const tracker = getTrackerFromUrl(url, stats.domain);
-      if (tracker) {
-        stats.trackers.push(tracker);
-      }
-    });
-  }
+  stats.trackers.sort(
+    (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
+  );
 
   tabStats.set(tabId, stats);
 
@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       const { domain } = parse(sender.url);
 
       if (domain) {
-        tabStats.set(sender.tab.id, { domain, trackers: [], loadTime: 0 });
+        tabStats.set(sender.tab.id, { domain, trackers: [] });
 
         // Clean up throttled icon update
         setIcon.cancel();
