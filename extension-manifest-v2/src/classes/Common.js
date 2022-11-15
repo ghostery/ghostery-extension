@@ -76,6 +76,8 @@ common.load = async () => {
 		HW_CHANNEL = 'ghostery-browser-android';
 	} else 	if (IS_ANDROID) {
 		HW_CHANNEL = 'android';
+	} else {
+		HW_CHANNEL = 'ghostery';
 	}
 	WTM.CHANNEL = HW_CHANNEL;
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
