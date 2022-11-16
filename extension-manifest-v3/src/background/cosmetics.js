@@ -95,7 +95,7 @@ function adblockerInjectStylesWebExtension(
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-async function adblockerOnMessage(msg, sender, sendResponse) {
+async function adblockerOnMessage(msg, sender) {
   // Extract hostname from sender's URL
   const { url = '', frameId } = sender;
   const parsed = parse(url);
