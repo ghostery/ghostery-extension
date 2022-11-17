@@ -133,6 +133,9 @@
   "ghostery_privacy_policy": {
     "message": "Ghostery Privacy Policy"
   },
+  "ghostery_settings": {
+    "message": "Ghostery settings"
+  },
   "hosting": {
     "message": "Hosting",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
