@@ -1663,6 +1663,9 @@
   "subscription_expired": {
     "message": "Account expired"
   },
+  "subscription_for_contributors": {
+    "message": "For contributors"
+  },
   "subscription_inactive": {
     "message": "Inactive"
   },
@@ -1707,9 +1710,6 @@
   },
   "subscription_upgrade_to": {
     "message": "Become a Contributor"
-  },
-  "subscription_for_contributors": {
-    "message": "For contributors"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",
