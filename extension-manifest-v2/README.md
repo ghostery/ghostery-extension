@@ -16,8 +16,12 @@ Ghostery helps you browse smarter by giving you control over ads and tracking te
 
 ## Installation
 
+Node.js 18 (or higher) is required to build the extension.
+
 #### Install local npm packages
+
 ```sh
+$ (cd ../libs && npm ci)
 $ npm ci
 ```
 
