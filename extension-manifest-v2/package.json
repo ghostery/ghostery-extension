@@ -61,7 +61,7 @@
     "history": "^4.10.1",
     "hybrids": "^8.1.1",
     "json-api-normalizer": "^1.0.4",
-    "linkedom": "^0.14.5",
+    "linkedom": "0.14.12",
     "moment": "^2.29.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.13.1",
