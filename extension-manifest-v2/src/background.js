@@ -1379,6 +1379,8 @@ function initializeVersioning() {
  * @return {Promise}
  */
 function initializeGhosteryModules() {
+	metrics.setUninstallUrl();
+
 	if (globals.JUST_UPGRADED) {
 		log('JUST UPGRADED');
 		metrics.ping('upgrade');
@@ -1397,8 +1399,6 @@ function initializeGhosteryModules() {
 		if (BROWSER_INFO.name === 'ghostery_desktop') {
 			conf.site_whitelist.push('bing.com', 'search.yahoo.com', 'startpage.com');
 		}
-
-		metrics.setUninstallUrl();
 
 		metrics.ping('install');
 
