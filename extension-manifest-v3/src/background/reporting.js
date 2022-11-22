@@ -130,8 +130,8 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 });
 
 // for debugging service-workers (TODO: provide a way to control logging)
-self.ghostery = self.ghostery || {};
-self.ghostery.WTM = {
+globalThis.ghostery = globalThis.ghostery || {};
+globalThis.ghostery.WTM = {
   communication,
   reporting,
   config,
