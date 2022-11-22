@@ -59,7 +59,6 @@ const config = {
   CONFIG_URL: 'https://api.ghostery.net/api/v1/config',
   ...platformSpecificSettings(),
 };
-console.debug('reporting config:', config);
 
 class Storage {
   constructor(namespace) {
@@ -135,4 +134,5 @@ self.ghostery = self.ghostery || {};
 self.ghostery.WTM = {
   communication,
   reporting,
+  config,
 };
