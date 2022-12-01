@@ -4,7 +4,7 @@ export default define({
   tag: 'ui-text',
   type: 'body-m',
   color: '',
-  underline: false,
+  ellipsis: false,
   render: ({ type, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
@@ -37,6 +37,12 @@ export default define({
 
     :host([type^="button"]) ::slotted(*) {
       text-decoration: none;
+    }
+
+    :host([ellipsis]) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     ::slotted(*) {

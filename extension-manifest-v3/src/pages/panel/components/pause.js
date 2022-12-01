@@ -64,7 +64,7 @@ function simulateClickOnEnter(host, event) {
 }
 
 export default define({
-  tag: 'gh-panel-action',
+  tag: 'gh-panel-pause',
   paused: false,
   pauseType: 1,
   pauseList: false,
