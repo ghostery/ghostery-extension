@@ -11,13 +11,14 @@
 
 import '@ghostery/ui';
 
-import './components/action.js';
 import './components/alert.js';
 import './components/button.js';
+import './components/dialog.js';
 import './components/menu.js';
 import './components/menu-item.js';
 import './components/notification.js';
 import './components/options.js';
 import './components/options-item.js';
+import './components/pause.js';
 
 import './panel.js';

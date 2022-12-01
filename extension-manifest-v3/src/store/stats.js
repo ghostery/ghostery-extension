@@ -14,16 +14,48 @@ import { store } from 'hybrids';
 const supportsChangedListener =
   chrome.runtime.getManifest().manifest_version >= 3;
 
+export const Company = {
+  id: true,
+  name: '',
+  description: '',
+  website: '',
+  contact: '',
+  privacyPolicy: '',
+};
+
 const Stats = {
   domain: '',
   trackers: [
     {
       id: true,
       name: '',
-      company_id: 'unknown',
       category: 'unknown',
+      company: Company,
+      url: '',
     },
   ],
+  byCategory: ({ trackers }) =>
+    Object.entries(
+      trackers.reduce((acc, tracker) => {
+        const category = acc[tracker.category] || { count: 0, trackers: [] };
+
+        const agg = category.trackers.find(({ name }) => name === tracker.name);
+        if (agg) {
+          agg.count += 1;
+        } else {
+          category.trackers.push({
+            name: tracker.name,
+            company: tracker.company,
+            count: 1,
+          });
+        }
+
+        category.count += 1;
+
+        acc[tracker.category] = category;
+        return acc;
+      }, {}),
+    ),
   categories: ({ trackers }) => trackers.map((t) => t.category),
   [store.connect]: {
     async get() {

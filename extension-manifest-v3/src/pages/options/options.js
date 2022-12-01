@@ -13,6 +13,17 @@ import { html, define, store } from 'hybrids';
 
 import Options from '/store/options.js';
 
+function toggleNeverConsent(host, event) {
+  const { checked } = event.target;
+
+  store.set(host.options, {
+    dnrRules: {
+      annoyances: checked,
+    },
+    autoconsent: null,
+  });
+}
+
 export default define({
   tag: 'gh-options',
   options: store(Options),
@@ -21,42 +32,124 @@ export default define({
     <template layout="grid height::100%">
       <ui-page-layout>
         <ui-card>
-          <ui-text type="display-s" layout="block:center margin:bottom:4">
-            Ghostery settings
-          </ui-text>
-          <section layout="column gap:3">
-            ${store.ready(options) &&
-            html`
-              <section layout="column gap">
-                <ui-text type="headline-xs" layout="margin:bottom">
-                  User interface
-                </ui-text>
-                <label layout="row items:center">
-                  <ui-text layout="grow">
-                    Show Tracker Wheel in the browser toolbar
-                  </ui-text>
-                  <input
-                    type="checkbox"
-                    checked="${options.trackerWheel}"
-                    onchange="${html.set(options, 'trackerWheel')}"
-                    layout="shrink:0 size:2"
-                  />
-                </label>
-                <label layout="row items:center">
-                  <ui-text layout="grow">
-                    Show Trackers Preview next to search results
-                  </ui-text>
-                  <input
-                    type="checkbox"
-                    checked="${options.wtmSerpReport}"
-                    onchange="${html.set(options, 'wtmSerpReport')}"
-                    layout="shrink:0 size:2"
-                  />
-                </label>
+          ${store.ready(options) &&
+          html`
+            <div layout="column gap:4">
+              <ui-text type="headline-s">Privacy Protection</ui-text>
+              <section layout="column gap:4">
+                <section layout="column gap:2">
+                  <div layout="column">
+                    <ui-text type="headline-xs">Setup protection level</ui-text>
+                    <ui-text type="body-s" color="gray-500">
+                      Get extra protection and automated control with our
+                      enhanced privacy features.
+                    </ui-text>
+                  </div>
+                  <label layout="row items:center">
+                    <div layout="column grow">
+                      <ui-text>Ad-Blocking</ui-text>
+                      <ui-text type="body-s" color="gray-500">
+                        Praesent egestas tristique nibh. Cras ultricies mi eu
+                        turpis hendrerit fringilla.
+                      </ui-text>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked="${options.dnrRules.ads}"
+                      onchange="${html.set(options, 'dnrRules.ads')}"
+                      layout="shrink:0 size:2"
+                    />
+                  </label>
+                  <label layout="row items:center">
+                    <div layout="column grow">
+                      <ui-text>Anti-Tracking</ui-text>
+                      <ui-text type="body-s" color="gray-500">
+                        Praesent egestas tristique nibh. Cras ultricies mi eu
+                        turpis hendrerit fringilla.
+                      </ui-text>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked="${options.dnrRules.tracking}"
+                      onchange="${html.set(options, 'dnrRules.tracking')}"
+                      layout="shrink:0 size:2"
+                    />
+                  </label>
+                  <label layout="row items:center">
+                    <div layout="column grow">
+                      <ui-text>Never-Consent</ui-text>
+                      <ui-text type="body-s" color="gray-500">
+                        Praesent egestas tristique nibh. Cras ultricies mi eu
+                        turpis hendrerit fringilla.
+                      </ui-text>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked="${options.dnrRules.annoyances}"
+                      onchange="${toggleNeverConsent}"
+                      layout="shrink:0 size:2"
+                    />
+                  </label>
+                </section>
               </section>
-              <gh-options-devtools></gh-options-devtools>
-            `}
-          </section>
+              <ui-text type="headline-s">WhoTracks.me</ui-text>
+              <section layout="column gap:4">
+                <section layout="column gap:2">
+                  <div layout="column">
+                    <ui-text type="headline-xs">Browser Settings</ui-text>
+                    <ui-text type="body-s" color="gray-500">
+                      Suspendisse feugiat. Nunc nulla. Vivamus consectetuer
+                      hendrerit lacus. In ut quam vitae odio lacinia tincidunt.
+                      Sed cursus turpis vitae tortor.
+                    </ui-text>
+                  </div>
+                  <label layout="row items:center">
+                    <div layout="column grow">
+                      <ui-text>Trackers Wheel</ui-text>
+                      <ui-text type="body-s" color="gray-500">
+                        Praesent egestas tristique nibh. Cras ultricies mi eu
+                        turpis hendrerit fringilla.
+                      </ui-text>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked="${options.trackerWheel}"
+                      onchange="${html.set(options, 'trackerWheel')}"
+                      layout="shrink:0 size:2"
+                    />
+                  </label>
+                </section>
+
+                <section layout="column gap:2">
+                  <div layout="column">
+                    <ui-text type="headline-xs">Tracker Settings</ui-text>
+                    <ui-text type="body-s" color="gray-500">
+                      Vivamus quis mi. Vestibulum ante ipsum primis in faucibus
+                      orci luctus et ultrices posuere cubilia Curae; Fusce id
+                      purus.
+                    </ui-text>
+                  </div>
+                  <label layout="row items:center">
+                    <div layout="column grow">
+                      <ui-text>Trackers Preview on SERP</ui-text>
+                      <ui-text type="body-s" color="gray-500">
+                        Praesent egestas tristique nibh. Cras ultricies mi eu
+                        turpis hendrerit fringilla.
+                      </ui-text>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked="${options.wtmSerpReport}"
+                      onchange="${html.set(options, 'wtmSerpReport')}"
+                      layout="shrink:0 size:2"
+                    />
+                  </label>
+                </section>
+
+                <gh-options-devtools></gh-options-devtools>
+              </section>
+            </div>
+          `}
         </ui-card>
       </ui-page-layout>
     </template>

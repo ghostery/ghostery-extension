@@ -12,11 +12,11 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 import { throttle } from 'lodash-es';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
-import { getCategoryKey, order } from '@ghostery/ui/categories';
+import { order } from '@ghostery/ui/categories';
 
 import Options from '/store/options.js';
 import { getTrackerFromUrl } from './utils/bugs.js';
-import tabStats from './utils/tab-stats.js';
+import tabStats from './utils/map.js';
 
 const setIcon = throttle((tabId, stats) => {
   const categories = stats.trackers.map((t) => t.category);
@@ -35,10 +35,7 @@ async function updateTabStats(msg, sender) {
   msg.urls.forEach((url) => {
     const tracker = getTrackerFromUrl(url, stats.domain);
     if (tracker) {
-      stats.trackers.push({
-        ...tracker,
-        category: getCategoryKey(tracker.category),
-      });
+      stats.trackers.push(tracker);
     }
   });
 

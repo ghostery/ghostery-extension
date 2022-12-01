@@ -5,7 +5,8 @@ import Stats from '/store/stats.js';
 
 import sleep from '../assets/sleep.svg';
 
-import Menu from './menu';
+import Menu from './menu.js';
+import Company from './company.js';
 
 const NOTIFICATIONS = [
   {
@@ -95,7 +96,7 @@ async function togglePause(host, event) {
 
 export default define({
   [router.connect]: {
-    stack: [Menu],
+    stack: [Menu, Company],
   },
   tag: 'gh-panel-home-view',
   options: store(Options),
@@ -169,12 +170,12 @@ export default define({
             ${options.terms
               ? options.paused &&
                 html`
-                  <gh-panel-action
+                  <gh-panel-pause
                     onaction="${togglePause}"
                     paused="${options.paused.find(
                       ({ id }) => id === stats.domain,
                     )}"
-                  ></gh-panel-action>
+                  ></gh-panel-pause>
                 `
               : html`
                   <gh-panel-button>
@@ -193,6 +194,8 @@ export default define({
             <ui-stats
               domain="${stats.domain}"
               categories="${stats.categories}"
+              trackers="${stats.byCategory}"
+              dialog="${Company}"
               layout="margin:2"
             >
               <ui-text type="label-m">Trackers found</ui-text>

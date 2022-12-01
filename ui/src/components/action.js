@@ -24,6 +24,10 @@ export default define({
       -webkit-tap-highlight-color: transparent;
     }
 
+    ::slotted(*:focus:not(:focus-visible)) {
+      outline: none;
+    }
+
     ::slotted(*:active) {
       opacity: 0.6;
     }
