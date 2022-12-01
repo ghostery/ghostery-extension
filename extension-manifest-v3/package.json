@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "9.6.3",
+  "version": "9.7.0",
   "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
@@ -47,7 +47,7 @@
     "@duckduckgo/autoconsent": "^3.0.1",
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
-    "@whotracksme/webextension-packages": "1.0.0",
+    "@whotracksme/webextension-packages": "^2.1.0",
     "hybrids": "^8.1.0",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
