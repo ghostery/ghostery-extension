@@ -138,7 +138,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
-    "message": "Wyrażam zgodę na przesyłanie informacji nieosobowych do <a href=\"$${0}\"> Ghostery WhoTracks.Me </a>, oraz akceptuję Politykę Prywatności <a href=\"$${1}\"> Ghostery </a> "
+    "message": "Wyrażam zgodę na przesyłanie informacji nieosobowych do <a href=\"$${0}\">Ghostery WhoTracks.Me</a>, oraz akceptuję  <a href=\"$${1}\">Politykę Prywatności Ghostery</a> "
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Istnieje dzięki mikrowkładom każdego użytkownika Ghostery, który zdecyduje się wysłać nieosobiste informacje do WhoTracks.Me. Wkład ten umożliwia Ghostery dostarczanie w czasie rzeczywistym informacji o trackerach, co z kolei zapewnia ochronę całej społeczności Ghostery."
