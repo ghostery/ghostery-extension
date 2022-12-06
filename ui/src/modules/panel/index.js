@@ -9,7 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui/settings';
+// Globals
+import '../../index.js';
+import '../../styles/panel.css';
 
-import './devtools.js';
-import './options.js';
+// Components
+import './components/badge.js';
+import './components/category.js';
+import './components/list.js';
+import './components/stats.js';

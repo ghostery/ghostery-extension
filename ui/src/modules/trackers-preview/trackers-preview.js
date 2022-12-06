@@ -36,9 +36,12 @@ export default define({
       html.resolve(
         stats.then(
           (data) => html`
-            <ui-stats domain="${domain}" categories="${data.stats.sort(sort)}">
+            <ui-panel-stats
+              domain="${domain}"
+              categories="${data.stats.sort(sort)}"
+            >
               <ui-text type="label-m">Trackers Preview</ui-text>
-            </ui-stats>
+            </ui-panel-stats>
           `,
         ),
       )}

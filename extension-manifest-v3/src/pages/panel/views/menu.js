@@ -52,28 +52,22 @@ export default define({
       <gh-panel-menu>
         <ui-header slot="header">
           Menu
-          <ui-link
-            slot="actions"
-            href="${router.backUrl({ scrollToTop: true })}"
-          >
-            <ui-icon name="close" color="gray-900"></ui-icon>
-          </ui-link>
+          <ui-action slot="actions">
+            <a href="${router.backUrl({ scrollToTop: true })}">
+              <ui-icon name="close" color="gray-900"></ui-icon>
+            </a>
+          </ui-action>
         </ui-header>
         ${MENU.map(({ icon, label, href }) =>
           label
             ? html`
-                <ui-action>
-                  <ui-link
-                    href="${href}"
-                    clean
-                    external
-                    layout="block margin:1:2"
-                  >
+                <ui-text>
+                  <a href="${href}" target="_blank" layout="block margin:1:2">
                     <gh-panel-menu-item icon="${icon}">
                       ${label}
                     </gh-panel-menu-item>
-                  </ui-link>
-                </ui-action>
+                  </a>
+                </ui-text>
               `
             : html`<hr />`,
         )}

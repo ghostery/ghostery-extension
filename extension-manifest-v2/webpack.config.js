@@ -155,9 +155,9 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.scss$/,
+				test: /\.(css|scss)$/,
 				resolve: {
-					extensions: ['.scss', '.sass']
+					extensions: ['.scss', '.sass', '.css']
 				},
 				use: [
 					MiniCssExtractPlugin.loader,

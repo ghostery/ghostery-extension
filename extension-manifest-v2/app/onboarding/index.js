@@ -1,6 +1,5 @@
 import { define, html } from 'hybrids';
 
-import '@ghostery/ui';
 import '@ghostery/ui/onboarding';
 
 function complete() {

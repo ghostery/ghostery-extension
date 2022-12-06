@@ -9,6 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// Global components
+import '../../index.js';
+import '../../styles/pages.css';
+
 import './components/card.js';
 import './components/header.js';
 
