@@ -9,6 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// Globals
+import '../../index.js';
+import '../../styles/pages.css';
+
 // Components
 import './components/badge.js';
 import './components/dialog.js';

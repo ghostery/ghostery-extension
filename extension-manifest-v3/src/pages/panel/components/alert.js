@@ -79,6 +79,7 @@ export default define({
       padding: 0 12px;
       height: 40px;
       --ui-text-color-heading: currentColor;
+      --ui-text-color-anchor: currentColor;
     }
 
     :host([type="success"]) {

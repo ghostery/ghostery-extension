@@ -39,7 +39,7 @@ function getPauseNotification(domain, paused, pauseType) {
   if (paused) {
     switch (pauseType) {
       case 0:
-        return msg.html`${domain} removed from <ui-link href="${UNPROTECTED_SITES_URL}" external>unprotected sites</ui-link>`;
+        return msg.html`${domain} removed from <a href="${UNPROTECTED_SITES_URL}" target="_blank">unprotected sites</a>`;
       default:
         return msg`${domain} was unpaused`;
     }
@@ -47,7 +47,7 @@ function getPauseNotification(domain, paused, pauseType) {
 
   switch (pauseType) {
     case 0:
-      return msg.html`${domain} added to <ui-link href="${UNPROTECTED_SITES_URL}" external>unprotected sites</ui-link>`;
+      return msg.html`${domain} added to <a href="${UNPROTECTED_SITES_URL}" target="_blank">unprotected sites</a>`;
     case 1:
       return msg`${domain} paused for 1 hour`;
     case 24:
@@ -101,16 +101,8 @@ export default define({
   tag: 'gh-panel-home-view',
   options: store(Options),
   stats: store(Stats),
-  categoriesCount: ({ stats }) =>
-    store.ready(stats) &&
-    stats.categories.reduce((acc, key) => {
-      acc.add(key);
-      return acc;
-    }, new Set()).size,
-  notification: ({ options, categoriesCount }) =>
-    store.ready(options) &&
-    categoriesCount < 6 &&
-    NOTIFICATIONS[options.terms ? 1 : 0],
+  notification: ({ options }) =>
+    store.ready(options) && NOTIFICATIONS[options.terms ? 1 : 0],
   content: ({ options, stats, notification }) => html`}
     <template layout="column">
       <section
@@ -124,12 +116,16 @@ export default define({
           ? html`
               <ui-header layout="fixed top left width:full">
                 ${store.ready(stats) && stats.domain}
-                <ui-link slot="icon" href="https://www.ghostery.com" external>
-                  <ui-icon name="logo"></ui-icon>
-                </ui-link>
-                <ui-link slot="actions" href="${router.url(Menu)}">
-                  <ui-icon name="panel-menu" color="gray-900"></ui-icon>
-                </ui-link>
+                <ui-action slot="icon">
+                  <a href="https://www.ghostery.com" target="_blank">
+                    <ui-icon name="logo"></ui-icon>
+                  </a>
+                </ui-action>
+                <ui-action slot="actions">
+                  <a href="${router.url(Menu)}">
+                    <ui-icon name="panel-menu" color="gray-900"></ui-icon>
+                  </a>
+                </ui-action>
               </ui-header>
             `
           : html`
@@ -139,14 +135,14 @@ export default define({
                 layout="absolute inset bottom:auto margin"
               >
                 Additional Permissions Required <br />
-                <ui-link
+                <a
                   href="${chrome.runtime.getURL(
                     '/pages/onboarding/index.html',
                   )}"
-                  external
+                  target="_blank"
                 >
                   Enable Ghostery
-                </ui-link>
+                </a>
               </gh-panel-alert>
             `}
         <section layout="column margin:7:0:1">
@@ -191,7 +187,7 @@ export default define({
                     </a>
                   </gh-panel-button>
                 `}
-            <ui-stats
+            <ui-panel-stats
               domain="${stats.domain}"
               categories="${stats.categories}"
               trackers="${stats.byCategory}"
@@ -199,40 +195,43 @@ export default define({
               layout="margin:2"
             >
               <ui-text type="label-m">Trackers found</ui-text>
-            </ui-stats>
+            </ui-panel-stats>
           `}
 
           <gh-panel-options>
             <span slot="header">Ghostery global operations</span>
-            <ui-link
-              href="${chrome.runtime.getURL(
-                `/pages/${options.terms ? 'options' : 'onboarding'}/index.html`,
-              )}"
-              clean
-              external
-            >
-              <gh-panel-options-item
-                icon="panel-ads"
-                enabled="${options.dnrRules.ads}"
-                terms="${options.terms}"
+            <ui-text color="inherit">
+              <a
+                href="${chrome.runtime.getURL(
+                  `/pages/${
+                    options.terms ? 'options' : 'onboarding'
+                  }/index.html`,
+                )}"
+                target="_blank"
               >
-                Ad-Blocking
-              </gh-panel-options-item>
-              <gh-panel-options-item
-                icon="panel-tracking"
-                enabled="${options.dnrRules.tracking}"
-                terms="${options.terms}"
-              >
-                Anti-Tracking
-              </gh-panel-options-item>
-              <gh-panel-options-item
-                icon="panel-autoconsent"
-                enabled="${options.dnrRules.annoyances}"
-                terms="${options.terms}"
-              >
-                Never-Consent
-              </gh-panel-options-item>
-            </ui-link>
+                <gh-panel-options-item
+                  icon="panel-ads"
+                  enabled="${options.dnrRules.ads}"
+                  terms="${options.terms}"
+                >
+                  Ad-Blocking
+                </gh-panel-options-item>
+                <gh-panel-options-item
+                  icon="panel-tracking"
+                  enabled="${options.dnrRules.tracking}"
+                  terms="${options.terms}"
+                >
+                  Anti-Tracking
+                </gh-panel-options-item>
+                <gh-panel-options-item
+                  icon="panel-autoconsent"
+                  enabled="${options.dnrRules.annoyances}"
+                  terms="${options.terms}"
+                >
+                  Never-Consent
+                </gh-panel-options-item>
+              </a>
+            </ui-text>
           </gh-panel-options>
           ${notification &&
           html`
@@ -245,7 +244,7 @@ export default define({
               ${notification.actions.map(
                 ({ text, url }) => html`
                   <ui-text type="label-s" color="primary-700">
-                    <ui-link href="${url}" clean external>${text}</ui-link>
+                    <a href="${url}" target="_blank">${text}</a>
                   </ui-text>
                 `,
               )}

@@ -9,4 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// Panel UI
+import '../panel/index.js';
+
 import './trackers-preview.js';

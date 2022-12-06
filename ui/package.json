@@ -6,13 +6,14 @@
   "type": "module",
   "exports": {
     ".": "./src/index.js",
-    "./css": "./src/index.css",
-    "./categories": "./src/utils/categories.js",
-    "./wheel": "./src/utils/wheel.js",
-    "./onboarding": "./src/modules/onboarding/index.js",
     "./autoconsent": "./src/modules/autoconsent/index.js",
     "./autoconsent/iframe": "./src/modules/autoconsent/iframe.js",
-    "./trackers-preview": "./src/modules/trackers-preview/index.js"
+    "./onboarding": "./src/modules/onboarding/index.js",
+    "./panel": "./src/modules/panel/index.js",
+    "./settings": "./src/modules/settings/index.js",
+    "./trackers-preview": "./src/modules/trackers-preview/index.js",
+    "./categories": "./src/utils/categories.js",
+    "./wheel": "./src/utils/wheel.js"
   },
   "scripts": {
     "lint": "eslint ./src"

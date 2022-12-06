@@ -1,4 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('../fonts/Inter-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('../fonts/Inter-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('../fonts/Inter-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 html {
   /* Variables */
@@ -54,13 +76,6 @@ body {
   overflow-x: hidden;
   --webkit-overflow-scrolling: touch;
 }
-
-/* @media screen and (height: 600px) {
-  html,
-  body {
-    max-height: 100vh;
-  }
-} */
 
 body {
   min-width: 375px;

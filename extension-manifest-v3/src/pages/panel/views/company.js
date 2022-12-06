@@ -1,6 +1,10 @@
 import { define, html, router, store } from 'hybrids';
 import Stats, { Company } from '/store/stats';
 
+function cleanUp(text) {
+  return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
+}
+
 export default define({
   [router.connect]: { dialog: true },
   tag: 'gh-panel-company-view',
@@ -17,7 +21,7 @@ export default define({
           <ui-text slot="header" type="body-s" color="gray-500">
             ${trackers.length} trackers
           </ui-text>
-          <ui-text type="body-s">${company.description}</ui-text>
+          <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
           <hr />
           <section layout="grid:max|1 items:start:stretch gap:1:3">
             <ui-icon name="panel-browser"></ui-icon>
@@ -36,9 +40,9 @@ export default define({
               <div layout="column gap">
                 <ui-text type="label-xs">Website</ui-text>
                 <ui-text type="label-xs" color="primary-700" ellipsis>
-                  <ui-link href="${company.website}" external clean>
+                  <a href="${company.website}" target="_blank">
                     ${company.website}
-                  </ui-link>
+                  </a>
                 </ui-text>
               </div>
             `}
@@ -50,9 +54,9 @@ export default define({
                   <!-- | Panel Company -->Privacy policy
                 </ui-text>
                 <ui-text type="label-xs" color="primary-700" ellipsis>
-                  <ui-link href="${company.privacyPolicy}" external clean>
+                  <a href="${company.privacyPolicy}" target="_blank">
                     ${company.privacyPolicy}
-                  </ui-link>
+                  </a>
                 </ui-text>
               </div>
             `}
@@ -62,15 +66,14 @@ export default define({
               <div layout="column gap">
                 <ui-text type="label-xs">Contact</ui-text>
                 <ui-text type="label-xs" color="primary-700" ellipsis>
-                  <ui-link
+                  <a
                     href="${company.contact.startsWith('http')
                       ? ''
                       : 'mailto:'}${company.contact}"
-                    external
-                    clean
+                    target="_blank"
                   >
                     ${company.contact}
-                  </ui-link>
+                  </a>
                 </ui-text>
               </div>
             `}

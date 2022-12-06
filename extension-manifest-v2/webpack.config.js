@@ -56,6 +56,7 @@ module.exports = {
 			'@ghostery/ui/autoconsent/iframe$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/iframe.js'),
 			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
 			'@ghostery/ui/trackers-preview$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/trackers-preview/index.js'),
+			'@ghostery/ui/categories': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/categories'),
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
 			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
 		},
@@ -196,9 +197,10 @@ module.exports = {
 					}
 				]
 			}, {
-				test: /\.scss$/,
+				// test css and scss
+				test: /\.(css|scss)$/,
 				resolve: {
-					extensions: ['.scss', '.sass']
+					extensions: ['.scss', '.sass', '.css']
 				},
 				use: [
 					MiniCssExtractPlugin.loader,

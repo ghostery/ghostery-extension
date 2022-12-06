@@ -5,6 +5,7 @@ export default define({
   type: 'body-m',
   color: '',
   ellipsis: false,
+  underline: false,
   render: ({ type, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
@@ -17,17 +18,10 @@ export default define({
     :host([type^="label"]) {
       color: var(--ui-text-color-heading, var(--ui-color-gray-800));
     }
-    
-    :host([type^="body"]) {
-      --ui-link-color-hover: var(--ui-color-${color ? color : 'primary-500'});
-    }
-
-    :host([type^="body"]) ::slotted(ui-link) {
-      font-weight: 500;
-    }
 
     :host([color]) {
       --ui-text-color: var(--ui-color-${color});
+      --ui-text-color-anchor: var(--ui-color-${color});
       --ui-text-color-heading: var(--ui-color-${color});
     }
 
@@ -52,8 +46,12 @@ export default define({
       color: inherit;
     }
 
-    :host([type^="body"]) ::slotted(a) {
-      font-weight: 500;
-    }
+    ::slotted(a) { transition: all 0.2s; text-decoration: none}
+    ::slotted(a:hover) { color: var(--ui-text-color-anchor, inherit); }
+    ::slotted(a:active) { opacity: 0.6; }
+    ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
+
+    :host([type^="body"]) ::slotted(a) { font-weight: 500; }
+    :host([underline]) ::slotted(a) { text-decoration: underline; }
   `,
 });
