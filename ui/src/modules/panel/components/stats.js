@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, router } from 'hybrids';
+import { define, html, msg, router } from 'hybrids';
 
 export default define({
   tag: 'ui-panel-stats',
@@ -28,52 +28,65 @@ export default define({
   domain: '',
   type: 'graph',
   dialog: undefined,
-  render: ({
+  label: msg`Trackers found`,
+  content: ({
     categories,
     categoryList,
     trackers,
     domain,
     type,
     dialog,
+    label,
   }) => html`
     <template layout="column gap:2">
       <div layout="row items:center gap">
-        <div layout="grow"><slot></slot></div>
+        <div layout="grow">
+          <ui-text type="label-m">${label}</ui-text>
+        </div>
         <ui-tooltip>
           <span slot="content">WhoTracks.Me Statistical Report</span>
-          <a
-            class="action"
-            href="https://www.whotracks.me/websites/${domain}.html"
-            target="_blank"
-          >
-            <ui-icon name="panel-whotracksme"></ui-icon>
-          </a>
+          <ui-panel-action>
+            <a
+              href="https://www.whotracks.me/websites/${domain}.html"
+              target="_blank"
+            >
+              <ui-icon name="panel-whotracksme"></ui-icon>
+            </a>
+          </ui-panel-action>
         </ui-tooltip>
         ${trackers &&
-        html`<div class="action-group">
-          <ui-tooltip>
-            <span slot="content">Graph View</span>
-            <button
-              class="action ${type === 'graph' ? 'active' : ''}"
-              onclick="${html.set('type', 'graph')}"
-            >
-              <ui-icon name="panel-chart"></ui-icon>
-            </button>
-          </ui-tooltip>
-          <ui-tooltip>
-            <span slot="content">Detailed View</span>
-            <button
-              class="action ${type === 'list' ? 'active' : ''}"
-              onclick="${html.set('type', 'list')}"
-            >
-              <ui-icon name="panel-list"></ui-icon>
-            </button>
-          </ui-tooltip>
-        </div>`}
+        html`
+          <ui-panel-action-group>
+            <ui-tooltip>
+              <span slot="content">Graph View</span>
+              <ui-panel-action
+                grouped
+                active="${type === 'graph'}"
+                layout="size:30px"
+              >
+                <button onclick="${html.set('type', 'graph')}">
+                  <ui-icon name="panel-chart"></ui-icon>
+                </button>
+              </ui-panel-action>
+            </ui-tooltip>
+            <ui-tooltip>
+              <span slot="content">Detailed View</span>
+              <ui-panel-action
+                grouped
+                active="${type === 'list'}"
+                layout="size:30px"
+              >
+                <button onclick="${html.set('type', 'list')}">
+                  <ui-icon name="panel-list"></ui-icon>
+                </button>
+              </ui-panel-action>
+            </ui-tooltip>
+          </ui-panel-action-group>
+        `}
       </div>
       ${type === 'graph' &&
       html`
-        <div layout="row gap:3 height::16">
+        <div layout="row gap:3">
           <ui-tracker-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
@@ -104,19 +117,25 @@ export default define({
                   ${trackers.map(
                     (t) =>
                       html`
-                        <ui-text type="body-s" ellipsis>
-                          <a
-                            href="${t.company && dialog
-                              ? router.url(dialog, { company: t.company })
-                              : ''}"
-                          >
-                            <div
-                              layout="row items:center gap:0.5 padding:0.5:0"
-                            >
-                              ${t.name}
-                              <ui-panel-badge>${t.count}</ui-panel-badge>
-                            </div>
-                          </a>
+                        <ui-text type="body-s">
+                          ${t.company && dialog
+                            ? html`
+                                <a
+                                  href="${router.url(dialog, {
+                                    company: t.company,
+                                  })}"
+                                  layout="row items:center gap:0.5 padding:0.5:0"
+                                >
+                                  ${t.name}
+                                  <ui-panel-badge>${t.count}</ui-panel-badge>
+                                </a>
+                              `
+                            : html`<a
+                                layout="row items:center gap:0.5 padding:0.5:0"
+                              >
+                                ${t.name}
+                                <ui-panel-badge>${t.count}</ui-panel-badge>
+                              </a>`}
                         </ui-text>
                       `,
                   )}
@@ -127,47 +146,5 @@ export default define({
         </section>
       `}
     </template>
-  `.css`
-    .action {
-      cursor: pointer;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      appearance: none;
-      border: none;
-      background: var(--ui-color-white);
-      border: 1px solid var(--ui-color-gray-200);
-      box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
-      border-radius: 8px;
-      width: 36px;
-      height: 36px;
-      transition: all 0.2s;
-      padding: 0;
-    }
-
-    .action { color: var(--ui-color-gray-900); }
-    .action:hover { color: var(--ui-color-primary-500); }
-    .action:active { color: var(--ui-color-primary-700); }
-
-    .action-group {
-      display: flex;
-      background: var(--ui-color-gray-100);
-      border: 1px solid  var(--ui-color-gray-200);
-      border-radius: 8px;
-      padding: 2px;
-      gap: 2px;
-    }
-
-    .action-group .action {
-      width: 30px;
-      height: 30px;
-    }
-
-    .action-group .action:not(.active) {
-      background: none;
-      border: none;
-      box-shadow: none;
-    }
   `,
 });

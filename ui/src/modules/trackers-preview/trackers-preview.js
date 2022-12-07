@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, dispatch } from 'hybrids';
+import { html, define, msg, dispatch } from 'hybrids';
 
 import { sortCategories } from '@ghostery/ui/categories';
 const sort = sortCategories();
@@ -39,8 +39,8 @@ export default define({
             <ui-panel-stats
               domain="${domain}"
               categories="${data.stats.sort(sort)}"
+              label="${msg`Trackers Preview`}"
             >
-              <ui-text type="label-m">Trackers Preview</ui-text>
             </ui-panel-stats>
           `,
         ),

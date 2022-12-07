@@ -30,7 +30,6 @@ export default define({
       box-sizing: border-box;
       padding: 16px;
       background: var(--ui-color-white);
-      border-bottom: 1px solid var(--ui-color-gray-300);
       box-shadow: 0px 4px 16px rgba(32, 44, 68, 0.1);
     }
    `,

@@ -5,5 +5,6 @@ import Home from './views/home.js';
 export default define({
   tag: 'gh-panel',
   stack: router([Home]),
-  content: ({ stack }) => html`<template layout="contents">${stack}</template>`,
+  content: ({ stack }) =>
+    html`<template layout="block width::375px">${stack}</template>`,
 });

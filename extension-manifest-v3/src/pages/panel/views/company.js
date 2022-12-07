@@ -13,7 +13,7 @@ export default define({
   trackers: ({ company, stats }) =>
     store.ready(stats) && stats.trackers.filter((t) => t.company === company),
   content: ({ company, trackers }) => html`
-    <template layout="contents">
+    <template layout="column">
       <gh-panel-dialog>
         <ui-text slot="header" type="label-l">${company.name}</ui-text>
         ${trackers &&
@@ -23,7 +23,13 @@ export default define({
           </ui-text>
           <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
           <hr />
-          <section layout="grid:max|1 items:start:stretch gap:1:3">
+          <section
+            layout="
+              grid:max|1 items:start:stretch content:start gap:1:3 
+              grow:1 
+              padding:bottom:4
+            "
+          >
             <ui-icon name="panel-browser"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">Detected trackers:</ui-text>
@@ -39,7 +45,12 @@ export default define({
               <ui-icon name="panel-globe"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-xs">Website</ui-text>
-                <ui-text type="label-xs" color="primary-700" ellipsis>
+                <ui-text
+                  type="label-xs"
+                  color="primary-700"
+                  ellipsis
+                  layout="padding margin:-1"
+                >
                   <a href="${company.website}" target="_blank">
                     ${company.website}
                   </a>
@@ -53,7 +64,12 @@ export default define({
                 <ui-text type="label-xs">
                   <!-- | Panel Company -->Privacy policy
                 </ui-text>
-                <ui-text type="label-xs" color="primary-700" ellipsis>
+                <ui-text
+                  type="label-xs"
+                  color="primary-700"
+                  ellipsis
+                  layout="padding margin:-1"
+                >
                   <a href="${company.privacyPolicy}" target="_blank">
                     ${company.privacyPolicy}
                   </a>
@@ -65,7 +81,12 @@ export default define({
               <ui-icon name="panel-mail"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-xs">Contact</ui-text>
-                <ui-text type="label-xs" color="primary-700" ellipsis>
+                <ui-text
+                  type="label-xs"
+                  color="primary-700"
+                  ellipsis
+                  layout="padding margin:-1"
+                >
                   <a
                     href="${company.contact.startsWith('http')
                       ? ''

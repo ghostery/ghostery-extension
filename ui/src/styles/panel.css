@@ -74,11 +74,11 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  --webkit-overflow-scrolling: touch;
 }
 
 body {
-  min-width: 375px;
+  width: 100%;
+  max-width: max(100vw, 375px);
   -webkit-user-select: none;
   user-select: none;
   background: var(--ui-color-white);
@@ -88,4 +88,11 @@ button,
 label,
 input {
   font-family: inherit !important;
+}
+
+@media screen and (max-height: 600px) {
+  body {
+    max-height: 600px;
+    overflow: scroll;
+  }
 }

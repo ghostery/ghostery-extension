@@ -14,6 +14,8 @@ import '../../index.js';
 import '../../styles/panel.css';
 
 // Components
+import './components/action-group.js';
+import './components/action.js';
 import './components/badge.js';
 import './components/category.js';
 import './components/list.js';

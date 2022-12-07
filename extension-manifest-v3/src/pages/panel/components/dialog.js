@@ -22,7 +22,7 @@ const fade = {
 function close(host, event) {
   if (event.target === event.currentTarget) {
     const closeBtn = host.shadowRoot.querySelector('#close');
-    closeBtn.shadowRoot.querySelector('a').click();
+    closeBtn?.shadowRoot.querySelector('a').click();
   }
 }
 
@@ -56,31 +56,44 @@ export default define({
     },
   },
   render: () => html`
-    <template layout="contents">
+    <template layout="block">
       <dialog
         onclick="${close}"
-        layout="grid::max|1 width:full::full bottom margin:0 top:auto"
+        layout="
+          grid::max|1
+          width:full::full height:auto::auto 
+          margin:0 padding:0 
+          top:6 bottom
+        "
       >
-        <section id="header" layout="grid:24px|1|24px items:center">
+        <section
+          id="header"
+          layout="grid:24px|1|24px items:center padding:1.5:2"
+        >
           <div layout="column items:center area:2">
             <slot name="header"></slot>
           </div>
-          <a id="close" onclick="${animateOnClose}" href="${router.backUrl()}">
-            <ui-icon name="panel-close" layout="size:3"></ui-icon>
-          </a>
+          <ui-action>
+            <a
+              id="close"
+              onclick="${animateOnClose}"
+              href="${router.backUrl({ scrollToTop: true })}"
+              layout="block"
+            >
+              <ui-icon name="panel-close" layout="size:3"></ui-icon>
+            </a>
+          </ui-action>
         </section>
-        <section id="content" layout="column overflow:scroll gap:2">
+        <section id="content" layout="column overflow:scroll gap:2 padding:2">
           <slot></slot>
         </section>
       </dialog>
     </template>
   `.css`
     dialog {
-      padding: 0;
       border: none;
       border-radius: 12px 12px 0 0;
       background: var(--ui-color-white);
-      max-height: calc(100vh - 32px);
       overscroll-behavior: contain;
     }
 
@@ -95,17 +108,12 @@ export default define({
 
     #header {
       border-bottom: 1px solid var(--ui-color-gray-200);
-      padding: 12px 16px;
     }
 
     #close  {
       color: var(--ui-color-gray-500);
       background: var(--ui-color-gray-200);
       border-radius: 50%;
-    }
-
-    #content {
-      padding: 16px;
     }
 
     #content ::slotted(hr) {

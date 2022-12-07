@@ -34,6 +34,8 @@ const NOTIFICATIONS = [
 const UNPROTECTED_SITES_URL = chrome.runtime.getURL(
   '/pages/options/index.html',
 );
+const OPTIONS_URL = chrome.runtime.getURL('/pages/options/index.html');
+const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
 
 function getPauseNotification(domain, paused, pauseType) {
   if (paused) {
@@ -103,7 +105,7 @@ export default define({
   stats: store(Stats),
   notification: ({ options }) =>
     store.ready(options) && NOTIFICATIONS[options.terms ? 1 : 0],
-  content: ({ options, stats, notification }) => html`}
+  content: ({ options, stats, notification }) => html`
     <template layout="column">
       <section
         id="gh-panel-alerts"
@@ -192,22 +194,18 @@ export default define({
               categories="${stats.categories}"
               trackers="${stats.byCategory}"
               dialog="${Company}"
-              layout="margin:2"
+              layout="margin:2 height::188px"
             >
-              <ui-text type="label-m">Trackers found</ui-text>
             </ui-panel-stats>
           `}
 
           <gh-panel-options>
             <span slot="header">Ghostery global operations</span>
-            <ui-text color="inherit">
+            <ui-text color="gray-900">
               <a
-                href="${chrome.runtime.getURL(
-                  `/pages/${
-                    options.terms ? 'options' : 'onboarding'
-                  }/index.html`,
-                )}"
+                href="${options.terms ? OPTIONS_URL : ONBOARDING_URL}"
                 target="_blank"
+                layout="block"
               >
                 <gh-panel-options-item
                   icon="panel-ads"
@@ -252,5 +250,6 @@ export default define({
           `}
         </section>
       `}
-    </template>`,
+    </template>
+  `,
 });
