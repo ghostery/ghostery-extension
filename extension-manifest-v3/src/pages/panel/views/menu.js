@@ -48,7 +48,7 @@ const MENU = [
 export default define({
   tag: 'gh-panel-menu-view',
   content: () => html`
-    <template layout="grid">
+    <template layout="grid height:600px">
       <gh-panel-menu>
         <ui-header slot="header">
           Menu

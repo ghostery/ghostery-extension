@@ -40,14 +40,11 @@ export default define({
     }
 
     ::slotted(*) {
-      display: inline;
-      margin: 0;
-      padding: 0;
       color: inherit;
     }
 
-    ::slotted(a) { transition: all 0.2s; text-decoration: none}
-    ::slotted(a:hover) { color: var(--ui-text-color-anchor, inherit); }
+    ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; }
+    ::slotted(a:hover, a:focus-visible) { color: var(--ui-text-color-anchor, inherit); }
     ::slotted(a:active) { opacity: 0.6; }
     ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
 
