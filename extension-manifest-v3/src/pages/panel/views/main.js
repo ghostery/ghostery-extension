@@ -10,7 +10,7 @@ import Company from './company.js';
 
 const NOTIFICATIONS = [
   {
-    icon: 'panel-help',
+    icon: 'help',
     text: msg`Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.`,
     actions: [
       {
@@ -20,7 +20,7 @@ const NOTIFICATIONS = [
     ],
   },
   {
-    icon: 'panel-heart',
+    icon: 'heart',
     text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
     actions: [
       {
@@ -116,7 +116,7 @@ export default define({
       html`
         ${options.terms
           ? html`
-              <ui-header layout="fixed top left width:full">
+              <ui-panel-header layout="fixed top left width:full">
                 ${store.ready(stats) && stats.domain}
                 <ui-action slot="icon">
                   <a href="https://www.ghostery.com" target="_blank">
@@ -125,10 +125,10 @@ export default define({
                 </ui-action>
                 <ui-action slot="actions">
                   <a href="${router.url(Menu)}">
-                    <ui-icon name="panel-menu" color="gray-900"></ui-icon>
+                    <ui-icon name="menu" color="gray-900"></ui-icon>
                   </a>
                 </ui-action>
-              </ui-header>
+              </ui-panel-header>
             `
           : html`
               <gh-panel-alert
@@ -179,7 +179,7 @@ export default define({
                       target="_blank"
                       layout="row center gap:0.5"
                     >
-                      <ui-icon name="panel-pause"></ui-icon>
+                      <ui-icon name="pause"></ui-icon>
                       Enable Ghostery
                     </a>
                   </gh-panel-button>

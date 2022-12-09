@@ -2,44 +2,44 @@ import { define, html, msg, router } from 'hybrids';
 
 const MENU = [
   {
-    icon: 'panel-user',
+    icon: 'user',
     label: msg`Sign in`,
     href: 'https://signon.ghostery.com/',
   },
   {
-    icon: 'panel-heart',
+    icon: 'heart',
     label: msg`Become a contributor`,
     href: 'https://www.ghostery.com/become-a-contributor',
   },
   {},
   {
-    icon: 'panel-alert',
+    icon: 'alert',
     label: msg`Report a broken page`,
     href: 'https://www.ghostery.com/support',
   },
   {
-    icon: 'panel-send',
+    icon: 'send',
     label: msg`Submit a new tracker`,
     href: 'https://www.ghostery.com/submit-a-tracker',
   },
   {
-    icon: 'panel-help',
+    icon: 'help',
     label: msg`Contact support`,
     href: 'https://www.ghostery.com/support',
   },
   {},
   {
-    icon: 'panel-shield',
+    icon: 'shield',
     label: msg`Unprotected sites`,
     href: chrome.runtime.getURL('/pages/options/index.html'),
   },
   {
-    icon: 'panel-settings',
+    icon: 'settings',
     label: msg`Settings`,
     href: chrome.runtime.getURL('/pages/options/index.html'),
   },
   {
-    icon: 'panel-info',
+    icon: 'info',
     label: msg`About`,
     href: 'https://www.ghostery.com/',
   },
@@ -50,14 +50,14 @@ export default define({
   content: () => html`
     <template layout="grid height:600px">
       <gh-panel-menu>
-        <ui-header slot="header">
+        <ui-panel-header slot="header">
           Menu
           <ui-action slot="actions">
             <a href="${router.backUrl({ scrollToTop: true })}">
-              <ui-icon name="close" color="gray-900"></ui-icon>
+              <ui-icon name="close" color="gray-900" layout="size:3"></ui-icon>
             </a>
           </ui-action>
-        </ui-header>
+        </ui-panel-header>
         ${MENU.map(({ icon, label, href }) =>
           label
             ? html`

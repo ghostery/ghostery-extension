@@ -91,7 +91,7 @@ export default define({
                 layout="grid:max|1|min gap:2 items:center:start margin:2"
                 layout@768px="margin:3"
               >
-                <ui-icon name="tracking"></ui-icon>
+                <ui-icon name="tracking" layout="size:3"></ui-icon>
                 <ui-text type="headline-xs">Trackers</ui-text>
                 <ui-onboarding-badge enabled="${form.protection}">
                   ${form.protection ? html`Blocked` : html`Unblocked`}
@@ -101,7 +101,7 @@ export default define({
                 layout="grid:max|1|min gap:2 items:center:start margin:2"
                 layout@768px="margin:3"
               >
-                <ui-icon name="ads"></ui-icon>
+                <ui-icon name="ads" layout="size:3"></ui-icon>
                 <ui-text type="headline-xs"><!-- | onboarding -->Ads</ui-text>
                 <ui-onboarding-badge enabled="${form.protection}">
                   ${form.protection ? html`Blocked` : html`Unblocked`}
@@ -111,7 +111,7 @@ export default define({
                 layout="grid:max|1|min gap:2 items:center:start margin:2"
                 layout@768px="margin:3"
               >
-                <ui-icon name="annoyances"></ui-icon>
+                <ui-icon name="autoconsent" layout="size:3"></ui-icon>
                 <ui-text type="headline-xs">All Popups</ui-text>
                 <ui-onboarding-badge enabled="${form.protection}">
                   ${form.protection ? html`Blocked` : html`Unblocked`}

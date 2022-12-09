@@ -50,7 +50,7 @@ export default define({
               href="https://www.whotracks.me/websites/${domain}.html"
               target="_blank"
             >
-              <ui-icon name="panel-whotracksme"></ui-icon>
+              <ui-icon name="whotracksme"></ui-icon>
             </a>
           </ui-panel-action>
         </ui-tooltip>
@@ -65,7 +65,7 @@ export default define({
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'graph')}">
-                  <ui-icon name="panel-chart"></ui-icon>
+                  <ui-icon name="chart"></ui-icon>
                 </button>
               </ui-panel-action>
             </ui-tooltip>
@@ -77,7 +77,7 @@ export default define({
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'list')}">
-                  <ui-icon name="panel-list"></ui-icon>
+                  <ui-icon name="list"></ui-icon>
                 </button>
               </ui-panel-action>
             </ui-tooltip>
@@ -87,10 +87,10 @@ export default define({
       ${type === 'graph' &&
       html`
         <div layout="row gap:3">
-          <ui-tracker-wheel
+          <ui-panel-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
-          ></ui-tracker-wheel>
+          ></ui-panel-wheel>
           <div layout="column grow">
             ${categoryList.map(
               ([category, count]) => html`

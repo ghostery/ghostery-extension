@@ -18,5 +18,7 @@ import './components/action-group.js';
 import './components/action.js';
 import './components/badge.js';
 import './components/category.js';
+import './components/header.js';
 import './components/list.js';
 import './components/stats.js';
+import './components/wheel.js';

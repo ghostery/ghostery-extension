@@ -12,7 +12,7 @@
 import { html, define } from 'hybrids';
 
 export default define({
-  tag: 'ui-header',
+  tag: 'ui-panel-header',
   render: () => html`
     <template
       layout="grid:max|1|max items:center gap:2 height:7 padding:2 relative layer"

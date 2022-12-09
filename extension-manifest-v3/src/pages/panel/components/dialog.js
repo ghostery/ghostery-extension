@@ -80,7 +80,7 @@ export default define({
               href="${router.backUrl({ scrollToTop: true })}"
               layout="block"
             >
-              <ui-icon name="panel-close" layout="size:3"></ui-icon>
+              <ui-icon name="close" layout="size:3 padding:0.5"></ui-icon>
             </a>
           </ui-action>
         </section>
