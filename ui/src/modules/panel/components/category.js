@@ -20,7 +20,7 @@ export default define({
   render: ({ name, count }) => html`
     <template layout="row gap items:center">
       <div id="pill" layout="size:12px:6px"></div>
-      <div id="label" layout="row gap items:center grow">
+      <div id="label" layout="row gap items:center grow padding:0.5:0">
         <ui-text type="body-s" color="gray-500" layout="grow">
           ${labels.categories[name]}
         </ui-text>
@@ -39,7 +39,6 @@ export default define({
 
     #label {
       border-bottom: 1px solid var(--ui-color-gray-200);
-      padding: 4px 0;
     }
 
     :host(:last-child) #label {

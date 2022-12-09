@@ -30,7 +30,7 @@ export default define({
               padding:bottom:4
             "
           >
-            <ui-icon name="panel-browser"></ui-icon>
+            <ui-icon name="browser"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">Detected trackers:</ui-text>
               ${trackers.map(
@@ -42,7 +42,7 @@ export default define({
             </div>
             ${company.website &&
             html`
-              <ui-icon name="panel-globe"></ui-icon>
+              <ui-icon name="globe"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-xs">Website</ui-text>
                 <ui-text
@@ -59,7 +59,7 @@ export default define({
             `}
             ${company.privacyPolicy &&
             html`
-              <ui-icon name="panel-privacy"></ui-icon>
+              <ui-icon name="privacy"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-xs">
                   <!-- | Panel Company -->Privacy policy
@@ -78,7 +78,7 @@ export default define({
             `}
             ${company.contact &&
             html`
-              <ui-icon name="panel-mail"></ui-icon>
+              <ui-icon name="mail"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-xs">Contact</ui-text>
                 <ui-text

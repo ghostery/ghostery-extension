@@ -77,7 +77,7 @@ export default define({
         onclick="${!pauseList && dispatchAction}"
       >
         <div id="label" layout="grow row center gap:0.5 shrink overflow">
-          <ui-icon name="panel-pause" color="gh-panel-action"></ui-icon>
+          <ui-icon name="pause" color="gh-panel-action"></ui-icon>
           <ui-text type="label-m" color="gh-panel-action">
             ${paused ? `Ghostery paused` : `Pause Ghostery on this site`}
           </ui-text>
@@ -92,7 +92,7 @@ export default define({
         >
           ${paused
             ? html`
-                <ui-icon name="panel-refresh" color="danger-500"></ui-icon>
+                <ui-icon name="refresh" color="danger-500"></ui-icon>
                 <ui-text
                   type="label-m"
                   color="danger-500"
@@ -123,8 +123,7 @@ export default define({
                 layout.active="grid:1|max:auto"
               >
                 <ui-text type="label-m" color="gray-900">${label}</ui-text>
-                ${pauseType === value &&
-                html`<ui-icon name="panel-check"></ui-icon>`}
+                ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
                 <ui-text type="body-s" color="gray-500" layout="area:2">
                   ${description}
                 </ui-text>

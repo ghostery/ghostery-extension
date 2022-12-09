@@ -19,7 +19,7 @@ const slide = {
 export default define({
   tag: 'gh-panel-alert',
   type: '',
-  icon: 'panel-alert-info',
+  icon: 'alert-info',
   autoclose: {
     value: 0,
     connect(host, key) {
@@ -67,7 +67,7 @@ export default define({
       </ui-text>
       ${!!autoclose &&
       html`<button onclick="${close}">
-        <ui-icon name="panel-close"></ui-icon>
+        <ui-icon name="close"></ui-icon>
       </button>`}
     </template>
   `.css`

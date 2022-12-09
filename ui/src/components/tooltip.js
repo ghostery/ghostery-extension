@@ -43,7 +43,10 @@ export default define({
         onmouseleave="${html.set('show', false)}"
       ></slot>
       <div id="tooltip" layout="absolute layer bottom:full left:50%" hidden>
-        <ui-text type="label-s" layout="block:center margin:bottom:0.5">
+        <ui-text
+          type="label-s"
+          layout="block:center margin:bottom:0.5 padding:0.5:1"
+        >
           <slot name="content"></slot>
         </ui-text>
       </div>
@@ -59,7 +62,6 @@ export default define({
       border: 0.5px solid var(--ui-color-gray-300);
       box-shadow: 0px 4px 12px rgba(32, 44, 68, 0.2);
       border-radius: 4px;
-      padding: 4px 8px;
       white-space: nowrap;  
     }
   `,

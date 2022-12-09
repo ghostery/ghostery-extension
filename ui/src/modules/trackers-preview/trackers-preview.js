@@ -20,54 +20,53 @@ export default define({
   stats: undefined,
   domain: '',
   render: ({ domain, confirmDisabled, stats }) => html`
-    <ui-header>
-      <ui-text type="label-m">${domain}</ui-text>
-      <button
-        class="svg-button"
-        onclick="${(host) => dispatch(host, 'close')}"
-        slot="actions"
-      >
-        <ui-icon name="close"></ui-icon>
-      </button>
-    </ui-header>
+    <template layout="block height:full margin:0:auto">
+      <ui-panel-header>
+        <ui-text type="label-m">${domain}</ui-text>
+        <button
+          class="svg-button"
+          onclick="${(host) => dispatch(host, 'close')}"
+          slot="actions"
+        >
+          <ui-icon name="close"></ui-icon>
+        </button>
+      </ui-panel-header>
 
-    <main>
-      ${stats &&
-      html.resolve(
-        stats.then(
-          (data) => html`
-            <ui-panel-stats
-              domain="${domain}"
-              categories="${data.stats.sort(sort)}"
-              label="${msg`Trackers Preview`}"
-            >
-            </ui-panel-stats>
-          `,
-        ),
-      )}
-    </main>
-    <footer>
-      ${confirmDisabled
-        ? html`
-            <span>Are you sure?</span>
-            <button onclick="${(host) => dispatch(host, 'disable')}">
-              Disable Trackers Preview
-            </button>
-            <button onclick="${html.set('confirmDisabled', false)}">
-              Cancel
-            </button>
-          `
-        : html`
-            <button onclick="${html.set('confirmDisabled', true)}">
-              Disable Trackers Preview
-            </button>
-          `}
-    </footer>
+      <main>
+        ${stats &&
+        html.resolve(
+          stats.then(
+            (data) => html`
+              <ui-panel-stats
+                domain="${domain}"
+                categories="${data.stats.sort(sort)}"
+                label="${msg`Trackers Preview`}"
+              >
+              </ui-panel-stats>
+            `,
+          ),
+        )}
+      </main>
+      <footer>
+        ${confirmDisabled
+          ? html`
+              <span>Are you sure?</span>
+              <button onclick="${(host) => dispatch(host, 'disable')}">
+                Disable Trackers Preview
+              </button>
+              <button onclick="${html.set('confirmDisabled', false)}">
+                Cancel
+              </button>
+            `
+          : html`
+              <button onclick="${html.set('confirmDisabled', true)}">
+                Disable Trackers Preview
+              </button>
+            `}
+      </footer>
+    </template>
   `.css`
      :host {
-       height: 100%;
-       display: block;
-       margin: 0 auto;
        background-color: #F8F8F8;
      }
  
@@ -98,12 +97,7 @@ export default define({
        height: 22px;
        width: 22px;
      }
- 
-     .svg-button ui-icon {
-       height: 16px;
-       width: 16px;
-     }
- 
+
      .buttons {
        display: grid;
        grid-template-columns: 1fr 1fr;

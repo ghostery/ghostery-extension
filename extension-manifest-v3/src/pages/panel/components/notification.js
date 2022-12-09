@@ -44,12 +44,10 @@ export default define({
 
     #close {
       cursor: pointer;
-      background: none;
       border: none;
       color: var(--ui-color-gray-500);
       background: var(--ui-color-white);
       border-radius: 12px;
-      padding:0;
     }
 
     #close:hover {

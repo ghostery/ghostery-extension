@@ -26,8 +26,8 @@ export default define({
       >
         <ui-icon
           id="icon"
-          name="panel-heart"
-          layout="relative size:2"
+          name="category-${name}"
+          layout="relative size:3 padding:0.5"
         ></ui-icon>
         <ui-text type="label-m">${labels.categories[name]}</ui-text>
         <slot name="header"></slot>
@@ -66,7 +66,6 @@ export default define({
     }
 
     #icon {
-      padding: 4px;
       color: ${getCategoryColor(name)};
     }
 

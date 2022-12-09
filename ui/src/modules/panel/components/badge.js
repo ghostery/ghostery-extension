@@ -14,13 +14,12 @@ import { define, html } from 'hybrids';
 export default define({
   tag: 'ui-panel-badge',
   render: () => html`
-    <template layout="row center width::2 height:2">
+    <template layout="row center width::2 height:2 padding:0:0.25">
       <ui-text type="label-xs" color="gray-500"><slot></slot></ui-text>
     </template>
   `.css`
     :host {
       box-sizing: border-box;
-      padding: 0px 2px;
       border: 1px solid var(--ui-color-gray-200);
       border-radius: 4px;
     }

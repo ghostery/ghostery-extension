@@ -63,6 +63,8 @@ export default define({
     }
 
     ui-icon {
+      width: 24px;
+      height: 24px;
       color: var(--ui-color-white);
       z-index: 1;
     }
