@@ -6,7 +6,7 @@ export default define({
   enabled: false,
   terms: false,
   render: ({ icon, enabled, terms }) => html`
-    <template layout="row items:center">
+    <template layout="row items:center padding:1:1.5">
       ${icon &&
       html`<ui-icon
         name="${icon}"
@@ -26,7 +26,6 @@ export default define({
     </template>
   `.css`
     :host {
-      padding: 8px 12px;
       background: var(--ui-color-white);
       border: 1px solid var(--ui-color-gray-200);
     }

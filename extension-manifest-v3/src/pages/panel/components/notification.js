@@ -8,7 +8,7 @@ export default define({
   tag: 'gh-panel-notification',
   icon: '',
   render: ({ icon }) => html`
-    <template layout="row gap:2 items:stretch">
+    <template layout="row gap:2 items:stretch padding:1.5">
       ${icon &&
       html`
         <div id="icon" layout="row center shrink:0 width:5">
@@ -19,7 +19,11 @@ export default define({
       <ui-action>
         <button
           id="close"
-          layout="row center self:start shrink:0 size:3 margin:right:-1 margin:top:-1"
+          layout="
+            row center self:start shrink:0 
+            size:3
+            margin:right:-1 margin:top:-1 padding:0
+          "
           onclick="${close}"
         >
           <ui-icon name="close" layout="size:2"></ui-icon>
@@ -28,7 +32,6 @@ export default define({
     </template>
   `.css`
     :host {
-      padding: 12px;
       border-radius: 12px;
       background: var(--ui-color-gray-100);
     }

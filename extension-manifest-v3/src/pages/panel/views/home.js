@@ -137,12 +137,7 @@ export default define({
                 layout="absolute inset bottom:auto margin"
               >
                 Additional Permissions Required <br />
-                <a
-                  href="${chrome.runtime.getURL(
-                    '/pages/onboarding/index.html',
-                  )}"
-                  target="_blank"
-                >
+                <a href="${ONBOARDING_URL}" target="_blank">
                   Enable Ghostery
                 </a>
               </gh-panel-alert>
