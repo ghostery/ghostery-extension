@@ -14,7 +14,9 @@ import { html, define } from 'hybrids';
 export default define({
   tag: 'ui-header',
   render: () => html`
-    <template layout="grid:max|1|max items:center gap:2 height:7">
+    <template
+      layout="grid:max|1|max items:center gap:2 height:7 padding:2 relative layer"
+    >
       <div layout="row center width:3">
         <slot name="icon"></slot>
       </div>
@@ -25,10 +27,6 @@ export default define({
     </template>
   `.css`
     :host {
-      position: relative;
-      z-index: 1;
-      box-sizing: border-box;
-      padding: 16px;
       background: var(--ui-color-white);
       box-shadow: 0px 4px 16px rgba(32, 44, 68, 0.1);
     }

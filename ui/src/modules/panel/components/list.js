@@ -18,11 +18,11 @@ export default define({
   name: '',
   closed: false,
   render: ({ name, closed }) => html`
-    <template layout="column gap:1.5">
+    <template layout="column gap:1.5 padding:1:1:1.5:1.5">
       <button
         id="header"
         onclick="${html.set('closed', !closed)}"
-        layout="row items:center gap"
+        layout="row items:center gap padding:0 margin:0"
       >
         <ui-icon
           id="icon"
@@ -40,7 +40,6 @@ export default define({
     </template>
   `.css`
     :host {
-      padding: 8px 8px 12px 12px;
       border: 1px solid var(--ui-color-gray-200);
       border-bottom: none;
     }
@@ -56,7 +55,6 @@ export default define({
 
     #header {
       cursor: pointer;
-      padding: 0;
       background: none;
       appearance: none;
       border: none;

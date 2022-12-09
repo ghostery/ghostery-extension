@@ -3,14 +3,13 @@ import { define, html } from 'hybrids';
 export default define({
   tag: 'gh-panel-menu',
   render: () => html`
-    <template layout="column gap">
+    <template layout="column gap padding:bottom">
       <div id="header"><slot name="header"></slot></div>
       <slot></slot>
     </template>
   `.css`
     :host {
       background: var(--ui-color-white);
-      padding-bottom: 8px;
     }
 
     #header {
