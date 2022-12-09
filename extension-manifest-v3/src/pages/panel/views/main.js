@@ -203,21 +203,21 @@ export default define({
                 layout="block"
               >
                 <gh-panel-options-item
-                  icon="panel-ads"
+                  icon="ads"
                   enabled="${options.dnrRules.ads}"
                   terms="${options.terms}"
                 >
                   Ad-Blocking
                 </gh-panel-options-item>
                 <gh-panel-options-item
-                  icon="panel-tracking"
+                  icon="tracking"
                   enabled="${options.dnrRules.tracking}"
                   terms="${options.terms}"
                 >
                   Anti-Tracking
                 </gh-panel-options-item>
                 <gh-panel-options-item
-                  icon="panel-autoconsent"
+                  icon="autoconsent"
                   enabled="${options.dnrRules.annoyances}"
                   terms="${options.terms}"
                 >
