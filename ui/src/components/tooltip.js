@@ -11,10 +11,14 @@
 
 import { define, html } from 'hybrids';
 
+const timeouts = new WeakMap();
+
 export default define({
   tag: 'ui-tooltip',
+  autohide: 2000,
   show: {
     value: false,
+    connect: (host) => () => clearTimeout(timeouts.get(host)),
     observe: (host, value) => {
       const tooltip = host.render().querySelector('#tooltip');
       tooltip.hidden = !value;
@@ -33,6 +37,17 @@ export default define({
             overflowLeft,
           )}px)`;
         }
+
+        if (host.autohide) {
+          timeouts.set(
+            host,
+            setTimeout(() => {
+              host.show = false;
+            }, host.autohide),
+          );
+        }
+      } else {
+        clearTimeout(timeouts.get(host));
       }
     },
   },

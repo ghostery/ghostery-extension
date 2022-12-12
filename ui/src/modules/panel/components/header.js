@@ -15,7 +15,7 @@ export default define({
   tag: 'ui-panel-header',
   render: () => html`
     <template
-      layout="grid:max|1|max items:center gap:2 height:7 padding:2 relative layer"
+      layout="grid:max|1|max items:center gap:2 height:7 padding:2 relative layer:100"
     >
       <div layout="row center width:3">
         <slot name="icon"></slot>
