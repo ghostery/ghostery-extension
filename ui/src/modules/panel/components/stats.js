@@ -87,10 +87,10 @@ export default define({
       ${type === 'graph' &&
       html`
         <div layout="row gap:3">
-          <ui-panel-wheel
+          <ui-tracker-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
-          ></ui-panel-wheel>
+          ></ui-tracker-wheel>
           <div layout="column grow">
             ${categoryList.map(
               ([category, count]) => html`

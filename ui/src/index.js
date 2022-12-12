@@ -21,3 +21,4 @@ import './components/onboarding-state.js';
 import './components/page-layout.js';
 import './components/text.js';
 import './components/tooltip.js';
+import './components/tracker-wheel.js';
