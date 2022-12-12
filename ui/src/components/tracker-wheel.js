@@ -10,8 +10,8 @@
  */
 
 import { html, svg, define } from 'hybrids';
-import { getCategoryColor } from '../../../utils/categories.js';
-import * as labels from '../../../utils/labels.js';
+import { getCategoryColor } from '../utils/categories.js';
+import * as labels from '../utils/labels.js';
 
 function updateTooltipPosition(host, event) {
   const { clientX, clientY } = event;
@@ -29,7 +29,7 @@ function count(key) {
 }
 
 export default define({
-  tag: 'ui-panel-wheel',
+  tag: 'ui-tracker-wheel',
   categories: undefined,
   data: ({ categories = [] }) => {
     if (!categories.length) {
