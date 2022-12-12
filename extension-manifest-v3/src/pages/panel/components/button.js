@@ -21,8 +21,10 @@ export default define({
       transition: 0.2s all;
     }
 
-    ui-text:hover {
-      background: var(--ui-color-primary-700);
+    @media (hover: hover) and (pointer: fine) {
+      ui-text:hover {
+        background: var(--ui-color-primary-700);
+      }
     }
 
     ui-text:active {

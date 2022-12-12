@@ -20,12 +20,14 @@ export default define({
       color: var(--ui-color-gray-500);
     }
 
-    :host(:hover) {
-      color: var(--ui-color-primary-700);
-    }
+    @media (hover: hover) and (pointer: fine) {
+      :host(:hover) {
+        color: var(--ui-color-primary-700);
+      }
 
-    :host(:hover) ui-icon {
-      color: var(--ui-color-primary-700);
+      :host(:hover) ui-icon {
+        color: var(--ui-color-primary-700);
+      }
     }
   `,
 });

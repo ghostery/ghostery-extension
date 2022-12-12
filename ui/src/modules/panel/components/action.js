@@ -44,6 +44,8 @@ export default define({
       box-shadow: none;
     }
 
-    ::slotted(*:hover) { color: var(--ui-color-primary-700); }
+    @media (hover: hover) and (pointer: fine) {
+      ::slotted(*:hover) { color: var(--ui-color-primary-700); }
+    }
   `,
 });

@@ -50,8 +50,10 @@ export default define({
       border-radius: 12px;
     }
 
-    #close:hover {
-      color: var(--ui-color-gray-700);
+    @media (hover: hover) and (pointer: fine) {
+      #close:hover {
+        color: var(--ui-color-gray-700);
+      }
     }
   `,
 });

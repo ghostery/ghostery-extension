@@ -19,21 +19,23 @@ export default define({
   closed: false,
   render: ({ name, closed }) => html`
     <template layout="column gap:1.5 padding:1:1:1.5:1.5">
-      <button
-        id="header"
-        onclick="${html.set('closed', !closed)}"
-        layout="row items:center gap padding:0 margin:0"
-      >
-        <ui-icon
-          id="icon"
-          name="category-${name}"
-          layout="relative size:3 padding:0.5"
-        ></ui-icon>
-        <ui-text type="label-m">${labels.categories[name]}</ui-text>
-        <slot name="header"></slot>
-        <div layout="grow"></div>
-        <ui-icon id="arrow" name="arrow-down" color="gray-500"></ui-icon>
-      </button>
+      <ui-action>
+        <button
+          id="header"
+          onclick="${html.set('closed', !closed)}"
+          layout="row items:center gap padding:0 margin:0"
+        >
+          <ui-icon
+            id="icon"
+            name="category-${name}"
+            layout="relative size:3 padding:0.5"
+          ></ui-icon>
+          <ui-text type="label-m">${labels.categories[name]}</ui-text>
+          <slot name="header"></slot>
+          <div layout="grow"></div>
+          <ui-icon id="arrow" name="arrow-down" color="gray-500"></ui-icon>
+        </button>
+      </ui-action>
       <div id="content" layout="margin:left:4">
         <slot></slot>
       </div>
@@ -61,7 +63,13 @@ export default define({
       overflow: hidden;
     }
 
-    #header:is(:hover, :focus-visible) ui-text {
+    @media (hover: hover) and (pointer: fine) {
+      #header:hover ui-text {
+        color: var(--ui-color-primary-700);
+      }
+    }
+
+    #header:focus-visible ui-text {
       color: var(--ui-color-primary-700);
     }
 
