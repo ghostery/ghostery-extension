@@ -163,7 +163,7 @@ export default define({
 
     #main, #label, #type { transition: all 0.2s; }
 
-    #main:hover, #main.active {
+    #main.active {
       background: var(--ui-color-primary-500);
       --ui-color-gh-panel-action: var(--ui-color-white);
     }
@@ -184,12 +184,12 @@ export default define({
       transition: transform 0.1s;
     }
 
-    #main:hover #type, #main.active #type {
+    #main.active #type {
       --ui-color-gh-panel-action: var(--ui-color-primary-700);
       border-color: var(--ui-color-primary-100);
     }
 
-    #main:hover #type:hover, #main.active #type {
+    #main.active #type {
       --ui-color-gh-panel-action: var(--ui-color-white);
       background: var(--ui-color-primary-700);
       border-color: var(--ui-color-primary-700);
@@ -206,9 +206,24 @@ export default define({
     }
 
     @media (hover: hover) and (pointer: fine) {
+      #main:hover {
+        background: var(--ui-color-primary-500);
+        --ui-color-gh-panel-action: var(--ui-color-white);
+      }
+
+      #main:hover #type {
+        --ui-color-gh-panel-action: var(--ui-color-primary-700);
+        border-color: var(--ui-color-primary-100);
+      }
+
+      #main:hover #type:hover {
+        --ui-color-gh-panel-action: var(--ui-color-white);
+        background: var(--ui-color-primary-700);
+        border-color: var(--ui-color-primary-700);
+      }
+
       #main.paused:hover:has(#type:hover) #label, #main.paused:focus-visible #label {
         width: 0;
-        opacity: 0;
       }
 
       #main.paused:hover:has(#type:hover) #type, #main.paused:focus-visible #type {

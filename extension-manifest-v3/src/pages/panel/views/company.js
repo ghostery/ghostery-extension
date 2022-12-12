@@ -21,8 +21,11 @@ export default define({
           <ui-text slot="header" type="body-s" color="gray-500">
             ${trackers.length} trackers
           </ui-text>
-          <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
-          <hr />
+          ${company.description &&
+          html`
+            <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
+            <hr />
+          `}
           <section
             layout="
               grid:max|1 items:start:stretch content:start gap:1:3 

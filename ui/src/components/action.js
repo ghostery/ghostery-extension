@@ -23,11 +23,11 @@ export default define({
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
-
+    
     ::slotted(*:focus:not(:focus-visible)) {
       outline: none;
     }
-
+  
     ::slotted(*:active) {
       opacity: 0.6;
     }

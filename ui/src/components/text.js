@@ -45,6 +45,11 @@ export default define({
 
     ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; }
     ::slotted(a:hover, a:focus-visible) { color: var(--ui-text-color-anchor, inherit); }
+
+    @media (hover: hover) and (pointer: fine) {
+      ::slotted(a:hover) { color: var(--ui-text-color-anchor, inherit); }
+    }
+
     ::slotted(a:active) { opacity: 0.6; }
     ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
 
