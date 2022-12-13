@@ -107,10 +107,6 @@ export default define({
     store.ready(options) && NOTIFICATIONS[options.terms ? 1 : 0],
   content: ({ options, stats, notification }) => html`
     <template layout="column">
-      <section
-        id="gh-panel-alerts"
-        layout="fixed inset:1 bottom:auto layer:2"
-      ></section>
       ${store.ready(options) &&
       (store.ready(stats) || store.error(stats)) &&
       html`
@@ -142,6 +138,10 @@ export default define({
                 </a>
               </gh-panel-alert>
             `}
+        <section
+          id="gh-panel-alerts"
+          layout="fixed inset:1 bottom:auto layer:100"
+        ></section>
         <section layout="column margin:7:0:1">
           ${store.error(stats) &&
           html`
