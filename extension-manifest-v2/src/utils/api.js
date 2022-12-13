@@ -35,11 +35,11 @@ class Api {
 
 		const pending = (async () => {
 			const fromCookie = async (name) => {
-				const { value } = await cookiesGet({ name });
-				if (!value) {
+				const cookie = await cookiesGet({ name });
+				if (!cookie || !cookie.value) {
 					throw new Error(`Unable to refreshToken without "${name}"`);
 				}
-				return value;
+				return cookie.value;
 			};
 			const headers = {
 				UserId: await fromCookie('user_id'),
