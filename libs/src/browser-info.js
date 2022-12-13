@@ -69,7 +69,13 @@ const getVersion = () => {
 };
 
 const getBrowserInfo = async () => {
-  const BROWSER_INFO = {};
+  const BROWSER_INFO = {
+    displayName: '',
+    name: '',
+    token: '',
+    os: '',
+    version: '',
+  };
 
   // Set name and token properties. CMP uses `name` value.  Metrics uses `token`
   const browser = getBrowser();
@@ -143,6 +149,9 @@ cachedGetBrowserInfo.isFirefox = isFirefox;
 cachedGetBrowserInfo.isEdge = isEdge;
 cachedGetBrowserInfo.isGhosteryBrowser = async () => {
   const browserInfo = await cachedGetBrowserInfo();
+  if (!browserInfo.name) {
+    return false;
+  }
   return browserInfo.name.includes('ghostery');
 };
 
