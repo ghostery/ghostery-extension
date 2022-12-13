@@ -28,11 +28,11 @@ const MENU = [
     href: 'https://www.ghostery.com/support',
   },
   {},
-  {
-    icon: 'shield',
-    label: msg`Unprotected sites`,
-    href: chrome.runtime.getURL('/pages/options/index.html'),
-  },
+  // {
+  //   icon: 'shield',
+  //   label: msg`Unprotected sites`,
+  //   href: chrome.runtime.getURL('/pages/options/index.html'),
+  // },
   {
     icon: 'settings',
     label: msg`Settings`,
