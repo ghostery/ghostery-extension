@@ -17,6 +17,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin-next');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 const sass = require('sass');
 const crypto = require('crypto');
 
@@ -135,6 +136,13 @@ module.exports = {
 			include: /\.js$/
 		}),
 	],
+	optimization: {
+		minimizer: [
+			new ESBuildMinifyPlugin({
+				target: 'es2015',
+			}),
+		],
+	},
 	module: {
 		rules: [
 			{
@@ -144,23 +152,18 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(jsx)$/,
-				include: [APP_DIR],
+				test: /\.(js|jsx)$/,
+				include: [APP_DIR, SRC_DIR],
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: 'babel-loader',
+						loader: 'esbuild-loader',
 						options: {
-							envName: 'app',
+							loader: 'jsx',
+							target: 'es2015',
 						}
-					}
-				]
-			}, {
-				test: /\.js$/,
-				include: [SRC_DIR, APP_DIR],
-				exclude: /node_modules/,
-				use: [
-					'eslint-loader'
+					},
+					'eslint-loader',
 				]
 			},
 			{
