@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+
 module.exports = {
 	verbose: true,
 	setupFiles: [
@@ -23,5 +24,9 @@ module.exports = {
 	testEnvironment: 'jsdom',
 	testEnvironmentOptions: {
 		url: 'http://localhost',
-	}
+	},
+	transform: {
+		'^.+\\.(js|jsx)?$': 'esbuild-jest',
+	},
+	setupFilesAfterEnv: ['./jest.env.js'],
 };

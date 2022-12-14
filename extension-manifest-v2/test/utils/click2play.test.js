@@ -103,12 +103,16 @@ tabInfo.setTabInfo = jest.fn().mockImplementation((tab_id, property, value) => {
 	tabInfo[property] = value;
 });
 
-// Mock utils functions
-utils.sendMessage = jest.fn();
-inject.injectScript = jest.fn(() => Promise.resolve());
-utils.processUrl = jest.requireActual('../../src/utils/utils').processUrl;
-
 describe('src/utils/click2play.js', () => {
+	beforeEach(() => {
+		chrome.tabs.sendMessage.flush();
+		chrome.tabs.executeScript.flush();
+	})
+
+	afterAll(() => {
+		chrome.flush();
+	});
+
 	const details = {
 		tab_id: 1
 	};
@@ -118,17 +122,17 @@ describe('src/utils/click2play.js', () => {
 		describe('c2pStatus is "none"', () => {
 			beforeAll(() => {
 				tabInfo.c2pStatus = 'none';
-				utils.sendMessage.mockClear();
-				inject.injectScript.mockClear();
 			});
 
 			test('c2pStatus defaults to "none"', () => {
 				expect(tab.c2pStatus).toBe('none');
 			});
 
-			test('injectScript() is called', () => {
+			test('chrome.tabs.executeScript() is called', () => {
+				chrome.tabs.executeScript.yields();
+				chrome.runtime.sendMessage.yields();
 				buildC2P(details, 464);
-				expect(inject.injectScript).toHaveBeenCalledWith(details.tab_id, 'dist/click_to_play.js', '', 'document_idle');
+				expect(chrome.tabs.executeScript.withArgs(details.tab_id, { file: 'dist/click_to_play.js', runAt: 'document_idle' }).calledOnce);
 			});
 
 			test('c2pApp and c2pHtml data added to c2pQueue', () => {
@@ -137,9 +141,9 @@ describe('src/utils/click2play.js', () => {
 				expect(c2pQueue).toHaveProperty('464');
 			});
 
-			test('sendMessage() called with correct C2P data', () => {
+			test('chrome.runtime.sendMessage() called with correct C2P data', () => {
 				const c2pQueue = tabInfo.setTabInfo.mock.calls[1][2];
-				expect(utils.sendMessage).toHaveBeenCalledWith(details.tab_id, 'c2p', c2pQueue);
+				expect(chrome.runtime.sendMessage.withArgs(details.tab_id, { name: 'c2p', message: c2pQueue }).calledOnce);
 			});
 
 			test('c2pStatus set to "done"', () => {
@@ -153,15 +157,13 @@ describe('src/utils/click2play.js', () => {
 
 		describe('c2pStatus is "loading"', () => {
 			beforeAll(() => {
-				utils.sendMessage.mockClear();
-				inject.injectScript.mockClear();
 				tabInfo.c2pStatus = 'loading';
 				buildC2P(details, 464);
 			});
 
-			test('injectScript() and sendMessage() are not called', () => {
-				expect(inject.injectScript).not.toHaveBeenCalled();
-				expect(utils.sendMessage).not.toHaveBeenCalled();
+			test('chrome.tabs.executeScript() and chrome.runtime.sendMessage() are not called', () => {
+				expect(chrome.tabs.executeScript.notCalled);
+				expect(chrome.runtime.sendMessage.notCalled);
 			});
 
 			test('c2pApp and c2pHtml data added to c2pQueue', () => {
@@ -171,16 +173,14 @@ describe('src/utils/click2play.js', () => {
 
 		describe('c2pStatus is "done"', () => {
 			beforeAll(() => {
-				utils.sendMessage.mockClear();
-				inject.injectScript.mockClear();
 				tabInfo.c2pStatus = 'done';
 				tabInfo.c2pQueue = {};
 				buildC2P(details, 464);
 			});
 
-			test('injectScript() is not called. sendMessage() is called', () => {
-				expect(inject.injectScript).not.toHaveBeenCalled();
-				expect(utils.sendMessage).toHaveBeenCalled();
+			test('chrome.tabs.executeScript() is not called. chrome.runtime.sendMessage() is called', () => {
+				expect(chrome.tabs.executeScript.notCalled);
+				expect(chrome.runtime.sendMessage.calledOnce);
 			});
 
 			test('c2pQueue is empty', () => {
