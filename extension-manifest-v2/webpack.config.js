@@ -142,27 +142,9 @@ module.exports = {
 				use: {
 					loader: 'underscore-template-loader'
 				}
-			}, {
-				test: /\.js$/,
-				include: [
-					path.resolve(__dirname, 'node_modules/@ghostery/libs'),
-					path.resolve(__dirname, 'node_modules/@ghostery/ui'),
-					path.resolve(__dirname, 'node_modules/@duckduckgo/autoconsent'),
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules/@ghostery/libs/node_modules'),
-				],
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							envName: 'src',
-						}
-					},
-					'eslint-loader'
-				],
-			}, {
-				test: /\.(js|jsx)$/,
+			},
+			{
+				test: /\.(jsx)$/,
 				include: [APP_DIR],
 				exclude: /node_modules/,
 				use: [
@@ -171,34 +153,17 @@ module.exports = {
 						options: {
 							envName: 'app',
 						}
-					},
-					'eslint-loader'
-				]
-			}, {
-				test: /\.js$/,
-				include: [SRC_DIR],
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							envName: 'src',
-						}
-					},
-					'eslint-loader'
-				]
-			}, {
-				test: /\.js$/,
-				include: [path.resolve(__dirname, 'node_modules/@cliqz/adblocker-extended-selectors')],
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							envName: 'common',
-						}
 					}
 				]
 			}, {
+				test: /\.js$/,
+				include: [SRC_DIR, APP_DIR],
+				exclude: /node_modules/,
+				use: [
+					'eslint-loader'
+				]
+			},
+			{
 				test: /\.scss$/,
 				resolve: {
 					extensions: ['.scss', '.sass']
