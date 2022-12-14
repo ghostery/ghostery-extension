@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /**
  * OverviewTab Test Component
  *
@@ -11,7 +12,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import OverviewTab from '../OverviewTab';

@@ -13,7 +13,6 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as msg from '../../utils/msg';
 import * as summaryActions from '../SummaryActions';
 import {
 	UPDATE_COMMON_MODULE_DATA,
@@ -27,18 +26,16 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 const testData = { adblock: {}, antitracking: {} };
-// eslint-disable-next-line no-import-assign, import/namespace
-msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve) => {
-	switch (messageType) {
-		case 'updateCommonModuleData':
-			resolve(testData);
-			break;
-		default:
-			resolve();
-	}
-}));
 
 describe('app/panel/actions/SummaryActions.js', () => {
+	beforeEach(() => {
+		chrome.runtime.sendMessage.flush();
+	});
+
+	afterAll(() => {
+		chrome.flush();
+	});
+
 	test('updateCommonModuleData action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
@@ -46,7 +43,6 @@ describe('app/panel/actions/SummaryActions.js', () => {
 		const data = testData;
 		const expectedPayload = { data, type: UPDATE_COMMON_MODULE_DATA };
 		store.dispatch(summaryActions.updateCommonModuleData(data));
-
 		const actions = store.getActions();
 		expect(actions).toEqual([expectedPayload]);
 	});
@@ -64,6 +60,7 @@ describe('app/panel/actions/SummaryActions.js', () => {
 	});
 
 	test('updateGhosteryPaused action should return correctly', () => {
+		chrome.runtime.sendMessage.yields();
 		const initialState = {};
 		const store = mockStore(initialState);
 
