@@ -16,27 +16,23 @@ module.exports = {
 		browser: true,
 		es6: true,
 		commonjs: true,
-		jest: true
+		jest: true,
+		es2022: true,
 	},
-	extends: 'airbnb',
+	extends: [
+		'airbnb',
+		'plugin:import/recommended',
+	],
 	globals: {
 		chrome: true,
 		t: true,
 		Atomics: 'readonly',
 		SharedArrayBuffer: 'readonly',
 	},
-	parser: 'babel-eslint',
 	parserOptions: {
-		ecmaFeatures: {
-			jsx: true,
-		},
-		ecmaVersion: 2018,
 		sourceType: 'module',
+		ecmaVersion: 2022,
 	},
-	plugins: [
-		'react',
-		'import',
-	],
 	// 0 = off, 1 = warn, 2 = error
 	rules: {
 		'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
