@@ -36,7 +36,7 @@ class ForgotPassword extends React.Component {
 	handleInputChange = (e) => {
 		const { name, value } = e.target;
 		this.setState({ [name]: value });
-	}
+	};
 
 	/**
 	 * Validate entered data, notify user if validation fails,
@@ -65,12 +65,13 @@ class ForgotPassword extends React.Component {
 					}
 				});
 		});
-	}
+	};
 
+	// eslint-disable-next-line react/no-unused-class-component-methods
 	navigateToLogIn = () => {
 		const { history } = this.props;
 		history.push('/log-in');
-	}
+	};
 
 	/**
 	 * Render Forgot Password panel.

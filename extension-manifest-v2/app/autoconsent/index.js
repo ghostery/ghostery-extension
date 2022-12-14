@@ -38,20 +38,24 @@ async function disable(_, event) {
 
 async function getCategories() {
 	const tab = await new Promise(
-		resolve => chrome.runtime.sendMessage({ name: 'getTabInfo' }, resolve)
+		(resolve) => { chrome.runtime.sendMessage({ name: 'getTabInfo' }, resolve); }
 	);
 
 	const { summary } = await new Promise(
-		resolve => chrome.runtime.sendMessage({
-			name: 'getPanelData',
-			message: { view: 'panel', tabId: tab.id },
-		}, resolve),
+		(resolve) => {
+			chrome.runtime.sendMessage({
+				name: 'getPanelData',
+				message: { view: 'panel', tabId: tab.id },
+			}, resolve);
+		},
 	);
 	const { antiTracking, adBlock } = await new Promise(
-		resolve => chrome.runtime.sendMessage({
-			name: 'getCommonModuleData',
-			message: { tabId: tab.id },
-		}, resolve),
+		(resolve) => {
+			chrome.runtime.sendMessage({
+				name: 'getCommonModuleData',
+				message: { tabId: tab.id },
+			}, resolve);
+		},
 	);
 
 	const result = summary.categories.reduce((acc, c) => {

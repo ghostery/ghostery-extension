@@ -20,7 +20,7 @@ import ClassNames from 'classnames';
  * @return {JSX} JSX for rendering a Toggle Checkbox
  * @memberof SharedComponents
  */
-const ToggleCheckbox = ({ checked, onChange, className }) => {
+function ToggleCheckbox({ checked, onChange, className }) {
 	const checkboxClassNames = ClassNames('ToggleCheckbox', className, {
 		'ToggleCheckbox--active': checked,
 	});
@@ -36,7 +36,7 @@ const ToggleCheckbox = ({ checked, onChange, className }) => {
 			</svg>
 		</div>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 ToggleCheckbox.propTypes = {

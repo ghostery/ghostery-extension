@@ -16,7 +16,7 @@ import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 
 async function getTabDomain(tabId) {
-	const tab = await new Promise(resolve => chrome.tabs.get(tabId, resolve));
+	const tab = await new Promise((resolve) => { chrome.tabs.get(tabId, resolve); });
 	return parse(tab.url).domain;
 }
 

@@ -133,7 +133,7 @@ class OverviewTab extends React.Component {
 		callGlobalAction({
 			actionName: 'handleTrustButtonClick',
 		});
-	}
+	};
 
 	handleRestrictButtonClick = () => {
 		const { callGlobalAction } = this.props;
@@ -141,7 +141,7 @@ class OverviewTab extends React.Component {
 		callGlobalAction({
 			actionName: 'handleRestrictButtonClick',
 		});
-	}
+	};
 
 	handlePauseButtonClick = (time) => {
 		const { summary, callGlobalAction } = this.props;
@@ -154,7 +154,7 @@ class OverviewTab extends React.Component {
 				time: typeof time === 'number' ? time * 60000 : 0,
 			},
 		});
-	}
+	};
 
 	handleCommonFeatureClick = ({ feature, status }) => {
 		const { callGlobalAction } = this.props;
@@ -166,7 +166,7 @@ class OverviewTab extends React.Component {
 				type: feature,
 			},
 		});
-	}
+	};
 
 	_renderNavigationLinks() {
 		const { clickAccount, clickSettings, panel: { setup_complete } } = this.props;

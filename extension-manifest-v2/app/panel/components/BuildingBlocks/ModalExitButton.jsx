@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
  * @return {JSX} JSX for rendering a Exit Button
  * @memberof SharedComponents
  */
-const ModalExitButton = (props) => {
+function ModalExitButton(props) {
 	const {
 		toggleModal,
 		border
@@ -32,7 +32,7 @@ const ModalExitButton = (props) => {
 			<span className="ModalExitButton__exitIcon" />
 		</button>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 ModalExitButton.propTypes = {

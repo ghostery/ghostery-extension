@@ -21,7 +21,7 @@ import ExitButton from '../ExitButton';
  * @return {JSX} JSX for rendering a Stepped Navigation
  * @memberof SharedComponents
  */
-const SteppedNavigation = (props) => {
+function SteppedNavigation(props) {
 	const {
 		totalSteps,
 		activeIndex,
@@ -75,7 +75,7 @@ const SteppedNavigation = (props) => {
 			</div>
 		</div>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 SteppedNavigation.propTypes = {

@@ -21,7 +21,7 @@ import ClassNames from 'classnames';
  * The view allows to set parameters for Ghostery purplebox.
  * @memberOf SettingsComponents
  */
-const SettingsMenu = ({ is_expanded }) => {
+function SettingsMenu({ is_expanded }) {
 	const listClassNames = ClassNames('content-settings-menu menu vertical no-bullet', {
 		's-hide': is_expanded,
 	});
@@ -64,6 +64,6 @@ const SettingsMenu = ({ is_expanded }) => {
 			</li>
 		</ul>
 	);
-};
+}
 
 export default SettingsMenu;

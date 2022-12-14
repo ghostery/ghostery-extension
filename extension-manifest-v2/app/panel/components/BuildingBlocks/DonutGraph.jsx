@@ -38,7 +38,7 @@ class DonutGraph extends React.Component {
 	 * @param  {Array} categories list of categories detected on the site
 	 * @param  {Object} options    options for the graph
 	 */
-	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true })
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true });
 
 	constructor(props) {
 		super(props);

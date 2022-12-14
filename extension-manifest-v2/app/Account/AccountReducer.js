@@ -34,7 +34,7 @@ const initialState = {
 	resetPasswordError: false
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action = null) => {
 	switch (action.type) {
 		case UPDATE_PANEL_DATA: {
 			const { account } = action.data;

@@ -27,7 +27,7 @@ const { GHOSTERY_BASE_URL } = globals;
  * @return {ReactComponent} StatsGraph instance
  * @memberof PanelClasses
  */
-const StatsView = (props) => {
+function StatsView(props) {
 	const {
 		showResetModal,
 		showPitchModal,
@@ -215,6 +215,6 @@ const StatsView = (props) => {
 			)}
 		</div>
 	);
-};
+}
 
 export default StatsView;

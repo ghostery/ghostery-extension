@@ -19,13 +19,13 @@ import Site from './Site';
  * lists of whitelisted and blacklisted sites.
  * @memberOf SettingsComponents
  */
-const Sites = (props) => {
+function Sites(props) {
 	const { sites, listType } = props;
 	const siteList = sites.map(site => (
 		<Site key={site} site={site} listType={listType} updateSitePolicy={props.updateSitePolicy} />
 	));
 	return <div className="s-sites">{ siteList }</div>;
-};
+}
 
 Sites.defaultProps = {
 	sites: {},

@@ -324,6 +324,7 @@ const Ghostery = (function(win, doc) {
 		} else if (app.hasInsecureIssue) {
 			icon = nonSecureIcon;
 			icon.style.opacity = '1.0';
+		// eslint-disable-next-line no-dupe-else-if
 		} else if (app.hasInsecureIssue && app.hasLatencyIssue) {
 			icon = nonSecureSlowIcon;
 		} else {

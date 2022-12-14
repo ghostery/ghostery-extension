@@ -40,7 +40,7 @@ class Settings extends React.Component {
 		} else {
 			this.setState({ view: 'settings-home' });
 		}
-	}
+	};
 
 	updateSitePolicy = ({ type, pageHost }) => {
 		const { callGlobalAction } = this.props;
@@ -49,7 +49,7 @@ class Settings extends React.Component {
 			actionName: 'updateSitePolicy',
 			actionData: { type, pageHost },
 		});
-	}
+	};
 
 	updateDatabase = () => {
 		const { callGlobalAction } = this.props;
@@ -57,7 +57,7 @@ class Settings extends React.Component {
 		callGlobalAction({
 			actionName: 'updateDatabase',
 		});
-	}
+	};
 
 	toggleCheckbox = (event) => {
 		const { callGlobalAction } = this.props;
@@ -67,8 +67,9 @@ class Settings extends React.Component {
 			actionName: 'updateSettingCheckbox',
 			actionData: { name, checked },
 		});
-	}
+	};
 
+	// eslint-disable-next-line react/no-unused-class-component-methods
 	selectItem = ({ event, value }) => {
 		const { callGlobalAction } = this.props;
 
@@ -76,7 +77,7 @@ class Settings extends React.Component {
 			actionName: 'selectItem',
 			actionData: { event, value },
 		});
-	}
+	};
 
 	exportSettings = () => {
 		const { callGlobalAction } = this.props;
@@ -84,7 +85,7 @@ class Settings extends React.Component {
 		callGlobalAction({
 			actionName: 'exportSettings',
 		});
-	}
+	};
 
 	importSettingsDialog = () => {
 		const { callGlobalAction } = this.props;
@@ -92,7 +93,7 @@ class Settings extends React.Component {
 		callGlobalAction({
 			actionName: 'importSettingsDialog',
 		});
-	}
+	};
 
 	importSettingsNative = (importFile) => {
 		const { callGlobalAction } = this.props;
@@ -101,7 +102,7 @@ class Settings extends React.Component {
 			actionName: 'importSettingsNative',
 			actionData: importFile,
 		});
-	}
+	};
 
 	_renderSettingsHeader() {
 		const { view } = this.state;

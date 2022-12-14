@@ -22,7 +22,7 @@ const TOOLTIP_SVG_FILEPATH = '../../app/images/panel/icon-information-tooltip.sv
  * It invites user to opt in for telemetry options and human web
  * @memberOf SettingsComponents
  */
-const OptIn = ({ settingsData, toggleCheckbox }) => {
+function OptIn({ settingsData, toggleCheckbox }) {
 	const checkbox = (opt, name) => (
 		<input
 			type="checkbox"
@@ -79,7 +79,7 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 			</div>
 		</div>
 	);
-};
+}
 
 OptIn.propTypes = {
 	toggleCheckbox: PropTypes.func.isRequired,

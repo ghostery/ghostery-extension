@@ -303,9 +303,7 @@ const NotificationsContentScript = (function(win, doc) {
 	 *
 	 * @return {Object}  styled div DOM element
 	 */
-	const createUpgradeNotificationContent = function(
-		imageData, title, message, linkUrl, linkText
-	) {
+	const createUpgradeNotificationContent = function(imageData, title, message, linkUrl, linkText) {
 		const content = createEl('div');
 		content.style.cssText = `
 		border-radius: 6px !important;

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-class-component-methods */
 /**
  * Blocking Component
  *

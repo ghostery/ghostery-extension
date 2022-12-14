@@ -18,7 +18,7 @@ import { handleClickOnNewTabLink } from '../../utils/msg';
  * Implement panel -> new tab links. Used in Help, About, and other panel views
  * @memberof PanelBuildingBlocks
  */
-const PanelToTabLink = (props) => {
+function PanelToTabLink(props) {
 	const { className, href, children } = props;
 
 	const classes = className || '';
@@ -26,6 +26,6 @@ const PanelToTabLink = (props) => {
 	return (
 		<a className={classes} href={href} onClick={handleClickOnNewTabLink}>{children}</a>
 	);
-};
+}
 
 export default PanelToTabLink;

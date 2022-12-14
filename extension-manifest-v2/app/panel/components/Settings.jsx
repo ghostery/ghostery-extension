@@ -38,7 +38,7 @@ class Settings extends React.Component {
 			showToast: false,
 			toastText: ''
 		});
-	}, 3000)
+	}, 3000);
 
 	constructor(props) {
 		super(props);
@@ -89,7 +89,7 @@ class Settings extends React.Component {
 				setup_complete={setup_complete}
 			/>
 		);
-	}
+	};
 
 	TrustAndRestrictComponent = () => {
 		const { actions, site_whitelist, site_blacklist } = this.props;
@@ -101,7 +101,7 @@ class Settings extends React.Component {
 				actions={actions}
 			/>
 		);
-	}
+	};
 
 	GeneralSettingsComponent = () => {
 		const { actions, setup_complete } = this.props;
@@ -113,7 +113,7 @@ class Settings extends React.Component {
 				setup_complete={setup_complete}
 			/>
 		);
-	}
+	};
 
 	PurpleboxComponent = () => {
 		const { actions } = this.props;
@@ -125,7 +125,7 @@ class Settings extends React.Component {
 				actions={actions}
 			/>
 		);
-	}
+	};
 
 	NotificationsComponent = () => {
 		const { actions } = this.props;
@@ -136,7 +136,7 @@ class Settings extends React.Component {
 				actions={actions}
 			/>
 		);
-	}
+	};
 
 	OptInComponent = () => {
 		const { actions } = this.props;
@@ -147,7 +147,7 @@ class Settings extends React.Component {
 				actions={actions}
 			/>
 		);
-	}
+	};
 
 	AccountComponent = () => {
 		const { actions } = this.props;
@@ -158,7 +158,7 @@ class Settings extends React.Component {
 				actions={actions}
 			/>
 		);
-	}
+	};
 
 	/**
 	 * Handles messages from dynamic UI port to background

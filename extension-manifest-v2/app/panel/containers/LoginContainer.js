@@ -35,7 +35,11 @@ const mapStateToProps = state => ({ // get properties from panel redux store
  * @param  {Object} 	ownProps  Login view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { login, getUser, getUserSettings }), dispatch) });
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators({
+		...actions, login, getUser, getUserSettings
+	}, dispatch),
+});
 /**
  * Connects Login view component to the Redux store.
  * @memberOf PanelContainers

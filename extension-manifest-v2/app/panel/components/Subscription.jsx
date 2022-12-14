@@ -45,13 +45,15 @@ class Subscription extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	componentDidUpdate = () => {
+	componentDidUpdate() {
 		const { loggedIn, history } = this.props;
 		if (!loggedIn) {
 			history.push('/detail');
 		}
 	}
 
+	// TODO: can we remove this method?
+	// eslint-disable-next-line react/no-unused-class-component-methods
 	parseSubscriptionData = () => {
 		const { subscriptionData } = this.props;
 		const sd = subscriptionData;
@@ -79,7 +81,7 @@ class Subscription extends React.Component {
 			};
 		}
 		return { loading: true };
-	}
+	};
 
 	changeTheme = (updated_theme) => {
 		const { actions } = this.props;
@@ -87,7 +89,7 @@ class Subscription extends React.Component {
 		actions.getTheme(updated_theme).then(() => {
 			sendMessage('ping', 'theme_change');
 		});
-	}
+	};
 
 	SubscriptionThemesComponent = () => {
 		const { theme } = this.state;
@@ -96,6 +98,7 @@ class Subscription extends React.Component {
 		);
 	};
 
+	// eslint-disable-next-line class-methods-use-this
 	PrioritySupportComponent = () => (<PrioritySupport />);
 
 	/**

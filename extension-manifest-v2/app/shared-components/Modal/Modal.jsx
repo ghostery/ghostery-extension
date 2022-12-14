@@ -19,18 +19,20 @@ import PropTypes from 'prop-types';
  * @return {JSX} JSX for rendering a Modal
  * @memberof SharedComponents
  */
-const Modal = ({ show, toggle, children }) => (
-	<div className="Modal">
-		{ show && (
-			<div>
-				<div className="Modal__background" onClick={toggle || undefined} />
-				<div className="Modal__container flex-container align-center-middle">
-					{children}
+function Modal({ show, toggle, children }) {
+	return (
+		<div className="Modal">
+			{ show && (
+				<div>
+					<div className="Modal__background" onClick={toggle || undefined} />
+					<div className="Modal__container flex-container align-center-middle">
+						{children}
+					</div>
 				</div>
-			</div>
-		)}
-	</div>
-);
+			)}
+		</div>
+	);
+}
 
 // PropTypes ensure we pass required props of the correct type
 Modal.propTypes = {
