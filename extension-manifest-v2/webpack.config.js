@@ -15,7 +15,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin-next');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const sass = require('sass');
 const crypto = require('crypto');
@@ -42,7 +42,7 @@ const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
-	devtool: 'none', // source-maps
+	// devtool: 'source-maps',
 	performance: {
 		hints: false // notify of assets over 250kb
 	},
@@ -59,6 +59,9 @@ module.exports = {
 			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
 			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
 		},
+		fallback: {
+			url: require.resolve('url'),
+		}
 	},
 	entry: {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],
@@ -226,7 +229,8 @@ module.exports = {
 					options: {
 						limit: 200000
 					}
-				}
+				},
+				type: 'javascript/auto'
 			}
 		]
 	}

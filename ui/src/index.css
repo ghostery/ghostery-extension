@@ -1,46 +1,6 @@
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./fonts/Roboto-Regular.ttf');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url('./fonts/Roboto-Medium.ttf');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('./fonts/Roboto-Medium.ttf');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto Condensed';
-  src: local('Roboto Condensed'), url('./fonts/RobotoCondensed-Regular.ttf');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto Condensed';
-  src: local('Roboto Condensed'), url('./fonts/RobotoCondensed-Bold.ttf');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 html {
   /* Legacy colors */
-  
+
   --ui-text: #838b90;
   --ui-black: #252525;
   --ui-ghostery: #00aef0;
@@ -112,8 +72,8 @@ html {
   --ui-font-body-xs: 12px / 18px var(--ui-font-family-body);
 
   /* Global overwrites */
-  -webkit-font-smoothing: antialiased; 
-  -moz-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
 }
 
