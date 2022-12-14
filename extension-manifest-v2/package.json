@@ -10,10 +10,10 @@
   "license": "MPL-2.0",
   "scripts": {
     "start": "web-ext run --target=chromium",
-    "build.dev": "webpack --mode development --display-error-details --progress",
-    "build.prod": "webpack --mode production --display-error-details --progress",
-    "upload-sentry": "webpack --mode production --display-error-details --progress --devtool source-maps && ./tools/upload-sentry.sh",
-    "build.watch": "webpack --mode development --display-error-details --progress --watch",
+    "build.dev": "webpack --mode development --progress",
+    "build.prod": "webpack --mode production --progress",
+    "upload-sentry": "webpack --mode production --progress --devtool source-maps && ./tools/upload-sentry.sh",
+    "build.watch": "webpack --mode development --progress --watch",
     "prebuild.dev": "node ./tools/licenses/fetchLicenses.js",
     "prebuild.prod": "node ./tools/licenses/fetchLicenses.js",
     "prebuild.watch": "node ./tools/licenses/fetchLicenses.js",
@@ -53,7 +53,7 @@
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
     "@sentry/browser": "7.1.1",
-    "@whotracksme/webextension-packages": "^0.4.9",
+    "@whotracksme/webextension-packages": "^0.4.10",
     "classnames": "^2.2.5",
     "d3": "^5.16.0",
     "foundation-sites": "^6.6.2",
@@ -78,7 +78,8 @@
     "rsvp": "^4.8.5",
     "spanan": "^2.0.0",
     "tldts-experimental": "^5.7.58",
-    "underscore": "^1.13.1"
+    "underscore": "^1.13.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",
@@ -128,8 +129,8 @@
     "url-loader": "^4.1.1",
     "vendor-copy": "^3.0.1",
     "web-ext": "^7.3.1",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-shell-plugin": "^0.5.0"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-shell-plugin-next": "^2.3.1"
   }
 }
