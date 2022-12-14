@@ -18,6 +18,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin-next');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const sass = require('sass');
 const crypto = require('crypto');
 
@@ -62,7 +63,9 @@ module.exports = {
 		},
 		fallback: {
 			url: require.resolve('url'),
-		}
+			os: require.resolve('os-browserify/browser'),
+			tty: require.resolve('tty-browserify'),
+		},
 	},
 	entry: {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],
@@ -135,6 +138,9 @@ module.exports = {
 			raw: true,
 			include: /\.js$/
 		}),
+		new ESLintPlugin({
+			extensions: ['js', 'jsx']
+		}),
 	],
 	optimization: {
 		minimizer: [
@@ -163,7 +169,6 @@ module.exports = {
 							target: 'es2015',
 						}
 					},
-					'eslint-loader',
 				]
 			},
 			{
