@@ -89,7 +89,7 @@ class BlockingTracker extends React.Component {
 		const slug = (tracker.wtm) ? tracker.wtm : getSlugFromTrackerId(tracker.id);
 		const tab = window.open(`https://whotracks.me/trackers/${slug}.html`, '_blank');
 		tab.focus();
-	}
+	};
 
 	clickBlock = () => {
 		const {
@@ -125,7 +125,7 @@ class BlockingTracker extends React.Component {
 				}
 			});
 		}
-	}
+	};
 
 	clickRestrict = () => {
 		const { tracker, categoryId, callGlobalAction } = this.props;
@@ -145,7 +145,7 @@ class BlockingTracker extends React.Component {
 				block: blocked, // Keep blocking
 			}
 		});
-	}
+	};
 
 	clickTrust = () => {
 		const { tracker, categoryId, callGlobalAction } = this.props;
@@ -165,7 +165,7 @@ class BlockingTracker extends React.Component {
 				block: blocked, // Keep blocking
 			}
 		});
-	}
+	};
 
 	clickAnonymize = () => {
 		const {	tracker, callGlobalAction } = this.props;
@@ -180,7 +180,7 @@ class BlockingTracker extends React.Component {
 				unidentifiedTracker: tracker,
 			}
 		});
-	}
+	};
 
 	renderTrackerModified() {
 		const { type, tracker } = this.props;
@@ -280,10 +280,13 @@ class BlockingTracker extends React.Component {
 	renderSmartBlockOverflow() {
 		const { open, tracker } = this.props;
 		const { warningSmartBlock } = tracker;
-		const selectGroupClassNames = ClassNames('OverrideText full-height',
-			'flex-container align-center-middle', {
+		const selectGroupClassNames = ClassNames(
+			'OverrideText full-height',
+			'flex-container align-center-middle',
+			{
 				'OverrideText--open': open,
-			});
+			}
+		);
 		const text = (warningSmartBlock && warningSmartBlock === 'blocked') ?
 			t('panel_tracker_warning_smartblock_tooltip') :
 			t('panel_tracker_warning_smartunblock_tooltip');
@@ -305,16 +308,22 @@ class BlockingTracker extends React.Component {
 		const { ss_allowed = false, ss_blocked = false, blocked } = tracker;
 		const { toggle_individual_trackers = false } = settings;
 
-		const selectGroupClassNames = ClassNames('BlockingSelectGroup full-height',
-			'flex-container flex-dir-row-reverse', {
+		const selectGroupClassNames = ClassNames(
+			'BlockingSelectGroup full-height',
+			'flex-container flex-dir-row-reverse',
+			{
 				'BlockingSelectGroup--open': open,
 				'BlockingSelectGroup--wide': type === 'site' && toggle_individual_trackers,
 				'BlockingSelectGroup--disabled': this.selectDisabled,
-			});
-		const selectBlockClassNames = ClassNames('BlockingSelect BlockingSelect__block',
-			'full-height flex-child-grow', {
+			}
+		);
+		const selectBlockClassNames = ClassNames(
+			'BlockingSelect BlockingSelect__block',
+			'full-height flex-child-grow',
+			{
 				'BlockingSelect--disabled': this.selectBlockDisabled,
-			});
+			}
+		);
 
 		return (
 			<div className={selectGroupClassNames}>
@@ -342,11 +351,14 @@ class BlockingTracker extends React.Component {
 		} = this.props;
 		const { whitelisted } = tracker;
 
-		const selectGroupClassNames = ClassNames('BlockingSelectGroup full-height',
-			'flex-container flex-dir-row-reverse', {
+		const selectGroupClassNames = ClassNames(
+			'BlockingSelectGroup full-height',
+			'flex-container flex-dir-row-reverse',
+			{
 				'BlockingSelectGroup--open': open,
 				'BlockingSelectGroup--disabled': this.selectDisabled,
-			});
+			}
+		);
 
 		return (
 			<div className={selectGroupClassNames}>

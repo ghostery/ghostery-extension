@@ -18,7 +18,7 @@ const { BROWSER_INFO, EXTENSION_VERSION } = globals;
 /**
  * Render About view which opens from the main drop-down menu.
  */
-const About = () => {
+function About() {
 	const licensesUrl = chrome.runtime.getURL('./app/templates/licenses.html');
 
 	return (
@@ -40,6 +40,6 @@ const About = () => {
 			</div>
 		</div>
 	);
-};
+}
 
 export default About;

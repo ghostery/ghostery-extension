@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * Header Menu Component
  *
@@ -32,7 +33,7 @@ class HeaderMenu extends React.Component {
 		if (!this.node.contains(e.target)) {
 			toggleDropdown();
 		}
-	}
+	};
 
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
@@ -41,7 +42,7 @@ class HeaderMenu extends React.Component {
 		const { history, toggleDropdown } = this.props;
 		toggleDropdown();
 		history.push('/settings/globalblocking');
-	}
+	};
 
 	/**
 	 * Handle click on 'Report a broken page' menu item.
@@ -85,7 +86,7 @@ class HeaderMenu extends React.Component {
 		}).catch(() => {
 			log('Error gathering page data');
 		});
-	}
+	};
 
 	/**
 	 * Handle click on 'Submit a new tracker' menu item.
@@ -97,7 +98,7 @@ class HeaderMenu extends React.Component {
 			become_active: true,
 		});
 		window.close();
-	}
+	};
 
 	/**
 	 * Handle click on 'Help' menu item.
@@ -107,7 +108,7 @@ class HeaderMenu extends React.Component {
 		const { history, toggleDropdown } = this.props;
 		toggleDropdown();
 		history.push('/help');
-	}
+	};
 
 	/**
 	 * Handle click on 'About' menu item.
@@ -117,7 +118,7 @@ class HeaderMenu extends React.Component {
 		const { history, toggleDropdown } = this.props;
 		toggleDropdown();
 		history.push('/about');
-	}
+	};
 
 	/**
 	 * Handle click on the user name, displayed on the menu when a
@@ -129,7 +130,7 @@ class HeaderMenu extends React.Component {
 			become_active: true,
 		});
 		window.close();
-	}
+	};
 
 	/**
 	 * Handle click on 'Sign in' menu item and navigate to Login panel.
@@ -138,7 +139,7 @@ class HeaderMenu extends React.Component {
 		const { history, toggleDropdown } = this.props;
 		toggleDropdown();
 		history.push('/login');
-	}
+	};
 
 	/**
 	 * Handle click on 'Sign out' menu item (if user is in logged in state) and log out the user.
@@ -147,7 +148,7 @@ class HeaderMenu extends React.Component {
 		const { actions, toggleDropdown } = this.props;
 		toggleDropdown();
 		actions.logout();
-	}
+	};
 
 	/**
 	 * Handle click on Subscriber menu item.
@@ -157,7 +158,7 @@ class HeaderMenu extends React.Component {
 		sendMessage('ping', 'plus_panel_from_menu');
 		toggleDropdown();
 		history.push('/subscription');
-	}
+	};
 
 	/**
 	 * Render drop-down menu.

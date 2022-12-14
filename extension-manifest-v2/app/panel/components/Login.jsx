@@ -44,7 +44,7 @@ class Login extends React.Component {
 	handleInputChange = (e) => {
 		const { name, value } = e.target;
 		this.setState({ [name]: value });
-	}
+	};
 
 	/**
 	 * Validate entered login data and, if it is good, trigger Login action.
@@ -87,7 +87,7 @@ class Login extends React.Component {
 				})
 				.catch(err => log(err));
 		});
-	}
+	};
 
 	/**
 	 * Render Sign In view.

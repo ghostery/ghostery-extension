@@ -50,12 +50,18 @@ function gatherFilePaths() {
 				paths.push(`${LOCALES_FOLDER}/${locale}/messages.json`);
 			});
 			if (langFilesCounted === LANG_FILES_COUNT) {
-				console.log('Correctly found %d of %d locale files.',
-					LANG_FILES_COUNT, langFilesCounted);
+				console.log(
+					'Correctly found %d of %d locale files.',
+					LANG_FILES_COUNT,
+					langFilesCounted
+				);
 				resolve(paths);
 			} else {
-				console.log('Error: there should be %d locale files, only scanned %d.',
-					LANG_FILES_COUNT, langFilesCounted);
+				console.log(
+					'Error: there should be %d locale files, only scanned %d.',
+					LANG_FILES_COUNT,
+					langFilesCounted
+				);
 				reject();
 			}
 		});

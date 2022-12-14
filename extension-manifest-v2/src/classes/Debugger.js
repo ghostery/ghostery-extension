@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * Ghostery Debug Class
  *
@@ -242,7 +243,7 @@ class Debugger {
 		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
 		[`${this._helpFunctionNames.refreshToken}`, 'Forces a refresh of the token (you have to be logged in)'],
-	]
+	];
 
 	/**
 	 * @access private
@@ -327,12 +328,12 @@ class Debugger {
 		['Anything else', 'The whole ActiveTabInfo object. Also returned if there are no matching results'],
 	];
 
-  static helpCheckStorage = [
+	static helpCheckStorage = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.checkStorage}`,
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['No argument or any arguments', 'Information about the storage'],
-  ];
+	];
 
 	/**
 	 * @access private
@@ -408,12 +409,12 @@ class Debugger {
 		['mobile', 'The mobile panel for Android'],
 	];
 
-  static helpRefreshToken = [
+	static helpRefreshToken = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.refreshToken}`,
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 		['No argument or any arguments', 'Refreshes the access token (need to be logged in)'],
-  ];
+	];
 
 	/**
 	 * @access private
@@ -450,7 +451,7 @@ class Debugger {
 		["'ON'", 'Turns logging on'],
 		["'OFF'", 'Turns logging off'],
 		['Any other argument or no argument', 'Turns logging on if it was off and vice versa'],
-	]
+	];
 
 	/**
 	 * @access private
@@ -562,7 +563,7 @@ class Debugger {
 
 		// Display a little ad or thank you note instead of "undefined"
 		return (pickRandomArrEl(_helpPromoMessages).val);
-	}
+	};
 	// END [[Help CLI & strings]] SECTION
 
 	// START [[Main Actions]] SECTION
@@ -641,7 +642,7 @@ class Debugger {
 
 				return THANKS;
 			}));
-	}
+	};
 
 	/**
 	 * @since 8.5.3
@@ -691,7 +692,7 @@ class Debugger {
 				return THANKS;
 			})
 		);
-	}
+	};
 
 	/**
 	 * @since 8.5.3
@@ -709,7 +710,7 @@ class Debugger {
 		Debugger._printToConsole(Debugger._typeset(output));
 
 		return (THANKS);
-	}
+	};
 
 	/**
 	 * @since 8.5.3
@@ -763,7 +764,7 @@ class Debugger {
 			}
 		});
 		return THANKS;
-	}
+	};
 
 	/**
 	 * @since 8.5.3
@@ -800,7 +801,7 @@ class Debugger {
 			}
 		});
 		return THANKS;
-	}
+	};
 
 	/**
 	 * Runs diagnostics to identify rare problems related to the persistance layer.
@@ -837,7 +838,7 @@ class Debugger {
 			Debugger._printToConsole(Debugger._typeset(output));
 		})();
 		return THANKS;
-	}
+	};
 
 	/**
 	 * @since 8.5.3
@@ -848,9 +849,9 @@ class Debugger {
 	 * @return {Promise}		The Promise for the calls to the account server. When the Promise fulfills, it returns a thank you message.
 	 */
 	getUserData = () => {
-		const _getUserSettings = () => new Promise(r => account.getUserSettings().catch(r).then(r));
+		const _getUserSettings = () => new Promise((r) => { account.getUserSettings().catch(r).then(r); });
 
-		const _getUserSubscriptionData = () => new Promise(r => account.getUserSubscriptionData().catch(r).then(r));
+		const _getUserSubscriptionData = () => new Promise((r) => { account.getUserSubscriptionData().catch(r).then(r); });
 
 		const _printError = (error) => {
 			const output = [];
@@ -895,7 +896,7 @@ class Debugger {
 			.then(data => _printUserData(data))
 			.catch(error => _printError(error))
 			.finally(() => _printAccountEvents());
-	}
+	};
 
 	/**
 	 * Forces a token refresh for troubleshooting situations where you get logged out.
@@ -919,7 +920,7 @@ class Debugger {
 			Debugger._printToConsole(Debugger._typeset(output));
 		})();
 		return THANKS;
-	}
+	};
 
 	// [[Main Actions]] public wrt to other background code, but intentionally not fully exposed to the console
 	/**
@@ -1083,7 +1084,7 @@ class Debugger {
 				return (this.settings.show('outputStyle'));
 			},
 		});
-	})()
+	})();
 
 	/**
 	 * @private

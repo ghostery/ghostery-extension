@@ -39,7 +39,7 @@ class Header extends React.Component {
 		if (is_expert) {
 			this.toggleExpert();
 		}
-	}
+	};
 
 	/**
 	 * Handles clicking on the Detailed View tab
@@ -49,7 +49,7 @@ class Header extends React.Component {
 		if (!is_expert) {
 			this.toggleExpert();
 		}
-	}
+	};
 
 	/**
 	 * Toggle between Simple and Detailed Views.
@@ -62,19 +62,19 @@ class Header extends React.Component {
 		} else {
 			history.push('/detail');
 		}
-	}
+	};
 
 	/**
 	 * Handles toggling the drop-down pane open/closed
 	 */
 	toggleDropdown = () => {
 		this.setState(prevState => ({ dropdownOpen: !prevState.dropdownOpen }));
-	}
+	};
 
 	handleSignin = () => {
 		const { history } = this.props;
 		history.push('/login');
-	}
+	};
 
 	handleSendValidateAccountEmail = () => {
 		const { actions, user } = this.props;
@@ -97,7 +97,7 @@ class Header extends React.Component {
 				text: t('server_error_message'),
 			});
 		});
-	}
+	};
 
 	generateAccountLogo = () => {
 		const { loggedIn, user } = this.props;
@@ -137,7 +137,7 @@ class Header extends React.Component {
 				{accountIcon}
 			</div>
 		);
-	}
+	};
 
 	determineBackPath = () => {
 		const { history, is_expert } = this.props;
@@ -148,7 +148,7 @@ class Header extends React.Component {
 			return 'subscription/info';
 		}
 		return is_expert ? '/detail/blocking' : '/';
-	}
+	};
 
 	/**
 	* React's required render function. Returns JSX

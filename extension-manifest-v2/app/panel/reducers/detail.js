@@ -20,7 +20,10 @@ const initialState = {};
  * @param  {Object} action 		action which provides data
  * @return {Object}        		unaltered state
  */
-export default (state = initialState, action) => {
+export default (state = initialState, action = null) => {
+	if (!action) {
+		return state;
+	}
 	switch (action.type) {
 		default: return state;
 	}

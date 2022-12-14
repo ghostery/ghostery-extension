@@ -316,12 +316,14 @@ class Summary extends React.Component {
 		}
 	}
 
+	// eslint-disable-next-line react/no-unused-class-component-methods
 	_hasPlusAccess() {
 		const { user } = this.props;
 
 		return user && user.plusAccess;
 	}
 
+	// eslint-disable-next-line react/no-unused-class-component-methods
 	_hasPremiumAccess() {
 		const { user } = this.props;
 

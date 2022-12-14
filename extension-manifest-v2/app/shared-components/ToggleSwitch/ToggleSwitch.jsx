@@ -20,7 +20,7 @@ import ClassNames from 'classnames';
  * @return {JSX} JSX for rendering a Toggle Switch
  * @memberof SharedComponents
  */
-const ToggleSwitch = ({ checked, locked, onChange }) => {
+function ToggleSwitch({ checked, locked, onChange }) {
 	const switchClassNames = ClassNames('ToggleSwitch', {
 		'ToggleSwitch--active': checked,
 		'ToggleSwitch--locked': locked
@@ -32,7 +32,7 @@ const ToggleSwitch = ({ checked, locked, onChange }) => {
 			<span className="ToggleSwitch__circle" />
 		</div>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 ToggleSwitch.propTypes = {

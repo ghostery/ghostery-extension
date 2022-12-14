@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-class-component-methods */
 /**
  * Panel Component
  *
@@ -210,7 +211,7 @@ class Panel extends React.Component {
 		const { loggedIn, user } = this.props;
 
 		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:insights'));
-	}
+	};
 
 	/**
 	 * @returns {bool}
@@ -221,7 +222,7 @@ class Panel extends React.Component {
 		const { loggedIn, user } = this.props;
 
 		return loggedIn && (user && user.premiumAccess);
-	}
+	};
 
 	/**
 	 * @returns {bool}
@@ -232,7 +233,7 @@ class Panel extends React.Component {
 		const { loggedIn, user } = this.props;
 
 		return loggedIn && (user && user.plusAccess);
-	}
+	};
 
 	/**
 	 * React's required render function. Returns JSX

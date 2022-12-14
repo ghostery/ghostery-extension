@@ -189,7 +189,9 @@ class EventHandlers {
 				injectNotifications(tab.id).then((result) => {
 					if (result) {
 						utils.sendMessage(
-							tab_id, 'showUpgradeAlert', {
+							tab_id,
+							'showUpgradeAlert',
+							{
 								translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 								language: conf.language,
 								major_upgrade: globals.JUST_UPGRADED_FROM_7,

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * Stats Component
  *
@@ -66,7 +67,7 @@ class Stats extends React.Component {
 			default:
 				return '';
 		}
-	}
+	};
 
 	getGraphTitle = (type, view) => {
 		const viewText = this.getGraphTitleBase(view);
@@ -85,7 +86,7 @@ class Stats extends React.Component {
 		}
 
 		return '';
-	}
+	};
 
 	getGraphIconPath = (view) => {
 		switch (view) {
@@ -100,7 +101,7 @@ class Stats extends React.Component {
 			default:
 				return '../../app/images/panel/eye.svg';
 		}
-	}
+	};
 
 	getSummaryTitle = (type) => {
 		switch (type) {
@@ -113,7 +114,7 @@ class Stats extends React.Component {
 			default:
 				return t('historical_tracker_stats');
 		}
-	}
+	};
 
 	getSummaryData = (state, type) => {
 		switch (type) {
@@ -130,7 +131,7 @@ class Stats extends React.Component {
 				return {};
 			}
 		}
-	}
+	};
 
 	getTooltipText = (view) => {
 		switch (view) {
@@ -145,7 +146,7 @@ class Stats extends React.Component {
 			default:
 				return t('panel_stats_trackers_seen');
 		}
-	}
+	};
 
 	/**
 	 * Set view selection according to the clicked button. Save it in state.
@@ -168,7 +169,7 @@ class Stats extends React.Component {
 
 			this.setState({ selection });
 		}
-	}
+	};
 
 	/**
 	 * Set type selection according to the clicked button. Save it in state.
@@ -218,7 +219,7 @@ class Stats extends React.Component {
 
 			this.setState({ selection });
 		}
-	}
+	};
 
 	/**
 	 * Change time frame based on user's selection
@@ -252,24 +253,24 @@ class Stats extends React.Component {
 		}
 		state.selection.selectionData = this._determineSelectionData(state);
 		this.setState(state);
-	}
+	};
 
 	resetStats = () => {
 		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
 		this.setState({ showResetModal: true });
-	}
+	};
 
 	doReset = () => {
 		sendMessage('resetStats');
 		this.setState(this._reset(false));
-	}
+	};
 
 	cancelReset = () => {
 		// Do nothing, just close the modal
 		this.setState({ showResetModal: false });
-	}
+	};
 
 	/**
 	 * Helper function to handle clicking on Sign in link on modal
@@ -277,11 +278,11 @@ class Stats extends React.Component {
 	signIn = () => {
 		const { history } = this.props;
 		history.push('/login');
-	}
+	};
 
 	_resetState = () => {
 		this.setState(this._reset(true));
-	}
+	};
 
 	_reset = (demo) => {
 		const { user } = this.props;
@@ -326,7 +327,7 @@ class Stats extends React.Component {
 			showPitchModal: (!user || !user.plusAccess),
 		};
 		return clearOrDemoState;
-	}
+	};
 
 	_getAllStats = () => (
 		sendMessageInPromise('getAllStats')
@@ -485,7 +486,7 @@ class Stats extends React.Component {
 				this.setState(state);
 			}
 		});
-	}
+	};
 
 	/**
 	 * Determine data selection for Stats Graph according to parameters in state
@@ -509,7 +510,7 @@ class Stats extends React.Component {
 			return parsedEntry;
 		});
 		return selectionData;
-	}
+	};
 
 	_hasPlusAccess = props => props.user && props.user.plusAccess;
 

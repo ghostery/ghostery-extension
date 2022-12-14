@@ -53,6 +53,7 @@ const serverErr = {
 	],
 };
 
+// eslint-disable-next-line no-import-assign, import/namespace
 msg.sendMessageInPromise = jest.fn((messageType, data) => new Promise((resolve, reject) => {
 	switch (messageType) {
 		case 'account.getUserSettings':

@@ -176,23 +176,24 @@ class Api {
 		});
 	}
 
-	_errorHandler = errors => Promise.resolve(errors)
+	// eslint-disable-next-line class-methods-use-this
+	_errorHandler = errors => Promise.resolve(errors);
 
 	static get JSONAPI_CONTENT_TYPE() { return 'application/vnd.api+json'; }
 
 	get = (type, id, include = '') => {
 		if (!id) { return Promise.reject(new Error('id is missing')); }
 		return this._sendAuthenticatedRequest('GET', `/api/v2.1.0/${type}/${id}?${include ? `include=${include}` : ''}`);
-	}
+	};
 
-	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2.1.0/${type}/`, data)
+	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2.1.0/${type}/`, data);
 
 	update = (type, data) => {
 		// TODO check for data.id and fail
 		this._sendAuthenticatedRequest('PATCH', `/api/v2.1.0/${type}/${data.id}`, { data });
-	}
+	};
 
-	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2.1.0/${type}/${id}`)
+	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2.1.0/${type}/${id}`);
 }
 
 export default Api;

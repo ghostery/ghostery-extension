@@ -22,7 +22,7 @@ class ImportExport extends React.Component {
 	clickExportSettings = () => {
 		const { actions, settingsData } = this.props;
 		actions.exportSettings(settingsData.pageUrl);
-	}
+	};
 
 	/**
 	 * Trigger custom Import dialog or a native Open File dialog depending on browser.
@@ -37,7 +37,7 @@ class ImportExport extends React.Component {
 			// for chrome and opera, use the native File Dialog
 			this.selectedFile.click();
 		}
-	}
+	};
 
 	/**
 	 * Parse settings file imported via native browser window. Called via input#select-file onChange.
@@ -45,7 +45,7 @@ class ImportExport extends React.Component {
 	validateImportFile = () => {
 		const { actions } = this.props;
 		actions.importSettingsNative(this.selectedFile.files[0]);
-	}
+	};
 
 	/**
 	* Render Account subview.

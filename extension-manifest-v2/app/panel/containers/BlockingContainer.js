@@ -46,11 +46,12 @@ const mapStateToProps = state => ({
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(
-		Object.assign(blockingActions, {
+		{
+			...blockingActions,
 			updateTrackerCounts,
 			showNotification,
 			toggleCommonFeature
-		}),
+		},
 		dispatch
 	)
 });

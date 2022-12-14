@@ -1,9 +1,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 
-export const renderKnownTrackerButtons = (
-	ss_allowed, ss_blocked, clickTrackerTrust, clickTrackerRestrict, clickTrackerStatus
-) => (
+export const renderKnownTrackerButtons = (ss_allowed, ss_blocked, clickTrackerTrust, clickTrackerRestrict, clickTrackerStatus) => (
 	<div className="svg-container">
 		<span className="t-tooltip-up-left" data-g-tooltip={ss_allowed ? t('summary_undo') : t('panel_tracker_trust_tooltip')}>
 			<svg className="blocking-icons trust" onClick={clickTrackerTrust} width="20px" height="20px" viewBox="0 0 20 20">
@@ -53,9 +51,7 @@ export const renderKnownTrackerButtons = (
 	</div>
 );
 
-export const renderUnidentifiedTrackerButtons = (
-	handleCommonTrackerWhitelist, whitelisted, siteRestricted, type, contextType
-) => {
+export const renderUnidentifiedTrackerButtons = (handleCommonTrackerWhitelist, whitelisted, siteRestricted, type, contextType) => {
 	const svgContainerClasses = ClassNames('unidentified-svg-container', {
 		whitelisted: whitelisted && !siteRestricted,
 		siteRestricted,

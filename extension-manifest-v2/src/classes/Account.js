@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * User Accounts
  *
@@ -42,6 +43,7 @@ class Account {
 		const opts = {
 			errorHandler: errors => (
 				new Promise((resolve, reject) => {
+					// eslint-disable-next-line no-unreachable-loop
 					for (let i = 0; i < errors.length; i++) {
 						const err = errors[i];
 						switch (err.code) {
@@ -54,16 +56,20 @@ class Account {
 							case '10201': // refresh token is missing
 							case '10300': // csrf token is missing
 							case '10301': // csrf tokens do not match
+								// eslint-disable-next-line no-promise-executor-return
 								return this.logout()
 									.then(() => resolve())
 									.catch(() => resolve());
 							case '10030': // email not validated
 							case 'not-found':
+								// eslint-disable-next-line no-promise-executor-return
 								return reject(err);
 							default:
+								// eslint-disable-next-line no-promise-executor-return
 								return resolve();
 						}
 					}
+					// eslint-disable-next-line no-promise-executor-return
 					return resolve();
 				})
 			)
@@ -102,7 +108,7 @@ class Account {
 			alwaysLog(err);
 			return err;
 		});
-	}
+	};
 
 	async logout() {
 		try {
@@ -131,7 +137,7 @@ class Account {
 		}
 	}
 
-	refreshToken = () => api.refreshToken()
+	refreshToken = () => api.refreshToken();
 
 	// @TODO a 404 here should trigger a logout
 	getUser = () => (
@@ -150,7 +156,7 @@ class Account {
 				this._setAccountUserInfo(user);
 				return user;
 			})
-	)
+	);
 
 	getUserSettings = () => (
 		this._getUserIDIfEmailIsValidated()
@@ -179,7 +185,7 @@ class Account {
 			// or they have simply never been synced to the account server yet
 			// In that case, just use the local settings
 			.catch(() => this.buildUserSettings())
-	)
+	);
 
 	/**
 	 * @return {array}	All subscriptions the user has, empty if none
@@ -219,7 +225,7 @@ class Account {
 					metrics.ping('sign_in_success');
 				}
 			})
-	)
+	);
 
 	saveUserSettings = () => (
 		this._getUserIDIfEmailIsValidated()
@@ -232,7 +238,7 @@ class Account {
 					}
 				})
 			))
-	)
+	);
 
 	getTheme = name => (
 		this._getUserID()
@@ -254,13 +260,13 @@ class Account {
 						return css;
 					});
 			})
-	)
+	);
 
 	sendValidateAccountEmail = () => (
 		this._getUserID()
 			.then(userID => fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`))
 			.then(res => res.status < 400)
-	)
+	);
 
 	resetPassword = (email) => {
 		const data = `email=${window.encodeURIComponent(email)}`;
@@ -277,7 +283,7 @@ class Account {
 			}
 			return {};
 		});
-	}
+	};
 
 	migrate = () => (
 		new Promise((resolve) => {
@@ -346,7 +352,7 @@ class Account {
 			})
 			// should not break the init path
 			.catch(e => alwaysLog(e))
-	)
+	);
 
 	/**
 	 * Determines if the user has the required scope combination(s) to access a resource.
@@ -386,7 +392,7 @@ class Account {
 			}
 		}
 		return false;
-	}
+	};
 
 	/**
 	 * Create settings object for syncing and/or Export.
@@ -413,7 +419,7 @@ class Account {
 			}
 		});
 		return settings;
-	}
+	};
 
 	async _getUserID() {
 		if (!conf.account) {
@@ -454,17 +460,17 @@ class Account {
 			subscriptionData: null,
 			themeData: null,
 		};
-	}
+	};
 
 	_setAccountUserInfo = (user) => {
 		conf.account.user = user;
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_setAccountUserSettings = (settings) => {
 		conf.account.userSettings = settings;
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_setSubscriptionData = (data) => {
 		// TODO: Change this so that we aren't writing over data
@@ -474,7 +480,7 @@ class Account {
 		}
 		conf.account.subscriptionData = data || null;
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_setThemeData = (data) => {
 		if (!conf.account.themeData) {
@@ -483,12 +489,12 @@ class Account {
 		const { name } = data;
 		conf.account.themeData[name] = { timestamp: Date.now(), ...data };
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_clearAccountInfo = () => {
 		conf.account = null;
 		conf.current_theme = 'default';
-	}
+	};
 
 	_getUserIDFromCookie = async () => {
 		const cookie = await cookiesGet({ name: 'user_id' });
@@ -496,7 +502,7 @@ class Account {
 			throw new Error('err getting login user_id cookie');
 		}
 		return cookie.value;
-	}
+	};
 
 	/**
 	 * GET user settings from ConsumerAPI
@@ -514,7 +520,7 @@ class Account {
 			}
 		});
 		return returnedSettings;
-	}
+	};
 
 	_removeCookies = () => {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
@@ -526,7 +532,7 @@ class Account {
 				log(`Could not remove cookie with a name: ${name}`, e);
 			}
 		});
-	}
+	};
 }
 
 // Return the class as a singleton

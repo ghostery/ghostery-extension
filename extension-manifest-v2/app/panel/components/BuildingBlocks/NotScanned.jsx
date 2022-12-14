@@ -20,7 +20,7 @@ import ClassNames from 'classnames';
  * when a site is not scannable or has not yet been scanned.
  * @memberof PanelBuildingBlocks
  */
-const NotScanned = ({ isSmall }) => {
+function NotScanned({ isSmall }) {
 	const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {
 		small: isSmall,
 	});
@@ -38,7 +38,7 @@ const NotScanned = ({ isSmall }) => {
 			</div>
 		</div>
 	);
-};
+}
 
 NotScanned.propTypes = {
 	isSmall: PropTypes.bool,

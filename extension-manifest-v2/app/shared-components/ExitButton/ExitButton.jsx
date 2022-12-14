@@ -20,7 +20,7 @@ import { NavLink } from 'react-router-dom';
  * @return {JSX} JSX for rendering a Exit Button
  * @memberof SharedComponents
  */
-const ExitButton = (props) => {
+function ExitButton(props) {
 	const {
 		hrefExit,
 		textExit,
@@ -34,7 +34,7 @@ const ExitButton = (props) => {
 			<span className="ExitButton__exitIcon" />
 		</NavLink>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 ExitButton.propTypes = {

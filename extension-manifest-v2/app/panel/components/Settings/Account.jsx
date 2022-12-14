@@ -30,20 +30,21 @@ class Account extends React.Component {
 	clickSigninCreate = () => {
 		const { settingsData } = this.props;
 		settingsData.history.push('/login');
-	}
+	};
 
 	/**
 	 * Implement handler for 'Edit' link on the Account
 	 * view in signed in state to open Profile web page
 	 * where user can adjust data of his/her account.
 	 */
+	// eslint-disable-next-line class-methods-use-this
 	clickEditAccount = () => {
 		sendMessage('openNewTab', {
 			url: `${globals.ACCOUNT_BASE_URL}/`,
 			become_active: true,
 		});
 		window.close();
-	}
+	};
 
 	/**
 	* Render Account subview.

@@ -36,21 +36,23 @@ const store = configureStore();
  * @var {ReactComponent} 	Ghostery	Top-level component for Ghostery panel.
  * @memberOf PanelClasses
  */
-const Ghostery = () => (
-	<Panel>
-		{/* Load Summary on both "/"" and "/detail" paths */}
-		<Route path="/(|detail)/" component={Summary} />
-		<Route path="/detail" component={Detail} />
-		<Route path="/settings" component={Settings} />
-		<Route path="/help" component={Help} />
-		<Route path="/about" component={About} />
-		<Route path="/subscription" component={Subscription} />
-		<Route path="/stats" component={Stats} />
-		<Route path="/login" component={Login} />
-		<Route path="/forgot-password" render={() => <ForgotPassword />} />
-		<Route path="/account-success" component={AccountSuccess} />
-	</Panel>
-);
+function Ghostery() {
+	return (
+		<Panel>
+			{/* Load Summary on both "/"" and "/detail" paths */}
+			<Route path="/(|detail)/" component={Summary} />
+			<Route path="/detail" component={Detail} />
+			<Route path="/settings" component={Settings} />
+			<Route path="/help" component={Help} />
+			<Route path="/about" component={About} />
+			<Route path="/subscription" component={Subscription} />
+			<Route path="/stats" component={Stats} />
+			<Route path="/login" component={Login} />
+			<Route path="/forgot-password" render={() => <ForgotPassword />} />
+			<Route path="/account-success" component={AccountSuccess} />
+		</Panel>
+	);
+}
 
 ReactDOM.render(
 	(

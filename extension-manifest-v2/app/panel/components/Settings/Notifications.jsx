@@ -19,55 +19,57 @@ import PropTypes from 'prop-types';
  * Settings view.
  * @memberOf SettingsComponents
  */
-const Notifications = ({ settingsData, toggleCheckbox }) => (
-	<div className="s-tabs-panel">
-		<div className="row">
-			<div className="columns">
-				<h3>{ t('settings_notifications') }</h3>
-				<h5>{ t('settings_notify_me') }</h5>
-				<div className="s-tooltip-down" data-g-tooltip={t('settings_notify_me_tooltip')}>
-					<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-announcements" name="show_cmp" defaultChecked={settingsData.show_cmp} onClick={toggleCheckbox} />
-						<label id="settings-announcements-label" htmlFor="settings-announcements">{ t('settings_announcements') }</label>
+function Notifications({ settingsData, toggleCheckbox }) {
+	return (
+		<div className="s-tabs-panel">
+			<div className="row">
+				<div className="columns">
+					<h3>{ t('settings_notifications') }</h3>
+					<h5>{ t('settings_notify_me') }</h5>
+					<div className="s-tooltip-down" data-g-tooltip={t('settings_notify_me_tooltip')}>
+						<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 					</div>
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-new-features" name="notify_upgrade_updates" defaultChecked={settingsData.notify_upgrade_updates} onClick={toggleCheckbox} />
-						<label id="settings-new-features-label" htmlFor="settings-new-features">{ t('settings_new_features') }</label>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-announcements" name="show_cmp" defaultChecked={settingsData.show_cmp} onClick={toggleCheckbox} />
+							<label id="settings-announcements-label" htmlFor="settings-announcements">{ t('settings_announcements') }</label>
+						</div>
 					</div>
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-new-promotions" name="notify_promotions" defaultChecked={settingsData.notify_promotions} onClick={toggleCheckbox} />
-						<label id="settings-new-promotions-label" htmlFor="settings-new-promotions">{ t('settings_new_promotions') }</label>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-new-features" name="notify_upgrade_updates" defaultChecked={settingsData.notify_upgrade_updates} onClick={toggleCheckbox} />
+							<label id="settings-new-features-label" htmlFor="settings-new-features">{ t('settings_new_features') }</label>
+						</div>
 					</div>
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-show-reload-banner" name="reload_banner_status" defaultChecked={settingsData.reload_banner_status} onClick={toggleCheckbox} />
-						<label id="settings-show-reload-banner-label" htmlFor="settings-show-reload-banner">{ t('settings_show_reload_banner') }</label>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-new-promotions" name="notify_promotions" defaultChecked={settingsData.notify_promotions} onClick={toggleCheckbox} />
+							<label id="settings-new-promotions-label" htmlFor="settings-new-promotions">{ t('settings_new_promotions') }</label>
+						</div>
 					</div>
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-show-trackers-banner" name="trackers_banner_status" defaultChecked={settingsData.trackers_banner_status} onClick={toggleCheckbox} />
-						<label id="settings-show-trackers-banner-label" htmlFor="settings-show-trackers-banner">{ t('settings_show_trackers_banner') }</label>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-show-reload-banner" name="reload_banner_status" defaultChecked={settingsData.reload_banner_status} onClick={toggleCheckbox} />
+							<label id="settings-show-reload-banner-label" htmlFor="settings-show-reload-banner">{ t('settings_show_reload_banner') }</label>
+						</div>
 					</div>
-				</div>
-				<div className="s-option-group">
-					<div className="s-square-checkbox">
-						<input type="checkbox" id="settings-show-count-badge" name="show_badge" defaultChecked={settingsData.show_badge} onClick={toggleCheckbox} />
-						<label id="settings-show-count-badge-label" htmlFor="settings-show-count-badge">{ t('settings_show_tracker_count_badge') }</label>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-show-trackers-banner" name="trackers_banner_status" defaultChecked={settingsData.trackers_banner_status} onClick={toggleCheckbox} />
+							<label id="settings-show-trackers-banner-label" htmlFor="settings-show-trackers-banner">{ t('settings_show_trackers_banner') }</label>
+						</div>
+					</div>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-show-count-badge" name="show_badge" defaultChecked={settingsData.show_badge} onClick={toggleCheckbox} />
+							<label id="settings-show-count-badge-label" htmlFor="settings-show-count-badge">{ t('settings_show_tracker_count_badge') }</label>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-);
+	);
+}
 
 Notifications.propTypes = {
 	toggleCheckbox: PropTypes.func.isRequired,

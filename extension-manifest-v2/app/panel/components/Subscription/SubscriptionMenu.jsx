@@ -18,32 +18,34 @@ import { NavLink } from 'react-router-dom';
  * menu which allows to navigate to Subscription subviews.
  * @memberOf SubscriptionComponents
  */
-const SubscriptionMenu = () => (
-	<ul className="content-settings-menu menu vertical no-bullet">
-		<li className="s-tabs-title">
-			<NavLink to="/subscription/themes">
-				<span>{ t('subscription_themes') }</span>
-			</NavLink>
-		</li>
+function SubscriptionMenu() {
+	return (
+		<ul className="content-settings-menu menu vertical no-bullet">
+			<li className="s-tabs-title">
+				<NavLink to="/subscription/themes">
+					<span>{ t('subscription_themes') }</span>
+				</NavLink>
+			</li>
 
-		<li className="s-tabs-title">
-			<NavLink to="/subscription/prioritysupport">
-				<span>{ t('priority_support') }</span>
-			</NavLink>
-		</li>
+			<li className="s-tabs-title">
+				<NavLink to="/subscription/prioritysupport">
+					<span>{ t('priority_support') }</span>
+				</NavLink>
+			</li>
 
-		<li className="s-tabs-title">
-			<NavLink to="/stats">
-				<span>{ t('historical_stats') }</span>
-			</NavLink>
-		</li>
+			<li className="s-tabs-title">
+				<NavLink to="/stats">
+					<span>{ t('historical_stats') }</span>
+				</NavLink>
+			</li>
 
-		<li className="s-tabs-title">
-			<a href="https://account.ghostery.com/subscription" target="_blank" rel="noreferrer">
-				<span>{ t('subscription_info') }</span>
-			</a>
-		</li>
-	</ul>
-);
+			<li className="s-tabs-title">
+				<a href="https://account.ghostery.com/subscription" target="_blank" rel="noreferrer">
+					<span>{ t('subscription_info') }</span>
+				</a>
+			</li>
+		</ul>
+	);
+}
 
 export default SubscriptionMenu;

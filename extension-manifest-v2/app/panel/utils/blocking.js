@@ -22,7 +22,7 @@ import { sendMessage } from './msg';
  * @param {object} smartBlock 	blocked and unblocked of Smart Blocking
  * @param {function} updateTrackerCounts 	from SummaryActions
  */
-export function updateSummaryBlockingCount(categories = [], smartBlock, updateTrackerCounts) {
+export function updateSummaryBlockingCount(categories, smartBlock, updateTrackerCounts) {
 	let numTotal = 0;
 	let numTotalBlocked = 0;
 	let numTotalSsBlocked = 0;
@@ -30,7 +30,7 @@ export function updateSummaryBlockingCount(categories = [], smartBlock, updateTr
 	let numTotalSbBlocked = 0;
 	let numTotalSbUnblocked = 0;
 
-	categories.forEach((categoryEl) => {
+	(categories || []).forEach((categoryEl) => {
 		categoryEl.trackers.forEach((trackerEl) => {
 			numTotal++;
 			const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);

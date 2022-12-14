@@ -188,7 +188,10 @@ const _updateCommonModuleWhitelist = (state, action) => {
  * @param  {Object} action 		action which provides data
  * @return {Object}        		updated state clone
  */
-export default (state = initialState, action) => {
+export default (state = initialState, action = null) => {
+	if (!action) {
+		return state;
+	}
 	switch (action.type) {
 		case UPDATE_BLOCKING_DATA: {
 			return { ...state, ...action.data };

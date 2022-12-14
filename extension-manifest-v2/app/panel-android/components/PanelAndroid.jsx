@@ -103,13 +103,13 @@ class PanelAndroid extends React.Component {
 				}
 			}));
 		});
-	}
+	};
 
 	setSummaryState = (tabId) => {
 		getSummaryData(tabId).then((data) => {
 			this.setState({ summary: data });
 		});
-	}
+	};
 
 	setSettingsState = () => {
 		getSettingsData().then((data) => {
@@ -121,19 +121,19 @@ class PanelAndroid extends React.Component {
 				}
 			}));
 		});
-	}
+	};
 
 	setBlockingState = (tabId) => {
 		getBlockingData(tabId).then((data) => {
 			this.setState({ blocking: data });
 		});
-	}
+	};
 
 	setCommonDataState = (tabId) => {
 		getCommonModuleData(tabId).then((data) => {
 			this.setState({ commonModuleData: data });
 		});
-	}
+	};
 
 	setGlobalState = (updated) => {
 		const newState = { needsReload: true };
@@ -146,7 +146,7 @@ class PanelAndroid extends React.Component {
 		}
 
 		this.setState(newState);
-	}
+	};
 
 	callGlobalAction = ({ actionName, actionData = {} }) => {
 		const updated = handleAllActions({ actionName, actionData, state: this.state });
@@ -159,12 +159,13 @@ class PanelAndroid extends React.Component {
 		} else if (Object.keys(updated).length !== 0) {
 			this.setGlobalState(updated);
 		}
-	}
+	};
 
 	changeView = (newView) => {
 		this.setState({ view: newView });
-	}
+	};
 
+	// eslint-disable-next-line class-methods-use-this
 	massageCommonTrackers = tracker => ({
 		id: tracker.name,
 		catId: tracker.type,
@@ -176,13 +177,13 @@ class PanelAndroid extends React.Component {
 		whitelisted: tracker.whitelisted,
 		blocked: false, // To appease BlockingTracker PropTypes
 		wtm: tracker.wtm,
-	})
+	});
 
 	reloadTab = () => {
 		const { panel } = this.state;
 		sendMessage('reloadTab', { tab_id: +panel.tab_id });
 		window.close();
-	}
+	};
 
 	_renderSettings() {
 		const { summary, settings } = this.state;
