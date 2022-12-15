@@ -31,31 +31,8 @@ const NOTIFICATIONS = [
   },
 ];
 
-const UNPROTECTED_SITES_URL = chrome.runtime.getURL(
-  '/pages/options/index.html',
-);
 const OPTIONS_URL = chrome.runtime.getURL('/pages/options/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
-
-function getPauseNotification(domain, paused, pauseType) {
-  if (paused) {
-    switch (pauseType) {
-      case 0:
-        return msg.html`${domain} removed from <a href="${UNPROTECTED_SITES_URL}" target="_blank">unprotected sites</a>`;
-      default:
-        return msg`${domain} was unpaused`;
-    }
-  }
-
-  switch (pauseType) {
-    case 0:
-      return msg.html`${domain} added to <a href="${UNPROTECTED_SITES_URL}" target="_blank">unprotected sites</a>`;
-    case 1:
-      return msg`${domain} paused for 1 hour`;
-    case 24:
-      return msg`${domain} paused for 24 hours`;
-  }
-}
 
 async function togglePause(host, event) {
   const { paused, pauseType } = event.target;
@@ -89,7 +66,9 @@ async function togglePause(host, event) {
 
   html`
     <gh-panel-alert type="success" slide autoclose="5">
-      ${getPauseNotification(host.stats.domain, paused, pauseType)}
+      ${paused
+        ? html`Ghostery has been resumed on this site.`
+        : html`Ghostery is paused on this site.`}
     </gh-panel-alert>
   `(wrapper);
 
