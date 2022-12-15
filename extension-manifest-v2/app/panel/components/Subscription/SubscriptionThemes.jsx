@@ -35,7 +35,7 @@ function SubscriptionThemes({ theme, changeTheme }) {
 				<div className="columns column-subscription">
 					<h1 className="subscription-title">{t('subscription_themes_title')}</h1>
 					<span className="tooltip-icon s-tooltip-down-right" data-g-tooltip={t('subscription_themes_tooltip')}>
-						<img src="../../app/images/panel/icon-information-tooltip-blue.svg" className="s-question" />
+						<img src="/app/images/panel/icon-information-tooltip-blue.svg" className="s-question" />
 					</span>
 					<RadioButtonGroup
 						labels={themeLabels}
