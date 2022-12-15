@@ -52,15 +52,6 @@ module.exports = {
 		mainFields: ['main'],
 		symlinks: false, // allow module resolution with `npm link`
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
-		alias: {
-			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
-			'@ghostery/ui/autoconsent$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/index.js'),
-			'@ghostery/ui/autoconsent/iframe$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/iframe.js'),
-			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
-			'@ghostery/ui/trackers-preview$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/trackers-preview/index.js'),
-			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
-			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
-		},
 		fallback: {
 			url: require.resolve('url'),
 			os: require.resolve('os-browserify/browser'),
