@@ -11,5 +11,5 @@
 
 import '@ghostery/ui/settings';
 
-import './devtools.js';
-import './options.js';
+import './components/devtools.js';
+import './views/main.js';

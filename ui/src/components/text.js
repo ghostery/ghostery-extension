@@ -3,14 +3,25 @@ import { define, html } from 'hybrids';
 export default define({
   tag: 'ui-text',
   type: 'body-m',
+  mobileType: '',
   color: '',
   ellipsis: false,
   underline: false,
-  render: ({ type, color }) => html`<slot></slot>`.css`
+  render: ({ type, mobileType, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
-      font: var(--ui-font-${type});
+      font: var(--ui-font-${mobileType || type});
       color: var(--ui-text-color, inherit);
+    }
+
+    ${
+      mobileType
+        ? /*css*/ `
+          @media screen and (min-width: 768px) {
+            :host { font: var(--ui-font-${type}); }
+          }
+        `
+        : ''
     }
 
     :host([type^="display"]), 
@@ -37,6 +48,10 @@ export default define({
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    ::slotted(ui-text) {
+      display: inline;
     }
 
     ::slotted(*) {

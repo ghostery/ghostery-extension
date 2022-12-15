@@ -31,7 +31,7 @@ const NOTIFICATIONS = [
   },
 ];
 
-const OPTIONS_URL = chrome.runtime.getURL('/pages/options/index.html');
+const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
 
 async function togglePause(host, event) {
@@ -177,7 +177,7 @@ export default define({
             <span slot="header">Ghostery settings</span>
             <ui-text color="gray-900">
               <a
-                href="${options.terms ? OPTIONS_URL : ONBOARDING_URL}"
+                href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
                 target="_blank"
                 layout="block"
               >

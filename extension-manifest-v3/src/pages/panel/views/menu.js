@@ -31,12 +31,12 @@ const MENU = [
   // {
   //   icon: 'shield',
   //   label: msg`Unprotected sites`,
-  //   href: chrome.runtime.getURL('/pages/options/index.html'),
+  //   href: chrome.runtime.getURL('/pages/settings/index.html'),
   // },
   {
     icon: 'settings',
     label: msg`Settings`,
-    href: chrome.runtime.getURL('/pages/options/index.html'),
+    href: chrome.runtime.getURL('/pages/settings/index.html'),
   },
   {
     icon: 'info',

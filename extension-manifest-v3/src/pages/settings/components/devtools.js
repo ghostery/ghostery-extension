@@ -50,14 +50,18 @@ function clearStorage(host, event) {
 }
 
 export default define({
-  tag: 'gh-options-devtools',
+  tag: 'gh-settings-devtools',
   counter: 0,
   content: ({ counter }) => html`
     <template layout="block">
       ${counter === 5
         ? html`
             <section layout="column gap" translate="no">
-              <ui-text type="headline-xs" layout="margin:bottom">
+              <ui-text
+                type="headline-m"
+                mobile-type="headline-s"
+                layout="margin:bottom"
+              >
                 Developer tools
               </ui-text>
               <div layout="row">

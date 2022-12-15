@@ -48,6 +48,10 @@ html {
   --ui-font-family: 'Inter', sans-serif;
   --ui-font-family-label: var(--ui-font-family);
 
+  --ui-font-headline-l: 600 30px / 40px var(--ui-font-family);
+  --ui-font-headline-m: 600 24px / 32px var(--ui-font-family);
+  --ui-font-headline-s: 600 18px / 22px var(--ui-font-family);
+
   --ui-font-label-l: 600 16px / 20px var(--ui-font-family);
   --ui-font-label-m: 600 14px / 18px var(--ui-font-family);
   --ui-font-label-s: 600 12px / 16px var(--ui-font-family);

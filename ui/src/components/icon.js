@@ -266,7 +266,12 @@ const icons = {
       <path d="M13.125 16.125C13.125 16.7463 12.6213 17.25 12 17.25C11.3787 17.25 10.875 16.7463 10.875 16.125C10.875 15.5037 11.3787 15 12 15C12.6213 15 13.125 15.5037 13.125 16.125Z" fill="currentColor"/>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" fill="currentColor"/>
     </svg>
-  `
+  `,
+  'wtm': html`
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.5 6V12.5H1.5V4.5H22.5V19.5H1.5V16.5H2.5V18V18.5H3H21H21.5V18V6V5.5H21H3H2.5V6Z" fill="black" stroke="currentColor"/>
+    </svg>
+  `,
  };
 
 export default define({
@@ -275,7 +280,7 @@ export default define({
   color: '',
   inline: false,
   render: ({ name, color }) => html`
-    <template layout="row center" layout[inline]="row inline">
+    <template layout="block" layout[inline]="row inline">
       ${icons[name] || ''}
     </template>
   `.css`
@@ -284,8 +289,9 @@ export default define({
     }
 
     svg {
-      min-width: 100%;
-      min-height: 100%;
+      display: block;
+      width: 100%;
+      height: 100%;
     }
    `,
 });

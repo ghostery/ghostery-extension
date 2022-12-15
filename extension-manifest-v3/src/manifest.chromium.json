@@ -21,7 +21,7 @@
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
   },
-  "options_page": "pages/options/index.html",
+  "options_page": "pages/settings/index.html",
   "content_scripts": [
     {
       "matches": ["*://*/*"],

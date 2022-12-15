@@ -11,4 +11,7 @@
 
 // Globals
 import '../../index.js';
-import '../../styles/pages.css';
+import '../../styles/panel.css';
+
+// Components
+import './components/layout.js';
