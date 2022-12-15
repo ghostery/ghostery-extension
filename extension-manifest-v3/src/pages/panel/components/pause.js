@@ -15,17 +15,17 @@ const PAUSE_TYPES = [
   {
     value: 1,
     label: msg`1 hour`,
-    description: msg`This site will be unprotected for 1 hour`,
+    description: msg`Ghostery on this site will be paused for 1 hour`,
   },
   {
     value: 24,
-    label: msg`Day`,
-    description: msg`This site will be unprotected for 24 hours`,
+    label: msg`1 day`,
+    description: msg`Ghostery on this site will be paused for 1 day`,
   },
   {
     value: 0,
     label: msg`Always`,
-    description: msg`This site will be added to unprotected sites`,
+    description: msg`Ghostery on this site will be paused. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you across the web.`,
   },
 ];
 

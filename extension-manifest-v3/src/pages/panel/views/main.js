@@ -11,51 +11,28 @@ import Company from './company.js';
 const NOTIFICATIONS = [
   {
     icon: 'help',
-    text: msg`Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.`,
+    text: 'Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.',
     actions: [
       {
-        text: msg`Get Help`,
-        url: 'https://www.ghostery.com/support/',
+        text: 'Get help',
+        url: 'https://www.ghostery.com/support?utm_source=gbe',
       },
     ],
   },
   {
     icon: 'heart',
-    text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
+    text: 'Hey, do you enjoy Ghostery and want to support our work?',
     actions: [
       {
-        text: msg`Become a contributor`,
-        url: 'https://www.ghostery.com/become-a-contributor/',
+        text: 'Become a Contributor',
+        url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
       },
     ],
   },
 ];
 
-const UNPROTECTED_SITES_URL = chrome.runtime.getURL(
-  '/pages/options/index.html',
-);
 const OPTIONS_URL = chrome.runtime.getURL('/pages/options/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
-
-function getPauseNotification(domain, paused, pauseType) {
-  if (paused) {
-    switch (pauseType) {
-      case 0:
-        return msg.html`${domain} removed from <a href="${UNPROTECTED_SITES_URL}" target="_blank">unprotected sites</a>`;
-      default:
-        return msg`${domain} was unpaused`;
-    }
-  }
-
-  switch (pauseType) {
-    case 0:
-      return msg.html`${domain} added to <a href="${UNPROTECTED_SITES_URL}" target="_blank">unprotected sites</a>`;
-    case 1:
-      return msg`${domain} paused for 1 hour`;
-    case 24:
-      return msg`${domain} paused for 24 hours`;
-  }
-}
 
 async function togglePause(host, event) {
   const { paused, pauseType } = event.target;
@@ -89,7 +66,9 @@ async function togglePause(host, event) {
 
   html`
     <gh-panel-alert type="success" slide autoclose="5">
-      ${getPauseNotification(host.stats.domain, paused, pauseType)}
+      ${paused
+        ? html`Ghostery has been resumed on this site.`
+        : html`Ghostery is paused on this site.`}
     </gh-panel-alert>
   `(wrapper);
 
@@ -195,7 +174,7 @@ export default define({
           `}
 
           <gh-panel-options>
-            <span slot="header">Ghostery global operations</span>
+            <span slot="header">Ghostery settings</span>
             <ui-text color="gray-900">
               <a
                 href="${options.terms ? OPTIONS_URL : ONBOARDING_URL}"
