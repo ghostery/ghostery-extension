@@ -11,21 +11,21 @@ import Company from './company.js';
 const NOTIFICATIONS = [
   {
     icon: 'help',
-    text: msg`Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.`,
+    text: 'Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.',
     actions: [
       {
-        text: msg`Get Help`,
-        url: 'https://www.ghostery.com/support/',
+        text: 'Get help',
+        url: 'https://www.ghostery.com/support?utm_source=gbe',
       },
     ],
   },
   {
     icon: 'heart',
-    text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
+    text: 'Hey, do you enjoy Ghostery and want to support our work?',
     actions: [
       {
-        text: msg`Become a contributor`,
-        url: 'https://www.ghostery.com/become-a-contributor/',
+        text: 'Become a Contributor',
+        url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
       },
     ],
   },
@@ -195,7 +195,7 @@ export default define({
           `}
 
           <gh-panel-options>
-            <span slot="header">Ghostery global operations</span>
+            <span slot="header">Ghostery settings</span>
             <ui-text color="gray-900">
               <a
                 href="${options.terms ? OPTIONS_URL : ONBOARDING_URL}"

@@ -28,7 +28,7 @@ export default define({
   domain: '',
   type: 'graph',
   dialog: undefined,
-  label: msg`Trackers found`,
+  label: msg`Trackers detected`,
   content: ({
     categories,
     categoryList,
@@ -58,7 +58,7 @@ export default define({
         html`
           <ui-panel-action-group>
             <ui-tooltip>
-              <span slot="content">Graph View</span>
+              <span slot="content">Simple View</span>
               <ui-panel-action
                 grouped
                 active="${type === 'graph'}"

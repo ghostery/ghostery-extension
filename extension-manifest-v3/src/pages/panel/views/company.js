@@ -28,14 +28,14 @@ export default define({
           `}
           <section
             layout="
-              grid:max|1 items:start:stretch content:start gap:1:3 
-              grow:1 
+              grid:max|1 items:start:stretch content:start gap:1:3
+              grow:1
               padding:bottom:4
             "
           >
             <ui-icon name="browser"></ui-icon>
             <div layout="column gap">
-              <ui-text type="label-s">Detected trackers:</ui-text>
+              <ui-text type="label-s">Trackers detected</ui-text>
               ${trackers.map(
                 ({ url }) =>
                   html`<ui-text type="label-xs" color="primary-700" ellipsis>
