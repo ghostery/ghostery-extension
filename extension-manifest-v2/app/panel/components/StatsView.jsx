@@ -110,7 +110,7 @@ function StatsView(props) {
 					{t('panel_stats_reset')}
 					{!demo && (
 						<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
-							<ReactSVG src="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+							<ReactSVG src="/app/images/panel/info.svg" className="stats-top-header-info-icon" />
 						</div>
 					)}
 				</span>

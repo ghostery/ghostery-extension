@@ -28,7 +28,7 @@ function Purplebox({ settingsData, toggleCheckbox, selectItem }) {
 							<input type="checkbox" id="settings-show-tracker-tally" name="show_alert" defaultChecked={settingsData.show_alert} onClick={toggleCheckbox} />
 							<label htmlFor="settings-show-tracker-tally"><span>{ t('settings_show_purple_box') }</span></label>
 							<div className="s-tooltip-down" data-g-tooltip={t('settings_show_purple_box_tooltip')}>
-								<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+								<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 							</div>
 						</div>
 					</div>

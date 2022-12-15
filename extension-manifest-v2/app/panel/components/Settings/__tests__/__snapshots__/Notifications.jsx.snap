@@ -22,7 +22,7 @@ exports[`app/panel/Settings/Notifications.jsx Snapshot tests with react-test-ren
       >
         <img
           className="s-question"
-          src="../../app/images/panel/icon-information-tooltip.svg"
+          src="/app/images/panel/icon-information-tooltip.svg"
         />
       </div>
       <div
@@ -178,7 +178,7 @@ exports[`app/panel/Settings/Notifications.jsx Snapshot tests with react-test-ren
       >
         <img
           className="s-question"
-          src="../../app/images/panel/icon-information-tooltip.svg"
+          src="/app/images/panel/icon-information-tooltip.svg"
         />
       </div>
       <div

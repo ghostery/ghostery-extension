@@ -37,7 +37,7 @@ const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
-	// devtool: 'source-maps',
+	devtool: false, // 'source-map'
 	performance: {
 		hints: false // notify of assets over 250kb
 	},
@@ -163,8 +163,12 @@ module.exports = {
 					MiniCssExtractPlugin.loader,
 					'css-loader',
 					{
+						loader: 'resolve-url-loader',
+					},
+					{
 						loader: 'sass-loader',
 						options: {
+							sourceMap: true,
 							implementation: sass,
 							sassOptions: {
 								includePaths: [
@@ -175,19 +179,15 @@ module.exports = {
 						},
 					}
 				]
-			}, {
+			},
+			{
 				test: /\.svg$/,
 				loader: 'svg-url-loader'
-			}, {
+			},
+			{
 				test: /\.(png|woff|woff2|eot|ttf)$/,
-				use: {
-					loader: 'url-loader',
-					options: {
-						limit: 200000
-					}
-				},
-				type: 'javascript/auto'
-			}
-		]
+				type: 'asset/inline',
+			},
+		],
 	}
 };

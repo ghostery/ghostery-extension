@@ -265,7 +265,7 @@ class Category extends React.Component {
 								{category.name}
 							</div>
 							<div className={globalBlocking ? (index ? 'cat-tooltip-up' : 'cat-tooltip-down') : 'hide'} data-g-tooltip={category.description} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
-								<img src="../../app/images/panel/icon-information-tooltip.svg" className="cat-question" />
+								<img src="/app/images/panel/icon-information-tooltip.svg" className="cat-question" />
 							</div>
 							<div className="counts">
 								<div className="total-count">

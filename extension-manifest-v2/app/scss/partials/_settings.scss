@@ -78,7 +78,7 @@
 			@extend .s-tooltip-down;
 			&:hover:before {
 				padding-bottom: 32px;
-				background-image: url('../../app/images/panel/click-to-play.svg');
+				background-image: url('/app/images/panel/click-to-play.svg');
 				background-repeat: no-repeat;
 				background-position: center bottom 5px;
 				background-size: 39px 22px;
@@ -160,11 +160,11 @@
 		}
 		.s-import-icon {
 			@extend .s-side-icon;
-			content: url("../../app/images/panel/import.svg");
+			content: url("/app/images/panel/import.svg");
 		}
 		.s-export-icon {
 			@extend .s-side-icon;
-			content: url("../../app/images/panel/export.svg");
+			content: url("/app/images/panel/export.svg");
 		}
 		h3 {
 			font-family: 'Open Sans', sans-serif;
@@ -243,14 +243,14 @@
 					&:checked {
 						& + label {
 							&:before {
-								content: url("../../app/images/panel/checkbox-checked.svg");
+								content: url("/app/images/panel/checkbox-checked.svg");
 							}
 						}
 					}
 					&:not(:checked) {
 						& + label {
 							&:before {
-								content: url("../../app/images/panel/checkbox.svg");
+								content: url("/app/images/panel/checkbox.svg");
 							}
 						}
 					}
@@ -259,7 +259,7 @@
 							cursor: default;
 							color: #9B9B9B;
 							&:before {
-								content: url("../../app/images/panel/checkbox-disabled.svg");
+								content: url("/app/images/panel/checkbox-disabled.svg");
 							}
 						}
 					}
@@ -363,7 +363,7 @@
 			&::before {
 				display: block;
 				content: ' ';
-				background-image: url('../../app/images/panel/plus.svg');
+				background-image: url('/app/images/panel/plus.svg');
 				background-size: 14.5px 14.5px;
 				height: 14.5px;
 				width: 14.5px;
@@ -393,7 +393,7 @@
 				background-color: $mercury;
 				.s-site-x-container {
 					@extend %pointer;
-					background: url('../../app/images/panel/icon-trust-restrict-x.svg') no-repeat center center;
+					background: url('/app/images/panel/icon-trust-restrict-x.svg') no-repeat center center;
 					background-size: calc($itemHeight/4) calc($itemHeight/4);
 					height: $itemHeight;
 					width: calc($itemHeight/4);

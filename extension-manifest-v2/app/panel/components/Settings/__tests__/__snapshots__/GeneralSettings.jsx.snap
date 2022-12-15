@@ -76,19 +76,19 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
               id="last-updated-span"
             >
               settings_last_update
-               
+
             </span>
             <span
               id="last-updated-span-value"
             >
-              
+
             </span>
             <span
               className="s-blue-header"
               id="update-now-span"
               onClick={[Function]}
             >
-               
+
             </span>
           </div>
         </div>
@@ -119,7 +119,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -135,7 +135,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
       >
         <img
           className="s-question"
-          src="../../app/images/panel/icon-information-tooltip.svg"
+          src="/app/images/panel/icon-information-tooltip.svg"
         />
       </div>
       <div
@@ -207,7 +207,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -238,7 +238,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -268,7 +268,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -354,7 +354,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
               id="last-updated-span"
             >
               settings_last_update
-               
+
             </span>
             <span
               id="last-updated-span-value"
@@ -366,7 +366,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
               id="update-now-span"
               onClick={[Function]}
             >
-               
+
               database-updated-text
             </span>
           </div>
@@ -398,7 +398,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -414,7 +414,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
       >
         <img
           className="s-question"
-          src="../../app/images/panel/icon-information-tooltip.svg"
+          src="/app/images/panel/icon-information-tooltip.svg"
         />
       </div>
       <div
@@ -486,7 +486,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -517,7 +517,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -547,7 +547,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>

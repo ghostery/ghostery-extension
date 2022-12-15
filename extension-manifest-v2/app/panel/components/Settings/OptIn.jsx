@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TOOLTIP_SVG_FILEPATH = '../../app/images/panel/icon-information-tooltip.svg';
+const TOOLTIP_SVG_FILEPATH = '/app/images/panel/icon-information-tooltip.svg';
 
 /**
  * @class Implement Opt In subview as a React component.

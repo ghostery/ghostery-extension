@@ -91,15 +91,15 @@ class Stats extends React.Component {
 	getGraphIconPath = (view) => {
 		switch (view) {
 			case 'trackersSeen':
-				return '../../app/images/panel/eye.svg';
+				return '/app/images/panel/eye.svg';
 			case 'trackersBlocked':
-				return '../../app/images/panel/blocked.svg';
+				return '/app/images/panel/blocked.svg';
 			case 'trackersAnonymized':
-				return '../../app/images/panel/anonymized.svg';
+				return '/app/images/panel/anonymized.svg';
 			case 'adsBlocked':
-				return '../../app/images/panel/adsblocked.svg';
+				return '/app/images/panel/adsblocked.svg';
 			default:
-				return '../../app/images/panel/eye.svg';
+				return '/app/images/panel/eye.svg';
 		}
 	};
 

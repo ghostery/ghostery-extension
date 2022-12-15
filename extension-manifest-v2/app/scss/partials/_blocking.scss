@@ -32,7 +32,7 @@
 	background-color: #F0F0F0;
 	background-position: right -80px;
 	background-repeat: no-repeat;
-	background-image: url('../../app/images/panel/tracker-list-background.svg');
+	background-image: url('/app/images/panel/tracker-list-background.svg');
 	position: relative;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -48,22 +48,22 @@
 	}
 	.blocking-trk.warning {
 		&.compatibility .warning-image {
-			background-image: url('../../app/images/panel/warning-compatibility.svg');
+			background-image: url('/app/images/panel/warning-compatibility.svg');
 		}
 	}
 	&.show-warnings .blocking-trk.warning:not(.blocked),
 	&.show-warnings.paused .blocking-trk.warning {
 		&.compatibility .warning-image {
-			background-image: url('../../app/images/panel/warning-compatibility-faded.svg');
+			background-image: url('/app/images/panel/warning-compatibility-faded.svg');
 		}
 	}
 	&.show-warnings {
 		.blocking-trk.warning {
 			&.insecure .warning-image {
-				background-image: url('../../app/images/panel/warning-insecure.svg');
+				background-image: url('/app/images/panel/warning-insecure.svg');
 			}
 			&.slow .warning-image {
-				background-image: url('../../app/images/panel/warning-slow.svg');
+				background-image: url('/app/images/panel/warning-slow.svg');
 			}
 			&.insecure.slow .warning-image {
 				position: relative;
@@ -72,7 +72,7 @@
 				height: 22px;
 				margin-right: 10px;
 				background-size: 22px 22px;
-				background-image: url('../../app/images/panel/warning-insecure-slow.svg');
+				background-image: url('/app/images/panel/warning-insecure-slow.svg');
 			}
 			&.smart-blocked .warning-image,
 			&.smart-unblocked .warning-image {
@@ -83,13 +83,13 @@
 	&.show-warnings .blocking-trk.warning.blocked,
 	&.show-warnings.paused .blocking-trk.warning:not(.blocked) {
 		&.insecure .warning-image {
-			background-image: url('../../app/images/panel/warning-insecure-faded.svg');
+			background-image: url('/app/images/panel/warning-insecure-faded.svg');
 		}
 		&.slow .warning-image {
-			background-image: url('../../app/images/panel/warning-slow-faded.svg');
+			background-image: url('/app/images/panel/warning-slow-faded.svg');
 		}
 		&.insecure.slow .warning-image {
-			background-image: url('../../app/images/panel/warning-insecure-slow-faded.svg');
+			background-image: url('/app/images/panel/warning-insecure-slow-faded.svg');
 		}
 	}
 	&.trusted {

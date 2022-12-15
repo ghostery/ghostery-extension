@@ -27,7 +27,7 @@ function Notifications({ settingsData, toggleCheckbox }) {
 					<h3>{ t('settings_notifications') }</h3>
 					<h5>{ t('settings_notify_me') }</h5>
 					<div className="s-tooltip-down" data-g-tooltip={t('settings_notify_me_tooltip')}>
-						<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+						<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 					</div>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
