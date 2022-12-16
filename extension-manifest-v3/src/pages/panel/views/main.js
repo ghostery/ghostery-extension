@@ -1,4 +1,4 @@
-import { define, html, store, msg, router } from 'hybrids';
+import { define, html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import Stats from '/store/stats.js';
