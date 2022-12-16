@@ -39,7 +39,7 @@ COMMON.config.default_prefs = {
 	'modules.hpnv2.enabled': false,
 	'modules.human-web-lite.enabled': false,
 	'modules.hpn-lite.enabled': false,
-	'modules.anolysis.enabled': !IS_ANDROID,
+	'modules.anolysis.enabled': false,
 	'modules.insights.enabled': true,
 };
 
@@ -82,7 +82,7 @@ common.load = async () => {
 	WTM.CHANNEL = HW_CHANNEL;
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
 
-	setPref('modules.anolysis.enabled', !IS_ANDROID);
+	setPref('modules.anolysis.enabled', false);
 
 	if (!IS_ANDROID) {
 		setPref('modules.human-web.enabled', conf.enable_human_web);
