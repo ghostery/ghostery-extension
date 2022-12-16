@@ -1569,21 +1569,32 @@ async function initializeAccount() {
 	}, 5000);
 
 	try {
-		await account.migrate();
-		lastStep = 'migrate';
+		try {
+			// try to get user session from ghostery.com cookie
+			await account.getUser();
+			lastStep = 'getUser';
+		} catch (e) {
+			// expected if the user is not logged in
+		}
 
 		if (!conf.account) {
 			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
 			if (globals.JUST_INSTALLED) {
 				setGhosteryDefaultBlocking();
 			}
+			lastStep = 'setGhosteryDefaultBlocking';
 			return;
 		}
 
-		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
+		try {
+			lastStep = 'beforeGetUserSubscriptionData';
+			await account.getUserSubscriptionData();
+			lastStep = 'afterGetUserSubscriptionData';
+		} catch (e) {
+			// expected if the user does not have active subscription
+		}
 
-		await account.getUser();
-		lastStep = 'getUser';
+		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
 
 		await account.getUserSettings();
 		lastStep = 'getUserSettings';
@@ -1592,8 +1603,6 @@ async function initializeAccount() {
 			await account.getTheme(conf.current_theme);
 			lastStep = 'getTheme';
 		}
-
-		alwaysLog('successfully signed in');
 	} catch (e) {
 		ErrorReporter.captureException(e);
 		alwaysLog(e);
@@ -1620,35 +1629,58 @@ async function recordUTMs() {
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
+ *
+ * IMPORTANT: nothing on the intialization path should be able to fail.
+ * 	It is critical for the application to enter the `globals.INIT_COMPLETE = true` state.
+ *
  * @memberOf Background
  */
 async function init() {
+	let lastStep = 'start';
+	const timeout = setTimeout(() => {
+		const error = new Error(`init timeout after step: ${lastStep}`);
+		ErrorReporter.captureException(error);
+		alwaysLog(error);
+	}, 5000);
+
 	try {
 		await confData.init();
+		lastStep = 'confData.init';
 
 		metrics.init();
+		lastStep = 'metrics.init';
 
 		initializePopup();
+		lastStep = 'initializePopup';
 
 		initializeEventListeners();
+		lastStep = 'initializeEventListeners';
 
 		initializeVersioning();
+		lastStep = 'initializeVersioning';
 
 		if (globals.JUST_UPGRADED) {
 			await purgeObsoleteData();
+			lastStep = 'purgeObsoleteData';
 			await freeSpaceIfNearQuota({ force: true }); // TODO: consider dropping "force" once all users upgraded
+			lastStep = 'freeSpaceIfNearQuota';
 		}
 
 		await initializeSearchMessageHandler();
+		lastStep = 'initializeSearchMessageHandler';
 
 		await recordUTMs();
+		lastStep = 'recordUTMs';
 
 		await initializeGhosteryModules();
+		lastStep = 'initializeGhosteryModules';
 
-		initializeAccount();
+		await initializeAccount();
+		lastStep = 'initializeAccount';
 
 		// persist Conf properties to storage only after init has completed
 		await prefsSet(globals.initProps);
+		lastStep = 'prefsSet';
 
 		globals.INIT_COMPLETE = true;
 	} catch (err) {
@@ -1656,6 +1688,8 @@ async function init() {
 		alwaysLog('Error in init()', err);
 
 		throw err;
+	} finally {
+		clearTimeout(timeout);
 	}
 }
 
