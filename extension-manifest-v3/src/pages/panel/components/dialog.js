@@ -61,8 +61,8 @@ export default define({
         onclick="${close}"
         layout="
           grid::max|1
-          width:full::full height:auto::auto 
-          margin:0 padding:0 
+          width:full::full height:auto::auto
+          margin:0 padding:0
           top:6 bottom
         "
       >
@@ -78,9 +78,9 @@ export default define({
               id="close"
               onclick="${animateOnClose}"
               href="${router.backUrl({ scrollToTop: true })}"
-              layout="block"
+              layout="block size:3 padding:0.5"
             >
-              <ui-icon name="close" layout="size:3 padding:0.5"></ui-icon>
+              <ui-icon name="close"></ui-icon>
             </a>
           </ui-action>
         </section>

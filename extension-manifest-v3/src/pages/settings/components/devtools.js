@@ -78,7 +78,7 @@ export default define({
           `
         : html`
             <ui-text
-              type="body-xs"
+              type="label-xs"
               color="gray-300"
               layout="block:right margin:top:2"
               onclick="${html.set('counter', counter + 1)}"

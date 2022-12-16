@@ -25,11 +25,9 @@ export default define({
           onclick="${html.set('closed', !closed)}"
           layout="row items:center gap padding:0 margin:0"
         >
-          <ui-icon
-            id="icon"
-            name="category-${name}"
-            layout="relative size:3 padding:0.5"
-          ></ui-icon>
+          <div id="icon" layout="block relative size:3 padding:0.5">
+            <ui-icon name="category-${name}"></ui-icon>
+          </div>
           <ui-text type="label-m">${labels.categories[name]}</ui-text>
           <slot name="header"></slot>
           <div layout="grow"></div>

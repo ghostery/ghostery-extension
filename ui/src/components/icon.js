@@ -278,11 +278,8 @@ export default define({
   tag: 'ui-icon',
   name: '',
   color: '',
-  inline: false,
   render: ({ name, color }) => html`
-    <template layout="block" layout[inline]="row inline">
-      ${icons[name] || ''}
-    </template>
+    <template layout="block">${icons[name] || ''}</template>
   `.css`
     :host {
       ${color ? `color: var(--ui-color-${color});` : ''}
@@ -290,8 +287,8 @@ export default define({
 
     svg {
       display: block;
-      width: 100%;
-      height: 100%;
+      width: inherit;
+      height: inherit;
     }
    `,
 });
