@@ -33,7 +33,7 @@ const mapStateToProps = () => ({});
  * @param  {Object} 	ownProps  ForgotPassword component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assig({ ...actions }, { resetPassword }), dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ ...actions, resetPassword }, dispatch) });
 /**
  * Connect ForgotPassword component to the Redux store.
  * @memberOf PanelContainers
