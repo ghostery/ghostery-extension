@@ -10,22 +10,27 @@ const getUA = () => {
   return ua;
 };
 
-function checkExtendedBrowserInfo() {
-  if (typeof chrome.runtime.getBrowserInfo === 'function') {
+async function getExtendedBrowserInfo() {
+  try {
     return chrome.runtime.getBrowserInfo();
+  } catch (e) {
+    return null;
   }
-  return Promise.resolve(false);
 }
 
-function checkPlatformInfo() {
+function getPlatformInfo() {
   if (typeof chrome.runtime.getPlatformInfo === 'function') {
     return new Promise((resolve) => {
       chrome.runtime.getPlatformInfo((info) => {
+        if (chrome.runtime.lastError) {
+          resolve(null);
+          return;
+        }
         resolve(info);
       });
     });
   }
-  return Promise.resolve(false);
+  return Promise.resolve(null);
 }
 
 const getOS = () => {
@@ -112,7 +117,7 @@ const getBrowserInfo = async () => {
   BROWSER_INFO.version = getVersion();
 
   // Check for Ghostery browsers
-  const browserInfo = await checkExtendedBrowserInfo();
+  const browserInfo = await getExtendedBrowserInfo();
   if (browserInfo && browserInfo.name === 'Ghostery') {
     if (BROWSER_INFO.os === 'android') {
       BROWSER_INFO.displayName = 'Ghostery Android Browser';
@@ -127,7 +132,7 @@ const getBrowserInfo = async () => {
     }
   }
 
-  const platformInfo = await checkPlatformInfo();
+  const platformInfo = await getPlatformInfo();
   if (platformInfo && platformInfo.os === 'ios' && BROWSER_INFO.os === 'mac') {
     BROWSER_INFO.os = 'ipados';
   }

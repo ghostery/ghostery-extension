@@ -155,6 +155,11 @@ class ConfData {
 			_initProperty('enable_human_web', isGhosteryBrowser);
 			_initProperty('enable_metrics', isGhosteryBrowser);
 			_initProperty('enable_abtests', isGhosteryBrowser);
+
+			// sanity checks and cleanups
+			if (!(this.version_history instanceof Array)) {
+				this.version_history = [];
+			}
 		});
 	}
 
