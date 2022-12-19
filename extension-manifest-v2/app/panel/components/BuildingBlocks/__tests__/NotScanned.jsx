@@ -16,6 +16,7 @@ import renderer from 'react-test-renderer';
 import NotScanned from '../NotScanned';
 
 // Fake the translation function to only return the translation key
+// eslint-disable-next-line no-undef
 global.t = function(str) {
 	return str;
 };
