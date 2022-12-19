@@ -181,11 +181,7 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.svg$/,
-				loader: 'svg-url-loader'
-			},
-			{
-				test: /\.(png|woff|woff2|eot|ttf)$/,
+				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
 				type: 'asset/inline',
 			},
 		],
