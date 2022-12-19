@@ -1,5 +1,5 @@
 import globals from '../classes/Globals';
-import { decodeJwt } from './common';
+import { parseJwt } from './common';
 
 let IS_FIRST_PARTY_ISOLATION_ENABLED = false;
 let IS_FIRST_PARTY_ISOLATION_TESTED = false;
@@ -102,7 +102,7 @@ export const setAllLoginCookies = ({
 		throw new Error('login response incomplete (userId missing)');
 	}
 
-	const exp = expirationDate || decodeJwt(accessToken)?.payload?.exp;
+	const exp = expirationDate || parseJwt(accessToken)?.exp;
 	if (!exp) {
 		throw new Error('login response incomplete (expiration date missing; neither in exp nor as part of the accessToken');
 	}
