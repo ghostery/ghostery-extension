@@ -84,7 +84,6 @@ class Account {
 			body: data,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
 			},
 			credentials: 'omit',
 		}).then((res) => {
@@ -275,7 +274,6 @@ class Account {
 			body: data,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
 			},
 		}).then((res) => {
 			if (res.status >= 400) {

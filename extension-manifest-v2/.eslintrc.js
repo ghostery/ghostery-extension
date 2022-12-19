@@ -14,8 +14,6 @@
 module.exports = {
 	env: {
 		browser: true,
-		es6: true,
-		commonjs: true,
 		jest: true,
 		es2022: true,
 	},
@@ -26,8 +24,6 @@ module.exports = {
 	globals: {
 		chrome: true,
 		t: true,
-		Atomics: 'readonly',
-		SharedArrayBuffer: 'readonly',
 	},
 	parserOptions: {
 		sourceType: 'module',
@@ -100,4 +96,15 @@ module.exports = {
 	settings: {
 		'import/resolver': 'webpack',
 	},
+	overrides: [
+		{
+			files: [
+				'src/**/*',
+				'app/**/*',
+			],
+			env: {
+				node: false,
+			},
+		},
+	],
 };

@@ -72,7 +72,6 @@ class Api {
 	async _sendReq(method, path, body) {
 		const headers = {
 			'Content-Type': Api.JSONAPI_CONTENT_TYPE,
-			'Content-Length': Buffer.byteLength(JSON.stringify(body)),
 		};
 		const	csrfTokenCookie = await cookiesGet({ name: 'csrf_token' });
 		if (csrfTokenCookie) {

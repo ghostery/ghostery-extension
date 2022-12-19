@@ -9,8 +9,7 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
- */
-
+*/
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as accountActions from '../AccountActions';
@@ -20,6 +19,7 @@ import {
 } from '../AccountConstants';
 
 // Fake the translation function to only return the translation key
+// eslint-disable-next-line no-undef
 global.t = function(str) {
 	return str;
 };

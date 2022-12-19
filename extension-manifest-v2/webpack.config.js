@@ -42,7 +42,7 @@ module.exports = {
 		hints: false // notify of assets over 250kb
 	},
 	resolve: {
-		mainFields: ['main'],
+		mainFields: ['browser', 'main'],
 		symlinks: false, // allow module resolution with `npm link`
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
 		fallback: {
