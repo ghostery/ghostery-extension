@@ -1,4 +1,15 @@
-import { define, html, msg, router } from 'hybrids';
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html, msg, router } from 'hybrids';
 
 const MENU = [
   {
@@ -29,24 +40,23 @@ const MENU = [
   },
   {},
   // {
-  //   icon: 'shield',
+  //   icon: 'shield-menu',
   //   label: msg`Unprotected sites`,
   //   href: chrome.runtime.getURL('/pages/settings/index.html'),
   // },
   {
     icon: 'settings',
-    label: msg`Settings`,
+    label: msg`Ghostery settings`,
     href: chrome.runtime.getURL('/pages/settings/index.html'),
   },
   {
-    icon: 'info',
+    icon: 'info-menu',
     label: msg`About`,
     href: 'https://www.ghostery.com/',
   },
 ];
 
-export default define({
-  tag: 'gh-panel-menu-view',
+export default {
   content: () => html`
     <template layout="grid height:600px">
       <gh-panel-menu>
@@ -74,4 +84,4 @@ export default define({
       </gh-panel-menu>
     </template>
   `,
-});
+};

@@ -8,8 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
+import { define } from 'hybrids';
 import '@ghostery/ui/settings';
 
-import './components/devtools.js';
-import './views/main.js';
+define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
+  root: ['components', 'views'],
+  prefix: 'gh-settings',
+});

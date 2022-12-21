@@ -39,9 +39,16 @@ export default define({
     label,
   }) => html`
     <template layout="column gap:2">
-      <div layout="row items:center gap">
-        <div layout="grow">
+      <div layout="row items:center gap:0.5">
+        <div layout="row gap grow">
           <ui-text type="label-m">${label}</ui-text>
+          <ui-tooltip wrap>
+            <span slot="content" layout="block width:200px">
+              Mind that not all listed entities are trackers, that is not all of
+              them collect personal data
+            </span>
+            <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
+          </ui-tooltip>
         </div>
         <ui-tooltip>
           <span slot="content">WhoTracks.Me Statistical Report</span>
@@ -92,6 +99,12 @@ export default define({
             layout="shrink:0 size:12 margin:top"
           ></ui-tracker-wheel>
           <div layout="column grow">
+            ${!categoryList.length &&
+            html`
+              <ui-text type="body-s" color="gray-600" layout="grow row center">
+                No trackers detected
+              </ui-text>
+            `}
             ${categoryList.map(
               ([category, count]) => html`
                 <ui-panel-category

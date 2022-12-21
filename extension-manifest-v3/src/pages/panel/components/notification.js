@@ -1,11 +1,21 @@
-import { define, html } from 'hybrids';
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html } from 'hybrids';
 
 function close(host) {
   host.parentNode.removeChild(host);
 }
 
-export default define({
-  tag: 'gh-panel-notification',
+export default {
   icon: '',
   render: ({ icon }) => html`
     <template layout="row gap:2 items:stretch padding:1.5">
@@ -20,7 +30,7 @@ export default define({
         <button
           id="close"
           layout="
-            row center self:start shrink:0 
+            row center self:start shrink:0
             size:3
             margin:right:-1 margin:top:-1 padding:0
           "
@@ -45,7 +55,7 @@ export default define({
     #close {
       cursor: pointer;
       border: none;
-      color: var(--ui-color-gray-500);
+      color: var(--ui-color-gray-600);
       background: var(--ui-color-white);
       border-radius: 12px;
     }
@@ -56,4 +66,4 @@ export default define({
       }
     }
   `,
-});
+};

@@ -16,6 +16,7 @@ const timeouts = new WeakMap();
 export default define({
   tag: 'ui-tooltip',
   autohide: 2000,
+  wrap: false,
   show: {
     value: false,
     connect: (host) => () => clearTimeout(timeouts.get(host)),
@@ -78,6 +79,10 @@ export default define({
       box-shadow: 0px 4px 12px rgba(32, 44, 68, 0.2);
       border-radius: 4px;
       white-space: nowrap;  
+    }
+
+    :host([wrap]) #tooltip ui-text {
+      white-space: normal;
     }
   `,
 });

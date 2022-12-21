@@ -1,0 +1,12 @@
+diff --git a/node_modules/vite/dist/node/chunks/dep-6305614c.js b/node_modules/vite/dist/node/chunks/dep-6305614c.js
+index 194adb1..d5ebd1f 100644
+--- a/node_modules/vite/dist/node/chunks/dep-6305614c.js
++++ b/node_modules/vite/dist/node/chunks/dep-6305614c.js
+@@ -44900,7 +44900,6 @@ function resolveChokidarOptions(config, options) {
+     const resolvedWatchOptions = {
+         ignored: [
+             '**/.git/**',
+-            '**/node_modules/**',
+             '**/test-results/**',
+             out.escapePath(config.cacheDir) + '/**',
+             ...(Array.isArray(ignored) ? ignored : [ignored]),

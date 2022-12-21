@@ -1,4 +1,15 @@
-import { define, html } from 'hybrids';
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html } from 'hybrids';
 
 function close(host) {
   host.parentNode.removeChild(host);
@@ -16,8 +27,7 @@ const slide = {
   },
 };
 
-export default define({
-  tag: 'gh-panel-alert',
+export default {
   type: '',
   icon: 'alert-info',
   autoclose: {
@@ -58,7 +68,7 @@ export default define({
   },
   render: ({ icon, autoclose }) => html`
     <template
-      layout="grid:max|1|max items:center gap:0.5"
+      layout="grid:max|1|max items:center gap:0.5 height:5 padding:0:1.5"
       layout[slide]="absolute inset bottom:auto"
     >
       <ui-icon name="${icon}"></ui-icon>
@@ -76,8 +86,6 @@ export default define({
       border: 1px solid var(--ui-color-gray-200);
       box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.15);
       border-radius: 30px;
-      padding: 0 12px;
-      height: 40px;
       --ui-text-color-heading: currentColor;
       --ui-text-color-anchor: currentColor;
     }
@@ -105,4 +113,4 @@ export default define({
       color: inherit;
     }
   `,
-});
+};

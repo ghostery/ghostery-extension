@@ -31,7 +31,7 @@ export default define({
           <ui-text type="label-m">${labels.categories[name]}</ui-text>
           <slot name="header"></slot>
           <div layout="grow"></div>
-          <ui-icon id="arrow" name="arrow-down" color="gray-500"></ui-icon>
+          <ui-icon id="arrow" name="arrow-down" color="gray-600"></ui-icon>
         </button>
       </ui-action>
       <div id="content" layout="margin:left:4">

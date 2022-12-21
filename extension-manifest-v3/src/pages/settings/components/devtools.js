@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, store } from 'hybrids';
+import { html, store } from 'hybrids';
 import Options from '/store/options.js';
 
 const VERSION = chrome.runtime.getManifest().version;
@@ -49,8 +49,7 @@ function clearStorage(host, event) {
   );
 }
 
-export default define({
-  tag: 'gh-settings-devtools',
+export default {
   counter: 0,
   content: ({ counter }) => html`
     <template layout="block">
@@ -89,4 +88,4 @@ export default define({
           `}
     </template>
   `,
-});
+};

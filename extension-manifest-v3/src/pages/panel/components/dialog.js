@@ -1,4 +1,15 @@
-import { html, define, router } from 'hybrids';
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html, router } from 'hybrids';
 
 const slide = {
   keyframes: { transform: ['translateY(100%)', 'translateY(0)'] },
@@ -45,8 +56,7 @@ function animateOnClose(host, event) {
   );
 }
 
-export default define({
-  tag: 'gh-panel-dialog',
+export default {
   dialog: {
     get: ({ render }) => render().querySelector('dialog'),
     observe(host, el) {
@@ -78,7 +88,7 @@ export default define({
               id="close"
               onclick="${animateOnClose}"
               href="${router.backUrl({ scrollToTop: true })}"
-              layout="block size:3 padding:0.5"
+              layout="size:3 padding:0.5"
             >
               <ui-icon name="close"></ui-icon>
             </a>
@@ -111,16 +121,9 @@ export default define({
     }
 
     #close  {
-      color: var(--ui-color-gray-500);
+      color: var(--ui-color-gray-600);
       background: var(--ui-color-gray-200);
       border-radius: 50%;
     }
-
-    #content ::slotted(hr) {
-      margin: 0;
-      height: 0px;
-      border: none;
-      border-bottom: 1px solid var(--ui-color-gray-200);
-    }
   `,
-});
+};

@@ -1,30 +1,59 @@
-import { define, html, router, store } from 'hybrids';
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html, router, store } from 'hybrids';
+import { categories } from '@ghostery/ui/labels';
 import Stats, { Company } from '/store/stats';
 
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
 }
 
-export default define({
+export default {
   [router.connect]: { dialog: true },
   tag: 'gh-panel-company-view',
   company: store(Company),
   stats: store(Stats),
   trackers: ({ company, stats }) =>
     store.ready(stats) && stats.trackers.filter((t) => t.company === company),
-  content: ({ company, trackers }) => html`
+  trackersByCategory: ({ trackers }) => [
+    ...trackers.reduce((acc, t) => {
+      const list = acc.get(t.category) || [];
+      list.push(t);
+      return acc.set(t.category, list);
+    }, new Map()),
+  ],
+  content: ({ company, trackers, trackersByCategory }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <ui-text slot="header" type="label-l">${company.name}</ui-text>
         ${trackers &&
         html`
-          <ui-text slot="header" type="body-s" color="gray-500">
-            ${trackers.length} trackers
+          <ui-text slot="header" type="body-s" color="gray-600">
+            trackers: ${trackers.length}
           </ui-text>
           ${company.description &&
           html`
-            <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
-            <hr />
+            <div layout="column gap:0.5">
+              <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
+              <ui-text type="label-xs" color="primary-700">
+                <a
+                  href="https://www.whotracks.me/trackers/${company.id}.html"
+                  target="_blank"
+                >
+                  Read more on WhoTracks.me
+                </a>
+              </ui-text>
+            </div>
+            <gh-panel-line></gh-panel-line>
           `}
           <section
             layout="
@@ -33,23 +62,45 @@ export default define({
               padding:bottom:4
             "
           >
-            <ui-icon name="browser"></ui-icon>
+            <ui-icon name="shield"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">Trackers detected</ui-text>
-              ${trackers.map(
-                ({ url }) =>
-                  html`<ui-text type="label-xs" color="primary-700" ellipsis>
-                    ${url}
-                  </ui-text>`,
-              )}
+              <div layout="column gap:2">
+                ${trackersByCategory.map(
+                  ([category, list]) => html`
+                    <div layout="column gap">
+                      <div layout="column gap:0.5">
+                        <ui-text type="label-s" color="gray-600">
+                          ${categories[category]}
+                        </ui-text>
+
+                        <gh-panel-line></gh-panel-line>
+                      </div>
+                      ${list.map(
+                        ({ url }) =>
+                          html`
+                            <div
+                              layout="row content:space-between items:center"
+                            >
+                              <ui-text type="body-s" color="gray-600" ellipsis>
+                                ${url}
+                              </ui-text>
+                              <gh-panel-copy content="${url}"></gh-panel-copy>
+                            </div>
+                          `,
+                      )}
+                    </div>
+                  `,
+                )}
+              </div>
             </div>
             ${company.website &&
             html`
               <ui-icon name="globe"></ui-icon>
               <div layout="column gap">
-                <ui-text type="label-xs">Website</ui-text>
+                <ui-text type="label-s">Website</ui-text>
                 <ui-text
-                  type="label-xs"
+                  type="body-s"
                   color="primary-700"
                   ellipsis
                   layout="padding margin:-1"
@@ -64,11 +115,11 @@ export default define({
             html`
               <ui-icon name="privacy"></ui-icon>
               <div layout="column gap">
-                <ui-text type="label-xs">
+                <ui-text type="label-s">
                   <!-- | Panel Company -->Privacy policy
                 </ui-text>
                 <ui-text
-                  type="label-xs"
+                  type="body-s"
                   color="primary-700"
                   ellipsis
                   layout="padding margin:-1"
@@ -83,22 +134,25 @@ export default define({
             html`
               <ui-icon name="mail"></ui-icon>
               <div layout="column gap">
-                <ui-text type="label-xs">Contact</ui-text>
-                <ui-text
-                  type="label-xs"
-                  color="primary-700"
-                  ellipsis
-                  layout="padding margin:-1"
-                >
-                  <a
-                    href="${company.contact.startsWith('http')
-                      ? ''
-                      : 'mailto:'}${company.contact}"
-                    target="_blank"
+                <ui-text type="label-s">Contact</ui-text>
+                <div layout="row content:space-between items:center">
+                  <ui-text
+                    type="body-s"
+                    color="primary-700"
+                    ellipsis
+                    layout="padding margin:-1"
                   >
-                    ${company.contact}
-                  </a>
-                </ui-text>
+                    <a
+                      href="${company.contact.startsWith('http')
+                        ? ''
+                        : 'mailto:'}${company.contact}"
+                      target="_blank"
+                    >
+                      ${company.contact}
+                    </a>
+                  </ui-text>
+                  <gh-panel-copy content="${company.contact}"></gh-panel-copy>
+                </div>
               </div>
             `}
           </section>
@@ -106,4 +160,4 @@ export default define({
       </gh-panel-dialog>
     </template>
   `,
-});
+};

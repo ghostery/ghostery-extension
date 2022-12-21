@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, dispatch, html, msg } from 'hybrids';
+import { dispatch, html, msg } from 'hybrids';
 
 const PAUSE_TYPES = [
   {
@@ -63,8 +63,7 @@ function simulateClickOnEnter(host, event) {
   }
 }
 
-export default define({
-  tag: 'gh-panel-pause',
+export default {
   paused: false,
   pauseType: 1,
   pauseList: false,
@@ -124,7 +123,7 @@ export default define({
               >
                 <ui-text type="label-m" color="gray-900">${label}</ui-text>
                 ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
-                <ui-text type="body-s" color="gray-500" layout="area:2">
+                <ui-text type="body-s" color="gray-600" layout="area:2">
                   ${description}
                 </ui-text>
               </button>
@@ -279,4 +278,4 @@ export default define({
       color: var(--ui-color-primary-700);
     }
   `,
-});
+};

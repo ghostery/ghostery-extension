@@ -13,6 +13,7 @@
     "./settings": "./src/modules/settings/index.js",
     "./trackers-preview": "./src/modules/trackers-preview/index.js",
     "./categories": "./src/utils/categories.js",
+    "./labels": "./src/utils/labels.js",
     "./wheel": "./src/utils/wheel.js"
   },
   "scripts": {

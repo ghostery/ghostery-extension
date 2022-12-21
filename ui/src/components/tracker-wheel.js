@@ -103,10 +103,6 @@ export default define({
       </svg>
     </template>
   `.css`
-    :host {
-      -webkit-tap-highlight-color: transparent;
-    }
-  
     path {
       fill: none;
       stroke-width: 3;
@@ -122,7 +118,7 @@ export default define({
       color: var(--ui-color-gray-900);
       font-family: var(--ui-font-family-label);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
     }
    `,
 });

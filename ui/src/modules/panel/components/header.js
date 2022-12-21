@@ -20,7 +20,7 @@ export default define({
       <div layout="row center width:3">
         <slot name="icon"></slot>
       </div>
-      <ui-text type="label-m"><slot></slot></ui-text>
+      <ui-text type="label-m" ellipsis><slot></slot></ui-text>
       <div layout="row center width::3 gap">
         <slot name="actions"></slot>
       </div>

@@ -14,18 +14,10 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: local('Inter'), url('../fonts/Inter-Bold.ttf');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 html {
   /* Variables */
   --ui-color-gray-900: #202c44;
-  --ui-color-gray-500: #6d778e;
+  --ui-color-gray-600: #49556e;
   --ui-color-gray-400: #9ba3b4;
   --ui-color-gray-300: #c3cad9;
   --ui-color-gray-200: #dfe3eb;
@@ -38,8 +30,10 @@ html {
   --ui-color-primary-200: #daf3ff;
   --ui-color-primary-100: #ebf7fd;
 
+  --ui-color-success-700: #008d00;
   --ui-color-success-500: #0ab00a;
 
+  --ui-color-danger-700: #c80f11;
   --ui-color-danger-500: #f13436;
   --ui-color-danger-100: #ffecec;
 

@@ -10,7 +10,6 @@
  */
 
 import { define, html, msg, router, dispatch } from 'hybrids';
-import Home from './home.js';
 
 function closeIframe(host) {
   dispatch(host, 'closeiframe', {
@@ -36,7 +35,7 @@ export default define({
       </div>
       <div layout="grid:2 gap:2">
         <ui-button type="outline" size="small">
-          <a href="${router.url(Home)}">Back</a>
+          <a href="${router.backUrl()}">Back</a>
         </ui-button>
         <ui-button type="primary" size="small">
           <button onclick="${closeIframe}">OK</button>

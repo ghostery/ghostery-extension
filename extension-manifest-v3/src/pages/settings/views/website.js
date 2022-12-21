@@ -1,6 +1,5 @@
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'gh-settings-website',
+export default {
   content: () => html``,
-});
+};

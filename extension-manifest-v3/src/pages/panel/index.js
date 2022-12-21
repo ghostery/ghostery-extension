@@ -8,17 +8,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { define } from 'hybrids';
 
 import '@ghostery/ui/panel';
 
-import './components/alert.js';
-import './components/button.js';
-import './components/dialog.js';
-import './components/menu.js';
-import './components/menu-item.js';
-import './components/notification.js';
-import './components/options.js';
-import './components/options-item.js';
-import './components/pause.js';
-
-import './panel.js';
+define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
+  root: ['components', 'views'],
+  prefix: 'gh-panel',
+});

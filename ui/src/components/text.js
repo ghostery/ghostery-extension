@@ -58,7 +58,7 @@ export default define({
       color: inherit;
     }
 
-    ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; }
+    ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; -webkit-tap-highlight-color: transparent; }
     ::slotted(a:hover, a:focus-visible) { color: var(--ui-text-color-anchor, inherit); }
 
     @media (hover: hover) and (pointer: fine) {
