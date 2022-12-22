@@ -14,13 +14,9 @@ import { define, html } from 'hybrids';
 export default define({
   tag: 'ui-button',
   type: 'primary',
-  size: 'medium',
+  size: '',
   disabled: false,
-  render: ({ size }) => html`
-    <ui-text type="button-${size === 'small' ? 's' : 'm'}">
-      <slot></slot>
-    </ui-text>
-  `.css`
+  render: ({ size }) => html`<slot></slot>`.css`
       :host {
         box-sizing: border-box;
         display: grid;
@@ -28,30 +24,41 @@ export default define({
         height: 48px;
         border-radius: 24px;
         white-space: nowrap;
+        transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
+        font: var(--ui-font-button-${size === 'small' ? 's' : 'm'});
+        text-transform: uppercase;
       }
 
       :host([type="outline"]) {
         background: var(--ui-color-white);
         color: var(--ui-color-gray-700);
         border: 1px solid var(--ui-color-gray-200);
-      }
-
-      :host([type="outline"]:hover) {
-        color: var(--ui-color-primary-500);
-        border-color: var(--ui-color-primary-500);
+        --ui-button-color-hover: var(--ui-color-primary-500);
       }
 
       :host([type="primary"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
-      }
-
-      :host([type="primary"]:hover) {
-        background: var(--ui-color-primary-700);
+        --ui-button-color-hover: var(--ui-color-primary-700);
       }
 
       :host([type="secondary"]) {
         background: var(--ui-color-gray-700);
+      }
+
+      @media (hover: hover) and (pointer: fine) { 
+        :host([type="outline"]:hover) {
+          color: var(--ui-button-color-hover);
+          border-color: var(--ui-button-color-hover);
+        }
+
+        :host([type="primary"]:hover) {
+          background: var(--ui-button-color-hover);
+        }
+      }
+
+      :host(:active) {
+        opacity: 0.6;
       }
 
       :host([size="small"]) {
@@ -83,6 +90,11 @@ export default define({
         color: inherit;
         font: inherit;
         text-transform: inherit;
+        text-decoration: none;
+      }
+
+      :host([size="small"]) ::slotted(*) {
+        padding: 0px 12px;
       }
    `,
 });

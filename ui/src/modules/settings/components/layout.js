@@ -1,3 +1,14 @@
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 import { html } from 'hybrids';
 
 export default {
@@ -73,7 +84,7 @@ export default {
       padding: 6px 4px 4px;
       text-align: center;
       --ui-color-nav: currentColor;
-      transition: color 0.2s;
+      transition: color 0.2s, opacity 0.2s;
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -81,6 +92,10 @@ export default {
         color: var(--ui-color-primary-700);
         --ui-color-nav: currentColor;
       }
+    }
+
+    nav ::slotted(a:active) {
+      opacity: 0.6;
     }
 
     nav ::slotted(a.active) {

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router } from 'hybrids';
+import { define, html, msg, router, dispatch } from 'hybrids';
 
 export default define({
   tag: 'ui-panel-stats',
@@ -26,7 +26,14 @@ export default define({
     ),
   trackers: undefined,
   domain: '',
-  type: 'graph',
+  type: {
+    value: 'graph',
+    observe(host, value, lastValue) {
+      if (lastValue && value !== lastValue) {
+        dispatch(host, 'typechange');
+      }
+    },
+  },
   dialog: undefined,
   label: msg`Trackers detected`,
   content: ({

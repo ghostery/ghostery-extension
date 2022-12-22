@@ -86,6 +86,11 @@ async function togglePause(host, event) {
   host.querySelector('#gh-panel-alerts').appendChild(wrapper);
 }
 
+function setStatsType(host, event) {
+  const { type } = event.target;
+  store.set(host.options, { panel: { statsType: type } });
+}
+
 export default {
   [router.connect]: { stack: [Navigation, Company] },
   options: store(Options),
@@ -176,7 +181,9 @@ export default {
               categories="${stats.categories}"
               trackers="${stats.byCategory}"
               dialog="${Company}"
-              layout="margin:2 height::188px"
+              type="${options.panel.statsType}"
+              layout="margin:2 height::188px layer:101"
+              ontypechange="${setStatsType}"
             >
             </ui-panel-stats>
           `}

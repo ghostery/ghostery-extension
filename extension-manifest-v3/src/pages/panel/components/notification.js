@@ -32,7 +32,7 @@ export default {
           layout="
             row center self:start shrink:0
             size:3
-            margin:right:-1 margin:top:-1 padding:0
+            margin:right:-1 margin:top:-1
           "
           onclick="${close}"
         >
@@ -53,8 +53,6 @@ export default {
     }
 
     #close {
-      cursor: pointer;
-      border: none;
       color: var(--ui-color-gray-600);
       background: var(--ui-color-white);
       border-radius: 12px;

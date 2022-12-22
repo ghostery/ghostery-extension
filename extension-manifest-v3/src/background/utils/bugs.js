@@ -52,7 +52,10 @@ export function getTrackerFromUrl(url, origin) {
         tracker.company = companiesDb[tracker.company_id];
       }
 
-      const company = tracker.company;
+      const company = tracker.company || {
+        id: tracker.id,
+        name: tracker.name,
+      };
 
       return {
         name: tracker.name,

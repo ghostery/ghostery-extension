@@ -23,7 +23,7 @@ export default define({
         <button
           id="header"
           onclick="${html.set('closed', !closed)}"
-          layout="row items:center gap padding:0 margin:0"
+          layout="row items:center gap overflow padding margin:-1"
         >
           <div id="icon" layout="block relative size:3 padding:0.5">
             <ui-icon name="category-${name}"></ui-icon>
@@ -51,14 +51,6 @@ export default define({
     :host(:last-of-type) {
       border-radius: 0 0 8px 8px;
       border-bottom: 1px solid var(--ui-color-gray-200);
-    }
-
-    #header {
-      cursor: pointer;
-      background: none;
-      appearance: none;
-      border: none;
-      overflow: hidden;
     }
 
     @media (hover: hover) and (pointer: fine) {

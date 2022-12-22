@@ -16,3 +16,22 @@ define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
   root: ['components', 'views'],
   prefix: 'gh-panel',
 });
+
+/*
+  Safari extension popup has a bug, which focuses visibly the first element on the page
+  when the popup is opened. This is a workaround to remove the focus.
+*/
+window.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+
+  body.tabIndex = 0;
+  body.focus();
+
+  body.addEventListener(
+    'focus',
+    () => {
+      body.removeAttribute('tabIndex');
+    },
+    { once: true },
+  );
+});

@@ -19,7 +19,7 @@ export default define({
     </template>
   `.css`
     ::slotted(*) {
-      transition: opacity 0.2s, color 0.2s, background-color 0.2s;
+      transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
@@ -30,6 +30,15 @@ export default define({
   
     ::slotted(*:active) {
       opacity: 0.6;
+    }
+
+    ::slotted(button) {
+      appearance: none;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
     }
   `,
 });

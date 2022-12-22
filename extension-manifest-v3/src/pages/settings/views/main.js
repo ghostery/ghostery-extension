@@ -11,12 +11,14 @@
 
 import { html, router } from 'hybrids';
 
+import Options from '/store/options.js';
+
 import Privacy from './privacy.js';
-import Website from './website.js';
+import Websites from './websites.js';
 import Whotracksme from './whotracksme.js';
 
 export default {
-  stack: router([Privacy, Website, Whotracksme]),
+  stack: router([Privacy, Websites, Whotracksme]),
   content: ({ stack }) => html`
     <template layout="contents">
       <ui-settings-layout>
@@ -28,14 +30,15 @@ export default {
           <ui-icon name="shield-menu" color="nav" layout="size:3"></ui-icon>
           Privacy Protection
         </a>
-        <a
-          href="${router.url(Website, { scrollToTop: true })}"
-          class="${{ active: router.active(Website) }}"
+        ${!!Options.paused &&
+        html`<a
+          href="${router.url(Websites, { scrollToTop: true })}"
+          class="${{ active: router.active(Websites) }}"
           slot="nav"
         >
           <ui-icon name="settings" color="nav" layout="size:3"></ui-icon>
           Website Settings
-        </a>
+        </a>`}
         <a
           href="${router.url(Whotracksme, { scrollToTop: true })}"
           class="${{ active: router.active(Whotracksme) }}"

@@ -33,6 +33,9 @@ const Options = {
   wtmSerpReport: true,
   terms: false,
   onboarding: { done: false, shownAt: 0 },
+  panel: {
+    statsType: 'graph',
+  },
   [store.connect]: {
     async get() {
       const { options = {} } = await chrome.storage.local.get(['options']);

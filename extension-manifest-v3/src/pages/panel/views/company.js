@@ -53,7 +53,7 @@ export default {
                 </a>
               </ui-text>
             </div>
-            <gh-panel-line></gh-panel-line>
+            <ui-line></ui-line>
           `}
           <section
             layout="
@@ -74,7 +74,7 @@ export default {
                           ${categories[category]}
                         </ui-text>
 
-                        <gh-panel-line></gh-panel-line>
+                        <ui-line></ui-line>
                       </div>
                       ${list.map(
                         ({ url }) =>
@@ -85,7 +85,7 @@ export default {
                               <ui-text type="body-s" color="gray-600" ellipsis>
                                 ${url}
                               </ui-text>
-                              <gh-panel-copy content="${url}"></gh-panel-copy>
+                              <gh-panel-copy text="${url}"></gh-panel-copy>
                             </div>
                           `,
                       )}
@@ -151,7 +151,10 @@ export default {
                       ${company.contact}
                     </a>
                   </ui-text>
-                  <gh-panel-copy content="${company.contact}"></gh-panel-copy>
+                  ${!company.contact.startsWith('http') &&
+                  html`
+                    <gh-panel-copy text="${company.contact}"></gh-panel-copy>
+                  `}
                 </div>
               </div>
             `}

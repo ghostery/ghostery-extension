@@ -112,7 +112,7 @@ export default {
       html`
         <section
           id="type-list"
-          layout="column absolute layer top:full left:2 right:2 margin:top:-20px"
+          layout="column absolute layer:102 top:full left:2 right:2 margin:top:-20px"
         >
           ${PAUSE_TYPES.map(
             ({ value, label, description }) => html`

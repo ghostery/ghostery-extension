@@ -9,9 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { define, html } from 'hybrids';
 
-export default {
+export default define({
+  tag: 'ui-line',
   color: 'gray-200',
   render: ({ color }) => html`
     <template layout="block height:1px shrink:0"></template>
@@ -20,4 +21,4 @@ export default {
       background: var(--ui-color-${color});
     }
   `,
-};
+});
