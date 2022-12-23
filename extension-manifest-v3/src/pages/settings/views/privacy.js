@@ -9,10 +9,35 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store } from 'hybrids';
+import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import assets from '../assets/index.js';
+
+import Preview from './preview.js';
+
+const PREVIEWS = {
+  'ad_blocking': {
+    src: assets.ad_blocking,
+    title: msg`Ad-Blocking`,
+    description: msg`Declutters the web for you/eliminates ads on the websites you visit, offering a calm, safe and private internet.`,
+  },
+  'anti_tracking': {
+    src: assets.anti_tracking,
+    title: msg`Anti-Tracking`,
+    description: msg`Ghostery’s AI driven Anti-Tracking technology prevents
+    various tracking techniques (should we mention them to make
+    an impression and educate?) securing your digital privacy
+    while browsing the web.`,
+  },
+  'never_consent': {
+    src: assets.never_consent,
+    title: msg`Never Consent`,
+    description: msg`Removes intrusive cookie popups and expresses dissent to
+    online tracking. You can browse the web without worrying
+    about cookie consent dialogues or privacy violations.`,
+  },
+};
 
 function toggleNeverConsent(host) {
   store.set(host.options, {
@@ -50,8 +75,8 @@ export default {
                 times.
               </ui-text>
             </div>
-            <div layout="row gap:2" layout@768px="gap:5">
-              <a href="#">
+            <div layout="row items:start gap:2" layout@768px="gap:5">
+              <a href="${router.url(Preview, PREVIEWS['ad_blocking'])}">
                 <ui-settings-help-image layout="size:12:8 shrink:0">
                   <img src="${assets.ad_blocking_small}" alt="Ad-Blocking" />
                 </ui-settings-help-image>
@@ -73,8 +98,8 @@ export default {
                 ></ui-settings-toggle>
               </div>
             </div>
-            <div layout="row gap:2" layout@768px="gap:5">
-              <a href="#">
+            <div layout="row items:start gap:2" layout@768px="gap:5">
+              <a href="${router.url(Preview, PREVIEWS['anti_tracking'])}">
                 <ui-settings-help-image layout="size:12:8 shrink:0">
                   <img
                     src="${assets.anti_tracking_small}"
@@ -101,8 +126,8 @@ export default {
                 ></ui-settings-toggle>
               </div>
             </div>
-            <div layout="row gap:2" layout@768px="gap:5">
-              <a href="#">
+            <div layout="row items:start gap:2" layout@768px="gap:5">
+              <a href="${router.url(Preview, PREVIEWS['never_consent'])}">
                 <ui-settings-help-image layout="size:12:8 shrink:0">
                   <img
                     src="${assets.never_consent_small}"

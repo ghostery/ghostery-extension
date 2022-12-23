@@ -182,7 +182,7 @@ export default {
               trackers="${stats.byCategory}"
               dialog="${Company}"
               type="${options.panel.statsType}"
-              layout="margin:2 height::188px layer:101"
+              layout="margin:2 height::170px layer:101"
               ontypechange="${setStatsType}"
             >
             </ui-panel-stats>

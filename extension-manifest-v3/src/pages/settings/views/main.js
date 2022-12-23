@@ -16,9 +16,10 @@ import Options from '/store/options.js';
 import Privacy from './privacy.js';
 import Websites from './websites.js';
 import Whotracksme from './whotracksme.js';
+import Preview from './preview.js';
 
 export default {
-  stack: router([Privacy, Websites, Whotracksme]),
+  stack: router([Privacy, Websites, Whotracksme, Preview]),
   content: ({ stack }) => html`
     <template layout="contents">
       <ui-settings-layout>

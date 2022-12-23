@@ -9,10 +9,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store } from 'hybrids';
+import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import assets from '../assets/index.js';
+
+import Preview from './preview.js';
+
+const PREVIEWS = {
+  'wtm_wheel': {
+    src: assets['wtm_wheel'],
+    title: msg`Trackers Wheel`,
+    description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
+  },
+  'trackers_preview': {
+    src: assets['trackers_preview'],
+    title: msg`Trackers Preview`,
+    description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
+  },
+};
 
 export default {
   options: store(Options),
@@ -48,7 +63,7 @@ export default {
             </ui-text>
           </div>
           <div layout="row gap:2" layout@768px="gap:5">
-            <a href="#">
+            <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
               <ui-settings-help-image layout="size:12:8 shrink:0">
                 <img src="${assets.wtm_wheel_small}" alt="Trackers WheelP" />
               </ui-settings-help-image>
@@ -83,7 +98,7 @@ export default {
             </ui-text>
           </div>
           <div layout="row gap:2" layout@768px="gap:5">
-            <a href="#">
+            <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
               <ui-settings-help-image layout="size:12:8 shrink:0">
                 <img
                   src="${assets.trackers_preview_small}"

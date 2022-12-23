@@ -22,15 +22,11 @@ define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
   when the popup is opened. This is a workaround to remove the focus.
 */
 window.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-
-  body.tabIndex = 0;
-  body.focus();
-
-  body.addEventListener(
+  document.body.focus();
+  document.body.addEventListener(
     'focus',
     () => {
-      body.removeAttribute('tabIndex');
+      document.body.removeAttribute('tabIndex');
     },
     { once: true },
   );
