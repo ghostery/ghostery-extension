@@ -12,8 +12,7 @@
 import { define } from 'hybrids';
 
 // Globals
-import '../../index.js';
-import '../../styles/panel.css';
+import '../panel/index.js';
 
 // Components
 define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {

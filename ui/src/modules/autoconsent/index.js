@@ -10,8 +10,7 @@
  */
 
 // Global components
-import '../../index.js';
-import '../../styles/pages.css';
+import '../pages/index.js';
 
 import './components/card.js';
 import './components/header.js';

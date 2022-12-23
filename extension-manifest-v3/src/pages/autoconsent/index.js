@@ -10,5 +10,4 @@
  */
 
 import '@ghostery/ui/autoconsent';
-
 import './autoconsent.js';

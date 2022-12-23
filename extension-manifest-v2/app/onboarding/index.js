@@ -1,6 +1,7 @@
 import { define, html } from 'hybrids';
 
 import '@ghostery/ui/onboarding';
+import './styles.scss';
 
 function complete() {
 	chrome.runtime.sendMessage({

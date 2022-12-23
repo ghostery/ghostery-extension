@@ -10,15 +10,7 @@
  */
 
 // Global components
-import '../pages/index.js';
+import '../../index.js';
 
-// Components
-import './components/badge.js';
-import './components/dialog.js';
-import './components/checkbox.js';
-import './components/protection.js';
-import './components/terms.js';
-import './components/toggle.js';
-
-// Root
-import './onboarding.js';
+// Styles
+import './styles.css';

@@ -9,9 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Globals
+// Global components
 import '../../index.js';
-import '../../styles/panel.css';
+
+// Styles
+import './styles.css';
 
 // Components
 import './components/action-group.js';

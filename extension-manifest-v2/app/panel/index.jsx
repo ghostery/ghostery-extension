@@ -31,6 +31,8 @@ import Help from './components/Help';
 import About from './components/About';
 import Stats from './containers/StatsContainer';
 
+import '../scss/panel.scss';
+
 const store = configureStore();
 /**
  * @var {ReactComponent} 	Ghostery	Top-level component for Ghostery panel.

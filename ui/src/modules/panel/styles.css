@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Inter';
-  src: local('Inter'), url('../fonts/Inter-Regular.ttf');
+  src: local('Inter'), url('./assets/Inter-Regular.ttf');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: local('Inter'), url('../fonts/Inter-SemiBold.ttf');
+  src: local('Inter'), url('./assets/Inter-SemiBold.ttf');
   font-weight: 600;
   font-style: normal;
   font-display: swap;

@@ -27,7 +27,7 @@ export default define({
           layout="column center gap:2 margin absolute inset layer:1"
         >
           <ui-text type="label-m" color="error-500" layout="block:center">
-            <ui-icon name="warning"></ui-icon><br />
+            <ui-icon name="warning" layout="block inline"></ui-icon><br />
             Additional Permissions Required
           </ui-text>
           <ui-text class="button" type="label-m" color="white">

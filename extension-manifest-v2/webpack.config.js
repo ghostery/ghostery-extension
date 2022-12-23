@@ -66,18 +66,14 @@ module.exports = {
 		onboarding: [`${ONBOARDING_DIR}/index.js`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
-		trackers_preview_popup: [`${TRACKERS_PREVIEW_DIR}/index.js`],
+		trackers_preview: [`${TRACKERS_PREVIEW_DIR}/index.js`],
 		trackers_preview_content_script: [`${CONTENT_SCRIPTS_DIR}/trackers-preview.js`],
-		autoconsent_popup: [`${AUTOCONSENT_DIR}/index.js`],
+		autoconsent: [`${AUTOCONSENT_DIR}/index.js`],
 
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
 		licenses: [`${SASS_DIR}/licenses.scss`],
-		onboarding_styles: [`${SASS_DIR}/onboarding.scss`],
-		panel: [`${SASS_DIR}/panel.scss`],
-		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
-		ghostery_ui: [`${SASS_DIR}/ghostery_ui.scss`],
 		trackers_preview_content_script_styles: [`${SASS_DIR}/trackers-preview_content_script.scss`],
 	},
 	output: {

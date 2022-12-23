@@ -10,5 +10,30 @@
  */
 
 import '@ghostery/ui/trackers-preview';
+import { define, html } from 'hybrids';
+import {
+  getStats,
+  close,
+  disable,
+  updateIframeHeight,
+} from '@whotracksme/webextension-packages/packages/trackers-preview/page_scripts';
 
-import './trackers-preview.js';
+const domain = new URLSearchParams(window.location.search).get('domain');
+const stats = getStats(domain);
+
+updateIframeHeight();
+
+define({
+  tag: 'gh-trackers-preview',
+  content: () =>
+    html`
+      <template layout="block">
+        <ui-trackers-preview
+          stats="${stats}"
+          domain="${domain}"
+          onclose="${close}"
+          ondisable="${disable}"
+        ></ui-trackers-preview>
+      </template>
+    `,
+});

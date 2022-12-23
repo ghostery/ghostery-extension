@@ -14,7 +14,7 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
-import '@ghostery/ui';
+import '@ghostery/ui/pages';
 
 import Tooltip from '../../shared-components/Tooltip';
 import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
