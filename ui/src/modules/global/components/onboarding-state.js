@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-onboarding-state',
+export default {
   disabled: false,
   href: '',
   render: ({ disabled, href }) => html`
@@ -68,4 +67,4 @@ export default define({
       z-index: 0;
     }
   `,
-});
+};

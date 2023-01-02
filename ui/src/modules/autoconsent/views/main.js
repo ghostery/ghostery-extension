@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router } from 'hybrids';
+import { html, msg, router } from 'hybrids';
 
 import Home from './home.js';
 
@@ -38,7 +38,7 @@ function closeIframe(host, event) {
   });
 })();
 
-export default define({
+export default {
   tag: 'ui-autoconsent',
   stack: router([Home]),
   categories: {
@@ -82,4 +82,4 @@ export default define({
       `}
     </template>
   `,
-});
+};

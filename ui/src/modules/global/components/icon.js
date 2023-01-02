@@ -9,7 +9,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
+
+export default {
+  name: '',
+  color: '',
+  render: ({ name, color }) => html`
+    <template layout="block">${icons[name] || ''}</template>
+  `.css`
+    :host {
+      ${color ? `color: var(--ui-color-${color});` : ''}
+    }
+
+    svg {
+      display: block;
+      width: inherit;
+      height: inherit;
+    }
+   `,
+};
 
 // prettier-ignore
 const icons = {
@@ -298,22 +316,3 @@ const icons = {
   </svg>
   `,
  };
-
-export default define({
-  tag: 'ui-icon',
-  name: '',
-  color: '',
-  render: ({ name, color }) => html`
-    <template layout="block">${icons[name] || ''}</template>
-  `.css`
-    :host {
-      ${color ? `color: var(--ui-color-${color});` : ''}
-    }
-
-    svg {
-      display: block;
-      width: inherit;
-      height: inherit;
-    }
-   `,
-});

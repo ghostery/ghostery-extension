@@ -9,9 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, svg, define } from 'hybrids';
-import { getCategoryColor } from '../utils/categories.js';
-import * as labels from '../utils/labels.js';
+import { html, svg } from 'hybrids';
+import { getCategoryColor } from '../../../utils/categories.js';
+import * as labels from '../../../utils/labels.js';
 
 function updateTooltipPosition(host, event) {
   const { clientX, clientY } = event;
@@ -28,8 +28,7 @@ function count(key) {
   return (acc, current) => (current === key ? acc + 1 : acc);
 }
 
-export default define({
-  tag: 'ui-tracker-wheel',
+export default {
   categories: undefined,
   data: ({ categories = [] }) => {
     if (!categories.length) {
@@ -121,4 +120,4 @@ export default define({
       font-weight: 600;
     }
    `,
-});
+};

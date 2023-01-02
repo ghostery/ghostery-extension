@@ -8,16 +8,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { define } from 'hybrids';
+import { define, localize } from 'hybrids';
 
-// Global components
-import '../global/index.js';
+// Localize wrapper for chrome.i18n
+if (typeof chrome === 'object' && chrome.i18n) {
+  localize(chrome.i18n.getMessage.bind(chrome.i18n), { format: 'chrome.i18n' });
+}
 
-// Styles
-import './styles.css';
-
-// Components
+// Define components
 define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
-  prefix: 'ui-panel',
+  prefix: 'ui',
   root: 'components',
 });

@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-page-layout',
+export default {
   render: () => html`
     <template layout="column height::100% width::375px">
       <header layout="row center self:stretch gap:2 height:100px">
@@ -35,4 +34,4 @@ export default define({
        background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
      }
    `,
-});
+};

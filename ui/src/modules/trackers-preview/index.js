@@ -84,11 +84,11 @@ export default define({
      :host {
        background-color: #F8F8F8;
      }
- 
+
      main {
        background-color: white;
      }
- 
+
      footer {
        border-top: 1px solid rgba(0, 0, 0, 0.1);
      }

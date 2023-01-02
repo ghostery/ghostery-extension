@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-panel-action',
+export default {
   active: false,
   grouped: false,
   render: () => html`
@@ -48,4 +47,4 @@ export default define({
       ::slotted(*:hover) { color: var(--ui-color-primary-700); }
     }
   `,
-});
+};

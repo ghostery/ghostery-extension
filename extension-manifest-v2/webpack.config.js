@@ -137,6 +137,11 @@ module.exports = {
 				}
 			},
 			{
+				test: /\.js$/,
+				include: /node_modules\/@ghostery\/ui/,
+				use: [{ loader: 'import-meta-loader' }],
+			},
+			{
 				test: /\.(js|jsx)$/,
 				include: [APP_DIR, SRC_DIR],
 				exclude: /node_modules/,

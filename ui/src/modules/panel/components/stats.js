@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router, dispatch } from 'hybrids';
+import { html, msg, router, dispatch } from 'hybrids';
 
-export default define({
-  tag: 'ui-panel-stats',
+export default {
   categories: undefined,
   categoryList: ({ categories = [] }) =>
     Object.entries(
@@ -167,4 +166,4 @@ export default define({
       `}
     </template>
   `,
-});
+};

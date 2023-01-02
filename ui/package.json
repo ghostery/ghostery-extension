@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.3.3",
   "description": "",
-  "type": "module",
   "exports": {
     "./autoconsent": "./src/modules/autoconsent/index.js",
     "./autoconsent/iframe": "./src/modules/autoconsent/iframe.js",

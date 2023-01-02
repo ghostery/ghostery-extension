@@ -9,12 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 import { getCategoryColor } from '../../../utils/categories.js';
 import * as labels from '../../../utils/labels.js';
 
-export default define({
-  tag: 'ui-panel-category',
+export default {
   name: '',
   count: 0,
   render: ({ name, count }) => html`
@@ -45,4 +44,4 @@ export default define({
       border-bottom: none;
     }
   `,
-});
+};

@@ -10,7 +10,7 @@
  */
 
 // Global components
-import '../../index.js';
+import '../global/index.js';
 
 // Styles
 import './styles.css';

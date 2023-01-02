@@ -1,7 +1,6 @@
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-text',
+export default {
   type: 'body-m',
   mobileType: '',
   color: '',
@@ -71,4 +70,4 @@ export default define({
     :host([type^="body"]) ::slotted(a) { font-weight: 500; }
     :host([underline]) ::slotted(a) { text-decoration: underline; }
   `,
-});
+};

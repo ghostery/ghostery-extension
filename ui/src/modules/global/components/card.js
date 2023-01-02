@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-card',
+export default {
   type: '',
   render: ({ type }) => html`
     <template layout="column">
@@ -55,4 +54,4 @@ export default define({
       margin-bottom: 24px;
     }
     `,
-});
+};

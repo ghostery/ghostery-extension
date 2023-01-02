@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router, dispatch } from 'hybrids';
+import { html, msg, router, dispatch } from 'hybrids';
 
 function closeIframe(host) {
   dispatch(host, 'closeiframe', {
@@ -18,8 +18,7 @@ function closeIframe(host) {
   });
 }
 
-export default define({
-  tag: 'ui-autoconsent-confirm-view',
+export default {
   enabled: false,
   content: ({ enabled }) => html`
     <template layout="column margin:3 gap:4">
@@ -43,4 +42,4 @@ export default define({
       </div>
     </template>
   `,
-});
+};

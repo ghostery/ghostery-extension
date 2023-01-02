@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-panel-action-group',
+export default {
   render: () => html`<template layout="row padding:2px gap:2px">
     <slot></slot>
   </template>`.css`
@@ -22,4 +21,4 @@ export default define({
       border-radius: 8px;
     }
   `,
-});
+};

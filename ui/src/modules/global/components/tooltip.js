@@ -9,12 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
 const timeouts = new WeakMap();
 
-export default define({
-  tag: 'ui-tooltip',
+export default {
   autohide: 2000,
   wrap: false,
   show: {
@@ -85,4 +84,4 @@ export default define({
       white-space: normal;
     }
   `,
-});
+};
