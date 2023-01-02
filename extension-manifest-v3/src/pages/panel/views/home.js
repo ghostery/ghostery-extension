@@ -132,7 +132,7 @@ export default {
             `}
         <section
           id="gh-panel-alerts"
-          layout="fixed inset:1 bottom:auto layer:100"
+          layout="fixed inset:1 bottom:auto layer:200"
         ></section>
         <section layout="column margin:7:0:1">
           ${store.error(stats) &&
@@ -182,7 +182,7 @@ export default {
               trackers="${stats.byCategory}"
               dialog="${Company}"
               type="${options.panel.statsType}"
-              layout="margin:2 height::170px layer:101"
+              layout="margin:2 height::170px"
               ontypechange="${setStatsType}"
             >
             </ui-panel-stats>

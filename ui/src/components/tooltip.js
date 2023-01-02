@@ -58,7 +58,7 @@ export default define({
         onmouseenter="${html.set('show', true)}"
         onmouseleave="${html.set('show', false)}"
       ></slot>
-      <div id="tooltip" layout="absolute layer bottom:full left:50%" hidden>
+      <div id="tooltip" layout="absolute bottom:full left:50% layer:200" hidden>
         <ui-text
           type="label-s"
           layout="block:center margin:bottom:0.5 padding:0.5:1"
