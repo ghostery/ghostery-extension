@@ -78,6 +78,9 @@ export default {
       color: var(--ui-color-gray-900);
       text-decoration: none;
       font: var(--ui-font-label-xs);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
       flex: 1 1 0;
       max-width: 165px;
       border-radius: 6px;

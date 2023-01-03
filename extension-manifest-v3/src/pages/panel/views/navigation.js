@@ -9,14 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, router } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
+
+import Account from '/store/account.js';
 
 const MENU = [
-  {
-    icon: 'user',
-    label: msg`Sign in`,
-    href: 'https://signon.ghostery.com/',
-  },
   {
     icon: 'heart',
     label: msg`Become a contributor`,
@@ -52,7 +49,8 @@ const MENU = [
 ];
 
 export default {
-  content: () => html`
+  account: store(Account),
+  content: ({ account }) => html`
     <template layout="grid height:600px">
       <gh-panel-menu>
         <ui-panel-header slot="header">
@@ -63,6 +61,24 @@ export default {
             </a>
           </ui-action>
         </ui-panel-header>
+        <ui-text>
+          <a
+            href="${store.ready(account)
+              ? 'https://account.ghostery.com/'
+              : 'https://signon.ghostery.com/'}"
+            target="_blank"
+            layout="block margin:1:2"
+          >
+            <gh-panel-menu-item icon="user">
+              ${store.ready(account) &&
+              html`
+                <div>${account.name}</div>
+                <ui-text color="gray-600">${account.email}</ui-text>
+              `}
+              ${store.error(account) && html`Sign in`}
+            </gh-panel-menu-item>
+          </a>
+        </ui-text>
         ${MENU.map(({ icon, label, href }) =>
           label
             ? html`

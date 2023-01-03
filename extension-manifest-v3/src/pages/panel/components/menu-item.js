@@ -16,7 +16,9 @@ export default {
   render: ({ icon }) => html`
     <template layout="grid:max|1|max items:center:start gap:2">
       <ui-icon name="${icon}" layout="size:3"></ui-icon>
-      <ui-text type="label-m"><slot></slot></ui-text>
+      <ui-text type="label-m" ellipsis layout="column width::0:full">
+        <slot></slot>
+      </ui-text>
       <ui-icon name="arrow-right"></ui-icon>
     </template>
   `.css`
@@ -28,6 +30,12 @@ export default {
 
     ui-icon {
       color: var(--ui-color-gray-600);
+    }
+
+    ui-text ::slotted(*) {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     @media (hover: hover) and (pointer: fine) {
