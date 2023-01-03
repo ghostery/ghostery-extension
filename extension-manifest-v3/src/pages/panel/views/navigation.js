@@ -39,11 +39,6 @@ const MENU = [
     href: 'https://www.ghostery.com/support',
   },
   {},
-  // {
-  //   icon: 'shield-menu',
-  //   label: msg`Unprotected sites`,
-  //   href: chrome.runtime.getURL('/pages/settings/index.html'),
-  // },
   {
     icon: 'settings',
     label: msg`Ghostery settings`,

@@ -19,13 +19,23 @@ import { getTrackerFromUrl } from './utils/bugs.js';
 import tabStats from './utils/map.js';
 
 const setIcon = throttle((tabId, stats) => {
-  const categories = stats.trackers.map((t) => t.category);
-  const imageData = getOffscreenImageData(128, categories);
+  if (!stats) {
+    (chrome.browserAction || chrome.action).setIcon({
+      tabId,
+      path: {
+        16: '/assets/images/icon19_off.png',
+        32: '/assets/images/icon38_off.png',
+      },
+    });
+  } else {
+    const categories = stats.trackers.map((t) => t.category);
+    const imageData = getOffscreenImageData(128, categories);
 
-  (chrome.browserAction || chrome.action).setIcon({
-    tabId,
-    imageData,
-  });
+    (chrome.browserAction || chrome.action).setIcon({
+      tabId,
+      imageData,
+    });
+  }
 }, 250);
 
 async function updateTabStats(msg, sender) {
@@ -45,9 +55,11 @@ async function updateTabStats(msg, sender) {
 
   tabStats.set(tabId, stats);
 
-  const { trackerWheel } = await store.resolve(Options);
+  const { trackerWheel, paused } = await store.resolve(Options);
 
-  if (trackerWheel && stats.trackers.length > 0) {
+  if (paused && paused.some(({ id }) => id === stats.domain)) {
+    setIcon(tabId, null);
+  } else if (trackerWheel && stats.trackers.length > 0) {
     setIcon(tabId, stats);
   }
 }
