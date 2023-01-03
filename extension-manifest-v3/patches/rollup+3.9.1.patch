@@ -1,8 +1,8 @@
 diff --git a/node_modules/rollup/dist/es/shared/rollup.js b/node_modules/rollup/dist/es/shared/rollup.js
-index 15e05d0..b3053f9 100644
+index 4a97d2c..7696867 100644
 --- a/node_modules/rollup/dist/es/shared/rollup.js
 +++ b/node_modules/rollup/dist/es/shared/rollup.js
-@@ -15449,7 +15449,7 @@ class Chunk {
+@@ -15521,7 +15521,7 @@ class Chunk {
                  : relative(this.inputBase, idWithoutExtension);
          }
          else {
