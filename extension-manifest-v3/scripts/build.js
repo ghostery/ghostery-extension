@@ -40,7 +40,9 @@ const config = {
     assetsDir: '',
     emptyOutDir: false,
     minify: false,
-    polyfillModulePreload: false,
+    modulePreload: {
+      polyfill: false,
+    },
     watch: argv.watch ? {} : null,
   },
 };
@@ -140,7 +142,7 @@ function mapPaths(paths) {
   }, {});
 }
 
-await build({
+build({
   ...config,
   build: {
     ...config.build,
@@ -173,7 +175,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
     shelljs.cp(path, resolve(options.outDir, id));
   } else {
     // build content scripts
-    await build({
+    build({
       ...config,
       build: {
         ...config.build,
