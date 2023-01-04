@@ -18,6 +18,57 @@ export const DNR_RULES_LIST =
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 
+async function migrateOptions() {
+  const options = {};
+
+  try {
+    // Only Chrome uses version 3 in the manifest,
+    // so it is a good condition to check if we are in Chrome
+    if (manifest.version === 3) {
+      const storage = await chrome.storage.local.get(null);
+
+      // Proceed if the storage contains data from v2
+      if ('version_history' in storage) {
+        options.dnrRules = {};
+        options.dnrRules.ads = storage.enable_ad_block || false;
+        options.dnrRules.tracking = storage.enable_anti_tracking || false;
+        options.dnrRules.annoyances = storage.enable_autoconsent || false;
+
+        options.onboarding = {
+          done: storage.setup_complete || storage.setup_skip || false,
+          shownAt: storage.setup_timestamp || 0,
+        };
+        options.terms = storage.setup_complete || false;
+        options.wtmSerpReport = storage.enable_wtm_serp_report || false;
+
+        options.autoconsent = {
+          all: !storage.autoconsent_whitelist,
+          allowed: storage.autoconsent_whitelist || [],
+          disallowed: storage.autoconsent_blacklist || [],
+        };
+
+        // TODO: 'site_whitelist', 'site_blacklist', etc. (generally user's custom rules)
+        // TODO: migrate account when it is implemented for v3
+
+        await Promise.all([
+          chrome.storage.local.clear(),
+          indexedDB
+            .databases()
+            .then((dbs) =>
+              Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name))),
+            ),
+        ]);
+      }
+    }
+  } catch (e) {
+    console.error(`Error while migrating data`, e);
+    return options;
+  }
+
+  await chrome.storage.local.set({ options });
+  return options;
+}
+
 const Options = {
   dnrRules: DNR_RULES_LIST.reduce(
     (all, rule) => ({ ...all, [rule]: false }),
@@ -38,7 +89,8 @@ const Options = {
   },
   [store.connect]: {
     async get() {
-      const { options = {} } = await chrome.storage.local.get(['options']);
+      const { options = await migrateOptions() } =
+        await chrome.storage.local.get(['options']);
 
       // Migrate `trackerWheelDisabled` to `trackerWheel`
       // INFO: `trackerWheel` option introduced in v9.7.0
