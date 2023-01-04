@@ -9,14 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router } from 'hybrids';
+import { define, html, msg, router, dispatch } from 'hybrids';
 import Home from './home.js';
 
-function closeIframe(reload) {
-  window.parent.postMessage(
-    { type: 'ghostery-autoconsent-close-iframe', reload },
-    '*',
-  );
+function closeIframe(host) {
+  dispatch(host, 'closeiframe', {
+    bubbles: true,
+    detail: { reload: host.enabled },
+  });
 }
 
 export default define({
@@ -24,22 +24,22 @@ export default define({
   enabled: false,
   content: ({ enabled }) => html`
     <template layout="column margin:3 gap:4">
-      <div layout="column items:center gap margin:0:7">
-        <ui-text type="display-s" color="gray-800">
+      <div layout="column items:center gap margin:0:5">
+        <ui-text type="display-s" layout="block:center">
           ${enabled
             ? msg`Never-Consent is Enabled`
             : msg`Never-Consent is Disabled`}
         </ui-text>
-        <ui-text type="body-s" color="gray-800" layout="block:center">
+        <ui-text layout="block:center">
           ${msg.html`You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>.`}
         </ui-text>
       </div>
       <div layout="grid:2 gap:2">
-        <ui-button type="outline-light" size="small">
+        <ui-button type="outline" size="small">
           <a href="${router.url(Home)}">Back</a>
         </ui-button>
         <ui-button type="primary" size="small">
-          <button onclick="${() => closeIframe(enabled)}">OK</button>
+          <button onclick="${closeIframe}">OK</button>
         </ui-button>
       </div>
     </template>

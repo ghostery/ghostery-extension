@@ -309,7 +309,10 @@ const _filter = (state, action) => {
  * @param  {Object} action 		action which provides data
  * @return {Object}        		updated state clone
  */
-export default (state = initialState, action) => {
+export default (state = initialState, action = null) => {
+	if (!action) {
+		return state;
+	}
 	switch (action.type) {
 		case GET_SETTINGS_DATA: {
 			return { ...state, ...action.data };

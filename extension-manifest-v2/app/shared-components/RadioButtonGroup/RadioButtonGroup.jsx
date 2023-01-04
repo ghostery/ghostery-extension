@@ -19,7 +19,7 @@ import RadioButton from '../RadioButton';
  * @class Implements a radio button group
  * @memberof PanelBuildingBlocks
  */
-const RadioButtonGroup = ({ indexClicked, handleItemClick, labels }) => {
+function RadioButtonGroup({ indexClicked, handleItemClick, labels }) {
 	const labelsEl = labels.map((label, index) => (
 		<div
 			key={label}
@@ -49,7 +49,7 @@ const RadioButtonGroup = ({ indexClicked, handleItemClick, labels }) => {
 			</div>
 		</div>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 RadioButtonGroup.propTypes = {

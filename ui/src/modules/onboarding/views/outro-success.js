@@ -14,25 +14,33 @@ import { define, html, msg } from 'hybrids';
 import protection from '../illustrations/protection.js';
 
 const FAQ_URL = 'https://www.ghostery.com/faq';
+const SUPPORT_EMAIL = `support@ghostery.com`;
 
 export default define({
   tag: 'ui-onboarding-outro-success-view',
   content: () => html`
-    <ui-onboarding-layout>
-      <ui-onboarding-card>
+    <template layout="block">
+      <ui-card>
         <div slot="illustration">${protection}</div>
-        <ui-text type="display-xl"> You're all set, Ghosterian! </ui-text>
-        <ui-text type="body-xl">
-          Ghostery is set up to stop trackers in their tracks and protect your
-          privacy while browsing!
-        </ui-text>
-        <ui-onboarding-card type="highlight">
-          <ui-text type="body-xl"> Any questions? Anytime! </ui-text>
-          <ui-text color="gray-300">
-            ${msg.html`Check out <a href="${FAQ_URL}" target="_blank">FAQs</a> or drop us a line at <a href="mailto:support@ghostery.com">support@ghostery.com</a>. We'll be more than happy to talk to you!`}
+        <section layout="block:center column gap:2" layout@768px="margin:0:6">
+          <ui-text type="display-l">You're all set, Ghosterian!</ui-text>
+          <ui-text type="body-xl" color="gray-800">
+            Ghostery is set up to stop trackers in their tracks and protect your
+            privacy while browsing!
           </ui-text>
-        </ui-onboarding-card>
-      </ui-onboarding-card>
-    </ui-onboarding-layout>
+        </section>
+        <ui-card type="highlight" layout="margin:top:5">
+          <section layout="column gap">
+            <ui-text type="label-xl">Any questions? Anytime!</ui-text>
+            <ui-text type="body-l">
+              ${msg.html`
+                Check out <a href="${FAQ_URL}" target="_blank">FAQs</a> or drop us a line at <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>.
+                <br/> We'll be more than happy to talk to you!
+              `}
+            </ui-text>
+          </section>
+        </ui-card>
+      </ui-card>
+    </template>
   `,
 });

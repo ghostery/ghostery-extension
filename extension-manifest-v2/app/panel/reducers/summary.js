@@ -135,7 +135,10 @@ const _updateSitePolicy = (state, action) => {
  * @param  {Object} action 		action which provides data
  * @return {Object}        		updated state clone
  */
-export default (state = initialState, action) => {
+export default (state = initialState, action = null) => {
+	if (!action) {
+		return state;
+	}
 	switch (action.type) {
 		case UPDATE_SUMMARY_DATA:
 		case UPDATE_COMMON_MODULE_DATA: {

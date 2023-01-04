@@ -15,6 +15,7 @@ export default define({
   tag: 'ui-button',
   type: 'primary',
   size: 'medium',
+  disabled: false,
   render: ({ size }) => html`
     <ui-text type="button-${size === 'small' ? 's' : 'm'}">
       <slot></slot>
@@ -25,30 +26,23 @@ export default define({
         display: grid;
         grid: 1fr / 1fr;
         height: 48px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
         border-radius: 24px;
-        color: white;
+        white-space: nowrap;
       }
 
-      :host([type^="outline"]) {
-        background: transparent;
-        border: 2px solid var(--ui-color-gray-600);
+      :host([type="outline"]) {
+        background: var(--ui-color-white);
+        color: var(--ui-color-gray-700);
+        border: 1px solid var(--ui-color-gray-200);
       }
 
       :host([type="outline"]:hover) {
-        border-color: white;
-      }
-      
-      :host([type="outline-light"]) {
-        color: var(--ui-color-gray-700);
-        border-color: var(--ui-color-gray-300);
-      }
-
-      :host([type="outline-light"]:hover) {
-        border-color: var(--ui-color-gray-400);
+        color: var(--ui-color-primary-500);
+        border-color: var(--ui-color-primary-500);
       }
 
       :host([type="primary"]) {
+        color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
       }
 
@@ -64,10 +58,11 @@ export default define({
         height: 40px;
       }
 
-      :host([type^="outline"]) ::slotted(*) {
-        margin: -2px;
-        height: calc(100% + 4px);
-        width: calc(100% + 4px);
+      :host([disabled]) {
+        background: var(--ui-color-gray-200);
+        color: var(--ui-color-gray-400);
+        border-color: var(--ui-color-gray-200);
+        pointer-events: none;
       }
 
       ::slotted(*) {

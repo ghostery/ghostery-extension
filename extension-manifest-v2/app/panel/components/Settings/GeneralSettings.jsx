@@ -131,13 +131,13 @@ class GeneralSettings extends React.Component {
 									<span>{ t('settings_show_patterns') }</span>
 								</label>
 								<div className="s-tooltip-up" data-g-tooltip={t('settings_show_patterns_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+									<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 								</div>
 							</div>
 						</div>
 						<h3 className="s-special">{ t('settings_highlight_trackers') }</h3>
 						<div className="s-tooltip-down-click-to-play-img" data-g-tooltip={t('settings_highlight_trackers_tooltip')}>
-							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+							<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
@@ -161,7 +161,7 @@ class GeneralSettings extends React.Component {
 									<span>{ t('settings_individual_trackers') }</span>
 								</label>
 								<div className="s-tooltip-up" data-g-tooltip={t('settings_individual_trackers_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+									<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 								</div>
 							</div>
 						</div>
@@ -172,7 +172,7 @@ class GeneralSettings extends React.Component {
 									<span>{ t('settings_allow_trackers') }</span>
 								</label>
 								<div className="s-tooltip-up" data-g-tooltip={t('settings_allow_trackers_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+									<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 								</div>
 							</div>
 						</div>
@@ -183,7 +183,7 @@ class GeneralSettings extends React.Component {
 									<span>{ t('settings_show_redirect_tracking_dialogs') }</span>
 								</label>
 								<div className="s-tooltip-up" data-g-tooltip={t('settings_show_redirect_tracking_dialogs_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+									<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 								</div>
 							</div>
 						</div>

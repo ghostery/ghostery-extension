@@ -9,11 +9,9 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
- */
-
+*/
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as msg from '../../panel/utils/msg';
 import * as accountActions from '../AccountActions';
 import {
 	LOGIN_FAIL, LOGIN_SUCCESS,
@@ -21,6 +19,7 @@ import {
 } from '../AccountConstants';
 
 // Fake the translation function to only return the translation key
+// eslint-disable-next-line no-undef
 global.t = function(str) {
 	return str;
 };
@@ -53,32 +52,17 @@ const serverErr = {
 	],
 };
 
-msg.sendMessageInPromise = jest.fn((messageType, data) => new Promise((resolve, reject) => {
-	switch (messageType) {
-		case 'account.getUserSettings':
-			resolve(settings);
-			break;
-		case 'account.getUser':
-			resolve(user);
-			break;
-		case 'account.login':
-			if (data.email === 'valid.account') {
-				resolve(responseSuccess);
-			} else if (data.email === 'invalid.account') {
-				resolve(invalidAccountErr);
-			} else if (data.email === 'server.err') {
-				resolve(serverErr);
-			} else {
-				resolve(responseSuccess);
-			}
-			break;
-		default:
-			reject();
-	}
-}));
-
 describe('app/panel/actions/AccountActions.js', () => {
-	test('getUserSettings action should resolve correctly', () => {
+	beforeEach(() => {
+		chrome.runtime.sendMessage.flush();
+	});
+
+	afterAll(() => {
+		chrome.flush();
+	});
+
+	test('account.getUserSettings action should resolve correctly', () => {
+		chrome.runtime.sendMessage.withArgs({ name: 'account.getUserSettings', message: undefined, origin: '' }).yields(settings);
 		const initialState = {};
 		const store = mockStore(initialState);
 		const expectedPayload = { payload: { settings }, type: GET_USER_SETTINGS_SUCCESS };
@@ -89,10 +73,9 @@ describe('app/panel/actions/AccountActions.js', () => {
 				expect(actions).toEqual([expectedPayload]);
 			});
 	});
-});
 
-describe('app/panel/actions/AccountActions.js', () => {
-	test('accountGetUser action should resolve correctly', () => {
+	test('account.getUser action should resolve correctly', () => {
+		chrome.runtime.sendMessage.withArgs({ name: 'account.getUser', message: undefined, origin: '' }).yields(user);
 		const initialState = {};
 		const store = mockStore(initialState);
 		const expectedPayload = { payload: user, type: GET_USER_SUCCESS };
@@ -104,7 +87,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 			});
 	});
 
-	test('accountLogin action valid login should resolve correctly', () => {
+	test('account.login action valid login should resolve correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 		const email = 'valid.account';
@@ -117,13 +100,14 @@ describe('app/panel/actions/AccountActions.js', () => {
 				}
 			}
 		];
+		chrome.runtime.sendMessage.withArgs({ name: 'account.login', message: { email, password }, origin: '' }).yields(responseSuccess);
 		return store.dispatch(accountActions.login(email, password)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual(expectedPayload);
 		});
 	});
 
-	test('accountLogin action invalid account err should fail correctly', () => {
+	test('account.login action invalid account err should fail correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 		const email = 'invalid.account';
@@ -134,6 +118,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 				payload: invalidAccountErr
 			}
 		];
+		chrome.runtime.sendMessage.withArgs({ name: 'account.login', message: { email, password }, origin: '' }).yields(invalidAccountErr);
 		return store.dispatch(accountActions.login(email, password))
 			.then(() => {
 				const actions = store.getActions();
@@ -141,7 +126,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 			});
 	});
 
-	test('accountLogin action server err should fail correctly', () => {
+	test('account.login action server err should fail correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 		const email = 'server.err';
@@ -152,6 +137,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 				payload: serverErr
 			}
 		];
+		chrome.runtime.sendMessage.withArgs({ name: 'account.login', message: { email, password }, origin: '' }).yields(serverErr);
 		return store.dispatch(accountActions.login(email, password))
 			.then(() => {
 				const actions = store.getActions();

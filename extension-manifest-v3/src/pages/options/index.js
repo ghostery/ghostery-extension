@@ -12,4 +12,5 @@
 import '@ghostery/ui';
 import '@ghostery/ui/css';
 
-import './ghostery-options.js';
+import './devtools.js';
+import './options.js';

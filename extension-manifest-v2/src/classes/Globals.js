@@ -99,8 +99,6 @@ class Globals {
 			'alert_bubble_pos',
 			'alert_bubble_timeout',
 			'alert_expanded',
-			'autoconsent_whitelist',
-			'autoconsent_blacklist',
 			'cliqz_module_whitelist',
 			'current_theme',
 			'enable_ad_block',
@@ -158,15 +156,6 @@ class Globals {
 			abtests: {},
 			cmp_data: {}
 		};
-	}
-
-	/**
-	 * Checks if the current browser is Ghostery
-	 * @return {Promise}
-	 */
-	async isGhosteryBrowser() {
-		await this.BROWSER_INFO_READY;
-		return this.BROWSER_INFO.name.startsWith('ghostery');
 	}
 }
 

@@ -1,12 +1,12 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "9.6.1",
+  "version": "9.7.1",
   "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
     "download-dnr-lists": "node scripts/download-dnr-lists.js",
-    "postinstall": "npm run download-cosmetics && npm run download-dnr-lists",
+    "postinstall": "patch-package && npm run download-cosmetics && npm run download-dnr-lists",
     "build": "node scripts/build.js",
     "build.chromium": "npm run build -- --target chromium",
     "build.safari": "npm run build -- --target safari",
@@ -29,24 +29,25 @@
   },
   "license": "MPL-2.0",
   "devDependencies": {
-    "eslint": "^8.6.0",
+    "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "node-fetch": "^3.2.3",
+    "patch-package": "^6.5.0",
     "prettier": "^2.6.1",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "vendor-copy": "^3.0.1",
-    "vite": "^2.8.2",
-    "web-ext": "^6.8.0"
+    "vite": "^3.2.0",
+    "web-ext": "^7.3.1"
   },
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@duckduckgo/autoconsent": "^2.1.2",
+    "@duckduckgo/autoconsent": "^3.0.1",
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
-    "@whotracksme/webextension-packages": "^0.4.3",
+    "@whotracksme/webextension-packages": "^2.1.0",
     "hybrids": "^8.1.0",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"

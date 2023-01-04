@@ -14,6 +14,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
+
 import {
 	NotScanned,
 	DonutGraph,
@@ -132,7 +133,7 @@ class OverviewTab extends React.Component {
 		callGlobalAction({
 			actionName: 'handleTrustButtonClick',
 		});
-	}
+	};
 
 	handleRestrictButtonClick = () => {
 		const { callGlobalAction } = this.props;
@@ -140,7 +141,7 @@ class OverviewTab extends React.Component {
 		callGlobalAction({
 			actionName: 'handleRestrictButtonClick',
 		});
-	}
+	};
 
 	handlePauseButtonClick = (time) => {
 		const { summary, callGlobalAction } = this.props;
@@ -153,7 +154,7 @@ class OverviewTab extends React.Component {
 				time: typeof time === 'number' ? time * 60000 : 0,
 			},
 		});
-	}
+	};
 
 	handleCommonFeatureClick = ({ feature, status }) => {
 		const { callGlobalAction } = this.props;
@@ -165,10 +166,10 @@ class OverviewTab extends React.Component {
 				type: feature,
 			},
 		});
-	}
+	};
 
 	_renderNavigationLinks() {
-		const { clickAccount, clickSettings } = this.props;
+		const { clickAccount, clickSettings, panel: { setup_complete } } = this.props;
 		const accountIcon = (
 			<svg width="30" height="30" viewBox="3 2 26 16">
 				<g fill="none" fillRule="nonzero">
@@ -188,7 +189,7 @@ class OverviewTab extends React.Component {
 			</svg>
 		);
 
-		return (
+		return setup_complete ? (
 			<div className="OverviewTab__NavigationLinks full-width">
 				<div className="row align-justify align-middle">
 					<div className="OverviewTab__NavigationLink" onClick={clickAccount}>
@@ -199,7 +200,7 @@ class OverviewTab extends React.Component {
 					</div>
 				</div>
 			</div>
-		);
+		) : null;
 	}
 
 	_renderDonut() {
@@ -350,6 +351,7 @@ class OverviewTab extends React.Component {
 	}
 
 	render() {
+		const { panel: { setup_complete } } = this.props;
 		return (
 			<div className="OverviewTab">
 				{this._renderNavigationLinks()}
@@ -375,13 +377,15 @@ class OverviewTab extends React.Component {
 					</div>
 				)}
 
-				<div className="OverviewTab__GhosteryFeaturesContainer">
-					{this._renderGhosteryFeatures()}
-				</div>
+				<ui-onboarding-state class="OverviewTab__onboardingState" ref={(el) => { if (el) { el.disabled = !setup_complete; } }} href={chrome.runtime.getURL('/app/templates/onboarding.html')}>
+					<div className="OverviewTab__GhosteryFeaturesContainer">
+						{this._renderGhosteryFeatures()}
+					</div>
 
-				<div className="OverviewTab__CommonFeaturesContainer">
-					{this._renderCommonFeatures()}
-				</div>
+					<div className="OverviewTab__CommonFeaturesContainer">
+						{this._renderCommonFeatures()}
+					</div>
+				</ui-onboarding-state>
 			</div>
 		);
 	}
@@ -397,6 +401,7 @@ OverviewTab.propTypes = {
 			blocked: PropTypes.shape({}).isRequired,
 			unblocked: PropTypes.shape({}).isRequired,
 		}).isRequired,
+		setup_complete: PropTypes.bool.isRequired,
 	}).isRequired,
 	summary: PropTypes.shape({
 		categories: PropTypes.arrayOf.isRequired,

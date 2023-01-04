@@ -186,9 +186,7 @@ class BugDb extends Updatable {
 				if (new_app_ids.length > 0) {
 					log(`${new_app_ids.length} new trackers have been added`);
 					const { selected_app_ids } = conf;
-					const newBlockedTrackers = BugDb._scanForNewTrackersToBlock(
-						bugs, old_bugs, new_app_ids, selected_app_ids
-					);
+					const newBlockedTrackers = BugDb._scanForNewTrackersToBlock(bugs, old_bugs, new_app_ids, selected_app_ids);
 
 					if (newBlockedTrackers.length > 0) {
 						newBlockedTrackers.forEach((app_id) => {

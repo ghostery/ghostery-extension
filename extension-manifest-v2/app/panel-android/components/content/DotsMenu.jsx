@@ -36,13 +36,13 @@ class DotsMenu extends React.Component {
 		if (!unmounted) { // Can I remove this and still have no React Warning?
 			this.setState({ open: false });
 		}
-	}
+	};
 
 	clickDotsMenu = (event) => {
 		event.stopPropagation();
 		window.addEventListener('click', this.closeDotsMenu);
 		this.setState(prevState => ({ open: !prevState.open }));
-	}
+	};
 
 	render() {
 		const { actions } = this.props;

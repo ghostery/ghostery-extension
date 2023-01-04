@@ -96,7 +96,7 @@ class BlockingCategory extends React.Component {
 	getTrackerOpenStatus = (index) => {
 		const { openTrackerIndex } = this.state;
 		return index === openTrackerIndex;
-	}
+	};
 
 	toggleTrackerSelectOpen = (index) => {
 		const { openTrackerIndex } = this.state;
@@ -105,7 +105,7 @@ class BlockingCategory extends React.Component {
 		} else {
 			this.setState({ openTrackerIndex: index });
 		}
-	}
+	};
 
 	clickCategorySelect = (event) => {
 		event.stopPropagation();
@@ -132,7 +132,7 @@ class BlockingCategory extends React.Component {
 				}
 			});
 		}
-	}
+	};
 
 	renderCategorySelect() {
 		const categorySelect = this.categorySelectStatus;
@@ -192,7 +192,7 @@ class BlockingCategory extends React.Component {
 				<div className="BlockingCategory__trackerBottom" />
 			</div>
 		);
-	}
+	};
 
 	render() {
 		const { openTrackerIndex } = this.state;

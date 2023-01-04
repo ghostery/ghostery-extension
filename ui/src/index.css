@@ -40,7 +40,7 @@
 
 html {
   /* Legacy colors */
-  
+
   --ui-text: #838b90;
   --ui-black: #252525;
   --ui-ghostery: #00aef0;
@@ -55,6 +55,8 @@ html {
   --ui-color-gray-500: #636468;
   --ui-color-gray-400: #88898C;
   --ui-color-gray-300: #B9BBBE;
+  --ui-color-gray-200: #D4D6D9;
+  --ui-color-gray-100: #F2F4F7;
   --ui-color-white: white;
 
   --ui-color-primary-700: #0077CC;
@@ -79,10 +81,11 @@ html {
 
   --ui-font-display-2xl: 40px / 40px var(--ui-font-family-display);
   --ui-font-display-xl: 32px / 32px var(--ui-font-family-display);
-  --ui-font-display-l: 24px / 24px var(--ui-font-family-display);
-  --ui-font-display-m: 20px / 20px var(--ui-font-family-display);
-  --ui-font-display-s: 16px / 16px var(--ui-font-family-display);
-  --ui-font-display-xs: 16px / 16px var(--ui-font-family-display);
+  --ui-font-display-l: 32px / 32px var(--ui-font-family-display);
+  --ui-font-display-m: 24px / 24px var(--ui-font-family-display);
+  --ui-font-display-s: 20px / 20px var(--ui-font-family-display);
+  --ui-font-display-xs: 18px / 18px var(--ui-font-family-display);
+  --ui-font-display-2xs: 16px / 16px var(--ui-font-family-display);
 
   --ui-font-headline-xl: 32px / 38px var(--ui-font-family-headline);
   --ui-font-headline-l: 24px / 28px var(--ui-font-family-headline);
@@ -109,8 +112,8 @@ html {
   --ui-font-body-xs: 12px / 18px var(--ui-font-family-body);
 
   /* Global overwrites */
-  -webkit-font-smoothing: antialiased; 
-  -moz-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
 }
 
@@ -121,7 +124,8 @@ html {
     --ui-font-display-l: 40px / 40px var(--ui-font-family-display);
     --ui-font-display-m: 32px / 32px var(--ui-font-family-display);
     --ui-font-display-s: 24px / 24px var(--ui-font-family-display);
-    --ui-font-display-xs: 16px / 16px var(--ui-font-family-display);
+    --ui-font-display-xs: 20px / 20px var(--ui-font-family-display);
+    --ui-font-display-2xs: 16px / 16px var(--ui-font-family-display);
 
     --ui-font-headline-xl: 58px / 64px var(--ui-font-family-headline);
     --ui-font-headline-l: 40px / 48px var(--ui-font-family-headline);
@@ -159,7 +163,7 @@ body {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Open Sans', Arial,
     Helvetica, sans-serif;
   font-size: 13px;
-  color: var(--ui-text);
+  color: var(--ui-color-gray-600);
 }
 
 button,

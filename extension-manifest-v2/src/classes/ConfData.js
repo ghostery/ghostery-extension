@@ -16,6 +16,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { getBrowserInfo } from '@ghostery/libs';
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
@@ -42,7 +43,7 @@ class ConfData {
 	 * This method is called once on startup.
 	 */
 	init() {
-		return prefsGet().then((d) => {
+		return prefsGet().then(async (d) => {
 			const data = { ...d };
 			const nowTime = Date.now();
 			const _setProp = (name, value) => {
@@ -89,14 +90,6 @@ class ConfData {
 				_initProperty('trackers_banner_status', true);
 			}
 
-			(async () => {
-				const isGhosteryBrowser = await globals.isGhosteryBrowser();
-				_initProperty('enable_metrics', isGhosteryBrowser);
-				if (isGhosteryBrowser) {
-					_initProperty('enable_human_web', true);
-				}
-			})();
-
 			// simple props
 			_initProperty('alert_bubble_pos', 'br');
 			_initProperty('alert_bubble_timeout', 15);
@@ -111,8 +104,6 @@ class ConfData {
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', false);
 			_initProperty('enable_click2play_social', false);
-			_initProperty('enable_human_web', false);
-			_initProperty('enable_abtests', false);
 			_initProperty('enable_smart_block', false);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
@@ -144,6 +135,7 @@ class ConfData {
 			_initProperty('account', null);
 			_initProperty('autoconsent_whitelist', []);
 			_initProperty('autoconsent_blacklist', []);
+			_initProperty('autoconsent_interactions', 0);
 			_initProperty('bugs', {});
 			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);
@@ -158,6 +150,16 @@ class ConfData {
 			_initProperty('cliqz_module_whitelist', {});
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
+
+			const isGhosteryBrowser = await getBrowserInfo.isGhosteryBrowser();
+			_initProperty('enable_human_web', isGhosteryBrowser);
+			_initProperty('enable_metrics', isGhosteryBrowser);
+			_initProperty('enable_abtests', isGhosteryBrowser);
+
+			// sanity checks and cleanups
+			if (!(this.version_history instanceof Array)) {
+				this.version_history = [];
+			}
 		});
 	}
 

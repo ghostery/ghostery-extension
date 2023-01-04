@@ -77,8 +77,9 @@ const Options = {
     all: false,
     allowed: [String],
     disallowed: [String],
+    interactions: 0,
   },
-  trackerWheelDisabled: false,
+  trackerWheel: true,
   wtmSerpReport: true,
   terms: false,
   onboarding: { done: false, shownAt: 0 },
@@ -86,6 +87,12 @@ const Options = {
     async get() {
       const { options = await migrateOptions() } =
         await chrome.storage.local.get(['options']);
+
+      // Migrate `trackerWheelDisabled` to `trackerWheel`
+      // INFO: `trackerWheel` option introduced in v9.7.0
+      if (options.trackerWheelDisabled !== undefined) {
+        options.trackerWheel = !options.trackerWheelDisabled;
+      }
 
       // Set default value for keys, which type does no match the current one
       Object.entries(options).forEach(([key, value]) => {

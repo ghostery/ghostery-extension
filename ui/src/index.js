@@ -10,10 +10,12 @@
  */
 
 import './components/button.js';
+import './components/card.js';
 import './components/category.js';
 import './components/header.js';
 import './components/icon.js';
 import './components/onboarding-state.js';
+import './components/page-layout.js';
 import './components/page-load.js';
 import './components/stats.js';
 import './components/text.js';

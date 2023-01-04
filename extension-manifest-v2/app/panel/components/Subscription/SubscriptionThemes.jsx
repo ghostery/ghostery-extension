@@ -21,7 +21,7 @@ import RadioButtonGroup from '../../../shared-components/RadioButtonGroup/RadioB
  * It allows to switch between available Ghostery themes.
  * @memberOf SettingsComponents
 */
-const SubscriptionThemes = ({ theme, changeTheme }) => {
+function SubscriptionThemes({ theme, changeTheme }) {
 	const themes = ['default', 'midnight-theme', 'palm-theme', 'leaf-theme'];
 	const themeLabels = ['subscription_default_theme', 'subscription_dark_blue_theme', 'subscription_palm_theme', 'subscription_leaf_theme'];
 
@@ -35,7 +35,7 @@ const SubscriptionThemes = ({ theme, changeTheme }) => {
 				<div className="columns column-subscription">
 					<h1 className="subscription-title">{t('subscription_themes_title')}</h1>
 					<span className="tooltip-icon s-tooltip-down-right" data-g-tooltip={t('subscription_themes_tooltip')}>
-						<img src="../../app/images/panel/icon-information-tooltip-blue.svg" className="s-question" />
+						<img src="/app/images/panel/icon-information-tooltip-blue.svg" className="s-question" />
 					</span>
 					<RadioButtonGroup
 						labels={themeLabels}
@@ -46,7 +46,7 @@ const SubscriptionThemes = ({ theme, changeTheme }) => {
 			</div>
 		</div>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 SubscriptionThemes.propTypes = {

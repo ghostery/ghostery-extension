@@ -12,7 +12,6 @@
  */
 
 .OverviewTab {
-	padding-bottom: 35px;
 	text-align: center;
 
 	.OverviewTab__NavigationLinks {
@@ -135,4 +134,9 @@
 			display: none;
 		}
 	}
+}
+
+.OverviewTab__onboardingState {
+	margin: 10px;
+	padding: 0 0 35px;
 }

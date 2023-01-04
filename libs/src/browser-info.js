@@ -1,37 +1,89 @@
 import parser from 'ua-parser-js';
 
-/**
- * Check for information about this browser (FF only)
- * @private
- * @return {Promise}
- */
-function _checkBrowserInfo() {
-  if (typeof chrome.runtime.getBrowserInfo === 'function') {
-    return chrome.runtime.getBrowserInfo();
+// we cache the UA as it used by many modules that need it on file load
+let ua;
+const getUA = () => {
+  if (ua) {
+    return ua;
   }
-  return Promise.resolve(false);
+  ua = parser(navigator.userAgent);
+  return ua;
+};
+
+async function getExtendedBrowserInfo() {
+  try {
+    return chrome.runtime.getBrowserInfo();
+  } catch (e) {
+    return null;
+  }
 }
 
-function _checkPlatformInfo() {
+function getPlatformInfo() {
   if (typeof chrome.runtime.getPlatformInfo === 'function') {
     return new Promise((resolve) => {
       chrome.runtime.getPlatformInfo((info) => {
+        if (chrome.runtime.lastError) {
+          resolve(null);
+          return;
+        }
         resolve(info);
       });
     });
   }
-  return Promise.resolve(false);
+  return Promise.resolve(null);
 }
 
-const getBrowserInfo = async () => {
-  const ua = parser(navigator.userAgent);
-  const browser = ua.browser.name.toLowerCase();
-  const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
+const getOS = () => {
+  const ua = getUA();
   const platform = ua.os?.name?.toLowerCase() || ''; // Make sure that undefined operating systems don't mess with stuff like .includes()
+  if (platform.includes('mac')) {
+    return 'mac';
+  } else if (platform.includes('win')) {
+    return 'win';
+  } else if (platform.includes('linux')) {
+    return 'linux';
+  } else if (platform.includes('android')) {
+    return 'android';
+  } else if (platform.includes('ios')) {
+    return 'ios';
+  }
+};
 
-  const BROWSER_INFO = {};
+const getBrowser = () => {
+  const ua = getUA();
+  return ua.browser.name.toLowerCase();
+};
+
+const isAndroid = () => {
+  return getOS() === 'android';
+};
+
+const isFirefox = () => {
+  const browser = getBrowser();
+  return browser.includes('firefox');
+};
+
+const isEdge = () => {
+  const browser = getBrowser();
+  return browser.includes('edge');
+};
+
+const getVersion = () => {
+  const ua = getUA();
+  return parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
+};
+
+const getBrowserInfo = async () => {
+  const BROWSER_INFO = {
+    displayName: '',
+    name: '',
+    token: '',
+    os: '',
+    version: '',
+  };
 
   // Set name and token properties. CMP uses `name` value.  Metrics uses `token`
+  const browser = getBrowser();
   if (browser.includes('edge')) {
     BROWSER_INFO.displayName = 'Edge';
     BROWSER_INFO.name = 'edge';
@@ -59,29 +111,18 @@ const getBrowserInfo = async () => {
   }
 
   // Set OS property
-  if (platform.includes('mac')) {
-    BROWSER_INFO.os = 'mac';
-  } else if (platform.includes('win')) {
-    BROWSER_INFO.os = 'win';
-  } else if (platform.includes('linux')) {
-    BROWSER_INFO.os = 'linux';
-  } else if (platform.includes('android')) {
-    BROWSER_INFO.os = 'android';
-  } else if (platform.includes('ios')) {
-    BROWSER_INFO.os = 'ios';
-  }
+  BROWSER_INFO.os = getOS();
 
   // Set version property
-  BROWSER_INFO.version = version;
+  BROWSER_INFO.version = getVersion();
 
   // Check for Ghostery browsers
-  const browserInfo = await _checkBrowserInfo();
+  const browserInfo = await getExtendedBrowserInfo();
   if (browserInfo && browserInfo.name === 'Ghostery') {
-    if (platform.includes('android')) {
+    if (BROWSER_INFO.os === 'android') {
       BROWSER_INFO.displayName = 'Ghostery Android Browser';
       BROWSER_INFO.name = 'ghostery_android';
       BROWSER_INFO.token = 'ga';
-      BROWSER_INFO.os = 'android';
       BROWSER_INFO.version = browserInfo.version;
     } else {
       BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
@@ -91,7 +132,7 @@ const getBrowserInfo = async () => {
     }
   }
 
-  const platformInfo = await _checkPlatformInfo();
+  const platformInfo = await getPlatformInfo();
   if (platformInfo && platformInfo.os === 'ios' && BROWSER_INFO.os === 'mac') {
     BROWSER_INFO.os = 'ipados';
   }
@@ -99,4 +140,24 @@ const getBrowserInfo = async () => {
   return BROWSER_INFO;
 };
 
-export default getBrowserInfo;
+let browserInfo;
+const cachedGetBrowserInfo = async () => {
+  if (browserInfo) {
+    return browserInfo;
+  }
+  browserInfo = await getBrowserInfo();
+  return browserInfo;
+};
+
+cachedGetBrowserInfo.isAndroid = isAndroid;
+cachedGetBrowserInfo.isFirefox = isFirefox;
+cachedGetBrowserInfo.isEdge = isEdge;
+cachedGetBrowserInfo.isGhosteryBrowser = async () => {
+  const browserInfo = await cachedGetBrowserInfo();
+  if (!browserInfo.name) {
+    return false;
+  }
+  return browserInfo.name.includes('ghostery');
+};
+
+export default cachedGetBrowserInfo;

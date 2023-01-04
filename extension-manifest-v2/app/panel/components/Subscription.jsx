@@ -17,7 +17,6 @@ import moment from 'moment';
 import { sendMessage } from '../utils/msg';
 
 import SubscriptionMenu from './Subscription/SubscriptionMenu';
-import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
 
@@ -39,21 +38,22 @@ class Subscription extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		const { actions, history } = this.props;
-		history.push('/subscription/info');
-		actions.getUserSubscriptionData();
+		const { history } = this.props;
+		history.replace('/subscription/themes');
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
-	componentDidUpdate = () => {
+	componentDidUpdate() {
 		const { loggedIn, history } = this.props;
 		if (!loggedIn) {
 			history.push('/detail');
 		}
 	}
 
+	// TODO: can we remove this method?
+	// eslint-disable-next-line react/no-unused-class-component-methods
 	parseSubscriptionData = () => {
 		const { subscriptionData } = this.props;
 		const sd = subscriptionData;
@@ -81,7 +81,7 @@ class Subscription extends React.Component {
 			};
 		}
 		return { loading: true };
-	}
+	};
 
 	changeTheme = (updated_theme) => {
 		const { actions } = this.props;
@@ -89,9 +89,7 @@ class Subscription extends React.Component {
 		actions.getTheme(updated_theme).then(() => {
 			sendMessage('ping', 'theme_change');
 		});
-	}
-
-	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
+	};
 
 	SubscriptionThemesComponent = () => {
 		const { theme } = this.state;
@@ -100,6 +98,7 @@ class Subscription extends React.Component {
 		);
 	};
 
+	// eslint-disable-next-line class-methods-use-this
 	PrioritySupportComponent = () => (<PrioritySupport />);
 
 	/**
@@ -111,7 +110,6 @@ class Subscription extends React.Component {
 			<div>
 				<div id="content-settings">
 					<SubscriptionMenu />
-					<Route path="/subscription/info" render={this.SubscriptionInfoComponent} />
 					<Route path="/subscription/themes" render={this.SubscriptionThemesComponent} />
 					<Route path="/subscription/prioritysupport" render={this.PrioritySupportComponent} />
 				</div>

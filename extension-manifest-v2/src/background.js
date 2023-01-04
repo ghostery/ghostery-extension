@@ -17,9 +17,10 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
+import { getBrowserInfo } from '@ghostery/libs';
 
 import common, {
-	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState
+	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState, addMigration
 } from './classes/Common';
 import ghosteryDebugger from './classes/Debugger';
 // object classes
@@ -73,9 +74,9 @@ const { onMessage } = chrome.runtime;
 const {
 	CDN_BASE_URL, BROWSER_INFO,
 } = globals;
-const IS_EDGE = (BROWSER_INFO.name === 'edge');
-const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const IS_ANDROID = (BROWSER_INFO.os === 'android');
+const IS_EDGE = getBrowserInfo.isEdge();
+const IS_FIREFOX = getBrowserInfo.isFirefox();
+const IS_ANDROID = getBrowserInfo.isAndroid();
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
 const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;
@@ -558,28 +559,42 @@ function onMessageHandler(request, sender, callback) {
 		if (name === 'enable') {
 			conf.enable_autoconsent = true;
 			if (message.url) {
-				conf.autoconsent_whitelist = conf.autoconsent_whitelist.concat(message.url);
+				conf.autoconsent_whitelist = (conf.autoconsent_whitelist || []).concat(message.url);
+				conf.autoconsent_blacklist = conf.autoconsent_blacklist || [];
+				conf.autoconsent_interactions += 1;
 			} else {
-				conf.autoconsent_whitelist = null;
-				conf.autoconsent_blacklist = null;
+				conf.autoconsent_whitelist = false;
+				conf.autoconsent_blacklist = false;
+				conf.autoconsent_interactions = 0;
 			}
+
+			account.saveUserSettings().catch(err => log('Background autoconsent', err));
 
 			return false;
 		}
 		if (name === 'disable') {
 			if (message.url) {
-				conf.autoconsent_blacklist = conf.autoconsent_blacklist.concat(message.url);
+				conf.autoconsent_whitelist = conf.autoconsent_whitelist || [];
+				conf.autoconsent_blacklist = (conf.autoconsent_blacklist || []).concat(message.url);
+				conf.autoconsent_interactions += 1;
 			} else {
 				conf.enable_autoconsent = false;
 				conf.autoconsent_whitelist = [];
 				conf.autoconsent_blacklist = [];
+				conf.autoconsent_interactions = 0;
 			}
+
+			account.saveUserSettings().catch(err => log('Background autoconsent', err));
 
 			return false;
 		}
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	if (name === 'getTabInfo') {
+		utils.getActiveTab(callback);
+		return true;
+	}
 	if (name === 'getPanelData') { // Used by panel-android
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
@@ -732,7 +747,7 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `${globals.GHOSTERY_BASE_URL}/pricing`;
+		let url = `${globals.GHOSTERY_BASE_URL}/become-a-contributor`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
@@ -1343,6 +1358,13 @@ function initializeVersioning() {
 			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') < 0) {
 				conf.enable_autoconsent = true;
 			}
+
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.4') < 0) {
+				addMigration((app) => {
+					alwaysLog('ONE-TIME MIGRATION: removing "developer" flag if present');
+					app.prefs.clear('developer');
+				});
+			}
 		} else {
 			log('SAME VERSION OR NOT THE FIRST RUN');
 		}
@@ -1357,6 +1379,8 @@ function initializeVersioning() {
  * @return {Promise}
  */
 function initializeGhosteryModules() {
+	metrics.setUninstallUrl();
+
 	if (globals.JUST_UPGRADED) {
 		log('JUST UPGRADED');
 		metrics.ping('upgrade');
@@ -1375,8 +1399,6 @@ function initializeGhosteryModules() {
 		if (BROWSER_INFO.name === 'ghostery_desktop') {
 			conf.site_whitelist.push('bing.com', 'search.yahoo.com', 'startpage.com');
 		}
-
-		metrics.setUninstallUrl();
 
 		metrics.ping('install');
 
@@ -1547,21 +1569,32 @@ async function initializeAccount() {
 	}, 5000);
 
 	try {
-		await account.migrate();
-		lastStep = 'migrate';
+		try {
+			// try to get user session from ghostery.com cookie
+			await account.getUser();
+			lastStep = 'getUser';
+		} catch (e) {
+			// expected if the user is not logged in
+		}
 
 		if (!conf.account) {
 			ghosteryDebugger.addAccountEvent('app started', 'not signed in');
 			if (globals.JUST_INSTALLED) {
 				setGhosteryDefaultBlocking();
 			}
+			lastStep = 'setGhosteryDefaultBlocking';
 			return;
 		}
 
-		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
+		try {
+			lastStep = 'beforeGetUserSubscriptionData';
+			await account.getUserSubscriptionData();
+			lastStep = 'afterGetUserSubscriptionData';
+		} catch (e) {
+			// expected if the user does not have active subscription
+		}
 
-		await account.getUser();
-		lastStep = 'getUser';
+		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
 
 		await account.getUserSettings();
 		lastStep = 'getUserSettings';
@@ -1570,8 +1603,6 @@ async function initializeAccount() {
 			await account.getTheme(conf.current_theme);
 			lastStep = 'getTheme';
 		}
-
-		alwaysLog('successfully signed in');
 	} catch (e) {
 		ErrorReporter.captureException(e);
 		alwaysLog(e);
@@ -1598,33 +1629,58 @@ async function recordUTMs() {
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
+ *
+ * IMPORTANT: nothing on the intialization path should be able to fail.
+ * 	It is critical for the application to enter the `globals.INIT_COMPLETE = true` state.
+ *
  * @memberOf Background
  */
 async function init() {
+	let lastStep = 'start';
+	const timeout = setTimeout(() => {
+		const error = new Error(`init timeout after step: ${lastStep}`);
+		ErrorReporter.captureException(error);
+		alwaysLog(error);
+	}, 5000);
+
 	try {
 		await confData.init();
+		lastStep = 'confData.init';
+
+		metrics.init();
+		lastStep = 'metrics.init';
 
 		initializePopup();
+		lastStep = 'initializePopup';
 
 		initializeEventListeners();
+		lastStep = 'initializeEventListeners';
 
 		initializeVersioning();
+		lastStep = 'initializeVersioning';
 
 		if (globals.JUST_UPGRADED) {
 			await purgeObsoleteData();
+			lastStep = 'purgeObsoleteData';
 			await freeSpaceIfNearQuota({ force: true }); // TODO: consider dropping "force" once all users upgraded
+			lastStep = 'freeSpaceIfNearQuota';
 		}
 
 		await initializeSearchMessageHandler();
+		lastStep = 'initializeSearchMessageHandler';
 
 		await recordUTMs();
+		lastStep = 'recordUTMs';
 
 		await initializeGhosteryModules();
+		lastStep = 'initializeGhosteryModules';
 
-		initializeAccount();
+		await initializeAccount();
+		lastStep = 'initializeAccount';
 
 		// persist Conf properties to storage only after init has completed
 		await prefsSet(globals.initProps);
+		lastStep = 'prefsSet';
 
 		globals.INIT_COMPLETE = true;
 	} catch (err) {
@@ -1632,6 +1688,8 @@ async function init() {
 		alwaysLog('Error in init()', err);
 
 		throw err;
+	} finally {
+		clearTimeout(timeout);
 	}
 }
 

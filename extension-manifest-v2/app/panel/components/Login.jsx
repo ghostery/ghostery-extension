@@ -14,7 +14,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
-import RSVP from 'rsvp';
 import globals from '../../../src/classes/Globals';
 import { validateEmail } from '../utils/utils';
 import { log } from '../../../src/utils/common';
@@ -44,7 +43,7 @@ class Login extends React.Component {
 	handleInputChange = (e) => {
 		const { name, value } = e.target;
 		this.setState({ [name]: value });
-	}
+	};
 
 	/**
 	 * Validate entered login data and, if it is good, trigger Login action.
@@ -66,7 +65,7 @@ class Login extends React.Component {
 			actions.login(email, password)
 				.then((success) => {
 					if (success) {
-						RSVP.all([
+						Promise.all([
 							actions.getUser(),
 							actions.getUserSettings(),
 						])
@@ -87,7 +86,7 @@ class Login extends React.Component {
 				})
 				.catch(err => log(err));
 		});
-	}
+	};
 
 	/**
 	 * Render Sign In view.

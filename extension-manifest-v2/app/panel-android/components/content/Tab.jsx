@@ -20,7 +20,7 @@ class Tab extends React.Component {
 		event.preventDefault();
 		const { onClick, tabIndex } = this.props;
 		onClick(tabIndex);
-	}
+	};
 
 	render() {
 		const { isActive, tabLabel, linkClassName } = this.props;

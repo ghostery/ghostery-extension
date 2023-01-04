@@ -17,7 +17,7 @@ import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from '../../shared-components/Tooltip';
 import HeaderMenu from './HeaderMenu';
-import { sendMessage, sendMessageInPromise } from '../utils/msg';
+import { sendMessageInPromise } from '../utils/msg';
 import { log } from '../../../src/utils/common';
 /**
  * @class Implements header component which is common to all panel views
@@ -39,7 +39,7 @@ class Header extends React.Component {
 		if (is_expert) {
 			this.toggleExpert();
 		}
-	}
+	};
 
 	/**
 	 * Handles clicking on the Detailed View tab
@@ -49,7 +49,7 @@ class Header extends React.Component {
 		if (!is_expert) {
 			this.toggleExpert();
 		}
-	}
+	};
 
 	/**
 	 * Toggle between Simple and Detailed Views.
@@ -62,19 +62,19 @@ class Header extends React.Component {
 		} else {
 			history.push('/detail');
 		}
-	}
+	};
 
 	/**
 	 * Handles toggling the drop-down pane open/closed
 	 */
 	toggleDropdown = () => {
 		this.setState(prevState => ({ dropdownOpen: !prevState.dropdownOpen }));
-	}
+	};
 
 	handleSignin = () => {
 		const { history } = this.props;
 		history.push('/login');
-	}
+	};
 
 	handleSendValidateAccountEmail = () => {
 		const { actions, user } = this.props;
@@ -97,7 +97,7 @@ class Header extends React.Component {
 				text: t('server_error_message'),
 			});
 		});
-	}
+	};
 
 	generateAccountLogo = () => {
 		const { loggedIn, user } = this.props;
@@ -137,7 +137,7 @@ class Header extends React.Component {
 				{accountIcon}
 			</div>
 		);
-	}
+	};
 
 	determineBackPath = () => {
 		const { history, is_expert } = this.props;
@@ -148,17 +148,7 @@ class Header extends React.Component {
 			return 'subscription/info';
 		}
 		return is_expert ? '/detail/blocking' : '/';
-	}
-
-	clickUpgradeBannerOrSubscriberBadgeIcon = () => {
-		// TODO check whether this is the message we want to be sending now
-		const { history } = this.props;
-		sendMessage('ping', 'plus_panel_from_badge');
-		const { user } = this.props;
-		const hasPlusAccess = user && user.plusAccess;
-		const hasPremiumAccess = user && user.premiumAccess;
-		history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : `/subscribe/${!!user}`);
-	}
+	};
 
 	/**
 	* React's required render function. Returns JSX
@@ -167,7 +157,6 @@ class Header extends React.Component {
 	render() {
 		const {
 			actions,
-			is_expanded,
 			is_expert,
 			location,
 			loggedIn,
@@ -192,10 +181,6 @@ class Header extends React.Component {
 		const hasPlusAccess = user && user.plusAccess;
 		const hasPremiumAccess = user && user.premiumAccess;
 		const accountLogolink = this.generateAccountLogo();
-		const badgeClasses = ClassNames('columns', 'shrink', {
-			'non-subscriber-badge': !(hasPlusAccess || hasPremiumAccess),
-			'subscriber-badge': hasPlusAccess || hasPremiumAccess
-		});
 
 		const simpleTab = (
 			<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
@@ -229,15 +214,6 @@ class Header extends React.Component {
 				</Link>
 				<ReactSVG src="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
 			</span>
-		);
-
-		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
-			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrSubscriberBadgeIcon}>
-				{
-					((hasPlusAccess || hasPremiumAccess) && <ReactSVG src="/app/images/panel/plus-badge-icon-expanded-view.svg" />)
-					|| <ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
-				}
-			</div>
 		);
 
 		const headerMenuKebab = (
@@ -278,7 +254,6 @@ class Header extends React.Component {
 									<div className="columns shrink">
 										{accountLogolink}
 									</div>
-									{((is_expert && is_expanded) || !showTabs) && plusUpgradeBannerOrSubscriberBadgeLogolink }
 									{headerMenuKebab}
 								</div>
 								{ dropdownOpen && headerMenu }

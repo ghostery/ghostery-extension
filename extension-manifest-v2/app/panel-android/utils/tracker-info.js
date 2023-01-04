@@ -14,7 +14,9 @@
  * @namespace  PanelAndroidUtils
  */
 
-import { apps } from '../../../common/core/tracker_db_v2.json';
+import trackerdb from '../../../common/core/tracker_db_v2.json';
+
+const { apps } = trackerdb;
 
 /**
  * Look up WhoTracksMe url slug

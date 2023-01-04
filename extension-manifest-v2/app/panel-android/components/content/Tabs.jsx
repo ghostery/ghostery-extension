@@ -32,7 +32,7 @@ class Tabs extends React.Component {
 		this.setState({
 			activeTabIndex: tabIndex,
 		});
-	}
+	};
 
 	renderTabsNavigation = () => {
 		const { children } = this.props;
@@ -42,7 +42,7 @@ class Tabs extends React.Component {
 			tabIndex: index,
 			isActive: index === activeTabIndex,
 		}));
-	}
+	};
 
 	renderActiveTabContent = () => {
 		const { children } = this.props;
@@ -51,7 +51,7 @@ class Tabs extends React.Component {
 			return children[activeTabIndex].props.children;
 		}
 		return null;
-	}
+	};
 
 	render() {
 		return (

@@ -71,7 +71,7 @@ async function purgeIfTooBig({ key, maxSize }) {
 			const usedSize = estimateBytesUsedByValue(value);
 			if (usedSize > maxSize) {
 				alwaysLog(`purge: ${key} takes ${usedSize} bytes, which exceeds the threshold of ${maxSize} bytes`);
-				await new Promise(done => chrome.storage.local.remove(key, done));
+				await new Promise((done) => { chrome.storage.local.remove(key, done); });
 			}
 		}
 	} catch (err) {
@@ -146,7 +146,7 @@ export default async function freeSpaceIfNearQuota({ force = false } = {}) {
 			const keysToRemove = allBigKeys.map(({ key }) => key).filter(key => !protectedKeys.includes(key));
 			if (keysToRemove.length > 0) {
 				alwaysLog('Removing big keys:', keysToRemove);
-				await new Promise(resolve => chrome.storage.local.remove(keysToRemove, resolve));
+				await new Promise((resolve) => { chrome.storage.local.remove(keysToRemove, resolve); });
 			}
 
 			// Wipe that data structure completely: not because it is taking a lot of space,

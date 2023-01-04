@@ -31,6 +31,7 @@ class Detail extends React.Component {
 		props.history.push('/detail/blocking');
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	BlockingComponent = () => (<Blocking />);
 
 	/**

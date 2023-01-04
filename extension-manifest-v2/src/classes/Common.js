@@ -16,16 +16,19 @@ import { parseHtml } from 'ghostery-common/build/gbe/human-web/html-helpers';
 import COMMON from 'ghostery-common';
 import WTM from 'ghostery-common/build/gbe/human-web/human-web';
 import { DOMParser } from 'linkedom';
+import { getBrowserInfo } from '@ghostery/libs';
+
 import globals from './Globals';
 import conf from './Conf';
 import GhosteryModule from './Module';
+import { alwaysLog } from '../utils/common';
 
 if (!navigator.userAgent.includes('Firefox')) {
 	parseHtml.domParser = new DOMParser();
 }
 
 const DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
-const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
+const IS_ANDROID = getBrowserInfo.isAndroid();
 
 COMMON.config.baseURL = '/common/';
 // Override the default prefs based on the platform
@@ -36,7 +39,7 @@ COMMON.config.default_prefs = {
 	'modules.hpnv2.enabled': false,
 	'modules.human-web-lite.enabled': false,
 	'modules.hpn-lite.enabled': false,
-	'modules.anolysis.enabled': IS_ANDROID,
+	'modules.anolysis.enabled': false,
 	'modules.insights.enabled': true,
 };
 
@@ -54,6 +57,12 @@ export const syncTrustedSites = () => {
 	setPref('adb-trusted-sites', conf.site_whitelist || []);
 };
 
+const dataMigrations = [];
+
+export function addMigration(dataMigration) {
+	dataMigrations.push(dataMigration);
+}
+
 const load = common.load.bind(common);
 common.load = async () => {
 	// ensures that prefs.set is present
@@ -61,15 +70,19 @@ common.load = async () => {
 
 	let { HW_CHANNEL } = COMMON.config.settings;
 	await globals.BROWSER_INFO_READY;
-	if (IS_ANDROID) {
-		HW_CHANNEL = 'android';
-	} else if (globals.BROWSER_INFO.token === 'gd') {
+	if (globals.BROWSER_INFO.token === 'gd') {
 		HW_CHANNEL = 'ghostery-browser';
 	} else if (globals.BROWSER_INFO.token === 'ga') {
 		HW_CHANNEL = 'ghostery-browser-android';
+	} else 	if (IS_ANDROID) {
+		HW_CHANNEL = 'android';
+	} else {
+		HW_CHANNEL = 'ghostery';
 	}
 	WTM.CHANNEL = HW_CHANNEL;
 	COMMON.config.settings.HW_CHANNEL = HW_CHANNEL;
+
+	setPref('modules.anolysis.enabled', false);
 
 	if (!IS_ANDROID) {
 		setPref('modules.human-web.enabled', conf.enable_human_web);
@@ -84,6 +97,16 @@ common.load = async () => {
 
 	setPref('modules.adblocker.enabled', conf.enable_ad_block);
 	setPref('modules.antitracking.enabled', conf.enable_anti_tracking);
+
+	// eslint-disable-next-line no-await-in-loop, no-restricted-syntax
+	for (const dataMigration of dataMigrations) {
+		try {
+			// eslint-disable-next-line no-await-in-loop
+			await dataMigration(common);
+		} catch (e) {
+			alwaysLog('Problem with Common migration', e);
+		}
+	}
 
 	return load();
 };

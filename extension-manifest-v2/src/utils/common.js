@@ -187,58 +187,18 @@ export function hashCode(str) {
 	return hash;
 }
 
-/**
- * Unescape base64-encoded string.
- * @private
- *
- * @param  {string} str		base64-encoded str
- * @return {string}			unescaped str
- */
-function _base64urlUnescape(str) {
-	const returnStr = str + new Array(5 - (str.length % 4)).join('=');
-	return returnStr.replace(/-/g, '+').replace(/_/g, '/');
-}
+// source https://stackoverflow.com/a/38552302
+export function parseJwt(token) {
+	const base64Url = token.split('.')[1];
+	const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+	const jsonPayload = decodeURIComponent(
+		window.atob(base64)
+			.split('')
+			.map(c => `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`)
+			.join('')
+	);
 
-/**
- * Decode base64-encoded string.
- * @private
- *
- * @param  {string} str		base64-encoded string
- * @return {string}			decoded string
- */
-function _base64urlDecode(str) {
-	return Buffer.from(_base64urlUnescape(str), 'base64').toString();
-}
-
-/**
- * Decode JWT Tokens.
- * @memberOf BackgroundUtils
- *
- * @param  {string} token 		JWT token
- *
- * @return {Object} 			Object with decoded parts of JWT token
- */
-export function decodeJwt(token) {
-	const segments = token.split('.');
-
-	if (segments.length !== 3) {
-		return null;
-	}
-
-	// All segment should be base64
-	const headerSeg = segments[0];
-	const payloadSeg = segments[1];
-	const signatureSeg = segments[2];
-
-	// base64 decode and parse JSON
-	const header = JSON.parse(_base64urlDecode(headerSeg));
-	const payload = JSON.parse(_base64urlDecode(payloadSeg));
-
-	return {
-		header,
-		payload,
-		signature: signatureSeg
-	};
+	return JSON.parse(jsonPayload);
 }
 
 export function getISODate() {

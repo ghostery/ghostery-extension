@@ -20,7 +20,7 @@ import ClassNames from 'classnames';
  * @memberof PanelBuildingBlocks
  */
 
-const RadioButton = (props) => {
+function RadioButton(props) {
 	const { checked, handleClick, altDesign } = props;
 	const OuterCircleClassNames = ClassNames('RadioButton__outerCircle', {
 		checked,
@@ -37,7 +37,7 @@ const RadioButton = (props) => {
 			</span>
 		</span>
 	);
-};
+}
 
 // PropTypes ensure we pass required props of the correct type
 RadioButton.propTypes = {

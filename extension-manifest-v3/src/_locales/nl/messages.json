@@ -26,9 +26,6 @@
   "all_popups": {
     "message": "Alle popups"
   },
-  "all_set__go_with_ghosty_": {
-    "message": "Alles klaar! ga met ghosty!"
-  },
   "anti_tracking": {
     "message": "Anti-tracking"
   },
@@ -64,8 +61,8 @@
     "message": "CDN",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto_support@ghostery_com__support@ghostery_com__a___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "Kijk op <a href=\"$${0}\" target=\"_blank\">FAQs</a> of stuur ons een berichtje <a href=\"mailto:support@ghostery.com\">support@ghostery.com</a>. Wij staan u graag te woord!"
+  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
+    "message": "Kijk op <a href=\"$${0}\" target=\"_blank\">FAQs</a> of stuur ons een bericht op <a href=\"mailto:$${1}\">$${2}</a>. <br/> We staan je graag te woord!"
   },
   "comments": {
     "message": "Opmerkingen",
@@ -85,14 +82,14 @@
   "detailed_view": {
     "message": "Gedetailleerd Overzicht"
   },
-  "disable_tracker_wheel_in_browser_toolbar": {
-    "message": "Tracker Wheel in browserwerkbalk uitschakelen"
-  },
   "disable_trackers_preview": {
     "message": "Preview trackers uitschakelen"
   },
   "done": {
     "message": "Klaar"
+  },
+  "done__go_with_ghosty_": {
+    "message": "Klaar! Ga met Ghosty!"
   },
   "email": {
     "message": "E-mail",
@@ -127,8 +124,8 @@
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery is ingesteld om trackers in hun sporen te stoppen en uw privacy te beschermen tijdens het surfen!"
   },
-  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_for_their_own_profit_": {
-    "message": "Ghostery stopt trackers in hun sporen en voorkomt dat u wordt geprofileerd en uw persoonlijke informatie wordt verkocht aan data brokers voor hun eigen winst."
+  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
+    "message": "Ghostery stopt trackers in hun sporen en voorkomt dat je wordt geprofileerd en je persoonlijke informatie wordt verkocht aan data brokers."
   },
   "ghostery_options": {
     "message": "Ghostery Opties"
@@ -140,11 +137,11 @@
     "message": "Hosting",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "i_agree_to_send_non_personal_information_to__a_href__@_0___whotracks_me__a__and_i_accept_the_ghostery__a_href____1___privacy_policy__a_": {
-    "message": "Ik ga akkoord met het verzenden van niet-persoonlijke informatie naar <a href=\"$${0}\">WhoTracks.Me</a> en ik accepteer het Ghostery <a href=\"$${1}\">Privacybeleid</a>"
+  "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
+    "message": "Ik ga akkoord met het versturen van niet-persoonlijke informatie naar <a href=\"$${0}\">Ghostery's WhoTracks.Me</a>, en ik accepteer het <a href=\"$${1}\">Ghostery Privacybeleid</a>."
   },
-  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_tracker_information_to_whotracks_me__the_tracker_input_enables_ghostery_to_provide_real_time_intel_on_trackers_and_protection_to_the_entire_ghostery_user_community_": {
-    "message": "Het bestaat dankzij micro-bijdragen van elke Ghostery gebruiker die ervoor kiest om tracker informatie te sturen naar whotracks.me. De tracker input stelt Ghostery in staat om real-time informatie over trackers en bescherming te bieden aan de gehele Ghostery gebruikersgemeenschap."
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
+    "message": "Het bestaat dankzij micro-bijdragen van elke Ghostery-gebruiker die ervoor kiest om niet-persoonlijke informatie naar WhoTracks.Me te sturen. De input stelt Ghostery in staat om real-time informatie te verstrekken over trackers die op hun beurt bescherming bieden aan de gehele Ghostery gemeenschap."
   },
   "learn_more": {
     "message": "Meer Weten"
@@ -162,8 +159,8 @@
     "message": "Diversen",
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
-  "more_information_on_@_0__": {
-    "message": "Meer informatie over $${0}."
+  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
+    "message": "Meer informatie over $${0} methodologie in Ghostery's Manifesto."
   },
   "never_consent": {
     "message": "Nooit-Toestemming"
@@ -183,6 +180,9 @@
   "ok": {
     "message": "OK"
   },
+  "ok__i_understand": {
+    "message": "Ok, ik begrijp het"
+  },
   "on": {
     "message": "Aan"
   },
@@ -200,6 +200,9 @@
   },
   "report_a_broken_page": {
     "message": "Meld een verbroken pagina"
+  },
+  "show_tracker_wheel_in_the_browser_toolbar": {
+    "message": "Show Tracker Wheel in the browser toolbar"
   },
   "show_trackers_preview_next_to_search_results": {
     "message": "Trackers weergeven naast zoekresultaten"
@@ -249,17 +252,17 @@
   "user_interface": {
     "message": "Gebruikersinterface"
   },
-  "welcome_to": {
-    "message": "Welkom bij"
+  "welcome_to_ghostery": {
+    "message": "Welkom bij Ghostery"
   },
   "what_is_whotracks_me_": {
-    "message": "Wat is whotracks.me?"
+    "message": "Wat is WhoTracks.Me?"
   },
-  "whotracks_me__operated_by_ghostery__is_the_most_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.me, beheerd door Ghostery, is de meest uitgebreide wereldwijde bron op trackers, het brengen van transparantie in web tracking."
+  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.Me, beheerd door Ghostery, is een integraal onderdeel van Ghostery's AI anti-tracking technologie. Het is een uitgebreide wereldwijde bron over trackers, die voor transparantie zorgt in webtracking."
   },
-  "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
-    "message": "Met Ghostery ingeschakeld bladert u direct veiliger, sneller en met minder vervelende advertenties over het web."
+  "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
+    "message": "Met Ghostery ingeschakeld blader je meteen veiliger, sneller en met minder vervelende advertenties door het web."
   },
   "yes": {
     "message": "Ja"
@@ -267,8 +270,8 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "Je kunt deze instellingen altijd wijzigen in het&nbsp;<strong>Ghostery configuratiescherm</strong>."
   },
-  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-    "message": "U kunt op elk moment van gedachten veranderen en Ghostery inschakelen om de trackers voor u te gaan volgen in Ghostery instellingen."
+  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
+    "message": "Je kunt op elk moment van gedachten veranderen en Ghostery inschakelen om de trackers voor je te gaan volgen in het Ghostery-paneel."
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "U koos ervoor om Ghostery niet in te schakelen!"

@@ -11,8 +11,7 @@
 
 import { define, html, router } from 'hybrids';
 
-const PRIVACY_POLICY_URL =
-  'https://ghostery.com/privacy/ghostery-plans-and-products-privacy-policy';
+const PRIVACY_POLICY_URL = 'https://www.ghostery.com/privacy-policy';
 
 function scrollToAnchor(host, event) {
   let anchor = event.target;
@@ -40,50 +39,49 @@ export default define({
 
       throw new Error('Failed to load privacy policy');
     }),
-  render: ({ policy }) =>
-    html`
-      <ui-onboarding-dialog>
-        <ui-text slot="header" type="headline-m" color="white">
-          Ghostery Privacy Policy
-        </ui-text>
-        <div>
-          ${html.resolve(
-            policy
-              .then(
-                (policy) =>
-                  html`<div
-                    id="policy"
-                    onclick="${scrollToAnchor}"
-                    innerHTML="${policy}"
-                  ></div>`,
-              )
-              .catch(
-                () =>
-                  html`<ui-text type="body-s">
-                    For more information read our full
-                    <a href="${PRIVACY_POLICY_URL}" target="_blank"
-                      >privacy policy</a
-                    >.
-                  </ui-text>`,
-              ),
-          )}
-        </div>
-        <ui-button slot="footer">
-          <a href="${router.backUrl()}">Done</a>
-        </ui-button>
-      </ui-onboarding-dialog>
-    `.css`
-      :host { color: var(--ui-color-gray-300); }
+  render: ({ policy }) => html`
+    <ui-onboarding-dialog>
+      <ui-text slot="header" type="headline-m">
+        Ghostery Privacy Policy
+      </ui-text>
+      <div>
+        ${html.resolve(
+          policy
+            .then(
+              (policy) =>
+                html`<div
+                  id="policy"
+                  onclick="${scrollToAnchor}"
+                  innerHTML="${policy}"
+                ></div>`,
+            )
+            .catch(
+              () =>
+                html`<ui-text type="body-s">
+                  For more information read our full
+                  <a href="${PRIVACY_POLICY_URL}" target="_blank"
+                    >privacy policy</a
+                  >.
+                </ui-text>`,
+            ),
+        )}
+      </div>
+      <ui-button slot="footer">
+        <a href="${router.backUrl()}">Done</a>
+      </ui-button>
+    </ui-onboarding-dialog>
+  `.css`
+    #policy { min-height: 100vh; }
+    #policy h1 { display: none }
+    #policy h3, #policy .side-menu .cap { font: var(--ui-font-headline-s); font-weight: 400; color: var(--ui-color-gray-800); margin: 16px 0; }
+    #policy .side-menu .cap { font: var(--ui-font-headline-s); }
+    #policy ul { list-style: none; padding: 0; margin: 16px 0; }
+    #policy ul li { font: var(--ui-font-body-m); margin: 0; }
+    #policy ul li a { text-decoration: none }
+    #policy p { font: var(--ui-font-body-m); margin: 16px 0; }
+    #policy a { color: var(--ui-color-gray-800); font-weight: bold; }
+    #policy code { white-space: initial; }
 
-      #policy { min-height: 100vh; }
-      #policy h3, #policy .side-menu .cap { font: var(--ui-font-headline-s); font-weight: 400; color: var(--ui-color-white); margin: 16px 0; }
-      #policy .side-menu .cap { font: var(--ui-font-headline-m); }
-      #policy ul { list-style: none; padding: 0; margin: 16px 0; }
-      #policy ul li { font: var(--ui-font-body-s); margin: 0; }
-      #policy ul li a { text-decoration: none }
-      #policy p { font: var(--ui-font-body-s); margin: 16px 0; }
-      #policy a { color: var(--ui-color-white); }
-
-      #policy .breadcrumb, #policy h2, #policy ul li.child { display: none }
-    `,
+    #policy .breadcrumb, #policy h2, #policy ul li.child { display: none }
+  `,
 });

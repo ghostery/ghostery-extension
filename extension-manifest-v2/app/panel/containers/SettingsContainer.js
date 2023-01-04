@@ -48,10 +48,11 @@ const mapStateToProps = state => ({
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(settingsActions, {
+	actions: bindActionCreators({
+		...settingsActions,
 		toggleExpanded,
 		updateSitePolicy,
-	}), dispatch),
+	}, dispatch),
 });
 /**
  * Connects Settings view component to the Redux store. Pass updated match, location, and history props to the wrapped component.

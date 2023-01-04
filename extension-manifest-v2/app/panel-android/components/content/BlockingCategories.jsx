@@ -41,7 +41,7 @@ class BlockingCategories extends React.Component {
 	getOpenStatus = (index) => {
 		const { openCategoryIndex } = this.state;
 		return index === openCategoryIndex;
-	}
+	};
 
 	toggleCategoryOpen = (index) => {
 		const { openCategoryIndex } = this.state;
@@ -50,7 +50,7 @@ class BlockingCategories extends React.Component {
 		} else {
 			this.setState({ openCategoryIndex: index });
 		}
-	}
+	};
 
 	render() {
 		const {

@@ -33,28 +33,45 @@ class Api {
 			return this._refreshPromise;
 		}
 
-		this._refreshPromise = fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
-			method: 'POST',
-			credentials: 'omit',
-		}).then((res) => {
-			if (res.status > 400) {
-				throw res.json();
-			}
-			return res.json();
-		}).then(response => setAllLoginCookies({
-			accessToken: response.access_token,
-			refreshToken: response.refresh_token,
-			csrfToken: response.csrf_token,
-			userId: response.user_id,
-		})).finally(() => { this._refreshPromise = null; });
+		const pending = (async () => {
+			const fromCookie = async (name) => {
+				const cookie = await cookiesGet({ name });
+				if (!cookie || !cookie.value) {
+					throw new Error(`Unable to refreshToken without "${name}"`);
+				}
+				return cookie.value;
+			};
+			const headers = {
+				UserId: await fromCookie('user_id'),
+				RefreshToken: await fromCookie('refresh_token'),
+			};
 
-		return this._refreshPromise;
+			const response = await fetch(`${this.config.AUTH_SERVER}/api/v2/refresh_token`, {
+				method: 'POST',
+				credentials: 'omit',
+				headers,
+			});
+			if (response.ok) {
+				const data = await response.json();
+				await setAllLoginCookies({
+					accessToken: data.access_token,
+					refreshToken: data.refresh_token,
+					csrfToken: data.csrf_token,
+					userId: data.user_id,
+				});
+			}
+			return response;
+		})();
+		this._refreshPromise = pending;
+		pending.finally(() => {
+			this._refreshPromise = null;
+		});
+		return pending;
 	}
 
 	async _sendReq(method, path, body) {
 		const headers = {
 			'Content-Type': Api.JSONAPI_CONTENT_TYPE,
-			'Content-Length': Buffer.byteLength(JSON.stringify(body)),
 		};
 		const	csrfTokenCookie = await cookiesGet({ name: 'csrf_token' });
 		if (csrfTokenCookie) {
@@ -112,7 +129,13 @@ class Api {
 					let shouldRefresh = false;
 					if (data && data.errors) {
 						data.errors.forEach((e) => {
-							if (e.code === '10021' || e.code === '10022') { // token is expired or missing
+							if (e.code === '10020' || e.code === '10021' || e.code === '10022') {
+								// The access_token was rejected, but we can get a new one because it is
+								// one of the retryable cases (not valid, expired, or missing).
+								//
+								// Note: "not valid" ('10020') is somewhat misleading: it does not
+								// necessarily mean that the access_token is ill-formed; the server
+								// will also return that code in situations where the token expired.
 								shouldRefresh = true;
 							}
 						});
@@ -152,23 +175,24 @@ class Api {
 		});
 	}
 
-	_errorHandler = errors => Promise.resolve(errors)
+	// eslint-disable-next-line class-methods-use-this
+	_errorHandler = errors => Promise.resolve(errors);
 
 	static get JSONAPI_CONTENT_TYPE() { return 'application/vnd.api+json'; }
 
 	get = (type, id, include = '') => {
 		if (!id) { return Promise.reject(new Error('id is missing')); }
 		return this._sendAuthenticatedRequest('GET', `/api/v2.1.0/${type}/${id}?${include ? `include=${include}` : ''}`);
-	}
+	};
 
-	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2.1.0/${type}/`, data)
+	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2.1.0/${type}/`, data);
 
 	update = (type, data) => {
 		// TODO check for data.id and fail
 		this._sendAuthenticatedRequest('PATCH', `/api/v2.1.0/${type}/${data.id}`, { data });
-	}
+	};
 
-	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2.1.0/${type}/${id}`)
+	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2.1.0/${type}/${id}`);
 }
 
 export default Api;

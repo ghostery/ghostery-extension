@@ -20,19 +20,21 @@ import { openSupportPage } from '../../utils/msg';
  * It allows user to access Priority Support
  * @memberOf SubscriptionComponents
  */
-const PrioritySupport = () => (
-	<div className="content-subscription s-tabs-panel">
-		<div className="row">
-			<div className="columns column-subscription">
-				<h1>{ t('priority_support') }</h1>
-				<div className="status-row">
-					<span className="status-value">{ t('subscription_support') }</span>
-					<div style={{ marginTop: '20px' }}>
-						<span className="status-value blue resubscribe" onClick={openSupportPage}>{ t('subscription_submit_issue') }</span>
+function PrioritySupport() {
+	return (
+		<div className="content-subscription s-tabs-panel">
+			<div className="row">
+				<div className="columns column-subscription">
+					<h1>{ t('priority_support') }</h1>
+					<div className="status-row">
+						<span className="status-value">{ t('subscription_support') }</span>
+						<div style={{ marginTop: '20px' }}>
+							<span className="status-value blue resubscribe" onClick={openSupportPage}>{ t('subscription_submit_issue') }</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-);
+	);
+}
 export default PrioritySupport;

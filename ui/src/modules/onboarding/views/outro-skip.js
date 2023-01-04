@@ -16,23 +16,25 @@ import sleep from '../illustrations/sleep.js';
 export default define({
   tag: 'ui-onboarding-outro-skip-view',
   content: () => html`
-    <ui-onboarding-layout>
-      <ui-onboarding-card>
+    <template layout="block">
+      <ui-card>
         <div slot="illustration">${sleep}</div>
-        <ui-text type="display-xl">
-          You chose to skip enabling Ghostery!
-        </ui-text>
-        <ui-text type="body-xl">
-          The Ghostery Browser Extension is installed in your browser but Ghosty
-          is taking a light nap.
-        </ui-text>
-        <ui-onboarding-card type="highlight">
-          <ui-text type="body-xl">
-            You can change your mind anytime and enable Ghostery to start
-            tracking the trackers for you in Ghostery settings.
+        <section layout="block:center column gap:2" layout@768px="margin:0:4">
+          <ui-text type="display-l">
+            You chose to skip enabling Ghostery!
           </ui-text>
-        </ui-onboarding-card>
-      </ui-onboarding-card>
-    </ui-onboarding-layout>
+          <ui-text type="body-xl" color="gray-800">
+            The Ghostery Browser Extension is installed in your browser but
+            Ghosty is taking a light nap.
+          </ui-text>
+        </section>
+        <ui-card type="highlight" layout="margin:top:5">
+          <ui-text type="body-l">
+            You can change your mind anytime and enable Ghostery to start
+            tracking the trackers for you in Ghostery panel.
+          </ui-text>
+        </ui-card>
+      </ui-card>
+    </template>
   `,
 });

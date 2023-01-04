@@ -20,7 +20,7 @@ import { NavLink } from 'react-router-dom';
  * @return {JSX} JSX for rendering the the button
  * @memberof PanelClasses
  */
-const NavButton = (props) => {
+function NavButton(props) {
 	/**
 	 * Render stats view
 	 * @return {ReactComponent}   ReactComponent instance
@@ -37,6 +37,6 @@ const NavButton = (props) => {
 			<ReactSVG src={imagePath} />
 		</NavLink>
 	);
-};
+}
 
 export default NavButton;

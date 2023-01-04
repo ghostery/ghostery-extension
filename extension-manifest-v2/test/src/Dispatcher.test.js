@@ -23,7 +23,7 @@ describe('dispatcher tests', () => {
 
 	test('dispatcher is triggered once for conf value not in SYNC_ARRAY', () => {
 		conf.paused_blocking = true;
-		return expect(spy).toHaveBeenCalledTimes(1);
+		return expect(spy).toHaveBeenCalledTimes(2);
 	});
 
 	test('clearAllMocks() works and callCount is reset to 0', () => {

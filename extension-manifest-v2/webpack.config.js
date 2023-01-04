@@ -15,16 +15,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin-next');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const sass = require('sass');
-const crypto = require('crypto');
-
-// Webpack uses obsolete hash algorithm which is no longer provided
-// by the node crypto package. This walkaround can be removed after
-// Webpack version is updated.
-const crypto_orig_createHash = crypto.createHash;
-crypto.createHash = algorithm => crypto_orig_createHash(algorithm === 'md4' ? 'sha256' : algorithm);
 
 // constants
 const BUILD_DIR = path.resolve(__dirname, 'dist');
@@ -42,22 +37,18 @@ const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
-	devtool: 'none', // source-maps
+	devtool: false, // 'source-map'
 	performance: {
 		hints: false // notify of assets over 250kb
 	},
 	resolve: {
-		mainFields: ['main'],
+		mainFields: ['browser', 'main'],
 		symlinks: false, // allow module resolution with `npm link`
 		extensions: ['.js', '.jsx'], // allow leaving off file extension when importing
-		alias: {
-			'@ghostery/ui$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/index.js'),
-			'@ghostery/ui/autoconsent$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/index.js'),
-			'@ghostery/ui/autoconsent/iframe$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/autoconsent/iframe.js'),
-			'@ghostery/ui/onboarding$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/onboarding/index.js'),
-			'@ghostery/ui/trackers-preview$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/modules/trackers-preview/index.js'),
-			'@ghostery/ui/wheel$': path.resolve(__dirname, 'node_modules/@ghostery/ui/src/utils/wheel.js'),
-			'@ghostery/libs$': path.resolve(__dirname, 'node_modules/@ghostery/libs/src/index.js'),
+		fallback: {
+			url: require.resolve('url'),
+			os: require.resolve('os-browserify/browser'),
+			tty: require.resolve('tty-browserify'),
 		},
 	},
 	entry: {
@@ -92,7 +83,6 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: BUILD_DIR,
-		hashFunction: 'sha256',
 	},
 	plugins: [
 		// Clear './dist' folder
@@ -131,7 +121,17 @@ module.exports = {
 			raw: true,
 			include: /\.js$/
 		}),
+		new ESLintPlugin({
+			extensions: ['js', 'jsx']
+		}),
 	],
+	optimization: {
+		minimizer: [
+			new ESBuildMinifyPlugin({
+				target: 'es2015',
+			}),
+		],
+	},
 	module: {
 		rules: [
 			{
@@ -139,63 +139,22 @@ module.exports = {
 				use: {
 					loader: 'underscore-template-loader'
 				}
-			}, {
-				test: /\.js$/,
-				include: [
-					path.resolve(__dirname, 'node_modules/@ghostery/libs'),
-					path.resolve(__dirname, 'node_modules/@ghostery/ui'),
-					path.resolve(__dirname, 'node_modules/@duckduckgo/autoconsent'),
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules/@ghostery/libs/node_modules'),
-				],
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							envName: 'src',
-						}
-					},
-					'eslint-loader'
-				],
-			}, {
+			},
+			{
 				test: /\.(js|jsx)$/,
-				include: [APP_DIR],
+				include: [APP_DIR, SRC_DIR],
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: 'babel-loader',
+						loader: 'esbuild-loader',
 						options: {
-							envName: 'app',
+							loader: 'jsx',
+							target: 'es2015',
 						}
 					},
-					'eslint-loader'
 				]
-			}, {
-				test: /\.js$/,
-				include: [SRC_DIR],
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							envName: 'src',
-						}
-					},
-					'eslint-loader'
-				]
-			}, {
-				test: /\.js$/,
-				include: [path.resolve(__dirname, 'node_modules/@cliqz/adblocker-extended-selectors')],
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							envName: 'common',
-						}
-					}
-				]
-			}, {
+			},
+			{
 				test: /\.scss$/,
 				resolve: {
 					extensions: ['.scss', '.sass']
@@ -204,8 +163,12 @@ module.exports = {
 					MiniCssExtractPlugin.loader,
 					'css-loader',
 					{
+						loader: 'resolve-url-loader',
+					},
+					{
 						loader: 'sass-loader',
 						options: {
+							sourceMap: true,
 							implementation: sass,
 							sassOptions: {
 								includePaths: [
@@ -216,18 +179,11 @@ module.exports = {
 						},
 					}
 				]
-			}, {
-				test: /\.svg$/,
-				loader: 'svg-url-loader'
-			}, {
-				test: /\.(png|woff|woff2|eot|ttf)$/,
-				use: {
-					loader: 'url-loader',
-					options: {
-						limit: 200000
-					}
-				}
-			}
-		]
+			},
+			{
+				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+				type: 'asset/inline',
+			},
+		],
 	}
 };

@@ -213,8 +213,8 @@ await build({
           return '[name].js';
         },
         assetFileNames: (chunkInfo) => {
-          return chunkInfo.name.includes('/') && chunkInfo.name.endsWith('.css')
-            ? chunkInfo.name.replace('.css', '')
+          return chunkInfo.name.startsWith('src/')
+            ? chunkInfo.name.replace('src/', '')
             : 'assets/[name].[ext]';
         },
       },
@@ -250,7 +250,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
           assetFileNames: (chunkInfo) => {
             return chunkInfo.name.includes('/') &&
               chunkInfo.name.endsWith('.css')
-              ? chunkInfo.name.replace('.css', '')
+              ? chunkInfo.name
               : 'assets/[name].[ext]';
           },
         },

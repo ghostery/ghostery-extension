@@ -22,10 +22,14 @@ const telemetry = new Telemetry({
 	EXTENSION_VERSION: globals.EXTENSION_VERSION,
 	getConf: () => conf,
 	log,
-	storage: conf.metrics,
+	storage: null, // WARNING: conf is not initilizied yet - call init() when conf is ready
 	saveStorage: (metrics) => {
 		conf.metrics = metrics;
 	},
 });
+
+telemetry.init = () => {
+	telemetry.storage = conf.metrics;
+};
 
 export default telemetry;

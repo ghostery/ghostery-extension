@@ -16,7 +16,7 @@ export default define({
   render: () => html`
     <template layout="row center">
       <ui-text
-        type="display-xs"
+        type="display-2xs"
         color="primary-500"
         layout="row gap items:center margin"
       >

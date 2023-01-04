@@ -72,9 +72,7 @@ const handler = {
 		// notify specific key subscribers
 		dispatcher.trigger(`conf.save.${key}`, value);
 		// notify catch all settings subscribers
-		if (confMutable.SYNC_SET.has(key) || key === 'bugs_last_checked') {
-			dispatcher.trigger('conf.changed.settings', key);
-		}
+		dispatcher.trigger('conf.changed.settings', key);
 
 		return true;
 	},

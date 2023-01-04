@@ -44,7 +44,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -76,7 +76,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -130,7 +130,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>
@@ -162,7 +162,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           >
             <img
               className="s-question"
-              src="../../app/images/panel/icon-information-tooltip.svg"
+              src="/app/images/panel/icon-information-tooltip.svg"
             />
           </div>
         </div>

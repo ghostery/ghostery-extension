@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 /**
  * OverviewTab Test Component
  *
@@ -11,7 +12,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import OverviewTab from '../OverviewTab';
@@ -109,6 +109,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				enable_anti_tracking: false,
 				enable_smart_block: false,
 				smartBlock: { blocked: {}, unblocked: {} },
+				setup_complete: true,
 			};
 			const summary = {
 				categories: [],

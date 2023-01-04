@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * User Accounts
  *
@@ -42,6 +43,7 @@ class Account {
 		const opts = {
 			errorHandler: errors => (
 				new Promise((resolve, reject) => {
+					// eslint-disable-next-line no-unreachable-loop
 					for (let i = 0; i < errors.length; i++) {
 						const err = errors[i];
 						switch (err.code) {
@@ -54,16 +56,20 @@ class Account {
 							case '10201': // refresh token is missing
 							case '10300': // csrf token is missing
 							case '10301': // csrf tokens do not match
+								// eslint-disable-next-line no-promise-executor-return
 								return this.logout()
 									.then(() => resolve())
 									.catch(() => resolve());
 							case '10030': // email not validated
 							case 'not-found':
+								// eslint-disable-next-line no-promise-executor-return
 								return reject(err);
 							default:
+								// eslint-disable-next-line no-promise-executor-return
 								return resolve();
 						}
 					}
+					// eslint-disable-next-line no-promise-executor-return
 					return resolve();
 				})
 			)
@@ -78,7 +84,6 @@ class Account {
 			body: data,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
 			},
 			credentials: 'omit',
 		}).then((res) => {
@@ -102,7 +107,7 @@ class Account {
 			alwaysLog(err);
 			return err;
 		});
-	}
+	};
 
 	async logout() {
 		try {
@@ -131,18 +136,26 @@ class Account {
 		}
 	}
 
-	refreshToken = () => api.refreshToken()
+	refreshToken = () => api.refreshToken();
 
 	// @TODO a 404 here should trigger a logout
 	getUser = () => (
 		this._getUserID()
 			.then(userID => api.get('users', userID))
 			.then((res) => {
+				if (Array.isArray(res?.errors) && res.errors.length > 0) {
+					log('We have a userID but we are not able to get data from the server. Force a logout. Errors:', res.errors);
+					throw new Error('Unable to fetch the user acount (forcing logout)');
+				}
+				if (!res.data?.id) {
+					alwaysLog('Unexpected case: the server sent missing data:', res);
+					throw new Error('User not properly logged in (got corrupted response)');
+				}
 				const user = build(normalize(res), 'users', res.data.id);
 				this._setAccountUserInfo(user);
 				return user;
 			})
-	)
+	);
 
 	getUserSettings = () => (
 		this._getUserIDIfEmailIsValidated()
@@ -158,6 +171,10 @@ class Account {
 					});
 				}
 
+				// clean up the autoconsent whitelist/blacklist
+				delete settings_json.autoconsent_whitelist;
+				delete settings_json.autoconsent_blacklist;
+
 				// @TODO setConfUserSettings settings.settingsJson
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);
@@ -167,7 +184,7 @@ class Account {
 			// or they have simply never been synced to the account server yet
 			// In that case, just use the local settings
 			.catch(() => this.buildUserSettings())
-	)
+	);
 
 	/**
 	 * @return {array}	All subscriptions the user has, empty if none
@@ -207,7 +224,7 @@ class Account {
 					metrics.ping('sign_in_success');
 				}
 			})
-	)
+	);
 
 	saveUserSettings = () => (
 		this._getUserIDIfEmailIsValidated()
@@ -220,7 +237,7 @@ class Account {
 					}
 				})
 			))
-	)
+	);
 
 	getTheme = name => (
 		this._getUserID()
@@ -242,13 +259,13 @@ class Account {
 						return css;
 					});
 			})
-	)
+	);
 
 	sendValidateAccountEmail = () => (
 		this._getUserID()
 			.then(userID => fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`))
 			.then(res => res.status < 400)
-	)
+	);
 
 	resetPassword = (email) => {
 		const data = `email=${window.encodeURIComponent(email)}`;
@@ -257,7 +274,6 @@ class Account {
 			body: data,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
 			},
 		}).then((res) => {
 			if (res.status >= 400) {
@@ -265,76 +281,7 @@ class Account {
 			}
 			return {};
 		});
-	}
-
-	migrate = () => (
-		new Promise((resolve) => {
-			ghosteryDebugger.addAccountEvent('migrate', 'migrate start');
-			const legacyLoginInfoKey = 'login_info';
-			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
-				if (chrome.runtime.lastError) {
-					ghosteryDebugger.addAccountEvent('migrate', 'runtime error');
-					resolve(chrome.runtime.lastError);
-					return;
-				}
-
-				const { login_info } = items;
-				if (!items || !login_info) {
-					ghosteryDebugger.addAccountEvent('migrate', 'no items found');
-					resolve();
-					return;
-				}
-
-				// ensure we have all the necessary info
-				const { decoded_user_token, user_token } = login_info;
-				if (!decoded_user_token || !user_token) {
-					ghosteryDebugger.addAccountEvent('migrate', 'found items, not enough info I');
-					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
-					return;
-				}
-				const {
-					UserId, csrf_token, RefreshToken, exp
-				} = decoded_user_token;
-				if (!UserId || !csrf_token || !RefreshToken || !exp) {
-					ghosteryDebugger.addAccountEvent('migrate', 'found items, not enough info II');
-					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
-					return;
-				}
-
-				// set cookies
-				this._setAllLoginCookies({
-					refreshToken: RefreshToken,
-					accessToken: user_token,
-					csrfToken: csrf_token,
-					userId: UserId,
-					expirationDate: exp,
-				}).then(() => {
-					// login
-					this._setAccountInfo(UserId);
-					this.getUserSubscriptionData();
-					ghosteryDebugger.addAccountEvent('migrate', 'remove legacy items');
-					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
-				}).catch((err) => {
-					ghosteryDebugger.addAccountEvent('migrate', 'cookies set error');
-					resolve(err);
-				});
-			});
-		})
-			.then(async () => {
-				// Checks if user is already logged in
-				// @TODO move this into an init() function
-				if (conf.account) {
-					return;
-				}
-				const cookie = await cookiesGet({ name: 'user_id' });
-				if (cookie) {
-					this._setAccountInfo(cookie.value);
-					this.getUserSubscriptionData();
-				}
-			})
-			// should not break the init path
-			.catch(e => alwaysLog(e))
-	)
+	};
 
 	/**
 	 * Determines if the user has the required scope combination(s) to access a resource.
@@ -374,7 +321,7 @@ class Account {
 			}
 		}
 		return false;
-	}
+	};
 
 	/**
 	 * Create settings object for syncing and/or Export.
@@ -401,45 +348,38 @@ class Account {
 			}
 		});
 		return settings;
+	};
+
+	async _getUserID() {
+		if (!conf.account) {
+			try {
+				const userID = await this._getUserIDFromCookie();
+				if (userID) {
+					log('Found user ID', userID, 'in cookies');
+					this._setAccountInfo(userID);
+				}
+			} catch (e) {
+				log('Unable to get userID from cookie');
+			}
+		}
+		const userID = conf.account?.userID;
+		if (!userID) {
+			throw new Error('_getUserID: cannot find userID (neither in account or cookies)');
+		}
+		return userID;
 	}
 
-	_getUserID = () => (
-		new Promise((resolve, reject) => {
-			if (!conf.account) {
-				return this._getUserIDFromCookie()
-					.then((userID) => {
-						this._setAccountInfo(userID);
-						resolve(conf.account.userID);
-					})
-					.catch(() => {
-						reject(new Error('_getUserID() Not logged in'));
-					});
-			}
-			return resolve(conf.account.userID);
-		})
-	)
-
-	_getUserIDIfEmailIsValidated = () => (
-		this._getUserID()
-			.then(userID => (
-				new Promise((resolve, reject) => {
-					const { user } = conf.account;
-					if (!user) {
-						return this.getUser()
-							.then((u) => {
-								if (u.emailValidated !== true) {
-									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
-								}
-								return resolve(userID);
-							});
-					}
-					if (!user.emailValidated) {
-						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
-					}
-					return resolve(userID);
-				})
-			))
-	)
+	async _getUserIDIfEmailIsValidated() {
+		const userID = await this._getUserID();
+		let { user } = conf.account;
+		if (!user) {
+			user = await this.getUser();
+		}
+		if (user?.emailValidated) {
+			return userID;
+		}
+		return new Error('_getUserIDIfEmailIsValidated(): email not validated');
+	}
 
 	_setAccountInfo = (userID) => {
 		conf.account = {
@@ -449,17 +389,17 @@ class Account {
 			subscriptionData: null,
 			themeData: null,
 		};
-	}
+	};
 
 	_setAccountUserInfo = (user) => {
 		conf.account.user = user;
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_setAccountUserSettings = (settings) => {
 		conf.account.userSettings = settings;
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_setSubscriptionData = (data) => {
 		// TODO: Change this so that we aren't writing over data
@@ -469,7 +409,7 @@ class Account {
 		}
 		conf.account.subscriptionData = data || null;
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_setThemeData = (data) => {
 		if (!conf.account.themeData) {
@@ -478,12 +418,12 @@ class Account {
 		const { name } = data;
 		conf.account.themeData[name] = { timestamp: Date.now(), ...data };
 		dispatcher.trigger('conf.save.account');
-	}
+	};
 
 	_clearAccountInfo = () => {
 		conf.account = null;
 		conf.current_theme = 'default';
-	}
+	};
 
 	_getUserIDFromCookie = async () => {
 		const cookie = await cookiesGet({ name: 'user_id' });
@@ -491,7 +431,7 @@ class Account {
 			throw new Error('err getting login user_id cookie');
 		}
 		return cookie.value;
-	}
+	};
 
 	/**
 	 * GET user settings from ConsumerAPI
@@ -509,7 +449,7 @@ class Account {
 			}
 		});
 		return returnedSettings;
-	}
+	};
 
 	_removeCookies = () => {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
@@ -521,7 +461,7 @@ class Account {
 				log(`Could not remove cookie with a name: ${name}`, e);
 			}
 		});
-	}
+	};
 }
 
 // Return the class as a singleton

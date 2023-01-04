@@ -42,7 +42,7 @@ const mapStateToProps = state => ({
  * @param  {Object} 	ownProps  Header component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { logout }), dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ ...actions, logout }, dispatch) });
 /**
  * Connects Header component to the Redux store.
  * @memberOf PanelContainers

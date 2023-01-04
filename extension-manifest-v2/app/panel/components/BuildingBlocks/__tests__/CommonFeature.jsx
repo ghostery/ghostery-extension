@@ -17,6 +17,7 @@ import { shallow } from 'enzyme';
 import CommonFeature from '../CommonFeature';
 
 // Fake the translation function to only return the translation key
+// eslint-disable-next-line no-undef
 global.t = function(str) {
 	return str;
 };
