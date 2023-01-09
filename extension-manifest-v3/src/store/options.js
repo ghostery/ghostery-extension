@@ -18,57 +18,6 @@ export const DNR_RULES_LIST =
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 
-async function migrateOptions() {
-  const options = {};
-
-  try {
-    // Only Chrome uses version 3 in the manifest,
-    // so it is a good condition to check if we are in Chrome
-    if (manifest.version === 3) {
-      const storage = await chrome.storage.local.get(null);
-
-      // Proceed if the storage contains data from v2
-      if ('version_history' in storage) {
-        options.dnrRules = {};
-        options.dnrRules.ads = storage.enable_ad_block || false;
-        options.dnrRules.tracking = storage.enable_anti_tracking || false;
-        options.dnrRules.annoyances = storage.enable_autoconsent || false;
-
-        options.onboarding = {
-          done: storage.setup_complete || storage.setup_skip || false,
-          shownAt: storage.setup_timestamp || 0,
-        };
-        options.terms = storage.setup_complete || false;
-        options.wtmSerpReport = storage.enable_wtm_serp_report || false;
-
-        options.autoconsent = {
-          all: !storage.autoconsent_whitelist,
-          allowed: storage.autoconsent_whitelist || [],
-          disallowed: storage.autoconsent_blacklist || [],
-        };
-
-        // TODO: 'site_whitelist', 'site_blacklist', etc. (generally user's custom rules)
-        // TODO: migrate account when it is implemented for v3
-
-        await Promise.all([
-          chrome.storage.local.clear(),
-          indexedDB
-            .databases()
-            .then((dbs) =>
-              Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name))),
-            ),
-        ]);
-      }
-    }
-  } catch (e) {
-    console.error(`Error while migrating data`, e);
-    return options;
-  }
-
-  await chrome.storage.local.set({ options });
-  return options;
-}
-
 const Options = {
   dnrRules: DNR_RULES_LIST.reduce(
     (all, rule) => ({ ...all, [rule]: false }),
@@ -89,7 +38,7 @@ const Options = {
   },
   [store.connect]: {
     async get() {
-      const { options = await migrateOptions() } =
+      const { options = await migrateFromMV2() } =
         await chrome.storage.local.get(['options']);
 
       // Migrate `trackerWheelDisabled` to `trackerWheel`
@@ -144,7 +93,7 @@ const Options = {
                   ? {
                       action: { type: 'allowAllRequests' },
                       condition: {
-                        requestDomains: options.paused.map(String),
+                        requestDomains: options.paused.map(({ id }) => id),
                         resourceTypes: ['main_frame', 'sub_frame'],
                       },
                     }
@@ -153,7 +102,7 @@ const Options = {
                       condition: {
                         urlFilter: '*',
                         domains: options.paused
-                          .map(String)
+                          .map(({ id }) => id)
                           .map((d) => [d, `www.${d}`])
                           .flat(),
                       },
@@ -231,6 +180,63 @@ if (chrome.declarativeNetRequest.getDynamicRules) {
 }
 
 export default Options;
+
+async function migrateFromMV2() {
+  const options = {};
+
+  try {
+    // Only Chrome uses version 3 in the manifest,
+    // so it is a good condition to check if we are in Chrome
+    if (manifest.manifest_version === 3) {
+      const storage = await chrome.storage.local.get(null);
+
+      // Proceed if the storage contains data from v2
+      if ('version_history' in storage) {
+        options.dnrRules = {};
+        options.dnrRules.ads = storage.enable_ad_block || false;
+        options.dnrRules.tracking = storage.enable_anti_tracking || false;
+        options.dnrRules.annoyances = storage.enable_autoconsent || false;
+
+        options.onboarding = {
+          done: storage.setup_complete || storage.setup_skip || false,
+          shownAt: storage.setup_timestamp || 0,
+        };
+        options.terms = storage.setup_complete || false;
+        options.wtmSerpReport = storage.enable_wtm_serp_report || false;
+
+        options.autoconsent = {
+          all: !storage.autoconsent_whitelist,
+          allowed: storage.autoconsent_whitelist || [],
+          disallowed: storage.autoconsent_blacklist || [],
+        };
+
+        options.paused = storage.site_whitelist.map((domain) => ({
+          id: domain,
+          revokeAt: 0,
+        }));
+
+        await chrome.storage.local.clear();
+
+        await Promise.all([
+          // Clean up indexedDBs
+          indexedDB
+            .databases()
+            .then((dbs) =>
+              Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name))),
+            ),
+          // Set options by hand to make sure, that
+          // paused side effects are triggered
+          Options[store.connect].set(undefined, options, ['paused']),
+        ]);
+      }
+    }
+  } catch (e) {
+    console.error(`Error while migrating data`, e);
+    return options;
+  }
+
+  return options;
+}
 
 const observers = new Set();
 export async function observe(property, fn) {
