@@ -42,12 +42,14 @@ async function updateTabStats(msg, sender) {
   const tabId = sender.tab.id;
   const stats = tabStats.get(tabId);
 
-  msg.urls.forEach((url) => {
-    const tracker = getTrackerFromUrl(url, stats.domain);
-    if (tracker) {
-      stats.trackers.push(tracker);
-    }
-  });
+  msg.urls
+    .filter((url) => !stats.trackers.some((t) => t.url === url))
+    .forEach((url) => {
+      const tracker = getTrackerFromUrl(url, stats.domain);
+      if (tracker) {
+        stats.trackers.push(tracker);
+      }
+    });
 
   stats.trackers.sort(
     (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
