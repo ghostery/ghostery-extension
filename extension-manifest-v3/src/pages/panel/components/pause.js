@@ -77,8 +77,8 @@ export default {
       >
         <div id="label" layout="grow row center gap:0.5 shrink overflow">
           <ui-icon name="pause" color="gh-panel-action"></ui-icon>
-          <ui-text type="label-m" color="gh-panel-action">
-            ${paused ? `Ghostery paused` : `Pause Ghostery on this site`}
+          <ui-text type="label-m" color="gh-panel-action" layout="block:center">
+            ${paused ? `Ghostery paused` : `Pause on this site`}
           </ui-text>
         </div>
         <div
@@ -157,7 +157,6 @@ export default {
       border-radius: 8px;
       box-sizing: border-box;
       padding: 4px;
-      white-space: nowrap;
     }
 
     #main, #label, #type { transition: all 0.2s; }
@@ -177,6 +176,7 @@ export default {
       border-radius: 8px;
       border: 1px solid var(--ui-color-primary-300);
       padding: 8px 8px 8px 12px;
+      white-space: nowrap;
     }
 
     #type ui-icon {
@@ -201,6 +201,7 @@ export default {
     #main.paused, #main.paused:hover, #main.paused:active {
       pointer-events: none;
       background: var(--ui-color-danger-500);
+      white-space: nowrap;
       --ui-color-gh-panel-action: var(--ui-color-white);
     }
 
