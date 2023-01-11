@@ -49,7 +49,7 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/url-parser": "^1.1.4",
-    "@duckduckgo/autoconsent": "^3.0.4",
+    "@duckduckgo/autoconsent": "^4.0.0",
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
     "@sentry/browser": "7.1.1",
