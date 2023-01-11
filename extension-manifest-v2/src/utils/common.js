@@ -132,14 +132,19 @@ export function prefsSet(prefs) {
 		throw new Error('Bad argument');
 	}
 	return new Promise(((resolve, reject) => {
-		chrome.storage.local.set(prefs, () => {
-			if (chrome.runtime.lastError) {
-				alwaysLog('prefsSet ERROR', chrome.runtime.lastError);
-				reject(chrome.runtime.lastError);
-			} else {
-				resolve(prefs);
-			}
-		});
+		try {
+			chrome.storage.local.set(prefs, () => {
+				if (chrome.runtime.lastError) {
+					alwaysLog('prefsSet ERROR', chrome.runtime.lastError);
+					reject(chrome.runtime.lastError);
+				} else {
+					resolve(prefs);
+				}
+			});
+		} catch (e) {
+			alwaysLog('prefsSet ERROR', e);
+			reject(e);
+		}
 	}));
 }
 
