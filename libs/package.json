@@ -13,7 +13,8 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
-    "ua-parser-js": "^1.0.2"
+    "ua-parser-js": "^1.0.2",
+    "webextension-polyfill": "^0.10.0"
   },
   "devDependencies": {
     "eslint": "^8.21.0",

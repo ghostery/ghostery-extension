@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import browser from 'webextension-polyfill';
+
 import getBrowserInfo from './browser-info.js';
 
 /**
@@ -103,30 +105,19 @@ class Metrics {
   }
 
   async detectUTMs() {
-    await new Promise((resolve) => {
-      let foundUTM = false;
-      chrome.tabs.query(
-        {
-          url: ['https://www.ghostery.com/*'],
-        },
-        (tabs) => {
-          tabs.forEach((tab) => {
-            if (foundUTM) {
-              return;
-            }
-
-            const query = processUrlQuery(tab.url);
-            if (!query.utm_source || !query.utm_campaign) {
-              return;
-            }
-
-            this.setUTMs(query);
-            foundUTM = true;
-          });
-          resolve();
-        },
-      );
+    const tabs = await browser.tabs.query({
+      url: ['https://www.ghostery.com/*'],
     });
+
+    // find first ghostery.com tab with utm_source and utm_campaign
+    for (const tab of tabs) {
+      const query = processUrlQuery(tab.url);
+
+      if (query.utm_source && query.utm_campaign) {
+        this.setUTMs(query);
+        break;
+      }
+    }
 
     return {
       utm_source: this.utm_source,
@@ -134,9 +125,9 @@ class Metrics {
     };
   }
 
-  setUTMs(utms) {
-    this.utm_source = utms.utm_source;
-    this.utm_campaign = utms.utm_campaign;
+  setUTMs({ utm_source, utm_campaign }) {
+    this.utm_source = utm_source;
+    this.utm_campaign = utm_campaign;
   }
 
   /**
