@@ -1,5 +1,10 @@
 import { html, router } from 'hybrids';
 
+function clickOnClose(host) {
+  const anchor = host.shadowRoot.querySelector('a');
+  anchor.click();
+}
+
 export default {
   render: () => html`
     <template layout="contents">
@@ -8,6 +13,7 @@ export default {
           block fixed inset layer:100
           margin:0 padding:2.5 overflow:scroll
         "
+        onclick="${clickOnClose}"
       >
         <section
           layout="column content:center gap:2 width:::1200px height::full margin:0:auto"

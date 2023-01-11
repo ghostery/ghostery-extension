@@ -36,7 +36,7 @@ export default {
     return paused.filter((item) => item.id.includes(query));
   },
   content: ({ paused, websites }) => html`
-    <template layout="block overflow:scroll">
+    <template layout="block">
       <div layout="column gap:4">
         <div
           layout="row items:center content:space-between"
@@ -53,7 +53,7 @@ export default {
           `}
         </div>
         <section layout="column gap:4" layout@768px="gap:5">
-          <div layout="column gap:0.5">
+          <div layout="column gap">
             <ui-text type="headline-m" mobile-type="headline-s">
               Websites with paused Ghostery Privacy Protection
             </ui-text>
@@ -111,7 +111,7 @@ export default {
                             <ui-icon
                               name="trash"
                               layout="size:3"
-                              color="gray-600"
+                              color="gray-400"
                             ></ui-icon>
                           </button>
                         </ui-action>

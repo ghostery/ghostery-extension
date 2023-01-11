@@ -20,7 +20,7 @@ const PREVIEWS = {
   'ad_blocking': {
     src: assets.ad_blocking,
     title: msg`Ad-Blocking`,
-    description: msg`Declutters the web for you/eliminates ads on the websites you visit, offering a calm, safe and private internet.`,
+    description: msg`Eliminates ads on websites you visit, offering a calm, safe and private internet.`,
   },
   'anti_tracking': {
     src: assets.anti_tracking,
@@ -51,7 +51,7 @@ function toggleNeverConsent(host) {
 export default {
   options: store(Options),
   content: ({ options }) => html`
-    <template layout="block overflow:scroll">
+    <template layout="block">
       ${store.ready(options) &&
       html`
         <div layout="column gap:4">
@@ -60,20 +60,24 @@ export default {
             mobile-type="headline-m"
             layout@992px="margin:bottom"
           >
-            Global Settings for Privacy Protection
+            Privacy Protection
           </ui-text>
           <section layout="column gap:4" layout@768px="gap:5">
             <div layout="column gap:0.5">
               <ui-text type="headline-m" mobile-type="headline-s">
                 Manage your Ghostery Privacy Protection
               </ui-text>
-              <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                Ghostery protects your privacy by detecting and neutralizing
-                different types of data collectors, from ads to trackers and
-                cookie popups. You can manage the functionality of these privacy
-                components to your liking. We recommend keeping them ON at all
-                times.
-              </ui-text>
+              <div layout="column gap">
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  Ghostery protects your privacy by detecting and neutralizing
+                  different types of data collectors, from ads to trackers and
+                  cookie popups.
+                </ui-text>
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  You can manage the functionality of these privacy components
+                  to your liking. We recommend keeping them ON at all times.
+                </ui-text>
+              </div>
             </div>
             <div layout="row items:start gap:2" layout@768px="gap:5">
               <a href="${router.url(Preview, PREVIEWS['ad_blocking'])}">
@@ -88,8 +92,8 @@ export default {
                 <div layout="column gap:0.5 grow">
                   <ui-text type="headline-s">Ad-Blocking</ui-text>
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                    Declutters the web for you/eliminates ads on the websites
-                    you visit, offering a calm, safe and private internet.
+                    Eliminates ads on websites you visit, offering a calm, safe
+                    and private internet.
                   </ui-text>
                 </div>
                 <ui-settings-toggle

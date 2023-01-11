@@ -12,6 +12,8 @@
 import { html, define, msg, dispatch } from 'hybrids';
 import { sortCategories } from '@ghostery/ui/categories';
 
+import DisablePreviewImg from './assets/disable-preview.svg';
+
 // Panel UI
 import '../panel/index.js';
 
@@ -24,73 +26,101 @@ export default define({
   domain: '',
   render: ({ domain, confirmDisabled, stats }) => html`
     <template layout="block height:full">
-      <ui-panel-header>
-        <ui-text type="label-m">${domain}</ui-text>
-        <ui-action slot="actions">
-          <button
-            onclick="${(host) => dispatch(host, 'close')}"
-            layout="row center size:3"
-          >
-            <ui-icon name="close" color="gray-900"></ui-icon>
-          </button>
-        </ui-action>
-      </ui-panel-header>
+      ${confirmDisabled
+        ? html`
+            <main layout="column gap:2 padding:3:5:3">
+              <img
+                src="${DisablePreviewImg}"
+                alt="Disable Preview Trackers"
+                layout="self:center"
+              />
+              <div layout="block:center column gap">
+                <ui-text type="label-l">
+                  Are you sure, you want to disable tracker previews?
+                </ui-text>
+                <ui-text>
+                  You won’t see anymore tracker wheels next to the search
+                  results.
+                </ui-text>
+              </div>
+              <div layout="grid:2 gap:2">
+                <ui-button type="outline" size="small">
+                  <button onclick="${html.set('confirmDisabled', false)}">
+                    Cancel
+                  </button>
+                </ui-button>
+                <ui-button id="disable" type="outline" size="small">
+                  <button onclick="${(host) => dispatch(host, 'disable')}">
+                    Disable
+                  </button>
+                </ui-button>
+              </div>
+            </main>
+          `
+        : html`
+            <ui-panel-header>
+              <ui-icon name="logo" slot="icon" layout="size:3"></ui-icon>
+              <ui-text type="label-m">${domain}</ui-text>
+              <ui-action slot="actions">
+                <button
+                  onclick="${(host) => dispatch(host, 'close')}"
+                  layout="row center size:3"
+                >
+                  <ui-icon
+                    name="close"
+                    color="gray-900"
+                    layout="size:2.5"
+                  ></ui-icon>
+                </button>
+              </ui-action>
+            </ui-panel-header>
 
-      <main layout="padding:1.5">
-        ${stats &&
-        html.resolve(
-          stats.then(
-            (data) => html`
-              <ui-panel-stats
-                domain="${domain}"
-                categories="${data.stats.sort(sort)}"
-                label="${msg`Trackers Preview`}"
-                layout="relative layer:101"
-              >
-              </ui-panel-stats>
-            `,
-          ),
-        )}
-      </main>
-      <footer layout="row padding gap">
-        ${confirmDisabled
-          ? html`
-              <ui-text type="body-s" color="gray-600">Are you sure?</ui-text>
+            <main layout="padding:1.5">
+              ${stats &&
+              html.resolve(
+                stats.then(
+                  (data) => html`
+                    <ui-panel-stats
+                      domain="${domain}"
+                      categories="${data.stats.sort(sort)}"
+                      label="${msg`Trackers Preview`}"
+                      layout="relative layer:101"
+                    >
+                    </ui-panel-stats>
+                  `,
+                ),
+              )}
+            </main>
+            <footer layout="row center padding:2">
               <ui-action>
-                <button onclick="${(host) => dispatch(host, 'disable')}">
-                  <ui-text type="body-s" color="gray-600">
+                <button
+                  onclick="${html.set('confirmDisabled', true)}"
+                  layout="row gap:0.5"
+                >
+                  <ui-icon name="block" color="gray-600"></ui-icon>
+                  <ui-text type="label-s" color="gray-600">
                     Disable Trackers Preview
                   </ui-text>
                 </button>
               </ui-action>
-              <ui-action>
-                <button onclick="${html.set('confirmDisabled', false)}">
-                  <ui-text type="body-s" color="gray-600">Cancel</ui-text>
-                </button>
-              </ui-action>
-            `
-          : html`
-              <ui-action>
-                <button onclick="${html.set('confirmDisabled', true)}">
-                  <ui-text type="body-s" color="gray-600">
-                    Disable Trackers Preview
-                  </ui-text>
-                </button>
-              </ui-action>
-            `}
-      </footer>
+            </footer>
+          `}
     </template>
   `.css`
-     :host {
-       background-color: #F8F8F8;
-     }
+    footer {
+      background: linear-gradient(180deg, #F0F2F7 0%, #FFFFFF 90%);
+    }
 
-     main {
-       background-color: white;
-     }
+     ui-button {
+      text-transform: none;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
+      --ui-button-color-hover: var(--ui-color-primary-700);
+    }
 
-     footer {
-       border-top: 1px solid rgba(0, 0, 0, 0.1);
-     }
-   `,
+    ui-button#disable {
+      color: var(--ui-color-danger-500);
+      --ui-button-color-hover: var(--ui-color-danger-700);
+    }
+  `,
 });

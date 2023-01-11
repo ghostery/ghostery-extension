@@ -35,7 +35,7 @@ export default {
       >
         <slot name="nav"></slot>
       </nav>
-      <main layout="column grow" layout@992px="area::2">
+      <main layout="column grow overflow:scroll" layout@992px="area::2">
         <slot
           layout::slotted(*)="padding:4:2"
           layout::slotted(*)@768px="padding:5:6"
@@ -78,7 +78,6 @@ export default {
       color: var(--ui-color-gray-900);
       text-decoration: none;
       font: var(--ui-font-label-xs);
-      white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
       flex: 1 1 0;

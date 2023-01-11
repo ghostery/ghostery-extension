@@ -32,7 +32,7 @@ const PREVIEWS = {
 export default {
   options: store(Options),
   content: ({ options }) => html`
-    <template layout="column gap:4 overflow:scroll">
+    <template layout="column gap:4" layout@768px="gap:5">
       <div layout="column gap" layout@992px="margin:bottom">
         <ui-text type="headline-l" mobile-type="headline-m">
           WhoTracks.me
@@ -52,20 +52,10 @@ export default {
       ${store.ready(options) &&
       html`
         <section layout="column gap:4">
-          <div layout="column gap:0.5">
-            <ui-text type="headline-m" mobile-type="headline-s">
-              Browser Settings
-            </ui-text>
-            <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-              Suspendisse feugiat. Nunc nulla. Vivamus consectetuer hendrerit
-              lacus. In ut quam vitae odio lacinia tincidunt. Sed cursus turpis
-              vitae tortor.
-            </ui-text>
-          </div>
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
               <ui-settings-help-image layout="size:12:8 shrink:0">
-                <img src="${assets.wtm_wheel_small}" alt="Trackers WheelP" />
+                <img src="${assets.wtm_wheel_small}" alt="WhoTracks.Me Wheel" />
               </ui-settings-help-image>
             </a>
             <div
@@ -73,7 +63,7 @@ export default {
               layout@768px="row items:center gap:5 grow"
             >
               <div layout="column grow">
-                <ui-text type="headline-s">Trackers Wheel</ui-text>
+                <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Praesent egestas tristique nibh. Cras ultricies mi eu turpis
                   hendrerit fringilla.
@@ -85,24 +75,12 @@ export default {
               ></ui-settings-toggle>
             </div>
           </div>
-        </section>
-
-        <section layout="column gap:4 margin:top:6">
-          <div layout="column gap:0.5">
-            <ui-text type="headline-l" mobile-type="headline-m">
-              Tracker Settings
-            </ui-text>
-            <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-              Vivamus quis mi. Vestibulum ante ipsum primis in faucibus orci
-              luctus et ultrices posuere cubilia Curae; Fusce id purus.
-            </ui-text>
-          </div>
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
               <ui-settings-help-image layout="size:12:8 shrink:0">
                 <img
                   src="${assets.trackers_preview_small}"
-                  alt="Trackers Preview on SERP"
+                  alt="Trackers Preview"
                 />
               </ui-settings-help-image>
             </a>
@@ -111,7 +89,7 @@ export default {
               layout@768px="row items:center gap:5 grow"
             >
               <div layout="column grow">
-                <ui-text type="headline-s">Trackers Preview on SERP</ui-text>
+                <ui-text type="headline-s">Trackers Preview</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Praesent egestas tristique nibh. Cras ultricies mi eu turpis
                   hendrerit fringilla.

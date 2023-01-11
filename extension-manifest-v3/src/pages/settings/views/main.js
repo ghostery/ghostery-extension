@@ -43,7 +43,7 @@ export default {
           slot="nav"
         >
           <ui-icon name="settings" color="nav" layout="size:3"></ui-icon>
-          Website Settings
+          Websites
         </a>`}
         <a
           href="${router.url(Whotracksme, { scrollToTop: true })}"

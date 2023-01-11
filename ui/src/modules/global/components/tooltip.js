@@ -13,8 +13,10 @@ import { html } from 'hybrids';
 
 const timeouts = new WeakMap();
 
+let activeTooltip = null;
+
 export default {
-  autohide: 2000,
+  autohide: 2,
   wrap: false,
   show: {
     value: false,
@@ -25,6 +27,11 @@ export default {
       tooltip.style.transform = '';
 
       if (value) {
+        if (activeTooltip && activeTooltip !== host) {
+          activeTooltip.show = false;
+        }
+        activeTooltip = host;
+
         const { left, width } = tooltip.getBoundingClientRect();
 
         const overflowRight = left + width + 8 - window.innerWidth;
@@ -43,7 +50,7 @@ export default {
             host,
             setTimeout(() => {
               host.show = false;
-            }, host.autohide),
+            }, host.autohide * 1000),
           );
         }
       } else {
@@ -52,18 +59,26 @@ export default {
     },
   },
   render: () => html`
-    <template layout="block relative">
-      <slot
+    <template layout="contents">
+      <div
+        ontouchstart="${html.set('show', true)}"
         onmouseenter="${html.set('show', true)}"
         onmouseleave="${html.set('show', false)}"
-      ></slot>
-      <div id="tooltip" layout="absolute bottom:full left:50% layer:200" hidden>
-        <ui-text
-          type="label-s"
-          layout="block:center margin:bottom:0.5 padding:0.5:1"
+        layout="block relative"
+      >
+        <slot></slot>
+        <div
+          id="tooltip"
+          layout="absolute bottom:full left:50% layer:90"
+          hidden
         >
-          <slot name="content"></slot>
-        </ui-text>
+          <ui-text
+            type="label-s"
+            layout="block:center margin:bottom:0.5 padding:0.5:1"
+          >
+            <slot name="content"></slot>
+          </ui-text>
+        </div>
       </div>
     </template>
   `.css`

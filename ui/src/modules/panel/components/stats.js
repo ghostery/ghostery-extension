@@ -25,6 +25,17 @@ export default {
     ),
   trackers: undefined,
   domain: '',
+  wtmUrl: ({ domain }) =>
+    domain
+      ? fetch(`https://www.whotracks.me/websites/${domain}.html`).then(
+          (res) => {
+            if (res.status !== 200) {
+              throw Error('Not found');
+            }
+            return res.url;
+          },
+        )
+      : Promise.reject(),
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -39,16 +50,16 @@ export default {
     categories,
     categoryList,
     trackers,
-    domain,
+    wtmUrl,
     type,
     dialog,
     label,
   }) => html`
     <template layout="column gap:2">
-      <div layout="row items:center gap:0.5">
+      <div layout="row items:center gap height::4.5">
         <div layout="row gap grow">
           <ui-text type="label-m">${label}</ui-text>
-          <ui-tooltip wrap>
+          <ui-tooltip wrap autohide="10">
             <span slot="content" layout="block width:200px">
               Mind that not all listed entities are trackers, that is not all of
               them collect personal data
@@ -56,17 +67,20 @@ export default {
             <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
           </ui-tooltip>
         </div>
-        <ui-tooltip>
-          <span slot="content">WhoTracks.Me Statistical Report</span>
-          <ui-panel-action>
-            <a
-              href="https://www.whotracks.me/websites/${domain}.html"
-              target="_blank"
-            >
-              <ui-icon name="whotracksme"></ui-icon>
-            </a>
-          </ui-panel-action>
-        </ui-tooltip>
+        ${html.resolve(
+          wtmUrl.then(
+            (url) => html`
+              <ui-tooltip>
+                <span slot="content">WhoTracks.Me Statistical Report</span>
+                <ui-panel-action>
+                  <a href="${url}" target="_blank">
+                    <ui-icon name="whotracksme"></ui-icon>
+                  </a>
+                </ui-panel-action>
+              </ui-tooltip>
+            `,
+          ),
+        )}
         ${trackers &&
         html`
           <ui-panel-action-group>

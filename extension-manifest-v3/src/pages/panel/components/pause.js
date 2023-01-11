@@ -15,17 +15,17 @@ const PAUSE_TYPES = [
   {
     value: 1,
     label: msg`1 hour`,
-    description: msg`Ghostery on this site will be paused for 1 hour`,
+    description: msg`Ghostery will be paused on this site for 1 hour`,
   },
   {
     value: 24,
     label: msg`1 day`,
-    description: msg`Ghostery on this site will be paused for 1 day`,
+    description: msg`Ghostery will be paused on this site for 1 day`,
   },
   {
     value: 0,
     label: msg`Always`,
-    description: msg`Ghostery on this site will be paused. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you across the web.`,
+    description: msg`Ghostery will be paused on this site. You can change this at any time in Ghostery Settings to stop trackers and ads from tracking you around the web`,
   },
 ];
 
@@ -184,11 +184,6 @@ export default {
     }
 
     #main.active #type {
-      --ui-color-gh-panel-action: var(--ui-color-primary-700);
-      border-color: var(--ui-color-primary-100);
-    }
-
-    #main.active #type {
       --ui-color-gh-panel-action: var(--ui-color-white);
       background: var(--ui-color-primary-700);
       border-color: var(--ui-color-primary-700);
@@ -211,7 +206,7 @@ export default {
         --ui-color-gh-panel-action: var(--ui-color-white);
       }
 
-      #main:hover #type {
+      #main:hover:not(.active) #type {
         --ui-color-gh-panel-action: var(--ui-color-primary-700);
         border-color: var(--ui-color-primary-100);
       }
