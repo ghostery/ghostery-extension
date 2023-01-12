@@ -22,6 +22,11 @@ const PREVIEWS = {
     title: msg`Trackers Wheel`,
     description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
   },
+  'trackers_count': {
+    src: assets['trackers_count'],
+    title: msg`Trackers Count`,
+    description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
+  },
   'trackers_preview': {
     src: assets['trackers_preview'],
     title: msg`Trackers Preview`,
@@ -72,6 +77,31 @@ export default {
               <ui-settings-toggle
                 value="${options.trackerWheel}"
                 onchange="${html.set(options, 'trackerWheel')}"
+              ></ui-settings-toggle>
+            </div>
+          </div>
+          <div layout="row gap:2" layout@768px="gap:5">
+            <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
+              <ui-settings-help-image layout="size:12:8 shrink:0">
+                <img
+                  src="${assets.trackers_count_small}"
+                  alt="Trackers Count"
+                />
+              </ui-settings-help-image>
+            </a>
+            <div
+              layout="column gap:2"
+              layout@768px="row items:center gap:5 grow"
+            >
+              <div layout="column grow">
+                <ui-text type="headline-s">Trackers Count</ui-text>
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  Praesent venenatis metus at tortor pulvinar varius.
+                </ui-text>
+              </div>
+              <ui-settings-toggle
+                value="${options.wtmSerpReport}"
+                onchange="${html.set(options, 'trackerCount')}"
               ></ui-settings-toggle>
             </div>
           </div>

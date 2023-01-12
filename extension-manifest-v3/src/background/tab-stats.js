@@ -18,24 +18,35 @@ import Options from '/store/options.js';
 import { getTrackerFromUrl } from './utils/bugs.js';
 import tabStats from './utils/map.js';
 
-const setIcon = throttle((tabId, stats) => {
-  if (!stats) {
-    (chrome.browserAction || chrome.action).setIcon({
-      tabId,
-      path: {
+const action = chrome.browserAction || chrome.action;
+action.setBadgeBackgroundColor({ color: '#3f4146' /* gray-600 */ });
+
+const setIcon = throttle(async (tabId, stats) => {
+  const options = await store.resolve(Options);
+
+  if (options.trackerWheel && stats.trackers.length > 0) {
+    const paused = options.paused?.some(({ id }) => id === stats.domain);
+    const data = {};
+
+    if (paused) {
+      data.path = {
         16: '/assets/images/icon19_off.png',
         32: '/assets/images/icon38_off.png',
-      },
-    });
-  } else {
-    const categories = stats.trackers.map((t) => t.category);
-    const imageData = getOffscreenImageData(128, categories);
+      };
+    } else {
+      data.imageData = getOffscreenImageData(
+        128,
+        stats.trackers.map((t) => t.category),
+      );
+    }
 
-    (chrome.browserAction || chrome.action).setIcon({
-      tabId,
-      imageData,
-    });
+    action.setIcon({ tabId, ...data });
   }
+
+  action.setBadgeText({
+    tabId,
+    text: options.trackerCount ? String(stats.trackers.length) : '',
+  });
 }, 250);
 
 async function updateTabStats(msg, sender) {
@@ -56,14 +67,7 @@ async function updateTabStats(msg, sender) {
   );
 
   tabStats.set(tabId, stats);
-
-  const { trackerWheel, paused } = await store.resolve(Options);
-
-  if (paused && paused.some(({ id }) => id === stats.domain)) {
-    setIcon(tabId, null);
-  } else if (trackerWheel && stats.trackers.length > 0) {
-    setIcon(tabId, stats);
-  }
+  setIcon(tabId, stats);
 }
 
 chrome.tabs.onRemoved.addListener((tabId) => {

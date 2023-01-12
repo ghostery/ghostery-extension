@@ -30,6 +30,7 @@ const Options = {
     interactions: 0,
   },
   trackerWheel: true,
+  trackerCount: true,
   wtmSerpReport: true,
   terms: false,
   onboarding: { done: false, shownAt: 0 },
