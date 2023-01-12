@@ -21,6 +21,7 @@ Node.js 18 (or higher) is required to build the extension.
 #### Install local npm packages
 
 ```sh
+$ (cd .. && npm ci)
 $ (cd ../libs && npm ci)
 $ npm ci
 ```

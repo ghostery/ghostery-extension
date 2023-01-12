@@ -1,7 +1,6 @@
 ## Build Files
 dist/
 build/
-licenses.json
 
 ## Node
 node_modules/

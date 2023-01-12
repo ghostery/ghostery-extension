@@ -12,13 +12,8 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import licenses from '../../tools/licenses/licenses.json';
 import License from './License';
 
-const licensesArray = [];
-Object.keys(licenses).forEach((key) => {
-	licensesArray.push(licenses[key]);
-});
 /**
  * @class Handles a list of licenses on internal licenses.html page
  * which displays licenses for all third-party packages used by Ghostery.
@@ -35,12 +30,25 @@ class Licenses extends React.Component {
 		return { __html: t('license_footer') };
 	}
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			licenses: [],
+		};
+		fetch('/dist/licenses.json').then(async (response) => {
+			const licenses = await response.json();
+			this.setState({
+				licenses: Object.values(licenses),
+			});
+		});
+	}
+
 	/**
 	 * Render page.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const list = licensesArray.map((license, index) => (
+		const list = this.state.licenses.map((license, index) => (
 			<License index={index} key={license.name} license={license} />
 		));
 		return (
