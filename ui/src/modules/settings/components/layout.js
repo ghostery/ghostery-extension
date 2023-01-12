@@ -11,7 +11,12 @@
 
 import { html } from 'hybrids';
 
+function scrollToTop({ main }) {
+  main.scrollTop = 0;
+}
+
 export default {
+  main: ({ render }) => render().querySelector('main'),
   render: () => html`
     <template
       layout="column height:100%"
@@ -41,6 +46,7 @@ export default {
           layout::slotted(*)@768px="padding:5:6"
           layout::slotted(*)@992px="padding:6:3 area::2"
           layout::slotted(*)@1280px="padding:8:3"
+          onslotchange="${scrollToTop}"
         ></slot>
       </main>
     </template>
