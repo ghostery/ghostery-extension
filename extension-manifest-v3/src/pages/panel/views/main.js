@@ -16,6 +16,6 @@ import Home from './home.js';
 export default {
   stack: router([Home]),
   content: ({ stack }) => html`
-    <template layout="block width:full:375px">${stack}</template>
+    <template layout="block width:full:350px">${stack}</template>
   `,
 };
