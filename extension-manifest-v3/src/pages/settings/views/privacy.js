@@ -20,21 +20,20 @@ const PREVIEWS = {
   'ad_blocking': {
     src: assets.ad_blocking,
     title: msg`Ad-Blocking`,
-    description: msg`Eliminates ads on websites you visit, offering a calm, safe and private internet.`,
+    description:
+      'Eliminates ads on websites you visit, offering a calm, safe and private internet.',
   },
   'anti_tracking': {
     src: assets.anti_tracking,
     title: msg`Anti-Tracking`,
-    description: msg`Ghostery’s AI driven Anti-Tracking technology prevents
-    various tracking techniques securing your digital privacy
-    while browsing the web.`,
+    description:
+      'Ghostery’s AI driven Anti-Tracking technology prevents various tracking techniques securing your digital privacy while browsing the web.',
   },
   'never_consent': {
     src: assets.never_consent,
     title: msg`Never Consent`,
-    description: msg`Removes intrusive cookie popups and expresses dissent to
-    online tracking. You can browse the web without worrying
-    about cookie consent dialogues or privacy violations.`,
+    description:
+      'Removes intrusive cookie popups and expresses dissent to online tracking. You can browse the web without worrying about cookie consent dialogues or privacy violations.',
   },
 };
 
@@ -66,7 +65,7 @@ export default {
               <ui-text type="headline-m" mobile-type="headline-s">
                 Manage your privacy protection
               </ui-text>
-              <div layout="column gap">
+              <div layout="column gap" translate="no">
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Ghostery protects your privacy by detecting and neutralizing
                   different types of data collectors, from ads to trackers and
@@ -90,7 +89,12 @@ export default {
               >
                 <div layout="column gap:0.5 grow">
                   <ui-text type="headline-s">Ad-Blocking</ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  <ui-text
+                    type="body-l"
+                    mobile-type="body-m"
+                    color="gray-600"
+                    translate="no"
+                  >
                     Eliminates ads on websites you visit, offering a calm, safe
                     and private internet.
                   </ui-text>
@@ -116,7 +120,12 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-s">Anti-Tracking</ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  <ui-text
+                    type="body-l"
+                    mobile-type="body-m"
+                    color="gray-600"
+                    translate="no"
+                  >
                     Ghostery’s AI driven Anti-Tracking technology prevents
                     various tracking techniques securing your digital privacy
                     while browsing the web.
@@ -143,7 +152,12 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-s">Never-Consent</ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  <ui-text
+                    type="body-l"
+                    mobile-type="body-m"
+                    color="gray-600"
+                    translate="no"
+                  >
                     Removes intrusive cookie popups and expresses dissent to
                     online tracking. You can browse the web without worrying
                     about cookie consent dialogues or privacy violations.

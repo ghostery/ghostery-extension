@@ -151,7 +151,7 @@ export default {
                   >
                     No websites added
                   </ui-text>
-                  <ui-text type="body-l" mobile-type="body-m">
+                  <ui-text type="body-l" mobile-type="body-m" translate="no">
                     For websites to be listed here, you need to pause Ghostery
                     Privacy Protection in Ghostery Panel for a reason individual
                     to you.
