@@ -17,8 +17,9 @@ export default {
   name: '',
   closed: false,
   render: ({ name, closed }) => html`
-    <template layout="column gap:1.5 padding:1:1:1.5:1.5">
-      <ui-action>
+    <template layout="column gap:1.5 padding:1:1.5">
+      ${name &&
+      html`<ui-action>
         <button
           id="header"
           onclick="${html.set('closed', !closed)}"
@@ -30,10 +31,20 @@ export default {
           <ui-text type="label-m">${labels.categories[name]}</ui-text>
           <slot name="header"></slot>
           <div layout="grow"></div>
-          <ui-icon id="arrow" name="arrow-down" color="gray-600"></ui-icon>
+          <ui-icon
+            id="arrow"
+            name="arrow-down"
+            color="gray-600"
+            layout="margin:right:-0.5"
+          ></ui-icon>
         </button>
-      </ui-action>
-      <div id="content" layout="margin:left:4">
+      </ui-action>`}
+      <div
+        id="content"
+        class="${{ name }}"
+        layout="column grow"
+        layout.name="margin:left:4"
+      >
         <slot></slot>
       </div>
     </template>
@@ -44,11 +55,13 @@ export default {
     }
 
     :host(:first-of-type) {
-      border-radius: 8px 8px 0 0;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
 
     :host(:last-of-type) {
-      border-radius: 0 0 8px 8px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
       border-bottom: 1px solid var(--ui-color-gray-200);
     }
 

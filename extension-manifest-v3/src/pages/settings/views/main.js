@@ -34,7 +34,7 @@ export default {
           slot="nav"
         >
           <ui-icon name="shield-menu" color="nav" layout="size:3"></ui-icon>
-          Privacy Protection
+          Privacy protection
         </a>
         ${!!Options.paused &&
         html`<a

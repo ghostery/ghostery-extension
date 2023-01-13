@@ -14,7 +14,7 @@ import { html } from 'hybrids';
 export default {
   render: () => html`
     <template layout="column padding:2:2:1">
-      <ui-text type="body-s" color="gray-600" layout="margin:bottom">
+      <ui-text type="label-s" layout="margin:bottom">
         <slot name="header"></slot>
       </ui-text>
       <slot></slot>

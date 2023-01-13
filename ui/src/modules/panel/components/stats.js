@@ -138,7 +138,15 @@ export default {
       `}
       ${type === 'list' &&
       html`
-        <section>
+        <section layout="column grow">
+          ${!categoryList.length &&
+          html`
+            <ui-panel-list layout="grow">
+              <ui-text type="body-s" color="gray-600" layout="grow row center">
+                No trackers detected
+              </ui-text>
+            </ui-panel-list>
+          `}
           ${trackers.map(
             ([name, { count, trackers }]) => html`
               <ui-panel-list name="${name}">

@@ -26,8 +26,7 @@ const PREVIEWS = {
     src: assets.anti_tracking,
     title: msg`Anti-Tracking`,
     description: msg`Ghostery’s AI driven Anti-Tracking technology prevents
-    various tracking techniques (should we mention them to make
-    an impression and educate?) securing your digital privacy
+    various tracking techniques securing your digital privacy
     while browsing the web.`,
   },
   'never_consent': {
@@ -60,12 +59,12 @@ export default {
             mobile-type="headline-m"
             layout@992px="margin:bottom"
           >
-            Privacy Protection
+            Privacy protection
           </ui-text>
           <section layout="column gap:4" layout@768px="gap:5">
             <div layout="column gap:0.5">
               <ui-text type="headline-m" mobile-type="headline-s">
-                Manage your Ghostery Privacy Protection
+                Manage your privacy protection
               </ui-text>
               <div layout="column gap">
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -119,8 +118,7 @@ export default {
                   <ui-text type="headline-s">Anti-Tracking</ui-text>
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                     Ghostery’s AI driven Anti-Tracking technology prevents
-                    various tracking techniques (should we mention them to make
-                    an impression and educate?) securing your digital privacy
+                    various tracking techniques securing your digital privacy
                     while browsing the web.
                   </ui-text>
                 </div>

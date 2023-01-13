@@ -49,6 +49,7 @@ export default {
       display: block;
       aspect-ratio: 12 / 8;
       max-width: 100%;
+      max-height: 80vh;
       border-radius: 8px;
       overflow: hidden;
       background: var(--ui-color-gray-100);

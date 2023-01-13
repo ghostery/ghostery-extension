@@ -20,17 +20,17 @@ const PREVIEWS = {
   'wtm_wheel': {
     src: assets['wtm_wheel'],
     title: msg`Trackers Wheel`,
-    description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
+    description: msg`Replaces Ghostery icon in the browser toolbar`,
   },
   'trackers_count': {
     src: assets['trackers_count'],
     title: msg`Trackers Count`,
-    description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
+    description: msg`Show tracker count badge on the Ghostery icon in browser toolbar`,
   },
   'trackers_preview': {
     src: assets['trackers_preview'],
     title: msg`Trackers Preview`,
-    description: msg`Praesent egestas tristique nibh. Cras ultricies mi eu turpis hendrerit fringilla.`,
+    description: msg`Shows statistical information about website tracking on search engine result page`,
   },
 };
 
@@ -68,10 +68,9 @@ export default {
               layout@768px="row items:center gap:5 grow"
             >
               <div layout="column grow">
-                <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
+                <ui-text type="headline-s">WhoTracks.Me wheel</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  Praesent egestas tristique nibh. Cras ultricies mi eu turpis
-                  hendrerit fringilla.
+                  Replaces Ghostery icon in the browser toolbar
                 </ui-text>
               </div>
               <ui-settings-toggle
@@ -94,9 +93,10 @@ export default {
               layout@768px="row items:center gap:5 grow"
             >
               <div layout="column grow">
-                <ui-text type="headline-s">Trackers Count</ui-text>
+                <ui-text type="headline-s">Trackers count</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  Praesent venenatis metus at tortor pulvinar varius.
+                  Show tracker count badge on the Ghostery icon in browser
+                  toolbar
                 </ui-text>
               </div>
               <ui-settings-toggle
@@ -119,10 +119,10 @@ export default {
               layout@768px="row items:center gap:5 grow"
             >
               <div layout="column grow">
-                <ui-text type="headline-s">Trackers Preview</ui-text>
+                <ui-text type="headline-s">Trackers preview</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  Praesent egestas tristique nibh. Cras ultricies mi eu turpis
-                  hendrerit fringilla.
+                  Shows statistical information about website tracking on search
+                  engine result page
                 </ui-text>
               </div>
               <ui-settings-toggle

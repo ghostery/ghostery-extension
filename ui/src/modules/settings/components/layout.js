@@ -32,7 +32,7 @@ export default {
           color="primary-500"
           layout="height:4 margin:bottom:-2px"
         ></ui-icon>
-        <ui-text type="label-s">Settings</ui-text>
+        <ui-text type="label-s">settings</ui-text>
       </header>
       <nav
         layout="order:1 row content:space-around padding gap:0.5"
@@ -40,7 +40,7 @@ export default {
       >
         <slot name="nav"></slot>
       </nav>
-      <main layout="column grow overflow:scroll" layout@992px="area::2">
+      <main layout="grow overflow:y:scroll" layout@992px="area::2">
         <slot
           layout::slotted(*)="padding:4:2"
           layout::slotted(*)@768px="padding:5:6"

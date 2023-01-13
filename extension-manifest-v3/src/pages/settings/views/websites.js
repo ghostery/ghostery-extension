@@ -53,16 +53,9 @@ export default {
           `}
         </div>
         <section layout="column gap:4" layout@768px="gap:5">
-          <div layout="column gap">
-            <ui-text type="headline-m" mobile-type="headline-s">
-              Websites with paused Ghostery Privacy Protection
-            </ui-text>
-            <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-              When pausing the Ghostery Privacy Protection on individual
-              websites for various personal reasons, those websites will appear
-              here.
-            </ui-text>
-          </div>
+          <ui-text type="headline-m" mobile-type="headline-s">
+            Manage website settings
+          </ui-text>
           ${paused.length
             ? html`
                 <ui-settings-input icon="search" layout@1280px="width:::340px">
@@ -87,7 +80,7 @@ export default {
                       layout="hidden"
                       layout@768px="block"
                     >
-                      Ghostery Privacy Protection
+                      Settings
                     </ui-text>
                   </div>
                   ${websites.map(
