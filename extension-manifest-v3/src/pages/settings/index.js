@@ -10,7 +10,6 @@
  */
 
 import { define } from 'hybrids';
-import '@ghostery/ui/settings';
 
 define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
   root: ['components', 'views'],

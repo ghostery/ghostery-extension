@@ -10,8 +10,6 @@
  */
 import { define } from 'hybrids';
 
-import '@ghostery/ui/panel';
-
 define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
   root: ['components', 'views'],
   prefix: 'gh-panel',

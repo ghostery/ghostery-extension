@@ -1,7 +1,15 @@
 {
-  "@_0__detected": {
-    "message": "$${0} détecté(s)",
-    "description": "Number of trackers detected by Ghostery"
+  "@_0__left": {
+    "message": "$${0} left"
+  },
+  "1_day": {
+    "message": "1 day"
+  },
+  "1_hour": {
+    "message": "1 hour"
+  },
+  "about": {
+    "message": "À propos de Ghostery"
   },
   "accept_terms": {
     "message": "Accepter les conditions"
@@ -17,14 +25,17 @@
   },
   "adult_advertising": {
     "message": "Publicités réservées aux publics adultes",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "advertising": {
     "message": "Publicité",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "all_popups": {
     "message": "Toutes les fenêtres contextuelles"
+  },
+  "always": {
+    "message": "Always"
   },
   "anti_tracking": {
     "message": "Anti-pistage"
@@ -35,18 +46,21 @@
   "apply_optimal_privacy_settings_": {
     "message": "Utilisez les meilleurs paramètres :"
   },
-  "are_you_sure_": {
-    "message": "Vraiment ?"
+  "are_you_sure__you_want_to_disable_tracker_previews_": {
+    "message": "Are you sure, you want to disable tracker previews?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Voulez-vous vraiment reporter l'activation de Ghostery ?"
   },
   "audio_video_player": {
     "message": "Lecteur audio/vidéo ",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "back": {
     "message": "Retour"
+  },
+  "become_a_contributor": {
+    "message": "Become a contributor"
   },
   "blocked": {
     "message": "Bloqué"
@@ -59,31 +73,46 @@
   },
   "cdn": {
     "message": "CDN",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
     "message": "Consulte la FAQ <a href=\"$${0}\" target=\"_blank\"> </a> ou écris-nous à <a href=\"mailto:$${1}\"> $${2} </a>.  <br/>  Nous serons plus qu'heureux de te parler !"
   },
+  "clear_all": {
+    "message": "Clear all"
+  },
   "comments": {
     "message": "Commentaires",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "consent_management": {
     "message": "Gestion du consentement",
-    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+    "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
+  },
+  "contact": {
+    "message": "Contact"
+  },
+  "contact_support": {
+    "message": "Contact support"
   },
   "continue": {
     "message": "Continuer"
   },
   "customer_interaction": {
     "message": "Interaction avec les clients",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "detailed_view": {
     "message": "Affichage détaillé"
   },
+  "disable": {
+    "message": "Disable"
+  },
   "disable_trackers_preview": {
     "message": "Désact. aperçu des mouchards"
+  },
+  "disabled": {
+    "message": "Disabled"
   },
   "done": {
     "message": "Terminé"
@@ -93,7 +122,7 @@
   },
   "email": {
     "message": "E-mail",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "enable_ghostery": {
     "message": "Activer Ghostery"
@@ -104,13 +133,16 @@
   "enable_never_consent_": {
     "message": "Activer Never-Consent ?"
   },
+  "enabled": {
+    "message": "Activé"
+  },
   "essential": {
     "message": "Essentiels",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "extensions": {
     "message": "Extensions",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "for_more_information_read_our_full": {
     "message": "Pour plus d'information, lisez notre"
@@ -121,21 +153,39 @@
   "ghostery_enabled": {
     "message": "Ghostery est actif"
   },
+  "ghostery_has_been_resumed_on_this_site_": {
+    "message": "Ghostery has been resumed on this site."
+  },
+  "ghostery_has_nothing_to_do_on_this_page": {
+    "message": "Ghostery has nothing to do on this page"
+  },
+  "ghostery_is_paused_on_this_site_": {
+    "message": "Ghostery is paused on this site."
+  },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery est conçu pour protéger votre vie privée en mettant en échec les mouchards quand vous naviguez !"
   },
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
     "message": "Ghostery arrête les trackers dans leurs traces et t'empêche d'être profilé et de vendre tes informations personnelles à des courtiers en données."
   },
-  "ghostery_options": {
-    "message": "Options Ghostery"
-  },
   "ghostery_privacy_policy": {
     "message": "Politique de confidentialité de Ghostery"
   },
+  "ghostery_settings": {
+    "message": "Ghostery settings"
+  },
+  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery Settings to stop trackers and ads from tracking you around the web"
+  },
+  "ghostery_will_be_paused_on_this_site_for_1_day": {
+    "message": "Ghostery will be paused on this site for 1 day"
+  },
+  "ghostery_will_be_paused_on_this_site_for_1_hour": {
+    "message": "Ghostery will be paused on this site for 1 hour"
+  },
   "hosting": {
     "message": "Hébergement",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
     "message": "J'accepte d'envoyer des informations non personnelles à <a href=\"$${0}\"> WhoTracks.Me de Ghostery </a>, et j'accepte la politique de confidentialité de <a href=\"$${1}\"> Ghostery </a>. "
@@ -149,18 +199,33 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Laissez Ghostery défendre vos convictions en rejetant les fenêtres surgissantes et mouchards, ou faites-le vous-même !"
   },
-  "manifest_name": {
+  "manage_website_settings": {
+    "message": "Manage website settings"
+  },
+  "manage_your_privacy_protection": {
+    "message": "Manage your privacy protection"
+  },
+	"manifest_name": {
     "message": "Ghostery – Bloqueur de publicité protégeant la vie privée"
   },
   "manifest_short_description": {
     "message": "Ghostery est une puissante extension de protection de la vie privée. Bloquez les publicités, déjouez les outils de pistage et accélérez les sites Web."
   },
+  "menu": {
+    "message": "Menu"
+  },
+  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
+    "message": "Mind that not all listed entities are trackers, that is not all of them collect personal data"
+  },
   "miscellaneous": {
     "message": "Divers",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "Plus d'informations sur la méthodologie $${0} dans le Manifeste de Ghostery."
+  },
+  "my_account": {
+    "message": "Mon compte"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -173,6 +238,12 @@
   },
   "no": {
     "message": "Non"
+  },
+  "no_trackers_detected": {
+    "message": "No trackers detected"
+  },
+  "no_websites_added": {
+    "message": "No websites added"
   },
   "off": {
     "message": "désactivé"
@@ -192,37 +263,59 @@
   "on_this_website": {
     "message": "Sur ce site"
   },
-  "page_load_": {
-    "message": "Chargement de la page"
+  "paused": {
+    "message": "Paused"
+  },
+  "permission_required": {
+    "message": "Permission required"
   },
   "privacy_policy": {
     "message": "politique de confidentialité"
   },
+  "privacy_policy___panel_company": {
+    "message": "Privacy policy"
+  },
+  "privacy_protection": {
+    "message": "Privacy protection"
+  },
+  "read_more_on_whotracks_me": {
+    "message": "Read more on WhoTracks.me"
+  },
   "report_a_broken_page": {
     "message": "Signaler un lien brisé"
   },
-  "show_tracker_wheel_in_the_browser_toolbar": {
-    "message": "Show Tracker Wheel in the browser toolbar"
+  "resume": {
+    "message": "Reprendre"
   },
-  "show_trackers_preview_next_to_search_results": {
-    "message": "Afficher l'aperçu der mouchards à côté des résultats"
+  "search_website___": {
+    "message": "Search website..."
+  },
+  "settings": {
+    "message": "settings"
+  },
+  "sign_in": {
+    "message": "Connexion"
+  },
+  "simple_view": {
+    "message": "Affichage simplifié"
   },
   "site_analytics": {
     "message": "Outils d'analyse de sites web",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "skip": {
     "message": "Ignorer"
   },
   "social_media": {
     "message": "Réseaux sociaux",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
-  },
-  "statistical_report": {
-    "message": "Rapport statistique"
+    "description": "Tracker category name"
   },
   "submit_a_new_tracker": {
     "message": "Soumettre un nouveau mouchard"
+  },
+  "telemetry": {
+    "message": "Télémétrie",
+    "description": "Tracker category name"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "L'extension Ghostery Browser est installée dans votre navigateur, mais Ghosty fait une petite sieste."
@@ -230,11 +323,17 @@
   "tired_of_cookie_popups_": {
     "message": "REFUSER LES COOKIES VOUS USE ?"
   },
-  "tracker_details": {
-    "message": "Détails du traqueur"
-  },
   "trackers": {
     "message": "mouchards"
+  },
+  "trackers__@_0_": {
+    "message": "trackers: $${0}"
+  },
+  "trackers_count": {
+    "message": "Trackers Count"
+  },
+  "trackers_detected": {
+    "message": "Trackers detected"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Mouchards détectés par Ghostery sur ce site :&nbsp;$${0}"
@@ -242,15 +341,27 @@
   "trackers_preview": {
     "message": "Aperçu mouchards"
   },
+  "trackers_wheel": {
+    "message": "Trackers Wheel"
+  },
+  "try_to_open_this_panel_on_a_different_browser_tab": {
+    "message": "Try to open this panel on a different browser tab"
+  },
   "unblocked": {
     "message": "Débloqué"
   },
   "unknown": {
     "message": "Inconnu",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
-  "user_interface": {
-    "message": "Interface utilisateur"
+  "website": {
+    "message": "Website"
+  },
+  "website__@_0__": {
+    "message": "Website ($${0})"
+  },
+  "websites": {
+    "message": "Websites"
   },
   "welcome_to_ghostery": {
     "message": "Bienvenue à Ghostery"
@@ -258,8 +369,17 @@
   "what_is_whotracks_me_": {
     "message": "Qu'est-ce que WhoTracks.Me ?"
   },
+  "whotracks_me": {
+    "message": "WhoTracks.Me"
+  },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, exploité par Ghostery, fait partie intégrante de la technologie anti-tracking AI de Ghostery. Il s'agit d'une ressource mondiale complète sur les trackers, apportant de la transparence au tracking web."
+  },
+  "whotracks_me_statistical_report": {
+    "message": "WhoTracks.Me Statistical Report"
+  },
+  "whotracks_me_wheel": {
+    "message": "WhoTracks.Me wheel"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Avec Ghostery activé, tu navigues instantanément sur le Web de manière plus sûre, plus rapide et avec moins de publicités gênantes."
@@ -278,5 +398,8 @@
   },
   "you_re_all_set__ghosterian_": {
     "message": "Tout est prêt, Ghosterien·ne !"
+  },
+  "you_won_t_see_anymore_tracker_wheels_next_to_the_search_results_": {
+    "message": "You won’t see anymore tracker wheels next to the search results."
   }
 }

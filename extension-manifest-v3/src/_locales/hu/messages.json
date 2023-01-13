@@ -1,7 +1,15 @@
 {
-  "@_0__detected": {
-    "message": "$${0} észlelve",
-    "description": "Number of trackers detected by Ghostery"
+  "@_0__left": {
+    "message": "$${0} left"
+  },
+  "1_day": {
+    "message": "1 day"
+  },
+  "1_hour": {
+    "message": "1 hour"
+  },
+  "about": {
+    "message": "Rólunk"
   },
   "accept_terms": {
     "message": "Feltételek elfogadása"
@@ -17,14 +25,17 @@
   },
   "adult_advertising": {
     "message": "Felnőtt hirdetés",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "advertising": {
     "message": "Hirdetés",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "all_popups": {
     "message": "Minden felugró ablak"
+  },
+  "always": {
+    "message": "Always"
   },
   "anti_tracking": {
     "message": "Követés elleni védelem"
@@ -35,18 +46,21 @@
   "apply_optimal_privacy_settings_": {
     "message": "Optimális adatvédelmi beállítások alkalmazása:"
   },
-  "are_you_sure_": {
-    "message": "Biztos benne?"
+  "are_you_sure__you_want_to_disable_tracker_previews_": {
+    "message": "Are you sure, you want to disable tracker previews?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Biztos, hogy nem akarja engedélyezni a Ghostery-t?"
   },
   "audio_video_player": {
     "message": "Zene-/filmlejátszó",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "back": {
     "message": "Vissza"
+  },
+  "become_a_contributor": {
+    "message": "Become a contributor"
   },
   "blocked": {
     "message": "Blokkolva"
@@ -59,31 +73,46 @@
   },
   "cdn": {
     "message": "CDN",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
     "message": "Tekintse meg a <a href=\"$${0}\" target=\"_blank\">GYIK</a> oldalunkat vagy írjon nekünk e-mail-t: <a href=\"mailto:$${1}\">$${2}</a>. <br/> Örömmel állunk rendelkezésére!"
   },
+  "clear_all": {
+    "message": "Clear all"
+  },
   "comments": {
     "message": "Hozzászólások",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "consent_management": {
     "message": "Hozzájárulás-kezelés",
-    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+    "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
+  },
+  "contact": {
+    "message": "Contact"
+  },
+  "contact_support": {
+    "message": "Contact support"
   },
   "continue": {
     "message": "Folytatás"
   },
   "customer_interaction": {
     "message": "Ügyfélkommunikáció",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "detailed_view": {
     "message": "Részletes nézet"
   },
+  "disable": {
+    "message": "Disable"
+  },
   "disable_trackers_preview": {
     "message": "Nyomonkövetők előnézetének letiltása"
+  },
+  "disabled": {
+    "message": "Disabled"
   },
   "done": {
     "message": "Kész"
@@ -93,7 +122,7 @@
   },
   "email": {
     "message": "E-mail-cím",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "enable_ghostery": {
     "message": "Ghostery engedélyezése"
@@ -104,13 +133,16 @@
   "enable_never_consent_": {
     "message": "Engedélyezi a Never-Consent használatát?"
   },
+  "enabled": {
+    "message": "Engedélyezve"
+  },
   "essential": {
     "message": "Alapvető",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "extensions": {
     "message": "Kiterjesztések",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "for_more_information_read_our_full": {
     "message": "További információért olvassa el a teljes"
@@ -121,21 +153,39 @@
   "ghostery_enabled": {
     "message": "Ghostery engedélyezve"
   },
+  "ghostery_has_been_resumed_on_this_site_": {
+    "message": "Ghostery has been resumed on this site."
+  },
+  "ghostery_has_nothing_to_do_on_this_page": {
+    "message": "Ghostery has nothing to do on this page"
+  },
+  "ghostery_is_paused_on_this_site_": {
+    "message": "Ghostery is paused on this site."
+  },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "A Ghostery úgy van beállítva, hogy hatástalanítsa a nyomkövetőket, és megvédje a magánéletét böngészés közben!"
   },
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
     "message": "A Ghostery hatástalanítja a nyomkövetőket, és megakadályozza, hogy profilozzák önt és személyes adatait eladják adatbrókereknek."
   },
-  "ghostery_options": {
-    "message": "Ghostery lehetőségek"
-  },
   "ghostery_privacy_policy": {
     "message": "Ghostery Adatvédelmi Szabályzat"
   },
+  "ghostery_settings": {
+    "message": "Ghostery settings"
+  },
+  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery Settings to stop trackers and ads from tracking you around the web"
+  },
+  "ghostery_will_be_paused_on_this_site_for_1_day": {
+    "message": "Ghostery will be paused on this site for 1 day"
+  },
+  "ghostery_will_be_paused_on_this_site_for_1_hour": {
+    "message": "Ghostery will be paused on this site for 1 hour"
+  },
   "hosting": {
     "message": "Hosztolás",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
     "message": "Hozzájárulok, hogy a nem személyes adataimat elküldjék a <a href=\"$${0}\">Ghostery WhoTracks.Me</a> részére, és elfogadom a <a href=\"$${1}\">Ghostery Adatvédelmi Szabályzatát</a>."
@@ -149,18 +199,33 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Hagyja, hogy a Ghostery legyen az ön teljeskörű adatvédelmi szószólója, és utasítson el minden felugró ablakot és nyomkövetést ön helyett, vagy tegye meg ön manuálisan!"
   },
-  "manifest_name": {
+  "manage_website_settings": {
+    "message": "Manage website settings"
+  },
+  "manage_your_privacy_protection": {
+    "message": "Manage your privacy protection"
+  },
+	"manifest_name": {
     "message": "Ghostery – Adatavédelmi Reklámblokkoló"
   },
   "manifest_short_description": {
     "message": "Ennek a kiegészítőnek a rövid leírása. Blokkolja a reklámokat, leállítja a trackereket (követőalkalmazások) és felgyorsítja a weboldalakat."
   },
+  "menu": {
+    "message": "Menu"
+  },
+  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
+    "message": "Mind that not all listed entities are trackers, that is not all of them collect personal data"
+  },
   "miscellaneous": {
     "message": "Egyéb",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "További információ a $${0} módszertanról a Ghostery kiáltványában található."
+  },
+  "my_account": {
+    "message": "Fiókom"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -173,6 +238,12 @@
   },
   "no": {
     "message": "Nem"
+  },
+  "no_trackers_detected": {
+    "message": "No trackers detected"
+  },
+  "no_websites_added": {
+    "message": "No websites added"
   },
   "off": {
     "message": "Ki"
@@ -192,37 +263,59 @@
   "on_this_website": {
     "message": "ezen az oldalon"
   },
-  "page_load_": {
-    "message": "Oldal betöltése"
+  "paused": {
+    "message": "Paused"
+  },
+  "permission_required": {
+    "message": "Permission required"
   },
   "privacy_policy": {
     "message": "Adatvédelmi Szabályzat"
   },
+  "privacy_policy___panel_company": {
+    "message": "Privacy policy"
+  },
+  "privacy_protection": {
+    "message": "Privacy protection"
+  },
+  "read_more_on_whotracks_me": {
+    "message": "Read more on WhoTracks.me"
+  },
   "report_a_broken_page": {
     "message": "Hibás oldal jelentése"
   },
-  "show_tracker_wheel_in_the_browser_toolbar": {
-    "message": "Show Tracker Wheel in the browser toolbar"
+  "resume": {
+    "message": "Folytatás"
   },
-  "show_trackers_preview_next_to_search_results": {
-    "message": "Nyomonkövetők előnézetének megjelenítése a keresési eredmények mellett"
+  "search_website___": {
+    "message": "Search website..."
+  },
+  "settings": {
+    "message": "settings"
+  },
+  "sign_in": {
+    "message": "Bejelentkezés"
+  },
+  "simple_view": {
+    "message": "Egyszerű nézet"
   },
   "site_analytics": {
     "message": "Webanalitika",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "skip": {
     "message": "Konténer"
   },
   "social_media": {
     "message": "Közösségi média",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
-  },
-  "statistical_report": {
-    "message": "Statisztikai jelentés"
+    "description": "Tracker category name"
   },
   "submit_a_new_tracker": {
     "message": "Új tracker beküldése"
+  },
+  "telemetry": {
+    "message": "Telemetria",
+    "description": "Tracker category name"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "A Ghostery böngészőbővítmény telepítve van a böngészőjébe, de Ghosty éppen szundikál."
@@ -230,11 +323,17 @@
   "tired_of_cookie_popups_": {
     "message": "ELEGE VAN A COOKIE FELUGRÓ ABLAKAIBÓL?"
   },
-  "tracker_details": {
-    "message": "Tracker adatok"
-  },
   "trackers": {
     "message": "Trackerek"
+  },
+  "trackers__@_0_": {
+    "message": "trackers: $${0}"
+  },
+  "trackers_count": {
+    "message": "Trackers Count"
+  },
+  "trackers_detected": {
+    "message": "Trackers detected"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "A Ghostery által észlelt nyomkövetők ezen a weboldalon:&nbsp;$${0}"
@@ -242,15 +341,27 @@
   "trackers_preview": {
     "message": "Nyomonkövetők előnézete"
   },
+  "trackers_wheel": {
+    "message": "Trackers Wheel"
+  },
+  "try_to_open_this_panel_on_a_different_browser_tab": {
+    "message": "Try to open this panel on a different browser tab"
+  },
   "unblocked": {
     "message": "Feloldva"
   },
   "unknown": {
     "message": "Ismeretlen",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
-  "user_interface": {
-    "message": "Felhasználói kezelőfelület"
+  "website": {
+    "message": "Website"
+  },
+  "website__@_0__": {
+    "message": "Website ($${0})"
+  },
+  "websites": {
+    "message": "Websites"
   },
   "welcome_to_ghostery": {
     "message": "Üdvözli Önt a Ghostery"
@@ -258,8 +369,17 @@
   "what_is_whotracks_me_": {
     "message": "Mi az a WhoTracks.Me?"
   },
+  "whotracks_me": {
+    "message": "WhoTracks.Me"
+  },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "A Ghostery által üzemeltetett WhoTracks.Me a Ghostery mesterséges intelligencia alapú nyomkövetés elleni technológiájának szerves részét képezi. Ez egy átfogó globális adatforrás a nyomonkövetőkről, amely átláthatóvá teszi a webes nyomkövetést."
+  },
+  "whotracks_me_statistical_report": {
+    "message": "WhoTracks.Me Statistical Report"
+  },
+  "whotracks_me_wheel": {
+    "message": "WhoTracks.Me wheel"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "A Ghostery engedélyezésével azonnal biztonságosabban, gyorsabban és kevesebb idegesítő hirdetéssel böngészhet a weben."
@@ -278,5 +398,8 @@
   },
   "you_re_all_set__ghosterian_": {
     "message": "Minden készen áll, Ghostery-rajongó!"
+  },
+  "you_won_t_see_anymore_tracker_wheels_next_to_the_search_results_": {
+    "message": "You won’t see anymore tracker wheels next to the search results."
   }
 }
