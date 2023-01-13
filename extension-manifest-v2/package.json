@@ -67,7 +67,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-markdown": "^7.1.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-svg": "^11.0.34",

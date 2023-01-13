@@ -19,7 +19,7 @@ const { BROWSER_INFO, EXTENSION_VERSION } = globals;
  * Render About view which opens from the main drop-down menu.
  */
 function About() {
-	const licensesUrl = chrome.runtime.getURL('./app/templates/licenses.html');
+	const licensesUrl = chrome.runtime.getURL('/dist/licenses.html');
 
 	return (
 		<div id="content-about">
