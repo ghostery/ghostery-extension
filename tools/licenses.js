@@ -34,11 +34,13 @@ const template= (packages) => `
 			html {
 				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 				font-size: 14px;
-			}
-
-			html, body {
 				margin: 0;
 				padding: 0;
+			}
+
+			body {
+				margin: 0 auto;
+				padding: 20px 0;
 			}
 		</style>
 	</head>
