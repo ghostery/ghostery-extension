@@ -41,6 +41,13 @@ module.exports = {
 	performance: {
 		hints: false // notify of assets over 250kb
 	},
+	// watch node_module for changes in libs and ui
+	snapshot: {
+		managedPaths: [
+			path.resolve(__dirname, 'node_modules/@ghostery/libs'),
+			path.resolve(__dirname, 'node_modules/@ghostery/ui'),
+		],
+	},
 	resolve: {
 		mainFields: ['browser', 'main'],
 		symlinks: false, // allow module resolution with `npm link`

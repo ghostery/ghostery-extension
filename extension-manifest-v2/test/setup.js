@@ -23,6 +23,10 @@ import Adapter from 'enzyme-adapter-react-16';
 // https://github.com/acvetkov/sinon-chrome/issues/111
 delete chrome.runtime.getPlatformInfo;
 
+// Fix for running webextension-polyfill in jest
+// https://github.com/mozilla/webextension-polyfill/issues/218#issuecomment-584936358
+chrome.runtime.id = 'testid';
+
 // Disable logging
 jest.mock('../src/utils/common', () => {
 	const commonActual = jest.requireActual('../src/utils/common');
