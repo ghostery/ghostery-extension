@@ -26,11 +26,11 @@ const IGNORED_PACAKGES = [
 const template = (packages) => `
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Licenses</title>
-		<style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Licenses</title>
+    <style>
       html {
         font-family: -apple-system, 
           BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, 
@@ -46,38 +46,40 @@ const template = (packages) => `
       pre {
         white-space: break-spaces;
       }
-		</style>
-	</head>
-	<body>
-		<h1>Licenses</h1>
-		${packages
+    </style>
+  </head>
+  <body>
+    <h1>Licenses</h1>
+    ${packages
       .map(
         (package) => `
-			<h2>${package.name}</h2>
-			<ul>
-				${
+      <h2>${package.name}</h2>
+      <ul>
+        ${
           package.publisher
             ? `<li><label>Publisher: </label>${package.publisher}</li>`
             : ''
         }
-				${package.email ? `<li><label>Email: </label>${package.email}</li>` : ''}
-				${
+        ${
+          package.email ? `<li><label>Email: </label>${package.email}</li>` : ''
+        }
+        ${
           package.repository
             ? `<li><label>Repository: </label>${package.repository}</li>`
             : ''
         }
-				${package.url ? `<li><label>URL: </label>${package.url}</li>` : ''}
-				${
+        ${package.url ? `<li><label>URL: </label>${package.url}</li>` : ''}
+        ${
           package.licenses
             ? `<li><label>License: </label>${package.licenses}</li>`
             : ''
         }
-			</ul>
-			${package.licenseText ? `<pre>${package.licenseText}</pre>` : ''}
-		`,
+      </ul>
+      ${package.licenseText ? `<pre>${package.licenseText}</pre>` : ''}
+    `,
       )
       .join('')}
-	</body>
+  </body>
 </html>
 `;
 
