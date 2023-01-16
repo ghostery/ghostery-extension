@@ -63,6 +63,9 @@ options.assets.forEach((path) => {
   );
 });
 
+// generate license file
+import('../../tools/licenses.js');
+
 // --- Save manifest ---
 
 // set manifest version from package.json

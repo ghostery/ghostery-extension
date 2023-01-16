@@ -9,6 +9,8 @@ This repository contains a version built with the new `chrome.declarativeNetRequ
 First, you need to install JavaScript dependencies and download additional resources (e.g. block lists):
 
 ```sh
+$ (cd .. && npm ci)
+$ (cd ../libs && npm ci)
 $ npm ci
 ```
 

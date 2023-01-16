@@ -1,0 +1,8 @@
+{
+  "name": "ghostery-extension",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "license-checker": "^25.0.1"
+  }
+}

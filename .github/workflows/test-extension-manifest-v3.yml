@@ -19,6 +19,9 @@ jobs:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: ./extension-manifest-v3/package-lock.json
+      - name: Install dependencies in repo root
+        run: npm ci
+        working-directory: .
       - name: Install dependencies in libs
         run: npm ci
         working-directory: libs

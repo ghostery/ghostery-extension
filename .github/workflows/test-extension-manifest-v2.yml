@@ -19,6 +19,9 @@ jobs:
           cache: 'npm'
           node-version: '18'
           cache-dependency-path: ./extension-manifest-v2/package-lock.json
+      - name: Install dependencies in repo root
+        run: npm ci
+        working-directory: .
       - name: Install dependencies in libs
         run: npm ci
         working-directory: libs
@@ -30,7 +33,7 @@ jobs:
           npm ci
       - name: Build Licenses
         run: |
-          node ./tools/licenses/fetchLicenses.js
+          npm run licenses
       - name: Lint
         run: |
           npm run lint
