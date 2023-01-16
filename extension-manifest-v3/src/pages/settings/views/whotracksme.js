@@ -69,8 +69,8 @@ export default {
               layout="column gap:2"
               layout@768px="row items:center gap:5 grow"
             >
-              <div layout="column grow">
-                <ui-text type="headline-s">WhoTracks.Me wheel</ui-text>
+              <div layout="column grow gap:0.5">
+                <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
                 <ui-text
                   type="body-l"
                   mobile-type="body-m"
@@ -86,37 +86,40 @@ export default {
               ></ui-settings-toggle>
             </div>
           </div>
-          <div layout="row gap:2" layout@768px="gap:5">
-            <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
-              <ui-settings-help-image layout="size:12:8 shrink:0">
-                <img
-                  src="${assets.trackers_count_small}"
-                  alt="Trackers Count"
-                />
-              </ui-settings-help-image>
-            </a>
-            <div
-              layout="column gap:2"
-              layout@768px="row items:center gap:5 grow"
-            >
-              <div layout="column grow">
-                <ui-text type="headline-s">Trackers count</ui-text>
-                <ui-text
-                  type="body-l"
-                  mobile-type="body-m"
-                  color="gray-600"
-                  translate="no"
-                >
-                  Show tracker count badge on the Ghostery icon in browser
-                  toolbar
-                </ui-text>
+          ${Options.trackerCount &&
+          html`
+            <div layout="row gap:2" layout@768px="gap:5">
+              <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
+                <ui-settings-help-image layout="size:12:8 shrink:0">
+                  <img
+                    src="${assets.trackers_count_small}"
+                    alt="Trackers Count"
+                  />
+                </ui-settings-help-image>
+              </a>
+              <div
+                layout="column gap:2"
+                layout@768px="row items:center gap:5 grow"
+              >
+                <div layout="column grow gap:0.5">
+                  <ui-text type="headline-s">Trackers Count</ui-text>
+                  <ui-text
+                    type="body-l"
+                    mobile-type="body-m"
+                    color="gray-600"
+                    translate="no"
+                  >
+                    Show tracker count badge on the Ghostery icon in browser
+                    toolbar
+                  </ui-text>
+                </div>
+                <ui-settings-toggle
+                  value="${options.trackerCount}"
+                  onchange="${html.set(options, 'trackerCount')}"
+                ></ui-settings-toggle>
               </div>
-              <ui-settings-toggle
-                value="${options.trackerCount}"
-                onchange="${html.set(options, 'trackerCount')}"
-              ></ui-settings-toggle>
             </div>
-          </div>
+          `}
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
               <ui-settings-help-image layout="size:12:8 shrink:0">
@@ -130,8 +133,8 @@ export default {
               layout="column gap:2"
               layout@768px="row items:center gap:5 grow"
             >
-              <div layout="column grow">
-                <ui-text type="headline-s">Trackers preview</ui-text>
+              <div layout="column grow gap:0.5">
+                <ui-text type="headline-s">Trackers Preview</ui-text>
                 <ui-text
                   type="body-l"
                   mobile-type="body-m"
@@ -140,6 +143,19 @@ export default {
                 >
                   Shows statistical information about website tracking on search
                   engine result page
+                </ui-text>
+                <ui-text
+                  type="body-l"
+                  mobile-type="body-m"
+                  color="gray-900"
+                  underline
+                >
+                  <a
+                    href="https://www.ghostery.com/blog/introducing-wtm-serp-report"
+                    target="_blank"
+                  >
+                    Learn more
+                  </a>
                 </ui-text>
               </div>
               <ui-settings-toggle

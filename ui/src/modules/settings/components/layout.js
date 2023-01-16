@@ -27,12 +27,10 @@ export default {
         layout="row center gap padding:2 relative layer"
         layout@992px="padding:5:3 content:start"
       >
-        <ui-icon
-          name="logo-full"
-          color="primary-500"
-          layout="height:4 margin:bottom:-2px"
-        ></ui-icon>
-        <ui-text type="label-s">settings</ui-text>
+        <ui-icon name="logo" color="primary-500" layout="size:3"></ui-icon>
+        <ui-text type="headline-s" color="primary-500">
+          Ghostery settings
+        </ui-text>
       </header>
       <nav
         layout="order:1 row content:space-around padding gap:0.5"
@@ -62,13 +60,6 @@ export default {
 
     header {
       border-bottom: 1px solid var(--ui-color-gray-200);
-    }
-
-    header ui-text {
-      color: var(--ui-color-white);
-      background: var(--ui-color-primary-500);
-      border-radius: 4px;
-      padding: 2px 4px;
     }
 
     nav {

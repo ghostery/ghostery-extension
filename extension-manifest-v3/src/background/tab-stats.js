@@ -43,10 +43,12 @@ const setIcon = throttle(async (tabId, stats) => {
     action.setIcon({ tabId, ...data });
   }
 
-  action.setBadgeText({
-    tabId,
-    text: options.trackerCount ? String(stats.trackers.length) : '',
-  });
+  if (Options.trackerCount) {
+    action.setBadgeText({
+      tabId,
+      text: options.trackerCount ? String(stats.trackers.length) : '',
+    });
+  }
 }, 250);
 
 async function updateTabStats(msg, sender) {

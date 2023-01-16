@@ -53,29 +53,30 @@ export default {
       ${store.ready(options) &&
       html`
         <div layout="column gap:4">
-          <ui-text
-            type="headline-l"
-            mobile-type="headline-m"
-            layout@992px="margin:bottom"
-          >
-            Privacy protection
-          </ui-text>
           <section layout="column gap:4" layout@768px="gap:5">
-            <div layout="column gap:0.5">
-              <ui-text type="headline-m" mobile-type="headline-s">
-                Manage your privacy protection
+            <div layout="column gap" layout@992px="margin:bottom">
+              <ui-text type="headline-l" mobile-type="headline-m">
+                Privacy protection
               </ui-text>
-              <div layout="column gap" translate="no">
-                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  Ghostery protects your privacy by detecting and neutralizing
-                  different types of data collectors, from ads to trackers and
-                  cookie popups.
-                </ui-text>
-                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  You can manage the functionality of these privacy components
-                  to your liking. We recommend keeping them ON at all times.
-                </ui-text>
-              </div>
+              <ui-text
+                type="body-l"
+                mobile-type="body-m"
+                color="gray-600"
+                translate="no"
+              >
+                Ghostery protects your privacy by detecting and neutralizing
+                different types of data collectors, from ads to trackers and
+                cookie popups.
+              </ui-text>
+              <ui-text
+                type="body-l"
+                mobile-type="body-m"
+                color="gray-600"
+                translate="no"
+              >
+                You can manage the functionality of these privacy components to
+                your liking. We recommend keeping them ON at all times.
+              </ui-text>
             </div>
             <div layout="row items:start gap:2" layout@768px="gap:5">
               <a href="${router.url(Preview, PREVIEWS['ad_blocking'])}">
