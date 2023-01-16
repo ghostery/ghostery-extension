@@ -199,12 +199,6 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Let Ghostery be your complete privacy advocate and reject all popups and tracking for you, or do it yourself!"
   },
-  "manage_website_settings": {
-    "message": "Manage website settings"
-  },
-  "manage_your_privacy_protection": {
-    "message": "Manage your privacy protection"
-  },
 	"manifest_name": {
     "message": "Ghostery – 隱私廣告攔截器"
   },
@@ -241,9 +235,6 @@
   },
   "no_trackers_detected": {
     "message": "No trackers detected"
-  },
-  "no_websites_added": {
-    "message": "No websites added"
   },
   "off": {
     "message": "關閉"
@@ -291,7 +282,7 @@
     "message": "Search website..."
   },
   "settings": {
-    "message": "settings"
+    "message": "設定"
   },
   "sign_in": {
     "message": "登入"
@@ -379,7 +370,7 @@
     "message": "WhoTracks.Me Statistical Report"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me wheel"
+    "message": "WhoTracks.Me Wheel"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "With Ghostery enabled you instantly browse the web safer, faster and with less annoying ads."
