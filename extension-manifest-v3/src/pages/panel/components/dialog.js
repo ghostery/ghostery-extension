@@ -87,7 +87,7 @@ export default {
             <a
               id="close"
               onclick="${animateOnClose}"
-              href="${router.backUrl({ scrollToTop: true })}"
+              href="${router.backUrl()}"
               layout="size:3 padding:0.5"
             >
               <ui-icon name="close"></ui-icon>

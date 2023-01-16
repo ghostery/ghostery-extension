@@ -56,7 +56,7 @@ export default {
         <ui-panel-header slot="header">
           Menu
           <ui-action slot="actions">
-            <a href="${router.backUrl({ scrollToTop: true })}">
+            <a href="${router.backUrl()}">
               <ui-icon name="close" color="gray-900" layout="size:3"></ui-icon>
             </a>
           </ui-action>

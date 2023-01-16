@@ -112,7 +112,7 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.wtmSerpReport}"
+                value="${options.trackerCount}"
                 onchange="${html.set(options, 'trackerCount')}"
               ></ui-settings-toggle>
             </div>
