@@ -8,11 +8,24 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { define } from 'hybrids';
 
-import '@ghostery/ui';
-import '@ghostery/ui/css';
+define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
+  root: ['components', 'views'],
+  prefix: 'gh-panel',
+});
 
-import './components/category-with-trackers.js';
-import './components/layout.js';
-
-import './views/root.js';
+/*
+  Safari extension popup has a bug, which focuses visibly the first element on the page
+  when the popup is opened. This is a workaround to remove the focus.
+*/
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.focus();
+  document.body.addEventListener(
+    'focus',
+    () => {
+      document.body.removeAttribute('tabIndex');
+    },
+    { once: true },
+  );
+});

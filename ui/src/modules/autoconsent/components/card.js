@@ -1,7 +1,6 @@
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-autoconsent-card',
+export default {
   render: () =>
     html`
       <template layout="column">
@@ -14,4 +13,4 @@ export default define({
         overflow: hidden;
       }
     `,
-});
+};

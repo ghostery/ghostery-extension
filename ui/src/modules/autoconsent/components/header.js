@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-autoconsent-header',
+export default {
   render: () => html`
     <template layout="row center">
       <ui-text
@@ -35,4 +34,4 @@ export default define({
       padding: 4px 10px;
     }
   `,
-});
+};

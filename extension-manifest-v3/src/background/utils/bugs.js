@@ -9,20 +9,26 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { parse } from 'tldts-experimental';
-import rules from './rules.js';
+
+import bugsDb from '../../rule_resources/bugs.json';
+import categoriesDb from '../../rule_resources/categories.json';
+import companiesDb from '../../rule_resources/companies.json';
+import trackersDb from '../../rule_resources/trackers.json';
+import trackerDomainsDb from '../../rule_resources/tracker_domains.json';
+
+import { getCategoryKey } from '@ghostery/ui/categories';
 
 export function getTrackerFromUrl(url, origin) {
   try {
     const bugId = isBug(url);
-    let trackerId = null;
     let tracker = null;
 
     if (bugId) {
-      const { bugs, apps } = rules.get('bugs');
+      const { bugs, apps } = bugsDb;
       const appId = bugs[bugId].aid;
       const app = apps[appId];
-      trackerId = app.trackerID;
-      tracker = {
+
+      tracker = trackersDb[app.trackerID] || {
         id: app.trackerID,
         name: app.name,
         category: app.cat,
@@ -34,23 +40,42 @@ export function getTrackerFromUrl(url, origin) {
         return null;
       }
 
-      trackerId = rules.get('tracker_domains')[domain];
+      tracker =
+        trackerDomainsDb[domain] && trackersDb[trackerDomainsDb[domain]];
     }
 
-    if (trackerId) {
-      if (rules.get('trackers')[trackerId]) {
-        tracker = rules.get('trackers')[trackerId];
+    // Extend tracker object in-place for the first time
+    if (tracker) {
+      if (!tracker.category) {
+        tracker.category =
+          tracker.category || getCategoryKey(categoriesDb[tracker.category_id]);
+        tracker.company = companiesDb[tracker.company_id];
       }
-      if (!tracker.category && tracker.category_id) {
-        tracker.category = rules.get('categories')[tracker.category_id];
-      }
-      return tracker;
+
+      const company = tracker.company || {
+        id: tracker.id,
+        name: tracker.name,
+      };
+
+      return {
+        name: tracker.name,
+        category: tracker.category,
+        company: company && {
+          id: company.id,
+          name: company.name,
+          description: company.description,
+          website: company.website_url,
+          contact: company.privacy_contact,
+          privacyPolicy: company.privacy_url,
+        },
+        url,
+      };
     }
+
+    return null;
   } catch (e) {
     return null;
   }
-
-  return null;
 }
 
 function processUrl(src) {
@@ -73,7 +98,6 @@ function processUrl(src) {
  * @return {int|boolean} 		bug id or false
  */
 function isBug(src) {
-  const db = rules.get('bugs');
   const processedSrc = processUrl(src.toLowerCase());
   let found = false;
 
@@ -81,9 +105,9 @@ function isBug(src) {
 
   found =
     // pattern classification 2: check host+path hash
-    matchesHost(db.patterns.host_path, processedSrc.hostname, path) ||
+    matchesHost(bugsDb.patterns.host_path, processedSrc.hostname, path) ||
     // class 1: check host hash
-    matchesHost(db.patterns.host, processedSrc.hostname) ||
+    matchesHost(bugsDb.patterns.host, processedSrc.hostname) ||
     // class 3: check path hash
     matchesPath(path) ||
     // class 4: check regex patterns
@@ -184,7 +208,7 @@ function matchesHost(root, src_host, src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function matchesPath(src_path) {
-  const paths = rules.get('bugs').patterns.path;
+  const paths = bugsDb.patterns.path;
 
   // NOTE: we re-add the "/" in order to match patterns that include "/"
   const srcPath = `/${src_path}`;
@@ -208,7 +232,7 @@ function matchesPath(src_path) {
  * @return {int|boolean} 		bug id or false if the match was not found
  */
 function matchesRegex(src) {
-  const regexes = rules.get('bugs').patterns.regex;
+  const regexes = bugsDb.patterns.regex;
   const bug_ids = Object.keys(regexes);
   for (let i = 0; i < bug_ids.length; i++) {
     const bug_id = bug_ids[i];

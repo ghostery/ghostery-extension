@@ -12,47 +12,62 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 import { throttle } from 'lodash-es';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
+import { order } from '@ghostery/ui/categories';
 
 import Options from '/store/options.js';
 import { getTrackerFromUrl } from './utils/bugs.js';
-import tabStats from './utils/tab-stats.js';
+import tabStats from './utils/map.js';
 
-const setIcon = throttle((tabId, stats) => {
-  const categories = stats.trackers.map((t) => t.category);
-  const imageData = getOffscreenImageData(128, categories);
+const action = chrome.browserAction || chrome.action;
+action.setBadgeBackgroundColor({ color: '#3f4146' /* gray-600 */ });
 
-  (chrome.browserAction || chrome.action).setIcon({
+const setIcon = throttle(async (tabId, stats) => {
+  const options = await store.resolve(Options);
+
+  if (options.trackerWheel && stats.trackers.length > 0) {
+    const paused = options.paused?.some(({ id }) => id === stats.domain);
+    const data = {};
+
+    if (paused) {
+      data.path = {
+        16: '/assets/images/icon19_off.png',
+        32: '/assets/images/icon38_off.png',
+      };
+    } else {
+      data.imageData = getOffscreenImageData(
+        128,
+        stats.trackers.map((t) => t.category),
+      );
+    }
+
+    action.setIcon({ tabId, ...data });
+  }
+
+  action.setBadgeText({
     tabId,
-    imageData,
+    text: options.trackerCount ? String(stats.trackers.length) : '',
   });
 }, 250);
 
 async function updateTabStats(msg, sender) {
   const tabId = sender.tab.id;
   const stats = tabStats.get(tabId);
-  const urls = msg.args[0].urls;
-  const loadTime = msg.args[0].loadTime;
 
-  if (loadTime && sender.frameId === 0) {
-    stats.loadTime = loadTime;
-  }
-
-  if (urls) {
-    urls.forEach((url) => {
+  msg.urls
+    .filter((url) => !stats.trackers.some((t) => t.url === url))
+    .forEach((url) => {
       const tracker = getTrackerFromUrl(url, stats.domain);
       if (tracker) {
         stats.trackers.push(tracker);
       }
     });
-  }
+
+  stats.trackers.sort(
+    (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
+  );
 
   tabStats.set(tabId, stats);
-
-  const { trackerWheel } = await store.resolve(Options);
-
-  if (trackerWheel && stats.trackers.length > 0) {
-    setIcon(tabId, stats);
-  }
+  setIcon(tabId, stats);
 }
 
 chrome.tabs.onRemoved.addListener((tabId) => {
@@ -68,7 +83,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       const { domain } = parse(sender.url);
 
       if (domain) {
-        tabStats.set(sender.tab.id, { domain, trackers: [], loadTime: 0 });
+        tabStats.set(sender.tab.id, { domain, trackers: [] });
 
         // Clean up throttled icon update
         setIcon.cancel();

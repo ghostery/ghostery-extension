@@ -20,10 +20,14 @@ async function getTabDomain(tabId) {
 }
 
 async function initialize(msg, tabId, frameId) {
-  const { dnrRules, autoconsent } = await store.resolve(Options);
+  const { dnrRules, autoconsent, paused } = await store.resolve(Options);
   const domain = await getTabDomain(tabId);
 
-  if (dnrRules.annoyances && !autoconsent.disallowed.includes(domain)) {
+  if (
+    dnrRules.annoyances &&
+    !autoconsent.disallowed.includes(domain) &&
+    (!paused || !paused.some(({ id }) => id === domain))
+  ) {
     const optOut = autoconsent.all || autoconsent.allowed.includes(domain);
 
     chrome.tabs.sendMessage(

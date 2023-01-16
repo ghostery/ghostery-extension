@@ -9,9 +9,28 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui';
-import '@ghostery/ui/css';
 import '@ghostery/ui/onboarding';
+import { define, html, store } from 'hybrids';
+import Options, { DNR_RULES_LIST } from '/store/options';
 
-// Main
-import './onboarding.js';
+function updateOptions(host, event) {
+  const success = event.type === 'success';
+
+  store.set(Options, {
+    dnrRules: DNR_RULES_LIST.reduce(
+      (all, rule) => ({ ...all, [rule]: success }),
+      {},
+    ),
+    terms: success,
+    onboarding: { done: true },
+  });
+}
+
+define({
+  tag: 'gh-onboarding',
+  content: () =>
+    html`<ui-onboarding
+      onsuccess="${updateOptions}"
+      onskip="${updateOptions}"
+    ></ui-onboarding>`,
+});

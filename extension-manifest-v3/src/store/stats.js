@@ -11,72 +11,80 @@
 
 import { store } from 'hybrids';
 
+const supportsChangedListener =
+  chrome.runtime.getManifest().manifest_version >= 3;
+
+export const Company = {
+  id: true,
+  name: '',
+  description: '',
+  website: '',
+  contact: '',
+  privacyPolicy: '',
+};
+
 const Stats = {
   domain: '',
-  all: 0,
-  loadTime: 0,
   trackers: [
     {
       id: true,
       name: '',
-      company_id: 'unknown',
       category: 'unknown',
+      company: Company,
+      url: '',
     },
   ],
-  byCategory: ({ trackers }) => {
-    return trackers.reduce(
-      (all, current) => ({
-        ...all,
-        [current.category]: {
-          count: (all[current.category] || { count: 0 }).count + 1,
-          trackers: [
-            ...(all[current.category] || { trackers: [] }).trackers,
-            current,
-          ],
-        },
-      }),
-      {},
-    );
-  },
-  byTracker: ({ trackers }) => {
-    return trackers.reduce(
-      (all, current) => ({
-        ...all,
-        [current.id]: current,
-      }),
-      {},
-    );
-  },
-  categories: ({ trackers }) => {
-    return trackers.map((t) => t.category);
-  },
+  byCategory: ({ trackers }) =>
+    Object.entries(
+      trackers.reduce((acc, tracker) => {
+        const category = acc[tracker.category] || { count: 0, trackers: [] };
+
+        const agg = category.trackers.find(({ name }) => name === tracker.name);
+        if (agg) {
+          agg.count += 1;
+        } else {
+          category.trackers.push({
+            name: tracker.name,
+            company: tracker.company,
+            count: 1,
+          });
+        }
+
+        category.count += 1;
+
+        acc[tracker.category] = category;
+        return acc;
+      }, {}),
+    ),
+  categories: ({ trackers }) => trackers.map((t) => t.category),
   [store.connect]: {
     async get() {
       const currentTab = (
         await chrome.tabs.query({ active: true, currentWindow: true })
       )[0];
+
       const storage = await chrome.storage.local.get(['tabStats:v1']);
 
       if (!storage['tabStats:v1']) {
         throw Error('No stats found');
       }
 
-      const tabStats = storage['tabStats:v1'].entries[currentTab.id];
-      return tabStats;
+      return storage['tabStats:v1'].entries[currentTab.id];
     },
+    observe:
+      !supportsChangedListener &&
+      (() => {
+        setTimeout(() => store.clear(Stats, false), 1000);
+      }),
   },
 };
 
-export default Stats;
-
-export function statsFactory(interval = 1000) {
-  return {
-    get: () => store.get(Stats),
-    connect: () => {
-      const id = setInterval(async () => {
-        store.clear(Stats, false);
-      }, interval);
-      return () => clearInterval(id);
-    },
-  };
+if (supportsChangedListener) {
+  chrome.storage.onChanged.addListener((changes) => {
+    if (changes['tabStats:v1']) {
+      store.clear(Stats, false);
+    }
+  });
 }
+
+export default Stats;

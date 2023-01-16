@@ -31,65 +31,18 @@ const manifest = JSON.parse(
 
 const config = {
   configFile: false,
-  root: process.cwd(),
-  plugins: [
-    // Required for disabling module preload feature
-    {
-      name: 'remove-vite-build-import-analysis',
-      enforce: 'pre',
-      options: (options) => {
-        options.plugins = options.plugins.filter(
-          (p) => p.name !== 'vite:build-import-analysis',
-        );
-        return options;
-      },
-    },
-    // Required for cleaning up scripts tag generation in html files
-    {
-      name: 'clean-imports-for-html-generation',
-      generateBundle(options, bundle) {
-        Object.values(bundle).forEach((chunk) => {
-          if (
-            chunk.type === 'chunk' &&
-            !chunk.isEntry &&
-            !chunk.facadeModuleId?.endsWith('.html') &&
-            chunk.imports &&
-            chunk.imports.length
-          ) {
-            chunk.imports = [];
-          }
-        });
-      },
-    },
-    // Required for correct html assets path because of the root dir
-    {
-      name: 'clean-html-src-path',
-      enforce: 'post',
-      generateBundle: (options, bundle) => {
-        Object.values(bundle).forEach((chunk) => {
-          if (
-            chunk.type === 'asset' &&
-            chunk.fileName.endsWith('.html') &&
-            !chunk.fileName.includes('node_modules')
-          ) {
-            chunk.fileName = chunk.fileName.replace('src/', '');
-          }
-        });
-      },
-    },
-  ],
+  root: options.srcDir,
   resolve: {
     preserveSymlinks: true,
-    alias: [
-      { find: '/hybrids.js', replacement: 'hybrids' },
-      { find: '/', replacement: '/src/' },
-    ],
   },
   build: {
     outDir: options.outDir,
+    assetsDir: '',
     emptyOutDir: false,
     minify: false,
-    polyfillModulePreload: false,
+    modulePreload: {
+      polyfill: false,
+    },
     watch: argv.watch ? {} : null,
   },
 };
@@ -182,14 +135,14 @@ if (manifest.background) {
 
 function mapPaths(paths) {
   return paths.reduce((acc, src) => {
-    acc[src] = src.startsWith('node_modules')
+    acc[src.replace(/\.js/, '')] = src.startsWith('node_modules')
       ? resolve(src)
       : resolve(options.srcDir, src);
     return acc;
   }, {});
 }
 
-await build({
+build({
   ...config,
   build: {
     ...config.build,
@@ -203,20 +156,8 @@ await build({
         preserveModules: true,
         preserveModulesRoot: 'src',
         minifyInternalExports: false,
-        entryFileNames: (chunkInfo) => {
-          if (chunkInfo.facadeModuleId.endsWith('.css')) {
-            return 'common/[name].css';
-          }
-          if (chunkInfo.isEntry) {
-            return chunkInfo.facadeModuleId.replace(/^.*\//, '');
-          }
-          return '[name].js';
-        },
-        assetFileNames: (chunkInfo) => {
-          return chunkInfo.name.startsWith('src/')
-            ? chunkInfo.name.replace('src/', '')
-            : 'assets/[name].[ext]';
-        },
+        entryFileNames: '[name].js',
+        assetFileNames: 'assets/[name].[ext]',
       },
     },
   },
@@ -225,36 +166,29 @@ await build({
 // --- Build content scripts ---
 
 for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
-  await build({
-    ...config,
-    build: {
-      ...config.build,
-      target: 'esnext',
-      rollupOptions: {
-        input: { [id]: path },
-        output: {
-          format: path.endsWith('.css') ? 'es' : 'iife',
-          dir: options.outDir,
-          entryFileNames: (chunkInfo) => {
-            if (chunkInfo.facadeModuleId.endsWith('.css')) {
-              return 'common/[name].css';
-            }
-            if (chunkInfo.isEntry) {
-              return chunkInfo.facadeModuleId
-                .replace(options.srcDir, '')
-                .replace(config.root, '')
-                .replace(/^\//, '');
-            }
-            return '[name].js';
-          },
-          assetFileNames: (chunkInfo) => {
-            return chunkInfo.name.includes('/') &&
-              chunkInfo.name.endsWith('.css')
-              ? chunkInfo.name
-              : 'assets/[name].[ext]';
+  // Copy assets
+  if (!path.endsWith('.js')) {
+    shelljs.mkdir(
+      '-p',
+      resolve(options.outDir, id.split('/').slice(0, -1).join('/')),
+    );
+    shelljs.cp(path, resolve(options.outDir, id));
+  } else {
+    // build content scripts
+    build({
+      ...config,
+      build: {
+        ...config.build,
+        target: 'esnext',
+        rollupOptions: {
+          input: { [id]: path },
+          output: {
+            format: 'iife',
+            dir: options.outDir,
+            entryFileNames: '[name].js',
           },
         },
       },
-    },
-  });
+    });
+  }
 }

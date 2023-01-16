@@ -9,8 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router, dispatch } from 'hybrids';
-import Home from './home.js';
+import { html, msg, router, dispatch } from 'hybrids';
 
 function closeIframe(host) {
   dispatch(host, 'closeiframe', {
@@ -19,8 +18,7 @@ function closeIframe(host) {
   });
 }
 
-export default define({
-  tag: 'ui-autoconsent-confirm-view',
+export default {
   enabled: false,
   content: ({ enabled }) => html`
     <template layout="column margin:3 gap:4">
@@ -36,7 +34,7 @@ export default define({
       </div>
       <div layout="grid:2 gap:2">
         <ui-button type="outline" size="small">
-          <a href="${router.url(Home)}">Back</a>
+          <a href="${router.backUrl()}">Back</a>
         </ui-button>
         <ui-button type="primary" size="small">
           <button onclick="${closeIframe}">OK</button>
@@ -44,4 +42,4 @@ export default define({
       </div>
     </template>
   `,
-});
+};

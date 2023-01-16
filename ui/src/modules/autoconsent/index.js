@@ -9,7 +9,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import './components/card.js';
-import './components/header.js';
+import { define } from 'hybrids';
 
-import './views/root.js';
+// Global components
+import '../pages/index.js';
+
+// Components & Views
+define.from(
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  {
+    prefix: 'ui-autoconsent',
+    root: ['components'],
+  },
+);

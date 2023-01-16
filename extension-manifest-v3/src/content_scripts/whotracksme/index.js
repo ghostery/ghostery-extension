@@ -10,8 +10,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+const origin = new URL(window.location.href).origin;
+
 function postMessage({ urls }) {
-  chrome.runtime.sendMessage({ action: 'updateTabStats', args: [{ urls }] });
+  chrome.runtime.sendMessage({ action: 'updateTabStats', urls });
 }
 
 // Should only be needed on Safari:
@@ -19,19 +21,6 @@ function postMessage({ urls }) {
 // is not reliable. When opening bookmarks, it can happen that
 // the event is associated with a tabId of 0.
 chrome.runtime.sendMessage({ action: 'onCommitted' });
-
-const origin = new URL(window.location.href).origin;
-
-const start = Date.now();
-let loadTime = 0;
-
-window.addEventListener('load', () => {
-  loadTime = Date.now() - start;
-  chrome.runtime.sendMessage({
-    action: 'updateTabStats',
-    args: [{ loadTime }],
-  });
-});
 
 // Based on https://github.com/mozilla-mobile/firefox-ios/blob/1f3fd1640214b2b442c573ea7d2882d480f4f24c/content-blocker-lib-ios/js/TrackingProtectionStats.js
 /* This Source Code Form is subject to the terms of the Mozilla Public
@@ -42,9 +31,10 @@ window.addEventListener('load', () => {
   let sendUrlsTimeout = null;
 
   function sendMessage(url) {
-    if (!url || url.startsWith('data:')) {
+    if (!url || url.startsWith('data:') || sendUrls.includes(url)) {
       return;
     }
+
     sendUrls.push(url);
 
     // If already set, return
@@ -73,45 +63,45 @@ window.addEventListener('load', () => {
       .forEach(function (el) {
         sendMessage(el.src, 'load iframe');
       });
-  }
 
-  window.addEventListener('load', onLoadNativeCallback, false);
-
-  const mutationObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (node) {
-        // `<script src="*">` elements.
-        if (node.tagName === 'SCRIPT' && node.src) {
-          sendMessage(node.src, 'mutation script');
-          return;
-        }
-        if (node.tagName === 'IMG' && node.src) {
-          sendMessage(node.src, 'mutation image');
-          return;
-        }
-
-        // `<iframe src="*">` elements where [src] is not "about:blank".
-        if (node.tagName === 'IFRAME' && node.src) {
-          if (node.src === 'about:blank') {
+    const mutationObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          // `<script src="*">` elements.
+          if (node.tagName === 'SCRIPT' && node.src) {
+            sendMessage(node.src, 'mutation script');
+            return;
+          }
+          if (node.tagName === 'IMG' && node.src) {
+            sendMessage(node.src, 'mutation image');
             return;
           }
 
-          sendMessage(node.src, 'mutation iframe');
-          return;
-        }
+          // `<iframe src="*">` elements where [src] is not "about:blank".
+          if (node.tagName === 'IFRAME' && node.src) {
+            if (node.src === 'about:blank') {
+              return;
+            }
 
-        // `<link href="*">` elements.
-        if (node.tagName === 'LINK' && node.href) {
-          sendMessage(node.href, 'mutation link');
-        }
+            sendMessage(node.src, 'mutation iframe');
+            return;
+          }
+
+          // `<link href="*">` elements.
+          if (node.tagName === 'LINK' && node.href) {
+            sendMessage(node.href, 'mutation link');
+          }
+        });
       });
     });
-  });
 
-  mutationObserver.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-  });
+    mutationObserver.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  window.addEventListener('load', onLoadNativeCallback, false);
 
   // fetch, XMLHTTPRequest and others must be injected in main world
   function injectMonkeyPatches() {
@@ -128,10 +118,11 @@ window.addEventListener('load', () => {
       if (
         !message.isTrusted ||
         !(typeof message.data === 'string') ||
-        message.data.startsWith('GhosteryTrackingDetection:')
+        !message.data.startsWith('GhosteryTrackingDetection:')
       ) {
         return;
       }
+
       let url = decodeURIComponent(message.data.split(':')[1]);
       if (url.startsWith('/')) {
         url = `${origin}${url}`;

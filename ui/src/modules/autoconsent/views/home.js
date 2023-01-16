@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, router, dispatch } from 'hybrids';
+import { html, router, dispatch } from 'hybrids';
 
 import Confirm from './confirm.js';
 
@@ -26,9 +26,8 @@ function onConfirm(type) {
   };
 }
 
-export default define({
+export default {
   [router.connect]: { stack: [Confirm] },
-  tag: 'ui-autoconsent-home-view',
   scope: defaultChoice === 'all' ? 'all' : 'selected',
   content: ({ scope }) => html`
     <template layout="column margin:3 gap:4">
@@ -91,4 +90,4 @@ export default define({
       </div>
     </template>
   `,
-});
+};

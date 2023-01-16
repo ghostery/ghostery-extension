@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "9.7.1",
+  "version": "10.0.0",
   "type": "module",
   "scripts": {
     "download-cosmetics": "node scripts/download-cosmetics.js",
@@ -13,7 +13,7 @@
     "dev": "npm run build.chromium -- --watch",
     "dev.safari": "npm run build.safari -- --watch",
     "release": "web-ext build",
-    "start": "web-ext run --target=chromium",
+    "start": "web-ext run --target=chromium --no-reload",
     "lint": "eslint src/",
     "test": "npm run lint",
     "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme/webextension-packages/packages ./src/_locales/en/messages.json",
@@ -38,17 +38,18 @@
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "vendor-copy": "^3.0.1",
-    "vite": "^3.2.0",
+    "vite": "^4.0.2",
     "web-ext": "^7.3.1"
   },
   "dependencies": {
     "@cliqz/adblocker": "^1.23.7",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
-    "@duckduckgo/autoconsent": "^3.0.1",
+    "@duckduckgo/autoconsent": "^4.0.0",
     "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "file:../ui",
+    "@github/relative-time-element": "^4.1.5",
     "@whotracksme/webextension-packages": "^2.1.0",
-    "hybrids": "^8.1.0",
+    "hybrids": "^8.1.12",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
   },
