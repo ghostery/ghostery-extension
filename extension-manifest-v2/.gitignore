@@ -2,10 +2,6 @@
 dist/
 build/
 
-## Node
-node_modules/
-npm-debug.log
-
 ## Development Files
 *.swp
 *.pem
@@ -31,9 +27,3 @@ out/
 
 ## Jest
 coverage/
-
-## OSX
-.DS_Store
-
-## Other Files
-bug-list.md

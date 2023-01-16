@@ -10,8 +10,6 @@ First, you need to install JavaScript dependencies and download additional resou
 
 ```sh
 $ (cd .. && npm ci)
-$ (cd ../libs && npm ci)
-$ npm ci
 ```
 
 Now everything is ready. Change the code, and run it in Chrome:

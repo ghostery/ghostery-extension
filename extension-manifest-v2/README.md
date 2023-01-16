@@ -22,8 +22,6 @@ Node.js 18 (or higher) is required to build the extension.
 
 ```sh
 $ (cd .. && npm ci)
-$ (cd ../libs && npm ci)
-$ npm ci
 ```
 
 ## Building
