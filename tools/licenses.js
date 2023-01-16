@@ -31,17 +31,21 @@ const template = (packages) => `
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Licenses</title>
 		<style>
-			html {
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-				font-size: 14px;
-				margin: 0;
-				padding: 0;
-			}
+      html {
+        font-family: -apple-system, 
+          BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, 
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 14px;
+      }
 
-			body {
-				margin: 0 auto;
-				padding: 20px 0;
-			}
+      body {
+        max-width: 480px;
+        margin: 1em;
+      }
+
+      pre {
+        white-space: break-spaces;
+      }
 		</style>
 	</head>
 	<body>
