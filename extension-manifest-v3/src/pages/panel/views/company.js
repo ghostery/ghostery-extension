@@ -31,7 +31,11 @@ export default {
       return acc.set(t.category, list);
     }, new Map()),
   ],
-  content: ({ company, trackers, trackersByCategory }) => html`
+  wtmUrl: ({ company }) => {
+    const url = `https://www.whotracks.me/trackers/${company.id}.html`;
+    return fetch(url).then((res) => (res.ok ? url : null));
+  },
+  content: ({ company, trackers, trackersByCategory, wtmUrl }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <ui-text slot="header" type="label-l">${company.name}</ui-text>
@@ -44,14 +48,20 @@ export default {
           html`
             <div layout="column gap:0.5">
               <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
-              <ui-text type="label-xs" color="primary-700">
-                <a
-                  href="https://www.whotracks.me/trackers/${company.id}.html"
-                  target="_blank"
-                >
-                  Read more on WhoTracks.me
-                </a>
-              </ui-text>
+              ${html.resolve(
+                wtmUrl.then(
+                  (url) =>
+                    url &&
+                    html` <ui-text type="label-xs" color="primary-700">
+                      <a
+                        href="https://www.whotracks.me/trackers/${company.id}.html"
+                        target="_blank"
+                      >
+                        Read more on WhoTracks.me
+                      </a>
+                    </ui-text>`,
+                ),
+              )}
             </div>
             <ui-line></ui-line>
           `}
