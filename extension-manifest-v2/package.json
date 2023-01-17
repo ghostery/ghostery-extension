@@ -25,8 +25,8 @@
     "leet": "node ./tools/leet/leet-en.js",
     "leet.reset": "node ./tools/leet/leet-reset.js",
     "postinstall": "vendor-copy && npm run licenses",
-    "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme/webextension-packages/packages ./_locales/en/messages.json",
-    "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./_locales/en/messages.json",
+    "locales.wtm": "hybrids extract -c --format=chrome.i18n ../node_modules/@whotracksme/webextension-packages/packages ./_locales/en/messages.json",
+    "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./app ./_locales/en/messages.json",
     "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src"
   },
