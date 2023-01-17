@@ -175,7 +175,10 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
       '-p',
       resolve(options.outDir, id.split('/').slice(0, -1).join('/')),
     );
-    shelljs.cp(path, resolve(options.outDir, id));
+    shelljs.cp(
+      path.replace('node_modules', '../node_modules'),
+      resolve(options.outDir, id),
+    );
   } else {
     // build content scripts
     build({

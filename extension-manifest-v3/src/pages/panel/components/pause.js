@@ -25,7 +25,7 @@ const PAUSE_TYPES = [
   {
     value: 0,
     label: msg`Always`,
-    description: msg`Ghostery will be paused on this site. You can change this at any time in Ghostery Settings to stop trackers and ads from tracking you around the web`,
+    description: msg`Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web`,
   },
 ];
 

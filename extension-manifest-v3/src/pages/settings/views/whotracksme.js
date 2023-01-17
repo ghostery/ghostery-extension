@@ -41,8 +41,8 @@ export default {
   content: ({ options }) => html`
     <template layout="column gap:4" layout@768px="gap:5">
       <div layout="column gap" layout@992px="margin:bottom">
-        <ui-text type="headline-l" mobile-type="headline-m">
-          WhoTracks.me
+        <ui-text type="headline-l" mobile-type="headline-m" translate="no">
+          WhoTracks.Me
         </ui-text>
         <ui-text type="body-l" mobile-type="body-m" color="gray-600">
           WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s

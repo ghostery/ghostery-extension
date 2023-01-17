@@ -46,8 +46,8 @@
   "apply_optimal_privacy_settings_": {
     "message": "최적의 개인 정보 설정 적용:"
   },
-  "are_you_sure__you_want_to_disable_tracker_previews_": {
-    "message": "Are you sure, you want to disable tracker previews?"
+  "are_you_sure_you_want_to_disable_trackers_preview_": {
+    "message": "Are you sure you want to disable Trackers Preview?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Ghostery 활성화를 건너뛰시겠습니까?"
@@ -175,7 +175,7 @@
     "message": "Ghostery settings"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery Settings to stop trackers and ads from tracking you around the web"
+    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
   },
   "ghostery_will_be_paused_on_this_site_for_1_day": {
     "message": "Ghostery will be paused on this site for 1 day"
@@ -270,7 +270,7 @@
     "message": "Privacy protection"
   },
   "read_more_on_whotracks_me": {
-    "message": "Read more on WhoTracks.me"
+    "message": "Read more on WhoTracks.Me"
   },
   "report_a_broken_page": {
     "message": "깨진 페이지 보고 "
@@ -317,9 +317,6 @@
   "trackers": {
     "message": "트래커 "
   },
-  "trackers__@_0_": {
-    "message": "trackers: $${0}"
-  },
   "trackers_count": {
     "message": "Trackers Count"
   },
@@ -360,9 +357,6 @@
   "what_is_whotracks_me_": {
     "message": "WhoTracks.Me란?"
   },
-  "whotracks_me": {
-    "message": "WhoTracks.Me"
-  },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghostery가 운영하는 WhoTracks.Me는 Ghostery의 AI 추적 방지 기술을 필수 부분으로 작동합니다. 이는 트래커에 대한 가장 포괄적인 글로벌 리소스로서 웹 추적에 투명성을 가져다 줍니다."
   },
@@ -390,7 +384,7 @@
   "you_re_all_set__ghosterian_": {
     "message": "모두 준비가 되었습니다, Ghosterian!"
   },
-  "you_won_t_see_anymore_tracker_wheels_next_to_the_search_results_": {
-    "message": "You won’t see anymore tracker wheels next to the search results."
+  "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
+    "message": "You will no longer see tracker wheels next to the search results."
   }
 }

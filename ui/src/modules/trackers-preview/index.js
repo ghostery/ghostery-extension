@@ -36,10 +36,10 @@ export default define({
               />
               <div layout="block:center column gap">
                 <ui-text type="label-l">
-                  Are you sure, you want to disable tracker previews?
+                  Are you sure you want to disable Trackers Preview?
                 </ui-text>
                 <ui-text>
-                  You won’t see anymore tracker wheels next to the search
+                  You will no longer see tracker wheels next to the search
                   results.
                 </ui-text>
               </div>
