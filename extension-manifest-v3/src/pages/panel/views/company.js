@@ -40,7 +40,7 @@ export default {
         ${trackers &&
         html`
           <ui-text slot="header" type="body-s" color="gray-600">
-            trackers: ${trackers.length}
+            <span>trackers detected</span>: ${trackers.length}
           </ui-text>
           ${company.description &&
           html`
@@ -50,7 +50,7 @@ export default {
               html`
                 <ui-text type="label-xs" color="primary-700">
                   <a href="${wtmUrl}" target="_blank">
-                    Read more on WhoTracks.me
+                    Read more on WhoTracks.Me
                   </a>
                 </ui-text>
               `}
@@ -59,7 +59,7 @@ export default {
           `}
           <section
             layout="
-              grid:max|1 items:start:stretch content:start gap:1:3
+              grid:max|1 items:start:stretch content:start gap:1:2
               grow:1
               padding:bottom:4
             "

@@ -49,6 +49,7 @@ export default {
           href="${router.url(Whotracksme, { scrollToTop: true })}"
           class="${{ active: router.active(Whotracksme) }}"
           slot="nav"
+          translate="no"
         >
           <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
           WhoTracks.Me

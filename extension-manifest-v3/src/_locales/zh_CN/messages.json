@@ -46,8 +46,8 @@
   "apply_optimal_privacy_settings_": {
     "message": "应用最佳隐私设置："
   },
-  "are_you_sure__you_want_to_disable_tracker_previews_": {
-    "message": "Are you sure, you want to disable tracker previews?"
+  "are_you_sure_you_want_to_disable_trackers_preview_": {
+    "message": "Are you sure you want to disable Trackers Preview?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "确定要跳过启用 Ghostery 吗？"
@@ -90,7 +90,7 @@
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "contact": {
-    "message": "Contact"
+    "message": "contact"
   },
   "contact_support": {
     "message": "Contact support"
@@ -175,7 +175,7 @@
     "message": "Ghostery settings"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery Settings to stop trackers and ads from tracking you around the web"
+    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
   },
   "ghostery_will_be_paused_on_this_site_for_1_day": {
     "message": "Ghostery will be paused on this site for 1 day"
@@ -264,13 +264,13 @@
     "message": "隐私政策"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "隐私政策"
   },
   "privacy_protection": {
     "message": "Privacy protection"
   },
   "read_more_on_whotracks_me": {
-    "message": "Read more on WhoTracks.me"
+    "message": "Read more on WhoTracks.Me"
   },
   "report_a_broken_page": {
     "message": "报告崩溃页面"
@@ -317,9 +317,6 @@
   "trackers": {
     "message": "跟踪器"
   },
-  "trackers__@_0_": {
-    "message": "trackers: $${0}"
-  },
   "trackers_count": {
     "message": "Trackers Count"
   },
@@ -346,7 +343,7 @@
     "description": "Tracker category name"
   },
   "website": {
-    "message": "Website"
+    "message": "website"
   },
   "website__@_0__": {
     "message": "Website ($${0})"
@@ -359,9 +356,6 @@
   },
   "what_is_whotracks_me_": {
     "message": "什么是 WhoTracks.Me？"
-  },
-  "whotracks_me": {
-    "message": "WhoTracks.Me"
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"
@@ -390,7 +384,7 @@
   "you_re_all_set__ghosterian_": {
     "message": "Ghostery，一切准备就绪！"
   },
-  "you_won_t_see_anymore_tracker_wheels_next_to_the_search_results_": {
-    "message": "You won’t see anymore tracker wheels next to the search results."
+  "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
+    "message": "You will no longer see tracker wheels next to the search results."
   }
 }
