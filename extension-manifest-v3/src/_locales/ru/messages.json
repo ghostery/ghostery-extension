@@ -90,7 +90,7 @@
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "contact": {
-    "message": "contact"
+    "message": "Contact"
   },
   "contact_support": {
     "message": "Contact support"
@@ -264,7 +264,7 @@
     "message": "политика конфиденциальности"
   },
   "privacy_policy___panel_company": {
-    "message": "политика конфиденциальности"
+    "message": "Privacy policy"
   },
   "privacy_protection": {
     "message": "Privacy protection"
@@ -343,7 +343,7 @@
     "description": "Tracker category name"
   },
   "website": {
-    "message": "website"
+    "message": "Website"
   },
   "website__@_0__": {
     "message": "Website ($${0})"
