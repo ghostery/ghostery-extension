@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: ./ui/package-lock.json
-      - run: npm ci
+          cache-dependency-path: ./package-lock.json
+      - name: Install dependencies in repo root
+        run: npm ci
+        working-directory: .
       - run: npm run lint

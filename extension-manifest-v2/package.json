@@ -24,7 +24,7 @@
     "docs": "jsdoc -c jsdoc.json -d docs -r",
     "leet": "node ./tools/leet/leet-en.js",
     "leet.reset": "node ./tools/leet/leet-reset.js",
-    "postinstall": "patch-package && vendor-copy && npm run licenses",
+    "postinstall": "vendor-copy && npm run licenses",
     "locales.wtm": "hybrids extract -c --format=chrome.i18n node_modules/@whotracksme/webextension-packages/packages ./_locales/en/messages.json",
     "locales.ui": "hybrids extract -c --format=chrome.i18n node_modules/@ghostery/ui ./_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./app ./_locales/en/messages.json",
@@ -32,8 +32,8 @@
   },
   "vendorCopy": [
     {
-      "from": "node_modules/ghostery-common/build/gbe/assets",
-      "to": "common"
+      "from": "../node_modules/ghostery-common/build/gbe/assets",
+      "to": "./common"
     }
   ],
   "repository": {
@@ -57,9 +57,9 @@
     "foundation-sites": "^6.6.2",
     "ghostery-common": "^1.2.48",
     "history": "^4.10.1",
-    "hybrids": "^8.1.10",
+    "hybrids": "^8.1.13",
     "json-api-normalizer": "^1.0.4",
-    "linkedom": "0.14.12",
+    "linkedom": "^0.14.21",
     "moment": "^2.29.1",
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
@@ -99,7 +99,6 @@
     "mini-css-extract-plugin": "^2.7.2",
     "oboe": "^2.1.5",
     "os-browserify": "^0.3.0",
-    "patch-package": "^6.5.0",
     "path": "^0.12.7",
     "react-router": "^5.2.0",
     "react-test-renderer": "^16.13.1",

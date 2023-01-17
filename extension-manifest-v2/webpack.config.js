@@ -77,7 +77,6 @@ module.exports = {
 
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
-		licenses: [`${SASS_DIR}/licenses.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
 		trackers_preview_content_script_styles: [`${SASS_DIR}/trackers-preview_content_script.scss`],
 	},
@@ -177,7 +176,7 @@ module.exports = {
 							implementation: sass,
 							sassOptions: {
 								includePaths: [
-									path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
+									path.resolve(__dirname, '../node_modules/foundation-sites/scss'),
 									path.resolve(__dirname, 'app/scss'),
 								]
 							}

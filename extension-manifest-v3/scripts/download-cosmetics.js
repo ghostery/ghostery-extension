@@ -13,7 +13,7 @@ import { readFile } from 'fs/promises';
 import fetch from 'node-fetch';
 
 const pkg = JSON.parse(
-  await readFile(new URL('../package-lock.json', import.meta.url)),
+  await readFile(new URL('../../package-lock.json', import.meta.url)),
 );
 
 const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version;

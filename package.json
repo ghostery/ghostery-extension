@@ -2,7 +2,20 @@
   "name": "ghostery-extension",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "postinstall": "patch-package"
+  },
   "devDependencies": {
-    "license-checker": "^25.0.1"
+    "license-checker": "^25.0.1",
+    "patch-package": "^6.5.1"
+  },
+  "workspaces": [
+    "libs",
+    "ui",
+    "extension-manifest-v3",
+    "extension-manifest-v2"
+  ],
+  "overrides": {
+    "ua-parser-js": "1.0.2"
   }
 }

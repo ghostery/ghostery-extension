@@ -30,6 +30,7 @@ try {
   });
 
   writeJSONPlaceholder('categories.json', {});
+  writeJSONPlaceholder('companies.json', {});
   writeJSONPlaceholder('trackers.json', {});
   writeJSONPlaceholder('tracker_domains.json', {});
 
