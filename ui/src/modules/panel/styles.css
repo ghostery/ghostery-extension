@@ -78,8 +78,6 @@ body {
 
 body {
   width: 100%;
-  -webkit-user-select: none;
-  user-select: none;
   background: var(--ui-color-white);
 }
 
