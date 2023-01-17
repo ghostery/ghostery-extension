@@ -30,7 +30,6 @@ const Options = {
     interactions: 0,
   },
   trackerWheel: true,
-  trackerCount: true,
   wtmSerpReport: true,
   terms: false,
   onboarding: { done: false, shownAt: 0 },
@@ -161,6 +160,11 @@ const Options = {
     },
   },
 };
+
+// Options for chromium-based browsers only
+if (manifest.manifest_version === 3) {
+  Options.trackerCount = true;
+}
 
 if (chrome.declarativeNetRequest.getDynamicRules) {
   // Define `paused` property for keeping paused sites

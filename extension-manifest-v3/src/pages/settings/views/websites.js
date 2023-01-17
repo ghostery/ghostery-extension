@@ -38,24 +38,29 @@ export default {
   content: ({ paused, websites }) => html`
     <template layout="block">
       <div layout="column gap:4">
-        <div
-          layout="row items:center content:space-between"
-          layout@992px="margin:bottom"
-        >
-          <ui-text type="headline-l" mobile-type="headline-m">
-            Websites
+        <div layout="column gap" layout@992px="margin:bottom">
+          <div layout="row items:center content:space-between">
+            <ui-text type="headline-l" mobile-type="headline-m">
+              Websites
+            </ui-text>
+            ${!!paused.length &&
+            html`
+              <ui-button type="outline" size="small">
+                <button onclick="${clearAll}">Clear all</button>
+              </ui-button>
+            `}
+          </div>
+          <ui-text
+            type="body-l"
+            mobile-type="body-m"
+            color="gray-600"
+            translate="no"
+          >
+            When pausing Ghostery on individual websites for various personal
+            reasons, those websites will appear here.
           </ui-text>
-          ${!!paused.length &&
-          html`
-            <ui-button type="outline" size="small">
-              <button onclick="${clearAll}">Clear all</button>
-            </ui-button>
-          `}
         </div>
         <section layout="column gap:4" layout@768px="gap:5">
-          <ui-text type="headline-m" mobile-type="headline-s">
-            Manage website settings
-          </ui-text>
           ${paused.length
             ? html`
                 <ui-settings-input icon="search" layout@1280px="width:::340px">
@@ -137,25 +142,13 @@ export default {
             : html`
                 <div
                   layout="block:center width:::400px margin:2:auto"
-                  layout@768px="margin:top:7"
+                  layout@768px="margin:top:4"
                 >
                   <img
                     src="${NoWebsitesSVG}"
-                    layout="margin:bottom:2 size:96px"
+                    layout="size:96px"
                     layout@768px="size:128px"
                   />
-                  <ui-text
-                    type="headline-m"
-                    mobile-type="headline-s"
-                    layout="margin:bottom:0.5"
-                  >
-                    No websites added
-                  </ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" translate="no">
-                    For websites to be listed here, you need to pause Ghostery
-                    Privacy Protection in Ghostery Panel for a reason individual
-                    to you.
-                  </ui-text>
                 </div>
               `}
         </section>

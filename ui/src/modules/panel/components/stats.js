@@ -25,17 +25,7 @@ export default {
     ),
   trackers: undefined,
   domain: '',
-  wtmUrl: ({ domain }) =>
-    domain
-      ? fetch(`https://www.whotracks.me/websites/${domain}.html`).then(
-          (res) => {
-            if (res.status !== 200) {
-              throw Error('Not found');
-            }
-            return res.url;
-          },
-        )
-      : Promise.reject(),
+  wtmUrl: ({ domain }) => `https://www.whotracks.me/websites/${domain}.html`,
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -67,20 +57,17 @@ export default {
             <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
           </ui-tooltip>
         </div>
-        ${html.resolve(
-          wtmUrl.then(
-            (url) => html`
-              <ui-tooltip>
-                <span slot="content">WhoTracks.Me Statistical Report</span>
-                <ui-panel-action>
-                  <a href="${url}" target="_blank">
-                    <ui-icon name="whotracksme"></ui-icon>
-                  </a>
-                </ui-panel-action>
-              </ui-tooltip>
-            `,
-          ),
-        )}
+        ${wtmUrl &&
+        html`
+          <ui-tooltip>
+            <span slot="content">WhoTracks.Me Statistical Report</span>
+            <ui-panel-action>
+              <a href="${wtmUrl}" target="_blank">
+                <ui-icon name="whotracksme"></ui-icon>
+              </a>
+            </ui-panel-action>
+          </ui-tooltip>
+        `}
         ${trackers &&
         html`
           <ui-panel-action-group>

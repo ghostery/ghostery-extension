@@ -11,29 +11,9 @@
 
 import { html, router } from 'hybrids';
 
-const slide = {
-  keyframes: { transform: ['translateY(100%)', 'translateY(0)'] },
-  options: {
-    duration: 200,
-    easing: 'ease-out',
-    fill: 'forwards',
-  },
-};
-
-const fade = {
-  keyframes: { opacity: [0, 1] },
-  options: {
-    duration: 200,
-    easing: 'ease-out',
-    fill: 'forwards',
-    pseudoElement: '::backdrop',
-  },
-};
-
 function close(host, event) {
   if (event.target === event.currentTarget) {
-    const closeBtn = host.shadowRoot.querySelector('#close');
-    closeBtn?.shadowRoot.querySelector('a').click();
+    host.shadowRoot.querySelector('a').click();
   }
 }
 
@@ -41,17 +21,8 @@ function animateOnClose(host, event) {
   router.resolve(
     event,
     new Promise((resolve) => {
-      host.dialog.animate(fade.keyframes, {
-        ...fade.options,
-        direction: 'reverse',
-      });
-
-      host.dialog
-        .animate(slide.keyframes, {
-          ...slide.options,
-          direction: 'reverse',
-        })
-        .addEventListener('finish', resolve);
+      host.dialog.addEventListener('transitionend', resolve, { once: true });
+      host.dialog.close();
     }),
   );
 }
@@ -59,10 +30,11 @@ function animateOnClose(host, event) {
 export default {
   dialog: {
     get: ({ render }) => render().querySelector('dialog'),
-    observe(host, el) {
-      el.showModal();
-      el.animate(slide.keyframes, slide.options);
-      el.animate(fade.keyframes, fade.options);
+    connect(host, key) {
+      const timeout = setTimeout(() => {
+        host[key].showModal();
+      }, 0);
+      return () => clearTimeout(timeout);
     },
   },
   render: () => html`
@@ -85,7 +57,6 @@ export default {
           </div>
           <ui-action>
             <a
-              id="close"
               onclick="${animateOnClose}"
               href="${router.backUrl()}"
               layout="size:3 padding:0.5"
@@ -105,22 +76,29 @@ export default {
       border-radius: 12px 12px 0 0;
       background: var(--ui-color-white);
       overscroll-behavior: contain;
+      transform: translateY(100%);
+      transition: all 0.2s ease-out;
     }
 
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1 }
+    dialog[open] {
+      transform: translateY(0);
     }
 
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    dialog[open]::backdrop {
+      opacity: 1;
     }
 
     #header {
       border-bottom: 1px solid var(--ui-color-gray-200);
     }
 
-    #close  {
+    a {
       color: var(--ui-color-gray-600);
       background: var(--ui-color-gray-200);
       border-radius: 50%;

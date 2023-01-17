@@ -199,12 +199,6 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghosteryをプライバシーの完璧な守護者にして、ポップアップやお客様の追跡を全て拒否するか、ご自身で手動設定しましょう!"
   },
-  "manage_website_settings": {
-    "message": "Manage website settings"
-  },
-  "manage_your_privacy_protection": {
-    "message": "Manage your privacy protection"
-  },
 	"manifest_name": {
     "message": "Ghostery – プライバシー広告ブロッカー"
   },
@@ -241,9 +235,6 @@
   },
   "no_trackers_detected": {
     "message": "No trackers detected"
-  },
-  "no_websites_added": {
-    "message": "No websites added"
   },
   "off": {
     "message": "オフ"
@@ -291,7 +282,7 @@
     "message": "Search website..."
   },
   "settings": {
-    "message": "settings"
+    "message": "設定"
   },
   "sign_in": {
     "message": "サインイン"
@@ -379,7 +370,7 @@
     "message": "WhoTracks.Me Statistical Report"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me wheel"
+    "message": "WhoTracks.Me Wheel"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Ghosteryを有効にすると、より安全に、より速く、そして迷惑な広告をより減らす形で、ウェブを瞬時にブラウズすることができます。"

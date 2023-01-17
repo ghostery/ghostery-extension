@@ -199,12 +199,6 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghostery가 귀하의 완전한 개인 정보 보호를 지원할 수 있게 하고 모든 팝업 및 추적을 거부하십시오. 또는 직접 실행할 수도 있습니다!"
   },
-  "manage_website_settings": {
-    "message": "Manage website settings"
-  },
-  "manage_your_privacy_protection": {
-    "message": "Manage your privacy protection"
-  },
 	"manifest_name": {
     "message": "Ghostery – 개인정보 보호용 광고 차단기"
   },
@@ -241,9 +235,6 @@
   },
   "no_trackers_detected": {
     "message": "No trackers detected"
-  },
-  "no_websites_added": {
-    "message": "No websites added"
   },
   "off": {
     "message": "끄기 "
@@ -291,7 +282,7 @@
     "message": "Search website..."
   },
   "settings": {
-    "message": "settings"
+    "message": "설정 "
   },
   "sign_in": {
     "message": "로그인 "
@@ -379,7 +370,7 @@
     "message": "WhoTracks.Me Statistical Report"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me wheel"
+    "message": "WhoTracks.Me Wheel"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Ghostery를 사용하면 웹을 즉시 보다 안전하고 빠르게 탐색할 수 있으며 성가신 광고들도 줄어들게 됩니다."
