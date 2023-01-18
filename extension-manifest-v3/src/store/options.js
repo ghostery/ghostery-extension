@@ -17,6 +17,7 @@ export const DNR_RULES_LIST =
   manifest.declarative_net_request.rule_resources.map((r) => r.id);
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+const ALARM_PREFIX = 'options:revoke';
 
 const Options = {
   dnrRules: DNR_RULES_LIST.reduce(
@@ -63,12 +64,16 @@ const Options = {
       await chrome.storage.local.set({ options });
 
       if (keys.includes('paused')) {
-        const alarms = await chrome.alarms.getAll();
+        const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
+          name.startsWith(ALARM_PREFIX),
+        );
         const revokeDomains = options.paused.filter(({ revokeAt }) => revokeAt);
 
         // Clear alarms for removed domains
         alarms.forEach(({ name }) => {
-          if (!revokeDomains.find(({ id }) => name === `revoke:${id}`)) {
+          if (
+            !revokeDomains.find(({ id }) => name === `${ALARM_PREFIX}:${id}`)
+          ) {
             chrome.alarms.clear(name);
           }
         });
@@ -78,7 +83,7 @@ const Options = {
           revokeDomains
             .filter(({ id }) => !alarms.some(({ name }) => name === id))
             .forEach(({ id, revokeAt }) => {
-              chrome.alarms.create(`revoke:${id}`, { when: revokeAt });
+              chrome.alarms.create(`${ALARM_PREFIX}:${id}`, { when: revokeAt });
             });
         }
 
@@ -172,11 +177,11 @@ if (chrome.declarativeNetRequest.getDynamicRules) {
 
   // Remove paused domains from options when alarm is triggered
   chrome.alarms.onAlarm.addListener((alarm) => {
-    if (alarm.name.startsWith('revoke:')) {
+    if (alarm.name.startsWith(ALARM_PREFIX)) {
       store.resolve(Options).then((options) => {
         store.set(options, {
           paused: options.paused.filter(
-            ({ id }) => `revoke:${id}` !== alarm.name,
+            ({ id }) => `${ALARM_PREFIX}:${id}` !== alarm.name,
           ),
         });
       });
