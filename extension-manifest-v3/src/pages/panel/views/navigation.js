@@ -16,7 +16,7 @@ import Account from '/store/account.js';
 const MENU = [
   {
     icon: 'heart',
-    label: msg`Become a contributor`,
+    label: msg`Become a Contributor`,
     href: 'https://www.ghostery.com/become-a-contributor',
   },
   {},
