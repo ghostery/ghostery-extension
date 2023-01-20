@@ -11,7 +11,7 @@ export default {
       <main
         layout="
           block fixed inset layer:100
-          margin:0 padding:2.5 overflow:scroll
+          margin:0 padding:2.5 overflow:auto
         "
         onclick="${clickOnClose}"
       >

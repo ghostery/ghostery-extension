@@ -17,13 +17,8 @@ export default {
   terms: false,
   render: ({ icon, enabled, terms }) => html`
     <template layout="row items:center padding:1:1.5">
-      ${icon &&
-      html`<ui-icon
-        name="${icon}"
-        layout="margin:right"
-        color="gray-600"
-      ></ui-icon>`}
-      <ui-text type="body-s" layout="grow">
+      ${icon && html`<ui-icon name="${icon}" layout="margin:right"></ui-icon>`}
+      <ui-text type="body-s" color="gray-900" layout="grow">
         <slot></slot>
       </ui-text>
       <ui-text type="label-s" color="${enabled ? '' : 'danger-500'}">
@@ -50,6 +45,24 @@ export default {
 
     :host(:not(:last-of-type)) {
       border-bottom: none;
+    }
+
+    ui-icon {
+      color: var(--ui-color-gray-600);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      :host(:hover) {
+        background: var(--ui-color-primary-100);
+      }
+
+      :host(:hover) ui-icon {
+        color: var(--ui-color-primary-700);
+      }
+
+      :host(:hover) ui-text {
+        --ui-text-color: var(--ui-color-primary-700);
+      }
     }
   `,
 };
