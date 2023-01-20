@@ -60,7 +60,7 @@
     "message": "뒤로"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "기부자가 되세요."
   },
   "blocked": {
     "message": "차단됨 "
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "계속"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "고객 응대 ",
@@ -264,7 +267,7 @@
     "message": "개인정보 취급방침"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "개인정보 취급방침"
   },
   "privacy_protection": {
     "message": "Privacy protection"

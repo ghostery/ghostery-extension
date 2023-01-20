@@ -98,6 +98,9 @@
   "continue": {
     "message": "Continue"
   },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
+  },
   "customer_interaction": {
     "message": "Customer Interaction",
     "description": "Tracker category name"

@@ -60,7 +60,7 @@
     "message": "返回"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "成为贡献者"
   },
   "blocked": {
     "message": "已拦截"
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "继续"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "客户互动",
@@ -264,7 +267,7 @@
     "message": "隐私政策"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "隐私政策"
   },
   "privacy_protection": {
     "message": "Privacy protection"

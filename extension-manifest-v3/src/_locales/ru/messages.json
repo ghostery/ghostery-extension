@@ -60,7 +60,7 @@
     "message": "Назад"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "Стать участником"
   },
   "blocked": {
     "message": "Заблокированные"
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "Продолжить"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "Взаимодействие с клиентами",
@@ -264,7 +267,7 @@
     "message": "политика конфиденциальности"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "Политика конфиденциальности"
   },
   "privacy_protection": {
     "message": "Privacy protection"
