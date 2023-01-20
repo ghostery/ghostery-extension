@@ -13,31 +13,31 @@ import { store } from 'hybrids';
 
 const ACCOUNT_URL = 'https://accountapi.ghostery.com/api/v2.1.0';
 const AUTH_URL = 'https://consumerapi.ghostery.com/api/v2';
+const COOKIE_URL = 'https://ghostery.com';
 
 const ALARM_NAME = 'account:refresh';
-const REFRESH_RATE = 60 * 24 * 30; // 30 days
+const REFRESH_RATE = 60 * 24 * 30; // 30 days in minutes
 
 async function cookie(name) {
-  const cookie = await chrome.cookies.get({
-    url: 'https://ghostery.com',
-    name,
-    // TODO: Add firstPartyDomain support
-    // firstPartyDomain: 'ghostery.com',
-  });
-
-  return cookie && cookie.value;
+  // TODO: Add firstPartyDomain support
+  // firstPartyDomain: 'ghostery.com',
+  const cookie = await chrome.cookies.get({ url: COOKIE_URL, name });
+  return cookie ? cookie.value : null;
 }
 
-async function get(url, headers) {
+async function get(url) {
+  const accessToken = await cookie('access_token');
   const csrfToken = await cookie('csrf_token');
+
+  if (!accessToken || !csrfToken) throw Error('Unauthorized');
 
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/vnd.api+json',
-      'X-CSRF-Token': csrfToken || undefined,
-      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+      'X-CSRF-Token': csrfToken,
     },
-    credentials: 'include',
+    credentials: 'omit',
   });
 
   if (res.ok) {
@@ -47,18 +47,22 @@ async function get(url, headers) {
   throw res;
 }
 
-async function session() {
+async function session(account) {
   const userId = await cookie('user_id');
   if (!userId) return undefined;
 
-  if (!(await cookie('access_token'))) {
-    await fetch(`${AUTH_URL}/refresh_token`, {
-      method: 'post',
-      headers: {
-        UserId: userId,
-        RefreshToken: await cookie('refresh_token'),
-      },
-    });
+  if (account && !(await cookie('access_token'))) {
+    const refreshToken = await cookie('refresh_token');
+    if (refreshToken) {
+      await fetch(`${AUTH_URL}/refresh_token`, {
+        method: 'post',
+        headers: {
+          UserId: userId,
+          RefreshToken: refreshToken,
+        },
+        credentials: 'omit',
+      });
+    }
   }
 
   return userId;
@@ -72,13 +76,12 @@ const Account = {
   name: ({ firstName, lastName }) => `${firstName} ${lastName}`,
   [store.connect]: {
     async get() {
-      let { account } = await chrome.storage.local.get(['account']);
-
       try {
-        const userId = await session();
+        let { account } = await chrome.storage.local.get(['account']);
+        const userId = await session(account);
 
         if (!userId) {
-          throw Error('Not found');
+          throw Error('Account not found');
         } else if (!account || account.userId !== userId) {
           const { data: user } = await get(`${ACCOUNT_URL}/users/${userId}`);
 
@@ -94,10 +97,7 @@ const Account = {
 
         return account;
       } catch (e) {
-        if (account) {
-          chrome.storage.local.set({ account: undefined });
-        }
-
+        chrome.storage.local.set({ account: undefined });
         throw e;
       }
     },
@@ -119,7 +119,7 @@ const Account = {
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
-    session();
+    store.get(Account);
   }
 });
 
