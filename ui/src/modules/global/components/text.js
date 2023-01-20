@@ -61,13 +61,13 @@ export default {
     ::slotted(a:hover, a:focus-visible) { color: var(--ui-text-color-anchor, inherit); }
 
     @media (hover: hover) and (pointer: fine) {
-      ::slotted(a:hover) { color: var(--ui-text-color-anchor, inherit); }
+      ::slotted(a:hover) { color: var(--ui-text-color-anchor, inherit) }
+      :host([underline]) ::slotted(a:hover) { text-decoration: underline; }
     }
 
     ::slotted(a:active) { opacity: 0.6; }
     ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
 
     :host([type^="body"]) ::slotted(a) { font-weight: 500; }
-    :host([underline]) ::slotted(a) { text-decoration: underline; }
   `,
 };

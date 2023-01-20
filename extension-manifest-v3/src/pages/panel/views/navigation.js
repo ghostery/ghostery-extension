@@ -52,22 +52,22 @@ export default {
   account: store(Account),
   content: ({ account }) => html`
     <template layout="grid height:600px">
-      <gh-panel-menu>
-        <ui-panel-header slot="header">
-          Menu
-          <ui-action slot="actions">
-            <a href="${router.backUrl()}">
-              <ui-icon name="close" color="gray-900" layout="size:3"></ui-icon>
-            </a>
-          </ui-action>
-        </ui-panel-header>
+      <ui-panel-header layout="fixed top left width:full">
+        Menu
+        <ui-action slot="actions">
+          <a href="${router.backUrl()}">
+            <ui-icon name="close" color="gray-900" layout="size:3"></ui-icon>
+          </a>
+        </ui-action>
+      </ui-panel-header>
+      <div layout="column gap padding:bottom margin:top:8">
         <ui-text>
           <a
             href="${store.ready(account)
               ? 'https://account.ghostery.com/'
               : 'https://signon.ghostery.com/'}"
             target="_blank"
-            layout="block margin:1:2"
+            layout="block padding margin:0:1"
           >
             <gh-panel-menu-item icon="user">
               ${store.ready(account) &&
@@ -83,16 +83,20 @@ export default {
           label
             ? html`
                 <ui-text>
-                  <a href="${href}" target="_blank" layout="block margin:1:2">
+                  <a
+                    href="${href}"
+                    target="_blank"
+                    layout="block padding margin:0:1"
+                  >
                     <gh-panel-menu-item icon="${icon}">
                       ${label}
                     </gh-panel-menu-item>
                   </a>
                 </ui-text>
               `
-            : html`<hr />`,
+            : html`<ui-line></ui-line>`,
         )}
-      </gh-panel-menu>
+      </div>
     </template>
   `,
 };

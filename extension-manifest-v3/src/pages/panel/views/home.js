@@ -23,22 +23,14 @@ const NOTIFICATIONS = [
   {
     icon: 'help',
     text: 'Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.',
-    actions: [
-      {
-        text: 'Get help',
-        url: 'https://www.ghostery.com/support?utm_source=gbe',
-      },
-    ],
+    url: 'https://www.ghostery.com/support?utm_source=gbe',
+    action: 'Get help',
   },
   {
     icon: 'heart',
     text: 'Hey, do you enjoy Ghostery and want to support our work?',
-    actions: [
-      {
-        text: 'Become a Contributor',
-        url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-      },
-    ],
+    url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+    action: 'Become a Contributor',
   },
 ];
 
@@ -225,16 +217,10 @@ export default {
             <gh-panel-notification
               icon="${notification.icon}"
               layout="margin:0:2:1"
+              href="${notification.url}"
             >
-              <ui-text type="body-s">${notification.text}</ui-text>
-
-              ${notification.actions.map(
-                ({ text, url }) => html`
-                  <ui-text type="label-s" color="primary-700">
-                    <a href="${url}" target="_blank">${text}</a>
-                  </ui-text>
-                `,
-              )}
+              ${notification.text}
+              <span slot="action">${notification.action}</span>
             </gh-panel-notification>
           `}
         </section>

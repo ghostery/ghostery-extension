@@ -145,9 +145,9 @@ export default {
                   engine result page
                 </ui-text>
                 <ui-text
-                  type="body-l"
-                  mobile-type="body-m"
-                  color="gray-900"
+                  type="body-m"
+                  mobile-type="body-s"
+                  color="gray-600"
                   underline
                 >
                   <a

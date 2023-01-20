@@ -17,6 +17,22 @@ function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
 }
 
+function showCopyNotification(host) {
+  const wrapper = document.createDocumentFragment();
+
+  Array.from(
+    host.querySelectorAll('#gh-panel-company-alerts gh-panel-alert'),
+  ).forEach((el) => el.parentNode.removeChild(el));
+
+  html`
+    <gh-panel-alert type="success" slide autoclose="2">
+      Copied to clipboard
+    </gh-panel-alert>
+  `(wrapper);
+
+  host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
+}
+
 export default {
   [router.connect]: { dialog: true },
   tag: 'gh-panel-company-view',
@@ -36,6 +52,10 @@ export default {
   content: ({ company, trackers, trackersByCategory, wtmUrl }) => html`
     <template layout="column">
       <gh-panel-dialog>
+        <div
+          id="gh-panel-company-alerts"
+          layout="absolute inset:1 bottom:auto"
+        ></div>
         <ui-text slot="header" type="label-l">${company.name}</ui-text>
         ${trackers &&
         html`
@@ -48,7 +68,7 @@ export default {
               <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
               ${wtmUrl &&
               html`
-                <ui-text type="label-xs" color="primary-700">
+                <ui-text type="label-xs" color="primary-700" underline>
                   <a href="${wtmUrl}" target="_blank">
                     Read more on WhoTracks.Me
                   </a>
@@ -59,7 +79,7 @@ export default {
           `}
           <section
             layout="
-              grid:max|1 items:start:stretch content:start gap:1:2
+              grid:max|1 items:start:stretch content:start gap:1:2.5
               grow:1
               padding:bottom:4
             "
@@ -81,14 +101,9 @@ export default {
                       ${list.map(
                         ({ url }) =>
                           html`
-                            <div
-                              layout="row content:space-between items:center"
-                            >
-                              <ui-text type="body-s" color="gray-600" ellipsis>
-                                ${url}
-                              </ui-text>
-                              <gh-panel-copy text="${url}"></gh-panel-copy>
-                            </div>
+                            <gh-panel-copy oncopy="${showCopyNotification}">
+                              ${url}
+                            </gh-panel-copy>
                           `,
                       )}
                     </div>
@@ -105,6 +120,7 @@ export default {
                   type="body-s"
                   color="primary-700"
                   ellipsis
+                  underline
                   layout="padding margin:-1"
                 >
                   <a href="${company.website}" target="_blank">
@@ -124,6 +140,7 @@ export default {
                   type="body-s"
                   color="primary-700"
                   ellipsis
+                  underline
                   layout="padding margin:-1"
                 >
                   <a href="${company.privacyPolicy}" target="_blank">
@@ -137,27 +154,22 @@ export default {
               <ui-icon name="mail"></ui-icon>
               <div layout="column gap">
                 <ui-text type="label-s">Contact</ui-text>
-                <div layout="row content:space-between items:center">
-                  <ui-text
-                    type="body-s"
-                    color="primary-700"
-                    ellipsis
-                    layout="padding margin:-1"
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
+                >
+                  <a
+                    href="${company.contact.startsWith('http')
+                      ? ''
+                      : 'mailto:'}${company.contact}"
+                    target="_blank"
                   >
-                    <a
-                      href="${company.contact.startsWith('http')
-                        ? ''
-                        : 'mailto:'}${company.contact}"
-                      target="_blank"
-                    >
-                      ${company.contact}
-                    </a>
-                  </ui-text>
-                  ${!company.contact.startsWith('http') &&
-                  html`
-                    <gh-panel-copy text="${company.contact}"></gh-panel-copy>
-                  `}
-                </div>
+                    ${company.contact}
+                  </a>
+                </ui-text>
               </div>
             `}
           </section>

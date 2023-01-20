@@ -45,7 +45,7 @@ export default {
           grid::max|1
           width:full::full height:auto::auto
           margin:0 padding:0
-          top:6 bottom
+          top:4 bottom layer:400
         "
       >
         <section
@@ -65,10 +65,11 @@ export default {
             </a>
           </ui-action>
         </section>
-        <section id="content" layout="column overflow:scroll gap:2 padding:2">
+        <section id="content" layout="column overflow:y:auto gap:2 padding:2">
           <slot></slot>
         </section>
       </dialog>
+      <div id="backdrop" layout="fixed layer:300 inset:0"></div>
     </template>
   `.css`
     dialog {
@@ -77,7 +78,7 @@ export default {
       background: var(--ui-color-white);
       overscroll-behavior: contain;
       transform: translateY(100%);
-      transition: all 0.2s ease-out;
+      transition: transform 500ms cubic-bezier(0.4, 0.15, 0, 1);
     }
 
     dialog[open] {
@@ -85,13 +86,17 @@ export default {
     }
 
     dialog::backdrop {
-      background: rgba(0, 0, 0, 0.4);
-      opacity: 0;
-      transition: opacity 0.2s ease-out;
+      display: none;
     }
 
-    dialog[open]::backdrop {
-      opacity: 1;
+    #backdrop {
+      background: var(--ui-color-gray-900);
+      opacity: 0;
+      transition: all 500ms ease-out;
+    }
+
+    dialog[open] + #backdrop {
+      opacity: 0.7;
     }
 
     #header {
