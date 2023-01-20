@@ -60,7 +60,7 @@
     "message": "Terug"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "Word Contributor"
   },
   "blocked": {
     "message": "Geblokkeerd"
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "Ga door"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "Klanten Interactie",
@@ -264,7 +267,7 @@
     "message": "Privacybeleid"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "Privacybeleid"
   },
   "privacy_protection": {
     "message": "Privacy protection"

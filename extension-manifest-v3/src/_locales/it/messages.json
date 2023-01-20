@@ -60,7 +60,7 @@
     "message": "Indietro"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "Diventa un collaboratore"
   },
   "blocked": {
     "message": "Bloccati"
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "Continua"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "Interazione Cliente",
@@ -264,7 +267,7 @@
     "message": "informativa sulla privacy"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "Informativa sulla privacy"
   },
   "privacy_protection": {
     "message": "Privacy protection"

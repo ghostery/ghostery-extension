@@ -60,7 +60,7 @@
     "message": "戻る"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "Contributorになる"
   },
   "blocked": {
     "message": "ブロックされた対象"
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "継続"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "顧客インタラクション",
@@ -264,7 +267,7 @@
     "message": "プライバシー・ポリシー"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "プライバシー・ポリシー"
   },
   "privacy_protection": {
     "message": "Privacy protection"

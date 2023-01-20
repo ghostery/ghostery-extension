@@ -60,7 +60,7 @@
     "message": "Zurück"
   },
   "become_a_contributor": {
-    "message": "Become a contributor"
+    "message": "Werde Ghostery-Förderer"
   },
   "blocked": {
     "message": "Blockiert"
@@ -97,6 +97,9 @@
   },
   "continue": {
     "message": "Weiter"
+  },
+  "copied_to_clipboard": {
+    "message": "Copied to clipboard"
   },
   "customer_interaction": {
     "message": "Kundeninteraktion",
@@ -264,7 +267,7 @@
     "message": "Datenschutzrichtlinie"
   },
   "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "Datenschutzrichtlinie"
   },
   "privacy_protection": {
     "message": "Privacy protection"
