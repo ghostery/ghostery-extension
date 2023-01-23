@@ -10,65 +10,12 @@
  */
 
 import { store } from 'hybrids';
-
-const ACCOUNT_URL = 'https://accountapi.ghostery.com/api/v2.1.0';
-const AUTH_URL = 'https://consumerapi.ghostery.com/api/v2';
-const COOKIE_URL = 'https://ghostery.com';
+import * as api from './utils/api.js';
 
 const ALARM_NAME = 'account:refresh';
 const REFRESH_RATE = 60 * 24 * 30; // 30 days in minutes
 
-async function cookie(name) {
-  // TODO: Add firstPartyDomain support
-  // firstPartyDomain: 'ghostery.com',
-  const cookie = await chrome.cookies.get({ url: COOKIE_URL, name });
-  return cookie ? cookie.value : null;
-}
-
-async function get(url) {
-  const accessToken = await cookie('access_token');
-  const csrfToken = await cookie('csrf_token');
-
-  if (!accessToken || !csrfToken) throw Error('Unauthorized');
-
-  const res = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/vnd.api+json',
-      Authorization: `Bearer ${accessToken}`,
-      'X-CSRF-Token': csrfToken,
-    },
-    credentials: 'omit',
-  });
-
-  if (res.ok) {
-    return res.json();
-  }
-
-  throw res;
-}
-
-async function session(account) {
-  const userId = await cookie('user_id');
-  if (!userId) return undefined;
-
-  if (account && !(await cookie('access_token'))) {
-    const refreshToken = await cookie('refresh_token');
-    if (refreshToken) {
-      await fetch(`${AUTH_URL}/refresh_token`, {
-        method: 'post',
-        headers: {
-          UserId: userId,
-          RefreshToken: refreshToken,
-        },
-        credentials: 'omit',
-      });
-    }
-  }
-
-  return userId;
-}
-
-const Account = {
+export default {
   userId: '',
   firstName: '',
   lastName: '',
@@ -77,16 +24,16 @@ const Account = {
   [store.connect]: {
     async get() {
       try {
+        const userId = await api.session();
         let { account } = await chrome.storage.local.get(['account']);
-        const userId = await session(account);
 
         if (!userId) {
-          throw Error('Account not found');
-        } else if (!account || account.userId !== userId) {
-          const { data: user } = await get(`${ACCOUNT_URL}/users/${userId}`);
+          throw Error('Unauthorized');
+        } else if (!account || account.userId !== userId.value) {
+          const { data: user } = await api.get(`users/${userId.value}`);
 
           account = {
-            userId,
+            userId: userId.value,
             firstName: user.attributes.first_name,
             lastName: user.attributes.last_name,
             email: user.attributes.email,
@@ -119,8 +66,6 @@ const Account = {
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
-    store.get(Account);
+    api.session();
   }
 });
-
-export default Account;
