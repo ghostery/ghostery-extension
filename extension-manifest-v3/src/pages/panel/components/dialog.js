@@ -11,41 +11,41 @@
 
 import { html, router } from 'hybrids';
 
-function close(host, event) {
-  if (event.target === event.currentTarget) {
-    host.shadowRoot.querySelector('a').click();
-  }
+function close(host) {
+  host.shadowRoot.querySelector('a').click();
 }
 
 function animateOnClose(host, event) {
   router.resolve(
     event,
     new Promise((resolve) => {
-      host.dialog.addEventListener('transitionend', resolve, { once: true });
-      host.dialog.close();
+      host.shadowRoot
+        .querySelector('#dialog')
+        .addEventListener('transitionend', resolve, { once: true });
+      host.open = false;
     }),
   );
 }
 
 export default {
-  dialog: {
-    get: ({ render }) => render().querySelector('dialog'),
+  open: {
+    value: false,
     connect(host, key) {
       const timeout = setTimeout(() => {
-        host[key].showModal();
-      }, 0);
+        host[key] = true;
+      });
       return () => clearTimeout(timeout);
     },
   },
   render: () => html`
-    <template layout="block">
-      <dialog
-        onclick="${close}"
+    <template layout="contents">
+      <div
+        id="dialog"
         layout="
           grid::max|1
           width:full::full height:auto::auto
           margin:0 padding:0
-          top:4 bottom layer:400
+          fixed inset top:4 bottom layer:400
         "
       >
         <section
@@ -68,11 +68,15 @@ export default {
         <section id="content" layout="column overflow:y:auto gap:2 padding:2">
           <slot></slot>
         </section>
-      </dialog>
-      <div id="backdrop" layout="fixed layer:300 inset:0"></div>
+      </div>
+      <div
+        id="backdrop"
+        layout="fixed layer:300 inset:0"
+        onclick="${close}"
+      ></div>
     </template>
   `.css`
-    dialog {
+    #dialog {
       border: none;
       border-radius: 12px 12px 0 0;
       background: var(--ui-color-white);
@@ -81,21 +85,17 @@ export default {
       transition: transform 500ms cubic-bezier(0.4, 0.15, 0, 1);
     }
 
-    dialog[open] {
-      transform: translateY(0);
-    }
-
-    dialog::backdrop {
-      display: none;
-    }
-
     #backdrop {
       background: var(--ui-color-gray-900);
       opacity: 0;
       transition: all 500ms ease-out;
     }
 
-    dialog[open] + #backdrop {
+    :host([open]) #dialog {
+      transform: translateY(0);
+    }
+
+    :host([open]) #backdrop {
       opacity: 0.7;
     }
 
