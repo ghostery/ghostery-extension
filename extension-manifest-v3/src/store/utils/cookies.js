@@ -9,8 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-const COOKIE_DOMAIN = '.ghosterystage.com';
-const COOKIE_URL = 'https://ghosterystage.com';
+const COOKIE_DOMAIN = '.ghostery.com';
+const COOKIE_URL = 'https://ghostery.com';
 const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 
 export async function get(name) {

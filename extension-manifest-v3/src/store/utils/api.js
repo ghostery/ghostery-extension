@@ -11,8 +11,8 @@
 
 import * as cookies from './cookies.js';
 
-const ACCOUNT_URL = 'https://accountapi.ghosterystage.com/api/v2.1.0';
-const AUTH_URL = 'https://consumerapi.ghosterystage.com/api/v2';
+const ACCOUNT_URL = 'https://accountapi.ghostery.com/api/v2.1.0';
+const AUTH_URL = 'https://consumerapi.ghostery.com/api/v2';
 
 const COOKIE_SHORT_DURATION = 60 * 60 * 24; // 1 day in seconds
 
