@@ -2,10 +2,13 @@
   "name": "ghostery-extension",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "glossary-converter": "node tools/glossary-converter.js",
     "postinstall": "patch-package"
   },
   "devDependencies": {
+    "csv": "^6.2.5",
     "license-checker": "^25.0.1",
     "patch-package": "^6.5.1"
   },
