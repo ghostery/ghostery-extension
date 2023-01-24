@@ -98,9 +98,8 @@ export default {
           </ui-panel-action-group>
         `}
       </div>
-      ${type === 'graph' &&
-      html`
-        <div layout="row gap:3">
+      <ui-panel-switch>
+        <ui-panel-switch-item active="${type === 'graph'}" layout="row gap:3">
           <ui-tracker-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
@@ -121,58 +120,65 @@ export default {
               `,
             )}
           </div>
-        </div>
-      `}
-      ${type === 'list' &&
-      html`
-        <section layout="column grow">
-          ${!categoryList.length &&
-          html`
-            <ui-panel-list layout="grow">
-              <ui-text type="body-s" color="gray-600" layout="grow row center">
-                No trackers detected
-              </ui-text>
-            </ui-panel-list>
-          `}
-          ${trackers.map(
-            ([name, { count, trackers }]) => html`
-              <ui-panel-list name="${name}">
-                <div slot="header" layout="row items:center gap">
-                  <ui-panel-badge>${count}</ui-panel-badge>
-                </div>
+        </ui-panel-switch-item>
+        ${trackers &&
+        html`
+          <ui-panel-switch-item
+            active="${type === 'list'}"
+            layout="column grow"
+          >
+            ${!categoryList.length &&
+            html`
+              <ui-panel-list layout="grow">
+                <ui-text
+                  type="body-s"
+                  color="gray-600"
+                  layout="grow row center"
+                >
+                  No trackers detected
+                </ui-text>
+              </ui-panel-list>
+            `}
+            ${trackers.map(
+              ([name, { count, trackers }]) => html`
+                <ui-panel-list name="${name}">
+                  <div slot="header" layout="row items:center gap">
+                    <ui-panel-badge>${count}</ui-panel-badge>
+                  </div>
 
-                <section id="content" layout="column items:start">
-                  ${trackers.map(
-                    (t) =>
-                      html`
-                        <ui-text type="body-s">
-                          ${t.company && dialog
-                            ? html`
-                                <a
-                                  href="${router.url(dialog, {
-                                    company: t.company,
-                                  })}"
+                  <section id="content" layout="column items:start">
+                    ${trackers.map(
+                      (t) =>
+                        html`
+                          <ui-text type="body-s">
+                            ${t.company && dialog
+                              ? html`
+                                  <a
+                                    href="${router.url(dialog, {
+                                      company: t.company,
+                                    })}"
+                                    layout="row items:center gap:0.5 padding:0.5:0"
+                                  >
+                                    ${t.name}
+                                    <ui-panel-badge>${t.count}</ui-panel-badge>
+                                  </a>
+                                `
+                              : html`<a
                                   layout="row items:center gap:0.5 padding:0.5:0"
                                 >
                                   ${t.name}
                                   <ui-panel-badge>${t.count}</ui-panel-badge>
-                                </a>
-                              `
-                            : html`<a
-                                layout="row items:center gap:0.5 padding:0.5:0"
-                              >
-                                ${t.name}
-                                <ui-panel-badge>${t.count}</ui-panel-badge>
-                              </a>`}
-                        </ui-text>
-                      `,
-                  )}
-                </section>
-              </ui-panel-list>
-            `,
-          )}
-        </section>
-      `}
+                                </a>`}
+                          </ui-text>
+                        `,
+                    )}
+                  </section>
+                </ui-panel-list>
+              `,
+            )}
+          </ui-panel-switch-item>
+        `}
+      </ui-panel-switch>
     </template>
   `,
 };
