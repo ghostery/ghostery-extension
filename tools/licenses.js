@@ -11,8 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-const checker = require('license-checker');
-const fs = require('fs');
+import fs from 'node:fs';
+import checker from 'license-checker';
 
 const IGNORED_PACAKGES = [
   '@ghostery/libs',
@@ -32,8 +32,8 @@ const template = (packages) => `
     <title>Licenses</title>
     <style>
       html {
-        font-family: -apple-system, 
-          BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, 
+        font-family: -apple-system,
+          BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
           sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         font-size: 14px;
       }
@@ -52,30 +52,30 @@ const template = (packages) => `
     <h1>Licenses</h1>
     ${packages
       .map(
-        (package) => `
-      <h2>${package.name}</h2>
+        (pkg) => `
+      <h2>${pkg.name}</h2>
       <ul>
         ${
-          package.publisher
-            ? `<li><label>Publisher: </label>${package.publisher}</li>`
+          pkg.publisher
+            ? `<li><label>Publisher: </label>${pkg.publisher}</li>`
             : ''
         }
         ${
-          package.email ? `<li><label>Email: </label>${package.email}</li>` : ''
+          pkg.email ? `<li><label>Email: </label>${pkg.email}</li>` : ''
         }
         ${
-          package.repository
-            ? `<li><label>Repository: </label>${package.repository}</li>`
+          pkg.repository
+            ? `<li><label>Repository: </label>${pkg.repository}</li>`
             : ''
         }
-        ${package.url ? `<li><label>URL: </label>${package.url}</li>` : ''}
+        ${pkg.url ? `<li><label>URL: </label>${pkg.url}</li>` : ''}
         ${
-          package.licenses
-            ? `<li><label>License: </label>${package.licenses}</li>`
+          pkg.licenses
+            ? `<li><label>License: </label>${pkg.licenses}</li>`
             : ''
         }
       </ul>
-      ${package.licenseText ? `<pre>${package.licenseText}</pre>` : ''}
+      ${pkg.licenseText ? `<pre>${pkg.licenseText}</pre>` : ''}
     `,
       )
       .join('')}
