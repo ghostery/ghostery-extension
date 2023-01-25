@@ -77,7 +77,7 @@ export default {
                     layout@768px="grid:2 gap:4"
                   >
                     <ui-text type="label-m" slot="header">
-                      Website (${websites.length})
+                      Website <span>(${websites.length})</span>
                     </ui-text>
                     <ui-text
                       type="label-m"

@@ -1,6 +1,6 @@
 {
   "accept_terms": {
-    "message": "Accept terms"
+    "message": "接受條款"
   },
   "account_creation_privacy_statement": {
     "message": "我們的$LINK_TERMS_START$條款與條件$LINK_TERMS_END$ 和我們的 $LINK_UA_START$許可協議$LINK_UA_END$ 適用。您可以找到我們的隱私聲明$LINK_PS_START$here$LINK_PS_END$。",
@@ -29,13 +29,13 @@
     "message": "廣告"
   },
   "additional_permissions_required": {
-    "message": "Additional Permissions Required"
+    "message": "需要額外的權限"
   },
   "ads": {
     "message": "廣告"
   },
   "ads___onboarding": {
-    "message": "Ads"
+    "message": "廣告"
   },
   "adult_advertising": {
     "message": "成人廣告",
@@ -91,7 +91,7 @@
     "message": "啟用智能瀏覽功能。將調整追蹤器封鎖功能以最佳化頁面性能。"
   },
   "all_popups": {
-    "message": "All Popups"
+    "message": "所有彈出式視窗"
   },
   "already_subscribed": {
     "message": "已訂閱"
@@ -139,16 +139,16 @@
     "message": "還原"
   },
   "any_questions__anytime_": {
-    "message": "Any questions? Anytime!"
+    "message": "有任何問題嗎？ 隨時提問！"
   },
   "apply_optimal_privacy_settings_": {
-    "message": "Apply optimal privacy settings:"
+    "message": "套用最佳隱私權設定："
   },
   "are_you_sure_": {
     "message": "Are you sure?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
-    "message": "Are you sure you want to skip enabling Ghostery?"
+    "message": "你確定要跳過啟用 Ghostery 嗎？"
   },
   "audio_video_player": {
     "message": "音訊/視訊播放器",
@@ -411,7 +411,7 @@
     "message": "取消"
   },
   "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "By using Never-Consent you let website owners know that you’re against tracking!"
+    "message": "使用 Never-Consent，你可以讓網站擁有者知道你反對追蹤！"
   },
   "cancel": {
     "message": "取消"
@@ -450,7 +450,7 @@
   },
   "category_consent": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
-    "message": "Consent Management"
+    "message": "同意管理"
   },
   "category_consent_desc": {
     "description": "User-facing description for the Customer Interaction tag category.",
@@ -530,11 +530,11 @@
   },
   "category_telemetry": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
-    "message": "Telemetry"
+    "message": "遙測"
   },
   "category_telemetry_desc": {
     "description": "User-facing description for the Telemetry tag category.",
-    "message": "Telemetry"
+    "message": "遙測"
   },
   "category_uncategorized": {
     "message": "未分類的"
@@ -550,7 +550,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "Check out <a href=\"$${0}\" target=\"_blank\">FAQs</a> or drop us a line at <a href=\"mailto:$${1}\">$${2}</a>. <br/> We'll be more than happy to talk to you!"
+    "message": "查看<a href=\"$${0}\" target=\"_blank\">常見問題集</a>或寄電子郵件至 <a href=\"mailto:$${1}\">$${2}</a>。 <br/> 我們非常樂意與你聯絡！"
   },
   "choose_your_default_search": {
     "message": "選擇預設搜尋"
@@ -638,11 +638,11 @@
     "message": "確認密碼："
   },
   "consent_management": {
-    "message": "Consent Management",
+    "message": "同意管理",
     "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
   },
   "continue": {
-    "message": "Continue"
+    "message": "繼續"
   },
   "cookie": {
     "message": "cookie"
@@ -684,7 +684,7 @@
     "message": "詳細圖示"
   },
   "disable_trackers_preview": {
-    "message": "Disable Trackers Preview"
+    "message": "停用「追蹤器預覽」"
   },
   "dollar_sign": {
     "message": "&#36;"
@@ -693,7 +693,7 @@
     "message": "完成"
   },
   "done__go_with_ghosty_": {
-    "message": "Done! Go with Ghosty!"
+    "message": "完成！ 跟 Ghosty 一起去！"
   },
   "download_for_free": {
     "message": "免費下載"
@@ -709,13 +709,13 @@
     "message": "電郵："
   },
   "enable_ghostery": {
-    "message": "Enable Ghostery"
+    "message": "啟用 Ghostery"
   },
   "enable_ghostery_to_get_started": {
-    "message": "Enable Ghostery to get started"
+    "message": "啟用 Ghostery 開始"
   },
   "enable_never_consent_": {
-    "message": "Enable Never-Consent?"
+    "message": "啟用 Never-Consent？"
   },
   "enable_when_blacklisted": {
     "message": "欲使用此功能，請取消限制網站。"
@@ -765,7 +765,7 @@
     "message": "名 (非必填項):"
   },
   "for_more_information_read_our_full": {
-    "message": "For more information read our full"
+    "message": "如欲了解更多訊息，請閱讀我們的全文"
   },
   "forgot_password": {
     "message": "忘記了密碼？"
@@ -780,22 +780,22 @@
     "message": "Basic"
   },
   "ghostery_disabled": {
-    "message": "Ghostery disabled"
+    "message": "Ghostery 已停用"
   },
   "ghostery_enabled": {
-    "message": "Ghostery enabled"
+    "message": "Ghostery 已啟用"
   },
   "ghostery_is_ready": {
     "message": "Ghostery 已準備好了！"
   },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery is set up to stop trackers in their tracks and protect your privacy while browsing!"
+    "message": "Ghostery 的設置是為了在其追蹤中制止追蹤器並在瀏覽時保護你的隱私！"
   },
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
-    "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers."
+    "message": "Ghostery 正在其追蹤中制止追蹤器，並防止你被分析和你的個人資料被賣給資料仲介。"
   },
   "ghostery_privacy_policy": {
-    "message": "Ghostery Privacy Policy"
+    "message": "Ghostery 隱私權政策"
   },
   "global_settings_saved": {
     "message": "全球設定已儲存"
@@ -820,7 +820,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
-    "message": "I agree to send non-personal information to <a href=\"$${0}\">Ghostery’s WhoTracks.Me</a>, and I accept the <a href=\"$${1}\">Ghostery Privacy Policy</a>"
+    "message": "我同意將非個人資料傳送到 <a href=\"$${0}\">Ghostery 的 WhoTracks.Me</a>，而且我接受 <a href=\"$${1}\">Ghostery 隱私權政策< /a>"
   },
   "invalid_email_forgot": {
     "message": "很抱歉，您必須輸入一個真實的電郵址。"
@@ -829,7 +829,7 @@
     "message": "很抱歉，您必須輸入一個真實的電郵址。"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
-    "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send non-personal information to WhoTracks.Me. The input enables Ghostery to provide real-time intel on trackers which in turn provides protection to the entire Ghostery community."
+    "message": "它的存在要歸功於每位選擇將非個人資料傳送到 WhoTracks.Me 的 Ghostery 用戶的微小貢獻。 這些資料的輸入使 Ghostery 能夠提供有關追蹤器的即時情報，進而為整個 Ghostery 社群提供保護。"
   },
   "last_name_field_label": {
     "message": "姓 (非必填項):"
@@ -838,7 +838,7 @@
     "message": "瞭解更多"
   },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Let Ghostery be your complete privacy advocate and reject all popups and tracking for you, or do it yourself!"
+    "message": "讓 Ghostery 成為你的全面隱私倡議者，拒絕所有彈出式視窗和追蹤，或者你自己動手！"
   },
   "license_email": {
     "message": "電郵："
@@ -881,7 +881,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "More information on $${0} methodology in Ghostery’s Manifesto."
+    "message": "更多有關 Ghostery 宣言中 $${0} 方法的資訊。"
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
@@ -891,10 +891,10 @@
     "message": "Never-Consent"
   },
   "never_consent_is_disabled": {
-    "message": "Never-Consent is Disabled"
+    "message": "Never-Consent 已停用"
   },
   "never_consent_is_enabled": {
-    "message": "Never-Consent is Enabled"
+    "message": "Never-Consent 已啟用"
   },
   "new_themes": {
     "message": "新主題"
@@ -940,19 +940,19 @@
     "message": "關閉"
   },
   "ok": {
-    "message": "OK"
+    "message": "好的"
   },
   "ok__i_understand": {
-    "message": "Ok, I understand"
+    "message": "好的，我了解了"
   },
   "on": {
     "message": "啟動"
   },
   "on_all_websites": {
-    "message": "on all websites"
+    "message": "在所有網站上"
   },
   "on_this_website": {
-    "message": "on this website"
+    "message": "在此網站上"
   },
   "options_tracker_wheel_disabled": {
     "message": "在瀏覽器工具欄中禁用跟踪輪"
@@ -1298,7 +1298,7 @@
     "message": "優先支援"
   },
   "privacy_policy": {
-    "message": "privacy policy"
+    "message": "隱私權政策"
   },
   "privacy_protection": {
     "message": "本網站的隱私保護"
@@ -1706,7 +1706,7 @@
     "message": "更改Ghostery的顏色方案。"
   },
   "subscription_upgrade_to": {
-    "message": "Become a Contributor"
+    "message": "成為捐助者"
   },
   "subscription_for_contributors": {
     "message": "For contributors"
@@ -1772,10 +1772,10 @@
     "message": "全系統跟蹤器和廣告封鎖"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
-    "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
+    "message": "Ghostery 瀏覽器擴充功能已安裝在你的瀏覽器中，但 Ghosty 正在小睡片刻。"
   },
   "tired_of_cookie_popups_": {
-    "message": "TIRED OF COOKIE POPUPS?"
+    "message": "厭倦了 Cookie 彈出式視窗？"
   },
   "too_many_failed_logins_text": {
     "message": "登入失敗次數過多，請一小時後重試。"
@@ -1826,10 +1826,10 @@
     "message": "檢測到"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-    "message": "Trackers detected by Ghostery on this website:&nbsp;$${0}"
+    "message": "Ghostery 在此網站上偵測到的追蹤器：$${0}"
   },
   "trackers_preview": {
-    "message": "Trackers Preview"
+    "message": "追蹤器預覽"
   },
   "try_ghostery_midnight": {
     "message": "試用 Ghostery Midnight"
@@ -1848,7 +1848,7 @@
     "description": "Ghostery organizes tags by category. This is one of several tag categories."
   },
   "welcome_to_ghostery": {
-    "message": "Welcome to Ghostery"
+    "message": "歡迎來到 Ghostery"
   },
   "what_is_whotracks_me_": {
     "message": "什么是 WhoTracks.Me？"
@@ -1864,25 +1864,25 @@
     "message": "此網站已受信任。"
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s AI anti-tracking technology. It is a comprehensive global resource on trackers, bringing transparency to web tracking."
+    "message": "WhoTracks.Me 由 Ghostery 營運，是 Ghostery 人工智慧反追蹤技術不可或缺的一部分。 它是有關追蹤器的綜合性全球資源，使網路追蹤透明化。"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
-    "message": "With Ghostery enabled you instantly browse the web safer, faster and with less annoying ads."
+    "message": "啟用 Ghostery 後，你即刻可以更安全、更快速地瀏覽網路，並減少惱人的廣告。"
   },
   "yes": {
     "message": "是"
   },
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>."
+    "message": "你可以隨時在 <strong>Ghostery 控制面板</strong>中更改這些設定。"
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
-    "message": "You can change your mind anytime and enable Ghostery to start tracking the trackers for you in Ghostery panel."
+    "message": "你可以隨時改變主意並啟用 Ghostery，以在 Ghostery 面板中開始追蹤追蹤器。"
   },
   "you_chose_to_skip_enabling_ghostery_": {
-    "message": "You chose to skip enabling Ghostery!"
+    "message": "你選擇跳過啟用 Ghostery！"
   },
   "you_re_all_set__ghosterian_": {
-    "message": "You're all set, Ghosterian!"
+    "message": "一切準備就緒，Ghosterian！"
   },
   "your_email_do_not_match": {
     "message": "您的這些電郵不脗合。"
