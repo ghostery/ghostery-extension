@@ -157,7 +157,7 @@
     "message": "Ghostery aktywne"
   },
   "ghostery_has_been_resumed_on_this_site_": {
-    "message": "Ghostery has been resumed on this site."
+    "message": "Ghostery zostało wznowione na tej stronie."
   },
   "ghostery_has_nothing_to_do_on_this_page": {
     "message": "Ghostery nie ma co robić na tej stronie"
@@ -172,7 +172,7 @@
     "message": "Ghostery zatrzymuje trackery na ich drodze i zapobiega profilowaniu Ciebie i Twoich danych osobowych sprzedawanych brokerom danych."
   },
   "ghostery_paused": {
-    "message": "Ghostery paused"
+    "message": "Ghostery wstrzymane"
   },
   "ghostery_privacy_policy": {
     "message": "Polityka prywatności Ghostery"
@@ -261,7 +261,7 @@
     "message": "na tej stronie"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "Wstrzymaj na tej stronie"
   },
   "paused": {
     "message": "wstrzymane"
