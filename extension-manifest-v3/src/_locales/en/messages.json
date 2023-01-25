@@ -171,6 +171,9 @@
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
     "message": "Ghostery is stopping trackers in their tracks and preventing you from being profiled and your personal information sold to data brokers."
   },
+  "ghostery_paused": {
+    "message": "Ghostery paused"
+  },
   "ghostery_privacy_policy": {
     "message": "Ghostery Privacy Policy"
   },
@@ -256,6 +259,9 @@
   },
   "on_this_website": {
     "message": "on this website"
+  },
+  "pause_on_this_site": {
+    "message": "Pause on this site"
   },
   "paused": {
     "message": "Paused"
@@ -347,9 +353,6 @@
   },
   "website": {
     "message": "Website"
-  },
-  "website__@_0__": {
-    "message": "Website ($${0})"
   },
   "websites": {
     "message": "Websites"

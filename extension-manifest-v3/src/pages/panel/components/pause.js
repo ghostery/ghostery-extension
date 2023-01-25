@@ -78,7 +78,7 @@ export default {
         <div id="label" layout="grow row center gap:0.5 shrink overflow">
           <ui-icon name="pause" color="gh-panel-action"></ui-icon>
           <ui-text type="label-m" color="gh-panel-action" layout="block:center">
-            ${paused ? `Ghostery paused` : `Pause on this site`}
+            ${paused ? msg`Ghostery paused` : msg`Pause on this site`}
           </ui-text>
         </div>
         <div

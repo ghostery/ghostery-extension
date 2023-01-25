@@ -1,12 +1,12 @@
 {
   "@_0__left": {
-    "message": "$${0} left"
+    "message": "$${0} gauche"
   },
   "1_day": {
-    "message": "1 day"
+    "message": "1 jour"
   },
   "1_hour": {
-    "message": "1 hour"
+    "message": "1 heure"
   },
   "about": {
     "message": "À propos de Ghostery"
@@ -35,7 +35,7 @@
     "message": "Toutes les fenêtres contextuelles"
   },
   "always": {
-    "message": "Always"
+    "message": "Toujours"
   },
   "anti_tracking": {
     "message": "Anti-pistage"
@@ -47,7 +47,7 @@
     "message": "Utilisez les meilleurs paramètres :"
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
-    "message": "Are you sure you want to disable Trackers Preview?"
+    "message": "Voulez-vous vraiment désactiver l'aperçu des trackers ?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Voulez-vous vraiment reporter l'activation de Ghostery ?"
@@ -79,7 +79,7 @@
     "message": "Consulte la FAQ <a href=\"$${0}\" target=\"_blank\"> </a> ou écris-nous à <a href=\"mailto:$${1}\"> $${2} </a>.  <br/>  Nous serons plus qu'heureux de te parler !"
   },
   "clear_all": {
-    "message": "Clear all"
+    "message": "Effacer tout"
   },
   "comments": {
     "message": "Commentaires",
@@ -93,13 +93,13 @@
     "message": "Contact"
   },
   "contact_support": {
-    "message": "Contact support"
+    "message": "Contacter l'assistance"
   },
   "continue": {
     "message": "Continuer"
   },
   "copied_to_clipboard": {
-    "message": "Copied to clipboard"
+    "message": "Copié dans le presse-papiers"
   },
   "customer_interaction": {
     "message": "Interaction avec les clients",
@@ -109,13 +109,13 @@
     "message": "Affichage détaillé"
   },
   "disable": {
-    "message": "Disable"
+    "message": "Désactiver"
   },
   "disable_trackers_preview": {
     "message": "Désact. aperçu des mouchards"
   },
   "disabled": {
-    "message": "Disabled"
+    "message": "Désactivé"
   },
   "done": {
     "message": "Terminé"
@@ -157,13 +157,13 @@
     "message": "Ghostery est actif"
   },
   "ghostery_has_been_resumed_on_this_site_": {
-    "message": "Ghostery has been resumed on this site."
+    "message": "Ghostery a été réactivé sur ce site."
   },
   "ghostery_has_nothing_to_do_on_this_page": {
-    "message": "Ghostery has nothing to do on this page"
+    "message": "Il n'y a rien à faire sur cette page pour Ghostery"
   },
   "ghostery_is_paused_on_this_site_": {
-    "message": "Ghostery is paused on this site."
+    "message": "Ghostery est en pause sur ce site."
   },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery est conçu pour protéger votre vie privée en mettant en échec les mouchards quand vous naviguez !"
@@ -171,20 +171,23 @@
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
     "message": "Ghostery arrête les trackers dans leurs traces et t'empêche d'être profilé et de vendre tes informations personnelles à des courtiers en données."
   },
+  "ghostery_paused": {
+    "message": "Ghostery paused"
+  },
   "ghostery_privacy_policy": {
     "message": "Politique de confidentialité de Ghostery"
   },
   "ghostery_settings": {
-    "message": "Ghostery settings"
+    "message": "Paramètres Ghostery"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
+    "message": "Ghostery sera mis en pause sur ce site. Vous pouvez modifier cette option à tout moment dans les paramètres de Ghostery pour empêcher les trackers et les publicités de vous suivre sur le Web."
   },
   "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery will be paused on this site for 1 day"
+    "message": "Ghostery sera mis en pause sur ce site pour 1 jour."
   },
   "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery will be paused on this site for 1 hour"
+    "message": "Ghostery sera mis en pause sur ce site pour 1 heure."
   },
   "hosting": {
     "message": "Hébergement",
@@ -212,7 +215,7 @@
     "message": "Menu"
   },
   "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Mind that not all listed entities are trackers, that is not all of them collect personal data"
+    "message": "Les entités répertoriées ne sont pas toutes des trackers ; elles ne collectent pas toutes des données personnelles."
   },
   "miscellaneous": {
     "message": "Divers",
@@ -237,7 +240,7 @@
     "message": "Non"
   },
   "no_trackers_detected": {
-    "message": "No trackers detected"
+    "message": "Pas de trackers détectés"
   },
   "off": {
     "message": "désactivé"
@@ -257,11 +260,14 @@
   "on_this_website": {
     "message": "Sur ce site"
   },
+  "pause_on_this_site": {
+    "message": "Pause on this site"
+  },
   "paused": {
-    "message": "Paused"
+    "message": "En pause"
   },
   "permission_required": {
-    "message": "Permission required"
+    "message": "Autorisation requise"
   },
   "privacy_policy": {
     "message": "politique de confidentialité"
@@ -270,10 +276,10 @@
     "message": "Politique de confidentialité"
   },
   "privacy_protection": {
-    "message": "Privacy protection"
+    "message": "Protection de la vie privée"
   },
   "read_more_on_whotracks_me": {
-    "message": "Read more on WhoTracks.Me"
+    "message": "Plus d'informations sur WhoTracks.Me"
   },
   "report_a_broken_page": {
     "message": "Signaler un lien brisé"
@@ -282,7 +288,7 @@
     "message": "Reprendre"
   },
   "search_website___": {
-    "message": "Search website..."
+    "message": "Rechercher sur le site..."
   },
   "settings": {
     "message": "Paramètres"
@@ -321,10 +327,10 @@
     "message": "mouchards"
   },
   "trackers_count": {
-    "message": "Trackers Count"
+    "message": "Trackers comptés"
   },
   "trackers_detected": {
-    "message": "Trackers detected"
+    "message": "Trackers détectés"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Mouchards détectés par Ghostery sur ce site :&nbsp;$${0}"
@@ -333,10 +339,10 @@
     "message": "Aperçu mouchards"
   },
   "trackers_wheel": {
-    "message": "Trackers Wheel"
+    "message": "Camembert des trackers"
   },
   "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "Try to open this panel on a different browser tab"
+    "message": "Essayez d'ouvrir ce panneau dans un autre onglet du navigateur"
   },
   "unblocked": {
     "message": "Débloqué"
@@ -346,13 +352,10 @@
     "description": "Tracker category name"
   },
   "website": {
-    "message": "Website"
-  },
-  "website__@_0__": {
-    "message": "Website ($${0})"
+    "message": "Site Web"
   },
   "websites": {
-    "message": "Websites"
+    "message": "Sites Web"
   },
   "welcome_to_ghostery": {
     "message": "Bienvenue à Ghostery"
@@ -364,10 +367,10 @@
     "message": "WhoTracks.Me, exploité par Ghostery, fait partie intégrante de la technologie anti-tracking AI de Ghostery. Il s'agit d'une ressource mondiale complète sur les trackers, apportant de la transparence au tracking web."
   },
   "whotracks_me_statistical_report": {
-    "message": "WhoTracks.Me Statistical Report"
+    "message": "Rapport statistique de WhoTracks.Me"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me Wheel"
+    "message": "Roue whotracks.me"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Avec Ghostery activé, tu navigues instantanément sur le Web de manière plus sûre, plus rapide et avec moins de publicités gênantes."
@@ -388,6 +391,6 @@
     "message": "Tout est prêt, Ghosterien·ne !"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
-    "message": "You will no longer see tracker wheels next to the search results."
+    "message": "Vous ne verrez plus de camembert des trackers à côté des résultats de recherche."
   }
 }
