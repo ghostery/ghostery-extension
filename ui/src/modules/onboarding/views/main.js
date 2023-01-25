@@ -88,7 +88,7 @@ export default define({
                 </section>
               </label>
               <div
-                layout="grid:max|1|min gap:2 items:center:start margin:2"
+                layout="grid:max|1|max gap:2 items:center:start margin:2"
                 layout@768px="margin:3"
               >
                 <ui-icon name="tracking" layout="size:3"></ui-icon>
@@ -98,7 +98,7 @@ export default define({
                 </ui-onboarding-badge>
               </div>
               <div
-                layout="grid:max|1|min gap:2 items:center:start margin:2"
+                layout="grid:max|1|max gap:2 items:center:start margin:2"
                 layout@768px="margin:3"
               >
                 <ui-icon name="ads" layout="size:3"></ui-icon>
@@ -108,7 +108,7 @@ export default define({
                 </ui-onboarding-badge>
               </div>
               <div
-                layout="grid:max|1|min gap:2 items:center:start margin:2"
+                layout="grid:max|1|max gap:2 items:center:start margin:2"
                 layout@768px="margin:3"
               >
                 <ui-icon name="autoconsent" layout="size:3"></ui-icon>
