@@ -34,13 +34,14 @@ export default {
     },
   },
   render: () => html`
-    <template layout="block relative overflow margin:-2 padding:2">
+    <template layout="block relative margin:-2 padding:2">
       <slot></slot>
     </template>
   `.css`
     :host {
-      transition: height 500ms cubic-bezier(0.4, 0.15, 0, 1);
       box-sizing: border-box;
+      transition: height 500ms cubic-bezier(0.4, 0.15, 0, 1);
+      will-change: height;
     }
   `,
 };
