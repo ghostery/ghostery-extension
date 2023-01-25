@@ -21,7 +21,12 @@ export default {
       <ui-text type="body-s" color="gray-900" layout="grow">
         <slot></slot>
       </ui-text>
-      <ui-text type="label-s" color="${enabled ? '' : 'danger-500'}">
+      <ui-text
+        type="label-s"
+        color="${enabled ? '' : 'danger-500'}"
+        ellipsis
+        layout="shrink:0"
+      >
         ${terms
           ? enabled
             ? msg`Enabled`

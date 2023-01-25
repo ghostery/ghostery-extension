@@ -35,7 +35,7 @@ export default {
     },
   },
   dialog: undefined,
-  label: msg`Trackers detected`,
+  label: '',
   content: ({
     categories,
     categoryList,
@@ -48,7 +48,7 @@ export default {
     <template layout="column gap:2">
       <div layout="row items:center gap height::4.5">
         <div layout="row gap grow">
-          <ui-text type="label-m">${label}</ui-text>
+          <ui-text type="label-m">${label || msg`Trackers detected`}</ui-text>
           <ui-tooltip wrap autohide="10">
             <span slot="content" layout="block width:200px">
               Mind that not all listed entities are trackers, that is not all of
