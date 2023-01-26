@@ -228,14 +228,36 @@ observe('terms', (terms) => {
 });
 
 chrome.webNavigation.onCommitted.addListener((details) => {
-  const { url, frameId } = details;
+  const { url, frameId, tabId } = details;
   if (frameId !== 0 || url === 'about:blank' || url.startsWith('chrome://')) {
     return;
   }
 
-  // TODO: in private windows, we should also exit (how to get the information?)
-
   (async () => {
+    // Be aware that the documentation of webNavigation.onCommitted is incomplete
+    // (https://developer.chrome.com/docs/extensions/reference/webNavigation/#event-onCommitted):
+    //
+    // > Fired when a navigation is committed. The document (and the resources
+    // > it refers to, such as images and subframes) might still be downloading,
+    // > but at least part of the document has been received from the server and
+    // > the browser has decided to switch to the new document.
+    //
+    // In practice, the event may also trigger for prefetch requests for which
+    // no tab exists. For instance, it can be reproduced in Chrome by starting
+    // a Google search from the address bar. Under certain conditions, the first
+    // search result triggers an extra onCommitted event (even if the user didn't
+    // click on the link yet).
+    const tab = await chrome.tabs.get(tabId).catch(() => null);
+    if (!tab) {
+      return;
+    }
+
+    // Don't leak information in private tabs (neither by storing on disk nor
+    // by initiating HTTP requests).
+    if (tab.incognito) {
+      return;
+    }
+
     try {
       const jobRegistered = await reporting.analyzeUrl(url);
       if (jobRegistered) {
