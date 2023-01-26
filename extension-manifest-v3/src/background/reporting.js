@@ -10,6 +10,7 @@
  */
 import AnonymousCommunication from '@whotracksme/webextension-packages/packages/anonymous-communication';
 import Reporting from '@whotracksme/webextension-packages/packages/reporting';
+import * as IDB from 'idb';
 
 import { observe } from '/store/options.js';
 
@@ -60,6 +61,23 @@ const config = {
   ...platformSpecificSettings(),
 };
 
+/**
+ * A simple key-value storage built ontop of chrome.storage.local. If you need
+ * to support more specific uses cases, use IndexedDBKeyValueStore instead.
+ *
+ * When should I use Storage and when IndexedDBKeyValueStore? In most cases it
+ * is best to start with Storage. Only if you must, use the more complicated
+ * IndexedDBKeyValueStore, for instance:
+ * - You need to store huge values and are afraid that you may exceed
+ *   the 5 MB limit of chrome.storage.local
+ * - You need to efficiently store binary data
+ * - You need to efficiently iterate over keys
+ *
+ * Note that even IndexedDBKeyValueStore might not be sufficient for advanced
+ * use cases since it is a simplified key-value store. If you need the full
+ * power of IndexedDB, you can either use its native APIs, or use a library
+ * (e.g. IDB).
+ */
 class Storage {
   constructor(namespace) {
     this.namespace = `wtm::v1::${namespace}::`;
@@ -75,11 +93,120 @@ class Storage {
     const prefixedKey = this.namespace + key;
     return chrome.storage.local.set({ [prefixedKey]: value });
   }
+
+  async remove(key) {
+    const prefixedKey = this.namespace + key;
+    return chrome.storage.local.remove(prefixedKey);
+  }
+
+  /**
+   * Should be used onyl for debugging. Note that Storage is not designed
+   * to support efficient iteration over keys. If you need that, consider
+   * using IndexedDBKeyValueStore.
+   */
+  async _dumpToMap() {
+    return Object.entries(await chrome.storage.local.get()).filter(([key]) =>
+      key.startsWith(this.namespace),
+    );
+  }
+}
+
+/**
+ * Provides a similar interface then Storage, but is based on IndexedDB.
+ * See the comments in Storage to understand the pros and cons.
+ *
+ * TODO: Maybe implement a transparent fallback to an in-memory version instead
+ * if IndexedDB is not working. Maybe configurable with an option in the
+ * constructor. Even though an in-memory version is almost useless with
+ * Manifest V3, it might be still better then throwing.
+ */
+class IndexedDBKeyValueStore {
+  constructor(dbName, { version = 1, objectStore = 'default' } = {}) {
+    this._dbName = dbName;
+    this._version = version;
+    this._objectStore = objectStore;
+  }
+
+  async open() {
+    if (!this._db) {
+      const objectStore = this._objectStore;
+      const dbName = this._dbName;
+      const version = this._version;
+      this._db = await IDB.openDB(this._dbName, this._version, {
+        upgrade(db, oldVersion) {
+          if (oldVersion >= 1) {
+            console.warn(
+              `Purging the content of the database ${dbName} because its version is outdated (${oldVersion} < ${version}).',
+              '(This should only happen after an extension upgrade).`,
+            );
+            db.deleteObjectStore(objectStore);
+          }
+          db.createObjectStore(objectStore);
+        },
+      });
+    }
+  }
+
+  async close() {
+    try {
+      if (this.db) {
+        await this.db.close();
+      }
+    } finally {
+      this.db = null;
+    }
+  }
+
+  async get(key) {
+    await this.open();
+    return this._db.get(this._objectStore, key);
+  }
+
+  async set(key, value) {
+    await this.open();
+    return this._db.put(this._objectStore, value, key);
+  }
+
+  async remove(key) {
+    await this.open();
+    return this._db.delete(this._objectStore, key);
+  }
+
+  async clear() {
+    await this.open();
+    return this._db.clear(this._objectStore);
+  }
+
+  async keys() {
+    await this.open();
+    return this._db.getAllKeys(this._objectStore);
+  }
+
+  /**
+   * Debug function (to workaround limitations in the devtools).
+   * Do not use this function for production code! If you need to
+   * iterate over a database, there are more efficient ways.
+   */
+  async _dumpToMap() {
+    const keys = await this.keys();
+    return new Map(
+      await Promise.all(
+        keys.sort().map(async (key) => [key, await this.get(key)]),
+      ),
+    );
+  }
+}
+
+function prefixedIndexedDBKeyValueStore(namespace) {
+  return (dbName, options) => {
+    return new IndexedDBKeyValueStore(`wtm::${namespace}::${dbName}`, options);
+  };
 }
 
 const communication = new AnonymousCommunication({
   config,
   storage: new Storage('communication'),
+  connectDatabase: prefixedIndexedDBKeyValueStore('communication'),
 });
 const reporting = new Reporting({
   config,
