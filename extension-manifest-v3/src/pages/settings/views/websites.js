@@ -131,7 +131,7 @@ export default {
                                   lang="${chrome.i18n.getUILanguage()}"
                                 ></relative-time>`}
                                 left`
-                              : `Always`}
+                              : msg`Always`}
                           </ui-text>
                         </div>
                       </div>
