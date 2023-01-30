@@ -1,12 +1,12 @@
 {
   "@_0__left": {
-    "message": "$${0} left"
+    "message": "$${0} verbleibend"
   },
   "1_day": {
-    "message": "1 day"
+    "message": "1 Tag"
   },
   "1_hour": {
-    "message": "1 hour"
+    "message": "1 Stunde"
   },
   "about": {
     "message": "Über uns"
@@ -35,7 +35,7 @@
     "message": "Alle Popups"
   },
   "always": {
-    "message": "Always"
+    "message": "Immer"
   },
   "anti_tracking": {
     "message": "Anti-Tracking"
@@ -47,7 +47,7 @@
     "message": "Privatsphäreeinstellungen optimal anwenden:"
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
-    "message": "Are you sure you want to disable Trackers Preview?"
+    "message": "Sind Sie sicher, dass Sie die Trackervorschau deaktivieren möchten?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Sind Sie sicher, dass Sie Ghostery nicht aktivieren wollen?"
@@ -79,7 +79,7 @@
     "message": "Sieh dir die <a href=\"$${0}\" target=\"_blank\"> FAQs </a> an oder schreibe uns eine E-Mail an <a href=\"mailto:$${1}\"> $${2} </a>.  <br/>  Wir freuen uns darauf, mit dir zu sprechen!"
   },
   "clear_all": {
-    "message": "Clear all"
+    "message": "Alle löschen"
   },
   "comments": {
     "message": "Kommentare",
@@ -90,16 +90,16 @@
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "contact": {
-    "message": "Contact"
+    "message": "Kontakt"
   },
   "contact_support": {
-    "message": "Contact support"
+    "message": "Kontakt zum Support"
   },
   "continue": {
     "message": "Weiter"
   },
   "copied_to_clipboard": {
-    "message": "Copied to clipboard"
+    "message": "In die Zwischenablage kopiert"
   },
   "customer_interaction": {
     "message": "Kundeninteraktion",
@@ -109,13 +109,13 @@
     "message": "Detailansicht"
   },
   "disable": {
-    "message": "Disable"
+    "message": "Deaktivieren"
   },
   "disable_trackers_preview": {
     "message": "Tracker-Vorschau deaktivieren"
   },
   "disabled": {
-    "message": "Disabled"
+    "message": "Deaktiviert"
   },
   "done": {
     "message": "Erledigt"
@@ -157,13 +157,13 @@
     "message": "Ghostery aktiviert"
   },
   "ghostery_has_been_resumed_on_this_site_": {
-    "message": "Ghostery has been resumed on this site."
+    "message": "Ghostery wird auf dieser Website fortgesetzt."
   },
   "ghostery_has_nothing_to_do_on_this_page": {
-    "message": "Ghostery has nothing to do on this page"
+    "message": "Ghostery hat auf dieser Seite nichts zu tun"
   },
   "ghostery_is_paused_on_this_site_": {
-    "message": "Ghostery is paused on this site."
+    "message": "Ghostery pausiert auf dieser Website."
   },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery ist so eingestellt, dass es Tracker stoppt und Ihre Privatsphäre beim Browsen schützt!"
@@ -171,20 +171,23 @@
   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
     "message": "Ghostery stoppt Tracker in ihren Gleisen und verhindert, dass ein Daten-Profil über dich erstellt wird und deine persönlichen Informationen an Datenhändler verkauft werden."
   },
+  "ghostery_paused": {
+    "message": "Ghostery pausiert"
+  },
   "ghostery_privacy_policy": {
     "message": "Ghostery-Datenschutzrichtlinie"
   },
   "ghostery_settings": {
-    "message": "Ghostery settings"
+    "message": "Ghostery-Einstellungen"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
+    "message": "Ghostery pausiert auf dieser Website. Sie können dies jederzeit in den Ghostery-Einstellungen ändern, damit Tracker und Werbung Ihnen nicht durchs Web folgen"
   },
   "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery will be paused on this site for 1 day"
+    "message": "Ghostery wird auf dieser Website für 1 Tag  pausiert"
   },
   "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery will be paused on this site for 1 hour"
+    "message": "Ghostery wird auf dieser Seite für 1 Stunde pausiert"
   },
   "hosting": {
     "message": "Hosting",
@@ -209,10 +212,10 @@
     "message": "Ghostery ist eine leistungsstarke Datenschutz-Erweiterung. Damit können Sie Werbung blockieren, Tracker stoppen und Websites beschleunigen."
   },
   "menu": {
-    "message": "Menu"
+    "message": "Menü"
   },
   "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Mind that not all listed entities are trackers, that is not all of them collect personal data"
+    "message": "Beachten Sie, dass nicht alle genannten Einheiten Tracker sind, d.h. nicht alle sammeln persönliche Daten."
   },
   "miscellaneous": {
     "message": "Sonstiges",
@@ -237,7 +240,7 @@
     "message": "Nein"
   },
   "no_trackers_detected": {
-    "message": "No trackers detected"
+    "message": "Keine Tracker gefunden"
   },
   "off": {
     "message": "Aus"
@@ -257,11 +260,14 @@
   "on_this_website": {
     "message": "auf dieser Website"
   },
+  "pause_on_this_site": {
+    "message": "Auf dieser Seite pausieren"
+  },
   "paused": {
-    "message": "Paused"
+    "message": "Pausiert"
   },
   "permission_required": {
-    "message": "Permission required"
+    "message": "Berechtigung erforderlich"
   },
   "privacy_policy": {
     "message": "Datenschutzrichtlinie"
@@ -270,10 +276,10 @@
     "message": "Datenschutzrichtlinie"
   },
   "privacy_protection": {
-    "message": "Privacy protection"
+    "message": "Datenschutz"
   },
   "read_more_on_whotracks_me": {
-    "message": "Read more on WhoTracks.Me"
+    "message": "Lesen Sie mehr auf WhoTracks.Me"
   },
   "report_a_broken_page": {
     "message": "Fehlerhafte Seite melden"
@@ -282,7 +288,7 @@
     "message": "Fortsetzen"
   },
   "search_website___": {
-    "message": "Search website..."
+    "message": "Website durchsuchen ..."
   },
   "settings": {
     "message": "Einstellungen"
@@ -321,10 +327,10 @@
     "message": "Tracker"
   },
   "trackers_count": {
-    "message": "Trackers Count"
+    "message": "Tracker-Zähler"
   },
   "trackers_detected": {
-    "message": "Trackers detected"
+    "message": "Tracker gefunden"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Von Ghostery erkannte Tracker auf dieser Website:&nbsp;$${0}"
@@ -333,10 +339,10 @@
     "message": "Tracker-Vorschau"
   },
   "trackers_wheel": {
-    "message": "Trackers Wheel"
+    "message": "Tracker-Rad"
   },
   "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "Try to open this panel on a different browser tab"
+    "message": "Versuchen Sie dieses Feld in einem anderen Browser-Tab zu öffnen"
   },
   "unblocked": {
     "message": "Entsperrt"
@@ -347,9 +353,6 @@
   },
   "website": {
     "message": "Website"
-  },
-  "website__@_0__": {
-    "message": "Website ($${0})"
   },
   "websites": {
     "message": "Websites"
@@ -364,10 +367,10 @@
     "message": "WhoTracks.Me wird von Ghostery betrieben und ist ein Bestandteil der Ghostery KI-Anti-Tracking-Technologie. Es ist eine umfassende globale Quelle für Tracker und bringt Transparenz in das Web-Tracking."
   },
   "whotracks_me_statistical_report": {
-    "message": "WhoTracks.Me Statistical Report"
+    "message": "WhoTracks.Me-Statistiken"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me Wheel"
+    "message": "Whotracks.me-Rad"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Wenn du Ghostery aktivierst, kannst du sofort sicher, schneller und mit weniger lästiger Werbung surfen."
@@ -388,6 +391,6 @@
     "message": "Sie sind bereit, Ghosterianer!"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
-    "message": "You will no longer see tracker wheels next to the search results."
+    "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
   }
 }

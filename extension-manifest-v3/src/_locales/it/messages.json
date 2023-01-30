@@ -172,7 +172,7 @@
     "message": "Ghostery blocca i tracker e impedisce che tu venga profilato e che le tue informazioni personali vengano vendute agli intermediari di dati."
   },
   "ghostery_paused": {
-    "message": "Ghostery paused"
+    "message": "Ghostery ha messo in pausa"
   },
   "ghostery_privacy_policy": {
     "message": "Informativa sulla Privacy di Ghostery"
@@ -261,7 +261,7 @@
     "message": "su questo sito web"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "Pausa su questo sito"
   },
   "paused": {
     "message": "In pausa"

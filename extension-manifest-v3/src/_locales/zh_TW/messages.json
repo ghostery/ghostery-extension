@@ -172,7 +172,7 @@
     "message": "Ghostery 正在其追蹤中制止追蹤器，並防止你被分析和你的個人資料被賣給資料仲介。"
   },
   "ghostery_paused": {
-    "message": "Ghostery paused"
+    "message": "Ghostery暫停"
   },
   "ghostery_privacy_policy": {
     "message": "Ghostery 隱私權政策"
@@ -261,7 +261,7 @@
     "message": "在此網站上"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "在此站點暫停"
   },
   "paused": {
     "message": "暫停"

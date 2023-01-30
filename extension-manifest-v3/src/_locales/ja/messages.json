@@ -172,7 +172,7 @@
     "message": "Ghosteryはトラッカーの追跡を止め、あなたがプロファイリングされ、あなたの個人情報がデータブローカーに売られることを防いでいます。"
   },
   "ghostery_paused": {
-    "message": "Ghostery paused"
+    "message": "ゴーストリーの一時停止"
   },
   "ghostery_privacy_policy": {
     "message": "Ghosteryプライバシー・ポリシー"
@@ -261,7 +261,7 @@
     "message": "このウェブサイトに対して"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "このサイトでのポーズ"
   },
   "paused": {
     "message": "一時停止"

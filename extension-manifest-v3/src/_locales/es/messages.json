@@ -172,7 +172,7 @@
     "message": "Ghostery detiene a los rastreadores en su camino y evita que se elaboren perfiles y se venda tu información personal a los corredores de datos."
   },
   "ghostery_paused": {
-    "message": "Ghostery paused"
+    "message": "Ghostery en pausa"
   },
   "ghostery_privacy_policy": {
     "message": "Política de privacidad de Ghostery"
@@ -261,7 +261,7 @@
     "message": "en este sitio web"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "Pausa en este sitio"
   },
   "paused": {
     "message": "Pausado"
