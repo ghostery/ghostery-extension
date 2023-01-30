@@ -52,40 +52,42 @@ function clearStorage(host, event) {
 export default {
   counter: 0,
   content: ({ counter }) => html`
-    <template layout="block">
-      ${counter === 5
-        ? html`
-            <section layout="column gap" translate="no">
-              <ui-text
-                type="headline-m"
-                mobile-type="headline-s"
-                layout="margin:bottom"
-              >
-                Developer tools
-              </ui-text>
-              <div layout="row">
-                <ui-button
-                  size="small"
-                  type="outline"
-                  onclick="${clearStorage}"
-                  layout="shrink:0"
-                >
-                  <button>Clear storage</button>
-                </ui-button>
-              </div>
-            </section>
-          `
-        : html`
-            <ui-text
-              type="label-xs"
-              color="gray-300"
-              layout="block:right margin:top:2"
-              onclick="${html.set('counter', counter + 1)}"
-              translate="no"
+    <template layout="column gap:3">
+      ${counter === 5 &&
+      html`
+        <section layout="column gap" translate="no">
+          <ui-text
+            type="headline-m"
+            mobile-type="headline-s"
+            layout="margin:bottom"
+          >
+            Developer tools
+          </ui-text>
+          <div layout="row">
+            <ui-button
+              size="small"
+              type="outline"
+              onclick="${clearStorage}"
+              layout="shrink:0"
             >
-              v${VERSION}
-            </ui-text>
-          `}
+              <button>Clear storage</button>
+            </ui-button>
+          </div>
+        </section>
+      `}
+      <div layout="row center gap:2">
+        <ui-text
+          type="label-s"
+          color="gray-300"
+          onclick="${html.set('counter', counter + 1)}"
+          translate="no"
+        >
+          v${VERSION}
+        </ui-text>
+        <ui-text type="label-s" color="gray-300">
+          <a href="/licenses.html" target="_blank">Software Licenses</a>
+        </ui-text>
+      </div>
     </template>
   `,
 };

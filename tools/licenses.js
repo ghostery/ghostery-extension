@@ -14,14 +14,7 @@
 import fs from 'node:fs';
 import checker from 'license-checker';
 
-const IGNORED_PACAKGES = [
-  '@ghostery/libs',
-  '@ghostery/ui',
-  'ghostery-common',
-  '@ghostery/extension-manifest-v2',
-  '@ghostery/extension-manifest-v3',
-  '@types/',
-];
+const IGNORED_PACKAGES = ['ghostery-common', '@types/'];
 
 const template = (packages) => `
 <!DOCTYPE html>
@@ -60,9 +53,7 @@ const template = (packages) => `
             ? `<li><label>Publisher: </label>${pkg.publisher}</li>`
             : ''
         }
-        ${
-          pkg.email ? `<li><label>Email: </label>${pkg.email}</li>` : ''
-        }
+        ${pkg.email ? `<li><label>Email: </label>${pkg.email}</li>` : ''}
         ${
           pkg.repository
             ? `<li><label>Repository: </label>${pkg.repository}</li>`
@@ -70,9 +61,7 @@ const template = (packages) => `
         }
         ${pkg.url ? `<li><label>URL: </label>${pkg.url}</li>` : ''}
         ${
-          pkg.licenses
-            ? `<li><label>License: </label>${pkg.licenses}</li>`
-            : ''
+          pkg.licenses ? `<li><label>License: </label>${pkg.licenses}</li>` : ''
         }
       </ul>
       ${pkg.licenseText ? `<pre>${pkg.licenseText}</pre>` : ''}
@@ -83,13 +72,16 @@ const template = (packages) => `
 </html>
 `;
 
+if (!fs.existsSync('./node_modules') && fs.existsSync('../node_modules')) {
+  fs.symlinkSync('../node_modules', './node_modules', 'dir');
+}
+
 // Build list of licenses
 checker.init(
   {
-    start: '.',
+    start: process.cwd(),
     production: true,
-    json: true,
-    direct: false,
+    excludePrivatePackages: true,
   },
   (err, licenseJSON) => {
     if (err) {
@@ -98,35 +90,26 @@ checker.init(
     }
 
     console.log('Generating licenses.html');
-    const output = {};
 
-    Object.keys(licenseJSON).forEach((packageName) => {
-      if (IGNORED_PACAKGES.some((name) => packageName.startsWith(name))) {
-        return;
-      }
-
-      output[packageName] = {
-        name: packageName,
-        repository: licenseJSON[packageName].repository,
-        licenses: licenseJSON[packageName].licenses,
-        publisher: licenseJSON[packageName].publisher,
-        url: licenseJSON[packageName].url,
-        email: licenseJSON[packageName].email,
-      };
-
-      if (licenseJSON[packageName].licenseFile) {
-        output[packageName].licenseText = fs.readFileSync(
-          licenseJSON[packageName].licenseFile,
-          { encoding: 'utf8', flag: 'r' },
-        );
-      }
-    });
+    const output = Object.entries(licenseJSON)
+      .filter(
+        ([packageName]) =>
+          !IGNORED_PACKAGES.some((name) => packageName.startsWith(name)),
+      )
+      .map(([name, data]) => ({
+        name,
+        ...data,
+        licenseText:
+          data.licenseFile && fs.readFileSync(data.licenseFile, 'utf8'),
+      }));
 
     if (!fs.existsSync('dist')) {
       fs.mkdirSync('dist');
     }
 
-    fs.writeFileSync('./dist/licenses.html', template(Object.values(output)));
+    fs.writeFileSync('./dist/licenses.html', template(output));
+    fs.unlinkSync('./node_modules');
+
     console.log('Completed licenses.html');
   },
 );

@@ -172,7 +172,7 @@
     "message": "Ghostery는 트래커의 추적을 중단하고 사용자가 프로파일링되는 것을 방지하여 트래커가 사용자의 개인 정보를 데이터 브로커에게 판매하지 못하게 합니다."
   },
   "ghostery_paused": {
-    "message": "Ghostery paused"
+    "message": "Ghostery 일시중지됨"
   },
   "ghostery_privacy_policy": {
     "message": "Ghostery 개인정보 취급방침"
@@ -261,7 +261,7 @@
     "message": "이 웹사이트에서"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "이 사이트에서 일시 중지"
   },
   "paused": {
     "message": "일시 중지됨"

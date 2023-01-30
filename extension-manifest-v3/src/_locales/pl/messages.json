@@ -47,7 +47,7 @@
     "message": "Zastosuj optymalne ustawienia prywatności:"
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
-    "message": "Jesteś pewny, że checz wyłączyć Podgląd Trakerów?"
+    "message": "Chcesz wyłączyć Podgląd trackerów?"
   },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Na pewno chcesz pominąć aktywację Ghostery?"
@@ -79,7 +79,7 @@
     "message": "Sprawdź <a href=\"$${0}\" target=\"_blank\"> FAQ </a> lub napisz do nas na <a href=\"mailto:$${1}\"> $${2} </a>.  <br/>  Będziemy bardziej niż szczęśliwi, aby porozmawiać z tobą!"
   },
   "clear_all": {
-    "message": "Wyczyść wszystkie"
+    "message": "Wyczyść wszystko"
   },
   "comments": {
     "message": "Komentarze",
@@ -93,7 +93,7 @@
     "message": "Kontakt"
   },
   "contact_support": {
-    "message": "Contact support"
+    "message": "Skontaktuj się z obsługą"
   },
   "continue": {
     "message": "Kontynuuj"
@@ -157,13 +157,13 @@
     "message": "Ghostery aktywne"
   },
   "ghostery_has_been_resumed_on_this_site_": {
-    "message": "Ghostery zostało wznowione na tej stronie."
+    "message": "Ghostery zostało wznowione dla tej witryny."
   },
   "ghostery_has_nothing_to_do_on_this_page": {
-    "message": "Ghostery nie ma co robić na tej stronie"
+    "message": "Ghostery nic nie wykryło na tej stronie"
   },
   "ghostery_is_paused_on_this_site_": {
-    "message": "Ghostery jest wstrzymane na tej stronie."
+    "message": "Ghostery zostało wstrzymane dla tej witryny."
   },
   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery działa tak, aby zatrzymać trackery podczas ich śledzenia i ochronić Twoją prywatność podczas przeglądania internetu!"
@@ -181,13 +181,13 @@
     "message": "Ustawienia Ghostery"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery będzie wstrzymane na tej stronie. Możesz to zmienić w dowolnym momencie w Ustawieniach Ghostery, aby zatrzymać trackery i reklamy przed śledzeniem Cię w sieci."
+    "message": "Ghostery zostanie wstrzymane dla tej witryny. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
   },
   "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery będzie wstrzymane na tej stronie przez 1 dzień"
+    "message": "Ghostery zostanie wstrzymane dla tej witryny na 1 dzień"
   },
   "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery będzie wstrzymane na tej stronie przez 1 godzinę"
+    "message": "Ghostery zostanie wstrzymane dla tej witryny na 1 godzinę"
   },
   "hosting": {
     "message": "Hosting",
@@ -215,7 +215,7 @@
     "message": "Menu"
   },
   "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Mind that not all listed entities are trackers, that is not all of them collect personal data"
+    "message": "Należy pamiętać, że nie wszystkie wymienione podmioty są trackerami, czyli nie wszystkie gromadzą dane osobowe"
   },
   "miscellaneous": {
     "message": "Różne",
@@ -264,7 +264,7 @@
     "message": "Wstrzymaj na tej stronie"
   },
   "paused": {
-    "message": "wstrzymane"
+    "message": "Wstrzymane"
   },
   "permission_required": {
     "message": "Wymagane uprawnienia"
@@ -279,7 +279,7 @@
     "message": "Ochrona prywatności"
   },
   "read_more_on_whotracks_me": {
-    "message": "Czytaj więcej na WhoTracks.Me"
+    "message": "Dowiedz się więcej na WhoTracks.Me"
   },
   "report_a_broken_page": {
     "message": "Zgłoś uszkodzoną stronę"
@@ -288,7 +288,7 @@
     "message": "Wznów"
   },
   "search_website___": {
-    "message": "Szukaj strony..."
+    "message": "Wyszukiwanie witryny..."
   },
   "settings": {
     "message": "Ustawienia"
@@ -327,7 +327,7 @@
     "message": "Tropiciele"
   },
   "trackers_count": {
-    "message": "Trackers Count"
+    "message": "Licznik trackerów"
   },
   "trackers_detected": {
     "message": "Wykryte trackery"
@@ -339,10 +339,10 @@
     "message": "Podgląd trackerów"
   },
   "trackers_wheel": {
-    "message": "Trackers Wheel"
+    "message": "Wykres kołowy z trackerami"
   },
   "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "Spróbuj otworzyć ten panel na innej karcie przeglądarki"
+    "message": "Spróbuj otworzyć ten panel w innej zakładce przeglądarki"
   },
   "unblocked": {
     "message": "Odblokowane"
@@ -352,10 +352,10 @@
     "description": "Tracker category name"
   },
   "website": {
-    "message": "Strona internetowa"
+    "message": "Witryna"
   },
   "websites": {
-    "message": "Strony internetowe"
+    "message": "Witryny"
   },
   "welcome_to_ghostery": {
     "message": "Witamy w Ghostery"
@@ -370,7 +370,7 @@
     "message": "Raport statystyczny WhoTracks.Me"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me Wheel"
+    "message": "Wykres kołowy WhoTracks.Me"
   },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Z włączonym Ghostery przeglądasz strony internetowe bezpieczniej, szybciej i z mniejszą ilością irytujących reklam."
@@ -391,6 +391,6 @@
     "message": "Wszystko gotowe, Ghosterianie!"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
-    "message": "You will no longer see tracker wheels next to the search results."
+    "message": "Wykresy kołowe z trackerami nie będą wyświetlane obok wyników wyszukiwania."
   }
 }
