@@ -255,7 +255,7 @@ ${scripts.join('\n\n')}}
 
 chrome.webNavigation.onCommitted.addListener(async (details) => {
   const { hostname, domain } = parse(details.url);
-  if (!hostname) {
+  if (!hostname || pausedDomains.includes(domain)) {
     return;
   }
 
