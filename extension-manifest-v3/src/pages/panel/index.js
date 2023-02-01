@@ -19,13 +19,15 @@ define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
   Safari extension popup has a bug, which focuses visibly the first element on the page
   when the popup is opened. This is a workaround to remove the focus.
 */
-window.addEventListener('DOMContentLoaded', () => {
-  document.body.focus();
-  document.body.addEventListener(
-    'focus',
-    () => {
-      document.body.removeAttribute('tabIndex');
-    },
-    { once: true },
-  );
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.body.focus();
+    document.body.addEventListener(
+      'focus',
+      () => {
+        document.body.removeAttribute('tabIndex');
+      },
+      { once: true },
+    );
+  }, 100);
 });
