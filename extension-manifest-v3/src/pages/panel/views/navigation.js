@@ -14,11 +14,6 @@ import { html, msg, router, store } from 'hybrids';
 import Account from '/store/account.js';
 
 const MENU = [
-  {
-    icon: 'heart',
-    label: msg`Become a Contributor`,
-    href: 'https://www.ghostery.com/become-a-contributor',
-  },
   {},
   {
     icon: 'alert',
@@ -48,10 +43,18 @@ const MENU = [
   },
 ];
 
+if (__PLATFORM__ !== 'safari') {
+  MENU.unshift({
+    icon: 'heart',
+    label: msg`Become a Contributor`,
+    href: 'https://www.ghostery.com/become-a-contributor',
+  });
+}
+
 export default {
   account: store(Account),
   content: ({ account }) => html`
-    <template layout="grid height:600px">
+    <template layout="grid">
       <ui-panel-header layout="fixed top left width:full">
         Menu
         <ui-action slot="actions">
