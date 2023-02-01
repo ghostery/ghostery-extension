@@ -20,13 +20,11 @@ const argv = process.argv.slice(2).reduce((acc, arg, index, arr) => {
   }
   return acc;
 }, {});
+const target = argv.target || 'chromium';
 
 const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
 const manifest = JSON.parse(
-  readFileSync(
-    resolve(options.srcDir, `manifest.${argv.target || 'chromium'}.json`),
-    'utf8',
-  ),
+  readFileSync(resolve(options.srcDir, `manifest.${target}.json`), 'utf8'),
 );
 
 const config = {
@@ -35,6 +33,7 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
+  define: { __PLATFORM__: JSON.stringify(target) },
   build: {
     outDir: options.outDir,
     assetsDir: '',

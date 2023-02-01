@@ -26,12 +26,14 @@ const NOTIFICATIONS = [
     url: 'https://www.ghostery.com/support?utm_source=gbe',
     action: 'Get help',
   },
-  {
-    icon: 'heart',
-    text: 'Hey, do you enjoy Ghostery and want to support our work?',
-    url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-    action: 'Become a Contributor',
-  },
+  __PLATFORM__ !== 'safari'
+    ? {
+        icon: 'heart',
+        text: 'Hey, do you enjoy Ghostery and want to support our work?',
+        url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+        action: 'Become a Contributor',
+      }
+    : null,
 ];
 
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
