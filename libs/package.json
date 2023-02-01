@@ -5,6 +5,7 @@
   "description": "",
   "license": "MPL-2.0",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": "./src/index.js"
   },
