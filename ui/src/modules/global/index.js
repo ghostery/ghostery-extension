@@ -8,15 +8,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { define, localize } from 'hybrids';
+import { define } from 'hybrids';
 
-// Localize wrapper for chrome.i18n
-if (typeof chrome === 'object' && chrome.i18n) {
-  localize(chrome.i18n.getMessage.bind(chrome.i18n), { format: 'chrome.i18n' });
-}
+import './localize.js';
 
 // Define components
-define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
-  prefix: 'ui',
-  root: 'components',
-});
+define.from(
+  import.meta.glob('./components/*.js', { eager: true, import: 'default' }),
+  {
+    prefix: 'ui',
+    root: 'components',
+  },
+);

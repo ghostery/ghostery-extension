@@ -8,6 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import '@ghostery/ui/panel';
 import { define } from 'hybrids';
 
 define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
