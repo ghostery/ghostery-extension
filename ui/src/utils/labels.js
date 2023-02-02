@@ -10,6 +10,8 @@
  */
 
 import { msg } from 'hybrids';
+
+// Required to force loading localization module before using msg`...`
 import '../modules/global/localize.js';
 
 export const categories = {
