@@ -10,11 +10,14 @@
  */
 
 import './onboarding.js';
-import './alarms.js';
-import './dnr.js';
+
+import './autoconsent.js';
 import './adblocker.js';
 import './tab-stats.js';
 import './trackers-preview.js';
+
+import './alarms.js';
+import './dnr.js';
+
 import './telemetry.js';
-import './autoconsent.js';
 import './reporting.js';
