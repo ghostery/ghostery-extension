@@ -72,11 +72,21 @@ async function updateTabStats(msg, sender) {
   setIcon(tabId, stats);
 }
 
+async function getCurrentTabId(sendResponse) {
+  const tabs = await chrome.tabs.query({ active: true });
+  sendResponse(tabs[0].id);
+}
+
 chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
-chrome.runtime.onMessage.addListener((msg, sender) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === 'getCurrentTabId') {
+    getCurrentTabId(sendResponse);
+    return true;
+  }
+
   if (sender.tab?.id && sender.frameId !== undefined) {
     // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
     // with the correct tabId (sometimes it is correct, sometimes it is 0).

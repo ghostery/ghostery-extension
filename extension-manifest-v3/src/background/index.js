@@ -10,8 +10,10 @@
  */
 
 import './onboarding.js';
+import './alarms.js';
+import './dnr.js';
+import './adblocker.js';
 import './tab-stats.js';
-import './cosmetics.js';
 import './trackers-preview.js';
 import './telemetry.js';
 import './autoconsent.js';

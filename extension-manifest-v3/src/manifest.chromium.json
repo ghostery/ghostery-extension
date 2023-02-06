@@ -21,7 +21,50 @@
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
   },
-  "options_page": "pages/settings/index.html",
+  "options_ui": {
+    "page": "pages/settings/index.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "cookies",
+    "tabs",
+    "alarms",
+    "storage",
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "ws://*/*",
+    "wss://*/*"
+  ],
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "declarative_net_request" : {
+    "rule_resources" : [
+      {
+        "id": "ads",
+        "enabled": false,
+        "path": "rule_resources/dnr-ads-network.json"
+      },
+      {
+        "id": "tracking",
+        "enabled": false,
+        "path": "rule_resources/dnr-tracking-network.json"
+      },
+      {
+        "id": "annoyances",
+        "enabled": false,
+        "path": "rule_resources/dnr-annoyances-network.json"
+      }
+    ]
+  },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
@@ -34,7 +77,7 @@
       "matches": ["*://*/*"],
       "run_at": "document_start",
       "js": [
-        "content_scripts/cosmetics.js"
+        "content_scripts/adblocker.js"
       ]
     },
     {
@@ -453,46 +496,6 @@
       ]
     }
   ],
-  "permissions": [
-    "alarms",
-    "cookies",
-    "declarativeNetRequest",
-    "declarativeNetRequestFeedback",
-    "webNavigation",
-    "storage",
-    "tabs",
-    "scripting"
-  ],
-  "host_permissions": [
-    "http://*/*",
-    "https://*/*",
-    "ws://*/*",
-    "wss://*/*"
-  ],
-  "background": {
-    "service_worker": "background/index.js",
-    "type": "module"
-  },
-  "declarative_net_request" : {
-    "rule_resources" : [
-      {
-        "id": "ads",
-        "enabled": false,
-        "path": "rule_resources/dnr-ads-network.json"
-      },
-      {
-        "id": "tracking",
-        "enabled": false,
-        "path": "rule_resources/dnr-tracking-network.json"
-      },
-      {
-        "id": "annoyances",
-        "enabled": false,
-        "path": "rule_resources/dnr-annoyances-network.json"
-      }
-    ]
-  },
-  "content_security_policy" : {},
   "web_accessible_resources": [
     {
       "resources": [
@@ -707,5 +710,6 @@
         "*://*.google.ng/*"
       ]
     }
-  ]
+  ],
+  "content_security_policy" : {}
 }

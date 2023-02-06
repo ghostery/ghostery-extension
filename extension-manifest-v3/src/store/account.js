@@ -48,23 +48,25 @@ export default {
         throw e;
       }
     },
-    async observe(_, account) {
-      if (account) {
-        const alarm = await chrome.alarms.get('account');
-        if (!alarm) {
-          chrome.alarms.create(ALARM_NAME, {
-            periodInMinutes: REFRESH_RATE,
-            when: Date.now() + 1000 * REFRESH_RATE,
-          });
+    observe:
+      chrome.alarms &&
+      async function observe(_, account) {
+        if (account) {
+          const alarm = await chrome.alarms.get('account');
+          if (!alarm) {
+            chrome.alarms.create(ALARM_NAME, {
+              periodInMinutes: REFRESH_RATE,
+              when: Date.now() + 1000 * REFRESH_RATE,
+            });
+          }
+        } else {
+          chrome.alarms.clear(ALARM_NAME);
         }
-      } else {
-        chrome.alarms.clear(ALARM_NAME);
-      }
-    },
+      },
   },
 };
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms?.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
     api.session();
   }

@@ -32,7 +32,7 @@ async function enable(_, event) {
   }
 
   store.set(options, {
-    dnrRules: { annoyances: true },
+    engines: { annoyances: true },
     autoconsent: {
       all,
       allowed,
@@ -60,7 +60,7 @@ async function disable(_, event) {
   }
 
   store.set(Options, {
-    dnrRules: { annoyances: !all },
+    engines: { annoyances: !all },
     autoconsent: { allowed, disallowed, interactions },
   });
 }

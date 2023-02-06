@@ -37,10 +37,10 @@ const PREVIEWS = {
   },
 };
 
-function toggleNeverConsent(host) {
-  store.set(host.options, {
-    dnrRules: {
-      annoyances: !host.options.dnrRules.annoyances,
+function toggleNeverConsent({ options }) {
+  store.set(options, {
+    engines: {
+      annoyances: !options.engines.annoyances,
     },
     autoconsent: null,
   });
@@ -100,8 +100,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.dnrRules.ads}"
-                onchange="${html.set(options, 'dnrRules.ads')}"
+                value="${options.engines.ads}"
+                onchange="${html.set(options, 'engines.ads')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -129,8 +129,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.dnrRules.tracking}"
-                onchange="${html.set(options, 'dnrRules.tracking')}"
+                value="${options.engines.tracking}"
+                onchange="${html.set(options, 'engines.tracking')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -158,7 +158,7 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.dnrRules.annoyances}"
+                value="${options.engines.annoyances}"
                 onchange="${toggleNeverConsent}"
               ></ui-settings-toggle>
             </div>

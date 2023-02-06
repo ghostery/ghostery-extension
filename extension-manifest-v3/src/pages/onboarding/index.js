@@ -9,15 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui/onboarding';
 import { define, html, store } from 'hybrids';
-import Options, { DNR_RULES_LIST } from '/store/options';
+import '@ghostery/ui/onboarding';
+
+import Options from '/store/options.js';
 
 function updateOptions(host, event) {
   const success = event.type === 'success';
 
   store.set(Options, {
-    dnrRules: DNR_RULES_LIST.reduce(
+    engines: Object.keys(Options.engines).reduce(
       (all, rule) => ({ ...all, [rule]: success }),
       {},
     ),
@@ -34,3 +35,6 @@ define({
       onskip="${updateOptions}"
     ></ui-onboarding>`,
 });
+
+// Update options showAt timestamp
+store.set(Options, { onboarding: { shownAt: Date.now() } });

@@ -21,8 +21,6 @@ const DAY_IN_MS = 24 * 60 * 60 * 1000;
     !options.onboarding.done &&
     options.onboarding.shownAt < now - DAY_IN_MS
   ) {
-    await store.set(options, { onboarding: { shownAt: now } });
-
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });

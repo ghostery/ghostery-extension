@@ -12,11 +12,11 @@
 import { FiltersEngine } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 
-import { DNR_RULES_LIST, observe } from '/store/options.js';
+import Options, { observe } from '/store/options.js';
 
 const DEBUG_SCRIPLETS = false;
 
-const adblockerEngines = DNR_RULES_LIST.reduce((map, name) => {
+const adblockerEngines = Object.keys(Options.engines).reduce((map, name) => {
   map[name] = {
     engine: null,
     isEnabled: false,
@@ -26,9 +26,9 @@ const adblockerEngines = DNR_RULES_LIST.reduce((map, name) => {
 let pausedDomains = [];
 
 let adblockerStartupPromise = (async function () {
-  await observe('dnrRules', (dnrRules) => {
-    DNR_RULES_LIST.forEach((key) => {
-      adblockerEngines[key].isEnabled = dnrRules[key];
+  await observe('engines', (engines) => {
+    Object.entries(engines).forEach(([key, value]) => {
+      adblockerEngines[key].isEnabled = value;
     });
   });
 
@@ -102,7 +102,7 @@ async function adblockerOnMessage(msg, sender) {
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
 
-  if (pausedDomains.includes(domain)) {
+  if (!sender.tab || pausedDomains.includes(domain)) {
     return;
   }
 
@@ -237,7 +237,7 @@ ${scripts.join('\n\n')}}
   chrome.scripting.executeScript(
     {
       injectImmediately: true,
-      world: 'MAIN',
+      world: __PLATFORM__ === 'firefox' ? undefined : 'MAIN',
       target: {
         tabId,
         allFrames: true,
