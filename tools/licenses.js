@@ -72,7 +72,9 @@ const template = (packages) => `
 </html>
 `;
 
+let symlink = false;
 if (!fs.existsSync('./node_modules') && fs.existsSync('../node_modules')) {
+  symlink = true;
   fs.symlinkSync('../node_modules', './node_modules', 'dir');
 }
 
@@ -108,8 +110,9 @@ checker.init(
     }
 
     fs.writeFileSync('./dist/licenses.html', template(output));
-    fs.unlinkSync('./node_modules');
-
+    if (symlink) {
+      fs.unlinkSync('./node_modules');
+    }
     console.log('Completed licenses.html');
   },
 );
