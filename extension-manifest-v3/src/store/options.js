@@ -158,19 +158,16 @@ export async function observe(property, fn) {
   let value;
   const wrapper = (options) => {
     if (value === undefined || options[property] !== value) {
-      const nextValue = options[property];
+      const prevValue = value;
+      value = options[property];
 
-      try {
-        fn(nextValue, value);
-      } catch (e) {
-        console.error('Error while calling options observer', e);
-      } finally {
-        value = nextValue;
-      }
+      fn(value, prevValue);
     }
   };
 
   observers.add(wrapper);
+
+  store.resolve(Options);
 
   // Return unobserve function
   return () => {
