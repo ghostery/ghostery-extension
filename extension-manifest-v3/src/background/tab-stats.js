@@ -72,19 +72,14 @@ async function updateTabStats(msg, sender) {
   setIcon(tabId, stats);
 }
 
-async function getCurrentTabId(sendResponse) {
-  const tabs = await chrome.tabs.query({ active: true });
-  sendResponse(tabs[0].id);
-}
-
 chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getCurrentTabId') {
-    getCurrentTabId(sendResponse);
-    return true;
+    sendResponse(sender.tab?.id);
+    return false;
   }
 
   if (sender.tab?.id && sender.frameId !== undefined) {
