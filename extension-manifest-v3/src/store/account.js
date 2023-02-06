@@ -39,35 +39,29 @@ export default {
             email: user.attributes.email,
           };
 
+          chrome.alarms?.create(ALARM_NAME, {
+            periodInMinutes: REFRESH_RATE,
+            when: Date.now() + 1000 * REFRESH_RATE,
+          });
+
           chrome.storage.local.set({ account });
         }
 
         return account;
       } catch (e) {
+        chrome.alarms?.clear(ALARM_NAME);
         chrome.storage.local.set({ account: undefined });
+
         throw e;
       }
     },
-    observe:
-      chrome.alarms &&
-      async function observe(_, account) {
-        if (account) {
-          const alarm = await chrome.alarms.get('account');
-          if (!alarm) {
-            chrome.alarms.create(ALARM_NAME, {
-              periodInMinutes: REFRESH_RATE,
-              when: Date.now() + 1000 * REFRESH_RATE,
-            });
-          }
-        } else {
-          chrome.alarms.clear(ALARM_NAME);
-        }
-      },
   },
 };
 
 chrome.alarms?.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
-    api.session();
+    if (!api.session()) {
+      chrome.alarms.clear(ALARM_NAME);
+    }
   }
 });

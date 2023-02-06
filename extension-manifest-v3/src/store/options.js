@@ -186,11 +186,5 @@ chrome.runtime.onMessage.addListener((msg) => {
       store.clear(options, false);
       store.get(Options);
     }
-
-    store.resolve(options).then((resolvedOptions) => {
-      observers.forEach((fn) => {
-        fn(resolvedOptions);
-      });
-    });
   }
 });
