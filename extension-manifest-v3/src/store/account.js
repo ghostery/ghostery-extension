@@ -10,7 +10,7 @@
  */
 
 import { store } from 'hybrids';
-import * as api from './utils/api.js';
+import * as api from '../utils/api.js';
 
 const ALARM_NAME = 'account:refresh';
 const REFRESH_RATE = 60 * 24 * 30; // 30 days in minutes

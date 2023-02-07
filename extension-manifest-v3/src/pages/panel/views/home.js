@@ -135,11 +135,11 @@ export default {
               <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
               <ui-text
                 type="label-l"
-                layout="block:center width:::60% margin:top"
+                layout="block:center width:::210px margin:top"
               >
                 Ghostery has nothing to do on this page
               </ui-text>
-              <ui-text type="body-m" layout="block:center width:::70%">
+              <ui-text type="body-m" layout="block:center width:::245px">
                 Try to open this panel on a different browser tab
               </ui-text>
             </div>

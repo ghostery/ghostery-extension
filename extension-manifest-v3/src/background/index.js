@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import '../utils/shims.js';
+
 import './onboarding.js';
 
 import './autoconsent.js';
