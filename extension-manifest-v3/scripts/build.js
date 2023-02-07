@@ -1,5 +1,6 @@
 import { resolve, dirname } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
+import { exec } from 'child_process';
 import { build } from 'vite';
 import shelljs from 'shelljs';
 import webExt from 'web-ext';
@@ -218,9 +219,12 @@ if (argv.watch) {
   buildPromise.then((watchEmitter) =>
     watchEmitter.on('event', function callback(e) {
       if (e.code === 'BUNDLE_END') {
+        watchEmitter.off('event', callback);
+
         let settings;
         switch (argv.target) {
           case 'safari':
+            exec('xed xcode');
             return;
           case 'firefox':
             settings = {
@@ -239,8 +243,6 @@ if (argv.watch) {
             settings = { target: 'chromium' };
             break;
         }
-
-        watchEmitter.off('event', callback);
 
         webExt.cmd.run({
           ...settings,
