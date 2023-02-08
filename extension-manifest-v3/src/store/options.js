@@ -67,6 +67,7 @@ const Options = {
 
       await chrome.storage.local.set({
         options:
+          // Firefox does not serialize correctly objects with getters
           __PLATFORM__ === 'firefox'
             ? JSON.parse(JSON.stringify(options))
             : options,

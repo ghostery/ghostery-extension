@@ -39,7 +39,7 @@ export default {
             email: user.attributes.email,
           };
 
-          chrome.alarms?.create(ALARM_NAME, {
+          chrome.alarms.create(ALARM_NAME, {
             periodInMinutes: REFRESH_RATE,
             when: Date.now() + 1000 * REFRESH_RATE,
           });
@@ -49,7 +49,7 @@ export default {
 
         return account;
       } catch (e) {
-        chrome.alarms?.clear(ALARM_NAME);
+        chrome.alarms.clear(ALARM_NAME);
         chrome.storage.local.set({ account: undefined });
 
         throw e;
@@ -58,7 +58,7 @@ export default {
   },
 };
 
-chrome.alarms?.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
     if (!api.session()) {
       chrome.alarms.clear(ALARM_NAME);

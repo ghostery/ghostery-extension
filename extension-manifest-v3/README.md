@@ -9,7 +9,7 @@ This repository contains a version built with the new `chrome.declarativeNetRequ
 First, you need to install JavaScript dependencies and download additional resources (e.g. block lists):
 
 ```bash
-npm i
+cd .. && npm ci
 ```
 
 Now everything is ready. Change the code, and run it in Chrome:
