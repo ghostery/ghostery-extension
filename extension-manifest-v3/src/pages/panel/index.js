@@ -18,6 +18,9 @@ define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
   prefix: 'gh-panel',
 });
 
+/* Ping telemetry on panel open */
+chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });
+
 /*
   Safari extension popup has a bug, which focuses visibly the first element on the page
   when the popup is opened. This is a workaround to remove the focus.
