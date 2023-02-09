@@ -12,48 +12,48 @@
 import { store } from 'hybrids';
 import * as api from '../utils/api.js';
 
-const ALARM_NAME = 'account:refresh';
+const ALARM_NAME = 'session:refresh';
 const REFRESH_RATE = 60 * 24 * 30; // 30 days in minutes
 
 export default {
-  userId: '',
+  user: '',
   firstName: '',
   lastName: '',
   email: '',
+  contributor: false,
   name: ({ firstName, lastName }) => `${firstName} ${lastName}`,
   [store.connect]: {
+    offline: true,
     async get() {
-      try {
-        const userId = await api.session();
-        let { account } = await chrome.storage.local.get(['account']);
+      const userId = await api.session();
+      if (!userId) return {};
 
-        if (!userId) {
-          throw Error('Unauthorized');
-        } else if (!account || account.userId !== userId.value) {
-          const { data: user } = await api.get(`users/${userId.value}`);
+      const { data: user } = await api.get(`users/${userId.value}`);
 
-          account = {
-            userId: userId.value,
-            firstName: user.attributes.first_name,
-            lastName: user.attributes.last_name,
-            email: user.attributes.email,
-          };
-
+      return {
+        user: userId.value,
+        firstName: user.attributes.first_name,
+        lastName: user.attributes.last_name,
+        email: user.attributes.email,
+        contributor: !!user.attributes.scopes?.length,
+      };
+    },
+    async observe(_, { user }) {
+      if (user) {
+        if (!(await chrome.alarms.get(ALARM_NAME))) {
           chrome.alarms.create(ALARM_NAME, {
-            periodInMinutes: REFRESH_RATE,
             when: Date.now() + 1000 * REFRESH_RATE,
           });
-
-          chrome.storage.local.set({ account });
         }
-
-        return account;
-      } catch (e) {
+      } else {
         chrome.alarms.clear(ALARM_NAME);
-        chrome.storage.local.set({ account: undefined });
-
-        throw e;
       }
+
+      // * Clear account data kept in earlier versions in local storage
+      // * Remove alarm with old name
+      // TODO: Remove this in a future release
+      chrome.storage.local.set({ account: undefined });
+      chrome.alarms.clear('account:refresh');
     },
   },
 };
@@ -62,6 +62,10 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM_NAME) {
     if (!api.session()) {
       chrome.alarms.clear(ALARM_NAME);
+    } else {
+      chrome.alarms.create(ALARM_NAME, {
+        when: Date.now() + 1000 * REFRESH_RATE,
+      });
     }
   }
 });

@@ -50,12 +50,7 @@ export default {
               </ui-button>
             `}
           </div>
-          <ui-text
-            type="body-l"
-            mobile-type="body-m"
-            color="gray-600"
-            translate="no"
-          >
+          <ui-text type="body-l" mobile-type="body-m" color="gray-600">
             When pausing Ghostery on individual websites for various personal
             reasons, those websites will appear here.
           </ui-text>

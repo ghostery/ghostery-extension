@@ -17,6 +17,8 @@ function shimAlarms() {
     },
     create(name, options) {
       if (options.when) {
+        if (alarms.has(name)) this.clear(name);
+
         alarms.set(
           name,
           setTimeout(() => {

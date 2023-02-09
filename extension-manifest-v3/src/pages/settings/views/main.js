@@ -12,7 +12,7 @@
 import { html, router, store } from 'hybrids';
 
 import Options from '/store/options.js';
-import Account from '/store/account.js';
+import Session from '/store/session.js';
 
 import Privacy from './privacy.js';
 import Websites from './websites.js';
@@ -24,8 +24,8 @@ const SIGNON_URL = 'https://signon.ghostery.com/';
 
 export default {
   stack: router([Privacy, Websites, Whotracksme, Preview]),
-  account: store(Account),
-  content: ({ stack, account }) => html`
+  session: store(Session),
+  content: ({ stack, session }) => html`
     <template layout="contents">
       <ui-settings-layout>
         <a
@@ -54,15 +54,15 @@ export default {
           <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
           WhoTracks.Me
         </a>
-        ${(store.ready(account) || store.error(account)) &&
+        ${store.ready(session) &&
         html`
           <a
             class="bottom"
-            href="${store.ready(account) ? ACCOUNT_URL : SIGNON_URL}"
+            href="${session.user ? ACCOUNT_URL : SIGNON_URL}"
             target="_blank"
             slot="nav"
           >
-            ${store.ready(account)
+            ${session.user
               ? html`
                   <ui-icon name="user" color="nav"></ui-icon>
                   <span layout@992px="hidden">My Account</span>
@@ -70,9 +70,9 @@ export default {
                     layout="hidden"
                     layout@992px="column margin:left:2px width::0"
                   >
-                    <div>${account.name}</div>
+                    <div>${session.name}</div>
                     <ui-text type="body-m" color="gray-600" ellipsis>
-                      ${account.email}
+                      ${session.email}
                     </ui-text>
                   </div>
                 `

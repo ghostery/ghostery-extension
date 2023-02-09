@@ -11,7 +11,7 @@
 
 import { html, msg, router, store } from 'hybrids';
 
-import Account from '/store/account.js';
+import Session from '/store/session.js';
 
 const MENU = [
   {},
@@ -52,8 +52,8 @@ if (__PLATFORM__ !== 'safari') {
 }
 
 export default {
-  account: store(Account),
-  content: ({ account }) => html`
+  session: store(Session),
+  content: ({ session }) => html`
     <template layout="grid">
       <ui-panel-header layout="fixed top left width:full">
         Menu
@@ -64,41 +64,47 @@ export default {
         </ui-action>
       </ui-panel-header>
       <div layout="column gap padding:bottom margin:top:8">
-        <ui-text>
-          <a
-            href="${store.ready(account)
-              ? 'https://account.ghostery.com/'
-              : 'https://signon.ghostery.com/'}"
-            target="_blank"
-            layout="block padding margin:0:1"
-          >
-            <gh-panel-menu-item icon="user">
-              ${store.ready(account) &&
-              html`
-                <div>${account.name}</div>
-                <ui-text color="gray-600">${account.email}</ui-text>
-              `}
-              ${store.error(account) && html`Sign in`}
-            </gh-panel-menu-item>
-          </a>
-        </ui-text>
-        ${MENU.map(({ icon, label, href }) =>
-          label
-            ? html`
-                <ui-text>
-                  <a
-                    href="${href}"
-                    target="_blank"
-                    layout="block padding margin:0:1"
-                  >
-                    <gh-panel-menu-item icon="${icon}">
-                      ${label}
-                    </gh-panel-menu-item>
-                  </a>
-                </ui-text>
-              `
-            : html`<ui-line></ui-line>`,
-        )}
+        ${store.ready(session) &&
+        html`
+          <ui-text>
+            <a
+              href="${session.user
+                ? 'https://account.ghostery.com/'
+                : 'https://signon.ghostery.com/'}"
+              target="_blank"
+              layout="block padding margin:0:1"
+            >
+              <gh-panel-menu-item icon="user">
+                ${session.user
+                  ? html`
+                      <div>${session.name}</div>
+                      <ui-text color="gray-600">${session.email}</ui-text>
+                    `
+                  : html`Sign in`}
+              </gh-panel-menu-item>
+            </a>
+          </ui-text>
+          ${MENU.filter(
+            // Hide the "Become a Contributor" menu item if the user is already a contributor
+            (_, i) => i !== 0 || (i === 0 && !session.contributor),
+          ).map(({ icon, label, href }) =>
+            label
+              ? html`
+                  <ui-text>
+                    <a
+                      href="${href}"
+                      target="_blank"
+                      layout="block padding margin:0:1"
+                    >
+                      <gh-panel-menu-item icon="${icon}">
+                        ${label}
+                      </gh-panel-menu-item>
+                    </a>
+                  </ui-text>
+                `
+              : html`<ui-line></ui-line>`,
+          )}
+        `}
       </div>
     </template>
   `,
