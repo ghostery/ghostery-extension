@@ -12,6 +12,7 @@
 import { html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
+import Session from '/store/session.js';
 import Stats from '/store/stats.js';
 
 import sleep from '../assets/sleep.svg';
@@ -89,8 +90,11 @@ export default {
   [router.connect]: { stack: [Navigation, Company] },
   options: store(Options),
   stats: store(Stats),
-  notification: ({ options }) =>
-    store.ready(options) && NOTIFICATIONS[options.terms ? 1 : 0],
+  session: store(Session),
+  notification: ({ options, session }) =>
+    store.ready(options, session) &&
+    !session.contributor &&
+    NOTIFICATIONS[options.terms ? 1 : 0],
   content: ({ options, stats, notification }) => html`
     <template layout="column">
       ${store.ready(options) &&

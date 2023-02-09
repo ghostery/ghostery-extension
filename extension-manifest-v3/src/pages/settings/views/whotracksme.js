@@ -20,19 +20,17 @@ const PREVIEWS = {
   'wtm_wheel': {
     src: assets['wtm_wheel'],
     title: msg`Trackers Wheel`,
-    description: 'Replaces Ghostery icon in the browser toolbar',
+    description: msg`Replaces Ghostery icon in the browser toolbar`,
   },
   'trackers_count': {
     src: assets['trackers_count'],
     title: msg`Trackers Count`,
-    description:
-      'Show tracker count badge on the Ghostery icon in browser toolbar',
+    description: msg`Show tracker count badge on the Ghostery icon in browser toolbar`,
   },
   'trackers_preview': {
     src: assets['trackers_preview'],
     title: msg`Trackers Preview`,
-    description:
-      'Shows statistical information about website tracking on search engine result page',
+    description: msg`Shows statistical information about website tracking on search engine result page`,
   },
 };
 
@@ -71,12 +69,7 @@ export default {
             >
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
-                <ui-text
-                  type="body-l"
-                  mobile-type="body-m"
-                  color="gray-600"
-                  translate="no"
-                >
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Replaces Ghostery icon in the browser toolbar
                 </ui-text>
               </div>
@@ -103,12 +96,7 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-s">Trackers Count</ui-text>
-                  <ui-text
-                    type="body-l"
-                    mobile-type="body-m"
-                    color="gray-600"
-                    translate="no"
-                  >
+                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                     Show tracker count badge on the Ghostery icon in browser
                     toolbar
                   </ui-text>
@@ -135,12 +123,7 @@ export default {
             >
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">Trackers Preview</ui-text>
-                <ui-text
-                  type="body-l"
-                  mobile-type="body-m"
-                  color="gray-600"
-                  translate="no"
-                >
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Shows statistical information about website tracking on search
                   engine result page
                 </ui-text>
