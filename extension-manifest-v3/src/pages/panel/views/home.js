@@ -135,11 +135,11 @@ export default {
               <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
               <ui-text
                 type="label-l"
-                layout="block:center width:::60% margin:top"
+                layout="block:center width:::210px margin:top"
               >
                 Ghostery has nothing to do on this page
               </ui-text>
-              <ui-text type="body-m" layout="block:center width:::70%">
+              <ui-text type="body-m" layout="block:center width:::245px">
                 Try to open this panel on a different browser tab
               </ui-text>
             </div>
@@ -192,21 +192,21 @@ export default {
               >
                 <gh-panel-options-item
                   icon="ads"
-                  enabled="${options.dnrRules.ads}"
+                  enabled="${options.engines.ads}"
                   terms="${options.terms}"
                 >
                   Ad-Blocking
                 </gh-panel-options-item>
                 <gh-panel-options-item
                   icon="tracking"
-                  enabled="${options.dnrRules.tracking}"
+                  enabled="${options.engines.tracking}"
                   terms="${options.terms}"
                 >
                   Anti-Tracking
                 </gh-panel-options-item>
                 <gh-panel-options-item
                   icon="autoconsent"
-                  enabled="${options.dnrRules.annoyances}"
+                  enabled="${options.engines.annoyances}"
                   terms="${options.terms}"
                 >
                   Never-Consent
@@ -216,14 +216,15 @@ export default {
           </gh-panel-options>
           ${notification &&
           html`
-            <gh-panel-notification
-              icon="${notification.icon}"
-              layout="margin:0:2:1"
-              href="${notification.url}"
-            >
-              ${notification.text}
-              <span slot="action">${notification.action}</span>
-            </gh-panel-notification>
+            <div layout="padding:0:2:1 width:min:full">
+              <gh-panel-notification
+                icon="${notification.icon}"
+                href="${notification.url}"
+              >
+                ${notification.text}
+                <span slot="action">${notification.action}</span>
+              </gh-panel-notification>
+            </div>
           `}
         </section>
       `}

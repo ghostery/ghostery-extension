@@ -106,11 +106,6 @@ html {
   --ui-font-body-s: 12px / 18px var(--ui-font-family-body);
   --ui-font-body-xs: 12px / 18px var(--ui-font-family-body);
 
-  /* Global overwrites */
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-
   --ui-text-color-anchor: var(--ui-color-primary-500);
 }
 
@@ -160,6 +155,7 @@ body {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Open Sans', Arial,
     Helvetica, sans-serif;
   font-size: 13px;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--ui-color-gray-600);
 }
 

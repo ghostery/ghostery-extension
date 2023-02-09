@@ -20,11 +20,11 @@ async function getTabDomain(tabId) {
 }
 
 async function initialize(msg, tabId, frameId) {
-  const { dnrRules, autoconsent, paused } = await store.resolve(Options);
+  const { engines, autoconsent, paused } = await store.resolve(Options);
   const domain = await getTabDomain(tabId);
 
   if (
-    dnrRules.annoyances &&
+    engines.annoyances &&
     !autoconsent.disallowed.includes(domain) &&
     (!paused || !paused.some(({ id }) => id === domain))
   ) {

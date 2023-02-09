@@ -61,10 +61,6 @@ html {
   --ui-text-color-heading: var(--ui-color-gray-900);
   --ui-text-color-anchor: var(--ui-color-primary-700);
 
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-
   /* Global styles */
   color: var(--ui-color-gray-900);
 }
@@ -77,6 +73,10 @@ body {
 }
 
 body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Open Sans', Arial,
+    Helvetica, sans-serif;
+  font-size: 13px;
+  -moz-osx-font-smoothing: grayscale;
   width: 100%;
   background: var(--ui-color-white);
 }

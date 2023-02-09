@@ -9,10 +9,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import '../utils/shims.js';
+
 import './onboarding.js';
-import './tab-stats.js';
-import './cosmetics.js';
-import './trackers-preview.js';
-import './telemetry.js';
+
 import './autoconsent.js';
+import './adblocker.js';
+import './tab-stats.js';
+import './trackers-preview.js';
+
+import './alarms.js';
+import './dnr.js';
+
+import './telemetry.js';
 import './reporting.js';

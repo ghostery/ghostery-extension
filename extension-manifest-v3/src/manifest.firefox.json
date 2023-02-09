@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
   "author": "Ghostery",
-  "name": "Ghostery",
+  "name": "__MSG_manifest_name__",
   "short_name": "Ghostery",
   "default_locale": "en",
-  "description": "Block Ads, Trackers and Annoyances",
+  "description": "__MSG_manifest_short_description__",
   "icons": {
     "16": "assets/images/icon16.png",
     "48": "assets/images/icon48.png",
@@ -18,6 +18,7 @@
       "48": "assets/images/icon48.png",
       "128": "assets/images/icon128.png"
     },
+    "default_area": "navbar",
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
   },
@@ -25,53 +26,24 @@
     "page": "pages/settings/index.html",
     "open_in_tab": true
   },
-  "permissions": [
-    "webNavigation",
-    "cookies",
-    "tabs",
-    "alarms",
-    "storage",
+	"permissions": [
+		"webNavigation",
+		"webRequest",
+		"webRequestBlocking",
+		"cookies",
+		"tabs",
     "scripting",
-    "declarativeNetRequest",
-    "declarativeNetRequestFeedback"
-  ],
-  "host_permissions": [
-    "http://*/*",
-    "https://*/*",
-    "ws://*/*",
-    "wss://*/*"
-  ],
+		"storage",
+		"http://*/*",
+		"https://*/*",
+		"ws://*/*",
+		"wss://*/*"
+	],
   "background": {
     "page": "background/index.html",
-    "persistent": false
-  },
-  "declarative_net_request" : {
-    "rule_resources" : [
-      {
-        "id": "ads",
-        "enabled": false,
-        "path": "rule_resources/dnr-safari-ads-network.json"
-      },
-      {
-        "id": "tracking",
-        "enabled": false,
-        "path": "rule_resources/dnr-safari-tracking-network.json"
-      },
-      {
-        "id": "annoyances",
-        "enabled": false,
-        "path": "rule_resources/dnr-safari-annoyances-network.json"
-      }
-    ]
+		"persistent": true
   },
   "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "run_at": "document_start",
-      "js": [
-        "content_scripts/prevent-indexeddb-tracking/index.js"
-      ]
-    },
     {
       "matches": ["*://*/*"],
       "run_at": "document_start",
@@ -508,6 +480,5 @@
     "pages/trackers-preview/index.html",
     "pages/onboarding/index.html",
     "pages/autoconsent/index.html"
-  ],
-  "content_security_policy" : {}
+  ]
 }

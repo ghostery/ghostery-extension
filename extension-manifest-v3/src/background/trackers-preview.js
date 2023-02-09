@@ -6,12 +6,14 @@ import {
 
 import Options from '/store/options.js';
 
-store.get(Options);
-
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   const options = store.get(Options);
 
-  if (options.wtmSerpReport ?? true) {
+  if (!store.ready(options)) {
+    return false;
+  }
+
+  if (options.wtmSerpReport) {
     if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
       return false;
     }

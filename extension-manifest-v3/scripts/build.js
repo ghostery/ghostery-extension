@@ -1,7 +1,9 @@
 import { resolve, dirname } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
+import { exec } from 'child_process';
 import { build } from 'vite';
 import shelljs from 'shelljs';
+import webExt from 'web-ext';
 
 const pwd = process.cwd();
 
@@ -11,20 +13,35 @@ const options = {
   assets: ['_locales', 'assets'],
 };
 
+const TARGET_TO_MANIFEST_MAP = {
+  chrome: 'chromium',
+  opera: 'chromium',
+  firefox: 'firefox',
+  safari: 'safari',
+};
+
 // Generate arguments from command line
-const argv = process.argv.slice(2).reduce((acc, arg, index, arr) => {
-  if (arg.startsWith('--')) {
-    const key = arg.slice(2);
-    const value = arr[index + 1];
-    acc[key] = !value || value.startsWith('--') ? true : value;
-  }
-  return acc;
-}, {});
-const target = argv.target || 'chromium';
+const argv = process.argv.slice(2).reduce(
+  (acc, arg) => {
+    if (arg.startsWith('--')) {
+      acc[arg.slice(2)] = true;
+    } else {
+      acc.target = arg;
+    }
+    return acc;
+  },
+  { target: 'chrome' },
+);
 
 const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
 const manifest = JSON.parse(
-  readFileSync(resolve(options.srcDir, `manifest.${target}.json`), 'utf8'),
+  readFileSync(
+    resolve(
+      options.srcDir,
+      `manifest.${TARGET_TO_MANIFEST_MAP[argv.target]}.json`,
+    ),
+    'utf8',
+  ),
 );
 
 const config = {
@@ -33,7 +50,7 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
-  define: { __PLATFORM__: JSON.stringify(target) },
+  define: { __PLATFORM__: JSON.stringify(argv.target) },
   build: {
     outDir: options.outDir,
     assetsDir: '',
@@ -89,8 +106,8 @@ if (manifest.browser_action?.default_popup) {
 }
 
 // options page
-if (manifest.options_page) {
-  source.push(manifest.options_page);
+if (manifest.options_ui?.page) {
+  source.push(manifest.options_ui?.page);
 }
 
 // content scripts
@@ -144,7 +161,7 @@ function mapPaths(paths) {
   }, {});
 }
 
-build({
+const buildPromise = build({
   ...config,
   build: {
     ...config.build,
@@ -196,4 +213,43 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
       },
     });
   }
+}
+
+if (argv.watch) {
+  buildPromise.then((watchEmitter) =>
+    watchEmitter.on('event', function callback(e) {
+      if (e.code === 'BUNDLE_END') {
+        watchEmitter.off('event', callback);
+
+        let settings;
+        switch (argv.target) {
+          case 'safari':
+            exec('xed xcode');
+            return;
+          case 'firefox':
+            settings = {
+              target: 'firefox-desktop',
+              firefoxBinary:
+                '/Applications/Firefox Nightly.app/Contents/MacOS/firefox-bin',
+            };
+            break;
+          case 'opera':
+            settings = {
+              target: 'chromium',
+              chromiumBinary: '/Applications/Opera.app/Contents/MacOS/Opera',
+            };
+            break;
+          default:
+            settings = { target: 'chromium' };
+            break;
+        }
+
+        webExt.cmd.run({
+          ...settings,
+          noReload: true,
+          sourceDir: options.outDir,
+        });
+      }
+    }),
+  );
 }

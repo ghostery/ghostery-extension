@@ -76,7 +76,12 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
-chrome.runtime.onMessage.addListener((msg, sender) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === 'getCurrentTabId') {
+    sendResponse(sender.tab?.id);
+    return false;
+  }
+
   if (sender.tab?.id && sender.frameId !== undefined) {
     // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
     // with the correct tabId (sometimes it is correct, sometimes it is 0).
