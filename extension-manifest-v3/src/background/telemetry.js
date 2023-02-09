@@ -62,10 +62,18 @@ const getConf = async () => {
   };
 };
 
+let telemetry;
+
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.action === 'telemetry') {
+    telemetry.ping(msg.event);
+  }
+});
+
 (async () => {
   const storage = await loadStorage();
 
-  const telemetry = new Telemetry({
+  telemetry = new Telemetry({
     METRICS_BASE_URL: 'https://d.ghostery.com',
     EXTENSION_VERSION: chrome.runtime.getManifest().version,
     getConf,
