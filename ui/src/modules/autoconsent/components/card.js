@@ -10,7 +10,6 @@ export default {
       :host {
         background: white;
         border-radius: 16px;
-        overflow: hidden;
       }
     `,
 };
