@@ -123,6 +123,9 @@
   "done__go_with_ghosty_": {
     "message": "Fatto! Vai con Ghosty!"
   },
+  "eliminates_ads_on_websites_you_visit__offering_a_calm__safe_and_private_internet_": {
+    "message": "Eliminates ads on websites you visit, offering a calm, safe and private internet."
+  },
   "email": {
     "message": "Email",
     "description": "Tracker category name"
@@ -177,6 +180,12 @@
   "ghostery_privacy_policy": {
     "message": "Informativa sulla Privacy di Ghostery"
   },
+  "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collectors__from_ads_to_trackers_and_cookie_popups_": {
+    "message": "Ghostery protects your privacy by detecting and neutralizing different types of data collectors, from ads to trackers and cookie popups."
+  },
+  "ghostery_s_ai_driven_anti_tracking_technology_prevents_various_tracking_techniques_securing_your_digital_privacy_while_browsing_the_web_": {
+    "message": "Ghostery’s AI driven Anti-Tracking technology prevents various tracking techniques securing your digital privacy while browsing the web."
+  },
   "ghostery_settings": {
     "message": "Impostazioni Ghostery"
   },
@@ -205,7 +214,7 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Lascia che Ghostery difenda la tua privacy e rifiuti tutti i popup e il tracciamento per te, oppure fallo tu stesso!"
   },
-	"manifest_name": {
+  "manifest_name": {
     "message": "Ghostery – Ad Blocker per la Privacy"
   },
   "manifest_short_description": {
@@ -281,6 +290,12 @@
   "read_more_on_whotracks_me": {
     "message": "Scopri di più su WhoTracks.Me"
   },
+  "removes_intrusive_cookie_popups_and_expresses_dissent_to_online_tracking__you_can_browse_the_web_without_worrying_about_cookie_consent_dialogues_or_privacy_violations_": {
+    "message": "Removes intrusive cookie popups and expresses dissent to online tracking. You can browse the web without worrying about cookie consent dialogues or privacy violations."
+  },
+  "replaces_ghostery_icon_in_the_browser_toolbar": {
+    "message": "Replaces Ghostery icon in the browser toolbar"
+  },
   "report_a_broken_page": {
     "message": "Segnala una pagina orfana"
   },
@@ -292,6 +307,12 @@
   },
   "settings": {
     "message": "Impostazioni"
+  },
+  "show_tracker_count_badge_on_the_ghostery_icon_in_browser_toolbar": {
+    "message": "Mostra il badge con il conteggio dei tracker sull'icona di Ghostery nella barra degli strumenti del browser"
+  },
+  "shows_statistical_information_about_website_tracking_on_search_engine_result_page": {
+    "message": "Shows statistical information about website tracking on search engine result page"
   },
   "sign_in": {
     "message": "Accedi"
@@ -309,6 +330,9 @@
   "social_media": {
     "message": "Social Media",
     "description": "Tracker category name"
+  },
+  "software_licenses": {
+    "message": "Licenze Software"
   },
   "submit_a_new_tracker": {
     "message": "Invia un nuovo tracker"
@@ -363,6 +387,9 @@
   "what_is_whotracks_me_": {
     "message": "Che cos'è WhoTracks.Me?"
   },
+  "when_pausing_ghostery_on_individual_websites_for_various_personal_reasons__those_websites_will_appear_here_": {
+    "message": "When pausing Ghostery on individual websites for various personal reasons, those websites will appear here."
+  },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, gestito da Ghostery, è parte integrante della tecnologia anti-tracciamento AI di Ghostery. Si tratta di una risorsa globale completa sui tracker, che porta trasparenza al tracciamento sul web."
   },
@@ -383,6 +410,9 @@
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
     "message": "Puoi cambiare idea in qualsiasi momento e consentire a Ghostery di iniziare a tracciare i tracker per te nel pannello di Ghostery."
+  },
+  "you_can_manage_the_functionality_of_these_privacy_components_to_your_liking__we_recommend_keeping_them_on_at_all_times_": {
+    "message": "You can manage the functionality of these privacy components to your liking. We recommend keeping them ON at all times."
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "Hai scelto di non abilitare Ghostery!"

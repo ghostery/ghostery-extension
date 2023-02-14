@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.0.0",
+  "version": "10.0.1",
   "type": "module",
   "scripts": {
     "postinstall": "npm run download-cosmetics && npm run download-dnr-lists",
@@ -9,7 +9,7 @@
     "start": "npm run build -- --watch",
     "download-cosmetics": "node scripts/download-cosmetics.js",
     "download-dnr-lists": "node scripts/download-dnr-lists.js",
-    "lint": "eslint src/", 
+    "lint": "eslint src/",
     "test": "npm run lint",
     "locales.wtm": "hybrids extract -c --format=chrome.i18n ../node_modules/@whotracksme/webextension-packages/packages ./src/_locales/en/messages.json",
     "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./src/_locales/en/messages.json",

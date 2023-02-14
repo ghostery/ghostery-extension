@@ -123,6 +123,9 @@
   "done__go_with_ghosty_": {
     "message": "完成！ 和幽灵一起消失吧！"
   },
+  "eliminates_ads_on_websites_you_visit__offering_a_calm__safe_and_private_internet_": {
+    "message": "Eliminates ads on websites you visit, offering a calm, safe and private internet."
+  },
   "email": {
     "message": "电子邮件地址",
     "description": "Tracker category name"
@@ -177,6 +180,12 @@
   "ghostery_privacy_policy": {
     "message": "Ghostery 隐私政策"
   },
+  "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collectors__from_ads_to_trackers_and_cookie_popups_": {
+    "message": "Ghostery protects your privacy by detecting and neutralizing different types of data collectors, from ads to trackers and cookie popups."
+  },
+  "ghostery_s_ai_driven_anti_tracking_technology_prevents_various_tracking_techniques_securing_your_digital_privacy_while_browsing_the_web_": {
+    "message": "Ghostery’s AI driven Anti-Tracking technology prevents various tracking techniques securing your digital privacy while browsing the web."
+  },
   "ghostery_settings": {
     "message": "Ghostery 设置"
   },
@@ -205,7 +214,7 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "让 Ghostery 成为您的全面隐私权倡导者，并为您拒绝所有弹出窗口和跟踪，或者由您自己做主！"
   },
-	"manifest_name": {
+  "manifest_name": {
     "message": "Ghostery – 隐私广告拦截工具"
   },
   "manifest_short_description": {
@@ -281,6 +290,12 @@
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
   },
+  "removes_intrusive_cookie_popups_and_expresses_dissent_to_online_tracking__you_can_browse_the_web_without_worrying_about_cookie_consent_dialogues_or_privacy_violations_": {
+    "message": "Removes intrusive cookie popups and expresses dissent to online tracking. You can browse the web without worrying about cookie consent dialogues or privacy violations."
+  },
+  "replaces_ghostery_icon_in_the_browser_toolbar": {
+    "message": "Replaces Ghostery icon in the browser toolbar"
+  },
   "report_a_broken_page": {
     "message": "报告崩溃页面"
   },
@@ -292,6 +307,12 @@
   },
   "settings": {
     "message": "设置"
+  },
+  "show_tracker_count_badge_on_the_ghostery_icon_in_browser_toolbar": {
+    "message": "在浏览器工具栏中的 Ghostery 图标上显示跟踪器计数标志"
+  },
+  "shows_statistical_information_about_website_tracking_on_search_engine_result_page": {
+    "message": "Shows statistical information about website tracking on search engine result page"
   },
   "sign_in": {
     "message": "登录"
@@ -309,6 +330,9 @@
   "social_media": {
     "message": "社交媒体",
     "description": "Tracker category name"
+  },
+  "software_licenses": {
+    "message": "软件许可证"
   },
   "submit_a_new_tracker": {
     "message": "提交新跟踪器"
@@ -363,6 +387,9 @@
   "what_is_whotracks_me_": {
     "message": "什么是 WhoTracks.Me？"
   },
+  "when_pausing_ghostery_on_individual_websites_for_various_personal_reasons__those_websites_will_appear_here_": {
+    "message": "When pausing Ghostery on individual websites for various personal reasons, those websites will appear here."
+  },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"
   },
@@ -383,6 +410,9 @@
   },
   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
     "message": "您可以随时改变主意，在 Ghostery 面板中启用 Ghostery 开始追踪跟踪器。"
+  },
+  "you_can_manage_the_functionality_of_these_privacy_components_to_your_liking__we_recommend_keeping_them_on_at_all_times_": {
+    "message": "You can manage the functionality of these privacy components to your liking. We recommend keeping them ON at all times."
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "您选择跳过启用 Ghostery！"
