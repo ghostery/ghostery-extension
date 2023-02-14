@@ -42,6 +42,7 @@ export default {
       box-sizing: border-box;
       transition: height 500ms cubic-bezier(0.4, 0.15, 0, 1);
       will-change: height;
+      overflow: hidden;
     }
   `,
 };
