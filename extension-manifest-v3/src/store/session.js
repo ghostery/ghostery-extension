@@ -25,18 +25,23 @@ export default {
   [store.connect]: {
     offline: true,
     async get() {
-      const userId = await api.session();
-      if (!userId) return {};
+      try {
+        const userId = await api.session();
+        if (!userId) return {};
 
-      const { data: user } = await api.get(`users/${userId.value}`);
+        const { data: user } = await api.get(`users/${userId.value}`);
 
-      return {
-        user: userId.value,
-        firstName: user.attributes.first_name,
-        lastName: user.attributes.last_name,
-        email: user.attributes.email,
-        contributor: !!user.attributes.scopes?.length,
-      };
+        return {
+          user: userId.value,
+          firstName: user.attributes.first_name,
+          lastName: user.attributes.last_name,
+          email: user.attributes.email,
+          contributor: !!user.attributes.scopes?.length,
+        };
+      } catch (e) {
+        console.error("Failed to fetch user's session", e);
+        return {};
+      }
     },
     async observe(_, { user }) {
       if (user) {
