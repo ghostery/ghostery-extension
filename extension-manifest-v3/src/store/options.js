@@ -155,7 +155,7 @@ async function migrateFromMV2() {
   }
 }
 
-export async function observe(property, fn) {
+export function observe(property, fn) {
   let value;
   const wrapper = (options) => {
     if (value === undefined || options[property] !== value) {
