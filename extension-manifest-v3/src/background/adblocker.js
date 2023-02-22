@@ -10,7 +10,6 @@
  */
 
 import { FiltersEngine } from '@cliqz/adblocker';
-import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
 import Options, { observe } from '/store/options.js';
@@ -27,10 +26,6 @@ const adblockerEngines = Object.keys(Options.engines).reduce((map, name) => {
 let pausedDomains = [];
 
 let adblockerStartupPromise = (async function () {
-  await store.resolve(Options);
-  Object.keys(Options.engines).forEach((engineName) => {
-    adblockerEngines[engineName].isEnabled = Options.engines[engineName];
-  });
   observe('engines', (engines) => {
     Object.entries(engines).forEach(([key, value]) => {
       adblockerEngines[key].isEnabled = value;

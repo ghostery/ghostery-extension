@@ -85,17 +85,10 @@ const Options = {
           e,
         );
       }
-
       return options;
     },
     observe: (_, options, prevOptions) => {
-      observers.forEach((fn) => {
-        try {
-          fn(options, prevOptions);
-        } catch (e) {
-          console.error(`Error while observing options: `, e);
-        }
-      });
+      observers.forEach((fn) => fn(options, prevOptions));
     },
   },
 };
@@ -162,13 +155,19 @@ export function observe(property, fn) {
       const prevValue = value;
       value = options[property];
 
-      fn(value, prevValue);
+      try {
+        fn(value, prevValue);
+      } catch (e) {
+        console.error(`Error while observing options: `, e);
+      }
     }
   };
 
   observers.add(wrapper);
 
-  store.resolve(Options);
+  // let observer know of the option value
+  // in case when registered after the store.connect
+  store.resolve(Options).then(wrapper).catch(console.error);
 
   // Return unobserve function
   return () => {
