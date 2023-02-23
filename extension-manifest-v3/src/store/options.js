@@ -156,7 +156,7 @@ export async function observe(property, fn) {
       value = options[property];
 
       try {
-        return fn(value, prevValue);
+        return await fn(value, prevValue);
       } catch (e) {
         console.error(`Error while observing options: `, e);
       }
