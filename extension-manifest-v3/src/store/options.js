@@ -87,8 +87,8 @@ const Options = {
       }
       return options;
     },
-    observe: (_, options, prevOptions) => {
-      observers.forEach((fn) => fn(options, prevOptions));
+    observe: (_, options) => {
+      observers.forEach((fn) => fn(options));
     },
   },
 };
@@ -148,15 +148,15 @@ async function migrateFromMV2() {
   }
 }
 
-export function observe(property, fn) {
+export async function observe(property, fn) {
   let value;
-  const wrapper = (options) => {
+  const wrapper = async (options) => {
     if (value === undefined || options[property] !== value) {
       const prevValue = value;
       value = options[property];
 
       try {
-        fn(value, prevValue);
+        return fn(value, prevValue);
       } catch (e) {
         console.error(`Error while observing options: `, e);
       }
@@ -165,9 +165,15 @@ export function observe(property, fn) {
 
   observers.add(wrapper);
 
-  // let observer know of the option value
-  // in case when registered after the store.connect
-  store.resolve(Options).then(wrapper).catch(console.error);
+  try {
+    const options = await store.resolve(Options);
+    // let observer know of the option value
+    // in case when registered after the store.connect
+    // wait for the callback to be fired
+    await wrapper(options);
+  } catch (e) {
+    console.error(e);
+  }
 
   // Return unobserve function
   return () => {
