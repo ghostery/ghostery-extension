@@ -1,4 +1,4 @@
-import { resolve, dirname } from 'path';
+import { resolve, dirname, join } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 import { exec } from 'child_process';
 import { build } from 'vite';
@@ -145,6 +145,13 @@ if (manifest.declarative_net_request?.rule_resources) {
   });
 }
 
+// copy TrackerDB
+const trackedDBPath = join('assets', 'trackerdb.engine');
+shelljs.cp(
+  resolve(options.srcDir, trackedDBPath),
+  resolve(options.outDir, trackedDBPath),
+);
+
 // background
 if (manifest.background) {
   source.push(manifest.background.service_worker || manifest.background.page);
@@ -178,6 +185,7 @@ const buildPromise = build({
         entryFileNames: '[name].js',
         assetFileNames: 'assets/[name].[ext]',
       },
+      plugins: [],
     },
   },
 });
