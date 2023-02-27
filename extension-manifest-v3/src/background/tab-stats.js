@@ -14,8 +14,8 @@ import { throttle } from 'lodash-es';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
+import { getMetadata } from './utils/trackerdb.js';
 import Options from '/store/options.js';
-import { getTrackerFromUrl } from './utils/bugs.js';
 import tabStats from './utils/map.js';
 
 const action = chrome.browserAction || chrome.action;
@@ -58,9 +58,9 @@ async function updateTabStats(msg, sender) {
   msg.urls
     .filter((url) => !stats.trackers.some((t) => t.url === url))
     .forEach((url) => {
-      const tracker = getTrackerFromUrl(url, stats.domain);
-      if (tracker) {
-        stats.trackers.push(tracker);
+      const pattern = getMetadata(url, stats.sourceUrl);
+      if (pattern) {
+        stats.trackers.push(pattern);
       }
     });
 
@@ -90,7 +90,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       const { domain } = parse(sender.url);
 
       if (domain) {
-        tabStats.set(sender.tab.id, { domain, trackers: [] });
+        tabStats.set(sender.tab.id, {
+          domain,
+          trackers: [],
+          sourceUrl: sender.url,
+        });
 
         // Clean up throttled icon update
         setIcon.cancel();
