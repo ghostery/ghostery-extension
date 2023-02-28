@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "glossary-converter": "node tools/glossary-converter.js",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package && npm run postinstall --ws --if-present"
   },
   "devDependencies": {
     "csv": "^6.2.5",
