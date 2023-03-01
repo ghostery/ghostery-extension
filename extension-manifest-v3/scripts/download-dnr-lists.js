@@ -25,15 +25,6 @@ try {
 } catch (e) {
   console.log('Generating placeholder DNR lists');
 
-  writeJSONPlaceholder('bugs.json', {
-    patterns: { host_path: {} },
-  });
-
-  writeJSONPlaceholder('categories.json', {});
-  writeJSONPlaceholder('companies.json', {});
-  writeJSONPlaceholder('trackers.json', {});
-  writeJSONPlaceholder('tracker_domains.json', {});
-
   writeJSONPlaceholder('sites.json', []);
 
   writeJSONPlaceholder('dnr-ads-network.json', []);

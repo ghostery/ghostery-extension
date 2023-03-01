@@ -3,6 +3,7 @@ tmp
 dist
 src/_metadata
 src/rule_resources
+src/assets/trackerdb.engine.bytes
 src/assets/adblocker_engines/*
 !src/assets/adblocker_engines/.gitkeep
 
