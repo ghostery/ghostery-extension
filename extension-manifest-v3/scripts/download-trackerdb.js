@@ -12,9 +12,15 @@ import { writeFileSync } from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
 
-const trackerDB = await fetch(
+const response = await fetch(
   'https://github.com/ghostery/trackerdb/releases/latest/download/trackerdb.engine',
-).then((res) => res.arrayBuffer());
+)
+
+if (!response.ok) {
+  throw new Error(`Failed to load TrackerDB ${response.status}: ${response.statusText}`);
+}
+
+const trackerDB = await response.arrayBuffer();
 
 writeFileSync(
   path.join('src', 'assets', 'trackerdb.engine.bytes'),
