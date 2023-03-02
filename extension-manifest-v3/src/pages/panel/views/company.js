@@ -62,21 +62,21 @@ export default {
           <ui-text slot="header" type="body-s" color="gray-600">
             <span>trackers detected</span>: ${trackers.length}
           </ui-text>
-          ${company.description &&
-          html`
-            <div layout="column gap:0.5">
-              <ui-text type="body-s">${cleanUp(company.description)}</ui-text>
-              ${wtmUrl &&
-              html`
-                <ui-text type="label-xs" color="primary-700" underline>
-                  <a href="${wtmUrl}" target="_blank">
-                    Read more on WhoTracks.Me
-                  </a>
-                </ui-text>
-              `}
-            </div>
-            <ui-line></ui-line>
-          `}
+          <div layout="column gap:0.5">
+            ${company.description &&
+            html`<ui-text type="body-s"
+              >${cleanUp(company.description)}</ui-text
+            >`}
+            ${wtmUrl &&
+            html`
+              <ui-text type="label-xs" color="primary-700" underline>
+                <a href="${wtmUrl}" target="_blank">
+                  Read more on WhoTracks.Me
+                </a>
+              </ui-text>
+            `}
+          </div>
+          <ui-line></ui-line>
           <section
             layout="
               grid:max|1 items:start:stretch content:start gap:1:2.5
