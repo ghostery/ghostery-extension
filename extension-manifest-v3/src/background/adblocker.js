@@ -10,25 +10,28 @@
  */
 
 import { FiltersEngine } from '@cliqz/adblocker';
+import {
+  fromWebRequestDetails,
+  filterRequestHTML,
+} from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
 import Options, { observe } from '/store/options.js';
 
 const DEBUG_SCRIPLETS = false;
 
-const adblockerEngines = Object.keys(Options.engines).reduce((map, name) => {
-  map[name] = {
-    engine: null,
-    isEnabled: false,
-  };
-  return map;
-}, {});
+const adblockerEngines = Object.keys(Options.engines).map((name) => ({
+  name,
+  engine: null,
+  isEnabled: false,
+}));
 let pausedDomains = [];
 
 let adblockerStartupPromise = (async function () {
   await observe('engines', (engines) => {
     Object.entries(engines).forEach(([key, value]) => {
-      adblockerEngines[key].isEnabled = value;
+      const engine = adblockerEngines.find((e) => e.name === key);
+      engine.isEnabled = value;
     });
   });
   await observe('paused', (paused) => {
@@ -36,15 +39,16 @@ let adblockerStartupPromise = (async function () {
   });
 
   await Promise.all(
-    Object.keys(adblockerEngines).map(async (engineName) => {
+    adblockerEngines.map(async (engine) => {
       const response = await fetch(
         chrome.runtime.getURL(
-          `assets/adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`,
+          `assets/adblocker_engines/dnr-${
+            __PLATFORM__ === 'firefox' ? '' : 'cosmetics-'
+          }${engine.name}.engine.bytes`,
         ),
       );
       const engineBytes = await response.arrayBuffer();
-      const engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
-      adblockerEngines[engineName].engine = engine;
+      engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
     }),
   );
   adblockerStartupPromise = null;
@@ -113,7 +117,7 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
-  Object.values(adblockerEngines).forEach(({ engine, isEnabled }) => {
+  adblockerEngines.forEach(({ engine, isEnabled }) => {
     if (!isEnabled) {
       return;
     }
@@ -262,7 +266,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
     await adblockerStartupPromise;
   }
 
-  Object.values(adblockerEngines).forEach(({ isEnabled, engine }) => {
+  adblockerEngines.forEach(({ isEnabled, engine }) => {
     if (isEnabled === false) {
       return;
     }
@@ -295,3 +299,51 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
   return false;
 });
+
+if (__PLATFORM__ === 'firefox') {
+  chrome.webRequest.onBeforeRequest.addListener(
+    (details) => {
+      const request = fromWebRequestDetails(details);
+
+      if (pausedDomains.includes(request.domain)) {
+        return {};
+      }
+
+      for (const { engine, isEnabled } of adblockerEngines) {
+        if (isEnabled === false) {
+          continue;
+        }
+
+        if (request.isMainFrame()) {
+          const htmlFilters = engine.getHtmlFilters(request);
+          if (htmlFilters.length !== 0) {
+            filterRequestHTML(
+              chrome.webRequest.filterResponseData,
+              request,
+              htmlFilters,
+            );
+          }
+        } else {
+          const { redirect, match } = engine.match(request);
+
+          if (redirect !== undefined) {
+            return { redirectUrl: redirect.dataUrl };
+          } else if (match === true) {
+            return { cancel: true };
+          }
+        }
+      }
+
+      return {};
+    },
+    { urls: ['<all_urls>'] },
+    ['blocking'],
+  );
+
+  // TODO: CSP injection
+  // chrome.webRequest.onHeadersReceived.addListener(
+  //   (details) => {},
+  //   { urls: ['<all_urls>'], types: ['main_frame'] },
+  //   ['blocking', 'responseHeaders'],
+  // );
+}

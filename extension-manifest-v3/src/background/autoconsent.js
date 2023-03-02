@@ -57,7 +57,7 @@ async function evalCode(code, id, tabId, frameId) {
       tabId,
       frameIds: [frameId],
     },
-    world: 'MAIN',
+    world: __PLATFORM__ === 'firefox' ? undefined : 'MAIN',
     args: [code],
     func: (code) => {
       try {

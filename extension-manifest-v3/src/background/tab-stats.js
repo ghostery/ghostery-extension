@@ -55,6 +55,10 @@ async function updateTabStats(msg, sender) {
   const tabId = sender.tab.id;
   const stats = tabStats.get(tabId);
 
+  // Stats might not be available on Firefox using webRequest.onBeforeRequest
+  // as some of the requests are fired before the tab is created, tabId -1
+  if (!stats) return;
+
   const newUrls = msg.urls.filter(
     (url) => !stats.trackers.some((t) => t.url === url),
   );
@@ -78,13 +82,35 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
+if (__PLATFORM__ === 'firefox') {
+  chrome.webRequest.onBeforeRequest.addListener(
+    (details) => {
+      if (details.type === 'main_frame') {
+        const { domain } = parse(details.url);
+        tabStats.set(details.tabId, {
+          domain,
+          trackers: [],
+          sourceUrl: details.url,
+        });
+      } else {
+        updateTabStats({ urls: [details.url] }, { tab: { id: details.tabId } });
+      }
+    },
+    { urls: ['<all_urls>'] },
+  );
+}
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getCurrentTabId') {
     sendResponse(sender.tab?.id);
     return false;
   }
 
-  if (sender.tab?.id && sender.frameId !== undefined) {
+  if (
+    __PLATFORM__ !== 'firefox' &&
+    sender.tab?.id &&
+    sender.frameId !== undefined
+  ) {
     // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
     // with the correct tabId (sometimes it is correct, sometimes it is 0).
     // Thus, let the content_script fire it.

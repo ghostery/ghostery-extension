@@ -20,5 +20,8 @@
   ],
   "overrides": {
     "ua-parser-js": "1.0.2"
+  },
+  "dependencies": {
+    "@cliqz/adblocker": "^1.26.0"
   }
 }

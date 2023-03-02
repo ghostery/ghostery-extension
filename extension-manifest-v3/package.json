@@ -4,10 +4,10 @@
   "version": "10.0.4",
   "type": "module",
   "scripts": {
-    "postinstall": "npm run download-cosmetics && npm run download-dnr-lists && npm run download-trackerdb",
+    "postinstall": "npm run download-rules && npm run download-dnr-lists && npm run download-trackerdb",
     "build": "node scripts/build.js",
     "start": "npm run build -- --watch",
-    "download-cosmetics": "node scripts/download-cosmetics.js",
+    "download-rules": "node scripts/download-rules.js",
     "download-dnr-lists": "node scripts/download-dnr-lists.js",
     "download-trackerdb": "node scripts/download-trackerdb.js",
     "lint": "eslint src/",
