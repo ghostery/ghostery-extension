@@ -43,14 +43,20 @@ export async function getMetadata(url, sourceUrl) {
   return {
     name: pattern.name,
     category: category.key,
-    company: {
-      id: organization.key,
-      name: organization.name,
-      description: organization.description,
-      website: organization.website_url,
-      contact: organization.privacy_contact,
-      privacyPolicy: organization.privacy_policy_url,
-    },
+    company: organization
+      ? {
+          id: pattern.key,
+          name: organization.name,
+          description: organization.description,
+          website: organization.website_url || pattern.website_url,
+          contact: organization.privacy_contact,
+          privacyPolicy: organization.privacy_policy_url,
+        }
+      : {
+          id: pattern.key,
+          name: pattern.name,
+          website: pattern.website_url,
+        },
     url,
   };
 }
