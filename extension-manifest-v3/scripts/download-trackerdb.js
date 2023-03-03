@@ -8,19 +8,39 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
 
-const response = await fetch(
-  'https://github.com/ghostery/trackerdb/releases/latest/download/trackerdb.engine',
-)
+const pkg = JSON.parse(
+  readFileSync(new URL('../../package-lock.json', import.meta.url)),
+);
 
-if (!response.ok) {
-  throw new Error(`Failed to load TrackerDB ${response.status}: ${response.statusText}`);
+const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version;
+
+const listResponse = await fetch(
+  'https://cdn.ghostery.com/adblocker/configs/trackerdbMv3/allowed-lists.json',
+);
+
+if (!listResponse.ok) {
+  throw new Error(`Failed to load TrackerDB list ${listResponse.status}: ${listResponse.statusText}`);
 }
 
-const trackerDB = await response.arrayBuffer();
+const list = await listResponse.json();
+
+const trackerDBEngine = Object.values(list.engines).find((e) =>
+  e.url.startsWith(
+    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
+  ),
+);
+
+const trackerDBResponse = await fetch(trackerDBEngine.url);
+
+if (!trackerDBResponse.ok) {
+  throw new Error(`Failed to load TrackerDB ${trackerDBResponse.status}: ${trackerDBResponse.statusText}`);
+}
+
+const trackerDB = await trackerDBResponse.arrayBuffer();
 
 writeFileSync(
   path.join('src', 'assets', 'trackerdb.engine.bytes'),
