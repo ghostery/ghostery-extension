@@ -13,6 +13,7 @@ import { FiltersEngine } from '@cliqz/adblocker';
 import {
   fromWebRequestDetails,
   filterRequestHTML,
+  updateResponseHeadersWithCSP,
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
@@ -314,7 +315,7 @@ if (__PLATFORM__ === 'firefox') {
           continue;
         }
 
-        if (request.isMainFrame()) {
+        if (details.type === 'main_frame') {
           const htmlFilters = engine.getHtmlFilters(request);
           if (htmlFilters.length !== 0) {
             filterRequestHTML(
@@ -340,10 +341,23 @@ if (__PLATFORM__ === 'firefox') {
     ['blocking'],
   );
 
-  // TODO: CSP injection
-  // chrome.webRequest.onHeadersReceived.addListener(
-  //   (details) => {},
-  //   { urls: ['<all_urls>'], types: ['main_frame'] },
-  //   ['blocking', 'responseHeaders'],
-  // );
+  chrome.webRequest.onHeadersReceived.addListener(
+    (details) => {
+      const request = fromWebRequestDetails(details);
+      if (pausedDomains.includes(request.domain)) {
+        return {};
+      }
+
+      const policies = adblockerEngines.reduce((acc, { engine, isEnabled }) => {
+        if (isEnabled && !acc) {
+          return engine.getCSPDirectives(request);
+        }
+        return acc;
+      }, undefined);
+
+      return updateResponseHeadersWithCSP(details, policies);
+    },
+    { urls: ['<all_urls>'], types: ['main_frame'] },
+    ['blocking', 'responseHeaders'],
+  );
 }
