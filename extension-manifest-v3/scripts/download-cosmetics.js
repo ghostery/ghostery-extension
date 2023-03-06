@@ -9,15 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { writeFileSync } from 'fs';
-import { readFile } from 'fs/promises';
 import fetch from 'node-fetch';
+
 import { ENGINE_VERSION } from '@cliqz/adblocker';
 
-const pkg = JSON.parse(
-  await readFile(new URL('../../package-lock.json', import.meta.url)),
-);
-
-const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version;
 const distPath = 'src/assets/adblocker_engines';
 
 // Ad rules
