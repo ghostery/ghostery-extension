@@ -26,7 +26,7 @@ const list = await listResponse.json();
 
 const trackerDBEngineUrl = list.engines[ENGINE_VERSION].url;
 
-const trackerDBResponse = await fetch(trackerDBEngine.url);
+const trackerDBResponse = await fetch(trackerDBEngineUrl);
 
 if (!trackerDBResponse.ok) {
   throw new Error(`Failed to load TrackerDB ${trackerDBResponse.status}: ${trackerDBResponse.statusText}`);

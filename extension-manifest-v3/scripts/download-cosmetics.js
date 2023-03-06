@@ -11,6 +11,7 @@
 import { writeFileSync } from 'fs';
 import { readFile } from 'fs/promises';
 import fetch from 'node-fetch';
+import { ENGINE_VERSION } from '@cliqz/adblocker';
 
 const pkg = JSON.parse(
   await readFile(new URL('../../package-lock.json', import.meta.url)),
@@ -25,14 +26,9 @@ const adList = await fetch(
 ).then((res) => res.json());
 
 // Ad Cosmetic rules
+const adCosmeticEngineUrl = adList.engines[ENGINE_VERSION].url;
 
-const adCosmeticEngine = Object.values(adList.engines).find((e) =>
-  e.url.startsWith(
-    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
-  ),
-);
-
-const adCosmeticRules = await fetch(adCosmeticEngine.url).then((res) =>
+const adCosmeticRules = await fetch(adCosmeticEngineUrl).then((res) =>
   res.arrayBuffer(),
 );
 writeFileSync(
@@ -47,14 +43,10 @@ const trackingList = await fetch(
 ).then((res) => res.json());
 
 // Tracking Consmetic rules
-const trackingConsmeticEngine = Object.values(trackingList.engines).find((e) =>
-  e.url.startsWith(
-    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
-  ),
-);
+const trackingConsmeticEngineUrl = trackingList.engines[ENGINE_VERSION].url;
 
 const trackingCosmeticRules = await (
-  await fetch(trackingConsmeticEngine.url)
+  await fetch(trackingConsmeticEngineUrl)
 ).arrayBuffer();
 writeFileSync(
   `${distPath}/dnr-tracking-cosmetics.engine.bytes`,
@@ -68,15 +60,9 @@ const annoyancesList = await fetch(
 ).then((res) => res.json());
 
 // Tracking Cosmetic rules
+const annoyancesCosmeticEngineUrl = annoyancesList.engines[ENGINE_VERSION].url;
 
-const annoyancesCosmeticEngine = Object.values(annoyancesList.engines).find(
-  (e) =>
-    e.url.startsWith(
-      `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
-    ),
-);
-
-const annoyancesCosmeticRules = await fetch(annoyancesCosmeticEngine.url).then(
+const annoyancesCosmeticRules = await fetch(annoyancesCosmeticEngineUrl).then(
   (res) => res.arrayBuffer(),
 );
 
