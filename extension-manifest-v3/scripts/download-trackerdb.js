@@ -12,11 +12,7 @@ import { writeFileSync, readFileSync } from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
 
-const pkg = JSON.parse(
-  readFileSync(new URL('../../package-lock.json', import.meta.url)),
-);
-
-const adblockerVersion = pkg.dependencies['@cliqz/adblocker'].version;
+import { ENGINE_VERSION } from '@cliqz/adblocker';
 
 const listResponse = await fetch(
   'https://cdn.ghostery.com/adblocker/configs/trackerdbMv3/allowed-lists.json',
@@ -28,11 +24,7 @@ if (!listResponse.ok) {
 
 const list = await listResponse.json();
 
-const trackerDBEngine = Object.values(list.engines).find((e) =>
-  e.url.startsWith(
-    `https://cdn.ghostery.com/adblocker/engines/${adblockerVersion}`,
-  ),
-);
+const trackerDBEngineUrl = list.engines[ENGINE_VERSION].url;
 
 const trackerDBResponse = await fetch(trackerDBEngine.url);
 
