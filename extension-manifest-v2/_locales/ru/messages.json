@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "Телеметрия"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "Без категории"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "Эти трекеры еще не были распределены по категориям."
-  },
-  "category_unknown": {
-    "message": "Неизвестный"
   },
   "cdn": {
     "message": "СДД",

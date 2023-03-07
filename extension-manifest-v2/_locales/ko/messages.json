@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "원격 측정"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "분류되지 않음 "
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "아직 분류되지 않은 트래커입니다."
-  },
-  "category_unknown": {
-    "message": "알 수 없음 "
   },
   "cdn": {
     "message": "CDN",

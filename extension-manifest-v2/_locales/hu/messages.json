@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "Telemetria"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "Nem kategorizált"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "Ezek a trackerek még nincsenek kategorizálva."
-  },
-  "category_unknown": {
-    "message": "Ismeretlen"
   },
   "cdn": {
     "message": "CDN",

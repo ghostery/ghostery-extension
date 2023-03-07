@@ -365,7 +365,7 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "Versuchen Sie dieses Feld in einem anderen Browser-Tab zu öffnen"
   },
-  "unknown": {
+  "unidentified": {
     "message": "Unbekannt",
     "description": "Tracker category name"
   },

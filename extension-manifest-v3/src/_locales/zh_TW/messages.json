@@ -365,7 +365,7 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "試著在不同的瀏覽器標籤上打開此面板"
   },
-  "unknown": {
+  "unidentified": {
     "message": "不明的",
     "description": "Tracker category name"
   },

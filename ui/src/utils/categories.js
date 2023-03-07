@@ -16,7 +16,7 @@ const colors = {
   essential: '#FC9734',
   hosting: '#8459A5',
   customer_interaction: '#EF671E',
-  unknown: '#E8E8E8',
+  unidentified: '#E8E8E8',
   audio_video_player: '#4ECB4E',
   cdn: '#4ECBA1',
   comments: '#4EA1CB',
@@ -35,7 +35,6 @@ export const order = [
   'essential',
   'hosting',
   'customer_interaction',
-  'unknown',
   'audio_video_player',
   'cdn',
   'comments',
@@ -45,10 +44,11 @@ export const order = [
   'pornvertising',
   'social_media',
   'telemetry',
+  'unidentified',
 ];
 
 export const getCategoryKey = (category) => {
-  return colors[category] ? category : 'unknown';
+  return colors[category] ? category : 'unidentified';
 };
 
 export const getCategoryColor = (category) => {

@@ -28,7 +28,7 @@ const Stats = {
       name: '',
       url: '',
       blocked: false,
-      category: 'unknown',
+      category: 'unidentified',
       company: Company,
     },
   ],

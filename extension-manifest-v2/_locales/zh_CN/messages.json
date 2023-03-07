@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "遥测"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "未分类"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "这些跟踪器尚未分类。"
-  },
-  "category_unknown": {
-    "message": "未知"
   },
   "cdn": {
     "message": "CDN",

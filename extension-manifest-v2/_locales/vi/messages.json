@@ -392,7 +392,7 @@
   "settings_abtests_tooltip": {
     "message": "Tham gia vào các bài kiểm tra A / B ngẫu nhiên giúp Ghostery hiểu được phiên bản của bố cục hoặc tính năng mới mà người dùng như bạn thích."
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "Các trình theo dõi này vẫn chưa được phân loại."
   },
   "file_was_not_selected": {
@@ -408,7 +408,7 @@
   "panel_detail_menu_history_title": {
     "message": "Môn lịch sử"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "Chưa được phân loại"
   },
   "settings_export_success": {
@@ -1122,9 +1122,6 @@
   },
   "panel_detail_menu_list_title": {
     "message": "Xem danh sách"
-  },
-  "category_unknown": {
-    "message": "không xác định"
   },
   "sign_in": {
     "message": "Đăng nhập"

@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "テレメトリー"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "未分類"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "これらのトラッカーはまだ分類されていません。"
-  },
-  "category_unknown": {
-    "message": "未知"
   },
   "cdn": {
     "message": "CDN",

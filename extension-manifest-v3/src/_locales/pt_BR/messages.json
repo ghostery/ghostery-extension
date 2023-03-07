@@ -365,7 +365,7 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "Tente abrir este painel em outra guia do navegador"
   },
-  "unknown": {
+  "unidentified": {
     "message": "Desconhecido",
     "description": "Tracker category name"
   },

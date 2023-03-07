@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "Telemetria"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "Bez kategorii"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "Te tropiciele nie posiadają jeszcze swojej kategorii."
-  },
-  "category_unknown": {
-    "message": "Nieznany"
   },
   "cdn": {
     "message": "CDN",
