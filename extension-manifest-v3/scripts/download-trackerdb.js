@@ -12,15 +12,27 @@ import { writeFileSync } from 'fs';
 import fetch from 'node-fetch';
 import path from 'path';
 
-const response = await fetch(
-  'https://github.com/ghostery/trackerdb/releases/latest/download/trackerdb.engine',
-)
+import { ENGINE_VERSION } from '@cliqz/adblocker';
 
-if (!response.ok) {
-  throw new Error(`Failed to load TrackerDB ${response.status}: ${response.statusText}`);
+const listResponse = await fetch(
+  'https://cdn.ghostery.com/adblocker/configs/trackerdbMv3/allowed-lists.json',
+);
+
+if (!listResponse.ok) {
+  throw new Error(`Failed to load TrackerDB list ${listResponse.status}: ${listResponse.statusText}`);
 }
 
-const trackerDB = await response.arrayBuffer();
+const list = await listResponse.json();
+
+const trackerDBEngineUrl = list.engines[ENGINE_VERSION].url;
+
+const trackerDBResponse = await fetch(trackerDBEngineUrl);
+
+if (!trackerDBResponse.ok) {
+  throw new Error(`Failed to load TrackerDB ${trackerDBResponse.status}: ${trackerDBResponse.statusText}`);
+}
+
+const trackerDB = await trackerDBResponse.arrayBuffer();
 
 writeFileSync(
   path.join('src', 'assets', 'trackerdb.engine.bytes'),
