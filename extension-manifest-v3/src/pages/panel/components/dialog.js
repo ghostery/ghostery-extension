@@ -52,7 +52,7 @@ export default {
           id="header"
           layout="grid:24px|1|24px items:center padding:1.5:2"
         >
-          <div layout="column items:center area:2">
+          <div layout="column items:center area:2/3">
             <slot name="header"></slot>
           </div>
           <ui-action>
