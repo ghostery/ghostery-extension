@@ -132,6 +132,11 @@ class BrowserButton {
 		let	trackerCount = '';
 		let alert = false;
 
+		if (!conf.setup_complete) {
+			this._setIcon(false, tabId, '!', true);
+			return;
+		}
+
 		// Get tracker count for badgeText
 		if (foundBugs.getBugs(tabId) === false) {
 			// if no cached bug discovery data then:

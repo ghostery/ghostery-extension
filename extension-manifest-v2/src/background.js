@@ -527,6 +527,7 @@ function onMessageHandler(request, sender, callback) {
 			globals.ONBOARDED_FEATURES.forEach((confName) => {
 				conf[confName] = true;
 			});
+			button.update();
 		}
 		if (name === 'setup_skip') {
 			conf.setup_skip = true;
