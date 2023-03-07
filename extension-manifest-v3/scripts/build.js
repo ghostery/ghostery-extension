@@ -79,6 +79,14 @@ options.assets.forEach((path) => {
   );
 });
 
+// copy adblocker engines
+const engineType = argv.target === 'firefox' ? 'full' : 'cosmetics';
+shelljs.cp(
+  '-r',
+  resolve(options.srcDir, 'adblocker_engines', engineType, '*'),
+  resolve(options.outDir, 'assets'),
+);
+
 // generate license file
 import('../../tools/licenses.js');
 

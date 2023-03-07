@@ -42,11 +42,7 @@ let adblockerStartupPromise = (async function () {
   await Promise.all(
     adblockerEngines.map(async (engine) => {
       const response = await fetch(
-        chrome.runtime.getURL(
-          `assets/adblocker_engines/dnr-${
-            __PLATFORM__ === 'firefox' ? '' : 'cosmetics-'
-          }${engine.name}.engine.bytes`,
-        ),
+        chrome.runtime.getURL(`assets/${engine.name}.engine.bytes`),
       );
       const engineBytes = await response.arrayBuffer();
       engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
@@ -306,8 +302,14 @@ if (__PLATFORM__ === 'firefox') {
     (details) => {
       const request = fromWebRequestDetails(details);
 
-      if (pausedDomains.includes(request.domain)) {
-        return {};
+      if (
+        pausedDomains.includes(
+          request.isMainFrame()
+            ? request.domain
+            : parse(details.documentUrl).domain,
+        )
+      ) {
+        return;
       }
 
       for (const { engine, isEnabled } of adblockerEngines) {
@@ -315,7 +317,7 @@ if (__PLATFORM__ === 'firefox') {
           continue;
         }
 
-        if (details.type === 'main_frame') {
+        if (request.isMainFrame()) {
           const htmlFilters = engine.getHtmlFilters(request);
           if (htmlFilters.length !== 0) {
             filterRequestHTML(
@@ -334,8 +336,6 @@ if (__PLATFORM__ === 'firefox') {
           }
         }
       }
-
-      return {};
     },
     { urls: ['<all_urls>'] },
     ['blocking'],
@@ -348,12 +348,15 @@ if (__PLATFORM__ === 'firefox') {
         return {};
       }
 
-      const policies = adblockerEngines.reduce((acc, { engine, isEnabled }) => {
-        if (isEnabled && !acc) {
-          return engine.getCSPDirectives(request);
+      let policies;
+      for (const { engine, isEnabled } of adblockerEngines) {
+        if (isEnabled) {
+          policies = engine.getCSPDirectives(request);
+          if (policies !== undefined) {
+            break;
+          }
         }
-        return acc;
-      }, undefined);
+      }
 
       return updateResponseHeadersWithCSP(details, policies);
     },

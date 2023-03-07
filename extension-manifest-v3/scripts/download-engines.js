@@ -11,28 +11,28 @@
 
 import { writeFileSync } from 'fs';
 import { readFile } from 'fs/promises';
+import { resolve } from 'path';
 import fetch from 'node-fetch';
 import shelljs from 'shelljs';
 
-const ENGINES = [
-  'dnr-ads',
-  'dnr-tracking',
-  'dnr-annoyances',
-  'dnr-cosmetics-ads',
-  'dnr-cosmetics-tracking',
-  'dnr-cosmetics-annoyances',
-];
+const ENGINES = {
+  'dnr-ads': 'full/ads',
+  'dnr-tracking': 'full/tracking',
+  'dnr-annoyances': 'full/annoyances',
+  'dnr-cosmetics-ads': 'cosmetics/ads',
+  'dnr-cosmetics-tracking': 'cosmetics/tracking',
+  'dnr-cosmetics-annoyances': 'cosmetics/annoyances',
+};
 
-const DIST_PATH = 'src/assets/adblocker_engines';
+const TARGET_PATH = resolve('src/adblocker_engines');
 
-shelljs.rm('-rf', DIST_PATH);
-shelljs.mkdir('-p', DIST_PATH);
+shelljs.rm('-rf', TARGET_PATH);
 
 const adblockerVersion = JSON.parse(
   await readFile(new URL('../../package-lock.json', import.meta.url)),
 ).dependencies['@cliqz/adblocker'].version;
 
-for (const name of ENGINES) {
+for (const [name, path] of Object.entries(ENGINES)) {
   console.log(`Downloading "${name}" for adblocker ${adblockerVersion}...`);
 
   const list = await fetch(
@@ -53,5 +53,6 @@ for (const name of ENGINES) {
 
   const rules = await fetch(engine.url).then((res) => res.arrayBuffer());
 
-  writeFileSync(`${DIST_PATH}/${name}.engine.bytes`, new Uint8Array(rules));
+  shelljs.mkdir('-p', `${TARGET_PATH}/${path.split('/')[0]}`);
+  writeFileSync(`${TARGET_PATH}/${path}.engine.bytes`, new Uint8Array(rules));
 }
