@@ -86,6 +86,10 @@ shelljs.cp(
   resolve(options.srcDir, 'adblocker_engines', engineType, '*'),
   resolve(options.outDir, 'assets'),
 );
+shelljs.cp(
+  resolve(options.srcDir, 'adblocker_engines', 'trackerdb.engine.bytes'),
+  resolve(options.outDir, 'assets'),
+);
 
 // generate license file
 import('../../tools/licenses.js');
