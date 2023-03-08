@@ -301,14 +301,11 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
       const request = fromWebRequestDetails(details);
+      const sourceDomain = request.isMainFrame()
+        ? request.domain
+        : parse(details.documentUrl).domain;
 
-      if (
-        pausedDomains.includes(
-          request.isMainFrame()
-            ? request.domain
-            : parse(details.documentUrl).domain,
-        )
-      ) {
+      if (pausedDomains.includes(sourceDomain)) {
         return;
       }
 
