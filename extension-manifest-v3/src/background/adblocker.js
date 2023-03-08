@@ -326,12 +326,14 @@ if (__PLATFORM__ === 'firefox') {
         _originalRequestDetails: details,
       });
 
-      // Update stats
-      if (isMainFrame) {
-        setupTabStats(details.tabId, parsedSourceUrl.domain);
-      } else {
-        updateTabStats(details.tabId, [request]);
-      }
+      // Update stats asynchronously
+      Promise.resolve().then(() => {
+        if (isMainFrame) {
+          setupTabStats(details.tabId, parsedSourceUrl.domain);
+        } else {
+          updateTabStats(details.tabId, [request]);
+        }
+      });
 
       if (pausedDomains.includes(parsedSourceUrl.domain)) {
         return;
