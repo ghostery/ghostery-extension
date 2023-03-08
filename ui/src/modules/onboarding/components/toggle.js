@@ -11,11 +11,9 @@
 
 import { define, html } from 'hybrids';
 
-function setupChecked(host, event) {
-  const slot = event.target;
-  const elements = slot.assignedNodes();
-  const input = elements.find((e) => e.nodeName === 'INPUT');
-  host.checked = input.checked;
+function setupChecked(host) {
+  const input = host.querySelector('input');
+  host.checked = input?.checked;
 }
 
 function updateChecked(host, event) {
@@ -24,7 +22,7 @@ function updateChecked(host, event) {
 
 export default define({
   tag: 'ui-onboarding-toggle',
-  checked: false,
+  checked: true,
   render: () => html`
     <div onchange=${updateChecked}>
       <slot onslotchange="${setupChecked}"></slot>
