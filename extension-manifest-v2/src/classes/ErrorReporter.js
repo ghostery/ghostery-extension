@@ -29,10 +29,10 @@ globals.BROWSER_INFO_READY.then(() => {
 
 export default {
 	captureException(error) {
-		if (error.stack) {
-			// eslint-disable-next-line no-param-reassign
-			error.stack = error.stack.replace(hostRegexp, 'filtered');
-		}
-		Sentry.captureException(error);
+		const newError = new Error(error.message);
+		newError.name = error.name;
+		newError.cause = error.cause;
+		newError.error = error.stack.replace(hostRegexp, 'filtered');
+		Sentry.captureException(newError);
 	},
 };
