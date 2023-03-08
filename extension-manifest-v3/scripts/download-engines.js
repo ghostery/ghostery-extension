@@ -35,7 +35,15 @@ for (const [name, path] of Object.entries(ENGINES)) {
 
   const list = await fetch(
     `https://cdn.ghostery.com/adblocker/configs/${name}/allowed-lists.json`,
-  ).then((res) => res.json());
+  ).then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to download allowed list for "${name}": ${res.status}: ${res.statusText}`,
+      );
+    }
+
+    return res.json();
+  });
 
   const engine = list.engines[ENGINE_VERSION];
 
@@ -45,7 +53,15 @@ for (const [name, path] of Object.entries(ENGINES)) {
     );
   }
 
-  const rules = await fetch(engine.url).then((res) => res.arrayBuffer());
+  const rules = await fetch(engine.url).then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch engine "${name}": ${res.status}: ${res.statusText}`,
+      );
+    }
+
+    return res.arrayBuffer();
+  });
 
   if (path.includes('/')) {
     shelljs.mkdir('-p', `${TARGET_PATH}/${path.split('/')[0]}`);
