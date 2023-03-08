@@ -1564,6 +1564,7 @@ async function initializeAccount() {
 	let lastStep = 'start';
 	const timeout = setTimeout(() => {
 		const error = new Error(`account init timeout after step: ${lastStep}`);
+		error.name = 'AccountTimeoutError';
 		ErrorReporter.captureException(error);
 		alwaysLog(error);
 	}, 5000);
@@ -1605,6 +1606,7 @@ async function initializeAccount() {
 		}
 	} catch (e) {
 		ErrorReporter.captureException(e);
+		e.name = 'AccountError';
 		alwaysLog(e);
 	} finally {
 		clearTimeout(timeout);
@@ -1638,10 +1640,11 @@ async function recordUTMs() {
 async function init() {
 	let lastStep = 'start';
 	const timeout = setTimeout(() => {
-		const error = new Error(`init timeout after step: ${lastStep}`);
+		const error = new Error(lastStep);
+		error.name = 'InitTimeoutError';
 		ErrorReporter.captureException(error);
 		alwaysLog(error);
-	}, 5000);
+	}, 20000);
 
 	try {
 		await confData.init();
@@ -1684,6 +1687,7 @@ async function init() {
 
 		globals.INIT_COMPLETE = true;
 	} catch (err) {
+		err.name = 'InitError';
 		ErrorReporter.captureException(err);
 		alwaysLog('Error in init()', err);
 

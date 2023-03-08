@@ -33,6 +33,10 @@ export default {
 		newError.name = error.name;
 		newError.cause = error.cause;
 		newError.error = error.stack.replace(hostRegexp, 'filtered');
-		Sentry.captureException(newError);
+		Sentry.captureException(newError, {
+			tags: {
+				INIT_COMPLETE: globals.INIT_COMPLETE,
+			},
+		});
 	},
 };
