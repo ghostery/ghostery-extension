@@ -18,6 +18,7 @@ import {
 import { parse } from 'tldts-experimental';
 
 import Options, { observe } from '/store/options.js';
+import { setupTabStats, updateTabStats } from './tab-stats';
 
 const DEBUG_SCRIPLETS = false;
 
@@ -305,6 +306,13 @@ if (__PLATFORM__ === 'firefox') {
         ? request.domain
         : parse(details.documentUrl).domain;
 
+      // Update stats
+      if (request.isMainFrame()) {
+        setupTabStats(details.tabId, details.url, sourceDomain);
+      } else {
+        updateTabStats(details.tabId, [details.url]);
+      }
+
       if (pausedDomains.includes(sourceDomain)) {
         return;
       }
@@ -322,6 +330,7 @@ if (__PLATFORM__ === 'firefox') {
               request,
               htmlFilters,
             );
+            return;
           }
         } else {
           const { redirect, match } = engine.match(request);

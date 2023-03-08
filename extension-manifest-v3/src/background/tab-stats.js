@@ -51,15 +51,14 @@ const setIcon = throttle(async (tabId, stats) => {
   }
 }, 250);
 
-async function updateTabStats(msg, sender) {
-  const tabId = sender.tab.id;
+export async function updateTabStats(tabId, urls) {
   const stats = tabStats.get(tabId);
 
   // Stats might not be available on Firefox using webRequest.onBeforeRequest
   // as some of the requests are fired before the tab is created, tabId -1
   if (!stats) return;
 
-  const newUrls = msg.urls.filter(
+  const newUrls = urls.filter(
     (url) => !stats.trackers.some((t) => t.url === url),
   );
 
@@ -78,27 +77,22 @@ async function updateTabStats(msg, sender) {
   setIcon(tabId, stats);
 }
 
+export function setupTabStats(tabId, url, domain) {
+  if (domain) {
+    tabStats.set(tabId, {
+      domain,
+      trackers: [],
+      sourceUrl: url,
+    });
+
+    // Clean up throttled icon update
+    setIcon.cancel();
+  }
+}
+
 chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
-
-if (__PLATFORM__ === 'firefox') {
-  chrome.webRequest.onBeforeRequest.addListener(
-    (details) => {
-      if (details.type === 'main_frame') {
-        const { domain } = parse(details.url);
-        tabStats.set(details.tabId, {
-          domain,
-          trackers: [],
-          sourceUrl: details.url,
-        });
-      } else {
-        updateTabStats({ urls: [details.url] }, { tab: { id: details.tabId } });
-      }
-    },
-    { urls: ['<all_urls>'] },
-  );
-}
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getCurrentTabId') {
@@ -115,24 +109,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     // with the correct tabId (sometimes it is correct, sometimes it is 0).
     // Thus, let the content_script fire it.
     if (sender.url && msg.action === 'onCommitted') {
-      const { domain } = parse(sender.url);
-
-      if (domain) {
-        tabStats.set(sender.tab.id, {
-          domain,
-          trackers: [],
-          sourceUrl: sender.url,
-        });
-
-        // Clean up throttled icon update
-        setIcon.cancel();
-      }
-
+      setupTabStats(sender.tab.id, sender.url, parse(sender.url).domain);
       return false;
     }
 
     if (msg.action === 'updateTabStats') {
-      return updateTabStats(msg, sender);
+      return updateTabStats(sender.tab.id, msg.urls);
     }
   }
 
