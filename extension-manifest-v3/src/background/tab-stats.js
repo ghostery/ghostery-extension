@@ -17,6 +17,7 @@ import { order } from '@ghostery/ui/categories';
 import { getMetadata } from './utils/trackerdb.js';
 import Options from '/store/options.js';
 import tabStats from './utils/map.js';
+import { Request } from '@cliqz/adblocker';
 
 const action = chrome.browserAction || chrome.action;
 action.setBadgeBackgroundColor({ color: '#3f4146' /* gray-600 */ });
@@ -51,19 +52,21 @@ const setIcon = throttle(async (tabId, stats) => {
   }
 }, 250);
 
-export async function updateTabStats(tabId, urls) {
+export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);
 
   // Stats might not be available on Firefox using webRequest.onBeforeRequest
   // as some of the requests are fired before the tab is created, tabId -1
   if (!stats) return;
 
-  const newUrls = urls.filter(
-    (url) => !stats.trackers.some((t) => t.url === url),
+  const filtered = requests.filter(
+    ({ url }) => !stats.trackers.some((t) => t.url === url),
   );
 
-  for (const url of newUrls) {
-    const pattern = await getMetadata(url, stats.sourceUrl);
+  if (!filtered.length) return;
+
+  for (const request of filtered) {
+    const pattern = await getMetadata(request);
     if (pattern) {
       stats.trackers.push(pattern);
     }
@@ -77,12 +80,11 @@ export async function updateTabStats(tabId, urls) {
   setIcon(tabId, stats);
 }
 
-export function setupTabStats(tabId, url, domain) {
+export function setupTabStats(tabId, domain) {
   if (domain) {
     tabStats.set(tabId, {
       domain,
       trackers: [],
-      sourceUrl: url,
     });
 
     // Clean up throttled icon update
@@ -109,12 +111,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     // with the correct tabId (sometimes it is correct, sometimes it is 0).
     // Thus, let the content_script fire it.
     if (sender.url && msg.action === 'onCommitted') {
-      setupTabStats(sender.tab.id, sender.url, parse(sender.url).domain);
+      setupTabStats(sender.tab.id, parse(sender.url).domain);
       return false;
     }
 
     if (msg.action === 'updateTabStats') {
-      return updateTabStats(sender.tab.id, msg.urls);
+      return updateTabStats(
+        sender.tab.id,
+        msg.urls.map((url) =>
+          Request.fromRawDetails({ url, sourceUrl: sender.url }),
+        ),
+      );
     }
   }
 

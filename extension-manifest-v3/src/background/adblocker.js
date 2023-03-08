@@ -328,9 +328,9 @@ if (__PLATFORM__ === 'firefox') {
 
       // Update stats
       if (isMainFrame) {
-        setupTabStats(details.tabId, details.url, parsedSourceUrl.domain);
+        setupTabStats(details.tabId, parsedSourceUrl.domain);
       } else {
-        updateTabStats(details.tabId, [details.url]);
+        updateTabStats(details.tabId, [request]);
       }
 
       if (pausedDomains.includes(parsedSourceUrl.domain)) {
