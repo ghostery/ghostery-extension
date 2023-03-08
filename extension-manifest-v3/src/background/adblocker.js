@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FiltersEngine } from '@cliqz/adblocker';
+import { FiltersEngine, Request } from '@cliqz/adblocker';
 import {
   fromWebRequestDetails,
   filterRequestHTML,
@@ -301,19 +301,39 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      const request = fromWebRequestDetails(details);
-      const sourceDomain = request.isMainFrame()
-        ? request.domain
-        : parse(details.documentUrl).domain;
+      const isMainFrame = details.type === 'main_frame';
+      const sourceUrl = isMainFrame
+        ? details.url
+        : details.originUrl || details.documentUrl;
+
+      const parsedUrl = parse(details.url);
+      const parsedSourceUrl = isMainFrame ? parsedUrl : parse(sourceUrl);
+
+      const request = new Request({
+        requestId: details.requestId,
+        tabId: details.tabId,
+
+        domain: parsedUrl.domain,
+        hostname: parsedUrl.hostname,
+        url: details.url.toLowerCase(),
+
+        sourceDomain: parsedSourceUrl.domain,
+        sourceHostname: parsedSourceUrl.hostname,
+        sourceUrl: sourceUrl.toLowerCase(),
+
+        type: details.type,
+
+        _originalRequestDetails: details,
+      });
 
       // Update stats
-      if (request.isMainFrame()) {
-        setupTabStats(details.tabId, details.url, sourceDomain);
+      if (isMainFrame) {
+        setupTabStats(details.tabId, details.url, parsedSourceUrl.domain);
       } else {
         updateTabStats(details.tabId, [details.url]);
       }
 
-      if (pausedDomains.includes(sourceDomain)) {
+      if (pausedDomains.includes(parsedSourceUrl.domain)) {
         return;
       }
 
@@ -322,7 +342,7 @@ if (__PLATFORM__ === 'firefox') {
           continue;
         }
 
-        if (request.isMainFrame()) {
+        if (isMainFrame) {
           const htmlFilters = engine.getHtmlFilters(request);
           if (htmlFilters.length !== 0) {
             filterRequestHTML(
