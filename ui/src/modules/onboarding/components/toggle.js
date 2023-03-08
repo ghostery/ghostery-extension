@@ -14,8 +14,8 @@ import { define, html } from 'hybrids';
 function setupChecked(host, event) {
   const slot = event.target;
   const elements = slot.assignedNodes();
-
-  host.checked = elements[0].checked;
+  const input = elements.find((e) => e.nodeName === 'INPUT');
+  host.checked = input.checked;
 }
 
 function updateChecked(host, event) {

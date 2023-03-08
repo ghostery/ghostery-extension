@@ -17,8 +17,8 @@ import Skip from './skip.js';
 import OutroSuccess from './outro-success.js';
 
 const Form = {
-  protection: false,
-  terms: store.value(false, (val, _, { protection }) => val || !protection),
+  protection: true,
+  terms: store.value(true, (val, _, { protection }) => val || !protection),
 };
 
 export async function submit(host, event) {
@@ -120,53 +120,45 @@ export default define({
             </ui-onboarding-protection>
           </div>
         </ui-card>
-        ${form.protection
-          ? html`
-              <ui-card type="narrow" id="terms-card">
-                <div layout="column gap:3">
-                  <label layout="grid:min|1:min|min gap:2:0.5 items:start">
-                    <ui-onboarding-checkbox layout="area::2">
-                      <input
-                        type="checkbox"
-                        checked="${form.terms}"
-                        onchange="${html.set(form, 'terms')}"
-                      />
-                    </ui-onboarding-checkbox>
+        <ui-card type="narrow" id="terms-card">
+          <div layout="column gap:3">
+            <label layout="grid:min|1:min|min gap:2:0.5 items:start">
+              <ui-onboarding-checkbox layout="area::2">
+                <input
+                  type="checkbox"
+                  checked="${form.terms}"
+                  onchange="${html.set(form, 'terms')}"
+                />
+              </ui-onboarding-checkbox>
 
-                    <ui-text type="display-s">Accept terms</ui-text>
+              <ui-text type="display-s">Accept terms</ui-text>
 
-                    <ui-text>
-                      <ui-onboarding-terms>
-                        ${msg.html`I agree to send non-personal information to <a href="${router.url(
-                          Whotracksme,
-                        )}">Ghostery’s WhoTracks.Me</a>, and I accept the <a href="${router.url(
-                          Privacy,
-                        )}">Ghostery Privacy Policy</a>`}
-                      </ui-onboarding-terms>
-                    </ui-text>
-                  </label>
-                  ${form.terms &&
-                  html`
-                    <ui-button layout@768px="self:end">
-                      <button type="submit">
-                        <ui-icon name="ghosty"></ui-icon>
-                        Done! Go with Ghosty!
-                      </button>
-                    </ui-button>
-                  `}
-                </div>
-              </ui-card>
-            `
-          : html`
-              <ui-card
-                type="transparent"
-                layout="grow row items:end content:end"
-              >
-                <ui-button type="outline">
-                  <a href="${router.url(Skip)}">Skip</a>
-                </ui-button>
-              </ui-card>
+              <ui-text>
+                <ui-onboarding-terms>
+                  ${msg.html`I agree to send non-personal information to <a href="${router.url(
+                    Whotracksme,
+                  )}">Ghostery’s WhoTracks.Me</a>, and I accept the <a href="${router.url(
+                    Privacy,
+                  )}">Ghostery Privacy Policy</a>`}
+                </ui-onboarding-terms>
+              </ui-text>
+            </label>
+            ${form.terms &&
+            html`
+              <ui-button layout@768px="self:end">
+                <button type="submit">
+                  <ui-icon name="ghosty"></ui-icon>
+                  Done! Go with Ghosty!
+                </button>
+              </ui-button>
             `}
+          </div>
+        </ui-card>
+        <ui-card type="transparent" layout="grow row items:end content:end">
+          <ui-button type="outline">
+            <a href="${router.url(Skip)}">Skip</a>
+          </ui-button>
+        </ui-card>
       </form>
     </template>
   `,
