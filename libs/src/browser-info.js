@@ -40,13 +40,18 @@ const getOS = () => {
     return 'mac';
   } else if (platform.includes('win')) {
     return 'win';
-  } else if (platform.includes('linux')) {
-    return 'linux';
   } else if (platform.includes('android')) {
     return 'android';
   } else if (platform.includes('ios')) {
     return 'ios';
+  } else if (platform.includes('chromium os')) {
+    return 'cros';
+  } else if (platform.includes('bsd')) {
+    return 'openbsd';
+  } else if (platform.includes('linux')) {
+    return 'linux';
   }
+  return 'other';
 };
 
 const getBrowser = () => {
