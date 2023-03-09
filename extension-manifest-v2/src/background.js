@@ -18,6 +18,7 @@ import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 import { getBrowserInfo } from '@ghostery/libs';
+import browser from 'webextension-polyfill';
 
 import common, {
 	syncTrustedSites, setAdblockerState, setAntitrackingState, setWhotracksmeState, addMigration
@@ -123,11 +124,7 @@ function updateDBs() {
 	}));
 }
 
-function tryOpenOnboarding() {
-	if (globals.JUST_UPGRADED) {
-		conf.setup_complete = true;
-	}
-
+async function tryOpenOnboarding() {
 	if (conf.setup_complete || conf.setup_skip) {
 		return;
 	}
@@ -135,10 +132,22 @@ function tryOpenOnboarding() {
 	const now = Date.now();
 	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > ONE_DAY_MSEC)) {
 		conf.setup_timestamp = now;
-		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/onboarding.html'),
-			active: true
-		});
+
+		const onboardingURL = chrome.runtime.getURL('./app/templates/onboarding.html');
+		const onboardingTabs = await browser.tabs.query({ url: onboardingURL });
+
+		if (onboardingTabs.length > 0) {
+			const firstTab = onboardingTabs.shift();
+			chrome.tabs.update(firstTab.id, {
+				active: true,
+			});
+			chrome.tabs.discard(onboardingTabs.map(t => t.id));
+		} else {
+			chrome.tabs.create({
+				url: onboardingURL,
+				active: true
+			});
+		}
 	}
 }
 
@@ -1330,11 +1339,10 @@ function initializeVersioning() {
 			conf.previous_version = globals.EXTENSION_VERSION;
 
 			// Establish version history
-			const { version_history } = conf;
+			const { version_history = [] } = conf;
 			version_history.push(globals.EXTENSION_VERSION);
-			conf.version_history = version_history;
+			conf.version_history = version_history.sort(utils.semverCompare);
 
-			const versions = [...version_history].sort(utils.semverCompare);
 			const prevVersion = PREVIOUS_EXTENSION_VERSION.split('.');
 			const currentVersion = globals.EXTENSION_VERSION.split('.');
 
@@ -1352,15 +1360,25 @@ function initializeVersioning() {
 			}
 
 			// Check if the earliest version is < 8.4.2
-			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
+			if (utils.semverCompare(conf.version_history[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
 			}
 
-			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') < 0) {
+			// Check if the earliest version is < 8.9.0
+			if (utils.semverCompare(conf.version_history[0], '8.9.0') === -1) {
+				conf.setup_complete = true;
+			} else if (conf.setup_complete && !conf.setup_skip && !conf.enable_human_web) {
+				// bug fix for setting setup_complete on all upgrades
+				// forces onboarding to be shown
+				alwaysLog('Reverting setup_complete for bugged installations');
+				conf.setup_complete = false;
+			}
+
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.0') === -1) {
 				conf.enable_autoconsent = true;
 			}
 
-			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.4') < 0) {
+			if (utils.semverCompare(PREVIOUS_EXTENSION_VERSION, '8.9.4') === -1) {
 				addMigration((app) => {
 					alwaysLog('ONE-TIME MIGRATION: removing "developer" flag if present');
 					app.prefs.clear('developer');
@@ -1489,8 +1507,7 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		commonStartup(),
 	])
-		.then(() => scheduledTasks())
-		.then(() => tryOpenOnboarding());
+		.then(() => scheduledTasks());
 }
 
 /**
@@ -1687,6 +1704,9 @@ async function init() {
 		lastStep = 'prefsSet';
 
 		globals.INIT_COMPLETE = true;
+
+		// ensure onboarding is show to fully functional extension only
+		await tryOpenOnboarding();
 	} catch (err) {
 		err.name = 'InitError';
 		ErrorReporter.captureException(err);
