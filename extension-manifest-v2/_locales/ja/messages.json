@@ -39,11 +39,11 @@
   },
   "adult_advertising": {
     "message": "アダルト広告",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "advertising": {
     "message": "広告",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "alert_ad_block_off": {
     "message": "広告ブロッキングがオフになりました。広告はブロックされません。"
@@ -147,12 +147,15 @@
   "are_you_sure_": {
     "message": "本当に行いますか？"
   },
+  "are_you_sure_you_want_to_disable_trackers_preview_": {
+    "message": "Trackers Previewを無効にしてもよいですか？"
+  },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "本当にGhosteryを有効にしなくてもいいのですか？"
   },
   "audio_video_player": {
     "message": "オーディオ/ビデオ・プレーヤー",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "back": {
     "message": "戻る"
@@ -547,7 +550,7 @@
   },
   "cdn": {
     "message": "CDN",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
     "message": "<a href=\"$${0}\" target=\"_blank\">FAQs</a> を確認するか、<a href=\"mailto:$${1}\">$${2}</a>までお問い合わせください。 <br/> ぜひ、ご相談ください。"
@@ -629,7 +632,7 @@
   },
   "comments": {
     "message": "コメント",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "confirm_email_colon": {
     "message": "メールを確認："
@@ -639,7 +642,7 @@
   },
   "consent_management": {
     "message": "同意の管理",
-    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+    "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "continue": {
     "message": "継続"
@@ -675,13 +678,16 @@
   },
   "customer_interaction": {
     "message": "顧客インタラクション",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "customize_setup": {
     "message": "カスタマイズ設定"
   },
   "detailed_view": {
     "message": "詳細ビュー"
+  },
+  "disable": {
+    "message": "無効化"
   },
   "disable_trackers_preview": {
     "message": "トラッカーの無効化プレビュー"
@@ -700,7 +706,7 @@
   },
   "email": {
     "message": "メール",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "email_address_in_use": {
     "message": "そのメールアドレスは既に使用されています。別のメールアドレスを選択してください。 "
@@ -743,14 +749,14 @@
   },
   "essential": {
     "message": "必需",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "expand_all": {
     "message": "すべてを展開"
   },
   "extensions": {
     "message": "拡張機能",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "file_was_not_selected": {
     "message": "ファイルが選択されていません"
@@ -797,6 +803,9 @@
   "ghostery_privacy_policy": {
     "message": "Ghosteryプライバシー・ポリシー"
   },
+  "ghostery_settings": {
+    "message": "Ghostery 設定"
+  },
   "global_settings_saved": {
     "message": "グローバル設定が保存されました"
   },
@@ -817,7 +826,7 @@
   },
   "hosting": {
     "message": "ホスティング",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
     "message": "<a href=\"$${0}\">Ghostery’s WhoTracks.Me</a>に個人情報以外の情報を送信することに同意し、<a href=\"$${1}\">GhosteryのPrivacy Policy</a><a href=\"$${0}\">WhoTracks.Me</a> を承諾します。"
@@ -876,9 +885,12 @@
   "license_url": {
     "message": "URL"
   },
+  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
+    "message": "すべての事業者がトラッカーではないこと、すなわち、すべての事業者が個人情報を収集するわけではないことにご留意ください。"
+  },
   "miscellaneous": {
     "message": "さまざまな",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "$${0}の方法論の詳細については、Ghostery's Manifestoに記載されています。"
@@ -913,6 +925,9 @@
   },
   "no_thanks_continue_with_basic": {
     "message": "いいえ、ベーシックプランで継続する"
+  },
+  "no_trackers_detected": {
+    "message": "トラッカーは検出されませんでした"
   },
   "none": {
     "description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -1613,7 +1628,7 @@
   },
   "site_analytics": {
     "message": "サイト分析",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "skip": {
     "message": "スキップ"
@@ -1623,7 +1638,7 @@
   },
   "social_media": {
     "message": "ソーシャル・メディア",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "spring_is_here": {
     "message": "春がやって来ました！"
@@ -1662,6 +1677,9 @@
   },
   "subscription_expired": {
     "message": "アカウントの有効期限切れ"
+  },
+  "subscription_for_contributors": {
+    "message": "Contributorに向け"
   },
   "subscription_inactive": {
     "message": "非アクティブ"
@@ -1707,9 +1725,6 @@
   },
   "subscription_upgrade_to": {
     "message": "Contributorになる"
-  },
-  "subscription_for_contributors": {
-    "message": "Contributorに向け"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",
@@ -1770,6 +1785,10 @@
   },
   "system_wide_tracker_and_ad_blocking": {
     "message": "システム全体を対象としたトラッカーと広告ブロッキング"
+  },
+  "telemetry": {
+    "message": "テレメトリー",
+    "description": "Tracker category name"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "Ghostery Browser Extensionはブラウザにインストールされていますが、Ghostyは休止中です。"
@@ -1845,7 +1864,7 @@
   },
   "unknown": {
     "message": "未知",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "welcome_to_ghostery": {
     "message": "Ghosteryをご利用いただきありがとうございます"
@@ -1866,6 +1885,9 @@
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghosteryが運営するWhoTracks.Meは、GhosteryのAIアンチトラッキング技術に統合されている要素です。 トラッカーに関する最も包括的なグローバルリソースで、Webトラッキングに透明性をもたらしています。"
   },
+  "whotracks_me_statistical_report": {
+    "message": "WhoTracks.Me統計レポート"
+  },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Ghosteryを有効にすると、より安全に、より速く、そして迷惑な広告をより減らす形で、ウェブを瞬時にブラウズすることができます。"
   },
@@ -1883,6 +1905,9 @@
   },
   "you_re_all_set__ghosterian_": {
     "message": "Ghosteryの仲間として、これで大丈夫です!"
+  },
+  "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
+    "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
   },
   "your_email_do_not_match": {
     "message": "お客様のメールアドレスは一致しません。"

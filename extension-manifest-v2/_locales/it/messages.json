@@ -39,11 +39,11 @@
   },
   "adult_advertising": {
     "message": "Pubblicità per Adulti",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "advertising": {
     "message": "Pubblicità",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "alert_ad_block_off": {
     "message": "Blocca Pubblicità DISATTIVATO. Le pubblicità non verranno bloccate."
@@ -147,12 +147,15 @@
   "are_you_sure_": {
     "message": "Sei sicuro?"
   },
+  "are_you_sure_you_want_to_disable_trackers_preview_": {
+    "message": "Disattivare l'anteprima dei tracker?"
+  },
   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
     "message": "Sicuro di non voler abilitare Ghostery?"
   },
   "audio_video_player": {
     "message": "Lettore Audio/Video",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "back": {
     "message": "Indietro"
@@ -547,7 +550,7 @@
   },
   "cdn": {
     "message": "CDN",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
     "message": "Consulta le FAQ di <a href=\"$${0}\" target=\"_blank\"> </a> o scrivici a <a href=\"mailto:$${1}\"> $${2} </a>.  <br/>  Saremo più che felici di parlare con te!"
@@ -629,7 +632,7 @@
   },
   "comments": {
     "message": "Commenti",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "confirm_email_colon": {
     "message": "Conferma Email:"
@@ -639,7 +642,7 @@
   },
   "consent_management": {
     "message": "Gestione del consenso",
-    "description": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity."
+    "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "continue": {
     "message": "Continua"
@@ -675,13 +678,16 @@
   },
   "customer_interaction": {
     "message": "Interazione Cliente",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "customize_setup": {
     "message": "Personalizza Configurazione"
   },
   "detailed_view": {
     "message": "Vista Dettagliata"
+  },
+  "disable": {
+    "message": "Disattiva"
   },
   "disable_trackers_preview": {
     "message": "Disattiva anteprima Tracker"
@@ -700,7 +706,7 @@
   },
   "email": {
     "message": "Email",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "email_address_in_use": {
     "message": "Indirizzo e-mail già in uso. Sceglierne un altro."
@@ -736,21 +742,21 @@
     "message": "Anti-Tracking"
   },
   "enhanced_autoconsent": {
-    "message": "Never-Cosent"
+    "message": "Never-Consent"
   },
   "error_email_forgot": {
     "message": "Hmm, non riesco a trovare quell'email. Puoi provarne un'altra?"
   },
   "essential": {
     "message": "Essenziali",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "expand_all": {
     "message": "Espandi Tutto"
   },
   "extensions": {
     "message": "Estensioni",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "file_was_not_selected": {
     "message": "Il file non è stato selezionato"
@@ -797,6 +803,9 @@
   "ghostery_privacy_policy": {
     "message": "Informativa sulla Privacy di Ghostery"
   },
+  "ghostery_settings": {
+    "message": "Impostazioni Ghostery"
+  },
   "global_settings_saved": {
     "message": "Impostazioni Globali Salvate"
   },
@@ -817,7 +826,7 @@
   },
   "hosting": {
     "message": "Hosting",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
     "message": "Accetto di inviare informazioni non personali a <a href=\"$${0}\"> WhoTracks.Me di Ghostery </a>, e accetto l'Informativa sulla trattamento dei dati personali di <a href=\"$${1}\"> Ghostery </a> "
@@ -876,9 +885,12 @@
   "license_url": {
     "message": "Url"
   },
+  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
+    "message": "Si tenga presente che non tutte le entità elencate sono tracker, cioè non tutte raccolgono dati personali"
+  },
   "miscellaneous": {
     "message": "Varie",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "Maggiori informazioni sulla metodologia $${0} nel Manifesto di Ghostery."
@@ -888,13 +900,13 @@
     "message": "Ghostery – Ad Blocker per la Privacy"
   },
   "never_consent": {
-    "message": "Never-Cosent"
+    "message": "Never-Consent"
   },
   "never_consent_is_disabled": {
-    "message": "Never-Cosent è disabilitato"
+    "message": "Never-Consent è disabilitato"
   },
   "never_consent_is_enabled": {
-    "message": "Never-Cosent è abilitato"
+    "message": "Never-Consent è abilitato"
   },
   "new_themes": {
     "message": "Nuovi temi"
@@ -913,6 +925,9 @@
   },
   "no_thanks_continue_with_basic": {
     "message": "No, grazie. Continuo con la versione base"
+  },
+  "no_trackers_detected": {
+    "message": "Nessun tracker rilevato"
   },
   "none": {
     "description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -1613,7 +1628,7 @@
   },
   "site_analytics": {
     "message": "Analisi dei siti",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "skip": {
     "message": "Salta"
@@ -1623,7 +1638,7 @@
   },
   "social_media": {
     "message": "Social Media",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "spring_is_here": {
     "message": "La primavera è arrivata!"
@@ -1662,6 +1677,9 @@
   },
   "subscription_expired": {
     "message": "Account scaduto"
+  },
+  "subscription_for_contributors": {
+    "message": "Per i collaboratori"
   },
   "subscription_inactive": {
     "message": "Inattivo"
@@ -1707,9 +1725,6 @@
   },
   "subscription_upgrade_to": {
     "message": "Diventa un collaboratore"
-  },
-  "subscription_for_contributors": {
-    "message": "Per i collaboratori"
   },
   "summary_alert": {
     "description": "as in '1 ALERT'",
@@ -1770,6 +1785,10 @@
   },
   "system_wide_tracker_and_ad_blocking": {
     "message": "Tracker e bocco delle pubblicità per tutto il sistema"
+  },
+  "telemetry": {
+    "message": "Telemetria",
+    "description": "Tracker category name"
   },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "L'estensione per il browser Ghostery è installata, ma Ghosty sta facendo un sonnellino."
@@ -1845,7 +1864,7 @@
   },
   "unknown": {
     "message": "Sconosciuto",
-    "description": "Ghostery organizes tags by category. This is one of several tag categories."
+    "description": "Tracker category name"
   },
   "welcome_to_ghostery": {
     "message": "Benvenuto in Ghostery"
@@ -1866,6 +1885,9 @@
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, gestito da Ghostery, è parte integrante della tecnologia anti-tracciamento AI di Ghostery. Si tratta di una risorsa globale completa sui tracker, che porta trasparenza al tracciamento sul web."
   },
+  "whotracks_me_statistical_report": {
+    "message": "Rapporto statistico WhoTracks.Me"
+  },
   "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
     "message": "Con Ghostery attivato navighi sul web in modo più sicuro, più veloce e con meno annunci fastidiosi."
   },
@@ -1883,6 +1905,9 @@
   },
   "you_re_all_set__ghosterian_": {
     "message": "Tutto pronto, Ghosterian!"
+  },
+  "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
+    "message": "Non vedrai più le ruote del tracker vicino ai risultati della ricerca."
   },
   "your_email_do_not_match": {
     "message": "I tuo indirizzi email non coincidono."
