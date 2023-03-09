@@ -41,7 +41,7 @@ export default define({
     observe(host, value) {
       if (value) {
         requestAnimationFrame(() => {
-          value.scrollIntoView({ behavior: 'smooth' });
+          value.scrollIntoView({ behavior: 'smooth', block: 'end' });
         });
       }
     },
