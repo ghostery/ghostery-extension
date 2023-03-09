@@ -28,6 +28,7 @@ if (!navigator.userAgent.includes('Firefox')) {
 }
 
 const DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
+const HAS_WASM = typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function';
 const IS_ANDROID = getBrowserInfo.isAndroid();
 
 COMMON.config.baseURL = '/common/';
@@ -84,10 +85,10 @@ common.load = async () => {
 
 	setPref('modules.anolysis.enabled', false);
 
-	if (!IS_ANDROID) {
+	if (!IS_ANDROID && HAS_WASM) {
 		setPref('modules.human-web.enabled', conf.enable_human_web);
 		setPref('modules.hpnv2.enabled', conf.enable_human_web);
-	} else {
+	} else if (IS_ANDROID) {
 		setPref('modules.human-web-lite.enabled', conf.enable_human_web);
 		setPref('modules.hpn-lite.enabled', conf.enable_human_web);
 	}
@@ -124,10 +125,10 @@ export const setAdblockerState = async enabled => setModuleState('adblocker', en
 export const setAntitrackingState = async enabled => setModuleState('antitracking', enabled);
 
 export const setWhotracksmeState = async (enabled) => {
-	if (!IS_ANDROID) {
+	if (!IS_ANDROID && HAS_WASM) {
 		await setModuleState('hpnv2', enabled);
 		await setModuleState('human-web', enabled);
-	} else {
+	} else if (IS_ANDROID) {
 		await setModuleState('hpn-lite', enabled);
 		await setModuleState('human-web-lite', enabled);
 	}
