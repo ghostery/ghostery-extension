@@ -95,6 +95,7 @@ class ABTest {
 			&si=${conf.account ? '1' : '0'}
 			&ua=${encodeURIComponent(BROWSER_INFO.name)}
 			&v=${encodeURIComponent(conf.cmp_version)}
+			&gr=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
 			&l=${encodeURIComponent(conf.language)}`
 		);
 	}

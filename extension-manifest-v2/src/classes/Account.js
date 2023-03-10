@@ -15,8 +15,8 @@
  */
 
 import { isEqual } from 'underscore';
-import normalize from 'json-api-normalizer';
 import build from 'redux-object';
+import normalize from '../utils/json-api-normalizer';
 import globals from './Globals';
 import conf from './Conf';
 import dispatcher from './Dispatcher';
