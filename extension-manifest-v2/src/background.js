@@ -79,8 +79,9 @@ const IS_EDGE = getBrowserInfo.isEdge();
 const IS_FIREFOX = getBrowserInfo.isFirefox();
 const IS_ANDROID = getBrowserInfo.isAndroid();
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
-const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;
+const ONE_DAY_MSEC = ONE_HOUR_MSEC * 24;
+const ONE_WEEK_MSEC = ONE_DAY_MSEC * 7;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
@@ -124,13 +125,13 @@ function updateDBs() {
 	}));
 }
 
-async function tryOpenOnboarding() {
-	if (conf.setup_complete || conf.setup_skip) {
+async function tryOpenOnboarding({ force = false, period = ONE_DAY_MSEC } = {}) {
+	if ((conf.setup_complete || conf.setup_skip) && !force) {
 		return;
 	}
 
 	const now = Date.now();
-	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > ONE_DAY_MSEC)) {
+	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > period)) {
 		conf.setup_timestamp = now;
 
 		const onboardingURL = chrome.runtime.getURL('./app/templates/onboarding.html');
@@ -924,6 +925,9 @@ function onMessageHandler(request, sender, callback) {
  * @memberOf Background
  */
 function setupABTests() {
+	if (abtest.has('terms')) {
+		tryOpenOnboarding({ force: true, period: ONE_WEEK_MSEC });
+	}
 }
 
 /**
@@ -1450,7 +1454,6 @@ function initializeGhosteryModules() {
 		conf.show_alert = false;
 	}
 
-	// Set these tasks to run every hour
 	function scheduledTasks() {
 		return new Promise((resolve) => {
 			// auto-fetch from CMP
@@ -1473,8 +1476,8 @@ function initializeGhosteryModules() {
 		});
 	}
 
-	// Check CMP and ABTest every day.
-	setInterval(scheduledTasks, ONE_DAY_MSEC);
+	// Check CMP and ABTest every second hour.
+	setInterval(scheduledTasks, ONE_HOUR_MSEC * 2);
 
 	// Update db right away.
 	autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked);
