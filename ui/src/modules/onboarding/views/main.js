@@ -120,7 +120,12 @@ export default define({
             </ui-onboarding-protection>
           </div>
         </ui-card>
-        <ui-card type="narrow" id="terms-card">
+        <ui-card
+          type="narrow"
+          id="terms-card"
+          hidden="${!form.protection}"
+          layout[hidden]="hidden"
+        >
           <div layout="column gap:3">
             <label layout="grid:min|1:min|min gap:2:0.5 items:start">
               <ui-onboarding-checkbox layout="area::2">
