@@ -153,7 +153,12 @@ module.exports = {
 						loader: 'esbuild-loader',
 						options: {
 							loader: 'jsx',
-							target: 'es2015',
+							target: [
+								'firefox68',
+								'edge79',
+								'opera56',
+								'chrome69',
+							],
 						}
 					},
 				]
