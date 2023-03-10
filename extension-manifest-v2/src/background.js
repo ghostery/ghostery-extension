@@ -15,7 +15,7 @@
  * @namespace Background
  */
 import { debounce, every, size } from 'underscore';
-import moment from 'moment/min/moment-with-locales.min';
+import moment from 'moment';
 import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 import { getBrowserInfo } from '@ghostery/libs';
 import browser from 'webextension-polyfill';
