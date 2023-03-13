@@ -479,5 +479,10 @@
     "pages/trackers-preview/index.html",
     "pages/onboarding/index.html",
     "pages/autoconsent/index.html"
-  ]
+  ],
+  "browser_specific_settings": {
+		"gecko": {
+			"id": "firefox@ghostery.com"
+		}
+	}
 }
