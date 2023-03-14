@@ -44,7 +44,7 @@
     "@ghostery/ui": "file:../ui",
     "@github/relative-time-element": "^4.1.5",
     "@whotracksme/webextension-packages": "^2.1.5",
-    "hybrids": "^8.1.13",
+    "hybrids": "^8.1.14",
     "idb": "^7.1.1",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
