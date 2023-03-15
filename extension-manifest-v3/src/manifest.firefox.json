@@ -476,7 +476,6 @@
   ],
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
-    "content_scripts/prevent-indexeddb-tracking/ghostery-prevent-indexeddb-tracking.js",
     "pages/trackers-preview/index.html",
     "pages/onboarding/index.html",
     "pages/autoconsent/index.html"
