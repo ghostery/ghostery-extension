@@ -42,22 +42,6 @@
     "page": "pages/settings/index.html",
     "open_in_tab": true
   },
-  "permissions": [
-    "webNavigation",
-    "cookies",
-    "tabs",
-    "alarms",
-    "storage",
-    "scripting",
-    "declarativeNetRequest",
-    "declarativeNetRequestFeedback"
-  ],
-  "host_permissions": [
-    "http://*/*",
-    "https://*/*",
-    "ws://*/*",
-    "wss://*/*"
-  ],
   "background": {
     "page": "background/index.html",
     "persistent": false
