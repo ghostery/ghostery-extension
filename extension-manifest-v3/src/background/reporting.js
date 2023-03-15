@@ -227,7 +227,13 @@ observe('terms', (terms) => {
   }
 });
 
+function delay(timeInMs) {
+  return new Promise((resolve) => setTimeout(resolve, timeInMs));
+}
+
 chrome.webNavigation.onCommitted.addListener((details) => {
+  if (!reporting.isActive) return;
+
   const { url, frameId, tabId } = details;
   if (frameId !== 0 || url === 'about:blank' || url.startsWith('chrome://')) {
     return;
@@ -265,11 +271,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
         // we should avoid timers in MV3 or at least assume that we the service
         // worker will die (persisting the jobs and shift the scheduling
         // responsibility into the reporting module itself could help)
-        const delay = ({ timeInMs }) => {
-          return new Promise((resolve) => setTimeout(resolve, timeInMs));
-        };
-        await delay({ timeInMs: 2000 + 3000 * Math.random() });
-
+        await delay(2000 + 3000 * Math.random());
         await reporting.processPendingJobs();
       }
     } catch (e) {
