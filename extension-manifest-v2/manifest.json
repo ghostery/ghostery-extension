@@ -17,7 +17,8 @@
 			"19": "app/images/icon19.png",
 			"38": "app/images/icon38.png"
 		},
-		"default_title": "Ghostery"
+		"default_title": "Ghostery",
+		"default_area": "navbar"
 	},
 	"content_scripts": [
 		{
