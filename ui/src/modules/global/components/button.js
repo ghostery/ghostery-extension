@@ -45,6 +45,11 @@ export default {
         background: var(--ui-color-gray-700);
       }
 
+      :host([type="success"]) {
+        color: var(--ui-color-white);
+        background: var(--ui-color-success-500);
+      }
+
       @media (hover: hover) and (pointer: fine) { 
         :host([type="outline"]:hover) {
           color: var(--ui-button-color-hover);

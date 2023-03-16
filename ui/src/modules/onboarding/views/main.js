@@ -83,11 +83,14 @@ export default define({
                 </ui-onboarding-terms>
               </ui-text>
             </label>
-            <div layout="column-reverse gap" layout@480px="row content:space-between">
+            <div
+              layout="column-reverse gap"
+              layout@480px="row content:space-between"
+            >
               <ui-button type="outline">
                 <a href="${router.url(Skip)}">Cancel</a>
               </ui-button>
-              <ui-button disabled="${!form.terms}">
+              <ui-button type="success" disabled="${!form.terms}">
                 <button type="submit">
                   <ui-icon name="ghosty"></ui-icon>
                   Enable Ghostery
