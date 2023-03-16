@@ -132,23 +132,24 @@ async function tryOpenOnboarding({ force = false, period = ONE_DAY_MSEC } = {}) 
 
 	const now = Date.now();
 	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > period)) {
-		conf.setup_timestamp = now;
-
 		const onboardingURL = chrome.runtime.getURL('./app/templates/onboarding.html');
 		const onboardingTabs = await browser.tabs.query({ url: onboardingURL });
 
 		if (onboardingTabs.length > 0) {
 			const firstTab = onboardingTabs.shift();
-			chrome.tabs.update(firstTab.id, {
+			await browser.tabs.update(firstTab.id, {
 				active: true,
 			});
 			chrome.tabs.discard(onboardingTabs.map(t => t.id));
 		} else {
-			chrome.tabs.create({
+			await browser.tabs.create({
 				url: onboardingURL,
 				active: true
 			});
 		}
+
+		conf.setup_timestamp = now;
+		conf.setup_shown += 1;
 	}
 }
 
@@ -542,6 +543,9 @@ function onMessageHandler(request, sender, callback) {
 		if (name === 'setup_skip') {
 			conf.setup_skip = true;
 		}
+		// no need to share it with telemetry
+		conf.setup_timestamp = null;
+		metrics.ping('install_complete');
 		return false;
 	}
 	if (origin === 'checkout_pages') {
@@ -1407,8 +1411,6 @@ function initializeGhosteryModules() {
 	if (globals.JUST_UPGRADED) {
 		log('JUST UPGRADED');
 		metrics.ping('upgrade');
-		// We don't want install_complete pings for upgrade
-		conf.metrics.install_complete_all = Date.now();
 	} else if (globals.JUST_INSTALLED) {
 		log('JUST INSTALLED');
 		const dateString = getISODate();
@@ -1424,15 +1426,9 @@ function initializeGhosteryModules() {
 		}
 
 		metrics.ping('install');
-
-		// Set 5 min timeout
-		setTimeout(() => {
-			metrics.ping('install_complete');
-		}, 300000);
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');
-		metrics.ping('install_complete');
 	}
 	// start common app
 	const commonStartup = async () => {
