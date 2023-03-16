@@ -132,24 +132,24 @@ async function tryOpenOnboarding({ force = false, period = ONE_DAY_MSEC } = {}) 
 
 	const now = Date.now();
 	if (!conf.setup_timestamp || ((now - conf.setup_timestamp) > period)) {
-		conf.setup_timestamp = now;
-		conf.setup_shown += 1;
-
 		const onboardingURL = chrome.runtime.getURL('./app/templates/onboarding.html');
 		const onboardingTabs = await browser.tabs.query({ url: onboardingURL });
 
 		if (onboardingTabs.length > 0) {
 			const firstTab = onboardingTabs.shift();
-			chrome.tabs.update(firstTab.id, {
+			await browser.tabs.update(firstTab.id, {
 				active: true,
 			});
 			chrome.tabs.discard(onboardingTabs.map(t => t.id));
 		} else {
-			chrome.tabs.create({
+			await browser.tabs.create({
 				url: onboardingURL,
 				active: true
 			});
 		}
+
+		conf.setup_timestamp = now;
+		conf.setup_shown += 1;
 	}
 }
 

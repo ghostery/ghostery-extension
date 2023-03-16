@@ -60,7 +60,7 @@ const getConf = async () => {
     enable_human_web: options.terms,
     install_date,
     setup_complete: options.onboarding.done && options.terms,
-    setup_skip: options.onboarding.done && options.terms,
+    setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,
     setup_shown: options.onboarding.shown,
   };

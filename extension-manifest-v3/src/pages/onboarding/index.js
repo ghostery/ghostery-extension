@@ -29,7 +29,10 @@ function updateOptions(host, event) {
       shownAt: null,
     },
   });
-  chrome.runtime.sendMessage({ action: 'telemetry', event: 'install_complete' });
+  chrome.runtime.sendMessage({
+    action: 'telemetry',
+    event: 'install_complete',
+  });
 }
 
 define({
@@ -41,12 +44,11 @@ define({
     ></ui-onboarding>`,
 });
 
-store.ready(Options).then(() => {
-  const options = store.get(Options);
+store.resolve(store.get(Options)).then((options) => {
   store.set(Options, {
     onboarding: {
       shownAt: Date.now(),
       shown: options.onboarding.shown + 1,
     },
   });
-})
+});
