@@ -305,9 +305,16 @@ class Metrics {
         // Antitracking state
         buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
         // Onboarding status
-        buildQueryPair('ss', conf.setup_complete ? '1' : conf.setup_skip ? '-1' : '0') +
+        buildQueryPair(
+          'ss',
+          conf.setup_complete ? '1' : conf.setup_skip ? '-1' : '0',
+        ) +
         // Onboarding last shown at
-        buildQueryPair('sl', conf.setup_timestamp && new Date(conf.setup_timestamp).toISOString().split('T')[0]) +
+        buildQueryPair(
+          'sl',
+          conf.setup_timestamp &&
+            new Date(conf.setup_timestamp).toISOString().split('T')[0],
+        ) +
         // Onboarding shown counter
         buildQueryPair('sb', String(conf.setup_shown)) +
         // Recency, days since last active daily ping

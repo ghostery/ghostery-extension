@@ -114,7 +114,9 @@ async function migrateFromMV2() {
       };
       options.onboarding.shown = options.onboarding.shown
         ? options.onboarding.shown
-        : options.onboarding.done ? 1 : 0;
+        : options.onboarding.done
+        ? 1
+        : 0;
       options.terms = storage.setup_complete || false;
       options.wtmSerpReport = storage.enable_wtm_serp_report || false;
 
