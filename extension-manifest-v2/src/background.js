@@ -79,7 +79,8 @@ const IS_EDGE = getBrowserInfo.isEdge();
 const IS_FIREFOX = getBrowserInfo.isFirefox();
 const IS_ANDROID = getBrowserInfo.isAndroid();
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
-const ONE_HOUR_MSEC = 3600000;
+const ONE_MINUTE_MSEC = 60000;
+const ONE_HOUR_MSEC = ONE_MINUTE_MSEC * 60;
 const ONE_DAY_MSEC = ONE_HOUR_MSEC * 24;
 const ONE_WEEK_MSEC = ONE_DAY_MSEC * 7;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
@@ -1709,7 +1710,12 @@ async function init() {
 		globals.INIT_COMPLETE = true;
 
 		// ensure onboarding is show to fully functional extension only
+		// (for the reminder, add 60 seconds drift to avoid clashing with the 24 hour cooldown)
 		await tryOpenOnboarding();
+		setInterval(() => {
+			log('run onboarding reminder (only if the extension is installed but inactive)...');
+			tryOpenOnboarding().catch(alwaysLog);
+		}, ONE_DAY_MSEC + ONE_MINUTE_MSEC);
 	} catch (err) {
 		err.name = 'InitError';
 		ErrorReporter.captureException(err);
