@@ -44,7 +44,7 @@ define({
     ></ui-onboarding>`,
 });
 
-store.resolve(store.get(Options)).then((options) => {
+store.resolve(Options).then((options) => {
   store.set(Options, {
     onboarding: {
       shownAt: Date.now(),
