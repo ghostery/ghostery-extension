@@ -127,6 +127,9 @@ class ConfData {
 			_initProperty('setup_complete', false);
 			_initProperty('setup_skip', false);
 			_initProperty('setup_timestamp', null);
+			_initProperty('setup_shown', data.setup_shown
+				? data.setup_shown
+				: (data.setup_complete || data.setup_skip) ? 1 : 0);
 			_initProperty('tutorial_complete', false);
 			_initProperty('enable_wtm_serp_report', true);
 			_initProperty('show_redirect_tracking_dialogs', true);

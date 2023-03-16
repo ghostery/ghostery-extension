@@ -30,7 +30,7 @@ const Options = {
   ...(__PLATFORM__ === 'chromium' ? { trackerCount: true } : {}),
   wtmSerpReport: true,
   terms: false,
-  onboarding: { done: false, shownAt: 0 },
+  onboarding: { done: false, shownAt: 0, shown: 0 },
   panel: {
     statsType: 'graph',
   },
@@ -112,6 +112,9 @@ async function migrateFromMV2() {
         done: storage.setup_complete || storage.setup_skip || false,
         shownAt: storage.setup_timestamp || 0,
       };
+      options.onboarding.shown = options.onboarding.shown
+        ? options.onboarding.shown
+        : options.onboarding.done ? 1 : 0;
       options.terms = storage.setup_complete || false;
       options.wtmSerpReport = storage.enable_wtm_serp_report || false;
 
