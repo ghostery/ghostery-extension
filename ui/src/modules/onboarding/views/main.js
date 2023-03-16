@@ -90,7 +90,7 @@ export default define({
               <ui-button type="outline">
                 <a href="${router.url(Skip)}">Cancel</a>
               </ui-button>
-              <ui-button type="success" disabled="${!form.terms}">
+              <ui-button type="error" disabled="${!form.terms}">
                 <button type="submit">
                   <ui-icon name="ghosty"></ui-icon>
                   Enable Ghostery

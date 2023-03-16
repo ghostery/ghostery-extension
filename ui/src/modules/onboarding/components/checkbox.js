@@ -49,7 +49,7 @@ export default define({
       appearance: none;
       box-sizing: border-box;
       background: var(--ui-color-white);
-      border: 2px solid var(--ui-color-success-500);
+      border: 2px solid var(--ui-color-gray-400);
       box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 22px;
       padding: 0;
@@ -59,7 +59,7 @@ export default define({
     :host([checked]) ::slotted(input) {
       border-color: transparent;
       box-shadow: none;
-      background: var(--ui-color-success-500);
+      background: var(--ui-color-gray-400);
     }
 
     ui-icon {
