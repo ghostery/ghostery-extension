@@ -9,45 +9,44 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import * as cookies from './cookies.js';
+import jwtDecode from 'jwt-decode';
 
-const ACCOUNT_URL = 'https://accountapi.ghostery.com/api/v2.1.0';
-const AUTH_URL = 'https://consumerapi.ghostery.com/api/v2';
+const DOMAIN = 'ghostery.com';
+const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
 
+const COOKIE_DOMAIN = `.${DOMAIN}`;
+const COOKIE_URL = `https://${DOMAIN}`;
+const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 const COOKIE_SHORT_DURATION = 60 * 60 * 24; // 1 day in seconds
 
-export async function get(url) {
-  const accessToken = await cookies.get('access_token');
-  const csrfToken = await cookies.get('csrf_token');
+export async function getCookie(name) {
+  const cookie = await chrome.cookies.get({ url: COOKIE_URL, name });
+  return cookie.value || undefined;
+}
 
-  if (!accessToken || !csrfToken) throw Error('Unauthorized');
-
-  const res = await fetch(`${ACCOUNT_URL}/${url}`, {
-    headers: {
-      'Content-Type': 'application/vnd.api+json',
-      Authorization: `Bearer ${accessToken.value}`,
-      'X-CSRF-Token': csrfToken.value,
-    },
-    credentials: 'omit',
+export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
+  await chrome.cookies[value !== undefined ? 'set' : 'remove']({
+    url: COOKIE_URL,
+    domain: COOKIE_DOMAIN,
+    path: '/',
+    name,
+    value,
+    expirationDate: Date.now() / 1000 + durationInSec,
   });
-
-  if (res.ok) {
-    return res.json();
-  }
-
-  throw res;
 }
 
 export async function session() {
-  const userId = await cookies.get('user_id');
-  if (!userId) return undefined;
+  const userId = await getCookie('user_id');
+  if (!userId) return null;
 
-  if (!(await cookies.get('access_token'))) {
-    const refreshToken = await cookies.get('refresh_token');
+  let accessToken = await getCookie('access_token');
+
+  if (!accessToken) {
+    const refreshToken = await getCookie('refresh_token');
 
     if (!refreshToken) {
-      cookies.set('user_id', undefined);
-      cookies.set('csrf_token', undefined);
+      setCookie('user_id', undefined);
+      setCookie('csrf_token', undefined);
 
       throw Error('Unauthorized');
     }
@@ -55,25 +54,26 @@ export async function session() {
     const res = await fetch(`${AUTH_URL}/refresh_token`, {
       method: 'post',
       headers: {
-        UserId: userId.value,
-        RefreshToken: refreshToken.value,
+        UserId: userId,
+        RefreshToken: refreshToken,
       },
       credentials: 'omit',
     });
 
     if (res.ok) {
       const data = await res.json();
+      accessToken = data.access_token;
 
       await Promise.all([
-        cookies.set('user_id', data.user_id),
-        cookies.set('refresh_token', data.refresh_token),
-        cookies.set('access_token', data.access_token, COOKIE_SHORT_DURATION),
-        cookies.set('csrf_token', data.csrf_token, COOKIE_SHORT_DURATION),
+        setCookie('user_id', data.user_id),
+        setCookie('refresh_token', data.refresh_token),
+        setCookie('access_token', data.access_token, COOKIE_SHORT_DURATION),
+        setCookie('csrf_token', data.csrf_token, COOKIE_SHORT_DURATION),
       ]);
     } else {
       throw res;
     }
   }
 
-  return userId;
+  return jwtDecode(accessToken);
 }
