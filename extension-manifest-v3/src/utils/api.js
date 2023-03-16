@@ -21,7 +21,7 @@ const COOKIE_SHORT_DURATION = 60 * 60 * 24; // 1 day in seconds
 
 export async function getCookie(name) {
   const cookie = await chrome.cookies.get({ url: COOKIE_URL, name });
-  return cookie.value || undefined;
+  return cookie?.value || undefined;
 }
 
 export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
