@@ -317,8 +317,8 @@ if (__PLATFORM__ === 'firefox') {
         hostname: parsedUrl.hostname,
         url: details.url.toLowerCase(),
 
-        sourceDomain: parsedSourceUrl.domain,
-        sourceHostname: parsedSourceUrl.hostname,
+        sourceDomain: parsedSourceUrl.domain || '',
+        sourceHostname: parsedSourceUrl.hostname || '',
         sourceUrl: sourceUrl.toLowerCase(),
 
         type: details.type,
