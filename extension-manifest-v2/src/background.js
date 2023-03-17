@@ -1517,12 +1517,9 @@ function initializeGhosteryModules() {
  * Initialize Search Message Handler on Ghostery Browser.
  * @memberOf Background
  */
-async function initializeSearchMessageHandler() {
-	await globals.BROWSER_INFO_READY; // ensure browser info is set
-	if (BROWSER_INFO.name === 'ghostery_desktop') {
-		const sm = new SearchMessager();
-		sm.init();
-	}
+function initializeSearchMessageHandler() {
+	const sm = new SearchMessager();
+	sm.init();
 }
 
 /**
@@ -1690,7 +1687,7 @@ async function init() {
 			lastStep = 'freeSpaceIfNearQuota';
 		}
 
-		await initializeSearchMessageHandler();
+		initializeSearchMessageHandler();
 		lastStep = 'initializeSearchMessageHandler';
 
 		await recordUTMs();
