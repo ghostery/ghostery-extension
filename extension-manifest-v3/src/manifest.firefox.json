@@ -5,6 +5,19 @@
   "short_name": "Ghostery",
   "default_locale": "en",
   "description": "__MSG_manifest_short_description__",
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "tabs",
+    "scripting",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "ws://*/*",
+    "wss://*/*"
+  ],
   "icons": {
     "16": "assets/images/icon16.png",
     "48": "assets/images/icon48.png",
@@ -26,31 +39,11 @@
     "page": "pages/settings/index.html",
     "open_in_tab": true
   },
-	"permissions": [
-		"webNavigation",
-		"webRequest",
-		"webRequestBlocking",
-		"cookies",
-		"tabs",
-    "scripting",
-		"storage",
-		"http://*/*",
-		"https://*/*",
-		"ws://*/*",
-		"wss://*/*"
-	],
   "background": {
     "page": "background/index.html",
-		"persistent": true
+    "persistent": true
   },
   "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "run_at": "document_start",
-      "js": [
-        "content_scripts/whotracksme/index.js"
-      ]
-    },
     {
       "matches": ["*://*/*"],
       "run_at": "document_start",
