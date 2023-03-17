@@ -10,34 +10,35 @@
  */
 
 import { store } from 'hybrids';
-import * as api from '../utils/api.js';
+import { session } from '../utils/api.js';
 
 const ALARM_NAME = 'session:refresh';
-const REFRESH_RATE = 60 * 24 * 30; // 30 days in minutes
+const ALARM_REFRESH_RATE = 1000 * 60 * 24 * 30; // 30 days in milliseconds
 
 export default {
   user: '',
   firstName: '',
   lastName: '',
   email: '',
-  contributor: false,
-  name: ({ firstName, lastName }) => `${firstName} ${lastName}`,
+  scopes: [String],
+  contributor: ({ scopes }) => !!scopes.length,
+  name: ({ firstName, lastName }) =>
+    [firstName, lastName].filter((s) => s).join(' '),
   [store.connect]: {
     offline: true,
     async get() {
       try {
-        const userId = await api.session();
-        if (!userId) return {};
+        const data = await session();
 
-        const { data: user } = await api.get(`users/${userId.value}`);
-
-        return {
-          user: userId.value,
-          firstName: user.attributes.first_name,
-          lastName: user.attributes.last_name,
-          email: user.attributes.email,
-          contributor: !!user.attributes.scopes?.length,
-        };
+        return data
+          ? {
+              user: data.sub,
+              firstName: data.first_name,
+              lastName: data.last_name,
+              email: data.email,
+              scopes: data.scopes || [],
+            }
+          : {};
       } catch (e) {
         console.error("Failed to fetch user's session", e);
         return {};
@@ -47,29 +48,23 @@ export default {
       if (user) {
         if (!(await chrome.alarms.get(ALARM_NAME))) {
           chrome.alarms.create(ALARM_NAME, {
-            when: Date.now() + 1000 * REFRESH_RATE,
+            when: Date.now() + ALARM_REFRESH_RATE,
           });
         }
       } else {
         chrome.alarms.clear(ALARM_NAME);
       }
-
-      // * Clear account data kept in earlier versions in local storage
-      // * Remove alarm with old name
-      // TODO: Remove this in a future release
-      chrome.storage.local.set({ account: undefined });
-      chrome.alarms.clear('account:refresh');
     },
   },
 };
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === ALARM_NAME) {
-    if (!api.session()) {
+    if (!(await session())) {
       chrome.alarms.clear(ALARM_NAME);
     } else {
       chrome.alarms.create(ALARM_NAME, {
-        when: Date.now() + 1000 * REFRESH_RATE,
+        when: Date.now() + ALARM_REFRESH_RATE,
       });
     }
   }

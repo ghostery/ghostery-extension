@@ -304,6 +304,19 @@ class Metrics {
         buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
         // Antitracking state
         buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
+        // Onboarding status
+        buildQueryPair(
+          'ss',
+          conf.setup_complete ? '1' : conf.setup_skip ? '-1' : '0',
+        ) +
+        // Onboarding last shown at
+        buildQueryPair(
+          'sl',
+          conf.setup_timestamp &&
+            new Date(conf.setup_timestamp).toISOString().split('T')[0],
+        ) +
+        // Onboarding shown counter
+        buildQueryPair('sb', String(conf.setup_shown)) +
         // Recency, days since last active daily ping
         buildQueryPair(
           'rc',
@@ -557,9 +570,6 @@ class Metrics {
     if (conf.enable_metrics) {
       return true;
     }
-    if (this.storage.install_complete_all) {
-      return false;
-    }
     if (this.ping_set && this.ping_set.size < MAX_DELAYED_PINGS) {
       this.ping_set.add(type);
     } else {
@@ -585,10 +595,6 @@ class Metrics {
    * @private
    */
   _recordInstallComplete() {
-    // We don't want to record 'install' twice
-    if (this.storage.install_complete_all) {
-      return;
-    }
     this._sendReq('install_complete');
     this.ping_set.forEach((type) => {
       this.ping(type);

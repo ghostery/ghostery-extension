@@ -20,9 +20,6 @@
   "additional_permissions_required": {
     "message": "추가 권한 필요"
   },
-  "ads___onboarding": {
-    "message": "광고"
-  },
   "adult_advertising": {
     "message": "성인 광고 ",
     "description": "Tracker category name"
@@ -30,9 +27,6 @@
   "advertising": {
     "message": "광고 ",
     "description": "Tracker category name"
-  },
-  "all_popups": {
-    "message": "팝업 전체"
   },
   "always": {
     "message": "항상 "
@@ -61,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "기부자가 되세요."
-  },
-  "blocked": {
-    "message": "차단됨 "
   },
   "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
     "message": "동의하지 않음을 사용하면 웹사이트 소유자에게 추적에 반대한다는 것을 알릴 수 있습니다!"
@@ -120,9 +111,6 @@
   "done": {
     "message": "완료"
   },
-  "done__go_with_ghosty_": {
-    "message": "완료! Ghosty와 함께 시작해 보세요!"
-  },
   "eliminates_ads_on_websites_you_visit__offering_a_calm__safe_and_private_internet_": {
     "message": "Eliminates ads on websites you visit, offering a calm, safe and private internet."
   },
@@ -152,12 +140,6 @@
   },
   "for_more_information_read_our_full": {
     "message": "자세한 정보는 전문을 읽으시기 바랍니다"
-  },
-  "ghostery_disabled": {
-    "message": "Ghostery 활성화되지 않음"
-  },
-  "ghostery_enabled": {
-    "message": "Ghostery 활성화됨"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 재개되었습니다."
@@ -324,9 +306,6 @@
     "message": "사이트 분석 ",
     "description": "Tracker category name"
   },
-  "skip": {
-    "message": "건너뛰기"
-  },
   "social_media": {
     "message": "소셜 미디어 ",
     "description": "Tracker category name"
@@ -347,9 +326,6 @@
   "tired_of_cookie_popups_": {
     "message": "쿠키 팝업이 너무 많습니까?"
   },
-  "trackers": {
-    "message": "트래커 "
-  },
   "trackers_count": {
     "message": "트래커 카운트"
   },
@@ -368,9 +344,6 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "다른 브라우저 탭에서 이 패널 열기 시도"
   },
-  "unblocked": {
-    "message": "차단 해제됨 "
-  },
   "unknown": {
     "message": "알 수 없음 ",
     "description": "Tracker category name"
@@ -380,9 +353,6 @@
   },
   "websites": {
     "message": "웹사이트"
-  },
-  "welcome_to_ghostery": {
-    "message": "Ghostery를 시작합니다"
   },
   "what_is_whotracks_me_": {
     "message": "WhoTracks.Me란?"

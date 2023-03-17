@@ -56,71 +56,11 @@ export default define({
         <ui-card id="form">
           <div layout="column gap:5">
             <section layout="block:center">
-              <ui-text type="body-xl" layout="margin:bottom:2">
-                Welcome to Ghostery
-              </ui-text>
-              <ui-text type="display-l">
+              <ui-text type="display-m" layout="margin:bottom:5">
                 Enable Ghostery to get started
               </ui-text>
             </section>
-
-            <ui-onboarding-protection
-              id="info"
-              class="${{ protection: form.protection }}"
-            >
-              <label slot="header">
-                <section
-                  layout="row items:center gap:2 margin:2"
-                  layout@768px="margin:3"
-                >
-                  <ui-text type="display-s" layout="grow">
-                    ${form.protection
-                      ? html`Ghostery enabled`
-                      : html`Ghostery disabled`}
-                  </ui-text>
-                  <ui-onboarding-toggle>
-                    <input
-                      type="checkbox"
-                      checked="${form.protection}"
-                      onchange="${html.set(form, 'protection')}"
-                    />
-                  </ui-onboarding-toggle>
-                </section>
-              </label>
-              <div
-                layout="grid:max|1|max gap:2 items:center:start margin:2"
-                layout@768px="margin:3"
-              >
-                <ui-icon name="tracking" layout="size:3"></ui-icon>
-                <ui-text type="headline-xs">Trackers</ui-text>
-                <ui-onboarding-badge enabled="${form.protection}">
-                  ${form.protection ? html`Blocked` : html`Unblocked`}
-                </ui-onboarding-badge>
-              </div>
-              <div
-                layout="grid:max|1|max gap:2 items:center:start margin:2"
-                layout@768px="margin:3"
-              >
-                <ui-icon name="ads" layout="size:3"></ui-icon>
-                <ui-text type="headline-xs"><!-- | onboarding -->Ads</ui-text>
-                <ui-onboarding-badge enabled="${form.protection}">
-                  ${form.protection ? html`Blocked` : html`Unblocked`}
-                </ui-onboarding-badge>
-              </div>
-              <div
-                layout="grid:max|1|max gap:2 items:center:start margin:2"
-                layout@768px="margin:3"
-              >
-                <ui-icon name="autoconsent" layout="size:3"></ui-icon>
-                <ui-text type="headline-xs">All Popups</ui-text>
-                <ui-onboarding-badge enabled="${form.protection}">
-                  ${form.protection ? html`Blocked` : html`Unblocked`}
-                </ui-onboarding-badge>
-              </div>
-            </ui-onboarding-protection>
           </div>
-        </ui-card>
-        <ui-card type="narrow" id="terms-card" hidden="${!form.protection}">
           <div layout="column gap:3">
             <label layout="grid:min|1:min|min gap:2:0.5 items:start">
               <ui-onboarding-checkbox layout="area::2">
@@ -143,21 +83,21 @@ export default define({
                 </ui-onboarding-terms>
               </ui-text>
             </label>
-            ${form.terms &&
-            html`
-              <ui-button layout@768px="self:end">
+            <div
+              layout="column-reverse gap"
+              layout@480px="row content:space-between"
+            >
+              <ui-button type="outline">
+                <a href="${router.url(Skip)}">Cancel</a>
+              </ui-button>
+              <ui-button type="error" disabled="${!form.terms}">
                 <button type="submit">
                   <ui-icon name="ghosty"></ui-icon>
-                  Done! Go with Ghosty!
+                  Enable Ghostery
                 </button>
               </ui-button>
-            `}
+            </div>
           </div>
-        </ui-card>
-        <ui-card type="transparent" layout="grow row items:end content:end">
-          <ui-button type="outline">
-            <a href="${router.url(Skip)}">Skip</a>
-          </ui-button>
         </ui-card>
       </form>
     </template>

@@ -24,7 +24,14 @@ function updateOptions(host, event) {
       {},
     ),
     terms: success,
-    onboarding: { done: true },
+    onboarding: {
+      done: true,
+      shownAt: null,
+    },
+  });
+  chrome.runtime.sendMessage({
+    action: 'telemetry',
+    event: 'install_complete',
   });
 }
 
@@ -37,5 +44,11 @@ define({
     ></ui-onboarding>`,
 });
 
-// Update options showAt timestamp
-store.set(Options, { onboarding: { shownAt: Date.now() } });
+store.resolve(Options).then((options) => {
+  store.set(Options, {
+    onboarding: {
+      shownAt: Date.now(),
+      shown: options.onboarding.shown + 1,
+    },
+  });
+});

@@ -59,6 +59,10 @@ const getConf = async () => {
     enable_ad_block: Object.values(options.engines).some((enabled) => enabled),
     enable_human_web: options.terms,
     install_date,
+    setup_complete: options.onboarding.done && options.terms,
+    setup_skip: options.onboarding.done && !options.terms,
+    setup_timestamp: options.onboarding.shownAt,
+    setup_shown: options.onboarding.shown,
   };
 };
 

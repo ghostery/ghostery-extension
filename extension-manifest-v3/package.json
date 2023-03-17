@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.0.2",
+  "version": "10.0.4",
   "type": "module",
   "scripts": {
     "postinstall": "npm run download-cosmetics && npm run download-dnr-lists && npm run download-trackerdb",
@@ -46,6 +46,7 @@
     "@whotracksme/webextension-packages": "^2.1.5",
     "hybrids": "^8.1.14",
     "idb": "^7.1.1",
+    "jwt-decode": "^3.1.2",
     "lodash-es": "^4.17.21",
     "tldts-experimental": "^5.7.66"
   },

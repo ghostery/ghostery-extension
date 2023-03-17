@@ -20,9 +20,6 @@
   "additional_permissions_required": {
     "message": "Se requieren permisos adicionales"
   },
-  "ads___onboarding": {
-    "message": "Anuncios"
-  },
   "adult_advertising": {
     "message": "Publicidad para adultos",
     "description": "Tracker category name"
@@ -30,9 +27,6 @@
   "advertising": {
     "message": "Publicidad",
     "description": "Tracker category name"
-  },
-  "all_popups": {
-    "message": "Todas las ventanas emergentes"
   },
   "always": {
     "message": "Siempre"
@@ -61,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Conviértete en Contribuyente"
-  },
-  "blocked": {
-    "message": "Bloqueado"
   },
   "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
     "message": "Al usar Never-Consent, les haces saber a los propietarios de sitios web que te opones al seguimiento."
@@ -120,9 +111,6 @@
   "done": {
     "message": "Hecho"
   },
-  "done__go_with_ghosty_": {
-    "message": "¡Ya está! ¡Vaya con Ghosty!"
-  },
   "eliminates_ads_on_websites_you_visit__offering_a_calm__safe_and_private_internet_": {
     "message": "Eliminates ads on websites you visit, offering a calm, safe and private internet."
   },
@@ -152,12 +140,6 @@
   },
   "for_more_information_read_our_full": {
     "message": "Para obtener más información, lee todos nuestros"
-  },
-  "ghostery_disabled": {
-    "message": "Ghostery deshabilitado"
-  },
-  "ghostery_enabled": {
-    "message": "Ghostery habilitado"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery se ha reanudado en este sitio."
@@ -324,9 +306,6 @@
     "message": "Estadísticas de sitios",
     "description": "Tracker category name"
   },
-  "skip": {
-    "message": "Omitir"
-  },
   "social_media": {
     "message": "Redes sociales",
     "description": "Tracker category name"
@@ -347,9 +326,6 @@
   "tired_of_cookie_popups_": {
     "message": "¿TE HAS CANSADO DE LAS VENTANAS SOBRE LAS COOKIES?"
   },
-  "trackers": {
-    "message": "Rastreadores"
-  },
   "trackers_count": {
     "message": "Número de rastreadores"
   },
@@ -368,9 +344,6 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "Prueba a abrir este panel en una pestaña diferente del navegador"
   },
-  "unblocked": {
-    "message": "Desbloqueado"
-  },
   "unknown": {
     "message": "Desconocido",
     "description": "Tracker category name"
@@ -380,9 +353,6 @@
   },
   "websites": {
     "message": "Sitios web"
-  },
-  "welcome_to_ghostery": {
-    "message": "Bienvenido a Ghostery"
   },
   "what_is_whotracks_me_": {
     "message": "¿Qué es WhoTracks.Me?"
