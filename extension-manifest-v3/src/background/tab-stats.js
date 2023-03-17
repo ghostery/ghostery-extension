@@ -22,35 +22,46 @@ import { Request } from '@cliqz/adblocker';
 const action = chrome.browserAction || chrome.action;
 action.setBadgeBackgroundColor({ color: '#3f4146' /* gray-600 */ });
 
-const setIcon = throttle(async (tabId, stats) => {
-  const options = await store.resolve(Options);
+const setIcon = throttle(
+  async (tabId, stats) => {
+    const options = await store.resolve(Options);
 
-  if (options.trackerWheel && stats.trackers.length > 0) {
-    const paused = options.paused?.some(({ id }) => id === stats.domain);
-    const data = {};
+    if (options.trackerWheel && stats.trackers.length > 0) {
+      const paused = options.paused?.some(({ id }) => id === stats.domain);
+      const data = {};
 
-    if (paused) {
-      data.path = {
-        16: '/assets/images/icon19_off.png',
-        32: '/assets/images/icon38_off.png',
-      };
-    } else {
-      data.imageData = getOffscreenImageData(
-        128,
-        stats.trackers.map((t) => t.category),
-      );
+      if (paused) {
+        data.path = {
+          16: '/assets/images/icon19_off.png',
+          32: '/assets/images/icon38_off.png',
+        };
+      } else {
+        data.imageData = getOffscreenImageData(
+          128,
+          stats.trackers.map((t) => t.category),
+        );
+      }
+      try {
+        await action.setIcon({ tabId, ...data });
+      } catch (e) {
+        console.error('Error while trying update the icon:', e);
+      }
     }
 
-    action.setIcon({ tabId, ...data });
-  }
-
-  if (Options.trackerCount) {
-    action.setBadgeText({
-      tabId,
-      text: options.trackerCount ? String(stats.trackers.length) : '',
-    });
-  }
-}, 250);
+    if (Options.trackerCount) {
+      try {
+        await action.setBadgeText({
+          tabId,
+          text: options.trackerCount ? String(stats.trackers.length) : '',
+        });
+      } catch (e) {
+        console.error('Error while trying update the badge', e);
+      }
+    }
+  },
+  // Firefox flickers when updating the icon, so we should expand the throttle
+  __PLATFORM__ === 'firefox' ? 1000 : 250,
+);
 
 export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);

@@ -303,7 +303,7 @@ if (__PLATFORM__ === 'firefox') {
       const isMainFrame = details.type === 'main_frame';
       const sourceUrl = isMainFrame
         ? details.url
-        : details.originUrl || details.documentUrl;
+        : details.originUrl || details.documentUrl || '';
 
       const parsedUrl = parse(details.url);
       const parsedSourceUrl = isMainFrame ? parsedUrl : parse(sourceUrl);
@@ -326,12 +326,15 @@ if (__PLATFORM__ === 'firefox') {
       });
 
       // Update stats
-      if (parsedSourceUrl.domain) {
-        if (isMainFrame) {
-          setupTabStats(details.tabId, parsedSourceUrl.domain);
-        } else {
-          updateTabStats(details.tabId, [request]);
-        }
+      if (details.tabId > -1 && parsedSourceUrl.domain) {
+        const tabId = details.tabId;
+        const domain = parsedSourceUrl.domain;
+
+        Promise.resolve().then(
+          isMainFrame
+            ? () => setupTabStats(tabId, domain)
+            : () => updateTabStats(tabId, [request]),
+        );
       }
 
       if (pausedDomains.includes(parsedSourceUrl.domain)) {
@@ -339,7 +342,7 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       for (const { engine, isEnabled } of adblockerEngines) {
-        if (isEnabled === false) {
+        if (!engine || isEnabled === false) {
           continue;
         }
 
