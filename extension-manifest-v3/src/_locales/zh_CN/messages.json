@@ -20,9 +20,6 @@
   "additional_permissions_required": {
     "message": "需要额外的权限"
   },
-  "ads___onboarding": {
-    "message": "条广告"
-  },
   "adult_advertising": {
     "message": "成人广告",
     "description": "Tracker category name"
@@ -30,9 +27,6 @@
   "advertising": {
     "message": "广告",
     "description": "Tracker category name"
-  },
-  "all_popups": {
-    "message": "所有弹出窗口"
   },
   "always": {
     "message": "始终"
@@ -61,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "成为贡献者"
-  },
-  "blocked": {
-    "message": "已拦截"
   },
   "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
     "message": "通过使用 Never-Consent，您可以让网站所有者知道您反对跟踪！"
@@ -120,9 +111,6 @@
   "done": {
     "message": "完成"
   },
-  "done__go_with_ghosty_": {
-    "message": "完成！ 和幽灵一起消失吧！"
-  },
   "eliminates_ads_on_websites_you_visit__offering_a_calm__safe_and_private_internet_": {
     "message": "Eliminates ads on websites you visit, offering a calm, safe and private internet."
   },
@@ -152,12 +140,6 @@
   },
   "for_more_information_read_our_full": {
     "message": "欲了解更多信息，请阅读我们的完整"
-  },
-  "ghostery_disabled": {
-    "message": "Ghostery 已禁用"
-  },
-  "ghostery_enabled": {
-    "message": "Ghostery 已启用"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery 已在此网站上恢复。"
@@ -324,9 +306,6 @@
     "message": "网站分析",
     "description": "Tracker category name"
   },
-  "skip": {
-    "message": "跳过"
-  },
   "social_media": {
     "message": "社交媒体",
     "description": "Tracker category name"
@@ -347,9 +326,6 @@
   "tired_of_cookie_popups_": {
     "message": "厌烦了 Cookie 弹出窗口？"
   },
-  "trackers": {
-    "message": "跟踪器"
-  },
   "trackers_count": {
     "message": "跟踪器数量"
   },
@@ -368,9 +344,6 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "尝试在其他浏览器标签页中打开此面板"
   },
-  "unblocked": {
-    "message": "未拦截"
-  },
   "unknown": {
     "message": "未知",
     "description": "Tracker category name"
@@ -380,9 +353,6 @@
   },
   "websites": {
     "message": "网站"
-  },
-  "welcome_to_ghostery": {
-    "message": "欢迎使用 Ghostery"
   },
   "what_is_whotracks_me_": {
     "message": "什么是 WhoTracks.Me？"
