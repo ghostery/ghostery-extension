@@ -59,15 +59,9 @@ const Stats = {
   categories: ({ trackers }) => trackers.map((t) => t.category),
   [store.connect]: {
     async get() {
-      const currentTab =
-        chrome.tabs &&
-        (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
-
-      const tabId =
-        currentTab?.id ||
-        (await chrome.runtime.sendMessage({
-          action: 'getCurrentTabId',
-        }));
+      const tabId = await chrome.runtime.sendMessage({
+        action: 'getCurrentTabId',
+      });
 
       const storage = await chrome.storage.local.get(['tabStats:v1']);
 

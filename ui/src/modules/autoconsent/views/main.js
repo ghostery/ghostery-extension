@@ -47,13 +47,15 @@ export default {
   },
   content: ({ stack, categories }) => html`
     <template layout="grid::min|1|min">
-      <ui-autoconsent-card oncloseiframe="${closeIframe}">
-        <ui-autoconsent-header></ui-autoconsent-header>
+      <ui-iframe-card
+        header="${msg`Never-Consent`}"
+        oncloseiframe="${closeIframe}"
+      >
         ${stack}
-      </ui-autoconsent-card>
+      </ui-iframe-card>
       ${router.active(Home) &&
       html`
-        <ui-autoconsent-card layout="margin:top:0.5">
+        <ui-iframe-card layout="margin:top:0.5">
           <section layout="row margin:2 gap:2">
             <div layout="area:1:2">
               <ui-tracker-wheel
@@ -78,7 +80,7 @@ export default {
               </ui-text>
             </div>
           </section>
-        </ui-autoconsent-card>
+        </ui-iframe-card>
       `}
     </template>
   `,

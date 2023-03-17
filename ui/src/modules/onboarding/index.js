@@ -9,16 +9,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { define } from 'hybrids';
 // Global components
 import '../pages/index.js';
 
-// Components
-import './components/badge.js';
-import './components/dialog.js';
-import './components/checkbox.js';
-import './components/protection.js';
-import './components/terms.js';
-import './components/toggle.js';
+// Components & Views
+define.from(
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  {
+    prefix: 'ui-onboarding',
+    root: ['components'],
+  },
+);
 
 // Root
 import './onboarding.js';
+import './iframe.js';

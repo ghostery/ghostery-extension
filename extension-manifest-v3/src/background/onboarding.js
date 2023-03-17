@@ -26,3 +26,19 @@ const DAY_IN_MS = 24 * 60 * 60 * 1000;
     });
   }
 })();
+
+function openIframe(tabId) {
+  chrome.tabs.sendMessage(
+    tabId,
+    {
+      action: 'contextual-onboarding',
+      type: 'openIframe',
+    },
+    { frameId: 0 },
+  );
+}
+
+// TODO: improve triggering based on tabStats
+chrome.webNavigation.onCommitted.addListener((details) => {
+  openIframe(details.tabId);
+});

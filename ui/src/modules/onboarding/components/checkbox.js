@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
 function setupChecked(host, event) {
   const slot = event.target;
@@ -22,8 +22,7 @@ function updateChecked(host, event) {
   host.checked = event.target.checked;
 }
 
-export default define({
-  tag: 'ui-onboarding-checkbox',
+export default {
   checked: false,
   render: ({ checked }) => html`
     <div onchange=${updateChecked}>
@@ -69,4 +68,4 @@ export default define({
       z-index: 1;
     }
   `,
-});
+};

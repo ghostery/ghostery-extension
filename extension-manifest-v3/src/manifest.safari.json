@@ -89,6 +89,13 @@
       "all_frames": true
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/onboarding.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
@@ -500,6 +507,7 @@
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "pages/trackers-preview/index.html",
     "pages/onboarding/index.html",
+    "pages/contextual-onboarding/index.html",
     "pages/autoconsent/index.html"
   ],
   "content_security_policy" : {}
