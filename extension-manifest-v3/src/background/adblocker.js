@@ -20,8 +20,6 @@ import { parse } from 'tldts-experimental';
 import Options, { observe } from '/store/options.js';
 import { setupTabStats, updateTabStats } from './tab-stats';
 
-const DEBUG_SCRIPLETS = false;
-
 const adblockerEngines = Object.keys(Options.engines).map((name) => ({
   name,
   engine: null,
@@ -199,6 +197,17 @@ async function adblockerOnMessage(msg, sender) {
   }
 }
 
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  if (msg.action === 'getCosmeticsFilters') {
+    adblockerOnMessage(msg, sender).catch((e) =>
+      console.error(`Error while processing cosmetics filters: ${e}`),
+    );
+  }
+
+  return false;
+});
+
+const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
@@ -288,16 +297,6 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
   });
 });
 
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action === 'getCosmeticsFilters') {
-    adblockerOnMessage(msg, sender).catch((e) =>
-      console.error(`Error while processing cosmetics filters: ${e}`),
-    );
-  }
-
-  return false;
-});
-
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
@@ -326,14 +325,14 @@ if (__PLATFORM__ === 'firefox') {
         _originalRequestDetails: details,
       });
 
-      // Update stats asynchronously
-      Promise.resolve().then(() => {
+      // Update stats
+      if (parsedSourceUrl.domain) {
         if (isMainFrame) {
           setupTabStats(details.tabId, parsedSourceUrl.domain);
         } else {
           updateTabStats(details.tabId, [request]);
         }
-      });
+      }
 
       if (pausedDomains.includes(parsedSourceUrl.domain)) {
         return;
