@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FiltersEngine, Request } from '@cliqz/adblocker';
+import { FiltersEngine } from '@cliqz/adblocker';
 
 let engine;
 let trackerDBStartupPromise = (async () => {
@@ -21,12 +21,10 @@ let trackerDBStartupPromise = (async () => {
   trackerDBStartupPromise = undefined;
 })();
 
-export async function getMetadata(url, sourceUrl) {
+export async function getMetadata(request) {
   if (trackerDBStartupPromise) {
     await trackerDBStartupPromise;
   }
-
-  const request = Request.fromRawDetails({ url, sourceUrl });
 
   let matches = engine.getPatternMetadata(request);
 
@@ -57,6 +55,6 @@ export async function getMetadata(url, sourceUrl) {
           name: pattern.name,
           website: pattern.website_url,
         },
-    url,
+    url: request.url,
   };
 }

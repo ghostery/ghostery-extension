@@ -9,26 +9,29 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FiltersEngine } from '@cliqz/adblocker';
+import { FiltersEngine, Request } from '@cliqz/adblocker';
+import {
+  fromWebRequestDetails,
+  filterRequestHTML,
+  updateResponseHeadersWithCSP,
+} from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
 import Options, { observe } from '/store/options.js';
+import { setupTabStats, updateTabStats } from './tab-stats';
 
-const DEBUG_SCRIPLETS = false;
-
-const adblockerEngines = Object.keys(Options.engines).reduce((map, name) => {
-  map[name] = {
-    engine: null,
-    isEnabled: false,
-  };
-  return map;
-}, {});
+const adblockerEngines = Object.keys(Options.engines).map((name) => ({
+  name,
+  engine: null,
+  isEnabled: false,
+}));
 let pausedDomains = [];
 
 let adblockerStartupPromise = (async function () {
   await observe('engines', (engines) => {
     Object.entries(engines).forEach(([key, value]) => {
-      adblockerEngines[key].isEnabled = value;
+      const engine = adblockerEngines.find((e) => e.name === key);
+      engine.isEnabled = value;
     });
   });
   await observe('paused', (paused) => {
@@ -36,15 +39,12 @@ let adblockerStartupPromise = (async function () {
   });
 
   await Promise.all(
-    Object.keys(adblockerEngines).map(async (engineName) => {
+    adblockerEngines.map(async (engine) => {
       const response = await fetch(
-        chrome.runtime.getURL(
-          `assets/adblocker_engines/dnr-${engineName}-cosmetics.engine.bytes`,
-        ),
+        chrome.runtime.getURL(`assets/${engine.name}.engine.bytes`),
       );
       const engineBytes = await response.arrayBuffer();
-      const engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
-      adblockerEngines[engineName].engine = engine;
+      engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
     }),
   );
   adblockerStartupPromise = null;
@@ -113,7 +113,7 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
-  Object.values(adblockerEngines).forEach(({ engine, isEnabled }) => {
+  adblockerEngines.forEach(({ engine, isEnabled }) => {
     if (!isEnabled) {
       return;
     }
@@ -197,6 +197,17 @@ async function adblockerOnMessage(msg, sender) {
   }
 }
 
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  if (msg.action === 'getCosmeticsFilters') {
+    adblockerOnMessage(msg, sender).catch((e) =>
+      console.error(`Error while processing cosmetics filters: ${e}`),
+    );
+  }
+
+  return false;
+});
+
+const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
@@ -262,7 +273,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
     await adblockerStartupPromise;
   }
 
-  Object.values(adblockerEngines).forEach(({ isEnabled, engine }) => {
+  adblockerEngines.forEach(({ isEnabled, engine }) => {
     if (isEnabled === false) {
       return;
     }
@@ -286,12 +297,100 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
   });
 });
 
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action === 'getCosmeticsFilters') {
-    adblockerOnMessage(msg, sender).catch((e) =>
-      console.error(`Error while processing cosmetics filters: ${e}`),
-    );
-  }
+if (__PLATFORM__ === 'firefox') {
+  chrome.webRequest.onBeforeRequest.addListener(
+    (details) => {
+      const isMainFrame = details.type === 'main_frame';
+      const sourceUrl = isMainFrame
+        ? details.url
+        : details.originUrl || details.documentUrl || '';
 
-  return false;
-});
+      const parsedUrl = parse(details.url);
+      const parsedSourceUrl = isMainFrame ? parsedUrl : parse(sourceUrl);
+
+      const request = new Request({
+        requestId: details.requestId,
+        tabId: details.tabId,
+
+        domain: parsedUrl.domain,
+        hostname: parsedUrl.hostname,
+        url: details.url.toLowerCase(),
+
+        sourceDomain: parsedSourceUrl.domain || '',
+        sourceHostname: parsedSourceUrl.hostname || '',
+        sourceUrl: sourceUrl.toLowerCase(),
+
+        type: details.type,
+
+        _originalRequestDetails: details,
+      });
+
+      // Update stats
+      if (details.tabId > -1 && parsedSourceUrl.domain) {
+        const tabId = details.tabId;
+        const domain = parsedSourceUrl.domain;
+
+        Promise.resolve().then(
+          isMainFrame
+            ? () => setupTabStats(tabId, domain)
+            : () => updateTabStats(tabId, [request]),
+        );
+      }
+
+      if (pausedDomains.includes(parsedSourceUrl.domain)) {
+        return;
+      }
+
+      for (const { engine, isEnabled } of adblockerEngines) {
+        if (!engine || isEnabled === false) {
+          continue;
+        }
+
+        if (isMainFrame) {
+          const htmlFilters = engine.getHtmlFilters(request);
+          if (htmlFilters.length !== 0) {
+            filterRequestHTML(
+              chrome.webRequest.filterResponseData,
+              request,
+              htmlFilters,
+            );
+            return;
+          }
+        } else {
+          const { redirect, match } = engine.match(request);
+
+          if (redirect !== undefined) {
+            return { redirectUrl: redirect.dataUrl };
+          } else if (match === true) {
+            return { cancel: true };
+          }
+        }
+      }
+    },
+    { urls: ['<all_urls>'] },
+    ['blocking'],
+  );
+
+  chrome.webRequest.onHeadersReceived.addListener(
+    (details) => {
+      const request = fromWebRequestDetails(details);
+      if (pausedDomains.includes(request.domain)) {
+        return {};
+      }
+
+      let policies;
+      for (const { engine, isEnabled } of adblockerEngines) {
+        if (isEnabled) {
+          policies = engine.getCSPDirectives(request);
+          if (policies !== undefined) {
+            break;
+          }
+        }
+      }
+
+      return updateResponseHeadersWithCSP(details, policies);
+    },
+    { urls: ['<all_urls>'], types: ['main_frame'] },
+    ['blocking', 'responseHeaders'],
+  );
+}

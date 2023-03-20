@@ -93,7 +93,6 @@ class AutoSyncingMap {
   get(_key) {
     this._warnIfOutOfSync();
     const key = this._normalizeKey(_key);
-    console.debug(`AutoSyncingMap: get(${key})`);
     return this.inMemoryMap.get(key);
   }
 
@@ -115,7 +114,6 @@ class AutoSyncingMap {
     }
 
     const key = this._normalizeKey(_key);
-    console.debug(`AutoSyncingMap: set(${key}, ...)`);
     this.inMemoryMap.set(key, value);
     this._ttlMap.set(key, Date.now() + this.ttlInMs);
     this._markAsDirty();
@@ -163,7 +161,6 @@ class AutoSyncingMap {
     }
 
     if (count > 0) {
-      console.log('AutoSyncingMap: expired', count, 'entries.');
       this._markAsDirty();
     }
     return count;
@@ -225,7 +222,6 @@ class AutoSyncingMap {
             reject(chrome.runtime.lastError);
           } else {
             this._lastFlush = Date.now();
-            console.debug('AutoSyncingMap: flushed');
             resolve();
           }
         });
