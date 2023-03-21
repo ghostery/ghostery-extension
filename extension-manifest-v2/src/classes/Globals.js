@@ -112,7 +112,6 @@ class Globals {
 			'enable_abtests',
 			'expand_all_trackers',
 			'hide_alert_trusted',
-			'ignore_first_party',
 			'import_callout_dismissed',
 			'is_expanded',
 			'is_expert',

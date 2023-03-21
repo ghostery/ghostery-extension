@@ -167,17 +167,6 @@ class GeneralSettings extends React.Component {
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-allow-trackers" name="ignore_first_party" defaultChecked={settingsData.ignore_first_party} onClick={toggleCheckbox} />
-								<label htmlFor="settings-allow-trackers">
-									<span>{ t('settings_allow_trackers') }</span>
-								</label>
-								<div className="s-tooltip-up" data-g-tooltip={t('settings_allow_trackers_tooltip')}>
-									<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
-								</div>
-							</div>
-						</div>
-						<div className="s-option-group">
-							<div className="s-square-checkbox">
 								<input type="checkbox" id="settings-show-redirect-tracking-dialogs" name="show_redirect_tracking_dialogs" defaultChecked={settingsData.show_redirect_tracking_dialogs} onClick={toggleCheckbox} />
 								<label htmlFor="settings-show-redirect-tracking-dialogs">
 									<span>{ t('settings_show_redirect_tracking_dialogs') }</span>
@@ -208,7 +197,6 @@ GeneralSettings.propTypes = {
 		enable_click2play: PropTypes.bool.isRequired,
 		enable_click2play_social: PropTypes.bool.isRequired,
 		toggle_individual_trackers: PropTypes.bool.isRequired,
-		ignore_first_party: PropTypes.bool.isRequired,
 	}).isRequired,
 };
 

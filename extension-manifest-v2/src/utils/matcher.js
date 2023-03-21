@@ -234,15 +234,5 @@ export function isBug(src, tab_url) {
 		// class 4: check regex patterns
 		_matchesRegex(processedSrc.host + processedSrc.pathname);
 
-	if (typeof tab_url !== 'undefined') {
-		// check firstPartyExceptions
-		if (conf.ignore_first_party &&
-			found !== false &&
-			db.firstPartyExceptions[found] &&
-			fuzzyUrlMatcher(tab_url, db.firstPartyExceptions[found])) {
-			return false;
-		}
-	}
-
 	return found;
 }
