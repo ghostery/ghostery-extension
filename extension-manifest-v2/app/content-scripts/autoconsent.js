@@ -12,26 +12,28 @@
 import AutoConsent from '@duckduckgo/autoconsent';
 import { showIframe } from '@ghostery/ui/autoconsent/iframe';
 
-const consent = new AutoConsent(msg => chrome.runtime.sendMessage(
-	{ ...msg, action: 'autoconsent' },
-));
+if (document.contentType === 'text/html') {
+	const consent = new AutoConsent(msg => chrome.runtime.sendMessage(
+		{ ...msg, action: 'autoconsent' },
+	));
 
-let shownIframe = false;
-chrome.runtime.onMessage.addListener((msg) => {
-	if (msg.action === 'autoconsent') {
-		if (msg.type === 'openIframe') {
-			if (shownIframe) return false;
+	let shownIframe = false;
+	chrome.runtime.onMessage.addListener((msg) => {
+		if (msg.action === 'autoconsent') {
+			if (msg.type === 'openIframe') {
+				if (shownIframe) return false;
 
-			showIframe(chrome.runtime.getURL(
-				`app/templates/autoconsent.html?host=${encodeURIComponent(msg.domain)}&default=${msg.defaultForAll ? 'all' : ''}`
-			));
-			shownIframe = true;
+				showIframe(chrome.runtime.getURL(
+					`app/templates/autoconsent.html?host=${encodeURIComponent(msg.domain)}&default=${msg.defaultForAll ? 'all' : ''}`
+				));
+				shownIframe = true;
 
-			return false;
+				return false;
+			}
+
+			return Promise.resolve(consent.receiveMessageCallback(msg));
 		}
 
-		return Promise.resolve(consent.receiveMessageCallback(msg));
-	}
-
-	return false;
-});
+		return false;
+	});
+}
