@@ -28,8 +28,15 @@ function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chrome.action.setBadgeBackgroundColor({ color });
 }
 
-// Set the badge background color on startup
-setBadgeColor();
+observe('terms', async (terms) => {
+  if (!terms) {
+    await chrome.action.setBadgeText({ text: '!' });
+    setBadgeColor('#f13436' /* danger-500 */);
+  } else {
+    await chrome.action.setBadgeText({ text: '' });
+    setBadgeColor();
+  }
+});
 
 const setIcon = throttle(
   async (tabId, stats) => {
@@ -71,16 +78,6 @@ const setIcon = throttle(
   // Firefox flickers when updating the icon, so we should expand the throttle
   __PLATFORM__ === 'firefox' ? 1000 : 250,
 );
-
-observe('terms', async (terms, prevTerms) => {
-  if (!terms) {
-    await chrome.action.setBadgeText({ text: '!' });
-    setBadgeColor('#f13436' /* danger-500 */);
-  } else if (prevTerms === false) {
-    await chrome.action.setBadgeText({ text: '' });
-    setBadgeColor();
-  }
-});
 
 export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);
