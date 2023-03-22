@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           cache: 'npm'
-          node-version: '18'
+          node-version: '19.8.1'
           cache-dependency-path: ./package-lock.json
       - name: Install dependencies in repo root
         run: npm ci
@@ -33,4 +33,3 @@ jobs:
           npm run test
       - name: Build
         run: npm run build.prod
-
