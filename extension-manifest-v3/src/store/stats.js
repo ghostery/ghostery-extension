@@ -11,9 +11,6 @@
 
 import { store } from 'hybrids';
 
-const supportsChangedListener =
-  chrome.runtime.getManifest().manifest_version >= 3;
-
 export const Company = {
   id: true,
   name: '',
@@ -29,9 +26,10 @@ const Stats = {
     {
       id: true,
       name: '',
+      url: '',
+      blocked: false,
       category: 'unknown',
       company: Company,
-      url: '',
     },
   ],
   byCategory: ({ trackers }) =>
@@ -74,19 +72,19 @@ const Stats = {
       return storage['tabStats:v1']?.entries[tabId];
     },
     observe:
-      !supportsChangedListener &&
+      __PLATFORM__ === 'safari' &&
       (() => {
         setTimeout(() => store.clear(Stats, false), 1000);
       }),
   },
 };
 
-if (supportsChangedListener) {
+export default Stats;
+
+if (__PLATFORM__ !== 'safari') {
   chrome.storage.onChanged.addListener((changes) => {
     if (changes['tabStats:v1']) {
       store.clear(Stats, false);
     }
   });
 }
-
-export default Stats;
