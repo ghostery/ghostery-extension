@@ -13,7 +13,7 @@
 // with local storage from time to time. That is done to prevent
 // the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
-class AutoSyncingMap {
+export default class AutoSyncingMap {
   constructor({
     storageKey,
     softFlushIntervalInMs = 200,
@@ -235,10 +235,3 @@ class AutoSyncingMap {
     return this._pending;
   }
 }
-
-// If you bump this number, the extension will start with a
-// clean state. Normally, this should not be needed.
-const autoSyncVersion = 1;
-const storageKey = `tabStats:v${autoSyncVersion}`;
-
-export default new AutoSyncingMap({ storageKey });

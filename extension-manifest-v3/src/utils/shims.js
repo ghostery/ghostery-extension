@@ -43,7 +43,11 @@ function shimAlarms() {
 }
 
 if (__PLATFORM__ === 'firefox') {
-  window.chrome = Object.assign(window.browser, {
+  window.chrome = Object.assign(browser, {
     alarms: shimAlarms(),
   });
+}
+
+if (!chrome.action) {
+  window.chrome.action = chrome.browserAction;
 }

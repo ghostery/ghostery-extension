@@ -18,12 +18,14 @@ import { order } from '@ghostery/ui/categories';
 import Request from './utils/request.js';
 import { getMetadata } from './utils/trackerdb.js';
 import Options, { observe } from '/store/options.js';
-import tabStats from './utils/map.js';
+import AutoSyncingMap from './utils/map.js';
 
-const action = chrome.browserAction || chrome.action;
+// If you bump this number, the extension will start with a
+// clean state. Normally, this should not be needed.
+const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
-  action.setBadgeBackgroundColor({ color });
+  chrome.action.setBadgeBackgroundColor({ color });
 }
 
 // Set the badge background color on startup
@@ -49,7 +51,7 @@ const setIcon = throttle(
         );
       }
       try {
-        await action.setIcon({ tabId, ...data });
+        await chrome.action.setIcon({ tabId, ...data });
       } catch (e) {
         console.error('Error while trying update the icon:', e);
       }
@@ -57,7 +59,7 @@ const setIcon = throttle(
 
     if (Options.trackerCount) {
       try {
-        await action.setBadgeText({
+        await chrome.action.setBadgeText({
           tabId,
           text: options.trackerCount ? String(stats.trackers.length) : '',
         });
@@ -72,10 +74,10 @@ const setIcon = throttle(
 
 observe('terms', async (terms, prevTerms) => {
   if (!terms) {
-    await action.setBadgeText({ text: '!' });
+    await chrome.action.setBadgeText({ text: '!' });
     setBadgeColor('#f13436' /* danger-500 */);
   } else if (prevTerms === false) {
-    await action.setBadgeText({ text: '' });
+    await chrome.action.setBadgeText({ text: '' });
     setBadgeColor();
   }
 });
