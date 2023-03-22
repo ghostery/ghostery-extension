@@ -9,6 +9,8 @@ if (__PLATFORM__ !== 'safari') {
     'search@ghostery.com', // Firefox
   ];
 
+  const GHOSTERY_NEW_TAB_EXTENSION_IDS = ['newtab@ghostery.com'];
+
   chrome.runtime.onMessageExternal.addListener(
     (message, sender, sendResponse) => {
       // Refresh session support for Ghostery Search extension
@@ -19,6 +21,17 @@ if (__PLATFORM__ !== 'safari') {
               (res) => sendResponse({ success: res !== undefined }),
               (error) => sendResponse({ success: false, error }),
             );
+            return true;
+          default:
+            console.error(`Unknown message type from "${sender.id}"`, message);
+        }
+      }
+
+      // Send historical stats to Ghostery New Tab extension
+      if (GHOSTERY_NEW_TAB_EXTENSION_IDS.includes(sender.id)) {
+        switch (message?.name) {
+          case 'getDashboardStats':
+            sendResponse({});
             return true;
           default:
             console.error(`Unknown message type from "${sender.id}"`, message);
