@@ -16,6 +16,7 @@ const options = {
 const TARGET_TO_MANIFEST_MAP = {
   chrome: 'chromium',
   opera: 'chromium',
+  edge: 'chromium',
   firefox: 'firefox',
   safari: 'safari',
 };
@@ -249,6 +250,13 @@ if (argv.watch) {
             settings = {
               target: 'chromium',
               chromiumBinary: '/Applications/Opera.app/Contents/MacOS/Opera',
+            };
+            break;
+          case 'edge':
+            settings = {
+              target: 'chromium',
+              chromiumBinary:
+                '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
             };
             break;
           default:
