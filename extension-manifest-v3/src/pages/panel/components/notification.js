@@ -19,6 +19,7 @@ function close(host, event) {
 export default {
   icon: '',
   href: '',
+  type: '', // warning
   render: ({ icon, href }) => html`
     <template layout="block">
       <ui-action>
@@ -30,16 +31,12 @@ export default {
           ${icon &&
           html`
             <div id="icon" layout="row center shrink:0 width:5">
-              <ui-icon
-                name="${icon}"
-                color="primary-700"
-                layout="margin"
-              ></ui-icon>
+              <ui-icon name="${icon}" layout="margin"></ui-icon>
             </div>
           `}
           <div layout="column gap grow">
             <ui-text type="body-s"><slot></slot></ui-text>
-            <ui-text id="action" type="label-s" color="primary-700">
+            <ui-text id="action" type="label-s">
               <slot name="action"></slot>
             </ui-text>
           </div>
@@ -58,9 +55,23 @@ export default {
       </ui-action>
     </template>
   `.css`
+    :host {
+      --ui-panel-notification-bg: var(--ui-color-gray-100);
+      --ui-panel-notification-color: var(--ui-color-primary-700);
+    }
+
+    #action {
+      color: var(--ui-panel-notification-color);
+    }
+
+    :host([type="warning"]) {
+      --ui-panel-notification-bg: var(--ui-color-danger-100);
+      --ui-panel-notification-color: var(--ui-color-danger-700);
+    }
+
     a {
+      background: var(--ui-panel-notification-bg);
       border-radius: 12px;
-      background: var(--ui-color-gray-100);
       color: inherit;
       text-decoration: none;
     }
@@ -71,6 +82,10 @@ export default {
       border-radius: 8px;
     }
 
+    #icon ui-icon {
+      color: var(--ui-panel-notification-color);
+    }
+
     #close > * {
       color: var(--ui-color-gray-600);
       background: var(--ui-color-white);
@@ -79,8 +94,8 @@ export default {
 
     @media (hover: hover) and (pointer: fine) {
       a:hover:not(:has(#close:hover)) {
-        background: var(--ui-color-primary-100);
-        --ui-text-color: var(--ui-color-primary-700);
+        background: var(--ui-panel-notification-bg);
+        --ui-text-color: var(--ui-panel-notification-color);
       }
 
       a:hover:not(:has(#close:hover)) #action {
@@ -89,7 +104,7 @@ export default {
 
       #close:hover > * {
         color: var(--ui-color-white);
-        background: var(--ui-color-primary-700);
+        background: var(--ui-panel-notification-color);
       }
     }
   `,
