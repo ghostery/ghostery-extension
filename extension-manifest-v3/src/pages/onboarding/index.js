@@ -15,10 +15,10 @@ import '@ghostery/ui/onboarding';
 
 import Options from '/store/options.js';
 
-function updateOptions(host, event) {
+async function updateOptions(host, event) {
   const success = event.type === 'success';
 
-  store.set(Options, {
+  await store.set(Options, {
     engines: Object.keys(Options.engines).reduce(
       (all, rule) => ({ ...all, [rule]: success }),
       {},
@@ -29,6 +29,7 @@ function updateOptions(host, event) {
       shownAt: null,
     },
   });
+
   chrome.runtime.sendMessage({
     action: 'telemetry',
     event: 'install_complete',
