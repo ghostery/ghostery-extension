@@ -13,8 +13,7 @@
     "webNavigation",
     "storage",
     "scripting",
-    "tabs",
-    "webRequest"
+    "tabs"
   ],
   "host_permissions": [
     "http://*/*",

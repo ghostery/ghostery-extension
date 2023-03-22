@@ -42,23 +42,6 @@
     "page": "pages/settings/index.html",
     "open_in_tab": true
   },
-  "permissions": [
-    "webNavigation",
-    "webRequest",
-    "cookies",
-    "tabs",
-    "alarms",
-    "storage",
-    "scripting",
-    "declarativeNetRequest",
-    "declarativeNetRequestFeedback"
-  ],
-  "host_permissions": [
-    "http://*/*",
-    "https://*/*",
-    "ws://*/*",
-    "wss://*/*"
-  ],
   "background": {
     "service_worker": "background/index.js",
     "type": "module"
@@ -83,13 +66,6 @@
     ]
   },
   "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "run_at": "document_start",
-      "js": [
-        "content_scripts/whotracksme/index.js"
-      ]
-    },
     {
       "matches": ["*://*/*"],
       "run_at": "document_start",
