@@ -56,5 +56,6 @@ export async function getMetadata(request) {
           website: pattern.website_url,
         },
     url: request.url,
+    blocked: request.blocked,
   };
 }

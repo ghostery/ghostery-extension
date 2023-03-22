@@ -9,15 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FiltersEngine, Request } from '@cliqz/adblocker';
+import { FiltersEngine } from '@cliqz/adblocker';
 import {
-  fromWebRequestDetails,
   filterRequestHTML,
   updateResponseHeadersWithCSP,
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
 import Options, { observe } from '/store/options.js';
+
+import Request from './utils/request.js';
 import { setupTabStats, updateTabStats } from './tab-stats';
 
 const adblockerEngines = Object.keys(Options.engines).map((name) => ({
@@ -300,44 +301,20 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      const isMainFrame = details.type === 'main_frame';
-      const sourceUrl = isMainFrame
-        ? details.url
-        : details.originUrl || details.documentUrl || '';
-
-      const parsedUrl = parse(details.url);
-      const parsedSourceUrl = isMainFrame ? parsedUrl : parse(sourceUrl);
-
-      const request = new Request({
-        requestId: details.requestId,
-        tabId: details.tabId,
-
-        domain: parsedUrl.domain,
-        hostname: parsedUrl.hostname,
-        url: details.url.toLowerCase(),
-
-        sourceDomain: parsedSourceUrl.domain || '',
-        sourceHostname: parsedSourceUrl.hostname || '',
-        sourceUrl: sourceUrl.toLowerCase(),
-
-        type: details.type,
-
-        _originalRequestDetails: details,
-      });
+      const request = Request.fromRequestDetails(details);
 
       // Update stats
-      if (details.tabId > -1 && parsedSourceUrl.domain) {
+      if (details.tabId > -1 && request.sourceDomain) {
         const tabId = details.tabId;
-        const domain = parsedSourceUrl.domain;
 
         Promise.resolve().then(
-          isMainFrame
-            ? () => setupTabStats(tabId, domain)
+          request.isMainFrame()
+            ? () => setupTabStats(tabId, request.sourceDomain)
             : () => updateTabStats(tabId, [request]),
         );
       }
 
-      if (pausedDomains.includes(parsedSourceUrl.domain)) {
+      if (pausedDomains.includes(request.sourceDomain)) {
         return;
       }
 
@@ -346,7 +323,7 @@ if (__PLATFORM__ === 'firefox') {
           continue;
         }
 
-        if (isMainFrame) {
+        if (request.isMainFrame()) {
           const htmlFilters = engine.getHtmlFilters(request);
           if (htmlFilters.length !== 0) {
             filterRequestHTML(
@@ -360,8 +337,10 @@ if (__PLATFORM__ === 'firefox') {
           const { redirect, match } = engine.match(request);
 
           if (redirect !== undefined) {
+            request.blocked = true;
             return { redirectUrl: redirect.dataUrl };
           } else if (match === true) {
+            request.blocked = true;
             return { cancel: true };
           }
         }
@@ -373,8 +352,9 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      const request = fromWebRequestDetails(details);
-      if (pausedDomains.includes(request.domain)) {
+      const request = Request.fromRequestDetails(details);
+
+      if (pausedDomains.includes(request.sourceDomain)) {
         return {};
       }
 

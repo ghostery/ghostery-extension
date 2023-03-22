@@ -11,16 +11,23 @@
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 import { throttle } from 'lodash-es';
+
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
+import Request from './utils/request.js';
 import { getMetadata } from './utils/trackerdb.js';
-import Options from '/store/options.js';
+import Options, { observe } from '/store/options.js';
 import tabStats from './utils/map.js';
-import { Request } from '@cliqz/adblocker';
 
 const action = chrome.browserAction || chrome.action;
-action.setBadgeBackgroundColor({ color: '#3f4146' /* gray-600 */ });
+
+function setBadgeColor(color = '#3f4146' /* gray-600 */) {
+  action.setBadgeBackgroundColor({ color });
+}
+
+// Set the badge background color on startup
+setBadgeColor();
 
 const setIcon = throttle(
   async (tabId, stats) => {
@@ -30,7 +37,7 @@ const setIcon = throttle(
       const paused = options.paused?.some(({ id }) => id === stats.domain);
       const data = {};
 
-      if (paused) {
+      if (paused || !options.terms) {
         data.path = {
           16: '/assets/images/icon19_off.png',
           32: '/assets/images/icon38_off.png',
@@ -62,6 +69,16 @@ const setIcon = throttle(
   // Firefox flickers when updating the icon, so we should expand the throttle
   __PLATFORM__ === 'firefox' ? 1000 : 250,
 );
+
+observe('terms', async (terms, prevTerms) => {
+  if (!terms) {
+    await action.setBadgeText({ text: '!' });
+    setBadgeColor('#f13436' /* danger-500 */);
+  } else if (prevTerms === false) {
+    await action.setBadgeText({ text: '' });
+    setBadgeColor();
+  }
+});
 
 export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);
@@ -114,7 +131,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 
   if (
-    __PLATFORM__ !== 'firefox' &&
+    __PLATFORM__ === 'safari' &&
     sender.tab?.id &&
     sender.frameId !== undefined
   ) {
@@ -138,3 +155,23 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   return false;
 });
+
+// Following code only applies to chromium-based browsers excluding:
+// * Safari - it does not support chrome.webRequest.onBeforeRequest
+// * Firefox - it has own implementation in `./adblocker.js` with blocking requests
+if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
+  chrome.webRequest.onBeforeRequest.addListener(
+    (details) => {
+      const request = Request.fromRequestDetails(details);
+
+      Promise.resolve().then(
+        request.isMainFrame()
+          ? () => setupTabStats(details.tabId, request.sourceDomain)
+          : () => updateTabStats(details.tabId, [request]),
+      );
+    },
+    {
+      urls: ['<all_urls>'],
+    },
+  );
+}
