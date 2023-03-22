@@ -16,7 +16,7 @@ export default {
   enabled: false,
   terms: false,
   render: ({ icon, enabled, terms }) => html`
-    <template layout="row items:center padding:1:1.5">
+    <template layout="row gap items:center padding:1:1.5">
       ${icon && html`<ui-icon name="${icon}" layout="margin:right"></ui-icon>`}
       <ui-text type="body-s" color="gray-900" layout="grow">
         <slot></slot>
