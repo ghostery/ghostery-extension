@@ -16,9 +16,9 @@ const observers = new Set();
 
 const Options = {
   engines: {
-    ads: true,
-    tracking: true,
-    annoyances: true,
+    ads: false,
+    tracking: false,
+    annoyances: false,
   },
   autoconsent: {
     all: false,
@@ -27,7 +27,7 @@ const Options = {
     interactions: 0,
   },
   trackerWheel: true,
-  ...(__PLATFORM__ === 'chromium' ? { trackerCount: true } : {}),
+  ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
   wtmSerpReport: true,
   terms: false,
   onboarding: { done: false, shownAt: 0, shown: 0 },
