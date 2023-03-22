@@ -44,6 +44,10 @@ function clearStorage(host, event) {
 
       // Clear main local storage
       chrome.storage.local.clear();
+
+      // Remove all indexedDBs
+      const dbs = await indexedDB.databases();
+      await Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name)));
     },
     'Storage cleared',
   );
