@@ -22,7 +22,8 @@ import Company from './company.js';
 
 const NOTIFICATIONS = [
   {
-    icon: 'help',
+    icon: 'triangle',
+    type: 'warning',
     text: 'Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.',
     url: 'https://www.ghostery.com/support?utm_source=gbe',
     action: 'Get help',
@@ -30,6 +31,7 @@ const NOTIFICATIONS = [
   __PLATFORM__ !== 'safari'
     ? {
         icon: 'heart',
+        type: '',
         text: 'Hey, do you enjoy Ghostery and want to support our work?',
         url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
         action: 'Become a Contributor',
@@ -224,6 +226,7 @@ export default {
               <gh-panel-notification
                 icon="${notification.icon}"
                 href="${notification.url}"
+                type="${notification.type}"
               >
                 ${notification.text}
                 <span slot="action">${notification.action}</span>
