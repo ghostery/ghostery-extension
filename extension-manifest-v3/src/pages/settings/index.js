@@ -11,9 +11,24 @@
 import '../../utils/shims.js';
 
 import '@ghostery/ui/settings';
-import { define } from 'hybrids';
+import { define, store } from 'hybrids';
 
-define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
-  root: ['components', 'views'],
-  prefix: 'gh-settings',
-});
+import Options from '/store/options.js';
+
+// As the user can access settings page from browser native UI
+// we must redirect to onboarding if terms are not accepted
+const { terms } = await store.resolve(Options);
+
+if (terms) {
+  define.from(
+    import.meta.glob('./**/*.js', { eager: true, import: 'default' }),
+    {
+      root: ['components', 'views'],
+      prefix: 'gh-settings',
+    },
+  );
+} else {
+  window.location.replace(
+    chrome.runtime.getURL('/pages/onboarding/index.html'),
+  );
+}
