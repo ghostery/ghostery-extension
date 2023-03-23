@@ -92,64 +92,24 @@ describe('src/utils/matcher.js', () => {
 	describe('testing isBug()', () => {
 		describe('testing basic pattern matching', () => {
 			test('host only tracker matching works', () => {
-				expect(isBug('https://gmodules.com/', 'example.com')).toBe(101);
+				expect(isBug('https://gmodules.com/')).toBe(101);
 			});
 
 			test('host+path tracker matching works', () => {
-				expect(isBug('https://apis.google.com/js/plusone.js', 'example.com')).toBe(1240);
+				expect(isBug('https://apis.google.com/js/plusone.js')).toBe(1240);
 			});
 
 			test('path only tracker matching works', () => {
-				expect(isBug('https://apis.google.com/js/tracking.js', 'example.com')).toBe(13);
+				expect(isBug('https://apis.google.com/js/tracking.js')).toBe(13);
 			});
 
 			test('regex tracker matching works', () => {
-				expect(isBug('https://apis.google.com/js/tracking.js', 'example.com')).toBe(13);
+				expect(isBug('https://apis.google.com/js/tracking.js')).toBe(13);
 			});
 
 			test('pattern matching is case insensitive', () => {
-				expect(isBug('https://googletagservices.com/anything/tracker.js', 'example.com')).toBe(15);
-				expect(isBug('https://googletagservices.com/anything/tracker.css', 'example.com')).toBeFalsy();
-			});
-		});
-
-		describe('testing isBug() first party exceptions for twitter', () => {
-			const twitter_button = 'http://platform.twitter.com/widgets/';
-
-			test('first confirm Twitter Button is a tracker', () => {
-				expect(isBug(twitter_button)).toBe(991);
-			});
-
-			test('host-only first-party exception', () => {
-				expect(isBug(twitter_button, 'https://twitter.com/ghostery')).toBeFalsy();
-			});
-
-			test('same exception on the same page URL as above, but with www', () => {
-				expect(isBug(twitter_button, 'https://www.twitter.com/ghostery')).toBeFalsy();
-			});
-		});
-
-		describe('testing isBug() first party exceptions for google widgets', () => {
-			const google_widgets = 'http://gmodules.com/blah';
-
-			test('first confirm Google Widgets is a tracker', () => {
-				expect(isBug(google_widgets)).toBe(101);
-			});
-
-			test('host and exact path exception', () => {
-				expect(isBug(google_widgets, 'http://google.com/ig')).toBeFalsy();
-			});
-		});
-
-		describe('testing isBug() first party exceptions for google plus one', () => {
-			const google_plus_one = 'https://apis.google.com/js/plusone.js';
-
-			test('first confirm Google +1 is a tracker', () => {
-				expect(isBug(google_plus_one)).toBe(1240);
-			});
-
-			test('host and fuzzy path exception', () => {
-				expect(isBug(google_plus_one, 'https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij?hl=en')).toBeFalsy();
+				expect(isBug('https://googletagservices.com/anything/tracker.js')).toBe(15);
+				expect(isBug('https://googletagservices.com/anything/tracker.css')).toBeFalsy();
 			});
 		});
 	});

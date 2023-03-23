@@ -29,7 +29,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_click2play: false,
 				enable_click2play_social: false,
 				toggle_individual_trackers: false,
-				ignore_first_party: false,
 			};
 			const actions = {
 				updateDatabase: () => {},
@@ -55,7 +54,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_click2play: true,
 				enable_click2play_social: true,
 				toggle_individual_trackers: true,
-				ignore_first_party: true,
 			};
 			const actions = {
 				updateDatabase: () => {},
@@ -82,7 +80,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_click2play: false,
 				enable_click2play_social: false,
 				toggle_individual_trackers: false,
-				ignore_first_party: false,
 			};
 			const actions = {
 				updateDatabase: jest.fn(),
@@ -103,8 +100,7 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 
 			expect(toggleCheckbox.mock.calls.length).toBe(0);
 			component.find('input[type="checkbox"]').at(0).simulate('click');
-			component.find('#settings-allow-trackers').simulate('click');
-			expect(toggleCheckbox.mock.calls.length).toBe(2);
+			expect(toggleCheckbox.mock.calls.length).toBe(1);
 		});
 	});
 });

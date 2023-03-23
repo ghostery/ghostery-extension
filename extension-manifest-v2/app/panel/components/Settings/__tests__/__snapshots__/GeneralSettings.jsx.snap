@@ -219,37 +219,6 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           className="s-square-checkbox"
         >
           <input
-            defaultChecked={false}
-            id="settings-allow-trackers"
-            name="ignore_first_party"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-allow-trackers"
-          >
-            <span>
-              settings_allow_trackers
-            </span>
-          </label>
-          <div
-            className="s-tooltip-up"
-            data-g-tooltip="settings_allow_trackers_tooltip"
-          >
-            <img
-              className="s-question"
-              src="/app/images/panel/icon-information-tooltip.svg"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
             id="settings-show-redirect-tracking-dialogs"
             name="show_redirect_tracking_dialogs"
             onClick={[Function]}
@@ -483,37 +452,6 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           <div
             className="s-tooltip-up"
             data-g-tooltip="settings_individual_trackers_tooltip"
-          >
-            <img
-              className="s-question"
-              src="/app/images/panel/icon-information-tooltip.svg"
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-allow-trackers"
-            name="ignore_first_party"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-allow-trackers"
-          >
-            <span>
-              settings_allow_trackers
-            </span>
-          </label>
-          <div
-            className="s-tooltip-up"
-            data-g-tooltip="settings_allow_trackers_tooltip"
           >
             <img
               className="s-question"

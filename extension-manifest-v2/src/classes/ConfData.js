@@ -107,7 +107,6 @@ class ConfData {
 			_initProperty('enable_smart_block', false);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
-			_initProperty('ignore_first_party', true);
 			_initProperty('import_callout_dismissed', true);
 			_initProperty('install_random_number', 0);
 			_initProperty('install_date', 0);

@@ -12,7 +12,6 @@
  */
 
 import bugDb from '../classes/BugDb';
-import conf from '../classes/Conf';
 import { processUrl, processTrackerUrl } from './utils';
 import { log } from './common';
 
@@ -213,11 +212,10 @@ function _matchesPath(src_path) {
  * @memberOf BackgroundUtils
  *
  * @param {string} 	src		 	url of the request
- * @param {string}	tab_url	 	url of the page
  *
  * @return {int|boolean} 		bug id or false
  */
-export function isBug(src, tab_url) {
+export function isBug(src) {
 	const { db } = bugDb;
 	const processedSrc = processUrl(src.toLowerCase());
 	let	found = false;
@@ -233,16 +231,6 @@ export function isBug(src, tab_url) {
 		_matchesPath(path) ||
 		// class 4: check regex patterns
 		_matchesRegex(processedSrc.host + processedSrc.pathname);
-
-	if (typeof tab_url !== 'undefined') {
-		// check firstPartyExceptions
-		if (conf.ignore_first_party &&
-			found !== false &&
-			db.firstPartyExceptions[found] &&
-			fuzzyUrlMatcher(tab_url, db.firstPartyExceptions[found])) {
-			return false;
-		}
-	}
 
 	return found;
 }
