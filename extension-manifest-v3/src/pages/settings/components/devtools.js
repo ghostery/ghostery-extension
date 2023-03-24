@@ -46,8 +46,11 @@ function clearStorage(host, event) {
       chrome.storage.local.clear();
 
       // Remove all indexedDBs
-      const dbs = await indexedDB.databases();
-      await Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name)));
+      // Note: Firefox doesn't support indexedDB.databases()
+      if (indexedDB.databases) {
+        const dbs = await indexedDB.databases();
+        await Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name)));
+      }
     },
     'Storage cleared',
   );

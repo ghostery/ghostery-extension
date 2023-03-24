@@ -136,10 +136,10 @@ async function migrateFromMV2() {
       await Promise.all([
         // Clean up indexedDBs
         indexedDB
-          .databases()
+          .databases?.()
           .then((dbs) =>
             Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name))),
-          ),
+          ) ?? Promise.resolve(),
         // Set options by hand to make sure, that
         // paused side effects are triggered
         Options[store.connect].set(undefined, options, ['paused']),

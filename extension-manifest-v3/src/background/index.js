@@ -15,7 +15,7 @@ import './onboarding.js';
 
 import './autoconsent.js';
 import './adblocker.js';
-import './tab-stats.js';
+import './stats.js';
 import './trackers-preview.js';
 
 import './alarms.js';

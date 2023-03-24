@@ -16,13 +16,20 @@ import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
 import Request from './utils/request.js';
-import { getMetadata } from './utils/trackerdb.js';
+import * as trackerDb from './utils/trackerdb.js';
 import Options, { observe } from '/store/options.js';
 import AutoSyncingMap from './utils/map.js';
 
-// If you bump this number, the extension will start with a
-// clean state. Normally, this should not be needed.
 const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
+const dailyStats = new AutoSyncingMap({
+  storageKey: 'dailyStats:v1',
+  softFlushIntervalInMs: 1000, // 1 second
+  hardFlushIntervalInMs: 5000, // 5 seconds
+  ttlInMs: 1000 * 60 * 60 * 24 * 365 * 5, // 5 years
+  maxEntries: 365 * 5 + 2, // ~ 5 years of data + 2 days for 29th of February (worst case scenario)
+});
+
+const DAILY_STATS_ADS_CATEGORY = 'advertising';
 
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chrome.action.setBadgeBackgroundColor({ color });
@@ -79,6 +86,58 @@ const setIcon = throttle(
   __PLATFORM__ === 'firefox' ? 1000 : 250,
 );
 
+export async function getStats(since = '') {
+  let entries = await dailyStats.getAll();
+
+  if (since) {
+    const sinceDate = new Date(since);
+    entries = entries.filter(([date]) => new Date(date) >= sinceDate);
+  }
+
+  const [, firstStats] = entries.shift();
+  const result = { ...firstStats };
+
+  result.patterns = new Set(result.patterns);
+
+  for (const [, stats] of entries) {
+    for (const key of Object.keys(stats)) {
+      if (key === 'trackers') {
+        for (const t of stats.patterns) result.patterns.add(t);
+      } else {
+        result[key] = result[key] + stats[key];
+      }
+    }
+  }
+
+  const patterns = [];
+  const patternsDetailed = [];
+  for (const key of result.patterns) {
+    patterns.push(key);
+
+    const pattern = await trackerDb.getPattern(key);
+    if (pattern) patternsDetailed.push(pattern);
+  }
+
+  return Object.assign(result, { patterns, patternsDetailed });
+}
+
+function updateDailyStats(fn) {
+  const todayDate = new Date().toISOString().split('T')[0];
+
+  const stats = dailyStats.get(todayDate) || {
+    all: 0,
+    allBlocked: 0,
+    ads: 0,
+    adsBlocked: 0,
+    trackers: 0,
+    trackersBlocked: 0,
+    pages: 0,
+    patterns: [],
+  };
+
+  dailyStats.set(todayDate, fn(stats));
+}
+
 export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);
 
@@ -92,10 +151,13 @@ export async function updateTabStats(tabId, requests) {
 
   if (!filtered.length) return;
 
+  const patterns = [];
+
   for (const request of filtered) {
-    const pattern = await getMetadata(request);
+    const pattern = await trackerDb.getMetadata(request);
     if (pattern) {
       stats.trackers.push(pattern);
+      patterns.push(pattern);
     }
   }
 
@@ -105,6 +167,28 @@ export async function updateTabStats(tabId, requests) {
 
   tabStats.set(tabId, stats);
   setIcon(tabId, stats);
+
+  updateDailyStats((stats) => {
+    for (const pattern of patterns) {
+      stats.all += 1;
+
+      if (pattern.blocked) stats.allBlocked += 1;
+
+      if (pattern.category === DAILY_STATS_ADS_CATEGORY) {
+        stats.ads += 1;
+        if (pattern.blocked) stats.adsBlocked += 1;
+      } else {
+        stats.trackers += 1;
+        if (pattern.blocked) stats.trackersBlocked += 1;
+      }
+
+      if (pattern.key && !stats.patterns.includes(pattern.key)) {
+        stats.patterns.push(pattern.key);
+      }
+    }
+
+    return stats;
+  });
 }
 
 export function setupTabStats(tabId, domain) {
@@ -116,6 +200,11 @@ export function setupTabStats(tabId, domain) {
 
     // Clean up throttled icon update
     setIcon.cancel();
+
+    // Counts up pages visited in daily stats
+    updateDailyStats((stats) =>
+      Object.assign(stats, { pages: stats.pages + 1 }),
+    );
   }
 }
 

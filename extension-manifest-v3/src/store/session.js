@@ -25,6 +25,7 @@ export default {
   name: ({ firstName, lastName }) =>
     [firstName, lastName].filter((s) => s).join(' '),
   [store.connect]: {
+    cache: false,
     offline: true,
     async get() {
       try {

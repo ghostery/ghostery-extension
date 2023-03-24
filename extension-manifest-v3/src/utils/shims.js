@@ -4,16 +4,21 @@ function shimAlarms() {
   const alarms = new Map();
 
   return {
+    async get(name) {
+      if (alarms.has(name)) {
+        return { name };
+      }
+    },
+    async clear(name) {
+      clearTimeout(alarms.get(name));
+      alarms.delete(name);
+    },
     async getAll() {
       return Array.from(alarms.keys()).map((name) => ({ name }));
     },
     async clearAll() {
       alarms.forEach((timeout) => clearTimeout(timeout));
       alarms.clear();
-    },
-    async clear(name) {
-      clearTimeout(alarms.get(name));
-      alarms.delete(name);
     },
     create(name, options) {
       if (options.when) {

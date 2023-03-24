@@ -38,7 +38,8 @@ export async function getMetadata(request) {
 
   const { category, pattern, organization } = matches[0];
 
-  return {
+  const metadata = {
+    key: pattern.key,
     name: pattern.name,
     category: category.key,
     company: organization
@@ -58,4 +59,21 @@ export async function getMetadata(request) {
     url: request.url,
     blocked: request.blocked,
   };
+
+  return metadata;
+}
+
+const patterns = new Map();
+export async function getPattern(key) {
+  if (trackerDBStartupPromise) {
+    await trackerDBStartupPromise;
+  }
+
+  if (!patterns.size) {
+    for (const p of engine.metadata.getPatterns()) {
+      patterns.set(p.key, p);
+    }
+  }
+
+  return patterns.get(key);
 }
