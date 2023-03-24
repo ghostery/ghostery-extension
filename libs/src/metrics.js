@@ -99,6 +99,7 @@ class Metrics {
 
     this.utm_source = '';
     this.utm_campaign = '';
+    // Store non-critical pings until install_complete
     this.ping_set = new Set();
     this.saveStorage = saveStorage;
     this.storage = storage || {};
@@ -572,8 +573,6 @@ class Metrics {
     }
     if (this.ping_set && this.ping_set.size < MAX_DELAYED_PINGS) {
       this.ping_set.add(type);
-    } else {
-      this.ping_set = [];
     }
     return false;
   }
@@ -596,7 +595,7 @@ class Metrics {
    */
   _recordInstallComplete() {
     this._sendReq('install_complete');
-    this.ping_set.forEach((type) => {
+    this.ping_set?.forEach((type) => {
       this.ping(type);
     });
     delete this.ping_set;
