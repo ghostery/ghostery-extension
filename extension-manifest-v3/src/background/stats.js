@@ -24,10 +24,10 @@ import AutoSyncingMap from './utils/map.js';
 const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 const dailyStats = new AutoSyncingMap({
   storageKey: 'dailyStats:v1',
-  softFlushIntervalInMs: 1000, // 1 second
-  hardFlushIntervalInMs: 5000, // 5 seconds
+  softFlushIntervalInMs: 1000 * 10,
+  hardFlushIntervalInMs: 1000 * 60,
   ttlInMs: 1000 * 60 * 60 * 24 * 365 * 5, // 5 years
-  maxEntries: 365 * 5 + 2, // ~ 5 years of data + 2 days for 29th of February (worst case scenario)
+  maxEntries: 2500,
 });
 
 const DAILY_STATS_ADS_CATEGORY = 'advertising';
