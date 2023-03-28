@@ -231,7 +231,7 @@ function delay(timeInMs) {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 }
 
-chrome.webNavigation.onCommitted.addListener((details) => {
+function onLocationChange(details) {
   if (!reporting.isActive) return;
 
   const { url, frameId, tabId } = details;
@@ -278,7 +278,10 @@ chrome.webNavigation.onCommitted.addListener((details) => {
       console.warn('Unexpected error in reporting module:', e);
     }
   })();
-});
+}
+
+chrome.webNavigation.onCommitted.addListener(onLocationChange);
+chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
 
 // for debugging service-workers (TODO: provide a way to control logging)
 globalThis.ghostery = globalThis.ghostery || {};
