@@ -264,8 +264,8 @@ ${scripts.join('\n\n')}}
   );
 }
 
-chrome.webNavigation.onCommitted.addListener(async (details) => {
-  const { hostname, domain } = parse(details.url);
+async function injectScriptlets(tabId, url) {
+  const { hostname, domain } = parse(url);
   if (!hostname || pausedDomains.includes(domain)) {
     return;
   }
@@ -280,7 +280,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
     }
 
     const { active, scripts } = engine.getCosmeticsFilters({
-      url: details.url,
+      url: url,
       hostname,
       domain: domain || '',
       getBaseRules: false,
@@ -293,10 +293,24 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
       return;
     }
     if (scripts.length > 0) {
-      executeScriptlets(details.tabId, scripts);
+      executeScriptlets(tabId, scripts);
     }
   });
-});
+}
+
+if (__PLATFORM__ === 'safari') {
+  chrome.runtime.onMessage.addListener((msg, sender) => {
+    if (sender.url && msg.action === 'onCommitted') {
+      injectScriptlets(sender.tab.id, sender.url);
+    }
+
+    return false;
+  });
+} else {
+  chrome.webNavigation.onCommitted.addListener(async (details) => {
+    injectScriptlets(details.tabId, details.url);
+  });
+}
 
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
