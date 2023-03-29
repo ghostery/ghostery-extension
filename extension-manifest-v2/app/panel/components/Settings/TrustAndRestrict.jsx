@@ -13,7 +13,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { parse } from 'tldts-experimental';
 import Sites from './Sites';
+
 /**
  * @class Implement Trust and Restrict subview presenting the lists
  * of whitelisted and blacklisted sites.
@@ -39,26 +41,15 @@ class TrustAndRestrict extends React.Component {
 	}
 
 	static isValidUrlorWildcard(pageHost) {
-		// Only allow valid host name characters, ':' for port numbers and '*' for wildcards
-		const isSafePageHost = /^[a-zA-Z0-9-.:*]*$/;
-		if (!isSafePageHost.test(pageHost)) { return false; }
+		let hostname = pageHost;
 
-		// Check for valid URL from node-validator
-		const isValidUrlRegex = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
-		if (isValidUrlRegex.test(pageHost)) return true;
-
-		// Check for valid wildcard
-		let isValidWildcard = false;
 		if (pageHost.includes('*')) {
-			const wildcardPattern = pageHost.replace(/\*/g, '.*');
-			try {
-				const regex = new RegExp(wildcardPattern); // eslint-disable-line no-unused-vars
-				isValidWildcard = true;
-			} catch (err) {
-				return false;
-			}
+			hostname = pageHost.replace(/\*/g, 'x');
 		}
-		return isValidWildcard;
+
+		if (parse(hostname).hostname) { return true; }
+
+		return false;
 	}
 
 	/**
@@ -139,7 +130,9 @@ class TrustAndRestrict extends React.Component {
 		}
 
 		this.showWarning('');
-		pageHost = pageHost.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
+		pageHost = pageHost.toLowerCase()
+			.replace(/^(http[s]?:\/\/)?(www\.)?/, '')
+			.replace(/\/+$/, '');
 
 		// Check for Validity
 		if (pageHost.length >= 2083
