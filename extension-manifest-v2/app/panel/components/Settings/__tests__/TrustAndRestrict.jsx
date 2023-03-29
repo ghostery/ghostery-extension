@@ -13,7 +13,6 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { when } from 'jest-when';
 import TrustAndRestrict from '../TrustAndRestrict';
 
 describe('app/panel/components/Settings/TrustAndRestrict', () => {
@@ -33,114 +32,40 @@ describe('app/panel/components/Settings/TrustAndRestrict', () => {
 
 describe('app/panel/components/Settings/', () => {
 	test('isValidUrlorWildcard should return true with url entered', () => {
-		let input = 'ghostery.com';
-		let fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		let returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
-
-		input = 'localhost:3000';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('ghostery.com')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('localhost:3000')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('linux.home')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('hassio:8123')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('127.0.0.1')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('127.0.0.1:80')).toBe(true);
 	});
 
 	test('isValidUrlorWildcard should return true with wildcard URL entered', () => {
-		let input = 'developer.*.org';
-		let fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		let returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
-
-		input = '*.com';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
-
-		input = '*';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
-
-		input = 'developer.*';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
-
-		input = '****';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('developer.*.org')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('*.com')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('*')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('developer.*')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('****')).toBe(true);
+		expect(TrustAndRestrict.isValidUrlorWildcard('αράδειγμα.δοκιμ.*')).toBe(true);
 	});
 
 	test('isValidUrlorWildcard should return false with wildcard URL entered', () => {
-		let input = '<script>*</script>';
-		let fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		let returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = '+$@@#$*';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = 'αράδειγμα.δοκιμ.*';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = 'SELECT * FROM USERS';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard('<script>*</script>')).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard('+$@@#$*')).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard('SELECT * FROM USERS')).toBe(false);
 	});
 
 	test('isValidUrlorWildcard should return false with regex entered', () => {
-		let input = ')';
-		let fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		let returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = '++';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = '/foo(?)/';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard(')')).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard('++')).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard('/foo(?)/')).toBe(false);
 	});
 
 	test('isValidUrlorWildcard should return false with unsafe test entered', () => {
-		let input = '/^(\w+\s?)*$/'; // eslint-disable-line no-useless-escape
-		let fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		let returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = '/^([0-9]+)*$/';
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
-
-		input = '(x\w{1,10})+y'; // eslint-disable-line no-useless-escape
-		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
+		// eslint-disable-next-line no-useless-escape
+		expect(TrustAndRestrict.isValidUrlorWildcard('/^(\w+\s?)*$/')).toBe(false);
+		expect(TrustAndRestrict.isValidUrlorWildcard('/^([0-9]+)*$/')).toBe(false);
+		// eslint-disable-next-line no-useless-escape
+		expect(TrustAndRestrict.isValidUrlorWildcard('(x\w{1,10})+y')).toBe(false);
 	});
 });
