@@ -16,19 +16,14 @@ import { throttle } from 'lodash-es';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
+import DailyStats, { getMergedStats } from '/store/daily-stats.js';
+import Options, { observe } from '/store/options.js';
+
 import Request from './utils/request.js';
 import * as trackerDb from './utils/trackerdb.js';
-import Options, { observe } from '/store/options.js';
 import AutoSyncingMap from './utils/map.js';
 
 const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
-const dailyStats = new AutoSyncingMap({
-  storageKey: 'dailyStats:v1',
-  softFlushIntervalInMs: 1000 * 10,
-  hardFlushIntervalInMs: 1000 * 60,
-  ttlInMs: 1000 * 60 * 60 * 24 * 365 * 5, // 5 years
-  maxEntries: 2500,
-});
 
 const DAILY_STATS_ADS_CATEGORY = 'advertising';
 
@@ -87,56 +82,25 @@ const setIcon = throttle(
   __PLATFORM__ === 'firefox' ? 1000 : 250,
 );
 
-export async function getStats(since = '') {
-  let entries = await dailyStats.getAll();
+export async function getStatsWithMetadata(since) {
+  const result = await getMergedStats(since);
 
-  if (since) {
-    const sinceDate = new Date(since);
-    entries = entries.filter(([date]) => new Date(date) >= sinceDate);
-  }
-
-  const [, firstStats] = entries.shift();
-  const result = { ...firstStats };
-
-  result.patterns = new Set(result.patterns);
-
-  for (const [, stats] of entries) {
-    for (const key of Object.keys(stats)) {
-      if (key === 'trackers') {
-        for (const t of stats.patterns) result.patterns.add(t);
-      } else {
-        result[key] = result[key] + stats[key];
-      }
-    }
-  }
-
-  const patterns = [];
   const patternsDetailed = [];
   for (const key of result.patterns) {
-    patterns.push(key);
-
     const pattern = await trackerDb.getPattern(key);
     if (pattern) patternsDetailed.push(pattern);
   }
 
-  return Object.assign(result, { patterns, patternsDetailed });
+  return Object.assign(result, { patternsDetailed });
 }
 
 function updateDailyStats(fn) {
-  const todayDate = new Date().toISOString().split('T')[0];
+  const stats = store.get(DailyStats, new Date().toISOString().split('T')[0]);
 
-  const stats = dailyStats.get(todayDate) || {
-    all: 0,
-    allBlocked: 0,
-    ads: 0,
-    adsBlocked: 0,
-    trackers: 0,
-    trackersBlocked: 0,
-    pages: 0,
-    patterns: [],
-  };
+  const mutableStats = { ...stats, patterns: [...stats.patterns] };
+  delete mutableStats.id;
 
-  dailyStats.set(todayDate, fn(stats));
+  store.set(stats, fn(mutableStats));
 }
 
 export async function updateTabStats(tabId, requests) {

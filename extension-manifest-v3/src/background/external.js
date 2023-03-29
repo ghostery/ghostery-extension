@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import Session from '/store/session.js';
 
 import { session } from '/utils/api.js';
-import { getStats } from './stats.js';
+import { getStatsWithMetadata } from './stats.js';
 
 if (__PLATFORM__ !== 'safari') {
   // Listen for messages from Ghostery Search extension
@@ -48,7 +48,7 @@ if (__PLATFORM__ !== 'safari') {
         switch (message?.name) {
           case 'getDashboardStats': {
             (async () => {
-              const stats = await getStats();
+              const stats = await getStatsWithMetadata();
 
               sendResponse({
                 adsBlocked: stats.adsBlocked,

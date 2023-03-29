@@ -24,3 +24,4 @@ import './dnr.js';
 import './telemetry.js';
 import './reporting.js';
 import './external.js';
+import './devtools.js';

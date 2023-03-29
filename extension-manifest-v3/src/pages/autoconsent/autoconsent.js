@@ -12,7 +12,7 @@
 import { define, html, store } from 'hybrids';
 
 import Options from '/store/options.js';
-import Stats from '/store/stats.js';
+import TabStats from '/store/tab-stats.js';
 
 const hostname = new URLSearchParams(window.location.search).get('host');
 
@@ -67,7 +67,7 @@ async function disable(_, event) {
 
 export default define({
   tag: 'gh-autoconsent',
-  stats: store(Stats),
+  stats: store(TabStats),
   content: ({ stats }) =>
     html`
       <template layout="block">

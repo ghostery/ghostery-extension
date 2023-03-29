@@ -10,6 +10,7 @@
  */
 
 import { store } from 'hybrids';
+import { deleteDB } from 'idb';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 const observers = new Set();
@@ -95,6 +96,9 @@ const Options = {
 
 export default Options;
 
+// TODO: Collect and set databases names before switching to MV3
+const MV2_INDEXED_DB_NAMES = [];
+
 async function migrateFromMV2() {
   try {
     const options = {};
@@ -133,17 +137,13 @@ async function migrateFromMV2() {
 
       await chrome.storage.local.clear();
 
-      await Promise.all([
-        // Clean up indexedDBs
-        indexedDB
-          .databases?.()
-          .then((dbs) =>
-            Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name))),
-          ) ?? Promise.resolve(),
-        // Set options by hand to make sure, that
-        // paused side effects are triggered
-        Options[store.connect].set(undefined, options, ['paused']),
-      ]);
+      // Delete indexedDBs
+      // Notice: Doesn't wait to avoid blocking the migrated options
+      MV2_INDEXED_DB_NAMES.forEach((name) => deleteDB(name));
+
+      // Set options by hand to make sure, that
+      // paused side effects are triggered
+      await Options[store.connect].set(undefined, options, ['paused']);
     }
 
     return options;

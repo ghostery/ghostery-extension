@@ -11,7 +11,7 @@
 
 import { html, router, store } from 'hybrids';
 import { categories } from '@ghostery/ui/labels';
-import Stats, { Company } from '/store/stats';
+import TabStats, { Company } from '/store/tab-stats.js';
 
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
@@ -37,7 +37,7 @@ export default {
   [router.connect]: { dialog: true },
   tag: 'gh-panel-company-view',
   company: store(Company),
-  stats: store(Stats),
+  stats: store(TabStats),
   trackers: ({ company, stats }) =>
     store.ready(stats) && stats.trackers.filter((t) => t.company === company),
   trackersByCategory: ({ trackers }) => [
