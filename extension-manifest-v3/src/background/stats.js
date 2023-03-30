@@ -94,13 +94,16 @@ export async function getStatsWithMetadata(since) {
   return Object.assign(result, { patternsDetailed });
 }
 
-function updateDailyStats(fn) {
-  const stats = store.get(DailyStats, new Date().toISOString().split('T')[0]);
+async function updateDailyStats(fn) {
+  const stats = await store.resolve(
+    DailyStats,
+    new Date().toISOString().split('T')[0],
+  );
 
   const mutableStats = { ...stats, patterns: [...stats.patterns] };
   delete mutableStats.id;
 
-  store.set(stats, fn(mutableStats));
+  await store.set(stats, fn(mutableStats));
 }
 
 export async function updateTabStats(tabId, requests) {

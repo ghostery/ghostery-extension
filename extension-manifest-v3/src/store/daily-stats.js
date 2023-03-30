@@ -6,21 +6,62 @@ import { registerDatabase } from '/utils/indexeddb.js';
 // Synchronously register name of the database
 // so if a user don't open any page, it is still possible
 // to delete the database from settings page
-const DB_NAME = registerDatabase('stats');
+const DB_NAME = registerDatabase('insights');
 
 async function getDb() {
+  let upgradeFromMV2 = false;
+
   if (!getDb.current) {
-    getDb.current = await IDB.openDB(DB_NAME, 1, {
-      upgrade(db) {
-        // Version 1
-        const daily = db.createObjectStore('daily', { keyPath: 'id' });
-        daily.createIndex('id', 'id', { unique: true });
+    getDb.current = await IDB.openDB(DB_NAME, 31, {
+      async upgrade(db, oldVersion) {
+        upgradeFromMV2 = oldVersion > 0 && oldVersion < 31;
+
+        if (oldVersion < 1) {
+          db.createObjectStore('daily', { keyPath: 'day' });
+        }
+
+        if (oldVersion >= 20) {
+          db.deleteObjectStore('search');
+        }
+
+        if (oldVersion === 30) {
+          db.deleteObjectStore('tabs');
+        }
       },
       blocking() {
         getDb.current.close();
         getDb.current = null;
+        upgradeFromMV2 = false;
       },
     });
+  }
+
+  if (upgradeFromMV2) {
+    const db = getDb.current;
+    const oldStats = await db.getAll('daily');
+    const tx = db.transaction('daily', 'readwrite');
+    const daily = tx.objectStore('daily');
+
+    for (const stats of oldStats) {
+      daily.delete(stats.day);
+
+      await daily.put({
+        id: stats.day,
+        day: stats.day,
+        all:
+          stats.adsBlocked + stats.trackersDetected + stats.trackersBlocked ||
+          0,
+        allBlocked: stats.adsBlocked + stats.trackersBlocked || 0,
+        ads: stats.adsBlocked || 0,
+        adsBlocked: stats.adsBlocked || 0,
+        trackers: stats.trackersDetected + stats.trackersBlocked || 0,
+        trackersBlocked: stats.trackersBlocked || 0,
+        pages: stats.pages || 0,
+        patterns: stats.trackers || [],
+      });
+    }
+
+    await tx.done;
   }
 
   return getDb.current;
@@ -51,6 +92,7 @@ async function flush(id) {
 
 const DailyStats = {
   id: true,
+  day: '',
   all: 0,
   allBlocked: 0,
   ads: 0,
@@ -60,8 +102,9 @@ const DailyStats = {
   pages: 0,
   patterns: [String],
   [store.connect]: {
-    get(id) {
-      return { id };
+    async get(id) {
+      const db = await getDb();
+      return (await db.get('daily', id)) || { id, day: id };
     },
     set(id, values) {
       flush(id);
@@ -74,7 +117,7 @@ export default DailyStats;
 
 export async function getMergedStats(since) {
   const db = await getDb();
-  const list = await db.getAllFromIndex('daily', 'id', since);
+  const list = await db.getAllFromIndex('daily', 'day', since);
 
   const result = list.reduce(
     (acc, stats) => {
