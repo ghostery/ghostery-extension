@@ -96,13 +96,6 @@ export default class AutoSyncingMap {
     return this.inMemoryMap.get(key);
   }
 
-  async getAll() {
-    this._warnIfOutOfSync();
-
-    await this._pending;
-    return [...this.inMemoryMap.entries()];
-  }
-
   set(_key, value) {
     this._warnIfOutOfSync();
 
