@@ -48,16 +48,14 @@ async function getDb() {
       await daily.put({
         id: stats.day,
         day: stats.day,
-        all:
-          stats.adsBlocked + stats.trackersDetected + stats.trackersBlocked ||
-          0,
+        all: stats.adsBlocked + stats.trackerRequestsBlocked || 0,
         allBlocked: stats.adsBlocked + stats.trackersBlocked || 0,
         ads: stats.adsBlocked || 0,
         adsBlocked: stats.adsBlocked || 0,
         cookiesBlocked: stats.cookiesBlocked || 0,
         fingerprintsRemoved: stats.fingerprintsRemoved || 0,
-        trackers: stats.trackersDetected + stats.trackersBlocked || 0,
-        trackersBlocked: stats.trackersBlocked || 0,
+        trackers: stats.trackerRequestsBlocked || 0,
+        trackersBlocked: stats.trackerRequestsBlocked || 0,
         pages: stats.pages || 0,
         patterns: stats.trackers || [],
       });
