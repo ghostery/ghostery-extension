@@ -281,7 +281,10 @@ function onLocationChange(details) {
 }
 
 chrome.webNavigation.onCommitted.addListener(onLocationChange);
-chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
+
+if (__PLATFORM__ !== 'safari') {
+  chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
+}
 
 // for debugging service-workers (TODO: provide a way to control logging)
 globalThis.ghostery = globalThis.ghostery || {};
