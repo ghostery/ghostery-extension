@@ -101,7 +101,7 @@ export default {
     !session.contributor &&
     NOTIFICATIONS[options.terms ? 1 : 0],
   content: ({ options, stats, notification }) => html`
-    <template layout="column">
+    <template layout="column relative">
       ${store.ready(options) &&
       (store.ready(stats) || store.error(stats)) &&
       html`
@@ -138,6 +138,19 @@ export default {
           layout="fixed inset:1 bottom:auto layer:200"
         ></section>
         <section layout="column margin:7:0:1">
+          ${!options.terms &&
+          html`
+            <gh-panel-button>
+              <a
+                href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
+                target="_blank"
+                layout="row center gap:0.5"
+              >
+                <ui-icon name="pause"></ui-icon>
+                Enable Ghostery
+              </a>
+            </gh-panel-button>
+          `}
           ${store.error(stats) &&
           html`
             <div layout="column items:center gap margin:2:0:3">
@@ -155,30 +168,14 @@ export default {
           `}
           ${store.ready(stats) &&
           html`
-            ${options.terms
-              ? options.paused &&
-                html`
-                  <gh-panel-pause
-                    onaction="${togglePause}"
-                    paused="${options.paused.find(
-                      ({ id }) => id === stats.domain,
-                    )}"
-                  ></gh-panel-pause>
-                `
-              : html`
-                  <gh-panel-button>
-                    <a
-                      href="${chrome.runtime.getURL(
-                        '/pages/onboarding/index.html',
-                      )}"
-                      target="_blank"
-                      layout="row center gap:0.5"
-                    >
-                      <ui-icon name="pause"></ui-icon>
-                      Enable Ghostery
-                    </a>
-                  </gh-panel-button>
-                `}
+            ${options.terms &&
+            options.paused &&
+            html`
+              <gh-panel-pause
+                onaction="${togglePause}"
+                paused="${options.paused.find(({ id }) => id === stats.domain)}"
+              ></gh-panel-pause>
+            `}
             <ui-panel-stats
               domain="${stats.domain}"
               categories="${stats.categories}"
@@ -190,7 +187,6 @@ export default {
             >
             </ui-panel-stats>
           `}
-
           <gh-panel-options>
             <span slot="header">Ghostery settings</span>
             <ui-text color="gray-900">
