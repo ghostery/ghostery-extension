@@ -126,7 +126,7 @@ export async function getMergedStats(since) {
   const result = list.reduce(
     (acc, stats) => {
       for (const key of Object.keys(stats)) {
-        if (key === 'id') continue;
+        if (key === 'id' || key === 'day') continue;
 
         if (key === 'patterns') {
           for (const id of stats.patterns) {
@@ -144,6 +144,7 @@ export async function getMergedStats(since) {
 
   // clean up model definition related properties
   delete result.id;
+  delete result.day;
   delete result[store.connect];
 
   return Object.assign(result, { patterns: [...result.patterns] });
