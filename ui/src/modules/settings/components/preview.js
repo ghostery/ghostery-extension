@@ -16,7 +16,10 @@ export default {
         onclick="${clickOnClose}"
       >
         <section
-          layout="column content:center gap:2 width:::1200px height::full margin:0:auto"
+          layout="column content:center gap:2 height::full margin:0:auto"
+          layout@786px="width:::728px"
+          layout@992px="width:::912px"
+          layout@1280px="width:::1200px"
         >
           <slot></slot>
           <footer layout="padding:2">
@@ -52,7 +55,7 @@ export default {
       max-height: 80vh;
       border-radius: 8px;
       overflow: hidden;
-      background: var(--ui-color-gray-100);
+      object-fit: cover;
     }
 
     footer {
