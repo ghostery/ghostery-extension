@@ -13,12 +13,8 @@ async function getDb() {
 
   if (!getDb.current) {
     getDb.current = await IDB.openDB(DB_NAME, 31, {
-      async upgrade(db, oldVersion) {
+      async upgrade(db, oldVersion, newVersion, transaction) {
         upgradeFromMV2 = oldVersion > 0 && oldVersion < 31;
-
-        if (oldVersion < 1) {
-          db.createObjectStore('daily', { keyPath: 'day' });
-        }
 
         if (oldVersion >= 20) {
           db.deleteObjectStore('search');
@@ -26,6 +22,15 @@ async function getDb() {
 
         if (oldVersion === 30) {
           db.deleteObjectStore('tabs');
+        }
+
+        if (oldVersion < 31) {
+          const daily =
+            oldVersion < 1
+              ? db.createObjectStore('daily', { keyPath: 'day' })
+              : transaction.objectStore('daily');
+
+          daily.createIndex('day', 'day', { unique: true });
         }
       },
       blocking() {
@@ -48,14 +53,14 @@ async function getDb() {
       await daily.put({
         id: stats.day,
         day: stats.day,
-        all: stats.adsBlocked + stats.trackerRequestsBlocked || 0,
-        allBlocked: stats.adsBlocked + stats.trackersBlocked || 0,
-        ads: stats.adsBlocked || 0,
         adsBlocked: stats.adsBlocked || 0,
+        adsDetected: stats.adsBlocked || 0,
+        trackersBlocked: stats.trackersBlocked || 0,
+        trackersDetected: stats.trackersDetected || 0,
+        requestsBlocked: stats.trackerRequestsBlocked || 0,
+        requestsDetected: stats.trackerRequestsBlocked || 0,
         cookiesBlocked: stats.cookiesBlocked || 0,
-        fingerprintsRemoved: stats.fingerprintsRemoved || 0,
-        trackers: stats.trackerRequestsBlocked || 0,
-        trackersBlocked: stats.trackerRequestsBlocked || 0,
+        fingerprintsBlocked: stats.fingerprintsRemoved || 0,
         pages: stats.pages || 0,
         patterns: stats.trackers || [],
       });
@@ -93,14 +98,14 @@ async function flush(id) {
 const DailyStats = {
   id: true,
   day: '',
-  all: 0,
-  allBlocked: 0,
-  ads: 0,
   adsBlocked: 0,
-  cookiesBlocked: 0,
-  fingerprintsRemoved: 0,
-  trackers: 0,
+  adsDetected: 0,
   trackersBlocked: 0,
+  trackersDetected: 0,
+  requestsBlocked: 0,
+  requestsDetected: 0,
+  cookiesBlocked: 0,
+  fingerprintsBlocked: 0,
   pages: 0,
   patterns: [String],
   [store.connect]: {

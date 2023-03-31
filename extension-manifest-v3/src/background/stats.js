@@ -25,8 +25,6 @@ import AutoSyncingMap from './utils/map.js';
 
 const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
-const DAILY_STATS_ADS_CATEGORY = 'advertising';
-
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chrome.action.setBadgeBackgroundColor({ color });
 }
@@ -94,18 +92,6 @@ export async function getStatsWithMetadata(since) {
   return Object.assign(result, { patternsDetailed });
 }
 
-async function updateDailyStats(fn) {
-  const stats = await store.resolve(
-    DailyStats,
-    new Date().toISOString().split('T')[0],
-  );
-
-  const mutableStats = { ...stats, patterns: [...stats.patterns] };
-  delete mutableStats.id;
-
-  await store.set(stats, fn(mutableStats));
-}
-
 export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);
 
@@ -124,6 +110,8 @@ export async function updateTabStats(tabId, requests) {
   for (const request of filtered) {
     const pattern = await trackerDb.getMetadata(request);
     if (pattern) {
+      pattern.blocked =
+        pattern.blocked || stats.requestsBlocked.includes(request.requestId);
       stats.trackers.push(pattern);
       patterns.push(pattern);
     }
@@ -135,48 +123,73 @@ export async function updateTabStats(tabId, requests) {
 
   tabStats.set(tabId, stats);
   setIcon(tabId, stats);
+}
 
-  updateDailyStats((stats) => {
-    for (const pattern of patterns) {
-      stats.all += 1;
+const DAILY_STATS_ADS_CATEGORY = 'advertising';
+async function flushTabStatsToDailyStats(tabId) {
+  const stats = tabStats.get(tabId);
+  if (!stats || !stats.trackers.length) return;
 
-      if (pattern.blocked) stats.allBlocked += 1;
+  const adsDetected = new Map();
+  const trackersDetected = new Map();
 
-      if (pattern.category === DAILY_STATS_ADS_CATEGORY) {
-        stats.ads += 1;
-        if (pattern.blocked) stats.adsBlocked += 1;
-      } else {
-        stats.trackers += 1;
-        if (pattern.blocked) stats.trackersBlocked += 1;
-      }
-
-      if (pattern.key && !stats.patterns.includes(pattern.key)) {
-        stats.patterns.push(pattern.key);
-      }
+  for (const tracker of stats.trackers) {
+    if (tracker.category === DAILY_STATS_ADS_CATEGORY) {
+      adsDetected.set(
+        tracker.name,
+        adsDetected.get(tracker.name)?.blocked ?? tracker.blocked,
+      );
+    } else {
+      trackersDetected.set(
+        tracker.name,
+        trackersDetected.get(tracker.name)?.blocked ?? tracker.blocked,
+      );
     }
+  }
 
-    return stats;
+  const adsBlocked = [...adsDetected.values()].filter(Boolean).length;
+  const trackersBlocked = [...trackersDetected.values()].filter(Boolean).length;
+
+  const dailyStats = await store.resolve(
+    DailyStats,
+    new Date().toISOString().split('T')[0],
+  );
+
+  const patterns = [
+    ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.key)]),
+  ];
+
+  await store.set(dailyStats, {
+    adsDetected: dailyStats.adsDetected + adsDetected.size,
+    adsBlocked: dailyStats.adsBlocked + adsBlocked,
+    trackersDetected: dailyStats.trackersDetected + trackersDetected.size,
+    trackersBlocked: dailyStats.trackersBlocked + trackersBlocked,
+    requestsDetected: dailyStats.requestsDetected + stats.trackers.length,
+    requestsBlocked: dailyStats.requestsBlocked + adsBlocked + trackersBlocked,
+    pages: dailyStats.pages + 1,
+    patterns,
   });
 }
 
 export function setupTabStats(tabId, domain) {
+  flushTabStatsToDailyStats(tabId);
+
   if (domain) {
     tabStats.set(tabId, {
       domain,
+      requestsBlocked: [],
       trackers: [],
     });
 
     // Clean up throttled icon update
     setIcon.cancel();
-
-    // Counts up pages visited in daily stats
-    updateDailyStats((stats) =>
-      Object.assign(stats, { pages: stats.pages + 1 }),
-    );
+  } else {
+    tabStats.delete(tabId);
   }
 }
 
 chrome.tabs.onRemoved.addListener((tabId) => {
+  flushTabStatsToDailyStats(tabId);
   tabStats.delete(tabId);
 });
 
@@ -225,6 +238,18 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
           ? () => setupTabStats(details.tabId, request.sourceDomain)
           : () => updateTabStats(details.tabId, [request]),
       );
+    },
+    {
+      urls: ['<all_urls>'],
+    },
+  );
+
+  chrome.webRequest.onErrorOccurred.addListener(
+    (details) => {
+      if (details.error !== 'net::ERR_BLOCKED_BY_CLIENT') return;
+
+      const stats = tabStats.get(details.tabId);
+      stats?.requestsBlocked.push(details.requestId);
     },
     {
       urls: ['<all_urls>'],
