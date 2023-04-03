@@ -59,8 +59,7 @@ async function getDb() {
     const daily = tx.objectStore('daily');
 
     for (const stats of oldStats) {
-      daily.delete(stats.day);
-
+      await daily.delete(stats.day);
       await daily.put({
         id: stats.day,
         day: stats.day,
