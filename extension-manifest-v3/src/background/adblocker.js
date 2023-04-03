@@ -19,7 +19,7 @@ import { parse } from 'tldts-experimental';
 import Options, { observe } from '/store/options.js';
 
 import Request from './utils/request.js';
-import { setupTabStats, updateTabStats } from './tab-stats';
+import { setupTabStats, updateTabStats } from './stats.js';
 
 const adblockerEngines = Object.keys(Options.engines).map((name) => ({
   name,

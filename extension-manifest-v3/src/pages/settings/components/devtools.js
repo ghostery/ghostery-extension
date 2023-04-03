@@ -9,18 +9,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store } from 'hybrids';
-import Options from '/store/options.js';
+import { html } from 'hybrids';
 
 const VERSION = chrome.runtime.getManifest().version;
 
-async function asyncAction(event, fn, complete = '') {
+async function asyncAction(event, promise, complete = '') {
   const button = event.currentTarget;
   const el = button.children[0];
   const origText = el.textContent;
 
   button.disabled = true;
-  await fn();
+  await promise;
 
   if (complete) {
     el.innerHTML = complete;
@@ -38,17 +37,7 @@ async function asyncAction(event, fn, complete = '') {
 function clearStorage(host, event) {
   asyncAction(
     event,
-    async () => {
-      // Restore options to default values
-      await store.set(Options, null);
-
-      // Clear main local storage
-      chrome.storage.local.clear();
-
-      // Remove all indexedDBs
-      const dbs = await indexedDB.databases();
-      await Promise.all(dbs.map((db) => indexedDB.deleteDatabase(db.name)));
-    },
+    chrome.runtime.sendMessage({ action: 'clearStorage' }),
     'Storage cleared',
   );
 }

@@ -13,7 +13,7 @@ import { html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import Session from '/store/session.js';
-import Stats from '/store/stats.js';
+import TabStats from '/store/tab-stats.js';
 
 import sleep from '../assets/sleep.svg';
 
@@ -94,7 +94,7 @@ function setStatsType(host, event) {
 export default {
   [router.connect]: { stack: [Navigation, Company] },
   options: store(Options),
-  stats: store(Stats),
+  stats: store(TabStats),
   session: store(Session),
   notification: ({ options, session }) =>
     store.ready(options, session) &&

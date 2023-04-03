@@ -8,6 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 import { throttle } from 'lodash-es';
@@ -15,13 +16,13 @@ import { throttle } from 'lodash-es';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
-import Request from './utils/request.js';
-import { getMetadata } from './utils/trackerdb.js';
+import DailyStats, { getMergedStats } from '/store/daily-stats.js';
 import Options, { observe } from '/store/options.js';
+
+import Request from './utils/request.js';
+import * as trackerDb from './utils/trackerdb.js';
 import AutoSyncingMap from './utils/map.js';
 
-// If you bump this number, the extension will start with a
-// clean state. Normally, this should not be needed.
 const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
@@ -79,6 +80,18 @@ const setIcon = throttle(
   __PLATFORM__ === 'firefox' ? 1000 : 250,
 );
 
+export async function getStatsWithMetadata(since) {
+  const result = await getMergedStats(since);
+
+  const patternsDetailed = [];
+  for (const key of result.patterns) {
+    const pattern = await trackerDb.getPattern(key);
+    if (pattern) patternsDetailed.push(pattern);
+  }
+
+  return Object.assign(result, { patternsDetailed });
+}
+
 export async function updateTabStats(tabId, requests) {
   const stats = tabStats.get(tabId);
 
@@ -92,10 +105,15 @@ export async function updateTabStats(tabId, requests) {
 
   if (!filtered.length) return;
 
+  const patterns = [];
+
   for (const request of filtered) {
-    const pattern = await getMetadata(request);
+    const pattern = await trackerDb.getMetadata(request);
     if (pattern) {
+      pattern.blocked =
+        pattern.blocked || stats.requestsBlocked.includes(request.requestId);
       stats.trackers.push(pattern);
+      patterns.push(pattern);
     }
   }
 
@@ -107,19 +125,71 @@ export async function updateTabStats(tabId, requests) {
   setIcon(tabId, stats);
 }
 
+const DAILY_STATS_ADS_CATEGORY = 'advertising';
+async function flushTabStatsToDailyStats(tabId) {
+  const stats = tabStats.get(tabId);
+  if (!stats || !stats.trackers.length) return;
+
+  const adsDetected = new Map();
+  const trackersDetected = new Map();
+
+  for (const tracker of stats.trackers) {
+    if (tracker.category === DAILY_STATS_ADS_CATEGORY) {
+      adsDetected.set(
+        tracker.name,
+        adsDetected.get(tracker.name)?.blocked ?? tracker.blocked,
+      );
+    } else {
+      trackersDetected.set(
+        tracker.name,
+        trackersDetected.get(tracker.name)?.blocked ?? tracker.blocked,
+      );
+    }
+  }
+
+  const adsBlocked = [...adsDetected.values()].filter(Boolean).length;
+  const trackersBlocked = [...trackersDetected.values()].filter(Boolean).length;
+
+  const dailyStats = await store.resolve(
+    DailyStats,
+    new Date().toISOString().split('T')[0],
+  );
+
+  const patterns = [
+    ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.key)]),
+  ];
+
+  await store.set(dailyStats, {
+    adsDetected: dailyStats.adsDetected + adsDetected.size,
+    adsBlocked: dailyStats.adsBlocked + adsBlocked,
+    trackersDetected: dailyStats.trackersDetected + trackersDetected.size,
+    trackersBlocked: dailyStats.trackersBlocked + trackersBlocked,
+    requestsDetected: dailyStats.requestsDetected + stats.trackers.length,
+    requestsBlocked: dailyStats.requestsBlocked + adsBlocked + trackersBlocked,
+    pages: dailyStats.pages + 1,
+    patterns,
+  });
+}
+
 export function setupTabStats(tabId, domain) {
+  flushTabStatsToDailyStats(tabId);
+
   if (domain) {
     tabStats.set(tabId, {
       domain,
+      requestsBlocked: [],
       trackers: [],
     });
 
     // Clean up throttled icon update
     setIcon.cancel();
+  } else {
+    tabStats.delete(tabId);
   }
 }
 
 chrome.tabs.onRemoved.addListener((tabId) => {
+  flushTabStatsToDailyStats(tabId);
   tabStats.delete(tabId);
 });
 
@@ -168,6 +238,18 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
           ? () => setupTabStats(details.tabId, request.sourceDomain)
           : () => updateTabStats(details.tabId, [request]),
       );
+    },
+    {
+      urls: ['<all_urls>'],
+    },
+  );
+
+  chrome.webRequest.onErrorOccurred.addListener(
+    (details) => {
+      if (details.error !== 'net::ERR_BLOCKED_BY_CLIENT') return;
+
+      const stats = tabStats.get(details.tabId);
+      stats?.requestsBlocked.push(details.requestId);
     },
     {
       urls: ['<all_urls>'],

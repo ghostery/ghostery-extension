@@ -8,11 +8,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import AnonymousCommunication from '@whotracksme/webextension-packages/packages/anonymous-communication';
 import Reporting from '@whotracksme/webextension-packages/packages/reporting';
 import * as IDB from 'idb';
 
 import { observe } from '/store/options.js';
+import { registerDatabase } from '/utils/indexeddb.js';
 
 function platformSpecificSettings() {
   if (
@@ -122,7 +124,7 @@ class Storage {
  */
 class IndexedDBKeyValueStore {
   constructor(dbName, { version = 1, objectStore = 'default' } = {}) {
-    this._dbName = dbName;
+    this._dbName = registerDatabase(dbName);
     this._version = version;
     this._objectStore = objectStore;
   }

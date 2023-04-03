@@ -43,6 +43,7 @@ export default class ExtendedRequest extends Request {
   constructor(data) {
     super(data);
 
+    this.requestId = data.requestId;
     this.blocked = false;
     this.sourceDomain = data.sourceDomain;
   }
