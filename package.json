@@ -23,7 +23,7 @@
   ],
   "vendorCopy": [
     {
-      "from": "./node_modules/ghostery-common/build/gbe/assets",
+      "from": "./extension-manifest-v2/node_modules/ghostery-common/build/gbe/assets",
       "to": "./extension-manifest-v2/common"
     }
   ],
