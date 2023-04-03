@@ -58,6 +58,10 @@ async function getDb() {
     const tx = db.transaction('daily', 'readwrite');
     const daily = tx.objectStore('daily');
 
+    console.log(
+      `[daily-stats] Migrating ${oldStats.length} daily stats from MV2`,
+    );
+
     for (const stats of oldStats) {
       await daily.delete(stats.day);
       await daily.put({
@@ -77,6 +81,10 @@ async function getDb() {
     }
 
     await tx.done;
+
+    console.log(
+      `[daily-stats] Migration of daily stats from MV2 done successfully`,
+    );
   }
 
   return getDb.current;
