@@ -45,10 +45,10 @@ export default {
         background: var(--ui-color-gray-700);
       }
 
-      :host([type="error"]) {
+      :host([type="success"]) {
         color: var(--ui-color-white);
-        background: var(--ui-color-error-400);
-        --ui-button-color-hover: var(--ui-color-error-500);
+        background: var(--ui-color-success-500);
+        --ui-button-color-hover: var(--ui-color-success-700);
       }
 
       @media (hover: hover) and (pointer: fine) { 
@@ -58,7 +58,7 @@ export default {
         }
 
         :host([type="primary"]:hover), 
-        :host([type="error"]:hover) {
+        :host([type="success"]:hover) {
           background: var(--ui-button-color-hover);
         }
       }
