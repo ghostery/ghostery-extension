@@ -9,22 +9,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define } from 'hybrids';
+import { showIframe } from '@ghostery/ui/iframe';
 
-// Global components
-import '../pages/index.js';
+let shown = false;
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.action === 'showIframe') {
+    if (shown) return false;
 
-// Components
-define.from(
-  import.meta.glob('./components/*.js', { eager: true, import: 'default' }),
-  {
-    prefix: 'ui-onboarding',
-    root: 'components',
-  },
-);
+    showIframe(chrome.runtime.getURL(msg.url));
+    shown = true;
 
-// Root
-import './onboarding.js';
+    return false;
+  }
 
-// Iframe
-import './iframe.js';
+  return false;
+});

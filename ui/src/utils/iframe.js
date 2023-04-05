@@ -10,11 +10,12 @@
  */
 
 export function showIframe(url) {
-  const wrapper = document.createElement('div');
+  const wrapper = document.createElement('ghostery-iframe-wrapper');
+
   const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
   const template = document.createElement('template');
 
-  template.innerHTML = `
+  template.innerHTML = /*html*/ `
     <iframe src="${url}" frameborder="0"></iframe>
     <style>
       :host {
@@ -31,11 +32,10 @@ export function showIframe(url) {
       }
 
       iframe {
-        flex-grow: 1;
-        pointer-events: auto;
         display: block;
-        width: min(440px, calc(100% - 20px));
-        height: 346px;
+        flex-grow: 1;
+        width: min(100%, 440px);
+        pointer-events: auto;
         box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.4);
         border-radius: 16px;
         background: linear-gradient(90deg, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.27) 100%);
@@ -64,7 +64,7 @@ export function showIframe(url) {
   `;
 
   shadowRoot.appendChild(template.content);
-  document.body.appendChild(wrapper);
+  document.documentElement.appendChild(wrapper);
 
   const iframe = shadowRoot.querySelector('iframe');
 
@@ -74,10 +74,11 @@ export function showIframe(url) {
 
   window.addEventListener('message', (e) => {
     switch (e.data?.type) {
-      case 'ghostery-autoconsent-resize-iframe':
+      case `ghostery-resize-iframe`:
+        iframe.style.width = e.data.width + 'px';
         iframe.style.height = e.data.height + 'px';
         break;
-      case 'ghostery-autoconsent-close-iframe':
+      case `ghostery-close-iframe`:
         wrapper.parentElement.removeChild(wrapper);
         if (e.data.reload) {
           window.location.reload();
@@ -86,5 +87,33 @@ export function showIframe(url) {
       default:
         break;
     }
+  });
+}
+
+export function closeIframe(reload = false) {
+  window.parent.postMessage({ type: `ghostery-close-iframe`, reload }, '*');
+}
+
+export function setupIframeSize({ width, height } = {}) {
+  if (width) {
+    document.body.style.width = width + 'px';
+  }
+  if (height) {
+    document.body.style.height = height + 'px';
+  }
+
+  const resizeObserver = new ResizeObserver(() => {
+    window.parent.postMessage(
+      {
+        type: `ghostery-resize-iframe`,
+        width: document.body.clientWidth,
+        height: document.body.clientHeight,
+      },
+      '*',
+    );
+  });
+
+  resizeObserver.observe(document.body, {
+    box: 'border-box',
   });
 }

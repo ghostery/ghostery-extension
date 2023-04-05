@@ -9,38 +9,67 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg } from 'hybrids';
+import { define, html } from 'hybrids';
 
 import protection from '../illustrations/protection.js';
 
-const FAQ_URL = 'https://www.ghostery.com/faq';
-const SUPPORT_EMAIL = `support@ghostery.com`;
+import pinExtensionChrome from '../assets/pin-extension-chrome.jpg';
+import pinExtensionEdge from '../assets/pin-extension-edge.jpg';
+import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
+
+const PIN_EXTENSION_IMAGES = {
+  chrome: pinExtensionChrome,
+  edge: pinExtensionEdge,
+  opera: pinExtensionOpera,
+};
 
 export default define({
   tag: 'ui-onboarding-outro-success-view',
-  content: () => html`
-    <template layout="block">
-      <ui-card>
-        <div slot="illustration">${protection}</div>
-        <section layout="block:center column gap:2" layout@768px="margin:0:6">
-          <ui-text type="display-l">You're all set, Ghosterian!</ui-text>
-          <ui-text type="body-xl" color="gray-800">
-            Ghostery is set up to stop trackers in their tracks and protect your
-            privacy while browsing!
+  platform: '',
+  content: ({ platform }) => html`
+    <template layout="column gap">
+      <ui-onboarding-card>
+        <section layout="block:center column gap:2">
+          <div layout="row center">${protection}</div>
+          <ui-text type="display-m">Setup Successful</ui-text>
+          <ui-text type="body-m" color="gray-800">
+            Ghostery is all set to stop trackers in their tracks and protect
+            your privacy while browsing!
           </ui-text>
         </section>
-        <ui-card type="highlight" layout="margin:top:5">
-          <section layout="column gap">
-            <ui-text type="label-xl">Any questions? Anytime!</ui-text>
-            <ui-text type="body-l">
-              ${msg.html`
-                Check out <a href="${FAQ_URL}" target="_blank">FAQs</a> or drop us a line at <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>.
-                <br/> We'll be more than happy to talk to you!
-              `}
+      </ui-onboarding-card>
+      ${PIN_EXTENSION_IMAGES[platform] &&
+      html`
+        <ui-onboarding-card>
+          <section layout="column gap:2">
+            <ui-text type="display-2xs" color="gray-800" layout="block:center">
+              What’s next?
+            </ui-text>
+            <img src="${PIN_EXTENSION_IMAGES[platform]}" />
+            <div layout="row items:center gap">
+              <ui-icon
+                name="extension-${platform}"
+                layout="block inline size:3"
+                color="gray-400"
+              ></ui-icon>
+              <ui-text type="display-xs" color="gray-800">
+                Pin Extension for easy access
+              </ui-text>
+            </div>
+            <ui-text>
+              Click the puzzle icon next to the search bar and pin Ghostery to
+              your toolbar.
+            </ui-text>
+            <ui-text>
+              Ghostery will show how many trackers were blocked on a page.
+              Clicking on the Ghostery icon reveals more detailed information.
             </ui-text>
           </section>
-        </ui-card>
-      </ui-card>
+        </ui-onboarding-card>
+        <ui-onboarding-pin-it platform="${platform}">
+          Pin it here
+        </ui-onboarding-pin-it>
+      `}
     </template>
   `,
 });

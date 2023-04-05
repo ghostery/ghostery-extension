@@ -14,6 +14,7 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
+import { sendShowIframeMessage } from './utils/iframe.js';
 
 async function getTabDomain(tabId) {
   return parse((await chrome.tabs.get(tabId)).url).domain;
@@ -88,21 +89,18 @@ async function openIframe(msg, tabId) {
   if (autoconsent.all) return;
 
   const domain = await getTabDomain(tabId);
+  if (domain) {
+    if (autoconsent.allowed.includes(domain)) {
+      return;
+    }
 
-  if (autoconsent.allowed.includes(domain)) {
-    return;
+    sendShowIframeMessage(
+      tabId,
+      `pages/autoconsent/index.html?host=${encodeURIComponent(
+        domain,
+      )}&default=${autoconsent.interactions >= 2 ? 'all' : ''}`,
+    );
   }
-
-  chrome.tabs.sendMessage(
-    tabId,
-    {
-      action: 'autoconsent',
-      type: 'openIframe',
-      domain,
-      defaultForAll: autoconsent.interactions >= 2,
-    },
-    { frameId: 0 },
-  );
 }
 
 chrome.runtime.onMessage.addListener((msg, sender) => {

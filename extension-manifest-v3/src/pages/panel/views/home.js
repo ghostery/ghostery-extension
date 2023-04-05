@@ -24,7 +24,7 @@ const NOTIFICATIONS = [
   {
     icon: 'triangle',
     type: 'warning',
-    text: 'Ghostery is not fully functional because of the browser’s restrictions and missing additional permissions.',
+    text: 'Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.',
     url:
       __PLATFORM__ === 'safari'
         ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe'

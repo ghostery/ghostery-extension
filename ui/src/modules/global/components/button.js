@@ -35,6 +35,13 @@ export default {
         --ui-button-color-hover: var(--ui-color-primary-500);
       }
 
+      :host([type="outline-error"]) {
+        background: var(--ui-color-white);
+        color: var(--ui-color-error-400);
+        border: 1px solid var(--ui-color-gray-200);
+        --ui-button-color-hover: var(--ui-color-error-500);
+      }
+
       :host([type="primary"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
@@ -51,8 +58,14 @@ export default {
         --ui-button-color-hover: var(--ui-color-success-700);
       }
 
+      :host([type="success"]) {
+        color: var(--ui-color-white);
+        background: var(--ui-color-success-500);
+        --ui-button-color-hover: var(--ui-color-success-700);
+      }
+
       @media (hover: hover) and (pointer: fine) { 
-        :host([type="outline"]:hover) {
+        :host([type^="outline"]:hover) {
           color: var(--ui-button-color-hover);
           border-color: var(--ui-button-color-hover);
         }

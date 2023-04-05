@@ -23,7 +23,7 @@ import Request from './utils/request.js';
 import * as trackerDb from './utils/trackerdb.js';
 import AutoSyncingMap from './utils/map.js';
 
-const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
+export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chrome.action.setBadgeBackgroundColor({ color });

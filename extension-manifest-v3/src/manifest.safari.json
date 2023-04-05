@@ -88,6 +88,13 @@
       "all_frames": true
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/iframe.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",

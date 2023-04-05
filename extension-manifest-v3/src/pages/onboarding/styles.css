@@ -1,6 +1,10 @@
-html, body {
-  background: var(--ui-color-gray-800);
+html,
+body {
+  background: var(--ui-color-white);
   height: 100%;
 }
 
-gh-onboarding { display: block; height: 100%; }
+gh-onboarding {
+  display: block;
+  height: 100%;
+}

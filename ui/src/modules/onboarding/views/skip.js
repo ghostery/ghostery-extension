@@ -19,21 +19,20 @@ export default define({
   content: () => html`
     <ui-onboarding-dialog>
       <ui-text slot="header" type="headline-m">
-        Are you sure you want to skip enabling Ghostery?
+        Are you sure you want to keep Ghostery disabled?
       </ui-text>
       <ui-text>
-        Ghostery is stopping trackers in their tracks and preventing you from
-        being profiled and your personal information sold to data brokers.
+        Ghostery stops trackers in their tracks and prevents you from being
+        profiled by data brokers.
       </ui-text>
       <ui-text>
-        With Ghostery enabled you instantly browse the web safer, faster and
-        with less annoying ads.
+        Enable Ghostery to browse the web safer, faster, and with less ads.
       </ui-text>
       <ui-button type="outline" slot="footer">
         <a href="${router.backUrl()}">Back</a>
       </ui-button>
-      <ui-button type="outline" slot="footer">
-        <a href="${router.url(OutroSkip)}">Continue</a>
+      <ui-button type="outline-error" slot="footer">
+        <a href="${router.url(OutroSkip)}">Keep disabled</a>
       </ui-button>
     </ui-onboarding-dialog>
   `,

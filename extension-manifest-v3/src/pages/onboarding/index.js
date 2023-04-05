@@ -40,6 +40,7 @@ define({
   tag: 'gh-onboarding',
   content: () =>
     html`<ui-onboarding
+      platform="${__PLATFORM__}"
       onsuccess="${updateOptions}"
       onskip="${updateOptions}"
     ></ui-onboarding>`,

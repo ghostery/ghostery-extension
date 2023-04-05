@@ -17,7 +17,10 @@ import OutroSuccess from './views/outro-success.js';
 
 export default define({
   tag: 'ui-onboarding',
-  views: router([Main, OutroSuccess, OutroSkip]),
+  platform: '',
+  views: router([Main, OutroSuccess, OutroSkip], {
+    params: ['platform'],
+  }),
   state: {
     value: '',
     connect: (host) => {
@@ -41,7 +44,9 @@ export default define({
   },
   content: ({ views }) => html`
     <template layout="grid height::100%">
-      <ui-page-layout>${views}</ui-page-layout>
+      <ui-onboarding-layout>${views}</ui-onboarding-layout>
     </template>
+  `.css`
+    ui-text a { text-decoration: underline }
   `,
 });

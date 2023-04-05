@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-onboarding-protection',
+export default {
   render: () => html`
     <template layout="column overflow">
       <header><slot name="header"></slot></header>
@@ -39,4 +38,4 @@ export default define({
       border-bottom: none;
     }
   `,
-});
+};

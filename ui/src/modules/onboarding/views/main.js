@@ -9,97 +9,69 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router, store } from 'hybrids';
+import { define, html, msg, router } from 'hybrids';
 
 import Whotracksme from './whotracksme.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 import OutroSuccess from './outro-success.js';
 
-const Form = {
-  protection: true,
-  terms: store.value(true, (val, _, { protection }) => val || !protection),
-};
-
-export async function submit(host, event) {
-  router.resolve(event, store.submit(host.form));
-}
+const TERMS_AND_CONDITIONS_URL =
+  'https://www.ghostery.com/privacy/ghostery-terms-and-conditions?utm_source=gbe';
 
 export default define({
   [router.connect]: { stack: [Skip, Whotracksme, Privacy] },
   tag: 'ui-onboarding-main-view',
-  form: store(Form, { draft: true }),
-  scroll: {
-    get: ({ form, content }) => {
-      if (form.terms) {
-        return content().querySelector('button[type="submit"]');
-      } else if (form.protection) {
-        return content().querySelector('#terms-card');
-      }
-      return null;
-    },
-    observe(host, value) {
-      if (value) {
-        requestAnimationFrame(() => {
-          value.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        });
-      }
-    },
-  },
-  content: ({ form }) => html`
-    <template layout="row grow">
-      <form
-        onsubmit="${submit}"
-        action="${router.url(OutroSuccess)}"
-        layout="grow column gap"
-      >
-        <ui-card id="form">
-          <div layout="column gap:5">
-            <section layout="block:center">
-              <ui-text type="display-m" layout="margin:bottom:5">
-                Enable Ghostery to get started
-              </ui-text>
-            </section>
-          </div>
-          <div layout="column gap:3">
-            <label layout="grid:min|1:min|min gap:2:0.5 items:start">
-              <ui-onboarding-checkbox layout="area::2">
-                <input
-                  type="checkbox"
-                  checked="${form.terms}"
-                  onchange="${html.set(form, 'terms')}"
-                />
-              </ui-onboarding-checkbox>
-
-              <ui-text type="display-s">Accept terms</ui-text>
-
-              <ui-text>
-                <ui-onboarding-terms>
-                  ${msg.html`I agree to send non-personal information to <a href="${router.url(
-                    Whotracksme,
-                  )}">Ghostery’s WhoTracks.Me</a>, and I accept the <a href="${router.url(
-                    Privacy,
-                  )}">Ghostery Privacy Policy</a>`}
-                </ui-onboarding-terms>
-              </ui-text>
-            </label>
-            <div
-              layout="column-reverse gap"
-              layout@480px="row content:space-between"
-            >
-              <ui-button type="outline">
-                <a href="${router.url(Skip)}">Cancel</a>
-              </ui-button>
-              <ui-button type="success" disabled="${!form.terms}">
-                <button type="submit">
-                  <ui-icon name="ghosty"></ui-icon>
-                  Enable Ghostery
-                </button>
-              </ui-button>
+  content: () => html`
+    <template layout="grow column gap">
+      <ui-onboarding-card>
+        <div layout="column gap:5">
+          <section layout="block:center column gap">
+            <ui-text type="body-l" layout="margin:top:2">
+              Welcome to Ghostery
+            </ui-text>
+            <ui-text type="display-m" layout="margin:bottom:5">
+              Enable Ghostery to get started
+            </ui-text>
+          </section>
+        </div>
+        <div layout="column gap:3">
+          <div layout="column gap">
+            <ui-text type="display-2xs" layout="block:center">
+              Your Privacy Features:
+            </ui-text>
+            <div layout="grid:3 gap">
+              <ui-onboarding-feature icon="onboarding-adblocking">
+                Ad-Blocking
+              </ui-onboarding-feature>
+              <ui-onboarding-feature icon="onboarding-anti-tracking">
+                Anti-Tracking
+              </ui-onboarding-feature>
+              <ui-onboarding-feature icon="onboarding-never-consent">
+                Never-Consent
+              </ui-onboarding-feature>
             </div>
           </div>
-        </ui-card>
-      </form>
+          <ui-text underline>
+            ${msg.html`
+              Information about web trackers will be shared in accordance with our 
+              <a href="${router.url(Privacy)}">Privacy Policy</a>`}.
+          </ui-text>
+          <div layout="column gap">
+            <ui-button type="success">
+              <a href="${router.url(OutroSuccess)}">Enable Ghostery</a>
+            </ui-button>
+            <ui-button type="transparent">
+              <a href="${router.url(Skip)}">Cancel</a>
+            </ui-button>
+          </div>
+        </div>
+      </ui-onboarding-card>
+      <ui-text layout="block:center margin:3:0" underline>
+        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
+          Terms & Conditions
+        </a>
+      </ui-text>
     </template>
   `,
 });
