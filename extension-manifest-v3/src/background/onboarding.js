@@ -14,7 +14,7 @@ import { sendShowIframeMessage } from './utils/iframe.js';
 import { tabStats } from './stats.js';
 
 const NOTIFICATION_DELAY = 60 * 60 * 1000; // an hour in milliseconds
-const NOTIFICATION_TRACKERS_THRESHOLD = 5;
+const NOTIFICATION_TRACKERS_THRESHOLD = 10;
 
 let shownAt = undefined;
 observe('onboarding', (onboarding) => {
