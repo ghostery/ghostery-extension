@@ -36,14 +36,12 @@ export default {
 
     #c-1 {
       background: radial-gradient(circle, #A1E4FF 0%, rgba(255,255,255,0.1) 70%);
-      filter: blur(50px);
       opacity: 0.4;
     }
 
     #c-2 {
       background: radial-gradient(circle, #3751D5 0%, rgba(255,255,255,0.1) 65%);
-      filter: blur(50px);
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     header {
