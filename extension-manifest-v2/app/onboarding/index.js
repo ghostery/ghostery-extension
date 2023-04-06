@@ -28,11 +28,15 @@ const BrowserInfo = {
 define({
 	tag: 'gh-onboarding',
 	browserInfo: store(BrowserInfo),
-	content: ({ browserInfo }) => html`
-		<ui-onboarding
-			platform="${store.ready(browserInfo) && browserInfo.name}"
-			onsuccess="${complete}"
-			onskip="${skip}"
-		></ui-onboarding>
-	`,
+	content: ({ browserInfo }) => (
+		store.pending(browserInfo)
+			? html``
+			: html`
+				<ui-onboarding
+					platform="${store.ready(browserInfo) ? browserInfo.name : ''}"
+					onsuccess="${complete}"
+					onskip="${skip}"
+				></ui-onboarding>
+			`
+	),
 });
