@@ -190,7 +190,7 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+				test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
 				type: 'asset/inline',
 			},
 		],

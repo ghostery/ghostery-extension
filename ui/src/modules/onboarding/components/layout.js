@@ -13,7 +13,14 @@ import { html } from 'hybrids';
 
 export default {
   render: () => html`
-    <template layout="column height::100% width::375px">
+    <template layout="relative column height::100% width::375px overflow">
+      <div
+        id="bg"
+        layout="absolute top:-250px left:50% size:1648px:1525px layer:-1"
+      >
+        <div id="c-1" layout="absolute left:300px top:100px size:800px"></div>
+        <div id="c-2" layout="absolute left:420px top:320px size:1200px"></div>
+      </div>
       <header layout="row center self:stretch gap:2 height:100px">
         <ui-icon name="logo-full"></ui-icon>
         <ui-icon name="slogan"></ui-icon>
@@ -25,8 +32,18 @@ export default {
       </div>
     </template>
   `.css`
-    :host {
-      background: no-repeat center -250px url("data:image/svg+xml,%3Csvg width='1648' height='1525' viewBox='0 0 1648 1525' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1648' height='1524' transform='translate(0 0.495117)' fill='white'/%3E%3Cg filter='url(%23filter0_f_1866_5615)'%3E%3Cellipse cx='467.5' cy='443.995' rx='167.5' ry='143.5' fill='%23A1E4FF'/%3E%3C/g%3E%3Cg filter='url(%23filter1_f_1866_5615)'%3E%3Cellipse cx='923' cy='848.495' rx='225' ry='176' fill='%233751D5'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_f_1866_5615' x='0' y='0.495117' width='935' height='887' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='150' result='effect1_foregroundBlur_1866_5615'/%3E%3C/filter%3E%3Cfilter id='filter1_f_1866_5615' x='198' y='172.495' width='1450' height='1352' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='250' result='effect1_foregroundBlur_1866_5615'/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E%0A");
+    #bg { transform: translateX(-50%); }
+
+    #c-1 {
+      background: radial-gradient(circle, #A1E4FF 0%, rgba(255,255,255,0.1) 70%);
+      filter: blur(50px);
+      opacity: 0.4;
+    }
+
+    #c-2 {
+      background: radial-gradient(circle, #3751D5 0%, rgba(255,255,255,0.1) 65%);
+      filter: blur(50px);
+      opacity: 0.4;
     }
 
     header {
