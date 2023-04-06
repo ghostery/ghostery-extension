@@ -44,6 +44,9 @@
     "message": "Audio/Video Player",
     "description": "Tracker category name"
   },
+  "automatically_rejects_of_cookie_consent_notices_": {
+    "message": "Automatically rejects of cookie consent notices."
+  },
   "back": {
     "message": "Back"
   },
@@ -99,11 +102,14 @@
   "disabled": {
     "message": "Disabled"
   },
+  "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
+    "message": "Displays the tracker count on the Ghostery icon in the browser toolbar."
+  },
   "done": {
     "message": "Done"
   },
-  "eliminates_ads_on_websites_you_visit__offering_a_calm__safe_and_private_internet_": {
-    "message": "Eliminates ads on websites you visit, offering a calm, safe and private internet."
+  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
+    "message": "Eliminates ads on wesbites for safe and fast browsing."
   },
   "email": {
     "message": "Email",
@@ -162,11 +168,8 @@
   "ghostery_privacy_policy": {
     "message": "Ghostery Privacy Policy"
   },
-  "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collectors__from_ads_to_trackers_and_cookie_popups_": {
-    "message": "Ghostery protects your privacy by detecting and neutralizing different types of data collectors, from ads to trackers and cookie popups."
-  },
-  "ghostery_s_ai_driven_anti_tracking_technology_prevents_various_tracking_techniques_securing_your_digital_privacy_while_browsing_the_web_": {
-    "message": "Ghostery’s AI driven Anti-Tracking technology prevents various tracking techniques securing your digital privacy while browsing the web."
+  "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collection_including_ads__trackers__and_cookie_pop_ups_": {
+    "message": "Ghostery protects your privacy by detecting and neutralizing different types of data collection including ads, trackers, and cookie pop-ups."
   },
   "ghostery_settings": {
     "message": "Ghostery settings"
@@ -207,12 +210,6 @@
   },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Let Ghostery be your complete privacy advocate and reject all popups and tracking for you, or do it yourself!"
-  },
-  "manifest_name": {
-    "message": "Ghostery – Privacy Ad Blocker"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery is a powerful privacy extension. Block ads, stop trackers and speed up websites."
   },
   "menu": {
     "message": "Menu"
@@ -278,6 +275,9 @@
   "pin_it_here": {
     "message": "Pin it here"
   },
+  "prevents_various_tracking_techniques_using_ai_driven_technology_": {
+    "message": "Prevents various tracking techniques using AI-driven technology."
+  },
   "privacy_policy": {
     "message": "privacy policy"
   },
@@ -290,11 +290,8 @@
   "read_more_on_whotracks_me": {
     "message": "Read more on WhoTracks.Me"
   },
-  "removes_intrusive_cookie_popups_and_expresses_dissent_to_online_tracking__you_can_browse_the_web_without_worrying_about_cookie_consent_dialogues_or_privacy_violations_": {
-    "message": "Removes intrusive cookie popups and expresses dissent to online tracking. You can browse the web without worrying about cookie consent dialogues or privacy violations."
-  },
-  "replaces_ghostery_icon_in_the_browser_toolbar": {
-    "message": "Replaces Ghostery icon in the browser toolbar"
+  "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
+    "message": "Replaces the Ghostery icon in the browser toolbar with the tracker wheel."
   },
   "report_a_broken_page": {
     "message": "Report a broken page"
@@ -311,11 +308,8 @@
   "setup_successful": {
     "message": "Setup Successful"
   },
-  "show_tracker_count_badge_on_the_ghostery_icon_in_browser_toolbar": {
-    "message": "Show tracker count badge on the Ghostery icon in browser toolbar"
-  },
-  "shows_statistical_information_about_website_tracking_on_search_engine_result_page": {
-    "message": "Shows statistical information about website tracking on search engine result page"
+  "shows_the_tracker_preview_beside_search_results_": {
+    "message": "Shows the tracker preview beside search results."
   },
   "sign_in": {
     "message": "Sign in"
@@ -384,8 +378,8 @@
   "what_s_next_": {
     "message": "What’s next?"
   },
-  "when_pausing_ghostery_on_individual_websites_for_various_personal_reasons__those_websites_will_appear_here_": {
-    "message": "When pausing Ghostery on individual websites for various personal reasons, those websites will appear here."
+  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
+    "message": "When pausing Ghostery on individual websites, those websites will appear here."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s AI anti-tracking technology. It is a comprehensive global resource on trackers, bringing transparency to web tracking."
@@ -399,14 +393,14 @@
   "yes": {
     "message": "Yes"
   },
+  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
+    "message": "You can adjust the settings below. We recommend keeping them ON at all times."
+  },
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>."
   },
   "you_can_change_your_mind_at_any_time_and_enable_ghostery_in_the_ghostery_panel_to_start_tracking_the_trackers_": {
     "message": "You can change your mind at any time and enable Ghostery in the Ghostery panel to start tracking the trackers."
-  },
-  "you_can_manage_the_functionality_of_these_privacy_components_to_your_liking__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "You can manage the functionality of these privacy components to your liking. We recommend keeping them ON at all times."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "You will no longer see tracker wheels next to the search results."
