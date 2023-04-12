@@ -25,6 +25,9 @@
   "ad": {
     "message": "ad"
   },
+  "ad_blocking": {
+    "message": "Ad-Blocking"
+  },
   "additional_permissions_required": {
     "message": "Additional Permissions Required"
   },
@@ -135,6 +138,9 @@
   "android_untrust": {
     "message": "Undo"
   },
+  "anti_tracking": {
+    "message": "Anti-Tracking"
+  },
   "apply_optimal_privacy_settings_": {
     "message": "Apply optimal privacy settings:"
   },
@@ -143,6 +149,9 @@
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Are you sure you want to disable Trackers Preview?"
+  },
+  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
+    "message": "Are you sure you want to keep Ghostery disabled?"
   },
   "audio_video_player": {
     "message": "Audio/Video Player",
@@ -552,6 +561,9 @@
   "choose_your_privacy_plan": {
     "message": "Choose your privacy plan"
   },
+  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
+    "message": "Click the puzzle icon next to the search bar and pin Ghostery to your toolbar."
+  },
   "click2play_allow_always_tooltip": {
     "description": "Tooltip that appears over the 'allow always' click2play button.",
     "message": "Allow and reload."
@@ -702,6 +714,9 @@
   "enable_ghostery": {
     "message": "Enable Ghostery"
   },
+  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
+    "message": "Enable Ghostery to browse the web safer, faster, and with less ads."
+  },
   "enable_ghostery_to_get_started": {
     "message": "Enable Ghostery to get started"
   },
@@ -770,11 +785,23 @@
   "ghostery_basic": {
     "message": "Basic"
   },
+  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Browser Extension is installed in your browser but is inactive. You are browsing the web unprotected."
+  },
+  "ghostery_can_t_block_them_due_to_missing_permissions_": {
+    "message": "Ghostery can't block them due to missing permissions."
+  },
   "ghostery_disabled": {
     "message": "Ghostery disabled"
   },
   "ghostery_enabled": {
     "message": "Ghostery enabled"
+  },
+  "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
+    "message": "Ghostery is all set to stop trackers in their tracks and protect your privacy while browsing!"
+  },
+  "ghostery_is_disabled": {
+    "message": "Ghostery is disabled"
   },
   "ghostery_is_ready": {
     "message": "Ghostery is Ready!"
@@ -784,6 +811,12 @@
   },
   "ghostery_settings": {
     "message": "Ghostery settings"
+  },
+  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
+    "message": "Ghostery stops trackers in their tracks and prevents you from being profiled by data brokers."
+  },
+  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
+    "message": "Ghostery will show how many trackers were blocked on a page. Clicking on the Ghostery icon reveals more detailed information."
   },
   "global_settings_saved": {
     "message": "Global Settings Saved"
@@ -807,6 +840,12 @@
     "message": "Hosting",
     "description": "Tracker category name"
   },
+  "ignore": {
+    "message": "Ignore"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
+    "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>"
+  },
   "invalid_email_forgot": {
     "message": "Sorry, you have to enter a real email address."
   },
@@ -815,6 +854,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send non-personal information to WhoTracks.Me. The input enables Ghostery to provide real-time intel on trackers which in turn provides protection to the entire Ghostery community."
+  },
+  "keep_disabled": {
+    "message": "Keep disabled"
   },
   "last_name_field_label": {
     "message": "Last Name (Optional):"
@@ -1255,6 +1297,12 @@
   "pick_a_default_search_engine": {
     "message": "Choose a default search engine for all your searches."
   },
+  "pin_extension_for_easy_access": {
+    "message": "Pin Extension for easy access"
+  },
+  "pin_it_here": {
+    "message": "Pin it here"
+  },
   "please_enter_a_valid_email": {
     "message": "Please enter a valid email."
   },
@@ -1586,6 +1634,9 @@
   "settings_wtm_serp_report": {
     "message": "Show Trackers Preview next to search results"
   },
+  "setup_successful": {
+    "message": "Setup Successful"
+  },
   "seven_day_free_trial": {
     "message": "7-day free trial"
   },
@@ -1766,6 +1817,9 @@
     "message": "Telemetry",
     "description": "Tracker category name"
   },
+  "terms___conditions": {
+    "message": "Terms & Conditions"
+  },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "The Ghostery Browser Extension is installed in your browser but Ghosty is taking a light nap."
   },
@@ -1848,6 +1902,9 @@
   "what_is_whotracks_me_": {
     "message": "What is WhoTracks.Me?"
   },
+  "what_s_next_": {
+    "message": "What’s next?"
+  },
   "white_black_list_error_invalid_url": {
     "message": "Please enter a valid URL or wildcard."
   },
@@ -1870,6 +1927,9 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>."
   },
+  "you_can_change_your_mind_at_any_time_and_enable_ghostery_in_the_ghostery_panel_to_start_tracking_the_trackers_": {
+    "message": "You can change your mind at any time and enable Ghostery in the Ghostery panel to start tracking the trackers."
+  },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "You chose to skip enabling Ghostery!"
   },
@@ -1881,5 +1941,8 @@
   },
   "your_email_do_not_match": {
     "message": "Your emails do not match."
+  },
+  "your_privacy_features_": {
+    "message": "Your Privacy Features:"
   }
 }
