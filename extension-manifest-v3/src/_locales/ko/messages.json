@@ -38,14 +38,14 @@
     "message": "트래커 미리보기를 비활성화하시겠습니까?"
   },
   "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Are you sure you want to keep Ghostery disabled?"
+    "message": "Ghostery의 비활성 상태를 계속 유지하시겠습니까?"
   },
   "audio_video_player": {
     "message": "오디오/비디오 플레이어 ",
     "description": "Tracker category name"
   },
   "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "Automatically rejects of cookie consent notices."
+    "message": "쿠키 동의 알림을 자동 거부합니다."
   },
   "back": {
     "message": "뒤로"
@@ -67,7 +67,7 @@
     "message": "모두 지우기"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
-    "message": "Click the puzzle icon next to the search bar and pin Ghostery to your toolbar."
+    "message": "검색 바 옆 퍼즐 아이콘을 클릭하면 Ghostery가 툴바에 고정됩니다."
   },
   "comments": {
     "message": "댓글",
@@ -103,13 +103,13 @@
     "message": "비활성화됨"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
-    "message": "Displays the tracker count on the Ghostery icon in the browser toolbar."
+    "message": "브라우저 툴바 Ghostery 아이콘상에 트래커 개수를 표시합니다."
   },
   "done": {
     "message": "완료"
   },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "Eliminates ads on wesbites for safe and fast browsing."
+    "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
   },
   "email": {
     "message": "이메일 ",
@@ -119,7 +119,7 @@
     "message": "Ghostery 활성화"
   },
   "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Enable Ghostery to browse the web safer, faster, and with less ads."
+    "message": "Ghostery를 활성화하여 더욱 안전하고, 빠르고, 광고가 적은 웹을 즐기세요."
   },
   "enable_ghostery_to_get_started": {
     "message": "시작하려면 Ghostery를 활성화하십시오"
@@ -142,10 +142,10 @@
     "message": "자세한 정보는 전문을 읽으시기 바랍니다"
   },
   "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery Browser Extension is installed in your browser but is inactive. You are browsing the web unprotected."
+    "message": "브라우저에 Ghostery 브라우저 확장 프로그램에 설치되어 있지만 비활성 상태입니다. 웹 브라우징이 보호되지 않습니다."
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "Ghostery can't block them due to missing permissions."
+    "message": "누락된 권한이 있어 Ghostery가 차단할 수 없습니다."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 재개되었습니다."
@@ -154,10 +154,10 @@
     "message": "이 사이트에서는 Ghostery가 할 일이 없습니다. "
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery is all set to stop trackers in their tracks and protect your privacy while browsing!"
+    "message": "Ghostery는 트래커의 추적 행위를 막아 브라우징 중 이용자의 프라이버시를 완벽하게 보호합니다!"
   },
   "ghostery_is_disabled": {
-    "message": "Ghostery is disabled"
+    "message": "Ghostery가 비활성화됨"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 일시 중지되었습니다. "
@@ -169,13 +169,13 @@
     "message": "Ghostery 개인정보 취급방침"
   },
   "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collection_including_ads__trackers__and_cookie_pop_ups_": {
-    "message": "Ghostery protects your privacy by detecting and neutralizing different types of data collection including ads, trackers, and cookie pop-ups."
+    "message": "Ghostery는 광고, 트래커, 쿠키 팝업 등 다양한 유형의 데이터 수집을 감지하고 유해 요소를 해소하여 이용자의 프라이버시를 보호합니다."
   },
   "ghostery_settings": {
     "message": "Ghostery 설정 "
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery stops trackers in their tracks and prevents you from being profiled by data brokers."
+    "message": "Ghostery는 트래커의 추적 행위를 막아 데이터 브로커가 이용자를 프로파일링하지 못하게 합니다."
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "이 사이트에서 Ghostery가 일시 중지될 것입니다. 언제든지 마음을 바꾸어 Ghostery 설정에서 트래커와 광고가 웹에서 귀하를 추적하는 것을 중단하게 할 수 있습니다."
@@ -187,29 +187,35 @@
     "message": "이 사이트에서 Ghostery가 1시간 동안 일시 중지될 것입니다."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
-    "message": "Ghostery will show how many trackers were blocked on a page. Clicking on the Ghostery icon reveals more detailed information."
+    "message": "Ghostery는 페이지에서 차단된 트래커의 수를 보여줍니다. Ghostery 아이콘을 클릭하면 자세한 정보를 볼 수 있습니다."
   },
   "hosting": {
     "message": "호스팅",
     "description": "Tracker category name"
   },
   "ignore": {
-    "message": "Ignore"
+    "message": "무시"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>"
+    "message": "웹 트래커에 대한 정보는 당사의 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유됩니다."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "트래커 정보를 WhoTracks.Me로 전송을 허락해 준 모든 Ghostery 사용자의 이러한 작은 기여들이 모여 Ghostery는 운영됩니다. 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 이렇게 전체 Ghostery 사용자 커뮤니티가 보호받을 수 있습니다."
   },
   "keep_disabled": {
-    "message": "Keep disabled"
+    "message": "비활성 상태 유지"
   },
   "learn_more": {
     "message": "자세히 알아보기"
   },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghostery가 귀하의 완전한 개인 정보 보호를 지원할 수 있게 하고 모든 팝업 및 추적을 거부하십시오. 또는 직접 실행할 수도 있습니다!"
+  },
+	"manifest_name": {
+    "message": "Ghostery – 개인정보 보호용 광고 차단기"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery는 강력한 개인정보 보호 확장 프로그램입니다. 광고와 트래커를 차단하고 웹 사이트의 속도를 높여줍니다."
   },
   "menu": {
     "message": "메뉴"
@@ -270,13 +276,13 @@
     "message": "권한 필요"
   },
   "pin_extension_for_easy_access": {
-    "message": "Pin Extension for easy access"
+    "message": "빠르게 이용할 수 있게 확장 프로그램 고정"
   },
   "pin_it_here": {
-    "message": "Pin it here"
+    "message": "여기 고정"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
-    "message": "Prevents various tracking techniques using AI-driven technology."
+    "message": "AI 기반 기술로 다양한 추적 기법에 대응합니다."
   },
   "privacy_policy": {
     "message": "개인정보 취급방침"
@@ -291,7 +297,7 @@
     "message": "WhoTracks.Me 자세히 보기"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
-    "message": "Replaces the Ghostery icon in the browser toolbar with the tracker wheel."
+    "message": "브라우저 툴바에서 Ghostery 아이콘을 트래커 휠로 대체합니다."
   },
   "report_a_broken_page": {
     "message": "깨진 페이지 보고 "
@@ -306,10 +312,10 @@
     "message": "설정 "
   },
   "setup_successful": {
-    "message": "Setup Successful"
+    "message": "셋업 성공"
   },
   "shows_the_tracker_preview_beside_search_results_": {
-    "message": "Shows the tracker preview beside search results."
+    "message": "검색결과 옆에 트래커 미리보기를 표시합니다."
   },
   "sign_in": {
     "message": "로그인 "
@@ -376,10 +382,10 @@
     "message": "WhoTracks.Me란?"
   },
   "what_s_next_": {
-    "message": "What’s next?"
+    "message": "다음 업데이트"
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "When pausing Ghostery on individual websites, those websites will appear here."
+    "message": "개별 웹사이트에서 Ghostery를 일시 중지하면 해당 웹사이트가 여기 표시됩니다."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghostery가 운영하는 WhoTracks.Me는 Ghostery의 AI 추적 방지 기술을 필수 부분으로 작동합니다. 이는 트래커에 대한 가장 포괄적인 글로벌 리소스로서 웹 추적에 투명성을 가져다 줍니다."
@@ -394,18 +400,18 @@
     "message": "예 "
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "You can adjust the settings below. We recommend keeping them ON at all times."
+    "message": "아래에서 설정을 조정하실 수 있습니다. 항상 켜둘 것을 권장합니다."
   },
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "해당 설정은&nbsp;<strong>Ghostery 제어판</strong>에서 언제든지 변경할 수 있습니다."
   },
   "you_can_change_your_mind_at_any_time_and_enable_ghostery_in_the_ghostery_panel_to_start_tracking_the_trackers_": {
-    "message": "You can change your mind at any time and enable Ghostery in the Ghostery panel to start tracking the trackers."
+    "message": "언제든 마음이 바뀌면 Ghostery 패널에서 Ghostery를 활성화하여 트래커 추적을 시작할 수 있습니다."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "검색 결과 옆의 트래커 휠이 더 이상 표시되지 않습니다."
   },
   "your_privacy_features_": {
-    "message": "Your Privacy Features:"
+    "message": "프라이버시 관련 기능:"
   }
 }
