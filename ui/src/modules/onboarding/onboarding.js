@@ -18,7 +18,7 @@ import OutroSuccess from './views/outro-success.js';
 export default define({
   tag: 'ui-onboarding',
   platform: '',
-  views: router([Main, OutroSuccess, OutroSkip], {
+  views: router([Main, OutroSuccess], {
     params: ['platform'],
   }),
   state: {

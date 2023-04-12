@@ -12,7 +12,6 @@
 import { define, html, router } from 'hybrids';
 
 import disabled from '../illustrations/disabled.js';
-import Main from './main.js';
 
 export default define({
   tag: 'ui-onboarding-outro-skip-view',
@@ -31,7 +30,7 @@ export default define({
         </section>
         <section layout="row center margin:top:4 margin:bottom">
           <ui-button type="outline">
-            <a href="${router.url(Main)}">Enable Ghostery</a>
+            <a href="${router.backUrl()}">Enable Ghostery</a>
           </ui-button>
         </section>
       </ui-onboarding-card>

@@ -14,6 +14,12 @@ import { define } from 'hybrids';
 // Global components
 import '../pages/index.js';
 
+// Root
+import './onboarding.js';
+
+// Iframe
+import './iframe.js';
+
 // Components
 define.from(
   import.meta.glob('./components/*.js', { eager: true, import: 'default' }),
@@ -22,9 +28,3 @@ define.from(
     root: 'components',
   },
 );
-
-// Root
-import './onboarding.js';
-
-// Iframe
-import './iframe.js';

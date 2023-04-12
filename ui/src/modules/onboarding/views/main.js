@@ -14,13 +14,14 @@ import { define, html, msg, router } from 'hybrids';
 import Whotracksme from './whotracksme.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
+import OutroSkip from './outro-skip.js';
 import OutroSuccess from './outro-success.js';
 
 const TERMS_AND_CONDITIONS_URL =
   'https://www.ghostery.com/privacy/ghostery-terms-and-conditions?utm_source=gbe';
 
 export default define({
-  [router.connect]: { stack: [Skip, Whotracksme, Privacy] },
+  [router.connect]: { stack: [Skip, Whotracksme, Privacy, OutroSkip] },
   tag: 'ui-onboarding-main-view',
   content: () => html`
     <template layout="grow column gap">

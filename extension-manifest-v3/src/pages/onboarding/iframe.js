@@ -26,7 +26,10 @@ async function close(host, event) {
     onboarding: event.type === 'ignore' ? { shownAt: Date.now() } : null,
   });
 
-  closeIframe();
+  // Options notify other contexts about changes, but
+  // we cannot await for it, as Safari returns unfulfilled promise
+  // which introduces bug
+  setTimeout(closeIframe, 100);
 }
 
 define({
