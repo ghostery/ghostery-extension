@@ -1927,9 +1927,6 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "Vous pouvez accéder à ces paramètres à tout moment dans le&nbsp;<strong>panneau de commande</strong>."
   },
-  "you_can_change_your_mind_at_any_time_and_enable_ghostery_in_the_ghostery_panel_to_start_tracking_the_trackers_": {
-    "message": "Vous pouvez changer d'avis à tout moment et activer Ghostery dans le Panneau Ghostery pour commencer à suivre les trackers."
-  },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "Vous avez choisi de reporter l'activation de Ghostery !"
   },

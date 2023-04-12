@@ -1927,9 +1927,6 @@
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "您可以随时在&nbsp;<strong>Ghostery 控制面板</strong>中更改这些设置。"
   },
-  "you_can_change_your_mind_at_any_time_and_enable_ghostery_in_the_ghostery_panel_to_start_tracking_the_trackers_": {
-    "message": "您可以随时在 Ghostery 面板启用 Ghostery 来追踪跟踪器。"
-  },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "您选择跳过启用 Ghostery！"
   },
