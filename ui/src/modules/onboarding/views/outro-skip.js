@@ -9,9 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { define, html, router } from 'hybrids';
 
 import disabled from '../illustrations/disabled.js';
+import Main from './main.js';
 
 export default define({
   tag: 'ui-onboarding-outro-skip-view',
@@ -28,12 +29,11 @@ export default define({
             inactive. You are browsing the web unprotected.
           </ui-text>
         </section>
-        <ui-onboarding-card type="highlight" layout="margin:top:4">
-          <ui-text type="body-m" color="gray-600">
-            You can change your mind at any time and enable Ghostery in the
-            Ghostery panel to start tracking the trackers.
-          </ui-text>
-        </ui-onboarding-card>
+        <section layout="row center margin:top:4 margin:bottom">
+          <ui-button type="outline">
+            <a href="${router.url(Main)}">Enable Ghostery</a>
+          </ui-button>
+        </section>
       </ui-onboarding-card>
     </template>
   `,

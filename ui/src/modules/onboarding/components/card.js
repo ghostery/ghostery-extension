@@ -31,13 +31,5 @@ export default {
       box-shadow: none;
       border: none;
     }
-
-    :host([type="highlight"]) {
-      background: var(--ui-color-gray-100);
-      border-radius: 8px;
-      border: none;
-      box-shadow: none;
-      padding: 16px 24px;
-    }
   `,
 };
