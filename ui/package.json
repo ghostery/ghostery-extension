@@ -31,6 +31,6 @@
     "prettier": "^2.6.2"
   },
   "dependencies": {
-    "hybrids": "^8.1.14"
+    "hybrids": "^8.1.15"
   }
 }
