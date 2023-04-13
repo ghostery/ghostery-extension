@@ -29,7 +29,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "node-fetch": "^3.2.3",
     "prettier": "^2.6.1",
-    "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "vite": "^4.0.2",
     "web-ext": "^7.3.1"
