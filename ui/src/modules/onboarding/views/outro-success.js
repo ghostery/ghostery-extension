@@ -45,7 +45,10 @@ export default define({
             <ui-text type="display-2xs" color="gray-800" layout="block:center">
               What’s next?
             </ui-text>
-            <img src="${PIN_EXTENSION_IMAGES[platform]}" />
+            <img
+              src="${PIN_EXTENSION_IMAGES[platform]}"
+              layout="width:::full"
+            />
             <div layout="row items:center gap">
               <ui-icon
                 name="extension-${platform}"

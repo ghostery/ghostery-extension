@@ -13,7 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   render: () => html`
-    <template layout="relative column height::100% width::375px overflow">
+    <template layout="relative column height::100% width::359px overflow">
       <div
         id="bg"
         layout="absolute top:-250px left:50% size:1648px:1525px layer:-1"

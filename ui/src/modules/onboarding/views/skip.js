@@ -17,23 +17,32 @@ export default define({
   [router.connect]: { dialog: true },
   tag: 'ui-onboarding-skip-dialog',
   content: () => html`
-    <ui-onboarding-dialog>
-      <ui-text slot="header" type="headline-m">
-        Are you sure you want to keep Ghostery disabled?
-      </ui-text>
-      <ui-text>
-        Ghostery stops trackers in their tracks and prevents you from being
-        profiled by data brokers.
-      </ui-text>
-      <ui-text>
-        Enable Ghostery to browse the web safer, faster, and with less ads.
-      </ui-text>
-      <ui-button type="outline" slot="footer">
-        <a href="${router.backUrl()}">Back</a>
-      </ui-button>
-      <ui-button type="outline-error" slot="footer">
-        <a href="${router.url(OutroSkip)}">Keep disabled</a>
-      </ui-button>
-    </ui-onboarding-dialog>
+    <template layout="block">
+      <ui-onboarding-dialog>
+        <ui-text slot="header" type="headline-m">
+          Are you sure you want to keep Ghostery disabled?
+        </ui-text>
+        <ui-text>
+          Ghostery stops trackers in their tracks and prevents you from being
+          profiled by data brokers.
+        </ui-text>
+        <ui-text>
+          Enable Ghostery to browse the web safer, faster, and with less ads.
+        </ui-text>
+        <div layout="padding:top:5" layout@500px="hidden"></div>
+        <section
+          slot="footer"
+          layout="column-reverse gap:2"
+          layout@500px="row content:flex-end"
+        >
+          <ui-button type="outline">
+            <a href="${router.backUrl()}">Back</a>
+          </ui-button>
+          <ui-button type="outline-error">
+            <a href="${router.url(OutroSkip)}">Keep disabled</a>
+          </ui-button>
+        </section>
+      </ui-onboarding-dialog>
+    </template>
   `,
 });
