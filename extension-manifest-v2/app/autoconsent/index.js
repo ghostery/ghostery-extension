@@ -9,11 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui/autoconsent';
-
 import { define, html } from 'hybrids';
 
+import '@ghostery/ui/autoconsent';
+import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
+
 const hostname = new URLSearchParams(window.location.search).get('host');
+setupIframeSize();
 
 async function enable(_, event) {
 	const { all } = event.detail;
@@ -33,6 +35,10 @@ async function disable(_, event) {
 		origin: 'autoconsent',
 		message: { url: all ? undefined : hostname },
 	});
+}
+
+function close(host, event) {
+	closeIframe(event.detail.reload);
 }
 
 async function getCategories() {
@@ -96,8 +102,9 @@ export default define({
 		<template layout="block">
 			<ui-autoconsent
 				categories="${categories}"
-				onenable=${enable}
-				ondisable=${disable}
+				onenable="${enable}"
+				ondisable="${disable}"
+				onclose="${close}"
 			></ui-autoconsent>
 		</template>
 	`,

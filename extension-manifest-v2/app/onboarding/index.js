@@ -1,4 +1,5 @@
-import { define, html } from 'hybrids';
+import { define, html, store } from 'hybrids';
+import { getBrowserInfo } from '@ghostery/libs';
 
 import '@ghostery/ui/onboarding';
 import './styles.scss';
@@ -19,7 +20,23 @@ function skip() {
 	});
 }
 
+const BrowserInfo = {
+	name: '',
+	[store.connect]: getBrowserInfo,
+};
+
 define({
 	tag: 'gh-onboarding',
-	content: () => html`<ui-onboarding onsuccess="${complete}" onskip="${skip}"></ui-onboarding>`,
+	browserInfo: store(BrowserInfo),
+	content: ({ browserInfo }) => (
+		store.pending(browserInfo)
+			? html``
+			: html`
+				<ui-onboarding
+					platform="${store.ready(browserInfo) ? browserInfo.name : ''}"
+					onsuccess="${complete}"
+					onskip="${skip}"
+				></ui-onboarding>
+			`
+	),
 });

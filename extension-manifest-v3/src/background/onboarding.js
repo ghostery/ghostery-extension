@@ -9,21 +9,35 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from 'hybrids';
-import Options from '/store/options.js';
+import { observe } from '/store/options.js';
+import { sendShowIframeMessage } from './utils/iframe.js';
+import { tabStats } from './stats.js';
 
-const DAY_IN_MS = 24 * 60 * 60 * 1000;
+const NOTIFICATION_DELAY = 60 * 60 * 1000; // an hour in milliseconds
+const NOTIFICATION_TRACKERS_THRESHOLD = 10;
 
-(async function onboarding() {
-  const options = await store.resolve(Options);
-  const now = Date.now();
+let shownAt = undefined;
+observe('onboarding', (onboarding) => {
+  shownAt = !onboarding.done && onboarding.shownAt;
 
-  if (
-    !options.onboarding.done &&
-    options.onboarding.shownAt < now - DAY_IN_MS
-  ) {
+  if (!onboarding.done && !onboarding.shownAt) {
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });
   }
-})();
+});
+
+chrome.webNavigation.onCompleted.addListener((details) => {
+  if (
+    details.frameId === 0 &&
+    shownAt &&
+    Date.now() - shownAt > NOTIFICATION_DELAY
+  ) {
+    setTimeout(() => {
+      const stats = tabStats.get(details.tabId);
+      if (stats && stats.trackers.length >= NOTIFICATION_TRACKERS_THRESHOLD) {
+        sendShowIframeMessage(details.tabId, 'pages/onboarding/iframe.html');
+      }
+    }, 1000);
+  }
+});

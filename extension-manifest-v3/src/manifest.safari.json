@@ -88,6 +88,13 @@
       "all_frames": true
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/iframe.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",
@@ -498,8 +505,9 @@
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
     "pages/trackers-preview/index.html",
+    "pages/autoconsent/index.html",
     "pages/onboarding/index.html",
-    "pages/autoconsent/index.html"
+    "pages/onboarding/iframe.html"
   ],
   "content_security_policy" : {}
 }

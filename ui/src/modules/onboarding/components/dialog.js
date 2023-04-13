@@ -9,69 +9,47 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 
-export default define({
-  tag: 'ui-onboarding-dialog',
+export default {
   render: () => html`
-    <div id="dialog">
-      <div id="content">
-        <header><slot name="header"></slot></header>
-        <slot></slot>
+    <template
+      layout="column center fixed inset padding:2.5 layer:1000"
+      layout@768px="padding:5"
+    >
+      <div
+        id="dialog"
+        layout="column shrink:0 relative width:full::600px height:::full"
+      >
+        <div
+          layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:12"
+          layout@768px="padding:5 padding:bottom:15"
+        >
+          <header><slot name="header"></slot></header>
+          <slot></slot>
+        </div>
+        <footer
+          layout="row gap:2 absolute inset top:auto layer padding:0:2.5:2.5"
+          layout@768px="content:flex-end padding:0:5:5"
+        >
+          <slot
+            name="footer"
+            layout::slotted(*)="relative grow:1 layer:2"
+            layout::slotted(*)@768px="grow:0"
+          ></slot>
+        </footer>
       </div>
-      <footer><slot name="footer"></slot></footer>
-    </div>
+    </template>
   `.css`
     :host {
       background: rgba(18, 18, 28, 0.4);
       backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      --ui-onboarding-dialog-spacing: 20px;
-      padding: var(--ui-onboarding-dialog-spacing);
-      z-index: 1000;
     }
 
     #dialog {
-      display: flex;
-      flex-flow: column;
-      position: relative;
-      box-sizing: border-box;
       background: var(--ui-color-white);
       border-radius: 16px;
-      width: 100%;
-      max-width: 600px;
-      max-height: 100%;
       box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.2);
-    }
-
-    #content {
-      display: grid;
-      grid-auto-rows: min-content;
-      gap: 16px;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      max-height: 100%;
-      padding: var(--ui-onboarding-dialog-spacing) var(--ui-onboarding-dialog-spacing) calc(var(--ui-onboarding-dialog-spacing) + 80px);
-    }
-
-    footer {
-      z-index: 1;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 0 var(--ui-onboarding-dialog-spacing) var(--ui-onboarding-dialog-spacing);
-      display: flex;
-      gap: 16px;
-      justify-content: stretch;
-      margin-top: 24px;
     }
 
     footer::before {
@@ -83,25 +61,5 @@ export default define({
       border-radius: 16px;
       background: linear-gradient(0deg, var(--ui-color-white) 0%, rgba(47, 49, 54, 0) 100%);
     }
-
-    footer ::slotted(*) {
-      position: relative;
-      z-index: 2;
-      flex: 1;
-    }
-
-    @media screen and (min-width: 768px) {
-      :host {
-        --ui-onboarding-dialog-spacing: 40px;
-      }
-
-      footer {
-        justify-content: flex-end;
-      }
-
-      footer ::slotted(*) {
-        flex: 0;
-      }
-    }
   `,
-});
+};

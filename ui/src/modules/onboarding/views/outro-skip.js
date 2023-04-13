@@ -9,32 +9,31 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { define, html, router } from 'hybrids';
 
-import sleep from '../illustrations/sleep.js';
+import disabled from '../illustrations/disabled.js';
 
 export default define({
   tag: 'ui-onboarding-outro-skip-view',
   content: () => html`
     <template layout="block">
-      <ui-card>
-        <div slot="illustration">${sleep}</div>
-        <section layout="block:center column gap:2" layout@768px="margin:0:4">
-          <ui-text type="display-l">
-            You chose to skip enabling Ghostery!
+      <ui-onboarding-card>
+        <section layout="block:center column gap:2">
+          <div layout="row center">${disabled}</div>
+          <ui-text type="display-m" color="error-500">
+            Ghostery is disabled
           </ui-text>
-          <ui-text type="body-xl" color="gray-800">
-            The Ghostery Browser Extension is installed in your browser but
-            Ghosty is taking a light nap.
+          <ui-text type="body-m" color="gray-800">
+            Ghostery Browser Extension is installed in your browser but is
+            inactive. You are browsing the web unprotected.
           </ui-text>
         </section>
-        <ui-card type="highlight" layout="margin:top:5">
-          <ui-text type="body-l">
-            You can change your mind anytime and enable Ghostery to start
-            tracking the trackers for you in Ghostery panel.
-          </ui-text>
-        </ui-card>
-      </ui-card>
+        <section layout="row center margin:top:4 margin:bottom">
+          <ui-button type="outline">
+            <a href="${router.backUrl()}">Enable Ghostery</a>
+          </ui-button>
+        </section>
+      </ui-onboarding-card>
     </template>
   `,
 });

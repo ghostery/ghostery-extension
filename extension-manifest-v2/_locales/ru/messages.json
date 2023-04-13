@@ -1,7 +1,4 @@
 {
-  "accept_terms": {
-    "message": "Принять условия"
-  },
   "account_creation_privacy_statement": {
     "message": "Применяются наши стандартные $LINK_TERMS_START$Условия и положения$LINK_TERMS_END$ и $LINK_UA_START$Лицензионное соглашение$LINK_UA_END$. Наше Заявление о конфиденциальности доступно $LINK_PS_START$здесь$LINK_PS_END$.",
     "placeholders": {
@@ -27,6 +24,9 @@
   },
   "ad": {
     "message": "реклама"
+  },
+  "ad_blocking": {
+    "message": "Блокировка рекламы"
   },
   "additional_permissions_required": {
     "message": "Требуются дополнительные разрешения"
@@ -138,8 +138,8 @@
   "android_untrust": {
     "message": "Вернуть"
   },
-  "any_questions__anytime_": {
-    "message": "Есть вопросы? Всегда пожалуйста!"
+  "anti_tracking": {
+    "message": "Анти-трекинг"
   },
   "apply_optimal_privacy_settings_": {
     "message": "Применить оптимальные настройки конфиденциальности:"
@@ -150,8 +150,8 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Are you sure you want to disable Trackers Preview?"
   },
-  "are_you_sure_you_want_to_skip_enabling_ghostery_": {
-    "message": "Вы уверены, что хотите отказаться от включения Ghostery?"
+  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
+    "message": "Не включать расширение Ghostery?"
   },
   "audio_video_player": {
     "message": "Аудио/видео проигрыватель",
@@ -552,9 +552,6 @@
     "message": "СДД",
     "description": "Tracker category name"
   },
-  "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
-    "message": "Ознакомьтесь с <a href=\"$${0}\" target=\"_blank\">FAQs</a> или напишите нам <a href=\"mailto:$${1}\">$${2}</a>. <br/> Будем рады пообщаться с вами!"
-  },
   "choose_your_default_search": {
     "message": "Выбрать поиск по умолчанию"
   },
@@ -563,6 +560,9 @@
   },
   "choose_your_privacy_plan": {
     "message": "Выберите свой план конфиденциальности"
+  },
+  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
+    "message": "Нажмите на значок «Расширения» справа от строки поиска и закрепите Ghostery на панели инструментов."
   },
   "click2play_allow_always_tooltip": {
     "description": "Tooltip that appears over the 'allow always' click2play button.",
@@ -644,9 +644,6 @@
     "message": "Управление согласием",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
-  "continue": {
-    "message": "Продолжить"
-  },
   "cookie": {
     "message": "куки"
   },
@@ -717,6 +714,9 @@
   "enable_ghostery": {
     "message": "Включить Ghostery"
   },
+  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
+    "message": "Включите Ghostery, чтобы повысить безопасность и скорость работы в браузере и видеть меньше рекламы."
+  },
   "enable_ghostery_to_get_started": {
     "message": "Включите Ghostery, чтобы начать работу"
   },
@@ -785,26 +785,38 @@
   "ghostery_basic": {
     "message": "Базовый"
   },
+  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
+    "message": "Расширение Ghostery установлено, но отключено. Ваши данные не защищены в интернете."
+  },
+  "ghostery_can_t_block_them_due_to_missing_permissions_": {
+    "message": "У Ghostery недостаточно разрешений для блокировки трекеров."
+  },
   "ghostery_disabled": {
     "message": "Ghostery отключен"
   },
   "ghostery_enabled": {
     "message": "Ghostery включен"
   },
+  "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
+    "message": "Ghostery блокирует трекеры и обеспечивает конфиденциальность при работе в браузере."
+  },
+  "ghostery_is_disabled": {
+    "message": "Расширение Ghostery отключено"
+  },
   "ghostery_is_ready": {
     "message": "Ghostery готов!"
-  },
-  "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery блокирует трекеры и защищает вашу конфиденциальность!"
-  },
-  "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
-    "message": "Ghostery блокирует трекеры и предотвращает профилирование и продажу ваших данных брокерам."
   },
   "ghostery_privacy_policy": {
     "message": "Политика конфиденциальности Ghostery"
   },
   "ghostery_settings": {
     "message": "Ghostery settings"
+  },
+  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
+    "message": "Ghostery блокирует трекеры и защищает ваши данные от брокеров."
+  },
+  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
+    "message": "Ghostery будет показывать количество трекеров, заблокированных на странице. Чтобы посмотреть более подробную статистику, нажмите на значок расширения."
   },
   "global_settings_saved": {
     "message": "Глобальные настройки сохранены"
@@ -828,8 +840,11 @@
     "message": "Хостинг",
     "description": "Tracker category name"
   },
-  "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
-    "message": "Я соглашаюсь отправлять неличную информацию на <a href=\"$${0}\">Ghostery’s WhoTracks.Me</a> и принимаю <a href=\"$${1}\">Политику конфиденциальности Ghostery</a> Ghostery."
+  "ignore": {
+    "message": "Игнорировать"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
+    "message": "Мы делимся информацией о трекерах в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>"
   },
   "invalid_email_forgot": {
     "message": "Извините, вам необходимо ввести настоящий адрес электронной почты."
@@ -839,6 +854,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего неперсональную информацию на WhoTracks.Me. Данные позволяют Ghostery оперативно предоставлять информацию о трекерах, что взамен обеспечивает защиту всего сообщества Ghostery."
+  },
+  "keep_disabled": {
+    "message": "Не включать"
   },
   "last_name_field_label": {
     "message": "Фамилия (необязательно):"
@@ -1279,6 +1297,12 @@
   "pick_a_default_search_engine": {
     "message": "Выберите поисковую систему по умолчанию для всех ваших поисков."
   },
+  "pin_extension_for_easy_access": {
+    "message": "Закрепить Ghostery для быстрого доступа"
+  },
+  "pin_it_here": {
+    "message": "Закрепить здесь"
+  },
   "please_enter_a_valid_email": {
     "message": "Введите действующий адрес электронной почты."
   },
@@ -1610,6 +1634,9 @@
   "settings_wtm_serp_report": {
     "message": "Показывать трекеры рядом с результатами поиска"
   },
+  "setup_successful": {
+    "message": "Настройка завершена"
+  },
   "seven_day_free_trial": {
     "message": "7-дневная бесплатная версия"
   },
@@ -1790,6 +1817,9 @@
     "message": "Телеметрия",
     "description": "Tracker category name"
   },
+  "terms___conditions": {
+    "message": "Условия и положения"
+  },
   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
     "message": "Расширение Ghostery Browser Extension установлено в вашем браузере, но Ghosty пока дремлет."
   },
@@ -1872,6 +1902,9 @@
   "what_is_whotracks_me_": {
     "message": "Что такое WhoTracks.Me?"
   },
+  "what_s_next_": {
+    "message": "Что дальше?"
+  },
   "white_black_list_error_invalid_url": {
     "message": "Введите действительный адрес URL или подстановочный знак."
   },
@@ -1888,17 +1921,11 @@
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me Statistical Report"
   },
-  "with_ghostery_enabled_you_instantly_browse_the_web_safer__faster_and_with_less_annoying_ads_": {
-    "message": "С включенным Ghostery вы мгновенно переходите на более безопасный, быстрый и менее раздражающий просмотр веб-сайтов."
-  },
   "yes": {
     "message": "Да"
   },
   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
     "message": "Вы всегда можете изменить эти настройки в&nbsp;<strong>панели управления Ghostery</strong>."
-  },
-  "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_panel_": {
-    "message": "Вы можете передумать в любое время и разрешить Ghostery начать отслеживать трекеры за вас в панели Ghostery."
   },
   "you_chose_to_skip_enabling_ghostery_": {
     "message": "Вы решили пропустить включение Ghostery!"
@@ -1911,5 +1938,8 @@
   },
   "your_email_do_not_match": {
     "message": "Адреса вашей электронной почты не совпадают."
+  },
+  "your_privacy_features_": {
+    "message": "Ваши функции защиты конфиденциальности:"
   }
 }

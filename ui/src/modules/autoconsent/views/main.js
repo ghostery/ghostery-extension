@@ -9,34 +9,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, router } from 'hybrids';
+import { dispatch, html, msg, router } from 'hybrids';
 
 import Home from './home.js';
 
 function closeIframe(host, event) {
   // Disconnect host from the DOM to clean up the router
+  dispatch(host, 'close', { detail: { reload: event.detail.reload } });
   host.parentElement.removeChild(host);
-
-  window.parent.postMessage(
-    { type: 'ghostery-autoconsent-close-iframe', reload: event.detail.reload },
-    '*',
-  );
 }
-
-(function updateIframeHeight() {
-  const resizeObserver = new ResizeObserver(() => {
-    window.parent.postMessage(
-      {
-        type: 'ghostery-autoconsent-resize-iframe',
-        height: document.body.clientHeight,
-      },
-      '*',
-    );
-  });
-  resizeObserver.observe(document.body, {
-    box: 'border-box',
-  });
-})();
 
 export default {
   tag: 'ui-autoconsent',

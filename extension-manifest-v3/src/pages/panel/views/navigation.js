@@ -18,17 +18,17 @@ const MENU = [
   {
     icon: 'alert',
     label: msg`Report a broken page`,
-    href: 'https://www.ghostery.com/support',
+    href: 'https://www.ghostery.com/support?utm_source=gbe',
   },
   {
     icon: 'send',
     label: msg`Submit a new tracker`,
-    href: 'https://www.ghostery.com/submit-a-tracker',
+    href: 'https://www.ghostery.com/submit-a-tracker?utm_source=gbe',
   },
   {
     icon: 'help',
     label: msg`Contact support`,
-    href: 'https://www.ghostery.com/support',
+    href: 'https://www.ghostery.com/support?utm_source=gbe',
   },
   {},
   {
@@ -39,7 +39,7 @@ const MENU = [
   {
     icon: 'info-menu',
     label: msg`About`,
-    href: 'https://www.ghostery.com/',
+    href: 'https://www.ghostery.com/?utm_source=gbe',
   },
 ];
 
@@ -47,7 +47,7 @@ if (__PLATFORM__ !== 'safari') {
   MENU.unshift({
     icon: 'heart',
     label: msg`Become a Contributor`,
-    href: 'https://www.ghostery.com/become-a-contributor',
+    href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
   });
 }
 

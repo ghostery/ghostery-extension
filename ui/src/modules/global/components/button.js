@@ -28,38 +28,48 @@ export default {
         text-transform: uppercase;
       }
 
-      :host([type="outline"]) {
-        background: var(--ui-color-white);
-        color: var(--ui-color-gray-700);
-        border: 1px solid var(--ui-color-gray-200);
-        --ui-button-color-hover: var(--ui-color-primary-500);
-      }
-
       :host([type="primary"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
-        --ui-button-color-hover: var(--ui-color-primary-700);
-      }
-
-      :host([type="secondary"]) {
-        background: var(--ui-color-gray-700);
+        --ui-button-hover-color: var(--ui-color-white);
+        --ui-button-hover-background: var(--ui-color-primary-700);
       }
 
       :host([type="success"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-success-500);
-        --ui-button-color-hover: var(--ui-color-success-700);
+        --ui-button-hover-color: var(--ui-color-white);
+        --ui-button-hover-background: var(--ui-color-success-700);
+      }
+
+      :host([type="transparent"]) {
+        --ui-button-hover-color: var(--ui-color-primary-500);
+        --ui-button-hover-background: var(--ui-color-primary-100);
+      }
+
+      :host([type="outline"]) {
+        color: var(--ui-color-gray-700);
+        background: var(--ui-color-white);
+        border: 1px solid var(--ui-color-gray-200);
+        --ui-button-hover-color: var(--ui-color-primary-500);
+        --ui-button-hover-border: var(--ui-color-primary-500);
+        --ui-button-hover-background: var(--ui-color-white);
+      }
+
+      :host([type="outline-error"]) {
+        color: var(--ui-color-error-400);
+        background: var(--ui-color-white);
+        border: 1px solid var(--ui-color-gray-200);
+        --ui-button-hover-color: var(--ui-color-error-500);
+        --ui-button-hover-border: var(--ui-color-error-500);
+        --ui-button-hover-background: var(--ui-color-white);
       }
 
       @media (hover: hover) and (pointer: fine) { 
-        :host([type="outline"]:hover) {
-          color: var(--ui-button-color-hover);
-          border-color: var(--ui-button-color-hover);
-        }
-
-        :host([type="primary"]:hover), 
-        :host([type="success"]:hover) {
-          background: var(--ui-button-color-hover);
+        :host(:hover), :host(:focus-within) {
+          color: var(--ui-button-hover-color);
+          border-color: var(--ui-button-hover-border);
+          background: var(--ui-button-hover-background);
         }
       }
 
@@ -76,6 +86,10 @@ export default {
         color: var(--ui-color-gray-400);
         border-color: var(--ui-color-gray-200);
         pointer-events: none;
+      }
+
+      :host([disabled]:focus-within) {
+        visibility: hidden;
       }
 
       ::slotted(*) {
@@ -97,6 +111,11 @@ export default {
         font: inherit;
         text-transform: inherit;
         text-decoration: none;
+        border-radius: 24px;
+      }
+
+      ::slotted(*:focus-visible) {
+        outline: 6px solid rgba(0, 174, 240, 0.15);
       }
 
       :host([size="small"]) ::slotted(*) {

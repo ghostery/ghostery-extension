@@ -14,27 +14,16 @@ import { html } from 'hybrids';
 export default {
   type: '',
   render: ({ type }) => html`
-    <template layout="column">
-      <div
-        class="${{ [type]: type }}"
-        layout="margin:3"
-        layout@768px="margin:5"
-        layout.narrow="margin:left:3 margin:right:3"
-        layout.highlight="margin:2"
-        layout.highlight@768px="margin:3"
-      >
-        <div id="illustration" layout="row content:center">
-          <slot name="illustration"></slot>
-        </div>
+    <template layout="column padding:3">
+      <div class="${{ [type]: type }}">
         <slot></slot>
       </div>
     </template>
   `.css`
-    :host {
+    :host { 
       background: var(--ui-color-white);
       border-radius: 16px;
       box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
-      border: 1px solid var(--ui-color-gray-200);
     }
 
     :host([type="transparent"]) {
@@ -42,16 +31,5 @@ export default {
       box-shadow: none;
       border: none;
     }
-
-    :host([type="highlight"]) {
-      background: var(--ui-color-gray-100);
-      border-radius: 8px;
-      border: none;
-      box-shadow: none;
-    }
-
-    #illustration ::slotted(*) {
-      margin-bottom: 24px;
-    }
-    `,
+  `,
 };

@@ -9,22 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define } from 'hybrids';
-
-// Global components
-import '../pages/index.js';
-
-// Root
-import './onboarding.js';
-
-// Iframe
-import './iframe.js';
-
-// Components
-define.from(
-  import.meta.glob('./components/*.js', { eager: true, import: 'default' }),
-  {
-    prefix: 'ui-onboarding',
-    root: 'components',
-  },
-);
+export async function sendShowIframeMessage(tabId, url) {
+  try {
+    await chrome.tabs.sendMessage(
+      tabId,
+      { action: 'showIframe', url },
+      { frameId: 0 },
+    );
+  } catch (e) {
+    console.warn('Could not show iframe for tab', tabId, e);
+  }
+}

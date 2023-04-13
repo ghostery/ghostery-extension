@@ -51,8 +51,8 @@ export default {
             `}
           </div>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-            When pausing Ghostery on individual websites for various personal
-            reasons, those websites will appear here.
+            When pausing Ghostery on individual websites, those websites will
+            appear here.
           </ui-text>
         </div>
         <section layout="column gap:4" layout@768px="gap:5">

@@ -10,7 +10,7 @@
  */
 
 import AutoConsent from '@duckduckgo/autoconsent';
-import { showIframe } from '@ghostery/ui/autoconsent/iframe';
+import { showIframe } from '@ghostery/ui/iframe';
 
 if (document.contentType === 'text/html') {
 	const consent = new AutoConsent(msg => chrome.runtime.sendMessage(
