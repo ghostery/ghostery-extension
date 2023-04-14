@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "glossary-converter": "node tools/glossary-converter.js",
-    "postinstall-mv2": "cd extension-manifest-v2 && npm run licenses",
-    "postinstall-mv3": "cd extension-manifest-v3 && npm run licenses && npm run download-engines && npm run download-dnr-lists",
-    "postinstall": "patch-package && vendor-copy && npm run postinstall-mv2 && npm run postinstall-mv3"
+    "postinstall": "patch-package && vendor-copy && npm run postinstall --workspaces --if-present"
   },
   "devDependencies": {
     "csv": "^6.2.5",
