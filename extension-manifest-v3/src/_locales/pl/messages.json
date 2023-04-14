@@ -45,7 +45,7 @@
     "description": "Tracker category name"
   },
   "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "Automatycznie odrzuca komunikaty dotyczące zgody na stosowanie plików cookie."
+    "message": "Automatycznie odrzuca komunikaty dotyczące zgody na pliki cookie."
   },
   "back": {
     "message": "Wstecz"
@@ -154,7 +154,7 @@
     "message": "Ghostery nic nie wykryło na tej stronie"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery jest już gotowy, aby blokować Trackerów i chronić twoją prywatność podczas przeglądania."
+    "message": "Ghostery jest już gotowy, aby blokować trackerów i chronić twoją prywatność podczas przeglądania."
   },
   "ghostery_is_disabled": {
     "message": "Ghostery jest nieaktywne"
@@ -169,13 +169,13 @@
     "message": "Polityka prywatności Ghostery"
   },
   "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collection_including_ads__trackers__and_cookie_pop_ups_": {
-    "message": "Ghostery chroni twoją prywatność poprzez wykrywanie i neutralizowanie różnych sposobów gromadzenia danych, w tym reklam, Trackerów i komunikatów o plikach cookies."
+    "message": "Ghostery chroni twoją prywatność poprzez wykrywanie i neutralizowanie różnych sposobów gromadzenia danych, w tym reklam, trackerów i komunikatów o plikach cookies."
   },
   "ghostery_settings": {
     "message": "Ustawienia Ghostery"
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery blokuje Trackerów i zapobiega profilowaniu przez handlarzy danymi."
+    "message": "Ghostery blokuje trackerów i zapobiega profilowaniu przez handlarzy danymi."
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ghostery zostanie wstrzymane dla tej witryny. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
@@ -187,7 +187,7 @@
     "message": "Ghostery zostanie wstrzymane dla tej witryny na 1 godzinę"
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
-    "message": "Ghostery będzie wyświetlać liczbę Trackerów zablokowanych na danej stronie. Kliknięcie w ikonę Ghostery spowoduje wyśwetlenie bardziej szczegółowych informacji."
+    "message": "Ghostery będzie wyświetlać liczbę trackerów zablokowanych na danej stronie. Kliknięcie w ikonę Ghostery spowoduje wyśwetlenie bardziej szczegółowych informacji."
   },
   "hosting": {
     "message": "Hosting",
@@ -197,7 +197,7 @@
     "message": "Zignoruj"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Informacje dotyczące Trackerów będą udostępniane zgodnie z naszymi <a href=\"$${0}\">Zasadami ochrony prywatności</a>"
+    "message": "Informacje dotyczące trackerów będą udostępniane zgodnie z naszymi <a href=\"$${0}\">Zasadami ochrony prywatności</a>"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Istnieje dzięki mikrowkładom każdego użytkownika Ghostery, który zdecyduje się wysłać nieosobiste informacje do WhoTracks.Me. Wkład ten umożliwia Ghostery dostarczanie w czasie rzeczywistym informacji o trackerach, co z kolei zapewnia ochronę całej społeczności Ghostery."
@@ -276,7 +276,7 @@
     "message": "Wymagane uprawnienia"
   },
   "pin_extension_for_easy_access": {
-    "message": "Przypnij Rozszerzenie i ciesz się łatwiejszym dostępem"
+    "message": "Przypnij rozszerzenie i ciesz się łatwiejszym dostępem"
   },
   "pin_it_here": {
     "message": "Przypnij je tu"
@@ -315,7 +315,7 @@
     "message": "Ustawienie zakończone sukcesem"
   },
   "shows_the_tracker_preview_beside_search_results_": {
-    "message": "Wyświetla podgląd Trackerów przy wynikach wyszukiwania."
+    "message": "Wyświetla podgląd trackerów przy wynikach wyszukiwania."
   },
   "sign_in": {
     "message": "Zaloguj się"
@@ -409,6 +409,6 @@
     "message": "Wykresy kołowe z trackerami nie będą wyświetlane obok wyników wyszukiwania."
   },
   "your_privacy_features_": {
-    "message": "Twoje opcje ochrony prywatności:"
+    "message": "Twoje funkcje prywatności:"
   }
 }

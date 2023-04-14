@@ -67,7 +67,7 @@
     "message": "Cancella tutto"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
-    "message": "Cliccare sull’icona del puzzle accanto alla barra di ricerca e aggiungi Ghostery alla barra degli strumenti."
+    "message": "Cliccare sull’icona del puzzle accanto alla barra di ricerca e blocca Ghostery nella barra degli strumenti."
   },
   "comments": {
     "message": "Commenti",
@@ -276,10 +276,10 @@
     "message": "Autorizzazione richiesta"
   },
   "pin_extension_for_easy_access": {
-    "message": "Estensione Aggiungi per un accesso rapido"
+    "message": "Blocca l’estensione per un accesso rapido"
   },
   "pin_it_here": {
-    "message": "Aggiungi qui"
+    "message": "Blocca qui"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Impedisce varie tecniche di tracciamento tramite tecnologia Al-driven."

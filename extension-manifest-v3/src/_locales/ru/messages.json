@@ -45,7 +45,7 @@
     "description": "Tracker category name"
   },
   "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "Автоматически запрещать использование файлов cookie"
+    "message": "Автоматически запрещает использование файлов cookie."
   },
   "back": {
     "message": "Назад"
@@ -103,13 +103,13 @@
     "message": "Disabled"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
-    "message": "Показывать счетчик трекеров у значка Ghostery на панели инструментов в браузере"
+    "message": "Показывает счетчик трекеров у значка Ghostery на панели инструментов в браузере."
   },
   "done": {
     "message": "Готово"
   },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "Блокировать рекламу на сайтах для более быстрой и безопасной работы в браузере"
+    "message": "Блокирует рекламу на сайтах для более быстрой и безопасной работы в браузере."
   },
   "email": {
     "message": "Email",
@@ -197,7 +197,7 @@
     "message": "Игнорировать"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Мы делимся информацией о трекерах в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>"
+    "message": "Мы делимся информацией о трекерах в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего неперсональную информацию на WhoTracks.Me. Данные позволяют Ghostery оперативно предоставлять информацию о трекерах, что взамен обеспечивает защиту всего сообщества Ghostery."
@@ -276,13 +276,13 @@
     "message": "Permission required"
   },
   "pin_extension_for_easy_access": {
-    "message": "Закрепить Ghostery для быстрого доступа"
+    "message": "Закрепите Ghostery для быстрого доступа"
   },
   "pin_it_here": {
-    "message": "Закрепить здесь"
+    "message": "Закрепите здесь"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
-    "message": "Использовать ИИ для блокировки различных способов сбора данных"
+    "message": "Использует ИИ для блокировки различных способов сбора данных."
   },
   "privacy_policy": {
     "message": "политика конфиденциальности"
@@ -297,7 +297,7 @@
     "message": "Read more on WhoTracks.Me"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
-    "message": "Заменить значок Ghostery на панели инструментов статистикой трекеров"
+    "message": "Заменяет значок Ghostery на панели инструментов статистикой трекеров."
   },
   "report_a_broken_page": {
     "message": "Сообщить о поврежденной странице"
@@ -315,7 +315,7 @@
     "message": "Настройка завершена"
   },
   "shows_the_tracker_preview_beside_search_results_": {
-    "message": "Показывать количество трекеров рядом с результатами поиска"
+    "message": "Показывает количество трекеров рядом с результатами поиска."
   },
   "sign_in": {
     "message": "Вход"
