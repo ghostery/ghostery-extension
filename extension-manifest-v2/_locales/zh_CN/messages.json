@@ -936,21 +936,6 @@
   "not_http_page": {
     "message": "确保您当前的标签页中打开了 http 或 https 网页"
   },
-  "notification_upgrade": {
-    "message": "我们的团队爱岗敬业、技术出众，在他们的努力工作下，我们发布全新版本的 Ghostery。"
-  },
-  "notification_upgrade_link": {
-    "message": "该版本中新增了一些贴心功能，且修复了缺陷。"
-  },
-  "notification_upgrade_link_v8": {
-    "message": "立即展示！"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Ghostery 8 隆重发布！"
-  },
-  "notification_upgrade_v8": {
-    "message": "设置酷炫的新功能，了解最新版本。"
-  },
   "off": {
     "message": "关闭"
   },

@@ -936,21 +936,6 @@
   "not_http_page": {
     "message": "Ellenőrizze, hogy a jelenlegi lapfüle http vagy https oldalt nyitott-e meg"
   },
-  "notification_upgrade": {
-    "message": "Elkötelezett és rendkívül vonzó csapatunk keményen dolgozott a Ghostery új verziójának kiadásán."
-  },
-  "notification_upgrade_link": {
-    "message": "A friss verzió pazar új funkcióikat és hibajavításokat tartalmaz."
-  },
-  "notification_upgrade_link_v8": {
-    "message": "Mutassa meg most!"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Bemutatjuk a Ghostery 8-at!"
-  },
-  "notification_upgrade_v8": {
-    "message": "Állítsa be az új innovatív funkcióinkat és tudjon meg többet az eddigi legnagyobb kiadásunkról."
-  },
   "off": {
     "message": "Ki"
   },

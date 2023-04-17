@@ -936,21 +936,6 @@
   "not_http_page": {
     "message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください"
   },
-  "notification_upgrade": {
-    "message": "私たちの献身的で魅力的なチームが一生懸命に働いて Ghostery の新しいバージョンをリリースしました。"
-  },
-  "notification_upgrade_link": {
-    "message": "本リリースの素晴らしい新機能と不具合修正を確認してください。"
-  },
-  "notification_upgrade_link_v8": {
-    "message": "今すぐ見せてください！"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Ghostery 8の紹介！"
-  },
-  "notification_upgrade_v8": {
-    "message": "素晴らしい新機能を設定し、最新のリリースについても学びます。"
-  },
   "off": {
     "message": "オフ"
   },

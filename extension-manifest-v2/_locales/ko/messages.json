@@ -936,21 +936,6 @@
   "not_http_page": {
     "message": "현재 탭에 http 또는 https 페이지가 열려 있는지 확인하십시오 "
   },
-  "notification_upgrade": {
-    "message": "매사 최선을 다하는 Ghostery 팀이 Ghostery의 새 버전 출시를 위해 열심히 노력해왔습니다."
-  },
-  "notification_upgrade_link": {
-    "message": "이번 릴리스의 근사한 새 기능과 결함 수정 사항을 확인해 보세요."
-  },
-  "notification_upgrade_link_v8": {
-    "message": "지금 알아보기!"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Ghostery 8을 소개합니다!"
-  },
-  "notification_upgrade_v8": {
-    "message": "새로운 멋진 기능을 설정하고 지금까지 가장 중대한 소식에 대해 알아 보십시오."
-  },
   "off": {
     "message": "끄기 "
   },

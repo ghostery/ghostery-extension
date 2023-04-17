@@ -936,21 +936,6 @@
   "not_http_page": {
     "message": "Controleer of je huidige tab een http of https pagina open heeft"
   },
-  "notification_upgrade": {
-    "message": "Ons toegewijd en ongelooflijk aantrekkelijk team heeft keihard gewerkt aan een nieuwe versie van Ghostery."
-  },
-  "notification_upgrade_link": {
-    "message": "Check zelf de te gekke nieuwe functies en fixes in deze release."
-  },
-  "notification_upgrade_link_v8": {
-    "message": "Bekijk nu!"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Hier is Ghostery 8!"
-  },
-  "notification_upgrade_v8": {
-    "message": "Installeer onze coole nieuwe features en kom meer te weten over onze grootste release tot nu toe."
-  },
   "off": {
     "message": "Uit"
   },

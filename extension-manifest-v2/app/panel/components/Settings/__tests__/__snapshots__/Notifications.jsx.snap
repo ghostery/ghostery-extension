@@ -54,27 +54,6 @@ exports[`app/panel/Settings/Notifications.jsx Snapshot tests with react-test-ren
         >
           <input
             defaultChecked={false}
-            id="settings-new-features"
-            name="notify_upgrade_updates"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-new-features"
-            id="settings-new-features-label"
-          >
-            settings_new_features
-          </label>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={false}
             id="settings-new-promotions"
             name="notify_promotions"
             onClick={[Function]}
@@ -199,27 +178,6 @@ exports[`app/panel/Settings/Notifications.jsx Snapshot tests with react-test-ren
             id="settings-announcements-label"
           >
             settings_announcements
-          </label>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-new-features"
-            name="notify_upgrade_updates"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-new-features"
-            id="settings-new-features-label"
-          >
-            settings_new_features
           </label>
         </div>
       </div>
