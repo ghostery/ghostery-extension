@@ -12,6 +12,7 @@
  */
 import { FiltersEngine } from '@cliqz/adblocker';
 import { sortCategories } from '@ghostery/ui/categories';
+import globals from './Globals';
 
 import conf from './Conf';
 
@@ -60,9 +61,10 @@ export class BugDb {
 		const patterns = this.engine.metadata.getPatterns();
 
 		/* Mark new trackers */
+		let oldKnownAppIds;
 		if (just_upgraded) {
 			const newKnownAppIds = patterns.map(getPatternId);
-			const oldKnownAppIds = this.conf.known_app_ids;
+			oldKnownAppIds = this.conf.known_app_ids;
 			const new_app_ids = newKnownAppIds.filter(id => !oldKnownAppIds.includes(id));
 			this.conf.new_app_ids = new_app_ids;
 			this.conf.known_app_ids = newKnownAppIds;
@@ -109,19 +111,30 @@ export class BugDb {
 
 		/* block new trackers if in mostly blocked category */
 		if (just_upgraded) {
-			Object.values(categoriesMeta).forEach((meta) => {
-				if (meta.blockedTrackersCount >= (meta.trackers.length / 2)) {
-					let newlyBlockedCount = 0;
-					meta.trackers.forEach((tracker) => {
-						if (!tracker.blocked && !selectedApps.hasOwnProperty(tracker.id)) {
-							selectedApps[tracker.id] = 1;
-							tracker.blocked = true;
-							newlyBlockedCount += 1;
-						}
-					});
-					meta.blockedTrackersCount += newlyBlockedCount;
+			// Bias in favor of blocking if the category will be
+			// blocked by default in a new installtion. This is
+			// mostly relevant if new categories were introduced.
+			const majority = globals.CATEGORIES_BLOCKED_BY_DEFAULT.reduce((all, current) => ({
+				...all,
+				[current]: 0.5,
+			}), {});
+
+			oldKnownAppIds.forEach((app_id) => {
+				const category = this.db.apps[app_id].cat;
+				const vote = selectedApps.hasOwnProperty(app_id) ? 1 : -1;
+				majority[category] = (majority[category] || 0) + vote;
+			});
+
+			this.conf.new_app_ids.forEach((app_id) => {
+				const { cat: category } = this.db.apps[app_id];
+				if (majority[category] && majority[category] > 0) {
+					categoriesMeta[category].blockedTrackersCount += 1;
+					categoriesMeta[category].trackers.find(t => t.id === app_id).blocked = true;
+					selectedApps[app_id] = 1;
 				}
 			});
+
+			// triggers a persist
 			this.conf.selected_app_ids = selectedApps;
 		}
 

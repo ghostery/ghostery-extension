@@ -1,4 +1,7 @@
 import { BugDb } from '../../src/classes/BugDb';
+import globals from '../../src/classes/Globals';
+
+const { CATEGORIES_BLOCKED_BY_DEFAULT } = globals;
 
 const createEngineMock = ({ categories = [], patterns = [] }) => ({
 	metadata: {
@@ -14,16 +17,20 @@ describe('src/classes/BugDb.js', () => {
 		bugDb = new BugDb();
 	});
 
+	afterEach(() => {
+		globals.CATEGORIES_BLOCKED_BY_DEFAULT = CATEGORIES_BLOCKED_BY_DEFAULT;
+	});
+
 	describe('init', () => {
 		describe('on every run', () => {
-			test('adds categories', () => {
+			test('adds categories', async () => {
 				bugDb.engine = createEngineMock({
 					categories: [{
 						key: 'advertising'
 					}],
 				});
 				expect(bugDb.db.categories).toHaveLength(0);
-				bugDb.init();
+				await bugDb.init();
 				expect(bugDb.db.categories).toEqual([{
 					description: 'category_advertising_desc',
 					id: 'advertising',
@@ -50,9 +57,9 @@ describe('src/classes/BugDb.js', () => {
 					});
 				});
 
-				test('adds apps', () => {
+				test('adds apps', async () => {
 					expect(bugDb.db.apps).toEqual({});
-					bugDb.init();
+					await bugDb.init();
 					expect(bugDb.db.apps).toEqual({
 						1: {
 							cat: 'advertising',
@@ -63,9 +70,9 @@ describe('src/classes/BugDb.js', () => {
 					});
 				});
 
-				test('adds bugs', () => {
+				test('adds bugs', async () => {
 					expect(bugDb.db.bugs).toEqual({});
-					bugDb.init();
+					await bugDb.init();
 					expect(bugDb.db.bugs).toEqual({
 						1: {
 							aid: '1',
@@ -73,9 +80,9 @@ describe('src/classes/BugDb.js', () => {
 					});
 				});
 
-				test('adds tracker to category', () => {
+				test('adds tracker to category', async () => {
 					expect(bugDb.db.categories).toEqual([]);
-					bugDb.init();
+					await bugDb.init();
 					expect(bugDb.db.categories).toEqual([{
 						description: 'category_advertising_desc',
 						id: 'advertising',
@@ -95,14 +102,14 @@ describe('src/classes/BugDb.js', () => {
 					}]);
 				});
 
-				test('adds tracker to category and mark as blocked', () => {
+				test('adds tracker to category and mark as blocked', async () => {
 					expect(bugDb.db.categories).toEqual([]);
 
 					bugDb.conf.selected_app_ids = {
 						1: 1,
 					};
 
-					bugDb.init();
+					await bugDb.init();
 					expect(bugDb.db.categories).toEqual([{
 						description: 'category_advertising_desc',
 						id: 'advertising',
@@ -151,31 +158,31 @@ describe('src/classes/BugDb.js', () => {
 				});
 			});
 
-			test('updates conf with new_app_ids', () => {
+			test('updates conf with new_app_ids', async () => {
 				bugDb.conf.selected_app_ids = {};
 				bugDb.conf.known_app_ids = ['1'];
 
-				bugDb.init(true);
+				await bugDb.init(true);
 
 				expect(bugDb.conf.new_app_ids).toEqual(['2', '3']);
 			});
 
-			test('updates conf with known_app_ids', () => {
+			test('updates conf with known_app_ids', async () => {
 				bugDb.conf.selected_app_ids = {};
 				bugDb.conf.known_app_ids = ['1'];
 
-				bugDb.init(true);
+				await bugDb.init(true);
 
 				expect(bugDb.conf.known_app_ids).toEqual(['1', '2', '3']);
 			});
 
-			test('updates conf with selected_app_ids', () => {
+			test('updates conf with selected_app_ids', async () => {
 				bugDb.conf.selected_app_ids = {
 					1: 1,
 				};
 				bugDb.conf.known_app_ids = [];
 
-				bugDb.init(true);
+				await bugDb.init(true);
 
 				expect(bugDb.conf.selected_app_ids).toEqual({
 					1: 1,
@@ -183,13 +190,88 @@ describe('src/classes/BugDb.js', () => {
 				});
 			});
 
-			test('blocks new trackers if category is mostly blocking', () => {
+			test('blocks trackers in new non-blocking category', async () => {
+				bugDb.conf.selected_app_ids = {};
+				bugDb.conf.known_app_ids = [];
+
+				bugDb.engine = createEngineMock({
+					categories: [{
+						key: 'xxx'
+					}],
+					patterns: [{
+						category: 'xxx',
+						ghostery_id: '1',
+						name: 'Google Ads',
+						key: 'google_ads',
+					}],
+				});
+
+				await bugDb.init(true);
+
+				expect(bugDb.db.categories).toEqual([{
+					description: 'category_xxx_desc',
+					id: 'xxx',
+					img_name: 'xxx',
+					name: 'category_xxx',
+					num_blocked: 0,
+					num_total: 1,
+					trackers: [{
+						blocked: false,
+						catId: 'xxx',
+						description: '',
+						id: '1',
+						name: 'Google Ads',
+						shouldShow: true,
+						trackerID: 'google_ads',
+					}],
+				}]);
+			});
+
+			test('blocks trackers in new blocking category', async () => {
+				bugDb.conf.selected_app_ids = {};
+				bugDb.conf.known_app_ids = [];
+				globals.CATEGORIES_BLOCKED_BY_DEFAULT = ['xxx'];
+
+				bugDb.engine = createEngineMock({
+					categories: [{
+						key: 'xxx'
+					}],
+					patterns: [{
+						category: 'xxx',
+						ghostery_id: '1',
+						name: 'Google Ads',
+						key: 'google_ads',
+					}],
+				});
+
+				await bugDb.init(true);
+
+				expect(bugDb.db.categories).toEqual([{
+					description: 'category_xxx_desc',
+					id: 'xxx',
+					img_name: 'xxx',
+					name: 'category_xxx',
+					num_blocked: 1,
+					num_total: 1,
+					trackers: [{
+						blocked: true,
+						catId: 'xxx',
+						description: '',
+						id: '1',
+						name: 'Google Ads',
+						shouldShow: true,
+						trackerID: 'google_ads',
+					}],
+				}]);
+			});
+
+			test('blocks new trackers if category is mostly blocking', async () => {
 				bugDb.conf.selected_app_ids = {
 					1: 1,
 				};
-				bugDb.conf.known_app_ids = [];
+				bugDb.conf.known_app_ids = ['1'];
 
-				bugDb.init(true);
+				await bugDb.init(true);
 
 				expect(bugDb.db.categories).toEqual([{
 					description: 'category_advertising_desc',
