@@ -1227,7 +1227,6 @@ function initializeEventListeners() {
 			'https://d.ghostery.com/*',
 			'https://cmp-cdn.ghostery.com/*',
 			'https://cdn.ghostery.com/*',
-			'https://gcache.ghostery.com/*'
 		]
 	}, ['requestHeaders', 'blocking']);
 

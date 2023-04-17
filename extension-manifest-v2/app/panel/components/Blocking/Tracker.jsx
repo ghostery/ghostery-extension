@@ -326,7 +326,7 @@ class Tracker extends React.Component {
 	*/
 	render() {
 		const {
-			tracker, isUnidentified, language, show_tracker_urls, setup_complete,
+			tracker, isUnidentified, show_tracker_urls, setup_complete,
 		} = this.props;
 		const {
 			trackerClasses,
@@ -337,20 +337,7 @@ class Tracker extends React.Component {
 		} = this.state;
 
 		let sources;
-		if (tracker.sources) {
-			sources = tracker.sources.map(source => (
-				<a
-					target="_blank"
-					rel="noopener noreferrer"
-					className="trk-src-link"
-					title={source.src}
-					key={source.request_id}
-					href={`${globals.GCACHE_BASE_URL}/${encodeURIComponent(language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
-				>
-					{ source.src }
-				</a>
-			));
-		} else if (tracker.domains) {
+		if (tracker.domains) {
 			sources = tracker.domains.map(domain => (
 				<p className="trk-src-link unidentified" key={domain}>{domain}</p>
 			));
