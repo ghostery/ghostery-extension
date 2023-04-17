@@ -92,7 +92,7 @@ class Categories extends React.Component {
 					key={isUnidentified ? unidentifiedCategoryMapping.id : category.id}
 					filtered={filteredBool}
 					showToast={showToast}
-					show_tracker_urls={show_tracker_urls}
+					show_tracker_urls={isUnidentified ? show_tracker_urls : false}
 					sitePolicy={sitePolicy}
 					paused_blocking={paused_blocking}
 					language={language}

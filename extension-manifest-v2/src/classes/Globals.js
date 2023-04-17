@@ -60,7 +60,6 @@ class Globals {
 		this.CMP_BASE_URL = `https://${this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn'}.ghostery.com`;
 		this.CDN_BASE_URL = `https://${this.DEBUG ? 'staging-cdn' : 'cdn'}.ghostery.com`;
 		this.WTM_BASE_URL = 'https://www.whotracks.me';
-		this.GCACHE_BASE_URL = `https://${this.DEBUG ? 'staging-gcache' : 'gcache'}.ghostery.com`;
 		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.COOKIE_DOMAIN = `.${this.GHOSTERY_ROOT_DOMAIN}`;
