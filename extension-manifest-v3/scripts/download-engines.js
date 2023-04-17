@@ -82,17 +82,63 @@ for (const [name, target] of Object.entries(ENGINES)) {
 
     writeFileSync(`${TARGET_PATH}/dnr-${target}.json`, dnr);
 
-    // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
-    const safariDnr = JSON.parse(dnr).filter((rule) => {
+    const supportedActions = [
+      'block',
+      'allow',
+      'upgradeScheme',
+      'allowAllRequests',
+      'redirect',
+    ];
+
+    const supportedResourceTypes = [
+      'font',
+      'image',
+      'main_frame',
+      'media',
+      'ping',
+      'script',
+      'stylesheet',
+      'sub_frame',
+      'websocket',
+      'xmlhttprequest',
+      'other',
+    ];
+
+    const safariDnr = [];
+
+    for (const rule of JSON.parse(dnr)) {
       if (
-        rule.action?.type === 'modifyHeaders' ||
-        rule.condition?.regexFilter?.match(/(\{\d*,\d*\}|\{\d\}|\|)/)
+        !supportedActions.includes(rule.action.type) ||
+        // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
+        rule.condition.regexFilter?.match(/(\{\d*,\d*\}|\{\d\}|\|)/) ||
+        rule.condition.requestDomains
       ) {
-        return false;
+        continue;
       }
 
-      return true;
-    });
+      const safariRule = {
+        priority: rule.priority,
+        action: rule.action,
+        condition: {
+          isUrlFilterCaseSensitive:
+            rule.condition.isUrlFilterCaseSensitive || false,
+          domainType: rule.condition.domainType,
+          resourceTypes: rule.condition.resourceTypes?.filter((type) =>
+            supportedResourceTypes.includes(type),
+          ),
+          domains: rule.condition.initiatorDomains,
+          urlFilter: rule.condition.urlFilter,
+          regexFilter: rule.condition.regexFilter,
+        },
+      };
+
+      if (safariRule.condition.resourceTypes?.length === 0) {
+        continue;
+      }
+
+      safariRule.id = safariDnr.length + 1;
+      safariDnr.push(safariRule);
+    }
 
     writeFileSync(
       `${TARGET_PATH}/dnr-safari-${target}.json`,

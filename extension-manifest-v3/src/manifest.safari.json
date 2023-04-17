@@ -9,6 +9,7 @@
     "alarms",
     "cookies",
     "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
     "declarativeNetRequestFeedback",
     "webNavigation",
     "storage",

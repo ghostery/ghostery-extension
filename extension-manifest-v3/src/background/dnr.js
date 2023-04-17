@@ -36,7 +36,6 @@ if (__PLATFORM__ !== 'firefox') {
     }
   });
 
-  const manifest = chrome.runtime.getManifest();
   observe('paused', async (paused, prevPaused) => {
     // Skip if domains has not changed
     if (!prevPaused) return;
@@ -48,7 +47,7 @@ if (__PLATFORM__ !== 'firefox') {
           {
             id: 1,
             priority: 10000,
-            ...(manifest.manifest_version === 3
+            ...(__PLATFORM__ !== 'safari'
               ? {
                   action: { type: 'allowAllRequests' },
                   condition: {
