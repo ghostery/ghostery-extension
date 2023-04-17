@@ -21,7 +21,6 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 		test('Notifications is rendered correctly with falsy props', () => {
 			const settingsData = {
 				show_cmp: false,
-				notify_upgrade_updates: false,
 				notify_promotions: false,
 				reload_banner_status: false,
 				trackers_banner_status: false,
@@ -40,7 +39,6 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 		test('Notifications is rendered correctly with truthy props', () => {
 			const settingsData = {
 				show_cmp: true,
-				notify_upgrade_updates: true,
 				notify_promotions: true,
 				reload_banner_status: true,
 				trackers_banner_status: true,
@@ -61,7 +59,6 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 		test('Notifications functions correctly', () => {
 			const settingsData = {
 				show_cmp: false,
-				notify_upgrade_updates: false,
 				notify_promotions: false,
 				reload_banner_status: false,
 				trackers_banner_status: false,
@@ -78,12 +75,11 @@ describe('app/panel/Settings/Notifications.jsx', () => {
 
 			expect(toggleCheckbox.mock.calls.length).toBe(0);
 			component.find('#settings-announcements').simulate('click');
-			component.find('#settings-new-features').simulate('click');
 			component.find('#settings-new-promotions').simulate('click');
 			component.find('#settings-show-reload-banner').simulate('click');
 			component.find('#settings-show-trackers-banner').simulate('click');
 			component.find('#settings-show-count-badge').simulate('click');
-			expect(toggleCheckbox.mock.calls.length).toBe(6);
+			expect(toggleCheckbox.mock.calls.length).toBe(5);
 		});
 	});
 });

@@ -15,9 +15,8 @@
  */
 
 import {
-	map, object, reduce, throttle
+	reduce, throttle
 } from 'underscore';
-import { getBrowserInfo } from '@ghostery/libs';
 import bugDb from './BugDb';
 import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
@@ -161,16 +160,6 @@ class EventHandlers {
 				return;
 			}
 
-			const alert_messages = [
-				'notification_upgrade',
-				'notification_upgrade_link',
-				'notification_upgrade_title_v8',
-				'notification_upgrade_v8',
-				'notification_upgrade_link_v8'
-			];
-
-			const isGhosteryBrowser = await getBrowserInfo.isGhosteryBrowser();
-
 			if (cmp.CMP_DATA.length !== 0 && conf.show_cmp) {
 				injectNotifications(tab.id).then((result) => {
 					if (result) {
@@ -183,26 +172,6 @@ class EventHandlers {
 								cmp.CMP_DATA.splice(0, 1);
 							}
 						});
-					}
-				});
-			} else if (!isGhosteryBrowser && globals.JUST_UPGRADED && !globals.HOTFIX && !globals.upgrade_alert_shown && conf.notify_upgrade_updates) {
-				injectNotifications(tab.id).then((result) => {
-					if (result) {
-						utils.sendMessage(
-							tab_id,
-							'showUpgradeAlert',
-							{
-								translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
-								language: conf.language,
-								major_upgrade: globals.JUST_UPGRADED_FROM_7,
-								version: globals.EXTENSION_VERSION,
-							},
-							() => {
-							// not all tabs will have content scripts loaded, so better wait for confirmation first
-							// TODO no longer necessary?
-								globals.upgrade_alert_shown = true;
-							}
-						);
 					}
 				});
 			} else if (bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS) {

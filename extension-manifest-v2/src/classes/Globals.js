@@ -43,7 +43,6 @@ class Globals {
 		this.HOTFIX = false;
 		this.LET_REDIRECTS_THROUGH = false;
 		this.NOTIFICATIONS_LOADED = false;
-		this.upgrade_alert_shown = false;
 
 		// init
 		this.INIT_COMPLETE = false;
@@ -116,7 +115,6 @@ class Globals {
 			'is_expanded',
 			'is_expert',
 			'notify_promotions',
-			'notify_upgrade_updates',
 			'reload_banner_status',
 			'selected_app_ids',
 			'show_alert',

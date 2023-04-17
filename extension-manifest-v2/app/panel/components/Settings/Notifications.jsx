@@ -37,12 +37,6 @@ function Notifications({ settingsData, toggleCheckbox }) {
 					</div>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
-							<input type="checkbox" id="settings-new-features" name="notify_upgrade_updates" defaultChecked={settingsData.notify_upgrade_updates} onClick={toggleCheckbox} />
-							<label id="settings-new-features-label" htmlFor="settings-new-features">{ t('settings_new_features') }</label>
-						</div>
-					</div>
-					<div className="s-option-group">
-						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-new-promotions" name="notify_promotions" defaultChecked={settingsData.notify_promotions} onClick={toggleCheckbox} />
 							<label id="settings-new-promotions-label" htmlFor="settings-new-promotions">{ t('settings_new_promotions') }</label>
 						</div>
@@ -75,7 +69,6 @@ Notifications.propTypes = {
 	toggleCheckbox: PropTypes.func.isRequired,
 	settingsData: PropTypes.shape({
 		show_cmp: PropTypes.bool.isRequired,
-		notify_upgrade_updates: PropTypes.bool.isRequired,
 		notify_promotions: PropTypes.bool.isRequired,
 		reload_banner_status: PropTypes.bool,
 		trackers_banner_status: PropTypes.bool,

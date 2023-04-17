@@ -954,21 +954,6 @@
   "not_http_page": {
     "message": "Assurez-vous que l'onglet ouvert affiche bien une page http ou https"
   },
-  "notification_upgrade": {
-    "message": "Notre équipe dévouée et singulièrement attirante a travaillé dur pour lancer une nouvelle version de Ghostery."
-  },
-  "notification_upgrade_link": {
-    "message": "Découvrez les nouvelles fonctionnalités sympa et les corrections de défauts de cette version."
-  },
-  "notification_upgrade_link_v8": {
-    "message": "Montrez-moi la nouvelle version !"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Découvrez Ghostery 8 !"
-  },
-  "notification_upgrade_v8": {
-    "message": "Installez de nouvelles fonctionnalités astucieuses et découvrez notre lancement le plus ambitieux à ce jour."
-  },
   "off": {
     "message": "désactivé"
   },

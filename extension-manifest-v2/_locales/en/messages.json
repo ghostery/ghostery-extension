@@ -954,21 +954,6 @@
   "not_http_page": {
     "message": "Ensure that your current tab has http or https page opened"
   },
-  "notification_upgrade": {
-    "message": "Our dedicated and uncommonly attractive team has worked hard to release a new version of Ghostery."
-  },
-  "notification_upgrade_link": {
-    "message": "Check out the sweet new features and defect fixes in this release."
-  },
-  "notification_upgrade_link_v8": {
-    "message": "Show me now!"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "Introducing Ghostery 8!"
-  },
-  "notification_upgrade_v8": {
-    "message": "Set up our cool new features and learn about our biggest release yet."
-  },
   "off": {
     "message": "Off"
   },

@@ -467,9 +467,6 @@
   "settings_individual_trackers_tooltip": {
     "message": "Chọn những trình theo dõi cụ thể để luôn tin tưởng hoặc luôn hạn chế trên một trang web cụ thể."
   },
-  "notification_upgrade": {
-    "message": "Nhóm tận tâm và đặc biệt hấp dẫn của chúng tôi đã làm việc chăm chỉ để phát hành phiên bản Ghostery mới."
-  },
   "tracker_description_none_found": {
     "message": "Không tìm thấy mô tả trình theo dõi."
   },
@@ -1117,9 +1114,6 @@
   "new_themes": {
     "message": "Chủ đề mới"
   },
-  "notification_upgrade_title_v8": {
-    "message": "Giới thiệu Ghostery 8!"
-  },
   "settings_dismiss_after": {
     "message": "Bỏ qua sau"
   },
@@ -1185,9 +1179,6 @@
   },
   "alert_smart_block_off": {
     "message": "Duyệt web thông minh TẮT. Tính năng chặn của trình theo dõi sẽ không được tự động điều chỉnh."
-  },
-  "notification_upgrade_link": {
-    "message": "Kiểm tra các tính năng mới thú vị và các bản sửa lỗi trong bản phát hành này."
   },
   "built_in_vpn": {
     "message": "VPN tích hợp"
@@ -1285,9 +1276,6 @@
   },
   "android_site_blocking_header": {
     "message": "Theo dõi trên trang web này"
-  },
-  "notification_upgrade_v8": {
-    "message": "Thiết lập các tính năng mới thú vị của chúng tôi và tìm hiểu về bản phát hành lớn nhất của chúng tôi."
   },
   "please_enter_a_valid_email": {
     "message": "Vui lòng nhập email hợp lệ."
@@ -1473,9 +1461,6 @@
   },
   "android_blocking_reset": {
     "message": "Đặt lại cài đặt"
-  },
-  "notification_upgrade_link_v8": {
-    "message": "Cho tôi xem ngay!"
   },
   "settings_sites_placeholder": {
     "message": "example.com (hỗ trợ ký tự đại diện)"

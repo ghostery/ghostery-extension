@@ -114,7 +114,6 @@ class ConfData {
 			_initProperty('is_expert', false);
 			_initProperty('last_cmp_date', 0);
 			_initProperty('notify_promotions', true);
-			_initProperty('notify_upgrade_updates', true);
 			_initProperty('paid_subscription', false);
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);

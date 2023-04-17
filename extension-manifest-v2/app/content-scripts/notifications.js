@@ -20,7 +20,6 @@ import msgModule from './utils/msg';
 import { log } from '../../src/utils/common';
 import xImage from '../data-images/popup/xImage';
 import logoImage from '../data-images/popup/logoImage';
-import bigLogoImage from '../data-images/popup/bigLogoImage';
 
 const msg = msgModule('notifications');
 const { sendMessage } = msg;
@@ -32,7 +31,6 @@ const { onMessage } = chrome.runtime;
  */
 const NotificationsContentScript = (function(win, doc) {
 	const ALERT_ID = 'ALERT_ID_6AEC0607-8CC8-4904-BDEB-00F947E5E3C2';
-	let NOTIFICATION_TRANSLATIONS = {};
 	let CMP_DATA = {};
 	let CSS_INJECTED = false;
 	let ALERT_SHOWN = false;
@@ -294,123 +292,7 @@ const NotificationsContentScript = (function(win, doc) {
 
 		return content;
 	};
-	/**
-	 * Helper for creating a special popup's content area.
-	 * This popup is displayed during upgrade from version
-	 * 7 to version 8.
-	 * @memberOf NotificationsContentScript
-	 * @package
-	 *
-	 * @return {Object}  styled div DOM element
-	 */
-	const createUpgradeNotificationContent = function(imageData, title, message, linkUrl, linkText) {
-		const content = createEl('div');
-		content.style.cssText = `
-		border-radius: 6px !important;
-		background: #fff !important;
-		`;
 
-		const header = createNotificationHeader();
-		appendChild(content, header);
-
-		const image = createEl('div');
-		image.style.cssText = `
-		width: 100% !important;
-		height: 94px !important;
-		margin-top: 13px !important;
-		background: url('${imageData}') no-repeat center !important;
-		background-size: 103px 94px !important;
-		`;
-
-		appendChild(content, image);
-
-		const titleDiv = createEl('div');
-		titleDiv.style.cssText = `
-		margin-top: 24px !important;
-		text-align: center !important;
-		`;
-
-		const titleSpan = createEl('span');
-
-		titleSpan.style.cssText = `
-		opacity: 100% !important;
-		color: #2E2E31 !important;
-		font-face: Roboto-Medium !important;
-		font-size: 20px !important;
-		font-weight: 700 !important;
-		line-height: 24px !important;
-		display: block !important;
-		`;
-
-		appendChild(titleSpan, doc.createTextNode(title));
-
-		appendChild(titleDiv, titleSpan);
-		appendChild(content, titleDiv);
-
-		const messageDiv = createEl('div');
-
-		messageDiv.style.cssText = `
-		text-align: center !important;
-		margin-left: 25px !important;
-		margin-right: 25px !important;
-		margin-top: 33px !important;
-		`;
-
-		const messageSpan = createEl('span');
-
-		messageSpan.style.cssText = `
-		opacity: 100% !important;
-		color: #2E2E31 !important;
-		font-face: Roboto-Light !important;
-		font-size: 16px !important;
-		line-height: 24px !important;
-		font-weight: 300 !important;
-		display: block !important;
-		`;
-
-		appendChild(messageSpan, doc.createTextNode(message));
-
-		appendChild(messageDiv, messageSpan);
-		appendChild(content, messageDiv);
-
-		const buttonDiv = createEl('div');
-
-		buttonDiv.style.cssText = `
-		margin: 33px 60px 49px 60px !important;
-		height: 38px !important;
-		width: 206px !important;
-		background-color: #930194 !important;
-		border-radius: 3px !important;
-		`;
-
-		const buttonSpan = createEl('span');
-
-		buttonSpan.style.cssText = `
-		line-height: 38px !important;
-		color: white !important;
-		cursor: pointer !important;
-		opacity: 100% !important;
-		font-face: Roboto-Medium !important;
-		font-size: 18px !important;
-		`;
-
-		buttonSpan.addEventListener('click', () => {
-			const callback = function() {
-				removeAlert();
-			};
-			chrome.runtime.sendMessage({
-				origin: 'notifications',
-				name: 'openTab',
-				message: { url: linkUrl, become_active: true }
-			}, callback);
-		});
-
-		appendChild(buttonSpan, doc.createTextNode(linkText));
-		appendChild(buttonDiv, buttonSpan);
-		appendChild(content, buttonDiv);
-
-		return content;
-	};
 	/**
 	 * Helper for creating top level popup element.
 	 * @memberOf NotificationsContentScript
@@ -650,30 +532,6 @@ const NotificationsContentScript = (function(win, doc) {
 					sendMessage('dismissCMPMessage', { cmp_data: CMP_DATA, reason: 'link' });
 				}
 			);
-		} else if (type === 'showUpgradeAlert') {
-			// major version upgrade
-			if (options.major_upgrade) {
-				alert_contents = createUpgradeNotificationContent(
-					bigLogoImage,
-					NOTIFICATION_TRANSLATIONS.notification_upgrade_title_v8,
-					NOTIFICATION_TRANSLATIONS.notification_upgrade_v8,
-					chrome.runtime.getURL('./app/templates/setup.html#upgrade'),
-					NOTIFICATION_TRANSLATIONS.notification_upgrade_link_v8,
-					() => {
-						removeAlert();
-					}
-				);
-			} else {
-				// minor version upgrade
-				alert_contents = createNotificationContent(
-					NOTIFICATION_TRANSLATIONS.notification_upgrade,
-					`https://github.com/ghostery/ghostery-extension/releases/tag/v${options.version}`,
-					NOTIFICATION_TRANSLATIONS.notification_upgrade_link,
-					() => {
-						removeAlert();
-					}
-				);
-			}
 		}
 
 		const alert_div = createAlert();
@@ -692,7 +550,6 @@ const NotificationsContentScript = (function(win, doc) {
 		onMessage.addListener((request, sender, sendResponse) => {
 			try {
 				const alertMessages = [
-					'showUpgradeAlert',
 					'showCMPMessage',
 					'showBrowseWindow'
 				];
@@ -711,13 +568,6 @@ const NotificationsContentScript = (function(win, doc) {
 					CMP_DATA = message.data;
 					showAlert('showCMPMessage', {
 						campaign: CMP_DATA
-					});
-					ALERT_SHOWN = true;
-				} else if (name === 'showUpgradeAlert') {
-					NOTIFICATION_TRANSLATIONS = message.translations;
-					showAlert('showUpgradeAlert', {
-						version: message.version,
-						major_upgrade: message.major_upgrade,
 					});
 					ALERT_SHOWN = true;
 				} else if (name === 'showBrowseWindow') {

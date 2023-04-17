@@ -954,21 +954,6 @@
   "not_http_page": {
     "message": "確保您當前的標簽打開了 http 或 https 網頁"
   },
-  "notification_upgrade": {
-    "message": "我們的團隊又敬業又可愛非凡，一直努力工作好釋出新版的 Ghostery。"
-  },
-  "notification_upgrade_link": {
-    "message": "這個版本新增了一些貼心功能，並修復了錯誤。"
-  },
-  "notification_upgrade_link_v8": {
-    "message": "現在顯示給我看!"
-  },
-  "notification_upgrade_title_v8": {
-    "message": "介紹 Ghostery 8!"
-  },
-  "notification_upgrade_v8": {
-    "message": "設定我們新的酷功能及學習我們迄今最巨大的版本。"
-  },
   "off": {
     "message": "關閉"
   },
