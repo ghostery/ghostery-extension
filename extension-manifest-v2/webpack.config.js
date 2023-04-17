@@ -36,7 +36,7 @@ const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 module.exports = {
-	devtool: false, // 'source-map'
+	devtool: 'source-map',
 	performance: {
 		hints: false // notify of assets over 250kb
 	},
