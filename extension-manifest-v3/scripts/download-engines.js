@@ -17,20 +17,21 @@ import shelljs from 'shelljs';
 import { ENGINE_VERSION } from '@cliqz/adblocker';
 
 const ENGINES = {
-  'dnr-ads': 'full/ads',
-  'dnr-tracking': 'full/tracking',
-  'dnr-annoyances': 'full/annoyances',
-  'dnr-cosmetics-ads': 'cosmetics/ads',
-  'dnr-cosmetics-tracking': 'cosmetics/tracking',
-  'dnr-cosmetics-annoyances': 'cosmetics/annoyances',
+  'dnr-ads': 'ads',
+  'dnr-tracking': 'tracking',
+  'dnr-annoyances': 'annoyances',
+  'dnr-cosmetics-ads': 'ads-cosmetics',
+  'dnr-cosmetics-tracking': 'tracking-cosmetics',
+  'dnr-cosmetics-annoyances': 'annoyances-cosmetics',
   'trackerdbMv3': 'trackerdb',
 };
 
-const TARGET_PATH = resolve('src/adblocker_engines');
+const TARGET_PATH = resolve('src/rule_resources');
 
 shelljs.rm('-rf', TARGET_PATH);
+shelljs.mkdir('-p', TARGET_PATH);
 
-for (const [name, path] of Object.entries(ENGINES)) {
+for (const [name, target] of Object.entries(ENGINES)) {
   console.log(`Downloading "${name}"...`);
 
   const list = await fetch(
@@ -44,6 +45,8 @@ for (const [name, path] of Object.entries(ENGINES)) {
 
     return res.json();
   });
+
+  /* adblocker serialized engine */
 
   const engine = list.engines[ENGINE_VERSION];
 
@@ -63,9 +66,37 @@ for (const [name, path] of Object.entries(ENGINES)) {
     return res.arrayBuffer();
   });
 
-  if (path.includes('/')) {
-    shelljs.mkdir('-p', `${TARGET_PATH}/${path.split('/')[0]}`);
-  }
+  writeFileSync(`${TARGET_PATH}/engine-${target}.bytes`, new Uint8Array(rules));
 
-  writeFileSync(`${TARGET_PATH}/${path}.engine.bytes`, new Uint8Array(rules));
+  /* DNR rules */
+  if (list.dnr) {
+    const dnr = await fetch(list.dnr.network).then((res) => {
+      if (!res.ok) {
+        throw new Error(
+          `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
+        );
+      }
+
+      return res.text();
+    });
+
+    writeFileSync(`${TARGET_PATH}/dnr-${target}.json`, dnr);
+
+    // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
+    const safariDnr = JSON.parse(dnr).filter((rule) => {
+      if (
+        rule.action?.type === 'modifyHeaders' ||
+        rule.condition?.regexFilter?.match(/(\{\d*,\d*\}|\{\d\}|\|)/)
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+
+    writeFileSync(
+      `${TARGET_PATH}/dnr-safari-${target}.json`,
+      JSON.stringify(safariDnr, null, 2),
+    );
+  }
 }

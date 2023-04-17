@@ -81,15 +81,23 @@ options.assets.forEach((path) => {
 });
 
 // copy adblocker engines
-const engineType = argv.target === 'firefox' ? 'full' : 'cosmetics';
+shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources'));
+
+const engines = ['ads', 'tracking', 'annoyances'];
+const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
+
+engines.forEach((engine) => {
+  const path = `engine-${engine}${engineType}.bytes`;
+  shelljs.cp(
+    resolve(options.srcDir, 'rule_resources', path),
+    resolve(options.outDir, 'rule_resources'),
+  );
+});
+
+// copy trackerdb engine
 shelljs.cp(
-  '-r',
-  resolve(options.srcDir, 'adblocker_engines', engineType, '*'),
-  resolve(options.outDir, 'assets'),
-);
-shelljs.cp(
-  resolve(options.srcDir, 'adblocker_engines', 'trackerdb.engine.bytes'),
-  resolve(options.outDir, 'assets'),
+  resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.bytes'),
+  resolve(options.outDir, 'rule_resources'),
 );
 
 // generate license file

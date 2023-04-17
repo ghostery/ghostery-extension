@@ -3,8 +3,6 @@ tmp
 dist
 src/_metadata
 src/rule_resources
-src/assets/trackerdb.engine.bytes
-src/adblocker_engines
 
 web-ext-artifacts/
 
