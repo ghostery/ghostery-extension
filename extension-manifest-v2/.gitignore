@@ -27,3 +27,6 @@ out/
 
 ## Jest
 coverage/
+
+## Assets
+databases/trackerdb.engine.bytes

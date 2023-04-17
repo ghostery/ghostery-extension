@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "遙測"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "未分類的"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "此等網頁跟蹤器尚未被分類。"
-  },
-  "category_unknown": {
-    "message": "不明的"
   },
   "cdn": {
     "message": "CDN",

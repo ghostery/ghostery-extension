@@ -539,14 +539,11 @@
     "description": "User-facing description for the Telemetry tag category.",
     "message": "Telemetría"
   },
-  "category_uncategorized": {
+  "category_unidentified": {
     "message": "Sin categoría"
   },
-  "category_uncategorized_desc": {
+  "category_unidentified_desc": {
     "message": "Estos rastreadores aún no han sido clasificados."
-  },
-  "category_unknown": {
-    "message": "Desconocido"
   },
   "cdn": {
     "message": "CDN",

@@ -142,6 +142,7 @@ class ConfData {
 			_initProperty('cmp_data', []);
 			_initProperty('compatibility', {});
 			_initProperty('metrics', {});
+			_initProperty('known_app_ids', []);
 			_initProperty('new_app_ids', []);
 			_initProperty('selected_app_ids', {});
 			_initProperty('site_blacklist', []);

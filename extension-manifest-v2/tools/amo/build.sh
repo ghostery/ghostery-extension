@@ -107,7 +107,6 @@ cat ${TMP_FILE} > $VERSION_FILE # copy into manifest.json
 rm -f ${TMP_FILE}
 
 # Download databases
-curl "https://cdn.ghostery.com/update/v4.1/bugs.json" -o $DB_DIR/bugs.json --compressed --fail
 curl "https://cdn.ghostery.com/update/v4.1/click2play.json" -o $DB_DIR/click2play.json --compressed --fail
 curl "https://cdn.ghostery.com/update/v4.1/compatibility.json" -o $DB_DIR/compatibility.json --compressed --fail
 curl "https://cdn.ghostery.com/update/v4.1/surrogates.json" -o $DB_DIR/surrogates.json --compressed --fail

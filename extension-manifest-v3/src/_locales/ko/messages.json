@@ -365,7 +365,7 @@
   "try_to_open_this_panel_on_a_different_browser_tab": {
     "message": "다른 브라우저 탭에서 이 패널 열기 시도"
   },
-  "unknown": {
+  "unidentified": {
     "message": "알 수 없음 ",
     "description": "Tracker category name"
   },

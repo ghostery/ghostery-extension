@@ -174,8 +174,6 @@ class EventHandlers {
 						});
 					}
 				});
-			} else if (bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS) {
-				bugDb.db.JUST_UPDATED_WITH_NEW_TRACKERS = false;
 			}
 		});
 	}

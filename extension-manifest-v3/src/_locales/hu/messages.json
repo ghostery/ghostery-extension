@@ -341,7 +341,7 @@
   "unblocked": {
     "message": "Feloldva"
   },
-  "unknown": {
+  "unidentified": {
     "message": "Ismeretlen",
     "description": "Tracker category name"
   },

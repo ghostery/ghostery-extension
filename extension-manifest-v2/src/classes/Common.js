@@ -22,6 +22,7 @@ import globals from './Globals';
 import conf from './Conf';
 import GhosteryModule from './Module';
 import { alwaysLog } from '../utils/common';
+import domainInfo from '../utils/domainInfo';
 
 if (!navigator.userAgent.includes('Firefox')) {
 	parseHtml.domParser = new DOMParser();
@@ -44,6 +45,9 @@ COMMON.config.default_prefs = {
 };
 
 const common = new (COMMON.App)({ debug: globals.DEBUG });
+
+// implements 'getAppOwner', 'getBugOwner', 'getAppForBug', 'getDomainOwner', 'getTrackerDetails', 'domains'
+common.services.domainInfo._initializer = domainInfo;
 
 // add ghostery module to expose ghostery state to common
 common.modules.ghostery = new GhosteryModule();

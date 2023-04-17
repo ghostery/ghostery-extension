@@ -92,37 +92,21 @@ const { onHeadersReceived } = Events;
  *
  * @return {Promise} 	database updated data
  */
-function updateDBs() {
-	return new Promise(((resolve, reject) => {
-		const failed = { success: false, updated: false };
-		utils.getJson(`${VERSION_CHECK_URL}?d=${getISODate()}`).then((data) => {
-			log('Database version retrieval succeeded', data);
+async function updateDBs() {
+	try {
+		const data = await utils.getJson(`${VERSION_CHECK_URL}?d=${getISODate()}`);
+		log('Database version retrieval succeeded', data);
 
-			c2pDb.update(data.click2play);
-			compDb.update(data.compatibility);
-			bugDb.update(data.bugs, (result) => {
-				log('CHECK LIBRARY VERSION CALLED', result);
-				if (result.success) {
-					const nowTime = Date.now();
-					conf.bugs_last_checked = nowTime;
-					if (result.updated) {
-						log('BUGS LAST UPDATED UPDATED', new Date());
-						conf.bugs_last_updated = nowTime;
-					}
-				}
-				resolve({
-					...result,
-					confData: {
-						bugs_last_checked: conf.bugs_last_checked,
-						bugs_last_updated: conf.bugs_last_updated
-					}
-				});
-			});
-		}).catch((err) => {
-			log('Error in updateDBs', err);
-			reject(failed);
-		});
-	}));
+		await c2pDb.update(data.click2play);
+		await compDb.update(data.compatibility);
+		return {
+			success: true,
+			updated: true,
+		};
+	} catch (err) {
+		log('Error in updateDBs', err);
+		return { success: false, updated: false };
+	}
 }
 
 async function tryOpenOnboarding({ force = false, period = ONE_DAY_MSEC } = {}) {
@@ -189,6 +173,8 @@ function setGhosteryDefaultBlocking() {
 			selected_app_ids[app_id] = 1;
 		}
 	});
+	conf.know_app_ids = app_ids;
+	conf.selected_app_ids = selected_app_ids;
 	panelData.set({ selected_app_ids });
 }
 

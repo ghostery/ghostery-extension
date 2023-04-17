@@ -21,7 +21,7 @@ export const categories = {
   essential: msg`Essential | Tracker category name`,
   hosting: msg`Hosting | Tracker category name`,
   customer_interaction: msg`Customer Interaction | Tracker category name`,
-  unknown: msg`Unknown | Tracker category name`,
+  unidentified: msg`Unidentified | Tracker category name`,
   audio_video_player: msg`Audio/Video Player | Tracker category name`,
   cdn: msg`CDN | Tracker category name`,
   comments: msg`Comments | Tracker category name`,
