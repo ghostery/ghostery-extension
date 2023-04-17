@@ -5,27 +5,18 @@
   "type": "module",
   "scripts": {
     "glossary-converter": "node tools/glossary-converter.js",
-    "postinstall-mv2": "cd extension-manifest-v2 && npm run licenses",
-    "postinstall-mv3": "cd extension-manifest-v3 && npm run licenses && npm run download-engines && npm run download-dnr-lists",
-    "postinstall": "patch-package && vendor-copy && npm run postinstall-mv2 && npm run postinstall-mv3"
+    "postinstall": "patch-package && npm run postinstall --workspaces --if-present"
   },
   "devDependencies": {
     "csv": "^6.2.5",
     "license-checker": "^25.0.1",
-    "patch-package": "^6.5.1",
-    "vendor-copy": "^3.0.1"
+    "patch-package": "^6.5.1"
   },
   "workspaces": [
     "libs",
     "ui",
     "extension-manifest-v3",
     "extension-manifest-v2"
-  ],
-  "vendorCopy": [
-    {
-      "from": "./extension-manifest-v2/node_modules/ghostery-common/build/gbe/assets",
-      "to": "./extension-manifest-v2/common"
-    }
   ],
   "overrides": {
     "ua-parser-js": "1.0.2"

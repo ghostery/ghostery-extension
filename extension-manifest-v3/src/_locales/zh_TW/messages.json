@@ -145,7 +145,7 @@
     "message": "Ghostery 瀏覽器擴充程式已安裝至瀏覽器，但尚未啟用。你目前的網頁瀏覽未受保護。"
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "由於缺乏相關權限，Ghostery 無法阻擋。"
+    "message": "由於缺乏相關權限，Ghostery 無法阻擋追蹤器。"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery 已在此網站上恢復。"

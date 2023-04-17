@@ -145,7 +145,7 @@
     "message": "Ghostery 浏览器扩展程序已安装至您的浏览器中，但尚未启用。您当前的网页浏览不受保护。"
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "由于缺乏相关权限，Ghostery 无法阻止。"
+    "message": "由于缺乏相关权限，Ghostery 无法阻止跟踪器。"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery 已在此网站上恢复。"
