@@ -216,17 +216,32 @@ const reporting = new Reporting({
   communication,
 });
 
-observe('terms', (terms) => {
-  if (terms) {
-    reporting.init().catch((e) => {
-      console.warn(
-        'Failed to initialize reporting. Leaving the module disabled and continue.',
-        e,
-      );
-    });
-  } else {
-    reporting.unload();
-  }
+const pendingStartup = new Promise((done) => {
+  let timeout = setTimeout(() => {
+    console.warn('Startup takes too long. Waking up pending listeners...');
+    timeout = null;
+    done();
+  }, 3000);
+
+  observe('terms', async (terms) => {
+    try {
+      if (terms) {
+        try {
+          await reporting.init();
+        } catch (e) {
+          console.warn(
+            'Failed to initialize reporting. Leaving the module disabled and continue.',
+            e,
+          );
+        }
+      } else {
+        reporting.unload();
+      }
+    } finally {
+      clearTimeout(timeout);
+      done();
+    }
+  });
 });
 
 function delay(timeInMs) {
@@ -234,8 +249,6 @@ function delay(timeInMs) {
 }
 
 function onLocationChange(details) {
-  if (!reporting.isActive) return;
-
   const { url, frameId, tabId } = details;
   if (frameId !== 0 || url === 'about:blank' || url.startsWith('chrome://')) {
     return;
@@ -267,6 +280,11 @@ function onLocationChange(details) {
     }
 
     try {
+      await pendingStartup;
+      if (!reporting.isActive) {
+        return;
+      }
+
       const jobRegistered = await reporting.analyzeUrl(url);
       if (jobRegistered) {
         // TODO: This part here is not robust:
