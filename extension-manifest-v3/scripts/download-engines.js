@@ -104,8 +104,7 @@ for (const [name, target] of Object.entries(ENGINES)) {
       'other',
     ];
 
-    const safariDnr = [];
-
+    const rules = [];
     for (const rule of JSON.parse(dnr)) {
       if (
         !supportedActions.includes(rule.action.type) ||
@@ -116,33 +115,53 @@ for (const [name, target] of Object.entries(ENGINES)) {
         continue;
       }
 
-      const safariRule = {
+      const compatRule = {
         priority: rule.priority,
-        action: rule.action,
-        condition: {
-          isUrlFilterCaseSensitive:
-            rule.condition.isUrlFilterCaseSensitive || false,
-          domainType: rule.condition.domainType,
-          resourceTypes: rule.condition.resourceTypes?.filter((type) =>
-            supportedResourceTypes.includes(type),
-          ),
-          domains: rule.condition.initiatorDomains,
-          urlFilter: rule.condition.urlFilter,
-          regexFilter: rule.condition.regexFilter,
-        },
+        ...(rule.action.type === 'allowAllRequests'
+          ? {
+              action: { type: 'allow' },
+              condition: {
+                domains: rule.condition.requestDomains?.map((d) => `*${d}`),
+                regexFilter: '.*',
+              },
+            }
+          : {
+              action: rule.action,
+              condition: {
+                isUrlFilterCaseSensitive:
+                  rule.condition.isUrlFilterCaseSensitive || false,
+                domainType: rule.condition.domainType,
+                resourceTypes: rule.condition.resourceTypes?.filter((type) =>
+                  supportedResourceTypes.includes(type),
+                ),
+                domains: rule.condition.initiatorDomains?.map((d) => `*${d}`),
+                excludedDomains: rule.condition.excludedInitiatorDomains?.map(
+                  (d) => `*${d}`,
+                ),
+                urlFilter:
+                  rule.action.type === 'redirect' &&
+                  rule.condition.urlFilter?.startsWith('||')
+                    ? rule.condition.urlFilter.slice(2)
+                    : rule.condition.urlFilter,
+                regexFilter:
+                  rule.condition.regexFilter || !rule.condition.urlFilter
+                    ? '.*'
+                    : undefined,
+              },
+            }),
       };
 
-      if (safariRule.condition.resourceTypes?.length === 0) {
+      if (compatRule.condition.resourceTypes?.length === 0) {
         continue;
       }
 
-      safariRule.id = safariDnr.length + 1;
-      safariDnr.push(safariRule);
+      compatRule.id = rules.length + 1;
+      rules.push(compatRule);
     }
 
     writeFileSync(
       `${TARGET_PATH}/dnr-safari-${target}.json`,
-      JSON.stringify(safariDnr, null, 2),
+      JSON.stringify(rules, null, 2),
     );
   }
 }
