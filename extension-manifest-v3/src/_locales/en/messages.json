@@ -233,6 +233,9 @@
   "my_account": {
     "message": "My Account"
   },
+  "navigate_to_a_website_to_see_ghostery_in_action_": {
+    "message": "Navigate to a website to see Ghostery in action."
+  },
   "never_consent": {
     "message": "Never-Consent"
   },
@@ -361,9 +364,6 @@
   },
   "trackers_wheel": {
     "message": "Trackers Wheel"
-  },
-  "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "Try to open this panel on a different browser tab"
   },
   "unidentified": {
     "message": "Unidentified",
