@@ -25,13 +25,7 @@ const supportedResourceTypes = [
   'other',
 ];
 
-const supportedActions = [
-  'block',
-  'allow',
-  'upgradeScheme',
-  'allowAllRequests',
-  'redirect',
-];
+const supportedActions = ['block', 'allow', 'allowAllRequests'];
 
 export function getCompatRule(rule) {
   const resourceTypes = rule.condition.resourceTypes?.filter((type) =>
@@ -69,11 +63,7 @@ export function getCompatRule(rule) {
             excludedDomains: rule.condition.excludedInitiatorDomains?.map(
               (d) => `*${d}`,
             ),
-            urlFilter:
-              rule.action.type === 'redirect' &&
-              rule.condition.urlFilter?.startsWith('||')
-                ? rule.condition.urlFilter.slice(2)
-                : rule.condition.urlFilter,
+            urlFilter: rule.condition.urlFilter,
             regexFilter:
               rule.condition.regexFilter ||
               (rule.condition.urlFilter ? undefined : '.*'),
