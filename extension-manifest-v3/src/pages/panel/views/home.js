@@ -162,7 +162,7 @@ export default {
                 Ghostery has nothing to do on this page
               </ui-text>
               <ui-text type="body-m" layout="block:center width:::245px">
-                Try to open this panel on a different browser tab
+                Navigate to a website to see Ghostery in action.
               </ui-text>
             </div>
           `}
