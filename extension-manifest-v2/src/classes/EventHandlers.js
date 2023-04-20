@@ -15,7 +15,7 @@
  */
 
 import {
-	reduce, throttle
+	throttle
 } from 'underscore';
 import bugDb from './BugDb';
 import button from './BrowserButton';
@@ -29,7 +29,6 @@ import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH, BLOCK_REASON_GLOBAL_UNBLOCKED } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
-import surrogatedb from './SurrogateDb';
 import tabInfo from './TabInfo';
 import { buildC2P, buildRedirectC2P } from '../utils/click2play';
 import { log } from '../utils/common';
@@ -277,7 +276,7 @@ class EventHandlers {
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
 		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, null, null, request_id, from_redirect, true);
+			return EventHandlers._blockHelper(eventMutable, tab_id, null, request_id, from_redirect, true);
 		}
 
 		// TODO fuse this into a single call to improve performance
@@ -335,7 +334,7 @@ class EventHandlers {
 		}, 1);
 
 		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
+			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
 		}
 
 		return { cancel: false };
@@ -536,7 +535,7 @@ class EventHandlers {
 	 * @param  {boolean} fromRedirect
 	 * @return {string|boolean}
 	 */
-	static _blockHelper(details, tabId, appId, bugId, requestId, fromRedirect, upgradeInsecure) {
+	static _blockHelper(details, tabId, appId, requestId, fromRedirect, upgradeInsecure) {
 		if (upgradeInsecure) {
 			// attempt to redirect request to HTTPS. NOTE: Redirects from URLs
 			// with ws:// and wss:// schemes are ignored.
@@ -562,27 +561,7 @@ class EventHandlers {
 				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
 			};
 		}
-		if (details.type === 'script' && bugId) {
-			let code = '';
-			if (appId === 2575) { // Hubspot
-				code = EventHandlers._getHubspotFormSurrogate(details.url);
-			} else {
-				const ti = tabInfo.getTabInfo(tabId);
-				const surrogates = surrogatedb.getForTracker(details.url, appId, bugId, ti.host);
-
-				if (surrogates.length > 0) {
-					code = reduce(surrogates, (memo, s) => memo + s.code, '');
-				}
-			}
-
-			if (code) {
-				const dataUrl = `data:application/javascript;base64,${btoa(code)}`;
-				log('NEW SURROGATE', appId);
-				return {
-					redirectUrl: dataUrl
-				};
-			}
-		} else if (fromRedirect) {
+		if (fromRedirect) {
 			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId);
 			setTimeout(() => {
 				chrome.tabs.update(details.tabId, { url });
@@ -613,28 +592,6 @@ class EventHandlers {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Creates surrogate for hubspot form
-	 *
-	 * @private
-	 *
-	 * @param  {string} form 	request url
-	 * @return {string} 		surrogate code
-	 */
-	static _getHubspotFormSurrogate(url) {
-		// Hubspot url has a fixed format
-		// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
-		// The following three parameters are privacy-safe:
-		// 532040 - parner id
-		// 95b5de3a-6d4a-4729-bebf-07c41268d773 - form id on the page
-		// hs_reqwest_0 - function which will be called on the client after the request
-		//
-		// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-		const tokens = url.substr(8).split(/\/|&|\?|#|=/ig);
-
-		return `${tokens[7]}({"form":{"portalId":${tokens[4]},"guid": "${tokens[5]}","cssClass":"hs-form stacked","formFieldGroups":[{"fields":[{}]}],"metaData":[]},"properties":{}})`;
 	}
 
 	/**

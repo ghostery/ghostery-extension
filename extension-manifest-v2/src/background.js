@@ -40,7 +40,6 @@ import conf from './classes/Conf';
 import dispatcher from './classes/Dispatcher';
 import foundBugs from './classes/FoundBugs';
 import globals from './classes/Globals';
-import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/MetricsWrapper';
 import account from './classes/Account';
@@ -1488,7 +1487,6 @@ function initializeGhosteryModules() {
 		bugDb.init(globals.JUST_UPGRADED),
 		c2pDb.init(globals.JUST_UPGRADED),
 		compDb.init(globals.JUST_UPGRADED),
-		surrogatedb.init(globals.JUST_UPGRADED),
 		commonStartup(),
 	])
 		.then(() => scheduledTasks());
