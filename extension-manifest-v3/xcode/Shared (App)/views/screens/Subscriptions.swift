@@ -28,7 +28,7 @@ struct Subscriptions: View {
                 Spacer()
                 Button(action: restorePurchases) {
                     HStack {
-                        Text("Restore subscription")
+                        Text("Restore donation")
                     }
                 }
             }
@@ -38,10 +38,10 @@ struct Subscriptions: View {
                 .frame(maxWidth: .infinity, alignment: .topLeading)
 
 
-            Text("Support our mission for a clean, fast, and free internet.")
+            Text("Contribute to Ghostery and support a clean, fast, and open web.")
                 .multilineTextAlignment(.center)
                 .padding()
-            Text("Choose a subscription plan:")
+            Text("Choose how to support Ghostery:")
                 .font(.headline)
                 .padding()
 
@@ -51,20 +51,20 @@ struct Subscriptions: View {
                         SubscriptionListViewRow(products: subscriptions)
                     }
                 } else {
-                    Text("No Subscriptions available")
+                    Text("No donations available")
                         .font(.title)
                         .foregroundColor(.red)
                 }
             }
 
             Text("""
-            • By subscribing to Ghostery, you are supporting our mission. Thank you for believing in us!
+            • By donating to Ghostery, you are supporting our mission. Thank you for believing in us!
 
-            • For now the subscription does not unlock any additional features but it helps us.
+            • For now donating does not unlock any additional features, but it does help us.
 
-            • We are working on implementing more premium features for you on the Apple platform.
+            • We are working on implementing more privacy features and benefits on the Apple platform.
 
-            • You will be soon able to link your Apple subscription to your Ghostery account for unlocking premium features on further platforms.
+            • You will soon be able to link your Apple subscription to your Ghostery account and unlock additional features on other platforms.
             """)
                 .font(.footnote)
                 .lineLimit(nil)
