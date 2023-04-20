@@ -216,14 +216,8 @@ const reporting = new Reporting({
   communication,
 });
 
-const pendingStartup = new Promise((done) => {
-  let timeout = setTimeout(() => {
-    console.warn('Startup takes too long. Waking up pending listeners...');
-    timeout = null;
-    done();
-  }, 3000);
-
-  observe('terms', async (terms) => {
+let pendingStartup = (async function () {
+  await observe('terms', async (terms) => {
     try {
       if (terms) {
         try {
@@ -238,11 +232,10 @@ const pendingStartup = new Promise((done) => {
         reporting.unload();
       }
     } finally {
-      clearTimeout(timeout);
-      done();
+      pendingStartup = null;
     }
   });
-});
+})();
 
 function delay(timeInMs) {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
@@ -280,7 +273,16 @@ function onLocationChange(details) {
     }
 
     try {
-      await pendingStartup;
+      if (pendingStartup) {
+        await Promise.race([
+          pendingStartup,
+          delay(2000).then(() => {
+            throw new Error(
+              'Init of reporting is hanging. Skipping event to avoid queuing.',
+            );
+          }),
+        ]);
+      }
       if (!reporting.isActive) {
         return;
       }
