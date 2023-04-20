@@ -21,6 +21,9 @@
           "adHocOffers" : [
 
           ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "47.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -29,7 +32,7 @@
           "localizations" : [
             {
               "description" : "$3.99/month - Cancel anytime",
-              "displayName" : "Yearly subscription",
+              "displayName" : "Yearly donation",
               "locale" : "en_US"
             }
           ],
@@ -43,6 +46,9 @@
           "adHocOffers" : [
 
           ],
+          "codeOffers" : [
+
+          ],
           "displayPrice" : "4.99",
           "familyShareable" : false,
           "groupNumber" : 1,
@@ -50,8 +56,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Cancel anytime",
-              "displayName" : "Monthly subscription",
+              "description" : "$4.99/month",
+              "displayName" : "Monthly donation",
               "locale" : "en_US"
             }
           ],
@@ -65,7 +71,7 @@
     }
   ],
   "version" : {
-    "major" : 1,
-    "minor" : 1
+    "major" : 2,
+    "minor" : 0
   }
 }
