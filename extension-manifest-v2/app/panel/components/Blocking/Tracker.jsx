@@ -337,7 +337,13 @@ class Tracker extends React.Component {
 		} = this.state;
 
 		let sources;
-		if (tracker.domains) {
+		if (tracker.sources) {
+			sources = tracker.sources.map(source => (
+				<p className="trk-src-link unidentified">
+					{ source.src }
+				</p>
+			));
+		} else if (tracker.domains) {
 			sources = tracker.domains.map(domain => (
 				<p className="trk-src-link unidentified" key={domain}>{domain}</p>
 			));
