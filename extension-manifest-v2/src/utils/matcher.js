@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { Request } from '@cliqz/adblocker';
+import { fromWebRequestDetails } from '@cliqz/adblocker-webextension';
 
 import { processUrl, processTrackerUrl } from './utils';
 import { log } from './common';
@@ -77,26 +77,12 @@ export function fuzzyUrlMatcher(url, urls) {
 	return false;
 }
 
-/**
- * Determine if web request qualifies as a bug.
- * @memberOf BackgroundUtils
- *
- * @param {string} 	url		 	url of the request
- * @param {string}	sourceUrl	 	url of the page
- *
- * @return {int|boolean} 		bug id or false
- */
-// eslint-disable-next-line import/prefer-default-export
-export function isBug(url, sourceUrl) {
+export function isBug(details) {
 	const { engine } = bugDb;
 
-	const request = Request.fromRawDetails({ url, sourceUrl });
+	const request = fromWebRequestDetails(details);
 
-	let matches = engine.getPatternMetadata(request);
-
-	if (matches.length === 0) {
-		matches = engine.metadata.fromDomain(request.domain);
-	}
+	const matches = engine.getPatternMetadata(request);
 
 	if (matches.length === 0) {
 		return false;

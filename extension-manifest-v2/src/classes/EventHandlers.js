@@ -282,7 +282,7 @@ class EventHandlers {
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const bug_id = isBug(eventMutable.url);
+		const bug_id = isBug(eventMutable);
 
 		// allow if not a tracker
 		if (!bug_id) {

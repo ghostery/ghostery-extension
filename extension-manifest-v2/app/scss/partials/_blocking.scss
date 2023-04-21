@@ -162,16 +162,6 @@
 				.dash {display: block;}
 			}
 		}
-		.blocking-trk.blocked:not(.smart-unblocked),
-		.blocking-trk.smart-blocked {
-			.trk-name {
-				color: #9b9b9b;
-				font-style: italic;
-			}
-			.trk-src-link {
-				font-style: italic;
-			}
-		}
 		.blocking-trk.blocked {
 			svg.status {
 				.border {stroke: $red;}

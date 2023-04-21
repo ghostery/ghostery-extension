@@ -79,9 +79,10 @@ export function showIframe(url) {
         iframe.style.height = e.data.height + 'px';
         break;
       case `ghostery-close-iframe`:
-        wrapper.parentElement.removeChild(wrapper);
         if (e.data.reload) {
           window.location.reload();
+        } else {
+          setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
         }
         break;
       default:
