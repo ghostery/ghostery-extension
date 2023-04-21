@@ -218,23 +218,20 @@ const reporting = new Reporting({
 
 let pendingStartup = (async function () {
   await observe('terms', async (terms) => {
-    try {
-      if (terms) {
-        try {
-          await reporting.init();
-        } catch (e) {
-          console.warn(
-            'Failed to initialize reporting. Leaving the module disabled and continue.',
-            e,
-          );
-        }
-      } else {
-        reporting.unload();
+    if (terms) {
+      try {
+        await reporting.init();
+      } catch (e) {
+        console.warn(
+          'Failed to initialize reporting. Leaving the module disabled and continue.',
+          e,
+        );
       }
-    } finally {
-      pendingStartup = null;
+    } else {
+      reporting.unload();
     }
   });
+  pendingStartup = null;
 })();
 
 function delay(timeInMs) {
