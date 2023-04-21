@@ -173,7 +173,7 @@ function setGhosteryDefaultBlocking() {
 			selected_app_ids[app_id] = 1;
 		}
 	});
-	conf.know_app_ids = app_ids;
+	conf.known_app_ids = app_ids;
 	conf.selected_app_ids = selected_app_ids;
 	panelData.set({ selected_app_ids });
 }
