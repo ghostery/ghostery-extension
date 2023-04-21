@@ -30,14 +30,16 @@
     "node-fetch": "^3.2.3",
     "prettier": "^2.6.1",
     "shelljs": "^0.8.5",
+    "sinon-chrome": "^3.0.1",
     "vite": "^4.0.2",
-    "web-ext": "^7.3.1"
+    "web-ext": "^7.3.1",
+    "webextension-polyfill": "^0.10.0"
   },
   "dependencies": {
     "@cliqz/adblocker": "^1.26.5",
     "@cliqz/adblocker-webextension-cosmetics": "^1.22.7",
     "@duckduckgo/autoconsent": "^4.0.0",
-    "@ghostery/libs": "^1.0.0",
+    "@ghostery/libs": "file:../libs",
     "@ghostery/ui": "^0.3.3",
     "@github/relative-time-element": "^4.1.5",
     "@whotracksme/webextension-packages": "^2.1.5",
