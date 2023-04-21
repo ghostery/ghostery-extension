@@ -23,7 +23,7 @@ describe('src/classes/BugDb.js', () => {
 
 	describe('init', () => {
 		describe('on every run', () => {
-			test('adds categories', async () => {
+			test('does not add empty category', async () => {
 				bugDb.engine = createEngineMock({
 					categories: [{
 						key: 'advertising'
@@ -31,15 +31,7 @@ describe('src/classes/BugDb.js', () => {
 				});
 				expect(bugDb.db.categories).toHaveLength(0);
 				await bugDb.init();
-				expect(bugDb.db.categories).toEqual([{
-					description: 'category_advertising_desc',
-					id: 'advertising',
-					img_name: 'adv',
-					name: 'category_advertising',
-					num_blocked: 0,
-					num_total: 0,
-					trackers: [],
-				}]);
+				expect(bugDb.db.categories).toEqual([]);
 			});
 
 			describe('with patterns', () => {
@@ -53,6 +45,7 @@ describe('src/classes/BugDb.js', () => {
 							ghostery_id: '1',
 							name: 'Google Ads',
 							key: 'google_ads',
+							filters: ['test']
 						}],
 					});
 				});
@@ -144,16 +137,19 @@ describe('src/classes/BugDb.js', () => {
 						ghostery_id: '1',
 						name: 'Google Ads',
 						key: 'google_ads',
+						filters: ['test']
 					}, {
 						category: 'advertising',
 						ghostery_id: '2',
 						name: 'Facebook Ads',
 						key: 'facebook_ads',
+						filters: ['test']
 					}, {
 						category: 'essential',
 						ghostery_id: '3',
 						name: 'Google Tag Manager',
 						key: 'google_tag_manager',
+						filters: ['test']
 					}],
 				});
 			});
@@ -203,6 +199,7 @@ describe('src/classes/BugDb.js', () => {
 						ghostery_id: '1',
 						name: 'Google Ads',
 						key: 'google_ads',
+						filters: ['test']
 					}],
 				});
 
@@ -241,6 +238,7 @@ describe('src/classes/BugDb.js', () => {
 						ghostery_id: '1',
 						name: 'Google Ads',
 						key: 'google_ads',
+						filters: ['test']
 					}],
 				});
 
