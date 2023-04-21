@@ -161,14 +161,12 @@ export async function observe(property, fn) {
       value = options[property];
 
       try {
-        return await fn(value, prevValue);
+        await fn(value, prevValue);
       } catch (e) {
         console.error(`Error while observing options: `, e);
       }
     }
   };
-
-  observers.add(wrapper);
 
   try {
     const options = await store.resolve(Options);
@@ -179,6 +177,7 @@ export async function observe(property, fn) {
   } catch (e) {
     console.error(e);
   }
+  observers.add(wrapper);
 
   // Return unobserve function
   return () => {
