@@ -4,11 +4,10 @@
   "version": "10.0.7",
   "type": "module",
   "scripts": {
-    "postinstall": "npm run download-engines && npm run download-dnr-lists",
+    "postinstall": "npm run download-engines",
     "build": "node scripts/build.js",
     "start": "npm run build -- --watch",
-    "download-engines": "node scripts/download-engines.js",
-    "download-dnr-lists": "node scripts/download-dnr-lists.js",
+    "download-engines": "node scripts/download-engines/index.js",
     "licenses": "node ../tools/licenses.js",
     "lint": "eslint src/",
     "test": "npm run lint",

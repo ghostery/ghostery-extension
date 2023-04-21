@@ -42,7 +42,11 @@ let adblockerStartupPromise = (async function () {
   await Promise.all(
     adblockerEngines.map(async (engine) => {
       const response = await fetch(
-        chrome.runtime.getURL(`assets/${engine.name}.engine.bytes`),
+        chrome.runtime.getURL(
+          `rule_resources/engine-${engine.name}${
+            __PLATFORM__ === 'firefox' ? '' : '-cosmetics'
+          }.bytes`,
+        ),
       );
       const engineBytes = await response.arrayBuffer();
       engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
