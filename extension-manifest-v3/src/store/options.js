@@ -154,6 +154,11 @@ async function migrateFromMV2() {
 }
 
 export async function observe(property, fn) {
+  let called;
+  const firstCall = new Promise((resolve) => {
+    called = resolve;
+  });
+
   let value;
   const wrapper = async (options) => {
     if (value === undefined || options[property] !== value) {
@@ -161,13 +166,21 @@ export async function observe(property, fn) {
       value = options[property];
 
       try {
-        return await fn(value, prevValue);
+        await fn(value, prevValue);
       } catch (e) {
         console.error(`Error while observing options: `, e);
+      } finally {
+        called();
       }
     }
   };
 
+  // Note: this is why the "firstCall" detection is added. When observers
+  // are called, they may be first in seeing the initial value change.
+  // When we call the wrapper (in this function), it may be already the
+  // second time that the wrapper gets called. In that case, it would
+  // resolve immediately (while the first call that the observer triggered
+  // might still be pending).
   observers.add(wrapper);
 
   try {
@@ -179,6 +192,7 @@ export async function observe(property, fn) {
   } catch (e) {
     console.error(e);
   }
+  await firstCall;
 
   // Return unobserve function
   return () => {
