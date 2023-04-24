@@ -98,6 +98,21 @@ async function updateDBs() {
 
 		await c2pDb.update(data.click2play);
 		await compDb.update(data.compatibility);
+
+		let lastUpdate;
+		if (common.modules.adblocker.isEnabled) {
+			lastUpdate = common.modules.adblocker.background.adblocker.manager;
+		}
+		if (!lastUpdate) {
+			lastUpdate = Date.now();
+		}
+		if (!conf.bugs_last_checked) {
+			conf.bugs_last_checked = lastUpdate;
+		}
+		if (!conf.bugs_last_updated) {
+			conf.bugs_last_updated = lastUpdate;
+		}
+
 		return {
 			success: true,
 			updated: true,
@@ -806,6 +821,17 @@ function onMessageHandler(request, sender, callback) {
 		updateDBs().then(async (result) => {
 			if (common.modules.adblocker.isEnabled) {
 				await common.modules.adblocker.background.adblocker.update();
+				const lastUpdate = common.modules.adblocker.background.adblocker.manager;
+				if (lastUpdate > conf.bugs_last_checked) {
+					conf.bugs_last_checked = lastUpdate;
+				}
+				if (lastUpdate > conf.bugs_last_updated) {
+					conf.bugs_last_updated = lastUpdate;
+				}
+				result.confData = {
+					bugs_last_checked: conf.bugs_last_checked,
+					bugs_last_updated: conf.bugs_last_updated,
+				};
 			} else {
 				// Note: Adblocking is disabled in the UI. We cannot force an update when
 				// the module is not loaded. Once the user enables adblocking, the adblocker
