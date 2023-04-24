@@ -124,13 +124,17 @@ export class BugDb {
 			}), {});
 
 			oldKnownAppIds.forEach((app_id) => {
-				const category = this.db.apps[app_id].cat;
+				const app = this.db.apps[app_id];
+				if (!app) { return; }
+				const category = app.cat;
 				const vote = selectedApps.hasOwnProperty(app_id) ? 1 : -1;
 				majority[category] = (majority[category] || 0) + vote;
 			});
 
 			this.conf.new_app_ids.forEach((app_id) => {
-				const { cat: category } = this.db.apps[app_id];
+				const app = this.db.apps[app_id];
+				if (!app) { return; }
+				const category = app.cat;
 				if (majority[category] && majority[category] > 0) {
 					categoriesMeta[category].blockedTrackersCount += 1;
 					categoriesMeta[category].trackers.find(t => t.id === app_id).blocked = true;
