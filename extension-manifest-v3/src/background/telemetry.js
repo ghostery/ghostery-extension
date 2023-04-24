@@ -52,13 +52,11 @@ const loadStorage = async () => {
 
 const getConf = async () => {
   const options = await store.resolve(Options);
-  const install_date = new Date(options.onboarding.shownAt)
-    .toISOString()
-    .split('T')[0];
+
   return {
     enable_ad_block: Object.values(options.engines).some((enabled) => enabled),
     enable_human_web: options.terms,
-    install_date,
+    install_date: options.installDate,
     setup_complete: options.onboarding.done && options.terms,
     setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,
