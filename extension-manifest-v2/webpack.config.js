@@ -35,6 +35,13 @@ const TRACKERS_PREVIEW_DIR = path.resolve(__dirname, 'app/trackers-preview');
 const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
+const BUILD_TARGET = [
+	'firefox68',
+	'edge79',
+	'opera56',
+	'chrome69',
+];
+
 module.exports = {
 	devtool: 'source-map',
 	performance: {
@@ -100,12 +107,16 @@ module.exports = {
 		}),
 		// Clear duplicate js files created from CSS extraction
 		new WebpackShellPlugin({
-			onBuildExit: [
-				`${RM} ./dist/foundation.js`,
-				`${RM} ./dist/panel.js`,
-				`${RM} ./dist/panel_android.js`,
-				`${RM} ./dist/purplebox_styles.js`,
-			]
+			onBuildEnd: {
+				scripts: [
+					`${RM} ./dist/foundation.js`,
+					`${RM} ./dist/panel.js`,
+					`${RM} ./dist/panel_android.js`,
+					`${RM} ./dist/purplebox_styles.js`,
+					'npm run licenses',
+				],
+				blocking: true,
+			},
 		}),
 		// Create global `t` function for i18n
 		new webpack.DefinePlugin({
@@ -127,7 +138,7 @@ module.exports = {
 	optimization: {
 		minimizer: [
 			new ESBuildMinifyPlugin({
-				target: 'es2015',
+				target: BUILD_TARGET,
 			}),
 		],
 	},
@@ -153,12 +164,7 @@ module.exports = {
 						loader: 'esbuild-loader',
 						options: {
 							loader: 'jsx',
-							target: [
-								'firefox68',
-								'edge79',
-								'opera56',
-								'chrome69',
-							],
+							target: BUILD_TARGET,
 						}
 					},
 				]

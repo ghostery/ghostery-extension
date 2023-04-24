@@ -9,7 +9,7 @@
   },
   "license": "MPL-2.0",
   "scripts": {
-    "postinstall": "vendor-copy && npm run licenses && npm run download-trackerdb",
+    "postinstall": "vendor-copy && npm run download-trackerdb",
     "start": "web-ext run --target=chromium",
     "build.dev": "webpack --mode development --progress",
     "build.prod": "webpack --mode production --progress",
