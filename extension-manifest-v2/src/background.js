@@ -101,7 +101,7 @@ async function updateDBs() {
 
 		let lastUpdate;
 		if (common.modules.adblocker.isEnabled) {
-			lastUpdate = common.modules.adblocker.background.adblocker.manager;
+			lastUpdate = common.modules.adblocker.background.adblocker.manager.lastUpdate;
 		}
 		if (!lastUpdate) {
 			lastUpdate = Date.now();
@@ -821,7 +821,7 @@ function onMessageHandler(request, sender, callback) {
 		updateDBs().then(async (result) => {
 			if (common.modules.adblocker.isEnabled) {
 				await common.modules.adblocker.background.adblocker.update();
-				const lastUpdate = common.modules.adblocker.background.adblocker.manager;
+				const { lastUpdate } = common.modules.adblocker.background.adblocker.manager;
 				if (lastUpdate > conf.bugs_last_checked) {
 					conf.bugs_last_checked = lastUpdate;
 				}
