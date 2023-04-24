@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.0.7",
+  "version": "10.0.8",
   "type": "module",
   "scripts": {
     "postinstall": "npm run download-engines",
