@@ -59,14 +59,11 @@ export default {
         <section layout="column gap:4">
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
-              <ui-settings-help-image layout="size:12:8 shrink:0">
+              <ui-settings-help-image>
                 <img src="${assets.wtm_wheel_small}" alt="WhoTracks.Me Wheel" />
               </ui-settings-help-image>
             </a>
-            <div
-              layout="column gap:2"
-              layout@768px="row items:center gap:5 grow"
-            >
+            <div layout="column gap:2" layout@768px="row gap:5 grow">
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -84,17 +81,14 @@ export default {
           html`
             <div layout="row gap:2" layout@768px="gap:5">
               <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
-                <ui-settings-help-image layout="size:12:8 shrink:0">
+                <ui-settings-help-image>
                   <img
                     src="${assets.trackers_count_small}"
                     alt="Trackers Count"
                   />
                 </ui-settings-help-image>
               </a>
-              <div
-                layout="column gap:2"
-                layout@768px="row items:center gap:5 grow"
-              >
+              <div layout="column gap:2" layout@768px="row gap:5 grow">
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-s">Trackers Count</ui-text>
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -111,17 +105,14 @@ export default {
           `}
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
-              <ui-settings-help-image layout="size:12:8 shrink:0">
+              <ui-settings-help-image>
                 <img
                   src="${assets.trackers_preview_small}"
                   alt="Trackers Preview"
                 />
               </ui-settings-help-image>
             </a>
-            <div
-              layout="column gap:2"
-              layout@768px="row items:center gap:5 grow"
-            >
+            <div layout="column gap:2" layout@768px="row gap:5 grow">
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">Trackers Preview</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">

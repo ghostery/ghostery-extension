@@ -14,7 +14,10 @@ import { html } from 'hybrids';
 export default {
   render: () =>
     html`
-      <template layout="grid relative overflow">
+      <template
+        layout="grid relative overflow size:12:8 shrink:0"
+        layout@768px="size:15:10"
+      >
         <div id="icon" layout="absolute top:2px right:2px row center size:3">
           <ui-icon name="zoom-in" color="gray-900" layout="size:2"></ui-icon>
         </div>
