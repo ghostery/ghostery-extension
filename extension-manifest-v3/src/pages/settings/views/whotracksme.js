@@ -63,10 +63,7 @@ export default {
                 <img src="${assets.wtm_wheel_small}" alt="WhoTracks.Me Wheel" />
               </ui-settings-help-image>
             </a>
-            <div
-              layout="column gap:2"
-              layout@768px="row items:center gap:5 grow"
-            >
+            <div layout="column gap:2" layout@768px="row gap:5 grow">
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -91,10 +88,7 @@ export default {
                   />
                 </ui-settings-help-image>
               </a>
-              <div
-                layout="column gap:2"
-                layout@768px="row items:center gap:5 grow"
-              >
+              <div layout="column gap:2" layout@768px="row gap:5 grow">
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-s">Trackers Count</ui-text>
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -118,10 +112,7 @@ export default {
                 />
               </ui-settings-help-image>
             </a>
-            <div
-              layout="column gap:2"
-              layout@768px="row items:center gap:5 grow"
-            >
+            <div layout="column gap:2" layout@768px="row gap:5 grow">
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">Trackers Preview</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
