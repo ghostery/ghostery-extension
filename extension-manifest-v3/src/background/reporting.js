@@ -15,6 +15,7 @@ import * as IDB from 'idb';
 
 import { observe } from '/store/options.js';
 import { registerDatabase } from '/utils/indexeddb.js';
+import startupGuard from './utils/startup-guard.js';
 
 function platformSpecificSettings() {
   if (
@@ -205,6 +206,10 @@ function prefixedIndexedDBKeyValueStore(namespace) {
   };
 }
 
+function delay(timeInMs) {
+  return new Promise((resolve) => setTimeout(resolve, timeInMs));
+}
+
 const communication = new AnonymousCommunication({
   config,
   storage: new Storage('communication'),
@@ -216,26 +221,22 @@ const reporting = new Reporting({
   communication,
 });
 
-observe('terms', (terms) => {
-  if (terms) {
+const startup = startupGuard(
+  () =>
     reporting.init().catch((e) => {
       console.warn(
         'Failed to initialize reporting. Leaving the module disabled and continue.',
-        e,
       );
-    });
-  } else {
-    reporting.unload();
-  }
+      throw e;
+    }),
+  () => reporting.unload(),
+);
+
+observe('terms', (terms) => {
+  terms ? startup.start() : startup.stop();
 });
 
-function delay(timeInMs) {
-  return new Promise((resolve) => setTimeout(resolve, timeInMs));
-}
-
 function onLocationChange(details) {
-  if (!reporting.isActive) return;
-
   const { url, frameId, tabId } = details;
   if (frameId !== 0 || url === 'about:blank' || url.startsWith('chrome://')) {
     return;
@@ -267,6 +268,12 @@ function onLocationChange(details) {
     }
 
     try {
+      await startup.isReady({
+        timeout: 2000,
+        errorMessage:
+          'Init of reporting is hanging. Skipping event to avoid queuing.',
+      });
+
       const jobRegistered = await reporting.analyzeUrl(url);
       if (jobRegistered) {
         // TODO: This part here is not robust:
