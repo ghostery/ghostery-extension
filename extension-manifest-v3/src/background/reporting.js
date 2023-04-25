@@ -220,38 +220,21 @@ function delay(timeInMs) {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 }
 
-function guard() {
-  const _guard = {};
-
-  let wasUpdatedOnce = false;
-  let promsie = new Promise((resolver) => {
-    _guard.update = (value) => {
-      wasUpdatedOnce = true;
-      resolver(value);
-    };
+function defer() {
+  const deferred = {};
+  deferred.promise = new Promise((resolve) => {
+    deferred.resolve = resolve;
   });
-
-  _guard.reset = () => {
-    if (wasUpdatedOnce) {
-      promsie = new Promise((resolver) => {
-        _guard.update = resolver;
-      });
-    }
-  };
-
-  _guard.waitUntil = ({ timeout, errorMessage = 'Timeout exceeded' } = {}) =>
-    Promise.race([
-      promsie,
-      delay(timeout).then(() => Promise.reject(errorMessage)),
-    ]);
-
-  return _guard;
+  return deferred;
 }
 
-const startupGuard = guard();
+let startupDefer = defer();
 
 observe('terms', async (terms) => {
-  startupGuard.reset();
+  if (!startupDefer) {
+    startupDefer = defer();
+  }
+
   if (terms) {
     try {
       await reporting.init();
@@ -264,7 +247,9 @@ observe('terms', async (terms) => {
   } else {
     reporting.unload();
   }
-  startupGuard.update(reporting.isActive);
+
+  startupDefer.resolve();
+  startupDefer = null;
 });
 
 function onLocationChange(details) {
@@ -299,13 +284,18 @@ function onLocationChange(details) {
     }
 
     try {
-      if (
-        !(await startupGuard.waitUntil({
-          timeout: 2000,
-          errorMessage:
-            'Init of reporting is hanging. Skipping event to avoid queuing.',
-        }))
-      ) {
+      if (startupDefer) {
+        await Promise.race([
+          startupDefer.promise,
+          delay(2000).then(() =>
+            Promise.reject(
+              'Init of reporting is hanging. Skipping event to avoid queuing.',
+            ),
+          ),
+        ]);
+      }
+
+      if (!reporting.isActive) {
         return;
       }
 
