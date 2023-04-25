@@ -216,26 +216,45 @@ const reporting = new Reporting({
   communication,
 });
 
-observe('terms', (terms) => {
-  if (terms) {
-    reporting.init().catch((e) => {
-      console.warn(
-        'Failed to initialize reporting. Leaving the module disabled and continue.',
-        e,
-      );
-    });
-  } else {
-    reporting.unload();
-  }
-});
-
 function delay(timeInMs) {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 }
 
-function onLocationChange(details) {
-  if (!reporting.isActive) return;
+function defer() {
+  const deferred = {};
+  deferred.promise = new Promise((resolver) => {
+    deferred.resolve = resolver;
+  });
+  deferred.waitUntil = async ({
+    timeout,
+    errorMessage = 'Timeout exceeded',
+  } = {}) =>
+    Promise.race([
+      deferred.promise,
+      delay(timeout).then(() => Promise.reject(errorMessage)),
+    ]);
+  return deferred;
+}
 
+const deferredStartup = defer();
+
+observe('terms', async (terms) => {
+  if (terms) {
+    try {
+      await reporting.init();
+    } catch (e) {
+      console.warn(
+        'Failed to initialize reporting. Leaving the module disabled and continue.',
+        e,
+      );
+    }
+  } else {
+    reporting.unload();
+  }
+  deferredStartup.resolve(reporting.isActive);
+});
+
+function onLocationChange(details) {
   const { url, frameId, tabId } = details;
   if (frameId !== 0 || url === 'about:blank' || url.startsWith('chrome://')) {
     return;
@@ -267,6 +286,16 @@ function onLocationChange(details) {
     }
 
     try {
+      if (
+        await defer.waitUntil({
+          timeout: 2000,
+          errorMessage:
+            'Init of reporting is hanging. Skipping event to avoid queuing.',
+        })
+      ) {
+        return;
+      }
+
       const jobRegistered = await reporting.analyzeUrl(url);
       if (jobRegistered) {
         // TODO: This part here is not robust:
