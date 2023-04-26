@@ -18,7 +18,7 @@ import TabStats from '/store/tab-stats.js';
 import sleep from '../assets/sleep.svg';
 
 import Navigation from './navigation.js';
-import Company from './company.js';
+import TrackerDetails from './tracker-details.js';
 
 const NOTIFICATIONS = [
   {
@@ -92,7 +92,7 @@ function setStatsType(host, event) {
 }
 
 export default {
-  [router.connect]: { stack: [Navigation, Company] },
+  [router.connect]: { stack: [Navigation, TrackerDetails] },
   options: store(Options),
   stats: store(TabStats),
   session: store(Session),
@@ -179,8 +179,8 @@ export default {
             <ui-panel-stats
               domain="${stats.domain}"
               categories="${stats.categories}"
-              trackers="${stats.byCategory}"
-              dialog="${Company}"
+              trackers="${stats.trackers}"
+              dialog="${TrackerDetails}"
               type="${options.panel.statsType}"
               layout="margin:2"
               ontypechange="${setStatsType}"

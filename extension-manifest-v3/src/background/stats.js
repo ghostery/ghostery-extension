@@ -99,21 +99,18 @@ export async function updateTabStats(tabId, requests) {
   // as some of the requests are fired before the tab is created, tabId -1
   if (!stats) return;
 
-  const filtered = requests.filter(
-    ({ url }) => !stats.trackers.some((t) => t.url === url),
-  );
-
-  if (!filtered.length) return;
-
-  const patterns = [];
-
-  for (const request of filtered) {
+  for (const request of requests) {
     const pattern = await trackerDb.getMetadata(request);
+
     if (pattern) {
-      pattern.blocked =
-        pattern.blocked || stats.requestsBlocked.includes(request.requestId);
-      stats.trackers.push(pattern);
-      patterns.push(pattern);
+      let tracker = stats.trackers.find((t) => t.id === pattern.id);
+
+      if (!tracker) {
+        tracker = { ...pattern, requests: [] };
+        stats.trackers.push(tracker);
+      }
+
+      tracker.requests.push({ url: request.url, blocked: request.blocked });
     }
   }
 
@@ -137,12 +134,14 @@ async function flushTabStatsToDailyStats(tabId) {
     if (tracker.category === DAILY_STATS_ADS_CATEGORY) {
       adsDetected.set(
         tracker.name,
-        adsDetected.get(tracker.name)?.blocked ?? tracker.blocked,
+        adsDetected.get(tracker.name)?.blocked ??
+          tracker.requests.some(({ blocked }) => blocked),
       );
     } else {
       trackersDetected.set(
         tracker.name,
-        trackersDetected.get(tracker.name)?.blocked ?? tracker.blocked,
+        trackersDetected.get(tracker.name)?.blocked ??
+          tracker.requests.some(({ blocked }) => blocked),
       );
     }
   }
@@ -156,7 +155,7 @@ async function flushTabStatsToDailyStats(tabId) {
   );
 
   const patterns = [
-    ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.key)]),
+    ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.id)]),
   ];
 
   await store.set(dailyStats, {
@@ -164,7 +163,12 @@ async function flushTabStatsToDailyStats(tabId) {
     adsBlocked: dailyStats.adsBlocked + adsBlocked,
     trackersDetected: dailyStats.trackersDetected + trackersDetected.size,
     trackersBlocked: dailyStats.trackersBlocked + trackersBlocked,
-    requestsDetected: dailyStats.requestsDetected + stats.trackers.length,
+    requestsDetected:
+      dailyStats.requestsDetected +
+      stats.trackers.reduce((acc, tracker) => {
+        acc += tracker.requests.length;
+        return acc;
+      }, 0),
     requestsBlocked: dailyStats.requestsBlocked + adsBlocked + trackersBlocked,
     pages: dailyStats.pages + 1,
     patterns,

@@ -39,25 +39,15 @@ export async function getMetadata(request) {
   const { category, pattern, organization } = matches[0];
 
   const metadata = {
+    id: pattern.key,
     key: pattern.key,
     name: pattern.name,
     category: category.key,
-    company: organization
-      ? {
-          id: pattern.key,
-          name: organization.name,
-          description: organization.description,
-          website: organization.website_url || pattern.website_url,
-          contact: organization.privacy_contact,
-          privacyPolicy: organization.privacy_policy_url,
-        }
-      : {
-          id: pattern.key,
-          name: pattern.name,
-          website: pattern.website_url,
-        },
-    url: request.url,
-    blocked: request.blocked,
+    company: organization?.name,
+    description: organization?.description,
+    website: pattern.website_url || organization?.website_url,
+    contact: organization?.privacy_contact,
+    privacyPolicy: organization?.privacy_policy_url,
   };
 
   return metadata;
