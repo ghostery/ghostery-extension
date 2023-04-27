@@ -100,7 +100,9 @@ export async function updateTabStats(tabId, requests) {
   if (!stats) return;
 
   for (const request of requests) {
-    const pattern = await trackerDb.getMetadata(request);
+    const pattern = await trackerDb.getMetadata(request, {
+      getDomainMetadata: true,
+    });
 
     if (pattern) {
       let tracker = stats.trackers.find((t) => t.id === pattern.id);

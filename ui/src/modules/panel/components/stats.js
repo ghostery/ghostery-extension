@@ -26,13 +26,16 @@ export default {
   trackers: {
     set: (host, trackers = []) =>
       Object.entries(
-        trackers.reduce((acc, tracker) => {
-          const category = acc[tracker.category] || [];
-          category.push(tracker);
-
-          acc[tracker.category] = category;
-          return acc;
-        }, {}),
+        trackers.reduce(
+          (categories, tracker) => ({
+            ...categories,
+            [tracker.category]: [
+              ...(categories[tracker.category] || []),
+              tracker,
+            ],
+          }),
+          {},
+        ),
       ),
   },
   domain: '',
