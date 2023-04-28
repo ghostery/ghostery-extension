@@ -14,7 +14,7 @@ import { FiltersEngine } from '@cliqz/adblocker';
 let engine;
 let trackerDBStartupPromise = (async () => {
   const response = await fetch(
-    chrome.runtime.getURL('rule_resources/engine-trackerdb.bytes'),
+    chrome.runtime.getURL('rule_resources/engine-trackerdb.dat'),
   );
   const rawTrackerDB = await response.arrayBuffer();
   engine = FiltersEngine.deserialize(new Uint8Array(rawTrackerDB));
