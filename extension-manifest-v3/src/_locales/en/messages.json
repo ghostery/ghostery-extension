@@ -305,6 +305,9 @@
   "report_a_broken_page": {
     "message": "Report a broken page"
   },
+  "requests": {
+    "message": "Requests"
+  },
   "resume": {
     "message": "Resume"
   },

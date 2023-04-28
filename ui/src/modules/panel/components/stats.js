@@ -24,7 +24,8 @@ export default {
       ),
     ),
   trackers: {
-    set: (host, trackers = []) =>
+    set: (host, trackers) =>
+      trackers &&
       Object.entries(
         trackers.reduce(
           (categories, tracker) => ({

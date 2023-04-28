@@ -36,6 +36,7 @@ const Options = {
     statsType: 'graph',
   },
   paused: [{ id: true, revokeAt: 0 }],
+  installDate: '',
   [store.connect]: {
     async get() {
       let { options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {} } =

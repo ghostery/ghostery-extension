@@ -24,10 +24,7 @@ async function updateOptions(host, event) {
       {},
     ),
     terms: success,
-    onboarding: {
-      done: true,
-      shownAt: null,
-    },
+    onboarding: { done: true },
   });
 
   chrome.runtime.sendMessage({
@@ -46,11 +43,21 @@ define({
     ></ui-onboarding>`,
 });
 
-store.resolve(Options).then((options) => {
+store.resolve(Options).then(({ installDate, onboarding }) => {
+  // Get install date from `onboarding.shownAt` or generate current date
+  if (!installDate) {
+    installDate = (
+      onboarding.shownAt ? new Date(onboarding.shownAt) : new Date()
+    )
+      .toISOString()
+      .split('T')[0];
+  }
+
   store.set(Options, {
     onboarding: {
       shownAt: Date.now(),
-      shown: options.onboarding.shown + 1,
+      shown: onboarding.shown + 1,
     },
+    installDate,
   });
 });
