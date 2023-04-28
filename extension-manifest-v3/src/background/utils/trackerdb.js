@@ -40,7 +40,6 @@ export async function getMetadata(request) {
 
   const metadata = {
     id: pattern.key,
-    key: pattern.key,
     name: pattern.name,
     category: category.key,
     company: organization?.name,
