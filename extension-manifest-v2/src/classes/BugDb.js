@@ -22,7 +22,7 @@ export function getPatternId(pattern) {
 
 async function getEngine() {
 	const response = await fetch(
-		chrome.runtime.getURL('databases/trackerdb.engine.bytes'),
+		chrome.runtime.getURL('databases/trackerdb.engine.dat'),
 	);
 	const rawTrackerDB = await response.arrayBuffer();
 	return FiltersEngine.deserialize(new Uint8Array(rawTrackerDB));
