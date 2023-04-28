@@ -68,7 +68,7 @@ for (const [name, target] of Object.entries(ENGINES)) {
     return res.arrayBuffer();
   });
 
-  writeFileSync(`${TARGET_PATH}/engine-${target}.bytes`, new Uint8Array(rules));
+  writeFileSync(`${TARGET_PATH}/engine-${target}.dat`, new Uint8Array(rules));
 
   /* DNR rules */
 

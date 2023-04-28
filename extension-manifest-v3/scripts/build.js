@@ -87,7 +87,7 @@ const engines = ['ads', 'tracking', 'annoyances'];
 const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {
-  const path = `engine-${engine}${engineType}.bytes`;
+  const path = `engine-${engine}${engineType}.dat`;
   shelljs.cp(
     resolve(options.srcDir, 'rule_resources', path),
     resolve(options.outDir, 'rule_resources'),
@@ -96,7 +96,7 @@ engines.forEach((engine) => {
 
 // copy trackerdb engine
 shelljs.cp(
-  resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.bytes'),
+  resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.dat'),
   resolve(options.outDir, 'rule_resources'),
 );
 

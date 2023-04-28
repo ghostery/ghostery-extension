@@ -29,4 +29,4 @@ out/
 coverage/
 
 ## Assets
-databases/trackerdb.engine.bytes
+databases/trackerdb.engine.dat

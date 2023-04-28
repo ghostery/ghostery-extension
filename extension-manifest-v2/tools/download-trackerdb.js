@@ -36,7 +36,7 @@ const { ENGINE_VERSION } = require('@cliqz/adblocker');
 	const trackerDB = await trackerDBResponse.arrayBuffer();
 
 	writeFileSync(
-		path.join('databases', 'trackerdb.engine.bytes'),
+		path.join('databases', 'trackerdb.engine.dat'),
 		new Uint8Array(trackerDB),
 	);
 })();
