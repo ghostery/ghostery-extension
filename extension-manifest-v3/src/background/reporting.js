@@ -15,6 +15,7 @@ import * as IDB from 'idb';
 
 import { observe } from '/store/options.js';
 import { registerDatabase } from '/utils/indexeddb.js';
+import startupGuard from './utils/startup-guard.js';
 
 function platformSpecificSettings() {
   if (
@@ -205,6 +206,10 @@ function prefixedIndexedDBKeyValueStore(namespace) {
   };
 }
 
+function delay(timeInMs) {
+  return new Promise((resolve) => setTimeout(resolve, timeInMs));
+}
+
 const communication = new AnonymousCommunication({
   config,
   storage: new Storage('communication'),
@@ -216,40 +221,19 @@ const reporting = new Reporting({
   communication,
 });
 
-function delay(timeInMs) {
-  return new Promise((resolve) => setTimeout(resolve, timeInMs));
-}
-
-function defer() {
-  const deferred = {};
-  deferred.promise = new Promise((resolve) => {
-    deferred.resolve = resolve;
-  });
-  return deferred;
-}
-
-let startupDefer = defer();
-
-observe('terms', async (terms) => {
-  if (!startupDefer) {
-    startupDefer = defer();
-  }
-
-  if (terms) {
-    try {
-      await reporting.init();
-    } catch (e) {
+const startup = startupGuard(
+  () =>
+    reporting.init().catch((e) => {
       console.warn(
         'Failed to initialize reporting. Leaving the module disabled and continue.',
-        e,
       );
-    }
-  } else {
-    reporting.unload();
-  }
+      throw e;
+    }),
+  () => reporting.unload(),
+);
 
-  startupDefer.resolve();
-  startupDefer = null;
+observe('terms', (terms) => {
+  terms ? startup.start() : startup.stop();
 });
 
 function onLocationChange(details) {
@@ -284,20 +268,11 @@ function onLocationChange(details) {
     }
 
     try {
-      if (startupDefer) {
-        await Promise.race([
-          startupDefer.promise,
-          delay(2000).then(() =>
-            Promise.reject(
-              'Init of reporting is hanging. Skipping event to avoid queuing.',
-            ),
-          ),
-        ]);
-      }
-
-      if (!reporting.isActive) {
-        return;
-      }
+      await startup.isReady({
+        timeout: 2000,
+        errorMessage:
+          'Init of reporting is hanging. Skipping event to avoid queuing.',
+      });
 
       const jobRegistered = await reporting.analyzeUrl(url);
       if (jobRegistered) {
