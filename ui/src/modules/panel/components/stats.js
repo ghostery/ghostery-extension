@@ -23,7 +23,21 @@ export default {
         {},
       ),
     ),
-  trackers: undefined,
+  trackers: {
+    set: (host, trackers = []) =>
+      Object.entries(
+        trackers.reduce(
+          (categories, tracker) => ({
+            ...categories,
+            [tracker.category]: [
+              ...(categories[tracker.category] || []),
+              tracker,
+            ],
+          }),
+          {},
+        ),
+      ),
+  },
   domain: '',
   wtmUrl: ({ domain }) => `https://www.whotracks.me/websites/${domain}.html`,
   type: {
@@ -127,7 +141,7 @@ export default {
             active="${type === 'list'}"
             layout="column grow"
           >
-            ${!categoryList.length &&
+            ${!trackers.length &&
             html`
               <ui-panel-list layout="grow">
                 <ui-text
@@ -140,35 +154,28 @@ export default {
               </ui-panel-list>
             `}
             ${trackers.map(
-              ([name, { count, trackers }]) => html`
+              ([name, trackers]) => html`
                 <ui-panel-list name="${name}">
                   <div slot="header" layout="row items:center gap">
-                    <ui-panel-badge>${count}</ui-panel-badge>
+                    <ui-panel-badge>${trackers.length}</ui-panel-badge>
                   </div>
 
                   <section id="content" layout="column items:start">
                     ${trackers.map(
-                      (t) =>
+                      (tracker) =>
                         html`
                           <ui-text type="body-s">
-                            ${t.company && dialog
-                              ? html`
-                                  <a
-                                    href="${router.url(dialog, {
-                                      company: t.company,
-                                    })}"
-                                    layout="row items:center gap:0.5 padding:0.5:0"
-                                  >
-                                    ${t.name}
-                                    <ui-panel-badge>${t.count}</ui-panel-badge>
-                                  </a>
-                                `
-                              : html`<a
-                                  layout="row items:center gap:0.5 padding:0.5:0"
-                                >
-                                  ${t.name}
-                                  <ui-panel-badge>${t.count}</ui-panel-badge>
-                                </a>`}
+                            <a
+                              href="${router.url(dialog, {
+                                trackerId: tracker.id,
+                              })}"
+                              layout="row items:center gap:0.5 padding:0.5:0"
+                            >
+                              ${tracker.name}
+                              <ui-panel-badge>
+                                ${tracker.requests.length}
+                              </ui-panel-badge>
+                            </a>
                           </ui-text>
                         `,
                     )}
