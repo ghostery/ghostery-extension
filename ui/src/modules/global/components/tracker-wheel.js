@@ -75,7 +75,10 @@ export default {
   tooltip: ({ render }) => render().querySelector('ui-tooltip'),
   render: ({ categories, data, current }) => html`
     <template layout="grid relative">
-      <ui-tooltip layout="absolute top left" show="${current}">
+      <ui-tooltip
+        layout="block absolute top left padding:top:0.5"
+        show="${current}"
+      >
         <span slot="content"
           >${labels.categories[current]}:
           ${categories.reduce(count(current), 0)}</span

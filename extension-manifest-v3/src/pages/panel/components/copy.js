@@ -1,7 +1,7 @@
 import { dispatch, html } from 'hybrids';
 
 function copy(host) {
-  navigator.clipboard.writeText(host.textContent);
+  navigator.clipboard.writeText(host.textContent.trim());
   dispatch(host, 'copy');
 }
 
