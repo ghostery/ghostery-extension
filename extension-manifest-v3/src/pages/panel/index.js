@@ -8,15 +8,22 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import './safari-monkey-patch.js';
 import '../../utils/shims.js';
 
 import '@ghostery/ui/panel';
 import { define } from 'hybrids';
 
-define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
-  root: ['components', 'views'],
-  prefix: 'gh-panel',
-});
+define.from(
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  {
+    root: ['components', 'views'],
+    prefix: 'gh-panel',
+  },
+);
 
 /* Ping telemetry on panel open */
 chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });
