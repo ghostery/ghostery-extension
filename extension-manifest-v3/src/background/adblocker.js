@@ -29,29 +29,35 @@ const adblockerEngines = Object.keys(Options.engines).map((name) => ({
 let pausedDomains = [];
 
 let adblockerStartupPromise = (async function () {
-  await observe('engines', (engines) => {
-    Object.entries(engines).forEach(([key, value]) => {
-      const engine = adblockerEngines.find((e) => e.name === key);
-      engine.isEnabled = value;
-    });
-  });
-  await observe('paused', (paused) => {
-    pausedDomains = paused ? paused.map(String) : [];
-  });
+  const pending = [];
+  pending.push(
+    observe('engines', (engines) => {
+      Object.entries(engines).forEach(([key, value]) => {
+        const engine = adblockerEngines.find((e) => e.name === key);
+        engine.isEnabled = value;
+      });
+    }),
+  );
+  pending.push(
+    observe('paused', (paused) => {
+      pausedDomains = paused ? paused.map(String) : [];
+    }),
+  );
 
-  await Promise.all(
-    adblockerEngines.map(async (engine) => {
+  pending.push(
+    ...adblockerEngines.map(async (engine) => {
       const response = await fetch(
         chrome.runtime.getURL(
           `rule_resources/engine-${engine.name}${
             __PLATFORM__ === 'firefox' ? '' : '-cosmetics'
-          }.bytes`,
+          }.dat`,
         ),
       );
       const engineBytes = await response.arrayBuffer();
       engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
     }),
   );
+  await Promise.all(pending);
   adblockerStartupPromise = null;
 })();
 
@@ -106,12 +112,15 @@ async function adblockerOnMessage(msg, sender) {
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
 
-  if (!sender.tab || pausedDomains.includes(domain)) {
+  if (!sender.tab) {
     return;
   }
 
   if (adblockerStartupPromise) {
     await adblockerStartupPromise;
+  }
+  if (pausedDomains.includes(domain)) {
+    return;
   }
 
   const genericStyles = [];
@@ -270,12 +279,16 @@ ${scripts.join('\n\n')}}
 
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
-  if (!hostname || pausedDomains.includes(domain)) {
+  if (!hostname) {
     return;
   }
 
   if (adblockerStartupPromise) {
     await adblockerStartupPromise;
+  }
+
+  if (pausedDomains.includes(domain)) {
+    return;
   }
 
   adblockerEngines.forEach(({ isEnabled, engine }) => {
