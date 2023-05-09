@@ -16,6 +16,8 @@ import * as IDB from 'idb';
 import { observe } from '/store/options.js';
 import { registerDatabase } from '/utils/indexeddb.js';
 
+import asyncSetup from './utils/setup.js';
+
 function platformSpecificSettings() {
   if (
     /iPad|iPhone|iPod/.test(navigator.platform) ||
@@ -216,24 +218,28 @@ const reporting = new Reporting({
   communication,
 });
 
-observe('terms', (terms) => {
-  if (terms) {
-    reporting.init().catch((e) => {
-      console.warn(
-        'Failed to initialize reporting. Leaving the module disabled and continue.',
-        e,
-      );
-    });
-  } else {
-    reporting.unload();
-  }
-});
+const setup = asyncSetup([
+  observe('terms', (terms) => {
+    if (terms) {
+      reporting.init().catch((e) => {
+        console.warn(
+          'Failed to initialize reporting. Leaving the module disabled and continue.',
+          e,
+        );
+      });
+    } else {
+      reporting.unload();
+    }
+  }),
+]);
 
 function delay(timeInMs) {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 }
 
-function onLocationChange(details) {
+async function onLocationChange(details) {
+  setup.pending && (await setup.pending);
+
   if (!reporting.isActive) return;
 
   const { url, frameId, tabId } = details;

@@ -19,6 +19,8 @@ import { parse } from 'tldts-experimental';
 import Options, { observe } from '/store/options.js';
 
 import Request from './utils/request.js';
+import asyncSetup from './utils/setup.js';
+
 import { setupTabStats, updateTabStats } from './stats.js';
 
 const adblockerEngines = Object.keys(Options.engines).map((name) => ({
@@ -28,38 +30,28 @@ const adblockerEngines = Object.keys(Options.engines).map((name) => ({
 }));
 let pausedDomains = [];
 
-let adblockerStartupPromise = (async function () {
-  const pending = [];
-  pending.push(
-    observe('engines', (engines) => {
-      Object.entries(engines).forEach(([key, value]) => {
-        const engine = adblockerEngines.find((e) => e.name === key);
-        engine.isEnabled = value;
-      });
-    }),
-  );
-  pending.push(
-    observe('paused', (paused) => {
-      pausedDomains = paused ? paused.map(String) : [];
-    }),
-  );
-
-  pending.push(
-    ...adblockerEngines.map(async (engine) => {
-      const response = await fetch(
-        chrome.runtime.getURL(
-          `rule_resources/engine-${engine.name}${
-            __PLATFORM__ === 'firefox' ? '' : '-cosmetics'
-          }.dat`,
-        ),
-      );
-      const engineBytes = await response.arrayBuffer();
-      engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
-    }),
-  );
-  await Promise.all(pending);
-  adblockerStartupPromise = null;
-})();
+const setup = asyncSetup([
+  observe('engines', (engines) => {
+    Object.entries(engines).forEach(([key, value]) => {
+      const engine = adblockerEngines.find((e) => e.name === key);
+      engine.isEnabled = value;
+    });
+  }),
+  observe('paused', (paused) => {
+    pausedDomains = paused ? paused.map(String) : [];
+  }),
+  ...adblockerEngines.map(async (engine) => {
+    const response = await fetch(
+      chrome.runtime.getURL(
+        `rule_resources/engine-${engine.name}${
+          __PLATFORM__ === 'firefox' ? '' : '-cosmetics'
+        }.dat`,
+      ),
+    );
+    const engineBytes = await response.arrayBuffer();
+    engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
+  }),
+]);
 
 function adblockerInjectStylesWebExtension(
   styles,
@@ -116,9 +108,8 @@ async function adblockerOnMessage(msg, sender) {
     return;
   }
 
-  if (adblockerStartupPromise) {
-    await adblockerStartupPromise;
-  }
+  setup.pending && (await setup.pending);
+
   if (pausedDomains.includes(domain)) {
     return;
   }
@@ -283,9 +274,7 @@ async function injectScriptlets(tabId, url) {
     return;
   }
 
-  if (adblockerStartupPromise) {
-    await adblockerStartupPromise;
-  }
+  setup.pending && (await setup.pending);
 
   if (pausedDomains.includes(domain)) {
     return;
