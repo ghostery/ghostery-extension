@@ -211,7 +211,7 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghosteryをプライバシーの完璧な守護者にして、ポップアップやお客様の追跡を全て拒否するか、ご自身で手動設定しましょう!"
   },
-	"manifest_name": {
+  "manifest_name": {
     "message": "Ghostery – プライバシー広告ブロッカー"
   },
   "manifest_short_description": {
@@ -232,6 +232,9 @@
   },
   "my_account": {
     "message": "アカウント"
+  },
+  "navigate_to_a_website_to_see_ghostery_in_action_": {
+    "message": "Navigate to a website to see Ghostery in action."
   },
   "never_consent": {
     "message": "決して同意しない"
@@ -362,12 +365,12 @@
   "trackers_wheel": {
     "message": "トラッカーホイール"
   },
-  "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "このパネルを別のブラウザのタブで開いてください"
-  },
   "unidentified": {
     "message": "未知",
     "description": "Tracker category name"
+  },
+  "urls": {
+    "message": "URLs"
   },
   "website": {
     "message": "ウェブサイト"

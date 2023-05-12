@@ -211,7 +211,7 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Позвольте Ghostery стать вашим комплексным защитником конфиденциальности и отклонять за вас все всплывающие окна и отслеживание или делайте это самостоятельно!"
   },
-	"manifest_name": {
+  "manifest_name": {
     "message": "Ghostery – Конфиденциальный Блокировщик Рекламы"
   },
   "manifest_short_description": {
@@ -232,6 +232,9 @@
   },
   "my_account": {
     "message": "Моя учетная запись"
+  },
+  "navigate_to_a_website_to_see_ghostery_in_action_": {
+    "message": "Navigate to a website to see Ghostery in action."
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -362,12 +365,12 @@
   "trackers_wheel": {
     "message": "Trackers Wheel"
   },
-  "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "Try to open this panel on a different browser tab"
-  },
   "unidentified": {
-    "message": "Неизвестный",
+    "message": "Неизвестно",
     "description": "Tracker category name"
+  },
+  "urls": {
+    "message": "URLs"
   },
   "website": {
     "message": "Website"
