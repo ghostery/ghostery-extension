@@ -169,8 +169,6 @@ export async function observe(property, fn) {
     }
   };
 
-  observers.add(wrapper);
-
   try {
     const options = await store.resolve(Options);
     // let observer know of the option value
@@ -180,6 +178,8 @@ export async function observe(property, fn) {
   } catch (e) {
     console.error(e);
   }
+
+  observers.add(wrapper);
 
   // Return unobserve function
   return () => {
