@@ -28,5 +28,9 @@ export default function asyncSetup(promises, threshold = 5000) {
     }),
   };
 
+  result.pending.catch((e) => {
+    console.warn('Error during async setup:', e);
+  });
+
   return result;
 }

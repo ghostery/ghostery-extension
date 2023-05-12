@@ -108,7 +108,12 @@ async function adblockerOnMessage(msg, sender) {
     return;
   }
 
-  setup.pending && (await setup.pending);
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.error(`Error while setup adblocker filters: ${e}`);
+    return;
+  }
 
   if (pausedDomains.includes(domain)) {
     return;
@@ -274,7 +279,12 @@ async function injectScriptlets(tabId, url) {
     return;
   }
 
-  setup.pending && (await setup.pending);
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.error(`Error while setup adblocker filters: ${e}`);
+    return;
+  }
 
   if (pausedDomains.includes(domain)) {
     return;

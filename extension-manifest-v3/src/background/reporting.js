@@ -219,9 +219,9 @@ const reporting = new Reporting({
 });
 
 const setup = asyncSetup([
-  observe('terms', (terms) => {
+  observe('terms', async (terms) => {
     if (terms) {
-      reporting.init().catch((e) => {
+      await reporting.init().catch((e) => {
         console.warn(
           'Failed to initialize reporting. Leaving the module disabled and continue.',
           e,
@@ -238,7 +238,12 @@ function delay(timeInMs) {
 }
 
 async function onLocationChange(details) {
-  setup.pending && (await setup.pending);
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.warn('Reporting is unavailable:', e);
+    return;
+  }
 
   if (!reporting.isActive) return;
 
@@ -247,51 +252,53 @@ async function onLocationChange(details) {
     return;
   }
 
-  (async () => {
-    // Be aware that the documentation of webNavigation.onCommitted is incomplete
-    // (https://developer.chrome.com/docs/extensions/reference/webNavigation/#event-onCommitted):
-    //
-    // > Fired when a navigation is committed. The document (and the resources
-    // > it refers to, such as images and subframes) might still be downloading,
-    // > but at least part of the document has been received from the server and
-    // > the browser has decided to switch to the new document.
-    //
-    // In practice, the event may also trigger for prefetch requests for which
-    // no tab exists. For instance, it can be reproduced in Chrome by starting
-    // a Google search from the address bar. Under certain conditions, the first
-    // search result triggers an extra onCommitted event (even if the user didn't
-    // click on the link yet).
-    const tab = await chrome.tabs.get(tabId).catch(() => null);
-    if (!tab) {
-      return;
-    }
+  // Be aware that the documentation of webNavigation.onCommitted is incomplete
+  // (https://developer.chrome.com/docs/extensions/reference/webNavigation/#event-onCommitted):
+  //
+  // > Fired when a navigation is committed. The document (and the resources
+  // > it refers to, such as images and subframes) might still be downloading,
+  // > but at least part of the document has been received from the server and
+  // > the browser has decided to switch to the new document.
+  //
+  // In practice, the event may also trigger for prefetch requests for which
+  // no tab exists. For instance, it can be reproduced in Chrome by starting
+  // a Google search from the address bar. Under certain conditions, the first
+  // search result triggers an extra onCommitted event (even if the user didn't
+  // click on the link yet).
+  const tab = await chrome.tabs.get(tabId).catch(() => null);
+  if (!tab) {
+    return;
+  }
 
-    // Don't leak information in private tabs (neither by storing on disk nor
-    // by initiating HTTP requests).
-    if (tab.incognito) {
-      return;
-    }
+  // Don't leak information in private tabs (neither by storing on disk nor
+  // by initiating HTTP requests).
+  if (tab.incognito) {
+    return;
+  }
 
-    try {
-      const jobRegistered = await reporting.analyzeUrl(url);
-      if (jobRegistered) {
-        // TODO: This part here is not robust:
-        // we should avoid timers in MV3 or at least assume that we the service
-        // worker will die (persisting the jobs and shift the scheduling
-        // responsibility into the reporting module itself could help)
-        await delay(2000 + 3000 * Math.random());
-        await reporting.processPendingJobs();
-      }
-    } catch (e) {
-      console.warn('Unexpected error in reporting module:', e);
+  try {
+    const jobRegistered = await reporting.analyzeUrl(url);
+    if (jobRegistered) {
+      // TODO: This part here is not robust:
+      // we should avoid timers in MV3 or at least assume that we the service
+      // worker will die (persisting the jobs and shift the scheduling
+      // responsibility into the reporting module itself could help)
+      await delay(2000 + 3000 * Math.random());
+      await reporting.processPendingJobs();
     }
-  })();
+  } catch (e) {
+    console.warn('Unexpected error in reporting module:', e);
+  }
 }
 
-chrome.webNavigation.onCommitted.addListener(onLocationChange);
+chrome.webNavigation.onCommitted.addListener((details) => {
+  onLocationChange(details);
+});
 
 if (__PLATFORM__ !== 'safari') {
-  chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
+  chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
+    onLocationChange(details);
+  });
 }
 
 // for debugging service-workers (TODO: provide a way to control logging)
