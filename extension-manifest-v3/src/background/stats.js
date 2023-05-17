@@ -11,7 +11,6 @@
 
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
-import { throttle } from 'lodash-es';
 
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
@@ -39,46 +38,69 @@ observe('terms', async (terms) => {
   }
 });
 
-const setIcon = throttle(
-  async (tabId, stats) => {
-    const options = await store.resolve(Options);
+async function refreshIcon(tabId) {
+  const stats = tabStats.get(tabId);
+  const options = await store.resolve(Options);
 
-    if (options.trackerWheel && stats.trackers.length > 0) {
-      const paused = options.paused?.some(({ id }) => id === stats.domain);
-      const data = {};
+  if (options.trackerWheel && stats.trackers.length > 0) {
+    const paused = options.paused?.some(({ id }) => id === stats.domain);
+    const data = {};
 
-      if (paused || !options.terms) {
-        data.path = {
-          16: '/assets/images/icon19_off.png',
-          32: '/assets/images/icon38_off.png',
-        };
-      } else {
-        data.imageData = getOffscreenImageData(
-          128,
-          stats.trackers.map((t) => t.category),
-        );
-      }
-      try {
-        await chrome.action.setIcon({ tabId, ...data });
-      } catch (e) {
-        console.error('Error while trying update the icon:', e);
-      }
+    if (paused || !options.terms) {
+      data.path = {
+        16: '/assets/images/icon19_off.png',
+        32: '/assets/images/icon38_off.png',
+      };
+    } else {
+      data.imageData = getOffscreenImageData(
+        128,
+        stats.trackers.map((t) => t.category),
+      );
     }
-
-    if (Options.trackerCount) {
-      try {
-        await chrome.action.setBadgeText({
-          tabId,
-          text: options.trackerCount ? String(stats.trackers.length) : '',
-        });
-      } catch (e) {
-        console.error('Error while trying update the badge', e);
-      }
+    try {
+      await chrome.action.setIcon({ tabId, ...data });
+    } catch (e) {
+      console.error('Error while trying update the icon:', e);
     }
-  },
-  // Firefox flickers when updating the icon, so we should expand the throttle
-  __PLATFORM__ === 'firefox' ? 1000 : 250,
-);
+  }
+
+  if (Options.trackerCount) {
+    try {
+      await chrome.action.setBadgeText({
+        tabId,
+        text: options.trackerCount ? String(stats.trackers.length) : '',
+      });
+    } catch (e) {
+      console.error('Error while trying update the badge', e);
+    }
+  }
+}
+
+const delayMap = new Map();
+function updateIcon(tabId) {
+  if (delayMap.has(tabId)) return;
+
+  refreshIcon(tabId);
+
+  const timeoutId = setTimeout(
+    async () => {
+      refreshIcon(tabId);
+      delayMap.delete(tabId);
+    },
+    // Firefox flickers when updating the icon, so we should expand the throttle
+    __PLATFORM__ === 'firefox' ? 1000 : 250,
+  );
+
+  delayMap.set(tabId, timeoutId);
+}
+
+updateIcon.cancel = (tabId) => {
+  const timeoutId = delayMap.get(tabId);
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    delayMap.delete(tabId);
+  }
+};
 
 export async function getStatsWithMetadata(since) {
   const result = await getMergedStats(since);
@@ -121,7 +143,7 @@ export async function updateTabStats(tabId, requests) {
   );
 
   tabStats.set(tabId, stats);
-  setIcon(tabId, stats);
+  updateIcon(tabId);
 }
 
 const DAILY_STATS_ADS_CATEGORY = 'advertising';
@@ -187,8 +209,8 @@ export function setupTabStats(tabId, domain) {
       trackers: [],
     });
 
-    // Clean up throttled icon update
-    setIcon.cancel();
+    // Clean up icon update
+    updateIcon.cancel(tabId);
   } else {
     tabStats.delete(tabId);
   }
