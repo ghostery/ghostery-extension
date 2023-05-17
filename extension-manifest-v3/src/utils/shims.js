@@ -22,6 +22,8 @@ function shimAlarms() {
     },
     async clear(name) {
       clearTimeout(alarms.get(name));
+      clearInterval(alarms.get(name));
+
       alarms.delete(name);
     },
     async getAll() {
@@ -31,20 +33,30 @@ function shimAlarms() {
       alarms.forEach((timeout) => clearTimeout(timeout));
       alarms.clear();
     },
-    create(name, options) {
-      if (options.when) {
+    create(name, options = {}) {
+      const { when, delayInMinutes, periodInMinutes } = options;
+
+      if (when || delayInMinutes || periodInMinutes) {
         if (alarms.has(name)) this.clear(name);
 
         alarms.set(
           name,
-          setTimeout(() => {
-            listeners.forEach((fn) => fn({ name }));
-            if (options.periodInMinutes) {
-              setInterval(() => {
-                listeners.forEach((fn) => fn({ name }));
-              }, options.periodInMinutes * 60 * 1000);
-            }
-          }, options.when - Date.now()),
+          setTimeout(
+            () => {
+              listeners.forEach((fn) => fn({ name }));
+              if (periodInMinutes) {
+                alarms.set(
+                  name,
+                  setInterval(() => {
+                    listeners.forEach((fn) => fn({ name }));
+                  }, periodInMinutes * 60 * 1000),
+                );
+              }
+            },
+            when
+              ? when - Date.now()
+              : (delayInMinutes || periodInMinutes) * 60 * 1000,
+          ),
         );
       } else {
         throw new Error('Invalid alarm options');

@@ -12,8 +12,18 @@
 import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
+import Session from './session.js';
+
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 const observers = new Set();
+
+export const SYNC_OPTIONS = [
+  'engines',
+  'trackerWheel',
+  'wtmSerpReport',
+  'panel',
+  'revision',
+];
 
 const Options = {
   engines: {
@@ -37,6 +47,8 @@ const Options = {
   },
   paused: [{ id: true, revokeAt: 0 }],
   installDate: '',
+  sync: true,
+  revision: 0,
   [store.connect]: {
     async get() {
       let { options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {} } =
@@ -64,8 +76,17 @@ const Options = {
 
       return options;
     },
-    async set(_, options) {
-      if (options === null) options = {};
+    async set(_, options, keys) {
+      options = options || {};
+
+      if (!keys.includes('revision')) {
+        options = Object.assign({}, options, {
+          revision:
+            options.sync && (await store.resolve(Session)).user
+              ? Date.now()
+              : 0,
+        });
+      }
 
       await chrome.storage.local.set({
         options:
@@ -76,21 +97,20 @@ const Options = {
       });
 
       // Send update message to another contexts (background page / panel / options)
-      try {
-        chrome.runtime.sendMessage({
-          action: UPDATE_OPTIONS_ACTION_NAME,
-          options,
-        });
-      } catch (e) {
-        console.error(
-          `Error while sending update options to other contexts: `,
-          e,
-        );
-      }
+      chrome.runtime
+        .sendMessage({ action: UPDATE_OPTIONS_ACTION_NAME })
+        .catch(() => {});
+
       return options;
     },
-    observe: (_, options) => {
-      observers.forEach((fn) => fn(options));
+    observe: (_, options, prevOptions) => {
+      observers.forEach((fn) => {
+        try {
+          fn(options, prevOptions);
+        } catch (e) {
+          console.error(`Error while observing options: `, e);
+        }
+      });
     },
   },
 };
@@ -167,19 +187,19 @@ async function migrateFromMV2() {
 }
 
 export async function observe(property, fn) {
-  let value;
-  const wrapper = async (options) => {
-    if (value === undefined || options[property] !== value) {
-      const prevValue = value;
-      value = options[property];
-
-      try {
+  let wrapper;
+  if (property) {
+    let value;
+    wrapper = async (options) => {
+      if (value === undefined || options[property] !== value) {
+        const prevValue = value;
+        value = options[property];
         return await fn(value, prevValue);
-      } catch (e) {
-        console.error(`Error while observing options: `, e);
       }
-    }
-  };
+    };
+  } else {
+    wrapper = fn;
+  }
 
   try {
     const options = await store.resolve(Options);
@@ -188,7 +208,7 @@ export async function observe(property, fn) {
     // wait for the callback to be fired
     await wrapper(options);
   } catch (e) {
-    console.error(e);
+    console.error(`Error while observing options: `, e);
   }
 
   observers.add(wrapper);

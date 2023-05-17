@@ -12,8 +12,9 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
-import assets from '../assets/index.js';
+import Session from '/store/session.js';
 
+import assets from '../assets/index.js';
 import Preview from './preview.js';
 
 const PREVIEWS = {
@@ -45,9 +46,10 @@ function toggleNeverConsent({ options }) {
 
 export default {
   options: store(Options),
-  content: ({ options }) => html`
+  session: store(Session),
+  content: ({ options, session }) => html`
     <template layout="column gap:4">
-      ${store.ready(options) &&
+      ${store.ready(options, session) &&
       html`
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="column gap" layout@992px="margin:bottom">
@@ -128,6 +130,35 @@ export default {
               <ui-settings-toggle
                 value="${options.engines.annoyances}"
                 onchange="${toggleNeverConsent}"
+              ></ui-settings-toggle>
+            </div>
+          </div>
+        </section>
+
+        <section layout="column gap:4" layout@768px="gap:5">
+          <div layout="column gap" layout@992px="margin:bottom">
+            <ui-text type="headline-m" mobile-type="headline-s">
+              Synchronization
+            </ui-text>
+            <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </ui-text>
+          </div>
+          <div layout="row items:start gap:2" layout@768px="gap:5">
+            <div
+              layout="column gap:2"
+              layout@768px="row items:center gap:5 grow"
+            >
+              <div layout="column grow gap:0.5">
+                <ui-text type="headline-s">Sync settings</ui-text>
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  Automatically sync settings between your devices.
+                </ui-text>
+              </div>
+              <ui-settings-toggle
+                disabled="${!session.user}"
+                value="${options.sync}"
+                onchange="${html.set(options, 'sync')}"
               ></ui-settings-toggle>
             </div>
           </div>

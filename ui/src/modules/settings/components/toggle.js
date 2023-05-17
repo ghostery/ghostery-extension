@@ -18,6 +18,7 @@ function toggle(host) {
 
 export default {
   value: false,
+  disabled: false,
   render: Object.assign(
     ({ value }) => html`
       <template layout="block">
@@ -34,6 +35,11 @@ export default {
         </button>
       </template>
     `.css`
+      :host([disabled]) {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      
       button {
         background: none;
         appearance: none;
