@@ -211,7 +211,7 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Laissez Ghostery défendre vos convictions en rejetant les fenêtres surgissantes et mouchards, ou faites-le vous-même !"
   },
-	"manifest_name": {
+  "manifest_name": {
     "message": "Ghostery – Bloqueur de publicité protégeant la vie privée"
   },
   "manifest_short_description": {
@@ -232,6 +232,9 @@
   },
   "my_account": {
     "message": "Mon compte"
+  },
+  "navigate_to_a_website_to_see_ghostery_in_action_": {
+    "message": "Navigate to a website to see Ghostery in action."
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -362,12 +365,12 @@
   "trackers_wheel": {
     "message": "Camembert des trackers"
   },
-  "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "Essayez d'ouvrir ce panneau dans un autre onglet du navigateur"
-  },
   "unidentified": {
-    "message": "Inconnu",
+    "message": "Non identifié",
     "description": "Tracker category name"
+  },
+  "urls": {
+    "message": "URLs"
   },
   "website": {
     "message": "Site Web"

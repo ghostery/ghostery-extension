@@ -211,7 +211,7 @@
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghostery가 귀하의 완전한 개인 정보 보호를 지원할 수 있게 하고 모든 팝업 및 추적을 거부하십시오. 또는 직접 실행할 수도 있습니다!"
   },
-	"manifest_name": {
+  "manifest_name": {
     "message": "Ghostery – 개인정보 보호용 광고 차단기"
   },
   "manifest_short_description": {
@@ -232,6 +232,9 @@
   },
   "my_account": {
     "message": "내 계정 "
+  },
+  "navigate_to_a_website_to_see_ghostery_in_action_": {
+    "message": "Navigate to a website to see Ghostery in action."
   },
   "never_consent": {
     "message": "동의하지 않음"
@@ -362,12 +365,12 @@
   "trackers_wheel": {
     "message": "트래커 휠"
   },
-  "try_to_open_this_panel_on_a_different_browser_tab": {
-    "message": "다른 브라우저 탭에서 이 패널 열기 시도"
-  },
   "unidentified": {
-    "message": "알 수 없음 ",
+    "message": "알 수 없음",
     "description": "Tracker category name"
+  },
+  "urls": {
+    "message": "URLs"
   },
   "website": {
     "message": "웹사이트"
