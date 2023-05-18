@@ -115,7 +115,7 @@ async function adblockerOnMessage(msg, sender) {
     return;
   }
 
-  if (pausedDomains.includes(domain)) {
+  if (pausedDomains.includes(domain) || pausedDomains.includes(hostname)) {
     return;
   }
 
@@ -286,7 +286,7 @@ async function injectScriptlets(tabId, url) {
     return;
   }
 
-  if (pausedDomains.includes(domain)) {
+  if (pausedDomains.includes(domain) || pausedDomains.includes(hostname)) {
     return;
   }
 
@@ -332,19 +332,28 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
+      const tabId = details.tabId;
 
       // Update stats
-      if (details.tabId > -1 && request.sourceDomain) {
-        const tabId = details.tabId;
+      if (tabId > -1 && (request.sourceDomain || request.sourceHostname)) {
+        if (request.isMainFrame() && !request.isHttp && !request.isHttps) {
+          return;
+        }
 
         Promise.resolve().then(
           request.isMainFrame()
-            ? () => setupTabStats(tabId, request.sourceDomain)
+            ? () =>
+                setupTabStats(
+                  tabId,
+                  request.sourceDomain || request.sourceHostname,
+                )
             : () => updateTabStats(tabId, [request]),
         );
       }
 
-      if (pausedDomains.includes(request.sourceDomain)) {
+      if (
+        pausedDomains.includes(request.sourceDomain || request.sourceHostname)
+      ) {
         return;
       }
 

@@ -46,5 +46,6 @@ export default class ExtendedRequest extends Request {
     this.requestId = data.requestId;
     this.blocked = false;
     this.sourceDomain = data.sourceDomain;
+    this.sourceHostname = data.sourceHostname;
   }
 }

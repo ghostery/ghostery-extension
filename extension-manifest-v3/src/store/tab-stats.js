@@ -35,7 +35,7 @@ const Stats = {
       });
 
       const storage = await chrome.storage.local.get(['tabStats:v1']);
-      const stats = storage['tabStats:v1']?.entries[tab.id];
+      const stats = tab && storage['tabStats:v1']?.entries[tab.id];
 
       if (stats && tab.url.includes(stats.domain)) {
         return stats;

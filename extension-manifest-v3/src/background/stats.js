@@ -264,6 +264,10 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
+      if (request.isMainFrame() && (!request.isHttp || !request.isHttps)) {
+        return;
+      }
+
       Promise.resolve().then(
         request.isMainFrame()
           ? () =>
