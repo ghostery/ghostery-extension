@@ -80,18 +80,17 @@ const delayMap = new Map();
 function updateIcon(tabId) {
   if (delayMap.has(tabId)) return;
 
-  refreshIcon(tabId);
-
   const timeoutId = setTimeout(
-    async () => {
-      refreshIcon(tabId);
+    () => {
       delayMap.delete(tabId);
+      refreshIcon(tabId);
     },
     // Firefox flickers when updating the icon, so we should expand the throttle
     __PLATFORM__ === 'firefox' ? 1000 : 250,
   );
 
   delayMap.set(tabId, timeoutId);
+  refreshIcon(tabId);
 }
 
 updateIcon.cancel = (tabId) => {
@@ -223,9 +222,9 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getCurrentTab') {
-    chrome.tabs
-      .query({ active: true, currentWindow: true })
-      .then(([tab]) => sendResponse(tab));
+    chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
+      sendResponse(tab);
+    });
     return true;
   }
 
@@ -261,11 +260,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
+      if (details.tabId < 0) return;
+
       const request = Request.fromRequestDetails(details);
 
       Promise.resolve().then(
         request.isMainFrame()
-          ? () => setupTabStats(details.tabId, request.sourceDomain)
+          ? () =>
+              setupTabStats(
+                details.tabId,
+                request.sourceDomain || request.sourceHostname,
+              )
           : () => updateTabStats(details.tabId, [request]),
       );
     },
