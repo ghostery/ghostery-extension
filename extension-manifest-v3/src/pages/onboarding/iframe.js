@@ -11,7 +11,7 @@
 
 import '../../utils/shims.js';
 
-import { define, html, store } from 'hybrids';
+import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/onboarding';
 
 import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
@@ -32,8 +32,7 @@ async function close(host, event) {
   setTimeout(closeIframe, 100);
 }
 
-define({
-  tag: 'gh-onboarding-iframe',
+mount(document.body, {
   stats: store(TabStats),
   content: ({ stats }) => html`
     <ui-onboarding-iframe

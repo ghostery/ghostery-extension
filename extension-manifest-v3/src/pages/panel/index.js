@@ -12,8 +12,10 @@ import './safari-monkey-patch.js';
 import '../../utils/shims.js';
 
 import '@ghostery/ui/panel';
-import { define } from 'hybrids';
+import { define, mount, router, html } from 'hybrids';
+import Home from './views/home.js';
 
+// Define components and views
 define.from(
   import.meta.glob(['./components/*.js', './views/*.js'], {
     eager: true,
@@ -24,6 +26,14 @@ define.from(
     prefix: 'gh-panel',
   },
 );
+
+// Mount the app
+mount(document.body, {
+  stack: router([Home]),
+  content: ({ stack }) => html`
+    <template layout="block width:full:350px">${stack}</template>
+  `,
+});
 
 /* Ping telemetry on panel open */
 chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });

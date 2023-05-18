@@ -10,7 +10,7 @@
  */
 import '../../utils/shims.js';
 
-import { define, html, store } from 'hybrids';
+import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/onboarding';
 
 import Options from '/store/options.js';
@@ -33,14 +33,14 @@ async function updateOptions(host, event) {
   });
 }
 
-define({
-  tag: 'gh-onboarding',
-  content: () =>
-    html`<ui-onboarding
+mount(document.body, {
+  content: () => html`
+    <ui-onboarding
       platform="${__PLATFORM__}"
       onsuccess="${updateOptions}"
       onskip="${updateOptions}"
-    ></ui-onboarding>`,
+    ></ui-onboarding>
+  `,
 });
 
 store.resolve(Options).then(({ installDate, onboarding }) => {

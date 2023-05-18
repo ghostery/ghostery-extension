@@ -10,7 +10,7 @@
  */
 import '../../utils/shims.js';
 
-import { define, html, store } from 'hybrids';
+import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/autoconsent';
 import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
 
@@ -74,8 +74,7 @@ async function disable(_, event) {
   });
 }
 
-define({
-  tag: 'gh-autoconsent',
+mount(document.body, {
   stats: store(TabStats),
   content: ({ stats }) =>
     html`
