@@ -30,19 +30,18 @@ const Stats = {
 
   [store.connect]: {
     async get() {
-      const currentTab =
-        chrome.tabs &&
-        (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
-
-      const tabId =
-        currentTab?.id ||
-        (await chrome.runtime.sendMessage({
-          action: 'getCurrentTabId',
-        }));
+      const tab = await chrome.runtime.sendMessage({
+        action: 'getCurrentTab',
+      });
 
       const storage = await chrome.storage.local.get(['tabStats:v1']);
+      const stats = storage['tabStats:v1']?.entries[tab.id];
 
-      return storage['tabStats:v1']?.entries[tabId];
+      if (stats && tab.url.includes(stats.domain)) {
+        return stats;
+      } else {
+        throw new Error('Tab stats not found');
+      }
     },
     observe:
       __PLATFORM__ === 'safari' &&
