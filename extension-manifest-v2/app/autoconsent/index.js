@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { mount, html } from 'hybrids';
 
 import '@ghostery/ui/autoconsent';
 import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
@@ -81,8 +81,7 @@ async function getCategories() {
 	return result;
 }
 
-export default define({
-	tag: 'gh-autoconsent',
+mount(document.body, {
 	categories: {
 		value: undefined,
 		connect: (host, key) => {
@@ -99,13 +98,11 @@ export default define({
 		},
 	},
 	content: ({ categories }) => html`
-		<template layout="block">
-			<ui-autoconsent
-				categories="${categories}"
-				onenable="${enable}"
-				ondisable="${disable}"
-				onclose="${close}"
-			></ui-autoconsent>
-		</template>
+		<ui-autoconsent
+			categories="${categories}"
+			onenable="${enable}"
+			ondisable="${disable}"
+			onclose="${close}"
+		></ui-autoconsent>
 	`,
 });

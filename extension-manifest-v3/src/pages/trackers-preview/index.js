@@ -11,7 +11,7 @@
 import '../../utils/shims.js';
 
 import '@ghostery/ui/trackers-preview';
-import { define, html } from 'hybrids';
+import { mount, html } from 'hybrids';
 import {
   getStats,
   close,
@@ -24,17 +24,15 @@ const stats = getStats(domain);
 
 updateIframeHeight();
 
-define({
-  tag: 'gh-trackers-preview',
-  content: () =>
-    html`
-      <template layout="block">
-        <ui-trackers-preview
-          stats="${stats}"
-          domain="${domain}"
-          onclose="${close}"
-          ondisable="${disable}"
-        ></ui-trackers-preview>
-      </template>
-    `,
+mount(document.body, {
+  content: () => html`
+    <template layout="block">
+      <ui-trackers-preview
+        stats="${stats}"
+        domain="${domain}"
+        onclose="${close}"
+        ondisable="${disable}"
+      ></ui-trackers-preview>
+    </template>
+  `,
 });

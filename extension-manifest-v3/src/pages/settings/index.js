@@ -11,9 +11,10 @@
 import '../../utils/shims.js';
 
 import '@ghostery/ui/settings';
-import { define, store } from 'hybrids';
+import { define, mount, store } from 'hybrids';
 
 import Options from '/store/options.js';
+import Settings from './settings.js';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted
@@ -27,6 +28,8 @@ if (terms) {
       prefix: 'gh-settings',
     },
   );
+
+  mount(document.body, Settings);
 } else {
   window.location.replace(
     chrome.runtime.getURL('/pages/onboarding/index.html'),

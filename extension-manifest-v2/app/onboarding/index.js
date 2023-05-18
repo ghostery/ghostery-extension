@@ -1,4 +1,4 @@
-import { define, html, store } from 'hybrids';
+import { mount, html, store } from 'hybrids';
 import { getBrowserInfo } from '@ghostery/libs';
 
 import '@ghostery/ui/onboarding';
@@ -25,8 +25,7 @@ const BrowserInfo = {
 	[store.connect]: getBrowserInfo,
 };
 
-define({
-	tag: 'gh-onboarding',
+mount(document.body, {
 	browserInfo: store(BrowserInfo),
 	content: ({ browserInfo }) => (
 		store.pending(browserInfo)

@@ -14,10 +14,10 @@ import { html, router, store } from 'hybrids';
 import Options from '/store/options.js';
 import Session from '/store/session.js';
 
-import Privacy from './privacy.js';
-import Websites from './websites.js';
-import Whotracksme from './whotracksme.js';
-import Preview from './preview.js';
+import Privacy from './views/privacy.js';
+import Websites from './views/websites.js';
+import Whotracksme from './views/whotracksme.js';
+import Preview from './views/preview.js';
 
 const ACCOUNT_URL = 'https://account.ghostery.com/';
 const SIGNON_URL = 'https://signon.ghostery.com/';
