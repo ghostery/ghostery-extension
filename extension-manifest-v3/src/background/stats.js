@@ -222,9 +222,11 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === 'getCurrentTabId') {
-    sendResponse(sender.tab?.id);
-    return false;
+  if (msg.action === 'getCurrentTab') {
+    chrome.tabs
+      .query({ active: true, currentWindow: true })
+      .then(([tab]) => sendResponse(tab));
+    return true;
   }
 
   if (
