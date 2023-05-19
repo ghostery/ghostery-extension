@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
 import Session from './session.js';
+import { getUserOptions, setUserOptions } from '/utils/api.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 const observers = new Set();
@@ -20,6 +21,7 @@ const observers = new Set();
 export const SYNC_OPTIONS = [
   'engines',
   'trackerWheel',
+  'trackerCount',
   'wtmSerpReport',
   'panel',
   'revision',
@@ -54,38 +56,58 @@ const Options = {
       let { options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {} } =
         await chrome.storage.local.get(['options']);
 
-      // Migrate `trackerWheelDisabled` to `trackerWheel`
-      // INFO: `trackerWheel` option introduced in v9.7.0
-      if (options.trackerWheelDisabled !== undefined) {
-        options.trackerWheel = !options.trackerWheelDisabled;
-      }
-
       // Migrate `dnrRules` to `engines`
-      // INFO: `engines` option introduced in v10.1.0
+      // INFO: `engines` option introduced in v10.0.1
       if (options.dnrRules) {
         options.engines = options.dnrRules;
       }
 
-      // Set default value for keys, which type does no match the current one
-      Object.entries(options).forEach(([key, value]) => {
-        if (typeof value !== typeof Options[key]) {
-          delete options[key];
-          console.warn(`Saved options "${key}" key has wrong type, deleted`);
+      // Fetch options from the server for logged in users
+      if (options.terms && options.sync) {
+        const serverOptions = await getUserOptions();
+        if (serverOptions && serverOptions.revision > options.revision) {
+          for (const key of SYNC_OPTIONS) {
+            options[key] = serverOptions[key];
+          }
+          this.set(null, options, SYNC_OPTIONS.concat(['revision']));
         }
-      });
+      }
 
       return options;
     },
-    async set(_, options, keys) {
-      options = options || {};
-
+    async set(_, options = {}, keys) {
       if (!keys.includes('revision')) {
         options = Object.assign({}, options, {
           revision:
-            options.sync && (await store.resolve(Session)).user
+            options.terms && options.sync && (await store.resolve(Session)).user
               ? Date.now()
               : 0,
         });
+
+        // Sync options for logged in users
+        if (options.terms && options.sync) {
+          const serverOptions = await getUserOptions();
+          if (serverOptions) {
+            // Merge local options with newer server options
+            // but only not currently set keys
+            if (serverOptions.revision) {
+              for (const key of SYNC_OPTIONS) {
+                if (key === 'revision' || keys.includes(key)) continue;
+                options[key] = hasOwnProperty.call(serverOptions, key)
+                  ? serverOptions[key]
+                  : options[key];
+              }
+            }
+
+            // Send only sync options to the server
+            await setUserOptions(
+              SYNC_OPTIONS.reduce((acc, key) => {
+                acc[key] = options[key];
+                return acc;
+              }, {}),
+            );
+          }
+        }
       }
 
       await chrome.storage.local.set({
@@ -221,11 +243,7 @@ export async function observe(property, fn) {
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
-    const options = store.get(Options);
-
-    if (!store.pending(options)) {
-      store.clear(options, false);
-      store.get(Options);
-    }
+    store.clear(Options, false);
+    store.get(Options);
   }
 });

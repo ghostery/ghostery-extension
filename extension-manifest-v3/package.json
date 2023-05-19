@@ -48,7 +48,6 @@
     "tldts-experimental": "^5.7.66"
   },
   "webExt": {
-    "noReload": true,
     "sourceDir": "./dist/"
   }
 }

@@ -11,7 +11,7 @@
 
 import jwtDecode from 'jwt-decode';
 
-const DOMAIN = 'ghostery.com';
+const DOMAIN = 'ghosterystage.com';
 const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
 const ACCOUNT_URL = `https://accountapi.${DOMAIN}/api/v2.1.0`;
 
@@ -79,20 +79,15 @@ export async function session() {
   return jwtDecode(accessToken);
 }
 
-export async function getAccountOptions() {
+export async function getUserOptions() {
   try {
     const user = await session();
     if (!user) return null;
-  } catch (e) {
-    return null;
-  }
 
-  const userId = await getCookie('user_id');
-  const accessToken = await getCookie('access_token');
-  const csrfToken = await getCookie('csrf_token');
-
-  try {
-    const data = await fetch(`${ACCOUNT_URL}/settings/${userId}`, {
+    const userId = await getCookie('user_id');
+    const accessToken = await getCookie('access_token');
+    const csrfToken = await getCookie('csrf_token');
+    const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
       headers: {
         'Content-Type': 'application/vnd.api+json',
         Authorization: `Bearer ${accessToken}`,
@@ -103,24 +98,21 @@ export async function getAccountOptions() {
 
     return (await data.json()).data.attributes.options || {};
   } catch (e) {
-    return {};
+    console.error('Failed to get user options from the server:', e);
+    return null;
   }
 }
 
-export async function setAccountOptions(options) {
+export async function setUserOptions(options) {
   try {
     const user = await session();
     if (!user) return null;
-  } catch (e) {
-    return null;
-  }
 
-  const userId = await getCookie('user_id');
-  const accessToken = await getCookie('access_token');
-  const csrfToken = await getCookie('csrf_token');
+    const userId = await getCookie('user_id');
+    const accessToken = await getCookie('access_token');
+    const csrfToken = await getCookie('csrf_token');
 
-  try {
-    await fetch(`${ACCOUNT_URL}/settings/${userId}`, {
+    return await fetch(`${ACCOUNT_URL}/options/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/vnd.api+json',
@@ -130,13 +122,14 @@ export async function setAccountOptions(options) {
       credentials: 'omit',
       body: JSON.stringify({
         data: {
-          type: 'settings',
+          type: 'options',
           id: userId,
           attributes: { options },
         },
       }),
-    });
+    }).then((res) => res.json());
   } catch (e) {
-    console.error('Failed to update user options to server:', e);
+    console.error('Failed to update user options to the server:', e);
+    return null;
   }
 }

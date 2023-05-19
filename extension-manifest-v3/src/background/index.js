@@ -20,7 +20,7 @@ import './trackers-preview.js';
 
 import './alarms.js';
 import './dnr.js';
-import './sync.js';
+import './session.js';
 import './helpers.js';
 
 import './telemetry.js';

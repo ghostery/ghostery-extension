@@ -11,7 +11,7 @@
 import { store } from 'hybrids';
 
 import Options, { SYNC_OPTIONS } from '/store/options.js';
-import { getAccountOptions, setAccountOptions } from '/utils/api.js';
+import { getUserOptions, setUserOptions } from '/utils/api.js';
 
 let revision;
 export async function syncOptions(options) {
@@ -19,7 +19,7 @@ export async function syncOptions(options) {
 
   if (revision === options.revision) return;
 
-  const serverOptions = await getAccountOptions();
+  const serverOptions = await getUserOptions();
 
   if (
     // Not logged in user
@@ -37,7 +37,7 @@ export async function syncOptions(options) {
     } else {
       revision = options.revision;
 
-      await setAccountOptions(
+      await setUserOptions(
         SYNC_OPTIONS.reduce((acc, key) => {
           acc[key] = options[key];
           return acc;
