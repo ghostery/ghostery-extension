@@ -96,7 +96,7 @@ class Tracker extends React.Component {
 
 	static _renderCommonFingerprintStat(count) { return Tracker._renderCommonStat(count, 'fingerprint'); }
 
-	static _renderCommonAdStat(count) { return Tracker._renderCommonStat(count, 'ad'); }
+	static _renderCommonAdStat(count) { return Tracker._renderCommonStat(count, 'request'); }
 
 	static _renderCommonStat(count, type) {
 		const exactlyOne = count === 1;
@@ -366,26 +366,6 @@ class Tracker extends React.Component {
 							{tracker.name}
 						</div>
 						{!tracker.whitelisted && this._renderCommonStatsContainer()}
-					</div>
-					<div className="columns shrink align-self-justify collapse-right">
-						{setup_complete && (
-							<React.Fragment>
-								{!isUnidentified && renderKnownTrackerButtons(
-									tracker.ss_allowed,
-									tracker.ss_blocked,
-									this.clickTrackerTrust,
-									this.clickTrackerRestrict,
-									this.clickTrackerStatus,
-								)}
-								{isUnidentified && renderUnidentifiedTrackerButtons(
-									this.handleCommonTrackerWhitelist,
-									tracker.whitelisted,
-									tracker.siteRestricted,
-									tracker.type,
-									this.context
-								)}
-							</React.Fragment>
-						)}
 					</div>
 				</div>
 				{showMoreInfo && (

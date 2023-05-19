@@ -263,20 +263,20 @@
     "message": "Blocked"
   },
   "blocking_category_tracker": {
-    "message": "Tracker"
+    "message": "Detected"
   },
   "blocking_category_tracker_found": {
     "message": "Found"
   },
   "blocking_category_trackers": {
-    "message": "Trackers"
+    "message": "Detected"
   },
   "blocking_category_whitelisted": {
     "description": "as in '5 (trackers) TRUSTED'",
     "message": "Trusted"
   },
   "blocking_trackers": {
-    "message": "Trackers"
+    "message": "Domains"
   },
   "blocking_unblock_all": {
     "message": "Unblock All"
@@ -1334,6 +1334,12 @@
   "refresh_and_try_again": {
     "message": "Refresh page and try again"
   },
+	"request": {
+		"message": "Request"
+	},
+	"requests": {
+		"message": "Requests"
+	},
   "requests_modified": {
     "message": "Requests Modified:"
   },
@@ -1851,7 +1857,7 @@
     "message": "Trackers"
   },
   "trackers_blocked": {
-    "message": "Trackers Blocked:"
+    "message": "Requests Blocked:"
   },
   "trackers_detected": {
     "message": "Detected"

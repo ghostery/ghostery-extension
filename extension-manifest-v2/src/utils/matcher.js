@@ -82,7 +82,9 @@ export function isBug(details) {
 
 	const request = fromWebRequestDetails(details);
 
-	const matches = engine.getPatternMetadata(request);
+	const matches = engine.getPatternMetadata(request, {
+		getDomainMetadata: true,
+	});
 
 	if (matches.length === 0) {
 		return false;

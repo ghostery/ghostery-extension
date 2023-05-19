@@ -663,8 +663,8 @@ class PanelData {
 	 * _buildCategories helper
 	 * @return	{boolean}	is the tracker blocked in one of the possible ways?
 	 */
-	static _addsUpToBlocked({ blocked }) {
-		return !!blocked;
+	static _addsUpToBlocked(tracker) {
+		return !!tracker.blocked || tracker.commonAdCount > 0;
 	}
 
 	/**
@@ -712,13 +712,12 @@ class PanelData {
 			blocked: actually_blocked,
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
-
 		return {
 			id,
 			name,
 			description: '',
 			actually_blocked,
-			blocked,
+			blocked: blocked || commonAdCount > 0,
 			ss_allowed,
 			ss_blocked,
 			shouldShow: true, // used for filtering tracker list

@@ -14,6 +14,7 @@
 import bugDb from './BugDb';
 import compDb from './CompatibilityDb';
 import tabInfo from './TabInfo';
+import { getCommonData } from '../utils/commonModulesData';
 
 const LATENCY_ISSUE_THRESHOLD = 1000;
 
@@ -77,6 +78,20 @@ class FoundBugs {
 	constructor() {
 		this._foundBugs = {};
 		this._foundApps = {};
+	}
+
+	/**
+	 * Gets tracker count the traditional way, from BugDb
+	 * @param  {number} tabId  the Tab Id
+	 * @param  {string} tabUrl the Tab URL
+	 * @return {Object}        the number of total trackers and alerted trackers in an Object
+	 */
+	getDetectedCount(tabId, tabUrl) {
+		const apps = this.getAppsCountByIssues(tabId, tabUrl);
+		const adBlockingTrackers = getCommonData(tabId, tabUrl).unidentifiedTrackers;
+		const antiTrackingTrackers = getCommonData(tabId, tabUrl, true).unidentifiedTrackers;
+		const uniqueUnidentifiedTrackers = [...new Set([...adBlockingTrackers, ...antiTrackingTrackers].map(t => t.name))];
+		return (apps.all + uniqueUnidentifiedTrackers.length).toString();
 	}
 
 	/**

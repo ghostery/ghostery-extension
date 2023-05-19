@@ -80,9 +80,9 @@ export class BugDb {
 		patterns.forEach((pattern) => {
 			const id = getPatternId(pattern);
 
-			if (pattern.filters.length === 0) {
-				return;
-			}
+			// if (pattern.filters.length === 0) {
+			// 	return;
+			// }
 
 			categoriesMeta[pattern.category].trackers.push({
 				id,
@@ -155,7 +155,8 @@ export class BugDb {
 			num_total: categoriesMeta[category].trackers.length,
 			num_blocked: categoriesMeta[category].blockedTrackersCount,
 			trackers: categoriesMeta[category].trackers,
-		})).filter(category => category.num_total > 0);
+		}));
+		// .filter(category => category.num_total > 0);
 
 		this.conf.bugs = this.db;
 		this.loadingPromiseResolver();

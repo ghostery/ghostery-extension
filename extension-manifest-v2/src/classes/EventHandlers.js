@@ -301,7 +301,7 @@ class EventHandlers {
 		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
 		if (!block && [BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED].indexOf(reason) > -1) {
 			// The way to pass this flag to Common handlers
-			eventMutable.ghosteryWhitelisted = true;
+			// eventMutable.ghosteryWhitelisted = true;
 		}
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.
 		// TODO can URLs repeat within a redirect chain? what are the cases of repeating URLs (trackers only, ...)?
@@ -333,9 +333,9 @@ class EventHandlers {
 			});
 		}, 1);
 
-		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
-		}
+		// if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
+		// 	return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
+		// }
 
 		return { cancel: false };
 	}

@@ -147,12 +147,10 @@ class BrowserButton {
 			return;
 		}
 
-		const { appsCount, appsAlertCount } = BrowserButton._getTrackerCount(tabId);
-		const adBlockingCount = getCommonData(tabId, tabHostUrl).trackerCount;
-		const antiTrackingCount = getCommonData(tabId, tabHostUrl, true).trackerCount;
+		trackerCount = foundBugs.getDetectedCount(tabId, tabHostUrl);
 
+		const { appsAlertCount } = foundBugs.getAppsCountByIssues(tabId, tabHostUrl);
 		alert = (appsAlertCount > 0);
-		trackerCount = (appsCount + antiTrackingCount + adBlockingCount).toString();
 
 		// gray-out the icon when blocking has been disabled for whatever reason
 		if (trackerCount === '') {
@@ -160,20 +158,6 @@ class BrowserButton {
 		} else {
 			this._setIcon(!globals.SESSION.paused_blocking && Policy.getSitePolicy(tab.url) !== globals.WHITELISTED, tabId, trackerCount, alert);
 		}
-	}
-
-	/**
-	 * Gets tracker count the traditional way, from BugDb
-	 * @param  {number} tabId  the Tab Id
-	 * @param  {string} tabUrl the Tab URL
-	 * @return {Object}        the number of total trackers and alerted trackers in an Object
-	 */
-	static _getTrackerCount(tabId, tabUrl) {
-		const apps = foundBugs.getAppsCountByIssues(tabId, tabUrl);
-		return {
-			appsCount: apps.all,
-			appsAlertCount: apps.total,
-		};
 	}
 }
 

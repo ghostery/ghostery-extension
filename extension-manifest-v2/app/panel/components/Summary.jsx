@@ -347,45 +347,21 @@ class Summary extends React.Component {
 			enable_ad_block,
 		} = this.props;
 
-		return (enable_ad_block && adBlock && adBlock.trackerCount) || 0;
+		return (enable_ad_block && adBlock && adBlock.totalUnsafeCount) || 0;
 	}
 
-	_antiTrackUnsafe() {
+	_requestsModifiedCount() {
 		const {
 			antiTracking,
 			enable_anti_tracking,
 		} = this.props;
-
-		return (enable_anti_tracking && antiTracking && antiTracking.trackerCount) || 0;
-	}
-
-	_requestsModifiedCount() {
-		return this._antiTrackUnsafe() + this._adBlockBlocked();
+		return (enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount) || 0;
 	}
 
 	_totalTrackersFound() {
-		const { trackerCounts } = this.props;
-
-		return (trackerCounts.allowed + trackerCounts.blocked + this._requestsModifiedCount()) || 0;
-	}
-
-	_totalTrackersBlockedCount() {
-		const {
-			paused_blocking,
-			sitePolicy,
-			trackerCounts
-		} = this.props;
-
-		let totalTrackersBlockedCount;
-		if (paused_blocking || sitePolicy === WHITELISTED) {
-			totalTrackersBlockedCount = 0;
-		} else if (sitePolicy === BLACKLISTED) {
-			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
-		} else {
-			totalTrackersBlockedCount = trackerCounts.blocked || 0;
-		}
-
-		return totalTrackersBlockedCount;
+		const { categories, antiTracking, adBlock } = this.props;
+		const uniqueUnidentifiedTrackers = [...new Set([...antiTracking.unidentifiedTrackers, ...adBlock.unidentifiedTrackers].map(t => t.name))];
+		return uniqueUnidentifiedTrackers.length + categories.reduce((sum, category) => sum + category.trackers.length, 0);
 	}
 
 	_isCondensed() {
@@ -491,7 +467,7 @@ class Summary extends React.Component {
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
 			clickable: is_expert,
 		});
-		const totalTrackersBlockedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
+		const totalTrackersBlockedClassNames = ClassNames('SummaryPageStat', 'total-requests-modified', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
@@ -503,7 +479,7 @@ class Summary extends React.Component {
 						{' '}
 					</span>
 					<span className="SummaryPageStat__value">
-						{this._totalTrackersBlockedCount()}
+						{this._adBlockBlocked()}
 					</span>
 				</div>
 			</div>
