@@ -11,7 +11,7 @@
 
 import jwtDecode from 'jwt-decode';
 
-const DOMAIN = 'ghosterystage.com';
+const DOMAIN = 'ghostery.com';
 const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
 const ACCOUNT_URL = `https://accountapi.${DOMAIN}/api/v2.1.0`;
 

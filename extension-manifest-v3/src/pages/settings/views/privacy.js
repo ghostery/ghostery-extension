@@ -135,35 +135,6 @@ export default {
           </div>
         </section>
 
-        <section layout="column gap:4" layout@768px="gap:5">
-          <div layout="column gap" layout@992px="margin:bottom">
-            <ui-text type="headline-m" mobile-type="headline-s">
-              Synchronization
-            </ui-text>
-            <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </ui-text>
-          </div>
-          <div layout="row items:start gap:2" layout@768px="gap:5">
-            <div
-              layout="column gap:2"
-              layout@768px="row items:center gap:5 grow"
-            >
-              <div layout="column grow gap:0.5">
-                <ui-text type="headline-s">Sync settings</ui-text>
-                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  Automatically sync settings between your devices.
-                </ui-text>
-              </div>
-              <ui-settings-toggle
-                disabled="${!session.user}"
-                value="${options.sync}"
-                onchange="${html.set(options, 'sync')}"
-              ></ui-settings-toggle>
-            </div>
-          </div>
-        </section>
-
         <gh-settings-devtools></gh-settings-devtools>
       `}
     </template>

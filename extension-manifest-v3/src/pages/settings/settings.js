@@ -17,15 +17,13 @@ import Session from '/store/session.js';
 import Privacy from './views/privacy.js';
 import Websites from './views/websites.js';
 import Whotracksme from './views/whotracksme.js';
+import Account from './views/account.js';
 import Preview from './views/preview.js';
 
-const ACCOUNT_URL = 'https://account.ghostery.com/';
-const SIGNON_URL = 'https://signon.ghostery.com/';
-
 export default {
-  stack: router([Privacy, Websites, Whotracksme, Preview]),
+  stack: router([Privacy, Websites, Whotracksme, Account, Preview]),
   session: store(Session),
-  content: ({ stack, session }) => html`
+  content: ({ stack }) => html`
     <template layout="contents">
       <ui-settings-layout>
         <a
@@ -54,34 +52,15 @@ export default {
           <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
           WhoTracks.Me
         </a>
-        ${store.ready(session) &&
-        html`
-          <a
-            class="bottom"
-            href="${session.user ? ACCOUNT_URL : SIGNON_URL}"
-            target="_blank"
-            slot="nav"
-          >
-            ${session.user
-              ? html`
-                  <ui-icon name="user" color="nav"></ui-icon>
-                  <span layout@992px="hidden">My Account</span>
-                  <div
-                    layout="hidden"
-                    layout@992px="column margin:left:2px width::0"
-                  >
-                    <div>${session.name}</div>
-                    <ui-text type="body-m" color="gray-600" ellipsis>
-                      ${session.email}
-                    </ui-text>
-                  </div>
-                `
-              : html`
-                  <ui-icon name="user" color="nav"></ui-icon>
-                  Sign in
-                `}
-          </a>
-        `}
+        <a
+          class="bottom"
+          href="${router.url(Account, { scrollToTop: true })}"
+          class="${{ active: router.active(Account) }}"
+          slot="nav"
+        >
+          <ui-icon name="user" color="nav" layout="size:3"></ui-icon>
+          My Account
+        </a>
         ${stack}
       </ui-settings-layout>
     </template>
