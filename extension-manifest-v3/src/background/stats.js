@@ -230,24 +230,27 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
   if (
     __PLATFORM__ === 'safari' &&
-    sender.tab?.id &&
-    sender.frameId !== undefined
+    sender.url &&
+    sender.frameId !== undefined &&
+    sender.tab?.id
   ) {
-    // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
-    // with the correct tabId (sometimes it is correct, sometimes it is 0).
-    // Thus, let the content_script fire it.
-    if (sender.url && msg.action === 'onCommitted') {
-      setupTabStats(sender.tab.id, parse(sender.url).domain);
-      return false;
-    }
-
-    if (msg.action === 'updateTabStats') {
-      return updateTabStats(
-        sender.tab.id,
-        msg.urls.map((url) =>
-          Request.fromRawDetails({ url, sourceUrl: sender.url }),
-        ),
-      );
+    switch (msg.action) {
+      // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
+      // with the correct tabId (sometimes it is correct, sometimes it is 0).
+      // Thus, let the content_script fire it.
+      case 'onCommitted': {
+        const { domain, hostname } = parse(sender.url);
+        setupTabStats(sender.tab.id, domain || hostname);
+        break;
+      }
+      case 'updateTabStats':
+        updateTabStats(
+          sender.tab.id,
+          msg.urls.map((url) =>
+            Request.fromRawDetails({ url, sourceUrl: sender.url }),
+          ),
+        );
+        break;
     }
   }
 
@@ -264,7 +267,7 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
-      if (request.isMainFrame() && (!request.isHttp || !request.isHttps)) {
+      if (request.isMainFrame() && !request.isHttp && !request.isHttps) {
         return;
       }
 
