@@ -58,8 +58,8 @@
 		465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E359B27567A000032B8D2 /* StoreConstants.swift */; };
 		468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42922701F84A008B5792 /* LaunchScreen.storyboard */; };
 		468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E429F2701F84A008B5792 /* GhosteryApp.swift */; };
-		468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		468E42BF2701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C02701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C12701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
@@ -136,26 +136,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		468E42CE2701F84A008B5792 /* Embed App Extensions */ = {
+		468E42CE2701F84A008B5792 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */,
+				468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		468E42D52701F84A008B5792 /* Embed App Extensions */ = {
+		468E42D52701F84A008B5792 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed App Extensions */,
+				468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -209,7 +209,6 @@
 		B430752327EB3AEC0042D537 /* ArrowRight.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArrowRight.svg; sourceTree = "<group>"; };
 		B430752427EB3AEC0042D537 /* GreenCheck.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenCheck.svg; sourceTree = "<group>"; };
 		B430752527EB3AEC0042D537 /* GlowingArch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GlowingArch.svg; sourceTree = "<group>"; };
-		B443D43528EEDB4200880C93 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B44AE7B227D21E7D00F19705 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
 		B456D51827E094E30038964E /* Safari.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Safari.svg; sourceTree = "<group>"; };
 		B456D51927E094E30038964E /* Settings.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.svg; sourceTree = "<group>"; };
@@ -226,6 +225,7 @@
 		B479A073299266F300A25D8F /* utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = utils; path = ../../dist/utils; sourceTree = "<group>"; };
 		B4D49C6F28045EFC00277CCA /* store */ = {isa = PBXFileReference; lastKnownFileType = folder; name = store; path = ../../dist/store; sourceTree = "<group>"; };
 		B4DA09B5283CEBAE0052F343 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4EBAD7E2A1DFA6C006A7D73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4FFD50127F73B820041049C /* rule_resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rule_resources; path = ../../dist/rule_resources; sourceTree = "<group>"; };
 		CEC6DBC9292BE699001E9642 /* virtual */ = {isa = PBXFileReference; lastKnownFileType = folder; name = virtual; path = ../../dist/virtual; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -486,7 +486,7 @@
 				468E42872701F84A008B5792 /* Sources */,
 				468E42882701F84A008B5792 /* Frameworks */,
 				468E42892701F84A008B5792 /* Resources */,
-				468E42CE2701F84A008B5792 /* Embed App Extensions */,
+				468E42CE2701F84A008B5792 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -508,7 +508,7 @@
 				468E42992701F84A008B5792 /* Sources */,
 				468E429A2701F84A008B5792 /* Frameworks */,
 				468E429B2701F84A008B5792 /* Resources */,
-				468E42D52701F84A008B5792 /* Embed App Extensions */,
+				468E42D52701F84A008B5792 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -565,7 +565,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					468E428A2701F84A008B5792 = {
 						CreatedOnToolsVersion = 13.0;
@@ -587,6 +587,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 468E42772701F848008B5792;
 			packageReferences = (
@@ -786,7 +787,7 @@
 		468E42922701F84A008B5792 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B443D43528EEDB4200880C93 /* en */,
+				B4EBAD7E2A1DFA6C006A7D73 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
