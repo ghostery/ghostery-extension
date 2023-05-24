@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { FiltersEngine } from '@cliqz/adblocker';
-import { sortCategories } from '@ghostery/ui/categories';
+import { sortCategories, getCategoryColor } from '@ghostery/ui/categories';
 import globals from './Globals';
 
 import conf from './Conf';
@@ -56,7 +56,7 @@ export class BugDb {
 
 		const categories = this.engine.metadata.getCategories()
 			.map(({ key: category }) => category)
-			.sort(sortCategories);
+			.sort(sortCategories());
 
 		const patterns = this.engine.metadata.getPatterns();
 
@@ -69,7 +69,6 @@ export class BugDb {
 			this.conf.new_app_ids = new_app_ids;
 			this.conf.known_app_ids = newKnownAppIds;
 		}
-
 		const categoriesMeta = categories.reduce((all, category) => ({
 			...all,
 			[category]: {
@@ -148,6 +147,7 @@ export class BugDb {
 
 		this.db.categories = categories.map(category => ({
 			id: category,
+			color: getCategoryColor(category),
 			name: t(`category_${category}`),
 			description: t(`category_${category}_desc`),
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.

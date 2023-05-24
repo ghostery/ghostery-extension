@@ -249,7 +249,7 @@ class Category extends React.Component {
 		} else {
 			trackersBlockedCount = category.num_blocked || 0;
 		}
-
+console.warn(category)
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
 				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}${isUnidentified ? ' anti-tracking-header' : ''}`}>
@@ -258,7 +258,10 @@ class Category extends React.Component {
 					)}
 					<div className="row align-middle">
 						<div className="columns shrink align-self-top">
-							<img className="cat-image" src={`/app/images/panel/${category.img_name}.svg`} />
+							<div className="cat-image-wrapper">
+								<div className="cat-image-background" style={{ backgroundColor: category.color }} />
+								<img className="cat-image" src={`/app/images/panel/categories/${category.img_name}.svg`} />
+							</div>
 						</div>
 						<div className="columns collapse-left collapse-right align-self-top">
 							<div className={`cat-name ${globalBlocking ? 'has-tooltip' : ''}`} onClick={this.toggleCategoryTrackers}>

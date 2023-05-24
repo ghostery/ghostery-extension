@@ -10,13 +10,13 @@
  */
 
 const colors = {
-  advertising: ' #CB55CD',
+  advertising: '#CB55CD',
   site_analytics: '#87D7EF',
   consent: '#556FCD',
   essential: '#FC9734',
   hosting: '#8459A5',
   customer_interaction: '#EF671E',
-  unidentified: '#E8E8E8',
+  unidentified: '#818181',
   audio_video_player: '#4ECB4E',
   cdn: '#4ECBA1',
   comments: '#4EA1CB',

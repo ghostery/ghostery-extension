@@ -1,5 +1,6 @@
 import { BugDb } from '../../src/classes/BugDb';
 import globals from '../../src/classes/Globals';
+import { getCategoryColor } from '../../../ui/src/utils/categories';
 
 const { CATEGORIES_BLOCKED_BY_DEFAULT } = globals;
 
@@ -80,6 +81,7 @@ describe('src/classes/BugDb.js', () => {
 						description: 'category_advertising_desc',
 						id: 'advertising',
 						img_name: 'adv',
+						color: getCategoryColor('advertising'),
 						name: 'category_advertising',
 						num_blocked: 0,
 						num_total: 1,
@@ -107,6 +109,7 @@ describe('src/classes/BugDb.js', () => {
 						description: 'category_advertising_desc',
 						id: 'advertising',
 						img_name: 'adv',
+						color: getCategoryColor('advertising'),
 						name: 'category_advertising',
 						num_blocked: 1,
 						num_total: 1,
@@ -209,6 +212,7 @@ describe('src/classes/BugDb.js', () => {
 					description: 'category_xxx_desc',
 					id: 'xxx',
 					img_name: 'xxx',
+					color: getCategoryColor('xxx'),
 					name: 'category_xxx',
 					num_blocked: 0,
 					num_total: 1,
@@ -248,6 +252,7 @@ describe('src/classes/BugDb.js', () => {
 					description: 'category_xxx_desc',
 					id: 'xxx',
 					img_name: 'xxx',
+					color: getCategoryColor('xxx'),
 					name: 'category_xxx',
 					num_blocked: 1,
 					num_total: 1,
@@ -275,6 +280,7 @@ describe('src/classes/BugDb.js', () => {
 					description: 'category_advertising_desc',
 					id: 'advertising',
 					img_name: 'adv',
+					color: getCategoryColor('advertising'),
 					name: 'category_advertising',
 					num_blocked: 2,
 					num_total: 2,
@@ -299,6 +305,7 @@ describe('src/classes/BugDb.js', () => {
 					description: 'category_essential_desc',
 					id: 'essential',
 					img_name: 'essential',
+					color: getCategoryColor('essential'),
 					name: 'category_essential',
 					num_blocked: 0,
 					num_total: 1,

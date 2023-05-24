@@ -218,7 +218,10 @@ class BlockingCategory extends React.Component {
 		return (
 			<div className={categoryClassNames}>
 				<div className="BlockingCategory__details flex-container" onClick={() => { toggleCategoryOpen(index); }}>
-					<img className="BlockingCategory__image" src={categoryImage} />
+					<div className="cat-image-wrapper">
+						<div className="cat-image-background" style={{ backgroundColor: category.color }} />
+						<img className="BlockingCategory__image" src={categoryImage} />
+					</div>
 					<div className="flex-child-grow">
 						<h2 className="BlockingCategory__name">{name}</h2>
 						<div>

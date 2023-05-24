@@ -124,10 +124,22 @@ exports[`app/panel-android/components/content/BlockingTab.jsx Snapshot tests wit
         className="BlockingCategory__details flex-container"
         onClick={[Function]}
       >
-        <img
-          className="BlockingCategory__image"
-          src="/app/images/panel-android/categories/category-image-url.svg"
-        />
+        <div
+          className="cat-image-wrapper"
+        >
+          <div
+            className="cat-image-background"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          />
+          <img
+            className="BlockingCategory__image"
+            src="/app/images/panel-android/categories/category-image-url.svg"
+          />
+        </div>
         <div
           className="flex-child-grow"
         >
@@ -181,10 +193,22 @@ exports[`app/panel-android/components/content/BlockingTab.jsx Snapshot tests wit
         className="BlockingCategory__details flex-container"
         onClick={[Function]}
       >
-        <img
-          className="BlockingCategory__image"
-          src="/app/images/panel-android/categories/category-image-url-2.svg"
-        />
+        <div
+          className="cat-image-wrapper"
+        >
+          <div
+            className="cat-image-background"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          />
+          <img
+            className="BlockingCategory__image"
+            src="/app/images/panel-android/categories/category-image-url-2.svg"
+          />
+        </div>
         <div
           className="flex-child-grow"
         >
@@ -341,10 +365,22 @@ exports[`app/panel-android/components/content/BlockingTab.jsx Snapshot tests wit
         className="BlockingCategory__details flex-container"
         onClick={[Function]}
       >
-        <img
-          className="BlockingCategory__image"
-          src="/app/images/panel-android/categories/category-image-url.svg"
-        />
+        <div
+          className="cat-image-wrapper"
+        >
+          <div
+            className="cat-image-background"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          />
+          <img
+            className="BlockingCategory__image"
+            src="/app/images/panel-android/categories/category-image-url.svg"
+          />
+        </div>
         <div
           className="flex-child-grow"
         >
