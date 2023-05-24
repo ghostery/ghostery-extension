@@ -804,10 +804,10 @@ class PanelData {
 
 			bugIds.forEach((bugsId) => {
 				const trackerId = conf.bugs.bugs[bugsId];
-				if (!trackerId) return;
+				if (trackerId === undefined) return;
 
 				const trackerListIndex = appsById[trackerId.aid];
-				if (!trackerListIndex) return;
+				if (trackerListIndex === undefined) return;
 
 				this._trackerList[trackerListIndex].commonCookieCount = bugs[bugsId].cookies;
 				this._trackerList[trackerListIndex].commonFingerprintCount = bugs[bugsId].fingerprints;
