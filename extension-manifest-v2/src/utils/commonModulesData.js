@@ -14,7 +14,6 @@
 
 // @namespace BackgroundUtils
 
-import { extend } from 'underscore';
 import conf from '../classes/Conf';
 import common from '../classes/Common';
 
@@ -120,9 +119,49 @@ export function getCommonGhosteryBugs(tabId) {
 	const antiTrackingStats = (conf.enable_anti_tracking) ? antitracking.background.actions.getGhosteryStats(tabId) : { bugs: {}, others: {} };
 	const adBlockingStats = (conf.enable_ad_block) ? adblocker.background.actions.getGhosteryStats(tabId) : { bugs: {}, others: {} };
 
+	// { 1: { cookies: 0, fingerprints: 0, ads: 0 } }
+	const bugs = {};
+	Object.keys(antiTrackingStats.bugs).forEach((tracker) => {
+		bugs[tracker] = { ...antiTrackingStats.bugs[tracker] };
+	});
+	Object.keys(adBlockingStats.bugs).forEach((tracker) => {
+		if (!bugs[tracker]) {
+			bugs[tracker] = { ...adBlockingStats.bugs[tracker] };
+		} else {
+			bugs[tracker].cookies += adBlockingStats.bugs[tracker].cookies || 0;
+			bugs[tracker].fingerprints += adBlockingStats.bugs[tracker].fingerprints || 0;
+			bugs[tracker].ads += adBlockingStats.bugs[tracker].ads || 0;
+			bugs[tracker].firstPartyAds += adBlockingStats.bugs[tracker].firstPartyAds || 0;
+		}
+	});
+
+	// { "test.com": { cookies: 0, fingerprints: 0, ads: 0, name: "test.com", domains: ["test.com"], cat: "unindentified" } }
+	const others = {};
+	Object.keys(antiTrackingStats.others).forEach((tracker) => {
+		others[tracker] = { ...antiTrackingStats.others[tracker] };
+	});
+	Object.keys(adBlockingStats.others).forEach((tracker) => {
+		if (!others[tracker]) {
+			others[tracker] = { ...adBlockingStats.others[tracker] };
+		} else {
+			others[tracker].cookies += adBlockingStats.others[tracker].cookies || 0;
+			others[tracker].fingerprints += adBlockingStats.others[tracker].fingerprints || 0;
+			others[tracker].ads += adBlockingStats.others[tracker].ads || 0;
+			if (adBlockingStats.others[tracker].name) {
+				others[tracker].name = adBlockingStats.others[tracker].name;
+			}
+			if (adBlockingStats.others[tracker].cat) {
+				others[tracker].cat = adBlockingStats.others[tracker].cat;
+			}
+			if (adBlockingStats.others[tracker].domains?.length > 0) {
+				others[tracker].domains.push(...adBlockingStats.others[tracker].domains);
+			}
+		}
+	});
+
 	return {
-		bugs: extend({}, antiTrackingStats.bugs, adBlockingStats.bugs),
-		others: extend({}, antiTrackingStats.others, adBlockingStats.others),
+		bugs,
+		others,
 	};
 }
 

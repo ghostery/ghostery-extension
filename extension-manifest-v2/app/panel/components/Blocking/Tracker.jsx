@@ -103,10 +103,9 @@ class Tracker extends React.Component {
 		const label = exactlyOne ?
 			t(`${type}`) :
 			t(`${type}s`);
-		const cssClass = `trk-common-stat trk-common-stat-${type}s-count`;
 
 		return (
-			<span className={cssClass}>
+			<span className="trk-common-stat">
 				{count}
 				{' '}
 				{label}
@@ -284,17 +283,17 @@ class Tracker extends React.Component {
 
 		return (
 			<div className="trk-common-stats-outer-container">
+				{oneOrMoreAds && (
+					<div className="trk-common-stats-container">
+						{this._renderCommonAdsIcon()}
+						{Tracker._renderCommonAdStat(commonAdCount)}
+					</div>
+				)}
 				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
 					<div className="trk-common-stats-container">
 						{this._renderCommonCookiesAndFingerprintsIcon()}
 						{oneOrMoreCookies && Tracker._renderCommonCookieStat(commonCookieCount)}
 						{oneOrMoreFingerprints && Tracker._renderCommonFingerprintStat(commonFingerprintCount)}
-					</div>
-				)}
-				{oneOrMoreAds && (
-					<div className="trk-common-stats-container">
-						{this._renderCommonAdsIcon()}
-						{Tracker._renderCommonAdStat(commonAdCount)}
 					</div>
 				)}
 			</div>

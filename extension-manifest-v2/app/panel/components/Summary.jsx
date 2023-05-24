@@ -369,34 +369,6 @@ class Summary extends React.Component {
 		return (trackerCounts.allowed + trackerCounts.blocked + this._requestsModifiedCount()) || 0;
 	}
 
-	_sbBlocked() {
-		const { smartBlock, trackerCounts } = this.props;
-
-		let sbBlocked = (smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length) || 0;
-		if (sbBlocked === trackerCounts.sbBlocked) {
-			sbBlocked = 0;
-		}
-
-		return sbBlocked;
-	}
-
-	_sbAllowed() {
-		const { smartBlock, trackerCounts } = this.props;
-
-		let sbAllowed = (smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length) || 0;
-		if (sbAllowed === trackerCounts.sbAllowed) {
-			sbAllowed = 0;
-		}
-
-		return sbAllowed;
-	}
-
-	_sbAdjust() {
-		const { enable_smart_block } = this.props;
-
-		return enable_smart_block && ((this._sbBlocked() - this._sbAllowed()) || 0);
-	}
-
 	_totalTrackersBlockedCount() {
 		const {
 			paused_blocking,
@@ -410,7 +382,7 @@ class Summary extends React.Component {
 		} else if (sitePolicy === BLACKLISTED) {
 			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
 		} else {
-			totalTrackersBlockedCount = trackerCounts.blocked + this._sbAdjust() || 0;
+			totalTrackersBlockedCount = trackerCounts.blocked || 0;
 		}
 
 		return totalTrackersBlockedCount;
