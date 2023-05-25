@@ -97,9 +97,6 @@ const Options = {
 
 export default Options;
 
-// TODO: Collect and set databases names before switching to MV3
-const MV2_INDEXED_DB_NAMES = [];
-
 async function migrateFromMV2() {
   try {
     const options = {};
@@ -116,14 +113,12 @@ async function migrateFromMV2() {
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,
         shownAt: storage.setup_timestamp || 0,
+        shown: storage.setup_shown || 0,
       };
-      options.onboarding.shown = options.onboarding.shown
-        ? options.onboarding.shown
-        : options.onboarding.done
-        ? 1
-        : 0;
+
       options.terms = storage.setup_complete || false;
-      options.wtmSerpReport = storage.enable_wtm_serp_report || false;
+
+      options.wtmSerpReport = storage.enable_wtm_serp_report || true;
 
       options.autoconsent = {
         all: !storage.autoconsent_whitelist,
@@ -136,15 +131,32 @@ async function migrateFromMV2() {
         revokeAt: 0,
       }));
 
+      options.installDate = storage.install_date || '';
+
       await chrome.storage.local.clear();
 
       // Delete indexedDBs
       // Notice: Doesn't wait to avoid blocking the migrated options
-      MV2_INDEXED_DB_NAMES.forEach((name) => deleteDB(name));
+      [
+        '__dbnames',
+        'antitracking',
+        'cliqz-adb',
+        'cliqz-kv-store',
+        'hpnv2',
+        'insights',
+      ].forEach((name) => deleteDB(name).catch(() => {}));
 
       // Set options by hand to make sure, that
       // paused side effects are triggered
-      await Options[store.connect].set(undefined, options, ['paused']);
+      await Options[store.connect].set(undefined, options, [
+        'engines',
+        'onboarding',
+        'terms',
+        'wtmSerpReport',
+        'autoconsent',
+        'paused',
+        'installDate',
+      ]);
     }
 
     return options;
