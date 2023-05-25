@@ -110,8 +110,6 @@ module.exports = {
 			onBuildEnd: {
 				scripts: [
 					`${RM} ./dist/foundation.js`,
-					`${RM} ./dist/panel.js`,
-					`${RM} ./dist/panel_android.js`,
 					`${RM} ./dist/purplebox_styles.js`,
 					'npm run licenses',
 				],
