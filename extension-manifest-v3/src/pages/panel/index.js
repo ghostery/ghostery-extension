@@ -66,6 +66,6 @@ if (__PLATFORM__ === 'firefox') {
     let el = event.target;
     while (el && !el.href) el = el.parentElement;
 
-    if (el?.target) requestIdleCallback(window.close);
+    if (el?.target) setTimeout(window.close, 100);
   });
 }
