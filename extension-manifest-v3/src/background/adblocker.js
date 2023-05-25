@@ -351,7 +351,7 @@ if (__PLATFORM__ === 'firefox') {
         );
       }
 
-      if (details.frameAncestors.length > 0) {
+      if (details.frameAncestors?.length > 0) {
         for (const { url } of details.frameAncestors) {
           const { domain, hostname } = parse(url);
           if (pausedDomains.includes(domain || hostname)) {
@@ -402,7 +402,7 @@ if (__PLATFORM__ === 'firefox') {
     (details) => {
       const request = Request.fromRequestDetails(details);
 
-      if (details.frameAncestors.length > 0) {
+      if (details.frameAncestors?.length > 0) {
         for (const { url } of details.frameAncestors) {
           const { domain, hostname } = parse(url);
           if (pausedDomains.includes(domain || hostname)) {
