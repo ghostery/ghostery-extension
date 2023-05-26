@@ -78,7 +78,7 @@ function adblockerInjectStylesWebExtension(
         origin: 'USER',
         target,
       })
-      .catch((e) => console.error('Failed to inject CSS', e));
+      .catch((e) => console.warn('Failed to inject CSS', e));
   } else {
     const details = {
       allFrames,
@@ -92,7 +92,7 @@ function adblockerInjectStylesWebExtension(
     }
     chrome.tabs
       .insertCSS(tabId, details)
-      .catch((e) => console.error('Failed to inject CSS', e));
+      .catch((e) => console.warn('Failed to inject CSS', e));
   }
 }
 
@@ -267,7 +267,7 @@ ${scripts.join('\n\n')}}
     },
     () => {
       if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError);
+        console.warn(chrome.runtime.lastError);
       }
     },
   );
