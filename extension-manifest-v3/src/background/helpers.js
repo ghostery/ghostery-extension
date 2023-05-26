@@ -9,20 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '../utils/shims.js';
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  switch (msg.action) {
+    case 'getCurrentTab':
+      chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
+        sendResponse(tab);
+      });
+      return true;
+  }
 
-import './onboarding.js';
-
-import './autoconsent.js';
-import './adblocker.js';
-import './stats.js';
-import './trackers-preview.js';
-
-import './alarms.js';
-import './dnr.js';
-import './helpers.js';
-
-import './telemetry.js';
-import './reporting.js';
-import './external.js';
-import './devtools.js';
+  return false;
+});

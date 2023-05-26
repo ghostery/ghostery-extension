@@ -12,6 +12,7 @@
 import { html, msg, router, store } from 'hybrids';
 
 import Session from '/store/session.js';
+import { openTabWithUrl } from '/utils/tabs.js';
 
 const MENU = [
   {},
@@ -73,6 +74,7 @@ export default {
                 : 'https://signon.ghostery.com/'}"
               target="_blank"
               layout="block padding margin:0:1"
+              onclick="${openTabWithUrl}"
             >
               <gh-panel-menu-item icon="user">
                 ${session.user
@@ -95,6 +97,7 @@ export default {
                       href="${href}"
                       target="_blank"
                       layout="block padding margin:0:1"
+                      onclick="${openTabWithUrl}"
                     >
                       <gh-panel-menu-item icon="${icon}">
                         ${label}

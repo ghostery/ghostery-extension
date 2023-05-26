@@ -13,6 +13,8 @@ import { html } from 'hybrids';
 
 function close(host, event) {
   event.preventDefault();
+  event.stopPropagation();
+
   host.parentNode.removeChild(host);
 }
 

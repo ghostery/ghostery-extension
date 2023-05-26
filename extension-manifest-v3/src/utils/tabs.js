@@ -9,20 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '../utils/shims.js';
+export function openTabWithUrl(host, event) {
+  const { href } = event.currentTarget;
+  event.preventDefault();
 
-import './onboarding.js';
-
-import './autoconsent.js';
-import './adblocker.js';
-import './stats.js';
-import './trackers-preview.js';
-
-import './alarms.js';
-import './dnr.js';
-import './helpers.js';
-
-import './telemetry.js';
-import './reporting.js';
-import './external.js';
-import './devtools.js';
+  Promise.resolve(chrome.tabs.create({ url: href })).then(() => {
+    window.close();
+  });
+}
