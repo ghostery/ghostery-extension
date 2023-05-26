@@ -40,8 +40,9 @@ observe('terms', async (terms) => {
 
 async function refreshIcon(tabId) {
   const stats = tabStats.get(tabId);
-  const options = await store.resolve(Options);
+  if (!stats) return;
 
+  const options = await store.resolve(Options);
   if (options.trackerWheel && stats.trackers.length > 0) {
     const paused = options.paused?.some(({ id }) => id === stats.domain);
     const data = {};
@@ -57,11 +58,18 @@ async function refreshIcon(tabId) {
         stats.trackers.map((t) => t.category),
       );
     }
-    try {
-      await chrome.action.setIcon({ tabId, ...data });
-    } catch (e) {
-      console.error('Error while trying update the icon:', e);
-    }
+
+    // Note: Even in MV3, this is not (yet) returning a promise.
+    chrome.action.setIcon({ tabId, ...data }, () => {
+      if (chrome.runtime.lastError) {
+        console.debug(
+          'setIcon failed for tabId',
+          tabId,
+          '(most likely the tab was closed)',
+          chrome.runtime.lastError,
+        );
+      }
+    });
   }
 
   if (Options.trackerCount) {
@@ -71,7 +79,7 @@ async function refreshIcon(tabId) {
         text: options.trackerCount ? String(stats.trackers.length) : '',
       });
     } catch (e) {
-      console.error('Error while trying update the badge', e);
+      console.debug('Error while trying update the badge', e);
     }
   }
 }

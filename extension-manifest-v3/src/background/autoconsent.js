@@ -70,7 +70,7 @@ async function evalCode(code, id, tabId, frameId) {
     },
   });
 
-  chrome.tabs.sendMessage(
+  await chrome.tabs.sendMessage(
     tabId,
     {
       action: 'autoconsent',
