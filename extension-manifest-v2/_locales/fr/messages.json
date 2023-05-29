@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "mouchards"
   },
-  "box_warning_compatibility": {
-    "message": "mouchards de page brisée"
-  },
   "box_warning_nonsecure": {
     "message": "mouchards non sécurisés"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Se fier aux mouchards sur ce site"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Le mouchard bloqué empêche l'affichage"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Le mouchard est non sécurisé"

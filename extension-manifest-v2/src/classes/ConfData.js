@@ -102,8 +102,6 @@ class ConfData {
 			_initProperty('enable_anti_tracking', false);
 			_initProperty('enable_autoconsent', false);
 			_initProperty('enable_autoupdate', true);
-			_initProperty('enable_click2play', false);
-			_initProperty('enable_click2play_social', false);
 			_initProperty('enable_smart_block', false);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
@@ -138,9 +136,7 @@ class ConfData {
 			_initProperty('autoconsent_blacklist', []);
 			_initProperty('autoconsent_interactions', 0);
 			_initProperty('bugs', {});
-			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);
-			_initProperty('compatibility', {});
 			_initProperty('metrics', {});
 			_initProperty('known_app_ids', []);
 			_initProperty('new_app_ids', []);

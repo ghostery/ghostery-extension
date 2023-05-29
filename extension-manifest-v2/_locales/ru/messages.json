@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Трекеры"
   },
-  "box_warning_compatibility": {
-    "message": "Трекеры поврежденной страницы"
-  },
   "box_warning_nonsecure": {
     "message": "Небезопасные трекеры"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Разрешить на этом сайте"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Заблокированный трекер повреждает страницу"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Трекер небезопасный"

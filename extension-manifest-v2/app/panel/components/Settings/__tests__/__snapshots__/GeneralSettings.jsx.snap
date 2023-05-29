@@ -138,46 +138,6 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           src="/app/images/panel/icon-information-tooltip.svg"
         />
       </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={false}
-            id="settings-enable-click2play"
-            name="enable_click2play"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-enable-click2play"
-          >
-            settings_required_trackers
-          </label>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={false}
-            id="settings-replace-social"
-            name="enable_click2play_social"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-replace-social"
-          >
-            settings_replace_social
-          </label>
-        </div>
-      </div>
       <h3>
         settings_blocking
       </h3>
@@ -385,46 +345,6 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
           className="s-question"
           src="/app/images/panel/icon-information-tooltip.svg"
         />
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-enable-click2play"
-            name="enable_click2play"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-enable-click2play"
-          >
-            settings_required_trackers
-          </label>
-        </div>
-      </div>
-      <div
-        className="s-option-group"
-      >
-        <div
-          className="s-square-checkbox"
-        >
-          <input
-            defaultChecked={true}
-            id="settings-replace-social"
-            name="enable_click2play_social"
-            onClick={[Function]}
-            type="checkbox"
-          />
-          <label
-            htmlFor="settings-replace-social"
-          >
-            settings_replace_social
-          </label>
-        </div>
       </div>
       <h3>
         settings_blocking

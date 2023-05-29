@@ -80,8 +80,6 @@ class Globals {
 		this.WHITELISTED = 2;
 
 		// data stores
-		this.REDIRECT_MAP = new Map();
-		this.BLOCKED_REDIRECT_DATA = {};
 		this.EXCLUDES = [
 			'extension.ghostery.com',
 			'extension.ghosterystage.com',
@@ -103,8 +101,6 @@ class Globals {
 			'enable_anti_tracking',
 			'enable_autoconsent',
 			'enable_autoupdate',
-			'enable_click2play',
-			'enable_click2play_social',
 			'enable_wtm_serp_report',
 			'enable_metrics',
 			'enable_abtests',

@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Tracker"
   },
-  "box_warning_compatibility": {
-    "message": "Tracker Pagina Orfana"
-  },
   "box_warning_nonsecure": {
     "message": "Tracker non sicuri"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Considera affidabile su questo sito"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Il tracker bloccato impedisce il caricamento della pagina"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Il tracker non è sicuro"

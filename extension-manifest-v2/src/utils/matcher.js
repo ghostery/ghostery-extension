@@ -20,7 +20,7 @@ import bugDb from '../classes/BugDb';
 // ALL APIS IN THIS FILE ARE PERFORMANCE-CRITICAL
 /**
  * Determine if a url matches an entry in an array urls. The matching is
- * permissive. Used for matching FirstPartyException and CompatibilityDB urls.
+ * permissive. Used for matching FirstPartyException urls.
  * @memberOf BackgroundUtils
  *
  * @param {string} 	url		 	url to match

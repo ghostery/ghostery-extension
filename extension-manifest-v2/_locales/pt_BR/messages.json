@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Rastreadores"
   },
-  "box_warning_compatibility": {
-    "message": "Rastreadores de páginas quebradas"
-  },
   "box_warning_nonsecure": {
     "message": "Rastreadores não-seguros"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Confiar nesse site"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Rastreador bloqueado quebra página"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "O rastreador é não-seguro"

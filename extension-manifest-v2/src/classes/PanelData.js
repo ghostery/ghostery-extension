@@ -322,10 +322,10 @@ class PanelData {
 	_getDynamicSummaryData() {
 		if (!this._activeTab) { return {}; }
 
-		const { id, url } = this._activeTab;
+		const { id } = this._activeTab;
 
 		return {
-			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
+			alertCounts: foundBugs.getAppsCountByIssues(id) || {},
 			categories: this._categories,
 			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
 		};
@@ -477,7 +477,7 @@ class PanelData {
 	static _getUserSettingsForSettingsView(userSettingsSource) {
 		const {
 			alert_bubble_pos, alert_bubble_timeout, enable_autoupdate,
-			enable_click2play, enable_click2play_social, enable_human_web,
+			enable_human_web,
 			enable_metrics, enable_abtests, hide_alert_trusted,
 			notify_promotions, selected_app_ids, show_alert, show_badge,
 			show_cmp, show_tracker_urls, toggle_individual_trackers, enable_wtm_serp_report,
@@ -488,8 +488,6 @@ class PanelData {
 			alert_bubble_pos,
 			alert_bubble_timeout,
 			enable_autoupdate,
-			enable_click2play,
-			enable_click2play_social,
 			enable_human_web,
 			enable_metrics,
 			enable_abtests,
@@ -704,7 +702,6 @@ class PanelData {
 			commonAdCount,
 			commonCookieCount,
 			commonFingerprintCount,
-			hasCompatibilityIssue,
 			hasInsecureIssue,
 			hasLatencyIssue,
 			id,
@@ -727,7 +724,6 @@ class PanelData {
 			catId: cat,
 			sources,
 			trackerID,
-			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
 			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,

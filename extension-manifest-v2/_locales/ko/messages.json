@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "트래커 "
   },
-  "box_warning_compatibility": {
-    "message": "깨진 페이지 트래커 "
-  },
   "box_warning_nonsecure": {
     "message": "안전하지 않은 트래커 "
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "이 사이트에서 신뢰 "
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "차단된 트래커로 인해 페이지 깨짐 "
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "안전하지 않은 트래커 "

@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "跟踪器"
   },
-  "box_warning_compatibility": {
-    "message": "导致网页崩溃的跟踪器"
-  },
   "box_warning_nonsecure": {
     "message": "不安全的跟踪器"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "在此网站上信任"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "拦截了导致页面崩溃的跟踪器"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "跟踪器不安全"

@@ -19,12 +19,8 @@ import Policy, {
 	BLOCK_REASON_BLACKLISTED,
 	BLOCK_REASON_SS_UNBLOCKED,
 	BLOCK_REASON_SS_BLOCKED,
-	BLOCK_REASON_C2P_ALLOWED_ONCE,
 } from '../../src/classes/Policy';
-import c2pDb from '../../src/classes/Click2PlayDb';
-import conf from '../../src/classes/Conf';
 import globals from '../../src/classes/Globals';
-import { processUrl } from '../../src/utils/utils';
 
 // Mock imports for dependencies
 jest.mock('../../src/classes/TabInfo');
@@ -61,12 +57,6 @@ jest.mock('../../src/classes/Globals', () => {
 
 describe('src/classes/Policy.js', () => {
 	describe('testing shouldBlock()', () => {
-		beforeAll(() => {
-			// Mock C2P allow-once check
-			c2pDb.allowedOnce = jest.fn();
-			c2pDb.allowedOnce.mockReturnValue(false);
-		});
-
 		describe('with Ghostery paused', () => {
 			beforeEach(() => {
 				globals.SESSION.paused_blocking = true;
@@ -93,45 +83,6 @@ describe('src/classes/Policy.js', () => {
 				const { block, reason } = Policy.shouldBlock(50, 'essential', 1, 'www.tmz.com', 'https://www.tmz.com/');
 				expect(block).toBeFalsy();
 				expect(reason).toBe(BLOCK_REASON_BLOCK_PAUSED);
-			});
-		});
-
-		describe('with Click2Play Allow Once enabled', () => {
-			beforeAll(() => {
-				c2pDb.allowedOnce.mockReturnValue(true);
-			});
-			afterAll(() => {
-				c2pDb.allowedOnce.mockReturnValue(false);
-			});
-			test('a blocked tracker on the site-specific allow list on a black-listed site is unblocked with reason BLOCK_REASON_C2P_ALLOWED_ONCE', () => {
-				const { block, reason } = Policy.shouldBlock(41, 'advertising', 1, 'www.tmz.com', 'https://www.tmz.com/');
-				expect(block).toBeFalsy();
-				expect(reason).toBe(BLOCK_REASON_C2P_ALLOWED_ONCE);
-			});
-			test('a blocked tracker is unblocked with reason BLOCK_REASON_C2P_ALLOWED_ONCE', () => {
-				const { block, reason } = Policy.shouldBlock(41, 'advertising', 1, 'www.cnn.com', 'https://www.cnn.com/');
-				expect(block).toBeFalsy();
-				expect(reason).toBe(BLOCK_REASON_C2P_ALLOWED_ONCE);
-			});
-			test('an unblocked tracker on the site-specific block list remains unblocked with reason BLOCK_REASON_C2P_ALLOWED_ONCE', () => {
-				const { block, reason } = Policy.shouldBlock(50, 'essential', 1, 'www.espn.com', 'https://www.espn.com/');
-				expect(block).toBeFalsy();
-				expect(reason).toBe(BLOCK_REASON_C2P_ALLOWED_ONCE);
-			});
-			test('an unblocked tracker on the site-specific allow list on a black-listed site remains unblocked with reason BLOCK_REASON_C2P_ALLOWED_ONCE', () => {
-				const { block, reason } = Policy.shouldBlock(50, 'essential', 1, 'www.tmz.com', 'https://www.tmz.com/');
-				expect(block).toBeFalsy();
-				expect(reason).toBe(BLOCK_REASON_C2P_ALLOWED_ONCE);
-			});
-			test('an unblocked tracker on a black-listed site remains unblocked with reason BLOCK_REASON_C2P_ALLOWED_ONCE', () => {
-				const { block, reason } = Policy.shouldBlock(55, 'essential', 1, 'www.tmz.com', 'https://www.tmz.com/');
-				expect(block).toBeFalsy();
-				expect(reason).toBe(BLOCK_REASON_C2P_ALLOWED_ONCE);
-			});
-			test('an unblocked tracker remains unblocked with reason BLOCK_REASON_C2P_ALLOWED_ONCE', () => {
-				const { block, reason } = Policy.shouldBlock(55, 'essential', 1, 'www.cnn.com', 'https://www.cnn.com/');
-				expect(block).toBeFalsy();
-				expect(reason).toBe(BLOCK_REASON_C2P_ALLOWED_ONCE);
 			});
 		});
 

@@ -139,20 +139,6 @@ class GeneralSettings extends React.Component {
 						<div className="s-tooltip-down-click-to-play-img" data-g-tooltip={t('settings_highlight_trackers_tooltip')}>
 							<img src="/app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>
-						<div className="s-option-group">
-							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-enable-click2play" name="enable_click2play" defaultChecked={settingsData.enable_click2play} onClick={toggleCheckbox} />
-								<label htmlFor="settings-enable-click2play">
-									{ t('settings_required_trackers') }
-								</label>
-							</div>
-						</div>
-						<div className="s-option-group">
-							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-replace-social" name="enable_click2play_social" defaultChecked={settingsData.enable_click2play_social} onClick={toggleCheckbox} />
-								<label htmlFor="settings-replace-social">{ t('settings_replace_social') }</label>
-							</div>
-						</div>
 						<h3>{ t('settings_blocking') }</h3>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
@@ -194,8 +180,6 @@ GeneralSettings.propTypes = {
 		enable_autoupdate: PropTypes.bool.isRequired,
 		dbUpdateText: PropTypes.string,
 		show_tracker_urls: PropTypes.bool.isRequired,
-		enable_click2play: PropTypes.bool.isRequired,
-		enable_click2play_social: PropTypes.bool.isRequired,
 		toggle_individual_trackers: PropTypes.bool.isRequired,
 	}).isRequired,
 };

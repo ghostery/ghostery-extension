@@ -318,9 +318,6 @@ const Ghostery = (function(win, doc) {
 		if (app.hasLatencyIssue) {
 			icon = slowIcon;
 			icon.style.opacity = '1.0';
-		} else if (app.hasCompatibilityIssue) {
-			icon = breakingIcon;
-			icon.style.opacity = '1.0';
 		} else if (app.hasInsecureIssue) {
 			icon = nonSecureIcon;
 			icon.style.opacity = '1.0';
@@ -464,7 +461,6 @@ const Ghostery = (function(win, doc) {
 		pbIcons.id = 'ghostery-pb-icons-container';
 		breakingIcon.id = 'ghostery-breaking-tracker';
 		breakingIcon.className = 'ghostery-pb-tracker';
-		breakingIcon.title = BOX_TRANSLATIONS.box_warning_compatibility;
 		breakingIcon.style.background = `url(${breakingIconImage})`;
 		breakingIcon.style.opacity = '0.5';
 		slowIcon.id = 'ghostery-slow-tracker';

@@ -19,18 +19,16 @@ import {
 } from 'underscore';
 import bugDb from './BugDb';
 import button from './BrowserButton';
-import c2pDb from './Click2PlayDb';
 import cmp from './CMP';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
 import panelData from './PanelData';
-import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH, BLOCK_REASON_GLOBAL_UNBLOCKED } from './Policy';
+import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
 import tabInfo from './TabInfo';
-import { buildC2P, buildRedirectC2P } from '../utils/click2play';
 import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
@@ -265,18 +263,13 @@ class EventHandlers {
 			});
 		}
 
-		if (!EventHandlers._checkRedirect(eventMutable.type, request_id)) {
-			return { cancel: false };
-		}
-
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
-		const from_redirect = globals.REDIRECT_MAP.has(request_id);
 		const processed = utils.processUrl(eventMutable.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
 		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, null, request_id, from_redirect, true);
+			return EventHandlers._blockHelper(eventMutable, tab_id, null, request_id, false, true);
 		}
 
 		// TODO fuse this into a single call to improve performance
@@ -297,8 +290,7 @@ class EventHandlers {
 		const cat_id = bugDb.db.apps[app_id].cat;
 		const incognito = tabInfo.getTabInfo(tab_id, 'incognito');
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
-		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
-		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url);
 		if (!block && [BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED].indexOf(reason) > -1) {
 			// The way to pass this flag to Common handlers
 			eventMutable.ghosteryWhitelisted = true;
@@ -333,8 +325,8 @@ class EventHandlers {
 			});
 		}, 1);
 
-		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
+		if (conf.enable_ad_block && block) {
+			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, false);
 		}
 
 		return { cancel: false };
@@ -385,7 +377,6 @@ class EventHandlers {
 	onBeforeRedirect(details) {
 		if (details.type === 'main_frame') {
 			tabInfo.setTabInfo(details.tabId, 'url', details.redirectUrl);
-			globals.REDIRECT_MAP.set(details.requestId, { url: details.url, redirectUrl: details.redirectUrl });
 		}
 
 		const appWithLatencyId = latency.logLatency(details);
@@ -404,7 +395,6 @@ class EventHandlers {
 		if (!details || details.tabId <= 0) {
 			return;
 		}
-		EventHandlers._clearRedirects(details.requestId);
 
 		if (details.type !== 'main_frame') {
 			const appWithLatencyId = latency.logLatency(details);
@@ -491,7 +481,6 @@ class EventHandlers {
 			bug_id, app_id, type, url, block, tab_id, request_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
-		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
 
 		let num_apps_old;
 
@@ -509,13 +498,9 @@ class EventHandlers {
 		// throttled in PanelData
 		panelData.updatePanelUI();
 
-		if (block && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
-			buildC2P(details, app_id);
-		}
-
 		// Note: tab.purplebox handles a race condition where this function is sometimes called before onNavigation()
 		if (conf.show_alert && tab && !tab.prefetched && tab.purplebox) {
-			if (foundBugs.getAppsCount(details.tab_id) > num_apps_old || allowedOnce) {
+			if (foundBugs.getAppsCount(details.tab_id) > num_apps_old) {
 				this.purplebox.updateBox(details.tab_id, app_id);
 			}
 		}
@@ -561,12 +546,7 @@ class EventHandlers {
 				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
 			};
 		}
-		if (fromRedirect) {
-			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId);
-			setTimeout(() => {
-				chrome.tabs.update(details.tabId, { url });
-			}, 0);
-		}
+
 		return {
 			// If true, the request is canceled. This prevents the request from being sent.
 			cancel: true
@@ -627,37 +607,6 @@ class EventHandlers {
 	}
 
 	/**
-	 * Clear the REDIRECT_MAP for a particular requestId
-	 *
-	 * @private
-	 *
-	 * @param  {number} requestId
-	 */
-	static _clearRedirects(requestId) {
-		globals.REDIRECT_MAP.delete(requestId);
-		globals.LET_REDIRECTS_THROUGH = false;
-	}
-
-	/**
-	 * Check for redirects in onBeforeRequest
-	 *
-	 * @private
-	 *
-	 * @param  {string} type 			type of request
-	 * @param  {number}	request_id		request id
-	 * @return {boolean}
-	 */
-	static _checkRedirect(type, request_id) {
-		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
-		// if the request is part of the main_frame and not a redirect, we don't proceed
-		if (type === 'main_frame' && !fromRedirect) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
 	 * @typedef {Object} BlockWithReason
 	 * @property {boolean}	block	indicates if the tracker should be blocked.
 	 * @property {string}	reason	indicates the reason for the block result.
@@ -673,35 +622,10 @@ class EventHandlers {
 	 * @param  {number} 	tab_id			tab id
 	 * @param  {string} 	tab_host		tab url host
 	 * @param  {string} 	page_url		full tab url
-	 * @param  {number} 	request_id		request id
 	 * @return {BlockWithReason}			block result with reason
 	 */
-	static _checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id) {
-		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
-		let block;
-
-		// If we let page-level c2p trackers through, we don't want to block it
-		// along with all subsequent top-level redirects.
-		if (fromRedirect && globals.LET_REDIRECTS_THROUGH) {
-			block = { block: false, reason: BLOCK_REASON_C2P_ALLOWED_THROUGH };
-		} else {
-			block = Policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
-		}
-
-		return block;
-	}
-
-	/**
-	 * Utility method to reset data during/after event
-	 *
-	 * @private
-	 *
-	 * @param  {number}	tab_id		tab id
-	 */
-	static _eventReset(tab_id) {
-		c2pDb.reset(tab_id);
-		globals.REDIRECT_MAP.clear();
-		globals.LET_REDIRECTS_THROUGH = false;
+	static _checkBlocking(app_id, cat_id, tab_id, tab_host, page_url) {
+		return Policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
 	}
 
 	/**

@@ -452,9 +452,6 @@
   "subscribe_pitch_button_label": {
     "message": "Tải xuống Ghostery Plus!"
   },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Trang ngắt trang của trình theo dõi bị chặn"
-  },
   "panel_tracker_block_tooltip": {
     "message": "Chặn trên tất cả các trang web"
   },
@@ -1231,9 +1228,6 @@
   },
   "settings_last_update": {
     "message": "Đồng bộ hóa lần cuối vào"
-  },
-  "box_warning_compatibility": {
-    "message": "Trình theo dõi trang bị hỏng"
   },
   "settings_share_human_web": {
     "message": "Chia sẻ dữ liệu Web của con người"

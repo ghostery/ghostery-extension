@@ -14,7 +14,6 @@
  */
 
 import tabInfo from './TabInfo';
-import compDb from './CompatibilityDb';
 import { log } from '../utils/common';
 /**
  * Class for handling Smart Blocking site policy.
@@ -69,9 +68,7 @@ class PolicySmartBlock {
 		if (PolicySmartBlock._requestWasSlow(tabId, appId, requestTimestamp)) {
 			reason = 'slow';
 
-			if (PolicySmartBlock._appHasKnownIssue(tabId, appId, pageURL)) {
-				reason = 'hasIssue'; 		// allow if tracker is in compatibility list
-			} else if (this._allowedCategories(tabId, appId, catId)) {
+			if (this._allowedCategories(tabId, appId, catId)) {
 				reason = 'allowedCategory'; // allow if tracker is in breaking category
 			} else if (this._allowedTypes(tabId, appId, requestType)) {
 				reason = 'allowedType'; 	// allow if tracker is in breaking type
@@ -96,7 +93,6 @@ class PolicySmartBlock {
 	 * 3. Page is neither whitelisted or blacklisted
 	 * 4. Tracker is not site-specific unblocked
 	 * 5. Tracker is not site-specific blocked
-	 * 6. Tracker does not have entry in Click2Play
 	 *
 	 * @param  {number} 			tabId 	tab id
 	 * @param  {string | boolean} 	appId 	tracker id
@@ -113,17 +109,6 @@ class PolicySmartBlock {
 	 */
 	static _pageWasReloaded(tabId) {
 		return tabInfo.getTabInfo(tabId, 'reloaded') || false;
-	}
-
-	/**
-	 * Check if app has a known issue with a URL.
-	 * @param 	{number} tabId 		tab id
-	 * @param  	{string} appId		tracker id
-	 * @param  	{string} pageURL	tab url
-	 * @return 	{boolean}
-	 */
-	static _appHasKnownIssue(tabId, appId, pageURL) {
-		return compDb.hasIssue(appId, pageURL);
 	}
 
 	/**

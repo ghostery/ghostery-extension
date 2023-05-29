@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Trackers"
   },
-  "box_warning_compatibility": {
-    "message": "Broken Page Trackers"
-  },
   "box_warning_nonsecure": {
     "message": "Non-secure Trackers"
   },
@@ -1216,9 +1213,6 @@
   "panel_tracker_trust_tooltip": {
     "message": "Trust on this site"
   },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Blocked tracker breaks page"
-  },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Tracker is non-secure"
   },
@@ -1510,12 +1504,6 @@
   },
   "settings_purple_box": {
     "message": "Tracker-Tally"
-  },
-  "settings_replace_social": {
-    "message": "Replace blocked social media buttons with a Ghostery icon"
-  },
-  "settings_required_trackers": {
-    "message": "Show me when I need to allow a tracker to use a site's features"
   },
   "settings_restricted_sites": {
     "message": "Restricted Sites"

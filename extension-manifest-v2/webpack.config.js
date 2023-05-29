@@ -67,9 +67,7 @@ module.exports = {
 	entry: {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],
 		background: [`${SRC_DIR}/background.js`],
-		blocked_redirect: [`${CONTENT_SCRIPTS_DIR}/blocked_redirect.js`],
 		checkout_pages: [`${CONTENT_SCRIPTS_DIR}/checkout_pages.js`],
-		click_to_play: [`${CONTENT_SCRIPTS_DIR}/click_to_play.js`],
 		content_script_bundle: [`${CONTENT_SCRIPTS_DIR}/content_script_bundle.js`],
 		notifications: [`${CONTENT_SCRIPTS_DIR}/notifications.js`],
 		page_performance: [`${CONTENT_SCRIPTS_DIR}/page_performance.js`],

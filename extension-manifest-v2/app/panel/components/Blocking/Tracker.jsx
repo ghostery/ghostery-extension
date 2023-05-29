@@ -64,11 +64,10 @@ class Tracker extends React.Component {
 		classes.push((tracker.blocked) ? 'blocked' : '');
 		classes.push((tracker.ss_allowed) ? 'individual-trust' : '');
 		classes.push((tracker.ss_blocked) ? 'individual-restrict' : '');
-		classes.push((tracker.warningCompatibility || tracker.warningInsecure || tracker.warningSlow || tracker.warningSmartBlock) ? 'warning' : '');
+		classes.push((tracker.warningInsecure || tracker.warningSlow || tracker.warningSmartBlock) ? 'warning' : '');
 		if (tracker.warningSmartBlock) {
 			classes.push(tracker.warningSmartBlock === 'blocked' ? 'smart-blocked' : 'smart-unblocked');
 		} else {
-			classes.push((tracker.warningCompatibility) ? 'compatibility' : '');
 			classes.push((tracker.warningInsecure) ? 'insecure' : '');
 			classes.push((tracker.warningSlow) ? 'slow' : '');
 		}
@@ -76,8 +75,6 @@ class Tracker extends React.Component {
 		// Create tooltips for tracker alerts
 		if (tracker.warningSmartBlock) {
 			updated_title = tracker.warningSmartBlock === 'blocked' ? t('panel_tracker_warning_smartblock_tooltip') : t('panel_tracker_warning_smartunblock_tooltip');
-		} else if (tracker.warningCompatibility) {
-			updated_title = t('panel_tracker_warning_compatibility_tooltip');
 		} else if (tracker.warningInsecure && tracker.warningSlow) {
 			updated_title = t('panel_tracker_warning_slow_nonsecure_tooltip');
 		} else if (tracker.warningInsecure) {

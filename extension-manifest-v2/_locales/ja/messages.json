@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "トラッカー"
   },
-  "box_warning_compatibility": {
-    "message": "区切られたページのトラッカー"
-  },
   "box_warning_nonsecure": {
     "message": "保護のないトラッカー"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "このサイトで信頼"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "ブロックされたトラッカーがページを区切ります"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "トラッカーが保護されていません"

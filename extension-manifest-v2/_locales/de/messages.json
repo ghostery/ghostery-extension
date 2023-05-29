@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Tracker"
   },
-  "box_warning_compatibility": {
-    "message": "Fehlerhafte Seitentracker"
-  },
   "box_warning_nonsecure": {
     "message": "Unsichere Tracker"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Auf dieser Website vertrauen"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Der blockierte Tracker macht die Seite unbenutzbar"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Der Tracker ist unsicher"

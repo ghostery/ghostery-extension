@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Tropiciele"
   },
-  "box_warning_compatibility": {
-    "message": "Tropiciele uszkodzonych stron"
-  },
   "box_warning_nonsecure": {
     "message": "Tropiciele bez zabezpieczeń"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Zaufaj na tej stronie"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Zablokowany tropiciel uszkadza stronę"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Tropiciel jest niezabezpieczony"

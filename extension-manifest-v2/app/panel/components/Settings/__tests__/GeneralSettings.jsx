@@ -26,8 +26,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				bugs_last_checked: 0,
 				enable_autoupdate: false,
 				show_tracker_urls: false,
-				enable_click2play: false,
-				enable_click2play_social: false,
 				toggle_individual_trackers: false,
 			};
 			const actions = {
@@ -51,8 +49,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				enable_autoupdate: true,
 				dbUpdateText: 'database-updated-text',
 				show_tracker_urls: true,
-				enable_click2play: true,
-				enable_click2play_social: true,
 				toggle_individual_trackers: true,
 			};
 			const actions = {
@@ -77,8 +73,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 				bugs_last_checked: 0,
 				enable_autoupdate: false,
 				show_tracker_urls: false,
-				enable_click2play: false,
-				enable_click2play_social: false,
 				toggle_individual_trackers: false,
 			};
 			const actions = {

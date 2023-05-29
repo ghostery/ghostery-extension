@@ -31,10 +31,8 @@ import Policy from './classes/Policy';
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
 import button from './classes/BrowserButton';
-import c2pDb from './classes/Click2PlayDb';
 import cmp from './classes/CMP';
 import abtest from './classes/ABTest';
-import compDb from './classes/CompatibilityDb';
 import confData from './classes/ConfData';
 import conf from './classes/Conf';
 import dispatcher from './classes/Dispatcher';
@@ -46,7 +44,6 @@ import account from './classes/Account';
 import SearchMessager from './classes/SearchMessager';
 import ErrorReporter from './classes/ErrorReporter';
 // utilities
-import { allowAllwaysC2P } from './utils/click2play';
 import {
 	log, alwaysLog, hashCode, prefsSet, prefsGet, getISODate
 } from './utils/common';
@@ -95,9 +92,6 @@ async function updateDBs() {
 	try {
 		const data = await utils.getJson(`${VERSION_CHECK_URL}?d=${getISODate()}`);
 		log('Database version retrieval succeeded', data);
-
-		await c2pDb.update(data.click2play);
-		await compDb.update(data.compatibility);
 
 		let lastUpdate;
 		if (common.modules.adblocker.isEnabled) {
@@ -418,66 +412,6 @@ function handleNotifications(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from dist/click_to_play.js content script.
- * Includes handling of clicks on overlay icons.
- * @memberOf Background
- *
- * @param  {string} 	name  		message name
- * @param  {Object} 	message 	message data
- * @param  {number} 		tab_id 		tab id
- * @param  {function} 	callback 	function to call (at most once) when you have a response
- */
-function handleClick2Play(name, message, tab_id, callback) {
-	if (name === 'processC2P') {
-		// Note: if the site is restricted, the 'allow always' button will not be shown
-		if (message.action === 'always') {
-			const tab_host = tabInfo.getTabInfo(tab_id, 'host');
-			message.app_ids.forEach((aid) => {
-				allowAllwaysC2P(aid, tab_host);
-			});
-			callback();
-			return true;
-		}
-		if (message.action === 'once') {
-			c2pDb.allowOnce(message.app_ids, tab_id);
-			callback();
-			return true;
-		}
-	}
-	return false;
-}
-
-/**
- * Handle messages sent from dist/blocked_redirect.js content script.
- * Used for C2P page redirect blocking.
- * @memberOf Background
- *
- * @param  {string} 	name 		message name
- * @param  {Object} 	message 	message data
- * @param  {number} 	tab_id 		tab id
- * @param  {function} 	callback 	function to call (at most once) when you have a response
- */
-function handleBlockedRedirect(name, message, tab_id, callback) {
-	if (name === 'getBlockedRedirectData') {
-		callback(globals.BLOCKED_REDIRECT_DATA);
-		return true;
-	}
-	if (name === 'allow_always_page_c2p_tracker') {
-		// Allow always - unblock this tracker
-		// Note: if the site is restricted, the 'allow always' button will not be shown
-		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
-		allowAllwaysC2P(message.app_id, tab_host);
-		chrome.tabs.update(tab_id, { url: message.url });
-	} else if (name === 'allow_once_page_c2p_tracker') {
-		// Allow once - temporarily allow redirects
-		globals.LET_REDIRECTS_THROUGH = true;
-		chrome.tabs.update(tab_id, { url: message.url });
-	}
-
-	return false;
-}
-
-/**
  * Handle messages sent from dist/purplebox.js content script.
  * @memberOf Background
  *
@@ -563,12 +497,6 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (origin === 'notifications') {
 		return handleNotifications(name, message, tab_id);
-	}
-	if (origin === 'click_to_play') {
-		return handleClick2Play(name, message, tab_id, callback);
-	}
-	if (origin === 'blocked_redirect') {
-		return handleBlockedRedirect(name, message, tab_id, callback);
 	}
 	if (origin === 'autoconsent') {
 		if (name === 'enable') {
@@ -1511,8 +1439,6 @@ function initializeGhosteryModules() {
 	// initialize all tracker and surrogate DBs in parallel with Promise.all
 	return Promise.all([
 		bugDb.init(globals.JUST_UPGRADED),
-		c2pDb.init(globals.JUST_UPGRADED),
-		compDb.init(globals.JUST_UPGRADED),
 		commonStartup(),
 	])
 		.then(() => scheduledTasks());

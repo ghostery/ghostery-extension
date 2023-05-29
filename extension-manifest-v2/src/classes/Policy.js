@@ -13,7 +13,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import c2pDb from './Click2PlayDb';
 import conf from './Conf';
 import globals from './Globals';
 import { processUrl } from '../utils/utils';
@@ -30,8 +29,6 @@ export const BLOCK_REASON_WHITELISTED = 'BLOCK_REASON_WHITELISTED';
 export const BLOCK_REASON_BLACKLISTED = 'BLOCK_REASON_BLACKLISTED';
 export const BLOCK_REASON_SS_UNBLOCKED = 'BLOCK_REASON_SS_UNBLOCKED';
 export const BLOCK_REASON_SS_BLOCKED = 'BLOCK_REASON_SS_BLOCKED';
-export const BLOCK_REASON_C2P_ALLOWED_ONCE = 'BLOCK_REASON_C2P_ALLOWED_ONCE';
-export const BLOCK_REASON_C2P_ALLOWED_THROUGH = 'BLOCK_REASON_C2P_ALLOWED_THROUGH';
 
 /**
  * Class for handling site policy.
@@ -153,14 +150,13 @@ class Policy {
 			return { block: false, reason: BLOCK_REASON_BLOCK_PAUSED };
 		}
 
-		const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 		// The app_id has been globally blocked
 		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
 			// The app_id is on the site-specific allow list for this tab_host
 			if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
-				// Site blacklist overrides all block settings except C2P allow once
+				// Site blacklist overrides all block settings
 				if (Policy.blacklisted(tab_url)) {
-					return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
+					return { block: true, reason: BLOCK_REASON_BLACKLISTED };
 				}
 				return { block: false, reason: BLOCK_REASON_SS_UNBLOCKED };
 			}
@@ -169,7 +165,7 @@ class Policy {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
 			// The app_id is globally blocked
-			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_BLOCKED };
+			return { block: true, reason: BLOCK_REASON_GLOBAL_BLOCKED };
 		}
 
 		// The app_id has not been globally blocked
@@ -179,22 +175,22 @@ class Policy {
 			if (Policy.checkSiteWhitelist(tab_url)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
-			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_SS_BLOCKED };
+			return { block: true, reason: BLOCK_REASON_SS_BLOCKED };
 		}
 		// Check to see if the app_id is on the site-specific allow list for this tab_host
 		if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
-			// Site blacklist overrides all block settings except C2P allow once
+			// Site blacklist overrides all block settings
 			if (Policy.blacklisted(tab_url)) {
-				return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
+				return { block: true, reason: BLOCK_REASON_BLACKLISTED };
 			}
 			return { block: false, reason: BLOCK_REASON_SS_UNBLOCKED };
 		}
 		// Check for site black-listing
 		if (Policy.blacklisted(tab_url)) {
-			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
+			return { block: true, reason: BLOCK_REASON_BLACKLISTED };
 		}
 		// The app_id is globally unblocked
-		return { block: false, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_UNBLOCKED };
+		return { block: false, reason: BLOCK_REASON_GLOBAL_UNBLOCKED };
 	}
 
 	/**

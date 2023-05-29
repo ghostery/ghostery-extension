@@ -168,8 +168,8 @@ class BrowserButton {
 	 * @param  {string} tabUrl the Tab URL
 	 * @return {Object}        the number of total trackers and alerted trackers in an Object
 	 */
-	static _getTrackerCount(tabId, tabUrl) {
-		const apps = foundBugs.getAppsCountByIssues(tabId, tabUrl);
+	static _getTrackerCount(tabId) {
+		const apps = foundBugs.getAppsCountByIssues(tabId);
 		return {
 			appsCount: apps.all,
 			appsAlertCount: apps.total,

@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "網頁跟蹤器"
   },
-  "box_warning_compatibility": {
-    "message": "被截斷網頁網頁跟蹤器"
-  },
   "box_warning_nonsecure": {
     "message": "非安全的網頁跟踪器"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "信任此網站"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "封鎖了的網頁跟蹤器截斷網頁"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "網頁跟蹤器不安全"
