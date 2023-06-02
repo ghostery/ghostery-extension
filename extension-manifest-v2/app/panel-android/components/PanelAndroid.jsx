@@ -228,6 +228,7 @@ class PanelAndroid extends React.Component {
 			name: t('unidentified'),
 			description: t('unidentified_description'),
 			img_name: 'unidentified',
+			color: '#818181',
 			num_total: unidentifiedTrackers.length,
 			num_blocked: 0, // We don't want to see the Trackers Blocked text
 			trackers: unidentifiedTrackers,

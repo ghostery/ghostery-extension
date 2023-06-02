@@ -249,6 +249,7 @@ class Category extends React.Component {
 		} else {
 			trackersBlockedCount = category.num_blocked || 0;
 		}
+
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
 				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}${isUnidentified ? ' anti-tracking-header' : ''}`}>

@@ -61,6 +61,11 @@
 		cursor: pointer;
 	}
 
+	.BlockingCategory__image {
+		width: 24px;
+		height: 24px;
+	}
+
 	.cat-image-wrapper {
 		height: 50px;
 		width: 50px;
@@ -76,8 +81,9 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
-		height: 100%;
+		width: 32px;
+		height: 32px;
+		margin: 9px;
 	}
 
 	.BlockingCategory__name {

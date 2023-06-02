@@ -57,6 +57,7 @@ class Categories extends React.Component {
 					name: t('unidentified'),
 					description: t('unidentified_description'),
 					img_name: 'unidentified',
+					color: '#818181',
 					num_total: unidentifiedCategory.unidentifiedTrackers.length,
 					num_blocked: unidentifiedCategory.unidentifiedTrackerCount,
 					num_shown: unidentifiedCategory.hide ? 0 : unidentifiedCategory.unidentifiedTrackers.length,

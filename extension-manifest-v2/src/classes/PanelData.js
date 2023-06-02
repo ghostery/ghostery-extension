@@ -16,6 +16,7 @@
 
 import { isEqual, throttle } from 'underscore';
 import { getBrowserInfo } from '@ghostery/libs';
+import { getCategoryColor, sortCategories } from '@ghostery/ui/categories';
 
 import button from './BrowserButton';
 import conf from './Conf';
@@ -653,11 +654,7 @@ class PanelData {
 
 		const categoryArray = Object.values(categories);
 
-		categoryArray.sort((a, b) => {
-			const a1 = a.name.toLowerCase();
-			const b1 = b.name.toLowerCase();
-			return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
-		});
+		categoryArray.sort(sortCategories(c => c.id));
 
 		return categoryArray;
 	}
@@ -680,6 +677,7 @@ class PanelData {
 		return {
 			id: category,
 			name: t(`category_${category}`),
+			color: getCategoryColor(category),
 			description: t(`category_${category}_desc`),
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
