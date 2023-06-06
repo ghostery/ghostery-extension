@@ -14,6 +14,7 @@
 import bugDb from './BugDb';
 import compDb from './CompatibilityDb';
 import tabInfo from './TabInfo';
+import { getCommonData } from '../utils/commonModulesData';
 
 const LATENCY_ISSUE_THRESHOLD = 1000;
 
@@ -309,20 +310,27 @@ class FoundBugs {
 	 * @param  {number} tab_id 	tab id
 	 * @return {Object}        	counts for blocked and allowed trackers
 	 */
-	getAppsCountByBlocked(tab_id) {
+	getTrackerCounts(tab_id, tabUrl) {
 		if (!this._init(tab_id)) {
 			return {
 				blocked: 0,
-				allowed: 0
+				allowed: 0,
+				found: 0,
 			};
 		}
 
 		const { blocked } = this._foundApps[tab_id].issueCounts;
 		const allowed = this._foundApps[tab_id].apps.length - blocked;
 
+		const adBlockingTrackers = getCommonData(tab_id, tabUrl).unidentifiedTrackers;
+		const antiTrackingTrackers = getCommonData(tab_id, tabUrl, true).unidentifiedTrackers;
+		const uniqueUnidentifiedTrackers = [...new Set([...adBlockingTrackers, ...antiTrackingTrackers].map(t => t.name))];
+		const found = this._foundApps[tab_id].apps.length + uniqueUnidentifiedTrackers.length;
+
 		return {
 			blocked,
-			allowed
+			allowed,
+			found,
 		};
 	}
 

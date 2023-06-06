@@ -44,6 +44,7 @@ class PanelAndroid extends React.Component {
 				trackerCounts: {
 					allowed: 0,
 					blocked: 0,
+					found: 0,
 				},
 				sitePolicy: false,
 				paused_blocking: false,
