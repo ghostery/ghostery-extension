@@ -15,6 +15,8 @@ import { throttle } from 'underscore';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import { getCategoryColor } from '@ghostery/ui/categories';
+
 import {
 	arc,
 	easeLinear,
@@ -48,44 +50,7 @@ class DonutGraph extends React.Component {
 
 		// Variables
 		this.colors = {
-			regular: (id) => {
-				switch (id) {
-					case 'advertising':
-						return '#cb55cd';
-					case 'audio_video_player':
-						return '#ef671e';
-					case 'cdn':
-						return '#d3b6aa';
-					case 'comments':
-						return '#43b7c5';
-					case 'consent':
-						return '#becfb3';
-					case 'customer_interaction':
-						return '#fdc257';
-					case 'email':
-						return '#ff868f';
-					case 'essential':
-						return '#fc9734';
-					case 'extensions':
-						return '#f5a623';
-					case 'hosting':
-						return '#6c9493';
-					case 'misc':
-						return '#dd959d';
-					case 'pornvertising':
-						return '#ecafc2';
-					case 'site_analytics':
-						return '#87d7ef';
-					case 'social_media':
-						return '#388ee8';
-					case 'telemetry':
-						return '#b26859';
-					case 'unidentified':
-						return '#8459a5';
-					default:
-						return '#e8e8e8';
-				}
-			},
+			regular: getCategoryColor,
 			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
 			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};
