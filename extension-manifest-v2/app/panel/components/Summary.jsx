@@ -360,14 +360,16 @@ class Summary extends React.Component {
 	}
 
 	_requestsModifiedCount() {
-		return this._antiTrackUnsafe() + this._adBlockBlocked();
+		return this._antiTrackUnsafe();
 	}
 
 	_totalTrackersBlockedCount() {
 		const {
 			paused_blocking,
 			sitePolicy,
-			trackerCounts
+			trackerCounts,
+			adBlock,
+			antiTracking,
 		} = this.props;
 
 		let totalTrackersBlockedCount;
@@ -378,8 +380,10 @@ class Summary extends React.Component {
 		} else {
 			totalTrackersBlockedCount = trackerCounts.blocked || 0;
 		}
-
-		return totalTrackersBlockedCount;
+		const adBlockingTrackers = adBlock.unidentifiedTrackers;
+		const antiTrackingTrackers = antiTracking.unidentifiedTrackers;
+		const uniqueUnidentifiedTrackers = [...new Set([...adBlockingTrackers, ...antiTrackingTrackers].map(t => t.name))];
+		return totalTrackersBlockedCount + uniqueUnidentifiedTrackers.length;
 	}
 
 	_isCondensed() {
