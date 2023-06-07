@@ -328,7 +328,7 @@ class PanelData {
 		return {
 			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
 			categories: this._categories,
-			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
+			trackerCounts: foundBugs.getTrackerCounts(id, url) || {}
 		};
 	}
 

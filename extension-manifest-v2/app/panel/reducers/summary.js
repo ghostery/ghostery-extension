@@ -33,6 +33,7 @@ const initialState = {
 	trackerCounts: {
 		allowed: 0,
 		blocked: 0,
+		found: 0,
 	},
 	tab_id: 0,
 	antiTracking: {
@@ -155,6 +156,7 @@ export default (state = initialState, action = null) => {
 			return {
 				...state,
 				trackerCounts: {
+					...state.trackerCounts,
 					blocked: action.data.num_blocked,
 					allowed: action.data.num_total - action.data.num_blocked,
 					ssBlocked: action.data.num_ss_blocked,

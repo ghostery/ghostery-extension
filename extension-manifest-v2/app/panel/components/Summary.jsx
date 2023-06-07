@@ -363,12 +363,6 @@ class Summary extends React.Component {
 		return this._antiTrackUnsafe() + this._adBlockBlocked();
 	}
 
-	_totalTrackersFound() {
-		const { trackerCounts } = this.props;
-
-		return (trackerCounts.allowed + trackerCounts.blocked + this._requestsModifiedCount()) || 0;
-	}
-
 	_totalTrackersBlockedCount() {
 		const {
 			paused_blocking,
@@ -427,6 +421,7 @@ class Summary extends React.Component {
 			is_expert,
 			paused_blocking,
 			sitePolicy,
+			trackerCounts,
 		} = this.props;
 
 		return (
@@ -437,7 +432,7 @@ class Summary extends React.Component {
 					antiTracking={antiTracking}
 					renderRedscale={sitePolicy === BLACKLISTED}
 					renderGreyscale={paused_blocking}
-					totalCount={this._totalTrackersFound()}
+					totalCount={trackerCounts.found}
 					ghosteryFeatureSelect={sitePolicy}
 					isSmall={is_expert}
 					clickDonut={this.clickDonut}
@@ -471,7 +466,7 @@ class Summary extends React.Component {
 		return (
 			<div className="Summary__totalTrackerCountContainer clickable" onClick={this.clickTrackersCount}>
 				<span className="Summary__totalTrackerCount g-tooltip">
-					{this._totalTrackersFound()}
+					{this.props.trackerCounts.found}
 					<Tooltip
 						header={t('panel_tracker_total_tooltip')}
 						position="right"

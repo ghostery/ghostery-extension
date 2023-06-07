@@ -33,6 +33,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				trackerCounts: {
 					allowed: 0,
 					blocked: 0,
+					found: 0,
 				},
 				sitePolicy: false,
 				paused_blocking: false,
@@ -73,6 +74,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				trackerCounts: {
 					allowed: 3,
 					blocked: 5,
+					found: 5,
 				},
 				sitePolicy: false,
 				paused_blocking: true,
@@ -116,6 +118,7 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 				trackerCounts: {
 					allowed: 0,
 					blocked: 0,
+					found: 0,
 				},
 				sitePolicy: false,
 				paused_blocking: false,

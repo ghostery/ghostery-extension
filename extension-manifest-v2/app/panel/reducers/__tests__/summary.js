@@ -33,6 +33,7 @@ const initialState = Immutable({
 	trackerCounts: {
 		allowed: 0,
 		blocked: 0,
+		found: 0,
 	},
 	tab_id: 0,
 	antiTracking: {
