@@ -17,7 +17,6 @@ import { getBrowserInfo } from '@ghostery/libs';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import Policy from './Policy';
-import { getCommonData } from '../utils/commonModulesData';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
