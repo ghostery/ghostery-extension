@@ -341,33 +341,21 @@ class Summary extends React.Component {
 		return (pageHost.split('.').length < 2);
 	}
 
-	_adBlockBlocked() {
-		const {
-			adBlock,
-			enable_ad_block,
-		} = this.props;
-
-		return (enable_ad_block && adBlock && adBlock.trackerCount) || 0;
-	}
-
-	_antiTrackUnsafe() {
+	_requestsModifiedCount() {
 		const {
 			antiTracking,
 			enable_anti_tracking,
 		} = this.props;
 
-		return (enable_anti_tracking && antiTracking && antiTracking.trackerCount) || 0;
-	}
-
-	_requestsModifiedCount() {
-		return this._antiTrackUnsafe() + this._adBlockBlocked();
+		return (enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount) || 0;
 	}
 
 	_totalTrackersBlockedCount() {
 		const {
 			paused_blocking,
 			sitePolicy,
-			trackerCounts
+			trackerCounts,
+			adBlock,
 		} = this.props;
 
 		let totalTrackersBlockedCount;
@@ -378,8 +366,7 @@ class Summary extends React.Component {
 		} else {
 			totalTrackersBlockedCount = trackerCounts.blocked || 0;
 		}
-
-		return totalTrackersBlockedCount;
+		return totalTrackersBlockedCount + (adBlock?.unidentifiedTrackers?.length || 0);
 	}
 
 	_isCondensed() {

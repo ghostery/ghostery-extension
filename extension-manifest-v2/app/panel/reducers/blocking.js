@@ -241,7 +241,7 @@ export default (state = initialState, action = null) => {
 					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
 					totalUnidentifiedCount: antiTracking.totalUnidentifiedCount + adBlock.totalUnidentifiedCount,
 					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
-					unidentifiedTrackerCount: antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount,
+					unidentifiedTrackerCount: adBlock.unidentifiedTrackerCount,
 					unidentifiedTrackers: Array.from(new Set(antiTracking.unidentifiedTrackers.concat(adBlock.unidentifiedTrackers))),
 					whitelistedUrls: { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls },
 					hide: state.unidentifiedCategory.hide,
