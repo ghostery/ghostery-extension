@@ -341,17 +341,13 @@ class Summary extends React.Component {
 		return (pageHost.split('.').length < 2);
 	}
 
-	_antiTrackUnsafe() {
+	_requestsModifiedCount() {
 		const {
 			antiTracking,
 			enable_anti_tracking,
 		} = this.props;
 
-		return (enable_anti_tracking && antiTracking && antiTracking.trackerCount) || 0;
-	}
-
-	_requestsModifiedCount() {
-		return this._antiTrackUnsafe();
+		return (enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount) || 0;
 	}
 
 	_totalTrackersBlockedCount() {
@@ -360,7 +356,6 @@ class Summary extends React.Component {
 			sitePolicy,
 			trackerCounts,
 			adBlock,
-			antiTracking,
 		} = this.props;
 
 		let totalTrackersBlockedCount;
@@ -371,10 +366,7 @@ class Summary extends React.Component {
 		} else {
 			totalTrackersBlockedCount = trackerCounts.blocked || 0;
 		}
-		const adBlockingTrackers = adBlock.unidentifiedTrackers;
-		const antiTrackingTrackers = antiTracking.unidentifiedTrackers;
-		const uniqueUnidentifiedTrackers = [...new Set([...adBlockingTrackers, ...antiTrackingTrackers].map(t => t.name))];
-		return totalTrackersBlockedCount + uniqueUnidentifiedTrackers.length;
+		return totalTrackersBlockedCount + (adBlock?.unidentifiedTrackers?.length || 0);
 	}
 
 	_isCondensed() {
