@@ -322,7 +322,7 @@ class FoundBugs {
 		const { blocked } = this._foundApps[tab_id].issueCounts;
 		const allowed = this._foundApps[tab_id].apps.length - blocked;
 
-		const adBlockingTrackers = getCommonData(tab_id, tabUrl).unidentifiedTrackers;
+		const adBlockingTrackers = getCommonData(tab_id, tabUrl, false).unidentifiedTrackers;
 		const antiTrackingTrackers = getCommonData(tab_id, tabUrl, true).unidentifiedTrackers;
 		const uniqueUnidentifiedTrackers = [...new Set([...adBlockingTrackers, ...antiTrackingTrackers].map(t => t.name))];
 		const found = this._foundApps[tab_id].apps.length + uniqueUnidentifiedTrackers.length;
