@@ -13,7 +13,7 @@ export function openTabWithUrl(host, event) {
   const { href } = event.currentTarget;
   event.preventDefault();
 
-  Promise.resolve(chrome.tabs.create({ url: href })).then(() => {
+  chrome.tabs.create({ url: href }).then(() => {
     window.close();
   });
 }
