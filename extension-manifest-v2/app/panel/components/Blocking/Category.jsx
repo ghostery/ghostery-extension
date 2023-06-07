@@ -252,10 +252,7 @@ class Category extends React.Component {
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
-				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}${isUnidentified ? ' anti-tracking-header' : ''}`}>
-					{isUnidentified && (
-						<div className="Category__antiTrackingDivider" />
-					)}
+				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}`}>
 					<div className="row align-middle">
 						<div className="columns shrink align-self-top">
 							<div className="cat-image-wrapper">
@@ -282,14 +279,14 @@ class Category extends React.Component {
 										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
 									</span>
 								</div>
-								{((!isUnidentified && !!trackersBlockedCount)
-								|| (isUnidentified && !!category.whitelistedTotal && sitePolicy !== 1)) && (
-									<div className={`blocked-count${isUnidentified ? ' ghosty-blue' : ''}`}>
+								{!!trackersBlockedCount && (
+									<div className="blocked-count">
 										<span className="count">
-											{isUnidentified ? `${category.whitelistedTotal} ` : `${trackersBlockedCount} `}
+											{trackersBlockedCount}
 										</span>
+										&nbsp;
 										<span className="text">
-											{isUnidentified ? t('blocking_category_whitelisted') : t('blocking_category_blocked') }
+											{t('blocking_category_blocked')}
 										</span>
 									</div>
 								)}
