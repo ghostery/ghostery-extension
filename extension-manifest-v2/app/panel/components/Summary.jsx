@@ -341,15 +341,6 @@ class Summary extends React.Component {
 		return (pageHost.split('.').length < 2);
 	}
 
-	_adBlockBlocked() {
-		const {
-			adBlock,
-			enable_ad_block,
-		} = this.props;
-
-		return (enable_ad_block && adBlock && adBlock.trackerCount) || 0;
-	}
-
 	_antiTrackUnsafe() {
 		const {
 			antiTracking,
