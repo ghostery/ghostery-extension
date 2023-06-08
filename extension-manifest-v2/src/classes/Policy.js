@@ -90,7 +90,7 @@ class Policy {
 		let isWhitelisted = false;
 		const processedHostUrl = processUrl(hostUrl).host;
 		const processedTrackerUrl = processUrl(trackerUrl).host;
-		const cliqzModuleWhitelist = conf.cliqz_module_whitelist;
+		const cliqzModuleWhitelist = conf.common_whitelist;
 
 		if (cliqzModuleWhitelist[processedTrackerUrl]) {
 			cliqzModuleWhitelist[processedTrackerUrl].hosts.some((host) => {

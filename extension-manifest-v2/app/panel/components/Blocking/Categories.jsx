@@ -51,37 +51,39 @@ class Categories extends React.Component {
 
 		const renderCategory = (category, index, isUnidentified) => {
 			let whitelistedTotal = 0;
-			const unidentifiedCategoryMapping = isUnidentified ? (
-				{
+			let unidentifiedCategoryMapping = null;
+			if (isUnidentified) {
+				const trackers = unidentifiedCategory.unidentifiedTrackers.map((unidentifiedTracker) => {
+					if (unidentifiedTracker.whitelisted) { whitelistedTotal++; }
+					return {
+						name: unidentifiedTracker.name,
+						domains: unidentifiedTracker.domains,
+						whitelisted: unidentifiedTracker.whitelisted,
+						type: unidentifiedTracker.type,
+						siteRestricted: sitePolicy === 1,
+						blocked: false,
+						catId: 'unidentified',
+						description: '',
+						id: unidentifiedTracker.name + unidentifiedTracker.domains[0],
+						shouldShow: true,
+						commonAdCount: unidentifiedTracker.ads,
+						commonCookieCount: unidentifiedTracker.cookies,
+						commonFingerprintCount: unidentifiedTracker.fingerprints,
+					};
+				});
+				unidentifiedCategoryMapping = {
 					id: 'unidentified',
 					name: t('unidentified'),
 					description: t('unidentified_description'),
 					img_name: 'unidentified',
 					color: '#818181',
 					num_total: unidentifiedCategory.unidentifiedTrackers.length,
-					num_blocked: unidentifiedCategory.unidentifiedTrackerCount,
+					num_blocked: unidentifiedCategory.unidentifiedTrackerCount - whitelistedTotal,
 					num_shown: unidentifiedCategory.hide ? 0 : unidentifiedCategory.unidentifiedTrackers.length,
-					trackers: unidentifiedCategory.unidentifiedTrackers.map((unidentifiedTracker) => {
-						if (unidentifiedTracker.whitelisted) { whitelistedTotal++; }
-						return {
-							name: unidentifiedTracker.name,
-							domains: unidentifiedTracker.domains,
-							whitelisted: unidentifiedTracker.whitelisted,
-							type: unidentifiedTracker.type,
-							siteRestricted: sitePolicy === 1,
-							blocked: false,
-							catId: 'unidentified',
-							description: '',
-							id: unidentifiedTracker.name + unidentifiedTracker.domains[0],
-							shouldShow: true,
-							commonAdCount: unidentifiedTracker.ads,
-							commonCookieCount: unidentifiedTracker.cookies,
-							commonFingerprintCount: unidentifiedTracker.fingerprints,
-						};
-					}),
+					trackers,
 					whitelistedTotal,
-				}
-			) : null;
+				};
+			}
 
 			return (
 				<Category

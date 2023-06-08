@@ -126,7 +126,7 @@ export function anonymizeSiteTracker({ actionData, state }) {
 			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});
-	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
+	sendMessage('setPanelData', { common_whitelist: whitelistedUrls });
 	return {
 		commonModuleData: updatedcommonModuleData,
 	};

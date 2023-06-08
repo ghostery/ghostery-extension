@@ -149,7 +149,7 @@ class ConfData {
 			_initProperty('site_specific_blocks', {});
 			_initProperty('site_specific_unblocks', {});
 			_initProperty('site_whitelist', []);
-			_initProperty('cliqz_module_whitelist', {});
+			_initProperty('common_whitelist', {});
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
 
