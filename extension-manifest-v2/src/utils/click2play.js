@@ -241,7 +241,7 @@ export function allowAllwaysC2P(app_id, tab_host) {
 	conf.selected_app_ids = selected_app_ids;
 
 	// Remove fron site-specific-blocked
-	if (conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
+	if (conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(app_id)) {
 		const { site_specific_blocks } = conf;
 		site_specific_blocks[tab_host].splice(0, 1);
 		conf.site_specific_blocks = site_specific_blocks;
