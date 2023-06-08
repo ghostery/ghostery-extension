@@ -171,7 +171,7 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 	const updated_settings_category = updated_settings_categories.find(category => category.id === cat_id);
 
 	const selectedSettingsTracker = updated_settings_category.trackers
-		.find(tracker => tracker.shouldShow && +tracker.id === app_id);
+		.find(tracker => tracker.shouldShow && tracker.id === app_id);
 	if (selectedSettingsTracker && !trust && !restrict) { // Only update global if this action is blocking
 		const oldState = selectedSettingsTracker.blocked;
 		selectedSettingsTracker.blocked = block;
