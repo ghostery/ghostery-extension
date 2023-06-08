@@ -34,7 +34,6 @@ import button from './classes/BrowserButton';
 import c2pDb from './classes/Click2PlayDb';
 import cmp from './classes/CMP';
 import abtest from './classes/ABTest';
-import compDb from './classes/CompatibilityDb';
 import confData from './classes/ConfData';
 import conf from './classes/Conf';
 import dispatcher from './classes/Dispatcher';
@@ -97,7 +96,6 @@ async function updateDBs() {
 		log('Database version retrieval succeeded', data);
 
 		await c2pDb.update(data.click2play);
-		await compDb.update(data.compatibility);
 
 		let lastUpdate;
 		if (common.modules.adblocker.isEnabled) {
@@ -1512,7 +1510,6 @@ function initializeGhosteryModules() {
 	return Promise.all([
 		bugDb.init(globals.JUST_UPGRADED),
 		c2pDb.init(globals.JUST_UPGRADED),
-		compDb.init(globals.JUST_UPGRADED),
 		commonStartup(),
 	])
 		.then(() => scheduledTasks());

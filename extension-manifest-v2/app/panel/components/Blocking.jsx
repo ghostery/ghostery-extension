@@ -183,32 +183,7 @@ class Blocking extends React.Component {
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
 			categoryEl.trackers.forEach((trackerEl) => {
-				if (trackerEl.warningCompatibility || trackerEl.warningInsecure || trackerEl.warningSlow) {
-					trackerEl.shouldShow = true;
-					count++;
-				} else {
-					trackerEl.shouldShow = false;
-				}
-			});
-
-			categoryEl.num_shown = count;
-		});
-
-		actions.updateCategories(updated_categories);
-	}
-
-	/**
-	* Filter trackers in categories to show only those
-	* that have compatibility warnings. Trigger action.
-	*/
-	setWarningCompatibilityShow() {
-		const { actions, categories } = this.props;
-		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
-
-		updated_categories.forEach((categoryEl) => {
-			let count = 0;
-			categoryEl.trackers.forEach((trackerEl) => {
-				if (trackerEl.warningCompatibility) {
+				if (trackerEl.warningInsecure || trackerEl.warningSlow) {
 					trackerEl.shouldShow = true;
 					count++;
 				} else {
@@ -300,8 +275,6 @@ class Blocking extends React.Component {
 			this.setBlockedShow();
 		} else if (filter.type === 'trackers' && filter.name === 'warning') {
 			this.setWarningShow();
-		} else if (filter.type === 'trackers' && filter.name === 'warning-compatibility') {
-			this.setWarningCompatibilityShow();
 		} else if (filter.type === 'trackers' && filter.name === 'warning-slow-insecure') {
 			this.setWarningSlowInsecureShow();
 		} else if (filter.type === 'category') {

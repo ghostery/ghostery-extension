@@ -22,7 +22,6 @@ import msgModule from './utils/msg';
 import { log } from '../../src/utils/common';
 import trackersCountImage from '../data-images/purple_box/trackersCountImage';
 import closeIconImage from '../data-images/purple_box/closeIconImage';
-import breakingIconImage from '../data-images/purple_box/breakingIconImage';
 import slowIconImage from '../data-images/purple_box/slowIconImage';
 import nonSecureIconImage from '../data-images/purple_box/nonSecureIconImage';
 import nonSecureSlowIconImage from '../data-images/purple_box/nonSecureSlowIconImage';
@@ -51,7 +50,6 @@ const Ghostery = (function(win, doc) {
 	let box;
 	let count;
 	let pbIcons;
-	let breakingIcon;
 	let slowIcon;
 	let nonSecureIcon;
 	let nonSecureSlowIcon;
@@ -318,9 +316,6 @@ const Ghostery = (function(win, doc) {
 		if (app.hasLatencyIssue) {
 			icon = slowIcon;
 			icon.style.opacity = '1.0';
-		} else if (app.hasCompatibilityIssue) {
-			icon = breakingIcon;
-			icon.style.opacity = '1.0';
 		} else if (app.hasInsecureIssue) {
 			icon = nonSecureIcon;
 			icon.style.opacity = '1.0';
@@ -436,7 +431,6 @@ const Ghostery = (function(win, doc) {
 		box = createEl('div');
 		count = createEl('div');
 		pbIcons = createEl('div');
-		breakingIcon = createEl('span');
 		slowIcon = createEl('span');
 		nonSecureIcon = createEl('span');
 		nonSecureSlowIcon = createEl('span');
@@ -462,11 +456,6 @@ const Ghostery = (function(win, doc) {
 		count.textContent = '0';
 		count.style.color = 'transparent';
 		pbIcons.id = 'ghostery-pb-icons-container';
-		breakingIcon.id = 'ghostery-breaking-tracker';
-		breakingIcon.className = 'ghostery-pb-tracker';
-		breakingIcon.title = BOX_TRANSLATIONS.box_warning_compatibility;
-		breakingIcon.style.background = `url(${breakingIconImage})`;
-		breakingIcon.style.opacity = '0.5';
 		slowIcon.id = 'ghostery-slow-tracker';
 		slowIcon.className = 'ghostery-pb-tracker';
 		slowIcon.title = BOX_TRANSLATIONS.box_warning_slow;
@@ -495,7 +484,7 @@ const Ghostery = (function(win, doc) {
 
 		appendChild(background, list);
 		appendChild(minimizeContainer, minimizeIcon);
-		appendChild(pbIcons, breakingIcon, slowIcon, nonSecureIcon);
+		appendChild(pbIcons, slowIcon, nonSecureIcon);
 		appendChild(box, count, pbIcons, title, minimizeContainer, close);
 		appendChild(ghostery, box, background);
 

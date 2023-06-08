@@ -46,17 +46,6 @@
 			}
 		}
 	}
-	.blocking-trk.warning {
-		&.compatibility .warning-image {
-			background-image: url('/app/images/panel/warning-compatibility.svg');
-		}
-	}
-	&.show-warnings .blocking-trk.warning:not(.blocked),
-	&.show-warnings.paused .blocking-trk.warning {
-		&.compatibility .warning-image {
-			background-image: url('/app/images/panel/warning-compatibility-faded.svg');
-		}
-	}
 	&.show-warnings {
 		.blocking-trk.warning {
 			&.insecure .warning-image {

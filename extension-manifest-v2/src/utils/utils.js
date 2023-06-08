@@ -144,7 +144,7 @@ export function defineLazyProperty(obj, prop, callback) {
 
 /**
  * Quickly process tracker URLs to return host and path. Used with fuzzyUrlMatcher()
- * to parse FirstPartyException and CompatibilityDB URLs
+ * to parse FirstPartyException URLs
  * @memberOf BackgroundUtils
  *
  * @param  {string} src 	the tracker url
