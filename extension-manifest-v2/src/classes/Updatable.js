@@ -19,7 +19,7 @@ import { getISODate, log } from '../utils/common';
 
 const { CDN_BASE_URL } = globals;
 /**
- * Base class for BugDb, Click2PlayDb, CompatibilityDb.
+ * Base class for Click2PlayDb.
  * It provides update functionality, which all of these subclasses
  * need. Hence - the name.
  * @memberOf  BackgroundClasses

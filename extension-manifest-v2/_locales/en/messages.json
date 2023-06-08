@@ -390,9 +390,6 @@
   "box_trackers": {
     "message": "Trackers"
   },
-  "box_warning_compatibility": {
-    "message": "Broken Page Trackers"
-  },
   "box_warning_nonsecure": {
     "message": "Non-secure Trackers"
   },
@@ -1215,9 +1212,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Trust on this site"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Blocked tracker breaks page"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Tracker is non-secure"
