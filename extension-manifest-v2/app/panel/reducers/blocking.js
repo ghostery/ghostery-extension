@@ -66,7 +66,7 @@ const _updateTrackerTrustRestrict = (state, action) => {
 	let updated_site_specific_blocks = {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
 	const msg = action.data;
-	const app_id = +msg.app_id;
+	const { app_id } = msg;
 	const { pageHost } = action;
 	const siteSpecificUnblocks = state.site_specific_unblocks;
 	const siteSpecificBlocks = state.site_specific_blocks;
