@@ -757,7 +757,7 @@ class PanelData {
 			ss_allowed: pageUnblocks.includes(trackerId),
 			ss_blocked: pageBlocks.includes(trackerId),
 			sb_blocked: smartBlockActive && smartBlock.blocked.hasOwnProperty(trackerId),
-			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(trackerId)
+			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(trackerId),
 		};
 	}
 

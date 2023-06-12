@@ -334,7 +334,7 @@ class EventHandlers {
 		}, 1);
 
 		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
+			// return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
 		}
 
 		return { cancel: false };

@@ -89,23 +89,16 @@ class Tracker extends React.Component {
 		};
 	}
 
-	static _renderCommonCookieStat(count) { return Tracker._renderCommonStat(count, 'cookie'); }
+	static _renderCommonAntiTrackingStat(count) { return Tracker._renderCommonStat(count, 'modified'); }
 
-	static _renderCommonFingerprintStat(count) { return Tracker._renderCommonStat(count, 'fingerprint'); }
-
-	static _renderCommonAdStat(count) { return Tracker._renderCommonStat(count, 'ad'); }
+	static _renderCommonAdStat(count) { return Tracker._renderCommonStat(count, 'blocked'); }
 
 	static _renderCommonStat(count, type) {
-		const exactlyOne = count === 1;
-		const label = exactlyOne ?
-			t(`${type}`) :
-			t(`${type}s`);
-
 		return (
 			<span className="trk-common-stat">
 				{count}
 				{' '}
-				{label}
+				{type}
 			</span>
 		);
 	}
@@ -270,13 +263,19 @@ class Tracker extends React.Component {
 		});
 	}
 
+	_isBlocking() {
+		const { tracker } = this.props;
+		const { commonAdCount, commonCookieCount, commonFingerprintCount } = tracker;
+		return (commonAdCount || 0) + (commonCookieCount || 0) + (commonFingerprintCount || 0);
+	}
+
 	_renderCommonStatsContainer() {
 		const { tracker } = this.props;
 		const { commonAdCount, commonCookieCount, commonFingerprintCount } = tracker;
 
-		const oneOrMoreCookies = commonCookieCount >= 1;
-		const oneOrMoreFingerprints = commonFingerprintCount >= 1;
 		const oneOrMoreAds = commonAdCount >= 1;
+		const antiTrackingCount = commonCookieCount + commonFingerprintCount;
+		const oneOrMoreModified = antiTrackingCount >= 1;
 
 		return (
 			<div className="trk-common-stats-outer-container">
@@ -286,11 +285,15 @@ class Tracker extends React.Component {
 						{Tracker._renderCommonAdStat(commonAdCount)}
 					</div>
 				)}
-				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
+				{oneOrMoreModified && (
 					<div className="trk-common-stats-container">
 						{this._renderCommonCookiesAndFingerprintsIcon()}
-						{oneOrMoreCookies && Tracker._renderCommonCookieStat(commonCookieCount)}
-						{oneOrMoreFingerprints && Tracker._renderCommonFingerprintStat(commonFingerprintCount)}
+						{oneOrMoreModified && Tracker._renderCommonAntiTrackingStat(antiTrackingCount)}
+					</div>
+				)}
+				{(!this._isBlocking()) && (
+					<div className="trk-common-stats-container">
+						No tracking detected
 					</div>
 				)}
 			</div>
@@ -365,7 +368,7 @@ class Tracker extends React.Component {
 						{!tracker.whitelisted && this._renderCommonStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						{setup_complete && (
+						{(setup_complete && this._isBlocking()) ? (
 							<React.Fragment>
 								{!isUnidentified && renderKnownTrackerButtons(
 									tracker.ss_allowed,
@@ -382,7 +385,7 @@ class Tracker extends React.Component {
 									this.context
 								)}
 							</React.Fragment>
-						)}
+						) : null}
 					</div>
 				</div>
 				{showMoreInfo && (
