@@ -121,14 +121,17 @@ const Options = {
       // Send update message to another contexts (background page / panel / options)
       chrome.runtime
         .sendMessage({ action: UPDATE_OPTIONS_ACTION_NAME })
+        // The function only throws if the other end does not exist. Mainly, it happens
+        // when the background process starts, but there is no other content script or
+        // extension page, which could receive a message.
         .catch(() => {});
 
       return options;
     },
     observe: (_, options, prevOptions) => {
-      observers.forEach((fn) => {
+      observers.forEach(async (fn) => {
         try {
-          fn(options, prevOptions);
+          await fn(options, prevOptions);
         } catch (e) {
           console.error(`Error while observing options: `, e);
         }
