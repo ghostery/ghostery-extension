@@ -89,6 +89,6 @@ export default {
         }
       }
     `,
-    { deleteFocus: true },
+    { delegateFocus: true },
   ),
 };

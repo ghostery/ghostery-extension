@@ -10,9 +10,12 @@
  */
 
 import { html } from 'hybrids';
+import { openTabWithUrl } from '/utils/tabs.js';
 
 function close(host, event) {
   event.preventDefault();
+  event.stopPropagation();
+
   host.parentNode.removeChild(host);
 }
 
@@ -25,7 +28,7 @@ export default {
       <ui-action>
         <a
           href="${href}"
-          target="_blank"
+          onclick="${openTabWithUrl}"
           layout="row gap:2 items:stretch padding:1.5"
         >
           ${icon &&

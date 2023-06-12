@@ -15,6 +15,8 @@ import Options from '/store/options.js';
 import Session from '/store/session.js';
 import TabStats from '/store/tab-stats.js';
 
+import { openTabWithUrl } from '/utils/tabs.js';
+
 import sleep from '../assets/sleep.svg';
 
 import Navigation from './navigation.js';
@@ -110,7 +112,10 @@ export default {
               <ui-panel-header layout="fixed top left width:full">
                 ${store.ready(stats) && stats.domain}
                 <ui-action slot="icon">
-                  <a href="https://www.ghostery.com" target="_blank">
+                  <a
+                    href="https://www.ghostery.com"
+                    onclick="${openTabWithUrl}"
+                  >
                     <ui-icon name="logo"></ui-icon>
                   </a>
                 </ui-action>
@@ -128,7 +133,7 @@ export default {
                 layout="absolute inset bottom:auto margin"
               >
                 Additional Permissions Required <br />
-                <a href="${ONBOARDING_URL}" target="_blank">
+                <a href="${ONBOARDING_URL}" onclick="${openTabWithUrl}">
                   Enable Ghostery
                 </a>
               </gh-panel-alert>
@@ -143,8 +148,8 @@ export default {
             <gh-panel-button>
               <a
                 href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
-                target="_blank"
                 layout="row center gap:0.5"
+                onclick="${openTabWithUrl}"
               >
                 <ui-icon name="pause"></ui-icon>
                 Enable Ghostery
@@ -192,7 +197,7 @@ export default {
             <ui-text color="gray-900">
               <a
                 href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-                target="_blank"
+                onclick="${openTabWithUrl}"
                 layout="block"
               >
                 <gh-panel-options-item
@@ -226,6 +231,7 @@ export default {
                 icon="${notification.icon}"
                 href="${notification.url}"
                 type="${notification.type}"
+                onclick="${openTabWithUrl}"
               >
                 ${notification.text}
                 <span slot="action">${notification.action}</span>

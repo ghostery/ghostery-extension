@@ -228,42 +228,32 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === 'getCurrentTab') {
-    chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
-      sendResponse(tab);
-    });
-    return true;
-  }
-
-  if (
-    __PLATFORM__ === 'safari' &&
-    sender.url &&
-    sender.frameId !== undefined &&
-    sender.tab?.id
-  ) {
-    switch (msg.action) {
-      // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
-      // with the correct tabId (sometimes it is correct, sometimes it is 0).
-      // Thus, let the content_script fire it.
-      case 'onCommitted': {
-        const { domain, hostname } = parse(sender.url);
-        setupTabStats(sender.tab.id, domain || hostname);
-        break;
+if (__PLATFORM__ === 'safari') {
+  chrome.runtime.onMessage.addListener((msg, sender) => {
+    if (sender.url && sender.frameId !== undefined && sender.tab?.id) {
+      switch (msg.action) {
+        // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
+        // with the correct tabId (sometimes it is correct, sometimes it is 0).
+        // Thus, let the content_script fire it.
+        case 'onCommitted': {
+          const { domain, hostname } = parse(sender.url);
+          setupTabStats(sender.tab.id, domain || hostname);
+          break;
+        }
+        case 'updateTabStats':
+          updateTabStats(
+            sender.tab.id,
+            msg.urls.map((url) =>
+              Request.fromRawDetails({ url, sourceUrl: sender.url }),
+            ),
+          );
+          break;
       }
-      case 'updateTabStats':
-        updateTabStats(
-          sender.tab.id,
-          msg.urls.map((url) =>
-            Request.fromRawDetails({ url, sourceUrl: sender.url }),
-          ),
-        );
-        break;
     }
-  }
 
-  return false;
-});
+    return false;
+  });
+}
 
 // Following code only applies to chromium-based browsers excluding:
 // * Safari - it does not support chrome.webRequest.onBeforeRequest

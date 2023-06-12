@@ -111,7 +111,7 @@ export default define({
       background: linear-gradient(180deg, #F0F2F7 0%, #FFFFFF 90%);
     }
 
-     ui-button {
+    ui-button {
       text-transform: none;
       border-radius: 8px;
       box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);

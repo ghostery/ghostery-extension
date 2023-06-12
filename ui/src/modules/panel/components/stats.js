@@ -11,6 +11,17 @@
 
 import { html, msg, router, dispatch } from 'hybrids';
 
+function openTabWithUrl(host, event) {
+  if (chrome.tabs?.create) {
+    event.preventDefault();
+    Promise.resolve(chrome.tabs.create({ url: event.currentTarget.href })).then(
+      () => {
+        window.close();
+      },
+    );
+  }
+}
+
 export default {
   categories: undefined,
   categoryList: ({ categories = [] }) =>
@@ -77,7 +88,7 @@ export default {
           <ui-tooltip>
             <span slot="content">WhoTracks.Me Statistical Report</span>
             <ui-panel-action>
-              <a href="${wtmUrl}" target="_blank">
+              <a href="${wtmUrl}" onclick="${openTabWithUrl}">
                 <ui-icon name="whotracksme"></ui-icon>
               </a>
             </ui-panel-action>
