@@ -126,7 +126,7 @@ export function anonymizeSiteTracker({ actionData, state }) {
 			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});
-	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
+	sendMessage('setPanelData', { common_whitelist: whitelistedUrls });
 	return {
 		commonModuleData: updatedcommonModuleData,
 	};
@@ -171,7 +171,7 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 	const updated_settings_category = updated_settings_categories.find(category => category.id === cat_id);
 
 	const selectedSettingsTracker = updated_settings_category.trackers
-		.find(tracker => tracker.shouldShow && +tracker.id === app_id);
+		.find(tracker => tracker.shouldShow && tracker.id === app_id);
 	if (selectedSettingsTracker && !trust && !restrict) { // Only update global if this action is blocking
 		const oldState = selectedSettingsTracker.blocked;
 		selectedSettingsTracker.blocked = block;
@@ -248,7 +248,7 @@ export function blockUnblockGlobalTracker({ actionData, state }) {
 	const updated_blocking_category = updated_blocking_categories.find(item => item.id === cat_id);
 
 	const selectedBlockingTracker = updated_blocking_category.trackers
-		.find(tracker => tracker.shouldShow && tracker.id === +app_id);
+		.find(tracker => tracker.shouldShow && tracker.id === app_id);
 	// Only update if the site tracker is neither trusted nor restricted
 	if (selectedBlockingTracker) {
 		const oldState = selectedBlockingTracker.blocked || selectedBlockingTracker.ss_blocked;

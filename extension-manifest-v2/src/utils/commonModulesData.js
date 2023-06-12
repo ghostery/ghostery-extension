@@ -33,7 +33,7 @@ export function getCommonData(tabId, tabHostUrl, antiTracking) {
 	let trackerCount = 0;
 	let unidentifiedTrackerCount = 0;
 	const unidentifiedTrackers = [];
-	const whitelistedUrls = conf.cliqz_module_whitelist;
+	const whitelistedUrls = conf.common_whitelist;
 	const commonModule = antiTracking ? antitracking : adblocker;
 	const commonModuleEnabled = antiTracking ? conf.enable_anti_tracking : conf.enable_ad_block;
 

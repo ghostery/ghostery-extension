@@ -267,7 +267,7 @@ const _filter = (state, action) => {
 					}
 					break;
 				case 'new':
-					trackerEl.shouldShow = !!(new_app_ids.indexOf(+trackerEl.id) !== -1);
+					trackerEl.shouldShow = !!(new_app_ids.indexOf(trackerEl.id) !== -1);
 					if (trackerEl.shouldShow) {
 						categoryEl.num_total++;
 					}

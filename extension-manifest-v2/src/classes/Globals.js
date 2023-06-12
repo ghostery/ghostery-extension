@@ -97,7 +97,6 @@ class Globals {
 			'alert_bubble_pos',
 			'alert_bubble_timeout',
 			'alert_expanded',
-			'cliqz_module_whitelist',
 			'current_theme',
 			'enable_ad_block',
 			'enable_anti_tracking',

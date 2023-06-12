@@ -52,6 +52,26 @@ const initialState = {
 	}
 };
 
+function mergeTrackers(adblockerTrackers, antiTrackingTrackers) {
+	const all = new Map();
+	adblockerTrackers.forEach((tracker) => {
+		all.set(tracker.name, tracker);
+	});
+	antiTrackingTrackers.forEach((tracker) => {
+		const existing = all.get(tracker.name);
+		if (!existing) {
+			all.set(tracker.name, tracker);
+		} else {
+			existing.cookies = tracker.cookies;
+			existing.fingerprints = tracker.fingerprints;
+			existing.whitelisted = existing.whitelisted || tracker.whitelisted;
+			existing.domains.concat(tracker.domains);
+			all.set(tracker.name, existing);
+		}
+	});
+	return Array.from(all.values());
+}
+
 /**
  * Update site_specific_blocks/unblocks for tracker whitelist
  * and blacklist.  Also updates categories.
@@ -175,7 +195,7 @@ const _updateCommonModuleWhitelist = (state, action) => {
 		}
 	});
 
-	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
+	sendMessage('setPanelData', { common_whitelist: whitelistedUrls });
 
 	return updatedUnidentifiedCategory;
 };
@@ -237,12 +257,13 @@ export default (state = initialState, action = null) => {
 		case UPDATE_SUMMARY_DATA: {
 			if (action.data.antiTracking && action.data.adBlock) {
 				const { antiTracking, adBlock } = action.data;
+				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers);
 				const unidentifiedCategory = {
 					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
 					totalUnidentifiedCount: antiTracking.totalUnidentifiedCount + adBlock.totalUnidentifiedCount,
 					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
-					unidentifiedTrackerCount: adBlock.unidentifiedTrackerCount,
-					unidentifiedTrackers: Array.from(new Set(antiTracking.unidentifiedTrackers.concat(adBlock.unidentifiedTrackers))),
+					unidentifiedTrackerCount: trackers.length,
+					unidentifiedTrackers: trackers,
 					whitelistedUrls: { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls },
 					hide: state.unidentifiedCategory.hide,
 				};
