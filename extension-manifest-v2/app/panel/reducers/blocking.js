@@ -176,30 +176,34 @@ const _updateCommonModuleWhitelist = (state, action) => {
 	const updatedUnidentifiedCategory = JSON.parse(JSON.stringify(state.unidentifiedCategory));
 	const { whitelistedUrls } = updatedUnidentifiedCategory;
 	const { unidentifiedTracker, pageHost } = action.data;
+	const pageTld = parse(pageHost).domain;
 
 	const addToWhitelist = () => {
 		unidentifiedTracker.domains.forEach((domain) => {
-			if (whitelistedUrls.hasOwnProperty(domain)) {
-				whitelistedUrls[domain].name = unidentifiedTracker.name;
-				whitelistedUrls[domain].hosts.push(pageHost);
+			const tld = parse(domain).domain;
+			if (whitelistedUrls.hasOwnProperty(tld)) {
+				whitelistedUrls[tld].name = unidentifiedTracker.name;
+				whitelistedUrls[tld].hosts = [...new Set([...whitelistedUrls[tld].hosts, pageTld])];
 			} else {
-				whitelistedUrls[domain] = {
+				whitelistedUrls[tld] = {
 					name: unidentifiedTracker.name,
-					hosts: [pageHost],
+					hosts: [pageTld],
 				};
 			}
 		});
 	};
 
 	const removeFromWhitelist = (domain) => {
-		if (!whitelistedUrls[domain]) { return; }
+		const tld = parse(domain).domain;
 
-		whitelistedUrls[domain].hosts = whitelistedUrls[domain].hosts.filter(hostUrl => (
-			hostUrl !== pageHost
+		if (!whitelistedUrls[tld]) { return; }
+
+		whitelistedUrls[tld].hosts = whitelistedUrls[tld].hosts.filter(hostUrl => (
+			hostUrl !== pageTld
 		));
 
-		if (whitelistedUrls[domain].hosts.length === 0) {
-			delete whitelistedUrls[domain];
+		if (whitelistedUrls[tld].hosts.length === 0) {
+			delete whitelistedUrls[tld];
 		}
 	};
 

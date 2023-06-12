@@ -13,6 +13,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { parse } from 'tldts-experimental';
 import c2pDb from './Click2PlayDb';
 import conf from './Conf';
 import globals from './Globals';
@@ -88,13 +89,13 @@ class Policy {
 	 */
 	static checkCommonModuleWhitelist(hostUrl, trackerUrl) {
 		let isWhitelisted = false;
-		const processedHostUrl = processUrl(hostUrl).host;
-		const processedTrackerUrl = processUrl(trackerUrl).host;
+		const pageTld = parse(hostUrl).domain;
+		const trackerTld = parse(trackerUrl).domain;
 		const cliqzModuleWhitelist = conf.common_whitelist;
 
-		if (cliqzModuleWhitelist[processedTrackerUrl]) {
-			cliqzModuleWhitelist[processedTrackerUrl].hosts.some((host) => {
-				if (host === processedHostUrl) {
+		if (cliqzModuleWhitelist[trackerTld]) {
+			cliqzModuleWhitelist[trackerTld].hosts.some((host) => {
+				if (host === pageTld) {
 					isWhitelisted = true;
 					return true;
 				}
