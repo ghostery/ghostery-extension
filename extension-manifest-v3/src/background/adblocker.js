@@ -328,6 +328,23 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
+function isPaused(details, request) {
+  if (details.frameAncestors?.length > 0) {
+    for (const { url } of details.frameAncestors) {
+      const { domain, hostname } = parse(url);
+      if (pausedDomains.includes(domain || hostname)) {
+        return true;
+      }
+    }
+  }
+
+  if (pausedDomains.includes(request.sourceDomain || request.sourceHostname)) {
+    return true;
+  }
+
+  return false;
+}
+
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
@@ -349,47 +366,34 @@ if (__PLATFORM__ === 'firefox') {
                 )
             : () => updateTabStats(tabId, [request]),
         );
-      }
 
-      if (details.frameAncestors?.length > 0) {
-        for (const { url } of details.frameAncestors) {
-          const { domain, hostname } = parse(url);
-          if (pausedDomains.includes(domain || hostname)) {
-            return;
+        if (isPaused(details, request)) return;
+
+        for (const { engine, isEnabled } of adblockerEngines) {
+          if (!engine || isEnabled === false) {
+            continue;
           }
-        }
-      }
 
-      if (
-        pausedDomains.includes(request.sourceDomain || request.sourceHostname)
-      ) {
-        return;
-      }
+          if (request.isMainFrame()) {
+            const htmlFilters = engine.getHtmlFilters(request);
+            if (htmlFilters.length !== 0) {
+              filterRequestHTML(
+                chrome.webRequest.filterResponseData,
+                request,
+                htmlFilters,
+              );
+              return;
+            }
+          } else {
+            const { redirect, match } = engine.match(request);
 
-      for (const { engine, isEnabled } of adblockerEngines) {
-        if (!engine || isEnabled === false) {
-          continue;
-        }
-
-        if (request.isMainFrame()) {
-          const htmlFilters = engine.getHtmlFilters(request);
-          if (htmlFilters.length !== 0) {
-            filterRequestHTML(
-              chrome.webRequest.filterResponseData,
-              request,
-              htmlFilters,
-            );
-            return;
-          }
-        } else {
-          const { redirect, match } = engine.match(request);
-
-          if (redirect !== undefined) {
-            request.blocked = true;
-            return { redirectUrl: redirect.dataUrl };
-          } else if (match === true) {
-            request.blocked = true;
-            return { cancel: true };
+            if (redirect !== undefined) {
+              request.blocked = true;
+              return { redirectUrl: redirect.dataUrl };
+            } else if (match === true) {
+              request.blocked = true;
+              return { cancel: true };
+            }
           }
         }
       }
@@ -401,19 +405,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-
-      if (details.frameAncestors?.length > 0) {
-        for (const { url } of details.frameAncestors) {
-          const { domain, hostname } = parse(url);
-          if (pausedDomains.includes(domain || hostname)) {
-            return;
-          }
-        }
-      }
-
-      if (pausedDomains.includes(request.sourceDomain)) {
-        return {};
-      }
+      if (isPaused(details, request)) return;
 
       let policies;
       for (const { engine, isEnabled } of adblockerEngines) {
