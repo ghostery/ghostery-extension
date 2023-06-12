@@ -65,7 +65,7 @@ export default {
           ${wtmUrl &&
           html`
             <ui-text type="label-xs" color="primary-700" underline>
-              <a href="${wtmUrl}" target="_blank" onclick="${openTabWithUrl}">
+              <a href="${wtmUrl}" onclick="${openTabWithUrl}">
                 Read more on WhoTracks.Me
               </a>
             </ui-text>
@@ -107,11 +107,7 @@ export default {
                 underline
                 layout="padding margin:-1"
               >
-                <a
-                  href="${tracker.website}"
-                  target="_blank"
-                  onclick="${openTabWithUrl}"
-                >
+                <a href="${tracker.website}" onclick="${openTabWithUrl}">
                   ${tracker.website}
                 </a>
               </ui-text>
@@ -131,11 +127,7 @@ export default {
                 underline
                 layout="padding margin:-1"
               >
-                <a
-                  href="${tracker.privacyPolicy}"
-                  target="_blank"
-                  onclick="${openTabWithUrl}"
-                >
+                <a href="${tracker.privacyPolicy}" onclick="${openTabWithUrl}">
                   ${tracker.privacyPolicy}
                 </a>
               </ui-text>
@@ -157,7 +149,6 @@ export default {
                   href="${tracker.contact.startsWith('http')
                     ? ''
                     : 'mailto:'}${tracker.contact}"
-                  target="_blank"
                   onclick="${openTabWithUrl}"
                 >
                   ${tracker.contact}

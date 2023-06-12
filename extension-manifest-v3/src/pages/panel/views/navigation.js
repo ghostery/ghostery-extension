@@ -72,7 +72,6 @@ export default {
               href="${session.user
                 ? 'https://account.ghostery.com/'
                 : 'https://signon.ghostery.com/'}"
-              target="_blank"
               layout="block padding margin:0:1"
               onclick="${openTabWithUrl}"
             >
@@ -95,7 +94,6 @@ export default {
                   <ui-text>
                     <a
                       href="${href}"
-                      target="_blank"
                       layout="block padding margin:0:1"
                       onclick="${openTabWithUrl}"
                     >

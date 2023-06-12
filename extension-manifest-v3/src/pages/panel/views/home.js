@@ -114,7 +114,6 @@ export default {
                 <ui-action slot="icon">
                   <a
                     href="https://www.ghostery.com"
-                    target="_blank"
                     onclick="${openTabWithUrl}"
                   >
                     <ui-icon name="logo"></ui-icon>
@@ -134,7 +133,7 @@ export default {
                 layout="absolute inset bottom:auto margin"
               >
                 Additional Permissions Required <br />
-                <a href="${ONBOARDING_URL}" target="_blank">
+                <a href="${ONBOARDING_URL}" onclick="${openTabWithUrl}">
                   Enable Ghostery
                 </a>
               </gh-panel-alert>
@@ -149,7 +148,6 @@ export default {
             <gh-panel-button>
               <a
                 href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
-                target="_blank"
                 layout="row center gap:0.5"
                 onclick="${openTabWithUrl}"
               >
@@ -199,7 +197,7 @@ export default {
             <ui-text color="gray-900">
               <a
                 href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-                target="_blank"
+                onclick="${openTabWithUrl}"
                 layout="block"
               >
                 <gh-panel-options-item
