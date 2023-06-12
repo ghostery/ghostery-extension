@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { parse } from 'tldts-experimental';
 import {
 	UPDATE_BLOCKING_DATA,
 	FILTER_TRACKERS,
@@ -52,7 +53,7 @@ const initialState = {
 	}
 };
 
-function mergeTrackers(adblockerTrackers, antiTrackingTrackers) {
+function mergeTrackers(adblockerTrackers, antiTrackingTrackers, whitelist, pageUrl) {
 	const all = new Map();
 	adblockerTrackers.forEach((tracker) => {
 		all.set(tracker.name, tracker);
@@ -67,6 +68,31 @@ function mergeTrackers(adblockerTrackers, antiTrackingTrackers) {
 			existing.whitelisted = existing.whitelisted || tracker.whitelisted;
 			existing.domains.concat(tracker.domains);
 			all.set(tracker.name, existing);
+		}
+	});
+	const findTrackerByWhitelistedDomain = domain => Array.from(all.values()).find(
+		tracker => !!tracker.domains.some(whitelistedDomain => whitelistedDomain.endsWith(domain))
+	);
+
+	const pageTld = parse(pageUrl).domain;
+
+	Object.keys(whitelist).forEach((domain) => {
+		if (!whitelist[domain].hosts.some(host => host === pageTld)) {
+			return;
+		}
+		const tld = parse(domain).domain;
+		const existing = findTrackerByWhitelistedDomain(tld) || all.get(tld);
+		if (existing) {
+			existing.whitelisted = true;
+			existing.domains = [...new Set([...existing.domains, domain])];
+		} else {
+			all.set(tld, {
+				name: tld,
+				cookies: 0,
+				fingerprints: 0,
+				domains: [domain],
+				whitelisted: true,
+			});
 		}
 	});
 	return Array.from(all.values());
@@ -257,7 +283,8 @@ export default (state = initialState, action = null) => {
 		case UPDATE_SUMMARY_DATA: {
 			if (action.data.antiTracking && action.data.adBlock) {
 				const { antiTracking, adBlock } = action.data;
-				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers);
+				const { common_whitelist, pageUrl } = state;
+				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers, common_whitelist, pageUrl);
 				const unidentifiedCategory = {
 					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
 					totalUnidentifiedCount: antiTracking.totalUnidentifiedCount + adBlock.totalUnidentifiedCount,
