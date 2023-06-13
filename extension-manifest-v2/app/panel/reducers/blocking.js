@@ -70,9 +70,15 @@ function mergeTrackers(adblockerTrackers, antiTrackingTrackers, whitelist, pageU
 			all.set(tracker.name, existing);
 		}
 	});
-	const findTrackerByWhitelistedDomain = domain => Array.from(all.values()).find(
-		tracker => !!tracker.domains.some(whitelistedDomain => whitelistedDomain.endsWith(domain))
-	);
+
+	const findTrackerByWhitelistedDomain = (domain) => {
+		for (const tracker of all.values()) {
+			if (tracker.domains.some(whitelistedDomain => whitelistedDomain.endsWith(domain))) {
+				return tracker;
+			}
+		}
+		return null;
+	};
 
 	const pageTld = parse(pageUrl).domain;
 
@@ -81,7 +87,7 @@ function mergeTrackers(adblockerTrackers, antiTrackingTrackers, whitelist, pageU
 			return;
 		}
 		const tld = parse(domain).domain;
-		const existing = findTrackerByWhitelistedDomain(tld) || all.get(tld);
+		const existing = all.get(tld) || findTrackerByWhitelistedDomain(tld);
 		if (existing) {
 			existing.whitelisted = true;
 			existing.domains = [...new Set([...existing.domains, domain])];

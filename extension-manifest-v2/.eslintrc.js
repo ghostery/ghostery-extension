@@ -31,6 +31,7 @@ module.exports = {
 	},
 	// 0 = off, 1 = warn, 2 = error
 	rules: {
+		'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
 		'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
 		camelcase: [0],
 		'comma-dangle': [2, {
