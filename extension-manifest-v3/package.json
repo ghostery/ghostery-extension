@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.0.10",
+  "version": "10.0.11",
   "type": "module",
   "scripts": {
     "postinstall": "npm run download-engines",
@@ -15,7 +15,8 @@
     "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./src/_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
     "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src",
-    "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode"
+    "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
+    "release": "./scripts/release.sh"
   },
   "author": {
     "name": "Ghostery GmbH",
