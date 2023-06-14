@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { parse } from 'tldts-experimental';
 import {
 	UPDATE_BLOCKING_DATA,
 	FILTER_TRACKERS,
@@ -52,7 +53,7 @@ const initialState = {
 	}
 };
 
-function mergeTrackers(adblockerTrackers, antiTrackingTrackers) {
+function mergeTrackers(adblockerTrackers, antiTrackingTrackers, whitelist, pageUrl) {
 	const all = new Map();
 	adblockerTrackers.forEach((tracker) => {
 		all.set(tracker.name, tracker);
@@ -67,6 +68,37 @@ function mergeTrackers(adblockerTrackers, antiTrackingTrackers) {
 			existing.whitelisted = existing.whitelisted || tracker.whitelisted;
 			existing.domains.concat(tracker.domains);
 			all.set(tracker.name, existing);
+		}
+	});
+
+	const findTrackerByWhitelistedDomain = (domain) => {
+		for (const tracker of all.values()) {
+			if (tracker.domains.some(whitelistedDomain => whitelistedDomain.endsWith(domain))) {
+				return tracker;
+			}
+		}
+		return null;
+	};
+
+	const pageTld = parse(pageUrl).domain;
+
+	Object.keys(whitelist).forEach((domain) => {
+		if (!whitelist[domain].hosts.some(host => host === pageTld)) {
+			return;
+		}
+		const tld = parse(domain).domain;
+		const existing = all.get(tld) || findTrackerByWhitelistedDomain(tld);
+		if (existing) {
+			existing.whitelisted = true;
+			existing.domains = [...new Set([...existing.domains, domain])];
+		} else {
+			all.set(tld, {
+				name: tld,
+				cookies: 0,
+				fingerprints: 0,
+				domains: [domain],
+				whitelisted: true,
+			});
 		}
 	});
 	return Array.from(all.values());
@@ -150,30 +182,34 @@ const _updateCommonModuleWhitelist = (state, action) => {
 	const updatedUnidentifiedCategory = JSON.parse(JSON.stringify(state.unidentifiedCategory));
 	const { whitelistedUrls } = updatedUnidentifiedCategory;
 	const { unidentifiedTracker, pageHost } = action.data;
+	const pageTld = parse(pageHost).domain;
 
 	const addToWhitelist = () => {
 		unidentifiedTracker.domains.forEach((domain) => {
-			if (whitelistedUrls.hasOwnProperty(domain)) {
-				whitelistedUrls[domain].name = unidentifiedTracker.name;
-				whitelistedUrls[domain].hosts.push(pageHost);
+			const tld = parse(domain).domain;
+			if (whitelistedUrls.hasOwnProperty(tld)) {
+				whitelistedUrls[tld].name = unidentifiedTracker.name;
+				whitelistedUrls[tld].hosts = [...new Set([...whitelistedUrls[tld].hosts, pageTld])];
 			} else {
-				whitelistedUrls[domain] = {
+				whitelistedUrls[tld] = {
 					name: unidentifiedTracker.name,
-					hosts: [pageHost],
+					hosts: [pageTld],
 				};
 			}
 		});
 	};
 
 	const removeFromWhitelist = (domain) => {
-		if (!whitelistedUrls[domain]) { return; }
+		const tld = parse(domain).domain;
 
-		whitelistedUrls[domain].hosts = whitelistedUrls[domain].hosts.filter(hostUrl => (
-			hostUrl !== pageHost
+		if (!whitelistedUrls[tld]) { return; }
+
+		whitelistedUrls[tld].hosts = whitelistedUrls[tld].hosts.filter(hostUrl => (
+			hostUrl !== pageTld
 		));
 
-		if (whitelistedUrls[domain].hosts.length === 0) {
-			delete whitelistedUrls[domain];
+		if (whitelistedUrls[tld].hosts.length === 0) {
+			delete whitelistedUrls[tld];
 		}
 	};
 
@@ -257,7 +293,8 @@ export default (state = initialState, action = null) => {
 		case UPDATE_SUMMARY_DATA: {
 			if (action.data.antiTracking && action.data.adBlock) {
 				const { antiTracking, adBlock } = action.data;
-				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers);
+				const { common_whitelist, pageUrl } = state;
+				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers, common_whitelist, pageUrl);
 				const unidentifiedCategory = {
 					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
 					totalUnidentifiedCount: antiTracking.totalUnidentifiedCount + adBlock.totalUnidentifiedCount,

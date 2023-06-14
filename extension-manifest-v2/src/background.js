@@ -1087,9 +1087,15 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || Policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
+	return (
+		Boolean(globals.SESSION.paused_blocking)
+		|| Boolean(state.ghosteryWhitelisted)
+		|| Policy.getSitePolicy(state.tabUrl, state.url) === 2
+		// only check common_checklist if the tracker id is unknown
+		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domain, state.urlParts.domain))
+	);
 }
+
 /**
  * Set listener for 'enabled' event for Antitracking module which replaces
  * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.

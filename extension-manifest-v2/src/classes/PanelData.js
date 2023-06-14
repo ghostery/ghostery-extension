@@ -249,7 +249,7 @@ class PanelData {
 	 */
 	_getBlockingData() {
 		const {
-			expand_all_trackers, selected_app_ids, show_tracker_urls,
+			expand_all_trackers, selected_app_ids, show_tracker_urls, common_whitelist,
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
 			setup_complete,
 		} = conf;
@@ -258,6 +258,7 @@ class PanelData {
 			setup_complete,
 			expand_all_trackers,
 			selected_app_ids,
+			common_whitelist,
 			show_tracker_urls,
 			site_specific_blocks,
 			site_specific_unblocks,

@@ -44,11 +44,11 @@ class Policy {
 	 * @param  {string} url		site url
 	 * @return {boolean}
 	 */
-	static getSitePolicy(hostUrl, trackerUrl) {
+	static getSitePolicy(hostUrl) {
 		if (Policy.blacklisted(hostUrl)) {
 			return globals.BLACKLISTED;
 		}
-		if (Policy.checkSiteWhitelist(hostUrl) || Policy.checkCommonModuleWhitelist(hostUrl, trackerUrl)) {
+		if (Policy.checkSiteWhitelist(hostUrl)) {
 			return globals.WHITELISTED;
 		}
 		return false;
@@ -81,20 +81,13 @@ class Policy {
 		return false;
 	}
 
-	/**
-	 * Check given url against anti-tracking whitelist
-	 * @param  {string} url 		site url
-	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
-	 */
-	static checkCommonModuleWhitelist(hostUrl, trackerUrl) {
+	static checkCommonModuleWhitelist(pageTld, trackerTld) {
 		let isWhitelisted = false;
-		const processedHostUrl = processUrl(hostUrl).host;
-		const processedTrackerUrl = processUrl(trackerUrl).host;
 		const cliqzModuleWhitelist = conf.common_whitelist;
 
-		if (cliqzModuleWhitelist[processedTrackerUrl]) {
-			cliqzModuleWhitelist[processedTrackerUrl].hosts.some((host) => {
-				if (host === processedHostUrl) {
+		if (cliqzModuleWhitelist[trackerTld]) {
+			cliqzModuleWhitelist[trackerTld].hosts.some((host) => {
+				if (host === pageTld) {
 					isWhitelisted = true;
 					return true;
 				}
