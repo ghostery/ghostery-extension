@@ -1180,7 +1180,7 @@
     "message": " breaking the page."
   },
   "panel_tracker_found_sources_title": {
-    "message": "Detected tracker URLs:"
+    "message": "Detected URLs:"
   },
   "panel_tracker_restrict_tooltip": {
     "message": "Restrict on this site"

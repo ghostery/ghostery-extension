@@ -448,10 +448,7 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the total trackers blocked readout
 	 */
 	_renderTotalTrackersBlocked() {
-		const { is_expert } = this.props;
-
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
-			clickable: is_expert,
 		});
 		const totalTrackersBlockedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
@@ -475,7 +472,7 @@ class Summary extends React.Component {
 	_renderTotalTrackersModified() {
 		const { is_expert } = this.props;
 
-		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'g-tooltip', 'total-trackers-blocked', {
+		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 

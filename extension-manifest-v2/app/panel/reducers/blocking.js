@@ -94,10 +94,12 @@ function mergeTrackers(adblockerTrackers, antiTrackingTrackers, whitelist, pageU
 		} else {
 			all.set(tld, {
 				name: tld,
+				ads: 0,
 				cookies: 0,
 				fingerprints: 0,
 				domains: [domain],
 				whitelisted: true,
+				type: 'antiTracking',
 			});
 		}
 	});

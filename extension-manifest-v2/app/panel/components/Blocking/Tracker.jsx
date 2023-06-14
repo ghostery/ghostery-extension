@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import ClassNames from 'classnames';
 
 import ThemeContext from '../../contexts/ThemeContext';
 import globals from '../../../../src/classes/Globals';
@@ -293,7 +292,7 @@ class Tracker extends React.Component {
 				)}
 				{(!this._isBlocking()) && (
 					<div className="trk-common-stats-container">
-						No tracking detected
+						Nothing to do
 					</div>
 				)}
 			</div>
@@ -348,10 +347,6 @@ class Tracker extends React.Component {
 			));
 		}
 
-		const trackerNameClasses = ClassNames('trk-name', {
-			'is-whitelisted': tracker.whitelisted && !tracker.siteRestricted,
-		});
-
 		return (
 			<div className={`${trackerClasses} blocking-trk`}>
 				<div className="row align-middle trk-header">
@@ -360,15 +355,14 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns collapse-left">
 						<div
-							className={trackerNameClasses}
 							onClick={this.toggleDescription}
 						>
 							{tracker.name}
 						</div>
-						{!tracker.whitelisted && this._renderCommonStatsContainer()}
+						{this._renderCommonStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						{(setup_complete && this._isBlocking()) ? (
+						{setup_complete ? (
 							<React.Fragment>
 								{!isUnidentified && renderKnownTrackerButtons(
 									tracker.ss_allowed,

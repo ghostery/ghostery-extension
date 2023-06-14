@@ -65,7 +65,7 @@
 		.caret-down {
 			@extend %pointer;
 			display: inline-block;
-			margin: 0 15px 4px 0;
+			margin: 0 4px 4px 0;
 			path {
 				fill: $tundora;
 			}
@@ -73,12 +73,13 @@
 		.caret-up {
 			@extend %pointer;
 			display: inline-block;
-			margin: 0 15px 4px 0;
+			margin: 0 4px 4px 0;
 			path {
 				fill: $tundora;
 			}
 		}
 		.checkbox-container {
+			margin-left: 11px;
 			display: inline-block;
 		}
 		.no-sticky {
