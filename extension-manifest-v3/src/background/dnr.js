@@ -9,20 +9,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { observe } from '/store/options.js';
+import { observe, ENGINES } from '/store/options.js';
 
 if (__PLATFORM__ !== 'firefox') {
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
-  observe('engines', async (engines) => {
+  observe(null, async (options) => {
     const enabledRulesetIds =
       (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
 
     const enableRulesetIds = [];
     const disableRulesetIds = [];
 
-    Object.entries(engines).forEach(([rule, enabled]) => {
+    ENGINES.forEach((rule) => {
+      const enabled = options[rule];
       if (enabledRulesetIds.includes(rule) !== enabled) {
         (enabled ? enableRulesetIds : disableRulesetIds).push(rule);
       }

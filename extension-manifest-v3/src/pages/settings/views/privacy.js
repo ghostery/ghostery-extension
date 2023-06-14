@@ -37,9 +37,7 @@ const PREVIEWS = {
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
-    engines: {
-      annoyances: !options.engines.annoyances,
-    },
+    annoyances: !options.annoyances,
     autoconsent: null,
   });
 }
@@ -83,8 +81,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.engines.ads}"
-                onchange="${html.set(options, 'engines.ads')}"
+                value="${options.ads}"
+                onchange="${html.set(options, 'ads')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -106,8 +104,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.engines.tracking}"
-                onchange="${html.set(options, 'engines.tracking')}"
+                value="${options.tracking}"
+                onchange="${html.set(options, 'tracking')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -128,7 +126,7 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.engines.annoyances}"
+                value="${options.annoyances}"
                 onchange="${toggleNeverConsent}"
               ></ui-settings-toggle>
             </div>

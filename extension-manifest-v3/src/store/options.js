@@ -19,7 +19,9 @@ const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 const observers = new Set();
 
 export const SYNC_OPTIONS = [
-  'engines',
+  'ads',
+  'tracking',
+  'annoyances',
   'trackerWheel',
   'trackerCount',
   'wtmSerpReport',
@@ -27,39 +29,61 @@ export const SYNC_OPTIONS = [
   'revision',
 ];
 
+export const ENGINES =
+  chrome.runtime
+    .getManifest()
+    .declarative_net_request?.rule_resources.map(({ id }) => id) || [];
+
 const Options = {
-  engines: {
-    ads: false,
-    tracking: false,
-    annoyances: false,
-  },
+  // Main features
+  ads: false,
+  tracking: false,
+  annoyances: false,
+
+  // Never-consent popup
   autoconsent: {
     all: false,
     allowed: [String],
     disallowed: [String],
     interactions: 0,
   },
+
+  // Browser icon
   trackerWheel: true,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
+
+  // Tracker wheel on SERP
   wtmSerpReport: true,
+
+  // Onboarding
   terms: false,
   onboarding: { done: false, shownAt: 0, shown: 0 },
-  panel: {
-    statsType: 'graph',
-  },
-  paused: [{ id: true, revokeAt: 0 }],
   installDate: '',
+
+  // Panel
+  panel: { statsType: 'graph' },
+
+  // Pause
+  paused: [{ id: true, revokeAt: 0 }],
+
+  // Sync
   sync: true,
   revision: 0,
+
   [store.connect]: {
     async get() {
       let { options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {} } =
         await chrome.storage.local.get(['options']);
 
-      // Migrate `dnrRules` to `engines`
-      // INFO: `engines` option introduced in v10.0.1
-      if (options.dnrRules) {
-        options.engines = options.dnrRules;
+      // Migrate `dnrRules` or `engines` to flatten structure:
+      // * `engines` option introduced in v10.0.1
+      // * flatted main features introduced in v10.0.12
+      if (options.engines || options.dnrRules) {
+        const engines = options.engines || options.dnrRules;
+
+        options.ads = engines.ads;
+        options.tracking = engines.tracking;
+        options.annoyances = engines.annoyances;
       }
 
       // Fetch options from the server for logged in users
@@ -149,11 +173,9 @@ async function migrateFromMV2() {
 
     // Proceed if the storage contains data from v2
     if ('version_history' in storage) {
-      options.engines = {
-        ads: storage.enable_ad_block || false,
-        tracking: storage.enable_anti_tracking || false,
-        annoyances: storage.enable_autoconsent || false,
-      };
+      options.ads = storage.enable_ad_block || false;
+      options.tracking = storage.enable_anti_tracking || false;
+      options.annoyances = storage.enable_autoconsent || false;
 
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,
