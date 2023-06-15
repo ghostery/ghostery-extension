@@ -81,14 +81,19 @@ export function isBug(details) {
 	const { engine } = bugDb;
 
 	const request = fromWebRequestDetails(details);
+	let isFilterBlocker = false;
 
-	const matches = engine.getPatternMetadata(request, {
-		getDomainMetadata: true,
-	});
+	let matches = engine.getPatternMetadata(request);
 
-	if (matches.length === 0) {
-		return false;
+	if (matches.length > 0) {
+		isFilterBlocker = true;
+	} else {
+		matches = engine.metadata.fromDomain(request.domain);
 	}
 
-	return String(matches[0].pattern.ghostery_id);
+	if (matches.length === 0) {
+		return [null, false];
+	}
+
+	return [String(matches[0].pattern.ghostery_id), isFilterBlocker];
 }
