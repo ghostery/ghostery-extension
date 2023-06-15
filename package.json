@@ -21,7 +21,7 @@
   "overrides": {
     "ua-parser-js": "1.0.2"
   },
-  "engineStrict" : true,
+  "engineStrict": true,
   "engines": {
     "npm": ">=9.6.7"
   }
