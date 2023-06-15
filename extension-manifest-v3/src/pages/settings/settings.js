@@ -20,10 +20,12 @@ import Whotracksme from './views/whotracksme.js';
 import Account from './views/account.js';
 import Preview from './views/preview.js';
 
+import assets from './assets/index.js';
+
 export default {
   stack: router([Privacy, Websites, Whotracksme, Account, Preview]),
   session: store(Session),
-  content: ({ stack }) => html`
+  content: ({ stack, session }) => html`
     <template layout="contents">
       <ui-settings-layout>
         <a
@@ -52,16 +54,106 @@ export default {
           <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
           WhoTracks.Me
         </a>
+        ${store.ready(session) &&
+        !session.contributor &&
+        html`
+          <ui-settings-card
+            layout="hidden"
+            layout@992px="
+              area::5/6 self:end:stretch
+              margin:top:2 padding:2 gap content:center
+              column
+            "
+            slot="nav"
+          >
+            <img
+              src="${assets['hands']}"
+              layout="size:12"
+              alt="Contribution"
+              slot="picture"
+            />
+            <div layout="column gap:0.5">
+              <ui-text type="label-l" layout="block:center">
+                Become a Contributor
+              </ui-text>
+              <ui-text type="body-s" color="gray-600" layout="block:center">
+                Help Ghostery fight for a web where privacy is a basic human
+                right.
+              </ui-text>
+              <ui-button layout="margin:top">
+                <a
+                  href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
+                  target="_blank"
+                >
+                  Become a Contributor
+                </a>
+              </ui-button>
+            </div>
+          </ui-settings-card>
+        `}
         <a
-          class="bottom"
           href="${router.url(Account, { scrollToTop: true })}"
-          class="${{ active: router.active(Account) }}"
+          class="${{ active: router.active(Account), bottom: true }}"
           slot="nav"
         >
-          <ui-icon name="user" color="nav" layout="size:3"></ui-icon>
-          My Account
+          <ui-icon name="user" color="nav"></ui-icon>
+          ${store.ready(session) && session.user
+            ? html`
+                <span layout@992px="hidden">My Account</span>
+                <div
+                  layout="hidden"
+                  layout@992px="column margin:left:2px width::0"
+                >
+                  <div>My Account</div>
+                  <ui-text type="body-m" ellipsis>${session.email}</ui-text>
+                </div>
+              `
+            : html`My Account`}
         </a>
         ${stack}
+        ${store.ready(session) &&
+        !session.contributor &&
+        html`
+          <section
+            layout="grid:1/1 grow items:end:stretch padding:0"
+            layout@992px="hidden"
+          >
+            <ui-settings-card
+              in-content
+              layout="column items:center gap"
+              layout@768px="row gap:5"
+            >
+              <img
+                src="${assets['hands']}"
+                layout="size:12"
+                alt="Contribution"
+                slot="picture"
+              />
+              <div
+                layout="block:center column gap:0.5"
+                layout@768px="block:left row grow gap:5 content:space-between"
+              >
+                <div layout="column gap:0.5">
+                  <ui-text type="label-l" layout="">
+                    Become a Contributor
+                  </ui-text>
+                  <ui-text type="body-s" color="gray-600">
+                    Help Ghostery fight for a web where privacy is a basic human
+                    right.
+                  </ui-text>
+                </div>
+                <ui-button layout="grow margin:top">
+                  <a
+                    href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
+                    target="_blank"
+                  >
+                    Become a Contributor
+                  </a>
+                </ui-button>
+              </div>
+            </ui-settings-card>
+          </section>
+        `}
       </ui-settings-layout>
     </template>
   `.css`

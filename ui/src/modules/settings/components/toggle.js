@@ -37,7 +37,14 @@ export default {
     `.css`
       :host([disabled]) {
         pointer-events: none;
-        opacity: 0.5;
+      }
+
+      :host([disabled]) button {
+        --ui-text-color-heading: var(--ui-color-gray-400);
+      }
+
+      :host([disabled]) #toggle {
+        background: var(--ui-color-gray-400);
       }
       
       button {

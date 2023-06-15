@@ -12,6 +12,7 @@
 import { html, msg, router, store } from 'hybrids';
 
 import Session from '/store/session.js';
+import { SIGNON_PAGE_URL } from '/utils/api.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
 const MENU = [
@@ -71,7 +72,8 @@ export default {
             <a
               href="${session.user
                 ? chrome.runtime.getURL('/pages/settings/index.html#account')
-                : 'https://signon.ghostery.com/'}"
+                : SIGNON_PAGE_URL}"
+              target="_blank"
               layout="block padding margin:0:1"
               onclick="${openTabWithUrl}"
             >

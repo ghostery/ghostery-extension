@@ -1,10 +1,23 @@
-import { html, store } from 'hybrids';
+import { html, store, router, msg } from 'hybrids';
 
 import Options from '/store/options.js';
 import Session from '/store/session.js';
 
-const ACCOUNT_URL = 'https://account.ghostery.com/';
-const SIGNON_URL = 'https://signon.ghostery.com/';
+import {
+  SIGNON_PAGE_URL,
+  CREATE_ACCOUNT_PAGE_URL,
+  ACCOUNT_PAGE_URL,
+} from '/utils/api.js';
+
+import assets from '../assets/index.js';
+import Preview from './preview.js';
+const PREVIEWS = {
+  'sync': {
+    src: assets['sync'],
+    title: msg`Settings Sync`,
+    description: msg`Automatically sync settings between your devices.`,
+  },
+};
 
 export default {
   options: store(Options),
@@ -17,48 +30,73 @@ export default {
             My Account
           </ui-text>
         </div>
-        <ui-text>
+        <ui-settings-card>
+          <img
+            src="${assets[session.user ? 'shield' : 'contribution']}"
+            layout="size:20"
+            alt="Contribution"
+            slot="picture"
+          />
           ${store.ready(session) &&
-          html`
-            <a
-              href="${session.user ? ACCOUNT_URL : SIGNON_URL}"
-              target="_blank"
-              layout="row gap items:center"
-            >
-              ${session.user
-                ? html`
-                    <ui-icon name="user" color="nav"></ui-icon>
-                    <div layout="column margin:left:2px width::0">
-                      <div>${session.name}</div>
-                      <ui-text type="body-m" color="gray-600" ellipsis>
-                        ${session.email}
-                      </ui-text>
-                    </div>
-                  `
-                : html`
-                    <ui-icon name="user" color="nav"></ui-icon>
-                    Sign in
-                  `}
-            </a>
-          `}
-        </ui-text>
+          (session.user
+            ? html`
+                <div layout="column gap:0.5 margin:bottom:2">
+                  <ui-text type="label-m" color="gray-600">You are signed in as:</ui-text>
+                  <div layout="row items:center gap:2">
+                    <ui-text type="headline-m">
+                      ${session.name}
+                    </ui-text>
+                    ${
+                      session.contributor &&
+                      html`<ui-settings-badge type="primary">
+                        Contributor
+                      </ui-settings-badge>`
+                    }
+                  </div>
+                  <ui-text type="body-m" color="gray-600">${
+                    session.email
+                  }</ui-text>
+                </div>
+                <div layout="row gap">
+                  <ui-button>
+                    <a href="${ACCOUNT_PAGE_URL}" target=_blank">Account details</a>
+                  </ui-button>
+                </div>
+              `
+            : html`
+                <ui-text type="headline-m">Join Ghostery</ui-text>
+                <div layout="row gap">
+                  <ui-button type="success">
+                    <a href="${SIGNON_PAGE_URL}" target=_blank">Sign in</a>
+                  </ui-button>
+                  <ui-button type="outline">
+                    <a href="${CREATE_ACCOUNT_PAGE_URL}" target="_blank">Create Account</a>
+                  </ui-button>
+                </div>
+              `)}
+        </ui-settings-card>
 
         <div layout="column gap:4" layout@768px="gap:5">
           <div layout="row items:start gap:2" layout@768px="gap:5">
+            <a href="${router.url(Preview, PREVIEWS['sync'])}">
+              <ui-settings-help-image>
+                <img src="${assets.sync_small}" alt="Sync" />
+              </ui-settings-help-image>
+            </a>
             <div
               layout="column gap:2"
               layout@768px="row items:center gap:5 grow"
             >
               <div layout="column grow gap:0.5">
-                <ui-text type="headline-s">Sync settings</ui-text>
+                <ui-text type="headline-s">Settings Sync</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Automatically sync settings between your devices.
                 </ui-text>
               </div>
               <ui-settings-toggle
                 disabled="${!session.user}"
-                value="${options.sync}"
-                onchange="${html.set(options, 'sync')}"
+                value="${session.user && options.sync}"
+                onchange="${session.user && html.set(options, 'sync')}"
               ></ui-settings-toggle>
             </div>
           </div>
