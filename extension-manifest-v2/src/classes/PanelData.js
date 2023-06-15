@@ -293,6 +293,7 @@ class PanelData {
 		return {
 			siteNotScanned: !this._trackerList || false, // TODO [] ==  false is true, and ![] == false is true, so this MAY be a bug
 			pageUrl,
+			common_whitelist: conf.common_whitelist,
 			categories: this._categories
 		};
 	}

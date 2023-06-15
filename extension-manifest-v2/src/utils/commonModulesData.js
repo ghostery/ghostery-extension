@@ -178,5 +178,6 @@ export function sendCommonModuleCounts(tabId, tabHostUrl, callback) {
 
 	modules.adBlock = getCommonData(tabId, tabHostUrl);
 	modules.antiTracking = getCommonData(tabId, tabHostUrl, true);
+	modules.common_whitelist = conf.common_whitelist;
 	callback(modules);
 }
