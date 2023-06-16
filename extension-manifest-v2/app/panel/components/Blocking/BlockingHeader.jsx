@@ -296,7 +296,7 @@ class BlockingHeader extends React.Component {
 						</div>
 					</div>
 					<div className="shrink columns align-self-justify text-right">
-						{setup_complete && categories && categories.length > 0 && (
+						{setup_complete && globalBlocking && categories && categories.length > 0 && (
 							<div
 								className="block-text"
 								onClick={this.clickBlockAll}
