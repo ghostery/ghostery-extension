@@ -140,7 +140,6 @@ class ConfData {
 			_initProperty('bugs', {});
 			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);
-			_initProperty('compatibility', {});
 			_initProperty('metrics', {});
 			_initProperty('known_app_ids', []);
 			_initProperty('new_app_ids', []);

@@ -67,7 +67,6 @@ class PurpleBox {
 			translations: {
 				looking: t('box_looking'),
 				trackers: t('box_trackers'),
-				box_warning_compatibility: t('box_warning_compatibility'),
 				box_warning_slow: t('box_warning_slow'),
 				box_warning_nonsecure: t('box_warning_nonsecure'),
 				tracker: t('box_tracker'),

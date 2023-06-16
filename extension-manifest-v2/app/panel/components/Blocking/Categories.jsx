@@ -80,7 +80,17 @@ class Categories extends React.Component {
 					num_total: unidentifiedCategory.unidentifiedTrackers.length,
 					num_blocked: unidentifiedCategory.unidentifiedTrackerCount - whitelistedTotal,
 					num_shown: unidentifiedCategory.hide ? 0 : unidentifiedCategory.unidentifiedTrackers.length,
-					trackers,
+					trackers: trackers.sort((a, b) => {
+						const aName = a.name.toLowerCase();
+						const bName = b.name.toLowerCase();
+						if (aName < bName) {
+							return -1;
+						}
+						if (aName > bName) {
+							return 1;
+						}
+						return 0;
+					}),
 					whitelistedTotal,
 				};
 			}

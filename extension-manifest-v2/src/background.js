@@ -34,7 +34,6 @@ import button from './classes/BrowserButton';
 import c2pDb from './classes/Click2PlayDb';
 import cmp from './classes/CMP';
 import abtest from './classes/ABTest';
-import compDb from './classes/CompatibilityDb';
 import confData from './classes/ConfData';
 import conf from './classes/Conf';
 import dispatcher from './classes/Dispatcher';
@@ -97,7 +96,6 @@ async function updateDBs() {
 		log('Database version retrieval succeeded', data);
 
 		await c2pDb.update(data.click2play);
-		await compDb.update(data.compatibility);
 
 		let lastUpdate;
 		if (common.modules.adblocker.isEnabled) {
@@ -1087,9 +1085,15 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || Policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
+	return (
+		Boolean(globals.SESSION.paused_blocking)
+		|| Boolean(state.ghosteryWhitelisted)
+		|| Policy.getSitePolicy(state.tabUrl, state.url) === 2
+		// only check common_checklist if the tracker id is unknown
+		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domain, state.urlParts.domain))
+	);
 }
+
 /**
  * Set listener for 'enabled' event for Antitracking module which replaces
  * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
@@ -1512,7 +1516,6 @@ function initializeGhosteryModules() {
 	return Promise.all([
 		bugDb.init(globals.JUST_UPGRADED),
 		c2pDb.init(globals.JUST_UPGRADED),
-		compDb.init(globals.JUST_UPGRADED),
 		commonStartup(),
 	])
 		.then(() => scheduledTasks());

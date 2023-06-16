@@ -249,7 +249,7 @@ class PanelData {
 	 */
 	_getBlockingData() {
 		const {
-			expand_all_trackers, selected_app_ids, show_tracker_urls,
+			expand_all_trackers, selected_app_ids, show_tracker_urls, common_whitelist,
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
 			setup_complete,
 		} = conf;
@@ -258,6 +258,7 @@ class PanelData {
 			setup_complete,
 			expand_all_trackers,
 			selected_app_ids,
+			common_whitelist,
 			show_tracker_urls,
 			site_specific_blocks,
 			site_specific_unblocks,
@@ -292,6 +293,7 @@ class PanelData {
 		return {
 			siteNotScanned: !this._trackerList || false, // TODO [] ==  false is true, and ![] == false is true, so this MAY be a bug
 			pageUrl,
+			common_whitelist: conf.common_whitelist,
 			categories: this._categories
 		};
 	}
@@ -702,7 +704,6 @@ class PanelData {
 			commonAdCount,
 			commonCookieCount,
 			commonFingerprintCount,
-			hasCompatibilityIssue,
 			hasInsecureIssue,
 			hasLatencyIssue,
 			id,
@@ -725,7 +726,6 @@ class PanelData {
 			catId: cat,
 			sources,
 			trackerID,
-			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
 			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,

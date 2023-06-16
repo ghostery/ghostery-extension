@@ -45,7 +45,7 @@ const initialState = {
 		changes: {},
 	},
 	notificationClasses: '',
-	notificationFilter: '', // compatibility/slow tracker/success message
+	notificationFilter: '', // slow tracker/success message
 	notificationText: '',
 	notificationShown: false,
 	reload_banner_status: true,

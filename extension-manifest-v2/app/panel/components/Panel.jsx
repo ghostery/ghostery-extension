@@ -99,7 +99,7 @@ class Panel extends React.Component {
 	}
 
 	/**
-	 * Filter trackers when clicking on compatibility/slow
+	 * Filter trackers when clicking on slow
 	 * tracker notifications and trigger appropriate action.
 	 * @param  {Object} event
 	 */
@@ -112,8 +112,6 @@ class Panel extends React.Component {
 
 		if (classes.includes('slow-insecure')) {
 			actions.filterTrackers({ type: 'trackers', name: 'warning-slow-insecure' });
-		} else if (classes.includes('compatibility')) {
-			actions.filterTrackers({ type: 'trackers', name: 'warning-compatibility' });
 		} else {
 			actions.filterTrackers({ type: 'trackers', name: 'warning' });
 		}
@@ -188,14 +186,6 @@ class Panel extends React.Component {
 				<span>
 					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: notificationText }} />
 					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
-				</span>
-			);
-		}
-		if (notificationFilter === 'compatibility') {
-			return (
-				<span>
-					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: notificationText }} />
-					<span key="1">{ t('panel_tracker_breaking_page_end') }</span>
 				</span>
 			);
 		}

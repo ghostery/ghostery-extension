@@ -12,7 +12,6 @@
  */
 
 import bugDb from './BugDb';
-import compDb from './CompatibilityDb';
 import tabInfo from './TabInfo';
 import { getCommonData } from '../utils/commonModulesData';
 
@@ -44,7 +43,6 @@ class FoundBugs {
 	 *			apps: [{
 	 *				blocked: boolean,
 	 *				cat: string,
-	 *				hasCompatibilityIssue: boolean,
 	 *				hasInsecureIssue: boolean,
 	 *				hasLatencyIssue: boolean,
 	 *				id: number,
@@ -59,7 +57,6 @@ class FoundBugs {
 	 *			}],
 	 *			appsMetadata: {
 	 *				appId: {
-	 *					needsCompatibilityCheck: boolean, // so we don't have to invoke fuzzyUrlMatcher more than once per app per tab
 	 *					sortingName: string, // so we don't have to lowerCase each app name each time we want to sort the apps array in getApps
 	 *				}
 	 *			},
@@ -67,7 +64,6 @@ class FoundBugs {
 	 *				appId: number // the index position of the appID in _foundApps[tab_id][apps] and _foundApps[tab_id][appsMetadata]
 	 *			},
 	 *			issueCounts : {
-	 *				compatibility: number,
 	 *				insecure: number,
 	 *				latency: number,
 	 *				blocked: number
@@ -133,10 +129,6 @@ class FoundBugs {
 	getApps(tab_id, sorted, tab_url, app_id) {
 		if (!this._init(tab_id)) {
 			return [];
-		}
-
-		if (tab_url) {
-			this._checkForCompatibilityIssues(tab_id, tab_url);
 		}
 
 		const { apps, appsMetadata } = this._foundApps[tab_id];
@@ -278,10 +270,9 @@ class FoundBugs {
 	 * @param  {string} 	tab_url		tab url
 	 * @return {Object}					counts for different types of issues
 	 */
-	getAppsCountByIssues(tab_id, tab_url) {
+	getAppsCountByIssues(tab_id) {
 		if (!this._init(tab_id)) {
 			return {
-				compatibility: 0,
 				insecure: 0,
 				latency: 0,
 				total: 0,
@@ -289,14 +280,11 @@ class FoundBugs {
 			};
 		}
 
-		if (tab_url) { this._checkForCompatibilityIssues(tab_id, tab_url); }
-
-		const { compatibility, insecure, latency } = this._foundApps[tab_id].issueCounts;
-		const total = compatibility + insecure + latency;
+		const { insecure, latency } = this._foundApps[tab_id].issueCounts;
+		const total = insecure + latency;
 		const all = this._foundApps[tab_id].apps.length;
 
 		return {
-			compatibility,
 			insecure,
 			latency,
 			total,
@@ -409,7 +397,6 @@ class FoundBugs {
 				appsMetadata: {},
 				appsById: {},
 				issueCounts: {
-					compatibility: 0,
 					insecure: 0,
 					latency: 0,
 					blocked: 0
@@ -418,24 +405,6 @@ class FoundBugs {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Check to see if the app is on the Compatibility list
-	 * @private
-	 * @param  {number} tab_id
-	 * @param  {string} tab_url
-	 */
-	_checkForCompatibilityIssues(tab_id, tab_url) {
-		const { apps, appsMetadata, issueCounts } = this._foundApps[tab_id];
-		apps.forEach((appEntry) => {
-			const { id } = appEntry;
-			if (appsMetadata[id].needsCompatibilityCheck) {
-				appEntry.hasCompatibilityIssue = appEntry.blocked ? compDb.hasIssue(id, tab_url) : false;
-				if (appEntry.hasCompatibilityIssue) { issueCounts.compatibility++; }
-				appsMetadata[id].needsCompatibilityCheck = false;
-			}
-		});
 	}
 
 	/**
@@ -503,9 +472,6 @@ class FoundBugs {
 			app.hasLatencyIssue = app.hasLatencyIssue || hasLatencyIssue;
 			app.hasInsecureIssue = app.hasInsecureIssue || hasInsecureIssue;
 			app.blocked = app.blocked && blocked;
-
-			appsMetadata[aid].needsCompatibilityCheck =
-				appsMetadata[aid].needsCompatibilityCheck && app.blocked;
 		} else {
 			const { name, cat, trackerID } = db.apps[aid];
 
@@ -516,7 +482,6 @@ class FoundBugs {
 				trackerID,
 				blocked,
 				sources,
-				hasCompatibilityIssue: false,
 				hasLatencyIssue,
 				hasInsecureIssue
 			});
@@ -526,7 +491,6 @@ class FoundBugs {
 			if (blocked) { issueCounts.blocked++; }
 
 			appsMetadata[aid] = {
-				needsCompatibilityCheck: blocked,
 				sortingName: name.toLowerCase()
 			};
 
