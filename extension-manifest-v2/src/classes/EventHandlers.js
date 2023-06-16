@@ -276,12 +276,23 @@ class EventHandlers {
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
 		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, null, request_id, from_redirect, true);
+			// attempt to redirect request to HTTPS. NOTE: Redirects from URLs
+			// with ws:// and wss:// schemes are ignored.
+			// keep track of insecure redirects to avoid redirect loops
+			const ir = tabInfo.getTabInfo(tab_id, 'insecureRedirects');
+			if (ir.indexOf(request_id) >= 0) {
+				return { cancel: true };
+			}
+			ir.push(request_id);
+			tabInfo.setTabInfo(tab_id, 'insecureRedirects', ir);
+			return {
+				redirectUrl: eventMutable.url.replace(/^http:/, 'https:')
+			};
 		}
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const [bug_id] = isBug(eventMutable);
+		const [bug_id, isFilterMatched] = isBug(eventMutable);
 
 		// allow if not a tracker
 		if (!bug_id) {
@@ -332,10 +343,6 @@ class EventHandlers {
 				request_id
 			});
 		}, 1);
-
-		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
-			// return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
-		}
 
 		return { cancel: false };
 	}
@@ -519,58 +526,6 @@ class EventHandlers {
 				this.purplebox.updateBox(details.tab_id, app_id);
 			}
 		}
-	}
-
-	/**
-	 * Helper function that returns the appropriate object to block several
-	 * types of requests coming through `chrome.webRequest.onBeforeRequest`
-	 *
-	 * @private
-	 *
-	 * @param  {Object} details 	event data
-	 * @param  {number} tabId 		tab id
-	 * @param  {number} appId 		app id
-	 * @param  {number} bugId 		bug id
-	 * @param  {number} requestId 	request id
-	 * @param  {boolean} fromRedirect
-	 * @return {string|boolean}
-	 */
-	static _blockHelper(details, tabId, appId, requestId, fromRedirect, upgradeInsecure) {
-		if (upgradeInsecure) {
-			// attempt to redirect request to HTTPS. NOTE: Redirects from URLs
-			// with ws:// and wss:// schemes are ignored.
-			// keep track of insecure redirects to avoid redirect loops
-			const ir = tabInfo.getTabInfo(tabId, 'insecureRedirects');
-			if (ir.indexOf(requestId) >= 0) {
-				return { cancel: true };
-			}
-			ir.push(requestId);
-			tabInfo.setTabInfo(tabId, 'insecureRedirects', ir);
-			return {
-				redirectUrl: details.url.replace(/^http:/, 'https:')
-			};
-		}
-		if (details.type === 'sub_frame') {
-			return {
-				redirectUrl: 'about:blank'
-			};
-		}
-		if (details.type === 'image') {
-			return {
-				// send PNG (and not GIF) to avoid conflicts with Adblock Plus
-				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
-			};
-		}
-		if (fromRedirect) {
-			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId);
-			setTimeout(() => {
-				chrome.tabs.update(details.tabId, { url });
-			}, 0);
-		}
-		return {
-			// If true, the request is canceled. This prevents the request from being sent.
-			cancel: true
-		};
 	}
 
 	/**
