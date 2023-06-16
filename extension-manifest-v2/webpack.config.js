@@ -41,6 +41,7 @@ const BUILD_TARGET = [
 ];
 
 module.exports = {
+	devtool: false,
 	stats: 'errors-only',
 	performance: {
 		hints: false // notify of assets over 250kb
