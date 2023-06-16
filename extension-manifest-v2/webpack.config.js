@@ -17,8 +17,6 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin-next');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const sass = require('sass');
 
 // constants
@@ -43,7 +41,7 @@ const BUILD_TARGET = [
 ];
 
 module.exports = {
-	devtool: 'source-map',
+	stats: 'errors-only',
 	performance: {
 		hints: false // notify of assets over 250kb
 	},
@@ -129,16 +127,9 @@ module.exports = {
 			raw: true,
 			include: /\.js$/
 		}),
-		new ESLintPlugin({
-			extensions: ['js', 'jsx']
-		}),
 	],
 	optimization: {
-		minimizer: [
-			new ESBuildMinifyPlugin({
-				target: BUILD_TARGET,
-			}),
-		],
+		minimize: false,
 	},
 	module: {
 		rules: [
