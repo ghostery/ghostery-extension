@@ -34,6 +34,7 @@ class Categories extends React.Component {
 			categories,
 			expandAll,
 			unidentifiedCategory,
+			enable_ad_block,
 			enable_anti_tracking,
 			sitePolicy,
 			globalBlocking,
@@ -101,6 +102,7 @@ class Categories extends React.Component {
 					language={language}
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
+					enable_ad_block={enable_ad_block}
 					enable_anti_tracking={enable_anti_tracking}
 					isUnidentified={isUnidentified}
 					setup_complete={setup_complete}

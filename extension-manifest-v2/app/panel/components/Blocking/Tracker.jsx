@@ -262,39 +262,62 @@ class Tracker extends React.Component {
 		});
 	}
 
-	_isBlocking() {
-		const { tracker } = this.props;
-		const { commonAdCount, commonCookieCount, commonFingerprintCount } = tracker;
-		return (commonAdCount || 0) + (commonCookieCount || 0) + (commonFingerprintCount || 0);
-	}
-
-	_renderCommonStatsContainer() {
-		const { tracker } = this.props;
+	_renderDescription() {
+		const { tracker, enable_ad_block, enable_anti_tracking } = this.props;
 		const { commonAdCount, commonCookieCount, commonFingerprintCount } = tracker;
 
 		const oneOrMoreAds = commonAdCount >= 1;
 		const antiTrackingCount = commonCookieCount + commonFingerprintCount;
 		const oneOrMoreModified = antiTrackingCount >= 1;
-
 		return (
 			<div className="trk-common-stats-outer-container">
-				{oneOrMoreAds && (
-					<div className="trk-common-stats-container">
-						{this._renderCommonAdsIcon()}
-						{Tracker._renderCommonAdStat(commonAdCount)}
-					</div>
-				)}
-				{oneOrMoreModified && (
-					<div className="trk-common-stats-container">
-						{this._renderCommonCookiesAndFingerprintsIcon()}
-						{oneOrMoreModified && Tracker._renderCommonAntiTrackingStat(antiTrackingCount)}
-					</div>
-				)}
-				{(!this._isBlocking()) && (
-					<div className="trk-common-stats-container">
-						Nothing to do
-					</div>
-				)}
+				{(() => {
+					if (oneOrMoreAds) {
+						return (
+							<div className="trk-common-stats-container">
+								{this._renderCommonAdsIcon()}
+								{Tracker._renderCommonAdStat(commonAdCount)}
+							</div>
+						);
+					}
+					if (oneOrMoreModified) {
+						return (
+							<div className="trk-common-stats-container">
+								{this._renderCommonCookiesAndFingerprintsIcon()}
+								{oneOrMoreModified && Tracker._renderCommonAntiTrackingStat(antiTrackingCount)}
+							</div>
+						);
+					}
+					if (!enable_ad_block && !enable_anti_tracking) {
+						return (
+							<div className="trk-common-stats-container">
+								Protection disabled
+							</div>
+						);
+					}
+					if (tracker.ss_allowed) {
+						return (
+							<div className="trk-common-stats-container">
+								Trusted
+							</div>
+						);
+					}
+					if (!tracker.blocked) {
+						return (
+							<div className="trk-common-stats-container">
+								Allowed
+							</div>
+						);
+					}
+					if (tracker.blocked) {
+						return (
+							<div className="trk-common-stats-container">
+								Tracking not detected
+							</div>
+						);
+					}
+					return null;
+				})()}
 			</div>
 		);
 	}
@@ -359,7 +382,7 @@ class Tracker extends React.Component {
 						>
 							{tracker.name}
 						</div>
-						{this._renderCommonStatsContainer()}
+						{this._renderDescription()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						{setup_complete ? (

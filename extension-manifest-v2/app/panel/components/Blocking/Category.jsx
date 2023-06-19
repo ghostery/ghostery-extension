@@ -227,6 +227,8 @@ class Category extends React.Component {
 			smartBlockActive,
 			smartBlock,
 			setup_complete,
+			enable_ad_block,
+			enable_anti_tracking,
 		} = this.props;
 		const {
 			totalShownBlocked,
@@ -349,6 +351,8 @@ class Category extends React.Component {
 						smartBlock={smartBlock}
 						isUnidentified={isUnidentified}
 						setup_complete={setup_complete}
+						enable_ad_block={enable_ad_block}
+						enable_anti_tracking={enable_anti_tracking}
 					/>
 				)}
 			</div>
