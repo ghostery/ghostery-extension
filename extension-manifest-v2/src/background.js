@@ -56,6 +56,7 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 import './modules/autoconsent';
+import setupRenew from './modules/renew';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -938,9 +939,11 @@ function onMessageHandler(request, sender, callback) {
  * @memberOf Background
  */
 function setupABTests() {
-	if (abtest.has('terms')) {
+	if (abtest.hasTest('terms')) {
 		tryOpenOnboarding({ force: true, period: ONE_WEEK_MSEC });
 	}
+
+	setupRenew(abtest.hasTest('terms'));
 }
 
 /**
