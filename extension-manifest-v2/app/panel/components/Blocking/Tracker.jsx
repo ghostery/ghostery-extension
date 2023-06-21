@@ -302,14 +302,15 @@ class Tracker extends React.Component {
 							</div>
 						);
 					}
-					if (!tracker.blocked) {
+					// not blocked and website not restricted
+					if (!tracker.blocked && this.props.sitePolicy !== 1) {
 						return (
 							<div className="trk-common-stats-container">
 								Allowed
 							</div>
 						);
 					}
-					if (tracker.blocked) {
+					if (tracker.blocked || this.props.sitePolicy === 1) {
 						return (
 							<div className="trk-common-stats-container">
 								Tracking not detected
