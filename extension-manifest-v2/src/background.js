@@ -1058,8 +1058,8 @@ function initialiseWebRequestPipeline() {
 			spec: 'blocking',
 			before: existingSteps.onBeforeRequest,
 			fn: (state, response) => {
-				const result = events.onBeforeRequest(state);
-				if (result && (result.cancel === true || result.redirectUrl)) {
+				const result = events.onBeforeRequest(state, response);
+				if (result.cancel || result.redirectUrl) {
 					Object.assign(response, result);
 				}
 				return true;

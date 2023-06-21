@@ -35,6 +35,7 @@ import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 import { injectScript, injectNotifications } from '../utils/inject';
+import common from './Common';
 
 /**
  * This class is a collection of handlers for
@@ -235,7 +236,7 @@ class EventHandlers {
 	 * @param  {Object} eventMutable 	event data
 	 * @return {Object}			optionaly return {cancel: true} to force dropping the request
 	 */
-	onBeforeRequest(eventMutable) {
+	onBeforeRequest(eventMutable, response) {
 		const tab_id = eventMutable.tabId;
 		const request_id = eventMutable.requestId;
 
@@ -270,7 +271,6 @@ class EventHandlers {
 		}
 
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
-		const from_redirect = globals.REDIRECT_MAP.has(request_id);
 		const processed = utils.processUrl(eventMutable.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
@@ -343,6 +343,47 @@ class EventHandlers {
 				request_id
 			});
 		}, 1);
+
+		if (block && isFilterMatched && conf.show_redirect_tracking_dialogs && fromRedirect) {
+			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(request_id), app_id);
+			setTimeout(() => {
+				chrome.tabs.update(tab_id, { url });
+			}, 0);
+			return {};
+		}
+
+		if (conf.enable_ad_block && block && isFilterMatched) {
+			// let the Tracker Db do the blocking according to ghostery-common/adblocker logic
+			const trackerdbAdblockerStub = {
+				manager: {
+					engine: bugDb.engine,
+				},
+				shouldProcessRequest(context, _response) {
+					// Ignore background requests
+					if (context.isBackgroundRequest()) {
+						return false;
+					}
+
+					// If this request was either canceled or redirected by another step, then
+					// we do not try to perform any matching on it.
+					if (_response.cancel === true || _response.redirectUrl !== undefined) {
+						return false;
+					}
+
+					// Make sure that we have a valid `url` and `frameUrl` for this request
+					if (context.urlParts === null || context.frameUrlParts === null) {
+						return false;
+					}
+					return true;
+				},
+				stats: common.modules.adblocker.background.adblocker.stats,
+				processRequest: common.modules.adblocker.background.adblocker.processRequest.bind(common.modules.adblocker.background.adblocker),
+			};
+			const onBeforeRequest = common.modules.adblocker.background.adblocker.onBeforeRequest.bind(trackerdbAdblockerStub);
+			if (!onBeforeRequest(eventMutable, response)) {
+				return {};
+			}
+		}
 
 		return { cancel: false };
 	}
