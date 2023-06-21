@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 const Tracker = {
   id: true,
   name: '',
-  requests: [{ url: '', blocked: false }],
+  requests: [{ url: '', blocked: false, modified: false }],
   category: 'unidentified',
   company: '',
   description: '',

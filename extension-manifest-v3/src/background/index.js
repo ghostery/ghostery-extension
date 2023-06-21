@@ -22,6 +22,6 @@ import './session.js';
 import './helpers.js';
 
 import './telemetry.js';
-import './reporting.js';
+import './reporting/index.js';
 import './external.js';
 import './devtools.js';

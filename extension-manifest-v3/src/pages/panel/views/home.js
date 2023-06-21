@@ -214,6 +214,16 @@ export default {
                   terms="${options.terms}"
                 >
                   Anti-Tracking
+                  ${stats.trackers.reduce(
+                    (totalRequestsModified, tracker) =>
+                      totalRequestsModified +
+                      tracker.requests.reduce(
+                        (requestsModified, request) =>
+                          requestsModified + Number(request.modified || false),
+                        0,
+                      ),
+                    0,
+                  )}
                 </gh-panel-options-item>
                 <gh-panel-options-item
                   icon="autoconsent"

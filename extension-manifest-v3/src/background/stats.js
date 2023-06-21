@@ -143,7 +143,29 @@ export async function updateTabStats(tabId, requests) {
         stats.trackers.push(tracker);
       }
 
-      tracker.requests.push({ url: request.url, blocked: request.blocked });
+      tracker.requests.push({
+        url: request.url,
+        blocked: request.blocked || false,
+        modified: request.modified || false,
+      });
+    } else if (request.blocked || request.modified) {
+      let tracker = stats.trackers.find((t) => t.id === request.domain);
+
+      if (!tracker) {
+        tracker = {
+          id: request.domain,
+          name: request.domain,
+          category: 'unidentified',
+          requests: [],
+        };
+        stats.trackers.push(tracker);
+      }
+
+      tracker.requests.push({
+        url: request.url,
+        blocked: request.blocked || false,
+        modified: request.modified || false,
+      });
     }
   }
 
