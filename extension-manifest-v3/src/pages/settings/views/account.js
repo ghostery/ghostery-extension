@@ -15,7 +15,7 @@ const PREVIEWS = {
   'sync': {
     src: assets['sync'],
     title: msg`Settings Sync`,
-    description: msg`Automatically sync settings between your devices.`,
+    description: msg`Save and synchronize your custom settings between browsers and devices.`,
   },
 };
 
@@ -90,7 +90,8 @@ export default {
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">Settings Sync</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  Automatically sync settings between your devices.
+                  Save and synchronize your custom settings between browsers and
+                  devices.
                 </ui-text>
               </div>
               <ui-settings-toggle
