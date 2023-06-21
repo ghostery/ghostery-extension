@@ -1088,18 +1088,18 @@ function isWhitelistedForAdblocking(state) {
 	return (
 		Boolean(globals.SESSION.paused_blocking)
 		|| Boolean(state.ghosteryWhitelisted)
-		|| Policy.getSitePolicy(state.tabUrl, state.url) === 2
+		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
 		// only check common_checklist if the tracker id is unknown
-		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domain, state.urlParts.domain))
+		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
 	);
 }
 
 function isWhitelistedForAntiTracking(state) {
 	return (
 		Boolean(globals.SESSION.paused_blocking)
-		|| Policy.getSitePolicy(state.tabUrl, state.url) === 2
+		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
 		// only check common_checklist if the tracker id is unknown
-		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domain, state.urlParts.domain))
+		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
 	);
 }
 
