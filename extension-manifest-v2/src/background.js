@@ -56,7 +56,7 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 import './modules/autoconsent';
-import setupRenew from './modules/renew';
+import './modules/renew';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -935,18 +935,6 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Configure A/B tests based on data fetched from the A/B server
- * @memberOf Background
- */
-function setupABTests() {
-	if (abtest.hasTest('terms')) {
-		tryOpenOnboarding({ force: true, period: ONE_WEEK_MSEC });
-	}
-
-	setupRenew(abtest.hasTest('terms'));
-}
-
-/**
  * @since 8.5.3
  *
  * Update config options for the Common antitracking module to match the current human web setting.
@@ -1485,9 +1473,6 @@ function initializeGhosteryModules() {
 
 			if (conf.enable_abtests) {
 				abtest.fetch()
-					.then(() => {
-						setupABTests();
-					})
 					.catch(() => {
 						log('Unable to reach abtest server');
 					})

@@ -12,7 +12,7 @@ import { showIframe } from '@ghostery/ui/iframe';
 
 const HOUR_IN_MS = 1000 * 60 * 60;
 
-chrome.storage.local.get(['renew_setup'], ({ renew_setup }) => {
+chrome.runtime.sendMessage({ action: 'renew:setup' }).then((renew_setup) => {
 	const now = Date.now();
 
 	if (

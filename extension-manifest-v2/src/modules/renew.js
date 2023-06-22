@@ -14,18 +14,20 @@ import { openNewTab } from '../utils/utils';
 
 import conf from '../classes/ConfData';
 import globals from '../classes/Globals';
+import ABTest from '../classes/ABTest';
 
 const _14_DAYS_IN_MS = 1000 * 60 * 60 * 24 * 14;
 let timeoutId;
 
-function clearRenew() {
+function clear() {
 	if (timeoutId) {
 		clearTimeout(timeoutId);
 		browser.storage.local.remove(['renew_setup']);
 	}
 }
 
-function revokeGhostery() {
+function revoke() {
+	// reset all onboarding flags
 	conf.setup_complete = false;
 	conf.setup_skip = false;
 	conf.setup_timestamp = null;
@@ -34,12 +36,15 @@ function revokeGhostery() {
 		conf[confName] = false;
 	});
 
-	clearRenew();
+	// Clear renew setup
+	clear();
+
+	// Open onboarding
 	openNewTab({ url: '/app/templates/onboarding.html?renew=1', become_active: true });
 }
 
-export default async function setupRenew(enable = false) {
-	if (enable && conf.setup_complete && !conf.enable_human_web) {
+export default async function setup() {
+	if (ABTest.hasTest('terms') && conf.setup_complete && !conf.enable_human_web) {
 		let { renew_setup } = await browser.storage.local.get(['renew_setup']);
 		const now = Date.now();
 
@@ -51,14 +56,29 @@ export default async function setupRenew(enable = false) {
 			browser.storage.local.set({ renew_setup });
 		}
 
-		timeoutId = setTimeout(revokeGhostery, renew_setup.timestamp - now);
-	} else {
-		clearRenew();
+		if (!timeoutId) {
+			timeoutId = setTimeout(revoke, renew_setup.timestamp - now);
+		}
+
+		return renew_setup;
 	}
+
+	clear();
+
+	return null;
 }
 
-browser.runtime.onMessage.addListener((message) => {
-	if (message.action === 'renew:clear') {
-		revokeGhostery();
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+	switch (message.action) {
+		case 'renew:setup':
+			setup().then(sendResponse);
+			return true;
+		case 'renew:clear':
+			revoke();
+			break;
+		default:
+			break;
 	}
+
+	return false;
 });
