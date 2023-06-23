@@ -24,12 +24,9 @@
 			@extend %pointer;
 			font-size: 14px;
 			line-height: 25px;
-			font-weight: 400;
-			color: #4a4a4a;
+			font-weight: 600;
+			color: #4b4b4b;
 			@extend %nowrap;
-			&.is-whitelisted {
-				color: #00AEF0;
-			}
 		}
 		.trk-common-stats-outer-container {
 			// prevent jitter from breaking to new line
@@ -75,6 +72,7 @@
 		.trk-common-stats-container {
 			display: inline-block;
 			padding-right: 8px;
+			color: #808080;
 		}
 
 		.svg-container {

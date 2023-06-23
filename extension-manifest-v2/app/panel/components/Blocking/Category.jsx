@@ -277,7 +277,7 @@ class Category extends React.Component {
 									)}
 									<span className="count">{`${category.num_total} `}</span>
 									<span className="text">
-										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
+										{ (category.num_total === 1) ? t('organization') : t('organizations') }
 									</span>
 								</div>
 								{globalBlocking && !!trackersBlockedCount && (

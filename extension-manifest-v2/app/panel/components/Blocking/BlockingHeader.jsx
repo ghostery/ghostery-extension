@@ -288,7 +288,7 @@ class BlockingHeader extends React.Component {
 				<div className="row align-middle">
 					<div className="columns">
 						<div className="title">
-							{ globalBlockingBool ? t('settings_global_blocking') : t('blocking_trackers') }
+							{ globalBlockingBool ? t('settings_global_blocking') : t('tracker_database') }
 							{' '}
 							{setup_complete && (
 								<Link to="/settings/globalblocking" className="gear-icon" />

@@ -291,14 +291,14 @@ class Tracker extends React.Component {
 					if (!enable_ad_block && !enable_anti_tracking) {
 						return (
 							<div className="trk-common-stats-container">
-								Protection disabled
+								{t('protection_disabled')}
 							</div>
 						);
 					}
 					if (tracker.ss_allowed) {
 						return (
 							<div className="trk-common-stats-container">
-								Trusted
+								{t('trusted')}
 							</div>
 						);
 					}
@@ -306,14 +306,14 @@ class Tracker extends React.Component {
 					if (!tracker.blocked && this.props.sitePolicy !== 1) {
 						return (
 							<div className="trk-common-stats-container">
-								Allowed
+								{t('allowed')}
 							</div>
 						);
 					}
 					if (tracker.blocked || this.props.sitePolicy === 1) {
 						return (
 							<div className="trk-common-stats-container">
-								Tracking not detected
+								{t('tracking_not_detected')}
 							</div>
 						);
 					}
@@ -379,6 +379,7 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns collapse-left">
 						<div
+							className="trk-name"
 							onClick={this.toggleDescription}
 						>
 							{tracker.name}

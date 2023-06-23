@@ -54,7 +54,6 @@ class Summary extends React.Component {
 		this.clickDonut = this.clickDonut.bind(this);
 		this.clickPauseButton = this.clickPauseButton.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
-		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.showStatsView = this.showStatsView.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
@@ -230,21 +229,6 @@ class Summary extends React.Component {
 			classes,
 			text,
 		});
-	}
-
-	/**
-	 * Handles clicking on Trackers Blocked. Triggers a filter action
-	 */
-	clickTrackersBlocked() {
-		const { actions, sitePolicy, is_expert } = this.props;
-
-		if (!is_expert) { return; }
-
-		if (sitePolicy === BLACKLISTED) {
-			actions.filterTrackers({ type: 'trackers', name: 'all' });
-		} else {
-			actions.filterTrackers({ type: 'trackers', name: 'blocked' });
-		}
 	}
 
 	/**
@@ -455,7 +439,7 @@ class Summary extends React.Component {
 		});
 
 		return (
-			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
+			<div className={totalTrackersBlockedContainerClassNames}>
 				<div className={totalTrackersBlockedClassNames}>
 					<span className="SummaryPageStat__label">
 						{t('trackers_blocked')}
@@ -470,8 +454,6 @@ class Summary extends React.Component {
 	}
 
 	_renderTotalTrackersModified() {
-		const { is_expert } = this.props;
-
 		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
@@ -486,7 +468,6 @@ class Summary extends React.Component {
 					<span className="SummaryPageStat__value">
 						{this._trackerModifiedCount()}
 					</span>
-					<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 				</div>
 			</div>
 		);

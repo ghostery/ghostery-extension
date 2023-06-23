@@ -115,8 +115,8 @@
 		display: inline-block;
 		font-size: 18px;
 		line-height: 24px;
-		font-weight: 400;
-		color: #333333;
+		font-weight: 500;
+		color: #4B4B4B;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -133,9 +133,10 @@
 		margin: 2px 0 0;
 		text-transform: uppercase;
 		.total-count {
-			color: #333333;
+			color: #808080;
 			display: inline-block;
 			overflow-y: hidden;
+			font-weight: 700;
 			@extend %nowrap;
 		}
 		.blocked-count {
