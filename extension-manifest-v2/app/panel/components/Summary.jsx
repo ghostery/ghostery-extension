@@ -462,7 +462,7 @@ class Summary extends React.Component {
 			<div className="Summary__pageStatContainer">
 				<div className={totalRequestsModifiedClassNames}>
 					<span className="SummaryPageStat__label">
-						{t('requests_modified')}
+						{t('trackers_modified')}
 						{' '}
 					</span>
 					<span className="SummaryPageStat__value">

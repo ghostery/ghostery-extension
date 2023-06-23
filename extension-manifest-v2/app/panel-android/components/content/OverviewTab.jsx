@@ -256,7 +256,7 @@ class OverviewTab extends React.Component {
 		return (
 			<div className="OverviewTab__PageStat">
 				<span>
-					{t('requests_modified')}
+					{t('trackers_modified')}
 					{' '}
 				</span>
 				<span className="OverviewTab__PageStat--blue">

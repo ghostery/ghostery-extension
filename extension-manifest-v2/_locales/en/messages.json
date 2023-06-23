@@ -1331,11 +1331,8 @@
   "refresh_and_try_again": {
     "message": "Refresh page and try again"
   },
-  "requests_modified": {
+  "trackers_modified": {
     "message": "Trackers Modified:"
-  },
-  "requests_modified_tooltip": {
-    "message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad-Blocking"
   },
   "select_basic": {
     "message": "Select Basic"
@@ -1845,7 +1842,7 @@
     "message": "Tracker Details"
   },
   "trackers": {
-    "message": "Organizations"
+    "message": "Trackers"
   },
   "trackers_blocked": {
     "message": "Trackers Blocked:"
