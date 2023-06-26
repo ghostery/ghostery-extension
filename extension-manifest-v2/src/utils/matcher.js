@@ -77,16 +77,18 @@ export function fuzzyUrlMatcher(url, urls) {
 	return false;
 }
 
-export function isBug(details) {
+export function matchTrackerBD(details) {
 	const { engine } = bugDb;
 
 	const request = fromWebRequestDetails(details);
-	let isFilterBlocker = false;
+	let isFilterMatched = false;
+	let isRedirect = false;
 
 	let matches = engine.getPatternMetadata(request);
 
 	if (matches.length > 0) {
-		isFilterBlocker = true;
+		isFilterMatched = true;
+		isRedirect = matches[0].redirect;
 	} else {
 		matches = engine.metadata.fromDomain(request.domain);
 	}
@@ -95,5 +97,9 @@ export function isBug(details) {
 		return [null, false];
 	}
 
-	return [String(matches[0].pattern.ghostery_id), isFilterBlocker];
+	return {
+		patternId: String(matches[0].pattern.ghostery_id),
+		isFilterMatched,
+		isRedirect,
+	};
 }

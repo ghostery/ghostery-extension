@@ -32,7 +32,7 @@ import PurpleBox from './PurpleBox';
 import tabInfo from './TabInfo';
 import { buildC2P, buildRedirectC2P } from '../utils/click2play';
 import { log } from '../utils/common';
-import { isBug } from '../utils/matcher';
+import { matchTrackerBD } from '../utils/matcher';
 import * as utils from '../utils/utils';
 import { injectScript, injectNotifications } from '../utils/inject';
 import common from './Common';
@@ -292,7 +292,11 @@ class EventHandlers {
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const [bug_id, isFilterMatched] = isBug(eventMutable);
+		const {
+			patternId: bug_id,
+			isFilterMatched,
+			isRedirect: shoudlRedirect,
+		} = matchTrackerBD(eventMutable);
 
 		// allow if not a tracker
 		if (!bug_id) {
@@ -352,12 +356,11 @@ class EventHandlers {
 			return {};
 		}
 
+		// This is here to let common/adblocker handle previously TrackerDB matched requests as
+		// if it would do it with its own engine.
 		if (conf.enable_ad_block && block && isFilterMatched) {
 			// let the Tracker Db do the blocking according to ghostery-common/adblocker logic
-			const trackerdbAdblockerStub = {
-				manager: {
-					engine: bugDb.engine,
-				},
+			const onBeforeRequest = common.modules.adblocker.background.adblocker.onBeforeRequest.bind({
 				shouldProcessRequest(context, _response) {
 					// Ignore background requests
 					if (context.isBackgroundRequest()) {
@@ -376,10 +379,20 @@ class EventHandlers {
 					}
 					return true;
 				},
+				processRequest: common.modules.adblocker.background.adblocker.processRequest.bind({
+					...common.modules.adblocker.background.adblocker,
+					manager: {
+						engine: {
+							...bugDb.engine,
+							match() {
+								return { match: true, redirect: shoudlRedirect };
+							},
+						}
+					}
+				}),
 				stats: common.modules.adblocker.background.adblocker.stats,
-				processRequest: common.modules.adblocker.background.adblocker.processRequest.bind(common.modules.adblocker.background.adblocker),
-			};
-			const onBeforeRequest = common.modules.adblocker.background.adblocker.onBeforeRequest.bind(trackerdbAdblockerStub);
+			});
+
 			if (!onBeforeRequest(eventMutable, response)) {
 				return {};
 			}
