@@ -80,7 +80,6 @@ const IS_ANDROID = getBrowserInfo.isAndroid();
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
 const ONE_HOUR_MSEC = 3600000;
 const ONE_DAY_MSEC = ONE_HOUR_MSEC * 24;
-const ONE_WEEK_MSEC = ONE_DAY_MSEC * 7;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
