@@ -240,7 +240,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
         className="OverviewTab__PageStat"
       >
         <span>
-          requests_modified
+          trackers_modified
            
         </span>
         <span

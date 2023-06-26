@@ -14,6 +14,7 @@
 import bugDb from './BugDb';
 import tabInfo from './TabInfo';
 import { getCommonData } from '../utils/commonModulesData';
+import common from './Common';
 
 const LATENCY_ISSUE_THRESHOLD = 1000;
 
@@ -372,6 +373,7 @@ class FoundBugs {
 	 * @param  {number} tab_id		tab id
 	 */
 	clear(tab_id) {
+		common.modules?.adblocker?.background?.adblocker?.stats.tabs.delete(tab_id);
 		delete this._foundBugs[tab_id];
 		delete this._foundApps[tab_id];
 	}

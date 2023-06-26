@@ -194,11 +194,10 @@ class Category extends React.Component {
 
 	_renderCaret() {
 		const { isExpanded } = this.state;
-		const { isUnidentified } = this.props;
 		const caretClasses = ClassNames(this.context, {
 			'caret-down': !isExpanded,
 			'caret-up': isExpanded,
-			Category__antiTrackingCaret: isUnidentified
+			Category__antiTrackingCaret: false,
 		});
 		return (
 			<svg className={caretClasses} onClick={this.toggleCategoryTrackers} width="11" height="7" viewBox="0 0 11 7" xmlns="http://www.w3.org/2000/svg">
@@ -228,6 +227,8 @@ class Category extends React.Component {
 			smartBlockActive,
 			smartBlock,
 			setup_complete,
+			enable_ad_block,
+			enable_anti_tracking,
 		} = this.props;
 		const {
 			totalShownBlocked,
@@ -276,10 +277,10 @@ class Category extends React.Component {
 									)}
 									<span className="count">{`${category.num_total} `}</span>
 									<span className="text">
-										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
+										{ (category.num_total === 1) ? t('organization') : t('organizations') }
 									</span>
 								</div>
-								{!!trackersBlockedCount && (
+								{globalBlocking && !!trackersBlockedCount && (
 									<div className="blocked-count">
 										<span className="count">
 											{trackersBlockedCount}
@@ -294,7 +295,7 @@ class Category extends React.Component {
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
 							{ this._renderCaret() }
-							{setup_complete && !isUnidentified && (
+							{setup_complete && globalBlockingBool && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
 									<span className={index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
@@ -328,7 +329,17 @@ class Category extends React.Component {
 				{isExpanded && (
 					<Trackers
 						globalBlocking={globalBlockingBool}
-						trackers={category.trackers}
+						trackers={category.trackers.sort((a, b) => {
+							const aName = a.name.toLowerCase();
+							const bName = b.name.toLowerCase();
+							if (aName < bName) {
+								return -1;
+							}
+							if (aName > bName) {
+								return 1;
+							}
+							return 0;
+						})}
 						cat_id={category.id}
 						actions={actions}
 						showToast={showToast}
@@ -340,6 +351,8 @@ class Category extends React.Component {
 						smartBlock={smartBlock}
 						isUnidentified={isUnidentified}
 						setup_complete={setup_complete}
+						enable_ad_block={enable_ad_block}
+						enable_anti_tracking={enable_anti_tracking}
 					/>
 				)}
 			</div>

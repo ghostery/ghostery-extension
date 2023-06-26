@@ -288,7 +288,7 @@ class BlockingHeader extends React.Component {
 				<div className="row align-middle">
 					<div className="columns">
 						<div className="title">
-							{ globalBlockingBool ? t('settings_global_blocking') : t('blocking_trackers') }
+							{ globalBlockingBool ? t('settings_global_blocking') : t('tracker_database') }
 							{' '}
 							{setup_complete && (
 								<Link to="/settings/globalblocking" className="gear-icon" />
@@ -296,7 +296,7 @@ class BlockingHeader extends React.Component {
 						</div>
 					</div>
 					<div className="shrink columns align-self-justify text-right">
-						{setup_complete && categories && categories.length > 0 && (
+						{setup_complete && globalBlocking && categories && categories.length > 0 && (
 							<div
 								className="block-text"
 								onClick={this.clickBlockAll}

@@ -65,7 +65,7 @@
 		.caret-down {
 			@extend %pointer;
 			display: inline-block;
-			margin: 0 15px 4px 0;
+			margin: 0 4px 4px 0;
 			path {
 				fill: $tundora;
 			}
@@ -73,12 +73,13 @@
 		.caret-up {
 			@extend %pointer;
 			display: inline-block;
-			margin: 0 15px 4px 0;
+			margin: 0 4px 4px 0;
 			path {
 				fill: $tundora;
 			}
 		}
 		.checkbox-container {
+			margin-left: 11px;
 			display: inline-block;
 		}
 		.no-sticky {
@@ -114,8 +115,8 @@
 		display: inline-block;
 		font-size: 18px;
 		line-height: 24px;
-		font-weight: 400;
-		color: #333333;
+		font-weight: 500;
+		color: #4B4B4B;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -132,9 +133,10 @@
 		margin: 2px 0 0;
 		text-transform: uppercase;
 		.total-count {
-			color: #333333;
+			color: #808080;
 			display: inline-block;
 			overflow-y: hidden;
+			font-weight: 700;
 			@extend %nowrap;
 		}
 		.blocked-count {

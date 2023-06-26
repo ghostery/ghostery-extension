@@ -31,6 +31,7 @@ const mapStateToProps = state => ({
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
 	smartBlock: state.panel.smartBlock,
+	enable_ad_block: state.panel.enable_ad_block,
 	enable_anti_tracking: state.panel.enable_anti_tracking,
 	pageHost: state.summary.pageHost,
 	paused_blocking: state.summary.paused_blocking,

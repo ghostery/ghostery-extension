@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import ClassNames from 'classnames';
 
 import ThemeContext from '../../contexts/ThemeContext';
 import globals from '../../../../src/classes/Globals';
@@ -89,23 +88,16 @@ class Tracker extends React.Component {
 		};
 	}
 
-	static _renderCommonCookieStat(count) { return Tracker._renderCommonStat(count, 'cookie'); }
+	static _renderCommonAntiTrackingStat(count) { return Tracker._renderCommonStat(count, 'modified'); }
 
-	static _renderCommonFingerprintStat(count) { return Tracker._renderCommonStat(count, 'fingerprint'); }
-
-	static _renderCommonAdStat(count) { return Tracker._renderCommonStat(count, 'ad'); }
+	static _renderCommonAdStat(count) { return Tracker._renderCommonStat(count, 'blocked'); }
 
 	static _renderCommonStat(count, type) {
-		const exactlyOne = count === 1;
-		const label = exactlyOne ?
-			t(`${type}`) :
-			t(`${type}s`);
-
 		return (
 			<span className="trk-common-stat">
 				{count}
 				{' '}
-				{label}
+				{type}
 			</span>
 		);
 	}
@@ -270,29 +262,60 @@ class Tracker extends React.Component {
 		});
 	}
 
-	_renderCommonStatsContainer() {
-		const { tracker } = this.props;
+	_renderDescription() {
+		const { tracker, enable_ad_block, enable_anti_tracking } = this.props;
 		const { commonAdCount, commonCookieCount, commonFingerprintCount } = tracker;
 
-		const oneOrMoreCookies = commonCookieCount >= 1;
-		const oneOrMoreFingerprints = commonFingerprintCount >= 1;
 		const oneOrMoreAds = commonAdCount >= 1;
-
+		const antiTrackingCount = commonCookieCount + commonFingerprintCount;
+		const oneOrMoreModified = antiTrackingCount >= 1;
 		return (
 			<div className="trk-common-stats-outer-container">
-				{oneOrMoreAds && (
-					<div className="trk-common-stats-container">
-						{this._renderCommonAdsIcon()}
-						{Tracker._renderCommonAdStat(commonAdCount)}
-					</div>
-				)}
-				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
-					<div className="trk-common-stats-container">
-						{this._renderCommonCookiesAndFingerprintsIcon()}
-						{oneOrMoreCookies && Tracker._renderCommonCookieStat(commonCookieCount)}
-						{oneOrMoreFingerprints && Tracker._renderCommonFingerprintStat(commonFingerprintCount)}
-					</div>
-				)}
+				{(() => {
+					if (oneOrMoreAds) {
+						return (
+							<div className="trk-common-stats-container">
+								{this._renderCommonAdsIcon()}
+								{Tracker._renderCommonAdStat(commonAdCount)}
+							</div>
+						);
+					}
+					if (oneOrMoreModified) {
+						return (
+							<div className="trk-common-stats-container">
+								{this._renderCommonCookiesAndFingerprintsIcon()}
+								{oneOrMoreModified && Tracker._renderCommonAntiTrackingStat(antiTrackingCount)}
+							</div>
+						);
+					}
+					if (!enable_ad_block && !enable_anti_tracking) {
+						return (
+							<div className="trk-common-stats-container">
+								{t('protection_disabled')}
+							</div>
+						);
+					}
+					if (tracker.ss_allowed) {
+						return (
+							<div className="trk-common-stats-container">
+								{t('trusted')}
+							</div>
+						);
+					}
+					// not blocked and website not restricted
+					if (!tracker.blocked && this.props.sitePolicy !== 1) {
+						return (
+							<div className="trk-common-stats-container">
+								{t('allowed')}
+							</div>
+						);
+					}
+					return (
+						<div className="trk-common-stats-container">
+							{t('tracking_not_detected')}
+						</div>
+					);
+				})()}
 			</div>
 		);
 	}
@@ -334,8 +357,9 @@ class Tracker extends React.Component {
 
 		let sources;
 		if (tracker.sources) {
-			sources = tracker.sources.map(source => (
-				<p className="trk-src-link unidentified">
+			sources = tracker.sources.map((source, i) => (
+				// eslint-disable-next-line react/no-array-index-key
+				<p className="trk-src-link unidentified" key={`${i}${source.src}`}>
 					{ source.src }
 				</p>
 			));
@@ -345,10 +369,6 @@ class Tracker extends React.Component {
 			));
 		}
 
-		const trackerNameClasses = ClassNames('trk-name', {
-			'is-whitelisted': tracker.whitelisted && !tracker.siteRestricted,
-		});
-
 		return (
 			<div className={`${trackerClasses} blocking-trk`}>
 				<div className="row align-middle trk-header">
@@ -357,15 +377,15 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns collapse-left">
 						<div
-							className={trackerNameClasses}
+							className="trk-name"
 							onClick={this.toggleDescription}
 						>
 							{tracker.name}
 						</div>
-						{!tracker.whitelisted && this._renderCommonStatsContainer()}
+						{this._renderDescription()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						{setup_complete && (
+						{setup_complete ? (
 							<React.Fragment>
 								{!isUnidentified && renderKnownTrackerButtons(
 									tracker.ss_allowed,
@@ -382,7 +402,7 @@ class Tracker extends React.Component {
 									this.context
 								)}
 							</React.Fragment>
-						)}
+						) : null}
 					</div>
 				</div>
 				{showMoreInfo && (

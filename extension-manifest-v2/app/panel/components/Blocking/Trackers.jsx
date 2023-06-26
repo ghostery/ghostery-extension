@@ -54,6 +54,8 @@ class Trackers extends React.Component {
 			smartBlockActive,
 			smartBlock,
 			setup_complete,
+			enable_ad_block,
+			enable_anti_tracking,
 		} = this.props;
 		let trackerList;
 		if (globalBlocking) {
@@ -90,6 +92,8 @@ class Trackers extends React.Component {
 					smartBlock={smartBlock}
 					isUnidentified={isUnidentified}
 					setup_complete={setup_complete}
+					enable_ad_block={enable_ad_block}
+					enable_anti_tracking={enable_anti_tracking}
 				/>
 			));
 		}

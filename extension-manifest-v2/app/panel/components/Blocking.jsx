@@ -291,6 +291,7 @@ class Blocking extends React.Component {
 			actions,
 			categories,
 			unidentifiedCategory,
+			enable_ad_block,
 			enable_anti_tracking,
 			expand_all_trackers,
 			is_expanded,
@@ -336,6 +337,7 @@ class Blocking extends React.Component {
 								smartBlockActive={smartBlockActive}
 								smartBlock={smartBlock}
 								unidentifiedCategory={unidentifiedCategory}
+								enable_ad_block={enable_ad_block}
 								enable_anti_tracking={enable_anti_tracking}
 								setup_complete={setup_complete}
 							/>
