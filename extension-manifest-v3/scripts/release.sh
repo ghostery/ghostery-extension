@@ -20,7 +20,8 @@ fi
 # Update xcode version
 node ./scripts/xcode-version.js
 
-# Push and pull new translations
+# Compile, push and pull new translations
+npm run locales
 tx push
 tx pull
 
