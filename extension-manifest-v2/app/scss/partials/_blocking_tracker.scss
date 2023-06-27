@@ -24,12 +24,9 @@
 			@extend %pointer;
 			font-size: 14px;
 			line-height: 25px;
-			font-weight: 400;
-			color: #4a4a4a;
+			font-weight: 600;
+			color: #4b4b4b;
 			@extend %nowrap;
-			&.is-whitelisted {
-				color: #00AEF0;
-			}
 		}
 		.trk-common-stats-outer-container {
 			// prevent jitter from breaking to new line
@@ -66,7 +63,6 @@
 			color: #1dafed;
 			text-transform: capitalize;
 			display: inline-block;
-			max-width: 0px;
 			padding-right: 0px;
 			transition: max-width 0.6s, padding 0.6s;
 			transition-delay: 0.2s;
@@ -75,10 +71,8 @@
 		}
 		.trk-common-stats-container {
 			display: inline-block;
-		}
-		.trk-common-stats-container:hover .trk-common-stat {
-			max-width: 100px;
-			padding-right: 4px;
+			padding-right: 8px;
+			color: #808080;
 		}
 
 		.svg-container {

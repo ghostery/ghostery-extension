@@ -22,18 +22,15 @@
       }
     }
   },
-  "ad": {
-    "message": "ad"
-  },
   "ad_blocking": {
     "message": "Ad-Blocking"
   },
   "additional_permissions_required": {
     "message": "Additional Permissions Required"
   },
-  "ads": {
-    "message": "ads"
-  },
+	"modified": {
+		"message": "Modified"
+	},
   "ads___onboarding": {
     "message": "Ads"
   },
@@ -92,6 +89,9 @@
   },
   "all_popups": {
     "message": "All Popups"
+  },
+  "allowed": {
+    "message": "Allowed"
   },
   "already_subscribed": {
     "message": "Already Subscribed"
@@ -262,21 +262,21 @@
     "description": "as in '5 (trackers) BLOCKED'",
     "message": "Blocked"
   },
-  "blocking_category_tracker": {
-    "message": "Tracker"
+  "organization": {
+    "message": "Organization"
   },
   "blocking_category_tracker_found": {
     "message": "Found"
   },
-  "blocking_category_trackers": {
-    "message": "Trackers"
+  "organizations": {
+    "message": "Organizations"
   },
   "blocking_category_whitelisted": {
     "description": "as in '5 (trackers) TRUSTED'",
     "message": "Trusted"
   },
-  "blocking_trackers": {
-    "message": "Trackers"
+  "tracker_database": {
+    "message": "Tracker Database"
   },
   "blocking_unblock_all": {
     "message": "Unblock All"
@@ -1183,7 +1183,7 @@
     "message": " breaking the page."
   },
   "panel_tracker_found_sources_title": {
-    "message": "Detected tracker URLs:"
+    "message": "Detected URLs:"
   },
   "panel_tracker_restrict_tooltip": {
     "message": "Restrict on this site"
@@ -1322,17 +1322,17 @@
     "message": "Promos turned off. You can turn them back on in",
     "description": "translation must take into account that 'Settings' is appended to this string"
   },
+  "protection_disabled": {
+    "message": "Protection disabled"
+  },
   "recommended": {
     "message": "Recommended"
   },
   "refresh_and_try_again": {
     "message": "Refresh page and try again"
   },
-  "requests_modified": {
-    "message": "Requests Modified:"
-  },
-  "requests_modified_tooltip": {
-    "message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad-Blocking"
+  "trackers_modified": {
+    "message": "Trackers Modified:"
   },
   "select_basic": {
     "message": "Select Basic"
@@ -1855,6 +1855,12 @@
   },
   "trackers_preview": {
     "message": "Trackers Preview"
+  },
+  "tracking_not_detected": {
+    "message": "Tracking not detected"
+  },
+  "trusted": {
+    "message": "Trusted"
   },
   "try_ghostery_midnight": {
     "message": "Try Ghostery Midnight"

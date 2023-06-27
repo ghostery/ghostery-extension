@@ -94,6 +94,7 @@ common.load = async () => {
 		setPref('modules.hpn-lite.enabled', conf.enable_human_web);
 	}
 
+	setPref('attrack.cookieMode', 'trackers');
 	setPref('cliqz_adb_mode', DEFAULT_ADBLOCKER_MODE);
 	syncTrustedSites();
 

@@ -54,7 +54,6 @@ class Summary extends React.Component {
 		this.clickDonut = this.clickDonut.bind(this);
 		this.clickPauseButton = this.clickPauseButton.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
-		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.showStatsView = this.showStatsView.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
@@ -233,21 +232,6 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Trackers Blocked. Triggers a filter action
-	 */
-	clickTrackersBlocked() {
-		const { actions, sitePolicy, is_expert } = this.props;
-
-		if (!is_expert) { return; }
-
-		if (sitePolicy === BLACKLISTED) {
-			actions.filterTrackers({ type: 'trackers', name: 'all' });
-		} else {
-			actions.filterTrackers({ type: 'trackers', name: 'blocked' });
-		}
-	}
-
-	/**
 	 * Handles clicking on the total trackers count on the condensed view
 	 */
 	clickTrackersCount() {
@@ -341,32 +325,12 @@ class Summary extends React.Component {
 		return (pageHost.split('.').length < 2);
 	}
 
-	_requestsModifiedCount() {
-		const {
-			antiTracking,
-			enable_anti_tracking,
-		} = this.props;
-
-		return (enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount) || 0;
+	_trackerModifiedCount() {
+		return this.props.antiTracking?.trackerCount || 0;
 	}
 
 	_totalTrackersBlockedCount() {
-		const {
-			paused_blocking,
-			sitePolicy,
-			trackerCounts,
-			adBlock,
-		} = this.props;
-
-		let totalTrackersBlockedCount;
-		if (paused_blocking || sitePolicy === WHITELISTED) {
-			totalTrackersBlockedCount = 0;
-		} else if (sitePolicy === BLACKLISTED) {
-			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
-		} else {
-			totalTrackersBlockedCount = trackerCounts.blocked || 0;
-		}
-		return totalTrackersBlockedCount + (adBlock?.unidentifiedTrackers?.length || 0);
+		return this.props.adBlock?.trackerCount || 0;
 	}
 
 	_isCondensed() {
@@ -468,17 +432,14 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the total trackers blocked readout
 	 */
 	_renderTotalTrackersBlocked() {
-		const { is_expert } = this.props;
-
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
-			clickable: is_expert,
 		});
 		const totalTrackersBlockedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
 		return (
-			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
+			<div className={totalTrackersBlockedContainerClassNames}>
 				<div className={totalTrackersBlockedClassNames}>
 					<span className="SummaryPageStat__label">
 						{t('trackers_blocked')}
@@ -492,10 +453,8 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderTotalRequestsModified() {
-		const { is_expert } = this.props;
-
-		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'g-tooltip', 'total-requests-modified', {
+	_renderTotalTrackersModified() {
+		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
@@ -503,13 +462,12 @@ class Summary extends React.Component {
 			<div className="Summary__pageStatContainer">
 				<div className={totalRequestsModifiedClassNames}>
 					<span className="SummaryPageStat__label">
-						{t('requests_modified')}
+						{t('trackers_modified')}
 						{' '}
 					</span>
 					<span className="SummaryPageStat__value">
-						{this._requestsModifiedCount()}
+						{this._trackerModifiedCount()}
 					</span>
-					<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 				</div>
 			</div>
 		);
@@ -737,7 +695,7 @@ class Summary extends React.Component {
 
 					<div className="Summary__pageStatsContainer">
 						{!disableBlocking && this._renderTotalTrackersBlocked()}
-						{!disableBlocking && this._renderTotalRequestsModified()}
+						{!disableBlocking && this._renderTotalTrackersModified()}
 						{!disableBlocking && this._renderPageLoadTime()}
 					</div>
 

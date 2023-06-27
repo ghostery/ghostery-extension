@@ -24,7 +24,7 @@ describe('src/classes/BugDb.js', () => {
 
 	describe('init', () => {
 		describe('on every run', () => {
-			test('does not add empty category', async () => {
+			test('adds categories', async () => {
 				bugDb.engine = createEngineMock({
 					categories: [{
 						key: 'advertising'
@@ -32,7 +32,16 @@ describe('src/classes/BugDb.js', () => {
 				});
 				expect(bugDb.db.categories).toHaveLength(0);
 				await bugDb.init();
-				expect(bugDb.db.categories).toEqual([]);
+				expect(bugDb.db.categories).toEqual([{
+					description: 'category_advertising_desc',
+					color: '#CB55CD',
+					id: 'advertising',
+					img_name: 'adv',
+					name: 'category_advertising',
+					num_blocked: 0,
+					num_total: 0,
+					trackers: [],
+				}]);
 			});
 
 			describe('with patterns', () => {

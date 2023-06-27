@@ -77,16 +77,29 @@ export function fuzzyUrlMatcher(url, urls) {
 	return false;
 }
 
-export function isBug(details) {
+export function matchTrackerBD(details) {
 	const { engine } = bugDb;
 
 	const request = fromWebRequestDetails(details);
+	let isFilterMatched = false;
+	let isRedirect = false;
 
-	const matches = engine.getPatternMetadata(request);
+	let matches = engine.getPatternMetadata(request);
 
-	if (matches.length === 0) {
-		return false;
+	if (matches.length > 0) {
+		isFilterMatched = true;
+		isRedirect = matches[0].redirect;
+	} else {
+		matches = engine.metadata.fromDomain(request.domain);
 	}
 
-	return String(matches[0].pattern.ghostery_id);
+	if (matches.length === 0) {
+		return [null, false];
+	}
+
+	return {
+		patternId: String(matches[0].pattern.ghostery_id),
+		isFilterMatched,
+		isRedirect,
+	};
 }

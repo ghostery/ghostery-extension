@@ -16,7 +16,7 @@ const colors = {
   essential: '#FC9734',
   hosting: '#8459A5',
   customer_interaction: '#EF671E',
-  unidentified: '#818181',
+  unidentified: '#79859E',
   audio_video_player: '#4ECB4E',
   cdn: '#4ECBA1',
   comments: '#4EA1CB',
@@ -53,6 +53,14 @@ export const getCategoryKey = (category) => {
 
 export const getCategoryColor = (category) => {
   return colors[getCategoryKey(category)];
+};
+
+export const getCategoryChartColor = (category) => {
+  const categoryKey = getCategoryKey(category);
+  if (categoryKey === 'unidentified') {
+    return '#9FA8BB';
+  }
+  return colors[categoryKey];
 };
 
 export const sortCategories = (resolveCategoryName = (a) => a) => {

@@ -1058,8 +1058,8 @@ function initialiseWebRequestPipeline() {
 			spec: 'blocking',
 			before: existingSteps.onBeforeRequest,
 			fn: (state, response) => {
-				const result = events.onBeforeRequest(state);
-				if (result && (result.cancel === true || result.redirectUrl)) {
+				const result = events.onBeforeRequest(state, response);
+				if (result.cancel || result.redirectUrl) {
 					Object.assign(response, result);
 				}
 				return true;
@@ -1084,13 +1084,22 @@ function initialiseWebRequestPipeline() {
  *
  * @return {boolean}
  */
-function isWhitelisted(state) {
+function isWhitelistedForAdblocking(state) {
 	return (
 		Boolean(globals.SESSION.paused_blocking)
 		|| Boolean(state.ghosteryWhitelisted)
-		|| Policy.getSitePolicy(state.tabUrl, state.url) === 2
+		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
 		// only check common_checklist if the tracker id is unknown
-		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domain, state.urlParts.domain))
+		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
+	);
+}
+
+function isWhitelistedForAntiTracking(state) {
+	return (
+		Boolean(globals.SESSION.paused_blocking)
+		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
+		// only check common_checklist if the tracker id is unknown
+		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
 	);
 }
 
@@ -1103,7 +1112,7 @@ function isWhitelisted(state) {
  */
 common.modules.antitracking.on('enabled', () => {
 	common.modules.antitracking.isReady().then(() => {
-		common.modules.antitracking.action('setWhiteListCheck', isWhitelisted);
+		common.modules.antitracking.action('setWhiteListCheck', isWhitelistedForAntiTracking);
 	});
 });
 
@@ -1114,7 +1123,7 @@ common.modules.antitracking.on('enabled', () => {
  */
 common.modules.adblocker.on('enabled', () => {
 	common.modules.adblocker.isReady().then(() => {
-		common.modules.adblocker.action('addWhiteListCheck', isWhitelisted);
+		common.modules.adblocker.action('addWhiteListCheck', isWhitelistedForAdblocking);
 	});
 });
 

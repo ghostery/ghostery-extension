@@ -32,9 +32,10 @@ import PurpleBox from './PurpleBox';
 import tabInfo from './TabInfo';
 import { buildC2P, buildRedirectC2P } from '../utils/click2play';
 import { log } from '../utils/common';
-import { isBug } from '../utils/matcher';
+import { matchTrackerBD } from '../utils/matcher';
 import * as utils from '../utils/utils';
 import { injectScript, injectNotifications } from '../utils/inject';
+import common from './Common';
 
 /**
  * This class is a collection of handlers for
@@ -235,7 +236,7 @@ class EventHandlers {
 	 * @param  {Object} eventMutable 	event data
 	 * @return {Object}			optionaly return {cancel: true} to force dropping the request
 	 */
-	onBeforeRequest(eventMutable) {
+	onBeforeRequest(eventMutable, response) {
 		const tab_id = eventMutable.tabId;
 		const request_id = eventMutable.requestId;
 
@@ -270,18 +271,32 @@ class EventHandlers {
 		}
 
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
-		const from_redirect = globals.REDIRECT_MAP.has(request_id);
 		const processed = utils.processUrl(eventMutable.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
 		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, null, request_id, from_redirect, true);
+			// attempt to redirect request to HTTPS. NOTE: Redirects from URLs
+			// with ws:// and wss:// schemes are ignored.
+			// keep track of insecure redirects to avoid redirect loops
+			const ir = tabInfo.getTabInfo(tab_id, 'insecureRedirects');
+			if (ir.indexOf(request_id) >= 0) {
+				return { cancel: true };
+			}
+			ir.push(request_id);
+			tabInfo.setTabInfo(tab_id, 'insecureRedirects', ir);
+			return {
+				redirectUrl: eventMutable.url.replace(/^http:/, 'https:')
+			};
 		}
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const bug_id = isBug(eventMutable);
+		const {
+			patternId: bug_id,
+			isFilterMatched,
+			isRedirect: shoudlRedirect,
+		} = matchTrackerBD(eventMutable);
 
 		// allow if not a tracker
 		if (!bug_id) {
@@ -333,8 +348,54 @@ class EventHandlers {
 			});
 		}, 1);
 
-		if (conf.enable_ad_block && block && (!fromRedirect || conf.show_redirect_tracking_dialogs)) {
-			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, request_id, fromRedirect);
+		if (block && isFilterMatched && conf.show_redirect_tracking_dialogs && fromRedirect) {
+			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(request_id), app_id);
+			setTimeout(() => {
+				chrome.tabs.update(tab_id, { url });
+			}, 0);
+			return {};
+		}
+
+		// This is here to let common/adblocker handle previously TrackerDB matched requests as
+		// if it would do it with its own engine.
+		if (conf.enable_ad_block && block && isFilterMatched) {
+			// let the Tracker Db do the blocking according to ghostery-common/adblocker logic
+			const onBeforeRequest = common.modules.adblocker.background.adblocker.onBeforeRequest.bind({
+				shouldProcessRequest(context, _response) {
+					// Ignore background requests
+					if (context.isBackgroundRequest()) {
+						return false;
+					}
+
+					// If this request was either canceled or redirected by another step, then
+					// we do not try to perform any matching on it.
+					if (_response.cancel === true || _response.redirectUrl !== undefined) {
+						return false;
+					}
+
+					// Make sure that we have a valid `url` and `frameUrl` for this request
+					if (context.urlParts === null || context.frameUrlParts === null) {
+						return false;
+					}
+					return true;
+				},
+				processRequest: common.modules.adblocker.background.adblocker.processRequest.bind({
+					...common.modules.adblocker.background.adblocker,
+					manager: {
+						engine: {
+							...bugDb.engine,
+							match() {
+								return { match: true, redirect: shoudlRedirect };
+							},
+						}
+					}
+				}),
+				stats: common.modules.adblocker.background.adblocker.stats,
+			});
+
+			if (!onBeforeRequest(eventMutable, response)) {
+				return {};
+			}
 		}
 
 		return { cancel: false };
@@ -519,58 +580,6 @@ class EventHandlers {
 				this.purplebox.updateBox(details.tab_id, app_id);
 			}
 		}
-	}
-
-	/**
-	 * Helper function that returns the appropriate object to block several
-	 * types of requests coming through `chrome.webRequest.onBeforeRequest`
-	 *
-	 * @private
-	 *
-	 * @param  {Object} details 	event data
-	 * @param  {number} tabId 		tab id
-	 * @param  {number} appId 		app id
-	 * @param  {number} bugId 		bug id
-	 * @param  {number} requestId 	request id
-	 * @param  {boolean} fromRedirect
-	 * @return {string|boolean}
-	 */
-	static _blockHelper(details, tabId, appId, requestId, fromRedirect, upgradeInsecure) {
-		if (upgradeInsecure) {
-			// attempt to redirect request to HTTPS. NOTE: Redirects from URLs
-			// with ws:// and wss:// schemes are ignored.
-			// keep track of insecure redirects to avoid redirect loops
-			const ir = tabInfo.getTabInfo(tabId, 'insecureRedirects');
-			if (ir.indexOf(requestId) >= 0) {
-				return { cancel: true };
-			}
-			ir.push(requestId);
-			tabInfo.setTabInfo(tabId, 'insecureRedirects', ir);
-			return {
-				redirectUrl: details.url.replace(/^http:/, 'https:')
-			};
-		}
-		if (details.type === 'sub_frame') {
-			return {
-				redirectUrl: 'about:blank'
-			};
-		}
-		if (details.type === 'image') {
-			return {
-				// send PNG (and not GIF) to avoid conflicts with Adblock Plus
-				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
-			};
-		}
-		if (fromRedirect) {
-			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId);
-			setTimeout(() => {
-				chrome.tabs.update(details.tabId, { url });
-			}, 0);
-		}
-		return {
-			// If true, the request is canceled. This prevents the request from being sent.
-			cancel: true
-		};
 	}
 
 	/**

@@ -15,7 +15,7 @@ import { throttle } from 'underscore';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { getCategoryColor } from '@ghostery/ui/categories';
+import { getCategoryChartColor, sortCategories } from '@ghostery/ui/categories';
 
 import {
 	arc,
@@ -50,7 +50,7 @@ class DonutGraph extends React.Component {
 
 		// Variables
 		this.colors = {
-			regular: getCategoryColor,
+			regular: getCategoryChartColor,
 			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
 			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};
@@ -209,7 +209,7 @@ class DonutGraph extends React.Component {
 					value: cat.num_total
 				});
 			});
-			graphData.sort((a, b) => a.value < b.value);
+			graphData.sort(sortCategories(c => c.id));
 		}
 
 		if (antiTracking.unidentifiedTrackerCount || adBlock.unidentifiedTrackerCount) {

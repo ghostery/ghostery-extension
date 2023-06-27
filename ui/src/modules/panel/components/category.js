@@ -10,7 +10,7 @@
  */
 
 import { html } from 'hybrids';
-import { getCategoryColor } from '../../../utils/categories.js';
+import { getCategoryChartColor } from '../../../utils/categories.js';
 import * as labels from '../../../utils/labels.js';
 
 export default {
@@ -28,7 +28,7 @@ export default {
     </template>
   `.css`
     #pill {
-      background: ${getCategoryColor(name)};
+      background: ${getCategoryChartColor(name)};
       border-radius: 3px;
     }
 
