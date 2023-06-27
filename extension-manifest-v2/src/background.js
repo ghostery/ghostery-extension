@@ -56,7 +56,7 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 import './modules/autoconsent';
-import './modules/renew';
+import renew from './modules/renew';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -1463,23 +1463,21 @@ function initializeGhosteryModules() {
 		conf.show_alert = false;
 	}
 
-	function scheduledTasks() {
-		return new Promise((resolve) => {
-			// auto-fetch from CMP
-			if (conf.show_cmp) {
-				cmp.fetchCMPData();
-			}
+	async function scheduledTasks() {
+		// auto-fetch from CMP
+		if (conf.show_cmp) {
+			await cmp.fetchCMPData();
+		}
 
-			if (conf.enable_abtests) {
-				abtest.fetch()
-					.catch(() => {
-						log('Unable to reach abtest server');
-					})
-					.finally(() => resolve());
-			} else {
-				resolve();
-			}
-		});
+		// Fetch ABtest flags
+		if (conf.enable_abtests) {
+			await abtest.fetch().catch(() => {
+				log('Unable to reach abtest server');
+			});
+		}
+
+		// Renew onboarding
+		renew();
 	}
 
 	// Check CMP and ABTest every second hour.

@@ -17,8 +17,8 @@ import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
 const timestamp = new URLSearchParams(window.location.search).get('timestamp');
 setupIframeSize();
 
-function renew() {
-	chrome.runtime.sendMessage({ action: 'renew:clear' });
+function revoke() {
+	chrome.runtime.sendMessage({ action: 'renew:revoke' });
 	closeIframe();
 }
 
@@ -26,13 +26,8 @@ mount(document.body, {
 	content: () => html`
 		<ui-onboarding-renew
 			timestamp="${timestamp}"
-			onrenew="${renew}"
+			onrenew="${revoke}"
 		  onignore="${() => closeIframe()}"
 		></ui-onboarding-renew>
 	`,
-});
-
-// Update lastSeen
-chrome.storage.local.set({
-	renew_setup: { timestamp, lastSeen: Date.now() },
 });

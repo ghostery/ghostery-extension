@@ -10,16 +10,8 @@
  */
 import { showIframe } from '@ghostery/ui/iframe';
 
-const HOUR_IN_MS = 1000 * 60 * 60;
-
-chrome.runtime.sendMessage({ action: 'renew:setup' }).then((renew_setup) => {
-	const now = Date.now();
-
-	if (
-		renew_setup &&
-		renew_setup.timestamp > now &&
-		renew_setup.lastSeen + HOUR_IN_MS < now
-	) {
-		showIframe(chrome.runtime.getURL(`app/templates/renew.html?timestamp=${renew_setup.timestamp}`), '360px');
+chrome.runtime.onMessage.addListener((msg) => {
+	if (msg.action === 'renew:show') {
+		showIframe(chrome.runtime.getURL(`app/templates/renew.html?timestamp=${msg.timestamp}`), '360px');
 	}
 });

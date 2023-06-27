@@ -17,11 +17,12 @@ import globals from '../classes/Globals';
 import ABTest from '../classes/ABTest';
 
 const _14_DAYS_IN_MS = 1000 * 60 * 60 * 24 * 14;
-let timeoutId;
+let intervalId;
+let callback;
 
 function clear() {
-	if (timeoutId) {
-		clearTimeout(timeoutId);
+	if (intervalId) {
+		clearInterval(intervalId);
 		browser.storage.local.remove(['renew_setup']);
 	}
 }
@@ -43,42 +44,56 @@ function revoke() {
 	openNewTab({ url: '/app/templates/onboarding.html?renew=1', become_active: true });
 }
 
-export default async function setup() {
-	if (ABTest.hasTest('terms') && conf.setup_complete && !conf.enable_human_web) {
+export default async function renew() {
+	if (
+		ABTest.hasTest('terms') &&
+		conf.setup_complete &&
+		!conf.enable_human_web &&
+		!intervalId
+	) {
 		let { renew_setup } = await browser.storage.local.get(['renew_setup']);
 		const now = Date.now();
 
 		if (!renew_setup) {
-			renew_setup = {
-				timestamp: now + _14_DAYS_IN_MS,
-				lastSeen: 0,
-			};
+			renew_setup = now + _14_DAYS_IN_MS;
 			browser.storage.local.set({ renew_setup });
 		}
 
-		if (!timeoutId) {
-			timeoutId = setTimeout(revoke, renew_setup.timestamp - now);
+		if (now > renew_setup) {
+			revoke();
+			return;
 		}
 
-		return renew_setup;
+		// Setup showing the popup every hour
+		intervalId = setInterval(async () => {
+			if (Date.now() > renew_setup) {
+				revoke();
+				return;
+			}
+
+			// Clean up the listener if there was no navigation the last time
+			if (callback) {
+				browser.webNavigation.onDOMContentLoaded.removeListener(callback);
+			}
+
+			callback = (details) => {
+				if (details.frameId === 0 && details.url.match(/^https?/)) {
+					// Clean up current listener
+					browser.webNavigation.onDOMContentLoaded.removeListener(callback);
+
+					browser.tabs.sendMessage(details.tabId, { action: 'renew:show', timestamp: renew_setup });
+				}
+			};
+
+			browser.webNavigation.onDOMContentLoaded.addListener(callback);
+		}, 1000 * 60 * 60);
+	} else {
+		clear();
 	}
-
-	clear();
-
-	return null;
 }
 
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-	switch (message.action) {
-		case 'renew:setup':
-			setup().then(sendResponse);
-			return true;
-		case 'renew:clear':
-			revoke();
-			break;
-		default:
-			break;
+browser.runtime.onMessage.addListener((msg) => {
+	if (msg.action === 'renew:revoke') {
+		revoke();
 	}
-
-	return false;
 });
