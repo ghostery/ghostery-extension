@@ -37,7 +37,7 @@ async function enable(_, event) {
   }
 
   store.set(options, {
-    annoyances: true,
+    blockAnnoyances: true,
     autoconsent: {
       all,
       allowed,
@@ -69,7 +69,7 @@ async function disable(_, event) {
   }
 
   store.set(Options, {
-    annoyances: !all,
+    blockAnnoyances: !all,
     autoconsent: { allowed, disallowed, interactions },
   });
 }

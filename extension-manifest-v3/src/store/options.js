@@ -19,9 +19,9 @@ const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 const observers = new Set();
 
 export const SYNC_OPTIONS = [
-  'ads',
-  'tracking',
-  'annoyances',
+  'blockAds',
+  'blockTrackers',
+  'blockAnnoyances',
   'trackerWheel',
   'trackerCount',
   'wtmSerpReport',
@@ -29,16 +29,26 @@ export const SYNC_OPTIONS = [
   'revision',
 ];
 
-export const ENGINES =
-  chrome.runtime
-    .getManifest()
-    .declarative_net_request?.rule_resources.map(({ id }) => id) || [];
+export const ENGINES = [
+  {
+    name: 'ads',
+    option: 'blockAds',
+  },
+  {
+    name: 'tracking',
+    option: 'blockTrackers',
+  },
+  {
+    name: 'annoyances',
+    option: 'blockAnnoyances',
+  },
+];
 
 const Options = {
   // Main features
-  ads: false,
-  tracking: false,
-  annoyances: false,
+  blockAds: false,
+  blockTrackers: false,
+  blockAnnoyances: false,
 
   // Never-consent popup
   autoconsent: {
@@ -81,9 +91,9 @@ const Options = {
       if (options.engines || options.dnrRules) {
         const engines = options.engines || options.dnrRules;
 
-        options.ads = engines.ads;
-        options.tracking = engines.tracking;
-        options.annoyances = engines.annoyances;
+        options.blockAds = engines.ads;
+        options.blockTrackers = engines.tracking;
+        options.blockAnnoyances = engines.annoyances;
       }
 
       // Fetch options from the server for logged in users
@@ -108,8 +118,8 @@ const Options = {
               : 0,
         });
 
-        // Sync options for logged in users
         if (options.terms && options.sync) {
+          // Sync options for logged in users
           const serverOptions = await getUserOptions();
           if (serverOptions) {
             // Merge local options with newer server options
@@ -173,9 +183,9 @@ async function migrateFromMV2() {
 
     // Proceed if the storage contains data from v2
     if ('version_history' in storage) {
-      options.ads = storage.enable_ad_block || false;
-      options.tracking = storage.enable_anti_tracking || false;
-      options.annoyances = storage.enable_autoconsent || false;
+      options.blockAds = storage.enable_ad_block || false;
+      options.blockTrackers = storage.enable_anti_tracking || false;
+      options.blockAnnoyances = storage.enable_autoconsent || false;
 
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,

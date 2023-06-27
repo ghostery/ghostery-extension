@@ -22,10 +22,10 @@ if (__PLATFORM__ !== 'firefox') {
     const enableRulesetIds = [];
     const disableRulesetIds = [];
 
-    ENGINES.forEach((rule) => {
-      const enabled = options[rule];
-      if (enabledRulesetIds.includes(rule) !== enabled) {
-        (enabled ? enableRulesetIds : disableRulesetIds).push(rule);
+    ENGINES.forEach(({ name, option }) => {
+      const enabled = options[option];
+      if (enabledRulesetIds.includes(name) !== enabled) {
+        (enabled ? enableRulesetIds : disableRulesetIds).push(name);
       }
     });
 

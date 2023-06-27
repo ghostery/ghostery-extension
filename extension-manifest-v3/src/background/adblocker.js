@@ -23,8 +23,8 @@ import asyncSetup from './utils/setup.js';
 
 import { setupTabStats, updateTabStats } from './stats.js';
 
-const adblockerEngines = ENGINES.map((name) => ({
-  name,
+const adblockerEngines = ENGINES.map((engine) => ({
+  ...engine,
   engine: null,
   isEnabled: false,
 }));
@@ -33,9 +33,9 @@ let pausedDomains = [];
 
 const setup = asyncSetup([
   observe(null, (options) => {
-    ENGINES.forEach((key) => {
-      const engine = adblockerEngines.find((e) => e.name === key);
-      engine.isEnabled = options[key];
+    ENGINES.forEach(({ name, option }) => {
+      const engine = adblockerEngines.find((e) => e.name === name);
+      engine.isEnabled = options[option];
     });
 
     pausedDomains = options.paused ? options.paused.map(String) : [];

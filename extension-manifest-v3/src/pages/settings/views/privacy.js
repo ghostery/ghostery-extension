@@ -37,7 +37,7 @@ const PREVIEWS = {
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
-    annoyances: !options.annoyances,
+    blockAnnoyances: !options.blockAnnoyances,
     autoconsent: null,
   });
 }
@@ -81,8 +81,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.ads}"
-                onchange="${html.set(options, 'ads')}"
+                value="${options.blockAds}"
+                onchange="${html.set(options, 'blockAds')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -104,8 +104,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.tracking}"
-                onchange="${html.set(options, 'tracking')}"
+                value="${options.blockTrackers}"
+                onchange="${html.set(options, 'blockTrackers')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.annoyances}"
+                value="${options.blockAnnoyances}"
                 onchange="${toggleNeverConsent}"
               ></ui-settings-toggle>
             </div>

@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 import { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
 
-import { session, COOKIE_DOMAIN } from '/utils/api.js';
+import { session, ACCOUNT_PAGE_URL, SIGNON_PAGE_URL } from '/utils/api.js';
 
 // Trigger options sync every hour
 const ALARM_SYNC_OPTIONS = 'session:sync:options';
@@ -23,10 +23,17 @@ const ALARM_SYNC_OPTIONS_RATE = 1 * 60; // 1 hour in minutes
 const ALARM_UPDATE_SESSION = 'session:update';
 const ALARM_UPDATE_SESSION_DELAY = 1000 * 60 * 24 * 30; // 30 days in milliseconds
 
+function reloadOptions() {
+  store.clear(Options, false);
+  store.get(Options);
+}
+
 // Observe cookie changes (login/logout actions)
-chrome.cookies.onChanged.addListener(async ({ cookie, removed }) => {
-  if (cookie.domain === COOKIE_DOMAIN && cookie.name === 'access_token') {
-    if (!removed) {
+chrome.webNavigation.onDOMContentLoaded.addListener(async ({ url = '' }) => {
+  if (url.includes(SIGNON_PAGE_URL) || url.includes(ACCOUNT_PAGE_URL)) {
+    const user = await session().catch(() => null);
+
+    if (user) {
       if (!(await chrome.alarms.get(ALARM_SYNC_OPTIONS))) {
         chrome.alarms.create(ALARM_SYNC_OPTIONS, {
           periodInMinutes: ALARM_SYNC_OPTIONS_RATE,
@@ -38,13 +45,12 @@ chrome.cookies.onChanged.addListener(async ({ cookie, removed }) => {
           when: Date.now() + ALARM_UPDATE_SESSION_DELAY,
         });
       }
-
-      store.clear(Options, false);
-      store.get(Options);
     } else {
       chrome.alarms.clear(ALARM_SYNC_OPTIONS);
       chrome.alarms.clear(ALARM_UPDATE_SESSION);
     }
+
+    reloadOptions();
 
     // Send message to update session in other contexts
     chrome.runtime.sendMessage({ action: UPDATE_SESSION_ACTION_NAME });
@@ -52,20 +58,20 @@ chrome.cookies.onChanged.addListener(async ({ cookie, removed }) => {
 });
 
 chrome.alarms.onAlarm.addListener(async ({ name }) => {
-  if (name === ALARM_SYNC_OPTIONS) {
-    store.clear(Options, false);
-    store.get(Options);
-  }
-});
-
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === ALARM_UPDATE_SESSION) {
-    if (!(await session())) {
-      chrome.alarms.clear(ALARM_UPDATE_SESSION);
-    } else {
-      chrome.alarms.create(ALARM_UPDATE_SESSION, {
-        when: Date.now() + ALARM_UPDATE_SESSION_DELAY,
-      });
-    }
+  switch (name) {
+    case ALARM_SYNC_OPTIONS:
+      reloadOptions();
+      break;
+    case ALARM_UPDATE_SESSION:
+      if (!(await session())) {
+        chrome.alarms.clear(ALARM_UPDATE_SESSION);
+      } else {
+        chrome.alarms.create(ALARM_UPDATE_SESSION, {
+          when: Date.now() + ALARM_UPDATE_SESSION_DELAY,
+        });
+      }
+      break;
+    default:
+      break;
   }
 });

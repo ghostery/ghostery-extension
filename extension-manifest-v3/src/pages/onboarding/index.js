@@ -19,9 +19,9 @@ async function updateOptions(host, event) {
   const success = event.type === 'success';
 
   await store.set(Options, {
-    ads: success,
-    tracking: success,
-    annoyances: success,
+    blockAds: success,
+    blockTrackers: success,
+    blockAnnoyances: success,
     terms: success,
     onboarding: { done: true },
   });

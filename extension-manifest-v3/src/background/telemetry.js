@@ -54,7 +54,8 @@ const getConf = async () => {
   const options = await store.resolve(Options);
 
   return {
-    enable_ad_block: options.ads || options.tracking || options.annoyances,
+    enable_ad_block:
+      options.blockAds || options.blockTrackers || options.blockAnnoyances,
     enable_human_web: options.terms,
     install_date: options.installDate,
     setup_complete: options.onboarding.done && options.terms,
