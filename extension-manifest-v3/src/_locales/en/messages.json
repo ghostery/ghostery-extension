@@ -11,6 +11,9 @@
   "about": {
     "message": "About"
   },
+  "account_details": {
+    "message": "Account details"
+  },
   "ad_blocking": {
     "message": "Ad-Blocking"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "Contact support"
   },
+  "contributor": {
+    "message": "Contributor"
+  },
   "copied_to_clipboard": {
     "message": "Copied to clipboard"
+  },
+  "create_account": {
+    "message": "Create Account"
   },
   "customer_interaction": {
     "message": "Customer Interaction",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery will stop working in:"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Help Ghostery fight for a web where privacy is a basic human right."
+  },
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send non-personal information to WhoTracks.Me. The input enables Ghostery to provide real-time intel on trackers which in turn provides protection to the entire Ghostery community."
+  },
+  "join_ghostery": {
+    "message": "Join Ghostery"
   },
   "keep_disabled": {
     "message": "Keep disabled"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "Resume"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Save and synchronize your custom settings between browsers and devices."
+  },
   "search_website___": {
     "message": "Search website..."
   },
   "settings": {
     "message": "Settings"
+  },
+  "settings_sync": {
+    "message": "Settings Sync"
   },
   "setup_successful": {
     "message": "Setup Successful"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "Yes"
+  },
+  "you_are_signed_in_as_": {
+    "message": "You are signed in as:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "You can adjust the settings below. We recommend keeping them ON at all times."
