@@ -56,6 +56,7 @@ import { _getJSONAPIErrorsObject } from './utils/api';
 import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 import './modules/autoconsent';
+import renew from './modules/renew';
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -79,7 +80,6 @@ const IS_ANDROID = getBrowserInfo.isAndroid();
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
 const ONE_HOUR_MSEC = 3600000;
 const ONE_DAY_MSEC = ONE_HOUR_MSEC * 24;
-const ONE_WEEK_MSEC = ONE_DAY_MSEC * 7;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
@@ -934,16 +934,6 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Configure A/B tests based on data fetched from the A/B server
- * @memberOf Background
- */
-function setupABTests() {
-	if (abtest.has('terms')) {
-		tryOpenOnboarding({ force: true, period: ONE_WEEK_MSEC });
-	}
-}
-
-/**
  * @since 8.5.3
  *
  * Update config options for the Common antitracking module to match the current human web setting.
@@ -1473,26 +1463,21 @@ function initializeGhosteryModules() {
 		conf.show_alert = false;
 	}
 
-	function scheduledTasks() {
-		return new Promise((resolve) => {
-			// auto-fetch from CMP
-			if (conf.show_cmp) {
-				cmp.fetchCMPData();
-			}
+	async function scheduledTasks() {
+		// auto-fetch from CMP
+		if (conf.show_cmp) {
+			await cmp.fetchCMPData();
+		}
 
-			if (conf.enable_abtests) {
-				abtest.fetch()
-					.then(() => {
-						setupABTests();
-					})
-					.catch(() => {
-						log('Unable to reach abtest server');
-					})
-					.finally(() => resolve());
-			} else {
-				resolve();
-			}
-		});
+		// Fetch ABtest flags
+		if (conf.enable_abtests) {
+			await abtest.fetch().catch(() => {
+				log('Unable to reach abtest server');
+			});
+		}
+
+		// Renew onboarding
+		renew();
 	}
 
 	// Check CMP and ABTest every second hour.

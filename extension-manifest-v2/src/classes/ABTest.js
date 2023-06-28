@@ -19,13 +19,6 @@ import globals from './Globals';
 import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
-const {
-	BROWSER_INFO_READY,
-	BROWSER_INFO,
-	CMP_BASE_URL,
-	EXTENSION_VERSION
-} = globals;
-
 /** Helper class for handling A/B tests.
  * @memberof  BackgroundClasses
  */
@@ -86,7 +79,14 @@ class ABTest {
 	}
 
 	static async _buildURL(ir) {
-		await BROWSER_INFO_READY;
+		await globals.BROWSER_INFO_READY;
+
+		const {
+			BROWSER_INFO,
+			EXTENSION_VERSION,
+			CMP_BASE_URL
+		} = globals;
+
 		return (`${CMP_BASE_URL}/abtestcheck
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&install_date=${encodeURIComponent(conf.install_date)}

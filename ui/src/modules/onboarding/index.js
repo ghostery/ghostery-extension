@@ -17,8 +17,9 @@ import '../pages/index.js';
 // Root
 import './onboarding.js';
 
-// Iframe
+// Iframes
 import './iframe.js';
+import './renew.js';
 
 // Components
 define.from(

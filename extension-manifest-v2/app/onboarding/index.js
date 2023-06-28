@@ -4,6 +4,8 @@ import { getBrowserInfo } from '@ghostery/libs';
 import '@ghostery/ui/onboarding';
 import './styles.scss';
 
+const renew = new URLSearchParams(window.location.search).get('renew') === '1';
+
 function complete() {
 	chrome.runtime.sendMessage({
 		name: 'setup_complete',
@@ -33,6 +35,7 @@ mount(document.body, {
 			: html`
 				<ui-onboarding
 					platform="${store.ready(browserInfo) ? browserInfo.name : ''}"
+					renew=${renew}
 					onsuccess="${complete}"
 					onskip="${skip}"
 				></ui-onboarding>

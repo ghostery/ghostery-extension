@@ -23,7 +23,8 @@ const TERMS_AND_CONDITIONS_URL =
 export default define({
   [router.connect]: { stack: [Skip, Whotracksme, Privacy, OutroSkip] },
   tag: 'ui-onboarding-main-view',
-  content: () => html`
+  renew: false,
+  content: ({ renew }) => html`
     <template layout="grow column gap">
       <ui-onboarding-card>
         <div layout="column gap:5">
@@ -32,7 +33,9 @@ export default define({
               Welcome to Ghostery
             </ui-text>
             <ui-text type="display-m" layout="margin:bottom:5">
-              Enable Ghostery to get started
+              ${renew
+                ? html`renew GHOSTERY for full protection`
+                : html`Enable Ghostery to get started`}
             </ui-text>
           </section>
         </div>
@@ -60,10 +63,14 @@ export default define({
           </ui-text>
           <div layout="column gap">
             <ui-button type="success">
-              <a href="${router.url(OutroSuccess)}">Enable Ghostery</a>
+              <a href="${router.url(OutroSuccess)}"
+                >${renew ? html`Enable New Setup` : html`Enable Ghostery`}</a
+              >
             </ui-button>
             <ui-button type="transparent">
-              <a href="${router.url(Skip)}">Cancel</a>
+              ${renew
+                ? html`<a href="${router.url(OutroSkip)}">Disable Ghostery</a>`
+                : html`<a href="${router.url(Skip)}">Cancel</a>`}
             </ui-button>
           </div>
         </div>
