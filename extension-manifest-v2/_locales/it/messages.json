@@ -22,17 +22,11 @@
       }
     }
   },
-  "ad": {
-    "message": "pubblicità"
-  },
   "ad_blocking": {
     "message": "Blocco pubblicità"
   },
   "additional_permissions_required": {
     "message": "Ulteriori permessi richiesti"
-  },
-  "ads": {
-    "message": "pubblicità"
   },
   "ads___onboarding": {
     "message": "Pubblicità"
@@ -92,6 +86,9 @@
   },
   "all_popups": {
     "message": "Tutti i popup"
+  },
+  "allowed": {
+    "message": "Consentito"
   },
   "already_subscribed": {
     "message": "Già Abbonato"
@@ -262,21 +259,12 @@
     "description": "as in '5 (trackers) BLOCKED'",
     "message": "Bloccati"
   },
-  "blocking_category_tracker": {
-    "message": "Tracker"
-  },
   "blocking_category_tracker_found": {
     "message": "Trovato"
-  },
-  "blocking_category_trackers": {
-    "message": "Tracker"
   },
   "blocking_category_whitelisted": {
     "description": "as in '5 (trackers) TRUSTED'",
     "message": "Considerati affidabili"
-  },
-  "blocking_trackers": {
-    "message": "Tracker"
   },
   "blocking_unblock_all": {
     "message": "Sblocca Tutti"
@@ -389,9 +377,6 @@
   },
   "box_trackers": {
     "message": "Tracker"
-  },
-  "box_warning_compatibility": {
-    "message": "Tracker Pagina Orfana"
   },
   "box_warning_nonsecure": {
     "message": "Tracker non sicuri"
@@ -537,7 +522,7 @@
   },
   "category_telemetry_desc": {
     "description": "User-facing description for the Telemetry tag category.",
-    "message": "Telemetria"
+    "message": "Raccogli informazioni sull’interazione utente, i rapporti sugli errori e le prestazioni. I dati vengono utilizzati per migliorare i prodotti e non devono essere condivisi con terze parti."
   },
   "category_unidentified": {
     "message": "Senza categoria"
@@ -677,11 +662,17 @@
   "customize_setup": {
     "message": "Personalizza Configurazione"
   },
+  "days": {
+    "message": "giorni"
+  },
   "detailed_view": {
     "message": "Vista Dettagliata"
   },
   "disable": {
     "message": "Disattiva"
+  },
+  "disable_ghostery": {
+    "message": "Disabilita Ghostery"
   },
   "disable_trackers_preview": {
     "message": "Disattiva anteprima Tracker"
@@ -719,6 +710,9 @@
   },
   "enable_never_consent_": {
     "message": "Abilitare Never-Cosent?"
+  },
+  "enable_new_setup": {
+    "message": "Abilita la nuova configurazione"
   },
   "enable_when_blacklisted": {
     "message": "Per utilizzare questa funzione, annulla Sito Limitato."
@@ -779,6 +773,9 @@
   "full_coverage_protection_promise": {
     "message": "Ottieni la protezione completa per tutti i browser e le app sul tuo dispositivo"
   },
+  "ghostery__action_required": {
+    "message": "Ghostery: azione richiesta"
+  },
   "ghostery_basic": {
     "message": "Base"
   },
@@ -815,6 +812,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery mostrerà quanti tracker sono stati bloccati in una pagina. Cliccare sull’icona di Ghostery per avere informazioni più dettagliate."
   },
+  "ghostery_will_stop_working_in_": {
+    "message": "Ghostery smetterà di funzionare tra:"
+  },
   "global_settings_saved": {
     "message": "Impostazioni Globali Salvate"
   },
@@ -836,6 +836,9 @@
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
+  },
+  "hours": {
+    "message": "ore"
   },
   "ignore": {
     "message": "Ignora"
@@ -907,6 +910,9 @@
     "message": "Varie",
     "description": "Tracker category name"
   },
+  "modified": {
+    "message": "Modificato"
+  },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "Maggiori informazioni sulla metodologia $${0} nel Manifesto di Ghostery."
   },
@@ -971,6 +977,12 @@
   },
   "options_tracker_wheel_disabled": {
     "message": "Disattiva Tracker Wheel nella barra degli strumenti del browser"
+  },
+  "organization": {
+    "message": "Organizzazione"
+  },
+  "organizations": {
+    "message": "Organizzazioni"
   },
   "page_load": {
     "message": "Caricamento della Pagina"
@@ -1186,7 +1198,7 @@
     "message": " impediscono il corretto caricamento della pagina."
   },
   "panel_tracker_found_sources_title": {
-    "message": "URL dei tracker rilevati:"
+    "message": "URL rilevati:"
   },
   "panel_tracker_restrict_tooltip": {
     "message": "Limita su questo sito"
@@ -1215,9 +1227,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "Considera affidabile su questo sito"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "Il tracker bloccato impedisce il caricamento della pagina"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "Il tracker non è sicuro"
@@ -1328,17 +1337,20 @@
     "message": "Promozioni disattivate. Le puoi riattivare su ",
     "description": "translation must take into account that 'Settings' is appended to this string"
   },
+  "protection_disabled": {
+    "message": "Protezione disattivata"
+  },
   "recommended": {
     "message": "Raccomandato"
   },
   "refresh_and_try_again": {
     "message": "Aggiorna la pagina e riprova"
   },
-  "requests_modified": {
-    "message": "Richieste modificate:"
+  "renew_ghostery_for_full_protection": {
+    "message": "rinnova GHOSTERY per una protezione completa"
   },
-  "requests_modified_tooltip": {
-    "message": "Numero totale di richieste ed elementi di tracciamento modificati da Anti-Tracking e Blocca Pubblicità"
+  "renew_setup": {
+    "message": "Rinnova la configurazione"
   },
   "select_basic": {
     "message": "Seleziona Base"
@@ -1835,6 +1847,9 @@
   "tooltip_trust_on": {
     "message": "Sul sito i tracker sono consentiti e l'Anti-Tracking è disattivato. Clicca per Annullare."
   },
+  "tracker_database": {
+    "message": "Database Tracker"
+  },
   "tracker_description_getting": {
     "message": "Recupero descrizione del tracker in corso..."
   },
@@ -1859,8 +1874,17 @@
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Tracker rilevati da Ghostery su questo sito web:&nbsp;$${0}"
   },
+  "trackers_modified": {
+    "message": "Tracciatori modificati:"
+  },
   "trackers_preview": {
     "message": "Anteprima Tracker"
+  },
+  "tracking_not_detected": {
+    "message": "Tracciamento non rilevato"
+  },
+  "trusted": {
+    "message": "Considerati affidabili"
   },
   "try_ghostery_midnight": {
     "message": "Prova Ghostery Midnight"
@@ -1869,7 +1893,8 @@
     "message": "sbloccati"
   },
   "unidentified": {
-    "message": "Non identificato"
+    "message": "Non identificato",
+    "description": "Tracker category name"
   },
   "unidentified_description": {
     "message": "Tracker non identificati annullati da Anti-Tracking"
@@ -1877,6 +1902,9 @@
   "unknown": {
     "message": "Sconosciuto",
     "description": "Tracker category name"
+  },
+  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
+    "message": "Abbiamo aggiornato i Termini e condizioni. Per continuare a usare Ghostery Tracker & Ad Blocker durante la navigazione, rinnova la configurazione."
   },
   "welcome_to_ghostery": {
     "message": "Benvenuto in Ghostery"
@@ -1923,5 +1951,26 @@
   },
   "your_privacy_features_": {
     "message": "Le tue funzioni privacy:"
-  }
+	},
+	"account_details": {
+		"message": "Dettagli dell’account"
+	},
+	"contributor": {
+		"message": "Collaboratore"
+	},
+	"help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+		"message": "Aiuta Ghostery a lottare per un web dove la privacy è un diritto umano fondamentale."
+	},
+	"join_ghostery": {
+		"message": "Unisciti a Ghostery"
+	},
+	"save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+		"message": "Salva e sincronizza le tue impostazioni personalizzate tra browser e dispositivi."
+	},
+	"settings_sync": {
+		"message": "Sincronizzazione delle impostazioni"
+	},
+	"you_are_signed_in_as_": {
+		"message": "Hai effettuato l’accesso come:"
+	}
 }

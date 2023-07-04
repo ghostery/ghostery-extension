@@ -22,17 +22,11 @@
       }
     }
   },
-  "ad": {
-    "message": "条广告"
-  },
   "ad_blocking": {
     "message": "广告拦截"
   },
   "additional_permissions_required": {
     "message": "需要额外的权限"
-  },
-  "ads": {
-    "message": "条广告"
   },
   "ads___onboarding": {
     "message": "条广告"
@@ -92,6 +86,9 @@
   },
   "all_popups": {
     "message": "所有弹出窗口"
+  },
+  "allowed": {
+    "message": "已允许"
   },
   "already_subscribed": {
     "message": "已订阅"
@@ -262,21 +259,12 @@
     "description": "as in '5 (trackers) BLOCKED'",
     "message": "已拦截"
   },
-  "blocking_category_tracker": {
-    "message": "跟踪器"
-  },
   "blocking_category_tracker_found": {
     "message": "已发现"
-  },
-  "blocking_category_trackers": {
-    "message": "跟踪器"
   },
   "blocking_category_whitelisted": {
     "description": "as in '5 (trackers) TRUSTED'",
     "message": "受信任"
-  },
-  "blocking_trackers": {
-    "message": "跟踪器"
   },
   "blocking_unblock_all": {
     "message": "全部取消拦截"
@@ -389,9 +377,6 @@
   },
   "box_trackers": {
     "message": "跟踪器"
-  },
-  "box_warning_compatibility": {
-    "message": "导致网页崩溃的跟踪器"
   },
   "box_warning_nonsecure": {
     "message": "不安全的跟踪器"
@@ -537,7 +522,7 @@
   },
   "category_telemetry_desc": {
     "description": "User-facing description for the Telemetry tag category.",
-    "message": "遥测"
+    "message": "收集有关用户交流、错误报告和性能的信息。数据用于改良产品，且应与第三方共享。"
   },
   "category_unidentified": {
     "message": "未分类"
@@ -677,11 +662,17 @@
   "customize_setup": {
     "message": "自定义设置"
   },
+  "days": {
+    "message": "天"
+  },
   "detailed_view": {
     "message": "详细视图"
   },
   "disable": {
     "message": "禁用"
+  },
+  "disable_ghostery": {
+    "message": "禁用 Ghostery"
   },
   "disable_trackers_preview": {
     "message": "禁用跟踪器预览"
@@ -719,6 +710,9 @@
   },
   "enable_never_consent_": {
     "message": "启用 Never-Consent？"
+  },
+  "enable_new_setup": {
+    "message": "启用新设置"
   },
   "enable_when_blacklisted": {
     "message": "要使用该功能，请撤销限制网站。"
@@ -779,6 +773,9 @@
   "full_coverage_protection_promise": {
     "message": "全面保护设备中的所有浏览器和应用程序"
   },
+  "ghostery__action_required": {
+    "message": "Ghostery：需要操作"
+  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -815,6 +812,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 会显示页面上已阻止的跟踪器数量。点击 Ghostery 图标，获取更多详情。"
   },
+  "ghostery_will_stop_working_in_": {
+    "message": "距离 Ghostery 停止运行还有："
+  },
   "global_settings_saved": {
     "message": "全局设置已保存"
   },
@@ -836,6 +836,9 @@
   "hosting": {
     "message": "托管",
     "description": "Tracker category name"
+  },
+  "hours": {
+    "message": "小时"
   },
   "ignore": {
     "message": "忽略"
@@ -907,6 +910,9 @@
     "message": "其他",
     "description": "Tracker category name"
   },
+  "modified": {
+    "message": "已修改"
+  },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "如需了解有关 $${0} 方法的更多信息，请参见 Ghostery 的宣言。"
   },
@@ -971,6 +977,12 @@
   },
   "options_tracker_wheel_disabled": {
     "message": "在浏览器工具栏中禁用跟踪器轮盘"
+  },
+  "organization": {
+    "message": "组织机构"
+  },
+  "organizations": {
+    "message": "组织机构"
   },
   "page_load": {
     "message": "网页加载"
@@ -1186,7 +1198,7 @@
     "message": " 。"
   },
   "panel_tracker_found_sources_title": {
-    "message": "检测到的跟踪器网址："
+    "message": "检测到的URL:"
   },
   "panel_tracker_restrict_tooltip": {
     "message": "在此网站上限制"
@@ -1215,9 +1227,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "在此网站上信任"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "拦截了导致页面崩溃的跟踪器"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "跟踪器不安全"
@@ -1328,17 +1337,20 @@
     "message": "促销已关闭。要重新打开，请访问",
     "description": "translation must take into account that 'Settings' is appended to this string"
   },
+  "protection_disabled": {
+    "message": "保护功能失效"
+  },
   "recommended": {
     "message": "建议"
   },
   "refresh_and_try_again": {
     "message": "刷新页面，然后重试"
   },
-  "requests_modified": {
-    "message": "已修改的请求："
+  "renew_ghostery_for_full_protection": {
+    "message": "续订 GHOSTERY 以获得全面保护"
   },
-  "requests_modified_tooltip": {
-    "message": "通过反跟踪和广告拦截功能修改的跟踪请求和元素总数"
+  "renew_setup": {
+    "message": "续订设置"
   },
   "select_basic": {
     "message": "选择 Basic"
@@ -1835,6 +1847,9 @@
   "tooltip_trust_on": {
     "message": "网站上的跟踪器已开启，反跟踪功能已关闭。点击撤销。"
   },
+  "tracker_database": {
+    "message": "追踪器数据库"
+  },
   "tracker_description_getting": {
     "message": "正在获取跟踪器描述..."
   },
@@ -1859,8 +1874,17 @@
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Ghostery 在此网站上检测到的跟踪器：$${0}"
   },
+  "trackers_modified": {
+    "message": "追踪器被修改:"
+  },
   "trackers_preview": {
     "message": "跟踪器预览"
+  },
+  "tracking_not_detected": {
+    "message": "未检测到跟踪"
+  },
+  "trusted": {
+    "message": "受信任"
   },
   "try_ghostery_midnight": {
     "message": "试用 Ghostery Midnight"
@@ -1869,7 +1893,8 @@
     "message": "未拦截"
   },
   "unidentified": {
-    "message": "未识别"
+    "message": "未识别",
+    "description": "Tracker category name"
   },
   "unidentified_description": {
     "message": "由反跟踪功能清除的未识别跟踪器"
@@ -1877,6 +1902,9 @@
   "unknown": {
     "message": "未知",
     "description": "Tracker category name"
+  },
+  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
+    "message": "我们更新了条款及条件。若要在浏览时继续使用 Ghostery Tracker 和广告拦截工具，请更新设置。"
   },
   "welcome_to_ghostery": {
     "message": "欢迎使用 Ghostery"
@@ -1923,5 +1951,26 @@
   },
   "your_privacy_features_": {
     "message": "您的隐私功能："
-  }
+	},
+	"account_details": {
+		"message": "帐户详情"
+	},
+	"contributor": {
+		"message": "贡献者"
+	},
+	"help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+		"message": "帮助 Ghostery 为建立以隐私为基本人权的网络而奋斗。"
+	},
+	"join_ghostery": {
+		"message": "加入 Ghostery"
+	},
+	"save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+		"message": "保存您的自定义设置并在浏览器和设备之间同步。"
+	},
+	"settings_sync": {
+		"message": "设置同步"
+	},
+	"you_are_signed_in_as_": {
+		"message": "你的登录身份为："
+	}
 }

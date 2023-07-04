@@ -22,17 +22,11 @@
       }
     }
   },
-  "ad": {
-    "message": "廣告"
-  },
   "ad_blocking": {
     "message": "廣告封鎖"
   },
   "additional_permissions_required": {
     "message": "需要額外的權限"
-  },
-  "ads": {
-    "message": "廣告"
   },
   "ads___onboarding": {
     "message": "廣告"
@@ -58,10 +52,10 @@
     "message": "啟用反追蹤功能。個人資料將作匿名處理。"
   },
   "alert_autoconsent_off": {
-    "message": "Never-Consent OFF."
+    "message": "Never-Consent 關閉。"
   },
   "alert_autoconsent_on": {
-    "message": "Never-Consent ON."
+    "message": "Never-Consent 開啟。"
   },
   "alert_ghostery_paused": {
     "message": "Ghostery擴充功能已暫停。"
@@ -92,6 +86,9 @@
   },
   "all_popups": {
     "message": "所有彈出式視窗"
+  },
+  "allowed": {
+    "message": "已允許"
   },
   "already_subscribed": {
     "message": "已訂閱"
@@ -145,7 +142,7 @@
     "message": "套用最佳隱私權設定："
   },
   "are_you_sure_": {
-    "message": "Are you sure?"
+    "message": "您確定嗎？"
   },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "你確定要停用「追蹤器預覽」嗎？"
@@ -262,21 +259,12 @@
     "description": "as in '5 (trackers) BLOCKED'",
     "message": "已封鎖"
   },
-  "blocking_category_tracker": {
-    "message": "網頁跟蹤器"
-  },
   "blocking_category_tracker_found": {
     "message": "發現"
-  },
-  "blocking_category_trackers": {
-    "message": "網頁跟蹤器"
   },
   "blocking_category_whitelisted": {
     "description": "as in '5 (trackers) TRUSTED'",
     "message": "已信任"
-  },
-  "blocking_trackers": {
-    "message": "網頁跟蹤器"
   },
   "blocking_unblock_all": {
     "message": "解封全部"
@@ -390,9 +378,6 @@
   "box_trackers": {
     "message": "網頁跟蹤器"
   },
-  "box_warning_compatibility": {
-    "message": "被截斷網頁網頁跟蹤器"
-  },
   "box_warning_nonsecure": {
     "message": "非安全的網頁跟踪器"
   },
@@ -441,7 +426,7 @@
   },
   "category_cdn_desc": {
     "description": "User-facing description for the CDN tag category.",
-    "message": "Content delivery networks distribute resources for different site utilities, collect user analytics and tracking data on network traffic."
+    "message": "內容交付網路負責為不同網站工具發佈資訊、收集使用者分析，以及追蹤網路流量資料。"
   },
   "category_comments": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -457,7 +442,7 @@
   },
   "category_consent_desc": {
     "description": "User-facing description for the Customer Interaction tag category.",
-    "message": "Includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
+    "message": "包含用於 Cookie 同意管理的追蹤程式，允許網站對使用活動進行不同程度的追蹤"
   },
   "category_customer_interaction": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -473,7 +458,7 @@
   },
   "category_email_desc": {
     "description": "User-facing description for the Email tag category.",
-    "message": "Includes tracking pixels used to measure email open rates."
+    "message": "包含用於衡量電子郵件開啟率的追蹤像素。"
   },
   "category_essential": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -489,7 +474,7 @@
   },
   "category_extensions_desc": {
     "description": "User-facing description for the Extensions tag category.",
-    "message": "Software on user-devices that can intercept and analyse browser traffic (man in the middle)."
+    "message": "使用者裝置上的軟體，可攔截和分析瀏覽器流量 (中間人)。"
   },
   "category_hosting": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -497,7 +482,7 @@
   },
   "category_hosting_desc": {
     "description": "User-facing description for the Hosting tag category.",
-    "message": "Services providing access to websites have access to server logs, including IP address and information about User Agent."
+    "message": "提供存取網站的服務，可存取伺服器日誌，包含 IP 位址和使用者代理的資訊。"
   },
   "category_misc": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -505,7 +490,7 @@
   },
   "category_misc_desc": {
     "description": "User-facing description for the Miscellaneous tag category.",
-    "message": "Contains different types of unclassified trackers."
+    "message": "包含不同類型的未分類追蹤程式。"
   },
   "category_pornvertising": {
     "description": "Ghostery organizes tags by category. This is one of several tag categories.",
@@ -537,7 +522,7 @@
   },
   "category_telemetry_desc": {
     "description": "User-facing description for the Telemetry tag category.",
-    "message": "遙測"
+    "message": "收集有關使用者交流、錯誤報告和效能的資訊。資料用於改良產品，且應與第三方共享。"
   },
   "category_unidentified": {
     "message": "未分類的"
@@ -677,11 +662,17 @@
   "customize_setup": {
     "message": "定制設置"
   },
+  "days": {
+    "message": "日"
+  },
   "detailed_view": {
     "message": "詳細圖示"
   },
   "disable": {
     "message": "停用"
+  },
+  "disable_ghostery": {
+    "message": "停用 Ghostery"
   },
   "disable_trackers_preview": {
     "message": "停用「追蹤器預覽」"
@@ -719,6 +710,9 @@
   },
   "enable_never_consent_": {
     "message": "啟用 Never-Consent？"
+  },
+  "enable_new_setup": {
+    "message": "啟用新設定"
   },
   "enable_when_blacklisted": {
     "message": "欲使用此功能，請取消限制網站。"
@@ -779,6 +773,9 @@
   "full_coverage_protection_promise": {
     "message": "全面防護您裝置上的所有瀏覽器和應用程式"
   },
+  "ghostery__action_required": {
+    "message": "Ghostery：需要採取動作"
+  },
   "ghostery_basic": {
     "message": "Basic"
   },
@@ -815,6 +812,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 將顯示頁面中已經阻擋的追蹤器數量。點擊 Ghostery 圖示可以顯示更多資訊。"
   },
+  "ghostery_will_stop_working_in_": {
+    "message": "Ghostery 將會在以下位置停止運作："
+  },
   "global_settings_saved": {
     "message": "全球設定已儲存"
   },
@@ -836,6 +836,9 @@
   "hosting": {
     "message": "託管",
     "description": "Tracker category name"
+  },
+  "hours": {
+    "message": "小時"
   },
   "ignore": {
     "message": "忽略"
@@ -907,6 +910,9 @@
     "message": "各種各樣的",
     "description": "Tracker category name"
   },
+  "modified": {
+    "message": "已修改"
+  },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "更多有關 Ghostery 宣言中 $${0} 方法的資訊。"
   },
@@ -971,6 +977,12 @@
   },
   "options_tracker_wheel_disabled": {
     "message": "在瀏覽器工具欄中禁用跟踪輪"
+  },
+  "organization": {
+    "message": "組織"
+  },
+  "organizations": {
+    "message": "組織"
   },
   "page_load": {
     "message": "網頁載入"
@@ -1140,7 +1152,7 @@
     "message": "登入"
   },
   "panel_stats_pitch_modal_text": {
-    "message": "Become a Contributor to unlock a line of Ghostery extras."
+    "message": "成為貢獻者，解鎖一系列 Ghostery 附加功能。"
   },
   "panel_stats_pitch_modal_tooltip": {
     "message": "及時清除到此點的所有統計歷史。"
@@ -1186,7 +1198,7 @@
     "message": " 截斷網頁。"
   },
   "panel_tracker_found_sources_title": {
-    "message": "偵測到的網頁跟蹤器 URLs："
+    "message": "偵測到的 URL："
   },
   "panel_tracker_restrict_tooltip": {
     "message": "限制此網站"
@@ -1215,9 +1227,6 @@
   },
   "panel_tracker_trust_tooltip": {
     "message": "信任此網站"
-  },
-  "panel_tracker_warning_compatibility_tooltip": {
-    "message": "封鎖了的網頁跟蹤器截斷網頁"
   },
   "panel_tracker_warning_nonsecure_tooltip": {
     "message": "網頁跟蹤器不安全"
@@ -1328,17 +1337,20 @@
     "message": "已停用促銷。如欲重新啟用，請至",
     "description": "translation must take into account that 'Settings' is appended to this string"
   },
+  "protection_disabled": {
+    "message": "保護功能已停用"
+  },
   "recommended": {
     "message": "推薦"
   },
   "refresh_and_try_again": {
     "message": "更新網頁並再次嘗試"
   },
-  "requests_modified": {
-    "message": "被更動請求："
+  "renew_ghostery_for_full_protection": {
+    "message": "更新 GHOSTERY 以獲得全面防護"
   },
-  "requests_modified_tooltip": {
-    "message": "由反追蹤及廣告封鎖功能更動的追蹤請求及元素總數量"
+  "renew_setup": {
+    "message": "更新設定"
   },
   "select_basic": {
     "message": "選擇 Basic"
@@ -1551,10 +1563,10 @@
     "message": "位於瀏覽器角落的追蹤器紀錄列表會顯示實時載入的追蹤器。"
   },
   "settings_show_redirect_tracking_dialogs": {
-    "message": "Ask me to confirm before visiting a site that redirects me through a tracker"
+    "message": "造訪會透過追蹤程式將我重新導向的網站之前，先詢問我是否同意"
   },
   "settings_show_redirect_tracking_dialogs_tooltip": {
-    "message": "Redirect tracking means that instead of visiting a website directly, you are first redirected through another site that may try to track you (e.g. by placing a cookie). In contrast to normal tracking, you cannot block the request without breaking the functionality."
+    "message": "重新導向代表不是直接造訪網站，而是會先透過另一個可能會追蹤您 (例如透過置放 Cookie) 的網站重新透向。有別於正常追蹤，您無法在沒有截斷功能的情況下封鎖該請求。"
   },
   "settings_show_reload_banner": {
     "message": "在附加功能圖標上方顯示網頁重新載入通告條"
@@ -1614,7 +1626,7 @@
     "message": "仍是最新的"
   },
   "settings_wtm_serp_report": {
-    "message": "Show Trackers Preview next to search results"
+    "message": "在搜尋結果旁顯示追蹤程式預覽"
   },
   "setup_successful": {
     "message": "設定成功"
@@ -1688,7 +1700,7 @@
     "message": "帳戶已過期"
   },
   "subscription_for_contributors": {
-    "message": "For contributors"
+    "message": "針對貢獻者"
   },
   "subscription_inactive": {
     "message": "不活躍"
@@ -1835,6 +1847,9 @@
   "tooltip_trust_on": {
     "message": "在此網站，跟蹤器獲准運行， 而反跟蹤功能則被關閉。點擊以取消上次行動。\n"
   },
+  "tracker_database": {
+    "message": "追蹤程式資料庫"
+  },
   "tracker_description_getting": {
     "message": "搜集網頁跟蹤器資料..."
   },
@@ -1859,8 +1874,17 @@
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Ghostery 在此網站上偵測到的追蹤器：$${0}"
   },
+  "trackers_modified": {
+    "message": "已修改的追蹤程式："
+  },
   "trackers_preview": {
     "message": "追蹤器預覽"
+  },
+  "tracking_not_detected": {
+    "message": "未偵測到追蹤"
+  },
+  "trusted": {
+    "message": "已信任"
   },
   "try_ghostery_midnight": {
     "message": "試用 Ghostery Midnight"
@@ -1869,7 +1893,8 @@
     "message": "已解除封鎖"
   },
   "unidentified": {
-    "message": "不明"
+    "message": "不明",
+    "description": "Tracker category name"
   },
   "unidentified_description": {
     "message": "由反追蹤功能清理的不明追蹤器"
@@ -1877,6 +1902,9 @@
   "unknown": {
     "message": "不明的",
     "description": "Tracker category name"
+  },
+  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
+    "message": "我們更新了條款及條件。若要在瀏覽時繼續使用 Ghostery Tracker 和廣告攔截器，請更新設定。"
   },
   "welcome_to_ghostery": {
     "message": "歡迎來到 Ghostery"
@@ -1923,5 +1951,26 @@
   },
   "your_privacy_features_": {
     "message": "你的隱私功能："
-  }
+	},
+	"account_details": {
+		"message": "帳戶詳細資料"
+	},
+	"contributor": {
+		"message": "貢獻者"
+	},
+	"help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+		"message": "協助 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
+	},
+	"join_ghostery": {
+		"message": "加入 Ghostery"
+	},
+	"save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+		"message": "儲存並在瀏覽器和裝置之間同步您的自訂設定。"
+	},
+	"settings_sync": {
+		"message": "設定同步"
+	},
+	"you_are_signed_in_as_": {
+		"message": "您登入為："
+	}
 }
