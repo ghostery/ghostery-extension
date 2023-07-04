@@ -20,13 +20,6 @@ const _14_DAYS_IN_MS = 1000 * 60 * 60 * 24 * 14;
 let intervalId;
 let callback;
 
-function clear() {
-	if (intervalId) {
-		clearInterval(intervalId);
-		browser.storage.local.remove(['renew_setup']);
-	}
-}
-
 function revoke() {
 	// reset all onboarding flags
 	conf.setup_complete = false;
@@ -36,10 +29,9 @@ function revoke() {
 	globals.ONBOARDED_FEATURES.forEach((confName) => {
 		conf[confName] = false;
 	});
+}
 
-	// Clear renew setup
-	clear();
-
+function openOnboarding() {
 	// Open onboarding
 	openNewTab({ url: '/app/templates/onboarding.html?renew=1', become_active: true });
 }
@@ -61,6 +53,7 @@ export default async function renew() {
 
 		if (now > renew_setup) {
 			revoke();
+			openOnboarding();
 			return;
 		}
 
@@ -68,6 +61,7 @@ export default async function renew() {
 		intervalId = setInterval(async () => {
 			if (Date.now() > renew_setup) {
 				revoke();
+				openOnboarding();
 				return;
 			}
 
@@ -87,13 +81,19 @@ export default async function renew() {
 
 			browser.webNavigation.onDOMContentLoaded.addListener(callback);
 		}, 1000 * 60 * 60);
-	} else {
-		clear();
 	}
 }
 
 browser.runtime.onMessage.addListener((msg) => {
 	if (msg.action === 'renew:revoke') {
-		revoke();
+		openOnboarding();
+	} else if (msg.name === 'setup_complete' || msg.name === 'setup_skip') {
+		if (msg.name === 'setup_skip') {
+			revoke();
+		}
+
+		clearInterval(intervalId);
+		if (callback) browser.webNavigation.onDOMContentLoaded.removeListener(callback);
+		browser.storage.local.remove(['renew_setup']);
 	}
 });
