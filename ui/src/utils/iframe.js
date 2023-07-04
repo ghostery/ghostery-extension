@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export function showIframe(url) {
+export function showIframe(url, maxWidth = '440px') {
   const wrapper = document.createElement('ghostery-iframe-wrapper');
 
   const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
@@ -34,7 +34,7 @@ export function showIframe(url) {
       iframe {
         display: block;
         flex-grow: 1;
-        width: min(100%, 440px);
+        width: min(100%, ${maxWidth});
         pointer-events: auto;
         box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.4);
         border-radius: 16px;
@@ -58,6 +58,7 @@ export function showIframe(url) {
         iframe {
           flex-grow: 0;
           transform: translateY(-20px);
+          max-width: ${maxWidth};
         }
       }
     </style>
