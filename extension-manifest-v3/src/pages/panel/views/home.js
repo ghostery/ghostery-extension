@@ -156,7 +156,8 @@ export default {
               </a>
             </gh-panel-button>
           `}
-          ${store.error(stats) &&
+          ${!store.ready(stats) &&
+          store.error(stats) &&
           html`
             <div layout="column items:center gap margin:2:0:3">
               <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
