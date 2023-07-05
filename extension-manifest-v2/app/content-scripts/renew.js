@@ -12,6 +12,6 @@ import { showIframe } from '@ghostery/ui/iframe';
 
 chrome.runtime.onMessage.addListener((msg) => {
 	if (msg.action === 'renew:show') {
-		showIframe(chrome.runtime.getURL(`app/templates/renew.html?timestamp=${msg.timestamp}`), '360px');
+		showIframe(chrome.runtime.getURL(`app/templates/renew.html?timestamp=${msg.timestamp}`), '460px');
 	}
 });
