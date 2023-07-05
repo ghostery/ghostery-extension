@@ -15,7 +15,7 @@ export default define({
   tag: 'ui-onboarding-renew',
   timestamp: 0,
   content: ({ timestamp }) => html`
-    <template layout="block">
+    <template layout="block overflow">
       <ui-onboarding-card layout="padding:2">
         <div layout="row items:start gap:2">
           <div layout="relative">
@@ -37,7 +37,7 @@ export default define({
             <ui-onboarding-countdown timestamp="${timestamp}">
               Ghostery will stop working in:
             </ui-onboarding-countdown>
-            <div layout="row gap">
+            <div layout="row:wrap gap">
               <ui-button type="success" size="small">
                 <button onclick="${(host) => dispatch(host, 'renew')}">
                   Renew Setup
