@@ -240,11 +240,6 @@ class EventHandlers {
 		const tab_id = eventMutable.tabId;
 		const request_id = eventMutable.requestId;
 
-		// -1 indicates the request isn't related to a tab
-		if (tab_id <= 0) {
-			return { cancel: false };
-		}
-
 		if (!tabInfo.getTabInfo(tab_id)) {
 			log(`tabInfo not found for tab ${tab_id}, initializing...`);
 
