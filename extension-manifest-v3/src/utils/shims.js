@@ -21,6 +21,8 @@ function shimAlarms() {
       }
     },
     async clear(name) {
+      // As the alarm can be a timeout first, then interval, it is necessary to
+      // clear both of them. The code uses a fact of shared pool of IDs for both
       clearTimeout(alarms.get(name));
       clearInterval(alarms.get(name));
 
@@ -30,7 +32,11 @@ function shimAlarms() {
       return Array.from(alarms.keys()).map((name) => ({ name }));
     },
     async clearAll() {
-      alarms.forEach((timeout) => clearTimeout(timeout));
+      alarms.forEach((timeout) => {
+        clearTimeout(timeout);
+        clearInterval(timeout);
+      });
+
       alarms.clear();
     },
     create(name, options = {}) {
