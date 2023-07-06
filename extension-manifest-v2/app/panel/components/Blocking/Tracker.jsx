@@ -97,7 +97,7 @@ class Tracker extends React.Component {
 			<span className="trk-common-stat">
 				{count}
 				{' '}
-				{type}
+				{t(type)}
 			</span>
 		);
 	}
@@ -272,19 +272,22 @@ class Tracker extends React.Component {
 		return (
 			<div className="trk-common-stats-outer-container">
 				{(() => {
-					if (oneOrMoreAds) {
+					if (oneOrMoreAds || oneOrMoreModified) {
 						return (
 							<div className="trk-common-stats-container">
-								{this._renderCommonAdsIcon()}
-								{Tracker._renderCommonAdStat(commonAdCount)}
-							</div>
-						);
-					}
-					if (oneOrMoreModified) {
-						return (
-							<div className="trk-common-stats-container">
-								{this._renderCommonCookiesAndFingerprintsIcon()}
-								{oneOrMoreModified && Tracker._renderCommonAntiTrackingStat(antiTrackingCount)}
+								{oneOrMoreAds ? (
+									<React.Fragment>
+										{this._renderCommonAdsIcon()}
+										{Tracker._renderCommonAdStat(commonAdCount)}
+										&nbsp;&nbsp;
+									</React.Fragment>
+								) : null}
+								{oneOrMoreModified ? (
+									<React.Fragment>
+										{this._renderCommonCookiesAndFingerprintsIcon()}
+										{Tracker._renderCommonAntiTrackingStat(antiTrackingCount)}
+									</React.Fragment>
+								) : null}
 							</div>
 						);
 					}
