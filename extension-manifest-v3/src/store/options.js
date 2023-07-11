@@ -12,10 +12,10 @@
 import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
-import Session from './session.js';
-import { getUserOptions, setUserOptions } from '/utils/api.js';
+import { session, getUserOptions, setUserOptions } from '/utils/api.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+
 const observers = new Set();
 
 export const SYNC_OPTIONS = [
@@ -26,7 +26,6 @@ export const SYNC_OPTIONS = [
   'trackerCount',
   'wtmSerpReport',
   'panel',
-  'revision',
 ];
 
 export const ENGINES = [
@@ -96,53 +95,10 @@ const Options = {
         options.blockAnnoyances = engines.annoyances;
       }
 
-      // Fetch options from the server for logged in users
-      if (options.terms && options.sync) {
-        const serverOptions = await getUserOptions();
-        if (serverOptions && serverOptions.revision > options.revision) {
-          for (const key of SYNC_OPTIONS) {
-            options[key] = serverOptions[key];
-          }
-          this.set(null, options, SYNC_OPTIONS.concat(['revision']));
-        }
-      }
-
       return options;
     },
-    async set(_, options = {}, keys) {
-      if (!keys.includes('revision')) {
-        options = Object.assign({}, options, {
-          revision:
-            options.terms && options.sync && (await store.resolve(Session)).user
-              ? Date.now()
-              : 0,
-        });
-
-        if (options.terms && options.sync) {
-          // Sync options for logged in users
-          const serverOptions = await getUserOptions();
-          if (serverOptions) {
-            // Merge local options with newer server options
-            // but only not currently set keys
-            if (serverOptions.revision) {
-              for (const key of SYNC_OPTIONS) {
-                if (key === 'revision' || keys.includes(key)) continue;
-                options[key] = hasOwnProperty.call(serverOptions, key)
-                  ? serverOptions[key]
-                  : options[key];
-              }
-            }
-
-            // Send only sync options to the server
-            await setUserOptions(
-              SYNC_OPTIONS.reduce((acc, key) => {
-                acc[key] = options[key];
-                return acc;
-              }, {}),
-            );
-          }
-        }
-      }
+    async set(_, options, keys) {
+      options = options || {};
 
       await chrome.storage.local.set({
         options:
@@ -152,17 +108,21 @@ const Options = {
             : options,
       });
 
-      // Send update message to another contexts (background page / panel / options)
-      chrome.runtime
-        .sendMessage({ action: UPDATE_OPTIONS_ACTION_NAME })
-        // The function only throws if the other end does not exist. Mainly, it happens
-        // when the background process starts, but there is no other content script or
-        // extension page, which could receive a message.
-        .catch(() => {});
+      sync(options, keys)
+        .then(() =>
+          // Send update message to another contexts (background page / panel / options)
+          chrome.runtime.sendMessage({
+            action: UPDATE_OPTIONS_ACTION_NAME,
+          }),
+        )
+        .catch(() => null);
 
       return options;
     },
     observe: (_, options, prevOptions) => {
+      // Sync if the current memory context get options for the first time
+      if (!prevOptions) sync(options);
+
       observers.forEach(async (fn) => {
         try {
           await fn(options, prevOptions);
@@ -175,6 +135,64 @@ const Options = {
 };
 
 export default Options;
+
+export async function sync(options, keys) {
+  try {
+    // Do not sync if revision is set or terms and sync options are false
+    if (keys?.includes('revision') || !options.terms || !options.sync) {
+      return;
+    }
+
+    // If user is not logged in, clean up options revision and return
+    if (!(await session().catch(() => null))) {
+      if (options.revision !== 0) {
+        store.set(Options, { revision: 0 });
+      }
+      return;
+    }
+
+    // If options update, set revision to "dirty" state
+    if (keys && options.revision > 0) {
+      options = await store.set(Options, { revision: options.revision * -1 });
+    }
+
+    const serverOptions = await getUserOptions();
+
+    // Server has newer options - merge with local options
+    if (serverOptions.revision > Math.abs(options.revision)) {
+      const values = SYNC_OPTIONS.reduce(
+        (acc, key) => {
+          if (!keys?.includes(key) && hasOwnProperty.call(serverOptions, key)) {
+            acc[key] = serverOptions[key];
+          }
+
+          return acc;
+        },
+        { revision: serverOptions.revision },
+      );
+
+      options = await store.set(Options, values);
+    }
+
+    // Set options or update if revision is dirty
+    if (keys || options.revision < 0) {
+      const { revision } = await setUserOptions(
+        SYNC_OPTIONS.reduce(
+          (acc, key) => {
+            acc[key] = options[key];
+            return acc;
+          },
+          { revision: serverOptions.revision + 1 },
+        ),
+      );
+
+      // Update local revision
+      await store.set(Options, { revision });
+    }
+  } catch (e) {
+    console.error(`Error while syncing options: `, e);
+  }
+}
 
 async function migrateFromMV2() {
   try {
@@ -282,3 +300,8 @@ chrome.runtime.onMessage.addListener((msg) => {
     store.get(Options);
   }
 });
+
+globalThis.clearOptions = () => {
+  store.clear(Options, false);
+  store.get(Options);
+};

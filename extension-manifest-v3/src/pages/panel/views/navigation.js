@@ -71,7 +71,9 @@ export default {
           <ui-text>
             <a
               href="${session.user
-                ? chrome.runtime.getURL('/pages/settings/index.html#account')
+                ? chrome.runtime.getURL(
+                    '/pages/settings/index.html#@gh-settings-account',
+                  )
                 : SIGNON_PAGE_URL}"
               target="_blank"
               layout="block padding margin:0:1"

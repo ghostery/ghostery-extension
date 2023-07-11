@@ -85,56 +85,43 @@ export async function session() {
 }
 
 export async function getUserOptions() {
-  try {
-    const user = await session();
-    if (!user) return null;
+  const userId = await getCookie('user_id');
+  const accessToken = await getCookie('access_token');
+  const csrfToken = await getCookie('csrf_token');
 
-    const userId = await getCookie('user_id');
-    const accessToken = await getCookie('access_token');
-    const csrfToken = await getCookie('csrf_token');
-    const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
-      headers: {
-        'Content-Type': 'application/vnd.api+json',
-        Authorization: `Bearer ${accessToken}`,
-        'X-CSRF-Token': csrfToken,
-      },
-      credentials: 'omit',
-    });
+  const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
+    headers: {
+      'Content-Type': 'application/vnd.api+json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-CSRF-Token': csrfToken,
+    },
+    credentials: 'omit',
+  });
 
-    return (await data.json()).data.attributes.options || {};
-  } catch (e) {
-    console.error('Failed to get user options from the server:', e);
-    return null;
-  }
+  return (await data.json()).data.attributes.options || {};
 }
 
 export async function setUserOptions(options) {
-  try {
-    const user = await session();
-    if (!user) return null;
+  const userId = await getCookie('user_id');
+  const accessToken = await getCookie('access_token');
+  const csrfToken = await getCookie('csrf_token');
 
-    const userId = await getCookie('user_id');
-    const accessToken = await getCookie('access_token');
-    const csrfToken = await getCookie('csrf_token');
-
-    return await fetch(`${ACCOUNT_URL}/options/${userId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/vnd.api+json',
-        Authorization: `Bearer ${accessToken}`,
-        'X-CSRF-Token': csrfToken,
+  const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/vnd.api+json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-CSRF-Token': csrfToken,
+    },
+    credentials: 'omit',
+    body: JSON.stringify({
+      data: {
+        type: 'options',
+        id: userId,
+        attributes: { options },
       },
-      credentials: 'omit',
-      body: JSON.stringify({
-        data: {
-          type: 'options',
-          id: userId,
-          attributes: { options },
-        },
-      }),
-    }).then((res) => res.json());
-  } catch (e) {
-    console.error('Failed to update user options to the server:', e);
-    return null;
-  }
+    }),
+  });
+
+  return (await data.json()).data.attributes.options || {};
 }
