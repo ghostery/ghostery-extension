@@ -84,6 +84,8 @@ class TabInfo {
 	// TODO consider improving handling of what happens if we mistype the property name. Always
 	// returning an object where property would otherwise have returned false could result in subtle bugs.
 	getTabInfo(tab_id, property) {
+		if (tab_id < 0) { return false; }
+
 		if (this._tabInfo.hasOwnProperty(tab_id)) {
 			if (property) {
 				return this._tabInfo[tab_id][property];
