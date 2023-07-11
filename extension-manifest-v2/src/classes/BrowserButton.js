@@ -40,7 +40,7 @@ class BrowserButton {
 	 * @param  {number} tabId		tab id
 	 */
 	update(tabId) {
-		if (IS_ANDROID) { return; }
+		if (IS_ANDROID || tabId < 0) { return; }
 		// Update this specific tab
 		if (tabId) {
 			// In ES6 classes, we need to bind context to callback function

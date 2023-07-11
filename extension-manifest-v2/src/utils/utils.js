@@ -189,6 +189,8 @@ export function processUrl(src) {
  * @param  {function}   [error]  	function to call if tab not found
  */
 export function getTab(tab_id, callback, error) {
+	if (tab_id < 0) { return; }
+
 	chrome.tabs.get(tab_id, (tab) => {
 		if (chrome.runtime.lastError) {
 			log('getTab', chrome.runtime.lastError.message);
