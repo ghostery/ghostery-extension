@@ -15,7 +15,23 @@ import {
   isDisableWTMReportMessage,
 } from '@whotracksme/webextension-packages/packages/trackers-preview/background';
 
-import Options from '/store/options.js';
+import Options, { observe } from '/store/options.js';
+import { toggleDynamicContentScript } from './utils/scripts';
+import { domainList } from './utils/google';
+
+observe(null, ({ terms, wtmSerpReport }) => {
+  toggleDynamicContentScript(
+    {
+      id: 'trackers-preview',
+      matches: domainList,
+      js: ['/content_scripts/trackers-preview.js'],
+      css: [
+        '/node_modules/@whotracksme/webextension-packages/packages/trackers-preview/src/content_scripts/styles.css',
+      ],
+    },
+    terms && wtmSerpReport,
+  );
+});
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   const options = store.get(Options);

@@ -167,19 +167,19 @@ async function migrateFromMV2() {
 }
 
 export async function observe(property, fn) {
-  let value;
-  const wrapper = async (options) => {
-    if (value === undefined || options[property] !== value) {
-      const prevValue = value;
-      value = options[property];
-
-      try {
+  let wrapper;
+  if (property) {
+    let value;
+    wrapper = async (options) => {
+      if (value === undefined || options[property] !== value) {
+        const prevValue = value;
+        value = options[property];
         return await fn(value, prevValue);
-      } catch (e) {
-        console.error(`Error while observing options: `, e);
       }
-    }
-  };
+    };
+  } else {
+    wrapper = fn;
+  }
 
   try {
     const options = await store.resolve(Options);
@@ -188,7 +188,7 @@ export async function observe(property, fn) {
     // wait for the callback to be fired
     await wrapper(options);
   } catch (e) {
-    console.error(e);
+    console.error(`Error while observing options: `, e);
   }
 
   observers.add(wrapper);

@@ -151,6 +151,8 @@ manifest.web_accessible_resources?.forEach((entry) => {
       const dir = dirname(path);
       shelljs.mkdir('-p', resolve(options.outDir, dir));
       shelljs.cp('', path, resolve(options.outDir, dir));
+    } else if (path.match(/\.(js|css)$/)) {
+      content_scripts.push(path);
     } else {
       source.push(path);
     }

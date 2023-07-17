@@ -17,6 +17,7 @@ import './autoconsent.js';
 import './adblocker.js';
 import './stats.js';
 import './trackers-preview.js';
+import './serp-tracking.js';
 
 import './alarms.js';
 import './dnr.js';
