@@ -133,6 +133,7 @@ module.exports = {
 		}),
 	],
 	optimization: {
+		moduleIds: 'deterministic',
 		minimize: false,
 	},
 	module: {
