@@ -18,6 +18,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin-next');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const sass = require('sass');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 
 // constants
 const BUILD_DIR = path.resolve(__dirname, 'dist');
@@ -133,8 +134,11 @@ module.exports = {
 		}),
 	],
 	optimization: {
-		moduleIds: 'deterministic',
-		minimize: false,
+		minimizer: [
+			new ESBuildMinifyPlugin({
+				target: BUILD_TARGET,
+			}),
+		],
 	},
 	module: {
 		rules: [
