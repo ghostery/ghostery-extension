@@ -16,7 +16,6 @@
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment';
-import { tryWTMReportOnMessageHandler, isDisableWTMReportMessage } from '@whotracksme/webextension-packages/packages/trackers-preview/src/background/index';
 import { getBrowserInfo } from '@ghostery/libs';
 import browser from 'webextension-polyfill';
 
@@ -57,6 +56,8 @@ import { sendCommonModuleCounts } from './utils/commonModulesData';
 
 import './modules/autoconsent';
 import renew from './modules/renew';
+
+const trackerPreview = import('@whotracksme/webextension-packages/packages/trackers-preview/src/background/index');
 
 // For debug purposes, provide Access to the internals of `ghostery-common`
 // module from Developer Tools Console.
@@ -516,13 +517,17 @@ function onMessageHandler(request, sender, callback) {
 	const tab_id = tab && tab.id;
 
 	if (conf.enable_wtm_serp_report) {
-		if (tryWTMReportOnMessageHandler(request, sender, callback)) {
+		trackerPreview.then((preview) => {
+			if (preview.tryWTMReportOnMessageHandler(request, sender, callback)) {
+				return false;
+			}
+			if (preview.isDisableWTMReportMessage(request)) {
+				conf.enable_wtm_serp_report = false;
+				return false;
+			}
 			return false;
-		}
-		if (isDisableWTMReportMessage(request)) {
-			conf.enable_wtm_serp_report = false;
-			return false;
-		}
+		});
+		return true;
 	}
 
 	// HANDLE PAGE EVENTS HERE
