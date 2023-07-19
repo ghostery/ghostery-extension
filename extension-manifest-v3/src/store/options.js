@@ -300,8 +300,3 @@ chrome.runtime.onMessage.addListener((msg) => {
     store.get(Options);
   }
 });
-
-globalThis.clearOptions = () => {
-  store.clear(Options, false);
-  store.get(Options);
-};
