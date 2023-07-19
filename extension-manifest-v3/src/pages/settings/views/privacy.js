@@ -12,7 +12,6 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
-import Session from '/store/session.js';
 
 import assets from '../assets/index.js';
 import Preview from './preview.js';
@@ -44,10 +43,9 @@ function toggleNeverConsent({ options }) {
 
 export default {
   options: store(Options),
-  session: store(Session),
-  content: ({ options, session }) => html`
+  content: ({ options }) => html`
     <template layout="column gap:4">
-      ${store.ready(options, session) &&
+      ${store.ready(options) &&
       html`
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="column gap" layout@992px="margin:bottom">
