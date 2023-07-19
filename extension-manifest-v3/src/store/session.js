@@ -51,7 +51,6 @@ export default Session;
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.action === UPDATE_SESSION_ACTION_NAME) {
-    const session = store.get(Session);
-    if (store.ready(session)) store.clear(Session, false);
+    store.clear(Session, false);
   }
 });

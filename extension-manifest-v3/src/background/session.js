@@ -15,7 +15,7 @@ import { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
 
 import { session, ACCOUNT_PAGE_URL, SIGNON_PAGE_URL } from '/utils/api.js';
 
-// Trigger options sync every hour
+// Trigger options sync every one day
 const ALARM_SYNC_OPTIONS = 'session:sync:options';
 const ALARM_SYNC_OPTIONS_RATE = 1 * 60 * 24; // 1 day in minutes
 
