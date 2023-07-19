@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export function showIframe(url, maxWidth = '440px') {
+export function showIframe(url, width = '440px') {
   const wrapper = document.createElement('ghostery-iframe-wrapper');
 
   const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
@@ -34,7 +34,7 @@ export function showIframe(url, maxWidth = '440px') {
       iframe {
         display: block;
         flex-grow: 1;
-        width: min(100%, ${maxWidth});
+        width: min(100%, ${width});
         pointer-events: auto;
         box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.4);
         border-radius: 16px;
@@ -58,7 +58,7 @@ export function showIframe(url, maxWidth = '440px') {
         iframe {
           flex-grow: 0;
           transform: translateY(-20px);
-          max-width: ${maxWidth};
+          max-width: ${width};
         }
       }
     </style>
@@ -76,7 +76,6 @@ export function showIframe(url, maxWidth = '440px') {
   window.addEventListener('message', (e) => {
     switch (e.data?.type) {
       case `ghostery-resize-iframe`:
-        iframe.style.width = e.data.width + 'px';
         iframe.style.height = e.data.height + 'px';
         break;
       case `ghostery-close-iframe`:
@@ -96,19 +95,11 @@ export function closeIframe(reload = false) {
   window.parent.postMessage({ type: `ghostery-close-iframe`, reload }, '*');
 }
 
-export function setupIframeSize({ width, height } = {}) {
-  if (width) {
-    document.body.style.width = width + 'px';
-  }
-  if (height) {
-    document.body.style.height = height + 'px';
-  }
-
+export function setupIframeSize() {
   const resizeObserver = new ResizeObserver(() => {
     window.parent.postMessage(
       {
         type: `ghostery-resize-iframe`,
-        width: document.body.clientWidth,
         height: document.body.clientHeight,
       },
       '*',
@@ -118,4 +109,6 @@ export function setupIframeSize({ width, height } = {}) {
   resizeObserver.observe(document.body, {
     box: 'border-box',
   });
+
+  document.body.style.overflow = 'hidden';
 }
