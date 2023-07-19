@@ -11,7 +11,7 @@
 
 const colors = {
   advertising: '#CB55CD',
-  site_analytics: '#87D7EF',
+  site_analytics: '#5EBEDB',
   consent: '#556FCD',
   essential: '#FC9734',
   hosting: '#8459A5',
@@ -26,6 +26,12 @@ const colors = {
   pornvertising: '#CB4E4E',
   social_media: '#CBA14E',
   telemetry: '#A1CB4E',
+};
+
+const backgroundColors = {
+  ...colors,
+  site_analytics: '#87D7EF',
+  unidentified: '#DBDFE7',
 };
 
 export const order = [
@@ -47,26 +53,22 @@ export const order = [
   'unidentified',
 ];
 
-export const getCategoryKey = (category) => {
+export function getCategoryKey(category) {
   return colors[category] ? category : 'unidentified';
-};
+}
 
-export const getCategoryColor = (category) => {
+export function getCategoryColor(category) {
   return colors[getCategoryKey(category)];
-};
+}
 
-export const getCategoryChartColor = (category) => {
-  const categoryKey = getCategoryKey(category);
-  if (categoryKey === 'unidentified') {
-    return '#9FA8BB';
-  }
-  return colors[categoryKey];
-};
+export function getCategoryBgColor(category) {
+  return backgroundColors[getCategoryKey(category)];
+}
 
-export const sortCategories = (resolveCategoryName = (a) => a) => {
+export function sortCategories(resolveCategoryName = (a) => a) {
   return (a, b) => {
     const a1 = getCategoryKey(resolveCategoryName(a));
     const b1 = getCategoryKey(resolveCategoryName(b));
     return order.indexOf(a1) - order.indexOf(b1);
   };
-};
+}
