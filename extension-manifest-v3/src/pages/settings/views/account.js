@@ -1,5 +1,7 @@
 import { html, store, router, msg } from 'hybrids';
 
+import { openTabWithUrl } from '/utils/tabs.js';
+
 import Options from '/store/options.js';
 import Session from '/store/session.js';
 
@@ -41,25 +43,25 @@ export default {
           (session.user
             ? html`
                 <div layout="column gap:0.5 margin:bottom:2">
-                  <ui-text type="label-m" color="gray-600">You are signed in as:</ui-text>
+                  <ui-text type="label-m" color="gray-600"
+                    >You are signed in as:</ui-text
+                  >
                   <div layout="row items:center gap:2">
-                    <ui-text type="headline-m">
-                      ${session.name}
-                    </ui-text>
-                    ${
-                      session.contributor &&
-                      html`<ui-settings-badge type="primary">
-                        Contributor
-                      </ui-settings-badge>`
-                    }
+                    <ui-text type="headline-m"> ${session.name} </ui-text>
+                    ${session.contributor &&
+                    html`<ui-settings-badge type="primary">
+                      Contributor
+                    </ui-settings-badge>`}
                   </div>
-                  <ui-text type="body-m" color="gray-600">${
-                    session.email
-                  }</ui-text>
+                  <ui-text type="body-m" color="gray-600"
+                    >${session.email}</ui-text
+                  >
                 </div>
                 <div layout="row gap">
                   <ui-button>
-                    <a href="${ACCOUNT_PAGE_URL}" target=_blank">Account details</a>
+                    <a href="${ACCOUNT_PAGE_URL}" onclick="${openTabWithUrl}">
+                      Account details
+                    </a>
                   </ui-button>
                 </div>
               `
@@ -67,10 +69,17 @@ export default {
                 <ui-text type="headline-m">Join Ghostery</ui-text>
                 <div layout="row gap">
                   <ui-button type="success">
-                    <a href="${SIGNON_PAGE_URL}" target=_blank">Sign in</a>
+                    <a href="${SIGNON_PAGE_URL}" onclick="${openTabWithUrl}">
+                      Sign in
+                    </a>
                   </ui-button>
                   <ui-button type="outline">
-                    <a href="${CREATE_ACCOUNT_PAGE_URL}" target="_blank">Create Account</a>
+                    <a
+                      href="${CREATE_ACCOUNT_PAGE_URL}"
+                      onclick="${openTabWithUrl}"
+                    >
+                      Create Account
+                    </a>
                   </ui-button>
                 </div>
               `)}
