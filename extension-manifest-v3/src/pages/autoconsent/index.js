@@ -8,7 +8,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import '../../utils/shims.js';
 
 import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/autoconsent';
