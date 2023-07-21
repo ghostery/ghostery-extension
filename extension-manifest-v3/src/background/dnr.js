@@ -45,25 +45,25 @@ if (__PLATFORM__ !== 'firefox') {
       const domains = paused.map(({ id }) => id);
       chrome.declarativeNetRequest.updateDynamicRules({
         addRules: [
-          {
-            id: 1,
-            priority: 10000,
-            ...(__PLATFORM__ !== 'safari'
-              ? {
-                  action: { type: 'allowAllRequests' },
-                  condition: {
-                    requestDomains: domains,
-                    resourceTypes: ['main_frame', 'sub_frame'],
-                  },
-                }
-              : {
-                  action: { type: 'allow' },
-                  condition: {
-                    urlFilter: '*',
-                    domains: domains.map((d) => [d, `www.${d}`]).flat(),
-                  },
-                }),
-          },
+          __PLATFORM__ === 'safari'
+            ? {
+                id: 1,
+                priority: 10000,
+                action: { type: 'allow' },
+                condition: {
+                  domains: domains.map((d) => `*${d}`),
+                  urlFilter: '*',
+                },
+              }
+            : {
+                id: 1,
+                priority: 10000,
+                action: { type: 'allowAllRequests' },
+                condition: {
+                  requestDomains: domains,
+                  resourceTypes: ['main_frame', 'sub_frame'],
+                },
+              },
         ],
         removeRuleIds: [1],
       });
