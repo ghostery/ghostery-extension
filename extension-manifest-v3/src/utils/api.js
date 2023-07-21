@@ -25,8 +25,26 @@ export const SIGNON_PAGE_URL = `https://signon.${DOMAIN}/`;
 export const CREATE_ACCOUNT_PAGE_URL = `https://signon.${DOMAIN}/register`;
 export const ACCOUNT_PAGE_URL = `https://account.${DOMAIN}/`;
 
+async function isFirstPartyIsolation() {
+  if (isFirstPartyIsolation.value === undefined) {
+    try {
+      await chrome.cookies.getAll({ domain: '' });
+      isFirstPartyIsolation.value = false;
+    } catch (e) {
+      isFirstPartyIsolation.value = e.message.indexOf('firstPartyDomain') > -1;
+    }
+  }
+
+  return isFirstPartyIsolation.value;
+}
+
 export async function getCookie(name) {
-  const cookie = await chrome.cookies.get({ url: COOKIE_URL, name });
+  const cookie = await chrome.cookies.get({
+    url: COOKIE_URL,
+    name,
+    firstPartyDomain: (await isFirstPartyIsolation()) ? DOMAIN : '',
+  });
+
   return cookie?.value || undefined;
 }
 
@@ -38,6 +56,7 @@ export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
     name,
     value,
     expirationDate: Date.now() / 1000 + durationInSec,
+    firstPartyDomain: (await isFirstPartyIsolation()) ? DOMAIN : '',
   });
 }
 
