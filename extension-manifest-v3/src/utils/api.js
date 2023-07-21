@@ -89,7 +89,7 @@ export async function getUserOptions() {
   const accessToken = await getCookie('access_token');
   const csrfToken = await getCookie('csrf_token');
 
-  const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
+  const res = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
     headers: {
       'Content-Type': 'application/vnd.api+json',
       Authorization: `Bearer ${accessToken}`,
@@ -98,7 +98,11 @@ export async function getUserOptions() {
     credentials: 'omit',
   });
 
-  return (await data.json()).data.attributes.options || {};
+  if (!res.ok) {
+    throw Error(`Failed to get options: ${res.status} ${res.statusText}`);
+  }
+
+  return (await res.json()).data.attributes.options || {};
 }
 
 export async function setUserOptions(options) {
@@ -106,7 +110,7 @@ export async function setUserOptions(options) {
   const accessToken = await getCookie('access_token');
   const csrfToken = await getCookie('csrf_token');
 
-  const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
+  const res = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/vnd.api+json',
@@ -123,5 +127,9 @@ export async function setUserOptions(options) {
     }),
   });
 
-  return (await data.json()).data.attributes.options || {};
+  if (!res.ok) {
+    throw Error(`Failed to save options: ${res.status} ${res.statusText}`);
+  }
+
+  return (await res.json()).data.attributes.options || {};
 }
