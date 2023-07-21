@@ -15,7 +15,7 @@ import { throttle } from 'underscore';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { getCategoryChartColor, sortCategories } from '@ghostery/ui/categories';
+import { getCategoryBgColor, sortCategories } from '@ghostery/ui/categories';
 
 import {
 	arc,
@@ -50,7 +50,7 @@ class DonutGraph extends React.Component {
 
 		// Variables
 		this.colors = {
-			regular: getCategoryChartColor,
+			regular: getCategoryBgColor,
 			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
 			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};

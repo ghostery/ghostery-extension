@@ -95,7 +95,6 @@ export default {
           </ui-tooltip>
         `}
         ${trackers &&
-        trackers.length > 0 &&
         html`
           <ui-panel-action-group>
             <ui-tooltip>

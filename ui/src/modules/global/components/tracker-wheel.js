@@ -10,7 +10,10 @@
  */
 
 import { html, svg } from 'hybrids';
-import { getCategoryChartColor } from '../../../utils/categories.js';
+import {
+  getCategoryBgColor,
+  getCategoryKey,
+} from '../../../utils/categories.js';
 import * as labels from '../../../utils/labels.js';
 
 function updateTooltipPosition(host, event) {
@@ -80,7 +83,7 @@ export default {
         show="${current}"
       >
         <span slot="content"
-          >${labels.categories[current]}:
+          >${labels.categories[getCategoryKey(current)]}:
           ${categories.reduce(count(current), 0)}</span
         >
       </ui-tooltip>
@@ -92,7 +95,7 @@ export default {
                 class="${{ empty: !key }}"
                 stroke-dasharray="${value}, ${100 - value}"
                 transform="rotate(${offset}, 18, 18)"
-                stroke="${getCategoryChartColor(key)}"
+                stroke="${getCategoryBgColor(key)}"
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 onmouseenter="${html.set('current', key)}"
                 onmouseleave="${html.set('current', '')}"
