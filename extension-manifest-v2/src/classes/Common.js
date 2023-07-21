@@ -80,6 +80,14 @@ common.load = async () => {
 		HW_CHANNEL = 'ghostery-browser-android';
 	} else 	if (IS_ANDROID) {
 		HW_CHANNEL = 'android';
+	} else if (globals.BROWSER_INFO.token === 'ff') {
+		HW_CHANNEL = 'ghostery-firefox';
+	} else if (globals.BROWSER_INFO.token === 'ch') {
+		HW_CHANNEL = 'ghostery-chrome';
+	} else if (globals.BROWSER_INFO.token === 'ed') {
+		HW_CHANNEL = 'ghostery-edge';
+	} else if (globals.BROWSER_INFO.token === 'op') {
+		HW_CHANNEL = 'ghostery-opera';
 	} else {
 		HW_CHANNEL = 'ghostery';
 	}
