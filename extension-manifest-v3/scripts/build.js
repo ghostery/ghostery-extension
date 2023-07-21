@@ -168,7 +168,9 @@ if (manifest.declarative_net_request?.rule_resources) {
 
 // background
 if (manifest.background) {
-  source.push(manifest.background.service_worker || manifest.background.page);
+  source.push(
+    manifest.background.service_worker || manifest.background.scripts[0],
+  );
 }
 
 // --- Build  ---
@@ -191,6 +193,9 @@ const buildPromise = build({
       input: mapPaths(source),
       preserveEntrySignatures: 'exports-only',
       output: {
+        banner:
+          argv.target === 'firefox' &&
+          'globalThis.chrome = globalThis.browser;\n',
         dir: options.outDir,
         manualChunks: false,
         preserveModules: true,
@@ -226,6 +231,9 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
         rollupOptions: {
           input: { [id]: path },
           output: {
+            banner:
+              argv.target === 'firefox' &&
+              'globalThis.chrome = globalThis.browser;\n',
             format: 'iife',
             dir: options.outDir,
             entryFileNames: '[name].js',

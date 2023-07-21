@@ -9,7 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import './safari-monkey-patch.js';
-import '../../utils/shims.js';
 
 import '@ghostery/ui/panel';
 import { define, mount, router, html } from 'hybrids';

@@ -42,7 +42,8 @@
     "open_in_tab": true
   },
   "background": {
-    "page": "background/index.html",
+    "scripts": ["background/index.js"],
+    "type": "module",
     "persistent": false
   },
   "declarative_net_request" : {
