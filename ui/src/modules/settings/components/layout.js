@@ -34,11 +34,11 @@ export default {
       </header>
       <nav
         layout="order:1 row content:space-around padding gap:0.5"
-        layout@992px="grid:1:repeat(3,max-content)|1|max content:stretch padding:0:2:2 layer"
+        layout@992px="grid:1:repeat(3,max-content)|max|1fr content:stretch padding:0:2:2 layer overflow:y:auto"
       >
         <slot name="nav"></slot>
       </nav>
-      <main layout="grow overflow:y:scroll" layout@992px="area::2">
+      <main layout="column grow overflow:y:scroll" layout@992px="area::2">
         <slot
           layout::slotted(*)="padding:4:2"
           layout::slotted(*)@768px="padding:5:6"
@@ -125,7 +125,21 @@ export default {
       }
 
       nav ::slotted(a.bottom) {
-        grid-row: 5;
+        position: relative;
+        grid-row: 4;
+        margin-top: 32px;
+        overflow: visible;
+      }
+
+      nav ::slotted(a.bottom)::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(100% + 17px);
+        height: 1px;
+        background: var(--ui-color-gray-200);
       }
     }
 

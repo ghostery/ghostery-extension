@@ -18,10 +18,9 @@ async function updateOptions(host, event) {
   const success = event.type === 'success';
 
   await store.set(Options, {
-    engines: Object.keys(Options.engines).reduce(
-      (all, rule) => ({ ...all, [rule]: success }),
-      {},
-    ),
+    blockAds: success,
+    blockTrackers: success,
+    blockAnnoyances: success,
     terms: success,
     onboarding: { done: true },
   });

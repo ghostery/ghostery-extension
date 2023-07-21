@@ -55,6 +55,7 @@ html {
   --ui-font-body-m: 400 14px / 18px var(--ui-font-family);
   --ui-font-body-s: 400 12px / 16px var(--ui-font-family);
 
+  --ui-font-button-m: var(--ui-font-label-m);
   --ui-font-button-s: 600 14px / 24px var(--ui-font-family);
 
   /* UI components overwrites */
@@ -104,7 +105,7 @@ input::-webkit-search-cancel-button {
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 4L4 12M4 4L12 12' stroke='%2349556e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-ui-button[size='small'] {
+ui-button {
   text-transform: none;
   border-radius: 8px;
   --ui-button-color-hover: var(--ui-color-primary-700);

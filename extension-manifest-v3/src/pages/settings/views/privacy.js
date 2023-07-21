@@ -12,8 +12,8 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
-import assets from '../assets/index.js';
 
+import assets from '../assets/index.js';
 import Preview from './preview.js';
 
 const PREVIEWS = {
@@ -36,9 +36,7 @@ const PREVIEWS = {
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
-    engines: {
-      annoyances: !options.engines.annoyances,
-    },
+    blockAnnoyances: !options.blockAnnoyances,
     autoconsent: null,
   });
 }
@@ -81,8 +79,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.engines.ads}"
-                onchange="${html.set(options, 'engines.ads')}"
+                value="${options.blockAds}"
+                onchange="${html.set(options, 'blockAds')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -104,8 +102,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.engines.tracking}"
-                onchange="${html.set(options, 'engines.tracking')}"
+                value="${options.blockTrackers}"
+                onchange="${html.set(options, 'blockTrackers')}"
               ></ui-settings-toggle>
             </div>
           </div>
@@ -126,7 +124,7 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.engines.annoyances}"
+                value="${options.blockAnnoyances}"
                 onchange="${toggleNeverConsent}"
               ></ui-settings-toggle>
             </div>

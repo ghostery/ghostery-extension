@@ -18,6 +18,7 @@ function toggle(host) {
 
 export default {
   value: false,
+  disabled: false,
   render: Object.assign(
     ({ value }) => html`
       <template layout="block">
@@ -34,6 +35,18 @@ export default {
         </button>
       </template>
     `.css`
+      :host([disabled]) {
+        pointer-events: none;
+      }
+
+      :host([disabled]) button {
+        --ui-text-color-heading: var(--ui-color-gray-400);
+      }
+
+      :host([disabled]) #toggle {
+        background: var(--ui-color-gray-400);
+      }
+      
       button {
         background: none;
         appearance: none;

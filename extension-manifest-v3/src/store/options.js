@@ -12,60 +12,93 @@
 import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
+import { session, getUserOptions, setUserOptions } from '/utils/api.js';
+
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+
 const observers = new Set();
 
-const Options = {
-  engines: {
-    ads: false,
-    tracking: false,
-    annoyances: false,
+export const SYNC_OPTIONS = [
+  'blockAds',
+  'blockTrackers',
+  'blockAnnoyances',
+  'trackerWheel',
+  'trackerCount',
+  'wtmSerpReport',
+  'panel',
+];
+
+export const ENGINES = [
+  {
+    name: 'ads',
+    option: 'blockAds',
   },
+  {
+    name: 'tracking',
+    option: 'blockTrackers',
+  },
+  {
+    name: 'annoyances',
+    option: 'blockAnnoyances',
+  },
+];
+
+const Options = {
+  // Main features
+  blockAds: false,
+  blockTrackers: false,
+  blockAnnoyances: false,
+
+  // Never-consent popup
   autoconsent: {
     all: false,
     allowed: [String],
     disallowed: [String],
     interactions: 0,
   },
+
+  // Browser icon
   trackerWheel: true,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
+
+  // Tracker wheel on SERP
   wtmSerpReport: true,
+
+  // Onboarding
   terms: false,
   onboarding: { done: false, shownAt: 0, shown: 0 },
-  panel: {
-    statsType: 'graph',
-  },
-  paused: [{ id: true, revokeAt: 0 }],
   installDate: '',
+
+  // Panel
+  panel: { statsType: 'graph' },
+
+  // Pause
+  paused: [{ id: true, revokeAt: 0 }],
+
+  // Sync
+  sync: true,
+  revision: 0,
+
   [store.connect]: {
     async get() {
       let { options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {} } =
         await chrome.storage.local.get(['options']);
 
-      // Migrate `trackerWheelDisabled` to `trackerWheel`
-      // INFO: `trackerWheel` option introduced in v9.7.0
-      if (options.trackerWheelDisabled !== undefined) {
-        options.trackerWheel = !options.trackerWheelDisabled;
-      }
+      // Migrate `dnrRules` or `engines` to flatten structure:
+      // * `engines` option introduced in v10.0.1
+      // * flatted main features introduced in v10.0.12
+      if (options.engines || options.dnrRules) {
+        const engines = options.engines || options.dnrRules;
 
-      // Migrate `dnrRules` to `engines`
-      // INFO: `engines` option introduced in v10.1.0
-      if (options.dnrRules) {
-        options.engines = options.dnrRules;
+        options.blockAds = engines.ads;
+        options.blockTrackers = engines.tracking;
+        options.blockAnnoyances = engines.annoyances;
       }
-
-      // Set default value for keys, which type does no match the current one
-      Object.entries(options).forEach(([key, value]) => {
-        if (typeof value !== typeof Options[key]) {
-          delete options[key];
-          console.warn(`Saved options "${key}" key has wrong type, deleted`);
-        }
-      });
 
       return options;
     },
-    async set(_, options) {
-      if (options === null) options = {};
+    async set(_, options, keys) {
+      options = options || {};
 
       await chrome.storage.local.set({
         options:
@@ -75,27 +108,91 @@ const Options = {
             : options,
       });
 
-      // Send update message to another contexts (background page / panel / options)
-      try {
-        chrome.runtime.sendMessage({
-          action: UPDATE_OPTIONS_ACTION_NAME,
-          options,
-        });
-      } catch (e) {
-        console.error(
-          `Error while sending update options to other contexts: `,
-          e,
-        );
-      }
+      sync(options, keys)
+        .then(() =>
+          // Send update message to another contexts (background page / panel / options)
+          chrome.runtime.sendMessage({
+            action: UPDATE_OPTIONS_ACTION_NAME,
+          }),
+        )
+        .catch(() => null);
+
       return options;
     },
-    observe: (_, options) => {
-      observers.forEach((fn) => fn(options));
+    observe: (_, options, prevOptions) => {
+      // Sync if the current memory context get options for the first time
+      if (!prevOptions) sync(options);
+
+      observers.forEach(async (fn) => {
+        try {
+          await fn(options, prevOptions);
+        } catch (e) {
+          console.error(`Error while observing options: `, e);
+        }
+      });
     },
   },
 };
 
 export default Options;
+
+export async function sync(options, keys) {
+  try {
+    // Do not sync if revision is set or terms and sync options are false
+    if (keys?.includes('revision') || !options.terms || !options.sync) {
+      return;
+    }
+
+    // If user is not logged in, clean up options revision and return
+    if (!(await session().catch(() => null))) {
+      if (options.revision !== 0) {
+        store.set(Options, { revision: 0 });
+      }
+      return;
+    }
+
+    // If options update, set revision to "dirty" state
+    if (keys && options.revision > 0) {
+      options = await store.set(Options, { revision: options.revision * -1 });
+    }
+
+    const serverOptions = await getUserOptions();
+
+    // Server has newer options - merge with local options
+    if (serverOptions.revision > Math.abs(options.revision)) {
+      const values = SYNC_OPTIONS.reduce(
+        (acc, key) => {
+          if (!keys?.includes(key) && hasOwnProperty.call(serverOptions, key)) {
+            acc[key] = serverOptions[key];
+          }
+
+          return acc;
+        },
+        { revision: serverOptions.revision },
+      );
+
+      options = await store.set(Options, values);
+    }
+
+    // Set options or update if revision is dirty
+    if (keys || options.revision < 0) {
+      const { revision } = await setUserOptions(
+        SYNC_OPTIONS.reduce(
+          (acc, key) => {
+            acc[key] = options[key];
+            return acc;
+          },
+          { revision: serverOptions.revision + 1 },
+        ),
+      );
+
+      // Update local revision
+      await store.set(Options, { revision });
+    }
+  } catch (e) {
+    console.error(`Error while syncing options: `, e);
+  }
+}
 
 async function migrateFromMV2() {
   try {
@@ -104,11 +201,9 @@ async function migrateFromMV2() {
 
     // Proceed if the storage contains data from v2
     if ('version_history' in storage) {
-      options.engines = {
-        ads: storage.enable_ad_block || false,
-        tracking: storage.enable_anti_tracking || false,
-        annoyances: storage.enable_autoconsent || false,
-      };
+      options.blockAds = storage.enable_ad_block || false;
+      options.blockTrackers = storage.enable_anti_tracking || false;
+      options.blockAnnoyances = storage.enable_autoconsent || false;
 
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,
@@ -167,19 +262,19 @@ async function migrateFromMV2() {
 }
 
 export async function observe(property, fn) {
-  let value;
-  const wrapper = async (options) => {
-    if (value === undefined || options[property] !== value) {
-      const prevValue = value;
-      value = options[property];
-
-      try {
+  let wrapper;
+  if (property) {
+    let value;
+    wrapper = async (options) => {
+      if (value === undefined || options[property] !== value) {
+        const prevValue = value;
+        value = options[property];
         return await fn(value, prevValue);
-      } catch (e) {
-        console.error(`Error while observing options: `, e);
       }
-    }
-  };
+    };
+  } else {
+    wrapper = fn;
+  }
 
   try {
     const options = await store.resolve(Options);
@@ -188,7 +283,7 @@ export async function observe(property, fn) {
     // wait for the callback to be fired
     await wrapper(options);
   } catch (e) {
-    console.error(e);
+    console.error(`Error while observing options: `, e);
   }
 
   observers.add(wrapper);
@@ -201,11 +296,7 @@ export async function observe(property, fn) {
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
-    const options = store.get(Options);
-
-    if (!store.pending(options)) {
-      store.clear(options, false);
-      store.get(Options);
-    }
+    store.clear(Options, false);
+    store.get(Options);
   }
 });

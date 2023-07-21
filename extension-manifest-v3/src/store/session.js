@@ -12,10 +12,9 @@
 import { store } from 'hybrids';
 import { session } from '../utils/api.js';
 
-const ALARM_NAME = 'session:refresh';
-const ALARM_REFRESH_RATE = 1000 * 60 * 24 * 30; // 30 days in milliseconds
+export const UPDATE_SESSION_ACTION_NAME = 'updateSession';
 
-export default {
+const Session = {
   user: '',
   firstName: '',
   lastName: '',
@@ -45,28 +44,13 @@ export default {
         return {};
       }
     },
-    async observe(_, { user }) {
-      if (user) {
-        if (!(await chrome.alarms.get(ALARM_NAME))) {
-          chrome.alarms.create(ALARM_NAME, {
-            when: Date.now() + ALARM_REFRESH_RATE,
-          });
-        }
-      } else {
-        chrome.alarms.clear(ALARM_NAME);
-      }
-    },
   },
 };
 
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === ALARM_NAME) {
-    if (!(await session())) {
-      chrome.alarms.clear(ALARM_NAME);
-    } else {
-      chrome.alarms.create(ALARM_NAME, {
-        when: Date.now() + ALARM_REFRESH_RATE,
-      });
-    }
+export default Session;
+
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.action === UPDATE_SESSION_ACTION_NAME) {
+    store.clear(Session, false);
   }
 });

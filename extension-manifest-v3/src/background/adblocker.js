@@ -16,29 +16,29 @@ import {
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
-import Options, { observe } from '/store/options.js';
+import { observe, ENGINES } from '/store/options.js';
 
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 
 import { setupTabStats, updateTabStats } from './stats.js';
 
-const adblockerEngines = Object.keys(Options.engines).map((name) => ({
-  name,
+const adblockerEngines = ENGINES.map((engine) => ({
+  ...engine,
   engine: null,
   isEnabled: false,
 }));
+
 let pausedDomains = [];
 
 const setup = asyncSetup([
-  observe('engines', (engines) => {
-    Object.entries(engines).forEach(([key, value]) => {
-      const engine = adblockerEngines.find((e) => e.name === key);
-      engine.isEnabled = value;
+  observe(null, (options) => {
+    ENGINES.forEach(({ name, option }) => {
+      const engine = adblockerEngines.find((e) => e.name === name);
+      engine.isEnabled = options[option];
     });
-  }),
-  observe('paused', (paused) => {
-    pausedDomains = paused ? paused.map(String) : [];
+
+    pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
   ...adblockerEngines.map(async (engine) => {
     const response = await fetch(

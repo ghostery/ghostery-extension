@@ -12,12 +12,18 @@
 import jwtDecode from 'jwt-decode';
 
 const DOMAIN = 'ghostery.com';
-const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
 
-const COOKIE_DOMAIN = `.${DOMAIN}`;
+const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
+const ACCOUNT_URL = `https://accountapi.${DOMAIN}/api/v2.1.0`;
+
+export const COOKIE_DOMAIN = `.${DOMAIN}`;
 const COOKIE_URL = `https://${DOMAIN}`;
 const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 const COOKIE_SHORT_DURATION = 60 * 60 * 24; // 1 day in seconds
+
+export const SIGNON_PAGE_URL = `https://signon.${DOMAIN}/`;
+export const CREATE_ACCOUNT_PAGE_URL = `https://signon.${DOMAIN}/register`;
+export const ACCOUNT_PAGE_URL = `https://account.${DOMAIN}/`;
 
 export async function getCookie(name) {
   const cookie = await chrome.cookies.get({ url: COOKIE_URL, name });
@@ -76,4 +82,46 @@ export async function session() {
   }
 
   return jwtDecode(accessToken);
+}
+
+export async function getUserOptions() {
+  const userId = await getCookie('user_id');
+  const accessToken = await getCookie('access_token');
+  const csrfToken = await getCookie('csrf_token');
+
+  const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
+    headers: {
+      'Content-Type': 'application/vnd.api+json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-CSRF-Token': csrfToken,
+    },
+    credentials: 'omit',
+  });
+
+  return (await data.json()).data.attributes.options || {};
+}
+
+export async function setUserOptions(options) {
+  const userId = await getCookie('user_id');
+  const accessToken = await getCookie('access_token');
+  const csrfToken = await getCookie('csrf_token');
+
+  const data = await fetch(`${ACCOUNT_URL}/options/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/vnd.api+json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-CSRF-Token': csrfToken,
+    },
+    credentials: 'omit',
+    body: JSON.stringify({
+      data: {
+        type: 'options',
+        id: userId,
+        attributes: { options },
+      },
+    }),
+  });
+
+  return (await data.json()).data.attributes.options || {};
 }

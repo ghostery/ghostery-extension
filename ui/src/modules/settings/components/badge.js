@@ -28,6 +28,11 @@ export default {
       background: var(--ui-color-danger-100);
     }
 
+    :host([type="primary"]) {
+      color: var(--ui-color-primary-700);
+      background: var(--ui-color-primary-100);
+    }
+
     ui-text {
       text-transform: uppercase;
     }

@@ -21,11 +21,11 @@ async function getTabDomain(tabId) {
 }
 
 async function initialize(msg, tabId, frameId) {
-  const { engines, autoconsent, paused } = await store.resolve(Options);
+  const { blockAnnoyances, autoconsent, paused } = await store.resolve(Options);
   const domain = await getTabDomain(tabId);
 
   if (
-    engines.annoyances &&
+    blockAnnoyances &&
     !autoconsent.disallowed.includes(domain) &&
     (!paused || !paused.some(({ id }) => id === domain))
   ) {

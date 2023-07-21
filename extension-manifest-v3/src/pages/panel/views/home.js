@@ -203,21 +203,21 @@ export default {
               >
                 <gh-panel-options-item
                   icon="ads"
-                  enabled="${options.engines.ads}"
+                  enabled="${options.blockAds}"
                   terms="${options.terms}"
                 >
                   Ad-Blocking
                 </gh-panel-options-item>
                 <gh-panel-options-item
                   icon="tracking"
-                  enabled="${options.engines.tracking}"
+                  enabled="${options.blockTrackers}"
                   terms="${options.terms}"
                 >
                   Anti-Tracking
                 </gh-panel-options-item>
                 <gh-panel-options-item
                   icon="autoconsent"
-                  enabled="${options.engines.annoyances}"
+                  enabled="${options.blockAnnoyances}"
                   terms="${options.terms}"
                 >
                   Never-Consent
