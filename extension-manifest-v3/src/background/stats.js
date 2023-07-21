@@ -24,16 +24,18 @@ import AutoSyncingMap from './utils/map.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
+const chromeAction = chrome.action || chrome.browserAction;
+
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
-  chrome.action.setBadgeBackgroundColor({ color });
+  chromeAction.setBadgeBackgroundColor({ color });
 }
 
 observe('terms', async (terms) => {
   if (!terms) {
-    await chrome.action.setBadgeText({ text: '!' });
+    await chromeAction.setBadgeText({ text: '!' });
     setBadgeColor('#f13436' /* danger-500 */);
   } else {
-    await chrome.action.setBadgeText({ text: '' });
+    await chromeAction.setBadgeText({ text: '' });
     setBadgeColor();
   }
 });
@@ -60,7 +62,7 @@ async function refreshIcon(tabId) {
     }
 
     // Note: Even in MV3, this is not (yet) returning a promise.
-    chrome.action.setIcon({ tabId, ...data }, () => {
+    chromeAction.setIcon({ tabId, ...data }, () => {
       if (chrome.runtime.lastError) {
         console.debug(
           'setIcon failed for tabId',
@@ -74,7 +76,7 @@ async function refreshIcon(tabId) {
 
   if (Options.trackerCount) {
     try {
-      await chrome.action.setBadgeText({
+      await chromeAction.setBadgeText({
         tabId,
         text: options.trackerCount ? String(stats.trackers.length) : '',
       });

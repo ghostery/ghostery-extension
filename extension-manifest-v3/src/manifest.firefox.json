@@ -6,13 +6,14 @@
   "default_locale": "en",
   "description": "__MSG_manifest_short_description__",
   "permissions": [
+    "alarms",
+    "cookies",
+    "storage",
+    "scripting",
+    "tabs",
     "webNavigation",
     "webRequest",
     "webRequestBlocking",
-    "cookies",
-    "tabs",
-    "scripting",
-    "storage",
     "http://*/*",
     "https://*/*",
     "ws://*/*",
@@ -40,8 +41,9 @@
     "open_in_tab": true
   },
   "background": {
-    "page": "background/index.html",
-    "persistent": true
+    "scripts": ["background/index.js"],
+    "type": "module",
+    "persistent": false
   },
   "content_scripts": [
     {
@@ -475,7 +477,6 @@
     }
   ],
   "web_accessible_resources": [
-    "content_scripts/whotracksme/ghostery-whotracksme.js",
     "pages/trackers-preview/index.html",
     "pages/autoconsent/index.html",
     "pages/onboarding/index.html",
