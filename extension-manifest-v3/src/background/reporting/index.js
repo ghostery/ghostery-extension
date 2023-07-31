@@ -99,7 +99,7 @@ const urlReporter = new UrlReporter({
 });
 let requestReporter = null;
 let pausedDomains = [];
-let isAntiTrackingEnabled = Options.engines.tracking;
+let isAntiTrackingEnabled = Options.blockTrackers;
 
 if (__PLATFORM__ === 'firefox') {
   requestReporter = new RequestReporter(config.request, {
@@ -154,8 +154,8 @@ const setup = asyncSetup([
       }
     }
   }),
-  observe('engines', (engines) => {
-    isAntiTrackingEnabled = engines.tracking;
+  observe('blockTrackers', (blockTrackers) => {
+    isAntiTrackingEnabled = blockTrackers;
   }),
   observe('paused', (paused) => {
     pausedDomains = paused || [];

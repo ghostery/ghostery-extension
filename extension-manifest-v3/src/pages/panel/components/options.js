@@ -19,9 +19,5 @@ export default {
       </ui-text>
       <slot></slot>
     </template>
-  `.css`
-    :host {
-      background: linear-gradient(180deg, #F0F2F7 0%, #FFFFFF 90%);
-    }
   `,
 };

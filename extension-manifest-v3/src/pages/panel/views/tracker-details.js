@@ -34,6 +34,27 @@ function showCopyNotification(host) {
   host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
 }
 
+const requestList = (name, icon, requests) =>
+  requests.length > 0 &&
+  html`
+    <ui-icon name=${icon}></ui-icon>
+    <div layout="column gap">
+      <ui-text type="label-s" layout="row gap:0.5">${name}:</ui-text>
+      <div layout="column gap:2">
+        <div layout="column gap">
+          ${requests.map(
+            ({ url }) =>
+              html`
+                <gh-panel-copy oncopy="${showCopyNotification}">
+                  ${url}
+                </gh-panel-copy>
+              `,
+          )}
+        </div>
+      </div>
+    </div>
+  `;
+
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
@@ -42,7 +63,19 @@ export default {
     stats.trackers.find((t) => t.id === trackerId),
   wtmUrl: ({ tracker }) =>
     `https://www.whotracks.me/trackers/${tracker.id}.html`,
-  content: ({ tracker, wtmUrl }) => html`
+  requestsObserved: ({ tracker }) =>
+    tracker.requests.filter((request) => !request.blocked && !request.modified),
+  requestsBlocked: ({ tracker }) =>
+    tracker.requests.filter((request) => request.blocked),
+  requestsModified: ({ tracker }) =>
+    tracker.requests.filter((request) => request.modified),
+  content: ({
+    tracker,
+    wtmUrl,
+    requestsObserved,
+    requestsBlocked,
+    requestsModified,
+  }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -79,22 +112,9 @@ export default {
             padding:bottom:4
           "
         >
-          <ui-icon name="shield"></ui-icon>
-          <div layout="column gap">
-            <ui-text type="label-s" layout="row gap:0.5">Requests</ui-text>
-            <div layout="column gap:2">
-              <div layout="column gap">
-                ${tracker.requests.map(
-                  ({ url, blocked }) =>
-                    html`
-                      <gh-panel-copy oncopy="${showCopyNotification}">
-                        ${blocked ? html`<s>${url}</s>` : url}
-                      </gh-panel-copy>
-                    `,
-                )}
-              </div>
-            </div>
-          </div>
+          ${requestList('URLs observed', 'shield', requestsObserved)}
+          ${requestList('URLs blocked', 'block', requestsBlocked)}
+          ${requestList('URLs modified', 'eye', requestsModified)}
           ${tracker.website &&
           html`
             <ui-icon name="globe"></ui-icon>

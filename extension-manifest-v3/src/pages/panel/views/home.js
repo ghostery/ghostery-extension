@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store, router } from 'hybrids';
+import { html, store, router, msg } from 'hybrids';
 
 import Options from '/store/options.js';
 import Session from '/store/session.js';
@@ -92,6 +92,31 @@ function setStatsType(host, event) {
   const { type } = event.target;
   store.set(host.options, { panel: { statsType: type } });
 }
+
+const trackerStatus = ({ count, title, description, icon, iconColor }) => html`
+  <section layout="column center grow">
+    <div layout="row center">
+      <ui-icon name=${icon} color=${iconColor}></ui-icon>
+      <strong class="stats-number"
+        >${count}</strong
+      >
+    </div>
+    <div layout="row center">
+      <strong class="stats-description">${title}</strong>
+      <ui-tooltip wrap autohide="10">
+        <span slot="content" layout="block width:200px">
+          ${description}
+        </span>
+        <ui-icon
+          name="info"
+          color="gray-400"
+          layout="size:2"
+        ></ui-icon>
+      </ui-tooltip>
+    </div>
+  </section>
+  </section>
+`;
 
 export default {
   [router.connect]: { stack: [Navigation, TrackerDetails] },
@@ -193,6 +218,29 @@ export default {
             >
             </ui-panel-stats>
           `}
+          ${store.ready(stats) &&
+          (stats.trackersBlockedCount > 0 || stats.trackersModifiedCount > 0) &&
+          html`
+            <section layout="row padding:2:2:2" class="stats">
+              ${stats.trackersBlockedCount > 0 &&
+              trackerStatus({
+                count: stats.trackersBlockedCount,
+                title: msg`Trackers blocked`,
+                description: msg`Number of trackers blocked.`,
+                icon: 'block',
+                iconColor: 'danger-700',
+              })}
+              ${stats.trackersModifiedCount > 0 &&
+              trackerStatus({
+                count: stats.trackersModifiedCount,
+                title: msg`Trackers modified`,
+                description: msg`Number of trackers modified.`,
+                icon: 'eye',
+                iconColor: 'primary-700',
+              })}
+            </section>
+          `}
+
           <gh-panel-options>
             <span slot="header">Ghostery settings</span>
             <ui-text color="gray-900">
@@ -214,16 +262,6 @@ export default {
                   terms="${options.terms}"
                 >
                   Anti-Tracking
-                  ${stats.trackers.reduce(
-                    (totalRequestsModified, tracker) =>
-                      totalRequestsModified +
-                      tracker.requests.reduce(
-                        (requestsModified, request) =>
-                          requestsModified + Number(request.modified || false),
-                        0,
-                      ),
-                    0,
-                  )}
                 </gh-panel-options-item>
                 <gh-panel-options-item
                   icon="autoconsent"
@@ -252,5 +290,22 @@ export default {
         </section>
       `}
     </template>
+  `.css`
+    .stats {
+      background-color: #F0F2F7;
+    }
+    .stats-number {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 32px;
+      margin-left: 4px;
+    }
+    .stats-description {
+      font-family: Inter;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 13px;
+      margin-right: 4px;
+    }
   `,
 };

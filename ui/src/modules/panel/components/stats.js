@@ -181,12 +181,17 @@ export default {
                               href="${router.url(dialog, {
                                 trackerId: tracker.id,
                               })}"
+                              class="tracker"
                               layout="row items:center gap:0.5 padding:0.5:0"
                             >
                               ${tracker.name}
                               <ui-panel-badge>
                                 ${tracker.requests.length}
                               </ui-panel-badge>
+                              ${tracker.requestsBlockedCount > 0 &&
+                              html`<ui-icon name="block" />`}
+                              ${tracker.requestsModifiedCount > 0 &&
+                              html`<ui-icon name="eye" />`}
                             </a>
                           </ui-text>
                         `,
@@ -199,5 +204,9 @@ export default {
         `}
       </ui-panel-switch>
     </template>
+  `.css`
+    .tracker ui-icon {
+      color: var(--ui-color-gray-400);
+    }
   `,
 };
