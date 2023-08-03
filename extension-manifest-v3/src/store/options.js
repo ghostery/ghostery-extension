@@ -174,8 +174,11 @@ export async function sync(options, keys) {
       options = await store.set(Options, values);
     }
 
-    // Set options or update if revision is dirty
-    if (keys || options.revision < 0) {
+    // Set options or update:
+    // * No revision on server - initial sync
+    // * Keys are passed - options update
+    // * Revision is negative - local options are dirty (not synced)
+    if (!serverOptions.revision || keys || options.revision < 0) {
       const { revision } = await setUserOptions(
         SYNC_OPTIONS.reduce(
           (acc, key) => {
