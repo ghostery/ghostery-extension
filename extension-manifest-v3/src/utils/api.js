@@ -42,7 +42,7 @@ export async function getCookie(name) {
   const cookie = await chrome.cookies.get({
     url: COOKIE_URL,
     name,
-    firstPartyDomain: (await isFirstPartyIsolation()) ? DOMAIN : '',
+    ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
   });
 
   return cookie?.value || undefined;
@@ -56,7 +56,7 @@ export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
     name,
     value,
     expirationDate: Date.now() / 1000 + durationInSec,
-    firstPartyDomain: (await isFirstPartyIsolation()) ? DOMAIN : '',
+    ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
   });
 }
 
