@@ -43,32 +43,23 @@ export function getCompatRule(rule) {
 
   return {
     priority: rule.priority,
-    ...(rule.action.type === 'allowAllRequests'
-      ? {
-          action: { type: 'allow' },
-          condition: {
-            domains: rule.condition.requestDomains?.map((d) => `*${d}`),
-            resourceTypes,
-            regexFilter: '.*',
-          },
-        }
-      : {
-          action: rule.action,
-          condition: {
-            isUrlFilterCaseSensitive:
-              rule.condition.isUrlFilterCaseSensitive || false,
-            domainType: rule.condition.domainType,
-            resourceTypes,
-            domains: rule.condition.initiatorDomains?.map((d) => `*${d}`),
-            excludedDomains: rule.condition.excludedInitiatorDomains?.map(
-              (d) => `*${d}`,
-            ),
-            urlFilter: rule.condition.urlFilter,
-            regexFilter:
-              rule.condition.regexFilter ||
-              (rule.condition.urlFilter ? undefined : '.*'),
-          },
-        }),
+    action:
+      rule.action.type === 'allowAllRequests' ? { type: 'allow' } : rule.action,
+    condition: {
+      domainType: rule.condition.domainType,
+      resourceTypes,
+      domains: (
+        rule.condition.initiatorDomains || rule.condition.requestDomains
+      )?.map((d) => `*${d}`),
+      excludedDomains: (
+        rule.condition.excludedInitiatorDomains ||
+        rule.condition.excludedRequestDomains
+      )?.map((d) => `*${d}`),
+      urlFilter:
+        rule.condition.urlFilter ||
+        (rule.condition.regexFilter ? undefined : '*'),
+      regexFilter: rule.condition.regexFilter,
+    },
   };
 }
 
@@ -82,6 +73,8 @@ export function setupStream(path) {
 
   return {
     write: (rule) => {
+      if (!rule) return;
+
       rule.id = currentId;
       output.write(separator + JSON.stringify(rule));
 

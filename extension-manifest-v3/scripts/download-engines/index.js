@@ -90,15 +90,19 @@ for (const [name, target] of Object.entries(ENGINES)) {
     for (const rule of JSON.parse(dnr)) {
       if (rule.condition.requestDomains) {
         for (const domain of rule.condition.requestDomains) {
-          const compatRule = getCompatRule({
-            ...rule,
-            condition: { ...rule.condition, urlFilter: `||${domain}/` },
-          });
-          if (compatRule) stream.write(compatRule);
+          stream.write(
+            getCompatRule({
+              ...rule,
+              condition: {
+                ...rule.condition,
+                requestDomains: undefined,
+                urlFilter: `||${domain}`,
+              },
+            }),
+          );
         }
       } else {
-        const compatRule = getCompatRule(rule);
-        if (compatRule) stream.write(compatRule);
+        stream.write(getCompatRule(rule));
       }
     }
 
