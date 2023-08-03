@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store } from 'hybrids';
+import { html, router, store, msg } from 'hybrids';
 
 import TabStats from '/store/tab-stats.js';
 import { openTabWithUrl } from '/utils/tabs.js';
@@ -112,9 +112,9 @@ export default {
             padding:bottom:4
           "
         >
-          ${requestList('URLs observed', 'shield', requestsObserved)}
-          ${requestList('URLs blocked', 'block', requestsBlocked)}
-          ${requestList('URLs modified', 'eye', requestsModified)}
+          ${requestList(msg`URLs observed`, 'shield', requestsObserved)}
+          ${requestList(msg`URLs blocked`, 'block', requestsBlocked)}
+          ${requestList(msg`URLs modified`, 'eye', requestsModified)}
           ${tracker.website &&
           html`
             <ui-icon name="globe"></ui-icon>
