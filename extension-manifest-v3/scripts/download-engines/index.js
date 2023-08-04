@@ -29,6 +29,7 @@ const ENGINES = {
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
+const MAX_RULE_REQUEST_DOMAINS = 27000;
 
 shelljs.rm('-rf', TARGET_PATH);
 shelljs.mkdir('-p', TARGET_PATH);
@@ -89,6 +90,15 @@ for (const [name, target] of Object.entries(ENGINES)) {
 
     for (const rule of JSON.parse(dnr)) {
       if (rule.condition.requestDomains) {
+        if (rule.condition.requestDomains.length > MAX_RULE_REQUEST_DOMAINS) {
+          console.log(
+            `Rule has too many domains (${rule.condition.requestDomains.length}), cutting it down to ${MAX_RULE_REQUEST_DOMAINS} domains`,
+          );
+          rule.condition.requestDomains = rule.condition.requestDomains.slice(
+            0,
+            MAX_RULE_REQUEST_DOMAINS,
+          );
+        }
         for (const domain of rule.condition.requestDomains) {
           stream.write(
             getCompatRule({
