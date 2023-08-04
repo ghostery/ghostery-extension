@@ -100,6 +100,37 @@ shelljs.cp(
   resolve(options.outDir, 'rule_resources'),
 );
 
+// copy declarative net request lists
+if (manifest.declarative_net_request?.rule_resources) {
+  let rulesCount = 0;
+
+  manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
+    const dir = dirname(path);
+    const sourcePath = resolve(options.srcDir, path);
+    const destPath = resolve(options.outDir, dir);
+
+    // open json file
+    if (argv.target === 'safari') {
+      const list = JSON.parse(readFileSync(sourcePath, 'utf8'));
+      rulesCount += list?.length;
+    }
+
+    shelljs.mkdir('-p', destPath);
+    shelljs.cp(sourcePath, destPath);
+  });
+
+  if (argv.target === 'safari') {
+    console.log('Declarative Net Request rules:', rulesCount);
+
+    // https://github.com/WebKit/WebKit/blob/c85962a5c0e929991e5963811da957b75d1501db/Source/WebCore/contentextensions/ContentExtensionCompiler.cpp#L199
+    if (rulesCount > 75000) {
+      console.warn(
+        `Warning: The number of rules exceeds the limit of 75k rules.`,
+      );
+    }
+  }
+}
+
 // generate license file
 import('../../tools/licenses.js');
 
@@ -156,15 +187,6 @@ manifest.web_accessible_resources?.forEach((entry) => {
     }
   });
 });
-
-// declarative net request
-if (manifest.declarative_net_request?.rule_resources) {
-  manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
-    const dir = dirname(path);
-    shelljs.mkdir('-p', resolve(options.outDir, dir));
-    shelljs.cp(resolve(options.srcDir, path), resolve(options.outDir, dir));
-  });
-}
 
 // background
 if (manifest.background) {
