@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store, router, msg } from 'hybrids';
+import { html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import Session from '/store/session.js';
@@ -193,7 +193,6 @@ export default {
             >
             </ui-panel-stats>
           `}
-
           ${store.ready(stats) &&
           html`
             <gh-panel-feedback
