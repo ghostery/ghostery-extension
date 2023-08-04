@@ -223,7 +223,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
     );
   } else {
     // build content scripts
-    await build({
+    build({
       ...config,
       build: {
         ...config.build,
