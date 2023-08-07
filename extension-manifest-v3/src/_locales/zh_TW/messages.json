@@ -11,6 +11,9 @@
   "about": {
     "message": "有關"
   },
+  "account_details": {
+    "message": "帳戶詳細資料"
+  },
   "ad_blocking": {
     "message": "廣告封鎖"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "聯絡支援"
   },
+  "contributor": {
+    "message": "貢獻者"
+  },
   "copied_to_clipboard": {
     "message": "複製到剪貼簿"
+  },
+  "create_account": {
+    "message": "創建帳戶"
   },
   "customer_interaction": {
     "message": "客戶互動",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery 將會在以下位置停止運作："
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "協助 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
+  },
   "hosting": {
     "message": "託管",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "它的存在要歸功於每位選擇將非個人資料傳送到 WhoTracks.Me 的 Ghostery 用戶的微小貢獻。 這些資料的輸入使 Ghostery 能夠提供有關追蹤器的即時情報，進而為整個 Ghostery 社群提供保護。"
+  },
+  "join_ghostery": {
+    "message": "加入 Ghostery"
   },
   "keep_disabled": {
     "message": "保持關閉"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "恢復"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "儲存並在瀏覽器和裝置之間同步您的自訂設定。"
+  },
   "search_website___": {
     "message": "搜尋網站......"
   },
   "settings": {
     "message": "設定"
+  },
+  "settings_sync": {
+    "message": "設定同步"
   },
   "setup_successful": {
     "message": "設定成功"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "是"
+  },
+  "you_are_signed_in_as_": {
+    "message": "您登入為："
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "你可以在下方調整設定。我們建議你永遠保持啟用。"

@@ -11,6 +11,9 @@
   "about": {
     "message": "A proposito di"
   },
+  "account_details": {
+    "message": "Dettagli dell’account"
+  },
   "ad_blocking": {
     "message": "Blocco pubblicità"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "Contatta l'assistenza"
   },
+  "contributor": {
+    "message": "Collaboratore"
+  },
   "copied_to_clipboard": {
     "message": "Copiato negli appunti"
+  },
+  "create_account": {
+    "message": "Crea Account"
   },
   "customer_interaction": {
     "message": "Interazione Cliente",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery smetterà di funzionare tra:"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Aiuta Ghostery a lottare per un web dove la privacy è un diritto umano fondamentale."
+  },
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Esiste grazie ai micro-contributi di ogni utente di Ghostery che sceglie di inviare informazioni non personali a WhoTracks.Me. Il contributo permette a Ghostery di fornire informazioni in tempo reale sui tracker, che a loro volta proteggono l'intera comunità di Ghostery."
+  },
+  "join_ghostery": {
+    "message": "Unisciti a Ghostery"
   },
   "keep_disabled": {
     "message": "Mantieni disabilitato"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "Riattiva"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Salva e sincronizza le tue impostazioni personalizzate tra browser e dispositivi."
+  },
   "search_website___": {
     "message": "Ricerca sito web..."
   },
   "settings": {
     "message": "Impostazioni"
+  },
+  "settings_sync": {
+    "message": "Sincronizzazione delle impostazioni"
   },
   "setup_successful": {
     "message": "Configurazione completata correttamente"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "Sì"
+  },
+  "you_are_signed_in_as_": {
+    "message": "Hai effettuato l’accesso come:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Puoi modificare le impostazioni di seguito. Consigliamo di mantenerle sempre attive. "

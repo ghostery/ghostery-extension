@@ -11,6 +11,9 @@
   "about": {
     "message": "À propos de Ghostery"
   },
+  "account_details": {
+    "message": "Détails du compte"
+  },
   "ad_blocking": {
     "message": "Blocage de publicité"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "Contacter l'assistance"
   },
+  "contributor": {
+    "message": "Contributeur"
+  },
   "copied_to_clipboard": {
     "message": "Copié dans le presse-papiers"
+  },
+  "create_account": {
+    "message": "Créer un compte"
   },
   "customer_interaction": {
     "message": "Interaction avec les clients",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery cessera de fonctionner dans :"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Aidez Ghostery à lutter pour un Web où la vie privée est un droit humain fondamental."
+  },
   "hosting": {
     "message": "Hébergement",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Il existe grâce aux micro-contributions de chaque utilisateur de Ghostery qui choisit d'envoyer des informations non personnelles à WhoTracks.Me. Ces informations permettent à Ghostery de fournir des renseignements en temps réel sur les trackers, ce qui permet de protéger l'ensemble de la communauté Ghostery."
+  },
+  "join_ghostery": {
+    "message": "Rejoignez Ghostery"
   },
   "keep_disabled": {
     "message": "Maintenir désactivé"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "Reprendre"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Enregistrez et synchronisez vos paramètres personnalisés sur vos navigateurs et vos appareils."
+  },
   "search_website___": {
     "message": "Rechercher sur le site..."
   },
   "settings": {
     "message": "Paramètres"
+  },
+  "settings_sync": {
+    "message": "Synchronisation des paramètres"
   },
   "setup_successful": {
     "message": "Configuration réussie"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "Oui"
+  },
+  "you_are_signed_in_as_": {
+    "message": "Vous êtes connecté en tant que :"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Vous pouvez ajuster les paramètres ci-dessous. Nous vous recommandons de les maintenir activés à tout moment."
