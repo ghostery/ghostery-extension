@@ -24,7 +24,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
       // Clear stats memory cache
       console.log('[devtools] Clearing stats memory cache');
-      store.clear(DailyStats);
+      try {
+        store.clear(DailyStats);
+      } catch (e) {
+        console.log('[devtools] Stats memory cache is empty');
+      }
 
       // Clear main local storage
       console.log('[devtools] Clearing main local storage');
