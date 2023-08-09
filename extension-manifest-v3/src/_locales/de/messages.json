@@ -11,6 +11,9 @@
   "about": {
     "message": "Über uns"
   },
+  "account_details": {
+    "message": "Kontodetails"
+  },
   "ad_blocking": {
     "message": "Werbeblocker"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "Kontakt zum Support"
   },
+  "contributor": {
+    "message": "Unterstützer"
+  },
   "copied_to_clipboard": {
     "message": "In die Zwischenablage kopiert"
+  },
+  "create_account": {
+    "message": "Konto erstellen"
   },
   "customer_interaction": {
     "message": "Kundeninteraktion",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery funktioniert nicht mehr in:"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Helfen Sie Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
+  },
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Es existiert dank der Beiträge jedes Ghostery-Nutzers, der sich dafür entscheidet, nicht-personenbezogene Informationen an WhoTracks.Me zu senden. Diese Informationen ermöglichen es Ghostery, Echtzeitinformationen über Tracker zu liefern, die wiederum die gesamte Ghostery-Gemeinschaft schützen."
+  },
+  "join_ghostery": {
+    "message": "Schließen Sie sich Ghostery an"
   },
   "keep_disabled": {
     "message": "Deaktiviert lassen"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "Fortsetzen"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Speichern und synchronisieren Sie Ihre benutzerdefinierten Einstellungen auf verschiedenen Browsern und Geräten."
+  },
   "search_website___": {
     "message": "Website durchsuchen ..."
   },
   "settings": {
     "message": "Einstellungen"
+  },
+  "settings_sync": {
+    "message": "Synchronisationseinstellungen"
   },
   "setup_successful": {
     "message": "Einrichtung erfolgreich"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "Ja"
+  },
+  "you_are_signed_in_as_": {
+    "message": "Sie sind angemeldet als:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Sie können die Einstellungen unten anpassen. Wir empfehlen, sie immer auf AN zu lassen."

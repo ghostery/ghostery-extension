@@ -11,6 +11,9 @@
   "about": {
     "message": "Acerca de"
   },
+  "account_details": {
+    "message": "Detalles de la cuenta"
+  },
   "ad_blocking": {
     "message": "Bloqueador de anuncios"
   },
@@ -83,15 +86,21 @@
   "contact_support": {
     "message": "Contacta con asistencia"
   },
+  "contributor": {
+    "message": "Colaborador"
+  },
   "copied_to_clipboard": {
     "message": "Copiado al portapapeles"
+  },
+  "create_account": {
+    "message": "Crear una cuenta"
   },
   "customer_interaction": {
     "message": "Interacción con el cliente",
     "description": "Tracker category name"
   },
   "days": {
-    "message": "days"
+    "message": "días"
   },
   "detailed_view": {
     "message": "Vista detallada"
@@ -100,7 +109,7 @@
     "message": "Deshabilitar"
   },
   "disable_ghostery": {
-    "message": "Disable Ghostery"
+    "message": "Desactivar Ghostery"
   },
   "disable_trackers_preview": {
     "message": "Deshabilitar vista previa de rastreadores"
@@ -134,7 +143,7 @@
     "message": "¿Habilitar Never-Consent?"
   },
   "enable_new_setup": {
-    "message": "Enable New Setup"
+    "message": "Activar nueva configuración"
   },
   "enabled": {
     "message": "Habilitado"
@@ -151,7 +160,7 @@
     "message": "Para obtener más información, lee todos nuestros"
   },
   "ghostery__action_required": {
-    "message": "Ghostery: Action required"
+    "message": "Ghostery: accion necesaria"
   },
   "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
     "message": "La extensión de navegador Ghostery está instalada en el navegador, pero está inactiva. Estás navegando por la red sin protección."
@@ -202,14 +211,17 @@
     "message": "Ghostery mostrará cuántos rastreadores ha bloqueado en una página. Si haces clic en el icono de Ghostery, verás información más detallada."
   },
   "ghostery_will_stop_working_in_": {
-    "message": "Ghostery will stop working in:"
+    "message": "Ghostery dejará de funcionar en:"
+  },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Únete a Ghostery en la lucha por una web en la que la privacidad sea un derecho humano básico."
   },
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
   },
   "hours": {
-    "message": "hours"
+    "message": "horas"
   },
   "ignore": {
     "message": "Ignorar"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Existe gracias a las microcontribuciones de cada usuario de Ghostery que decide enviar información no personal a WhoTracks.Me. Esta aportación permite a Ghostery proporcionar información en tiempo real sobre los rastreadores, lo que a su vez proporciona protección a toda la comunidad de Ghostery."
+  },
+  "join_ghostery": {
+    "message": "Únete a Ghostery"
   },
   "keep_disabled": {
     "message": "Mantener deshabilitado"
@@ -318,10 +333,10 @@
     "message": "Leer más sobre WhoTracks.Me"
   },
   "renew_ghostery_for_full_protection": {
-    "message": "renew GHOSTERY for full protection"
+    "message": "Renueva GHOSTERY para tener protección total"
   },
   "renew_setup": {
-    "message": "Renew Setup"
+    "message": "Renovar configuración"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Sustituye el icono de Ghostery de la barra de herramientas del navegador por la rueda de rastreadores."
@@ -335,11 +350,17 @@
   "resume": {
     "message": "Reactivar"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Guarda y sincroniza tus ajustes personalizados en todos tus navegadores y dispositivos."
+  },
   "search_website___": {
     "message": "Buscar sitio web..."
   },
   "settings": {
     "message": "Ajustes"
+  },
+  "settings_sync": {
+    "message": "Sincronizar configuración"
   },
   "setup_successful": {
     "message": "La configuración ha terminado"
@@ -397,7 +418,7 @@
     "description": "Tracker category name"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
-    "message": "We have updated Terms & Conditions. To continue using the Ghostery Tracker & Ad Blocker while browsing, please renew the setup."
+    "message": "Actualizamos los Términos y condiciones. Para seguir usando Ghostery Tracker & Ad Blocker mientras navegas, renueva la configuración."
   },
   "website": {
     "message": "Sitio web"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "Sí"
+  },
+  "you_are_signed_in_as_": {
+    "message": "Iniciaste sesión como:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Puedes cambiar los ajustes abajo. Te recomendamos mantenerlos activados en todo momento."

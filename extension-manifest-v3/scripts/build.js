@@ -191,7 +191,9 @@ manifest.web_accessible_resources?.forEach((entry) => {
 // background
 if (manifest.background) {
   source.push(
-    manifest.background.service_worker || manifest.background.scripts[0],
+    manifest.background.service_worker ||
+      manifest.background.page ||
+      manifest.background.scripts[0],
   );
 }
 

@@ -11,6 +11,9 @@
   "about": {
     "message": "정보 "
   },
+  "account_details": {
+    "message": "계정 세부정보"
+  },
   "ad_blocking": {
     "message": "광고 차단"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "연락 지원 "
   },
+  "contributor": {
+    "message": "기부자"
+  },
   "copied_to_clipboard": {
     "message": "클립보드에 복사됨"
+  },
+  "create_account": {
+    "message": "계정 만들기 "
   },
   "customer_interaction": {
     "message": "고객 응대 ",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery 작동 중지까지 남은 시간:"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸울 힘을 주세요."
+  },
   "hosting": {
     "message": "호스팅",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "트래커 정보를 WhoTracks.Me로 전송을 허락해 준 모든 Ghostery 사용자의 이러한 작은 기여들이 모여 Ghostery는 운영됩니다. 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 이렇게 전체 Ghostery 사용자 커뮤니티가 보호받을 수 있습니다."
+  },
+  "join_ghostery": {
+    "message": "Ghostery 가입"
   },
   "keep_disabled": {
     "message": "비활성 상태 유지"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "다시 시작 "
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
+  },
   "search_website___": {
     "message": "웹사이트 검색..."
   },
   "settings": {
     "message": "설정 "
+  },
+  "settings_sync": {
+    "message": "설정 동기화"
   },
   "setup_successful": {
     "message": "셋업 성공"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "예 "
+  },
+  "you_are_signed_in_as_": {
+    "message": "로그인한 계정:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "아래에서 설정을 조정하실 수 있습니다. 항상 켜둘 것을 권장합니다."
