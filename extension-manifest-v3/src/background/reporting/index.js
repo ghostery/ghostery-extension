@@ -230,17 +230,12 @@ if (__PLATFORM__ !== 'safari') {
   });
 }
 
-chrome.runtime.onMessage.addListener((request, sender) => {
+chrome.runtime.onMessage.addListener((msg, sender) => {
   if (!requestReporter) {
     return;
   }
-  if (request.action === 'mousedown') {
-    requestReporter.recordClick(
-      request.event,
-      request.context,
-      request.href,
-      sender,
-    );
+  if (msg.action === 'mousedown') {
+    requestReporter.recordClick(msg.event, msg.context, msg.href, sender);
   }
 });
 

@@ -15,24 +15,26 @@ const Tracker = {
   id: true,
   name: '',
   requests: [{ url: '', blocked: false, modified: false }],
-  requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
-  requestsModified: ({ requests }) => requests.filter((r) => r.modified),
   category: 'unidentified',
   company: '',
   description: '',
   website: '',
   contact: '',
   privacyPolicy: '',
+  requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
+  requestsModified: ({ requests }) => requests.filter((r) => r.modified),
+  requestsObserved: ({ requests }) =>
+    requests.filter((request) => !request.blocked && !request.modified),
 };
 
 const Stats = {
   domain: '',
   trackers: [Tracker],
+  categories: ({ trackers }) => trackers.map((t) => t.category),
   trackersBlocked: ({ trackers }) =>
     trackers.filter((tracker) => tracker.requestsBlocked.length),
   trackersModified: ({ trackers }) =>
     trackers.filter((tracker) => tracker.requestsModified.length),
-  categories: ({ trackers }) => trackers.map((t) => t.category),
 
   [store.connect]: {
     async get() {

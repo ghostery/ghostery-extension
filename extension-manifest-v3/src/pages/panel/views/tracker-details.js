@@ -63,9 +63,7 @@ export default {
     stats.trackers.find((t) => t.id === trackerId),
   wtmUrl: ({ tracker }) =>
     `https://www.whotracks.me/trackers/${tracker.id}.html`,
-  requestsObserved: ({ tracker }) =>
-    tracker.requests.filter((request) => !request.blocked && !request.modified),
-  content: ({ tracker, wtmUrl, requestsObserved }) => html`
+  content: ({ tracker, wtmUrl }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -102,7 +100,7 @@ export default {
             padding:bottom:4
           "
         >
-          ${requestList(msg`URLs observed`, 'shield', requestsObserved)}
+          ${requestList(msg`URLs observed`, 'shield', tracker.requestsObserved)}
           ${requestList(msg`URLs blocked`, 'block', tracker.requestsBlocked)}
           ${requestList(msg`URLs modified`, 'eye', tracker.requestsModified)}
           ${tracker.website &&
