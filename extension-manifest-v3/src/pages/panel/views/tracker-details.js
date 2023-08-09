@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store, msg } from 'hybrids';
+import { html, router, store } from 'hybrids';
 
 import TabStats from '/store/tab-stats.js';
 import { openTabWithUrl } from '/utils/tabs.js';
@@ -33,27 +33,6 @@ function showCopyNotification(host) {
 
   host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
 }
-
-const requestList = (name, icon, requests) =>
-  requests.length > 0 &&
-  html`
-    <ui-icon name=${icon}></ui-icon>
-    <div layout="column gap">
-      <ui-text type="label-s" layout="row gap:0.5">${name}:</ui-text>
-      <div layout="column gap:2">
-        <div layout="column gap">
-          ${requests.map(
-            ({ url }) =>
-              html`
-                <gh-panel-copy oncopy="${showCopyNotification}">
-                  ${url}
-                </gh-panel-copy>
-              `,
-          )}
-        </div>
-      </div>
-    </div>
-  `;
 
 export default {
   [router.connect]: { dialog: true },
@@ -100,9 +79,63 @@ export default {
             padding:bottom:4
           "
         >
-          ${requestList(msg`URLs observed`, 'shield', tracker.requestsObserved)}
-          ${requestList(msg`URLs blocked`, 'block', tracker.requestsBlocked)}
-          ${requestList(msg`URLs modified`, 'eye', tracker.requestsModified)}
+          ${tracker.requestsObserved.length > 0 &&
+          html`
+            <ui-icon name="shield"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs observed</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsObserved.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
+          ${tracker.requestsBlocked.length > 0 &&
+          html`
+            <ui-icon name="block"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs blocked</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsBlocked.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
+          ${tracker.requestsModified.length > 0 &&
+          html`
+            <ui-icon name="eye"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs modified</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsModified.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
           ${tracker.website &&
           html`
             <ui-icon name="globe"></ui-icon>

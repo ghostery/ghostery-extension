@@ -24,7 +24,7 @@ const Tracker = {
   requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
   requestsModified: ({ requests }) => requests.filter((r) => r.modified),
   requestsObserved: ({ requests }) =>
-    requests.filter((request) => !request.blocked && !request.modified),
+    requests.filter((r) => !r.blocked && !r.modified),
 };
 
 const Stats = {
