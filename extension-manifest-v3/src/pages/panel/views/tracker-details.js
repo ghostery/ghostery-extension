@@ -65,17 +65,7 @@ export default {
     `https://www.whotracks.me/trackers/${tracker.id}.html`,
   requestsObserved: ({ tracker }) =>
     tracker.requests.filter((request) => !request.blocked && !request.modified),
-  requestsBlocked: ({ tracker }) =>
-    tracker.requests.filter((request) => request.blocked),
-  requestsModified: ({ tracker }) =>
-    tracker.requests.filter((request) => request.modified),
-  content: ({
-    tracker,
-    wtmUrl,
-    requestsObserved,
-    requestsBlocked,
-    requestsModified,
-  }) => html`
+  content: ({ tracker, wtmUrl, requestsObserved }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -113,8 +103,8 @@ export default {
           "
         >
           ${requestList(msg`URLs observed`, 'shield', requestsObserved)}
-          ${requestList(msg`URLs blocked`, 'block', requestsBlocked)}
-          ${requestList(msg`URLs modified`, 'eye', requestsModified)}
+          ${requestList(msg`URLs blocked`, 'block', tracker.requestsBlocked)}
+          ${requestList(msg`URLs modified`, 'eye', tracker.requestsModified)}
           ${tracker.website &&
           html`
             <ui-icon name="globe"></ui-icon>

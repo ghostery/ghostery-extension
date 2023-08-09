@@ -15,9 +15,8 @@ const Tracker = {
   id: true,
   name: '',
   requests: [{ url: '', blocked: false, modified: false }],
-  requestsBlocked: ({ requests }) => requests.filter((r) => Boolean(r.blocked)),
-  requestsModified: ({ requests }) =>
-    requests.filter((r) => Boolean(r.modified)),
+  requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
+  requestsModified: ({ requests }) => requests.filter((r) => r.modified),
   category: 'unidentified',
   company: '',
   description: '',
@@ -30,9 +29,9 @@ const Stats = {
   domain: '',
   trackers: [Tracker],
   trackersBlocked: ({ trackers }) =>
-    trackers.filter((tracker) => Boolean(tracker.requestsBlocked.length)),
+    trackers.filter((tracker) => tracker.requestsBlocked.length),
   trackersModified: ({ trackers }) =>
-    trackers.filter((tracker) => Boolean(tracker.requestsModified.length)),
+    trackers.filter((tracker) => tracker.requestsModified.length),
   categories: ({ trackers }) => trackers.map((t) => t.category),
 
   [store.connect]: {
