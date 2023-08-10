@@ -92,7 +92,7 @@ const Options = {
         // It looks, that a major part of the users were affected by this issue,
         // so they might have switched off main features not intentionally.
         // We need to switched them on again one time only for onboarded users.
-        if (options.terms) {
+        if (__PLATFORM__ === 'safari' && options.terms) {
           options.blockAds = true;
           options.blockTrackers = true;
           options.blockAnnoyances = true;
