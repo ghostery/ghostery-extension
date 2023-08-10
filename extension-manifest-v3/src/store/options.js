@@ -81,13 +81,17 @@ const Options = {
 
   [store.connect]: {
     async get() {
-      let {
-        options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {},
-        optionsVersion = 0,
-      } = await chrome.storage.local.get(['options', 'optionsVersion']);
+      let { options = {}, optionsVersion = 0 } = await chrome.storage.local.get(
+        ['options', 'optionsVersion'],
+      );
 
       // Migrate options
       if (optionsVersion < 1) {
+        // Migrate from Extension v8 (MV2)
+        if (__PLATFORM__ !== 'safari') {
+          options = migrateFromMV2();
+        }
+
         // The v10.1.0 introduced options rollback when DNR lists fail to update.
         // It looks, that a major part of the users were affected by this issue,
         // so they might have switched off main features not intentionally.
