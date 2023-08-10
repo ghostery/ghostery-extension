@@ -81,18 +81,35 @@ const Options = {
 
   [store.connect]: {
     async get() {
-      let { options = __PLATFORM__ !== 'safari' ? migrateFromMV2() : {} } =
-        await chrome.storage.local.get(['options']);
+      let { options = {}, optionsVersion = 0 } = await chrome.storage.local.get(
+        ['options', 'optionsVersion'],
+      );
 
-      // Migrate `dnrRules` or `engines` to flatten structure:
-      // * `engines` option introduced in v10.0.1
-      // * flatted main features introduced in v10.0.12
-      if (options.engines || options.dnrRules) {
-        const engines = options.engines || options.dnrRules;
+      // Migrate options
+      if (optionsVersion < 1) {
+        // Migrate from Extension v8 (MV2)
+        if (__PLATFORM__ !== 'safari') {
+          options = migrateFromMV2();
+        }
 
-        options.blockAds = engines.ads;
-        options.blockTrackers = engines.tracking;
-        options.blockAnnoyances = engines.annoyances;
+        // The v10.1.0 introduced options rollback when DNR lists fail to update.
+        // It looks, that a major part of the users were affected by this issue,
+        // so they might have switched off main features not intentionally.
+        // We need to switched them on again one time only for onboarded users.
+        if (__PLATFORM__ === 'safari' && options.terms) {
+          options.blockAds = true;
+          options.blockTrackers = true;
+          options.blockAnnoyances = true;
+        }
+
+        // Flush updated options and version to the storage
+        await chrome.storage.local.set({
+          options:
+            __PLATFORM__ === 'firefox'
+              ? JSON.parse(JSON.stringify(options))
+              : options,
+          optionsVersion: 1,
+        });
       }
 
       return options;
