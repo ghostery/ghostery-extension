@@ -11,6 +11,9 @@
   "about": {
     "message": "バージョン情報"
   },
+  "account_details": {
+    "message": "アカウント詳細"
+  },
   "ad_blocking": {
     "message": "広告ブロッキング"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "お問い合わせ先"
   },
+  "contributor": {
+    "message": "Contributor"
+  },
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
+  },
+  "create_account": {
+    "message": "アカウントを作成"
   },
   "customer_interaction": {
     "message": "顧客インタラクション",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghosteryの停止:"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。ぜひサポートをお願いいたします。"
+  },
   "hosting": {
     "message": "ホスティング",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "これは、WhoTracks.Meに個人情報以外の情報を送信することを選択したGhosteryユーザー全員による、小さな貢献のおかげで存在しています。 入力すると、Ghosteryは見返りとしてトラッカーと保護に関するリアルタイムの情報をGhosteryのコミュニティ全体に提供することができます。"
+  },
+  "join_ghostery": {
+    "message": "Ghosteryに登録"
   },
   "keep_disabled": {
     "message": "無効にしておく"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "再開"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
+  },
   "search_website___": {
     "message": "サイトを検索..."
   },
   "settings": {
     "message": "設定"
+  },
+  "settings_sync": {
+    "message": "同期設定"
   },
   "setup_successful": {
     "message": "セットアップ成功"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "はい"
+  },
+  "you_are_signed_in_as_": {
+    "message": "次のユーザーでサインインしています:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "以下で設定を調整することができます。常時ONにしておくことをお勧めします。"

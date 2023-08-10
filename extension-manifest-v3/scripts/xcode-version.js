@@ -1,5 +1,3 @@
-// Open ./xcode/Ghostery.xcodeproj/project.pbxproj and find the line that looks like this:
-// 		GHOSTERY_VERSION = "8.5.0";
 import { resolve } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 

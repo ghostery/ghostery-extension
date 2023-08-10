@@ -11,6 +11,9 @@
   "about": {
     "message": "О программе"
   },
+  "account_details": {
+    "message": "Данные аккаунта"
+  },
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
@@ -83,8 +86,14 @@
   "contact_support": {
     "message": "Contact support"
   },
+  "contributor": {
+    "message": "Участник"
+  },
   "copied_to_clipboard": {
     "message": "Copied to clipboard"
+  },
+  "create_account": {
+    "message": "Создать учетную запись"
   },
   "customer_interaction": {
     "message": "Взаимодействие с клиентами",
@@ -204,6 +213,9 @@
   "ghostery_will_stop_working_in_": {
     "message": "Ghostery перестанет работать здесь:"
   },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Помогите Ghostery в борьбе за конфиденциальность как за основное право человека."
+  },
   "hosting": {
     "message": "Хостинг",
     "description": "Tracker category name"
@@ -219,6 +231,9 @@
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего неперсональную информацию на WhoTracks.Me. Данные позволяют Ghostery оперативно предоставлять информацию о трекерах, что взамен обеспечивает защиту всего сообщества Ghostery."
+  },
+  "join_ghostery": {
+    "message": "Присоединяйтесь к Ghostery"
   },
   "keep_disabled": {
     "message": "Не включать"
@@ -335,11 +350,17 @@
   "resume": {
     "message": "Возобновить"
   },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Сохраняйте свои настройки и синхронизируйте их между браузерами и устройствами."
+  },
   "search_website___": {
     "message": "Search website..."
   },
   "settings": {
     "message": "Настройки"
+  },
+  "settings_sync": {
+    "message": "Синхронизация настроек"
   },
   "setup_successful": {
     "message": "Настройка завершена"
@@ -428,6 +449,9 @@
   },
   "yes": {
     "message": "Да"
+  },
+  "you_are_signed_in_as_": {
+    "message": "Вы вошли как:"
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Вы можете изменить настройки ниже. Рекомендуем включить все функции Ghostery."
