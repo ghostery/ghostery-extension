@@ -284,6 +284,12 @@
   "no_trackers_detected": {
     "message": "未偵測到追蹤器"
   },
+  "number_of_trackers_with_blocked_network_requests_": {
+    "message": "Number of trackers with blocked network requests."
+  },
+  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
+    "message": "Number of trackers with removed cookies or fingerprints."
+  },
   "off": {
     "message": "關閉"
   },
@@ -398,6 +404,9 @@
   "tired_of_cookie_popups_": {
     "message": "厭倦了 Cookie 彈出式視窗？"
   },
+  "trackers_blocked": {
+    "message": "Trackers blocked"
+  },
   "trackers_count": {
     "message": "追蹤器計數"
   },
@@ -406,6 +415,9 @@
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Ghostery 在此網站上偵測到的追蹤器：$${0}"
+  },
+  "trackers_modified": {
+    "message": "Trackers modified"
   },
   "trackers_preview": {
     "message": "追蹤器預覽"
@@ -416,6 +428,15 @@
   "unidentified": {
     "message": "不明",
     "description": "Tracker category name"
+  },
+  "urls_blocked": {
+    "message": "URLs blocked"
+  },
+  "urls_modified": {
+    "message": "URLs modified"
+  },
+  "urls_observed": {
+    "message": "URLs observed"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "我們更新了條款及條件。若要在瀏覽時繼續使用 Ghostery Tracker 和廣告攔截器，請更新設定。"

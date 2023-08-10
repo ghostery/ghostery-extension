@@ -284,6 +284,12 @@
   "no_trackers_detected": {
     "message": "Nenhum rastreador detectado"
   },
+  "number_of_trackers_with_blocked_network_requests_": {
+    "message": "Number of trackers with blocked network requests."
+  },
+  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
+    "message": "Number of trackers with removed cookies or fingerprints."
+  },
   "off": {
     "message": "Desligado"
   },
@@ -398,6 +404,9 @@
   "tired_of_cookie_popups_": {
     "message": "CANSADO DE POPUPS DE COOKIES?"
   },
+  "trackers_blocked": {
+    "message": "Trackers blocked"
+  },
   "trackers_count": {
     "message": "Contagem de rastreadores"
   },
@@ -406,6 +415,9 @@
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Rastreadores detectados pelo Ghostery neste site:&nbsp;$$$${0}"
+  },
+  "trackers_modified": {
+    "message": "Trackers modified"
   },
   "trackers_preview": {
     "message": "Prévia de rastreadores"
@@ -416,6 +428,15 @@
   "unidentified": {
     "message": "Não identificado",
     "description": "Tracker category name"
+  },
+  "urls_blocked": {
+    "message": "URLs blocked"
+  },
+  "urls_modified": {
+    "message": "URLs modified"
+  },
+  "urls_observed": {
+    "message": "URLs observed"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "Atualizamos os Termos e Condições. Para continuar usando o Ghostery Tracker & Ad Blocker durante a navegação, renove a configuração."
