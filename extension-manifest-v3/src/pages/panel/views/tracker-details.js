@@ -41,6 +41,7 @@ export default {
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
   wtmUrl: ({ tracker }) =>
+    tracker.category !== 'unidentified' &&
     `https://www.whotracks.me/trackers/${tracker.id}.html`,
   content: ({ tracker, wtmUrl }) => html`
     <template layout="column">
@@ -57,21 +58,24 @@ export default {
             ${tracker.company}
           </ui-text>
         `}
-        <div layout="column gap:0.5">
-          ${tracker.description &&
-          html`
-            <ui-text type="body-s"> ${cleanUp(tracker.description)} </ui-text>
-          `}
-          ${wtmUrl &&
-          html`
-            <ui-text type="label-xs" color="primary-700" underline>
-              <a href="${wtmUrl}" onclick="${openTabWithUrl}">
-                Read more on WhoTracks.Me
-              </a>
-            </ui-text>
-          `}
-        </div>
-        <ui-line></ui-line>
+        ${(tracker.description || wtmUrl) &&
+        html`
+          <div layout="column gap:0.5">
+            ${tracker.description &&
+            html`
+              <ui-text type="body-s"> ${cleanUp(tracker.description)} </ui-text>
+            `}
+            ${wtmUrl &&
+            html`
+              <ui-text type="label-xs" color="primary-700" underline>
+                <a href="${wtmUrl}" onclick="${openTabWithUrl}">
+                  Read more on WhoTracks.Me
+                </a>
+              </ui-text>
+            `}
+          </div>
+          <ui-line></ui-line>
+        `}
         <section
           layout="
             grid:max|1 items:start:stretch content:start gap:1:2.5
@@ -79,22 +83,63 @@ export default {
             padding:bottom:4
           "
         >
-          <ui-icon name="shield"></ui-icon>
-          <div layout="column gap">
-            <ui-text type="label-s" layout="row gap:0.5">Requests</ui-text>
-            <div layout="column gap:2">
-              <div layout="column gap">
-                ${tracker.requests.map(
-                  ({ url, blocked }) =>
-                    html`
-                      <gh-panel-copy oncopy="${showCopyNotification}">
-                        ${blocked ? html`<s>${url}</s>` : url}
-                      </gh-panel-copy>
-                    `,
-                )}
+          ${tracker.requestsObserved.length > 0 &&
+          html`
+            <ui-icon name="shield"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs observed</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsObserved.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          `}
+          ${tracker.requestsBlocked.length > 0 &&
+          html`
+            <ui-icon name="block"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs blocked</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsBlocked.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
+          ${tracker.requestsModified.length > 0 &&
+          html`
+            <ui-icon name="eye"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs modified</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsModified.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
           ${tracker.website &&
           html`
             <ui-icon name="globe"></ui-icon>

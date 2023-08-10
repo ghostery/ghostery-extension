@@ -89,6 +89,13 @@
       ]
     },
     {
+      "matches": ["*://*/*"],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/whotracksme/reporting.js"
+      ]
+    },
+    {
       "matches": [
         "*://*.google.com/*",
         "*://*.google.ad/*",

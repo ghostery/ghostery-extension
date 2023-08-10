@@ -14,19 +14,27 @@ import { store } from 'hybrids';
 const Tracker = {
   id: true,
   name: '',
-  requests: [{ url: '', blocked: false }],
+  requests: [{ url: '', blocked: false, modified: false }],
   category: 'unidentified',
   company: '',
   description: '',
   website: '',
   contact: '',
   privacyPolicy: '',
+  requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
+  requestsModified: ({ requests }) => requests.filter((r) => r.modified),
+  requestsObserved: ({ requests }) =>
+    requests.filter((r) => !r.blocked && !r.modified),
 };
 
 const Stats = {
   domain: '',
   trackers: [Tracker],
   categories: ({ trackers }) => trackers.map((t) => t.category),
+  trackersBlocked: ({ trackers }) =>
+    trackers.filter((tracker) => tracker.requestsBlocked.length),
+  trackersModified: ({ trackers }) =>
+    trackers.filter((tracker) => tracker.requestsModified.length),
 
   [store.connect]: {
     async get() {

@@ -193,6 +193,14 @@ export default {
             >
             </ui-panel-stats>
           `}
+          ${store.ready(stats) &&
+          html`
+            <gh-panel-feedback
+              modified=${stats.trackersModified.length}
+              blocked=${stats.trackersBlocked.length}
+            ></gh-panel-feedback>
+          `}
+
           <gh-panel-options>
             <span slot="header">Ghostery settings</span>
             <ui-text color="gray-900">
