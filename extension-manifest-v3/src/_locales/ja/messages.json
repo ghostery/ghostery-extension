@@ -284,6 +284,12 @@
   "no_trackers_detected": {
     "message": "トラッカーは検出されませんでした"
   },
+  "number_of_trackers_with_blocked_network_requests_": {
+    "message": "Number of trackers with blocked network requests."
+  },
+  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
+    "message": "Number of trackers with removed cookies or fingerprints."
+  },
   "off": {
     "message": "オフ"
   },
@@ -398,6 +404,9 @@
   "tired_of_cookie_popups_": {
     "message": "クッキーのポップアップにうんざりですか?"
   },
+  "trackers_blocked": {
+    "message": "Trackers blocked"
+  },
   "trackers_count": {
     "message": "トラッカーカウント"
   },
@@ -406,6 +415,9 @@
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "このウェブサイト上でGhosteryがトラッカーを検出:&nbsp;$${0}"
+  },
+  "trackers_modified": {
+    "message": "Trackers modified"
   },
   "trackers_preview": {
     "message": "トラッカーのプレビュー"
@@ -416,6 +428,15 @@
   "unidentified": {
     "message": "未知",
     "description": "Tracker category name"
+  },
+  "urls_blocked": {
+    "message": "URLs blocked"
+  },
+  "urls_modified": {
+    "message": "URLs modified"
+  },
+  "urls_observed": {
+    "message": "URLs observed"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "利用規約を更新しました。Ghosteryのトラッカー＆広告ブロッカーを引き続きご利用いただくには、セットアップを更新してください。"

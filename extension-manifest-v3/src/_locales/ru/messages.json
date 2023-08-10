@@ -284,6 +284,12 @@
   "no_trackers_detected": {
     "message": "Трекеры не обнаружены"
   },
+  "number_of_trackers_with_blocked_network_requests_": {
+    "message": "Number of trackers with blocked network requests."
+  },
+  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
+    "message": "Number of trackers with removed cookies or fingerprints."
+  },
   "off": {
     "message": "Выкл"
   },
@@ -398,6 +404,9 @@
   "tired_of_cookie_popups_": {
     "message": "УСТАЛИ ОТ ВСПЛЫВАЮЩИХ УВЕДОМЛЕНИЙ О ФАЙЛАХ COOKIE?"
   },
+  "trackers_blocked": {
+    "message": "Trackers blocked"
+  },
   "trackers_count": {
     "message": "Trackers Count"
   },
@@ -406,6 +415,9 @@
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Трекеры, обнаруженные Ghostery на этом сайте:&nbsp;$${0}"
+  },
+  "trackers_modified": {
+    "message": "Trackers modified"
   },
   "trackers_preview": {
     "message": "Предварительный просмотр трекеров"
@@ -416,6 +428,15 @@
   "unidentified": {
     "message": "Неизвестно",
     "description": "Tracker category name"
+  },
+  "urls_blocked": {
+    "message": "URLs blocked"
+  },
+  "urls_modified": {
+    "message": "URLs modified"
+  },
+  "urls_observed": {
+    "message": "URLs observed"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "Мы обновили Условия и положения. Чтобы и дальше использовать Ghostery Tracker & Ad Blocker для просмотра веб-страниц, обновите настройки."
