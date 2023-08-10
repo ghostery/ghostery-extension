@@ -39,18 +39,6 @@ if (__PLATFORM__ !== 'firefox') {
         console.log('DNR - Lists successfully updated');
       } catch (e) {
         console.error(`DNR - Error while updating lists:`, e);
-        console.error(`DNR - Rolling back options to the previous state...`);
-
-        const enabledRulesetIds =
-          (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
-
-        store.set(
-          Options,
-          ENGINES.reduce((acc, { name, option }) => {
-            acc[option] = enabledRulesetIds.includes(name);
-            return acc;
-          }, {}),
-        );
       }
     }
   });
