@@ -9,8 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from 'hybrids';
-import Options, { observe, ENGINES } from '/store/options.js';
+import { observe, ENGINES } from '/store/options.js';
 
 if (__PLATFORM__ !== 'firefox') {
   // Ensure that DNR rulesets are equal to those from options.
@@ -39,18 +38,6 @@ if (__PLATFORM__ !== 'firefox') {
         console.log('DNR - Lists successfully updated');
       } catch (e) {
         console.error(`DNR - Error while updating lists:`, e);
-        console.error(`DNR - Rolling back options to the previous state...`);
-
-        const enabledRulesetIds =
-          (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
-
-        store.set(
-          Options,
-          ENGINES.reduce((acc, { name, option }) => {
-            acc[option] = enabledRulesetIds.includes(name);
-            return acc;
-          }, {}),
-        );
       }
     }
   });
