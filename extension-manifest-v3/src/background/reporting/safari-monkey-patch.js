@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-if (!chrome.webRequest) {
+if (__PLATFORM__ === 'safari') {
   chrome.webRequest = {
     OnBeforeRequestOptions: {},
     onBeforeRequest: {

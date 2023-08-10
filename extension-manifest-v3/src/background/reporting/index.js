@@ -9,6 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// TODO: This is a temporary solution to avoid throwing errors in Safari
+import './safari-monkey-patch.js';
+
 import AnonymousCommunication from '@whotracksme/webextension-packages/packages/anonymous-communication';
 import {
   WebRequestPipeline,
