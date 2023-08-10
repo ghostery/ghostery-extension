@@ -104,10 +104,7 @@ const Options = {
 
         // Flush updated options and version to the storage
         await chrome.storage.local.set({
-          options:
-            __PLATFORM__ === 'firefox'
-              ? JSON.parse(JSON.stringify(options))
-              : options,
+          options,
           optionsVersion: 1,
         });
       }
