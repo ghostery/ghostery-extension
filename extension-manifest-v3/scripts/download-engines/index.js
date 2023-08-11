@@ -29,7 +29,7 @@ const ENGINES = {
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
-const MAX_RULE_REQUEST_DOMAINS = 20000;
+const MAX_RULE_REQUEST_DOMAINS = 15000;
 
 shelljs.rm('-rf', TARGET_PATH);
 shelljs.mkdir('-p', TARGET_PATH);

@@ -87,6 +87,8 @@ const Options = {
 
       // Migrate options
       if (optionsVersion < 1) {
+        const keys = [];
+
         // Migrate from Extension v8 (MV2)
         if (__PLATFORM__ !== 'safari') {
           options = migrateFromMV2();
@@ -100,16 +102,18 @@ const Options = {
           options.blockAds = true;
           options.blockTrackers = true;
           options.blockAnnoyances = true;
+
+          keys.push('blockAds', 'blockTrackers', 'blockAnnoyances');
         }
 
         // Flush updated options and version to the storage
         await chrome.storage.local.set({
-          options:
-            __PLATFORM__ === 'firefox'
-              ? JSON.parse(JSON.stringify(options))
-              : options,
+          options,
           optionsVersion: 1,
         });
+
+        // Send updated options to the server
+        Promise.resolve().then(() => sync(options, keys));
       }
 
       return options;
