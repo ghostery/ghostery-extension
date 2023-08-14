@@ -29,7 +29,9 @@ const ENGINES = {
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
-const MAX_RULE_REQUEST_DOMAINS = 15000;
+const MAX_RULE_REQUEST_DOMAINS = 26000;
+
+const debug = process.argv.includes('--debug');
 
 shelljs.rm('-rf', TARGET_PATH);
 shelljs.mkdir('-p', TARGET_PATH);
@@ -101,18 +103,21 @@ for (const [name, target] of Object.entries(ENGINES)) {
         }
         for (const domain of rule.condition.requestDomains) {
           stream.write(
-            getCompatRule({
-              ...rule,
-              condition: {
-                ...rule.condition,
-                requestDomains: undefined,
-                urlFilter: `||${domain}`,
+            getCompatRule(
+              {
+                ...rule,
+                condition: {
+                  ...rule.condition,
+                  requestDomains: undefined,
+                  urlFilter: `||${domain}`,
+                },
               },
-            }),
+              debug,
+            ),
           );
         }
       } else {
-        stream.write(getCompatRule(rule));
+        stream.write(getCompatRule(rule, debug));
       }
     }
 
