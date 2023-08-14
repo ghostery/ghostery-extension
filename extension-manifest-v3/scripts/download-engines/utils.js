@@ -27,13 +27,12 @@ const supportedResourceTypes = [
 
 const supportedActions = ['block', 'allow', 'allowAllRequests'];
 
-export function getCompatRule(rule, shouldLog = false) {
+export function getCompatRule(rule, debug = false) {
   const resourceTypes = rule.condition.resourceTypes?.filter((type) =>
     supportedResourceTypes.includes(type),
   );
 
-  const log = (msg) =>
-    shouldLog && console.warn(`! ${msg}:`, JSON.stringify(rule));
+  const log = (msg) => debug && console.warn(`! ${msg}:`, JSON.stringify(rule));
 
   if (
     // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
