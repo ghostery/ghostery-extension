@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.1.2",
+  "version": "10.1.3",
   "type": "module",
   "scripts": {
     "postinstall": "npm run download-engines && npm run download-whotracksme-bloomfilter",
