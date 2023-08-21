@@ -262,7 +262,6 @@ async function migrateFromMV2() {
         'cliqz-adb',
         'cliqz-kv-store',
         'hpnv2',
-        'insights',
       ].forEach((name) => deleteDB(name).catch(() => {}));
 
       // Set options by hand to make sure, that
