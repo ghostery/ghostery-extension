@@ -9,7 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { html, store } from 'hybrids';
+
+import Options from '/store/options.js';
 
 const VERSION = chrome.runtime.getManifest().version;
 
@@ -42,28 +44,60 @@ function clearStorage(host, event) {
   );
 }
 
+function refresh(host) {
+  host.counter += 1;
+}
+
 export default {
   counter: 0,
+  options: store(Options),
   content: ({ counter }) => html`
     <template layout="column gap:3">
-      ${counter === 5 &&
+      ${counter >= 5 &&
       html`
-        <section layout="column gap" translate="no">
-          <ui-text
-            type="headline-m"
-            mobile-type="headline-s"
-            layout="margin:bottom"
-          >
-            Developer tools
-          </ui-text>
-          <div layout="row">
+        <section layout="column gap:3" translate="no">
+          <ui-text type="headline-m">Developer tools</ui-text>
+          <div layout="column gap">
+            <div layout="column gap items:start">
+              <ui-text type="headline-s">Clear extension storage</ui-text>
+              <ui-button
+                size="small"
+                type="outline"
+                onclick="${clearStorage}"
+                layout="shrink:0"
+              >
+                <button>Clear storage</button>
+              </ui-button>
+            </div>
+          </div>
+          <div layout="column gap items:start">
+            <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+            <ui-text type="body-xs" color="gray-400">
+              The below list is not reactive to changes made in the extension,
+              use refresh button
+            </ui-text>
+            <div layout="row gap">
+              ${html.resolve(
+                chrome.declarativeNetRequest
+                  .getEnabledRulesets()
+                  .then(
+                    (rules) => html`
+                      ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
+                      ${!rules.length &&
+                      html`<ui-text translate="no">
+                        No rulesets enabled...
+                      </ui-text>`}
+                    `,
+                  ),
+              )}
+            </div>
             <ui-button
               size="small"
               type="outline"
-              onclick="${clearStorage}"
+              onclick="${refresh}"
               layout="shrink:0"
             >
-              <button>Clear storage</button>
+              <button>Refresh</button>
             </ui-button>
           </div>
         </section>

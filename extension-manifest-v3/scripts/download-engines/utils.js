@@ -32,19 +32,16 @@ export function getCompatRule(rule, debug = false) {
     supportedResourceTypes.includes(type),
   );
 
-  const log = (msg) => debug && console.warn(`! ${msg}:`, JSON.stringify(rule));
+  const log = (msg) => debug && console.warn(`${msg}:\n`, JSON.stringify(rule));
 
   if (
     // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
-    rule.condition.regexFilter?.match(/(\{\d*,\d*\}|\{\d\}|\|)/) ||
+    rule.condition.regexFilter?.includes('\\d') ||
+    rule.condition.regexFilter?.match(/(\{\d*,\d*\}|\{\d+\}|\|)/) ||
     !supportedActions.includes(rule.action.type) ||
     (resourceTypes && resourceTypes.length === 0)
   ) {
-    return null;
-  }
-
-  if (rule.condition.regexFilter?.includes('\\d')) {
-    log('skipping broken regex');
+    log('Skipping unsupported rule');
     return null;
   }
 
@@ -65,18 +62,18 @@ export function getCompatRule(rule, debug = false) {
       )?.map((d) => `*${d}`),
       urlFilter: rule.condition.urlFilter,
       regexFilter: rule.condition.regexFilter,
-      isUrlFilterCaseSensitive: rule.condition.isUrlFilterCaseSensitive,
+      isUrlFilterCaseSensitive: undefined,
     },
   };
 
   if (!newRule.condition.urlFilter && !newRule.condition.regexFilter) {
     newRule.condition.urlFilter = '*';
-    log('fixing missing urlFilter');
+    log('Fixing missing urlFilter');
   }
 
   if (newRule.condition.urlFilter === '*' && !newRule.condition.domainType) {
     newRule.condition.domainType = 'thirdParty';
-    log('fixing missing domainType');
+    log('Fixing missing domainType');
   }
 
   if (
@@ -84,7 +81,7 @@ export function getCompatRule(rule, debug = false) {
     newRule.condition.regexFilter?.endsWith('/')
   ) {
     newRule.condition.regexFilter = newRule.condition.regexFilter.slice(1, -1);
-    log('fixing regexp');
+    log('Fixing regexp');
   }
 
   return newRule;

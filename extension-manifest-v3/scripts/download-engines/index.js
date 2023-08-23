@@ -29,7 +29,7 @@ const ENGINES = {
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
-const MAX_RULE_REQUEST_DOMAINS = 26000;
+const MAX_RULE_REQUEST_DOMAINS = 1000;
 
 const debug = process.argv.includes('--debug');
 
@@ -94,13 +94,11 @@ for (const [name, target] of Object.entries(ENGINES)) {
       if (rule.condition.requestDomains) {
         if (rule.condition.requestDomains.length > MAX_RULE_REQUEST_DOMAINS) {
           console.log(
-            `Rule has too many domains (${rule.condition.requestDomains.length}), cutting it down to ${MAX_RULE_REQUEST_DOMAINS} domains`,
+            `Rule has too many domains (${rule.condition.requestDomains.length}), omitting it`,
           );
-          rule.condition.requestDomains = rule.condition.requestDomains.slice(
-            0,
-            MAX_RULE_REQUEST_DOMAINS,
-          );
+          continue;
         }
+
         for (const domain of rule.condition.requestDomains) {
           stream.write(
             getCompatRule(
