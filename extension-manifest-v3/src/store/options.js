@@ -45,9 +45,9 @@ export const ENGINES = [
 
 const Options = {
   // Main features
-  blockAds: false,
-  blockTrackers: false,
-  blockAnnoyances: false,
+  blockAds: true,
+  blockTrackers: true,
+  blockAnnoyances: true,
 
   // Never-consent popup
   autoconsent: {

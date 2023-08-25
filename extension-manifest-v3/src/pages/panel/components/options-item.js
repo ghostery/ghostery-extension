@@ -23,7 +23,7 @@ export default {
       </ui-text>
       <ui-text
         type="label-s"
-        color="${enabled ? '' : 'danger-500'}"
+        color="${terms && enabled ? '' : 'danger-500'}"
         ellipsis
         layout="shrink:0"
       >
