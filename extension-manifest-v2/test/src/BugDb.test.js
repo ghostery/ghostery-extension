@@ -1,6 +1,6 @@
+import { getCategoryColor } from '@ghostery/ui/categories';
 import { BugDb } from '../../src/classes/BugDb';
 import globals from '../../src/classes/Globals';
-import { getCategoryColor } from '../../../ui/src/utils/categories';
 
 const { CATEGORIES_BLOCKED_BY_DEFAULT } = globals;
 

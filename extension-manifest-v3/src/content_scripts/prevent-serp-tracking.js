@@ -9,4 +9,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@whotracksme/webextension-packages/packages/prevent-serp-tracking/src/content_scripts/prevent-serp-tracking.js';
+function safeLinkClick(event) {
+  let el = event.target;
+  while (el && !el.href) el = el.parentElement;
+
+  if (!el) return;
+
+  el.removeAttribute('ping');
+
+  const targetUrl =
+    el.pathname === '/url' && new URL(el.href).searchParams.get('url');
+
+  if (targetUrl) {
+    event.stopImmediatePropagation();
+    el.href = targetUrl;
+  }
+}
+
+document.addEventListener('click', safeLinkClick, true);

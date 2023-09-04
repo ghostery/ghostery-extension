@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import setupTrackersPreview from '@whotracksme/webextension-packages/packages/trackers-preview/content_scripts';
+import setupTrackersPreview from '@ghostery/trackers-preview/content_scripts';
 
 setupTrackersPreview(
   chrome.runtime.getURL('pages/trackers-preview/index.html'),

@@ -1,4 +1,4 @@
-name: Test libs
+name: Linting & code style in packages
 
 on:
   push:
@@ -7,11 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  test-libs:
+  test-ui:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/libs
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -22,4 +19,12 @@ jobs:
       - name: Install dependencies in repo root
         run: npm ci
         working-directory: .
-      - run: npm run lint
+      - name: packages/libs
+        run: npm test
+        working-directory: packages/libs
+      - name: packages/trackers-preview
+        run: npm test
+        working-directory: packages/trackers-preview
+      - name: packages/ui
+        run: npm test
+        working-directory: packages/ui
