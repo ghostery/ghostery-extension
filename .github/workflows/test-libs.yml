@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: libs
+        working-directory: packages/libs
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2

@@ -13,7 +13,7 @@
     "patch-package": "^6.5.1"
   },
   "workspaces": [
-    "libs",
+    "packages/libs",
     "ui",
     "extension-manifest-v3",
     "extension-manifest-v2"
