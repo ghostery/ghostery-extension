@@ -17,7 +17,8 @@
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
     "locales": "npm run locales.wtm && npm run locales.ui && npm run locales.src",
     "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
-    "release": "./scripts/release.sh"
+    "release": "./scripts/release.sh",
+    "package": "./scripts/package.sh"
   },
   "author": {
     "name": "Ghostery GmbH",

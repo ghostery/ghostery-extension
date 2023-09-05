@@ -46,6 +46,7 @@ const manifest = JSON.parse(
 );
 
 const config = {
+  logLevel: argv.silent ? 'silent' : undefined,
   configFile: false,
   root: options.srcDir,
   resolve: {
