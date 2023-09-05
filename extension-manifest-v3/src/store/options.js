@@ -91,7 +91,7 @@ const Options = {
 
         // Migrate from Extension v8 (MV2)
         if (__PLATFORM__ !== 'safari') {
-          options = migrateFromMV2();
+          options = await migrateFromMV2();
         }
 
         // The v10.1.0 introduced options rollback when DNR lists fail to update.
