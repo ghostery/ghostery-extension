@@ -35,7 +35,7 @@ const setup = asyncSetup([
   observe(null, (options) => {
     ENGINES.forEach(({ name, option }) => {
       const engine = adblockerEngines.find((e) => e.name === name);
-      engine.isEnabled = options[option];
+      engine.isEnabled = options.terms && options[option];
     });
 
     pausedDomains = options.paused ? options.paused.map(String) : [];
