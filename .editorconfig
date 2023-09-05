@@ -13,6 +13,3 @@ block_comment_end = */
 
 [*.md]
 indent_size = 4
-
-[src/_locales/**/*.json]
-indent_style = tab
