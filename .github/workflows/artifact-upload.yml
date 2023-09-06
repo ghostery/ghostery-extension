@@ -1,25 +1,23 @@
-name: Upload builds
+name: Artifact Upload
 
 on:
-  push
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
-  upload-builds-mv3:
+  artifact-upload:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: extension-manifest-v3
     steps:
-      - uses: jwalton/gh-find-current-pr@v1
-        id: findPr
-        with:
-          state: open
-      - run: exit 1
-        if: steps.findPr.outputs.number == null
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '19.8.1'
+          node-version-file: '.tool-versions'
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
       - name: Install dependencies in repo root
@@ -31,11 +29,6 @@ jobs:
         uses: actions/upload-artifact@v3
         id: upload
         with:
-          name: builds
+          name: Ghostery 10 builds
           path: extension-manifest-v3/web-ext-artifacts/*
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          pr_number: ${{ steps.findPr.outputs.pr }}
-          message: |
-            Hello world ${{ steps.findPr.outputs.pr }} ! :wave:
+          if-no-files-found: error
