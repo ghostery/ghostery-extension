@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import {
   tryWTMReportOnMessageHandler,
   isDisableWTMReportMessage,
-} from '@whotracksme/webextension-packages/packages/trackers-preview/background';
+} from '@ghostery/trackers-preview/background';
 
 import Options from '/store/options.js';
 

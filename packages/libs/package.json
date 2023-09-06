@@ -2,24 +2,19 @@
   "name": "@ghostery/libs",
   "version": "1.0.0",
   "private": true,
-  "description": "",
-  "license": "MPL-2.0",
   "type": "module",
+  "author": "Ghostery GmbH",
+  "license": "MPL-2.0",
   "sideEffects": false,
   "exports": {
     ".": "./src/index.js"
   },
   "scripts": {
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test" : "npm run lint"
   },
   "dependencies": {
     "ua-parser-js": "^1.0.2",
     "webextension-polyfill": "^0.10.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.7.1"
   }
 }

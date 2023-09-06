@@ -16,7 +16,7 @@ import {
   close,
   disable,
   updateIframeHeight,
-} from '@whotracksme/webextension-packages/packages/trackers-preview/page_scripts';
+} from '@ghostery/trackers-preview/page_scripts';
 
 const domain = new URLSearchParams(window.location.search).get('domain');
 const stats = getStats(domain);

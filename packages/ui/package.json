@@ -1,8 +1,9 @@
 {
   "name": "@ghostery/ui",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.3.3",
-  "description": "",
+  "author": "Ghostery GmbH",
+  "license": "MPL-2.0",
   "exports": {
     "./autoconsent": "./src/modules/autoconsent/index.js",
     "./onboarding": "./src/modules/onboarding/index.js",
@@ -16,19 +17,8 @@
     "./iframe": "./src/utils/iframe.js"
   },
   "scripts": {
-    "lint": "eslint ./src"
-  },
-  "author": {
-    "name": "Ghostery GmbH",
-    "email": "info@ghostery.com",
-    "url": "https://www.ghostery.com"
-  },
-  "license": "MPL-2.0",
-  "devDependencies": {
-    "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.6.2"
+    "lint": "eslint ./src",
+    "test": "npm run lint"
   },
   "dependencies": {
     "hybrids": "^8.2.2"

@@ -476,7 +476,7 @@
       ],
       "run_at": "document_end",
       "css": [
-        "node_modules/@whotracksme/webextension-packages/packages/trackers-preview/src/content_scripts/styles.css"
+        "node_modules/@ghostery/trackers-preview/src/content_scripts/styles.css"
       ],
       "js": [
         "content_scripts/trackers-preview.js"

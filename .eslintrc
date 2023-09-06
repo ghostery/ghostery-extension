@@ -1,16 +1,18 @@
 {
+  "root": true,
   "env": {
     "es2020": true,
     "browser": true,
+    "node": true,
     "serviceworker": true,
-    "webextensions": true,
-    "mocha": true
+    "webextensions": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
+    "ecmaVersion": "latest",
     "sourceType": "module"
   }
 }

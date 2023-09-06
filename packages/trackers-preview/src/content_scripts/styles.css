@@ -1,0 +1,48 @@
+/**
+ * WhoTracks.Me
+ * https://whotracks.me/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.wtm-tracker-wheel-container {
+  display: inline-flex;
+  visibility: visible;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  vertical-align: middle;
+  padding-left: 8px;
+  margin-top: -1px;
+}
+
+.wtm-tracker-wheel-container label {
+  margin-left: 3px;
+  font-size: 11px;
+  line-height: 11px;
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+}
+
+.wtm-popup-iframe-wrapper {
+  position: absolute;
+  width: 350px;
+  height: 338px;
+  z-index: 127;
+  border: 1px solid #C3CAD9;
+  box-shadow: 30px 60px 160px rgba(32, 44, 68, 0.4);
+  border-radius: 16px;
+  background: white;
+}
+
+.wtm-popup-iframe-wrapper iframe {
+  border: 0px;
+  height: 100%;
+  width: 100%;
+  border-radius: 16px;
+}
