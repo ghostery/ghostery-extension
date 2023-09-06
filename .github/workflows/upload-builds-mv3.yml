@@ -1,0 +1,35 @@
+name: Upload builds
+
+on:
+  push
+
+jobs:
+  upload-builds-mv3:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension-manifest-v3
+    steps:
+      - uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+        with:
+          state: open
+      - run: exit 1
+        if: steps.findPr.outputs.number == null
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '19.8.1'
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+      - name: Install dependencies in repo root
+        run: npm ci
+        working-directory: .
+      - name: Build packages
+        run: npm run package
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          pr_number: ${{ steps.findPr.outputs.pr }}
+          message: |
+            Hello world ${{ steps.findPr.outputs.pr }} ! :wave:
