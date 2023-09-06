@@ -1,4 +1,4 @@
-name: Comment Artifact URL on PR
+name: Comment Artifact URL on PRs
 
 on:
   workflow_run:
