@@ -25,10 +25,27 @@ jobs:
         working-directory: .
       - name: Build packages
         run: npm run package -- --sha
-      - name: Upload builds
+      - name: Upload Chrome build
         uses: actions/upload-artifact@v3
-        id: upload
         with:
-          name: Ghostery 10 builds
-          path: extension-manifest-v3/web-ext-artifacts/*
+          name: Ghostery 10 for Chrome
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-chrome-*
+          if-no-files-found: error
+      - name: Upload Firefox build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ghostery 10 for Firefox
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-firefox-*
+          if-no-files-found: error
+      - name: Upload Edge build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ghostery 10 for Edge
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-edge-*
+          if-no-files-found: error
+      - name: Upload Opera build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ghostery 10 for Opera
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-opera-*
           if-no-files-found: error
