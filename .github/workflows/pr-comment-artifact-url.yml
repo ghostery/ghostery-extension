@@ -42,7 +42,11 @@ jobs:
               artifacts.json)
           )
           echo -e "PR COMMENT: \n$PR_COMMENT"
-          echo "PR_COMMENT=\"$PR_COMMENT\"" >> "$GITHUB_ENV"
+          {
+            echo 'PR_COMMENT<<EOF'
+            echo -e "$PR_COMMENT"
+            echo EOF
+          } >> "$GITHUB_ENV"
       - name: Update Comment
         env:
           HEAD_SHA: ${{ env.HEAD_SHA }}
