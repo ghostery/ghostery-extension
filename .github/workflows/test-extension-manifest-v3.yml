@@ -14,9 +14,9 @@ jobs:
         working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '19.8.1'
+          node-version-file: '.tool-versions'
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
       - name: Install dependencies in repo root
