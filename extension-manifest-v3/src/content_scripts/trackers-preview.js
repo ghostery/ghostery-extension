@@ -11,6 +11,8 @@
 
 import setupTrackersPreview from '@ghostery/trackers-preview/content_scripts';
 
-setupTrackersPreview(
-  chrome.runtime.getURL('pages/trackers-preview/index.html'),
-);
+document.addEventListener('DOMContentLoaded', () => {
+  setupTrackersPreview(
+    chrome.runtime.getURL('pages/trackers-preview/index.html'),
+  );
+});

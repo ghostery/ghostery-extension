@@ -25,6 +25,7 @@ export const SYNC_OPTIONS = [
   'trackerWheel',
   'trackerCount',
   'wtmSerpReport',
+  'serpTrackingPrevention',
   'panel',
 ];
 
@@ -61,8 +62,9 @@ const Options = {
   trackerWheel: true,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
-  // Tracker wheel on SERP
+  // SERP
   wtmSerpReport: true,
+  serpTrackingPrevention: true,
 
   // Onboarding
   terms: false,
