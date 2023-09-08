@@ -6,15 +6,23 @@ on:
       - opened
       - reopened
       - synchronize
+      - labeled
 
 jobs:
   artifact-upload:
+    if: contains(github.event.pull_request.labels.*.name, 'package')
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
+      - run: |
+          SHA=$(git rev-parse --short "$GITHUB_SHA")
+          echo "SHA=$SHA" >> "$GITHUB_ENV"
+
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.tool-versions'
@@ -24,11 +32,34 @@ jobs:
         run: npm ci
         working-directory: .
       - name: Build packages
-        run: npm run package -- --sha
-      - name: Upload builds
+        run: npm run package -- --simple
+      - name: Uncompress packages
+        run: |
+          for PLATFORM in firefox chrome edge opera; do
+            mkdir web-ext-artifacts/ghostery-$PLATFORM
+            unzip "web-ext-artifacts/ghostery-$PLATFORM.zip" -d "web-ext-artifacts/ghostery-$PLATFORM"
+          done
+      - name: Upload Chrome build
         uses: actions/upload-artifact@v3
-        id: upload
         with:
-          name: Ghostery 10 builds
-          path: extension-manifest-v3/web-ext-artifacts/*
+          name: ghostery-chrome-${{ env.VERSION }}-${{ env.SHA }}
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-chrome/*
+          if-no-files-found: error
+      - name: Upload Firefox build
+        uses: actions/upload-artifact@v3
+        with:
+          name: ghostery-firefox-${{ env.VERSION }}-${{ env.SHA }}
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-firefox/*
+          if-no-files-found: error
+      - name: Upload Edge build
+        uses: actions/upload-artifact@v3
+        with:
+          name: ghostery-edge-${{ env.VERSION }}-${{ env.SHA }}
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-edge/*
+          if-no-files-found: error
+      - name: Upload Opera build
+        uses: actions/upload-artifact@v3
+        with:
+          name: ghostery-opera-${{ env.VERSION }}-${{ env.SHA }}
+          path: extension-manifest-v3/web-ext-artifacts/ghostery-opera/*
           if-no-files-found: error
