@@ -32,6 +32,11 @@ const PREVIEWS = {
     title: msg`Never Consent`,
     description: msg`Automatically rejects of cookie consent notices.`,
   },
+  'serp_tracking': {
+    src: assets.serp_tracking,
+    title: msg`Tracking Prevention on Search Engine Result Pages`,
+    description: msg`While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage.`,
+  },
 };
 
 function toggleNeverConsent({ options }) {
@@ -126,6 +131,35 @@ export default {
               <ui-settings-toggle
                 value="${options.blockAnnoyances}"
                 onchange="${toggleNeverConsent}"
+              ></ui-settings-toggle>
+            </div>
+          </div>
+          <ui-text type="headline-m" mobile-type="headline-s">
+            Further Protection
+          </ui-text>
+          <div layout="row items:start gap:2" layout@768px="gap:5">
+            <a href="${router.url(Preview, PREVIEWS['serp_tracking'])}">
+              <ui-settings-help-image>
+                <img src="${assets.serp_tracking_small}" alt="Serp Tracking" />
+              </ui-settings-help-image>
+            </a>
+            <div
+              layout="column gap:2"
+              layout@768px="row items:center gap:5 grow"
+            >
+              <div layout="column grow gap:0.5">
+                <ui-text type="headline-s">
+                  Tracking Prevention on Search Engine Result Pages
+                </ui-text>
+                <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  While using a non-private search engine like Google or Bing,
+                  Ghostery detects and displays trackers even before you visit a
+                  webpage.
+                </ui-text>
+              </div>
+              <ui-settings-toggle
+                value="${options.serpTracking}"
+                onchange="${html.set(options, 'serpTracking')}"
               ></ui-settings-toggle>
             </div>
           </div>

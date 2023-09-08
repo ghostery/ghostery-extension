@@ -63,6 +63,8 @@ const Options = {
 
   // Tracker wheel on SERP
   wtmSerpReport: true,
+  // Prevent SERP tracking
+  serpTracking: true,
 
   // Onboarding
   terms: false,
