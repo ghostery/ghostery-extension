@@ -203,7 +203,9 @@ export async function sync(options, keys) {
       const { revision } = await setUserOptions(
         SYNC_OPTIONS.reduce(
           (acc, key) => {
-            acc[key] = options[key];
+            if (hasOwnProperty.call(options, key)) {
+              acc[key] = options[key];
+            }
             return acc;
           },
           { revision: serverOptions.revision + 1 },
