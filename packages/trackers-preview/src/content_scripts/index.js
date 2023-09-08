@@ -94,7 +94,7 @@ function removeWheel(anchor) {
 export default function setupTrackersPreview(popupUrl) {
   const elements = [
     ...window.document.querySelectorAll(
-      '[data-hveid] div.yuRUbf > div > a, [data-hveid] div.xpd a.cz3goc, [data-hveid] > .xpd > div.kCrYT:first-child > a',
+      '[data-hveid] div.yuRUbf > div > span > a, [data-hveid] div.yuRUbf > div > a, [data-hveid] div.xpd a.cz3goc, [data-hveid] > .xpd > div.kCrYT:first-child > a',
     ),
   ].filter((el) => !el.dataset.wtm);
 
