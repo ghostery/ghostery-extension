@@ -184,7 +184,11 @@ manifest.web_accessible_resources?.forEach((entry) => {
       shelljs.mkdir('-p', resolve(options.outDir, dir));
       shelljs.cp('', path, resolve(options.outDir, dir));
     } else {
-      source.push(path);
+      if (path.match(/\.html$/)) {
+        source.push(path);
+      } else {
+        content_scripts.push(path);
+      }
     }
   });
 });
