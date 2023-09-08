@@ -17,7 +17,7 @@ import './dnr.js';
 import './paused.js';
 import './session.js';
 import './stats.js';
-import './trackers-preview.js';
+import './serp.js';
 
 import './helpers.js';
 import './external.js';

@@ -25,6 +25,7 @@ export const SYNC_OPTIONS = [
   'trackerWheel',
   'trackerCount',
   'wtmSerpReport',
+  'serpTrackingPrevention',
   'panel',
 ];
 
@@ -61,8 +62,9 @@ const Options = {
   trackerWheel: true,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
-  // Tracker wheel on SERP
+  // SERP
   wtmSerpReport: true,
+  serpTrackingPrevention: true,
 
   // Onboarding
   terms: false,
@@ -203,7 +205,9 @@ export async function sync(options, keys) {
       const { revision } = await setUserOptions(
         SYNC_OPTIONS.reduce(
           (acc, key) => {
-            acc[key] = options[key];
+            if (hasOwnProperty.call(options, key)) {
+              acc[key] = options[key];
+            }
             return acc;
           },
           { revision: serverOptions.revision + 1 },
@@ -225,9 +229,9 @@ async function migrateFromMV2() {
 
     // Proceed if the storage contains data from v2
     if ('version_history' in storage) {
-      options.blockAds = storage.enable_ad_block || false;
-      options.blockTrackers = storage.enable_anti_tracking || false;
-      options.blockAnnoyances = storage.enable_autoconsent || false;
+      options.blockAds = storage.enable_ad_block || true;
+      options.blockTrackers = storage.enable_anti_tracking || true;
+      options.blockAnnoyances = storage.enable_autoconsent || true;
 
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,
