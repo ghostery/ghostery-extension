@@ -152,9 +152,8 @@ export default {
                   Tracking Prevention on Search Engine Result Pages
                 </ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  While using a non-private search engine like Google or Bing,
-                  Ghostery detects and displays trackers even before you visit a
-                  webpage.
+                  While using a non-private search engine like Google, Ghostery
+                  detects and displays trackers even before you visit a webpage.
                 </ui-text>
               </div>
               <ui-settings-toggle
