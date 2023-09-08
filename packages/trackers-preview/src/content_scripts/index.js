@@ -178,7 +178,6 @@ export default function setupTrackersPreview(popupUrl) {
     const observer = new MutationObserver((mutations) => {
       if (mutations.some((m) => m.addedNodes.length)) {
         observer.disconnect();
-        console.log('delaying setupTrackersPreview');
         setTimeout(() => setupTrackersPreview(popupUrl), 500);
       }
     });
