@@ -158,8 +158,8 @@ export default {
                 </ui-text>
               </div>
               <ui-settings-toggle
-                value="${options.serpTracking}"
-                onchange="${html.set(options, 'serpTracking')}"
+                value="${options.serpTrackingPrevention}"
+                onchange="${html.set(options, 'serpTrackingPrevention')}"
               ></ui-settings-toggle>
             </div>
           </div>

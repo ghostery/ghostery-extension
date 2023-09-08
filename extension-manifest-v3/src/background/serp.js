@@ -33,7 +33,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
         });
       }
 
-      if (options.wtmSerpReport || options.serpTracking) {
+      if (options.wtmSerpReport || options.serpTrackingPrevention) {
         chrome.scripting.executeScript(
           {
             injectImmediately: true,
@@ -45,7 +45,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
               ...(options.wtmSerpReport
                 ? ['/content_scripts/trackers-preview.js']
                 : null),
-              ...(options.serpTracking
+              ...(options.serpTrackingPrevention
                 ? ['/content_scripts/prevent-serp-tracking.js']
                 : null),
             ],

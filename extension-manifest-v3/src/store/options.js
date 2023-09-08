@@ -61,10 +61,9 @@ const Options = {
   trackerWheel: true,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
-  // Tracker wheel on SERP
+  // SERP
   wtmSerpReport: true,
-  // Prevent SERP tracking
-  serpTracking: true,
+  serpTrackingPrevention: true,
 
   // Onboarding
   terms: false,
