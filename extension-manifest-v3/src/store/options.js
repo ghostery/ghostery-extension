@@ -25,6 +25,7 @@ export const SYNC_OPTIONS = [
   'trackerWheel',
   'trackerCount',
   'wtmSerpReport',
+  'serpTrackingPrevention',
   'panel',
 ];
 
