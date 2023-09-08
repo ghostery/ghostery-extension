@@ -96,7 +96,7 @@ export default function setupTrackersPreview(popupUrl) {
     ...window.document.querySelectorAll(
       '[data-hveid] div.yuRUbf > div > span > a, [data-hveid] div.yuRUbf > div > a, [data-hveid] div.xpd a.cz3goc, [data-hveid] > .xpd > div.kCrYT:first-child > a',
     ),
-  ];
+  ].filter((el) => !el.dataset.wtm);
 
   if (elements.length) {
     const links = elements.map((el) => {
@@ -117,15 +117,6 @@ export default function setupTrackersPreview(popupUrl) {
           );
           return;
         }
-
-        document.addEventListener('click', (event) => {
-          let el = event.target;
-          while (el && !el.href) el = el.parentElement;
-
-          if (!el) return;
-
-          closePopups();
-        });
 
         elements.forEach((anchor, i) => {
           const stats = response.wtmStats[i];
@@ -151,6 +142,8 @@ export default function setupTrackersPreview(popupUrl) {
               } else {
                 container.appendChild(wheelEl);
               }
+
+              anchor.dataset.wtm = 1;
             } catch (e) {
               console.warn(
                 'Unexpected error while rendering the Tracker Preview wheel',
@@ -180,6 +173,18 @@ export default function setupTrackersPreview(popupUrl) {
         const height = message.data.split(':')[1];
         resizePopup(height);
       }
+    });
+
+    const observer = new MutationObserver((mutations) => {
+      if (mutations.some((m) => m.addedNodes.length)) {
+        observer.disconnect();
+        setTimeout(() => setupTrackersPreview(popupUrl), 500);
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
   }
 }
