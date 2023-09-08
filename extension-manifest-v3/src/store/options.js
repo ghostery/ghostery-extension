@@ -225,9 +225,9 @@ async function migrateFromMV2() {
 
     // Proceed if the storage contains data from v2
     if ('version_history' in storage) {
-      options.blockAds = storage.enable_ad_block || false;
-      options.blockTrackers = storage.enable_anti_tracking || false;
-      options.blockAnnoyances = storage.enable_autoconsent || false;
+      options.blockAds = storage.enable_ad_block || true;
+      options.blockTrackers = storage.enable_anti_tracking || true;
+      options.blockAnnoyances = storage.enable_autoconsent || true;
 
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,
