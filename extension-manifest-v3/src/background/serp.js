@@ -18,7 +18,8 @@ import css from '@ghostery/trackers-preview/content_scripts/styles.css?raw';
 
 import Options from '/store/options.js';
 
-const SERP_URL_REGEXP = /google\.[a-z]+(\.[a-z]+)?\/search/;
+const SERP_URL_REGEXP =
+  /^https:[/][/][^/]*[.]google[.][a-z]+([.][a-z]+)?[/]search/;
 
 chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.url.match(SERP_URL_REGEXP)) {
