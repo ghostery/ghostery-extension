@@ -159,6 +159,9 @@
   "for_more_information_read_our_full": {
     "message": "Per maggiori informazioni, visita il nostro sito"
   },
+  "further_protection": {
+    "message": "Further Protection"
+  },
   "ghostery__action_required": {
     "message": "Ghostery: azione richiesta"
   },
@@ -425,6 +428,9 @@
   "trackers_wheel": {
     "message": "Ruota tracker"
   },
+  "tracking_prevention_on_search_engine_result_pages": {
+    "message": "Tracking Prevention on Search Engine Result Pages"
+  },
   "unidentified": {
     "message": "Non identificato",
     "description": "Tracker category name"
@@ -458,6 +464,12 @@
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
     "message": "Mettendo in pausa Ghostery nei singoli siti web, tali siti appariranno qui."
+  },
+  "while_using_a_non_private_search_engine_like_google__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
+    "message": "While using a non-private search engine like Google, Ghostery detects and displays trackers even before you visit a webpage."
+  },
+  "while_using_a_non_private_search_engine_like_google_or_bing__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
+    "message": "While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, gestito da Ghostery, è parte integrante della tecnologia anti-tracciamento AI di Ghostery. Si tratta di una risorsa globale completa sui tracker, che porta trasparenza al tracciamento sul web."
