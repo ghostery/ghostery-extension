@@ -30,18 +30,9 @@ export const SYNC_OPTIONS = [
 ];
 
 export const ENGINES = [
-  {
-    name: 'ads',
-    option: 'blockAds',
-  },
-  {
-    name: 'tracking',
-    option: 'blockTrackers',
-  },
-  {
-    name: 'annoyances',
-    option: 'blockAnnoyances',
-  },
+  { name: 'ads', key: 'blockAds' },
+  { name: 'tracking', key: 'blockTrackers' },
+  { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
 const Options = {

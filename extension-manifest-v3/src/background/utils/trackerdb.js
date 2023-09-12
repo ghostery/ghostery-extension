@@ -9,22 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FiltersEngine } from '@cliqz/adblocker';
+import * as engines from './engines.js';
 
-let engine;
-let trackerDBStartupPromise = (async () => {
-  const response = await fetch(
-    chrome.runtime.getURL('rule_resources/engine-trackerdb.dat'),
-  );
-  const rawTrackerDB = await response.arrayBuffer();
-  engine = FiltersEngine.deserialize(new Uint8Array(rawTrackerDB));
-  trackerDBStartupPromise = undefined;
-})();
+engines.init('trackerdb');
 
 export async function getMetadata(request) {
-  if (trackerDBStartupPromise) {
-    await trackerDBStartupPromise;
-  }
+  const engine = engines.get('trackerdb');
+  if (!engine) return null;
 
   let matches = engine.getPatternMetadata(request);
 
@@ -54,9 +45,8 @@ export async function getMetadata(request) {
 
 const patterns = new Map();
 export async function getPattern(key) {
-  if (trackerDBStartupPromise) {
-    await trackerDBStartupPromise;
-  }
+  const engine = engines.get('trackerdb');
+  if (!engine) return null;
 
   if (!patterns.size) {
     for (const p of engine.metadata.getPatterns()) {

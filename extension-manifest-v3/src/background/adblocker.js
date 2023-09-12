@@ -9,7 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { FiltersEngine } from '@cliqz/adblocker';
 import {
   filterRequestHTML,
   updateResponseHeadersWithCSP,
@@ -20,37 +19,28 @@ import { observe, ENGINES } from '/store/options.js';
 
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
+import * as engines from './utils/engines.js';
 
 import { setupTabStats, updateTabStats } from './stats.js';
 
-const adblockerEngines = ENGINES.map((engine) => ({
-  ...engine,
-  engine: null,
-  isEnabled: false,
-}));
-
+let enabledEngines = [];
 let pausedDomains = [];
 
 const setup = asyncSetup([
   observe(null, (options) => {
-    ENGINES.forEach(({ name, option }) => {
-      const engine = adblockerEngines.find((e) => e.name === name);
-      engine.isEnabled = options.terms && options[option];
-    });
+    // Set enabled engines
+    enabledEngines = ENGINES.reduce((acc, { name, key }) => {
+      if (options.terms && options[key]) {
+        acc.push(name);
+      }
+      return acc;
+    }, []);
 
+    // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
-  ...adblockerEngines.map(async (engine) => {
-    const response = await fetch(
-      chrome.runtime.getURL(
-        `rule_resources/engine-${engine.name}${
-          __PLATFORM__ === 'firefox' ? '' : '-cosmetics'
-        }.dat`,
-      ),
-    );
-    const engineBytes = await response.arrayBuffer();
-    engine.engine = FiltersEngine.deserialize(new Uint8Array(engineBytes));
-  }),
+  // Initial load of engines
+  ...ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
 function adblockerInjectStylesWebExtension(
@@ -123,10 +113,9 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
-  adblockerEngines.forEach(({ engine, isEnabled }) => {
-    if (!isEnabled) {
-      return;
-    }
+  enabledEngines.forEach((name) => {
+    const engine = engines.get(name);
+    if (!engine) return;
 
     // Once per tab/page load we inject base stylesheets. These are always
     // the same for all frames of a given page because they do not depend on
@@ -290,10 +279,9 @@ async function injectScriptlets(tabId, url) {
     return;
   }
 
-  adblockerEngines.forEach(({ isEnabled, engine }) => {
-    if (isEnabled === false) {
-      return;
-    }
+  enabledEngines.forEach((name) => {
+    const engine = engines.get(name);
+    if (!engine) return;
 
     const { active, scripts } = engine.getCosmeticsFilters({
       url: url,
@@ -369,10 +357,9 @@ if (__PLATFORM__ === 'firefox') {
 
         if (isPaused(details, request)) return;
 
-        for (const { engine, isEnabled } of adblockerEngines) {
-          if (!engine || isEnabled === false) {
-            continue;
-          }
+        for (const name of enabledEngines) {
+          const engine = engines.get(name);
+          if (!engine) continue;
 
           if (request.isMainFrame()) {
             const htmlFilters = engine.getHtmlFilters(request);
@@ -408,8 +395,9 @@ if (__PLATFORM__ === 'firefox') {
       if (isPaused(details, request)) return;
 
       let policies;
-      for (const { engine, isEnabled } of adblockerEngines) {
-        if (isEnabled) {
+      for (const name of enabledEngines) {
+        const engine = engines.get(name);
+        if (engine) {
           policies = engine.getCSPDirectives(request);
           if (policies !== undefined) {
             break;
