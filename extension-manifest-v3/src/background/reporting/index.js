@@ -62,6 +62,15 @@ function platformSpecificSettings() {
     };
   }
 
+  if (navigator.userAgent.includes('Android')) {
+    return {
+      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
+      PATTERNS_URL:
+        'https://cdn2.ghostery.com/wtm-ghostery-android/patterns.json',
+      CHANNEL: 'android',
+    };
+  }
+
   console.warn(
     'No matching config found. Falling back to patterns from Chrome Desktop.',
   );
