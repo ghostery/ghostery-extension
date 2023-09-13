@@ -31,14 +31,15 @@ function saveToMemory(name, engine) {
 
 const DB_NAME = registerDatabase('engines');
 
-function getDB() {
+async function getDB() {
   if (!getDB.current) {
     getDB.current = IDB.openDB(DB_NAME, 1, {
       upgrade(db) {
         db.createObjectStore('engines');
       },
-      blocking() {
-        getDB.current.close();
+      async blocking() {
+        const db = await getDB.current;
+        db.close();
         getDB.current = null;
       },
     });
@@ -93,7 +94,7 @@ function check(response) {
   return response;
 }
 
-async function updateEngine(name) {
+async function update(name) {
   try {
     const urlName =
       name === 'trackerdb'
@@ -265,7 +266,12 @@ async function updateEngine(name) {
     return engine;
   } catch (e) {
     console.error(`Failed to update engine "${name}"`, e);
+    throw e;
   }
+}
+
+export function updateAll() {
+  return Promise.all(Array.from(engines.keys()).map((name) => update(name)));
 }
 
 async function loadFromDisk(name) {
@@ -287,7 +293,7 @@ async function loadFromDisk(name) {
     // After initial load from disk, schedule an update
     // as it is done only once on the first run.
     // After loading from disk, it should be loaded from the storage
-    updateEngine(name);
+    update(name).catch(() => null);
 
     return engine;
   } catch (e) {
@@ -321,7 +327,7 @@ export async function init(name) {
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name.startsWith(ALARM_PREFIX)) {
     const name = alarm.name.slice(ALARM_PREFIX.length);
-    updateEngine(name);
+    update(name).catch(() => null);
 
     chrome.alarms.create(alarm.name, {
       delayInMinutes: ALARM_DELAY,

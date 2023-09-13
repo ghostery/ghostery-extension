@@ -10,38 +10,58 @@
  */
 
 import { store } from 'hybrids';
-import DailyStats from '/store/daily-stats';
 
+import DailyStats from '/store/daily-stats';
 import Options from '/store/options.js';
+
 import { deleteDatabases } from '/utils/indexeddb.js';
 
+import * as engines from './utils/engines.js';
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.action === 'clearStorage') {
-    (async () => {
-      // Restore options to default values
-      console.log('[devtools] Restoring options to default values');
-      await store.set(Options, null);
+  switch (msg.action) {
+    case 'clearStorage':
+      (async () => {
+        try {
+          // Restore options to default values
+          console.log('[devtools] Restoring options to default values');
+          await store.set(Options, null);
 
-      // Clear stats memory cache
-      console.log('[devtools] Clearing stats memory cache');
-      try {
-        store.clear(DailyStats);
-      } catch (e) {
-        console.log('[devtools] Stats memory cache is empty');
-      }
+          // Clear stats memory cache
+          console.log('[devtools] Clearing stats memory cache');
+          try {
+            store.clear(DailyStats);
+          } catch (e) {
+            console.log('[devtools] Stats memory cache is empty');
+          }
 
-      // Clear main local storage
-      console.log('[devtools] Clearing main local storage');
-      chrome.storage.local.clear();
+          // Clear main local storage
+          console.log('[devtools] Clearing main local storage');
+          chrome.storage.local.clear();
 
-      // Remove all indexedDBs
-      console.log('[devtools] Removing all indexedDBs...');
-      await deleteDatabases();
+          // Remove all indexedDBs
+          console.log('[devtools] Removing all indexedDBs...');
+          await deleteDatabases();
 
-      sendResponse();
-    })();
+          sendResponse('Storage cleared');
+        } catch (e) {
+          sendResponse(`Error clearing storage: ${e}`);
+        }
+      })();
 
-    return true;
+      return true;
+
+    case 'updateEngines':
+      (async () => {
+        try {
+          await engines.updateAll();
+        } catch (e) {
+          sendResponse(`Error updating engines: ${e}`);
+        }
+        sendResponse(`Engines updated`);
+      })();
+
+      return true;
   }
 
   return false;
