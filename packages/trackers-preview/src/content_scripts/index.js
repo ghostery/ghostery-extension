@@ -125,15 +125,15 @@ export default function setupTrackersPreview(popupUrl) {
               const wheelEl = getWheelElement(stats, popupUrl);
               if (!wheelEl) return;
 
-              const parent = anchor.parentElement;
-
               const container =
-                // Desktop flat
-                parent.querySelector('.B6fmyf') ||
-                // Mobile flat
+                // Desktop
+                anchor.parentElement.querySelector('.B6fmyf') ||
+                anchor.parentElement.parentElement.querySelector('.B6fmyf') ||
+                // Mobile
+                anchor.querySelector('span.yIn8Od') ||
                 anchor.querySelector('div[role="link"]') ||
-                // Mobile cards
                 anchor.querySelector('div.UPmit.AP7Wnd');
+
               if (!container) return;
 
               let tempEl = container.firstElementChild;
