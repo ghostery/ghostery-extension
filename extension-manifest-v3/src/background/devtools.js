@@ -55,10 +55,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       (async () => {
         try {
           await engines.updateAll();
+          sendResponse(`Engines updated`);
         } catch (e) {
           sendResponse(`Error updating engines: ${e}`);
         }
-        sendResponse(`Engines updated`);
       })();
 
       return true;
