@@ -51,6 +51,16 @@ struct GhosteryApp: App {
                     .sheet(isPresented: $showSheet) {
                             SafariView(url: $url)
                     }
+                    .onOpenURL { url in
+                        handleIncomingURL(url)
+                    }
+        }
+    }
+
+    func handleIncomingURL(_ url: URL) {
+        // check path of the url
+        if url.pathComponents.contains("become-a-contributor") {
+            // run toggleSubscriptions from ContentView
         }
     }
 
