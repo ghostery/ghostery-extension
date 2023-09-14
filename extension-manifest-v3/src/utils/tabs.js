@@ -11,9 +11,7 @@
 
 export function openTabWithUrl(host, event) {
   const { href } = event.currentTarget;
-  event.preventDefault();
 
-  chrome.tabs.create({ url: href }).then(() => {
-    window.close();
-  });
+  event.preventDefault();
+  chrome.tabs.create({ url: href });
 }
