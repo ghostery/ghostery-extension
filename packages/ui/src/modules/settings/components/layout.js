@@ -154,6 +154,6 @@ export default {
       }
     }
   `.style(
-      isAndroidFirefoxBrowser && /*css*/ `:host { height: calc(100% - 56px); }`,
+      isAndroidFirefoxBrowser && /*css*/ `:host { height: calc(100% - 60px); }`,
     ),
 };
