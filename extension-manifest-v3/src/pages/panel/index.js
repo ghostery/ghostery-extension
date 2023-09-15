@@ -66,6 +66,8 @@ if (__PLATFORM__ === 'firefox') {
     while (el && !el.href) el = el.parentElement;
 
     // Timeout is required to prevent from closing the window before the anchor is opened
-    if (el?.target) setTimeout(window.close, 100);
+    if (el.origin !== location.origin || el.pathname !== location.pathname) {
+      setTimeout(window.close, 100);
+    }
   });
 }

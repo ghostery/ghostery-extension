@@ -11,6 +11,7 @@
 
 import { html, store } from 'hybrids';
 
+import { openTabWithUrl } from '/utils/tabs.js';
 import Options from '/store/options.js';
 
 const VERSION = chrome.runtime.getManifest().version;
@@ -77,36 +78,39 @@ export default {
               <button>Update engines</button>
             </ui-button>
           </div>
-          <div layout="column gap items:start">
-            <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
-            <ui-text type="body-xs" color="gray-400">
-              The below list is not reactive to changes made in the extension,
-              use refresh button
-            </ui-text>
-            <div layout="row gap">
-              ${html.resolve(
-                chrome.declarativeNetRequest
-                  .getEnabledRulesets()
-                  .then(
-                    (rules) => html`
-                      ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
-                      ${!rules.length &&
-                      html`<ui-text translate="no">
-                        No rulesets enabled...
-                      </ui-text>`}
-                    `,
-                  ),
-              )}
+          ${chrome.declarativeNetRequest &&
+          html`
+            <div layout="column gap items:start">
+              <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+              <ui-text type="body-xs" color="gray-400">
+                The below list is not reactive to changes made in the extension,
+                use refresh button
+              </ui-text>
+              <div layout="row gap">
+                ${html.resolve(
+                  chrome.declarativeNetRequest
+                    .getEnabledRulesets()
+                    .then(
+                      (rules) => html`
+                        ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
+                        ${!rules.length &&
+                        html`<ui-text translate="no">
+                          No rulesets enabled...
+                        </ui-text>`}
+                      `,
+                    ),
+                )}
+              </div>
+              <ui-button
+                size="small"
+                type="outline"
+                onclick="${refresh}"
+                layout="shrink:0"
+              >
+                <button>Refresh</button>
+              </ui-button>
             </div>
-            <ui-button
-              size="small"
-              type="outline"
-              onclick="${refresh}"
-              layout="shrink:0"
-            >
-              <button>Refresh</button>
-            </ui-button>
-          </div>
+          `}
         </section>
       `}
       <div layout="row center gap:2">
@@ -119,7 +123,9 @@ export default {
           v${VERSION}
         </ui-text>
         <ui-text type="label-s" color="gray-300">
-          <a href="/licenses.html" target="_blank">Software Licenses</a>
+          <a href="/licenses.html" onclick="${openTabWithUrl}">
+            Software Licenses
+          </a>
         </ui-text>
       </div>
     </template>
