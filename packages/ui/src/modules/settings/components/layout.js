@@ -15,40 +15,44 @@ function scrollToTop({ main }) {
   main.scrollTop = 0;
 }
 
+const isAndroidFirefoxBrowser =
+  !!navigator?.userAgent.match(/Android.*Firefox/);
+
 export default {
   main: ({ render }) => render().querySelector('main'),
-  render: () => html`
-    <template
-      layout="column height:100%"
-      layout@992px="grid:280px|1:min|1"
-      layout@1280px="grid:320px|1:min|1"
-    >
-      <header
-        layout="row center gap padding:2 relative layer"
-        layout@992px="padding:5:3 content:start"
+  render: () =>
+    html`
+      <template
+        layout="column height:full"
+        layout@992px="grid:280px|1:min|1"
+        layout@1280px="grid:320px|1:min|1"
       >
-        <ui-icon name="logo" color="primary-500" layout="size:3"></ui-icon>
-        <ui-text type="headline-s" color="primary-500">
-          Ghostery settings
-        </ui-text>
-      </header>
-      <nav
-        layout="order:1 row content:space-around padding gap:0.5"
-        layout@992px="grid:1:repeat(3,max-content)|max|1fr content:stretch padding:0:2:2 layer overflow:y:auto"
-      >
-        <slot name="nav"></slot>
-      </nav>
-      <main layout="column grow overflow:y:scroll" layout@992px="area::2">
-        <slot
-          layout::slotted(*)="padding:4:2"
-          layout::slotted(*)@768px="padding:5:6"
-          layout::slotted(*)@992px="padding:6:3 area::2"
-          layout::slotted(*)@1280px="padding:8:3"
-          onslotchange="${scrollToTop}"
-        ></slot>
-      </main>
-    </template>
-  `.css`
+        <header
+          layout="row center gap padding:2 relative layer"
+          layout@992px="padding:5:3 content:start"
+        >
+          <ui-icon name="logo" color="primary-500" layout="size:3"></ui-icon>
+          <ui-text type="headline-s" color="primary-500">
+            Ghostery settings
+          </ui-text>
+        </header>
+        <nav
+          layout="order:1 row content:space-around padding gap:0.5"
+          layout@992px="grid:1:repeat(3,max-content)|max|1fr content:stretch padding:0:2:2 layer overflow:y:auto"
+        >
+          <slot name="nav"></slot>
+        </nav>
+        <main layout="column grow overflow:y:scroll" layout@992px="area::2">
+          <slot
+            layout::slotted(*)="padding:4:2"
+            layout::slotted(*)@768px="padding:5:6"
+            layout::slotted(*)@992px="padding:6:3 area::2"
+            layout::slotted(*)@1280px="padding:8:3"
+            onslotchange="${scrollToTop}"
+          ></slot>
+        </main>
+      </template>
+    `.css`
     :host {
       background: var(--ui-color-white);
     }
@@ -149,5 +153,7 @@ export default {
         margin: 0 auto;
       }
     }
-  `,
+  `.style(
+      isAndroidFirefoxBrowser && /*css*/ `:host { height: calc(100% - 56px); }`,
+    ),
 };
