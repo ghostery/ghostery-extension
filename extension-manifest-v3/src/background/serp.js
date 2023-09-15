@@ -34,6 +34,13 @@ chrome.webNavigation.onCommitted.addListener((details) => {
       }
 
       if (options.wtmSerpReport || options.serpTrackingPrevention) {
+        const files = [];
+
+        if (options.wtmSerpReport)
+          files.push('/content_scripts/trackers-preview.js');
+        if (options.serpTrackingPrevention)
+          files.push('/content_scripts/prevent-serp-tracking.js');
+
         chrome.scripting.executeScript(
           {
             injectImmediately: true,
@@ -41,14 +48,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
             target: {
               tabId: details.tabId,
             },
-            files: [
-              ...(options.wtmSerpReport
-                ? ['/content_scripts/trackers-preview.js']
-                : null),
-              ...(options.serpTrackingPrevention
-                ? ['/content_scripts/prevent-serp-tracking.js']
-                : null),
-            ],
+            files,
           },
           () => {
             if (chrome.runtime.lastError) {
