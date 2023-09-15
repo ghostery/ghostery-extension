@@ -240,7 +240,6 @@ export default {
                 icon="${notification.icon}"
                 href="${notification.url}"
                 type="${notification.type}"
-                onclick="${openTabWithUrl}"
               >
                 ${notification.text}
                 <span slot="action">${notification.action}</span>

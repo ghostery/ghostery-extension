@@ -82,15 +82,6 @@ function getWheelElement(stats, popupUrl) {
   return container;
 }
 
-function removeWheel(anchor) {
-  const container = anchor.parentElement.querySelector(
-    '.wtm-tracker-wheel-container',
-  );
-  if (container) {
-    container.parentElement.removeChild(container);
-  }
-}
-
 export default function setupTrackersPreview(popupUrl) {
   const elements = [
     ...window.document.querySelectorAll(
@@ -125,15 +116,15 @@ export default function setupTrackersPreview(popupUrl) {
               const wheelEl = getWheelElement(stats, popupUrl);
               if (!wheelEl) return;
 
-              const parent = anchor.parentElement;
-
               const container =
-                // Desktop flat
-                parent.querySelector('.B6fmyf') ||
-                // Mobile flat
+                // Desktop
+                anchor.parentElement.querySelector('.B6fmyf') ||
+                anchor.parentElement.parentElement.querySelector('.B6fmyf') ||
+                // Mobile
+                anchor.querySelector('span.yIn8Od') ||
                 anchor.querySelector('div[role="link"]') ||
-                // Mobile cards
                 anchor.querySelector('div.UPmit.AP7Wnd');
+
               if (!container) return;
 
               let tempEl = container.firstElementChild;
@@ -155,26 +146,6 @@ export default function setupTrackersPreview(popupUrl) {
       },
     );
 
-    window.addEventListener('message', (message) => {
-      if (
-        message.origin + '/' !== chrome.runtime.getURL('/').toLowerCase() &&
-        typeof message.data == 'string'
-      ) {
-        return;
-      }
-
-      if (message.data === 'WTMReportClosePopups') {
-        closePopups();
-      } else if (message.data === 'WTMReportDisable') {
-        closePopups();
-        elements.forEach(removeWheel);
-        chrome.runtime.sendMessage({ action: 'disableWTMReport' });
-      } else if (message.data.startsWith('WTMReportResize')) {
-        const height = message.data.split(':')[1];
-        resizePopup(height);
-      }
-    });
-
     const observer = new MutationObserver((mutations) => {
       if (mutations.some((m) => m.addedNodes.length)) {
         observer.disconnect();
@@ -188,3 +159,34 @@ export default function setupTrackersPreview(popupUrl) {
     });
   }
 }
+
+window.addEventListener('message', (message) => {
+  if (
+    message.origin + '/' !== chrome.runtime.getURL('/').toLowerCase() &&
+    typeof message.data == 'string'
+  ) {
+    return;
+  }
+
+  if (message.data === 'WTMReportClosePopups') {
+    closePopups();
+  } else if (message.data === 'WTMReportDisable') {
+    closePopups();
+
+    // Remove the wheel from the elements
+    [...document.querySelectorAll('[data-wtm]')].forEach((el) => {
+      delete el.dataset.wtm;
+    });
+
+    [...document.querySelectorAll('.wtm-tracker-wheel-container')].forEach(
+      (el) => {
+        el.parentElement.removeChild(el);
+      },
+    );
+
+    chrome.runtime.sendMessage({ action: 'disableWTMReport' });
+  } else if (message.data.startsWith('WTMReportResize')) {
+    const height = message.data.split(':')[1];
+    resizePopup(height);
+  }
+});
