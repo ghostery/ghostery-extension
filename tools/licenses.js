@@ -75,7 +75,7 @@ const template = (packages) => `
 let symlink = false;
 if (!fs.existsSync('./node_modules') && fs.existsSync('../node_modules')) {
   symlink = true;
-  fs.symlinkSync('../node_modules', './node_modules', 'dir');
+  fs.symlinkSync('../node_modules', './node_modules', 'junction');
 }
 
 // Build list of licenses
