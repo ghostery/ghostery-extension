@@ -29,12 +29,9 @@ let pausedDomains = [];
 const setup = asyncSetup([
   observe(null, (options) => {
     // Set enabled engines
-    enabledEngines = ENGINES.reduce((acc, { name, key }) => {
-      if (options.terms && options[key]) {
-        acc.push(name);
-      }
-      return acc;
-    }, []);
+    enabledEngines = ENGINES.filter(
+      ({ key }) => options.terms && options[key],
+    ).map(({ name }) => name);
 
     // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
