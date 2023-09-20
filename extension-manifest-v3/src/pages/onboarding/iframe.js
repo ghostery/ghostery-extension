@@ -12,22 +12,19 @@
 import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/onboarding';
 
-import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
+import { setupIframe, closeIframe } from '@ghostery/ui/iframe';
 
 import TabStats from '/store/tab-stats.js';
 import Options from '/store/options.js';
 
-setupIframeSize();
+setupIframe();
 
 async function close(host, event) {
   await store.set(Options, {
     onboarding: event.type === 'ignore' ? { shownAt: Date.now() } : null,
   });
 
-  // Options notify other contexts about changes, but
-  // we cannot await for it, as Safari returns unfulfilled promise
-  // which introduces bug
-  setTimeout(closeIframe, 100);
+  closeIframe(false, true);
 }
 
 mount(document.body, {

@@ -105,7 +105,8 @@
         "pages/trackers-preview/index.html",
         "pages/autoconsent/index.html",
         "pages/onboarding/index.html",
-        "pages/onboarding/iframe.html"
+        "pages/onboarding/iframe.html",
+        "pages/onboarding/serp.html"
       ],
       "all_frames": true,
       "matches": [

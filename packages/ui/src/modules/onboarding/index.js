@@ -20,6 +20,7 @@ import './onboarding.js';
 // Iframes
 import './iframe.js';
 import './renew.js';
+import './serp.js';
 
 // Components
 define.from(

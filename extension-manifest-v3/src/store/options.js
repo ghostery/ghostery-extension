@@ -68,7 +68,12 @@ const Options = {
 
   // Onboarding
   terms: false,
-  onboarding: { done: false, shownAt: 0, shown: 0 },
+  onboarding: {
+    done: false,
+    shownAt: 0,
+    shown: 0,
+    ...(__PLATFORM__ === 'opera' ? { serpShownAt: 0, serpShown: 0 } : {}),
+  },
   installDate: '',
 
   // Panel

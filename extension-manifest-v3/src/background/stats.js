@@ -18,6 +18,8 @@ import { order } from '@ghostery/ui/categories';
 import DailyStats, { getMergedStats } from '/store/daily-stats.js';
 import Options, { observe } from '/store/options.js';
 
+import { showOperaSerpAlert } from '/utils/opera-serp.js';
+
 import Request from './utils/request.js';
 import * as trackerDb from './utils/trackerdb.js';
 import AutoSyncingMap from './utils/map.js';
@@ -31,7 +33,7 @@ function setBadgeColor(color = '#3f4146' /* gray-600 */) {
 }
 
 observe('terms', async (terms) => {
-  if (!terms) {
+  if (!terms || (__PLATFORM__ === 'opera' && (await showOperaSerpAlert()))) {
     await chromeAction.setBadgeText({ text: '!' });
     setBadgeColor('#f13436' /* danger-500 */);
   } else {
