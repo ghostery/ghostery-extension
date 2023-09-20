@@ -11,9 +11,13 @@
 
 import * as engines from './engines.js';
 
-engines.init('trackerdb');
+let promise = engines.init('trackerdb').then(() => {
+  promise = null;
+});
 
 export async function getMetadata(request) {
+  if (promise) await promise;
+
   const engine = engines.get('trackerdb');
   if (!engine) return null;
 
