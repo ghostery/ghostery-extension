@@ -13,7 +13,6 @@ import { store } from 'hybrids';
 
 import Session from '/store/session.js';
 
-import { session } from '/utils/api.js';
 import { getStatsWithMetadata } from './stats.js';
 
 if (__PLATFORM__ !== 'safari') {
