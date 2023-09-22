@@ -11,7 +11,7 @@
 
 import jwtDecode from 'jwt-decode';
 
-const DOMAIN = 'ghostery.com';
+const DOMAIN = 'ghosterystage.com';
 
 const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
 const ACCOUNT_URL = `https://accountapi.${DOMAIN}/api/v2.1.0`;
@@ -83,13 +83,17 @@ async function getCookie(name) {
 
 async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
   return chrome.cookies[value !== undefined ? 'set' : 'remove']({
-    url: COOKIE_URL,
-    domain: COOKIE_DOMAIN,
-    path: '/',
     name,
-    value,
-    expirationDate:
-      Date.now() / 1000 + durationInSec + COOKIE_EXPIRATION_DATE_OFFSET,
+    url: COOKIE_URL,
+    ...(value !== undefined
+      ? {
+          path: '/',
+          value,
+          domain: COOKIE_DOMAIN,
+          expirationDate:
+            Date.now() / 1000 + durationInSec + COOKIE_EXPIRATION_DATE_OFFSET,
+        }
+      : {}),
     ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
   });
 }
