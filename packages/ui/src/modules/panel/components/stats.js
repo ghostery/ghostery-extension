@@ -88,7 +88,7 @@ export default {
           <ui-tooltip>
             <span slot="content">WhoTracks.Me Statistical Report</span>
             <ui-panel-action>
-              <a href="${wtmUrl}" onclick="${openTabWithUrl}">
+              <a href="${wtmUrl}" onclick="${openTabWithUrl}" target="_blank">
                 <ui-icon name="whotracksme"></ui-icon>
               </a>
             </ui-panel-action>

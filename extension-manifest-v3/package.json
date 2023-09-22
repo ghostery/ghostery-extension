@@ -39,7 +39,7 @@
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",
     "@github/relative-time-element": "^4.1.5",
-    "@whotracksme/webextension-packages": "^4.0.1",
+    "@whotracksme/webextension-packages": "^4.0.3",
     "hybrids": "^8.2.4",
     "idb": "^7.1.1",
     "jwt-decode": "^3.1.2",
