@@ -33,10 +33,9 @@ if (__PLATFORM__ !== 'safari') {
       if (GHOSTERY_SEARCH_EXTENSION_IDS.includes(sender.id)) {
         switch (message) {
           case 'refreshToken':
-            session().then(
-              (res) => sendResponse({ success: res !== undefined }),
-              (error) => sendResponse({ success: false, error }),
-            );
+            store
+              .resolve(Session)
+              .then(({ user }) => sendResponse({ success: !!user }));
             return true;
           default:
             console.error(`Unknown message type from "${sender.id}"`, message);

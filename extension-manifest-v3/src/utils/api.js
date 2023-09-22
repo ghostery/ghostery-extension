@@ -117,10 +117,7 @@ export async function session() {
   try {
     if (!accessToken) {
       const refreshToken = await getCookie('refresh_token');
-
-      if (!refreshToken) {
-        throw Error('Unauthorized');
-      }
+      if (!refreshToken) return null;
 
       const res = await fetch(`${AUTH_URL}/refresh_token`, {
         method: 'post',
@@ -142,17 +139,23 @@ export async function session() {
           setCookie('csrf_token', data.csrf_token, COOKIE_SHORT_DURATION),
         ]);
       } else {
-        throw res;
+        throw Error(`${res.status} ${res.statusText}`);
       }
     }
   } catch (e) {
-    setCookie('user_id', undefined);
-    setCookie('csrf_token', undefined);
+    console.error('Failed to refresh access token:', e);
 
-    throw e;
+    accessToken = undefined;
+
+    await Promise.all([
+      setCookie('user_id', undefined),
+      setCookie('refresh_token', undefined),
+      setCookie('access_token', undefined),
+      setCookie('csrf_token', undefined),
+    ]);
   }
 
-  return jwtDecode(accessToken.value);
+  return accessToken ? jwtDecode(accessToken.value) : null;
 }
 
 export async function getUserOptions() {
