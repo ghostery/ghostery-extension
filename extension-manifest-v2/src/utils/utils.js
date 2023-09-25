@@ -243,6 +243,7 @@ function _openNewTab(data) {
 				url: data.url,
 				active: data.become_active || false,
 				openerTabId: tab.id,
+				windowId: tab.windowId,
 				index: tab.index + 1
 			});
 		} else {
