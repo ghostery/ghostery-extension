@@ -83,17 +83,26 @@ async function getCookie(name) {
 
 async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
   return chrome.cookies[value !== undefined ? 'set' : 'remove']({
-    url: COOKIE_URL,
-    domain: COOKIE_DOMAIN,
-    path: '/',
     name,
-    value,
-    expirationDate:
-      Date.now() / 1000 + durationInSec + COOKIE_EXPIRATION_DATE_OFFSET,
+    url: COOKIE_URL,
+    ...(value !== undefined
+      ? {
+          path: '/',
+          value,
+          domain: COOKIE_DOMAIN,
+          expirationDate:
+            Date.now() / 1000 + durationInSec + COOKIE_EXPIRATION_DATE_OFFSET,
+        }
+      : {}),
     ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
   });
 }
 
+/*
+  WARNING: This function is meant bo be used only by the Session store model.
+  It is not intended to be used by any other part of the extension.
+  If you need to get user's session, use the `store.resolve(Session)` or similar...
+*/
 export async function session() {
   const userId = await getCookie('user_id');
   if (!userId) return null;
@@ -117,10 +126,7 @@ export async function session() {
   try {
     if (!accessToken) {
       const refreshToken = await getCookie('refresh_token');
-
-      if (!refreshToken) {
-        throw Error('Unauthorized');
-      }
+      if (!refreshToken) return null;
 
       const res = await fetch(`${AUTH_URL}/refresh_token`, {
         method: 'post',
@@ -142,17 +148,23 @@ export async function session() {
           setCookie('csrf_token', data.csrf_token, COOKIE_SHORT_DURATION),
         ]);
       } else {
-        throw res;
+        throw Error(`${res.status} ${res.statusText}`);
       }
     }
   } catch (e) {
-    setCookie('user_id', undefined);
-    setCookie('csrf_token', undefined);
+    console.error('Failed to refresh access token:', e);
 
-    throw e;
+    accessToken = undefined;
+
+    await Promise.all([
+      setCookie('user_id', undefined),
+      setCookie('refresh_token', undefined),
+      setCookie('access_token', undefined),
+      setCookie('csrf_token', undefined),
+    ]);
   }
 
-  return jwtDecode(accessToken.value);
+  return accessToken ? jwtDecode(accessToken.value) : null;
 }
 
 export async function getUserOptions() {
