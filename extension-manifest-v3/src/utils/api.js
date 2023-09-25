@@ -98,6 +98,11 @@ async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
   });
 }
 
+/*
+  WARNING: This function is meant bo be used only by the Session store model. It is not
+  intended to be used by any other part of the extension. If you need to get
+  user's session, use the `store.resolve(Session)` or similar...
+*/
 export async function session() {
   const userId = await getCookie('user_id');
   if (!userId) return null;
