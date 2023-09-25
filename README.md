@@ -13,6 +13,7 @@ This repository is home to all Ghostery Browser Extensions for various platforms
 ## Links
 
 + [Website](https://www.ghostery.com/)
++ [Broken Page Reports](https://github.com/ghostery/broken-page-reports/)
 + [Support](https://www.ghostery.com/support)
 + [Twitter (@ghostery)](https://twitter.com/ghostery)
 + [Facebook](https://www.facebook.com/ghostery)
