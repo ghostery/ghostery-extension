@@ -25,7 +25,6 @@ const Session = {
     [firstName, lastName].filter((s) => s).join(' '),
   [store.connect]: {
     cache: false,
-    offline: true,
     async get() {
       try {
         const data = await session();

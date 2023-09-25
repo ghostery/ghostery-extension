@@ -11,9 +11,9 @@
 import { store } from 'hybrids';
 
 import Options, { sync } from '/store/options.js';
-import { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
+import Session, { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
 
-import { session, ACCOUNT_PAGE_URL, SIGNON_PAGE_URL } from '/utils/api.js';
+import { ACCOUNT_PAGE_URL, SIGNON_PAGE_URL } from '/utils/api.js';
 
 // Trigger options sync every one day
 const ALARM_SYNC_OPTIONS = 'session:sync:options';
@@ -30,7 +30,7 @@ async function syncOptions() {
 // Observe cookie changes (login/logout actions)
 chrome.webNavigation.onDOMContentLoaded.addListener(async ({ url = '' }) => {
   if (url.includes(SIGNON_PAGE_URL) || url.includes(ACCOUNT_PAGE_URL)) {
-    const user = await session().catch(() => null);
+    const { user } = await store.resolve(Session);
 
     if (user) {
       if (!(await chrome.alarms.get(ALARM_SYNC_OPTIONS))) {
@@ -66,8 +66,10 @@ chrome.alarms.onAlarm.addListener(async ({ name }) => {
     case ALARM_SYNC_OPTIONS:
       syncOptions();
       break;
-    case ALARM_UPDATE_SESSION:
-      if (!(await session())) {
+    case ALARM_UPDATE_SESSION: {
+      const { user } = await store.resolve(Session);
+
+      if (!user) {
         chrome.alarms.clear(ALARM_UPDATE_SESSION);
       } else {
         chrome.alarms.create(ALARM_UPDATE_SESSION, {
@@ -75,6 +77,7 @@ chrome.alarms.onAlarm.addListener(async ({ name }) => {
         });
       }
       break;
+    }
     default:
       break;
   }
