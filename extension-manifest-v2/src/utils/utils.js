@@ -228,7 +228,7 @@ export function getActiveTab(callback, error) {
 }
 
 export async function openNewTab({ url, become_active: active = false } = {}) {
-	if (!url) { return; }
+	if (url === undefined) { throw new Error('url missing'); }
 
 	const [currentTab] = await browser.tabs.query({ active: true, currentWindow: true });
 
