@@ -46,8 +46,8 @@
     "service_worker": "background/index.js",
     "type": "module"
   },
-  "declarative_net_request" : {
-    "rule_resources" : [
+  "declarative_net_request": {
+    "rule_resources": [
       {
         "id": "ads",
         "enabled": false,
@@ -106,7 +106,7 @@
         "pages/autoconsent/index.html",
         "pages/onboarding/index.html",
         "pages/onboarding/iframe.html",
-        "pages/onboarding/serp.html"
+        "pages/onboarding/opera-serp.html"
       ],
       "all_frames": true,
       "matches": [
@@ -114,5 +114,5 @@
       ]
     }
   ],
-  "content_security_policy" : {}
+  "content_security_policy": {}
 }

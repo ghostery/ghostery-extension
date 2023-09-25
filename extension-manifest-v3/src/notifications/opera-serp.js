@@ -15,7 +15,7 @@ import Options from '/store/options.js';
 
 const NOTIFICATION_SHOW_LIMIT = 4;
 const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-const TEST_COOKIE_NAME = 'ghostery:opera:cookie:test';
+const TEST_COOKIE_NAME = `ghostery:opera:cookie:test:${Date.now()}`;
 
 async function isSerpSupported() {
   try {
@@ -40,7 +40,7 @@ async function isSerpSupported() {
   }
 }
 
-export async function showOperaSerpNotification(cb) {
+export async function shouldShowOperaSerpNotification(cb) {
   try {
     if (await isSerpSupported()) return false;
 
@@ -69,7 +69,7 @@ export async function showOperaSerpNotification(cb) {
   }
 }
 
-export async function showOperaSerpAlert() {
+export async function shouldShowOperaSerpAlert() {
   if (await isSerpSupported()) return false;
 
   const options = await store.resolve(Options);

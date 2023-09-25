@@ -16,7 +16,7 @@ import Session from '/store/session.js';
 import TabStats from '/store/tab-stats.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
-import { showOperaSerpAlert } from '/utils/opera-serp.js';
+import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
 
 import sleep from '../assets/sleep.svg';
 
@@ -108,7 +108,7 @@ export default {
   stats: store(TabStats),
   session: store(Session),
   notification: async ({ options, session }) => {
-    if (__PLATFORM__ === 'opera' && (await showOperaSerpAlert())) {
+    if (__PLATFORM__ === 'opera' && (await shouldShowOperaSerpAlert())) {
       return NOTIFICATIONS.opera;
     }
 

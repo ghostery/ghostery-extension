@@ -20,14 +20,14 @@ import Options from '/store/options.js';
 setupIframe(360);
 
 async function updateOptions() {
-  return store.resolve(Options).then((options) =>
-    store.set(options, {
-      onboarding: {
-        serpShown: options.onboarding.serpShown + 1,
-        serpShownAt: Date.now(),
-      },
-    }),
-  );
+  const options = await store.resolve(Options);
+
+  return store.set(options, {
+    onboarding: {
+      serpShown: options.onboarding.serpShown + 1,
+      serpShownAt: Date.now(),
+    },
+  });
 }
 
 async function enable(host, event) {

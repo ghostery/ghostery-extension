@@ -12,7 +12,7 @@
 import { observe } from '/store/options.js';
 import { sendShowIframeMessage } from './utils/iframe.js';
 import { tabStats } from './stats.js';
-import { showOperaSerpNotification } from '/utils/opera-serp.js';
+import { shouldShowOperaSerpNotification } from '/notifications/opera-serp.js';
 
 const NOTIFICATION_DELAY = 24 * 60 * 60 * 1000; // a day in milliseconds
 const NOTIFICATION_TRACKERS_THRESHOLD = 10;
@@ -48,8 +48,11 @@ chrome.webNavigation.onCompleted.addListener((details) => {
         }, 1000);
       }
     } else if (__PLATFORM__ === 'opera') {
-      showOperaSerpNotification(() => {
-        sendShowIframeMessage(details.tabId, 'pages/onboarding/serp.html');
+      shouldShowOperaSerpNotification(() => {
+        sendShowIframeMessage(
+          details.tabId,
+          'pages/onboarding/opera-serp.html',
+        );
       });
     }
   }
