@@ -25,7 +25,7 @@ for PLATFORM in firefox chrome edge opera; do
   npm run build -- $PLATFORM --silent
   NAME="ghostery-$PLATFORM"
   if ! [ $SIMPLE ]; then
-    NAME+="$VERSION"
+    NAME+="-$VERSION"
     if [ $SHA ]; then
       NAME+="-$SHA"
     fi
