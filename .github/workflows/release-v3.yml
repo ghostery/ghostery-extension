@@ -3,7 +3,7 @@ name: Upload builds to release
 on:
   release:
     types:
-      - created
+      - published
 
 jobs:
   release-v10:
