@@ -34,7 +34,9 @@ export default {
         </div>
         <ui-settings-card>
           <img
-            src="${assets[session.user ? 'shield' : 'contribution']}"
+            src="${assets[
+              store.ready(session) && session.user ? 'shield' : 'contribution'
+            ]}"
             layout="size:20"
             alt="Contribution"
             slot="picture"
@@ -103,11 +105,14 @@ export default {
                   devices.
                 </ui-text>
               </div>
-              <ui-settings-toggle
-                disabled="${!session.user}"
-                value="${session.user && options.sync}"
-                onchange="${session.user && html.set(options, 'sync')}"
-              ></ui-settings-toggle>
+              ${store.ready(session) &&
+              html`
+                <ui-settings-toggle
+                  disabled="${!session.user}"
+                  value="${session.user && options.sync}"
+                  onchange="${session.user && html.set(options, 'sync')}"
+                ></ui-settings-toggle>
+              `}
             </div>
           </div>
         </div>

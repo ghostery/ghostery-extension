@@ -12,7 +12,9 @@
 import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
-import { session, getUserOptions, setUserOptions } from '/utils/api.js';
+import { getUserOptions, setUserOptions } from '/utils/api.js';
+
+import Session from './session.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 
@@ -30,18 +32,9 @@ export const SYNC_OPTIONS = [
 ];
 
 export const ENGINES = [
-  {
-    name: 'ads',
-    option: 'blockAds',
-  },
-  {
-    name: 'tracking',
-    option: 'blockTrackers',
-  },
-  {
-    name: 'annoyances',
-    option: 'blockAnnoyances',
-  },
+  { name: 'ads', key: 'blockAds' },
+  { name: 'tracking', key: 'blockTrackers' },
+  { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
 const Options = {
@@ -171,8 +164,10 @@ export async function sync(options, keys) {
       return;
     }
 
+    const { user } = await store.resolve(Session);
+
     // If user is not logged in, clean up options revision and return
-    if (!(await session().catch(() => null))) {
+    if (!user) {
       if (options.revision !== 0) {
         store.set(Options, { revision: 0 });
       }

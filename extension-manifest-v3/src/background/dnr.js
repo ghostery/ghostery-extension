@@ -22,8 +22,8 @@ if (__PLATFORM__ !== 'firefox') {
     const enableRulesetIds = [];
     const disableRulesetIds = [];
 
-    ENGINES.forEach(({ name, option }) => {
-      const enabled = options.terms && options[option];
+    ENGINES.forEach(({ name, key }) => {
+      const enabled = options.terms && options[key];
       if (enabledRulesetIds.includes(name) !== enabled) {
         (enabled ? enableRulesetIds : disableRulesetIds).push(name);
       }
