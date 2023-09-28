@@ -12,6 +12,7 @@
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
+import { setCookie } from '/utils/api.js';
 
 const NOTIFICATION_SHOW_LIMIT = 4;
 const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
@@ -34,8 +35,15 @@ async function isSerpSupported() {
       name: TEST_COOKIE_NAME,
     });
 
+    // Set `opera_serp_notification` on the `ghostery.com` domain
+    // to make sure the top bar notification is not shown
+    setCookie('opera_serp_notification', 'true', 60 * 60 * 24 * 365 * 10);
+
     return true;
   } catch (e) {
+    // Clear out the cookie if it was set
+    setCookie('opera_serp_notification', undefined);
+
     return false;
   }
 }

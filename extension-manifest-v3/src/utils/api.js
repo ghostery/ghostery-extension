@@ -81,7 +81,7 @@ async function getCookie(name) {
   });
 }
 
-async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
+export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
   return chrome.cookies[value !== undefined ? 'set' : 'remove']({
     name,
     url: COOKIE_URL,
