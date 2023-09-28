@@ -47,7 +47,7 @@ mount(document.body, {
     <ui-onboarding-serp
       onenable="${enable}"
       onignore="${ignore}"
-      href="https://www.ghostery.com/blog/block-search-engine-ads-on-opera"
+      href="https://www.ghostery.com/blog/block-search-engine-ads-on-opera#strong-remove-ads-on-search-results-pages-strong"
     ></ui-onboarding-serp>
   `,
 });
