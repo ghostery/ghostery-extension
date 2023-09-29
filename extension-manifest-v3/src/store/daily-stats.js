@@ -23,7 +23,7 @@ async function getDb() {
   let upgradeFromMV2 = false;
 
   if (!getDb.current) {
-    getDb.current = await IDB.openDB(DB_NAME, 31, {
+    getDb.current = IDB.openDB(DB_NAME, 31, {
       async upgrade(db, oldVersion, newVersion, transaction) {
         upgradeFromMV2 = oldVersion > 0 && oldVersion < 31;
 
@@ -44,8 +44,10 @@ async function getDb() {
           daily.createIndex('day', 'day', { unique: true });
         }
       },
-      blocking() {
-        getDb.current.close();
+      async blocking() {
+        const db = await getDb.current;
+
+        db.close();
         getDb.current = null;
         upgradeFromMV2 = false;
       },
@@ -53,7 +55,7 @@ async function getDb() {
   }
 
   if (upgradeFromMV2) {
-    const db = getDb.current;
+    const db = await getDb.current;
     const oldStats = await db.getAll('daily');
     const tx = db.transaction('daily', 'readwrite');
     const daily = tx.objectStore('daily');
@@ -87,7 +89,7 @@ async function getDb() {
     );
   }
 
-  return getDb.current;
+  return await getDb.current;
 }
 
 // Keep postponing the flush until the stats are not updated

@@ -16,16 +16,18 @@ import Options from '/store/options.js';
 
 const VERSION = chrome.runtime.getManifest().version;
 
-async function asyncAction(event, promise, complete = '') {
+async function asyncAction(event, promise) {
   const button = event.currentTarget;
   const el = button.children[0];
   const origText = el.textContent;
 
   button.disabled = true;
-  await promise;
+  el.innerHTML = '...';
 
-  if (complete) {
-    el.innerHTML = complete;
+  const response = await promise;
+
+  if (response) {
+    el.innerHTML = response;
 
     setTimeout(() => {
       button.disabled = false;
@@ -38,11 +40,11 @@ async function asyncAction(event, promise, complete = '') {
 }
 
 function clearStorage(host, event) {
-  asyncAction(
-    event,
-    chrome.runtime.sendMessage({ action: 'clearStorage' }),
-    'Storage cleared',
-  );
+  asyncAction(event, chrome.runtime.sendMessage({ action: 'clearStorage' }));
+}
+
+function updateEngines(host, event) {
+  asyncAction(event, chrome.runtime.sendMessage({ action: 'updateEngines' }));
 }
 
 function refresh(host) {
@@ -58,18 +60,23 @@ export default {
       html`
         <section layout="column gap:3" translate="no">
           <ui-text type="headline-m">Developer tools</ui-text>
-          <div layout="column gap">
-            <div layout="column gap items:start">
-              <ui-text type="headline-s">Clear extension storage</ui-text>
-              <ui-button
-                size="small"
-                type="outline"
-                onclick="${clearStorage}"
-                layout="shrink:0"
-              >
-                <button>Clear storage</button>
-              </ui-button>
-            </div>
+          <div layout="row gap items:start">
+            <ui-button
+              size="small"
+              type="outline"
+              onclick="${clearStorage}"
+              layout="shrink:0"
+            >
+              <button>Clear storage</button>
+            </ui-button>
+            <ui-button
+              size="small"
+              type="outline"
+              onclick="${updateEngines}"
+              layout="shrink:0"
+            >
+              <button>Update engines</button>
+            </ui-button>
           </div>
           ${chrome.declarativeNetRequest &&
           html`

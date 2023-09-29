@@ -16,13 +16,11 @@
 /**
  * @namespace BackgroundUtils
  */
+import browser from 'webextension-polyfill';
 import { debounce } from 'underscore';
 import { URL } from '@cliqz/url-parser';
-import { getBrowserInfo } from '@ghostery/libs';
 
 import { log } from './common';
-
-const IS_FIREFOX = getBrowserInfo.isFirefox();
 
 /**
  * Handle chrome.runtime.lastError messages
@@ -229,60 +227,25 @@ export function getActiveTab(callback, error) {
 	});
 }
 
-/**
- * Helper called by openNewTab.
- * @memberOf BackgroundUtils
- * @private
- *
- * @param  {Object} data 	info about the new tab
- */
-function _openNewTab(data) {
-	getActiveTab((tab) => {
-		if (tab) {
-			chrome.tabs.create({
-				url: data.url,
-				active: data.become_active || false,
-				openerTabId: tab.id,
-				index: tab.index + 1
-			});
-		} else {
-			chrome.tabs.create({
-				url: data.url,
-				active: data.become_active || false
-			});
-		}
-	}, (err) => {
-		log(`_openNewTab Error: ${err}`);
+export async function openNewTab({ url, become_active: active = false } = {}) {
+	if (url === undefined) { throw new Error('url missing'); }
+
+	const [currentTab] = await browser.tabs.query({ active: true, currentWindow: true });
+
+	const newTab = await browser.tabs.create({
+		url,
+		active,
 	});
-}
-/**
- * Open a new browser tab.
- * @memberOf BackgroundUtils
- *
- * @param  {Object} data 	info about the new tab
- */
-export function openNewTab(data) {
-	if (IS_FIREFOX) {
-		chrome.tabs.create({
-			url: data.url,
-			active: data.become_active || false
-		});
-	} else if (data.tab_id) {
-		chrome.tabs.get(data.tab_id, (tab) => {
-			if (tab) {
-				chrome.tabs.create({
-					url: data.url,
-					active: data.become_active || false,
-					openerTabId: tab.id,
-					index: tab.index + 1,
-					windowId: tab.windowId
-				});
-			} else {
-				_openNewTab(data);
-			}
-		});
-	} else {
-		_openNewTab(data);
+
+	// as chrome cannot open extension pages in incognito tabs
+	// we open a tab in another window and bring it to focus
+	if (
+		currentTab &&
+		currentTab.incognito &&
+		active &&
+		url.startsWith('chrome-extension://') // applies to chromium only
+	) {
+		await browser.windows.update(newTab.windowId, { focused: true });
 	}
 }
 

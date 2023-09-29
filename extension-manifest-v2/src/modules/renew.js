@@ -33,7 +33,7 @@ function revoke() {
 
 function openOnboarding() {
 	// Open onboarding
-	openNewTab({ url: '/app/templates/onboarding.html?renew=1', become_active: true });
+	openNewTab({ url: chrome.runtime.getURL('/app/templates/onboarding.html?renew=1'), become_active: true });
 }
 
 export default async function renew() {
