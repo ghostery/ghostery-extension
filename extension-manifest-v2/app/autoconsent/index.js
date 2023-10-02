@@ -12,10 +12,10 @@
 import { mount, html } from 'hybrids';
 
 import '@ghostery/ui/autoconsent';
-import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
+import { setupIframe, closeIframe } from '@ghostery/ui/iframe';
 
 const hostname = new URLSearchParams(window.location.search).get('host');
-setupIframeSize();
+setupIframe();
 
 async function enable(_, event) {
 	const { all } = event.detail;

@@ -14,7 +14,7 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
-import { sendShowIframeMessage } from './utils/iframe.js';
+import { sendShowIframeMessage } from '/utils/iframe.js';
 
 async function getTabDomain(tabId) {
   return parse((await chrome.tabs.get(tabId)).url).domain;

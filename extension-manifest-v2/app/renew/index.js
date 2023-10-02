@@ -12,10 +12,10 @@
 import { mount, html } from 'hybrids';
 
 import '@ghostery/ui/onboarding';
-import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
+import { setupIframe, closeIframe } from '@ghostery/ui/iframe';
 
 const timestamp = new URLSearchParams(window.location.search).get('timestamp');
-setupIframeSize();
+setupIframe();
 
 function revoke() {
 	chrome.runtime.sendMessage({ action: 'renew:revoke' });

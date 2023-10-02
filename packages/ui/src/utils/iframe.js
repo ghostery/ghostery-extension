@@ -75,13 +75,29 @@ export function showIframe(url, width = '440px') {
 
   window.addEventListener('message', (e) => {
     switch (e.data?.type) {
-      case `ghostery-resize-iframe`:
-        iframe.style.height = e.data.height + 'px';
+      case `ghostery-resize-iframe`: {
+        const { height, width } = e.data;
+
+        iframe.style.height = height + 'px';
+        if (width) {
+          iframe.style.width = width + 'px';
+        }
         break;
+      }
       case `ghostery-close-iframe`:
+        if (e.data.clear) {
+          // Send clearIframe message to other pages
+          chrome.runtime.sendMessage({ action: 'clearIframe', url });
+        }
+
         if (e.data.reload) {
           window.location.reload();
         } else {
+          setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
+        }
+        break;
+      case 'ghostery-clear-iframe':
+        if (iframe.src === e.data.url) {
           setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
         }
         break;
@@ -91,16 +107,24 @@ export function showIframe(url, width = '440px') {
   });
 }
 
-export function closeIframe(reload = false) {
-  window.parent.postMessage({ type: `ghostery-close-iframe`, reload }, '*');
+export function closeIframe(reload = false, clear = false) {
+  // In some cases await for store.set() is not enough to propagate changes
+  // so we need to wait a bit before sending the message
+  setTimeout(() => {
+    window.parent.postMessage(
+      { type: `ghostery-close-iframe`, reload, clear },
+      '*',
+    );
+  }, 100);
 }
 
-export function setupIframeSize() {
+export function setupIframe(width) {
   const resizeObserver = new ResizeObserver(() => {
     window.parent.postMessage(
       {
         type: `ghostery-resize-iframe`,
         height: document.body.clientHeight,
+        width,
       },
       '*',
     );
@@ -111,4 +135,17 @@ export function setupIframeSize() {
   });
 
   document.body.style.overflow = 'hidden';
+
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.action === 'clearIframe') {
+      console.log('clearIframe', msg.url);
+      window.parent.postMessage(
+        {
+          type: `ghostery-clear-iframe`,
+          url: msg.url,
+        },
+        '*',
+      );
+    }
+  });
 }

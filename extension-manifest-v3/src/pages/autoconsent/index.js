@@ -11,14 +11,14 @@
 
 import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/autoconsent';
-import { setupIframeSize, closeIframe } from '@ghostery/ui/iframe';
+import { setupIframe, closeIframe } from '@ghostery/ui/iframe';
 
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 
 const hostname = new URLSearchParams(window.location.search).get('host');
 
-setupIframeSize();
+setupIframe();
 
 async function enable(_, event) {
   const options = await store.resolve(Options);

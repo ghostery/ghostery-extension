@@ -16,14 +16,15 @@ import Session from '/store/session.js';
 import TabStats from '/store/tab-stats.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
+import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
 
 import sleep from '../assets/sleep.svg';
 
 import Navigation from './navigation.js';
 import TrackerDetails from './tracker-details.js';
 
-const NOTIFICATIONS = [
-  {
+const NOTIFICATIONS = {
+  terms: {
     icon: 'triangle',
     type: 'warning',
     text: 'Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.',
@@ -33,16 +34,24 @@ const NOTIFICATIONS = [
         : 'https://www.ghostery.com/support?utm_source=gbe',
     action: 'Get help',
   },
-  __PLATFORM__ !== 'safari'
-    ? {
-        icon: 'heart',
-        type: '',
-        text: 'Hey, do you enjoy Ghostery and want to support our work?',
-        url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-        action: 'Become a Contributor',
-      }
-    : null,
-];
+  contributor:
+    __PLATFORM__ !== 'safari'
+      ? {
+          icon: 'heart',
+          type: '',
+          text: 'Hey, do you enjoy Ghostery and want to support our work?',
+          url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+          action: 'Become a Contributor',
+        }
+      : null,
+  opera: {
+    icon: 'logo-opera',
+    type: 'warning',
+    text: 'Expand Ghostery ad blocking to search engines in a few easy steps. ',
+    url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera',
+    action: 'Enable Ad Blocking Now',
+  },
+};
 
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
@@ -98,10 +107,17 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   session: store(Session),
-  notification: ({ options, session }) =>
-    store.ready(options, session) &&
-    !session.contributor &&
-    NOTIFICATIONS[options.terms ? 1 : 0],
+  notification: async ({ options, session }) => {
+    if (__PLATFORM__ === 'opera' && (await shouldShowOperaSerpAlert())) {
+      return NOTIFICATIONS.opera;
+    }
+
+    if (session.contributor || !store.ready(options, session)) {
+      return null;
+    }
+
+    return !options.terms ? NOTIFICATIONS.terms : NOTIFICATIONS.contributor;
+  },
   content: ({ options, stats, notification }) => html`
     <template layout="column relative">
       ${store.ready(options) &&
@@ -233,19 +249,24 @@ export default {
               </a>
             </ui-text>
           </gh-panel-options>
-          ${notification &&
-          html`
-            <div layout="padding:0:2:1 width:min:full">
-              <gh-panel-notification
-                icon="${notification.icon}"
-                href="${notification.url}"
-                type="${notification.type}"
-              >
-                ${notification.text}
-                <span slot="action">${notification.action}</span>
-              </gh-panel-notification>
-            </div>
-          `}
+          ${html.resolve(
+            notification.then(
+              (n) =>
+                n &&
+                html`
+                  <div layout="padding:0:2:1 width:min:full">
+                    <gh-panel-notification
+                      icon="${n.icon}"
+                      href="${n.url}"
+                      type="${n.type}"
+                    >
+                      ${n.text}
+                      <span slot="action">${n.action}</span>
+                    </gh-panel-notification>
+                  </div>
+                `,
+            ),
+          )}
         </section>
       `}
     </template>
