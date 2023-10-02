@@ -20,7 +20,7 @@ import './onboarding.js';
 // Iframes
 import './iframe.js';
 import './renew.js';
-import './serp.js';
+import './opera-serp.js';
 
 // Components
 define.from(

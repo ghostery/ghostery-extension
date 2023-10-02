@@ -12,7 +12,9 @@
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
+
 import { setCookie } from '/utils/api.js';
+import { sendShowIframeMessage } from '/utils/iframe.js';
 
 const NOTIFICATION_SHOW_LIMIT = 4;
 const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
@@ -48,9 +50,9 @@ async function isSerpSupported() {
   }
 }
 
-export async function shouldShowOperaSerpNotification(cb) {
+export async function showOperaSerpNotification(tabId) {
   try {
-    if (await isSerpSupported()) return false;
+    if (await isSerpSupported()) return;
 
     const { autoconsent, onboarding } = await store.resolve(Options);
 
@@ -68,12 +70,9 @@ export async function shouldShowOperaSerpNotification(cb) {
       return false;
     }
 
-    // Run the callback function
-    if (cb) cb();
-
-    return true;
+    sendShowIframeMessage(tabId, 'pages/onboarding/opera-serp.html');
   } catch (e) {
-    return false;
+    console.error('Error while showing Opera SERP notification', e);
   }
 }
 
