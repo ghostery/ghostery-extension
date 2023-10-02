@@ -74,11 +74,22 @@ async function isFirstPartyIsolation() {
 }
 
 async function getCookie(name) {
-  return chrome.cookies.get({
+  const cookie = await chrome.cookies.get({
     url: COOKIE_URL,
     name,
     ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
   });
+
+  if (
+    cookie &&
+    (cookie.session ||
+      cookie.expirationDate * (__PLATFORM__ !== 'safari' ? 1000 : 1) >
+        Date.now())
+  ) {
+    return cookie;
+  }
+
+  return null;
 }
 
 export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {

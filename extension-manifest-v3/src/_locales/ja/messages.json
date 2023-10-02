@@ -148,6 +148,9 @@
   "enabled": {
     "message": "有効になっています"
   },
+  "enabled_dnr_rulesets": {
+    "message": "Enabled DNR rulesets"
+  },
   "essential": {
     "message": "必需",
     "description": "Tracker category name"
@@ -158,6 +161,9 @@
   },
   "for_more_information_read_our_full": {
     "message": "詳細はこちらをご覧ください"
+  },
+  "further_protection": {
+    "message": "Further Protection"
   },
   "ghostery__action_required": {
     "message": "Ghostery: 要対応"
@@ -338,6 +344,9 @@
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
   },
+  "refresh": {
+    "message": "Refresh"
+  },
   "renew_ghostery_for_full_protection": {
     "message": "Ghosteryを更新して包括的な保護機能を利用する"
   },
@@ -401,6 +410,9 @@
   "terms___conditions": {
     "message": "利用規約"
   },
+  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
+    "message": "The below list is not reactive to changes made in the extension, use refresh button"
+  },
   "tired_of_cookie_popups_": {
     "message": "クッキーのポップアップにうんざりですか?"
   },
@@ -424,6 +436,9 @@
   },
   "trackers_wheel": {
     "message": "トラッカーホイール"
+  },
+  "tracking_prevention_on_search_engine_result_pages": {
+    "message": "Tracking Prevention on Search Engine Result Pages"
   },
   "unidentified": {
     "message": "未知",
@@ -458,6 +473,12 @@
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
     "message": "個々のウェブサイトでGhosteryを一時停止すると、そのウェブサイトがここに表示されます。"
+  },
+  "while_using_a_non_private_search_engine_like_google__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
+    "message": "While using a non-private search engine like Google, Ghostery detects and displays trackers even before you visit a webpage."
+  },
+  "while_using_a_non_private_search_engine_like_google_or_bing__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
+    "message": "While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghosteryが運営するWhoTracks.Meは、GhosteryのAIアンチトラッキング技術に統合されている要素です。 トラッカーに関する最も包括的なグローバルリソースで、Webトラッキングに透明性をもたらしています。"
