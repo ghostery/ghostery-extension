@@ -223,6 +223,8 @@
 		B469CA8827BE924D00408C43 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../dist/_locales; sourceTree = "<group>"; };
 		B469CA9A27BE949000408C43 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = ../../dist/manifest.json; sourceTree = "<group>"; };
 		B479A073299266F300A25D8F /* utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = utils; path = ../../dist/utils; sourceTree = "<group>"; };
+		B49948CB2AB2F01700264E8A /* Ghostery – Privacy Ad Blocker (iOS) - Debug.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker (iOS) - Debug.entitlements"; sourceTree = "<group>"; };
+		B49948CC2AB2F02800264E8A /* Ghostery – Privacy Ad Blocker (iOS) - Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker (iOS) - Release.entitlements"; sourceTree = "<group>"; };
 		B4D49C6F28045EFC00277CCA /* store */ = {isa = PBXFileReference; lastKnownFileType = folder; name = store; path = ../../dist/store; sourceTree = "<group>"; };
 		B4DA09B5283CEBAE0052F343 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4EBAD7E2A1DFA6C006A7D73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -422,6 +424,8 @@
 		468E428D2701F84A008B5792 /* iOS (App) */ = {
 			isa = PBXGroup;
 			children = (
+				B49948CC2AB2F02800264E8A /* Ghostery – Privacy Ad Blocker (iOS) - Release.entitlements */,
+				B49948CB2AB2F01700264E8A /* Ghostery – Privacy Ad Blocker (iOS) - Debug.entitlements */,
 				465E356127551D600032B8D2 /* GhosteryApp.swift */,
 				468E42982701F84A008B5792 /* Info.plist */,
 				468E42922701F84A008B5792 /* LaunchScreen.storyboard */,
@@ -989,6 +993,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "iOS (App)/Ghostery – Privacy Ad Blocker (iOS) - Debug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = HPY23A294X;
@@ -1026,6 +1031,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "iOS (App)/Ghostery – Privacy Ad Blocker (iOS) - Release.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = HPY23A294X;

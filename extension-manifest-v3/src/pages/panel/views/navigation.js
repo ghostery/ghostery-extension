@@ -16,6 +16,11 @@ import { SIGNON_PAGE_URL } from '/utils/api.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
 const MENU = [
+  {
+    icon: 'heart',
+    label: msg`Become a Contributor`,
+    href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+  },
   {},
   {
     icon: 'alert',
@@ -44,14 +49,6 @@ const MENU = [
     href: 'https://www.ghostery.com/?utm_source=gbe',
   },
 ];
-
-if (__PLATFORM__ !== 'safari') {
-  MENU.unshift({
-    icon: 'heart',
-    label: msg`Become a Contributor`,
-    href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-  });
-}
 
 export default {
   session: store(Session),
