@@ -145,6 +145,9 @@
   "enable_new_setup": {
     "message": "새 셋업 활성화"
   },
+  "enable_now": {
+    "message": "Enable now"
+  },
   "enabled": {
     "message": "활성화됨 "
   },
@@ -154,6 +157,9 @@
   "essential": {
     "message": "필수 ",
     "description": "Tracker category name"
+  },
+  "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
+    "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
   },
   "extensions": {
     "message": "확장",
@@ -265,6 +271,9 @@
   "miscellaneous": {
     "message": "기타",
     "description": "Tracker category name"
+  },
+  "more_ad_blocking_available": {
+    "message": "More ad blocking available"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "$${0} 어떠한 방법으로 작동하는지 그 자세한 정보는 Ghostery의 강령에서 확인해 보실 수 있습니다."

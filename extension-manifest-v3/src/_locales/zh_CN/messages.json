@@ -145,6 +145,9 @@
   "enable_new_setup": {
     "message": "启用新设置"
   },
+  "enable_now": {
+    "message": "Enable now"
+  },
   "enabled": {
     "message": "已启用"
   },
@@ -154,6 +157,9 @@
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
+  },
+  "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
+    "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
   },
   "extensions": {
     "message": "扩展",
@@ -265,6 +271,9 @@
   "miscellaneous": {
     "message": "其他",
     "description": "Tracker category name"
+  },
+  "more_ad_blocking_available": {
+    "message": "More ad blocking available"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "如需了解有关 $${0} 方法的更多信息，请参见 Ghostery 的宣言。"
