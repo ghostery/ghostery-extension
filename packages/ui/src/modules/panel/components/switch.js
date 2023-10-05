@@ -34,7 +34,7 @@ export default {
     },
   },
   render: () => html`
-    <template layout="block relative overflow:x margin:-2 padding:2">
+    <template layout="block relative overflow:x margin:0:-2 padding:0:2">
       <slot></slot>
     </template>
   `.css`

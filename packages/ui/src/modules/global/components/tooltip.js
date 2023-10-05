@@ -18,6 +18,7 @@ let activeTooltip = null;
 export default {
   autohide: 2,
   wrap: false,
+  position: 'top', // top, bottom
   show: {
     value: false,
     connect: (host) => () => clearTimeout(timeouts.get(host)),
@@ -58,7 +59,7 @@ export default {
       }
     },
   },
-  render: () => html`
+  render: ({ position }) => html`
     <template layout="contents">
       <div
         ontouchstart="${html.set('show', true)}"
@@ -69,12 +70,15 @@ export default {
         <slot></slot>
         <div
           id="tooltip"
-          layout="absolute bottom:full left:50% layer:90"
+          class="${position}"
+          layout="absolute left:50% layer:90"
+          layout.top="bottom:full"
+          layout.bottom="top:full"
           hidden
         >
           <ui-text
             type="label-s"
-            layout="block:center margin:bottom:0.5 padding:0.5:1"
+            layout="block:center margin:0.5:0 padding:0.5:1"
           >
             <slot name="content"></slot>
           </ui-text>
@@ -92,7 +96,7 @@ export default {
       border: 0.5px solid var(--ui-color-gray-300);
       box-shadow: 0px 4px 12px rgba(32, 44, 68, 0.2);
       border-radius: 4px;
-      white-space: nowrap;  
+      white-space: nowrap;
     }
 
     :host([wrap]) #tooltip ui-text {

@@ -15,45 +15,42 @@ export default {
   blocked: 0,
   modified: 0,
   render: ({ blocked, modified }) => html`
-    <template layout="row">
-      ${(blocked > 0 || modified > 0) &&
+    <template layout="row padding:0.5:0:1">
+      ${blocked > 0 &&
       html`
-        ${blocked > 0 &&
-        html`
-          <section layout="column center grow padding:1.5:0">
-            <div layout="row center gap:0.5">
-              <ui-icon name="block" color="danger-700"></ui-icon>
-              <ui-text type="headline-m">${blocked}</ui-text>
-            </div>
-            <div layout="row center gap:0.5">
-              <ui-text type="label-xs">Trackers blocked</ui-text>
-              <ui-tooltip wrap autohide="10">
-                <span slot="content" layout="block width:200px">
-                  Number of trackers with blocked network requests.
-                </span>
-                <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
-              </ui-tooltip>
-            </div>
-          </section>
-        `}
-        ${modified > 0 &&
-        html`
-          <section layout="column center grow padding:1.5:0">
-            <div layout="row center gap:0.5">
-              <ui-icon name="eye" color="primary-700"></ui-icon>
-              <ui-text type="headline-m">${modified}</ui-text>
-            </div>
-            <div layout="row center gap:0.5">
-              <ui-text type="label-xs">Trackers modified</ui-text>
-              <ui-tooltip wrap autohide="10">
-                <span slot="content" layout="block width:200px">
-                  Number of trackers with removed cookies or fingerprints.
-                </span>
-                <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
-              </ui-tooltip>
-            </div>
-          </section>
-        `}
+        <section layout="column center grow">
+          <div layout="row center gap:0.5">
+            <ui-icon name="block" color="danger-700"></ui-icon>
+            <ui-text type="headline-m">${blocked}</ui-text>
+          </div>
+          <div layout="row center gap:0.5">
+            <ui-text type="label-xs">Trackers blocked</ui-text>
+            <ui-tooltip wrap autohide="10">
+              <span slot="content" layout="block width:200px">
+                Number of trackers with blocked network requests.
+              </span>
+              <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
+            </ui-tooltip>
+          </div>
+        </section>
+      `}
+      ${modified > 0 &&
+      html`
+        <section layout="column center grow">
+          <div layout="row center gap:0.5">
+            <ui-icon name="eye" color="primary-700"></ui-icon>
+            <ui-text type="headline-m">${modified}</ui-text>
+          </div>
+          <div layout="row center gap:0.5">
+            <ui-text type="label-xs">Trackers modified</ui-text>
+            <ui-tooltip wrap autohide="10">
+              <span slot="content" layout="block width:200px">
+                Number of trackers with removed cookies or fingerprints.
+              </span>
+              <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
+            </ui-tooltip>
+          </div>
+        </section>
       `}
     </template>
   `.css`

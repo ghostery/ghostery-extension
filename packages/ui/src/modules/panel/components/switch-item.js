@@ -3,7 +3,7 @@ import { html } from 'hybrids';
 export default {
   active: false,
   render: () => html`<template
-    layout="block width:full absolute top:2 left:2 height::118px"
+    layout="block absolute top:0 left:0 width:full"
     layout[active]="static top:auto left:auto"
   >
     <slot></slot>

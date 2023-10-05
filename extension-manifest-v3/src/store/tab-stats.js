@@ -31,6 +31,30 @@ const Stats = {
   domain: '',
   trackers: [Tracker],
   categories: ({ trackers }) => trackers.map((t) => t.category),
+
+  topCategories: ({ categories }) => {
+    const counts = categories.reduce((acc, category) => {
+      acc[category] = (acc[category] || 0) + 1;
+      return acc;
+    }, {});
+
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+    if (sorted.length > 5) {
+      return [
+        ...sorted
+          .slice(0, 5)
+          .map(([category, count]) => Array(count).fill(category))
+          .flat(),
+        ...Array(
+          sorted.slice(5).reduce((acc, [, count]) => acc + count, 0),
+        ).fill('other'),
+      ];
+    }
+
+    return categories;
+  },
+
   trackersBlocked: ({ trackers }) =>
     trackers.filter((tracker) => tracker.requestsBlocked.length),
   trackersModified: ({ trackers }) =>
@@ -45,11 +69,7 @@ const Stats = {
       const storage = await chrome.storage.local.get(['tabStats:v1']);
       const stats = tab && storage['tabStats:v1']?.entries[tab.id];
 
-      if (stats && tab.url.includes(stats.domain)) {
-        return stats;
-      } else {
-        throw new Error('Tab stats not found');
-      }
+      return stats && tab.url.includes(stats.domain) ? stats : {};
     },
     observe:
       __PLATFORM__ === 'safari' &&

@@ -12,46 +12,15 @@
 import { html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
-import Session from '/store/session.js';
 import TabStats from '/store/tab-stats.js';
+import Notification from '../store/notification.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
-import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
 
 import sleep from '../assets/sleep.svg';
 
 import Navigation from './navigation.js';
 import TrackerDetails from './tracker-details.js';
-
-const NOTIFICATIONS = {
-  terms: {
-    icon: 'triangle',
-    type: 'warning',
-    text: 'Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.',
-    url:
-      __PLATFORM__ === 'safari'
-        ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe'
-        : 'https://www.ghostery.com/support?utm_source=gbe',
-    action: 'Get help',
-  },
-  contributor:
-    __PLATFORM__ !== 'safari'
-      ? {
-          icon: 'heart',
-          type: '',
-          text: 'Hey, do you enjoy Ghostery and want to support our work?',
-          url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-          action: 'Become a Contributor',
-        }
-      : null,
-  opera: {
-    icon: 'logo-opera',
-    type: 'warning',
-    text: 'Expand Ghostery ad blocking to search engines in a few easy steps. ',
-    url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera',
-    action: 'Enable Ad Blocking Now',
-  },
-};
 
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
@@ -106,168 +75,137 @@ export default {
   [router.connect]: { stack: [Navigation, TrackerDetails] },
   options: store(Options),
   stats: store(TabStats),
-  session: store(Session),
-  notification: async ({ options, session }) => {
-    if (__PLATFORM__ === 'opera' && (await shouldShowOperaSerpAlert())) {
-      return NOTIFICATIONS.opera;
-    }
-
-    if (session.contributor || !store.ready(options, session)) {
-      return null;
-    }
-
-    return !options.terms ? NOTIFICATIONS.terms : NOTIFICATIONS.contributor;
-  },
+  notification: store(Notification),
   content: ({ options, stats, notification }) => html`
-    <template layout="column relative">
-      ${store.ready(options) &&
-      (store.ready(stats) || store.error(stats)) &&
+    <template layout="column grow relative">
+      ${store.ready(options, stats) &&
       html`
-        ${options.terms
-          ? html`
-              <ui-panel-header layout="fixed top left width:full">
-                ${store.ready(stats) && stats.domain}
-                <ui-action slot="icon">
-                  <a
-                    href="https://www.ghostery.com"
-                    onclick="${openTabWithUrl}"
-                  >
-                    <ui-icon name="logo"></ui-icon>
-                  </a>
-                </ui-action>
-                <ui-action slot="actions">
-                  <a href="${router.url(Navigation)}">
-                    <ui-icon name="menu" color="gray-900"></ui-icon>
-                  </a>
-                </ui-action>
-              </ui-panel-header>
-            `
-          : html`
-              <gh-panel-alert
-                type="info"
-                icon="logo"
-                layout="absolute inset bottom:auto margin"
-              >
-                Additional Permissions Required <br />
-                <a href="${ONBOARDING_URL}" onclick="${openTabWithUrl}">
-                  Enable Ghostery
-                </a>
-              </gh-panel-alert>
-            `}
+        ${options.terms &&
+        html`
+          <ui-panel-header>
+            ${store.ready(stats) && stats.domain}
+            <ui-action slot="icon">
+              <a href="https://www.ghostery.com" onclick="${openTabWithUrl}">
+                <ui-icon name="logo"></ui-icon>
+              </a>
+            </ui-action>
+            <ui-action slot="actions">
+              <a href="${router.url(Navigation)}">
+                <ui-icon name="menu" color="gray-900"></ui-icon>
+              </a>
+            </ui-action>
+          </ui-panel-header>
+        `}
         <section
           id="gh-panel-alerts"
           layout="fixed inset:1 bottom:auto layer:200"
         ></section>
-        <section layout="column margin:7:0:1">
-          ${!options.terms &&
-          html`
-            <gh-panel-button>
-              <a
-                href="${chrome.runtime.getURL('/pages/onboarding/index.html')}"
-                layout="row center gap:0.5"
-                onclick="${openTabWithUrl}"
-              >
-                <ui-icon name="pause"></ui-icon>
-                Enable Ghostery
-              </a>
-            </gh-panel-button>
-          `}
-          ${!store.ready(stats) &&
-          store.error(stats) &&
-          html`
-            <div layout="column items:center gap margin:2:0:3">
-              <img src="${sleep}" alt="Ghosty sleeping" layout="size:160px" />
-              <ui-text
-                type="label-l"
-                layout="block:center width:::210px margin:top"
-              >
-                Ghostery has nothing to do on this page
-              </ui-text>
-              <ui-text type="body-m" layout="block:center width:::245px">
-                Navigate to a website to see Ghostery in action.
-              </ui-text>
-            </div>
-          `}
-          ${store.ready(stats) &&
-          html`
-            ${options.terms &&
-            options.paused &&
+        ${options.terms
+          ? stats.domain &&
             html`
               <gh-panel-pause
                 onaction="${togglePause}"
                 paused="${options.paused.find(({ id }) => id === stats.domain)}"
               ></gh-panel-pause>
+            `
+          : html`
+              <gh-panel-button>
+                <a
+                  href="${chrome.runtime.getURL(
+                    '/pages/onboarding/index.html',
+                  )}"
+                  layout="row center gap:0.5"
+                  onclick="${openTabWithUrl}"
+                >
+                  <ui-icon name="pause"></ui-icon>
+                  Enable Ghostery
+                </a>
+              </gh-panel-button>
             `}
-            <ui-panel-stats
-              domain="${stats.domain}"
-              categories="${stats.categories}"
-              trackers="${stats.trackers}"
-              dialog="${TrackerDetails}"
-              type="${options.panel.statsType}"
-              layout="margin:2"
-              ontypechange="${setStatsType}"
-            >
-            </ui-panel-stats>
-          `}
-          ${store.ready(stats) &&
-          html`
-            <gh-panel-feedback
-              modified=${stats.trackersModified.length}
-              blocked=${stats.trackersBlocked.length}
-            ></gh-panel-feedback>
-          `}
-
-          <gh-panel-options>
-            <span slot="header">Ghostery settings</span>
-            <ui-text color="gray-900">
-              <a
-                href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-                onclick="${openTabWithUrl}"
-                layout="block"
-              >
-                <gh-panel-options-item
-                  icon="ads"
-                  enabled="${options.blockAds}"
-                  terms="${options.terms}"
+        <gh-panel-container>
+          ${stats.domain
+            ? html`
+                <ui-panel-stats
+                  domain="${stats.domain}"
+                  categories="${stats.topCategories}"
+                  trackers="${stats.trackers}"
+                  dialog="${TrackerDetails}"
+                  type="${options.panel.statsType}"
+                  ontypechange="${setStatsType}"
+                  layout="margin:1:1.5"
                 >
-                  Ad-Blocking
-                </gh-panel-options-item>
-                <gh-panel-options-item
-                  icon="tracking"
-                  enabled="${options.blockTrackers}"
-                  terms="${options.terms}"
-                >
-                  Anti-Tracking
-                </gh-panel-options-item>
-                <gh-panel-options-item
-                  icon="autoconsent"
-                  enabled="${options.blockAnnoyances}"
-                  terms="${options.terms}"
-                >
-                  Never-Consent
-                </gh-panel-options-item>
-              </a>
-            </ui-text>
-          </gh-panel-options>
-          ${html.resolve(
-            notification.then(
-              (n) =>
-                n &&
+                </ui-panel-stats>
+                ${!!(
+                  stats.trackersModified.length || stats.trackersBlocked.length
+                ) &&
                 html`
-                  <div layout="padding:0:2:1 width:min:full">
-                    <gh-panel-notification
-                      icon="${n.icon}"
-                      href="${n.url}"
-                      type="${n.type}"
-                    >
-                      ${n.text}
-                      <span slot="action">${n.action}</span>
-                    </gh-panel-notification>
-                  </div>
-                `,
-            ),
-          )}
-        </section>
+                  <gh-panel-feedback
+                    modified=${stats.trackersModified.length}
+                    blocked=${stats.trackersBlocked.length}
+                    layout="margin:bottom:1.5"
+                  ></gh-panel-feedback>
+                `}
+              `
+            : html`
+                <div layout="column items:center gap margin:1.5">
+                  <img
+                    src="${sleep}"
+                    alt="Ghosty sleeping"
+                    layout="size:160px"
+                  />
+                  <ui-text
+                    type="label-l"
+                    layout="block:center width:::210px margin:top"
+                  >
+                    Ghostery has nothing to do on this page
+                  </ui-text>
+                  <ui-text type="body-m" layout="block:center width:::245px">
+                    Navigate to a website to see Ghostery in action.
+                  </ui-text>
+                </div>
+              `}
+          <ui-text>
+            <a
+              href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
+              onclick="${openTabWithUrl}"
+              layout="block margin:0:1.5"
+            >
+              <gh-panel-options-item
+                icon="ads"
+                enabled="${options.blockAds}"
+                terms="${options.terms}"
+              >
+                Ad-Blocking
+              </gh-panel-options-item>
+              <gh-panel-options-item
+                icon="tracking"
+                enabled="${options.blockTrackers}"
+                terms="${options.terms}"
+              >
+                Anti-Tracking
+              </gh-panel-options-item>
+              <gh-panel-options-item
+                icon="autoconsent"
+                enabled="${options.blockAnnoyances}"
+                terms="${options.terms}"
+              >
+                Never-Consent
+              </gh-panel-options-item>
+            </a>
+          </ui-text>
+        </gh-panel-container>
+        ${store.ready(notification) &&
+        html`
+          <gh-panel-notification
+            icon="${notification.icon}"
+            href="${notification.url}"
+            type="${notification.type}"
+            layout="width:min:full padding:1.5"
+          >
+            ${notification.text}
+            <span slot="action">${notification.action}</span>
+          </gh-panel-notification>
+        `}
       `}
     </template>
   `,
