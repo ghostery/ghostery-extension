@@ -33,26 +33,24 @@ const Stats = {
   categories: ({ trackers }) => trackers.map((t) => t.category),
 
   topCategories: ({ categories }) => {
-    const counts = categories.reduce((acc, category) => {
-      acc[category] = (acc[category] || 0) + 1;
-      return acc;
-    }, {});
+    const counts = Object.entries(
+      categories.reduce((acc, category) => {
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {}),
+    );
 
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    if (counts.length < 6) return categories;
 
-    if (sorted.length > 5) {
-      return [
-        ...sorted
-          .slice(0, 5)
-          .map(([category, count]) => Array(count).fill(category))
-          .flat(),
-        ...Array(
-          sorted.slice(5).reduce((acc, [, count]) => acc + count, 0),
-        ).fill('other'),
-      ];
-    }
-
-    return categories;
+    return [
+      ...counts
+        .slice(0, 5)
+        .map(([category, count]) => Array(count).fill(category))
+        .flat(),
+      ...Array(counts.slice(5).reduce((acc, [, count]) => acc + count, 0)).fill(
+        'other',
+      ),
+    ];
   },
 
   trackersBlocked: ({ trackers }) =>
