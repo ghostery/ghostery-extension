@@ -71,11 +71,11 @@ export default {
     dialog,
     label,
   }) => html`
-    <template layout="column gap:2">
+    <template layout="column gap:0.5">
       <div layout="row items:center gap height::4.5">
         <div layout="row gap grow">
           <ui-text type="label-m">${label || msg`Trackers detected`}</ui-text>
-          <ui-tooltip wrap autohide="10">
+          <ui-tooltip wrap autohide="10" position="bottom">
             <span slot="content" layout="block width:200px">
               Mind that not all listed entities are trackers, that is not all of
               them collect personal data
@@ -85,7 +85,7 @@ export default {
         </div>
         ${wtmUrl &&
         html`
-          <ui-tooltip>
+          <ui-tooltip position="bottom">
             <span slot="content">WhoTracks.Me Statistical Report</span>
             <ui-panel-action>
               <a href="${wtmUrl}" onclick="${openTabWithUrl}" target="_blank">
@@ -97,7 +97,7 @@ export default {
         ${trackers &&
         html`
           <ui-panel-action-group>
-            <ui-tooltip>
+            <ui-tooltip position="bottom">
               <span slot="content">Simple View</span>
               <ui-panel-action
                 grouped
@@ -109,7 +109,7 @@ export default {
                 </button>
               </ui-panel-action>
             </ui-tooltip>
-            <ui-tooltip>
+            <ui-tooltip position="bottom">
               <span slot="content">Detailed View</span>
               <ui-panel-action
                 grouped
@@ -125,7 +125,10 @@ export default {
         `}
       </div>
       <ui-panel-switch>
-        <ui-panel-switch-item active="${type === 'graph'}" layout="row gap:3">
+        <ui-panel-switch-item
+          active="${type === 'graph'}"
+          layout="row gap:3 padding:0:1"
+        >
           <ui-tracker-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
@@ -142,6 +145,8 @@ export default {
                 <ui-panel-category
                   name="${category}"
                   count="${count}"
+                  onclick="${trackers && html.set('type', 'list')}"
+                  actionable="${!!trackers}"
                 ></ui-panel-category>
               `,
             )}
@@ -151,11 +156,11 @@ export default {
         html`
           <ui-panel-switch-item
             active="${type === 'list'}"
-            layout="column grow"
+            layout="column grow height::104px"
           >
             ${!trackers.length &&
             html`
-              <ui-panel-list layout="grow">
+              <ui-panel-list layout="grow margin:0.5:0">
                 <ui-text
                   type="body-s"
                   color="gray-600"
@@ -167,7 +172,11 @@ export default {
             `}
             ${trackers.map(
               ([name, trackers]) => html`
-                <ui-panel-list name="${name}">
+                <ui-panel-list
+                  name="${name}"
+                  layout:last-of-type="margin:bottom:0.5"
+                  layout:first-of-type="margin:top:0.5"
+                >
                   <div slot="header" layout="row items:center gap">
                     <ui-panel-badge>${trackers.length}</ui-panel-badge>
                   </div>

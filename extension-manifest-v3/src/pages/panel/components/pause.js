@@ -72,7 +72,7 @@ export default {
       <button
         id="main"
         class="${{ active: pauseList, paused }}"
-        layout="row center margin:2 height:6"
+        layout="row center margin:1.5 height:6"
         onclick="${!pauseList && dispatchAction}"
       >
         <div id="label" layout="grow row center gap:0.5 shrink overflow">

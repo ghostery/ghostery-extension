@@ -70,7 +70,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
@@ -80,12 +80,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   background: var(--ui-color-white);
+  max-height: 100dvh;
 }
 
 @media screen and (max-height: 600px) {
   body {
     max-height: 600px;
-    overflow-y: auto;
   }
 }
 

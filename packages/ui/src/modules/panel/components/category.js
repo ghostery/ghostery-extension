@@ -20,6 +20,7 @@ import * as labels from '../../../utils/labels.js';
 export default {
   name: '',
   count: 0,
+  actionable: false,
   render: ({ name, count }) => html`
     <template layout="row gap items:center">
       <div id="pill" layout="size:12px:6px"></div>
@@ -46,6 +47,13 @@ export default {
 
     :host(:last-child) #label {
       border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      :host([actionable]) {
+        cursor: pointer;
+      }
     }
   `,
 };
