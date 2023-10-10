@@ -31,4 +31,5 @@ export const categories = {
   pornvertising: msg`Adult Advertising | Tracker category name`,
   social_media: msg`Social Media | Tracker category name`,
   telemetry: msg`Telemetry | Tracker category name`,
+  other: msg`Other | Tracker category name`,
 };

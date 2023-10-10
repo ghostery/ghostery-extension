@@ -14,7 +14,7 @@ import { html } from 'hybrids';
 export default {
   render: () => html`
     <template layout="block">
-      <ui-text type="label-m" layout="grid margin:2" color="white">
+      <ui-text type="label-m" layout="grid margin:1.5" color="white">
         <slot></slot>
       </ui-text>
     </template>

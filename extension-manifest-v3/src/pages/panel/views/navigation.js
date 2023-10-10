@@ -56,7 +56,7 @@ if (__PLATFORM__ !== 'safari') {
 export default {
   session: store(Session),
   content: ({ session }) => html`
-    <template layout="grid">
+    <template layout="grid grow">
       <ui-panel-header layout="fixed top left width:full">
         Menu
         <ui-action slot="actions">

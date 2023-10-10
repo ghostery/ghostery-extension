@@ -30,7 +30,7 @@ define.from(
 mount(document.body, {
   stack: router([Home]),
   content: ({ stack }) => html`
-    <template layout="block width:full:350px">${stack}</template>
+    <template layout="row width:full:350px">${stack}</template>
   `,
 });
 

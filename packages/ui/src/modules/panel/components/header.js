@@ -14,7 +14,7 @@ import { html } from 'hybrids';
 export default {
   render: () => html`
     <template
-      layout="grid:max|1|max items:center gap:2 height:7 padding:2 relative layer:100"
+      layout="grid:max|1|max items:center gap:2 height:6 padding:1.5 relative layer:100"
     >
       <div layout="row center width:3">
         <slot name="icon"></slot>

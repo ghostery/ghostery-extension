@@ -26,6 +26,7 @@ const colors = {
   pornvertising: '#CB4E4E',
   social_media: '#CBA14E',
   telemetry: '#A1CB4E',
+  other: '#D5DBE5',
 };
 
 const backgroundColors = {
@@ -51,6 +52,7 @@ export const order = [
   'social_media',
   'telemetry',
   'unidentified',
+  'other',
 ];
 
 export function getCategoryKey(category) {
