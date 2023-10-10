@@ -117,7 +117,7 @@ export default {
                   layout="row center gap:0.5"
                   onclick="${openTabWithUrl}"
                 >
-                  <ui-icon name="pause"></ui-icon>
+                  <ui-icon name="play"></ui-icon>
                   Enable Ghostery
                 </a>
               </gh-panel-button>
