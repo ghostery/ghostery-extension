@@ -123,12 +123,18 @@
   "done": {
     "message": "Erledigt"
   },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "Entfernt Werbung auf Websites für sicheres und schnelles Surfen."
   },
   "email": {
     "message": "E-Mail-Adresse",
     "description": "Tracker category name"
+  },
+  "enable_ad_blocking_now": {
+    "message": "Enable Ad Blocking Now"
   },
   "enable_ghostery": {
     "message": "Ghostery aktivieren"
@@ -170,6 +176,9 @@
   },
   "further_protection": {
     "message": "Further Protection"
+  },
+  "get_help": {
+    "message": "Get help"
   },
   "ghostery__action_required": {
     "message": "Ghostery: Aktion erforderlich"
@@ -227,6 +236,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Helfen Sie Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
   "hosting": {
     "message": "Hosting",
@@ -322,6 +334,10 @@
   },
   "on_this_website": {
     "message": "auf dieser Website"
+  },
+  "other": {
+    "message": "Sonstiges",
+    "description": "Tracker category name"
   },
   "pause_on_this_site": {
     "message": "Auf dieser Seite pausieren"

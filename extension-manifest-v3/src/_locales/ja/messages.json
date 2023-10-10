@@ -123,12 +123,18 @@
   "done": {
     "message": "完了"
   },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "ウェブサイト上の広告を除去し、安全で高速なブラウジングを実現します。"
   },
   "email": {
     "message": "メール",
     "description": "Tracker category name"
+  },
+  "enable_ad_blocking_now": {
+    "message": "Enable Ad Blocking Now"
   },
   "enable_ghostery": {
     "message": "Ghosteryを有効にする"
@@ -170,6 +176,9 @@
   },
   "further_protection": {
     "message": "Further Protection"
+  },
+  "get_help": {
+    "message": "Get help"
   },
   "ghostery__action_required": {
     "message": "Ghostery: 要対応"
@@ -227,6 +236,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。ぜひサポートをお願いいたします。"
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
   "hosting": {
     "message": "ホスティング",
@@ -322,6 +334,10 @@
   },
   "on_this_website": {
     "message": "このウェブサイトに対して"
+  },
+  "other": {
+    "message": "その他",
+    "description": "Tracker category name"
   },
   "pause_on_this_site": {
     "message": "このサイトでのポーズ"
