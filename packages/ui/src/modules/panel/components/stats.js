@@ -125,7 +125,10 @@ export default {
         `}
       </div>
       <ui-panel-switch>
-        <ui-panel-switch-item active="${type === 'graph'}" layout="row gap:3">
+        <ui-panel-switch-item
+          active="${type === 'graph'}"
+          layout="row gap:3 padding:0:1"
+        >
           <ui-tracker-wheel
             categories="${categories}"
             layout="shrink:0 size:12 margin:top"
