@@ -51,7 +51,6 @@ export default {
       ),
   },
   domain: '',
-  wtmUrl: ({ domain }) => `https://www.whotracks.me/websites/${domain}.html`,
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -66,7 +65,7 @@ export default {
     categories,
     categoryList,
     trackers,
-    wtmUrl,
+    domain,
     type,
     dialog,
     label,
@@ -83,12 +82,16 @@ export default {
             <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
           </ui-tooltip>
         </div>
-        ${wtmUrl &&
+        ${domain &&
         html`
           <ui-tooltip position="bottom">
             <span slot="content">WhoTracks.Me Statistical Report</span>
             <ui-panel-action>
-              <a href="${wtmUrl}" onclick="${openTabWithUrl}" target="_blank">
+              <a
+                href="https://www.whotracks.me/websites/${domain}.html"
+                onclick="${openTabWithUrl}"
+                target="_blank"
+              >
                 <ui-icon name="whotracksme"></ui-icon>
               </a>
             </ui-panel-action>
