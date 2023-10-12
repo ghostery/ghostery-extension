@@ -137,11 +137,13 @@ if (__PLATFORM__ === 'firefox') {
       if (event === 'observed') {
         return;
       }
-      const request = Request.fromRawDetails({
+
+      const request = Request.fromRequestDetails({
         url: state.url,
-        sourceUrl: state.tabUrl,
+        originUrl: state.tabUrl,
       });
       request.modified = true;
+
       updateTabStats(state.tabId, [request]);
     },
   });
