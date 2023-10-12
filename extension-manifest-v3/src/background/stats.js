@@ -9,7 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
@@ -50,22 +49,22 @@ async function refreshIcon(tabId) {
   if (!stats) return;
 
   const options = await store.resolve(Options);
-  if (options.trackerWheel && stats.trackers.length > 0) {
-    const paused = options.paused?.some(({ id }) => id === stats.domain);
-    const data = {};
+  const paused = options.paused?.some(({ id }) => id === stats.domain);
+  const data = {};
 
-    if (paused || !options.terms) {
-      data.path = {
-        16: '/assets/images/icon19_off.png',
-        32: '/assets/images/icon38_off.png',
-      };
-    } else {
-      data.imageData = getOffscreenImageData(
-        128,
-        stats.trackers.map((t) => t.category),
-      );
-    }
+  if (paused || !options.terms) {
+    data.path = {
+      16: '/assets/images/icon19_off.png',
+      32: '/assets/images/icon38_off.png',
+    };
+  } else if (options.trackerWheel && stats.trackers.length > 0) {
+    data.imageData = getOffscreenImageData(
+      128,
+      stats.trackers.map((t) => t.category),
+    );
+  }
 
+  if (data.path || data.imageData) {
     // Note: Even in MV3, this is not (yet) returning a promise.
     chromeAction.setIcon({ tabId, ...data }, () => {
       if (chrome.runtime.lastError) {
@@ -95,91 +94,97 @@ const delayMap = new Map();
 function updateIcon(tabId) {
   if (delayMap.has(tabId)) return;
 
-  const timeoutId = setTimeout(
-    () => {
-      delayMap.delete(tabId);
-      refreshIcon(tabId);
-    },
-    // Firefox flickers when updating the icon, so we should expand the throttle
-    __PLATFORM__ === 'firefox' ? 1000 : 250,
+  delayMap.set(
+    tabId,
+    setTimeout(
+      () => {
+        delayMap.delete(tabId);
+        refreshIcon(tabId);
+      },
+      // Firefox flickers when updating the icon, so we should expand the throttle
+      __PLATFORM__ === 'firefox' ? 1000 : 250,
+    ),
   );
 
-  delayMap.set(tabId, timeoutId);
   refreshIcon(tabId);
 }
 
-updateIcon.cancel = (tabId) => {
-  const timeoutId = delayMap.get(tabId);
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-    delayMap.delete(tabId);
-  }
-};
+export function setupTabStats(tabId, domain) {
+  flushTabStatsToDailyStats(tabId);
 
-export async function getStatsWithMetadata(since) {
-  const result = await getMergedStats(since);
-
-  const patternsDetailed = [];
-  for (const key of result.patterns) {
-    const pattern = await trackerDb.getPattern(key);
-    if (pattern) patternsDetailed.push(pattern);
+  if (domain) {
+    tabStats.set(tabId, {
+      domain,
+      trackers: [],
+    });
+  } else {
+    tabStats.delete(tabId);
   }
 
-  return Object.assign(result, { patternsDetailed });
+  updateIcon(tabId);
 }
 
-export async function updateTabStats(tabId, requests) {
-  const stats = tabStats.get(tabId);
+export function updateTabStats(tabId, requests) {
+  Promise.resolve().then(async () => {
+    const stats = tabStats.get(tabId);
 
-  // Stats might not be available on Firefox using webRequest.onBeforeRequest
-  // as some of the requests are fired before the tab is created, tabId -1
-  if (!stats) return;
+    // Stats might not be available on Firefox using webRequest.onBeforeRequest
+    // as some of the requests are fired before the tab is created, tabId -1
+    if (!stats) return;
 
-  for (const request of requests) {
-    const pattern = await trackerDb.getMetadata(request, {
-      getDomainMetadata: true,
-    });
+    let sortingRequired = false;
 
-    if (pattern) {
-      let tracker = stats.trackers.find((t) => t.id === pattern.id);
+    // Filter out requests that are not related to the current domain
+    // (e.g. requests on trailing edge when navigation to a new page is in progress)
+    requests = requests.filter(
+      (request) => request?.initiatorDomain === stats.domain ?? true,
+    );
 
-      if (!tracker) {
-        tracker = { ...pattern, requests: [] };
-        stats.trackers.push(tracker);
-      }
-
-      tracker.requests.push({
-        url: request.url,
-        blocked: request.blocked || false,
-        modified: request.modified || false,
+    for (const request of requests) {
+      const pattern = await trackerDb.getMetadata(request, {
+        getDomainMetadata: true,
       });
-    } else if (request.blocked || request.modified) {
-      let tracker = stats.trackers.find((t) => t.id === request.domain);
 
-      if (!tracker) {
-        tracker = {
-          id: request.domain,
-          name: request.domain,
-          category: 'unidentified',
-          requests: [],
-        };
-        stats.trackers.push(tracker);
+      if (pattern || request.blocked || request.modified) {
+        let tracker =
+          stats.trackers.find((t) => t.id === pattern.id) ||
+          stats.trackers.find((t) => t.id === request.domain);
+
+        if (!tracker) {
+          tracker = pattern
+            ? { ...pattern, requests: [] }
+            : {
+                id: request.domain,
+                name: request.domain,
+                category: 'unidentified',
+                requests: [],
+              };
+
+          stats.trackers.push(tracker);
+          sortingRequired = true;
+        }
+
+        tracker.requests.push({
+          id: request.requestId,
+          url: request.url,
+          blocked: request.blocked,
+          modified: request.modified,
+        });
       }
-
-      tracker.requests.push({
-        url: request.url,
-        blocked: request.blocked || false,
-        modified: request.modified || false,
-      });
     }
-  }
 
-  stats.trackers.sort(
-    (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
-  );
+    if (sortingRequired) {
+      stats.trackers.sort(
+        (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
+      );
+    }
 
-  tabStats.set(tabId, stats);
-  updateIcon(tabId);
+    // After navigation stats are cleared, so the current `stats` variable might be outdated
+    if (stats === tabStats.get(tabId)) {
+      tabStats.set(tabId, stats);
+      updateIcon(tabId);
+    }
+  });
 }
 
 const DAILY_STATS_ADS_CATEGORY = 'advertising';
@@ -235,21 +240,16 @@ async function flushTabStatsToDailyStats(tabId) {
   });
 }
 
-export function setupTabStats(tabId, domain) {
-  flushTabStatsToDailyStats(tabId);
+export async function getStatsWithMetadata(since) {
+  const result = await getMergedStats(since);
 
-  if (domain) {
-    tabStats.set(tabId, {
-      domain,
-      requestsBlocked: [],
-      trackers: [],
-    });
-
-    // Clean up icon update
-    updateIcon.cancel(tabId);
-  } else {
-    tabStats.delete(tabId);
+  const patternsDetailed = [];
+  for (const key of result.patterns) {
+    const pattern = await trackerDb.getPattern(key);
+    if (pattern) patternsDetailed.push(pattern);
   }
+
+  return Object.assign(result, { patternsDetailed });
 }
 
 chrome.tabs.onRemoved.addListener((tabId) => {
@@ -265,15 +265,20 @@ if (__PLATFORM__ === 'safari') {
         // with the correct tabId (sometimes it is correct, sometimes it is 0).
         // Thus, let the content_script fire it.
         case 'onCommitted': {
-          const { domain, hostname } = parse(sender.url);
-          setupTabStats(sender.tab.id, domain || hostname);
+          const request = Request.fromRequestDetails({ url: sender.url });
+          setupTabStats(
+            sender.tab.id,
+            request.isHttp || request.isHttps
+              ? request.domain || request.hostname
+              : undefined,
+          );
           break;
         }
         case 'updateTabStats':
           updateTabStats(
             sender.tab.id,
             msg.urls.map((url) =>
-              Request.fromRawDetails({ url, sourceUrl: sender.url }),
+              Request.fromRequestDetails({ url, originUrl: sender.url }),
             ),
           );
           break;
@@ -284,29 +289,32 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-// Following code only applies to chromium-based browsers excluding:
-// * Safari - it does not support chrome.webRequest.onBeforeRequest
-// * Firefox - it has own implementation in `./adblocker.js` with blocking requests
+if (__PLATFORM__ !== 'safari') {
+  chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+    if (details.tabId < 0) return;
+
+    if (details.frameType === 'outermost_frame') {
+      const request = Request.fromRequestDetails(details);
+
+      setupTabStats(
+        details.tabId,
+        request.isHttp || request.isHttps
+          ? request.domain || request.hostname
+          : undefined,
+      );
+    }
+  });
+}
+
 if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
       if (details.tabId < 0) return;
 
       const request = Request.fromRequestDetails(details);
-
-      if (request.isMainFrame() && !request.isHttp && !request.isHttps) {
-        return;
+      if (details.type !== 'main_frame') {
+        updateTabStats(details.tabId, [request]);
       }
-
-      Promise.resolve().then(
-        request.isMainFrame()
-          ? () =>
-              setupTabStats(
-                details.tabId,
-                request.sourceDomain || request.sourceHostname,
-              )
-          : () => updateTabStats(details.tabId, [request]),
-      );
     },
     {
       urls: ['<all_urls>'],
@@ -318,7 +326,16 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
       if (details.error !== 'net::ERR_BLOCKED_BY_CLIENT') return;
 
       const stats = tabStats.get(details.tabId);
-      stats?.requestsBlocked.push(details.requestId);
+      if (!stats) return;
+
+      for (const tracker of stats.trackers) {
+        for (const request of tracker.requests) {
+          if (request.id === details.requestId) {
+            request.blocked = true;
+            return;
+          }
+        }
+      }
     },
     {
       urls: ['<all_urls>'],

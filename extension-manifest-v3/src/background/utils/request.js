@@ -31,6 +31,7 @@ export default class ExtendedRequest extends Request {
       url: details.url.toLowerCase(),
 
       sourceDomain: parsedSourceUrl.domain || '',
+      initiatorDomain: details.initiator ? parse(details.initiator).domain : '',
       sourceHostname: parsedSourceUrl.hostname || '',
       sourceUrl: sourceUrl.toLowerCase(),
 
@@ -44,10 +45,12 @@ export default class ExtendedRequest extends Request {
     super(data);
 
     this.requestId = data.requestId;
+
     this.blocked = false;
     this.modified = false;
 
     this.sourceDomain = data.sourceDomain;
+    this.initiatorDomain = data.initiatorDomain;
     this.sourceHostname = data.sourceHostname;
   }
 }
