@@ -16,12 +16,6 @@ function postMessage({ urls }) {
   chrome.runtime.sendMessage({ action: 'updateTabStats', urls });
 }
 
-// Should only be needed on Safari:
-// the tabId of the initial chrome.webNavigation.onCommitted
-// is not reliable. When opening bookmarks, it can happen that
-// the event is associated with a tabId of 0.
-chrome.runtime.sendMessage({ action: 'onCommitted' });
-
 // Based on https://github.com/mozilla-mobile/firefox-ios/blob/1f3fd1640214b2b442c573ea7d2882d480f4f24c/content-blocker-lib-ios/js/TrackingProtectionStats.js
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this

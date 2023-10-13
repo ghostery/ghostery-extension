@@ -109,21 +109,6 @@ function updateIcon(tabId) {
   refreshIcon(tabId);
 }
 
-export function setupTabStats(tabId, domain) {
-  flushTabStatsToDailyStats(tabId);
-
-  if (domain) {
-    tabStats.set(tabId, {
-      domain,
-      trackers: [],
-    });
-  } else {
-    tabStats.delete(tabId);
-  }
-
-  updateIcon(tabId);
-}
-
 export function updateTabStats(tabId, requests) {
   Promise.resolve().then(async () => {
     const stats = tabStats.get(tabId);
@@ -134,11 +119,9 @@ export function updateTabStats(tabId, requests) {
 
     let sortingRequired = false;
 
-    // Filter out requests that are not related to the current domain
+    // Filter out requests that are not related to the current page
     // (e.g. requests on trailing edge when navigation to a new page is in progress)
-    requests = requests.filter(
-      (request) => request?.initiatorDomain === stats.domain ?? true,
-    );
+    requests = requests.filter((request) => request.isFromOriginUrl(stats.url));
 
     for (const request of requests) {
       const pattern = await trackerDb.getMetadata(request, {
@@ -147,7 +130,7 @@ export function updateTabStats(tabId, requests) {
 
       if (pattern || request.blocked || request.modified) {
         let tracker =
-          stats.trackers.find((t) => t.id === pattern.id) ||
+          (pattern && stats.trackers.find((t) => t.id === pattern.id)) ||
           stats.trackers.find((t) => t.id === request.domain);
 
         if (!tracker) {
@@ -257,24 +240,48 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   tabStats.delete(tabId);
 });
 
+function setupTabStats(tabId, request) {
+  flushTabStatsToDailyStats(tabId);
+
+  if (request.isHttp || request.isHttps) {
+    tabStats.set(tabId, {
+      url: request.url,
+      domain: request.domain || request.hostname,
+      trackers: [],
+    });
+  } else {
+    tabStats.delete(tabId);
+  }
+
+  updateIcon(tabId);
+}
+
+// Setup stats for the tab when a user navigates to a new page
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+  if (details.tabId < 0) return;
+
+  if (details.parentFrameId === -1) {
+    setupTabStats(details.tabId, Request.fromRequestDetails(details));
+  }
+});
+
 if (__PLATFORM__ === 'safari') {
+  // On Safari we have content script to sends back the list of urls
   chrome.runtime.onMessage.addListener((msg, sender) => {
-    if (sender.url && sender.frameId !== undefined && sender.tab?.id) {
+    if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
       switch (msg.action) {
-        // We cannot trust that Safari fires "chrome.webNavigation.onCommitted"
-        // with the correct tabId (sometimes it is correct, sometimes it is 0).
-        // Thus, let the content_script fire it.
-        case 'onCommitted': {
-          const request = Request.fromRequestDetails({ url: sender.url });
-          setupTabStats(
-            sender.tab.id,
-            request.isHttp || request.isHttps
-              ? request.domain || request.hostname
-              : undefined,
-          );
-          break;
-        }
         case 'updateTabStats':
+          // On Safari `onBeforeNavigate` event is not trigger correctly
+          // if a user navigates to the page by setting URL in the address bar.
+          // This condition ensures that we setup tabStats for the tab
+          // when `updateTabStats` message is received.
+          if (tabStats.get(sender.tab.id)?.url !== sender.url) {
+            setupTabStats(
+              sender.tab.id,
+              Request.fromRequestDetails({ url: sender.url }),
+            );
+          }
+
           updateTabStats(
             sender.tab.id,
             msg.urls.map((url) =>
@@ -289,24 +296,8 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-if (__PLATFORM__ !== 'safari') {
-  chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-    if (details.tabId < 0) return;
-
-    if (details.frameType === 'outermost_frame') {
-      const request = Request.fromRequestDetails(details);
-
-      setupTabStats(
-        details.tabId,
-        request.isHttp || request.isHttps
-          ? request.domain || request.hostname
-          : undefined,
-      );
-    }
-  });
-}
-
 if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
+  // Chromium based browser can use readonly webRequest API
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
       if (details.tabId < 0) return;
@@ -321,18 +312,19 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
     },
   );
 
+  // Callback for listing if requests were blocked by the DNR
   chrome.webRequest.onErrorOccurred.addListener(
     (details) => {
-      if (details.error !== 'net::ERR_BLOCKED_BY_CLIENT') return;
+      if (details.error === 'net::ERR_BLOCKED_BY_CLIENT') {
+        const stats = tabStats.get(details.tabId);
+        if (!stats) return;
 
-      const stats = tabStats.get(details.tabId);
-      if (!stats) return;
-
-      for (const tracker of stats.trackers) {
-        for (const request of tracker.requests) {
-          if (request.id === details.requestId) {
-            request.blocked = true;
-            return;
+        for (const tracker of stats.trackers) {
+          for (const request of tracker.requests) {
+            if (request.id === details.requestId) {
+              request.blocked = true;
+              return;
+            }
           }
         }
       }
