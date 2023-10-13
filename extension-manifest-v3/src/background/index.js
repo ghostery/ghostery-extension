@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// import to initialise webNavigation listener
+import './utils/origin-url';
 import './onboarding.js';
 
 import './autoconsent.js';
