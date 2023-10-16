@@ -10,7 +10,7 @@
  */
 
 // This global provides an API like an ES Map but will sync
-// with local storage from time to time. That is done to prevent
+// with session storage from time to time. That is done to prevent
 // the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
 export default class AutoSyncingMap {
@@ -30,7 +30,7 @@ export default class AutoSyncingMap {
     this.maxEntries = maxEntries;
 
     // Make sure old entries that were not cleaned up are eventually
-    // removed. Otherwise, we could exceed the local storage quota.
+    // removed. Otherwise, we could exceed the session storage quota.
     // Plus, when the maps get big, serializing and deserializing
     // may become expensive. If the actively triggered clean up works,
     // there should be no need to make this expiration too aggressive.
