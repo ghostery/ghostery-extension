@@ -64,19 +64,17 @@ async function refreshIcon(tabId) {
     );
   }
 
-  if (data.path || data.imageData) {
-    // Note: Even in MV3, this is not (yet) returning a promise.
-    chromeAction.setIcon({ tabId, ...data }, () => {
-      if (chrome.runtime.lastError) {
-        console.debug(
-          'setIcon failed for tabId',
-          tabId,
-          '(most likely the tab was closed)',
-          chrome.runtime.lastError,
-        );
-      }
-    });
-  }
+  // Note: Even in MV3, this is not (yet) returning a promise.
+  chromeAction.setIcon({ tabId, ...data }, () => {
+    if (chrome.runtime.lastError) {
+      console.debug(
+        'setIcon failed for tabId',
+        tabId,
+        '(most likely the tab was closed)',
+        chrome.runtime.lastError,
+      );
+    }
+  });
 
   if (Options.trackerCount) {
     try {
@@ -101,12 +99,10 @@ function updateIcon(tabId) {
         delayMap.delete(tabId);
         refreshIcon(tabId);
       },
-      // Firefox flickers when updating the icon, so we should expand the throttle
+      // Firefox flickers when updating the icon, so we should expand the debounce delay
       __PLATFORM__ === 'firefox' ? 1000 : 250,
     ),
   );
-
-  refreshIcon(tabId);
 }
 
 export function updateTabStats(tabId, requests) {
@@ -147,12 +143,34 @@ export function updateTabStats(tabId, requests) {
           sortingRequired = true;
         }
 
-        tracker.requests.push({
-          id: request.requestId,
-          url: request.url,
-          blocked: request.blocked,
-          modified: request.modified,
-        });
+        if (!tracker.requests.some((r) => r.url === request.url)) {
+          tracker.requestsCount = (tracker.requestsCount || 0) + 1;
+          tracker.blocked = tracker.blocked || request.blocked;
+          tracker.modified = tracker.modified || request.modified;
+
+          let blocked = Number(request.blocked);
+          let modified = Number(request.modified);
+          let observed = !blocked && !modified ? 1 : 0;
+
+          tracker.requests = tracker.requests.filter((r) => {
+            if (r.blocked) {
+              return ++blocked <= 10 ? true : false;
+            }
+
+            if (r.modified) {
+              return ++modified <= 10 ? true : false;
+            }
+
+            return ++observed <= 10 ? true : false;
+          });
+
+          tracker.requests.unshift({
+            id: request.requestId,
+            url: request.url,
+            blocked: request.blocked,
+            modified: request.modified,
+          });
+        }
       }
     }
 
@@ -182,14 +200,12 @@ async function flushTabStatsToDailyStats(tabId) {
     if (tracker.category === DAILY_STATS_ADS_CATEGORY) {
       adsDetected.set(
         tracker.name,
-        adsDetected.get(tracker.name)?.blocked ??
-          tracker.requests.some(({ blocked }) => blocked),
+        adsDetected.get(tracker.name) || tracker.blocked,
       );
     } else {
       trackersDetected.set(
         tracker.name,
-        trackersDetected.get(tracker.name)?.blocked ??
-          tracker.requests.some(({ blocked }) => blocked),
+        trackersDetected.get(tracker.name) || tracker.blocked,
       );
     }
   }
@@ -253,7 +269,7 @@ function setupTabStats(tabId, request) {
     tabStats.delete(tabId);
   }
 
-  updateIcon(tabId);
+  updateIcon(tabId, true);
 }
 
 // Setup stats for the tab when a user navigates to a new page
@@ -323,6 +339,8 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
           for (const request of tracker.requests) {
             if (request.id === details.requestId) {
               request.blocked = true;
+              tracker.blocked = true;
+
               return;
             }
           }
