@@ -269,7 +269,7 @@ function setupTabStats(tabId, request) {
     tabStats.delete(tabId);
   }
 
-  updateIcon(tabId, true);
+  updateIcon(tabId);
 }
 
 // Setup stats for the tab when a user navigates to a new page
