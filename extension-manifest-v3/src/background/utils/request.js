@@ -28,11 +28,10 @@ export default class ExtendedRequest extends Request {
 
       domain: parsedUrl.domain || '',
       hostname: parsedUrl.hostname || '',
-      url: details.url.toLowerCase(),
+      url: details.url,
 
       sourceDomain: parsedSourceUrl.domain || '',
       sourceHostname: parsedSourceUrl.hostname || '',
-      sourceUrl: sourceUrl.toLowerCase(),
 
       type: details.type,
 
@@ -44,8 +43,38 @@ export default class ExtendedRequest extends Request {
     super(data);
 
     this.requestId = data.requestId;
+
     this.blocked = false;
+    this.modified = false;
+
     this.sourceDomain = data.sourceDomain;
     this.sourceHostname = data.sourceHostname;
+  }
+
+  isFromOriginUrl(url) {
+    const { frameAncestors } = this._originalRequestDetails;
+
+    /* Firefox APIs */
+
+    if (frameAncestors && frameAncestors.length > 0) {
+      return url === frameAncestors[frameAncestors.length - 1].url;
+    }
+
+    if (this.sourceUrl) {
+      return url === this.sourceUrl;
+    }
+
+    /* Chrome APIs */
+
+    const { frameType, initiator } = this._originalRequestDetails;
+
+    // For frameType 'sub_frame', we can't determine the origin URL
+    // as it might be the iframe itself or any of its ancestors
+    if (frameType === 'outermost_frame' && initiator) {
+      return url.startsWith(initiator);
+    }
+
+    // As a fallback, we assume that the request is from the origin URL
+    return true;
   }
 }

@@ -21,7 +21,7 @@ import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 import * as engines from './utils/engines.js';
 
-import { setupTabStats, updateTabStats } from './stats.js';
+import { updateTabStats } from './stats.js';
 
 let enabledEngines = [];
 let pausedDomains = [];
@@ -333,24 +333,15 @@ function isPaused(details, request) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
+      if (details.tabId < 0) return;
+
       const request = Request.fromRequestDetails(details);
-      const tabId = details.tabId;
 
-      // Update stats
-      if (tabId > -1 && (request.sourceDomain || request.sourceHostname)) {
-        if (request.isMainFrame() && !request.isHttp && !request.isHttps) {
-          return;
+      // INFO: request.source... is only available in Firefox
+      if (request.sourceDomain || request.sourceHostname) {
+        if (details.type !== 'main_frame') {
+          updateTabStats(details.tabId, [request]);
         }
-
-        Promise.resolve().then(
-          request.isMainFrame()
-            ? () =>
-                setupTabStats(
-                  tabId,
-                  request.sourceDomain || request.sourceHostname,
-                )
-            : () => updateTabStats(tabId, [request]),
-        );
 
         if (isPaused(details, request)) return;
 
@@ -358,7 +349,7 @@ if (__PLATFORM__ === 'firefox') {
           const engine = engines.get(name);
           if (!engine) continue;
 
-          if (request.isMainFrame()) {
+          if (details.type === 'main_frame') {
             const htmlFilters = engine.getHtmlFilters(request);
             if (htmlFilters.length !== 0) {
               filterRequestHTML(
