@@ -65,6 +65,8 @@ if (__PLATFORM__ === 'firefox') {
     let el = event.target;
     while (el && !el.href) el = el.parentElement;
 
+    if (!el) return;
+
     // Timeout is required to prevent from closing the window before the anchor is opened
     if (el.origin !== location.origin || el.pathname !== location.pathname) {
       setTimeout(window.close, 100);

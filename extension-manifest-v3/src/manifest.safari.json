@@ -66,21 +66,21 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "js": [
         "content_scripts/whotracksme/index.js"
       ]
     },
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "js": [
         "content_scripts/adblocker.js"
       ]
     },
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "js": [
         "content_scripts/autoconsent.js"
@@ -88,14 +88,14 @@
       "all_frames": true
     },
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "js": [
         "content_scripts/iframe.js"
       ]
     },
     {
-      "matches": ["*://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "js": [
         "content_scripts/whotracksme/reporting.js"

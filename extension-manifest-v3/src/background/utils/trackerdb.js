@@ -49,6 +49,8 @@ export async function getMetadata(request) {
 
 const patterns = new Map();
 export async function getPattern(key) {
+  if (promise) await promise;
+
   const engine = engines.get('trackerdb');
   if (!engine) return null;
 

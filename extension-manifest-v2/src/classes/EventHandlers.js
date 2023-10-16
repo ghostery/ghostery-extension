@@ -331,6 +331,9 @@ class EventHandlers {
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
 		setTimeout(() => {
+			if (tabInfo.getTabInfo(tab_id, 'url') !== eventMutable.tabUrl) {
+				return;
+			}
 			this._processBug({
 				bug_id,
 				app_id,
