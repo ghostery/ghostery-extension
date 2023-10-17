@@ -98,6 +98,8 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
+                  ${tracker.requestsObserved.length >= 10 &&
+                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>
@@ -117,6 +119,8 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
+                  ${tracker.requestsBlocked.length >= 10 &&
+                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>
@@ -136,6 +140,8 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
+                  ${tracker.requestsModified.length >= 10 &&
+                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>

@@ -197,11 +197,11 @@ export default {
                             >
                               ${tracker.name}
                               <ui-panel-badge>
-                                ${tracker.requests.length}
+                                ${tracker.requestsCount}
                               </ui-panel-badge>
-                              ${tracker.requestsBlocked.length > 0 &&
+                              ${tracker.blocked &&
                               html`<ui-icon name="block" color="gray-400" />`}
-                              ${tracker.requestsModified.length > 0 &&
+                              ${tracker.modified &&
                               html`<ui-icon name="eye" color="gray-400" />`}
                             </a>
                           </ui-text>
