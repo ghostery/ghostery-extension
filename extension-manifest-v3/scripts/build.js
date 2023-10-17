@@ -10,7 +10,7 @@ const pwd = process.cwd();
 const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
-  assets: ['_locales', 'assets'],
+  assets: ['_locales', 'icons'],
 };
 
 const TARGET_TO_MANIFEST_MAP = {
