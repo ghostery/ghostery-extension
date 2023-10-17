@@ -47,7 +47,7 @@ function updateEngines(host, event) {
   asyncAction(event, chrome.runtime.sendMessage({ action: 'updateEngines' }));
 }
 
-function refresh(host, event) {
+function refresh(host) {
   host.counter += 1;
 }
 
