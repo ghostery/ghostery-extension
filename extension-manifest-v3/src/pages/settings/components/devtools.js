@@ -47,7 +47,7 @@ function updateEngines(host, event) {
   asyncAction(event, chrome.runtime.sendMessage({ action: 'updateEngines' }));
 }
 
-function refresh(host) {
+function refresh(host, event) {
   host.counter += 1;
 }
 
@@ -80,7 +80,7 @@ export default {
           </div>
           ${chrome.declarativeNetRequest &&
           html`
-            <div layout="column gap items:start">
+            <div layout="column gap items:start" translate="no">
               <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
               <ui-text type="body-xs" color="gray-400">
                 The below list is not reactive to changes made in the extension,
@@ -117,7 +117,7 @@ export default {
         <ui-text
           type="label-s"
           color="gray-300"
-          onclick="${html.set('counter', counter + 1)}"
+          onclick="${refresh}"
           translate="no"
         >
           v${VERSION}
