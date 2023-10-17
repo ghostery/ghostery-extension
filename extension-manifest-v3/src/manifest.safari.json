@@ -22,17 +22,15 @@
     "wss://*/*"
   ],
   "icons": {
-    "16": "assets/images/icon16.png",
-    "48": "assets/images/icon48.png",
-    "128": "assets/images/icon128.png"
+    "32": "icons/icon.svg",
+    "64": "icons/icon.svg",
+    "128": "icons/icon.svg"
   },
   "browser_action": {
     "default_icon": {
-      "16": "assets/images/icon16.png",
-      "24": "assets/images/icon19.png",
-      "32": "assets/images/icon38.png",
-      "48": "assets/images/icon48.png",
-      "128": "assets/images/icon128.png"
+      "32": "icons/icon.svg",
+      "64": "icons/icon.svg",
+      "128": "icons/icon.svg"
     },
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
