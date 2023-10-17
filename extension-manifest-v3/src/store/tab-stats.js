@@ -14,13 +14,16 @@ import { store } from 'hybrids';
 const Tracker = {
   id: true,
   name: '',
-  requests: [{ url: '', blocked: false, modified: false }],
   category: 'unidentified',
   company: '',
   description: '',
   website: '',
   contact: '',
   privacyPolicy: '',
+  blocked: false,
+  modified: false,
+  requests: [{ url: '', blocked: false, modified: false }],
+  requestsCount: 0,
   requestsBlocked: ({ requests }) => requests.filter((r) => r.blocked),
   requestsModified: ({ requests }) => requests.filter((r) => r.modified),
   requestsObserved: ({ requests }) =>
@@ -30,6 +33,11 @@ const Tracker = {
 const Stats = {
   domain: '',
   trackers: [Tracker],
+  trackersBlocked: ({ trackers }) =>
+    trackers.reduce((acc, { blocked }) => acc + Number(blocked), 0),
+  trackersModified: ({ trackers }) =>
+    trackers.reduce((acc, { modified }) => acc + Number(modified), 0),
+
   categories: ({ trackers }) => trackers.map((t) => t.category),
 
   topCategories: ({ categories }) => {
@@ -53,18 +61,13 @@ const Stats = {
     ];
   },
 
-  trackersBlocked: ({ trackers }) =>
-    trackers.filter((tracker) => tracker.requestsBlocked.length),
-  trackersModified: ({ trackers }) =>
-    trackers.filter((tracker) => tracker.requestsModified.length),
-
   [store.connect]: {
     async get() {
       const tab = await chrome.runtime.sendMessage({
         action: 'getCurrentTab',
       });
 
-      const storage = await chrome.storage.local.get(['tabStats:v1']);
+      const storage = await chrome.storage.session.get(['tabStats:v1']);
       const stats = tab && storage['tabStats:v1']?.entries[tab.id];
 
       return stats && tab.url.includes(stats.domain) ? stats : {};

@@ -10,7 +10,7 @@
  */
 
 // This global provides an API like an ES Map but will sync
-// with local storage from time to time. That is done to prevent
+// with session storage from time to time. That is done to prevent
 // the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
 export default class AutoSyncingMap {
@@ -18,8 +18,8 @@ export default class AutoSyncingMap {
     storageKey,
     softFlushIntervalInMs = 200,
     hardFlushIntervalInMs = 1000,
-    ttlInMs = 7 * 24 * 60 * 60 * 1000 /* 1 week */,
-    maxEntries = 5000,
+    ttlInMs = 24 * 60 * 60 * 1000 /* 1 day */,
+    maxEntries = 1000,
   }) {
     if (!storageKey) {
       throw new Error('Missing storage key');
@@ -30,7 +30,7 @@ export default class AutoSyncingMap {
     this.maxEntries = maxEntries;
 
     // Make sure old entries that were not cleaned up are eventually
-    // removed. Otherwise, we could exceed the local storage quota.
+    // removed. Otherwise, we could exceed the session storage quota.
     // Plus, when the maps get big, serializing and deserializing
     // may become expensive. If the actively triggered clean up works,
     // there should be no need to make this expiration too aggressive.
@@ -69,7 +69,11 @@ export default class AutoSyncingMap {
     // and log it. A potential improvement could be to treat the
     // in-memory map as the source of truth in that scenario.)
     this._pending = new Promise((resolve, reject) => {
-      chrome.storage.local.get([this.storageKey], (result) => {
+      // Migration to session storage
+      // TODO: Remove this code after a few releases
+      chrome.storage.local.remove(this.storageKey);
+
+      chrome.storage.session.get([this.storageKey], (result) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         } else {
@@ -137,7 +141,7 @@ export default class AutoSyncingMap {
 
     this._scheduleAction(
       new Promise((resolve, reject) => {
-        chrome.storage.local.remove(this.storageKey, () => {
+        chrome.storage.session.remove(this.storageKey, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {
@@ -217,7 +221,7 @@ export default class AutoSyncingMap {
           entries: Object.fromEntries(this.inMemoryMap),
           ttl: Object.fromEntries(this._ttlMap),
         };
-        chrome.storage.local.set({ [this.storageKey]: serialized }, () => {
+        chrome.storage.session.set({ [this.storageKey]: serialized }, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {

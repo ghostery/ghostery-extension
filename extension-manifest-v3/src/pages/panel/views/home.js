@@ -135,13 +135,11 @@ export default {
                   layout="margin:1:1.5"
                 >
                 </ui-panel-stats>
-                ${!!(
-                  stats.trackersModified.length || stats.trackersBlocked.length
-                ) &&
+                ${!!(stats.trackersModified || stats.trackersBlocked) &&
                 html`
                   <gh-panel-feedback
-                    modified=${stats.trackersModified.length}
-                    blocked=${stats.trackersBlocked.length}
+                    modified=${stats.trackersModified}
+                    blocked=${stats.trackersBlocked}
                     layout="margin:bottom:1.5"
                   ></gh-panel-feedback>
                 `}
