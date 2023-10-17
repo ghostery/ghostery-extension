@@ -16,7 +16,21 @@ function degToRad(degree) {
   return degree * factor;
 }
 
-export function drawWheel(ctx, size, categories, useScale = true) {
+function grayscaleColor(hexColor) {
+  const r = parseInt(hexColor.substr(1, 2), 16);
+  const g = parseInt(hexColor.substr(3, 2), 16);
+  const b = parseInt(hexColor.substr(5, 2), 16);
+  const value = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  return `rgb(${value}, ${value}, ${value})`;
+}
+
+export function drawWheel(
+  ctx,
+  size,
+  categories,
+  { useScale = true, grayscale = false } = {},
+) {
   if (useScale && typeof window !== 'undefined') {
     const { canvas } = ctx;
 
@@ -61,7 +75,7 @@ export function drawWheel(ctx, size, categories, useScale = true) {
     if (numTrackers > 0) {
       const newPosition = position + numTrackers * increment;
       const color = getCategoryBgColor(category);
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = grayscale ? grayscaleColor(color) : color;
       ctx.beginPath();
       ctx.arc(
         center,
@@ -76,7 +90,7 @@ export function drawWheel(ctx, size, categories, useScale = true) {
   }
 }
 
-export function getOffscreenImageData(size, categories) {
+export function getOffscreenImageData(size, categories, options) {
   let canvas;
   try {
     canvas = new OffscreenCanvas(size, size);
@@ -86,7 +100,7 @@ export function getOffscreenImageData(size, categories) {
     canvas.height = size;
   }
   const ctx = canvas.getContext('2d');
-  drawWheel(ctx, size, categories, false);
+  drawWheel(ctx, size, categories, { useScale: false, ...options });
 
   return ctx.getImageData(0, 0, size, size);
 }
