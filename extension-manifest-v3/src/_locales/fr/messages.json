@@ -157,9 +157,6 @@
   "enabled": {
     "message": "Activé"
   },
-  "enabled_dnr_rulesets": {
-    "message": "Enabled DNR rulesets"
-  },
   "essential": {
     "message": "Essentiels",
     "description": "Tracker category name"
@@ -369,9 +366,6 @@
   "read_more_on_whotracks_me": {
     "message": "Plus d'informations sur WhoTracks.Me"
   },
-  "refresh": {
-    "message": "Refresh"
-  },
   "renew_ghostery_for_full_protection": {
     "message": "Renouvelez Ghostery pour bénéficier d'une protection complète"
   },
@@ -383,9 +377,6 @@
   },
   "report_a_broken_page": {
     "message": "Signaler un lien brisé"
-  },
-  "requests": {
-    "message": "Requests"
   },
   "resume": {
     "message": "Reprendre"
@@ -434,9 +425,6 @@
   },
   "terms___conditions": {
     "message": "Conditions générales d'utilisation"
-  },
-  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
-    "message": "The below list is not reactive to changes made in the extension, use refresh button"
   },
   "tired_of_cookie_popups_": {
     "message": "REFUSER LES COOKIES VOUS USE ?"

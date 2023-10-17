@@ -157,9 +157,6 @@
   "enabled": {
     "message": "已啟用"
   },
-  "enabled_dnr_rulesets": {
-    "message": "Enabled DNR rulesets"
-  },
   "essential": {
     "message": "基本內容",
     "description": "Tracker category name"
@@ -369,9 +366,6 @@
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上繼續閱讀"
   },
-  "refresh": {
-    "message": "Refresh"
-  },
   "renew_ghostery_for_full_protection": {
     "message": "更新 GHOSTERY 以獲得全面防護"
   },
@@ -383,9 +377,6 @@
   },
   "report_a_broken_page": {
     "message": "報告已損毀的網頁"
-  },
-  "requests": {
-    "message": "Requests"
   },
   "resume": {
     "message": "恢復"
@@ -434,9 +425,6 @@
   },
   "terms___conditions": {
     "message": "條款及條件"
-  },
-  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
-    "message": "The below list is not reactive to changes made in the extension, use refresh button"
   },
   "tired_of_cookie_popups_": {
     "message": "厭倦了 Cookie 彈出式視窗？"
