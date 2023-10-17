@@ -11,6 +11,8 @@
 
 import { store } from 'hybrids';
 
+import AutoSyncingMap from '/utils/map.js';
+
 const Tracker = {
   id: true,
   name: '',
@@ -66,9 +68,7 @@ const Stats = {
       const tab = await chrome.runtime.sendMessage({
         action: 'getCurrentTab',
       });
-
-      const storage = await chrome.storage.session.get(['tabStats:v1']);
-      const stats = tab && storage['tabStats:v1']?.entries[tab.id];
+      const stats = tab && (await AutoSyncingMap.get('tabStats:v1', tab.id));
 
       return stats && tab.url.includes(stats.domain) ? stats : {};
     },

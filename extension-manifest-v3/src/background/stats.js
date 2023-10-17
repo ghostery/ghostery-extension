@@ -18,10 +18,10 @@ import DailyStats, { getMergedStats } from '/store/daily-stats.js';
 import Options, { observe } from '/store/options.js';
 
 import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
+import AutoSyncingMap from '/utils/map.js';
 
 import Request from './utils/request.js';
 import * as trackerDb from './utils/trackerdb.js';
-import AutoSyncingMap from './utils/map.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
