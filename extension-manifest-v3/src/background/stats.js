@@ -18,14 +18,20 @@ import DailyStats, { getMergedStats } from '/store/daily-stats.js';
 import Options, { observe } from '/store/options.js';
 
 import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
+import AutoSyncingMap from '/utils/map.js';
 
 import Request from './utils/request.js';
 import * as trackerDb from './utils/trackerdb.js';
-import AutoSyncingMap from './utils/map.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
 const chromeAction = chrome.action || chrome.browserAction;
+
+const { icons } = chrome.runtime.getManifest();
+const inactiveIcons = Object.keys(icons).reduce((acc, key) => {
+  acc[key] = icons[key].replace('.', '-inactive.');
+  return acc;
+}, {});
 
 function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chromeAction.setBadgeBackgroundColor({ color });
@@ -45,23 +51,23 @@ observe('terms', async (terms) => {
 });
 
 async function refreshIcon(tabId) {
+  const options = await store.resolve(Options);
+
   const stats = tabStats.get(tabId);
   if (!stats) return;
 
-  const options = await store.resolve(Options);
-  const paused = options.paused?.some(({ id }) => id === stats.domain);
-  const data = {};
+  const inactive =
+    !options.terms || options.paused?.some(({ id }) => id === stats.domain);
 
-  if (paused || !options.terms) {
-    data.path = {
-      16: '/assets/images/icon19_off.png',
-      32: '/assets/images/icon38_off.png',
-    };
-  } else if (options.trackerWheel && stats.trackers.length > 0) {
+  const data = {};
+  if (options.trackerWheel && stats.trackers.length > 0) {
     data.imageData = getOffscreenImageData(
       128,
       stats.trackers.map((t) => t.category),
+      { grayscale: inactive },
     );
+  } else {
+    data.path = inactive ? inactiveIcons : icons;
   }
 
   // Note: Even in MV3, this is not (yet) returning a promise.
@@ -89,8 +95,11 @@ async function refreshIcon(tabId) {
 }
 
 const delayMap = new Map();
-function updateIcon(tabId) {
-  if (delayMap.has(tabId)) return;
+function updateIcon(tabId, force) {
+  if (delayMap.has(tabId)) {
+    if (!force) return;
+    clearTimeout(delayMap.get(tabId));
+  }
 
   delayMap.set(
     tabId,
@@ -103,6 +112,8 @@ function updateIcon(tabId) {
       __PLATFORM__ === 'firefox' ? 1000 : 250,
     ),
   );
+
+  refreshIcon(tabId);
 }
 
 export function updateTabStats(tabId, requests) {
@@ -113,7 +124,8 @@ export function updateTabStats(tabId, requests) {
     // as some of the requests are fired before the tab is created, tabId -1
     if (!stats) return;
 
-    let sortingRequired = false;
+    let trackersUpdated = false;
+    let requestsUpdated = false;
 
     // Filter out requests that are not related to the current page
     // (e.g. requests on trailing edge when navigation to a new page is in progress)
@@ -140,7 +152,7 @@ export function updateTabStats(tabId, requests) {
               };
 
           stats.trackers.push(tracker);
-          sortingRequired = true;
+          trackersUpdated = true;
         }
 
         if (!tracker.requests.some((r) => r.url === request.url)) {
@@ -170,20 +182,24 @@ export function updateTabStats(tabId, requests) {
             blocked: request.blocked,
             modified: request.modified,
           });
+
+          requestsUpdated = true;
         }
       }
     }
 
-    if (sortingRequired) {
+    if (trackersUpdated) {
       stats.trackers.sort(
         (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
       );
     }
 
     // After navigation stats are cleared, so the current `stats` variable might be outdated
-    if (stats === tabStats.get(tabId)) {
+    if (requestsUpdated && stats === tabStats.get(tabId)) {
       tabStats.set(tabId, stats);
-      updateIcon(tabId);
+
+      // We need to update the icon only if new categories were added
+      if (trackersUpdated) updateIcon(tabId);
     }
   });
 }
@@ -269,7 +285,7 @@ function setupTabStats(tabId, request) {
     tabStats.delete(tabId);
   }
 
-  updateIcon(tabId);
+  updateIcon(tabId, true);
 }
 
 // Setup stats for the tab when a user navigates to a new page
