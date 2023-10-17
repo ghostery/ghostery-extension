@@ -13,7 +13,15 @@
 // with session storage from time to time. That is done to prevent
 // the loss of all stats when the browser terminates the execution
 // context (background script or service worker).
+
+export const storage = chrome.storage.session || chrome.storage.local;
+
 export default class AutoSyncingMap {
+  static async get(storageKey, key) {
+    const data = await storage.get([storageKey]);
+    return data[storageKey]?.entries[key];
+  }
+
   constructor({
     storageKey,
     softFlushIntervalInMs = 200,
@@ -71,9 +79,11 @@ export default class AutoSyncingMap {
     this._pending = new Promise((resolve, reject) => {
       // Migration to session storage
       // TODO: Remove this code after a few releases
-      chrome.storage.local.remove(this.storageKey);
+      if (chrome.storage.session) {
+        chrome.storage.local.remove(this.storageKey);
+      }
 
-      chrome.storage.session.get([this.storageKey], (result) => {
+      storage.get([this.storageKey], (result) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         } else {
@@ -141,7 +151,7 @@ export default class AutoSyncingMap {
 
     this._scheduleAction(
       new Promise((resolve, reject) => {
-        chrome.storage.session.remove(this.storageKey, () => {
+        storage.remove(this.storageKey, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {
@@ -221,7 +231,7 @@ export default class AutoSyncingMap {
           entries: Object.fromEntries(this.inMemoryMap),
           ttl: Object.fromEntries(this._ttlMap),
         };
-        chrome.storage.session.set({ [this.storageKey]: serialized }, () => {
+        storage.set({ [this.storageKey]: serialized }, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {
