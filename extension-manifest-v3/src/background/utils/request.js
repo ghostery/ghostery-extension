@@ -30,6 +30,7 @@ export default class ExtendedRequest extends Request {
       hostname: parsedUrl.hostname || '',
       url: details.url,
 
+      sourceUrl,
       sourceDomain: parsedSourceUrl.domain || '',
       sourceHostname: parsedSourceUrl.hostname || '',
 
@@ -47,6 +48,7 @@ export default class ExtendedRequest extends Request {
     this.blocked = false;
     this.modified = false;
 
+    this.sourceUrl = data.sourceUrl;
     this.sourceDomain = data.sourceDomain;
     this.sourceHostname = data.sourceHostname;
   }
