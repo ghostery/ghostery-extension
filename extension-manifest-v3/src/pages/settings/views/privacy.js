@@ -149,11 +149,11 @@ export default {
             >
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-s">
-                  Tracking Prevention on Search Engine Result Pages
+                  Search Engine Redirect Protection
                 </ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                  While using a non-private search engine like Google, Ghostery
-                  detects and displays trackers even before you visit a webpage.
+                  Prevent Google from redirecting search result links through
+                  their servers instead of linking directly to pages.
                 </ui-text>
               </div>
               <ui-settings-toggle
