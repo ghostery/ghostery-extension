@@ -34,8 +34,8 @@ const PREVIEWS = {
   },
   'serp_tracking': {
     src: assets.serp_tracking,
-    title: msg`Tracking Prevention on Search Engine Result Pages`,
-    description: msg`While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage.`,
+    title: msg`Search Engine Redirect Protection`,
+    description: msg`Prevent Google from redirecting search result links through their servers instead of linking directly to pages.`,
   },
 };
 
