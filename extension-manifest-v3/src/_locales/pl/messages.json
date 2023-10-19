@@ -351,6 +351,9 @@
   "pin_it_here": {
     "message": "Przypnij je tu"
   },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Chroń swoje dane przed śledzeniem w sieci dzięki technologii wspomaganej przez SI"
   },
@@ -383,6 +386,9 @@
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "Zapisz i zsynchronizuj ustawienia niestandardowe pomiędzy przeglądarkami a urządzeniami."
+  },
+  "search_engine_redirect_protection": {
+    "message": "Search Engine Redirect Protection"
   },
   "search_website___": {
     "message": "Wyszukiwanie witryny..."

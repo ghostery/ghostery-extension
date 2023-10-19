@@ -351,6 +351,9 @@
   "pin_it_here": {
     "message": "여기 고정"
   },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술로 다양한 추적 기법에 대응합니다."
   },
@@ -383,6 +386,9 @@
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
+  },
+  "search_engine_redirect_protection": {
+    "message": "Search Engine Redirect Protection"
   },
   "search_website___": {
     "message": "웹사이트 검색..."
