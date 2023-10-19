@@ -123,12 +123,18 @@
   "done": {
     "message": "完成"
   },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "清除网站上的广告，获得安全迅捷的浏览体验。"
   },
   "email": {
     "message": "电子邮件地址",
     "description": "Tracker category name"
+  },
+  "enable_ad_blocking_now": {
+    "message": "Enable Ad Blocking Now"
   },
   "enable_ghostery": {
     "message": "启用 Ghostery"
@@ -151,9 +157,6 @@
   "enabled": {
     "message": "已启用"
   },
-  "enabled_dnr_rulesets": {
-    "message": "Enabled DNR rulesets"
-  },
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
@@ -170,6 +173,9 @@
   },
   "further_protection": {
     "message": "Further Protection"
+  },
+  "get_help": {
+    "message": "Get help"
   },
   "ghostery__action_required": {
     "message": "Ghostery：需要操作"
@@ -227,6 +233,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "帮助 Ghostery 为建立以隐私为基本人权的网络而奋斗。"
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
   "hosting": {
     "message": "托管",
@@ -323,6 +332,10 @@
   "on_this_website": {
     "message": "在此网站上"
   },
+  "other": {
+    "message": "其他",
+    "description": "Tracker category name"
+  },
   "pause_on_this_site": {
     "message": "在这个网站上暂停"
   },
@@ -337,6 +350,9 @@
   },
   "pin_it_here": {
     "message": "在此处锁定"
+  },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "阻止各种 AI 驱动的跟踪技术。"
@@ -353,9 +369,6 @@
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
   },
-  "refresh": {
-    "message": "Refresh"
-  },
   "renew_ghostery_for_full_protection": {
     "message": "续订 GHOSTERY 以获得全面保护"
   },
@@ -368,14 +381,14 @@
   "report_a_broken_page": {
     "message": "报告崩溃页面"
   },
-  "requests": {
-    "message": "Requests"
-  },
   "resume": {
     "message": "继续"
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "保存您的自定义设置并在浏览器和设备之间同步。"
+  },
+  "search_engine_redirect_protection": {
+    "message": "Search Engine Redirect Protection"
   },
   "search_website___": {
     "message": "搜索网站..."
@@ -419,9 +432,6 @@
   "terms___conditions": {
     "message": "条款和条件"
   },
-  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
-    "message": "The below list is not reactive to changes made in the extension, use refresh button"
-  },
   "tired_of_cookie_popups_": {
     "message": "厌烦了 Cookie 弹出窗口？"
   },
@@ -445,9 +455,6 @@
   },
   "trackers_wheel": {
     "message": "跟踪器轮"
-  },
-  "tracking_prevention_on_search_engine_result_pages": {
-    "message": "Tracking Prevention on Search Engine Result Pages"
   },
   "unidentified": {
     "message": "未识别",
@@ -482,12 +489,6 @@
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
     "message": "对独立网站暂停使用 Ghostery 时，这些网站会出现在这里。"
-  },
-  "while_using_a_non_private_search_engine_like_google__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google, Ghostery detects and displays trackers even before you visit a webpage."
-  },
-  "while_using_a_non_private_search_engine_like_google_or_bing__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"

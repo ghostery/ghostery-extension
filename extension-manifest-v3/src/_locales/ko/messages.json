@@ -123,12 +123,18 @@
   "done": {
     "message": "완료"
   },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
   },
   "email": {
     "message": "이메일 ",
     "description": "Tracker category name"
+  },
+  "enable_ad_blocking_now": {
+    "message": "Enable Ad Blocking Now"
   },
   "enable_ghostery": {
     "message": "Ghostery 활성화"
@@ -151,9 +157,6 @@
   "enabled": {
     "message": "활성화됨 "
   },
-  "enabled_dnr_rulesets": {
-    "message": "Enabled DNR rulesets"
-  },
   "essential": {
     "message": "필수 ",
     "description": "Tracker category name"
@@ -170,6 +173,9 @@
   },
   "further_protection": {
     "message": "Further Protection"
+  },
+  "get_help": {
+    "message": "Get help"
   },
   "ghostery__action_required": {
     "message": "Ghostery: 조치 필요"
@@ -227,6 +233,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸울 힘을 주세요."
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
   "hosting": {
     "message": "호스팅",
@@ -323,6 +332,10 @@
   "on_this_website": {
     "message": "이 웹사이트에서"
   },
+  "other": {
+    "message": "기타",
+    "description": "Tracker category name"
+  },
   "pause_on_this_site": {
     "message": "이 사이트에서 일시 중지"
   },
@@ -337,6 +350,9 @@
   },
   "pin_it_here": {
     "message": "여기 고정"
+  },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술로 다양한 추적 기법에 대응합니다."
@@ -353,9 +369,6 @@
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me 자세히 보기"
   },
-  "refresh": {
-    "message": "Refresh"
-  },
   "renew_ghostery_for_full_protection": {
     "message": "완벽한 보호를 위해 GHOSTERY를 갱신하세요"
   },
@@ -368,14 +381,14 @@
   "report_a_broken_page": {
     "message": "깨진 페이지 보고 "
   },
-  "requests": {
-    "message": "Requests"
-  },
   "resume": {
     "message": "다시 시작 "
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
+  },
+  "search_engine_redirect_protection": {
+    "message": "Search Engine Redirect Protection"
   },
   "search_website___": {
     "message": "웹사이트 검색..."
@@ -419,9 +432,6 @@
   "terms___conditions": {
     "message": "사용 약관 "
   },
-  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
-    "message": "The below list is not reactive to changes made in the extension, use refresh button"
-  },
   "tired_of_cookie_popups_": {
     "message": "쿠키 팝업이 너무 많습니까?"
   },
@@ -445,9 +455,6 @@
   },
   "trackers_wheel": {
     "message": "트래커 휠"
-  },
-  "tracking_prevention_on_search_engine_result_pages": {
-    "message": "Tracking Prevention on Search Engine Result Pages"
   },
   "unidentified": {
     "message": "알 수 없음",
@@ -482,12 +489,6 @@
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
     "message": "개별 웹사이트에서 Ghostery를 일시 중지하면 해당 웹사이트가 여기 표시됩니다."
-  },
-  "while_using_a_non_private_search_engine_like_google__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google, Ghostery detects and displays trackers even before you visit a webpage."
-  },
-  "while_using_a_non_private_search_engine_like_google_or_bing__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghostery가 운영하는 WhoTracks.Me는 Ghostery의 AI 추적 방지 기술을 필수 부분으로 작동합니다. 이는 트래커에 대한 가장 포괄적인 글로벌 리소스로서 웹 추적에 투명성을 가져다 줍니다."

@@ -123,12 +123,18 @@
   "done": {
     "message": "完了"
   },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "ウェブサイト上の広告を除去し、安全で高速なブラウジングを実現します。"
   },
   "email": {
     "message": "メール",
     "description": "Tracker category name"
+  },
+  "enable_ad_blocking_now": {
+    "message": "Enable Ad Blocking Now"
   },
   "enable_ghostery": {
     "message": "Ghosteryを有効にする"
@@ -151,9 +157,6 @@
   "enabled": {
     "message": "有効になっています"
   },
-  "enabled_dnr_rulesets": {
-    "message": "Enabled DNR rulesets"
-  },
   "essential": {
     "message": "必需",
     "description": "Tracker category name"
@@ -170,6 +173,9 @@
   },
   "further_protection": {
     "message": "Further Protection"
+  },
+  "get_help": {
+    "message": "Get help"
   },
   "ghostery__action_required": {
     "message": "Ghostery: 要対応"
@@ -227,6 +233,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。ぜひサポートをお願いいたします。"
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
   "hosting": {
     "message": "ホスティング",
@@ -323,6 +332,10 @@
   "on_this_website": {
     "message": "このウェブサイトに対して"
   },
+  "other": {
+    "message": "その他",
+    "description": "Tracker category name"
+  },
   "pause_on_this_site": {
     "message": "このサイトでのポーズ"
   },
@@ -337,6 +350,9 @@
   },
   "pin_it_here": {
     "message": "ここにピン留め"
+  },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AIを活用した技術で様々な追跡手法を防止します。"
@@ -353,9 +369,6 @@
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
   },
-  "refresh": {
-    "message": "Refresh"
-  },
   "renew_ghostery_for_full_protection": {
     "message": "Ghosteryを更新して包括的な保護機能を利用する"
   },
@@ -368,14 +381,14 @@
   "report_a_broken_page": {
     "message": "区切られたページを報告"
   },
-  "requests": {
-    "message": "Requests"
-  },
   "resume": {
     "message": "再開"
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
+  },
+  "search_engine_redirect_protection": {
+    "message": "Search Engine Redirect Protection"
   },
   "search_website___": {
     "message": "サイトを検索..."
@@ -419,9 +432,6 @@
   "terms___conditions": {
     "message": "利用規約"
   },
-  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
-    "message": "The below list is not reactive to changes made in the extension, use refresh button"
-  },
   "tired_of_cookie_popups_": {
     "message": "クッキーのポップアップにうんざりですか?"
   },
@@ -445,9 +455,6 @@
   },
   "trackers_wheel": {
     "message": "トラッカーホイール"
-  },
-  "tracking_prevention_on_search_engine_result_pages": {
-    "message": "Tracking Prevention on Search Engine Result Pages"
   },
   "unidentified": {
     "message": "未知",
@@ -482,12 +489,6 @@
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
     "message": "個々のウェブサイトでGhosteryを一時停止すると、そのウェブサイトがここに表示されます。"
-  },
-  "while_using_a_non_private_search_engine_like_google__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google, Ghostery detects and displays trackers even before you visit a webpage."
-  },
-  "while_using_a_non_private_search_engine_like_google_or_bing__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghosteryが運営するWhoTracks.Meは、GhosteryのAIアンチトラッキング技術に統合されている要素です。 トラッカーに関する最も包括的なグローバルリソースで、Webトラッキングに透明性をもたらしています。"

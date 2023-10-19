@@ -123,12 +123,18 @@
   "done": {
     "message": "Done"
   },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "Eliminates ads on wesbites for safe and fast browsing."
   },
   "email": {
     "message": "Email",
     "description": "Tracker category name"
+  },
+  "enable_ad_blocking_now": {
+    "message": "Enable Ad Blocking Now"
   },
   "enable_ghostery": {
     "message": "Enable Ghostery"
@@ -151,9 +157,6 @@
   "enabled": {
     "message": "Enabled"
   },
-  "enabled_dnr_rulesets": {
-    "message": "Enabled DNR rulesets"
-  },
   "essential": {
     "message": "Essential",
     "description": "Tracker category name"
@@ -170,6 +173,9 @@
   },
   "further_protection": {
     "message": "Further Protection"
+  },
+  "get_help": {
+    "message": "Get help"
   },
   "ghostery__action_required": {
     "message": "Ghostery: Action required"
@@ -227,6 +233,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Help Ghostery fight for a web where privacy is a basic human right."
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Hey, do you enjoy Ghostery and want to support our work?"
   },
   "hosting": {
     "message": "Hosting",
@@ -323,6 +332,10 @@
   "on_this_website": {
     "message": "on this website"
   },
+  "other": {
+    "message": "Other",
+    "description": "Tracker category name"
+  },
   "pause_on_this_site": {
     "message": "Pause on this site"
   },
@@ -337,6 +350,9 @@
   },
   "pin_it_here": {
     "message": "Pin it here"
+  },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Prevents various tracking techniques using AI-driven technology."
@@ -353,9 +369,6 @@
   "read_more_on_whotracks_me": {
     "message": "Read more on WhoTracks.Me"
   },
-  "refresh": {
-    "message": "Refresh"
-  },
   "renew_ghostery_for_full_protection": {
     "message": "renew GHOSTERY for full protection"
   },
@@ -368,14 +381,14 @@
   "report_a_broken_page": {
     "message": "Report a broken page"
   },
-  "requests": {
-    "message": "Requests"
-  },
   "resume": {
     "message": "Resume"
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "Save and synchronize your custom settings between browsers and devices."
+  },
+  "search_engine_redirect_protection": {
+    "message": "Search Engine Redirect Protection"
   },
   "search_website___": {
     "message": "Search website..."
@@ -419,9 +432,6 @@
   "terms___conditions": {
     "message": "Terms & Conditions"
   },
-  "the_below_list_is_not_reactive_to_changes_made_in_the_extension__use_refresh_button": {
-    "message": "The below list is not reactive to changes made in the extension, use refresh button"
-  },
   "tired_of_cookie_popups_": {
     "message": "TIRED OF COOKIE POPUPS?"
   },
@@ -445,9 +455,6 @@
   },
   "trackers_wheel": {
     "message": "Trackers Wheel"
-  },
-  "tracking_prevention_on_search_engine_result_pages": {
-    "message": "Tracking Prevention on Search Engine Result Pages"
   },
   "unidentified": {
     "message": "Unidentified",
@@ -482,12 +489,6 @@
   },
   "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
     "message": "When pausing Ghostery on individual websites, those websites will appear here."
-  },
-  "while_using_a_non_private_search_engine_like_google__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google, Ghostery detects and displays trackers even before you visit a webpage."
-  },
-  "while_using_a_non_private_search_engine_like_google_or_bing__ghostery_detects_and_displays_trackers_even_before_you_visit_a_webpage_": {
-    "message": "While using a non-private search engine like Google or Bing, Ghostery detects and displays trackers even before you visit a webpage."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s AI anti-tracking technology. It is a comprehensive global resource on trackers, bringing transparency to web tracking."
