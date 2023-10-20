@@ -20,15 +20,15 @@
     "wss://*/*"
   ],
   "icons": {
-    "32": "icons/icon.svg",
-    "64": "icons/icon.svg",
-    "128": "icons/icon.svg"
+    "32": "/icons/icon.svg",
+    "64": "/icons/icon.svg",
+    "128": "/icons/icon.svg"
   },
   "browser_action": {
     "default_icon": {
-      "32": "icons/icon.svg",
-      "64": "icons/icon.svg",
-      "128": "icons/icon.svg"
+      "32": "/icons/icon.svg",
+      "64": "/icons/icon.svg",
+      "128": "/icons/icon.svg"
     },
     "default_area": "navbar",
     "default_title": "Ghostery",
