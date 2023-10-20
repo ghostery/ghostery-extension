@@ -20,6 +20,11 @@ jobs:
 
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.3.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.tool-versions'
@@ -36,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-firefox.zip
           asset_name: ghostery-firefox.zip
           asset_content_type: application/gzip
@@ -46,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-chrome.zip
           asset_name: ghostery-chrome.zip
           asset_content_type: application/gzip
@@ -56,7 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-opera.zip
           asset_name: ghostery-opera.zip
           asset_content_type: application/gzip
@@ -66,7 +71,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-edge.zip
           asset_name: ghostery-edge.zip
           asset_content_type: application/gzip
