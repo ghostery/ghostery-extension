@@ -11,15 +11,9 @@
 
 import { define, html, dispatch } from 'hybrids';
 
-function openBlog() {
-	chrome.tabs.create({
-		url: 'https://www.ghostery.com/blog/whats-happening-with-youtube-ads',
-	});
-}
-
 export default define({
 	tag: 'youtube-message',
-	content: ({ onclose }) => html`
+	content: () => html`
     <template layout="block overflow">
       <ui-onboarding-card layout="padding:2">
         <div layout="row items:start gap:2">
@@ -54,7 +48,7 @@ export default define({
             </ui-text>
             <div layout="row:wrap gap">
               <ui-button type="success" size="small">
-                <button onclick="${host => dispatch(host, 'open')}">Open YouTube in Private Window</button>
+                <button onclick="${host => dispatch(host, 'openprivatewindow')}">Open YouTube in Private Window</button>
               </ui-button>
             </div>
             <div class="hr"></div>
@@ -63,7 +57,10 @@ export default define({
             </ui-text>
             <div layout="row:wrap gap">
               <ui-button type="outline" size="small">
-                <button onclick="${openBlog}">Visit our blog</button>
+                <button onclick="${host => dispatch(host, 'openblog')}">Visit our blog</button>
+              </ui-button>
+							<ui-button type="transparent" size="small">
+                <button onclick="${host => dispatch(host, 'dontask')}"><ui-text>Don't ask again</ui-text></button>
               </ui-button>
             </div>
           </div>

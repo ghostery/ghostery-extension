@@ -850,6 +850,13 @@ function onMessageHandler(request, sender, callback) {
 		utils.openNewTab(message);
 		return false;
 	}
+	if (name === 'openNewPrivateTab') {
+		chrome.windows.create({
+			url: message.url,
+			incognito: true,
+		});
+		return false;
+	}
 	if (name === 'reloadTab') {
 		reloadTab(message);
 		closeAndroidPanelTabs();

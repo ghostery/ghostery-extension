@@ -18,18 +18,39 @@ setupIframe();
 
 const url = new URLSearchParams(window.location.search).get('url');
 
-function open() {
-	chrome.windows.create({
-		url,
-		incognito: true,
+function openPrivateWindow() {
+	chrome.runtime.sendMessage({
+		name: 'openNewPrivateTab',
+		message: {
+			url,
+		},
 	});
+}
+
+function openBlog() {
+	chrome.runtime.sendMessage({
+		name: 'openNewTab',
+		message: {
+			url: 'https://www.ghostery.com/blog/whats-happening-with-youtube-ads',
+			become_active: true,
+		},
+	});
+}
+
+function dontAsk() {
+	chrome.storage.local.set({
+		youtube_dont_show_again: true,
+	});
+	closeIframe();
 }
 
 mount(document.body, {
 	content: () => html`
 		<youtube-message
-			onopen="${() => open()}"
 			onclose="${() => closeIframe()}"
+			ondontask="${() => dontAsk()}"
+			onopenblog="${() => openBlog()}"
+			onopenprivatewindow="${() => openPrivateWindow()}"
 		></youtube-message>
 	`,
 });
