@@ -4,6 +4,7 @@ on:
   release:
     types:
       - prereleased
+  workflow_dispatch:
 
 jobs:
   release-v10:
