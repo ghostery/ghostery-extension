@@ -60,6 +60,14 @@
 		},
 		{
 			"js": [
+				"/dist/youtube_content_script.js"
+			],
+			"matches": [
+				"*://www.youtube.com/*"
+			]
+		},
+		{
+			"js": [
 				"/dist/trackers_preview_content_script.js"
 			],
 			"css": [
@@ -296,6 +304,7 @@
 		"app/images/*",
 		"app/templates/trackers-preview.html",
 		"app/templates/autoconsent.html",
+		"app/templates/youtube.html",
 		"app/templates/renew.html"
 	]
 }
