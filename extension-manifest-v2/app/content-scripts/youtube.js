@@ -3,7 +3,6 @@ import { showIframe, closeIframe } from '@ghostery/ui/iframe';
 // Based on https://github.com/AdguardTeam/AdguardFilters/blob/e5ae8e3194f8d18bdcc660d4c42282e4a96ca5b9/AnnoyancesFilter/Popups/sections/antiadblock.txt#L2044
 const ADBLOCKER_WALL_SELECTORS = [
 	'ytd-enforcement-message-view-model > div.ytd-enforcement-message-view-model',
-	'ytd-watch-flexy[player-unavailable] #player-container-outer.ytd-watch-flexy',
 ];
 
 let isShown = false;
