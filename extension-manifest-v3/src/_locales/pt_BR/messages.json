@@ -124,7 +124,7 @@
     "message": "Pronto"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
-    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+    "message": "Devido às restrições do navegador e à falta de permissões adicionais, o Ghostery não é capaz de proteger você."
   },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "Elimina anúncios em sites para navegação segura e rápida."
@@ -134,7 +134,7 @@
     "description": "Tracker category name"
   },
   "enable_ad_blocking_now": {
-    "message": "Enable Ad Blocking Now"
+    "message": "Ative o bloqueio de anúncios agora"
   },
   "enable_ghostery": {
     "message": "Ativar o Ghostery"
@@ -152,7 +152,7 @@
     "message": "Ativar nova configuração"
   },
   "enable_now": {
-    "message": "Enable now"
+    "message": "Ativar agora"
   },
   "enabled": {
     "message": "Ativado"
@@ -162,7 +162,7 @@
     "description": "Tracker category name"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
-    "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
+    "message": "Expanda o bloqueio de anúncios do Ghostery para mecanismos de pesquisa em algumas etapas fáceis."
   },
   "extensions": {
     "message": "Extensões",
@@ -172,10 +172,10 @@
     "message": "Para mais informações, leia a nossa versão completa"
   },
   "further_protection": {
-    "message": "Further Protection"
+    "message": "Mais proteção"
   },
   "get_help": {
-    "message": "Get help"
+    "message": "Obter ajuda"
   },
   "ghostery__action_required": {
     "message": "Ghostery: ação exigida"
@@ -235,7 +235,7 @@
     "message": "Ajude o Ghostery a lutar por uma web onde a privacidade é um direito humano básico."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
-    "message": "Hey, do you enjoy Ghostery and want to support our work?"
+    "message": "Eai, você curte Ghostery e quer apoiar nosso trabalho?"
   },
   "hosting": {
     "message": "Hospedando",
@@ -282,7 +282,7 @@
     "description": "Tracker category name"
   },
   "more_ad_blocking_available": {
-    "message": "More ad blocking available"
+    "message": "Mais bloqueio de anúncios disponível"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "Mais informações sobre a metodologia $${0} no Manifesto do Ghostery."
@@ -291,7 +291,7 @@
     "message": "Minha conta"
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
-    "message": "Navigate to a website to see Ghostery in action."
+    "message": "Navegue até um site para ver o Ghostery em ação."
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -309,10 +309,10 @@
     "message": "Nenhum rastreador detectado"
   },
   "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Number of trackers with blocked network requests."
+    "message": "Número de rastreadores com solicitações de rede bloqueadas."
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Number of trackers with removed cookies or fingerprints."
+    "message": "Número de rastreadores com cookies ou impressões digitais removidos."
   },
   "off": {
     "message": "Desligado"
@@ -352,7 +352,7 @@
     "message": "Prenda-o aqui"
   },
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
+    "message": "Evite que o Google redirecione links de resultados de pesquisa por meio de seus servidores, em vez de vincular diretamente às páginas."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Impede várias técnicas de rastreamento usando tecnologia orientada por IA."
@@ -388,7 +388,7 @@
     "message": "Salve e sincronize suas configurações personalizadas entre navegadores e dispositivos."
   },
   "search_engine_redirect_protection": {
-    "message": "Search Engine Redirect Protection"
+    "message": "Proteção contra redirecionamento de mecanismo de pesquisa"
   },
   "search_website___": {
     "message": "Pesquisar site..."
@@ -436,7 +436,7 @@
     "message": "CANSADO DE POPUPS DE COOKIES?"
   },
   "trackers_blocked": {
-    "message": "Trackers blocked"
+    "message": "Rastreadores bloqueados"
   },
   "trackers_count": {
     "message": "Contagem de rastreadores"
@@ -448,7 +448,7 @@
     "message": "Rastreadores detectados pelo Ghostery neste site:&nbsp;$$$${0}"
   },
   "trackers_modified": {
-    "message": "Trackers modified"
+    "message": "Rastreadores modificados"
   },
   "trackers_preview": {
     "message": "Prévia de rastreadores"
@@ -461,13 +461,13 @@
     "description": "Tracker category name"
   },
   "urls_blocked": {
-    "message": "URLs blocked"
+    "message": "URLs bloqueados"
   },
   "urls_modified": {
-    "message": "URLs modified"
+    "message": "URLs modificados"
   },
   "urls_observed": {
-    "message": "URLs observed"
+    "message": "URLs observados"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "Atualizamos os Termos e Condições. Para continuar usando o Ghostery Tracker & Ad Blocker durante a navegação, renove a configuração."

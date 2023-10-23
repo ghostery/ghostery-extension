@@ -124,7 +124,7 @@
     "message": "완료"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
-    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+    "message": "브라우저 제한 사항 및 추가 권한 누락으로 인해 Ghostery가 보호해드릴 수 없습니다."
   },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
@@ -134,7 +134,7 @@
     "description": "Tracker category name"
   },
   "enable_ad_blocking_now": {
-    "message": "Enable Ad Blocking Now"
+    "message": "지금 광고 차단 활성화"
   },
   "enable_ghostery": {
     "message": "Ghostery 활성화"
@@ -152,7 +152,7 @@
     "message": "새 셋업 활성화"
   },
   "enable_now": {
-    "message": "Enable now"
+    "message": "지금 활성화"
   },
   "enabled": {
     "message": "활성화됨 "
@@ -162,7 +162,7 @@
     "description": "Tracker category name"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
-    "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
+    "message": "간단히 몇 단계만 거치면 검색 엔진에까지 Ghostery 광고 차단을 확대 적용할 수 있습니다."
   },
   "extensions": {
     "message": "확장",
@@ -172,10 +172,10 @@
     "message": "자세한 정보는 전문을 읽으시기 바랍니다"
   },
   "further_protection": {
-    "message": "Further Protection"
+    "message": "추가 보호"
   },
   "get_help": {
-    "message": "Get help"
+    "message": "도움 받기"
   },
   "ghostery__action_required": {
     "message": "Ghostery: 조치 필요"
@@ -235,7 +235,7 @@
     "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸울 힘을 주세요."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
-    "message": "Hey, do you enjoy Ghostery and want to support our work?"
+    "message": "Ghostery가 마음에 드셔서 지지해주고 싶으신가요?"
   },
   "hosting": {
     "message": "호스팅",
@@ -282,7 +282,7 @@
     "description": "Tracker category name"
   },
   "more_ad_blocking_available": {
-    "message": "More ad blocking available"
+    "message": "더 많은 광고 차단 가능"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "$${0} 어떠한 방법으로 작동하는지 그 자세한 정보는 Ghostery의 강령에서 확인해 보실 수 있습니다."
@@ -291,7 +291,7 @@
     "message": "내 계정 "
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
-    "message": "Navigate to a website to see Ghostery in action."
+    "message": "웹사이트로 이동하여 Ghostery가 어떻게 작동하는지 살펴보세요."
   },
   "never_consent": {
     "message": "동의하지 않음"
@@ -309,10 +309,10 @@
     "message": "트래커 감지되지 않음"
   },
   "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Number of trackers with blocked network requests."
+    "message": "네트워크 요청이 차단된 트래커의 수."
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Number of trackers with removed cookies or fingerprints."
+    "message": "쿠키 및 지문이 제거된 트래커의 수."
   },
   "off": {
     "message": "끄기 "
@@ -352,7 +352,7 @@
     "message": "여기 고정"
   },
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
+    "message": "Google이 페이지로 직접 링크하지 않고, 자체 서버를 통해 검색결과 링크를 리디렉션하지 못하도록 보호합니다."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술로 다양한 추적 기법에 대응합니다."
@@ -388,7 +388,7 @@
     "message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
   },
   "search_engine_redirect_protection": {
-    "message": "Search Engine Redirect Protection"
+    "message": "검색결과 리디렉션 보호"
   },
   "search_website___": {
     "message": "웹사이트 검색..."
@@ -436,7 +436,7 @@
     "message": "쿠키 팝업이 너무 많습니까?"
   },
   "trackers_blocked": {
-    "message": "Trackers blocked"
+    "message": "차단된 트래커"
   },
   "trackers_count": {
     "message": "트래커 카운트"
@@ -448,7 +448,7 @@
     "message": "이 웹사이트에서 Ghostery가 탐지한 추적기:&nbsp;$${0}"
   },
   "trackers_modified": {
-    "message": "Trackers modified"
+    "message": "수정된 트래커"
   },
   "trackers_preview": {
     "message": "트래커 미리보기"
@@ -461,13 +461,13 @@
     "description": "Tracker category name"
   },
   "urls_blocked": {
-    "message": "URLs blocked"
+    "message": "차단된 URL"
   },
   "urls_modified": {
-    "message": "URLs modified"
+    "message": "수정된 URL"
   },
   "urls_observed": {
-    "message": "URLs observed"
+    "message": "관찰된 URL"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "이용 약관이 업데이트되었습니다. 브라우징 중 Ghostery 트래커 및 광고 차단기를 계속 사용하려면 셋업을 갱신해주세요."

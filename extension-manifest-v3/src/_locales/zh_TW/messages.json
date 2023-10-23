@@ -124,7 +124,7 @@
     "message": "完成"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
-    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+    "message": "由於瀏覽器限制和缺少額外權限，Ghostery 無法為您提供保護。"
   },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "消除網站上的廣告，獲得安全又快速的瀏覽體驗。"
@@ -134,7 +134,7 @@
     "description": "Tracker category name"
   },
   "enable_ad_blocking_now": {
-    "message": "Enable Ad Blocking Now"
+    "message": "立即啟用廣告攔截功能"
   },
   "enable_ghostery": {
     "message": "啟用 Ghostery"
@@ -152,7 +152,7 @@
     "message": "啟用新設定"
   },
   "enable_now": {
-    "message": "Enable now"
+    "message": "立即啟用"
   },
   "enabled": {
     "message": "已啟用"
@@ -162,7 +162,7 @@
     "description": "Tracker category name"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
-    "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
+    "message": "只需幾個簡單步驟，即可將 Ghostery 廣告攔截功能擴展到搜尋引擎。"
   },
   "extensions": {
     "message": "擴展",
@@ -172,10 +172,10 @@
     "message": "如欲了解更多訊息，請閱讀我們的全文"
   },
   "further_protection": {
-    "message": "Further Protection"
+    "message": "更多防護"
   },
   "get_help": {
-    "message": "Get help"
+    "message": "取得幫助"
   },
   "ghostery__action_required": {
     "message": "Ghostery：需要採取動作"
@@ -235,7 +235,7 @@
     "message": "協助 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
-    "message": "Hey, do you enjoy Ghostery and want to support our work?"
+    "message": "嗨，您喜歡使用 Ghostery 並願意鼓勵我們的工作嗎？"
   },
   "hosting": {
     "message": "託管",
@@ -282,7 +282,7 @@
     "description": "Tracker category name"
   },
   "more_ad_blocking_available": {
-    "message": "More ad blocking available"
+    "message": "更多可用的廣告攔截功能"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "更多有關 Ghostery 宣言中 $${0} 方法的資訊。"
@@ -291,7 +291,7 @@
     "message": "我的帳號"
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
-    "message": "Navigate to a website to see Ghostery in action."
+    "message": "導覽到一個網站，親眼查看 Ghostery 的實際運作。"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -309,10 +309,10 @@
     "message": "未偵測到追蹤器"
   },
   "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Number of trackers with blocked network requests."
+    "message": "網路請求被攔截的追蹤器數量。"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Number of trackers with removed cookies or fingerprints."
+    "message": "已刪除 cookie 或指紋的追蹤器數量。"
   },
   "off": {
     "message": "關閉"
@@ -352,7 +352,7 @@
     "message": "於此處釘選"
   },
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
+    "message": "防止 Google 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "使用 AI 科技防止各種追蹤技術。"
@@ -388,7 +388,7 @@
     "message": "儲存並在瀏覽器和裝置之間同步您的自訂設定。"
   },
   "search_engine_redirect_protection": {
-    "message": "Search Engine Redirect Protection"
+    "message": "搜尋引擎重新導向保護"
   },
   "search_website___": {
     "message": "搜尋網站......"
@@ -436,7 +436,7 @@
     "message": "厭倦了 Cookie 彈出式視窗？"
   },
   "trackers_blocked": {
-    "message": "Trackers blocked"
+    "message": "已攔截的追蹤器"
   },
   "trackers_count": {
     "message": "追蹤器計數"
@@ -448,7 +448,7 @@
     "message": "Ghostery 在此網站上偵測到的追蹤器：$${0}"
   },
   "trackers_modified": {
-    "message": "Trackers modified"
+    "message": "已修改的追蹤器"
   },
   "trackers_preview": {
     "message": "追蹤器預覽"
@@ -461,13 +461,13 @@
     "description": "Tracker category name"
   },
   "urls_blocked": {
-    "message": "URLs blocked"
+    "message": "已封鎖的 URL"
   },
   "urls_modified": {
-    "message": "URLs modified"
+    "message": "已修改的 URL"
   },
   "urls_observed": {
-    "message": "URLs observed"
+    "message": "已觀察到的 URL"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "我們更新了條款及條件。若要在瀏覽時繼續使用 Ghostery Tracker 和廣告攔截器，請更新設定。"
