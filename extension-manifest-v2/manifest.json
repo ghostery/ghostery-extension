@@ -3,8 +3,8 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.11.1",
-	"version_name": "8.11.1",
+	"version": "8.12.0",
+	"version_name": "8.12.0",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"icons": {
@@ -55,6 +55,15 @@
 			"exclude_matches": [
 				"*://*/_/chrome/newtab*",
 				"*://ntp.msn.com/*"
+			],
+			"run_at": "document_start"
+		},
+		{
+			"js": [
+				"/dist/youtube_content_script.js"
+			],
+			"matches": [
+				"*://www.youtube.com/*"
 			],
 			"run_at": "document_start"
 		},
@@ -296,6 +305,7 @@
 		"app/images/*",
 		"app/templates/trackers-preview.html",
 		"app/templates/autoconsent.html",
+		"app/templates/youtube.html",
 		"app/templates/renew.html"
 	]
 }

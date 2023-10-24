@@ -680,6 +680,9 @@
   "dollar_sign": {
     "message": "&#36;"
   },
+  "don_t_ask_again": {
+    "message": "Nie pytaj ponownie"
+  },
   "done": {
     "message": "Gotowe"
   },
@@ -714,6 +717,9 @@
   "enable_new_setup": {
     "message": "Aktywuj nową konfigurację"
   },
+  "enable_now": {
+    "message": "Włącz teraz"
+  },
   "enable_when_blacklisted": {
     "message": "Aby użyć tej funkcji, cofnij Zastrzeż stronę."
   },
@@ -744,6 +750,9 @@
   },
   "expand_all": {
     "message": "Rozwiń wszystko"
+  },
+  "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
+    "message": "Rozszerz blokowanie reklam Ghostery na wyszukiwarki w kilku prostych krokach."
   },
   "extensions": {
     "message": "Rozszerzenia",
@@ -864,6 +873,9 @@
   "learn_more": {
     "message": "Dowiedz się więcej"
   },
+  "learn_more_about_youtube_s_challenges_to_ad_blockers": {
+    "message": "Dowiedz się więcej o wyzwaniach YouTube związanych z blokowaniem reklam"
+  },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Pozwól, aby wtyczka Ghostery pełniła funkcję Twojego obrońcy prywatności i odrzucała wszystkie popupy i trackery, lub zajmij się tym sam!"
   },
@@ -912,6 +924,9 @@
   },
   "modified": {
     "message": "Zmodyfikowany"
+  },
+  "more_ad_blocking_available": {
+    "message": "Dostępne jest więcej opcji blokowania reklam"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "Więcej informacji o metodologii $${0} w Manifeście Ghostery."
@@ -975,6 +990,9 @@
   "on_this_website": {
     "message": "na tej stronie"
   },
+  "open_youtube_in_private_window": {
+    "message": "Otwórz YouTube w prywatnym oknie"
+  },
   "options_tracker_wheel_disabled": {
     "message": "Wyłącz licznik tropicieli na pasku narzędzi przeglądarki"
   },
@@ -983,6 +1001,10 @@
   },
   "organizations": {
     "message": "Organizacje"
+  },
+  "other": {
+    "message": "Inne",
+    "description": "Tracker category name"
   },
   "page_load": {
     "message": "Ładowanie strony"
@@ -1903,8 +1925,14 @@
     "message": "Nieznany",
     "description": "Tracker category name"
   },
+  "visit_our_blog": {
+    "message": "Odwiedź nasz blog"
+  },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "Zaktualizowaliśmy Warunki. Żeby nadal korzystać z trackera i blokera reklam Ghostery podczas przeglądania stron, wznów konfigurację."
+  },
+  "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
+    "message": "Wiemy, że polegasz na Ghostery, aby płynnie korzystać z YouTube. Dopóki nie pojawi się bardziej wyrafinowane rozwiązanie, oto tymczasowa poprawka."
   },
   "welcome_to_ghostery": {
     "message": "Witamy w Ghostery"
@@ -1951,26 +1979,8 @@
   },
   "your_privacy_features_": {
     "message": "Twoje opcje ochrony prywatności:"
-	},
-	"account_details": {
-		"message": "Dane konta"
-	},
-	"contributor": {
-		"message": "Kontrybutor"
-	},
-	"help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-		"message": "Pomóż Ghostery w walce o sieć, w której prywatność będzie podstawowym prawem człowieka."
-	},
-	"join_ghostery": {
-		"message": "Dołącz do Ghostery"
-	},
-	"save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
-		"message": "Zapisz i zsynchronizuj ustawienia niestandardowe pomiędzy przeglądarkami a urządzeniami."
-	},
-	"settings_sync": {
-		"message": "Ustawienia synchronizacji"
-	},
-	"you_are_signed_in_as_": {
-		"message": "Zalogowano jako:"
-	}
+  },
+  "youtube_blocking_you_from_watching_ad_free_videos_": {
+    "message": "YouTube blokuje Ci możliwość oglądania filmów bez reklam?"
+  }
 }

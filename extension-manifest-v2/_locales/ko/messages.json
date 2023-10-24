@@ -680,6 +680,9 @@
   "dollar_sign": {
     "message": "&#36;"
   },
+  "don_t_ask_again": {
+    "message": "다시 묻지 마세요"
+  },
   "done": {
     "message": "완료"
   },
@@ -714,6 +717,9 @@
   "enable_new_setup": {
     "message": "새 셋업 활성화"
   },
+  "enable_now": {
+    "message": "지금 활성화"
+  },
   "enable_when_blacklisted": {
     "message": "이 기능을 사용하려면 사이트 제한을 실행 취소하십시오."
   },
@@ -744,6 +750,9 @@
   },
   "expand_all": {
     "message": "모두 펼치기 "
+  },
+  "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
+    "message": "간단히 몇 단계만 거치면 검색 엔진에까지 Ghostery 광고 차단을 확대 적용할 수 있습니다."
   },
   "extensions": {
     "message": "확장",
@@ -864,6 +873,9 @@
   "learn_more": {
     "message": "자세히 알아보기 "
   },
+  "learn_more_about_youtube_s_challenges_to_ad_blockers": {
+    "message": "광고 차단기에 대한 YouTube의 도전에 대해 자세히 알아보기"
+  },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghostery가 귀하의 완전한 개인 정보 보호를 지원할 수 있게 하고 모든 팝업 및 추적을 거부하십시오. 또는 직접 실행할 수도 있습니다!"
   },
@@ -912,6 +924,9 @@
   },
   "modified": {
     "message": "수정됨"
+  },
+  "more_ad_blocking_available": {
+    "message": "더 많은 광고 차단 가능"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "$${0} 어떠한 방법으로 작동하는지 그 자세한 정보는 Ghostery의 강령에서 확인해 보실 수 있습니다."
@@ -975,6 +990,9 @@
   "on_this_website": {
     "message": "이 웹사이트에서"
   },
+  "open_youtube_in_private_window": {
+    "message": "비공개 창에서 YouTube 열기"
+  },
   "options_tracker_wheel_disabled": {
     "message": "브라우저 툴바에서 트래커 바퀴 비활성화"
   },
@@ -983,6 +1001,10 @@
   },
   "organizations": {
     "message": "조직"
+  },
+  "other": {
+    "message": "기타",
+    "description": "Tracker category name"
   },
   "page_load": {
     "message": "페이지 로드 "
@@ -1903,8 +1925,14 @@
     "message": "알 수 없음 ",
     "description": "Tracker category name"
   },
+  "visit_our_blog": {
+    "message": "블로그 방문하기"
+  },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "이용 약관이 업데이트되었습니다. 브라우징 중 Ghostery 트래커 및 광고 차단기를 계속 사용하려면 셋업을 갱신해주세요."
+  },
+  "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
+    "message": "원활한 YouTube 환경을 위해 고스트리를 사용하시는 것을 잘 알고 있습니다. 보다 개선된 솔루션이 나올 때까지 임시 해결 방법을 알려드립니다."
   },
   "welcome_to_ghostery": {
     "message": "Ghostery를 시작합니다"
@@ -1951,26 +1979,8 @@
   },
   "your_privacy_features_": {
     "message": "프라이버시 관련 기능:"
-	},
-	"account_details": {
-		"message": "계정 세부정보"
-	},
-	"contributor": {
-		"message": "기부자"
-	},
-	"help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-		"message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸울 힘을 주세요."
-	},
-	"join_ghostery": {
-		"message": "Ghostery 가입"
-	},
-	"save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
-		"message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
-	},
-	"settings_sync": {
-		"message": "설정 동기화"
-	},
-	"you_are_signed_in_as_": {
-		"message": "로그인한 계정:"
-	}
+  },
+  "youtube_blocking_you_from_watching_ad_free_videos_": {
+    "message": "YouTube에서 광고 없는 동영상 시청이 차단되나요?"
+  }
 }

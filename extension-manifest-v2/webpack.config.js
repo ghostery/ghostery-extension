@@ -33,6 +33,7 @@ const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const TRACKERS_PREVIEW_DIR = path.resolve(__dirname, 'app/trackers-preview');
 const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RENEW_DIR = path.resolve(__dirname, 'app/renew');
+const YOUTUBE_DIR = path.resolve(__dirname, 'app/youtube');
 
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
@@ -84,6 +85,8 @@ module.exports = {
 		trackers_preview_content_script: [`${CONTENT_SCRIPTS_DIR}/trackers-preview.js`],
 		autoconsent: [`${AUTOCONSENT_DIR}/index.js`],
 		renew: [`${RENEW_DIR}/index.js`],
+		youtube: [`${YOUTUBE_DIR}/index.js`],
+		youtube_content_script: [`${CONTENT_SCRIPTS_DIR}/youtube.js`],
 
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
