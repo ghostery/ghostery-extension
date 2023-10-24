@@ -15,9 +15,13 @@ import {
   ENGINE_VERSION,
   getLinesWithFilters,
   mergeDiffs,
+  Config,
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from '/utils/indexeddb.js';
+
+export const COSMETIC_ENGINE = 'custom-filters-cosmetic';
+export const NETWORK_ENGINE = 'custom-filters-network';
 
 const engines = new Map();
 
@@ -27,6 +31,41 @@ function loadFromMemory(name) {
 
 function saveToMemory(name, engine) {
   engines.set(name, engine);
+}
+
+// custom filter exceptions should apply to all engines
+function shareExceptions(name, engine) {
+  if (name.startsWith('custom-filters')) {
+    return;
+  }
+
+  // Network exceptions
+  const matchExceptions = engine.exceptions.match.bind(engine.exceptions);
+  engine.exceptions.match = (...args) => {
+    return (
+      matchExceptions(...args) || get(NETWORK_ENGINE).exceptions.match(...args)
+    );
+  };
+
+  // Cosmetic exceptions
+  const iterMatchingFiltersUnhide =
+    engine.cosmetics.unhideIndex.iterMatchingFilters.bind(
+      engine.cosmetics.unhideIndex,
+    );
+  engine.cosmetics.unhideIndex.iterMatchingFilters = (...args) => {
+    iterMatchingFiltersUnhide(...args);
+    get(NETWORK_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
+  };
+
+  const matchAllUnhideExceptions = engine.hideExceptions.matchAll.bind(
+    engine.hideExceptions,
+  );
+  engine.hideExceptions.matchAll = (...args) => {
+    return (
+      matchAllUnhideExceptions(...args) ||
+      get(COSMETIC_ENGINE).hideExceptions.matchAll(...args)
+    );
+  };
 }
 
 const DB_NAME = registerDatabase('engines');
@@ -59,6 +98,7 @@ async function loadFromStorage(name) {
 
     if (engineBytes) {
       const engine = FiltersEngine.deserialize(engineBytes);
+      shareExceptions(name, engine);
       saveToMemory(name, engine);
 
       return engine;
@@ -95,6 +135,9 @@ function check(response) {
 }
 
 async function update(name) {
+  if (name.startsWith('custom-filters')) {
+    return;
+  }
   try {
     const urlName =
       name === 'trackerdb'
@@ -153,6 +196,7 @@ async function update(name) {
       const engineBytes = new Uint8Array(arrayBuffer);
       engine = FiltersEngine.deserialize(engineBytes);
 
+      shareExceptions(name, engine);
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
       saveToStorage(name);
@@ -287,6 +331,7 @@ async function loadFromDisk(name) {
     const engineBytes = new Uint8Array(await response.arrayBuffer());
     const engine = FiltersEngine.deserialize(engineBytes);
 
+    shareExceptions(name, engine);
     saveToMemory(name, engine);
     saveToStorage(name);
 
@@ -321,6 +366,27 @@ export async function init(name) {
 
   return (
     get(name) || (await loadFromStorage(name)) || (await loadFromDisk(name))
+  );
+}
+
+async function createCustomEngine(name, filters = '') {
+  const config = new Config({
+    enableHtmlFiltering: true,
+  });
+  const engine = FiltersEngine.parse(filters, config);
+  saveToMemory(name, engine);
+  saveToStorage(name);
+  return engine;
+}
+
+export async function initCustom(name, filters) {
+  if (typeof filters === 'string') {
+    return createCustomEngine(name, filters);
+  }
+  return (
+    get(name) ||
+    (await loadFromStorage(name)) ||
+    (await createCustomEngine(name))
   );
 }
 

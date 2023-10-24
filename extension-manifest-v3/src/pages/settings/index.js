@@ -21,7 +21,10 @@ const { terms } = await store.resolve(Options);
 
 if (terms) {
   define.from(
-    import.meta.glob('./**/*.js', { eager: true, import: 'default' }),
+    import.meta.glob(['./components/*.js', './views/*.js'], {
+      eager: true,
+      import: 'default',
+    }),
     {
       root: ['components', 'views'],
       prefix: 'gh-settings',
