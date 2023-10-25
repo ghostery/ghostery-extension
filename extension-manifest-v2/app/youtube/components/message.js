@@ -27,7 +27,7 @@ export default define({
 					</div>
 					<div layout="column gap:1.5">
 						<div layout="margin:bottom:-1 row">
-							<ui-text type="label-l">
+							<ui-text type="label-xl">
 								YouTube blocking you from watching ad-free videos?
 							</ui-text>
 							<ui-action>
@@ -42,13 +42,13 @@ export default define({
 								</button>
 							</ui-action>
 						</div>
-						<ui-text type="body-s">
+						<ui-text type="body-m">
 							We know you rely on Ghostery for a smooth YouTube experience.
 							Until a more refined solution emerges, here’s a temporary fix.
 						</ui-text>
 							<div layout="column gap">
-								<div layout="row">
-									<ui-text type="label-s" translate="no">1.&nbsp;</ui-text>
+								<div layout="row gap:0.5">
+									<ui-text type="label-s" translate="no">1.</ui-text>
 									<ui-text type="label-s">
 										Allow Ghostery in private windows
 									</ui-text>
@@ -64,8 +64,8 @@ export default define({
 								</div>
 							</div>
 							<div layout="column gap">
-								<div layout="row">
-									<ui-text type="label-s" translate="no">2.&nbsp;</ui-text>
+								<div layout="row gap:0.5">
+									<ui-text type="label-s" translate="no">2.</ui-text>
 									<ui-text type="label-s">
 										Open YouTube in a private window
 									</ui-text>
@@ -82,7 +82,7 @@ export default define({
 						</div>
 						<div class="hr"></div>
 						<div layout="column gap:1">
-							<ui-text type="body-s">
+							<ui-text type="body-m">
 								Learn more about YouTube’s challenges to ad blockers
 							</ui-text>
 							<div layout="row:wrap gap">
@@ -107,12 +107,6 @@ export default define({
 			background: #D4D6D9;
 			height: 1px;
 			align-self: stretch;
-		}
-		ui-text[type='body-s'], ui-text[type='label-s'] {
-			font-size: 14px !important;
-		}
-		ui-text[type='label-l'] {
-			font-size: 18px !important;
 		}
 	`,
 });
