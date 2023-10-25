@@ -87,6 +87,9 @@
   "all_popups": {
     "message": "Все всплывающие окна"
   },
+  "allow_ghostery_in_private_windows": {
+    "message": "Разреши Ghostery в приватных окнах"
+  },
   "allowed": {
     "message": "Разрешено"
   },
@@ -870,6 +873,9 @@
   "last_name_field_label": {
     "message": "Фамилия (необязательно):"
   },
+  "learn_how": {
+    "message": "Узнай, как"
+  },
   "learn_more": {
     "message": "Подробнее"
   },
@@ -989,6 +995,12 @@
   },
   "on_this_website": {
     "message": "на этом веб-сайте"
+  },
+  "open_video": {
+    "message": "Открытое видео"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "Открой YouTube в закрытом окне"
   },
   "open_youtube_in_private_window": {
     "message": "Открыть YouTube в приватном окне"
