@@ -37,7 +37,7 @@ export default define({
 									layout="margin:-1 self:start shrink:0 padding"
 								>
 									<div layout="row center size:3">
-										<ui-icon name="close" layout="size:2"></ui-icon>
+										<ui-icon name="close" color="gray-400" layout="size:3"></ui-icon>
 									</div>
 								</button>
 							</ui-action>
@@ -46,9 +46,8 @@ export default define({
 							We know you rely on Ghostery for a smooth YouTube experience.
 							Until a more refined solution emerges, here’s a temporary fix.
 						</ui-text>
-						<div layout="column:wrap gap">
-							<div layout="column">
-								<div layout="row margin:bottom:0.5">
+							<div layout="column gap">
+								<div layout="row">
 									<ui-text type="label-s" translate="no">1.&nbsp;</ui-text>
 									<ui-text type="label-s">
 										Allow Ghostery in private windows
@@ -64,8 +63,8 @@ export default define({
 									</ui-button>
 								</div>
 							</div>
-							<div layout="column">
-								<div layout="row margin:bottom:0.5">
+							<div layout="column gap">
+								<div layout="row">
 									<ui-text type="label-s" translate="no">2.&nbsp;</ui-text>
 									<ui-text type="label-s">
 										Open YouTube in a private window
@@ -80,23 +79,24 @@ export default define({
 										</button>
 									</ui-button>
 								</div>
-							</div>
 						</div>
 						<div class="hr"></div>
-						<ui-text type="body-s">
-							Learn more about YouTube’s challenges to ad blockers
-						</ui-text>
-						<div layout="row:wrap gap">
-							<ui-button type="outline" size="small">
-								<button onclick="${host => dispatch(host, 'openblog2')}">
-									Visit our blog
-								</button>
-							</ui-button>
-							<ui-button type="transparent" size="small">
-								<button onclick="${host => dispatch(host, 'dontask')}">
-									<ui-text>Don't ask again</ui-text>
-								</button>
-							</ui-button>
+						<div layout="column gap:1">
+							<ui-text type="body-s">
+								Learn more about YouTube’s challenges to ad blockers
+							</ui-text>
+							<div layout="row:wrap gap">
+								<ui-button type="outline" size="small">
+									<button onclick="${host => dispatch(host, 'openblog2')}">
+										Visit our blog
+									</button>
+								</ui-button>
+								<ui-button type="transparent" size="small">
+									<button onclick="${host => dispatch(host, 'dontask')}">
+										<ui-text>Don't ask again</ui-text>
+									</button>
+								</ui-button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -107,6 +107,12 @@ export default define({
 			background: #D4D6D9;
 			height: 1px;
 			align-self: stretch;
+		}
+		ui-text[type='body-s'], ui-text[type='label-s'] {
+			font-size: 14px !important;
+		}
+		ui-text[type='label-l'] {
+			font-size: 18px !important;
 		}
 	`,
 });
