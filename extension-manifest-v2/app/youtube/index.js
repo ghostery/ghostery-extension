@@ -27,11 +27,11 @@ function openPrivateWindow() {
 	});
 }
 
-function openBlog() {
+function openBlog(slug) {
 	chrome.runtime.sendMessage({
 		name: 'openNewTab',
 		message: {
-			url: 'https://www.ghostery.com/blog/whats-happening-with-youtube-ads',
+			url: `https://www.ghostery.com/blog/${slug}?utm_source=gbe&utm_campaign=youtube`,
 			become_active: true,
 		},
 	});
@@ -49,7 +49,8 @@ mount(document.body, {
 		<youtube-message
 			onclose="${() => closeIframe()}"
 			ondontask="${() => dontAsk()}"
-			onopenblog="${() => openBlog()}"
+			onopenblog1="${() => openBlog('enable-extensions-in-incognito')}"
+			onopenblog2="${() => openBlog('whats-happening-with-youtube-ads')}"
 			onopenprivatewindow="${() => openPrivateWindow()}"
 		></youtube-message>
 	`,
