@@ -46,36 +46,40 @@ export default define({
 							We know you rely on Ghostery for a smooth YouTube experience.
 							Until a more refined solution emerges, here’s a temporary fix.
 						</ui-text>
-						<div layout="row:wrap gap">
+						<div layout="column:wrap gap">
 							<div layout="column">
 								<div layout="row margin:bottom:0.5">
 									<ui-text type="label-s" translate="no">1.&nbsp;</ui-text>
-									<ui-text type="label-s"
-										>Allow Ghostery in private windows</ui-text
-									>
+									<ui-text type="label-s">
+										Allow Ghostery in private windows
+									</ui-text>
 								</div>
-								<ui-button type="outline" size="small">
-									<button
-										onclick="${host => dispatch(host, 'openblog1')}"
-									>
-										Learn how
-									</button>
-								</ui-button>
+								<div layout="row">
+									<ui-button type="outline" size="small">
+										<button
+											onclick="${host => dispatch(host, 'openblog1')}"
+										>
+											Learn how
+										</button>
+									</ui-button>
+								</div>
 							</div>
 							<div layout="column">
 								<div layout="row margin:bottom:0.5">
 									<ui-text type="label-s" translate="no">2.&nbsp;</ui-text>
-									<ui-text type="label-s"
-										>Open YouTube in a private window</ui-text
-									>
+									<ui-text type="label-s">
+										Open YouTube in a private window
+									</ui-text>
 								</div>
-								<ui-button type="success" size="small">
-									<button
-										onclick="${host => dispatch(host, 'openprivatewindow')}"
-									>
-										Open video
-									</button>
-								</ui-button>
+								<div layout="row">
+									<ui-button type="success" size="small">
+										<button
+											onclick="${host => dispatch(host, 'openprivatewindow')}"
+										>
+											Open video
+										</button>
+									</ui-button>
+								</div>
 							</div>
 						</div>
 						<div class="hr"></div>
@@ -101,7 +105,7 @@ export default define({
 	`.css`
 		.hr {
 			background: #D4D6D9;
-			height: 2px;
+			height: 1px;
 			align-self: stretch;
 		}
 	`,
