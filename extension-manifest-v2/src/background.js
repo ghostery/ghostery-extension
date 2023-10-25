@@ -1082,9 +1082,17 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelistedForAdblocking(state) {
+	if (globals.SESSION.paused_blocking) {
+		return true;
+	}
+	if (state.onlyCheckPause) {
+		// This should only be reachable in the context of push injections,
+		// which lack the context. But push injection handled whitelisted
+		// pages already in a previous step.
+		return false;
+	}
 	return (
-		Boolean(globals.SESSION.paused_blocking)
-		|| Boolean(state.ghosteryWhitelisted)
+		Boolean(state.ghosteryWhitelisted)
 		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
 		// only check common_checklist if the tracker id is unknown
 		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
