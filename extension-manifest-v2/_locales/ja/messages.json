@@ -87,6 +87,9 @@
   "all_popups": {
     "message": "すべてのポップアップ"
   },
+  "allow_ghostery_in_private_windows": {
+    "message": "プライベートウィンドウでGhosteryを許可する"
+  },
   "allowed": {
     "message": "許可"
   },
@@ -870,6 +873,9 @@
   "last_name_field_label": {
     "message": "姓（オプション）："
   },
+  "learn_how": {
+    "message": "どのように学ぶ"
+  },
   "learn_more": {
     "message": "詳細はこちら"
   },
@@ -989,6 +995,12 @@
   },
   "on_this_website": {
     "message": "このウェブサイトに対して"
+  },
+  "open_video": {
+    "message": "ビデオを開く"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "YouTubeをプライベートウィンドウで開く"
   },
   "open_youtube_in_private_window": {
     "message": "プライベートウィンドウでYouTubeを開く"

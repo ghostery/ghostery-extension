@@ -87,6 +87,9 @@
   "all_popups": {
     "message": "所有弹出窗口"
   },
+  "allow_ghostery_in_private_windows": {
+    "message": "允许在私人窗口中使用 Ghostery"
+  },
   "allowed": {
     "message": "已允许"
   },
@@ -870,6 +873,9 @@
   "last_name_field_label": {
     "message": "姓氏（可选）："
   },
+  "learn_how": {
+    "message": "如何学习"
+  },
   "learn_more": {
     "message": "了解详情"
   },
@@ -989,6 +995,12 @@
   },
   "on_this_website": {
     "message": "在此网站上"
+  },
+  "open_video": {
+    "message": "打开视频"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "在私人窗口中打开 YouTube"
   },
   "open_youtube_in_private_window": {
     "message": "在私人窗口中打开 YouTube"

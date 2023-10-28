@@ -87,6 +87,9 @@
   "all_popups": {
     "message": "All Popups"
   },
+  "allow_ghostery_in_private_windows": {
+    "message": "Allow Ghostery in private windows"
+  },
   "allowed": {
     "message": "Allowed"
   },
@@ -870,6 +873,9 @@
   "last_name_field_label": {
     "message": "Last Name (Optional):"
   },
+  "learn_how": {
+    "message": "Learn how"
+  },
   "learn_more": {
     "message": "Learn More"
   },
@@ -989,6 +995,12 @@
   },
   "on_this_website": {
     "message": "on this website"
+  },
+  "open_video": {
+    "message": "Open video"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "Open YouTube in a private window"
   },
   "open_youtube_in_private_window": {
     "message": "Open YouTube in Private Window"
