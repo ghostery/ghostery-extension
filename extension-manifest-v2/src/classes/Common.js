@@ -32,6 +32,8 @@ const DEFAULT_ADBLOCKER_MODE = 2; // 2 == Ads + Trackers + Annoyances
 const HAS_WASM = typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function';
 const IS_ANDROID = getBrowserInfo.isAndroid();
 
+COMMON.config.settings.ADBLOCKER_BASE_URL = `${globals.CDN_BASE_URL}/adblocker/configs`;
+
 COMMON.config.baseURL = '/common/';
 // Override the default prefs based on the platform
 COMMON.config.default_prefs = {
