@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 import * as IDB from 'idb';
 
 import { registerDatabase } from '/utils/indexeddb.js';
+import * as trackerDb from '/utils/trackerdb.js';
 
 // Synchronously register name of the database
 // so if a user don't open any page, it is still possible
@@ -69,14 +70,9 @@ async function getDb() {
       await daily.put({
         id: stats.day,
         day: stats.day,
-        adsBlocked: stats.adsBlocked || 0,
-        adsDetected: stats.adsBlocked || 0,
         trackersBlocked: stats.trackersBlocked || 0,
-        trackersDetected: stats.trackersDetected || 0,
-        requestsBlocked: stats.trackerRequestsBlocked || 0,
-        requestsDetected: stats.trackerRequestsBlocked || 0,
-        cookiesBlocked: stats.cookiesBlocked || 0,
-        fingerprintsBlocked: stats.fingerprintsRemoved || 0,
+        trackersModified:
+          (stats.cookiesBlocked || 0) + (stats.fingerprintsRemoved || 0),
         pages: stats.pages || 0,
         patterns: stats.trackers || [],
       });
@@ -118,17 +114,12 @@ async function flush(id) {
 const DailyStats = {
   id: true,
   day: '',
-  adsBlocked: 0,
-  adsDetected: 0,
   trackersBlocked: 0,
-  trackersDetected: 0,
-  requestsBlocked: 0,
-  requestsDetected: 0,
-  cookiesBlocked: 0,
-  fingerprintsBlocked: 0,
+  trackersModified: 0,
   pages: 0,
   patterns: [String],
   [store.connect]: {
+    loose: true,
     async get(id) {
       const db = await getDb();
       return (await db.get('daily', id)) || { id, day: id };
@@ -137,38 +128,61 @@ const DailyStats = {
       flush(id);
       return values;
     },
+    async list() {
+      const db = await getDb();
+      return db.getAllFromIndex('daily', 'day');
+    },
   },
 };
 
 export default DailyStats;
 
-export async function getMergedStats(since) {
-  const db = await getDb();
-  const list = await db.getAllFromIndex('daily', 'day', since);
+// const MERGED_STATS_OFFSET = 1000 * 60 * 60 * 24 * 30; // 30 days
 
-  const result = list.reduce(
-    (acc, stats) => {
-      for (const key of Object.keys(stats)) {
-        if (key === 'id' || key === 'day') continue;
+export const MergedStats = {
+  trackersBlocked: 0,
+  trackersModified: 0,
+  trackersDetailed: [{ id: true, category: '' }],
+  [store.connect]: {
+    cache: false,
+    async get() {
+      // const since = new Date(Date.now() - MERGED_STATS_OFFSET)
+      //   .toISOString()
+      //   .split('T')[0];
+      const list = await store.resolve([DailyStats]);
+      const patterns = new Set();
 
-        if (key === 'patterns') {
+      // Merge stats
+      const mergedStats = list.reduce(
+        (acc, stats) => {
           for (const id of stats.patterns) {
-            acc.patterns.add(id);
+            patterns.add(id);
           }
-        } else {
-          acc[key] = acc[key] + stats[key];
-        }
+
+          acc.trackersBlocked += stats.trackersBlocked;
+          acc.trackersModified += stats.trackersModified;
+
+          return acc;
+        },
+        {
+          trackersBlocked: 0,
+          trackersModified: 0,
+          trackersDetailed: [],
+        },
+      );
+
+      // Add metadata
+      for (const id of patterns) {
+        const { category = 'unidentified' } =
+          (await trackerDb.getPattern(id)) || {};
+
+        mergedStats.trackersDetailed.push({
+          id,
+          category,
+        });
       }
 
-      return acc;
+      return mergedStats;
     },
-    { ...DailyStats, patterns: new Set() },
-  );
-
-  // clean up model definition related properties
-  delete result.id;
-  delete result.day;
-  delete result[store.connect];
-
-  return Object.assign(result, { patterns: [...result.patterns] });
-}
+  },
+};
