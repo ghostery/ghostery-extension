@@ -84,6 +84,11 @@ export function getCompatRule(rule, debug = false) {
     log('Fixing regexp');
   }
 
+  if (newRule.priority > 10000) {
+    log('Skipping complex rule');
+    return null;
+  }
+
   return newRule;
 }
 
@@ -107,6 +112,10 @@ export function setupStream(path) {
     },
     close: () => {
       output.write(']');
+      console.log(`Generated ${currentId} rules`);
+      if (currentId > 75000) {
+        throw new Error('Too many DNR rules');
+      }
       output.close();
     },
   };

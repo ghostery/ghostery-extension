@@ -125,7 +125,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 
     // https://github.com/WebKit/WebKit/blob/c85962a5c0e929991e5963811da957b75d1501db/Source/WebCore/contentextensions/ContentExtensionCompiler.cpp#L199
     if (rulesCount > 75000) {
-      console.warn(
+      throw new Error(
         `Warning: The number of rules exceeds the limit of 75k rules.`,
       );
     }
