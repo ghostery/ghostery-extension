@@ -67,7 +67,8 @@
       "run_at": "document_start",
       "js": [
         "content_scripts/adblocker.js"
-      ]
+      ],
+      "all_frames": true
     },
     {
       "matches": ["http://*/*", "https://*/*"],

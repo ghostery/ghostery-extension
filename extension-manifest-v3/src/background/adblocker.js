@@ -301,7 +301,7 @@ async function injectScriptlets(tabId, url) {
 
 if (__PLATFORM__ === 'safari') {
   chrome.runtime.onMessage.addListener((msg, sender) => {
-    if (sender.url && msg.action === 'onCommitted') {
+    if (sender.url && msg.action === 'injectScriptlets') {
       injectScriptlets(sender.tab.id, sender.url);
     }
 
