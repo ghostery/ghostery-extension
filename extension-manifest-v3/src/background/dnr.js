@@ -12,6 +12,10 @@
 import { observe, ENGINES } from '/store/options.js';
 
 if (__PLATFORM__ !== 'firefox') {
+  const DNR_RESOURCES = chrome.runtime
+    .getManifest()
+    .declarative_net_request.rule_resources.map(({ id }) => id);
+
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
@@ -23,6 +27,8 @@ if (__PLATFORM__ !== 'firefox') {
     const disableRulesetIds = [];
 
     ENGINES.forEach(({ name, key }) => {
+      if (!DNR_RESOURCES.includes(name)) return;
+
       const enabled = options.terms && options[key];
       if (enabledRulesetIds.includes(name) !== enabled) {
         (enabled ? enableRulesetIds : disableRulesetIds).push(name);

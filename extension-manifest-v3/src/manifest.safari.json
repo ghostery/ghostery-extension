@@ -47,16 +47,6 @@
         "id": "ads",
         "enabled": false,
         "path": "rule_resources/dnr-safari-ads.json"
-      },
-      {
-        "id": "tracking",
-        "enabled": false,
-        "path": "rule_resources/dnr-safari-tracking.json"
-      },
-      {
-        "id": "annoyances",
-        "enabled": false,
-        "path": "rule_resources/dnr-safari-annoyances.json"
       }
     ]
   },
