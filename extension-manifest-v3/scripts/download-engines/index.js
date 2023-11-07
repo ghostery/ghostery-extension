@@ -19,9 +19,6 @@ import { ENGINE_VERSION } from '@cliqz/adblocker';
 import { getCompatRule, setupStream } from './utils.js';
 
 const ENGINES = {
-  'dnr-ads': 'ads',
-  'dnr-tracking': 'tracking',
-  'dnr-annoyances': 'annoyances',
   'dnr-cosmetics-ads': 'ads-cosmetics',
   'dnr-cosmetics-tracking': 'tracking-cosmetics',
   'dnr-cosmetics-annoyances': 'annoyances-cosmetics',
@@ -72,6 +69,28 @@ for (const [name, target] of Object.entries(ENGINES)) {
   });
 
   writeFileSync(`${TARGET_PATH}/engine-${target}.dat`, new Uint8Array(rules));
+}
+
+const DNR = {
+  'dnr-ads-2': 'ads',
+  'dnr-tracking-2': 'tracking',
+  'dnr-annoyances-2': 'annoyances',
+};
+
+for (const [name, target] of Object.entries(DNR)) {
+  console.log(`Downloading "${name}"...`);
+
+  const list = await fetch(
+    `https://cdn.ghostery.com/adblocker/configs/${name}/allowed-lists.json`,
+  ).then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to download allowed list for "${name}": ${res.status}: ${res.statusText}`,
+      );
+    }
+
+    return res.json();
+  });
 
   /* DNR rules */
 
