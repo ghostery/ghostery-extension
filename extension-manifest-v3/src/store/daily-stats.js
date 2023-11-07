@@ -137,8 +137,6 @@ const DailyStats = {
 
 export default DailyStats;
 
-// const MERGED_STATS_OFFSET = 1000 * 60 * 60 * 24 * 30; // 30 days
-
 export const MergedStats = {
   trackersBlocked: 0,
   trackersModified: 0,
@@ -146,9 +144,6 @@ export const MergedStats = {
   [store.connect]: {
     cache: false,
     async get() {
-      // const since = new Date(Date.now() - MERGED_STATS_OFFSET)
-      //   .toISOString()
-      //   .split('T')[0];
       const list = await store.resolve([DailyStats]);
       const patterns = new Set();
 
