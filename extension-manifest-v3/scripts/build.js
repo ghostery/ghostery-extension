@@ -89,17 +89,19 @@ const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {
   const path = `engine-${engine}${engineType}.dat`;
-  shelljs.cp(
+  const result = shelljs.cp(
     resolve(options.srcDir, 'rule_resources', path),
     resolve(options.outDir, 'rule_resources'),
   );
+  if (result.stderr) process.exit(1);
 });
 
 // copy trackerdb engine
-shelljs.cp(
+const trackerdbResult = shelljs.cp(
   resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.dat'),
   resolve(options.outDir, 'rule_resources'),
 );
+if (trackerdbResult.stderr) process.exit(1);
 
 // copy declarative net request lists
 if (manifest.declarative_net_request?.rule_resources) {
@@ -117,7 +119,8 @@ if (manifest.declarative_net_request?.rule_resources) {
     }
 
     shelljs.mkdir('-p', destPath);
-    shelljs.cp(sourcePath, destPath);
+    const result = shelljs.cp(sourcePath, destPath);
+    if (result.stderr) process.exit(1);
   });
 
   if (argv.target === 'safari') {
