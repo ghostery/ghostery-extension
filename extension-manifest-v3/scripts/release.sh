@@ -8,6 +8,9 @@ git pull
 git checkout -b mv3-release
 git checkout mv3-release
 
+# Remove local node_modules if exists
+rm -rf ./node_modules
+
 # Update npm dependencies
 cd .. && npm ci
 cd ./extension-manifest-v3

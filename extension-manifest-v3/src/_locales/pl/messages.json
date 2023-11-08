@@ -309,10 +309,10 @@
     "message": "Nie wykryto trackerów"
   },
   "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Liczba elementów śledzących z zablokowanymi żądaniami sieciowymi"
+    "message": "Liczba trackerów z zablokowanymi żądaniami sieciowymi"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Liczba elementów śledzących z usuniętymi plikami cookie lub odciskami palców."
+    "message": "Liczba trackerów z usuniętymi plikami cookie lub odciskami palców."
   },
   "off": {
     "message": "Wył."
@@ -436,7 +436,7 @@
     "message": "MASZ JUŻ DOŚĆ PYTAŃ O CIASTECZKA?"
   },
   "trackers_blocked": {
-    "message": "Zablokowane elementy śledzące"
+    "message": "Zablokowane trackery"
   },
   "trackers_count": {
     "message": "Licznik trackerów"
@@ -448,7 +448,7 @@
     "message": "Ghostery wykrył trackery śledzące na tej stronie:&nbsp;$${0}"
   },
   "trackers_modified": {
-    "message": "Zmodyfikowane elementy śledzące"
+    "message": "Zmodyfikowane trackery"
   },
   "trackers_preview": {
     "message": "Podgląd trackerów"
