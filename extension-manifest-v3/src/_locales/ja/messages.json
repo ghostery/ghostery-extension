@@ -124,7 +124,7 @@
     "message": "完了"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
-    "message": "Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you."
+    "message": "ブラウザの制限および追加権限がないため、Ghosteryによる保護を開始できません。"
   },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "ウェブサイト上の広告を除去し、安全で高速なブラウジングを実現します。"
@@ -134,7 +134,7 @@
     "description": "Tracker category name"
   },
   "enable_ad_blocking_now": {
-    "message": "Enable Ad Blocking Now"
+    "message": "広告ブロッキングを今すぐ有効化"
   },
   "enable_ghostery": {
     "message": "Ghosteryを有効にする"
@@ -152,7 +152,7 @@
     "message": "新規設定を有効にする"
   },
   "enable_now": {
-    "message": "Enable now"
+    "message": "今すぐ有効化"
   },
   "enabled": {
     "message": "有効になっています"
@@ -162,7 +162,7 @@
     "description": "Tracker category name"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
-    "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
+    "message": "簡単なステップで、Ghosteryの広告ブロッキングを検索エンジンへと拡張できます。"
   },
   "extensions": {
     "message": "拡張機能",
@@ -172,10 +172,10 @@
     "message": "詳細はこちらをご覧ください"
   },
   "further_protection": {
-    "message": "Further Protection"
+    "message": "高度な保護"
   },
   "get_help": {
-    "message": "Get help"
+    "message": "ヘルプ"
   },
   "ghostery__action_required": {
     "message": "Ghostery: 要対応"
@@ -235,7 +235,7 @@
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。ぜひサポートをお願いいたします。"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
-    "message": "Hey, do you enjoy Ghostery and want to support our work?"
+    "message": "Ghosteryが好きで、私たちの仕事をサポートしていただける方を募集中です。"
   },
   "hosting": {
     "message": "ホスティング",
@@ -282,7 +282,7 @@
     "description": "Tracker category name"
   },
   "more_ad_blocking_available": {
-    "message": "More ad blocking available"
+    "message": "利用できるその他の広告ブロッキング"
   },
   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
     "message": "$${0}の方法論の詳細については、Ghostery's Manifestoに記載されています。"
@@ -291,7 +291,7 @@
     "message": "アカウント"
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
-    "message": "Navigate to a website to see Ghostery in action."
+    "message": "ホームページにアクセスして、Ghosteryの動作を確認しましょう。"
   },
   "never_consent": {
     "message": "決して同意しない"
@@ -309,10 +309,10 @@
     "message": "トラッカーは検出されませんでした"
   },
   "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Number of trackers with blocked network requests."
+    "message": "ネットワークリクエストがブロックされたトラッカーの数。"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Number of trackers with removed cookies or fingerprints."
+    "message": "Cookieまたはフィンガープリントが削除されたトラッカーの数。"
   },
   "off": {
     "message": "オフ"
@@ -352,7 +352,7 @@
     "message": "ここにピン留め"
   },
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
+    "message": "検索結果のリンクを、Googleがページに直接リンクするのではなく、自社のサーバーを経由してリダイレクトするのを防ぎます。"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AIを活用した技術で様々な追跡手法を防止します。"
@@ -388,7 +388,7 @@
     "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
   },
   "search_engine_redirect_protection": {
-    "message": "Search Engine Redirect Protection"
+    "message": "検索エンジンのリダイレクト保護"
   },
   "search_website___": {
     "message": "サイトを検索..."
@@ -436,7 +436,7 @@
     "message": "クッキーのポップアップにうんざりですか?"
   },
   "trackers_blocked": {
-    "message": "Trackers blocked"
+    "message": "ブロックされたトラッカー"
   },
   "trackers_count": {
     "message": "トラッカーカウント"
@@ -448,7 +448,7 @@
     "message": "このウェブサイト上でGhosteryがトラッカーを検出:&nbsp;$${0}"
   },
   "trackers_modified": {
-    "message": "Trackers modified"
+    "message": "変更されたトラッカー"
   },
   "trackers_preview": {
     "message": "トラッカーのプレビュー"
@@ -461,13 +461,13 @@
     "description": "Tracker category name"
   },
   "urls_blocked": {
-    "message": "URLs blocked"
+    "message": "ブロック済みURL"
   },
   "urls_modified": {
-    "message": "URLs modified"
+    "message": "変更済みURL"
   },
   "urls_observed": {
-    "message": "URLs observed"
+    "message": "観察済みURL"
   },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "利用規約を更新しました。Ghosteryのトラッカー＆広告ブロッカーを引き続きご利用いただくには、セットアップを更新してください。"
