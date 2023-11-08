@@ -16,10 +16,10 @@ import {
 import { parse } from 'tldts-experimental';
 
 import { observe, ENGINES } from '/store/options.js';
+import * as engines from '/utils/engines.js';
 
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
-import * as engines from './utils/engines.js';
 
 import { updateTabStats } from './stats.js';
 

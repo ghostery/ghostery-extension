@@ -14,14 +14,14 @@ import { store } from 'hybrids';
 import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
-import DailyStats, { getMergedStats } from '/store/daily-stats.js';
+import DailyStats from '/store/daily-stats.js';
 import Options, { observe } from '/store/options.js';
 
 import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
 
 import Request from './utils/request.js';
-import * as trackerDb from './utils/trackerdb.js';
+import * as trackerDb from '/utils/trackerdb.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
@@ -204,67 +204,31 @@ export function updateTabStats(tabId, requests) {
   });
 }
 
-const DAILY_STATS_ADS_CATEGORY = 'advertising';
 async function flushTabStatsToDailyStats(tabId) {
   const stats = tabStats.get(tabId);
   if (!stats || !stats.trackers.length) return;
 
-  const adsDetected = new Map();
-  const trackersDetected = new Map();
+  let trackersBlocked = 0;
+  let trackersModified = 0;
 
   for (const tracker of stats.trackers) {
-    if (tracker.category === DAILY_STATS_ADS_CATEGORY) {
-      adsDetected.set(
-        tracker.name,
-        adsDetected.get(tracker.name) || tracker.blocked,
-      );
-    } else {
-      trackersDetected.set(
-        tracker.name,
-        trackersDetected.get(tracker.name) || tracker.blocked,
-      );
-    }
+    trackersBlocked += tracker.blocked ? 1 : 0;
+    trackersModified += tracker.modified ? 1 : 0;
   }
-
-  const adsBlocked = [...adsDetected.values()].filter(Boolean).length;
-  const trackersBlocked = [...trackersDetected.values()].filter(Boolean).length;
 
   const dailyStats = await store.resolve(
     DailyStats,
     new Date().toISOString().split('T')[0],
   );
 
-  const patterns = [
-    ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.id)]),
-  ];
-
   await store.set(dailyStats, {
-    adsDetected: dailyStats.adsDetected + adsDetected.size,
-    adsBlocked: dailyStats.adsBlocked + adsBlocked,
-    trackersDetected: dailyStats.trackersDetected + trackersDetected.size,
     trackersBlocked: dailyStats.trackersBlocked + trackersBlocked,
-    requestsDetected:
-      dailyStats.requestsDetected +
-      stats.trackers.reduce((acc, tracker) => {
-        acc += tracker.requests.length;
-        return acc;
-      }, 0),
-    requestsBlocked: dailyStats.requestsBlocked + adsBlocked + trackersBlocked,
+    trackersModified: dailyStats.trackersModified + trackersModified,
     pages: dailyStats.pages + 1,
-    patterns,
+    patterns: [
+      ...new Set([...dailyStats.patterns, ...stats.trackers.map((t) => t.id)]),
+    ],
   });
-}
-
-export async function getStatsWithMetadata(since) {
-  const result = await getMergedStats(since);
-
-  const patternsDetailed = [];
-  for (const key of result.patterns) {
-    const pattern = await trackerDb.getPattern(key);
-    if (pattern) patternsDetailed.push(pattern);
-  }
-
-  return Object.assign(result, { patternsDetailed });
 }
 
 chrome.tabs.onRemoved.addListener((tabId) => {
