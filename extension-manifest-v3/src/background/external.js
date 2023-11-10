@@ -12,8 +12,7 @@
 import { store } from 'hybrids';
 
 import Session from '/store/session.js';
-
-import { getStatsWithMetadata } from './stats.js';
+import { MergedStats } from '/store/daily-stats.js';
 
 if (__PLATFORM__ !== 'safari') {
   // Listen for messages from Ghostery Search extension
@@ -46,18 +45,10 @@ if (__PLATFORM__ !== 'safari') {
         switch (message?.name) {
           case 'getDashboardStats': {
             (async () => {
-              const stats = await getStatsWithMetadata();
+              const stats = await store.resolve(MergedStats);
 
-              sendResponse({
-                adsBlocked: stats.adsBlocked,
-                cookiesBlocked: 0,
-                fingerprintsRemoved: 0,
-                timeSaved: 0,
-                trackersBlocked: stats.trackersBlocked,
-                trackersDetailed: stats.patternsDetailed.map(
-                  ({ name, category }) => ({ name, cat: category }),
-                ),
-              });
+              // Firefox does not serialize correctly objects with getters
+              sendResponse(JSON.parse(JSON.stringify(stats)));
             })();
 
             return true;
@@ -65,7 +56,9 @@ if (__PLATFORM__ !== 'safari') {
           case 'getUser': {
             (async () => {
               const session = await store.resolve(Session);
-              sendResponse(session.user && session);
+
+              // Firefox does not serialize correctly objects with getters
+              sendResponse(session.user && JSON.parse(JSON.stringify(session)));
             })();
 
             return true;

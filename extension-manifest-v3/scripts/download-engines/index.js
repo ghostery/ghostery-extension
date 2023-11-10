@@ -19,6 +19,9 @@ import { ENGINE_VERSION } from '@cliqz/adblocker';
 import { getCompatRule, setupStream } from './utils.js';
 
 const ENGINES = {
+  'dnr-ads': 'ads',
+  'dnr-tracking': 'tracking',
+  'dnr-annoyances': 'annoyances',
   'dnr-cosmetics-ads': 'ads-cosmetics',
   'dnr-cosmetics-tracking': 'tracking-cosmetics',
   'dnr-cosmetics-annoyances': 'annoyances-cosmetics',
