@@ -26,24 +26,23 @@
   },
   "license": "MPL-2.0",
   "devDependencies": {
-    "node-fetch": "^3.2.3",
     "shelljs": "^0.8.5",
-    "vite": "^4.0.2",
-    "web-ext": "^7.6.2"
+    "vite": "^4.5.0",
+    "web-ext": "^7.8.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.26.11",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.26.11",
-    "@duckduckgo/autoconsent": "^6.1.1",
+    "@cliqz/adblocker": "^1.26.12",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.26.12",
+    "@duckduckgo/autoconsent": "^6.2.0",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",
-    "@github/relative-time-element": "^4.1.5",
+    "@github/relative-time-element": "^4.3.0",
     "@whotracksme/webextension-packages": "^4.0.5",
-    "hybrids": "^8.2.4",
+    "hybrids": "^8.2.5",
     "idb": "^7.1.1",
-    "jwt-decode": "^3.1.2",
-    "tldts-experimental": "^6.0.11"
+    "jwt-decode": "^4.0.0",
+    "tldts-experimental": "^6.0.19"
   },
   "webExt": {
     "sourceDir": "./dist/"

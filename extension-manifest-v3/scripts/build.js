@@ -1,6 +1,6 @@
 import { resolve, dirname } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
-import { exec } from 'child_process';
+import { exec, execSync } from 'child_process';
 import { build } from 'vite';
 import shelljs from 'shelljs';
 import webExt from 'web-ext';
@@ -136,7 +136,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 }
 
 // generate license file
-import('../../tools/licenses.js');
+execSync('node ../tools/licenses.js', { stdio: 'inherit' });
 
 // --- Save manifest ---
 
