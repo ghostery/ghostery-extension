@@ -11,7 +11,6 @@
 
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
-import fetch from 'node-fetch';
 import shelljs from 'shelljs';
 
 import { ENGINE_VERSION } from '@cliqz/adblocker';
