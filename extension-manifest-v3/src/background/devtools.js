@@ -16,7 +16,7 @@ import Options from '/store/options.js';
 
 import { deleteDatabases } from '/utils/indexeddb.js';
 
-import * as engines from './utils/engines.js';
+import * as engines from '../utils/engines.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {

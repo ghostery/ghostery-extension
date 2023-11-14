@@ -307,7 +307,7 @@ export function get(name) {
 }
 
 const ALARM_PREFIX = 'engines:update:';
-const ALARM_DELAY = 60 * 24; // 24 hours
+const ALARM_DELAY = 60; // 1 hour
 
 export async function init(name) {
   // Schedule an alarm to update engines once a day

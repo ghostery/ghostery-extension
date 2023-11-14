@@ -57,8 +57,7 @@ export default {
       return NOTIFICATIONS.opera;
     }
 
-    const session = store.get(Session);
-    if (store.ready(session) && session.contributor) {
+    if ((await store.resolve(Session)).contributor) {
       return null;
     }
 

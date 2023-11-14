@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "@ghostery/ui": "^1.0.0",
-    "tldts-experimental": "^6.0.11"
+    "tldts-experimental": "^6.0.19"
   }
 }
