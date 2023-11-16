@@ -1,282 +1,333 @@
 {
-   "on_this_website": {
-     "message": "trên trang này"
-   },
-   "email": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "Email"
-   },
-   "back": {
-     "message": "Quay lại"
-   },
-   "you_can_change_your_mind_anytime_and_enable_ghostery_to_start_tracking_the_trackers_for_you_in_ghostery_settings_": {
-     "message": "Bạn có thể thay đổi suy nghĩ của mình bất cứ lúc nào và cho phép Ghostery bắt đầu theo dõi trình theo dõi cho bạn trong cài đặt Ghostery."
-   },
-   "enable_ghostery_to_get_started": {
-     "message": "Bật Ghostery để bắt đầu"
-   },
-   "statistical_report": {
-     "message": "Báo cáo thống kê"
-   },
-   "ads___onboarding": {
-     "message": "Quảng cáo"
-   },
-   "detailed_view": {
-     "message": "Xem chi tiết"
-   },
-   "ok": {
-     "message": "Vâng"
-   },
-   "@_0__detected": {
-     "description": "Số lượng trình theo dõi được phát hiện bởi Ghostery",
-     "message": "$${0} đã xóa"
-   },
-   "never_consent_is_enabled": {
-     "message": "Không bao giờ đồng thuận được kích hoạt"
-   },
-   "essential": {
-     "message": "Thiết yếu",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "never_consent_is_disabled": {
-     "message": "Không bao giờ đồng thuận là bị vô hiệu hóa"
-   },
-   "yes": {
-     "message": "Vâng"
-   },
-   "apply_optimal_privacy_settings_": {
-     "message": "Áp dụng cài đặt quyền riêng tư tối ưu:"
-   },
-   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
-     "message": "Nó tồn tại nhờ các giao dịch vi mô của mỗi người dùng Ghostery chọn gửi thông tin phi cá nhân đến whotracks.me.  Đầu vào cho phép Ghostery cung cấp thông tin thời gian thực trên các trình theo dõi, từ đó cung cấp sự bảo vệ cho toàn bộ cộng đồng Ghostery."
-   },
-   "comments": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "Bình luận"
-   },
-   "i_agree_to_send_non_personal_information_to__a_href__@_0___ghostery_s_whotracks_me__a___and_i_accept_the__a_href____1___ghostery_privacy_policy__a_": {
-     "message": "Tôi đồng ý gửi thông tin phi cá nhân đến <a href=\"$${0}\">Ghostery’s WhoTracks.Me</a>, và tôi đồng ý chập nhận <a href=\"$${1}\">chính sách bảo mật Ghostery</a>"
-   },
-   "never_consent": {
-     "message": "Không bao giờ đồng ý"
-   },
-   "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-     "message": "Bạn luôn có thể thay đổi các cài đặt này trong bảng điều khiển <strong> Ghostery </strong>."
-   },
-   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-     "message": "Whotracks.me, được điều hành bởi Ghostery, là một phần không thể thiếu trong công nghệ chống theo dõi Ghostery AI AI.  Đây là một nguồn tài nguyên toàn cầu toàn diện trên các trình theo dõi, mang lại sự minh bạch cho việc theo dõi web."
-   },
-   "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-     "message": "Bằng cách sử dụng không bao giờ đồng ý, bạn cho chủ sở hữu trang web biết rằng bạn đã chống lại việc theo dõi!"
-   },
-   "no": {
-     "message": "Không"
-   },
-   "unblocked": {
-     "message": "Bỏ chặn"
-   },
-   "what_is_whotracks_me_": {
-     "message": "Whotracks.me là gì?"
-   },
-   "accept_terms": {
-     "message": "Chấp nhận các điều khoản"
-   },
-   "hosting": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "Máy lưu trữ"
-   },
-   "skip": {
-     "message": "Bỏ qua"
-   },
-   "enable_never_consent_": {
-     "message": "Kích hoạt không bao giờ đồng ý?"
-   },
-   "cdn": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "CDN"
-   },
-   "you_re_all_set__ghosterian_": {
-     "message": "Bạn đã sẵn sàng, Ghosterian!"
-   },
-   "ghostery_options": {
-     "message": "Tùy chọn Ghostery"
-   },
-   "advertising": {
-     "message": "Quảng cáo",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "check_out__a_href__@_0___target___blank__faqs__a__or_drop_us_a_line_at__a_href__mailto___1_____2___a____br___we_ll_be_more_than_happy_to_talk_to_you_": {
-     "message": "Kiểm tra <a href=\"$${0}\" target=\"_blank\"> Câu hỏi thường gặp </a> hoặc thả cho chúng tôi một dòng tại <a href=\"mailto:$${1}\">$${2}</a>.  <br/> Chúng tôi sẽ rất vui khi được nói chuyện với bạn!"
-   },
-   "report_a_broken_page": {
-     "message": "Báo cáo trang web bị hỏng"
-   },
-   "manifest_short_description": {
-     "message": "Ghostery là một phần mở rộng quyền riêng tư mạnh mẽ.  Chặn quảng cáo, dừng theo dõi và tăng tốc các trang web."
-   },
-   "on": {
-     "message": "Bật"
-   },
-   "user_interface": {
-     "message": "Giao diện người dùng"
-   },
-   "site_analytics": {
-     "message": "Phân tích trang web",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "done__go_with_ghosty_": {
-     "message": "Xong!  Đi với Ghosty!"
-   },
-   "ghostery_is_stopping_trackers_in_their_tracks_and_preventing_you_from_being_profiled_and_your_personal_information_sold_to_data_brokers_": {
-     "message": "Ghostery đang dừng các trình theo dõi trong các bài hát của họ và ngăn bạn được mô tả và thông tin cá nhân của bạn được bán cho các nhà môi giới dữ liệu."
-   },
-   "extensions": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "Các tiện ích"
-   },
-   "ok__i_understand": {
-     "message": "Vâng tôi hiểu"
-   },
-   "ghostery_disabled": {
-     "message": "Ghostery đã tắt"
-   },
-   "disable_trackers_preview": {
-     "message": "Tắt bản theo dõi xem trước"
-   },
-   "privacy_policy": {
-     "message": "chính sách bảo mật"
-   },
-   "ghostery_is_set_up_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-     "message": "Ghostery được thiết lập để ngăn chặn các trình theo dõi trong các bài hát của họ và bảo vệ quyền riêng tư của bạn trong khi duyệt!"
-   },
-   "adult_advertising": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "Quảng cáo dành cho người lớn"
-   },
-   "audio_video_player": {
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
-     "message": "Trình phát âm thanh/video"
-   },
-   "all_popups": {
-     "message": "Tất cả các cửa sổ bật lên"
-   },
-   "trackers": {
-     "message": "Trình theo dõi"
-   },
-   "you_chose_to_skip_enabling_ghostery_": {
-     "message": "Bạn đã chọn bỏ qua Kích hoạt Ghostery!"
-   },
-   "page_load_": {
-     "message": "Tải trang:"
-   },
-   "continue": {
-     "message": "Tiếp tục"
-   },
-   "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-     "message": "Thông tin thêm về phương pháp $${0} trong Tuyên ngôn của Ghostery."
-   },
-   "tired_of_cookie_popups_": {
-     "message": "Mệt mỏi với cửa sổ bật lên cookie?"
-   },
-   "anti_tracking": {
-     "message": "Chống theo dõi"
-   },
-   "off": {
-     "message": "Tắt"
-   },
-   "are_you_sure_": {
-     "message": "Bạn chắc chứ?"
-   },
-   "unidentified": {
-     "message": "Không xác định",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "consent_management": {
-     "message": "Quản lý đồng ý",
-     "description": "Bao gồm các trình theo dõi được sử dụng để quản lý đồng ý cookie, cho phép các trang web các cấp độ khác nhau của hoạt động người dùng."
-   },
-   "submit_a_new_tracker": {
-     "message": "Gửi trình theo dõi mới"
-   },
-   "ad_blocking": {
-     "message": "Chặn quảng cáo"
-   },
-   "on_all_websites": {
-     "message": "trên tất cả trang web"
-   },
-   "enable_ghostery": {
-     "message": "Bật Ghostery"
-   },
-   "blocked": {
-     "message": "Đã chặn"
-   },
-   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-     "message": "Trình theo dõi được phát hiện bởi Ghostery trên trang web này:&nbsp;$${0}"
-   },
-   "tracker_details": {
-     "message": "Chi tiết theo dõi"
-   },
-   "welcome_to_ghostery": {
-     "message": "Chào mừng bạn đến với Ghostery"
-   },
-   "manifest_name": {
-     "message": "Ghostery - Trình chặn quảng cáo quyền riêng tư"
-   },
-   "any_questions__anytime_": {
-     "message": "Bất kỳ câu hỏi?  Bất cứ lúc nào!"
-   },
-   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-     "message": "Hãy để Ghostery trở thành người ủng hộ quyền riêng tư hoàn toàn của bạn và từ chối tất cả các cửa sổ bật lên và theo dõi cho bạn, hoặc tự làm điều đó!"
-   },
-   "customer_interaction": {
-     "message": "Tương tác của khách hàng",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "additional_permissions_required": {
-     "message": "Cần thêm quyền"
-   },
-   "learn_more": {
-     "message": "Tìm hiểu thêm"
-   },
-   "with_ghostery_enabled_you_instantly_browser_the_web_safer__faster_and_with_less_annoying_ads_": {
-     "message": "Với Ghostery đã kích hoạt bạn ngay lập tức trình duyệt web an toàn hơn, nhanh hơn và với quảng cáo ít gây phiền nhiễu hơn."
-   },
-   "are_you_sure_you_want_to_skip_enabling_ghostery_": {
-     "message": "Bạn có chắc là bạn muốn bỏ qua bật Ghostery?"
-   },
-   "the_ghostery_browser_extension_is_installed_in_your_browser_but_ghosty_is_taking_a_light_nap_": {
-     "message": "Phần mở rộng trình duyệt Ghostery được cài đặt trong trình duyệt của bạn nhưng Ghosty đang ngủ trưa."
-   },
-   "social_media": {
-     "message": "Truyền thông xã hội",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "miscellaneous": {
-     "message": "Điều khoản khác",
-     "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
-   },
-   "for_more_information_read_our_full": {
-     "message": "Để biết thêm thông tin, hãy đọc đầy đủ của chúng tôi"
-   },
-   "show_trackers_preview_next_to_search_results": {
-     "message": "Hiển thị trình theo dõi xem trước bên cạnh kết quả tìm kiếm"
-   },
-   "done": {
-     "message": "Xong"
-   },
-   "ghostery_enabled": {
-     "message": "Ghostery đã kích hoạt"
-   },
-   "ghostery_privacy_policy": {
-     "message": "Chính sách bảo mật Ghostery"
-   },
-   "trackers_preview": {
-     "message": "Xem trước theo dõi"
-   },
-   "cancel": {
-     "message": "Hủy bỏ"
-   },
-   "disable_tracker_wheel_in_browser_toolbar": {
-     "message": "Tắt bánh xe theo dõi trong thanh công cụ trình duyệt"
-   }
- }
+  "@_0__left": { "message": "$${0} trái" },
+  "1_day": { "message": "1 ngày" },
+  "1_hour": { "message": "1 giờ" },
+  "about": { "message": "Giới thiệu" },
+  "account_details": { "message": "Thông tin tài khoản" },
+  "ad_blocking": { "message": "Chặn quảng cáo" },
+  "additional_permissions_required": { "message": "Cần thêm quyền" },
+  "adult_advertising": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "Quảng cáo dành cho người lớn"
+  },
+  "advertising": {
+    "message": "Quảng cáo",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "always": { "message": "Luôn luôn" },
+  "anti_tracking": { "message": "Chống theo dõi" },
+  "apply_optimal_privacy_settings_": {
+    "message": "Áp dụng cài đặt quyền riêng tư tối ưu:"
+  },
+  "are_you_sure_you_want_to_disable_trackers_preview_": {
+    "message": "Bạn có chắc chắn muốn tắt Xem trước Trình theo dõi không?"
+  },
+  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
+    "message": "Bạn có chắc chắn muốn tắt Ghostery không?"
+  },
+  "audio_video_player": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "Trình phát âm thanh/video"
+  },
+  "automatically_rejects_of_cookie_consent_notices_": {
+    "message": "Tự động từ chối thông báo chấp thuận cookie."
+  },
+  "back": { "message": "Quay lại" },
+  "become_a_contributor": { "message": "Trở thành người đóng góp" },
+  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
+    "message": "Bằng cách sử dụng không bao giờ đồng ý, bạn cho chủ sở hữu trang web biết rằng bạn đã chống lại việc theo dõi!"
+  },
+  "cancel": { "message": "Hủy bỏ" },
+  "cdn": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "CDN"
+  },
+  "clear_all": { "message": "Xóa tất cả" },
+  "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
+    "message": "Nhấp vào biểu tượng câu đố bên cạnh thanh tìm kiếm và ghim Ghostery vào thanh công cụ của bạn."
+  },
+  "comments": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "Bình luận"
+  },
+  "consent_management": {
+    "message": "Quản lý đồng ý",
+    "description": "Bao gồm các trình theo dõi được sử dụng để quản lý đồng ý cookie, cho phép các trang web các cấp độ khác nhau của hoạt động người dùng."
+  },
+  "contact": { "message": "Liên hệ" },
+  "contact_support": { "message": "Liên hệ hỗ trợ" },
+  "contributor": { "message": "Người cộng tác" },
+  "copied_to_clipboard": { "message": "Đã sao chép vào bảng nhớ tạm" },
+  "create_account": { "message": "Tạo tài khoản" },
+  "customer_interaction": {
+    "message": "Tương tác của khách hàng",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "days": { "message": "ngày" },
+  "detailed_view": { "message": "Xem chi tiết" },
+  "disable": { "message": "Vô hiệu hóa" },
+  "disable_ghostery": { "message": "Tắt Ghostery" },
+  "disable_trackers_preview": { "message": "Tắt bản theo dõi xem trước" },
+  "disabled": { "message": "Đã vô hiệu" },
+  "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
+    "message": "Displays the tracker count on the Ghostery icon in the browser toolbar."
+  },
+  "done": { "message": "Xong" },
+  "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
+    "message": "Do hạn chế của trình duyệt và thiếu quyền bổ sung, Ghostery không thể bảo vệ bạn."
+  },
+  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
+    "message": "Loại bỏ quảng cáo trên wesbites để duyệt web an toàn và nhanh chóng."
+  },
+  "email": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "Email"
+  },
+  "enable_ad_blocking_now": { "message": "Enable Ad Blocking Now" },
+  "enable_ghostery": { "message": "Bật Ghostery" },
+  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
+    "message": "Cho phép Ghostery duyệt web an toàn hơn, nhanh hơn và ít quảng cáo hơn."
+  },
+  "enable_ghostery_to_get_started": { "message": "Bật Ghostery để bắt đầu" },
+  "enable_never_consent_": { "message": "Kích hoạt không bao giờ đồng ý?" },
+  "enable_new_setup": { "message": "Kích hoạt thiết lập mới" },
+  "enable_now": { "message": "Kích hoạt ngay" },
+  "enabled": { "message": "Đã kích hoạt" },
+  "essential": {
+    "message": "Thiết yếu",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
+    "message": "Mở rộng tính năng chặn quảng cáo Ghostery cho các công cụ tìm kiếm chỉ bằng một vài bước đơn giản."
+  },
+  "extensions": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "Các tiện ích"
+  },
+  "for_more_information_read_our_full": {
+    "message": "Để biết thêm thông tin, hãy đọc đầy đủ của chúng tôi"
+  },
+  "further_protection": { "message": "Bảo vệ thêm" },
+  "get_help": { "message": "Trợ giúp" },
+  "ghostery__action_required": { "message": "Ghostery: Cần hành động" },
+  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
+    "message": "Tiện ích mở rộng trình duyệt Ghostery được cài đặt trong trình duyệt của bạn nhưng không hoạt động. Bạn đang duyệt web không được bảo vệ."
+  },
+  "ghostery_can_t_block_them_due_to_missing_permissions_": {
+    "message": "Ghostery không thể chặn chúng do thiếu quyền."
+  },
+  "ghostery_has_been_resumed_on_this_site_": {
+    "message": "Ghostery đã được nối lại trên trang web này."
+  },
+  "ghostery_has_nothing_to_do_on_this_page": {
+    "message": "Ghostery không có gì để làm trên trang này"
+  },
+  "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
+    "message": "Ghostery đã sẵn sàng để ngăn chặn những kẻ theo dõi và bảo vệ quyền riêng tư của bạn khi duyệt web!"
+  },
+  "ghostery_is_disabled": {
+    "message": "Ghostery bị vô hiệu hóaGhostery bị vô hiệu hóa"
+  },
+  "ghostery_is_paused_on_this_site_": {
+    "message": "Ghostery bị tạm dừng trên trang web này."
+  },
+  "ghostery_paused": { "message": "Ghostery bị tạm dừng" },
+  "ghostery_privacy_policy": { "message": "Chính sách bảo mật Ghostery" },
+  "ghostery_protects_your_privacy_by_detecting_and_neutralizing_different_types_of_data_collection_including_ads__trackers__and_cookie_pop_ups_": {
+    "message": "Ghostery bảo vệ quyền riêng tư của bạn bằng cách phát hiện và vô hiệu hóa các loại thu thập dữ liệu khác nhau bao gồm quảng cáo, trình theo dõi và cửa sổ bật lên cookie."
+  },
+  "ghostery_settings": { "message": "Ghostery cài đặt" },
+  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
+    "message": "Ghostery ngăn chặn các trình theo dõi và ngăn bạn bị các nhà môi giới dữ liệu lập hồ sơ."
+  },
+  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Ghostery sẽ bị tạm dừng trên trang web này. Bạn có thể thay đổi điều này bất kỳ lúc nào trong cài đặt Ghostery để ngăn các trình theo dõi và quảng cáo theo dõi bạn trên web"
+  },
+  "ghostery_will_be_paused_on_this_site_for_1_day": {
+    "message": "Ghostery sẽ bị tạm dừng trên trang này trong 1 ngày"
+  },
+  "ghostery_will_be_paused_on_this_site_for_1_hour": {
+    "message": "Ghostery sẽ bị tạm dừng trên trang này trong 1 giờ"
+  },
+  "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
+    "message": "Ghostery sẽ hiển thị số lượng trình theo dõi đã bị chặn trên một trang. Nhấp vào biểu tượng Ghostery sẽ hiển thị thông tin chi tiết hơn."
+  },
+  "ghostery_will_stop_working_in_": {
+    "message": "Ghostery sẽ ngừng hoạt động trong:"
+  },
+  "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Hãy giúp Ghostery đấu tranh cho một trang web nơi quyền riêng tư là quyền cơ bản của con người."
+  },
+  "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
+    "message": "Này, bạn có thích Ghostery và muốn hỗ trợ công việc của chúng tôi không?"
+  },
+  "hosting": {
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ.",
+    "message": "Máy lưu trữ"
+  },
+  "hours": { "message": "giờ" },
+  "ignore": { "message": "Không chấp nhận" },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
+    "message": "Thông tin về trình theo dõi web sẽ được chia sẻ theo <a href=\"$${0}\">Chính sách quyền riêng tư</a> của chúng tôi"
+  },
+  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
+    "message": "Nó tồn tại nhờ các giao dịch vi mô của mỗi người dùng Ghostery chọn gửi thông tin phi cá nhân đến whotracks.me.  Đầu vào cho phép Ghostery cung cấp thông tin thời gian thực trên các trình theo dõi, từ đó cung cấp sự bảo vệ cho toàn bộ cộng đồng Ghostery."
+  },
+  "join_ghostery": { "message": "Tham gia Ghostery" },
+  "keep_disabled": { "message": "Giữ bị vô hiệu hóa" },
+  "learn_more": { "message": "Tìm hiểu thêm" },
+  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
+    "message": "Hãy để Ghostery trở thành người ủng hộ quyền riêng tư hoàn toàn của bạn và từ chối tất cả các cửa sổ bật lên và theo dõi cho bạn, hoặc tự làm điều đó!"
+  },
+  "manifest_name": {
+    "message": "Ghostery - Trình chặn quảng cáo quyền riêng tư"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery là một phần mở rộng quyền riêng tư mạnh mẽ.  Chặn quảng cáo, dừng theo dõi và tăng tốc các trang web."
+  },
+  "menu": { "message": "Menu" },
+  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
+    "message": "Xin lưu ý rằng không phải tất cả các thực thể được liệt kê đều là công cụ theo dõi, không phải tất cả chúng đều thu thập dữ liệu cá nhân"
+  },
+  "miscellaneous": {
+    "message": "Điều khoản khác",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "more_ad_blocking_available": {
+    "message": "Có thêm tính năng chặn quảng cáo"
+  },
+  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
+    "message": "Thông tin thêm về phương pháp $${0} trong Tuyên ngôn của Ghostery."
+  },
+  "my_account": { "message": "Tài khoản của tôi" },
+  "navigate_to_a_website_to_see_ghostery_in_action_": {
+    "message": "Điều hướng đến một trang web để xem Ghostery hoạt động."
+  },
+  "never_consent": { "message": "Không bao giờ đồng ý" },
+  "never_consent_is_disabled": {
+    "message": "Không bao giờ đồng thuận là bị vô hiệu hóa"
+  },
+  "never_consent_is_enabled": {
+    "message": "Không bao giờ đồng thuận được kích hoạt"
+  },
+  "no": { "message": "Không" },
+  "no_trackers_detected": { "message": "Không phát hiện trình theo dõi" },
+  "number_of_trackers_with_blocked_network_requests_": {
+    "message": "Điều hướng đến một trang web để xem Ghostery hoạt động."
+  },
+  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
+    "message": "Số lượng trình theo dõi có yêu cầu mạng bị chặn."
+  },
+  "off": { "message": "Tắt" },
+  "ok": { "message": "Vâng" },
+  "ok__i_understand": { "message": "Vâng tôi hiểu" },
+  "on": { "message": "Bật" },
+  "on_all_websites": { "message": "trên tất cả trang web" },
+  "on_this_website": { "message": "trên trang này" },
+  "other": { "message": "Khá", "description": "Tên loại trình theo dõi" },
+  "pause_on_this_site": { "message": "Tạm dừng trên trang này" },
+  "paused": { "message": "Đã tạm dừng" },
+  "permission_required": { "message": "Cần quyền" },
+  "pin_extension_for_easy_access": {
+    "message": "Pin mở rộng để dễ dàng truy cập"
+  },
+  "pin_it_here": { "message": "Pin tại đây" },
+  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Ngăn Google chuyển hướng các liên kết kết quả tìm kiếm thông qua máy chủ của họ thay vì liên kết trực tiếp đến các trang."
+  },
+  "prevents_various_tracking_techniques_using_ai_driven_technology_": {
+    "message": "Ngăn chặn các kỹ thuật theo dõi khác nhau bằng công nghệ điều khiển AI."
+  },
+  "privacy_policy": { "message": "chính sách bảo mật" },
+  "privacy_policy___panel_company": { "message": "Chính sách bảo mật" },
+  "privacy_protection": { "message": "Bảo vệ quyền riêng tư" },
+  "read_more_on_whotracks_me": { "message": "Đọc thêm tại WhoTracks.Me" },
+  "renew_ghostery_for_full_protection": {
+    "message": "gia hạn GHOSTERY để được bảo vệ hoàn toàn"
+  },
+  "renew_setup": { "message": "Renew Setup" },
+  "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
+    "message": "Thay thế biểu tượng Ghostery trên thanh công cụ của trình duyệt bằng bánh xe theo dõi."
+  },
+  "report_a_broken_page": { "message": "Báo cáo trang web bị hỏng" },
+  "resume": { "message": "Tiếp tục" },
+  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Lưu và đồng bộ hóa cài đặt tùy chỉnh của bạn giữa các trình duyệt và thiết bị."
+  },
+  "search_engine_redirect_protection": {
+    "message": "Bảo vệ chuyển hướng công cụ tìm kiếm"
+  },
+  "search_website___": { "message": "Tìm trang web..." },
+  "settings": { "message": "Cài đặt" },
+  "settings_sync": { "message": "Đồng bộ cài đặt" },
+  "setup_successful": { "message": "Thiết lập thành công" },
+  "shows_the_tracker_preview_beside_search_results_": {
+    "message": "Hiển thị bản xem trước của trình theo dõi bên cạnh kết quả tìm kiếm."
+  },
+  "sign_in": { "message": "Đăng nhập" },
+  "simple_view": { "message": "Xem đơn giản" },
+  "site_analytics": {
+    "message": "Phân tích trang web",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "social_media": {
+    "message": "Truyền thông xã hội",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "software_licenses": { "message": "Giấy phép phần mềm" },
+  "submit_a_new_tracker": { "message": "Gửi trình theo dõi mới" },
+  "telemetry": {
+    "message": "Từ xa",
+    "description": "Tên thể loại trình theo dõi"
+  },
+  "terms___conditions": { "message": "Điều khoản và điều kiện" },
+  "tired_of_cookie_popups_": {
+    "message": "Mệt mỏi với cửa sổ bật lên cookie?"
+  },
+  "trackers_blocked": { "message": "Đã chặn trình theo dõi" },
+  "trackers_count": { "message": "Số lượng trình theo dõi" },
+  "trackers_detected": { "message": "Trình theo dõi đã chặn" },
+  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
+    "message": "Trình theo dõi được phát hiện bởi Ghostery trên trang web này:&nbsp;$${0}"
+  },
+  "trackers_modified": { "message": "Trình theo dõi đã sửa" },
+  "trackers_preview": { "message": "Xem trước theo dõi" },
+  "trackers_wheel": { "message": "Bánh xe theo dõi" },
+  "unidentified": {
+    "message": "Không xác định",
+    "description": "Ghostery tổ chức các thẻ theo thể loại.  Đây là một trong một số loại thẻ."
+  },
+  "urls_blocked": { "message": "URL đã chặn" },
+  "urls_modified": { "message": "URLs đã sửa" },
+  "urls_observed": { "message": "URLs theo dõi" },
+  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
+    "message": "Chúng tôi đã cập nhật Điều khoản & Điều kiện. Để tiếp tục sử dụng Ghostery Tracker & Trình chặn quảng cáo trong khi duyệt, vui lòng gia hạn thiết lập."
+  },
+  "website": { "message": "Trang web" },
+  "websites": { "message": "Các trang web" },
+  "welcome_to_ghostery": { "message": "Chào mừng bạn đến với Ghostery" },
+  "what_is_whotracks_me_": { "message": "Whotracks.me là gì?" },
+  "what_s_next_": { "message": "Cái gì mới?" },
+  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
+    "message": "Khi tạm dừng Ghostery trên các website riêng lẻ, các website đó sẽ xuất hiện tại đây."
+  },
+  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "Whotracks.me, được điều hành bởi Ghostery, là một phần không thể thiếu trong công nghệ chống theo dõi Ghostery AI AI.  Đây là một nguồn tài nguyên toàn cầu toàn diện trên các trình theo dõi, mang lại sự minh bạch cho việc theo dõi web."
+  },
+  "whotracks_me_statistical_report": {
+    "message": "Báo cáo thống kê WhoTracks.Me"
+  },
+  "whotracks_me_wheel": { "message": "Bánh xe WhoTracks.Me" },
+  "yes": { "message": "Vâng" },
+  "you_are_signed_in_as_": { "message": "Bạn đã đăng nhập với tư cách:" },
+  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
+    "message": "Bạn có thể điều chỉnh các cài đặt bên dưới. Chúng tôi khuyên bạn nên luôn BẬT chúng."
+  },
+  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
+    "message": "Bạn luôn có thể thay đổi các cài đặt này trong bảng điều khiển <strong> Ghostery </strong>."
+  },
+  "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
+    "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."
+  },
+  "your_privacy_features_": { "message": "Tính năng bảo mật của bạn:" }
+}
