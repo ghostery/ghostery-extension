@@ -1,11 +1,16 @@
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import detectWall from '@ghostery/ui/youtube/wall';
 import { showIframe, closeIframe } from '@ghostery/ui/iframe';
-
-// Based on https://github.com/AdguardTeam/AdguardFilters/blob/e5ae8e3194f8d18bdcc660d4c42282e4a96ca5b9/AnnoyancesFilter/Popups/sections/antiadblock.txt#L2044
-const ADBLOCKER_WALL_SELECTORS = [
-	'ytd-watch-flexy:not([hidden]) ytd-enforcement-message-view-model > div.ytd-enforcement-message-view-model',
-];
-
-let isShown = false;
 
 chrome.storage.local.get(['youtube_dont_show_again'], (storage) => {
 	if (storage.youtube_dont_show_again || chrome.extension.inIncognitoContext) {
@@ -13,14 +18,13 @@ chrome.storage.local.get(['youtube_dont_show_again'], (storage) => {
 	}
 
 	window.addEventListener('yt-navigate-start', () => {
-		isShown = false;
 		closeIframe();
 	}, true);
 
-	setInterval(() => {
-		if (!isShown && document.querySelectorAll(ADBLOCKER_WALL_SELECTORS).length > 0) {
-			showIframe(chrome.runtime.getURL(`app/templates/youtube.html?url=${encodeURIComponent(window.location.href)}`), '460px');
-			isShown = true;
-		}
-	}, 2000);
+	detectWall(() => {
+		showIframe(
+			chrome.runtime.getURL(`app/templates/youtube.html?url=${encodeURIComponent(window.location.href)}`),
+			'460px',
+		);
+	});
 });

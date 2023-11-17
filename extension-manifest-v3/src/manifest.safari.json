@@ -94,7 +94,12 @@
       "js": [
         "content_scripts/whotracksme/reporting.js"
       ]
-    }
+    },
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "run_at": "document_start",
+			"js": ["content_scripts/youtube.js"]
+		}
   ],
   "web_accessible_resources": [
     "content_scripts/whotracksme/ghostery-whotracksme.js",
@@ -103,7 +108,8 @@
     "pages/trackers-preview/index.html",
     "pages/autoconsent/index.html",
     "pages/onboarding/index.html",
-    "pages/onboarding/iframe.html"
+    "pages/onboarding/iframe.html",
+    "pages/youtube/index.html"
   ],
   "content_security_policy" : {},
   "browser_specific_settings": {

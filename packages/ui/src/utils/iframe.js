@@ -10,6 +10,11 @@
  */
 
 export function showIframe(url, width = '440px') {
+  // Prevent multiple iframes be shown at the same time
+  if (document.querySelector('ghostery-iframe-wrapper')) {
+    return;
+  }
+
   const wrapper = document.createElement('ghostery-iframe-wrapper');
 
   const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
