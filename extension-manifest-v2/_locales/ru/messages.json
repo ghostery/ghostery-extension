@@ -939,7 +939,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery – Конфиденциальный Блокировщик Рекламы"
+    "message": "Ghostery Трекер & Ad Blocker - приватный блокировщик рекламы"
   },
   "never_consent": {
     "message": "Never-Consent"

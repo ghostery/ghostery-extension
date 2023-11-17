@@ -939,7 +939,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery – 개인정보 보호용 광고 차단기"
+    "message": "고스트 트래커 및 광고 차단기 - 프라이버시 AdBlock"
   },
   "never_consent": {
     "message": "동의하지 않음"
