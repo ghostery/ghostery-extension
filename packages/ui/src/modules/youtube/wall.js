@@ -16,17 +16,24 @@ const SELECTORS = [
   'yt-playability-error-supported-renderers#error-screen ytd-enforcement-message-view-model',
   'tp-yt-paper-dialog .ytd-enforcement-message-view-model',
 ];
+const DELAY = 2000;
 
 export default function detectWall(cb) {
-  let currentHref = '';
+  let timeout = null;
 
   const observer = new MutationObserver(() => {
-    if (currentHref === location.href) return;
-    currentHref = location.href;
+    if (timeout) return;
 
-    if (document.querySelector(SELECTORS)?.clientHeight > 0) {
-      cb();
-    }
+    timeout = setTimeout(() => {
+      timeout = null;
+      if (document.querySelector(SELECTORS)?.clientHeight > 0) {
+        try {
+          cb();
+        } catch (e) {
+          /* ignore */
+        }
+      }
+    }, DELAY);
   });
 
   document.addEventListener('DOMContentLoaded', () => {
