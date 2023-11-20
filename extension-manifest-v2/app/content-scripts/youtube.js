@@ -12,19 +12,29 @@
 import detectWall from '@ghostery/ui/youtube/wall';
 import { showIframe, closeIframe } from '@ghostery/ui/iframe';
 
-chrome.storage.local.get(['youtube_dont_show_again'], (storage) => {
-	if (storage.youtube_dont_show_again || chrome.extension.inIncognitoContext) {
-		return;
-	}
-
-	window.addEventListener('yt-navigate-start', () => {
-		closeIframe();
-	}, true);
-
-	detectWall(() => {
-		showIframe(
-			chrome.runtime.getURL(`app/templates/youtube.html?url=${encodeURIComponent(window.location.href)}`),
-			'460px',
-		);
+function isFeatureDisabled() {
+	return new Promise((resolve) => {
+		chrome.storage.local.get(['youtube_dont_show_again'], (storage) => {
+			resolve(storage.youtube_dont_show_again);
+		});
 	});
-});
+}
+
+if (!chrome.extension.inIncognitoContext) {
+	(async () => {
+		if (await isFeatureDisabled()) return;
+
+		window.addEventListener('yt-navigate-start', () => {
+			closeIframe();
+		}, true);
+
+		detectWall(async () => {
+			if (await isFeatureDisabled()) return;
+
+			showIframe(
+				chrome.runtime.getURL(`app/templates/youtube.html?url=${encodeURIComponent(window.location.href)}`),
+				'460px',
+			);
+		});
+	})();
+}

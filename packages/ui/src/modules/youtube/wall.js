@@ -16,7 +16,7 @@ const SELECTORS = [
   'yt-playability-error-supported-renderers#error-screen ytd-enforcement-message-view-model',
   'tp-yt-paper-dialog .ytd-enforcement-message-view-model',
 ];
-const DELAY = 2000;
+const DELAY = 1000; // 1 second
 
 export default function detectWall(cb) {
   let timeout = null;
@@ -25,15 +25,21 @@ export default function detectWall(cb) {
     if (timeout) return;
 
     timeout = setTimeout(() => {
-      timeout = null;
       if (document.querySelector(SELECTORS)?.clientHeight > 0) {
         try {
           cb();
         } catch (e) {
           /* ignore */
         }
+      } else {
+        timeout = null;
       }
     }, DELAY);
+  });
+
+  document.addEventListener('yt-navigate-start', () => {
+    clearTimeout(timeout);
+    timeout = null;
   });
 
   document.addEventListener('DOMContentLoaded', () => {

@@ -12,10 +12,7 @@
 import { showIframe, closeIframe } from '@ghostery/ui/iframe';
 import detectWall from '@ghostery/ui/youtube/wall';
 
-(async () => {
-  // INFO: Safari always returns false for `inIncognitoContext`
-  if (chrome.extension.inIncognitoContext) return;
-
+async function isFeatureDisabled() {
   const { options, youtubeDontAsk } = await chrome.storage.local.get([
     'options',
     'youtubeDontAsk',
@@ -29,19 +26,30 @@ import detectWall from '@ghostery/ui/youtube/wall';
     !options.terms ||
     options.paused.some(({ id }) => id.includes('youtube.com'))
   ) {
-    return;
+    return true;
   }
 
-  window.addEventListener('yt-navigate-start', () => closeIframe(), true);
+  return false;
+}
 
-  detectWall(() => {
-    showIframe(
-      chrome.runtime.getURL(
-        `/pages/youtube/index.html?url=${encodeURIComponent(
-          window.location.href,
-        )}`,
-      ),
-      '460px',
-    );
-  });
-})();
+// INFO: Safari always returns false for `inIncognitoContext`
+if (!chrome.extension.inIncognitoContext) {
+  (async () => {
+    if (await isFeatureDisabled()) return;
+
+    window.addEventListener('yt-navigate-start', () => closeIframe(), true);
+
+    detectWall(async () => {
+      if (await isFeatureDisabled()) return;
+
+      showIframe(
+        chrome.runtime.getURL(
+          `/pages/youtube/index.html?url=${encodeURIComponent(
+            window.location.href,
+          )}`,
+        ),
+        '460px',
+      );
+    });
+  })();
+}
