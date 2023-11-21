@@ -8,10 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import { mount, html } from 'hybrids';
 
-import '@ghostery/ui/onboarding';
-import './components/message';
+import '@ghostery/ui/youtube';
 import { setupIframe, closeIframe } from '@ghostery/ui/iframe';
 
 setupIframe();
@@ -25,6 +25,7 @@ function openPrivateWindow() {
 			url,
 		},
 	});
+	closeIframe();
 }
 
 function openBlog(slug) {
@@ -46,12 +47,12 @@ function dontAsk() {
 
 mount(document.body, {
 	content: () => html`
-		<youtube-message
+		<ui-youtube-wall
 			onclose="${() => closeIframe()}"
 			ondontask="${() => dontAsk()}"
 			onopenblog1="${() => openBlog('enable-extensions-in-incognito')}"
 			onopenblog2="${() => openBlog('whats-happening-with-youtube-ads')}"
 			onopenprivatewindow="${() => openPrivateWindow()}"
-		></youtube-message>
+		></ui-youtube-wall>
 	`,
 });
