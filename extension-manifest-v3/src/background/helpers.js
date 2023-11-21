@@ -16,6 +16,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         sendResponse(tab);
       });
       return true;
+    case 'openTabWithUrl':
+      chrome.tabs.create({ url: msg.url });
+      break;
+    case 'openPrivateWindowWithUrl':
+      chrome.windows.create({ url: msg.url, incognito: true });
+      break;
   }
 
   return false;
