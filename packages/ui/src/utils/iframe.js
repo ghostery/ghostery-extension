@@ -10,6 +10,11 @@
  */
 
 export function showIframe(url, width = '440px') {
+  // Prevent multiple iframes be shown at the same time
+  if (document.querySelector('ghostery-iframe-wrapper')) {
+    return;
+  }
+
   const wrapper = document.createElement('ghostery-iframe-wrapper');
 
   const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
@@ -93,12 +98,16 @@ export function showIframe(url, width = '440px') {
         if (e.data.reload) {
           window.location.reload();
         } else {
-          setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
+          if (wrapper.parentElement) {
+            setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
+          }
         }
         break;
       case 'ghostery-clear-iframe':
         if (iframe.src === e.data.url) {
-          setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
+          if (wrapper.parentElement) {
+            setTimeout(() => wrapper.parentElement.removeChild(wrapper), 0);
+          }
         }
         break;
       default:

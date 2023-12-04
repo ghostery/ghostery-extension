@@ -28,6 +28,9 @@
     "message": "광고 ",
     "description": "Tracker category name"
   },
+  "allow_ghostery_in_private_windows": {
+    "message": "비공개 창에서 고스트리밍 허용"
+  },
   "always": {
     "message": "항상 "
   },
@@ -119,6 +122,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "브라우저 툴바 Ghostery 아이콘상에 트래커 개수를 표시합니다."
+  },
+  "don_t_ask_again": {
+    "message": "다시 묻지 마세요"
   },
   "done": {
     "message": "완료"
@@ -259,8 +265,14 @@
   "keep_disabled": {
     "message": "비활성 상태 유지"
   },
+  "learn_how": {
+    "message": "방법 알아보기"
+  },
   "learn_more": {
     "message": "자세히 알아보기"
+  },
+  "learn_more_about_youtube_s_challenges_to_ad_blockers": {
+    "message": "광고 차단기에 대한 YouTube의 도전에 대해 자세히 알아보기"
   },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Ghostery가 귀하의 완전한 개인 정보 보호를 지원할 수 있게 하고 모든 팝업 및 추적을 거부하십시오. 또는 직접 실행할 수도 있습니다!"
@@ -331,6 +343,12 @@
   },
   "on_this_website": {
     "message": "이 웹사이트에서"
+  },
+  "open_video": {
+    "message": "비디오 열기"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "비공개 창에서 YouTube 열기"
   },
   "other": {
     "message": "기타",
@@ -469,8 +487,14 @@
   "urls_observed": {
     "message": "관찰된 URL"
   },
+  "visit_our_blog": {
+    "message": "블로그 방문하기"
+  },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "이용 약관이 업데이트되었습니다. 브라우징 중 Ghostery 트래커 및 광고 차단기를 계속 사용하려면 셋업을 갱신해주세요."
+  },
+  "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
+    "message": "원활한 YouTube 환경을 위해 고스트리를 사용하시는 것을 잘 알고 있습니다. 보다 개선된 솔루션이 나올 때까지 임시 해결 방법을 알려드립니다."
   },
   "website": {
     "message": "웹사이트"
@@ -516,5 +540,8 @@
   },
   "your_privacy_features_": {
     "message": "프라이버시 관련 기능:"
+  },
+  "youtube_blocking_you_from_watching_ad_free_videos_": {
+    "message": "YouTube에서 광고 없는 동영상 시청이 차단되나요?"
   }
 }

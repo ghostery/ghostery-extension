@@ -28,6 +28,9 @@
     "message": "Publicité",
     "description": "Tracker category name"
   },
+  "allow_ghostery_in_private_windows": {
+    "message": "Autorise Ghostery dans les fenêtres privées"
+  },
   "always": {
     "message": "Toujours"
   },
@@ -119,6 +122,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Affiche le décompte des trackers sur l'icône Ghostery dans la barre d'outils du navigateur."
+  },
+  "don_t_ask_again": {
+    "message": "Ne demande plus rien"
   },
   "done": {
     "message": "Terminé"
@@ -259,8 +265,14 @@
   "keep_disabled": {
     "message": "Maintenir désactivé"
   },
+  "learn_how": {
+    "message": "Apprends comment"
+  },
   "learn_more": {
     "message": "En savoir plus"
+  },
+  "learn_more_about_youtube_s_challenges_to_ad_blockers": {
+    "message": "En savoir plus sur les défis de YouTube face aux bloqueurs de publicité."
   },
   "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
     "message": "Laissez Ghostery défendre vos convictions en rejetant les fenêtres surgissantes et mouchards, ou faites-le vous-même !"
@@ -331,6 +343,12 @@
   },
   "on_this_website": {
     "message": "Sur ce site"
+  },
+  "open_video": {
+    "message": "Ouvrir la vidéo"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "Open YouTube in a private window"
   },
   "other": {
     "message": "Non-classés",
@@ -469,8 +487,14 @@
   "urls_observed": {
     "message": "URL observées"
   },
+  "visit_our_blog": {
+    "message": "Visite notre blog"
+  },
   "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
     "message": "Nous avons mis à jour nos Conditions générales. Pour continuer à utiliser le bloqueur de trackers et de publicités Ghostery, veuillez renouveler la configuration."
+  },
+  "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
+    "message": "We know you rely on Ghostery for a smooth YouTube experience. Until a more refined solution emerges, here’s a temporary fix."
   },
   "website": {
     "message": "Site Web"
@@ -516,5 +540,8 @@
   },
   "your_privacy_features_": {
     "message": "Vos fonctions de confidentialité :"
+  },
+  "youtube_blocking_you_from_watching_ad_free_videos_": {
+    "message": "YouTube t'empêche de regarder des vidéos sans publicité ?"
   }
 }
