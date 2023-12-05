@@ -11,7 +11,6 @@
 
 import { define, html, msg, router } from 'hybrids';
 
-import Whotracksme from './whotracksme.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 import OutroSkip from './outro-skip.js';
@@ -21,7 +20,7 @@ const TERMS_AND_CONDITIONS_URL =
   'https://www.ghostery.com/privacy/ghostery-terms-and-conditions?utm_source=gbe';
 
 export default define({
-  [router.connect]: { stack: [Skip, Whotracksme, Privacy, OutroSkip] },
+  [router.connect]: { stack: [Skip, Privacy, OutroSkip] },
   tag: 'ui-onboarding-main-view',
   renew: false,
   content: ({ renew }) => html`
@@ -58,7 +57,7 @@ export default define({
           </div>
           <ui-text underline>
             ${msg.html`
-              Information about web trackers will be shared in accordance with our 
+              Information about web trackers will be shared in accordance with our
               <a href="${router.url(Privacy)}">Privacy Policy</a>`}.
           </ui-text>
           <div layout="column gap">
