@@ -7,6 +7,7 @@
   "exports": {
     "./autoconsent": "./src/modules/autoconsent/index.js",
     "./onboarding": "./src/modules/onboarding/index.js",
+    "./onboarding/short": "./src/modules/onboarding/short.js",
     "./pages": "./src/modules/pages/index.js",
     "./panel": "./src/modules/panel/index.js",
     "./settings": "./src/modules/settings/index.js",
