@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery is disabled"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery is installed with limited functionality"
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery is paused on this site."
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery stops trackers in their tracks and prevents you from being profiled by data brokers."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blocker is naming the trackers present on websites you visit. You are browsing the web unprotected."
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send non-personal information to WhoTracks.Me. The input enables Ghostery to provide real-time intel on trackers which in turn provides protection to the entire Ghostery community."
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "WhoTracks.Me Wheel"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Without privacy features enabled, only basic functionality of naming trackers is available."
   },
   "yes": {
     "message": "Yes"
