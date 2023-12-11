@@ -809,6 +809,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery jest nieaktywne"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery jest zainstalowany z ograniczoną funkcjonalnością"
+  },
   "ghostery_is_ready": {
     "message": "Ghostery jest gotowe!"
   },
@@ -820,6 +823,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery blokuje Trackerów i zapobiega profilowaniu przez handlarzy danymi."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Bloker Trackerów i Reklam nazywa elementy śledzące obecne na odwiedzanych przez Ciebie stronach internetowych. Przeglądasz sieć bez ochrony."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery będzie wyświetlać liczbę Trackerów zablokowanych na danej stronie. Kliknięcie w ikonę Ghostery spowoduje wyśwetlenie bardziej szczegółowych informacji."
@@ -857,6 +863,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Informacje dotyczące Trackerów będą udostępniane zgodnie z naszymi <a href=\"$${0}\">Zasadami ochrony prywatności</a>"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Informacje o modułach śledzących będą udostępniane zgodnie z naszą Polityką prywatności <a href=\"$${0}\"></a> , zwiększającą ochronę prywatności społeczności Ghostery."
   },
   "invalid_email_forgot": {
     "message": "Przykro nam, musisz podać prawdziwy adres e-mail."
@@ -1970,6 +1979,9 @@
   },
   "whotracks_me_statistical_report": {
     "message": "Raport statystyczny WhoTracks.Me"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Bez włączonych funkcji prywatności dostępne są tylko podstawowe funkcje śledzenia nazw."
   },
   "yes": {
     "message": "Tak"

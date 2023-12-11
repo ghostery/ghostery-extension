@@ -809,6 +809,9 @@
   "ghostery_is_disabled": {
     "message": "Расширение Ghostery отключено"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery устанавливается с ограниченной функциональностью"
+  },
   "ghostery_is_ready": {
     "message": "Ghostery готов!"
   },
@@ -820,6 +823,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery блокирует трекеры и защищает ваши данные от брокеров."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Трекер & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery будет показывать количество трекеров, заблокированных на странице. Чтобы посмотреть более подробную статистику, нажмите на значок расширения."
@@ -857,6 +863,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Мы делимся информацией о трекерах в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Информация о веб-трекерах будет распространяться в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>, продвигая защиту конфиденциальности для сообщества Ghostery."
   },
   "invalid_email_forgot": {
     "message": "Извините, вам необходимо ввести настоящий адрес электронной почты."
@@ -1970,6 +1979,9 @@
   },
   "whotracks_me_statistical_report": {
     "message": "Статистический отчет WhoTracks.Me"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Без включенных функций приватности доступен только базовый функционал именных трекеров."
   },
   "yes": {
     "message": "Да"

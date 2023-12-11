@@ -809,6 +809,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery가 비활성화됨"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery는 제한된 기능으로 설치되었습니다."
+  },
   "ghostery_is_ready": {
     "message": "Ghostery 이용이 가능합니다!"
   },
@@ -820,6 +823,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery는 트래커의 추적 행위를 막아 데이터 브로커가 이용자를 프로파일링하지 못하게 합니다."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blocker는 방문한 웹사이트에 존재하는 추적기들의 이름을 알려줍니다. 웹을 보호받지 않고 브라우징 중입니다."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery는 페이지에서 차단된 트래커의 수를 보여줍니다. Ghostery 아이콘을 클릭하면 자세한 정보를 볼 수 있습니다."
@@ -857,6 +863,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "웹 트래커에 대한 정보는 당사의 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유됩니다."
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "정보는 저희 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유되며, Ghostery 커뮤니티의 개인정보 보호를 위해 개선됩니다."
   },
   "invalid_email_forgot": {
     "message": "죄송하지만 실제 이메일 주소를 입력해야 합니다."
@@ -1970,6 +1979,9 @@
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me 통계 보고서 "
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "개인 정보 보호 기능이 활성화되지 않으면, 추적기의 기본 기능만 사용할 수 있습니다."
   },
   "yes": {
     "message": "예 "
