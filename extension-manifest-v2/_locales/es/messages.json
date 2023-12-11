@@ -809,6 +809,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery está deshabilitado"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery está instalado con funcionalidad limitada"
+  },
   "ghostery_is_ready": {
     "message": "¡Ghostery está listo!"
   },
@@ -820,6 +823,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery les para los pies a los rastreadores y evita que los intermediarios de datos realicen perfiles sobre ti."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blocker solo identifica los rastreadores presentes en los sitios web que visitas. Estás navegando sin protección."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery mostrará cuántos rastreadores ha bloqueado en una página. Si haces clic en el icono de Ghostery, verás información más detallada."
@@ -857,6 +863,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "La información sobre los rastreadores web se compartirá de acuerdo con nuestra <a href=\"$${0}\">Política de privacidad</a>"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Información sobre los rastreadores web se compartirá de acuerdo con nuestra <a href=\"$${0}\">Política de Privacidad</a>, avanzando la protección de la privacidad para la comunidad de Ghostery."
   },
   "invalid_email_forgot": {
     "message": "Lo sentimos, pero debes indicar una dirección de correo electrónico real."
@@ -1970,6 +1979,9 @@
   },
   "whotracks_me_statistical_report": {
     "message": "Informe estadístico de WhoTracks.Me"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Sin las funciones de privacidad activadas, solo la funcionalidad básica de identificar rastreadores está disponible."
   },
   "yes": {
     "message": "Sí"

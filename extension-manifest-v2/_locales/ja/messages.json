@@ -809,6 +809,9 @@
   "ghostery_is_disabled": {
     "message": "Ghosteryが無効になっています"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghosteryは制限付きの機能でインストールされています。"
+  },
   "ghostery_is_ready": {
     "message": "Ghosteryはあなたを待っています!"
   },
@@ -820,6 +823,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghosteryはトラッカーの追跡を阻止し、データブローカーによるプロファイリングを防止します。"
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blockerは、あなたが訪れるウェブサイトに存在するトラッカーの名前を表示します。ウェブを保護されていない状態でブラウジングしています。"
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghosteryは、あるページでブロックされたトラッカーの数を表示します。Ghosteryのアイコンをクリックすると、より詳細な情報が表示されます。"
@@ -857,6 +863,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "ウェブトラッカーに関する情報は、当社の<a href=\"$${0}\">プライバシーポリシー</a>に基づき共有されます"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "私たちの<a href=\"$${0}\">プライバシーポリシー</a>に従って、ウェブトラッカーに関する情報が共有され、Ghosteryコミュニティのプライバシー保護が進められます。"
   },
   "invalid_email_forgot": {
     "message": "申し訳ありませんが、実際のメールアドレスを入力してください。"
@@ -1970,6 +1979,9 @@
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me統計レポート"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "プライバシー機能が有効になっていない場合、トラッカーの命名の基本的な機能のみが利用可能です。"
   },
   "yes": {
     "message": "はい"
