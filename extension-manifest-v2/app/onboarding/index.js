@@ -1,7 +1,8 @@
-import { mount, html, store } from 'hybrids';
+import { mount, html } from 'hybrids';
 import { getBrowserInfo } from '@ghostery/libs';
 
 import '@ghostery/ui/onboarding';
+import '@ghostery/ui/onboarding/short';
 import './styles.scss';
 
 const renew = new URLSearchParams(window.location.search).get('renew') === '1';
@@ -22,23 +23,27 @@ function skip() {
 	});
 }
 
-const BrowserInfo = {
-	name: '',
-	[store.connect]: getBrowserInfo,
-};
-
-mount(document.body, {
-	browserInfo: store(BrowserInfo),
-	content: ({ browserInfo }) => (
-		store.pending(browserInfo)
-			? html``
-			: html`
-				<ui-onboarding
-					platform="${store.ready(browserInfo) ? browserInfo.name : ''}"
-					renew=${renew}
-					onsuccess="${complete}"
-					onskip="${skip}"
-				></ui-onboarding>
-			`
-	),
+getBrowserInfo().then(({ name }) => {
+	if (name.toLowerCase() === 'firefox') {
+		mount(document.body, {
+			content: () => html`
+			<ui-onboarding-short
+				platform="${name}"
+				onsuccess="${complete}"
+				onskip="${skip}"
+			></ui-onboarding-short>
+		`,
+		});
+	} else {
+		mount(document.body, {
+			content: () => html`
+			<ui-onboarding
+				platform="${name}"
+				renew=${renew}
+				onsuccess="${complete}"
+				onskip="${skip}"
+			></ui-onboarding>
+		`,
+		});
+	}
 });

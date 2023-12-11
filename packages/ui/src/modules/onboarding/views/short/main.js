@@ -11,19 +11,17 @@
 
 import { define, html, msg, router } from 'hybrids';
 
-import Privacy from './privacy.js';
-import Skip from './skip.js';
+import Privacy from '../privacy.js';
 import OutroSkip from './outro-skip.js';
-import OutroSuccess from './outro-success.js';
+import OutroSuccess from '../outro-success.js';
 
 const TERMS_AND_CONDITIONS_URL =
   'https://www.ghostery.com/privacy/ghostery-terms-and-conditions?utm_source=gbe';
 
 export default define({
-  [router.connect]: { stack: [Skip, Privacy, OutroSkip] },
-  tag: 'ui-onboarding-main-view',
-  renew: false,
-  content: ({ renew }) => html`
+  [router.connect]: { stack: [Privacy, OutroSkip] },
+  tag: 'ui-onboarding-short-main-view',
+  content: () => html`
     <template layout="grow column gap">
       <ui-onboarding-card>
         <div layout="column gap:5">
@@ -32,9 +30,7 @@ export default define({
               Welcome to Ghostery
             </ui-text>
             <ui-text type="display-m" layout="margin:bottom:5">
-              ${renew
-                ? html`renew GHOSTERY for full protection`
-                : html`Enable Ghostery to get started`}
+              Enable Ghostery to get started
             </ui-text>
           </section>
         </div>
@@ -57,20 +53,24 @@ export default define({
           </div>
           <ui-text underline>
             ${msg.html`
-              Information about web trackers will be shared in accordance with our
-              <a href="${router.url(Privacy)}">Privacy Policy</a>`}.
+              Information about web trackers will be shared in accordance with our <a href="${router.url(
+                Privacy,
+              )}">Privacy Policy</a>, advancing privacy protection for the Ghostery community.
+            `}
           </ui-text>
-          <div layout="column gap">
-            <ui-button type="success">
-              <a href="${router.url(OutroSuccess)}"
-                >${renew ? html`Enable New Setup` : html`Enable Ghostery`}</a
-              >
+          <div layout="column gap:3">
+            <ui-button type="success" size="small">
+              <a href="${router.url(OutroSuccess)}">Enable Ghostery</a>
             </ui-button>
-            <ui-button type="transparent">
-              ${renew
-                ? html`<a href="${router.url(OutroSkip)}">Disable Ghostery</a>`
-                : html`<a href="${router.url(Skip)}">Cancel</a>`}
-            </ui-button>
+            <ui-onboarding-error-card>
+              <ui-text type="label-s" color="error-500" layout="block:center">
+                Without privacy features enabled, only basic functionality of
+                naming trackers is available.
+              </ui-text>
+              <ui-button type="outline-error" size="small">
+                <a href="${router.url(OutroSkip)}">Keep disabled</a>
+              </ui-button>
+            </ui-onboarding-error-card>
           </div>
         </div>
       </ui-onboarding-card>

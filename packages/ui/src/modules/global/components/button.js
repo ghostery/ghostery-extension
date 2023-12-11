@@ -15,7 +15,7 @@ export default {
   type: 'primary',
   size: '',
   disabled: false,
-  render: ({ size }) => html`<slot></slot>`.css`
+  render: () => html`<slot></slot>`.css`
       :host {
         box-sizing: border-box;
         display: grid;
@@ -24,7 +24,7 @@ export default {
         border-radius: 24px;
         white-space: nowrap;
         transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
-        font: var(--ui-font-button-${size === 'small' ? 's' : 'm'});
+        font: var(--ui-font-button-m);
         text-transform: uppercase;
       }
 
@@ -65,7 +65,7 @@ export default {
         --ui-button-hover-background: var(--ui-color-white);
       }
 
-      @media (hover: hover) and (pointer: fine) { 
+      @media (hover: hover) and (pointer: fine) {
         :host(:hover), :host(:focus-within) {
           color: var(--ui-button-hover-color);
           border-color: var(--ui-button-hover-border);
@@ -79,6 +79,7 @@ export default {
 
       :host([size="small"]) {
         height: 40px;
+        font: var(--ui-font-button-s);
       }
 
       :host([disabled]) {

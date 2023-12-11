@@ -809,6 +809,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery is disabled"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery is installed with limited functionality"
+  },
   "ghostery_is_ready": {
     "message": "Ghostery is Ready!"
   },
@@ -820,6 +823,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery stops trackers in their tracks and prevents you from being profiled by data brokers."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blocker is naming the trackers present on websites you visit. You are browsing the web unprotected."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery will show how many trackers were blocked on a page. Clicking on the Ghostery icon reveals more detailed information."
@@ -857,6 +863,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
   },
   "invalid_email_forgot": {
     "message": "Sorry, you have to enter a real email address."
@@ -939,7 +948,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery – Privacy Ad Blocker"
+    "message": "Ghostery Tracker & Ad Blocker - Privacy AdBlock"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -1970,6 +1979,9 @@
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me Statistical Report"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Without privacy features enabled, only basic functionality of naming trackers is available."
   },
   "yes": {
     "message": "Yes"
