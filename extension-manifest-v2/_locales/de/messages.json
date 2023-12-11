@@ -939,7 +939,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery – Datenschutzorientierter Werbeblocker"
+    "message": "Ghostery Tracker- & Werbeblocker | Datenschutz AdBlocker"
   },
   "never_consent": {
     "message": "Never-Consent"

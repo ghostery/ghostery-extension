@@ -939,7 +939,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery – 隱私廣告攔截器"
+    "message": "Ghostery 追蹤器和廣告攔截器 - 隱私 AdBlock"
   },
   "never_consent": {
     "message": "Never-Consent"
