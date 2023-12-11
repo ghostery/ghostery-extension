@@ -293,6 +293,7 @@
 		"persistent": true
 	},
 	"browser_specific_settings": {
+		"gecko_android": {},
 		"gecko": {
 			"id": "firefox@ghostery.com",
 			"strict_min_version": "68.0"
