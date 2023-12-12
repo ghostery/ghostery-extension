@@ -948,7 +948,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery Bloqueur de Traqueurs et de Publicités - confidentialité"
+    "message": "Ghostery Bloqueur de Traqueurs et Publicités"
   },
   "never_consent": {
     "message": "Never-Consent"
