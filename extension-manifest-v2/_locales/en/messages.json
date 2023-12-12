@@ -525,7 +525,7 @@
   },
   "category_telemetry_desc": {
     "description": "User-facing description for the Telemetry tag category.",
-    "message": "Gather information about user interaction, error reports and performance. Data is used to improved products and should shared with 3rd parties."
+    "message": "Gathers information about user interaction, error reports, and performance. The data is used to improve products."
   },
   "category_unidentified": {
     "message": "Uncategorized"
