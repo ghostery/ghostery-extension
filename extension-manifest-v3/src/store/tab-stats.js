@@ -10,6 +10,7 @@
  */
 
 import { store } from 'hybrids';
+import { parse } from 'tldts-experimental';
 
 import AutoSyncingMap from '/utils/map.js';
 
@@ -68,9 +69,21 @@ const Stats = {
       const tab = await chrome.runtime.sendMessage({
         action: 'getCurrentTab',
       });
-      const stats = tab && (await AutoSyncingMap.get('tabStats:v1', tab.id));
 
-      return stats && tab.url.includes(stats.domain) ? stats : {};
+      if (!tab || !tab.url.startsWith('http')) {
+        return {};
+      }
+
+      const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
+
+      if (tabStats && tab.url.includes(tabStats.domain)) {
+        return tabStats;
+      }
+
+      const { domain, hostname } = parse(tab.url);
+      return {
+        domain: domain || hostname,
+      };
     },
     observe:
       __PLATFORM__ === 'safari' &&
