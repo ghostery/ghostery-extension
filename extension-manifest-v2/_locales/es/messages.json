@@ -948,7 +948,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "Ghostery Rastreador & Bloqueador de anuncios - Privacidad AdBlock"
+    "message": "Ghostery Bloqueador de Anuncios& Rastreadores"
   },
   "never_consent": {
     "message": "Never-Consent"
