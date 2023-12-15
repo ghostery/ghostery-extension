@@ -19,11 +19,6 @@ common/
 ## Tools
 tools/amo/*.zip
 
-## JSDoc
-docs/
-jsdocs/
-out/
-
 ## Jest
 coverage/
 
