@@ -68,12 +68,6 @@ $ npm run lint.raw src/utils/matcher.js
 ```
 
 
-## Build Docs
-```sh
-# Build JSDoc files to ./docs
-$ npm run docs
-```
-
 ## Internationalization
 
 This project is configured to use the Transifex CLI. See their [documentation](https://docs.transifex.com/client/installing-the-client) to get started. *Note*:  You do not need to run `tx config` as the project [configuration file](.tx/config) has already been generated.
