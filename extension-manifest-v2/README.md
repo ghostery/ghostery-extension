@@ -67,12 +67,6 @@ $ npm run lint
 $ npm run lint.raw src/utils/matcher.js
 ```
 
-```sh
-# Test i18n string lengths for panel UI
-$ npm run leet
-# Reset back to original en language file
-$ npm run leet.reset
-```
 
 ## Build Docs
 ```sh
