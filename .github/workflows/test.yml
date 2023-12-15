@@ -47,7 +47,7 @@ jobs:
 
       - name: MV2 - Build
         working-directory: extension-manifest-v2
-        run: npm run build.prod
+        run: npm run build
 
       - name: MV3 - Test
         working-directory: extension-manifest-v3
