@@ -32,7 +32,7 @@ $ npm run build.dev
 
 ```sh
 # Build for production
-$ npm run build.prod
+$ npm run build
 ```
 
 ```sh
