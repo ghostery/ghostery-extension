@@ -129,7 +129,7 @@ export function updateTabStats(tabId, requests) {
 
     // Filter out requests that are not related to the current page
     // (e.g. requests on trailing edge when navigation to a new page is in progress)
-    requests = requests.filter((request) => request.isFromOriginUrl(stats.url));
+    requests = requests.filter((request) => request.isFromDomain(stats.domain));
 
     for (const request of requests) {
       const pattern = await trackerDb.getMetadata(request, {
@@ -241,7 +241,6 @@ function setupTabStats(tabId, request) {
 
   if (request.isHttp || request.isHttps) {
     tabStats.set(tabId, {
-      url: request.url,
       domain: request.domain || request.hostname,
       trackers: [],
     });

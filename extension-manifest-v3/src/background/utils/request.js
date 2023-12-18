@@ -53,27 +53,31 @@ export default class ExtendedRequest extends Request {
     this.sourceHostname = data.sourceHostname;
   }
 
-  isFromOriginUrl(url) {
+  isFromDomain(domain) {
     const { frameAncestors } = this._originalRequestDetails;
 
+    let url = '';
+
     /* Firefox APIs */
-
     if (frameAncestors && frameAncestors.length > 0) {
-      return url === frameAncestors[frameAncestors.length - 1].url;
+      url = frameAncestors[frameAncestors.length - 1].url;
+    } else if (this.sourceUrl) {
+      url = this.sourceUrl;
+    } else {
+      /* Chrome APIs */
+
+      const { frameType, initiator } = this._originalRequestDetails;
+
+      // For frameType 'sub_frame', we can't determine the origin URL
+      // as it might be the iframe itself or any of its ancestors
+      if (frameType === 'outermost_frame' && initiator) {
+        url = initiator;
+      }
     }
 
-    if (this.sourceUrl) {
-      return url === this.sourceUrl;
-    }
-
-    /* Chrome APIs */
-
-    const { frameType, initiator } = this._originalRequestDetails;
-
-    // For frameType 'sub_frame', we can't determine the origin URL
-    // as it might be the iframe itself or any of its ancestors
-    if (frameType === 'outermost_frame' && initiator) {
-      return url.startsWith(initiator);
+    if (url) {
+      const parsedUrl = parse(url);
+      return parsedUrl.domain === domain || parsedUrl.hostname === domain;
     }
 
     // As a fallback, we assume that the request is from the origin URL
