@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery jest nieaktywne"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery jest zainstalowany z ograniczoną funkcjonalnością"
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery jest wstrzymane dla tej witryny."
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery blokuje trackerów i zapobiega profilowaniu przez handlarzy danymi."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Bloker Trackerów i Reklam nazywa trackery obecne na odwiedzanych przez Ciebie stronach internetowych. Przeglądasz sieć bez ochrony."
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ghostery zostanie wstrzymane dla tej witryny. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Informacje dotyczące trackerów będą udostępniane zgodnie z naszymi <a href=\"$${0}\">Zasadami ochrony prywatności</a>"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Informacje o trackerach będą udostępniane zgodnie z naszą Polityką prywatności <a href=\"$${0}\"></a> , zwiększającą ochronę prywatności społeczności Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Istnieje dzięki mikrowkładom każdego użytkownika Ghostery, który zdecyduje się wysłać nieosobiste informacje do WhoTracks.Me. Wkład ten umożliwia Ghostery dostarczanie w czasie rzeczywistym informacji o trackerach, co z kolei zapewnia ochronę całej społeczności Ghostery."
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "Wykres kołowy WhoTracks.Me"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Bez włączonych funkcji prywatności dostępne są tylko podstawowe funkcje nazywania trackerów."
   },
   "yes": {
     "message": "Tak"

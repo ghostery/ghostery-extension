@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery가 비활성화됨"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery는 제한된 기능으로 설치되었습니다."
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 일시 중지되었습니다. "
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery는 트래커의 추적 행위를 막아 데이터 브로커가 이용자를 프로파일링하지 못하게 합니다."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blocker는 방문한 웹사이트에 존재하는 추적기들의 이름을 알려줍니다. 웹을 보호받지 않고 브라우징 중입니다."
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "이 사이트에서 Ghostery가 일시 중지될 것입니다. 언제든지 마음을 바꾸어 Ghostery 설정에서 트래커와 광고가 웹에서 귀하를 추적하는 것을 중단하게 할 수 있습니다."
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "웹 트래커에 대한 정보는 당사의 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유됩니다."
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "정보는 저희 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유되며, Ghostery 커뮤니티의 개인정보 보호를 위해 개선됩니다."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "트래커 정보를 WhoTracks.Me로 전송을 허락해 준 모든 Ghostery 사용자의 이러한 작은 기여들이 모여 Ghostery는 운영됩니다. 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 이렇게 전체 Ghostery 사용자 커뮤니티가 보호받을 수 있습니다."
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "WhoTracks.Me 휠 "
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "개인 정보 보호 기능이 활성화되지 않으면, 추적기의 기본 기능만 사용할 수 있습니다."
   },
   "yes": {
     "message": "예 "

@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery 已關閉"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery 安裝了有限的功能"
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery 已在此網站上暫停。"
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery 幫你阻擋追蹤器，防止數據中介獲得你的個人資料。"
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker＆Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ghostery 將在此網站上暫停。 你可以隨時在 Ghostery 設定中更改此設定，制止追蹤器和廣告在網路中追蹤你"
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "網頁追蹤器的資訊將依據我們的<a href=\"$${0}\">隱私權政策</a>分享"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "根據我們的<a href=\"$${0}\">隱私政策</a>，將分享有關網路追蹤器的資訊，以推進Ghostery社群的隱私保護。"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "它的存在要歸功於每位選擇將非個人資料傳送到 WhoTracks.Me 的 Ghostery 用戶的微小貢獻。 這些資料的輸入使 Ghostery 能夠提供有關追蹤器的即時情報，進而為整個 Ghostery 社群提供保護。"
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "WhoTracks.Me 輪盤"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "啟用隱私功能後，僅提供命名追蹤器的基本功能。"
   },
   "yes": {
     "message": "是"

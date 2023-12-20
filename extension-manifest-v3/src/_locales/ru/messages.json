@@ -3,10 +3,10 @@
     "message": "$${0} left"
   },
   "1_day": {
-    "message": "1 day"
+    "message": "1 день"
   },
   "1_hour": {
-    "message": "1 hour"
+    "message": "1 час"
   },
   "about": {
     "message": "О программе"
@@ -32,7 +32,7 @@
     "message": "Разреши Ghostery в приватных окнах"
   },
   "always": {
-    "message": "Always"
+    "message": "Всегда"
   },
   "anti_tracking": {
     "message": "Анти-трекинг"
@@ -70,7 +70,7 @@
     "description": "Tracker category name"
   },
   "clear_all": {
-    "message": "Clear all"
+    "message": "Очистить все"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Нажмите на значок «Расширения» справа от строки поиска и закрепите Ghostery на панели инструментов."
@@ -84,16 +84,16 @@
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"
   },
   "contact": {
-    "message": "Contact"
+    "message": "Обращайся на"
   },
   "contact_support": {
-    "message": "Contact support"
+    "message": "Контактная поддержка"
   },
   "contributor": {
     "message": "Участник"
   },
   "copied_to_clipboard": {
-    "message": "Copied to clipboard"
+    "message": "Скопировано в буфер обмена"
   },
   "create_account": {
     "message": "Создать учетную запись"
@@ -118,7 +118,7 @@
     "message": "Отключить предварительный просмотр трекеров"
   },
   "disabled": {
-    "message": "Disabled"
+    "message": "Инвалид"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Показывает счетчик трекеров у значка Ghostery на панели инструментов в браузере."
@@ -193,10 +193,10 @@
     "message": "У Ghostery недостаточно разрешений для блокировки трекеров."
   },
   "ghostery_has_been_resumed_on_this_site_": {
-    "message": "Ghostery has been resumed on this site."
+    "message": "На этом сайте возобновлена работа Ghostery."
   },
   "ghostery_has_nothing_to_do_on_this_page": {
-    "message": "Ghostery has nothing to do on this page"
+    "message": "Ghostery нечего делать на этой странице"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery блокирует трекеры и обеспечивает конфиденциальность при работе в браузере."
@@ -204,8 +204,11 @@
   "ghostery_is_disabled": {
     "message": "Расширение Ghostery отключено"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery устанавливается с ограниченной функциональностью"
+  },
   "ghostery_is_paused_on_this_site_": {
-    "message": "Ghostery is paused on this site."
+    "message": "Ghostery приостановлен на этом сайте."
   },
   "ghostery_paused": {
     "message": "Ghostery сделал паузу"
@@ -222,14 +225,17 @@
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery блокирует трекеры и защищает ваши данные от брокеров."
   },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Трекер & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
+  },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
+    "message": "Ghostery будет приостановлен на этом сайте. Вы можете изменить это в любое время в настройках Ghostery, чтобы остановить трекеры и рекламу, отслеживающую вас в Интернете."
   },
   "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery will be paused on this site for 1 day"
+    "message": "Ghostery будет приостановлен на этом сайте на 1 день"
   },
   "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery will be paused on this site for 1 hour"
+    "message": "Ghostery будет приостановлен на этом сайте на 1 час"
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery будет показывать количество трекеров, заблокированных на странице. Чтобы посмотреть более подробную статистику, нажмите на значок расширения."
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Мы делимся информацией о трекерах в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>."
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Информация о веб-трекерах будет распространяться в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>, продвигая защиту конфиденциальности для сообщества Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего неперсональную информацию на WhoTracks.Me. Данные позволяют Ghostery оперативно предоставлять информацию о трекерах, что взамен обеспечивает защиту всего сообщества Ghostery."
@@ -284,7 +293,7 @@
     "message": "Ghostery - это мощное расширение для обеспечения конфиденциальности. Блокируйте рекламу, отключайте средства слежения и ускоряйте загрузку веб-сайтов."
   },
   "menu": {
-    "message": "Menu"
+    "message": "Меню"
   },
   "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
     "message": "Учитывайте, что не все перечисленные элементы —трекеры, т. е. не все из них собирают персональные данные."
@@ -358,10 +367,10 @@
     "message": "Пауза на этом сайте"
   },
   "paused": {
-    "message": "Paused"
+    "message": "Приостановлено"
   },
   "permission_required": {
-    "message": "Permission required"
+    "message": "Требуется разрешение"
   },
   "pin_extension_for_easy_access": {
     "message": "Закрепите Ghostery для быстрого доступа"
@@ -382,10 +391,10 @@
     "message": "Политика конфиденциальности"
   },
   "privacy_protection": {
-    "message": "Privacy protection"
+    "message": "Защита конфиденциальности"
   },
   "read_more_on_whotracks_me": {
-    "message": "Read more on WhoTracks.Me"
+    "message": "Читайте больше на WhoTracks.Me"
   },
   "renew_ghostery_for_full_protection": {
     "message": "возобновите GHOSTERY, чтобы добиться полной защиты"
@@ -409,7 +418,7 @@
     "message": "Защита от перенаправления поисковых систем"
   },
   "search_website___": {
-    "message": "Search website..."
+    "message": "Поиск сайта..."
   },
   "settings": {
     "message": "Настройки"
@@ -457,10 +466,10 @@
     "message": "Заблокированные трекеры"
   },
   "trackers_count": {
-    "message": "Trackers Count"
+    "message": "Трекеры Count"
   },
   "trackers_detected": {
-    "message": "Trackers detected"
+    "message": "Трекеры обнаружены"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Трекеры, обнаруженные Ghostery на этом сайте:&nbsp;$${0}"
@@ -472,7 +481,7 @@
     "message": "Предварительный просмотр трекеров"
   },
   "trackers_wheel": {
-    "message": "Trackers Wheel"
+    "message": "Трекерская рулетка"
   },
   "unidentified": {
     "message": "Неизвестно",
@@ -497,10 +506,10 @@
     "message": "Мы знаем, что ты полагаешься на Ghostery для бесперебойной работы с YouTube. Пока не появится более совершенное решение, вот временное исправление."
   },
   "website": {
-    "message": "Website"
+    "message": "Веб-сайт"
   },
   "websites": {
-    "message": "Websites"
+    "message": "Веб-сайты"
   },
   "welcome_to_ghostery": {
     "message": "Добро пожаловать в Ghostery"
@@ -521,7 +530,10 @@
     "message": "Статистический отчет WhoTracks.Me"
   },
   "whotracks_me_wheel": {
-    "message": "WhoTracks.Me Wheel"
+    "message": "Колесо WhoTracks.Me"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Без включенных функций приватности доступен только базовый функционал именных трекеров."
   },
   "yes": {
     "message": "Да"

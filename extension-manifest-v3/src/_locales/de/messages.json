@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery ist deaktiviert"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery ist mit eingeschränkter Funktionalität installiert"
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery pausiert auf dieser Website."
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghostery unterbindet Tracker und verhindert, dass Datenagenturen ein Profil von Ihnen erstellen."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Der Ghostery Tracker- und Werbeblocker zeigt lediglich Tracker auf Webseiten an. Dies allein garantiert keinen umfassenden Datenschutz. "
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ghostery pausiert auf dieser Website. Sie können dies jederzeit in den Ghostery-Einstellungen ändern, damit Tracker und Werbung Ihnen nicht durchs Web folgen"
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Informationen über Web-Tracker werden gemäß unserer <a href=\"$${0}\">Datenschutzrichtlinie</a> geteilt"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Informationen über Web-Tracker werden gemäß unserer <a href=\"$${0}\">Datenschutzerklärung</a> geteilt, um den \nSchutz der Privatsphäre für die Ghostery-Community zu verbessern."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Es existiert dank der Beiträge jedes Ghostery-Nutzers, der sich dafür entscheidet, nicht-personenbezogene Informationen an WhoTracks.Me zu senden. Diese Informationen ermöglichen es Ghostery, Echtzeitinformationen über Tracker zu liefern, die wiederum die gesamte Ghostery-Gemeinschaft schützen."
@@ -348,7 +357,7 @@
     "message": "Video öffnen"
   },
   "open_youtube_in_a_private_window": {
-    "message": "Open YouTube in a private window"
+    "message": "YouTube in einem privaten Fenster öffnen"
   },
   "other": {
     "message": "Sonstiges",
@@ -494,7 +503,7 @@
     "message": "Wir haben unsere allgemeinen Geschäftsbedingungen aktualisiert. Um den Ghostery Tracker & Ad Blocker beim Surfen weiterhin nutzen zu können, erneuern Sie bitte die Einrichtung."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
-    "message": "We know you rely on Ghostery for a smooth YouTube experience. Until a more refined solution emerges, here’s a temporary fix."
+    "message": "Wir wissen, dass du dich für ein reibungsloses YouTube-Erlebnis auf Ghostery verlässt. Bis eine bessere Lösung gefunden ist, haben wir hier eine vorübergehende Lösung."
   },
   "website": {
     "message": "Website"
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "Whotracks.me-Rad"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Ohne aktivierte Datenschutzfunktionen steht nur die Grundfunktion zur Benennung von Trackern zur Verfügung."
   },
   "yes": {
     "message": "Ja"

@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghostery está desabilitado"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "O Ghostery está instalado com funcionalidade limitada"
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "O Ghostery está pausado neste site."
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "O Ghostery interrompe os rastreadores e impede que você seja analisado por corretores de dados."
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "O Ghostery Tracker &amp; Ad Blocker está nomeando os rastreadores presentes nos sites que você visita. Você está navegando na Web sem proteção."
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "O Ghostery será pausado neste site. Você pode mudar isso a qualquer momento nas configurações do Ghostery para impedir que rastreadores e anúncios rastreiem você na web."
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "Informações sobre rastreadores da web serão compartilhadas de acordo com nossa <a href=\"$${0}\"> Política de Privacidade </a> "
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa Política de Privacidade <a href=\"$${0}\"></a> , avançando na proteção da privacidade para a comunidade Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Ele existe graças às microcontribuições de cada usuário do Ghostery que opta por enviar informações não pessoais para o WhoTracks.Me. A entrada permite que o Ghostery forneça informações em tempo real sobre rastreadores que, por sua vez, trazem proteção para toda a comunidade Ghostery."
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "Roda do WhoTracks.Me"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Sem os recursos de privacidade ativados, apenas a funcionalidade básica dos rastreadores de nomes está disponível."
   },
   "yes": {
     "message": "Sim"

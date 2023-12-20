@@ -204,6 +204,9 @@
   "ghostery_is_disabled": {
     "message": "Ghosteryが無効になっています"
   },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghosteryは制限付きの機能でインストールされています。"
+  },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghosteryは、このサイトで一時停止しています。"
   },
@@ -221,6 +224,9 @@
   },
   "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
     "message": "Ghosteryはトラッカーの追跡を阻止し、データブローカーによるプロファイリングを防止します。"
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blockerは、あなたが訪れるウェブサイトに存在するトラッカーの名前を表示します。ウェブを保護されていない状態でブラウジングしています。"
   },
   "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ghosteryは、このサイトで一時停止されます。 この設定は、Ghosteryの設定でいつでも変更でき、トラッカーや広告がウェブ上であなたを追跡するのを阻止することができます。"
@@ -255,6 +261,9 @@
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
     "message": "ウェブトラッカーに関する情報は、当社の<a href=\"$${0}\">プライバシーポリシー</a>に基づき共有されます"
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "私たちの<a href=\"$${0}\">プライバシーポリシー</a>に従って、ウェブトラッカーに関する情報が共有され、Ghosteryコミュニティのプライバシー保護が進められます。"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "これは、WhoTracks.Meに個人情報以外の情報を送信することを選択したGhosteryユーザー全員による、小さな貢献のおかげで存在しています。 入力すると、Ghosteryは見返りとしてトラッカーと保護に関するリアルタイムの情報をGhosteryのコミュニティ全体に提供することができます。"
@@ -348,7 +357,7 @@
     "message": "ビデオを開く"
   },
   "open_youtube_in_a_private_window": {
-    "message": "Open YouTube in a private window"
+    "message": "YouTubeをプライベートウィンドウで開く"
   },
   "other": {
     "message": "その他",
@@ -494,7 +503,7 @@
     "message": "利用規約を更新しました。Ghosteryのトラッカー＆広告ブロッカーを引き続きご利用いただくには、セットアップを更新してください。"
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
-    "message": "We know you rely on Ghostery for a smooth YouTube experience. Until a more refined solution emerges, here’s a temporary fix."
+    "message": "スムーズなYouTube体験のためにGhosteryに依存していることは承知しています。より洗練されたソリューションが登場するまでの一時的な解決策をご紹介します。"
   },
   "website": {
     "message": "ウェブサイト"
@@ -522,6 +531,9 @@
   },
   "whotracks_me_wheel": {
     "message": "WhoTracks.Me Wheel"
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "プライバシー機能が有効になっていない場合、トラッカーの命名の基本的な機能のみが利用可能です。"
   },
   "yes": {
     "message": "はい"
