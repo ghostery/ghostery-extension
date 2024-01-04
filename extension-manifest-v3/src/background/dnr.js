@@ -52,35 +52,65 @@ if (__PLATFORM__ !== 'firefox') {
     // Skip if domains has not changed
     if (!prevPaused) return;
 
+    const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+
     if (paused.length) {
       const domains = paused.map(({ id }) => id);
+
       chrome.declarativeNetRequest.updateDynamicRules({
-        addRules: [
+        addRules:
           __PLATFORM__ === 'safari'
-            ? {
-                id: 1,
-                priority: 10000,
-                action: { type: 'allow' },
-                condition: {
-                  domains: domains.map((d) => `*${d}`),
-                  urlFilter: '*',
+            ? [
+                {
+                  id: 1,
+                  priority: 10000,
+                  action: { type: 'allow' },
+                  condition: {
+                    domains: domains.map((d) => `*${d}`),
+                    urlFilter: '*',
+                  },
                 },
-              }
-            : {
-                id: 1,
-                priority: 10000,
-                action: { type: 'allowAllRequests' },
-                condition: {
-                  requestDomains: domains,
-                  resourceTypes: ['main_frame', 'sub_frame'],
+              ]
+            : [
+                {
+                  id: 1,
+                  priority: 10000,
+                  action: { type: 'allow' },
+                  condition: {
+                    initiatorDomains: domains,
+                    resourceTypes: [
+                      'main_frame',
+                      'sub_frame',
+                      'stylesheet',
+                      'script',
+                      'image',
+                      'font',
+                      'object',
+                      'xmlhttprequest',
+                      'ping',
+                      'media',
+                      'websocket',
+                      'webtransport',
+                      'webbundle',
+                      'other',
+                    ],
+                  },
                 },
-              },
-        ],
-        removeRuleIds: [1],
+                {
+                  id: 2,
+                  priority: 10000,
+                  action: { type: 'allowAllRequests' },
+                  condition: {
+                    initiatorDomains: domains,
+                    resourceTypes: ['main_frame', 'sub_frame'],
+                  },
+                },
+              ],
+        removeRuleIds: dynamicRules.map(({ id }) => id),
       });
-    } else {
+    } else if (dynamicRules.length) {
       chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: [1],
+        removeRuleIds: dynamicRules.map(({ id }) => id),
       });
     }
   });
