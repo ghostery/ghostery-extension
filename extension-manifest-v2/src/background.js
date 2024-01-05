@@ -1018,18 +1018,6 @@ function initializeDispatcher() {
 		common.modules.core.action('refreshAppState');
 	});
 }
-/**
- * Checks if the origin of the request comes from whitelisted sites
- * @param {webRequestPipeline.request} state
- * @returns boolean
- */
-function isOriginWhitelisted(state) {
-	if (state.originUrlParts && conf.site_whitelist.includes(state.originUrlParts.hostname)) {
-		return true;
-	}
-
-	return false;
-}
 
 /**
  * WebRequest pipeline initialization: find which Common modules are enabled,
@@ -1067,31 +1055,13 @@ function initialiseWebRequestPipeline() {
 			spec: 'blocking',
 			before: existingSteps.onBeforeRequest,
 			fn: (state, response) => {
-				if (isOriginWhitelisted(state)) {
-					return true;
-				}
-
 				const result = events.onBeforeRequest(state, response);
 				if (result.cancel || result.redirectUrl) {
 					Object.assign(response, result);
 				}
-
 				return true;
 			}
 		}),
-		webRequestPipeline.action('addPipelineStep', 'onHeadersReceived', {
-			name: 'ghostery.onHeadersReceived',
-			spec: 'collect',
-			before: existingSteps.onHeadersReceived,
-			fn: (state) => {
-				if (isOriginWhitelisted(state)) {
-					return true;
-				}
-
-				Events.onHeadersReceived(state);
-				return true;
-			}
-		})
 	]);
 }
 /**
@@ -1106,18 +1076,12 @@ function isWhitelistedForAdblocking(state) {
 	if (globals.SESSION.paused_blocking) {
 		return true;
 	}
-
-	if (isOriginWhitelisted(state)) {
-		return true;
-	}
-
 	if (state.onlyCheckPause) {
 		// This should only be reachable in the context of push injections,
 		// which lack the context. But push injection handled whitelisted
 		// pages already in a previous step.
 		return false;
 	}
-
 	return (
 		Boolean(state.ghosteryWhitelisted)
 		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
@@ -1129,7 +1093,6 @@ function isWhitelistedForAdblocking(state) {
 function isWhitelistedForAntiTracking(state) {
 	return (
 		Boolean(globals.SESSION.paused_blocking)
-		|| isOriginWhitelisted(state)
 		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
 		// only check common_checklist if the tracker id is unknown
 		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
