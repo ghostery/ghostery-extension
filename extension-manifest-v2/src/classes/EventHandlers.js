@@ -286,7 +286,7 @@ class EventHandlers {
 		}
 
 		// TODO fuse this into a single call to improve performance
-		const page_url = tabInfo.getTabInfo(tab_id, 'url');
+		const page_url = eventMutable.tabUrl;
 		const {
 			patternId: bug_id,
 			isFilterMatched,
@@ -421,17 +421,6 @@ class EventHandlers {
 		}
 
 		return { requestHeaders: details.requestHeaders };
-	}
-
-	/**
-	 * Handler for webRequest.onHeadersReceived event
-	 * Called each time that an HTTP(S) response header is received.
-	 *
-	 * @param  {Object} details 	event data
-	 */
-	static onHeadersReceived(details) {
-		// Skip content-length collection if it's a 3XX (redirect)
-		if (details.statusCode >> 8 === 1) { } // eslint-disable-line no-bitwise, no-empty
 	}
 
 	/**
