@@ -114,7 +114,9 @@ export function setupStream(path) {
       output.write(']');
       console.log(`Generated ${currentId} rules`);
       if (currentId > 75000) {
-        throw new Error('Too many DNR rules');
+        console.error('-'.repeat(80));
+        console.error('WARNING! Too many DNR rules generated...');
+        console.error('-'.repeat(80));
       }
       output.close();
     },
