@@ -6,7 +6,15 @@ This repository contains a version built with the new `chrome.declarativeNetRequ
 
 ## Local development
 
-First, you need to install JavaScript dependencies and download additional resources (e.g. block lists):
+### Nodejs version
+
+Be sure to use nodejs version specified in `../.tool-versions`.
+
+In order to build for Apple platform, xcode has to trigger the extension build. It has to run with the proper version of node. Please use (mise)[https://github.com/jdx/mise] to manage your nodejs runtimes.
+
+### Other
+
+You need to install JavaScript dependencies and download additional resources (e.g. block lists):
 
 ```bash
 cd .. && npm ci

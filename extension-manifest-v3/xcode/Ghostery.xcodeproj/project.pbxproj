@@ -487,6 +487,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (iOS)" */;
 			buildPhases = (
+				46F5023F2B4C55CD0092182B /* Build extension */,
 				468E42872701F84A008B5792 /* Sources */,
 				468E42882701F84A008B5792 /* Frameworks */,
 				468E42892701F84A008B5792 /* Resources */,
@@ -509,6 +510,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (macOS)" */;
 			buildPhases = (
+				46F502402B4C59820092182B /* ShellScript */,
 				468E42992701F84A008B5792 /* Sources */,
 				468E429A2701F84A008B5792 /* Frameworks */,
 				468E429B2701F84A008B5792 /* Resources */,
@@ -698,6 +700,46 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		46F5023F2B4C55CD0092182B /* Build extension */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build extension";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "eval \"$(/opt/homebrew/bin/mise activate zsh)\"\ncd ..\nnpm run build -- safari\n";
+		};
+		46F502402B4C59820092182B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "eval \"$(/opt/homebrew/bin/mise activate zsh)\"\ncd ..\nnpm run build -- safari\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		468E42872701F84A008B5792 /* Sources */ = {
