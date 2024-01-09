@@ -723,6 +723,7 @@
 		};
 		B48C697F2B4D84600005A820 /* Build Source */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
