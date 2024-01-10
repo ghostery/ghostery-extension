@@ -719,7 +719,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && eval \\\"$(/opt/homebrew/bin/mise activate zsh)\\\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari-ios\n";
+			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari-ios\n";
 		};
 		B48C697F2B4D84600005A820 /* Build Source */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -738,7 +738,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && eval \\\"$(/opt/homebrew/bin/mise activate zsh)\\\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari-mac\n";
+			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari-mac\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
