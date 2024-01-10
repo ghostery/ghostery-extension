@@ -32,7 +32,7 @@ const TARGET_MANIFEST_MAP = {
   edge: 'chromium',
   firefox: 'firefox',
   'safari-ios': 'safari-ios',
-  'safari-mac': 'safari-mac',
+  'safari-macos': 'safari-macos',
 };
 
 if (!TARGET_MANIFEST_MAP[argv.target]) {
