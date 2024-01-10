@@ -13,14 +13,6 @@ const options = {
   assets: ['_locales', 'icons'],
 };
 
-const TARGET_TO_MANIFEST_MAP = {
-  chrome: 'chromium',
-  opera: 'chromium',
-  edge: 'chromium',
-  firefox: 'firefox',
-  safari: 'safari',
-};
-
 // Generate arguments from command line
 const argv = process.argv.slice(2).reduce(
   (acc, arg) => {
@@ -34,16 +26,41 @@ const argv = process.argv.slice(2).reduce(
   { target: 'chrome' },
 );
 
+const TARGET_MANIFEST_MAP = {
+  chrome: 'chromium',
+  opera: 'chromium',
+  edge: 'chromium',
+  firefox: 'firefox',
+  'safari-ios': 'safari-ios',
+  'safari-macos': 'safari-macos',
+};
+
+if (!TARGET_MANIFEST_MAP[argv.target]) {
+  throw new Error(
+    `Unknown target "${argv.target}". Supported targets: ${Object.keys(
+      TARGET_MANIFEST_MAP,
+    ).join(', ')}`,
+  );
+}
+
 const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
+
+// Get manifest from source directory
+console.log(`Reading manifest.${TARGET_MANIFEST_MAP[argv.target]}.json...`);
 const manifest = JSON.parse(
   readFileSync(
     resolve(
       options.srcDir,
-      `manifest.${TARGET_TO_MANIFEST_MAP[argv.target]}.json`,
+      `manifest.${TARGET_MANIFEST_MAP[argv.target]}.json`,
     ),
     'utf8',
   ),
 );
+
+// Clear out Safari platform suffix
+if (argv.target.startsWith('safari')) {
+  argv.target = 'safari';
+}
 
 const config = {
   logLevel: argv.silent ? 'silent' : undefined,

@@ -77,6 +77,7 @@ const DNR = {
   'dnr-ads-2': 'ads',
   'dnr-tracking-2': 'tracking',
   'dnr-annoyances-2': 'annoyances',
+  'dnr-ios': 'safari',
 };
 
 for (const [name, target] of Object.entries(DNR)) {
@@ -107,39 +108,41 @@ for (const [name, target] of Object.entries(DNR)) {
       return res.text();
     });
 
-    writeFileSync(`${TARGET_PATH}/dnr-${target}.json`, dnr);
+    if (!target.includes('safari')) {
+      writeFileSync(`${TARGET_PATH}/dnr-${target}.json`, dnr);
+    } else {
+      const stream = setupStream(`${TARGET_PATH}/dnr-${target}.json`);
 
-    const stream = setupStream(`${TARGET_PATH}/dnr-safari-${target}.json`);
+      for (const rule of JSON.parse(dnr)) {
+        if (rule.condition.requestDomains) {
+          if (rule.condition.requestDomains.length > MAX_RULE_REQUEST_DOMAINS) {
+            console.log(
+              `Rule has too many domains (${rule.condition.requestDomains.length}), omitting it`,
+            );
+            continue;
+          }
 
-    for (const rule of JSON.parse(dnr)) {
-      if (rule.condition.requestDomains) {
-        if (rule.condition.requestDomains.length > MAX_RULE_REQUEST_DOMAINS) {
-          console.log(
-            `Rule has too many domains (${rule.condition.requestDomains.length}), omitting it`,
-          );
-          continue;
-        }
-
-        for (const domain of rule.condition.requestDomains) {
-          stream.write(
-            getCompatRule(
-              {
-                ...rule,
-                condition: {
-                  ...rule.condition,
-                  requestDomains: undefined,
-                  urlFilter: `||${domain}`,
+          for (const domain of rule.condition.requestDomains) {
+            stream.write(
+              getCompatRule(
+                {
+                  ...rule,
+                  condition: {
+                    ...rule.condition,
+                    requestDomains: undefined,
+                    urlFilter: `||${domain}`,
+                  },
                 },
-              },
-              debug,
-            ),
-          );
+                debug,
+              ),
+            );
+          }
+        } else {
+          stream.write(getCompatRule(rule, debug));
         }
-      } else {
-        stream.write(getCompatRule(rule, debug));
       }
-    }
 
-    stream.close();
+      stream.close();
+    }
   }
 }

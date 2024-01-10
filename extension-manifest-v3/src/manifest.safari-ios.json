@@ -46,7 +46,7 @@
       {
         "id": "ads",
         "enabled": false,
-        "path": "rule_resources/dnr-safari-ads.json"
+        "path": "rule_resources/dnr-safari.json"
       }
     ]
   },

@@ -35,5 +35,9 @@ version=$(node -p "require('./package.json').version")
 git add ../package-lock.json .
 git commit -m "Release $version"
 
-# Build extension
-npm run start safari
+
+# Clean dist
+rm -rf ./dist
+
+# Open Xcode
+xed xcode
