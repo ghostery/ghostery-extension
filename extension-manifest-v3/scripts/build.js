@@ -62,6 +62,11 @@ if (argv.target.startsWith('safari')) {
   argv.target = 'safari';
 }
 
+// Add background/safari path to assets for Safari target
+if (argv.target === 'safari') {
+  options.assets.push('background/safari');
+}
+
 const config = {
   logLevel: argv.silent ? 'silent' : undefined,
   configFile: false,
