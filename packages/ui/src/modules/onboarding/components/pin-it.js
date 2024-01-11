@@ -49,7 +49,9 @@ export default {
     :host([platform='chrome']) #arrow { right: 92px; }
     :host([platform='edge']) { min-width: 175px;  }
     :host([platform='edge']) #arrow { right: 175px; }
-    :host([platform='opera']) #arrow { right: 60px; }
+
+    :host([platform='opera']) { top: 16px; right: 8px; }
+    :host([platform='opera']) #arrow { right: 22px; }
 
     #icon {
       background: var(--ui-color-white);
