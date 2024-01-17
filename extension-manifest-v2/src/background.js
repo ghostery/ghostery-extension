@@ -81,7 +81,6 @@ const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4.1/versions.json`;
 const ONE_HOUR_MSEC = 3600000;
 const ONE_DAY_MSEC = ONE_HOUR_MSEC * 24;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
-const { onHeadersReceived } = Events;
 
 /**
  * Pulls down latest version.json and triggers
@@ -1038,13 +1037,11 @@ function initialiseWebRequestPipeline() {
 	}
 	// remove ghostery listeners from standard webrequest events
 	chrome.webRequest.onBeforeRequest.removeListener(onBeforeRequest);
-	chrome.webRequest.onHeadersReceived.removeListener(onHeadersReceived);
 
 	// look for steps from other modules which we need to be before
-	const existingSteps = { onBeforeRequest: [], onHeadersReceived: [] };
+	const existingSteps = { onBeforeRequest: [] };
 	if (common.modules.antitracking.isEnabled) {
 		existingSteps.onBeforeRequest.push('common.modules.antitracking.onBeforeRequest');
-		existingSteps.onHeadersReceived.push('common.modules.antitracking.onHeadersReceived');
 	}
 	if (common.modules.adblocker.isEnabled) {
 		existingSteps.onBeforeRequest.push('adblocker');
@@ -1197,7 +1194,6 @@ function addCommonGhosteryAndAntitrackingListeners() {
 		}, []);
 	}
 	chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, { urls: urlFilters }, ['blocking']);
-	chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, { urls: urlFilters }, ['responseHeaders']);
 }
 
 /**
@@ -1250,10 +1246,7 @@ function initializeEventListeners() {
 		]
 	}, ['requestHeaders', 'blocking']);
 
-	// Fires each time that an HTTP(S) response header is received
-	// chrome.webRequest.onHeadersReceived
-
-	// Add onBeforeRequest and onHeadersReceived listeners which are shared by Ghostery and Antitracking
+	// Add onBeforeRequest listeners which are shared by Ghostery and Antitracking
 	addCommonGhosteryAndAntitrackingListeners();
 
 	// Fires when a redirect is about to be executed
