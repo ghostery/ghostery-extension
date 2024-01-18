@@ -40,7 +40,7 @@ function SubscriptionMenu() {
 			</li>
 
 			<li className="s-tabs-title">
-				<a href="https://account.ghostery.com/subscription" target="_blank" rel="noreferrer">
+				<a href="https://www.ghostery.com/account/contribution" target="_blank" rel="noreferrer">
 					<span>{ t('subscription_info') }</span>
 				</a>
 			</li>
