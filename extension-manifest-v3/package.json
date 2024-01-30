@@ -28,7 +28,7 @@
   "devDependencies": {
     "shelljs": "^0.8.5",
     "vite": "^4.5.0",
-    "web-ext": "^7.8.0"
+    "web-ext": "^7.11.0"
   },
   "dependencies": {
     "@cliqz/adblocker": "^1.26.12",
