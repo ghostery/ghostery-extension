@@ -165,9 +165,10 @@ class Settings extends React.Component {
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
 						{ t('settings_opt_in') }
 					</div>
-					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
+					{/* TODO: Uncomment the import/export feature when Firefox Android supports files correctly */}
+					{/* <div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
 						{ t('settings_import_export') }
-					</div>
+					</div> */}
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-help' }); }}>
 						{ t('panel_menu_help') }
 					</div>
