@@ -11,12 +11,11 @@
   "scripts": {
     "postinstall": "vendor-copy && npm run download-trackerdb",
     "start": "web-ext run --target=chromium",
-    "prebuild": "npm run licenses",
     "build.dev": "webpack --mode development --progress",
     "build": "webpack --mode production --progress",
     "build.prod": "npm run build",
     "build.watch": "webpack --mode development --progress --watch",
-    "licenses": "node ../tools/licenses.js",
+    "licenses": "license-report --config=../license-report-config.json > dist/licenses.html",
     "test": "jest",
     "test.watch": "jest --watch",
     "test.snapshot": "jest --updateSnapshot",

@@ -9,7 +9,7 @@
     "start": "npm run build -- --watch",
     "download-engines": "node scripts/download-engines/index.js",
     "download-whotracksme-bloomfilter": "node scripts/download-whotracksme-bloomfilter.js",
-    "licenses": "node ../tools/licenses.js",
+    "licenses": "license-report --config=../license-report-config.json > dist/licenses.html",
     "lint": "eslint src/",
     "test": "npm run lint",
     "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./src/_locales/en/messages.json",
