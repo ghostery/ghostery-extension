@@ -158,7 +158,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 }
 
 // generate license file
-execSync('node ../tools/licenses.js', { stdio: 'inherit' });
+execSync('npm run licenses', { stdio: 'inherit' });
 
 // --- Save manifest ---
 
