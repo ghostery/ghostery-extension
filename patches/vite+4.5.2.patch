@@ -1,7 +1,7 @@
-diff --git a/node_modules/vite/dist/node/chunks/dep-bb8a8339.js b/node_modules/vite/dist/node/chunks/dep-bb8a8339.js
-index 417b6a1..2a7e0f2 100644
---- a/node_modules/vite/dist/node/chunks/dep-bb8a8339.js
-+++ b/node_modules/vite/dist/node/chunks/dep-bb8a8339.js
+diff --git a/node_modules/vite/dist/node/chunks/dep-52909643.js b/node_modules/vite/dist/node/chunks/dep-52909643.js
+index 1881e5b..b03abde 100644
+--- a/node_modules/vite/dist/node/chunks/dep-52909643.js
++++ b/node_modules/vite/dist/node/chunks/dep-52909643.js
 @@ -37775,8 +37775,6 @@ function buildHtmlPlugin(config) {
                      const importee = bundle[file];
                      if (importee?.type === 'chunk' && !seen.has(file)) {
