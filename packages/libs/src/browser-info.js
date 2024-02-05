@@ -1,4 +1,4 @@
-import * as Bowser from 'bowser';
+import Bowser from 'bowser';
 
 // we cache the UA as it used by many modules that need it on file load
 let ua;
