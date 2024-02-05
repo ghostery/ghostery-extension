@@ -29,4 +29,5 @@ module.exports = {
 		'^.+\\.(js|jsx)?$': 'esbuild-jest',
 	},
 	setupFilesAfterEnv: ['./jest.env.js'],
+	transformIgnorePatterns: ['/node_modules/(?!d3|d3-array|internmap|robust-predicates|delaunator)'],
 };
