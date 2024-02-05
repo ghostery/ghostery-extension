@@ -15,7 +15,7 @@
     "build": "webpack --mode production --progress",
     "build.prod": "npm run build",
     "build.watch": "webpack --mode development --progress --watch",
-    "licenses": "license-report --config=../license-report-config.json > dist/licenses.html",
+    "licenses": "license-report --config=../.license-report-config.json > dist/licenses.html",
     "test": "jest",
     "test.watch": "jest --watch",
     "test.snapshot": "jest --updateSnapshot",
