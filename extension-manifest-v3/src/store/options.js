@@ -52,7 +52,7 @@ const Options = {
   },
 
   // Browser icon
-  trackerWheel: true,
+  trackerWheel: __PLATFORM__ === 'safari',
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
   // SERP
@@ -229,9 +229,9 @@ async function migrateFromMV2() {
 
     // Proceed if the storage contains data from v2
     if ('version_history' in storage) {
-      options.blockAds = storage.enable_ad_block || true;
-      options.blockTrackers = storage.enable_anti_tracking || true;
-      options.blockAnnoyances = storage.enable_autoconsent || true;
+      options.blockAds = storage.enable_ad_block ?? true;
+      options.blockTrackers = storage.enable_anti_tracking ?? true;
+      options.blockAnnoyances = storage.enable_autoconsent ?? true;
 
       options.onboarding = {
         done: storage.setup_complete || storage.setup_skip || false,
@@ -241,12 +241,13 @@ async function migrateFromMV2() {
 
       options.terms = storage.setup_complete || false;
 
-      options.wtmSerpReport = storage.enable_wtm_serp_report || true;
+      options.wtmSerpReport = storage.enable_wtm_serp_report ?? true;
 
       options.autoconsent = {
         all: !storage.autoconsent_whitelist,
         allowed: storage.autoconsent_whitelist || [],
         disallowed: storage.autoconsent_blacklist || [],
+        interactions: storage.autoconsent_interactions || 0,
       };
 
       options.paused = storage.site_whitelist.map((domain) => ({
