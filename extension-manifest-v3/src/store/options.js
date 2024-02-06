@@ -52,7 +52,7 @@ const Options = {
   },
 
   // Browser icon
-  trackerWheel: true,
+  trackerWheel: __PLATFORM__ === 'safari',
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
   // SERP
