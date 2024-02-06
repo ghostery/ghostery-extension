@@ -74,11 +74,20 @@ function platformSpecificSettings() {
   console.warn(
     'No matching config found. Falling back to patterns from Chrome Desktop.',
   );
-  return {
+  const settings = {
     ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
     PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
     CHANNEL: 'ghostery',
   };
+
+  if (
+    navigator.userAgent.includes('Opera') &&
+    navigator.userAgent.includes('YaBrowser') // same release channel as Opera
+  ) {
+    settings.CHANNEL = 'opera';
+  }
+
+  return settings;
 }
 
 const COLLECTOR_DIRECT_URL = 'https://anonymous-communication.ghostery.net';
@@ -92,7 +101,6 @@ const config = {
     ...platformSpecificSettings(),
   },
   request: {
-    userAgent: 'ch',
     configUrl: 'https://cdn.ghostery.com/antitracking/config.json',
     remoteWhitelistUrl: 'https://cdn.ghostery.com/antitracking/whitelist/2',
     localWhitelistUrl: '/rule_resources/whotracksme',
