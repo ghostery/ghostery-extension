@@ -11,10 +11,10 @@
   },
   "scripts": {
     "lint": "eslint ./src",
-    "test" : "npm run lint"
+    "test": "npm run lint"
   },
   "dependencies": {
-    "ua-parser-js": "^1.0.2",
+    "bowser": "^2.11.0",
     "webextension-polyfill": "^0.10.0"
   }
 }

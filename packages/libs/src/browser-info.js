@@ -1,4 +1,4 @@
-import parser from 'ua-parser-js';
+import Bowser from 'bowser';
 
 // we cache the UA as it used by many modules that need it on file load
 let ua;
@@ -6,7 +6,7 @@ const getUA = () => {
   if (ua) {
     return ua;
   }
-  ua = parser(navigator.userAgent);
+  ua = Bowser.parse(navigator.userAgent);
   return ua;
 };
 

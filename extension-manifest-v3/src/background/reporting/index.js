@@ -74,11 +74,20 @@ function platformSpecificSettings() {
   console.warn(
     'No matching config found. Falling back to patterns from Chrome Desktop.',
   );
-  return {
+  const settings = {
     ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
     PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
     CHANNEL: 'ghostery',
   };
+
+  if (
+    navigator.userAgent.includes('Opera') &&
+    navigator.userAgent.includes('YaBrowser') // same release channel as Opera
+  ) {
+    settings.CHANNEL = 'opera';
+  }
+
+  return settings;
 }
 
 const COLLECTOR_DIRECT_URL = 'https://anonymous-communication.ghostery.net';
@@ -89,10 +98,11 @@ const config = {
     COLLECTOR_DIRECT_URL,
     COLLECTOR_PROXY_URL,
     CONFIG_URL: 'https://api.ghostery.net/api/v1/config',
+    SAFE_QUORUM_CONFIG_ENDPOINT:
+      'https://safe-browsing-quorum.privacy.ghostery.net/config',
     ...platformSpecificSettings(),
   },
   request: {
-    userAgent: 'ch',
     configUrl: 'https://cdn.ghostery.com/antitracking/config.json',
     remoteWhitelistUrl: 'https://cdn.ghostery.com/antitracking/whitelist/2',
     localWhitelistUrl: '/rule_resources/whotracksme',
@@ -107,6 +117,7 @@ const communication = new AnonymousCommunication({
 const urlReporter = new UrlReporter({
   config: config.url,
   storage: new Storage('reporting'),
+  connectDatabase: prefixedIndexedDBKeyValueStore('reporting'),
   communication,
 });
 let requestReporter = null;
@@ -176,10 +187,6 @@ const setup = asyncSetup([
   }),
 ]);
 
-function delay(timeInMs) {
-  return new Promise((resolve) => setTimeout(resolve, timeInMs));
-}
-
 async function onLocationChange(details) {
   try {
     setup.pending && (await setup.pending);
@@ -220,15 +227,7 @@ async function onLocationChange(details) {
   }
 
   try {
-    const jobRegistered = await urlReporter.analyzeUrl(url);
-    if (jobRegistered) {
-      // TODO: This part here is not robust:
-      // we should avoid timers in MV3 or at least assume that we the service
-      // worker will die (persisting the jobs and shift the scheduling
-      // responsibility into the reporting module itself could help)
-      await delay(2000 + 3000 * Math.random());
-      await urlReporter.processPendingJobs();
-    }
+    await urlReporter.analyzeUrl(url);
   } catch (e) {
     console.warn('Unexpected error in reporting module:', e);
   }
@@ -253,7 +252,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   }
 });
 
-// for debugging service-workers (TODO: provide a way to control logging)
+// for debugging service-workers
 globalThis.ghostery = globalThis.ghostery || {};
 globalThis.ghostery.WTM = {
   communication,
@@ -261,4 +260,5 @@ globalThis.ghostery.WTM = {
   requestReporter,
   config,
   webRequestPipeline,
+  extensionStartedAt: new Date(),
 };

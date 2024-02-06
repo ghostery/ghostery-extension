@@ -9,7 +9,7 @@
     "start": "npm run build -- --watch",
     "download-engines": "node scripts/download-engines/index.js",
     "download-whotracksme-bloomfilter": "node scripts/download-whotracksme-bloomfilter.js",
-    "licenses": "node ../tools/licenses.js",
+    "licenses": "license-report --config=../.license-report-config.json > dist/licenses.html",
     "lint": "eslint src/",
     "test": "npm run lint",
     "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./src/_locales/en/messages.json",
@@ -27,7 +27,7 @@
   "license": "MPL-2.0",
   "devDependencies": {
     "shelljs": "^0.8.5",
-    "vite": "^4.5.0",
+    "vite": "^4.5.2",
     "web-ext": "^7.11.0"
   },
   "dependencies": {
@@ -38,7 +38,7 @@
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",
     "@github/relative-time-element": "^4.3.0",
-    "@whotracksme/webextension-packages": "^4.0.6",
+    "@whotracksme/webextension-packages": "^5.0.0",
     "hybrids": "^8.2.5",
     "idb": "^7.1.1",
     "jwt-decode": "^4.0.0",
