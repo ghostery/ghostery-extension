@@ -367,7 +367,7 @@ class EventHandlers {
 						engine: {
 							...bugDb.engine,
 							match(request) {
-								block = !this.exceptions.match(request);
+								block = !common.modules.adblocker.background.adblocker.manager.engine.exceptions.match(request);
 								return { match: block, redirect: shoudlRedirect && block };
 							},
 						}
