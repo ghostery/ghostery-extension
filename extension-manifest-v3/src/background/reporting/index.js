@@ -18,6 +18,7 @@ import {
   UrlReporter,
   RequestReporter,
   setLogLevel,
+  describeLoggers,
 } from '@whotracksme/webextension-packages/packages/reporting';
 import { getBrowserInfo } from '@ghostery/libs';
 
@@ -33,7 +34,21 @@ const webRequestPipeline = new WebRequestPipeline();
 // Important to call it in a first tick as it assigns chrome. listeners
 webRequestPipeline.init();
 
-setLogLevel('debug');
+(async () => {
+  try {
+    const key = 'ghosteryReportingLoggerConfig';
+    const { [key]: config } = (await chrome.storage.local.get(key)) || {};
+    if (config) {
+      for (const { level, prefix = '*' } of config) {
+        setLogLevel(level, { prefix });
+      }
+    } else {
+      setLogLevel('off');
+    }
+  } catch (e) {
+    console.warn('Failed to apply logger overwrites', e);
+  }
+})();
 
 function platformSpecificSettings() {
   if (
@@ -261,4 +276,8 @@ globalThis.ghostery.WTM = {
   config,
   webRequestPipeline,
   extensionStartedAt: new Date(),
+  logging: {
+    setLogLevel,
+    describeLoggers,
+  },
 };
