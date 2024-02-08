@@ -308,7 +308,8 @@ class EventHandlers {
 		const incognito = tabInfo.getTabInfo(tab_id, 'incognito');
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
-		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+		// eslint-disable-next-line prefer-const
+		let { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
 		if (!block && [BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_GLOBAL_UNBLOCKED].indexOf(reason) > -1) {
 			// The way to pass this flag to Common handlers
 			eventMutable.ghosteryWhitelisted = true;
@@ -328,24 +329,6 @@ class EventHandlers {
 			};
 		}
 
-		// process the tracker asynchronously
-		// very important to block request processing as little as necessary
-		setTimeout(() => {
-			if (tabInfo.getTabInfo(tab_id, 'url') !== eventMutable.tabUrl) {
-				return;
-			}
-			this._processBug({
-				bug_id,
-				app_id,
-				type: eventMutable.type,
-				url: eventMutable.url,
-				block: conf.enable_ad_block && block,
-				tab_id,
-				from_frame: eventMutable.parentFrameId !== -1,
-				request_id
-			});
-		}, 1);
-
 		if (block && isFilterMatched && conf.show_redirect_tracking_dialogs && fromRedirect) {
 			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(request_id), app_id);
 			setTimeout(() => {
@@ -356,9 +339,10 @@ class EventHandlers {
 
 		// This is here to let common/adblocker handle previously TrackerDB matched requests as
 		// if it would do it with its own engine.
+		let adblockerOnBeforeRequest;
 		if (conf.enable_ad_block && block && isFilterMatched) {
 			// let the Tracker Db do the blocking according to ghostery-common/adblocker logic
-			const onBeforeRequest = common.modules.adblocker.background.adblocker.onBeforeRequest.bind({
+			adblockerOnBeforeRequest = common.modules.adblocker.background.adblocker.onBeforeRequest.bind({
 				shouldProcessRequest(context, _response) {
 					// Ignore background requests
 					if (context.isBackgroundRequest()) {
@@ -382,18 +366,37 @@ class EventHandlers {
 					manager: {
 						engine: {
 							...bugDb.engine,
-							match() {
-								return { match: true, redirect: shoudlRedirect };
+							match(request) {
+								block = !this.exceptions.match(request);
+								return { match: block, redirect: shoudlRedirect && block };
 							},
 						}
 					}
 				}),
 				stats: common.modules.adblocker.background.adblocker.stats,
 			});
+		}
 
-			if (!onBeforeRequest(eventMutable, response)) {
-				return {};
+		// process the tracker asynchronously
+		// very important to block request processing as little as necessary
+		setTimeout(() => {
+			if (tabInfo.getTabInfo(tab_id, 'url') !== eventMutable.tabUrl) {
+				return;
 			}
+			this._processBug({
+				bug_id,
+				app_id,
+				type: eventMutable.type,
+				url: eventMutable.url,
+				block: conf.enable_ad_block && block,
+				tab_id,
+				from_frame: eventMutable.parentFrameId !== -1,
+				request_id
+			});
+		}, 1);
+
+		if (adblockerOnBeforeRequest && !adblockerOnBeforeRequest(eventMutable, response)) {
+			return {};
 		}
 
 		return { cancel: false };
