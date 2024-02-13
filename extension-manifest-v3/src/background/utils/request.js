@@ -12,6 +12,24 @@
 import { Request } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 
+const PARSE_CACHE_LIMIT = 1000;
+const parseCache = new Map();
+
+function parseWithCache(url) {
+  if (parseCache.has(url)) {
+    return parseCache.get(url);
+  }
+
+  if (parseCache.size > PARSE_CACHE_LIMIT) {
+    parseCache.clear();
+  }
+
+  const parsed = parse(url);
+  parseCache.set(url, parsed);
+
+  return parsed;
+}
+
 export default class ExtendedRequest extends Request {
   static fromRequestDetails(details) {
     const isMainFrame = details.type === 'main_frame';
@@ -19,8 +37,8 @@ export default class ExtendedRequest extends Request {
       ? details.url
       : details.originUrl || details.documentUrl || '';
 
-    const parsedUrl = parse(details.url);
-    const parsedSourceUrl = isMainFrame ? parsedUrl : parse(sourceUrl);
+    const parsedUrl = parseWithCache(details.url);
+    const parsedSourceUrl = isMainFrame ? parsedUrl : parseWithCache(sourceUrl);
 
     return new ExtendedRequest({
       requestId: details.requestId,
@@ -76,7 +94,7 @@ export default class ExtendedRequest extends Request {
     }
 
     if (url) {
-      const parsedUrl = parse(url);
+      const parsedUrl = parseWithCache(url);
       return parsedUrl.domain === domain || parsedUrl.hostname === domain;
     }
 
