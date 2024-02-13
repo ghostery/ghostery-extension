@@ -12,6 +12,24 @@
 import { Request } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 
+const PARSE_CACHE_LIMIT = 1000;
+const parseCache = new Map();
+
+function parseWithCache(url) {
+  if (parseCache.has(url)) {
+    return parseCache.get(url);
+  }
+
+  if (parseCache.size > PARSE_CACHE_LIMIT) {
+    parseCache.clear();
+  }
+
+  const parsed = parse(url);
+  parseCache.set(url, parsed);
+
+  return parsed;
+}
+
 export default class ExtendedRequest extends Request {
   static fromRequestDetails(details) {
     const isMainFrame = details.type === 'main_frame';
@@ -19,8 +37,8 @@ export default class ExtendedRequest extends Request {
       ? details.url
       : details.originUrl || details.documentUrl || '';
 
-    const parsedUrl = parse(details.url);
-    const parsedSourceUrl = isMainFrame ? parsedUrl : parse(sourceUrl);
+    const parsedUrl = parseWithCache(details.url);
+    const parsedSourceUrl = isMainFrame ? parsedUrl : parseWithCache(sourceUrl);
 
     return new ExtendedRequest({
       requestId: details.requestId,
@@ -53,27 +71,31 @@ export default class ExtendedRequest extends Request {
     this.sourceHostname = data.sourceHostname;
   }
 
-  isFromOriginUrl(url) {
+  isFromDomain(domain) {
     const { frameAncestors } = this._originalRequestDetails;
 
+    let url = '';
+
     /* Firefox APIs */
-
     if (frameAncestors && frameAncestors.length > 0) {
-      return url === frameAncestors[frameAncestors.length - 1].url;
+      url = frameAncestors[frameAncestors.length - 1].url;
+    } else if (this.sourceUrl) {
+      url = this.sourceUrl;
+    } else {
+      /* Chrome APIs */
+
+      const { frameType, initiator } = this._originalRequestDetails;
+
+      // For frameType 'sub_frame', we can't determine the origin URL
+      // as it might be the iframe itself or any of its ancestors
+      if (frameType === 'outermost_frame' && initiator) {
+        url = initiator;
+      }
     }
 
-    if (this.sourceUrl) {
-      return url === this.sourceUrl;
-    }
-
-    /* Chrome APIs */
-
-    const { frameType, initiator } = this._originalRequestDetails;
-
-    // For frameType 'sub_frame', we can't determine the origin URL
-    // as it might be the iframe itself or any of its ancestors
-    if (frameType === 'outermost_frame' && initiator) {
-      return url.startsWith(initiator);
+    if (url) {
+      const parsedUrl = parseWithCache(url);
+      return parsedUrl.domain === domain || parsedUrl.hostname === domain;
     }
 
     // As a fallback, we assume that the request is from the origin URL
