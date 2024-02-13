@@ -15,9 +15,6 @@ function scrollToTop({ main }) {
   main.scrollTop = 0;
 }
 
-const isAndroidFirefoxBrowser =
-  !!navigator?.userAgent.match(/Android.*Firefox/);
-
 export default {
   main: ({ render }) => render().querySelector('main'),
   render: () =>
@@ -153,7 +150,5 @@ export default {
         margin: 0 auto;
       }
     }
-  `.style(
-      isAndroidFirefoxBrowser && /*css*/ `:host { height: calc(100% - 60px); }`,
-    ),
+  `,
 };
