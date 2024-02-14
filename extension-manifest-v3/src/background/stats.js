@@ -17,7 +17,7 @@ import { order } from '@ghostery/ui/categories';
 import DailyStats from '/store/daily-stats.js';
 import Options, { observe } from '/store/options.js';
 
-import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
+import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
 
 import Request from './utils/request.js';
@@ -38,10 +38,7 @@ function setBadgeColor(color = '#3f4146' /* gray-600 */) {
 }
 
 observe('terms', async (terms) => {
-  if (
-    !terms ||
-    (__PLATFORM__ === 'opera' && (await shouldShowOperaSerpAlert()))
-  ) {
+  if (!terms) {
     await chromeAction.setBadgeText({ text: '!' });
     setBadgeColor('#f13436' /* danger-500 */);
   } else {
@@ -52,6 +49,12 @@ observe('terms', async (terms) => {
 
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
+
+  if (options.terms && __PLATFORM__ === 'opera') {
+    shouldSetDangerBadgeForTabId(tabId).then((danger) => {
+      setBadgeColor(danger ? '#f13436' /* danger-500 */ : undefined);
+    });
+  }
 
   const stats = tabStats.get(tabId);
   if (!stats) return;
