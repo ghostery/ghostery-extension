@@ -77,8 +77,34 @@ export async function showOperaSerpNotification(tabId) {
 }
 
 export async function shouldShowOperaSerpAlert() {
-  if (await isSerpSupported()) return false;
-
   const options = await store.resolve(Options);
-  return options.onboarding.serpShown < NOTIFICATION_SHOW_LIMIT;
+  if (options.onboarding.serpShown < NOTIFICATION_SHOW_LIMIT) {
+    if (await isSerpSupported()) {
+      store.set(options, {
+        onboarding: { serpShown: NOTIFICATION_SHOW_LIMIT },
+      });
+      return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
+export async function shouldSetDangerBadgeForTabId(tabId) {
+  const options = await store.resolve(Options);
+
+  if (options.onboarding.serpShown < NOTIFICATION_SHOW_LIMIT) {
+    try {
+      await chrome.scripting.insertCSS({
+        target: { tabId },
+        css: '',
+      });
+
+      return false;
+    } catch (e) {
+      return true;
+    }
+  }
 }
