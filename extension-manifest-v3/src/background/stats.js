@@ -50,7 +50,7 @@ observe('terms', async (terms) => {
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
 
-  if (options.terms && __PLATFORM__ === 'opera') {
+  if (__PLATFORM__ === 'opera' && options.terms) {
     shouldSetDangerBadgeForTabId(tabId).then((danger) => {
       setBadgeColor(danger ? '#f13436' /* danger-500 */ : undefined);
     });
@@ -245,6 +245,7 @@ function setupTabStats(tabId, request) {
   if (request.isHttp || request.isHttps) {
     tabStats.set(tabId, {
       domain: request.domain || request.hostname,
+      url: request.url,
       trackers: [],
     });
   } else {
