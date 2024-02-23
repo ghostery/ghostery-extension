@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, router, dispatch } from 'hybrids';
+import { html, msg, dispatch } from 'hybrids';
 
 function closeIframe(host) {
   dispatch(host, 'closeiframe', {
@@ -21,25 +21,25 @@ function closeIframe(host) {
 export default {
   enabled: false,
   content: ({ enabled }) => html`
-    <template layout="column margin:3 gap:4">
-      <div layout="column items:center gap margin:0:5">
-        <ui-text type="display-s" layout="block:center">
-          ${enabled
-            ? msg`Never-Consent is Enabled`
-            : msg`Never-Consent is Disabled`}
-        </ui-text>
-        <ui-text layout="block:center">
-          ${msg.html`You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>.`}
-        </ui-text>
-      </div>
-      <div layout="grid:2 gap:2">
-        <ui-button type="outline" size="small">
-          <a href="${router.backUrl()}">Back</a>
-        </ui-button>
-        <ui-button type="primary" size="small">
-          <button onclick="${closeIframe}">OK</button>
-        </ui-button>
-      </div>
+    <template layout="block">
+      <ui-autoconsent-card layout="row padding:2 padding:right:4 gap:2">
+        <ui-icon name="ghosty" color="primary-500" layout="size:4"></ui-icon>
+        <div layout="column gap:1.5">
+          <div layout="column gap">
+            <ui-text type="display-s">
+              ${enabled
+                ? msg`Never-Consent is Enabled`
+                : msg`Never-Consent is Disabled`}
+            </ui-text>
+            <ui-text>
+              ${msg.html`You can always change these settings in the&nbsp;<strong>Ghostery control panel</strong>.`}
+            </ui-text>
+          </div>
+          <ui-button type="outline" size="small">
+            <button onclick="${closeIframe}">OK</button>
+          </ui-button>
+        </div>
+      </ui-autoconsent-card>
     </template>
   `,
 };

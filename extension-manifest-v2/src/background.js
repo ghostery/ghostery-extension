@@ -573,11 +573,9 @@ function onMessageHandler(request, sender, callback) {
 			if (message.url) {
 				conf.autoconsent_whitelist = (conf.autoconsent_whitelist || []).concat(message.url);
 				conf.autoconsent_blacklist = conf.autoconsent_blacklist || [];
-				conf.autoconsent_interactions += 1;
 			} else {
 				conf.autoconsent_whitelist = false;
 				conf.autoconsent_blacklist = false;
-				conf.autoconsent_interactions = 0;
 			}
 
 			account.saveUserSettings().catch(err => log('Background autoconsent', err));
@@ -588,12 +586,10 @@ function onMessageHandler(request, sender, callback) {
 			if (message.url) {
 				conf.autoconsent_whitelist = conf.autoconsent_whitelist || [];
 				conf.autoconsent_blacklist = (conf.autoconsent_blacklist || []).concat(message.url);
-				conf.autoconsent_interactions += 1;
 			} else {
 				conf.enable_autoconsent = false;
 				conf.autoconsent_whitelist = [];
 				conf.autoconsent_blacklist = [];
-				conf.autoconsent_interactions = 0;
 			}
 
 			account.saveUserSettings().catch(err => log('Background autoconsent', err));

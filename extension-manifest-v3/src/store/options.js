@@ -48,7 +48,6 @@ const Options = {
     all: false,
     allowed: [String],
     disallowed: [String],
-    interactions: 0,
   },
 
   // Browser icon
@@ -247,7 +246,6 @@ async function migrateFromMV2() {
         all: !storage.autoconsent_whitelist,
         allowed: storage.autoconsent_whitelist || [],
         disallowed: storage.autoconsent_blacklist || [],
-        interactions: storage.autoconsent_interactions || 0,
       };
 
       options.paused = storage.site_whitelist.map((domain) => ({

@@ -24,7 +24,7 @@ if (document.contentType === 'text/html') {
 				if (shownIframe) return false;
 
 				showIframe(chrome.runtime.getURL(
-					`app/templates/autoconsent.html?host=${encodeURIComponent(msg.domain)}&default=${msg.defaultForAll ? 'all' : ''}`
+					`app/templates/autoconsent.html?host=${encodeURIComponent(msg.domain)}`
 				));
 				shownIframe = true;
 
