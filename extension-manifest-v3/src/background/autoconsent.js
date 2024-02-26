@@ -99,9 +99,7 @@ async function openIframe(msg, tabId) {
 
     sendShowIframeMessage(
       tabId,
-      `pages/autoconsent/index.html?host=${encodeURIComponent(
-        domain,
-      )}&default=${autoconsent.interactions >= 2 ? 'all' : ''}`,
+      `pages/autoconsent/index.html?host=${encodeURIComponent(domain)}`,
     );
   }
 }

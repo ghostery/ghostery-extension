@@ -28,10 +28,7 @@ export default {
   },
   content: ({ stack, categories }) => html`
     <template layout="grid::min|1|min">
-      <ui-autoconsent-card oncloseiframe="${closeIframe}">
-        <ui-autoconsent-header></ui-autoconsent-header>
-        ${stack}
-      </ui-autoconsent-card>
+      <div oncloseiframe="${closeIframe}">${stack}</div>
       ${router.active(Home) &&
       html`
         <ui-autoconsent-card layout="margin:top:0.5">

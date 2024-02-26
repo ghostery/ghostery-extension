@@ -604,10 +604,6 @@ class PanelData {
 			syncSetDataChanged = true;
 		}
 
-		if (data.hasOwnProperty('enable_autoconsent')) {
-			conf.autoconsent_interactions = 0;
-		}
-
 		if (syncSetDataChanged) {
 			// TODO: skip it if the user is not logged in (to avoid errors in the debug logs)
 			account.saveUserSettings().catch((err) => {

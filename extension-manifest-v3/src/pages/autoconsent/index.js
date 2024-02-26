@@ -24,13 +24,12 @@ async function enable(_, event) {
   const options = await store.resolve(Options);
   const { all } = event.detail;
 
-  let { allowed, disallowed, interactions } = options.autoconsent;
+  let { allowed, disallowed } = options.autoconsent;
 
   if (all) {
     allowed = [];
     disallowed = [];
   } else {
-    interactions += 1;
     allowed = allowed.includes(hostname) ? allowed : allowed.concat(hostname);
     disallowed = disallowed.filter((h) => h !== hostname);
   }
@@ -41,7 +40,6 @@ async function enable(_, event) {
       all,
       allowed,
       disallowed,
-      interactions,
     },
   });
 }
@@ -54,14 +52,12 @@ async function disable(_, event) {
   const options = await store.resolve(Options);
   const { all } = event.detail;
 
-  let { disallowed, allowed, interactions } = options.autoconsent;
+  let { disallowed, allowed } = options.autoconsent;
 
   if (all) {
     disallowed = [];
     allowed = [];
-    interactions = 0;
   } else {
-    interactions += 1;
     disallowed = disallowed.includes(hostname)
       ? disallowed
       : disallowed.concat(hostname);
@@ -69,7 +65,7 @@ async function disable(_, event) {
 
   store.set(Options, {
     blockAnnoyances: !all,
-    autoconsent: { allowed, disallowed, interactions },
+    autoconsent: { allowed, disallowed },
   });
 }
 
