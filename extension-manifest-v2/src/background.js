@@ -199,19 +199,19 @@ function reloadTab(data) {
 	if (data && data.tab_id) {
 		utils.getTab(data.tab_id, (tab) => {
 			if (tab && tab.url) {
-				chrome.tabs.update(tab.id, { url: tab.url });
+				chrome.tabs.reload(tab.id);
 			}
 		}, () => {
 			utils.getActiveTab((tab) => {
 				if (tab && tab.url) {
-					chrome.tabs.update(tab.id, { url: tab.url });
+					chrome.tabs.reload(tab.id);
 				}
 			});
 		});
 	} else {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.url) {
-				chrome.tabs.update(tab.id, { url: tab.url });
+				chrome.tabs.reload(tab.id);
 			}
 		});
 	}
