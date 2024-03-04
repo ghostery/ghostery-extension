@@ -242,7 +242,39 @@ async function migrateFromMV2() {
 
       options.installDate = storage.install_date || '';
 
+      // Clear the storage
       await chrome.storage.local.clear();
+
+      try {
+        // Keep for the future use global and site specific tracker block/unblock lists
+        const trackers = storage.bugs.apps;
+        const optionsFromV8 = {
+          selectedTrackers: Object.keys(storage.selected_app_ids).map(
+            (id) => trackers[id].trackerID,
+          ),
+          siteSpecificBlocks: Object.entries(storage.site_specific_blocks).map(
+            ([domain, ids]) => {
+              return {
+                domain,
+                trackers: ids.map((id) => trackers[id].trackerID),
+              };
+            },
+          ),
+          siteSpecificUnblocks: Object.entries(
+            storage.site_specific_unblocks,
+          ).map(([domain, ids]) => {
+            return {
+              domain,
+              trackers: ids.map((id) => trackers[id].trackerID),
+            };
+          }),
+        };
+
+        // Save options for the future use
+        await chrome.storage.local.set({ optionsFromV8 });
+      } catch (e) {
+        console.error(`Error while migrating site specific tracker lists: `, e);
+      }
 
       // Delete indexedDBs
       // Notice: Doesn't wait to avoid blocking the migrated options
