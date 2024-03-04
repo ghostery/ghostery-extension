@@ -54,13 +54,11 @@ export async function showOperaSerpNotification(tabId) {
   try {
     if (await isSerpSupported()) return;
 
-    const { autoconsent, onboarding } = await store.resolve(Options);
+    const { onboarding } = await store.resolve(Options);
 
     if (
       // Onboarding is not "done"
       !onboarding.done ||
-      // Autoconsent setup not complete
-      (!autoconsent.all && autoconsent.allowed.length === 0) ||
       // The notification was already shown maximum times
       onboarding.serpShown >= NOTIFICATION_SHOW_LIMIT ||
       // The notification was already shown recently

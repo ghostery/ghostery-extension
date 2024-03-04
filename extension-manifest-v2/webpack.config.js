@@ -31,7 +31,6 @@ const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const TRACKERS_PREVIEW_DIR = path.resolve(__dirname, 'app/trackers-preview');
-const AUTOCONSENT_DIR = path.resolve(__dirname, 'app/autoconsent');
 const RENEW_DIR = path.resolve(__dirname, 'app/renew');
 const YOUTUBE_DIR = path.resolve(__dirname, 'app/youtube');
 
@@ -83,7 +82,6 @@ module.exports = {
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
 		trackers_preview: [`${TRACKERS_PREVIEW_DIR}/index.js`],
 		trackers_preview_content_script: [`${CONTENT_SCRIPTS_DIR}/trackers-preview.js`],
-		autoconsent: [`${AUTOCONSENT_DIR}/index.js`],
 		renew: [`${RENEW_DIR}/index.js`],
 		youtube: [`${YOUTUBE_DIR}/index.js`],
 		youtube_content_script: [`${CONTENT_SCRIPTS_DIR}/youtube.js`],

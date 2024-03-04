@@ -305,7 +305,6 @@
 	"web_accessible_resources": [
 		"app/images/*",
 		"app/templates/trackers-preview.html",
-		"app/templates/autoconsent.html",
 		"app/templates/youtube.html",
 		"app/templates/renew.html"
 	]

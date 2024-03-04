@@ -14,26 +14,20 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
-import { sendShowIframeMessage } from '/utils/iframe.js';
 
 async function getTabDomain(tabId) {
   return parse((await chrome.tabs.get(tabId)).url).domain;
 }
 
 async function initialize(msg, tabId, frameId) {
-  const { terms, blockAnnoyances, autoconsent, paused } = await store.resolve(
-    Options,
-  );
+  const { terms, blockAnnoyances, paused } = await store.resolve(Options);
   const domain = await getTabDomain(tabId);
 
   if (
     terms &&
     blockAnnoyances &&
-    !autoconsent.disallowed.includes(domain) &&
     (!paused || !paused.some(({ id }) => id === domain))
   ) {
-    const optOut = autoconsent.all || autoconsent.allowed.includes(domain);
-
     chrome.tabs.sendMessage(
       tabId,
       {
@@ -42,9 +36,9 @@ async function initialize(msg, tabId, frameId) {
         rules,
         config: {
           enabled: true,
-          autoAction: optOut ? 'optOut' : '',
+          autoAction: 'optOut',
           disabledCmps: [],
-          enablePrehide: optOut,
+          enablePrehide: true,
           detectRetries: 20,
         },
       },
@@ -87,23 +81,6 @@ async function evalCode(code, id, tabId, frameId) {
   );
 }
 
-async function openIframe(msg, tabId) {
-  const { autoconsent } = await store.resolve(Options);
-  if (autoconsent.all) return;
-
-  const domain = await getTabDomain(tabId);
-  if (domain) {
-    if (autoconsent.allowed.includes(domain)) {
-      return;
-    }
-
-    sendShowIframeMessage(
-      tabId,
-      `pages/autoconsent/index.html?host=${encodeURIComponent(domain)}`,
-    );
-  }
-}
-
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action !== 'autoconsent') return;
   if (!sender.tab) return;
@@ -116,9 +93,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       return initialize(msg, tabId, frameId);
     case 'eval':
       return evalCode(msg.code, msg.id, tabId, frameId);
-    case 'cmpDetected':
-      openIframe(msg, tabId);
-      return false;
     default:
       break;
   }

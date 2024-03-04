@@ -23,8 +23,6 @@ async function getTabDomain(tabId) {
 async function initialize(msg, tabId, frameId) {
 	const {
 		enable_autoconsent,
-		autoconsent_whitelist,
-		autoconsent_blacklist,
 		site_whitelist,
 	} = conf;
 
@@ -34,12 +32,9 @@ async function initialize(msg, tabId, frameId) {
 
 	const domain = await getTabDomain(tabId);
 
-	if ((autoconsent_blacklist && autoconsent_blacklist.includes(domain)) || site_whitelist.some(s => s.includes(domain))) {
+	if (site_whitelist.some(s => s.includes(domain))) {
 		return;
 	}
-
-	const globallyEnabled = !autoconsent_whitelist;
-	const optOut = globallyEnabled || autoconsent_whitelist.includes(domain);
 
 	chrome.tabs.sendMessage(
 		tabId,
@@ -49,9 +44,9 @@ async function initialize(msg, tabId, frameId) {
 			rules,
 			config: {
 				enabled: true,
-				autoAction: optOut ? 'optOut' : '',
+				autoAction: 'optOut',
 				disabledCmps: [],
-				enablePrehide: optOut,
+				enablePrehide: true,
 				detectRetries: 20,
 			},
 		},
@@ -88,27 +83,6 @@ async function evalCode(code, id, tabId, frameId) {
 	);
 }
 
-async function openIframe(msg, tabId) {
-	const { autoconsent_whitelist } = conf;
-	if (!autoconsent_whitelist) return;
-
-	const domain = await getTabDomain(tabId);
-
-	if (autoconsent_whitelist.includes(domain)) {
-		return;
-	}
-
-	chrome.tabs.sendMessage(
-		tabId,
-		{
-			action: 'autoconsent',
-			type: 'openIframe',
-			domain,
-		},
-		{ frameId: 0 },
-	);
-}
-
 chrome.runtime.onMessage.addListener((msg, sender) => {
 	if (msg.action !== 'autoconsent') return false;
 	if (!sender.tab) return false;
@@ -121,9 +95,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 			return initialize(msg, tabId, frameId);
 		case 'eval':
 			return evalCode(msg.code, msg.id, tabId, frameId);
-		case 'cmpDetected':
-			openIframe(msg, tabId);
-			return false;
 		default:
 			return false;
 	}

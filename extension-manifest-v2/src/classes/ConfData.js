@@ -134,8 +134,6 @@ class ConfData {
 
 			// Complex props
 			_initProperty('account', null);
-			_initProperty('autoconsent_whitelist', []);
-			_initProperty('autoconsent_blacklist', []);
 			_initProperty('bugs', {});
 			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);
