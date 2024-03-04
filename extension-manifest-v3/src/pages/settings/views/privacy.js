@@ -42,7 +42,6 @@ const PREVIEWS = {
 function toggleNeverConsent({ options }) {
   store.set(options, {
     blockAnnoyances: !options.blockAnnoyances,
-    autoconsent: null,
   });
 }
 

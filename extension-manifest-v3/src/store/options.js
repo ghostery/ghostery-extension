@@ -43,13 +43,6 @@ const Options = {
   blockTrackers: true,
   blockAnnoyances: true,
 
-  // Never-consent popup
-  autoconsent: {
-    all: false,
-    allowed: [String],
-    disallowed: [String],
-  },
-
   // Browser icon
   trackerWheel: __PLATFORM__ === 'safari',
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
@@ -242,12 +235,6 @@ async function migrateFromMV2() {
 
       options.wtmSerpReport = storage.enable_wtm_serp_report ?? true;
 
-      options.autoconsent = {
-        all: !storage.autoconsent_whitelist,
-        allowed: storage.autoconsent_whitelist || [],
-        disallowed: storage.autoconsent_blacklist || [],
-      };
-
       options.paused = storage.site_whitelist.map((domain) => ({
         id: domain,
         revokeAt: 0,
@@ -274,7 +261,6 @@ async function migrateFromMV2() {
         'onboarding',
         'terms',
         'wtmSerpReport',
-        'autoconsent',
         'paused',
         'installDate',
       ]);

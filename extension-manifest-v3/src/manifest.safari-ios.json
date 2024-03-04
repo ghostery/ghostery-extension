@@ -106,7 +106,6 @@
     "content_scripts/trackers-preview.js",
     "content_scripts/prevent-serp-tracking.js",
     "pages/trackers-preview/index.html",
-    "pages/autoconsent/index.html",
     "pages/onboarding/index.html",
     "pages/onboarding/iframe.html",
     "pages/youtube/index.html"
