@@ -567,36 +567,6 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	}
-	if (origin === 'autoconsent') {
-		if (name === 'enable') {
-			conf.enable_autoconsent = true;
-			if (message.url) {
-				conf.autoconsent_whitelist = (conf.autoconsent_whitelist || []).concat(message.url);
-				conf.autoconsent_blacklist = conf.autoconsent_blacklist || [];
-			} else {
-				conf.autoconsent_whitelist = false;
-				conf.autoconsent_blacklist = false;
-			}
-
-			account.saveUserSettings().catch(err => log('Background autoconsent', err));
-
-			return false;
-		}
-		if (name === 'disable') {
-			if (message.url) {
-				conf.autoconsent_whitelist = conf.autoconsent_whitelist || [];
-				conf.autoconsent_blacklist = (conf.autoconsent_blacklist || []).concat(message.url);
-			} else {
-				conf.enable_autoconsent = false;
-				conf.autoconsent_whitelist = [];
-				conf.autoconsent_blacklist = [];
-			}
-
-			account.saveUserSettings().catch(err => log('Background autoconsent', err));
-
-			return false;
-		}
-	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
 	if (name === 'getTabInfo') {

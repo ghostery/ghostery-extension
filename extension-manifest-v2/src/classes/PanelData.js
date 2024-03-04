@@ -598,12 +598,6 @@ class PanelData {
 			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
 		}
 
-		if (data.enable_autoconsent === false) {
-			conf.autoconsent_whitelist = [];
-			conf.autoconsent_blacklist = [];
-			syncSetDataChanged = true;
-		}
-
 		if (syncSetDataChanged) {
 			// TODO: skip it if the user is not logged in (to avoid errors in the debug logs)
 			account.saveUserSettings().catch((err) => {
