@@ -12,13 +12,6 @@
 import { html } from 'hybrids';
 import { openTabWithUrl } from '/utils/tabs.js';
 
-function close(host, event) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  host.parentNode.removeChild(host);
-}
-
 export default {
   icon: '',
   href: '',
@@ -43,17 +36,6 @@ export default {
               <slot name="action"></slot>
             </ui-text>
           </div>
-          <ui-action>
-            <button
-              id="close"
-              onclick="${close}"
-              layout="margin:-2 self:start shrink:0 padding"
-            >
-              <div layout="row center size:3">
-                <ui-icon name="close" layout="size:2"></ui-icon>
-              </div>
-            </button>
-          </ui-action>
         </a>
       </ui-action>
     </template>
