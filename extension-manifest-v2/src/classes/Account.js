@@ -327,21 +327,8 @@ class Account {
 	 */
 	buildUserSettings = () => {
 		const settings = {};
-		const now = Date.now();
 		SYNC_SET.forEach((key) => {
-			// Whenever we prepare data to be sent out
-			// we have to convert these two parameters to objects
-			// so that they may be imported by pre-8.2 version
-			if (key === 'reload_banner_status' ||
-				key === 'trackers_banner_status') {
-				settings[key] = {
-					dismissals: [],
-					show_time: now,
-					show: conf[key]
-				};
-			} else {
-				settings[key] = conf[key];
-			}
+			settings[key] = conf[key];
 		});
 		return settings;
 	};
