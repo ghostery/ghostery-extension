@@ -10,6 +10,7 @@
  */
 
 import { html, msg, router, dispatch } from 'hybrids';
+import { getStats } from '@ghostery/trackers-preview/page_scripts';
 
 function openTabWithUrl(host, event) {
   if (chrome.tabs?.create) {
@@ -51,6 +52,8 @@ export default {
       ),
   },
   domain: '',
+  wtmLink: ({ domain }) =>
+    domain && getStats(domain).then(({ stats }) => !!stats.length),
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -66,6 +69,7 @@ export default {
     categoryList,
     trackers,
     domain,
+    wtmLink,
     type,
     dialog,
     label,
@@ -82,21 +86,27 @@ export default {
             <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
           </ui-tooltip>
         </div>
-        ${domain &&
-        html`
-          <ui-tooltip position="bottom">
-            <span slot="content">WhoTracks.Me Statistical Report</span>
-            <ui-panel-action>
-              <a
-                href="https://www.whotracks.me/websites/${domain}.html"
-                onclick="${openTabWithUrl}"
-                target="_blank"
-              >
-                <ui-icon name="whotracksme"></ui-icon>
-              </a>
-            </ui-panel-action>
-          </ui-tooltip>
-        `}
+        ${wtmLink &&
+        html.resolve(
+          wtmLink.then(
+            (link) =>
+              link &&
+              html`
+                <ui-tooltip position="bottom">
+                  <span slot="content">WhoTracks.Me Statistical Report</span>
+                  <ui-panel-action>
+                    <a
+                      href="https://www.whotracks.me/websites/${domain}.html"
+                      onclick="${openTabWithUrl}"
+                      target="_blank"
+                    >
+                      <ui-icon name="whotracksme"></ui-icon>
+                    </a>
+                  </ui-panel-action>
+                </ui-tooltip>
+              `,
+          ),
+        )}
         ${trackers &&
         html`
           <ui-panel-action-group>
