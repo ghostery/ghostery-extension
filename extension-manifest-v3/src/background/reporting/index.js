@@ -134,6 +134,7 @@ const urlReporter = new UrlReporter({
   storage: new Storage('reporting'),
   connectDatabase: prefixedIndexedDBKeyValueStore('reporting'),
   communication,
+  browserInfoProvider: getBrowserInfo.getRawBrowserInfo,
 });
 let requestReporter = null;
 let pausedDomains = [];
