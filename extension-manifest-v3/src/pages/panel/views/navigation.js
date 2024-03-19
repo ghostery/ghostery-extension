@@ -15,6 +15,8 @@ import Session from '/store/session.js';
 import { SIGNON_PAGE_URL } from '/utils/api.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
+import assets from '/pages/settings/assets/index.js';
+
 const MENU = [
   {},
   {
@@ -109,6 +111,34 @@ export default {
                 `
               : html`<ui-line></ui-line>`,
           )}
+        `}
+        ${session.contributor &&
+        html`
+          <ui-action>
+            <a
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@gh-settings-account',
+              )}"
+              onclick="${openTabWithUrl}"
+            >
+              <gh-panel-navigation-card
+                layout="row gap:1.5 items:center margin:1.5"
+              >
+                <img
+                  src="${assets['contributor_badge']}"
+                  layout="size:12"
+                  alt="Contribution"
+                />
+                <div>
+                  <ui-text type="label-l">You are awesome!</ui-text>
+                  <ui-text type="body-s" color="gray-600">
+                    Thank you for your support in Ghostery's fight for a web
+                    where privacy is a basic human right!
+                  </ui-text>
+                </div>
+              </gh-panel-navigation-card>
+            </a>
+          </ui-action>
         `}
       </div>
     </template>
