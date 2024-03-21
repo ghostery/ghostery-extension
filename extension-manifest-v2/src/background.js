@@ -1546,19 +1546,10 @@ function purgeObsoleteData() {
 }
 
 async function initializeAccount() {
-	let lastStep = 'start';
-	const timeout = setTimeout(() => {
-		const error = new Error(`account init timeout after step: ${lastStep}`);
-		error.name = 'AccountTimeoutError';
-		ErrorReporter.captureException(error);
-		alwaysLog(error);
-	}, 5000);
-
 	try {
 		try {
 			// try to get user session from ghostery.com cookie
 			await account.getUser();
-			lastStep = 'getUser';
 		} catch (e) {
 			// expected if the user is not logged in
 		}
@@ -1568,14 +1559,11 @@ async function initializeAccount() {
 			if (globals.JUST_INSTALLED) {
 				setGhosteryDefaultBlocking();
 			}
-			lastStep = 'setGhosteryDefaultBlocking';
 			return;
 		}
 
 		try {
-			lastStep = 'beforeGetUserSubscriptionData';
 			await account.getUserSubscriptionData();
-			lastStep = 'afterGetUserSubscriptionData';
 		} catch (e) {
 			// expected if the user does not have active subscription
 		}
@@ -1583,18 +1571,14 @@ async function initializeAccount() {
 		ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
 
 		await account.getUserSettings();
-		lastStep = 'getUserSettings';
 
 		if (conf.current_theme !== 'default') {
 			await account.getTheme(conf.current_theme);
-			lastStep = 'getTheme';
 		}
 	} catch (e) {
 		ErrorReporter.captureException(e);
 		e.name = 'AccountError';
 		alwaysLog(e);
-	} finally {
-		clearTimeout(timeout);
 	}
 }
 
@@ -1623,52 +1607,32 @@ async function recordUTMs() {
  * @memberOf Background
  */
 async function init() {
-	let lastStep = 'start';
-	const timeout = setTimeout(() => {
-		const error = new Error(lastStep);
-		error.name = 'InitTimeoutError';
-		ErrorReporter.captureException(error);
-		alwaysLog(error);
-	}, 20000);
-
 	try {
 		await confData.init();
-		lastStep = 'confData.init';
 
 		metrics.init();
-		lastStep = 'metrics.init';
 
 		initializePopup();
-		lastStep = 'initializePopup';
 
 		initializeEventListeners();
-		lastStep = 'initializeEventListeners';
 
 		initializeVersioning();
-		lastStep = 'initializeVersioning';
 
 		if (globals.JUST_UPGRADED) {
 			await purgeObsoleteData();
-			lastStep = 'purgeObsoleteData';
 			await freeSpaceIfNearQuota({ force: true }); // TODO: consider dropping "force" once all users upgraded
-			lastStep = 'freeSpaceIfNearQuota';
 		}
 
 		initializeSearchMessageHandler();
-		lastStep = 'initializeSearchMessageHandler';
 
 		await recordUTMs();
-		lastStep = 'recordUTMs';
 
 		await initializeGhosteryModules();
-		lastStep = 'initializeGhosteryModules';
 
 		await initializeAccount();
-		lastStep = 'initializeAccount';
 
 		// persist Conf properties to storage only after init has completed
 		await prefsSet(globals.initProps);
-		lastStep = 'prefsSet';
 
 		globals.INIT_COMPLETE = true;
 
@@ -1680,8 +1644,6 @@ async function init() {
 		alwaysLog('Error in init()', err);
 
 		throw err;
-	} finally {
-		clearTimeout(timeout);
 	}
 }
 

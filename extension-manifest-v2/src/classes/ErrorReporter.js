@@ -17,7 +17,7 @@ const config = {
 	// sending additional messages like session logs, activity pings, etc
 	autoSessionTracking: false,
 	defaultIntegrations: false,
-	sampleRate: 0.05,
+	sampleRate: 0.3,
 	attachStacktrace: true,
 };
 
