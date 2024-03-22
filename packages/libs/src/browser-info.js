@@ -165,4 +165,28 @@ cachedGetBrowserInfo.isGhosteryBrowser = async () => {
   return browserInfo.name.includes('ghostery');
 };
 
+// Provides direct access to the results of the parsing library.
+// The results are not sanitized; thus, more care should be taken
+// before sharing this information.
+//
+// Note:
+// * the primary use case is for alive-signals (and they
+//   will check with the quorum service first before sharing)
+cachedGetBrowserInfo.getRawBrowserInfo = async () => {
+  const ua = getUA();
+  const browserInfo = await getExtendedBrowserInfo();
+
+  const info = {};
+  if (browserInfo?.name === 'Ghostery') {
+    info.browser = browserInfo?.displayName || 'Ghostery';
+    info.version = browserInfo?.version ?? null;
+  } else {
+    info.browser = ua.browser?.name || null;
+    info.version = ua.browser?.version || null;
+  }
+  info.os = ua.os?.name || null;
+  info.platform = ua.platform?.type || null;
+  return info;
+};
+
 export default cachedGetBrowserInfo;
