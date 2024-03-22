@@ -459,6 +459,9 @@
   "terms___conditions": {
     "message": "条款和条件"
   },
+  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
+  },
   "tired_of_cookie_popups_": {
     "message": "厌烦了 Cookie 弹出窗口？"
   },
@@ -537,6 +540,9 @@
   },
   "yes": {
     "message": "是"
+  },
+  "you_are_awesome_": {
+    "message": "You are awesome!"
   },
   "you_are_signed_in_as_": {
     "message": "你的登录身份为："
