@@ -13,14 +13,19 @@ import { html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
+import TrackerException, {
+  getExceptionStatus,
+} from '/store/tracker-exception.js';
 import Notification from '../store/notification.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
+import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 
 import sleep from '../assets/sleep.svg';
 
 import Navigation from './navigation.js';
 import TrackerDetails from './tracker-details.js';
+import ProtectionStatus from './protection-status.js';
 
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
@@ -72,13 +77,33 @@ function setStatsType(host, event) {
 }
 
 export default {
-  [router.connect]: { stack: [Navigation, TrackerDetails] },
+  [router.connect]: { stack: [Navigation, TrackerDetails, ProtectionStatus] },
   options: store(Options),
   stats: store(TabStats),
+  trackerExceptions: store([TrackerException]),
+  trackers: ({ stats, trackerExceptions }) =>
+    store.ready(stats, trackerExceptions) &&
+    stats.trackers.map((t) => {
+      const exception = trackerExceptions.find((e) => e.id === t.id);
+      return {
+        ...t,
+        status: exception
+          ? getExceptionStatus(exception, stats.domain)
+          : Promise.resolve(
+              isCategoryBlockedByDefault(t.category) ? 'blocked' : 'trusted',
+            ),
+      };
+    }),
   notification: store(Notification),
-  content: ({ options, stats, notification }) => html`
+  content: ({
+    options,
+    stats,
+    notification,
+    trackerExceptions,
+    trackers,
+  }) => html`
     <template layout="column grow relative">
-      ${store.ready(options, stats) &&
+      ${store.ready(options, stats, trackerExceptions) &&
       html`
         ${options.terms &&
         html`
@@ -128,8 +153,9 @@ export default {
                 <ui-panel-stats
                   domain="${stats.domain}"
                   categories="${stats.topCategories}"
-                  trackers="${stats.trackers}"
+                  trackers="${trackers}"
                   dialog="${TrackerDetails}"
+                  exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
                   ontypechange="${setStatsType}"
                   layout="margin:1:1.5"

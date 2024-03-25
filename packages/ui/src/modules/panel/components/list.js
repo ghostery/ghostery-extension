@@ -98,7 +98,7 @@ export default {
     }
 
     #content ::slotted(*) {
-      --ui-link-color-hover: var(--ui-color-primary-700);
+      --ui-text-color-anchor: var(--ui-color-gray-800);
     }
 
     :host([closed]) #content {

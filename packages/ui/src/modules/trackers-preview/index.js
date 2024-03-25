@@ -97,7 +97,7 @@ export default define({
                   onclick="${html.set('confirmDisabled', true)}"
                   layout="row gap:0.5"
                 >
-                  <ui-icon name="block" color="gray-600"></ui-icon>
+                  <ui-icon name="block-s" color="gray-600"></ui-icon>
                   <ui-text type="label-s" color="gray-600">
                     Disable Trackers Preview
                   </ui-text>

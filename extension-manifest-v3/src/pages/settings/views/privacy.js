@@ -82,10 +82,10 @@ export default {
                   Eliminates ads on wesbites for safe and fast browsing.
                 </ui-text>
               </div>
-              <ui-settings-toggle
+              <ui-toggle
                 value="${options.blockAds}"
                 onchange="${html.set(options, 'blockAds')}"
-              ></ui-settings-toggle>
+              ></ui-toggle>
             </div>
           </div>
           <div layout="row items:start gap:2" layout@768px="gap:5">
@@ -105,10 +105,10 @@ export default {
                   technology.
                 </ui-text>
               </div>
-              <ui-settings-toggle
+              <ui-toggle
                 value="${options.blockTrackers}"
                 onchange="${html.set(options, 'blockTrackers')}"
-              ></ui-settings-toggle>
+              ></ui-toggle>
             </div>
           </div>
           <div layout="row items:start gap:2" layout@768px="gap:5">
@@ -127,10 +127,10 @@ export default {
                   Automatically rejects of cookie consent notices.
                 </ui-text>
               </div>
-              <ui-settings-toggle
+              <ui-toggle
                 value="${options.blockAnnoyances}"
                 onchange="${toggleNeverConsent}"
-              ></ui-settings-toggle>
+              ></ui-toggle>
             </div>
           </div>
           <ui-text type="headline-m" mobile-type="headline-s">
@@ -155,10 +155,10 @@ export default {
                   their servers instead of linking directly to pages.
                 </ui-text>
               </div>
-              <ui-settings-toggle
+              <ui-toggle
                 value="${options.serpTrackingPrevention}"
                 onchange="${html.set(options, 'serpTrackingPrevention')}"
-              ></ui-settings-toggle>
+              ></ui-toggle>
             </div>
           </div>
         </section>

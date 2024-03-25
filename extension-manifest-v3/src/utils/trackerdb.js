@@ -39,8 +39,13 @@ export async function getMetadata(request) {
     category: category.key,
     company: organization?.name,
     description: organization?.description,
-    website: pattern.website_url || organization?.website_url,
+    website: pattern.website_url,
+    organizationWebsite:
+      organization?.website_url !== pattern.website_url
+        ? organization?.website_url
+        : '',
     contact: organization?.privacy_contact,
+    country: organization?.country,
     privacyPolicy: organization?.privacy_policy_url,
   };
 
@@ -61,4 +66,15 @@ export async function getPattern(key) {
   }
 
   return patterns.get(key);
+}
+
+export function isCategoryBlockedByDefault(categoryId) {
+  switch (categoryId) {
+    case 'essential':
+    case 'cdn':
+    case 'hosting':
+      return false;
+    default:
+      return true;
+  }
 }

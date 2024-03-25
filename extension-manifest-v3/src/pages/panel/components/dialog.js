@@ -38,21 +38,22 @@ export default {
     },
   },
   render: () => html`
-    <template layout="contents">
+    <template layout="block relative layer:400">
+      <div id="backdrop" layout="fixed inset:0" onclick="${close}"></div>
       <div
         id="dialog"
         layout="
           grid::max|1
-          width:full::full height:auto::auto
+          width:full::full height:auto::94vh
           margin:0 padding:0
-          fixed inset top:4 bottom layer:400
+          fixed inset bottom top:auto
         "
       >
         <section
           id="header"
-          layout="grid:24px|1|24px items:center padding:1.5:2"
+          layout="grid:24px|1|24px items:center padding:1.5:2 gap"
         >
-          <div layout="column items:center area:2/3">
+          <div layout="block:center column items:center area:2/3">
             <slot name="header"></slot>
           </div>
           <ui-action>
@@ -69,11 +70,6 @@ export default {
           <slot></slot>
         </section>
       </div>
-      <div
-        id="backdrop"
-        layout="fixed layer:300 inset:0"
-        onclick="${close}"
-      ></div>
     </template>
   `.css`
     #dialog {

@@ -107,11 +107,11 @@ export default {
               </div>
               ${store.ready(session) &&
               html`
-                <ui-settings-toggle
+                <ui-toggle
                   disabled="${!session.user}"
                   value="${session.user && options.sync}"
                   onchange="${session.user && html.set(options, 'sync')}"
-                ></ui-settings-toggle>
+                ></ui-toggle>
               `}
             </div>
           </div>

@@ -34,17 +34,13 @@ export default {
       transition: all 0.2s;
       padding: 0;
       margin: 0;
-      color: var(--ui-color-gray-900);
+      color: inherit;
     }
 
     :host([grouped]:not([active])) ::slotted(*) {
       background: none;
-      border: none;
+      border-color: transparent;
       box-shadow: none;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      ::slotted(*:hover) { color: var(--ui-color-primary-700); }
     }
   `,
 };

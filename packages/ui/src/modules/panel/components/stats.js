@@ -63,6 +63,7 @@ export default {
     },
   },
   dialog: undefined,
+  exceptionDialog: undefined,
   label: '',
   content: ({
     categories,
@@ -72,12 +73,13 @@ export default {
     wtmLink,
     type,
     dialog,
+    exceptionDialog,
     label,
   }) => html`
     <template layout="column gap:0.5">
       <div layout="row items:center gap height::4.5">
         <div layout="row gap grow">
-          <ui-text type="label-m">${label || msg`Trackers detected`}</ui-text>
+          <ui-text type="label-m">${label || msg`Observed activities`}</ui-text>
           <ui-tooltip wrap autohide="10" position="bottom">
             <span slot="content" layout="block width:200px">
               Mind that not all listed entities are trackers, that is not all of
@@ -100,7 +102,7 @@ export default {
                       onclick="${openTabWithUrl}"
                       target="_blank"
                     >
-                      <ui-icon name="whotracksme"></ui-icon>
+                      <ui-icon name="whotracksme" color="gray-900"></ui-icon>
                     </a>
                   </ui-panel-action>
                 </ui-tooltip>
@@ -118,7 +120,7 @@ export default {
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'graph')}">
-                  <ui-icon name="chart"></ui-icon>
+                  <ui-icon name="chart" color="gray-900"></ui-icon>
                 </button>
               </ui-panel-action>
             </ui-tooltip>
@@ -130,7 +132,7 @@ export default {
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'list')}">
-                  <ui-icon name="list"></ui-icon>
+                  <ui-icon name="list" color="gray-900"></ui-icon>
                 </button>
               </ui-panel-action>
             </ui-tooltip>
@@ -194,27 +196,82 @@ export default {
                     <ui-panel-badge>${trackers.length}</ui-panel-badge>
                   </div>
 
-                  <section id="content" layout="column items:start">
+                  <section id="content" layout="column gap:0.5">
                     ${trackers.map(
                       (tracker) =>
                         html`
-                          <ui-text type="body-s">
-                            <a
-                              href="${router.url(dialog, {
-                                trackerId: tracker.id,
-                              })}"
-                              layout="row items:center gap:0.5 padding:0.5:0"
-                            >
-                              ${tracker.name}
-                              <ui-panel-badge>
-                                ${tracker.requestsCount}
-                              </ui-panel-badge>
-                              ${tracker.blocked &&
-                              html`<ui-icon name="block" color="gray-400" />`}
-                              ${tracker.modified &&
-                              html`<ui-icon name="eye" color="gray-400" />`}
-                            </a>
-                          </ui-text>
+                          <div
+                            layout="row gap content:space-between items:center"
+                          >
+                            <ui-text type="body-s">
+                              <a
+                                href="${router.url(dialog, {
+                                  trackerId: tracker.id,
+                                })}"
+                                layout="row items:center gap:0.5 padding:0.5:0"
+                              >
+                                <ui-tooltip>
+                                  <span slot="content">
+                                    View activity details
+                                  </span>
+                                  <ui-panel-tracker-name>
+                                    ${tracker.name}
+                                  </ui-panel-tracker-name>
+                                </ui-tooltip>
+                                <ui-panel-badge>
+                                  ${tracker.requestsCount}
+                                </ui-panel-badge>
+                                ${tracker.blocked &&
+                                html`<ui-icon
+                                  name="block-s"
+                                  color="gray-400"
+                                ></ui-icon>`}
+                                ${tracker.modified &&
+                                html`<ui-icon
+                                  name="eye"
+                                  color="gray-400"
+                                ></ui-icon>`}
+                              </a>
+                            </ui-text>
+                            ${html.resolve(
+                              tracker.status.then(
+                                (status) => html`
+                                  <ui-tooltip>
+                                    <span slot="content">
+                                      Set blocking preference
+                                    </span>
+                                    <ui-panel-action
+                                      type="outline"
+                                      layout="shrink:0"
+                                    >
+                                      <a
+                                        href="${router.url(exceptionDialog, {
+                                          trackerId: tracker.id,
+                                        })}"
+                                        layout="row center relative"
+                                      >
+                                        <ui-icon
+                                          name="${status.startsWith('blocked')
+                                            ? 'block'
+                                            : 'trust'}-m"
+                                          color="${status.startsWith('blocked')
+                                            ? 'gray-800'
+                                            : 'success-500'}"
+                                        ></ui-icon>
+                                        ${status.includes('website') &&
+                                        html`
+                                          <ui-icon
+                                            name="error"
+                                            layout="absolute right:-1px bottom:-1px"
+                                          ></ui-icon>
+                                        `}
+                                      </a>
+                                    </ui-panel-action>
+                                  </ui-tooltip>
+                                `,
+                              ),
+                            )}
+                          </div>
                         `,
                     )}
                   </section>

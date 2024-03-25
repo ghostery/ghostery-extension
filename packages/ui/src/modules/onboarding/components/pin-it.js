@@ -46,7 +46,7 @@ export default {
       transform: rotate(45deg) translateY(-50%);
     }
 
-    :host([platform='chrome']) #arrow { right: 92px; }
+    :host([platform='chrome']) #arrow { right: 121px; }
     :host([platform='edge']) { min-width: 175px;  }
     :host([platform='edge']) #arrow { right: 175px; }
 

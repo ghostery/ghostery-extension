@@ -31,6 +31,7 @@ export default {
       :host([type="primary"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
+        border: 1px solid var(--ui-color-primary-500);
         --ui-button-hover-color: var(--ui-color-white);
         --ui-button-hover-background: var(--ui-color-primary-700);
       }
@@ -38,11 +39,13 @@ export default {
       :host([type="success"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-success-500);
+        border: 1px solid var(--ui-color-success-500);
         --ui-button-hover-color: var(--ui-color-white);
         --ui-button-hover-background: var(--ui-color-success-700);
       }
 
       :host([type="transparent"]) {
+        border: 1px solid transparent;
         --ui-button-hover-color: var(--ui-color-primary-500);
         --ui-button-hover-background: var(--ui-color-primary-100);
       }

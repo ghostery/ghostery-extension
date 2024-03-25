@@ -10,9 +10,16 @@
  */
 
 import { html, router, store } from 'hybrids';
+import * as labels from '@ghostery/ui/labels';
 
 import TabStats from '/store/tab-stats.js';
+import TrackerException, {
+  getExceptionStatus,
+} from '/store/tracker-exception.js';
+
 import { openTabWithUrl } from '/utils/tabs.js';
+
+import ProtectionStatus from './protection-status.js';
 
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
@@ -34,16 +41,22 @@ function showCopyNotification(host) {
   host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
 }
 
+const regionNames = new Intl.DisplayNames(
+  [chrome.i18n.getUILanguage().split('-')[0]],
+  { type: 'region' },
+);
+
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
   trackerId: '',
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
+  exception: store(TrackerException, { id: 'trackerId' }),
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
     `https://www.whotracks.me/trackers/${tracker.id}.html`,
-  content: ({ tracker, wtmUrl }) => html`
+  content: ({ stats, tracker, exception, wtmUrl }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -52,12 +65,45 @@ export default {
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        ${tracker.company !== tracker.name &&
-        html`
-          <ui-text slot="header" type="body-s" color="gray-600">
-            ${tracker.company}
-          </ui-text>
-        `}
+        <ui-text slot="header" type="body-s" color="gray-600">
+          ${tracker.company &&
+          tracker.company !== tracker.name &&
+          tracker.company + ' •'}
+          ${labels.categories[tracker.category]}
+        </ui-text>
+        <div layout="grid:1|max gap">
+          ${store.ready(exception) &&
+          html.resolve(
+            getExceptionStatus(exception, stats.domain).then(
+              (status) => html`<ui-panel-action layout="width:full">
+                <a
+                  href="${router.url(ProtectionStatus, {
+                    trackerId: tracker.id,
+                  })}"
+                  layout="row gap"
+                >
+                  <ui-icon
+                    name="${status.startsWith('block') ? 'block' : 'trust'}-m"
+                    color="${status.startsWith('block')
+                      ? 'gray-800'
+                      : 'success-500'}"
+                  ></ui-icon>
+                  <ui-text type="label-m" layout="row gap">
+                    ${status === 'trusted' && html`Trusted on all websites`}
+                    ${status === 'blocked' && html`Blocked on all websites`}
+                    ${status === 'trusted:website' &&
+                    html`Trusted on this website`}
+                    ${status === 'blocked:website' &&
+                    html`Blocked on this website`}
+                  </ui-text>
+                </a>
+              </ui-panel-action>`,
+            ),
+          )}
+          <ui-panel-action>
+            <ui-icon name="settings-m"></ui-icon>
+          </ui-panel-action>
+        </div>
         ${(tracker.description || wtmUrl) &&
         html`
           <div layout="column gap:0.5">
@@ -80,9 +126,50 @@ export default {
           layout="
             grid:max|1 items:start:stretch content:start gap:1:2.5
             grow:1
-            padding:bottom:4
           "
         >
+          ${tracker.requestsBlocked.length > 0 &&
+          html`
+            <ui-icon name="block-s" color="danger-700"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs blocked</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsBlocked.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                  ${tracker.requestsBlocked.length >= 10 &&
+                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
+                </div>
+              </div>
+            </div>
+          `}
+          ${tracker.requestsModified.length > 0 &&
+          html`
+            <ui-icon name="eye" color="primary-700"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs modified</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsModified.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                  ${tracker.requestsModified.length >= 10 &&
+                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
+                </div>
+              </div>
+            </div>
+          `}
           ${tracker.requestsObserved.length > 0 &&
           html`
             <ui-icon name="shield"></ui-icon>
@@ -104,46 +191,19 @@ export default {
               </div>
             </div>
           `}
-          ${tracker.requestsBlocked.length > 0 &&
+          ${tracker.country &&
           html`
-            <ui-icon name="block"></ui-icon>
+            <ui-icon name="pin"></ui-icon>
             <div layout="column gap">
-              <ui-text type="label-s">URLs blocked</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsBlocked.map(
-                    ({ url }) =>
-                      html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </gh-panel-copy>
-                      `,
-                  )}
-                  ${tracker.requestsBlocked.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
-                </div>
-              </div>
-            </div>
-          `}
-          ${tracker.requestsModified.length > 0 &&
-          html`
-            <ui-icon name="eye"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">URLs modified</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsModified.map(
-                    ({ url }) =>
-                      html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </gh-panel-copy>
-                      `,
-                  )}
-                  ${tracker.requestsModified.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
-                </div>
-              </div>
+              <ui-text type="label-s">Country</ui-text>
+              <ui-text
+                type="body-s"
+                color="gray-600"
+                ellipsis
+                layout="padding margin:-1"
+              >
+                ${regionNames.of(tracker.country) || tracker.country}
+              </ui-text>
             </div>
           `}
           ${tracker.website &&
@@ -160,6 +220,27 @@ export default {
               >
                 <a href="${tracker.website}" onclick="${openTabWithUrl}">
                   ${tracker.website}
+                </a>
+              </ui-text>
+            </div>
+          `}
+          ${tracker.organizationWebsite &&
+          html`
+            <ui-icon name="globe"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">Organization's website</ui-text>
+              <ui-text
+                type="body-s"
+                color="primary-700"
+                ellipsis
+                underline
+                layout="padding margin:-1"
+              >
+                <a
+                  href="${tracker.organizationWebsite}"
+                  onclick="${openTabWithUrl}"
+                >
+                  ${tracker.organizationWebsite}
                 </a>
               </ui-text>
             </div>

@@ -71,10 +71,10 @@ export default {
                   tracker wheel.
                 </ui-text>
               </div>
-              <ui-settings-toggle
+              <ui-toggle
                 value="${options.trackerWheel}"
                 onchange="${html.set(options, 'trackerWheel')}"
-              ></ui-settings-toggle>
+              ></ui-toggle>
             </div>
           </div>
           ${Options.trackerCount &&
@@ -96,10 +96,10 @@ export default {
                     browser toolbar.
                   </ui-text>
                 </div>
-                <ui-settings-toggle
+                <ui-toggle
                   value="${options.trackerCount}"
                   onchange="${html.set(options, 'trackerCount')}"
-                ></ui-settings-toggle>
+                ></ui-toggle>
               </div>
             </div>
           `}
@@ -132,10 +132,10 @@ export default {
                   </a>
                 </ui-text>
               </div>
-              <ui-settings-toggle
+              <ui-toggle
                 value="${options.wtmSerpReport}"
                 onchange="${html.set(options, 'wtmSerpReport')}"
-              ></ui-settings-toggle>
+              ></ui-toggle>
             </div>
           </div>
         </section>
