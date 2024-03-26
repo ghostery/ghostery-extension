@@ -13,6 +13,7 @@ import { html, router, store } from 'hybrids';
 
 import TabStats from '/store/tab-stats.js';
 import { openTabWithUrl } from '/utils/tabs.js';
+import TrackerException from '/store/tracker-exception';
 
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
@@ -34,6 +35,20 @@ function showCopyNotification(host) {
   host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
 }
 
+function toggleExceptionDomain(type) {
+  return ({ exception, stats }) => {
+    const list = [...exception[type]];
+    const index = list.indexOf(stats.domain);
+    if (index !== -1) {
+      list.splice(index, 1);
+    } else {
+      list.push(stats.domain);
+    }
+
+    store.set(exception, { [type]: list });
+  };
+}
+
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
@@ -43,7 +58,18 @@ export default {
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
     `https://www.whotracks.me/trackers/${tracker.id}.html`,
-  content: ({ tracker, wtmUrl }) => html`
+  exception: store(TrackerException, { id: 'trackerId' }),
+  blockedOnSite: ({ stats, exception }) =>
+    store.ready(exception) && exception.blocked.includes(stats.domain),
+  allowedOnSite: ({ stats, exception }) =>
+    store.ready(exception) && exception.allowed.includes(stats.domain),
+  content: ({
+    tracker,
+    wtmUrl,
+    exception,
+    blockedOnSite,
+    allowedOnSite,
+  }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -57,6 +83,37 @@ export default {
           <ui-text slot="header" type="body-s" color="gray-600">
             ${tracker.company}
           </ui-text>
+        `}
+        ${store.ready(exception) &&
+        html`
+          <div layout="column gap">
+            <ui-text type="label-m">Selective blocking</ui-text>
+            <label layout="row gap items:center">
+              <input
+                type="checkbox"
+                checked="${exception.overwriteStatus}"
+                onchange="${html.set(exception, 'overwriteStatus')}"
+              />
+              <ui-text type="body-s">Overwrite default blocking status</ui-text>
+            </label>
+            <div layout="row gap">
+              <ui-button
+                type="${blockedOnSite ? 'primary' : 'outline'}"
+                size="small"
+                onclick="${toggleExceptionDomain('blocked')}"
+              >
+                <button>Block on this site</button>
+              </ui-button>
+              <ui-button
+                type="${allowedOnSite ? 'primary' : 'outline'}"
+                size="small"
+                onclick="${toggleExceptionDomain('allowed')}"
+              >
+                <button>Allow on this site</button>
+              </ui-button>
+            </div>
+          </div>
+          <ui-line></ui-line>
         `}
         ${(tracker.description || wtmUrl) &&
         html`
