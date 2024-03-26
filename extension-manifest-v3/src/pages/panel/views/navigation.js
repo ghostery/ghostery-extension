@@ -131,7 +131,11 @@ export default {
                 />
                 <div>
                   <ui-text type="label-l">You are awesome!</ui-text>
-                  <ui-text type="body-s" color="gray-600">
+                  <ui-text
+                    type="body-s"
+                    color="gray-600"
+                    layout="width:::200px"
+                  >
                     Thank you for your support in Ghostery's fight for a web
                     where privacy is a basic human right!
                   </ui-text>
