@@ -22,10 +22,6 @@ import { registerDatabase } from '/utils/indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 
-function isCustomEngine(name) {
-  return name == CUSTOM_ENGINE;
-}
-
 const engines = new Map();
 
 function loadFromMemory(name) {
@@ -38,9 +34,7 @@ function saveToMemory(name, engine) {
 
 // custom filter exceptions should apply to all engines
 function shareExceptions(name, engine) {
-  if (name.startsWith('custom-filters')) {
-    return;
-  }
+  if (name === CUSTOM_ENGINE) return;
 
   // Network exceptions
   const matchExceptions = engine.exceptions.match.bind(engine.exceptions);
@@ -138,7 +132,7 @@ function check(response) {
 }
 
 async function update(name) {
-  if (isCustomEngine(name)) return;
+  if (name === CUSTOM_ENGINE) return;
 
   try {
     const urlName =
@@ -357,11 +351,11 @@ const ALARM_PREFIX = 'engines:update:';
 const ALARM_DELAY = 60; // 1 hour
 
 export async function init(name) {
-  if (isCustomEngine(name)) {
+  if (name === CUSTOM_ENGINE) {
     return (
-      get(name) ||
-      (await loadFromStorage(name)) ||
-      (await createCustomEngine(name))
+      get(CUSTOM_ENGINE) ||
+      (await loadFromStorage(CUSTOM_ENGINE)) ||
+      (await createCustomEngine())
     );
   }
 
@@ -379,14 +373,14 @@ export async function init(name) {
   );
 }
 
-export async function createCustomEngine(name, filters = '') {
+export async function createCustomEngine(filters = '') {
   const config = new Config({
     enableHtmlFiltering: true,
   });
   const engine = FiltersEngine.parse(filters, config);
 
-  saveToMemory(name, engine);
-  saveToStorage(name);
+  saveToMemory(CUSTOM_ENGINE, engine);
+  saveToStorage(CUSTOM_ENGINE);
 
   return engine;
 }

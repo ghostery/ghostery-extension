@@ -14,7 +14,7 @@ export default function asyncSetup(promises, threshold = 5000) {
 
   const result = {
     pending: Promise.race([
-      Promise.all(promises.filter((p) => p instanceof Promise)),
+      Promise.all(promises),
       new Promise((_, reject) => {
         timeoutId = setTimeout(() => {
           reject(Error('Initial setup threshold exceeded'));

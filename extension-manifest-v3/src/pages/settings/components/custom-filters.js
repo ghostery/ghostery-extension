@@ -45,41 +45,41 @@ function parseFilters(text = '') {
 
 async function submitFilters(host) {
   const { networkFilters, cosmeticFilters } = host.filters;
-  const dnrRules = [];
-  const dnrErrors = [];
 
-  const results = await Promise.allSettled(
-    [...networkFilters].map((filter) => converter.convert(filter)),
-  );
+  // Update DNR
+  if (__PLATFORM__ !== 'firefox') {
+    const dnrRules = [];
+    const dnrErrors = [];
+    const results = await Promise.allSettled(
+      [...networkFilters].map((filter) => converter.convert(filter)),
+    );
 
-  for (const result of results) {
-    dnrErrors.push(...result.value.errors);
-    dnrRules.push(...result.value.rules);
-  }
+    for (const result of results) {
+      dnrErrors.push(...result.value.errors);
+      dnrRules.push(...result.value.rules);
+    }
 
-  host.dnrErrors = dnrErrors;
+    if (dnrErrors.length) {
+      host.dnrErrors = dnrErrors;
+      return;
+    }
 
-  // DNR validation is not required for Firefox, but it wont harm
-  if (!dnrErrors.length) {
-    await store.submit(host.input);
-
-    await Promise.all([
-      chrome.runtime.sendMessage({
-        action: 'custom-filters:update-dnr',
-        dnrRules,
-      }),
-
-      chrome.runtime.sendMessage({
-        action: 'custom-filters:update-network',
-        filters: [
-          ...(__PLATFORM__ === 'firefox' ? networkFilters : []),
-          ...cosmeticFilters,
-        ].join('\n'),
-      }),
-    ]);
+    await chrome.runtime.sendMessage({
+      action: 'customFilters:dnr',
+      dnrRules,
+    });
 
     host.dnrRules = dnrRules;
   }
+
+  // Update engine
+  await chrome.runtime.sendMessage({
+    action: 'customFilters:engine',
+    filters: [...networkFilters, ...cosmeticFilters].join('\n'),
+  });
+
+  // Save input
+  await store.submit(host.input);
 }
 
 function update(host, event) {
@@ -115,15 +115,15 @@ export default {
         </div>
         ${!!errors.length &&
         html`
-          <div layout="column gap:0.5">
+          <div layout="column gap:0.5" translate="no">
             <ui-text type="label-s" color="danger-500">
               Errors (${errors.length}):
             </ui-text>
             ${errors.map(
               (error) =>
-                html`<ui-text type="body-xs" color="danger-500"
-                  >${error}</ui-text
-                >`,
+                html`<ui-text type="body-xs" color="danger-500">
+                  ${error}
+                </ui-text>`,
             )}
           </div>
         `}
@@ -138,7 +138,6 @@ export default {
           <button>Update</button>
         </ui-button>
 
-        <ui-text></ui-text>
         ${!!dnrRules?.length &&
         html`
           <details>
