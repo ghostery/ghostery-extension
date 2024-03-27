@@ -11,6 +11,8 @@
 
 import { observe, ENGINES } from '/store/options.js';
 
+const PAUSE_RULE_PRIORITY = 10000000;
+
 if (__PLATFORM__ !== 'firefox') {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
@@ -63,7 +65,7 @@ if (__PLATFORM__ !== 'firefox') {
             ? [
                 {
                   id: 1,
-                  priority: 10000,
+                  priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allow' },
                   condition: {
                     domains: domains.map((d) => `*${d}`),
@@ -74,7 +76,7 @@ if (__PLATFORM__ !== 'firefox') {
             : [
                 {
                   id: 1,
-                  priority: 10000,
+                  priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allow' },
                   condition: {
                     initiatorDomains: domains,
@@ -98,7 +100,7 @@ if (__PLATFORM__ !== 'firefox') {
                 },
                 {
                   id: 2,
-                  priority: 10000,
+                  priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allowAllRequests' },
                   condition: {
                     initiatorDomains: domains,
