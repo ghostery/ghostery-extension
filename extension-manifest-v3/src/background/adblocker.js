@@ -28,28 +28,20 @@ let pausedDomains = [];
 
 const setup = asyncSetup([
   observe(null, (options) => {
-    // Set enabled engines
-    enabledEngines = ENGINES.filter(
-      ({ key }) => options.terms && options[key],
-    ).map(({ name }) => name);
-
-    // custom filters engines
-    if (enabledEngines.length > 0) {
-      enabledEngines.push(engines.COSMETIC_ENGINE);
-      if (__PLATFORM__ === 'firefox') {
-        enabledEngines.push(engines.NETWORK_ENGINE);
-      }
-    }
+    enabledEngines = [
+      // Add custom engine
+      engines.CUSTOM_ENGINE,
+      // Set enabled engines
+      ...ENGINES.filter(({ key }) => options.terms && options[key]).map(
+        ({ name }) => name,
+      ),
+    ];
 
     // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
-  // Initial load of engines
-  ...ENGINES.map(({ name }) => engines.init(name)),
-  engines.initCustom(engines.COSMETIC_ENGINE),
-  ...(__PLATFORM__ === 'firefox'
-    ? [engines.initCustom(engines.NETWORK_ENGINE)]
-    : []),
+  engines.init(engines.CUSTOM_ENGINE),
+  ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
 function adblockerInjectStylesWebExtension(
@@ -411,25 +403,3 @@ if (__PLATFORM__ === 'firefox') {
     ['blocking', 'responseHeaders'],
   );
 }
-
-async function updateCosmeticFilters(cosmeticFilters) {
-  await engines.initCustom(engines.COSMETIC_ENGINE, cosmeticFilters.join('\n'));
-  return cosmeticFilters;
-}
-
-async function updateNetworkFilters(networkFilters) {
-  await engines.initCustom(engines.NETWORK_ENGINE, networkFilters.join('\n'));
-  return networkFilters;
-}
-
-chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
-  if (msg.action === 'custom-filters:update-cosmetic') {
-    updateCosmeticFilters(msg.cosmeticFilters).then(sendResponse);
-    return true;
-  }
-
-  if (msg.action === 'custom-filters:update-network') {
-    updateNetworkFilters(msg.networkFilters).then(sendResponse);
-    return true;
-  }
-});

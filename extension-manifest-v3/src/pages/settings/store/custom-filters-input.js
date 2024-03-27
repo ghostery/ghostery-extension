@@ -4,13 +4,15 @@ const CustomFiltersInput = {
   text: '',
   [store.connect]: {
     async get() {
-      const storage = await chrome.storage.local.get(['custom-filters-input']);
+      const { customFiltersInput } = await chrome.storage.local.get([
+        'customFiltersInput',
+      ]);
       return {
-        text: storage['custom-filters-input'] || '',
+        text: customFiltersInput,
       };
     },
     async set(_, { text }) {
-      await chrome.storage.local.set({ 'custom-filters-input': text });
+      await chrome.storage.local.set({ customFiltersInput: text });
       return { text };
     },
   },

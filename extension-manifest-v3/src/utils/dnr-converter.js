@@ -10,34 +10,34 @@
  */
 
 const requests = new Map();
-let requestCount = 0;
-let iframe;
-let isReady;
 
+let pending;
 function createIframe() {
+  if (pending) return pending;
+
   window.addEventListener('message', (event) => {
     const requestId = event.data.rules.shift().condition.urlFilter;
     requests.get(requestId)(event.data);
     requests.delete(requestId);
   });
 
-  iframe = document.createElement('iframe');
+  const iframe = document.createElement('iframe');
   iframe.setAttribute('src', 'https://ghostery.github.io/urlfilter2dnr/');
   iframe.setAttribute('style', 'display: none;');
 
-  return new Promise((resolve) => {
-    iframe.addEventListener('load', () => resolve());
+  pending = new Promise((resolve) => {
+    iframe.addEventListener('load', () => resolve(iframe));
     document.head.appendChild(iframe);
   });
+
+  return pending;
 }
 
-async function convert(filter) {
-  if (!isReady) {
-    isReady = createIframe();
-  }
-  await isReady;
-
+let requestCount = 0;
+export async function convert(filter) {
+  const iframe = await createIframe();
   const requestId = `request${requestCount++}`;
+
   iframe.contentWindow.postMessage(
     {
       action: 'convert',
@@ -46,9 +46,8 @@ async function convert(filter) {
     },
     '*',
   );
+
   return new Promise((resolve) => {
     requests.set(requestId, resolve);
   });
 }
-
-export default convert;

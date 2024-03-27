@@ -11,9 +11,10 @@
 
 import { html, store } from 'hybrids';
 import { detectFilterType } from '@cliqz/adblocker';
-import convert from '../dnr-converter.js';
-import { getDNRRules } from '/utils/custom-filters.js';
+
+import * as converter from '/utils/dnr-converter.js';
 import CustomFiltersInput from '../store/custom-filters-input.js';
+import { asyncAction } from './devtools.js';
 
 function parseFilters(text = '') {
   return text
@@ -25,30 +26,30 @@ function parseFilters(text = '') {
         const filterType = detectFilterType(filter);
         if (filterType === 1) {
           // NETWORK
-          filters.networkFilters.push(filter);
+          filters.networkFilters.add(filter);
         } else if (filterType === 2) {
           // COSMETIC
-          filters.cosmeticFilters.push(filter);
+          filters.cosmeticFilters.add(filter);
         } else {
           filters.errors.push(`Filter not supported: '${filter}'`);
         }
         return filters;
       },
       {
-        networkFilters: [],
-        cosmeticFilters: [],
+        networkFilters: new Set(),
+        cosmeticFilters: new Set(),
         errors: [],
       },
     );
 }
 
-async function onSave(host) {
+async function submitFilters(host) {
   const { networkFilters, cosmeticFilters } = host.filters;
   const dnrRules = [];
   const dnrErrors = [];
 
   const results = await Promise.allSettled(
-    networkFilters.map((filter) => convert(filter)),
+    [...networkFilters].map((filter) => converter.convert(filter)),
   );
 
   for (const result of results) {
@@ -60,83 +61,100 @@ async function onSave(host) {
 
   // DNR validation is not required for Firefox, but it wont harm
   if (!dnrErrors.length) {
-    store.submit(host.input);
-    if (__PLATFORM__ === 'firefox') {
-      await chrome.runtime.sendMessage({
-        action: 'custom-filters:update-network',
-        networkFilters,
-      });
-    } else {
-      host.dnrRules = await chrome.runtime.sendMessage({
+    await store.submit(host.input);
+
+    await Promise.all([
+      chrome.runtime.sendMessage({
         action: 'custom-filters:update-dnr',
         dnrRules,
-      });
-    }
+      }),
 
-    await chrome.runtime.sendMessage({
-      action: 'custom-filters:update-cosmetic',
-      cosmeticFilters,
-    });
+      chrome.runtime.sendMessage({
+        action: 'custom-filters:update-network',
+        filters: [
+          ...(__PLATFORM__ === 'firefox' ? networkFilters : []),
+          ...cosmeticFilters,
+        ].join('\n'),
+      }),
+    ]);
+
+    host.dnrRules = dnrRules;
   }
+}
+
+function update(host, event) {
+  asyncAction(
+    event,
+    submitFilters(host).then(() => 'Filters updated'),
+  );
 }
 
 export default {
   input: store(CustomFiltersInput, { draft: true }),
-  dnrRules: {
-    value: undefined,
-    connect: (host, key) => {
-      getDNRRules().then((dnrRules) => {
-        host[key] = dnrRules;
-      });
-    },
-  },
+  dnrRules: undefined,
   filters: ({ input }) => parseFilters(store.ready(input) ? input.text : ''),
   dnrErrors: undefined,
   errors: ({ filters, dnrErrors = [] }) => [...filters.errors, ...dnrErrors],
   content: ({ input, filters, dnrRules, errors }) => html`
-    <template layout="column gap:3">
-      ${store.ready(input) &&
-      html`
-        <textarea rows="10" oninput="${html.set(input, 'text')}">
-${input.text}</textarea
-        >
-      `}
-      <div layout="row gap items:center">
-        <ui-button
-          size="small"
-          type=${errors.length > 0 ? 'outline-error' : 'outline'}
-          disabled=${errors.length > 0}
-          onclick="${onSave}"
-          layout="shrink:0"
-        >
-          <a>Update</a>
-        </ui-button>
-      </div>
-      <section layout="gap items:center">
-        <h4>Errors</h4>
-        <ul>
-          ${errors.map(
-            (error) =>
-              html`<li>
-                <ui-text color="danger-500">${error}</ui-text>
-              </li>`,
-          )}
-        </ul>
-        <h4>Filters</h4>
-        <div>Network filters: ${filters.networkFilters.length}</div>
-        <div>Cosmetic filters: ${filters.cosmeticFilters.length}</div>
-        <div>Filter errors: ${filters.errors.length}</div>
-        ${dnrRules &&
+    <template layout="block">
+      <div layout="column gap" translate="no">
+        ${store.ready(input) &&
+        // prettier-ignore
         html`
-          <h4>Output</h4>
-          <div>DNR rules: ${dnrRules.length}</div>
-          <ul>
-            ${dnrRules.map(
-              (rule) => html`<li>${JSON.stringify(rule, null, 2)}</li>`,
+        <ui-settings-input>
+          <textarea rows="10" oninput="${html.set(input, 'text')}">${input.text}</textarea>
+        <ui-settings-input>
+      `}
+        <div layout="row content:space-around">
+          <ui-text type="body-xs" color="gray-400">
+            Network filters: ${filters.networkFilters.size}
+          </ui-text>
+          <ui-text type="body-xs" color="gray-400">
+            Cosmetic filters: ${filters.cosmeticFilters.size}
+          </ui-text>
+        </div>
+        ${!!errors.length &&
+        html`
+          <div layout="column gap:0.5">
+            <ui-text type="label-s" color="danger-500">
+              Errors (${errors.length}):
+            </ui-text>
+            ${errors.map(
+              (error) =>
+                html`<ui-text type="body-xs" color="danger-500"
+                  >${error}</ui-text
+                >`,
             )}
-          </ul>
-        `},
-      </section>
+          </div>
+        `}
+
+        <ui-button
+          layout="self:start"
+          size="small"
+          type="outline"
+          disabled=${errors.length > 0}
+          onclick="${update}"
+        >
+          <button>Update</button>
+        </ui-button>
+
+        <ui-text></ui-text>
+        ${!!dnrRules?.length &&
+        html`
+          <details>
+            <summary>
+              <ui-text type="label-s" layout="inline">
+                DNR Output (${dnrRules.length})
+              </ui-text>
+            </summary>
+            <ui-text type="body-s" color="gray-500">
+              ${dnrRules.map(
+                (rule) => html`<pre>${JSON.stringify(rule, null, 2)}</pre>`,
+              )}
+            </ui-text>
+          </details>
+        `}
+      </div>
     </template>
   `,
 };

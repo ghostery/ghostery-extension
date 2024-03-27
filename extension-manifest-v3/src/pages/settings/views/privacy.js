@@ -161,31 +161,6 @@ export default {
               ></ui-settings-toggle>
             </div>
           </div>
-          <ui-text type="headline-m" mobile-type="headline-s">
-            Custom filters
-          </ui-text>
-          <div>
-            <ui-text
-              type="body-l"
-              mobile-type="body-m"
-              color="gray-600"
-              layout="inline"
-            >
-              Create your own ad-blocking rules to customise your Ghostery
-              experience. Find information on how to create them
-            </ui-text>
-            <ui-text underline color="primary-500" layout="inline">
-              <a
-                href="https://adguard.com/kb/general/ad-filtering/create-own-filters/"
-                target="_blank"
-                rel="noreferrer"
-                >here</a
-              ></ui-text
-            >.
-          </div>
-          <div layout="items:start">
-            <gh-settings-custom-filters></gh-settings-custom-filters>
-          </div>
         </section>
 
         <gh-settings-devtools></gh-settings-devtools>

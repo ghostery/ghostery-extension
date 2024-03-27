@@ -20,8 +20,11 @@ import {
 
 import { registerDatabase } from '/utils/indexeddb.js';
 
-export const COSMETIC_ENGINE = 'custom-filters-cosmetic';
-export const NETWORK_ENGINE = 'custom-filters-network';
+export const CUSTOM_ENGINE = 'custom-filters';
+
+function isCustomEngine(name) {
+  return name == CUSTOM_ENGINE;
+}
 
 const engines = new Map();
 
@@ -43,7 +46,7 @@ function shareExceptions(name, engine) {
   const matchExceptions = engine.exceptions.match.bind(engine.exceptions);
   engine.exceptions.match = (...args) => {
     return (
-      matchExceptions(...args) || get(NETWORK_ENGINE).exceptions.match(...args)
+      matchExceptions(...args) || get(CUSTOM_ENGINE).exceptions.match(...args)
     );
   };
 
@@ -54,7 +57,7 @@ function shareExceptions(name, engine) {
     );
   engine.cosmetics.unhideIndex.iterMatchingFilters = (...args) => {
     iterMatchingFiltersUnhide(...args);
-    get(NETWORK_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
+    get(CUSTOM_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
   };
 
   const matchAllUnhideExceptions = engine.hideExceptions.matchAll.bind(
@@ -63,7 +66,7 @@ function shareExceptions(name, engine) {
   engine.hideExceptions.matchAll = (...args) => {
     return (
       matchAllUnhideExceptions(...args) ||
-      get(COSMETIC_ENGINE).hideExceptions.matchAll(...args)
+      get(CUSTOM_ENGINE).hideExceptions.matchAll(...args)
     );
   };
 }
@@ -135,9 +138,8 @@ function check(response) {
 }
 
 async function update(name) {
-  if (name.startsWith('custom-filters')) {
-    return;
-  }
+  if (isCustomEngine(name)) return;
+
   try {
     const urlName =
       name === 'trackerdb'
@@ -355,6 +357,14 @@ const ALARM_PREFIX = 'engines:update:';
 const ALARM_DELAY = 60; // 1 hour
 
 export async function init(name) {
+  if (isCustomEngine(name)) {
+    return (
+      get(name) ||
+      (await loadFromStorage(name)) ||
+      (await createCustomEngine(name))
+    );
+  }
+
   // Schedule an alarm to update engines once a day
   chrome.alarms.get(`${ALARM_PREFIX}${name}`, (alarm) => {
     if (!alarm) {
@@ -369,25 +379,16 @@ export async function init(name) {
   );
 }
 
-async function createCustomEngine(name, filters = '') {
+export async function createCustomEngine(name, filters = '') {
   const config = new Config({
     enableHtmlFiltering: true,
   });
   const engine = FiltersEngine.parse(filters, config);
+
   saveToMemory(name, engine);
   saveToStorage(name);
-  return engine;
-}
 
-export async function initCustom(name, filters) {
-  if (typeof filters === 'string') {
-    return createCustomEngine(name, filters);
-  }
-  return (
-    get(name) ||
-    (await loadFromStorage(name)) ||
-    (await createCustomEngine(name))
-  );
+  return engine;
 }
 
 chrome.alarms.onAlarm.addListener((alarm) => {
