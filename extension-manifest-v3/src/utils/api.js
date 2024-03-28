@@ -61,16 +61,24 @@ if (__PLATFORM__ === 'safari') {
 }
 
 async function isFirstPartyIsolation() {
-  if (isFirstPartyIsolation.value === undefined) {
-    try {
-      await chrome.cookies.getAll({ domain: '' });
-      isFirstPartyIsolation.value = false;
-    } catch (e) {
-      isFirstPartyIsolation.value = e.message.indexOf('firstPartyDomain') > -1;
+  // Safari has a bug with cookies.getAll(),
+  // which shows a permission popup to the user about random domains.
+  // This feature is not yet supported in Safari we can safely return false.
+  if (__PLATFORM__ !== 'safari') {
+    if (isFirstPartyIsolation.value === undefined) {
+      try {
+        await chrome.cookies.getAll({ domain: '' });
+        isFirstPartyIsolation.value = false;
+      } catch (e) {
+        isFirstPartyIsolation.value =
+          e.message.indexOf('firstPartyDomain') > -1;
+      }
     }
-  }
 
-  return isFirstPartyIsolation.value;
+    return isFirstPartyIsolation.value;
+  } else {
+    return false;
+  }
 }
 
 async function getCookie(name) {
