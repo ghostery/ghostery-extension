@@ -15,9 +15,12 @@ import {
   ENGINE_VERSION,
   getLinesWithFilters,
   mergeDiffs,
+  Config,
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from '/utils/indexeddb.js';
+
+export const CUSTOM_ENGINE = 'custom-filters';
 
 const engines = new Map();
 
@@ -27,6 +30,39 @@ function loadFromMemory(name) {
 
 function saveToMemory(name, engine) {
   engines.set(name, engine);
+}
+
+// custom filter exceptions should apply to all engines
+function shareExceptions(name, engine) {
+  if (name === CUSTOM_ENGINE) return;
+
+  // Network exceptions
+  const matchExceptions = engine.exceptions.match.bind(engine.exceptions);
+  engine.exceptions.match = (...args) => {
+    return (
+      matchExceptions(...args) || get(CUSTOM_ENGINE).exceptions.match(...args)
+    );
+  };
+
+  // Cosmetic exceptions
+  const iterMatchingFiltersUnhide =
+    engine.cosmetics.unhideIndex.iterMatchingFilters.bind(
+      engine.cosmetics.unhideIndex,
+    );
+  engine.cosmetics.unhideIndex.iterMatchingFilters = (...args) => {
+    iterMatchingFiltersUnhide(...args);
+    get(CUSTOM_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
+  };
+
+  const matchAllUnhideExceptions = engine.hideExceptions.matchAll.bind(
+    engine.hideExceptions,
+  );
+  engine.hideExceptions.matchAll = (...args) => {
+    return (
+      matchAllUnhideExceptions(...args) ||
+      get(CUSTOM_ENGINE).hideExceptions.matchAll(...args)
+    );
+  };
 }
 
 const DB_NAME = registerDatabase('engines');
@@ -59,6 +95,7 @@ async function loadFromStorage(name) {
 
     if (engineBytes) {
       const engine = FiltersEngine.deserialize(engineBytes);
+      shareExceptions(name, engine);
       saveToMemory(name, engine);
 
       return engine;
@@ -95,6 +132,8 @@ function check(response) {
 }
 
 async function update(name) {
+  if (name === CUSTOM_ENGINE) return;
+
   try {
     const urlName =
       name === 'trackerdb'
@@ -153,6 +192,7 @@ async function update(name) {
       const engineBytes = new Uint8Array(arrayBuffer);
       engine = FiltersEngine.deserialize(engineBytes);
 
+      shareExceptions(name, engine);
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
       saveToStorage(name);
@@ -287,6 +327,7 @@ async function loadFromDisk(name) {
     const engineBytes = new Uint8Array(await response.arrayBuffer());
     const engine = FiltersEngine.deserialize(engineBytes);
 
+    shareExceptions(name, engine);
     saveToMemory(name, engine);
     saveToStorage(name);
 
@@ -310,6 +351,14 @@ const ALARM_PREFIX = 'engines:update:';
 const ALARM_DELAY = 60; // 1 hour
 
 export async function init(name) {
+  if (name === CUSTOM_ENGINE) {
+    return (
+      get(CUSTOM_ENGINE) ||
+      (await loadFromStorage(CUSTOM_ENGINE)) ||
+      (await createCustomEngine())
+    );
+  }
+
   // Schedule an alarm to update engines once a day
   chrome.alarms.get(`${ALARM_PREFIX}${name}`, (alarm) => {
     if (!alarm) {
@@ -322,6 +371,18 @@ export async function init(name) {
   return (
     get(name) || (await loadFromStorage(name)) || (await loadFromDisk(name))
   );
+}
+
+export async function createCustomEngine(filters = '') {
+  const config = new Config({
+    enableHtmlFiltering: true,
+  });
+  const engine = FiltersEngine.parse(filters, config);
+
+  saveToMemory(CUSTOM_ENGINE, engine);
+  saveToStorage(CUSTOM_ENGINE);
+
+  return engine;
 }
 
 chrome.alarms.onAlarm.addListener((alarm) => {

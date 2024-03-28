@@ -37,6 +37,15 @@ export default {
       font: var(--ui-font-body-l);
     }
 
+    ::slotted(textarea) {
+      background: var(--ui-color-white);
+      border: 1px solid var(--ui-color-gray-200);
+      border-radius: 8px;
+      padding: 8px;
+      margin: 0;
+      font: var(--ui-font-body-s);
+    }
+
     :host([icon]) ::slotted(input) {
       padding-left: 44px;
     }

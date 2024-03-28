@@ -114,7 +114,7 @@ for (const [name, target] of Object.entries(DNR)) {
       const stream = setupStream(`${TARGET_PATH}/dnr-${target}.json`);
 
       for (const rule of JSON.parse(dnr)) {
-        if (rule.condition.requestDomains) {
+        if (rule.condition?.requestDomains) {
           if (rule.condition.requestDomains.length > MAX_RULE_REQUEST_DOMAINS) {
             console.log(
               `Rule has too many domains (${rule.condition.requestDomains.length}), omitting it`,

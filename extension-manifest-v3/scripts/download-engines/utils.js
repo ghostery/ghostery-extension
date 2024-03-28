@@ -28,6 +28,10 @@ const supportedResourceTypes = [
 const supportedActions = ['block', 'allow', 'allowAllRequests'];
 
 export function getCompatRule(rule, debug = false) {
+  if (!rule.condition) {
+    return null;
+  }
+
   const resourceTypes = rule.condition.resourceTypes?.filter((type) =>
     supportedResourceTypes.includes(type),
   );

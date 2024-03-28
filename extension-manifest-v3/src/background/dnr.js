@@ -112,7 +112,7 @@ if (__PLATFORM__ !== 'firefox') {
       });
     } else if (dynamicRules.length) {
       chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: dynamicRules.map(({ id }) => id),
+        removeRuleIds: __PLATFORM__ === 'safari' ? [1] : [1, 2],
       });
     }
   });

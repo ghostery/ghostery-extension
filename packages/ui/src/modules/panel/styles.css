@@ -33,6 +33,9 @@ html {
   --ui-color-success-700: #008d00;
   --ui-color-success-500: #0ab00a;
 
+  --ui-color-error-500: #ff4500;
+  --ui-color-error-400: #ff5d35;
+
   --ui-color-danger-700: #c80f11;
   --ui-color-danger-500: #f13436;
   --ui-color-danger-100: #ffecec;
