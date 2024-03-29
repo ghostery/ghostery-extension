@@ -28,16 +28,20 @@ let pausedDomains = [];
 
 const setup = asyncSetup([
   observe(null, (options) => {
-    // Set enabled engines
-    enabledEngines = ENGINES.filter(
-      ({ key }) => options.terms && options[key],
-    ).map(({ name }) => name);
+    enabledEngines = [
+      // Add custom engine
+      engines.CUSTOM_ENGINE,
+      // Set enabled engines
+      ...ENGINES.filter(({ key }) => options.terms && options[key]).map(
+        ({ name }) => name,
+      ),
+    ];
 
     // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
-  // Initial load of engines
-  ...ENGINES.map(({ name }) => engines.init(name)),
+  engines.init(engines.CUSTOM_ENGINE),
+  ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
 function adblockerInjectStylesWebExtension(

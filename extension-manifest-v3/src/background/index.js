@@ -26,3 +26,4 @@ import './telemetry.js';
 import './reporting/index.js';
 
 import './devtools.js';
+import './custom-filters.js';
