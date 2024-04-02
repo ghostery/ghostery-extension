@@ -1,0 +1,47 @@
+diff --git a/node_modules/ghostery-common/build/gbe/adblocker/manager.js b/node_modules/ghostery-common/build/gbe/adblocker/manager.js
+index d490618..e7e92ba 100644
+--- a/node_modules/ghostery-common/build/gbe/adblocker/manager.js
++++ b/node_modules/ghostery-common/build/gbe/adblocker/manager.js
+@@ -23,6 +23,17 @@ var _regions = _interopRequireDefault(require("./regions"));
+ 
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+ 
++var { isMobile, isFirefox, isChromium, isEdge } = require("../core/platform");
++
++const ENV = new Map([
++  ['ext_ghostery', true],
++  ['cap_html_filtering', true],
++  ['env_firefox', isFirefox],
++  ['env_chromium', isChromium],
++  ['env_edge', isEdge],
++  ['env_mobile', isMobile],
++]);
++
+ /*!
+  * Copyright (c) 2014-present Cliqz GmbH. All rights reserved.
+  *
+@@ -353,7 +364,7 @@ class EngineManager {
+ 
+     const cumulativeDiff = _adblocker.default.mergeDiffs(diffs);
+ 
+-    let updated = this.engine.updateFromDiff(cumulativeDiff);
++    let updated = this.engine.updateFromDiff(cumulativeDiff, ENV);
+     timer.stop();
+ 
+     if (updated === true) {
+@@ -407,6 +418,7 @@ class EngineManager {
+ 
+       try {
+         this.engine = _adblocker.default.WebExtensionBlocker.deserialize(serialized);
++        this.engine.updateEnv(ENV);
+       } catch (ex) {
+         // In case there is a mismatch between the version of the code
+         // and the serialization format of the engine on disk, we might
+@@ -449,6 +461,7 @@ class EngineManager {
+ 
+     try {
+       this.engine = _adblocker.default.WebExtensionBlocker.deserialize(serialized);
++      this.engine.updateEnv(ENV);
+     } catch (ex) {
+       _logger.default.error('exception while loading remote engine', ex);
+ 
