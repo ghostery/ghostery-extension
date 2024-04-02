@@ -22,6 +22,17 @@ import { registerDatabase } from '/utils/indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 
+const checkUserAgent = (pattern) => navigator.userAgent.indexOf(pattern) !== -1;
+
+const ENV = new Map([
+  ['ext_ghostery', true],
+  ['cap_html_filtering', true],
+  ['env_firefox', checkUserAgent('Firefox')],
+  ['env_chromium', checkUserAgent('Chrome')],
+  ['env_edge', checkUserAgent('Edg')],
+  ['env_mobile', checkUserAgent('Mobile')],
+]);
+
 const engines = new Map();
 
 function loadFromMemory(name) {
@@ -95,6 +106,7 @@ async function loadFromStorage(name) {
 
     if (engineBytes) {
       const engine = FiltersEngine.deserialize(engineBytes);
+      engine.updateEnv(ENV);
       shareExceptions(name, engine);
       saveToMemory(name, engine);
 
@@ -191,7 +203,7 @@ async function update(name) {
 
       const engineBytes = new Uint8Array(arrayBuffer);
       engine = FiltersEngine.deserialize(engineBytes);
-
+      engine.updateEnv(ENV);
       shareExceptions(name, engine);
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
@@ -280,7 +292,7 @@ async function update(name) {
     // `engine.update` method will return `true` if anything was
     // updated and `false` otherwise.
     const cumulativeDiff = mergeDiffs(diffs);
-    let updated = engine.updateFromDiff(cumulativeDiff);
+    let updated = engine.updateFromDiff(cumulativeDiff, ENV);
 
     // Last but not least, check if resources.txt should be updated. This can be
     // done independently of filters as the data is stored in a separate object.
@@ -326,7 +338,7 @@ async function loadFromDisk(name) {
 
     const engineBytes = new Uint8Array(await response.arrayBuffer());
     const engine = FiltersEngine.deserialize(engineBytes);
-
+    engine.updateEnv(ENV);
     shareExceptions(name, engine);
     saveToMemory(name, engine);
     saveToStorage(name);
