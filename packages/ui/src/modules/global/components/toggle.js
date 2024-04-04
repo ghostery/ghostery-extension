@@ -50,6 +50,7 @@ export default {
       }
 
       button {
+        cursor: pointer;
         background: none;
         appearance: none;
         border: none;

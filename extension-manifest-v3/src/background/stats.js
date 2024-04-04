@@ -119,6 +119,8 @@ function updateIcon(tabId, force) {
   refreshIcon(tabId);
 }
 
+const URL_IN_STATS_LIMIT = 5;
+
 export function updateTabStats(tabId, requests) {
   Promise.resolve().then(async () => {
     const stats = tabStats.get(tabId);
@@ -169,14 +171,14 @@ export function updateTabStats(tabId, requests) {
 
           tracker.requests = tracker.requests.filter((r) => {
             if (r.blocked) {
-              return ++blocked <= 10 ? true : false;
+              return ++blocked <= URL_IN_STATS_LIMIT ? true : false;
             }
 
             if (r.modified) {
-              return ++modified <= 10 ? true : false;
+              return ++modified <= URL_IN_STATS_LIMIT ? true : false;
             }
 
-            return ++observed <= 10 ? true : false;
+            return ++observed <= URL_IN_STATS_LIMIT ? true : false;
           });
 
           tracker.requests.unshift({

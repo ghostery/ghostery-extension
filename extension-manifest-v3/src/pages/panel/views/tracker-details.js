@@ -101,7 +101,14 @@ export default {
             ),
           )}
           <ui-panel-action>
-            <ui-icon name="settings-m"></ui-icon>
+            <a
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@gh-settings-trackers',
+              )}"
+              onclick="${openTabWithUrl}"
+            >
+              <ui-icon name="settings-m"></ui-icon>
+            </a>
           </ui-panel-action>
         </div>
         ${(tracker.description || wtmUrl) &&
@@ -143,8 +150,6 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
-                  ${tracker.requestsBlocked.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>
@@ -164,8 +169,6 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
-                  ${tracker.requestsModified.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>
@@ -185,8 +188,6 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
-                  ${tracker.requestsObserved.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>

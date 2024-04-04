@@ -98,7 +98,7 @@ export default {
                   <span slot="content">WhoTracks.Me Statistical Report</span>
                   <ui-panel-action>
                     <a
-                      href="https://www.whotracks.me/websites/${domain}.html"
+                      href="https://www.ghostery.com/whotracksme/websites/${domain}"
                       onclick="${openTabWithUrl}"
                       target="_blank"
                     >

@@ -58,29 +58,36 @@ export default {
         </ui-text>
         ${store.ready(exception) &&
         html`
-          <div layout="column gap">
-            <div layout="row:wrap gap">
-              <div layout="grow">
-                <ui-text type="label-m">Protection status</ui-text>
-                <ui-text type="body-s" color="gray-500">
+          <div layout="column gap:3">
+            <div layout="column gap">
+              <div layout="block:center grow">
+                <ui-text type="label-l">Protection status</ui-text>
+                <ui-text type="body-m" color="gray-500">
                   For all websites
                 </ui-text>
               </div>
               <ui-panel-protection-status-toggle
-                layout="shrink:0"
+                layout="self:center"
                 value="${exception.overwriteStatus}"
                 blockByDefault="${blockedByDefault}"
                 tooltip
                 onchange="${html.set(exception, 'overwriteStatus')}"
               ></ui-panel-protection-status-toggle>
             </div>
-            <ui-line></ui-line>
-            <div layout="row gap items:center">
+            <gh-panel-card type="info">
+              <ui-text type="label-s" color="primary-700" layout="row gap:0.5">
+                <ui-icon name="info-filled"></ui-icon>
+                ${blockedByDefault
+                  ? msg`Our recommendation for this activity: Blocked`
+                  : msg`Our recommendation for this activity: Trusted`}
+              </ui-text>
+            </gh-panel-card>
+            <gh-panel-card layout="row gap items:center">
               <div layout="grow">
                 <ui-text type="label-m">
                   Add ${stats.domain} as exception
                 </ui-text>
-                <ui-text type="body-m" color="gray-500">
+                <ui-text type="body-s" color="gray-500">
                   ${blockedByDefault === exception.overwriteStatus
                     ? msg`Block on this website`
                     : msg`Trust on this website`}
@@ -103,7 +110,7 @@ export default {
                       color="success-500"
                     ></ui-toggle>
                   `}
-            </div>
+            </gh-panel-card>
           </div>
         `}
       </gh-panel-dialog>
