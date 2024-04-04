@@ -32,7 +32,7 @@ export default {
             My Account
           </ui-text>
         </div>
-        <ui-settings-card>
+        <gh-settings-card>
           <img
             src="${assets[
               store.ready(session) && session.user ? 'shield' : 'contribution'
@@ -51,9 +51,9 @@ export default {
                   <div layout="row items:center gap:2">
                     <ui-text type="headline-m"> ${session.name} </ui-text>
                     ${session.contributor &&
-                    html`<ui-settings-badge type="primary">
+                    html`<gh-settings-badge type="primary">
                       Contributor
-                    </ui-settings-badge>`}
+                    </gh-settings-badge>`}
                   </div>
                   <ui-text type="body-m" color="gray-600"
                     >${session.email}</ui-text
@@ -85,14 +85,14 @@ export default {
                   </ui-button>
                 </div>
               `)}
-        </ui-settings-card>
+        </gh-settings-card>
 
         <div layout="column gap:4" layout@768px="gap:5">
           <div layout="row items:start gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['sync'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img src="${assets.sync_small}" alt="Sync" />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div
               layout="column gap:2"

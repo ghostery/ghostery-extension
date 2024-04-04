@@ -59,9 +59,9 @@ export default {
         <section layout="column gap:4">
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img src="${assets.wtm_wheel_small}" alt="WhoTracks.Me Wheel" />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div layout="column gap:2" layout@768px="row gap:5 grow">
               <div layout="column grow gap:0.5">
@@ -81,12 +81,12 @@ export default {
           html`
             <div layout="row gap:2" layout@768px="gap:5">
               <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
-                <ui-settings-help-image>
+                <gh-settings-help-image>
                   <img
                     src="${assets.trackers_count_small}"
                     alt="Trackers Count"
                   />
-                </ui-settings-help-image>
+                </gh-settings-help-image>
               </a>
               <div layout="column gap:2" layout@768px="row gap:5 grow">
                 <div layout="column grow gap:0.5">
@@ -105,12 +105,12 @@ export default {
           `}
           <div layout="row gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img
                   src="${assets.trackers_preview_small}"
                   alt="Trackers Preview"
                 />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div layout="column gap:2" layout@768px="row gap:5 grow">
               <div layout="column grow gap:0.5">
@@ -118,17 +118,13 @@ export default {
                 <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                   Shows the tracker preview beside search results.
                 </ui-text>
-                <ui-text
-                  type="body-m"
-                  mobile-type="body-s"
-                  color="gray-600"
-                  underline
-                >
+                <ui-text type="label-m" color="gray-600" underline>
                   <a
                     href="https://www.ghostery.com/blog/introducing-wtm-serp-report"
                     target="_blank"
+                    layout="row gap:0.5"
                   >
-                    Learn more
+                    Learn more <ui-icon name="arrow-right-s"></ui-icon>
                   </a>
                 </ui-text>
               </div>

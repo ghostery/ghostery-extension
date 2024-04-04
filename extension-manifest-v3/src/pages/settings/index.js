@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui/settings';
+import '@ghostery/ui/panel';
 import { define, mount, store } from 'hybrids';
 
 import Options from '/store/options.js';

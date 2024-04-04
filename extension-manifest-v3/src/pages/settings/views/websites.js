@@ -58,14 +58,14 @@ export default {
         <section layout="column gap:4" layout@768px="gap:5">
           ${paused.length
             ? html`
-                <ui-settings-input icon="search" layout@1280px="width:::340px">
+                <gh-settings-input icon="search" layout@1280px="width:::340px">
                   <input
                     type="search"
                     placeholder="${msg`Search website...`}"
                     oninput="${html.set('query')}"
                   />
-                </ui-settings-input>
-                <ui-settings-table>
+                </gh-settings-input>
+                <gh-settings-table>
                   <div
                     slot="header"
                     layout="column"
@@ -113,9 +113,9 @@ export default {
                           layout@768px="hidden"
                         ></ui-line>
                         <div layout="row items:center gap" layout@768px="grow">
-                          <ui-settings-badge type="danger">
+                          <gh-settings-badge type="danger">
                             Paused
-                          </ui-settings-badge>
+                          </gh-settings-badge>
                           <ui-text color="gray-600" layout="grow">
                             ${item.revokeAt
                               ? html`${html`<relative-time
@@ -132,7 +132,7 @@ export default {
                       </div>
                     `,
                   )}
-                </ui-settings-table>
+                </gh-settings-table>
               `
             : html`
                 <div

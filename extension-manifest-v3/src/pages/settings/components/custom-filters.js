@@ -101,9 +101,9 @@ export default {
         ${store.ready(input) &&
         // prettier-ignore
         html`
-        <ui-settings-input>
+        <gh-settings-input>
           <textarea rows="10" oninput="${html.set(input, 'text')}">${input.text}</textarea>
-        <ui-settings-input>
+        <gh-settings-input>
       `}
         <div layout="row content:space-around">
           <ui-text type="body-xs" color="gray-400">

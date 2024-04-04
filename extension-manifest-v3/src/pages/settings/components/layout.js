@@ -35,7 +35,7 @@ export default {
         </header>
         <nav
           layout="order:1 row content:space-around padding gap:0.5"
-          layout@992px="grid:1:repeat(3,max-content)|max|1fr content:stretch padding:0:2:2 layer overflow:y:auto"
+          layout@992px="grid:1:repeat(4,max-content)|max|1fr content:stretch padding:0:2:2 layer overflow:y:auto"
         >
           <slot name="nav"></slot>
         </nav>
@@ -103,6 +103,10 @@ export default {
       background: var(--ui-color-primary-100);
     }
 
+    nav ::slotted(a.wrap) {
+      word-break: break-word;
+    }
+
     @media screen and (min-width: 992px) {
       header, nav {
         box-shadow: none;
@@ -127,7 +131,7 @@ export default {
 
       nav ::slotted(a.bottom) {
         position: relative;
-        grid-row: 4;
+        grid-row: 5;
         margin-top: 32px;
         overflow: visible;
       }

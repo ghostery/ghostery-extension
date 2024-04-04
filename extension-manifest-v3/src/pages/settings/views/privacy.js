@@ -68,9 +68,9 @@ export default {
           </div>
           <div layout="row items:start gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['ad_blocking'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img src="${assets.ad_blocking_small}" alt="Ad-Blocking" />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div
               layout="column gap:2"
@@ -90,9 +90,9 @@ export default {
           </div>
           <div layout="row items:start gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['anti_tracking'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img src="${assets.anti_tracking_small}" alt="Anti-Tracking" />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div
               layout="column gap:2"
@@ -113,9 +113,9 @@ export default {
           </div>
           <div layout="row items:start gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['never_consent'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img src="${assets.never_consent_small}" alt="Never-Consent" />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div
               layout="column gap:2"
@@ -138,9 +138,9 @@ export default {
           </ui-text>
           <div layout="row items:start gap:2" layout@768px="gap:5">
             <a href="${router.url(Preview, PREVIEWS['serp_tracking'])}">
-              <ui-settings-help-image>
+              <gh-settings-help-image>
                 <img src="${assets.serp_tracking_small}" alt="Serp Tracking" />
-              </ui-settings-help-image>
+              </gh-settings-help-image>
             </a>
             <div
               layout="column gap:2"

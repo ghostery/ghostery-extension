@@ -35,7 +35,12 @@ const icons = {
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    `,
+  `,
+  'arrow-right-s': html`
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.66406 8H13.3307M13.3307 8L9.33073 4M13.3307 8L9.33073 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `,
   'arrow-down': html`
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M6.10651 8.78147C6.24852 8.65129 6.47876 8.65129 6.62077 8.78147L10 11.8791L13.3792 8.78147C13.5212 8.65129 13.7515 8.65129 13.8935 8.78147C14.0355 8.91164 14.0355 9.1227 13.8935 9.25287L10.2571 12.5862C10.1151 12.7164 9.88488 12.7164 9.74287 12.5862L6.10651 9.25287C5.9645 9.1227 5.9645 8.91164 6.10651 8.78147Z" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>

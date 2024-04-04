@@ -11,7 +11,6 @@
 
 import { html, router, store } from 'hybrids';
 
-import Options from '/store/options.js';
 import Session from '/store/session.js';
 
 import Privacy from './views/privacy.js';
@@ -19,15 +18,16 @@ import Websites from './views/websites.js';
 import Whotracksme from './views/whotracksme.js';
 import Account from './views/account.js';
 import Preview from './views/preview.js';
+import Trackers from './views/trackers.js';
 
 import assets from './assets/index.js';
 
 export default {
-  stack: router([Privacy, Websites, Whotracksme, Account, Preview]),
+  stack: router([Privacy, Websites, Whotracksme, Account, Preview, Trackers]),
   session: store(Session),
   content: ({ stack, session }) => html`
     <template layout="contents">
-      <ui-settings-layout>
+      <gh-settings-layout>
         <a
           href="${router.url(Privacy, { scrollToTop: true })}"
           class="${{ active: router.active(Privacy) }}"
@@ -36,30 +36,59 @@ export default {
           <ui-icon name="shield-menu" color="nav" layout="size:3"></ui-icon>
           Privacy protection
         </a>
-        ${!!Options.paused &&
-        html`<a
+        <a
           href="${router.url(Websites, { scrollToTop: true })}"
           class="${{ active: router.active(Websites) }}"
           slot="nav"
         >
           <ui-icon name="settings" color="nav" layout="size:3"></ui-icon>
           Websites
-        </a>`}
+        </a>
+        <a
+          href="${router.url(Trackers, { scrollToTop: true })}"
+          class="${{ active: router.active(Trackers) }}"
+          slot="nav"
+        >
+          <ui-icon name="block-m" color="nav" layout="size:3"></ui-icon>
+          Trackers
+        </a>
         <a
           href="${router.url(Whotracksme, { scrollToTop: true })}"
-          class="${{ active: router.active(Whotracksme) }}"
+          class="${{ active: router.active(Whotracksme), wrap: true }}"
           slot="nav"
           translate="no"
         >
           <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
           WhoTracks.Me
         </a>
+
+        <a
+          href="${router.url(Account, { scrollToTop: true })}"
+          class="${{ active: router.active(Account), bottom: true }}"
+          slot="nav"
+        >
+          ${store.ready(session) && session.user
+            ? html`
+                ${session.contributor
+                  ? html`<ui-icon name="contributor"></ui-icon>`
+                  : html`<ui-icon name="user" color="nav"></ui-icon>`}
+                <span layout@992px="hidden">My Account</span>
+                <div
+                  layout="hidden"
+                  layout@992px="column margin:left:2px width::0"
+                >
+                  <div>My Account</div>
+                  <ui-text type="body-m" ellipsis>${session.email}</ui-text>
+                </div>
+              `
+            : html`<ui-icon name="user" color="nav"></ui-icon> My Account`}
+        </a>
         ${store.ready(session) &&
         html`
-          <ui-settings-card
+          <gh-settings-card
             layout="hidden"
             layout@992px="
-              area::5/6 self:end:stretch
+              area::6/7 self:end:stretch
               margin:top:2 padding:2 gap content:center
               column
             "
@@ -116,29 +145,8 @@ export default {
                     </ui-button>
                   </div>
                 `}
-          </ui-settings-card>
+          </gh-settings-card>
         `}
-        <a
-          href="${router.url(Account, { scrollToTop: true })}"
-          class="${{ active: router.active(Account), bottom: true }}"
-          slot="nav"
-        >
-          ${store.ready(session) && session.user
-            ? html`
-                ${session.contributor
-                  ? html`<ui-icon name="contributor"></ui-icon>`
-                  : html`<ui-icon name="user" color="nav"></ui-icon>`}
-                <span layout@992px="hidden">My Account</span>
-                <div
-                  layout="hidden"
-                  layout@992px="column margin:left:2px width::0"
-                >
-                  <div>My Account</div>
-                  <ui-text type="body-m" ellipsis>${session.email}</ui-text>
-                </div>
-              `
-            : html`<ui-icon name="user" color="nav"></ui-icon> My Account`}
-        </a>
         ${stack}
         ${store.ready(session) &&
         html`
@@ -146,7 +154,7 @@ export default {
             layout="grid:1/1 grow items:end:stretch padding:0"
             layout@992px="hidden"
           >
-            <ui-settings-card
+            <gh-settings-card
               in-content
               layout="column items:center gap"
               layout@768px="row gap:5"
@@ -204,10 +212,10 @@ export default {
                       </ui-button>
                     </div>
                   `}
-            </ui-settings-card>
+            </gh-settings-card>
           </section>
         `}
-      </ui-settings-layout>
+      </gh-settings-layout>
     </template>
   `.css`
     html, body { height: 100%; }

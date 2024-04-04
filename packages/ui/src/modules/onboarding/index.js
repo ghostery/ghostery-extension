@@ -11,8 +11,11 @@
 
 import { define } from 'hybrids';
 
+// Styles
+import './styles.css';
+
 // Global components
-import '../pages/index.js';
+import '../global/index.js';
 
 // Root
 import './onboarding.js';
