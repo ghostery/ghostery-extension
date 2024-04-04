@@ -26,7 +26,7 @@ const checkUserAgent = (pattern) => navigator.userAgent.indexOf(pattern) !== -1;
 
 const ENV = new Map([
   ['ext_ghostery', true],
-  ['cap_html_filtering', true],
+  ['cap_html_filtering', checkUserAgent('Firefox')],
   ['env_firefox', checkUserAgent('Firefox')],
   ['env_chromium', checkUserAgent('Chrome')],
   ['env_edge', checkUserAgent('Edg')],
