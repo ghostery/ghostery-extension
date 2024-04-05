@@ -33,11 +33,20 @@ const ENV = new Map([
   ['env_mobile', checkUserAgent('Mobile')],
 ]);
 
-const deserializeEngine = (engineBytes) => {
+function deserializeEngine(engineBytes) {
   const engine = FiltersEngine.deserialize(engineBytes);
   engine.updateEnv(ENV);
   return engine;
-};
+}
+
+function parseFilters(filters) {
+  const config = new Config({
+    enableHtmlFiltering: ENV.get('cap_html_filtering'),
+  });
+  const engine = FiltersEngine.parse(filters, config);
+  engine.updateEnv(ENV);
+  return engine;
+}
 
 const engines = new Map();
 
@@ -389,11 +398,7 @@ export async function init(name) {
 }
 
 export async function createCustomEngine(filters = '') {
-  const config = new Config({
-    enableHtmlFiltering: true,
-  });
-  const engine = FiltersEngine.parse(filters, config);
-  engine.updateEnv(ENV);
+  const engine = parseFilters(filters);
 
   saveToMemory(CUSTOM_ENGINE, engine);
   saveToStorage(CUSTOM_ENGINE);
