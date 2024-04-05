@@ -123,6 +123,9 @@
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "在浏览器工具栏中的 Ghostery 图标上显示跟踪器计数。"
   },
+  "dnr_output__@_0__": {
+    "message": "DNR Output ($${0})"
+  },
   "don_t_ask_again": {
     "message": "别再问了"
   },
