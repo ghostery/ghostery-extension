@@ -31,8 +31,8 @@
     "web-ext": "^7.11.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.26.12",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.26.12",
+    "@cliqz/adblocker": "^1.27.0",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.27.0",
     "@duckduckgo/autoconsent": "^10.3.2",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",

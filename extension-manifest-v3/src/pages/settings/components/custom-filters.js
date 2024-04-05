@@ -44,7 +44,7 @@ function parseFilters(text = '') {
 }
 
 async function submitFilters(host) {
-  const { networkFilters, cosmeticFilters } = host.filters;
+  const { networkFilters } = host.filters;
 
   // Update DNR
   if (__PLATFORM__ !== 'firefox') {
@@ -75,7 +75,7 @@ async function submitFilters(host) {
   // Update engine
   await chrome.runtime.sendMessage({
     action: 'customFilters:engine',
-    filters: [...networkFilters, ...cosmeticFilters].join('\n'),
+    filters: host.input.text,
   });
 
   // Save input
