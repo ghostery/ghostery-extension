@@ -390,6 +390,7 @@ export async function createCustomEngine(filters = '') {
     enableHtmlFiltering: true,
   });
   const engine = FiltersEngine.parse(filters, config);
+  engine.updateEnv(ENV);
 
   saveToMemory(CUSTOM_ENGINE, engine);
   saveToStorage(CUSTOM_ENGINE);
