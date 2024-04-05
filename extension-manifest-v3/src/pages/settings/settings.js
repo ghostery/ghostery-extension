@@ -41,7 +41,7 @@ export default {
           class="${{ active: router.active(Websites) }}"
           slot="nav"
         >
-          <ui-icon name="settings" color="nav" layout="size:3"></ui-icon>
+          <ui-icon name="websites" color="nav" layout="size:3"></ui-icon>
           Websites
         </a>
         <a

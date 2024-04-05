@@ -42,5 +42,9 @@ export default {
       border-color: transparent;
       box-shadow: none;
     }
+
+    @media (hover: hover) and (pointer: fine) {
+      ::slotted(*:hover) { border-color: var(--ui-color-gray-300);} }
+    }
   `,
 };

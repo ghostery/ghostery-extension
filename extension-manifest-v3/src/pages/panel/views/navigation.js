@@ -20,7 +20,7 @@ import assets from '/pages/settings/assets/index.js';
 const MENU = [
   {},
   {
-    icon: 'alert',
+    icon: 'report',
     label: msg`Report a broken page`,
     href: 'https://www.ghostery.com/support?utm_source=gbe',
   },
@@ -36,10 +36,34 @@ const MENU = [
   },
   {},
   {
-    icon: 'settings',
-    label: msg`Ghostery settings`,
-    href: chrome.runtime.getURL('/pages/settings/index.html'),
+    icon: 'shield-menu',
+    label: msg`Privacy protection`,
+    href: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-privacy',
+    ),
   },
+  {
+    icon: 'websites',
+    label: msg`Websites`,
+    href: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-websites',
+    ),
+  },
+  {
+    icon: 'block-m',
+    label: msg`Trackers`,
+    href: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-trackers',
+    ),
+  },
+  {
+    icon: 'wtm',
+    label: msg`WhoTracks.Me`,
+    href: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-whotracksme',
+    ),
+  },
+  {},
   {
     icon: 'info-menu',
     label: msg`About`,

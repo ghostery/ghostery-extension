@@ -82,7 +82,7 @@ export default {
                   : msg`Our recommendation for this activity: Trusted`}
               </ui-text>
             </gh-panel-card>
-            <gh-panel-card layout="row gap items:center">
+            <gh-panel-card layout="row gap">
               <div layout="grow">
                 <ui-text type="label-m">
                   Add ${stats.domain} as exception
@@ -100,6 +100,7 @@ export default {
                       onchange="${toggleException('blocked')}"
                       type="status"
                       color="danger-500"
+                      layout="margin:top:0.5"
                     ></ui-toggle>
                   `
                 : html`
@@ -108,6 +109,7 @@ export default {
                       onchange="${toggleException('allowed')}"
                       type="status"
                       color="success-500"
+                      layout="margin:top:0.5"
                     ></ui-toggle>
                   `}
             </gh-panel-card>
