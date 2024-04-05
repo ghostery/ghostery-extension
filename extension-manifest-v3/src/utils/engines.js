@@ -33,6 +33,12 @@ const ENV = new Map([
   ['env_mobile', checkUserAgent('Mobile')],
 ]);
 
+const deserializeEngine = (engineBytes) => {
+  const engine = FiltersEngine.deserialize(engineBytes);
+  engine.updateEnv(ENV);
+  return engine;
+};
+
 const engines = new Map();
 
 function loadFromMemory(name) {
@@ -105,8 +111,7 @@ async function loadFromStorage(name) {
     const engineBytes = await table.get(name);
 
     if (engineBytes) {
-      const engine = FiltersEngine.deserialize(engineBytes);
-      engine.updateEnv(ENV);
+      const engine = deserializeEngine(engineBytes);
       shareExceptions(name, engine);
       saveToMemory(name, engine);
 
@@ -202,8 +207,7 @@ async function update(name) {
         .then((res) => res.arrayBuffer());
 
       const engineBytes = new Uint8Array(arrayBuffer);
-      engine = FiltersEngine.deserialize(engineBytes);
-      engine.updateEnv(ENV);
+      engine = deserializeEngine(engineBytes);
       shareExceptions(name, engine);
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
@@ -337,8 +341,7 @@ async function loadFromDisk(name) {
     );
 
     const engineBytes = new Uint8Array(await response.arrayBuffer());
-    const engine = FiltersEngine.deserialize(engineBytes);
-    engine.updateEnv(ENV);
+    const engine = deserializeEngine(engineBytes);
     shareExceptions(name, engine);
     saveToMemory(name, engine);
     saveToStorage(name);
