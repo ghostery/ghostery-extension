@@ -12,6 +12,7 @@
 import { html, router, store } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
+import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 import TrackerException, {
   getExceptionStatus,
@@ -49,14 +50,18 @@ const regionNames = new Intl.DisplayNames(
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
+  options: store(Options),
   trackerId: '',
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
   exception: store(TrackerException, { id: 'trackerId' }),
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
-    `https://www.whotracks.me/trackers/${tracker.id}.html`,
-  content: ({ stats, tracker, exception, wtmUrl }) => html`
+    `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
+  paused: ({ options, stats }) =>
+    store.ready(options, stats) &&
+    options.paused.find(({ id }) => id === stats.domain),
+  content: ({ stats, tracker, exception, wtmUrl, paused }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -72,34 +77,45 @@ export default {
           ${labels.categories[tracker.category]}
         </ui-text>
         <div layout="grid:1|max gap">
-          ${store.ready(exception) &&
-          html.resolve(
-            getExceptionStatus(exception, stats.domain).then(
-              (status) => html`<ui-panel-action layout="width:full">
-                <a
-                  href="${router.url(ProtectionStatus, {
-                    trackerId: tracker.id,
-                  })}"
-                  layout="row gap"
-                >
-                  <ui-icon
-                    name="${status.startsWith('block') ? 'block' : 'trust'}-m"
-                    color="${status.startsWith('block')
-                      ? 'gray-800'
-                      : 'success-500'}"
-                  ></ui-icon>
-                  <ui-text type="label-m" layout="row gap">
-                    ${status === 'trusted' && html`Trusted on all websites`}
-                    ${status === 'blocked' && html`Blocked on all websites`}
-                    ${status === 'trusted:website' &&
-                    html`Trusted on this website`}
-                    ${status === 'blocked:website' &&
-                    html`Blocked on this website`}
-                  </ui-text>
-                </a>
-              </ui-panel-action>`,
-            ),
-          )}
+          ${paused
+            ? html`
+                <ui-panel-action layout="width:full" disabled>
+                  <div layout="row gap">
+                    <ui-icon name="pause"></ui-icon>
+                    <ui-text type="label-m">Ghostery paused</ui-text>
+                  </div>
+                </ui-panel-action>
+              `
+            : store.ready(exception) &&
+              html.resolve(
+                getExceptionStatus(exception, stats.domain).then(
+                  (status) => html`<ui-panel-action layout="width:full">
+                    <a
+                      href="${router.url(ProtectionStatus, {
+                        trackerId: tracker.id,
+                      })}"
+                      layout="row gap"
+                    >
+                      <ui-icon
+                        name="${status.startsWith('block')
+                          ? 'block'
+                          : 'trust'}-m"
+                        color="${status.startsWith('block')
+                          ? 'gray-800'
+                          : 'success-500'}"
+                      ></ui-icon>
+                      <ui-text type="label-m" layout="row gap">
+                        ${status === 'trusted' && html`Trusted on all websites`}
+                        ${status === 'blocked' && html`Blocked on all websites`}
+                        ${status === 'trusted:website' &&
+                        html`Trusted on this website`}
+                        ${status === 'blocked:website' &&
+                        html`Blocked on this website`}
+                      </ui-text>
+                    </a>
+                  </ui-panel-action>`,
+                ),
+              )}
           <ui-panel-action>
             <a
               href="${chrome.runtime.getURL(

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, router, dispatch } from 'hybrids';
+import { html, router, dispatch } from 'hybrids';
 import { getStats } from '@ghostery/trackers-preview/page_scripts';
 
 function openTabWithUrl(host, event) {
@@ -64,7 +64,6 @@ export default {
   },
   dialog: undefined,
   exceptionDialog: undefined,
-  label: '',
   content: ({
     categories,
     categoryList,
@@ -74,19 +73,11 @@ export default {
     type,
     dialog,
     exceptionDialog,
-    label,
   }) => html`
     <template layout="column gap:0.5">
       <div layout="row items:center gap height::4.5">
         <div layout="row gap grow">
-          <ui-text type="label-m">${label || msg`Observed activities`}</ui-text>
-          <ui-tooltip wrap autohide="10" position="bottom">
-            <span slot="content" layout="block width:200px">
-              Mind that not all listed entities are trackers, that is not all of
-              them collect personal data
-            </span>
-            <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
-          </ui-tooltip>
+          <ui-text type="label-m">Observed activities</ui-text>
         </div>
         ${wtmLink &&
         html.resolve(
@@ -152,7 +143,7 @@ export default {
             ${!categoryList.length &&
             html`
               <ui-text type="body-s" color="gray-600" layout="grow row center">
-                No trackers detected
+                No activities detected
               </ui-text>
             `}
             ${categoryList.map(
@@ -181,7 +172,7 @@ export default {
                   color="gray-600"
                   layout="grow row center"
                 >
-                  No trackers detected
+                  No activities detected
                 </ui-text>
               </ui-panel-list>
             `}
@@ -233,7 +224,8 @@ export default {
                                 ></ui-icon>`}
                               </a>
                             </ui-text>
-                            ${html.resolve(
+                            ${tracker.status &&
+                            html.resolve(
                               tracker.status.then(
                                 (status) => html`
                                   <ui-tooltip>

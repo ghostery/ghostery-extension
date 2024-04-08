@@ -81,26 +81,32 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   trackerExceptions: store([TrackerException]),
-  trackers: ({ stats, trackerExceptions }) =>
+  trackers: ({ stats, trackerExceptions, paused }) =>
     store.ready(stats, trackerExceptions) &&
     stats.trackers.map((t) => {
       const exception = trackerExceptions.find((e) => e.id === t.id);
       return {
         ...t,
-        status: exception
-          ? getExceptionStatus(exception, stats.domain)
-          : Promise.resolve(
-              isCategoryBlockedByDefault(t.category) ? 'blocked' : 'trusted',
-            ),
+        status:
+          !paused &&
+          (exception
+            ? getExceptionStatus(exception, stats.domain)
+            : Promise.resolve(
+                isCategoryBlockedByDefault(t.category) ? 'blocked' : 'trusted',
+              )),
       };
     }),
   notification: store(Notification),
+  paused: ({ options, stats }) =>
+    store.ready(options, stats) &&
+    options.paused.find(({ id }) => id === stats.domain),
   content: ({
     options,
     stats,
-    notification,
     trackerExceptions,
     trackers,
+    notification,
+    paused,
   }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats, trackerExceptions) &&
@@ -130,7 +136,7 @@ export default {
             html`
               <gh-panel-pause
                 onaction="${togglePause}"
-                paused="${options.paused.find(({ id }) => id === stats.domain)}"
+                paused="${paused}"
               ></gh-panel-pause>
             `
           : html`

@@ -83,7 +83,6 @@ export default define({
                     <ui-panel-stats
                       domain="${domain}"
                       categories="${data.stats.sort(sort)}"
-                      label="${msg`Trackers Preview`}"
                       layout="relative layer:101"
                     >
                     </ui-panel-stats>

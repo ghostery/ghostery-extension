@@ -14,6 +14,7 @@ import { html } from 'hybrids';
 export default {
   active: false,
   grouped: false,
+  disabled: false,
   render: () => html`
     <template layout="grid size:4.5">
       <ui-action><slot></slot></ui-action>
@@ -41,6 +42,15 @@ export default {
       background: none;
       border-color: transparent;
       box-shadow: none;
+    }
+
+    :host([disabled]) ::slotted(*) {
+      pointer-events: none;
+      cursor: default;
+      box-shadow: none;
+      background: var(--ui-color-gray-100);
+      color: var(--ui-color-gray-600);
+      --ui-text-color-heading: var(--ui-color-gray-600);
     }
 
     @media (hover: hover) and (pointer: fine) {
