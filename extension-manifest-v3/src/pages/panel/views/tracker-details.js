@@ -42,7 +42,7 @@ export default {
     stats.trackers.find((t) => t.id === trackerId),
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
-    `https://www.whotracks.me/trackers/${tracker.id}.html`,
+    `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
   content: ({ tracker, wtmUrl }) => html`
     <template layout="column">
       <gh-panel-dialog>
