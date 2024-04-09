@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, msg, dispatch } from 'hybrids';
+import { html, define, dispatch } from 'hybrids';
 import { sortCategories } from '@ghostery/ui/categories';
 
 import DisablePreviewImg from './assets/disable-preview.svg';
