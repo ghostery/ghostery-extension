@@ -1,5 +1,5 @@
-import { resolve, dirname } from 'path';
-import { readFileSync, writeFileSync } from 'fs';
+import { resolve, dirname, join } from 'path';
+import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { exec, execSync } from 'child_process';
 import { build } from 'vite';
 import shelljs from 'shelljs';
@@ -182,6 +182,13 @@ if (manifest.action?.default_popup) {
 if (manifest.browser_action?.default_popup) {
   source.push(manifest.browser_action.default_popup);
 }
+
+// offscreen documents
+readdirSync(join(options.srcDir, 'pages', 'offscreen'), { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith('.'))
+  .forEach((dirent) =>
+    source.push(join('pages', 'offscreen', dirent.name, 'index.html')),
+  );
 
 // options page
 if (manifest.options_ui?.page) {

@@ -12,7 +12,7 @@
 import { html, store } from 'hybrids';
 import { detectFilterType } from '@cliqz/adblocker';
 
-import * as converter from '/utils/dnr-converter.js';
+import convert from '/utils/dnr-converter.js';
 import CustomFiltersInput from '../store/custom-filters-input.js';
 import { asyncAction } from './devtools.js';
 
@@ -51,7 +51,7 @@ async function submitFilters(host) {
     const dnrRules = [];
     const dnrErrors = [];
     const results = await Promise.allSettled(
-      [...networkFilters].map((filter) => converter.convert(filter)),
+      [...networkFilters].map((filter) => convert(filter)),
     );
 
     for (const result of results) {
@@ -83,10 +83,9 @@ async function submitFilters(host) {
 }
 
 function update(host, event) {
-  asyncAction(
-    event,
-    submitFilters(host).then(() => 'Filters updated'),
-  );
+  // submitFilters calls `convert` which may request optional permission - that function must be called during a user gesture.
+  const promise = submitFilters(host).then(() => 'Filters updated');
+  asyncAction(event, promise);
 }
 
 export default {
