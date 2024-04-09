@@ -87,7 +87,7 @@ export default {
               html`
                 <ui-tooltip position="bottom">
                   <span slot="content">WhoTracks.Me Statistical Report</span>
-                  <ui-panel-action>
+                  <ui-panel-action layout="size:4.5">
                     <a
                       href="https://www.ghostery.com/whotracksme/websites/${domain}"
                       onclick="${openTabWithUrl}"
@@ -234,7 +234,7 @@ export default {
                                     </span>
                                     <ui-panel-action
                                       type="outline"
-                                      layout="shrink:0"
+                                      layout="shrink:0 width:4.5"
                                     >
                                       <a
                                         href="${router.url(exceptionDialog, {

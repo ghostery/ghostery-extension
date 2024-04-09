@@ -116,7 +116,7 @@ export default {
                   </ui-panel-action>`,
                 ),
               )}
-          <ui-panel-action>
+          <ui-panel-action layout="width:4.5">
             <a
               href="${chrome.runtime.getURL(
                 '/pages/settings/index.html#@gh-settings-trackers',

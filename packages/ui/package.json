@@ -21,6 +21,6 @@
     "test": "npm run lint"
   },
   "dependencies": {
-    "hybrids": "^8.2.16"
+    "hybrids": "^8.2.17"
   }
 }

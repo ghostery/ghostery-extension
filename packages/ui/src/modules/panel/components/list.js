@@ -10,7 +10,6 @@
  */
 
 import { html } from 'hybrids';
-import { getCategoryColor } from '../../../utils/categories.js';
 import * as labels from '../../../utils/labels.js';
 
 export default {
@@ -25,9 +24,7 @@ export default {
           onclick="${html.set('closed', !closed)}"
           layout="row items:center gap overflow padding margin:-1"
         >
-          <div id="icon" layout="block relative size:3 padding:0.5">
-            <ui-icon name="category-${name}"></ui-icon>
-          </div>
+          <ui-panel-category-icon name="${name}"></ui-panel-category-icon>
           <ui-text type="label-m">${labels.categories[name]}</ui-text>
           <slot name="header"></slot>
           <div layout="grow"></div>
@@ -73,20 +70,6 @@ export default {
 
     #header:focus-visible ui-text {
       color: var(--ui-color-primary-700);
-    }
-
-    #icon {
-      color: ${getCategoryColor(name)};
-    }
-
-    #icon::before {
-      content: '';
-      display: block;
-      position: absolute;
-      inset: 0;
-      background: ${getCategoryColor(name)};
-      opacity: 0.15;
-      border-radius: 4px;
     }
 
     #arrow {

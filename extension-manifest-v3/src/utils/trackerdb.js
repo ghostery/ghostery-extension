@@ -52,6 +52,30 @@ export async function getMetadata(request) {
   return metadata;
 }
 
+export async function getCategories() {
+  if (promise) await promise;
+
+  const engine = engines.get('trackerdb');
+  if (!engine) return [];
+
+  const categories = new Map(
+    engine.metadata.categories
+      .getValues()
+      .map(({ key, description }) => [key, { key, description, patterns: [] }]),
+  );
+
+  const organizations = engine.metadata.organizations.getValues();
+
+  for (const p of engine.metadata.getPatterns()) {
+    categories.get(p.category).patterns.push({
+      ...p,
+      organization: organizations.find((o) => o.key === p.organization),
+    });
+  }
+
+  return [...categories.values().filter((c) => c.patterns.length > 0)];
+}
+
 const patterns = new Map();
 export async function getPattern(key) {
   if (promise) await promise;

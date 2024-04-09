@@ -32,9 +32,9 @@ export default {
       background: var(--ui-color-white);
       border: 1px solid var(--ui-color-gray-200);
       border-radius: 8px;
-      padding: 13px;
+      padding: 11px;
       margin: 0;
-      font: var(--ui-font-body-l);
+      font: var(--ui-font-body-m);
     }
 
     ::slotted(textarea) {

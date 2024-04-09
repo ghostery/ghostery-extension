@@ -16,7 +16,7 @@ export default {
   grouped: false,
   disabled: false,
   render: () => html`
-    <template layout="grid size:4.5">
+    <template layout="grid height:4.5">
       <ui-action><slot></slot></ui-action>
     </template>
   `.css`
@@ -33,7 +33,7 @@ export default {
       box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
       border-radius: 8px;
       transition: all 0.2s;
-      padding: 0;
+      padding: 0 8px;
       margin: 0;
       color: inherit;
     }

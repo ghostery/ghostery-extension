@@ -8,9 +8,14 @@ function toggle(host) {
 export default {
   value: false,
   blockByDefault: true,
-  render: ({ value, blockByDefault }) => html`
+  responsive: false,
+  render: ({ value, blockByDefault, responsive }) => html`
     <template layout="row relative">
-      <ui-panel-action-group>
+      <ui-panel-action-group
+        class="${{ responsive }}"
+        layout.responsive="column"
+        layout.responsive@768px="row"
+      >
         <ui-panel-action grouped active="${value !== blockByDefault}">
           <button layout="row relative gap:0.5 padding:0.5" onclick="${toggle}">
             <ui-icon name="block-s"></ui-icon>

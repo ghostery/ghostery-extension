@@ -1,0 +1,87 @@
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html, dispatch } from 'hybrids';
+import * as labels from '@ghostery/ui/labels';
+
+export default {
+  name: '',
+  description: '',
+  blocked: 0,
+  trusted: 0,
+  open: false,
+  render: ({ name, description, blocked, trusted, open }) => html`
+    <template layout="column gap:2 padding:1.5">
+      <header layout="row items:center gap:1.5" layout@768px="gap:2">
+        <ui-action>
+          <button
+            onclick="${(host) => dispatch(host, 'toggle')}"
+            layout="block:left row items:center gap:1.5 padding:0.5 grow"
+            layout@768px="gap:2"
+          >
+            <ui-icon id="arrow" name="arrow-down" layout="size:3"></ui-icon>
+            <ui-panel-category-icon
+              name="${name}"
+              layout="size:5 padding"
+            ></ui-panel-category-icon>
+            <div layout="column gap:0.5">
+              <ui-text type="label-l">
+                ${labels.categories[name]}<ui-tooltip delay="0.0" wrap inline>
+                  <span slot="content" layout="block width:200px">
+                    ${description}
+                  </span>
+                  <ui-icon
+                    name="info"
+                    color="gray-400"
+                    layout="margin:top:1px"
+                  ></ui-icon>
+                </ui-tooltip>
+              </ui-text>
+              <div layout="column" layout@768px="row gap">
+                <ui-text type="body-s" color="gray-600" layout="width::90px">
+                  Blocked: ${blocked}
+                </ui-text>
+                <ui-text type="body-s" color="gray-600" layout="width::90px">
+                  Trusted: ${trusted}
+                </ui-text>
+              </div>
+            </div>
+          </button>
+        </ui-action>
+
+        <ui-panel-action>
+          <ui-icon name="refresh"></ui-icon>
+        </ui-panel-action>
+      </header>
+
+      ${open &&
+      html`
+        <div layout="column gap:2">
+          <ui-line></ui-line>
+
+          <div layout="column gap:2" layout@768px="padding:left:100px">
+            <slot></slot>
+          </div>
+        </div>
+      `}
+    </template>
+  `.css`
+    :host {
+      border-radius: 8px;
+      border: 1px solid var(--ui-color-gray-200);
+      background: var(--ui-color-white);
+    }
+
+    :host([open]) #arrow {
+      transform: rotate(180deg);
+    }
+  `,
+};

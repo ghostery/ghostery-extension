@@ -38,6 +38,7 @@ export default {
   wrap: false,
   position: 'top', // top, bottom
   delay: 1,
+  inline: false,
   show: {
     value: false,
     connect: (host) => () => clearTimeout(timeouts.get(host)),
@@ -78,14 +79,16 @@ export default {
       }
     },
   },
-  render: ({ position }) => html`
+  render: ({ position, inline }) => html`
     <template layout="contents">
       <div
         ontouchstart="${toggle(true)}"
         onmouseenter="${toggle(true)}"
         onmouseleave="${toggle(false)}"
         onclick="${toggle(false)}"
+        class="${{ inline }}"
         layout="block relative"
+        layout.inline="block inline"
       >
         <slot></slot>
         <div
