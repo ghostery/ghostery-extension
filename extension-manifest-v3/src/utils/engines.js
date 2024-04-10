@@ -22,6 +22,32 @@ import { registerDatabase } from '/utils/indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 
+const checkUserAgent = (pattern) => navigator.userAgent.indexOf(pattern) !== -1;
+
+const ENV = new Map([
+  ['ext_ghostery', true],
+  ['cap_html_filtering', checkUserAgent('Firefox')],
+  ['env_firefox', checkUserAgent('Firefox')],
+  ['env_chromium', checkUserAgent('Chrome')],
+  ['env_edge', checkUserAgent('Edg')],
+  ['env_mobile', checkUserAgent('Mobile')],
+]);
+
+function deserializeEngine(engineBytes) {
+  const engine = FiltersEngine.deserialize(engineBytes);
+  engine.updateEnv(ENV);
+  return engine;
+}
+
+function parseFilters(filters) {
+  const config = new Config({
+    enableHtmlFiltering: ENV.get('cap_html_filtering'),
+  });
+  const engine = FiltersEngine.parse(filters, config);
+  engine.updateEnv(ENV);
+  return engine;
+}
+
 const engines = new Map();
 
 function loadFromMemory(name) {
@@ -94,7 +120,7 @@ async function loadFromStorage(name) {
     const engineBytes = await table.get(name);
 
     if (engineBytes) {
-      const engine = FiltersEngine.deserialize(engineBytes);
+      const engine = deserializeEngine(engineBytes);
       shareExceptions(name, engine);
       saveToMemory(name, engine);
 
@@ -190,8 +216,7 @@ async function update(name) {
         .then((res) => res.arrayBuffer());
 
       const engineBytes = new Uint8Array(arrayBuffer);
-      engine = FiltersEngine.deserialize(engineBytes);
-
+      engine = deserializeEngine(engineBytes);
       shareExceptions(name, engine);
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
@@ -280,7 +305,7 @@ async function update(name) {
     // `engine.update` method will return `true` if anything was
     // updated and `false` otherwise.
     const cumulativeDiff = mergeDiffs(diffs);
-    let updated = engine.updateFromDiff(cumulativeDiff);
+    let updated = engine.updateFromDiff(cumulativeDiff, ENV);
 
     // Last but not least, check if resources.txt should be updated. This can be
     // done independently of filters as the data is stored in a separate object.
@@ -325,8 +350,7 @@ async function loadFromDisk(name) {
     );
 
     const engineBytes = new Uint8Array(await response.arrayBuffer());
-    const engine = FiltersEngine.deserialize(engineBytes);
-
+    const engine = deserializeEngine(engineBytes);
     shareExceptions(name, engine);
     saveToMemory(name, engine);
     saveToStorage(name);
@@ -374,10 +398,7 @@ export async function init(name) {
 }
 
 export async function createCustomEngine(filters = '') {
-  const config = new Config({
-    enableHtmlFiltering: true,
-  });
-  const engine = FiltersEngine.parse(filters, config);
+  const engine = parseFilters(filters);
 
   saveToMemory(CUSTOM_ENGINE, engine);
   saveToStorage(CUSTOM_ENGINE);
