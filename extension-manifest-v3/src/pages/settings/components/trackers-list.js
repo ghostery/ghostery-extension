@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, dispatch } from 'hybrids';
+import { html, dispatch, msg } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
 export default {
@@ -18,7 +18,15 @@ export default {
   blocked: 0,
   trusted: 0,
   open: false,
-  render: ({ name, description, blocked, trusted, open }) => html`
+  blockedByDefault: false,
+  render: ({
+    name,
+    description,
+    blocked,
+    trusted,
+    open,
+    blockedByDefault,
+  }) => html`
     <template layout="column gap:2 padding:1.5">
       <header layout="row items:center gap:1.5" layout@768px="gap:2">
         <ui-action>
@@ -57,21 +65,21 @@ export default {
           </button>
         </ui-action>
 
-        <ui-panel-action>
-          <ui-icon name="refresh"></ui-icon>
-        </ui-panel-action>
+        <ui-tooltip>
+          <span slot="content">
+            ${blockedByDefault
+              ? msg`Block all (recommend)`
+              : `Trust all (recommend)`}
+          </span>
+          <ui-panel-action>
+            <button onclick="${(host) => dispatch(host, 'clear')}">
+              <ui-icon name="refresh"></ui-icon>
+            </button>
+          </ui-panel-action>
+        </ui-tooltip>
       </header>
 
-      ${open &&
-      html`
-        <div layout="column gap:2">
-          <ui-line></ui-line>
-
-          <div layout="column gap:2" layout@768px="padding:left:100px">
-            <slot></slot>
-          </div>
-        </div>
-      `}
+      ${open && html`<slot></slot> `}
     </template>
   `.css`
     :host {

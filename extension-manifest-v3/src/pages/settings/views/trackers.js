@@ -1,66 +1,64 @@
 import { html, msg, store } from 'hybrids';
 
 import Options from '/store/options.js';
-import { getCategories } from '/utils/trackerdb';
+
+import TrackerCategory from '../store/tracker-category.js';
 
 const PATTERNS_LIMIT = 50;
 
 function loadMore(category) {
   return (host) => {
     host.limits = {
-      ...host.limits,
-      [category]: (host.limits[category] || PATTERNS_LIMIT) + PATTERNS_LIMIT,
+      ...(host.limits || {}),
+      [category]: (host.limits?.[category] || PATTERNS_LIMIT) + PATTERNS_LIMIT,
     };
   };
 }
 
-function search(categories, query) {
-  if (!query || query.length < 3) return categories;
-  query = query.trim().toLowerCase();
+let timeout;
+function setLazyQuery(host, event) {
+  const value = event.target.value || '';
 
-  const result = [];
-
-  for (const category of categories) {
-    const patterns = category.patterns.filter((p) => {
-      return (
-        p.name.toLowerCase().includes(query) ||
-        p.organization?.name.toLowerCase().includes(query)
-      );
-    });
-
-    if (patterns.length) {
-      result.push({ ...category, patterns });
-    }
+  clearTimeout(timeout);
+  if (value.length >= 3) {
+    timeout = setTimeout(() => {
+      host.query = value;
+      host.category = '_all';
+    }, 20);
+  } else {
+    host.query = '';
   }
+}
 
-  return result;
+function isActive(category, key) {
+  return category === key || category === '_all';
+}
+
+function deffer(fn) {
+  return (host, target) => {
+    setTimeout(() => {
+      if (host.contains(target)) fn(host, target);
+    }, 0);
+  };
 }
 
 export default {
   options: store(Options),
-  categories: () => getCategories(),
-  limits: {
-    set: (host, value = {}) => value,
-  },
-  query: {
-    value: '',
-    observe(host, value) {
-      if (value.length >= 3) {
-        host.category = '_all';
-      } else {
-        host.category = '';
-      }
-
-      host.limits = {};
-    },
-  },
-  category: {
-    value: '',
-    observe(host) {
-      host.limits = {};
-    },
-  },
-  content: ({ options, categories, category, limits, query }) => html`
+  categories: store([TrackerCategory], {
+    id: ({ query }) => ({ query }),
+  }),
+  category: '',
+  limits: undefined,
+  query: '',
+  filter: '',
+  content: ({
+    options,
+    categories,
+    category,
+    limits = {},
+    query,
+    filter,
+  }) => html`
     <template layout="column gap:4">
       ${store.ready(options) &&
       html`
@@ -90,77 +88,126 @@ export default {
               </a>
             </ui-text>
           </div>
-          <div layout="row gap items:center">
+          <div layout="row:wrap gap items:center">
             <gh-settings-button
+              layout="width::12 grow"
+              layout@768px="grow:0"
               onclick="${html.set(
                 'category',
                 category !== '_all' ? '_all' : '',
               )}"
-              layout="width::12"
             >
               ${category !== '_all' ? msg`Expand` : msg`Collapse`}
             </gh-settings-button>
-            <gh-settings-input layout="grow">
+            <gh-settings-input layout="grow" layout@768px="grow:0">
+              <select value="${filter}" onchange="${html.set('filter')}">
+                <option selected value="">Show all</option>
+                <option value="blocked">Blocked</option>
+                <option value="trusted">Trusted</option>
+              </select>
+            </gh-settings-input>
+            <gh-settings-input layout="grow:5 width::250px" icon="search">
               <input
                 type="search"
-                value="${query}"
-                oninput="${html.set('query')}"
+                defaultValue="${query}"
+                oninput="${setLazyQuery}"
                 placeholder="Search for a tracker or organization..."
               />
             </gh-settings-input>
           </div>
           <div layout="column gap:0.5">
-            ${html.resolve(
-              categories.then((list) =>
-                search(list, query).map(
-                  ({ key, description, patterns }) =>
-                    html`
-                      <gh-settings-trackers-list
-                        name="${key}"
-                        description="${description}"
-                        open="${key === category || category === '_all'}"
-                        blocked="${patterns.length}"
-                        ontoggle="${html.set(
-                          'category',
-                          key === category || category === '_all' ? '' : key,
-                        )}"
-                      >
-                        ${(key === category || category === '_all') &&
-                        patterns.map(
-                          (p, index) =>
-                            index <= (limits[key] || PATTERNS_LIMIT) &&
-                            html`
-                              <div layout="row items:center gap">
-                                <div
-                                  layout="column grow"
-                                  layout@768px="row gap:2"
-                                >
-                                  <ui-text type="label-m"> ${p.name} </ui-text>
-                                  ${p.organization &&
-                                  html`
-                                    <ui-text color="gray-600">
-                                      ${p.organization.name}
-                                    </ui-text>
-                                  `}
-                                </div>
-                                <ui-panel-protection-status-toggle
-                                  responsive
-                                ></ui-panel-protection-status-toggle>
-                              </div>
-                            `,
-                        )}
-                        ${(limits[key] || PATTERNS_LIMIT) < patterns.length &&
-                        html`
-                          <div layout="row center margin:bottom:2">
-                            <gh-settings-button onclick="${loadMore(key)}">
-                              Load more
-                            </gh-settings-button>
+            ${store.ready(categories) &&
+            categories.map(
+              ({
+                key,
+                description,
+                trackers,
+                blocked,
+                trusted,
+                blockedByDefault,
+              }) =>
+                html`
+                  <gh-settings-trackers-list
+                    name="${key}"
+                    description="${description}"
+                    open="${isActive(category, key)}"
+                    blocked="${blocked}"
+                    trusted="${trusted}"
+                    blockedByDefault="${blockedByDefault}"
+                    ontoggle="${html.set(
+                      'category',
+                      isActive(category, key) ? '' : key,
+                    )}"
+                  >
+                    ${isActive(category, key) &&
+                    deffer(
+                      html`
+                        <template layout>
+                          <ui-line></ui-line>
+                          <div
+                            layout="column gap"
+                            layout@768px="padding:left:102px"
+                          >
+                            ${trackers.map(
+                              (tracker, index) =>
+                                index <= (limits[key] || PATTERNS_LIMIT) &&
+                                html`
+                                  <div layout="row items:center gap">
+                                    <div
+                                      layout="column grow"
+                                      layout@768px="row gap:2"
+                                    >
+                                      <ui-text type="label-m">
+                                        ${tracker.name}
+                                      </ui-text>
+                                      ${tracker.organization &&
+                                      html`
+                                        <ui-text color="gray-600">
+                                          ${tracker.organization.name}
+                                        </ui-text>
+                                      `}
+                                    </div>
+                                    ${store.ready(tracker.exception) &&
+                                    html`
+                                      <div layout="row items:center gap">
+                                        ${tracker.exception.overwriteStatus &&
+                                        html`
+                                          <ui-text
+                                            type="label-s"
+                                            color="gray-500"
+                                          >
+                                            adjusted
+                                          </ui-text>
+                                        `}
+                                        <ui-panel-protection-status-toggle
+                                          value="${tracker.exception
+                                            .overwriteStatus}"
+                                          blockByDefault="${blockedByDefault}"
+                                          responsive
+                                          onchange="${html.set(
+                                            tracker.exception,
+                                            'overwriteStatus',
+                                          )}"
+                                        ></ui-panel-protection-status-toggle>
+                                      </div>
+                                    `}
+                                  </div>
+                                `.key(tracker.id),
+                            )}
                           </div>
-                        `}
-                      </gh-settings-trackers-list>
-                    `,
-                ),
-              ),
+                          ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
+                          html`
+                            <div layout="row center margin:bottom:2">
+                              <gh-settings-button onclick="${loadMore(key)}">
+                                Load more
+                              </gh-settings-button>
+                            </div>
+                          `}
+                        </template>
+                      `,
+                    )}
+                  </gh-settings-trackers-list>
+                `.key(key),
             )}
           </div>
         </section>

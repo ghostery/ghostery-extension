@@ -1,12 +1,12 @@
 import { dispatch, html } from 'hybrids';
 
-function toggle(host) {
-  host.value = !host.value;
-  dispatch(host, 'change', { detail: host.value });
-}
-
 export default {
-  value: false,
+  value: {
+    value: false,
+    observe(host, value) {
+      dispatch(host, 'change', { detail: value });
+    },
+  },
   blockByDefault: true,
   responsive: false,
   render: ({ value, blockByDefault, responsive }) => html`
@@ -17,7 +17,10 @@ export default {
         layout.responsive@768px="row"
       >
         <ui-panel-action grouped active="${value !== blockByDefault}">
-          <button layout="row relative gap:0.5 padding:0.5" onclick="${toggle}">
+          <button
+            layout="row relative gap:0.5 padding:0.5"
+            onclick="${html.set('value', !blockByDefault)}"
+          >
             <ui-icon name="block-s"></ui-icon>
             <ui-text type="label-xs">Blocked</ui-text>
           </button>
@@ -27,7 +30,10 @@ export default {
           grouped
           active="${value === blockByDefault}"
         >
-          <button layout="row gap:0.5 padding:0.5" onclick="${toggle}">
+          <button
+            layout="row gap:0.5 padding:0.5"
+            onclick="${html.set('value', blockByDefault)}"
+          >
             <ui-icon name="trust-s"></ui-icon>
             <ui-text type="label-xs">Trusted</ui-text>
           </button>

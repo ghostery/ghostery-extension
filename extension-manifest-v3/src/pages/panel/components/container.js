@@ -44,15 +44,12 @@ export default {
       <div class="shadow bottom" layout="absolute width:full height:3"></div>
     </template>
   `.css`
-    :host(:last-child) #scroll {
-      padding-bottom: 12px;
-    }
-
     /* set custom scrollbar */
     #scroll {
       scrollbar-width: thin;
       scrollbar-color: var(--ui-color-gray-200) transparent;
     }
+
     .shadow {
       pointer-events: none;
       background: linear-gradient(

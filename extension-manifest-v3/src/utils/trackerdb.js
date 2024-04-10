@@ -73,7 +73,7 @@ export async function getCategories() {
     });
   }
 
-  return [...categories.values().filter((c) => c.patterns.length > 0)];
+  return [...categories.values()].filter((c) => c.patterns.length > 0);
 }
 
 const patterns = new Map();

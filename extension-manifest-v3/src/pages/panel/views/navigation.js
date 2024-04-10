@@ -34,7 +34,7 @@ const MENU = [
     label: msg`Contact support`,
     href: 'https://www.ghostery.com/support?utm_source=gbe',
   },
-  {},
+  { header: msg`Ghostery settings` },
   {
     icon: 'shield-menu',
     label: msg`Privacy protection`,
@@ -63,6 +63,13 @@ const MENU = [
       '/pages/settings/index.html#@gh-settings-whotracksme',
     ),
   },
+  {
+    icon: 'user',
+    label: msg`Account`,
+    href: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-account',
+    ),
+  },
   {},
   {
     icon: 'info-menu',
@@ -83,7 +90,7 @@ export default {
   session: store(Session),
   content: ({ session }) => html`
     <template layout="grid grow">
-      <ui-panel-header layout="fixed top left width:full">
+      <ui-panel-header>
         Menu
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
@@ -91,84 +98,96 @@ export default {
           </a>
         </ui-action>
       </ui-panel-header>
-      <div layout="column gap padding:bottom margin:top:8">
-        ${store.ready(session) &&
-        html`
-          <ui-text>
-            <a
-              href="${session.user
-                ? chrome.runtime.getURL(
-                    '/pages/settings/index.html#@gh-settings-account',
-                  )
-                : SIGNON_PAGE_URL}"
-              target="_blank"
-              layout="block padding margin:0:1"
-              onclick="${openTabWithUrl}"
-            >
-              <gh-panel-menu-item icon="user">
-                ${session.user
-                  ? html`
-                      <div>${session.name}</div>
-                      <ui-text color="gray-600">${session.email}</ui-text>
-                    `
-                  : html`Sign in`}
-              </gh-panel-menu-item>
-            </a>
-          </ui-text>
-          ${MENU.filter(
-            // Hide the "Become a Contributor" menu item if the user is already a contributor
-            (_, i) => i !== 0 || (i === 0 && !session.contributor),
-          ).map(({ icon, label, href }) =>
-            label
-              ? html`
-                  <ui-text>
-                    <a
-                      href="${href}"
-                      layout="block padding margin:0:1"
-                      onclick="${openTabWithUrl}"
-                    >
-                      <gh-panel-menu-item icon="${icon}">
-                        ${label}
-                      </gh-panel-menu-item>
-                    </a>
-                  </ui-text>
-                `
-              : html`<ui-line></ui-line>`,
-          )}
-        `}
-        ${session.contributor &&
-        html`
-          <ui-action>
-            <a
-              href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@gh-settings-account',
-              )}"
-              onclick="${openTabWithUrl}"
-            >
-              <gh-panel-navigation-card
-                layout="row gap:1.5 items:center margin:1.5"
+      <gh-panel-container>
+        <div layout="column gap:0.5 padding:1:0">
+          ${store.ready(session) &&
+          html`
+            <ui-text>
+              <a
+                href="${session.user
+                  ? chrome.runtime.getURL(
+                      '/pages/settings/index.html#@gh-settings-account',
+                    )
+                  : SIGNON_PAGE_URL}"
+                target="_blank"
+                layout="block padding margin:0:1"
+                onclick="${openTabWithUrl}"
               >
-                <img
-                  src="${assets['contributor_badge']}"
-                  layout="size:12"
-                  alt="Contribution"
-                />
-                <div>
-                  <ui-text type="label-l">You are awesome!</ui-text>
-                  <ui-text
-                    type="body-s"
-                    color="gray-600"
-                    layout="width:::200px"
-                  >
-                    Thank you for your support in Ghostery's fight for a web
-                    where privacy is a basic human right!
-                  </ui-text>
-                </div>
-              </gh-panel-navigation-card>
-            </a>
-          </ui-action>
-        `}
-      </div>
+                <gh-panel-menu-item icon="user">
+                  ${session.user
+                    ? html`
+                        <div>${session.name}</div>
+                        <ui-text color="gray-600">${session.email}</ui-text>
+                      `
+                    : html`Sign in`}
+                </gh-panel-menu-item>
+              </a>
+            </ui-text>
+            ${MENU.filter(
+              // Hide the "Become a Contributor" menu item if the user is already a contributor
+              (_, i) => i !== 0 || (i === 0 && !session.contributor),
+            ).map(({ icon, label, href, header }) =>
+              label
+                ? html`
+                    <ui-text>
+                      <a
+                        href="${href}"
+                        layout="block padding margin:0:1"
+                        onclick="${openTabWithUrl}"
+                      >
+                        <gh-panel-menu-item icon="${icon}">
+                          ${label}
+                        </gh-panel-menu-item>
+                      </a>
+                    </ui-text>
+                  `
+                : html`
+                    <ui-line></ui-line>
+                    ${header &&
+                    html`<ui-text
+                      type="label-s"
+                      color="gray-500"
+                      layout="padding:1:1:0 margin:0:1"
+                    >
+                      ${header.toUpperCase()}
+                    </ui-text>`}
+                  `,
+            )}
+          `}
+          ${session.contributor &&
+          html`
+            <ui-action>
+              <a
+                href="${chrome.runtime.getURL(
+                  '/pages/settings/index.html#@gh-settings-account',
+                )}"
+                onclick="${openTabWithUrl}"
+              >
+                <gh-panel-navigation-card
+                  layout="row gap:1.5 items:center margin:1.5"
+                >
+                  <img
+                    src="${assets['contributor_badge']}"
+                    layout="size:12"
+                    alt="Contribution"
+                  />
+                  <div>
+                    <ui-text type="label-l">You are awesome!</ui-text>
+                    <ui-text
+                      type="body-s"
+                      color="gray-600"
+                      layout="width:::200px"
+                    >
+                      Thank you for your support in Ghostery's fight for a web
+                      where privacy is a basic human right!
+                    </ui-text>
+                  </div>
+                </gh-panel-navigation-card>
+              </a>
+            </ui-action>
+          `}
+        </div>
+      </gh-panel-container>
     </template>
   `,
 };

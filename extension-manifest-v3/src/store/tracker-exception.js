@@ -44,8 +44,9 @@ const TrackerException = {
   blocked: [String], // blocked domains
   allowed: [String], // allowed domains
   [store.connect]: {
-    get: async (id) =>
-      (await getListFromStorage()).find((i) => i.id === id) || {},
+    // Get method is optimized to only return cases when exception is not set
+    // Always use store listing model to fetch exception first
+    get: (id) => ({ id }),
     set: async (id, values) => {
       const list = await getListFromStorage();
       let item = id && list.find((i) => i.id === id);
@@ -66,9 +67,3 @@ const TrackerException = {
 };
 
 export default TrackerException;
-
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes['exceptions']) {
-    store.clear(TrackerException, false);
-  }
-});

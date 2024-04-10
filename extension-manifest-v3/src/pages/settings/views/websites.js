@@ -45,9 +45,9 @@ export default {
             </ui-text>
             ${!!paused.length &&
             html`
-              <ui-button type="outline" size="small">
-                <button onclick="${clearAll}">Clear all</button>
-              </ui-button>
+              <gh-settings-button onclick="${clearAll}">
+                Clear all
+              </gh-settings-button>
             `}
           </div>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
