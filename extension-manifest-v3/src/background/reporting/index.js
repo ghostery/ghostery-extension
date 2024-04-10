@@ -86,23 +86,38 @@ function platformSpecificSettings() {
     };
   }
 
+  if (
+    navigator.userAgent.includes('Opera') ||
+    navigator.userAgent.includes('OPR') ||
+    navigator.userAgent.includes('YaBrowser') // same release channel as Opera
+  ) {
+    return {
+      ALLOWED_COUNTRY_CODES: [
+        'us',
+        'de',
+        'ru',
+        'fr',
+        'pl',
+        'gb',
+        'br',
+        'ca',
+        'ua',
+        'nl',
+        'es',
+      ],
+      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-opera-desktop/patterns.json',
+      CHANNEL: 'opera',
+    };
+  }
+
   console.warn(
     'No matching config found. Falling back to patterns from Chrome Desktop.',
   );
-  const settings = {
+  return {
     ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
     PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
     CHANNEL: 'ghostery',
   };
-
-  if (
-    navigator.userAgent.includes('Opera') &&
-    navigator.userAgent.includes('YaBrowser') // same release channel as Opera
-  ) {
-    settings.CHANNEL = 'opera';
-  }
-
-  return settings;
 }
 
 const COLLECTOR_DIRECT_URL = 'https://anonymous-communication.ghostery.net';
