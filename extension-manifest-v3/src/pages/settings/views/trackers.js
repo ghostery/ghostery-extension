@@ -34,11 +34,18 @@ function isActive(category, key) {
   return category === key || category === '_all';
 }
 
+const timeouts = new WeakMap();
 function deffer(fn) {
   return (host, target) => {
-    setTimeout(() => {
-      if (host.contains(target)) fn(host, target);
-    }, 0);
+    clearTimeout(timeouts.get(target));
+    timeouts.set(
+      target,
+      setTimeout(() => {
+        if (host.contains(target)) {
+          fn(host, target);
+        }
+      }),
+    );
   };
 }
 

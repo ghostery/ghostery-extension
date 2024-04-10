@@ -33,7 +33,6 @@ export default {
       box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
       border-radius: 8px;
       transition: all 0.2s;
-      padding: 0 8px;
       margin: 0;
       color: inherit;
     }
