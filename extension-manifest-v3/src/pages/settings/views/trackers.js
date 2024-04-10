@@ -49,11 +49,18 @@ function deffer(fn) {
   };
 }
 
+function updateException(tracker) {
+  return async (host, event) => {
+    const { value } = event.target;
+    await store.set(tracker.exception, { overwriteStatus: value });
+    store.clear([TrackerCategory], false);
+  };
+}
+
 export default {
   options: store(Options),
-  categories: store([TrackerCategory], {
-    id: ({ query }) => ({ query }),
-  }),
+  categories: ({ query, filter }) =>
+    store.get([TrackerCategory], { query, filter }),
   category: '',
   limits: undefined,
   query: '',
@@ -191,10 +198,7 @@ export default {
                                             .overwriteStatus}"
                                           blockByDefault="${blockedByDefault}"
                                           responsive
-                                          onchange="${html.set(
-                                            tracker.exception,
-                                            'overwriteStatus',
-                                          )}"
+                                          onchange="${updateException(tracker)}"
                                         ></ui-panel-protection-status-toggle>
                                       </div>
                                     `}

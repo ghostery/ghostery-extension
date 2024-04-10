@@ -3,8 +3,10 @@ import { dispatch, html } from 'hybrids';
 export default {
   value: {
     value: false,
-    observe(host, value) {
-      dispatch(host, 'change', { detail: value });
+    observe(host, value, lastValue) {
+      if (lastValue !== undefined) {
+        dispatch(host, 'change', { detail: value });
+      }
     },
   },
   blockByDefault: true,

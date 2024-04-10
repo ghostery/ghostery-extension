@@ -71,7 +71,7 @@ export default {
               ? msg`Block all (recommend)`
               : `Trust all (recommend)`}
           </span>
-          <ui-panel-action>
+          <ui-panel-action layout="width:4.5">
             <button onclick="${(host) => dispatch(host, 'clear')}">
               <ui-icon name="refresh"></ui-icon>
             </button>
