@@ -31,6 +31,9 @@ const TARGET_PATH = resolve('src/rule_resources');
 const MAX_RULE_REQUEST_DOMAINS = 1000;
 
 const debug = process.argv.includes('--debug');
+const staging = process.argv.includes('--staging');
+
+const CDN_HOSTNAME = staging ? 'staging-cdn.ghostery.com' : 'cdn.ghostery.com';
 
 shelljs.rm('-rf', TARGET_PATH);
 shelljs.mkdir('-p', TARGET_PATH);
@@ -39,7 +42,7 @@ for (const [name, target] of Object.entries(ENGINES)) {
   console.log(`Downloading "${name}"...`);
 
   const list = await fetch(
-    `https://cdn.ghostery.com/adblocker/configs/${name}/allowed-lists.json`,
+    `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
   ).then((res) => {
     if (!res.ok) {
       throw new Error(
@@ -84,7 +87,7 @@ for (const [name, target] of Object.entries(DNR)) {
   console.log(`Downloading "${name}"...`);
 
   const list = await fetch(
-    `https://cdn.ghostery.com/adblocker/configs/${name}/allowed-lists.json`,
+    `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
   ).then((res) => {
     if (!res.ok) {
       throw new Error(

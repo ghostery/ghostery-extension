@@ -16,8 +16,9 @@ import Skip from './skip.js';
 import OutroSkip from './outro-skip.js';
 import OutroSuccess from './outro-success.js';
 
-const TERMS_AND_CONDITIONS_URL =
-  'https://www.ghostery.com/privacy/ghostery-terms-and-conditions?utm_source=gbe';
+const TERMS_AND_CONDITIONS_URL = `https://www.${
+  chrome.runtime.getManifest().debug ? 'ghosterystage' : 'ghostery'
+}.com/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 
 export default define({
   [router.connect]: { stack: [Skip, Privacy, OutroSkip] },

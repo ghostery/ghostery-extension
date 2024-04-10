@@ -76,10 +76,12 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 (async () => {
   const storage = await loadStorage();
-
+  const { version, debug } = chrome.runtime.getManifest();
   telemetry = new Telemetry({
-    METRICS_BASE_URL: 'https://d.ghostery.com',
-    EXTENSION_VERSION: chrome.runtime.getManifest().version,
+    METRICS_BASE_URL: debug
+      ? 'staging-d.ghostery.com'
+      : 'https://d.ghostery.com',
+    EXTENSION_VERSION: version,
     getConf,
     log,
     storage,
