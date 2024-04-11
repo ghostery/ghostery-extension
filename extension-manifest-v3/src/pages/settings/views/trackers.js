@@ -57,6 +57,22 @@ function updateException(tracker) {
   };
 }
 
+function clearCategory(id) {
+  return async () => {
+    const category = store.get(TrackerCategory, id);
+
+    await Promise.all(
+      category.trackers
+        .filter((t) => t.exception.overwriteStatus)
+        .map((tracker) =>
+          store.set(tracker.exception, { overwriteStatus: false }),
+        ),
+    );
+
+    store.clear([TrackerCategory], false);
+  };
+}
+
 export default {
   options: store(Options),
   categories: ({ query, filter }) =>
@@ -133,6 +149,7 @@ export default {
             ${store.ready(categories) &&
             categories.map(
               ({
+                id,
                 key,
                 description,
                 trackers,
@@ -152,6 +169,7 @@ export default {
                       'category',
                       isActive(category, key) ? '' : key,
                     )}"
+                    onclear="${clearCategory(id)}"
                   >
                     ${isActive(category, key) &&
                     deffer(

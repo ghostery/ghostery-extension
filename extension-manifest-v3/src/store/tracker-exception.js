@@ -13,13 +13,32 @@ import { store } from 'hybrids';
 
 import { getPattern, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 
-async function getListFromStorage() {
-  const { exceptions = [] } = await chrome.storage.local.get(['exceptions']);
+async function getStorage() {
+  const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
   return exceptions;
 }
 
-async function setListToStorage(list) {
-  await chrome.storage.local.set({ exceptions: list });
+let promise;
+let items = null;
+async function setStorage(item) {
+  if (!promise) {
+    // eslint-disable-next-line no-async-promise-executor
+    promise = new Promise(async (resolve) => {
+      const exceptions = Object.assign(await getStorage(), items);
+      await chrome.storage.local.set({ exceptions });
+
+      promise = null;
+      items = null;
+
+      resolve();
+    });
+
+    items = {};
+  }
+
+  items[item.id] = item;
+
+  return promise.then(() => item);
 }
 
 export async function getExceptionStatus(trackerException, domain) {
@@ -47,21 +66,8 @@ const TrackerException = {
     // Get method is optimized to only return cases when exception is not set
     // Always use store listing model to fetch exception first
     get: (id) => ({ id }),
-    set: async (id, values) => {
-      const list = await getListFromStorage();
-      let item = id && list.find((i) => i.id === id);
-
-      if (item) {
-        Object.assign(item, values);
-      } else {
-        list.push(values);
-      }
-
-      await setListToStorage(list);
-
-      return values;
-    },
-    list: getListFromStorage,
+    set: (id, values) => setStorage(values),
+    list: async () => Object.values(await getStorage()),
     loose: true,
   },
 };

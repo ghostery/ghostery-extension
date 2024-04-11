@@ -33,31 +33,22 @@ export default {
   description: '',
   trackers: [Tracker],
   blockedByDefault: true,
-  blocked: ({ trackers, blockedByDefault }) => {
-    let count = blockedByDefault ? trackers.length : 0;
-
-    for (const tracker of trackers) {
-      if (tracker.exception && tracker.exception.overwriteStatus) {
-        count = blockedByDefault ? count - 1 : count + 1;
-      }
-    }
-
-    return count;
-  },
-  trusted: ({ trackers, blockedByDefault }) => {
-    let count = !blockedByDefault ? trackers.length : 0;
-
-    for (const tracker of trackers) {
-      if (tracker.exception && tracker.exception.overwriteStatus) {
-        count = blockedByDefault ? count + 1 : count - 1;
-      }
-    }
-
-    return count;
-  },
+  blocked: ({ trackers, blockedByDefault }) =>
+    trackers
+      .filter((t) => t.exception.overwriteStatus)
+      .reduce(
+        (count) => (blockedByDefault ? count - 1 : count + 1),
+        blockedByDefault ? trackers.length : 0,
+      ),
+  trusted: ({ trackers, blockedByDefault }) =>
+    trackers
+      .filter((t) => t.exception.overwriteStatus)
+      .reduce(
+        (count) => (blockedByDefault ? count + 1 : count - 1),
+        !blockedByDefault ? trackers.length : 0,
+      ),
   [store.connect]: {
     async list({ query, filter }) {
-      // Prefetch all of the exceptions from local storage
       const exceptions = await store.resolve([TrackerException]);
 
       const result = (await categories).map((category) => ({
