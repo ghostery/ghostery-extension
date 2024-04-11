@@ -9,13 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { createHash } from 'crypto';
 import { resolve } from 'path';
 import shelljs from 'shelljs';
 
 import { ENGINE_VERSION } from '@cliqz/adblocker';
 
-import { getCompatRule, setupStream } from './utils.js';
+function checksum(content) {
+  return createHash('sha256').update(content).digest('hex');
+}
 
 const ENGINES = {
   'dnr-ads': 'ads',
@@ -28,14 +31,11 @@ const ENGINES = {
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
-const MAX_RULE_REQUEST_DOMAINS = 1000;
 
-const debug = process.argv.includes('--debug');
 const staging = process.argv.includes('--staging');
 
 const CDN_HOSTNAME = staging ? 'staging-cdn.ghostery.com' : 'cdn.ghostery.com';
 
-shelljs.rm('-rf', TARGET_PATH);
 shelljs.mkdir('-p', TARGET_PATH);
 
 for (const [name, target] of Object.entries(ENGINES)) {
@@ -63,6 +63,16 @@ for (const [name, target] of Object.entries(ENGINES)) {
     );
   }
 
+  const outputPath = `${TARGET_PATH}/engine-${target}.dat`;
+
+  if (
+    existsSync(outputPath) &&
+    checksum(readFileSync(outputPath)) === engine.checksum
+  ) {
+    console.log('Checksum match - skipping download');
+    continue;
+  }
+
   const rules = await fetch(engine.url).then((res) => {
     if (!res.ok) {
       throw new Error(
@@ -73,13 +83,13 @@ for (const [name, target] of Object.entries(ENGINES)) {
     return res.arrayBuffer();
   });
 
-  writeFileSync(`${TARGET_PATH}/engine-${target}.dat`, new Uint8Array(rules));
+  writeFileSync(outputPath, new Uint8Array(rules));
 }
 
 const DNR = {
-  'dnr-ads-2': 'ads',
-  'dnr-tracking-2': 'tracking',
-  'dnr-annoyances-2': 'annoyances',
+  'dnr-ads': 'ads',
+  'dnr-tracking': 'tracking',
+  'dnr-annoyances': 'annoyances',
   'dnr-ios': 'safari',
 };
 
@@ -101,7 +111,17 @@ for (const [name, target] of Object.entries(DNR)) {
   /* DNR rules */
 
   if (list.dnr) {
-    const dnr = await fetch(list.dnr.network).then((res) => {
+    const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
+
+    if (
+      existsSync(outputPath) &&
+      checksum(readFileSync(outputPath)) === list.dnr.checksum
+    ) {
+      console.log('Checksum match - skipping download');
+      continue;
+    }
+
+    const dnr = await fetch(list.dnr.url).then((res) => {
       if (!res.ok) {
         throw new Error(
           `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
@@ -111,41 +131,6 @@ for (const [name, target] of Object.entries(DNR)) {
       return res.text();
     });
 
-    if (!target.includes('safari')) {
-      writeFileSync(`${TARGET_PATH}/dnr-${target}.json`, dnr);
-    } else {
-      const stream = setupStream(`${TARGET_PATH}/dnr-${target}.json`);
-
-      for (const rule of JSON.parse(dnr)) {
-        if (rule.condition?.requestDomains) {
-          if (rule.condition.requestDomains.length > MAX_RULE_REQUEST_DOMAINS) {
-            console.log(
-              `Rule has too many domains (${rule.condition.requestDomains.length}), omitting it`,
-            );
-            continue;
-          }
-
-          for (const domain of rule.condition.requestDomains) {
-            stream.write(
-              getCompatRule(
-                {
-                  ...rule,
-                  condition: {
-                    ...rule.condition,
-                    requestDomains: undefined,
-                    urlFilter: `||${domain}`,
-                  },
-                },
-                debug,
-              ),
-            );
-          }
-        } else {
-          stream.write(getCompatRule(rule, debug));
-        }
-      }
-
-      stream.close();
-    }
+    writeFileSync(outputPath, dnr);
   }
 }
