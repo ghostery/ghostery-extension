@@ -20,33 +20,19 @@ function setLazyQuery(host, event) {
   const value = event.target.value || '';
 
   clearTimeout(timeout);
-  if (value.length >= 3) {
+  if (value.length >= 2) {
     timeout = setTimeout(() => {
       host.query = value;
       host.category = '_all';
-    }, 20);
+    }, 50);
   } else {
+    host.category = '';
     host.query = '';
   }
 }
 
 function isActive(category, key) {
   return category === key || category === '_all';
-}
-
-const timeouts = new WeakMap();
-function deffer(fn) {
-  return (host, target) => {
-    clearTimeout(timeouts.get(target));
-    timeouts.set(
-      target,
-      setTimeout(() => {
-        if (host.contains(target)) {
-          fn(host, target);
-        }
-      }),
-    );
-  };
 }
 
 function updateException(tracker) {
@@ -172,69 +158,62 @@ export default {
                     onclear="${clearCategory(id)}"
                   >
                     ${isActive(category, key) &&
-                    deffer(
-                      html`
-                        <template layout>
-                          <ui-line></ui-line>
-                          <div
-                            layout="column gap"
-                            layout@768px="padding:left:102px"
-                          >
-                            ${trackers.map(
-                              (tracker, index) =>
-                                index <= (limits[key] || PATTERNS_LIMIT) &&
+                    html`
+                      <ui-line></ui-line>
+                      <div
+                        layout="column gap"
+                        layout@768px="padding:left:102px"
+                      >
+                        ${trackers.map(
+                          (tracker, index) =>
+                            index <= (limits[key] || PATTERNS_LIMIT) &&
+                            html`
+                              <div layout="row items:center gap">
+                                <div
+                                  layout="column grow"
+                                  layout@768px="row gap:2"
+                                >
+                                  <ui-text type="label-m">
+                                    ${tracker.name}
+                                  </ui-text>
+                                  ${tracker.organization &&
+                                  html`
+                                    <ui-text color="gray-600">
+                                      ${tracker.organization.name}
+                                    </ui-text>
+                                  `}
+                                </div>
+                                ${store.ready(tracker.exception) &&
                                 html`
                                   <div layout="row items:center gap">
-                                    <div
-                                      layout="column grow"
-                                      layout@768px="row gap:2"
-                                    >
-                                      <ui-text type="label-m">
-                                        ${tracker.name}
-                                      </ui-text>
-                                      ${tracker.organization &&
-                                      html`
-                                        <ui-text color="gray-600">
-                                          ${tracker.organization.name}
-                                        </ui-text>
-                                      `}
-                                    </div>
-                                    ${store.ready(tracker.exception) &&
+                                    ${tracker.exception.overwriteStatus &&
                                     html`
-                                      <div layout="row items:center gap">
-                                        ${tracker.exception.overwriteStatus &&
-                                        html`
-                                          <ui-text
-                                            type="label-s"
-                                            color="gray-500"
-                                          >
-                                            adjusted
-                                          </ui-text>
-                                        `}
-                                        <ui-panel-protection-status-toggle
-                                          value="${tracker.exception
-                                            .overwriteStatus}"
-                                          blockByDefault="${blockedByDefault}"
-                                          responsive
-                                          onchange="${updateException(tracker)}"
-                                        ></ui-panel-protection-status-toggle>
-                                      </div>
+                                      <ui-text type="label-s" color="gray-500">
+                                        adjusted
+                                      </ui-text>
                                     `}
+                                    <ui-panel-protection-status-toggle
+                                      value="${tracker.exception
+                                        .overwriteStatus}"
+                                      blockByDefault="${blockedByDefault}"
+                                      responsive
+                                      onchange="${updateException(tracker)}"
+                                    ></ui-panel-protection-status-toggle>
                                   </div>
-                                `.key(tracker.id),
-                            )}
-                          </div>
-                          ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
-                          html`
-                            <div layout="row center margin:bottom:2">
-                              <gh-settings-button onclick="${loadMore(key)}">
-                                Load more
-                              </gh-settings-button>
-                            </div>
-                          `}
-                        </template>
-                      `,
-                    )}
+                                `}
+                              </div>
+                            `.key(tracker.id),
+                        )}
+                      </div>
+                      ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
+                      html`
+                        <div layout="row center margin:bottom:2">
+                          <gh-settings-button onclick="${loadMore(key)}">
+                            Load more
+                          </gh-settings-button>
+                        </div>
+                      `}
+                    `}
                   </gh-settings-trackers-list>
                 `.key(key),
             )}

@@ -69,6 +69,8 @@ export default {
       }));
 
       if (query || filter) {
+        query = query.trim().toLowerCase();
+
         return result
           .map((category) => ({
             ...category,
