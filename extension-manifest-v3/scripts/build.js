@@ -184,11 +184,18 @@ if (manifest.browser_action?.default_popup) {
 }
 
 // offscreen documents
-readdirSync(join(options.srcDir, 'pages', 'offscreen'), { withFileTypes: true })
-  .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith('.'))
-  .forEach((dirent) =>
-    source.push(join('pages', 'offscreen', dirent.name, 'index.html')),
-  );
+if (
+  manifest.permissions.includes('offsceen') ||
+  manifest.optional_permissions.includes('offsceen')
+) {
+  readdirSync(join(options.srcDir, 'pages', 'offscreen'), {
+    withFileTypes: true,
+  })
+    .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith('.'))
+    .forEach((dirent) =>
+      source.push(join('pages', 'offscreen', dirent.name, 'index.html')),
+    );
+}
 
 // options page
 if (manifest.options_ui?.page) {

@@ -11,7 +11,13 @@
 
 let creating;
 
-function createMV2Converter() {
+async function hasPermission() {
+  return chrome.permissions.contains({
+    permissions: ['offscreen'],
+  });
+}
+
+function createDocumentConverter() {
   const requests = new Map();
 
   function createIframe() {
@@ -58,7 +64,7 @@ function createMV2Converter() {
   return convert;
 }
 
-function createMV3Converter() {
+function createOffscreenConverter() {
   async function setupOffscreenDocument() {
     const path = 'pages/offscreen/urlfilter2dnr/index.html';
     const offscreenUrl = chrome.runtime.getURL(path);
@@ -86,11 +92,6 @@ function createMV3Converter() {
   }
 
   async function createOffscreenDocument() {
-    async function hasPermission() {
-      return chrome.permissions.contains({
-        permissions: ['offscreen'],
-      });
-    }
     if (!(await hasPermission())) {
       await chrome.permissions.request({ permissions: ['offscreen'] });
       if (!(await hasPermission())) {
@@ -117,6 +118,9 @@ function createMV3Converter() {
   return convert;
 }
 
-export default chrome && chrome.runtime.getManifest?.().manifest_version === 3
-  ? createMV3Converter()
-  : createMV2Converter();
+// when run in the offscreen document, there is no `chrome.runtime.getManifest` so the module uses `createDocumentConverter`
+export default chrome &&
+(chrome.runtime.getManifest?.().permissions.includes('offscreen') ||
+  chrome.runtime.getManifest?.().optional_permissions.includes('offscreen'))
+  ? createOffscreenConverter()
+  : createDocumentConverter();

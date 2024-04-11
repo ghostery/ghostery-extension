@@ -27,4 +27,4 @@ import './reporting/index.js';
 
 import './devtools.js';
 import './custom-filters.js';
-import './exteptions.js';
+import './exceptions.js';
