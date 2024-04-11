@@ -86,12 +86,19 @@ for (const [name, target] of Object.entries(ENGINES)) {
   writeFileSync(outputPath, new Uint8Array(rules));
 }
 
-const DNR = {
-  'dnr-ads': 'ads',
-  'dnr-tracking': 'tracking',
-  'dnr-annoyances': 'annoyances',
-  'dnr-ios': 'safari',
-};
+const DNR = staging
+  ? {
+      'dnr-ads': 'ads',
+      'dnr-tracking': 'tracking',
+      'dnr-annoyances': 'annoyances',
+      'dnr-ios': 'safari',
+    }
+  : {
+      'dnr-ads-2': 'ads',
+      'dnr-tracking-2': 'tracking',
+      'dnr-annoyances-2': 'annoyances',
+      'dnr-ios': 'safari',
+    };
 
 for (const [name, target] of Object.entries(DNR)) {
   console.log(`Downloading "${name}"...`);
@@ -114,6 +121,7 @@ for (const [name, target] of Object.entries(DNR)) {
     const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
 
     if (
+      staging &&
       existsSync(outputPath) &&
       checksum(readFileSync(outputPath)) === list.dnr.checksum
     ) {
@@ -121,7 +129,7 @@ for (const [name, target] of Object.entries(DNR)) {
       continue;
     }
 
-    const dnr = await fetch(list.dnr.url).then((res) => {
+    const dnr = await fetch(list.dnr.url || list.dnr.network).then((res) => {
       if (!res.ok) {
         throw new Error(
           `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
