@@ -84,7 +84,9 @@ async function getCookie(name) {
   const cookie = await chrome.cookies.get({
     url: COOKIE_URL,
     name,
-    ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
+    ...((await isFirstPartyIsolation())
+      ? { firstPartyDomain: GHOSTERY_DOMAIN }
+      : {}),
   });
 
   if (
@@ -112,7 +114,9 @@ export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
             Date.now() / 1000 + durationInSec + COOKIE_EXPIRATION_DATE_OFFSET,
         }
       : {}),
-    ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
+    ...((await isFirstPartyIsolation())
+      ? { firstPartyDomain: GHOSTERY_DOMAIN }
+      : {}),
   });
 }
 
