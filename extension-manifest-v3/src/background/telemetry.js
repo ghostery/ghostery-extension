@@ -79,7 +79,7 @@ chrome.runtime.onMessage.addListener((msg) => {
   const { version, debug } = chrome.runtime.getManifest();
   telemetry = new Telemetry({
     METRICS_BASE_URL: debug
-      ? 'staging-d.ghostery.com'
+      ? 'https://staging-d.ghostery.com'
       : 'https://d.ghostery.com',
     EXTENSION_VERSION: version,
     getConf,
