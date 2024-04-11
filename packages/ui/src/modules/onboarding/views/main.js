@@ -10,15 +10,14 @@
  */
 
 import { define, html, msg, router } from 'hybrids';
+import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 import OutroSkip from './outro-skip.js';
 import OutroSuccess from './outro-success.js';
 
-const TERMS_AND_CONDITIONS_URL = `https://www.${
-  chrome.runtime.getManifest().debug ? 'ghosterystage' : 'ghostery'
-}.com/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
+const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}.com/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 
 export default define({
   [router.connect]: { stack: [Skip, Privacy, OutroSkip] },

@@ -11,10 +11,9 @@
 
 import { html, msg, router, dispatch } from 'hybrids';
 import { getStats } from '@ghostery/trackers-preview/page_scripts';
+import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
-const WTM_URL = `https://www.${
-  chrome.runtime.getManifest().debug ? 'ghosterystage' : 'ghostery'
-}.com/whotracksme/`;
+const WTM_URL = `https://www.${GHOSTERY_DOMAIN}.com/whotracksme/`;
 
 function openTabWithUrl(host, event) {
   if (chrome.tabs?.create) {
