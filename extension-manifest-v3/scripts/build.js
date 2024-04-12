@@ -67,6 +67,14 @@ if (argv.target === 'safari') {
   options.assets.push('background/safari');
 }
 
+if (argv.staging) {
+  execSync('npm run download.staging', { stdio: 'inherit' });
+
+  manifest.debug = true;
+} else {
+  execSync('npm run download', { stdio: 'inherit' });
+}
+
 const config = {
   logLevel: argv.silent ? 'silent' : undefined,
   configFile: false,
