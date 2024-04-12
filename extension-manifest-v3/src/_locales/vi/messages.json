@@ -329,5 +329,52 @@
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."
   },
-  "your_privacy_features_": { "message": "Tính năng bảo mật của bạn:" }
+  "your_privacy_features_": {
+    "message": "Tính năng bảo mật của bạn:"
+  },
+  "allow_ghostery_in_private_windows": {
+    "message": "Cho phép Ghostery trong cửa sổ riêng tư"
+  },
+  "don_t_ask_again": {
+    "message": "Không hỏi lại"
+  },
+  "ghostery_is_installed_with_limited_functionality": {
+    "message": "Ghostery được cài đặt với chức năng hạn chế"
+  },
+  "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
+    "message": "Ghostery Tracker & Ad Blocker đang đặt tên cho các trình theo dõi có trên các trang web bạn truy cập. Bạn đang duyệt web không được bảo vệ."
+  },
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Thông tin về trình theo dõi web sẽ được chia sẻ theo <a href=\"$${0}\">Chính sách quyền riêng tư</a> của chúng tôi, nâng cao khả năng bảo vệ quyền riêng tư cho cộng đồng Ghostery."
+  },
+  "learn_how": {
+    "message": "Học ngay"
+  },
+  "learn_more_about_youtube_s_challenges_to_ad_blockers": {
+    "message": "Tìm hiểu thêm về những thách thức của YouTube đối với trình chặn quảng cáo"
+  },
+  "open_video": {
+    "message": "Mở video"
+  },
+  "open_youtube_in_a_private_window": {
+    "message": "Mở YouTube trong cửa sổ riêng tư"
+  },
+  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
+    "message": "Cảm ơn bạn đã hỗ trợ trong cuộc chiến của Ghostery vì một trang web nơi quyền riêng tư là quyền cơ bản của con người!"
+  },
+  "visit_our_blog": {
+    "message": "Ghé thăm blog của chúng tôi"
+  },
+  "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
+    "message": "Chúng tôi biết bạn tin tưởng vào Ghostery để có trải nghiệm YouTube mượt mà. Đây là giải pháp tạm thời cho đến khi xuất hiện một giải pháp tinh tế hơn."
+  },
+  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Nếu không bật tính năng bảo mật, chỉ có chức năng cơ bản của trình theo dõi đặt tên khả dụng."
+  },
+  "you_are_awesome_": {
+    "message": "Bạn thật tuyệt vời!"
+  },
+  "youtube_blocking_you_from_watching_ad_free_videos_": {
+    "message": "YouTube chặn bạn xem video không có quảng cáo?"
+  }
 }
