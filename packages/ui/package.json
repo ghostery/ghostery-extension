@@ -23,6 +23,7 @@
     "test": "npm run lint"
   },
   "dependencies": {
+    "@ghostery/libs": "^1.0.0",
     "hybrids": "^8.2.14"
   }
 }

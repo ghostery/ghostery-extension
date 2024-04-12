@@ -10,21 +10,20 @@
  */
 
 import { jwtDecode } from 'jwt-decode';
+import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
-const DOMAIN = 'ghostery.com';
+const AUTH_URL = `https://consumerapi.${GHOSTERY_DOMAIN}/api/v2`;
+const ACCOUNT_URL = `https://accountapi.${GHOSTERY_DOMAIN}/api/v2.1.0`;
 
-const AUTH_URL = `https://consumerapi.${DOMAIN}/api/v2`;
-const ACCOUNT_URL = `https://accountapi.${DOMAIN}/api/v2.1.0`;
-
-export const COOKIE_DOMAIN = `.${DOMAIN}`;
-const COOKIE_URL = `https://${DOMAIN}`;
+export const COOKIE_DOMAIN = `.${GHOSTERY_DOMAIN}`;
+const COOKIE_URL = `https://${GHOSTERY_DOMAIN}`;
 const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 const COOKIE_SHORT_DURATION = 60 * 60; // 1 hour in seconds
 let COOKIE_EXPIRATION_DATE_OFFSET = 0;
 
-export const SIGNON_PAGE_URL = `https://signon.${DOMAIN}/`;
-export const CREATE_ACCOUNT_PAGE_URL = `https://signon.${DOMAIN}/register`;
-export const ACCOUNT_PAGE_URL = `https://account.${DOMAIN}/`;
+export const SIGNON_PAGE_URL = `https://signon.${GHOSTERY_DOMAIN}/`;
+export const CREATE_ACCOUNT_PAGE_URL = `https://signon.${GHOSTERY_DOMAIN}/register`;
+export const ACCOUNT_PAGE_URL = `https://account.${GHOSTERY_DOMAIN}/`;
 
 if (__PLATFORM__ === 'safari') {
   // Safari has two major inconsistency with the specification:
@@ -85,7 +84,9 @@ async function getCookie(name) {
   const cookie = await chrome.cookies.get({
     url: COOKIE_URL,
     name,
-    ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
+    ...((await isFirstPartyIsolation())
+      ? { firstPartyDomain: GHOSTERY_DOMAIN }
+      : {}),
   });
 
   if (
@@ -113,7 +114,9 @@ export async function setCookie(name, value, durationInSec = COOKIE_DURATION) {
             Date.now() / 1000 + durationInSec + COOKIE_EXPIRATION_DATE_OFFSET,
         }
       : {}),
-    ...((await isFirstPartyIsolation()) ? { firstPartyDomain: DOMAIN } : {}),
+    ...((await isFirstPartyIsolation())
+      ? { firstPartyDomain: GHOSTERY_DOMAIN }
+      : {}),
   });
 }
 

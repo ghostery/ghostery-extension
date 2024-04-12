@@ -10,13 +10,13 @@
  */
 
 import { define, html, msg, router } from 'hybrids';
+import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
 import Privacy from '../privacy.js';
 import OutroSkip from './outro-skip.js';
 import OutroSuccess from '../outro-success.js';
 
-const TERMS_AND_CONDITIONS_URL =
-  'https://www.ghostery.com/privacy/ghostery-terms-and-conditions?utm_source=gbe';
+const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}.com/privacy/ghostery-terms-and-conditions?utm_source=gbe`;
 
 export default define({
   [router.connect]: { stack: [Privacy, OutroSkip] },
