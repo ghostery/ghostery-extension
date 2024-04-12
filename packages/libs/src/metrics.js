@@ -109,6 +109,7 @@ class Metrics {
     const tabs = await browser.tabs.query({
       url: [
         'https://www.ghostery.com/*',
+        'https://www.ghosterystage.com/*',
         'https://chrome.google.com/webstore/detail/ghostery-*/mlomiejdfkolichcflejclcbmpeaniij*',
         'https://microsoftedge.microsoft.com/addons/detail/ghostery-*/fclbdkbhjlgkbpfldjodgjncejkkjcme*',
         'https://addons.mozilla.org/*/firefox/addon/ghostery/*',

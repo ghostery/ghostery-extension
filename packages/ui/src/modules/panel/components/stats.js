@@ -11,6 +11,9 @@
 
 import { html, msg, router, dispatch } from 'hybrids';
 import { getStats } from '@ghostery/trackers-preview/page_scripts';
+import { GHOSTERY_DOMAIN } from '@ghostery/libs';
+
+const WTM_URL = `https://www.${GHOSTERY_DOMAIN}.com/whotracksme/`;
 
 function openTabWithUrl(host, event) {
   if (chrome.tabs?.create) {
@@ -96,7 +99,7 @@ export default {
                   <span slot="content">WhoTracks.Me Statistical Report</span>
                   <ui-panel-action>
                     <a
-                      href="https://www.whotracks.me/websites/${domain}.html"
+                      href="${WTM_URL}websites/${domain}"
                       onclick="${openTabWithUrl}"
                       target="_blank"
                     >
