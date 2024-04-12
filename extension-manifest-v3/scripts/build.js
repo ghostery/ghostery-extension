@@ -194,7 +194,7 @@ if (manifest.browser_action?.default_popup) {
 // offscreen documents
 if (
   manifest.permissions.includes('offsceen') ||
-  manifest.optional_permissions.includes('offsceen')
+  manifest.optional_permissions?.includes('offsceen')
 ) {
   readdirSync(join(options.srcDir, 'pages', 'offscreen'), {
     withFileTypes: true,
