@@ -22,6 +22,10 @@ import { registerDatabase } from '/utils/indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 
+const CDN_HOSTNAME = chrome.runtime.getManifest().debug
+  ? 'staging-cdn.ghostery.com'
+  : 'cdn.ghostery.com';
+
 const checkUserAgent = (pattern) => navigator.userAgent.indexOf(pattern) !== -1;
 
 const ENV = new Map([
@@ -167,7 +171,7 @@ async function update(name) {
         : `dnr${__PLATFORM__ === 'firefox' ? '' : '-cosmetics'}-${name}`;
 
     const data = await fetch(
-      `https://cdn.ghostery.com/adblocker/configs/${urlName}/allowed-lists.json`,
+      `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`,
     )
       .then(check)
       .then((res) => res.json());
