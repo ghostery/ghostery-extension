@@ -10,6 +10,7 @@
  */
 
 import { observe, ENGINES } from '/store/options.js';
+import { TRACKERDB_ENGINE } from '/utils/engines.js';
 
 const PAUSE_RULE_PRIORITY = 10000000;
 
@@ -37,6 +38,12 @@ if (__PLATFORM__ !== 'firefox') {
         (enabled ? enableRulesetIds : disableRulesetIds).push(name);
       }
     });
+
+    if (enableRulesetIds.length > 0) {
+      enableRulesetIds.push(TRACKERDB_ENGINE);
+    } else {
+      disableRulesetIds.push(TRACKERDB_ENGINE);
+    }
 
     if (enableRulesetIds.length || disableRulesetIds.length) {
       try {

@@ -15,6 +15,7 @@ import {
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
+import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 import { observe, ENGINES } from '/store/options.js';
 import * as engines from '/utils/engines.js';
 
@@ -38,11 +39,21 @@ const setup = asyncSetup([
       ),
     ];
 
+    if (
+      __PLATFORM__ !== 'firefox' &&
+      ENGINES.some(({ key }) => options.terms && options[key])
+    ) {
+      enabledEngines.push(engines.TRACKERDB_ENGINE);
+    }
+
     // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
+  ...(__PLATFORM__ !== 'firefox'
+    ? [engines.init(engines.TRACKERDB_ENGINE)]
+    : []),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
@@ -116,6 +127,7 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
+  // TODO: add TrackerDB
   enabledEngines.forEach((name) => {
     const engine = engines.get(name);
     if (!engine) return;
@@ -349,9 +361,19 @@ if (__PLATFORM__ === 'firefox') {
           updateTabStats(details.tabId, [request]);
         }
 
-        if (isPaused(details, request)) return;
+        if (
+          (request.metadata &&
+            !isCategoryBlockedByDefault(request.metadata.category)) ||
+          isPaused(details, request)
+        ) {
+          return;
+        }
 
-        for (const name of enabledEngines) {
+        const engines = request.metadata
+          ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
+          : enabledEngines;
+
+        for (const name of engines) {
           const engine = engines.get(name);
           if (!engine) continue;
 
@@ -386,7 +408,13 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (isPaused(details, request)) return;
+      if (
+        (request.metadata &&
+          !isCategoryBlockedByDefault(request.metadata.category)) ||
+        isPaused(details, request)
+      ) {
+        return;
+      }
 
       let policies;
       for (const name of enabledEngines) {

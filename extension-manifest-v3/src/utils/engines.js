@@ -22,6 +22,7 @@ import { registerDatabase } from '/utils/indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 export const FIXES_ENGINE = 'fixes';
+export const TRACKERDB_ENGINE = 'trackerdb';
 
 const CDN_HOSTNAME = chrome.runtime.getManifest().debug
   ? 'staging-cdn.ghostery.com'
