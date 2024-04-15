@@ -16,7 +16,7 @@ import Privacy from '../privacy.js';
 import OutroSkip from './outro-skip.js';
 import OutroSuccess from '../outro-success.js';
 
-const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}.com/privacy/ghostery-terms-and-conditions?utm_source=gbe`;
+const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe`;
 
 export default define({
   [router.connect]: { stack: [Privacy, OutroSkip] },
