@@ -14,7 +14,7 @@ import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
 import disabled from '../../illustrations/disabled.js';
 
-const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}.com/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
+const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 
 export default define({
   tag: 'ui-onboarding-outro-short-skip-view',
