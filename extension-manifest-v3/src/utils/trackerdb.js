@@ -11,19 +11,23 @@
 
 import * as engines from './engines.js';
 
-let promise = engines.init('trackerdb').then(() => {
+let promise = engines.init(engines.TRACKERDB_ENGINE).then(() => {
   promise = null;
 });
 
-export async function getMetadata(request) {
-  if (promise) await promise;
+export function getMetadata(request) {
+  if (promise) {
+    console.warn('TrackerDB not ready yet');
+    return null;
+  }
 
-  const engine = engines.get('trackerdb');
-  if (!engine) return null;
+  const engine = engines.get(engines.TRACKERDB_ENGINE);
+  let isFilterMatched = true;
 
   let matches = engine.getPatternMetadata(request);
 
   if (matches.length === 0) {
+    isFilterMatched = false;
     matches = engine.metadata.fromDomain(request.domain);
   }
 
@@ -47,6 +51,7 @@ export async function getMetadata(request) {
     contact: organization?.privacy_contact,
     country: organization?.country,
     privacyPolicy: organization?.privacy_policy_url,
+    isFilterMatched,
   };
 
   return metadata;
@@ -55,7 +60,7 @@ export async function getMetadata(request) {
 export async function getCategories() {
   if (promise) await promise;
 
-  const engine = engines.get('trackerdb');
+  const engine = engines.get(engines.TRACKERDB_ENGINE);
   if (!engine) return [];
 
   const categories = new Map(
@@ -80,7 +85,7 @@ const patterns = new Map();
 export async function getPattern(key) {
   if (promise) await promise;
 
-  const engine = engines.get('trackerdb');
+  const engine = engines.get(engines.TRACKERDB_ENGINE);
   if (!engine) return null;
 
   if (!patterns.size) {
@@ -94,11 +99,12 @@ export async function getPattern(key) {
 
 export function isCategoryBlockedByDefault(categoryId) {
   switch (categoryId) {
-    case 'essential':
-    case 'cdn':
-    case 'hosting':
-      return false;
-    default:
+    case 'advertising':
+    case 'adult_advertising':
+    case 'email':
+    case 'site_analytics':
       return true;
+    default:
+      return false;
   }
 }

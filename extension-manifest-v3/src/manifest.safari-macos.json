@@ -49,6 +49,11 @@
         "path": "rule_resources/dnr-safari.json"
       },
       {
+        "id": "trackerdb",
+        "enabled": false,
+        "path": "rule_resources/dnr-trackerdb.json"
+      },
+      {
         "id": "fixes",
         "enabled": true,
         "path": "rule_resources/dnr-fixes.json"

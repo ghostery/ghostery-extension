@@ -21,7 +21,6 @@ import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
 
 import Request from './utils/request.js';
-import * as trackerDb from '/utils/trackerdb.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
@@ -137,9 +136,7 @@ export function updateTabStats(tabId, requests) {
     requests = requests.filter((request) => request.isFromDomain(stats.domain));
 
     for (const request of requests) {
-      const pattern = await trackerDb.getMetadata(request, {
-        getDomainMetadata: true,
-      });
+      const pattern = request.metadata;
 
       if (pattern || request.blocked || request.modified) {
         let tracker =
