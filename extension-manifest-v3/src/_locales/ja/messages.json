@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "追跡防止"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "最適なプライバシー設定を適用:"
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Trackers Previewを無効にしてもよいですか？"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Contributorになる"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "決して同意しないを用いることで、皆さんは追跡に同意しないことをウェブサイトのオーナーに伝えることができます!"
   },
   "cancel": {
     "message": "キャンセル"
@@ -123,9 +117,6 @@
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "ブラウザのツールバーのGhosteryアイコンにトラッカー数を表示します。"
   },
-  "dnr_output__@_0__": {
-    "message": "DNR Output ($${0})"
-  },
   "don_t_ask_again": {
     "message": "二度と聞くな"
   },
@@ -153,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "Ghosteryを有効にして開始する"
-  },
-  "enable_never_consent_": {
-    "message": "決して同意しないを有効化しますか?"
   },
   "enable_new_setup": {
     "message": "新規設定を有効にする"
@@ -286,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "広告ブロッカーに対するYouTubeの挑戦についてもっと知る"
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Ghosteryをプライバシーの完璧な守護者にして、ポップアップやお客様の追跡を全て拒否するか、ご自身で手動設定しましょう!"
-  },
   "manifest_name": {
     "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
   },
@@ -308,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "利用できるその他の広告ブロッキング"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "$${0}の方法論の詳細については、Ghostery's Manifestoに記載されています。"
-  },
   "my_account": {
     "message": "アカウント"
   },
@@ -319,15 +301,6 @@
   },
   "never_consent": {
     "message": "決して同意しない"
-  },
-  "never_consent_is_disabled": {
-    "message": "決して同意しないが無効化されています"
-  },
-  "never_consent_is_enabled": {
-    "message": "決して同意しないが有効化されています"
-  },
-  "no": {
-    "message": "いいえ"
   },
   "no_trackers_detected": {
     "message": "トラッカーは検出されませんでした"
@@ -341,20 +314,8 @@
   "off": {
     "message": "オフ"
   },
-  "ok": {
-    "message": "OK"
-  },
-  "ok__i_understand": {
-    "message": "はい、わかりました"
-  },
   "on": {
     "message": "オン"
-  },
-  "on_all_websites": {
-    "message": "すべてのウェブサイトに対して"
-  },
-  "on_this_website": {
-    "message": "このウェブサイトに対して"
   },
   "open_video": {
     "message": "ビデオを開く"
@@ -465,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "クッキーのポップアップにうんざりですか?"
-  },
   "trackers_blocked": {
     "message": "ブロックされたトラッカー"
   },
@@ -520,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "Ghosteryをご利用いただきありがとうございます"
   },
-  "what_is_whotracks_me_": {
-    "message": "WhoTracks.Meとは何か？"
-  },
   "what_s_next_": {
     "message": "次は何をするのでしょうか？"
   },
@@ -541,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "プライバシー機能が有効になっていない場合、トラッカーの命名の基本的な機能のみが利用可能です。"
   },
-  "yes": {
-    "message": "はい"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -552,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "以下で設定を調整することができます。常時ONにしておくことをお勧めします。"
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "&nbsp;<strong>Ghostery制御パネル</strong>でこれら設定をいつでも変更できます。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"

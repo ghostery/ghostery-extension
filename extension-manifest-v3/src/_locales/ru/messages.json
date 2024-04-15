@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "Анти-трекинг"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "Применить оптимальные настройки конфиденциальности:"
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Отключить функцию Trackers Preview?"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Стать участником"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "Используя функцию Never-Consent, вы сообщаете владельцам веб-сайтов, что вы против отслеживания!"
   },
   "cancel": {
     "message": "Отмена"
@@ -123,9 +117,6 @@
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Показывает счетчик трекеров у значка Ghostery на панели инструментов в браузере."
   },
-  "dnr_output__@_0__": {
-    "message": "DNR Output ($${0})"
-  },
   "don_t_ask_again": {
     "message": "Не спрашивай больше"
   },
@@ -153,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "Включите Ghostery, чтобы начать работу"
-  },
-  "enable_never_consent_": {
-    "message": "Активировать функцию Never-Consent?"
   },
   "enable_new_setup": {
     "message": "Включить новую настройку"
@@ -286,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Узнай больше о том, как YouTube противостоит блокировщикам рекламы"
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Позвольте Ghostery стать вашим комплексным защитником конфиденциальности и отклонять за вас все всплывающие окна и отслеживание или делайте это самостоятельно!"
-  },
   "manifest_name": {
     "message": "Ghostery Трекер & Ad Blocker - приватный блокировщик рекламы"
   },
@@ -308,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "Дополнительные настройки блокировки рекламы"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "Дополнительная информация о методологии $${0} в Декларации Ghostery."
-  },
   "my_account": {
     "message": "Моя учетная запись"
   },
@@ -319,15 +301,6 @@
   },
   "never_consent": {
     "message": "Never-Consent"
-  },
-  "never_consent_is_disabled": {
-    "message": "Функция Never-Consent отключена"
-  },
-  "never_consent_is_enabled": {
-    "message": "Функция Never-Consent включена"
-  },
-  "no": {
-    "message": "Нет"
   },
   "no_trackers_detected": {
     "message": "Трекеры не обнаружены"
@@ -341,20 +314,8 @@
   "off": {
     "message": "Выкл"
   },
-  "ok": {
-    "message": "OK"
-  },
-  "ok__i_understand": {
-    "message": "Да, я понимаю"
-  },
   "on": {
     "message": "Вкл"
-  },
-  "on_all_websites": {
-    "message": "на всех веб-сайтах"
-  },
-  "on_this_website": {
-    "message": "на этом веб-сайте"
   },
   "open_video": {
     "message": "Открытое видео"
@@ -465,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "УСТАЛИ ОТ ВСПЛЫВАЮЩИХ УВЕДОМЛЕНИЙ О ФАЙЛАХ COOKIE?"
-  },
   "trackers_blocked": {
     "message": "Заблокированные трекеры"
   },
@@ -520,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "Добро пожаловать в Ghostery"
   },
-  "what_is_whotracks_me_": {
-    "message": "Что такое WhoTracks.Me?"
-  },
   "what_s_next_": {
     "message": "Что дальше?"
   },
@@ -541,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Без включенных функций приватности доступен только базовый функционал именных трекеров."
   },
-  "yes": {
-    "message": "Да"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -552,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Вы можете изменить настройки ниже. Рекомендуем включить все функции Ghostery."
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "Вы всегда можете изменить эти настройки в&nbsp;<strong>панели управления Ghostery</strong>."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Вы больше не будете видеть статистику трекера рядом с результатами поиска."

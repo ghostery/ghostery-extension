@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "Anti-Tracking"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "Privatsphäreeinstellungen optimal anwenden:"
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Sind Sie sicher, dass Sie die Trackervorschau deaktivieren möchten?"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Werde Ghostery-Förderer"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "Durch Never-Consent erklären Sie Website-Besitzern, Tracking abzulehnen!"
   },
   "cancel": {
     "message": "Abbrechen"
@@ -123,9 +117,6 @@
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Zeigt den Tracker-Zähler auf dem Ghostery-Symbol in der Browser-Werkzeugleiste an"
   },
-  "dnr_output__@_0__": {
-    "message": "DNR Output ($${0})"
-  },
   "don_t_ask_again": {
     "message": "Frag nicht noch einmal"
   },
@@ -153,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "Aktivieren Sie Ghostery, um loszulegen"
-  },
-  "enable_never_consent_": {
-    "message": "Never-Consent aktivieren?"
   },
   "enable_new_setup": {
     "message": "Neue Einrichtung aktivieren"
@@ -286,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Erfahre mehr über die Herausforderungen von YouTube gegenüber Werbeblockern"
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Machen Sie Ghostery zum Rundumschutz für Ihre Privatsphäre, der Popups und Tracking ablehnt, oder tun Sie es selbst!"
-  },
   "manifest_name": {
     "message": "Ghostery Tracker- & Werbeblocker | Datenschutz AdBlocker"
   },
@@ -308,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "Weitere Werbeblocker verfügbar"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "Weitere Informationen zur $${0}-Methode findest du im Ghostery-Manifest."
-  },
   "my_account": {
     "message": "Mein Konto"
   },
@@ -319,15 +301,6 @@
   },
   "never_consent": {
     "message": "Never-Consent"
-  },
-  "never_consent_is_disabled": {
-    "message": "Never-Consent ist deaktiviert"
-  },
-  "never_consent_is_enabled": {
-    "message": "Never-Consent ist aktiviert"
-  },
-  "no": {
-    "message": "Nein"
   },
   "no_trackers_detected": {
     "message": "Keine Tracker gefunden"
@@ -341,20 +314,8 @@
   "off": {
     "message": "Aus"
   },
-  "ok": {
-    "message": "OK"
-  },
-  "ok__i_understand": {
-    "message": "Ok, ich verstehe"
-  },
   "on": {
     "message": "An"
-  },
-  "on_all_websites": {
-    "message": "auf allen Websites"
-  },
-  "on_this_website": {
-    "message": "auf dieser Website"
   },
   "open_video": {
     "message": "Video öffnen"
@@ -465,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "HABEN SIE GENUG VON COOKIE-POPUPS?"
-  },
   "trackers_blocked": {
     "message": "Blockierte Tracker"
   },
@@ -520,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "Willkommen bei Ghostery"
   },
-  "what_is_whotracks_me_": {
-    "message": "Was ist WhoTracks.Me?"
-  },
   "what_s_next_": {
     "message": "Wie geht es weiter?"
   },
@@ -541,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Ohne aktivierte Datenschutzfunktionen steht nur die Grundfunktion zur Benennung von Trackern zur Verfügung."
   },
-  "yes": {
-    "message": "Ja"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -552,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Sie können die Einstellungen unten anpassen. Wir empfehlen, sie immer auf AN zu lassen."
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "Sie können diese Einstellungen im <strong>Ghostery-Steuerbereich</strong> ändern."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."

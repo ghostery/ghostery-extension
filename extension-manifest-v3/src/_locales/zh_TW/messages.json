@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "反跟蹤"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "套用最佳隱私權設定："
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "你確定要停用「追蹤器預覽」嗎？"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "成為捐助者"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "使用 Never-Consent，你可以讓網站擁有者知道你反對追蹤！"
   },
   "cancel": {
     "message": "取消"
@@ -123,9 +117,6 @@
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "在瀏覽器工具列中的 Ghostery 圖示上顯示追蹤器記數。"
   },
-  "dnr_output__@_0__": {
-    "message": "DNR Output ($${0})"
-  },
   "don_t_ask_again": {
     "message": "不要再問"
   },
@@ -153,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "啟用 Ghostery 開始"
-  },
-  "enable_never_consent_": {
-    "message": "啟用 Never-Consent？"
   },
   "enable_new_setup": {
     "message": "啟用新設定"
@@ -286,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "詳細了解 YouTube 對廣告攔截器的挑戰 不要再問了"
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "讓 Ghostery 成為你的全面隱私倡議者，拒絕所有彈出式視窗和追蹤，或者你自己動手！"
-  },
   "manifest_name": {
     "message": "Ghostery 追蹤器和廣告攔截器 - 隱私 AdBlock"
   },
@@ -308,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "更多可用的廣告攔截功能"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "更多有關 Ghostery 宣言中 $${0} 方法的資訊。"
-  },
   "my_account": {
     "message": "我的帳號"
   },
@@ -319,15 +301,6 @@
   },
   "never_consent": {
     "message": "Never-Consent"
-  },
-  "never_consent_is_disabled": {
-    "message": "Never-Consent 已停用"
-  },
-  "never_consent_is_enabled": {
-    "message": "Never-Consent 已啟用"
-  },
-  "no": {
-    "message": "否"
   },
   "no_trackers_detected": {
     "message": "未偵測到追蹤器"
@@ -341,20 +314,8 @@
   "off": {
     "message": "關閉"
   },
-  "ok": {
-    "message": "好的"
-  },
-  "ok__i_understand": {
-    "message": "好的，我了解了"
-  },
   "on": {
     "message": "啟動"
-  },
-  "on_all_websites": {
-    "message": "在所有網站上"
-  },
-  "on_this_website": {
-    "message": "在此網站上"
   },
   "open_video": {
     "message": "打開視頻"
@@ -465,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "厭倦了 Cookie 彈出式視窗？"
-  },
   "trackers_blocked": {
     "message": "已攔截的追蹤器"
   },
@@ -520,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "歡迎來到 Ghostery"
   },
-  "what_is_whotracks_me_": {
-    "message": "什么是 WhoTracks.Me？"
-  },
   "what_s_next_": {
     "message": "下一步是？"
   },
@@ -541,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "啟用隱私功能後，僅提供命名追蹤器的基本功能。"
   },
-  "yes": {
-    "message": "是"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -552,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "你可以在下方調整設定。我們建議你永遠保持啟用。"
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "你可以隨時在 <strong>Ghostery 控制面板</strong>中更改這些設定。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"
