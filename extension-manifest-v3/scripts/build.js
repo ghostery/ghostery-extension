@@ -114,7 +114,7 @@ options.assets.forEach((path) => {
 // copy adblocker engines
 shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources'));
 
-const engines = ['ads', 'tracking', 'annoyances'];
+const engines = ['ads', 'tracking', 'annoyances', 'fixes'];
 const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {

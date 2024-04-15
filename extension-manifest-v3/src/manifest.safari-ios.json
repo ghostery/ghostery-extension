@@ -47,6 +47,11 @@
         "id": "ads",
         "enabled": false,
         "path": "rule_resources/dnr-safari.json"
+      },
+      {
+        "id": "fixes",
+        "enabled": true,
+        "path": "rule_resources/dnr-fixes.json"
       }
     ]
   },
