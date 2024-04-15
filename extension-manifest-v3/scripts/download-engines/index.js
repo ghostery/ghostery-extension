@@ -27,6 +27,8 @@ const ENGINES = {
   'dnr-cosmetics-ads': 'ads-cosmetics',
   'dnr-cosmetics-tracking': 'tracking-cosmetics',
   'dnr-cosmetics-annoyances': 'annoyances-cosmetics',
+  'dnr-fixes': 'fixes',
+  'dnr-cosmetics-fixes': 'fixes-cosmetics',
   'trackerdbMv3': 'trackerdb',
 };
 
@@ -86,19 +88,14 @@ for (const [name, target] of Object.entries(ENGINES)) {
   writeFileSync(outputPath, new Uint8Array(rules));
 }
 
-const DNR = staging
-  ? {
-      'dnr-ads': 'ads',
-      'dnr-tracking': 'tracking',
-      'dnr-annoyances': 'annoyances',
-      'dnr-ios': 'safari',
-    }
-  : {
-      'dnr-ads-2': 'ads',
-      'dnr-tracking-2': 'tracking',
-      'dnr-annoyances-2': 'annoyances',
-      'dnr-ios': 'safari',
-    };
+const DNR = {
+  'dnr-ads': 'ads',
+  'dnr-tracking': 'tracking',
+  'dnr-annoyances': 'annoyances',
+  'dnr-fixes': 'fixes',
+  'dnr-ios': 'safari',
+  'dnr-trackerdb': 'trackerdb',
+};
 
 for (const [name, target] of Object.entries(DNR)) {
   console.log(`Downloading "${name}"...`);

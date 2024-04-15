@@ -31,6 +31,7 @@ const setup = asyncSetup([
     enabledEngines = [
       // Add custom engine
       engines.CUSTOM_ENGINE,
+      engines.FIXES_ENGINE,
       // Set enabled engines
       ...ENGINES.filter(({ key }) => options.terms && options[key]).map(
         ({ name }) => name,
@@ -41,6 +42,7 @@ const setup = asyncSetup([
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
   engines.init(engines.CUSTOM_ENGINE),
+  engines.init(engines.FIXES_ENGINE),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
