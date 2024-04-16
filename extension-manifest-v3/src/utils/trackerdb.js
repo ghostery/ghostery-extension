@@ -103,6 +103,8 @@ export function isCategoryBlockedByDefault(categoryId) {
     case 'adult_advertising':
     case 'email':
     case 'site_analytics':
+    case 'unidentified':
+    case undefined:
       return true;
     default:
       return false;
