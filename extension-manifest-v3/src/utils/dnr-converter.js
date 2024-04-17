@@ -92,12 +92,7 @@ function createOffscreenConverter() {
   }
 
   async function createOffscreenDocument() {
-    if (!(await hasPermission())) {
-      await chrome.permissions.request({ permissions: ['offscreen'] });
-      if (!(await hasPermission())) {
-        throw new Error('Ghostery requires "offscreen" permission');
-      }
-    }
+    await requestPermission();
     await setupOffscreenDocument();
   }
 
@@ -118,9 +113,26 @@ function createOffscreenConverter() {
   return convert;
 }
 
-// when run in the offscreen document, there is no `chrome.runtime.getManifest` so the module uses `createDocumentConverter`
-export default chrome &&
-(chrome.runtime.getManifest?.().permissions.includes('offscreen') ||
-  chrome.runtime.getManifest?.().optional_permissions.includes('offscreen'))
+function isPermissionRequired() {
+  // when run in the offscreen document, there is no `chrome.runtime.getManifest` so the module uses `createDocumentConverter`
+  return (
+    chrome &&
+    (chrome.runtime.getManifest?.().permissions.includes('offscreen') ||
+      chrome.runtime.getManifest?.().optional_permissions.includes('offscreen'))
+  );
+}
+
+export async function requestPermission() {
+  if (!isPermissionRequired()) return;
+
+  if (!(await hasPermission())) {
+    await chrome.permissions.request({ permissions: ['offscreen'] });
+    if (!(await hasPermission())) {
+      throw new Error('Ghostery requires "offscreen" permission');
+    }
+  }
+}
+
+export default isPermissionRequired()
   ? createOffscreenConverter()
   : createDocumentConverter();
