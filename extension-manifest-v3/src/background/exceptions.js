@@ -16,18 +16,17 @@ import convert from '/utils/dnr-converter.js';
 
 function negateFilter(filter) {
   const cleanFilter = filter.toString();
-
+  let negatedFilter = '';
   if (filter.isNetworkFilter()) {
-    if (filter.isException()) {
-      return cleanFilter.slice(2);
-    }
-    return `@@${cleanFilter}`;
+    negatedFilter = filter.isException()
+      ? cleanFilter.slice(2)
+      : `@@${cleanFilter}`;
   } else if (filter.isCosmeticFilter()) {
-    if (filter.isUnhide()) {
-      return cleanFilter.replace('#@#', '##');
-    }
-    return cleanFilter.replace('##', '#@#');
+    negatedFilter = filter.isUnhide()
+      ? cleanFilter.replace('#@#', '##')
+      : cleanFilter.replace('##', '#@#');
   }
+  return parseFilter(negatedFilter);
 }
 
 let exceptions = {};
@@ -47,11 +46,12 @@ chrome.storage.onChanged.addListener(async (changes) => {
   const cosmeticFilters = [];
 
   for (const exception of Object.values(exceptions)) {
-    const pattern = await getTracker(exception.id);
-    const shouldNegate =
-      isCategoryBlockedByDefault(pattern.category) ===
-      exception.overwriteStatus;
-    console.info('exception', exception, shouldNegate);
+    const pattern = (await getTracker(exception.id)) || {
+      domains: [exception.id],
+      filters: [],
+    };
+    const shouldBlockByDefault = isCategoryBlockedByDefault(pattern.category);
+    const shouldNegate = shouldBlockByDefault === exception.overwriteStatus;
 
     // Action to take based on category (blocking / non-blocking) and the overwrite
     // global:
@@ -70,33 +70,75 @@ chrome.storage.onChanged.addListener(async (changes) => {
     // * non-blocking with overwrite = allow
     // * non-blocking without overwrite = nothing
 
-    // WIP
-    for (const rawFilter of pattern.filters) {
-      const filter = parseFilter(rawFilter);
+    // TODO:
+    // [ ] double click - advertising
+    // [ ] google tag manager - essential
+    // [ ] onetrust - consent
+    // [ ] unidentified
 
-      // global
-      if (filter.isNetworkFilter()) {
-        networkFilters.push(negateFilter(filter));
-      } else if (filter.isCosmeticFilter()) {
-        cosmeticFilters.push(negateFilter(filter));
-      }
-      // website blocked:
-      for (const hostname of exception.blocked) {
-        console.info(hostname);
-      }
-      // website allowed:
-      for (const hostname of exception.allowed) {
-        console.info(hostname);
+    let filters = [
+      ...pattern.filters,
+      ...pattern.domains.map((domain) => `||${domain}^$third-party`),
+    ].map((filter) => parseFilter(filter));
+
+    if (shouldNegate) {
+      filters = filters.map((filter) => negateFilter(filter));
+    }
+
+    if (exception.overwriteStatus) {
+      for (const filter of filters) {
+        if (filter.isNetworkFilter()) {
+          networkFilters.push(filter.toString());
+        } else if (filter.isCosmeticFilter()) {
+          cosmeticFilters.push(filter.toString());
+        }
       }
     }
   }
 
-  for (const filter of networkFilters) {
-    const dnrRule = await convert(filter);
-    console.info(dnrRule);
+  if (__PLATFORM__ !== 'firefox') {
+    await updateDNRRules(networkFilters);
   }
+  await updateCosmeticFilters(cosmeticFilters);
 });
 
 export function getException(id) {
   return exceptions[id];
+}
+
+async function updateCosmeticFilters(filters) {
+  // TODO
+  //engines.createCustomEngine(filters.join('\n'))
+}
+
+async function updateDNRRules(networkFilters) {
+  const dnrRules = [];
+  for (const filter of networkFilters) {
+    const { rules, errors } = await convert(filter);
+    if (errors.length > 0) {
+      console.error(errors);
+    }
+    dnrRules.push(
+      ...rules.map((rule) => ({
+        ...rule,
+        priority: 2000000,
+      })),
+    );
+  }
+  console.warn(dnrRules);
+  const addRules = dnrRules.map((rule, index) => ({
+    ...rule,
+    id: 2000000 + index,
+  }));
+
+  const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
+    .filter(({ id }) => id >= 2000000)
+    .map(({ id }) => id);
+
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds,
+  });
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    addRules,
+  });
 }

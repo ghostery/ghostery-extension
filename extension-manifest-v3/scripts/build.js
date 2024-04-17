@@ -175,6 +175,10 @@ execSync('npm run licenses', { stdio: 'inherit' });
 // set manifest version from package.json
 manifest.version = pkg.version;
 
+if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
+  manifest.permissions.push('declarativeNetRequestFeedback');
+}
+
 writeFileSync(
   resolve(options.outDir, 'manifest.json'),
   JSON.stringify(manifest, null, 2),
@@ -195,8 +199,8 @@ if (manifest.browser_action?.default_popup) {
 
 // offscreen documents
 if (
-  manifest.permissions.includes('offsceen') ||
-  manifest.optional_permissions?.includes('offsceen')
+  manifest.permissions.includes('offscreen') ||
+  manifest.optional_permissions?.includes('offscreen')
 ) {
   readdirSync(join(options.srcDir, 'pages', 'offscreen'), {
     withFileTypes: true,

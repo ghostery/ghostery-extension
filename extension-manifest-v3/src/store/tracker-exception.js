@@ -12,6 +12,7 @@
 import { store } from 'hybrids';
 
 import { getTracker, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import { requestPermission } from '/utils/dnr-converter';
 
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
@@ -67,7 +68,10 @@ const TrackerException = {
     // Get method is optimized to only return cases when exception is not set
     // Always use store listing model to fetch exception first
     get: (id) => ({ id }),
-    set: (id, values) => setStorage(values),
+    set: async (id, values) => {
+      await requestPermission();
+      setStorage(values);
+    },
     list: async () => Object.values(await getStorage()),
     loose: true,
   },

@@ -54,8 +54,7 @@ export function getMetadata(request) {
   if (exception) {
     // Set false/true explicitly only when overwriteStatus is set
     if (exception.overwriteStatus) {
-      shouldBlock =
-        isCategoryBlockedByDefault(category.key) !== exception.overwriteStatus;
+      shouldBlock = blockByDefault !== exception.overwriteStatus;
     }
 
     // If domain is allowed and global status is to block
@@ -112,6 +111,8 @@ function getTrackers() {
         name: p.name,
         category: p.category,
         exception: p.key,
+        filters: p.filters,
+        domains: p.domains,
         organization: organization
           ? {
               id: organization.key,
