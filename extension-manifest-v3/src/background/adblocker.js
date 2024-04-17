@@ -341,13 +341,21 @@ function isPaused(request) {
 }
 
 function shouldBlock(request) {
-  if (!request.metadata) return undefined;
+  if (request.type === 'main_frame') return undefined;
 
-  const shouldBlockByDefault = isCategoryBlockedByDefault(
-    request.metadata.category,
-  );
+  let category = undefined;
+  let activityId = request.domain;
 
-  const exception = getException(request.metadata.id);
+  if (request.metadata) {
+    category = request.metadata.category;
+    activityId = request.metadata.id;
+  }
+
+  const shouldBlockByDefault = isCategoryBlockedByDefault(category);
+
+  const exception = getException(activityId);
+
+  if (!exception && !request.metadata) return undefined;
 
   if (!exception) return shouldBlockByDefault;
 

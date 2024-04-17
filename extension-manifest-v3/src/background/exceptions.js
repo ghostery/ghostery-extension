@@ -30,10 +30,10 @@ function negateFilter(filter) {
   }
 }
 
-let exceptions = new Map();
+let exceptions = {};
 
 chrome.storage.local.get(['exceptions']).then((result) => {
-  exceptions = result.exceptions;
+  exceptions = result.exceptions || {};
 });
 
 chrome.storage.onChanged.addListener(async (changes) => {
@@ -41,7 +41,7 @@ chrome.storage.onChanged.addListener(async (changes) => {
     return;
   }
 
-  exceptions = changes['exceptions'].newValue;
+  exceptions = changes['exceptions'].newValue || {};
 
   const networkFilters = [];
   const cosmeticFilters = [];
