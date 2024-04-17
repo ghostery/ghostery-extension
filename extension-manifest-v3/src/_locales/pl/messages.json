@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "Ochrona przed śledzeniem"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "Zastosuj optymalne ustawienia prywatności:"
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Chcesz wyłączyć Podgląd Trackerów?"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Zostań Kontrybutorem"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "Używając Never-Consent, informujesz właścicieli stron, że sprzeciwiasz się trackerom!"
   },
   "cancel": {
     "message": "Anuluj"
@@ -150,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "Włącz Ghostery, aby rozpocząć"
-  },
-  "enable_never_consent_": {
-    "message": "Chcesz włączyć Never-Consent?"
   },
   "enable_new_setup": {
     "message": "Aktywuj nową konfigurację"
@@ -283,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Dowiedz się więcej o wyzwaniach YouTube związanych z blokowaniem reklam"
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Pozwól, aby wtyczka Ghostery pełniła funkcję Twojego obrońcy prywatności i odrzucała wszystkie popupy i trackery, lub zajmij się tym sam!"
-  },
   "manifest_name": {
     "message": "Ghostery Bloker Trackerów i Reklam - Prywatność AdBlock"
   },
@@ -305,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "Dostępne jest więcej opcji blokowania reklam"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "Więcej informacji o metodologii $${0} w Manifeście Ghostery."
-  },
   "my_account": {
     "message": "Moje konto"
   },
@@ -316,15 +301,6 @@
   },
   "never_consent": {
     "message": "Never-Consent"
-  },
-  "never_consent_is_disabled": {
-    "message": "Never-Consent jest wyłączony"
-  },
-  "never_consent_is_enabled": {
-    "message": "Never-Consent jest włączony"
-  },
-  "no": {
-    "message": "Nie"
   },
   "no_trackers_detected": {
     "message": "Nie wykryto trackerów"
@@ -338,20 +314,8 @@
   "off": {
     "message": "Wył."
   },
-  "ok": {
-    "message": "OK"
-  },
-  "ok__i_understand": {
-    "message": "Ok, rozumiem"
-  },
   "on": {
     "message": "Wł."
-  },
-  "on_all_websites": {
-    "message": "dla wszystkich stron"
-  },
-  "on_this_website": {
-    "message": "na tej stronie"
   },
   "open_video": {
     "message": "Otwórz wideo"
@@ -462,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "MASZ JUŻ DOŚĆ PYTAŃ O CIASTECZKA?"
-  },
   "trackers_blocked": {
     "message": "Zablokowane trackery"
   },
@@ -517,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "Witamy w Ghostery"
   },
-  "what_is_whotracks_me_": {
-    "message": "Czym jest WhoTracks.Me?"
-  },
   "what_s_next_": {
     "message": "Co dalej?"
   },
@@ -538,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Bez włączonych funkcji prywatności dostępne są tylko podstawowe funkcje nazywania trackerów."
   },
-  "yes": {
-    "message": "Tak"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -549,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Możesz dostosować ustawienia poniżej. Zalecamy, aby pozostawić je zawsze WŁĄCZONE."
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "Ustawienia te zawsze możesz zmienić w&nbsp;<strong>Panelu sterowania Ghostery</strong>."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Wykresy kołowe z trackerami nie będą wyświetlane obok wyników wyszukiwania."
