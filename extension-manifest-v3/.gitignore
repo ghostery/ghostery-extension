@@ -10,4 +10,4 @@ web-ext-artifacts/
 *.xcuserstate
 xcuserdata
 *.xcloc
-xcshareddata/swiftpm/*
+xcode/**/*/Package.resolved
