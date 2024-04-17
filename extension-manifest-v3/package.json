@@ -6,8 +6,6 @@
   "scripts": {
     "download-engines": "node scripts/download-engines/index.js",
     "download-whotracksme-bloomfilter": "node scripts/download-whotracksme-bloomfilter.js",
-    "download": "npm run download-engines && npm run download-whotracksme-bloomfilter",
-    "download.staging": "npm run download-engines -- --staging && npm run download-whotracksme-bloomfilter",
     "build": "node scripts/build.js",
     "start": "npm run build -- --watch",
     "licenses": "license-report --config=../.license-report-config.json > dist/licenses.html",
@@ -40,7 +38,7 @@
     "@ghostery/ui": "^1.0.0",
     "@github/relative-time-element": "^4.3.0",
     "@whotracksme/webextension-packages": "5.0.9",
-    "hybrids": "^8.2.19",
+    "hybrids": "^8.2.20",
     "idb": "^7.1.1",
     "jwt-decode": "^4.0.0",
     "tldts-experimental": "^6.0.19"
