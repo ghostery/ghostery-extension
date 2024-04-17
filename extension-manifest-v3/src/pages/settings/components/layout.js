@@ -11,10 +11,6 @@
 
 import { html } from 'hybrids';
 
-function scrollToTop({ main }) {
-  main.scrollTop = 0;
-}
-
 export default {
   main: ({ render }) => render().querySelector('main'),
   render: () =>
@@ -39,14 +35,8 @@ export default {
         >
           <slot name="nav"></slot>
         </nav>
-        <main layout="column grow overflow:y:scroll" layout@992px="area::2">
-          <slot
-            layout::slotted(*)="padding:4:2"
-            layout::slotted(*)@768px="padding:5:6"
-            layout::slotted(*)@992px="padding:6:3 area::2"
-            layout::slotted(*)@1280px="padding:8:3"
-            onslotchange="${scrollToTop}"
-          ></slot>
+        <main layout="column grow" layout@992px="area::2">
+          <slot></slot>
         </main>
       </template>
     `.css`
@@ -145,13 +135,6 @@ export default {
         bottom: calc(100% + 17px);
         height: 1px;
         background: var(--ui-color-gray-200);
-      }
-    }
-
-    @media screen and (min-width: 1280px) {
-      main ::slotted(*) {
-        max-width: 720px;
-        margin: 0 auto;
       }
     }
   `,

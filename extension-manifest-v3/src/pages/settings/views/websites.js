@@ -36,8 +36,8 @@ export default {
     return paused.filter((item) => item.id.includes(query));
   },
   content: ({ paused, websites }) => html`
-    <template layout="block">
-      <div layout="column gap:4">
+    <template layout="contents">
+      <gh-settings-page-layout layout="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <div layout="row items:center content:space-between">
             <ui-text type="headline-l" mobile-type="headline-m">
@@ -71,12 +71,11 @@ export default {
                     layout="column"
                     layout@768px="grid:2 gap:4"
                   >
-                    <ui-text type="label-m" slot="header">
+                    <ui-text type="label-m">
                       Website <span>(${websites.length})</span>
                     </ui-text>
                     <ui-text
                       type="label-m"
-                      slot="header"
                       layout="hidden"
                       layout@768px="block"
                     >
@@ -147,7 +146,7 @@ export default {
                 </div>
               `}
         </section>
-      </div>
+      </gh-settings-page-layout>
     </template>
   `,
 };

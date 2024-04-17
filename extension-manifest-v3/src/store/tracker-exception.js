@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { getPattern, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import { getTracker, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
@@ -42,7 +42,7 @@ async function setStorage(item) {
 }
 
 export async function getExceptionStatus(trackerException, domain) {
-  const { category } = await getPattern(trackerException.id);
+  const { category } = await getTracker(trackerException.id);
 
   if (
     isCategoryBlockedByDefault(category) === trackerException.overwriteStatus

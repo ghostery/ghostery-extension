@@ -11,7 +11,7 @@
 
 import { parseFilter } from '@cliqz/adblocker';
 
-import { getPattern, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import { getTracker, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 import convert from '/utils/dnr-converter.js';
 
 function negateFilter(filter) {
@@ -47,7 +47,7 @@ chrome.storage.onChanged.addListener(async (changes) => {
   const cosmeticFilters = [];
 
   for (const exception of Object.values(exceptions)) {
-    const pattern = await getPattern(exception.id);
+    const pattern = await getTracker(exception.id);
     const shouldNegate =
       isCategoryBlockedByDefault(pattern.category) ===
       exception.overwriteStatus;

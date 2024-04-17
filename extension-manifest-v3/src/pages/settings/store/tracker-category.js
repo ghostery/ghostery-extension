@@ -14,17 +14,9 @@ import { store } from 'hybrids';
 import TrackerException from '/store/tracker-exception.js';
 
 import { getCategories, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import Tracker from './tracker.js';
 
 const categories = getCategories();
-
-const Tracker = {
-  id: true,
-  name: '',
-  exception: TrackerException,
-  organization: {
-    name: '',
-  },
-};
 
 export default {
   id: true,
@@ -53,16 +45,11 @@ export default {
 
       const result = (await categories).map((category) => ({
         id: { key: category.key, query, filter },
-        key: category.key,
-        name: category.name,
-        description: category.description,
-        trackers: category.patterns.map((pattern) => {
+        ...category,
+        trackers: category.trackers.map((t) => {
           return {
-            id: pattern.key,
-            name: pattern.name,
-            organization: pattern.organization || {},
-            exception:
-              exceptions.find((e) => e.id === pattern.key) || pattern.key,
+            ...t,
+            exception: exceptions.find((e) => e.id === t.id) || t.id,
           };
         }),
         blockedByDefault: isCategoryBlockedByDefault(category.key),
@@ -78,16 +65,17 @@ export default {
               const match =
                 !query ||
                 t.name.toLowerCase().includes(query) ||
-                t.organization.name?.toLowerCase().includes(query);
+                t.organization?.name.toLowerCase().includes(query);
 
               return (
-                (match && !filter) ||
-                (filter === 'blocked' &&
-                  (t.exception.overwriteStatus || false) !==
-                    category.blockedByDefault) ||
-                (filter === 'trusted' &&
-                  (t.exception.overwriteStatus || false) ===
-                    category.blockedByDefault)
+                match &&
+                (!filter ||
+                  (filter === 'blocked' &&
+                    (t.exception.overwriteStatus || false) !==
+                      category.blockedByDefault) ||
+                  (filter === 'trusted' &&
+                    (t.exception.overwriteStatus || false) ===
+                      category.blockedByDefault))
               );
             }),
           }))

@@ -29,7 +29,7 @@ export default {
     <template layout="contents">
       <gh-settings-layout>
         <a
-          href="${router.url(Privacy, { scrollToTop: true })}"
+          href="${router.url(Privacy)}"
           class="${{ active: router.active(Privacy) }}"
           slot="nav"
         >
@@ -37,7 +37,7 @@ export default {
           Privacy protection
         </a>
         <a
-          href="${router.url(Websites, { scrollToTop: true })}"
+          href="${router.url(Websites)}"
           class="${{ active: router.active(Websites) }}"
           slot="nav"
         >
@@ -45,7 +45,7 @@ export default {
           Websites
         </a>
         <a
-          href="${router.url(Trackers, { scrollToTop: true })}"
+          href="${router.url(Trackers)}"
           class="${{ active: router.active(Trackers) }}"
           slot="nav"
         >
@@ -53,7 +53,7 @@ export default {
           Trackers
         </a>
         <a
-          href="${router.url(Whotracksme, { scrollToTop: true })}"
+          href="${router.url(Whotracksme)}"
           class="${{ active: router.active(Whotracksme), wrap: true }}"
           slot="nav"
           translate="no"
@@ -63,7 +63,7 @@ export default {
         </a>
 
         <a
-          href="${router.url(Account, { scrollToTop: true })}"
+          href="${router.url(Account)}"
           class="${{ active: router.active(Account), bottom: true }}"
           slot="nav"
         >
@@ -148,73 +148,6 @@ export default {
           </gh-settings-card>
         `}
         ${stack}
-        ${store.ready(session) &&
-        html`
-          <section
-            layout="grid:1/1 grow items:end:stretch padding:0"
-            layout@992px="hidden"
-          >
-            <gh-settings-card
-              in-content
-              layout="column items:center gap"
-              layout@768px="row gap:5"
-            >
-              ${session.contributor
-                ? html`
-                    <img
-                      src="${assets['contributor_badge']}"
-                      layout="size:12"
-                      alt="Contribution"
-                      slot="picture"
-                    />
-                    <div
-                      layout="block:center column gap:0.5"
-                      layout@768px="block:left row grow gap:5 content:space-between"
-                    >
-                      <div layout="column gap:0.5">
-                        <ui-text type="label-l" layout="">
-                          You are awesome!
-                        </ui-text>
-                        <ui-text type="body-s" color="gray-600">
-                          Thank you for your support in Ghostery's fight for a
-                          web where privacy is a basic human right!
-                        </ui-text>
-                      </div>
-                    </div>
-                  `
-                : html`
-                    <img
-                      src="${assets['hands']}"
-                      layout="size:12"
-                      alt="Contribution"
-                      slot="picture"
-                    />
-                    <div
-                      layout="block:center column gap:0.5"
-                      layout@768px="block:left row grow gap:5 content:space-between"
-                    >
-                      <div layout="column gap:0.5">
-                        <ui-text type="label-l" layout="">
-                          Become a Contributor
-                        </ui-text>
-                        <ui-text type="body-s" color="gray-600">
-                          Help Ghostery fight for a web where privacy is a basic
-                          human right.
-                        </ui-text>
-                      </div>
-                      <ui-button layout="grow margin:top">
-                        <a
-                          href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
-                          target="_blank"
-                        >
-                          Become a Contributor
-                        </a>
-                      </ui-button>
-                    </div>
-                  `}
-            </gh-settings-card>
-          </section>
-        `}
       </gh-settings-layout>
     </template>
   `.css`

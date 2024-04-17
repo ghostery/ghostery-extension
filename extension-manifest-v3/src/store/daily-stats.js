@@ -169,7 +169,7 @@ export const MergedStats = {
       // Add metadata
       for (const id of patterns) {
         const { category = 'unidentified' } =
-          (await trackerDb.getPattern(id)) || {};
+          (await trackerDb.getTracker(id)) || {};
 
         mergedStats.trackersDetailed.push({
           id,

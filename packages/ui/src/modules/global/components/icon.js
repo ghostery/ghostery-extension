@@ -213,6 +213,11 @@ const icons = {
       <path d="M1.66602 8.66667H4.66602L5.99935 7L7.99935 11L10.3327 5L11.9993 8.66667H14.3327" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `,
+  'category-organization': html`
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.66536 7.33333H11.8654C12.6121 7.33333 12.9855 7.33333 13.2707 7.47867C13.5216 7.60647 13.7256 7.81047 13.8534 8.06133C13.9987 8.34653 13.9987 8.71993 13.9987 9.46667V14M8.66536 14V4.13333C8.66536 3.3866 8.66536 3.01323 8.52003 2.72801C8.39223 2.47713 8.18823 2.27315 7.93736 2.14533C7.65216 2 7.27876 2 6.53203 2H4.13203C3.3853 2 3.01192 2 2.72671 2.14533C2.47582 2.27315 2.27185 2.47713 2.14402 2.72801C1.9987 3.01323 1.9987 3.3866 1.9987 4.13333V14M14.6654 14H1.33203M4.33203 4.66667H6.33203M4.33203 7.33333H6.33203M4.33203 10H6.33203" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `,
   'contributor' : html`
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_6704_38737)">
@@ -237,6 +242,11 @@ const icons = {
   'check': html`
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13.3337 4L6.00033 11.3333L2.66699 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `,
+  'chevron-left': html`
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 12L5 8L9 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `,
   'close': html`

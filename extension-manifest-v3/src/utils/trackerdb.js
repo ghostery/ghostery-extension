@@ -57,6 +57,48 @@ export function getMetadata(request) {
   return metadata;
 }
 
+const trackersMap = new Map();
+function getTrackers() {
+  if (!trackersMap.size) {
+    const engine = engines.get(engines.TRACKERDB_ENGINE);
+    const organizations = engine.metadata.organizations.getValues();
+
+    for (const p of engine.metadata.getPatterns()) {
+      const organization = organizations.find((o) => o.key === p.organization);
+
+      trackersMap.set(p.key, {
+        id: p.key,
+        name: p.name,
+        category: p.category,
+        exception: p.key,
+        organization: organization
+          ? {
+              id: organization.key,
+              name: organization.name,
+              country: organization.country,
+              websiteUrl: organization.website_url,
+              privacyPolicyUrl: organization.privacy_policy_url,
+            }
+          : undefined,
+      });
+    }
+  }
+
+  return trackersMap;
+}
+
+export async function getTracker(key) {
+  if (promise) await promise;
+
+  const engine = engines.get(engines.TRACKERDB_ENGINE);
+  if (!engine) return null;
+
+  // Ensure trackers are loaded
+  getTrackers();
+
+  return trackersMap.get(key);
+}
+
 export async function getCategories() {
   if (promise) await promise;
 
@@ -66,35 +108,14 @@ export async function getCategories() {
   const categories = new Map(
     engine.metadata.categories
       .getValues()
-      .map(({ key, description }) => [key, { key, description, patterns: [] }]),
+      .map(({ key, description }) => [key, { key, description, trackers: [] }]),
   );
 
-  const organizations = engine.metadata.organizations.getValues();
-
-  for (const p of engine.metadata.getPatterns()) {
-    categories.get(p.category).patterns.push({
-      ...p,
-      organization: organizations.find((o) => o.key === p.organization),
-    });
+  for (const p of getTrackers().values()) {
+    categories.get(p.category).trackers.push(p);
   }
 
-  return [...categories.values()].filter((c) => c.patterns.length > 0);
-}
-
-const patterns = new Map();
-export async function getPattern(key) {
-  if (promise) await promise;
-
-  const engine = engines.get(engines.TRACKERDB_ENGINE);
-  if (!engine) return null;
-
-  if (!patterns.size) {
-    for (const p of engine.metadata.getPatterns()) {
-      patterns.set(p.key, p);
-    }
-  }
-
-  return patterns.get(key);
+  return [...categories.values()].filter((c) => c.trackers.length > 0);
 }
 
 export function isCategoryBlockedByDefault(categoryId) {
