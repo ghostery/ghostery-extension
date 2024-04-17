@@ -30,15 +30,23 @@ function negateFilter(filter) {
   }
 }
 
+let exceptions = new Map();
+
+chrome.storage.local.get(['exceptions']).then((result) => {
+  exceptions = result.exceptions;
+});
+
 chrome.storage.onChanged.addListener(async (changes) => {
   if (!changes['exceptions']) {
     return;
   }
 
+  exceptions = changes['exceptions'].newValue;
+
   const networkFilters = [];
   const cosmeticFilters = [];
 
-  for (const exception of changes['exceptions'].newValue || []) {
+  for (const exception of Object.values(exceptions)) {
     const pattern = await getPattern(exception.id);
     const shouldNegate =
       isCategoryBlockedByDefault(pattern.category) ===
@@ -88,3 +96,7 @@ chrome.storage.onChanged.addListener(async (changes) => {
     console.info(dnrRule);
   }
 });
+
+export function getException(id) {
+  return exceptions[id];
+}

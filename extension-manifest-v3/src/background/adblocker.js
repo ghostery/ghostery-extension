@@ -19,6 +19,7 @@ import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 import { observe, ENGINES } from '/store/options.js';
 import * as engines from '/utils/engines.js';
 
+import { getException } from './exceptions.js';
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 
@@ -331,21 +332,30 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-function isPaused(details, request) {
-  if (details.frameAncestors?.length > 0) {
-    for (const { url } of details.frameAncestors) {
-      const { domain, hostname } = parse(url);
-      if (pausedDomains.includes(domain || hostname)) {
-        return true;
-      }
-    }
-  }
-
-  if (pausedDomains.includes(request.sourceDomain || request.sourceHostname)) {
+function isPaused(request) {
+  if (pausedDomains.includes(request.tab.domain || request.tab.hostname)) {
     return true;
   }
 
   return false;
+}
+
+function shouldBlock(request) {
+  if (!request.metadata) return undefined;
+
+  const shouldBlockByDefault = isCategoryBlockedByDefault(
+    request.metadata.category,
+  );
+
+  const exception = getException(request.metadata.id);
+
+  if (!exception) return shouldBlockByDefault;
+
+  if (exception.overwriteStatus) return !shouldBlockByDefault;
+
+  return !(shouldBlockByDefault
+    ? exception.allowed.includes(request.tab.domain)
+    : exception.blocked.includes(request.tab.domain));
 }
 
 if (__PLATFORM__ === 'firefox') {
@@ -361,19 +371,17 @@ if (__PLATFORM__ === 'firefox') {
           updateTabStats(details.tabId, [request]);
         }
 
-        if (
-          (request.metadata &&
-            !isCategoryBlockedByDefault(request.metadata.category)) ||
-          isPaused(details, request)
-        ) {
+        const shouldBlockRequest = shouldBlock(request);
+
+        if (shouldBlockRequest === false || isPaused(request)) {
           return;
         }
 
-        const engines = request.metadata
+        const allEngines = request.metadata
           ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
           : enabledEngines;
 
-        for (const name of engines) {
+        for (const name of allEngines) {
           const engine = engines.get(name);
           if (!engine) continue;
 
@@ -399,6 +407,11 @@ if (__PLATFORM__ === 'firefox') {
             }
           }
         }
+
+        if (shouldBlockRequest === true) {
+          request.blocked = true;
+          return { cancel: true };
+        }
       }
     },
     { urls: ['<all_urls>'] },
@@ -408,16 +421,16 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (
-        (request.metadata &&
-          !isCategoryBlockedByDefault(request.metadata.category)) ||
-        isPaused(details, request)
-      ) {
+      if (shouldBlock(request) === false || isPaused(request)) {
         return;
       }
 
+      const allEngines = request.metadata
+        ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
+        : enabledEngines;
+
       let policies;
-      for (const name of enabledEngines) {
+      for (const name of allEngines) {
         const engine = engines.get(name);
         if (engine) {
           policies = engine.getCSPDirectives(request);
