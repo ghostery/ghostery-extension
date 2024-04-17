@@ -12,13 +12,11 @@
 import { html, msg, router, store } from 'hybrids';
 
 import Session from '/store/session.js';
-import { SIGNON_PAGE_URL } from '/utils/api.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
 import assets from '/pages/settings/assets/index.js';
 
 const MENU = [
-  {},
   {
     icon: 'report',
     label: msg`Report a broken page`,
@@ -65,7 +63,7 @@ const MENU = [
   },
   {
     icon: 'user',
-    label: msg`Account`,
+    label: msg`My Account`,
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-account',
     ),
@@ -79,11 +77,14 @@ const MENU = [
 ];
 
 if (__PLATFORM__ !== 'safari') {
-  MENU.unshift({
-    icon: 'heart',
-    label: msg`Become a Contributor`,
-    href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-  });
+  MENU.unshift(
+    {
+      icon: 'heart',
+      label: msg`Become a Contributor`,
+      href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+    },
+    {},
+  );
 }
 
 export default {
@@ -102,30 +103,10 @@ export default {
         <div layout="column gap:0.5 padding:1:0">
           ${store.ready(session) &&
           html`
-            <ui-text>
-              <a
-                href="${session.user
-                  ? chrome.runtime.getURL(
-                      '/pages/settings/index.html#@gh-settings-account',
-                    )
-                  : SIGNON_PAGE_URL}"
-                target="_blank"
-                layout="block padding margin:0:1"
-                onclick="${openTabWithUrl}"
-              >
-                <gh-panel-menu-item icon="user">
-                  ${session.user
-                    ? html`
-                        <div>${session.name}</div>
-                        <ui-text color="gray-600">${session.email}</ui-text>
-                      `
-                    : html`Sign in`}
-                </gh-panel-menu-item>
-              </a>
-            </ui-text>
             ${MENU.filter(
               // Hide the "Become a Contributor" menu item if the user is already a contributor
-              (_, i) => i !== 0 || (i === 0 && !session.contributor),
+              (_, i) =>
+                __PLATFORM__ === 'safari' || i > 1 || !session.contributor,
             ).map(({ icon, label, href, header }) =>
               label
                 ? html`
