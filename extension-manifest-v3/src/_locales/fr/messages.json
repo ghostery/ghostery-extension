@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "Anti-pistage"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "Utilisez les meilleurs paramètres :"
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Voulez-vous vraiment désactiver l'aperçu des trackers ?"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Devenez donateur"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "Montrez aux propriétaires de sites que vous êtes contre le pistage avec Never-Consent !"
   },
   "cancel": {
     "message": "Annuler"
@@ -150,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "Donnez le feu vert à Ghostery"
-  },
-  "enable_never_consent_": {
-    "message": "Activer Never-Consent ?"
   },
   "enable_new_setup": {
     "message": "Activer la nouvelle configuration"
@@ -283,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "En savoir plus sur les défis de YouTube face aux bloqueurs de publicité."
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Laissez Ghostery défendre vos convictions en rejetant les fenêtres surgissantes et mouchards, ou faites-le vous-même !"
-  },
   "manifest_name": {
     "message": "Ghostery Bloqueur de Traqueurs et de Publicités - confidentialité"
   },
@@ -305,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "Davantage de blocage de publicités disponible"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "Plus d'informations sur la méthodologie $${0} dans le Manifeste de Ghostery."
-  },
   "my_account": {
     "message": "Mon compte"
   },
@@ -316,15 +301,6 @@
   },
   "never_consent": {
     "message": "Never-Consent"
-  },
-  "never_consent_is_disabled": {
-    "message": "Never-Consent est inactif"
-  },
-  "never_consent_is_enabled": {
-    "message": "Never-Consent est actif"
-  },
-  "no": {
-    "message": "Non"
   },
   "no_trackers_detected": {
     "message": "Pas de trackers détectés"
@@ -338,20 +314,8 @@
   "off": {
     "message": "désactivé"
   },
-  "ok": {
-    "message": "D'accord"
-  },
-  "ok__i_understand": {
-    "message": "Ok, je comprends"
-  },
   "on": {
     "message": "activé"
-  },
-  "on_all_websites": {
-    "message": "Sur tous les sites"
-  },
-  "on_this_website": {
-    "message": "Sur ce site"
   },
   "open_video": {
     "message": "Ouvrir la vidéo"
@@ -462,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "REFUSER LES COOKIES VOUS USE ?"
-  },
   "trackers_blocked": {
     "message": "Mouchards bloqués"
   },
@@ -517,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "Bienvenue à Ghostery"
   },
-  "what_is_whotracks_me_": {
-    "message": "Qu'est-ce que WhoTracks.Me ?"
-  },
   "what_s_next_": {
     "message": "Quelle est la suite ?"
   },
@@ -538,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Sans activation des fonctionnalités de confidentialité, seule la fonction de base identifiant les traqueurs est disponible."
   },
-  "yes": {
-    "message": "Oui"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -549,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Vous pouvez ajuster les paramètres ci-dessous. Nous vous recommandons de les maintenir activés à tout moment."
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "Vous pouvez accéder à ces paramètres à tout moment dans le&nbsp;<strong>panneau de commande</strong>."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Vous ne verrez plus de camembert des trackers à côté des résultats de recherche."

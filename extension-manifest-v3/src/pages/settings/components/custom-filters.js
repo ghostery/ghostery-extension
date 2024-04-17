@@ -139,7 +139,7 @@ export default {
 
         ${!!dnrRules?.length &&
         html`
-          <details>
+          <details translate="no">
             <summary>
               <ui-text type="label-s" layout="inline">
                 DNR Output (${dnrRules.length})

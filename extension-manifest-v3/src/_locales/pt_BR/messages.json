@@ -37,9 +37,6 @@
   "anti_tracking": {
     "message": "Anti-rastreamento"
   },
-  "apply_optimal_privacy_settings_": {
-    "message": "Aplicar as configurações de privacidade ideais:"
-  },
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Tem certeza de que deseja desativar a visualização de rastreadores?"
   },
@@ -58,9 +55,6 @@
   },
   "become_a_contributor": {
     "message": "Seja um colaborador"
-  },
-  "by_using_never_consent_you_let_website_owners_know_that_you_re_against_tracking_": {
-    "message": "Ao usar o Never-Consent, você informa aos proprietários do site que você é contra o rastreamento!"
   },
   "cancel": {
     "message": "Cancelar"
@@ -150,9 +144,6 @@
   },
   "enable_ghostery_to_get_started": {
     "message": "Autorize o Ghostery para começar"
-  },
-  "enable_never_consent_": {
-    "message": "Ativar Never-Consent?"
   },
   "enable_new_setup": {
     "message": "Ativar nova configuração"
@@ -283,9 +274,6 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Saiba mais sobre os desafios do YouTube em relação aos bloqueadores de anúncios"
   },
-  "let_ghostery_be_your_complete_privacy_advocate_and_reject_all_popups_and_tracking_for_you__or_do_it_yourself_": {
-    "message": "Deixe o Ghostery ser seu defensor completo da privacidade e rejeite todos os pop-ups e rastreamentos para você, ou faça você mesmo!"
-  },
   "manifest_name": {
     "message": "Ghostery Tracker & Ad Blocker - Privacidade AdBlock"
   },
@@ -305,9 +293,6 @@
   "more_ad_blocking_available": {
     "message": "Mais bloqueio de anúncios disponível"
   },
-  "more_information_on_@_0__methodology_in_ghostery_s_manifesto_": {
-    "message": "Mais informações sobre a metodologia $${0} no Manifesto do Ghostery."
-  },
   "my_account": {
     "message": "Minha conta"
   },
@@ -316,15 +301,6 @@
   },
   "never_consent": {
     "message": "Never-Consent"
-  },
-  "never_consent_is_disabled": {
-    "message": "O Never-Consent está desativado"
-  },
-  "never_consent_is_enabled": {
-    "message": "Never-Consent está ativado"
-  },
-  "no": {
-    "message": "Não"
   },
   "no_trackers_detected": {
     "message": "Nenhum rastreador detectado"
@@ -338,20 +314,8 @@
   "off": {
     "message": "Desligado"
   },
-  "ok": {
-    "message": "OK"
-  },
-  "ok__i_understand": {
-    "message": "Ok, eu entendo"
-  },
   "on": {
     "message": "Ligado"
-  },
-  "on_all_websites": {
-    "message": "em todos os sites"
-  },
-  "on_this_website": {
-    "message": "neste site"
   },
   "open_video": {
     "message": "Abrir vídeo"
@@ -462,9 +426,6 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "tired_of_cookie_popups_": {
-    "message": "CANSADO DE POPUPS DE COOKIES?"
-  },
   "trackers_blocked": {
     "message": "Rastreadores bloqueados"
   },
@@ -517,9 +478,6 @@
   "welcome_to_ghostery": {
     "message": "Bem-vindo ao Ghostery"
   },
-  "what_is_whotracks_me_": {
-    "message": "O que é WhoTracks.Me?"
-  },
   "what_s_next_": {
     "message": "O que vem a seguir?"
   },
@@ -538,9 +496,6 @@
   "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Sem os recursos de privacidade ativados, apenas a funcionalidade básica dos rastreadores de nomes está disponível."
   },
-  "yes": {
-    "message": "Sim"
-  },
   "you_are_awesome_": {
     "message": "You are awesome!"
   },
@@ -549,9 +504,6 @@
   },
   "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
     "message": "Você pode ajustar as configurações abaixo. Recomendamos mantê-los ligados o tempo todo."
-  },
-  "you_can_always_change_these_settings_in_the_nbsp__strong_ghostery_control_panel__strong__": {
-    "message": "Você sempre pode alterar essas configurações no&nbsp;<strong>painel de controle do Ghostery</strong>."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Você não verá mais rodas de rastreadores ao lado dos resultados de pesquisa."
