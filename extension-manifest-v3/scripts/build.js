@@ -67,13 +67,15 @@ if (argv.target === 'safari') {
   options.assets.push('background/safari');
 }
 
+// Download adblocker engines
 if (argv.staging) {
-  execSync('npm run download.staging', { stdio: 'inherit' });
-
+  execSync('npm run download-engines -- --staging', { stdio: 'inherit' });
   manifest.debug = true;
 } else {
-  execSync('npm run download', { stdio: 'inherit' });
+  execSync('npm run download-engines', { stdio: 'inherit' });
 }
+
+execSync('npm run download-whotracksme-bloomfilter', { stdio: 'inherit' });
 
 const config = {
   logLevel: argv.silent ? 'silent' : undefined,
