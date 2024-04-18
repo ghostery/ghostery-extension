@@ -119,7 +119,7 @@ export default {
           <ui-panel-action layout="width:4.5">
             <a
               href="${chrome.runtime.getURL(
-                '/pages/settings/index.html#@gh-settings-trackers',
+                `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
               )}"
               onclick="${openTabWithUrl}"
             >

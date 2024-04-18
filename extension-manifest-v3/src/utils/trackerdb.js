@@ -121,7 +121,7 @@ export async function getCategories() {
 export function isCategoryBlockedByDefault(categoryId) {
   switch (categoryId) {
     case 'advertising':
-    case 'adult_advertising':
+    case 'pornvertising':
     case 'email':
     case 'site_analytics':
     case 'unidentified':
