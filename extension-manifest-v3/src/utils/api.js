@@ -21,9 +21,9 @@ const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 const COOKIE_SHORT_DURATION = 60 * 60; // 1 hour in seconds
 let COOKIE_EXPIRATION_DATE_OFFSET = 0;
 
-export const SIGNON_PAGE_URL = `https://signon.${GHOSTERY_DOMAIN}/`;
-export const CREATE_ACCOUNT_PAGE_URL = `https://signon.${GHOSTERY_DOMAIN}/register`;
-export const ACCOUNT_PAGE_URL = `https://account.${GHOSTERY_DOMAIN}/`;
+export const SIGNON_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/signin`;
+export const CREATE_ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/register`;
+export const ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/account`;
 
 if (__PLATFORM__ === 'safari') {
   // Safari has two major inconsistency with the specification:

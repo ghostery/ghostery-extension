@@ -98,7 +98,7 @@ export function matchTrackerBD(details) {
 	}
 
 	return {
-		patternId: String(matches[0].pattern.ghostery_id),
+		patternId: String(matches[0].pattern.ghostery_id || matches[0].pattern.key),
 		isFilterMatched,
 		isRedirect,
 	};

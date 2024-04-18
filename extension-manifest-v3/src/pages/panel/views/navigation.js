@@ -56,7 +56,7 @@ const MENU = [
   },
   {
     icon: 'wtm',
-    label: msg`WhoTracks.Me`,
+    label: 'WhoTracks.Me',
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-whotracksme',
     ),

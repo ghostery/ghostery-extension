@@ -10,3 +10,4 @@ web-ext-artifacts/
 *.xcuserstate
 xcuserdata
 *.xcloc
+xcode/**/*/Package.resolved
