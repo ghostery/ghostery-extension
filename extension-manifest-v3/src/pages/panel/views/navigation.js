@@ -61,13 +61,6 @@ const MENU = [
       '/pages/settings/index.html#@gh-settings-whotracksme',
     ),
   },
-  {
-    icon: 'user',
-    label: msg`My Account`,
-    href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-account',
-    ),
-  },
   {},
   {
     icon: 'info-menu',
