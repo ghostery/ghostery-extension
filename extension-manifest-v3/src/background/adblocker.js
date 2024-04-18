@@ -349,18 +349,18 @@ if (__PLATFORM__ === 'firefox') {
       if (request.sourceDomain || request.sourceHostname) {
         if (details.type !== 'main_frame') {
           updateTabStats(details.tabId, [request]);
-        }
 
-        const shouldBlock = request.metadata?.shouldBlock;
+          const shouldBlock = request.metadata?.shouldBlock;
 
-        if (shouldBlock === false || isPaused(request)) {
-          return;
-        }
+          if (shouldBlock === false || isPaused(request)) {
+            return;
+          }
 
-        // Only if user added an exception (overwrite)
-        if (shouldBlock === true) {
-          request.blocked = true;
-          return { cancel: true };
+          // Only if user added an exception (overwrite)
+          if (shouldBlock === true) {
+            request.blocked = true;
+            return { cancel: true };
+          }
         }
 
         const allEngines = request.metadata
