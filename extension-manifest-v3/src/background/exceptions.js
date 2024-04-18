@@ -11,8 +11,8 @@
 
 import { parseFilter } from '@cliqz/adblocker';
 
-import { getTracker, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
-import convert from '/utils/dnr-converter.js';
+import { getTracker, isCategoryBlockedByDefault } from '../utils/trackerdb.js';
+import convert from '../utils/dnr-converter.js';
 
 function negateFilter(filter) {
   const cleanFilter = filter.toString();

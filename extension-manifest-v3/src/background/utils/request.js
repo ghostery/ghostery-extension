@@ -12,7 +12,7 @@
 import { Request } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 
-import * as trackerDb from '/utils/trackerdb.js';
+import * as trackerDb from '../../utils/trackerdb.js';
 
 const PARSE_CACHE_LIMIT = 1000;
 const parseCache = new Map();
@@ -90,7 +90,6 @@ export default class ExtendedRequest extends Request {
       const { frameAncestors } = this._originalRequestDetails;
 
       let url = '';
-
       /* Firefox APIs */
       if (frameAncestors && frameAncestors.length > 0) {
         url = frameAncestors[frameAncestors.length - 1].url;

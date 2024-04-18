@@ -352,16 +352,10 @@ if (__PLATFORM__ === 'firefox') {
         if (details.type !== 'main_frame') {
           updateTabStats(details.tabId, [request]);
 
-          const shouldBlock = request.metadata?.shouldBlock;
+          const isTrusted = request.metadata?.isTrusted;
 
-          if (shouldBlock === false) {
+          if (isTrusted) {
             return;
-          }
-
-          // Only if user added an exception (overwrite)
-          if (shouldBlock === true) {
-            request.blocked = true;
-            return { cancel: true };
           }
         }
 

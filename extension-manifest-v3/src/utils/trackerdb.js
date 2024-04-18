@@ -9,14 +9,44 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import * as engines from './engines.js';
-import { getException } from '/background/exceptions.js';
-
 import { order as categoryOrder } from '@ghostery/ui/categories';
+
+import * as engines from './engines.js';
+import { getException } from '../background/exceptions.js';
 
 let promise = engines.init(engines.TRACKERDB_ENGINE).then(() => {
   promise = null;
 });
+
+export function isCategoryBlockedByDefault(categoryId) {
+  switch (categoryId) {
+    case 'advertising':
+    case 'pornvertising':
+    case 'email':
+    case 'site_analytics':
+    case 'unidentified':
+    case undefined:
+      return true;
+    default:
+      return false;
+  }
+}
+
+export function isTrusted(request, category, exception) {
+  const blockByDefault = isCategoryBlockedByDefault(category);
+
+  let isTrusted = !blockByDefault;
+
+  if (exception) {
+    if (exception.overwriteStatus) {
+      isTrusted = blockByDefault === exception.overwriteStatus;
+    }
+    isTrusted = isTrusted
+      ? !exception.blocked.includes(request.tab.domain)
+      : exception.allowed.includes(request.tab.domain);
+  }
+  return isTrusted;
+}
 
 export function getMetadata(request) {
   if (promise) {
@@ -48,35 +78,8 @@ export function getMetadata(request) {
   }
 
   const { category, pattern, organization } = matches[0];
-  const blockByDefault = isCategoryBlockedByDefault(category.key);
 
   exception = exception || getException(pattern.key);
-
-  let shouldBlock = blockByDefault;
-  if (exception) {
-    // Set false/true explicitly only when overwriteStatus is set
-    if (exception.overwriteStatus) {
-      shouldBlock = blockByDefault !== exception.overwriteStatus;
-    }
-
-    // If domain is allowed and global status is to block
-    // set shouldBlock to false
-    if (
-      (shouldBlock === true || blockByDefault) &&
-      exception.allowed.includes(request.tab.domain)
-    ) {
-      shouldBlock = false;
-    }
-
-    // If domain is blocked and global status is to allow
-    // set shouldBlock to true
-    if (
-      (shouldBlock === false || !blockByDefault) &&
-      exception.blocked.includes(request.tab.domain)
-    ) {
-      shouldBlock = true;
-    }
-  }
 
   const metadata = {
     id: pattern.key,
@@ -93,7 +96,7 @@ export function getMetadata(request) {
     country: organization?.country,
     privacyPolicy: organization?.privacy_policy_url,
     isFilterMatched,
-    shouldBlock,
+    isTrusted: isTrusted(request, category.key, exception),
   };
 
   return metadata;
@@ -164,18 +167,4 @@ export async function getCategories() {
     .sort(
       (a, b) => categoryOrder.indexOf(a.key) - categoryOrder.indexOf(b.key),
     );
-}
-
-export function isCategoryBlockedByDefault(categoryId) {
-  switch (categoryId) {
-    case 'advertising':
-    case 'pornvertising':
-    case 'email':
-    case 'site_analytics':
-    case 'unidentified':
-    case undefined:
-      return true;
-    default:
-      return false;
-  }
 }
