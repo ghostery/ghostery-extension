@@ -15,7 +15,7 @@ import * as labels from '@ghostery/ui/labels';
 import Tracker from '../store/tracker.js';
 import assets from '../assets/index.js';
 
-import { updateException } from './trackers.js';
+import Trackers, { updateException } from './trackers.js';
 
 export default {
   tracker: store(Tracker),
@@ -24,7 +24,7 @@ export default {
       <gh-settings-page-layout>
         <div layout="column gap">
           <ui-action>
-            <a href="${router.backUrl()}" layout="self:start padding">
+            <a href="${router.url(Trackers)}" layout="self:start padding">
               <ui-text type="label-s" layout="row gap items:center">
                 <ui-icon name="chevron-left"></ui-icon> Back
               </ui-text>
