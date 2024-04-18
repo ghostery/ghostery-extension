@@ -15,11 +15,9 @@ import {
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
-import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 import { observe, ENGINES } from '/store/options.js';
 import * as engines from '/utils/engines.js';
 
-import { getException } from './exceptions.js';
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 
@@ -340,32 +338,6 @@ function isPaused(request) {
   return false;
 }
 
-function shouldBlock(request) {
-  if (request.type === 'main_frame') return undefined;
-
-  let category = undefined;
-  let activityId = request.domain;
-
-  if (request.metadata) {
-    category = request.metadata.category;
-    activityId = request.metadata.id;
-  }
-
-  const shouldBlockByDefault = isCategoryBlockedByDefault(category);
-
-  const exception = getException(activityId);
-
-  if (!exception && !request.metadata) return undefined;
-
-  if (!exception) return shouldBlockByDefault;
-
-  if (exception.overwriteStatus) return !shouldBlockByDefault;
-
-  return !(shouldBlockByDefault
-    ? exception.allowed.includes(request.tab.domain)
-    : exception.blocked.includes(request.tab.domain));
-}
-
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
@@ -379,10 +351,16 @@ if (__PLATFORM__ === 'firefox') {
           updateTabStats(details.tabId, [request]);
         }
 
-        const shouldBlockRequest = shouldBlock(request);
+        const shouldBlock = request.metadata?.shouldBlock;
 
-        if (shouldBlockRequest === false || isPaused(request)) {
+        if (shouldBlock === false || isPaused(request)) {
           return;
+        }
+
+        // Only if user added an exception (overwrite)
+        if (shouldBlock === true) {
+          request.blocked = true;
+          return { cancel: true };
         }
 
         const allEngines = request.metadata
@@ -415,11 +393,6 @@ if (__PLATFORM__ === 'firefox') {
             }
           }
         }
-
-        if (shouldBlockRequest === true) {
-          request.blocked = true;
-          return { cancel: true };
-        }
       }
     },
     { urls: ['<all_urls>'] },
@@ -429,7 +402,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (shouldBlock(request) === false || isPaused(request)) {
+      if (request.metadata?.shouldBlock === false || isPaused(request)) {
         return;
       }
 

@@ -10,6 +10,7 @@
  */
 
 import * as engines from './engines.js';
+import { getException } from '/background/exceptions.js';
 
 let promise = engines.init(engines.TRACKERDB_ENGINE).then(() => {
   promise = null;
@@ -22,8 +23,9 @@ export function getMetadata(request) {
   }
 
   const engine = engines.get(engines.TRACKERDB_ENGINE);
-  let isFilterMatched = true;
 
+  let isFilterMatched = true;
+  let exception = null;
   let matches = engine.getPatternMetadata(request);
 
   if (matches.length === 0) {
@@ -32,10 +34,48 @@ export function getMetadata(request) {
   }
 
   if (matches.length === 0) {
-    return null;
+    exception = getException(request.domain);
+    if (!exception) return null;
+
+    matches = [
+      {
+        pattern: { key: exception.id, name: exception.id },
+        category: { key: 'unidentified' },
+      },
+    ];
   }
 
   const { category, pattern, organization } = matches[0];
+  const blockByDefault = isCategoryBlockedByDefault(category.key);
+
+  exception = exception || getException(pattern.key);
+
+  let shouldBlock = undefined;
+  if (exception) {
+    // Set false/true explicitly only when overwriteStatus is set
+    if (exception.overwriteStatus) {
+      shouldBlock =
+        isCategoryBlockedByDefault(category.key) !== exception.overwriteStatus;
+    }
+
+    // If domain is allowed and global status is to block
+    // set shouldBlock to false
+    if (
+      (shouldBlock === true || blockByDefault) &&
+      exception.allowed.includes(request.tab.domain)
+    ) {
+      shouldBlock = false;
+    }
+
+    // If domain is blocked and global status is to allow
+    // set shouldBlock to true
+    if (
+      (shouldBlock === false || !blockByDefault) &&
+      exception.blocked.includes(request.tab.domain)
+    ) {
+      shouldBlock = true;
+    }
+  }
 
   const metadata = {
     id: pattern.key,
@@ -52,6 +92,7 @@ export function getMetadata(request) {
     country: organization?.country,
     privacyPolicy: organization?.privacy_policy_url,
     isFilterMatched,
+    shouldBlock,
   };
 
   return metadata;

@@ -42,10 +42,11 @@ async function setStorage(item) {
 }
 
 export async function getExceptionStatus(trackerException, domain) {
-  const { category } = await getTracker(trackerException.id);
+  const tracker = await getTracker(trackerException.id);
 
   if (
-    isCategoryBlockedByDefault(category) === trackerException.overwriteStatus
+    isCategoryBlockedByDefault(tracker?.category) ===
+    trackerException.overwriteStatus
   ) {
     return trackerException.blocked.includes(domain)
       ? 'blocked:website'
