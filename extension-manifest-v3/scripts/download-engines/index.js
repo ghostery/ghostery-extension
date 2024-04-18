@@ -118,7 +118,6 @@ for (const [name, target] of Object.entries(DNR)) {
     const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
 
     if (
-      staging &&
       existsSync(outputPath) &&
       checksum(readFileSync(outputPath)) === list.dnr.checksum
     ) {
@@ -138,40 +137,4 @@ for (const [name, target] of Object.entries(DNR)) {
 
     writeFileSync(outputPath, dnr);
   }
-}
-
-/* DNR for Safari */
-
-console.log(`Downloading "dnr-ios"...`);
-const outputPath = `${TARGET_PATH}/dnr-safari.json`;
-
-const list = await fetch(
-  `https://staging-cdn.ghostery.com/adblocker/configs/dnr-ios/allowed-lists.json`,
-).then((res) => {
-  if (!res.ok) {
-    throw new Error(
-      `Failed to download allowed list for dnr-ios": ${res.status}: ${res.statusText}`,
-    );
-  }
-
-  return res.json();
-});
-
-if (
-  !existsSync(outputPath) ||
-  checksum(readFileSync(outputPath)) !== list.dnr.checksum
-) {
-  const dnr = await fetch(list.dnr.url || list.dnr.network).then((res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to fetch DNR rules for "${name}": ${res.status}: ${res.statusText}`,
-      );
-    }
-
-    return res.text();
-  });
-
-  writeFileSync(outputPath, dnr);
-} else {
-  console.log('Checksum match - skipping download');
 }

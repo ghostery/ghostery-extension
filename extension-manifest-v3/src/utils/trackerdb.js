@@ -50,7 +50,7 @@ export function getMetadata(request) {
 
   exception = exception || getException(pattern.key);
 
-  let shouldBlock = undefined;
+  let shouldBlock = blockByDefault;
   if (exception) {
     // Set false/true explicitly only when overwriteStatus is set
     if (exception.overwriteStatus) {
