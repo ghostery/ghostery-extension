@@ -39,7 +39,7 @@ export function getMetadata(request) {
 
     matches = [
       {
-        pattern: { key: exception.id, name: exception.id },
+        pattern: { key: request.domain, name: request.domain },
         category: { key: 'unidentified' },
       },
     ];
