@@ -18,8 +18,10 @@ export async function openTabWithUrl(host, event) {
     const tabs = await chrome.tabs.query({ url: href.split('#')[0] });
 
     if (tabs.length) {
-      await chrome.tabs.update(tabs[0].id, { active: true, url: href });
-      globalThis.close();
+      await chrome.tabs.update(tabs[0].id, {
+        active: true,
+        url: href !== tabs[0].url ? href : undefined,
+      });
 
       return;
     }

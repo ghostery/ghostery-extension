@@ -153,7 +153,7 @@ export default {
                 </a>
               </gh-panel-button>
             `}
-        <gh-panel-container>
+        <gh-panel-container layout="padding:bottom:1.5">
           ${stats.domain
             ? html`
                 <ui-panel-stats
@@ -230,7 +230,7 @@ export default {
             icon="${notification.icon}"
             href="${notification.url}"
             type="${notification.type}"
-            layout="width:min:full padding:1.5"
+            layout="width:min:full padding:1.5 margin:top:-1.5"
           >
             ${notification.text}
             <span slot="action">${notification.action}</span>
