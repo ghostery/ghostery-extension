@@ -106,7 +106,7 @@ export function getException(id) {
   return exceptions[id];
 }
 
-async function updateCosmeticFilters(filters) {
+async function updateCosmeticFilters(/* filters */) {
   // TODO
   //engines.createCustomEngine(filters.join('\n'))
 }
