@@ -116,16 +116,19 @@ export default {
                   </ui-panel-action>`,
                 ),
               )}
-          <ui-panel-action layout="width:4.5">
-            <a
-              href="${chrome.runtime.getURL(
-                `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
-              )}"
-              onclick="${openTabWithUrl}"
-            >
-              <ui-icon name="settings-m"></ui-icon>
-            </a>
-          </ui-panel-action>
+          ${tracker.category !== 'unidentified' &&
+          html`
+            <ui-panel-action layout="width:4.5">
+              <a
+                href="${chrome.runtime.getURL(
+                  `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
+                )}"
+                onclick="${openTabWithUrl}"
+              >
+                <ui-icon name="settings-m"></ui-icon>
+              </a>
+            </ui-panel-action>
+          `}
         </div>
         ${(tracker.description || wtmUrl) &&
         html`
