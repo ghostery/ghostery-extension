@@ -327,6 +327,11 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
             }
           }
         }
+
+        const request = Request.fromRequestDetails(details);
+        request.blocked = true;
+
+        updateTabStats(details.tabId, [request]);
       }
     },
     {
