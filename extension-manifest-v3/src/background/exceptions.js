@@ -29,6 +29,81 @@ function negateFilter(filter) {
   return parseFilter(negatedFilter);
 }
 
+export function restrictFilter(filter, domain) {
+  const cleanFilter = filter.toString();
+  let restrictedFilter = '';
+  if (filter.isNetworkFilter()) {
+    if (!filter.domains) {
+      restrictedFilter = `${cleanFilter}${
+        cleanFilter.includes('$') ? ',' : '$'
+      }domain=${domain}`;
+    } else {
+      const domains = [...filter.domains.parts.split(','), domain];
+      restrictedFilter = cleanFilter.replace(
+        /domain=(.*?)(,|$)/,
+        `domain=${domains.join('|')}$2`,
+      );
+    }
+  } else if (filter.isCosmeticFilter()) {
+    if (cleanFilter.startsWith('##') || cleanFilter.startsWith('#@#')) {
+      restrictedFilter = `${domain}${cleanFilter}`;
+    } else {
+      restrictedFilter = `${domain},${cleanFilter}`;
+    }
+  }
+  return parseFilter(restrictedFilter);
+}
+
+async function convertExceptionsToFilters(exceptions) {
+  const filters = [];
+
+  for (const exception of Object.values(exceptions)) {
+    const pattern = (await getTracker(exception.id)) || {
+      domains: [exception.id],
+      filters: [],
+    };
+
+    const blockedByDefault = isCategoryBlockedByDefault(pattern.category);
+    const shouldBlock =
+      blockedByDefault !== (exception?.overwriteStatus || false);
+
+    let blockFilters = pattern.filters.map((filter) => parseFilter(filter));
+
+    if (!pattern.category) {
+      blockFilters.push(parseFilter(`||${exception.id}^$third-party`));
+    }
+
+    if (blockedByDefault) {
+      blockFilters.push(
+        ...pattern.domains
+          .map((domain) => `||${domain}^$third-party`)
+          .map((filter) => parseFilter(filter)),
+      );
+    }
+
+    const allowFilters = blockFilters.map((filter) => negateFilter(filter));
+
+    if (exception.overwriteStatus) {
+      filters.push(...(shouldBlock ? blockFilters : allowFilters));
+    }
+
+    if (shouldBlock) {
+      for (const domain of exception.allowed) {
+        for (const filter of allowFilters) {
+          filters.push(restrictFilter(filter, domain));
+        }
+      }
+    } else {
+      for (const domain of exception.blocked) {
+        for (const filter of blockFilters) {
+          filters.push(restrictFilter(filter, domain));
+        }
+      }
+    }
+  }
+  return filters;
+}
+
 let exceptions = {};
 
 chrome.storage.local.get(['exceptions']).then((result) => {
@@ -42,57 +117,16 @@ chrome.storage.onChanged.addListener(async (changes) => {
 
   exceptions = changes['exceptions'].newValue || {};
 
+  const filters = await convertExceptionsToFilters(exceptions);
+
   const networkFilters = [];
   const cosmeticFilters = [];
 
-  for (const exception of Object.values(exceptions)) {
-    const pattern = (await getTracker(exception.id)) || {
-      domains: [exception.id],
-      filters: [],
-    };
-    const shouldBlockByDefault = isCategoryBlockedByDefault(pattern.category);
-    const shouldNegate = shouldBlockByDefault === exception.overwriteStatus;
-
-    // Action to take based on category (blocking / non-blocking) and the overwrite
-    // global:
-    // * blocking with overwrite = trust
-    // * blocking without overwrite = nothing
-    // * non-blocking with overwrite = block
-    // * non-blocking without overwrite = nothing
-    // website blocked:
-    // * blocking with overwrite = block
-    // * blocking without overwrite = nothing
-    // * non-blocking with overwrite = nothing
-    // * non-blocking without overwrite = block
-    // website allowed:
-    // * blocking with overwrite = nothing
-    // * blocking without overwrite = allow
-    // * non-blocking with overwrite = allow
-    // * non-blocking without overwrite = nothing
-
-    // TODO:
-    // [ ] double click - advertising
-    // [ ] google tag manager - essential
-    // [ ] onetrust - consent
-    // [ ] unidentified
-
-    let filters = [
-      ...pattern.filters,
-      ...pattern.domains.map((domain) => `||${domain}^$third-party`),
-    ].map((filter) => parseFilter(filter));
-
-    if (shouldNegate) {
-      filters = filters.map((filter) => negateFilter(filter));
-    }
-
-    if (exception.overwriteStatus) {
-      for (const filter of filters) {
-        if (filter.isNetworkFilter()) {
-          networkFilters.push(filter.toString());
-        } else if (filter.isCosmeticFilter()) {
-          cosmeticFilters.push(filter.toString());
-        }
-      }
+  for (const filter of filters) {
+    if (filter.isNetworkFilter()) {
+      networkFilters.push(filter.toString());
+    } else if (filter.isCosmeticFilter()) {
+      cosmeticFilters.push(filter.toString());
     }
   }
 
@@ -125,7 +159,6 @@ async function updateDNRRules(networkFilters) {
       })),
     );
   }
-  console.warn(dnrRules);
   const addRules = dnrRules.map((rule, index) => ({
     ...rule,
     id: 2000000 + index,
@@ -134,7 +167,6 @@ async function updateDNRRules(networkFilters) {
   const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
     .filter(({ id }) => id >= 2000000)
     .map(({ id }) => id);
-
   await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds,
   });
