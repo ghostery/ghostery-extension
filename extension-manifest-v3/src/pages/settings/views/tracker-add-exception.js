@@ -73,7 +73,7 @@ export default {
             </div>
             <div layout="column gap:0.5">
               <ui-text type="label-m">Website</ui-text>
-              <gh-settings-input error="${store.error(model)}">
+              <gh-settings-input error="${store.error(model) || ''}">
                 <input
                   type="text"
                   placeholder="Enter website URL"

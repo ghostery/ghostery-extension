@@ -100,16 +100,9 @@ export default {
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.domain),
-  content: ({
-    options,
-    stats,
-    trackerExceptions,
-    trackers,
-    notification,
-    paused,
-  }) => html`
+  content: ({ options, stats, trackers, notification, paused }) => html`
     <template layout="column grow relative">
-      ${store.ready(options, stats, trackerExceptions) &&
+      ${store.ready(options, stats) &&
       html`
         ${options.terms &&
         html`
@@ -194,7 +187,10 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <ui-text>
+          <ui-text
+            class="${{ last: store.error(notification) }}"
+            layout.last="padding:bottom:1.5"
+          >
             <a
               href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
               onclick="${openTabWithUrl}"
@@ -224,19 +220,18 @@ export default {
             </a>
           </ui-text>
         </gh-panel-container>
-        ${store.ready(notification)
-          ? html`
-              <gh-panel-notification
-                icon="${notification.icon}"
-                href="${notification.url}"
-                type="${notification.type}"
-                layout="width:min:full padding:1.5"
-              >
-                ${notification.text}
-                <span slot="action">${notification.action}</span>
-              </gh-panel-notification>
-            `
-          : html`<div layout="padding:top:1.5"></div>`}
+        ${store.ready(notification) &&
+        html`
+          <gh-panel-notification
+            icon="${notification.icon}"
+            href="${notification.url}"
+            type="${notification.type}"
+            layout="width:min:full padding:1.5"
+          >
+            ${notification.text}
+            <span slot="action">${notification.action}</span>
+          </gh-panel-notification>
+        `}
       `}
     </template>
   `,
