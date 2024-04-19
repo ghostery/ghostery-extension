@@ -35,7 +35,7 @@ export default {
         >
           <slot name="nav"></slot>
         </nav>
-        <main layout="column grow" layout@992px="area::2">
+        <main layout="column grow height::0" layout@992px="area::2">
           <slot></slot>
         </main>
       </template>

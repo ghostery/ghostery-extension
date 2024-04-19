@@ -13,8 +13,9 @@ import { html } from 'hybrids';
 
 export default {
   icon: '',
-  render: ({ icon }) => html`
-    <template layout="grid relative">
+  error: '',
+  render: ({ icon, error }) => html`
+    <template layout="grid gap:0.5 relative">
       ${icon &&
       html`
         <div layout="row center absolute inset left:12px right:auto">
@@ -22,6 +23,8 @@ export default {
         </div>
       `}
       <slot></slot>
+      ${error &&
+      html`<ui-text color="error-400" type="body-s">${error}</ui-text>`}
     </template>
   `.css`
     :host {
@@ -55,6 +58,10 @@ export default {
 
     :host([icon]) ::slotted(input) {
       padding-left: 44px;
+    }
+
+    :host([error]) ::slotted(input) {
+      border-color: var(--ui-color-error-400);
     }
   `,
 };

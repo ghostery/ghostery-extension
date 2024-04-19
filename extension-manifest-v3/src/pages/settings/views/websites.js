@@ -65,7 +65,7 @@ export default {
                     oninput="${html.set('query')}"
                   />
                 </gh-settings-input>
-                <gh-settings-table>
+                <gh-settings-table responsive>
                   <div
                     slot="header"
                     layout="column"
@@ -112,7 +112,7 @@ export default {
                           layout@768px="hidden"
                         ></ui-line>
                         <div layout="row items:center gap" layout@768px="grow">
-                          <gh-settings-badge type="danger">
+                          <gh-settings-badge type="danger" uppercase>
                             Paused
                           </gh-settings-badge>
                           <ui-text color="gray-600" layout="grow">

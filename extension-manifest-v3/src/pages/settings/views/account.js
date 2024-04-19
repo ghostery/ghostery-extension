@@ -52,7 +52,7 @@ export default {
                     <div layout="row items:center gap:2">
                       <ui-text type="headline-m"> ${session.name} </ui-text>
                       ${session.contributor &&
-                      html`<gh-settings-badge type="primary">
+                      html`<gh-settings-badge type="primary" uppercase>
                         Contributor
                       </gh-settings-badge>`}
                     </div>

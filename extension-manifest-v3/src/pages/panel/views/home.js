@@ -153,7 +153,7 @@ export default {
                 </a>
               </gh-panel-button>
             `}
-        <gh-panel-container layout="padding:bottom:1.5">
+        <gh-panel-container>
           ${stats.domain
             ? html`
                 <ui-panel-stats
@@ -198,7 +198,7 @@ export default {
             <a
               href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
               onclick="${openTabWithUrl}"
-              layout="block margin:0:1.5"
+              layout="block margin:1.5:1.5:0"
             >
               <gh-panel-options-item
                 icon="ads"
@@ -224,18 +224,19 @@ export default {
             </a>
           </ui-text>
         </gh-panel-container>
-        ${store.ready(notification) &&
-        html`
-          <gh-panel-notification
-            icon="${notification.icon}"
-            href="${notification.url}"
-            type="${notification.type}"
-            layout="width:min:full padding:1.5 margin:top:-1.5"
-          >
-            ${notification.text}
-            <span slot="action">${notification.action}</span>
-          </gh-panel-notification>
-        `}
+        ${store.ready(notification)
+          ? html`
+              <gh-panel-notification
+                icon="${notification.icon}"
+                href="${notification.url}"
+                type="${notification.type}"
+                layout="width:min:full padding:1.5"
+              >
+                ${notification.text}
+                <span slot="action">${notification.action}</span>
+              </gh-panel-notification>
+            `
+          : html`<div layout="padding:top:1.5"></div>`}
       `}
     </template>
   `,

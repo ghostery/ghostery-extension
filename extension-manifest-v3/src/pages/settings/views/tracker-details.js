@@ -9,17 +9,33 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store } from 'hybrids';
+import { html, router, store, msg } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
 import Tracker from '../store/tracker.js';
 import assets from '../assets/index.js';
 
 import Trackers, { updateException } from './trackers.js';
+import TrackerAddException from './tracker-add-exception.js';
+
+function removeDomain(domain) {
+  return ({ tracker, listType }) => {
+    store.set(tracker.exception, {
+      [listType]: tracker.exception[listType].filter((d) => d !== domain),
+    });
+  };
+}
 
 export default {
+  [router.connect]: { stack: [TrackerAddException] },
   tracker: store(Tracker),
-  content: ({ tracker }) => html`
+  listType: ({ tracker }) =>
+    tracker.exception.overwriteStatus === tracker.blockedByDefault
+      ? 'blocked'
+      : 'allowed',
+  domains: (host) =>
+    (store.ready(host.tracker) && host.tracker.exception[host.listType]) || [],
+  content: ({ tracker, domains }) => html`
     <template layout="contents">
       <gh-settings-page-layout>
         <div layout="column gap">
@@ -70,28 +86,89 @@ export default {
                     alt="Selective blocking"
                   />
                 </gh-settings-help-image>
-                <div layout="column gap grow">
-                  <ui-text type="label-l">Protection status</ui-text>
-                  <ui-text type="body-m" color="gray-600">
-                    Modify the recommended blocking settings for every website.
-                  </ui-text>
+                <div layout="column items:start gap:2 grow">
+                  <div layout="row gap:2 items:start">
+                    <div layout="column gap:0.5">
+                      <ui-text type="label-l">Protection status</ui-text>
+                      <ui-text type="body-m" color="gray-600">
+                        Modify the recommended blocking settings for every
+                        website.
+                      </ui-text>
+                    </div>
+
+                    <ui-panel-protection-status-toggle
+                      value="${tracker.exception.overwriteStatus}"
+                      blockByDefault="${tracker.blockedByDefault}"
+                      responsive
+                      onchange="${updateException(tracker)}"
+                      layout="shrink:0"
+                    ></ui-panel-protection-status-toggle>
+                  </div>
+                  <gh-settings-badge
+                    type="primary"
+                    layout="row content:start padding"
+                  >
+                    <ui-icon name="info-filled"></ui-icon>
+                    ${tracker.blockedByDefault
+                      ? msg`Our recommendation for this activity: Blocked`
+                      : msg`Our recommendation for this activity: Trusted`}
+                  </gh-settings-badge>
                 </div>
-                <ui-panel-protection-status-toggle
-                  value="${tracker.exception.overwriteStatus}"
-                  blockByDefault="${tracker.blockedByDefault}"
-                  responsive
-                  onchange="${updateException(tracker)}"
-                  layout="shrink:0"
-                ></ui-panel-protection-status-toggle>
               </div>
               <div layout="column gap:2">
-                <ui-text type="label-l">Website exceptions</ui-text>
+                <div layout="row gap items:center content:space-between">
+                  <ui-text type="label-l">Website exceptions</ui-text>
+                  <ui-button size="small">
+                    <a href="${router.url(TrackerAddException, { tracker })}">
+                      Add
+                    </a>
+                  </ui-button>
+                </div>
                 <gh-settings-table>
                   <div slot="header" layout="grid:2 gap:4">
                     <ui-text type="label-m"> Website </ui-text>
                     <ui-text type="label-m"> Protection status </ui-text>
                   </div>
+
+                  ${domains.map(
+                    (domain) => html`
+                      <div layout="grid:2 items:center:stretch gap:4">
+                        <ui-text>${domain}</ui-text>
+                        <div layout="row content:space-between gap">
+                          <gh-settings-protection-badge
+                            blocked="${tracker.exception.overwriteStatus ===
+                            tracker.blockedByDefault}"
+                          ></gh-settings-protection-badge>
+                          <ui-action>
+                            <button
+                              layout@768px="order:1 padding:0.5"
+                              onclick="${removeDomain(domain)}"
+                            >
+                              <ui-icon
+                                name="trash"
+                                layout="size:3"
+                                color="gray-400"
+                              ></ui-icon>
+                            </button>
+                          </ui-action>
+                        </div>
+                      </div>
+                    `,
+                  )}
                 </gh-settings-table>
+                ${!domains.length &&
+                html`
+                  <div layout="column center gap padding:5:0">
+                    <ui-icon
+                      name="no-websites"
+                      layout="size:4"
+                      color="gray-400"
+                    ></ui-icon>
+                    <ui-text layout="block:center width:::180px">
+                      No websites exceptions added yet
+                    </ui-text>
+                  </div>
+                `}
               </div>
             </div>
           `}
