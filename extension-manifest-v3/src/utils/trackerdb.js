@@ -12,6 +12,8 @@
 import * as engines from './engines.js';
 import { getException } from '/background/exceptions.js';
 
+import { order as categoryOrder } from '@ghostery/ui/categories';
+
 let promise = engines.init(engines.TRACKERDB_ENGINE).then(() => {
   promise = null;
 });
@@ -157,7 +159,11 @@ export async function getCategories() {
     categories.get(p.category).trackers.push(p);
   }
 
-  return [...categories.values()].filter((c) => c.trackers.length > 0);
+  return [...categories.values()]
+    .filter((c) => c.trackers.length > 0)
+    .sort(
+      (a, b) => categoryOrder.indexOf(a.key) - categoryOrder.indexOf(b.key),
+    );
 }
 
 export function isCategoryBlockedByDefault(categoryId) {

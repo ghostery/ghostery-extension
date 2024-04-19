@@ -70,7 +70,7 @@ const TrackerException = {
     get: (id) => ({ id }),
     set: async (id, values) => {
       await requestPermission();
-      setStorage(values);
+      return setStorage(values);
     },
     list: async () => Object.values(await getStorage()),
     loose: true,
