@@ -118,7 +118,9 @@ function isPermissionRequired() {
   return (
     chrome &&
     (chrome.runtime.getManifest?.().permissions.includes('offscreen') ||
-      chrome.runtime.getManifest?.().optional_permissions.includes('offscreen'))
+      chrome.runtime
+        .getManifest?.()
+        .optional_permissions?.includes('offscreen'))
   );
 }
 

@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import * as IDB from 'idb';
 
 import { registerDatabase } from '/utils/indexeddb.js';
-import * as trackerDb from '/utils/trackerdb.js';
+import * as trackerDb from '../utils/trackerdb.js';
 
 // Synchronously register name of the database
 // so if a user don't open any page, it is still possible

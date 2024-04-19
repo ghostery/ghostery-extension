@@ -18,7 +18,7 @@ import {
   Config,
 } from '@cliqz/adblocker';
 
-import { registerDatabase } from '/utils/indexeddb.js';
+import { registerDatabase } from './indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 export const FIXES_ENGINE = 'fixes';
@@ -385,6 +385,8 @@ const ALARM_PREFIX = 'engines:update:';
 const ALARM_DELAY = 60; // 1 hour
 
 export async function init(name) {
+  if (__PLATFORM__ === 'tests') return;
+
   if (name === CUSTOM_ENGINE) {
     return (
       get(CUSTOM_ENGINE) ||

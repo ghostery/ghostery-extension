@@ -4,6 +4,7 @@
   "private": true,
   "author": "Ghostery GmbH",
   "license": "MPL-2.0",
+  "type": "module",
   "exports": {
     "./onboarding": "./src/modules/onboarding/index.js",
     "./onboarding/short": "./src/modules/onboarding/short.js",

@@ -19,7 +19,7 @@ import TrackerException, {
 import Notification from '../store/notification.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
-import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import { isCategoryBlockedByDefault } from '../../../utils/trackerdb.js';
 
 import sleep from '../assets/sleep.svg';
 

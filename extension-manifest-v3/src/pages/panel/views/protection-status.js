@@ -2,7 +2,7 @@ import { html, msg, router, store } from 'hybrids';
 
 import * as labels from '@ghostery/ui/labels';
 
-import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import { isCategoryBlockedByDefault } from '../../../utils/trackerdb.js';
 
 import TabStats from '/store/tab-stats.js';
 import TrackerException from '/store/tracker-exception.js';
