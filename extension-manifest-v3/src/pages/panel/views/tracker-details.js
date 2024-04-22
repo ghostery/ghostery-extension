@@ -55,13 +55,15 @@ export default {
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
   exception: store(TrackerException, { id: 'trackerId' }),
+  status: ({ stats, tracker, exception }) =>
+    getExceptionStatus(exception, stats.domain, tracker.category),
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
     `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.domain),
-  content: ({ stats, tracker, exception, wtmUrl, paused }) => html`
+  content: ({ tracker, status, wtmUrl, paused }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -86,36 +88,31 @@ export default {
                   </div>
                 </ui-panel-action>
               `
-            : store.ready(exception) &&
-              html.resolve(
-                getExceptionStatus(exception, stats.domain).then(
-                  (status) => html`<ui-panel-action layout="width:full">
-                    <a
-                      href="${router.url(ProtectionStatus, {
-                        trackerId: tracker.id,
-                      })}"
-                      layout="row gap"
-                    >
-                      <ui-icon
-                        name="${status.startsWith('block')
-                          ? 'block'
-                          : 'trust'}-m"
-                        color="${status.startsWith('block')
-                          ? 'gray-800'
-                          : 'success-500'}"
-                      ></ui-icon>
-                      <ui-text type="label-m" layout="row gap">
-                        ${status === 'trusted' && html`Trusted on all websites`}
-                        ${status === 'blocked' && html`Blocked on all websites`}
-                        ${status === 'trusted:website' &&
-                        html`Trusted on this website`}
-                        ${status === 'blocked:website' &&
-                        html`Blocked on this website`}
-                      </ui-text>
-                    </a>
-                  </ui-panel-action>`,
-                ),
-              )}
+            : html`<ui-panel-action layout="width:full">
+                <a
+                  href="${router.url(ProtectionStatus, {
+                    trackerId: tracker.id,
+                  })}"
+                  layout="row gap"
+                >
+                  <ui-icon
+                    name="${status.type}-m"
+                    color="${status.type === 'block'
+                      ? 'gray-800'
+                      : 'success-500'}"
+                  ></ui-icon>
+                  <ui-text type="label-m" layout="row gap">
+                    ${status.type === 'trust' && html`Trusted on all websites`}
+                    ${status.type === 'block' && html`Blocked on all websites`}
+                    ${status.type === 'trust' &&
+                    status.website &&
+                    html`Trusted on this website`}
+                    ${status === 'block' &&
+                    status.website &&
+                    html`Blocked on this website`}
+                  </ui-text>
+                </a>
+              </ui-panel-action>`}
           ${tracker.category !== 'unidentified' &&
           html`
             <ui-panel-action layout="width:4.5">

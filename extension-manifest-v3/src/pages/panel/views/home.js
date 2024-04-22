@@ -81,27 +81,27 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   trackerExceptions: store([TrackerException]),
-  trackers: ({ stats, trackerExceptions, paused }) =>
-    store.ready(stats, trackerExceptions) &&
-    stats.trackers.map((t) => {
+  trackers: ({ stats, trackerExceptions, paused }) => {
+    if (!store.ready(stats, trackerExceptions)) return null;
+    if (paused) return stats.trackers;
+
+    return stats.trackers.map((t) => {
       const exception = trackerExceptions.find((e) => e.id === t.id);
       return {
         ...t,
-        status:
-          !paused &&
-          (exception
-            ? getExceptionStatus(exception, stats.domain)
-            : Promise.resolve(
-                isCategoryBlockedByDefault(t.category) ? 'blocked' : 'trusted',
-              )),
+        status: (exception &&
+          getExceptionStatus(exception, stats.domain, t.category)) || {
+          type: isCategoryBlockedByDefault(t.category) ? 'block' : 'trust',
+        },
       };
-    }),
+    });
+  },
   notification: store(Notification),
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.domain),
   content: ({ options, stats, trackers, notification, paused }) => html`
-    <template layout="column grow relative">
+    <template layout="column grow relative height::488px">
       ${store.ready(options, stats) &&
       html`
         ${options.terms &&

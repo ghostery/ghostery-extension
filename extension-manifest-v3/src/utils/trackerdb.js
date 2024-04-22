@@ -92,7 +92,8 @@ export function getMetadata(request) {
     country: organization?.country,
     privacyPolicy: organization?.privacy_policy_url,
     isFilterMatched,
-    isTrusted: isTrusted(request.tab.domain, category.key, exception),
+    isTrusted:
+      request.tab && isTrusted(request.tab.domain, category.key, exception),
   };
 
   return metadata;
@@ -130,11 +131,11 @@ function getTrackers() {
   return trackersMap;
 }
 
-export async function getTracker(key) {
-  if (promise) await promise;
-
-  const engine = engines.get(engines.TRACKERDB_ENGINE);
-  if (!engine) return null;
+export function getTracker(key) {
+  if (promise) {
+    console.warn('TrackerDB not ready yet');
+    return null;
+  }
 
   // Ensure trackers are loaded
   getTrackers();
@@ -142,8 +143,11 @@ export async function getTracker(key) {
   return trackersMap.get(key);
 }
 
-export async function getCategories() {
-  if (promise) await promise;
+export function getCategories() {
+  if (promise) {
+    console.warn('TrackerDB not ready yet');
+    return null;
+  }
 
   const engine = engines.get(engines.TRACKERDB_ENGINE);
   if (!engine) return [];

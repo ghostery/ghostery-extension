@@ -228,44 +228,38 @@ export default {
                               </a>
                             </ui-text>
                             ${tracker.status &&
-                            html.resolve(
-                              tracker.status.then(
-                                (status) => html`
-                                  <ui-tooltip>
-                                    <span slot="content">
-                                      Set blocking preference
-                                    </span>
-                                    <ui-panel-action
-                                      type="outline"
-                                      layout="shrink:0 width:4.5"
-                                    >
-                                      <a
-                                        href="${router.url(exceptionDialog, {
-                                          trackerId: tracker.id,
-                                        })}"
-                                        layout="row center relative"
-                                      >
-                                        <ui-icon
-                                          name="${status.startsWith('blocked')
-                                            ? 'block'
-                                            : 'trust'}-m"
-                                          color="${status.startsWith('blocked')
-                                            ? 'gray-800'
-                                            : 'success-500'}"
-                                        ></ui-icon>
-                                        ${status.includes('website') &&
-                                        html`
-                                          <ui-icon
-                                            name="error"
-                                            layout="absolute right:-1px bottom:-1px"
-                                          ></ui-icon>
-                                        `}
-                                      </a>
-                                    </ui-panel-action>
-                                  </ui-tooltip>
-                                `,
-                              ),
-                            )}
+                            html`
+                              <ui-tooltip>
+                                <span slot="content">
+                                  Set blocking preference
+                                </span>
+                                <ui-panel-action
+                                  type="outline"
+                                  layout="shrink:0 width:4.5"
+                                >
+                                  <a
+                                    href="${router.url(exceptionDialog, {
+                                      trackerId: tracker.id,
+                                    })}"
+                                    layout="row center relative"
+                                  >
+                                    <ui-icon
+                                      name="${tracker.status.type}-m"
+                                      color="${tracker.status.type === 'block'
+                                        ? 'gray-800'
+                                        : 'success-500'}"
+                                    ></ui-icon>
+                                    ${tracker.status.website &&
+                                    html`
+                                      <ui-icon
+                                        name="error"
+                                        layout="absolute right:-1px bottom:-1px"
+                                      ></ui-icon>
+                                    `}
+                                  </a>
+                                </ui-panel-action>
+                              </ui-tooltip>
+                            `}
                           </div>
                         `,
                     )}

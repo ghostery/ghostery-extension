@@ -42,20 +42,17 @@ async function setStorage(item) {
   return promise.then(() => item);
 }
 
-export async function getExceptionStatus(trackerException, domain) {
-  const tracker = await getTracker(trackerException.id);
-
+export function getExceptionStatus(trackerException, domain, category) {
   if (
-    isCategoryBlockedByDefault(tracker?.category) ===
-    trackerException.overwriteStatus
+    isCategoryBlockedByDefault(category) === trackerException.overwriteStatus
   ) {
     return trackerException.blocked.includes(domain)
-      ? 'blocked:website'
-      : 'trusted';
+      ? { type: 'block', website: true }
+      : { type: 'trust' };
   } else {
     return trackerException.allowed.includes(domain)
-      ? 'trusted:website'
-      : 'blocked';
+      ? { type: 'trust', website: true }
+      : { type: 'block' };
   }
 }
 
