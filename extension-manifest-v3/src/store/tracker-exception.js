@@ -12,7 +12,7 @@
 import { store } from 'hybrids';
 
 import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
-import { requestPermission } from '/utils/dnr-converter';
+import { requestPermission } from '/utils/dnr-converter.js';
 
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);

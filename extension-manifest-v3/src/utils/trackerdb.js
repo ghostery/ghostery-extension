@@ -131,11 +131,8 @@ function getTrackers() {
   return trackersMap;
 }
 
-export function getTracker(key) {
-  if (promise) {
-    console.warn('TrackerDB not ready yet');
-    return null;
-  }
+export async function getTracker(key) {
+  if (promise) await promise;
 
   // Ensure trackers are loaded
   getTrackers();
@@ -143,14 +140,9 @@ export function getTracker(key) {
   return trackersMap.get(key);
 }
 
-export function getCategories() {
-  if (promise) {
-    console.warn('TrackerDB not ready yet');
-    return null;
-  }
-
+export async function getCategories() {
+  if (promise) await promise;
   const engine = engines.get(engines.TRACKERDB_ENGINE);
-  if (!engine) return [];
 
   const categories = new Map(
     engine.metadata.categories
