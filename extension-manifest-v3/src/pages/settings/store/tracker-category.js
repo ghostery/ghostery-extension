@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 
 import TrackerException from '/store/tracker-exception.js';
 
-import { getCategories, isCategoryBlockedByDefault } from '../../../utils/trackerdb.js';
+import { getCategories, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 import Tracker from './tracker.js';
 
 const categories = getCategories();

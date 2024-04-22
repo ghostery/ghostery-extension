@@ -32,20 +32,16 @@ export function isCategoryBlockedByDefault(categoryId) {
   }
 }
 
-export function isTrusted(request, category, exception) {
-  const blockByDefault = isCategoryBlockedByDefault(category);
+export function isTrusted(domain, category, exception) {
+  const blockedByDefault =
+    isCategoryBlockedByDefault(category) !==
+    (exception?.overwriteStatus || false);
 
-  let isTrusted = !blockByDefault;
-
-  if (exception) {
-    if (exception.overwriteStatus) {
-      isTrusted = blockByDefault === exception.overwriteStatus;
-    }
-    isTrusted = isTrusted
-      ? !exception.blocked.includes(request.tab.domain)
-      : exception.allowed.includes(request.tab.domain);
+  if (blockedByDefault) {
+    return exception?.allowed.includes(domain) || false;
+  } else {
+    return !exception?.blocked.includes(domain) ?? true;
   }
-  return isTrusted;
 }
 
 export function getMetadata(request) {
@@ -96,7 +92,7 @@ export function getMetadata(request) {
     country: organization?.country,
     privacyPolicy: organization?.privacy_policy_url,
     isFilterMatched,
-    isTrusted: isTrusted(request, category.key, exception),
+    isTrusted: isTrusted(request.tab.domain, category.key, exception),
   };
 
   return metadata;

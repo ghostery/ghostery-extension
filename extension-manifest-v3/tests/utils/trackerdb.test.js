@@ -10,65 +10,80 @@
  */
 
 import '../setup.js';
-import { describe, it } from 'node:test';
+import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert';
 import { isTrusted } from '../../src/utils/trackerdb.js';
-import Request from '../../src/background/utils/request.js';
 
 describe('/utils/trackerdb.js', () => {
   describe('#isTrusted', () => {
-    const domain = 'foo.org';
-    const request = Request.fromRequestDetails({
-      url: 'https://bar.com',
-      originUrl: `https://${domain}`,
+    let exception;
+
+    beforeEach(() => {
+      exception = {
+        overwriteStatus: false,
+        blocked: ['foo.org'],
+        allowed: ['foo.org'],
+      };
     });
 
-    it('returns false for blocked categories', () => {
-      assert.strictEqual(isTrusted(request, 'advertising'), false);
-    });
+    describe('not overwritten status', () => {
+      describe('tab with not listed domain', () => {
+        it('returns false for blocked categories', () => {
+          assert.strictEqual(
+            isTrusted('bar.com', 'advertising', exception),
+            false,
+          );
+        });
 
-    it('returns true for trusted categories', () => {
-      assert.strictEqual(isTrusted(request, 'cdn'), true);
-    });
-
-    it('handles exceptions for subdomains', () => {
-      const request = Request.fromRequestDetails({
-        url: 'https://bar.com',
-        originUrl: `https://baz.${domain}`,
+        it('returns true for trusted categories', () => {
+          assert.strictEqual(isTrusted('bar.com', 'cdn', exception), true);
+        });
       });
-      const exception = {
-        overwriteStatus: false,
-        blocked: [domain],
-        allowed: [domain],
-      };
-      assert.strictEqual(isTrusted(request, 'advertising', exception), true);
-      assert.strictEqual(isTrusted(request, 'cdn', exception), false);
+
+      describe('tab with listed domain', () => {
+        it('returns true for blocked categories', () => {
+          assert.strictEqual(
+            isTrusted('foo.org', 'advertising', exception),
+            true,
+          );
+        });
+
+        it('returns false for trusted categories', () => {
+          assert.strictEqual(isTrusted('foo.org', 'cdn', exception), false);
+        });
+      });
     });
 
-    it('handles domain overwrites', () => {
-      const exception = {
-        overwriteStatus: false,
-        blocked: [domain],
-        allowed: [domain],
-      };
-      assert.strictEqual(isTrusted(request, 'advertising', exception), true);
-      assert.strictEqual(isTrusted(request, 'cdn', exception), false);
-    });
+    describe('overwritten status', () => {
+      beforeEach(() => {
+        exception.overwriteStatus = true;
+      });
 
-    it('reverses global logic with global with exceptions overwrite', () => {
-      const exception = { overwriteStatus: true, blocked: [], allowed: [] };
-      assert.strictEqual(isTrusted(request, 'advertising', exception), true);
-      assert.strictEqual(isTrusted(request, 'cdn', exception), false);
-    });
+      describe('tab with not listed domain', () => {
+        it('returns true for blocked categories', () => {
+          assert.strictEqual(
+            isTrusted('bar.com', 'advertising', exception),
+            true,
+          );
+        });
 
-    it('reverses domain logic with global with exceptions overwrite', () => {
-      const exception = {
-        overwriteStatus: true,
-        blocked: [domain],
-        allowed: [domain],
-      };
-      assert.strictEqual(isTrusted(request, 'advertising', exception), false);
-      assert.strictEqual(isTrusted(request, 'cdn', exception), true);
+        it('returns false for trusted categories', () => {
+          assert.strictEqual(isTrusted('bar.com', 'cdn', exception), false);
+        });
+      });
+
+      describe('tab with listed domain', () => {
+        it('returns false for blocked categories', () => {
+          assert.strictEqual(
+            isTrusted('foo.org', 'advertising', exception),
+            false,
+          );
+        });
+
+        it('returns true for trusted categories', () => {
+          assert.strictEqual(isTrusted('foo.org', 'cdn', exception), true);
+        });
+      });
     });
   });
 });
