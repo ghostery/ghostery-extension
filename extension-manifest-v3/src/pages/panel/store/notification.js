@@ -41,7 +41,7 @@ const NOTIFICATIONS = {
     icon: 'logo-opera',
     type: 'warning',
     text: msg`Expand Ghostery ad blocking to search engines in a few easy steps.`,
-    url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera',
+    url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera-guide?utm_source=gbe&utm_campaign=opera_serp',
     action: msg`Enable Ad Blocking Now`,
   },
 };
