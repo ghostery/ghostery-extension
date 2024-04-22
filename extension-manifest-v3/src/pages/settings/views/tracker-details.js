@@ -12,6 +12,8 @@
 import { html, router, store, msg } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
+import { openTabWithUrl } from '/utils/tabs.js';
+
 import Tracker from '../store/tracker.js';
 import assets from '../assets/index.js';
 
@@ -29,13 +31,15 @@ function removeDomain(domain) {
 export default {
   [router.connect]: { stack: [TrackerAddException] },
   tracker: store(Tracker),
+  otherTrackers: ({ tracker }) =>
+    store.ready(tracker) && store.get([Tracker], { tracker: tracker.id }),
   listType: ({ tracker }) =>
     tracker.exception.overwriteStatus === tracker.blockedByDefault
       ? 'blocked'
       : 'allowed',
   domains: (host) =>
     (store.ready(host.tracker) && host.tracker.exception[host.listType]) || [],
-  content: ({ tracker, domains }) => html`
+  content: ({ tracker, domains, otherTrackers }) => html`
     <template layout="contents">
       <gh-settings-page-layout>
         <div layout="column gap">
@@ -87,8 +91,8 @@ export default {
                   />
                 </gh-settings-help-image>
                 <div layout="column items:start gap:2 grow">
-                  <div layout="row gap:2 items:start">
-                    <div layout="column gap:0.5">
+                  <div layout="row gap:2 items:start self:stretch">
+                    <div layout="column gap:0.5 grow">
                       <ui-text type="label-l">Protection status</ui-text>
                       <ui-text type="body-m" color="gray-600">
                         Modify the recommended blocking settings for every
@@ -167,6 +171,120 @@ export default {
                     <ui-text layout="block:center width:::180px">
                       No websites exceptions added yet
                     </ui-text>
+                  </div>
+                `}
+              </div>
+              <div layout="column gap:4">
+                <div layout="column gap:4" layout@768px="row">
+                  ${tracker.organization?.country &&
+                  html`
+                    <div layout="column gap grow:2">
+                      <ui-text type="label-xs" uppercase>Organization</ui-text>
+                      <ui-text type="label-l" mobile-type="label-m">
+                        ${tracker.organization.name}
+                      </ui-text>
+                      <ui-text color="gray-600">
+                        ${tracker.organization.description}
+                      </ui-text>
+                    </div>
+                  `}
+                  <div layout="column gap grow:1">
+                    <ui-text type="label-xs" uppercase>Category</ui-text>
+                    <ui-text type="label-l" mobile-type="label-m">
+                      ${labels.categories[tracker.category]}
+                    </ui-text>
+                    <ui-text color="gray-600">
+                      ${tracker.categoryDescription}
+                    </ui-text>
+                  </div>
+                </div>
+                ${tracker.organization?.country &&
+                html`
+                  <div layout="column gap">
+                    <ui-text type="label-xs" uppercase>Country</ui-text>
+                    <ui-text type="label-s">
+                      ${labels.regions.of(tracker.organization.country) ||
+                      tracker.organization.country}
+                    </ui-text>
+                  </div>
+                `}
+                ${tracker.organization?.websiteUrl &&
+                html` <div layout="column gap">
+                  <ui-text type="label-xs" uppercase>
+                    Organization's website
+                  </ui-text>
+                  <ui-text type="label-s" color="primary-700">
+                    <a
+                      href="${tracker.organization.websiteUrl}"
+                      onclick="${openTabWithUrl}"
+                    >
+                      ${tracker.organization.websiteUrl}
+                    </a>
+                  </ui-text>
+                </div>`}
+                ${tracker.organization?.privacyPolicyUrl &&
+                html`
+                  <div layout="column gap">
+                    <ui-text type="label-xs" uppercase>
+                      Privacy policy
+                    </ui-text>
+                    <ui-text type="label-s" color="primary-700">
+                      <a
+                        href="${tracker.organization.privacyPolicyUrl}"
+                        onclick="${openTabWithUrl}"
+                      >
+                        ${tracker.organization.privacyPolicyUrl}
+                      </a>
+                    </ui-text>
+                  </div>
+                `}
+                ${tracker.organization?.contact &&
+                html`
+                  <div layout="column gap">
+                    <ui-text type="label-xs" uppercase>Contact</ui-text>
+                    <ui-text
+                      type="label-s"
+                      color="primary-700"
+                      ellipsis
+                      underline
+                      layout="padding margin:-1"
+                    >
+                      <a
+                        href="${tracker.organization.contact.startsWith('http')
+                          ? ''
+                          : 'mailto:'}${tracker.organization.contact}"
+                        onclick="${openTabWithUrl}"
+                      >
+                        ${tracker.organization.contact}
+                      </a>
+                    </ui-text>
+                  </div>
+                `}
+                ${store.ready(otherTrackers) &&
+                !!otherTrackers.length &&
+                html`
+                  <div layout="column gap:1.5">
+                    <ui-text type="label-l">More in this organization</ui-text>
+                    <div layout="row:wrap gap:0.5">
+                      ${otherTrackers.map(
+                        (t) => html`
+                          <ui-panel-action layout="block:start height:auto">
+                            <a
+                              href="${router.currentUrl({
+                                tracker: t,
+                                scrollToTop: true,
+                              })}"
+                              layout="column items:start padding:1:1.5"
+                            >
+                              <ui-text type="label-m">${t.name}</ui-text>
+                              <ui-text type="label-xs" color="gray-500">
+                                ${labels.categories[t.category]}
+                              </ui-text>
+                            </a>
+                          </ui-panel-action>
+                        `,
+                      )}
+                    </div>
                   </div>
                 `}
               </div>

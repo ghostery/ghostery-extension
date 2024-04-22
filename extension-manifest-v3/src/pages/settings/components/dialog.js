@@ -15,18 +15,6 @@ function close(host) {
   host.shadowRoot.querySelector('a').click();
 }
 
-function animateOnClose(host, event) {
-  router.resolve(
-    event,
-    new Promise((resolve) => {
-      host.shadowRoot
-        .querySelector('#dialog')
-        .addEventListener('transitionend', resolve, { once: true });
-      host.open = false;
-    }),
-  );
-}
-
 export default {
   open: {
     value: false,
@@ -52,7 +40,6 @@ export default {
       >
         <ui-action>
           <a
-            onclick="${animateOnClose}"
             href="${router.backUrl()}"
             layout="absolute top:2 right:2 padding:0.5"
             tabindex="100"
@@ -68,9 +55,9 @@ export default {
       border: none;
       border-radius: 16px;
       background: var(--ui-color-white);
-      transform: translateY(100%);
+      transform: translateY(100px);
       opacity: 0;
-      transition: transform 500ms cubic-bezier(0.4, 0.15, 0, 1), opacity 500ms ease;
+      transition: transform 250ms cubic-bezier(0.4, 0.15, 0, 1), opacity 250ms ease;
     }
 
     :host([open]) #dialog {

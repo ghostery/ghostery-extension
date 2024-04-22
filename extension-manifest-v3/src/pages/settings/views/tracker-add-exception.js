@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store } from 'hybrids';
+import { html, router, store, msg } from 'hybrids';
 import Tracker from '../store/tracker.js';
 
 import { parse } from 'tldts-experimental';
@@ -51,9 +51,11 @@ async function add({ tracker, model }, event) {
 export default {
   [router.connect]: { dialog: true },
   tracker: store(Tracker),
+  blocked: ({ tracker }) =>
+    tracker.exception.overwriteStatus !== tracker.blockedByDefault,
   model: store(Model, { draft: true }),
-  content: ({ tracker, model }) => html`
-    <template layout="contents">
+  content: ({ tracker, blocked, model }) => html`
+    <template layout>
       ${store.ready(tracker) &&
       html`
         <gh-settings-dialog>
@@ -67,8 +69,7 @@ export default {
               <ui-text>Current protection status for ${tracker.name}:</ui-text>
 
               <gh-settings-protection-badge
-                blocked="${tracker.exception.overwriteStatus !==
-                tracker.blockedByDefault}"
+                blocked="${blocked}"
               ></gh-settings-protection-badge>
             </div>
             <div layout="column gap:0.5">
@@ -83,7 +84,9 @@ export default {
                 />
               </gh-settings-input>
               <ui-text type="body-s" color="gray-600">
-                ${tracker.name} will be trusted on this website.
+                ${blocked
+                  ? msg`${tracker.name} will be trusted on this website.`
+                  : msg`${tracker.name} will be blocked on this website.`}
               </ui-text>
             </div>
             <div layout="grid:1|1 gap">

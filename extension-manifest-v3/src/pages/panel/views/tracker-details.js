@@ -42,11 +42,6 @@ function showCopyNotification(host) {
   host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
 }
 
-const regionNames = new Intl.DisplayNames(
-  [chrome.i18n.getUILanguage().split('-')[0]],
-  { type: 'region' },
-);
-
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
@@ -219,7 +214,7 @@ export default {
                 ellipsis
                 layout="padding margin:-1"
               >
-                ${regionNames.of(tracker.country) || tracker.country}
+                ${labels.regions.of(tracker.country) || tracker.country}
               </ui-text>
             </div>
           `}

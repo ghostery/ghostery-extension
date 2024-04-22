@@ -33,3 +33,8 @@ export const categories = {
   telemetry: msg`Telemetry | Tracker category name`,
   other: msg`Other | Tracker category name`,
 };
+
+export const regions = new Intl.DisplayNames(
+  [chrome.i18n.getUILanguage().split('-')[0]],
+  { type: 'region' },
+);

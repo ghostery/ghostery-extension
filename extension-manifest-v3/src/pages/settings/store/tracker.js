@@ -12,17 +12,24 @@
 import { store } from 'hybrids';
 
 import TrackerException from '/store/tracker-exception.js';
-import { getTracker, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import {
+  getTracker,
+  getSimilarTrackers,
+  isCategoryBlockedByDefault,
+} from '/utils/trackerdb.js';
 
 export default {
   id: true,
   name: '',
   category: '',
+  categoryDescription: '',
   exception: TrackerException,
   organization: {
     id: true,
     name: '',
+    description: '',
     country: '',
+    contact: '',
     websiteUrl: '',
     privacyPolicyUrl: '',
   },
@@ -34,5 +41,6 @@ export default {
 
       return getTracker(id);
     },
+    list: ({ tracker: id }) => getSimilarTrackers(id),
   },
 };

@@ -104,6 +104,7 @@ function getTrackers() {
   if (!trackersMap.size) {
     const engine = engines.get(engines.TRACKERDB_ENGINE);
     const organizations = engine.metadata.organizations.getValues();
+    const categories = engine.metadata.categories.getValues();
 
     for (const p of engine.metadata.getPatterns()) {
       const organization = organizations.find((o) => o.key === p.organization);
@@ -112,6 +113,8 @@ function getTrackers() {
         id: p.key,
         name: p.name,
         category: p.category,
+        categoryDescription: categories.find((c) => c.key === p.category)
+          ?.description,
         exception: p.key,
         filters: p.filters,
         domains: p.domains,
@@ -119,7 +122,9 @@ function getTrackers() {
           ? {
               id: organization.key,
               name: organization.name,
+              description: organization.description,
               country: organization.country,
+              contact: organization.privacy_contact,
               websiteUrl: organization.website_url,
               privacyPolicyUrl: organization.privacy_policy_url,
             }
@@ -138,6 +143,22 @@ export async function getTracker(key) {
   getTrackers();
 
   return trackersMap.get(key);
+}
+
+export async function getSimilarTrackers(tracker) {
+  if (promise) await promise;
+  const result = [];
+
+  tracker = await getTracker(tracker);
+  if (!tracker.organization) return result;
+
+  trackersMap.forEach((t) => {
+    if (t.organization?.id === tracker.organization.id && t.id !== tracker.id) {
+      result.push(t);
+    }
+  });
+
+  return result;
 }
 
 export async function getCategories() {
