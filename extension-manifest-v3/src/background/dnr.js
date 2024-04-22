@@ -39,9 +39,17 @@ if (__PLATFORM__ !== 'firefox') {
       }
     });
 
-    if (enableRulesetIds.length > 0) {
+    const someEnginesEnabled =
+      enableRulesetIds.length > 0 ||
+      enabledRulesetIds
+        .filter((id) => !disableRulesetIds.includes(id))
+        .some((id) => ENGINES.find(({ name }) => name === id));
+
+    if (someEnginesEnabled && !enabledRulesetIds.includes(TRACKERDB_ENGINE)) {
       enableRulesetIds.push(TRACKERDB_ENGINE);
-    } else {
+    }
+
+    if (!someEnginesEnabled && enabledRulesetIds.includes(TRACKERDB_ENGINE)) {
       disableRulesetIds.push(TRACKERDB_ENGINE);
     }
 

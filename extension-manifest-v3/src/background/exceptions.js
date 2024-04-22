@@ -69,10 +69,6 @@ async function convertExceptionsToFilters(exceptions) {
 
     let blockFilters = pattern.filters.map((filter) => parseFilter(filter));
 
-    if (!pattern.category) {
-      blockFilters.push(parseFilter(`||${exception.id}^$third-party`));
-    }
-
     if (blockedByDefault) {
       blockFilters.push(
         ...pattern.domains
@@ -129,7 +125,6 @@ chrome.storage.onChanged.addListener(async (changes) => {
       cosmeticFilters.push(filter.toString());
     }
   }
-
   if (__PLATFORM__ !== 'firefox') {
     await updateDNRRules(networkFilters);
   }
@@ -168,9 +163,7 @@ async function updateDNRRules(networkFilters) {
     .filter(({ id }) => id >= 2000000)
     .map(({ id }) => id);
   await chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds,
-  });
-  await chrome.declarativeNetRequest.updateDynamicRules({
     addRules,
+    removeRuleIds,
   });
 }
