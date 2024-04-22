@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { getTracker, isCategoryBlockedByDefault } from '../utils/trackerdb.js';
+import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
 import { requestPermission } from '/utils/dnr-converter';
 
 async function getStorage() {
