@@ -100,9 +100,10 @@ export default class ExtendedRequest extends Request {
 
         const { frameType, initiator } = this._originalRequestDetails;
 
-        // For frameType 'sub_frame', we can't determine the origin URL
-        // as it might be the iframe itself or any of its ancestors
-        if (frameType === 'outermost_frame' && initiator) {
+        if (
+          (frameType === 'outermost_frame' || frameType === 'sub_frame') &&
+          initiator
+        ) {
           url = initiator;
         }
       }
@@ -111,6 +112,9 @@ export default class ExtendedRequest extends Request {
       } else {
         this.#tab = null;
       }
+    }
+    if (!this.#tab) {
+      console.error('Cound not detect a tab for the request', this);
     }
     return this.#tab;
   }

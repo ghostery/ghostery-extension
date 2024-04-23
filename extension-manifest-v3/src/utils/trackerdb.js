@@ -32,15 +32,15 @@ export function isCategoryBlockedByDefault(categoryId) {
   }
 }
 
-export function isTrusted(domain, category, exception) {
+export function isTrusted(domainOrHostname, category, exception) {
   const blockedByDefault =
     isCategoryBlockedByDefault(category) !==
     (exception?.overwriteStatus || false);
 
   if (blockedByDefault) {
-    return exception?.allowed.includes(domain) || false;
+    return exception?.allowed.includes(domainOrHostname) || false;
   } else {
-    return !exception?.blocked.includes(domain) ?? true;
+    return !exception?.blocked.includes(domainOrHostname) ?? true;
   }
 }
 
@@ -93,7 +93,12 @@ export function getMetadata(request) {
     privacyPolicy: organization?.privacy_policy_url,
     isFilterMatched,
     isTrusted:
-      request.tab && isTrusted(request.tab.domain, category.key, exception),
+      request.tab &&
+      isTrusted(
+        request.tab.domain || request.tab.hostname,
+        category.key,
+        exception,
+      ),
   };
 
   return metadata;
