@@ -20,8 +20,9 @@ const Model = {
   [store.connect]: {
     get: () => null,
     set: (id, model) => {
-      if (!parse(model.value).domain) {
-        throw 'The value must be a valid domain name';
+      const parsed = parse(model.value);
+      if (!parsed.domain && !parsed.isIp) {
+        throw 'The value must be a valid domain name or IP address.';
       }
       return model;
     },
@@ -41,7 +42,7 @@ async function add({ tracker, model }, event) {
     store.submit(model).then(({ value }) => {
       return store.set(tracker.exception, {
         [field]: [
-          ...new Set(tracker.exception[field].concat(parse(value).domain)),
+          ...new Set(tracker.exception[field].concat(parse(value).hostname)),
         ],
       });
     }),
