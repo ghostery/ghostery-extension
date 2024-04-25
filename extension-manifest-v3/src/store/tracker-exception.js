@@ -88,7 +88,13 @@ export function toggleExceptionDomain(
     list.push(domain);
   }
 
-  return store.set(exception, { [type]: list });
+  const values = { [type]: list };
+
+  if (!store.ready(exception)) {
+    values.blocked = blockedByDefault;
+  }
+
+  return store.set(exception, values);
 }
 
 export default TrackerException;

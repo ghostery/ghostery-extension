@@ -82,7 +82,7 @@ export default {
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.domain),
   content: ({ options, stats, notification, paused }) => html`
-    <template layout="column grow relative height::488px">
+    <template layout="column grow relative">
       ${store.ready(options, stats) &&
       html`
         ${options.terms &&
