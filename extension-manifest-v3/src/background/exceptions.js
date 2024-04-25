@@ -12,7 +12,16 @@
 import { parseFilter } from '@cliqz/adblocker';
 
 import { getTracker, isCategoryBlockedByDefault } from '../utils/trackerdb.js';
-import convert from '../utils/dnr-converter.js';
+
+import {
+  createDocumentConverter,
+  createOffscreenConverter,
+} from '../utils/dnr-converter.js';
+
+const convert =
+  __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
+    ? createOffscreenConverter()
+    : createDocumentConverter();
 
 function negateFilter(filter) {
   const cleanFilter = filter.toString();

@@ -12,9 +12,11 @@
 import { html, store } from 'hybrids';
 import { detectFilterType } from '@cliqz/adblocker';
 
-import convert from '/utils/dnr-converter.js';
+import { createDocumentConverter } from '/utils/dnr-converter.js';
 import CustomFiltersInput from '../store/custom-filters-input.js';
 import { asyncAction } from './devtools.js';
+
+const convert = createDocumentConverter();
 
 function parseFilters(text = '') {
   return text

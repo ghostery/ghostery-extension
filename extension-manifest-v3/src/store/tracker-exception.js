@@ -61,7 +61,10 @@ const TrackerException = {
     // Only use list type to fetch all exceptions
     get: () => null,
     set: async (id, values) => {
-      await requestPermission();
+      if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
+        await requestPermission();
+      }
+
       return setStorage(values);
     },
     list: async () => Object.values(await getStorage()),
