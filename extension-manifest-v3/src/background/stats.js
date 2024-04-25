@@ -150,6 +150,8 @@ export function updateTabStats(tabId, requests) {
                 id: request.domain,
                 name: request.domain,
                 category: 'unidentified',
+                exception: request.domain,
+                blockedByDefault: true,
                 requests: [],
               };
 
