@@ -11,15 +11,12 @@
 
 import { html, store, router } from 'hybrids';
 
+import { openTabWithUrl } from '/utils/tabs.js';
+
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
-import TrackerException, {
-  getExceptionStatus,
-} from '/store/tracker-exception.js';
-import Notification from '../store/notification.js';
 
-import { openTabWithUrl } from '/utils/tabs.js';
-import { isCategoryBlockedByDefault } from '../../../utils/trackerdb.js';
+import Notification from '../store/notification.js';
 
 import sleep from '../assets/sleep.svg';
 
@@ -80,27 +77,11 @@ export default {
   [router.connect]: { stack: [Navigation, TrackerDetails, ProtectionStatus] },
   options: store(Options),
   stats: store(TabStats),
-  trackerExceptions: store([TrackerException]),
-  trackers: ({ stats, trackerExceptions, paused }) => {
-    if (!store.ready(stats, trackerExceptions)) return null;
-    if (paused) return stats.trackers;
-
-    return stats.trackers.map((t) => {
-      const exception = trackerExceptions.find((e) => e.id === t.id);
-      return {
-        ...t,
-        status: (exception &&
-          getExceptionStatus(exception, stats.domain, t.category)) || {
-          type: isCategoryBlockedByDefault(t.category) ? 'block' : 'trust',
-        },
-      };
-    });
-  },
   notification: store(Notification),
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.domain),
-  content: ({ options, stats, trackers, notification, paused }) => html`
+  content: ({ options, stats, notification, paused }) => html`
     <template layout="column grow relative height::488px">
       ${store.ready(options, stats) &&
       html`
@@ -152,7 +133,8 @@ export default {
                 <ui-panel-stats
                   domain="${stats.domain}"
                   categories="${stats.topCategories}"
-                  trackers="${trackers}"
+                  trackers="${stats.trackers}"
+                  paused="${paused}"
                   dialog="${TrackerDetails}"
                   exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"

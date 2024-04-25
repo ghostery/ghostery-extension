@@ -2,23 +2,15 @@ import { html, msg, router, store } from 'hybrids';
 
 import * as labels from '@ghostery/ui/labels';
 
-import { isCategoryBlockedByDefault } from '../../../utils/trackerdb.js';
-
 import TabStats from '/store/tab-stats.js';
-import TrackerException from '/store/tracker-exception.js';
+import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
-function toggleException(type) {
-  return ({ exception, stats }) => {
-    const list = [...exception[type]];
-    const index = list.indexOf(stats.domain);
-    if (index !== -1) {
-      list.splice(index, 1);
-    } else {
-      list.push(stats.domain);
-    }
-
-    store.set(exception, { [type]: list });
-  };
+function toggleDomain({ stats, tracker }) {
+  toggleExceptionDomain(
+    tracker.exception,
+    stats.domain,
+    tracker.blockedByDefault,
+  );
 }
 
 export default {
@@ -27,21 +19,17 @@ export default {
   trackerId: '',
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
-  exception: store(TrackerException, { id: 'trackerId' }),
-  blockedByDefault: ({ tracker }) =>
-    isCategoryBlockedByDefault(tracker.category),
-  blockedOnSite: ({ stats, exception }) =>
-    store.ready(exception) && exception.blocked.includes(stats.domain),
-  allowedOnSite: ({ stats, exception }) =>
-    store.ready(exception) && exception.allowed.includes(stats.domain),
-  content: ({
-    stats,
-    tracker,
-    exception,
-    blockedByDefault,
-    blockedOnSite,
-    allowedOnSite,
-  }) => html`
+  blocked: ({ tracker }) =>
+    store.ready(tracker.exception)
+      ? tracker.exception.blocked
+      : tracker.blockedByDefault,
+  blockedOnSite: ({ stats, tracker }) =>
+    store.ready(tracker.exception) &&
+    tracker.exception.blockedDomains.includes(stats.domain),
+  allowedOnSite: ({ stats, tracker }) =>
+    store.ready(tracker.exception) &&
+    tracker.exception.trustedDomains.includes(stats.domain),
+  content: ({ stats, tracker, blocked, blockedOnSite, allowedOnSite }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -56,7 +44,7 @@ export default {
           tracker.company + ' •'}
           ${labels.categories[tracker.category]}
         </ui-text>
-        ${store.ready(exception) &&
+        ${(store.ready(tracker.exception) || store.error(tracker.exception)) &&
         html`
           <div layout="column gap:3">
             <div layout="column gap">
@@ -68,16 +56,15 @@ export default {
               </div>
               <ui-panel-protection-status-toggle
                 layout="self:center"
-                value="${exception.overwriteStatus}"
-                blockByDefault="${blockedByDefault}"
+                value="${blocked}"
                 tooltip
-                onchange="${html.set(exception, 'overwriteStatus')}"
+                onchange="${html.set(tracker.exception, 'blocked')}"
               ></ui-panel-protection-status-toggle>
             </div>
             <gh-panel-card type="info">
               <ui-text type="label-s" color="primary-700" layout="row gap:0.5">
                 <ui-icon name="info-filled"></ui-icon>
-                ${blockedByDefault
+                ${tracker.blockedByDefault
                   ? msg`Our recommendation for this activity: Blocked`
                   : msg`Our recommendation for this activity: Trusted`}
               </ui-text>
@@ -88,27 +75,27 @@ export default {
                   Add ${stats.domain} as exception
                 </ui-text>
                 <ui-text type="body-s" color="gray-500">
-                  ${blockedByDefault === exception.overwriteStatus
-                    ? msg`Block on this website`
-                    : msg`Trust on this website`}
+                  ${blocked
+                    ? msg`Trust on this website`
+                    : msg`Block on this website`}
                 </ui-text>
               </div>
-              ${blockedByDefault === exception.overwriteStatus
+              ${blocked
                 ? html`
                     <ui-toggle
-                      value="${blockedOnSite}"
-                      onchange="${toggleException('blocked')}"
+                      value="${allowedOnSite}"
+                      onchange="${toggleDomain}"
                       type="status"
-                      color="danger-500"
+                      color="success-500"
                       layout="margin:top:0.5"
                     ></ui-toggle>
                   `
                 : html`
                     <ui-toggle
-                      value="${allowedOnSite}"
-                      onchange="${toggleException('allowed')}"
+                      value="${blockedOnSite}"
+                      onchange="${toggleDomain}"
                       type="status"
-                      color="success-500"
+                      color="danger-500"
                       layout="margin:top:0.5"
                     ></ui-toggle>
                   `}

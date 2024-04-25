@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, dispatch } from 'hybrids';
+import { html, store, router, dispatch } from 'hybrids';
 import { getStats } from '@ghostery/trackers-preview/page_scripts';
 import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
@@ -54,6 +54,7 @@ export default {
         ),
       ),
   },
+  paused: false,
   domain: '',
   wtmLink: ({ domain }) =>
     domain && getStats(domain).then(({ stats }) => !!stats.length),
@@ -71,6 +72,7 @@ export default {
     categories,
     categoryList,
     trackers,
+    paused,
     domain,
     wtmLink,
     type,
@@ -227,7 +229,7 @@ export default {
                                 ></ui-icon>`}
                               </a>
                             </ui-text>
-                            ${tracker.status &&
+                            ${!paused &&
                             html`
                               <ui-tooltip>
                                 <span slot="content">
@@ -243,19 +245,17 @@ export default {
                                     })}"
                                     layout="row center relative"
                                   >
-                                    <ui-icon
-                                      name="${tracker.status.type}-m"
-                                      color="${tracker.status.type === 'block'
-                                        ? 'gray-800'
-                                        : 'success-500'}"
-                                    ></ui-icon>
-                                    ${tracker.status.website &&
-                                    html`
-                                      <ui-icon
-                                        name="error"
-                                        layout="absolute right:-1px bottom:-1px"
-                                      ></ui-icon>
-                                    `}
+                                    <ui-panel-protection-status-icon
+                                      status="${store.ready(tracker.exception)
+                                        ? tracker.exception.getDomainStatus(
+                                            domain,
+                                          )
+                                        : {
+                                            type: tracker.blockedByDefault
+                                              ? 'block'
+                                              : 'trust',
+                                          }}"
+                                    ></ui-panel-protection-status-icon>
                                   </a>
                                 </ui-panel-action>
                               </ui-tooltip>

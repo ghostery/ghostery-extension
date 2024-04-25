@@ -12,11 +12,7 @@
 import { store } from 'hybrids';
 
 import TrackerException from '/store/tracker-exception.js';
-import {
-  getTracker,
-  getSimilarTrackers,
-  isCategoryBlockedByDefault,
-} from '/utils/trackerdb.js';
+import { getTracker, getSimilarTrackers } from '/utils/trackerdb.js';
 
 export default {
   id: true,
@@ -33,7 +29,7 @@ export default {
     websiteUrl: '',
     privacyPolicyUrl: '',
   },
-  blockedByDefault: ({ category }) => isCategoryBlockedByDefault(category),
+  blockedByDefault: false,
   [store.connect]: {
     async get(id) {
       // Load exceptions to memory

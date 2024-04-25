@@ -14,17 +14,11 @@ import { parse } from 'tldts-experimental';
 
 import AutoSyncingMap from '/utils/map.js';
 
-const Tracker = {
-  id: true,
-  name: '',
-  category: 'unidentified',
-  company: '',
-  description: '',
-  website: '',
-  organizationWebsite: '',
-  contact: '',
-  country: '',
-  privacyPolicy: '',
+import Tracker from './tracker.js';
+import TrackerException from './tracker-exception.js';
+
+const StatsTracker = {
+  ...Tracker,
   blocked: false,
   modified: false,
   requests: [{ url: '', blocked: false, modified: false }],
@@ -37,7 +31,7 @@ const Tracker = {
 
 const Stats = {
   domain: '',
-  trackers: [Tracker],
+  trackers: [StatsTracker],
   trackersBlocked: ({ trackers }) =>
     trackers.reduce((acc, { blocked }) => acc + Number(blocked), 0),
   trackersModified: ({ trackers }) =>
@@ -79,6 +73,10 @@ const Stats = {
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
 
       if (tabStats && tab.url.includes(tabStats.domain)) {
+        // Tracker has a reference to TrackerException,
+        //so we need to resolve exceptions
+        await store.resolve([TrackerException]);
+
         return tabStats;
       }
 

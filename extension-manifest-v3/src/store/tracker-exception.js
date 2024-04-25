@@ -11,8 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { isCategoryBlockedByDefault } from '/utils/trackerdb.js';
-import { requestPermission } from '/utils/dnr-converter.js';
+import { requestPermission } from '/utils/offscreen.js';
 
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
@@ -42,29 +41,25 @@ async function setStorage(item) {
   return promise.then(() => item);
 }
 
-export function getExceptionStatus(trackerException, domain, category) {
-  if (
-    isCategoryBlockedByDefault(category) === trackerException.overwriteStatus
-  ) {
-    return trackerException.blocked.includes(domain)
-      ? { type: 'block', website: true }
-      : { type: 'trust' };
-  } else {
-    return trackerException.allowed.includes(domain)
-      ? { type: 'trust', website: true }
-      : { type: 'block' };
-  }
-}
-
 const TrackerException = {
   id: true,
-  overwriteStatus: false, // Change default blocked <-> allowed
-  blocked: [String], // blocked domains
-  allowed: [String], // allowed domains
+  blocked: true,
+  blockedDomains: [String],
+  trustedDomains: [String],
+  getDomainStatus: (exception) => (domain) => {
+    if (exception.blocked) {
+      return exception.trustedDomains.includes(domain)
+        ? { type: 'trust', website: true }
+        : { type: 'block' };
+    } else {
+      return exception.blockedDomains.includes(domain)
+        ? { type: 'block', website: true }
+        : { type: 'trust' };
+    }
+  },
   [store.connect]: {
-    // Get method is optimized to only return cases when exception is not set
-    // Always use store listing model to fetch exception first
-    get: (id) => ({ id }),
+    // Only use list type to fetch all exceptions
+    get: () => null,
     set: async (id, values) => {
       await requestPermission();
       return setStorage(values);
@@ -73,5 +68,27 @@ const TrackerException = {
     loose: true,
   },
 };
+
+export function toggleExceptionDomain(
+  exception,
+  domain,
+  blockedByDefault,
+  forceValue,
+) {
+  const blocked = store.ready(exception) ? exception.blocked : blockedByDefault;
+  const type = blocked ? 'trustedDomains' : 'blockedDomains';
+  const list = [...(store.ready(exception) ? exception[type] : [])];
+
+  const index = list.indexOf(domain);
+  if (index !== -1) {
+    if (forceValue !== true) {
+      list.splice(index, 1);
+    }
+  } else if (forceValue !== false) {
+    list.push(domain);
+  }
+
+  return store.set(exception, { [type]: list });
+}
 
 export default TrackerException;

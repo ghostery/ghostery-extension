@@ -10,7 +10,9 @@
  */
 
 import { html, router, store, msg } from 'hybrids';
-import Tracker from '../store/tracker.js';
+import Tracker from '/store/tracker.js';
+
+import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
 import { parse } from 'tldts-experimental';
 
@@ -32,19 +34,15 @@ const Model = {
 async function add({ tracker, model }, event) {
   event.preventDefault();
 
-  const field =
-    tracker.exception.overwriteStatus !== tracker.blockedByDefault
-      ? 'allowed'
-      : 'blocked';
-
   router.resolve(
     event,
     store.submit(model).then(({ value }) => {
-      return store.set(tracker.exception, {
-        [field]: [
-          ...new Set(tracker.exception[field].concat(parse(value).hostname)),
-        ],
-      });
+      return toggleExceptionDomain(
+        tracker.exception,
+        value,
+        tracker.blockedByDefault,
+        true,
+      );
     }),
   );
 }
@@ -53,7 +51,9 @@ export default {
   [router.connect]: { dialog: true },
   tracker: store(Tracker),
   blocked: ({ tracker }) =>
-    tracker.exception.overwriteStatus !== tracker.blockedByDefault,
+    store.ready(tracker.exception)
+      ? tracker.exception.blocked
+      : tracker.blockedByDefault,
   model: store(Model, { draft: true }),
   content: ({ tracker, blocked, model }) => html`
     <template layout>

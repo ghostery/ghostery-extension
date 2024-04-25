@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 
 import TrackerException from '/store/tracker-exception.js';
 
-import { getCategories, isCategoryBlockedByDefault } from '/utils/trackerdb.js';
+import { getCategories } from '/utils/trackerdb.js';
 import Tracker from './tracker.js';
 
 const categories = getCategories();
@@ -24,21 +24,19 @@ export default {
   name: '',
   description: '',
   trackers: [Tracker],
-  blockedByDefault: true,
+  blockedByDefault: false,
   blocked: ({ trackers, blockedByDefault }) =>
-    trackers
-      .filter((t) => t.exception.overwriteStatus)
-      .reduce(
-        (count) => (blockedByDefault ? count - 1 : count + 1),
-        blockedByDefault ? trackers.length : 0,
-      ),
-  trusted: ({ trackers, blockedByDefault }) =>
-    trackers
-      .filter((t) => t.exception.overwriteStatus)
-      .reduce(
-        (count) => (blockedByDefault ? count + 1 : count - 1),
-        !blockedByDefault ? trackers.length : 0,
-      ),
+    trackers.reduce(
+      (count, tracker) =>
+        count +
+        Number(
+          store.ready(tracker.exception)
+            ? tracker.exception.blocked
+            : blockedByDefault,
+        ),
+      0,
+    ),
+  trusted: ({ trackers, blocked }) => trackers.length - blocked,
   [store.connect]: {
     async list({ query, filter }) {
       const exceptions = await store.resolve([TrackerException]);
@@ -46,13 +44,6 @@ export default {
       const result = (await categories).map((category) => ({
         id: { key: category.key, query, filter },
         ...category,
-        trackers: category.trackers.map((t) => {
-          return {
-            ...t,
-            exception: exceptions.find((e) => e.id === t.id) || t.id,
-          };
-        }),
-        blockedByDefault: isCategoryBlockedByDefault(category.key),
       }));
 
       if (query || filter) {
@@ -67,16 +58,21 @@ export default {
                 t.name.toLowerCase().includes(query) ||
                 t.organization?.name.toLowerCase().includes(query);
 
-              return (
-                match &&
-                (!filter ||
-                  (filter === 'blocked' &&
-                    (t.exception.overwriteStatus || false) !==
-                      category.blockedByDefault) ||
-                  (filter === 'trusted' &&
-                    (t.exception.overwriteStatus || false) ===
-                      category.blockedByDefault))
-              );
+              const exception = exceptions.find((e) => e.id === t.id);
+              const blocked = exception?.blocked ?? t.blockedByDefault;
+
+              if (!match) return false;
+
+              switch (filter) {
+                case 'blocked':
+                  return blocked;
+                case 'trusted':
+                  return !blocked;
+                case 'adjusted':
+                  return exception && exception.blocked !== t.blockedByDefault;
+                default:
+                  return true;
+              }
             }),
           }))
           .filter((category) => category.trackers.length);

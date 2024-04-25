@@ -64,10 +64,8 @@ async function convertExceptionsToFilters(exceptions) {
     };
 
     const blockedByDefault = isCategoryBlockedByDefault(pattern.category);
-    const shouldBlock =
-      blockedByDefault !== (exception?.overwriteStatus || false);
 
-    let blockFilters = pattern.filters.map((filter) => parseFilter(filter));
+    const blockFilters = pattern.filters.map((filter) => parseFilter(filter));
 
     if (blockedByDefault) {
       blockFilters.push(
@@ -79,18 +77,19 @@ async function convertExceptionsToFilters(exceptions) {
 
     const allowFilters = blockFilters.map((filter) => negateFilter(filter));
 
-    if (exception.overwriteStatus) {
-      filters.push(...(shouldBlock ? blockFilters : allowFilters));
+    // Exception overwrites default behavior
+    if (exception.blocked !== blockedByDefault) {
+      filters.push(...(exception.blocked ? blockFilters : allowFilters));
     }
 
-    if (shouldBlock) {
-      for (const domain of exception.allowed) {
+    if (exception.blocked) {
+      for (const domain of exception.trustedDomains) {
         for (const filter of allowFilters) {
           filters.push(restrictFilter(filter, domain));
         }
       }
     } else {
-      for (const domain of exception.blocked) {
+      for (const domain of exception.blockedDomains) {
         for (const filter of blockFilters) {
           filters.push(restrictFilter(filter, domain));
         }

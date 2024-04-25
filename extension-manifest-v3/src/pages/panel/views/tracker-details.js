@@ -14,9 +14,6 @@ import * as labels from '@ghostery/ui/labels';
 
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
-import TrackerException, {
-  getExceptionStatus,
-} from '/store/tracker-exception.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
 
@@ -49,9 +46,10 @@ export default {
   trackerId: '',
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
-  exception: store(TrackerException, { id: 'trackerId' }),
-  status: ({ stats, tracker, exception }) =>
-    getExceptionStatus(exception, stats.domain, tracker.category),
+  status: ({ stats, tracker }) =>
+    store.ready(tracker.exception)
+      ? tracker.exception.getDomainStatus(stats.domain)
+      : { type: tracker.blockedByDefault ? 'block' : 'trust' },
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
     `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
@@ -97,14 +95,15 @@ export default {
                       : 'success-500'}"
                   ></ui-icon>
                   <ui-text type="label-m" layout="row gap">
-                    ${status.type === 'trust' && html`Trusted on all websites`}
-                    ${status.type === 'block' && html`Blocked on all websites`}
-                    ${status.type === 'trust' &&
-                    status.website &&
-                    html`Trusted on this website`}
-                    ${status === 'block' &&
-                    status.website &&
-                    html`Blocked on this website`}
+                    ${status.website
+                      ? (status.type === 'trust' &&
+                          html`Trusted on this website`) ||
+                        (status.type === 'block' &&
+                          html`Blocked on this website`)
+                      : (status.type === 'trust' &&
+                          html`Trusted on all websites`) ||
+                        (status.type === 'block' &&
+                          html`Blocked on all websites`)}
                   </ui-text>
                 </a>
               </ui-panel-action>`}
@@ -122,12 +121,14 @@ export default {
             </ui-panel-action>
           `}
         </div>
-        ${(tracker.description || wtmUrl) &&
+        ${(tracker.organization?.description || wtmUrl) &&
         html`
           <div layout="column gap:0.5">
-            ${tracker.description &&
+            ${tracker.organization?.description &&
             html`
-              <ui-text type="body-s"> ${cleanUp(tracker.description)} </ui-text>
+              <ui-text type="body-s">
+                ${cleanUp(tracker.organization?.description)}
+              </ui-text>
             `}
             ${wtmUrl &&
             html`
@@ -203,7 +204,7 @@ export default {
               </div>
             </div>
           `}
-          ${tracker.country &&
+          ${tracker.organization?.country &&
           html`
             <ui-icon name="pin"></ui-icon>
             <div layout="column gap">
@@ -214,11 +215,12 @@ export default {
                 ellipsis
                 layout="padding margin:-1"
               >
-                ${labels.regions.of(tracker.country) || tracker.country}
+                ${labels.regions.of(tracker.organization.country) ||
+                tracker.organization.country}
               </ui-text>
             </div>
           `}
-          ${tracker.website &&
+          ${tracker.websiteUrl &&
           html`
             <ui-icon name="globe"></ui-icon>
             <div layout="column gap">
@@ -230,75 +232,81 @@ export default {
                 underline
                 layout="padding margin:-1"
               >
-                <a href="${tracker.website}" onclick="${openTabWithUrl}">
-                  ${tracker.website}
+                <a href="${tracker.websiteUrl}" onclick="${openTabWithUrl}">
+                  ${tracker.websiteUrl}
                 </a>
               </ui-text>
             </div>
           `}
-          ${tracker.organizationWebsite &&
+          ${tracker.organization &&
           html`
-            <ui-icon name="globe"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">Organization's website</ui-text>
-              <ui-text
-                type="body-s"
-                color="primary-700"
-                ellipsis
-                underline
-                layout="padding margin:-1"
-              >
-                <a
-                  href="${tracker.organizationWebsite}"
-                  onclick="${openTabWithUrl}"
+            ${tracker.organization.websiteUrl &&
+            html`
+              <ui-icon name="globe"></ui-icon>
+              <div layout="column gap">
+                <ui-text type="label-s">Organization's website</ui-text>
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
                 >
-                  ${tracker.organizationWebsite}
-                </a>
-              </ui-text>
-            </div>
-          `}
-          ${tracker.privacyPolicy &&
-          html`
-            <ui-icon name="privacy"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">
-                <!-- | Panel Company -->Privacy policy
-              </ui-text>
-              <ui-text
-                type="body-s"
-                color="primary-700"
-                ellipsis
-                underline
-                layout="padding margin:-1"
-              >
-                <a href="${tracker.privacyPolicy}" onclick="${openTabWithUrl}">
-                  ${tracker.privacyPolicy}
-                </a>
-              </ui-text>
-            </div>
-          `}
-          ${tracker.contact &&
-          html`
-            <ui-icon name="mail"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">Contact</ui-text>
-              <ui-text
-                type="body-s"
-                color="primary-700"
-                ellipsis
-                underline
-                layout="padding margin:-1"
-              >
-                <a
-                  href="${tracker.contact.startsWith('http')
-                    ? ''
-                    : 'mailto:'}${tracker.contact}"
-                  onclick="${openTabWithUrl}"
+                  <a
+                    href="${tracker.organization.websiteUrl}"
+                    onclick="${openTabWithUrl}"
+                  >
+                    ${tracker.organization.websiteUrl}
+                  </a>
+                </ui-text>
+              </div>
+            `}
+            ${tracker.organization.privacyPolicy &&
+            html`
+              <ui-icon name="privacy"></ui-icon>
+              <div layout="column gap">
+                <ui-text type="label-s">
+                  <!-- | Panel Company -->Privacy policy
+                </ui-text>
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
                 >
-                  ${tracker.contact}
-                </a>
-              </ui-text>
-            </div>
+                  <a
+                    href="${tracker.organization.privacyPolicy}"
+                    onclick="${openTabWithUrl}"
+                  >
+                    ${tracker.organization.privacyPolicy}
+                  </a>
+                </ui-text>
+              </div>
+            `}
+            ${tracker.organization.contact &&
+            html`
+              <ui-icon name="mail"></ui-icon>
+              <div layout="column gap">
+                <ui-text type="label-s">Contact</ui-text>
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
+                >
+                  <a
+                    href="${tracker.organization.contact.startsWith('http')
+                      ? ''
+                      : 'mailto:'}${tracker.organization.contact}"
+                    onclick="${openTabWithUrl}"
+                  >
+                    ${tracker.organization.contact}
+                  </a>
+                </ui-text>
+              </div>
+            `}
           `}
         </section>
       </gh-panel-dialog>

@@ -9,32 +9,27 @@ export default {
       }
     },
   },
-  blockByDefault: true,
   responsive: false,
-  render: ({ value, blockByDefault, responsive }) => html`
+  render: ({ value, responsive }) => html`
     <template layout="row relative">
       <ui-panel-action-group
         class="${{ responsive }}"
         layout.responsive="column"
         layout.responsive@768px="row"
       >
-        <ui-panel-action grouped active="${value !== blockByDefault}">
+        <ui-panel-action grouped active="${value}">
           <button
             layout="row relative gap:0.5 padding:0.5"
-            onclick="${html.set('value', !blockByDefault)}"
+            onclick="${html.set('value', !value)}"
           >
             <ui-icon name="block-s"></ui-icon>
             <ui-text type="label-xs">Blocked</ui-text>
           </button>
         </ui-panel-action>
-        <ui-panel-action
-          class="trusted"
-          grouped
-          active="${value === blockByDefault}"
-        >
+        <ui-panel-action class="trusted" grouped active="${!value}">
           <button
             layout="row gap:0.5 padding:0.5"
-            onclick="${html.set('value', blockByDefault)}"
+            onclick="${html.set('value', !value)}"
           >
             <ui-icon name="trust-s"></ui-icon>
             <ui-text type="label-xs">Trusted</ui-text>

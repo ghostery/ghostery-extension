@@ -8,14 +8,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { isPermissionRequired, requestPermission } from './offscreen.js';
 
 let creating;
-
-async function hasPermission() {
-  return chrome.permissions.contains({
-    permissions: ['offscreen'],
-  });
-}
 
 function createDocumentConverter() {
   const requests = new Map();
@@ -106,33 +101,11 @@ function createOffscreenConverter() {
       (await chrome.runtime.sendMessage({
         action: 'offscreen:urlfitler2dnr:convert',
         filter,
-      })) || { errors: ['failed to innitiate offscreen document'], rules: [] }
+      })) || { errors: ['failed to initiate offscreen document'], rules: [] }
     );
   }
 
   return convert;
-}
-
-function isPermissionRequired() {
-  // when run in the offscreen document, there is no `chrome.runtime.getManifest` so the module uses `createDocumentConverter`
-  return (
-    chrome &&
-    (chrome.runtime.getManifest?.().permissions.includes('offscreen') ||
-      chrome.runtime
-        .getManifest?.()
-        .optional_permissions?.includes('offscreen'))
-  );
-}
-
-export async function requestPermission() {
-  if (!isPermissionRequired()) return;
-
-  if (!(await hasPermission())) {
-    await chrome.permissions.request({ permissions: ['offscreen'] });
-    if (!(await hasPermission())) {
-      throw new Error('Ghostery requires "offscreen" permission');
-    }
-  }
 }
 
 export default isPermissionRequired()

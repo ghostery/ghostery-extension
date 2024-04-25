@@ -12,19 +12,23 @@
 import { html, router, store, msg } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
+import Tracker from '/store/tracker.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
-import Tracker from '../store/tracker.js';
 import assets from '../assets/index.js';
 
 import Trackers, { updateException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';
+import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
 function removeDomain(domain) {
-  return ({ tracker, listType }) => {
-    store.set(tracker.exception, {
-      [listType]: tracker.exception[listType].filter((d) => d !== domain),
-    });
+  return ({ tracker }) => {
+    toggleExceptionDomain(
+      tracker.exception,
+      domain,
+      tracker.blockedByDefault,
+      false,
+    );
   };
 }
 
@@ -33,12 +37,13 @@ export default {
   tracker: store(Tracker),
   otherTrackers: ({ tracker }) =>
     store.ready(tracker) && store.get([Tracker], { tracker: tracker.id }),
-  listType: ({ tracker }) =>
-    tracker.exception.overwriteStatus === tracker.blockedByDefault
-      ? 'blocked'
-      : 'allowed',
-  domains: (host) =>
-    (store.ready(host.tracker) && host.tracker.exception[host.listType]) || [],
+  domains: ({ tracker }) =>
+    (store.ready(tracker) &&
+      store.ready(tracker.exception) &&
+      tracker.exception[
+        tracker.exception.blocked ? 'trustedDomains' : 'blockedDomains'
+      ]) ||
+    [],
   content: ({ tracker, domains, otherTrackers }) => html`
     <template layout="contents">
       <gh-settings-page-layout>
@@ -101,8 +106,9 @@ export default {
                     </div>
 
                     <ui-panel-protection-status-toggle
-                      value="${tracker.exception.overwriteStatus}"
-                      blockByDefault="${tracker.blockedByDefault}"
+                      value="${store.ready(tracker.exception)
+                        ? tracker.exception.blocked
+                        : tracker.blockedByDefault}"
                       responsive
                       onchange="${updateException(tracker)}"
                       layout="shrink:0"
@@ -140,8 +146,7 @@ export default {
                         <ui-text>${domain}</ui-text>
                         <div layout="row content:space-between gap">
                           <gh-settings-protection-badge
-                            blocked="${tracker.exception.overwriteStatus ===
-                            tracker.blockedByDefault}"
+                            blocked="${tracker.exception.blocked}"
                           ></gh-settings-protection-badge>
                           <ui-action>
                             <button
@@ -175,10 +180,10 @@ export default {
                 `}
               </div>
               <div layout="column gap:4">
-                <div layout="column gap:4" layout@768px="row">
-                  ${tracker.organization?.country &&
+                <div layout="column gap:4" layout@768px="grid:2fr|1fr">
+                  ${tracker.organization?.name &&
                   html`
-                    <div layout="column gap grow:2">
+                    <div layout="column gap">
                       <ui-text type="label-xs" uppercase>Organization</ui-text>
                       <ui-text type="label-l" mobile-type="label-m">
                         ${tracker.organization.name}
@@ -188,7 +193,7 @@ export default {
                       </ui-text>
                     </div>
                   `}
-                  <div layout="column gap grow:1">
+                  <div layout="column gap">
                     <ui-text type="label-xs" uppercase>Category</ui-text>
                     <ui-text type="label-l" mobile-type="label-m">
                       ${labels.categories[tracker.category]}

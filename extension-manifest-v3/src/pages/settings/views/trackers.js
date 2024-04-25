@@ -12,7 +12,7 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
-import TrackerCategory from '../store/tracker-category.js';
+import TrackerCategory from '/store/tracker-category.js';
 
 import TrackerDetails from './tracker-details.js';
 
@@ -49,8 +49,7 @@ function isActive(category, key) {
 
 export function updateException(tracker) {
   return async (host, event) => {
-    const { value } = event.target;
-    await store.set(tracker.exception, { overwriteStatus: value });
+    await store.set(tracker.exception, { blocked: event.target.value });
     store.clear([TrackerCategory], false);
   };
 }
@@ -61,9 +60,13 @@ function clearCategory(id) {
 
     await Promise.all(
       category.trackers
-        .filter((t) => t.exception.overwriteStatus)
+        .filter(
+          (t) =>
+            store.ready(t.exception) &&
+            t.exception.blocked !== category.blockedByDefault,
+        )
         .map((tracker) =>
-          store.set(tracker.exception, { overwriteStatus: false }),
+          store.set(tracker.exception, { blocked: category.blockedByDefault }),
         ),
     );
 
@@ -134,6 +137,7 @@ export default {
               <gh-settings-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
                   <option selected value="">Show all</option>
+                  <option value="adjusted">Adjusted</option>
                   <option value="blocked">Blocked</option>
                   <option value="trusted">Trusted</option>
                 </select>
@@ -204,28 +208,24 @@ export default {
                                       `}
                                     </a>
                                   </ui-action>
-                                  ${store.ready(tracker.exception) &&
-                                  html`
-                                    <div layout="row items:center gap">
-                                      ${tracker.exception.overwriteStatus &&
-                                      html`
-                                        <ui-text
-                                          type="label-s"
-                                          color="gray-500"
-                                        >
-                                          adjusted
-                                        </ui-text>
-                                      `}
-                                      <ui-panel-protection-status-toggle
-                                        value="${tracker.exception
-                                          .overwriteStatus}"
-                                        blockByDefault="${blockedByDefault}"
-                                        responsive
-                                        onchange="${updateException(tracker)}"
-                                        layout="shrink:0"
-                                      ></ui-panel-protection-status-toggle>
-                                    </div>
-                                  `}
+                                  <div layout="row items:center gap">
+                                    ${store.ready(tracker.exception) &&
+                                    tracker.exception.blocked !==
+                                      tracker.blockedByDefault &&
+                                    html`
+                                      <ui-text type="label-s" color="gray-500">
+                                        adjusted
+                                      </ui-text>
+                                    `}
+                                    <ui-panel-protection-status-toggle
+                                      value="${store.ready(tracker.exception)
+                                        ? tracker.exception.blocked
+                                        : tracker.blockedByDefault}"
+                                      responsive
+                                      onchange="${updateException(tracker)}"
+                                      layout="shrink:0"
+                                    ></ui-panel-protection-status-toggle>
+                                  </div>
                                 </div>
                               `.key(tracker.id),
                           )}

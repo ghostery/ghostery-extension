@@ -352,9 +352,7 @@ if (__PLATFORM__ === 'firefox') {
         if (details.type !== 'main_frame') {
           updateTabStats(details.tabId, [request]);
 
-          const isTrusted = request.metadata?.isTrusted;
-
-          if (isTrusted) {
+          if (request.metadata?.isTrusted) {
             return;
           }
         }

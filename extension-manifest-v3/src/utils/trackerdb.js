@@ -33,14 +33,15 @@ export function isCategoryBlockedByDefault(categoryId) {
 }
 
 export function isTrusted(domainOrHostname, category, exception) {
-  const blockedByDefault =
-    isCategoryBlockedByDefault(category) !==
-    (exception?.overwriteStatus || false);
+  const isCategoryBlocked = isCategoryBlockedByDefault(category);
 
-  if (blockedByDefault) {
-    return exception?.allowed.includes(domainOrHostname) || false;
+  if (exception.blocked) {
+    return exception.trustedDomains.includes(domainOrHostname) || false;
   } else {
-    return !exception?.blocked.includes(domainOrHostname) ?? true;
+    return (
+      !exception.blockedDomains.includes(domainOrHostname) &&
+      exception.blocked !== isCategoryBlocked
+    );
   }
 }
 
@@ -73,30 +74,18 @@ export function getMetadata(request) {
     ];
   }
 
-  const { category, pattern, organization } = matches[0];
-
-  exception = exception || getException(pattern.key);
+  const tracker = getTrackers().get(matches[0].pattern.key);
+  exception = exception || getException(tracker.id);
 
   const metadata = {
-    id: pattern.key,
-    name: pattern.name,
-    category: category.key,
-    company: organization?.name,
-    description: organization?.description,
-    website: pattern.website_url,
-    organizationWebsite:
-      organization?.website_url !== pattern.website_url
-        ? organization?.website_url
-        : '',
-    contact: organization?.privacy_contact,
-    country: organization?.country,
-    privacyPolicy: organization?.privacy_policy_url,
+    ...tracker,
     isFilterMatched,
     isTrusted:
+      exception &&
       request.tab &&
       isTrusted(
         request.tab.domain || request.tab.hostname,
-        category.key,
+        tracker.category,
         exception,
       ),
   };
@@ -120,6 +109,7 @@ function getTrackers() {
         category: p.category,
         categoryDescription: categories.find((c) => c.key === p.category)
           ?.description,
+        websiteUrl: p.website_url,
         exception: p.key,
         filters: p.filters,
         domains: p.domains,
@@ -134,6 +124,7 @@ function getTrackers() {
               privacyPolicyUrl: organization.privacy_policy_url,
             }
           : undefined,
+        blockedByDefault: isCategoryBlockedByDefault(p.category),
       });
     }
   }
@@ -171,9 +162,15 @@ export async function getCategories() {
   const engine = engines.get(engines.TRACKERDB_ENGINE);
 
   const categories = new Map(
-    engine.metadata.categories
-      .getValues()
-      .map(({ key, description }) => [key, { key, description, trackers: [] }]),
+    engine.metadata.categories.getValues().map(({ key, description }) => [
+      key,
+      {
+        key,
+        description,
+        blockedByDefault: isCategoryBlockedByDefault(key),
+        trackers: [],
+      },
+    ]),
   );
 
   for (const p of getTrackers().values()) {
