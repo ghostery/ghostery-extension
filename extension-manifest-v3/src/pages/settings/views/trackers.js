@@ -103,8 +103,8 @@ export default {
                 Tracker database
               </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                Listed entities may or may not be trackers, meaning not all of
-                them are collecting your personal data.
+                Mind that not all listed entities are trackers, that is not all
+                of them collect personal data
               </ui-text>
               <ui-text
                 type="label-m"
