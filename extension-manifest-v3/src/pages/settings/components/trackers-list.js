@@ -42,7 +42,12 @@ export default {
             ></ui-panel-category-icon>
             <div layout="column gap:0.5">
               <ui-text type="label-l">
-                ${labels.categories[name]}<ui-tooltip delay="0.0" wrap inline>
+                ${labels.categories[name]}<ui-tooltip
+                  delay="0"
+                  autohide="5"
+                  wrap
+                  inline
+                >
                   <span slot="content" layout="block width:200px">
                     ${description}
                   </span>
