@@ -34,7 +34,7 @@
   "dependencies": {
     "@cliqz/adblocker": "^1.27.1",
     "@cliqz/adblocker-webextension-cosmetics": "^1.27.1",
-    "@duckduckgo/autoconsent": "^10.3.2",
+    "@duckduckgo/autoconsent": "^10.6.3",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",
