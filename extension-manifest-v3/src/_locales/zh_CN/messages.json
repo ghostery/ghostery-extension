@@ -2,6 +2,12 @@
   "@_0__left": {
     "message": "剩余 $${0} 个"
   },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} will be trusted on this website."
+  },
+  "@_1__will_be_blocked_on_this_website_": {
+    "message": "$${1} will be blocked on this website."
+  },
   "1_day": {
     "message": "1 天"
   },
@@ -17,8 +23,17 @@
   "ad_blocking": {
     "message": "广告拦截"
   },
-  "additional_permissions_required": {
-    "message": "需要额外的权限"
+  "add": {
+    "message": "Add"
+  },
+  "add_@_0__as_exception": {
+    "message": "Add $${0} as exception"
+  },
+  "add_website_exception": {
+    "message": "Add website exception"
+  },
+  "adjusted": {
+    "message": "adjusted"
   },
   "adult_advertising": {
     "message": "成人广告",
@@ -56,8 +71,29 @@
   "become_a_contributor": {
     "message": "成为贡献者"
   },
+  "block_all__recommend_": {
+    "message": "Block all (recommend)"
+  },
+  "block_on_this_website": {
+    "message": "Block on this website"
+  },
+  "blocked": {
+    "message": "Blocked"
+  },
+  "blocked__@_0_": {
+    "message": "Blocked: $${0}"
+  },
+  "blocked_on_all_websites": {
+    "message": "Blocked on all websites"
+  },
+  "blocked_on_this_website": {
+    "message": "Blocked on this website"
+  },
   "cancel": {
     "message": "取消"
+  },
+  "category": {
+    "message": "Category"
   },
   "cdn": {
     "message": "CDN",
@@ -68,6 +104,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 Ghostery 固定在工具栏。"
+  },
+  "collapse": {
+    "message": "Collapse"
   },
   "comments": {
     "message": "评论",
@@ -89,8 +128,14 @@
   "copied_to_clipboard": {
     "message": "已复制到剪贴板"
   },
+  "country": {
+    "message": "Country"
+  },
   "create_account": {
     "message": "创建帐户"
+  },
+  "current_protection_status_for_@_0__": {
+    "message": "Current protection status for $${0}:"
   },
   "customer_interaction": {
     "message": "客户互动",
@@ -158,12 +203,18 @@
     "message": "基本",
     "description": "Tracker category name"
   },
+  "expand": {
+    "message": "Expand"
+  },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需简单几步，即可将 Ghostery 广告拦截功能扩展到搜索引擎。"
   },
   "extensions": {
     "message": "扩展",
     "description": "Tracker category name"
+  },
+  "for_all_websites": {
+    "message": "For all websites"
   },
   "for_more_information_read_our_full": {
     "message": "欲了解更多信息，请阅读我们的完整"
@@ -274,6 +325,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "进一步了解 YouTube 对广告拦截器的挑战"
   },
+  "load_more": {
+    "message": "Load more"
+  },
   "manifest_name": {
     "message": "Ghostery 跟踪器和广告拦截器 - 隐私广告拦截器"
   },
@@ -290,8 +344,14 @@
     "message": "其他",
     "description": "Tracker category name"
   },
+  "modify_the_recommended_blocking_settings_for_every_website_": {
+    "message": "Modify the recommended blocking settings for every website."
+  },
   "more_ad_blocking_available": {
     "message": "更多广告拦截功能"
+  },
+  "more_in_this_organization": {
+    "message": "More in this organization"
   },
   "my_account": {
     "message": "我的帐户"
@@ -302,14 +362,20 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no_trackers_detected": {
-    "message": "未检测到跟踪器"
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
+  "no_websites_exceptions_added_yet": {
+    "message": "No websites exceptions added yet"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "网络请求受阻的跟踪器数量。"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "已删除 cookie 或指纹的跟踪器数量。"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "关闭"
@@ -323,9 +389,21 @@
   "open_youtube_in_a_private_window": {
     "message": "在私人窗口中打开 YouTube"
   },
+  "organization": {
+    "message": "Organization"
+  },
+  "organization_s_website": {
+    "message": "Organization's website"
+  },
   "other": {
     "message": "其他",
     "description": "Tracker category name"
+  },
+  "our_recommendation_for_this_activity__blocked": {
+    "message": "Our recommendation for this activity: Blocked"
+  },
+  "our_recommendation_for_this_activity__trusted": {
+    "message": "Our recommendation for this activity: Trusted"
   },
   "pause_on_this_site": {
     "message": "在这个网站上暂停"
@@ -357,6 +435,9 @@
   "privacy_protection": {
     "message": "隐私保护"
   },
+  "protection_status": {
+    "message": "Protection status"
+  },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
   },
@@ -375,6 +456,9 @@
   "resume": {
     "message": "继续"
   },
+  "save": {
+    "message": "Save"
+  },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "保存您的自定义设置并在浏览器和设备之间同步。"
   },
@@ -384,6 +468,9 @@
   "search_website___": {
     "message": "搜索网站..."
   },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
+  },
   "settings": {
     "message": "设置"
   },
@@ -392,6 +479,9 @@
   },
   "setup_successful": {
     "message": "安装成功"
+  },
+  "show_all": {
+    "message": "Show all"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "在搜索结果旁边显示跟踪器预览。"
@@ -426,14 +516,17 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
+  "tracker_database": {
+    "message": "Tracker database"
+  },
+  "trackers": {
+    "message": "Trackers"
+  },
   "trackers_blocked": {
     "message": "已拦截跟踪器"
   },
   "trackers_count": {
     "message": "跟踪器数量"
-  },
-  "trackers_detected": {
-    "message": "检测到跟踪器"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Ghostery 在此网站上检测到的跟踪器：$${0}"
@@ -446,6 +539,21 @@
   },
   "trackers_wheel": {
     "message": "跟踪器轮"
+  },
+  "trust_on_this_website": {
+    "message": "Trust on this website"
+  },
+  "trusted": {
+    "message": "Trusted"
+  },
+  "trusted__@_0_": {
+    "message": "Trusted: $${0}"
+  },
+  "trusted_on_all_websites": {
+    "message": "Trusted on all websites"
+  },
+  "trusted_on_this_website": {
+    "message": "Trusted on this website"
   },
   "unidentified": {
     "message": "未识别",
@@ -460,6 +568,12 @@
   "urls_observed": {
     "message": "观察到的 URL"
   },
+  "view_activity_details": {
+    "message": "View activity details"
+  },
+  "view_trackerdb_on_github": {
+    "message": "View trackerdb on GitHub"
+  },
   "visit_our_blog": {
     "message": "访问我们的博客"
   },
@@ -471,6 +585,9 @@
   },
   "website": {
     "message": "网站"
+  },
+  "website_exceptions": {
+    "message": "Website exceptions"
   },
   "websites": {
     "message": "网站"

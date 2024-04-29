@@ -2,6 +2,12 @@
   "@_0__left": {
     "message": "$${0} 残"
   },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} will be trusted on this website."
+  },
+  "@_1__will_be_blocked_on_this_website_": {
+    "message": "$${1} will be blocked on this website."
+  },
   "1_day": {
     "message": "1日"
   },
@@ -17,8 +23,17 @@
   "ad_blocking": {
     "message": "広告ブロッキング"
   },
-  "additional_permissions_required": {
-    "message": "必要な追加パーミッション"
+  "add": {
+    "message": "Add"
+  },
+  "add_@_0__as_exception": {
+    "message": "Add $${0} as exception"
+  },
+  "add_website_exception": {
+    "message": "Add website exception"
+  },
+  "adjusted": {
+    "message": "adjusted"
   },
   "adult_advertising": {
     "message": "アダルト広告",
@@ -56,8 +71,29 @@
   "become_a_contributor": {
     "message": "Contributorになる"
   },
+  "block_all__recommend_": {
+    "message": "Block all (recommend)"
+  },
+  "block_on_this_website": {
+    "message": "Block on this website"
+  },
+  "blocked": {
+    "message": "Blocked"
+  },
+  "blocked__@_0_": {
+    "message": "Blocked: $${0}"
+  },
+  "blocked_on_all_websites": {
+    "message": "Blocked on all websites"
+  },
+  "blocked_on_this_website": {
+    "message": "Blocked on this website"
+  },
   "cancel": {
     "message": "キャンセル"
+  },
+  "category": {
+    "message": "Category"
   },
   "cdn": {
     "message": "CDN",
@@ -68,6 +104,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、Ghosteryをツールバーに固定します。"
+  },
+  "collapse": {
+    "message": "Collapse"
   },
   "comments": {
     "message": "コメント",
@@ -89,8 +128,14 @@
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
   },
+  "country": {
+    "message": "Country"
+  },
   "create_account": {
     "message": "アカウントを作成"
+  },
+  "current_protection_status_for_@_0__": {
+    "message": "Current protection status for $${0}:"
   },
   "customer_interaction": {
     "message": "顧客インタラクション",
@@ -158,12 +203,18 @@
     "message": "必需",
     "description": "Tracker category name"
   },
+  "expand": {
+    "message": "Expand"
+  },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "簡単なステップで、Ghosteryの広告ブロッキングを検索エンジンへと拡張できます。"
   },
   "extensions": {
     "message": "拡張機能",
     "description": "Tracker category name"
+  },
+  "for_all_websites": {
+    "message": "For all websites"
   },
   "for_more_information_read_our_full": {
     "message": "詳細はこちらをご覧ください"
@@ -274,6 +325,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "広告ブロッカーに対するYouTubeの挑戦についてもっと知る"
   },
+  "load_more": {
+    "message": "Load more"
+  },
   "manifest_name": {
     "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
   },
@@ -290,8 +344,14 @@
     "message": "さまざまな",
     "description": "Tracker category name"
   },
+  "modify_the_recommended_blocking_settings_for_every_website_": {
+    "message": "Modify the recommended blocking settings for every website."
+  },
   "more_ad_blocking_available": {
     "message": "利用できるその他の広告ブロッキング"
+  },
+  "more_in_this_organization": {
+    "message": "More in this organization"
   },
   "my_account": {
     "message": "アカウント"
@@ -302,14 +362,20 @@
   "never_consent": {
     "message": "決して同意しない"
   },
-  "no_trackers_detected": {
-    "message": "トラッカーは検出されませんでした"
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
+  "no_websites_exceptions_added_yet": {
+    "message": "No websites exceptions added yet"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "ネットワークリクエストがブロックされたトラッカーの数。"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "Cookieまたはフィンガープリントが削除されたトラッカーの数。"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "オフ"
@@ -323,9 +389,21 @@
   "open_youtube_in_a_private_window": {
     "message": "YouTubeをプライベートウィンドウで開く"
   },
+  "organization": {
+    "message": "Organization"
+  },
+  "organization_s_website": {
+    "message": "Organization's website"
+  },
   "other": {
     "message": "その他",
     "description": "Tracker category name"
+  },
+  "our_recommendation_for_this_activity__blocked": {
+    "message": "Our recommendation for this activity: Blocked"
+  },
+  "our_recommendation_for_this_activity__trusted": {
+    "message": "Our recommendation for this activity: Trusted"
   },
   "pause_on_this_site": {
     "message": "このサイトでのポーズ"
@@ -357,6 +435,9 @@
   "privacy_protection": {
     "message": "プライバシー保護"
   },
+  "protection_status": {
+    "message": "Protection status"
+  },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
   },
@@ -375,6 +456,9 @@
   "resume": {
     "message": "再開"
   },
+  "save": {
+    "message": "Save"
+  },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
   },
@@ -384,6 +468,9 @@
   "search_website___": {
     "message": "サイトを検索..."
   },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
+  },
   "settings": {
     "message": "設定"
   },
@@ -392,6 +479,9 @@
   },
   "setup_successful": {
     "message": "セットアップ成功"
+  },
+  "show_all": {
+    "message": "Show all"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "検索結果の横にトラッカープレビューを表示します。"
@@ -426,14 +516,17 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
+  "tracker_database": {
+    "message": "Tracker database"
+  },
+  "trackers": {
+    "message": "Trackers"
+  },
   "trackers_blocked": {
     "message": "ブロックされたトラッカー"
   },
   "trackers_count": {
     "message": "トラッカーカウント"
-  },
-  "trackers_detected": {
-    "message": "検出されたトラッカー"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "このウェブサイト上でGhosteryがトラッカーを検出:&nbsp;$${0}"
@@ -446,6 +539,21 @@
   },
   "trackers_wheel": {
     "message": "トラッカーホイール"
+  },
+  "trust_on_this_website": {
+    "message": "Trust on this website"
+  },
+  "trusted": {
+    "message": "Trusted"
+  },
+  "trusted__@_0_": {
+    "message": "Trusted: $${0}"
+  },
+  "trusted_on_all_websites": {
+    "message": "Trusted on all websites"
+  },
+  "trusted_on_this_website": {
+    "message": "Trusted on this website"
   },
   "unidentified": {
     "message": "未知",
@@ -460,6 +568,12 @@
   "urls_observed": {
     "message": "観察済みURL"
   },
+  "view_activity_details": {
+    "message": "View activity details"
+  },
+  "view_trackerdb_on_github": {
+    "message": "View trackerdb on GitHub"
+  },
   "visit_our_blog": {
     "message": "ブログを見る"
   },
@@ -471,6 +585,9 @@
   },
   "website": {
     "message": "ウェブサイト"
+  },
+  "website_exceptions": {
+    "message": "Website exceptions"
   },
   "websites": {
     "message": "ウェブサイト"

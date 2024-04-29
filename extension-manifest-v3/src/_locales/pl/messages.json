@@ -2,6 +2,12 @@
   "@_0__left": {
     "message": "pozostało $${0}"
   },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} will be trusted on this website."
+  },
+  "@_1__will_be_blocked_on_this_website_": {
+    "message": "$${1} will be blocked on this website."
+  },
   "1_day": {
     "message": "1 dzień"
   },
@@ -17,8 +23,17 @@
   "ad_blocking": {
     "message": "Blokowanie reklam"
   },
-  "additional_permissions_required": {
-    "message": "Wymagane dodatkowe uprawnienia"
+  "add": {
+    "message": "Add"
+  },
+  "add_@_0__as_exception": {
+    "message": "Add $${0} as exception"
+  },
+  "add_website_exception": {
+    "message": "Add website exception"
+  },
+  "adjusted": {
+    "message": "adjusted"
   },
   "adult_advertising": {
     "message": "Reklama dla dorosłych",
@@ -56,8 +71,29 @@
   "become_a_contributor": {
     "message": "Zostań Kontrybutorem"
   },
+  "block_all__recommend_": {
+    "message": "Block all (recommend)"
+  },
+  "block_on_this_website": {
+    "message": "Block on this website"
+  },
+  "blocked": {
+    "message": "Blocked"
+  },
+  "blocked__@_0_": {
+    "message": "Blocked: $${0}"
+  },
+  "blocked_on_all_websites": {
+    "message": "Blocked on all websites"
+  },
+  "blocked_on_this_website": {
+    "message": "Blocked on this website"
+  },
   "cancel": {
     "message": "Anuluj"
+  },
+  "category": {
+    "message": "Category"
   },
   "cdn": {
     "message": "CDN",
@@ -68,6 +104,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Kliknij ikonę puzzla obok pola wyszukiwania i przypnij Ghostery do paska narzędzi."
+  },
+  "collapse": {
+    "message": "Collapse"
   },
   "comments": {
     "message": "Komentarze",
@@ -89,8 +128,14 @@
   "copied_to_clipboard": {
     "message": "Skopiowano do schowka"
   },
+  "country": {
+    "message": "Country"
+  },
   "create_account": {
     "message": "Utwórz konto"
+  },
+  "current_protection_status_for_@_0__": {
+    "message": "Current protection status for $${0}:"
   },
   "customer_interaction": {
     "message": "Interakcja z klientem",
@@ -158,12 +203,18 @@
     "message": "Istotne",
     "description": "Tracker category name"
   },
+  "expand": {
+    "message": "Expand"
+  },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Rozszerz blokowanie reklam Ghostery na wyszukiwarki w kilku prostych krokach."
   },
   "extensions": {
     "message": "Rozszerzenia",
     "description": "Tracker category name"
+  },
+  "for_all_websites": {
+    "message": "For all websites"
   },
   "for_more_information_read_our_full": {
     "message": "Aby uzyskać więcej informacji, przeczytaj "
@@ -274,6 +325,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Dowiedz się więcej o wyzwaniach YouTube związanych z blokowaniem reklam"
   },
+  "load_more": {
+    "message": "Load more"
+  },
   "manifest_name": {
     "message": "Ghostery Bloker Trackerów i Reklam - Prywatność AdBlock"
   },
@@ -290,8 +344,14 @@
     "message": "Różne",
     "description": "Tracker category name"
   },
+  "modify_the_recommended_blocking_settings_for_every_website_": {
+    "message": "Modify the recommended blocking settings for every website."
+  },
   "more_ad_blocking_available": {
     "message": "Dostępne jest więcej opcji blokowania reklam"
+  },
+  "more_in_this_organization": {
+    "message": "More in this organization"
   },
   "my_account": {
     "message": "Moje konto"
@@ -302,14 +362,20 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no_trackers_detected": {
-    "message": "Nie wykryto trackerów"
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
+  "no_websites_exceptions_added_yet": {
+    "message": "No websites exceptions added yet"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "Liczba trackerów z zablokowanymi żądaniami sieciowymi"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "Liczba trackerów z usuniętymi plikami cookie lub odciskami palców."
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "Wył."
@@ -323,9 +389,21 @@
   "open_youtube_in_a_private_window": {
     "message": "Otwórz YouTube w prywatnym oknie"
   },
+  "organization": {
+    "message": "Organization"
+  },
+  "organization_s_website": {
+    "message": "Organization's website"
+  },
   "other": {
     "message": "Inne",
     "description": "Tracker category name"
+  },
+  "our_recommendation_for_this_activity__blocked": {
+    "message": "Our recommendation for this activity: Blocked"
+  },
+  "our_recommendation_for_this_activity__trusted": {
+    "message": "Our recommendation for this activity: Trusted"
   },
   "pause_on_this_site": {
     "message": "Wstrzymaj na tej stronie"
@@ -357,6 +435,9 @@
   "privacy_protection": {
     "message": "Ochrona prywatności"
   },
+  "protection_status": {
+    "message": "Protection status"
+  },
   "read_more_on_whotracks_me": {
     "message": "Dowiedz się więcej na WhoTracks.Me"
   },
@@ -375,6 +456,9 @@
   "resume": {
     "message": "Wznów"
   },
+  "save": {
+    "message": "Save"
+  },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "Zapisz i zsynchronizuj ustawienia niestandardowe pomiędzy przeglądarkami i urządzeniami."
   },
@@ -384,6 +468,9 @@
   "search_website___": {
     "message": "Wyszukiwanie witryny..."
   },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
+  },
   "settings": {
     "message": "Ustawienia"
   },
@@ -392,6 +479,9 @@
   },
   "setup_successful": {
     "message": "Ustawienie zakończone sukcesem"
+  },
+  "show_all": {
+    "message": "Show all"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Wyświetla podgląd trackerów przy wynikach wyszukiwania."
@@ -426,14 +516,17 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
+  "tracker_database": {
+    "message": "Tracker database"
+  },
+  "trackers": {
+    "message": "Trackers"
+  },
   "trackers_blocked": {
     "message": "Zablokowane trackery"
   },
   "trackers_count": {
     "message": "Licznik trackerów"
-  },
-  "trackers_detected": {
-    "message": "Wykryte trackery"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Ghostery wykryło trackery śledzące na tej stronie:&nbsp;$${0}"
@@ -446,6 +539,21 @@
   },
   "trackers_wheel": {
     "message": "Wykres kołowy z trackerami"
+  },
+  "trust_on_this_website": {
+    "message": "Trust on this website"
+  },
+  "trusted": {
+    "message": "Trusted"
+  },
+  "trusted__@_0_": {
+    "message": "Trusted: $${0}"
+  },
+  "trusted_on_all_websites": {
+    "message": "Trusted on all websites"
+  },
+  "trusted_on_this_website": {
+    "message": "Trusted on this website"
   },
   "unidentified": {
     "message": "Niezidentyfikowane",
@@ -460,6 +568,12 @@
   "urls_observed": {
     "message": "Zaobserwowane adresy URL"
   },
+  "view_activity_details": {
+    "message": "View activity details"
+  },
+  "view_trackerdb_on_github": {
+    "message": "View trackerdb on GitHub"
+  },
   "visit_our_blog": {
     "message": "Odwiedź nasz blog"
   },
@@ -471,6 +585,9 @@
   },
   "website": {
     "message": "Witryna"
+  },
+  "website_exceptions": {
+    "message": "Website exceptions"
   },
   "websites": {
     "message": "Witryny"
