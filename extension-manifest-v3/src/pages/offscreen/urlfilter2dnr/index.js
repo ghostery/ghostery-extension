@@ -1,4 +1,6 @@
-import convert from '/utils/dnr-converter.js';
+import { createDocumentConverter } from '/utils/dnr-converter.js';
+
+const convert = createDocumentConverter();
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'offscreen:urlfitler2dnr:convert') {
