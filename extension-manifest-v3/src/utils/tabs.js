@@ -9,9 +9,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export function openTabWithUrl(host, event) {
+export async function openTabWithUrl(host, event) {
   const { href } = event.currentTarget;
 
   event.preventDefault();
+
+  try {
+    const tabs = await chrome.tabs.query({ url: href.split('#')[0] });
+
+    if (tabs.length) {
+      await chrome.tabs.update(tabs[0].id, {
+        active: true,
+        url: href !== tabs[0].url ? href : undefined,
+      });
+
+      return;
+    }
+  } catch (e) {
+    console.error('Error while try to find existing tab:', e);
+  }
+
   chrome.tabs.create({ url: href });
 }

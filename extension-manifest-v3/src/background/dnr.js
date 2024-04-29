@@ -10,13 +10,15 @@
  */
 
 import { observe, ENGINES } from '/store/options.js';
+import { TRACKERDB_ENGINE } from '/utils/engines.js';
 
 const PAUSE_RULE_PRIORITY = 10000000;
 
 if (__PLATFORM__ !== 'firefox') {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
-    .declarative_net_request.rule_resources.map(({ id }) => id);
+    .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
+    .map(({ id }) => id);
 
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
@@ -36,6 +38,20 @@ if (__PLATFORM__ !== 'firefox') {
         (enabled ? enableRulesetIds : disableRulesetIds).push(name);
       }
     });
+
+    const someEnginesEnabled =
+      enableRulesetIds.length > 0 ||
+      enabledRulesetIds
+        .filter((id) => !disableRulesetIds.includes(id))
+        .some((id) => ENGINES.find(({ name }) => name === id));
+
+    if (someEnginesEnabled && !enabledRulesetIds.includes(TRACKERDB_ENGINE)) {
+      enableRulesetIds.push(TRACKERDB_ENGINE);
+    }
+
+    if (!someEnginesEnabled && enabledRulesetIds.includes(TRACKERDB_ENGINE)) {
+      disableRulesetIds.push(TRACKERDB_ENGINE);
+    }
 
     if (enableRulesetIds.length || disableRulesetIds.length) {
       try {

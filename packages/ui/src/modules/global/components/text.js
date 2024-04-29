@@ -6,6 +6,7 @@ export default {
   color: '',
   ellipsis: false,
   underline: false,
+  uppercase: false,
   render: ({ type, mobileType, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
@@ -23,7 +24,7 @@ export default {
         : ''
     }
 
-    :host([type^="display"]), 
+    :host([type^="display"]),
     :host([type^="headline"]),
     :host([type^="label"]) {
       color: var(--ui-text-color-heading, var(--ui-color-gray-800));
@@ -47,6 +48,10 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    :host([uppercase]) {
+      text-transform: uppercase;
     }
 
     ::slotted(ui-text) {

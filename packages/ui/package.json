@@ -4,12 +4,11 @@
   "private": true,
   "author": "Ghostery GmbH",
   "license": "MPL-2.0",
+  "type": "module",
   "exports": {
     "./onboarding": "./src/modules/onboarding/index.js",
     "./onboarding/short": "./src/modules/onboarding/short.js",
-    "./pages": "./src/modules/pages/index.js",
     "./panel": "./src/modules/panel/index.js",
-    "./settings": "./src/modules/settings/index.js",
     "./trackers-preview": "./src/modules/trackers-preview/index.js",
     "./youtube": "./src/modules/youtube/index.js",
     "./youtube/wall": "./src/modules/youtube/wall.js",
@@ -24,6 +23,6 @@
   },
   "dependencies": {
     "@ghostery/libs": "^1.0.0",
-    "hybrids": "^8.2.14"
+    "hybrids": "^8.2.22"
   }
 }

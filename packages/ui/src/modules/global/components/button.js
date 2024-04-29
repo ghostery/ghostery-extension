@@ -31,6 +31,7 @@ export default {
       :host([type="primary"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-primary-500);
+        border: 1px solid var(--ui-color-primary-500);
         --ui-button-hover-color: var(--ui-color-white);
         --ui-button-hover-background: var(--ui-color-primary-700);
       }
@@ -38,11 +39,13 @@ export default {
       :host([type="success"]) {
         color: var(--ui-color-white);
         background: var(--ui-color-success-500);
+        border: 1px solid var(--ui-color-success-500);
         --ui-button-hover-color: var(--ui-color-white);
         --ui-button-hover-background: var(--ui-color-success-700);
       }
 
       :host([type="transparent"]) {
+        border: 1px solid transparent;
         --ui-button-hover-color: var(--ui-color-primary-500);
         --ui-button-hover-background: var(--ui-color-primary-100);
       }
@@ -51,6 +54,7 @@ export default {
         color: var(--ui-color-gray-700);
         background: var(--ui-color-white);
         border: 1px solid var(--ui-color-gray-200);
+        box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
         --ui-button-hover-color: var(--ui-color-primary-500);
         --ui-button-hover-border: var(--ui-color-primary-500);
         --ui-button-hover-background: var(--ui-color-white);
@@ -60,13 +64,14 @@ export default {
         color: var(--ui-color-error-400);
         background: var(--ui-color-white);
         border: 1px solid var(--ui-color-gray-200);
+        box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
         --ui-button-hover-color: var(--ui-color-error-500);
         --ui-button-hover-border: var(--ui-color-error-500);
         --ui-button-hover-background: var(--ui-color-white);
       }
 
       @media (hover: hover) and (pointer: fine) {
-        :host(:hover), :host(:focus-within) {
+        :host(:hover), :host(:has(:focus-visible)) {
           color: var(--ui-button-hover-color);
           border-color: var(--ui-button-hover-border);
           background: var(--ui-button-hover-background);
@@ -89,7 +94,7 @@ export default {
         pointer-events: none;
       }
 
-      :host([disabled]:focus-within) {
+      :host([disabled]:has(:focus-visible)) {
         visibility: hidden;
       }
 
@@ -120,7 +125,7 @@ export default {
       }
 
       :host([size="small"]) ::slotted(*) {
-        padding: 0px 12px;
+        padding: 0px 16px;
       }
    `,
 };

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, dispatch } from 'hybrids';
+import { html, msg, dispatch } from 'hybrids';
 
 function toggle(host) {
   host.value = !host.value;
@@ -19,8 +19,10 @@ function toggle(host) {
 export default {
   value: false,
   disabled: false,
+  type: '',
+  color: '',
   render: Object.assign(
-    ({ value }) => html`
+    ({ value, color }) => html`
       <template layout="block">
         <button
           onclick="${toggle}"
@@ -30,7 +32,7 @@ export default {
             <span layout="block size:2 absolute top left margin:2px"></span>
           </div>
           <ui-text type="label-m" layout="width::36px">
-            ${value ? html`On` : html`Off`}
+            ${value ? msg`On` : msg`Off`}
           </ui-text>
         </button>
       </template>
@@ -46,8 +48,9 @@ export default {
       :host([disabled]) #toggle {
         background: var(--ui-color-gray-400);
       }
-      
+
       button {
+        cursor: pointer;
         background: none;
         appearance: none;
         border: none;
@@ -84,6 +87,19 @@ export default {
         left: calc(100% - 20px);
       }
 
+      :host([type="status"]) ui-text {
+        display: none;
+      }
+
+      :host([type="status"]) #toggle {
+        background: var(--ui-color-gray-400);
+      }
+
+      :host([value][type="status"]) #toggle {
+        background: var(--ui-color-${color});
+      }
+
+
       @media (hover: hover) and (pointer: fine) {
         button:hover {
           --ui-text-color-heading: var(--ui-color-danger-700);
@@ -99,6 +115,14 @@ export default {
 
         :host([value]) button:hover #toggle {
           background: var(--ui-color-success-700);
+        }
+
+        :host([type="status"]) button:hover #toggle {
+          background: var(--ui-color-gray-600);
+        }
+
+        :host([value][type="status"]) button:hover #toggle {
+          background: var(--ui-color-${color});
         }
       }
     `,

@@ -13,16 +13,23 @@ import { html } from 'hybrids';
 
 export default {
   type: 'danger',
+  uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">
-      <ui-text type="label-s" color="settings-badge"><slot></slot></ui-text>
+      <ui-text
+        type="label-s"
+        color="settings-badge"
+        layout="row items:center gap:0.5"
+      >
+        <slot></slot>
+      </ui-text>
     </template>
   `.css`
     :host {
       border-radius: 8px;
       --ui-color-settings-badge: currentColor;
     }
-    
+
     :host([type="danger"]) {
       color: var(--ui-color-danger-700);
       background: var(--ui-color-danger-100);
@@ -33,7 +40,17 @@ export default {
       background: var(--ui-color-primary-100);
     }
 
-    ui-text {
+    :host([type="info"]) {
+      color: var(--ui-color-gray-800);
+      background: var(--ui-color-gray-100);
+    }
+
+    :host([type="success"]) {
+      color: var(--ui-color-success-700);
+      background: var(--ui-color-success-100);
+    }
+
+    :host([uppercase]) ui-text {
       text-transform: uppercase;
     }
   `,

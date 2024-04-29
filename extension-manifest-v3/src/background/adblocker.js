@@ -31,16 +31,28 @@ const setup = asyncSetup([
     enabledEngines = [
       // Add custom engine
       engines.CUSTOM_ENGINE,
+      engines.FIXES_ENGINE,
       // Set enabled engines
       ...ENGINES.filter(({ key }) => options.terms && options[key]).map(
         ({ name }) => name,
       ),
     ];
 
+    if (
+      __PLATFORM__ !== 'firefox' &&
+      ENGINES.some(({ key }) => options.terms && options[key])
+    ) {
+      enabledEngines.push(engines.TRACKERDB_ENGINE);
+    }
+
     // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
   engines.init(engines.CUSTOM_ENGINE),
+  engines.init(engines.FIXES_ENGINE),
+  ...(__PLATFORM__ !== 'firefox'
+    ? [engines.init(engines.TRACKERDB_ENGINE)]
+    : []),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
@@ -114,6 +126,7 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
+  // TODO: add TrackerDB
   enabledEngines.forEach((name) => {
     const engine = engines.get(name);
     if (!engine) return;
@@ -317,17 +330,8 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-function isPaused(details, request) {
-  if (details.frameAncestors?.length > 0) {
-    for (const { url } of details.frameAncestors) {
-      const { domain, hostname } = parse(url);
-      if (pausedDomains.includes(domain || hostname)) {
-        return true;
-      }
-    }
-  }
-
-  if (pausedDomains.includes(request.sourceDomain || request.sourceHostname)) {
+function isPaused(request) {
+  if (pausedDomains.includes(request.tab.domain || request.tab.hostname)) {
     return true;
   }
 
@@ -343,13 +347,21 @@ if (__PLATFORM__ === 'firefox') {
 
       // INFO: request.source... is only available in Firefox
       if (request.sourceDomain || request.sourceHostname) {
+        if (isPaused(request)) return;
+
         if (details.type !== 'main_frame') {
           updateTabStats(details.tabId, [request]);
+
+          if (request.metadata?.isTrusted) {
+            return;
+          }
         }
 
-        if (isPaused(details, request)) return;
+        const allEngines = request.metadata
+          ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
+          : enabledEngines;
 
-        for (const name of enabledEngines) {
+        for (const name of allEngines) {
           const engine = engines.get(name);
           if (!engine) continue;
 
@@ -384,10 +396,16 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (isPaused(details, request)) return;
+      if (request.metadata?.shouldBlock === false || isPaused(request)) {
+        return;
+      }
+
+      const allEngines = request.metadata
+        ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
+        : enabledEngines;
 
       let policies;
-      for (const name of enabledEngines) {
+      for (const name of allEngines) {
         const engine = engines.get(name);
         if (engine) {
           policies = engine.getCSPDirectives(request);

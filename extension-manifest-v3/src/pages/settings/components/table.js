@@ -12,12 +12,13 @@
 import { html } from 'hybrids';
 
 export default {
+  responsive: false,
   render: () => html`
     <template layout="column gap">
       <header layout="padding:1.5" layout@768px="padding:1.5:2">
         <slot name="header"></slot>
       </header>
-      <div layout="column gap"><slot></slot></div>
+      <div layout="column"><slot></slot></div>
     </template>
   `.css`
     header {
@@ -27,12 +28,17 @@ export default {
 
     div ::slotted(*) {
       padding: 12px 14px;
+      border-bottom: 1px solid var(--ui-color-gray-200);
+    }
+
+    :host([responsive]) div ::slotted(*) {
       border: 1px solid var(--ui-color-gray-200);
       border-radius: 8px;
     }
 
     @media screen and (min-width: 768px) {
-      div ::slotted(*) {
+      div ::slotted(*),
+      :host([responsive]) div ::slotted(*) {
         padding: 24px 16px;
         border-radius: 0;
         border: none;

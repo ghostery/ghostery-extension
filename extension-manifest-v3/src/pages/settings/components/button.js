@@ -9,13 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define } from 'hybrids';
+import { html } from 'hybrids';
 
-// Globals
-import '../panel/index.js';
-
-// Components
-define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
-  prefix: 'ui-settings',
-  root: 'components',
-});
+export default {
+  render: () => html`
+    <template layout="grid">
+      <ui-panel-action layout="height:5">
+        <button layout="padding:1:1.5">
+          <ui-text type="label-m"><slot></slot></ui-text>
+        </button>
+      </ui-panel-action>
+    </template>
+  `,
+};

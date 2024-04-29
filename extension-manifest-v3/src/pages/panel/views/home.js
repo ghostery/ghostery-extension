@@ -11,16 +11,18 @@
 
 import { html, store, router } from 'hybrids';
 
+import { openTabWithUrl } from '/utils/tabs.js';
+
 import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
-import Notification from '../store/notification.js';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import Notification from '../store/notification.js';
 
 import sleep from '../assets/sleep.svg';
 
 import Navigation from './navigation.js';
 import TrackerDetails from './tracker-details.js';
+import ProtectionStatus from './protection-status.js';
 
 const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
@@ -72,11 +74,14 @@ function setStatsType(host, event) {
 }
 
 export default {
-  [router.connect]: { stack: [Navigation, TrackerDetails] },
+  [router.connect]: { stack: [Navigation, TrackerDetails, ProtectionStatus] },
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
-  content: ({ options, stats, notification }) => html`
+  paused: ({ options, stats }) =>
+    store.ready(options, stats) &&
+    options.paused.find(({ id }) => id === stats.domain),
+  content: ({ options, stats, notification, paused }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&
       html`
@@ -105,7 +110,7 @@ export default {
             html`
               <gh-panel-pause
                 onaction="${togglePause}"
-                paused="${options.paused.find(({ id }) => id === stats.domain)}"
+                paused="${paused}"
               ></gh-panel-pause>
             `
           : html`
@@ -129,7 +134,9 @@ export default {
                   domain="${stats.domain}"
                   categories="${stats.topCategories}"
                   trackers="${stats.trackers}"
+                  paused="${paused}"
                   dialog="${TrackerDetails}"
+                  exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
                   ontypechange="${setStatsType}"
                   layout="margin:1:1.5"
@@ -162,11 +169,14 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <ui-text>
+          <ui-text
+            class="${{ last: store.error(notification) }}"
+            layout.last="padding:bottom:1.5"
+          >
             <a
               href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
               onclick="${openTabWithUrl}"
-              layout="block margin:0:1.5"
+              layout="block margin:1.5:1.5:0"
             >
               <gh-panel-options-item
                 icon="ads"

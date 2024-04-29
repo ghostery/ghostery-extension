@@ -18,9 +18,11 @@ import {
   Config,
 } from '@cliqz/adblocker';
 
-import { registerDatabase } from '/utils/indexeddb.js';
+import { registerDatabase } from './indexeddb.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
+export const FIXES_ENGINE = 'fixes';
+export const TRACKERDB_ENGINE = 'trackerdb';
 
 const CDN_HOSTNAME = chrome.runtime.getManifest().debug
   ? 'staging-cdn.ghostery.com'
@@ -64,13 +66,15 @@ function saveToMemory(name, engine) {
 
 // custom filter exceptions should apply to all engines
 function shareExceptions(name, engine) {
-  if (name === CUSTOM_ENGINE) return;
+  if (name === CUSTOM_ENGINE || name === FIXES_ENGINE) return;
 
   // Network exceptions
   const matchExceptions = engine.exceptions.match.bind(engine.exceptions);
   engine.exceptions.match = (...args) => {
     return (
-      matchExceptions(...args) || get(CUSTOM_ENGINE).exceptions.match(...args)
+      get(CUSTOM_ENGINE).exceptions.match(...args) ||
+      get(FIXES_ENGINE).exceptions.match(...args) ||
+      matchExceptions(...args)
     );
   };
 
@@ -81,6 +85,7 @@ function shareExceptions(name, engine) {
     );
   engine.cosmetics.unhideIndex.iterMatchingFilters = (...args) => {
     iterMatchingFiltersUnhide(...args);
+    get(FIXES_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
     get(CUSTOM_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
   };
 
@@ -90,6 +95,7 @@ function shareExceptions(name, engine) {
   engine.hideExceptions.matchAll = (...args) => {
     return (
       matchAllUnhideExceptions(...args) ||
+      get(FIXES_ENGINE).hideExceptions.matchAll(...args) ||
       get(CUSTOM_ENGINE).hideExceptions.matchAll(...args)
     );
   };
@@ -379,6 +385,8 @@ const ALARM_PREFIX = 'engines:update:';
 const ALARM_DELAY = 60; // 1 hour
 
 export async function init(name) {
+  if (__PLATFORM__ === 'tests') return;
+
   if (name === CUSTOM_ENGINE) {
     return (
       get(CUSTOM_ENGINE) ||

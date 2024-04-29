@@ -10,9 +10,14 @@
  */
 
 import { html, router, store } from 'hybrids';
+import * as labels from '@ghostery/ui/labels';
 
+import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
+
 import { openTabWithUrl } from '/utils/tabs.js';
+
+import ProtectionStatus from './protection-status.js';
 
 function cleanUp(text) {
   return text.replace(/(\\"|\\n|\\t|\\r)/g, '').trim();
@@ -37,13 +42,21 @@ function showCopyNotification(host) {
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
+  options: store(Options),
   trackerId: '',
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
+  status: ({ stats, tracker }) =>
+    store.ready(tracker.exception)
+      ? tracker.exception.getDomainStatus(stats.domain)
+      : { type: tracker.blockedByDefault ? 'block' : 'trust' },
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
     `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
-  content: ({ tracker, wtmUrl }) => html`
+  paused: ({ options, stats }) =>
+    store.ready(options, stats) &&
+    options.paused.find(({ id }) => id === stats.domain),
+  content: ({ tracker, status, wtmUrl, paused }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -52,18 +65,70 @@ export default {
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        ${tracker.company !== tracker.name &&
-        html`
-          <ui-text slot="header" type="body-s" color="gray-600">
-            ${tracker.company}
-          </ui-text>
-        `}
-        ${(tracker.description || wtmUrl) &&
+        <ui-text slot="header" type="body-s" color="gray-600">
+          ${tracker.company &&
+          tracker.company !== tracker.name &&
+          tracker.company + ' •'}
+          ${labels.categories[tracker.category]}
+        </ui-text>
+        <div layout="grid:1|max gap">
+          ${paused
+            ? html`
+                <ui-panel-action layout="width:full" disabled>
+                  <div layout="row gap">
+                    <ui-icon name="pause"></ui-icon>
+                    <ui-text type="label-m">Ghostery paused</ui-text>
+                  </div>
+                </ui-panel-action>
+              `
+            : html`<ui-panel-action layout="width:full">
+                <a
+                  href="${router.url(ProtectionStatus, {
+                    trackerId: tracker.id,
+                  })}"
+                  layout="row gap"
+                >
+                  <ui-icon
+                    name="${status.type}-m"
+                    color="${status.type === 'block'
+                      ? 'gray-800'
+                      : 'success-500'}"
+                  ></ui-icon>
+                  <ui-text type="label-m" layout="row gap">
+                    ${status.website
+                      ? (status.type === 'trust' &&
+                          html`Trusted on this website`) ||
+                        (status.type === 'block' &&
+                          html`Blocked on this website`)
+                      : (status.type === 'trust' &&
+                          html`Trusted on all websites`) ||
+                        (status.type === 'block' &&
+                          html`Blocked on all websites`)}
+                  </ui-text>
+                </a>
+              </ui-panel-action>`}
+          ${tracker.category !== 'unidentified' &&
+          html`
+            <ui-panel-action layout="width:4.5">
+              <a
+                href="${chrome.runtime.getURL(
+                  `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
+                )}"
+                onclick="${openTabWithUrl}"
+              >
+                <ui-icon name="settings-m"></ui-icon>
+              </a>
+            </ui-panel-action>
+          `}
+        </div>
+        ${(tracker.organization?.description || wtmUrl) &&
         html`
           <div layout="column gap:0.5">
-            ${tracker.description &&
+            ${tracker.organization?.description &&
             html`
-              <ui-text type="body-s"> ${cleanUp(tracker.description)} </ui-text>
+              <ui-text type="body-s">
+                ${cleanUp(tracker.organization?.description)}
+              </ui-text>
             `}
             ${wtmUrl &&
             html`
@@ -80,9 +145,46 @@ export default {
           layout="
             grid:max|1 items:start:stretch content:start gap:1:2.5
             grow:1
-            padding:bottom:4
           "
         >
+          ${tracker.requestsBlocked.length > 0 &&
+          html`
+            <ui-icon name="block-s" color="danger-700"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs blocked</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsBlocked.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
+          ${tracker.requestsModified.length > 0 &&
+          html`
+            <ui-icon name="eye" color="primary-700"></ui-icon>
+            <div layout="column gap">
+              <ui-text type="label-s">URLs modified</ui-text>
+              <div layout="column gap:2">
+                <div layout="column gap">
+                  ${tracker.requestsModified.map(
+                    ({ url }) =>
+                      html`
+                        <gh-panel-copy oncopy="${showCopyNotification}">
+                          ${url}
+                        </gh-panel-copy>
+                      `,
+                  )}
+                </div>
+              </div>
+            </div>
+          `}
           ${tracker.requestsObserved.length > 0 &&
           html`
             <ui-icon name="shield"></ui-icon>
@@ -98,55 +200,27 @@ export default {
                         </gh-panel-copy>
                       `,
                   )}
-                  ${tracker.requestsObserved.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
                 </div>
               </div>
             </div>
           `}
-          ${tracker.requestsBlocked.length > 0 &&
+          ${tracker.organization?.country &&
           html`
-            <ui-icon name="block"></ui-icon>
+            <ui-icon name="pin"></ui-icon>
             <div layout="column gap">
-              <ui-text type="label-s">URLs blocked</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsBlocked.map(
-                    ({ url }) =>
-                      html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </gh-panel-copy>
-                      `,
-                  )}
-                  ${tracker.requestsBlocked.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
-                </div>
-              </div>
+              <ui-text type="label-s">Country</ui-text>
+              <ui-text
+                type="body-s"
+                color="gray-600"
+                ellipsis
+                layout="padding margin:-1"
+              >
+                ${labels.regions.of(tracker.organization.country) ||
+                tracker.organization.country}
+              </ui-text>
             </div>
           `}
-          ${tracker.requestsModified.length > 0 &&
-          html`
-            <ui-icon name="eye"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">URLs modified</ui-text>
-              <div layout="column gap:2">
-                <div layout="column gap">
-                  ${tracker.requestsModified.map(
-                    ({ url }) =>
-                      html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </gh-panel-copy>
-                      `,
-                  )}
-                  ${tracker.requestsModified.length >= 10 &&
-                  html`<ui-text type="body-s" color="gray-600">...</ui-text>`}
-                </div>
-              </div>
-            </div>
-          `}
-          ${tracker.website &&
+          ${tracker.websiteUrl &&
           html`
             <ui-icon name="globe"></ui-icon>
             <div layout="column gap">
@@ -158,54 +232,81 @@ export default {
                 underline
                 layout="padding margin:-1"
               >
-                <a href="${tracker.website}" onclick="${openTabWithUrl}">
-                  ${tracker.website}
+                <a href="${tracker.websiteUrl}" onclick="${openTabWithUrl}">
+                  ${tracker.websiteUrl}
                 </a>
               </ui-text>
             </div>
           `}
-          ${tracker.privacyPolicy &&
+          ${tracker.organization &&
           html`
-            <ui-icon name="privacy"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">
-                <!-- | Panel Company -->Privacy policy
-              </ui-text>
-              <ui-text
-                type="body-s"
-                color="primary-700"
-                ellipsis
-                underline
-                layout="padding margin:-1"
-              >
-                <a href="${tracker.privacyPolicy}" onclick="${openTabWithUrl}">
-                  ${tracker.privacyPolicy}
-                </a>
-              </ui-text>
-            </div>
-          `}
-          ${tracker.contact &&
-          html`
-            <ui-icon name="mail"></ui-icon>
-            <div layout="column gap">
-              <ui-text type="label-s">Contact</ui-text>
-              <ui-text
-                type="body-s"
-                color="primary-700"
-                ellipsis
-                underline
-                layout="padding margin:-1"
-              >
-                <a
-                  href="${tracker.contact.startsWith('http')
-                    ? ''
-                    : 'mailto:'}${tracker.contact}"
-                  onclick="${openTabWithUrl}"
+            ${tracker.organization.websiteUrl &&
+            html`
+              <ui-icon name="globe"></ui-icon>
+              <div layout="column gap">
+                <ui-text type="label-s">Organization's website</ui-text>
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
                 >
-                  ${tracker.contact}
-                </a>
-              </ui-text>
-            </div>
+                  <a
+                    href="${tracker.organization.websiteUrl}"
+                    onclick="${openTabWithUrl}"
+                  >
+                    ${tracker.organization.websiteUrl}
+                  </a>
+                </ui-text>
+              </div>
+            `}
+            ${tracker.organization.privacyPolicy &&
+            html`
+              <ui-icon name="privacy"></ui-icon>
+              <div layout="column gap">
+                <ui-text type="label-s">
+                  <!-- | Panel Company -->Privacy policy
+                </ui-text>
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
+                >
+                  <a
+                    href="${tracker.organization.privacyPolicy}"
+                    onclick="${openTabWithUrl}"
+                  >
+                    ${tracker.organization.privacyPolicy}
+                  </a>
+                </ui-text>
+              </div>
+            `}
+            ${tracker.organization.contact &&
+            html`
+              <ui-icon name="mail"></ui-icon>
+              <div layout="column gap">
+                <ui-text type="label-s">Contact</ui-text>
+                <ui-text
+                  type="body-s"
+                  color="primary-700"
+                  ellipsis
+                  underline
+                  layout="padding margin:-1"
+                >
+                  <a
+                    href="${tracker.organization.contact.startsWith('http')
+                      ? ''
+                      : 'mailto:'}${tracker.organization.contact}"
+                    onclick="${openTabWithUrl}"
+                  >
+                    ${tracker.organization.contact}
+                  </a>
+                </ui-text>
+              </div>
+            `}
           `}
         </section>
       </gh-panel-dialog>

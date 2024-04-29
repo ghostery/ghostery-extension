@@ -36,8 +36,8 @@ export default {
     return paused.filter((item) => item.id.includes(query));
   },
   content: ({ paused, websites }) => html`
-    <template layout="block">
-      <div layout="column gap:4">
+    <template layout="contents">
+      <gh-settings-page-layout layout="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <div layout="row items:center content:space-between">
             <ui-text type="headline-l" mobile-type="headline-m">
@@ -45,9 +45,9 @@ export default {
             </ui-text>
             ${!!paused.length &&
             html`
-              <ui-button type="outline" size="small">
-                <button onclick="${clearAll}">Clear all</button>
-              </ui-button>
+              <gh-settings-button onclick="${clearAll}">
+                Clear all
+              </gh-settings-button>
             `}
           </div>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -58,25 +58,24 @@ export default {
         <section layout="column gap:4" layout@768px="gap:5">
           ${paused.length
             ? html`
-                <ui-settings-input icon="search" layout@1280px="width:::340px">
+                <gh-settings-input icon="search" layout@1280px="width:::340px">
                   <input
                     type="search"
                     placeholder="${msg`Search website...`}"
                     oninput="${html.set('query')}"
                   />
-                </ui-settings-input>
-                <ui-settings-table>
+                </gh-settings-input>
+                <gh-settings-table responsive>
                   <div
                     slot="header"
                     layout="column"
                     layout@768px="grid:2 gap:4"
                   >
-                    <ui-text type="label-m" slot="header">
+                    <ui-text type="label-m">
                       Website <span>(${websites.length})</span>
                     </ui-text>
                     <ui-text
                       type="label-m"
-                      slot="header"
                       layout="hidden"
                       layout@768px="block"
                     >
@@ -113,9 +112,9 @@ export default {
                           layout@768px="hidden"
                         ></ui-line>
                         <div layout="row items:center gap" layout@768px="grow">
-                          <ui-settings-badge type="danger">
+                          <gh-settings-badge type="danger" uppercase>
                             Paused
-                          </ui-settings-badge>
+                          </gh-settings-badge>
                           <ui-text color="gray-600" layout="grow">
                             ${item.revokeAt
                               ? html`${html`<relative-time
@@ -132,7 +131,7 @@ export default {
                       </div>
                     `,
                   )}
-                </ui-settings-table>
+                </gh-settings-table>
               `
             : html`
                 <div
@@ -147,7 +146,7 @@ export default {
                 </div>
               `}
         </section>
-      </div>
+      </gh-settings-page-layout>
     </template>
   `,
 };

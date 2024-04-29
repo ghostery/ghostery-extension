@@ -1,5 +1,5 @@
-import { resolve, dirname } from 'path';
-import { readFileSync, writeFileSync } from 'fs';
+import { resolve, dirname, join } from 'path';
+import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { exec, execSync } from 'child_process';
 import { build } from 'vite';
 import shelljs from 'shelljs';
@@ -67,13 +67,15 @@ if (argv.target === 'safari') {
   options.assets.push('background/safari');
 }
 
+// Download adblocker engines
 if (argv.staging) {
-  execSync('npm run download.staging', { stdio: 'inherit' });
-
+  execSync('npm run download-engines -- --staging', { stdio: 'inherit' });
   manifest.debug = true;
 } else {
-  execSync('npm run download', { stdio: 'inherit' });
+  execSync('npm run download-engines', { stdio: 'inherit' });
 }
+
+execSync('npm run download-whotracksme-bloomfilter', { stdio: 'inherit' });
 
 const config = {
   logLevel: argv.silent ? 'silent' : undefined,
@@ -114,7 +116,7 @@ options.assets.forEach((path) => {
 // copy adblocker engines
 shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources'));
 
-const engines = ['ads', 'tracking', 'annoyances'];
+const engines = ['ads', 'tracking', 'annoyances', 'fixes'];
 const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {
@@ -173,6 +175,10 @@ execSync('npm run licenses', { stdio: 'inherit' });
 // set manifest version from package.json
 manifest.version = pkg.version;
 
+if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
+  manifest.permissions.push('declarativeNetRequestFeedback');
+}
+
 writeFileSync(
   resolve(options.outDir, 'manifest.json'),
   JSON.stringify(manifest, null, 2),
@@ -189,6 +195,20 @@ if (manifest.action?.default_popup) {
 
 if (manifest.browser_action?.default_popup) {
   source.push(manifest.browser_action.default_popup);
+}
+
+// offscreen documents
+if (
+  manifest.permissions.includes('offscreen') ||
+  manifest.optional_permissions?.includes('offscreen')
+) {
+  readdirSync(join(options.srcDir, 'pages', 'offscreen'), {
+    withFileTypes: true,
+  })
+    .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith('.'))
+    .forEach((dirent) =>
+      source.push(join('pages', 'offscreen', dirent.name, 'index.html')),
+    );
 }
 
 // options page

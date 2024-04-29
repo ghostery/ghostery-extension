@@ -17,9 +17,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '@ghostery/ui/pages';
 
 import PanelAndroid from './components/PanelAndroid';
+import '../panel/elements/onboarding-state';
+
 import '../scss/panel_android.scss';
 
 ReactDOM.render(

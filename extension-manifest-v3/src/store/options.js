@@ -245,37 +245,6 @@ async function migrateFromMV2() {
       // Clear the storage
       await chrome.storage.local.clear();
 
-      try {
-        // Keep for the future use global and site specific tracker block/unblock lists
-        const trackers = storage.bugs.apps;
-        const optionsFromV8 = {
-          selectedTrackers: Object.keys(storage.selected_app_ids).map(
-            (id) => trackers[id].trackerID,
-          ),
-          siteSpecificBlocks: Object.entries(storage.site_specific_blocks).map(
-            ([domain, ids]) => {
-              return {
-                domain,
-                trackers: ids.map((id) => trackers[id].trackerID),
-              };
-            },
-          ),
-          siteSpecificUnblocks: Object.entries(
-            storage.site_specific_unblocks,
-          ).map(([domain, ids]) => {
-            return {
-              domain,
-              trackers: ids.map((id) => trackers[id].trackerID),
-            };
-          }),
-        };
-
-        // Save options for the future use
-        await chrome.storage.local.set({ optionsFromV8 });
-      } catch (e) {
-        console.error(`Error while migrating site specific tracker lists: `, e);
-      }
-
       // Delete indexedDBs
       // Notice: Doesn't wait to avoid blocking the migrated options
       [
@@ -304,6 +273,11 @@ async function migrateFromMV2() {
     return {};
   }
 }
+
+// Remove `optionsFromV8` storage key, as we don't need it anymore
+// TODO: Please remove this code when the next version after the code is released
+// This touches only Opera users, as this is the only platform, which has `optionsFromV8` key
+if (__PLATFORM__ === 'opera') chrome.storage.local.remove('optionsFromV8');
 
 export async function observe(property, fn) {
   let wrapper;

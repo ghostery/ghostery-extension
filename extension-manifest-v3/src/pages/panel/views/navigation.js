@@ -48,6 +48,13 @@ const MENU = [
     ),
   },
   {
+    icon: 'block-m',
+    label: msg`Trackers`,
+    href: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-trackers',
+    ),
+  },
+  {
     icon: 'wtm',
     label: 'WhoTracks.Me',
     href: chrome.runtime.getURL(

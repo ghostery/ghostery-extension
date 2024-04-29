@@ -12,6 +12,8 @@
 import { Request } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 
+import * as trackerDb from '../../utils/trackerdb.js';
+
 const PARSE_CACHE_LIMIT = 1000;
 const parseCache = new Map();
 
@@ -58,6 +60,9 @@ export default class ExtendedRequest extends Request {
     });
   }
 
+  #metadata = null;
+  #tab = undefined;
+
   constructor(data) {
     super(data);
 
@@ -71,34 +76,52 @@ export default class ExtendedRequest extends Request {
     this.sourceHostname = data.sourceHostname;
   }
 
-  isFromDomain(domain) {
-    const { frameAncestors } = this._originalRequestDetails;
+  get metadata() {
+    if (!this.#metadata) {
+      this.#metadata = trackerDb.getMetadata(this, {
+        getDomainMetadata: true,
+      });
+    }
+    return this.#metadata;
+  }
 
-    let url = '';
+  get tab() {
+    if (this.#tab === undefined) {
+      const { frameAncestors } = this._originalRequestDetails;
 
-    /* Firefox APIs */
-    if (frameAncestors && frameAncestors.length > 0) {
-      url = frameAncestors[frameAncestors.length - 1].url;
-    } else if (this.sourceUrl) {
-      url = this.sourceUrl;
-    } else {
-      /* Chrome APIs */
+      let url = '';
+      /* Firefox APIs */
+      if (frameAncestors && frameAncestors.length > 0) {
+        url = frameAncestors[frameAncestors.length - 1].url;
+      } else if (this.sourceUrl) {
+        url = this.sourceUrl;
+      } else {
+        /* Chrome APIs */
 
-      const { frameType, initiator } = this._originalRequestDetails;
+        const { frameType, initiator } = this._originalRequestDetails;
 
-      // For frameType 'sub_frame', we can't determine the origin URL
-      // as it might be the iframe itself or any of its ancestors
-      if (frameType === 'outermost_frame' && initiator) {
-        url = initiator;
+        if (
+          (frameType === 'outermost_frame' || frameType === 'sub_frame') &&
+          initiator
+        ) {
+          url = initiator;
+        }
+      }
+      if (url) {
+        this.#tab = parseWithCache(url);
+      } else {
+        this.#tab = null;
       }
     }
-
-    if (url) {
-      const parsedUrl = parseWithCache(url);
-      return parsedUrl.domain === domain || parsedUrl.hostname === domain;
+    if (!this.#tab) {
+      console.error('Cound not detect a tab for the request', this);
     }
+    return this.#tab;
+  }
 
+  isFromDomain(domain) {
     // As a fallback, we assume that the request is from the origin URL
-    return true;
+    if (!this.tab) return true;
+    return this.tab.domain === domain || this.tab.hostname === domain;
   }
 }

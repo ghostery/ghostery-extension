@@ -15,10 +15,30 @@ const timeouts = new WeakMap();
 
 let activeTooltip = null;
 
+const delayTimeouts = new WeakMap();
+function toggle(value) {
+  return (host) => {
+    clearTimeout(delayTimeouts.get(host));
+
+    if (host.delay && value) {
+      delayTimeouts.set(
+        host,
+        setTimeout(() => {
+          host.show = value;
+        }, host.delay * 1000),
+      );
+    } else {
+      host.show = value;
+    }
+  };
+}
+
 export default {
   autohide: 2,
   wrap: false,
   position: 'top', // top, bottom
+  delay: 1,
+  inline: false,
   show: {
     value: false,
     connect: (host) => () => clearTimeout(timeouts.get(host)),
@@ -59,13 +79,16 @@ export default {
       }
     },
   },
-  render: ({ position }) => html`
+  render: ({ position, inline }) => html`
     <template layout="contents">
       <div
-        ontouchstart="${html.set('show', true)}"
-        onmouseenter="${html.set('show', true)}"
-        onmouseleave="${html.set('show', false)}"
+        ontouchstart="${toggle(true)}"
+        onmouseenter="${toggle(true)}"
+        onmouseleave="${toggle(false)}"
+        onclick="${toggle(false)}"
+        class="${{ inline }}"
         layout="block relative"
+        layout.inline="block inline"
       >
         <slot></slot>
         <div

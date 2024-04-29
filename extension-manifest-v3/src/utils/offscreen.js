@@ -9,8 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Global components
-import '../global/index.js';
+const permissionRequest = {
+  permissions: ['offscreen'],
+};
 
-// Styles
-import './styles.css';
+export async function requestPermission() {
+  if (!(await chrome.permissions.contains(permissionRequest))) {
+    if (!(await chrome.permissions.request(permissionRequest))) {
+      throw new Error('Ghostery requires "offscreen" permission');
+    }
+  }
+}

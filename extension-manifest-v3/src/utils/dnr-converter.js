@@ -9,45 +9,95 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-const requests = new Map();
+import { requestPermission } from './offscreen.js';
 
-let pending;
-function createIframe() {
-  if (pending) return pending;
+let documentConverter;
+export function createDocumentConverter() {
+  const requests = new Map();
 
-  window.addEventListener('message', (event) => {
-    const requestId = event.data.rules.shift().condition.urlFilter;
-    requests.get(requestId)(event.data);
-    requests.delete(requestId);
-  });
+  function createIframe() {
+    if (documentConverter) return documentConverter;
 
-  const iframe = document.createElement('iframe');
-  iframe.setAttribute('src', 'https://ghostery.github.io/urlfilter2dnr/');
-  iframe.setAttribute('style', 'display: none;');
+    window.addEventListener('message', (event) => {
+      const requestId = event.data.rules.shift().condition.urlFilter;
+      requests.get(requestId)(event.data);
+      requests.delete(requestId);
+    });
 
-  pending = new Promise((resolve) => {
-    iframe.addEventListener('load', () => resolve(iframe));
-    document.head.appendChild(iframe);
-  });
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('src', 'https://ghostery.github.io/urlfilter2dnr/');
+    iframe.setAttribute('style', 'display: none;');
 
-  return pending;
+    documentConverter = new Promise((resolve) => {
+      iframe.addEventListener('load', () => resolve(iframe));
+      document.head.appendChild(iframe);
+    });
+
+    return documentConverter;
+  }
+
+  let requestCount = 0;
+
+  return async function convert(filter) {
+    const iframe = await createIframe();
+    const requestId = `request${requestCount++}`;
+
+    return new Promise((resolve) => {
+      requests.set(requestId, resolve);
+
+      iframe.contentWindow.postMessage(
+        {
+          action: 'convert',
+          converter: 'adguard',
+          filters: [requestId, filter],
+        },
+        '*',
+      );
+    });
+  };
 }
 
-let requestCount = 0;
-export async function convert(filter) {
-  const iframe = await createIframe();
-  const requestId = `request${requestCount++}`;
+async function setupOffscreenDocument() {
+  await requestPermission();
 
-  iframe.contentWindow.postMessage(
-    {
-      action: 'convert',
-      converter: 'adguard',
-      filters: [requestId, filter],
-    },
-    '*',
-  );
-
-  return new Promise((resolve) => {
-    requests.set(requestId, resolve);
+  const path = 'pages/offscreen/urlfilter2dnr/index.html';
+  const offscreenUrl = chrome.runtime.getURL(path);
+  const existingContexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT'],
+    documentUrls: [offscreenUrl],
   });
+
+  if (existingContexts.length) {
+    return existingContexts[0];
+  }
+
+  await chrome.offscreen.createDocument({
+    url: path,
+    reasons: [chrome.offscreen.Reason.IFRAME_SCRIPTING],
+    justification: 'Convert network filters to DeclarativeNetRequest format.',
+  });
+}
+
+let offscreenDocument;
+export function createOffscreenConverter() {
+  return async function convert(filter) {
+    try {
+      if (!offscreenDocument) {
+        offscreenDocument = setupOffscreenDocument().then(() => {
+          offscreenDocument = true;
+        });
+      }
+
+      await offscreenDocument;
+    } catch (e) {
+      return { errors: [e.message], rules: [] };
+    }
+
+    return (
+      (await chrome.runtime.sendMessage({
+        action: 'offscreen:urlfitler2dnr:convert',
+        filter,
+      })) || { errors: ['failed to initiate offscreen document'], rules: [] }
+    );
+  };
 }

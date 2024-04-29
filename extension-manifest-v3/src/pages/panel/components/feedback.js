@@ -20,7 +20,7 @@ export default {
       html`
         <section layout="column center grow">
           <div layout="row center gap:0.5">
-            <ui-icon name="block" color="danger-700"></ui-icon>
+            <ui-icon name="block-s" color="danger-700"></ui-icon>
             <ui-text type="headline-m">${blocked}</ui-text>
           </div>
           <div layout="row center gap:0.5">

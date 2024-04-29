@@ -21,7 +21,6 @@ import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
 
 import Request from './utils/request.js';
-import * as trackerDb from '/utils/trackerdb.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
@@ -119,6 +118,8 @@ function updateIcon(tabId, force) {
   refreshIcon(tabId);
 }
 
+const URL_IN_STATS_LIMIT = 5;
+
 export function updateTabStats(tabId, requests) {
   Promise.resolve().then(async () => {
     const stats = tabStats.get(tabId);
@@ -135,9 +136,7 @@ export function updateTabStats(tabId, requests) {
     requests = requests.filter((request) => request.isFromDomain(stats.domain));
 
     for (const request of requests) {
-      const pattern = await trackerDb.getMetadata(request, {
-        getDomainMetadata: true,
-      });
+      const pattern = request.metadata;
 
       if (pattern || request.blocked || request.modified) {
         let tracker =
@@ -151,6 +150,8 @@ export function updateTabStats(tabId, requests) {
                 id: request.domain,
                 name: request.domain,
                 category: 'unidentified',
+                exception: request.domain,
+                blockedByDefault: true,
                 requests: [],
               };
 
@@ -169,14 +170,14 @@ export function updateTabStats(tabId, requests) {
 
           tracker.requests = tracker.requests.filter((r) => {
             if (r.blocked) {
-              return ++blocked <= 10 ? true : false;
+              return ++blocked <= URL_IN_STATS_LIMIT ? true : false;
             }
 
             if (r.modified) {
-              return ++modified <= 10 ? true : false;
+              return ++modified <= URL_IN_STATS_LIMIT ? true : false;
             }
 
-            return ++observed <= 10 ? true : false;
+            return ++observed <= URL_IN_STATS_LIMIT ? true : false;
           });
 
           tracker.requests.unshift({
@@ -328,6 +329,11 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
             }
           }
         }
+
+        const request = Request.fromRequestDetails(details);
+        request.blocked = true;
+
+        updateTabStats(details.tabId, [request]);
       }
     },
     {

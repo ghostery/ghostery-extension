@@ -81,6 +81,7 @@ export default {
       <ui-tooltip
         layout="block absolute top left padding:top:0.5"
         show="${current}"
+        delay="0"
       >
         <span slot="content"
           >${labels.categories[getCategoryKey(current)]}:

@@ -1,7 +1,16 @@
 import { html } from 'hybrids';
 
 export default {
-  active: false,
+  active: {
+    value: false,
+    observe(host, value) {
+      if (!value) {
+        host.setAttribute('tabindex', '-1');
+      } else {
+        host.removeAttribute('tabindex');
+      }
+    },
+  },
   render: () => html`<template
     layout="block absolute top:0 left:0 width:full"
     layout[active]="static top:auto left:auto"

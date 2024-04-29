@@ -56,20 +56,15 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-/*
-  Firefox extension popup has a bug, which does not closes the popup when an anchor is clicked.
-*/
-if (__PLATFORM__ === 'firefox') {
-  // Close window when anchor is clicked
-  document.addEventListener('click', (event) => {
-    let el = event.target;
-    while (el && !el.href) el = el.parentElement;
+// Close window when anchor is clicked
+document.addEventListener('click', (event) => {
+  let el = event.target;
+  while (el && !el.href) el = el.parentElement;
 
-    if (!el) return;
+  if (!el) return;
 
-    // Timeout is required to prevent from closing the window before the anchor is opened
-    if (el.origin !== location.origin || el.pathname !== location.pathname) {
-      setTimeout(window.close, 100);
-    }
-  });
-}
+  // Timeout is required to prevent from closing the window before the anchor is opened
+  if (el.origin !== location.origin || el.pathname !== location.pathname) {
+    setTimeout(window.close, 50);
+  }
+});

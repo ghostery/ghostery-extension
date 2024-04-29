@@ -9,12 +9,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { define, html } from 'hybrids';
 
-export default {
-  disabled: false,
-  href: '',
-  render: ({ disabled, href }) => html`
+export default define({
+	tag: 'ui-onboarding-state',
+	disabled: false,
+	href: '',
+	render: ({ disabled, href }) => html`
     <template
       layout="column content:center relative"
       layout[disabled]="height::120px"
@@ -25,22 +26,21 @@ export default {
           id="disabled"
           layout="column center gap:2 margin absolute inset layer:1"
         >
-          <ui-text type="label-m" color="error-500" layout="block:center">
+          <span layout="block:center">
             <ui-icon name="warning" layout="block inline"></ui-icon><br />
             Additional Permissions Required
-          </ui-text>
-          <ui-text class="button" type="label-m" color="white">
+          </span>
+          <span class="button">
             Enable Ghostery
-          </ui-text>
+          </span>
           <a layout="absolute inset layer:3" href="${href}" target="_blank"></a>
         </section>
       `}
       <div id="content"><slot></slot></div>
     </template>
   `.css`
-
     :host([disabled]) {
-      border: 1px dashed var(--ui-color-error-500);
+      border: 1px dashed #ff4500;
       border-radius: 4px;
     }
 
@@ -57,7 +57,13 @@ export default {
       background: rgba(255, 243, 238, 0.8);
     }
 
-    ui-text.button {
+		span {
+			font:  500 14px / 18px Roboto, sans-serif;
+			color: #ff4500;
+		}
+
+    span.button {
+			color: white;
       background: #00AEF0;
       border-radius: 2px;
       padding: 8px 12px;
@@ -67,4 +73,4 @@ export default {
       z-index: 0;
     }
   `,
-};
+});

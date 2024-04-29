@@ -5,6 +5,7 @@
   "short_name": "Ghostery",
   "default_locale": "en",
   "description": "__MSG_manifest_short_description__",
+  "optional_permissions": ["offscreen"],
   "permissions": [
     "alarms",
     "cookies",
@@ -58,6 +59,16 @@
         "id": "annoyances",
         "enabled": false,
         "path": "rule_resources/dnr-annoyances.json"
+      },
+      {
+        "id": "trackerdb",
+        "enabled": false,
+        "path": "rule_resources/dnr-trackerdb.json"
+      },
+      {
+        "id": "fixes",
+        "enabled": true,
+        "path": "rule_resources/dnr-fixes.json"
       }
     ]
   },

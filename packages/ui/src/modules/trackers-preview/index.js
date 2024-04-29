@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, msg, dispatch } from 'hybrids';
+import { html, define, dispatch } from 'hybrids';
 import { sortCategories } from '@ghostery/ui/categories';
 
 import DisablePreviewImg from './assets/disable-preview.svg';
@@ -83,7 +83,6 @@ export default define({
                     <ui-panel-stats
                       domain="${domain}"
                       categories="${data.stats.sort(sort)}"
-                      label="${msg`Trackers Preview`}"
                       layout="relative layer:101"
                     >
                     </ui-panel-stats>
@@ -97,7 +96,7 @@ export default define({
                   onclick="${html.set('confirmDisabled', true)}"
                   layout="row gap:0.5"
                 >
-                  <ui-icon name="block" color="gray-600"></ui-icon>
+                  <ui-icon name="block-s" color="gray-600"></ui-icon>
                   <ui-text type="label-s" color="gray-600">
                     Disable Trackers Preview
                   </ui-text>
