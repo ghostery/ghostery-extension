@@ -10,27 +10,22 @@
  */
 
 import '../setup.js';
-import { describe, it, beforeEach } from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { isTrusted } from '../../src/utils/trackerdb.js';
 
+const createException = (blocked = false) => ({
+  blocked,
+  blockedDomains: ['foo.org'],
+  trustedDomains: ['foo.org'],
+});
+
 describe('/utils/trackerdb.js', () => {
   describe('#isTrusted', () => {
-    let exception;
-
-    beforeEach(() => {
-      exception = {
-        blocked: false,
-        blockedDomains: ['foo.org'],
-        trustedDomains: ['foo.org'],
-      };
-    });
-
     describe('not overwritten status', () => {
       describe('tab with not listed domain', () => {
         it('returns false for blocked categories', () => {
-          exception.blocked = true;
-
+          const exception = createException(true);
           assert.strictEqual(
             isTrusted('bar.com', 'advertising', exception),
             false,
@@ -38,16 +33,14 @@ describe('/utils/trackerdb.js', () => {
         });
 
         it('returns false for trusted categories', () => {
-          exception.blocked = false;
-
+          const exception = createException();
           assert.strictEqual(isTrusted('bar.com', 'cdn', exception), false);
         });
       });
 
       describe('tab with listed domain', () => {
         it('returns true for blocked categories', () => {
-          exception.blocked = true;
-
+          const exception = createException(true);
           assert.strictEqual(
             isTrusted('foo.org', 'advertising', exception),
             true,
@@ -55,7 +48,7 @@ describe('/utils/trackerdb.js', () => {
         });
 
         it('returns false for trusted categories', () => {
-          exception.blocked = false;
+          const exception = createException();
           assert.strictEqual(isTrusted('foo.org', 'cdn', exception), false);
         });
       });
@@ -64,8 +57,7 @@ describe('/utils/trackerdb.js', () => {
     describe('overwritten status', () => {
       describe('tab with not listed domain', () => {
         it('returns true for blocked categories', () => {
-          exception.blocked = false;
-
+          const exception = createException();
           assert.strictEqual(
             isTrusted('bar.com', 'advertising', exception),
             true,
@@ -73,16 +65,14 @@ describe('/utils/trackerdb.js', () => {
         });
 
         it('returns false for trusted categories', () => {
-          exception.blocked = true;
-
+          const exception = createException(true);
           assert.strictEqual(isTrusted('bar.com', 'cdn', exception), false);
         });
       });
 
       describe('tab with listed domain', () => {
         it('returns false for blocked categories', () => {
-          exception.blocked = false;
-
+          const exception = createException();
           assert.strictEqual(
             isTrusted('foo.org', 'advertising', exception),
             false,
@@ -90,8 +80,7 @@ describe('/utils/trackerdb.js', () => {
         });
 
         it('returns true for trusted categories', () => {
-          exception.blocked = true;
-
+          const exception = createException(true);
           assert.strictEqual(isTrusted('foo.org', 'cdn', exception), true);
         });
       });
