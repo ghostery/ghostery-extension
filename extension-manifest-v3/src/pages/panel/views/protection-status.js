@@ -13,6 +13,10 @@ function toggleDomain({ stats, tracker }) {
   );
 }
 
+function updateException(host, event) {
+  store.set(host.tracker.exception, { blocked: event.target.value });
+}
+
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
@@ -58,7 +62,7 @@ export default {
                 layout="self:center"
                 value="${blocked}"
                 tooltip
-                onchange="${html.set(tracker.exception, 'blocked')}"
+                onchange="${updateException}"
               ></ui-panel-protection-status-toggle>
             </div>
             <gh-panel-card type="info">
