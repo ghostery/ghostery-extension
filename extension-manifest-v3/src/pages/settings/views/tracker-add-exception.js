@@ -26,7 +26,10 @@ const Model = {
       if (!parsed.domain && !parsed.isIp) {
         throw 'The value must be a valid domain name or IP address.';
       }
-      return model;
+      return {
+        ...model,
+        value: parsed.domain || parsed.hostname,
+      };
     },
   },
 };
