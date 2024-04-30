@@ -145,7 +145,8 @@ export default {
                         <ui-text>${domain}</ui-text>
                         <div layout="row content:space-between gap">
                           <gh-settings-protection-badge
-                            blocked="${tracker.exception.blocked}"
+                            blocked="${tracker.blockedByDefault !==
+                            tracker.exception.blocked}"
                           ></gh-settings-protection-badge>
                           <ui-action>
                             <button
