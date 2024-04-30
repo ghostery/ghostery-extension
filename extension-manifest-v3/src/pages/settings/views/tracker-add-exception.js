@@ -67,8 +67,10 @@ export default {
           >
             <ui-text type="label-l">Add website exception</ui-text>
             <div layout="column gap items:start">
-              <ui-text>Current protection status for ${tracker.name}:</ui-text>
-
+              <ui-text>
+                <!-- Current protection status for a tracker -->
+                Current protection status for ${tracker.name}:
+              </ui-text>
               <gh-settings-protection-badge
                 blocked="${blocked}"
               ></gh-settings-protection-badge>
@@ -86,8 +88,8 @@ export default {
               </gh-settings-input>
               <ui-text type="body-s" color="gray-600">
                 ${blocked
-                  ? msg`${tracker.name} will be trusted on this website.`
-                  : msg`${tracker.name} will be blocked on this website.`}
+                  ? msg`${tracker.name} will be trusted on this website. | A tracker will be trusted on this website.`
+                  : msg`${tracker.name} will be blocked on this website. | A tracker will be trusted on this website.`}
               </ui-text>
             </div>
             <div layout="grid:1|1 gap">

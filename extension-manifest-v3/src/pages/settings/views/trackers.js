@@ -100,7 +100,7 @@ export default {
           <section layout="column gap:4" layout@768px="gap:5">
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-l" mobile-type="headline-m">
-                Tracker database
+                Tracker Database
               </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                 Mind that not all listed entities are trackers, that is not all
@@ -118,7 +118,7 @@ export default {
                   layout="row gap:0.5"
                   target="_blank"
                 >
-                  View trackerdb on GitHub
+                  Contribute to Ghostery Tracker Database on Github
                   <ui-icon name="arrow-right-s"></ui-icon>
                 </a>
               </ui-text>

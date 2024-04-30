@@ -68,14 +68,14 @@ export default {
             <gh-panel-card type="info">
               <ui-text type="label-s" color="primary-700" layout="row gap:0.5">
                 <ui-icon name="info-filled"></ui-icon>
-                ${tracker.blockedByDefault
-                  ? msg`Our recommendation for this activity: Blocked`
-                  : msg`Our recommendation for this activity: Trusted`}
+                ${msg`Our recommendation for this activity`}:
+                ${tracker.blockedByDefault ? msg`Blocked` : msg`Trusted`}
               </ui-text>
             </gh-panel-card>
             <gh-panel-card layout="row gap">
               <div layout="grow">
                 <ui-text type="label-m">
+                  <!-- Add domain as exception -->
                   Add ${stats.domain} as exception
                 </ui-text>
                 <ui-text type="body-s" color="gray-500">

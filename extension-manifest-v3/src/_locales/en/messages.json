@@ -3,10 +3,12 @@
     "message": "$${0} left"
   },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} will be trusted on this website."
+    "message": "$${0} will be trusted on this website.",
+    "description": "A tracker will be trusted on this website."
   },
-  "@_1__will_be_blocked_on_this_website_": {
-    "message": "$${1} will be blocked on this website."
+  "@_0__will_be_blocked_on_this_website_": {
+    "message": "$${0} will be blocked on this website.",
+    "description": "A tracker will be trusted on this website."
   },
   "1_day": {
     "message": "1 day"
@@ -27,7 +29,8 @@
     "message": "Add"
   },
   "add_@_0__as_exception": {
-    "message": "Add $${0} as exception"
+    "message": "Add $${0} as exception",
+    "description": "Add domain as exception"
   },
   "add_website_exception": {
     "message": "Add website exception"
@@ -81,7 +84,8 @@
     "message": "Blocked"
   },
   "blocked__@_0_": {
-    "message": "Blocked: $${0}"
+    "message": "Blocked: $${0}",
+    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Blocked on all websites"
@@ -122,6 +126,9 @@
   "contact_support": {
     "message": "Contact support"
   },
+  "contribute_to_ghostery_tracker_database_on_github": {
+    "message": "Contribute to Ghostery Tracker Database on Github"
+  },
   "contributor": {
     "message": "Contributor"
   },
@@ -135,7 +142,8 @@
     "message": "Create Account"
   },
   "current_protection_status_for_@_0__": {
-    "message": "Current protection status for $${0}:"
+    "message": "Current protection status for $${0}:",
+    "description": "urrent protection status for a tracker"
   },
   "customer_interaction": {
     "message": "Customer Interaction",
@@ -399,11 +407,8 @@
     "message": "Other",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity__blocked": {
-    "message": "Our recommendation for this activity: Blocked"
-  },
-  "our_recommendation_for_this_activity__trusted": {
-    "message": "Our recommendation for this activity: Trusted"
+  "our_recommendation_for_this_activity": {
+    "message": "Our recommendation for this activity"
   },
   "pause_on_this_site": {
     "message": "Pause on this site"
@@ -517,7 +522,7 @@
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
   "tracker_database": {
-    "message": "Tracker database"
+    "message": "Tracker Database"
   },
   "trackers": {
     "message": "Trackers"
@@ -547,7 +552,8 @@
     "message": "Trusted"
   },
   "trusted__@_0_": {
-    "message": "Trusted: $${0}"
+    "message": "Trusted: $${0}",
+    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "Trusted on all websites"
@@ -570,9 +576,6 @@
   },
   "view_activity_details": {
     "message": "View activity details"
-  },
-  "view_trackerdb_on_github": {
-    "message": "View trackerdb on GitHub"
   },
   "visit_our_blog": {
     "message": "Visit our blog"
