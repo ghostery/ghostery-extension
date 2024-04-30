@@ -119,9 +119,8 @@ export default {
                     layout="row content:start padding"
                   >
                     <ui-icon name="info-filled"></ui-icon>
-                    ${tracker.blockedByDefault
-                      ? msg`Our recommendation for this activity: Blocked`
-                      : msg`Our recommendation for this activity: Trusted`}
+                    ${msg`Our recommendation for this activity`}:
+                    ${tracker.blockedByDefault ? msg`Blocked` : msg`Trusted`}
                   </gh-settings-badge>
                 </div>
               </div>
