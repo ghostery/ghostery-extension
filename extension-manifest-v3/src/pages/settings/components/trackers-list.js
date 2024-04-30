@@ -60,9 +60,11 @@ export default {
               </ui-text>
               <div layout="column" layout@768px="row gap">
                 <ui-text type="body-s" color="gray-600" layout="width::90px">
+                  <!-- A number of blocked trackers, eg: 'Blocked: 2' -->
                   Blocked: ${blocked}
                 </ui-text>
                 <ui-text type="body-s" color="gray-600" layout="width::90px">
+                  <!-- A number of trusted trackers eg: 'Trusted: 2' -->
                   Trusted: ${trusted}
                 </ui-text>
               </div>
