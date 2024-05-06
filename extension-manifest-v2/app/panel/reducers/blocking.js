@@ -296,7 +296,7 @@ export default (state = initialState, action = null) => {
 			if (action.data.antiTracking && action.data.adBlock) {
 				const { antiTracking, adBlock } = action.data;
 				const { common_whitelist, pageUrl } = state;
-				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers, common_whitelist, pageUrl);
+				const trackers = mergeTrackers(adBlock.unidentifiedTrackers, antiTracking.unidentifiedTrackers, common_whitelist || action.data.common_whitelist, pageUrl);
 				const unidentifiedCategory = {
 					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
 					totalUnidentifiedCount: antiTracking.totalUnidentifiedCount + adBlock.totalUnidentifiedCount,
