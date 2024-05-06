@@ -81,12 +81,12 @@ export default {
                   </div>
                 </ui-panel-action>
               `
-            : html`<ui-panel-action layout="width:full">
+            : html`<ui-panel-action layout="width:full height:auto">
                 <a
                   href="${router.url(ProtectionStatus, {
                     trackerId: tracker.id,
                   })}"
-                  layout="row gap"
+                  layout="row gap padding:0:1.5"
                 >
                   <ui-icon
                     name="${status.type}-m"
@@ -94,7 +94,10 @@ export default {
                       ? 'gray-800'
                       : 'success-500'}"
                   ></ui-icon>
-                  <ui-text type="label-m" layout="row gap">
+                  <ui-text
+                    type="label-m"
+                    layout="block:center row gap center padding:2px:0"
+                  >
                     ${status.website
                       ? (status.type === 'trust' &&
                           html`Trusted on this website`) ||
@@ -109,7 +112,7 @@ export default {
               </ui-panel-action>`}
           ${tracker.category !== 'unidentified' &&
           html`
-            <ui-panel-action layout="width:4.5">
+            <ui-panel-action layout="width:4.5 height:auto:4.5">
               <a
                 href="${chrome.runtime.getURL(
                   `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
