@@ -341,6 +341,12 @@
   "load_more": {
     "message": "さらに読み込む"
   },
+  "manifest_name": {
+    "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
+  },
+  "manifest_short_description": {
+    "message": "Ghosteryは強力なプライバシー拡張機能です。広告をブロックし、トラッカーを阻止し、ウェブサイトを高速化します。"
+  },
   "menu": {
     "message": "メニュー"
   },

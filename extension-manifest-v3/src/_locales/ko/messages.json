@@ -341,6 +341,12 @@
   "load_more": {
     "message": "자세히 알아보기"
   },
+  "manifest_name": {
+    "message": "고스터리 트래커 및 광고 차단기 - 프라이버시 AdBlock"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery는 강력한 개인정보 보호 확장 프로그램입니다. 광고와 트래커를 차단하고 웹 사이트의 속도를 높여줍니다."
+  },
   "menu": {
     "message": "메뉴"
   },

@@ -341,6 +341,12 @@
   "load_more": {
     "message": "Załaduj więcej"
   },
+  "manifest_name": {
+    "message": "Ghostery Bloker Trackerów i Reklam - Prywatność AdBlock"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery to potężne rozszerzenie do ochrony prywatności. Blokuje reklamy, zatrzymuje trackery i przyspiesza działanie stron internetowych."
+  },
   "menu": {
     "message": "Menu"
   },

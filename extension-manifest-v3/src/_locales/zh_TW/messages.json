@@ -341,6 +341,12 @@
   "load_more": {
     "message": "載入更多"
   },
+  "manifest_name": {
+    "message": "Ghostery 追蹤器和廣告攔截器 - 隱私 AdBlock"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery是一個強效的隱私擴增功能。攔截廣告、制止追蹤器及加快網頁運行。"
+  },
   "menu": {
     "message": "選單"
   },
