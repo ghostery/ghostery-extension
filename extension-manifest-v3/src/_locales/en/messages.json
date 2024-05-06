@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "Add website exception"
   },
-  "adjusted": {
-    "message": "adjusted"
+  "adjusted___tracker": {
+    "message": "adjusted",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Adjusted",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Adult Advertising",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "Become a Contributor"
   },
-  "block_all__recommend_": {
-    "message": "Block all (recommend)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "Block on this website"
@@ -545,8 +550,8 @@
   "trackers_wheel": {
     "message": "Trackers Wheel"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "Trust on this website"

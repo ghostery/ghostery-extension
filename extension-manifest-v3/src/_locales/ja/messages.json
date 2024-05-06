@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "ウェブサイトの例外を追加"
   },
-  "adjusted": {
-    "message": "調整済み"
+  "adjusted___tracker": {
+    "message": "調整済み",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "調整済み",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "アダルト広告",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "Contributorになる"
   },
-  "block_all__recommend_": {
-    "message": "すべてをブロック (推奨)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "このウェブサイトでブロック"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "さらに読み込む"
   },
-  "manifest_name": {
-    "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
-  },
-  "manifest_short_description": {
-    "message": "Ghosteryは強力なプライバシー拡張機能です。広告をブロックし、トラッカーを阻止し、ウェブサイトを高速化します。"
-  },
   "menu": {
     "message": "メニュー"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "トラッカーホイール"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "このウェブサイトで信頼"

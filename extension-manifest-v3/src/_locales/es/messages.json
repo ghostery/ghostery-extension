@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "Añadir excepción de sitio web"
   },
-  "adjusted": {
-    "message": "ajustado"
+  "adjusted___tracker": {
+    "message": "ajustado",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Ajustado",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Publicidad para adultos",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "Conviértete en Contribuyente"
   },
-  "block_all__recommend_": {
-    "message": "Bloquear todo (recomendado)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "Bloquear en este sitio web"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "Cargar más"
   },
-  "manifest_name": {
-    "message": "Ghostery Rastreador & Bloqueador de anuncios - Privacidad AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery es una potente extensión para tu privacidad. Bloquea anuncios, detiene rastreadores y acelera sitios web."
-  },
   "menu": {
     "message": "Menú"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "Rueda de rastreadores"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "Confiar en este sitio web"

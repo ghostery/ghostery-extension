@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "웹사이트 예외 추가"
   },
-  "adjusted": {
-    "message": "조정됨"
+  "adjusted___tracker": {
+    "message": "조정됨",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "조정됨",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "성인 광고 ",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "기부자가 되세요."
   },
-  "block_all__recommend_": {
-    "message": "모두 차단(권장)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "이 웹사이트상에서 차단"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "자세히 알아보기"
   },
-  "manifest_name": {
-    "message": "고스터리 트래커 및 광고 차단기 - 프라이버시 AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery는 강력한 개인정보 보호 확장 프로그램입니다. 광고와 트래커를 차단하고 웹 사이트의 속도를 높여줍니다."
-  },
   "menu": {
     "message": "메뉴"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "트래커 휠"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "이 웹사이트상에서 신뢰"

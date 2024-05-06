@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "新增網站例外"
   },
-  "adjusted": {
-    "message": "已調整"
+  "adjusted___tracker": {
+    "message": "已調整",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "已调整",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "成人廣告",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "成為捐助者"
   },
-  "block_all__recommend_": {
-    "message": "全部封鎖（推薦）"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "在此網站封鎖"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "載入更多"
   },
-  "manifest_name": {
-    "message": "Ghostery 追蹤器和廣告攔截器 - 隱私 AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery是一個強效的隱私擴增功能。攔截廣告、制止追蹤器及加快網頁運行。"
-  },
   "menu": {
     "message": "選單"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "追踪器輪盤"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "信任此網站"

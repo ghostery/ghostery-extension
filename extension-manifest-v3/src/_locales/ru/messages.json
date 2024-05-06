@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "Добавить сайт в качестве исключения"
   },
-  "adjusted": {
-    "message": "изменено"
+  "adjusted___tracker": {
+    "message": "изменено",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Изменено",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Реклама для взрослых",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "Стать участником"
   },
-  "block_all__recommend_": {
-    "message": "Заблокировать все (рекомендуется)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "Заблокировать на этом сайте"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "Показать еще"
   },
-  "manifest_name": {
-    "message": "Ghostery Трекер & Ad Blocker - приватный блокировщик рекламы"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery - это мощное расширение для обеспечения конфиденциальности. Блокируйте рекламу, отключайте средства слежения и ускоряйте загрузку веб-сайтов."
-  },
   "menu": {
     "message": "Меню"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "Трекерская рулетка"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "Разрешить на этом сайте"

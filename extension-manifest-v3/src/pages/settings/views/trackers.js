@@ -137,7 +137,9 @@ export default {
               <gh-settings-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
                   <option selected value="">Show all</option>
-                  <option value="adjusted">Adjusted</option>
+                  <option value="adjusted">
+                    <!-- Plural form - list of adjusted trackers | tracker-list -->Adjusted
+                  </option>
                   <option value="blocked">Blocked</option>
                   <option value="trusted">Trusted</option>
                 </select>
@@ -214,7 +216,7 @@ export default {
                                       tracker.blockedByDefault &&
                                     html`
                                       <ui-text type="label-s" color="gray-500">
-                                        adjusted
+                                        <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                       </ui-text>
                                     `}
                                     <ui-panel-protection-status-toggle

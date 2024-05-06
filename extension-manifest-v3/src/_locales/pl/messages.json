@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "Dodaj wyjątek dla tej witryny"
   },
-  "adjusted": {
-    "message": "dostosowano"
+  "adjusted___tracker": {
+    "message": "dostosowano",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Dostosowane",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Reklama dla dorosłych",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "Zostań Kontrybutorem"
   },
-  "block_all__recommend_": {
-    "message": "Zablokuj wszystkie (zalecane)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "Zablokuj na tej stronie"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "Załaduj więcej"
   },
-  "manifest_name": {
-    "message": "Ghostery Bloker Trackerów i Reklam - Prywatność AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery to potężne rozszerzenie do ochrony prywatności. Blokuje reklamy, zatrzymuje trackery i przyspiesza działanie stron internetowych."
-  },
   "menu": {
     "message": "Menu"
   },
@@ -525,7 +524,7 @@
     "message": "Baza danych Trackerów"
   },
   "trackers": {
-    "message": "Tropiciele"
+    "message": "Trackery"
   },
   "trackers_blocked": {
     "message": "Zablokowane trackery"
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "Wykres kołowy z trackerami"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "Zaufaj na tej stronie"

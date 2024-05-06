@@ -75,8 +75,8 @@ export default {
         <ui-tooltip>
           <span slot="content">
             ${blockedByDefault
-              ? msg`Block all (recommend)`
-              : msg`Trust all (recommend)`}
+              ? msg`Block all (recommended)`
+              : msg`Trust all (recommended)`}
           </span>
           <ui-panel-action layout="width:4.5">
             <button onclick="${(host) => dispatch(host, 'clear')}">

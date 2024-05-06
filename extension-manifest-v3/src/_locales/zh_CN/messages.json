@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "添加网站异常"
   },
-  "adjusted": {
-    "message": "已调整"
+  "adjusted___tracker": {
+    "message": "已调整",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "已调整",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "成人广告",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "成为贡献者"
   },
-  "block_all__recommend_": {
-    "message": "阻止所有（推荐）"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "阻止此网站"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "加载更多"
   },
-  "manifest_name": {
-    "message": "Ghostery 跟踪器和广告拦截器 - 隐私广告拦截器"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。"
-  },
   "menu": {
     "message": "菜单"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "跟踪器轮"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "信任此网站"

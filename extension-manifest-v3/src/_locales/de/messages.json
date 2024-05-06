@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "Website-Ausnahme hinzufügen"
   },
-  "adjusted": {
-    "message": "angepasst"
+  "adjusted___tracker": {
+    "message": "angepasst",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Angepasst",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Erwachsenenwerbung",
@@ -74,8 +79,8 @@
   "become_a_contributor": {
     "message": "Werde Ghostery-Förderer"
   },
-  "block_all__recommend_": {
-    "message": "Alle blockieren (empfohlen)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "Auf dieser Website blockieren"
@@ -336,12 +341,6 @@
   "load_more": {
     "message": "Mehr laden"
   },
-  "manifest_name": {
-    "message": "Ghostery Tracker- & Werbeblocker | Datenschutz AdBlocker"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery ist eine leistungsstarke Datenschutz-Erweiterung. Damit können Sie Werbung blockieren, Tracker stoppen und Websites beschleunigen."
-  },
   "menu": {
     "message": "Menü"
   },
@@ -545,8 +544,8 @@
   "trackers_wheel": {
     "message": "Tracker-Rad"
   },
-  "trust_all__recommend_": {
-    "message": "Trust all (recommend)"
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
   },
   "trust_on_this_website": {
     "message": "Auf dieser Website vertrauen"
