@@ -2,11 +2,13 @@
   "@_0__left": {
     "message": "$${0} 残"
   },
-  "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} will be trusted on this website."
+  "@_0__will_be_blocked_on_this_website_": {
+    "message": "$${0}はこのウェブサイトでブロックされます。",
+    "description": "A tracker will be trusted on this website."
   },
-  "@_1__will_be_blocked_on_this_website_": {
-    "message": "$${1} will be blocked on this website."
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0}はこのウェブサイトで信頼可能です。",
+    "description": "A tracker will be trusted on this website."
   },
   "1_day": {
     "message": "1日"
@@ -24,16 +26,17 @@
     "message": "広告ブロッキング"
   },
   "add": {
-    "message": "Add"
+    "message": "追加"
   },
   "add_@_0__as_exception": {
-    "message": "Add $${0} as exception"
+    "message": "$${0}を例外として追加",
+    "description": "Add domain as exception"
   },
   "add_website_exception": {
-    "message": "Add website exception"
+    "message": "ウェブサイトの例外を追加"
   },
   "adjusted": {
-    "message": "adjusted"
+    "message": "調整済み"
   },
   "adult_advertising": {
     "message": "アダルト広告",
@@ -72,28 +75,29 @@
     "message": "Contributorになる"
   },
   "block_all__recommend_": {
-    "message": "Block all (recommend)"
+    "message": "すべてをブロック (推奨)"
   },
   "block_on_this_website": {
-    "message": "Block on this website"
+    "message": "このウェブサイトでブロック"
   },
   "blocked": {
-    "message": "Blocked"
+    "message": "ブロックされた対象"
   },
   "blocked__@_0_": {
-    "message": "Blocked: $${0}"
+    "message": "ブロック済み: $${0}",
+    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
-    "message": "Blocked on all websites"
+    "message": "すべてのウェブサイトでブロック済み"
   },
   "blocked_on_this_website": {
-    "message": "Blocked on this website"
+    "message": "このウェブサイトでブロック済み"
   },
   "cancel": {
     "message": "キャンセル"
   },
   "category": {
-    "message": "Category"
+    "message": "カテゴリ"
   },
   "cdn": {
     "message": "CDN",
@@ -106,7 +110,7 @@
     "message": "検索バーの横にあるパズルのアイコンをクリックし、Ghosteryをツールバーに固定します。"
   },
   "collapse": {
-    "message": "Collapse"
+    "message": "折り畳む"
   },
   "comments": {
     "message": "コメント",
@@ -122,6 +126,9 @@
   "contact_support": {
     "message": "お問い合わせ先"
   },
+  "contribute_to_ghostery_tracker_database_on_github": {
+    "message": "GithubでGhosteryトラッカーデータベースに寄付"
+  },
   "contributor": {
     "message": "Contributor"
   },
@@ -129,13 +136,14 @@
     "message": "クリップボードにコピー済み"
   },
   "country": {
-    "message": "Country"
+    "message": "国"
   },
   "create_account": {
     "message": "アカウントを作成"
   },
   "current_protection_status_for_@_0__": {
-    "message": "Current protection status for $${0}:"
+    "message": "$${0}の現在の保護ステータス: ",
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "顧客インタラクション",
@@ -204,7 +212,7 @@
     "description": "Tracker category name"
   },
   "expand": {
-    "message": "Expand"
+    "message": "展開"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "簡単なステップで、Ghosteryの広告ブロッキングを検索エンジンへと拡張できます。"
@@ -214,7 +222,7 @@
     "description": "Tracker category name"
   },
   "for_all_websites": {
-    "message": "For all websites"
+    "message": "すべてのウェブサイトに対して"
   },
   "for_more_information_read_our_full": {
     "message": "詳細はこちらをご覧ください"
@@ -326,7 +334,7 @@
     "message": "広告ブロッカーに対するYouTubeの挑戦についてもっと知る"
   },
   "load_more": {
-    "message": "Load more"
+    "message": "さらに読み込む"
   },
   "manifest_name": {
     "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
@@ -345,13 +353,13 @@
     "description": "Tracker category name"
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
-    "message": "Modify the recommended blocking settings for every website."
+    "message": "それぞれのウェブサイトについて推奨されるブロック設定を変更します。"
   },
   "more_ad_blocking_available": {
     "message": "利用できるその他の広告ブロッキング"
   },
   "more_in_this_organization": {
-    "message": "More in this organization"
+    "message": "この組織の詳細"
   },
   "my_account": {
     "message": "アカウント"
@@ -363,10 +371,10 @@
     "message": "決して同意しない"
   },
   "no_activities_detected": {
-    "message": "No activities detected"
+    "message": "アクティビティは検出されませんでした"
   },
   "no_websites_exceptions_added_yet": {
-    "message": "No websites exceptions added yet"
+    "message": "ウェブサイトの例外はまだ追加されていません"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "ネットワークリクエストがブロックされたトラッカーの数。"
@@ -375,7 +383,7 @@
     "message": "Cookieまたはフィンガープリントが削除されたトラッカーの数。"
   },
   "observed_activities": {
-    "message": "Observed activities"
+    "message": "観察済みのアクティビティ"
   },
   "off": {
     "message": "オフ"
@@ -390,20 +398,17 @@
     "message": "YouTubeをプライベートウィンドウで開く"
   },
   "organization": {
-    "message": "Organization"
+    "message": "組織"
   },
   "organization_s_website": {
-    "message": "Organization's website"
+    "message": "組織のウェブサイト"
   },
   "other": {
     "message": "その他",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity__blocked": {
-    "message": "Our recommendation for this activity: Blocked"
-  },
-  "our_recommendation_for_this_activity__trusted": {
-    "message": "Our recommendation for this activity: Trusted"
+  "our_recommendation_for_this_activity": {
+    "message": "このアクティビティのおすすめ"
   },
   "pause_on_this_site": {
     "message": "このサイトでのポーズ"
@@ -436,7 +441,7 @@
     "message": "プライバシー保護"
   },
   "protection_status": {
-    "message": "Protection status"
+    "message": "保護ステータス"
   },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
@@ -457,7 +462,7 @@
     "message": "再開"
   },
   "save": {
-    "message": "Save"
+    "message": "保存"
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
@@ -469,7 +474,7 @@
     "message": "サイトを検索..."
   },
   "set_blocking_preference": {
-    "message": "Set blocking preference"
+    "message": "ブロック設定に進む"
   },
   "settings": {
     "message": "設定"
@@ -481,7 +486,7 @@
     "message": "セットアップ成功"
   },
   "show_all": {
-    "message": "Show all"
+    "message": "すべてを表示"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "検索結果の横にトラッカープレビューを表示します。"
@@ -514,13 +519,13 @@
     "message": "利用規約"
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
+    "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
   },
   "tracker_database": {
-    "message": "Tracker database"
+    "message": "トラッカー・データベース"
   },
   "trackers": {
-    "message": "Trackers"
+    "message": "トラッカー"
   },
   "trackers_blocked": {
     "message": "ブロックされたトラッカー"
@@ -540,20 +545,24 @@
   "trackers_wheel": {
     "message": "トラッカーホイール"
   },
+  "trust_all__recommend_": {
+    "message": "Trust all (recommend)"
+  },
   "trust_on_this_website": {
-    "message": "Trust on this website"
+    "message": "このウェブサイトで信頼"
   },
   "trusted": {
-    "message": "Trusted"
+    "message": "信頼済み"
   },
   "trusted__@_0_": {
-    "message": "Trusted: $${0}"
+    "message": "信頼済み: $${0}",
+    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
-    "message": "Trusted on all websites"
+    "message": "すべてのウェブサイトで信頼済み"
   },
   "trusted_on_this_website": {
-    "message": "Trusted on this website"
+    "message": "このウェブサイトで信頼済み"
   },
   "unidentified": {
     "message": "未知",
@@ -569,10 +578,7 @@
     "message": "観察済みURL"
   },
   "view_activity_details": {
-    "message": "View activity details"
-  },
-  "view_trackerdb_on_github": {
-    "message": "View trackerdb on GitHub"
+    "message": "アクティビティの詳細を表示"
   },
   "visit_our_blog": {
     "message": "ブログを見る"
@@ -587,7 +593,7 @@
     "message": "ウェブサイト"
   },
   "website_exceptions": {
-    "message": "Website exceptions"
+    "message": "ウェブサイトの例外"
   },
   "websites": {
     "message": "ウェブサイト"
@@ -614,7 +620,7 @@
     "message": "プライバシー機能が有効になっていない場合、トラッカーの命名の基本的な機能のみが利用可能です。"
   },
   "you_are_awesome_": {
-    "message": "You are awesome!"
+    "message": "ありがとうございます！"
   },
   "you_are_signed_in_as_": {
     "message": "次のユーザーでサインインしています:"

@@ -76,7 +76,7 @@ export default {
           <span slot="content">
             ${blockedByDefault
               ? msg`Block all (recommend)`
-              : `Trust all (recommend)`}
+              : msg`Trust all (recommend)`}
           </span>
           <ui-panel-action layout="width:4.5">
             <button onclick="${(host) => dispatch(host, 'clear')}">

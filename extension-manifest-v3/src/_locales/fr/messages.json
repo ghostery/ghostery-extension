@@ -2,11 +2,13 @@
   "@_0__left": {
     "message": "$${0} gauche"
   },
-  "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} will be trusted on this website."
+  "@_0__will_be_blocked_on_this_website_": {
+    "message": "$${0} sera bloqué sur ce site web.",
+    "description": "A tracker will be trusted on this website."
   },
-  "@_1__will_be_blocked_on_this_website_": {
-    "message": "$${1} will be blocked on this website."
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} sera autorisé sur ce site web.",
+    "description": "A tracker will be trusted on this website."
   },
   "1_day": {
     "message": "1 jour"
@@ -24,16 +26,17 @@
     "message": "Blocage de publicité"
   },
   "add": {
-    "message": "Add"
+    "message": "Ajouter"
   },
   "add_@_0__as_exception": {
-    "message": "Add $${0} as exception"
+    "message": "Ajouter $${0} comme exception",
+    "description": "Add domain as exception"
   },
   "add_website_exception": {
-    "message": "Add website exception"
+    "message": "Ajouter une exception de site web"
   },
   "adjusted": {
-    "message": "adjusted"
+    "message": "ajusté"
   },
   "adult_advertising": {
     "message": "Publicités réservées aux publics adultes",
@@ -72,28 +75,29 @@
     "message": "Devenez donateur"
   },
   "block_all__recommend_": {
-    "message": "Block all (recommend)"
+    "message": "Tout bloquer (recommandé)"
   },
   "block_on_this_website": {
-    "message": "Block on this website"
+    "message": "Bloquer sur ce site web"
   },
   "blocked": {
-    "message": "Blocked"
+    "message": "Bloqué"
   },
   "blocked__@_0_": {
-    "message": "Blocked: $${0}"
+    "message": "Bloqués : $${0}",
+    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
-    "message": "Blocked on all websites"
+    "message": "Bloqués sur tous les sites web"
   },
   "blocked_on_this_website": {
-    "message": "Blocked on this website"
+    "message": "Bloqués sur ce site web"
   },
   "cancel": {
     "message": "Annuler"
   },
   "category": {
-    "message": "Category"
+    "message": "Catégorie"
   },
   "cdn": {
     "message": "CDN",
@@ -106,7 +110,7 @@
     "message": "Cliquez sur l'icône de puzzle en regard de la barre de recherche et épinglez Ghostery à votre barre d'outils."
   },
   "collapse": {
-    "message": "Collapse"
+    "message": "Réduire"
   },
   "comments": {
     "message": "Commentaires",
@@ -122,6 +126,9 @@
   "contact_support": {
     "message": "Contacter l'assistance"
   },
+  "contribute_to_ghostery_tracker_database_on_github": {
+    "message": "Contribuer à la base de données de trackers de Ghostery sur Github"
+  },
   "contributor": {
     "message": "Contributeur"
   },
@@ -129,13 +136,14 @@
     "message": "Copié dans le presse-papiers"
   },
   "country": {
-    "message": "Country"
+    "message": "Pays"
   },
   "create_account": {
     "message": "Créer un compte"
   },
   "current_protection_status_for_@_0__": {
-    "message": "Current protection status for $${0}:"
+    "message": "Statut de protection actuel pour $${0} :",
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "Interaction avec les clients",
@@ -204,7 +212,7 @@
     "description": "Tracker category name"
   },
   "expand": {
-    "message": "Expand"
+    "message": "Développer"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Étendez le blocage des publicités de Ghostery aux moteurs de recherche en quelques étapes simples."
@@ -214,7 +222,7 @@
     "description": "Tracker category name"
   },
   "for_all_websites": {
-    "message": "For all websites"
+    "message": "Pour tous les sites web"
   },
   "for_more_information_read_our_full": {
     "message": "Pour plus d'information, lisez notre"
@@ -326,7 +334,7 @@
     "message": "En savoir plus sur les défis de YouTube face aux bloqueurs de publicité."
   },
   "load_more": {
-    "message": "Load more"
+    "message": "Charger plus"
   },
   "manifest_name": {
     "message": "Ghostery Bloqueur de Traqueurs et de Publicités - confidentialité"
@@ -345,13 +353,13 @@
     "description": "Tracker category name"
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
-    "message": "Modify the recommended blocking settings for every website."
+    "message": "Modifiez les réglages de blocage recommandés pour chaque site web."
   },
   "more_ad_blocking_available": {
     "message": "Davantage de blocage de publicités disponible"
   },
   "more_in_this_organization": {
-    "message": "More in this organization"
+    "message": "Plus dans cette organisation"
   },
   "my_account": {
     "message": "Mon compte"
@@ -363,10 +371,10 @@
     "message": "Never-Consent"
   },
   "no_activities_detected": {
-    "message": "No activities detected"
+    "message": "Aucune activité détectée"
   },
   "no_websites_exceptions_added_yet": {
-    "message": "No websites exceptions added yet"
+    "message": "Aucune exception de site web ajoutée pour l'instant"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "Nombre de mouchards avec des demandes de réseau bloquées."
@@ -375,7 +383,7 @@
     "message": "Nombre de mouchards avec des empreintes ou des cookies supprimés."
   },
   "observed_activities": {
-    "message": "Observed activities"
+    "message": "Activités observées"
   },
   "off": {
     "message": "désactivé"
@@ -390,20 +398,17 @@
     "message": "Ouvre YouTube dans une fenêtre privée"
   },
   "organization": {
-    "message": "Organization"
+    "message": "Organisation"
   },
   "organization_s_website": {
-    "message": "Organization's website"
+    "message": "Site web de l'organisation"
   },
   "other": {
     "message": "Non-classés",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity__blocked": {
-    "message": "Our recommendation for this activity: Blocked"
-  },
-  "our_recommendation_for_this_activity__trusted": {
-    "message": "Our recommendation for this activity: Trusted"
+  "our_recommendation_for_this_activity": {
+    "message": "Notre recommandation pour cette activité"
   },
   "pause_on_this_site": {
     "message": "Pause sur ce site"
@@ -436,7 +441,7 @@
     "message": "Protection de la vie privée"
   },
   "protection_status": {
-    "message": "Protection status"
+    "message": "Statut de protection"
   },
   "read_more_on_whotracks_me": {
     "message": "Plus d'informations sur WhoTracks.Me"
@@ -457,7 +462,7 @@
     "message": "Reprendre"
   },
   "save": {
-    "message": "Save"
+    "message": "Enregistrer"
   },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "Enregistrez et synchronisez vos paramètres personnalisés sur vos navigateurs et vos appareils."
@@ -469,7 +474,7 @@
     "message": "Rechercher sur le site..."
   },
   "set_blocking_preference": {
-    "message": "Set blocking preference"
+    "message": "Définir la préférence de blocage"
   },
   "settings": {
     "message": "Paramètres"
@@ -481,7 +486,7 @@
     "message": "Configuration réussie"
   },
   "show_all": {
-    "message": "Show all"
+    "message": "Tout afficher"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Affiche l'aperçu des trackers à côté des résultats de recherche."
@@ -514,13 +519,13 @@
     "message": "Conditions générales d'utilisation"
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
+    "message": "Merci de soutenir la lutte de Ghostery pour un Web où la vie privée est un droit humain fondamental !"
   },
   "tracker_database": {
-    "message": "Tracker database"
+    "message": "Fichage de traqueurs"
   },
   "trackers": {
-    "message": "Trackers"
+    "message": "mouchards"
   },
   "trackers_blocked": {
     "message": "Mouchards bloqués"
@@ -540,20 +545,24 @@
   "trackers_wheel": {
     "message": "Camembert des trackers"
   },
+  "trust_all__recommend_": {
+    "message": "Trust all (recommend)"
+  },
   "trust_on_this_website": {
-    "message": "Trust on this website"
+    "message": "Autoriser sur ce site web"
   },
   "trusted": {
-    "message": "Trusted"
+    "message": "Autorisé"
   },
   "trusted__@_0_": {
-    "message": "Trusted: $${0}"
+    "message": "Autorisés : $${0}",
+    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
-    "message": "Trusted on all websites"
+    "message": "Autorisés sur tous les sites web"
   },
   "trusted_on_this_website": {
-    "message": "Trusted on this website"
+    "message": "Autorisés sur ce site web"
   },
   "unidentified": {
     "message": "Non identifié",
@@ -569,10 +578,7 @@
     "message": "URL observées"
   },
   "view_activity_details": {
-    "message": "View activity details"
-  },
-  "view_trackerdb_on_github": {
-    "message": "View trackerdb on GitHub"
+    "message": "Afficher les détails de l'activité"
   },
   "visit_our_blog": {
     "message": "Visite notre blog"
@@ -587,7 +593,7 @@
     "message": "Site Web"
   },
   "website_exceptions": {
-    "message": "Website exceptions"
+    "message": "Exceptions de site web"
   },
   "websites": {
     "message": "Sites Web"
@@ -614,7 +620,7 @@
     "message": "Sans activation des fonctionnalités de confidentialité, seule la fonction de base identifiant les traqueurs est disponible."
   },
   "you_are_awesome_": {
-    "message": "You are awesome!"
+    "message": "Vous êtes super !"
   },
   "you_are_signed_in_as_": {
     "message": "Vous êtes connecté en tant que :"

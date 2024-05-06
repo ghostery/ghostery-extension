@@ -2,12 +2,12 @@
   "@_0__left": {
     "message": "$${0} left"
   },
-  "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} will be trusted on this website.",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_blocked_on_this_website_": {
     "message": "$${0} will be blocked on this website.",
+    "description": "A tracker will be trusted on this website."
+  },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} will be trusted on this website.",
     "description": "A tracker will be trusted on this website."
   },
   "1_day": {
@@ -143,7 +143,7 @@
   },
   "current_protection_status_for_@_0__": {
     "message": "Current protection status for $${0}:",
-    "description": "urrent protection status for a tracker"
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "Customer Interaction",
@@ -544,6 +544,9 @@
   },
   "trackers_wheel": {
     "message": "Trackers Wheel"
+  },
+  "trust_all__recommend_": {
+    "message": "Trust all (recommend)"
   },
   "trust_on_this_website": {
     "message": "Trust on this website"
