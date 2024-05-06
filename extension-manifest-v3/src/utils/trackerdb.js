@@ -9,10 +9,31 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { order as categoryOrder } from '@ghostery/ui/categories';
-
 import * as engines from './engines.js';
 import { getException } from '../background/exceptions.js';
+
+// TODO: remove after sunsetting Ghostery 8
+// This code is a duplicate of '@ghostery/ui/categories'
+// It's a walkaround to deal with WebPack problems with import.meta in @ghostery/ui when using type=module
+const categoryOrder = [
+  'advertising',
+  'site_analytics',
+  'consent',
+  'essential',
+  'hosting',
+  'customer_interaction',
+  'audio_video_player',
+  'cdn',
+  'comments',
+  'email',
+  'extensions',
+  'misc',
+  'pornvertising',
+  'social_media',
+  'telemetry',
+  'unidentified',
+  'other',
+];
 
 let promise = engines.init(engines.TRACKERDB_ENGINE).then(() => {
   promise = null;
