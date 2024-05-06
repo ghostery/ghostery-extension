@@ -17,7 +17,7 @@ import globals from './Globals';
 import conf from './Conf';
 
 export function getPatternId(pattern) {
-	return String(pattern.ghostery_id) || pattern.key;
+	return pattern.ghostery_id ? String(pattern.ghostery_id) : pattern.key;
 }
 
 async function getEngine() {
