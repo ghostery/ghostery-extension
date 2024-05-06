@@ -1056,6 +1056,7 @@ function isWhitelistedForAdblocking(state) {
 function isWhitelistedForAntiTracking(state) {
 	return (
 		Boolean(globals.SESSION.paused_blocking)
+		|| Boolean(state.ghosteryWhitelisted)
 		|| (Policy.getSitePolicy(state.tabUrl, state.url) === 2)
 		// only check common_checklist if the tracker id is unknown
 		|| (!state.ghosteryBug && Policy.checkCommonModuleWhitelist(state.tabUrlParts.domainInfo.domain, state.urlParts.domainInfo.domain))
