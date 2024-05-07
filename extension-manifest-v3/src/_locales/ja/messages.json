@@ -213,7 +213,7 @@
     "message": "有効になっています"
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "ウェブサイトのURLを入力"
   },
   "essential": {
     "message": "必需",
@@ -479,7 +479,7 @@
     "message": "検索エンジンのリダイレクト保護"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "トラッカーや組織を検索..."
   },
   "search_website___": {
     "message": "サイトを検索..."

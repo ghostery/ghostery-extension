@@ -213,7 +213,7 @@
     "message": "활성화됨 "
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "웹사이트 URL 입력"
   },
   "essential": {
     "message": "필수 ",
@@ -479,7 +479,7 @@
     "message": "검색결과 리디렉션 보호"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "트래커 또는 조직 검색..."
   },
   "search_website___": {
     "message": "웹사이트 검색..."

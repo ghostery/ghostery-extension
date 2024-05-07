@@ -213,7 +213,7 @@
     "message": "Włączone"
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "Wprowadź adres URL witryny"
   },
   "essential": {
     "message": "Istotne",
@@ -479,7 +479,7 @@
     "message": "Ochrona przekierowywania wyszukiwarki"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "Szukaj trackera lub organizacji..."
   },
   "search_website___": {
     "message": "Wyszukiwanie witryny..."

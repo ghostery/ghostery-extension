@@ -213,7 +213,7 @@
     "message": "Habilitado"
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "Introduce la URL del sitio web"
   },
   "essential": {
     "message": "Esencial",
@@ -479,7 +479,7 @@
     "message": "Protección frente al redireccionamiento en buscadores"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "Busca un Rastreador u organización..."
   },
   "search_website___": {
     "message": "Buscar sitio web..."

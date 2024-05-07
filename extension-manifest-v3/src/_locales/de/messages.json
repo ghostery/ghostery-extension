@@ -213,7 +213,7 @@
     "message": "Aktiviert"
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "URL der Website eingeben"
   },
   "essential": {
     "message": "Essenziell",
@@ -479,7 +479,7 @@
     "message": "Schutz vor Suchmaschinenumleitungen"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "Suche nach einer Tracker oder Organisation..."
   },
   "search_website___": {
     "message": "Website durchsuchen ..."

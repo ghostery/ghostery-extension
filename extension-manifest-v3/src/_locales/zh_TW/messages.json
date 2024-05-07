@@ -213,7 +213,7 @@
     "message": "已啟用"
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "輸入網站網址"
   },
   "essential": {
     "message": "基本內容",
@@ -479,7 +479,7 @@
     "message": "搜尋引擎重新導向保護"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "搜尋追蹤器或組織..."
   },
   "search_website___": {
     "message": "搜尋網站......"

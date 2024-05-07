@@ -213,7 +213,7 @@
     "message": "已启用"
   },
   "enter_website_url": {
-    "message": "Enter website URL"
+    "message": "输入网站 URL"
   },
   "essential": {
     "message": "基本",
@@ -479,7 +479,7 @@
     "message": "搜索引擎重定向保护"
   },
   "search_for_a_tracker_or_organization___": {
-    "message": "Search for a tracker or organization..."
+    "message": "搜索跟踪器或组织..."
   },
   "search_website___": {
     "message": "搜索网站..."
