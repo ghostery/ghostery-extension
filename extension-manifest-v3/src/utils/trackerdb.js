@@ -55,6 +55,8 @@ export function getMetadata(request) {
 
   let isFilterMatched = true;
   let exception = null;
+  let tracker;
+
   let matches = engine.getPatternMetadata(request);
 
   if (matches.length === 0) {
@@ -64,30 +66,35 @@ export function getMetadata(request) {
 
   if (matches.length === 0) {
     exception = getException(request.domain);
-    if (!exception) return null;
 
-    matches = [
-      {
-        pattern: { key: request.domain, name: request.domain },
-        category: { key: 'unidentified' },
-      },
-    ];
+    if (!exception && !request.blocked && !request.modified) {
+      return null;
+    }
+
+    tracker = {
+      id: request.domain,
+      name: request.domain,
+      category: 'unidentified',
+      exception: request.domain,
+      blockedByDefault: true,
+    };
+  } else {
+    tracker = getTrackers().get(matches[0].pattern.key);
   }
 
-  const tracker = getTrackers().get(matches[0].pattern.key);
   exception = exception || getException(tracker.id);
 
   const metadata = {
     ...tracker,
     isFilterMatched,
-    isTrusted:
-      exception &&
-      request.tab &&
-      isTrusted(
-        request.tab.domain || request.tab.hostname,
-        tracker.category,
-        exception,
-      ),
+    isTrusted: exception
+      ? request.tab &&
+        isTrusted(
+          request.tab.domain || request.tab.hostname,
+          tracker.category,
+          exception,
+        )
+      : !isCategoryBlockedByDefault(tracker.category),
   };
 
   return metadata;

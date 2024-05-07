@@ -391,7 +391,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (request.metadata?.shouldBlock === false || isPaused(request)) {
+      if (request.metadata?.isTrusted || isPaused(request)) {
         return;
       }
 
