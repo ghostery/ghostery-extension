@@ -56,11 +56,40 @@ async function initialize(msg, tabId, frameId) {
 	);
 }
 
+const injectScript = navigator.userAgent.includes('Firefox')
+	? (encodedScript) => {
+		const tempVariable = `autoconsent${Math.round(Math.random() * 100000)}`;
+		const script = decodeURIComponent(encodedScript);
+		const scriptTag = document.createElement('script');
+		scriptTag.async = false;
+		const blob = new Blob([`window['${tempVariable}'] = (${script});`], { type: 'text/javascript; charset=utf-8' });
+		const url = URL.createObjectURL(blob);
+		scriptTag.src = url;
+		(document.head || document.documentElement || document).appendChild(scriptTag);
+		URL.revokeObjectURL(url);
+		scriptTag.remove();
+		const returnValue = window[tempVariable];
+		delete window[tempVariable];
+		return returnValue;
+	}
+	: (encodedScript) => {
+		const tempVariable = `autoconsent${Math.round(Math.random() * 100000)}`;
+		const script = decodeURIComponent(encodedScript);
+		const scriptTag = document.createElement('script');
+		scriptTag.async = false;
+		scriptTag.appendChild(document.createTextNode(`window['${tempVariable}'] = (${script});`));
+		(document.head || document.documentElement || document).appendChild(scriptTag);
+		scriptTag.remove();
+		const returnValue = window[tempVariable];
+		delete window[tempVariable];
+		return returnValue;
+	};
+
 async function evalCode(code, id, tabId, frameId) {
 	const data = await new Promise((resolve) => {
 		chrome.tabs.executeScript(tabId, {
 			frameId,
-			code: `!!window.eval(decodeURIComponent("${encodeURIComponent(code)}"))`
+			code: `(${injectScript.toString()})('${encodeURIComponent(code)}')`,
 		}, (result) => {
 			resolve([{
 				result,
