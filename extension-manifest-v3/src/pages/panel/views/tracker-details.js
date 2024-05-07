@@ -81,7 +81,7 @@ export default {
                   </div>
                 </ui-panel-action>
               `
-            : html`<ui-panel-action layout="width:full height:auto">
+            : html`<ui-panel-action layout="width:full height:auto:4.5">
                 <a
                   href="${router.url(ProtectionStatus, {
                     trackerId: tracker.id,
