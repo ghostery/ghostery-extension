@@ -83,7 +83,7 @@ export default {
               <gh-settings-input error="${store.error(model) || ''}">
                 <input
                   type="text"
-                  placeholder="Enter website URL"
+                  placeholder="${msg`Enter website URL`}"
                   value="${model.value}"
                   oninput="${html.set(model, 'value')}"
                   tabindex="1"

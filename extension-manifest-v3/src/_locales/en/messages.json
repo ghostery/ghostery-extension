@@ -212,6 +212,9 @@
   "enabled": {
     "message": "Enabled"
   },
+  "enter_website_url": {
+    "message": "Enter website URL"
+  },
   "essential": {
     "message": "Essential",
     "description": "Tracker category name"
@@ -474,6 +477,9 @@
   },
   "search_engine_redirect_protection": {
     "message": "Search Engine Redirect Protection"
+  },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
   },
   "search_website___": {
     "message": "Search website..."

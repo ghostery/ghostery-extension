@@ -149,7 +149,7 @@ export default {
                   type="search"
                   defaultValue="${query}"
                   oninput="${setLazyQuery}"
-                  placeholder="Search for a tracker or organization..."
+                  placeholder="${msg`Search for a tracker or organization...`}"
                 />
               </gh-settings-input>
             </div>

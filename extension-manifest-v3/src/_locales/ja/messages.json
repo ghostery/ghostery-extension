@@ -80,7 +80,7 @@
     "message": "Contributorになる"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "すべてをブロック (推奨)"
   },
   "block_on_this_website": {
     "message": "このウェブサイトでブロック"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "有効になっています"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "必需",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "検索エンジンのリダイレクト保護"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "サイトを検索..."
   },
@@ -551,7 +557,7 @@
     "message": "トラッカーホイール"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "すべてを信頼する（推奨)"
   },
   "trust_on_this_website": {
     "message": "このウェブサイトで信頼"

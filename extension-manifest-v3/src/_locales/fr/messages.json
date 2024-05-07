@@ -80,7 +80,7 @@
     "message": "Devenez donateur"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "Tout bloquer (recommandé)"
   },
   "block_on_this_website": {
     "message": "Bloquer sur ce site web"
@@ -167,7 +167,7 @@
     "message": "Désactiver Ghostery"
   },
   "disable_trackers_preview": {
-    "message": "Désact. aperçu des mouchards"
+    "message": "Désactiver l'aperçu des trackers"
   },
   "disabled": {
     "message": "Désactivé"
@@ -212,6 +212,9 @@
   "enabled": {
     "message": "Activé"
   },
+  "enter_website_url": {
+    "message": "Enter website URL"
+  },
   "essential": {
     "message": "Essentiels",
     "description": "Tracker category name"
@@ -254,7 +257,7 @@
     "message": "Il n'y a rien à faire sur cette page pour Ghostery"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery est prêt à protéger votre vie privée en mettant en échec les mouchards quand vous naviguez !"
+    "message": "Ghostery est prêt à protéger votre vie privée en mettant en échec les trackers quand vous naviguez !"
   },
   "ghostery_is_disabled": {
     "message": "Ghostery est désactivé"
@@ -318,7 +321,7 @@
     "message": "Des informations sur les trackers web seront partagées conformément à notre <a href=\"$${0}\">politique de confidentialité</a>"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Les informations sur les traqueurs web seront partagées conformément à notre <a href=\"$${0}\">Politique de confidentialité</a>, afin de renforcer la protection de la vie privée de la communauté Ghostery."
+    "message": "Les informations sur les trackers web seront partagées conformément à notre <a href=\"$${0}\">Politique de confidentialité</a>, afin de renforcer la protection de la vie privée de la communauté Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Il existe grâce aux micro-contributions de chaque utilisateur de Ghostery qui choisit d'envoyer des informations non personnelles à WhoTracks.Me. Ces informations permettent à Ghostery de fournir des renseignements en temps réel sur les trackers, ce qui permet de protéger l'ensemble de la communauté Ghostery."
@@ -382,7 +385,7 @@
     "message": "Aucune exception de site web ajoutée pour l'instant"
   },
   "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Nombre de mouchards avec des demandes de réseau bloquées."
+    "message": "Nombre de trackers avec des requêtes réseau bloquées."
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "Nombre de mouchards avec des empreintes ou des cookies supprimés."
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "Protection contre les redirections dans les moteurs de recherche"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "Rechercher sur le site..."
   },
@@ -530,28 +536,28 @@
     "message": "Fichage de traqueurs"
   },
   "trackers": {
-    "message": "mouchards"
+    "message": "Trackers"
   },
   "trackers_blocked": {
-    "message": "Mouchards bloqués"
+    "message": "Trackers bloqués"
   },
   "trackers_count": {
     "message": "Trackers comptés"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-    "message": "Mouchards détectés par Ghostery sur ce site :&nbsp;$${0}"
+    "message": "Trackers détectés par Ghostery sur ce site :&nbsp;$${0}"
   },
   "trackers_modified": {
-    "message": "Mouchards modifiés"
+    "message": "Trackers modifiés"
   },
   "trackers_preview": {
-    "message": "Aperçu mouchards"
+    "message": "Aperçu des trackers"
   },
   "trackers_wheel": {
     "message": "Camembert des trackers"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "Faire confiance à tous (recommandé)"
   },
   "trust_on_this_website": {
     "message": "Autoriser sur ce site web"

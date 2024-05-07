@@ -80,7 +80,7 @@
     "message": "成為捐助者"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "阻止所有（推薦）"
   },
   "block_on_this_website": {
     "message": "在此網站封鎖"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "已啟用"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "基本內容",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "搜尋引擎重新導向保護"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "搜尋網站......"
   },
@@ -551,7 +557,7 @@
     "message": "追踪器輪盤"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "信任一切（推薦)"
   },
   "trust_on_this_website": {
     "message": "信任此網站"

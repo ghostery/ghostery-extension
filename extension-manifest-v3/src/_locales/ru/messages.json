@@ -80,7 +80,7 @@
     "message": "Стать участником"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "Заблокировать все (рекомендуется)"
   },
   "block_on_this_website": {
     "message": "Заблокировать на этом сайте"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "Включено"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "Важное",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "Защита от перенаправления поисковых систем"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "Поиск сайта..."
   },
@@ -551,7 +557,7 @@
     "message": "Трекерская рулетка"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "Доверяйте всем (рекомендуется)"
   },
   "trust_on_this_website": {
     "message": "Разрешить на этом сайте"

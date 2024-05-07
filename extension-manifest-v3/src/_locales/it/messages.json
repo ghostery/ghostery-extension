@@ -80,7 +80,7 @@
     "message": "Diventa un collaboratore"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "Blocca tutti (consigliato)"
   },
   "block_on_this_website": {
     "message": "Blocca su questo sito"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "Attivato"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "Essenziali",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "Protezione dal reindirizzamento dei motori di ricerca"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "Ricerca sito web..."
   },
@@ -551,7 +557,7 @@
     "message": "Ruota tracker"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "Fiducia in tutti (consigliato)"
   },
   "trust_on_this_website": {
     "message": "Considera affidabile su questo sito"

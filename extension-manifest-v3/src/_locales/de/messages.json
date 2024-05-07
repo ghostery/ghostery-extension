@@ -80,7 +80,7 @@
     "message": "Werde Ghostery-Förderer"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "Alle blockieren (empfohlen)"
   },
   "block_on_this_website": {
     "message": "Auf dieser Website blockieren"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "Aktiviert"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "Essenziell",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "Schutz vor Suchmaschinenumleitungen"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "Website durchsuchen ..."
   },
@@ -551,7 +557,7 @@
     "message": "Tracker-Rad"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "Allen vertrauen (empfohlen)"
   },
   "trust_on_this_website": {
     "message": "Auf dieser Website vertrauen"

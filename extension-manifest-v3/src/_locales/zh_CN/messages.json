@@ -80,7 +80,7 @@
     "message": "成为贡献者"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "阻止所有（推荐）"
   },
   "block_on_this_website": {
     "message": "阻止此网站"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "已启用"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "基本",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "搜索引擎重定向保护"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "搜索网站..."
   },
@@ -551,7 +557,7 @@
     "message": "跟踪器轮"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "全部信任（推荐)"
   },
   "trust_on_this_website": {
     "message": "信任此网站"

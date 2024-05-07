@@ -80,7 +80,7 @@
     "message": "기부자가 되세요."
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "모두 차단(권장)"
   },
   "block_on_this_website": {
     "message": "이 웹사이트상에서 차단"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "활성화됨 "
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "필수 ",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "검색결과 리디렉션 보호"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "웹사이트 검색..."
   },
@@ -551,7 +557,7 @@
     "message": "트래커 휠"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "모두 신뢰(권장)"
   },
   "trust_on_this_website": {
     "message": "이 웹사이트상에서 신뢰"

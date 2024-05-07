@@ -80,7 +80,7 @@
     "message": "Zostań Kontrybutorem"
   },
   "block_all__recommended_": {
-    "message": "Block all (recommended)"
+    "message": "Zablokuj wszystkie (zalecane)"
   },
   "block_on_this_website": {
     "message": "Zablokuj na tej stronie"
@@ -211,6 +211,9 @@
   },
   "enabled": {
     "message": "Włączone"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "Istotne",
@@ -475,6 +478,9 @@
   "search_engine_redirect_protection": {
     "message": "Ochrona przekierowywania wyszukiwarki"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "Wyszukiwanie witryny..."
   },
@@ -551,7 +557,7 @@
     "message": "Wykres kołowy z trackerami"
   },
   "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
+    "message": "Zaufaj wszystkie (zalecane)"
   },
   "trust_on_this_website": {
     "message": "Zaufaj na tej stronie"
