@@ -88,6 +88,10 @@
   "blocked": {
     "message": "차단됨 "
   },
+  "blocked___tracker_list": {
+    "message": "차단됨 ",
+    "description": "Plural form - list of blocked trackers"
+  },
   "blocked__@_0_": {
     "message": "차단됨: $${0}",
     "description": "A number of blocked trackers, eg: 'Blocked: 2'"
@@ -564,6 +568,10 @@
   },
   "trusted": {
     "message": "신뢰할 수 있는 사이트"
+  },
+  "trusted___tracker_list": {
+    "message": "신뢰할 수 있는 사이트",
+    "description": "Plural form - list of trusted trackers"
   },
   "trusted__@_0_": {
     "message": "신뢰됨: $${0}",

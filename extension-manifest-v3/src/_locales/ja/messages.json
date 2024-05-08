@@ -88,6 +88,10 @@
   "blocked": {
     "message": "ブロックされた対象"
   },
+  "blocked___tracker_list": {
+    "message": "ブロックされた対象",
+    "description": "Plural form - list of blocked trackers"
+  },
   "blocked__@_0_": {
     "message": "ブロック済み: $${0}",
     "description": "A number of blocked trackers, eg: 'Blocked: 2'"
@@ -564,6 +568,10 @@
   },
   "trusted": {
     "message": "信頼済み"
+  },
+  "trusted___tracker_list": {
+    "message": "信頼済み",
+    "description": "Plural form - list of trusted trackers"
   },
   "trusted__@_0_": {
     "message": "信頼済み: $${0}",

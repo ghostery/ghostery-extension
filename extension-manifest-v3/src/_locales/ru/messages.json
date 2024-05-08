@@ -88,6 +88,10 @@
   "blocked": {
     "message": "Заблокированные"
   },
+  "blocked___tracker_list": {
+    "message": "Заблокированные",
+    "description": "Plural form - list of blocked trackers"
+  },
   "blocked__@_0_": {
     "message": "Заблокировано: $${0}",
     "description": "A number of blocked trackers, eg: 'Blocked: 2'"
@@ -564,6 +568,10 @@
   },
   "trusted": {
     "message": "Доверенный"
+  },
+  "trusted___tracker_list": {
+    "message": "Доверенный",
+    "description": "Plural form - list of trusted trackers"
   },
   "trusted__@_0_": {
     "message": "Разрешено: $${0}",

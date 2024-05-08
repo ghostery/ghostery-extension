@@ -86,17 +86,21 @@
     "message": "Zablokuj na tej stronie"
   },
   "blocked": {
-    "message": "Zablokowane"
+    "message": "Zablokowany"
+  },
+  "blocked___tracker_list": {
+    "message": "Zablokowane",
+    "description": "Plural form - list of blocked trackers"
   },
   "blocked__@_0_": {
-    "message": "Zablokowano: $${0}",
+    "message": "Zablokowane: $${0}",
     "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
-    "message": "Zablokowano na wszystkich stronach"
+    "message": "Zablokowany wszędzie"
   },
   "blocked_on_this_website": {
-    "message": "Zablokowano na tej stronie"
+    "message": "Zablokowany na tej stronie"
   },
   "cancel": {
     "message": "Anuluj"
@@ -563,14 +567,18 @@
     "message": "Zaufaj na tej stronie"
   },
   "trusted": {
-    "message": "Zaufane"
+    "message": "Zaufany"
+  },
+  "trusted___tracker_list": {
+    "message": "Zaufane",
+    "description": "Plural form - list of trusted trackers"
   },
   "trusted__@_0_": {
-    "message": "Zaufany: $${0}",
+    "message": "Zaufane: $${0}",
     "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
-    "message": "Zaufany na wszystkich stronach"
+    "message": "Zaufany wszędzie"
   },
   "trusted_on_this_website": {
     "message": "Zaufany na tej stronie"

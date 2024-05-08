@@ -140,8 +140,12 @@ export default {
                   <option value="adjusted">
                     <!-- Plural form - list of adjusted trackers | tracker-list -->Adjusted
                   </option>
-                  <option value="blocked">Blocked</option>
-                  <option value="trusted">Trusted</option>
+                  <option value="blocked">
+                    <!-- Plural form - list of blocked trackers | tracker-list -->Blocked
+                  </option>
+                  <option value="trusted">
+                    <!-- Plural form - list of trusted trackers | tracker-list -->Trusted
+                  </option>
                 </select>
               </gh-settings-input>
               <gh-settings-input layout="grow:5 width::250px" icon="search">

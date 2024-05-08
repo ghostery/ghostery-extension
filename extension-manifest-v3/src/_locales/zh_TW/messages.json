@@ -88,6 +88,10 @@
   "blocked": {
     "message": "已封鎖"
   },
+  "blocked___tracker_list": {
+    "message": "已封鎖",
+    "description": "Plural form - list of blocked trackers"
+  },
   "blocked__@_0_": {
     "message": "已封鎖：$${0}",
     "description": "A number of blocked trackers, eg: 'Blocked: 2'"
@@ -564,6 +568,10 @@
   },
   "trusted": {
     "message": "已信任"
+  },
+  "trusted___tracker_list": {
+    "message": "已信任",
+    "description": "Plural form - list of trusted trackers"
   },
   "trusted__@_0_": {
     "message": "受信任：$${0}",
