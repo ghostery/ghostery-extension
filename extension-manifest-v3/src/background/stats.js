@@ -139,9 +139,7 @@ export function updateTabStats(tabId, requests) {
       const pattern = request.metadata;
 
       if (pattern) {
-        let tracker =
-          (pattern && stats.trackers.find((t) => t.id === pattern.id)) ||
-          stats.trackers.find((t) => t.id === request.domain);
+        let tracker = stats.trackers.find((t) => t.id === pattern.id);
 
         if (!tracker) {
           tracker = { ...pattern, requests: [] };
