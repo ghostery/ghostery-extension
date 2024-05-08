@@ -47,6 +47,7 @@ export default class ExtendedRequest extends Request {
       tabId: details.tabId,
 
       domain: parsedUrl.domain || parsedUrl.hostname || '',
+      hostname: parsedUrl.hostname || '',
       url: details.url,
 
       sourceUrl,
