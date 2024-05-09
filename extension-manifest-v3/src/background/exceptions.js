@@ -79,7 +79,7 @@ async function convertExceptionsToFilters(exceptions) {
     if (blockedByDefault) {
       blockFilters.push(
         ...pattern.domains
-          .map((domain) => `||${domain}^$third-party`)
+          .map((domain) => `||${domain}^`)
           .map((filter) => parseFilter(filter)),
       );
     }
