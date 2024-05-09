@@ -9,30 +9,22 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO: This is a temporary solution to avoid throwing errors in Safari
-import './safari-monkey-patch.js';
+// TODO: This is a temporary solution to avoid throwing errors in iOS Safari
+import './webrequest-monkey-patch.js';
 
-import AnonymousCommunication from '@whotracksme/webextension-packages/packages/anonymous-communication';
 import {
-  WebRequestPipeline,
-  UrlReporter,
-  RequestReporter,
   setLogLevel,
   describeLoggers,
 } from '@whotracksme/webextension-packages/packages/reporting';
-import { getBrowserInfo } from '@ghostery/libs';
 
-import prefixedIndexedDBKeyValueStore from './storage-indexeddb.js';
-import Storage from './storage-chrome-local.js';
-import Options, { observe } from '/store/options.js';
-import Request from '../utils/request.js';
-import { updateTabStats } from '../stats.js';
+import { observe } from '/store/options.js';
+
 import asyncSetup from '../utils/setup.js';
 
-const webRequestPipeline = new WebRequestPipeline();
-
-// Important to call it in a first tick as it assigns chrome. listeners
-webRequestPipeline.init();
+import config from './config.js';
+import communication from './communication.js';
+import urlReporter from './url-reporter.js';
+import webRequestReporter from './webrequest-reporter.js';
 
 (async () => {
   try {
@@ -50,147 +42,6 @@ webRequestPipeline.init();
   }
 })();
 
-function platformSpecificSettings() {
-  if (
-    /iPad|iPhone|iPod/.test(navigator.platform) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-  ) {
-    // Ghostery extension for Safari on iOS and other Apple mobile devices
-    return {
-      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-safari-ios/patterns.json',
-      CHANNEL: 'safari-ios',
-    };
-  }
-
-  if (
-    /Safari/i.test(navigator.userAgent) &&
-    /Apple Computer/.test(navigator.vendor) &&
-    !/Mobi|Android/i.test(navigator.userAgent)
-  ) {
-    // Ghostery extension for Safari on MacOS (Desktop)
-    return {
-      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-      PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-safari-desktop/patterns.json',
-      CHANNEL: 'safari-desktop',
-    };
-  }
-
-  if (navigator.userAgent.includes('Android')) {
-    return {
-      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-      PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-ghostery-android/patterns.json',
-      CHANNEL: 'android',
-    };
-  }
-
-  if (
-    navigator.userAgent.includes('Opera') ||
-    navigator.userAgent.includes('OPR') ||
-    navigator.userAgent.includes('YaBrowser') // same release channel as Opera
-  ) {
-    return {
-      ALLOWED_COUNTRY_CODES: [
-        'us',
-        'de',
-        'ru',
-        'fr',
-        'pl',
-        'gb',
-        'br',
-        'ca',
-        'ua',
-        'nl',
-        'es',
-      ],
-      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-opera-desktop/patterns.json',
-      CHANNEL: 'opera',
-    };
-  }
-
-  console.warn(
-    'No matching config found. Falling back to patterns from Chrome Desktop.',
-  );
-  return {
-    ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-    PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
-    CHANNEL: 'ghostery',
-  };
-}
-
-const COLLECTOR_DIRECT_URL = 'https://anonymous-communication.ghostery.net';
-const COLLECTOR_PROXY_URL = COLLECTOR_DIRECT_URL; // current we have no proxy configured
-
-const config = {
-  url: {
-    COLLECTOR_DIRECT_URL,
-    COLLECTOR_PROXY_URL,
-    CONFIG_URL: 'https://api.ghostery.net/api/v1/config',
-    SAFE_QUORUM_CONFIG_ENDPOINT:
-      'https://safe-browsing-quorum.privacy.ghostery.net/config',
-    ...platformSpecificSettings(),
-  },
-  request: {
-    configUrl: 'https://cdn.ghostery.com/antitracking/config.json',
-    remoteWhitelistUrl: 'https://cdn.ghostery.com/antitracking/whitelist/2',
-    localWhitelistUrl: '/rule_resources/whotracksme',
-  },
-};
-
-const communication = new AnonymousCommunication({
-  config: config.url,
-  storage: new Storage('communication'),
-  connectDatabase: prefixedIndexedDBKeyValueStore('communication'),
-});
-const urlReporter = new UrlReporter({
-  config: config.url,
-  storage: new Storage('reporting'),
-  connectDatabase: prefixedIndexedDBKeyValueStore('reporting'),
-  communication,
-  browserInfoProvider: getBrowserInfo.getRawBrowserInfo,
-});
-let requestReporter = null;
-let pausedDomains = [];
-let isAntiTrackingEnabled = Options.blockTrackers;
-
-if (__PLATFORM__ === 'firefox' || __PLATFORM__ === 'opera') {
-  requestReporter = new RequestReporter(config.request, {
-    webRequestPipeline,
-    communication,
-    countryProvider: urlReporter.countryProvider,
-    trustedClock: communication.trustedClock,
-    getBrowserInfo,
-    isRequestAllowed: (state) => {
-      if (!isAntiTrackingEnabled) {
-        return true;
-      }
-      if (
-        pausedDomains.some(
-          ({ id }) => id === state.tabUrlParts.domainInfo.domain,
-        )
-      ) {
-        return true;
-      }
-      return false;
-    },
-    onTrackerInteraction: (event, state) => {
-      if (event === 'observed') {
-        return;
-      }
-
-      const request = Request.fromRequestDetails({
-        url: state.url,
-        originUrl: state.tabUrl,
-      });
-      request.modified = true;
-
-      updateTabStats(state.tabId, [request]);
-    },
-  });
-}
-
 const setup = asyncSetup([
   observe('terms', async (terms) => {
     if (terms) {
@@ -200,21 +51,15 @@ const setup = asyncSetup([
           e,
         );
       });
-      if (requestReporter) {
-        await requestReporter.init();
+      if (webRequestReporter) {
+        await webRequestReporter.init();
       }
     } else {
       urlReporter.unload();
-      if (requestReporter) {
-        requestReporter.unload();
+      if (webRequestReporter) {
+        webRequestReporter.unload();
       }
     }
-  }),
-  observe('blockTrackers', (blockTrackers) => {
-    isAntiTrackingEnabled = blockTrackers;
-  }),
-  observe('paused', (paused) => {
-    pausedDomains = paused || [];
   }),
 ]);
 
@@ -264,33 +109,19 @@ async function onLocationChange(details) {
   }
 }
 
-chrome.webNavigation.onCommitted.addListener((details) => {
-  onLocationChange(details);
-});
+chrome.webNavigation.onCommitted.addListener(onLocationChange);
 
 if (__PLATFORM__ !== 'safari') {
-  chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
-    onLocationChange(details);
-  });
+  chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
 }
-
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (!requestReporter) {
-    return;
-  }
-  if (msg.action === 'mousedown') {
-    requestReporter.recordClick(msg.event, msg.context, msg.href, sender);
-  }
-});
 
 // for debugging service-workers
 globalThis.ghostery = globalThis.ghostery || {};
 globalThis.ghostery.WTM = {
   communication,
   urlReporter,
-  requestReporter,
   config,
-  webRequestPipeline,
+  webRequestReporter,
   extensionStartedAt: new Date(),
   logging: {
     setLogLevel,

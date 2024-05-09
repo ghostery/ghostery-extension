@@ -186,12 +186,40 @@ export function updateTabStats(tabId, requests) {
       );
     }
 
-    // After navigation stats are cleared, so the current `stats` variable might be outdated
-    if (requestsUpdated && stats === tabStats.get(tabId)) {
-      tabStats.set(tabId, stats);
+    if (requestsUpdated) {
+      if (
+        __PLATFORM__ === 'safari' &&
+        chrome.declarativeNetRequest.getMatchedRules
+      ) {
+        try {
+          const { rulesMatchedInfo } =
+            await chrome.declarativeNetRequest.getMatchedRules({
+              tabId,
+              minTimeStamp: stats.timestamp,
+            });
 
-      // We need to update the icon only if new categories were added
-      if (trackersUpdated) updateIcon(tabId);
+          for (const info of rulesMatchedInfo) {
+            for (const tracker of stats.trackers) {
+              for (const request of tracker.requests) {
+                if (request.url === info.request.url) {
+                  request.blocked = true;
+                  tracker.blocked = true;
+                }
+              }
+            }
+          }
+        } catch (e) {
+          console.error('Failed to get matched rules for stats', e);
+        }
+      }
+
+      // After navigation stats are cleared, so the current `stats` variable might be outdated
+      if (stats === tabStats.get(tabId)) {
+        tabStats.set(tabId, stats);
+
+        // We need to update the icon only if new categories were added
+        if (trackersUpdated) updateIcon(tabId);
+      }
     }
   });
 }
@@ -236,6 +264,7 @@ function setupTabStats(tabId, request) {
       domain: request.domain,
       url: request.url,
       trackers: [],
+      timestamp: performance.now(),
     });
   } else {
     tabStats.delete(tabId);
