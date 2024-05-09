@@ -95,6 +95,8 @@ const DNR = {
   'dnr-fixes': 'fixes',
   'dnr-ios': 'safari',
   'dnr-trackerdb': 'trackerdb',
+  'dnr-trackerdb-safari': 'trackerdb-safari',
+  'dnr-fixes-safari': 'fixes-safari',
 };
 
 for (const [name, target] of Object.entries(DNR)) {
