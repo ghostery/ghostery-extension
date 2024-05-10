@@ -20,7 +20,7 @@ export default {
         <ui-panel-action grouped active="${value}">
           <button
             layout="row relative gap:0.5 padding:0.5"
-            onclick="${html.set('value', !value)}"
+            onclick="${html.set('value', true)}"
           >
             <ui-icon name="block-s"></ui-icon>
             <ui-text type="label-xs">Blocked</ui-text>
@@ -29,7 +29,7 @@ export default {
         <ui-panel-action class="trusted" grouped active="${!value}">
           <button
             layout="row gap:0.5 padding:0.5"
-            onclick="${html.set('value', !value)}"
+            onclick="${html.set('value', false)}"
           >
             <ui-icon name="trust-s"></ui-icon>
             <ui-text type="label-xs">Trusted</ui-text>

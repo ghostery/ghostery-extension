@@ -2,6 +2,14 @@
   "@_0__left": {
     "message": "剩余 $${0} 个"
   },
+  "@_0__will_be_blocked_on_this_website_": {
+    "message": "$${0} 会在此网站被阻止。",
+    "description": "A tracker will be trusted on this website."
+  },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} 会在此网站受信任。",
+    "description": "A tracker will be trusted on this website."
+  },
   "1_day": {
     "message": "1 天"
   },
@@ -17,8 +25,23 @@
   "ad_blocking": {
     "message": "广告拦截"
   },
-  "additional_permissions_required": {
-    "message": "需要额外的权限"
+  "add": {
+    "message": "添加"
+  },
+  "add_@_0__as_exception": {
+    "message": "添加 $${0} 为异常",
+    "description": "Add domain as exception"
+  },
+  "add_website_exception": {
+    "message": "添加网站异常"
+  },
+  "adjusted___tracker": {
+    "message": "已调整",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "已调整",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "成人广告",
@@ -56,8 +79,34 @@
   "become_a_contributor": {
     "message": "成为贡献者"
   },
+  "block_all__recommended_": {
+    "message": "阻止所有（推荐）"
+  },
+  "block_on_this_website": {
+    "message": "阻止此网站"
+  },
+  "blocked": {
+    "message": "已拦截"
+  },
+  "blocked___tracker_list": {
+    "message": "已拦截",
+    "description": "Plural form - list of blocked trackers"
+  },
+  "blocked__@_0_": {
+    "message": "被阻止：$${0}",
+    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
+  },
+  "blocked_on_all_websites": {
+    "message": "在所有网站上被阻止"
+  },
+  "blocked_on_this_website": {
+    "message": "在此网站上被阻止"
+  },
   "cancel": {
     "message": "取消"
+  },
+  "category": {
+    "message": "类别"
   },
   "cdn": {
     "message": "CDN",
@@ -68,6 +117,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 Ghostery 固定在工具栏。"
+  },
+  "collapse": {
+    "message": "折叠"
   },
   "comments": {
     "message": "评论",
@@ -83,14 +135,24 @@
   "contact_support": {
     "message": "联系支持人员"
   },
+  "contribute_to_ghostery_tracker_database_on_github": {
+    "message": "在 Github 上为 Ghostery Tracker Database 贡献"
+  },
   "contributor": {
     "message": "贡献者"
   },
   "copied_to_clipboard": {
     "message": "已复制到剪贴板"
   },
+  "country": {
+    "message": "国家/地区"
+  },
   "create_account": {
     "message": "创建帐户"
+  },
+  "current_protection_status_for_@_0__": {
+    "message": "目前对于 $${0} 的保护功能状态：",
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "客户互动",
@@ -154,9 +216,15 @@
   "enabled": {
     "message": "已启用"
   },
+  "enter_website_url": {
+    "message": "输入网站 URL"
+  },
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
+  },
+  "expand": {
+    "message": "展开"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需简单几步，即可将 Ghostery 广告拦截功能扩展到搜索引擎。"
@@ -164,6 +232,9 @@
   "extensions": {
     "message": "扩展",
     "description": "Tracker category name"
+  },
+  "for_all_websites": {
+    "message": "对于所有网站"
   },
   "for_more_information_read_our_full": {
     "message": "欲了解更多信息，请阅读我们的完整"
@@ -274,6 +345,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "进一步了解 YouTube 对广告拦截器的挑战"
   },
+  "load_more": {
+    "message": "加载更多"
+  },
   "manifest_name": {
     "message": "Ghostery 跟踪器和广告拦截器 - 隐私广告拦截器"
   },
@@ -290,8 +364,14 @@
     "message": "其他",
     "description": "Tracker category name"
   },
+  "modify_the_recommended_blocking_settings_for_every_website_": {
+    "message": "为每个网站调整推荐的阻止设定。"
+  },
   "more_ad_blocking_available": {
     "message": "更多广告拦截功能"
+  },
+  "more_in_this_organization": {
+    "message": "在此组织中的更多内容"
   },
   "my_account": {
     "message": "我的帐户"
@@ -302,14 +382,20 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no_trackers_detected": {
-    "message": "未检测到跟踪器"
+  "no_activities_detected": {
+    "message": "未检测到活动"
+  },
+  "no_websites_exceptions_added_yet": {
+    "message": "还未添加网站异常"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "网络请求受阻的跟踪器数量。"
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "已删除 cookie 或指纹的跟踪器数量。"
+  },
+  "observed_activities": {
+    "message": "已观察过的活动"
   },
   "off": {
     "message": "关闭"
@@ -323,9 +409,18 @@
   "open_youtube_in_a_private_window": {
     "message": "在私人窗口中打开 YouTube"
   },
+  "organization": {
+    "message": "组织机构"
+  },
+  "organization_s_website": {
+    "message": "组织的网站"
+  },
   "other": {
     "message": "其他",
     "description": "Tracker category name"
+  },
+  "our_recommendation_for_this_activity": {
+    "message": "对于此活动，我们的推荐"
   },
   "pause_on_this_site": {
     "message": "在这个网站上暂停"
@@ -357,6 +452,9 @@
   "privacy_protection": {
     "message": "隐私保护"
   },
+  "protection_status": {
+    "message": "保护功能状态"
+  },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
   },
@@ -375,14 +473,23 @@
   "resume": {
     "message": "继续"
   },
+  "save": {
+    "message": "保存"
+  },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "保存您的自定义设置并在浏览器和设备之间同步。"
   },
   "search_engine_redirect_protection": {
     "message": "搜索引擎重定向保护"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "搜索跟踪器或组织..."
+  },
   "search_website___": {
     "message": "搜索网站..."
+  },
+  "set_blocking_preference": {
+    "message": "设置阻止首选项"
   },
   "settings": {
     "message": "设置"
@@ -392,6 +499,9 @@
   },
   "setup_successful": {
     "message": "安装成功"
+  },
+  "show_all": {
+    "message": "展示所有"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "在搜索结果旁边显示跟踪器预览。"
@@ -424,16 +534,19 @@
     "message": "条款和条件"
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
+    "message": "感谢支持 Ghostery，为建立一个隐私是基本人权的网络而奋斗。"
+  },
+  "tracker_database": {
+    "message": "追踪器数据库"
+  },
+  "trackers": {
+    "message": "跟踪器"
   },
   "trackers_blocked": {
     "message": "已拦截跟踪器"
   },
   "trackers_count": {
     "message": "跟踪器数量"
-  },
-  "trackers_detected": {
-    "message": "检测到跟踪器"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Ghostery 在此网站上检测到的跟踪器：$${0}"
@@ -446,6 +559,29 @@
   },
   "trackers_wheel": {
     "message": "跟踪器轮"
+  },
+  "trust_all__recommended_": {
+    "message": "全部信任（推荐)"
+  },
+  "trust_on_this_website": {
+    "message": "信任此网站"
+  },
+  "trusted": {
+    "message": "受信任"
+  },
+  "trusted___tracker_list": {
+    "message": "受信任",
+    "description": "Plural form - list of trusted trackers"
+  },
+  "trusted__@_0_": {
+    "message": "受信任：$${0}",
+    "description": "A number of trusted trackers eg: 'Trusted: 2'"
+  },
+  "trusted_on_all_websites": {
+    "message": "在所有网站上受信任"
+  },
+  "trusted_on_this_website": {
+    "message": "在此网站上受信任"
   },
   "unidentified": {
     "message": "未识别",
@@ -460,6 +596,9 @@
   "urls_observed": {
     "message": "观察到的 URL"
   },
+  "view_activity_details": {
+    "message": "查看活动详情"
+  },
   "visit_our_blog": {
     "message": "访问我们的博客"
   },
@@ -471,6 +610,9 @@
   },
   "website": {
     "message": "网站"
+  },
+  "website_exceptions": {
+    "message": "网站异常"
   },
   "websites": {
     "message": "网站"
@@ -497,7 +639,7 @@
     "message": "没有启用隐私功能，只有命名跟踪器的基本功能可用。"
   },
   "you_are_awesome_": {
-    "message": "You are awesome!"
+    "message": "太棒啦！"
   },
   "you_are_signed_in_as_": {
     "message": "你的登录身份为："

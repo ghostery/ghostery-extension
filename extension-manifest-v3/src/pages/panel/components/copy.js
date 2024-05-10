@@ -14,7 +14,7 @@ export default {
             <ui-text type="body-s" color="gray-600" ellipsis>
               <slot></slot>
             </ui-text>
-            <ui-icon name="copy"></ui-icon>
+            <ui-icon name="copy" layout="shrink:0"></ui-icon>
           </div>
         </button>
       </ui-action>

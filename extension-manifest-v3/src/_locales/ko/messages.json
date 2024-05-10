@@ -2,6 +2,14 @@
   "@_0__left": {
     "message": "$${0} 남음"
   },
+  "@_0__will_be_blocked_on_this_website_": {
+    "message": "$${0}이(가) 이 웹사이트상에서 차단됩니다.",
+    "description": "A tracker will be trusted on this website."
+  },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0}이(가) 이 웹사이트상에서 신뢰됩니다.",
+    "description": "A tracker will be trusted on this website."
+  },
   "1_day": {
     "message": "1일"
   },
@@ -17,8 +25,23 @@
   "ad_blocking": {
     "message": "광고 차단"
   },
-  "additional_permissions_required": {
-    "message": "추가 권한 필요"
+  "add": {
+    "message": "추가"
+  },
+  "add_@_0__as_exception": {
+    "message": "예외로 $${0} 추가",
+    "description": "Add domain as exception"
+  },
+  "add_website_exception": {
+    "message": "웹사이트 예외 추가"
+  },
+  "adjusted___tracker": {
+    "message": "조정됨",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "조정됨",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "성인 광고 ",
@@ -56,8 +79,34 @@
   "become_a_contributor": {
     "message": "기부자가 되세요."
   },
+  "block_all__recommended_": {
+    "message": "모두 차단(권장)"
+  },
+  "block_on_this_website": {
+    "message": "이 웹사이트상에서 차단"
+  },
+  "blocked": {
+    "message": "차단됨 "
+  },
+  "blocked___tracker_list": {
+    "message": "차단됨 ",
+    "description": "Plural form - list of blocked trackers"
+  },
+  "blocked__@_0_": {
+    "message": "차단됨: $${0}",
+    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
+  },
+  "blocked_on_all_websites": {
+    "message": "모든 웹사이트상에서 차단됨"
+  },
+  "blocked_on_this_website": {
+    "message": "이 웹사이트상에서 차단됨"
+  },
   "cancel": {
     "message": "취소 "
+  },
+  "category": {
+    "message": "카테고리"
   },
   "cdn": {
     "message": "CDN",
@@ -68,6 +117,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "검색 바 옆 퍼즐 아이콘을 클릭하면 Ghostery가 툴바에 고정됩니다."
+  },
+  "collapse": {
+    "message": "접기"
   },
   "comments": {
     "message": "댓글",
@@ -83,14 +135,24 @@
   "contact_support": {
     "message": "연락 지원 "
   },
+  "contribute_to_ghostery_tracker_database_on_github": {
+    "message": "Github상의 Ghostery 트래커 데이터베이스에 기여"
+  },
   "contributor": {
     "message": "기부자"
   },
   "copied_to_clipboard": {
     "message": "클립보드에 복사됨"
   },
+  "country": {
+    "message": "국가"
+  },
   "create_account": {
     "message": "계정 만들기 "
+  },
+  "current_protection_status_for_@_0__": {
+    "message": "현재 $${0} 보호 상태:",
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "고객 응대 ",
@@ -154,9 +216,15 @@
   "enabled": {
     "message": "활성화됨 "
   },
+  "enter_website_url": {
+    "message": "웹사이트 URL 입력"
+  },
   "essential": {
     "message": "필수 ",
     "description": "Tracker category name"
+  },
+  "expand": {
+    "message": "펼치기"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "간단히 몇 단계만 거치면 검색 엔진에까지 Ghostery 광고 차단을 확대 적용할 수 있습니다."
@@ -164,6 +232,9 @@
   "extensions": {
     "message": "확장",
     "description": "Tracker category name"
+  },
+  "for_all_websites": {
+    "message": "모든 웹사이트 대상"
   },
   "for_more_information_read_our_full": {
     "message": "자세한 정보는 전문을 읽으시기 바랍니다"
@@ -274,6 +345,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "광고 차단기에 대한 YouTube의 도전에 대해 자세히 알아보기"
   },
+  "load_more": {
+    "message": "자세히 알아보기"
+  },
   "manifest_name": {
     "message": "고스터리 트래커 및 광고 차단기 - 프라이버시 AdBlock"
   },
@@ -290,8 +364,14 @@
     "message": "기타",
     "description": "Tracker category name"
   },
+  "modify_the_recommended_blocking_settings_for_every_website_": {
+    "message": "모든 웹사이트에 대한 권장 차단 설정을 수정합니다."
+  },
   "more_ad_blocking_available": {
     "message": "더 많은 광고 차단 가능"
+  },
+  "more_in_this_organization": {
+    "message": "이 조직 내 더 보기"
   },
   "my_account": {
     "message": "내 계정 "
@@ -302,14 +382,20 @@
   "never_consent": {
     "message": "동의하지 않음"
   },
-  "no_trackers_detected": {
-    "message": "트래커 감지되지 않음"
+  "no_activities_detected": {
+    "message": "감지된 활동 없음"
+  },
+  "no_websites_exceptions_added_yet": {
+    "message": "아직 추가된 웹사이트 예외 없음"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "네트워크 요청이 차단된 트래커의 수."
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "쿠키 및 지문이 제거된 트래커의 수."
+  },
+  "observed_activities": {
+    "message": "관찰된 활동"
   },
   "off": {
     "message": "끄기 "
@@ -323,9 +409,18 @@
   "open_youtube_in_a_private_window": {
     "message": "비공개 창에서 YouTube 열기"
   },
+  "organization": {
+    "message": "조직"
+  },
+  "organization_s_website": {
+    "message": "조직의 웹사이트"
+  },
   "other": {
     "message": "기타",
     "description": "Tracker category name"
+  },
+  "our_recommendation_for_this_activity": {
+    "message": "이 활동에 대한 권장사항"
   },
   "pause_on_this_site": {
     "message": "이 사이트에서 일시 중지"
@@ -357,6 +452,9 @@
   "privacy_protection": {
     "message": "개인정보 보호"
   },
+  "protection_status": {
+    "message": "보호 상태"
+  },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me 자세히 보기"
   },
@@ -375,14 +473,23 @@
   "resume": {
     "message": "다시 시작 "
   },
+  "save": {
+    "message": "저장"
+  },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
   },
   "search_engine_redirect_protection": {
     "message": "검색결과 리디렉션 보호"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "트래커 또는 조직 검색..."
+  },
   "search_website___": {
     "message": "웹사이트 검색..."
+  },
+  "set_blocking_preference": {
+    "message": "차단 맞춤 설정"
   },
   "settings": {
     "message": "설정 "
@@ -392,6 +499,9 @@
   },
   "setup_successful": {
     "message": "셋업 성공"
+  },
+  "show_all": {
+    "message": "모두 표시"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "검색결과 옆에 트래커 미리보기를 표시합니다."
@@ -424,16 +534,19 @@
     "message": "사용 약관 "
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
+    "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸우는 데 지지를 보내주셔서 감사합니다!"
+  },
+  "tracker_database": {
+    "message": "기 데이터베이스"
+  },
+  "trackers": {
+    "message": "트래커 "
   },
   "trackers_blocked": {
     "message": "차단된 트래커"
   },
   "trackers_count": {
     "message": "트래커 카운트"
-  },
-  "trackers_detected": {
-    "message": "트래커 감지됨"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "이 웹사이트에서 Ghostery가 탐지한 추적기:&nbsp;$${0}"
@@ -446,6 +559,29 @@
   },
   "trackers_wheel": {
     "message": "트래커 휠"
+  },
+  "trust_all__recommended_": {
+    "message": "모두 신뢰(권장)"
+  },
+  "trust_on_this_website": {
+    "message": "이 웹사이트상에서 신뢰"
+  },
+  "trusted": {
+    "message": "신뢰할 수 있는 사이트"
+  },
+  "trusted___tracker_list": {
+    "message": "신뢰할 수 있는 사이트",
+    "description": "Plural form - list of trusted trackers"
+  },
+  "trusted__@_0_": {
+    "message": "신뢰됨: $${0}",
+    "description": "A number of trusted trackers eg: 'Trusted: 2'"
+  },
+  "trusted_on_all_websites": {
+    "message": "모든 웹사이트상에서 신뢰됨"
+  },
+  "trusted_on_this_website": {
+    "message": "이 웹사이트상에서 신뢰됨"
   },
   "unidentified": {
     "message": "알 수 없음",
@@ -460,6 +596,9 @@
   "urls_observed": {
     "message": "관찰된 URL"
   },
+  "view_activity_details": {
+    "message": "활동 세부정보 보기"
+  },
   "visit_our_blog": {
     "message": "블로그 방문하기"
   },
@@ -471,6 +610,9 @@
   },
   "website": {
     "message": "웹사이트"
+  },
+  "website_exceptions": {
+    "message": "웹사이트 예외"
   },
   "websites": {
     "message": "웹사이트"
@@ -497,7 +639,7 @@
     "message": "개인 정보 보호 기능이 활성화되지 않으면, 추적기의 기본 기능만 사용할 수 있습니다."
   },
   "you_are_awesome_": {
-    "message": "You are awesome!"
+    "message": "대단하십니다!"
   },
   "you_are_signed_in_as_": {
     "message": "로그인한 계정:"

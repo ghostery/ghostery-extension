@@ -138,23 +138,11 @@ export function updateTabStats(tabId, requests) {
     for (const request of requests) {
       const pattern = request.metadata;
 
-      if (pattern || request.blocked || request.modified) {
-        let tracker =
-          (pattern && stats.trackers.find((t) => t.id === pattern.id)) ||
-          stats.trackers.find((t) => t.id === request.domain);
+      if (pattern) {
+        let tracker = stats.trackers.find((t) => t.id === pattern.id);
 
         if (!tracker) {
-          tracker = pattern
-            ? { ...pattern, requests: [] }
-            : {
-                id: request.domain,
-                name: request.domain,
-                category: 'unidentified',
-                exception: request.domain,
-                blockedByDefault: true,
-                requests: [],
-              };
-
+          tracker = { ...pattern, requests: [] };
           stats.trackers.push(tracker);
           trackersUpdated = true;
         }
@@ -245,7 +233,7 @@ function setupTabStats(tabId, request) {
 
   if (request.isHttp || request.isHttps) {
     tabStats.set(tabId, {
-      domain: request.domain || request.hostname,
+      domain: request.domain,
       url: request.url,
       trackers: [],
     });

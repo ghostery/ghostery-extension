@@ -38,13 +38,6 @@ const setup = asyncSetup([
       ),
     ];
 
-    if (
-      __PLATFORM__ !== 'firefox' &&
-      ENGINES.some(({ key }) => options.terms && options[key])
-    ) {
-      enabledEngines.push(engines.TRACKERDB_ENGINE);
-    }
-
     // Set paused domains
     pausedDomains = options.paused ? options.paused.map(String) : [];
   }),
@@ -195,15 +188,17 @@ async function adblockerOnMessage(msg, sender) {
     }
   });
 
-  if (genericStyles.length > 0) {
-    adblockerInjectStylesWebExtension(genericStyles.join('\n'), {
+  const allGenericStyles = genericStyles.join('\n').trim();
+  if (allGenericStyles.length > 0) {
+    adblockerInjectStylesWebExtension(allGenericStyles, {
       tabId: sender.tab.id,
       allFrames: true,
     });
   }
 
-  if (specificStyles.length > 0) {
-    adblockerInjectStylesWebExtension(specificStyles.join('\n'), {
+  const allSpecificStyles = specificStyles.join('\n').trim();
+  if (allSpecificStyles.length > 0) {
+    adblockerInjectStylesWebExtension(allSpecificStyles, {
       tabId: sender.tab.id,
       frameId: specificFrameId,
     });
@@ -396,7 +391,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (request.metadata?.shouldBlock === false || isPaused(request)) {
+      if (request.metadata?.isTrusted || isPaused(request)) {
         return;
       }
 

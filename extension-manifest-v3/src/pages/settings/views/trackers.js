@@ -137,9 +137,15 @@ export default {
               <gh-settings-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
                   <option selected value="">Show all</option>
-                  <option value="adjusted">Adjusted</option>
-                  <option value="blocked">Blocked</option>
-                  <option value="trusted">Trusted</option>
+                  <option value="adjusted">
+                    <!-- Plural form - list of adjusted trackers | tracker-list -->Adjusted
+                  </option>
+                  <option value="blocked">
+                    <!-- Plural form - list of blocked trackers | tracker-list -->Blocked
+                  </option>
+                  <option value="trusted">
+                    <!-- Plural form - list of trusted trackers | tracker-list -->Trusted
+                  </option>
                 </select>
               </gh-settings-input>
               <gh-settings-input layout="grow:5 width::250px" icon="search">
@@ -147,7 +153,7 @@ export default {
                   type="search"
                   defaultValue="${query}"
                   oninput="${setLazyQuery}"
-                  placeholder="Search for a tracker or organization..."
+                  placeholder="${msg`Search for a tracker or organization...`}"
                 />
               </gh-settings-input>
             </div>
@@ -214,7 +220,7 @@ export default {
                                       tracker.blockedByDefault &&
                                     html`
                                       <ui-text type="label-s" color="gray-500">
-                                        adjusted
+                                        <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                       </ui-text>
                                     `}
                                     <ui-panel-protection-status-toggle

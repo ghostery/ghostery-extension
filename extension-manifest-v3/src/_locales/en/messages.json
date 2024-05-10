@@ -2,12 +2,12 @@
   "@_0__left": {
     "message": "$${0} left"
   },
-  "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} will be trusted on this website.",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_blocked_on_this_website_": {
     "message": "$${0} will be blocked on this website.",
+    "description": "A tracker will be trusted on this website."
+  },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "$${0} will be trusted on this website.",
     "description": "A tracker will be trusted on this website."
   },
   "1_day": {
@@ -35,8 +35,13 @@
   "add_website_exception": {
     "message": "Add website exception"
   },
-  "adjusted": {
-    "message": "adjusted"
+  "adjusted___tracker": {
+    "message": "adjusted",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Adjusted",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Adult Advertising",
@@ -74,14 +79,18 @@
   "become_a_contributor": {
     "message": "Become a Contributor"
   },
-  "block_all__recommend_": {
-    "message": "Block all (recommend)"
+  "block_all__recommended_": {
+    "message": "Block all (recommended)"
   },
   "block_on_this_website": {
     "message": "Block on this website"
   },
   "blocked": {
     "message": "Blocked"
+  },
+  "blocked___tracker_list": {
+    "message": "Blocked",
+    "description": "Plural form - list of blocked trackers"
   },
   "blocked__@_0_": {
     "message": "Blocked: $${0}",
@@ -143,7 +152,7 @@
   },
   "current_protection_status_for_@_0__": {
     "message": "Current protection status for $${0}:",
-    "description": "urrent protection status for a tracker"
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "Customer Interaction",
@@ -206,6 +215,9 @@
   },
   "enabled": {
     "message": "Enabled"
+  },
+  "enter_website_url": {
+    "message": "Enter website URL"
   },
   "essential": {
     "message": "Essential",
@@ -470,6 +482,9 @@
   "search_engine_redirect_protection": {
     "message": "Search Engine Redirect Protection"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Search for a tracker or organization..."
+  },
   "search_website___": {
     "message": "Search website..."
   },
@@ -545,11 +560,18 @@
   "trackers_wheel": {
     "message": "Trackers Wheel"
   },
+  "trust_all__recommended_": {
+    "message": "Trust all (recommended)"
+  },
   "trust_on_this_website": {
     "message": "Trust on this website"
   },
   "trusted": {
     "message": "Trusted"
+  },
+  "trusted___tracker_list": {
+    "message": "Trusted",
+    "description": "Plural form - list of trusted trackers"
   },
   "trusted__@_0_": {
     "message": "Trusted: $${0}",

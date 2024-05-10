@@ -2,6 +2,14 @@
   "@_0__left": {
     "message": "$${0} left"
   },
+  "@_0__will_be_blocked_on_this_website_": {
+    "message": "Трекер $${0} будет заблокирован на этом сайте.",
+    "description": "A tracker will be trusted on this website."
+  },
+  "@_0__will_be_trusted_on_this_website_": {
+    "message": "Трекер $${0} будет разрешен на этом сайте.",
+    "description": "A tracker will be trusted on this website."
+  },
   "1_day": {
     "message": "1 день"
   },
@@ -17,8 +25,23 @@
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
-  "additional_permissions_required": {
-    "message": "Требуются дополнительные разрешения"
+  "add": {
+    "message": "Добавить"
+  },
+  "add_@_0__as_exception": {
+    "message": "Добавить $${0} в качестве исключения",
+    "description": "Add domain as exception"
+  },
+  "add_website_exception": {
+    "message": "Добавить сайт в качестве исключения"
+  },
+  "adjusted___tracker": {
+    "message": "изменено",
+    "description": "Singular form - tracker has been adjusted"
+  },
+  "adjusted___tracker_list": {
+    "message": "Изменено",
+    "description": "Plural form - list of adjusted trackers"
   },
   "adult_advertising": {
     "message": "Реклама для взрослых",
@@ -56,8 +79,34 @@
   "become_a_contributor": {
     "message": "Стать участником"
   },
+  "block_all__recommended_": {
+    "message": "Заблокировать все (рекомендуется)"
+  },
+  "block_on_this_website": {
+    "message": "Заблокировать на этом сайте"
+  },
+  "blocked": {
+    "message": "Заблокированные"
+  },
+  "blocked___tracker_list": {
+    "message": "Заблокированные",
+    "description": "Plural form - list of blocked trackers"
+  },
+  "blocked__@_0_": {
+    "message": "Заблокировано: $${0}",
+    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
+  },
+  "blocked_on_all_websites": {
+    "message": "Заблокировано на всех сайтах"
+  },
+  "blocked_on_this_website": {
+    "message": "Заблокировано на этом сайте"
+  },
   "cancel": {
     "message": "Отмена"
+  },
+  "category": {
+    "message": "Категория"
   },
   "cdn": {
     "message": "СДД",
@@ -68,6 +117,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Нажмите на значок «Расширения» справа от строки поиска и закрепите Ghostery на панели инструментов."
+  },
+  "collapse": {
+    "message": "Свернуть"
   },
   "comments": {
     "message": "Комментарии",
@@ -83,14 +135,24 @@
   "contact_support": {
     "message": "Контактная поддержка"
   },
+  "contribute_to_ghostery_tracker_database_on_github": {
+    "message": "Поддержать базу данных трекеров от Ghostery на Github"
+  },
   "contributor": {
     "message": "Участник"
   },
   "copied_to_clipboard": {
     "message": "Скопировано в буфер обмена"
   },
+  "country": {
+    "message": "Страна"
+  },
   "create_account": {
     "message": "Создать учетную запись"
+  },
+  "current_protection_status_for_@_0__": {
+    "message": "Текущий статус $${0}: ",
+    "description": "Current protection status for a tracker"
   },
   "customer_interaction": {
     "message": "Взаимодействие с клиентами",
@@ -154,9 +216,15 @@
   "enabled": {
     "message": "Включено"
   },
+  "enter_website_url": {
+    "message": "Enter website URL"
+  },
   "essential": {
     "message": "Важное",
     "description": "Tracker category name"
+  },
+  "expand": {
+    "message": "Развернуть"
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Настройте блокировку рекламы от Ghostery для поисковых систем в несколько простых шагов."
@@ -164,6 +232,9 @@
   "extensions": {
     "message": "Расширения",
     "description": "Tracker category name"
+  },
+  "for_all_websites": {
+    "message": "Для всех сайтов"
   },
   "for_more_information_read_our_full": {
     "message": "Для получения дополнительной информации прочтите"
@@ -274,6 +345,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Узнай больше о том, как YouTube противостоит блокировщикам рекламы"
   },
+  "load_more": {
+    "message": "Показать еще"
+  },
   "manifest_name": {
     "message": "Ghostery Трекер & Ad Blocker - приватный блокировщик рекламы"
   },
@@ -290,8 +364,14 @@
     "message": "Разное",
     "description": "Tracker category name"
   },
+  "modify_the_recommended_blocking_settings_for_every_website_": {
+    "message": "Настраивайте рекомендуемые параметры блокировки для каждого сайта."
+  },
   "more_ad_blocking_available": {
     "message": "Дополнительные настройки блокировки рекламы"
+  },
+  "more_in_this_organization": {
+    "message": "Другие трекеры в организации"
   },
   "my_account": {
     "message": "Моя учетная запись"
@@ -302,14 +382,20 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no_trackers_detected": {
-    "message": "Трекеры не обнаружены"
+  "no_activities_detected": {
+    "message": "Действия не обнаружены"
+  },
+  "no_websites_exceptions_added_yet": {
+    "message": "Сайтов, добавленных в исключения, пока нет"
   },
   "number_of_trackers_with_blocked_network_requests_": {
     "message": "Количество трекеров с заблокированными сетевыми запросами."
   },
   "number_of_trackers_with_removed_cookies_or_fingerprints_": {
     "message": "Количество трекеров с удаленными файлами cookie или цифровыми отпечатками устройств."
+  },
+  "observed_activities": {
+    "message": "Отслеживаемые действия"
   },
   "off": {
     "message": "Выкл"
@@ -323,9 +409,18 @@
   "open_youtube_in_a_private_window": {
     "message": "Открой YouTube в закрытом окне"
   },
+  "organization": {
+    "message": "Организация"
+  },
+  "organization_s_website": {
+    "message": "Сайт организации"
+  },
   "other": {
     "message": "Другое",
     "description": "Tracker category name"
+  },
+  "our_recommendation_for_this_activity": {
+    "message": "Рекомендации для этого действия"
   },
   "pause_on_this_site": {
     "message": "Пауза на этом сайте"
@@ -357,6 +452,9 @@
   "privacy_protection": {
     "message": "Защита конфиденциальности"
   },
+  "protection_status": {
+    "message": "Статус защиты"
+  },
   "read_more_on_whotracks_me": {
     "message": "Читайте больше на WhoTracks.Me"
   },
@@ -375,14 +473,23 @@
   "resume": {
     "message": "Возобновить"
   },
+  "save": {
+    "message": "Сохранить"
+  },
   "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
     "message": "Сохраняйте свои настройки и синхронизируйте их между браузерами и устройствами."
   },
   "search_engine_redirect_protection": {
     "message": "Защита от перенаправления поисковых систем"
   },
+  "search_for_a_tracker_or_organization___": {
+    "message": "Ищи Трекер или организацию..."
+  },
   "search_website___": {
     "message": "Поиск сайта..."
+  },
+  "set_blocking_preference": {
+    "message": "Настроить параметры блокировки"
   },
   "settings": {
     "message": "Настройки"
@@ -392,6 +499,9 @@
   },
   "setup_successful": {
     "message": "Настройка завершена"
+  },
+  "show_all": {
+    "message": "Показать все"
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Показывает количество трекеров рядом с результатами поиска."
@@ -424,16 +534,19 @@
     "message": "Условия и положения"
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
+    "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
+  },
+  "tracker_database": {
+    "message": "База данных трекера"
+  },
+  "trackers": {
+    "message": "Трекеры"
   },
   "trackers_blocked": {
     "message": "Заблокированные трекеры"
   },
   "trackers_count": {
     "message": "Трекеры Count"
-  },
-  "trackers_detected": {
-    "message": "Трекеры обнаружены"
   },
   "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
     "message": "Трекеры, обнаруженные Ghostery на этом сайте:&nbsp;$${0}"
@@ -446,6 +559,29 @@
   },
   "trackers_wheel": {
     "message": "Трекерская рулетка"
+  },
+  "trust_all__recommended_": {
+    "message": "Доверяйте всем (рекомендуется)"
+  },
+  "trust_on_this_website": {
+    "message": "Разрешить на этом сайте"
+  },
+  "trusted": {
+    "message": "Доверенный"
+  },
+  "trusted___tracker_list": {
+    "message": "Доверенный",
+    "description": "Plural form - list of trusted trackers"
+  },
+  "trusted__@_0_": {
+    "message": "Разрешено: $${0}",
+    "description": "A number of trusted trackers eg: 'Trusted: 2'"
+  },
+  "trusted_on_all_websites": {
+    "message": "Разрешено на всех сайтах"
+  },
+  "trusted_on_this_website": {
+    "message": "Разрешено на этом сайте"
   },
   "unidentified": {
     "message": "Неизвестно",
@@ -460,6 +596,9 @@
   "urls_observed": {
     "message": "Отслеживаемые URL-адреса"
   },
+  "view_activity_details": {
+    "message": "Просмотреть подробности действия"
+  },
   "visit_our_blog": {
     "message": "Посетите наш блог"
   },
@@ -471,6 +610,9 @@
   },
   "website": {
     "message": "Веб-сайт"
+  },
+  "website_exceptions": {
+    "message": "Сайты-исключения"
   },
   "websites": {
     "message": "Веб-сайты"
@@ -497,7 +639,7 @@
     "message": "Без включенных функций приватности доступен только базовый функционал именных трекеров."
   },
   "you_are_awesome_": {
-    "message": "You are awesome!"
+    "message": "Отлично!"
   },
   "you_are_signed_in_as_": {
     "message": "Вы вошли как:"

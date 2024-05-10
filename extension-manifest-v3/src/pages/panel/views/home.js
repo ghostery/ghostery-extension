@@ -24,7 +24,9 @@ import Navigation from './navigation.js';
 import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
 
-const SETTINGS_URL = chrome.runtime.getURL('/pages/settings/index.html');
+const SETTINGS_URL = chrome.runtime.getURL(
+  '/pages/settings/index.html#@gh-settings-privacy',
+);
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
 
 async function togglePause(host, event) {
