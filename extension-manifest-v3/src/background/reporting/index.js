@@ -110,6 +110,27 @@ function platformSpecificSettings() {
     };
   }
 
+  if (navigator.userAgent.includes('Edg/')) {
+    // Ghostery extension for Microsoft's Edge desktop browser
+    return {
+      ALLOWED_COUNTRY_CODES: [
+        'us',
+        'de',
+        'ru',
+        'fr',
+        'pl',
+        'gb',
+        'br',
+        'ca',
+        'ua',
+        'nl',
+        'es',
+      ],
+      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-edge-desktop/patterns.json',
+      CHANNEL: 'edge-desktop',
+    };
+  }
+
   console.warn(
     'No matching config found. Falling back to patterns from Chrome Desktop.',
   );
