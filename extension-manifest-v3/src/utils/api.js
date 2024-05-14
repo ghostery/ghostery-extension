@@ -21,6 +21,7 @@ const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 const COOKIE_SHORT_DURATION = 60 * 60; // 1 hour in seconds
 let COOKIE_EXPIRATION_DATE_OFFSET = 0;
 
+export const HOME_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/`;
 export const SIGNON_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/signin`;
 export const CREATE_ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/register`;
 export const ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/account`;
