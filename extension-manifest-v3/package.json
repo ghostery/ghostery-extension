@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.3.0",
+  "version": "10.3.1",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines/index.js",
