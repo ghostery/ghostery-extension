@@ -176,7 +176,7 @@ let requestReporter = null;
 let pausedDomains = [];
 let isAntiTrackingEnabled = Options.blockTrackers;
 
-if (__PLATFORM__ === 'firefox' || __PLATFORM__ === 'opera') {
+if (__PLATFORM__ !== 'safari') {
   requestReporter = new RequestReporter(config.request, {
     webRequestPipeline,
     communication,
