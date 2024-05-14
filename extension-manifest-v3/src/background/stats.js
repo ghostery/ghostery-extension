@@ -120,6 +120,55 @@ function updateIcon(tabId, force) {
 
 const URL_IN_STATS_LIMIT = 5;
 
+function pushTabStats(stats, requests) {
+  let trackersUpdated = false;
+
+  for (const request of requests) {
+    const pattern = request.metadata;
+
+    if (pattern) {
+      let tracker = stats.trackers.find((t) => t.id === pattern.id);
+
+      if (!tracker) {
+        tracker = { ...pattern, requests: [] };
+        stats.trackers.push(tracker);
+        trackersUpdated = true;
+      }
+
+      if (!tracker.requests.some((r) => r.url === request.url)) {
+        tracker.requestsCount = (tracker.requestsCount || 0) + 1;
+        tracker.blocked = tracker.blocked || request.blocked;
+        tracker.modified = tracker.modified || request.modified;
+
+        let blocked = Number(request.blocked);
+        let modified = Number(request.modified);
+        let observed = !blocked && !modified ? 1 : 0;
+
+        tracker.requests = tracker.requests.filter((r) => {
+          if (r.blocked) {
+            return ++blocked <= URL_IN_STATS_LIMIT ? true : false;
+          }
+
+          if (r.modified) {
+            return ++modified <= URL_IN_STATS_LIMIT ? true : false;
+          }
+
+          return ++observed <= URL_IN_STATS_LIMIT ? true : false;
+        });
+
+        tracker.requests.unshift({
+          id: request.requestId,
+          url: request.url,
+          blocked: request.blocked,
+          modified: request.modified,
+        });
+      }
+    }
+  }
+
+  return trackersUpdated;
+}
+
 export function updateTabStats(tabId, requests) {
   Promise.resolve().then(async () => {
     const stats = tabStats.get(tabId);
@@ -128,57 +177,11 @@ export function updateTabStats(tabId, requests) {
     // as some of the requests are fired before the tab is created, tabId -1
     if (!stats) return;
 
-    let trackersUpdated = false;
-    let requestsUpdated = false;
-
     // Filter out requests that are not related to the current page
     // (e.g. requests on trailing edge when navigation to a new page is in progress)
     requests = requests.filter((request) => request.isFromDomain(stats.domain));
 
-    for (const request of requests) {
-      const pattern = request.metadata;
-
-      if (pattern) {
-        let tracker = stats.trackers.find((t) => t.id === pattern.id);
-
-        if (!tracker) {
-          tracker = { ...pattern, requests: [] };
-          stats.trackers.push(tracker);
-          trackersUpdated = true;
-        }
-
-        if (!tracker.requests.some((r) => r.url === request.url)) {
-          tracker.requestsCount = (tracker.requestsCount || 0) + 1;
-          tracker.blocked = tracker.blocked || request.blocked;
-          tracker.modified = tracker.modified || request.modified;
-
-          let blocked = Number(request.blocked);
-          let modified = Number(request.modified);
-          let observed = !blocked && !modified ? 1 : 0;
-
-          tracker.requests = tracker.requests.filter((r) => {
-            if (r.blocked) {
-              return ++blocked <= URL_IN_STATS_LIMIT ? true : false;
-            }
-
-            if (r.modified) {
-              return ++modified <= URL_IN_STATS_LIMIT ? true : false;
-            }
-
-            return ++observed <= URL_IN_STATS_LIMIT ? true : false;
-          });
-
-          tracker.requests.unshift({
-            id: request.requestId,
-            url: request.url,
-            blocked: request.blocked,
-            modified: request.modified,
-          });
-
-          requestsUpdated = true;
-        }
-      }
-    }
+    const trackersUpdated = pushTabStats(stats, requests);
 
     if (trackersUpdated) {
       stats.trackers.sort(
@@ -186,40 +189,62 @@ export function updateTabStats(tabId, requests) {
       );
     }
 
-    if (requestsUpdated) {
-      if (
-        __PLATFORM__ === 'safari' &&
-        chrome.declarativeNetRequest.getMatchedRules
-      ) {
-        try {
-          const { rulesMatchedInfo } =
-            await chrome.declarativeNetRequest.getMatchedRules({
-              tabId,
-              minTimeStamp: stats.timestamp,
-            });
+    if (
+      __PLATFORM__ === 'safari' &&
+      chrome.declarativeNetRequest.getMatchedRules
+    ) {
+      try {
+        const nextTimestamp = Date.now();
+        const { rulesMatchedInfo } =
+          await chrome.declarativeNetRequest.getMatchedRules({
+            tabId,
+            minTimeStamp: stats.timestamp,
+          });
 
-          for (const info of rulesMatchedInfo) {
-            for (const tracker of stats.trackers) {
-              for (const request of tracker.requests) {
-                if (request.url === info.request.url) {
-                  request.blocked = true;
-                  tracker.blocked = true;
-                }
+        const notFoundRequests = [];
+        for (const info of rulesMatchedInfo) {
+          let found = false;
+          for (const tracker of stats.trackers) {
+            for (const request of tracker.requests) {
+              if (request.url === info.request.url) {
+                found = true;
+
+                request.blocked = true;
+                tracker.blocked = true;
+
+                break;
               }
             }
+
+            if (found) break;
           }
-        } catch (e) {
-          console.error('Failed to get matched rules for stats', e);
+
+          if (!found) {
+            const request = Request.fromRequestDetails({
+              url: info.request.url,
+              originUrl: stats.url,
+            });
+            request.blocked = true;
+            notFoundRequests.push(request);
+          }
         }
-      }
 
+        if (notFoundRequests.length) {
+          pushTabStats(stats, notFoundRequests);
+        }
+
+        stats.timestamp = nextTimestamp;
+      } catch (e) {
+        console.error('Failed to get matched rules for stats', e);
+      }
+    }
+
+    if (stats === tabStats.get(tabId)) {
       // After navigation stats are cleared, so the current `stats` variable might be outdated
-      if (stats === tabStats.get(tabId)) {
-        tabStats.set(tabId, stats);
+      tabStats.set(tabId, stats);
 
-        // We need to update the icon only if new categories were added
-        if (trackersUpdated) updateIcon(tabId);
-      }
+      // We need to update the icon only if new categories were added
+      if (trackersUpdated) updateIcon(tabId);
     }
   });
 }
@@ -264,7 +289,7 @@ function setupTabStats(tabId, request) {
       domain: request.domain,
       url: request.url,
       trackers: [],
-      timestamp: performance.now(),
+      timestamp: __PLATFORM__ === 'safari' ? Date.now() : undefined,
     });
   } else {
     tabStats.delete(tabId);
