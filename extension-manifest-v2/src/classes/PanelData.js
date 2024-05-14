@@ -411,7 +411,7 @@ class PanelData {
 
 		const { url, pageHost } = this._activeTab;
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
-		const { site_blacklist, site_whitelist } = conf;
+		const { site_blacklist, site_whitelist, common_whitelist } = conf;
 
 		return {
 			paused_blocking,
@@ -420,6 +420,7 @@ class PanelData {
 			site_whitelist,
 			pageHost,
 			pageUrl: url || '',
+			common_whitelist,
 			siteNotScanned: !this._trackerList || false,
 			sitePolicy: Policy.getSitePolicy(url) || false,
 			...this._getDynamicSummaryData()

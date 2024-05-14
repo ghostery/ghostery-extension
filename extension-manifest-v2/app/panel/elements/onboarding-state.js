@@ -27,7 +27,6 @@ export default define({
           layout="column center gap:2 margin absolute inset layer:1"
         >
           <span layout="block:center">
-            <ui-icon name="warning" layout="block inline"></ui-icon><br />
             Additional Permissions Required
           </span>
           <span class="button">
