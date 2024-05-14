@@ -185,7 +185,7 @@ window.addEventListener('message', (message) => {
     );
 
     chrome.runtime.sendMessage({ action: 'disableWTMReport' });
-  } else if (message.data.startsWith('WTMReportResize')) {
+  } else if (message.data?.startsWith('WTMReportResize')) {
     const height = message.data.split(':')[1];
     resizePopup(height);
   }
