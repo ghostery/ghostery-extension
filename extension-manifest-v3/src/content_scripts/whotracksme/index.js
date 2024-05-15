@@ -47,32 +47,32 @@ function postMessage({ urls }) {
   function onLoadNativeCallback() {
     // Send back the sources of every script and image in the DOM back to the host application.
     [].slice.apply(document.scripts).forEach(function (el) {
-      sendMessage(el.src, 'load script');
+      if (el.getAttribute('src')) sendMessage(el.src, 'load script');
     });
     [].slice.apply(document.images).forEach(function (el) {
-      sendMessage(el.src, 'load image');
+      if (el.getAttribute('src')) sendMessage(el.src, 'load image');
     });
     [].slice
       .apply(document.getElementsByTagName('iframe'))
       .forEach(function (el) {
-        sendMessage(el.src, 'load iframe');
+        if (el.getAttribute('src')) sendMessage(el.src, 'load iframe');
       });
 
     const mutationObserver = new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
         mutation.addedNodes.forEach(function (node) {
           // `<script src="*">` elements.
-          if (node.tagName === 'SCRIPT' && node.src) {
+          if (node.tagName === 'SCRIPT' && node.getAttribute('src')) {
             sendMessage(node.src, 'mutation script');
             return;
           }
-          if (node.tagName === 'IMG' && node.src) {
+          if (node.tagName === 'IMG' && node.getAttribute('src')) {
             sendMessage(node.src, 'mutation image');
             return;
           }
 
           // `<iframe src="*">` elements where [src] is not "about:blank".
-          if (node.tagName === 'IFRAME' && node.src) {
+          if (node.tagName === 'IFRAME' && node.getAttribute('src')) {
             if (node.src === 'about:blank') {
               return;
             }
