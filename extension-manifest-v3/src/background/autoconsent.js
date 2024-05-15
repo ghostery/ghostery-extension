@@ -28,24 +28,29 @@ async function initialize(msg, tabId, frameId) {
     blockAnnoyances &&
     (!paused || !paused.some(({ id }) => id === domain))
   ) {
-    chrome.tabs.sendMessage(
-      tabId,
-      {
-        action: 'autoconsent',
-        type: 'initResp',
-        rules,
-        config: {
-          enabled: true,
-          autoAction: 'optOut',
-          disabledCmps: [],
-          enablePrehide: true,
-          detectRetries: 20,
+    try {
+      chrome.tabs.sendMessage(
+        tabId,
+        {
+          action: 'autoconsent',
+          type: 'initResp',
+          rules,
+          config: {
+            enabled: true,
+            autoAction: 'optOut',
+            disabledCmps: [],
+            enablePrehide: true,
+            detectRetries: 20,
+          },
         },
-      },
-      {
-        frameId,
-      },
-    );
+        {
+          frameId,
+        },
+      );
+    } catch (e) {
+      // The error is thrown when the tab is not ready to receive messages,
+      // like it is closed before the message is sent
+    }
   }
 }
 

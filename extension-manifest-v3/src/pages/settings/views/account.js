@@ -6,13 +6,14 @@ import Options from '/store/options.js';
 import Session from '/store/session.js';
 
 import {
+  ACCOUNT_PAGE_URL,
   SIGNON_PAGE_URL,
   CREATE_ACCOUNT_PAGE_URL,
-  ACCOUNT_PAGE_URL,
 } from '/utils/api.js';
 
 import assets from '../assets/index.js';
 import Preview from './preview.js';
+
 const PREVIEWS = {
   'sync': {
     src: assets['sync'],
@@ -20,6 +21,41 @@ const PREVIEWS = {
     description: msg`Save and synchronize your custom settings between browsers and devices.`,
   },
 };
+
+function openGhosteryPage(url) {
+  return async () => {
+    const currentTab = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
+
+    let tab;
+    const onSuccess = (details) => {
+      if (
+        details.tabId === tab.id &&
+        details.url.startsWith(ACCOUNT_PAGE_URL)
+      ) {
+        chrome.tabs.remove(tab.id);
+        chrome.webNavigation.onCommitted.removeListener(onSuccess);
+      }
+    };
+
+    const onRemove = (tabId) => {
+      if (tabId === tab.id) {
+        chrome.webNavigation.onCommitted.removeListener(onSuccess);
+        chrome.tabs.onRemoved.removeListener(onRemove);
+
+        store.clear(Session);
+        chrome.tabs.update(currentTab[0].id, { active: true });
+      }
+    };
+
+    chrome.tabs.onRemoved.addListener(onRemove);
+    chrome.webNavigation.onCommitted.addListener(onSuccess);
+
+    tab = await chrome.tabs.create({ url });
+  };
+}
 
 export default {
   options: store(Options),
@@ -63,26 +99,30 @@ export default {
                   <div layout="row gap">
                     <ui-button>
                       <a href="${ACCOUNT_PAGE_URL}" onclick="${openTabWithUrl}">
-                        Account details
+                        Account details <ui-icon name="arrow-right-s"></ui-icon>
                       </a>
                     </ui-button>
                   </div>
                 `
               : html`
-                  <ui-text type="headline-m">Join Ghostery</ui-text>
+                  <div>
+                    <ui-text type="headline-m">Join Ghostery</ui-text>
+                    <ui-text color="gray-500">
+                      Sign in or create account on ghostery.com
+                    </ui-text>
+                  </div>
                   <div layout="row gap">
                     <ui-button type="success">
-                      <a href="${SIGNON_PAGE_URL}" onclick="${openTabWithUrl}">
-                        Sign in
-                      </a>
+                      <button onclick="${openGhosteryPage(SIGNON_PAGE_URL)}">
+                        Sign in <ui-icon name="arrow-right-s"></ui-icon>
+                      </button>
                     </ui-button>
                     <ui-button type="outline">
-                      <a
-                        href="${CREATE_ACCOUNT_PAGE_URL}"
-                        onclick="${openTabWithUrl}"
+                      <button
+                        onclick="${openGhosteryPage(CREATE_ACCOUNT_PAGE_URL)}"
                       >
-                        Create Account
-                      </a>
+                        Create Account <ui-icon name="arrow-right-s"></ui-icon>
+                      </button>
                     </ui-button>
                   </div>
                 `)}

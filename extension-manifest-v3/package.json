@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.3.0",
+  "version": "10.3.1",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines/index.js",
@@ -35,7 +35,7 @@
     "@cliqz/adblocker": "^1.27.3",
     "@cliqz/adblocker-content": "^1.27.3",
     "@cliqz/adblocker-webextension-cosmetics": "^1.27.3",
-    "@duckduckgo/autoconsent": "^10.6.3",
+    "@duckduckgo/autoconsent": "^10.8.0",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",

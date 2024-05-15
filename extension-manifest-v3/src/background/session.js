@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import Options, { sync } from '/store/options.js';
 import Session, { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
 
-import { ACCOUNT_PAGE_URL, SIGNON_PAGE_URL } from '/utils/api.js';
+import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/api.js';
 
 // Trigger options sync every one day
 const ALARM_SYNC_OPTIONS = 'session:sync:options';
@@ -29,7 +29,7 @@ async function syncOptions() {
 
 // Observe cookie changes (login/logout actions)
 chrome.webNavigation.onDOMContentLoaded.addListener(async ({ url = '' }) => {
-  if (url.includes(SIGNON_PAGE_URL) || url.includes(ACCOUNT_PAGE_URL)) {
+  if (url === HOME_PAGE_URL || url.includes(ACCOUNT_PAGE_URL)) {
     const { user } = await store.resolve(Session);
 
     if (user) {
