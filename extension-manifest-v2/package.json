@@ -41,7 +41,7 @@
     "@cliqz/adblocker-content": "^1.27.3",
     "@cliqz/adblocker-webextension": "^1.27.3",
     "@cliqz/url-parser": "^1.1.5",
-    "@duckduckgo/autoconsent": "^10.6.3",
+    "@duckduckgo/autoconsent": "^10.8.0",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",
