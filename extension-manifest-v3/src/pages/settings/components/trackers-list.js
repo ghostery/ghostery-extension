@@ -35,7 +35,12 @@ export default {
             layout="block:left row items:center gap:1.5 padding:0.5 grow"
             layout@768px="gap:2"
           >
-            <ui-icon id="arrow" name="arrow-down" layout="size:3"></ui-icon>
+            <ui-icon
+              id="arrow"
+              name="arrow-down"
+              layout="size:3"
+              color="gray-600"
+            ></ui-icon>
             <ui-panel-category-icon
               name="${name}"
               layout="size:5 padding"

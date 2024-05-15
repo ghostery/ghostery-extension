@@ -39,12 +39,17 @@ export default {
       border-radius: 8px;
       padding: 11px;
       margin: 0;
-      font: var(--ui-font-body-m);
+      color: var(--ui-color-gray-800);
+    }
+
+    ::slotted(input) {
+      font: var(--ui-font-body-l);
     }
 
     ::slotted(textarea) {
       padding: 8px;
       font: var(--ui-font-body-s);
+      color: var(--ui-color-gray-800);
     }
 
     ::slotted(select) {
@@ -62,6 +67,12 @@ export default {
 
     :host([error]) ::slotted(input) {
       border-color: var(--ui-color-error-400);
+    }
+
+    @media screen and (min-width: 768px) {
+      ::slotted(input) {
+        font: var(--ui-font-body-m);
+      }
     }
   `,
 };

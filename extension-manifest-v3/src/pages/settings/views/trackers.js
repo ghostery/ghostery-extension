@@ -115,11 +115,14 @@ export default {
                 <a
                   href="https://github.com/ghostery/trackerdb"
                   rel="noreferrer"
-                  layout="row gap:0.5"
+                  layout="block"
                   target="_blank"
                 >
                   Contribute to Ghostery Tracker Database on Github
-                  <ui-icon name="arrow-right-s"></ui-icon>
+                  <ui-icon
+                    name="arrow-right-s"
+                    layout="block inline margin:bottom:-2px"
+                  ></ui-icon>
                 </a>
               </ui-text>
             </div>
