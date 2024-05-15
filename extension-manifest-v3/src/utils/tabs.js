@@ -15,7 +15,10 @@ export async function openTabWithUrl(host, event) {
   event.preventDefault();
 
   try {
-    const tabs = await chrome.tabs.query({ url: href.split('#')[0] });
+    const tabs = await chrome.tabs.query({
+      url: href.split('#')[0],
+      currentWindow: true,
+    });
 
     if (tabs.length) {
       await chrome.tabs.update(tabs[0].id, {
