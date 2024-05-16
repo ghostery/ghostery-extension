@@ -342,8 +342,6 @@ if (__PLATFORM__ === 'firefox') {
 
       // INFO: request.source... is only available in Firefox
       if (request.sourceDomain || request.sourceHostname) {
-        if (isPaused(request)) return;
-
         if (details.type !== 'main_frame') {
           updateTabStats(details.tabId, [request]);
 
@@ -351,6 +349,8 @@ if (__PLATFORM__ === 'firefox') {
             return;
           }
         }
+
+        if (isPaused(request)) return;
 
         const allEngines = request.metadata
           ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
