@@ -10,6 +10,7 @@
  */
 
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
+import { snippets } from '@duckduckgo/autoconsent/lib/eval-snippets';
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
@@ -54,22 +55,14 @@ async function initialize(msg, tabId, frameId) {
   }
 }
 
-async function evalCode(code, id, tabId, frameId) {
+async function evalCode(snippetId, id, tabId, frameId) {
   const result = await chrome.scripting.executeScript({
     target: {
       tabId,
       frameIds: [frameId],
     },
     world: __PLATFORM__ === 'firefox' ? undefined : 'MAIN',
-    args: [code],
-    func: (code) => {
-      try {
-        return window.eval(code);
-      } catch (e) {
-        // ignore CSP errors
-        return;
-      }
-    },
+    func: snippets[snippetId],
   });
 
   await chrome.tabs.sendMessage(
@@ -97,7 +90,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
     case 'init':
       return initialize(msg, tabId, frameId);
     case 'eval':
-      return evalCode(msg.code, msg.id, tabId, frameId);
+      return evalCode(msg.snippetId, msg.id, tabId, frameId);
     default:
       break;
   }
