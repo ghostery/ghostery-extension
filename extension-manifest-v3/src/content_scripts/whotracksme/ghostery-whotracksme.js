@@ -74,6 +74,7 @@
       sendMessage(value);
       originalImageSrc.set.call(this, value);
     },
+    configurable: true,
   });
 
   // -------------------------------------------------

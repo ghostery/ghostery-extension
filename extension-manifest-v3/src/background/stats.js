@@ -118,82 +118,113 @@ function updateIcon(tabId, force) {
   refreshIcon(tabId);
 }
 
-const URL_IN_STATS_LIMIT = 5;
+function pushTabStats(stats, requests) {
+  let trackersUpdated = false;
 
-export function updateTabStats(tabId, requests) {
-  Promise.resolve().then(async () => {
-    const stats = tabStats.get(tabId);
+  for (const request of requests) {
+    const pattern = request.metadata;
 
-    // Stats might not be available on Firefox using webRequest.onBeforeRequest
-    // as some of the requests are fired before the tab is created, tabId -1
-    if (!stats) return;
+    if (pattern) {
+      let tracker = stats.trackers.find((t) => t.id === pattern.id);
 
-    let trackersUpdated = false;
-    let requestsUpdated = false;
+      if (!tracker) {
+        tracker = { ...pattern, requests: [] };
+        stats.trackers.push(tracker);
+        trackersUpdated = true;
+      }
 
-    // Filter out requests that are not related to the current page
-    // (e.g. requests on trailing edge when navigation to a new page is in progress)
-    requests = requests.filter((request) => request.isFromDomain(stats.domain));
+      if (!tracker.requests.some((r) => r.url === request.url)) {
+        tracker.requestsCount = (tracker.requestsCount || 0) + 1;
+        tracker.blocked = tracker.blocked || request.blocked;
+        tracker.modified = tracker.modified || request.modified;
+        tracker.requests = tracker.requests.slice(0, 9);
 
-    for (const request of requests) {
-      const pattern = request.metadata;
-
-      if (pattern) {
-        let tracker = stats.trackers.find((t) => t.id === pattern.id);
-
-        if (!tracker) {
-          tracker = { ...pattern, requests: [] };
-          stats.trackers.push(tracker);
-          trackersUpdated = true;
-        }
-
-        if (!tracker.requests.some((r) => r.url === request.url)) {
-          tracker.requestsCount = (tracker.requestsCount || 0) + 1;
-          tracker.blocked = tracker.blocked || request.blocked;
-          tracker.modified = tracker.modified || request.modified;
-
-          let blocked = Number(request.blocked);
-          let modified = Number(request.modified);
-          let observed = !blocked && !modified ? 1 : 0;
-
-          tracker.requests = tracker.requests.filter((r) => {
-            if (r.blocked) {
-              return ++blocked <= URL_IN_STATS_LIMIT ? true : false;
-            }
-
-            if (r.modified) {
-              return ++modified <= URL_IN_STATS_LIMIT ? true : false;
-            }
-
-            return ++observed <= URL_IN_STATS_LIMIT ? true : false;
-          });
-
-          tracker.requests.unshift({
-            id: request.requestId,
-            url: request.url,
-            blocked: request.blocked,
-            modified: request.modified,
-          });
-
-          requestsUpdated = true;
-        }
+        tracker.requests.unshift({
+          id: request.requestId,
+          url: request.url,
+          blocked: request.blocked,
+          modified: request.modified,
+        });
       }
     }
+  }
 
-    if (trackersUpdated) {
-      stats.trackers.sort(
-        (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
-      );
+  return trackersUpdated;
+}
+
+export async function updateTabStats(tabId, requests) {
+  const stats = tabStats.get(tabId);
+
+  // Stats might not be available on Firefox using webRequest.onBeforeRequest
+  // as some of the requests are fired before the tab is created, tabId -1
+  if (!stats) return;
+
+  // Filter out requests that are not related to the current page
+  // (e.g. requests on trailing edge when navigation to a new page is in progress)
+  requests = requests.filter((request) => request.isFromDomain(stats.domain));
+
+  const trackersUpdated = pushTabStats(stats, requests);
+
+  if (trackersUpdated) {
+    stats.trackers.sort(
+      (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
+    );
+  }
+
+  if (
+    __PLATFORM__ === 'safari' &&
+    chrome.declarativeNetRequest.getMatchedRules
+  ) {
+    try {
+      const { rulesMatchedInfo } =
+        await chrome.declarativeNetRequest.getMatchedRules({
+          tabId,
+          minTimeStamp: stats.timestamp,
+        });
+
+      const notFoundRequests = [];
+      for (const info of rulesMatchedInfo) {
+        let found = false;
+        for (const tracker of stats.trackers) {
+          for (const request of tracker.requests) {
+            if (request.url === info.request.url) {
+              found = true;
+
+              request.blocked = true;
+              tracker.blocked = true;
+
+              break;
+            }
+          }
+
+          if (found) break;
+        }
+
+        if (!found) {
+          const request = Request.fromRequestDetails({
+            url: info.request.url,
+            originUrl: stats.url,
+          });
+          request.blocked = true;
+          notFoundRequests.push(request);
+        }
+      }
+
+      if (notFoundRequests.length) {
+        pushTabStats(stats, notFoundRequests);
+      }
+    } catch (e) {
+      console.error('Failed to get matched rules for stats', e);
     }
+  }
 
-    // After navigation stats are cleared, so the current `stats` variable might be outdated
-    if (requestsUpdated && stats === tabStats.get(tabId)) {
-      tabStats.set(tabId, stats);
+  // After navigation stats are cleared, so the current `stats` variable might be outdated
+  if (stats === tabStats.get(tabId)) {
+    tabStats.set(tabId, stats);
 
-      // We need to update the icon only if new categories were added
-      if (trackersUpdated) updateIcon(tabId);
-    }
-  });
+    // We need to update the icon only if new categories were added
+    if (trackersUpdated) updateIcon(tabId);
+  }
 }
 
 async function flushTabStatsToDailyStats(tabId) {
@@ -223,33 +254,29 @@ async function flushTabStatsToDailyStats(tabId) {
   });
 }
 
-chrome.tabs.onRemoved.addListener((tabId) => {
-  flushTabStatsToDailyStats(tabId);
-  tabStats.delete(tabId);
-});
+function setupTabStats(details) {
+  flushTabStatsToDailyStats(details.tabId);
 
-function setupTabStats(tabId, request) {
-  flushTabStatsToDailyStats(tabId);
+  const request = Request.fromRequestDetails(details);
 
   if (request.isHttp || request.isHttps) {
-    tabStats.set(tabId, {
+    tabStats.set(details.tabId, {
       domain: request.domain,
       url: request.url,
       trackers: [],
+      timestamp: details.timeStamp,
     });
   } else {
-    tabStats.delete(tabId);
+    tabStats.delete(details.tabId);
   }
 
-  updateIcon(tabId, true);
+  updateIcon(details.tabId, true);
 }
 
 // Setup stats for the tab when a user navigates to a new page
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-  if (details.tabId < 0) return;
-
-  if (details.parentFrameId === -1) {
-    setupTabStats(details.tabId, Request.fromRequestDetails(details));
+  if (details.tabId > -1 && details.parentFrameId === -1) {
+    setupTabStats(details);
   }
 });
 
@@ -264,10 +291,11 @@ if (__PLATFORM__ === 'safari') {
           // This condition ensures that we setup tabStats for the tab
           // when `updateTabStats` message is received.
           if (tabStats.get(sender.tab.id)?.url !== sender.url) {
-            setupTabStats(
-              sender.tab.id,
-              Request.fromRequestDetails({ url: sender.url }),
-            );
+            setupTabStats({
+              tabId: sender.tab.id,
+              url: sender.url,
+              timeStamp: Date.now(),
+            });
           }
 
           updateTabStats(
@@ -329,3 +357,8 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
     },
   );
 }
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  flushTabStatsToDailyStats(tabId);
+  tabStats.delete(tabId);
+});
