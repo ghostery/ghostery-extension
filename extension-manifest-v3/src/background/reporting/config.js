@@ -38,6 +38,7 @@ function platformSpecificSettings() {
 
   if (navigator.userAgent.includes('Android')) {
     return {
+      // TODO: once Ghostery 10 is released on Firefox, we can extend this list
       ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
       PATTERNS_URL:
         'https://cdn2.ghostery.com/wtm-ghostery-android/patterns.json',
@@ -90,13 +91,35 @@ function platformSpecificSettings() {
     };
   }
 
+  if (navigator.userAgent.includes('Firefox/')) {
+    // Ghostery extension running inside Firefox Desktop or the Ghostery Desktop Browser
+    return {
+      // TODO: once Ghostery 10 is released on Firefox, we can extend this list
+      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
+      PATTERNS_URL:
+        'https://cdn2.ghostery.com/wtm-firefox-desktop/patterns.json',
+      CHANNEL: 'firefox-desktop',
+    };
+  }
+
+  if (navigator.userAgent.includes('Chrome/')) {
+    // Ghostery extension running inside Chrome Desktop
+    return {
+      // TODO: once Ghostery 10 is released on Chrome, we can extend this list
+      ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
+      PATTERNS_URL:
+        'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
+      CHANNEL: 'chrome-desktop',
+    };
+  }
+
   console.warn(
     'No matching config found. Falling back to patterns from Chrome Desktop.',
   );
   return {
     ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
     PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
-    CHANNEL: 'ghostery',
+    CHANNEL: 'chrome-desktop',
   };
 }
 
