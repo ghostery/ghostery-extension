@@ -48,7 +48,7 @@ export default {
         </a>
         <a
           href="${router.url(Trackers)}"
-          class="${{ active: router.active(Trackers) }}"
+          class="${{ active: router.active(Trackers, { stack: true }) }}"
           slot="nav"
         >
           <ui-icon name="block-m" color="nav" layout="size:3"></ui-icon>
