@@ -509,6 +509,9 @@
   "sign_in": {
     "message": "로그인 "
   },
+  "sign_in_or_create_account_on_ghostery_com": {
+    "message": "Sign in or create account on ghostery.com"
+  },
   "simple_view": {
     "message": "간단히 보기 "
   },
