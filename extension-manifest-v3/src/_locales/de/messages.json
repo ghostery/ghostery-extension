@@ -509,6 +509,9 @@
   "sign_in": {
     "message": "Anmelden"
   },
+  "sign_in_or_create_account_on_ghostery_com": {
+    "message": "Sign in or create account on ghostery.com"
+  },
   "simple_view": {
     "message": "Einfache Ansicht"
   },
