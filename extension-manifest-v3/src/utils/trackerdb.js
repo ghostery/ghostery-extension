@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { store } from 'hybrids';
-import TrackerException from '/store/tracker-exception.js';
+import TrackerException from '../store/tracker-exception.js';
 
 import * as engines from './engines.js';
 

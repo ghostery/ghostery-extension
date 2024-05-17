@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { requestPermission } from '/utils/offscreen.js';
+import { requestPermission } from '../utils/offscreen.js';
 
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
