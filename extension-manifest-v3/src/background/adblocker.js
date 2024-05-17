@@ -341,7 +341,7 @@ if (__PLATFORM__ === 'firefox') {
       const request = Request.fromRequestDetails(details);
 
       // INFO: request.source... is only available in Firefox
-      if (request.sourceDomain || request.sourceHostname) {
+      if (request.sourceDomain) {
         if (details.type !== 'main_frame') {
           updateTabStats(details.tabId, [request]);
 

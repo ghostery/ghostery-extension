@@ -59,7 +59,7 @@ if (__PLATFORM__ !== 'firefox') {
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.log('DNR - Lists successfully updated');
+        console.info('DNR - Lists successfully updated');
       } catch (e) {
         console.error(`DNR - Error while updating lists:`, e);
       }
