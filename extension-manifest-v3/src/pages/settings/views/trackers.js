@@ -76,7 +76,7 @@ function clearCategory(id) {
 
 export default {
   [router.connect]: {
-    stack: [TrackerDetails],
+    stack: () => [TrackerDetails],
   },
   options: store(Options),
   categories: ({ query, filter }) =>

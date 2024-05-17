@@ -14,10 +14,11 @@ import * as labels from '@ghostery/ui/labels';
 
 import Tracker from '/store/tracker.js';
 import { openTabWithUrl } from '/utils/tabs.js';
+import { WTM_PAGE_URL } from '/utils/api.js';
 
 import assets from '../assets/index.js';
 
-import Trackers, { updateException } from './trackers.js';
+import { updateException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';
 import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
@@ -49,7 +50,7 @@ export default {
       <gh-settings-page-layout>
         <div layout="column gap">
           <ui-action>
-            <a href="${router.url(Trackers)}" layout="self:start padding">
+            <a href="${router.backUrl()}" layout="self:start padding">
               <ui-text type="label-s" layout="row gap items:center">
                 <ui-icon name="chevron-left"></ui-icon> Back
               </ui-text>
@@ -138,7 +139,19 @@ export default {
                     <ui-text type="label-m"> Website </ui-text>
                     <ui-text type="label-m"> Protection status </ui-text>
                   </div>
-
+                  ${!domains.length &&
+                  html`
+                    <div layout="column center gap padding:5:0">
+                      <ui-icon
+                        name="no-websites"
+                        layout="size:4"
+                        color="gray-400"
+                      ></ui-icon>
+                      <ui-text layout="block:center width:::180px">
+                        No websites exceptions added yet
+                      </ui-text>
+                    </div>
+                  `}
                   ${domains.map(
                     (domain) => html`
                       <div layout="grid:2 items:center:stretch gap:4">
@@ -165,19 +178,18 @@ export default {
                     `,
                   )}
                 </gh-settings-table>
-                ${!domains.length &&
-                html`
-                  <div layout="column center gap padding:5:0">
-                    <ui-icon
-                      name="no-websites"
-                      layout="size:4"
-                      color="gray-400"
-                    ></ui-icon>
-                    <ui-text layout="block:center width:::180px">
-                      No websites exceptions added yet
-                    </ui-text>
-                  </div>
-                `}
+              </div>
+              <div layout="margin:3:0">
+                <ui-action>
+                  <a
+                    href="${`${WTM_PAGE_URL}trackers/${tracker.id}`}"
+                    target="_blank"
+                  >
+                    <gh-settings-wtm-link>
+                      View WhoTracks.Me statistical report
+                    </gh-settings-wtm-link>
+                  </a>
+                </ui-action>
               </div>
               <div layout="column gap:4">
                 <div layout="column gap:4" layout@768px="grid:2fr|1fr">
