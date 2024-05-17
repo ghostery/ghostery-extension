@@ -8,9 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { store } from 'hybrids';
+import TrackerException from '../store/tracker-exception.js';
 
 import * as engines from './engines.js';
-import { getException } from '../background/exceptions.js';
 
 // TODO: remove after sunsetting Ghostery 8
 // This code is a duplicate of '@ghostery/ui/categories'
@@ -35,9 +36,12 @@ const categoryOrder = [
   'other',
 ];
 
-let promise = engines.init(engines.TRACKERDB_ENGINE).then(() => {
-  promise = null;
-});
+let promise = Promise.all([
+  store.resolve([TrackerException]),
+  engines.init(engines.TRACKERDB_ENGINE).then(() => {
+    promise = null;
+  }),
+]);
 
 export function isCategoryBlockedByDefault(categoryId) {
   switch (categoryId) {
@@ -86,9 +90,9 @@ export function getMetadata(request) {
   }
 
   if (matches.length === 0) {
-    exception = getException(request.domain);
+    exception = store.get(TrackerException, request.domain);
 
-    if (!exception && !request.blocked && !request.modified) {
+    if (!store.ready(exception) && !request.blocked && !request.modified) {
       return null;
     }
 
@@ -103,18 +107,13 @@ export function getMetadata(request) {
     tracker = getTrackers().get(matches[0].pattern.key);
   }
 
-  exception = exception || getException(tracker.id);
+  exception = exception || store.get(TrackerException, tracker.id);
 
   const metadata = {
     ...tracker,
     isFilterMatched,
-    isTrusted: exception
-      ? request.tab &&
-        isTrusted(
-          request.tab.domain || request.tab.hostname,
-          tracker.category,
-          exception,
-        )
+    isTrusted: store.ready(exception)
+      ? isTrusted(request.sourceDomain, tracker.category, exception)
       : !isCategoryBlockedByDefault(tracker.category),
   };
 

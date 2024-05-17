@@ -32,12 +32,29 @@ function parseWithCache(url) {
   return parsed;
 }
 
+function resolveSourceURL(details) {
+  /* Firefox APIs */
+  const { frameAncestors } = details;
+  if (frameAncestors && frameAncestors.length > 0) {
+    return frameAncestors[frameAncestors.length - 1].url;
+  }
+
+  /* Chrome APIs */
+  const { frameType, initiator } = details;
+  if (
+    initiator &&
+    (frameType === 'outermost_frame' || frameType === 'sub_frame')
+  ) {
+    return initiator;
+  }
+}
+
 export default class ExtendedRequest extends Request {
   static fromRequestDetails(details) {
     const isMainFrame = details.type === 'main_frame';
     const sourceUrl = isMainFrame
       ? details.url
-      : details.originUrl || details.documentUrl || '';
+      : details.originUrl || details.documentUrl || resolveSourceURL(details);
 
     const parsedUrl = parseWithCache(details.url);
     const parsedSourceUrl = isMainFrame ? parsedUrl : parseWithCache(sourceUrl);
@@ -51,7 +68,7 @@ export default class ExtendedRequest extends Request {
       url: details.url,
 
       sourceUrl,
-      sourceDomain: parsedSourceUrl.domain || '',
+      sourceDomain: parsedSourceUrl.domain || parsedSourceUrl.hostname || '',
       sourceHostname: parsedSourceUrl.hostname || '',
 
       type: details.type,
@@ -61,7 +78,6 @@ export default class ExtendedRequest extends Request {
   }
 
   #metadata = null;
-  #tab = undefined;
 
   constructor(data) {
     super(data);
@@ -78,50 +94,8 @@ export default class ExtendedRequest extends Request {
 
   get metadata() {
     if (!this.#metadata) {
-      this.#metadata = trackerDb.getMetadata(this, {
-        getDomainMetadata: true,
-      });
+      this.#metadata = trackerDb.getMetadata(this);
     }
     return this.#metadata;
-  }
-
-  get tab() {
-    if (this.#tab === undefined) {
-      const { frameAncestors } = this._originalRequestDetails;
-
-      let url = '';
-      /* Firefox APIs */
-      if (frameAncestors && frameAncestors.length > 0) {
-        url = frameAncestors[frameAncestors.length - 1].url;
-      } else if (this.sourceUrl) {
-        url = this.sourceUrl;
-      } else {
-        /* Chrome APIs */
-
-        const { frameType, initiator } = this._originalRequestDetails;
-
-        if (
-          (frameType === 'outermost_frame' || frameType === 'sub_frame') &&
-          initiator
-        ) {
-          url = initiator;
-        }
-      }
-      if (url) {
-        this.#tab = parseWithCache(url);
-      } else {
-        this.#tab = null;
-      }
-    }
-    if (!this.#tab) {
-      console.error('Cound not detect a tab for the request', this);
-    }
-    return this.#tab;
-  }
-
-  isFromDomain(domain) {
-    // As a fallback, we assume that the request is from the origin URL
-    if (!this.tab) return true;
-    return this.tab.domain === domain || this.tab.hostname === domain;
   }
 }

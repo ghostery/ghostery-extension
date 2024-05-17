@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { requestPermission } from '/utils/offscreen.js';
+import { requestPermission } from '../utils/offscreen.js';
 
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
@@ -72,6 +72,14 @@ const TrackerException = {
   },
 };
 
+export default TrackerException;
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.exceptions) {
+    store.clear([TrackerException], false);
+  }
+});
+
 export function toggleExceptionDomain(
   exception,
   domain,
@@ -99,5 +107,3 @@ export function toggleExceptionDomain(
 
   return store.set(exception, values);
 }
-
-export default TrackerException;

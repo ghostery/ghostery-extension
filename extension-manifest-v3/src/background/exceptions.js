@@ -137,11 +137,9 @@ chrome.storage.onChanged.addListener(async (changes) => {
     await updateDNRRules(networkFilters);
   }
   await updateCosmeticFilters(cosmeticFilters);
-});
 
-export function getException(id) {
-  return exceptions[id];
-}
+  console.info('Exceptions - Filters updated successfully');
+});
 
 async function updateCosmeticFilters(/* filters */) {
   // TODO

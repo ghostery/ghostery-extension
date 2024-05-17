@@ -161,7 +161,10 @@ export async function updateTabStats(tabId, requests) {
 
   // Filter out requests that are not related to the current page
   // (e.g. requests on trailing edge when navigation to a new page is in progress)
-  requests = requests.filter((request) => request.isFromDomain(stats.domain));
+  requests = requests.filter(
+    // As a fallback, we assume that the request is from the origin URL
+    (request) => !request.sourceDomain || request.sourceDomain === stats.domain,
+  );
 
   const trackersUpdated = pushTabStats(stats, requests);
 
