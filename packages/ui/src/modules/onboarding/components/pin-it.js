@@ -46,9 +46,9 @@ export default {
       transform: rotate(45deg) translateY(-50%);
     }
 
-    :host([platform='chrome']) #arrow { right: 121px; }
-    :host([platform='edge']) { min-width: 175px;  }
-    :host([platform='edge']) #arrow { right: 175px; }
+    :host([platform='chrome']) #arrow { right: 85px; }
+    :host([platform='edge']) { min-width: 220px;  }
+    :host([platform='edge']) #arrow { right: 218px; }
 
     :host([platform='opera']) { top: 16px; right: 8px; }
     :host([platform='opera']) #arrow { right: 22px; }
