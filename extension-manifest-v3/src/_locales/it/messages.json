@@ -22,6 +22,12 @@
   "account_details": {
     "message": "Dettagli dell’account"
   },
+  "active": {
+    "message": "Attivo"
+  },
+  "activities": {
+    "message": "Activities"
+  },
   "ad_blocking": {
     "message": "Blocco pubblicità"
   },
@@ -50,6 +56,9 @@
   "advertising": {
     "message": "Pubblicità",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "All websites with adjusted protection status will be listed here."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Consenti Ghostery nelle finestre private"
@@ -101,6 +110,9 @@
   },
   "blocked_on_this_website": {
     "message": "Blocco effettuato su questo sito"
+  },
+  "blocked_or_trusted_individual_activities_on_@_0_": {
+    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Annulla"
@@ -222,6 +234,9 @@
   "essential": {
     "message": "Essenziali",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Exceptions"
   },
   "expand": {
     "message": "Espandi"
@@ -376,6 +391,9 @@
   "my_account": {
     "message": "Il Mio Account"
   },
+  "name": {
+    "message": "Nome"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Visita un sito web e scopri Ghostery in azione."
   },
@@ -384,6 +402,9 @@
   },
   "no_activities_detected": {
     "message": "Nessuna attività rilevata"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "No protection exceptions added yet"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Nessuna eccezione ai siti web è stata ancora aggiunta"
@@ -451,6 +472,9 @@
   },
   "privacy_protection": {
     "message": "Protezione della privacy"
+  },
+  "protection_exceptions": {
+    "message": "Protection exceptions"
   },
   "protection_status": {
     "message": "Stato di protezione"
@@ -601,6 +625,9 @@
   },
   "view_activity_details": {
     "message": "Visualizza i dettagli delle attività"
+  },
+  "view_whotracks_me_statistical_report": {
+    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Visita il nostro blog"

@@ -22,6 +22,12 @@
   "account_details": {
     "message": "Detalhes da conta"
   },
+  "active": {
+    "message": "Ativo"
+  },
+  "activities": {
+    "message": "Activities"
+  },
   "ad_blocking": {
     "message": "Bloqueio de anúncios"
   },
@@ -50,6 +56,9 @@
   "advertising": {
     "message": "Anúncio",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "All websites with adjusted protection status will be listed here."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Permitir o Ghostery em janelas privadas"
@@ -101,6 +110,9 @@
   },
   "blocked_on_this_website": {
     "message": "Bloqueado neste site"
+  },
+  "blocked_or_trusted_individual_activities_on_@_0_": {
+    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Cancelar"
@@ -222,6 +234,9 @@
   "essential": {
     "message": "Essencial",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Exceptions"
   },
   "expand": {
     "message": "Expandir"
@@ -376,6 +391,9 @@
   "my_account": {
     "message": "Minha conta"
   },
+  "name": {
+    "message": "Nome"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Navegue até um site para ver o Ghostery em ação."
   },
@@ -384,6 +402,9 @@
   },
   "no_activities_detected": {
     "message": "Nenhuma atividade detectada"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "No protection exceptions added yet"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Nenhuma exceção de site adicionada ainda"
@@ -451,6 +472,9 @@
   },
   "privacy_protection": {
     "message": "Proteção de privacidade"
+  },
+  "protection_exceptions": {
+    "message": "Protection exceptions"
   },
   "protection_status": {
     "message": "Status de proteção"
@@ -601,6 +625,9 @@
   },
   "view_activity_details": {
     "message": "Ver detalhes da atividade"
+  },
+  "view_whotracks_me_statistical_report": {
+    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Visite nosso blog"

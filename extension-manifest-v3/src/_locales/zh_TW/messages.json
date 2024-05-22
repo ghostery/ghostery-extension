@@ -22,6 +22,12 @@
   "account_details": {
     "message": "帳戶詳細資料"
   },
+  "active": {
+    "message": "使用中"
+  },
+  "activities": {
+    "message": "Activities"
+  },
   "ad_blocking": {
     "message": "廣告封鎖"
   },
@@ -50,6 +56,9 @@
   "advertising": {
     "message": "廣告",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "All websites with adjusted protection status will be listed here."
   },
   "allow_ghostery_in_private_windows": {
     "message": "允許在私人視窗中使用 Ghostery"
@@ -101,6 +110,9 @@
   },
   "blocked_on_this_website": {
     "message": "在這個網站被封鎖"
+  },
+  "blocked_or_trusted_individual_activities_on_@_0_": {
+    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "取消"
@@ -222,6 +234,9 @@
   "essential": {
     "message": "基本內容",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Exceptions"
   },
   "expand": {
     "message": "展開"
@@ -376,6 +391,9 @@
   "my_account": {
     "message": "我的帳號"
   },
+  "name": {
+    "message": "名字"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "導覽到一個網站，親眼查看 Ghostery 的實際運作。"
   },
@@ -384,6 +402,9 @@
   },
   "no_activities_detected": {
     "message": "未偵測到任何活動"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "No protection exceptions added yet"
   },
   "no_websites_exceptions_added_yet": {
     "message": "尚未新增網站例外"
@@ -451,6 +472,9 @@
   },
   "privacy_protection": {
     "message": "隱私權保護"
+  },
+  "protection_exceptions": {
+    "message": "Protection exceptions"
   },
   "protection_status": {
     "message": "保護狀態"
@@ -601,6 +625,9 @@
   },
   "view_activity_details": {
     "message": "查看活動詳情"
+  },
+  "view_whotracks_me_statistical_report": {
+    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "造訪我們的博客"

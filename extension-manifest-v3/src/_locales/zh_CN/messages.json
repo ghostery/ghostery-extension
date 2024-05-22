@@ -22,6 +22,12 @@
   "account_details": {
     "message": "帐户详情"
   },
+  "active": {
+    "message": "有效"
+  },
+  "activities": {
+    "message": "Activities"
+  },
   "ad_blocking": {
     "message": "广告拦截"
   },
@@ -50,6 +56,9 @@
   "advertising": {
     "message": "广告",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "All websites with adjusted protection status will be listed here."
   },
   "allow_ghostery_in_private_windows": {
     "message": "允许在私人窗口中使用 Ghostery"
@@ -101,6 +110,9 @@
   },
   "blocked_on_this_website": {
     "message": "在此网站上被阻止"
+  },
+  "blocked_or_trusted_individual_activities_on_@_0_": {
+    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "取消"
@@ -222,6 +234,9 @@
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Exceptions"
   },
   "expand": {
     "message": "展开"
@@ -376,6 +391,9 @@
   "my_account": {
     "message": "我的帐户"
   },
+  "name": {
+    "message": "姓名"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "导航到一个网站，查看 Ghostery 的运行情况。"
   },
@@ -384,6 +402,9 @@
   },
   "no_activities_detected": {
     "message": "未检测到活动"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "No protection exceptions added yet"
   },
   "no_websites_exceptions_added_yet": {
     "message": "还未添加网站异常"
@@ -451,6 +472,9 @@
   },
   "privacy_protection": {
     "message": "隐私保护"
+  },
+  "protection_exceptions": {
+    "message": "Protection exceptions"
   },
   "protection_status": {
     "message": "保护功能状态"
@@ -601,6 +625,9 @@
   },
   "view_activity_details": {
     "message": "查看活动详情"
+  },
+  "view_whotracks_me_statistical_report": {
+    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "访问我们的博客"
