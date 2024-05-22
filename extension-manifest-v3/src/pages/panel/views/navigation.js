@@ -14,55 +14,53 @@ import { html, msg, router, store } from 'hybrids';
 import Session from '/store/session.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
-import assets from '/pages/settings/assets/index.js';
-
 const MENU = [
   {
-    icon: 'report',
+    icon: () => 'report',
     label: msg`Report a broken page`,
     href: 'https://www.ghostery.com/support?utm_source=gbe',
   },
   {
-    icon: 'send',
+    icon: () => 'send',
     label: msg`Submit a new tracker`,
     href: 'https://www.ghostery.com/submit-a-tracker?utm_source=gbe',
   },
   {
-    icon: 'help',
+    icon: () => 'help',
     label: msg`Contact support`,
     href: 'https://www.ghostery.com/support?utm_source=gbe',
   },
   { header: msg`Ghostery settings` },
   {
-    icon: 'shield-menu',
+    icon: () => 'shield-menu',
     label: msg`Privacy protection`,
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-privacy',
     ),
   },
   {
-    icon: 'websites',
+    icon: () => 'websites',
     label: msg`Websites`,
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-websites',
     ),
   },
   {
-    icon: 'block-m',
+    icon: () => 'block-m',
     label: msg`Trackers`,
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-trackers',
     ),
   },
   {
-    icon: 'wtm',
+    icon: () => 'wtm',
     label: 'WhoTracks.Me',
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-whotracksme',
     ),
   },
   {
-    icon: 'user',
+    icon: (session) => (session.contributor ? 'contributor' : 'user'),
     label: msg`My Account`,
     href: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-account',
@@ -70,7 +68,7 @@ const MENU = [
   },
   {},
   {
-    icon: 'info-menu',
+    icon: () => 'info-menu',
     label: msg`About`,
     href: 'https://www.ghostery.com/?utm_source=gbe',
   },
@@ -79,7 +77,7 @@ const MENU = [
 if (__PLATFORM__ !== 'safari') {
   MENU.unshift(
     {
-      icon: 'heart',
+      icon: () => 'heart',
       label: msg`Become a Contributor`,
       href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
     },
@@ -116,7 +114,7 @@ export default {
                         layout="block padding margin:0:1"
                         onclick="${openTabWithUrl}"
                       >
-                        <gh-panel-menu-item icon="${icon}">
+                        <gh-panel-menu-item icon="${icon(session)}">
                           ${label}
                         </gh-panel-menu-item>
                       </a>
@@ -134,38 +132,6 @@ export default {
                     </ui-text>`}
                   `,
             )}
-          `}
-          ${session.contributor &&
-          html`
-            <ui-action>
-              <a
-                href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@gh-settings-account',
-                )}"
-                onclick="${openTabWithUrl}"
-              >
-                <gh-panel-navigation-card
-                  layout="row gap:1.5 items:center margin:1.5"
-                >
-                  <img
-                    src="${assets['contributor_badge']}"
-                    layout="size:12"
-                    alt="Contribution"
-                  />
-                  <div>
-                    <ui-text type="label-l">You are awesome!</ui-text>
-                    <ui-text
-                      type="body-s"
-                      color="gray-600"
-                      layout="width:::200px"
-                    >
-                      Thank you for your support in Ghostery's fight for a web
-                      where privacy is a basic human right!
-                    </ui-text>
-                  </div>
-                </gh-panel-navigation-card>
-              </a>
-            </ui-action>
           `}
         </div>
       </gh-panel-container>
