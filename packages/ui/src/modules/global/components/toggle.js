@@ -22,11 +22,12 @@ export default {
   type: '',
   color: '',
   render: Object.assign(
-    ({ value, color }) => html`
+    ({ disabled, value, color }) => html`
       <template layout="block">
         <button
           onclick="${toggle}"
           layout="row items:center gap padding:0.5 margin:0"
+          tabindex="${disabled ? -1 : 0}"
         >
           <div id="toggle" layout="block relative size:36px:20px">
             <span layout="block size:2 absolute top left margin:2px"></span>

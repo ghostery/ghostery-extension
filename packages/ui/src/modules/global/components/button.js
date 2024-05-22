@@ -14,7 +14,16 @@ import { html } from 'hybrids';
 export default {
   type: 'primary',
   size: '',
-  disabled: false,
+  disabled: {
+    value: false,
+    observe: (host, value) => {
+      if (value) {
+        host.tabIndex = -1;
+      } else {
+        host.removeAttribute('tabindex');
+      }
+    },
+  },
   render: () => html`<slot></slot>`.css`
       :host {
         box-sizing: border-box;
