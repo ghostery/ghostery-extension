@@ -40,7 +40,11 @@ export default {
         </a>
         <a
           href="${router.url(Websites)}"
-          class="${{ active: router.active(Websites) }}"
+          class="${{
+            active:
+              router.active(Websites, { stack: true }) &&
+              !router.active(Trackers, { stack: true }),
+          }}"
           slot="nav"
         >
           <ui-icon name="websites" color="nav" layout="size:3"></ui-icon>
@@ -48,7 +52,9 @@ export default {
         </a>
         <a
           href="${router.url(Trackers)}"
-          class="${{ active: router.active(Trackers, { stack: true }) }}"
+          class="${{
+            active: router.active(Trackers, { stack: true }),
+          }}"
           slot="nav"
         >
           <ui-icon name="block-m" color="nav" layout="size:3"></ui-icon>

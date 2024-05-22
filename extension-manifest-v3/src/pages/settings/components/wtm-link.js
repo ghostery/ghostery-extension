@@ -13,12 +13,15 @@ import { html } from 'hybrids';
 
 export default {
   render: () => html`
-    <template layout="grid">
-      <ui-panel-action layout="height:5">
-        <button layout="padding:1:1.5">
-          <ui-text type="label-m" layout="row gap:0.5"><slot></slot></ui-text>
-        </button>
-      </ui-panel-action>
+    <template layout="row items:center gap:2 padding:1.5:2">
+      <ui-icon name="wtm-logo" color=""></ui-icon>
+      <ui-text type="label-m" layout="grow"><slot></slot></ui-text>
+      <ui-icon name="arrow-right" color="gray-800"></ui-icon>
     </template>
+  `.css`
+    :host {
+      border-radius: 16px;
+      background: var(--ui-color-primary-200);
+    }
   `,
 };

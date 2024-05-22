@@ -18,7 +18,7 @@ export default {
       <header layout="padding:1.5" layout@768px="padding:1.5:2">
         <slot name="header"></slot>
       </header>
-      <div layout="column"><slot></slot></div>
+      <div layout="column gap" layout@768px="gap:0"><slot></slot></div>
     </template>
   `.css`
     header {
