@@ -19,7 +19,6 @@ import Tracker from '/store/tracker.js';
 
 import { WTM_PAGE_URL } from '/utils/api.js';
 
-import Websites from './websites.js';
 import TrackerDetails from './tracker-details.js';
 
 function removeDomain(tracker) {
@@ -73,7 +72,7 @@ export default {
       <gh-settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
           <ui-action>
-            <a href="${router.url(Websites)}" layout="self:start padding">
+            <a href="${router.backUrl()}" layout="self:start padding">
               <ui-text type="label-s" layout="row gap items:center">
                 <ui-icon name="chevron-left"></ui-icon> Back
               </ui-text>
@@ -115,18 +114,17 @@ export default {
               Blocked or Trusted individual activities on ${domain}
             </ui-text>
           </div>
-          <gh-settings-table responsive>
-            <div slot="header" layout="grid:2fr|2fr|3fr gap:4">
-              <ui-text type="label-m" layout@768px="hidden">
-                Activities
-              </ui-text>
-              <ui-text type="label-m" layout="hidden" layout@768px="block">
-                Name
-              </ui-text>
+          <gh-settings-table>
+            <div
+              slot="header"
+              layout="grid:2 gap:2"
+              layout@768px="grid:2fr|2fr|3fr gap:4"
+            >
+              <ui-text type="label-m" mobile-type="label-s">Name</ui-text>
               <ui-text type="label-m" layout="hidden" layout@768px="block">
                 Category
               </ui-text>
-              <ui-text type="label-m" layout="hidden" layout@768px="block">
+              <ui-text type="label-m" mobile-type="label-s">
                 Protection status
               </ui-text>
             </div>
@@ -148,7 +146,7 @@ export default {
                 store.ready(tracker) &&
                 html`
                   <div
-                    layout="column gap"
+                    layout="grid:2 gap:2"
                     layout@768px="grid:2fr|2fr|3fr gap:4"
                   >
                     <div layout="column gap:0.5">
@@ -158,7 +156,9 @@ export default {
                             tracker: tracker.id,
                           })}"
                         >
-                          <ui-text type="label-m">${tracker.name}</ui-text>
+                          <ui-text type="label-m" mobile-type="label-s">
+                            ${tracker.name}
+                          </ui-text>
                         </a>
                       </ui-action>
                       ${tracker.organization &&
@@ -175,10 +175,6 @@ export default {
                     >
                       ${labels.categories[tracker.category]}
                     </ui-text>
-                    <ui-line
-                      layout="margin:1:0"
-                      layout@768px="hidden"
-                    ></ui-line>
                     <div layout="row gap items:center content:space-between">
                       ${tracker.exception.getDomainStatus(domain).type ===
                       'block'

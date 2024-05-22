@@ -25,9 +25,6 @@
   "active": {
     "message": "アクティブ"
   },
-  "activities": {
-    "message": "Activities"
-  },
   "ad_blocking": {
     "message": "広告ブロッキング"
   },
@@ -123,9 +120,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "すべてクリア"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、Ghosteryをツールバーに固定します。"
@@ -515,9 +509,6 @@
   "set_blocking_preference": {
     "message": "ブロック設定に進む"
   },
-  "settings": {
-    "message": "設定"
-  },
   "settings_sync": {
     "message": "同期設定"
   },
@@ -652,9 +643,6 @@
   },
   "what_s_next_": {
     "message": "次は何をするのでしょうか？"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "個々のウェブサイトでGhosteryを一時停止すると、そのウェブサイトがここに表示されます。"
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghosteryが運営するWhoTracks.Meは、GhosteryのAIアンチトラッキング技術に統合されている要素です。 トラッカーに関する最も包括的なグローバルリソースで、Webトラッキングに透明性をもたらしています。"

@@ -25,9 +25,6 @@
   "active": {
     "message": "Активный"
   },
-  "activities": {
-    "message": "Activities"
-  },
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
@@ -123,9 +120,6 @@
   "cdn": {
     "message": "СДД",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "Очистить все"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Нажмите на значок «Расширения» справа от строки поиска и закрепите Ghostery на панели инструментов."
@@ -515,9 +509,6 @@
   "set_blocking_preference": {
     "message": "Настроить параметры блокировки"
   },
-  "settings": {
-    "message": "Настройки"
-  },
   "settings_sync": {
     "message": "Синхронизация настроек"
   },
@@ -652,9 +643,6 @@
   },
   "what_s_next_": {
     "message": "Что дальше?"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "Здесь можно найти список сайтов, на которых вы приостановили работу Ghostery."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, управляемый Ghostery, является неотъемлемой частью технологии Ghostery ИИ, предотвращающей отслеживание. Это наиболее полный глобальный ресурс по трекерам, обеспечивающий прозрачность отслеживания."

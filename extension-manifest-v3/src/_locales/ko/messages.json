@@ -25,9 +25,6 @@
   "active": {
     "message": "사용"
   },
-  "activities": {
-    "message": "Activities"
-  },
   "ad_blocking": {
     "message": "광고 차단"
   },
@@ -123,9 +120,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "모두 지우기"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "검색 바 옆 퍼즐 아이콘을 클릭하면 Ghostery가 툴바에 고정됩니다."
@@ -515,9 +509,6 @@
   "set_blocking_preference": {
     "message": "차단 맞춤 설정"
   },
-  "settings": {
-    "message": "설정 "
-  },
   "settings_sync": {
     "message": "설정 동기화"
   },
@@ -652,9 +643,6 @@
   },
   "what_s_next_": {
     "message": "다음 업데이트"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "개별 웹사이트에서 Ghostery를 일시 중지하면 해당 웹사이트가 여기 표시됩니다."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "Ghostery가 운영하는 WhoTracks.Me는 Ghostery의 AI 추적 방지 기술을 필수 부분으로 작동합니다. 이는 트래커에 대한 가장 포괄적인 글로벌 리소스로서 웹 추적에 투명성을 가져다 줍니다."

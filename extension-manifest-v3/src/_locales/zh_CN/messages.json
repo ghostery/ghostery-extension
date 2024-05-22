@@ -25,9 +25,6 @@
   "active": {
     "message": "有效"
   },
-  "activities": {
-    "message": "Activities"
-  },
   "ad_blocking": {
     "message": "广告拦截"
   },
@@ -123,9 +120,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "全部清除"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 Ghostery 固定在工具栏。"
@@ -515,9 +509,6 @@
   "set_blocking_preference": {
     "message": "设置阻止首选项"
   },
-  "settings": {
-    "message": "设置"
-  },
   "settings_sync": {
     "message": "设置同步"
   },
@@ -652,9 +643,6 @@
   },
   "what_s_next_": {
     "message": "下一步是？"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "对独立网站暂停使用 Ghostery 时，这些网站会出现在这里。"
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"

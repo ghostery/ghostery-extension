@@ -25,9 +25,6 @@
   "active": {
     "message": "Activo"
   },
-  "activities": {
-    "message": "Activities"
-  },
   "ad_blocking": {
     "message": "Bloqueador de anuncios"
   },
@@ -123,9 +120,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "Limpiar todo"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Haz clic en el icono con forma de puzle que está junto a la barra de búsqueda y ancla Ghostery a la barra de herramientas."
@@ -515,9 +509,6 @@
   "set_blocking_preference": {
     "message": "Establecer preferencia de bloqueo"
   },
-  "settings": {
-    "message": "Ajustes"
-  },
   "settings_sync": {
     "message": "Sincronizar configuración"
   },
@@ -652,9 +643,6 @@
   },
   "what_s_next_": {
     "message": "¿Qué es lo siguiente?"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "Si pausas Ghostery en algunos sitios web concretos, esos sitios aparecerán aquí."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operado por Ghostery, es una parte integral de la tecnología anti-seguimiento de Ghostery. Es un recurso global completo sobre rastreadores, que aporta transparencia al rastreo web."
