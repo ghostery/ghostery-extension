@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "すべての調整済み保護ステータスのウェブサイトがここにリストされます。"
   },
   "allow_ghostery_in_private_windows": {
     "message": "プライベートウィンドウでGhosteryを許可する"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "このウェブサイトでブロック済み"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "キャンセル"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "例外"
   },
   "expand": {
     "message": "展開"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "さらに読み込む"
   },
-  "manifest_name": {
-    "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
-  },
-  "manifest_short_description": {
-    "message": "Ghosteryは強力なプライバシー拡張機能です。広告をブロックし、トラッカーを阻止し、ウェブサイトを高速化します。"
-  },
   "menu": {
     "message": "メニュー"
   },
@@ -398,7 +389,7 @@
     "message": "アクティビティは検出されませんでした"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "まだ保護例外は追加されていません"
   },
   "no_websites_exceptions_added_yet": {
     "message": "ウェブサイトの例外はまだ追加されていません"
@@ -468,7 +459,7 @@
     "message": "プライバシー保護"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "保護の例外"
   },
   "protection_status": {
     "message": "保護ステータス"
@@ -525,7 +516,7 @@
     "message": "サインイン"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "ghostery.com でログインまたはアカウントを作成してください。"
   },
   "simple_view": {
     "message": "シンプル・ビュー"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "アクティビティの詳細を表示"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "ブログを見る"

@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "Alle Websites mit angepasstem Schutzstatus werden hier aufgelistet."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Erlaube Ghostery in privaten Fenstern"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "Auf dieser Website blockiert"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Abbrechen"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "Ausnahmen"
   },
   "expand": {
     "message": "Mehr anzeigen"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "Mehr laden"
   },
-  "manifest_name": {
-    "message": "Ghostery Tracker- & Werbeblocker | Datenschutz AdBlocker"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery ist eine leistungsstarke Datenschutz-Erweiterung. Damit können Sie Werbung blockieren, Tracker stoppen und Websites beschleunigen."
-  },
   "menu": {
     "message": "Menü"
   },
@@ -398,7 +389,7 @@
     "message": "Keine Aktivitäten erkannt"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "Noch keine Schutzausnahmen hinzugefügt"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Noch keine Website-Ausnahmen hinzugefügt"
@@ -468,7 +459,7 @@
     "message": "Datenschutz"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "Schutzausnahmen"
   },
   "protection_status": {
     "message": "Schutzstatus"
@@ -525,7 +516,7 @@
     "message": "Anmelden"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Melden Sie sich an oder erstellen Sie ein Konto auf Ghostery.com."
   },
   "simple_view": {
     "message": "Einfache Ansicht"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "Details zur Aktivität anzeigen"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Besuche unseren Blog"

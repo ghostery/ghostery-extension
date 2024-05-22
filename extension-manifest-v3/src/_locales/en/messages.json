@@ -108,9 +108,6 @@
   "blocked_on_this_website": {
     "message": "Blocked on this website"
   },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
-  },
   "cancel": {
     "message": "Cancel"
   },
@@ -616,9 +613,6 @@
   },
   "view_activity_details": {
     "message": "View activity details"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Visit our blog"

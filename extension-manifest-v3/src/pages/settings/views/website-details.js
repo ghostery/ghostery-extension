@@ -110,9 +110,6 @@ export default {
         >
           <div layout="column gap:0.5 grow">
             <ui-text type="label-l">Protection exceptions</ui-text>
-            <ui-text type="body-s" color="gray-600">
-              Blocked or Trusted individual activities on ${domain}
-            </ui-text>
           </div>
           <gh-settings-table>
             <div
@@ -212,7 +209,7 @@ export default {
                       target="_blank"
                     >
                       <gh-settings-wtm-link>
-                        View WhoTracks.Me statistical report
+                        WhoTracks.Me Statistical Report
                       </gh-settings-wtm-link>
                     </a>
                   </ui-action>

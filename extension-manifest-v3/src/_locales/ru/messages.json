@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "Все веб-сайты с измененным статусом защиты будут перечислены здесь."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Разреши Ghostery в приватных окнах"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "Заблокировано на этом сайте"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Отмена"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "Исключения"
   },
   "expand": {
     "message": "Развернуть"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "Показать еще"
   },
-  "manifest_name": {
-    "message": "Ghostery Трекер & Ad Blocker - приватный блокировщик рекламы"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery - это мощное расширение для обеспечения конфиденциальности. Блокируйте рекламу, отключайте средства слежения и ускоряйте загрузку веб-сайтов."
-  },
   "menu": {
     "message": "Меню"
   },
@@ -398,7 +389,7 @@
     "message": "Действия не обнаружены"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "Исключения для защиты еще не добавлены"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Сайтов, добавленных в исключения, пока нет"
@@ -468,7 +459,7 @@
     "message": "Защита конфиденциальности"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "Исключения защиты"
   },
   "protection_status": {
     "message": "Статус защиты"
@@ -525,7 +516,7 @@
     "message": "Вход"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Войдите или создайте учетную запись на ghostery.com"
   },
   "simple_view": {
     "message": "Простой вид"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "Просмотреть подробности действия"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Посетите наш блог"

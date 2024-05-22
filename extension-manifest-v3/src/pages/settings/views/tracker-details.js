@@ -204,7 +204,7 @@ export default {
                     target="_blank"
                   >
                     <gh-settings-wtm-link>
-                      View WhoTracks.Me statistical report
+                      WhoTracks.Me Statistical Report
                     </gh-settings-wtm-link>
                   </a>
                 </ui-action>

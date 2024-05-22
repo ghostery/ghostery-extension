@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "Wszystkie strony internetowe z dostosowanym statusem ochrony zostaną tutaj wyświetlone."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Zezwalaj na Ghostery w prywatnych oknach"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "Zablokowany na tej stronie"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Anuluj"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "Wyjątki"
   },
   "expand": {
     "message": "Rozwiń"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "Załaduj więcej"
   },
-  "manifest_name": {
-    "message": "Ghostery Bloker Trackerów i Reklam - Prywatność AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery to potężne rozszerzenie do ochrony prywatności. Blokuje reklamy, zatrzymuje trackery i przyspiesza działanie stron internetowych."
-  },
   "menu": {
     "message": "Menu"
   },
@@ -398,7 +389,7 @@
     "message": "Nie wykryto aktywności"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "Brak jeszcze dodanych wyjątków ochrony."
   },
   "no_websites_exceptions_added_yet": {
     "message": "Nie dodano jeszcze żadnych wyjątków dla tej witryny"
@@ -468,7 +459,7 @@
     "message": "Ochrona prywatności"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "Wyjątki ochrony"
   },
   "protection_status": {
     "message": "Status ochrony"
@@ -504,7 +495,7 @@
     "message": "Szukaj trackera lub organizacji..."
   },
   "search_website___": {
-    "message": "Wyszukiwanie witryny..."
+    "message": "Szukaj witryny..."
   },
   "set_blocking_preference": {
     "message": "Ustaw preferencje blokowania"
@@ -525,7 +516,7 @@
     "message": "Zaloguj się"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Zaloguj się lub utwórz konto na Ghostery.com"
   },
   "simple_view": {
     "message": "Widok uproszczony"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "Zobacz szczegóły aktywności"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Odwiedź nasz blog"

@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "Tous les sites Web avec un statut de protection ajusté seront répertoriés ici."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Autorise Ghostery dans les fenêtres privées"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "Bloqués sur ce site web"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Annuler"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "Charger plus"
   },
-  "manifest_name": {
-    "message": "Ghostery Bloqueur de Traqueurs et de Publicités - confidentialité"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery est une puissante extension de protection de la vie privée. Bloquez les publicités, déjouez les outils de pistage et accélérez les sites Web."
-  },
   "menu": {
     "message": "Menu"
   },
@@ -398,7 +389,7 @@
     "message": "Aucune activité détectée"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "Aucune exception de protection ajoutée pour le moment"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Aucune exception de site web ajoutée pour l'instant"
@@ -468,7 +459,7 @@
     "message": "Protection de la vie privée"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "Exceptions de protection"
   },
   "protection_status": {
     "message": "Statut de protection"
@@ -525,7 +516,7 @@
     "message": "Connexion"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Connectez-vous ou créez un compte sur Ghostery.com"
   },
   "simple_view": {
     "message": "Affichage simplifié"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "Afficher les détails de l'activité"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Visite notre blog"

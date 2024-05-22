@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "모든 보호 상태가 조정된 웹사이트는 여기에 나열됩니다."
   },
   "allow_ghostery_in_private_windows": {
     "message": "비공개 창에서 고스트리밍 허용"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "이 웹사이트상에서 차단됨"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "취소 "
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "예외"
   },
   "expand": {
     "message": "펼치기"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "자세히 알아보기"
   },
-  "manifest_name": {
-    "message": "고스터리 트래커 및 광고 차단기 - 프라이버시 AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery는 강력한 개인정보 보호 확장 프로그램입니다. 광고와 트래커를 차단하고 웹 사이트의 속도를 높여줍니다."
-  },
   "menu": {
     "message": "메뉴"
   },
@@ -398,7 +389,7 @@
     "message": "감지된 활동 없음"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "아직 보호 예외가 추가되지 않았습니다."
   },
   "no_websites_exceptions_added_yet": {
     "message": "아직 추가된 웹사이트 예외 없음"
@@ -468,7 +459,7 @@
     "message": "개인정보 보호"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "보호 예외사항"
   },
   "protection_status": {
     "message": "보호 상태"
@@ -525,7 +516,7 @@
     "message": "로그인 "
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "ghostery.com에 로그인하거나 계정을 만드세요."
   },
   "simple_view": {
     "message": "간단히 보기 "
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "활동 세부정보 보기"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "블로그 방문하기"

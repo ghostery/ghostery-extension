@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "所有已調整保護狀態的網站都會在這裡列出。"
   },
   "allow_ghostery_in_private_windows": {
     "message": "允許在私人視窗中使用 Ghostery"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "在這個網站被封鎖"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "取消"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "例外情況"
   },
   "expand": {
     "message": "展開"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "載入更多"
   },
-  "manifest_name": {
-    "message": "Ghostery 追蹤器和廣告攔截器 - 隱私 AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery是一個強效的隱私擴增功能。攔截廣告、制止追蹤器及加快網頁運行。"
-  },
   "menu": {
     "message": "選單"
   },
@@ -398,7 +389,7 @@
     "message": "未偵測到任何活動"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "尚未添加任何防護例外。"
   },
   "no_websites_exceptions_added_yet": {
     "message": "尚未新增網站例外"
@@ -468,7 +459,7 @@
     "message": "隱私權保護"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "保護的例外情況"
   },
   "protection_status": {
     "message": "保護狀態"
@@ -525,7 +516,7 @@
     "message": "登入"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "登入或在 ghostery.com 創建帳戶"
   },
   "simple_view": {
     "message": "簡單圖示"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "查看活動詳情"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "造訪我們的博客"

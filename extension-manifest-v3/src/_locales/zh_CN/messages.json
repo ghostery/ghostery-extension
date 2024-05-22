@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "所有具有调整保护状态的网站将在此处列出。"
   },
   "allow_ghostery_in_private_windows": {
     "message": "允许在私人窗口中使用 Ghostery"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "在此网站上被阻止"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "取消"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "例外情况"
   },
   "expand": {
     "message": "展开"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "加载更多"
   },
-  "manifest_name": {
-    "message": "Ghostery 跟踪器和广告拦截器 - 隐私广告拦截器"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。"
-  },
   "menu": {
     "message": "菜单"
   },
@@ -398,7 +389,7 @@
     "message": "未检测到活动"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "尚未添加任何保护例外。"
   },
   "no_websites_exceptions_added_yet": {
     "message": "还未添加网站异常"
@@ -468,7 +459,7 @@
     "message": "隐私保护"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "保护的例外情况"
   },
   "protection_status": {
     "message": "保护功能状态"
@@ -525,7 +516,7 @@
     "message": "登录"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "登录或创建 Ghostery.com 帐户"
   },
   "simple_view": {
     "message": "简单视图"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "查看活动详情"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "访问我们的博客"

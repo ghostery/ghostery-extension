@@ -55,7 +55,7 @@
     "description": "Tracker category name"
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
-    "message": "All websites with adjusted protection status will be listed here."
+    "message": "Tutti i siti web con stato di protezione regolato saranno elencati qui."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Consenti Ghostery nelle finestre private"
@@ -107,9 +107,6 @@
   },
   "blocked_on_this_website": {
     "message": "Blocco effettuato su questo sito"
-  },
-  "blocked_or_trusted_individual_activities_on_@_0_": {
-    "message": "Blocked or Trusted individual activities on $${0}"
   },
   "cancel": {
     "message": "Annulla"
@@ -230,7 +227,7 @@
     "description": "Tracker category name"
   },
   "exceptions": {
-    "message": "Exceptions"
+    "message": "Eccezioni"
   },
   "expand": {
     "message": "Espandi"
@@ -357,12 +354,6 @@
   "load_more": {
     "message": "Carica altro"
   },
-  "manifest_name": {
-    "message": "Ghostery Blocco Annunci e Tracker - Privacy AdBlock"
-  },
-  "manifest_short_description": {
-    "message": "Ghostery è una potente estensione per la protezione della privacy. Blocca pubblicità e tracker, e accelera i siti web."
-  },
   "menu": {
     "message": "Menu"
   },
@@ -398,7 +389,7 @@
     "message": "Nessuna attività rilevata"
   },
   "no_protection_exceptions_added_yet": {
-    "message": "No protection exceptions added yet"
+    "message": "Nessuna eccezione di protezione aggiunta ancora"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Nessuna eccezione ai siti web è stata ancora aggiunta"
@@ -468,7 +459,7 @@
     "message": "Protezione della privacy"
   },
   "protection_exceptions": {
-    "message": "Protection exceptions"
+    "message": "Eccezioni di protezione"
   },
   "protection_status": {
     "message": "Stato di protezione"
@@ -525,7 +516,7 @@
     "message": "Accedi"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Accedi o crea un account su ghostery.com"
   },
   "simple_view": {
     "message": "Vista Semplice"
@@ -616,9 +607,6 @@
   },
   "view_activity_details": {
     "message": "Visualizza i dettagli delle attività"
-  },
-  "view_whotracks_me_statistical_report": {
-    "message": "View WhoTracks.Me statistical report"
   },
   "visit_our_blog": {
     "message": "Visita il nostro blog"
