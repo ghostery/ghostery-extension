@@ -20,6 +20,11 @@ export function createDocumentConverter() {
 
     window.addEventListener('message', (event) => {
       const requestId = event.data.rules.shift().condition.urlFilter;
+
+      if (__PLATFORM__ === 'safari') {
+        event.data.rules = event.data.rules.map(getCompatRule).filter(Boolean);
+      }
+
       requests.get(requestId)(event.data);
       requests.delete(requestId);
     });
@@ -100,4 +105,78 @@ export function createOffscreenConverter() {
       })) || { errors: ['failed to initiate offscreen document'], rules: [] }
     );
   };
+}
+
+const supportedResourceTypes = [
+  'font',
+  'image',
+  'main_frame',
+  'media',
+  'ping',
+  'script',
+  'stylesheet',
+  'sub_frame',
+  'websocket',
+  'xmlhttprequest',
+  'other',
+];
+
+const supportedActions = ['block', 'allow', 'allowAllRequests'];
+
+function getCompatRule(rule) {
+  if (!rule.condition) {
+    return null;
+  }
+
+  const resourceTypes = rule.condition.resourceTypes?.filter((type) =>
+    supportedResourceTypes.includes(type),
+  );
+
+  if (
+    // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
+    rule.condition.regexFilter?.includes('\\d') ||
+    rule.condition.regexFilter?.match(/(\{\d*,\d*\}|\{\d+\}|\|)/) ||
+    !supportedActions.includes(rule.action.type) ||
+    (resourceTypes && resourceTypes.length === 0)
+  ) {
+    return null;
+  }
+
+  const newRule = {
+    id: rule.id,
+    priority: rule.priority,
+    action:
+      rule.action.type === 'allowAllRequests' ? { type: 'allow' } : rule.action,
+    condition: {
+      domainType: rule.condition.domainType,
+      resourceTypes,
+      domains: (
+        rule.condition.initiatorDomains || rule.condition.requestDomains
+      )?.map((d) => `*${d}`),
+      excludedDomains: (
+        rule.condition.excludedInitiatorDomains ||
+        rule.condition.excludedRequestDomains
+      )?.map((d) => `*${d}`),
+      urlFilter: rule.condition.urlFilter,
+      regexFilter: rule.condition.regexFilter,
+      isUrlFilterCaseSensitive: undefined,
+    },
+  };
+
+  if (!newRule.condition.urlFilter && !newRule.condition.regexFilter) {
+    newRule.condition.urlFilter = '*';
+  }
+
+  if (newRule.condition.urlFilter === '*' && !newRule.condition.domainType) {
+    newRule.condition.domainType = 'thirdParty';
+  }
+
+  if (
+    newRule.condition.regexFilter?.startsWith('/') &&
+    newRule.condition.regexFilter?.endsWith('/')
+  ) {
+    newRule.condition.regexFilter = newRule.condition.regexFilter.slice(1, -1);
+  }
+
+  return newRule;
 }
