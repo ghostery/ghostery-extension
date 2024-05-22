@@ -143,6 +143,21 @@ export default {
                   ontypechange="${setStatsType}"
                   layout="margin:1:1.5"
                 >
+                  <ui-action slot="header">
+                    <a
+                      href="${chrome.runtime.getURL(
+                        '/pages/settings/index.html#@gh-settings-website-details?domain=' +
+                          stats.domain,
+                      )}"
+                      onclick="${openTabWithUrl}"
+                    >
+                      <ui-icon
+                        name="settings"
+                        layout="size:2"
+                        color="gray-500"
+                      ></ui-icon>
+                    </a>
+                  </ui-action>
                 </ui-panel-stats>
                 ${!!(stats.trackersModified || stats.trackersBlocked) &&
                 html`
