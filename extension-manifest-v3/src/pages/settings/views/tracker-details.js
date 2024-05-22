@@ -25,7 +25,10 @@ import TrackerAddException from './tracker-add-exception.js';
 import WebsiteDetails from './website-details.js';
 
 function removeDomain(domain) {
-  return ({ tracker }) => {
+  return ({ tracker }, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     toggleExceptionDomain(
       tracker.exception,
       domain,
