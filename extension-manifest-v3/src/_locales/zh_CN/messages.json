@@ -354,6 +354,12 @@
   "load_more": {
     "message": "加载更多"
   },
+  "manifest_name": {
+    "message": "Ghostery 跟踪器和广告拦截器 - 隐私广告拦截器"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。"
+  },
   "menu": {
     "message": "菜单"
   },

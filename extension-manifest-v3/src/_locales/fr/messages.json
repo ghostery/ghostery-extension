@@ -354,6 +354,12 @@
   "load_more": {
     "message": "Charger plus"
   },
+  "manifest_name": {
+    "message": "Ghostery Bloqueur de Traqueurs et de Publicités - confidentialité"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery est une puissante extension de protection de la vie privée. Bloquez les publicités, déjouez les outils de pistage et accélérez les sites Web."
+  },
   "menu": {
     "message": "Menu"
   },

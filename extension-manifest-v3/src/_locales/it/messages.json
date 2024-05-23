@@ -354,6 +354,12 @@
   "load_more": {
     "message": "Carica altro"
   },
+  "manifest_name": {
+    "message": "Ghostery Blocco Annunci e Tracker - Privacy AdBlock"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery è una potente estensione per la protezione della privacy. Blocca pubblicità e tracker, e accelera i siti web."
+  },
   "menu": {
     "message": "Menu"
   },

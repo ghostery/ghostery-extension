@@ -354,6 +354,12 @@
   "load_more": {
     "message": "Cargar más"
   },
+  "manifest_name": {
+    "message": "Ghostery Rastreador & Bloqueador de anuncios - Privacidad AdBlock"
+  },
+  "manifest_short_description": {
+    "message": "Ghostery es una potente extensión para tu privacidad. Bloquea anuncios, detiene rastreadores y acelera sitios web."
+  },
   "menu": {
     "message": "Menú"
   },
