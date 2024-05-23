@@ -377,7 +377,7 @@ class OverviewTab extends React.Component {
 					</div>
 				)}
 
-				<ui-onboarding-state class="OverviewTab__onboardingState" ref={(el) => { if (el) { el.disabled = !setup_complete; } }} href={chrome.runtime.getURL('/app/templates/onboarding.html')}>
+				<ui-onboarding-state class="OverviewTab__onboardingState" ref={(el) => { if (el) { el.disabled = !setup_complete; el.href = chrome.runtime.getURL('/app/templates/onboarding.html'); } }}>
 					<div className="OverviewTab__GhosteryFeaturesContainer">
 						{this._renderGhosteryFeatures()}
 					</div>
