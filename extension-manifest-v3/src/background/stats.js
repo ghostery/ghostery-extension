@@ -166,13 +166,7 @@ export async function updateTabStats(tabId, requests) {
     (request) => !request.sourceDomain || request.sourceDomain === stats.domain,
   );
 
-  const trackersUpdated = pushTabStats(stats, requests);
-
-  if (trackersUpdated) {
-    stats.trackers.sort(
-      (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
-    );
-  }
+  let trackersUpdated = pushTabStats(stats, requests);
 
   if (
     __PLATFORM__ === 'safari' &&
@@ -214,7 +208,8 @@ export async function updateTabStats(tabId, requests) {
       }
 
       if (notFoundRequests.length) {
-        pushTabStats(stats, notFoundRequests);
+        trackersUpdated =
+          pushTabStats(stats, notFoundRequests) || trackersUpdated;
       }
     } catch (e) {
       console.error('Failed to get matched rules for stats', e);
@@ -225,8 +220,14 @@ export async function updateTabStats(tabId, requests) {
   if (stats === tabStats.get(tabId)) {
     tabStats.set(tabId, stats);
 
-    // We need to update the icon only if new categories were added
-    if (trackersUpdated) updateIcon(tabId);
+    if (trackersUpdated) {
+      // We need to update the icon only if new categories were added
+      updateIcon(tabId);
+
+      stats.trackers.sort(
+        (a, b) => order.indexOf(a.category) - order.indexOf(b.category),
+      );
+    }
   }
 }
 
