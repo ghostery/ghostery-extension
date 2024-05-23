@@ -325,14 +325,6 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-function isPaused(request) {
-  if (pausedDomains.includes(request.tab.domain || request.tab.hostname)) {
-    return true;
-  }
-
-  return false;
-}
-
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
@@ -340,17 +332,14 @@ if (__PLATFORM__ === 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
-      // INFO: request.source... is only available in Firefox
       if (request.sourceDomain) {
-        if (details.type !== 'main_frame') {
+        if (
+          (details.type !== 'main_frame' && request.metadata?.isTrusted) ||
+          pausedDomains.includes(request.sourceDomain)
+        ) {
           updateTabStats(details.tabId, [request]);
-
-          if (request.metadata?.isTrusted) {
-            return;
-          }
+          return;
         }
-
-        if (isPaused(request)) return;
 
         const allEngines = request.metadata
           ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
@@ -375,13 +364,19 @@ if (__PLATFORM__ === 'firefox') {
 
             if (redirect !== undefined) {
               request.blocked = true;
+              updateTabStats(details.tabId, [request]);
+
               return { redirectUrl: redirect.dataUrl };
             } else if (match === true) {
               request.blocked = true;
+              updateTabStats(details.tabId, [request]);
+
               return { cancel: true };
             }
           }
         }
+
+        updateTabStats(details.tabId, [request]);
       }
     },
     { urls: ['<all_urls>'] },
@@ -391,7 +386,10 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (request.metadata?.isTrusted || isPaused(request)) {
+      if (
+        request.metadata?.isTrusted ||
+        pausedDomains.includes(request.sourceDomain)
+      ) {
         return;
       }
 
