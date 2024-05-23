@@ -47,14 +47,14 @@ function resolveSourceURL(details) {
   ) {
     return initiator;
   }
+
+  return details.originUrl || details.documentUrl || '';
 }
 
 export default class ExtendedRequest extends Request {
   static fromRequestDetails(details) {
     const isMainFrame = details.type === 'main_frame';
-    const sourceUrl = isMainFrame
-      ? details.url
-      : details.originUrl || details.documentUrl || resolveSourceURL(details);
+    const sourceUrl = isMainFrame ? details.url : resolveSourceURL(details);
 
     const parsedUrl = parseWithCache(details.url);
     const parsedSourceUrl = isMainFrame ? parsedUrl : parseWithCache(sourceUrl);
