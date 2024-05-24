@@ -264,7 +264,7 @@ function setupTabStats(details) {
 
   if (request.isHttp || request.isHttps) {
     tabStats.set(details.tabId, {
-      domain: request.domain,
+      domain: request.hostname,
       url: request.url,
       trackers: [],
       timestamp: details.timeStamp,

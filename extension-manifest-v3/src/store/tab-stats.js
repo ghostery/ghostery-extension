@@ -71,7 +71,6 @@ const Stats = {
       }
 
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
-
       if (tabStats && tab.url.includes(tabStats.domain)) {
         // Tracker has a reference to TrackerException,
         //so we need to resolve exceptions
@@ -79,10 +78,10 @@ const Stats = {
 
         return tabStats;
       }
+      const { hostname } = parse(tab.url);
 
-      const { domain, hostname } = parse(tab.url);
       return {
-        domain: domain || hostname,
+        domain: hostname,
       };
     },
     observe:
