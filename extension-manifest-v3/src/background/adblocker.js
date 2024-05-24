@@ -28,18 +28,18 @@ let pausedDomains = [];
 
 const setup = asyncSetup([
   observe(null, (options) => {
-    enabledEngines = [
-      // Add custom engine
-      engines.CUSTOM_ENGINE,
-      engines.FIXES_ENGINE,
-      // Set enabled engines
-      ...ENGINES.filter(({ key }) => options.terms && options[key]).map(
-        ({ name }) => name,
-      ),
-    ];
+    enabledEngines = options.terms
+      ? [
+          // Add custom engine
+          engines.CUSTOM_ENGINE,
+          engines.FIXES_ENGINE,
+          // Main engines
+          ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
+        ]
+      : [];
 
     // Set paused domains
-    pausedDomains = options.paused ? options.paused.map(String) : [];
+    pausedDomains = options.paused.map(String);
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
