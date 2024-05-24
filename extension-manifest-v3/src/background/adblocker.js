@@ -43,9 +43,6 @@ const setup = asyncSetup([
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
-  ...(__PLATFORM__ !== 'firefox'
-    ? [engines.init(engines.TRACKERDB_ENGINE)]
-    : []),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
@@ -341,9 +338,10 @@ if (__PLATFORM__ === 'firefox') {
           return;
         }
 
-        const allEngines = request.metadata
-          ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
-          : enabledEngines;
+        const allEngines =
+          enabledEngines.length && request.metadata
+            ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
+            : enabledEngines;
 
         for (const name of allEngines) {
           const engine = engines.get(name);
@@ -393,9 +391,10 @@ if (__PLATFORM__ === 'firefox') {
         return;
       }
 
-      const allEngines = request.metadata
-        ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
-        : enabledEngines;
+      const allEngines =
+        enabledEngines.length && request.metadata
+          ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
+          : enabledEngines;
 
       let policies;
       for (const name of allEngines) {
