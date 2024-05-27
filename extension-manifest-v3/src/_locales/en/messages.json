@@ -22,6 +22,9 @@
   "account_details": {
     "message": "Account details"
   },
+  "active": {
+    "message": "Active"
+  },
   "ad_blocking": {
     "message": "Ad-Blocking"
   },
@@ -50,6 +53,9 @@
   "advertising": {
     "message": "Advertising",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "All websites with adjusted protection status will be listed here."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Allow Ghostery in private windows"
@@ -111,9 +117,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "Clear all"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Click the puzzle icon next to the search bar and pin Ghostery to your toolbar."
@@ -222,6 +225,9 @@
   "essential": {
     "message": "Essential",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Exceptions"
   },
   "expand": {
     "message": "Expand"
@@ -376,6 +382,9 @@
   "my_account": {
     "message": "My Account"
   },
+  "name": {
+    "message": "Name"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Navigate to a website to see Ghostery in action."
   },
@@ -384,6 +393,9 @@
   },
   "no_activities_detected": {
     "message": "No activities detected"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "No protection exceptions added yet"
   },
   "no_websites_exceptions_added_yet": {
     "message": "No websites exceptions added yet"
@@ -452,6 +464,9 @@
   "privacy_protection": {
     "message": "Privacy protection"
   },
+  "protection_exceptions": {
+    "message": "Protection exceptions"
+  },
   "protection_status": {
     "message": "Protection status"
   },
@@ -490,9 +505,6 @@
   },
   "set_blocking_preference": {
     "message": "Set blocking preference"
-  },
-  "settings": {
-    "message": "Settings"
   },
   "settings_sync": {
     "message": "Settings Sync"
@@ -625,9 +637,6 @@
   },
   "what_s_next_": {
     "message": "What’s next?"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "When pausing Ghostery on individual websites, those websites will appear here."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operated by Ghostery, is an integral part of Ghostery’s AI anti-tracking technology. It is a comprehensive global resource on trackers, bringing transparency to web tracking."

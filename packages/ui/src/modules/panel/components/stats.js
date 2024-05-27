@@ -68,7 +68,7 @@ export default {
   },
   dialog: undefined,
   exceptionDialog: undefined,
-  content: ({
+  render: ({
     categories,
     categoryList,
     trackers,
@@ -81,8 +81,9 @@ export default {
   }) => html`
     <template layout="column gap:0.5">
       <div layout="row items:center gap height::4.5">
-        <div layout="row gap grow">
+        <div layout="row items:center gap grow">
           <ui-text type="label-m">Observed activities</ui-text>
+          <slot name="header"></slot>
         </div>
         ${wtmLink &&
         html.resolve(

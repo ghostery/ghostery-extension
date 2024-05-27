@@ -22,6 +22,9 @@
   "account_details": {
     "message": "Данные аккаунта"
   },
+  "active": {
+    "message": "Активный"
+  },
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
@@ -50,6 +53,9 @@
   "advertising": {
     "message": "Реклама",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "Все веб-сайты с измененным статусом защиты будут перечислены здесь."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Разреши Ghostery в приватных окнах"
@@ -111,9 +117,6 @@
   "cdn": {
     "message": "СДД",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "Очистить все"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Нажмите на значок «Расширения» справа от строки поиска и закрепите Ghostery на панели инструментов."
@@ -222,6 +225,9 @@
   "essential": {
     "message": "Важное",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Исключения"
   },
   "expand": {
     "message": "Развернуть"
@@ -376,6 +382,9 @@
   "my_account": {
     "message": "Моя учетная запись"
   },
+  "name": {
+    "message": "Имя"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Перейдите на любой сайт, чтобы увидеть, как работает Ghostery."
   },
@@ -384,6 +393,9 @@
   },
   "no_activities_detected": {
     "message": "Действия не обнаружены"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "Исключения для защиты еще не добавлены"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Сайтов, добавленных в исключения, пока нет"
@@ -452,6 +464,9 @@
   "privacy_protection": {
     "message": "Защита конфиденциальности"
   },
+  "protection_exceptions": {
+    "message": "Исключения защиты"
+  },
   "protection_status": {
     "message": "Статус защиты"
   },
@@ -491,9 +506,6 @@
   "set_blocking_preference": {
     "message": "Настроить параметры блокировки"
   },
-  "settings": {
-    "message": "Настройки"
-  },
   "settings_sync": {
     "message": "Синхронизация настроек"
   },
@@ -510,7 +522,7 @@
     "message": "Вход"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Войдите или создайте учетную запись на ghostery.com"
   },
   "simple_view": {
     "message": "Простой вид"
@@ -625,9 +637,6 @@
   },
   "what_s_next_": {
     "message": "Что дальше?"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "Здесь можно найти список сайтов, на которых вы приостановили работу Ghostery."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, управляемый Ghostery, является неотъемлемой частью технологии Ghostery ИИ, предотвращающей отслеживание. Это наиболее полный глобальный ресурс по трекерам, обеспечивающий прозрачность отслеживания."

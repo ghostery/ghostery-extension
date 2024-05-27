@@ -22,6 +22,9 @@
   "account_details": {
     "message": "帳戶詳細資料"
   },
+  "active": {
+    "message": "使用中"
+  },
   "ad_blocking": {
     "message": "廣告封鎖"
   },
@@ -50,6 +53,9 @@
   "advertising": {
     "message": "廣告",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "所有已調整保護狀態的網站都會在這裡列出。"
   },
   "allow_ghostery_in_private_windows": {
     "message": "允許在私人視窗中使用 Ghostery"
@@ -111,9 +117,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "全部清除"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "點擊搜尋欄位旁邊的拼圖圖示，將 Ghostery 釘選至工具列。"
@@ -222,6 +225,9 @@
   "essential": {
     "message": "基本內容",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "例外情況"
   },
   "expand": {
     "message": "展開"
@@ -376,6 +382,9 @@
   "my_account": {
     "message": "我的帳號"
   },
+  "name": {
+    "message": "名字"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "導覽到一個網站，親眼查看 Ghostery 的實際運作。"
   },
@@ -384,6 +393,9 @@
   },
   "no_activities_detected": {
     "message": "未偵測到任何活動"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "尚未添加任何防護例外。"
   },
   "no_websites_exceptions_added_yet": {
     "message": "尚未新增網站例外"
@@ -452,6 +464,9 @@
   "privacy_protection": {
     "message": "隱私權保護"
   },
+  "protection_exceptions": {
+    "message": "保護的例外情況"
+  },
   "protection_status": {
     "message": "保護狀態"
   },
@@ -491,9 +506,6 @@
   "set_blocking_preference": {
     "message": "設定封鎖偏好設定"
   },
-  "settings": {
-    "message": "設定"
-  },
   "settings_sync": {
     "message": "設定同步"
   },
@@ -510,7 +522,7 @@
     "message": "登入"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "登入或在 ghostery.com 創建帳戶"
   },
   "simple_view": {
     "message": "簡單圖示"
@@ -625,9 +637,6 @@
   },
   "what_s_next_": {
     "message": "下一步是？"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "對個別網站暫停使用 Ghostery 後，這些網站會顯示在這裡。"
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me 由 Ghostery 營運，是 Ghostery 人工智慧反追蹤技術不可或缺的一部分。 它是有關追蹤器的綜合性全球資源，使網路追蹤透明化。"

@@ -13,6 +13,8 @@ import { html, router, store, msg } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
 import Tracker from '/store/tracker.js';
+import { toggleExceptionDomain } from '/store/tracker-exception.js';
+
 import { openTabWithUrl } from '/utils/tabs.js';
 import { WTM_PAGE_URL } from '/utils/api.js';
 
@@ -20,10 +22,13 @@ import assets from '../assets/index.js';
 
 import { updateException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';
-import { toggleExceptionDomain } from '/store/tracker-exception.js';
+import WebsiteDetails from './website-details.js';
 
 function removeDomain(domain) {
-  return ({ tracker }) => {
+  return ({ tracker }, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     toggleExceptionDomain(
       tracker.exception,
       domain,
@@ -34,7 +39,7 @@ function removeDomain(domain) {
 }
 
 export default {
-  [router.connect]: { stack: [TrackerAddException] },
+  [router.connect]: { stack: () => [TrackerAddException] },
   tracker: store(Tracker),
   otherTrackers: ({ tracker }) =>
     store.ready(tracker) && store.get([Tracker], { tracker: tracker.id }),
@@ -136,8 +141,12 @@ export default {
                 </div>
                 <gh-settings-table>
                   <div slot="header" layout="grid:2 gap:4">
-                    <ui-text type="label-m"> Website </ui-text>
-                    <ui-text type="label-m"> Protection status </ui-text>
+                    <ui-text type="label-m" mobile-type="label-s">
+                      Website
+                    </ui-text>
+                    <ui-text type="label-m" mobile-type="label-s">
+                      Protection status
+                    </ui-text>
                   </div>
                   ${!domains.length &&
                   html`
@@ -154,27 +163,37 @@ export default {
                   `}
                   ${domains.map(
                     (domain) => html`
-                      <div layout="grid:2 items:center:stretch gap:4">
-                        <ui-text>${domain}</ui-text>
-                        <div layout="row content:space-between gap">
-                          <gh-settings-protection-badge
-                            blocked="${tracker.blockedByDefault !==
-                            tracker.exception.blocked}"
-                          ></gh-settings-protection-badge>
-                          <ui-action>
-                            <button
-                              layout@768px="order:1 padding:0.5"
-                              onclick="${removeDomain(domain)}"
-                            >
-                              <ui-icon
-                                name="trash"
-                                layout="size:3"
-                                color="gray-400"
-                              ></ui-icon>
-                            </button>
-                          </ui-action>
-                        </div>
-                      </div>
+                      <ui-action layout="block">
+                        <a
+                          href="${router.url(WebsiteDetails, {
+                            domain,
+                          })}"
+                          layout="grid:2 items:center:stretch gap:4"
+                        >
+                          <ui-text type="label-m" mobile-type="label-s">
+                            ${domain}
+                          </ui-text>
+                          <div layout="row content:space-between gap">
+                            <gh-settings-protection-badge
+                              blocked="${tracker.exception.getDomainStatus(
+                                domain,
+                              ).type === 'block'}"
+                            ></gh-settings-protection-badge>
+                            <ui-action>
+                              <button
+                                layout@768px="order:1 padding:0.5"
+                                onclick="${removeDomain(domain)}"
+                              >
+                                <ui-icon
+                                  name="trash"
+                                  layout="size:3"
+                                  color="gray-400"
+                                ></ui-icon>
+                              </button>
+                            </ui-action>
+                          </div>
+                        </a>
+                      </ui-action>
                     `,
                   )}
                 </gh-settings-table>
@@ -186,7 +205,7 @@ export default {
                     target="_blank"
                   >
                     <gh-settings-wtm-link>
-                      View WhoTracks.Me statistical report
+                      WhoTracks.Me Statistical Report
                     </gh-settings-wtm-link>
                   </a>
                 </ui-action>

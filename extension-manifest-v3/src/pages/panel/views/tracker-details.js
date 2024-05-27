@@ -56,7 +56,7 @@ export default {
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.domain),
-  content: ({ tracker, status, wtmUrl, paused }) => html`
+  content: ({ tracker, status, wtmUrl, paused, options }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div
@@ -71,59 +71,62 @@ export default {
           tracker.company + ' •'}
           ${labels.categories[tracker.category]}
         </ui-text>
-        <div layout="grid:1|max gap">
-          ${paused
-            ? html`
-                <ui-panel-action layout="width:full" disabled>
-                  <div layout="row gap">
-                    <ui-icon name="pause"></ui-icon>
-                    <ui-text type="label-m">Ghostery paused</ui-text>
-                  </div>
-                </ui-panel-action>
-              `
-            : html`<ui-panel-action layout="width:full height:auto:4.5">
-                <a
-                  href="${router.url(ProtectionStatus, {
-                    trackerId: tracker.id,
-                  })}"
-                  layout="row gap padding:0:1.5"
-                >
-                  <ui-icon
-                    name="${status.type}-m"
-                    color="${status.type === 'block'
-                      ? 'gray-800'
-                      : 'success-500'}"
-                  ></ui-icon>
-                  <ui-text
-                    type="label-m"
-                    layout="block:center row gap center padding:2px:0"
+        ${options.terms &&
+        html`
+          <div layout="grid:1|max gap">
+            ${paused
+              ? html`
+                  <ui-panel-action layout="width:full" disabled>
+                    <div layout="row gap">
+                      <ui-icon name="pause"></ui-icon>
+                      <ui-text type="label-m">Ghostery paused</ui-text>
+                    </div>
+                  </ui-panel-action>
+                `
+              : html`<ui-panel-action layout="width:full height:auto:4.5">
+                  <a
+                    href="${router.url(ProtectionStatus, {
+                      trackerId: tracker.id,
+                    })}"
+                    layout="row gap padding:0:1.5"
                   >
-                    ${status.website
-                      ? (status.type === 'trust' &&
-                          html`Trusted on this website`) ||
-                        (status.type === 'block' &&
-                          html`Blocked on this website`)
-                      : (status.type === 'trust' &&
-                          html`Trusted on all websites`) ||
-                        (status.type === 'block' &&
-                          html`Blocked on all websites`)}
-                  </ui-text>
+                    <ui-icon
+                      name="${status.type}-m"
+                      color="${status.type === 'block'
+                        ? 'gray-800'
+                        : 'success-500'}"
+                    ></ui-icon>
+                    <ui-text
+                      type="label-m"
+                      layout="block:center row gap center padding:2px:0"
+                    >
+                      ${status.website
+                        ? (status.type === 'trust' &&
+                            html`Trusted on this website`) ||
+                          (status.type === 'block' &&
+                            html`Blocked on this website`)
+                        : (status.type === 'trust' &&
+                            html`Trusted on all websites`) ||
+                          (status.type === 'block' &&
+                            html`Blocked on all websites`)}
+                    </ui-text>
+                  </a>
+                </ui-panel-action>`}
+            ${tracker.category !== 'unidentified' &&
+            html`
+              <ui-panel-action layout="width:4.5 height:auto:4.5">
+                <a
+                  href="${chrome.runtime.getURL(
+                    `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
+                  )}"
+                  onclick="${openTabWithUrl}"
+                >
+                  <ui-icon name="settings-m"></ui-icon>
                 </a>
-              </ui-panel-action>`}
-          ${tracker.category !== 'unidentified' &&
-          html`
-            <ui-panel-action layout="width:4.5 height:auto:4.5">
-              <a
-                href="${chrome.runtime.getURL(
-                  `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
-                )}"
-                onclick="${openTabWithUrl}"
-              >
-                <ui-icon name="settings-m"></ui-icon>
-              </a>
-            </ui-panel-action>
-          `}
-        </div>
+              </ui-panel-action>
+            `}
+          </div>
+        `}
         ${(tracker.organization?.description || wtmUrl) &&
         html`
           <div layout="column gap:0.5">

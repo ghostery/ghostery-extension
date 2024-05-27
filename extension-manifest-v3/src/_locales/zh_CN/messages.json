@@ -22,6 +22,9 @@
   "account_details": {
     "message": "帐户详情"
   },
+  "active": {
+    "message": "有效"
+  },
   "ad_blocking": {
     "message": "广告拦截"
   },
@@ -50,6 +53,9 @@
   "advertising": {
     "message": "广告",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "所有具有调整保护状态的网站将在此处列出。"
   },
   "allow_ghostery_in_private_windows": {
     "message": "允许在私人窗口中使用 Ghostery"
@@ -111,9 +117,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "全部清除"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 Ghostery 固定在工具栏。"
@@ -222,6 +225,9 @@
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "例外情况"
   },
   "expand": {
     "message": "展开"
@@ -376,6 +382,9 @@
   "my_account": {
     "message": "我的帐户"
   },
+  "name": {
+    "message": "姓名"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "导航到一个网站，查看 Ghostery 的运行情况。"
   },
@@ -384,6 +393,9 @@
   },
   "no_activities_detected": {
     "message": "未检测到活动"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "尚未添加任何保护例外。"
   },
   "no_websites_exceptions_added_yet": {
     "message": "还未添加网站异常"
@@ -452,6 +464,9 @@
   "privacy_protection": {
     "message": "隐私保护"
   },
+  "protection_exceptions": {
+    "message": "保护的例外情况"
+  },
   "protection_status": {
     "message": "保护功能状态"
   },
@@ -491,9 +506,6 @@
   "set_blocking_preference": {
     "message": "设置阻止首选项"
   },
-  "settings": {
-    "message": "设置"
-  },
   "settings_sync": {
     "message": "设置同步"
   },
@@ -510,7 +522,7 @@
     "message": "登录"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "登录或创建 Ghostery.com 帐户"
   },
   "simple_view": {
     "message": "简单视图"
@@ -625,9 +637,6 @@
   },
   "what_s_next_": {
     "message": "下一步是？"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "对独立网站暂停使用 Ghostery 时，这些网站会出现在这里。"
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"

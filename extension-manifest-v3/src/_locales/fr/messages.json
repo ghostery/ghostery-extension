@@ -22,6 +22,9 @@
   "account_details": {
     "message": "Détails du compte"
   },
+  "active": {
+    "message": "ACTIF"
+  },
   "ad_blocking": {
     "message": "Blocage de publicité"
   },
@@ -50,6 +53,9 @@
   "advertising": {
     "message": "Publicité",
     "description": "Tracker category name"
+  },
+  "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
+    "message": "Tous les sites Web avec un statut de protection ajusté seront répertoriés ici."
   },
   "allow_ghostery_in_private_windows": {
     "message": "Autorise Ghostery dans les fenêtres privées"
@@ -111,9 +117,6 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
-  },
-  "clear_all": {
-    "message": "Effacer tout"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Cliquez sur l'icône de puzzle en regard de la barre de recherche et épinglez Ghostery à votre barre d'outils."
@@ -222,6 +225,9 @@
   "essential": {
     "message": "Essentiels",
     "description": "Tracker category name"
+  },
+  "exceptions": {
+    "message": "Exceptions"
   },
   "expand": {
     "message": "Développer"
@@ -376,6 +382,9 @@
   "my_account": {
     "message": "Mon compte"
   },
+  "name": {
+    "message": "Nom"
+  },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Naviguez jusqu'à un site web pour voir Ghostery en action."
   },
@@ -384,6 +393,9 @@
   },
   "no_activities_detected": {
     "message": "Aucune activité détectée"
+  },
+  "no_protection_exceptions_added_yet": {
+    "message": "Aucune exception de protection ajoutée pour le moment"
   },
   "no_websites_exceptions_added_yet": {
     "message": "Aucune exception de site web ajoutée pour l'instant"
@@ -452,6 +464,9 @@
   "privacy_protection": {
     "message": "Protection de la vie privée"
   },
+  "protection_exceptions": {
+    "message": "Exceptions de protection"
+  },
   "protection_status": {
     "message": "Statut de protection"
   },
@@ -491,9 +506,6 @@
   "set_blocking_preference": {
     "message": "Définir la préférence de blocage"
   },
-  "settings": {
-    "message": "Paramètres"
-  },
   "settings_sync": {
     "message": "Synchronisation des paramètres"
   },
@@ -510,7 +522,7 @@
     "message": "Connexion"
   },
   "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
+    "message": "Connectez-vous ou créez un compte sur Ghostery.com"
   },
   "simple_view": {
     "message": "Affichage simplifié"
@@ -625,9 +637,6 @@
   },
   "what_s_next_": {
     "message": "Quelle est la suite ?"
-  },
-  "when_pausing_ghostery_on_individual_websites__those_websites_will_appear_here_": {
-    "message": "Lorsque vous mettez Ghostery en pause sur des sites web particuliers, ceux-ci apparaissent ici."
   },
   "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, exploité par Ghostery, fait partie intégrante de la technologie anti-tracking AI de Ghostery. Il s'agit d'une ressource mondiale complète sur les trackers, apportant de la transparence au tracking web."
