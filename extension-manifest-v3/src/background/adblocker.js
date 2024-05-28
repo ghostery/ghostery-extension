@@ -24,7 +24,7 @@ import asyncSetup from './utils/setup.js';
 import { updateTabStats } from './stats.js';
 
 let enabledEngines = [];
-let pausedDomains = [];
+let pausedHostnames = [];
 
 const setup = asyncSetup([
   observe(null, (options) => {
@@ -38,13 +38,18 @@ const setup = asyncSetup([
         ]
       : [];
 
-    // Set paused domains
-    pausedDomains = options.paused.map(String);
+    // Set paused hostnames
+    pausedHostnames = options.paused.map(String);
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
+
+function isHostnamePaused(hostname) {
+  const pureHostname = hostname.replace(/^www\./, '');
+  return pausedHostnames.includes(pureHostname);
+}
 
 function adblockerInjectStylesWebExtension(
   styles,
@@ -97,7 +102,7 @@ async function adblockerOnMessage(msg, sender) {
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
 
-  if (!sender.tab) {
+  if (!sender.tab || isHostnamePaused(hostname)) {
     return;
   }
 
@@ -105,10 +110,6 @@ async function adblockerOnMessage(msg, sender) {
     setup.pending && (await setup.pending);
   } catch (e) {
     console.error(`Error while setup adblocker filters: ${e}`);
-    return;
-  }
-
-  if (pausedDomains.includes(domain) || pausedDomains.includes(hostname)) {
     return;
   }
 
@@ -270,7 +271,7 @@ ${scripts.join('\n\n')}}
 
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
-  if (!hostname) {
+  if (!hostname || isHostnamePaused(hostname)) {
     return;
   }
 
@@ -278,10 +279,6 @@ async function injectScriptlets(tabId, url) {
     setup.pending && (await setup.pending);
   } catch (e) {
     console.error(`Error while setup adblocker filters: ${e}`);
-    return;
-  }
-
-  if (pausedDomains.includes(domain) || pausedDomains.includes(hostname)) {
     return;
   }
 
@@ -329,10 +326,10 @@ if (__PLATFORM__ === 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
-      if (request.sourceDomain) {
+      if (request.sourceHostname) {
         if (
           (details.type !== 'main_frame' && request.metadata?.isTrusted) ||
-          pausedDomains.includes(request.sourceDomain)
+          isHostnamePaused(request.sourceHostname)
         ) {
           updateTabStats(details.tabId, [request]);
           return;
@@ -386,7 +383,7 @@ if (__PLATFORM__ === 'firefox') {
       const request = Request.fromRequestDetails(details);
       if (
         request.metadata?.isTrusted ||
-        pausedDomains.includes(request.sourceDomain)
+        isHostnamePaused(request.sourceHostname)
       ) {
         return;
       }

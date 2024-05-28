@@ -48,14 +48,14 @@ export default {
     stats.trackers.find((t) => t.id === trackerId),
   status: ({ stats, tracker }) =>
     store.ready(tracker.exception)
-      ? tracker.exception.getDomainStatus(stats.domain)
+      ? tracker.exception.getDomainStatus(stats.hostname)
       : { type: tracker.blockedByDefault ? 'block' : 'trust' },
   wtmUrl: ({ tracker }) =>
     tracker.category !== 'unidentified' &&
     `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
-    options.paused.find(({ id }) => id === stats.domain),
+    options.paused.find(({ id }) => id === stats.hostname),
   content: ({ tracker, status, wtmUrl, paused, options }) => html`
     <template layout="column">
       <gh-panel-dialog>

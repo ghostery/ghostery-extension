@@ -139,11 +139,7 @@ export default {
                           layout="grid:1|min:auto gap:2 items:center:stretch margin:-2:0 padding:2:0"
                           layout@768px="grid:3fr|3fr|1fr|60px gap:4"
                         >
-                          <ui-text
-                            type="label-l"
-                            ellipsis
-                            layout@768px="width:50%"
-                          >
+                          <ui-text type="label-l" ellipsis>
                             ${item.id}
                           </ui-text>
                           <ui-action>

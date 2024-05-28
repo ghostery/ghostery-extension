@@ -34,7 +34,7 @@ const tab = await chrome.runtime.sendMessage({
 });
 
 const Stats = {
-  domain: '',
+  hostname: '',
   trackers: [StatsTracker],
   trackersBlocked: ({ trackers }) =>
     trackers.reduce((acc, { blocked }) => acc + Number(blocked), 0),
@@ -72,7 +72,7 @@ const Stats = {
 
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
 
-      if (tabStats && tab.url.includes(tabStats.domain)) {
+      if (tabStats && tab.url.includes(tabStats.hostname)) {
         // Tracker has a reference to TrackerException,
         //so we need to resolve exceptions
         await store.resolve([TrackerException]);
@@ -80,10 +80,8 @@ const Stats = {
         return tabStats;
       }
 
-      const { domain, hostname } = parse(tab.url);
-      return {
-        domain: domain || hostname,
-      };
+      const { hostname } = parse(tab.url);
+      return { hostname };
     },
     observe:
       __PLATFORM__ === 'safari' &&

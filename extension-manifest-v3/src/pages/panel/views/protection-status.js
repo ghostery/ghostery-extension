@@ -8,7 +8,7 @@ import { toggleExceptionDomain } from '/store/tracker-exception.js';
 function toggleDomain({ stats, tracker }) {
   toggleExceptionDomain(
     tracker.exception,
-    stats.domain,
+    stats.hostname,
     tracker.blockedByDefault,
   );
 }
@@ -25,10 +25,10 @@ export default {
       : tracker.blockedByDefault,
   blockedOnSite: ({ stats, tracker }) =>
     store.ready(tracker.exception) &&
-    tracker.exception.blockedDomains.includes(stats.domain),
+    tracker.exception.blockedDomains.includes(stats.hostname),
   allowedOnSite: ({ stats, tracker }) =>
     store.ready(tracker.exception) &&
-    tracker.exception.trustedDomains.includes(stats.domain),
+    tracker.exception.trustedDomains.includes(stats.hostname),
   content: ({ stats, tracker, blocked, blockedOnSite, allowedOnSite }) => html`
     <template layout="column">
       <gh-panel-dialog>
@@ -72,7 +72,7 @@ export default {
               <div layout="grow">
                 <ui-text type="label-m">
                   <!-- Add domain as exception -->
-                  Add ${stats.domain} as exception
+                  Add ${stats.hostname} as exception
                 </ui-text>
                 <ui-text type="body-s" color="gray-500">
                   ${blocked

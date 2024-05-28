@@ -27,7 +27,7 @@ if (__PLATFORM__ !== 'firefox') {
     const enabledRulesetIds =
       (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
 
-    const enableRulesetIds = [];
+    const enableRulesetIds = options.terms ? ['fixes'] : [];
     const disableRulesetIds = [];
 
     ENGINES.forEach(({ name, key }) => {
@@ -67,13 +67,13 @@ if (__PLATFORM__ !== 'firefox') {
   });
 
   observe('paused', async (paused, prevPaused) => {
-    // Skip if domains has not changed
+    // Skip if hostnames has not changed
     if (!prevPaused) return;
 
     const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
 
     if (paused.length) {
-      const domains = paused.map(({ id }) => id);
+      const hostnames = paused.map(({ id }) => id);
 
       chrome.declarativeNetRequest.updateDynamicRules({
         addRules:
@@ -84,7 +84,7 @@ if (__PLATFORM__ !== 'firefox') {
                   priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allow' },
                   condition: {
-                    domains: domains.map((d) => `*${d}`),
+                    domains: hostnames.map((d) => `*${d}`),
                     urlFilter: '*',
                   },
                 },
@@ -95,7 +95,7 @@ if (__PLATFORM__ !== 'firefox') {
                   priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allow' },
                   condition: {
-                    initiatorDomains: domains,
+                    initiatorDomains: hostnames,
                     resourceTypes: [
                       'main_frame',
                       'sub_frame',
@@ -119,7 +119,7 @@ if (__PLATFORM__ !== 'firefox') {
                   priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allowAllRequests' },
                   condition: {
-                    initiatorDomains: domains,
+                    initiatorDomains: hostnames,
                     resourceTypes: ['main_frame', 'sub_frame'],
                   },
                 },

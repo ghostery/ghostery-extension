@@ -57,14 +57,14 @@ export function isCategoryBlockedByDefault(categoryId) {
   }
 }
 
-export function isTrusted(domainOrHostname, category, exception) {
+export function isTrusted(hostname, category, exception) {
   const isCategoryBlocked = isCategoryBlockedByDefault(category);
 
   if (exception.blocked) {
-    return exception.trustedDomains.includes(domainOrHostname) || false;
+    return exception.trustedDomains.includes(hostname) || false;
   } else {
     return (
-      !exception.blockedDomains.includes(domainOrHostname) &&
+      !exception.blockedDomains.includes(hostname) &&
       exception.blocked !== isCategoryBlocked
     );
   }
@@ -90,17 +90,17 @@ export function getMetadata(request) {
   }
 
   if (matches.length === 0) {
-    exception = store.get(TrackerException, request.domain);
+    exception = store.get(TrackerException, request.hostname);
 
     if (!store.ready(exception) && !request.blocked && !request.modified) {
       return null;
     }
 
     tracker = {
-      id: request.domain,
-      name: request.domain,
+      id: request.hostname,
+      name: request.hostname,
       category: 'unidentified',
-      exception: request.domain,
+      exception: request.hostname,
       blockedByDefault: true,
     };
   } else {
@@ -113,7 +113,7 @@ export function getMetadata(request) {
     ...tracker,
     isFilterMatched,
     isTrusted: store.ready(exception)
-      ? isTrusted(request.sourceDomain, tracker.category, exception)
+      ? isTrusted(request.sourceHostname, tracker.category, exception)
       : !isCategoryBlockedByDefault(tracker.category),
   };
 

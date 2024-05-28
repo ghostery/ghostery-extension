@@ -59,7 +59,7 @@ async function refreshIcon(tabId) {
   if (!stats) return;
 
   const inactive =
-    !options.terms || options.paused?.some(({ id }) => id === stats.domain);
+    !options.terms || options.paused?.some(({ id }) => id === stats.hostname);
 
   const data = {};
   if (options.trackerWheel && stats.trackers.length > 0) {
@@ -163,7 +163,9 @@ export async function updateTabStats(tabId, requests) {
   // (e.g. requests on trailing edge when navigation to a new page is in progress)
   requests = requests.filter(
     // As a fallback, we assume that the request is from the origin URL
-    (request) => !request.sourceDomain || request.sourceDomain === stats.domain,
+    (request) =>
+      !request.sourceHostname ||
+      request.sourceHostname.endsWith(stats.hostname),
   );
 
   let trackersUpdated = pushTabStats(stats, requests);
@@ -265,7 +267,7 @@ function setupTabStats(details) {
 
   if (request.isHttp || request.isHttps) {
     tabStats.set(details.tabId, {
-      domain: request.domain,
+      hostname: request.hostname.replace('www.', ''),
       url: request.url,
       trackers: [],
       timestamp: details.timeStamp,

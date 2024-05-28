@@ -35,11 +35,11 @@ async function togglePause(host, event) {
   // Update options
   await store.set(host.options, {
     paused: paused
-      ? host.options.paused.filter((p) => p.id !== host.stats.domain)
+      ? host.options.paused.filter((p) => p.id !== host.stats.hostname)
       : [
           ...host.options.paused,
           {
-            id: host.stats.domain,
+            id: host.stats.hostname,
             revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
           },
         ],
@@ -82,7 +82,7 @@ export default {
   notification: store(Notification),
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
-    options.paused.find(({ id }) => id === stats.domain),
+    options.paused.find(({ id }) => id === stats.hostname),
   content: ({ options, stats, notification, paused }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&
@@ -90,7 +90,7 @@ export default {
         ${options.terms &&
         html`
           <ui-panel-header>
-            ${store.ready(stats) && stats.domain}
+            ${store.ready(stats) && stats.hostname}
             <ui-action slot="icon">
               <a href="https://www.ghostery.com" onclick="${openTabWithUrl}">
                 <ui-icon name="logo"></ui-icon>
@@ -108,7 +108,7 @@ export default {
           layout="fixed inset:1 bottom:auto layer:200"
         ></section>
         ${options.terms
-          ? stats.domain &&
+          ? stats.hostname &&
             html`
               <gh-panel-pause
                 onaction="${togglePause}"
@@ -130,10 +130,10 @@ export default {
               </gh-panel-button>
             `}
         <gh-panel-container>
-          ${stats.domain
+          ${stats.hostname
             ? html`
                 <ui-panel-stats
-                  domain="${stats.domain}"
+                  domain="${stats.hostname}"
                   categories="${stats.topCategories}"
                   trackers="${stats.trackers}"
                   paused="${paused || !options.terms}"
@@ -149,7 +149,7 @@ export default {
                       <a
                         href="${chrome.runtime.getURL(
                           '/pages/settings/index.html#@gh-settings-website-details?domain=' +
-                            stats.domain,
+                            stats.hostname,
                         )}"
                         onclick="${openTabWithUrl}"
                       >
