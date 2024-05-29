@@ -16,30 +16,30 @@ import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
 import { parse } from 'tldts-experimental';
 
-const Model = {
+const Hostname = {
   id: true,
   value: '',
   [store.connect]: {
     get: () => null,
     set: (id, model) => {
       const parsed = parse(model.value);
-      if (!parsed.domain && !parsed.isIp) {
-        throw 'The value must be a valid domain name or IP address.';
+      if (!parsed.hostname && !parsed.isIp) {
+        throw 'The value must be a valid hostname or IP address.';
       }
       return {
         ...model,
-        value: parsed.domain || parsed.hostname,
+        value: parsed.hostname.replace(/^www\./, ''),
       };
     },
   },
 };
 
-async function add({ tracker, model }, event) {
+async function add({ tracker, hostname }, event) {
   event.preventDefault();
 
   router.resolve(
     event,
-    store.submit(model).then(({ value }) => {
+    store.submit(hostname).then(({ value }) => {
       return toggleExceptionDomain(
         tracker.exception,
         value,
@@ -57,8 +57,8 @@ export default {
     store.ready(tracker.exception)
       ? tracker.exception.blocked
       : tracker.blockedByDefault,
-  model: store(Model, { draft: true }),
-  content: ({ tracker, blocked, model }) => html`
+  hostname: store(Hostname, { draft: true }),
+  content: ({ tracker, blocked, hostname }) => html`
     <template layout>
       ${store.ready(tracker) &&
       html`
@@ -80,12 +80,12 @@ export default {
             </div>
             <div layout="column gap:0.5">
               <ui-text type="label-m">Website</ui-text>
-              <gh-settings-input error="${store.error(model) || ''}">
+              <gh-settings-input error="${store.error(hostname) || ''}">
                 <input
                   type="text"
                   placeholder="${msg`Enter website URL`}"
-                  value="${model.value}"
-                  oninput="${html.set(model, 'value')}"
+                  value="${hostname.value}"
+                  oninput="${html.set(hostname, 'value')}"
                   tabindex="1"
                 />
               </gh-settings-input>

@@ -55,7 +55,7 @@
       },
       {
         "id": "fixes",
-        "enabled": true,
+        "enabled": false,
         "path": "rule_resources/dnr-fixes-safari.json"
       }
     ]

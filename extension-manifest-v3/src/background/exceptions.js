@@ -136,15 +136,9 @@ chrome.storage.onChanged.addListener(async (changes) => {
   if (__PLATFORM__ !== 'firefox') {
     await updateDNRRules(networkFilters);
   }
-  await updateCosmeticFilters(cosmeticFilters);
 
   console.info('Exceptions - Filters updated successfully');
 });
-
-async function updateCosmeticFilters(/* filters */) {
-  // TODO
-  //engines.createCustomEngine(filters.join('\n'))
-}
 
 async function updateDNRRules(networkFilters) {
   const dnrRules = [];

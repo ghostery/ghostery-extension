@@ -16,22 +16,18 @@ import { store } from 'hybrids';
 
 import Options from '/store/options.js';
 
-async function getTabDomain(tabId) {
-  return parse((await chrome.tabs.get(tabId)).url).domain;
-}
-
-async function initialize(msg, tabId, frameId) {
+async function initialize(msg, tab, frameId) {
   const { terms, blockAnnoyances, paused } = await store.resolve(Options);
-  const domain = await getTabDomain(tabId);
+  const pureHostname = tab.url && parse(tab.url).hostname.replace(/^www\./, '');
 
   if (
     terms &&
     blockAnnoyances &&
-    (!paused || !paused.some(({ id }) => id === domain))
+    (!pureHostname || !paused.includes(pureHostname))
   ) {
     try {
       chrome.tabs.sendMessage(
-        tabId,
+        tab.id,
         {
           action: 'autoconsent',
           type: 'initResp',
@@ -83,14 +79,13 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action !== 'autoconsent') return;
   if (!sender.tab) return;
 
-  const tabId = sender.tab.id;
   const frameId = sender.frameId;
 
   switch (msg.type) {
     case 'init':
-      return initialize(msg, tabId, frameId);
+      return initialize(msg, sender.tab, frameId);
     case 'eval':
-      return evalCode(msg.snippetId, msg.id, tabId, frameId);
+      return evalCode(msg.snippetId, msg.id, sender.tab.id, frameId);
     default:
       break;
   }
