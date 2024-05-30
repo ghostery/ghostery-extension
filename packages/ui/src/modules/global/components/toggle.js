@@ -43,11 +43,11 @@ export default {
       }
 
       :host([disabled]) button {
-        --ui-text-color-heading: var(--ui-color-gray-400);
+        --ui-text-color-heading: var(--ui-color-gray-400) !important;
       }
 
       :host([disabled]) #toggle {
-        background: var(--ui-color-gray-400);
+        background: var(--ui-color-gray-400) !important;
       }
 
       button {

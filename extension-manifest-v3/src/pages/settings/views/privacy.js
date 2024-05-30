@@ -64,10 +64,6 @@ export default {
                 different types of data collection including ads, trackers, and
                 cookie pop-ups.
               </ui-text>
-              <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                You can adjust the settings below. We recommend keeping them ON
-                at all times.
-              </ui-text>
             </div>
             <div layout="row items:start gap:2" layout@768px="gap:5">
               <a href="${router.url(Preview, PREVIEWS['ad_blocking'])}">
@@ -86,6 +82,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
+                  disabled
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
                 ></ui-toggle>
@@ -112,6 +109,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
+                  disabled
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
                 ></ui-toggle>
@@ -137,6 +135,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
+                  disabled
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
                 ></ui-toggle>
