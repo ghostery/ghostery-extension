@@ -159,98 +159,110 @@ export default {
                   placeholder="${msg`Search for a tracker or organization...`}"
                 />
               </gh-settings-input>
+              <gh-settings-button
+                layout="width::12 grow"
+                layout@768px="grow:0"
+                disabled=
+              >
+                ${msg`Block all`} (${msg`coming soon`})
+              </gh-settings-button>
             </div>
             <div layout="column gap:0.5">
-              ${store.ready(categories) &&
-              categories.map(
-                ({
-                  id,
-                  key,
-                  description,
-                  trackers,
-                  blocked,
-                  trusted,
-                  blockedByDefault,
-                }) =>
-                  html`
-                    <gh-settings-trackers-list
-                      name="${key}"
-                      description="${description}"
-                      open="${isActive(category, key)}"
-                      blocked="${blocked}"
-                      trusted="${trusted}"
-                      blockedByDefault="${blockedByDefault}"
-                      ontoggle="${html.set(
-                        'category',
-                        isActive(category, key) ? '' : key,
-                      )}"
-                      onclear="${clearCategory(id)}"
-                    >
-                      ${isActive(category, key) &&
-                      html`
-                        <ui-line></ui-line>
-                        <div
-                          layout="column gap"
-                          layout@768px="padding:left:102px"
-                        >
-                          ${trackers.map(
-                            (tracker, index) =>
-                              index <= (limits[key] || PATTERNS_LIMIT) &&
-                              html`
-                                <div layout="row items:center gap">
-                                  <ui-action>
-                                    <a
-                                      href="${router.url(TrackerDetails, {
-                                        tracker: tracker.id,
-                                      })}"
-                                      layout="column grow basis:0"
-                                      layout@768px="row gap:2"
-                                    >
-                                      <ui-text type="label-m">
-                                        ${tracker.name}
-                                      </ui-text>
-                                      ${tracker.organization &&
+              ${
+                store.ready(categories) &&
+                categories.map(
+                  ({
+                    id,
+                    key,
+                    description,
+                    trackers,
+                    blocked,
+                    trusted,
+                    blockedByDefault,
+                  }) =>
+                    html`
+                      <gh-settings-trackers-list
+                        name="${key}"
+                        description="${description}"
+                        open="${isActive(category, key)}"
+                        blocked="${blocked}"
+                        trusted="${trusted}"
+                        blockedByDefault="${blockedByDefault}"
+                        ontoggle="${html.set(
+                          'category',
+                          isActive(category, key) ? '' : key,
+                        )}"
+                        onclear="${clearCategory(id)}"
+                      >
+                        ${isActive(category, key) &&
+                        html`
+                          <ui-line></ui-line>
+                          <div
+                            layout="column gap"
+                            layout@768px="padding:left:102px"
+                          >
+                            ${trackers.map(
+                              (tracker, index) =>
+                                index <= (limits[key] || PATTERNS_LIMIT) &&
+                                html`
+                                  <div layout="row items:center gap">
+                                    <ui-action>
+                                      <a
+                                        href="${router.url(TrackerDetails, {
+                                          tracker: tracker.id,
+                                        })}"
+                                        layout="column grow basis:0"
+                                        layout@768px="row gap:2"
+                                      >
+                                        <ui-text type="label-m">
+                                          ${tracker.name}
+                                        </ui-text>
+                                        ${tracker.organization &&
+                                        html`
+                                          <ui-text color="gray-600">
+                                            ${tracker.organization.name}
+                                          </ui-text>
+                                        `}
+                                      </a>
+                                    </ui-action>
+                                    <div layout="row items:center gap">
+                                      ${store.ready(tracker.exception) &&
+                                      tracker.exception.blocked !==
+                                        tracker.blockedByDefault &&
                                       html`
-                                        <ui-text color="gray-600">
-                                          ${tracker.organization.name}
+                                        <ui-text
+                                          type="label-s"
+                                          color="gray-500"
+                                        >
+                                          <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                         </ui-text>
                                       `}
-                                    </a>
-                                  </ui-action>
-                                  <div layout="row items:center gap">
-                                    ${store.ready(tracker.exception) &&
-                                    tracker.exception.blocked !==
-                                      tracker.blockedByDefault &&
-                                    html`
-                                      <ui-text type="label-s" color="gray-500">
-                                        <!-- Singular form - tracker has been adjusted | tracker -->adjusted
-                                      </ui-text>
-                                    `}
-                                    <ui-panel-protection-status-toggle
-                                      value="${store.ready(tracker.exception)
-                                        ? tracker.exception.blocked
-                                        : tracker.blockedByDefault}"
-                                      responsive
-                                      onchange="${updateException(tracker)}"
-                                      layout="shrink:0"
-                                    ></ui-panel-protection-status-toggle>
+                                      <ui-panel-protection-status-toggle
+                                        value="${store.ready(tracker.exception)
+                                          ? tracker.exception.blocked
+                                          : tracker.blockedByDefault}"
+                                        responsive
+                                        onchange="${updateException(tracker)}"
+                                        layout="shrink:0"
+                                      ></ui-panel-protection-status-toggle>
+                                    </div>
                                   </div>
-                                </div>
-                              `.key(tracker.id),
-                          )}
-                        </div>
-                        ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
-                        html`
-                          <div layout="row center margin:bottom:2">
-                            <gh-settings-button onclick="${loadMore(key)}">
-                              Load more
-                            </gh-settings-button>
+                                `.key(tracker.id),
+                            )}
                           </div>
+                          ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
+                          html`
+                            <div layout="row center margin:bottom:2">
+                              <gh-settings-button onclick="${loadMore(key)}">
+                                Load more
+                              </gh-settings-button>
+                            </div>
+                          `}
                         `}
-                      `}
-                    </gh-settings-trackers-list>
-                  `.key(key),
-              )}
+                      </gh-settings-trackers-list>
+                    `.key(key),
+                )
+              }
             </div>
           </section>
         `}
