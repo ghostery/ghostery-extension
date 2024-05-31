@@ -12,11 +12,14 @@
 import { html } from 'hybrids';
 
 export default {
-  render: () => html`
+  disabled: false,
+  render: ({ disabled }) => html`
     <template layout="grid">
-      <ui-panel-action layout="height:5">
+      <ui-panel-action layout="height:5" disabled=${disabled}>
         <button layout="padding:1:1.5">
-          <ui-text type="label-m" layout="row gap:0.5"><slot></slot></ui-text>
+          <ui-text type="label-m" layout="row gap:0.5">
+            <slot></slot>
+          </ui-text>
         </button>
       </ui-panel-action>
     </template>
