@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store } from 'hybrids';
+import { html, store, dispatch } from 'hybrids';
 
 import { openTabWithUrl } from '/utils/tabs.js';
 import Options from '/store/options.js';
@@ -49,14 +49,20 @@ function updateEngines(host, event) {
 
 function refresh(host) {
   host.counter += 1;
+
+  if (host.counter > 5) {
+    host.isVisible = true;
+    dispatch(host, 'is-shown');
+  }
 }
 
 export default {
   counter: 0,
   options: store(Options),
-  content: ({ counter }) => html`
+  isVisible: false,
+  content: ({ isVisible }) => html`
     <template layout="column gap:3">
-      ${counter >= 5 &&
+      ${isVisible &&
       html`
         <section layout="column gap:3" translate="no">
           <ui-text type="headline-m">Developer tools</ui-text>

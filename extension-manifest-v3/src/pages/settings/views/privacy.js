@@ -46,10 +46,15 @@ function toggleNeverConsent({ options }) {
   });
 }
 
+function onDevModeEnabled(host) {
+  host.devMode = true;
+}
+
 export default {
   options: store(Options),
   session: store(Session),
-  content: ({ options, session }) => html`
+  devMode: false,
+  content: ({ options, session, devMode }) => html`
     <template layout="contents">
       <gh-settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
@@ -82,7 +87,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
-                  disabled
+                  disabled=${!devMode}
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
                 ></ui-toggle>
@@ -109,7 +114,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
-                  disabled
+                  disabled=${!devMode}
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
                 ></ui-toggle>
@@ -135,7 +140,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
-                  disabled
+                  disabled=${!devMode}
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
                 ></ui-toggle>
@@ -174,7 +179,9 @@ export default {
             </div>
           </section>
 
-          <gh-settings-devtools></gh-settings-devtools>
+          <gh-settings-devtools
+            onis-shown=${onDevModeEnabled}
+          ></gh-settings-devtools>
         `}
         ${store.ready(session) &&
         html`
