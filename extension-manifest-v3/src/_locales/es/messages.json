@@ -86,7 +86,7 @@
     "message": "Conviértete en Contribuyente"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "Bloquear todo"
   },
   "block_all__recommended_": {
     "message": "Bloquear todo (recomendado)"
@@ -128,7 +128,7 @@
     "message": "Contraer"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "Próximamente"
   },
   "comments": {
     "message": "Comentarios",
@@ -471,7 +471,7 @@
     "message": "Protección de la privacidad"
   },
   "protection": {
-    "message": "protection"
+    "message": "protección"
   },
   "protection_exceptions": {
     "message": "Excepciones de protección"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "Reactivar"
+  },
+  "resume_protection": {
+    "message": "Reanudar protección"
   },
   "save": {
     "message": "Guardar"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "El sitio es de confianza"
   },
   "social_media": {
     "message": "Redes sociales",
@@ -594,7 +597,7 @@
     "message": "Confiar en este sitio web"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "Confiar en este sitio"
   },
   "trusted": {
     "message": "De confianza"

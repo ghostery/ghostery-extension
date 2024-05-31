@@ -86,7 +86,7 @@
     "message": "Werde Ghostery-Förderer"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "Alle blockieren"
   },
   "block_all__recommended_": {
     "message": "Alle blockieren (empfohlen)"
@@ -128,7 +128,7 @@
     "message": "Weniger anzeigen"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "Demnächst verfügbar!"
   },
   "comments": {
     "message": "Kommentare",
@@ -471,7 +471,7 @@
     "message": "Datenschutz"
   },
   "protection": {
-    "message": "protection"
+    "message": "Schutz"
   },
   "protection_exceptions": {
     "message": "Schutzausnahmen"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "Fortsetzen"
+  },
+  "resume_protection": {
+    "message": "Schutz fortsetzen"
   },
   "save": {
     "message": "Speichern"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "Website ist vertrauenswürdig"
   },
   "social_media": {
     "message": "Social Media",
@@ -594,7 +597,7 @@
     "message": "Auf dieser Website vertrauen"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "Vertraue dieser Website"
   },
   "trusted": {
     "message": "Vertrauenswürdig"

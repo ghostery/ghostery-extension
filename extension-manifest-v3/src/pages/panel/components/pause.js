@@ -97,7 +97,8 @@ export default {
                   color="danger-500"
                   layout="margin:left:0.5"
                 >
-                  Resume <span>protection</span>
+                  <span short>Resume</span>
+                  <span long>Resume protection</span>
                 </ui-text>
               `
             : html`
@@ -226,7 +227,11 @@ export default {
         transition: width 0.2s;
       }
 
-      #main.paused:hover:has(#type:hover) #type span {
+      #main.paused:hover:has(#type:hover) #type span[short] {
+        display: none;
+      }
+
+      #main.paused:hover:has(#type:hover) #type span[long] {
         display: inline;
       }
 
@@ -242,7 +247,11 @@ export default {
       background: var(--ui-color-white);
     }
 
-    #main.paused #type span {
+    #main.paused #type span[short] {
+      display: inline;
+    }
+
+    #main.paused #type span[long] {
       display: none;
     }
 

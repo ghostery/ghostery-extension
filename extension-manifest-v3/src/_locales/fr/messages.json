@@ -86,7 +86,7 @@
     "message": "Devenez donateur"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "Tout bloquer"
   },
   "block_all__recommended_": {
     "message": "Tout bloquer (recommandé)"
@@ -128,7 +128,7 @@
     "message": "Réduire"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "Prochainement !"
   },
   "comments": {
     "message": "Commentaires",
@@ -497,6 +497,9 @@
   "resume": {
     "message": "Reprendre"
   },
+  "resume_protection": {
+    "message": "Reprise de la protection."
+  },
   "save": {
     "message": "Enregistrer"
   },
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "Site est de confiance."
   },
   "social_media": {
     "message": "Réseaux sociaux",
@@ -594,7 +597,7 @@
     "message": "Autoriser sur ce site web"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "Se fier à ce site"
   },
   "trusted": {
     "message": "Autorisé"

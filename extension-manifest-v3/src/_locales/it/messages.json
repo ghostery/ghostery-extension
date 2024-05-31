@@ -86,7 +86,7 @@
     "message": "Diventa un collaboratore"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "Blocca Tutti"
   },
   "block_all__recommended_": {
     "message": "Blocca tutti (consigliato)"
@@ -128,7 +128,7 @@
     "message": "Comprimi"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "In arrivo!"
   },
   "comments": {
     "message": "Commenti",
@@ -471,7 +471,7 @@
     "message": "Protezione della privacy"
   },
   "protection": {
-    "message": "protection"
+    "message": "protezione"
   },
   "protection_exceptions": {
     "message": "Eccezioni di protezione"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "Riattiva"
+  },
+  "resume_protection": {
+    "message": "Protezione del curriculum"
   },
   "save": {
     "message": "Salva"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "Il sito è affidabile"
   },
   "social_media": {
     "message": "Social Media",
@@ -594,7 +597,7 @@
     "message": "Considera affidabile su questo sito"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "Considera affidabile su questo sito"
   },
   "trusted": {
     "message": "Considerati affidabili"

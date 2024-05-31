@@ -86,7 +86,7 @@
     "message": "Seja um colaborador"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "Bloquear tudo"
   },
   "block_all__recommended_": {
     "message": "Bloquear tudo (recomendado)"
@@ -128,7 +128,7 @@
     "message": "Recolher"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "Em breve!"
   },
   "comments": {
     "message": "Comentários",
@@ -471,7 +471,7 @@
     "message": "Proteção de privacidade"
   },
   "protection": {
-    "message": "protection"
+    "message": "proteção"
   },
   "protection_exceptions": {
     "message": "Exceções de proteção"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "Retomar"
+  },
+  "resume_protection": {
+    "message": "Proteção de currículo"
   },
   "save": {
     "message": "Salvar"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "Site é confiável"
   },
   "social_media": {
     "message": "Mídia Social",
@@ -594,7 +597,7 @@
     "message": "Confiar nesse site"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "Confie neste site"
   },
   "trusted": {
     "message": "Confiável"

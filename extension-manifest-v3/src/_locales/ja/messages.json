@@ -86,7 +86,7 @@
     "message": "Contributorになる"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "すべてをブロック"
   },
   "block_all__recommended_": {
     "message": "すべてをブロック (推奨)"
@@ -128,7 +128,7 @@
     "message": "折り畳む"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "近日リリース！"
   },
   "comments": {
     "message": "コメント",
@@ -471,7 +471,7 @@
     "message": "プライバシー保護"
   },
   "protection": {
-    "message": "protection"
+    "message": "保護"
   },
   "protection_exceptions": {
     "message": "保護の例外"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "再開"
+  },
+  "resume_protection": {
+    "message": "再就職の保護"
   },
   "save": {
     "message": "保存"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "サイトは信頼されています"
   },
   "social_media": {
     "message": "ソーシャル・メディア",
@@ -594,7 +597,7 @@
     "message": "このウェブサイトで信頼"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "このサイトを信頼"
   },
   "trusted": {
     "message": "信頼済み"

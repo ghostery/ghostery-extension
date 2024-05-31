@@ -86,7 +86,7 @@
     "message": "기부자가 되세요."
   },
   "block_all": {
-    "message": "Block all"
+    "message": "모두 차단"
   },
   "block_all__recommended_": {
     "message": "모두 차단(권장)"
@@ -128,7 +128,7 @@
     "message": "접기"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "곧 제공됩니다!"
   },
   "comments": {
     "message": "댓글",
@@ -471,7 +471,7 @@
     "message": "개인정보 보호"
   },
   "protection": {
-    "message": "protection"
+    "message": "보호"
   },
   "protection_exceptions": {
     "message": "보호 예외사항"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "다시 시작 "
+  },
+  "resume_protection": {
+    "message": "이력서 보호"
   },
   "save": {
     "message": "저장"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "사이트는 신뢰할 수 있습니다"
   },
   "social_media": {
     "message": "소셜 미디어 ",
@@ -594,7 +597,7 @@
     "message": "이 웹사이트상에서 신뢰"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "이 사이트를 신뢰하십시오"
   },
   "trusted": {
     "message": "신뢰할 수 있는 사이트"

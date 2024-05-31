@@ -86,7 +86,7 @@
     "message": "Стать участником"
   },
   "block_all": {
-    "message": "Block all"
+    "message": "Заблокировать все"
   },
   "block_all__recommended_": {
     "message": "Заблокировать все (рекомендуется)"
@@ -128,7 +128,7 @@
     "message": "Свернуть"
   },
   "coming_soon": {
-    "message": "coming soon"
+    "message": "Скоро!"
   },
   "comments": {
     "message": "Комментарии",
@@ -471,7 +471,7 @@
     "message": "Защита конфиденциальности"
   },
   "protection": {
-    "message": "protection"
+    "message": "защита"
   },
   "protection_exceptions": {
     "message": "Исключения защиты"
@@ -496,6 +496,9 @@
   },
   "resume": {
     "message": "Возобновить"
+  },
+  "resume_protection": {
+    "message": "Защита резюме"
   },
   "save": {
     "message": "Сохранить"
@@ -541,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Site is trusted"
+    "message": "Сайт доверенный"
   },
   "social_media": {
     "message": "Социальные сети",
@@ -594,7 +597,7 @@
     "message": "Разрешить на этом сайте"
   },
   "trust_this_site": {
-    "message": "Trust this site"
+    "message": "Разрешить этому сайту"
   },
   "trusted": {
     "message": "Доверенный"
