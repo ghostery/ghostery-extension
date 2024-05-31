@@ -23,7 +23,7 @@ export default {
           `
         : html`
             <gh-settings-badge type="danger" uppercase>
-              Paused
+              Trusted
             </gh-settings-badge>
             <ui-text color="gray-600" layout="grow">
               ${revokeAt

@@ -78,7 +78,7 @@ export default {
         <div id="label" layout="grow row center gap:0.5 shrink overflow">
           <ui-icon name="pause" color="gh-panel-action"></ui-icon>
           <ui-text type="label-m" color="gh-panel-action" layout="block:center">
-            ${paused ? msg`Ghostery paused` : msg`Pause on this site`}
+            ${paused ? msg`Site is trusted` : msg`Trust this site`}
           </ui-text>
         </div>
         <div
@@ -97,7 +97,7 @@ export default {
                   color="danger-500"
                   layout="margin:left:0.5"
                 >
-                  Resume <span translate="no">Ghostery</span>
+                  Resume <span>protection</span>
                 </ui-text>
               `
             : html`
