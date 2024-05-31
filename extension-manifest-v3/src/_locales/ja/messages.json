@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "Contributorになる"
   },
+  "block_all": {
+    "message": "Block all"
+  },
   "block_all__recommended_": {
     "message": "すべてをブロック (推奨)"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "折り畳む"
+  },
+  "coming_soon": {
+    "message": "coming soon"
   },
   "comments": {
     "message": "コメント",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "プライバシー保護"
   },
+  "protection": {
+    "message": "protection"
+  },
   "protection_exceptions": {
     "message": "保護の例外"
   },
@@ -531,6 +540,9 @@
     "message": "サイト分析",
     "description": "Tracker category name"
   },
+  "site_is_trusted": {
+    "message": "Site is trusted"
+  },
   "social_media": {
     "message": "ソーシャル・メディア",
     "description": "Tracker category name"
@@ -580,6 +592,9 @@
   },
   "trust_on_this_website": {
     "message": "このウェブサイトで信頼"
+  },
+  "trust_this_site": {
+    "message": "Trust this site"
   },
   "trusted": {
     "message": "信頼済み"

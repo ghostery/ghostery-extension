@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "기부자가 되세요."
   },
+  "block_all": {
+    "message": "Block all"
+  },
   "block_all__recommended_": {
     "message": "모두 차단(권장)"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "접기"
+  },
+  "coming_soon": {
+    "message": "coming soon"
   },
   "comments": {
     "message": "댓글",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "개인정보 보호"
   },
+  "protection": {
+    "message": "protection"
+  },
   "protection_exceptions": {
     "message": "보호 예외사항"
   },
@@ -531,6 +540,9 @@
     "message": "사이트 분석 ",
     "description": "Tracker category name"
   },
+  "site_is_trusted": {
+    "message": "Site is trusted"
+  },
   "social_media": {
     "message": "소셜 미디어 ",
     "description": "Tracker category name"
@@ -580,6 +592,9 @@
   },
   "trust_on_this_website": {
     "message": "이 웹사이트상에서 신뢰"
+  },
+  "trust_this_site": {
+    "message": "Trust this site"
   },
   "trusted": {
     "message": "신뢰할 수 있는 사이트"

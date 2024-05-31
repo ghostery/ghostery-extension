@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "成为贡献者"
   },
+  "block_all": {
+    "message": "Block all"
+  },
   "block_all__recommended_": {
     "message": "阻止所有（推荐）"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "折叠"
+  },
+  "coming_soon": {
+    "message": "coming soon"
   },
   "comments": {
     "message": "评论",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "隐私保护"
   },
+  "protection": {
+    "message": "protection"
+  },
   "protection_exceptions": {
     "message": "保护的例外情况"
   },
@@ -531,6 +540,9 @@
     "message": "网站分析",
     "description": "Tracker category name"
   },
+  "site_is_trusted": {
+    "message": "Site is trusted"
+  },
   "social_media": {
     "message": "社交媒体",
     "description": "Tracker category name"
@@ -580,6 +592,9 @@
   },
   "trust_on_this_website": {
     "message": "信任此网站"
+  },
+  "trust_this_site": {
+    "message": "Trust this site"
   },
   "trusted": {
     "message": "受信任"

@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "Стать участником"
   },
+  "block_all": {
+    "message": "Block all"
+  },
   "block_all__recommended_": {
     "message": "Заблокировать все (рекомендуется)"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "Свернуть"
+  },
+  "coming_soon": {
+    "message": "coming soon"
   },
   "comments": {
     "message": "Комментарии",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "Защита конфиденциальности"
   },
+  "protection": {
+    "message": "protection"
+  },
   "protection_exceptions": {
     "message": "Исключения защиты"
   },
@@ -531,6 +540,9 @@
     "message": "Аналитика сайта",
     "description": "Tracker category name"
   },
+  "site_is_trusted": {
+    "message": "Site is trusted"
+  },
   "social_media": {
     "message": "Социальные сети",
     "description": "Tracker category name"
@@ -580,6 +592,9 @@
   },
   "trust_on_this_website": {
     "message": "Разрешить на этом сайте"
+  },
+  "trust_this_site": {
+    "message": "Trust this site"
   },
   "trusted": {
     "message": "Доверенный"
