@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "Become a Contributor"
   },
+  "block_all": {
+    "message": "Block all"
+  },
   "block_all__recommended_": {
     "message": "Block all (recommended)"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "Collapse"
+  },
+  "coming_soon": {
+    "message": "coming soon"
   },
   "comments": {
     "message": "Comments",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "Privacy protection"
   },
+  "protection": {
+    "message": "protection"
+  },
   "protection_exceptions": {
     "message": "Protection exceptions"
   },
@@ -487,6 +496,9 @@
   },
   "resume": {
     "message": "Resume"
+  },
+  "resume_protection": {
+    "message": "Resume protection"
   },
   "save": {
     "message": "Save"
@@ -530,6 +542,9 @@
   "site_analytics": {
     "message": "Site Analytics",
     "description": "Tracker category name"
+  },
+  "site_is_trusted": {
+    "message": "Site is trusted"
   },
   "social_media": {
     "message": "Social Media",
@@ -580,6 +595,9 @@
   },
   "trust_on_this_website": {
     "message": "Trust on this website"
+  },
+  "trust_this_site": {
+    "message": "Trust this site"
   },
   "trusted": {
     "message": "Trusted"

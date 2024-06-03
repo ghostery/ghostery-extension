@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "成為捐助者"
   },
+  "block_all": {
+    "message": "封鎖全部"
+  },
   "block_all__recommended_": {
     "message": "阻止所有（推薦）"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "折疊"
+  },
+  "coming_soon": {
+    "message": "即將推出"
   },
   "comments": {
     "message": "評論",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "隱私權保護"
   },
+  "protection": {
+    "message": "保護"
+  },
   "protection_exceptions": {
     "message": "保護的例外情況"
   },
@@ -487,6 +496,9 @@
   },
   "resume": {
     "message": "恢復"
+  },
+  "resume_protection": {
+    "message": "履歷保護"
   },
   "save": {
     "message": "儲存"
@@ -530,6 +542,9 @@
   "site_analytics": {
     "message": "網站分析",
     "description": "Tracker category name"
+  },
+  "site_is_trusted": {
+    "message": "網站是可信的"
   },
   "social_media": {
     "message": "社交媒體",
@@ -579,6 +594,9 @@
     "message": "信任一切（推薦)"
   },
   "trust_on_this_website": {
+    "message": "信任此網站"
+  },
+  "trust_this_site": {
     "message": "信任此網站"
   },
   "trusted": {

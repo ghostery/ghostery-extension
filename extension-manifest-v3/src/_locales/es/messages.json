@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "Conviértete en Contribuyente"
   },
+  "block_all": {
+    "message": "Bloquear todo"
+  },
   "block_all__recommended_": {
     "message": "Bloquear todo (recomendado)"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "Contraer"
+  },
+  "coming_soon": {
+    "message": "Próximamente"
   },
   "comments": {
     "message": "Comentarios",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "Protección de la privacidad"
   },
+  "protection": {
+    "message": "protección"
+  },
   "protection_exceptions": {
     "message": "Excepciones de protección"
   },
@@ -487,6 +496,9 @@
   },
   "resume": {
     "message": "Reactivar"
+  },
+  "resume_protection": {
+    "message": "Reanudar protección"
   },
   "save": {
     "message": "Guardar"
@@ -530,6 +542,9 @@
   "site_analytics": {
     "message": "Estadísticas de sitios",
     "description": "Tracker category name"
+  },
+  "site_is_trusted": {
+    "message": "El sitio es de confianza"
   },
   "social_media": {
     "message": "Redes sociales",
@@ -580,6 +595,9 @@
   },
   "trust_on_this_website": {
     "message": "Confiar en este sitio web"
+  },
+  "trust_this_site": {
+    "message": "Confiar en este sitio"
   },
   "trusted": {
     "message": "De confianza"

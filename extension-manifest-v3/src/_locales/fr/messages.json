@@ -85,6 +85,9 @@
   "become_a_contributor": {
     "message": "Devenez donateur"
   },
+  "block_all": {
+    "message": "Tout bloquer"
+  },
   "block_all__recommended_": {
     "message": "Tout bloquer (recommandé)"
   },
@@ -123,6 +126,9 @@
   },
   "collapse": {
     "message": "Réduire"
+  },
+  "coming_soon": {
+    "message": "Prochainement !"
   },
   "comments": {
     "message": "Commentaires",
@@ -464,6 +470,9 @@
   "privacy_protection": {
     "message": "Protection de la vie privée"
   },
+  "protection": {
+    "message": "protection"
+  },
   "protection_exceptions": {
     "message": "Exceptions de protection"
   },
@@ -487,6 +496,9 @@
   },
   "resume": {
     "message": "Reprendre"
+  },
+  "resume_protection": {
+    "message": "Reprise de la protection."
   },
   "save": {
     "message": "Enregistrer"
@@ -530,6 +542,9 @@
   "site_analytics": {
     "message": "Outils d'analyse de sites web",
     "description": "Tracker category name"
+  },
+  "site_is_trusted": {
+    "message": "Site est de confiance."
   },
   "social_media": {
     "message": "Réseaux sociaux",
@@ -580,6 +595,9 @@
   },
   "trust_on_this_website": {
     "message": "Autoriser sur ce site web"
+  },
+  "trust_this_site": {
+    "message": "Se fier à ce site"
   },
   "trusted": {
     "message": "Autorisé"
