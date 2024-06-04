@@ -46,10 +46,6 @@ function toggleNeverConsent({ options }) {
   });
 }
 
-function onDevModeEnabled(host) {
-  host.devMode = true;
-}
-
 export default {
   options: store(Options),
   session: store(Session),
@@ -180,7 +176,8 @@ export default {
           </section>
 
           <gh-settings-devtools
-            onis-shown=${onDevModeEnabled}
+            onshown="${html.set('devMode', true)}"
+            visible="${devMode}"
           ></gh-settings-devtools>
         `}
         ${store.ready(session) &&

@@ -51,18 +51,18 @@ function refresh(host) {
   host.counter += 1;
 
   if (host.counter > 5) {
-    host.isVisible = true;
-    dispatch(host, 'is-shown');
+    host.visible = true;
+    dispatch(host, 'shown');
   }
 }
 
 export default {
   counter: 0,
   options: store(Options),
-  isVisible: false,
-  content: ({ isVisible }) => html`
+  visible: false,
+  content: ({ visible }) => html`
     <template layout="column gap:3">
-      ${isVisible &&
+      ${visible &&
       html`
         <section layout="column gap:3" translate="no">
           <ui-text type="headline-m">Developer tools</ui-text>

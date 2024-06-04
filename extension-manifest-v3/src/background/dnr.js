@@ -24,33 +24,30 @@ if (__PLATFORM__ !== 'firefox') {
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
   observe(null, async (options) => {
+    const ids = ENGINES.map(({ name, key }) => {
+      return options.terms && options[key] ? name : '';
+    }).filter((id) => id && DNR_RESOURCES.includes(id));
+
+    if (ids.length) {
+      ids.push(TRACKERDB_ENGINE, 'fixes');
+    }
+
     const enabledRulesetIds =
       (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
 
-    const enableRulesetIds = options.terms ? ['fixes'] : [];
+    const enableRulesetIds = [];
     const disableRulesetIds = [];
 
-    ENGINES.forEach(({ name, key }) => {
-      if (!DNR_RESOURCES.includes(name)) return;
-
-      const enabled = options.terms && options[key];
-      if (enabledRulesetIds.includes(name) !== enabled) {
-        (enabled ? enableRulesetIds : disableRulesetIds).push(name);
+    for (const id of ids) {
+      if (!enabledRulesetIds.includes(id)) {
+        enableRulesetIds.push(id);
       }
-    });
-
-    const someEnginesEnabled =
-      enableRulesetIds.length > 0 ||
-      enabledRulesetIds
-        .filter((id) => !disableRulesetIds.includes(id))
-        .some((id) => ENGINES.find(({ name }) => name === id));
-
-    if (someEnginesEnabled && !enabledRulesetIds.includes(TRACKERDB_ENGINE)) {
-      enableRulesetIds.push(TRACKERDB_ENGINE);
     }
 
-    if (!someEnginesEnabled && enabledRulesetIds.includes(TRACKERDB_ENGINE)) {
-      disableRulesetIds.push(TRACKERDB_ENGINE);
+    for (const id of enabledRulesetIds) {
+      if (!ids.includes(id)) {
+        disableRulesetIds.push(id);
+      }
     }
 
     if (enableRulesetIds.length || disableRulesetIds.length) {
