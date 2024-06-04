@@ -54,7 +54,7 @@ if (__PLATFORM__ !== 'safari') {
         return true;
       }
 
-      const pureHostname = state.urlParts.hostname.replace(/^www\./, '');
+      const pureHostname = state.tabUrlParts.hostname.replace(/^www\./, '');
       if (pausedHostnames.some(({ id }) => pureHostname === id)) {
         return true;
       }
