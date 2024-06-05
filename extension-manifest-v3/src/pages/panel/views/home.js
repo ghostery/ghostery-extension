@@ -62,7 +62,7 @@ async function togglePause(host, event) {
   const wrapper = document.createDocumentFragment();
 
   html`
-    <gh-panel-alert type="success" slide autoclose="5">
+    <gh-panel-alert type="info" slide autoclose="5">
       ${paused
         ? html`Ghostery has been resumed on this site.`
         : html`Ghostery is paused on this site.`}

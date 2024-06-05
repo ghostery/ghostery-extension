@@ -76,7 +76,7 @@ export default {
         onclick="${!pauseList && dispatchAction}"
       >
         <div id="label" layout="grow row center gap:0.5 shrink overflow">
-          <ui-icon name="pause" color="gh-panel-action"></ui-icon>
+          <ui-icon name="circle" color="gh-panel-action"></ui-icon>
           <ui-text type="label-m" color="gh-panel-action" layout="block:center">
             ${paused ? msg`Site is trusted` : msg`Trust this site`}
           </ui-text>
@@ -85,7 +85,7 @@ export default {
           id="type"
           role="button"
           tabindex="${paused ? '-1' : '0'}"
-          layout="row center self:stretch width:13"
+          layout="row center self:stretch width:15"
           onclick="${!paused && !pauseList && openPauseList}"
           onkeypress=${!paused && !pauseList && simulateClickOnEnter}
         >
@@ -97,8 +97,7 @@ export default {
                   color="danger-500"
                   layout="margin:left:0.5"
                 >
-                  <span short>Resume</span>
-                  <span long>Resume protection</span>
+                  Undo
                 </ui-text>
               `
             : html`
@@ -227,14 +226,6 @@ export default {
         transition: width 0.2s;
       }
 
-      #main.paused:hover:has(#type:hover) #type span[short] {
-        display: none;
-      }
-
-      #main.paused:hover:has(#type:hover) #type span[long] {
-        display: inline;
-      }
-
       #main.paused #type:hover {
         background: var(--ui-color-white);
       }
@@ -245,14 +236,6 @@ export default {
       overflow: hidden;
       border: none;
       background: var(--ui-color-white);
-    }
-
-    #main.paused #type span[short] {
-      display: inline;
-    }
-
-    #main.paused #type span[long] {
-      display: none;
     }
 
     #type-list {
