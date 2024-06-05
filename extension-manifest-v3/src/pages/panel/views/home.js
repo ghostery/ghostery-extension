@@ -45,12 +45,14 @@ async function togglePause(host, event) {
         ],
   });
 
-  // Reload current tab
-  const [tab] = await chrome.tabs.query({
-    active: true,
-    currentWindow: true,
-  });
-  chrome.tabs.reload(tab.id);
+  // Reload current tab after 1s
+  setTimeout(async () => {
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
+    chrome.tabs.reload(tab.id);
+  }, 1000);
 
   // Show alert message
   Array.from(host.querySelectorAll('#gh-panel-alerts gh-panel-alert')).forEach(
