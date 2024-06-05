@@ -31,15 +31,24 @@ async function updateOptions() {
 }
 
 async function enable(host, event) {
-  openTabWithUrl(host, event);
+  try {
+    openTabWithUrl(host, event);
+    await updateOptions();
 
-  await updateOptions();
-  closeIframe(false, true);
+    closeIframe(false, true);
+  } catch (e) {
+    document.body.outerHTML = '';
+  }
 }
 
 async function ignore() {
-  await updateOptions();
-  closeIframe(false, true);
+  try {
+    await updateOptions();
+
+    closeIframe(false, true);
+  } catch (e) {
+    document.body.outerHTML = '';
+  }
 }
 
 mount(document.body, {
