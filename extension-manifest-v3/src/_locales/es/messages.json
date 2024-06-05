@@ -616,6 +616,9 @@
   "trusted_on_this_website": {
     "message": "De confianza en este sitio web"
   },
+  "undo": {
+    "message": "Deshacer"
+  },
   "unidentified": {
     "message": "Sin identificar",
     "description": "Tracker category name"
