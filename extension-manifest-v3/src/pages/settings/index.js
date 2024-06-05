@@ -31,6 +31,17 @@ if (terms) {
     },
   );
 
+  // Safari has a bug where the back button doesn't work properly
+  // when the page is loaded from a background page by the chrome.tabs.update API
+  // In the result the `popstate` event is not fired and the router cannot
+  // re-create the previous state correctly
+  if (__PLATFORM__ === 'safari') {
+    const backFn = history.back.bind(history);
+    history.back = () => {
+      setTimeout(backFn, 200);
+    };
+  }
+
   mount(document.body, Settings);
 } else {
   window.location.replace(
