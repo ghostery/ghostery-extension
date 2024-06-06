@@ -46,11 +46,11 @@ exports[`app/panel/components/Help.jsx Snapshot tests with react-test-renderer H
         </h3>
         <a
           className="info"
-          href="mailto:info@ghostery.com"
+          href="mailto:support@ghostery.com"
           rel="noopener noreferrer"
           target="_blank"
         >
-          info@ghostery.com
+          support@ghostery.com
         </a>
       </div>
     </div>
