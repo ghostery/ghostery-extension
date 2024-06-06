@@ -544,7 +544,7 @@
     "description": "Tracker category name"
   },
   "site_is_trusted": {
-    "message": "Website ist vertrauenswürdig"
+    "message": "Der Seite wird vertraut"
   },
   "social_media": {
     "message": "Social Media",
@@ -615,6 +615,9 @@
   },
   "trusted_on_this_website": {
     "message": "Auf dieser Website vertraut"
+  },
+  "undo": {
+    "message": "Widerrufen"
   },
   "unidentified": {
     "message": "Nicht identifiziert",

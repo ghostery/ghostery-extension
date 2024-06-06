@@ -616,6 +616,9 @@
   "trusted_on_this_website": {
     "message": "Zaufany na tej stronie"
   },
+  "undo": {
+    "message": "Cofnij"
+  },
   "unidentified": {
     "message": "Niezidentyfikowane",
     "description": "Tracker category name"

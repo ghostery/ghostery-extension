@@ -616,6 +616,9 @@
   "trusted_on_this_website": {
     "message": "在此网站上受信任"
   },
+  "undo": {
+    "message": "撤消"
+  },
   "unidentified": {
     "message": "未识别",
     "description": "Tracker category name"

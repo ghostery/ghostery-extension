@@ -616,6 +616,9 @@
   "trusted_on_this_website": {
     "message": "Разрешено на этом сайте"
   },
+  "undo": {
+    "message": "Вернуть"
+  },
   "unidentified": {
     "message": "Неизвестно",
     "description": "Tracker category name"
