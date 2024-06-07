@@ -83,7 +83,6 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
-                  disabled=${options.blockAds && !devMode}
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
                 ></ui-toggle>
@@ -110,7 +109,6 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
-                  disabled=${options.blockTrackers && !devMode}
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
                 ></ui-toggle>
@@ -136,7 +134,6 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
-                  disabled=${options.blockAnnoyances && !devMode}
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
                 ></ui-toggle>
