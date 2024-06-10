@@ -282,6 +282,8 @@ async function injectScriptlets(tabId, url) {
     return;
   }
 
+  const scriptlets = [];
+
   enabledEngines.forEach((name) => {
     const engine = engines.get(name);
     if (!engine) return;
@@ -300,9 +302,13 @@ async function injectScriptlets(tabId, url) {
       return;
     }
     if (scripts.length > 0) {
-      executeScriptlets(tabId, scripts);
+      scriptlets.push(...scripts);
     }
   });
+
+  if (scriptlets.length > 0) {
+    executeScriptlets(tabId, scriptlets);
+  }
 }
 
 if (__PLATFORM__ === 'safari') {
