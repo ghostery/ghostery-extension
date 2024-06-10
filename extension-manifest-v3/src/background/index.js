@@ -9,7 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import './debug.js';
 import './onboarding.js';
 
 import './autoconsent.js';
