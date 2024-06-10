@@ -428,3 +428,5 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     });
   }
 });
+
+globalThis.ghostery.engines = { get };

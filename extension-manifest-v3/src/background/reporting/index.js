@@ -115,8 +115,6 @@ if (__PLATFORM__ !== 'safari') {
   chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
 }
 
-// for debugging service-workers
-globalThis.ghostery = globalThis.ghostery || {};
 globalThis.ghostery.WTM = {
   communication,
   urlReporter,
