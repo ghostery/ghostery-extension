@@ -20,7 +20,7 @@ import {
 import { observe } from '/store/options.js';
 
 import asyncSetup from '../utils/setup.js';
-
+import debug from '/utils/debug.js';
 import config from './config.js';
 import communication from './communication.js';
 import urlReporter from './url-reporter.js';
@@ -115,9 +115,7 @@ if (__PLATFORM__ !== 'safari') {
   chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
 }
 
-// for debugging service-workers
-globalThis.ghostery = globalThis.ghostery || {};
-globalThis.ghostery.WTM = {
+debug.WTM = {
   communication,
   urlReporter,
   config,

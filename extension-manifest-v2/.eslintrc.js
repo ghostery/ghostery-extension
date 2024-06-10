@@ -96,7 +96,12 @@ module.exports = {
 		'jsx-a11y/anchor-has-content': [0], // ToDo: enable this check. Need anchor text to enable.
 	},
 	settings: {
-		'import/resolver': 'webpack',
+		'import/resolver': {
+			webpack: true,
+			node: {
+				extensions: ['.js', '.jsx', '.ts', '.tsx']
+			},
+		},
 	},
 	overrides: [
 		{

@@ -19,6 +19,7 @@ import {
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
+import debug from './debug.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 export const FIXES_ENGINE = 'fixes';
@@ -428,3 +429,5 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     });
   }
 });
+
+debug.engines = { get };
