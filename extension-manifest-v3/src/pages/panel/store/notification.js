@@ -44,6 +44,15 @@ const NOTIFICATIONS = {
     url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera-guide?utm_source=gbe&utm_campaign=opera_serp',
     action: msg`Enable Ad Blocking Now`,
   },
+  globalPause: {
+    icon: 'pause',
+    type: '',
+    text: msg`Missing the global pause feature? It is in the privacy settings now.`,
+    url: chrome.runtime.getURL(
+      '/pages/settings/index.html#@gh-settings-privacy',
+    ),
+    action: msg`Open settings`,
+  },
 };
 
 export default {
@@ -58,11 +67,11 @@ export default {
     }
 
     if ((await store.resolve(Session)).contributor) {
-      return null;
+      return NOTIFICATIONS.globalPause;
     }
 
     return !(await store.resolve(Options)).terms
       ? NOTIFICATIONS.terms
-      : NOTIFICATIONS.contributor;
+      : NOTIFICATIONS.globalPause;
   },
 };

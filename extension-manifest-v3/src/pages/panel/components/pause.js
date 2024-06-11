@@ -76,10 +76,7 @@ export default {
         onclick="${!pauseList && dispatchAction}"
       >
         <div id="label" layout="grow row center gap:0.5 shrink overflow">
-          <ui-icon name="circle" color="gh-panel-action"></ui-icon>
-          <ui-text type="label-m" color="gh-panel-action" layout="block:center">
-            ${paused ? msg`Site is trusted` : msg`Trust this site`}
-          </ui-text>
+          <slot></slot>
         </div>
         <div
           id="type"

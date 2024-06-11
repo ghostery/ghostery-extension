@@ -19,6 +19,7 @@ function toggle(host) {
 export default {
   value: false,
   disabled: false,
+  noLabel: false,
   type: '',
   color: '',
   render: Object.assign(
@@ -67,7 +68,7 @@ export default {
       #toggle {
         background: var(--ui-color-danger-500);
         border-radius: 12px;
-        transition: color 0.2s;
+        transition: color 0.2s, background 0.2s;
       }
 
       #toggle span {
@@ -88,7 +89,7 @@ export default {
         left: calc(100% - 20px);
       }
 
-      :host([type="status"]) ui-text {
+      :host([no-label]) ui-text {
         display: none;
       }
 
@@ -98,6 +99,14 @@ export default {
 
       :host([value][type="status"]) #toggle {
         background: var(--ui-color-${color});
+      }
+
+      :host([type="status"]) button {
+        --ui-text-color-heading: var(--ui-color-gray-400);
+      }
+
+      :host([value][type="status"]) button {
+        --ui-text-color-heading: var(--ui-color-${color});
       }
 
 
@@ -124,6 +133,14 @@ export default {
 
         :host([value][type="status"]) button:hover #toggle {
           background: var(--ui-color-${color});
+        }
+
+        :host([type="status"]) button:hover {
+          --ui-text-color-heading: var(--ui-color-gray-600);
+        }
+
+        :host([value][type="status"]) button:hover {
+          --ui-text-color-heading: var(--ui-color-${color});
         }
       }
     `,

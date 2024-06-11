@@ -14,6 +14,10 @@ export default {
       color: var(--ui-text-color, inherit);
     }
 
+    :host([hidden]) {
+      display: none;
+    }
+
     ${
       mobileType
         ? /*css*/ `

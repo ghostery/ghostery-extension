@@ -15,7 +15,7 @@ import {
 } from '@whotracksme/webextension-packages/packages/reporting';
 import { getBrowserInfo } from '@ghostery/libs';
 
-import { observe } from '/store/options.js';
+import { observe, GLOBAL_PAUSE_ID } from '/store/options.js';
 
 import Request from '../utils/request.js';
 import { updateTabStats } from '../stats.js';
@@ -40,7 +40,7 @@ if (__PLATFORM__ !== 'safari') {
   });
 
   observe('paused', (paused) => {
-    pausedHostnames = paused || [];
+    pausedHostnames = paused.map(({ id }) => id);
   });
 
   webRequestReporter = new RequestReporter(config.request, {
@@ -54,8 +54,12 @@ if (__PLATFORM__ !== 'safari') {
         return true;
       }
 
-      const pureHostname = state.tabUrlParts.hostname.replace(/^www\./, '');
-      if (pausedHostnames.some(({ id }) => pureHostname === id)) {
+      if (
+        pausedHostnames.includes(GLOBAL_PAUSE_ID) ||
+        pausedHostnames.includes(
+          state.tabUrlParts.hostname.replace(/^www\./, ''),
+        )
+      ) {
         return true;
       }
 

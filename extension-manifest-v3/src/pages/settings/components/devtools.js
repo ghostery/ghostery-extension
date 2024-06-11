@@ -60,9 +60,9 @@ export default {
   counter: 0,
   options: store(Options),
   visible: false,
-  content: ({ visible }) => html`
+  content: ({ visible, counter }) => html`
     <template layout="column gap:3">
-      ${visible &&
+      ${(visible || counter > 5) &&
       html`
         <section layout="column gap:3" translate="no">
           <ui-text type="headline-m">Developer tools</ui-text>

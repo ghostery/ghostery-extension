@@ -98,7 +98,10 @@ export function getMetadata(request) {
 
     tracker = {
       id: request.hostname,
-      name: request.hostname,
+      name:
+        request.hostname.length > 24
+          ? '...' + request.hostname.slice(-24)
+          : request.hostname,
       category: 'unidentified',
       exception: request.hostname,
       blockedByDefault: true,
