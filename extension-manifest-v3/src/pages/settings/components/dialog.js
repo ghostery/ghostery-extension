@@ -33,10 +33,9 @@ export default {
         layout="
           relative grid::max|1
           basis:480px height:auto::94vh
-          margin:0 padding:4:3
+          margin:0 padding:3
           overflow:y:auto
         "
-        layout@768px="padding:5"
       >
         <ui-action>
           <a

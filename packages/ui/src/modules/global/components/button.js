@@ -63,7 +63,6 @@ export default {
         color: var(--ui-color-gray-700);
         background: var(--ui-color-white);
         border: 1px solid var(--ui-color-gray-200);
-        box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
         --ui-button-hover-color: var(--ui-color-primary-500);
         --ui-button-hover-border: var(--ui-color-primary-500);
         --ui-button-hover-background: var(--ui-color-white);
@@ -73,7 +72,6 @@ export default {
         color: var(--ui-color-error-400);
         background: var(--ui-color-white);
         border: 1px solid var(--ui-color-gray-200);
-        box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
         --ui-button-hover-color: var(--ui-color-error-500);
         --ui-button-hover-border: var(--ui-color-error-500);
         --ui-button-hover-background: var(--ui-color-white);

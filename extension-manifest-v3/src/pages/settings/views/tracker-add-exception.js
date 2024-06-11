@@ -13,26 +13,7 @@ import { html, router, store, msg } from 'hybrids';
 import Tracker from '/store/tracker.js';
 
 import { toggleExceptionDomain } from '/store/tracker-exception.js';
-
-import { parse } from 'tldts-experimental';
-
-const Hostname = {
-  id: true,
-  value: '',
-  [store.connect]: {
-    get: () => null,
-    set: (id, model) => {
-      const parsed = parse(model.value);
-      if (!parsed.hostname && !parsed.isIp) {
-        throw 'The value must be a valid hostname or IP address.';
-      }
-      return {
-        ...model,
-        value: parsed.hostname.replace(/^www\./, ''),
-      };
-    },
-  },
-};
+import Hostname from '../store/hostname.js';
 
 async function add({ tracker, hostname }, event) {
   event.preventDefault();
@@ -66,9 +47,11 @@ export default {
           <form
             action="${router.backUrl()}"
             onsubmit="${add}"
-            layout="column gap:4"
+            layout="column gap:3"
           >
-            <ui-text type="label-l">Add website exception</ui-text>
+            <ui-text type="label-l" layout="block:center margin:bottom">
+              Add website exception
+            </ui-text>
             <div layout="column gap items:start">
               <ui-text>
                 <!-- Current protection status for a tracker -->
@@ -95,7 +78,7 @@ export default {
                   : msg`${tracker.name} will be blocked on this website. | A tracker will be trusted on this website.`}
               </ui-text>
             </div>
-            <div layout="grid:1|1 gap">
+            <div layout="grid:1|1 gap margin:top:2">
               <ui-button type="outline" size="small">
                 <a href="${router.backUrl()}" tabindex="2">Cancel</a>
               </ui-button>

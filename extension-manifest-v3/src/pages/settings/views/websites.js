@@ -18,6 +18,7 @@ import TrackerException from '/store/tracker-exception.js';
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
+import WebsitesAdd from './websites-add.js';
 
 function revoke(host, item) {
   if (item.exceptions) {
@@ -44,7 +45,7 @@ function revokeCallback(item) {
 }
 
 export default {
-  [router.connect]: { stack: [WebsiteDetails] },
+  [router.connect]: { stack: [WebsiteDetails, WebsitesAdd] },
   options: store(Options),
   query: '',
   paused: ({ options }) => (store.ready(options) ? options.paused : []),
@@ -97,14 +98,19 @@ export default {
           </ui-text>
         </div>
         <section layout="column gap:4" layout@768px="gap:5">
-          <gh-settings-input icon="search">
-            <input
-              type="search"
-              value="${query}"
-              placeholder="${msg`Search website...`}"
-              oninput="${html.set('query')}"
-            />
-          </gh-settings-input>
+          <div layout="row items:center gap:2">
+            <gh-settings-input icon="search" layout="grow:1">
+              <input
+                type="search"
+                value="${query}"
+                placeholder="${msg`Search website...`}"
+                oninput="${html.set('query')}"
+              />
+            </gh-settings-input>
+            <ui-button size="small">
+              <a href="${router.url(WebsitesAdd)}">Add</a>
+            </ui-button>
+          </div>
           ${websites.length
             ? html`
                 <gh-settings-table responsive>
