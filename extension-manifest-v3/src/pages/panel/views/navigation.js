@@ -26,6 +26,11 @@ const MENU = [
     href: 'https://www.ghostery.com/submit-a-tracker?utm_source=gbe',
   },
   {
+    icon: () => 'thumb-up',
+    label: msg`Send feedback`,
+    href: 'https://www.ghostery.com/feedback?utm_source=gbe',
+  },
+  {
     icon: () => 'help',
     label: msg`Contact support`,
     href: 'https://www.ghostery.com/support?utm_source=gbe',
