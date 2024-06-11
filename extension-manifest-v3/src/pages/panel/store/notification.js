@@ -47,11 +47,11 @@ const NOTIFICATIONS = {
   globalPause: {
     icon: 'pause',
     type: '',
-    text: msg`Missing the global pause feature? It is in the privacy settings now.`,
+    text: msg`Missing “Pause Ghostery”? You can find it in your privacy protection settings.`,
     url: chrome.runtime.getURL(
       '/pages/settings/index.html#@gh-settings-privacy',
     ),
-    action: msg`Open settings`,
+    action: msg`Open Ghostery settings`,
   },
 };
 

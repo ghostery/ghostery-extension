@@ -123,7 +123,7 @@ export default {
                       mobile-type="body-m"
                       color="gray-600"
                     >
-                      Eliminates ads on wesbites for safe and fast browsing.
+                      Eliminates ads on websites for safe and fast browsing.
                     </ui-text>
                   </div>
                   <ui-toggle
@@ -178,7 +178,7 @@ export default {
                       mobile-type="body-m"
                       color="gray-600"
                     >
-                      Automatically rejects of cookie consent notices.
+                      Automatically rejects cookie consent notices.
                     </ui-text>
                   </div>
                   <ui-toggle
@@ -200,12 +200,9 @@ export default {
               </gh-settings-help-image>
               <div layout="column gap:2" layout@768px="row grow gap:5">
                 <div layout="column gap:0.5 grow">
-                  <ui-text type="headline-s">
-                    <!-- Feature name (capitalized in english) | settings -->
-                    Global Pause
-                  </ui-text>
+                  <ui-text type="headline-s">Pause Ghostery</ui-text>
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                    Pause Ghostery on all websites for 1&nbsp;day.
+                    Suspends privacy protection globally for 1 day.
                   </ui-text>
                   ${globalPauseRevokeAt &&
                   html`
@@ -249,7 +246,7 @@ export default {
                     Search Engine Redirect Protection
                   </ui-text>
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                    Prevent Google from redirecting search result links through
+                    Prevents Google from redirecting search result links through
                     their servers instead of linking directly to pages.
                   </ui-text>
                 </div>

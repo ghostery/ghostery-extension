@@ -148,8 +148,7 @@ export default {
                   color="gh-panel-action"
                   layout="block:center"
                 >
-                  ${globalPause &&
-                  msg`Global pause | Status info - lowercased in english | panel`}
+                  ${globalPause && msg`Ghostery is paused`}
                   ${!globalPause &&
                   (paused ? msg`Site is trusted` : msg`Trust this site`)}
                 </ui-text>
