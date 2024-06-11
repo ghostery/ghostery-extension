@@ -38,7 +38,7 @@ export default {
   options: store(Options),
   content: ({ options }) => html`
     <template layout="contents">
-      <gh-settings-page-layout layout="gap:4" layout@768px="gap:5">
+      <gh-settings-page-layout layout="gap:4" layout@768px="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <ui-text type="headline-l" mobile-type="headline-m" translate="no">
             WhoTracks.Me
@@ -58,7 +58,7 @@ export default {
         ${store.ready(options) &&
         html`
           <section layout="column gap:4">
-            <div layout="row gap:2" layout@768px="gap:5">
+            <div layout="row gap:2" layout@768px="gap:4">
               <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
                 <gh-settings-help-image>
                   <img
@@ -83,7 +83,7 @@ export default {
             </div>
             ${Options.trackerCount &&
             html`
-              <div layout="row gap:2" layout@768px="gap:5">
+              <div layout="row gap:2" layout@768px="gap:4">
                 <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
                   <gh-settings-help-image>
                     <img
@@ -111,7 +111,7 @@ export default {
                 </div>
               </div>
             `}
-            <div layout="row gap:2" layout@768px="gap:5">
+            <div layout="row gap:2" layout@768px="gap:4">
               <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
                 <gh-settings-help-image>
                   <img

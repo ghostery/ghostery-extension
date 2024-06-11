@@ -9,11 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store, router } from 'hybrids';
+import { html, store, router, msg } from 'hybrids';
 
 import { openTabWithUrl } from '/utils/tabs.js';
 
-import Options from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 
 import Notification from '../store/notification.js';
@@ -29,10 +29,35 @@ const SETTINGS_URL = chrome.runtime.getURL(
 );
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
 
+function showAlert(host, message) {
+  Array.from(host.querySelectorAll('#gh-panel-alerts gh-panel-alert')).forEach(
+    (el) => el.parentNode.removeChild(el),
+  );
+
+  const wrapper = document.createDocumentFragment();
+
+  html`
+    <gh-panel-alert type="info" slide autoclose="5">
+      ${message}
+    </gh-panel-alert>
+  `(wrapper);
+
+  host.querySelector('#gh-panel-alerts').appendChild(wrapper);
+}
+
+function reloadTab() {
+  setTimeout(async () => {
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
+    chrome.tabs.reload(tab.id);
+  }, 1000);
+}
+
 async function togglePause(host, event) {
   const { paused, pauseType } = event.target;
 
-  // Update options
   await store.set(host.options, {
     paused: paused
       ? host.options.paused.filter((p) => p.id !== host.stats.hostname)
@@ -45,31 +70,26 @@ async function togglePause(host, event) {
         ],
   });
 
-  // Reload current tab after 1s
-  setTimeout(async () => {
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-    chrome.tabs.reload(tab.id);
-  }, 1000);
+  reloadTab();
 
-  // Show alert message
-  Array.from(host.querySelectorAll('#gh-panel-alerts gh-panel-alert')).forEach(
-    (el) => el.parentNode.removeChild(el),
+  showAlert(
+    host,
+    paused
+      ? msg`Ghostery has been resumed on this site.`
+      : msg`Ghostery is paused on this site.`,
   );
+}
 
-  const wrapper = document.createDocumentFragment();
+function revokeGlobalPause(host) {
+  const { options } = host;
 
-  html`
-    <gh-panel-alert type="info" slide autoclose="5">
-      ${paused
-        ? html`Ghostery has been resumed on this site.`
-        : html`Ghostery is paused on this site.`}
-    </gh-panel-alert>
-  `(wrapper);
+  store.set(options, {
+    paused: options.paused.filter((p) => p.id !== GLOBAL_PAUSE_ID),
+  });
 
-  host.querySelector('#gh-panel-alerts').appendChild(wrapper);
+  reloadTab();
+
+  showAlert(host, msg`Ghostery has been resumed.`);
 }
 
 function setStatsType(host, event) {
@@ -85,7 +105,10 @@ export default {
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.hostname),
-  content: ({ options, stats, notification, paused }) => html`
+  globalPause: ({ options }) =>
+    store.ready(options) &&
+    options.paused.find(({ id }) => id === GLOBAL_PAUSE_ID),
+  content: ({ options, stats, notification, paused, globalPause }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&
       html`
@@ -113,9 +136,23 @@ export default {
           ? stats.hostname &&
             html`
               <gh-panel-pause
-                onaction="${togglePause}"
-                paused="${paused}"
-              ></gh-panel-pause>
+                onaction="${globalPause ? revokeGlobalPause : togglePause}"
+                paused="${paused || globalPause}"
+              >
+                <ui-icon
+                  name="${globalPause ? 'pause' : 'circle'}"
+                  color="gh-panel-action"
+                ></ui-icon>
+                <ui-text
+                  type="label-m"
+                  color="gh-panel-action"
+                  layout="block:center"
+                >
+                  ${globalPause && msg`Ghostery is paused`}
+                  ${!globalPause &&
+                  (paused ? msg`Site is trusted` : msg`Trust this site`)}
+                </ui-text>
+              </gh-panel-pause>
             `
           : html`
               <gh-panel-button>
@@ -138,7 +175,7 @@ export default {
                   domain="${stats.hostname}"
                   categories="${stats.topCategories}"
                   trackers="${stats.trackers}"
-                  paused="${paused || !options.terms}"
+                  paused="${paused || globalPause || !options.terms}"
                   dialog="${TrackerDetails}"
                   exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
@@ -164,7 +201,9 @@ export default {
                     </ui-action>
                   `}
                 </ui-panel-stats>
-                ${!!(stats.trackersModified || stats.trackersBlocked) &&
+                ${!paused &&
+                !globalPause &&
+                !!(stats.trackersModified || stats.trackersBlocked) &&
                 html`
                   <gh-panel-feedback
                     modified=${stats.trackersModified}
@@ -194,6 +233,7 @@ export default {
           <ui-text
             class="${{ last: store.error(notification) }}"
             layout.last="padding:bottom:1.5"
+            hidden="${globalPause}"
           >
             <a
               href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"

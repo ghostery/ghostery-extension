@@ -16,8 +16,8 @@ export default {
   render: (host) =>
     html`
       <template
-        layout="grid relative overflow size:12:8 shrink:0"
-        layout@768px="size:15:10"
+        layout="row center relative overflow size:12:8 shrink:0"
+        layout@768px="size:14:9"
       >
         ${host.static
           ? html`<slot></slot>`
@@ -37,7 +37,7 @@ export default {
       </template>
     `.css`
       :host {
-        background: var(--ui-color-white);
+        background: var(--ui-color-gray-100);
         border: 1px solid var(--ui-color-gray-300);
         border-radius: 4px;
       }

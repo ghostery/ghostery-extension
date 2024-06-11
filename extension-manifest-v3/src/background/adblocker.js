@@ -15,7 +15,7 @@ import {
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
-import { observe, ENGINES } from '/store/options.js';
+import { observe, ENGINES, GLOBAL_PAUSE_ID } from '/store/options.js';
 import * as engines from '/utils/engines.js';
 
 import Request from './utils/request.js';
@@ -46,9 +46,11 @@ const setup = asyncSetup([
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
-function isHostnamePaused(hostname) {
-  const pureHostname = hostname.replace(/^www\./, '');
-  return pausedHostnames.includes(pureHostname);
+function isPaused(hostname) {
+  return (
+    pausedHostnames.includes(GLOBAL_PAUSE_ID) ||
+    pausedHostnames.includes(hostname.replace(/^www\./, ''))
+  );
 }
 
 function adblockerInjectStylesWebExtension(
@@ -102,7 +104,7 @@ async function adblockerOnMessage(msg, sender) {
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
 
-  if (!sender.tab || isHostnamePaused(hostname)) {
+  if (!sender.tab || isPaused(hostname)) {
     return;
   }
 
@@ -271,7 +273,7 @@ ${scripts.join('\n\n')}}
 
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
-  if (!hostname || isHostnamePaused(hostname)) {
+  if (!hostname || isPaused(hostname)) {
     return;
   }
 
@@ -335,7 +337,7 @@ if (__PLATFORM__ === 'firefox') {
       if (request.sourceHostname) {
         if (
           (details.type !== 'main_frame' && request.metadata?.isTrusted) ||
-          isHostnamePaused(request.sourceHostname)
+          isPaused(request.sourceHostname)
         ) {
           updateTabStats(details.tabId, [request]);
           return;
@@ -387,10 +389,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (
-        request.metadata?.isTrusted ||
-        isHostnamePaused(request.sourceHostname)
-      ) {
+      if (request.metadata?.isTrusted || isPaused(request.sourceHostname)) {
         return;
       }
 

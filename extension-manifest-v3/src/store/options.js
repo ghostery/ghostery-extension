@@ -17,6 +17,7 @@ import { getUserOptions, setUserOptions } from '/utils/api.js';
 import Session from './session.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 const observers = new Set();
 
@@ -146,6 +147,13 @@ const Options = {
     },
   },
 };
+
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
+    store.clear(Options, false);
+    store.get(Options);
+  }
+});
 
 export default Options;
 
@@ -312,9 +320,6 @@ export async function observe(property, fn) {
   };
 }
 
-chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
-    store.clear(Options, false);
-    store.get(Options);
-  }
-});
+export function isGlobalPaused(options) {
+  return options.paused.some(({ id }) => id === GLOBAL_PAUSE_ID);
+}

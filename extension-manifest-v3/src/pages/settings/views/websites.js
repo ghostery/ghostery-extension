@@ -12,7 +12,7 @@
 import { html, msg, store, router } from 'hybrids';
 import '@github/relative-time-element';
 
-import Options from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TrackerException from '/store/tracker-exception.js';
 
 import NoWebsitesSVG from '../assets/no_websites.svg';
@@ -73,7 +73,9 @@ export default {
     query = query.toLowerCase().trim();
 
     return [
-      ...paused.filter(({ id }) => !exceptions.some(([d]) => d === id)),
+      ...paused
+        .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
+        .filter(({ id }) => !exceptions.some(([d]) => d === id)),
       ...exceptions.map(([d, exceptions]) => ({
         id: d,
         revokeAt: paused.find((p) => p.id === d)?.revokeAt,

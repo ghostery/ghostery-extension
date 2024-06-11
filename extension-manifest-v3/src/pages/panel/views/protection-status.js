@@ -88,6 +88,7 @@ export default {
                       type="status"
                       color="success-500"
                       layout="margin:top:0.5"
+                      no-label
                     ></ui-toggle>
                   `
                 : html`
@@ -97,6 +98,7 @@ export default {
                       type="status"
                       color="danger-500"
                       layout="margin:top:0.5"
+                      no-label
                     ></ui-toggle>
                   `}
             </gh-panel-card>

@@ -27,7 +27,7 @@ export default {
           ${icon &&
           html`
             <div id="icon" layout="row center shrink:0 width:5">
-              <ui-icon name="${icon}" layout="margin"></ui-icon>
+              <ui-icon name="${icon}" layout="margin size:3"></ui-icon>
             </div>
           `}
           <div layout="column gap grow">

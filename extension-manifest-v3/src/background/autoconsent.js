@@ -14,13 +14,16 @@ import { snippets } from '@duckduckgo/autoconsent/lib/eval-snippets';
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
-import Options from '/store/options.js';
+import Options, { isGlobalPaused } from '/store/options.js';
 
 async function initialize(msg, tab, frameId) {
-  const { terms, blockAnnoyances, paused } = await store.resolve(Options);
+  const options = await store.resolve(Options);
+  const { terms, blockAnnoyances, paused } = options;
+
   const pureHostname = tab.url && parse(tab.url).hostname.replace(/^www\./, '');
 
   if (
+    !isGlobalPaused(options) &&
     terms &&
     blockAnnoyances &&
     (!pureHostname || !paused.includes(pureHostname))
