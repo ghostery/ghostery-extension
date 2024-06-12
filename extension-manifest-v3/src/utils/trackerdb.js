@@ -10,6 +10,7 @@
  */
 import { store } from 'hybrids';
 import TrackerException from '../store/tracker-exception.js';
+import { observe } from '../store/options.js';
 
 import * as engines from './engines.js';
 
@@ -36,14 +37,23 @@ const categoryOrder = [
   'other',
 ];
 
+let blockAllByDefault = false;
+
 let promise = Promise.all([
   store.resolve([TrackerException]),
+  observe('blockAllByDefault', (value) => {
+    blockAllByDefault = value;
+    // blockByDefault is cached for each tracker, so we need to clear the cache
+    trackersMap.clear();
+  }),
   engines.init(engines.TRACKERDB_ENGINE).then(() => {
     promise = null;
   }),
 ]);
 
 export function isCategoryBlockedByDefault(categoryId) {
+  if (blockAllByDefault) return true;
+
   switch (categoryId) {
     case 'advertising':
     case 'pornvertising':
@@ -82,14 +92,12 @@ export function getMetadata(request) {
 
   const engine = engines.get(engines.TRACKERDB_ENGINE);
 
-  let isFilterMatched = true;
   let exception = null;
   let tracker;
 
   let matches = engine.getPatternMetadata(request);
 
   if (matches.length === 0) {
-    isFilterMatched = false;
     matches = engine.metadata.fromDomain(request.domain);
   }
 
@@ -118,7 +126,6 @@ export function getMetadata(request) {
 
   const metadata = {
     ...tracker,
-    isFilterMatched,
     isTrusted: store.ready(exception)
       ? isTrusted(request.sourceHostname, tracker.category, exception)
       : !isCategoryBlockedByDefault(tracker.category),

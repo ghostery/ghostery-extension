@@ -16,8 +16,6 @@ import TrackerException from '/store/tracker-exception.js';
 import { getCategories } from '/utils/trackerdb.js';
 import Tracker from './tracker.js';
 
-const categories = getCategories();
-
 export default {
   id: true,
   key: '',
@@ -39,7 +37,7 @@ export default {
     async list({ query, filter }) {
       const exceptions = await store.resolve([TrackerException]);
 
-      const result = (await categories).map((category) => ({
+      const result = (await getCategories()).map((category) => ({
         id: { key: category.key, query, filter },
         ...category,
       }));

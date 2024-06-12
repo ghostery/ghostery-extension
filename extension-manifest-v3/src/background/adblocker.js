@@ -26,6 +26,8 @@ import { updateTabStats } from './stats.js';
 let enabledEngines = [];
 let pausedHostnames = [];
 
+let blockAllByDefault = false;
+
 const setup = asyncSetup([
   observe(null, (options) => {
     enabledEngines = options.terms
@@ -40,6 +42,7 @@ const setup = asyncSetup([
 
     // Set paused hostnames
     pausedHostnames = options.paused.map(String);
+    blockAllByDefault = options.blockAllByDefault;
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
@@ -344,7 +347,7 @@ if (__PLATFORM__ === 'firefox') {
         }
 
         const allEngines =
-          enabledEngines.length && request.metadata
+          enabledEngines.length && !blockAllByDefault && request.metadata
             ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
             : enabledEngines;
 
@@ -394,7 +397,7 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       const allEngines =
-        enabledEngines.length && request.metadata
+        enabledEngines.length && !blockAllByDefault && request.metadata
           ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
           : enabledEngines;
 

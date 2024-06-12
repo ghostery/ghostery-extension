@@ -30,7 +30,11 @@ if (__PLATFORM__ !== 'firefox') {
     }).filter((id) => id && DNR_RESOURCES.includes(id));
 
     if (ids.length) {
-      ids.push(TRACKERDB_ENGINE, 'fixes');
+      ids.push('fixes');
+
+      if (!options.blockAllByDefault) {
+        ids.push(TRACKERDB_ENGINE);
+      }
     }
 
     const enabledRulesetIds =

@@ -44,6 +44,8 @@ const Options = {
   blockTrackers: true,
   blockAnnoyances: true,
 
+  blockAllByDefault: false,
+
   // Browser icon
   trackerWheel: __PLATFORM__ === 'safari',
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
