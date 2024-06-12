@@ -94,7 +94,7 @@ export default {
                 <gh-settings-help-image
                   static
                   layout="hidden"
-                  layout@768px="block"
+                  layout@768px="row"
                 >
                   <img
                     src="${assets.selective_blocking}"

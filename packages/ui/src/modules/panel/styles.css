@@ -114,6 +114,7 @@ input::-webkit-search-cancel-button {
 ui-button {
   text-transform: none;
   border-radius: 8px;
+  box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
   --ui-button-color-hover: var(--ui-color-primary-700);
 }
 
