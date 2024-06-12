@@ -35,6 +35,9 @@
     "message": "예외로 $${0} 추가",
     "description": "Add domain as exception"
   },
+  "add_website": {
+    "message": "Add website"
+  },
   "add_website_exception": {
     "message": "웹사이트 예외 추가"
   },
@@ -75,6 +78,9 @@
   "audio_video_player": {
     "message": "오디오/비디오 플레이어 ",
     "description": "Tracker category name"
+  },
+  "automatically_rejects_cookie_consent_notices_": {
+    "message": "쿠키 동의 알림을 자동 거부합니다."
   },
   "automatically_rejects_of_cookie_consent_notices_": {
     "message": "쿠키 동의 알림을 자동 거부합니다."
@@ -197,6 +203,9 @@
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "브라우저 제한 사항 및 추가 권한 누락으로 인해 Ghostery가 보호해드릴 수 없습니다."
   },
+  "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
+    "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
   },
@@ -251,9 +260,6 @@
   "for_more_information_read_our_full": {
     "message": "자세한 정보는 전문을 읽으시기 바랍니다"
   },
-  "further_protection": {
-    "message": "추가 보호"
-  },
   "get_help": {
     "message": "도움 받기"
   },
@@ -265,6 +271,9 @@
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "누락된 권한이 있어 Ghostery가 차단할 수 없습니다."
+  },
+  "ghostery_has_been_resumed_": {
+    "message": "Ghostery has been resumed."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 재개되었습니다."
@@ -280,6 +289,9 @@
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery는 제한된 기능으로 설치되었습니다."
+  },
+  "ghostery_is_paused": {
+    "message": "Ghostery 일시중지됨"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 일시 중지되었습니다. "
@@ -376,6 +388,9 @@
     "message": "기타",
     "description": "Tracker category name"
   },
+  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
+    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "모든 웹사이트에 대한 권장 차단 설정을 수정합니다."
   },
@@ -421,6 +436,9 @@
   "on": {
     "message": "켜기 "
   },
+  "open_ghostery_settings": {
+    "message": "Open Ghostery settings"
+  },
   "open_video": {
     "message": "비디오 열기"
   },
@@ -440,11 +458,8 @@
   "our_recommendation_for_this_activity": {
     "message": "이 활동에 대한 권장사항"
   },
-  "pause_on_this_site": {
-    "message": "이 사이트에서 일시 중지"
-  },
-  "paused": {
-    "message": "일시 중지됨"
+  "pause_ghostery": {
+    "message": "Ghostery 일시 중지  "
   },
   "permission_required": {
     "message": "권한 필요"
@@ -458,6 +473,9 @@
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Google이 페이지로 직접 링크하지 않고, 자체 서버를 통해 검색결과 링크를 리디렉션하지 못하도록 보호합니다."
   },
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Google이 페이지로 직접 링크하지 않고, 자체 서버를 통해 검색결과 링크를 리디렉션하지 못하도록 보호합니다."
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술로 다양한 추적 기법에 대응합니다."
   },
@@ -469,9 +487,6 @@
   },
   "privacy_protection": {
     "message": "개인정보 보호"
-  },
-  "protection": {
-    "message": "보호"
   },
   "protection_exceptions": {
     "message": "보호 예외사항"
@@ -494,12 +509,6 @@
   "report_a_broken_page": {
     "message": "깨진 페이지 보고 "
   },
-  "resume": {
-    "message": "다시 시작 "
-  },
-  "resume_protection": {
-    "message": "이력서 보호"
-  },
   "save": {
     "message": "저장"
   },
@@ -514,6 +523,12 @@
   },
   "search_website___": {
     "message": "웹사이트 검색..."
+  },
+  "select_time_frame": {
+    "message": "Select time frame"
+  },
+  "send_feedback": {
+    "message": "Send feedback"
   },
   "set_blocking_preference": {
     "message": "차단 맞춤 설정"
@@ -556,6 +571,9 @@
   "submit_a_new_tracker": {
     "message": "새로운 트래커 제출 "
   },
+  "suspends_privacy_protection_globally_for_1_day_": {
+    "message": "Suspends privacy protection globally for 1 day."
+  },
   "telemetry": {
     "message": "원격 측정",
     "description": "Tracker category name"
@@ -565,6 +583,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸우는 데 지지를 보내주셔서 감사합니다!"
+  },
+  "to_adjust_privacy_protection_trust_a_site_": {
+    "message": "To adjust privacy protection trust a site:"
   },
   "tracker_database": {
     "message": "기 데이터베이스"
@@ -676,9 +697,6 @@
   },
   "you_are_signed_in_as_": {
     "message": "로그인한 계정:"
-  },
-  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "아래에서 설정을 조정하실 수 있습니다. 항상 켜둘 것을 권장합니다."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "검색 결과 옆의 트래커 휠이 더 이상 표시되지 않습니다."

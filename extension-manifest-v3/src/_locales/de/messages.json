@@ -35,6 +35,9 @@
     "message": "$${0} als Ausnahme hinzufügen",
     "description": "Add domain as exception"
   },
+  "add_website": {
+    "message": "Add website"
+  },
   "add_website_exception": {
     "message": "Website-Ausnahme hinzufügen"
   },
@@ -75,6 +78,9 @@
   "audio_video_player": {
     "message": "Audio/Video-Player",
     "description": "Tracker category name"
+  },
+  "automatically_rejects_cookie_consent_notices_": {
+    "message": "Lehnt Cookie-Einwilligungserklärungen automatisch ab."
   },
   "automatically_rejects_of_cookie_consent_notices_": {
     "message": "Lehnt Cookie-Einwilligungserklärungen automatisch ab."
@@ -197,6 +203,9 @@
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "Aufgrund von Browser-Einschränkungen und fehlenden zusätzlichen Berechtigungen kann Ghostery Sie nicht schützen."
   },
+  "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
+    "message": "Entfernt Werbung auf Websites für sicheres und schnelles Surfen."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "Entfernt Werbung auf Websites für sicheres und schnelles Surfen."
   },
@@ -251,9 +260,6 @@
   "for_more_information_read_our_full": {
     "message": "Für weitere Informationen lesen Sie bitte unsere vollständigen"
   },
-  "further_protection": {
-    "message": "Zusätzlicher Schutz"
-  },
   "get_help": {
     "message": "Hilfe erhalten"
   },
@@ -265,6 +271,9 @@
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery kann sie aufgrund fehlender Berechtigungen nicht blocken."
+  },
+  "ghostery_has_been_resumed_": {
+    "message": "Ghostery has been resumed."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery wird auf dieser Website fortgesetzt."
@@ -280,6 +289,9 @@
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery ist mit eingeschränkter Funktionalität installiert"
+  },
+  "ghostery_is_paused": {
+    "message": "Ghostery pausiert"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery pausiert auf dieser Website."
@@ -376,6 +388,9 @@
     "message": "Sonstiges",
     "description": "Tracker category name"
   },
+  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
+    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Ändern Sie die empfohlenen Blockierungseinstellungen für jede Website."
   },
@@ -421,6 +436,9 @@
   "on": {
     "message": "An"
   },
+  "open_ghostery_settings": {
+    "message": "Open Ghostery settings"
+  },
   "open_video": {
     "message": "Video öffnen"
   },
@@ -440,11 +458,8 @@
   "our_recommendation_for_this_activity": {
     "message": "Unsere Empfehlung für diese Aktivität"
   },
-  "pause_on_this_site": {
-    "message": "Auf dieser Seite pausieren"
-  },
-  "paused": {
-    "message": "Pausiert"
+  "pause_ghostery": {
+    "message": "Ghostery pausieren"
   },
   "permission_required": {
     "message": "Berechtigung erforderlich"
@@ -458,6 +473,9 @@
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Verhindern, dass Google die Links der Suchergebnisse über seine Server umleitet, anstatt sie direkt mit den Seiten zu verknüpfen."
   },
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Verhindern, dass Google die Links der Suchergebnisse über seine Server umleitet, anstatt sie direkt mit den Seiten zu verknüpfen."
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Nutzt KI-basierte Technologie, um verschiedene Tracking-Techniken zu verhindern."
   },
@@ -469,9 +487,6 @@
   },
   "privacy_protection": {
     "message": "Datenschutz"
-  },
-  "protection": {
-    "message": "Schutz"
   },
   "protection_exceptions": {
     "message": "Schutzausnahmen"
@@ -494,12 +509,6 @@
   "report_a_broken_page": {
     "message": "Fehlerhafte Seite melden"
   },
-  "resume": {
-    "message": "Fortsetzen"
-  },
-  "resume_protection": {
-    "message": "Schutz fortsetzen"
-  },
   "save": {
     "message": "Speichern"
   },
@@ -514,6 +523,12 @@
   },
   "search_website___": {
     "message": "Website durchsuchen ..."
+  },
+  "select_time_frame": {
+    "message": "Select time frame"
+  },
+  "send_feedback": {
+    "message": "Send feedback"
   },
   "set_blocking_preference": {
     "message": "Blockierungspräferenzen festlegen"
@@ -556,6 +571,9 @@
   "submit_a_new_tracker": {
     "message": "Neuen Tracker senden"
   },
+  "suspends_privacy_protection_globally_for_1_day_": {
+    "message": "Suspends privacy protection globally for 1 day."
+  },
   "telemetry": {
     "message": "Telemetrie",
     "description": "Tracker category name"
@@ -565,6 +583,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Vielen Dank für Ihre Unterstützung im Kampf von Ghostery für ein Internet, in dem Datenschutz ein grundlegendes Menschenrecht ist!"
+  },
+  "to_adjust_privacy_protection_trust_a_site_": {
+    "message": "To adjust privacy protection trust a site:"
   },
   "tracker_database": {
     "message": "Tracker Datenbank"
@@ -676,9 +697,6 @@
   },
   "you_are_signed_in_as_": {
     "message": "Sie sind angemeldet als:"
-  },
-  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "Sie können die Einstellungen unten anpassen. Wir empfehlen, sie immer auf AN zu lassen."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."

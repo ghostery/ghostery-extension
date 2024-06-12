@@ -35,6 +35,9 @@
     "message": "新增 $${0} 為例外",
     "description": "Add domain as exception"
   },
+  "add_website": {
+    "message": "Add website"
+  },
   "add_website_exception": {
     "message": "新增網站例外"
   },
@@ -75,6 +78,9 @@
   "audio_video_player": {
     "message": "音訊/視訊播放器",
     "description": "Tracker category name"
+  },
+  "automatically_rejects_cookie_consent_notices_": {
+    "message": "自動拒絕 cookie 同意通知。"
   },
   "automatically_rejects_of_cookie_consent_notices_": {
     "message": "自動拒絕 cookie 同意通知。"
@@ -197,6 +203,9 @@
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "由於瀏覽器限制和缺少額外權限，Ghostery 無法為您提供保護。"
   },
+  "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
+    "message": "消除網站上的廣告，獲得安全又快速的瀏覽體驗。"
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "消除網站上的廣告，獲得安全又快速的瀏覽體驗。"
   },
@@ -251,9 +260,6 @@
   "for_more_information_read_our_full": {
     "message": "如欲了解更多訊息，請閱讀我們的全文"
   },
-  "further_protection": {
-    "message": "更多防護"
-  },
   "get_help": {
     "message": "取得幫助"
   },
@@ -265,6 +271,9 @@
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "由於缺乏相關權限，Ghostery 無法阻擋追蹤器。"
+  },
+  "ghostery_has_been_resumed_": {
+    "message": "Ghostery has been resumed."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery 已在此網站上恢復。"
@@ -280,6 +289,9 @@
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery 安裝了有限的功能"
+  },
+  "ghostery_is_paused": {
+    "message": "Ghostery暂停了"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery 已在此網站上暫停。"
@@ -376,6 +388,9 @@
     "message": "各種各樣的",
     "description": "Tracker category name"
   },
+  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
+    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "為每個網站調整建議的封鎖設定。"
   },
@@ -421,6 +436,9 @@
   "on": {
     "message": "啟動"
   },
+  "open_ghostery_settings": {
+    "message": "Open Ghostery settings"
+  },
   "open_video": {
     "message": "打開視頻"
   },
@@ -440,10 +458,7 @@
   "our_recommendation_for_this_activity": {
     "message": "我們對此活動的推薦"
   },
-  "pause_on_this_site": {
-    "message": "在此站點暫停"
-  },
-  "paused": {
+  "pause_ghostery": {
     "message": "暫停"
   },
   "permission_required": {
@@ -458,6 +473,9 @@
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "防止 Google 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
   },
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "防止 Google 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "使用 AI 科技防止各種追蹤技術。"
   },
@@ -469,9 +487,6 @@
   },
   "privacy_protection": {
     "message": "隱私權保護"
-  },
-  "protection": {
-    "message": "保護"
   },
   "protection_exceptions": {
     "message": "保護的例外情況"
@@ -494,12 +509,6 @@
   "report_a_broken_page": {
     "message": "報告已損毀的網頁"
   },
-  "resume": {
-    "message": "恢復"
-  },
-  "resume_protection": {
-    "message": "履歷保護"
-  },
   "save": {
     "message": "儲存"
   },
@@ -514,6 +523,12 @@
   },
   "search_website___": {
     "message": "搜尋網站......"
+  },
+  "select_time_frame": {
+    "message": "Select time frame"
+  },
+  "send_feedback": {
+    "message": "Send feedback"
   },
   "set_blocking_preference": {
     "message": "設定封鎖偏好設定"
@@ -556,6 +571,9 @@
   "submit_a_new_tracker": {
     "message": "提交一個新的網頁跟蹤器"
   },
+  "suspends_privacy_protection_globally_for_1_day_": {
+    "message": "Suspends privacy protection globally for 1 day."
+  },
   "telemetry": {
     "message": "遙測",
     "description": "Tracker category name"
@@ -565,6 +583,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "感謝你支持 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
+  },
+  "to_adjust_privacy_protection_trust_a_site_": {
+    "message": "To adjust privacy protection trust a site:"
   },
   "tracker_database": {
     "message": "追蹤程式資料庫"
@@ -676,9 +697,6 @@
   },
   "you_are_signed_in_as_": {
     "message": "您登入為："
-  },
-  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "你可以在下方調整設定。我們建議你永遠保持啟用。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"
