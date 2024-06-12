@@ -25,6 +25,9 @@
   "active": {
     "message": "Activo"
   },
+  "activities": {
+    "message": "Actividades"
+  },
   "ad_blocking": {
     "message": "Bloqueador de anuncios"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "Agregar sitio web"
   },
   "add_website_exception": {
     "message": "Añadir excepción de sitio web"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "Bloqueado",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "Bloqueados: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Bloqueado en todos los sitios web"
@@ -273,7 +272,7 @@
     "message": "Ghostery no puede bloquearlos, porque le faltan permisos."
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery ha sido reanudado."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery se ha reanudado en este sitio."
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "¿Falta \"Pausar Ghostery\"? Puedes encontrarlo en la configuración de protección de privacidad."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Modifica los ajustes de bloqueo recomendados de todos los sitios web."
@@ -437,7 +436,7 @@
     "message": "Sí"
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Abra la configuración de Ghostery"
   },
   "open_video": {
     "message": "Abrir vídeo"
@@ -525,10 +524,10 @@
     "message": "Buscar sitio web..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "Seleccionar período de tiempo"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "Enviar comentarios"
   },
   "set_blocking_preference": {
     "message": "Establecer preferencia de bloqueo"
@@ -572,7 +571,7 @@
     "message": "Enviar nuevo rastreador"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "Suspende la protección de la privacidad a nivel mundial por 1 día."
   },
   "telemetry": {
     "message": "Telemetría",
@@ -585,7 +584,7 @@
     "message": "Gracias por tu apoyo a Ghostery en su afán por lograr que la privacidad sea un derecho humano básico en Internet."
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "Para ajustar la protección de privacidad confíe en un sitio:"
   },
   "tracker_database": {
     "message": "Base de datos de rastreadores"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "De confianza",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "De confianza: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "De confianza en todos los sitios web"

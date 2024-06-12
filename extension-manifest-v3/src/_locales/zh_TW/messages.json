@@ -25,6 +25,9 @@
   "active": {
     "message": "使用中"
   },
+  "activities": {
+    "message": "活动"
+  },
   "ad_blocking": {
     "message": "廣告封鎖"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "新增網站"
   },
   "add_website_exception": {
     "message": "新增網站例外"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "已封鎖",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "已封鎖：$${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "在所有網站都被封鎖"
@@ -273,7 +272,7 @@
     "message": "由於缺乏相關權限，Ghostery 無法阻擋追蹤器。"
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery 已恢復。"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery 已在此網站上恢復。"
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "缺少“暫停 Ghostery”？您可以在您的隱私保護設置中找到它。"
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "為每個網站調整建議的封鎖設定。"
@@ -437,7 +436,7 @@
     "message": "啟動"
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "打開 Ghostery 設定"
   },
   "open_video": {
     "message": "打開視頻"
@@ -459,7 +458,7 @@
     "message": "我們對此活動的推薦"
   },
   "pause_ghostery": {
-    "message": "暫停"
+    "message": "暫停 Ghostery"
   },
   "permission_required": {
     "message": "需要權限"
@@ -525,10 +524,10 @@
     "message": "搜尋網站......"
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "選擇時間範圍"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "發送反饋"
   },
   "set_blocking_preference": {
     "message": "設定封鎖偏好設定"
@@ -572,7 +571,7 @@
     "message": "提交一個新的網頁跟蹤器"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "全球暫停隱私保護一天。"
   },
   "telemetry": {
     "message": "遙測",
@@ -585,7 +584,7 @@
     "message": "感謝你支持 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "要調整隱私保護，請信任一個網站："
   },
   "tracker_database": {
     "message": "追蹤程式資料庫"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "已信任",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "受信任：$${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "受所有網站信任"

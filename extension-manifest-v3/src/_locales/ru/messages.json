@@ -25,6 +25,9 @@
   "active": {
     "message": "Активный"
   },
+  "activities": {
+    "message": "Деятельность"
+  },
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "Добавить сайт"
   },
   "add_website_exception": {
     "message": "Добавить сайт в качестве исключения"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "Заблокированные",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "Заблокировано: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Заблокировано на всех сайтах"
@@ -273,7 +272,7 @@
     "message": "У Ghostery недостаточно разрешений для блокировки трекеров."
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery возобновлен."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "На этом сайте возобновлена работа Ghostery."
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "Отсутствует \"Приостановить Ghostery\"? Вы можете найти его в настройках защиты конфиденциальности."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Настраивайте рекомендуемые параметры блокировки для каждого сайта."
@@ -437,7 +436,7 @@
     "message": "Вкл"
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Откройте настройки Ghostery"
   },
   "open_video": {
     "message": "Открытое видео"
@@ -525,10 +524,10 @@
     "message": "Поиск сайта..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "Выберите временной интервал"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "Отправить отзыв"
   },
   "set_blocking_preference": {
     "message": "Настроить параметры блокировки"
@@ -572,7 +571,7 @@
     "message": "Отправить новый трекер"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "Приостанавливает защиту конфиденциальности по всему миру на 1 день."
   },
   "telemetry": {
     "message": "Телеметрия",
@@ -585,7 +584,7 @@
     "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "Чтобы настроить защиту конфиденциальности, доверьтесь сайту:"
   },
   "tracker_database": {
     "message": "База данных трекера"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "Доверенный",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "Разрешено: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "Разрешено на всех сайтах"

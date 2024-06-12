@@ -25,6 +25,9 @@
   "active": {
     "message": "Aktywny"
   },
+  "activities": {
+    "message": "Aktywności"
+  },
   "ad_blocking": {
     "message": "Blokowanie reklam"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "Dodaj stronę internetową."
   },
   "add_website_exception": {
     "message": "Dodaj wyjątek dla tej witryny"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "Zablokowane",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "Zablokowane: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Zablokowany wszędzie"
@@ -273,7 +272,7 @@
     "message": "Ghostery nie może ich blokować, ponieważ nie ma uprawnień."
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery zostało wznowione."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery zostało wznowione dla tej witryny."
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "Szukasz „Wstrzymaj Ghostery”? Możesz je znaleźć w ustawieniach ochrony prywatności."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Zmodyfikuj zalecane ustawienia blokowania dla każdej witryny."
@@ -437,7 +436,7 @@
     "message": "Wł."
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Otwórz Ustawienia Ghostery"
   },
   "open_video": {
     "message": "Otwórz wideo"
@@ -459,7 +458,7 @@
     "message": "Nasze zalecenia dla tej aktywności"
   },
   "pause_ghostery": {
-    "message": "Wstrzymaj"
+    "message": "Wstrzymaj Ghostery"
   },
   "permission_required": {
     "message": "Wymagane uprawnienia"
@@ -525,10 +524,10 @@
     "message": "Szukaj witryny..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "Wybierz przedział czasowy"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "Wyślij opinię"
   },
   "set_blocking_preference": {
     "message": "Ustaw preferencje blokowania"
@@ -572,7 +571,7 @@
     "message": "Zgłoś nowego tropiciela"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "Zawiesza ochronę prywatności globalnie na 1 dzień."
   },
   "telemetry": {
     "message": "Telemetria",
@@ -585,7 +584,7 @@
     "message": "Dziękujemy za Twoje wsparcie w walce Ghostery o sieć, w której prywatność jest podstawowym prawem człowieka!"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "Aby dostosować ochronę prywatności, zaufaj witrynie:"
   },
   "tracker_database": {
     "message": "Baza danych Trackerów"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "Zaufane",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "Zaufane: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "Zaufany wszędzie"

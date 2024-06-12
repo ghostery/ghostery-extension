@@ -25,6 +25,9 @@
   "active": {
     "message": "アクティブ"
   },
+  "activities": {
+    "message": "アクティビティ"
+  },
   "ad_blocking": {
     "message": "広告ブロッキング"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "ウェブサイトを追加"
   },
   "add_website_exception": {
     "message": "ウェブサイトの例外を追加"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "ブロックされた対象",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "ブロック済み: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "すべてのウェブサイトでブロック済み"
@@ -273,7 +272,7 @@
     "message": "Ghosteryは権限が足りないため、ブロックできません。"
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghosteryが再開されました。"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghosteryがこのサイトで再開されました。"
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "「ゴーストリーを一時停止」が見つからない場合は、プライバシー保護設定で見つけることができますので、確認してください。"
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "それぞれのウェブサイトについて推奨されるブロック設定を変更します。"
@@ -437,7 +436,7 @@
     "message": "オン"
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Ghosteryの設定を開く"
   },
   "open_video": {
     "message": "ビデオを開く"
@@ -459,7 +458,7 @@
     "message": "このアクティビティのおすすめ"
   },
   "pause_ghostery": {
-    "message": "一時停止"
+    "message": "ゴーストリーを一時停止"
   },
   "permission_required": {
     "message": "許可が必要"
@@ -525,10 +524,10 @@
     "message": "サイトを検索..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "時間枠を選択"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "フィードバックを送信する"
   },
   "set_blocking_preference": {
     "message": "ブロック設定に進む"
@@ -572,7 +571,7 @@
     "message": "新しいトラッカーを提出"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "1日間、グローバルにプライバシー保護を一時停止します。"
   },
   "telemetry": {
     "message": "テレメトリー",
@@ -585,7 +584,7 @@
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "サイトのプライバシー保護を調整するには:"
   },
   "tracker_database": {
     "message": "トラッカー・データベース"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "信頼済み",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "信頼済み: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "すべてのウェブサイトで信頼済み"

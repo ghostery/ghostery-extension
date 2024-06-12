@@ -25,6 +25,9 @@
   "active": {
     "message": "사용"
   },
+  "activities": {
+    "message": "활동"
+  },
   "ad_blocking": {
     "message": "광고 차단"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "웹사이트 추가"
   },
   "add_website_exception": {
     "message": "웹사이트 예외 추가"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "차단됨 ",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "차단됨: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "모든 웹사이트상에서 차단됨"
@@ -273,7 +272,7 @@
     "message": "누락된 권한이 있어 Ghostery가 차단할 수 없습니다."
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery가 재개되었습니다."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "이 사이트에서 Ghostery가 재개되었습니다."
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "\"Ghostery 일시 중지\"가 없으신가요? 개인정보 보호 설정에서 \"Pause Ghostery\"를 찾을 수 있습니다."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "모든 웹사이트에 대한 권장 차단 설정을 수정합니다."
@@ -437,7 +436,7 @@
     "message": "켜기 "
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Ghostery 설정 열기"
   },
   "open_video": {
     "message": "비디오 열기"
@@ -525,10 +524,10 @@
     "message": "웹사이트 검색..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "시간 범위 선택"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "피드백 보내기"
   },
   "set_blocking_preference": {
     "message": "차단 맞춤 설정"
@@ -572,7 +571,7 @@
     "message": "새로운 트래커 제출 "
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "1 일 동안 전 세계적으로 개인 정보 보호를 중단합니다."
   },
   "telemetry": {
     "message": "원격 측정",
@@ -585,7 +584,7 @@
     "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸우는 데 지지를 보내주셔서 감사합니다!"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "사이트에서 제공하는 개인정보보호 정책을 확인하고 신뢰할 수 있는지 판단하세요."
   },
   "tracker_database": {
     "message": "기 데이터베이스"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "신뢰할 수 있는 사이트",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "신뢰됨: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "모든 웹사이트상에서 신뢰됨"

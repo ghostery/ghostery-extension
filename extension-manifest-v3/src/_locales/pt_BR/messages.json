@@ -25,6 +25,9 @@
   "active": {
     "message": "Ativo"
   },
+  "activities": {
+    "message": "Atividades"
+  },
   "ad_blocking": {
     "message": "Bloqueio de anúncios"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "Adicionar site"
   },
   "add_website_exception": {
     "message": "Adicionar exceção de site"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "Bloqueados",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "Bloqueado: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Bloqueado em todos os sites"
@@ -273,7 +272,7 @@
     "message": "O Ghostery não pode bloqueá-los devido à falta de permissões."
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery foi retomado."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "O Ghostery foi retomado neste site."
@@ -389,7 +388,7 @@
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "Sentindo falta de “Pausar Ghostery”? Você pode encontrá-lo nas suas configurações de privacidade."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Modifique as configurações de bloqueio recomendadas para cada site."
@@ -437,7 +436,7 @@
     "message": "Ligado"
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Abrir configurações do Ghostery"
   },
   "open_video": {
     "message": "Abrir vídeo"
@@ -459,7 +458,7 @@
     "message": "Nossa recomendação para esta atividade"
   },
   "pause_ghostery": {
-    "message": "Pausar"
+    "message": "Pausar Ghostery"
   },
   "permission_required": {
     "message": "Permissão necessária"
@@ -525,10 +524,10 @@
     "message": "Pesquisar site..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "Selecione o período"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "Enviar feedback"
   },
   "set_blocking_preference": {
     "message": "Definir preferência de bloqueio"
@@ -572,7 +571,7 @@
     "message": "Enviar um novo rastreador"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "Suspende a proteção da privacidade globalmente por 1 dia."
   },
   "telemetry": {
     "message": "Telemetria",
@@ -585,7 +584,7 @@
     "message": "Agradecemos seu apoio na luta do Ghostery por uma web onde a privacidade é um direito humano básico!"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "Para ajustar a proteção de privacidade, confie em um site:"
   },
   "tracker_database": {
     "message": "Banco de dados do rastreador"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "Confiável",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "Confiável: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "Confiável em todos os sites"

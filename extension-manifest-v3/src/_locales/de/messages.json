@@ -25,6 +25,9 @@
   "active": {
     "message": "Aktiv"
   },
+  "activities": {
+    "message": "Aktivitäten"
+  },
   "ad_blocking": {
     "message": "Werbeblocker"
   },
@@ -36,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Add website"
+    "message": "Webseite hinzufügen"
   },
   "add_website_exception": {
     "message": "Website-Ausnahme hinzufügen"
@@ -106,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "Blockiert",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "Blockiert: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Auf allen Websites blockiert"
@@ -273,7 +272,7 @@
     "message": "Ghostery kann sie aufgrund fehlender Berechtigungen nicht blocken."
   },
   "ghostery_has_been_resumed_": {
-    "message": "Ghostery has been resumed."
+    "message": "Ghostery wird fortgesetzt."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery wird auf dieser Website fortgesetzt."
@@ -382,14 +381,14 @@
     "message": "Menü"
   },
   "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Beachten Sie, dass nicht alle genannten Einheiten Tracker sind, d.h. nicht alle sammeln persönliche Daten."
+    "message": "Beachten Sie, dass nicht alle genannten Einträge Tracker sind, d.h. nicht alle sammeln persönliche Daten."
   },
   "miscellaneous": {
     "message": "Sonstiges",
     "description": "Tracker category name"
   },
   "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
+    "message": "Die Funktion „Ghostery pausieren“ finden Sie in den Einstellungen."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Ändern Sie die empfohlenen Blockierungseinstellungen für jede Website."
@@ -437,7 +436,7 @@
     "message": "An"
   },
   "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
+    "message": "Ghostery Einstellungen öffnen"
   },
   "open_video": {
     "message": "Video öffnen"
@@ -525,10 +524,10 @@
     "message": "Website durchsuchen ..."
   },
   "select_time_frame": {
-    "message": "Select time frame"
+    "message": "Zeitraum auswählen"
   },
   "send_feedback": {
-    "message": "Send feedback"
+    "message": "Feedback senden"
   },
   "set_blocking_preference": {
     "message": "Blockierungspräferenzen festlegen"
@@ -572,7 +571,7 @@
     "message": "Neuen Tracker senden"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "Suspends privacy protection globally for 1 day."
+    "message": "Deaktiviert den Ghostery-Schutz für 1 Tag."
   },
   "telemetry": {
     "message": "Telemetrie",
@@ -585,7 +584,7 @@
     "message": "Vielen Dank für Ihre Unterstützung im Kampf von Ghostery für ein Internet, in dem Datenschutz ein grundlegendes Menschenrecht ist!"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "To adjust privacy protection trust a site:"
+    "message": "Zur Anpassung der Einstellungen, vertrauen Sie einer Webseite:"
   },
   "tracker_database": {
     "message": "Tracker Datenbank"
@@ -626,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "Vertrauenswürdig",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "Vertraut: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "Auf allen Websites vertraut"
