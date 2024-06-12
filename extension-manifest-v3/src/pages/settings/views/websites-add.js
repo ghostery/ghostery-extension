@@ -54,7 +54,7 @@ export default {
             Add website
           </ui-text>
           <div layout="column gap items:start">
-            <ui-text>To adjust privacy protection</ui-text>
+            <ui-text>To adjust privacy protection trust a site:</ui-text>
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Website</ui-text>
@@ -69,7 +69,7 @@ export default {
             </gh-settings-input>
           </div>
           <div layout="column gap:0.5">
-            <ui-text type="label-m">Trust this site for</ui-text>
+            <ui-text type="label-m">Select time frame</ui-text>
             <gh-settings-input>
               <select
                 type="text"
