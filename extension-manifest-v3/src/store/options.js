@@ -12,7 +12,7 @@
 import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
-import { getUserOptions, setUserOptions } from '/utils/api.js';
+import { getUserOptions, setUserOptions } from '../utils/api.js';
 
 import Session from './session.js';
 

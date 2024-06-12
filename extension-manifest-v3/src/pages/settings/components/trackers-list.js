@@ -15,6 +15,8 @@ import * as labels from '@ghostery/ui/labels';
 export default {
   name: '',
   description: '',
+  size: 0,
+  adjusted: 0,
   blocked: 0,
   trusted: 0,
   open: false,
@@ -22,8 +24,8 @@ export default {
   render: ({
     name,
     description,
-    blocked,
-    trusted,
+    size,
+    adjusted,
     open,
     blockedByDefault,
   }) => html`
@@ -65,13 +67,14 @@ export default {
               </ui-text>
               <div layout="column" layout@768px="row gap">
                 <ui-text type="body-s" color="gray-600" layout="width::90px">
-                  <!-- A number of blocked trackers, eg: 'Blocked: 2' -->
-                  Blocked: ${blocked}
+                  Activities<span>:</span> ${size}
                 </ui-text>
-                <ui-text type="body-s" color="gray-600" layout="width::90px">
-                  <!-- A number of trusted trackers eg: 'Trusted: 2' -->
-                  Trusted: ${trusted}
-                </ui-text>
+                ${!!adjusted &&
+                html`
+                  <ui-text type="body-s" color="gray-600" layout="width::90px">
+                    <!-- | tracker-list -->Adjusted<span>:</span> ${adjusted}
+                  </ui-text>
+                `}
               </div>
             </div>
           </button>
