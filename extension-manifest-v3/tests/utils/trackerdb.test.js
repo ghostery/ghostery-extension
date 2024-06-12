@@ -34,7 +34,10 @@ describe('/utils/trackerdb.js', () => {
 
         it('returns false for trusted categories', () => {
           const exception = createException();
-          assert.strictEqual(isTrusted('bar.com', 'cdn', exception), false);
+          assert.strictEqual(
+            isTrusted('bar.com', 'essential', exception),
+            false,
+          );
         });
       });
 
@@ -49,7 +52,10 @@ describe('/utils/trackerdb.js', () => {
 
         it('returns false for trusted categories', () => {
           const exception = createException();
-          assert.strictEqual(isTrusted('foo.org', 'cdn', exception), false);
+          assert.strictEqual(
+            isTrusted('foo.org', 'essential', exception),
+            false,
+          );
         });
       });
     });
@@ -66,7 +72,10 @@ describe('/utils/trackerdb.js', () => {
 
         it('returns false for trusted categories', () => {
           const exception = createException(true);
-          assert.strictEqual(isTrusted('bar.com', 'cdn', exception), false);
+          assert.strictEqual(
+            isTrusted('bar.com', 'essential', exception),
+            false,
+          );
         });
       });
 
@@ -81,7 +90,10 @@ describe('/utils/trackerdb.js', () => {
 
         it('returns true for trusted categories', () => {
           const exception = createException(true);
-          assert.strictEqual(isTrusted('foo.org', 'cdn', exception), true);
+          assert.strictEqual(
+            isTrusted('foo.org', 'essential', exception),
+            true,
+          );
         });
       });
     });
