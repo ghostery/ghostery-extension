@@ -65,8 +65,15 @@ function clearCategory(id) {
             store.ready(t.exception) &&
             t.exception.blocked !== category.blockedByDefault,
         )
-        .map((tracker) =>
-          store.set(tracker.exception, { blocked: category.blockedByDefault }),
+        .map(({ exception }) =>
+          store.set(
+            exception,
+            exception.blockedDomains.length || exception.trustedDomains.length
+              ? {
+                  blocked: category.blockedByDefault,
+                }
+              : null,
+          ),
         ),
     );
 
@@ -176,8 +183,7 @@ export default {
                     key,
                     description,
                     trackers,
-                    blocked,
-                    trusted,
+                    adjusted,
                     blockedByDefault,
                   }) =>
                     html`
@@ -185,8 +191,8 @@ export default {
                         name="${key}"
                         description="${description}"
                         open="${isActive(category, key)}"
-                        blocked="${blocked}"
-                        trusted="${trusted}"
+                        size="${trackers.length}"
+                        adjusted="${adjusted}"
                         blockedByDefault="${blockedByDefault}"
                         ontoggle="${html.set(
                           'category',

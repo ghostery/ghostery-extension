@@ -20,11 +20,20 @@ async function getStorage() {
 
 let promise;
 let items = null;
-async function setStorage(item) {
+async function setStorage(id, item) {
   if (!promise) {
     // eslint-disable-next-line no-async-promise-executor
     promise = new Promise(async (resolve) => {
-      const exceptions = Object.assign(await getStorage(), items);
+      const exceptions = await getStorage();
+
+      for (const id of Object.keys(items)) {
+        if (items[id] === null) {
+          delete exceptions[id];
+        } else {
+          exceptions[id] = items[id];
+        }
+      }
+
       await chrome.storage.local.set({ exceptions });
 
       promise = null;
@@ -36,7 +45,7 @@ async function setStorage(item) {
     items = {};
   }
 
-  items[item.id] = item;
+  items[id] = item;
 
   return promise.then(() => item);
 }
@@ -65,7 +74,7 @@ const TrackerException = {
         await requestPermission();
       }
 
-      return setStorage(values);
+      return setStorage(id, values);
     },
     list: async () => Object.values(await getStorage()),
     loose: true,

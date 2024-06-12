@@ -49,6 +49,10 @@ export function isCategoryBlockedByDefault(categoryId) {
     case 'pornvertising':
     case 'email':
     case 'site_analytics':
+    case 'cdn':
+    case 'hosting':
+    case 'extensions':
+    case 'misc':
     case 'unidentified':
     case undefined:
       return true;
