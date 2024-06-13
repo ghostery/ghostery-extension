@@ -18,6 +18,7 @@ import {
   Config,
 } from '@cliqz/adblocker';
 
+import { observe } from '../store/options.js';
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 
@@ -38,6 +39,7 @@ const ENV = new Map([
   ['env_chromium', checkUserAgent('Chrome')],
   ['env_edge', checkUserAgent('Edg')],
   ['env_mobile', checkUserAgent('Mobile')],
+  ['env_experimental', false],
 ]);
 
 function deserializeEngine(engineBytes) {
@@ -427,6 +429,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     chrome.alarms.create(alarm.name, {
       delayInMinutes: ALARM_DELAY,
     });
+  }
+});
+
+observe('experimentalFilters', (experimentalFilters) => {
+  ENV.set('env_experimental', experimentalFilters);
+  for (const engine of engines.values()) {
+    engine.updateEnv(ENV);
   }
 });
 

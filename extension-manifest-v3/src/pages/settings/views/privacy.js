@@ -256,6 +256,41 @@ export default {
                 ></ui-toggle>
               </div>
             </div>
+            <div layout="row items:start gap:2" layout@768px="gap:4">
+              <gh-settings-help-image static>
+                <ui-icon
+                  name="alert-info"
+                  color="gray-400"
+                  layout="size:5"
+                ></ui-icon>
+              </gh-settings-help-image>
+              <div layout="column gap:2" layout@768px="row gap:5 grow">
+                <div layout="column grow gap:0.5">
+                  <ui-text type="headline-s"
+                    >Experimental ad-blocking filters</ui-text
+                  >
+                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                    Helps Ghostery fix broken pages faster. By activating you
+                    can test experimental filters and support us with feedback.
+                    Please send a message to support@ghostery.com describing how
+                    your experience changed after enabling.
+                  </ui-text>
+                  <ui-text type="label-m" color="gray-600" underline>
+                    <a
+                      href="https://github.com/ghostery/broken-page-reports/blob/main/filters/experimental.txt"
+                      target="_blank"
+                      layout="row gap:0.5"
+                    >
+                      Learn more<ui-icon name="arrow-right-s"></ui-icon>
+                    </a>
+                  </ui-text>
+                </div>
+                <ui-toggle
+                  value="${options.experimentalFilters}"
+                  onchange="${html.set(options, 'experimentalFilters')}"
+                ></ui-toggle>
+              </div>
+            </div>
           </section>
 
           <gh-settings-devtools
