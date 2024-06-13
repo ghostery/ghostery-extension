@@ -26,7 +26,7 @@ async function initialize(msg, tab, frameId) {
     !isGlobalPaused(options) &&
     terms &&
     blockAnnoyances &&
-    (!pureHostname || !paused.includes(pureHostname))
+    (!pureHostname || !paused.some(({ id }) => id === pureHostname))
   ) {
     try {
       chrome.tabs.sendMessage(
