@@ -231,61 +231,39 @@ export default {
                             (tracker, index) =>
                               index <= (limits[key] || PATTERNS_LIMIT) &&
                               html`
-                                  <div layout="row items:center gap">
-                                    <ui-action>
-                                      <a
-                                        href="${router.url(TrackerDetails, {
-                                          tracker: tracker.id,
-                                        })}"
-                                        layout="column grow basis:0"
-                                        layout@768px="row gap:2"
-                                      >
-                                        <ui-text type="label-m">
-                                          ${tracker.name}
+                                <div layout="row items:center gap">
+                                  <ui-action>
+                                    <a
+                                      href="${router.url(TrackerDetails, {
+                                        tracker: tracker.id,
+                                      })}"
+                                      layout="column grow basis:0"
+                                      layout@768px="row gap:2"
+                                    >
+                                      <ui-text type="label-m">
+                                        ${tracker.name}
+                                      </ui-text>
+                                      ${tracker.organization &&
+                                      html`
+                                        <ui-text color="gray-600">
+                                          ${tracker.organization.name}
                                         </ui-text>
-                                        ${
-                                          tracker.organization &&
-                                          html`
-                                            <ui-text color="gray-600">
-                                              ${tracker.organization.name}
-                                            </ui-text>
-                                          `
-                                        }
-                                      </a>
-                                    </ui-action>
-                                    <div layout="row items:center gap">
-                                      ${
-                                        store.ready(tracker.exception) &&
-                                        tracker.exception.blocked !==
-                                          tracker.blockedByDefault &&
-                                        html`
-                                          <ui-text color="gray-600">
-                                            ${tracker.organization.name}
-                                          </ui-text>
-                                        `
-                                      }
+                                      `}
                                     </a>
                                   </ui-action>
                                   <div layout="row items:center gap">
-                                    ${
-                                      store.ready(tracker.exception) &&
-                                      tracker.exception.blocked !==
-                                        tracker.blockedByDefault &&
-                                      html`
-                                        <ui-text
-                                          type="label-s"
-                                          color="gray-500"
-                                        >
-                                          <!-- Singular form - tracker has been adjusted | tracker -->adjusted
-                                        </ui-text>
-                                      `
-                                    }
+                                    ${store.ready(tracker.exception) &&
+                                    tracker.exception.blocked !==
+                                      tracker.blockedByDefault &&
+                                    html`
+                                      <ui-text type="label-s" color="gray-500">
+                                        <!-- Singular form - tracker has been adjusted | tracker -->adjusted
+                                      </ui-text>
+                                    `}
                                     <ui-panel-protection-status-toggle
-                                      value="${
-                                        store.ready(tracker.exception)
-                                          ? tracker.exception.blocked
-                                          : tracker.blockedByDefault
-                                      }"
+                                      value="${store.ready(tracker.exception)
+                                        ? tracker.exception.blocked
+                                        : tracker.blockedByDefault}"
                                       responsive
                                       onchange="${updateException(tracker)}"
                                       layout="shrink:0"
