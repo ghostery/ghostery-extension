@@ -6,9 +6,8 @@ This repository is home to all Ghostery Browser Extensions for various platforms
 
 ## Folder structure
 
-* extension for **Firefox**, **Chrome**, and **Edge** is in folder: [extension-manifest-v2](/extension-manifest-v2)
-* extension for **Opera** and **Safari** is in folder: [extension-manifest-v3](/extension-manifest-v3)
-* shared user interface is in folder: [ui](/ui)
+* Extension `v8.x` for **Firefox**: [extension-manifest-v2](/extension-manifest-v2)
+* Extension `v10.x` for **Chrome**, **Edge**, **Opera** and **Safari** is in folder: [extension-manifest-v3](/extension-manifest-v3)
 
 ## Links
 
