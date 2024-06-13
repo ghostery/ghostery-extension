@@ -25,6 +25,9 @@
   "active": {
     "message": "Активный"
   },
+  "activities": {
+    "message": "Деятельность"
+  },
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
@@ -34,6 +37,9 @@
   "add_@_0__as_exception": {
     "message": "Добавить $${0} в качестве исключения",
     "description": "Add domain as exception"
+  },
+  "add_website": {
+    "message": "Добавить сайт"
   },
   "add_website_exception": {
     "message": "Добавить сайт в качестве исключения"
@@ -76,6 +82,9 @@
     "message": "Аудио/видео проигрыватель",
     "description": "Tracker category name"
   },
+  "automatically_rejects_cookie_consent_notices_": {
+    "message": "Автоматически запрещает использование файлов cookie."
+  },
   "automatically_rejects_of_cookie_consent_notices_": {
     "message": "Автоматически запрещает использование файлов cookie."
   },
@@ -100,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "Заблокированные",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "Заблокировано: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "Заблокировано на всех сайтах"
@@ -197,6 +202,9 @@
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "Ghostery не работает из-за ограничений браузера и отсутствия дополнительных разрешений."
   },
+  "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
+    "message": "Блокирует рекламу на сайтах для более быстрой и безопасной работы в браузере."
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "Блокирует рекламу на сайтах для более быстрой и безопасной работы в браузере."
   },
@@ -251,9 +259,6 @@
   "for_more_information_read_our_full": {
     "message": "Для получения дополнительной информации прочтите"
   },
-  "further_protection": {
-    "message": "Дополнительная защита"
-  },
   "get_help": {
     "message": "Помощь"
   },
@@ -265,6 +270,9 @@
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "У Ghostery недостаточно разрешений для блокировки трекеров."
+  },
+  "ghostery_has_been_resumed_": {
+    "message": "Ghostery возобновлен."
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "На этом сайте возобновлена работа Ghostery."
@@ -280,6 +288,9 @@
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery устанавливается с ограниченной функциональностью"
+  },
+  "ghostery_is_paused": {
+    "message": "Ghostery сделал паузу"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery приостановлен на этом сайте."
@@ -376,6 +387,9 @@
     "message": "Разное",
     "description": "Tracker category name"
   },
+  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
+    "message": "Отсутствует \"Приостановить Ghostery\"? Вы можете найти его в настройках защиты конфиденциальности."
+  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Настраивайте рекомендуемые параметры блокировки для каждого сайта."
   },
@@ -421,6 +435,9 @@
   "on": {
     "message": "Вкл"
   },
+  "open_ghostery_settings": {
+    "message": "Откройте настройки Ghostery"
+  },
   "open_video": {
     "message": "Открытое видео"
   },
@@ -440,11 +457,8 @@
   "our_recommendation_for_this_activity": {
     "message": "Рекомендации для этого действия"
   },
-  "pause_on_this_site": {
-    "message": "Пауза на этом сайте"
-  },
-  "paused": {
-    "message": "Приостановлено"
+  "pause_ghostery": {
+    "message": "Приостановить Ghostery"
   },
   "permission_required": {
     "message": "Требуется разрешение"
@@ -458,6 +472,9 @@
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Запретить перенаправление ссылок на результаты поиска через серверы Google вместо прямого доступа к страницам."
   },
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Запретить перенаправление ссылок на результаты поиска через серверы Google вместо прямого доступа к страницам."
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Использует ИИ для блокировки различных способов сбора данных."
   },
@@ -469,9 +486,6 @@
   },
   "privacy_protection": {
     "message": "Защита конфиденциальности"
-  },
-  "protection": {
-    "message": "защита"
   },
   "protection_exceptions": {
     "message": "Исключения защиты"
@@ -494,12 +508,6 @@
   "report_a_broken_page": {
     "message": "Сообщить о поврежденной странице"
   },
-  "resume": {
-    "message": "Возобновить"
-  },
-  "resume_protection": {
-    "message": "Защита резюме"
-  },
   "save": {
     "message": "Сохранить"
   },
@@ -514,6 +522,12 @@
   },
   "search_website___": {
     "message": "Поиск сайта..."
+  },
+  "select_time_frame": {
+    "message": "Выберите временной интервал"
+  },
+  "send_feedback": {
+    "message": "Отправить отзыв"
   },
   "set_blocking_preference": {
     "message": "Настроить параметры блокировки"
@@ -556,6 +570,9 @@
   "submit_a_new_tracker": {
     "message": "Отправить новый трекер"
   },
+  "suspends_privacy_protection_globally_for_1_day_": {
+    "message": "Приостанавливает защиту конфиденциальности по всему миру на 1 день."
+  },
   "telemetry": {
     "message": "Телеметрия",
     "description": "Tracker category name"
@@ -565,6 +582,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
+  },
+  "to_adjust_privacy_protection_trust_a_site_": {
+    "message": "Чтобы настроить защиту конфиденциальности, доверьтесь сайту:"
   },
   "tracker_database": {
     "message": "База данных трекера"
@@ -605,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "Доверенный",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "Разрешено: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "Разрешено на всех сайтах"
@@ -676,9 +692,6 @@
   },
   "you_are_signed_in_as_": {
     "message": "Вы вошли как:"
-  },
-  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "Вы можете изменить настройки ниже. Рекомендуем включить все функции Ghostery."
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Вы больше не будете видеть статистику трекера рядом с результатами поиска."
