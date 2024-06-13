@@ -25,6 +25,9 @@
   "active": {
     "message": "有效"
   },
+  "activities": {
+    "message": "活动"
+  },
   "ad_blocking": {
     "message": "广告拦截"
   },
@@ -34,6 +37,9 @@
   "add_@_0__as_exception": {
     "message": "添加 $${0} 为异常",
     "description": "Add domain as exception"
+  },
+  "add_website": {
+    "message": "添加网站"
   },
   "add_website_exception": {
     "message": "添加网站异常"
@@ -76,6 +82,9 @@
     "message": "音频/视频播放器",
     "description": "Tracker category name"
   },
+  "automatically_rejects_cookie_consent_notices_": {
+    "message": "自动拒绝 cookie 同意通知。"
+  },
   "automatically_rejects_of_cookie_consent_notices_": {
     "message": "自动拒绝 cookie 同意通知。"
   },
@@ -100,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "已拦截",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "被阻止：$${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "在所有网站上被阻止"
@@ -197,6 +202,9 @@
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "由于浏览器限制和附加权限缺失，Ghostery 无法为您提供保护。"
   },
+  "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
+    "message": "清除网站上的广告，获得安全迅捷的浏览体验。"
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "清除网站上的广告，获得安全迅捷的浏览体验。"
   },
@@ -251,9 +259,6 @@
   "for_more_information_read_our_full": {
     "message": "欲了解更多信息，请阅读我们的完整"
   },
-  "further_protection": {
-    "message": "更多保障"
-  },
   "get_help": {
     "message": "获取帮助"
   },
@@ -265,6 +270,9 @@
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "由于缺乏相关权限，Ghostery 无法阻止跟踪器。"
+  },
+  "ghostery_has_been_resumed_": {
+    "message": "Ghostery 已恢复。"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghostery 已在此网站上恢复。"
@@ -280,6 +288,9 @@
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery安装了有限的功能"
+  },
+  "ghostery_is_paused": {
+    "message": "Ghostery暂停了"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery 已在此网站上暂停。"
@@ -376,6 +387,9 @@
     "message": "其他",
     "description": "Tracker category name"
   },
+  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
+    "message": "是否找不到“暂停Ghostery”？您可以在隐私保护设置中找到它。"
+  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "为每个网站调整推荐的阻止设定。"
   },
@@ -421,6 +435,9 @@
   "on": {
     "message": "开启"
   },
+  "open_ghostery_settings": {
+    "message": "打开Ghostery设置"
+  },
   "open_video": {
     "message": "打开视频"
   },
@@ -440,11 +457,8 @@
   "our_recommendation_for_this_activity": {
     "message": "对于此活动，我们的推荐"
   },
-  "pause_on_this_site": {
-    "message": "在这个网站上暂停"
-  },
-  "paused": {
-    "message": "已暂停"
+  "pause_ghostery": {
+    "message": "暂停 Ghostery"
   },
   "permission_required": {
     "message": "需要权限"
@@ -458,6 +472,9 @@
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "防止 Google 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
   },
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "防止 Google 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "阻止各种 AI 驱动的跟踪技术。"
   },
@@ -469,9 +486,6 @@
   },
   "privacy_protection": {
     "message": "隐私保护"
-  },
-  "protection": {
-    "message": "保护"
   },
   "protection_exceptions": {
     "message": "保护的例外情况"
@@ -494,12 +508,6 @@
   "report_a_broken_page": {
     "message": "报告崩溃页面"
   },
-  "resume": {
-    "message": "继续"
-  },
-  "resume_protection": {
-    "message": "履历保护"
-  },
   "save": {
     "message": "保存"
   },
@@ -514,6 +522,12 @@
   },
   "search_website___": {
     "message": "搜索网站..."
+  },
+  "select_time_frame": {
+    "message": "选择时间范围"
+  },
+  "send_feedback": {
+    "message": "发送反馈"
   },
   "set_blocking_preference": {
     "message": "设置阻止首选项"
@@ -556,6 +570,9 @@
   "submit_a_new_tracker": {
     "message": "提交新跟踪器"
   },
+  "suspends_privacy_protection_globally_for_1_day_": {
+    "message": "暂停全球隐私保护的时间为1天。"
+  },
   "telemetry": {
     "message": "遥测",
     "description": "Tracker category name"
@@ -565,6 +582,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "感谢支持 Ghostery，为建立一个隐私是基本人权的网络而奋斗。"
+  },
+  "to_adjust_privacy_protection_trust_a_site_": {
+    "message": "要调整隐私保护，请信任一个网站："
   },
   "tracker_database": {
     "message": "追踪器数据库"
@@ -605,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "受信任",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "受信任：$${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "在所有网站上受信任"
@@ -676,9 +692,6 @@
   },
   "you_are_signed_in_as_": {
     "message": "你的登录身份为："
-  },
-  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "您可以在下方调整设置。我们建议您全程保持启用。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "搜索结果旁将不再显示跟踪器轮。"

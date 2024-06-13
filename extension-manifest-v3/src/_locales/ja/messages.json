@@ -25,6 +25,9 @@
   "active": {
     "message": "アクティブ"
   },
+  "activities": {
+    "message": "アクティビティ"
+  },
   "ad_blocking": {
     "message": "広告ブロッキング"
   },
@@ -34,6 +37,9 @@
   "add_@_0__as_exception": {
     "message": "$${0}を例外として追加",
     "description": "Add domain as exception"
+  },
+  "add_website": {
+    "message": "ウェブサイトを追加"
   },
   "add_website_exception": {
     "message": "ウェブサイトの例外を追加"
@@ -76,6 +82,9 @@
     "message": "オーディオ/ビデオ・プレーヤー",
     "description": "Tracker category name"
   },
+  "automatically_rejects_cookie_consent_notices_": {
+    "message": "Cookieの同意通知を自動で拒否します。"
+  },
   "automatically_rejects_of_cookie_consent_notices_": {
     "message": "Cookieの同意通知を自動で拒否します。"
   },
@@ -100,10 +109,6 @@
   "blocked___tracker_list": {
     "message": "ブロックされた対象",
     "description": "Plural form - list of blocked trackers"
-  },
-  "blocked__@_0_": {
-    "message": "ブロック済み: $${0}",
-    "description": "A number of blocked trackers, eg: 'Blocked: 2'"
   },
   "blocked_on_all_websites": {
     "message": "すべてのウェブサイトでブロック済み"
@@ -197,6 +202,9 @@
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "ブラウザの制限および追加権限がないため、Ghosteryによる保護を開始できません。"
   },
+  "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
+    "message": "ウェブサイト上の広告を除去し、安全で高速なブラウジングを実現します。"
+  },
   "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
     "message": "ウェブサイト上の広告を除去し、安全で高速なブラウジングを実現します。"
   },
@@ -251,9 +259,6 @@
   "for_more_information_read_our_full": {
     "message": "詳細はこちらをご覧ください"
   },
-  "further_protection": {
-    "message": "高度な保護"
-  },
   "get_help": {
     "message": "ヘルプ"
   },
@@ -265,6 +270,9 @@
   },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghosteryは権限が足りないため、ブロックできません。"
+  },
+  "ghostery_has_been_resumed_": {
+    "message": "Ghosteryが再開されました。"
   },
   "ghostery_has_been_resumed_on_this_site_": {
     "message": "Ghosteryがこのサイトで再開されました。"
@@ -280,6 +288,9 @@
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghosteryは制限付きの機能でインストールされています。"
+  },
+  "ghostery_is_paused": {
+    "message": "ゴーストリーの一時停止"
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghosteryは、このサイトで一時停止しています。"
@@ -376,6 +387,9 @@
     "message": "さまざまな",
     "description": "Tracker category name"
   },
+  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
+    "message": "「ゴーストリーを一時停止」が見つからない場合は、プライバシー保護設定で見つけることができますので、確認してください。"
+  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "それぞれのウェブサイトについて推奨されるブロック設定を変更します。"
   },
@@ -421,6 +435,9 @@
   "on": {
     "message": "オン"
   },
+  "open_ghostery_settings": {
+    "message": "Ghosteryの設定を開く"
+  },
   "open_video": {
     "message": "ビデオを開く"
   },
@@ -440,11 +457,8 @@
   "our_recommendation_for_this_activity": {
     "message": "このアクティビティのおすすめ"
   },
-  "pause_on_this_site": {
-    "message": "このサイトでのポーズ"
-  },
-  "paused": {
-    "message": "一時停止"
+  "pause_ghostery": {
+    "message": "ゴーストリーを一時停止"
   },
   "permission_required": {
     "message": "許可が必要"
@@ -458,6 +472,9 @@
   "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "検索結果のリンクを、Googleがページに直接リンクするのではなく、自社のサーバーを経由してリダイレクトするのを防ぎます。"
   },
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "検索結果のリンクを、Googleがページに直接リンクするのではなく、自社のサーバーを経由してリダイレクトするのを防ぎます。"
+  },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AIを活用した技術で様々な追跡手法を防止します。"
   },
@@ -469,9 +486,6 @@
   },
   "privacy_protection": {
     "message": "プライバシー保護"
-  },
-  "protection": {
-    "message": "保護"
   },
   "protection_exceptions": {
     "message": "保護の例外"
@@ -494,12 +508,6 @@
   "report_a_broken_page": {
     "message": "区切られたページを報告"
   },
-  "resume": {
-    "message": "再開"
-  },
-  "resume_protection": {
-    "message": "再就職の保護"
-  },
   "save": {
     "message": "保存"
   },
@@ -514,6 +522,12 @@
   },
   "search_website___": {
     "message": "サイトを検索..."
+  },
+  "select_time_frame": {
+    "message": "時間枠を選択"
+  },
+  "send_feedback": {
+    "message": "フィードバックを送信する"
   },
   "set_blocking_preference": {
     "message": "ブロック設定に進む"
@@ -556,6 +570,9 @@
   "submit_a_new_tracker": {
     "message": "新しいトラッカーを提出"
   },
+  "suspends_privacy_protection_globally_for_1_day_": {
+    "message": "1日間、グローバルにプライバシー保護を一時停止します。"
+  },
   "telemetry": {
     "message": "テレメトリー",
     "description": "Tracker category name"
@@ -565,6 +582,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
+  },
+  "to_adjust_privacy_protection_trust_a_site_": {
+    "message": "サイトのプライバシー保護を調整するには:"
   },
   "tracker_database": {
     "message": "トラッカー・データベース"
@@ -605,10 +625,6 @@
   "trusted___tracker_list": {
     "message": "信頼済み",
     "description": "Plural form - list of trusted trackers"
-  },
-  "trusted__@_0_": {
-    "message": "信頼済み: $${0}",
-    "description": "A number of trusted trackers eg: 'Trusted: 2'"
   },
   "trusted_on_all_websites": {
     "message": "すべてのウェブサイトで信頼済み"
@@ -676,9 +692,6 @@
   },
   "you_are_signed_in_as_": {
     "message": "次のユーザーでサインインしています:"
-  },
-  "you_can_adjust_the_settings_below__we_recommend_keeping_them_on_at_all_times_": {
-    "message": "以下で設定を調整することができます。常時ONにしておくことをお勧めします。"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
