@@ -85,7 +85,7 @@ function platformSpecificSettings() {
         'ua',
         'nl',
         'es',
-        'ja',
+        'jp',
         'cn',
         'pt',
         'it',
