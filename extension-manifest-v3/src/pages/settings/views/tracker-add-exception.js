@@ -39,7 +39,7 @@ export default {
       ? tracker.exception.blocked
       : tracker.blockedByDefault,
   hostname: store(Hostname, { draft: true }),
-  content: ({ tracker, blocked, hostname }) => html`
+  render: ({ tracker, blocked, hostname }) => html`
     <template layout>
       ${store.ready(tracker) &&
       html`

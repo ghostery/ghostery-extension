@@ -43,7 +43,7 @@ export default define({
       return () => host.removeEventListener('navigate', cb);
     },
   },
-  content: ({ views }) => html`
+  render: ({ views }) => html`
     <template layout="grid height::100%">
       <ui-onboarding-layout>${views}</ui-onboarding-layout>
     </template>

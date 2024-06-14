@@ -14,7 +14,7 @@ import { define, html, dispatch } from 'hybrids';
 export default define({
   tag: 'ui-onboarding-renew',
   timestamp: 0,
-  content: ({ timestamp }) => html`
+  render: ({ timestamp }) => html`
     <template layout="block overflow">
       <ui-onboarding-card layout="padding:2">
         <div layout="row items:start gap:2">

@@ -67,7 +67,7 @@ export default {
   options: store(Options),
   paused: ({ options, domain }) =>
     (store.ready(options) && options.paused.find((p) => p.id === domain)) || {},
-  content: ({ domain, trackers, paused }) => html`
+  render: ({ domain, trackers, paused }) => html`
     <template layout="contents">
       <gh-settings-page-layout layout="gap:4">
         <div layout="column items:start gap">

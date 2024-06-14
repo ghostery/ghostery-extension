@@ -12,8 +12,8 @@
 import { html } from 'hybrids';
 
 export default {
-  icon: '',
-  error: '',
+  icon: { value: '', reflect: true },
+  error: { value: '', reflect: true },
   render: ({ icon, error }) => html`
     <template layout="grid gap:0.5 relative">
       ${icon &&

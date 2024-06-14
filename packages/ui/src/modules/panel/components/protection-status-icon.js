@@ -13,7 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   status: undefined, // expected type { type: 'block' | 'trust', website?: boolean }
-  content: ({ status }) => html`
+  render: ({ status }) => html`
     <template layout="contents">
       <ui-icon
         name="${status.type}-m"

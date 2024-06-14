@@ -1,12 +1,12 @@
 import { html } from 'hybrids';
 
 export default {
-  type: 'body-m',
-  mobileType: '',
-  color: '',
-  ellipsis: false,
-  underline: false,
-  uppercase: false,
+  type: { value: 'body-m', reflect: true },
+  mobileType: { value: '', reflect: true },
+  color: { value: '', reflect: true },
+  ellipsis: { value: false, reflect: true },
+  underline: { value: false, reflect: true },
+  uppercase: { value: false, reflect: true },
   render: ({ type, mobileType, color }) => html`<slot></slot>`.css`
     :host {
       display: block;

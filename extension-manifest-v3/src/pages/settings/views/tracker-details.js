@@ -50,7 +50,7 @@ export default {
         tracker.exception.blocked ? 'trustedDomains' : 'blockedDomains'
       ]) ||
     [],
-  content: ({ tracker, domains, otherTrackers }) => html`
+  render: ({ tracker, domains, otherTrackers }) => html`
     <template layout="contents">
       <gh-settings-page-layout>
         <div layout="column gap">

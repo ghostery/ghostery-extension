@@ -22,6 +22,6 @@
   },
   "dependencies": {
     "@ghostery/libs": "^1.0.0",
-    "hybrids": "^8.2.23"
+    "hybrids": "^9.0.0"
   }
 }

@@ -1,7 +1,7 @@
 import { html } from 'hybrids';
 
 export default {
-  type: '',
+  type: { value: '', reflect: true },
   render: () => html`
     <template layout="block padding:1.5">
       <slot></slot>

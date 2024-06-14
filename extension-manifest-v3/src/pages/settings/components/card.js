@@ -11,7 +11,7 @@
 import { html } from 'hybrids';
 
 export default {
-  inContent: false,
+  inContent: { value: false, reflect: true },
   render: () => html`
     <template
       layout="column gap:3 padding:3"

@@ -75,14 +75,14 @@ export default {
     observe: updateGlobalPause,
   },
   globalPauseRevokeAt: {
-    get: ({ options }) =>
+    value: ({ options }) =>
       store.ready(options) &&
       options.paused.find((p) => p.id === GLOBAL_PAUSE_ID)?.revokeAt,
     observe: (host, value) => {
       host.globalPause = value;
     },
   },
-  content: ({
+  render: ({
     options,
     session,
     devMode,

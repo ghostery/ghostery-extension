@@ -84,7 +84,7 @@ export default {
       })),
     ].filter((item) => item.id.includes(query));
   },
-  content: ({ websites, query }) => html`
+  render: ({ websites, query }) => html`
     <template layout="contents">
       <gh-settings-page-layout layout="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">

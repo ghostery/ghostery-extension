@@ -29,7 +29,7 @@ async function updateOptions(host, event) {
 }
 
 mount(document.body, {
-  content: () => html`
+  render: () => html`
     <ui-onboarding
       platform="${__PLATFORM__}"
       onsuccess="${updateOptions}"

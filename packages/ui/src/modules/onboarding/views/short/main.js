@@ -21,7 +21,7 @@ const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghoster
 export default define({
   [router.connect]: { stack: [Privacy, OutroSkip] },
   tag: 'ui-onboarding-short-main-view',
-  content: () => html`
+  render: () => html`
     <template layout="grow column gap">
       <ui-onboarding-card>
         <div layout="column gap:5">

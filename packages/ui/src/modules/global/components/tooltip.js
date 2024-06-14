@@ -35,7 +35,7 @@ function toggle(value) {
 
 export default {
   autohide: 2,
-  wrap: false,
+  wrap: { value: false, reflect: true },
   position: 'top', // top, bottom
   delay: 1,
   inline: false,

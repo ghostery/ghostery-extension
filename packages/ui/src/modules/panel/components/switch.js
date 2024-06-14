@@ -4,7 +4,7 @@ import SwitchItem from './switch-item.js';
 
 export default {
   height: {
-    value: undefined,
+    value: 0,
     observe(host, value, lastValue) {
       if (lastValue) {
         host.style.height = `${lastValue}px`;
@@ -26,7 +26,7 @@ export default {
   },
   items: children(SwitchItem),
   active: {
-    get: ({ items }) => items.find((item) => item.active),
+    value: ({ items }) => items.find((item) => item.active),
     observe(host) {
       requestAnimationFrame(() => {
         host.height = host.clientHeight;

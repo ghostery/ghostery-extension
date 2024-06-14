@@ -64,7 +64,7 @@ function simulateClickOnEnter(host, event) {
 }
 
 export default {
-  paused: false,
+  paused: { value: false, reflect: true },
   pauseType: 1,
   pauseList: false,
   render: ({ paused, pauseType, pauseList }) => html`

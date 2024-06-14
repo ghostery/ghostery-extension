@@ -15,7 +15,7 @@ import { openTabWithUrl } from '/utils/tabs.js';
 export default {
   icon: '',
   href: '',
-  type: '', // warning
+  type: { value: '', reflect: true }, // warning
   render: ({ icon, href }) => html`
     <template layout="block">
       <ui-action>

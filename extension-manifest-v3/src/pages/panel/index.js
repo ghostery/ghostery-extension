@@ -29,7 +29,7 @@ define.from(
 // Mount the app
 mount(document.body, {
   stack: router([Home]),
-  content: ({ stack }) => html`
+  render: ({ stack }) => html`
     <template layout="row width:full:350px">${stack}</template>
   `,
 });

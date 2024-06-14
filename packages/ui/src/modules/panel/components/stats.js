@@ -38,22 +38,20 @@ export default {
         {},
       ),
     ),
-  trackers: {
-    set: (host, trackers) =>
-      trackers &&
-      Object.entries(
-        trackers.reduce(
-          (categories, tracker) => ({
-            ...categories,
-            [tracker.category]: [
-              ...(categories[tracker.category] || []),
-              tracker,
-            ],
-          }),
-          {},
-        ),
+  trackers: (host, trackers) =>
+    trackers &&
+    Object.entries(
+      trackers.reduce(
+        (categories, tracker) => ({
+          ...categories,
+          [tracker.category]: [
+            ...(categories[tracker.category] || []),
+            tracker,
+          ],
+        }),
+        {},
       ),
-  },
+    ),
   paused: false,
   domain: '',
   wtmLink: ({ domain }) =>

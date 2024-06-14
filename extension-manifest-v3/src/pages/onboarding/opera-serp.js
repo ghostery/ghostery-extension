@@ -52,7 +52,7 @@ async function ignore() {
 }
 
 mount(document.body, {
-  content: () => html`
+  render: () => html`
     <ui-onboarding-serp
       onenable="${enable}"
       onignore="${ignore}"

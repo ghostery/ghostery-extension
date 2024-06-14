@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  type: '',
+  type: { value: '', reflect: true },
   render: ({ type }) => html`
     <template layout="column padding:3">
       <div class="${{ [type]: type }}">
@@ -20,7 +20,7 @@ export default {
       </div>
     </template>
   `.css`
-    :host { 
+    :host {
       background: var(--ui-color-white);
       border-radius: 16px;
       box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);

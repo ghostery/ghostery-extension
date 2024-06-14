@@ -528,6 +528,6 @@ const icons = {
   'zoom-in': html`
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13 13L9.66672 9.66667M10.7778 6.88889C10.7778 9.03667 9.03667 10.7778 6.88889 10.7778C4.74112 10.7778 3 9.03667 3 6.88889C3 4.74112 4.74112 3 6.88889 3C9.03667 3 10.7778 4.74112 10.7778 6.88889Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
+    </svg>
   `,
  };

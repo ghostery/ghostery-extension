@@ -5,7 +5,7 @@ export default {
   src: '',
   title: '',
   description: '',
-  content: ({ src, title, description }) => html`
+  render: ({ src, title, description }) => html`
     <template layout="block">
       <gh-settings-preview-dialog>
         <img src="${src}" />

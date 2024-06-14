@@ -12,9 +12,9 @@
 import { html } from 'hybrids';
 
 export default {
-  active: false,
-  grouped: false,
-  disabled: false,
+  active: { value: false, reflect: true },
+  grouped: { value: false, reflect: true },
+  disabled: { value: false, reflect: true },
   render: () => html`
     <template layout="grid height:4.5">
       <ui-action><slot></slot></ui-action>

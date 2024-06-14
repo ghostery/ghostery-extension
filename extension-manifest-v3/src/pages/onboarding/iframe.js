@@ -29,7 +29,7 @@ async function close(host, event) {
 
 mount(document.body, {
   stats: store(TabStats),
-  content: ({ stats }) => html`
+  render: ({ stats }) => html`
     <ui-onboarding-iframe
       trackers="${store.ready(stats) ? stats.trackers.length : 0}"
       onignore="${close}"

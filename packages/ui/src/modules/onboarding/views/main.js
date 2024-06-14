@@ -23,7 +23,7 @@ export default define({
   [router.connect]: { stack: [Skip, Privacy, OutroSkip] },
   tag: 'ui-onboarding-main-view',
   renew: false,
-  content: ({ renew }) => html`
+  render: ({ renew }) => html`
     <template layout="grow column gap">
       <ui-onboarding-card>
         <div layout="column gap:5">
