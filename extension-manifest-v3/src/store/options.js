@@ -29,7 +29,7 @@ export const SYNC_OPTIONS = [
   'trackerCount',
   'wtmSerpReport',
   'serpTrackingPrevention',
-  'experimentalCosmeticFilters',
+  'experimentalFilters',
   'panel',
 ];
 

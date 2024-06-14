@@ -267,7 +267,7 @@ export default {
               <div layout="column gap:2" layout@768px="row gap:5 grow">
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-s"
-                    >Experimental ad-blocking filters</ui-text
+                    >Experimental Ad-Blocking Filters</ui-text
                   >
                   <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                     Helps Ghostery fix broken pages faster. By activating you
