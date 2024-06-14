@@ -20,9 +20,8 @@ function updateShadow({ render }) {
 }
 
 export default {
-  _: {
-    get: () => {},
-    connect(host) {
+  render: {
+    connect: (host) => {
       const resizeObserver = new ResizeObserver(() => updateShadow(host));
       resizeObserver.observe(host);
 
@@ -30,50 +29,50 @@ export default {
         resizeObserver.disconnect();
       };
     },
+    value: () => html`
+      <template layout="row height::0 relative">
+        <div
+          id="scroll"
+          onscroll="${updateShadow}"
+          layout="grow overflow:x:hidden overflow:y:auto"
+        >
+          <slot onslotchange="${updateShadow}"></slot>
+        </div>
+        <div class="shadow top" layout="absolute width:full height:3"></div>
+        <div class="shadow bottom" layout="absolute width:full height:3"></div>
+      </template>
+    `.css`
+      /* set custom scrollbar */
+      #scroll {
+        scrollbar-width: thin;
+        scrollbar-color: var(--ui-color-gray-200) transparent;
+      }
+
+      .shadow {
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.1s, opacity 0.1s;
+      }
+
+      .shadow.show {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .shadow.top {
+        top: 0;
+        transform: rotate(180deg);
+      }
+
+      .shadow.bottom {
+        bottom: 0;
+      }
+    `,
   },
-  render: () => html`
-    <template layout="row height::0 relative">
-      <div
-        id="scroll"
-        onscroll="${updateShadow}"
-        layout="grow overflow:x:hidden overflow:y:auto"
-      >
-        <slot onslotchange="${updateShadow}"></slot>
-      </div>
-      <div class="shadow top" layout="absolute width:full height:3"></div>
-      <div class="shadow bottom" layout="absolute width:full height:3"></div>
-    </template>
-  `.css`
-    /* set custom scrollbar */
-    #scroll {
-      scrollbar-width: thin;
-      scrollbar-color: var(--ui-color-gray-200) transparent;
-    }
-
-    .shadow {
-      pointer-events: none;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.1) 100%
-      );
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.1s, opacity 0.1s;
-    }
-
-    .shadow.show {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .shadow.top {
-      top: 0;
-      transform: rotate(180deg);
-    }
-
-    .shadow.bottom {
-      bottom: 0;
-    }
-  `,
 };

@@ -96,7 +96,7 @@ export default {
   filters: ({ input }) => parseFilters(store.ready(input) ? input.text : ''),
   dnrErrors: undefined,
   errors: ({ filters, dnrErrors = [] }) => [...filters.errors, ...dnrErrors],
-  content: ({ input, filters, dnrRules, errors }) => html`
+  render: ({ input, filters, dnrRules, errors }) => html`
     <template layout="block">
       <div layout="column gap" translate="no">
         ${store.ready(input) &&

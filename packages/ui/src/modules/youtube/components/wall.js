@@ -12,7 +12,7 @@
 import { html, dispatch } from 'hybrids';
 
 export default {
-  content: () => html`
+  render: () => html`
     <template layout="block overflow">
       <ui-onboarding-card layout="padding:2">
         <div layout="row items:start gap:2">

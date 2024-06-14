@@ -3,6 +3,7 @@ import { html } from 'hybrids';
 export default {
   active: {
     value: false,
+    reflect: true,
     observe(host, value) {
       if (!value) {
         host.setAttribute('tabindex', '-1');

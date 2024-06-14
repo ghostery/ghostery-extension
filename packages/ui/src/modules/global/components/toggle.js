@@ -17,10 +17,10 @@ function toggle(host) {
 }
 
 export default {
-  value: false,
-  disabled: false,
-  noLabel: false,
-  type: '',
+  value: { value: false, reflect: true },
+  disabled: { value: false, reflect: true },
+  noLabel: { value: false, reflect: true },
+  type: { value: '', reflect: true },
   color: '',
   render: Object.assign(
     ({ disabled, value, color }) => html`

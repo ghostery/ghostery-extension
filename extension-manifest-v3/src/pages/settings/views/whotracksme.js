@@ -36,7 +36,7 @@ const PREVIEWS = {
 
 export default {
   options: store(Options),
-  content: ({ options }) => html`
+  render: ({ options }) => html`
     <template layout="contents">
       <gh-settings-page-layout layout="gap:4" layout@768px="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">

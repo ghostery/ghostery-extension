@@ -18,7 +18,7 @@ const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghoster
 
 export default define({
   tag: 'ui-onboarding-outro-short-skip-view',
-  content: () => html`
+  render: () => html`
     <template layout="block">
       <ui-onboarding-card>
         <section layout="block:center column gap:2">

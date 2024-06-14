@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  responsive: false,
+  responsive: { value: false, reflect: true },
   render: () => html`
     <template layout="column gap">
       <header layout="padding:1.5" layout@768px="padding:1.5:2">

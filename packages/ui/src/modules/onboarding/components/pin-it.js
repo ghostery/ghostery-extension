@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  platform: '',
+  platform: { value: '', reflect: true },
   render: ({ platform }) => html`
     <template
       layout="fixed top:3 right:3 layer:1000 row items:center gap:1.5 padding:2:3:2:2"

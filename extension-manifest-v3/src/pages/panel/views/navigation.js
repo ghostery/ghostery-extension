@@ -92,7 +92,7 @@ if (__PLATFORM__ !== 'safari') {
 
 export default {
   session: store(Session),
-  content: ({ session }) => html`
+  render: ({ session }) => html`
     <template layout="grid grow">
       <ui-panel-header>
         Menu

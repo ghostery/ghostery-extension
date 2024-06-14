@@ -14,7 +14,7 @@ import { define, html, msg, dispatch } from 'hybrids';
 export default define({
   tag: 'ui-onboarding-iframe',
   trackers: 0,
-  content: ({ trackers }) => html`
+  render: ({ trackers }) => html`
     <template layout="block">
       <ui-onboarding-card>
         <div layout="row items:start gap:2">

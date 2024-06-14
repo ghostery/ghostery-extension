@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  type: 'danger',
+  type: { value: 'danger', reflect: true },
   uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">

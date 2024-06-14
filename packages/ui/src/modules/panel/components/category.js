@@ -20,7 +20,7 @@ import * as labels from '../../../utils/labels.js';
 export default {
   name: '',
   count: 0,
-  actionable: false,
+  actionable: { value: false, reflect: true },
   render: ({ name, count }) => html`
     <template layout="row gap items:center">
       <div id="pill" layout="size:12px:6px"></div>

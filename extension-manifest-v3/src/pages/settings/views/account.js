@@ -60,7 +60,7 @@ function openGhosteryPage(url) {
 export default {
   options: store(Options),
   session: store(Session),
-  content: ({ options, session }) => html`
+  render: ({ options, session }) => html`
     <template layout="contents">
       <gh-settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">

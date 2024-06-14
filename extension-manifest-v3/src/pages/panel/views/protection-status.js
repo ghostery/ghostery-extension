@@ -29,7 +29,7 @@ export default {
   allowedOnSite: ({ stats, tracker }) =>
     store.ready(tracker.exception) &&
     tracker.exception.trustedDomains.includes(stats.hostname),
-  content: ({ stats, tracker, blocked, blockedOnSite, allowedOnSite }) => html`
+  render: ({ stats, tracker, blocked, blockedOnSite, allowedOnSite }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div

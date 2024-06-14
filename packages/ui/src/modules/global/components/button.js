@@ -12,8 +12,8 @@
 import { html } from 'hybrids';
 
 export default {
-  type: 'primary',
-  size: '',
+  type: { value: 'primary', reflect: true },
+  size: { value: '', reflect: true },
   disabled: {
     value: false,
     observe: (host, value) => {

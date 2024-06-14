@@ -92,7 +92,7 @@ export default {
   limits: undefined,
   query: '',
   filter: '',
-  content: ({
+  render: ({
     options,
     categories,
     category,

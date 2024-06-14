@@ -14,7 +14,7 @@ import * as labels from '../../../utils/labels.js';
 
 export default {
   name: '',
-  closed: false,
+  closed: { value: false, reflect: true },
   render: ({ name, closed }) => html`
     <template layout="column gap:1.5 padding:1:1.5">
       ${name &&

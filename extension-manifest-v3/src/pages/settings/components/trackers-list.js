@@ -19,8 +19,8 @@ export default {
   adjusted: 0,
   blocked: 0,
   trusted: 0,
-  open: false,
   blockedByDefault: false,
+  open: { value: false, reflect: true },
   render: ({
     name,
     description,

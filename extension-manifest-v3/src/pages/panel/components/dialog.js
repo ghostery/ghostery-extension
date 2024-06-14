@@ -30,6 +30,7 @@ function animateOnClose(host, event) {
 export default {
   open: {
     value: false,
+    reflect: true,
     connect(host, key) {
       const timeout = setTimeout(() => {
         host[key] = true;

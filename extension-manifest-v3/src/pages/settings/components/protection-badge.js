@@ -13,7 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   blocked: false,
-  content: ({ blocked }) => html`
+  render: ({ blocked }) => html`
     <template layout="block">
       ${blocked
         ? html`

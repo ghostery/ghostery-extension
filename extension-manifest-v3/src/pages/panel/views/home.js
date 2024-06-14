@@ -108,7 +108,7 @@ export default {
   globalPause: ({ options }) =>
     store.ready(options) &&
     options.paused.find(({ id }) => id === GLOBAL_PAUSE_ID),
-  content: ({ options, stats, notification, paused, globalPause }) => html`
+  render: ({ options, stats, notification, paused, globalPause }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&
       html`

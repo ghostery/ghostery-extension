@@ -15,7 +15,7 @@ import disabled from '../illustrations/disabled.js';
 
 export default define({
   tag: 'ui-onboarding-outro-skip-view',
-  content: () => html`
+  render: () => html`
     <template layout="block">
       <ui-onboarding-card>
         <section layout="block:center column gap:2">

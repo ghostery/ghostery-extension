@@ -16,7 +16,7 @@ import OutroSkip from './outro-skip.js';
 export default define({
   [router.connect]: { dialog: true },
   tag: 'ui-onboarding-skip-dialog',
-  content: () => html`
+  render: () => html`
     <template layout="block">
       <ui-onboarding-dialog>
         <ui-text slot="header" type="headline-m">

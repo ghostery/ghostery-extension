@@ -28,7 +28,7 @@ const slide = {
 };
 
 export default {
-  type: '',
+  type: { value: '', reflect: true },
   icon: 'alert-info',
   autoclose: {
     value: 0,

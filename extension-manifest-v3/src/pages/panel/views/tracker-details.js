@@ -56,7 +56,7 @@ export default {
   paused: ({ options, stats }) =>
     store.ready(options, stats) &&
     options.paused.find(({ id }) => id === stats.hostname),
-  content: ({ tracker, status, wtmUrl, paused, options }) => html`
+  render: ({ tracker, status, wtmUrl, paused, options }) => html`
     <template layout="column">
       <gh-panel-dialog>
         <div

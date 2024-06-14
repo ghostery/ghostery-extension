@@ -26,7 +26,7 @@ const PIN_EXTENSION_IMAGES = {
 export default define({
   tag: 'ui-onboarding-outro-success-view',
   platform: '',
-  content: ({ platform }) => html`
+  render: ({ platform }) => html`
     <template layout="column gap">
       <ui-onboarding-card>
         <section layout="block:center column gap:2">
