@@ -61,7 +61,7 @@ async function refreshIcon(tabId) {
   const inactive =
     isGlobalPaused(options) ||
     !options.terms ||
-    options.paused?.some(({ id }) => id === stats.hostname);
+    options.paused.some(({ id }) => id === stats.hostname);
 
   const data = {};
   if (options.trackerWheel && stats.trackers.length > 0) {

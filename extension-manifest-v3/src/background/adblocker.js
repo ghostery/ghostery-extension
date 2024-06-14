@@ -24,7 +24,7 @@ import asyncSetup from './utils/setup.js';
 import { updateTabStats } from './stats.js';
 
 let enabledEngines = [];
-let pausedHostnames = [];
+let pausedHostnames = new Set();
 
 const setup = asyncSetup([
   observe(null, (options) => {
@@ -39,7 +39,10 @@ const setup = asyncSetup([
       : [];
 
     // Set paused hostnames
-    pausedHostnames = options.paused.map(String);
+    pausedHostnames.clear();
+    for (const { id } of options.paused) {
+      pausedHostnames.add(id);
+    }
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
@@ -48,8 +51,8 @@ const setup = asyncSetup([
 
 function isPaused(hostname) {
   return (
-    pausedHostnames.includes(GLOBAL_PAUSE_ID) ||
-    pausedHostnames.includes(hostname.replace(/^www\./, ''))
+    pausedHostnames.has(GLOBAL_PAUSE_ID) ||
+    pausedHostnames.has(hostname.replace(/^www\./, ''))
   );
 }
 

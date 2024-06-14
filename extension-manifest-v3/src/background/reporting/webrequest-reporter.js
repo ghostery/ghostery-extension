@@ -32,7 +32,7 @@ if (__PLATFORM__ !== 'safari') {
   // Important to call it in a first tick as it assigns chrome. listeners
   webRequestPipeline.init();
 
-  let pausedHostnames = [];
+  let pausedHostnames = new Set();
   let isAntiTrackingEnabled = false;
 
   observe('blockTrackers', (blockTrackers) => {
@@ -40,7 +40,10 @@ if (__PLATFORM__ !== 'safari') {
   });
 
   observe('paused', (paused) => {
-    pausedHostnames = paused.map(({ id }) => id);
+    pausedHostnames.clear();
+    for (const { id } of paused) {
+      pausedHostnames.add(id);
+    }
   });
 
   webRequestReporter = new RequestReporter(config.request, {
@@ -55,10 +58,8 @@ if (__PLATFORM__ !== 'safari') {
       }
 
       if (
-        pausedHostnames.includes(GLOBAL_PAUSE_ID) ||
-        pausedHostnames.includes(
-          state.tabUrlParts.hostname.replace(/^www\./, ''),
-        )
+        pausedHostnames.has(GLOBAL_PAUSE_ID) ||
+        pausedHostnames.has(state.tabUrlParts.hostname.replace(/^www\./, ''))
       ) {
         return true;
       }
