@@ -35,7 +35,7 @@ buildVersion=$(cat ./xcode/Ghostery.xcodeproj/project.pbxproj | sed -n -e 's/^.*
 
 # Commit changes
 git add ../package-lock.json .
-git commit -m "Release v$version ($buildVersion)"
+git commit -m "Release v$version-$buildVersion"
 
 # Open Xcode
 xed xcode
