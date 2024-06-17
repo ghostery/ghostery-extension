@@ -106,7 +106,7 @@ export default {
         html`
           <section layout="column gap:4" layout@768px="gap:5">
             <div layout="column gap" layout@992px="margin:bottom">
-              <ui-text type="headline-l" mobile-type="headline-m">
+              <ui-text type="headline-m">
                 Tracker Database
               </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="gray-600">

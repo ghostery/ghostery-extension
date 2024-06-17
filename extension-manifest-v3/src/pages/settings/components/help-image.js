@@ -16,8 +16,8 @@ export default {
   render: (host) =>
     html`
       <template
-        layout="row center relative overflow size:12:8 shrink:0"
-        layout@768px="size:14:9"
+        layout="row center relative overflow size:10:7 shrink:0"
+        layout@768px="size:12:8"
       >
         ${host.static
           ? html`<slot></slot>`

@@ -40,9 +40,7 @@ export default {
     <template layout="contents">
       <gh-settings-page-layout layout="gap:4" layout@768px="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
-          <ui-text type="headline-l" mobile-type="headline-m" translate="no">
-            WhoTracks.Me
-          </ui-text>
+          <ui-text type="headline-m" translate="no">WhoTracks.Me</ui-text>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
             WhoTracks.Me, operated by Ghostery, is an integral part of
             Ghostery’s AI anti-tracking technology. It is a comprehensive global
@@ -58,7 +56,7 @@ export default {
         ${store.ready(options) &&
         html`
           <section layout="column gap:4">
-            <div layout="row gap:2" layout@768px="gap:4">
+            <div layout="row gap:2" layout@768px="gap:3">
               <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
                 <gh-settings-help-image>
                   <img
@@ -67,10 +65,10 @@ export default {
                   />
                 </gh-settings-help-image>
               </a>
-              <div layout="column gap:2" layout@768px="row gap:5 grow">
+              <div layout="column gap" layout@768px="row gap:2 grow">
                 <div layout="column grow gap:0.5">
-                  <ui-text type="headline-s">WhoTracks.Me Wheel</ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  <ui-text type="headline-xs">WhoTracks.Me Wheel</ui-text>
+                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
                     Replaces the Ghostery icon in the browser toolbar with the
                     tracker wheel.
                   </ui-text>
@@ -83,7 +81,7 @@ export default {
             </div>
             ${Options.trackerCount &&
             html`
-              <div layout="row gap:2" layout@768px="gap:4">
+              <div layout="row gap:2" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
                   <gh-settings-help-image>
                     <img
@@ -92,12 +90,12 @@ export default {
                     />
                   </gh-settings-help-image>
                 </a>
-                <div layout="column gap:2" layout@768px="row gap:5 grow">
+                <div layout="column gap" layout@768px="row gap:2 grow">
                   <div layout="column grow gap:0.5">
-                    <ui-text type="headline-s">Trackers Count</ui-text>
+                    <ui-text type="headline-xs">Trackers Count</ui-text>
                     <ui-text
-                      type="body-l"
-                      mobile-type="body-m"
+                      type="body-m"
+                      mobile-type="body-s"
                       color="gray-600"
                     >
                       Displays the tracker count on the Ghostery icon in the
@@ -111,7 +109,7 @@ export default {
                 </div>
               </div>
             `}
-            <div layout="row gap:2" layout@768px="gap:4">
+            <div layout="row gap:2" layout@768px="gap:3">
               <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
                 <gh-settings-help-image>
                   <img
@@ -120,13 +118,13 @@ export default {
                   />
                 </gh-settings-help-image>
               </a>
-              <div layout="column gap:2" layout@768px="row gap:5 grow">
+              <div layout="column gap" layout@768px="row gap:2 grow">
                 <div layout="column grow gap:0.5">
-                  <ui-text type="headline-s">Trackers Preview</ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+                  <ui-text type="headline-xs">Trackers Preview</ui-text>
+                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
                     Shows the tracker preview beside search results.
                   </ui-text>
-                  <ui-text type="label-m" color="gray-600" underline>
+                  <ui-text type="label-s" color="gray-600" underline>
                     <a
                       href="https://www.ghostery.com/blog/introducing-wtm-serp-report"
                       target="_blank"

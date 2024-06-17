@@ -1,4 +1,4 @@
-import { html, store, router, msg } from 'hybrids';
+import { html, store } from 'hybrids';
 
 import { openTabWithUrl } from '/utils/tabs.js';
 
@@ -12,15 +12,6 @@ import {
 } from '/utils/api.js';
 
 import assets from '../assets/index.js';
-import Preview from './preview.js';
-
-const PREVIEWS = {
-  'sync': {
-    src: assets['sync'],
-    title: msg`Settings Sync`,
-    description: msg`Save and synchronize your custom settings between browsers and devices.`,
-  },
-};
 
 function openGhosteryPage(url) {
   return async () => {
@@ -65,9 +56,7 @@ export default {
       <gh-settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="column gap" layout@992px="margin:bottom">
-            <ui-text type="headline-l" mobile-type="headline-m">
-              My Account
-            </ui-text>
+            <ui-text type="headline-m">My Account</ui-text>
           </div>
           <gh-settings-card>
             <img
@@ -86,7 +75,7 @@ export default {
                       >You are signed in as:</ui-text
                     >
                     <div layout="row items:center gap:2">
-                      <ui-text type="headline-m"> ${session.name} </ui-text>
+                      <ui-text type="headline-s"> ${session.name} </ui-text>
                       ${session.contributor &&
                       html`<gh-settings-badge type="primary" uppercase>
                         Contributor
@@ -106,8 +95,12 @@ export default {
                 `
               : html`
                   <div>
-                    <ui-text type="headline-m">Join Ghostery</ui-text>
-                    <ui-text color="gray-500">
+                    <ui-text type="headline-s">Join Ghostery</ui-text>
+                    <ui-text
+                      color="gray-500"
+                      type="body-m"
+                      mobile-type="body-s"
+                    >
                       Sign in or create account on ghostery.com
                     </ui-text>
                   </div>
@@ -127,36 +120,36 @@ export default {
                   </div>
                 `)}
           </gh-settings-card>
-
-          <div layout="column gap:4" layout@768px="gap:5">
-            <div layout="row items:start gap:2" layout@768px="gap:5">
-              <a href="${router.url(Preview, PREVIEWS['sync'])}">
-                <gh-settings-help-image>
-                  <img src="${assets.sync_small}" alt="Sync" />
-                </gh-settings-help-image>
-              </a>
-              <div
-                layout="column gap:2"
-                layout@768px="row items:center gap:5 grow"
-              >
+          ${store.ready(session) &&
+          html`
+            <div
+              layout="column gap:4"
+              layout@768px="gap:5"
+              style="${{ opacity: !session.user ? 0.5 : undefined }}"
+            >
+              <div layout="row items:start gap:2">
                 <div layout="column grow gap:0.5">
-                  <ui-text type="headline-s">Settings Sync</ui-text>
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                    Save and synchronize your custom settings between browsers
+                  <div layout="row gap items:center">
+                    <ui-icon
+                      name="websites"
+                      color="gray-600"
+                      layout="size:2"
+                    ></ui-icon>
+                    <ui-text type="headline-xs">Settings Sync</ui-text>
+                  </div>
+                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                    Saves and synchronizes your custom settings between browsers
                     and devices.
                   </ui-text>
                 </div>
-                ${store.ready(session) &&
-                html`
-                  <ui-toggle
-                    disabled="${!session.user}"
-                    value="${session.user && options.sync}"
-                    onchange="${session.user && html.set(options, 'sync')}"
-                  ></ui-toggle>
-                `}
+                <ui-toggle
+                  disabled="${!session.user}"
+                  value="${session.user && options.sync}"
+                  onchange="${session.user && html.set(options, 'sync')}"
+                ></ui-toggle>
               </div>
             </div>
-          </div>
+          `}
         </section>
       </gh-settings-page-layout>
     </template>
