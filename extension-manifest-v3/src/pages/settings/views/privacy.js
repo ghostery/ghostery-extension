@@ -168,7 +168,10 @@ export default {
               </div>
             </div>
             <ui-line></ui-line>
-            <div layout="row items:start gap:2">
+            <div
+              layout="row items:start gap:2"
+              style="${{ opacity: globalPause ? 0.5 : undefined }}"
+            >
               <div layout="column grow gap:0.5">
                 <div layout="row gap items:center">
                   <ui-icon name="globe" color="gray-600"></ui-icon>
@@ -182,6 +185,7 @@ export default {
                 </ui-text>
               </div>
               <ui-toggle
+                disabled="${globalPause}"
                 value="${options.serpTrackingPrevention}"
                 onchange="${html.set(options, 'serpTrackingPrevention')}"
               ></ui-toggle>
