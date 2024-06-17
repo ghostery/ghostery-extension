@@ -46,13 +46,16 @@ let promise = Promise.all([
 export function isCategoryBlockedByDefault(categoryId) {
   switch (categoryId) {
     case 'advertising':
-    case 'pornvertising':
-    case 'email':
     case 'site_analytics':
-    case 'cdn':
     case 'hosting':
+    case 'customer_interaction':
+    case 'audio_video_player':
+    case 'cdn':
+    case 'email':
     case 'extensions':
     case 'misc':
+    case 'pornvertising':
+    case 'social_media':
     case 'unidentified':
     case undefined:
       return true;
