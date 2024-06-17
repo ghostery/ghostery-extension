@@ -476,7 +476,7 @@
     "message": "Uniemożliwiaj Google przekierowywanie łączy do wyników wyszukiwania przez ich serwery zamiast bezpośredniego łączenia do stron."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
-    "message": "Chroń swoje dane przed śledzeniem w sieci dzięki technologii wspomaganej przez SI"
+    "message": "Chroni twoje dane przed śledzeniem w sieci dzięki technologii wspomaganej przez AI."
   },
   "privacy_policy": {
     "message": "polityka prywatności"
@@ -533,7 +533,7 @@
     "message": "Ustaw preferencje blokowania"
   },
   "settings_sync": {
-    "message": "Ustawienia synchronizacji"
+    "message": "Synchronizacja ustawień"
   },
   "setup_successful": {
     "message": "Ustawienie zakończone sukcesem"
