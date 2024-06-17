@@ -85,17 +85,11 @@
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Rejeita automaticamente os avisos de consentimento de cookies."
   },
-  "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "Rejeita automaticamente os avisos de consentimento de cookies."
-  },
   "back": {
     "message": "Voltar"
   },
   "become_a_contributor": {
     "message": "Seja um colaborador"
-  },
-  "block_all": {
-    "message": "Bloquear tudo"
   },
   "block_all__recommended_": {
     "message": "Bloquear tudo (recomendado)"
@@ -131,9 +125,6 @@
   },
   "collapse": {
     "message": "Recolher"
-  },
-  "coming_soon": {
-    "message": "Em breve!"
   },
   "comments": {
     "message": "Comentários",
@@ -205,9 +196,6 @@
   "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
     "message": "Elimina anúncios em sites para navegação segura e rápida."
   },
-  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "Elimina anúncios em sites para navegação segura e rápida."
-  },
   "email": {
     "message": "Email",
     "description": "Tracker category name"
@@ -248,6 +236,9 @@
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Expanda o bloqueio de anúncios do Ghostery para mecanismos de pesquisa em algumas etapas fáceis."
+  },
+  "experimental_ad_blocking_filters": {
+    "message": "Experimental Ad-Blocking Filters"
   },
   "extensions": {
     "message": "Extensões",
@@ -330,6 +321,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ajude o Ghostery a lutar por uma web onde a privacidade é um direito humano básico."
+  },
+  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
+    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Eai, você curte Ghostery e quer apoiar nosso trabalho?"
@@ -469,9 +463,6 @@
   "pin_it_here": {
     "message": "Prenda-o aqui"
   },
-  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Evite que o Google redirecione links de resultados de pesquisa por meio de seus servidores, em vez de vincular diretamente às páginas."
-  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Evite que o Google redirecione links de resultados de pesquisa por meio de seus servidores, em vez de vincular diretamente às páginas."
   },
@@ -511,7 +502,7 @@
   "save": {
     "message": "Salvar"
   },
-  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "Salve e sincronize suas configurações personalizadas entre navegadores e dispositivos."
   },
   "search_engine_redirect_protection": {

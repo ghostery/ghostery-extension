@@ -85,17 +85,11 @@
   "automatically_rejects_cookie_consent_notices_": {
     "message": "쿠키 동의 알림을 자동 거부합니다."
   },
-  "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "쿠키 동의 알림을 자동 거부합니다."
-  },
   "back": {
     "message": "뒤로"
   },
   "become_a_contributor": {
     "message": "기부자가 되세요."
-  },
-  "block_all": {
-    "message": "모두 차단"
   },
   "block_all__recommended_": {
     "message": "모두 차단(권장)"
@@ -131,9 +125,6 @@
   },
   "collapse": {
     "message": "접기"
-  },
-  "coming_soon": {
-    "message": "곧 제공됩니다!"
   },
   "comments": {
     "message": "댓글",
@@ -205,9 +196,6 @@
   "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
     "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
   },
-  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "웹사이트에서 광고를 제거하여 안전하고 빠른 브라우징 환경을 만듭니다."
-  },
   "email": {
     "message": "이메일 ",
     "description": "Tracker category name"
@@ -248,6 +236,9 @@
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "간단히 몇 단계만 거치면 검색 엔진에까지 Ghostery 광고 차단을 확대 적용할 수 있습니다."
+  },
+  "experimental_ad_blocking_filters": {
+    "message": "Experimental Ad-Blocking Filters"
   },
   "extensions": {
     "message": "확장",
@@ -330,6 +321,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸울 힘을 주세요."
+  },
+  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
+    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ghostery가 마음에 드셔서 지지해주고 싶으신가요?"
@@ -469,9 +463,6 @@
   "pin_it_here": {
     "message": "여기 고정"
   },
-  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Google이 페이지로 직접 링크하지 않고, 자체 서버를 통해 검색결과 링크를 리디렉션하지 못하도록 보호합니다."
-  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Google이 페이지로 직접 링크하지 않고, 자체 서버를 통해 검색결과 링크를 리디렉션하지 못하도록 보호합니다."
   },
@@ -511,7 +502,7 @@
   "save": {
     "message": "저장"
   },
-  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "맞춤 설정을 저장하여 여러 브라우저 및 장치 간에 동기화합니다."
   },
   "search_engine_redirect_protection": {
