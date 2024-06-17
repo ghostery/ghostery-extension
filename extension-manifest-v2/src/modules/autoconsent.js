@@ -91,10 +91,10 @@ async function evalCode(code, id, tabId, frameId) {
 			frameId,
 			code: `(${injectScript.toString()})('${encodeURIComponent(code)}')`,
 		}, (result) => {
-			resolve([{
+			resolve({
 				result,
 				frameId,
-			}]);
+			});
 		});
 	});
 
