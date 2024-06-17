@@ -238,7 +238,7 @@
     "message": "只需幾個簡單步驟，即可將 Ghostery 廣告攔截功能擴展到搜尋引擎。"
   },
   "experimental_ad_blocking_filters": {
-    "message": "Experimental Ad-Blocking Filters"
+    "message": "實驗性廣告阻擋過濾器"
   },
   "extensions": {
     "message": "擴展",
@@ -323,7 +323,7 @@
     "message": "協助 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
   },
   "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
+    "message": "幫助 Ghostery 更快修復損壞的頁面。通過啟用，您可以測試實驗性過濾器並通過反饋支持我們。請發送郵件至 support@ghostery.com，描述啟用後您的體驗有何改變。您的反饋對我們非常重要，能夠幫助我們改進服務，提供更好的用戶體驗。感謝您的支持和參與！"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜歡使用 Ghostery 並願意鼓勵我們的工作嗎？"

@@ -238,7 +238,7 @@
     "message": "간단히 몇 단계만 거치면 검색 엔진에까지 Ghostery 광고 차단을 확대 적용할 수 있습니다."
   },
   "experimental_ad_blocking_filters": {
-    "message": "Experimental Ad-Blocking Filters"
+    "message": "실험적 광고 차단 필터"
   },
   "extensions": {
     "message": "확장",
@@ -323,7 +323,7 @@
     "message": "개인정보 보호가 기본 인권인 웹을 위해 Ghostery가 싸울 힘을 주세요."
   },
   "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
+    "message": "Ghostery가 페이지 오류를 더 빠르게 수정할 수 있도록 도와줍니다. 활성화하면 실험적인 필터를 테스트하고 피드백으로 저희를 지원할 수 있습니다. 활성화 후 경험이 어떻게 변했는지 자세히 설명하여 support@ghostery.com으로 메시지를 보내주세요."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ghostery가 마음에 드셔서 지지해주고 싶으신가요?"

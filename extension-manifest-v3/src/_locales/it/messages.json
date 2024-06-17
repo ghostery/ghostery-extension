@@ -238,7 +238,7 @@
     "message": "Estendi il blocco delle pubblicità di Ghostery anche ai motori di ricerca in pochi semplici passi."
   },
   "experimental_ad_blocking_filters": {
-    "message": "Experimental Ad-Blocking Filters"
+    "message": "Filtri Sperimentali Blocca Pubblicità"
   },
   "extensions": {
     "message": "Estensioni",
@@ -323,7 +323,7 @@
     "message": "Aiuta Ghostery a lottare per un web dove la privacy è un diritto umano fondamentale."
   },
   "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
+    "message": "Aiuta Ghostery a risolvere le pagine rotte più velocemente. Attivando, puoi testare filtri sperimentali e supportarci con feedback. Invia un messaggio a support@ghostery.com descrivendo come è cambiata la tua esperienza dopo l'attivazione."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ti piace Ghostery e vorresti supportare il nostro lavoro?"
