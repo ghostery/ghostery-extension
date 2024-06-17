@@ -19,9 +19,7 @@ export default {
       layout@992px="padding:6:3 area::2"
       layout@1280px="padding:8:3"
     >
-      <slot
-        layout::slotted(*)@1280px="width:full::800px self:center:start"
-      ></slot>
+      <slot layout::slotted(*)="width:full::760px self:center:start"></slot>
     </template>
   `,
 };

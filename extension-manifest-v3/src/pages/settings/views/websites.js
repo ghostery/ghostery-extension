@@ -89,9 +89,7 @@ export default {
       <gh-settings-page-layout layout="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <div layout="row items:center content:space-between">
-            <ui-text type="headline-l" mobile-type="headline-m">
-              Websites
-            </ui-text>
+            <ui-text type="headline-m">Websites</ui-text>
           </div>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
             All websites with adjusted protection status will be listed here.
