@@ -69,7 +69,7 @@ export default {
       <gh-settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
         html`
-          <section layout="column gap:4" layout@768px="gap:4">
+          <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-m"> Privacy protection </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -114,102 +114,108 @@ export default {
             </div>
             <ui-line></ui-line>
             <div
-              layout="column gap:3"
+              layout="column gap:4"
               style="${{ opacity: globalPause ? 0.5 : undefined }}"
             >
+              <div layout="column gap:3">
+                <div layout="row items:start gap:2">
+                  <div layout="column gap:0.5 grow">
+                    <div layout="row gap items:center">
+                      <ui-icon name="ads" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">Ad-Blocking</ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Eliminates ads on websites for safe and fast browsing.
+                    </ui-text>
+                  </div>
+                  <ui-toggle
+                    disabled="${globalPause}"
+                    value="${options.blockAds}"
+                    onchange="${html.set(options, 'blockAds')}"
+                  ></ui-toggle>
+                </div>
+                <div layout="row items:start gap:2">
+                  <div layout="column grow gap:0.5">
+                    <div layout="row gap items:center">
+                      <ui-icon name="tracking" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">Anti-Tracking</ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Prevents various tracking techniques using AI-driven
+                      technology.
+                    </ui-text>
+                  </div>
+                  <ui-toggle
+                    disabled="${globalPause}"
+                    value="${options.blockTrackers}"
+                    onchange="${html.set(options, 'blockTrackers')}"
+                  ></ui-toggle>
+                </div>
+                <div layout="row items:start gap:2">
+                  <div layout="column grow gap:0.5">
+                    <div layout="row gap items:center">
+                      <ui-icon name="autoconsent" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">Never-Consent</ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Automatically rejects cookie consent notices.
+                    </ui-text>
+                  </div>
+                  <ui-toggle
+                    disabled="${globalPause}"
+                    value="${options.blockAnnoyances}"
+                    onchange="${toggleNeverConsent}"
+                  ></ui-toggle>
+                </div>
+              </div>
+              <ui-line></ui-line>
               <div layout="row items:start gap:2">
-                <div layout="column gap:0.5 grow">
+                <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon name="ads" color="gray-600"></ui-icon>
-                    <ui-text type="headline-xs">Ad-Blocking</ui-text>
+                    <ui-icon name="globe" color="gray-600"></ui-icon>
+                    <ui-text type="headline-xs">
+                      Search Engine Redirect Protection
+                    </ui-text>
                   </div>
                   <ui-text type="body-m" mobile-type="body-s" color="gray-600">
-                    Eliminates ads on websites for safe and fast browsing.
+                    Prevents Google from redirecting search result links through
+                    their servers instead of linking directly to pages.
                   </ui-text>
                 </div>
                 <ui-toggle
                   disabled="${globalPause}"
-                  value="${options.blockAds}"
-                  onchange="${html.set(options, 'blockAds')}"
+                  value="${options.serpTrackingPrevention}"
+                  onchange="${html.set(options, 'serpTrackingPrevention')}"
                 ></ui-toggle>
               </div>
+              <ui-line></ui-line>
               <div layout="row items:start gap:2">
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon name="tracking" color="gray-600"></ui-icon>
-                    <ui-text type="headline-xs">Anti-Tracking</ui-text>
+                    <ui-icon name="dots" color="gray-600"></ui-icon>
+                    <ui-text type="headline-xs">
+                      Experimental Ad-Blocking Filters
+                    </ui-text>
                   </div>
                   <ui-text type="body-m" mobile-type="body-s" color="gray-600">
-                    Prevents various tracking techniques using AI-driven
-                    technology.
-                  </ui-text>
-                </div>
-                <ui-toggle
-                  disabled="${globalPause}"
-                  value="${options.blockTrackers}"
-                  onchange="${html.set(options, 'blockTrackers')}"
-                ></ui-toggle>
-              </div>
-              <div layout="row items:start gap:2">
-                <div layout="column grow gap:0.5">
-                  <div layout="row gap items:center">
-                    <ui-icon name="autoconsent" color="gray-600"></ui-icon>
-                    <ui-text type="headline-xs">Never-Consent</ui-text>
-                  </div>
-                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
-                    Automatically rejects cookie consent notices.
-                  </ui-text>
-                </div>
-                <ui-toggle
-                  disabled="${globalPause}"
-                  value="${options.blockAnnoyances}"
-                  onchange="${toggleNeverConsent}"
-                ></ui-toggle>
-              </div>
-            </div>
-            <ui-line></ui-line>
-            <div
-              layout="row items:start gap:2"
-              style="${{ opacity: globalPause ? 0.5 : undefined }}"
-            >
-              <div layout="column grow gap:0.5">
-                <div layout="row gap items:center">
-                  <ui-icon name="globe" color="gray-600"></ui-icon>
-                  <ui-text type="headline-xs">
-                    Search Engine Redirect Protection
-                  </ui-text>
-                </div>
-                <ui-text type="body-m" mobile-type="body-s" color="gray-600">
-                  Prevents Google from redirecting search result links through
-                  their servers instead of linking directly to pages.
-                </ui-text>
-              </div>
-              <ui-toggle
-                disabled="${globalPause}"
-                value="${options.serpTrackingPrevention}"
-                onchange="${html.set(options, 'serpTrackingPrevention')}"
-              ></ui-toggle>
-            </div>
-            <div layout="row items:start gap:2" layout@768px="gap:4">
-              <gh-settings-help-image static>
-                <ui-icon
-                  name="alert-info"
-                  color="gray-400"
-                  layout="size:5"
-                ></ui-icon>
-              </gh-settings-help-image>
-              <div layout="column gap:2" layout@768px="row gap:5 grow">
-                <div layout="column grow gap:0.5">
-                  <ui-text type="headline-s"
-                    >Experimental Ad-Blocking Filters</ui-text
-                  >
-                  <ui-text type="body-l" mobile-type="body-m" color="gray-600">
                     Helps Ghostery fix broken pages faster. By activating you
                     can test experimental filters and support us with feedback.
                     Please send a message to support@ghostery.com describing how
                     your experience changed after enabling.
                   </ui-text>
-                  <ui-text type="label-m" color="gray-600" underline>
+                  <ui-text type="label-s" color="gray-600" underline>
                     <a
                       href="https://github.com/ghostery/broken-page-reports/blob/main/filters/experimental.txt"
                       target="_blank"
@@ -220,6 +226,7 @@ export default {
                   </ui-text>
                 </div>
                 <ui-toggle
+                  disabled="${globalPause}"
                   value="${options.experimentalFilters}"
                   onchange="${html.set(options, 'experimentalFilters')}"
                 ></ui-toggle>
