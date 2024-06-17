@@ -29,6 +29,7 @@ export const SYNC_OPTIONS = [
   'trackerCount',
   'wtmSerpReport',
   'serpTrackingPrevention',
+  'experimentalFilters',
   'panel',
 ];
 
@@ -51,6 +52,9 @@ const Options = {
   // SERP
   wtmSerpReport: true,
   serpTrackingPrevention: true,
+
+  // Optional
+  experimentalFilters: false,
 
   // Onboarding
   terms: false,

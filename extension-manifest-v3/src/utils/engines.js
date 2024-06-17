@@ -18,6 +18,7 @@ import {
   Config,
 } from '@cliqz/adblocker';
 
+import { observe } from '../store/options.js';
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 
@@ -25,11 +26,7 @@ export const CUSTOM_ENGINE = 'custom-filters';
 export const FIXES_ENGINE = 'fixes';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
-const CDN_HOSTNAME = chrome.runtime.getManifest().debug
-  ? 'staging-cdn.ghostery.com'
-  : 'cdn.ghostery.com';
-
-const checkUserAgent = (pattern) => navigator.userAgent.indexOf(pattern) !== -1;
+const engines = new Map();
 
 const ENV = new Map([
   ['ext_ghostery', true],
@@ -38,7 +35,19 @@ const ENV = new Map([
   ['env_chromium', checkUserAgent('Chrome')],
   ['env_edge', checkUserAgent('Edg')],
   ['env_mobile', checkUserAgent('Mobile')],
+  ['env_experimental', false],
 ]);
+
+observe('experimentalFilters', (experimentalFilters) => {
+  ENV.set('env_experimental', experimentalFilters);
+  for (const engine of engines.values()) {
+    engine.updateEnv(ENV);
+  }
+});
+
+function checkUserAgent(pattern) {
+  return navigator.userAgent.indexOf(pattern) !== -1;
+}
 
 function deserializeEngine(engineBytes) {
   const engine = FiltersEngine.deserialize(engineBytes);
@@ -54,8 +63,6 @@ function parseFilters(filters) {
   engine.updateEnv(ENV);
   return engine;
 }
-
-const engines = new Map();
 
 function loadFromMemory(name) {
   return engines.get(name);
@@ -167,6 +174,10 @@ function check(response) {
 
   return response;
 }
+
+const CDN_HOSTNAME = chrome.runtime.getManifest().debug
+  ? 'staging-cdn.ghostery.com'
+  : 'cdn.ghostery.com';
 
 async function update(name) {
   if (name === CUSTOM_ENGINE) return;
