@@ -40,6 +40,10 @@ const ENV = new Map([
 
 observe('experimentalFilters', (experimentalFilters) => {
   ENV.set('env_experimental', experimentalFilters);
+
+  // As engines on the server might have new filters, we need to update them
+  updateAll().catch(() => null);
+
   for (const engine of engines.values()) {
     engine.updateEnv(ENV);
   }
