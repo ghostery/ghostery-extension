@@ -55,7 +55,7 @@ async function initialize(msg, tab, frameId) {
 }
 
 async function evalCode(snippetId, id, tabId, frameId) {
-  const result = await chrome.scripting.executeScript({
+  const [result] = await chrome.scripting.executeScript({
     target: {
       tabId,
       frameIds: [frameId],
