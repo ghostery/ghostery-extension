@@ -97,6 +97,9 @@ export function getMetadata(request) {
   }
 
   if (matches.length === 0) {
+    // Blobs and data URLs don't have hostnames
+    if (!request.hostname) return null;
+
     exception = store.get(TrackerException, request.hostname);
 
     if (!store.ready(exception) && !request.blocked && !request.modified) {
