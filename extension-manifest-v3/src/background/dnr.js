@@ -14,6 +14,23 @@ import { TRACKERDB_ENGINE } from '/utils/engines.js';
 
 const PAUSE_RULE_PRIORITY = 10000000;
 
+const ALL_RESOURCE_TYPES = [
+  'main_frame',
+  'sub_frame',
+  'stylesheet',
+  'script',
+  'image',
+  'font',
+  'object',
+  'xmlhttprequest',
+  'ping',
+  'media',
+  'websocket',
+  'webtransport',
+  'webbundle',
+  'other',
+];
+
 if (__PLATFORM__ !== 'firefox') {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
@@ -73,7 +90,7 @@ if (__PLATFORM__ !== 'firefox') {
     if (paused.length) {
       const hostnames = paused.map(({ id }) => id);
 
-      chrome.declarativeNetRequest.updateDynamicRules({
+      await chrome.declarativeNetRequest.updateDynamicRules({
         addRules:
           __PLATFORM__ === 'safari'
             ? [
@@ -94,26 +111,20 @@ if (__PLATFORM__ !== 'firefox') {
                   action: { type: 'allow' },
                   condition: {
                     initiatorDomains: hostnames,
-                    resourceTypes: [
-                      'main_frame',
-                      'sub_frame',
-                      'stylesheet',
-                      'script',
-                      'image',
-                      'font',
-                      'object',
-                      'xmlhttprequest',
-                      'ping',
-                      'media',
-                      'websocket',
-                      'webtransport',
-                      'webbundle',
-                      'other',
-                    ],
+                    resourceTypes: ALL_RESOURCE_TYPES,
                   },
                 },
                 {
                   id: 2,
+                  priority: PAUSE_RULE_PRIORITY,
+                  action: { type: 'allow' },
+                  condition: {
+                    requestDomains: hostnames,
+                    resourceTypes: ALL_RESOURCE_TYPES,
+                  },
+                },
+                {
+                  id: 3,
                   priority: PAUSE_RULE_PRIORITY,
                   action: { type: 'allowAllRequests' },
                   condition: {
@@ -125,8 +136,8 @@ if (__PLATFORM__ !== 'firefox') {
         removeRuleIds: dynamicRules.map(({ id }) => id),
       });
     } else if (dynamicRules.length) {
-      chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: __PLATFORM__ === 'safari' ? [1] : [1, 2],
+      await chrome.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds: __PLATFORM__ === 'safari' ? [1] : [1, 2, 3],
       });
     }
   });
