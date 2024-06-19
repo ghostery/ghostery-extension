@@ -15,10 +15,8 @@ jobs:
         working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          SHA=$(git rev-parse --short "$GITHUB_SHA")
-          echo "SHA=$SHA" >> "$GITHUB_ENV"
-
+      - name: Set version
+        run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
       - name: Get release
@@ -44,7 +42,7 @@ jobs:
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-firefox.zip
-          asset_name: ghostery-firefox.zip
+          asset_name: ghostery-firefox-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
 
       - name: Upload Chrome build
@@ -54,7 +52,7 @@ jobs:
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-chrome.zip
-          asset_name: ghostery-chrome.zip
+          asset_name: ghostery-chrome-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
 
       - name: Upload Opera build
@@ -64,7 +62,7 @@ jobs:
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-opera.zip
-          asset_name: ghostery-opera.zip
+          asset_name: ghostery-opera-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
 
       - name: Upload Edge build
@@ -74,5 +72,5 @@ jobs:
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-edge.zip
-          asset_name: ghostery-edge.zip
+          asset_name: ghostery-edge-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
