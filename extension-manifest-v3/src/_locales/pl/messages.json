@@ -39,7 +39,7 @@
     "description": "Add domain as exception"
   },
   "add_website": {
-    "message": "Dodaj stronę internetową."
+    "message": "Dodaj stronę internetową"
   },
   "add_website_exception": {
     "message": "Dodaj wyjątek dla tej witryny"
