@@ -23,6 +23,9 @@ jobs:
 
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+          echo $VERSION
+          echo $SHA
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.tool-versions'
