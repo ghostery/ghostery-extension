@@ -123,11 +123,14 @@ export default {
           ${store.ready(session) &&
           html`
             <div
-              layout="column gap:4"
-              layout@768px="gap:5"
+              layout="grid"
               style="${{ opacity: !session.user ? 0.5 : undefined }}"
             >
-              <div layout="row items:start gap:2">
+              <ui-toggle
+                disabled="${!session.user}"
+                value="${session.user && options.sync}"
+                onchange="${session.user && html.set(options, 'sync')}"
+              >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
                     <ui-icon
@@ -142,12 +145,7 @@ export default {
                     and devices.
                   </ui-text>
                 </div>
-                <ui-toggle
-                  disabled="${!session.user}"
-                  value="${session.user && options.sync}"
-                  onchange="${session.user && html.set(options, 'sync')}"
-                ></ui-toggle>
-              </div>
+              </ui-toggle>
             </div>
           `}
         </section>
