@@ -17,7 +17,17 @@ jobs:
         working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
+      - name: Set version and SHA
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          echo "SHA=$SHA" >> "$GITHUB_ENV"
 
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+          echo version: $VERSION
+          echo github: $GITHUB_SHA
+          echo sha: $SHA
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.tool-versions'
@@ -34,17 +44,6 @@ jobs:
             mkdir web-ext-artifacts/ghostery-$PLATFORM
             unzip "web-ext-artifacts/ghostery-$PLATFORM.zip" -d "web-ext-artifacts/ghostery-$PLATFORM"
           done
-      - name: Set version and SHA
-        run: |
-          SHA=$(git rev-parse --short "$GITHUB_SHA")
-          echo "SHA=$SHA" >> "$GITHUB_ENV"
-
-          VERSION=$(node -p "require('./package.json').version")
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-
-          echo version: $VERSION
-          echo github: $GITHUB_SHA
-          echo sha: $SHA
       - name: Upload Chrome build
         uses: actions/upload-artifact@v3
         with:
