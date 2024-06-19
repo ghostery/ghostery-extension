@@ -15,10 +15,8 @@ jobs:
         working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          SHA=$(git rev-parse --short "$GITHUB_SHA")
-          echo "SHA=$SHA" >> "$GITHUB_ENV"
-
+      - name: Set version
+        run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
       - name: Get release
