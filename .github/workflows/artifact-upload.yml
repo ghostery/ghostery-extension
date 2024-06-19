@@ -25,6 +25,8 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
+          git log --pretty=oneline -n 5
+
           echo version: $VERSION
           echo github: $GITHUB_SHA
           echo sha: $SHA
