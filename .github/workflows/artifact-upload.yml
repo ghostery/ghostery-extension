@@ -17,6 +17,16 @@ jobs:
         working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
+      - name: Set version and SHA
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha }})
+          echo "SHA=$SHA" >> "$GITHUB_ENV"
+
+          echo $VERSION
+          echo $SHA
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.tool-versions'
@@ -25,10 +35,6 @@ jobs:
       - name: Install dependencies in repo root
         run: npm ci
         working-directory: .
-      - name: Set version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
       - name: Build packages
         run: npm run package -- --simple
       - name: Uncompress packages
@@ -46,18 +52,18 @@ jobs:
       - name: Upload Firefox build
         uses: actions/upload-artifact@v3
         with:
-          name: ghostery-firefox-${{ env.VERSION }}-${{ github.event.pull_request.head.sha }}
+          name: ghostery-firefox-${{ env.VERSION }}-${{ env.SHA }}
           path: extension-manifest-v3/web-ext-artifacts/ghostery-firefox/*
           if-no-files-found: error
       - name: Upload Edge build
         uses: actions/upload-artifact@v3
         with:
-          name: ghostery-edge-${{ env.VERSION }}-${{ github.event.pull_request.head.sha }}
+          name: ghostery-edge-${{ env.VERSION }}-${{ env.SHA }}
           path: extension-manifest-v3/web-ext-artifacts/ghostery-edge/*
           if-no-files-found: error
       - name: Upload Opera build
         uses: actions/upload-artifact@v3
         with:
-          name: ghostery-opera-${{ env.VERSION }}-${{ github.event.pull_request.head.sha }}
+          name: ghostery-opera-${{ env.VERSION }}-${{ env.SHA }}
           path: extension-manifest-v3/web-ext-artifacts/ghostery-opera/*
           if-no-files-found: error
