@@ -42,7 +42,7 @@ export default {
   options: store(Options),
   hostname: store(Hostname, { draft: true }),
   pauseType: 1,
-  content: ({ hostname, pauseType }) => html`
+  render: ({ hostname, pauseType }) => html`
     <template layout>
       <gh-settings-dialog>
         <form
