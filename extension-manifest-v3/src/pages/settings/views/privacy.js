@@ -78,7 +78,12 @@ export default {
                 cookie pop-ups.
               </ui-text>
             </div>
-            <div layout="row items:start gap:2">
+            <ui-toggle
+              type="status"
+              color="danger-500"
+              value="${globalPause}"
+              onchange="${html.set('globalPause')}"
+            >
               <div layout="column gap:0.5 grow">
                 <div layout="row gap items:center">
                   <ui-icon name="pause" color="gray-600"></ui-icon>
@@ -105,20 +110,18 @@ export default {
                   </ui-text>
                 `}
               </div>
-              <ui-toggle
-                type="status"
-                color="danger-500"
-                value="${globalPause}"
-                onchange="${html.set('globalPause')}"
-              ></ui-toggle>
-            </div>
+            </ui-toggle>
             <ui-line></ui-line>
             <div
               layout="column gap:4"
               style="${{ opacity: globalPause ? 0.5 : undefined }}"
             >
               <div layout="column gap:3">
-                <div layout="row items:start gap:2">
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.blockAds}"
+                  onchange="${html.set(options, 'blockAds')}"
+                >
                   <div layout="column gap:0.5 grow">
                     <div layout="row gap items:center">
                       <ui-icon name="ads" color="gray-600"></ui-icon>
@@ -132,13 +135,12 @@ export default {
                       Eliminates ads on websites for safe and fast browsing.
                     </ui-text>
                   </div>
-                  <ui-toggle
-                    disabled="${globalPause}"
-                    value="${options.blockAds}"
-                    onchange="${html.set(options, 'blockAds')}"
-                  ></ui-toggle>
-                </div>
-                <div layout="row items:start gap:2">
+                </ui-toggle>
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.blockTrackers}"
+                  onchange="${html.set(options, 'blockTrackers')}"
+                >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
                       <ui-icon name="tracking" color="gray-600"></ui-icon>
@@ -153,13 +155,12 @@ export default {
                       technology.
                     </ui-text>
                   </div>
-                  <ui-toggle
-                    disabled="${globalPause}"
-                    value="${options.blockTrackers}"
-                    onchange="${html.set(options, 'blockTrackers')}"
-                  ></ui-toggle>
-                </div>
-                <div layout="row items:start gap:2">
+                </ui-toggle>
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.blockAnnoyances}"
+                  onchange="${toggleNeverConsent}"
+                >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
                       <ui-icon name="autoconsent" color="gray-600"></ui-icon>
@@ -173,15 +174,14 @@ export default {
                       Automatically rejects cookie consent notices.
                     </ui-text>
                   </div>
-                  <ui-toggle
-                    disabled="${globalPause}"
-                    value="${options.blockAnnoyances}"
-                    onchange="${toggleNeverConsent}"
-                  ></ui-toggle>
-                </div>
+                </ui-toggle>
               </div>
               <ui-line></ui-line>
-              <div layout="row items:start gap:2">
+              <ui-toggle
+                disabled="${globalPause}"
+                value="${options.serpTrackingPrevention}"
+                onchange="${html.set(options, 'serpTrackingPrevention')}"
+              >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
                     <ui-icon name="globe" color="gray-600"></ui-icon>
@@ -194,15 +194,14 @@ export default {
                     their servers instead of linking directly to pages.
                   </ui-text>
                 </div>
-                <ui-toggle
-                  disabled="${globalPause}"
-                  value="${options.serpTrackingPrevention}"
-                  onchange="${html.set(options, 'serpTrackingPrevention')}"
-                ></ui-toggle>
-              </div>
+              </ui-toggle>
               <ui-line></ui-line>
-              <div layout="row items:start gap:2">
-                <div layout="column grow gap:0.5">
+              <ui-toggle
+                disabled="${globalPause}"
+                value="${options.experimentalFilters}"
+                onchange="${html.set(options, 'experimentalFilters')}"
+              >
+                <div layout="column grow items:start gap:0.5">
                   <div layout="row gap items:center">
                     <ui-icon name="dots" color="gray-600"></ui-icon>
                     <ui-text type="headline-xs">
@@ -225,12 +224,7 @@ export default {
                     </a>
                   </ui-text>
                 </div>
-                <ui-toggle
-                  disabled="${globalPause}"
-                  value="${options.experimentalFilters}"
-                  onchange="${html.set(options, 'experimentalFilters')}"
-                ></ui-toggle>
-              </div>
+              </ui-toggle>
             </div>
           </section>
 

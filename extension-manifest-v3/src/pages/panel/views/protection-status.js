@@ -68,39 +68,27 @@ export default {
                 ${tracker.blockedByDefault ? msg`Blocked` : msg`Trusted`}
               </ui-text>
             </gh-panel-card>
-            <gh-panel-card layout="row gap">
-              <div layout="grow">
-                <ui-text type="label-m">
-                  <!-- Add domain as exception -->
-                  Add ${stats.hostname} as exception
-                </ui-text>
-                <ui-text type="body-s" color="gray-500">
-                  ${blocked
-                    ? msg`Trust on this website`
-                    : msg`Block on this website`}
-                </ui-text>
-              </div>
-              ${blocked
-                ? html`
-                    <ui-toggle
-                      value="${allowedOnSite}"
-                      onchange="${toggleDomain}"
-                      type="status"
-                      color="success-500"
-                      layout="margin:top:0.5"
-                      no-label
-                    ></ui-toggle>
-                  `
-                : html`
-                    <ui-toggle
-                      value="${blockedOnSite}"
-                      onchange="${toggleDomain}"
-                      type="status"
-                      color="danger-500"
-                      layout="margin:top:0.5"
-                      no-label
-                    ></ui-toggle>
-                  `}
+            <gh-panel-card layout="grid">
+              <ui-toggle
+                value="${blocked ? allowedOnSite : blockedOnSite}"
+                onchange="${toggleDomain}"
+                type="status"
+                color="${blocked ? 'success' : 'danger'}-500"
+                layout="margin:top:0.5"
+                no-label
+              >
+                <div layout="grow">
+                  <ui-text type="label-m">
+                    <!-- Add domain as exception -->
+                    Add ${stats.hostname} as exception
+                  </ui-text>
+                  <ui-text type="body-s" color="gray-500">
+                    ${blocked
+                      ? msg`Trust on this website`
+                      : msg`Block on this website`}
+                  </ui-text>
+                </div>
+              </ui-toggle>
             </gh-panel-card>
           </div>
         `}

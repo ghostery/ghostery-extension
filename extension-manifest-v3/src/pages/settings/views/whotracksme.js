@@ -56,16 +56,19 @@ export default {
         ${store.ready(options) &&
         html`
           <section layout="column gap:4">
-            <div layout="row gap:2" layout@768px="gap:3">
-              <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
-                <gh-settings-help-image>
-                  <img
-                    src="${assets.wtm_wheel_small}"
-                    alt="WhoTracks.Me Wheel"
-                  />
-                </gh-settings-help-image>
-              </a>
-              <div layout="column gap" layout@768px="row gap:2 grow">
+            <ui-toggle
+              value="${options.trackerWheel}"
+              onchange="${html.set(options, 'trackerWheel')}"
+            >
+              <div layout="row items:start gap:2" layout@768px="gap:3">
+                <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
+                  <gh-settings-help-image>
+                    <img
+                      src="${assets.wtm_wheel_small}"
+                      alt="WhoTracks.Me Wheel"
+                    />
+                  </gh-settings-help-image>
+                </a>
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">WhoTracks.Me Wheel</ui-text>
                   <ui-text type="body-m" mobile-type="body-s" color="gray-600">
@@ -73,24 +76,23 @@ export default {
                     tracker wheel.
                   </ui-text>
                 </div>
-                <ui-toggle
-                  value="${options.trackerWheel}"
-                  onchange="${html.set(options, 'trackerWheel')}"
-                ></ui-toggle>
               </div>
-            </div>
+            </ui-toggle>
             ${Options.trackerCount &&
             html`
-              <div layout="row gap:2" layout@768px="gap:3">
-                <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
-                  <gh-settings-help-image>
-                    <img
-                      src="${assets.trackers_count_small}"
-                      alt="Trackers Count"
-                    />
-                  </gh-settings-help-image>
-                </a>
-                <div layout="column gap" layout@768px="row gap:2 grow">
+              <ui-toggle
+                value="${options.trackerCount}"
+                onchange="${html.set(options, 'trackerCount')}"
+              >
+                <div layout="row items:start gap:2" layout@768px="gap:3">
+                  <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
+                    <gh-settings-help-image>
+                      <img
+                        src="${assets.trackers_count_small}"
+                        alt="Trackers Count"
+                      />
+                    </gh-settings-help-image>
+                  </a>
                   <div layout="column grow gap:0.5">
                     <ui-text type="headline-xs">Trackers Count</ui-text>
                     <ui-text
@@ -102,23 +104,22 @@ export default {
                       browser toolbar.
                     </ui-text>
                   </div>
-                  <ui-toggle
-                    value="${options.trackerCount}"
-                    onchange="${html.set(options, 'trackerCount')}"
-                  ></ui-toggle>
                 </div>
-              </div>
+              </ui-toggle>
             `}
-            <div layout="row gap:2" layout@768px="gap:3">
-              <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
-                <gh-settings-help-image>
-                  <img
-                    src="${assets.trackers_preview_small}"
-                    alt="Trackers Preview"
-                  />
-                </gh-settings-help-image>
-              </a>
-              <div layout="column gap" layout@768px="row gap:2 grow">
+            <ui-toggle
+              value="${options.wtmSerpReport}"
+              onchange="${html.set(options, 'wtmSerpReport')}"
+            >
+              <div layout="row gap:2" layout@768px="gap:3">
+                <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
+                  <gh-settings-help-image>
+                    <img
+                      src="${assets.trackers_preview_small}"
+                      alt="Trackers Preview"
+                    />
+                  </gh-settings-help-image>
+                </a>
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">Trackers Preview</ui-text>
                   <ui-text type="body-m" mobile-type="body-s" color="gray-600">
@@ -134,12 +135,8 @@ export default {
                     </a>
                   </ui-text>
                 </div>
-                <ui-toggle
-                  value="${options.wtmSerpReport}"
-                  onchange="${html.set(options, 'wtmSerpReport')}"
-                ></ui-toggle>
               </div>
-            </div>
+            </ui-toggle>
           </section>
         `}
       </gh-settings-page-layout>

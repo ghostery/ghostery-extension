@@ -16,26 +16,39 @@ function toggle(host) {
   dispatch(host, 'change');
 }
 
+function stopForAnchors(host, event) {
+  let target = event.target;
+  while (target && target.tagName !== 'A') {
+    target = target.parentElement;
+  }
+  if (target) {
+    event.stopPropagation();
+  }
+}
+
 export default {
   value: { value: false, reflect: true },
   disabled: { value: false, reflect: true },
   noLabel: { value: false, reflect: true },
   type: { value: '', reflect: true },
   color: '',
-  render: Object.assign(
-    ({ disabled, value, color }) => html`
-      <template layout="block">
+  render: {
+    value: ({ disabled, value, color }) => html`
+      <template layout="contents">
         <button
           onclick="${toggle}"
-          layout="row items:center gap padding:0.5 margin:0"
+          layout="row items:start gap:2 padding:1 margin:-1"
           tabindex="${disabled ? -1 : 0}"
         >
-          <div id="toggle" layout="block relative size:36px:20px">
-            <span layout="block size:2 absolute top left margin:2px"></span>
+          <div layout="grow" onclick="${stopForAnchors}"><slot></slot></div>
+          <div id="button" layout="row items:center gap padding:0.5 margin:0">
+            <div id="toggle" layout="block relative size:36px:20px">
+              <span layout="block size:2 absolute top left margin:2px"></span>
+            </div>
+            <ui-text type="label-m" layout="width::36px">
+              ${value ? msg`On` : msg`Off`}
+            </ui-text>
           </div>
-          <ui-text type="label-m" layout="width::36px">
-            ${value ? msg`On` : msg`Off`}
-          </ui-text>
         </button>
       </template>
     `.css`
@@ -43,26 +56,29 @@ export default {
         pointer-events: none;
       }
 
-      :host([disabled]) button {
-        --ui-text-color-heading: var(--ui-color-gray-400) !important;
-      }
-
-      :host([disabled]) #toggle {
-        background: var(--ui-color-gray-400) !important;
-      }
 
       button {
         cursor: pointer;
         background: none;
         appearance: none;
         border: none;
-        --ui-text-color-heading: var(--ui-color-danger-500);
         -webkit-tap-highlight-color: transparent;
+        margin: 0;
+        padding: 0;
+        text-align: left;
       }
 
       ui-text {
         text-transform: uppercase;
         transition: color 0.2s;
+      }
+
+      #button {
+        --ui-text-color-heading: var(--ui-color-danger-500);
+      }
+
+      :host([disabled]) #button {
+        --ui-text-color-heading: var(--ui-color-gray-400) !important;
       }
 
       #toggle {
@@ -77,11 +93,15 @@ export default {
         transition: left 0.2s;
       }
 
+      :host([disabled]) #toggle {
+        background: var(--ui-color-gray-400) !important;
+      }
+
       :host([value]) #toggle {
         background: var(--ui-color-success-500);
       }
 
-      :host([value]) button {
+      :host([value]) #button {
         --ui-text-color-heading: var(--ui-color-success-500);
       }
 
@@ -101,17 +121,17 @@ export default {
         background: var(--ui-color-${color});
       }
 
-      :host([type="status"]) button {
+      :host([type="status"]) #button {
         --ui-text-color-heading: var(--ui-color-gray-400);
       }
 
-      :host([value][type="status"]) button {
+      :host([value][type="status"]) #button {
         --ui-text-color-heading: var(--ui-color-${color});
       }
 
 
       @media (hover: hover) and (pointer: fine) {
-        button:hover {
+        button:hover #button {
           --ui-text-color-heading: var(--ui-color-danger-700);
         }
 
@@ -119,7 +139,7 @@ export default {
           background: var(--ui-color-danger-700);
         }
 
-        :host([value]) button:hover {
+        :host([value]) button:hover #button {
           --ui-text-color-heading: var(--ui-color-success-700);
         }
 
@@ -135,15 +155,15 @@ export default {
           background: var(--ui-color-${color});
         }
 
-        :host([type="status"]) button:hover {
+        :host([type="status"]) button:hover #button {
           --ui-text-color-heading: var(--ui-color-gray-600);
         }
 
-        :host([value][type="status"]) button:hover {
+        :host([value][type="status"]) button:hover #button {
           --ui-text-color-heading: var(--ui-color-${color});
         }
       }
     `,
-    { delegateFocus: true },
-  ),
+    shadow: { delegateFocus: true },
+  },
 };
