@@ -126,14 +126,12 @@ const Options = {
             : options,
       });
 
-      sync(options, keys)
-        .then(() =>
-          // Send update message to another contexts (background page / panel / options)
-          chrome.runtime.sendMessage({
-            action: UPDATE_OPTIONS_ACTION_NAME,
-          }),
-        )
-        .catch(() => null);
+      // Send update message to another contexts (background page / panel / options)
+      chrome.runtime.sendMessage({
+        action: UPDATE_OPTIONS_ACTION_NAME,
+      });
+
+      sync(options, keys).catch(() => null);
 
       return options;
     },
