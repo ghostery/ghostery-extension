@@ -15,8 +15,7 @@
 }
 
 html {
-  /* Variables */
-  --ui-color-gray-900: #202c44;
+  --ui-color-gray-900: #020826;
   --ui-color-gray-800: #202c44;
   --ui-color-gray-600: #49556e;
   --ui-color-gray-500: #6d778e;
@@ -66,11 +65,8 @@ html {
   --ui-font-button-s: 600 14px / 24px var(--ui-font-family);
 
   /* UI components overwrites */
-  --ui-text-color-heading: var(--ui-color-gray-900);
+  --ui-text-color-heading: var(--ui-color-gray-800);
   --ui-text-color-anchor: var(--ui-color-primary-700);
-
-  /* Global styles */
-  color: var(--ui-color-gray-900);
 }
 
 html,
@@ -78,6 +74,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  color: var(--ui-color-gray-800);
 }
 
 body {

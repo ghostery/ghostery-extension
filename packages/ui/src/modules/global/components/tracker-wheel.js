@@ -121,7 +121,7 @@ export default {
     }
 
     text {
-      color: var(--ui-color-gray-900);
+      fill: var(--ui-color-gray-900);
       font-family: var(--ui-font-family-label);
       font-size: 12px;
       font-weight: 600;

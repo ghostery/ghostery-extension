@@ -85,17 +85,11 @@
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Automatically rejects cookie consent notices."
   },
-  "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "Automatically rejects of cookie consent notices."
-  },
   "back": {
     "message": "Back"
   },
   "become_a_contributor": {
     "message": "Become a Contributor"
-  },
-  "block_all": {
-    "message": "Block all"
   },
   "block_all__recommended_": {
     "message": "Block all (recommended)"
@@ -131,9 +125,6 @@
   },
   "collapse": {
     "message": "Collapse"
-  },
-  "coming_soon": {
-    "message": "coming soon"
   },
   "comments": {
     "message": "Comments",
@@ -205,9 +196,6 @@
   "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
     "message": "Eliminates ads on websites for safe and fast browsing."
   },
-  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "Eliminates ads on wesbites for safe and fast browsing."
-  },
   "email": {
     "message": "Email",
     "description": "Tracker category name"
@@ -248,6 +236,9 @@
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Expand Ghostery ad blocking to search engines in a few easy steps."
+  },
+  "experimental_ad_blocking_filters": {
+    "message": "Experimental Ad-Blocking Filters"
   },
   "extensions": {
     "message": "Extensions",
@@ -330,6 +321,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Help Ghostery fight for a web where privacy is a basic human right."
+  },
+  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
+    "message": "Helps Ghostery fix broken pages faster. By activating you can test experimental filters and support us with feedback. Please send a message to support@ghostery.com describing how your experience changed after enabling."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Hey, do you enjoy Ghostery and want to support our work?"
@@ -469,9 +463,6 @@
   "pin_it_here": {
     "message": "Pin it here"
   },
-  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Prevent Google from redirecting search result links through their servers instead of linking directly to pages."
-  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Prevents Google from redirecting search result links through their servers instead of linking directly to pages."
   },
@@ -511,8 +502,8 @@
   "save": {
     "message": "Save"
   },
-  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
-    "message": "Save and synchronize your custom settings between browsers and devices."
+  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
+    "message": "Saves and synchronizes your custom settings between browsers and devices."
   },
   "search_engine_redirect_protection": {
     "message": "Search Engine Redirect Protection"

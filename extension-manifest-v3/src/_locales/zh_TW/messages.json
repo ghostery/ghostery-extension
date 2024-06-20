@@ -85,17 +85,11 @@
   "automatically_rejects_cookie_consent_notices_": {
     "message": "自動拒絕 cookie 同意通知。"
   },
-  "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "自動拒絕 cookie 同意通知。"
-  },
   "back": {
     "message": "返回"
   },
   "become_a_contributor": {
     "message": "成為捐助者"
-  },
-  "block_all": {
-    "message": "封鎖全部"
   },
   "block_all__recommended_": {
     "message": "阻止所有（推薦）"
@@ -131,9 +125,6 @@
   },
   "collapse": {
     "message": "折疊"
-  },
-  "coming_soon": {
-    "message": "即將推出"
   },
   "comments": {
     "message": "評論",
@@ -205,9 +196,6 @@
   "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
     "message": "消除網站上的廣告，獲得安全又快速的瀏覽體驗。"
   },
-  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "消除網站上的廣告，獲得安全又快速的瀏覽體驗。"
-  },
   "email": {
     "message": "電郵",
     "description": "Tracker category name"
@@ -248,6 +236,9 @@
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需幾個簡單步驟，即可將 Ghostery 廣告攔截功能擴展到搜尋引擎。"
+  },
+  "experimental_ad_blocking_filters": {
+    "message": "實驗性廣告阻擋過濾器"
   },
   "extensions": {
     "message": "擴展",
@@ -330,6 +321,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "協助 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
+  },
+  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
+    "message": "幫助 Ghostery 更快修復損壞的頁面。通過啟用，您可以測試實驗性過濾器並通過反饋支持我們。請發送郵件至 support@ghostery.com，描述啟用後您的體驗有何改變。您的反饋對我們非常重要，能夠幫助我們改進服務，提供更好的用戶體驗。感謝您的支持和參與！"
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜歡使用 Ghostery 並願意鼓勵我們的工作嗎？"
@@ -469,9 +463,6 @@
   "pin_it_here": {
     "message": "於此處釘選"
   },
-  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "防止 Google 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
-  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "防止 Google 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
   },
@@ -511,8 +502,8 @@
   "save": {
     "message": "儲存"
   },
-  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
-    "message": "儲存並在瀏覽器和裝置之間同步您的自訂設定。"
+  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
+    "message": "保存您的自定义设置并在浏览器和设备之间同步。"
   },
   "search_engine_redirect_protection": {
     "message": "搜尋引擎重新導向保護"

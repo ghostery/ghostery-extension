@@ -85,17 +85,11 @@
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Автоматически запрещает использование файлов cookie."
   },
-  "automatically_rejects_of_cookie_consent_notices_": {
-    "message": "Автоматически запрещает использование файлов cookie."
-  },
   "back": {
     "message": "Назад"
   },
   "become_a_contributor": {
     "message": "Стать участником"
-  },
-  "block_all": {
-    "message": "Заблокировать все"
   },
   "block_all__recommended_": {
     "message": "Заблокировать все (рекомендуется)"
@@ -131,9 +125,6 @@
   },
   "collapse": {
     "message": "Свернуть"
-  },
-  "coming_soon": {
-    "message": "Скоро!"
   },
   "comments": {
     "message": "Комментарии",
@@ -205,9 +196,6 @@
   "eliminates_ads_on_websites_for_safe_and_fast_browsing_": {
     "message": "Блокирует рекламу на сайтах для более быстрой и безопасной работы в браузере."
   },
-  "eliminates_ads_on_wesbites_for_safe_and_fast_browsing_": {
-    "message": "Блокирует рекламу на сайтах для более быстрой и безопасной работы в браузере."
-  },
   "email": {
     "message": "Email",
     "description": "Tracker category name"
@@ -248,6 +236,9 @@
   },
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Настройте блокировку рекламы от Ghostery для поисковых систем в несколько простых шагов."
+  },
+  "experimental_ad_blocking_filters": {
+    "message": "Экспериментальные фильтры блокировки рекламы"
   },
   "extensions": {
     "message": "Расширения",
@@ -330,6 +321,9 @@
   },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Помогите Ghostery в борьбе за конфиденциальность как за основное право человека."
+  },
+  "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
+    "message": "Помогает Ghostery быстрее исправлять неработающие страницы. Активировав, вы можете тестировать экспериментальные фильтры и поддерживать нас обратной связью. Пожалуйста, отправьте сообщение на support@ghostery.com, описав, как изменился ваш опыт после включения."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Если вам нравится Ghostery, можете поддержать нашу работу."
@@ -469,9 +463,6 @@
   "pin_it_here": {
     "message": "Закрепите здесь"
   },
-  "prevent_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Запретить перенаправление ссылок на результаты поиска через серверы Google вместо прямого доступа к страницам."
-  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Запретить перенаправление ссылок на результаты поиска через серверы Google вместо прямого доступа к страницам."
   },
@@ -511,7 +502,7 @@
   "save": {
     "message": "Сохранить"
   },
-  "save_and_synchronize_your_custom_settings_between_browsers_and_devices_": {
+  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "Сохраняйте свои настройки и синхронизируйте их между браузерами и устройствами."
   },
   "search_engine_redirect_protection": {
