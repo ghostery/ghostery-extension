@@ -44,24 +44,7 @@ let promise = Promise.all([
 ]);
 
 export function isCategoryBlockedByDefault(categoryId) {
-  switch (categoryId) {
-    case 'advertising':
-    case 'site_analytics':
-    case 'hosting':
-    case 'customer_interaction':
-    case 'audio_video_player':
-    case 'cdn':
-    case 'email':
-    case 'extensions':
-    case 'misc':
-    case 'pornvertising':
-    case 'social_media':
-    case 'unidentified':
-    case undefined:
-      return true;
-    default:
-      return false;
-  }
+  return categoryId !== 'essential';
 }
 
 export function isTrusted(hostname, category, exception) {
