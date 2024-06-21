@@ -9,8 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { requestPermission } from './offscreen.js';
-
 let documentConverter;
 export function createDocumentConverter() {
   const requests = new Map();
@@ -63,8 +61,6 @@ export function createDocumentConverter() {
 }
 
 async function setupOffscreenDocument() {
-  await requestPermission();
-
   const path = 'pages/offscreen/urlfilter2dnr/index.html';
   const offscreenUrl = chrome.runtime.getURL(path);
   const existingContexts = await chrome.runtime.getContexts({
