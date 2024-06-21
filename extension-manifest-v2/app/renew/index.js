@@ -23,7 +23,7 @@ function revoke() {
 }
 
 mount(document.body, {
-	content: () => html`
+	render: () => html`
 		<ui-onboarding-renew
 			timestamp="${timestamp}"
 			onrenew="${revoke}"

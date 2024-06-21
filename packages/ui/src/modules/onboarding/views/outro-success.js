@@ -31,8 +31,8 @@ export default define({
       <ui-onboarding-card>
         <section layout="block:center column gap:2">
           <div layout="row center">${protection}</div>
-          <ui-text type="display-m">Setup Successful</ui-text>
-          <ui-text type="body-m" color="gray-800">
+          <ui-text type="display-s">Setup Successful</ui-text>
+          <ui-text type="body-s" color="gray-800">
             Ghostery is all set to stop trackers in their tracks and protect
             your privacy while browsing!
           </ui-text>
@@ -42,7 +42,7 @@ export default define({
       html`
         <ui-onboarding-card>
           <section layout="column gap:2">
-            <ui-text type="display-2xs" color="gray-800" layout="block:center">
+            <ui-text type="display-xs" color="gray-800" layout="block:center">
               What’s next?
             </ui-text>
             <img
@@ -59,11 +59,11 @@ export default define({
                 Pin Extension for easy access
               </ui-text>
             </div>
-            <ui-text>
+            <ui-text type="body-s">
               Click the puzzle icon next to the search bar and pin Ghostery to
               your toolbar.
             </ui-text>
-            <ui-text>
+            <ui-text type="body-s">
               Ghostery will show how many trackers were blocked on a page.
               Clicking on the Ghostery icon reveals more detailed information.
             </ui-text>

@@ -9,31 +9,34 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, router } from 'hybrids';
+import { define, html } from 'hybrids';
+import { GHOSTERY_DOMAIN } from '@ghostery/libs';
 
 import disabled from '../illustrations/disabled.js';
 
+const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
+
 export default define({
-  tag: 'ui-onboarding-outro-skip-view',
+  tag: 'ui-onboarding-outro-short-skip-view',
   render: () => html`
     <template layout="block">
       <ui-onboarding-card>
         <section layout="block:center column gap:2">
           <div layout="row center">${disabled}</div>
-          <ui-text type="display-m" color="error-500">
-            Ghostery is disabled
+          <ui-text type="display-s" color="error-500">
+            Ghostery is installed with limited functionality
           </ui-text>
           <ui-text type="body-m" color="gray-800">
-            Ghostery Browser Extension is installed in your browser but is
-            inactive. You are browsing the web unprotected.
+            Ghostery Tracker & Ad Blocker is naming the trackers present on
+            websites you visit. You are browsing the web unprotected.
           </ui-text>
         </section>
-        <section layout="row center margin:top:4 margin:bottom">
-          <ui-button type="outline">
-            <a href="${router.backUrl()}">Enable Ghostery</a>
-          </ui-button>
-        </section>
       </ui-onboarding-card>
+      <ui-text layout="block:center margin:3:0" underline>
+        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
+          Terms & Conditions
+        </a>
+      </ui-text>
     </template>
   `,
 });

@@ -948,7 +948,7 @@
   },
   "name": {
     "description": "The title of this extension (Ghostery).",
-    "message": "고스트 트래커 및 광고 차단기 - 프라이버시 AdBlock"
+    "message": "고스터리 트래커 및 광고 차단기 - 프라이버시 AdBlock"
   },
   "never_consent": {
     "message": "동의하지 않음"
@@ -971,6 +971,9 @@
   "no": {
     "message": "아니요"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "해당 이메일과 암호 조합을 찾을 수 없습니다. 다시 시도해 보십시오."
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "현재 탭에 http 또는 https 페이지가 열려 있는지 확인하십시오 "
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "끄기 "
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "기술적인 문제가 있는 것으로 보입니다. 나중에 다시 시도해 주십시오."
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "설정 "
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "알 수 없음 ",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "블로그 방문하기"

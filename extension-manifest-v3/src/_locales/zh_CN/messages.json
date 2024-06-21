@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "确定要禁用跟踪器预览吗？"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "确定要禁用 Ghostery 吗？"
-  },
   "audio_video_player": {
     "message": "音频/视频播放器",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "禁用"
   },
-  "disable_ghostery": {
-    "message": "禁用 Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "禁用跟踪器预览"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "启用 Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "启用 Ghostery 开启更安全、更迅速、更少广告的网页浏览体验。"
   },
   "enable_ghostery_to_get_started": {
     "message": "启用 Ghostery 以开始使用"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery：需要操作"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery 浏览器扩展程序已安装至您的浏览器中，但尚未启用。您当前的网页浏览不受保护。"
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "由于缺乏相关权限，Ghostery 无法阻止跟踪器。"
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ghostery 设置"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery 阻止跟踪器的跟踪，并防止数据中介获取您的个人信息。"
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "忽略"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "网页跟踪器的相关信息将依据我们的<a href=\"$${0}\">隐私政策</a>予以披露"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "根据我们的<a href=\"$${0}\">隐私政策</a>，将共享有关网络追踪器的信息，以推进Ghostery社区的隐私保护。"

@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Chcesz wyłączyć Podgląd Trackerów?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Czy na pewno chcesz, aby Ghostery nadal było nieaktywne?"
-  },
   "audio_video_player": {
     "message": "Odtwarzacz audio/wideo",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Wyłącz"
   },
-  "disable_ghostery": {
-    "message": "Wyłącz Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Wyłącz podgląd trackerów"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Włącz Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Uaktywnij Ghostery, aby przeglądać strony internetowe bezpieczniej, szybciej i z mniejszą ilością irytujących reklam. "
   },
   "enable_ghostery_to_get_started": {
     "message": "Włącz Ghostery, aby rozpocząć"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: wymagane działanie"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Wtyczka Ghostery Browser jest zainstalowana na twojej przeglądarce, ale jest nieaktywna. Przeglądasz strony internetowe w sposób niechroniony."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery nie może ich blokować, ponieważ nie ma uprawnień."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ustawienia Ghostery"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery blokuje trackerów i zapobiega profilowaniu przez handlarzy danymi."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Bloker Trackerów i Reklam nazywa trackery obecne na odwiedzanych przez Ciebie stronach internetowych. Przeglądasz sieć bez ochrony."
   },
@@ -338,11 +323,8 @@
   "ignore": {
     "message": "Zignoruj"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Informacje dotyczące trackerów będą udostępniane zgodnie z naszymi <a href=\"$${0}\">Zasadami ochrony prywatności</a>"
-  },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informacje o trackerach będą udostępniane zgodnie z naszą Polityką prywatności <a href=\"$${0}\"></a> , zwiększającą ochronę prywatności społeczności Ghostery."
+    "message": "Informacje o trackerach będą udostępniane zgodnie z naszą <a href=\"$${0}\">Polityką prywatności</a>, zwiększającą ochronę prywatności społeczności Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Istnieje dzięki mikrowkładom każdego użytkownika Ghostery, który zdecyduje się wysłać nieosobiste informacje do WhoTracks.Me. Wkład ten umożliwia Ghostery dostarczanie w czasie rzeczywistym informacji o trackerach, co z kolei zapewnia ochronę całej społeczności Ghostery."

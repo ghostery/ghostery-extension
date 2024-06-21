@@ -26,7 +26,7 @@ const stats = getStats(domain);
 updateIframeHeight();
 
 mount(document.body, {
-	content: () => html`
+	render: () => html`
 		<ui-trackers-preview
 			stats="${stats}"
 			domain="${domain}"

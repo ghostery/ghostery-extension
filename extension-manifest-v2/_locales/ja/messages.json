@@ -971,6 +971,9 @@
   "no": {
     "message": "いいえ"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "オフ"
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "技術的な問題があるようです。後でもう一度お試しください。"
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "設定"
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "未知",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "ブログを見る"

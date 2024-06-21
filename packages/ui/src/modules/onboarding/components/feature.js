@@ -22,7 +22,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: linear-gradient(180deg, #D9F3FD 0%, rgba(217, 243, 253, 0) 100%);
+      background: var(--ui-color-primary-100);
       border-radius: 16px;
     }
   `,

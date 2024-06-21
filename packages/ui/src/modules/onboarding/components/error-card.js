@@ -13,13 +13,13 @@ import { html } from 'hybrids';
 
 export default {
   render: () => html`
-    <template layout="column padding:1.5 gap:2">
+    <template layout="column padding:1.5 gap">
       <slot></slot>
     </template>
   `.css`
     :host {
       border-radius: 8px;
-      background: rgba(255, 93, 53, 0.15);
+      background: rgba(255, 93, 53, 0.05);
     }
   `,
 };

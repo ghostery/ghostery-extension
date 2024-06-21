@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Отключить функцию Trackers Preview?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Не включать расширение Ghostery?"
-  },
   "audio_video_player": {
     "message": "Аудио/видео проигрыватель",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Отключить"
   },
-  "disable_ghostery": {
-    "message": "Отключить Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Отключить предварительный просмотр трекеров"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Включить Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Включите Ghostery, чтобы повысить безопасность и скорость работы в браузере и видеть меньше рекламы."
   },
   "enable_ghostery_to_get_started": {
     "message": "Включите Ghostery, чтобы начать работу"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: необходимо выполнить действие"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Расширение Ghostery установлено, но отключено. Ваши данные не защищены в интернете."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "У Ghostery недостаточно разрешений для блокировки трекеров."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Настройки Ghostery"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery блокирует трекеры и защищает ваши данные от брокеров."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Трекер & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "Игнорировать"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Мы делимся информацией о трекерах в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>."
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Информация о веб-трекерах будет распространяться в соответствии с нашей <a href=\"$${0}\">Политикой конфиденциальности</a>, продвигая защиту конфиденциальности для сообщества Ghostery."

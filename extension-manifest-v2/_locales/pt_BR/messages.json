@@ -865,7 +865,7 @@
     "message": "Informações sobre rastreadores da web serão compartilhadas de acordo com nossa <a href=\"$${0}\"> Política de Privacidade </a> "
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa Política de Privacidade <a href=\"$${0}\"></a> , avançando na proteção da privacidade para a comunidade Ghostery."
+    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa  <a href=\"$${0}\">Política de Privacidade</a>, avançando na proteção da privacidade para a comunidade Ghostery."
   },
   "invalid_email_forgot": {
     "message": "Desculpe, você precisa informar um endereço de email válido."
@@ -971,6 +971,9 @@
   "no": {
     "message": "Não"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "Parece que não conseguimos encontrar essa combinação de email e senha. Tente novamente."
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "Certifique-se de que sua aba atual tenha uma página http ou https aberta"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "Desligado"
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "Parece que estamos tendo um problema técnico. Tente novamente mais tarde."
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "Configurações"
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "Desconhecido",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "Visite nosso blog"

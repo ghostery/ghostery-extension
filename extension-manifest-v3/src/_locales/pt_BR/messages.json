@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Tem certeza de que deseja desativar a visualização de rastreadores?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Tem certeza de que deseja manter o Ghostery desativado?"
-  },
   "audio_video_player": {
     "message": "Reprodutor de Áudio/Vídeo",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Desativar"
   },
-  "disable_ghostery": {
-    "message": "Desativar Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Desativar a visualização de rastreadores"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Ativar o Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Habilite o Ghostery para navegar na web de forma mais segura, rápida e com menos anúncios."
   },
   "enable_ghostery_to_get_started": {
     "message": "Autorize o Ghostery para começar"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: ação exigida"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "A extensão do navegador Ghostery está instalada no seu navegador, mas está inativa. Você está navegando na web desprotegido."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "O Ghostery não pode bloqueá-los devido à falta de permissões."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Configurações do Ghostery"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "O Ghostery interrompe os rastreadores e impede que você seja analisado por corretores de dados."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "O Ghostery Tracker &amp; Ad Blocker está nomeando os rastreadores presentes nos sites que você visita. Você está navegando na Web sem proteção."
   },
@@ -338,11 +323,8 @@
   "ignore": {
     "message": "Ignorar"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Informações sobre rastreadores da web serão compartilhadas de acordo com nossa <a href=\"$${0}\"> Política de Privacidade </a> "
-  },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa Política de Privacidade <a href=\"$${0}\"></a> , avançando na proteção da privacidade para a comunidade Ghostery."
+    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa <a href=\"$${0}\">Política de Privacidade</a>, avançando na proteção da privacidade para a comunidade Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Ele existe graças às microcontribuições de cada usuário do Ghostery que opta por enviar informações não pessoais para o WhoTracks.Me. A entrada permite que o Ghostery forneça informações em tempo real sobre rastreadores que, por sua vez, trazem proteção para toda a comunidade Ghostery."
