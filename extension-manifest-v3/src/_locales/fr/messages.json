@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Voulez-vous vraiment désactiver l'aperçu des trackers ?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Voulez-vous vraiment que Ghostery reste désactivé ?"
-  },
   "audio_video_player": {
     "message": "Lecteur audio/vidéo ",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Désactiver"
   },
-  "disable_ghostery": {
-    "message": "Désactiver Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Désactiver l'aperçu des trackers"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Activer Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Activez Ghostery pour parcourir le Web de manière plus sûre et plus rapide, et avec moins de publicités."
   },
   "enable_ghostery_to_get_started": {
     "message": "Donnez le feu vert à Ghostery"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery : action requise"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "L'extension de navigateur Ghostery est installée dans votre navigateur, mais elle est inactive. Vous parcourez le Web sans protection."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery ne peut pas les bloquer en raison d'autorisations manquantes."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Paramètres Ghostery"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery met en échec les trackers et empêche les courtiers en données de dresser votre profil."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery bloqueur de traqueurs et publicités nomme uniquement les traqueurs présents sur les sites web que vous visitez. Vous naviguez sur le web sans protection."
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "Ignorer"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Des informations sur les trackers web seront partagées conformément à notre <a href=\"$${0}\">politique de confidentialité</a>"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Les informations sur les trackers web seront partagées conformément à notre <a href=\"$${0}\">Politique de confidentialité</a>, afin de renforcer la protection de la vie privée de la communauté Ghostery."

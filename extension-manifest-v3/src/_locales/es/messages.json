@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "¿Seguro que quieres desactivar la vista previa de rastreadores?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "¿Seguro que quieres mantener Ghostery deshabilitado?"
-  },
   "audio_video_player": {
     "message": "Reproductor de audio/vídeo",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Deshabilitar"
   },
-  "disable_ghostery": {
-    "message": "Desactivar Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Deshabilitar vista previa de rastreadores"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Habilitar Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Habilita Ghostery para navegar por la red de forma más rápida y segura, y con menos anuncios."
   },
   "enable_ghostery_to_get_started": {
     "message": "Activa Ghostery para empezar"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: accion necesaria"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "La extensión de navegador Ghostery está instalada en el navegador, pero está inactiva. Estás navegando por la red sin protección."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery no puede bloquearlos, porque le faltan permisos."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ajustes de Ghostery"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery les para los pies a los rastreadores y evita que los intermediarios de datos realicen perfiles sobre ti."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker solo identifica los rastreadores presentes en los sitios web que visitas. Estás navegando sin protección."
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "Ignorar"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "La información sobre los rastreadores web se compartirá de acuerdo con nuestra <a href=\"$${0}\">Política de privacidad</a>"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Información sobre los rastreadores web se compartirá de acuerdo con nuestra <a href=\"$${0}\">Política de Privacidad</a>, avanzando la protección de la privacidad para la comunidad de Ghostery."

@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Are you sure you want to disable Trackers Preview?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Are you sure you want to keep Ghostery disabled?"
-  },
   "audio_video_player": {
     "message": "Audio/Video Player",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Disable"
   },
-  "disable_ghostery": {
-    "message": "Disable Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Disable Trackers Preview"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Enable Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Enable Ghostery to browse the web safer, faster, and with less ads."
   },
   "enable_ghostery_to_get_started": {
     "message": "Enable Ghostery to get started"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: Action required"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery Browser Extension is installed in your browser but is inactive. You are browsing the web unprotected."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery can't block them due to missing permissions."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ghostery settings"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery stops trackers in their tracks and prevents you from being profiled by data brokers."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker is naming the trackers present on websites you visit. You are browsing the web unprotected."
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "Ignore"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."

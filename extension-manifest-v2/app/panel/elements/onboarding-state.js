@@ -13,7 +13,7 @@ import { define, html } from 'hybrids';
 
 export default define({
 	tag: 'ui-onboarding-state',
-	disabled: false,
+	disabled: { value: false, reflect: true },
 	href: '',
 	render: ({ disabled, href }) => html`
     <template

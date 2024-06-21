@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Trackers Previewを無効にしてもよいですか？"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "本当にGhosteryを無効にしたままでよいですか？"
-  },
   "audio_video_player": {
     "message": "オーディオ/ビデオ・プレーヤー",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "無効化"
   },
-  "disable_ghostery": {
-    "message": "Ghosteryを無効にする"
-  },
   "disable_trackers_preview": {
     "message": "トラッカーの無効化プレビュー"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Ghosteryを有効にする"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Ghosteryを有効にすることで、より安全に、より速く、より少ない広告でウェブを閲覧することができます。"
   },
   "enable_ghostery_to_get_started": {
     "message": "Ghosteryを有効にして開始する"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: 要対応"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery Browser Extensionはブラウザにインストールされていますが、非アクティブになっています。あなたは無防備にウェブを閲覧していることになります。"
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghosteryは権限が足りないため、ブロックできません。"
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ghostery 設定"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghosteryはトラッカーの追跡を阻止し、データブローカーによるプロファイリングを防止します。"
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blockerは、あなたが訪れるウェブサイトに存在するトラッカーの名前を表示します。ウェブを保護されていない状態でブラウジングしています。"
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "無視する"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "ウェブトラッカーに関する情報は、当社の<a href=\"$${0}\">プライバシーポリシー</a>に基づき共有されます"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "私たちの<a href=\"$${0}\">プライバシーポリシー</a>に従って、ウェブトラッカーに関する情報が共有され、Ghosteryコミュニティのプライバシー保護が進められます。"

@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Disattivare l'anteprima dei tracker?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Confermi di volere mantenere disabilitato Ghostery?"
-  },
   "audio_video_player": {
     "message": "Lettore Audio/Video",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Disattiva"
   },
-  "disable_ghostery": {
-    "message": "Disabilita Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "Disattiva anteprima Tracker"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Abilita Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Consenti a Ghostery di navigare sul web in modo più sicuro, veloce e con meno pubblicità."
   },
   "enable_ghostery_to_get_started": {
     "message": "Abilita Ghostery per iniziare"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: azione richiesta"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "L’estensione per il browser Ghostery è installata nel tuo browser ma è inattiva. Stai navigando sul web in modalità non protetta."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery non può bloccarli a causa di autorizzazioni mancanti."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Impostazioni Ghostery"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery blocca i tracker e impedisce la tua profilazione da parte di broker di dati."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker si limita a nominare i tracker presenti sui siti web visitati. State navigando sul web senza protezione."
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "Ignora"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Le informazioni inerenti i tracker sul web verranno condivise in conformità alla nostra <a href=\"$${0}\">Informativa sulla privacy</a>"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Le informazioni sui web tracker saranno condivise in conformità con la nostra <a href=\"$${0}\">Politica sulla privacy</a>, promuovendo la protezione della privacy per la comunità di Ghostery."

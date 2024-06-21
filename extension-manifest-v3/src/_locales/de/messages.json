@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "Sind Sie sicher, dass Sie die Trackervorschau deaktivieren möchten?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Soll Ghostery wirklich deaktiviert bleiben?"
-  },
   "audio_video_player": {
     "message": "Audio/Video-Player",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "Deaktivieren"
   },
-  "disable_ghostery": {
-    "message": "Ghostery deaktivieren"
-  },
   "disable_trackers_preview": {
     "message": "Tracker-Vorschau deaktivieren"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Ghostery aktivieren"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Aktivieren Sie Ghostery, um schneller, sicherer und mit weniger Werbung im Web zu surfen."
   },
   "enable_ghostery_to_get_started": {
     "message": "Aktivieren Sie Ghostery, um loszulegen"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: Aktion erforderlich"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Die Ghostery-Browser-Erweiterung ist in Ihrem Browser installiert, aber nicht aktiviert. Sie surfen ungeschützt im Web."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "Ghostery kann sie aufgrund fehlender Berechtigungen nicht blocken."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ghostery-Einstellungen"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery unterbindet Tracker und verhindert, dass Datenagenturen ein Profil von Ihnen erstellen."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Der Ghostery Tracker- und Werbeblocker zeigt lediglich Tracker auf Webseiten an. Dies allein garantiert keinen umfassenden Datenschutz. "
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "Ignorieren"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "Informationen über Web-Tracker werden gemäß unserer <a href=\"$${0}\">Datenschutzrichtlinie</a> geteilt"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informationen über Web-Tracker werden gemäß unserer <a href=\"$${0}\">Datenschutzerklärung</a> geteilt, um den \nSchutz der Privatsphäre für die Ghostery-Community zu verbessern."

@@ -971,6 +971,9 @@
   "no": {
     "message": "No"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "Looks like we can't find this email and password combo. Give it another shot."
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "Ensure that your current tab has http or https page opened"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "Off"
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "We seem to be having a technical issue. Try again later."
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "Settings"
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "Unknown",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "Visit our blog"

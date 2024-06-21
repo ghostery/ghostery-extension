@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "트래커 미리보기를 비활성화하시겠습니까?"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "Ghostery의 비활성 상태를 계속 유지하시겠습니까?"
-  },
   "audio_video_player": {
     "message": "오디오/비디오 플레이어 ",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "비활성화 "
   },
-  "disable_ghostery": {
-    "message": "Ghostery 비활성화"
-  },
   "disable_trackers_preview": {
     "message": "트래커 미리보기 끄기"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "Ghostery 활성화"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "Ghostery를 활성화하여 더욱 안전하고, 빠르고, 광고가 적은 웹을 즐기세요."
   },
   "enable_ghostery_to_get_started": {
     "message": "시작하려면 Ghostery를 활성화하십시오"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery: 조치 필요"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "브라우저에 Ghostery 브라우저 확장 프로그램에 설치되어 있지만 비활성 상태입니다. 웹 브라우징이 보호되지 않습니다."
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "누락된 권한이 있어 Ghostery가 차단할 수 없습니다."
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ghostery 설정 "
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery는 트래커의 추적 행위를 막아 데이터 브로커가 이용자를 프로파일링하지 못하게 합니다."
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker는 방문한 웹사이트에 존재하는 추적기들의 이름을 알려줍니다. 웹을 보호받지 않고 브라우징 중입니다."
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "무시"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "웹 트래커에 대한 정보는 당사의 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유됩니다."
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "정보는 저희 <a href=\"$${0}\">개인정보 처리방침</a>에 따라 공유되며, Ghostery 커뮤니티의 개인정보 보호를 위해 개선됩니다."

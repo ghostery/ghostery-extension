@@ -971,6 +971,9 @@
   "no": {
     "message": "否"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "看來我們找不到這個電郵與密碼的組合。 再試一次。"
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "確保您當前的標簽打開了 http 或 https 網頁"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "關閉"
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "我們似乎發生技術問題。請稍後再試。"
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "設定"
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "不明的",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "造訪我們的博客"

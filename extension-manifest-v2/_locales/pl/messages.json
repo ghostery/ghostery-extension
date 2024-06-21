@@ -392,7 +392,7 @@
   },
   "browser_button_tooltip": {
     "description": "Ghostery's browser button tooltip.",
-    "message": "Przeglądaj wyniki wyszukana przez Ghostery"
+    "message": "Przeglądaj wyniki wyszukiwania przez Ghostery"
   },
   "built_in_vpn": {
     "message": "Wbudowana sieć VPN"
@@ -865,7 +865,7 @@
     "message": "Informacje dotyczące Trackerów będą udostępniane zgodnie z naszymi <a href=\"$${0}\">Zasadami ochrony prywatności</a>"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informacje o modułach śledzących będą udostępniane zgodnie z naszą Polityką prywatności <a href=\"$${0}\"></a> , zwiększającą ochronę prywatności społeczności Ghostery."
+    "message": "Informacje o modułach śledzących będą udostępniane zgodnie z naszą <a href=\"$${0}\">Polityką prywatności</a>, zwiększającą ochronę prywatności społeczności Ghostery."
   },
   "invalid_email_forgot": {
     "message": "Przykro nam, musisz podać prawdziwy adres e-mail."
@@ -971,6 +971,9 @@
   "no": {
     "message": "Nie"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "Wygląda na to, że nie możemy odnaleźć takiej kombinacji adresu e-mail i hasła. Wykonaj ponowną próbę."
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "Upewnij się, że aktualna zakładka ma otwartą stronę http lub https"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "Wył."
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "Wygląda na to, że mamy problem techniczny. Spróbuj ponownie później."
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "Ustawienia"
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "Nieznany",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "Odwiedź nasz blog"

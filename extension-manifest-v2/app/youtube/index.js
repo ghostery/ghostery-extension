@@ -46,7 +46,7 @@ function dontAsk() {
 }
 
 mount(document.body, {
-	content: () => html`
+	render: () => html`
 		<ui-youtube-wall
 			onclose="${() => closeIframe()}"
 			ondontask="${() => dontAsk()}"

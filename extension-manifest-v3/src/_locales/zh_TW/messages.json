@@ -75,9 +75,6 @@
   "are_you_sure_you_want_to_disable_trackers_preview_": {
     "message": "你確定要停用「追蹤器預覽」嗎？"
   },
-  "are_you_sure_you_want_to_keep_ghostery_disabled_": {
-    "message": "確定要繼續停用 Ghostery 嗎？"
-  },
   "audio_video_player": {
     "message": "音訊/視訊播放器",
     "description": "Tracker category name"
@@ -172,9 +169,6 @@
   "disable": {
     "message": "停用"
   },
-  "disable_ghostery": {
-    "message": "停用 Ghostery"
-  },
   "disable_trackers_preview": {
     "message": "停用「追蹤器預覽」"
   },
@@ -205,9 +199,6 @@
   },
   "enable_ghostery": {
     "message": "啟用 Ghostery"
-  },
-  "enable_ghostery_to_browse_the_web_safer__faster__and_with_less_ads_": {
-    "message": "啟用  Ghostery，開始更安全、更快速地瀏覽網頁，同時減少廣告量。"
   },
   "enable_ghostery_to_get_started": {
     "message": "啟用 Ghostery 開始"
@@ -256,9 +247,6 @@
   "ghostery__action_required": {
     "message": "Ghostery：需要採取動作"
   },
-  "ghostery_browser_extension_is_installed_in_your_browser_but_is_inactive__you_are_browsing_the_web_unprotected_": {
-    "message": "Ghostery 瀏覽器擴充程式已安裝至瀏覽器，但尚未啟用。你目前的網頁瀏覽未受保護。"
-  },
   "ghostery_can_t_block_them_due_to_missing_permissions_": {
     "message": "由於缺乏相關權限，Ghostery 無法阻擋追蹤器。"
   },
@@ -298,9 +286,6 @@
   "ghostery_settings": {
     "message": "Ghostery 設定"
   },
-  "ghostery_stops_trackers_in_their_tracks_and_prevents_you_from_being_profiled_by_data_brokers_": {
-    "message": "Ghostery 幫你阻擋追蹤器，防止數據中介獲得你的個人資料。"
-  },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker＆Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
@@ -337,9 +322,6 @@
   },
   "ignore": {
     "message": "忽略"
-  },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a_": {
-    "message": "網頁追蹤器的資訊將依據我們的<a href=\"$${0}\">隱私權政策</a>分享"
   },
   "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "根據我們的<a href=\"$${0}\">隱私政策</a>，將分享有關網路追蹤器的資訊，以推進Ghostery社群的隱私保護。"

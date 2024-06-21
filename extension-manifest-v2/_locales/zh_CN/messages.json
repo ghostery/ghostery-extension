@@ -971,6 +971,9 @@
   "no": {
     "message": "否"
   },
+  "no_activities_detected": {
+    "message": "No activities detected"
+  },
   "no_such_email_password_combo": {
     "message": "似乎无法找到此邮箱地址和密码的组合。 请重试。"
   },
@@ -986,6 +989,9 @@
   },
   "not_http_page": {
     "message": "确保您当前的标签页中打开了 http 或 https 网页"
+  },
+  "observed_activities": {
+    "message": "Observed activities"
   },
   "off": {
     "message": "关闭"
@@ -1409,6 +1415,9 @@
   },
   "server_error_message": {
     "message": "我们似乎遇到了技术问题。请稍后再试。"
+  },
+  "set_blocking_preference": {
+    "message": "Set blocking preference"
   },
   "settings": {
     "message": "设置"
@@ -1945,6 +1954,9 @@
   "unknown": {
     "message": "未知",
     "description": "Tracker category name"
+  },
+  "view_activity_details": {
+    "message": "View activity details"
   },
   "visit_our_blog": {
     "message": "访问我们的博客"
