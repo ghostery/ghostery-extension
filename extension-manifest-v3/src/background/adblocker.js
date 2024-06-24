@@ -56,6 +56,19 @@ function isPaused(hostname) {
   );
 }
 
+// This function is only an approximation: the async chrome.tabs introduces a race
+// (maybe it could be mitigated by extra bookkeeping of subframes with a pages).
+// Note: using this function makes only sense for subframes. Otherwise, you should
+// have synchronous access to URL. In that case, you should use "isPaused".
+async function isPausedTab(tabId) {
+  const tab = await chrome.tabs.get(tabId);
+  if (!tab?.url) {
+    return false;
+  }
+  const { hostname } = parse(tab.url);
+  return isPaused(hostname);
+}
+
 function adblockerInjectStylesWebExtension(
   styles,
   { tabId, frameId, allFrames = false },
@@ -326,7 +339,10 @@ if (__PLATFORM__ === 'safari') {
   });
 } else {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.url);
+    const isMainFrame = details.parentFrameId === -1;
+    if (isMainFrame || !(await isPausedTab(details.tabId))) {
+      injectScriptlets(details.tabId, details.url);
+    }
   });
 }
 
