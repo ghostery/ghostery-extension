@@ -21,7 +21,7 @@ import * as engines from '/utils/engines.js';
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 
-import { updateTabStats } from './stats.js';
+import { tabStats, updateTabStats } from './stats.js';
 
 let enabledEngines = [];
 let pausedHostnames = new Set();
@@ -325,7 +325,16 @@ if (__PLATFORM__ === 'safari') {
     return false;
   });
 } else {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
+  chrome.webNavigation.onCommitted.addListener((details) => {
+    // skip navigations of iframes when the main frame is a "trusted" page
+    const parentUrl =
+      details.parentFrameId === -1
+        ? undefined
+        : tabStats.get(details.tabId)?.hostname;
+    if (parentUrl && isPaused(parentUrl)) {
+      return;
+    }
+
     injectScriptlets(details.tabId, details.url);
   });
 }
