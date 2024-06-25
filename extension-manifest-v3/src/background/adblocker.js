@@ -21,7 +21,7 @@ import * as engines from '/utils/engines.js';
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 
-import { updateTabStats } from './stats.js';
+import { tabStats, updateTabStats } from './stats.js';
 
 let enabledEngines = [];
 let pausedHostnames = new Set();
@@ -274,10 +274,16 @@ ${scripts.join('\n\n')}}
   );
 }
 
-async function injectScriptlets(tabId, url) {
+async function injectScriptlets(tabId, url, origin) {
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(hostname)) {
     return;
+  }
+  if (origin) {
+    const originHost = parse(origin).hostname;
+    if (originHost && isPaused(originHost)) {
+      return;
+    }
   }
 
   try {
@@ -319,14 +325,20 @@ async function injectScriptlets(tabId, url) {
 if (__PLATFORM__ === 'safari') {
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && msg.action === 'injectScriptlets') {
-      injectScriptlets(sender.tab.id, sender.url);
+      injectScriptlets(sender.tab.id, sender.url, sender.origin);
     }
 
     return false;
   });
 } else {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.url);
+  chrome.webNavigation.onCommitted.addListener((details) => {
+    // Heuristic to guess the origin. Needed to to skip navigations of
+    // iframes when the main frame is a "trusted" page
+    const origin =
+      details.parentFrameId === -1
+        ? undefined
+        : tabStats.get(details.tabId)?.hostname;
+    injectScriptlets(details.tabId, details.url, origin);
   });
 }
 
