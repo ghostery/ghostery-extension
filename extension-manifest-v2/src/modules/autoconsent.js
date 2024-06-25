@@ -104,7 +104,7 @@ async function evalCode(code, id, tabId, frameId) {
 			action: 'autoconsent',
 			id,
 			type: 'evalResp',
-			result: data.result,
+			result: data.result[0],
 		},
 		{
 			frameId,
