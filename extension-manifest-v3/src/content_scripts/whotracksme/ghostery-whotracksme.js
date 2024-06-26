@@ -11,13 +11,17 @@
  */
 (function () {
   function sendMessage(url) {
-    if (!url || url.startsWith('data:')) {
-      return;
+    try {
+      if (!url || url.startsWith('data:')) {
+        return;
+      }
+      window.postMessage(
+        `GhosteryTrackingDetection:${encodeURIComponent(url)}`,
+        '*',
+      );
+    } catch (e) {
+      console.error('Error while sending message:', e);
     }
-    window.postMessage(
-      `GhosteryTrackingDetection:${encodeURIComponent(url)}`,
-      '*',
-    );
   }
 
   let originalXHROpen = null;
@@ -71,8 +75,8 @@
       return originalImageSrc.get.call(this);
     },
     set: function (value) {
-      sendMessage(value);
       originalImageSrc.set.call(this, value);
+      sendMessage(this.src);
     },
     configurable: true,
   });
