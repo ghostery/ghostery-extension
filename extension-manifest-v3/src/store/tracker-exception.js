@@ -11,8 +11,6 @@
 
 import { store } from 'hybrids';
 
-import { requestPermission } from '../utils/offscreen.js';
-
 async function getStorage() {
   const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
   return exceptions;
@@ -70,10 +68,6 @@ const TrackerException = {
     // Only use list type to fetch all exceptions
     get: () => null,
     set: async (id, values) => {
-      if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
-        await requestPermission();
-      }
-
       return setStorage(id, values);
     },
     list: async () => Object.values(await getStorage()),

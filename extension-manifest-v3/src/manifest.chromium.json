@@ -5,7 +5,6 @@
   "short_name": "Ghostery",
   "default_locale": "en",
   "description": "__MSG_manifest_short_description__",
-  "optional_permissions": ["offscreen"],
   "permissions": [
     "alarms",
     "cookies",
@@ -15,7 +14,8 @@
     "storage",
     "scripting",
     "tabs",
-    "webRequest"
+    "webRequest",
+    "offscreen"
   ],
   "host_permissions": [
     "http://*/*",
