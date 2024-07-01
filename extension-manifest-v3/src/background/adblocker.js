@@ -274,6 +274,25 @@ ${scripts.join('\n\n')}}
   );
 }
 
+// Don't inject scriptlets on consent management domains.
+// uBO cookie list has filters that provide similar functionality to Never-Consent,
+// running those together with autocosent may result in site breakge.
+function shouldSkipAnnoyancesScriptlets(tabDomain) {
+  const engine = engines.get(engines.TRACKERDB_ENGINE);
+
+  if (!tabDomain || !engine) {
+    return false;
+  }
+
+  const matches = engines.metadata.fromDomain(tabDomain);
+
+  if (matches.length === 0) {
+    return false;
+  }
+
+  return matches[0].category.key === 'consent';
+}
+
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(hostname)) {
@@ -292,6 +311,10 @@ async function injectScriptlets(tabId, url) {
   enabledEngines.forEach((name) => {
     const engine = engines.get(name);
     if (!engine) return;
+
+    if (name === 'annoyances' && shouldSkipAnnoyancesScriptlets(domain)) {
+      return;
+    }
 
     const { active, scripts } = engine.getCosmeticsFilters({
       url: url,
