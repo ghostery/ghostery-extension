@@ -284,7 +284,7 @@ function shouldSkipAnnoyancesScriptlets(tabDomain) {
     return false;
   }
 
-  const matches = engines.metadata.fromDomain(tabDomain);
+  const matches = engine.metadata.fromDomain(tabDomain);
 
   if (matches.length === 0) {
     return false;
@@ -293,7 +293,7 @@ function shouldSkipAnnoyancesScriptlets(tabDomain) {
   return matches[0].category.key === 'consent';
 }
 
-async function injectScriptlets(tabId, url) {
+async function injectScriptlets(tabId, url, frameId) {
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(hostname)) {
     return;
@@ -312,7 +312,12 @@ async function injectScriptlets(tabId, url) {
     const engine = engines.get(name);
     if (!engine) return;
 
-    if (name === 'annoyances' && shouldSkipAnnoyancesScriptlets(domain)) {
+    if (
+      // iframe only
+      frameId !== 0 &&
+      name === 'annoyances' &&
+      shouldSkipAnnoyancesScriptlets(domain)
+    ) {
       return;
     }
 
@@ -342,14 +347,14 @@ async function injectScriptlets(tabId, url) {
 if (__PLATFORM__ === 'safari') {
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && msg.action === 'injectScriptlets') {
-      injectScriptlets(sender.tab.id, sender.url);
+      injectScriptlets(sender.tab.id, sender.url, sender.frameId);
     }
 
     return false;
   });
 } else {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.url);
+    injectScriptlets(details.tabId, details.url, details.frameId);
   });
 }
 
