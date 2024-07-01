@@ -274,7 +274,26 @@ ${scripts.join('\n\n')}}
   );
 }
 
-async function injectScriptlets(tabId, url) {
+// Don't inject scriptlets on consent management domains.
+// uBO cookie list has filters that provide similar functionality to Never-Consent,
+// running those together with autocosent may result in site breakge.
+function shouldSkipAnnoyancesScriptlets(tabDomain) {
+  const engine = engines.get(engines.TRACKERDB_ENGINE);
+
+  if (!tabDomain || !engine) {
+    return false;
+  }
+
+  const matches = engine.metadata.fromDomain(tabDomain);
+
+  if (matches.length === 0) {
+    return false;
+  }
+
+  return matches[0].category.key === 'consent';
+}
+
+async function injectScriptlets(tabId, url, frameId) {
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(hostname)) {
     return;
@@ -292,6 +311,15 @@ async function injectScriptlets(tabId, url) {
   enabledEngines.forEach((name) => {
     const engine = engines.get(name);
     if (!engine) return;
+
+    if (
+      // iframe only
+      frameId !== 0 &&
+      name === 'annoyances' &&
+      shouldSkipAnnoyancesScriptlets(domain)
+    ) {
+      return;
+    }
 
     const { active, scripts } = engine.getCosmeticsFilters({
       url: url,
@@ -319,14 +347,14 @@ async function injectScriptlets(tabId, url) {
 if (__PLATFORM__ === 'safari') {
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && msg.action === 'injectScriptlets') {
-      injectScriptlets(sender.tab.id, sender.url);
+      injectScriptlets(sender.tab.id, sender.url, sender.frameId);
     }
 
     return false;
   });
 } else {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.url);
+    injectScriptlets(details.tabId, details.url, details.frameId);
   });
 }
 
