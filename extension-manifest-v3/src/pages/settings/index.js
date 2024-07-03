@@ -17,34 +17,37 @@ import Settings from './settings.js';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted
-const { terms } = await store.resolve(Options);
+store
+  .resolve(Options)
+  .then(({ terms }) => {
+    if (!terms) throw Error('Terms not accepted');
 
-if (terms) {
-  define.from(
-    import.meta.glob(['./components/*.js', './views/*.js'], {
-      eager: true,
-      import: 'default',
-    }),
-    {
-      root: ['components', 'views'],
-      prefix: 'gh-settings',
-    },
-  );
+    define.from(
+      import.meta.glob(['./components/*.js', './views/*.js'], {
+        eager: true,
+        import: 'default',
+      }),
+      {
+        root: ['components', 'views'],
+        prefix: 'gh-settings',
+      },
+    );
 
-  // Safari has a bug where the back button doesn't work properly
-  // when the page is loaded from a background page by the chrome.tabs.update API
-  // In the result the `popstate` event is not fired and the router cannot
-  // re-create the previous state correctly
-  if (__PLATFORM__ === 'safari') {
-    const backFn = history.back.bind(history);
-    history.back = () => {
-      setTimeout(backFn, 200);
-    };
-  }
+    // Safari has a bug where the back button doesn't work properly
+    // when the page is loaded from a background page by the chrome.tabs.update API
+    // In the result the `popstate` event is not fired and the router cannot
+    // re-create the previous state correctly
+    if (__PLATFORM__ === 'safari') {
+      const backFn = history.back.bind(history);
+      history.back = () => {
+        setTimeout(backFn, 200);
+      };
+    }
 
-  mount(document.body, Settings);
-} else {
-  window.location.replace(
-    chrome.runtime.getURL('/pages/onboarding/index.html'),
-  );
-}
+    mount(document.body, Settings);
+  })
+  .catch(() => {
+    window.location.replace(
+      chrome.runtime.getURL('/pages/onboarding/index.html'),
+    );
+  });

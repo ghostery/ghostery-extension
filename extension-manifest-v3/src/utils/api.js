@@ -35,31 +35,33 @@ if (__PLATFORM__ === 'safari') {
   //
   // Below code tries to detect the offset between the two
   // and use it to convert the expirationDate to seconds
-  try {
-    const cookie = await chrome.cookies.set({
-      url: COOKIE_URL,
-      domain: COOKIE_DOMAIN,
-      path: '/',
-      name: 'test',
-      value: '',
-      expirationDate: 1,
-    });
+  (async () => {
+    try {
+      const cookie = await chrome.cookies.set({
+        url: COOKIE_URL,
+        domain: COOKIE_DOMAIN,
+        path: '/',
+        name: 'test',
+        value: '',
+        expirationDate: 1,
+      });
 
-    // Other browsers don't return a cookie with expirationDate is in the past
-    if (cookie) {
-      const date = new Date(cookie.expirationDate);
+      // Other browsers don't return a cookie with expirationDate is in the past
+      if (cookie) {
+        const date = new Date(cookie.expirationDate);
 
-      // If the year is not 1970, it means there is a bug
-      if (date.getFullYear() !== 1970) {
-        COOKIE_EXPIRATION_DATE_OFFSET = -Math.round(
-          // Clear "1" from setting the cookie and transform to seconds
-          (cookie.expirationDate - 1000) / 1000,
-        );
+        // If the year is not 1970, it means there is a bug
+        if (date.getFullYear() !== 1970) {
+          COOKIE_EXPIRATION_DATE_OFFSET = -Math.round(
+            // Clear "1" from setting the cookie and transform to seconds
+            (cookie.expirationDate - 1000) / 1000,
+          );
+        }
       }
+    } catch (e) {
+      // Protect against throwing an error when trying to detect the offset
     }
-  } catch (e) {
-    // Protect against throwing an error when trying to detect the offset
-  }
+  })();
 }
 
 async function isFirstPartyIsolation() {
