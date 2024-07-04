@@ -276,9 +276,12 @@ ${scripts.join('\n\n')}}
 
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
-  const tabHostname = tabStats.get(tabId)?.hostname;
+  if (!hostname || isPaused(hostname)) {
+    return;
+  }
 
-  if (!hostname || isPaused(hostname) || isPaused(tabHostname)) {
+  const tabHostname = tabStats.get(tabId)?.hostname;
+  if (tabHostname && isPaused(tabHostname)) {
     return;
   }
 
