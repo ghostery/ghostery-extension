@@ -117,6 +117,7 @@ export default {
                       <a
                         href="${href}"
                         layout="block padding margin:0:1"
+                        layout@390px="padding:1.5:1"
                         onclick="${openTabWithUrl}"
                       >
                         <gh-panel-menu-item icon="${icon(session)}">

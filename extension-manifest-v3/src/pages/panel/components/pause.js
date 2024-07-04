@@ -73,6 +73,7 @@ export default {
         id="main"
         class="${{ active: pauseList, paused }}"
         layout="row center margin:1.5 height:6"
+        layout@390px="height:7"
         onclick="${!pauseList && dispatchAction}"
       >
         <div id="label" layout="grow row center gap:0.5 shrink overflow">

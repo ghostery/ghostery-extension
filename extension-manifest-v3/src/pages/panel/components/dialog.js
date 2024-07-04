@@ -61,9 +61,11 @@ export default {
             <a
               onclick="${animateOnClose}"
               href="${router.backUrl()}"
-              layout="size:3 padding:0.5"
+              layout="padding:2 margin:-2"
             >
-              <ui-icon name="close"></ui-icon>
+              <div layout="row center size:3">
+                <ui-icon name="close" layout="size:2"></ui-icon>
+              </div>
             </a>
           </ui-action>
         </section>
@@ -100,7 +102,7 @@ export default {
       border-bottom: 1px solid var(--ui-color-gray-200);
     }
 
-    a {
+    a > div {
       color: var(--ui-color-gray-600);
       background: var(--ui-color-gray-200);
       border-radius: 50%;
