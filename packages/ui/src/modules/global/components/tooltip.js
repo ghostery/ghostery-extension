@@ -109,6 +109,10 @@ export default {
       </div>
     </template>
   `.css`
+    @media (hover: none) {
+      #tooltip { display: none; }
+    }
+
     #tooltip {
       pointer-events: none;
       transform: translateX(-50%);

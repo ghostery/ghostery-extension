@@ -21,14 +21,7 @@ export default {
   trusted: 0,
   blockedByDefault: false,
   open: { value: false, reflect: true },
-  render: ({
-    name,
-    description,
-    size,
-    adjusted,
-    open,
-    blockedByDefault,
-  }) => html`
+  render: ({ name, size, adjusted, open, blockedByDefault }) => html`
     <template layout="column gap:2 padding:1.5">
       <header layout="row items:center gap:1.5" layout@768px="gap:2">
         <ui-action>
@@ -48,23 +41,7 @@ export default {
               layout="size:5 padding"
             ></ui-panel-category-icon>
             <div layout="column gap:0.5">
-              <ui-text type="label-l">
-                ${labels.categories[name]}<ui-tooltip
-                  delay="0"
-                  autohide="5"
-                  wrap
-                  inline
-                >
-                  <span slot="content" layout="block width:200px">
-                    ${description}
-                  </span>
-                  <ui-icon
-                    name="info"
-                    color="gray-400"
-                    layout="margin:top:1px"
-                  ></ui-icon>
-                </ui-tooltip>
-              </ui-text>
+              <ui-text type="label-l">${labels.categories[name]}</ui-text>
               <div layout="column" layout@768px="row gap">
                 <ui-text type="body-s" color="gray-600" layout="width::90px">
                   Activities<span>:</span> ${size}

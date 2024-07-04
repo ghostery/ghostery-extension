@@ -181,6 +181,7 @@ export default {
                   type="${options.panel.statsType}"
                   ontypechange="${setStatsType}"
                   layout="margin:1:1.5"
+                  layout@390px="margin:1.5:1.5:2"
                 >
                   ${options.terms &&
                   html`
@@ -209,6 +210,7 @@ export default {
                     modified=${stats.trackersModified}
                     blocked=${stats.trackersBlocked}
                     layout="margin:bottom:1.5"
+                    layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
                   ></gh-panel-feedback>
                 `}
               `
@@ -233,6 +235,8 @@ export default {
           <ui-text
             class="${{ last: store.error(notification) }}"
             layout.last="padding:bottom:1.5"
+            layout@390px="padding:bottom"
+            layout.last@390px="padding:bottom:2.5"
             hidden="${globalPause}"
           >
             <a

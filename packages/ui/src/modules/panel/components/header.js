@@ -15,6 +15,7 @@ export default {
   render: () => html`
     <template
       layout="grid:max|1|max items:center gap:2 height:6 padding:1.5 relative layer:100"
+      layout@390px="height:7 padding:2"
     >
       <div layout="row center width:3">
         <slot name="icon"></slot>
