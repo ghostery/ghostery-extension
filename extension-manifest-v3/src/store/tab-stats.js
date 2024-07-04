@@ -29,9 +29,7 @@ const StatsTracker = {
     requests.filter((r) => !r.blocked && !r.modified),
 };
 
-const tab = await chrome.runtime.sendMessage({
-  action: 'getCurrentTab',
-});
+let tab = undefined;
 
 const Stats = {
   hostname: '',
@@ -66,7 +64,13 @@ const Stats = {
 
   [store.connect]: {
     async get() {
-      if (!tab || !tab.url.startsWith('http')) {
+      if (!tab) {
+        tab = await chrome.runtime.sendMessage({
+          action: 'getCurrentTab',
+        });
+      }
+
+      if (!tab.url.startsWith('http')) {
         return {};
       }
 
