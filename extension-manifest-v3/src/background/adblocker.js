@@ -21,7 +21,7 @@ import * as engines from '/utils/engines.js';
 import Request from './utils/request.js';
 import asyncSetup from './utils/setup.js';
 
-import { updateTabStats } from './stats.js';
+import { tabStats, updateTabStats } from './stats.js';
 
 let enabledEngines = [];
 let pausedHostnames = new Set();
@@ -276,7 +276,9 @@ ${scripts.join('\n\n')}}
 
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
-  if (!hostname || isPaused(hostname)) {
+  const tabHostname = tabStats.get(tabId)?.hostname;
+
+  if (!hostname || isPaused(hostname) || isPaused(tabHostname)) {
     return;
   }
 
