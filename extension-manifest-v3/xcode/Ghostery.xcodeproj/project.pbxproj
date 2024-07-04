@@ -58,8 +58,8 @@
 		465E359D27567A000032B8D2 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E359B27567A000032B8D2 /* StoreConstants.swift */; };
 		468E42942701F84A008B5792 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468E42922701F84A008B5792 /* LaunchScreen.storyboard */; };
 		468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E429F2701F84A008B5792 /* GhosteryApp.swift */; };
-		468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		468E42AB2701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 468E42AA2701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		468E42B52701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 468E42B42701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		468E42BF2701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C02701F84A008B5792 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 468E42812701F849008B5792 /* Style.css */; };
 		468E42C12701F84A008B5792 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 468E42822701F849008B5792 /* Script.js */; };
@@ -144,7 +144,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				468E42AB2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */,
+				468E42AB2701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,7 +155,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				468E42B52701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */,
+				468E42B52701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,15 +194,15 @@
 		468E42822701F849008B5792 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
 		468E42842701F84A008B5792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
-		468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E428B2701F84A008B5792 /* Ghostery Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E42982701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E429D2701F84A008B5792 /* Ghostery Privacy Ad Blocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghostery Privacy Ad Blocker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E429F2701F84A008B5792 /* GhosteryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhosteryApp.swift; sourceTree = "<group>"; };
 		468E42A42701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E42A52701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
-		468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E42AA2701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E42AF2701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery – Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		468E42B42701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E42B92701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E42BA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
 		B423DDAB29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
@@ -414,10 +414,10 @@
 		468E428C2701F84A008B5792 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */,
-				468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */,
-				468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */,
-				468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */,
+				468E428B2701F84A008B5792 /* Ghostery Privacy Ad Blocker.app */,
+				468E429D2701F84A008B5792 /* Ghostery Privacy Ad Blocker.app */,
+				468E42AA2701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */,
+				468E42B42701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,9 +483,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		468E428A2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (iOS) */ = {
+		468E428A2701F84A008B5792 /* iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (iOS)" */;
+			buildConfigurationList = 468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "iOS" */;
 			buildPhases = (
 				468E42872701F84A008B5792 /* Sources */,
 				468E42882701F84A008B5792 /* Frameworks */,
@@ -497,17 +497,17 @@
 			dependencies = (
 				468E42AD2701F84A008B5792 /* PBXTargetDependency */,
 			);
-			name = "Ghostery – Privacy Ad Blocker (iOS)";
+			name = iOS;
 			packageProductDependencies = (
 				465E3583275673060032B8D2 /* OrderedCollections */,
 			);
 			productName = "Ghostery – Privacy Ad Blocker (iOS)";
-			productReference = 468E428B2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */;
+			productReference = 468E428B2701F84A008B5792 /* Ghostery Privacy Ad Blocker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		468E429C2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (macOS) */ = {
+		468E429C2701F84A008B5792 /* macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (macOS)" */;
+			buildConfigurationList = 468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "macOS" */;
 			buildPhases = (
 				468E42992701F84A008B5792 /* Sources */,
 				468E429A2701F84A008B5792 /* Frameworks */,
@@ -519,17 +519,17 @@
 			dependencies = (
 				468E42B72701F84A008B5792 /* PBXTargetDependency */,
 			);
-			name = "Ghostery – Privacy Ad Blocker (macOS)";
+			name = macOS;
 			packageProductDependencies = (
 				465E3588275673FB0032B8D2 /* OrderedCollections */,
 			);
 			productName = "Ghostery – Privacy Ad Blocker (macOS)";
-			productReference = 468E429D2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.app */;
+			productReference = 468E429D2701F84A008B5792 /* Ghostery Privacy Ad Blocker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		468E42A92701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (iOS) */ = {
+		468E42A92701F84A008B5792 /* Extension iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 468E42CB2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (iOS)" */;
+			buildConfigurationList = 468E42CB2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Extension iOS" */;
 			buildPhases = (
 				468E42A62701F84A008B5792 /* Sources */,
 				468E42A72701F84A008B5792 /* Frameworks */,
@@ -540,14 +540,14 @@
 			);
 			dependencies = (
 			);
-			name = "Ghostery – Privacy Ad Blocker Extension (iOS)";
+			name = "Extension iOS";
 			productName = "Ghostery – Privacy Ad Blocker Extension (iOS)";
-			productReference = 468E42AA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */;
+			productReference = 468E42AA2701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		468E42B32701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (macOS) */ = {
+		468E42B32701F84A008B5792 /* Extension macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 468E42D22701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (macOS)" */;
+			buildConfigurationList = 468E42D22701F84A008B5792 /* Build configuration list for PBXNativeTarget "Extension macOS" */;
 			buildPhases = (
 				468E42B02701F84A008B5792 /* Sources */,
 				468E42B12701F84A008B5792 /* Frameworks */,
@@ -558,9 +558,9 @@
 			);
 			dependencies = (
 			);
-			name = "Ghostery – Privacy Ad Blocker Extension (macOS)";
+			name = "Extension macOS";
 			productName = "Ghostery – Privacy Ad Blocker Extension (macOS)";
-			productReference = 468E42B42701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension.appex */;
+			productReference = 468E42B42701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -603,10 +603,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				468E428A2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (iOS) */,
-				468E429C2701F84A008B5792 /* Ghostery – Privacy Ad Blocker (macOS) */,
-				468E42A92701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (iOS) */,
-				468E42B32701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (macOS) */,
+				468E428A2701F84A008B5792 /* iOS */,
+				468E429C2701F84A008B5792 /* macOS */,
+				468E42A92701F84A008B5792 /* Extension iOS */,
+				468E42B32701F84A008B5792 /* Extension macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -822,12 +822,12 @@
 /* Begin PBXTargetDependency section */
 		468E42AD2701F84A008B5792 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 468E42A92701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (iOS) */;
+			target = 468E42A92701F84A008B5792 /* Extension iOS */;
 			targetProxy = 468E42AC2701F84A008B5792 /* PBXContainerItemProxy */;
 		};
 		468E42B72701F84A008B5792 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 468E42B32701F84A008B5792 /* Ghostery – Privacy Ad Blocker Extension (macOS) */;
+			target = 468E42B32701F84A008B5792 /* Extension macOS */;
 			targetProxy = 468E42B62701F84A008B5792 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -906,7 +906,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 10.3.11;
+				MARKETING_VERSION = 10.3.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -979,7 +979,7 @@
 				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -993,7 +993,7 @@
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension.safari;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1010,7 +1010,7 @@
 				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1024,7 +1024,7 @@
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension.safari;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1065,7 +1065,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1104,7 +1104,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1126,7 +1126,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1140,7 +1140,7 @@
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension.safari;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1161,7 +1161,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,7 +1175,7 @@
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension.safari;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker Extension";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1199,7 +1199,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -1216,7 +1216,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1238,7 +1238,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery – Privacy Ad Blocker";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -1255,7 +1255,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostery.extension;
-				PRODUCT_NAME = "Ghostery – Privacy Ad Blocker";
+				PRODUCT_NAME = "Ghostery Privacy Ad Blocker";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1275,7 +1275,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		468E42CB2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (iOS)" */ = {
+		468E42CB2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Extension iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				468E42CC2701F84A008B5792 /* Debug */,
@@ -1284,7 +1284,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (iOS)" */ = {
+		468E42CF2701F84A008B5792 /* Build configuration list for PBXNativeTarget "iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				468E42D02701F84A008B5792 /* Debug */,
@@ -1293,7 +1293,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		468E42D22701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker Extension (macOS)" */ = {
+		468E42D22701F84A008B5792 /* Build configuration list for PBXNativeTarget "Extension macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				468E42D32701F84A008B5792 /* Debug */,
@@ -1302,7 +1302,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "Ghostery – Privacy Ad Blocker (macOS)" */ = {
+		468E42D62701F84A008B5792 /* Build configuration list for PBXNativeTarget "macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				468E42D72701F84A008B5792 /* Debug */,
