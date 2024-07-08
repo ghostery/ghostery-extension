@@ -12,7 +12,7 @@
 import {
   WebRequestPipeline,
   RequestReporter,
-} from '@whotracksme/webextension-packages/packages/reporting';
+} from '@whotracksme/reporting/reporting';
 import { getBrowserInfo } from '@ghostery/libs';
 
 import { observe, GLOBAL_PAUSE_ID } from '/store/options.js';

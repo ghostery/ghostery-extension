@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { UrlReporter } from '@whotracksme/webextension-packages/packages/reporting';
+import { UrlReporter } from '@whotracksme/reporting/reporting';
 import { getBrowserInfo } from '@ghostery/libs';
 
 import config from './config.js';

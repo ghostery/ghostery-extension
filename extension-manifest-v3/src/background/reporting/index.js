@@ -12,10 +12,7 @@
 // TODO: This is a temporary solution to avoid throwing errors in iOS Safari
 import './webrequest-monkey-patch.js';
 
-import {
-  setLogLevel,
-  describeLoggers,
-} from '@whotracksme/webextension-packages/packages/reporting';
+import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
 import { observe } from '/store/options.js';
 
