@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import AnonymousCommunication from '@whotracksme/webextension-packages/packages/anonymous-communication';
+import AnonymousCommunication from '@whotracksme/reporting/communication';
 
 import config from './config.js';
 import prefixedIndexedDBKeyValueStore from './storage-indexeddb.js';
