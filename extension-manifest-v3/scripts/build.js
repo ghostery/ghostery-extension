@@ -62,11 +62,6 @@ if (argv.target.startsWith('safari')) {
   argv.target = 'safari';
 }
 
-// Add background/safari path to assets for Safari target
-if (argv.target === 'safari') {
-  options.assets.push('background/safari');
-}
-
 // Download adblocker engines
 if (argv.staging) {
   execSync('npm run download-engines -- --staging', { stdio: 'inherit' });
@@ -285,6 +280,19 @@ const buildPromise = build({
         minifyInternalExports: false,
         entryFileNames: '[name].js',
         assetFileNames: 'assets/[name].[ext]',
+        sanitizeFileName: (name) => {
+          name = name
+            .replace(/[\0?*]+/g, '_') // eslint-disable-line no-control-regex
+            .replace('node_modules', 'npm')
+            .replace('_virtual', 'virtual');
+
+          const path = name.replace(resolve(pwd, '..'), '');
+          if (path.length > 100) {
+            throw new Error(`Filename too long: ${path} (${path.length})`);
+          }
+
+          return name;
+        },
       },
     },
   },
