@@ -25,12 +25,6 @@ export default {
           </div>
           <div layout="row center gap:0.5">
             <ui-text type="label-xs">Trackers blocked</ui-text>
-            <ui-tooltip wrap autohide="10">
-              <span slot="content" layout="block width:200px">
-                Number of trackers with blocked network requests.
-              </span>
-              <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
-            </ui-tooltip>
           </div>
         </section>
       `}
@@ -43,12 +37,6 @@ export default {
           </div>
           <div layout="row center gap:0.5">
             <ui-text type="label-xs">Trackers modified</ui-text>
-            <ui-tooltip wrap autohide="10">
-              <span slot="content" layout="block width:200px">
-                Number of trackers with removed cookies or fingerprints.
-              </span>
-              <ui-icon name="info" color="gray-400" layout="size:2"></ui-icon>
-            </ui-tooltip>
           </div>
         </section>
       `}
