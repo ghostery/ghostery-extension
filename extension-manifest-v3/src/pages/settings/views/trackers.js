@@ -108,8 +108,8 @@ export default {
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-m"> Tracker Database </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-                Mind that not all listed entities are trackers, that is not all
-                of them collect personal data
+                Mind that not all listed activities are trackers, that is not
+                all of them collect personal data.
               </ui-text>
               <ui-text
                 type="label-m"
