@@ -94,8 +94,8 @@
 		B463BF732ADE91F00088B0F0 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B463BF712ADE91F00088B0F0 /* icons */; };
 		B46514432987C3BD000E71F6 /* licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = B46514422987C3BD000E71F6 /* licenses.html */; };
 		B46514442987C3BD000E71F6 /* licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = B46514422987C3BD000E71F6 /* licenses.html */; };
-		B469CA8A27BE924D00408C43 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* node_modules */; };
-		B469CA8B27BE924D00408C43 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* node_modules */; };
+		B469CA8A27BE924D00408C43 /* npm in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* npm */; };
+		B469CA8B27BE924D00408C43 /* npm in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* npm */; };
 		B469CA8E27BE924D00408C43 /* background in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8427BE924D00408C43 /* background */; };
 		B469CA8F27BE924D00408C43 /* background in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8427BE924D00408C43 /* background */; };
 		B469CA9027BE924D00408C43 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8527BE924D00408C43 /* assets */; };
@@ -218,7 +218,7 @@
 		B456D51B27E094E40038964E /* Extensions.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Extensions.svg; sourceTree = "<group>"; };
 		B463BF712ADE91F00088B0F0 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../dist/icons; sourceTree = "<group>"; };
 		B46514422987C3BD000E71F6 /* licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = licenses.html; path = ../../dist/licenses.html; sourceTree = "<group>"; };
-		B469CA8227BE924D00408C43 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = node_modules; path = ../../dist/node_modules; sourceTree = "<group>"; };
+		B469CA8227BE924D00408C43 /* npm */ = {isa = PBXFileReference; lastKnownFileType = folder; name = npm; path = ../../dist/npm; sourceTree = "<group>"; };
 		B469CA8427BE924D00408C43 /* background */ = {isa = PBXFileReference; lastKnownFileType = folder; name = background; path = ../../dist/background; sourceTree = "<group>"; };
 		B469CA8527BE924D00408C43 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../dist/assets; sourceTree = "<group>"; };
 		B469CA8627BE924D00408C43 /* content_scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content_scripts; path = ../../dist/content_scripts; sourceTree = "<group>"; };
@@ -473,7 +473,7 @@
 				B469CA8527BE924D00408C43 /* assets */,
 				B469CA8427BE924D00408C43 /* background */,
 				B469CA8627BE924D00408C43 /* content_scripts */,
-				B469CA8227BE924D00408C43 /* node_modules */,
+				B469CA8227BE924D00408C43 /* npm */,
 				B469CA8727BE924D00408C43 /* pages */,
 			);
 			name = common;
@@ -671,7 +671,7 @@
 				CEC6DBCA292BE699001E9642 /* virtual in Resources */,
 				B479A074299266F300A25D8F /* utils in Resources */,
 				B469CA9B27BE949000408C43 /* manifest.json in Resources */,
-				B469CA8A27BE924D00408C43 /* node_modules in Resources */,
+				B469CA8A27BE924D00408C43 /* npm in Resources */,
 				B469CA8E27BE924D00408C43 /* background in Resources */,
 				B4D49C7028045EFC00277CCA /* store in Resources */,
 				B469CA9227BE924D00408C43 /* content_scripts in Resources */,
@@ -691,7 +691,7 @@
 				CEC6DBCB292BE699001E9642 /* virtual in Resources */,
 				B479A075299266F300A25D8F /* utils in Resources */,
 				B469CA9C27BE949000408C43 /* manifest.json in Resources */,
-				B469CA8B27BE924D00408C43 /* node_modules in Resources */,
+				B469CA8B27BE924D00408C43 /* npm in Resources */,
 				B469CA8F27BE924D00408C43 /* background in Resources */,
 				B4D49C7128045EFC00277CCA /* store in Resources */,
 				B469CA9327BE924D00408C43 /* content_scripts in Resources */,
