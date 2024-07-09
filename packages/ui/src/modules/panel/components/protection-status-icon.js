@@ -17,7 +17,7 @@ export default {
     <template layout="contents">
       <ui-icon
         name="${status.type}-m"
-        color="${status.type === 'block' ? 'gray-800' : 'success-500'}"
+        color="${status.type === 'block' ? 'gray-800' : 'warning-500'}"
       ></ui-icon>
       ${status.website &&
       html`

@@ -188,6 +188,8 @@ export default {
               </ui-toggle>
               <ui-line></ui-line>
               <ui-toggle
+                type="status"
+                color="danger-500"
                 disabled="${globalPause}"
                 value="${options.experimentalFilters}"
                 onchange="${html.set(options, 'experimentalFilters')}"

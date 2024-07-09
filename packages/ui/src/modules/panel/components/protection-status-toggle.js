@@ -50,7 +50,7 @@ export default {
     }
 
     ui-panel-action.trusted[active] {
-      color: var(--ui-color-success-500);
+      color: var(--ui-color-warning-500);
     }
   `,
 };
