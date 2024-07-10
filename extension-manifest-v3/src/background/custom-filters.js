@@ -38,8 +38,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     console.log('filters:', msg.filters);
     engines
       .createCustomEngine(msg.filters)
-      .then(() => sendResponse('Engine updated'));
-
+      .then(({ notSupportedFilters, engine }) =>
+        sendResponse({
+          notSupportedFilters,
+          success: !!engine,
+        }),
+      );
     return true;
   }
 

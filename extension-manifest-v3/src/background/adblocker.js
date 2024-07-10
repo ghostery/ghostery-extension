@@ -287,6 +287,14 @@ async function injectScriptlets(tabId, url) {
     const engine = engines.get(name);
     if (!engine) return;
 
+    if (name === engines.CUSTOM_ENGINE) {
+      try {
+        engine.resources = engines.get(engines.FIXES_ENGINE).resources;
+      } catch (e) {
+        console.warn('Could not share resources with Custom Filters engien', e);
+      }
+    }
+
     const { active, scripts } = engine.getCosmeticsFilters({
       url: url,
       hostname,
