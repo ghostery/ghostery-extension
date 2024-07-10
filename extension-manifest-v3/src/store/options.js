@@ -46,7 +46,7 @@ const Options = {
   blockAnnoyances: true,
 
   // Browser icon
-  trackerWheel: __PLATFORM__ === 'safari',
+  trackerWheel: __PLATFORM__ !== 'firefox',
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
   // SERP
