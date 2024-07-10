@@ -15,7 +15,7 @@ import { getOffscreenImageData } from '@ghostery/ui/wheel';
 import { order } from '@ghostery/ui/categories';
 
 import DailyStats from '/store/daily-stats.js';
-import Options, { isGlobalPaused, observe } from '/store/options.js';
+import Options, { isPaused, observe } from '/store/options.js';
 
 import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
@@ -58,10 +58,7 @@ async function refreshIcon(tabId) {
   const stats = tabStats.get(tabId);
   if (!stats) return;
 
-  const inactive =
-    isGlobalPaused(options) ||
-    !options.terms ||
-    options.paused.some(({ id }) => id === stats.hostname);
+  const inactive = !options.terms || isPaused(options, stats.hostname);
 
   const data = {};
   if (options.trackerWheel && stats.trackers.length > 0) {

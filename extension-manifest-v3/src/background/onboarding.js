@@ -21,7 +21,7 @@ const NOTIFICATION_TRACKERS_THRESHOLD = 10;
 let done = false;
 let shownAt = 0;
 
-observe(null, (options) => {
+observe((options) => {
   ({ done, shownAt } = options.onboarding);
 
   if (!done && !shownAt) {

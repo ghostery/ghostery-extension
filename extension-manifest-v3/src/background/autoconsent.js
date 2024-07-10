@@ -14,19 +14,15 @@ import { snippets } from '@duckduckgo/autoconsent/lib/eval-snippets';
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
-import Options, { isGlobalPaused } from '/store/options.js';
+import Options, { isPaused } from '/store/options.js';
 
 async function initialize(msg, tab, frameId) {
   const options = await store.resolve(Options);
-  const { terms, blockAnnoyances, paused } = options;
-
-  const pureHostname = tab.url && parse(tab.url).hostname.replace(/^www\./, '');
 
   if (
-    !isGlobalPaused(options) &&
-    terms &&
-    blockAnnoyances &&
-    (!pureHostname || !paused.some(({ id }) => id === pureHostname))
+    options.terms &&
+    options.blockAnnoyances &&
+    !isPaused(options, tab.url ? parse(tab.url).hostname : '')
   ) {
     try {
       chrome.tabs.sendMessage(

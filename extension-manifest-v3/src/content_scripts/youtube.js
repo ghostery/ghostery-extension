@@ -11,6 +11,7 @@
 
 import { showIframe, closeIframe } from '@ghostery/ui/iframe';
 import detectWall from '@ghostery/ui/youtube/wall';
+import { isPaused } from '/store/options';
 
 async function isFeatureDisabled() {
   const { options, youtubeDontAsk } = await chrome.storage.local.get([
@@ -21,10 +22,10 @@ async function isFeatureDisabled() {
   if (
     // User's choice to not show the wall
     youtubeDontAsk ||
-    // Terms not accepted or paused domain
+    // Terms not accepted or paused
     !options ||
     !options.terms ||
-    options.paused.some(({ id }) => id.includes('youtube.com'))
+    isPaused(options, 'youtube.com')
   ) {
     return true;
   }

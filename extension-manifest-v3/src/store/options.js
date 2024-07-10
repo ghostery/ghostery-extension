@@ -39,6 +39,8 @@ export const ENGINES = [
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
+const OPTIONS_VERSION = 2;
+
 const Options = {
   // Main features
   blockAds: true,
@@ -70,7 +72,7 @@ const Options = {
   panel: { statsType: 'graph' },
 
   // Pause
-  paused: [{ id: true, revokeAt: 0 }],
+  paused: store.record({ revokeAt: 0 }),
 
   // Sync
   sync: true,
@@ -83,30 +85,30 @@ const Options = {
       );
 
       // Migrate options
-      if (optionsVersion < 1) {
+      if (optionsVersion < OPTIONS_VERSION) {
         const keys = [];
 
-        // Migrate from Extension v8 (MV2)
-        if (__PLATFORM__ !== 'safari') {
-          options = await migrateFromMV2();
+        if (optionsVersion < 1) {
+          // Migrate from Extension v8
+          if (__PLATFORM__ !== 'safari') {
+            options = await migrateFromV8();
+          }
         }
 
-        // The v10.1.0 introduced options rollback when DNR lists fail to update.
-        // It looks, that a major part of the users were affected by this issue,
-        // so they might have switched off main features not intentionally.
-        // We need to switched them on again one time only for onboarded users.
-        if (__PLATFORM__ === 'safari' && options.terms) {
-          options.blockAds = true;
-          options.blockTrackers = true;
-          options.blockAnnoyances = true;
-
-          keys.push('blockAds', 'blockTrackers', 'blockAnnoyances');
+        if (optionsVersion < 2) {
+          // Migrate 'paused' array to record
+          if (options.paused) {
+            options.paused = options.paused.reduce((acc, { id, revokeAt }) => {
+              acc[id] = { revokeAt };
+              return acc;
+            }, {});
+          }
         }
 
         // Flush updated options and version to the storage
         await chrome.storage.local.set({
           options,
-          optionsVersion: 1,
+          optionsVersion: OPTIONS_VERSION,
         });
 
         // Send updated options to the server
@@ -224,7 +226,7 @@ export async function sync(options, keys) {
   }
 }
 
-async function migrateFromMV2() {
+async function migrateFromV8() {
   try {
     const options = {};
     const storage = await chrome.storage.local.get(null);
@@ -245,10 +247,9 @@ async function migrateFromMV2() {
 
       options.wtmSerpReport = storage.enable_wtm_serp_report ?? true;
 
-      options.paused = storage.site_whitelist.map((domain) => ({
-        id: domain,
-        revokeAt: 0,
-      }));
+      options.paused = storage.site_whitelist.reduce((acc, domain) => {
+        acc[domain] = { revokeAt: 0 };
+      }, {});
 
       options.installDate = storage.install_date || '';
 
@@ -284,14 +285,11 @@ async function migrateFromMV2() {
   }
 }
 
-// Remove `optionsFromV8` storage key, as we don't need it anymore
-// TODO: Please remove this code when the next version after the code is released
-// This touches only Opera users, as this is the only platform, which has `optionsFromV8` key
-if (__PLATFORM__ === 'opera') chrome.storage.local.remove('optionsFromV8');
-
-export async function observe(property, fn) {
+export async function observe(...args) {
   let wrapper;
-  if (property) {
+
+  if (args.length === 2) {
+    const [property, fn] = args;
     let value;
     wrapper = async (options) => {
       if (value === undefined || options[property] !== value) {
@@ -301,7 +299,7 @@ export async function observe(property, fn) {
       }
     };
   } else {
-    wrapper = fn;
+    wrapper = args[0];
   }
 
   try {
@@ -322,6 +320,9 @@ export async function observe(property, fn) {
   };
 }
 
-export function isGlobalPaused(options) {
-  return options.paused.some(({ id }) => id === GLOBAL_PAUSE_ID);
+export function isPaused(options, domain = '') {
+  return (
+    !!options.paused[GLOBAL_PAUSE_ID] ||
+    (domain && !!options.paused[domain.replace(/^www\./, '')])
+  );
 }

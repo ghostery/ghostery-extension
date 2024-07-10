@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { observe, ENGINES, isGlobalPaused } from '/store/options.js';
+import { observe, ENGINES, isPaused } from '/store/options.js';
 import { TRACKERDB_ENGINE } from '/utils/engines.js';
 
 const PAUSE_RULE_PRIORITY = 10000000;
@@ -40,8 +40,8 @@ if (__PLATFORM__ !== 'firefox') {
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
-  observe(null, async (options) => {
-    const globalPause = isGlobalPaused(options);
+  observe(async (options) => {
+    const globalPause = isPaused(options);
     const ids = ENGINES.map(({ name, key }) => {
       return !globalPause && options.terms && options[key] ? name : '';
     }).filter((id) => id && DNR_RESOURCES.includes(id));
@@ -86,10 +86,9 @@ if (__PLATFORM__ !== 'firefox') {
     if (!prevPaused) return;
 
     const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+    const hostnames = Object.keys(paused);
 
-    if (paused.length) {
-      const hostnames = paused.map(({ id }) => id);
-
+    if (hostnames.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         addRules:
           __PLATFORM__ === 'safari'

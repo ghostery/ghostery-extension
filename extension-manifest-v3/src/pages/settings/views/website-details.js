@@ -45,7 +45,7 @@ function removeDomain(tracker) {
 
 function revokePaused({ options, domain }) {
   store.set(options, {
-    paused: options.paused.filter((p) => p.id !== domain),
+    paused: { [domain]: null },
   });
 }
 
@@ -66,7 +66,7 @@ export default {
   },
   options: store(Options),
   paused: ({ options, domain }) =>
-    (store.ready(options) && options.paused.find((p) => p.id === domain)) || {},
+    (store.ready(options) && options.paused[domain]) || {},
   render: ({ domain, trackers, paused }) => html`
     <template layout="contents">
       <gh-settings-page-layout layout="gap:4">

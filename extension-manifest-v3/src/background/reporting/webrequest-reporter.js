@@ -15,7 +15,7 @@ import {
 } from '@whotracksme/reporting/reporting';
 import { getBrowserInfo } from '@ghostery/libs';
 
-import { observe, GLOBAL_PAUSE_ID } from '/store/options.js';
+import { observe, isPaused } from '/store/options.js';
 
 import Request from '../utils/request.js';
 import { updateTabStats } from '../stats.js';
@@ -32,18 +32,9 @@ if (__PLATFORM__ !== 'safari') {
   // Important to call it in a first tick as it assigns chrome. listeners
   webRequestPipeline.init();
 
-  let pausedHostnames = new Set();
-  let isAntiTrackingEnabled = false;
-
-  observe('blockTrackers', (blockTrackers) => {
-    isAntiTrackingEnabled = blockTrackers;
-  });
-
-  observe('paused', (paused) => {
-    pausedHostnames.clear();
-    for (const { id } of paused) {
-      pausedHostnames.add(id);
-    }
+  let options = {};
+  observe((value) => {
+    options = value;
   });
 
   webRequestReporter = new RequestReporter(config.request, {
@@ -52,20 +43,8 @@ if (__PLATFORM__ !== 'safari') {
     countryProvider: urlReporter.countryProvider,
     trustedClock: communication.trustedClock,
     getBrowserInfo,
-    isRequestAllowed: (state) => {
-      if (!isAntiTrackingEnabled) {
-        return true;
-      }
-
-      if (
-        pausedHostnames.has(GLOBAL_PAUSE_ID) ||
-        pausedHostnames.has(state.tabUrlParts.hostname.replace(/^www\./, ''))
-      ) {
-        return true;
-      }
-
-      return false;
-    },
+    isRequestAllowed: (state) =>
+      !options.blockTrackers || isPaused(options, state.tabUrlParts.hostname),
     onTrackerInteraction: (event, state) => {
       if (event === 'observed') {
         return;
