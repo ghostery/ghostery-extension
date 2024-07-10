@@ -120,6 +120,9 @@ function updateIcon(tabId, force) {
   refreshIcon(tabId);
 }
 
+const REQUESTS_LIMIT = 100;
+const OBSERVED_REQUESTS_LIMIT = 25;
+
 function pushTabStats(stats, requests) {
   let trackersUpdated = false;
 
@@ -139,14 +142,24 @@ function pushTabStats(stats, requests) {
         tracker.requestsCount = (tracker.requestsCount || 0) + 1;
         tracker.blocked = tracker.blocked || request.blocked;
         tracker.modified = tracker.modified || request.modified;
-        tracker.requests = tracker.requests.slice(0, 9);
 
-        tracker.requests.unshift({
-          id: request.requestId,
-          url: request.url,
-          blocked: request.blocked,
-          modified: request.modified,
-        });
+        if (tracker.requests.length > REQUESTS_LIMIT) {
+          tracker.requests = tracker.requests.slice(0, REQUESTS_LIMIT - 1);
+        }
+
+        if (
+          request.blocked ||
+          request.modified ||
+          tracker.requests.filter((r) => !r.blocked && !r.modified).length <
+            OBSERVED_REQUESTS_LIMIT
+        ) {
+          tracker.requests.unshift({
+            id: request.requestId,
+            url: request.url,
+            blocked: request.blocked,
+            modified: request.modified,
+          });
+        }
       }
     }
   }
