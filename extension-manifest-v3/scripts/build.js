@@ -287,8 +287,8 @@ const buildPromise = build({
             .replace('_virtual', 'virtual');
 
           const path = name.replace(resolve(pwd, '..'), '');
-          if (path.length > 100) {
-            throw new Error(`Filename too long: ${path} (${path.length})`);
+          if (path.length > 100 && !argv['no-filename-limits']) {
+            throw new Error(`Filename too long: ${path} (${path.length}) (pass --no-filename-limit to disable)`);
           }
 
           return name;
