@@ -16,7 +16,7 @@ import {
 } from '@ghostery/trackers-preview/background';
 import css from '@ghostery/trackers-preview/content_scripts/styles.css?raw';
 
-import Options, { isGlobalPaused } from '/store/options.js';
+import Options, { isPaused } from '/store/options.js';
 
 const SERP_URL_REGEXP =
   /^https:[/][/][^/]*[.]google[.][a-z]+([.][a-z]+)?[/]search/;
@@ -38,7 +38,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
 
         if (options.wtmSerpReport)
           files.push('/content_scripts/trackers-preview.js');
-        if (!isGlobalPaused(options) && options.serpTrackingPrevention)
+        if (!isPaused(options) && options.serpTrackingPrevention)
           files.push('/content_scripts/prevent-serp-tracking.js');
 
         chrome.scripting.executeScript(

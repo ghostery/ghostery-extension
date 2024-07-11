@@ -19,12 +19,14 @@ observe('paused', async (paused) => {
   const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
     name.startsWith(PAUSED_ALARM_PREFIX),
   );
-  const revokeHostnames = paused.filter(({ revokeAt }) => revokeAt);
+  const revokeHostnames = Object.entries(paused).filter(
+    ([, { revokeAt }]) => revokeAt,
+  );
 
   // Clear alarms for removed hostnames
   alarms.forEach(({ name }) => {
     if (
-      !revokeHostnames.find(({ id }) => name === `${PAUSED_ALARM_PREFIX}:${id}`)
+      !revokeHostnames.find(([id]) => name === `${PAUSED_ALARM_PREFIX}:${id}`)
     ) {
       chrome.alarms.clear(name);
     }
@@ -33,8 +35,8 @@ observe('paused', async (paused) => {
   // Add alarms for new hostnames
   if (revokeHostnames.length) {
     revokeHostnames
-      .filter(({ id }) => !alarms.some(({ name }) => name === id))
-      .forEach(({ id, revokeAt }) => {
+      .filter(([id]) => !alarms.some(({ name }) => name === id))
+      .forEach(([id, { revokeAt }]) => {
         chrome.alarms.create(`${PAUSED_ALARM_PREFIX}:${id}`, {
           when: revokeAt,
         });
@@ -42,15 +44,10 @@ observe('paused', async (paused) => {
   }
 });
 
-// Remove paused hostnames from options when alarm is triggered
+// Remove paused hostname from options when alarm is triggered
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name.startsWith(PAUSED_ALARM_PREFIX)) {
-    store.resolve(Options).then((options) => {
-      store.set(options, {
-        paused: options.paused.filter(
-          ({ id }) => `${PAUSED_ALARM_PREFIX}:${id}` !== alarm.name,
-        ),
-      });
-    });
+    const id = alarm.name.slice(PAUSED_ALARM_PREFIX.length + 1);
+    store.set(Options, { paused: { [id]: null } });
   }
 });

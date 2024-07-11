@@ -59,15 +59,11 @@ async function togglePause(host, event) {
   const { paused, pauseType } = event.target;
 
   await store.set(host.options, {
-    paused: paused
-      ? host.options.paused.filter((p) => p.id !== host.stats.hostname)
-      : [
-          ...host.options.paused,
-          {
-            id: host.stats.hostname,
-            revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
-          },
-        ],
+    paused: {
+      [host.stats.hostname]: !paused
+        ? { revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType }
+        : null,
+    },
   });
 
   reloadTab();
@@ -84,7 +80,7 @@ function revokeGlobalPause(host) {
   const { options } = host;
 
   store.set(options, {
-    paused: options.paused.filter((p) => p.id !== GLOBAL_PAUSE_ID),
+    paused: { [GLOBAL_PAUSE_ID]: null },
   });
 
   reloadTab();
@@ -103,11 +99,9 @@ export default {
   stats: store(TabStats),
   notification: store(Notification),
   paused: ({ options, stats }) =>
-    store.ready(options, stats) &&
-    options.paused.find(({ id }) => id === stats.hostname),
+    store.ready(options, stats) && !!options.paused[stats.hostname],
   globalPause: ({ options }) =>
-    store.ready(options) &&
-    options.paused.find(({ id }) => id === GLOBAL_PAUSE_ID),
+    store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
   render: ({ options, stats, notification, paused, globalPause }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&

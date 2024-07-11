@@ -30,9 +30,7 @@ function revoke(host, item) {
     }
   }
 
-  store.set(host.options, {
-    paused: host.options.paused.filter((p) => p.id !== item.id),
-  });
+  store.set(host.options, { paused: { [item.id]: null } });
 }
 
 function revokeCallback(item) {
@@ -48,7 +46,6 @@ export default {
   [router.connect]: { stack: [WebsiteDetails, WebsitesAdd] },
   options: store(Options),
   query: '',
-  paused: ({ options }) => (store.ready(options) ? options.paused : []),
   exceptions: () => {
     const exceptions = store.get([TrackerException]);
     if (!store.ready(exceptions)) return [];
@@ -70,7 +67,14 @@ export default {
 
     return [...domains.entries()];
   },
-  websites: ({ paused, exceptions, query }) => {
+  websites: ({ options, exceptions, query }) => {
+    const paused = store.ready(options)
+      ? Object.entries(options.paused).map(([id, { revokeAt }]) => ({
+          id,
+          revokeAt,
+        }))
+      : [];
+
     query = query.toLowerCase().trim();
 
     return [

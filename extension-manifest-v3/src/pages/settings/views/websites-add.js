@@ -20,18 +20,14 @@ async function add({ options, hostname, pauseType }, event) {
   router.resolve(
     event,
     store.submit(hostname).then(({ value }) => {
-      if (options.paused.some((p) => p.id === value)) {
-        return;
-      }
+      if (options.paused[value]) return;
 
       return store.set(options, {
-        paused: [
-          ...options.paused,
-          {
-            id: value,
+        paused: {
+          [value]: {
             revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
           },
-        ],
+        },
       });
     }),
   );

@@ -25,21 +25,13 @@ function toggleNeverConsent({ options }) {
 function updateGlobalPause({ options }, value, lastValue) {
   if (lastValue === undefined) return;
 
-  if (!value) {
-    store.set(options, {
-      paused: options.paused.filter((p) => p.id !== GLOBAL_PAUSE_ID),
-    });
-  } else if (!options.paused.find((p) => p.id === GLOBAL_PAUSE_ID)) {
-    store.set(options, {
-      paused: [
-        ...options.paused,
-        {
-          id: GLOBAL_PAUSE_ID,
-          revokeAt: Date.now() + 24 * 60 * 60 * 1000,
-        },
-      ],
-    });
-  }
+  store.set(options, {
+    paused: {
+      [GLOBAL_PAUSE_ID]: value
+        ? { revokeAt: Date.now() + 24 * 60 * 60 * 1000 }
+        : null,
+    },
+  });
 }
 
 export default {
@@ -52,8 +44,7 @@ export default {
   },
   globalPauseRevokeAt: {
     value: ({ options }) =>
-      store.ready(options) &&
-      options.paused.find((p) => p.id === GLOBAL_PAUSE_ID)?.revokeAt,
+      store.ready(options) && options.paused[GLOBAL_PAUSE_ID]?.revokeAt,
     observe: (host, value) => {
       host.globalPause = value;
     },

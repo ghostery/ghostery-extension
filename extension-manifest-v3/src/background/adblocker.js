@@ -15,7 +15,7 @@ import {
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
-import { observe, ENGINES, GLOBAL_PAUSE_ID } from '/store/options.js';
+import { observe, ENGINES, isPaused } from '/store/options.js';
 import * as engines from '/utils/engines.js';
 
 import Request from './utils/request.js';
@@ -24,10 +24,12 @@ import asyncSetup from './utils/setup.js';
 import { tabStats, updateTabStats } from './stats.js';
 
 let enabledEngines = [];
-let pausedHostnames = new Set();
+let options = {};
 
 const setup = asyncSetup([
-  observe(null, (options) => {
+  observe((value) => {
+    options = value;
+
     enabledEngines = options.terms
       ? [
           // Add custom engine
@@ -37,24 +39,11 @@ const setup = asyncSetup([
           ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
         ]
       : [];
-
-    // Set paused hostnames
-    pausedHostnames.clear();
-    for (const { id } of options.paused) {
-      pausedHostnames.add(id);
-    }
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
-
-function isPaused(hostname) {
-  return (
-    pausedHostnames.has(GLOBAL_PAUSE_ID) ||
-    pausedHostnames.has(hostname.replace(/^www\./, ''))
-  );
-}
 
 function adblockerInjectStylesWebExtension(
   styles,
@@ -107,7 +96,7 @@ async function adblockerOnMessage(msg, sender) {
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
 
-  if (!sender.tab || isPaused(hostname)) {
+  if (!sender.tab || isPaused(options, hostname)) {
     return;
   }
 
@@ -276,12 +265,12 @@ ${scripts.join('\n\n')}}
 
 async function injectScriptlets(tabId, url) {
   const { hostname, domain } = parse(url);
-  if (!hostname || isPaused(hostname)) {
+  if (!hostname || isPaused(options, hostname)) {
     return;
   }
 
   const tabHostname = tabStats.get(tabId)?.hostname;
-  if (tabHostname && isPaused(tabHostname)) {
+  if (tabHostname && isPaused(options, tabHostname)) {
     return;
   }
 
@@ -345,7 +334,7 @@ if (__PLATFORM__ === 'firefox') {
       if (request.sourceHostname) {
         if (
           (details.type !== 'main_frame' && request.metadata?.isTrusted) ||
-          isPaused(request.sourceHostname)
+          isPaused(options, request.sourceHostname)
         ) {
           updateTabStats(details.tabId, [request]);
           return;
@@ -397,7 +386,10 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       const request = Request.fromRequestDetails(details);
-      if (request.metadata?.isTrusted || isPaused(request.sourceHostname)) {
+      if (
+        request.metadata?.isTrusted ||
+        isPaused(options, request.sourceHostname)
+      ) {
         return;
       }
 
