@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { store } from 'hybrids';
+import { store, msg } from 'hybrids';
 import { deleteDB } from 'idb';
 
 import { getUserOptions, setUserOptions } from '../utils/api.js';
@@ -40,6 +40,18 @@ export const ENGINES = [
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
+export const REGIONAL_FILTERS = Object.entries({
+  fr: msg`France`,
+  de: msg`Germany`,
+  gr: msg`Greece`,
+  it: msg`Italy`,
+  ja: msg`Japan`,
+  ko: msg`Korea`,
+  pl: msg`Poland`,
+  ru: msg`Russia`,
+  tr: msg`Turkey`,
+});
+
 const OPTIONS_VERSION = 2;
 
 const Options = {
@@ -47,6 +59,12 @@ const Options = {
   blockAds: true,
   blockTrackers: true,
   blockAnnoyances: true,
+
+  // Regional filters
+  regionalFilters: {
+    enabled: false,
+    regions: store.record(false),
+  },
 
   // Advanced features
   customFilters: {

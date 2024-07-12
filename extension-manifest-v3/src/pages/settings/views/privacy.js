@@ -11,7 +11,7 @@
 
 import { html, store } from 'hybrids';
 
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID, REGIONAL_FILTERS } from '/store/options.js';
 import Session from '/store/session.js';
 
 import assets from '../assets/index.js';
@@ -166,6 +166,57 @@ export default {
                 </ui-toggle>
               </div>
               <ui-line></ui-line>
+              <div layout="column gap">
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.regionalFilters.enabled}"
+                  onchange="${html.set(options, 'regionalFilters.enabled')}"
+                >
+                  <div layout="column grow gap:0.5">
+                    <div layout="row gap items:center">
+                      <ui-icon name="pin" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">Regional filters</ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Additional block lists covering ads, trackers and other
+                      popups specific for a given region. Enable only for the
+                      regions you are interested it as running multiple lists
+                      can slow down the browser.
+                    </ui-text>
+                  </div>
+                </ui-toggle>
+                <div
+                  layout="row:wrap gap:2:1 padding:right:12"
+                  style="${{
+                    opacity: options.regionalFilters.enabled ? undefined : 0.5,
+                  }}"
+                >
+                  ${REGIONAL_FILTERS.map(
+                    ([id, name]) => html`
+                      <label
+                        ><gh-settings-region
+                          disabled="${!options.regionalFilters.enabled}"
+                        >
+                          <input
+                            type="checkbox"
+                            disabled="${!options.regionalFilters.enabled}"
+                            checked="${options.regionalFilters.regions[id]}"
+                            onchange="${html.set(
+                              options,
+                              `regionalFilters.regions.${id}`,
+                            )}"
+                          />
+                          <span slot="label">${name}</span>
+                        </gh-settings-region>
+                      </label>
+                    `,
+                  )}
+                </div>
+              </div>
               <ui-toggle
                 disabled="${globalPause}"
                 value="${options.serpTrackingPrevention}"
