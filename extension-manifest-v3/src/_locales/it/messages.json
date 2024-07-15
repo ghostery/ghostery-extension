@@ -356,8 +356,8 @@
   "menu": {
     "message": "Menu"
   },
-  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Si tenga presente che non tutte le entità elencate sono tracker, cioè non tutte raccolgono dati personali"
+  "mind_that_not_all_listed_activities_are_trackers__that_is_not_all_of_them_collect_personal_data_": {
+    "message": "Si tenga presente che non tutte le attività elencate sono tracciatori, cioè non tutte raccolgono dati personali."
   },
   "miscellaneous": {
     "message": "Varie",
@@ -395,12 +395,6 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "Nessuna eccezione ai siti web è stata ancora aggiunta"
-  },
-  "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Numero di tracker con richieste di rete bloccate."
-  },
-  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Numero di tracker con cookie o impronte digitali rimossi."
   },
   "observed_activities": {
     "message": "Attività osservate"

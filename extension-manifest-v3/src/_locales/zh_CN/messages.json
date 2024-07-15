@@ -356,8 +356,8 @@
   "menu": {
     "message": "菜单"
   },
-  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "请注意，列出的实体并不全都是跟踪器，并非所有实体都收集个人数据"
+  "mind_that_not_all_listed_activities_are_trackers__that_is_not_all_of_them_collect_personal_data_": {
+    "message": "请注意，列出的活动并非全都是跟踪器，并非所有活动都收集个人数据。."
   },
   "miscellaneous": {
     "message": "其他",
@@ -395,12 +395,6 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "还未添加网站异常"
-  },
-  "number_of_trackers_with_blocked_network_requests_": {
-    "message": "网络请求受阻的跟踪器数量。"
-  },
-  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "已删除 cookie 或指纹的跟踪器数量。"
   },
   "observed_activities": {
     "message": "已观察过的活动"

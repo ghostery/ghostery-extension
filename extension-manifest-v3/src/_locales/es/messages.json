@@ -356,8 +356,8 @@
   "menu": {
     "message": "Menú"
   },
-  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Ten en cuenta que no todas las entidades enumeradas son rastreadoras; es decir, que no todas recopilan datos personales"
+  "mind_that_not_all_listed_activities_are_trackers__that_is_not_all_of_them_collect_personal_data_": {
+    "message": "Ten en cuenta que no todas las actividades enumeradas son rastreadores; es decir, que no todas recopilan datos personales."
   },
   "miscellaneous": {
     "message": "Miscelánea",
@@ -395,12 +395,6 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "No se ha añadido aún ninguna excepción"
-  },
-  "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Número de rastreadores con solicitudes de red bloqueadas."
-  },
-  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Número de rastreadores con cookies o huellas dactilares eliminadas."
   },
   "observed_activities": {
     "message": "Actividades observadas"
