@@ -1,7 +1,9 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directories:
+      - "extension-manifest-v3"
+      - "packages/*"
     schedule:
       interval: daily
       time: "04:00"
