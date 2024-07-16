@@ -28,7 +28,7 @@
   "devDependencies": {
     "shelljs": "^0.8.5",
     "sinon-chrome": "^3.0.1",
-    "vite": "^4.5.2",
+    "vite": "4.5.2",
     "web-ext": "^8.2.0",
     "webextension-polyfill": "^0.12.0"
   },
