@@ -49,8 +49,8 @@ export default {
       color: var(--ui-color-gray-800);
     }
 
-    ui-panel-action.trusted[active] {
-      color: var(--ui-color-warning-500);
+    ui-panel-action.trusted[active] button {
+      background: var(--ui-color-warning-500);
     }
   `,
 };

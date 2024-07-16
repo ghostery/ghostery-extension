@@ -73,7 +73,7 @@ export default {
                 value="${blocked ? allowedOnSite : blockedOnSite}"
                 onchange="${toggleDomain}"
                 type="status"
-                color="${blocked ? 'success' : 'danger'}-500"
+                color="${blocked ? 'warning' : 'danger'}-500"
                 layout="margin:top:0.5"
                 no-label
               >
