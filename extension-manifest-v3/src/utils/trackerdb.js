@@ -206,3 +206,7 @@ export async function getCategories() {
       (a, b) => categoryOrder.indexOf(a.key) - categoryOrder.indexOf(b.key),
     );
 }
+
+export function addUpdateListener(fn) {
+  engines.addUpdateListener(engines.TRACKERDB_ENGINE, fn);
+}
