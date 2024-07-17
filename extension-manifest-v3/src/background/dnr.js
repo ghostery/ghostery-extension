@@ -82,23 +82,19 @@ if (__PLATFORM__ !== 'firefox') {
     }
   });
 
-  const getPauseRulesIds = async () => {
-    return (await chrome.declarativeNetRequest.getDynamicRules())
-      .filter(({ id }) => id <= 3)
-      .map(({ id }) => id);
-  };
-
   observe('paused', async (paused, prevPaused) => {
     // The background process starts and runs for each tab, so we can assume
     // that this function is called before the user can change the paused state
     // in the panel or the settings page.
     if (!prevPaused) return;
 
+    const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
+      .filter(({ id }) => id <= 3)
+      .map(({ id }) => id);
+
     const hostnames = Object.keys(paused);
 
     if (hostnames.length) {
-      const removeRuleIds = await getPauseRulesIds();
-
       await chrome.declarativeNetRequest.updateDynamicRules({
         addRules:
           __PLATFORM__ === 'safari'
@@ -144,13 +140,10 @@ if (__PLATFORM__ !== 'firefox') {
               ],
         removeRuleIds,
       });
-    } else {
-      const removeRuleIds = await getPauseRulesIds();
-      if (removeRuleIds.length) {
-        await chrome.declarativeNetRequest.updateDynamicRules({
-          removeRuleIds,
-        });
-      }
+    } else if (removeRuleIds.length) {
+      await chrome.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds,
+      });
     }
 
     console.log('DNR: pause rules updated');
