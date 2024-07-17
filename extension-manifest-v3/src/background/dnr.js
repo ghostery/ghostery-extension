@@ -12,26 +12,26 @@
 import { observe, ENGINES, isPaused } from '/store/options.js';
 import { TRACKERDB_ENGINE } from '/utils/engines.js';
 
-const PAUSE_RULE_PRIORITY = 10000000;
-
-const ALL_RESOURCE_TYPES = [
-  'main_frame',
-  'sub_frame',
-  'stylesheet',
-  'script',
-  'image',
-  'font',
-  'object',
-  'xmlhttprequest',
-  'ping',
-  'media',
-  'websocket',
-  'webtransport',
-  'webbundle',
-  'other',
-];
-
 if (__PLATFORM__ !== 'firefox') {
+  const PAUSE_RULE_PRIORITY = 10000000;
+
+  const ALL_RESOURCE_TYPES = [
+    'main_frame',
+    'sub_frame',
+    'stylesheet',
+    'script',
+    'image',
+    'font',
+    'object',
+    'xmlhttprequest',
+    'ping',
+    'media',
+    'websocket',
+    'webtransport',
+    'webbundle',
+    'other',
+  ];
+
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
@@ -42,6 +42,7 @@ if (__PLATFORM__ !== 'firefox') {
   // to the value from the manifest.
   observe(async (options) => {
     const globalPause = isPaused(options);
+
     const ids = ENGINES.map(({ name, key }) => {
       return !globalPause && options.terms && options[key] ? name : '';
     }).filter((id) => id && DNR_RESOURCES.includes(id));
@@ -74,18 +75,23 @@ if (__PLATFORM__ !== 'firefox') {
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.info('DNR - Lists successfully updated');
+        console.info('DNR: lists successfully updated');
       } catch (e) {
-        console.error(`DNR - Error while updating lists:`, e);
+        console.error(`DNR: error while updating lists:`, e);
       }
     }
   });
 
   observe('paused', async (paused, prevPaused) => {
-    // Skip if hostnames has not changed
+    // The background process starts and runs for each tab, so we can assume
+    // that this function is called before the user can change the paused state
+    // in the panel or the settings page.
     if (!prevPaused) return;
 
-    const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+    const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
+      .filter(({ id }) => id <= 3)
+      .map(({ id }) => id);
+
     const hostnames = Object.keys(paused);
 
     if (hostnames.length) {
@@ -132,12 +138,14 @@ if (__PLATFORM__ !== 'firefox') {
                   },
                 },
               ],
-        removeRuleIds: dynamicRules.map(({ id }) => id),
+        removeRuleIds,
       });
-    } else if (dynamicRules.length) {
+    } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: __PLATFORM__ === 'safari' ? [1] : [1, 2, 3],
+        removeRuleIds,
       });
     }
+
+    console.log('DNR: pause rules updated');
   });
 }

@@ -31,8 +31,10 @@ export function createDocumentConverter() {
     iframe.setAttribute('src', 'https://ghostery.github.io/urlfilter2dnr/');
     iframe.setAttribute('style', 'display: none;');
 
-    documentConverter = new Promise((resolve) => {
+    documentConverter = new Promise((resolve, reject) => {
       iframe.addEventListener('load', () => resolve(iframe));
+      iframe.addEventListener('error', reject);
+
       document.head.appendChild(iframe);
     });
 

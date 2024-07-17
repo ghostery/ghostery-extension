@@ -11,7 +11,7 @@
 
 import { parseFilter } from '@cliqz/adblocker';
 
-import { getTracker, isCategoryBlockedByDefault } from '../utils/trackerdb.js';
+import * as trackerdb from '../utils/trackerdb.js';
 
 import {
   createDocumentConverter,
@@ -67,12 +67,14 @@ async function convertExceptionsToFilters(exceptions) {
   const filters = [];
 
   for (const exception of Object.values(exceptions)) {
-    const pattern = (await getTracker(exception.id)) || {
+    const pattern = (await trackerdb.getTracker(exception.id)) || {
       domains: [exception.id],
       filters: [],
     };
 
-    const blockedByDefault = isCategoryBlockedByDefault(pattern.category);
+    const blockedByDefault = trackerdb.isCategoryBlockedByDefault(
+      pattern.category,
+    );
 
     const blockFilters = pattern.filters.map((filter) => parseFilter(filter));
 
@@ -108,38 +110,6 @@ async function convertExceptionsToFilters(exceptions) {
   return filters;
 }
 
-let exceptions = {};
-
-chrome.storage.local.get(['exceptions']).then((result) => {
-  exceptions = result.exceptions || {};
-});
-
-chrome.storage.onChanged.addListener(async (changes) => {
-  if (!changes['exceptions']) {
-    return;
-  }
-
-  exceptions = changes['exceptions'].newValue || {};
-
-  const filters = await convertExceptionsToFilters(exceptions);
-
-  const networkFilters = [];
-  const cosmeticFilters = [];
-
-  for (const filter of filters) {
-    if (filter.isNetworkFilter()) {
-      networkFilters.push(filter.toString());
-    } else if (filter.isCosmeticFilter()) {
-      cosmeticFilters.push(filter.toString());
-    }
-  }
-  if (__PLATFORM__ !== 'firefox') {
-    await updateDNRRules(networkFilters);
-  }
-
-  console.info('Exceptions - Filters updated successfully');
-});
-
 async function updateDNRRules(networkFilters) {
   const dnrRules = [];
   for (const filter of networkFilters) {
@@ -162,8 +132,39 @@ async function updateDNRRules(networkFilters) {
   const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
     .filter(({ id }) => id >= 2000000)
     .map(({ id }) => id);
+
   await chrome.declarativeNetRequest.updateDynamicRules({
     addRules,
     removeRuleIds,
   });
 }
+
+async function updateFilters() {
+  const { exceptions = {} } = await chrome.storage.local.get(['exceptions']);
+  const filters = await convertExceptionsToFilters(exceptions);
+
+  const networkFilters = [];
+  const cosmeticFilters = [];
+
+  for (const filter of filters) {
+    if (filter.isNetworkFilter()) {
+      networkFilters.push(filter.toString());
+    } else if (filter.isCosmeticFilter()) {
+      cosmeticFilters.push(filter.toString());
+    }
+  }
+
+  if (__PLATFORM__ !== 'firefox') {
+    await updateDNRRules(networkFilters);
+  }
+
+  console.info('Exceptions: filters updated successfully');
+}
+
+// Update exceptions filters every time exceptions change
+chrome.storage.onChanged.addListener(async (changes) => {
+  if (changes['exceptions']) updateFilters();
+});
+
+// Update exceptions filters every time TrackerDB updates
+trackerdb.addUpdateListener(updateFilters);

@@ -434,10 +434,24 @@ export async function createCustomEngine(filters = '') {
   return engine;
 }
 
+const updateListeners = new Map();
+export function addUpdateListener(name, fn) {
+  if (!updateListeners.has(name)) {
+    updateListeners.set(name, new Set());
+  }
+
+  updateListeners.get(name).add(fn);
+}
+
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name.startsWith(ALARM_PREFIX)) {
     const name = alarm.name.slice(ALARM_PREFIX.length);
-    update(name).catch(() => null);
+    update(name)
+      .then(() => {
+        const fns = updateListeners.get(name);
+        fns?.forEach((fn) => fn());
+      })
+      .catch(() => null);
 
     chrome.alarms.create(alarm.name, {
       delayInMinutes: ALARM_DELAY,
