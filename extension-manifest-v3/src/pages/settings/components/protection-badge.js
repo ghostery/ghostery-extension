@@ -23,7 +23,7 @@ export default {
             </gh-settings-badge>
           `
         : html`
-            <gh-settings-badge type="warning">
+            <gh-settings-badge type="info">
               <ui-icon name="trust-s"></ui-icon>
               Trusted
             </gh-settings-badge>

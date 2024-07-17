@@ -201,7 +201,6 @@ export default {
     }
 
     #main.paused, #main.paused:hover, #main.paused:active {
-      pointer-events: none;
       background: var(--gh-pause-active-color);
       white-space: nowrap;
       --ui-color-gh-panel-action: var(--ui-color-gray-800);
@@ -232,11 +231,11 @@ export default {
         border-color: var(--ui-color-primary-700);
       }
 
-      #main.paused:hover #label, #main.paused:focus-visible #label {
+      #main.paused:hover:has(#type:hover) #label, #main.paused:focus-visible #label {
         width: 0;
       }
 
-      #main.paused:hover #type, #main.paused:focus-visible #type {
+      #main.paused #type:hover, #main.paused:focus-visible #type {
         width: 100%;
         transition: width 0.2s;
       }

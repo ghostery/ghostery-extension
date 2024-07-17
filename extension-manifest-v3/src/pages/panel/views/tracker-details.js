@@ -91,9 +91,8 @@ export default {
                   >
                     <ui-icon
                       name="${status.type}-m"
-                      color="${status.type === 'block'
-                        ? 'gray-800'
-                        : 'success-500'}"
+                      color="gray-600"
+                      layout="size:2.5"
                     ></ui-icon>
                     <ui-text
                       type="label-m"
