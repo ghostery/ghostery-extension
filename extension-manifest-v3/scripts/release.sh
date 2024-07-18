@@ -31,7 +31,7 @@ tx pull -f
 # Get version from package.json
 version=$(node -p "require('./package.json').version")
 # Get build number from xcode
-buildVersion=$(cat ./xcode/Ghostery.xcodeproj/project.pbxproj | sed -n -e 's/^.*CURRENT_PROJECT_VERSION = \([0-9]*\).*$/\1/p')
+buildVersion=$(cat ./xcode/Ghostery.xcodeproj/project.pbxproj | sed -n -e 's/^.*CURRENT_PROJECT_VERSION = \([0-9][0-9]*\).*$/\1/p' | head -n 1)
 
 # Commit changes
 git add ../package-lock.json .
