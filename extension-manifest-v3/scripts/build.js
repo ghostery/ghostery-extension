@@ -134,10 +134,6 @@ FiltersEngine.deserialize(
     resolve(options.srcDir, 'rule_resources', `engine-ads${engineType}.dat`),
   ),
 ).resources.resources.forEach((value, key) => {
-  if (seenWebAccessibleResources.has(key)) {
-    return;
-  }
-
   seenWebAccessibleResources.add(key);
 
   // Check if this is a scriptlet
