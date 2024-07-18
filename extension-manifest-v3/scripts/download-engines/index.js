@@ -151,9 +151,11 @@ const seenResource = new Set();
 FiltersEngine.deserialize(
   readFileSync(`${TARGET_PATH}/engine-ads.dat`),
 ).resources.resources.forEach((value, key) => {
+  // refs https://github.com/gorhill/uBlock/tree/master/src/web_accessible_resources
   if (
     value.contentType === 'application/javascript' &&
     (value.body.includes('scriptletGlobals') || // Drop scriptlets
+      key.indexOf('/') !== -1 || // Drop resources within a directory
       key.indexOf('.') === -1) // Drop scripts without file extensions
   ) {
     return;
@@ -170,9 +172,5 @@ FiltersEngine.deserialize(
     value.body = Buffer.from(value.body, 'base64').toString('binary');
   }
 
-  writeFileSync(
-    // Path flattening
-    resolve(TARGET_PATH, 'redirects', key.replace(/\//g, '__')),
-    value.body,
-  );
+  writeFileSync(resolve(TARGET_PATH, 'redirects', key), value.body);
 });
