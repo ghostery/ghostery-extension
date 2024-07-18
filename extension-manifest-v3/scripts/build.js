@@ -134,8 +134,6 @@ FiltersEngine.deserialize(
     resolve(options.srcDir, 'rule_resources', `engine-ads${engineType}.dat`),
   ),
 ).resources.resources.forEach((value, key) => {
-  seenWebAccessibleResources.add(key);
-
   // Check if this is a scriptlet
   if (
     value.contentType === 'application/javascript' &&
@@ -143,6 +141,8 @@ FiltersEngine.deserialize(
   ) {
     return;
   }
+
+  seenWebAccessibleResources.add('web_accessible_resources/' + key);
 
   // Decode base64
   if (value.contentType.endsWith(';base64')) {
@@ -212,6 +212,10 @@ if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
   manifest.permissions.push('declarativeNetRequestFeedback');
 }
 
+manifest.web_accessible_resources.push({
+  resources: Array.from(seenWebAccessibleResources),
+});
+
 writeFileSync(
   resolve(options.outDir, 'manifest.json'),
   JSON.stringify(manifest, null, 2),
@@ -256,6 +260,10 @@ manifest.content_scripts?.forEach(({ js = [], css = [] }) => {
 
 // web-accessible resources
 manifest.web_accessible_resources?.forEach((entry) => {
+  if (entry.matches === undefined) {
+    return;
+  }
+
   const paths = [];
 
   if (typeof entry === 'string') {
@@ -277,10 +285,6 @@ manifest.web_accessible_resources?.forEach((entry) => {
       }
     }
   });
-});
-
-manifest.web_accessible_resources.push({
-  resources: Array.from(seenWebAccessibleResources),
 });
 
 // background
