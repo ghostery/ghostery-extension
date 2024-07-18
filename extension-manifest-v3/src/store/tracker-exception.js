@@ -77,13 +77,6 @@ const TrackerException = {
 
 export default TrackerException;
 
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes.exceptions) {
-    store.clear([TrackerException], false);
-    store.resolve([TrackerException]);
-  }
-});
-
 export function toggleExceptionDomain(
   exception,
   domain,

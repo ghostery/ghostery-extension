@@ -16,7 +16,7 @@ import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
 import { observe } from '/store/options.js';
 
-import asyncSetup from '../utils/setup.js';
+import asyncSetup from '/utils/setup.js';
 import debug from '/utils/debug.js';
 import config from './config.js';
 import communication from './communication.js';

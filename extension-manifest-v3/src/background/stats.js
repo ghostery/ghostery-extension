@@ -19,8 +19,10 @@ import Options, { isPaused, observe } from '/store/options.js';
 
 import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
+import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
 
 import Request from './utils/request.js';
+import { getException } from './exceptions.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
@@ -124,13 +126,18 @@ function pushTabStats(stats, requests) {
   let trackersUpdated = false;
 
   for (const request of requests) {
-    const pattern = request.metadata;
+    const metadata =
+      getMetadata(request) ||
+      // If exception (trusted) is added to the unidentified tracker
+      // we must generate metadata for the request on the fly
+      (getException(request.hostname) &&
+        getUnidentifiedTracker(request.hostname));
 
-    if (pattern) {
-      let tracker = stats.trackers.find((t) => t.id === pattern.id);
+    if (metadata) {
+      let tracker = stats.trackers.find((t) => t.id === metadata.id);
 
       if (!tracker) {
-        tracker = { ...pattern, requests: [] };
+        tracker = { ...metadata, requests: [] };
         stats.trackers.push(tracker);
         trackersUpdated = true;
       }

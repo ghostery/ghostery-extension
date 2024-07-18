@@ -222,9 +222,7 @@ export default {
                                     </a>
                                   </ui-action>
                                   <div layout="row items:center gap">
-                                    ${store.ready(tracker.exception) &&
-                                    tracker.exception.blocked !==
-                                      tracker.blockedByDefault &&
+                                    ${tracker.adjusted &&
                                     html`
                                       <ui-text type="label-s" color="gray-500">
                                         <!-- Singular form - tracker has been adjusted | tracker -->adjusted
