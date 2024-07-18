@@ -144,17 +144,17 @@ for (const [name, target] of Object.entries(DNR)) {
 // Extract resources from ads engine
 console.log('Extracting resources...');
 
-shelljs.mkdir('-p', resolve(TARGET_PATH, 'statics'));
+shelljs.mkdir('-p', resolve(TARGET_PATH, 'redirects'));
 
 const seenResource = new Set();
 
 FiltersEngine.deserialize(
   readFileSync(`${TARGET_PATH}/engine-ads.dat`),
 ).resources.resources.forEach((value, key) => {
-  // Check if this is a scriptlet
   if (
     value.contentType === 'application/javascript' &&
-    value.body.includes('scriptletGlobals')
+    (value.body.includes('scriptletGlobals') || // Drop scriptlets
+      key.indexOf('.') === -1) // Drop scripts without file extensions
   ) {
     return;
   }
@@ -165,11 +165,6 @@ FiltersEngine.deserialize(
 
   seenResource.add(value.body);
 
-  // Remove extensions only with known extensions not to remove required files mistakenly
-  if (key.endsWith('.js') || key.endsWith('.css') || key.endsWith('.html')) {
-    key = key.slice(0, key.lastIndexOf('.'));
-  }
-
   // Decode base64
   if (value.contentType.endsWith(';base64')) {
     value.body = Buffer.from(value.body, 'base64').toString('binary');
@@ -177,7 +172,7 @@ FiltersEngine.deserialize(
 
   writeFileSync(
     // Path flattening
-    resolve(TARGET_PATH, 'statics', key.replace(/\//g, '__')),
+    resolve(TARGET_PATH, 'redirects', key.replace(/\//g, '__')),
     value.body,
   );
 });

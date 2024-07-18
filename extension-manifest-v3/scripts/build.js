@@ -162,6 +162,14 @@ if (manifest.declarative_net_request?.rule_resources) {
   }
 }
 
+// copy redirect rule resources
+shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources/redirects'));
+shelljs.cp(
+  '-r',
+  resolve(options.srcDir, 'rule_resources/redirects', '*'),
+  resolve(options.outDir, 'rule_resources/redirects'),
+);
+
 // generate license file
 execSync('npm run licenses', { stdio: 'inherit' });
 
