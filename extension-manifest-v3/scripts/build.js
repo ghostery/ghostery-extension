@@ -4,7 +4,6 @@ import { exec, execSync } from 'child_process';
 import { build } from 'vite';
 import shelljs from 'shelljs';
 import webExt from 'web-ext';
-import { FiltersEngine } from '@cliqz/adblocker';
 
 const pwd = process.cwd();
 
@@ -124,43 +123,6 @@ engines.forEach((engine) => {
   if (result.stderr) process.exit(1);
 });
 
-// extract resources
-shelljs.mkdir('-p', resolve(options.outDir, 'web_accessible_resources'));
-
-const seenWebAccessibleResources = new Set();
-
-FiltersEngine.deserialize(
-  readFileSync(
-    resolve(options.srcDir, 'rule_resources', `engine-ads${engineType}.dat`),
-  ),
-).resources.resources.forEach((value, key) => {
-  // Check if this is a scriptlet
-  if (
-    value.contentType === 'application/javascript' &&
-    value.body.startsWith('if(typeof scriptletGlobals==="undefined")')
-  ) {
-    return;
-  }
-
-  seenWebAccessibleResources.add('web_accessible_resources/' + key);
-
-  // Decode base64
-  if (value.contentType.endsWith(';base64')) {
-    value.body = Buffer.from(value.body, 'base64').toString('binary');
-  }
-
-  const path = resolve(options.outDir, 'web_accessible_resources', key);
-
-  shelljs.mkdir(
-    '-p',
-    dirname(resolve(options.outDir, 'web_accessible_resources', path)),
-  );
-  writeFileSync(
-    resolve(options.outDir, 'web_accessible_resources', key),
-    value.body,
-  );
-});
-
 // copy trackerdb engine
 const trackerdbResult = shelljs.cp(
   resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.dat'),
@@ -211,10 +173,6 @@ manifest.version = pkg.version;
 if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
   manifest.permissions.push('declarativeNetRequestFeedback');
 }
-
-manifest.web_accessible_resources.push({
-  resources: Array.from(seenWebAccessibleResources),
-});
 
 writeFileSync(
   resolve(options.outDir, 'manifest.json'),

@@ -125,6 +125,11 @@
       "matches": [
         "<all_urls>"
       ]
+    },
+    {
+      "resources": [
+        "rule_resources/statics/*"
+      ]
     }
   ],
   "content_security_policy": {}

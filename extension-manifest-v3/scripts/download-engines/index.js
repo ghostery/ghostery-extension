@@ -14,7 +14,7 @@ import { createHash } from 'crypto';
 import { resolve } from 'path';
 import shelljs from 'shelljs';
 
-import { ENGINE_VERSION } from '@cliqz/adblocker';
+import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
 
 function checksum(content) {
   return createHash('sha256').update(content).digest('hex');
@@ -140,3 +140,44 @@ for (const [name, target] of Object.entries(DNR)) {
     writeFileSync(outputPath, dnr);
   }
 }
+
+// Extract resources from ads engine
+console.log('Extracting resources...');
+
+shelljs.mkdir('-p', resolve(TARGET_PATH, 'statics'));
+
+const seenResource = new Set();
+
+FiltersEngine.deserialize(
+  readFileSync(`${TARGET_PATH}/engine-ads.dat`),
+).resources.resources.forEach((value, key) => {
+  // Check if this is a scriptlet
+  if (
+    value.contentType === 'application/javascript' &&
+    value.body.includes('scriptletGlobals')
+  ) {
+    return;
+  }
+
+  if (seenResource.has(value.body)) {
+    return;
+  }
+
+  seenResource.add(value.body);
+
+  // Remove extensions only with known extensions not to remove required files mistakenly
+  if (key.endsWith('.js') || key.endsWith('.css') || key.endsWith('.html')) {
+    key = key.slice(0, key.lastIndexOf('.'));
+  }
+
+  // Decode base64
+  if (value.contentType.endsWith(';base64')) {
+    value.body = Buffer.from(value.body, 'base64').toString('binary');
+  }
+
+  writeFileSync(
+    // Path flattening
+    resolve(TARGET_PATH, 'statics', key.replace(/\//g, '__')),
+    value.body,
+  );
+});
