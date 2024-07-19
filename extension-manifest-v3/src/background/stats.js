@@ -18,10 +18,11 @@ import DailyStats from '/store/daily-stats.js';
 import Options, { isPaused, observe } from '/store/options.js';
 
 import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
+
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
+import Request from '/utils/request.js';
 
-import Request from './utils/request.js';
 import { getException } from './exceptions.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });

@@ -20,7 +20,7 @@ import {
 
 // Create in background sync storage for exceptions
 let exceptions = {};
-chrome.storage.local.get(['exceptions'], ({ exceptions: value }) => {
+chrome.storage.local.get(['exceptions']).then(({ exceptions: value }) => {
   exceptions = value || {};
 });
 
