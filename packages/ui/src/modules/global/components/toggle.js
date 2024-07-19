@@ -35,10 +35,12 @@ export default {
       <template layout="contents">
         <button
           onclick="${toggle}"
-          layout="row items:start gap:2 padding:1 margin:-1"
+          layout="row items:start gap:2 padding:0.5 margin:-0.5"
           tabindex="${disabled ? -1 : 0}"
         >
-          <div layout="grow" onclick="${stopForAnchors}"><slot></slot></div>
+          <div layout="self:stretch grow row" onclick="${stopForAnchors}">
+            <slot></slot>
+          </div>
           <div id="button" layout="row items:center gap padding:0.5 margin:0">
             <div id="toggle" layout="block relative size:36px:20px">
               <span layout="block size:2 absolute top left margin:2px"></span>

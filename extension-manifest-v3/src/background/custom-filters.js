@@ -35,11 +35,20 @@ async function updateDNRRules(dnrRules) {
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'customFilters:engine') {
-    console.log('filters:', msg.filters);
+    console.groupCollapsed(
+      'Custom filters: generating filters for provided input',
+    );
+    console.log(msg.filters);
+    console.groupEnd();
+
     engines
       .createCustomEngine(msg.filters)
-      .then(() => sendResponse('Engine updated'));
-
+      .then(({ notSupportedFilters, engine }) =>
+        sendResponse({
+          notSupportedFilters,
+          success: !!engine,
+        }),
+      );
     return true;
   }
 

@@ -122,25 +122,6 @@ export default {
             </div>
             <ui-line></ui-line>
           `}
-          <div layout="column gap" translate="no">
-            <ui-text type="headline-s">Custom filters</ui-text>
-            <div layout="column gap:0.5">
-              <ui-text type="body-xs">
-                Create your own ad-blocking rules to customize your Ghostery
-                experience.
-              </ui-text>
-              <ui-text type="body-xs" color="gray-600" underline>
-                <a
-                  href="https://adguard.com/kb/general/ad-filtering/create-own-filters/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Learn more on how to create them
-                </a>
-              </ui-text>
-            </div>
-            <gh-settings-custom-filters></gh-settings-custom-filters>
-          </div>
         </section>
       `}
       <div layout="row center gap:2">

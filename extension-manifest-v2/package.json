@@ -37,9 +37,9 @@
   },
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
-    "@cliqz/adblocker": "^1.28.0",
-    "@cliqz/adblocker-content": "^1.28.0",
-    "@cliqz/adblocker-webextension": "^1.28.0",
+    "@cliqz/adblocker": "^1.30.0",
+    "@cliqz/adblocker-content": "^1.30.0",
+    "@cliqz/adblocker-webextension": "^1.30.0",
     "@cliqz/url-parser": "^1.1.5",
     "@duckduckgo/autoconsent": "^10.11.0",
     "@ghostery/libs": "^1.0.0",

@@ -25,11 +25,12 @@ export const SYNC_OPTIONS = [
   'blockAds',
   'blockTrackers',
   'blockAnnoyances',
+  'customFilters',
+  'experimentalFilters',
   'trackerWheel',
   'trackerCount',
   'wtmSerpReport',
   'serpTrackingPrevention',
-  'experimentalFilters',
   'panel',
 ];
 
@@ -47,6 +48,12 @@ const Options = {
   blockTrackers: true,
   blockAnnoyances: true,
 
+  // Advanced features
+  customFilters: {
+    trustedScriptlets: false,
+  },
+  experimentalFilters: false,
+
   // Browser icon
   trackerWheel: __PLATFORM__ !== 'firefox' ? true : false,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
@@ -54,9 +61,6 @@ const Options = {
   // SERP
   wtmSerpReport: true,
   serpTrackingPrevention: true,
-
-  // Optional
-  experimentalFilters: false,
 
   // Onboarding
   terms: false,
