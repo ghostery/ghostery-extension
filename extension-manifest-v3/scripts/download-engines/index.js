@@ -147,6 +147,17 @@ console.log('Extracting resources...');
 shelljs.mkdir('-p', resolve(TARGET_PATH, 'redirects'));
 
 const seenResource = new Set();
+const allowedResourceExtensions = [
+  'html',
+  'js',
+  'css',
+  'mp4',
+  'mp3',
+  'xml',
+  'txt',
+  'json',
+  'empty',
+];
 
 FiltersEngine.deserialize(
   readFileSync(`${TARGET_PATH}/engine-ads.dat`),
@@ -155,8 +166,13 @@ FiltersEngine.deserialize(
   if (
     value.contentType === 'application/javascript' &&
     (value.body.includes('scriptletGlobals') || // Drop scriptlets
-      key.indexOf('/') !== -1 || // Drop resources within a directory
-      key.indexOf('.') === -1) // Drop scripts without file extensions
+      key.indexOf('/') !== -1) // Drop resources within a directory
+  ) {
+    return;
+  }
+
+  if (
+    !allowedResourceExtensions.includes(key.split('.').pop()) // Drop resources with an unknown file extension
   ) {
     return;
   }

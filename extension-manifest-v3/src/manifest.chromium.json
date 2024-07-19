@@ -128,7 +128,7 @@
     },
     {
       "resources": [
-        "rule_resources/statics/*"
+        "rule_resources/redirects/*"
       ]
     }
   ],
