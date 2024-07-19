@@ -56,6 +56,9 @@
     "message": "성인 광고",
     "description": "Tracker category name"
   },
+  "advanced": {
+    "message": "고급"
+  },
   "advertising": {
     "message": "광고",
     "description": "Tracker category name"
@@ -65,6 +68,9 @@
   },
   "allow_ghostery_in_private_windows": {
     "message": "시크릿 모드에서 Ghostery 허용"
+  },
+  "allow_trusted_scriptlets": {
+    "message": "신뢰할 수 있는 스크립틀릿 허용"
   },
   "always": {
     "message": "항상"
@@ -152,9 +158,15 @@
   "create_account": {
     "message": "새 계정 만들기"
   },
+  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "자신만의 광고 차단 규칙을 만들어서 Ghostery 경험을 맞춤 설정해 보세요."
+  },
   "current_protection_status_for_@_0__": {
     "message": "$${0}의 현재 보호 상태",
     "description": "Current protection status for a tracker"
+  },
+  "custom_filters": {
+    "message": "맞춤 필터"
   },
   "customer_interaction": {
     "message": "고객 상담",
@@ -289,15 +301,6 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "현재 보호없이 웹 브라우저 사용 중입니다. Ghostery 트래커 및 광고 차단기로 방문하는 웹 사이트의 추적기를 파악할 수 있습니다."
   },
-  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "이 웹 사이트에서 Ghostery 사용을 잠시 멈춥니다. 웹 사이트의 트래커와 광고를 막기 위해 이 동작을 Ghostery 설정에서 언제든 변경할 수 있습니다."
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "1일 동안 이 웹 사이트에서 Ghostery 사용을 멈춥니다."
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "1 시간 동안 이 웹 사이트에서 Ghostery 사용을 멈춥니다."
-  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery가 이 페이지에서 얼마나 많은 트래커가 차단되었는지 보여줍니다. Ghostery 아이콘을 클릭하면 더 자세한 정보를 볼 수 있습니다."
   },
@@ -343,6 +346,9 @@
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "광고 차단기들을 향한 YouTube의 도전을 자세히 알아보세요"
+  },
+  "learn_more_on_supported_syntax": {
+    "message": "지원되는 구문에 대해 자세히 알아보기"
   },
   "load_more": {
     "message": "더 보기"
@@ -549,6 +555,15 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주셔서 진심으로 감사드립니다!"
+  },
+  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "이 사이트는 항상 신뢰할 수 있습니다. 웹 사이트의 트래커와 광고를 막기 위해 이 동작을 Ghostery 설정에서 언제든 변경할 수 있습니다. Ghostery 설정을 통해 언제든지 이 사이트의 신뢰 여부를 변경할 수 있습니다"
+  },
+  "this_site_will_be_trusted_for_1_day": {
+    "message": "이 사이트는 1일 동안 신뢰할 수 있습니다"
+  },
+  "this_site_will_be_trusted_for_1_hour": {
+    "message": "이 사이트는 1시간 동안 신뢰할 수 있습니다"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "웹 사이트에서 특정 시간동안 개인정보 보호를 중지합니다."

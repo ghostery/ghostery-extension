@@ -56,6 +56,9 @@
     "message": "アダルト広告",
     "description": "Tracker category name"
   },
+  "advanced": {
+    "message": "上級"
+  },
   "advertising": {
     "message": "広告",
     "description": "Tracker category name"
@@ -65,6 +68,9 @@
   },
   "allow_ghostery_in_private_windows": {
     "message": "プライベートウィンドウでGhosteryを許可する"
+  },
+  "allow_trusted_scriptlets": {
+    "message": "信頼されたスクリプトレットを許可"
   },
   "always": {
     "message": "常に"
@@ -152,9 +158,15 @@
   "create_account": {
     "message": "アカウントを作成"
   },
+  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "自分の広告ブロックルールを作成して、Ghosteryの体験を自分好みにカスタマイズしましょう。."
+  },
   "current_protection_status_for_@_0__": {
     "message": "$${0}の現在の保護ステータス: ",
     "description": "Current protection status for a tracker"
+  },
+  "custom_filters": {
+    "message": "カスタムフィルター"
   },
   "customer_interaction": {
     "message": "顧客インタラクション",
@@ -289,15 +301,6 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blockerは、あなたが訪れるウェブサイトに存在するトラッカーの名前を表示します。ウェブを保護されていない状態でブラウジングしています。"
   },
-  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghosteryは、このサイトで一時停止されます。 この設定は、Ghosteryの設定でいつでも変更でき、トラッカーや広告がウェブ上であなたを追跡するのを阻止することができます。"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghosteryは、このサイトで1日間停止されます。"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghosteryは、このサイトで1時間停止します。"
-  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghosteryは、あるページでブロックされたトラッカーの数を表示します。Ghosteryのアイコンをクリックすると、より詳細な情報が表示されます。"
   },
@@ -343,6 +346,9 @@
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "広告ブロッカーに対するYouTubeの挑戦についてもっと知る"
+  },
+  "learn_more_on_supported_syntax": {
+    "message": "サポートされている構文について詳しく学ぶ"
   },
   "load_more": {
     "message": "さらに読み込む"
@@ -549,6 +555,15 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
+  },
+  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "このサイトは常に信頼されます。 この設定は、Ghosteryの設定でいつでも変更でき、トラッカーや広告がウェブ上であなたを追跡するのを阻止することができますので、安心してご利用いただけます。"
+  },
+  "this_site_will_be_trusted_for_1_day": {
+    "message": "このサイトは1日間信頼されます"
+  },
+  "this_site_will_be_trusted_for_1_hour": {
+    "message": "このサイトは1時間信頼されます"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "サイトのプライバシー保護を調整するには:"

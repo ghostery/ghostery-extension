@@ -56,6 +56,9 @@
     "message": "Reklama dla dorosłych",
     "description": "Tracker category name"
   },
+  "advanced": {
+    "message": "Zaawansowane"
+  },
   "advertising": {
     "message": "Reklama",
     "description": "Tracker category name"
@@ -65,6 +68,9 @@
   },
   "allow_ghostery_in_private_windows": {
     "message": "Zezwalaj na Ghostery w prywatnych oknach"
+  },
+  "allow_trusted_scriptlets": {
+    "message": "Zezwól na zaufane skrypty"
   },
   "always": {
     "message": "Zawsze"
@@ -152,9 +158,15 @@
   "create_account": {
     "message": "Utwórz konto"
   },
+  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Stwórz własne zasady blokowania reklam, aby dostosować swoje doświadczenie z Ghostery."
+  },
   "current_protection_status_for_@_0__": {
     "message": "Aktualny status ochrony dla $${0}:",
     "description": "Current protection status for a tracker"
+  },
+  "custom_filters": {
+    "message": "Niestandardowe filtry"
   },
   "customer_interaction": {
     "message": "Interakcja z klientem",
@@ -289,15 +301,6 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Bloker Trackerów i Reklam nazywa trackery obecne na odwiedzanych przez Ciebie stronach internetowych. Przeglądasz sieć bez ochrony."
   },
-  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery zostanie wstrzymane dla tej witryny. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery zostanie wstrzymane dla tej witryny na 1 dzień"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery zostanie wstrzymane dla tej witryny na 1 godzinę"
-  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery będzie wyświetlać liczbę trackerów zablokowanych na danej stronie. Kliknięcie w ikonę Ghostery spowoduje wyśwetlenie bardziej szczegółowych informacji."
   },
@@ -343,6 +346,9 @@
   },
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Dowiedz się więcej o wyzwaniach YouTube związanych z blokowaniem reklam"
+  },
+  "learn_more_on_supported_syntax": {
+    "message": "Dowiedz się więcej o obsługiwanej składni"
   },
   "load_more": {
     "message": "Załaduj więcej"
@@ -549,6 +555,15 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Dziękujemy za Twoje wsparcie w walce Ghostery o sieć, w której prywatność jest podstawowym prawem człowieka!"
+  },
+  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Ta witryna zawsze będzie zaufana. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
+  },
+  "this_site_will_be_trusted_for_1_day": {
+    "message": "Ta witryna będzie zaufana przez 1 dzień"
+  },
+  "this_site_will_be_trusted_for_1_hour": {
+    "message": "Ta witryna będzie zaufana przez 1 godzinę"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Aby dostosować ochronę prywatności, zaufaj witrynie:"
