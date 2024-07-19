@@ -8,10 +8,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { store } from 'hybrids';
-import TrackerException from '../store/tracker-exception.js';
-
 import * as engines from './engines.js';
+import asyncSetup from './setup.js';
 
 // TODO: remove after sunsetting Ghostery 8
 // This code is a duplicate of '@ghostery/ui/categories'
@@ -36,84 +34,48 @@ const categoryOrder = [
   'other',
 ];
 
-let promise = Promise.all([
-  store.resolve([TrackerException]),
-  engines.init(engines.TRACKERDB_ENGINE).then(() => {
-    promise = null;
-  }),
-]);
+const setup = asyncSetup([engines.init(engines.TRACKERDB_ENGINE)]);
 
 export function isCategoryBlockedByDefault(categoryId) {
   return categoryId !== 'essential';
 }
 
-export function isTrusted(hostname, category, exception) {
-  const isCategoryBlocked = isCategoryBlockedByDefault(category);
-
-  if (exception.blocked) {
-    return exception.trustedDomains.includes(hostname) || false;
-  } else {
-    return (
-      !exception.blockedDomains.includes(hostname) &&
-      exception.blocked !== isCategoryBlocked
-    );
-  }
+export function getUnidentifiedTracker(hostname) {
+  return {
+    id: hostname,
+    name: hostname.length > 24 ? '...' + hostname.slice(-24) : hostname,
+    category: 'unidentified',
+    exception: hostname,
+    blockedByDefault: true,
+  };
 }
 
 export function getMetadata(request) {
-  if (promise) {
+  if (setup.pending) {
     console.warn('TrackerDB not ready yet');
     return null;
   }
 
   const engine = engines.get(engines.TRACKERDB_ENGINE);
 
-  let isFilterMatched = true;
-  let exception = null;
-  let tracker;
-
   let matches = engine.getPatternMetadata(request);
 
+  // No match for the pattern, try to get metadata from the domain
   if (matches.length === 0) {
-    isFilterMatched = false;
     matches = engine.metadata.fromDomain(request.domain);
   }
 
+  // No match for the domain, try to get metadata for blocked or modified requests
   if (matches.length === 0) {
-    // Blobs and data URLs don't have hostnames
-    if (!request.hostname) return null;
-
-    exception = store.get(TrackerException, request.hostname);
-
-    if (!store.ready(exception) && !request.blocked && !request.modified) {
+    // INFO: Blobs and data URLs don't have hostnames
+    if (!request.hostname || (!request.blocked && !request.modified)) {
       return null;
     }
-
-    tracker = {
-      id: request.hostname,
-      name:
-        request.hostname.length > 24
-          ? '...' + request.hostname.slice(-24)
-          : request.hostname,
-      category: 'unidentified',
-      exception: request.hostname,
-      blockedByDefault: true,
-    };
-  } else {
-    tracker = getTrackers().get(matches[0].pattern.key);
+    return getUnidentifiedTracker(request.hostname);
   }
 
-  exception = exception || store.get(TrackerException, tracker.id);
-
-  const metadata = {
-    ...tracker,
-    isFilterMatched,
-    isTrusted: store.ready(exception)
-      ? isTrusted(request.sourceHostname, tracker.category, exception)
-      : !isCategoryBlockedByDefault(tracker.category),
-  };
-
-  return metadata;
+  // Get tracker info from the first match of the TrackerDB
+  return getTrackers().get(matches[0].pattern.key);
 }
 
 const trackersMap = new Map();
@@ -156,7 +118,7 @@ function getTrackers() {
 }
 
 export async function getTracker(key) {
-  if (promise) await promise;
+  setup.pending && (await setup.pending);
 
   // Ensure trackers are loaded
   getTrackers();
@@ -165,7 +127,6 @@ export async function getTracker(key) {
 }
 
 export async function getSimilarTrackers(tracker) {
-  if (promise) await promise;
   const result = [];
 
   tracker = await getTracker(tracker);
@@ -181,7 +142,7 @@ export async function getSimilarTrackers(tracker) {
 }
 
 export async function getCategories() {
-  if (promise) await promise;
+  setup.pending && (await setup.pending);
   const engine = engines.get(engines.TRACKERDB_ENGINE);
 
   const categories = new Map(

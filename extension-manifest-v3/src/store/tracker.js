@@ -30,6 +30,11 @@ export default {
     privacyPolicyUrl: '',
   },
   blockedByDefault: false,
+  adjusted: ({ exception, blockedByDefault }) =>
+    store.ready(exception) &&
+    (exception.blocked !== blockedByDefault ||
+      exception.blockedDomains.length > 0 ||
+      exception.trustedDomains.length > 0),
   [store.connect]: {
     async get(id) {
       // Load exceptions to memory

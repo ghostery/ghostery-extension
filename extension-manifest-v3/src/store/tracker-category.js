@@ -26,15 +26,7 @@ export default {
   trackers: [Tracker],
   blockedByDefault: false,
   adjusted: ({ trackers }) =>
-    trackers.reduce(
-      (count, tracker) =>
-        count +
-        Number(
-          store.ready(tracker.exception) &&
-            tracker.exception.blocked !== tracker.blockedByDefault,
-        ),
-      0,
-    ),
+    trackers.reduce((count, tracker) => count + Number(tracker.adjusted), 0),
   [store.connect]: {
     async list({ query, filter }) {
       const exceptions = await store.resolve([TrackerException]);
@@ -67,7 +59,12 @@ export default {
                 case 'trusted':
                   return !blocked;
                 case 'adjusted':
-                  return exception && exception.blocked !== t.blockedByDefault;
+                  return (
+                    exception &&
+                    (exception.blocked !== t.blockedByDefault ||
+                      exception.blockedDomains.length > 0 ||
+                      exception.trustedDomains.length > 0)
+                  );
                 default:
                   return true;
               }
