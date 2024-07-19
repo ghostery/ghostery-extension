@@ -96,11 +96,11 @@ export default {
       }
 
       :host([value]) #toggle {
-        background: var(--ui-color-gray-500);
+        background: var(--ui-color-gray-600);
       }
 
       :host([value]) #button {
-        --ui-text-color-heading: var(--ui-color-gray-500);
+        --ui-text-color-heading: var(--ui-color-gray-600);
       }
 
       :host([value]) #toggle span {
@@ -121,7 +121,7 @@ export default {
         }
 
         :host([value]) button:hover #toggle {
-          background: var(--ui-color-gray-800);
+          background: var(--ui-color-gray-900);
         }
       }
     `,
