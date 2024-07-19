@@ -245,6 +245,7 @@ export default {
                                     layout="row center relative"
                                   >
                                     <ui-panel-protection-status-icon
+                                      blockByDefault="${tracker.blockedByDefault}"
                                       status="${store.ready(tracker.exception)
                                         ? tracker.exception.getDomainStatus(
                                             domain,

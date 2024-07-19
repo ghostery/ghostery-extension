@@ -70,8 +70,6 @@ export default {
               </ui-text>
             </div>
             <ui-toggle
-              type="status"
-              color="danger-500"
               value="${globalPause}"
               onchange="${html.set('globalPause')}"
             >
@@ -85,7 +83,7 @@ export default {
                 </ui-text>
                 ${globalPauseRevokeAt &&
                 html`
-                  <ui-text type="body-s" color="gray-400">
+                  <ui-text type="body-s" color="gray-500">
                     ${html`
                       <ui-text type="body-s" ellipsis
                         ><relative-time

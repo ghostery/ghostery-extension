@@ -178,7 +178,7 @@ export default {
                         ? html`<gh-settings-badge type="info">
                             <ui-icon name="block-s"></ui-icon> Blocked
                           </gh-settings-badge>`
-                        : html`<gh-settings-badge type="success">
+                        : html`<gh-settings-badge type="info">
                             <ui-icon name="trust-s"></ui-icon> Trusted
                           </gh-settings-badge>`}
                       <ui-action>
