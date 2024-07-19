@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
 import Options from '/store/options.js';
@@ -100,13 +100,13 @@ export default {
                     >
                       ${status.website
                         ? (status.type === 'trust' &&
-                            html`Trusted on this website`) ||
+                            msg`Trusted on this website`) ||
                           (status.type === 'block' &&
-                            html`Blocked on this website`)
+                            msg`Blocked on this website`)
                         : (status.type === 'trust' &&
-                            html`Trusted on all websites`) ||
+                            msg`Trusted on all websites`) ||
                           (status.type === 'block' &&
-                            html`Blocked on all websites`)}
+                            msg`Blocked on all websites`)}
                     </ui-text>
                   </a>
                 </ui-panel-action>`}
