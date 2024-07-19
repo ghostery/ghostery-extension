@@ -56,6 +56,9 @@
     "message": "Publicidad para adultos",
     "description": "Tracker category name"
   },
+  "advanced": {
+    "message": "Avanzado"
+  },
   "advertising": {
     "message": "Publicidad",
     "description": "Tracker category name"
@@ -65,6 +68,9 @@
   },
   "allow_ghostery_in_private_windows": {
     "message": "Permitir Ghostery en ventanas privadas"
+  },
+  "allow_trusted_scriptlets": {
+    "message": "Permitir scriptlets de confianza"
   },
   "always": {
     "message": "Siempre"
@@ -152,9 +158,15 @@
   "create_account": {
     "message": "Crear una cuenta"
   },
+  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Cree sus propias reglas de bloqueo de anuncios para personalizar su experiencia con Ghostery."
+  },
   "current_protection_status_for_@_0__": {
     "message": "Estado de protección actual de $${0}:",
     "description": "Current protection status for a tracker"
+  },
+  "custom_filters": {
+    "message": "Filtros personalizados"
   },
   "customer_interaction": {
     "message": "Interacción con el cliente",
@@ -289,15 +301,6 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker solo identifica los rastreadores presentes en los sitios web que visitas. Estás navegando sin protección."
   },
-  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery se pausará en este sitio. Esto se puede cambiar en cualquier momento en la configuración de Ghostery para evitar que los rastreadores y los anuncios te rastreen en la web"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery se pausará en este sitio durante 1 día"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery se pausará en este sitio durante 1 hora"
-  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery mostrará cuántos rastreadores ha bloqueado en una página. Si haces clic en el icono de Ghostery, verás información más detallada."
   },
@@ -344,6 +347,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Más información sobre los desafíos de YouTube a los bloqueadores de anuncios"
   },
+  "learn_more_on_supported_syntax": {
+    "message": "Aprende más sobre la sintaxis compatible"
+  },
   "load_more": {
     "message": "Cargar más"
   },
@@ -356,8 +362,8 @@
   "menu": {
     "message": "Menú"
   },
-  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Ten en cuenta que no todas las entidades enumeradas son rastreadoras; es decir, que no todas recopilan datos personales"
+  "mind_that_not_all_listed_activities_are_trackers__that_is_not_all_of_them_collect_personal_data_": {
+    "message": "Ten en cuenta que no todas las actividades enumeradas son rastreadores; es decir, que no todas recopilan datos personales."
   },
   "miscellaneous": {
     "message": "Miscelánea",
@@ -395,12 +401,6 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "No se ha añadido aún ninguna excepción"
-  },
-  "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Número de rastreadores con solicitudes de red bloqueadas."
-  },
-  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Número de rastreadores con cookies o huellas dactilares eliminadas."
   },
   "observed_activities": {
     "message": "Actividades observadas"
@@ -555,6 +555,15 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Gracias por tu apoyo a Ghostery en su afán por lograr que la privacidad sea un derecho humano básico en Internet."
+  },
+  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Este sitio siempre será de confianza. Esto se puede cambiar en cualquier momento en la configuración de Ghostery para evitar que los rastreadores y los anuncios te rastreen en la web"
+  },
+  "this_site_will_be_trusted_for_1_day": {
+    "message": "Este sitio será confiable por 1 día"
+  },
+  "this_site_will_be_trusted_for_1_hour": {
+    "message": "Este sitio será confiable por 1 hora"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Para ajustar la protección de privacidad confíe en un sitio:"

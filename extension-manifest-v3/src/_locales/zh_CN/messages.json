@@ -56,6 +56,9 @@
     "message": "成人广告",
     "description": "Tracker category name"
   },
+  "advanced": {
+    "message": "高级"
+  },
   "advertising": {
     "message": "广告",
     "description": "Tracker category name"
@@ -65,6 +68,9 @@
   },
   "allow_ghostery_in_private_windows": {
     "message": "允许在私人窗口中使用 Ghostery"
+  },
+  "allow_trusted_scriptlets": {
+    "message": "允许受信任的脚本小程序"
   },
   "always": {
     "message": "始终"
@@ -152,9 +158,15 @@
   "create_account": {
     "message": "创建帐户"
   },
+  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "创建您自己的广告拦截规则，以自定义您的Ghostery体验。."
+  },
   "current_protection_status_for_@_0__": {
     "message": "目前对于 $${0} 的保护功能状态：",
     "description": "Current protection status for a tracker"
+  },
+  "custom_filters": {
+    "message": "自定义过滤器"
   },
   "customer_interaction": {
     "message": "客户互动",
@@ -289,15 +301,6 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
-  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery 将在此网站上暂停。 为阻止跟踪器和广告在网络上跟踪您，您可以在 Ghostery 设置中更改此设置。"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery 将在此网站上暂停 1 天"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery 将在此网站上暂停 1 小时"
-  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 会显示页面上已阻止的跟踪器数量。点击 Ghostery 图标，获取更多详情。"
   },
@@ -344,6 +347,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "进一步了解 YouTube 对广告拦截器的挑战"
   },
+  "learn_more_on_supported_syntax": {
+    "message": "了解更多支持的语法"
+  },
   "load_more": {
     "message": "加载更多"
   },
@@ -356,8 +362,8 @@
   "menu": {
     "message": "菜单"
   },
-  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "请注意，列出的实体并不全都是跟踪器，并非所有实体都收集个人数据"
+  "mind_that_not_all_listed_activities_are_trackers__that_is_not_all_of_them_collect_personal_data_": {
+    "message": "请注意，列出的活动并非全都是跟踪器，并非所有活动都收集个人数据。."
   },
   "miscellaneous": {
     "message": "其他",
@@ -395,12 +401,6 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "还未添加网站异常"
-  },
-  "number_of_trackers_with_blocked_network_requests_": {
-    "message": "网络请求受阻的跟踪器数量。"
-  },
-  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "已删除 cookie 或指纹的跟踪器数量。"
   },
   "observed_activities": {
     "message": "已观察过的活动"
@@ -555,6 +555,15 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "感谢支持 Ghostery，为建立一个隐私是基本人权的网络而奋斗。"
+  },
+  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "此网站将始终被信任。您可以随时在 Ghostery 设置中更改此设置，以阻止跟踪器和广告在网络上跟踪您。请确保您定期检查和更新您的隐私设置，以确保您的在线活动始终受到保护。"
+  },
+  "this_site_will_be_trusted_for_1_day": {
+    "message": "此站点将在1天内被信任"
+  },
+  "this_site_will_be_trusted_for_1_hour": {
+    "message": "此网站将在1小时内被信任"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "要调整隐私保护，请信任一个网站："
