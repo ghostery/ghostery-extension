@@ -52,15 +52,13 @@ export default {
             <ui-text type="label-l" layout="block:center margin:bottom">
               Add website exception
             </ui-text>
-            <div layout="column gap items:start">
-              <ui-text>
-                <!-- Current protection status for a tracker -->
-                Current protection status for ${tracker.name}:
-              </ui-text>
+            <ui-text layout="row:wrap gap:0.5 items:center">
+              <!-- Current protection status for a tracker -->
+              Current protection status for ${tracker.name}:
               <gh-settings-protection-badge
                 blocked="${blocked}"
               ></gh-settings-protection-badge>
-            </div>
+            </ui-text>
             <div layout="column gap:0.5">
               <ui-text type="label-m">Website</ui-text>
               <gh-settings-input error="${store.error(hostname) || ''}">

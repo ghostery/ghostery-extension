@@ -12,8 +12,6 @@
 import { Request } from '@cliqz/adblocker';
 import { parse } from 'tldts-experimental';
 
-import * as trackerDb from '../../utils/trackerdb.js';
-
 const PARSE_CACHE_LIMIT = 1000;
 const parseCache = new Map();
 
@@ -77,8 +75,6 @@ export default class ExtendedRequest extends Request {
     });
   }
 
-  #metadata = null;
-
   constructor(data) {
     super(data);
 
@@ -90,12 +86,5 @@ export default class ExtendedRequest extends Request {
     this.sourceUrl = data.sourceUrl;
     this.sourceDomain = data.sourceDomain;
     this.sourceHostname = data.sourceHostname;
-  }
-
-  get metadata() {
-    if (!this.#metadata) {
-      this.#metadata = trackerDb.getMetadata(this);
-    }
-    return this.#metadata;
   }
 }

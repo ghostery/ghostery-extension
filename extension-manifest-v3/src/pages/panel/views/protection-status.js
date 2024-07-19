@@ -13,6 +13,21 @@ function toggleDomain({ stats, tracker }) {
   );
 }
 
+function updateStatus(host, event) {
+  const value = event.target.value;
+  const exception = host.tracker.exception;
+
+  store.set(
+    exception,
+    store.ready(exception) &&
+      value === host.tracker.blockedByDefault &&
+      !exception.blockedDomains.length &&
+      !exception.trustedDomains.length
+      ? null
+      : { blocked: value },
+  );
+}
+
 export default {
   [router.connect]: { dialog: true },
   stats: store(TabStats),
@@ -58,7 +73,7 @@ export default {
                 layout="self:center"
                 value="${blocked}"
                 tooltip
-                onchange="${html.set(tracker.exception, 'blocked')}"
+                onchange="${updateStatus}"
               ></ui-panel-protection-status-toggle>
             </div>
             <gh-panel-card type="info">
@@ -72,8 +87,6 @@ export default {
               <ui-toggle
                 value="${blocked ? allowedOnSite : blockedOnSite}"
                 onchange="${toggleDomain}"
-                type="status"
-                color="${blocked ? 'success' : 'danger'}-500"
                 layout="margin:top:0.5"
                 no-label
               >

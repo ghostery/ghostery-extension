@@ -15,17 +15,17 @@ const PAUSE_TYPES = [
   {
     value: 1,
     label: msg`1 hour`,
-    description: msg`Ghostery will be paused on this site for 1 hour`,
+    description: msg`This site will be trusted for 1 hour`,
   },
   {
     value: 24,
     label: msg`1 day`,
-    description: msg`Ghostery will be paused on this site for 1 day`,
+    description: msg`This site will be trusted for 1 day`,
   },
   {
     value: 0,
     label: msg`Always`,
-    description: msg`Ghostery will be paused on this site. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web`,
+    description: msg`This site will always be trusted. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web`,
   },
 ];
 
@@ -65,6 +65,7 @@ function simulateClickOnEnter(host, event) {
 
 export default {
   paused: { value: false, reflect: true },
+  global: { value: false, reflect: true },
   pauseType: 1,
   pauseList: false,
   render: ({ paused, pauseType, pauseList }) => html`
@@ -89,10 +90,10 @@ export default {
         >
           ${paused
             ? html`
-                <ui-icon name="refresh" color="danger-500"></ui-icon>
+                <ui-icon name="refresh" color="gh-panel-action"></ui-icon>
                 <ui-text
                   type="label-m"
-                  color="danger-500"
+                  color="gh-panel-action"
                   layout="margin:left:0.5"
                 >
                   Undo
@@ -135,10 +136,18 @@ export default {
       position: relative;
       background: var(--ui-color-primary-200);
       --ui-color-gh-panel-action: var(--ui-color-primary-700);
+      --gh-pause-active-color: var(--ui-color-warning-500);
+      --gh-pause-active-background: var(--ui-color-warning-100);
+    }
+
+    :host([global]) {
+      --gh-pause-active-color: var(--ui-color-danger-500);
+      --gh-pause-active-background: var(--ui-color-danger-100);
+      --ui-color-gh-panel-action: var(--ui-color-white);
     }
 
     :host([paused]) {
-      background: var(--ui-color-danger-100);
+      background: var(--gh-pause-active-background);
     }
 
     button {
@@ -192,10 +201,17 @@ export default {
     }
 
     #main.paused, #main.paused:hover, #main.paused:active {
-      pointer-events: none;
-      background: var(--ui-color-danger-500);
+      background: var(--gh-pause-active-color);
       white-space: nowrap;
+      --ui-color-gh-panel-action: var(--ui-color-gray-800);
+    }
+
+    :host([global]) #main.paused {
       --ui-color-gh-panel-action: var(--ui-color-white);
+    }
+
+    :host([global]) #main.paused #type {
+      --ui-color-gh-panel-action: var(--ui-color-danger-500);
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -204,12 +220,12 @@ export default {
         --ui-color-gh-panel-action: var(--ui-color-white);
       }
 
-      #main:hover:not(.active) #type {
+      #main:hover:not(.active, .paused) #type {
         --ui-color-gh-panel-action: var(--ui-color-primary-700);
         border-color: var(--ui-color-primary-100);
       }
 
-      #main:hover #type:hover {
+      #main:hover:not(.paused) #type:hover {
         --ui-color-gh-panel-action: var(--ui-color-white);
         background: var(--ui-color-primary-700);
         border-color: var(--ui-color-primary-700);
@@ -219,13 +235,9 @@ export default {
         width: 0;
       }
 
-      #main.paused:hover:has(#type:hover) #type, #main.paused:focus-visible #type {
+      #main.paused #type:hover, #main.paused:focus-visible #type {
         width: 100%;
         transition: width 0.2s;
-      }
-
-      #main.paused #type:hover {
-        background: var(--ui-color-white);
       }
     }
 

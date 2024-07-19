@@ -16,12 +16,14 @@ import {
 import { parse } from 'tldts-experimental';
 
 import { observe, ENGINES, isPaused } from '/store/options.js';
-import * as engines from '/utils/engines.js';
 
-import Request from './utils/request.js';
-import asyncSetup from './utils/setup.js';
+import * as engines from '/utils/engines.js';
+import Request from '/utils/request.js';
+import asyncSetup from '/utils/setup.js';
+import { getMetadata } from '/utils/trackerdb.js';
 
 import { tabStats, updateTabStats } from './stats.js';
+import { getException } from './exceptions.js';
 
 let enabledEngines = [];
 let options = {};
@@ -70,7 +72,7 @@ function adblockerInjectStylesWebExtension(
         origin: 'USER',
         target,
       })
-      .catch((e) => console.warn('Failed to inject CSS', e));
+      .catch((e) => console.warn('Adblocker: Failed to inject CSS', e));
   } else {
     const details = {
       allFrames,
@@ -84,12 +86,19 @@ function adblockerInjectStylesWebExtension(
     }
     chrome.tabs
       .insertCSS(tabId, details)
-      .catch((e) => console.warn('Failed to inject CSS', e));
+      .catch((e) => console.warn('Adblocker: Failed to inject CSS', e));
   }
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
 async function adblockerOnMessage(msg, sender) {
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.error(`Adblocker: Error while setup cosmetic filters: ${e}`);
+    return;
+  }
+
   // Extract hostname from sender's URL
   const { url = '', frameId } = sender;
   const parsed = parse(url);
@@ -97,13 +106,6 @@ async function adblockerOnMessage(msg, sender) {
   const domain = parsed.domain || '';
 
   if (!sender.tab || isPaused(options, hostname)) {
-    return;
-  }
-
-  try {
-    setup.pending && (await setup.pending);
-  } catch (e) {
-    console.error(`Error while setup adblocker filters: ${e}`);
     return;
   }
 
@@ -200,7 +202,9 @@ async function adblockerOnMessage(msg, sender) {
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
     adblockerOnMessage(msg, sender).catch((e) =>
-      console.error(`Error while processing cosmetics filters: ${e}`),
+      console.error(
+        `Adblocker: Error while processing cosmetics filters: ${e}`,
+      ),
     );
   }
 
@@ -287,6 +291,14 @@ async function injectScriptlets(tabId, url) {
     const engine = engines.get(name);
     if (!engine) return;
 
+    if (name === engines.CUSTOM_ENGINE) {
+      try {
+        engine.resources = engines.get(engines.FIXES_ENGINE).resources;
+      } catch (e) {
+        console.warn('Could not share resources with Custom Filters engine', e);
+      }
+    }
+
     const { active, scripts } = engine.getCosmeticsFilters({
       url: url,
       hostname,
@@ -324,28 +336,74 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
+function resolveEngines(request, type) {
+  // The request is from a tab that is paused
+  if (isPaused(options, request.sourceHostname)) {
+    return [];
+  }
+
+  // If the request is a main_frame, we need to return the main engines
+  // and not check the exceptions
+  if (type === 'main_frame') {
+    return enabledEngines;
+  }
+
+  const metadata = getMetadata(request);
+
+  // Get exception for known tracker (metadata id) or
+  // by the request hostname (unidentified tracker)
+  const exception = getException(metadata?.id || request.hostname);
+
+  if (exception) {
+    const tabHostname = request.sourceHostname.replace(/^www\./, '');
+
+    // The request is trusted if:
+    // - tracker is blocked, but tab hostname is added to trusted domains
+    // - tracker is not blocked and tab hostname is not found in the blocked domains
+    if (
+      exception.blocked
+        ? exception.trustedDomains.includes(tabHostname)
+        : !exception.blockedDomains.includes(tabHostname)
+    ) {
+      return [];
+    }
+
+    // If the tracker is not blocked by default, but the user has blocked it
+    // by the exception (otherwise the function would have returned already)
+    // we need to add the TrackerDB engine with filters for that tracker
+    if (!metadata.blockedByDefault) {
+      return enabledEngines.concat(engines.TRACKERDB_ENGINE);
+    }
+  }
+
+  // If there is no exception, but tracker is found in theTrackerDB
+  // and it is not blocked by default, it means is trusted
+  if (metadata && !metadata.blockedByDefault) {
+    return [];
+  }
+
+  // By default return the main enabled engines
+  return enabledEngines;
+}
+
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
+      if (setup.pending) {
+        console.error(
+          'Adblocker: Error while processing network request - adblocker not ready yet',
+        );
+        return;
+      }
+
       if (details.tabId < 0) return;
 
       const request = Request.fromRequestDetails(details);
 
       if (request.sourceHostname) {
-        if (
-          (details.type !== 'main_frame' && request.metadata?.isTrusted) ||
-          isPaused(options, request.sourceHostname)
-        ) {
-          updateTabStats(details.tabId, [request]);
-          return;
-        }
+        let result = undefined;
 
-        const allEngines =
-          enabledEngines.length && request.metadata
-            ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
-            : enabledEngines;
-
-        for (const name of allEngines) {
+        for (const name of resolveEngines(request, details.type)) {
           const engine = engines.get(name);
           if (!engine) continue;
 
@@ -364,19 +422,18 @@ if (__PLATFORM__ === 'firefox') {
 
             if (redirect !== undefined) {
               request.blocked = true;
-              updateTabStats(details.tabId, [request]);
-
-              return { redirectUrl: redirect.dataUrl };
+              result = { redirectUrl: redirect.dataUrl };
+              break;
             } else if (match === true) {
               request.blocked = true;
-              updateTabStats(details.tabId, [request]);
-
-              return { cancel: true };
+              result = { cancel: true };
+              break;
             }
           }
         }
 
         updateTabStats(details.tabId, [request]);
+        return result;
       }
     },
     { urls: ['<all_urls>'] },
@@ -385,31 +442,29 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      const request = Request.fromRequestDetails(details);
-      if (
-        request.metadata?.isTrusted ||
-        isPaused(options, request.sourceHostname)
-      ) {
+      if (setup.pending) {
+        console.error(
+          'Adblocker: Error while processing headers - adblocker not ready yet',
+        );
         return;
       }
 
-      const allEngines =
-        enabledEngines.length && request.metadata
-          ? [engines.TRACKERDB_ENGINE, ...enabledEngines]
-          : enabledEngines;
-
+      const request = Request.fromRequestDetails(details);
       let policies;
-      for (const name of allEngines) {
+
+      for (const name of resolveEngines(request, details.type)) {
         const engine = engines.get(name);
-        if (engine) {
-          policies = engine.getCSPDirectives(request);
-          if (policies !== undefined) {
-            break;
-          }
+        if (!engine) continue;
+
+        policies = engine.getCSPDirectives(request);
+        if (policies !== undefined) {
+          break;
         }
       }
 
-      return updateResponseHeadersWithCSP(details, policies);
+      if (policies) {
+        return updateResponseHeadersWithCSP(details, policies);
+      }
     },
     { urls: ['<all_urls>'], types: ['main_frame'] },
     ['blocking', 'responseHeaders'],

@@ -132,6 +132,7 @@ export default {
               <gh-panel-pause
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
                 paused="${paused || globalPause}"
+                global="${globalPause}"
               >
                 <ui-icon
                   name="${globalPause ? 'pause' : 'circle'}"

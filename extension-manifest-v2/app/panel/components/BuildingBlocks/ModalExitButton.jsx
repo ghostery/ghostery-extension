@@ -28,6 +28,7 @@ function ModalExitButton(props) {
 	const borderClassNames = `ModalExitButton__exit flex-container align-middle ${border}`;
 
 	return (
+		// eslint-disable-next-line jsx-a11y/control-has-associated-label
 		<button type="button" onClick={toggleModal} className={borderClassNames}>
 			<span className="ModalExitButton__exitIcon" />
 		</button>
