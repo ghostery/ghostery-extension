@@ -291,7 +291,7 @@ async function injectScriptlets(tabId, url) {
       try {
         engine.resources = engines.get(engines.FIXES_ENGINE).resources;
       } catch (e) {
-        console.warn('Could not share resources with Custom Filters engien', e);
+        console.warn('Could not share resources with Custom Filters engine', e);
       }
     }
 
