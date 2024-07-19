@@ -138,9 +138,11 @@ async function submitFilters(host) {
 
 function update(host, event) {
   host.dnrErrors = [];
-  // submitFilters calls `convert` which may request optional permission - that function must be called during a user gesture.
-  const promise = submitFilters(host).then(() => 'Filters updated');
-  asyncAction(event, promise);
+
+  asyncAction(
+    event,
+    submitFilters(host).then(() => 'Filters updated'),
+  );
 }
 
 export default {
