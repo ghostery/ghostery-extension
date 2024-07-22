@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
 import Options from '/store/options.js';
@@ -64,12 +64,21 @@ export default {
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        <ui-text slot="header" type="body-s" color="gray-600">
-          ${tracker.company &&
-          tracker.company !== tracker.name &&
-          tracker.company + ' •'}
-          ${labels.categories[tracker.category]}
-        </ui-text>
+        <div
+          slot="header"
+          layout="center row items:center gap overflow margin:0.5:0:0:0"
+        >
+          <ui-panel-category-icon
+            name="${tracker.category}"
+            layout="size:2.5"
+          ></ui-panel-category-icon>
+          <ui-text slot="header" type="body-s" color="gray-600">
+            ${tracker.company &&
+            tracker.company !== tracker.name &&
+            tracker.company + ' •'}
+            ${labels.categories[tracker.category]}
+          </ui-text>
+        </div>
         ${options.terms &&
         html`
           <div layout="grid:1|max gap">
@@ -100,13 +109,13 @@ export default {
                     >
                       ${status.website
                         ? (status.type === 'trust' &&
-                            html`Trusted on this website`) ||
+                            msg`Trusted on this website`) ||
                           (status.type === 'block' &&
-                            html`Blocked on this website`)
+                            msg`Blocked on this website`)
                         : (status.type === 'trust' &&
-                            html`Trusted on all websites`) ||
+                            msg`Trusted on all websites`) ||
                           (status.type === 'block' &&
-                            html`Blocked on all websites`)}
+                            msg`Blocked on all websites`)}
                     </ui-text>
                   </a>
                 </ui-panel-action>`}
