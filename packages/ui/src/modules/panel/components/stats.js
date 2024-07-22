@@ -188,7 +188,7 @@ export default {
                   layout:first-of-type="margin:top:0.5"
                 >
                   <div slot="header" layout="row items:center gap">
-                    <ui-panel-badge>${trackers.length}</ui-panel-badge>
+                    <ui-text type="label-s">${trackers.length}</ui-text>
                   </div>
 
                   <section id="content" layout="column gap:0.5">
@@ -219,12 +219,12 @@ export default {
                                 ${tracker.blocked &&
                                 html`<ui-icon
                                   name="block-s"
-                                  color="gray-400"
+                                  color="danger-700"
                                 ></ui-icon>`}
                                 ${tracker.modified &&
                                 html`<ui-icon
                                   name="eye"
-                                  color="gray-400"
+                                  color="primary-700"
                                 ></ui-icon>`}
                               </a>
                             </ui-text>
