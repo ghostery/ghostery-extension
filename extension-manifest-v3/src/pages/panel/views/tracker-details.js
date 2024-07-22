@@ -64,12 +64,21 @@ export default {
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        <ui-text slot="header" type="body-s" color="gray-600">
-          ${tracker.company &&
-          tracker.company !== tracker.name &&
-          tracker.company + ' •'}
-          ${labels.categories[tracker.category]}
-        </ui-text>
+        <div
+          slot="header"
+          layout="center row items:center gap overflow margin:0.5:0:0:0"
+        >
+          <ui-panel-category-icon
+            name="${tracker.category}"
+            layout="size:2.5"
+          ></ui-panel-category-icon>
+          <ui-text slot="header" type="body-s" color="gray-600">
+            ${tracker.company &&
+            tracker.company !== tracker.name &&
+            tracker.company + ' •'}
+            ${labels.categories[tracker.category]}
+          </ui-text>
+        </div>
         ${options.terms &&
         html`
           <div layout="grid:1|max gap">

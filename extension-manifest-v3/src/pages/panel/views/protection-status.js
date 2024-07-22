@@ -46,12 +46,21 @@ export default {
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
 
-        <ui-text slot="header" type="body-s" color="gray-600">
-          ${tracker.company &&
-          tracker.company !== tracker.name &&
-          tracker.company + ' •'}
-          ${labels.categories[tracker.category]}
-        </ui-text>
+        <div
+          slot="header"
+          layout="center row items:center gap overflow margin:0.5:0:0:0"
+        >
+          <ui-panel-category-icon
+            name="${tracker.category}"
+            layout="size:2.5"
+          ></ui-panel-category-icon>
+          <ui-text slot="header" type="body-s" color="gray-600">
+            ${tracker.company &&
+            tracker.company !== tracker.name &&
+            tracker.company + ' •'}
+            ${labels.categories[tracker.category]}
+          </ui-text>
+        </div>
         ${(store.ready(tracker.exception) || store.error(tracker.exception)) &&
         html`
           <div layout="column gap:2">
@@ -88,7 +97,7 @@ export default {
                       : msg`Block on all websites`}
                   </ui-text>
                   <ui-text type="body-s" color="gray-500">
-                    Add an exception for all websites
+                    Add exception
                   </ui-text>
                 </div>
               </ui-toggle>
