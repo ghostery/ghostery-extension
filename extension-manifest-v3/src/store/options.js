@@ -55,7 +55,8 @@ const Options = {
   experimentalFilters: false,
 
   // Browser icon
-  trackerWheel: __PLATFORM__ !== 'firefox' ? true : false,
+  // TODO: it should be enabled by default on Ghostery Private Browser only
+  trackerWheel: __PLATFORM__ === 'firefox' ? true : false,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
   // SERP
