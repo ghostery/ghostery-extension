@@ -166,7 +166,7 @@ FiltersEngine.deserialize(
   if (
     value.contentType === 'application/javascript' &&
     (value.body.includes('scriptletGlobals') || // Drop scriptlets
-      key.indexOf('/') !== -1) // Drop resources within a directory
+      key.includes('/')) // Drop resources within a directory
   ) {
     return;
   }
