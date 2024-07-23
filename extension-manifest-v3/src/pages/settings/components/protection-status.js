@@ -22,7 +22,7 @@ export default {
             </gh-settings-badge>
           `
         : html`
-            <gh-settings-badge type="danger" uppercase>
+            <gh-settings-badge type="warning" uppercase>
               Trusted
             </gh-settings-badge>
             <ui-text color="gray-600" layout="grow">

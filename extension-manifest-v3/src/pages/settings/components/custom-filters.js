@@ -10,29 +10,77 @@
  */
 
 import { html, store } from 'hybrids';
-import { detectFilterType } from '@cliqz/adblocker';
+import { detectFilterType, FilterType, CosmeticFilter } from '@cliqz/adblocker';
 
+import Options from '/store/options.js';
 import { createDocumentConverter } from '/utils/dnr-converter.js';
 import CustomFiltersInput from '../store/custom-filters-input.js';
 import { asyncAction } from './devtools.js';
 
 const convert = createDocumentConverter();
 
-function parseFilters(text = '') {
+class TrustedScriptletError extends Error {}
+
+// returns a scriptlet with encoded arguments
+// returns undefined if not a scriptlet
+// throws if scriptlet cannot be trusted
+function fixScriptlet(filter, allowTrusted) {
+  const cosmeticFilter = CosmeticFilter.parse(filter);
+
+  if (
+    !cosmeticFilter ||
+    !cosmeticFilter.isScriptInject() ||
+    !cosmeticFilter.selector
+  ) {
+    return null;
+  }
+
+  const parsedScript = cosmeticFilter.parseScript();
+
+  if (!parsedScript || !parsedScript.name) {
+    return null;
+  }
+
+  if (
+    !allowTrusted &&
+    (parsedScript.name === 'rpnt' ||
+      parsedScript.name === 'replace-node-text' ||
+      parsedScript.name.startsWith('trusted-'))
+  ) {
+    throw new TrustedScriptletError();
+  }
+
+  const [front] = filter.split(`#+js(${parsedScript.name}`);
+  const args = parsedScript.args.map((arg) => encodeURIComponent(arg));
+  return `${front}#+js(${[parsedScript.name, ...args].join(', ')})`;
+}
+
+function parseFilters(text = '', { allowTrusted }) {
   return text
     .split('\n')
     .map((f) => f.trim())
     .filter(Boolean)
     .reduce(
       (filters, filter) => {
-        const filterType = detectFilterType(filter);
-        if (filterType === 1) {
-          // NETWORK
+        const filterType = detectFilterType(filter, {
+          extendedNonSupportedTypes: true,
+        });
+        if (filterType === FilterType.NETWORK) {
           filters.networkFilters.add(filter);
-        } else if (filterType === 2) {
-          // COSMETIC
-          filters.cosmeticFilters.add(filter);
-        } else {
+        } else if (filterType === FilterType.COSMETIC) {
+          try {
+            const scriptlet = fixScriptlet(filter, allowTrusted);
+            filters.cosmeticFilters.add(scriptlet || filter);
+          } catch (e) {
+            if (e instanceof TrustedScriptletError) {
+              filters.errors.push(
+                `Trusted scriptlets are not allowed: '${filter}'`,
+              );
+            } else {
+              console.error(e);
+            }
+          }
+        } else if (filterType === FilterType.NOT_SUPPORTED_ADGUARD) {
           filters.errors.push(`Filter not supported: '${filter}'`);
         }
         return filters;
@@ -75,27 +123,43 @@ async function submitFilters(host) {
   }
 
   // Update engine
-  await chrome.runtime.sendMessage({
+  const { notSupportedFilters } = await chrome.runtime.sendMessage({
     action: 'customFilters:engine',
     filters: host.input.text,
   });
+
+  host.convertsionErrors = notSupportedFilters.map(
+    (error) => `Filter not supported: '${error.filter}'`,
+  );
 
   // Save input
   await store.submit(host.input);
 }
 
 function update(host, event) {
-  // submitFilters calls `convert` which may request optional permission - that function must be called during a user gesture.
-  const promise = submitFilters(host).then(() => 'Filters updated');
-  asyncAction(event, promise);
+  host.dnrErrors = [];
+
+  asyncAction(
+    event,
+    submitFilters(host).then(() => 'Filters updated'),
+  );
 }
 
 export default {
+  options: store(Options),
   input: store(CustomFiltersInput, { draft: true }),
   dnrRules: undefined,
-  filters: ({ input }) => parseFilters(store.ready(input) ? input.text : ''),
+  filters: ({ input, options }) =>
+    parseFilters(store.ready(input) ? input.text : '', {
+      allowTrusted: options.customFilters.trustedScriptlets,
+    }),
+  convertsionErrors: undefined,
   dnrErrors: undefined,
-  errors: ({ filters, dnrErrors = [] }) => [...filters.errors, ...dnrErrors],
+  errors: ({ filters, dnrErrors = [], convertsionErrors = [] }) => [
+    ...filters.errors,
+    ...dnrErrors,
+    ...convertsionErrors,
+  ],
   render: ({ input, filters, dnrRules, errors }) => html`
     <template layout="block">
       <div layout="column gap" translate="no">
@@ -136,7 +200,7 @@ export default {
           disabled=${errors.length > 0}
           onclick="${update}"
         >
-          <button>Update</button>
+          <button>Update filters</button>
         </ui-button>
 
         ${!!dnrRules?.length &&

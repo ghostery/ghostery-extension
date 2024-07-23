@@ -13,17 +13,21 @@ import { html } from 'hybrids';
 
 export default {
   status: undefined, // expected type { type: 'block' | 'trust', website?: boolean }
-  render: ({ status }) => html`
+  blockByDefault: false,
+  adjusted: ({ status, blockByDefault }) =>
+    status.website || (status.type === 'block') !== blockByDefault,
+  render: ({ status, adjusted }) => html`
     <template layout="contents">
       <ui-icon
         name="${status.type}-m"
-        color="${status.type === 'block' ? 'gray-800' : 'success-500'}"
+        color="${adjusted ? 'gray-600' : 'gray-300'}"
       ></ui-icon>
       ${status.website &&
       html`
         <ui-icon
           name="error"
-          layout="absolute right:-1px bottom:-1px"
+          color="gray-600"
+          layout="absolute right:1px bottom:1px"
         ></ui-icon>
       `}
     </template>

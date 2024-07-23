@@ -16,18 +16,17 @@ export default {
   uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">
-      <ui-text
-        type="label-s"
-        color="settings-badge"
-        layout="row items:center gap:0.5"
-      >
+      <ui-text type="label-s" layout="row items:center gap:0.5">
         <slot></slot>
       </ui-text>
     </template>
   `.css`
     :host {
       border-radius: 8px;
-      --ui-color-settings-badge: currentColor;
+    }
+
+    ui-text {
+      color: inherit;
     }
 
     :host([type="danger"]) {
@@ -48,6 +47,11 @@ export default {
     :host([type="success"]) {
       color: var(--ui-color-success-700);
       background: var(--ui-color-success-100);
+    }
+
+    :host([type="warning"]) {
+      color: var(--ui-color-gray-800);
+      background: var(--ui-color-warning-500);
     }
 
     :host([uppercase]) ui-text {

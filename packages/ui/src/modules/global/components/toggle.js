@@ -30,17 +30,17 @@ export default {
   value: { value: false, reflect: true },
   disabled: { value: false, reflect: true },
   noLabel: { value: false, reflect: true },
-  type: { value: '', reflect: true },
-  color: '',
   render: {
-    value: ({ disabled, value, color }) => html`
+    value: ({ disabled, value }) => html`
       <template layout="contents">
         <button
           onclick="${toggle}"
-          layout="row items:start gap:2 padding:1 margin:-1"
+          layout="row items:start gap:2 padding:0.5 margin:-0.5"
           tabindex="${disabled ? -1 : 0}"
         >
-          <div layout="grow" onclick="${stopForAnchors}"><slot></slot></div>
+          <div layout="self:stretch grow row" onclick="${stopForAnchors}">
+            <slot></slot>
+          </div>
           <div id="button" layout="row items:center gap padding:0.5 margin:0">
             <div id="toggle" layout="block relative size:36px:20px">
               <span layout="block size:2 absolute top left margin:2px"></span>
@@ -74,15 +74,15 @@ export default {
       }
 
       #button {
-        --ui-text-color-heading: var(--ui-color-danger-500);
+        --ui-text-color-heading: var(--ui-color-gray-400);
       }
 
       :host([disabled]) #button {
-        --ui-text-color-heading: var(--ui-color-gray-400) !important;
+        --ui-text-color-heading: var(--ui-color-gray-300) !important;
       }
 
       #toggle {
-        background: var(--ui-color-danger-500);
+        background: var(--ui-color-gray-300);
         border-radius: 12px;
         transition: color 0.2s, background 0.2s;
       }
@@ -94,15 +94,15 @@ export default {
       }
 
       :host([disabled]) #toggle {
-        background: var(--ui-color-gray-400) !important;
+        background: var(--ui-color-gray-200) !important;
       }
 
       :host([value]) #toggle {
-        background: var(--ui-color-success-500);
+        background: var(--ui-color-gray-600);
       }
 
       :host([value]) #button {
-        --ui-text-color-heading: var(--ui-color-success-500);
+        --ui-text-color-heading: var(--ui-color-gray-600);
       }
 
       :host([value]) #toggle span {
@@ -113,54 +113,17 @@ export default {
         display: none;
       }
 
-      :host([type="status"]) #toggle {
-        background: var(--ui-color-gray-400);
-      }
-
-      :host([value][type="status"]) #toggle {
-        background: var(--ui-color-${color});
-      }
-
-      :host([type="status"]) #button {
-        --ui-text-color-heading: var(--ui-color-gray-400);
-      }
-
-      :host([value][type="status"]) #button {
-        --ui-text-color-heading: var(--ui-color-${color});
-      }
-
-
       @media (hover: hover) and (pointer: fine) {
         button:hover #button {
-          --ui-text-color-heading: var(--ui-color-danger-700);
+          --ui-text-color-heading: var(--ui-color-gray-400);
         }
 
         button:hover #toggle {
-          background: var(--ui-color-danger-700);
-        }
-
-        :host([value]) button:hover #button {
-          --ui-text-color-heading: var(--ui-color-success-700);
+          background: var(--ui-color-gray-400);
         }
 
         :host([value]) button:hover #toggle {
-          background: var(--ui-color-success-700);
-        }
-
-        :host([type="status"]) button:hover #toggle {
-          background: var(--ui-color-gray-600);
-        }
-
-        :host([value][type="status"]) button:hover #toggle {
-          background: var(--ui-color-${color});
-        }
-
-        :host([type="status"]) button:hover #button {
-          --ui-text-color-heading: var(--ui-color-gray-600);
-        }
-
-        :host([value][type="status"]) button:hover #button {
-          --ui-text-color-heading: var(--ui-color-${color});
+          background: var(--ui-color-gray-900);
         }
       }
     `,

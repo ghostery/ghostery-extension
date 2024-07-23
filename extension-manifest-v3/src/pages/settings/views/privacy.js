@@ -70,8 +70,6 @@ export default {
               </ui-text>
             </div>
             <ui-toggle
-              type="status"
-              color="danger-500"
               value="${globalPause}"
               onchange="${html.set('globalPause')}"
             >
@@ -85,7 +83,7 @@ export default {
                 </ui-text>
                 ${globalPauseRevokeAt &&
                 html`
-                  <ui-text type="body-s" color="gray-400">
+                  <ui-text type="body-s" color="gray-500">
                     ${html`
                       <ui-text type="body-s" ellipsis
                         ><relative-time
@@ -187,35 +185,97 @@ export default {
                 </div>
               </ui-toggle>
               <ui-line></ui-line>
-              <ui-toggle
-                disabled="${globalPause}"
-                value="${options.experimentalFilters}"
-                onchange="${html.set(options, 'experimentalFilters')}"
-              >
-                <div layout="column grow items:start gap:0.5">
-                  <div layout="row gap items:center">
-                    <ui-icon name="dots" color="gray-600"></ui-icon>
-                    <ui-text type="headline-xs">
-                      Experimental Ad-Blocking Filters
+              <div layout="column gap:3">
+                <ui-text type="headline-xs" color="gray-600">Advanced</ui-text>
+                <ui-toggle
+                  type="status"
+                  color="success-500"
+                  disabled="${globalPause}"
+                  value="${options.experimentalFilters}"
+                  onchange="${html.set(options, 'experimentalFilters')}"
+                >
+                  <div layout="column grow items:start gap:0.5">
+                    <div layout="row gap items:center">
+                      <ui-icon name="dots" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">
+                        Experimental Ad-Blocking Filters
+                      </ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Helps Ghostery fix broken pages faster. By activating you
+                      can test experimental filters and support us with
+                      feedback. Please send a message to support@ghostery.com
+                      describing how your experience changed after enabling.
+                    </ui-text>
+                    <ui-text type="label-s" color="gray-600" underline>
+                      <a
+                        href="https://github.com/ghostery/broken-page-reports/blob/main/filters/experimental.txt"
+                        target="_blank"
+                        rel="noreferrer"
+                        layout="row gap:0.5"
+                      >
+                        Learn more
+                        <ui-icon name="arrow-right-s"></ui-icon>
+                      </a>
                     </ui-text>
                   </div>
-                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
-                    Helps Ghostery fix broken pages faster. By activating you
-                    can test experimental filters and support us with feedback.
-                    Please send a message to support@ghostery.com describing how
-                    your experience changed after enabling.
-                  </ui-text>
-                  <ui-text type="label-s" color="gray-600" underline>
-                    <a
-                      href="https://github.com/ghostery/broken-page-reports/blob/main/filters/experimental.txt"
-                      target="_blank"
-                      layout="row gap:0.5"
+                </ui-toggle>
+                <div layout="column gap">
+                  <div layout="column gap:0.5">
+                    <div layout="row gap items:center">
+                      <ui-icon name="detailed-view" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">Custom filters</ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
                     >
-                      Learn more<ui-icon name="arrow-right-s"></ui-icon>
-                    </a>
-                  </ui-text>
+                      Create your own ad-blocking rules to customize your
+                      Ghostery experience.
+                    </ui-text>
+                    <ui-text type="label-s" color="gray-600" underline>
+                      <a
+                        href="https://github.com/ghostery/adblocker/wiki/Compatibility-Matrix"
+                        target="_blank"
+                        rel="noreferrer"
+                        layout="row gap:0.5"
+                      >
+                        Learn more on supported syntax
+                        <ui-icon name="arrow-right-s"></ui-icon>
+                      </a>
+                    </ui-text>
+                  </div>
+                  <div layout="self:start">
+                    <ui-toggle
+                      no-label
+                      disabled="${globalPause}"
+                      value="${options.customFilters.trustedScriptlets}"
+                      onchange="${html.set(
+                        options,
+                        'customFilters.trustedScriptlets',
+                      )}"
+                    >
+                      <div
+                        layout="self:center column grow items:center gap:0.5"
+                      >
+                        <ui-text
+                          type="body-m"
+                          mobile-type="body-s"
+                          color="gray-600"
+                        >
+                          Allow trusted scriptlets
+                        </ui-text>
+                      </div>
+                    </ui-toggle>
+                  </div>
+                  <gh-settings-custom-filters></gh-settings-custom-filters>
                 </div>
-              </ui-toggle>
+              </div>
             </div>
           </section>
 

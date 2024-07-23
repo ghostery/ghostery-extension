@@ -26,14 +26,14 @@ export default {
         >
           <ui-panel-category-icon name="${name}"></ui-panel-category-icon>
           <ui-text type="label-m">${labels.categories[name]}</ui-text>
-          <slot name="header"></slot>
-          <div layout="grow"></div>
           <ui-icon
             id="arrow"
             name="arrow-down"
             color="gray-600"
             layout="margin:right:-0.5"
           ></ui-icon>
+          <div layout="grow"></div>
+          <slot name="header"></slot>
         </button>
       </ui-action>`}
       <div

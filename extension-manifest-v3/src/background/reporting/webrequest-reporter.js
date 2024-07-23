@@ -16,8 +16,8 @@ import {
 import { getBrowserInfo } from '@ghostery/libs';
 
 import { observe, isPaused } from '/store/options.js';
+import Request from '/utils/request.js';
 
-import Request from '../utils/request.js';
 import { updateTabStats } from '../stats.js';
 
 import config from './config.js';

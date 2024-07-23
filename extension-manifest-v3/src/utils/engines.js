@@ -16,6 +16,7 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Config,
+  parseFilters,
 } from '@cliqz/adblocker';
 
 import { observe } from '../store/options.js';
@@ -55,15 +56,6 @@ function checkUserAgent(pattern) {
 
 function deserializeEngine(engineBytes) {
   const engine = FiltersEngine.deserialize(engineBytes);
-  engine.updateEnv(ENV);
-  return engine;
-}
-
-function parseFilters(filters) {
-  const config = new Config({
-    enableHtmlFiltering: ENV.get('cap_html_filtering'),
-  });
-  const engine = FiltersEngine.parse(filters, config);
   engine.updateEnv(ENV);
   return engine;
 }
@@ -407,7 +399,7 @@ export async function init(name) {
     return (
       get(CUSTOM_ENGINE) ||
       (await loadFromStorage(CUSTOM_ENGINE)) ||
-      (await createCustomEngine())
+      (await createCustomEngine()).engine
     );
   }
 
@@ -426,12 +418,31 @@ export async function init(name) {
 }
 
 export async function createCustomEngine(filters = '') {
-  const engine = parseFilters(filters);
+  const config = new Config({
+    enableHtmlFiltering: ENV.get('cap_html_filtering'),
+  });
+
+  const {
+    cosmeticFilters,
+    networkFilters,
+    preprocessors,
+    notSupportedFilters,
+  } = parseFilters(filters);
+
+  const engine = new FiltersEngine(
+    {
+      cosmeticFilters,
+      networkFilters,
+      preprocessors,
+    },
+    config,
+  );
+  engine.updateEnv(ENV);
 
   saveToMemory(CUSTOM_ENGINE, engine);
   saveToStorage(CUSTOM_ENGINE);
 
-  return engine;
+  return { engine, notSupportedFilters };
 }
 
 const updateListeners = new Map();

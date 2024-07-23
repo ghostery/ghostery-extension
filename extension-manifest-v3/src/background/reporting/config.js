@@ -37,11 +37,22 @@ function platformSpecificSettings() {
   }
 
   if (navigator.userAgent.includes('Android')) {
+    if (navigator.userAgent.includes('Chrome/')) {
+      // Ghostery extension for Android Chromium forks (e.g. Edge, Kiwi)
+      return {
+        ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
+        PATTERNS_URL:
+          'https://cdn2.ghostery.com/wtm-chrome-android/patterns.json',
+        CHANNEL: 'android',
+      };
+    }
+
+    // Firefox Android & Ghostery Android Browser
     return {
       // TODO: extend this list before Ghostery 10 is released on Firefox
       ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
       PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-ghostery-android/patterns.json',
+        'https://cdn2.ghostery.com/wtm-firefox-android/patterns.json',
       CHANNEL: 'android',
     };
   }

@@ -56,6 +56,9 @@
     "message": "Реклама для взрослых",
     "description": "Tracker category name"
   },
+  "advanced": {
+    "message": "Продвинутый"
+  },
   "advertising": {
     "message": "Реклама",
     "description": "Tracker category name"
@@ -65,6 +68,9 @@
   },
   "allow_ghostery_in_private_windows": {
     "message": "Разреши Ghostery в приватных окнах"
+  },
+  "allow_trusted_scriptlets": {
+    "message": "Разрешить доверенные скрипты"
   },
   "always": {
     "message": "Всегда"
@@ -152,9 +158,15 @@
   "create_account": {
     "message": "Создать учетную запись"
   },
+  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Создайте свои правила блокировки рекламы для настройки Ghostery."
+  },
   "current_protection_status_for_@_0__": {
     "message": "Текущий статус $${0}: ",
     "description": "Current protection status for a tracker"
+  },
+  "custom_filters": {
+    "message": "Пользовательские фильтры"
   },
   "customer_interaction": {
     "message": "Взаимодействие с клиентами",
@@ -289,15 +301,6 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Трекер & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
   },
-  "ghostery_will_be_paused_on_this_site__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ghostery будет приостановлен на этом сайте. Вы можете изменить это в любое время в настройках Ghostery, чтобы остановить трекеры и рекламу, отслеживающую вас в Интернете."
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_day": {
-    "message": "Ghostery будет приостановлен на этом сайте на 1 день"
-  },
-  "ghostery_will_be_paused_on_this_site_for_1_hour": {
-    "message": "Ghostery будет приостановлен на этом сайте на 1 час"
-  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery будет показывать количество трекеров, заблокированных на странице. Чтобы посмотреть более подробную статистику, нажмите на значок расширения."
   },
@@ -344,6 +347,9 @@
   "learn_more_about_youtube_s_challenges_to_ad_blockers": {
     "message": "Узнай больше о том, как YouTube противостоит блокировщикам рекламы"
   },
+  "learn_more_on_supported_syntax": {
+    "message": "Узнайте больше о поддерживаемом синтаксисе"
+  },
   "load_more": {
     "message": "Показать еще"
   },
@@ -356,8 +362,8 @@
   "menu": {
     "message": "Меню"
   },
-  "mind_that_not_all_listed_entities_are_trackers__that_is_not_all_of_them_collect_personal_data": {
-    "message": "Учитывайте, что не все перечисленные элементы —трекеры, т. е. не все из них собирают персональные данные."
+  "mind_that_not_all_listed_activities_are_trackers__that_is_not_all_of_them_collect_personal_data_": {
+    "message": "Учитывайте, что не все перечисленные действия являются трекерами, т. е. не все из них собирают персональные данные."
   },
   "miscellaneous": {
     "message": "Разное",
@@ -395,12 +401,6 @@
   },
   "no_websites_exceptions_added_yet": {
     "message": "Сайтов, добавленных в исключения, пока нет"
-  },
-  "number_of_trackers_with_blocked_network_requests_": {
-    "message": "Количество трекеров с заблокированными сетевыми запросами."
-  },
-  "number_of_trackers_with_removed_cookies_or_fingerprints_": {
-    "message": "Количество трекеров с удаленными файлами cookie или цифровыми отпечатками устройств."
   },
   "observed_activities": {
     "message": "Отслеживаемые действия"
@@ -555,6 +555,15 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
+  },
+  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Этот сайт всегда будет доверенным. Вы можете изменить это в любое время в настройках Ghostery, чтобы остановить трекеры и рекламу, отслеживающую вас в Интернете"
+  },
+  "this_site_will_be_trusted_for_1_day": {
+    "message": "Этот сайт будет доверенным в течение 1 дня"
+  },
+  "this_site_will_be_trusted_for_1_hour": {
+    "message": "Этот сайт будет доверенным в течение 1 часа"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Чтобы настроить защиту конфиденциальности, доверьтесь сайту:"

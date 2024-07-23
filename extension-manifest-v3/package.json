@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.3.13",
+  "version": "10.3.15",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines/index.js",
@@ -28,14 +28,14 @@
   "devDependencies": {
     "shelljs": "^0.8.5",
     "sinon-chrome": "^3.0.1",
-    "vite": "^4.5.2",
-    "web-ext": "^7.11.0",
+    "vite": "4.5.2",
+    "web-ext": "^8.2.0",
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.28.0",
-    "@cliqz/adblocker-content": "^1.28.0",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.28.0",
+    "@cliqz/adblocker": "^1.30.0",
+    "@cliqz/adblocker-content": "^1.30.0",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.30.0",
     "@duckduckgo/autoconsent": "^10.11.0",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
