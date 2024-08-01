@@ -125,11 +125,6 @@
       "matches": [
         "<all_urls>"
       ]
-    },
-    {
-      "resources": [
-        "rule_resources/redirects/*"
-      ]
     }
   ],
   "content_security_policy": {}
