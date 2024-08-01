@@ -247,10 +247,6 @@ manifest.content_scripts?.forEach(({ js = [], css = [] }) => {
 
 // web-accessible resources
 manifest.web_accessible_resources?.forEach((entry) => {
-  if (entry.matches === undefined) {
-    return;
-  }
-
   const paths = [];
 
   if (typeof entry === 'string') {
