@@ -34,9 +34,12 @@
   "add": {
     "message": "追加"
   },
-  "add_@_0__as_exception": {
+  "add_@_0__as_an_exception": {
     "message": "$${0}を例外として追加",
-    "description": "Add domain as exception"
+    "description": "Add domain as an exception"
+  },
+  "add_exception": {
+    "message": "例外を追加"
   },
   "add_website": {
     "message": "ウェブサイトを追加"
@@ -96,6 +99,9 @@
   },
   "block_all__recommended_": {
     "message": "すべてをブロック (推奨)"
+  },
+  "block_on_all_websites": {
+    "message": "すべてのウェブサイトでブロック"
   },
   "block_on_this_website": {
     "message": "このウェブサイトでブロック"
@@ -246,9 +252,6 @@
   "extensions": {
     "message": "拡張機能",
     "description": "Tracker category name"
-  },
-  "for_all_websites": {
-    "message": "すべてのウェブサイトに対して"
   },
   "for_more_information_read_our_full": {
     "message": "詳細はこちらをご覧ください"
@@ -594,6 +597,9 @@
   },
   "trust_all__recommended_": {
     "message": "すべてを信頼する（推奨)"
+  },
+  "trust_on_all_websites": {
+    "message": "すべてのウェブサイトで信頼済み"
   },
   "trust_on_this_website": {
     "message": "このウェブサイトで信頼"

@@ -34,9 +34,12 @@
   "add": {
     "message": "Añadir"
   },
-  "add_@_0__as_exception": {
-    "message": "Añadir $${0} a modo excepción",
-    "description": "Add domain as exception"
+  "add_@_0__as_an_exception": {
+    "message": "Agregar $${0} como una excepción",
+    "description": "Add domain as an exception"
+  },
+  "add_exception": {
+    "message": "Agregar excepción"
   },
   "add_website": {
     "message": "Agregar sitio web"
@@ -96,6 +99,9 @@
   },
   "block_all__recommended_": {
     "message": "Bloquear todo (recomendado)"
+  },
+  "block_on_all_websites": {
+    "message": "Bloquear en todos los sitios web"
   },
   "block_on_this_website": {
     "message": "Bloquear en este sitio web"
@@ -246,9 +252,6 @@
   "extensions": {
     "message": "Extensiones",
     "description": "Tracker category name"
-  },
-  "for_all_websites": {
-    "message": "Para todos los sitios web"
   },
   "for_more_information_read_our_full": {
     "message": "Para obtener más información, lee todos nuestros"
@@ -594,6 +597,9 @@
   },
   "trust_all__recommended_": {
     "message": "Confiar en todos (recomendado)"
+  },
+  "trust_on_all_websites": {
+    "message": "Confianza en todos los sitios web"
   },
   "trust_on_this_website": {
     "message": "Confiar en este sitio web"

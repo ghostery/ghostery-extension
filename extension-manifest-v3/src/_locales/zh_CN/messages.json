@@ -34,9 +34,12 @@
   "add": {
     "message": "添加"
   },
-  "add_@_0__as_exception": {
+  "add_@_0__as_an_exception": {
     "message": "添加 $${0} 为异常",
-    "description": "Add domain as exception"
+    "description": "Add domain as an exception"
+  },
+  "add_exception": {
+    "message": "添加例外"
   },
   "add_website": {
     "message": "添加网站"
@@ -96,6 +99,9 @@
   },
   "block_all__recommended_": {
     "message": "阻止所有（推荐）"
+  },
+  "block_on_all_websites": {
+    "message": "在所有网站上拦截"
   },
   "block_on_this_website": {
     "message": "阻止此网站"
@@ -246,9 +252,6 @@
   "extensions": {
     "message": "扩展",
     "description": "Tracker category name"
-  },
-  "for_all_websites": {
-    "message": "对于所有网站"
   },
   "for_more_information_read_our_full": {
     "message": "欲了解更多信息，请阅读我们的完整"
@@ -594,6 +597,9 @@
   },
   "trust_all__recommended_": {
     "message": "全部信任（推荐)"
+  },
+  "trust_on_all_websites": {
+    "message": "信任所有网站"
   },
   "trust_on_this_website": {
     "message": "信任此网站"
