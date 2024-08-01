@@ -19,7 +19,6 @@ import {
   parseFilters,
 } from '@cliqz/adblocker';
 
-import { observe } from '../store/options.js';
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 
@@ -39,16 +38,14 @@ const ENV = new Map([
   ['env_experimental', false],
 ]);
 
-observe('experimentalFilters', (experimentalFilters) => {
-  ENV.set('env_experimental', experimentalFilters);
+export async function setEnv(key, value) {
+  ENV.set(key, value);
 
-  // As engines on the server might have new filters, we need to update them
-  updateAll().catch(() => null);
-
-  for (const engine of engines.values()) {
+  for (const [engine, name] of engines.entries()) {
     engine.updateEnv(ENV);
+    await saveToStorage(name);
   }
-});
+}
 
 function checkUserAgent(pattern) {
   return navigator.userAgent.indexOf(pattern) !== -1;
@@ -403,7 +400,7 @@ export async function init(name) {
     );
   }
 
-  // Schedule an alarm to update engines once a day
+  // Schedule an alarm to update engines once an hour
   chrome.alarms.get(`${ALARM_PREFIX}${name}`, (alarm) => {
     if (!alarm) {
       chrome.alarms.create(`${ALARM_PREFIX}${name}`, {
