@@ -5,7 +5,7 @@ import * as labels from '@ghostery/ui/labels';
 import TabStats from '/store/tab-stats.js';
 import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
-function toggleDomain({ stats, tracker }) {
+function toggleTrackerBlockedOnThisWebsite({ tracker, stats }) {
   toggleExceptionDomain(
     tracker.exception,
     stats.hostname,
@@ -13,14 +13,10 @@ function toggleDomain({ stats, tracker }) {
   );
 }
 
-function toggleBlocked({ tracker, blocked, status }) {
-  if (!status.website && store.ready(tracker.exception)) {
-    store.set(tracker.exception, null);
-  } else {
-    store.set(tracker.exception, {
-      blocked: !blocked,
-    });
-  }
+function toggleTrackerBlockedOnAllWebsites({ tracker, blocked }) {
+  store.set(tracker.exception, {
+    blocked: !blocked,
+  });
 }
 
 export default {
@@ -86,7 +82,7 @@ export default {
             <div layout="column margin:1:1:0">
               <ui-toggle
                 value="${blocked !== tracker.blockedByDefault}"
-                onchange="${toggleBlocked}"
+                onchange="${toggleTrackerBlockedOnAllWebsites}"
                 no-label
               >
                 <div layout="grow">
@@ -106,7 +102,7 @@ export default {
             <gh-panel-card layout="column gap">
               <ui-toggle
                 value="${status.website}"
-                onchange="${toggleDomain}"
+                onchange="${toggleTrackerBlockedOnThisWebsite}"
                 no-label
               >
                 <div layout="grow">
