@@ -187,6 +187,10 @@ export default {
                   layout:last-of-type="margin:bottom:0.5"
                   layout:first-of-type="margin:top:0.5"
                 >
+                  <div slot="header" layout="row items:center gap">
+                    <ui-text type="label-s">${trackers.length}</ui-text>
+                  </div>
+
                   <section id="content" layout="column gap:0.5">
                     ${trackers.map(
                       (tracker) =>
