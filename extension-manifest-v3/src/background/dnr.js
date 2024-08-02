@@ -140,12 +140,12 @@ if (__PLATFORM__ !== 'firefox') {
               ],
         removeRuleIds,
       });
+      console.log('DNR: pause rules updated');
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
       });
+      console.log('DNR: pause rules updated');
     }
-
-    console.log('DNR: pause rules updated');
   });
 }

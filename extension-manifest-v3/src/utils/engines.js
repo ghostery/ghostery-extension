@@ -16,13 +16,13 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Config,
-  parseFilters,
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
+export const REGIONAL_ENGINE = 'regional-filters';
 export const FIXES_ENGINE = 'fixes';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
@@ -41,7 +41,7 @@ const ENV = new Map([
 export async function setEnv(key, value) {
   ENV.set(key, value);
 
-  for (const [engine, name] of engines.entries()) {
+  for (const [name, engine] of engines.entries()) {
     engine.updateEnv(ENV);
     await saveToStorage(name);
   }
@@ -392,11 +392,11 @@ const ALARM_DELAY = 60; // 1 hour
 export async function init(name) {
   if (__PLATFORM__ === 'tests') return;
 
-  if (name === CUSTOM_ENGINE) {
+  // Custom and regional engines are created on demand
+  // And should not be updated by alarms
+  if (name === CUSTOM_ENGINE || name === REGIONAL_ENGINE) {
     return (
-      get(CUSTOM_ENGINE) ||
-      (await loadFromStorage(CUSTOM_ENGINE)) ||
-      (await createCustomEngine()).engine
+      get(name) || (await loadFromStorage(name)) || (await createEngine(name))
     );
   }
 
@@ -414,32 +414,18 @@ export async function init(name) {
   );
 }
 
-export async function createCustomEngine(filters = '') {
+export function createEngine(name, options = null) {
   const config = new Config({
     enableHtmlFiltering: ENV.get('cap_html_filtering'),
   });
 
-  const {
-    cosmeticFilters,
-    networkFilters,
-    preprocessors,
-    notSupportedFilters,
-  } = parseFilters(filters);
-
-  const engine = new FiltersEngine(
-    {
-      cosmeticFilters,
-      networkFilters,
-      preprocessors,
-    },
-    config,
-  );
+  const engine = new FiltersEngine({ ...options, config });
   engine.updateEnv(ENV);
 
-  saveToMemory(CUSTOM_ENGINE, engine);
-  saveToStorage(CUSTOM_ENGINE);
+  saveToMemory(name, engine);
+  saveToStorage(name);
 
-  return { engine, notSupportedFilters };
+  return engine;
 }
 
 const updateListeners = new Map();

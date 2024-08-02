@@ -123,14 +123,10 @@ async function submitFilters(host) {
   }
 
   // Update engine
-  const { notSupportedFilters } = await chrome.runtime.sendMessage({
+  host.conversionErrors = await chrome.runtime.sendMessage({
     action: 'customFilters:engine',
     filters: host.input.text,
   });
-
-  host.convertsionErrors = notSupportedFilters.map(
-    (error) => `Filter not supported: '${error.filter}'`,
-  );
 
   // Save input
   await store.submit(host.input);
@@ -148,17 +144,17 @@ function update(host, event) {
 export default {
   options: store(Options),
   input: store(CustomFiltersInput, { draft: true }),
-  dnrRules: undefined,
   filters: ({ input, options }) =>
     parseFilters(store.ready(input) ? input.text : '', {
       allowTrusted: options.customFilters.trustedScriptlets,
     }),
-  convertsionErrors: undefined,
+  dnrRules: undefined,
+  conversionErrors: undefined,
   dnrErrors: undefined,
-  errors: ({ filters, dnrErrors = [], convertsionErrors = [] }) => [
+  errors: ({ filters, dnrErrors = [], conversionErrors = [] }) => [
     ...filters.errors,
     ...dnrErrors,
-    ...convertsionErrors,
+    ...conversionErrors,
   ],
   render: ({ input, filters, dnrRules, errors }) => html`
     <template layout="block">

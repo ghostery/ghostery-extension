@@ -9,21 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { observe, REGIONAL_FILTERS } from '/store/options.js';
+import { observe } from '/store/options.js';
 
-// import * as engines from '/utils/engines.js';
-import asyncSetup from '/utils/setup.js';
+import * as engines from '/utils/engines.js';
 
-const enabledRegions = new Set();
+observe('regionalFilters', async (regionalFilters) => {
+  // Fetch and update engines for enabled regions
+  const engine = await engines.init(engines.REGIONAL_ENGINE);
+  const regions = Object.entries(regionalFilters.regions)
+    .filter(([, enabled]) => enabled)
+    .map(([region]) => region);
 
-asyncSetup([
-  observe('regionalFilters', async (regionalFilters) => {
-    for (const region of REGIONAL_FILTERS) {
-      if (regionalFilters[region]) {
-        enabledRegions.add(region);
-      } else {
-        enabledRegions.delete(region);
-      }
-    }
-  }),
-]);
+  engine.setRegions(regions);
+});

@@ -41,9 +41,14 @@ const setup = asyncSetup([
           ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
         ]
       : [];
+
+    if (options.regionalFilters.enabled) {
+      enabledEngines.push(engines.REGIONAL_ENGINE);
+    }
   }),
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
+  engines.init(engines.REGIONAL_ENGINE),
   ENGINES.map(({ name }) => engines.init(name)),
 ]);
 
