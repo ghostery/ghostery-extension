@@ -31,13 +31,7 @@ async function initialize(msg, tab, frameId) {
           action: 'autoconsent',
           type: 'initResp',
           rules,
-          config: {
-            enabled: true,
-            autoAction: 'optOut',
-            disabledCmps: [],
-            enablePrehide: true,
-            detectRetries: 20,
-          },
+          config: {},
         },
         {
           frameId,
