@@ -66,15 +66,8 @@ function clearCategory(id) {
             store.ready(t.exception) &&
             t.exception.blocked !== category.blockedByDefault,
         )
-        .map(({ exception }) =>
-          store.set(
-            exception,
-            exception.blockedDomains.length || exception.trustedDomains.length
-              ? {
-                  blocked: category.blockedByDefault,
-                }
-              : null,
-          ),
+        .map((tracker) =>
+          toggleExceptionBlocked(tracker.exception, tracker.blockedByDefault),
         ),
     );
 

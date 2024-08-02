@@ -1,14 +1,14 @@
 import { dispatch, html } from 'hybrids';
 
+function updateValue(value) {
+  return (host) => {
+    host.value = value;
+    dispatch(host, 'change', { detail: value });
+  };
+}
+
 export default {
-  value: {
-    value: false,
-    observe(host, value, lastValue) {
-      if (lastValue !== undefined) {
-        dispatch(host, 'change', { detail: value });
-      }
-    },
-  },
+  value: false,
   responsive: false,
   render: ({ value, responsive }) => html`
     <template layout="row relative">
@@ -20,7 +20,7 @@ export default {
         <ui-panel-action grouped active="${value}">
           <button
             layout="row relative gap:0.5 padding:0.5"
-            onclick="${html.set('value', true)}"
+            onclick="${updateValue(true)}"
           >
             <ui-icon name="block-s"></ui-icon>
             <ui-text type="label-xs">Blocked</ui-text>
@@ -29,7 +29,7 @@ export default {
         <ui-panel-action class="trusted" grouped active="${!value}">
           <button
             layout="row gap:0.5 padding:0.5"
-            onclick="${html.set('value', false)}"
+            onclick="${updateValue(false)}"
           >
             <ui-icon name="trust-s"></ui-icon>
             <ui-text type="label-xs">Trusted</ui-text>
