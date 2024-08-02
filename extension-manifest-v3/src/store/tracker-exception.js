@@ -77,6 +77,25 @@ const TrackerException = {
 
 export default TrackerException;
 
+export function toggleExceptionBlocked(exception, blockedByDefault) {
+  if (store.ready(exception)) {
+    const value = !exception.blocked;
+
+    return store.set(
+      exception,
+      value !== blockedByDefault ||
+        exception.blockedDomains ||
+        exception.trustedDomains
+        ? { blocked: value }
+        : null,
+    );
+  } else {
+    return store.set(exception, {
+      blocked: !blockedByDefault,
+    });
+  }
+}
+
 export function toggleExceptionDomain(
   exception,
   domain,

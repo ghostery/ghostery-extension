@@ -3,7 +3,10 @@ import { html, msg, router, store } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
 import TabStats from '/store/tab-stats.js';
-import { toggleExceptionDomain } from '/store/tracker-exception.js';
+import {
+  toggleExceptionDomain,
+  toggleExceptionBlocked,
+} from '/store/tracker-exception.js';
 
 function toggleDomain({ stats, tracker }) {
   toggleExceptionDomain(
@@ -13,14 +16,8 @@ function toggleDomain({ stats, tracker }) {
   );
 }
 
-function toggleBlocked({ tracker, blocked, status }) {
-  if (!status.website && store.ready(tracker.exception)) {
-    store.set(tracker.exception, null);
-  } else {
-    store.set(tracker.exception, {
-      blocked: !blocked,
-    });
-  }
+function toggleBlocked({ tracker }) {
+  toggleExceptionBlocked(tracker.exception, tracker.blockedByDefault);
 }
 
 export default {

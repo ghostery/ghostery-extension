@@ -13,6 +13,7 @@ import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import TrackerCategory from '/store/tracker-category.js';
+import { toggleExceptionBlocked } from '/store/tracker-exception.js';
 
 import TrackerDetails from './tracker-details.js';
 
@@ -47,9 +48,9 @@ function isActive(category, key) {
   return category === key || category === '_all';
 }
 
-export function updateException(tracker) {
-  return async (host, event) => {
-    await store.set(tracker.exception, { blocked: event.target.value });
+export function toggleException(tracker) {
+  return async () => {
+    await toggleExceptionBlocked(tracker.exception, tracker.blockedByDefault);
     store.clear([TrackerCategory], false);
   };
 }
@@ -233,7 +234,7 @@ export default {
                                         ? tracker.exception.blocked
                                         : tracker.blockedByDefault}"
                                       responsive
-                                      onchange="${updateException(tracker)}"
+                                      onchange="${toggleException(tracker)}"
                                       layout="shrink:0"
                                     ></ui-panel-protection-status-toggle>
                                   </div>
