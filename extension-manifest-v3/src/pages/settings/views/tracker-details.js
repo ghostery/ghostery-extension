@@ -20,7 +20,7 @@ import { WTM_PAGE_URL } from '/utils/api.js';
 
 import assets from '../assets/index.js';
 
-import { updateException } from './trackers.js';
+import { toggleException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';
 import WebsiteDetails from './website-details.js';
 
@@ -116,7 +116,7 @@ export default {
                         ? tracker.exception.blocked
                         : tracker.blockedByDefault}"
                       responsive
-                      onchange="${updateException(tracker)}"
+                      onchange="${toggleException(tracker)}"
                       layout="shrink:0"
                     ></ui-panel-protection-status-toggle>
                   </div>
