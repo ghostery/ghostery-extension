@@ -16,7 +16,7 @@ export default {
   render: () => html`
     <template layout="row gap:0.5 items:center">
       <slot></slot>
-      <ui-text type="label-s" color="gray-600">
+      <ui-text type="body-s" color="gray-500">
         <slot name="label"></slot>
       </ui-text>
     </template>

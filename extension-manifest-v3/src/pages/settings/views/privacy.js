@@ -10,9 +10,12 @@
  */
 
 import { html, store } from 'hybrids';
+import * as labels from '@ghostery/ui/labels';
 
-import Options, { GLOBAL_PAUSE_ID, REGIONAL_FILTERS } from '/store/options.js';
+import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Session from '/store/session.js';
+
+import REGIONS from '/utils/regions.js';
 
 import assets from '../assets/index.js';
 
@@ -32,6 +35,18 @@ function updateGlobalPause({ options }, value, lastValue) {
         : null,
     },
   });
+}
+
+function setRegion(id) {
+  return ({ options }, event) => {
+    const regions = event.target.checked
+      ? options.regionalFilters.regions.concat(id)
+      : options.regionalFilters.regions.filter((i) => i !== id);
+
+    regions.sort();
+
+    store.set(options, { regionalFilters: { regions } });
+  };
 }
 
 export default {
@@ -184,34 +199,35 @@ export default {
                     >
                       Additional block lists covering ads, trackers and other
                       popups specific for a given region. Enable only for the
-                      regions you are interested it as running multiple lists
+                      regions you are interested in, as running multiple lists
                       can slow down the browser.
                     </ui-text>
                   </div>
                 </ui-toggle>
                 <div
-                  layout="row:wrap gap:2:1 padding:right:12"
-                  style="${{
-                    opacity: options.regionalFilters.enabled ? undefined : 0.5,
-                  }}"
+                  hidden="${!options.regionalFilters.enabled}"
+                  layout="grid:repeat(auto-fill,minmax(130px,1fr)) gap:2:1 padding:right:12"
+                  layout[hidden]="hidden"
                 >
-                  ${REGIONAL_FILTERS.map(
-                    ([id, name]) => html`
-                      <label
-                        ><gh-settings-region
-                          disabled="${!options.regionalFilters.enabled}"
+                  ${REGIONS.map(
+                    (id) => html`
+                      <label layout="grow">
+                        <gh-settings-checkbox
+                          disabled="${globalPause ||
+                          !options.regionalFilters.enabled}"
                         >
                           <input
                             type="checkbox"
                             disabled="${!options.regionalFilters.enabled}"
-                            checked="${options.regionalFilters.regions[id]}"
-                            onchange="${html.set(
-                              options,
-                              `regionalFilters.regions.${id}`,
+                            checked="${options.regionalFilters.regions.includes(
+                              id,
                             )}"
+                            onchange="${setRegion(id)}"
                           />
-                          <span slot="label">${name}</span>
-                        </gh-settings-region>
+                          <span slot="label">
+                            ${labels.languages.of(id.toUpperCase())}
+                          </span>
+                        </gh-settings-checkbox>
                       </label>
                     `,
                   )}

@@ -54,6 +54,7 @@ function checkUserAgent(pattern) {
 function deserializeEngine(engineBytes) {
   const engine = FiltersEngine.deserialize(engineBytes);
   engine.updateEnv(ENV);
+
   return engine;
 }
 
@@ -152,9 +153,41 @@ async function saveToStorage(name) {
     const tx = db.transaction('engines', 'readwrite');
     const table = tx.objectStore('engines');
 
-    await table.put(engine.serialize(), name);
+    if (engine) {
+      await table.put(engine.serialize(), name);
+    } else {
+      await table.delete(name);
+    }
   } catch (e) {
     console.error(`Failed to save engine "${name}" to storage`, e);
+  }
+}
+
+async function loadFromDisk(name) {
+  try {
+    const response = await fetch(
+      chrome.runtime.getURL(
+        `rule_resources/engine-${name}${
+          __PLATFORM__ === 'firefox' || name === 'trackerdb' ? '' : '-cosmetics'
+        }.dat`,
+      ),
+    );
+
+    const engineBytes = new Uint8Array(await response.arrayBuffer());
+    const engine = deserializeEngine(engineBytes);
+    shareExceptions(name, engine);
+    saveToMemory(name, engine);
+    saveToStorage(name);
+
+    // After initial load from disk, schedule an update
+    // as it is done only once on the first run.
+    // After loading from disk, it should be loaded from the storage
+    update(name).catch(() => null);
+
+    return engine;
+  } catch (e) {
+    console.error(`Failed to load engine "${name}" from disk`, e);
+    return new FiltersEngine();
   }
 }
 
@@ -168,12 +201,21 @@ function check(response) {
   return response;
 }
 
+const updateListeners = new Map();
+export function addUpdateListener(name, fn) {
+  if (!updateListeners.has(name)) {
+    updateListeners.set(name, new Set());
+  }
+
+  updateListeners.get(name).add(fn);
+}
+
 const CDN_HOSTNAME = chrome.runtime.getManifest().debug
   ? 'staging-cdn.ghostery.com'
   : 'cdn.ghostery.com';
 
 async function update(name) {
-  if (name === CUSTOM_ENGINE) return;
+  if (name === CUSTOM_ENGINE || name === REGIONAL_ENGINE) return;
 
   try {
     const urlName =
@@ -194,7 +236,10 @@ async function update(name) {
     }
 
     // Get current engine
-    let engine = loadFromMemory(name);
+    let engine =
+      loadFromMemory(name) ||
+      (await loadFromStorage(name)) ||
+      (await loadFromDisk(name));
 
     // Check if some lists need to be removed from the engine: either because
     // there are lists removed from allowed-lists.json or because some region
@@ -339,6 +384,11 @@ async function update(name) {
 
     if (updated) {
       console.log(`Engine "${name}" updated`);
+
+      // Notify listeners
+      const fns = updateListeners.get(name);
+      fns?.forEach((fn) => fn());
+
       // Save the new engine to storage
       saveToStorage(name);
     }
@@ -352,34 +402,6 @@ async function update(name) {
 
 export function updateAll() {
   return Promise.all(Array.from(engines.keys()).map((name) => update(name)));
-}
-
-async function loadFromDisk(name) {
-  try {
-    const response = await fetch(
-      chrome.runtime.getURL(
-        `rule_resources/engine-${name}${
-          __PLATFORM__ === 'firefox' || name === 'trackerdb' ? '' : '-cosmetics'
-        }.dat`,
-      ),
-    );
-
-    const engineBytes = new Uint8Array(await response.arrayBuffer());
-    const engine = deserializeEngine(engineBytes);
-    shareExceptions(name, engine);
-    saveToMemory(name, engine);
-    saveToStorage(name);
-
-    // After initial load from disk, schedule an update
-    // as it is done only once on the first run.
-    // After loading from disk, it should be loaded from the storage
-    update(name).catch(() => null);
-
-    return engine;
-  } catch (e) {
-    console.error(`Failed to load engine "${name}" from disk`, e);
-    return new FiltersEngine();
-  }
 }
 
 export function get(name) {
@@ -414,6 +436,11 @@ export async function init(name) {
   );
 }
 
+export async function clean(name) {
+  engines.delete(name);
+  chrome.alarms.clear(`${ALARM_PREFIX}${name}`);
+}
+
 export function createEngine(name, options = null) {
   const config = new Config({
     enableHtmlFiltering: ENV.get('cap_html_filtering'),
@@ -428,24 +455,24 @@ export function createEngine(name, options = null) {
   return engine;
 }
 
-const updateListeners = new Map();
-export function addUpdateListener(name, fn) {
-  if (!updateListeners.has(name)) {
-    updateListeners.set(name, new Set());
-  }
+export function replaceEngine(name, engineOrEngines) {
+  const engines = [].concat(engineOrEngines);
 
-  updateListeners.get(name).add(fn);
+  let engine = new FiltersEngine({ config: engines[0].config });
+  engine.updateEnv(ENV);
+
+  engine = FiltersEngine.merge([engine, ...engines]);
+
+  saveToMemory(name, engine);
+  saveToStorage(name);
+
+  return engine;
 }
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name.startsWith(ALARM_PREFIX)) {
     const name = alarm.name.slice(ALARM_PREFIX.length);
-    update(name)
-      .then(() => {
-        const fns = updateListeners.get(name);
-        fns?.forEach((fn) => fn());
-      })
-      .catch(() => null);
+    update(name).catch(() => null);
 
     chrome.alarms.create(alarm.name, {
       delayInMinutes: ALARM_DELAY,
