@@ -34,9 +34,12 @@
   "add": {
     "message": "Hinzufügen"
   },
-  "add_@_0__as_exception": {
+  "add_@_0__as_an_exception": {
     "message": "$${0} als Ausnahme hinzufügen",
-    "description": "Add domain as exception"
+    "description": "Add domain as an exception"
+  },
+  "add_exception": {
+    "message": "Ausnahme hinzufügen"
   },
   "add_website": {
     "message": "Webseite hinzufügen"
@@ -96,6 +99,9 @@
   },
   "block_all__recommended_": {
     "message": "Alle blockieren (empfohlen)"
+  },
+  "block_on_all_websites": {
+    "message": "Auf allen Webseiten blockieren"
   },
   "block_on_this_website": {
     "message": "Auf dieser Website blockieren"
@@ -159,7 +165,7 @@
     "message": "Konto erstellen"
   },
   "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "Erstellen Sie Ihre eigenen Werbeblockierungsregeln, um Ihre Ghostery-Erfahrung anzupassen."
+    "message": "Erstelle benutzerdefinierte Werbeblocker-Regeln für eine individualisierte Ghostery-Erfahrung"
   },
   "current_protection_status_for_@_0__": {
     "message": "Aktueller Schutzstatus für $${0}:",
@@ -246,9 +252,6 @@
   "extensions": {
     "message": "Erweiterungen",
     "description": "Tracker category name"
-  },
-  "for_all_websites": {
-    "message": "Für alle Websites"
   },
   "for_more_information_read_our_full": {
     "message": "Für weitere Informationen lesen Sie bitte unsere vollständigen"
@@ -348,7 +351,7 @@
     "message": "Erfahre mehr über die Herausforderungen von YouTube gegenüber Werbeblockern"
   },
   "learn_more_on_supported_syntax": {
-    "message": "Erfahren Sie mehr über unterstützte Syntax"
+    "message": "Erfahre mehr über die unterstützte Syntax"
   },
   "load_more": {
     "message": "Mehr laden"
@@ -557,13 +560,13 @@
     "message": "Vielen Dank für Ihre Unterstützung im Kampf von Ghostery für ein Internet, in dem Datenschutz ein grundlegendes Menschenrecht ist!"
   },
   "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Diese Seite wird immer vertrauenswürdig sein. Sie können dies jederzeit in den Ghostery Einstellungen ändern, damit Tracker und Werbung Ihnen nicht durchs Web folgen"
+    "message": "Dieser Seite wird immer vertraut. Die Einstellung kann jederzeit in den Ghostery-Einstellungen widerrufen werden, um Tracking zu verhindern."
   },
   "this_site_will_be_trusted_for_1_day": {
-    "message": "Diese Seite wird für 1 Tag vertrauenswürdig sein"
+    "message": "Dieser Seite wird für 1 Tag vertraut"
   },
   "this_site_will_be_trusted_for_1_hour": {
-    "message": "Diese Seite wird für 1 Stunde vertrauenswürdig sein"
+    "message": "Dieser Seite wird für 1 Stunde vertraut"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Zur Anpassung der Einstellungen, vertrauen Sie einer Webseite:"
@@ -594,6 +597,9 @@
   },
   "trust_all__recommended_": {
     "message": "Allen vertrauen (empfohlen)"
+  },
+  "trust_on_all_websites": {
+    "message": "Auf allen Webseiten vertrauen"
   },
   "trust_on_this_website": {
     "message": "Auf dieser Website vertrauen"

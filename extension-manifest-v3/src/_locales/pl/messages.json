@@ -34,15 +34,18 @@
   "add": {
     "message": "Dodaj"
   },
-  "add_@_0__as_exception": {
+  "add_@_0__as_an_exception": {
     "message": "Dodaj $${0} do wyjątków",
-    "description": "Add domain as exception"
+    "description": "Add domain as an exception"
+  },
+  "add_exception": {
+    "message": "Dodaj wyjątek"
   },
   "add_website": {
     "message": "Dodaj stronę internetową"
   },
   "add_website_exception": {
-    "message": "Dodaj wyjątek dla tej witryny"
+    "message": "Dodaj wyjątek dla tej strony"
   },
   "adjusted___tracker": {
     "message": "dostosowano",
@@ -96,6 +99,9 @@
   },
   "block_all__recommended_": {
     "message": "Zablokuj wszystkie (zalecane)"
+  },
+  "block_on_all_websites": {
+    "message": "Blokuj na wszystkich stronach"
   },
   "block_on_this_website": {
     "message": "Zablokuj na tej stronie"
@@ -225,7 +231,7 @@
     "message": "Włączone"
   },
   "enter_website_url": {
-    "message": "Wprowadź adres URL witryny"
+    "message": "Wprowadź adres URL strony internetowej"
   },
   "essential": {
     "message": "Istotne",
@@ -246,9 +252,6 @@
   "extensions": {
     "message": "Rozszerzenia",
     "description": "Tracker category name"
-  },
-  "for_all_websites": {
-    "message": "Dla wszystkich stron"
   },
   "for_more_information_read_our_full": {
     "message": "Aby uzyskać więcej informacji, przeczytaj "
@@ -373,7 +376,7 @@
     "message": "Szukasz „Wstrzymaj Ghostery”? Możesz je znaleźć w ustawieniach ochrony prywatności."
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
-    "message": "Zmodyfikuj zalecane ustawienia blokowania dla każdej witryny."
+    "message": "Zmodyfikuj zalecane ustawienia blokowania dla każdej strony internetowej."
   },
   "more_ad_blocking_available": {
     "message": "Dostępne jest więcej opcji blokowania reklam"
@@ -400,7 +403,7 @@
     "message": "Brak jeszcze dodanych wyjątków ochrony."
   },
   "no_websites_exceptions_added_yet": {
-    "message": "Nie dodano jeszcze żadnych wyjątków dla tej witryny"
+    "message": "Nie dodano jeszcze żadnych wyjątków dla tej strony"
   },
   "observed_activities": {
     "message": "Obserwowane aktywności"
@@ -494,7 +497,7 @@
     "message": "Szukaj trackera lub organizacji..."
   },
   "search_website___": {
-    "message": "Szukaj witryny..."
+    "message": "Szukaj strony internetowej..."
   },
   "select_time_frame": {
     "message": "Wybierz przedział czasowy"
@@ -557,7 +560,7 @@
     "message": "Dziękujemy za Twoje wsparcie w walce Ghostery o sieć, w której prywatność jest podstawowym prawem człowieka!"
   },
   "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ta witryna zawsze będzie zaufana. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
+    "message": "Ta witryna będzie zaufana zawsze. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
   },
   "this_site_will_be_trusted_for_1_day": {
     "message": "Ta witryna będzie zaufana przez 1 dzień"
@@ -566,7 +569,7 @@
     "message": "Ta witryna będzie zaufana przez 1 godzinę"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
-    "message": "Aby dostosować ochronę prywatności, zaufaj witrynie:"
+    "message": "Aby dostosować ochronę prywatności, zaufaj stronie:"
   },
   "tracker_database": {
     "message": "Baza danych Trackerów"
@@ -594,6 +597,9 @@
   },
   "trust_all__recommended_": {
     "message": "Zaufaj wszystkim (zalecane)"
+  },
+  "trust_on_all_websites": {
+    "message": "Zaufaj na wszystkich stronach"
   },
   "trust_on_this_website": {
     "message": "Zaufaj na tej stronie"
@@ -643,10 +649,10 @@
     "message": "Wiemy, że polegasz na Ghostery, aby płynnie korzystać z YouTube. Dopóki nie pojawi się bardziej wyrafinowane rozwiązanie, oto tymczasowa poprawka."
   },
   "website": {
-    "message": "Witryna"
+    "message": "Strona internetowa"
   },
   "website_exceptions": {
-    "message": "Wyjątki dotyczące witryny"
+    "message": "Wyjątki stron internetowych"
   },
   "websites": {
     "message": "Witryny"

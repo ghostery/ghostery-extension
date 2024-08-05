@@ -34,9 +34,12 @@
   "add": {
     "message": "추가"
   },
-  "add_@_0__as_exception": {
+  "add_@_0__as_an_exception": {
     "message": "$${0}에서 예외 처리",
-    "description": "Add domain as exception"
+    "description": "Add domain as an exception"
+  },
+  "add_exception": {
+    "message": "예외 추가"
   },
   "add_website": {
     "message": "웹 사이트 추가"
@@ -70,7 +73,7 @@
     "message": "시크릿 모드에서 Ghostery 허용"
   },
   "allow_trusted_scriptlets": {
-    "message": "신뢰할 수 있는 스크립틀릿 허용"
+    "message": "위험한 스크립팅 실행(Trusted scriptlet) 허용하기"
   },
   "always": {
     "message": "항상"
@@ -96,6 +99,9 @@
   },
   "block_all__recommended_": {
     "message": "모두 차단 (권장됨)"
+  },
+  "block_on_all_websites": {
+    "message": "모든 웹사이트에서 차단"
   },
   "block_on_this_website": {
     "message": "이 웹 사이트에서 차단됩니다."
@@ -159,14 +165,14 @@
     "message": "새 계정 만들기"
   },
   "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "자신만의 광고 차단 규칙을 만들어서 Ghostery 경험을 맞춤 설정해 보세요."
+    "message": "광고 차단 규칙을 직접 만들고 Ghostery를 맞춤형으로 사용해보세요."
   },
   "current_protection_status_for_@_0__": {
     "message": "$${0}의 현재 보호 상태",
     "description": "Current protection status for a tracker"
   },
   "custom_filters": {
-    "message": "맞춤 필터"
+    "message": "사용자 필터"
   },
   "customer_interaction": {
     "message": "고객 상담",
@@ -246,9 +252,6 @@
   "extensions": {
     "message": "확장 프로그램",
     "description": "Tracker category name"
-  },
-  "for_all_websites": {
-    "message": "모든 웹 사이트"
   },
   "for_more_information_read_our_full": {
     "message": "더 많은 정보를 보려면 다음을 읽어보세요 "
@@ -348,7 +351,7 @@
     "message": "광고 차단기들을 향한 YouTube의 도전을 자세히 알아보세요"
   },
   "learn_more_on_supported_syntax": {
-    "message": "지원되는 구문에 대해 자세히 알아보기"
+    "message": "지원되는 문법에 대해 알아보기"
   },
   "load_more": {
     "message": "더 보기"
@@ -446,7 +449,7 @@
     "message": "여기에 고정하세요"
   },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Google 검색 결과 링크의 Google 서버 경유를 막는 대신 웹 페이지에 직접 연결합니다."
+    "message": "Google 검색 결과 링크의 Google 서버 경유를 막고 웹 페이지에 직접 연결합니다."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술을 사용하여 여러 추적 기술을 방지합니다."
@@ -544,7 +547,7 @@
     "message": "새 트래커 제보하기"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
-    "message": "모든 웹 사이트에서 앞으로 하루동안 개인정보 보호를 중지합니다."
+    "message": "모든 웹 사이트에서 앞으로 하루 동안 개인정보 보호를 중지합니다."
   },
   "telemetry": {
     "message": "측정 보고",
@@ -557,13 +560,13 @@
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주셔서 진심으로 감사드립니다!"
   },
   "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "이 사이트는 항상 신뢰할 수 있습니다. 웹 사이트의 트래커와 광고를 막기 위해 이 동작을 Ghostery 설정에서 언제든 변경할 수 있습니다. Ghostery 설정을 통해 언제든지 이 사이트의 신뢰 여부를 변경할 수 있습니다"
+    "message": "이 웹 사이트는 항상 허용됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다."
   },
   "this_site_will_be_trusted_for_1_day": {
-    "message": "이 사이트는 1일 동안 신뢰할 수 있습니다"
+    "message": "이 웹 사이트를 1 일동안 허용합니다."
   },
   "this_site_will_be_trusted_for_1_hour": {
-    "message": "이 사이트는 1시간 동안 신뢰할 수 있습니다"
+    "message": "이 웹 사이트를 1 시간동안 허용합니다."
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "웹 사이트에서 특정 시간동안 개인정보 보호를 중지합니다."
@@ -594,6 +597,9 @@
   },
   "trust_all__recommended_": {
     "message": "모두 허용 (권장됨)"
+  },
+  "trust_on_all_websites": {
+    "message": "모든 웹사이트에서 신뢰"
   },
   "trust_on_this_website": {
     "message": "이 웹 사이트에서 허용됩니다."
@@ -682,6 +688,6 @@
     "message": "현재 개인정보 보호 기능"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
-    "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하나요?"
+    "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하십니까?"
   }
 }
