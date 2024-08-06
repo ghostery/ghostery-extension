@@ -211,6 +211,18 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   return false;
 });
 
+function createRandomString(length) {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const randomArray = new Uint8Array(length);
+  crypto.getRandomValues(randomArray);
+  randomArray.forEach((number) => {
+    result += chars[number % chars.length];
+  });
+  return result;
+}
+
 const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
@@ -223,15 +235,23 @@ async function executeScriptlets(tabId, scripts) {
     debugMarker = () => '';
   }
 
+  const nonceSize = 20;
+  const nonce = createRandomString(nonceSize);
   // the scriptlet code that contains patches for the website
-  const codeRunningInPage = `(function(){
+  const codeRunningInPage = `(function(){const nonce = '${nonce}';
 ${debugMarker('run scriptlets (executing in "page world")')}
 ${scripts.join('\n\n')}}
 )()`;
 
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
-  function codeRunningInContentScript(code) {
+  function codeRunningInContentScript(code, nonce, nonceSize) {
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy('default', {
+        createScript: (string) =>
+          !string || string.slice(27, 27 + nonceSize) === nonce ? string : null,
+      });
+    }
     var script;
     try {
       script = document.createElement('script');
@@ -257,7 +277,7 @@ ${scripts.join('\n\n')}}
         allFrames: true,
       },
       func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage)],
+      args: [encodeURIComponent(codeRunningInPage), nonce, nonceSize],
     },
     () => {
       if (chrome.runtime.lastError) {
