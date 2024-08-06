@@ -223,6 +223,7 @@ function createRandomString(length) {
   return result;
 }
 
+const NONCE_SIZE = 20;
 const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
@@ -235,8 +236,7 @@ async function executeScriptlets(tabId, scripts) {
     debugMarker = () => '';
   }
 
-  const nonceSize = 20;
-  const nonce = createRandomString(nonceSize);
+  const nonce = createRandomString(NONCE_SIZE);
   // the scriptlet code that contains patches for the website
   const codeRunningInPage = `(function(){const nonce = '${nonce}';
 ${debugMarker('run scriptlets (executing in "page world")')}
@@ -246,21 +246,24 @@ ${scripts.join('\n\n')}}
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
   function codeRunningInContentScript(code, nonce, nonceSize) {
-    let trustedTypePolicy;
-    if (window.trustedTypes && window.trustedTypes.createPolicy) {
-      trustedTypePolicy = window.trustedTypes.createPolicy(nonce, {
-        createScript: (string) =>
-          !string || string.slice(27, 27 + nonceSize) === nonce ? string : null,
-      });
-    }
     var script;
     try {
-      const scriptBody = decodeURIComponent(code);
       script = document.createElement('script');
-      if (trustedTypePolicy) {
-        script.textContent = trustedTypePolicy.createScript(scriptBody);
+      if (window.trustedTypes?.createPolicy) {
+        const trustedTypePolicy = window.trustedTypes.createPolicy(
+          `ghostery-${Math.round(Math.random() * 1000000)}`,
+          {
+            createScript: (string) =>
+              !string || string.slice(27, 27 + nonceSize) === nonce
+                ? string
+                : null,
+          },
+        );
+        script.textContent = trustedTypePolicy.createScript(
+          decodeURIComponent(code),
+        );
       } else {
-        script.appendChild(document.createTextNode(scriptBody));
+        script.appendChild(document.createTextNode(decodeURIComponent(code)));
       }
       (document.head || document.documentElement).appendChild(script);
     } catch (ex) {
@@ -282,7 +285,7 @@ ${scripts.join('\n\n')}}
         allFrames: true,
       },
       func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage), nonce, nonceSize],
+      args: [encodeURIComponent(codeRunningInPage), nonce, NONCE_SIZE],
     },
     () => {
       if (chrome.runtime.lastError) {
