@@ -246,16 +246,22 @@ ${scripts.join('\n\n')}}
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
   function codeRunningInContentScript(code, nonce, nonceSize) {
+    let trustedTypePolicy;
     if (window.trustedTypes && window.trustedTypes.createPolicy) {
-      window.trustedTypes.createPolicy('default', {
+      trustedTypePolicy = window.trustedTypes.createPolicy(nonce, {
         createScript: (string) =>
           !string || string.slice(27, 27 + nonceSize) === nonce ? string : null,
       });
     }
     var script;
     try {
+      const scriptBody = decodeURIComponent(code);
       script = document.createElement('script');
-      script.appendChild(document.createTextNode(decodeURIComponent(code)));
+      if (trustedTypePolicy) {
+        script.textContent = trustedTypePolicy.createScript(scriptBody);
+      } else {
+        script.appendChild(document.createTextNode(scriptBody));
+      }
       (document.head || document.documentElement).appendChild(script);
     } catch (ex) {
       console.error('Failed to run script', ex);
@@ -264,7 +270,6 @@ ${scripts.join('\n\n')}}
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
-      script.textContent = '';
     }
   }
 
