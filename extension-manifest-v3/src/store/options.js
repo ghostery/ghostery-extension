@@ -53,7 +53,7 @@ const Options = {
   // Regional filters
   regionalFilters: {
     enabled: DEFAULT_REGIONS.length > 0,
-    regions: DEFAULT_REGIONS,
+    regions: DEFAULT_REGIONS.length ? DEFAULT_REGIONS : [String],
   },
 
   // Advanced features
