@@ -505,9 +505,6 @@
   "send_feedback": {
     "message": "發送反饋"
   },
-  "set_blocking_preference": {
-    "message": "設定封鎖偏好設定"
-  },
   "settings_sync": {
     "message": "設定同步"
   },

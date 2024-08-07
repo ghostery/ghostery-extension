@@ -505,9 +505,6 @@
   "send_feedback": {
     "message": "피드백 보내기"
   },
-  "set_blocking_preference": {
-    "message": "차단 설정 저장"
-  },
   "settings_sync": {
     "message": "설정 동기화"
   },

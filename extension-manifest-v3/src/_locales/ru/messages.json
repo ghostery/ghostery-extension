@@ -505,9 +505,6 @@
   "send_feedback": {
     "message": "Отправить отзыв"
   },
-  "set_blocking_preference": {
-    "message": "Настроить параметры блокировки"
-  },
   "settings_sync": {
     "message": "Синхронизация настроек"
   },
