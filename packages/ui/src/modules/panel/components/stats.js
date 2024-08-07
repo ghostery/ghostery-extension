@@ -230,35 +230,30 @@ export default {
                             </ui-text>
                             ${!paused &&
                             html`
-                              <ui-tooltip>
-                                <span slot="content">
-                                  Set blocking preference
-                                </span>
-                                <ui-panel-action
-                                  type="outline"
-                                  layout="shrink:0 width:4.5"
+                              <ui-panel-action
+                                type="outline"
+                                layout="shrink:0 width:4.5"
+                              >
+                                <a
+                                  href="${router.url(exceptionDialog, {
+                                    trackerId: tracker.id,
+                                  })}"
+                                  layout="row center relative"
                                 >
-                                  <a
-                                    href="${router.url(exceptionDialog, {
-                                      trackerId: tracker.id,
-                                    })}"
-                                    layout="row center relative"
-                                  >
-                                    <ui-panel-protection-status-icon
-                                      blockByDefault="${tracker.blockedByDefault}"
-                                      status="${store.ready(tracker.exception)
-                                        ? tracker.exception.getDomainStatus(
-                                            domain,
-                                          )
-                                        : {
-                                            type: tracker.blockedByDefault
-                                              ? 'block'
-                                              : 'trust',
-                                          }}"
-                                    ></ui-panel-protection-status-icon>
-                                  </a>
-                                </ui-panel-action>
-                              </ui-tooltip>
+                                  <ui-panel-protection-status-icon
+                                    blockByDefault="${tracker.blockedByDefault}"
+                                    status="${store.ready(tracker.exception)
+                                      ? tracker.exception.getDomainStatus(
+                                          domain,
+                                        )
+                                      : {
+                                          type: tracker.blockedByDefault
+                                            ? 'block'
+                                            : 'trust',
+                                        }}"
+                                  ></ui-panel-protection-status-icon>
+                                </a>
+                              </ui-panel-action>
                             `}
                           </div>
                         `,
