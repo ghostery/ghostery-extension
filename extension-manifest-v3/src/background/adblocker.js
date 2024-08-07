@@ -211,18 +211,6 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   return false;
 });
 
-function createRandomString(length) {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const randomArray = new Uint8Array(length);
-  crypto.getRandomValues(randomArray);
-  randomArray.forEach((number) => {
-    result += chars[number % chars.length];
-  });
-  return result;
-}
-
 const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
@@ -235,26 +223,22 @@ async function executeScriptlets(tabId, scripts) {
     debugMarker = () => '';
   }
 
-  const nonce = globalThis.trustedTypes ? createRandomString(20) : '';
   // the scriptlet code that contains patches for the website
-  const codeRunningInPage = `(function(){/*${nonce}*/
+  const codeRunningInPage = `(function(){
 ${debugMarker('run scriptlets (executing in "page world")')}
 ${scripts.join('\n\n')}}
 )()`;
 
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
-  function codeRunningInContentScript(code, nonce) {
-    const script = document.createElement('script');
+  function codeRunningInContentScript(code) {
     let content = decodeURIComponent(code);
-    if (nonce) {
+    const script = document.createElement('script');
+    if (window.trustedTypes) {
       const trustedTypePolicy = window.trustedTypes.createPolicy(
         `ghostery-${Math.round(Math.random() * 1000000)}`,
         {
-          createScript: (string) =>
-            !string || string.slice(13, 13 + nonce.length) === nonce
-              ? string
-              : null,
+          createScript: (s) => s,
         },
       );
       content = trustedTypePolicy.createScript(content);
@@ -273,7 +257,7 @@ ${scripts.join('\n\n')}}
         allFrames: true,
       },
       func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage), nonce],
+      args: [encodeURIComponent(codeRunningInPage)],
     },
     () => {
       if (chrome.runtime.lastError) {
