@@ -189,7 +189,7 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="globe" color="gray-600"></ui-icon>
+                      <ui-icon name="pin" color="gray-600"></ui-icon>
                       <ui-text type="headline-xs">Regional filters</ui-text>
                     </div>
                     <ui-text
@@ -198,8 +198,8 @@ export default {
                       color="gray-600"
                     >
                       Blocks additional ads, trackers, and pop-ups specific to
-                      your region. Enable only the regions you need to avoid
-                      slowing down your browser.
+                      the language of websites you visit. Enable only the
+                      languages you need to avoid slowing down your browser.
                     </ui-text>
                   </div>
                 </ui-toggle>
@@ -305,8 +305,8 @@ export default {
                       mobile-type="body-s"
                       color="gray-600"
                     >
-                      Create your own ad-blocking rules to customize your
-                      Ghostery experience.
+                      Facilitates the creation of your own ad-blocking rules to
+                      customize your Ghostery experience.
                     </ui-text>
                     <ui-text type="label-s" color="gray-600" underline>
                       <a
@@ -320,28 +320,21 @@ export default {
                       </a>
                     </ui-text>
                   </div>
-                  <div layout="self:start">
-                    <ui-toggle
-                      no-label
-                      disabled="${globalPause}"
-                      value="${options.customFilters.trustedScriptlets}"
-                      onchange="${html.set(
-                        options,
-                        'customFilters.trustedScriptlets',
-                      )}"
-                    >
-                      <div
-                        layout="self:center column grow items:center gap:0.5"
-                      >
-                        <ui-text
-                          type="body-m"
-                          mobile-type="body-s"
-                          color="gray-600"
-                        >
-                          Allow trusted scriptlets
-                        </ui-text>
-                      </div>
-                    </ui-toggle>
+                  <div layout="self:start margin:bottom">
+                    <label>
+                      <gh-settings-checkbox disabled="${globalPause}">
+                        <input
+                          type="checkbox"
+                          disabled="${globalPause}"
+                          checked="${options.customFilters.trustedScriptlets}"
+                          onchange="${html.set(
+                            options,
+                            'customFilters.trustedScriptlets',
+                          )}"
+                        />
+                        <span slot="label">Allow trusted scriptlets</span>
+                      </gh-settings-checkbox>
+                    </label>
                   </div>
                   <gh-settings-custom-filters></gh-settings-custom-filters>
                 </div>

@@ -158,7 +158,7 @@ export default {
   ],
   render: ({ input, filters, dnrRules, errors }) => html`
     <template layout="block">
-      <div layout="column gap" translate="no">
+      <div layout="column gap">
         ${store.ready(input) &&
         // prettier-ignore
         html`
@@ -168,15 +168,15 @@ export default {
       `}
         <div layout="row content:space-around">
           <ui-text type="body-xs" color="gray-400">
-            Network filters: ${filters.networkFilters.size}
+            Network Filters: ${filters.networkFilters.size}
           </ui-text>
           <ui-text type="body-xs" color="gray-400">
-            Cosmetic filters: ${filters.cosmeticFilters.size}
+            Cosmetic Filters: ${filters.cosmeticFilters.size}
           </ui-text>
         </div>
         ${!!errors.length &&
         html`
-          <div layout="column gap:0.5" translate="no">
+          <div layout="column gap:0.5">
             <ui-text type="label-s" color="danger-500">
               Errors (${errors.length}):
             </ui-text>
@@ -196,7 +196,7 @@ export default {
           disabled=${errors.length > 0}
           onclick="${update}"
         >
-          <button>Update filters</button>
+          <button>Update Filters</button>
         </ui-button>
 
         ${!!dnrRules?.length &&
