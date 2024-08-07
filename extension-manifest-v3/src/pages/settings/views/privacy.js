@@ -197,10 +197,9 @@ export default {
                       mobile-type="body-s"
                       color="gray-600"
                     >
-                      Additional block lists covering ads, trackers and other
-                      popups specific for a given region. Enable only for the
-                      regions you are interested in, as running multiple lists
-                      can slow down the browser.
+                      Blocks additional ads, trackers, and pop-ups specific to
+                      your region. Enable only the regions you need to avoid
+                      slowing down your browser.
                     </ui-text>
                   </div>
                 </ui-toggle>
