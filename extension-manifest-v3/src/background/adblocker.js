@@ -232,20 +232,20 @@ ${scripts.join('\n\n')}}
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
   function codeRunningInContentScript(code) {
-    var script;
-    try {
-      script = document.createElement('script');
-      script.appendChild(document.createTextNode(decodeURIComponent(code)));
-      (document.head || document.documentElement).appendChild(script);
-    } catch (ex) {
-      console.error('Failed to run script', ex);
+    let content = decodeURIComponent(code);
+    const script = document.createElement('script');
+    if (window.trustedTypes) {
+      const trustedTypePolicy = window.trustedTypes.createPolicy(
+        `ghostery-${Math.round(Math.random() * 1000000)}`,
+        {
+          createScript: (s) => s,
+        },
+      );
+      content = trustedTypePolicy.createScript(content);
     }
-    if (script) {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-      script.textContent = '';
-    }
+    script.textContent = content;
+    (document.head || document.documentElement).appendChild(script);
+    script.remove();
   }
 
   chrome.scripting.executeScript(
