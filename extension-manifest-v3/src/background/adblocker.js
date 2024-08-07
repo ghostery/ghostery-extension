@@ -232,18 +232,34 @@ ${scripts.join('\n\n')}}
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
   function codeRunningInContentScript(code) {
-    let content = decodeURIComponent(code);
     const script = document.createElement('script');
-    if (window.trustedTypes) {
-      const trustedTypePolicy = window.trustedTypes.createPolicy(
-        `ghostery-${Math.round(Math.random() * 1000000)}`,
-        {
-          createScript: (s) => s,
-        },
-      );
-      content = trustedTypePolicy.createScript(content);
+    script.async = false;
+
+    let scriptlets = decodeURIComponent(code);
+
+    if (navigator.userAgent.includes('Firefox')) {
+      const blob = new Blob([scriptlets], {
+        type: 'text/javascript; charset=utf-8',
+      });
+      const url = URL.createObjectURL(blob);
+      try {
+        script.src = url;
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    } else {
+      if (window.trustedTypes) {
+        const trustedTypePolicy = window.trustedTypes.createPolicy(
+          `ghostery-${Math.round(Math.random() * 1000000)}`,
+          {
+            createScript: (s) => s,
+          },
+        );
+        scriptlets = trustedTypePolicy.createScript(scriptlets);
+      }
+      script.textContent = scriptlets;
     }
-    script.textContent = content;
+
     (document.head || document.documentElement).appendChild(script);
     script.remove();
   }
