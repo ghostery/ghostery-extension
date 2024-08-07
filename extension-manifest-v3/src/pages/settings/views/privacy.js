@@ -189,7 +189,7 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="pin" color="gray-600"></ui-icon>
+                      <ui-icon name="globe" color="gray-600"></ui-icon>
                       <ui-text type="headline-xs">Regional filters</ui-text>
                     </div>
                     <ui-text
@@ -239,7 +239,11 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon name="globe" color="gray-600"></ui-icon>
+                    <ui-icon
+                      name="search"
+                      color="gray-600"
+                      layout="size:2"
+                    ></ui-icon>
                     <ui-text type="headline-xs">
                       Search Engine Redirect Protection
                     </ui-text>
