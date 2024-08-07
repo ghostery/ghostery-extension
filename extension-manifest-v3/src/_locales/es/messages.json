@@ -505,9 +505,6 @@
   "send_feedback": {
     "message": "Enviar comentarios"
   },
-  "set_blocking_preference": {
-    "message": "Establecer preferencia de bloqueo"
-  },
   "settings_sync": {
     "message": "Sincronizar configuración"
   },

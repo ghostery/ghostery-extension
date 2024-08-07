@@ -505,9 +505,6 @@
   "send_feedback": {
     "message": "发送反馈"
   },
-  "set_blocking_preference": {
-    "message": "设置阻止首选项"
-  },
   "settings_sync": {
     "message": "设置同步"
   },
