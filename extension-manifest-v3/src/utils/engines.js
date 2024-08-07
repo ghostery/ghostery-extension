@@ -457,11 +457,7 @@ export function createEngine(name, options = null) {
 
 export function replaceEngine(name, engineOrEngines) {
   const engines = [].concat(engineOrEngines);
-
-  let engine = new FiltersEngine({ config: engines[0].config });
-  engine.updateEnv(ENV);
-
-  engine = FiltersEngine.merge([engine, ...engines]);
+  const engine = engines.length > 1 ? FiltersEngine.merge(engines) : engines[0];
 
   saveToMemory(name, engine);
   saveToStorage(name);
