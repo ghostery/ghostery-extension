@@ -190,7 +190,7 @@ export default {
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
                       <ui-icon name="pin" color="gray-600"></ui-icon>
-                      <ui-text type="headline-xs">Regional filters</ui-text>
+                      <ui-text type="headline-xs">Regional Filters</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
@@ -268,7 +268,7 @@ export default {
                     <div layout="row gap items:center">
                       <ui-icon name="dots" color="gray-600"></ui-icon>
                       <ui-text type="headline-xs">
-                        Experimental Ad-Blocking Filters
+                        Experimental Filters
                       </ui-text>
                     </div>
                     <ui-text
@@ -298,7 +298,7 @@ export default {
                   <div layout="column gap:0.5">
                     <div layout="row gap items:center">
                       <ui-icon name="detailed-view" color="gray-600"></ui-icon>
-                      <ui-text type="headline-xs">Custom filters</ui-text>
+                      <ui-text type="headline-xs">Custom Filters</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
