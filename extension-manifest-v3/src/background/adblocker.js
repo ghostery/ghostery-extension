@@ -237,7 +237,7 @@ ${scripts.join('\n\n')}}
 
     let scriptlets = decodeURIComponent(code);
 
-    if (navigator.userAgent.includes('Firefox')) {
+    if (__PLATFORM__ === 'firefox') {
       const blob = new Blob([scriptlets], {
         type: 'text/javascript; charset=utf-8',
       });
