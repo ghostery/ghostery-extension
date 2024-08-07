@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
 import { getUserOptions, setUserOptions } from '../utils/api.js';
-import { getDefaultRegions } from '../utils/regions.js';
+import { DEFAULT_REGIONS } from '../utils/regions.js';
 
 import Session from './session.js';
 
@@ -52,8 +52,8 @@ const Options = {
 
   // Regional filters
   regionalFilters: {
-    enabled: true,
-    regions: getDefaultRegions(),
+    enabled: DEFAULT_REGIONS.length > 0,
+    regions: DEFAULT_REGIONS,
   },
 
   // Advanced features
