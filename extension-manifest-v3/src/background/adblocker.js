@@ -223,7 +223,6 @@ function createRandomString(length) {
   return result;
 }
 
-const NONCE_SIZE = 20;
 const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
@@ -236,43 +235,39 @@ async function executeScriptlets(tabId, scripts) {
     debugMarker = () => '';
   }
 
-  const nonce = createRandomString(NONCE_SIZE);
+  const nonce = globalThis.trustedTypes ? createRandomString(20) : '';
   // the scriptlet code that contains patches for the website
-  const codeRunningInPage = `(function(){const nonce = '${nonce}';
+  const codeRunningInPage = `(function(){/*${nonce}*/
 ${debugMarker('run scriptlets (executing in "page world")')}
 ${scripts.join('\n\n')}}
 )()`;
 
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
-  function codeRunningInContentScript(code, nonce, nonceSize) {
-    var script;
+  function codeRunningInContentScript(code, nonce) {
+    let script;
     try {
       script = document.createElement('script');
-      if (window.trustedTypes?.createPolicy) {
+      let content = decodeURIComponent(code);
+      if (nonce) {
         const trustedTypePolicy = window.trustedTypes.createPolicy(
           `ghostery-${Math.round(Math.random() * 1000000)}`,
           {
             createScript: (string) =>
-              !string || string.slice(27, 27 + nonceSize) === nonce
+              !string || string.slice(13, 13 + nonce.length) === nonce
                 ? string
                 : null,
           },
         );
-        script.textContent = trustedTypePolicy.createScript(
-          decodeURIComponent(code),
-        );
-      } else {
-        script.appendChild(document.createTextNode(decodeURIComponent(code)));
+        content = trustedTypePolicy.createScript(content);
       }
+      script.textContent = content;
       (document.head || document.documentElement).appendChild(script);
     } catch (ex) {
       console.error('Failed to run script', ex);
     }
     if (script) {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
+      script.remove();
     }
   }
 
@@ -285,7 +280,7 @@ ${scripts.join('\n\n')}}
         allFrames: true,
       },
       func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage), nonce, NONCE_SIZE],
+      args: [encodeURIComponent(codeRunningInPage), nonce],
     },
     () => {
       if (chrome.runtime.lastError) {
