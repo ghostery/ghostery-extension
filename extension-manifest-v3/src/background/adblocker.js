@@ -39,18 +39,20 @@ const setup = asyncSetup([
   observe((value) => {
     options = value;
 
-    enabledEngines = options.terms
-      ? [
-          // Add custom engine
-          engines.CUSTOM_ENGINE,
-          engines.FIXES_ENGINE,
-          // Main engines
-          ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
-        ]
-      : [];
+    if (options.terms) {
+      enabledEngines = [
+        // Add custom engine
+        engines.CUSTOM_ENGINE,
+        engines.FIXES_ENGINE,
+        // Main engines
+        ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
+      ];
 
-    if (options.regionalFilters.enabled) {
-      enabledEngines.push(engines.REGIONAL_ENGINE);
+      if (options.regionalFilters.enabled) {
+        enabledEngines.push(engines.REGIONAL_ENGINE);
+      }
+    } else {
+      enabledEngines = [];
     }
   }),
 
