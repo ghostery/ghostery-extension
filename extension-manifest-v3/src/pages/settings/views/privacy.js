@@ -210,24 +210,23 @@ export default {
                 >
                   ${REGIONS.map(
                     (id) => html`
-                      <label layout="grow">
-                        <gh-settings-checkbox
-                          disabled="${globalPause ||
-                          !options.regionalFilters.enabled}"
-                        >
-                          <input
-                            type="checkbox"
-                            disabled="${!options.regionalFilters.enabled}"
-                            checked="${options.regionalFilters.regions.includes(
-                              id,
-                            )}"
-                            onchange="${setRegion(id)}"
-                          />
-                          <span slot="label">
-                            ${labels.languages.of(id.toUpperCase())}
-                          </span>
-                        </gh-settings-checkbox>
-                      </label>
+                      <gh-settings-checkbox
+                        disabled="${globalPause ||
+                        !options.regionalFilters.enabled}"
+                        layout="grow"
+                      >
+                        <input
+                          type="checkbox"
+                          disabled="${!options.regionalFilters.enabled}"
+                          checked="${options.regionalFilters.regions.includes(
+                            id,
+                          )}"
+                          onchange="${setRegion(id)}"
+                        />
+                        <span slot="label">
+                          ${labels.languages.of(id.toUpperCase())}
+                        </span>
+                      </gh-settings-checkbox>
                     `,
                   )}
                 </div>
@@ -321,20 +320,18 @@ export default {
                     </ui-text>
                   </div>
                   <div layout="self:start margin:bottom">
-                    <label>
-                      <gh-settings-checkbox disabled="${globalPause}">
-                        <input
-                          type="checkbox"
-                          disabled="${globalPause}"
-                          checked="${options.customFilters.trustedScriptlets}"
-                          onchange="${html.set(
-                            options,
-                            'customFilters.trustedScriptlets',
-                          )}"
-                        />
-                        <span slot="label">Allow trusted scriptlets</span>
-                      </gh-settings-checkbox>
-                    </label>
+                    <gh-settings-checkbox disabled="${globalPause}">
+                      <input
+                        type="checkbox"
+                        disabled="${globalPause}"
+                        checked="${options.customFilters.trustedScriptlets}"
+                        onchange="${html.set(
+                          options,
+                          'customFilters.trustedScriptlets',
+                        )}"
+                      />
+                      <span slot="label">Allow trusted scriptlets</span>
+                    </gh-settings-checkbox>
                   </div>
                   <gh-settings-custom-filters></gh-settings-custom-filters>
                 </div>

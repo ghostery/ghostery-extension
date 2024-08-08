@@ -11,14 +11,20 @@
 
 import { html } from 'hybrids';
 
+function clickSlottedElement(host) {
+  host.render().querySelector('slot').assignedElements()[0].click();
+}
+
 export default {
   disabled: { value: false, reflect: true },
   render: () => html`
-    <template layout="row gap:0.5 items:center">
-      <slot></slot>
-      <ui-text type="body-s" color="gray-500">
-        <slot name="label"></slot>
-      </ui-text>
+    <template layout="contents">
+      <label layout="row gap:0.5 items:center" onclick="${clickSlottedElement}">
+        <slot></slot>
+        <ui-text type="body-s" color="gray-500">
+          <slot name="label"></slot>
+        </ui-text>
+      </label>
     </template>
   `.css`
     :host {
