@@ -35,7 +35,7 @@
     "message": "추가"
   },
   "add_@_0__as_an_exception": {
-    "message": "$${0}에서 예외 처리",
+    "message": "$${0} 예외 처리",
     "description": "Add domain as an exception"
   },
   "add_exception": {
@@ -165,7 +165,7 @@
     "message": "새 계정 만들기"
   },
   "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "광고 차단 규칙을 직접 만들고 Ghostery를 맞춤형으로 사용해보세요."
+    "message": "광고 차단 규칙을 직접 만들고 Ghostery를 맞춤으로 사용해보세요."
   },
   "current_protection_status_for_@_0__": {
     "message": "$${0}의 현재 보호 상태",
@@ -596,7 +596,7 @@
     "message": "모두 허용 (권장됨)"
   },
   "trust_on_all_websites": {
-    "message": "모든 웹사이트에서 신뢰"
+    "message": "모든 웹사이트에서 허용"
   },
   "trust_on_this_website": {
     "message": "이 웹 사이트에서 허용됩니다."
