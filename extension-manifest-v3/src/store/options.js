@@ -253,6 +253,7 @@ async function migrateFromV8() {
 
       options.paused = storage.site_whitelist.reduce((acc, domain) => {
         acc[domain] = { revokeAt: 0 };
+        return acc;
       }, {});
 
       options.installDate = storage.install_date || '';
