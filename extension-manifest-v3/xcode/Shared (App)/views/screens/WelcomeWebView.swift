@@ -14,7 +14,7 @@ import UIKit
 import Cocoa
 #endif
 
-let extensionBundleIdentifier = "com.ghostery.lite.extension"
+let extensionBundleIdentifier = "com.ghostery.extension.safari"
 
 struct WelcomeWebView {
     var openInWebView: (URL) -> Void

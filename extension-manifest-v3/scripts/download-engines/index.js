@@ -14,7 +14,7 @@ import { createHash } from 'crypto';
 import { resolve } from 'path';
 import shelljs from 'shelljs';
 
-import { ENGINE_VERSION } from '@cliqz/adblocker';
+import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
 
 function checksum(content) {
   return createHash('sha256').update(content).digest('hex');
@@ -140,3 +140,53 @@ for (const [name, target] of Object.entries(DNR)) {
     writeFileSync(outputPath, dnr);
   }
 }
+
+// Extract resources from ads engine
+console.log('Extracting resources...');
+
+shelljs.mkdir('-p', resolve(TARGET_PATH, 'redirects'));
+
+const seenResource = new Set();
+const allowedResourceExtensions = [
+  'html',
+  'js',
+  'css',
+  'mp4',
+  'mp3',
+  'xml',
+  'txt',
+  'json',
+  'empty',
+];
+
+FiltersEngine.deserialize(
+  readFileSync(`${TARGET_PATH}/engine-ads.dat`),
+).resources.resources.forEach((value, key) => {
+  // refs https://github.com/gorhill/uBlock/tree/master/src/web_accessible_resources
+  if (
+    value.contentType === 'application/javascript' &&
+    (value.body.includes('scriptletGlobals') || // Drop scriptlets
+      key.includes('/')) // Drop resources within a directory
+  ) {
+    return;
+  }
+
+  if (
+    !allowedResourceExtensions.includes(key.split('.').pop()) // Drop resources with an unknown file extension
+  ) {
+    return;
+  }
+
+  if (seenResource.has(value.body)) {
+    return;
+  }
+
+  seenResource.add(value.body);
+
+  // Decode base64
+  if (value.contentType.endsWith(';base64')) {
+    value.body = Buffer.from(value.body, 'base64').toString('binary');
+  }
+
+  writeFileSync(resolve(TARGET_PATH, 'redirects', key), value.body);
+});

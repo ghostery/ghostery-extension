@@ -505,9 +505,6 @@
   "send_feedback": {
     "message": "フィードバックを送信する"
   },
-  "set_blocking_preference": {
-    "message": "ブロック設定に進む"
-  },
   "settings_sync": {
     "message": "同期設定"
   },

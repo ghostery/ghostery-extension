@@ -54,9 +54,8 @@ const Options = {
   },
   experimentalFilters: false,
 
-  // Browser icon
-  // TODO: it should be enabled by default on Ghostery Private Browser only
-  trackerWheel: __PLATFORM__ === 'firefox' ? true : false,
+  // Browser toolbar icon
+  trackerWheel: false,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
 
   // SERP
@@ -254,6 +253,7 @@ async function migrateFromV8() {
 
       options.paused = storage.site_whitelist.reduce((acc, domain) => {
         acc[domain] = { revokeAt: 0 };
+        return acc;
       }, {});
 
       options.installDate = storage.install_date || '';
