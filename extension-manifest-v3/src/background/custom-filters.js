@@ -8,6 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { parseFilters } from '@cliqz/adblocker';
 
 import * as engines from '/utils/engines.js';
 
@@ -41,15 +42,30 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     console.log(msg.filters);
     console.groupEnd();
 
-    engines
-      .createCustomEngine(msg.filters)
-      .then(({ notSupportedFilters, engine }) =>
-        sendResponse({
-          notSupportedFilters,
-          success: !!engine,
-        }),
+    try {
+      const {
+        cosmeticFilters,
+        networkFilters,
+        preprocessors,
+        notSupportedFilters,
+      } = parseFilters(msg.filters);
+
+      engines.createEngine(engines.CUSTOM_ENGINE, {
+        cosmeticFilters,
+        networkFilters,
+        preprocessors,
+      });
+
+      sendResponse(
+        notSupportedFilters.map(
+          (msg) => `Filter not supported: '${msg.filter}'`,
+        ),
       );
-    return true;
+    } catch (e) {
+      sendResponse([e]);
+    }
+
+    return false;
   }
 
   if (__PLATFORM__ !== 'firefox') {

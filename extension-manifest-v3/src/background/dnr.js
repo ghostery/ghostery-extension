@@ -49,6 +49,15 @@ if (__PLATFORM__ !== 'firefox') {
 
     if (ids.length) {
       ids.push(TRACKERDB_ENGINE, 'fixes');
+
+      // Add regional network filters
+      if (options.regionalFilters.enabled) {
+        ids.push(
+          ...options.regionalFilters.regions
+            .map((id) => `lang-${id}`)
+            .filter((id) => DNR_RESOURCES.includes(id)),
+        );
+      }
     }
 
     const enabledRulesetIds =
@@ -75,7 +84,7 @@ if (__PLATFORM__ !== 'firefox') {
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.info('DNR: lists successfully updated');
+        console.info('DNR: lists updated with lists:', ids.join(', '));
       } catch (e) {
         console.error(`DNR: error while updating lists:`, e);
       }
@@ -140,12 +149,12 @@ if (__PLATFORM__ !== 'firefox') {
               ],
         removeRuleIds,
       });
+      console.log('DNR: pause rules updated');
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
       });
+      console.log('DNR: pause rules updated');
     }
-
-    console.log('DNR: pause rules updated');
   });
 }

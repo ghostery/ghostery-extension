@@ -23,6 +23,7 @@ export default {
         host.removeAttribute('tabindex');
       }
     },
+    reflect: true,
   },
   render: () => html`<slot></slot>`.css`
       :host {

@@ -5,6 +5,8 @@ import { build } from 'vite';
 import shelljs from 'shelljs';
 import webExt from 'web-ext';
 
+import REGIONS from '../src/utils/regions.js';
+
 const pwd = process.cwd();
 
 const options = {
@@ -111,7 +113,13 @@ options.assets.forEach((path) => {
 // copy adblocker engines
 shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources'));
 
-const engines = ['ads', 'tracking', 'annoyances', 'fixes'];
+const engines = [
+  'ads',
+  'tracking',
+  'annoyances',
+  'fixes',
+  ...REGIONS.map((region) => `lang-${region}`),
+];
 const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {

@@ -38,3 +38,8 @@ export const regions = new Intl.DisplayNames(
   [chrome.i18n.getUILanguage().split('-')[0]],
   { type: 'region' },
 );
+
+export const languages = new Intl.DisplayNames(
+  [chrome.i18n.getUILanguage().split('-')[0]],
+  { type: 'language' },
+);
