@@ -390,7 +390,13 @@ async function update(name) {
 
       // Notify listeners
       const fns = updateListeners.get(name);
-      fns?.forEach((fn) => fn());
+      fns?.forEach((fn) => {
+        try {
+          fn();
+        } catch (e) {
+          console.error(`Error while calling update listener for "${name}"`, e);
+        }
+      });
 
       // Save the new engine to storage
       saveToStorage(name);
