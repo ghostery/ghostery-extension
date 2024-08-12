@@ -16,14 +16,13 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Config,
-  parseFilters,
 } from '@cliqz/adblocker';
 
-import { observe } from '../store/options.js';
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
+export const REGIONAL_ENGINE = 'regional-filters';
 export const FIXES_ENGINE = 'fixes';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
@@ -39,16 +38,17 @@ const ENV = new Map([
   ['env_experimental', false],
 ]);
 
-observe('experimentalFilters', (experimentalFilters) => {
-  ENV.set('env_experimental', experimentalFilters);
+export function setEnv(key, value) {
+  if (ENV.has(key)) {
+    ENV.set(key, value);
 
-  // As engines on the server might have new filters, we need to update them
-  updateAll().catch(() => null);
-
-  for (const engine of engines.values()) {
-    engine.updateEnv(ENV);
+    for (const engine of engines.values()) {
+      engine.updateEnv(ENV);
+    }
+  } else {
+    throw Error(`Unknown environment variable: ${key}`);
   }
-});
+}
 
 function checkUserAgent(pattern) {
   return navigator.userAgent.indexOf(pattern) !== -1;
@@ -57,6 +57,7 @@ function checkUserAgent(pattern) {
 function deserializeEngine(engineBytes) {
   const engine = FiltersEngine.deserialize(engineBytes);
   engine.updateEnv(ENV);
+
   return engine;
 }
 
@@ -155,9 +156,41 @@ async function saveToStorage(name) {
     const tx = db.transaction('engines', 'readwrite');
     const table = tx.objectStore('engines');
 
-    await table.put(engine.serialize(), name);
+    if (engine) {
+      await table.put(engine.serialize(), name);
+    } else {
+      await table.delete(name);
+    }
   } catch (e) {
     console.error(`Failed to save engine "${name}" to storage`, e);
+  }
+}
+
+async function loadFromDisk(name) {
+  try {
+    const response = await fetch(
+      chrome.runtime.getURL(
+        `rule_resources/engine-${name}${
+          __PLATFORM__ === 'firefox' || name === 'trackerdb' ? '' : '-cosmetics'
+        }.dat`,
+      ),
+    );
+
+    const engineBytes = new Uint8Array(await response.arrayBuffer());
+    const engine = deserializeEngine(engineBytes);
+    shareExceptions(name, engine);
+    saveToMemory(name, engine);
+    saveToStorage(name);
+
+    // After initial load from disk, schedule an update
+    // as it is done only once on the first run.
+    // After loading from disk, it should be loaded from the storage
+    update(name).catch(() => null);
+
+    return engine;
+  } catch (e) {
+    console.error(`Failed to load engine "${name}" from disk`, e);
+    return new FiltersEngine();
   }
 }
 
@@ -171,12 +204,21 @@ function check(response) {
   return response;
 }
 
+const updateListeners = new Map();
+export function addUpdateListener(name, fn) {
+  if (!updateListeners.has(name)) {
+    updateListeners.set(name, new Set());
+  }
+
+  updateListeners.get(name).add(fn);
+}
+
 const CDN_HOSTNAME = chrome.runtime.getManifest().debug
   ? 'staging-cdn.ghostery.com'
   : 'cdn.ghostery.com';
 
 async function update(name) {
-  if (name === CUSTOM_ENGINE) return;
+  if (name === CUSTOM_ENGINE || name === REGIONAL_ENGINE) return;
 
   try {
     const urlName =
@@ -197,7 +239,10 @@ async function update(name) {
     }
 
     // Get current engine
-    let engine = loadFromMemory(name);
+    let engine =
+      loadFromMemory(name) ||
+      (await loadFromStorage(name)) ||
+      (await loadFromDisk(name));
 
     // Check if some lists need to be removed from the engine: either because
     // there are lists removed from allowed-lists.json or because some region
@@ -342,6 +387,17 @@ async function update(name) {
 
     if (updated) {
       console.log(`Engine "${name}" updated`);
+
+      // Notify listeners
+      const fns = updateListeners.get(name);
+      fns?.forEach((fn) => {
+        try {
+          fn();
+        } catch (e) {
+          console.error(`Error while calling update listener for "${name}"`, e);
+        }
+      });
+
       // Save the new engine to storage
       saveToStorage(name);
     }
@@ -357,34 +413,6 @@ export function updateAll() {
   return Promise.all(Array.from(engines.keys()).map((name) => update(name)));
 }
 
-async function loadFromDisk(name) {
-  try {
-    const response = await fetch(
-      chrome.runtime.getURL(
-        `rule_resources/engine-${name}${
-          __PLATFORM__ === 'firefox' || name === 'trackerdb' ? '' : '-cosmetics'
-        }.dat`,
-      ),
-    );
-
-    const engineBytes = new Uint8Array(await response.arrayBuffer());
-    const engine = deserializeEngine(engineBytes);
-    shareExceptions(name, engine);
-    saveToMemory(name, engine);
-    saveToStorage(name);
-
-    // After initial load from disk, schedule an update
-    // as it is done only once on the first run.
-    // After loading from disk, it should be loaded from the storage
-    update(name).catch(() => null);
-
-    return engine;
-  } catch (e) {
-    console.error(`Failed to load engine "${name}" from disk`, e);
-    return new FiltersEngine();
-  }
-}
-
 export function get(name) {
   return loadFromMemory(name);
 }
@@ -395,15 +423,15 @@ const ALARM_DELAY = 60; // 1 hour
 export async function init(name) {
   if (__PLATFORM__ === 'tests') return;
 
-  if (name === CUSTOM_ENGINE) {
+  // Custom and regional engines are created on demand
+  // And should not be updated by alarms
+  if (name === CUSTOM_ENGINE || name === REGIONAL_ENGINE) {
     return (
-      get(CUSTOM_ENGINE) ||
-      (await loadFromStorage(CUSTOM_ENGINE)) ||
-      (await createCustomEngine()).engine
+      get(name) || (await loadFromStorage(name)) || (await createEngine(name))
     );
   }
 
-  // Schedule an alarm to update engines once a day
+  // Schedule an alarm to update engines once an hour
   chrome.alarms.get(`${ALARM_PREFIX}${name}`, (alarm) => {
     if (!alarm) {
       chrome.alarms.create(`${ALARM_PREFIX}${name}`, {
@@ -417,52 +445,39 @@ export async function init(name) {
   );
 }
 
-export async function createCustomEngine(filters = '') {
+export async function clean(name) {
+  engines.delete(name);
+  chrome.alarms.clear(`${ALARM_PREFIX}${name}`);
+}
+
+export function createEngine(name, options = null) {
   const config = new Config({
     enableHtmlFiltering: ENV.get('cap_html_filtering'),
   });
 
-  const {
-    cosmeticFilters,
-    networkFilters,
-    preprocessors,
-    notSupportedFilters,
-  } = parseFilters(filters);
-
-  const engine = new FiltersEngine(
-    {
-      cosmeticFilters,
-      networkFilters,
-      preprocessors,
-    },
-    config,
-  );
+  const engine = new FiltersEngine({ ...options, config });
   engine.updateEnv(ENV);
 
-  saveToMemory(CUSTOM_ENGINE, engine);
-  saveToStorage(CUSTOM_ENGINE);
+  saveToMemory(name, engine);
+  saveToStorage(name);
 
-  return { engine, notSupportedFilters };
+  return engine;
 }
 
-const updateListeners = new Map();
-export function addUpdateListener(name, fn) {
-  if (!updateListeners.has(name)) {
-    updateListeners.set(name, new Set());
-  }
+export function replaceEngine(name, engineOrEngines) {
+  const engines = [].concat(engineOrEngines);
+  const engine = engines.length > 1 ? FiltersEngine.merge(engines) : engines[0];
 
-  updateListeners.get(name).add(fn);
+  saveToMemory(name, engine);
+  saveToStorage(name);
+
+  return engine;
 }
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name.startsWith(ALARM_PREFIX)) {
     const name = alarm.name.slice(ALARM_PREFIX.length);
-    update(name)
-      .then(() => {
-        const fns = updateListeners.get(name);
-        fns?.forEach((fn) => fn());
-      })
-      .catch(() => null);
+    update(name).catch(() => null);
 
     chrome.alarms.create(alarm.name, {
       delayInMinutes: ALARM_DELAY,

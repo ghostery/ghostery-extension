@@ -10,9 +10,12 @@
  */
 
 import { html, store } from 'hybrids';
+import * as labels from '@ghostery/ui/labels';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Session from '/store/session.js';
+
+import REGIONS from '/utils/regions.js';
 
 import assets from '../assets/index.js';
 
@@ -32,6 +35,18 @@ function updateGlobalPause({ options }, value, lastValue) {
         : null,
     },
   });
+}
+
+function setRegion(id) {
+  return ({ options }, event) => {
+    const regions = event.target.checked
+      ? options.regionalFilters.regions.concat(id)
+      : options.regionalFilters.regions.filter((i) => i !== id);
+
+    regions.sort();
+
+    store.set(options, { regionalFilters: { regions } });
+  };
 }
 
 export default {
@@ -166,6 +181,56 @@ export default {
                 </ui-toggle>
               </div>
               <ui-line></ui-line>
+              <div layout="column gap">
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.regionalFilters.enabled}"
+                  onchange="${html.set(options, 'regionalFilters.enabled')}"
+                >
+                  <div layout="column grow gap:0.5">
+                    <div layout="row gap items:center">
+                      <ui-icon name="pin" color="gray-600"></ui-icon>
+                      <ui-text type="headline-xs">Regional Filters</ui-text>
+                    </div>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Blocks additional ads, trackers, and pop-ups specific to
+                      the language of websites you visit. Enable only the
+                      languages you need to avoid slowing down your browser.
+                    </ui-text>
+                  </div>
+                </ui-toggle>
+                <div
+                  hidden="${!options.regionalFilters.enabled}"
+                  layout="grid:repeat(auto-fill,minmax(130px,1fr)) gap:2:1 padding:right:12"
+                  layout[hidden]="hidden"
+                >
+                  ${REGIONS.map(
+                    (id) => html`
+                      <gh-settings-checkbox
+                        disabled="${globalPause ||
+                        !options.regionalFilters.enabled}"
+                        layout="grow"
+                      >
+                        <input
+                          type="checkbox"
+                          disabled="${!options.regionalFilters.enabled}"
+                          checked="${options.regionalFilters.regions.includes(
+                            id,
+                          )}"
+                          onchange="${setRegion(id)}"
+                        />
+                        <span slot="label">
+                          ${labels.languages.of(id.toUpperCase())}
+                        </span>
+                      </gh-settings-checkbox>
+                    `,
+                  )}
+                </div>
+              </div>
               <ui-toggle
                 disabled="${globalPause}"
                 value="${options.serpTrackingPrevention}"
@@ -173,7 +238,11 @@ export default {
               >
                 <div layout="column grow gap:0.5">
                   <div layout="row gap items:center">
-                    <ui-icon name="globe" color="gray-600"></ui-icon>
+                    <ui-icon
+                      name="search"
+                      color="gray-600"
+                      layout="size:2"
+                    ></ui-icon>
                     <ui-text type="headline-xs">
                       Search Engine Redirect Protection
                     </ui-text>
@@ -198,7 +267,7 @@ export default {
                     <div layout="row gap items:center">
                       <ui-icon name="dots" color="gray-600"></ui-icon>
                       <ui-text type="headline-xs">
-                        Experimental Ad-Blocking Filters
+                        Experimental Filters
                       </ui-text>
                     </div>
                     <ui-text
@@ -228,15 +297,15 @@ export default {
                   <div layout="column gap:0.5">
                     <div layout="row gap items:center">
                       <ui-icon name="detailed-view" color="gray-600"></ui-icon>
-                      <ui-text type="headline-xs">Custom filters</ui-text>
+                      <ui-text type="headline-xs">Custom Filters</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
                       color="gray-600"
                     >
-                      Create your own ad-blocking rules to customize your
-                      Ghostery experience.
+                      Facilitates the creation of your own ad-blocking rules to
+                      customize your Ghostery experience.
                     </ui-text>
                     <ui-text type="label-s" color="gray-600" underline>
                       <a
@@ -250,28 +319,19 @@ export default {
                       </a>
                     </ui-text>
                   </div>
-                  <div layout="self:start">
-                    <ui-toggle
-                      no-label
-                      disabled="${globalPause}"
-                      value="${options.customFilters.trustedScriptlets}"
-                      onchange="${html.set(
-                        options,
-                        'customFilters.trustedScriptlets',
-                      )}"
-                    >
-                      <div
-                        layout="self:center column grow items:center gap:0.5"
-                      >
-                        <ui-text
-                          type="body-m"
-                          mobile-type="body-s"
-                          color="gray-600"
-                        >
-                          Allow trusted scriptlets
-                        </ui-text>
-                      </div>
-                    </ui-toggle>
+                  <div layout="self:start margin:bottom">
+                    <gh-settings-checkbox disabled="${globalPause}">
+                      <input
+                        type="checkbox"
+                        disabled="${globalPause}"
+                        checked="${options.customFilters.trustedScriptlets}"
+                        onchange="${html.set(
+                          options,
+                          'customFilters.trustedScriptlets',
+                        )}"
+                      />
+                      <span slot="label">Allow trusted scriptlets</span>
+                    </gh-settings-checkbox>
                   </div>
                   <gh-settings-custom-filters></gh-settings-custom-filters>
                 </div>

@@ -15,10 +15,20 @@ import { resolve } from 'path';
 import shelljs from 'shelljs';
 
 import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
+import REGIONS from '../../src/utils/regions.js';
 
 function checksum(content) {
   return createHash('sha256').update(content).digest('hex');
 }
+
+const REGIONAL_ENGINES = REGIONS.reduce((acc, region) => {
+  acc[`dnr-lang-${region}`] = `lang-${region}`;
+  return acc;
+}, {});
+const REGIONAL_COSMETICS_ENGINES = REGIONS.reduce((acc, region) => {
+  acc[`dnr-cosmetics-lang-${region}`] = `lang-${region}-cosmetics`;
+  return acc;
+}, {});
 
 const ENGINES = {
   'dnr-ads': 'ads',
@@ -30,6 +40,8 @@ const ENGINES = {
   'dnr-fixes': 'fixes',
   'dnr-cosmetics-fixes': 'fixes-cosmetics',
   'trackerdbMv3': 'trackerdb',
+  ...REGIONAL_ENGINES,
+  ...REGIONAL_COSMETICS_ENGINES,
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
@@ -92,15 +104,16 @@ const DNR = {
   'dnr-ads': 'ads',
   'dnr-tracking': 'tracking',
   'dnr-annoyances': 'annoyances',
-  'dnr-fixes': 'fixes',
   'dnr-ios': 'safari',
+  'dnr-fixes': 'fixes',
+  'dnr-fixes-safari': 'fixes-safari',
   'dnr-trackerdb': 'trackerdb',
   'dnr-trackerdb-safari': 'trackerdb-safari',
-  'dnr-fixes-safari': 'fixes-safari',
+  ...REGIONAL_ENGINES,
 };
 
 for (const [name, target] of Object.entries(DNR)) {
-  console.log(`Downloading "${name}"...`);
+  console.log(`Downloading DNR ruleset for "${name}"...`);
 
   const list = await fetch(
     `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,

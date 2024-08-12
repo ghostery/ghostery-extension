@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
 import { getUserOptions, setUserOptions } from '../utils/api.js';
+import { DEFAULT_REGIONS } from '../utils/regions.js';
 
 import Session from './session.js';
 
@@ -25,6 +26,7 @@ export const SYNC_OPTIONS = [
   'blockAds',
   'blockTrackers',
   'blockAnnoyances',
+  'regionalFilters',
   'customFilters',
   'experimentalFilters',
   'trackerWheel',
@@ -47,6 +49,12 @@ const Options = {
   blockAds: true,
   blockTrackers: true,
   blockAnnoyances: true,
+
+  // Regional filters
+  regionalFilters: {
+    enabled: DEFAULT_REGIONS.length > 0,
+    regions: DEFAULT_REGIONS.length ? DEFAULT_REGIONS : [String],
+  },
 
   // Advanced features
   customFilters: {

@@ -123,14 +123,10 @@ async function submitFilters(host) {
   }
 
   // Update engine
-  const { notSupportedFilters } = await chrome.runtime.sendMessage({
+  host.conversionErrors = await chrome.runtime.sendMessage({
     action: 'customFilters:engine',
     filters: host.input.text,
   });
-
-  host.convertsionErrors = notSupportedFilters.map(
-    (error) => `Filter not supported: '${error.filter}'`,
-  );
 
   // Save input
   await store.submit(host.input);
@@ -148,21 +144,21 @@ function update(host, event) {
 export default {
   options: store(Options),
   input: store(CustomFiltersInput, { draft: true }),
-  dnrRules: undefined,
   filters: ({ input, options }) =>
     parseFilters(store.ready(input) ? input.text : '', {
       allowTrusted: options.customFilters.trustedScriptlets,
     }),
-  convertsionErrors: undefined,
+  dnrRules: undefined,
+  conversionErrors: undefined,
   dnrErrors: undefined,
-  errors: ({ filters, dnrErrors = [], convertsionErrors = [] }) => [
+  errors: ({ filters, dnrErrors = [], conversionErrors = [] }) => [
     ...filters.errors,
     ...dnrErrors,
-    ...convertsionErrors,
+    ...conversionErrors,
   ],
   render: ({ input, filters, dnrRules, errors }) => html`
     <template layout="block">
-      <div layout="column gap" translate="no">
+      <div layout="column gap">
         ${store.ready(input) &&
         // prettier-ignore
         html`
@@ -172,15 +168,15 @@ export default {
       `}
         <div layout="row content:space-around">
           <ui-text type="body-xs" color="gray-400">
-            Network filters: ${filters.networkFilters.size}
+            Network Filters: ${filters.networkFilters.size}
           </ui-text>
           <ui-text type="body-xs" color="gray-400">
-            Cosmetic filters: ${filters.cosmeticFilters.size}
+            Cosmetic Filters: ${filters.cosmeticFilters.size}
           </ui-text>
         </div>
         ${!!errors.length &&
         html`
-          <div layout="column gap:0.5" translate="no">
+          <div layout="column gap:0.5">
             <ui-text type="label-s" color="danger-500">
               Errors (${errors.length}):
             </ui-text>
@@ -200,7 +196,7 @@ export default {
           disabled=${errors.length > 0}
           onclick="${update}"
         >
-          <button>Update filters</button>
+          <button>Update Filters</button>
         </ui-button>
 
         ${!!dnrRules?.length &&

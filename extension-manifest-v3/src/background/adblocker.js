@@ -29,23 +29,95 @@ let enabledEngines = [];
 let options = {};
 
 const setup = asyncSetup([
+  // Init engines
+  engines.init(engines.CUSTOM_ENGINE),
+  engines.init(engines.FIXES_ENGINE),
+  engines.init(engines.REGIONAL_ENGINE),
+  ENGINES.map(({ name }) => engines.init(name)),
+
+  // Update options & enabled engines
   observe((value) => {
     options = value;
 
-    enabledEngines = options.terms
-      ? [
-          // Add custom engine
-          engines.CUSTOM_ENGINE,
-          engines.FIXES_ENGINE,
-          // Main engines
-          ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
-        ]
-      : [];
+    if (options.terms) {
+      enabledEngines = [
+        // Add custom engine
+        engines.CUSTOM_ENGINE,
+        engines.FIXES_ENGINE,
+        // Main engines
+        ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
+      ];
+
+      if (options.regionalFilters.enabled) {
+        enabledEngines.push(engines.REGIONAL_ENGINE);
+      }
+    } else {
+      enabledEngines = [];
+    }
   }),
-  engines.init(engines.CUSTOM_ENGINE),
-  engines.init(engines.FIXES_ENGINE),
-  ENGINES.map(({ name }) => engines.init(name)),
+
+  // Experimental filters
+  observe('experimentalFilters', async (value, lastValue) => {
+    engines.setEnv('env_experimental', value);
+
+    // As engines on the server might have new filters, we force the update
+    // when value has changed from false to true
+    if (lastValue !== undefined && value) {
+      engines.updateAll().catch(() => null);
+    }
+  }),
+
+  // Regional filters
+  observe('regionalFilters', async ({ enabled, regions }, lastValue) => {
+    if (
+      // Pre-requirement for skipping update - engine must be initialized
+      // Otherwise it is a very first try to setup the engine
+      engines.get(engines.REGIONAL_ENGINE)?.lists.size !== 0 &&
+      // 1. Background script startup
+      (!lastValue ||
+        // 2. Exact comparison of the values
+        (lastValue.enabled === enabled &&
+          lastValue.regions.join() === regions.join()))
+    ) {
+      return;
+    }
+
+    // Clean previous regional engines
+    if (lastValue) {
+      await Promise.all(
+        lastValue.regions
+          .filter((id) => !regions.includes(id))
+          .map((id) => engines.clean(`lang-${id}`)),
+      );
+    }
+
+    // Schedule merge when one of the regional engines is updated
+    regions.forEach((id) => {
+      engines.addUpdateListener(`lang-${id}`, mergeRegionalEngines);
+    });
+
+    if (enabled && regions.length) {
+      mergeRegionalEngines(regions);
+    } else if (lastValue?.regions.length) {
+      engines.clean(engines.REGIONAL_ENGINE);
+      console.info('Regional filters: engine disabled');
+    }
+  }),
 ]);
+
+async function mergeRegionalEngines(regions) {
+  regions = regions || options.regionalFilters?.regions || [];
+
+  engines.replaceEngine(
+    engines.REGIONAL_ENGINE,
+    await Promise.all(regions.map((id) => engines.init(`lang-${id}`))),
+  );
+
+  console.info(
+    'Regional filters: engine updated with regions:',
+    regions.join(', '),
+  );
+}
 
 function adblockerInjectStylesWebExtension(
   styles,
@@ -113,7 +185,6 @@ async function adblockerOnMessage(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
-  // TODO: add TrackerDB
   enabledEngines.forEach((name) => {
     const engine = engines.get(name);
     if (!engine) return;

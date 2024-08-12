@@ -13,7 +13,9 @@ import './onboarding.js';
 
 import './autoconsent.js';
 import './adblocker.js';
+import './custom-filters.js';
 import './dnr.js';
+import './exceptions.js';
 import './paused.js';
 import './session.js';
 import './stats.js';
@@ -26,5 +28,3 @@ import './telemetry.js';
 import './reporting/index.js';
 
 import './devtools.js';
-import './custom-filters.js';
-import './exceptions.js';
