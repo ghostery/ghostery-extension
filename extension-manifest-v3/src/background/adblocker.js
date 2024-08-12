@@ -58,10 +58,11 @@ const setup = asyncSetup([
 
   // Experimental filters
   observe('experimentalFilters', async (value, lastValue) => {
-    await engines.setEnv('env_experimental', value);
+    engines.setEnv('env_experimental', value);
 
     // As engines on the server might have new filters, we force the update
-    if (value || lastValue) {
+    // when value has changed from false to true
+    if (lastValue !== undefined && value) {
       engines.updateAll().catch(() => null);
     }
   }),

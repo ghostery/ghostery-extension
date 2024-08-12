@@ -38,12 +38,15 @@ const ENV = new Map([
   ['env_experimental', false],
 ]);
 
-export async function setEnv(key, value) {
-  ENV.set(key, value);
+export function setEnv(key, value) {
+  if (ENV.has(key)) {
+    ENV.set(key, value);
 
-  for (const [name, engine] of engines.entries()) {
-    engine.updateEnv(ENV);
-    await saveToStorage(name);
+    for (const engine of engines.values()) {
+      engine.updateEnv(ENV);
+    }
+  } else {
+    throw Error(`Unknown environment variable: ${key}`);
   }
 }
 
