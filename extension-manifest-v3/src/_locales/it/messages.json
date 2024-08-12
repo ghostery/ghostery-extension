@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "Blocco effettuato su questo sito"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "Blocca ulteriori annunci, Tracker e pop-up specifici per la lingua dei siti web che visiti. Abilita solo le lingue di cui hai bisogno per evitare di rallentare il tuo browser."
+  },
   "cancel": {
     "message": "Annulla"
   },
@@ -158,21 +161,21 @@
   "copied_to_clipboard": {
     "message": "Copiato negli appunti"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "Filtri Cosmetici: $${0}"
+  },
   "country": {
     "message": "Paese"
   },
   "create_account": {
     "message": "Crea Account"
   },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "Crea le tue regole di blocco degli annunci per personalizzare la tua esperienza con Ghostery."
-  },
   "current_protection_status_for_@_0__": {
     "message": "Attuale stato di protezione per $${0}:",
     "description": "Current protection status for a tracker"
   },
   "custom_filters": {
-    "message": "Filtri personalizzati"
+    "message": "Filtri Personalizzati"
   },
   "customer_interaction": {
     "message": "Interazione Cliente",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "Inserire l'URL del sito web"
   },
+  "errors__@_0___": {
+    "message": "Errori ($${0}):"
+  },
   "essential": {
     "message": "Essenziali",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Estendi il blocco delle pubblicità di Ghostery anche ai motori di ricerca in pochi semplici passi."
   },
-  "experimental_ad_blocking_filters": {
-    "message": "Filtri Sperimentali Blocca Pubblicità"
+  "experimental_filters": {
+    "message": "Filtri Sperimentali"
   },
   "extensions": {
     "message": "Estensioni",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Facilita la creazione delle tue regole di blocco degli annunci per personalizzare la tua esperienza con Ghostery."
   },
   "for_more_information_read_our_full": {
     "message": "Per maggiori informazioni, visita il nostro sito"
@@ -393,6 +402,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Visita un sito web e scopri Ghostery in azione."
   },
+  "network_filters__@_0_": {
+    "message": "Filtri di Rete: $${0}"
+  },
   "never_consent": {
     "message": "Never-Cosent"
   },
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "Scopri di più su WhoTracks.Me"
+  },
+  "regional_filters": {
+    "message": "Filtri Regionali"
   },
   "renew_ghostery_for_full_protection": {
     "message": "rinnova GHOSTERY per una protezione completa"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "Non identificato",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "Aggiorna Filtri"
   },
   "urls_blocked": {
     "message": "URL bloccati"
