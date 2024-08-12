@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "Заблокировано на этом сайте"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "Блокирует дополнительные объявления, трекеры и всплывающие окна, специфичные для языка посещаемых вами веб-сайтов. Включайте только те языки, которые вам нужны, чтобы избежать замедления работы браузера."
+  },
   "cancel": {
     "message": "Отмена"
   },
@@ -158,14 +161,14 @@
   "copied_to_clipboard": {
     "message": "Скопировано в буфер обмена"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "Косметические фильтры: $${0}"
+  },
   "country": {
     "message": "Страна"
   },
   "create_account": {
     "message": "Создать учетную запись"
-  },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "Создайте свои правила блокировки рекламы для настройки Ghostery."
   },
   "current_protection_status_for_@_0__": {
     "message": "Текущий статус $${0}: ",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "Enter website URL"
   },
+  "errors__@_0___": {
+    "message": "Ошибки ($${0}):"
+  },
   "essential": {
     "message": "Важное",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Настройте блокировку рекламы от Ghostery для поисковых систем в несколько простых шагов."
   },
-  "experimental_ad_blocking_filters": {
-    "message": "Экспериментальные фильтры блокировки рекламы"
+  "experimental_filters": {
+    "message": "Экспериментальные фильтры"
   },
   "extensions": {
     "message": "Расширения",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Обеспечивает создание собственных правил блокировки рекламы для настройки вашего опыта использования Ghostery."
   },
   "for_more_information_read_our_full": {
     "message": "Для получения дополнительной информации прочтите"
@@ -393,6 +402,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Перейдите на любой сайт, чтобы увидеть, как работает Ghostery."
   },
+  "network_filters__@_0_": {
+    "message": "Сетевые фильтры: $${0}"
+  },
   "never_consent": {
     "message": "Never-Consent"
   },
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "Читайте больше на WhoTracks.Me"
+  },
+  "regional_filters": {
+    "message": "Региональные фильтры"
   },
   "renew_ghostery_for_full_protection": {
     "message": "возобновите GHOSTERY, чтобы добиться полной защиты"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "Неизвестно",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "Обновить фильтры"
   },
   "urls_blocked": {
     "message": "Заблокированные URL-адреса"
