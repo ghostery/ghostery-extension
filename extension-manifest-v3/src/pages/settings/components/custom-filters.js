@@ -10,209 +10,98 @@
  */
 
 import { html, store } from 'hybrids';
-import { detectFilterType, FilterType, CosmeticFilter } from '@cliqz/adblocker';
 
-import Options from '/store/options.js';
-import { createDocumentConverter } from '/utils/dnr-converter.js';
-import CustomFiltersInput from '../store/custom-filters-input.js';
-import { asyncAction } from './devtools.js';
+import CustomFilters from '/store/custom-filters.js';
 
-const convert = createDocumentConverter();
+async function update(host) {
+  host.result = undefined;
 
-class TrustedScriptletError extends Error {}
+  store.submit(host.input);
 
-// returns a scriptlet with encoded arguments
-// returns undefined if not a scriptlet
-// throws if scriptlet cannot be trusted
-function fixScriptlet(filter, allowTrusted) {
-  const cosmeticFilter = CosmeticFilter.parse(filter);
-
-  if (
-    !cosmeticFilter ||
-    !cosmeticFilter.isScriptInject() ||
-    !cosmeticFilter.selector
-  ) {
-    return null;
-  }
-
-  const parsedScript = cosmeticFilter.parseScript();
-
-  if (!parsedScript || !parsedScript.name) {
-    return null;
-  }
-
-  if (
-    !allowTrusted &&
-    (parsedScript.name === 'rpnt' ||
-      parsedScript.name === 'replace-node-text' ||
-      parsedScript.name.startsWith('trusted-'))
-  ) {
-    throw new TrustedScriptletError();
-  }
-
-  const [front] = filter.split(`#+js(${parsedScript.name}`);
-  const args = parsedScript.args.map((arg) => encodeURIComponent(arg));
-  return `${front}#+js(${[parsedScript.name, ...args].join(', ')})`;
-}
-
-function parseFilters(text = '', { allowTrusted }) {
-  return text
-    .split('\n')
-    .map((f) => f.trim())
-    .filter(Boolean)
-    .reduce(
-      (filters, filter) => {
-        const filterType = detectFilterType(filter, {
-          extendedNonSupportedTypes: true,
-        });
-        if (filterType === FilterType.NETWORK) {
-          filters.networkFilters.add(filter);
-        } else if (filterType === FilterType.COSMETIC) {
-          try {
-            const scriptlet = fixScriptlet(filter, allowTrusted);
-            filters.cosmeticFilters.add(scriptlet || filter);
-          } catch (e) {
-            if (e instanceof TrustedScriptletError) {
-              filters.errors.push(
-                `Trusted scriptlets are not allowed: '${filter}'`,
-              );
-            } else {
-              console.error(e);
-            }
-          }
-        } else if (filterType === FilterType.NOT_SUPPORTED_ADGUARD) {
-          filters.errors.push(`Filter not supported: '${filter}'`);
-        }
-        return filters;
-      },
-      {
-        networkFilters: new Set(),
-        cosmeticFilters: new Set(),
-        errors: [],
-      },
-    );
-}
-
-async function submitFilters(host) {
-  const { networkFilters } = host.filters;
-
-  // Update DNR
-  if (__PLATFORM__ !== 'firefox') {
-    const dnrRules = [];
-    const dnrErrors = [];
-    const results = await Promise.allSettled(
-      [...networkFilters].map((filter) => convert(filter)),
-    );
-
-    for (const result of results) {
-      dnrErrors.push(...result.value.errors);
-      dnrRules.push(...result.value.rules);
-    }
-
-    if (dnrErrors.length) {
-      host.dnrErrors = dnrErrors;
-      return;
-    }
-
-    await chrome.runtime.sendMessage({
-      action: 'customFilters:dnr',
-      dnrRules,
-    });
-
-    host.dnrRules = dnrRules;
-  }
-
-  // Update engine
-  host.conversionErrors = await chrome.runtime.sendMessage({
-    action: 'customFilters:engine',
-    filters: host.input.text,
+  host.result = await chrome.runtime.sendMessage({
+    action: 'customFilters:update',
+    input: host.input.text,
   });
-
-  // Save input
-  await store.submit(host.input);
-}
-
-function update(host, event) {
-  host.dnrErrors = [];
-
-  asyncAction(
-    event,
-    submitFilters(host).then(() => 'Filters updated'),
-  );
 }
 
 export default {
-  options: store(Options),
-  input: store(CustomFiltersInput, { draft: true }),
-  filters: ({ input, options }) =>
-    parseFilters(store.ready(input) ? input.text : '', {
-      allowTrusted: options.customFilters.trustedScriptlets,
-    }),
-  dnrRules: undefined,
-  conversionErrors: undefined,
-  dnrErrors: undefined,
-  errors: ({ filters, dnrErrors = [], conversionErrors = [] }) => [
-    ...filters.errors,
-    ...dnrErrors,
-    ...conversionErrors,
-  ],
-  render: ({ input, filters, dnrRules, errors }) => html`
+  storage: store(CustomFilters),
+  input: store(CustomFilters, { draft: true }),
+  result: undefined,
+  render: ({ input, storage, result }) => html`
     <template layout="block">
       <div layout="column gap">
-        ${store.ready(input) &&
-        // prettier-ignore
+        <gh-settings-input>
+          <textarea
+            rows="10"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            oninput="${html.set(input, 'text')}"
+            disabled="${!store.ready(input)}"
+            defaultValue="${store.ready(input) ? input.text : ''}"
+          ></textarea>
+        </gh-settings-input>
+
+        <ui-button
+          layout="self:start"
+          size="small"
+          type="outline"
+          disabled=${!store.ready(storage) || input.text === storage.text}
+          onclick="${update}"
+        >
+          <button>Update</button>
+        </ui-button>
+        ${result &&
         html`
-        <gh-settings-input>
-          <textarea rows="10" oninput="${html.set(input, 'text')}">${input.text}</textarea>
-        <gh-settings-input>
-      `}
-        <div layout="row content:space-around">
-          <ui-text type="body-xs" color="gray-400">
-            Network Filters: ${filters.networkFilters.size}
-          </ui-text>
-          <ui-text type="body-xs" color="gray-400">
-            Cosmetic Filters: ${filters.cosmeticFilters.size}
-          </ui-text>
-        </div>
-        ${!!errors.length &&
+          <div layout="column gap margin:top">
+            <div layout="column gap:0.5">
+              <ui-text type="label-s" color="gray-500">
+                Custom filters has been updated
+              </ui-text>
+              <ui-text type="body-s" color="gray-500">
+                ${__PLATFORM__ === 'firefox'
+                  ? html`Network filters: ${result.networkFilters || 0} `
+                  : html`
+                      <details translate="no">
+                        <summary>
+                          <ui-text
+                            type="body-s"
+                            layout="inline"
+                            color="gray-500"
+                          >
+                            DNR rules: ${result.dnrRules.length}
+                          </ui-text>
+                        </summary>
+                        <ui-text type="body-s" color="gray-500">
+                          ${result.dnrRules.map(
+                            (rule) =>
+                              html`<pre>${JSON.stringify(rule, null, 2)}</pre>`,
+                          )}
+                        </ui-text>
+                      </details>
+                    `}
+              </ui-text>
+              <ui-text type="body-s" color="gray-500">
+                Cosmetic filters: ${result.cosmeticFilters || 0}
+              </ui-text>
+            </div>
+          </div>
+        `}
+        ${!!result?.errors.length &&
         html`
           <div layout="column gap:0.5">
             <ui-text type="label-s" color="danger-500">
-              Errors (${errors.length}):
+              Errors (${result.errors.length})
             </ui-text>
-            ${errors.map(
+            ${result?.errors.map(
               (error) =>
                 html`<ui-text type="body-xs" color="danger-500">
                   ${error}
                 </ui-text>`,
             )}
           </div>
-        `}
-
-        <ui-button
-          layout="self:start"
-          size="small"
-          type="outline"
-          disabled=${errors.length > 0}
-          onclick="${update}"
-        >
-          <button>Update Filters</button>
-        </ui-button>
-
-        ${!!dnrRules?.length &&
-        html`
-          <details translate="no">
-            <summary>
-              <ui-text type="label-s" layout="inline">
-                DNR Output (${dnrRules.length})
-              </ui-text>
-            </summary>
-            <ui-text type="body-s" color="gray-500">
-              ${dnrRules.map(
-                (rule) => html`<pre>${JSON.stringify(rule, null, 2)}</pre>`,
-              )}
-            </ui-text>
-          </details>
         `}
       </div>
     </template>

@@ -41,8 +41,6 @@ const setup = asyncSetup([
 
     if (options.terms) {
       enabledEngines = [
-        // Add custom engine
-        engines.CUSTOM_ENGINE,
         engines.FIXES_ENGINE,
         // Main engines
         ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
@@ -50,6 +48,10 @@ const setup = asyncSetup([
 
       if (options.regionalFilters.enabled) {
         enabledEngines.push(engines.REGIONAL_ENGINE);
+      }
+
+      if (options.customFilters.enabled) {
+        enabledEngines.push(engines.CUSTOM_ENGINE);
       }
     } else {
       enabledEngines = [];
@@ -73,11 +75,8 @@ const setup = asyncSetup([
       // Pre-requirement for skipping update - engine must be initialized
       // Otherwise it is a very first try to setup the engine
       engines.get(engines.REGIONAL_ENGINE)?.lists.size !== 0 &&
-      // 1. Background script startup
-      (!lastValue ||
-        // 2. Exact comparison of the values
-        (lastValue.enabled === enabled &&
-          lastValue.regions.join() === regions.join()))
+      // Background script startup
+      !lastValue
     ) {
       return;
     }

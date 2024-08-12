@@ -18,12 +18,16 @@ export function createDocumentConverter() {
 
     window.addEventListener('message', (event) => {
       const requestId = event.data.rules.shift().condition.urlFilter;
+      let { rules, errors } = event.data;
 
-      if (__PLATFORM__ === 'safari') {
-        event.data.rules = event.data.rules.map(getCompatRule).filter(Boolean);
-      }
+      requests.get(requestId)({
+        rules:
+          __PLATFORM__ === 'safari'
+            ? rules.map(getCompatRule).filter(Boolean)
+            : rules,
+        errors: errors.map((e) => `DNR: ${e.message}`),
+      });
 
-      requests.get(requestId)(event.data);
       requests.delete(requestId);
     });
 

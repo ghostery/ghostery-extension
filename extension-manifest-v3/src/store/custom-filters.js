@@ -11,16 +11,15 @@
 
 import { store } from 'hybrids';
 
-const CustomFiltersInput = {
+export default {
   text: '',
   [store.connect]: {
+    cache: false,
     async get() {
       const { customFiltersInput } = await chrome.storage.local.get([
         'customFiltersInput',
       ]);
-      return {
-        text: customFiltersInput,
-      };
+      return { text: customFiltersInput };
     },
     async set(_, { text }) {
       await chrome.storage.local.set({ customFiltersInput: text });
@@ -28,5 +27,3 @@ const CustomFiltersInput = {
     },
   },
 };
-
-export default CustomFiltersInput;
