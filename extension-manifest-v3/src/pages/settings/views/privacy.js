@@ -39,13 +39,15 @@ function updateGlobalPause({ options }, value, lastValue) {
 
 function setRegion(id) {
   return ({ options }, event) => {
-    const regions = event.target.checked
-      ? options.regionalFilters.regions.concat(id)
-      : options.regionalFilters.regions.filter((i) => i !== id);
+    const set = new Set(options.regionalFilters.regions);
 
-    regions.sort();
+    if (event.target.checked) {
+      set.add(id);
+    } else {
+      set.delete(id);
+    }
 
-    store.set(options, { regionalFilters: { regions } });
+    store.set(options, { regionalFilters: { regions: [...set].sort() } });
   };
 }
 
