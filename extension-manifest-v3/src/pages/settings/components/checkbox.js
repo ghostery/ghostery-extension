@@ -11,8 +11,11 @@
 
 import { html } from 'hybrids';
 
-function clickSlottedElement(host) {
-  host.render().querySelector('slot').assignedElements()[0].click();
+function clickSlottedElement(host, event) {
+  const target = host.render().querySelector('slot').assignedElements()[0];
+  if (event.target !== target) {
+    target.click();
+  }
 }
 
 export default {
