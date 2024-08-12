@@ -84,20 +84,23 @@ const Options = {
 
   [store.connect]: {
     async get() {
-      let { options = {}, optionsVersion = 0 } = await chrome.storage.local.get(
-        ['options', 'optionsVersion'],
-      );
+      let { options, optionsVersion } = await chrome.storage.local.get([
+        'options',
+        'optionsVersion',
+      ]);
 
-      // Migrate options
-      if (optionsVersion < OPTIONS_VERSION) {
+      // Try to migrate options from v8 if options
+      // are not set (the initial get) for supported platforms
+      if (!options) {
+        options = __PLATFORM__ !== 'safari' ? await migrateFromV8() : {};
+      }
+
+      // Set version to the latest one if it is not set
+      // or trigger migration for older versions
+      if (!optionsVersion) {
+        chrome.storage.local.set({ optionsVersion: OPTIONS_VERSION });
+      } else if (optionsVersion < OPTIONS_VERSION) {
         const keys = [];
-
-        if (optionsVersion < 1) {
-          // Migrate from Extension v8
-          if (__PLATFORM__ !== 'safari') {
-            options = await migrateFromV8();
-          }
-        }
 
         if (optionsVersion < 2) {
           // Migrate 'paused' array to record
@@ -149,7 +152,7 @@ const Options = {
         try {
           await fn(options, prevOptions);
         } catch (e) {
-          console.error(`Error while observing options: `, e);
+          console.error(`Options: error while observing options: `, e);
         }
       });
     },
@@ -226,7 +229,7 @@ export async function sync(options, keys) {
       await store.set(Options, { revision });
     }
   } catch (e) {
-    console.error(`Error while syncing options: `, e);
+    console.error(`Options: error while syncing options: `, e);
   }
 }
 
@@ -283,9 +286,11 @@ async function migrateFromV8() {
       ]);
     }
 
+    console.info(`Options: successfully migrated options from v8`, options);
+
     return options;
   } catch (e) {
-    console.error(`Error while migrating data`, e);
+    console.error(`Options: error while migrating options`, e);
     return {};
   }
 }
@@ -314,7 +319,7 @@ export async function observe(...args) {
     // wait for the callback to be fired
     await wrapper(options);
   } catch (e) {
-    console.error(`Error while observing options: `, e);
+    console.error(`Options: error while observing options: `, e);
   }
 
   observers.add(wrapper);
