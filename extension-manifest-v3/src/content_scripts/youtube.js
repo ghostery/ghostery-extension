@@ -11,7 +11,6 @@
 
 import { showIframe, closeIframe } from '@ghostery/ui/iframe';
 import detectWall from '@ghostery/ui/youtube/wall';
-import { isPaused } from '/store/options';
 
 async function isFeatureDisabled() {
   const { options, youtubeDontAsk } = await chrome.storage.local.get([
@@ -25,7 +24,10 @@ async function isFeatureDisabled() {
     // Terms not accepted or paused
     !options ||
     !options.terms ||
-    isPaused(options, 'youtube.com')
+    // IMPORTANT: to avoid referencing the file, the `GLOBAL_PAUSE_ID`
+    // is used as is, instead from the `/store/options.js` file
+    !!options.paused['<all_urls>'] ||
+    !!options.paused['youtube.com']
   ) {
     return true;
   }
