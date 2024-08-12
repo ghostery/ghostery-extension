@@ -226,9 +226,11 @@ async function update(name) {
         ? 'trackerdbMv3'
         : `dnr${__PLATFORM__ === 'firefox' ? '' : '-cosmetics'}-${name}`;
 
-    const data = await fetch(
-      `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`,
-    )
+    const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
+
+    console.info(`Updating engine "${name}" from ${listURL}`);
+
+    const data = await fetch(listURL)
       .then(check)
       .then((res) => res.json());
 
