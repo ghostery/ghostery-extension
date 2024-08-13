@@ -501,7 +501,6 @@ if (__PLATFORM__ === 'firefox') {
             } else if (match === true) {
               request.blocked = true;
               result = { cancel: true };
-              break;
             }
           }
         }
