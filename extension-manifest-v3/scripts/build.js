@@ -168,35 +168,35 @@ if (manifest.declarative_net_request?.rule_resources) {
       );
     }
   }
-}
 
-// copy redirect rule resources
-shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources/redirects'));
-shelljs.cp(
-  '-r',
-  resolve(options.srcDir, 'rule_resources/redirects', '*'),
-  resolve(options.outDir, 'rule_resources/redirects'),
-);
-
-// append web_accessible_resources
-const redirectResources = readdirSync(
-  resolve(options.srcDir, 'rule_resources/redirects'),
-);
-
-if (manifest.manifest_version === 3) {
-  manifest.web_accessible_resources.push({
-    resources: redirectResources.map((filename) =>
-      join('rule_resources/redirects', filename),
-    ),
-    all_frames: true,
-    matches: ['<all_urls>'],
-  });
-} else {
-  redirectResources.forEach((filename) =>
-    manifest.web_accessible_resources.push(
-      join('rule_resources/redirects', filename),
-    ),
+  // copy redirect rule resources
+  shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources/redirects'));
+  shelljs.cp(
+    '-r',
+    resolve(options.srcDir, 'rule_resources/redirects', '*'),
+    resolve(options.outDir, 'rule_resources/redirects'),
   );
+
+  // append web_accessible_resources
+  const redirectResources = readdirSync(
+    resolve(options.srcDir, 'rule_resources/redirects'),
+  );
+
+  if (manifest.manifest_version === 3) {
+    manifest.web_accessible_resources.push({
+      resources: redirectResources.map((filename) =>
+        join('rule_resources/redirects', filename),
+      ),
+      all_frames: true,
+      matches: ['<all_urls>'],
+    });
+  } else {
+    redirectResources.forEach((filename) =>
+      manifest.web_accessible_resources.push(
+        join('rule_resources/redirects', filename),
+      ),
+    );
+  }
 }
 
 // generate license file
