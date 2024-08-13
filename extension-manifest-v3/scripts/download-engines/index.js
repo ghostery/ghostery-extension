@@ -169,6 +169,8 @@ const allowedResourceExtensions = [
   'xml',
   'txt',
   'json',
+  'png',
+  'gif',
   'empty',
 ];
 
