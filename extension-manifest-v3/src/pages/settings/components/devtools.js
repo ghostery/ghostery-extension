@@ -88,7 +88,7 @@ export default {
             </div>
           </div>
           <ui-line></ui-line>
-          ${chrome.declarativeNetRequest &&
+          ${__PLATFORM__ !== 'firefox' &&
           html`
             <div layout="column gap items:start" translate="no">
               <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
