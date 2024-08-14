@@ -11,7 +11,7 @@
 
 let documentConverter;
 export function createDocumentConverter() {
-  const requests = new Map();
+  const requestResolvers = new Map();
 
   function createIframe() {
     if (documentConverter) return documentConverter;
@@ -20,7 +20,9 @@ export function createDocumentConverter() {
       const requestId = event.data.rules.shift().condition.urlFilter;
       let { rules, errors } = event.data;
 
-      requests.get(requestId)({
+      const resolve = requestResolvers.get(requestId);
+
+      resolve({
         rules:
           __PLATFORM__ === 'safari'
             ? rules.map(getCompatRule).filter(Boolean)
@@ -28,7 +30,7 @@ export function createDocumentConverter() {
         errors: errors.map((e) => `DNR: ${e.message}`),
       });
 
-      requests.delete(requestId);
+      requestResolvers.delete(requestId);
     });
 
     const iframe = document.createElement('iframe');
@@ -52,7 +54,7 @@ export function createDocumentConverter() {
     const requestId = `request${requestCount++}`;
 
     return new Promise((resolve) => {
-      requests.set(requestId, resolve);
+      requestResolvers.set(requestId, resolve);
 
       iframe.contentWindow.postMessage(
         {

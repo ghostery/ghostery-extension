@@ -318,9 +318,11 @@ async function migrateFromV8() {
   }
 }
 
-function isEqual(a, b) {
+function isOptionEqual(a, b) {
   return Object.keys(a).every((key) =>
-    typeof a[key] === 'object' ? isEqual(a[key], b[key]) : a[key] === b[key],
+    typeof a[key] === 'object'
+      ? isOptionEqual(a[key], b[key])
+      : a[key] === b[key],
   );
 }
 
@@ -333,7 +335,7 @@ export async function observe(...args) {
 
     if (typeof Options[property] === 'object') {
       wrapper = async (options) => {
-        if (value === undefined || !isEqual(options[property], value)) {
+        if (value === undefined || !isOptionEqual(options[property], value)) {
           const prevValue = value;
           value = options[property];
           return await fn(value, prevValue);

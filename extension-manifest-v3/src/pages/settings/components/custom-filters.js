@@ -48,7 +48,8 @@ export default {
           layout="self:start"
           size="small"
           type="outline"
-          disabled=${!store.ready(storage) || input.text === storage.text}
+          disabled=${!store.ready(storage, input) ||
+          input.text === storage.text}
           onclick="${update}"
         >
           <button>Update</button>
@@ -92,12 +93,12 @@ export default {
         ${!!result?.errors.length &&
         html`
           <div layout="column gap:0.5">
-            <ui-text type="label-s" color="danger-500">
+            <ui-text type="label-s" color="gray-500">
               Errors (${result.errors.length})
             </ui-text>
             ${result?.errors.map(
               (error) =>
-                html`<ui-text type="body-xs" color="danger-500">
+                html`<ui-text type="body-s" color="danger-500">
                   ${error}
                 </ui-text>`,
             )}

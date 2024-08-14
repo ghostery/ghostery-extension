@@ -6,7 +6,7 @@
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0
+w * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { store } from 'hybrids';
 import {
@@ -24,6 +24,8 @@ import * as engines from '/utils/engines.js';
 
 import Options, { observe } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
+
+export const customFiltersEngine = engines.init(engines.CUSTOM_ENGINE);
 
 const convert =
   __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
@@ -66,42 +68,45 @@ function fixScriptlet(filter, trustedScriptlets) {
   return `${front}#+js(${[parsedScript.name, ...args].join(', ')})`;
 }
 
-function parseInput(text = '', { trustedScriptlets }) {
-  return text
-    .split('\n')
-    .map((f) => f.trim())
-    .filter(Boolean)
-    .reduce(
-      (filters, filter) => {
-        const filterType = detectFilterType(filter, {
-          extendedNonSupportedTypes: true,
-        });
-        if (filterType === FilterType.NETWORK) {
-          filters.networkFilters.add(filter);
-        } else if (filterType === FilterType.COSMETIC) {
-          try {
-            const scriptlet = fixScriptlet(filter, trustedScriptlets);
-            filters.cosmeticFilters.add(scriptlet || filter);
-          } catch (e) {
-            if (e instanceof TrustedScriptletError) {
-              filters.errors.push(
-                `Trusted scriptlets are not allowed: '${filter}'`,
-              );
-            } else {
-              console.error(e);
-            }
+function normalizeFilters(text = '', { trustedScriptlets }) {
+  const rows = text.split('\n').map((f) => f.trim());
+
+  return rows.reduce(
+    (filters, filter, index) => {
+      if (!filter) return filters;
+
+      const filterType = detectFilterType(filter, {
+        extendedNonSupportedTypes: true,
+      });
+      if (filterType === FilterType.NETWORK) {
+        filters.networkFilters.add(filter);
+      } else if (filterType === FilterType.COSMETIC) {
+        try {
+          const scriptlet = fixScriptlet(filter, trustedScriptlets);
+          filters.cosmeticFilters.add(scriptlet || filter);
+        } catch (e) {
+          if (e instanceof TrustedScriptletError) {
+            filters.errors.push(
+              `Trusted scriptlets are not allowed (${index + 1}): ${filter}`,
+            );
+          } else {
+            console.error(e);
           }
-        } else if (filterType === FilterType.NOT_SUPPORTED_ADGUARD) {
-          filters.errors.push(`Filter not supported: '${filter}'`);
         }
-        return filters;
-      },
-      {
-        networkFilters: new Set(),
-        cosmeticFilters: new Set(),
-        errors: [],
-      },
-    );
+      } else if (
+        filterType === FilterType.NOT_SUPPORTED ||
+        filterType === FilterType.NOT_SUPPORTED_ADGUARD
+      ) {
+        filters.errors.push(`Filter not supported (${index + 1}): ${filter}`);
+      }
+      return filters;
+    },
+    {
+      networkFilters: new Set(),
+      cosmeticFilters: new Set(),
+      errors: [],
+    },
+  );
 }
 
 async function updateDNRRules(dnrRules) {
@@ -117,24 +122,23 @@ async function updateDNRRules(dnrRules) {
   }
 
   if (dnrRules.length) {
+    dnrRules = dnrRules.map((rule, index) => ({
+      ...rule,
+      id: 1000000 + index,
+    }));
+
     await chrome.declarativeNetRequest.updateDynamicRules({
-      addRules: dnrRules.map((rule, index) => ({
-        ...rule,
-        id: 1000000 + index,
-      })),
+      addRules: dnrRules,
     });
 
     console.info(`Custom Filters: DNR updated with rules: ${dnrRules.length}`);
   }
+
+  return dnrRules;
 }
 
 function updateEngine(text) {
-  const {
-    networkFilters,
-    cosmeticFilters,
-    preprocessors,
-    notSupportedFilters,
-  } = parseFilters(text);
+  const { networkFilters, cosmeticFilters, preprocessors } = parseFilters(text);
 
   engines.createEngine(engines.CUSTOM_ENGINE, {
     cosmeticFilters,
@@ -143,35 +147,34 @@ function updateEngine(text) {
   });
 
   console.info(
-    `Custom Filters: Engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
+    `Custom Filters: engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
   );
 
   return {
     networkFilters: networkFilters.length,
     cosmeticFilters: cosmeticFilters.length,
-    errors: notSupportedFilters.map(
-      (msg) => `Filter not supported: '${msg.filter}'`,
-    ),
   };
 }
 async function update(text, { trustedScriptlets }) {
-  const parseResult = parseInput(text, { trustedScriptlets });
+  const { networkFilters, cosmeticFilters, errors } = normalizeFilters(text, {
+    trustedScriptlets,
+  });
 
-  const engineResult = updateEngine(
+  const result = updateEngine(
     [
-      ...(__PLATFORM__ === 'firefox' ? parseResult.networkFilters : []),
-      ...parseResult.cosmeticFilters,
+      ...(__PLATFORM__ === 'firefox' ? networkFilters : []),
+      ...cosmeticFilters,
     ].join('\n'),
   );
 
-  const errors = [...parseResult.errors, ...engineResult.errors];
-  const dnrRules = [];
+  result.errors = errors;
 
   if (__PLATFORM__ !== 'firefox') {
     const dnrResult = await Promise.allSettled(
-      [...parseResult.networkFilters].map((filter) => convert(filter)),
+      [...networkFilters].map((filter) => convert(filter)),
     );
 
+    const dnrRules = [];
     for (const result of dnrResult) {
       if (result.value.errors?.length) {
         errors.push(...result.value.errors);
@@ -180,22 +183,30 @@ async function update(text, { trustedScriptlets }) {
       dnrRules.push(...result.value.rules);
     }
 
-    updateDNRRules(dnrRules);
+    result.dnrRules = await updateDNRRules(dnrRules);
   }
 
-  return {
-    networkFilters: engineResult.networkFilters,
-    cosmeticFilters: engineResult.cosmeticFilters,
-    dnrRules,
-    errors,
-  };
+  return result;
 }
 
 observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
-  if (!lastValue) return;
+  // Background startup
+  if (!lastValue) {
+    const engine = await customFiltersEngine;
+    const { networkFilters, cosmeticFilters } = engine.getFilters();
 
-  const { text } = await store.resolve(CustomFilters);
-  update(enabled ? text : '', { trustedScriptlets });
+    // If there are filters already loaded, we can assume that
+    // filters are already added to the engine. This is specially
+    // for the case, when custom engine is reloaded because
+    // of the new adblocker version
+    if (networkFilters.length || cosmeticFilters.length) {
+      return;
+    }
+  }
+
+  update(enabled ? (await store.resolve(CustomFilters)).text : '', {
+    trustedScriptlets,
+  });
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
