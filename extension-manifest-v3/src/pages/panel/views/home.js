@@ -93,6 +93,10 @@ function setStatsType(host, event) {
   store.set(host.options, { panel: { statsType: type } });
 }
 
+function tail(hostname) {
+  return hostname.length > 24 ? '...' + hostname.slice(-24) : hostname;
+}
+
 export default {
   [router.connect]: { stack: [Navigation, TrackerDetails, ProtectionStatus] },
   options: store(Options),
@@ -109,7 +113,28 @@ export default {
         ${options.terms &&
         html`
           <ui-panel-header>
-            ${store.ready(stats) && stats.hostname}
+            ${stats.hostname &&
+            (options.terms
+              ? html`
+                  <ui-action>
+                    <a
+                      href="${chrome.runtime.getURL(
+                        '/pages/settings/index.html#@gh-settings-website-details?domain=' +
+                          stats.hostname,
+                      )}"
+                      onclick="${openTabWithUrl}"
+                      layout="row gap items:center"
+                    >
+                      <ui-text type="label-m">${tail(stats.hostname)}</ui-text>
+                      <ui-icon
+                        name="settings"
+                        layout="size:2"
+                        color="gray-400"
+                      ></ui-icon>
+                    </a>
+                  </ui-action>
+                `
+              : tail(stats.hostname))}
             <ui-action slot="icon">
               <a href="https://www.ghostery.com" onclick="${openTabWithUrl}">
                 <ui-icon name="logo"></ui-icon>
@@ -178,24 +203,6 @@ export default {
                   layout="margin:1:1.5"
                   layout@390px="margin:1.5:1.5:2"
                 >
-                  ${options.terms &&
-                  html`
-                    <ui-action slot="header">
-                      <a
-                        href="${chrome.runtime.getURL(
-                          '/pages/settings/index.html#@gh-settings-website-details?domain=' +
-                            stats.hostname,
-                        )}"
-                        onclick="${openTabWithUrl}"
-                      >
-                        <ui-icon
-                          name="settings"
-                          layout="size:2"
-                          color="gray-500"
-                        ></ui-icon>
-                      </a>
-                    </ui-action>
-                  `}
                 </ui-panel-stats>
                 ${!paused &&
                 !globalPause &&
