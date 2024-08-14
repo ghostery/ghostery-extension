@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "在此网站上被阻止"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "阻止特定于您访问的网站语言的额外广告、跟踪器和弹出窗口。仅启用您需要的语言，以避免减慢浏览器速度。."
+  },
   "cancel": {
     "message": "取消"
   },
@@ -158,14 +161,14 @@
   "copied_to_clipboard": {
     "message": "已复制到剪贴板"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "化妆过滤器：$${0}"
+  },
   "country": {
     "message": "国家/地区"
   },
   "create_account": {
     "message": "创建帐户"
-  },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "创建您自己的广告拦截规则，以自定义您的Ghostery体验。."
   },
   "current_protection_status_for_@_0__": {
     "message": "目前对于 $${0} 的保护功能状态：",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "输入网站 URL"
   },
+  "errors__@_0___": {
+    "message": "错误 ($${0}):"
+  },
   "essential": {
     "message": "基本",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需简单几步，即可将 Ghostery 广告拦截功能扩展到搜索引擎。"
   },
-  "experimental_ad_blocking_filters": {
-    "message": "实验性广告拦截过滤器"
+  "experimental_filters": {
+    "message": "实验性过滤器"
   },
   "extensions": {
     "message": "扩展",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "帮助您创建自己的广告拦截规则，以定制您的Ghostery体验。."
   },
   "for_more_information_read_our_full": {
     "message": "欲了解更多信息，请阅读我们的完整"
@@ -360,7 +369,7 @@
     "message": "Ghostery 跟踪器和广告拦截器 - 隐私广告拦截器"
   },
   "manifest_short_description": {
-    "message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。"
+    "message": "一个强大的隐私扩展，能够屏蔽广告、防止追踪器并加速网站加载"
   },
   "menu": {
     "message": "菜单"
@@ -392,6 +401,9 @@
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "导航到一个网站，查看 Ghostery 的运行情况。"
+  },
+  "network_filters__@_0_": {
+    "message": "网络过滤器：$${0}"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
+  },
+  "regional_filters": {
+    "message": "区域过滤器"
   },
   "renew_ghostery_for_full_protection": {
     "message": "续订 GHOSTERY 以获得全面保护"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "未识别",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "更新过滤器"
   },
   "urls_blocked": {
     "message": "已拦截 URL"

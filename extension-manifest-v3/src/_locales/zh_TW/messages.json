@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "在這個網站被封鎖"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "阻擋您所訪問網站語言特定的額外廣告、追蹤器和彈出視窗。僅啟用您需要的語言，以避免減慢瀏覽器速度。."
+  },
   "cancel": {
     "message": "取消"
   },
@@ -158,14 +161,14 @@
   "copied_to_clipboard": {
     "message": "複製到剪貼簿"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "化妝過濾器：$${0}"
+  },
   "country": {
     "message": "國家"
   },
   "create_account": {
     "message": "創建帳戶"
-  },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "建立您自己的廣告攔截規則，以自訂您的Ghostery使用體驗。."
   },
   "current_protection_status_for_@_0__": {
     "message": "目前對 $${0} 的保護狀態：",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "輸入網站網址"
   },
+  "errors__@_0___": {
+    "message": "錯誤 ($${0}):"
+  },
   "essential": {
     "message": "基本內容",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "只需幾個簡單步驟，即可將 Ghostery 廣告攔截功能擴展到搜尋引擎。"
   },
-  "experimental_ad_blocking_filters": {
-    "message": "實驗性廣告阻擋過濾器"
+  "experimental_filters": {
+    "message": "實驗性過濾器"
   },
   "extensions": {
     "message": "擴展",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "協助您創建自己的廣告攔截規則，以自訂您的Ghostery體驗。."
   },
   "for_more_information_read_our_full": {
     "message": "如欲了解更多訊息，請閱讀我們的全文"
@@ -360,7 +369,7 @@
     "message": "Ghostery 追蹤器和廣告攔截器 - 隱私 AdBlock"
   },
   "manifest_short_description": {
-    "message": "Ghostery是一個強效的隱私擴增功能。攔截廣告、制止追蹤器及加快網頁運行。"
+    "message": "強大的隱私擴充功能，能阻擋廣告、防止追蹤器並加速網站載入"
   },
   "menu": {
     "message": "選單"
@@ -392,6 +401,9 @@
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "導覽到一個網站，親眼查看 Ghostery 的實際運作。"
+  },
+  "network_filters__@_0_": {
+    "message": "網路過濾器：$${0}"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上繼續閱讀"
+  },
+  "regional_filters": {
+    "message": "區域過濾器"
   },
   "renew_ghostery_for_full_protection": {
     "message": "更新 GHOSTERY 以獲得全面防護"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "不明",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "更新過濾器"
   },
   "urls_blocked": {
     "message": "已封鎖的 URL"

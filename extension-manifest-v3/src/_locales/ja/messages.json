@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "このウェブサイトでブロック済み"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "追加の広告、トラッカー、ポップアップを、訪問するウェブサイトの言語に特化してブロックします。ブラウザの速度低下を避けるために、必要な言語のみを有効にしてください。."
+  },
   "cancel": {
     "message": "キャンセル"
   },
@@ -158,14 +161,14 @@
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "コスメティックフィルター: $${0}"
+  },
   "country": {
     "message": "国"
   },
   "create_account": {
     "message": "アカウントを作成"
-  },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "自分の広告ブロックルールを作成して、Ghosteryの体験を自分好みにカスタマイズしましょう。."
   },
   "current_protection_status_for_@_0__": {
     "message": "$${0}の現在の保護ステータス: ",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "ウェブサイトのURLを入力"
   },
+  "errors__@_0___": {
+    "message": "エラー ($${0}):"
+  },
   "essential": {
     "message": "必需",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "簡単なステップで、Ghosteryの広告ブロッキングを検索エンジンへと拡張できます。"
   },
-  "experimental_ad_blocking_filters": {
-    "message": "実験的な広告ブロックフィルター"
+  "experimental_filters": {
+    "message": "実験的フィルター"
   },
   "extensions": {
     "message": "拡張機能",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Ghosteryの体験をカスタマイズするために、自分自身の広告ブロックルールの作成を支援します。."
   },
   "for_more_information_read_our_full": {
     "message": "詳細はこちらをご覧ください"
@@ -360,7 +369,7 @@
     "message": "Ghosteryトラッカー＆広告ブロック - プライバシー広告ブロック"
   },
   "manifest_short_description": {
-    "message": "Ghosteryは強力なプライバシー拡張機能です。広告をブロックし、トラッカーを阻止し、ウェブサイトを高速化します。"
+    "message": "強力なプライバシー拡張機能で、広告をブロックし、トラッカーを防ぎ、ウェブサイトの読み込みを高速化します。"
   },
   "menu": {
     "message": "メニュー"
@@ -392,6 +401,9 @@
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "ホームページにアクセスして、Ghosteryの動作を確認しましょう。"
+  },
+  "network_filters__@_0_": {
+    "message": "ネットワークフィルター: $${0}"
   },
   "never_consent": {
     "message": "決して同意しない"
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
+  },
+  "regional_filters": {
+    "message": "地域フィルター"
   },
   "renew_ghostery_for_full_protection": {
     "message": "Ghosteryを更新して包括的な保護機能を利用する"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "未知",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "フィルターを更新"
   },
   "urls_blocked": {
     "message": "ブロック済みURL"

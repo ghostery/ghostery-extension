@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "이 웹 사이트에서 차단됨"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "웹사이트 언어에 맞춘 추가 광고, 추적기 및 팝업을 차단합니다. 브라우저 속도를 저하시키지 않도록 필요한 언어만 활성화하세요."
+  },
   "cancel": {
     "message": "취소"
   },
@@ -158,14 +161,14 @@
   "copied_to_clipboard": {
     "message": "클립보드에 복사됨"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "코스메틱 필터: $${0}"
+  },
   "country": {
     "message": "국가"
   },
   "create_account": {
     "message": "새 계정 만들기"
-  },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "광고 차단 규칙을 직접 만들고 Ghostery를 맞춤으로 사용해보세요."
   },
   "current_protection_status_for_@_0__": {
     "message": "$${0}의 현재 보호 상태",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "웹 사이트 URL 입력"
   },
+  "errors__@_0___": {
+    "message": "오류 ($${0}):"
+  },
   "essential": {
     "message": "필수 요소",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "몇 번의 쉬운 단계만으로 검색 엔진에 Ghostery 광고 차단 기능을 확장할 수 있습니다."
   },
-  "experimental_ad_blocking_filters": {
-    "message": "실험적인 광고 차단 필터"
+  "experimental_filters": {
+    "message": "실험 필터"
   },
   "extensions": {
     "message": "확장 프로그램",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Ghostery 경험을 맞춤화하기 위해 자신만의 광고 차단 규칙을 생성할 수 있도록 지원합니다."
   },
   "for_more_information_read_our_full": {
     "message": "더 많은 정보를 보려면 다음을 읽어보세요 "
@@ -360,7 +369,7 @@
     "message": "Ghostery 트래커 & 광고 차단기 - 개인정보 보호 광고 차단기"
   },
   "manifest_short_description": {
-    "message": "Ghostery는 강력한 개인정보 보호 확장 프로그램입니다. 광고를 차단, 추적을 중단하고 웹 사이트 속도를 빠르게 합니다."
+    "message": "강력한 개인정보 보호 확장 프로그램으로 광고를 차단하고, 추적기를 방지하며, 웹사이트 로딩 속도를 가속화합니다"
   },
   "menu": {
     "message": "메뉴"
@@ -392,6 +401,9 @@
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Ghostery가 동작하는지 확인하려면 웹 사이트로 이동하세요."
+  },
+  "network_filters__@_0_": {
+    "message": "네트워크 필터: $${0}"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me에서 더 보기"
+  },
+  "regional_filters": {
+    "message": "지역 필터"
   },
   "renew_ghostery_for_full_protection": {
     "message": "모든 보호 기능을 사용하려면 Ghostery 구독을 다시 시작하세요"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "확인되지 않음",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "필터 업데이트"
   },
   "urls_blocked": {
     "message": "차단된 URL"

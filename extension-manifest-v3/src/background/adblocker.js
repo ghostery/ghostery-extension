@@ -28,12 +28,15 @@ import { getException } from './exceptions.js';
 let enabledEngines = [];
 let options = {};
 
+const regionalFiltersEngine = engines.init(engines.REGIONAL_ENGINE);
+
 const setup = asyncSetup([
   // Init engines
   engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
-  engines.init(engines.REGIONAL_ENGINE),
   ENGINES.map(({ name }) => engines.init(name)),
+  // Regional filters engine is initialized separately for direct access
+  regionalFiltersEngine,
 
   // Update options & enabled engines
   observe((value) => {
@@ -71,10 +74,12 @@ const setup = asyncSetup([
 
   // Regional filters
   observe('regionalFilters', async ({ enabled, regions }, lastValue) => {
+    const engine = await regionalFiltersEngine;
+
     if (
       // Pre-requirement for skipping update - engine must be initialized
       // Otherwise it is a very first try to setup the engine
-      engines.get(engines.REGIONAL_ENGINE)?.lists.size !== 0 &&
+      engine.lists.size &&
       // Background script startup
       !lastValue
     ) {
@@ -83,11 +88,9 @@ const setup = asyncSetup([
 
     // Clean previous regional engines
     if (lastValue) {
-      await Promise.all(
-        lastValue.regions
-          .filter((id) => !regions.includes(id))
-          .map((id) => engines.clean(`lang-${id}`)),
-      );
+      lastValue.regions
+        .filter((id) => !regions.includes(id))
+        .forEach((id) => engines.clean(`lang-${id}`));
     }
 
     // Schedule merge when one of the regional engines is updated
@@ -497,7 +500,6 @@ if (__PLATFORM__ === 'firefox') {
             } else if (match === true) {
               request.blocked = true;
               result = { cancel: true };
-              break;
             }
           }
         }

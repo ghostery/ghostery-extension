@@ -73,7 +73,7 @@
     "message": "Erlaube Ghostery in privaten Fenstern"
   },
   "allow_trusted_scriptlets": {
-    "message": "Erlauben Sie vertrauenswürdige Skripte"
+    "message": "\"Trusted Scriptlets\" erlauben"
   },
   "always": {
     "message": "Immer"
@@ -119,6 +119,9 @@
   "blocked_on_this_website": {
     "message": "Auf dieser Website blockiert"
   },
+  "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
+    "message": "Blockiert zusätzlich sprachspezifische Werbung, Tracker und Pop-ups auf den von dir besuchten Webseiten. Aktiviere nur die benötigten Sprachen, um deinen Browser nicht zu verlangsamen."
+  },
   "cancel": {
     "message": "Abbrechen"
   },
@@ -158,14 +161,14 @@
   "copied_to_clipboard": {
     "message": "In die Zwischenablage kopiert"
   },
+  "cosmetic_filters__@_0_": {
+    "message": "Kosmetische Filter: $${0}"
+  },
   "country": {
     "message": "Land"
   },
   "create_account": {
     "message": "Konto erstellen"
-  },
-  "create_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
-    "message": "Erstelle benutzerdefinierte Werbeblocker-Regeln für eine individualisierte Ghostery-Erfahrung"
   },
   "current_protection_status_for_@_0__": {
     "message": "Aktueller Schutzstatus für $${0}:",
@@ -233,6 +236,9 @@
   "enter_website_url": {
     "message": "URL der Website eingeben"
   },
+  "errors__@_0___": {
+    "message": "Fehler ($${0}):"
+  },
   "essential": {
     "message": "Essenziell",
     "description": "Tracker category name"
@@ -246,12 +252,15 @@
   "expand_ghostery_ad_blocking_to_search_engines_in_a_few_easy_steps_": {
     "message": "Erweitern Sie den Ghostery-Werbeblocker in wenigen einfachen Schritten auf Suchmaschinen."
   },
-  "experimental_ad_blocking_filters": {
-    "message": "Experimentelle Werbeblocker-Filter"
+  "experimental_filters": {
+    "message": "Experimentelle Filter"
   },
   "extensions": {
     "message": "Erweiterungen",
     "description": "Tracker category name"
+  },
+  "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
+    "message": "Erstelle eigene Werbeblocker-Regeln, um deine Ghostery-Erfahrung anzupassen."
   },
   "for_more_information_read_our_full": {
     "message": "Für weitere Informationen lesen Sie bitte unsere vollständigen"
@@ -360,7 +369,7 @@
     "message": "Ghostery Tracker- & Werbeblocker | Datenschutz AdBlocker"
   },
   "manifest_short_description": {
-    "message": "Ghostery ist eine leistungsstarke Datenschutz-Erweiterung. Damit können Sie Werbung blockieren, Tracker stoppen und Websites beschleunigen."
+    "message": "Die leistungsstarke Datenschutz-Erweiterung - blockiert Werbung, stoppt Tracker und beschleunigt Webseiten"
   },
   "menu": {
     "message": "Menü"
@@ -392,6 +401,9 @@
   },
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Navigieren Sie zu einer Website, um Ghostery in Aktion zu sehen."
+  },
+  "network_filters__@_0_": {
+    "message": "Netzwerkfilter: $${0}"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -471,6 +483,9 @@
   },
   "read_more_on_whotracks_me": {
     "message": "Lesen Sie mehr auf WhoTracks.Me"
+  },
+  "regional_filters": {
+    "message": "Regionale Filter"
   },
   "renew_ghostery_for_full_protection": {
     "message": "erneuern Sie GHOSTERY für vollständigen Schutz"
@@ -623,6 +638,9 @@
   "unidentified": {
     "message": "Nicht identifiziert",
     "description": "Tracker category name"
+  },
+  "update_filters": {
+    "message": "Filter aktualisieren"
   },
   "urls_blocked": {
     "message": "Blockierte URLs"
