@@ -13,22 +13,29 @@ import { html, store } from 'hybrids';
 
 import CustomFilters from '/store/custom-filters.js';
 
-async function update(host) {
+async function update(host, event) {
+  const button = event.currentTarget;
+
+  button.disabled = true;
   host.result = undefined;
 
-  store.submit(host.input);
+  try {
+    store.submit(host.input);
 
-  host.result = await chrome.runtime.sendMessage({
-    action: 'customFilters:update',
-    input: host.input.text,
-  });
+    host.result = await chrome.runtime.sendMessage({
+      action: 'customFilters:update',
+      input: host.input.text,
+    });
+  } finally {
+    button.disabled = false;
+  }
 }
 
 export default {
-  storage: store(CustomFilters),
   input: store(CustomFilters, { draft: true }),
+  disabled: false,
   result: undefined,
-  render: ({ input, storage, result }) => html`
+  render: ({ input, result, disabled }) => html`
     <template layout="block">
       <div layout="column gap">
         <gh-settings-input>
@@ -39,7 +46,7 @@ export default {
             autocapitalize="off"
             spellcheck="false"
             oninput="${html.set(input, 'text')}"
-            disabled="${!store.ready(input)}"
+            disabled="${!store.ready(input) || disabled}"
             defaultValue="${store.ready(input) ? input.text : ''}"
           ></textarea>
         </gh-settings-input>
@@ -48,11 +55,10 @@ export default {
           layout="self:start"
           size="small"
           type="outline"
-          disabled=${!store.ready(storage, input) ||
-          input.text === storage.text}
           onclick="${update}"
+          disabled="${disabled}"
         >
-          <button>Update</button>
+          <button>Save</button>
         </ui-button>
         ${result &&
         html`

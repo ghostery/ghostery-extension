@@ -204,6 +204,11 @@ observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
       return;
     }
   }
+  // If only trustedScriptlets has changed, we don't update automatically.
+  // The user needs to click the update button.
+  else if (lastValue.enabled === enabled) {
+    return;
+  }
 
   update(enabled ? (await store.resolve(CustomFilters)).text : '', {
     trustedScriptlets,
