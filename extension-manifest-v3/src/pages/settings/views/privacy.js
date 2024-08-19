@@ -207,7 +207,7 @@ export default {
                 </ui-toggle>
                 <div
                   hidden="${!options.regionalFilters.enabled}"
-                  layout="grid:repeat(auto-fill,minmax(130px,1fr)) gap:2:1 padding:right:12"
+                  layout="grid:repeat(auto-fill,minmax(100px,1fr)) gap:2:1"
                   layout[hidden]="hidden"
                 >
                   ${REGIONS.map(
