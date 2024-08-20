@@ -123,13 +123,13 @@ export default {
                           stats.hostname,
                       )}"
                       onclick="${openTabWithUrl}"
-                      layout="row gap items:center"
+                      layout="row gap:2px items:center"
                     >
                       <ui-text type="label-m">${tail(stats.hostname)}</ui-text>
                       <ui-icon
-                        name="settings"
-                        layout="size:2"
-                        color="gray-400"
+                        name="arrow-down"
+                        layout="size:1.5"
+                        color="gray-600"
                       ></ui-icon>
                     </a>
                   </ui-action>
