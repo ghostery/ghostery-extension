@@ -14,8 +14,8 @@ import { html } from 'hybrids';
 export default {
   icon: '',
   render: ({ icon }) => html`
-    <template layout="grid:max|1|max items:center:start gap:2">
-      <ui-icon name="${icon}" layout="size:3"></ui-icon>
+    <template layout="grid:max|1|max items:center:start gap:1.5">
+      <ui-icon name="${icon}" layout="size:2.5"></ui-icon>
       <ui-text type="label-m" ellipsis layout="column width::0:full">
         <slot></slot>
       </ui-text>
