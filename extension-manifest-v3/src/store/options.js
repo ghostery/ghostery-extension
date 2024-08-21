@@ -282,6 +282,15 @@ async function migrateFromV8() {
         'hpnv2',
       ].forEach((name) => deleteDB(name).catch(() => {}));
 
+      // Bring back metrics and UTMs
+      await chrome.storage.local.set({
+        metrics: storage.metrics,
+        utms: {
+          utm_campaign: storage.utm_campaign,
+          utm_source: storage.utm_source,
+        },
+      });
+
       // Set options by hand to make sure, that
       // paused side effects are triggered
       await Options[store.connect].set(undefined, options, [
@@ -292,9 +301,9 @@ async function migrateFromV8() {
         'paused',
         'installDate',
       ]);
-    }
 
-    console.info(`Options: successfully migrated options from v8`, options);
+      console.info(`Options: successfully migrated options from v8`, options);
+    }
 
     return options;
   } catch (e) {
