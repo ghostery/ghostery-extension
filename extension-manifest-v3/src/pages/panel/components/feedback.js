@@ -21,7 +21,7 @@ export default {
         <section layout="column center grow">
           <div layout="row center gap:0.5">
             <ui-icon name="block-s" color="danger-700"></ui-icon>
-            <ui-text type="headline-m">${blocked}</ui-text>
+            <ui-text type="headline-s">${blocked}</ui-text>
           </div>
           <div layout="row center gap:0.5">
             <ui-text type="label-xs">Trackers blocked</ui-text>
@@ -33,7 +33,7 @@ export default {
         <section layout="column center grow">
           <div layout="row center gap:0.5">
             <ui-icon name="eye" color="primary-700"></ui-icon>
-            <ui-text type="headline-m">${modified}</ui-text>
+            <ui-text type="headline-s">${modified}</ui-text>
           </div>
           <div layout="row center gap:0.5">
             <ui-text type="label-xs">Trackers modified</ui-text>

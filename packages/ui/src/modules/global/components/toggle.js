@@ -123,7 +123,7 @@ export default {
         }
 
         :host([value]) button:hover #toggle {
-          background: var(--ui-color-gray-900);
+          background: var(--ui-color-gray-800);
         }
       }
     `,

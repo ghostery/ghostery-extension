@@ -68,7 +68,7 @@ export default define({
                 >
                   <ui-icon
                     name="close"
-                    color="gray-900"
+                    color="gray-800"
                     layout="size:2.5"
                   ></ui-icon>
                 </button>

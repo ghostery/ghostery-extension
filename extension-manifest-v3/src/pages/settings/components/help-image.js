@@ -28,7 +28,7 @@ export default {
               >
                 <ui-icon
                   name="zoom-in"
-                  color="gray-900"
+                  color="gray-800"
                   layout="size:2"
                 ></ui-icon>
               </div>
