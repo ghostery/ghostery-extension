@@ -77,6 +77,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 (async () => {
   const storage = await loadStorage();
   const { version, debug } = chrome.runtime.getManifest();
+
   telemetry = new Telemetry({
     METRICS_BASE_URL: debug
       ? 'https://staging-d.ghostery.com'
@@ -98,11 +99,6 @@ chrome.runtime.onMessage.addListener((msg) => {
     log('Telemetry recordUTMs() error', error);
   }
 
-  if (JUST_INSTALLED) {
-    telemetry.setUninstallUrl();
-
-    telemetry.ping('install');
-  } else {
-    telemetry.ping('active');
-  }
+  telemetry.ping(JUST_INSTALLED ? 'install' : 'active');
+  telemetry.setUninstallUrl();
 })();
