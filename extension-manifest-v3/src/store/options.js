@@ -301,9 +301,9 @@ async function migrateFromV8() {
         'paused',
         'installDate',
       ]);
-    }
 
-    console.info(`Options: successfully migrated options from v8`, options);
+      console.info(`Options: successfully migrated options from v8`, options);
+    }
 
     return options;
   } catch (e) {
