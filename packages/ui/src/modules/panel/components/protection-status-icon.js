@@ -26,18 +26,20 @@ export default {
             : (status.type === 'trust' && msg`Trusted on all websites`) ||
               (status.type === 'block' && msg`Blocked on all websites`)}
         </span>
-        <ui-icon
-          name="${status.type}-m"
-          color="${adjusted ? 'gray-600' : 'gray-300'}"
-        ></ui-icon>
-        ${status.website &&
-        html`
+        <div layout="relative">
           <ui-icon
-            name="error"
-            color="gray-600"
-            layout="absolute right:1px bottom:1px"
+            name="${status.type}-m"
+            color="${adjusted ? 'gray-600' : 'gray-300'}"
           ></ui-icon>
-        `}
+          ${status.website &&
+          html`
+            <ui-icon
+              name="error"
+              color="gray-600"
+              layout="absolute right:-4px bottom:-4px"
+            ></ui-icon>
+          `}
+        </div>
       </ui-tooltip>
     </template>
   `,

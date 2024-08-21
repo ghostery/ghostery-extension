@@ -80,7 +80,7 @@ export default {
                 </ui-text>
               </div>
             </div>
-            <div layout="column margin:1:1:0">
+            <div layout="column margin:2:1.5:0">
               <ui-toggle
                 value="${blocked !== tracker.blockedByDefault}"
                 onchange="${toggleBlocked}"
