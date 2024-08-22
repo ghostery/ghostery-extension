@@ -44,7 +44,8 @@ html {
   --ui-color-danger-500: #f13436;
   --ui-color-danger-100: #ffecec;
 
-  --ui-color-backdrop: #1c232c;
+  --ui-color-backdrop: var(--ui-color-gray-800);
+  --ui-color-warning-text: var(--ui-color-gray-800);
 
   --ui-color-inherit: inherit;
 
@@ -75,14 +76,14 @@ html {
 
 @media (prefers-color-scheme: dark) {
   html {
-    --ui-color-gray-100: #090d12;
-    --ui-color-gray-200: #222a39;
-    --ui-color-gray-300: #565f72;
-    --ui-color-gray-400: #6d778e;
-    --ui-color-gray-500: #9ba3b4;
-    --ui-color-gray-600: #8a92a5;
-    --ui-color-gray-800: #dfe3eb;
-    --ui-color-white: #131b24;
+    --ui-color-gray-100: #0e1218;
+    --ui-color-gray-200: #2b3444;
+    --ui-color-gray-300: #5e6773;
+    --ui-color-gray-400: #7f8aa3;
+    --ui-color-gray-500: #9da5b7;
+    --ui-color-gray-600: #b2b9cf;
+    --ui-color-gray-800: #eceff5;
+    --ui-color-white: #181d27;
 
     --ui-color-primary-100: #0a1e31;
     --ui-color-primary-200: #0f2a44;
@@ -100,11 +101,12 @@ html {
     --ui-color-error-500: #ff4500;
     --ui-color-error-400: #ff5d35;
 
-    --ui-color-danger-100: #c80f11;
+    --ui-color-danger-100: #460f10;
     --ui-color-danger-500: #f13436;
     --ui-color-danger-700: #e05c5e;
 
-    --ui-color-backdrop: #1c232c;
+    --ui-color-backdrop: var(--ui-color-gray-100);
+    --ui-color-warning-text: var(--ui-color-gray-100);
   }
 }
 

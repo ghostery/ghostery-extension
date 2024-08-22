@@ -203,7 +203,7 @@ export default {
     #main.paused, #main.paused:hover, #main.paused:active {
       background: var(--gh-pause-active-color);
       white-space: nowrap;
-      --ui-color-gh-panel-action: #202c44;
+      --ui-color-gh-panel-action: var(--ui-color-warning-text);
     }
 
     #main.paused #type {

@@ -15,7 +15,7 @@ export default {
   blocked: 0,
   modified: 0,
   render: ({ blocked, modified }) => html`
-    <template layout="row padding:0.5:0:1">
+    <template layout="row padding:1:0:1">
       ${blocked > 0 &&
       html`
         <section layout="column center grow">
