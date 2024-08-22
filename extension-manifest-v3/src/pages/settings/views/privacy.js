@@ -259,8 +259,6 @@ export default {
               <div layout="column gap:3">
                 <ui-text type="headline-xs" color="gray-600">Advanced</ui-text>
                 <ui-toggle
-                  type="status"
-                  color="success-500"
                   disabled="${globalPause}"
                   value="${options.experimentalFilters}"
                   onchange="${html.set(options, 'experimentalFilters')}"
@@ -296,46 +294,67 @@ export default {
                   </div>
                 </ui-toggle>
                 <div layout="column gap">
-                  <div layout="column gap:0.5">
-                    <div layout="row gap items:center">
-                      <ui-icon name="detailed-view" color="gray-800"></ui-icon>
-                      <ui-text type="headline-xs">Custom Filters</ui-text>
-                    </div>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="gray-600"
-                    >
-                      Facilitates the creation of your own ad-blocking rules to
-                      customize your Ghostery experience.
-                    </ui-text>
-                    <ui-text type="label-s" color="gray-600" underline>
-                      <a
-                        href="https://github.com/ghostery/adblocker/wiki/Compatibility-Matrix"
-                        target="_blank"
-                        rel="noreferrer"
-                        layout="row gap:0.5"
+                  <ui-toggle
+                    disabled="${globalPause}"
+                    value="${options.customFilters.enabled}"
+                    onchange="${html.set(options, 'customFilters.enabled')}"
+                  >
+                    <div layout="column gap:0.5">
+                      <div layout="row gap items:center">
+                        <ui-icon
+                          name="detailed-view"
+                          color="gray-800"
+                        ></ui-icon>
+                        <ui-text type="headline-xs">Custom Filters</ui-text>
+                      </div>
+                      <ui-text
+                        type="body-m"
+                        mobile-type="body-s"
+                        color="gray-600"
                       >
-                        Learn more on supported syntax
-                        <ui-icon name="arrow-right-s"></ui-icon>
-                      </a>
-                    </ui-text>
-                  </div>
-                  <div layout="self:start margin:bottom">
-                    <gh-settings-checkbox disabled="${globalPause}">
-                      <input
-                        type="checkbox"
+                        Facilitates the creation of your own ad-blocking rules
+                        to customize your Ghostery experience.
+                      </ui-text>
+                      <ui-text
+                        type="label-s"
+                        color="gray-600"
+                        underline
+                        layout="self:start"
+                      >
+                        <a
+                          href="https://github.com/ghostery/adblocker/wiki/Compatibility-Matrix"
+                          target="_blank"
+                          rel="noreferrer"
+                          layout="row gap:0.5"
+                        >
+                          Learn more on supported syntax
+                          <ui-icon name="arrow-right-s"></ui-icon>
+                        </a>
+                      </ui-text>
+                    </div>
+                  </ui-toggle>
+                  ${options.customFilters.enabled &&
+                  html`
+                    <div layout="column gap">
+                      <div layout="self:start margin:bottom">
+                        <gh-settings-checkbox disabled="${globalPause}">
+                          <input
+                            type="checkbox"
+                            disabled="${globalPause}"
+                            checked="${options.customFilters.trustedScriptlets}"
+                            onchange="${html.set(
+                              options,
+                              'customFilters.trustedScriptlets',
+                            )}"
+                          />
+                          <span slot="label">Allow trusted scriptlets</span>
+                        </gh-settings-checkbox>
+                      </div>
+                      <gh-settings-custom-filters
                         disabled="${globalPause}"
-                        checked="${options.customFilters.trustedScriptlets}"
-                        onchange="${html.set(
-                          options,
-                          'customFilters.trustedScriptlets',
-                        )}"
-                      />
-                      <span slot="label">Allow trusted scriptlets</span>
-                    </gh-settings-checkbox>
-                  </div>
-                  <gh-settings-custom-filters></gh-settings-custom-filters>
+                      ></gh-settings-custom-filters>
+                    </div>
+                  `}
                 </div>
               </div>
             </div>

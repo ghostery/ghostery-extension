@@ -24,6 +24,7 @@ import { getMetadata } from '/utils/trackerdb.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
+import { customFiltersEngine } from './custom-filters.js';
 
 let enabledEngines = [];
 let options = {};
@@ -32,10 +33,12 @@ const regionalFiltersEngine = engines.init(engines.REGIONAL_ENGINE);
 
 const setup = asyncSetup([
   // Init engines
-  engines.init(engines.CUSTOM_ENGINE),
   engines.init(engines.FIXES_ENGINE),
   ENGINES.map(({ name }) => engines.init(name)),
-  // Regional filters engine is initialized separately for direct access
+
+  // Regional and custom filters engines are initialized separately
+  // for direct access
+  customFiltersEngine,
   regionalFiltersEngine,
 
   // Update options & enabled engines
@@ -44,8 +47,6 @@ const setup = asyncSetup([
 
     if (options.terms) {
       enabledEngines = [
-        // Add custom engine
-        engines.CUSTOM_ENGINE,
         engines.FIXES_ENGINE,
         // Main engines
         ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
@@ -53,6 +54,10 @@ const setup = asyncSetup([
 
       if (options.regionalFilters.enabled) {
         enabledEngines.push(engines.REGIONAL_ENGINE);
+      }
+
+      if (options.customFilters.enabled) {
+        enabledEngines.push(engines.CUSTOM_ENGINE);
       }
     } else {
       enabledEngines = [];
@@ -72,19 +77,12 @@ const setup = asyncSetup([
 
   // Regional filters
   observe('regionalFilters', async ({ enabled, regions }, lastValue) => {
-    const engine = await regionalFiltersEngine;
-
-    if (
+    // Background startup
+    if (!lastValue) {
+      const engine = await regionalFiltersEngine;
       // Pre-requirement for skipping update - engine must be initialized
       // Otherwise it is a very first try to setup the engine
-      engine.lists.size &&
-      // 1. Background script startup
-      (!lastValue ||
-        // 2. Exact comparison of the values
-        (lastValue.enabled === enabled &&
-          lastValue.regions.join() === regions.join()))
-    ) {
-      return;
+      if (engine.lists.size) return;
     }
 
     // Clean previous regional engines

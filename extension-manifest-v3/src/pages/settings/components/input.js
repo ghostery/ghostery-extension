@@ -50,6 +50,7 @@ export default {
     ::slotted(textarea) {
       padding: 8px;
       font: var(--ui-font-body-s);
+      font-family: monospace;
       color: var(--ui-color-gray-800);
     }
 

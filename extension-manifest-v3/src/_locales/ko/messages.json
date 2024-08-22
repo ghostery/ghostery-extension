@@ -120,7 +120,7 @@
     "message": "이 웹 사이트에서 차단됨"
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
-    "message": "웹사이트 언어에 맞춘 추가 광고, 추적기 및 팝업을 차단합니다. 브라우저 속도를 저하시키지 않도록 필요한 언어만 활성화하세요."
+    "message": "방문하시는 웹 사이트 언어에 한하여 추가로 광고와 트래커, 팝업을 차단합니다. 필요한 언어만 활성화하면 웹 브라우저가 느려지는걸 방지할 수 있습니다."
   },
   "cancel": {
     "message": "취소"
@@ -162,7 +162,7 @@
     "message": "클립보드에 복사됨"
   },
   "cosmetic_filters__@_0_": {
-    "message": "코스메틱 필터: $${0}"
+    "message": "시각적 필터: $${0}"
   },
   "country": {
     "message": "국가"
@@ -253,7 +253,7 @@
     "message": "몇 번의 쉬운 단계만으로 검색 엔진에 Ghostery 광고 차단 기능을 확장할 수 있습니다."
   },
   "experimental_filters": {
-    "message": "실험 필터"
+    "message": "실험적 필터"
   },
   "extensions": {
     "message": "확장 프로그램",
@@ -369,7 +369,7 @@
     "message": "Ghostery 트래커 & 광고 차단기 - 개인정보 보호 광고 차단기"
   },
   "manifest_short_description": {
-    "message": "강력한 개인정보 보호 확장 프로그램으로 광고를 차단하고, 추적기를 방지하며, 웹사이트 로딩 속도를 가속화합니다"
+    "message": "광고와 트래커를 차단하고 웹 사이트 속도를 빠르게 하는 강력한 개인정보 보호 확장 프로그램입니다."
   },
   "menu": {
     "message": "메뉴"

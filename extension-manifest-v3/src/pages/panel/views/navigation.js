@@ -15,26 +15,6 @@ import Session from '/store/session.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
 const MENU = [
-  {
-    icon: () => 'report',
-    label: msg`Report a broken page`,
-    href: 'https://www.ghostery.com/support?utm_source=gbe',
-  },
-  {
-    icon: () => 'send',
-    label: msg`Submit a new tracker`,
-    href: 'https://www.ghostery.com/submit-a-tracker?utm_source=gbe',
-  },
-  {
-    icon: () => 'thumb-up',
-    label: msg`Send feedback`,
-    href: 'https://www.ghostery.com/feedback?utm_source=gbe',
-  },
-  {
-    icon: () => 'help',
-    label: msg`Contact support`,
-    href: 'https://www.ghostery.com/support?utm_source=gbe',
-  },
   { header: msg`Ghostery settings` },
   {
     icon: () => 'shield-menu',
@@ -73,6 +53,27 @@ const MENU = [
   },
   {},
   {
+    icon: () => 'report',
+    label: msg`Report a broken page`,
+    href: 'https://www.ghostery.com/support?utm_source=gbe',
+  },
+  {
+    icon: () => 'send',
+    label: msg`Submit a new tracker`,
+    href: 'https://www.ghostery.com/submit-a-tracker?utm_source=gbe',
+  },
+  {
+    icon: () => 'thumb-up',
+    label: msg`Send feedback`,
+    href: 'https://www.ghostery.com/feedback?utm_source=gbe',
+  },
+  {
+    icon: () => 'help',
+    label: msg`Contact support`,
+    href: 'https://www.ghostery.com/support?utm_source=gbe',
+  },
+  {},
+  {
     icon: () => 'info-menu',
     label: msg`About`,
     href: 'https://www.ghostery.com/?utm_source=gbe',
@@ -80,14 +81,11 @@ const MENU = [
 ];
 
 if (__PLATFORM__ !== 'safari') {
-  MENU.unshift(
-    {
-      icon: () => 'heart',
-      label: msg`Become a Contributor`,
-      href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
-    },
-    {},
-  );
+  MENU.splice(7, 0, {
+    icon: () => 'heart',
+    label: msg`Become a Contributor`,
+    href: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+  });
 }
 
 export default {
@@ -109,7 +107,7 @@ export default {
             ${MENU.filter(
               // Hide the "Become a Contributor" menu item if the user is already a contributor
               (_, i) =>
-                __PLATFORM__ === 'safari' || i > 1 || !session.contributor,
+                __PLATFORM__ === 'safari' || i !== 7 || !session.contributor,
             ).map(({ icon, label, href, header }) =>
               label
                 ? html`
@@ -127,15 +125,15 @@ export default {
                     </ui-text>
                   `
                 : html`
-                    <ui-line></ui-line>
-                    ${header &&
-                    html`<ui-text
-                      type="label-s"
-                      color="gray-500"
-                      layout="padding:1:1:0 margin:0:1"
-                    >
-                      ${header.toUpperCase()}
-                    </ui-text>`}
+                    ${header
+                      ? html`<ui-text
+                          type="label-s"
+                          color="gray-500"
+                          layout="padding:1:1:0 margin:0:1"
+                        >
+                          ${header.toUpperCase()}
+                        </ui-text>`
+                      : html`<ui-line></ui-line>`}
                   `,
             )}
           `}
