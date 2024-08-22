@@ -328,10 +328,16 @@ async function migrateFromV8() {
 }
 
 function isOptionEqual(a, b) {
-  return Object.keys(a).every((key) =>
-    typeof a[key] === 'object'
-      ? isOptionEqual(a[key], b[key])
-      : a[key] === b[key],
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
+
+  return (
+    aKeys.length === bKeys.length &&
+    aKeys.every((key) =>
+      typeof a[key] === 'object'
+        ? isOptionEqual(a[key], b[key])
+        : a[key] === b[key],
+    )
   );
 }
 
