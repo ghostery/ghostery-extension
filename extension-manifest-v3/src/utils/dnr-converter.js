@@ -11,20 +11,26 @@
 
 let documentConverter;
 export function createDocumentConverter() {
-  const requests = new Map();
+  const requestResolvers = new Map();
 
   function createIframe() {
     if (documentConverter) return documentConverter;
 
     window.addEventListener('message', (event) => {
       const requestId = event.data.rules.shift().condition.urlFilter;
+      let { rules, errors } = event.data;
 
-      if (__PLATFORM__ === 'safari') {
-        event.data.rules = event.data.rules.map(getCompatRule).filter(Boolean);
-      }
+      const resolve = requestResolvers.get(requestId);
 
-      requests.get(requestId)(event.data);
-      requests.delete(requestId);
+      resolve({
+        rules:
+          __PLATFORM__ === 'safari'
+            ? rules.map(getCompatRule).filter(Boolean)
+            : rules,
+        errors: errors.map((e) => `DNR: ${e.message}`),
+      });
+
+      requestResolvers.delete(requestId);
     });
 
     const iframe = document.createElement('iframe');
@@ -48,7 +54,7 @@ export function createDocumentConverter() {
     const requestId = `request${requestCount++}`;
 
     return new Promise((resolve) => {
-      requests.set(requestId, resolve);
+      requestResolvers.set(requestId, resolve);
 
       iframe.contentWindow.postMessage(
         {

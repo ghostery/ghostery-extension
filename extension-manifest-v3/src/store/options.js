@@ -16,6 +16,7 @@ import { getUserOptions, setUserOptions } from '../utils/api.js';
 import { DEFAULT_REGIONS } from '../utils/regions.js';
 
 import Session from './session.js';
+import CustomFilters from './custom-filters.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -42,7 +43,7 @@ export const ENGINES = [
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
-const OPTIONS_VERSION = 2;
+const OPTIONS_VERSION = 3;
 
 const Options = {
   // Main features
@@ -58,6 +59,7 @@ const Options = {
 
   // Advanced features
   customFilters: {
+    enabled: false,
     trustedScriptlets: false,
   },
   experimentalFilters: false,
@@ -117,6 +119,19 @@ const Options = {
               acc[id] = { revokeAt };
               return acc;
             }, {});
+          }
+        }
+
+        if (optionsVersion < 3) {
+          // Check if the user has custom filters, so we need to
+          // reflect the enabled state in the options
+          const { text } = await store.resolve(CustomFilters);
+          if (text) {
+            options.customFilters = {
+              ...options.customFilters,
+              enabled: true,
+            };
+            keys.push('customFilters');
           }
         }
 
@@ -312,19 +327,38 @@ async function migrateFromV8() {
   }
 }
 
+function isOptionEqual(a, b) {
+  return Object.keys(a).every((key) =>
+    typeof a[key] === 'object'
+      ? isOptionEqual(a[key], b[key])
+      : a[key] === b[key],
+  );
+}
+
 export async function observe(...args) {
   let wrapper;
 
   if (args.length === 2) {
     const [property, fn] = args;
     let value;
-    wrapper = async (options) => {
-      if (value === undefined || options[property] !== value) {
-        const prevValue = value;
-        value = options[property];
-        return await fn(value, prevValue);
-      }
-    };
+
+    if (typeof Options[property] === 'object') {
+      wrapper = async (options) => {
+        if (value === undefined || !isOptionEqual(options[property], value)) {
+          const prevValue = value;
+          value = options[property];
+          return await fn(value, prevValue);
+        }
+      };
+    } else {
+      wrapper = async (options) => {
+        if (value === undefined || options[property] !== value) {
+          const prevValue = value;
+          value = options[property];
+          return await fn(value, prevValue);
+        }
+      };
+    }
   } else {
     wrapper = args[0];
   }
