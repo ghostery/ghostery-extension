@@ -103,8 +103,8 @@ html {
     --ui-color-error-500: #ff4500;
     --ui-color-error-400: #ff5d35;
 
-    --ui-color-danger-100: #460f10;
-    --ui-color-danger-500: #f13436;
+    --ui-color-danger-100: #341b1c;
+    --ui-color-danger-500: #cd393c;
     --ui-color-danger-700: #e05c5e;
 
     --ui-color-backdrop: var(--ui-color-gray-100);
@@ -133,18 +133,11 @@ body {
 }
 
 @media screen and (max-height: 600px) {
-  html,
-  body {
-    overflow: hidden;
-    max-height: 600px;
-  }
-}
-
-@media screen and (max-height: 590px) {
-  html,
-  body {
+  html {
     overflow-y: auto;
-    max-height: none;
+  }
+  body {
+    max-height: 600px;
   }
 }
 
