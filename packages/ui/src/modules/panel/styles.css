@@ -49,6 +49,8 @@ html {
 
   --ui-color-inherit: inherit;
 
+  --ui-shadow-header: 0px 4px 16px rgba(32, 44, 68, 0.1);
+
   --ui-font-family: 'Inter', sans-serif;
   --ui-font-family-label: var(--ui-font-family);
 
@@ -86,10 +88,10 @@ html {
     --ui-color-white: #181d27;
 
     --ui-color-primary-100: #0a1e31;
-    --ui-color-primary-200: #0f2a44;
+    --ui-color-primary-200: #1a4065;
     --ui-color-primary-300: #144878;
-    --ui-color-primary-500: #4191c6;
-    --ui-color-primary-700: #66b4e8;
+    --ui-color-primary-500: #4fa9e4;
+    --ui-color-primary-700: #7dc7f8;
 
     --ui-color-success-100: #056605;
     --ui-color-success-500: #1b911b;
@@ -107,6 +109,8 @@ html {
 
     --ui-color-backdrop: var(--ui-color-gray-100);
     --ui-color-warning-text: var(--ui-color-gray-100);
+
+    --ui-shadow-header: 0px 1px 0px var(--ui-color-gray-200);
   }
 }
 
@@ -129,8 +133,18 @@ body {
 }
 
 @media screen and (max-height: 600px) {
+  html,
   body {
+    overflow: hidden;
     max-height: 600px;
+  }
+}
+
+@media screen and (max-height: 590px) {
+  html,
+  body {
+    overflow-y: auto;
+    max-height: none;
   }
 }
 

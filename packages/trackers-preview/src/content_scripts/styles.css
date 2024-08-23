@@ -34,10 +34,9 @@
   width: 350px;
   height: 338px;
   z-index: 127;
-  border: 1px solid #C3CAD9;
-  box-shadow: 30px 60px 160px rgba(32, 44, 68, 0.4);
+  box-shadow: 30px 60px 160px rgba(32, 44, 68, 0.2);
   border-radius: 16px;
-  background: white;
+  overflow: hidden;
 }
 
 .wtm-popup-iframe-wrapper iframe {

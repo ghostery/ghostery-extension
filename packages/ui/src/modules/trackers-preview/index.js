@@ -106,8 +106,14 @@ export default define({
           `}
     </template>
   `.css`
+    :host {
+      border: 1px solid var(--ui-color-gray-200);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
     footer {
-      background: linear-gradient(180deg, #F0F2F7 0%, #FFFFFF 90%);
+      background: var(--ui-color-gray-100);
     }
 
     ui-button {
