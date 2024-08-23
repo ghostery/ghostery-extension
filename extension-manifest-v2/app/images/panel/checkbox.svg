@@ -1,9 +1,0 @@
-<svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <rect id="a" width="12" height="12" rx="2"/>
-    <mask id="b" x="0" y="0" width="12" height="12" fill="#fff">
-      <use xlink:href="#a"/>
-    </mask>
-  </defs>
-  <use mask="url(#b)" xlink:href="#a" stroke="#2092BF" stroke-width="2" fill="none" fill-rule="evenodd"/>
-</svg>
