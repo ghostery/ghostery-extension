@@ -21,8 +21,6 @@ import '../global/index.js';
 import './onboarding.js';
 
 // Iframes
-import './iframe.js';
-import './renew.js';
 import './opera-serp.js';
 
 // Components

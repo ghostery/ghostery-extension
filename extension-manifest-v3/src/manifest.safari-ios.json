@@ -118,7 +118,6 @@
     "content_scripts/prevent-serp-tracking.js",
     "pages/trackers-preview/index.html",
     "pages/onboarding/index.html",
-    "pages/onboarding/iframe.html",
     "pages/youtube/index.html"
   ],
   "content_security_policy" : {},
