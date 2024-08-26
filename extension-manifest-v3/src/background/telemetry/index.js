@@ -9,10 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { Metrics as Telemetry } from '@ghostery/libs';
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
+
+import Telemetry from './metrics.js';
 
 const log = console.log.bind(console, '[telemetry]');
 

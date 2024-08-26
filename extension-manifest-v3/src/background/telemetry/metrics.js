@@ -13,7 +13,7 @@
 
 import browser from 'webextension-polyfill';
 
-import getBrowserInfo from './browser-info.js';
+import getBrowserInfo from '/utils/browser-info.js';
 
 /**
  * Helper for building query string key value pairs

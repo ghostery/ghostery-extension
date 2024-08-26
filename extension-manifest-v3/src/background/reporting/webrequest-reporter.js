@@ -13,8 +13,8 @@ import {
   WebRequestPipeline,
   RequestReporter,
 } from '@whotracksme/reporting/reporting';
-import { getBrowserInfo } from '@ghostery/libs';
 
+import { getBrowserInfo } from '/utils/browser-info.js';
 import { observe, isPaused } from '/store/options.js';
 import Request from '/utils/request.js';
 
