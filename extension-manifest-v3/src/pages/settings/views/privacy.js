@@ -207,7 +207,7 @@ export default {
                 </ui-toggle>
                 <div
                   hidden="${!options.regionalFilters.enabled}"
-                  layout="grid:repeat(auto-fill,minmax(100px,1fr)) gap:2:1"
+                  layout="grid:repeat(auto-fill,minmax(120px,1fr)) gap:2:1"
                   layout[hidden]="hidden"
                 >
                   ${REGIONS.map(
@@ -226,7 +226,7 @@ export default {
                           onchange="${setRegion(id)}"
                         />
                         <span slot="label">
-                          ${labels.languages.of(id.toUpperCase())}
+                          ${labels.languages.of(id.toUpperCase())} (${id})
                         </span>
                       </gh-settings-checkbox>
                     `,

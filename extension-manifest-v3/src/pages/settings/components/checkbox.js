@@ -24,7 +24,7 @@ export default {
     <template layout="contents">
       <label layout="row gap:0.5 items:center" onclick="${clickSlottedElement}">
         <slot></slot>
-        <ui-text type="body-s" color="gray-500">
+        <ui-text type="body-s" color="gray-600">
           <slot name="label"></slot>
         </ui-text>
       </label>
