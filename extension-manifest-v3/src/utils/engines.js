@@ -144,7 +144,9 @@ async function loadFromStorage(name) {
   } catch (e) {
     // If there is an error loading the engine from storage, the DB must be corrupted.
     // In this case, we should delete it, as it will be reloaded on the next run.
-    IDB.deleteDB('engines');
+    await IDB.deleteDB('engines').catch((e2) =>
+      console.error('Failed to cleanup corrupted engine db', e2),
+    );
 
     console.error(`Failed to load engine "${name}" from storage`, e);
   }
