@@ -14,7 +14,7 @@ import {
   RequestReporter,
 } from '@whotracksme/reporting/reporting';
 
-import { getBrowserInfo } from '/utils/browser-info.js';
+import getBrowserInfo from '/utils/browser-info.js';
 import { observe, isPaused } from '/store/options.js';
 import Request from '/utils/request.js';
 
