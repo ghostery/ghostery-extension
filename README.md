@@ -1,12 +1,9 @@
-[![Ghostery](extension-manifest-v2/app/images/hub/side-navigation/ghostery-logo.svg)](https://www.ghostery.com)
-
 # Ghostery Browser Extension
 
 This repository is home to all Ghostery Browser Extensions for various platforms.
 
 ## Folder structure
 
-* Extension `v8.x` for **Firefox**: [extension-manifest-v2](/extension-manifest-v2)
 * Extension `v10.x` for **Chrome**, **Edge**, **Opera** and **Safari**: [extension-manifest-v3](/extension-manifest-v3)
 
 ## Links

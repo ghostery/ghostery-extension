@@ -1,6 +1,0 @@
-# Ghostery CODEOWNERS
-# Each line is a file pattern followed by one or more owners,
-# the last matching pattern has the most precedence.
-
-# Core Ghostery team
-*       @ghostery/extension
