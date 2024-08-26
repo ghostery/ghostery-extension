@@ -479,17 +479,7 @@ if (__PLATFORM__ === 'firefox') {
           const engine = engines.get(name);
           if (!engine) continue;
 
-          if (details.type === 'main_frame') {
-            const htmlFilters = engine.getHtmlFilters(request);
-            if (htmlFilters.length !== 0) {
-              filterRequestHTML(
-                chrome.webRequest.filterResponseData,
-                request,
-                htmlFilters,
-              );
-              return;
-            }
-          } else {
+          if (details.type !== 'main_frame') {
             const { redirect, match } = engine.match(request);
 
             if (redirect !== undefined) {
@@ -521,20 +511,31 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       const request = Request.fromRequestDetails(details);
-      let policies;
+      let cspPolicies = [];
+      let htmlFilters = [];
 
       for (const name of resolveEngines(request, details.type)) {
         const engine = engines.get(name);
         if (!engine) continue;
 
-        policies = engine.getCSPDirectives(request);
+        htmlFilters.push(...engine.getHtmlFilters(request));
+
+        const policies = engine.getCSPDirectives(request);
         if (policies !== undefined) {
-          break;
+          cspPolicies.push(...policies);
         }
       }
 
-      if (policies) {
-        return updateResponseHeadersWithCSP(details, policies);
+      if (htmlFilters.length !== 0) {
+        filterRequestHTML(
+          chrome.webRequest.filterResponseData,
+          request,
+          htmlFilters,
+        );
+      }
+
+      if (cspPolicies.length !== 0) {
+        return updateResponseHeadersWithCSP(details, cspPolicies);
       }
     },
     { urls: ['<all_urls>'], types: ['main_frame'] },
