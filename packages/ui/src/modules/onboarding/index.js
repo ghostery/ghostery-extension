@@ -13,6 +13,7 @@ import { define } from 'hybrids';
 
 // Styles
 import './styles.css';
+import '../panel/dark.css';
 
 // Global components
 import '../global/index.js';

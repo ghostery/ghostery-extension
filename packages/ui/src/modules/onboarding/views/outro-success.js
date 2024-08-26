@@ -48,6 +48,7 @@ export default define({
             <img
               src="${PIN_EXTENSION_IMAGES[platform]}"
               layout="width:::full"
+              style="border-radius:8px; overflow:hidden;"
             />
             <div layout="row items:center gap">
               <ui-icon

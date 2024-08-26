@@ -39,18 +39,18 @@ export default {
       }
 
       :host([type="primary"]) {
-        color: var(--ui-color-white);
+        color: white;
         background: var(--ui-color-primary-500);
         border: 1px solid var(--ui-color-primary-500);
-        --ui-button-hover-color: var(--ui-color-white);
+        --ui-button-hover-color: white;
         --ui-button-hover-background: var(--ui-color-primary-700);
       }
 
       :host([type="success"]) {
-        color: var(--ui-color-white);
+        color: white;
         background: var(--ui-color-success-500);
         border: 1px solid var(--ui-color-success-500);
-        --ui-button-hover-color: var(--ui-color-white);
+        --ui-button-hover-color: white;
         --ui-button-hover-background: var(--ui-color-success-700);
       }
 
@@ -81,7 +81,6 @@ export default {
       @media (hover: hover) and (pointer: fine) {
         :host(:hover), :host(:has(:focus-visible)) {
           color: var(--ui-button-hover-color);
-          border-color: var(--ui-button-hover-border);
           background: var(--ui-button-hover-background);
         }
       }

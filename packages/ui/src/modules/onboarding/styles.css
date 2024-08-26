@@ -64,6 +64,7 @@ html {
   --ui-color-error-400: #ff5d35;
 
   --ui-color-current: currentColor;
+  --ui-color-onboarding-card: var(--ui-color-white);
 
   /* Fonts */
 
@@ -145,6 +146,12 @@ html {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  html {
+    --ui-color-onboarding-card: var(--ui-color-gray-100);
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -157,6 +164,7 @@ body {
   font-size: 13px;
   -moz-osx-font-smoothing: grayscale;
   color: var(--ui-color-gray-600);
+  background: var(--ui-color-white);
 }
 
 button,
