@@ -19,16 +19,29 @@
 
 const REGIONS = [
   'ar',
+  'cs',
   'de',
   'el',
+  'es',
   'fr',
+  'he',
+  'hi',
   'hu',
+  'id',
   'it',
   'ja',
   'ko',
+  'lt',
+  'lv',
+  'nl',
   'pl',
+  'pt',
+  'ro',
   'ru',
+  'sv',
   'tr',
+  'vi',
+  'zh',
 ];
 
 export default REGIONS;
