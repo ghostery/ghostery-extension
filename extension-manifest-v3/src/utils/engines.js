@@ -142,6 +142,12 @@ async function loadFromStorage(name) {
       return engine;
     }
   } catch (e) {
+    // If there is an error loading the engine from storage, the DB must be corrupted.
+    // In this case, we should delete it, as it will be reloaded on the next run.
+    await IDB.deleteDB('engines').catch((e2) =>
+      console.error('Failed to cleanup corrupted engine db', e2),
+    );
+
     console.error(`Failed to load engine "${name}" from storage`, e);
   }
 
@@ -149,20 +155,16 @@ async function loadFromStorage(name) {
 }
 
 async function saveToStorage(name) {
-  try {
-    const engine = loadFromMemory(name);
-    const db = await getDB();
+  const engine = loadFromMemory(name);
+  const db = await getDB();
 
-    const tx = db.transaction('engines', 'readwrite');
-    const table = tx.objectStore('engines');
+  const tx = db.transaction('engines', 'readwrite');
+  const table = tx.objectStore('engines');
 
-    if (engine) {
-      await table.put(engine.serialize(), name);
-    } else {
-      await table.delete(name);
-    }
-  } catch (e) {
-    console.error(`Failed to save engine "${name}" to storage`, e);
+  if (engine) {
+    await table.put(engine.serialize(), name);
+  } else {
+    await table.delete(name);
   }
 }
 
@@ -180,12 +182,16 @@ async function loadFromDisk(name) {
     const engine = deserializeEngine(engineBytes);
     shareExceptions(name, engine);
     saveToMemory(name, engine);
-    saveToStorage(name);
-
-    // After initial load from disk, schedule an update
-    // as it is done only once on the first run.
-    // After loading from disk, it should be loaded from the storage
-    update(name).catch(() => null);
+    saveToStorage(name)
+      .then(() => {
+        // After initial load from disk, schedule an update
+        // as it is done only once on the first run.
+        // After loading from disk, it should be loaded from the storage
+        update(name).catch(() => null);
+      })
+      .catch(() => {
+        console.error(`Failed to save engine "${name}" to storage`);
+      });
 
     return engine;
   } catch (e) {
@@ -218,7 +224,16 @@ const CDN_HOSTNAME = chrome.runtime.getManifest().debug
   : 'cdn.ghostery.com';
 
 async function update(name) {
-  if (name === CUSTOM_ENGINE || name === REGIONAL_ENGINE) return;
+  if (
+    // Custom and regional engines are created on demand
+    name === CUSTOM_ENGINE ||
+    name === REGIONAL_ENGINE ||
+    // If the IndexedDB is corrupted, and there is no way to load the engine
+    // from storage, we should not try to update it
+    (await loadFromStorage(name)) === null
+  ) {
+    return;
+  }
 
   try {
     const urlName =
@@ -241,10 +256,7 @@ async function update(name) {
     }
 
     // Get current engine
-    let engine =
-      loadFromMemory(name) ||
-      (await loadFromStorage(name)) ||
-      (await loadFromDisk(name));
+    let engine = loadFromMemory(name) || (await loadFromStorage(name));
 
     // Check if some lists need to be removed from the engine: either because
     // there are lists removed from allowed-lists.json or because some region
@@ -461,7 +473,9 @@ export function createEngine(name, options = null) {
   engine.updateEnv(ENV);
 
   saveToMemory(name, engine);
-  saveToStorage(name);
+  saveToStorage(name).catch(() => {
+    console.error(`Failed to save engine "${name}" to storage`);
+  });
 
   return engine;
 }
@@ -471,7 +485,9 @@ export function replaceEngine(name, engineOrEngines) {
   const engine = engines.length > 1 ? FiltersEngine.merge(engines) : engines[0];
 
   saveToMemory(name, engine);
-  saveToStorage(name);
+  saveToStorage(name).catch(() => {
+    console.error(`Failed to save engine "${name}" to storage`);
+  });
 
   return engine;
 }
