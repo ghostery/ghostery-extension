@@ -41,6 +41,7 @@ getBrowserInfo().then(({ token }) => {
 });
 
 export function captureException(error) {
+  console.error(error);
   const newError = new Error(error.message);
   newError.name = error.name;
   newError.cause = error.cause;
