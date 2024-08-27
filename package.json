@@ -26,5 +26,8 @@
   "engineStrict": true,
   "engines": {
     "npm": ">=9.6.7"
+  },
+  "dependencies": {
+    "bowser": "^2.11.0"
   }
 }

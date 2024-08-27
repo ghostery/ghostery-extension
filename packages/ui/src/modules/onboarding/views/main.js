@@ -10,7 +10,7 @@
  */
 
 import { define, html, msg, router } from 'hybrids';
-import { GHOSTERY_DOMAIN } from '@ghostery/libs';
+import { GHOSTERY_DOMAIN } from '../../../utils/urls.js';
 
 import Privacy from './privacy.js';
 import OutroSkip from './outro-skip.js';

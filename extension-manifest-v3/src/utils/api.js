@@ -10,7 +10,8 @@
  */
 
 import { jwtDecode } from 'jwt-decode';
-import { GHOSTERY_DOMAIN } from '@ghostery/libs';
+
+import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
 const AUTH_URL = `https://consumerapi.${GHOSTERY_DOMAIN}/api/v2`;
 const ACCOUNT_URL = `https://accountapi.${GHOSTERY_DOMAIN}/api/v2.1.0`;
