@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import browser from 'webextension-polyfill';
-
 import getBrowserInfo from '/utils/browser-info.js';
 
 /**
@@ -106,7 +104,7 @@ class Metrics {
   }
 
   async detectUTMs() {
-    const tabs = await browser.tabs.query({
+    const tabs = await chrome.tabs.query({
       url: [
         'https://www.ghostery.com/*',
         'https://www.ghosterystage.com/*',
