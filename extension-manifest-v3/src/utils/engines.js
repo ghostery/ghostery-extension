@@ -20,6 +20,7 @@ import {
 
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
+import { captureException } from './errors.js';
 
 export const CUSTOM_ENGINE = 'custom-filters';
 export const REGIONAL_ENGINE = 'regional-filters';
@@ -142,6 +143,7 @@ async function loadFromStorage(name) {
       return engine;
     }
   } catch (e) {
+    captureException(e);
     // If there is an error loading the engine from storage, the DB must be corrupted.
     // In this case, we should delete it, as it will be reloaded on the next run.
     await IDB.deleteDB('engines').catch((e2) =>
