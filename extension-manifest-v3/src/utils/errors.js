@@ -36,17 +36,22 @@ const config = {
 
 Sentry.init(config);
 
-getBrowserInfo().then(({ token }) => {
-  Sentry.setTag('ua', token);
-});
+getBrowserInfo().then(
+  ({ token }) => {
+    Sentry.setTag('ua', token);
+  },
+  // empty error handled for tests
+  () => {},
+);
 
 export function captureException(error) {
-  console.error(error);
   const newError = new Error(error.message);
   newError.name = error.name;
   newError.cause = error.cause;
   newError.stack = error.stack.replace(hostRegexp, 'filtered');
-  Sentry.captureException(newError);
+  if (__PLATFORM__ !== 'tests') {
+    Sentry.captureException(newError);
+  }
 }
 
 debug.errors = { captureException };
