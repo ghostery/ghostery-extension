@@ -162,7 +162,7 @@
     "message": "클립보드에 복사됨"
   },
   "cosmetic_filters__@_0_": {
-    "message": "시각적 필터: $${0}"
+    "message": "화장 필터: $${0}"
   },
   "country": {
     "message": "국가"
@@ -177,12 +177,12 @@
   "custom_filters": {
     "message": "사용자 필터"
   },
+  "custom_filters_has_been_updated": {
+    "message": "사용자 정의 필터가 업데이트되었습니다"
+  },
   "customer_interaction": {
     "message": "고객 상담",
     "description": "Tracker category name"
-  },
-  "days": {
-    "message": "일"
   },
   "detailed_view": {
     "message": "자세히 보기"
@@ -198,6 +198,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 갯수를 표시합니다."
+  },
+  "dnr_rules__@_0_": {
+    "message": "DNR 규칙: $${0}"
   },
   "don_t_ask_again": {
     "message": "다시 묻지 않기"
@@ -236,8 +239,8 @@
   "enter_website_url": {
     "message": "웹 사이트 URL 입력"
   },
-  "errors__@_0___": {
-    "message": "오류 ($${0}):"
+  "errors__@_0__": {
+    "message": "오류 ($${0})"
   },
   "essential": {
     "message": "필수 요소",
@@ -268,12 +271,6 @@
   "get_help": {
     "message": "도움받기"
   },
-  "ghostery__action_required": {
-    "message": "Ghostery: 조치 필요"
-  },
-  "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "권한 누락으로 인해 Ghostery가 항목을 차단할 수 없습니다."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 사용을 다시 시작합니다."
   },
@@ -285,9 +282,6 @@
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery가 웹 브라우저 사용 중에 트래커의 추적과 개인정보 유출로부터 보호할 준비를 끝마쳤습니다!"
-  },
-  "ghostery_is_disabled": {
-    "message": "Ghostery 사용 중지됨"
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery가 제한된 기능으로 설치되었습니다"
@@ -316,9 +310,6 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery가 이 페이지에서 얼마나 많은 트래커가 차단되었는지 보여줍니다. Ghostery 아이콘을 클릭하면 더 자세한 정보를 볼 수 있습니다."
   },
-  "ghostery_will_stop_working_in_": {
-    "message": "표시된 시간 이후로 Ghostery 사용이 중단됩니다."
-  },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주세요."
   },
@@ -331,9 +322,6 @@
   "hosting": {
     "message": "호스팅",
     "description": "Tracker category name"
-  },
-  "hours": {
-    "message": "시간"
   },
   "ignore": {
     "message": "무시"
@@ -490,9 +478,6 @@
   "renew_ghostery_for_full_protection": {
     "message": "모든 보호 기능을 사용하려면 Ghostery 구독을 다시 시작하세요"
   },
-  "renew_setup": {
-    "message": "다시 설정"
-  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "트래커 휠로 브라우저 툴바의 Ghostery 아이콘을 대체합니다."
   },
@@ -575,10 +560,10 @@
     "message": "이 웹 사이트는 항상 허용됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다."
   },
   "this_site_will_be_trusted_for_1_day": {
-    "message": "이 웹 사이트를 1 일동안 허용합니다."
+    "message": "이 웹 사이트를 1 일 동안 허용합니다."
   },
   "this_site_will_be_trusted_for_1_hour": {
-    "message": "이 웹 사이트를 1 시간동안 허용합니다."
+    "message": "이 웹 사이트를 1 시간 동안 허용합니다."
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "웹 사이트에서 특정 시간동안 개인정보 보호를 중지합니다."
@@ -594,9 +579,6 @@
   },
   "trackers_count": {
     "message": "트래커 갯수"
-  },
-  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-    "message": "이 웹 사이트에서 Ghostery가 탐지한 트래커:&nbsp;$${0}"
   },
   "trackers_modified": {
     "message": "변경된 트래커"
@@ -639,9 +621,6 @@
     "message": "확인되지 않음",
     "description": "Tracker category name"
   },
-  "update_filters": {
-    "message": "필터 업데이트"
-  },
   "urls_blocked": {
     "message": "차단된 URL"
   },
@@ -656,9 +635,6 @@
   },
   "visit_our_blog": {
     "message": "블로그를 방문해보세요"
-  },
-  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
-    "message": "이용약관을 개정했습니다. 웹 브라우저에서 Ghostery 트래커 & 광고 차단기를 계속 사용하려면 설정을 다시 진행해주세요."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "더 나은 YouTube 사용 환경을 위해 Ghostery 사용하는 것을 알고 있습니다. 보다 나은 해결책이 출시되기 전까지 임시 조치를 취할 수 있습니다."

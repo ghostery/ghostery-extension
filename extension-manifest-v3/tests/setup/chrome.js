@@ -8,3 +8,5 @@ chrome.runtime.id = true;
 chrome.runtime.getManifest.withArgs().returns({
   permissions: [],
 });
+
+chrome.runtime.getURL.withArgs().returns('chrome-extension://randomid/');

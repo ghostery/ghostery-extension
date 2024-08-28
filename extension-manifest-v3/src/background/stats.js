@@ -143,7 +143,11 @@ function pushTabStats(stats, requests) {
         trackersUpdated = true;
       }
 
-      if (!tracker.requests.some((r) => r.url === request.url)) {
+      const savedRequest = tracker.requests.find((r) => r.url === request.url);
+      if (savedRequest) {
+        savedRequest.blocked = savedRequest.blocked || request.blocked;
+        tracker.blocked = tracker.blocked || savedRequest.blocked;
+      } else {
         tracker.requestsCount = (tracker.requestsCount || 0) + 1;
         tracker.blocked = tracker.blocked || request.blocked;
         tracker.modified = tracker.modified || request.modified;
@@ -339,7 +343,7 @@ if (__PLATFORM__ === 'safari') {
 }
 
 if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
-  // Chromium based browser can use readonly webRequest API
+  // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
       if (details.tabId < 0) return;
@@ -354,7 +358,19 @@ if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
     },
   );
 
-  // Callback for listing if requests were blocked by the DNR
+  // Get feedback for requests, which were redirected
+  chrome.webRequest.onBeforeRedirect.addListener(
+    (details) => {
+      if (details.redirectUrl.startsWith('chrome-extension://')) {
+        const request = Request.fromRequestDetails(details);
+        request.blocked = true;
+        updateTabStats(details.tabId, [request]);
+      }
+    },
+    { urls: ['<all_urls>'] },
+  );
+
+  // Get feedback for requests, which were blocked
   chrome.webRequest.onErrorOccurred.addListener(
     (details) => {
       if (details.error === 'net::ERR_BLOCKED_BY_CLIENT') {

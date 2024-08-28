@@ -193,6 +193,10 @@ async function update(text, { trustedScriptlets }) {
 observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
   // Background startup
   if (!lastValue) {
+    // If custom filters are disabled, we don't care if engine was reloaded
+    // as custom filters should be empty
+    if (!enabled) return;
+
     const engine = await customFiltersEngine;
     const { networkFilters, cosmeticFilters } = engine.getFilters();
 
@@ -200,19 +204,20 @@ observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
     // filters are already added to the engine. This is specially
     // for the case, when custom engine is reloaded because
     // of the new adblocker version
-    if (networkFilters.length || cosmeticFilters.length) {
+    if (networkFilters.length === 0 && cosmeticFilters.length === 0) {
+      update((await store.resolve(CustomFilters)).text, { trustedScriptlets });
+    }
+  } else {
+    // If only trustedScriptlets has changed, we don't update automatically.
+    // The user needs to click the update button.
+    if (lastValue.enabled === enabled) {
       return;
     }
-  }
-  // If only trustedScriptlets has changed, we don't update automatically.
-  // The user needs to click the update button.
-  else if (lastValue.enabled === enabled) {
-    return;
-  }
 
-  update(enabled ? (await store.resolve(CustomFilters)).text : '', {
-    trustedScriptlets,
-  });
+    update(enabled ? (await store.resolve(CustomFilters)).text : '', {
+      trustedScriptlets,
+    });
+  }
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {

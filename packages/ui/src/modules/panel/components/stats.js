@@ -11,7 +11,7 @@
 
 import { html, store, router, dispatch } from 'hybrids';
 import { getStats } from '@ghostery/trackers-preview/page_scripts';
-import { GHOSTERY_DOMAIN } from '@ghostery/libs';
+import { GHOSTERY_DOMAIN } from '../../../utils/urls.js';
 
 const WTM_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme/`;
 

@@ -162,7 +162,7 @@
     "message": "Copied to clipboard"
   },
   "cosmetic_filters__@_0_": {
-    "message": "Cosmetic Filters: $${0}"
+    "message": "Cosmetic filters: $${0}"
   },
   "country": {
     "message": "Country"
@@ -177,12 +177,12 @@
   "custom_filters": {
     "message": "Custom Filters"
   },
+  "custom_filters_has_been_updated": {
+    "message": "Custom filters has been updated"
+  },
   "customer_interaction": {
     "message": "Customer Interaction",
     "description": "Tracker category name"
-  },
-  "days": {
-    "message": "days"
   },
   "detailed_view": {
     "message": "Detailed View"
@@ -198,6 +198,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Displays the tracker count on the Ghostery icon in the browser toolbar."
+  },
+  "dnr_rules__@_0_": {
+    "message": "DNR rules: $${0}"
   },
   "don_t_ask_again": {
     "message": "Don't ask again"
@@ -236,8 +239,8 @@
   "enter_website_url": {
     "message": "Enter website URL"
   },
-  "errors__@_0___": {
-    "message": "Errors ($${0}):"
+  "errors__@_0__": {
+    "message": "Errors ($${0})"
   },
   "essential": {
     "message": "Essential",
@@ -268,12 +271,6 @@
   "get_help": {
     "message": "Get help"
   },
-  "ghostery__action_required": {
-    "message": "Ghostery: Action required"
-  },
-  "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "Ghostery can't block them due to missing permissions."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery has been resumed."
   },
@@ -285,9 +282,6 @@
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery is all set to stop trackers in their tracks and protect your privacy while browsing!"
-  },
-  "ghostery_is_disabled": {
-    "message": "Ghostery is disabled"
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery is installed with limited functionality"
@@ -316,9 +310,6 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery will show how many trackers were blocked on a page. Clicking on the Ghostery icon reveals more detailed information."
   },
-  "ghostery_will_stop_working_in_": {
-    "message": "Ghostery will stop working in:"
-  },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Help Ghostery fight for a web where privacy is a basic human right."
   },
@@ -331,9 +322,6 @@
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
-  },
-  "hours": {
-    "message": "hours"
   },
   "ignore": {
     "message": "Ignore"
@@ -403,7 +391,7 @@
     "message": "Navigate to a website to see Ghostery in action."
   },
   "network_filters__@_0_": {
-    "message": "Network Filters: $${0}"
+    "message": "Network filters: $${0}"
   },
   "never_consent": {
     "message": "Never-Consent"
@@ -489,9 +477,6 @@
   },
   "renew_ghostery_for_full_protection": {
     "message": "renew GHOSTERY for full protection"
-  },
-  "renew_setup": {
-    "message": "Renew Setup"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Replaces the Ghostery icon in the browser toolbar with the tracker wheel."
@@ -595,9 +580,6 @@
   "trackers_count": {
     "message": "Trackers Count"
   },
-  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-    "message": "Trackers detected by Ghostery on this website:&nbsp;$${0}"
-  },
   "trackers_modified": {
     "message": "Trackers modified"
   },
@@ -639,9 +621,6 @@
     "message": "Unidentified",
     "description": "Tracker category name"
   },
-  "update_filters": {
-    "message": "Update Filters"
-  },
   "urls_blocked": {
     "message": "URLs blocked"
   },
@@ -656,9 +635,6 @@
   },
   "visit_our_blog": {
     "message": "Visit our blog"
-  },
-  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
-    "message": "We have updated Terms & Conditions. To continue using the Ghostery Tracker & Ad Blocker while browsing, please renew the setup."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "We know you rely on Ghostery for a smooth YouTube experience. Until a more refined solution emerges, here’s a temporary fix."

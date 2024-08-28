@@ -21,10 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: packages/libs
-        run: npm test
-        working-directory: packages/libs
-
       - name: packages/trackers-preview
         run: npm test
         working-directory: packages/trackers-preview
@@ -32,18 +28,6 @@ jobs:
       - name: packages/ui
         run: npm test
         working-directory: packages/ui
-
-      - name: MV2 - Lint
-        working-directory: extension-manifest-v2
-        run: npm run lint
-
-      - name: MV2 - Test
-        working-directory: extension-manifest-v2
-        run: npm run test
-
-      - name: MV2 - Build
-        working-directory: extension-manifest-v2
-        run: npm run build
 
       - name: MV3 - Test
         working-directory: extension-manifest-v3

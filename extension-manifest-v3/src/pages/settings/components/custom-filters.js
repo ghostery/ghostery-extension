@@ -71,7 +71,7 @@ export default {
                 ${__PLATFORM__ === 'firefox'
                   ? html`Network filters: ${result.networkFilters || 0} `
                   : html`
-                      <details translate="no">
+                      <details>
                         <summary>
                           <ui-text
                             type="body-s"
