@@ -11,8 +11,7 @@
 
 import * as Sentry from '@sentry/browser';
 
-import { getBrowserInfo } from '@ghostery/libs';
-
+import getBrowserInfo from './browser-info.js';
 import debug from './debug.js';
 
 const manifest = chrome.runtime.getManifest();
