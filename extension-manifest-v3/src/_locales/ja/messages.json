@@ -177,12 +177,12 @@
   "custom_filters": {
     "message": "カスタムフィルター"
   },
+  "custom_filters_has_been_updated": {
+    "message": "カスタムフィルターが更新されました"
+  },
   "customer_interaction": {
     "message": "顧客インタラクション",
     "description": "Tracker category name"
-  },
-  "days": {
-    "message": "日"
   },
   "detailed_view": {
     "message": "詳細ビュー"
@@ -198,6 +198,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "ブラウザのツールバーのGhosteryアイコンにトラッカー数を表示します。"
+  },
+  "dnr_rules__@_0_": {
+    "message": "DNRルール: $${0}"
   },
   "don_t_ask_again": {
     "message": "二度と聞くな"
@@ -236,8 +239,8 @@
   "enter_website_url": {
     "message": "ウェブサイトのURLを入力"
   },
-  "errors__@_0___": {
-    "message": "エラー ($${0}):"
+  "errors__@_0__": {
+    "message": "エラー ($${0})"
   },
   "essential": {
     "message": "必需",
@@ -268,12 +271,6 @@
   "get_help": {
     "message": "ヘルプ"
   },
-  "ghostery__action_required": {
-    "message": "Ghostery: 要対応"
-  },
-  "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "Ghosteryは権限が足りないため、ブロックできません。"
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghosteryが再開されました。"
   },
@@ -285,9 +282,6 @@
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghosteryは、トラッカーを足止めし、ブラウジング中のプライバシーを保護するようにきちんと設定されています!"
-  },
-  "ghostery_is_disabled": {
-    "message": "Ghosteryが無効になっています"
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghosteryは制限付きの機能でインストールされています。"
@@ -316,9 +310,6 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghosteryは、あるページでブロックされたトラッカーの数を表示します。Ghosteryのアイコンをクリックすると、より詳細な情報が表示されます。"
   },
-  "ghostery_will_stop_working_in_": {
-    "message": "Ghosteryの停止:"
-  },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。ぜひサポートをお願いいたします。"
   },
@@ -331,9 +322,6 @@
   "hosting": {
     "message": "ホスティング",
     "description": "Tracker category name"
-  },
-  "hours": {
-    "message": "時間"
   },
   "ignore": {
     "message": "無視する"
@@ -490,9 +478,6 @@
   "renew_ghostery_for_full_protection": {
     "message": "Ghosteryを更新して包括的な保護機能を利用する"
   },
-  "renew_setup": {
-    "message": "更新設定"
-  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "ブラウザのツールバーのGhosteryのアイコンをトラッカーホイールに置き換えます。"
   },
@@ -595,9 +580,6 @@
   "trackers_count": {
     "message": "トラッカーカウント"
   },
-  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-    "message": "このウェブサイト上でGhosteryがトラッカーを検出:&nbsp;$${0}"
-  },
   "trackers_modified": {
     "message": "変更されたトラッカー"
   },
@@ -639,9 +621,6 @@
     "message": "未知",
     "description": "Tracker category name"
   },
-  "update_filters": {
-    "message": "フィルターを更新"
-  },
   "urls_blocked": {
     "message": "ブロック済みURL"
   },
@@ -656,9 +635,6 @@
   },
   "visit_our_blog": {
     "message": "ブログを見る"
-  },
-  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
-    "message": "利用規約を更新しました。Ghosteryのトラッカー＆広告ブロッカーを引き続きご利用いただくには、セットアップを更新してください。"
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "スムーズなYouTube体験のためにGhosteryに依存していることは承知しています。より洗練されたソリューションが登場するまでの一時的な解決策をご紹介します。"

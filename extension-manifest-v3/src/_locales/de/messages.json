@@ -177,12 +177,12 @@
   "custom_filters": {
     "message": "Benutzerdefinierte Filter"
   },
+  "custom_filters_has_been_updated": {
+    "message": "Benutzerdefinierte Filter wurden aktualisiert"
+  },
   "customer_interaction": {
     "message": "Kundeninteraktion",
     "description": "Tracker category name"
-  },
-  "days": {
-    "message": "Tage"
   },
   "detailed_view": {
     "message": "Detailansicht"
@@ -198,6 +198,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Zeigt den Tracker-Zähler auf dem Ghostery-Symbol in der Browser-Werkzeugleiste an"
+  },
+  "dnr_rules__@_0_": {
+    "message": "Regeln des DNR: $${0}"
   },
   "don_t_ask_again": {
     "message": "Frag nicht noch einmal"
@@ -236,8 +239,8 @@
   "enter_website_url": {
     "message": "URL der Website eingeben"
   },
-  "errors__@_0___": {
-    "message": "Fehler ($${0}):"
+  "errors__@_0__": {
+    "message": "Fehler ($${0})"
   },
   "essential": {
     "message": "Essenziell",
@@ -268,12 +271,6 @@
   "get_help": {
     "message": "Hilfe erhalten"
   },
-  "ghostery__action_required": {
-    "message": "Ghostery: Aktion erforderlich"
-  },
-  "ghostery_can_t_block_them_due_to_missing_permissions_": {
-    "message": "Ghostery kann sie aufgrund fehlender Berechtigungen nicht blocken."
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery wird fortgesetzt."
   },
@@ -285,9 +282,6 @@
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery ist bereit, um Tracker zu unterbinden und Ihre Daten zu schützen, während Sie browsen!"
-  },
-  "ghostery_is_disabled": {
-    "message": "Ghostery ist deaktiviert"
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery ist mit eingeschränkter Funktionalität installiert"
@@ -316,9 +310,6 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery zeigt Ihnen, wie viele Tracker auf einer Seite blockiert wurden. Wenn Sie auf das Ghostery-Symbol klicken, erhalten Sie detailliertere Informationen."
   },
-  "ghostery_will_stop_working_in_": {
-    "message": "Ghostery funktioniert nicht mehr in:"
-  },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Helfen Sie Ghostery, für ein Web zu kämpfen, in dem Privatsphäre ein grundlegendes Menschenrecht ist."
   },
@@ -331,9 +322,6 @@
   "hosting": {
     "message": "Hosting",
     "description": "Tracker category name"
-  },
-  "hours": {
-    "message": "Stunden"
   },
   "ignore": {
     "message": "Ignorieren"
@@ -490,9 +478,6 @@
   "renew_ghostery_for_full_protection": {
     "message": "erneuern Sie GHOSTERY für vollständigen Schutz"
   },
-  "renew_setup": {
-    "message": "Einrichtung erneuern"
-  },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Ersetzt das Ghostery-Symbol in der Werkzeugleiste des Browsers mit dem Tracker-Rad."
   },
@@ -595,9 +580,6 @@
   "trackers_count": {
     "message": "Tracker-Zähler"
   },
-  "trackers_detected_by_ghostery_on_this_website__nbsp_@_0_": {
-    "message": "Von Ghostery erkannte Tracker auf dieser Website:&nbsp;$${0}"
-  },
   "trackers_modified": {
     "message": "Geänderte Tracker"
   },
@@ -639,9 +621,6 @@
     "message": "Nicht identifiziert",
     "description": "Tracker category name"
   },
-  "update_filters": {
-    "message": "Filter aktualisieren"
-  },
   "urls_blocked": {
     "message": "Blockierte URLs"
   },
@@ -656,9 +635,6 @@
   },
   "visit_our_blog": {
     "message": "Besuche unseren Blog"
-  },
-  "we_have_updated_terms___conditions__to_continue_using_the_ghostery_tracker___ad_blocker_while_browsing__please_renew_the_setup_": {
-    "message": "Wir haben unsere allgemeinen Geschäftsbedingungen aktualisiert. Um den Ghostery Tracker & Ad Blocker beim Surfen weiterhin nutzen zu können, erneuern Sie bitte die Einrichtung."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Wir wissen, dass du dich für ein reibungsloses YouTube-Erlebnis auf Ghostery verlässt. Bis eine bessere Lösung gefunden ist, haben wir hier eine vorübergehende Lösung."
