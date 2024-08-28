@@ -43,7 +43,7 @@ export default {
           href="${router.backUrl()}"
           layout="row center size:6 fixed top:2.5 right:2.5 layer:100"
         >
-          <ui-icon name="close" layout="size:3" color="gray-900"></ui-icon>
+          <ui-icon name="close" layout="size:3" color="gray-800"></ui-icon>
         </a>
       </ui-action>
     </template>

@@ -50,7 +50,7 @@ export default {
     }
 
     :host([type="warning"]) {
-      color: var(--ui-color-gray-800);
+      color: var(--ui-color-warning-text);
       background: var(--ui-color-warning-500);
     }
 

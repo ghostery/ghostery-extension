@@ -21,7 +21,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-white);
+      background: var(--ui-color-onboarding-card);
       border-radius: 16px;
       box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
     }

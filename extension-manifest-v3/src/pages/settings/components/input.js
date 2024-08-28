@@ -62,6 +62,17 @@ export default {
       padding-right: 28px;
     }
 
+    @media (prefers-color-scheme: dark) {
+      ::slotted(select) {
+        background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23eceff5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      }
+    }
+
+    ::slotted(input)::placeholder,
+    ::slotted(select)::placeholder {
+      color: var(--ui-color-gray-400);
+    }
+
     :host([icon]) ::slotted(input) {
       padding-left: 44px;
     }

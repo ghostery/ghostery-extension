@@ -15,6 +15,7 @@ import '../global/index.js';
 
 // Styles
 import './styles.css';
+import './dark.css';
 
 // Components
 define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {

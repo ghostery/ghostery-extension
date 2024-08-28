@@ -72,7 +72,7 @@ export default {
                       name="${tracker.category}"
                       layout="size:3 padding:0.5"
                     ></ui-panel-category-icon>
-                    <ui-text type="body-l" color="gray-500">
+                    <ui-text type="body-l" color="gray-600">
                       ${labels.categories[tracker.category]}
                     </ui-text>
                   </div>
@@ -83,7 +83,7 @@ export default {
                         name="organization"
                         layout="size:3 padding:0.5"
                       ></ui-panel-category-icon>
-                      <ui-text type="body-l" color="gray-500">
+                      <ui-text type="body-l" color="gray-600">
                         ${tracker.organization.name}
                       </ui-text>
                     </div>
@@ -313,7 +313,7 @@ export default {
                               layout="column items:start padding:1:1.5"
                             >
                               <ui-text type="label-m">${t.name}</ui-text>
-                              <ui-text type="label-xs" color="gray-500">
+                              <ui-text type="label-xs" color="gray-600">
                                 ${labels.categories[t.category]}
                               </ui-text>
                             </a>

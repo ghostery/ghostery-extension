@@ -41,7 +41,7 @@ export default {
     ui-panel-action {
       width: auto;
       height: 28px;
-      color: var(--ui-color-gray-500);
+      color: var(--ui-color-gray-600);
       --ui-text-color-heading: currentColor;
     }
 

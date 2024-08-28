@@ -66,7 +66,7 @@ export default {
     }
 
     #backdrop {
-      background: var(--ui-color-gray-900);
+      background: var(--ui-color-backdrop);
       opacity: 0;
       transition: all 500ms ease-out;
     }

@@ -92,7 +92,7 @@ export default {
             >
               <div layout="column gap:0.5 grow">
                 <div layout="row gap items:center">
-                  <ui-icon name="pause" color="gray-600"></ui-icon>
+                  <ui-icon name="pause" color="gray-800"></ui-icon>
                   <ui-text type="headline-xs">Pause Ghostery</ui-text>
                 </div>
                 <ui-text type="body-m" mobile-type="body-s" color="gray-600">
@@ -100,7 +100,7 @@ export default {
                 </ui-text>
                 ${globalPauseRevokeAt &&
                 html`
-                  <ui-text type="body-s" color="gray-500">
+                  <ui-text type="body-s" color="gray-600">
                     ${html`
                       <ui-text type="body-s" ellipsis
                         ><relative-time
@@ -130,7 +130,7 @@ export default {
                 >
                   <div layout="column gap:0.5 grow">
                     <div layout="row gap items:center">
-                      <ui-icon name="ads" color="gray-600"></ui-icon>
+                      <ui-icon name="ads" color="gray-800"></ui-icon>
                       <ui-text type="headline-xs">Ad-Blocking</ui-text>
                     </div>
                     <ui-text
@@ -149,7 +149,7 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="tracking" color="gray-600"></ui-icon>
+                      <ui-icon name="tracking" color="gray-800"></ui-icon>
                       <ui-text type="headline-xs">Anti-Tracking</ui-text>
                     </div>
                     <ui-text
@@ -169,7 +169,7 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="autoconsent" color="gray-600"></ui-icon>
+                      <ui-icon name="autoconsent" color="gray-800"></ui-icon>
                       <ui-text type="headline-xs">Never-Consent</ui-text>
                     </div>
                     <ui-text
@@ -191,7 +191,7 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="pin" color="gray-600"></ui-icon>
+                      <ui-icon name="pin" color="gray-800"></ui-icon>
                       <ui-text type="headline-xs">Regional Filters</ui-text>
                     </div>
                     <ui-text
@@ -242,7 +242,7 @@ export default {
                   <div layout="row gap items:center">
                     <ui-icon
                       name="search"
-                      color="gray-600"
+                      color="gray-800"
                       layout="size:2"
                     ></ui-icon>
                     <ui-text type="headline-xs">
@@ -265,7 +265,7 @@ export default {
                 >
                   <div layout="column grow items:start gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="dots" color="gray-600"></ui-icon>
+                      <ui-icon name="dots" color="gray-800"></ui-icon>
                       <ui-text type="headline-xs">
                         Experimental Filters
                       </ui-text>
@@ -303,7 +303,7 @@ export default {
                       <div layout="row gap items:center">
                         <ui-icon
                           name="detailed-view"
-                          color="gray-600"
+                          color="gray-800"
                         ></ui-icon>
                         <ui-text type="headline-xs">Custom Filters</ui-text>
                       </div>

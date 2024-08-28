@@ -97,7 +97,7 @@ export default {
                       onclick="${openTabWithUrl}"
                       target="_blank"
                     >
-                      <ui-icon name="whotracksme" color="gray-900"></ui-icon>
+                      <ui-icon name="whotracksme" color="gray-800"></ui-icon>
                     </a>
                   </ui-panel-action>
                 </ui-tooltip>
@@ -115,7 +115,7 @@ export default {
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'graph')}">
-                  <ui-icon name="chart" color="gray-900"></ui-icon>
+                  <ui-icon name="chart" color="gray-800"></ui-icon>
                 </button>
               </ui-panel-action>
             </ui-tooltip>
@@ -127,7 +127,7 @@ export default {
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'list')}">
-                  <ui-icon name="list" color="gray-900"></ui-icon>
+                  <ui-icon name="list" color="gray-800"></ui-icon>
                 </button>
               </ui-panel-action>
             </ui-tooltip>
