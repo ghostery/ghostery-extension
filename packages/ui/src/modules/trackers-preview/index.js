@@ -68,7 +68,7 @@ export default define({
                 >
                   <ui-icon
                     name="close"
-                    color="gray-900"
+                    color="gray-800"
                     layout="size:2.5"
                   ></ui-icon>
                 </button>
@@ -106,8 +106,14 @@ export default define({
           `}
     </template>
   `.css`
+    :host {
+      border: 1px solid var(--ui-color-gray-300);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
     footer {
-      background: linear-gradient(180deg, #F0F2F7 0%, #FFFFFF 90%);
+      background: var(--ui-color-gray-100);
     }
 
     ui-button {

@@ -13,6 +13,7 @@ import { define } from 'hybrids';
 
 // Styles
 import './styles.css';
+import '../panel/dark.css';
 
 // Global components
 import '../global/index.js';
@@ -21,8 +22,6 @@ import '../global/index.js';
 import './onboarding.js';
 
 // Iframes
-import './iframe.js';
-import './renew.js';
 import './opera-serp.js';
 
 // Components

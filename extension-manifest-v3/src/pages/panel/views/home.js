@@ -142,7 +142,7 @@ export default {
             </ui-action>
             <ui-action slot="actions">
               <a href="${router.url(Navigation)}">
-                <ui-icon name="menu" color="gray-900"></ui-icon>
+                <ui-icon name="menu" color="gray-800"></ui-icon>
               </a>
             </ui-action>
           </ui-panel-header>

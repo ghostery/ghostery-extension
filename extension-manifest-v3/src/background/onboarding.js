@@ -10,13 +10,7 @@
  */
 
 import { observe } from '/store/options.js';
-import { sendShowIframeMessage } from '/utils/iframe.js';
 import { showOperaSerpNotification } from '/notifications/opera-serp.js';
-
-import { tabStats } from './stats.js';
-
-const NOTIFICATION_DELAY = 24 * 60 * 60 * 1000; // a day in milliseconds
-const NOTIFICATION_TRACKERS_THRESHOLD = 10;
 
 let done = false;
 let shownAt = 0;
@@ -31,25 +25,10 @@ observe((options) => {
   }
 });
 
-chrome.webNavigation.onCompleted.addListener((details) => {
-  if (details.frameId === 0) {
-    if (!done) {
-      if (shownAt && Date.now() - shownAt > NOTIFICATION_DELAY) {
-        setTimeout(() => {
-          const stats = tabStats.get(details.tabId);
-          if (
-            stats &&
-            stats.trackers.length >= NOTIFICATION_TRACKERS_THRESHOLD
-          ) {
-            sendShowIframeMessage(
-              details.tabId,
-              'pages/onboarding/iframe.html',
-            );
-          }
-        }, 1000);
-      }
-    } else if (__PLATFORM__ === 'opera') {
+if (__PLATFORM__ === 'opera') {
+  chrome.webNavigation.onCompleted.addListener((details) => {
+    if (done && details.frameId === 0) {
       showOperaSerpNotification(details.tabId);
     }
-  }
-});
+  });
+}

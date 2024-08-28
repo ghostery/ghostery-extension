@@ -10,7 +10,7 @@
  */
 
 import { define, html } from 'hybrids';
-import { GHOSTERY_DOMAIN } from '@ghostery/libs';
+import { GHOSTERY_DOMAIN } from '../../../utils/urls.js';
 
 import disabled from '../illustrations/disabled.js';
 

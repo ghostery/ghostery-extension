@@ -24,7 +24,7 @@ export default {
   `.css`
     :host {
       text-decoration: none;
-      color: var(--ui-color-gray-900);
+      color: var(--ui-color-gray-800);
       --ui-text-color-heading: currentColor;
     }
 

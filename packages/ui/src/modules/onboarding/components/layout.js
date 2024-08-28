@@ -32,15 +32,19 @@ export default {
       </div>
     </template>
   `.css`
+    :host {
+      --ui-color-onboarding-layout: rgba(255,255,255,0.1);
+    }
+
     #bg { transform: translateX(-50%); }
 
     #c-1 {
-      background: radial-gradient(circle, #A1E4FF 0%, rgba(255,255,255,0.1) 70%);
+      background: radial-gradient(circle, #A1E4FF 0%, var(--ui-onboarding-layout-bg) 70%);
       opacity: 0.4;
     }
 
     #c-2 {
-      background: radial-gradient(circle, #3751D5 0%, rgba(255,255,255,0.1) 65%);
+      background: radial-gradient(circle, #3751D5 0%, var(--ui-onboarding-layout-bg) 65%);
       opacity: 0.3;
     }
 
