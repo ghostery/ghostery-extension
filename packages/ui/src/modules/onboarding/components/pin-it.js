@@ -25,7 +25,7 @@ export default {
           color="success-500"
         ></ui-icon>
       </div>
-      <ui-text type="display-xs" color="inherit"><slot></slot></ui-text>
+      <ui-text type="display-xs"><slot></slot></ui-text>
     </template>
   `.css`
     @keyframes shake {
@@ -39,6 +39,10 @@ export default {
       box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
       border-radius: 8px;
       animation: shake 1s ease-in-out infinite;
+      color: white;
+    }
+
+    ui-text {
       color: white;
     }
 
