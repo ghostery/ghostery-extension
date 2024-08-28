@@ -11,3 +11,8 @@ web-ext-artifacts/
 xcuserdata
 *.xcloc
 xcode/**/*/Package.resolved
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
