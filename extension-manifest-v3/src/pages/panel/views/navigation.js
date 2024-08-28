@@ -128,7 +128,7 @@ export default {
                     ${header
                       ? html`<ui-text
                           type="label-s"
-                          color="gray-500"
+                          color="gray-600"
                           layout="padding:1:1:0 margin:0:1"
                         >
                           ${header.toUpperCase()}

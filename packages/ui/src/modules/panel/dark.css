@@ -2,9 +2,8 @@
   html {
     --ui-color-gray-100: #0e1218;
     --ui-color-gray-200: #2b3444;
-    --ui-color-gray-300: #5e6773;
+    --ui-color-gray-300: #57616e;
     --ui-color-gray-400: #7f8aa3;
-    --ui-color-gray-500: #9da5b7;
     --ui-color-gray-600: #b2b9cf;
     --ui-color-gray-800: #eceff5;
     --ui-color-white: #181d27;
@@ -31,6 +30,7 @@
 
     --ui-color-backdrop: var(--ui-color-gray-100);
     --ui-color-warning-text: var(--ui-color-gray-100);
+    --ui-color-scroll-shadow: rgba(0, 0, 0, 0.4);
 
     --ui-shadow-header: 0px 1px 0px var(--ui-color-gray-200);
   }

@@ -107,7 +107,7 @@ export default define({
     </template>
   `.css`
     :host {
-      border: 1px solid var(--ui-color-gray-200);
+      border: 1px solid var(--ui-color-gray-300);
       border-radius: 16px;
       overflow: hidden;
     }

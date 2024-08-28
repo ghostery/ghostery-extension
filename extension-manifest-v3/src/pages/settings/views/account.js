@@ -97,7 +97,7 @@ export default {
                   <div>
                     <ui-text type="headline-s">Join Ghostery</ui-text>
                     <ui-text
-                      color="gray-500"
+                      color="gray-600"
                       type="body-m"
                       mobile-type="body-s"
                     >

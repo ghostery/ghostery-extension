@@ -100,7 +100,7 @@ export default {
                 </ui-text>
                 ${globalPauseRevokeAt &&
                 html`
-                  <ui-text type="body-s" color="gray-500">
+                  <ui-text type="body-s" color="gray-600">
                     ${html`
                       <ui-text type="body-s" ellipsis
                         ><relative-time

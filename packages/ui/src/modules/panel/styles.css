@@ -17,7 +17,6 @@
 html {
   --ui-color-gray-800: #202c44;
   --ui-color-gray-600: #49556e;
-  --ui-color-gray-500: #6d778e;
   --ui-color-gray-400: #9ba3b4;
   --ui-color-gray-300: #c3cad9;
   --ui-color-gray-200: #dfe3eb;
@@ -46,6 +45,7 @@ html {
 
   --ui-color-backdrop: var(--ui-color-gray-800);
   --ui-color-warning-text: var(--ui-color-gray-800);
+  --ui-color-scroll-shadow: rgba(0, 0, 0, 0.1);
 
   --ui-color-inherit: inherit;
 
