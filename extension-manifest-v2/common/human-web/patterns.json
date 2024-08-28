@@ -1,0 +1,149 @@
+{
+    "urlPatterns": [
+        "\\.google\\..*?[#?&;]q=[^$&]+",
+        ".search.yahoo\\..*?[#?&;]p=[^$&]+",
+        ".linkedin.*?\\/pub\\/dir+",
+        "\\.bing\\..*?[#?&;]q=[^$&]+",
+        ".*"
+    ],
+    "searchEngines": [
+        "0",
+        "1",
+        "3"
+    ],
+    "scrape": {
+        "0": {
+            ".med #search": {
+                "q": {
+                    "item": "#ires",
+                    "type": "searchQuery",
+                    "etype": "data-async-context",
+                    "keyName": "q",
+                    "functionsApplied": [
+                        [
+                            "splitF",
+                            "query:",
+                            1
+                        ]
+                    ]
+                }
+            }
+        },
+        "1" :{
+            ".sbq-w": {
+                "q": {
+                    "item": "#yschsp",
+                    "type": "searchQuery",
+                    "etype": "value",
+                    "keyName": "query"
+                }
+            }
+        },
+        "2": {
+            ".profile-card": {
+                "img": {
+                    "item": ".image",
+                    "type": "arr",
+                    "etype": "src",
+                    "keyName": "imgl"
+                },
+                "fullName": {
+                    "item": ".content h3 a",
+                    "type": "arr",
+                    "etype": "text",
+                    "keyName": "fn"
+                },
+                "profileLink": {
+                    "item": ".content h3 a",
+                    "type": "arr",
+                    "etype": "href",
+                    "keyName": "pl"
+                },
+                "currentWork": {
+                    "item": ".content p.headline",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "cw"
+                }
+            },
+            "ctry": {
+                "ctry": {
+                    "type": "standard",
+                    "etype": "ctry",
+                    "keyName": "ctry"
+                }
+            }
+        },
+        "3": {
+            "#sb_form": {
+                "q": {
+                    "item": "#sb_form_q",
+                    "type": "searchQuery",
+                    "etype": "value",
+                    "keyName": "query"
+                }
+            }
+        },
+        "4": {
+            "#errorPageContainer": {
+                "reason": {
+                    "item": "h1[id^=errorTitleText_]",
+                    "type": "arr",
+                    "etype": "id",
+                    "keyName": "reason",
+                    "required": "yes"
+                }
+            },
+            "qurl": {
+                "qurl": {
+                    "type": "standard",
+                    "etype": "url",
+                    "keyName": "qurl"
+                }
+            },
+            "ctry": {
+                "ctry": {
+                    "type": "standard",
+                    "etype": "ctry",
+                    "keyName": "ctry"
+                }
+            }
+        }
+    },
+    "payloads": {
+        "2": {
+            ".profile-card": {
+                "type": "single",
+                "results": "single",
+                "action": "linkedin"
+            }
+        },
+        "4": {
+            "#errorPageContainer": {
+                "type": "single",
+                "results": "custom",
+                "action": "maliciousUrl",
+                "fields": [
+                    [
+                        "qurl",
+                        "qurl"
+                    ],
+                    [
+                        "#errorPageContainer",
+                        "reason"
+                    ],
+                    [
+                        "ctry",
+                        "ctry"
+                    ]
+                ]
+            }
+        }
+    },
+    "idMapping": {
+        "0": "go",
+        "1": "ya",
+        "2": "lnkd",
+        "3": "bing"
+    }
+}

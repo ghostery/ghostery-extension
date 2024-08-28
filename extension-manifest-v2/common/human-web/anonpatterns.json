@@ -1,0 +1,614 @@
+{
+    "urlPatterns": [
+        "\\.google\\..*?[#?&;]q=[^$&]+",
+        ".search.yahoo\\..*?[#?&;][pq]=[^$&]+",
+        ".linkedin.*?\\/pub\\/dir+",
+        "\\.bing\\..*?[#?&;]q=[^$&]+",
+        ".*"
+    ],
+    "searchEngines": [
+        "0",
+        "1",
+        "3"
+    ],
+    "scrape": {
+        "0": {
+            ".r": {
+                "t": {
+                    "item": "a",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "t"
+                },
+                "u": {
+                    "item": "a",
+                    "type": "arr",
+                    "etype": "href",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            ".med #search": {
+                "q": {
+                    "item": "#ires",
+                    "type": "searchQuery",
+                    "etype": "data-async-context",
+                    "keyName": "q",
+                    "functionsApplied": [
+                        [
+                            "splitF",
+                            "query:",
+                            1
+                        ]
+                    ]
+                }
+            },
+            "#tads .ads-ad": {
+                "u": {
+                    "item": ".ads-visurl cite",
+                    "type": "multiple",
+                    "etype": "textContent",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        [
+                            false,
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "#mbEnd .ads-ad": {
+                "u": {
+                    "item": "a[id^=s1p]",
+                    "type": "multiple",
+                    "etype": "href",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            "parseU",
+                            "qs",
+                            "adurl"
+                        ],
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            ".pla-unit-title": {
+                "u": {
+                    "item": ".pla-unit-title-link",
+                    "type": "multiple",
+                    "etype": "href",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            "parseU",
+                            "qs",
+                            "adurl"
+                        ],
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "#tadsb .ads-ad": {
+                "u": {
+                    "item": ".ads-visurl cite",
+                    "type": "multiple",
+                    "etype": "textContent",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "qurl": {
+                "qurl": {
+                    "type": "standard",
+                    "etype": "url",
+                    "keyName": "qurl",
+                    "functionsApplied": [
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "ctry": {
+                "ctry": {
+                    "type": "standard",
+                    "etype": "ctry",
+                    "keyName": "ctry"
+                }
+            },
+            "._gt": {
+                "t": {
+                    "item": "[data-akp-oq] ._rl",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "t"
+                },
+                "u": {
+                    "item": ".rllt__action-button._Jrh",
+                    "type": "arr",
+                    "etype": "href",
+                    "keyName": "u"
+                },
+                "mu": {
+                    "item": ".rllt__action-button.rllt__directions-button",
+                    "type": "arr",
+                    "etype": "href",
+                    "keyName": "mu"
+                }
+            },
+            ".kp-blk._rod._Rqb._RJe": {
+                "ent": {
+                    "item": "._f2g ._g2g span",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "ent"
+                },
+                "pred": {
+                    "item": "._f2g ._i2g span",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "pred"
+                },
+                "ans": {
+                    "item": "._XWk",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "ans"
+                }
+            },
+            "._OKe .g": {
+                "u": {
+                    "item": ".s",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "u"
+                }
+            },
+            "._IK": {
+                "ent": {
+                    "item": ".kxbccp span",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "ent"
+                },
+                "pred": {
+                    "item": ".kxbccm .kxbc",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "pred"
+                }
+            },
+            "#taw p.card-section": {
+                "sq": {
+                    "item": "a.spell",
+                    "type": "arr",
+                    "etype": "textContent",
+                    "keyName": "sq"
+                }
+            },
+            "#gs_lc0": {
+                "oq": {
+                    "item": "#lst-ib.gsfi",
+                    "type": "arr",
+                    "etype": "value",
+                    "keyName": "oq"
+                }
+            }
+
+        },
+        "1": {
+            ".dd.algo": {
+                "t": {
+                    "item": "h3 [href]",
+                    "type": "arr",
+                    "etype": "text",
+                    "keyName": "t"
+                },
+                "u": {
+                    "item": "h3 [href]",
+                    "type": "arr",
+                    "etype": "href",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            "splitF",
+                            "RU=",
+                            1
+                        ],
+                        [
+                            "splitF",
+                            "RK=0/",
+                            0
+                        ],
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            ".sbq-w": {
+                "q": {
+                    "item": "#yschsp",
+                    "type": "searchQuery",
+                    "etype": "value",
+                    "keyName": "query"
+                }
+            },
+            "qurl": {
+                "qurl": {
+                    "type": "standard",
+                    "etype": "url",
+                    "keyName": "qurl",
+                    "functionsApplied": [
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "ctry": {
+                "ctry": {
+                    "type": "standard",
+                    "etype": "ctry",
+                    "keyName": "ctry"
+                }
+            }
+        },
+        "2":{},
+        "3": {
+            ".b_algo": {
+                "t": {
+                    "item": "h2 [href]",
+                    "type": "arr",
+                    "etype": "text",
+                    "keyName": "t"
+                },
+                "u": {
+                    "item": "h2 [href]",
+                    "type": "arr",
+                    "etype": "href",
+                    "keyName": "u",
+                    "functionsApplied": [
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "#sb_form": {
+                "q": {
+                    "item": "#sb_form_q",
+                    "type": "searchQuery",
+                    "etype": "value",
+                    "keyName": "query"
+                }
+            },
+            "qurl": {
+                "qurl": {
+                    "type": "standard",
+                    "etype": "url",
+                    "keyName": "qurl",
+                    "functionsApplied": [
+                        [
+                            "maskU",
+                            false,
+                            false
+                        ]
+                    ]
+                }
+            },
+            "ctry": {
+                "ctry": {
+                    "type": "standard",
+                    "etype": "ctry",
+                    "keyName": "ctry"
+                }
+            }
+        },
+        "4":{}
+    },
+    "payloads": {
+        "0": {
+            ".r": {
+                "type": "query",
+                "results": "clustered",
+                "action": "query",
+                "fields": [
+                    [
+                        ".r",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ],
+                    [
+                        "ctry",
+                        "ctry"
+                    ]
+                ]
+            },
+            "#tads .ads-ad": {
+                "type": "query",
+                "results": "clustered",
+                "action": "ads_A",
+                "fields": [
+                    [
+                        "#tads .ads-ad",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            "#mbEnd .ads-ad": {
+                "type": "query",
+                "results": "clustered",
+                "action": "ads_B",
+                "fields": [
+                    [
+                        "#mbEnd .ads-ad",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            ".pla-unit-title": {
+                "type": "query",
+                "results": "clustered",
+                "action": "ads_C",
+                "fields": [
+                    [
+                        ".pla-unit-title",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            "#tadsb .ads-ad": {
+                "type": "query",
+                "results": "clustered",
+                "action": "ads_D",
+                "fields": [
+                    [
+                        "#tadsb .ads-ad",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            "._gt": {
+                "type": "query",
+                "results": "clustered",
+                "action": "locdata",
+                "fields": [
+                    [
+                        "._gt",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            ".kp-blk._rod._Rqb._RJe": {
+                "type": "query",
+                "results": "clustered",
+                "action": "snippet",
+                "fields": [
+                    [
+                        ".kp-blk._rod._Rqb._RJe",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            "._OKe .g": {
+                "type": "query",
+                "results": "clustered",
+                "action": "snippet2",
+                "fields": [
+                    [
+                        "._OKe .g",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            "._IK": {
+                "type": "query",
+                "results": "clustered",
+                "action": "snippet3",
+                "fields": [
+                    [
+                        "._IK",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".med #search",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ]
+                ]
+            },
+            "#taw p.card-section": {
+                "type": "query",
+                "results": "clustered",
+                "action": "sq",
+                "fields": [
+                    [
+                        "#taw p.card-section",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        "#gs_lc0",
+                        "oq"
+                    ]
+                ]
+            }
+        },
+        "1": {
+            ".dd.algo": {
+                "type": "query",
+                "results": "clustered",
+                "action": "query",
+                "fields": [
+                    [
+                        ".dd.algo",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        ".sbq-w",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ],
+                    [
+                        "ctry",
+                        "ctry"
+                    ]
+                ]
+            }
+        },
+        "2":{},
+        "3": {
+            ".b_algo": {
+                "type": "query",
+                "results": "clustered",
+                "action": "query",
+                "fields": [
+                    [
+                        ".b_algo",
+                        "r",
+                        "join"
+                    ],
+                    [
+                        "#sb_form",
+                        "q"
+                    ],
+                    [
+                        "qurl",
+                        "qurl"
+                    ],
+                    [
+                        "ctry",
+                        "ctry"
+                    ]
+                ]
+            }
+        },
+        "4":{}
+    },
+    "idMapping": {
+        "0": "go",
+        "1": "ya",
+        "2": "lnkd",
+        "3": "bing"
+    }
+}
