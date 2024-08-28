@@ -31,6 +31,8 @@ const engines = new Map();
 const ENV = new Map([
   ['ext_ghostery', true],
   ['cap_html_filtering', checkUserAgent('Firefox')],
+  // can be removed in once $replace support is sufficiently distributed
+  ['cap_replace_modifier', checkUserAgent('Firefox')],
   ['env_firefox', checkUserAgent('Firefox')],
   ['env_chromium', checkUserAgent('Chrome')],
   ['env_edge', checkUserAgent('Edg')],
