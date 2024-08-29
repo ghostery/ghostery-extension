@@ -17,8 +17,21 @@ import shelljs from 'shelljs';
 import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
 import REGIONS from '../../src/utils/regions.js';
 
-function checksum(content) {
+function createChecksum(content) {
   return createHash('sha256').update(content).digest('hex');
+}
+
+function isChecksumMatched(path, checksum) {
+  if (existsSync(path) && createChecksum(readFileSync(path)) === checksum) {
+    if (process.stdout.isTTY) {
+      process.stdout.write('\r');
+      process.stdout.clearLine(1);
+    }
+
+    return true;
+  }
+
+  return false;
 }
 
 const REGIONAL_ENGINES = REGIONS.reduce((acc, region) => {
@@ -45,15 +58,16 @@ const ENGINES = {
 };
 
 const TARGET_PATH = resolve('src/rule_resources');
+const CDN_HOSTNAME = process.argv.includes('--staging')
+  ? 'staging-cdn.ghostery.com'
+  : 'cdn.ghostery.com';
 
-const staging = process.argv.includes('--staging');
-
-const CDN_HOSTNAME = staging ? 'staging-cdn.ghostery.com' : 'cdn.ghostery.com';
+console.log(`Downloading engines from ${CDN_HOSTNAME}...`);
 
 shelljs.mkdir('-p', TARGET_PATH);
 
 for (const [name, target] of Object.entries(ENGINES)) {
-  console.log(`Downloading "${name}"...`);
+  process.stdout.write(`Downloading "${name}"...`);
 
   const list = await fetch(
     `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
@@ -79,11 +93,7 @@ for (const [name, target] of Object.entries(ENGINES)) {
 
   const outputPath = `${TARGET_PATH}/engine-${target}.dat`;
 
-  if (
-    existsSync(outputPath) &&
-    checksum(readFileSync(outputPath)) === engine.checksum
-  ) {
-    console.log('Checksum match - skipping download');
+  if (isChecksumMatched(outputPath, engine.checksum)) {
     continue;
   }
 
@@ -98,6 +108,7 @@ for (const [name, target] of Object.entries(ENGINES)) {
   });
 
   writeFileSync(outputPath, new Uint8Array(rules));
+  process.stdout.write(' done\n');
 }
 
 const DNR = {
@@ -107,13 +118,12 @@ const DNR = {
   'dnr-ios': 'safari',
   'dnr-fixes': 'fixes',
   'dnr-fixes-safari': 'fixes-safari',
-  'dnr-trackerdb': 'trackerdb',
-  'dnr-trackerdb-safari': 'trackerdb-safari',
   ...REGIONAL_ENGINES,
 };
 
 for (const [name, target] of Object.entries(DNR)) {
-  console.log(`Downloading DNR ruleset for "${name}"...`);
+  if (process.stdout.isTTY) process.stdout.clearLine(1);
+  process.stdout.write(`Downloading DNR ruleset for "${name}"...`);
 
   const list = await fetch(
     `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
@@ -132,11 +142,7 @@ for (const [name, target] of Object.entries(DNR)) {
   if (list.dnr) {
     const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
 
-    if (
-      existsSync(outputPath) &&
-      checksum(readFileSync(outputPath)) === list.dnr.checksum
-    ) {
-      console.log('Checksum match - skipping download');
+    if (isChecksumMatched(outputPath, list.dnr.checksum)) {
       continue;
     }
 
@@ -151,6 +157,7 @@ for (const [name, target] of Object.entries(DNR)) {
     });
 
     writeFileSync(outputPath, dnr);
+    process.stdout.write(' done\n');
   }
 }
 

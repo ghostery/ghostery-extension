@@ -36,10 +36,6 @@ const categoryOrder = [
 
 const setup = asyncSetup([engines.init(engines.TRACKERDB_ENGINE)]);
 
-export function isCategoryBlockedByDefault(categoryId) {
-  return categoryId !== 'essential';
-}
-
 export function getUnidentifiedTracker(hostname) {
   return {
     id: hostname,
@@ -109,7 +105,7 @@ function getTrackers() {
               privacyPolicyUrl: organization.privacy_policy_url,
             }
           : undefined,
-        blockedByDefault: isCategoryBlockedByDefault(p.category),
+        blockedByDefault: true,
       });
     }
   }
@@ -151,7 +147,7 @@ export async function getCategories() {
       {
         key,
         description,
-        blockedByDefault: isCategoryBlockedByDefault(key),
+        blockedByDefault: true,
         trackers: [],
       },
     ]),

@@ -164,7 +164,7 @@ function adblockerInjectStylesWebExtension(
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-async function adblockerOnMessage(msg, sender) {
+async function injectCosmetics(msg, sender) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
@@ -273,7 +273,7 @@ async function adblockerOnMessage(msg, sender) {
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
-    adblockerOnMessage(msg, sender).catch((e) =>
+    injectCosmetics(msg, sender).catch((e) =>
       console.error(
         `Adblocker: Error while processing cosmetics filters: ${e}`,
       ),
@@ -340,6 +340,13 @@ ${scripts.join('\n\n')}}
 }
 
 async function injectScriptlets(tabId, url) {
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.error(`Error while setup adblocker filters: ${e}`);
+    return;
+  }
+
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(options, hostname)) {
     return;
@@ -347,13 +354,6 @@ async function injectScriptlets(tabId, url) {
 
   const tabHostname = tabStats.get(tabId)?.hostname;
   if (tabHostname && isPaused(options, tabHostname)) {
-    return;
-  }
-
-  try {
-    setup.pending && (await setup.pending);
-  } catch (e) {
-    console.error(`Error while setup adblocker filters: ${e}`);
     return;
   }
 
