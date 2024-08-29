@@ -497,7 +497,7 @@ if (__PLATFORM__ === 'firefox') {
         return result;
       }
     },
-    { urls: ['<all_urls>'] },
+    { urls: ['http://*/*', 'https://*/*'] },
     ['blocking'],
   );
 
@@ -538,7 +538,7 @@ if (__PLATFORM__ === 'firefox') {
         return updateResponseHeadersWithCSP(details, cspPolicies);
       }
     },
-    { urls: ['<all_urls>'], types: ['main_frame'] },
+    { urls: ['http://*/*', 'https://*/*'] },
     ['blocking', 'responseHeaders'],
   );
 }
