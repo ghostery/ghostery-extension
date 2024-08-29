@@ -511,8 +511,8 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       const request = Request.fromRequestDetails(details);
-      let cspPolicies = [];
-      let htmlFilters = [];
+      const cspPolicies = [];
+      const htmlFilters = [];
 
       for (const name of resolveEngines(request, details.type)) {
         const engine = engines.get(name);
