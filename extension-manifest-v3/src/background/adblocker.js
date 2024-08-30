@@ -520,9 +520,11 @@ if (__PLATFORM__ === 'firefox') {
 
         htmlFilters.push(...engine.getHtmlFilters(request));
 
-        const policies = engine.getCSPDirectives(request);
-        if (policies !== undefined) {
-          cspPolicies.push(...policies);
+        if (details.type === 'main_frame') {
+          const policies = engine.getCSPDirectives(request);
+          if (policies !== undefined) {
+            cspPolicies.push(...policies);
+          }
         }
       }
 
