@@ -1,5 +1,7 @@
-import { test as base, chromium, firefox } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { downloadAddon } from '../src/helpers';
+import { loadChromiumBrowserWithExtension } from './loaders/chromium';
+import { loadFirefoxBrowserWithExtension } from './loaders/firefox';
 
 const extensionUrls = {
   firefox:
@@ -11,16 +13,16 @@ const extensionUrls = {
 const test = base.extend({
   context: async ({ browserName }, use) => {
     const extensionPath = await downloadAddon(extensionUrls[browserName]);
-    const browserType = browserName === 'firefox' ? firefox : chromium;
-    const context = await browserType.launchPersistentContext('', {
-      headless: false,
-      args: [
-        `--disable-extensions-except=${extensionPath}`,
-        `--load-extension=${extensionPath}`,
-      ],
-    });
-    await use(context);
-    await context.close();
+
+    if (browserName === 'chromium') {
+      const context = await loadChromiumBrowserWithExtension(extensionPath);
+      await use(context);
+      await context.close();
+    } else if (browserName === 'firefox') {
+      const context = await loadFirefoxBrowserWithExtension(extensionPath);
+      await use(context);
+      await context.close();
+    }
   },
   extensionId: async ({ context }, use) => {
     let [background] = context.serviceWorkers();
