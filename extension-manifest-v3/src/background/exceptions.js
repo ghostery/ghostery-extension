@@ -57,12 +57,8 @@ async function updateFilters() {
       .concat(tracker.domains.map((domain) => `||${domain}^`))
       .map((f) => parseFilter(f))
       .filter((filter) => filter.isNetworkFilter())
-      .map((filter) =>
-        // Negate the filters to make them allow rules
-        filter.isException()
-          ? filter.toString().slice(2)
-          : `@@${filter.toString()}`,
-      );
+      // Negate the filters to make them allow rules
+      .map((filter) => `@@${filter.toString()}`);
 
     // Global rule domains/excludedDomains conditions based on the exception
     const domains = exception.blocked ? exception.trustedDomains : undefined;
