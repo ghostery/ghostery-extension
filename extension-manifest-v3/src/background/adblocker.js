@@ -439,19 +439,6 @@ function resolveEngines(request, type) {
     ) {
       return [];
     }
-
-    // If the tracker is not blocked by default, but the user has blocked it
-    // by the exception (otherwise the function would have returned already)
-    // we need to add the TrackerDB engine with filters for that tracker
-    if (!metadata.blockedByDefault) {
-      return enabledEngines.concat(engines.TRACKERDB_ENGINE);
-    }
-  }
-
-  // If there is no exception, but tracker is found in theTrackerDB
-  // and it is not blocked by default, it means is trusted
-  if (metadata && !metadata.blockedByDefault) {
-    return [];
   }
 
   // By default return the main enabled engines
