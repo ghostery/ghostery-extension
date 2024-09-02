@@ -77,7 +77,7 @@ export default {
         layout@390px="height:7"
         onclick="${!pauseList && dispatchAction}"
       >
-        <div id="label" layout="grow row center gap:0.5 shrink overflow">
+        <div id="label" layout="grow row center gap shrink overflow">
           <slot></slot>
         </div>
         <div

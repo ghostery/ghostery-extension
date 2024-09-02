@@ -101,18 +101,9 @@ export default {
                 ${globalPauseRevokeAt &&
                 html`
                   <ui-text type="body-s" color="gray-600">
-                    ${html`
-                      <ui-text type="body-s" ellipsis
-                        ><relative-time
-                          date="${new Date(globalPauseRevokeAt)}"
-                          format="duration"
-                          format-style="narrow"
-                          precision="minute"
-                          lang="${chrome.i18n.getUILanguage()}"
-                        ></relative-time
-                      ></ui-text>
-                    `}
-                    left
+                    <ui-panel-revoke-at
+                      revokeAt="${globalPauseRevokeAt}"
+                    ></ui-panel-revoke-at>
                   </ui-text>
                 `}
               </div>

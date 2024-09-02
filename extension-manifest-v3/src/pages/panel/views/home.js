@@ -103,7 +103,7 @@ export default {
   stats: store(TabStats),
   notification: store(Notification),
   paused: ({ options, stats }) =>
-    store.ready(options, stats) && !!options.paused[stats.hostname],
+    store.ready(options, stats) && options.paused[stats.hostname],
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
   render: ({ options, stats, notification, paused, globalPause }) => html`
@@ -163,15 +163,25 @@ export default {
                   name="${globalPause ? 'pause' : 'circle'}"
                   color="gh-panel-action"
                 ></ui-icon>
-                <ui-text
-                  type="label-m"
-                  color="gh-panel-action"
-                  layout="block:center"
-                >
-                  ${globalPause && msg`Ghostery is paused`}
-                  ${!globalPause &&
-                  (paused ? msg`Site is trusted` : msg`Trust this site`)}
-                </ui-text>
+                <div layout="column">
+                  <ui-text
+                    type="label-m"
+                    color="gh-panel-action"
+                    layout="block:center"
+                  >
+                    ${paused || globalPause
+                      ? msg`Ghostery is paused`
+                      : msg`Pause on this site`}
+                  </ui-text>
+                  ${((paused && !!paused.revokeAt) || globalPause) &&
+                  html`<ui-text type="body-xs" color="gh-panel-action">
+                    <ui-panel-revoke-at
+                      revokeAt="${globalPause
+                        ? globalPause.revokeAt
+                        : paused.revokeAt}"
+                    ></ui-panel-revoke-at>
+                  </ui-text>`}
+                </div>
               </gh-panel-pause>
             `
           : html`
