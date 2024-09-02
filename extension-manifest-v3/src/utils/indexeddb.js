@@ -22,15 +22,20 @@ export async function deleteDatabases() {
   const names = indexedDB.databases
     ? (await indexedDB.databases()).map((db) => db.name)
     : [...dbs];
-  await Promise.all(
+
+  await Promise.allSettled(
     names.map((name) => {
-      console.log(`[devtools] Deleting indexedDB database '${name}'`);
-      return deleteDB(name, {
-        blocked() {
-          console.error(
-            `Failed to delete database ${name} because it is blocked`,
-          );
-        },
+      console.info(`[devtools] Deleting indexedDB database '${name}'`);
+
+      return new Promise((resolve, reject) => {
+        deleteDB(name, {
+          blocked() {
+            console.error(
+              `[utils|indexeddb] Failed to delete database ${name} because it is blocked`,
+            );
+            reject();
+          },
+        }).then(resolve);
       });
     }),
   );

@@ -64,6 +64,8 @@ const Options = {
   },
   experimentalFilters: false,
 
+  filtersUpdatedAt: 0,
+
   // Browser toolbar icon
   trackerWheel: false,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
@@ -175,7 +177,7 @@ const Options = {
         try {
           await fn(options, prevOptions);
         } catch (e) {
-          console.error(`Options: error while observing options: `, e);
+          console.error(`[options] Error while observing options: `, e);
         }
       });
     },
@@ -252,7 +254,7 @@ export async function sync(options, keys) {
       await store.set(Options, { revision });
     }
   } catch (e) {
-    console.error(`Options: error while syncing options: `, e);
+    console.error(`[options] Error while syncing options: `, e);
   }
 }
 
@@ -317,12 +319,12 @@ async function migrateFromV8() {
         'installDate',
       ]);
 
-      console.info(`Options: successfully migrated options from v8`, options);
+      console.info(`[options] Successfully migrated options from v8`, options);
     }
 
     return options;
   } catch (e) {
-    console.error(`Options: error while migrating options`, e);
+    console.error(`[options] Error while migrating options`, e);
     return {};
   }
 }
@@ -376,7 +378,7 @@ export async function observe(...args) {
     // wait for the callback to be fired
     await wrapper(options);
   } catch (e) {
-    console.error(`Options: error while observing options: `, e);
+    console.error(`[options] Error while observing options: `, e);
   }
 
   observers.add(wrapper);

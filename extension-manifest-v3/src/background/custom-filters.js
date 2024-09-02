@@ -26,8 +26,6 @@ import * as engines from '/utils/engines.js';
 import Options, { observe } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
-export const customFiltersEngine = engines.init(engines.CUSTOM_ENGINE);
-
 const convert =
   __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
     ? createOffscreenConverter()
@@ -132,7 +130,7 @@ async function updateDNRRules(dnrRules) {
       addRules: dnrRules,
     });
 
-    console.info(`Custom Filters: DNR updated with rules: ${dnrRules.length}`);
+    console.info(`[custom filters] DNR updated with rules: ${dnrRules.length}`);
   }
 
   return dnrRules;
@@ -148,7 +146,7 @@ function updateEngine(text) {
   });
 
   console.info(
-    `Custom Filters: engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
+    `[custom filters] Engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
   );
 
   return {
@@ -156,6 +154,7 @@ function updateEngine(text) {
     cosmeticFilters: cosmeticFilters.length,
   };
 }
+
 async function update(text, { trustedScriptlets }) {
   const { networkFilters, cosmeticFilters, errors } = normalizeFilters(text, {
     trustedScriptlets,
@@ -197,14 +196,8 @@ observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
     // as custom filters should be empty
     if (!enabled) return;
 
-    const engine = await customFiltersEngine;
-    const { networkFilters, cosmeticFilters } = engine.getFilters();
-
-    // If there are filters already loaded, we can assume that
-    // filters are already added to the engine. This is specially
-    // for the case, when custom engine is reloaded because
-    // of the new adblocker version
-    if (networkFilters.length === 0 && cosmeticFilters.length === 0) {
+    // If we cannot initialize engine, we need to update it
+    if (!(await engines.init(engines.CUSTOM_ENGINE))) {
       update((await store.resolve(CustomFilters)).text, { trustedScriptlets });
     }
   } else {

@@ -22,9 +22,8 @@ import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
 import { captureException } from './errors.js';
 
+export const MAIN_ENGINE = 'main';
 export const CUSTOM_ENGINE = 'custom-filters';
-export const REGIONAL_ENGINE = 'regional-filters';
-export const FIXES_ENGINE = 'fixes';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
@@ -70,45 +69,7 @@ function saveToMemory(name, engine) {
   engines.set(name, engine);
 }
 
-// custom filter exceptions should apply to all engines
-function shareExceptions(name, engine) {
-  if (name === CUSTOM_ENGINE || name === FIXES_ENGINE) return;
-
-  // Network exceptions
-  const matchExceptions = engine.exceptions.match.bind(engine.exceptions);
-  engine.exceptions.match = (...args) => {
-    return (
-      get(CUSTOM_ENGINE).exceptions.match(...args) ||
-      get(FIXES_ENGINE).exceptions.match(...args) ||
-      matchExceptions(...args)
-    );
-  };
-
-  // Cosmetic exceptions
-  const iterMatchingFiltersUnhide =
-    engine.cosmetics.unhideIndex.iterMatchingFilters.bind(
-      engine.cosmetics.unhideIndex,
-    );
-  engine.cosmetics.unhideIndex.iterMatchingFilters = (...args) => {
-    iterMatchingFiltersUnhide(...args);
-    get(FIXES_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
-    get(CUSTOM_ENGINE).cosmetics.unhideIndex.iterMatchingFilters(...args);
-  };
-
-  const matchAllUnhideExceptions = engine.hideExceptions.matchAll.bind(
-    engine.hideExceptions,
-  );
-  engine.hideExceptions.matchAll = (...args) => {
-    return (
-      matchAllUnhideExceptions(...args) ||
-      get(FIXES_ENGINE).hideExceptions.matchAll(...args) ||
-      get(CUSTOM_ENGINE).hideExceptions.matchAll(...args)
-    );
-  };
-}
-
 const DB_NAME = registerDatabase('engines');
-
 async function getDB() {
   if (!getDB.current) {
     getDB.current = IDB.openDB(DB_NAME, 1, {
@@ -137,7 +98,6 @@ async function loadFromStorage(name) {
 
     if (engineBytes) {
       const engine = deserializeEngine(engineBytes);
-      shareExceptions(name, engine);
       saveToMemory(name, engine);
 
       return engine;
@@ -147,10 +107,10 @@ async function loadFromStorage(name) {
     // If there is an error loading the engine from storage, the DB must be corrupted.
     // In this case, we should delete it, as it will be reloaded on the next run.
     await IDB.deleteDB('engines').catch((e2) =>
-      console.error('Failed to cleanup corrupted engine db', e2),
+      console.error('[engines] Failed to cleanup corrupted engine db', e2),
     );
 
-    console.error(`Failed to load engine "${name}" from storage`, e);
+    console.error(`[engines] Failed to load engine "${name}" from storage`, e);
   }
 
   return null;
@@ -182,22 +142,23 @@ async function loadFromDisk(name) {
 
     const engineBytes = new Uint8Array(await response.arrayBuffer());
     const engine = deserializeEngine(engineBytes);
-    shareExceptions(name, engine);
+
     saveToMemory(name, engine);
-    saveToStorage(name)
-      .then(() => {
+
+    await saveToStorage(name)
+      .then(() =>
         // After initial load from disk, schedule an update
         // as it is done only once on the first run.
         // After loading from disk, it should be loaded from the storage
-        update(name).catch(() => null);
-      })
+        update(name).catch(() => null),
+      )
       .catch(() => {
-        console.error(`Failed to save engine "${name}" to storage`);
+        console.error(`[engines] Failed to save engine "${name}" to storage`);
       });
 
     return engine;
   } catch (e) {
-    console.error(`Failed to load engine "${name}" from disk`, e);
+    console.error(`[engines] Failed to load engine "${name}" from disk`, e);
     return new FiltersEngine();
   }
 }
@@ -213,7 +174,7 @@ function check(response) {
 }
 
 const updateListeners = new Map();
-export function addUpdateListener(name, fn) {
+export function addChangeListener(name, fn) {
   if (!updateListeners.has(name)) {
     updateListeners.set(name, new Set());
   }
@@ -221,19 +182,29 @@ export function addUpdateListener(name, fn) {
   updateListeners.get(name).add(fn);
 }
 
+function notifyListeners(name) {
+  const fns = updateListeners.get(name);
+
+  fns?.forEach((fn) => {
+    try {
+      fn();
+    } catch (e) {
+      console.error(
+        `[engines] Error while calling update listener for "${name}"`,
+        e,
+      );
+    }
+  });
+}
+
 const CDN_HOSTNAME = chrome.runtime.getManifest().debug
   ? 'staging-cdn.ghostery.com'
   : 'cdn.ghostery.com';
 
-async function update(name) {
-  if (
-    // Custom and regional engines are created on demand
-    name === CUSTOM_ENGINE ||
-    name === REGIONAL_ENGINE ||
-    // If the IndexedDB is corrupted, and there is no way to load the engine
-    // from storage, we should not try to update it
-    (await loadFromStorage(name)) === null
-  ) {
+export async function update(name) {
+  // If the IndexedDB is corrupted, and there is no way to load the engine
+  // from the storage, we should skip the update.
+  if ((await loadFromStorage(name)) === null) {
     return;
   }
 
@@ -245,7 +216,7 @@ async function update(name) {
 
     const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
 
-    console.info(`Updating engine "${name}" from ${listURL}`);
+    console.info(`[engines] Updating engine "${name}" from ${listURL}`);
 
     const data = await fetch(listURL)
       .then(check)
@@ -296,7 +267,7 @@ async function update(name) {
 
       const engineBytes = new Uint8Array(arrayBuffer);
       engine = deserializeEngine(engineBytes);
-      shareExceptions(name, engine);
+
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
       saveToStorage(name);
@@ -331,7 +302,7 @@ async function update(name) {
         });
         engine.lists.set(name, checksum);
       } catch (e) {
-        console.error(`Failed to add list "${name}"`, e);
+        console.error(`[engines] Failed to add list "${name}"`, e);
       }
     };
 
@@ -350,7 +321,7 @@ async function update(name) {
         );
         engine.lists.set(name, checksum);
       } catch (e) {
-        console.error(`Failed to update list "${name}"`, e);
+        console.error(`[engines] Failed to update list "${name}"`, e);
       }
     };
 
@@ -405,14 +376,7 @@ async function update(name) {
       console.log(`Engine "${name}" updated`);
 
       // Notify listeners
-      const fns = updateListeners.get(name);
-      fns?.forEach((fn) => {
-        try {
-          fn();
-        } catch (e) {
-          console.error(`Error while calling update listener for "${name}"`, e);
-        }
-      });
+      notifyListeners(name);
 
       // Save the new engine to storage
       saveToStorage(name);
@@ -420,64 +384,43 @@ async function update(name) {
 
     return engine;
   } catch (e) {
-    console.error(`Failed to update engine "${name}"`, e);
+    console.error(`[engines] Failed to update engine "${name}"`, e);
     throw e;
   }
-}
-
-export function updateAll() {
-  return Promise.all(Array.from(engines.keys()).map((name) => update(name)));
 }
 
 export function get(name) {
   return loadFromMemory(name);
 }
 
-const ALARM_PREFIX = 'engines:update:';
-const ALARM_DELAY = 60; // 1 hour
-
 export async function init(name) {
-  if (__PLATFORM__ === 'tests') return;
-
-  // Custom and regional engines are created on demand
-  // And should not be updated by alarms
-  if (name === CUSTOM_ENGINE || name === REGIONAL_ENGINE) {
-    return (
-      get(name) || (await loadFromStorage(name)) || (await createEngine(name))
-    );
-  }
-
-  // Schedule an alarm to update engines once an hour
-  chrome.alarms.get(`${ALARM_PREFIX}${name}`, (alarm) => {
-    if (!alarm) {
-      chrome.alarms.create(`${ALARM_PREFIX}${name}`, {
-        delayInMinutes: ALARM_DELAY,
-      });
-    }
-  });
+  if (__PLATFORM__ === 'tests') return null;
 
   return (
-    get(name) || (await loadFromStorage(name)) || (await loadFromDisk(name))
+    get(name) ||
+    (await loadFromStorage(name)) ||
+    (name !== MAIN_ENGINE &&
+      name !== CUSTOM_ENGINE &&
+      (await loadFromDisk(name)))
   );
 }
 
-export async function clean(name) {
-  engines.delete(name);
-  chrome.alarms.clear(`${ALARM_PREFIX}${name}`);
-}
-
 export function createEngine(name, options = null) {
-  const config = new Config({
-    enableHtmlFiltering: ENV.get('cap_html_filtering'),
-  });
+  const config =
+    engines.get(MAIN_ENGINE)?.config ||
+    new Config({
+      enableHtmlFiltering: ENV.get('cap_html_filtering'),
+    });
 
   const engine = new FiltersEngine({ ...options, config });
   engine.updateEnv(ENV);
 
   saveToMemory(name, engine);
   saveToStorage(name).catch(() => {
-    console.error(`Failed to save engine "${name}" to storage`);
+    console.error(`[engines] Failed to save engine "${name}" to storage`);
   });
+
+  notifyListeners(name);
 
   return engine;
 }
@@ -488,21 +431,12 @@ export function replaceEngine(name, engineOrEngines) {
 
   saveToMemory(name, engine);
   saveToStorage(name).catch(() => {
-    console.error(`Failed to save engine "${name}" to storage`);
+    console.error(`[engines] Failed to save engine "${name}" to storage`);
   });
+
+  notifyListeners(name);
 
   return engine;
 }
-
-chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name.startsWith(ALARM_PREFIX)) {
-    const name = alarm.name.slice(ALARM_PREFIX.length);
-    update(name).catch(() => null);
-
-    chrome.alarms.create(alarm.name, {
-      delayInMinutes: ALARM_DELAY,
-    });
-  }
-});
 
 debug.engines = { get };

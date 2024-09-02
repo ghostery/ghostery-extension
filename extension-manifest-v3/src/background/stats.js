@@ -238,7 +238,7 @@ export async function updateTabStats(tabId, requests) {
           pushTabStats(stats, notFoundRequests) || trackersUpdated;
       }
     } catch (e) {
-      console.error('Failed to get matched rules for stats', e);
+      console.error('[stats] Failed to get matched rules for stats', e);
     }
   }
 

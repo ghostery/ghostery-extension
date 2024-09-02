@@ -180,7 +180,7 @@ export async function session() {
       }
     }
   } catch (e) {
-    console.error('Failed to refresh access token:', e);
+    console.error('[api] Failed to refresh access token:', e);
 
     accessToken = undefined;
 
