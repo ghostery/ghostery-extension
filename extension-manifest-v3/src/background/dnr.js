@@ -10,7 +10,6 @@
  */
 
 import { observe, ENGINES, isPaused } from '/store/options.js';
-import { TRACKERDB_ENGINE } from '/utils/engines.js';
 
 if (__PLATFORM__ !== 'firefox') {
   const DNR_RESOURCES = chrome.runtime
@@ -29,7 +28,7 @@ if (__PLATFORM__ !== 'firefox') {
     }).filter((id) => id && DNR_RESOURCES.includes(id));
 
     if (ids.length) {
-      ids.push(TRACKERDB_ENGINE, 'fixes');
+      ids.push('fixes');
 
       // Add regional network filters
       if (options.regionalFilters.enabled) {
