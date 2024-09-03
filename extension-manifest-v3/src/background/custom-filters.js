@@ -26,6 +26,8 @@ import * as engines from '/utils/engines.js';
 import Options, { observe } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
+import { initializedMainEngine } from './adblocker.js';
+
 const convert =
   __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
     ? createOffscreenConverter()
@@ -139,7 +141,7 @@ async function updateDNRRules(dnrRules) {
 function updateEngine(text) {
   const { networkFilters, cosmeticFilters, preprocessors } = parseFilters(text);
 
-  engines.createEngine(engines.CUSTOM_ENGINE, {
+  engines.create(engines.CUSTOM_ENGINE, {
     cosmeticFilters,
     networkFilters,
     preprocessors,
@@ -190,6 +192,8 @@ async function update(text, { trustedScriptlets }) {
 }
 
 observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
+  await initializedMainEngine;
+
   // Background startup
   if (!lastValue) {
     // If custom filters are disabled, we don't care if engine was reloaded

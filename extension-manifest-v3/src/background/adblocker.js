@@ -50,7 +50,35 @@ function getEnabledEngines(config) {
   return [];
 }
 
+const HOUR_IN_MS = 60 * 60 * 1000;
+async function reloadEngine(enabledEngines) {
+  if (enabledEngines.length) {
+    engines.replace(
+      engines.MAIN_ENGINE,
+      (
+        await Promise.all(
+          enabledEngines.map((id) => engines.init(id).catch(() => null)),
+        )
+      ).filter((engine) => engine),
+    );
+
+    console.info(
+      `[adblocker] engine reloaded with: ${enabledEngines.join(', ')}`,
+    );
+  } else {
+    engines.create(engines.MAIN_ENGINE);
+    console.info('[adblocker] Engine reloaded with no filters');
+  }
+}
+
+engines.addChangeListener(engines.CUSTOM_ENGINE, async () => {
+  reloadEngine(getEnabledEngines(options));
+});
+
+export const initializedMainEngine = engines.init(engines.MAIN_ENGINE);
+
 const setup = asyncSetup([
+  initializedMainEngine,
   observe(async (value, lastValue) => {
     options = value;
 
@@ -59,10 +87,10 @@ const setup = asyncSetup([
 
     if (
       // Reload/mismatched main engine
-      !(await engines.init(engines.MAIN_ENGINE)) ||
+      !(await initializedMainEngine) ||
       // Enabled engines changed
       enabledEngines.length !== prevEnabledEngines.length ||
-      enabledEngines.every((id, i) => id === prevEnabledEngines[i]) ||
+      enabledEngines.some((id, i) => id !== prevEnabledEngines[i]) ||
       // Engine filters updated
       (lastValue?.filtersUpdatedAt &&
         value.filtersUpdatedAt !== lastValue.filtersUpdatedAt)
@@ -71,7 +99,7 @@ const setup = asyncSetup([
       // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
       // TODO: this can be removed in the future release when most of the users will have
       // the new version of the extension
-      engines.removeEngine('regional-filters');
+      engines.remove('regional-filters');
 
       await reloadEngine(enabledEngines);
     }
@@ -102,31 +130,6 @@ const setup = asyncSetup([
     engines.setEnv('env_experimental', value);
   }),
 ]);
-
-engines.addChangeListener(engines.CUSTOM_ENGINE, async () => {
-  reloadEngine(getEnabledEngines(options));
-});
-
-const HOUR_IN_MS = 60 * 60 * 1000;
-async function reloadEngine(enabledEngines) {
-  if (enabledEngines.length) {
-    engines.replaceEngine(
-      engines.MAIN_ENGINE,
-      (
-        await Promise.all(
-          enabledEngines.map((id) => engines.init(id).catch(() => null)),
-        )
-      ).filter((engine) => engine),
-    );
-
-    console.info(
-      `[adblocker] engine reloaded with: ${enabledEngines.join(', ')}`,
-    );
-  } else {
-    engines.createEngine(engines.MAIN_ENGINE);
-    console.info('[adblocker] Engine reloaded with no filters');
-  }
-}
 
 function adblockerInjectStylesWebExtension(
   styles,

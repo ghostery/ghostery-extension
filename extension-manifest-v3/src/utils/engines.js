@@ -373,7 +373,7 @@ export async function update(name) {
     }
 
     if (updated) {
-      console.log(`Engine "${name}" updated`);
+      console.log(`[engines] Engine "${name}" updated`);
 
       // Notify listeners
       notifyListeners(name);
@@ -405,7 +405,7 @@ export async function init(name) {
   );
 }
 
-export function createEngine(name, options = null) {
+export function create(name, options = null) {
   const config =
     engines.get(MAIN_ENGINE)?.config ||
     new Config({
@@ -425,7 +425,7 @@ export function createEngine(name, options = null) {
   return engine;
 }
 
-export function replaceEngine(name, engineOrEngines) {
+export function replace(name, engineOrEngines) {
   const engines = [].concat(engineOrEngines);
   const engine = engines.length > 1 ? FiltersEngine.merge(engines) : engines[0];
 
@@ -439,7 +439,7 @@ export function replaceEngine(name, engineOrEngines) {
   return engine;
 }
 
-export function removeEngine(name) {
+export function remove(name) {
   engines.delete(name);
   saveToStorage(name).catch(() => {
     console.error(`[engines] Failed to save engine "${name}" to storage`);
