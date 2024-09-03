@@ -44,6 +44,8 @@ getBrowserInfo().then(
 );
 
 export function captureException(error) {
+  if (!(error instanceof Error)) return;
+
   const newError = new Error(error.message);
   newError.name = error.name;
   newError.cause = error.cause;
