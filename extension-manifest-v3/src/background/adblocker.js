@@ -67,6 +67,12 @@ const setup = asyncSetup([
       (lastValue?.filtersUpdatedAt &&
         value.filtersUpdatedAt !== lastValue.filtersUpdatedAt)
     ) {
+      // The regional filters engine is no longer used, so we must remove it
+      // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
+      // TODO: this can be removed in the future release when most of the users will have
+      // the new version of the extension
+      engines.removeEngine('regional-filters');
+
       await reloadEngine(enabledEngines);
     }
 

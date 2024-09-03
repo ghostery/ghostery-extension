@@ -439,4 +439,11 @@ export function replaceEngine(name, engineOrEngines) {
   return engine;
 }
 
+export function removeEngine(name) {
+  engines.delete(name);
+  saveToStorage(name).catch(() => {
+    console.error(`[engines] Failed to save engine "${name}" to storage`);
+  });
+}
+
 debug.engines = { get };
