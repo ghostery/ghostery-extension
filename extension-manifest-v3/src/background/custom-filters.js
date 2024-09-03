@@ -26,6 +26,8 @@ import * as engines from '/utils/engines.js';
 import Options, { observe } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
+import { setup } from '/background/adblocker.js';
+
 const convert =
   __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
     ? createOffscreenConverter()
@@ -143,6 +145,7 @@ function updateEngine(text) {
     cosmeticFilters,
     networkFilters,
     preprocessors,
+    config: engines.get(engines.MAIN_ENGINE).config,
   });
 
   console.info(
@@ -156,6 +159,9 @@ function updateEngine(text) {
 }
 
 async function update(text, { trustedScriptlets }) {
+  // Ensure update of the custom filters is done after the main engine is initialized
+  setup.pending && (await setup.pending);
+
   const { networkFilters, cosmeticFilters, errors } = normalizeFilters(text, {
     trustedScriptlets,
   });

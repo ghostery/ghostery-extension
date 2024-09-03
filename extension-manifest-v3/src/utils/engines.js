@@ -391,14 +391,7 @@ export function get(name) {
   return loadFromMemory(name);
 }
 
-const initMap = new Map();
 export async function init(name) {
-  if (__PLATFORM__ === 'tests') return null;
-
-  if (initMap.has(name)) {
-    return initMap.get(name);
-  }
-
   return (
     get(name) ||
     (await loadFromStorage(name)) ||
@@ -408,9 +401,8 @@ export async function init(name) {
   );
 }
 
-export async function create(name, options = null) {
-  const config = (await init(FIXES_ENGINE))?.config;
-  const engine = new FiltersEngine({ ...options, config });
+export function create(name, options = null) {
+  const engine = new FiltersEngine({ ...options });
 
   engine.updateEnv(ENV);
 
@@ -440,8 +432,9 @@ export function replace(name, engineOrEngines) {
 
 export function remove(name) {
   engines.delete(name);
+
   saveToStorage(name).catch(() => {
-    console.error(`[engines] Failed to save engine "${name}" to storage`);
+    console.error(`[engines] Failed to remove engine "${name}" from storage`);
   });
 }
 

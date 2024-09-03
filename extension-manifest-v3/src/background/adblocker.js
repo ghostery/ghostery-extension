@@ -59,7 +59,12 @@ async function reloadEngine(enabledEngines) {
       engines.MAIN_ENGINE,
       (
         await Promise.all(
-          enabledEngines.map((id) => engines.init(id).catch(() => null)),
+          enabledEngines.map((id) =>
+            engines.init(id).catch(() => {
+              console.error(`[adblocker] failed to load engine: ${id}`);
+              return null;
+            }),
+          ),
         )
       ).filter((engine) => engine),
     );
@@ -77,7 +82,7 @@ engines.addChangeListener(engines.CUSTOM_ENGINE, async () => {
   reloadEngine(getEnabledEngines(options));
 });
 
-const setup = asyncSetup([
+export const setup = asyncSetup([
   observe(async (value, lastValue) => {
     options = value;
 
@@ -91,9 +96,8 @@ const setup = asyncSetup([
       (prevEnabledEngines &&
         (enabledEngines.length !== prevEnabledEngines.length ||
           enabledEngines.some((id, i) => id !== prevEnabledEngines[i]))) ||
-      // Engine filters updatedAt restarted
-      (lastValue?.filtersUpdatedAt &&
-        value.filtersUpdatedAt !== lastValue.filtersUpdatedAt)
+      // Engine filters updatedAt changed after successful update
+      (lastValue && value.filtersUpdatedAt > lastValue.filtersUpdatedAt)
     ) {
       // The regional filters engine is no longer used, so we must remove it
       // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
