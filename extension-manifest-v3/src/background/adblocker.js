@@ -30,14 +30,16 @@ let options = Options;
 
 function getEnabledEngines(config) {
   if (config.terms) {
-    const list = [
-      'fixes',
-      // Main engines
-      ...ENGINES.filter(({ key }) => config[key]).map(({ name }) => name),
-    ];
+    const list = ENGINES.filter(({ key }) => config[key]).map(
+      ({ name }) => name,
+    );
 
     if (config.regionalFilters.enabled) {
       list.push(...config.regionalFilters.regions.map((id) => `lang-${id}`));
+    }
+
+    if (list.length) {
+      list.push(engines.FIXES_ENGINE);
     }
 
     if (config.customFilters.enabled) {
@@ -75,23 +77,21 @@ engines.addChangeListener(engines.CUSTOM_ENGINE, async () => {
   reloadEngine(getEnabledEngines(options));
 });
 
-export const initializedMainEngine = engines.init(engines.MAIN_ENGINE);
-
 const setup = asyncSetup([
-  initializedMainEngine,
   observe(async (value, lastValue) => {
     options = value;
 
     const enabledEngines = getEnabledEngines(value);
-    const prevEnabledEngines = lastValue ? getEnabledEngines(lastValue) : [];
+    const prevEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
     if (
       // Reload/mismatched main engine
-      !(await initializedMainEngine) ||
+      !(await engines.init(engines.MAIN_ENGINE)) ||
       // Enabled engines changed
-      enabledEngines.length !== prevEnabledEngines.length ||
-      enabledEngines.some((id, i) => id !== prevEnabledEngines[i]) ||
-      // Engine filters updated
+      (prevEnabledEngines &&
+        (enabledEngines.length !== prevEnabledEngines.length ||
+          enabledEngines.some((id, i) => id !== prevEnabledEngines[i]))) ||
+      // Engine filters updatedAt restarted
       (lastValue?.filtersUpdatedAt &&
         value.filtersUpdatedAt !== lastValue.filtersUpdatedAt)
     ) {

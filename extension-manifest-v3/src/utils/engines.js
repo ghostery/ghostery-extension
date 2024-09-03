@@ -15,7 +15,6 @@ import {
   ENGINE_VERSION,
   getLinesWithFilters,
   mergeDiffs,
-  Config,
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
@@ -24,6 +23,8 @@ import { captureException } from './errors.js';
 
 export const MAIN_ENGINE = 'main';
 export const CUSTOM_ENGINE = 'custom-filters';
+
+export const FIXES_ENGINE = 'fixes';
 export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
@@ -103,12 +104,9 @@ async function loadFromStorage(name) {
       return engine;
     }
   } catch (e) {
-    captureException(e);
-    // If there is an error loading the engine from storage, the DB must be corrupted.
-    // In this case, we should delete it, as it will be reloaded on the next run.
-    await IDB.deleteDB('engines').catch((e2) =>
-      console.error('[engines] Failed to cleanup corrupted engine db', e2),
-    );
+    if (!e.message?.includes('serialized engine version mismatch')) {
+      captureException(e);
+    }
 
     console.error(`[engines] Failed to load engine "${name}" from storage`, e);
   }
@@ -393,8 +391,13 @@ export function get(name) {
   return loadFromMemory(name);
 }
 
+const initMap = new Map();
 export async function init(name) {
   if (__PLATFORM__ === 'tests') return null;
+
+  if (initMap.has(name)) {
+    return initMap.get(name);
+  }
 
   return (
     get(name) ||
@@ -405,14 +408,10 @@ export async function init(name) {
   );
 }
 
-export function create(name, options = null) {
-  const config =
-    engines.get(MAIN_ENGINE)?.config ||
-    new Config({
-      enableHtmlFiltering: ENV.get('cap_html_filtering'),
-    });
-
+export async function create(name, options = null) {
+  const config = (await init(FIXES_ENGINE))?.config;
   const engine = new FiltersEngine({ ...options, config });
+
   engine.updateEnv(ENV);
 
   saveToMemory(name, engine);
