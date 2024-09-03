@@ -36,7 +36,10 @@ if (__PLATFORM__ !== 'safari') {
               .then(({ user }) => sendResponse({ success: !!user }));
             return true;
           default:
-            console.error(`[external] Unknown message type from "${sender.id}"`, message);
+            console.error(
+              `[external] Unknown message type from "${sender.id}"`,
+              message,
+            );
         }
       }
 
@@ -64,7 +67,10 @@ if (__PLATFORM__ !== 'safari') {
             return true;
           }
           default:
-            console.error(`[external] Unknown message type from "${sender.id}"`, message);
+            console.error(
+              `[external] Unknown message type from "${sender.id}"`,
+              message,
+            );
         }
       }
 
