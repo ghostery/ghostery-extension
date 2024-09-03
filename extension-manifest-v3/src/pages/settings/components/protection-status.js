@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg } from 'hybrids';
+import { html } from 'hybrids';
 
 export default {
   revokeAt: undefined,
@@ -23,19 +23,10 @@ export default {
           `
         : html`
             <gh-settings-badge type="warning" uppercase>
-              Trusted
+              Paused
             </gh-settings-badge>
             <ui-text color="gray-600" layout="grow">
-              ${revokeAt
-                ? html`${html`<relative-time
-                    date="${new Date(revokeAt)}"
-                    format="duration"
-                    format-style="narrow"
-                    precision="minute"
-                    lang="${chrome.i18n.getUILanguage()}"
-                  ></relative-time>`}
-                  left`
-                : msg`Always`}
+              <ui-panel-revoke-at revokeAt="${revokeAt}"></ui-panel-revoke-at>
             </ui-text>
           `}
     </template>

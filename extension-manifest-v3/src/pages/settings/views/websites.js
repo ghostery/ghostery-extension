@@ -10,7 +10,6 @@
  */
 
 import { html, msg, store, router } from 'hybrids';
-import '@github/relative-time-element';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TrackerException from '/store/tracker-exception.js';

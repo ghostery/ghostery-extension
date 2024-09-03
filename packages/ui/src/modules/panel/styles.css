@@ -67,6 +67,7 @@ html {
   --ui-font-body-l: 400 16px / 20px var(--ui-font-family);
   --ui-font-body-m: 400 14px / 18px var(--ui-font-family);
   --ui-font-body-s: 400 12px / 16px var(--ui-font-family);
+  --ui-font-body-xs: 400 11px / 14px var(--ui-font-family);
 
   --ui-font-button-m: var(--ui-font-label-m);
   --ui-font-button-s: 600 14px / 24px var(--ui-font-family);
