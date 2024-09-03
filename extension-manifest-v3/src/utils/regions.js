@@ -23,6 +23,7 @@ const REGIONS = [
   'de',
   'el',
   'es',
+  'fa',
   'fr',
   'he',
   'hi',
