@@ -35,7 +35,7 @@ export async function deleteDatabases() {
             );
             reject();
           },
-        }).then(resolve);
+        }).then(resolve).catch(reject);
       });
     }),
   );
