@@ -484,7 +484,7 @@ if (__PLATFORM__ === 'firefox') {
         return result;
       }
     },
-    { urls: ['http://*/*', 'https://*/*'] },
+    { urls: ['<all_urls>'] },
     ['blocking'],
   );
 
