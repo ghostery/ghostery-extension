@@ -27,7 +27,7 @@ chrome.storage.local.get(['exceptions']).then(({ exceptions: value }) => {
 chrome.storage.onChanged.addListener((records) => {
   if (records.exceptions) {
     exceptions = records.exceptions.newValue || {};
-    updateFilters();
+    if (__PLATFORM__ !== 'firefox') updateFilters();
   }
 });
 
@@ -35,46 +35,83 @@ export function getException(id) {
   return exceptions[id];
 }
 
+const convert =
+  __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
+    ? createOffscreenConverter()
+    : createDocumentConverter();
+
 async function updateFilters() {
-  const filters = await convertExceptionsToFilters(exceptions);
+  const rules = [];
 
-  const networkFilters = [];
-  const cosmeticFilters = [];
+  for (const exception of Object.values(exceptions)) {
+    if (exception.blocked && exception.trustedDomains.length === 0) {
+      continue;
+    }
 
-  for (const filter of filters) {
-    if (filter.isNetworkFilter()) {
-      networkFilters.push(filter.toString());
-    } else if (filter.isCosmeticFilter()) {
-      cosmeticFilters.push(filter.toString());
+    const tracker = (await trackerdb.getTracker(exception.id)) || {
+      domains: [exception.id],
+      filters: [],
+    };
+
+    const filters = tracker.filters
+      .concat(tracker.domains.map((domain) => `||${domain}^`))
+      .map((f) => parseFilter(f))
+      .filter((filter) => filter.isNetworkFilter())
+      // Negate the filters to make them allow rules
+      .map((filter) => `@@${filter.toString()}`);
+
+    // Global rule domains/excludedDomains conditions based on the exception
+    const domains = exception.blocked ? exception.trustedDomains : undefined;
+    const excludedDomains =
+      !exception.blocked && exception.blockedDomains.length
+        ? exception.blockedDomains
+        : undefined;
+
+    for (const filter of filters) {
+      try {
+        const result = (await convert(filter.toString())).rules;
+
+        rules.push(
+          ...result.map((rule) => ({
+            ...rule,
+            condition: {
+              ...rule.condition,
+              // Add domain condition to the rule
+              ...(__PLATFORM__ === 'safari'
+                ? {
+                    domains:
+                      domains &&
+                      domains
+                        .map((d) => `*${d}`)
+                        .concat(rule.condition.domains || []),
+                    excludedDomains:
+                      excludedDomains &&
+                      excludedDomains
+                        .map((d) => `*${d}`)
+                        .concat(rule.condition.excludedDomains || []),
+                  }
+                : {
+                    initiatorDomains:
+                      domains &&
+                      domains.concat(rule.condition.initiatorDomains || []),
+                    excludedInitiatorDomains:
+                      excludedDomains &&
+                      excludedDomains.concat(
+                        rule.condition.excludedInitiatorDomains || [],
+                      ),
+                  }),
+            },
+            // Internal prefix + priority
+            priority: 2000000 + rule.priority,
+          })),
+        );
+      } catch (e) {
+        console.error('Error while converting filter:', e);
+      }
     }
   }
 
-  if (__PLATFORM__ !== 'firefox') {
-    await updateDNRRules(networkFilters);
-  }
-
-  console.info('Exceptions: filters updated successfully');
-}
-
-// Update exceptions filters every time TrackerDB updates
-trackerdb.addUpdateListener(updateFilters);
-
-async function updateDNRRules(networkFilters) {
-  const dnrRules = [];
-  for (const filter of networkFilters) {
-    const { rules, errors } = await convert(filter);
-    if (errors.length > 0) {
-      console.error(errors);
-    }
-    dnrRules.push(
-      ...rules.map((rule) => ({
-        ...rule,
-        priority: 2000000 + rule.priority,
-      })),
-    );
-  }
-
-  const addRules = dnrRules.map((rule, index) => ({
+  const addRules = rules.map((rule, index) => ({
     ...rule,
     id: 2000000 + index,
   }));
@@ -87,96 +124,11 @@ async function updateDNRRules(networkFilters) {
     addRules,
     removeRuleIds,
   });
+
+  console.info('Exceptions: filters updated successfully');
 }
 
-const convert =
-  __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
-    ? createOffscreenConverter()
-    : createDocumentConverter();
-
-function negateFilter(filter) {
-  const cleanFilter = filter.toString();
-  let negatedFilter = '';
-  if (filter.isNetworkFilter()) {
-    negatedFilter = filter.isException()
-      ? cleanFilter.slice(2)
-      : `@@${cleanFilter}`;
-  } else if (filter.isCosmeticFilter()) {
-    negatedFilter = filter.isUnhide()
-      ? cleanFilter.replace('#@#', '##')
-      : cleanFilter.replace('##', '#@#');
-  }
-  return parseFilter(negatedFilter);
-}
-
-export function restrictFilter(filter, domain) {
-  const cleanFilter = filter.toString();
-  let restrictedFilter = '';
-  if (filter.isNetworkFilter()) {
-    if (!filter.domains) {
-      restrictedFilter = `${cleanFilter}${
-        cleanFilter.includes('$') ? ',' : '$'
-      }domain=${domain}`;
-    } else {
-      const domains = [...filter.domains.parts.split(','), domain];
-      restrictedFilter = cleanFilter.replace(
-        /domain=(.*?)(,|$)/,
-        `domain=${domains.join('|')}$2`,
-      );
-    }
-  } else if (filter.isCosmeticFilter()) {
-    if (cleanFilter.startsWith('##') || cleanFilter.startsWith('#@#')) {
-      restrictedFilter = `${domain}${cleanFilter}`;
-    } else {
-      restrictedFilter = `${domain},${cleanFilter}`;
-    }
-  }
-  return parseFilter(restrictedFilter);
-}
-
-async function convertExceptionsToFilters(exceptions) {
-  const filters = [];
-
-  for (const exception of Object.values(exceptions)) {
-    const pattern = (await trackerdb.getTracker(exception.id)) || {
-      domains: [exception.id],
-      filters: [],
-    };
-
-    const blockedByDefault = trackerdb.isCategoryBlockedByDefault(
-      pattern.category,
-    );
-
-    const blockFilters = pattern.filters.map((filter) => parseFilter(filter));
-
-    if (blockedByDefault) {
-      blockFilters.push(
-        ...pattern.domains
-          .map((domain) => `||${domain}^`)
-          .map((filter) => parseFilter(filter)),
-      );
-    }
-
-    const allowFilters = blockFilters.map((filter) => negateFilter(filter));
-
-    // Exception overwrites default behavior
-    if (exception.blocked !== blockedByDefault) {
-      filters.push(...(exception.blocked ? blockFilters : allowFilters));
-    }
-
-    if (exception.blocked) {
-      for (const domain of exception.trustedDomains) {
-        for (const filter of allowFilters) {
-          filters.push(restrictFilter(filter, domain));
-        }
-      }
-    } else {
-      for (const domain of exception.blockedDomains) {
-        for (const filter of blockFilters) {
-          filters.push(restrictFilter(filter, domain));
-        }
-      }
-    }
-  }
-  return filters;
+if (__PLATFORM__ !== 'firefox') {
+  // Update exceptions filters every time TrackerDB updates
+  trackerdb.addUpdateListener(updateFilters);
 }

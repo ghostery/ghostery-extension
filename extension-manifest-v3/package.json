@@ -1,7 +1,7 @@
 {
   "name": "@ghostery/extension-manifest-v3",
   "private": true,
-  "version": "10.4.2",
+  "version": "10.4.3",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines/index.js",
@@ -37,11 +37,11 @@
     "@cliqz/adblocker-webextension": "^1.33.2",
     "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
     "@duckduckgo/autoconsent": "^10.15.0",
-    "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
     "@ghostery/ui": "^1.0.0",
     "@github/relative-time-element": "^4.3.0",
     "@whotracksme/reporting": "^5.1.21",
+    "@sentry/browser": "^8.26.0",
     "hybrids": "^9.1.1",
     "idb": "^7.1.1",
     "jwt-decode": "^4.0.0",

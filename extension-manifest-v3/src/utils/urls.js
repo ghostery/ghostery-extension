@@ -8,17 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { define } from 'hybrids';
 
-// Global components
-import '../global/index.js';
-
-// Styles
-import './styles.css';
-import './dark.css';
-
-// Components
-define.from(import.meta.glob('./**/*.js', { eager: true, import: 'default' }), {
-  prefix: 'ui-panel',
-  root: 'components',
-});
+export const GHOSTERY_DOMAIN = chrome.runtime.getManifest().debug
+  ? 'ghosterystage.com'
+  : 'ghostery.com';

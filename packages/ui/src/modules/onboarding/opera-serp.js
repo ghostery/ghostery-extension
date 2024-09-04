@@ -30,7 +30,7 @@ export default define({
             <ui-text type="label-l" layout="margin:bottom:-1">
               More ad blocking available
             </ui-text>
-            <ui-text color="gray-500">
+            <ui-text color="gray-600">
               Expand Ghostery ad blocking to search engines in a few easy steps.
             </ui-text>
             <div layout="row:wrap gap">

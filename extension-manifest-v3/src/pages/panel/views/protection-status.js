@@ -93,7 +93,7 @@ export default {
                       ? msg`Trust on all websites`
                       : msg`Block on all websites`}
                   </ui-text>
-                  <ui-text type="body-s" color="gray-500">
+                  <ui-text type="body-s" color="gray-600">
                     Add exception
                   </ui-text>
                 </div>
@@ -112,7 +112,7 @@ export default {
                       ? msg`Trust on this website`
                       : msg`Block on this website`}
                   </ui-text>
-                  <ui-text type="body-s" color="gray-500">
+                  <ui-text type="body-s" color="gray-600">
                     <!-- Add domain as an exception -->
                     Add ${stats.hostname} as an exception
                   </ui-text>

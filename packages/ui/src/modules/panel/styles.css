@@ -15,10 +15,8 @@
 }
 
 html {
-  --ui-color-gray-900: #020826;
   --ui-color-gray-800: #202c44;
   --ui-color-gray-600: #49556e;
-  --ui-color-gray-500: #6d778e;
   --ui-color-gray-400: #9ba3b4;
   --ui-color-gray-300: #c3cad9;
   --ui-color-gray-200: #dfe3eb;
@@ -45,7 +43,13 @@ html {
   --ui-color-danger-500: #f13436;
   --ui-color-danger-100: #ffecec;
 
+  --ui-color-backdrop: var(--ui-color-gray-800);
+  --ui-color-warning-text: var(--ui-color-gray-800);
+  --ui-color-scroll-shadow: rgba(0, 0, 0, 0.1);
+
   --ui-color-inherit: inherit;
+
+  --ui-shadow-header: 0px 4px 16px rgba(32, 44, 68, 0.1);
 
   --ui-font-family: 'Inter', sans-serif;
   --ui-font-family-label: var(--ui-font-family);
@@ -63,6 +67,7 @@ html {
   --ui-font-body-l: 400 16px / 20px var(--ui-font-family);
   --ui-font-body-m: 400 14px / 18px var(--ui-font-family);
   --ui-font-body-s: 400 12px / 16px var(--ui-font-family);
+  --ui-font-body-xs: 400 11px / 14px var(--ui-font-family);
 
   --ui-font-button-m: var(--ui-font-label-m);
   --ui-font-button-s: 600 14px / 24px var(--ui-font-family);
@@ -91,6 +96,9 @@ body {
 }
 
 @media screen and (max-height: 600px) {
+  html {
+    overflow-y: auto;
+  }
   body {
     max-height: 600px;
   }

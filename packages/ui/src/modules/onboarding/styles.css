@@ -40,11 +40,9 @@
 
 html {
   /* Colors */
-  --ui-color-gray-900: #12121c;
   --ui-color-gray-800: #202225;
   --ui-color-gray-700: #2f3136;
   --ui-color-gray-600: #3f4146;
-  --ui-color-gray-500: #636468;
   --ui-color-gray-400: #88898c;
   --ui-color-gray-300: #b9bbbe;
   --ui-color-gray-200: #d4d6d9;
@@ -65,6 +63,7 @@ html {
   --ui-color-error-400: #ff5d35;
 
   --ui-color-current: currentColor;
+  --ui-color-onboarding-card: var(--ui-color-white);
 
   /* Fonts */
 
@@ -146,6 +145,12 @@ html {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  html {
+    --ui-color-onboarding-card: var(--ui-color-gray-100);
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -158,6 +163,7 @@ body {
   font-size: 13px;
   -moz-osx-font-smoothing: grayscale;
   color: var(--ui-color-gray-600);
+  background: var(--ui-color-white);
 }
 
 button,

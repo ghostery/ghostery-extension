@@ -53,7 +53,7 @@ export default {
         background: linear-gradient(
           to bottom,
           rgba(0, 0, 0, 0) 0%,
-          rgba(0, 0, 0, 0.1) 100%
+          var(--ui-color-scroll-shadow) 100%
         );
         visibility: hidden;
         opacity: 0;

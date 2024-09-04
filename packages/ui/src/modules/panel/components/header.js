@@ -28,7 +28,7 @@ export default {
   `.css`
     :host {
       background: var(--ui-color-white);
-      box-shadow: 0px 4px 16px rgba(32, 44, 68, 0.1);
+      box-shadow: var(--ui-shadow-header);
     }
    `,
 };

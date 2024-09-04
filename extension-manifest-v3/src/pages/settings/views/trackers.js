@@ -218,7 +218,7 @@ export default {
                                   <div layout="row items:center gap">
                                     ${tracker.adjusted &&
                                     html`
-                                      <ui-text type="label-s" color="gray-500">
+                                      <ui-text type="label-s" color="gray-600">
                                         <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                       </ui-text>
                                     `}

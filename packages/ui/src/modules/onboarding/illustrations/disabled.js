@@ -14,7 +14,6 @@ import { html } from 'hybrids';
 // prettier-ignore
 export default html`
   <svg width="161" height="160" viewBox="0 0 161 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="160" height="160" transform="translate(0.5)" fill="white"/>
     <circle cx="80.5" cy="79.9993" r="73.3333" fill="#D9F3FD"/>
     <path d="M50.4647 35.4102H61.3735" stroke="#B2DBF7" stroke-width="1.36794" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M99.5648 35.4102H110.474" stroke="#B2DBF7" stroke-width="1.36794" stroke-linecap="round" stroke-linejoin="round"/>

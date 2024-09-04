@@ -64,24 +64,24 @@ export default {
         html`
           <div layout="column gap margin:top">
             <div layout="column gap:0.5">
-              <ui-text type="label-s" color="gray-500">
+              <ui-text type="label-s" color="gray-600">
                 Custom filters has been updated
               </ui-text>
-              <ui-text type="body-s" color="gray-500">
+              <ui-text type="body-s" color="gray-600">
                 ${__PLATFORM__ === 'firefox'
                   ? html`Network filters: ${result.networkFilters || 0} `
                   : html`
-                      <details translate="no">
+                      <details>
                         <summary>
                           <ui-text
                             type="body-s"
                             layout="inline"
-                            color="gray-500"
+                            color="gray-600"
                           >
                             DNR rules: ${result.dnrRules.length}
                           </ui-text>
                         </summary>
-                        <ui-text type="body-s" color="gray-500">
+                        <ui-text type="body-s" color="gray-600">
                           ${result.dnrRules.map(
                             (rule) =>
                               html`<pre>${JSON.stringify(rule, null, 2)}</pre>`,
@@ -90,7 +90,7 @@ export default {
                       </details>
                     `}
               </ui-text>
-              <ui-text type="body-s" color="gray-500">
+              <ui-text type="body-s" color="gray-600">
                 Cosmetic filters: ${result.cosmeticFilters || 0}
               </ui-text>
             </div>
@@ -99,7 +99,7 @@ export default {
         ${!!result?.errors.length &&
         html`
           <div layout="column gap:0.5">
-            <ui-text type="label-s" color="gray-500">
+            <ui-text type="label-s" color="gray-600">
               Errors (${result.errors.length})
             </ui-text>
             ${result?.errors.map(

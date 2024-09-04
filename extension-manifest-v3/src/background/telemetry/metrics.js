@@ -11,9 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import browser from 'webextension-polyfill';
-
-import getBrowserInfo from './browser-info.js';
+import getBrowserInfo from '/utils/browser-info.js';
 
 /**
  * Helper for building query string key value pairs
@@ -106,7 +104,7 @@ class Metrics {
   }
 
   async detectUTMs() {
-    const tabs = await browser.tabs.query({
+    const tabs = await chrome.tabs.query({
       url: [
         'https://www.ghostery.com/*',
         'https://www.ghosterystage.com/*',

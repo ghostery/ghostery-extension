@@ -74,7 +74,7 @@ export default {
       }
 
       #button {
-        --ui-text-color-heading: var(--ui-color-gray-400);
+        --ui-text-color-heading: var(--ui-color-gray-300);
       }
 
       :host([disabled]) #button {
@@ -123,7 +123,7 @@ export default {
         }
 
         :host([value]) button:hover #toggle {
-          background: var(--ui-color-gray-900);
+          background: var(--ui-color-gray-800);
         }
       }
     `,

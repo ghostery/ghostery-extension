@@ -77,7 +77,7 @@ export default {
         layout@390px="height:7"
         onclick="${!pauseList && dispatchAction}"
       >
-        <div id="label" layout="grow row center gap:0.5 shrink overflow">
+        <div id="label" layout="grow row center gap shrink overflow">
           <slot></slot>
         </div>
         <div
@@ -120,7 +120,7 @@ export default {
                 onclick="${dispatchTypeAction(value)}"
                 layout.active="grid:1|max:auto"
               >
-                <ui-text type="label-m" color="gray-900">${label}</ui-text>
+                <ui-text type="label-m" color="gray-800">${label}</ui-text>
                 ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
                 <ui-text type="body-s" color="gray-600" layout="area:2">
                   ${description}
@@ -203,6 +203,10 @@ export default {
     #main.paused, #main.paused:hover, #main.paused:active {
       background: var(--gh-pause-active-color);
       white-space: nowrap;
+      --ui-color-gh-panel-action: var(--ui-color-warning-text);
+    }
+
+    #main.paused #type {
       --ui-color-gh-panel-action: var(--ui-color-gray-800);
     }
 

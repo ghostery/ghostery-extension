@@ -63,7 +63,7 @@ export default {
       flex-flow: column;
       align-items: center;
       gap: 4px;
-      color: var(--ui-color-gray-900);
+      color: var(--ui-color-gray-800);
       text-decoration: none;
       font: var(--ui-font-label-xs);
       text-overflow: ellipsis;

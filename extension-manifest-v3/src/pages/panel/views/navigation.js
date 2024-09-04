@@ -96,7 +96,7 @@ export default {
         Menu
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
-            <ui-icon name="close" color="gray-900" layout="size:3"></ui-icon>
+            <ui-icon name="close" color="gray-800" layout="size:3"></ui-icon>
           </a>
         </ui-action>
       </ui-panel-header>
@@ -128,7 +128,7 @@ export default {
                     ${header
                       ? html`<ui-text
                           type="label-s"
-                          color="gray-500"
+                          color="gray-600"
                           layout="padding:1:1:0 margin:0:1"
                         >
                           ${header.toUpperCase()}
