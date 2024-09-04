@@ -33,9 +33,9 @@
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.33.0",
-    "@cliqz/adblocker-webextension": "^1.33.0",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.33.0",
+    "@cliqz/adblocker": "^1.33.2",
+    "@cliqz/adblocker-webextension": "^1.33.2",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
     "@duckduckgo/autoconsent": "^10.15.0",
     "@ghostery/libs": "^1.0.0",
     "@ghostery/trackers-preview": "^1.0.0",
