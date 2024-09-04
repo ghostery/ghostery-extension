@@ -135,7 +135,7 @@ async function saveToStorage(name) {
   }
 }
 
-async function loadFromDisk(name) {
+async function loadFromFile(name) {
   try {
     const response = await fetch(
       chrome.runtime.getURL(
@@ -210,6 +210,10 @@ export async function update(name) {
   // If the IndexedDB is corrupted, and there is no way to load the engine
   // from the storage, we should skip the update.
   if ((await loadFromStorage(name)) === null) {
+    console.error(
+      `[engines] Skipping update for engine "${name} as the engine is not available`,
+    );
+
     return;
   }
 
@@ -404,7 +408,7 @@ export async function init(name) {
     (await loadFromStorage(name)) ||
     (name !== MAIN_ENGINE &&
       name !== CUSTOM_ENGINE &&
-      (await loadFromDisk(name)))
+      (await loadFromFile(name)))
   );
 }
 
