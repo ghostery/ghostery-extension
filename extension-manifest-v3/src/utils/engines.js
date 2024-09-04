@@ -104,7 +104,14 @@ async function loadFromStorage(name) {
       return engine;
     }
   } catch (e) {
-    if (!e.message?.includes('serialized engine version mismatch')) {
+    const msg = e.message || '';
+
+    if (
+      // Adblocker core updates the engine version
+      !msg.includes('serialized engine version mismatch') &&
+      // Private Browsing mode in Firefox
+      !msg.includes('database that did not allow mutations')
+    ) {
       captureException(e);
     }
 
