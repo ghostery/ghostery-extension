@@ -143,12 +143,16 @@ async function loadFromStorage(name) {
       return engine;
     }
   } catch (e) {
-    captureException(e);
-    // If there is an error loading the engine from storage, the DB must be corrupted.
-    // In this case, we should delete it, as it will be reloaded on the next run.
-    await IDB.deleteDB('engines').catch((e2) =>
-      console.error('Failed to cleanup corrupted engine db', e2),
-    );
+    const msg = e.message || '';
+
+    if (
+      // Adblocker core updates the engine version
+      !msg.includes('serialized engine version mismatch') &&
+      // Private Browsing mode in Firefox
+      !msg.includes('database that did not allow mutations')
+    ) {
+      captureException(e);
+    }
 
     console.error(`Failed to load engine "${name}" from storage`, e);
   }
