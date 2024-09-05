@@ -26,7 +26,7 @@ import * as engines from '/utils/engines.js';
 import Options, { observe } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
-export const customFiltersEngine = engines.init(engines.CUSTOM_ENGINE);
+import { setup } from '/background/adblocker.js';
 
 const convert =
   __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
@@ -132,7 +132,7 @@ async function updateDNRRules(dnrRules) {
       addRules: dnrRules,
     });
 
-    console.info(`Custom Filters: DNR updated with rules: ${dnrRules.length}`);
+    console.info(`[custom filters] DNR updated with rules: ${dnrRules.length}`);
   }
 
   return dnrRules;
@@ -141,14 +141,15 @@ async function updateDNRRules(dnrRules) {
 function updateEngine(text) {
   const { networkFilters, cosmeticFilters, preprocessors } = parseFilters(text);
 
-  engines.createEngine(engines.CUSTOM_ENGINE, {
+  engines.create(engines.CUSTOM_ENGINE, {
     cosmeticFilters,
     networkFilters,
     preprocessors,
+    config: engines.get(engines.MAIN_ENGINE).config,
   });
 
   console.info(
-    `Custom Filters: engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
+    `[custom filters] Engine updated with network filters: ${networkFilters.length}, cosmetic filters: ${cosmeticFilters.length}`,
   );
 
   return {
@@ -156,7 +157,11 @@ function updateEngine(text) {
     cosmeticFilters: cosmeticFilters.length,
   };
 }
+
 async function update(text, { trustedScriptlets }) {
+  // Ensure update of the custom filters is done after the main engine is initialized
+  setup.pending && (await setup.pending);
+
   const { networkFilters, cosmeticFilters, errors } = normalizeFilters(text, {
     trustedScriptlets,
   });
@@ -197,14 +202,8 @@ observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
     // as custom filters should be empty
     if (!enabled) return;
 
-    const engine = await customFiltersEngine;
-    const { networkFilters, cosmeticFilters } = engine.getFilters();
-
-    // If there are filters already loaded, we can assume that
-    // filters are already added to the engine. This is specially
-    // for the case, when custom engine is reloaded because
-    // of the new adblocker version
-    if (networkFilters.length === 0 && cosmeticFilters.length === 0) {
+    // If we cannot initialize engine, we need to update it
+    if (!(await engines.init(engines.CUSTOM_ENGINE))) {
       update((await store.resolve(CustomFilters)).text, { trustedScriptlets });
     }
   } else {

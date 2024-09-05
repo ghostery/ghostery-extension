@@ -39,7 +39,7 @@ const Session = {
             }
           : {};
       } catch (e) {
-        console.error("Failed to fetch user's session", e);
+        console.error("[store|session] Failed to fetch user's session", e);
         return {};
       }
     },

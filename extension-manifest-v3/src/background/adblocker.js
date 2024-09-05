@@ -9,13 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { store } from 'hybrids';
 import {
   filterRequestHTML,
   updateResponseHeadersWithCSP,
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
-import { observe, ENGINES, isPaused } from '/store/options.js';
+import Options, { observe, ENGINES, isPaused } from '/store/options.js';
 
 import * as engines from '/utils/engines.js';
 import Request from '/utils/request.js';
@@ -24,101 +25,116 @@ import { getMetadata } from '/utils/trackerdb.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
-import { customFiltersEngine } from './custom-filters.js';
 
-let enabledEngines = [];
-let options = {};
+let options = Options;
 
-const regionalFiltersEngine = engines.init(engines.REGIONAL_ENGINE);
+function getEnabledEngines(config) {
+  if (config.terms) {
+    const list = ENGINES.filter(({ key }) => config[key]).map(
+      ({ name }) => name,
+    );
 
-const setup = asyncSetup([
-  // Init engines
-  engines.init(engines.FIXES_ENGINE),
-  ENGINES.map(({ name }) => engines.init(name)),
+    if (config.regionalFilters.enabled) {
+      list.push(...config.regionalFilters.regions.map((id) => `lang-${id}`));
+    }
 
-  // Regional and custom filters engines are initialized separately
-  // for direct access
-  customFiltersEngine,
-  regionalFiltersEngine,
+    if (list.length) {
+      list.push(engines.FIXES_ENGINE);
+    }
 
-  // Update options & enabled engines
-  observe((value) => {
+    if (config.customFilters.enabled) {
+      list.push(engines.CUSTOM_ENGINE);
+    }
+
+    return list;
+  }
+
+  return [];
+}
+
+const HOUR_IN_MS = 60 * 60 * 1000;
+async function reloadEngine(enabledEngines) {
+  if (enabledEngines.length) {
+    engines.replace(
+      engines.MAIN_ENGINE,
+      (
+        await Promise.all(
+          enabledEngines.map((id) =>
+            engines.init(id).catch(() => {
+              console.error(`[adblocker] failed to load engine: ${id}`);
+              return null;
+            }),
+          ),
+        )
+      ).filter((engine) => engine),
+    );
+
+    console.info(
+      `[adblocker] engine reloaded with: ${enabledEngines.join(', ')}`,
+    );
+  } else {
+    engines.create(engines.MAIN_ENGINE);
+    console.info('[adblocker] Engine reloaded with no filters');
+  }
+}
+
+engines.addChangeListener(engines.CUSTOM_ENGINE, async () => {
+  reloadEngine(getEnabledEngines(options));
+});
+
+export const setup = asyncSetup([
+  observe(async (value, lastValue) => {
     options = value;
 
-    if (options.terms) {
-      enabledEngines = [
-        engines.FIXES_ENGINE,
-        // Main engines
-        ...ENGINES.filter(({ key }) => options[key]).map(({ name }) => name),
-      ];
+    const enabledEngines = getEnabledEngines(value);
+    const prevEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
-      if (options.regionalFilters.enabled) {
-        enabledEngines.push(engines.REGIONAL_ENGINE);
-      }
+    if (
+      // Reload/mismatched main engine
+      !(await engines.init(engines.MAIN_ENGINE)) ||
+      // Enabled engines changed
+      (prevEnabledEngines &&
+        (enabledEngines.length !== prevEnabledEngines.length ||
+          enabledEngines.some((id, i) => id !== prevEnabledEngines[i]))) ||
+      // Engine filters updatedAt changed after successful update
+      (lastValue && value.filtersUpdatedAt > lastValue.filtersUpdatedAt)
+    ) {
+      // The regional filters engine is no longer used, so we must remove it
+      // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
+      // TODO: this can be removed in the future release when most of the users will have
+      // the new version of the extension
+      engines.remove('regional-filters');
 
-      if (options.customFilters.enabled) {
-        enabledEngines.push(engines.CUSTOM_ENGINE);
-      }
-    } else {
-      enabledEngines = [];
+      await reloadEngine(enabledEngines);
+    }
+
+    if (
+      // Experimental filters enabled
+      (options.experimentalFilters &&
+        lastValue?.experimentalFilters === false) ||
+      // Filters outdated (1 hour)
+      options.filtersUpdatedAt < Date.now() - HOUR_IN_MS
+    ) {
+      const updateEngines = getEnabledEngines(options)
+        // Remove the custom engine, as it is created client-side only
+        .filter((name) => name !== engines.CUSTOM_ENGINE)
+        // Add engines outside of the main engine
+        .concat(engines.TRACKERDB_ENGINE);
+
+      (async () => {
+        for (const id of updateEngines) {
+          await engines.update(id).catch(() => null);
+        }
+
+        // Trigger update of the main engine after all other engines are updated
+        store.set(Options, { filtersUpdatedAt: Date.now() });
+      })();
     }
   }),
-
-  // Experimental filters
-  observe('experimentalFilters', async (value, lastValue) => {
+  observe('experimentalFilters', async (value) => {
     engines.setEnv('env_experimental', value);
-
-    // As engines on the server might have new filters, we force the update
-    // when value has changed from false to true
-    if (lastValue !== undefined && value) {
-      engines.updateAll().catch(() => null);
-    }
-  }),
-
-  // Regional filters
-  observe('regionalFilters', async ({ enabled, regions }, lastValue) => {
-    // Background startup
-    if (!lastValue) {
-      const engine = await regionalFiltersEngine;
-      // Pre-requirement for skipping update - engine must be initialized
-      // Otherwise it is a very first try to setup the engine
-      if (engine.lists.size) return;
-    }
-
-    // Clean previous regional engines
-    if (lastValue) {
-      lastValue.regions
-        .filter((id) => !regions.includes(id))
-        .forEach((id) => engines.clean(`lang-${id}`));
-    }
-
-    // Schedule merge when one of the regional engines is updated
-    regions.forEach((id) => {
-      engines.addUpdateListener(`lang-${id}`, mergeRegionalEngines);
-    });
-
-    if (enabled && regions.length) {
-      mergeRegionalEngines(regions);
-    } else if (lastValue?.regions.length) {
-      engines.clean(engines.REGIONAL_ENGINE);
-      console.info('Regional filters: engine disabled');
-    }
   }),
 ]);
-
-async function mergeRegionalEngines(regions) {
-  regions = regions || options.regionalFilters?.regions || [];
-
-  engines.replaceEngine(
-    engines.REGIONAL_ENGINE,
-    await Promise.all(regions.map((id) => engines.init(`lang-${id}`))),
-  );
-
-  console.info(
-    'Regional filters: engine updated with regions:',
-    regions.join(', '),
-  );
-}
 
 function adblockerInjectStylesWebExtension(
   styles,
@@ -145,7 +161,7 @@ function adblockerInjectStylesWebExtension(
         origin: 'USER',
         target,
       })
-      .catch((e) => console.warn('Adblocker: Failed to inject CSS', e));
+      .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
   } else {
     const details = {
       allFrames,
@@ -159,7 +175,7 @@ function adblockerInjectStylesWebExtension(
     }
     chrome.tabs
       .insertCSS(tabId, details)
-      .catch((e) => console.warn('Adblocker: Failed to inject CSS', e));
+      .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
   }
 }
 
@@ -168,7 +184,7 @@ async function injectCosmetics(msg, sender) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
-    console.error(`Adblocker: Error while setup cosmetic filters: ${e}`);
+    console.error(`[adblocker] Error while setup cosmetic filters: ${e}`);
     return;
   }
 
@@ -186,73 +202,70 @@ async function injectCosmetics(msg, sender) {
   const specificStyles = [];
   let specificFrameId = null;
 
-  enabledEngines.forEach((name) => {
-    const engine = engines.get(name);
-    if (!engine) return;
+  const engine = engines.get(engines.MAIN_ENGINE);
 
-    // Once per tab/page load we inject base stylesheets. These are always
-    // the same for all frames of a given page because they do not depend on
-    // a particular domain and cannot be cancelled using unhide rules.
-    // Because of this, we specify `allFrames: true` when injecting them so
-    // that we do not need to perform this operation for sub-frames.
-    if (frameId === 0 && msg.lifecycle === 'start') {
-      const { active, styles } = engine.getCosmeticsFilters({
-        domain,
-        hostname,
-        url,
+  // Once per tab/page load we inject base stylesheets. These are always
+  // the same for all frames of a given page because they do not depend on
+  // a particular domain and cannot be cancelled using unhide rules.
+  // Because of this, we specify `allFrames: true` when injecting them so
+  // that we do not need to perform this operation for sub-frames.
+  if (frameId === 0 && msg.lifecycle === 'start') {
+    const { active, styles } = engine.getCosmeticsFilters({
+      domain,
+      hostname,
+      url,
 
-        classes: msg.classes,
-        hrefs: msg.hrefs,
-        ids: msg.ids,
+      classes: msg.classes,
+      hrefs: msg.hrefs,
+      ids: msg.ids,
 
-        // This needs to be done only once per tab
-        getBaseRules: true,
-        getInjectionRules: false,
-        getExtendedRules: false,
-        getRulesFromDOM: false,
-        getRulesFromHostname: false,
-      });
+      // This needs to be done only once per tab
+      getBaseRules: true,
+      getInjectionRules: false,
+      getExtendedRules: false,
+      getRulesFromDOM: false,
+      getRulesFromHostname: false,
+    });
 
-      if (active === false) {
-        return;
-      }
-
-      genericStyles.push(styles);
+    if (active === false) {
+      return;
     }
 
-    // Separately, requests cosmetics which depend on the page it self
-    // (either because of the hostname or content of the DOM). Content script
-    // logic is responsible for returning information about lists of classes,
-    // ids and hrefs observed in the DOM. MutationObserver is also used to
-    // make sure we can react to changes.
-    {
-      const { active, styles } = engine.getCosmeticsFilters({
-        domain,
-        hostname,
-        url,
+    genericStyles.push(styles);
+  }
 
-        classes: msg.classes,
-        hrefs: msg.hrefs,
-        ids: msg.ids,
+  // Separately, requests cosmetics which depend on the page it self
+  // (either because of the hostname or content of the DOM). Content script
+  // logic is responsible for returning information about lists of classes,
+  // ids and hrefs observed in the DOM. MutationObserver is also used to
+  // make sure we can react to changes.
+  {
+    const { active, styles } = engine.getCosmeticsFilters({
+      domain,
+      hostname,
+      url,
 
-        // This needs to be done only once per frame
-        getBaseRules: false,
-        getInjectionRules: msg.lifecycle === 'start',
-        getExtendedRules: msg.lifecycle === 'start',
-        getRulesFromHostname: msg.lifecycle === 'start',
+      classes: msg.classes,
+      hrefs: msg.hrefs,
+      ids: msg.ids,
 
-        // This will be done every time we get information about DOM mutation
-        getRulesFromDOM: msg.lifecycle === 'dom-update',
-      });
+      // This needs to be done only once per frame
+      getBaseRules: false,
+      getInjectionRules: msg.lifecycle === 'start',
+      getExtendedRules: msg.lifecycle === 'start',
+      getRulesFromHostname: msg.lifecycle === 'start',
 
-      if (active === false) {
-        return;
-      }
+      // This will be done every time we get information about DOM mutation
+      getRulesFromDOM: msg.lifecycle === 'dom-update',
+    });
 
-      specificStyles.push(styles);
-      specificFrameId = frameId;
+    if (active === false) {
+      return;
     }
-  });
+
+    specificStyles.push(styles);
+    specificFrameId = frameId;
+  }
 
   const allGenericStyles = genericStyles.join('\n').trim();
   if (allGenericStyles.length > 0) {
@@ -275,7 +288,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
     injectCosmetics(msg, sender).catch((e) =>
       console.error(
-        `Adblocker: Error while processing cosmetics filters: ${e}`,
+        `[adblocker] Error while processing cosmetics filters: ${e}`,
       ),
     );
   }
@@ -343,7 +356,7 @@ async function injectScriptlets(tabId, url) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
-    console.error(`Error while setup adblocker filters: ${e}`);
+    console.error(`[adblocker] Error while setup adblocker filters: ${e}`);
     return;
   }
 
@@ -358,36 +371,24 @@ async function injectScriptlets(tabId, url) {
   }
 
   const scriptlets = [];
+  const engine = engines.get(engines.MAIN_ENGINE);
 
-  enabledEngines.forEach((name) => {
-    const engine = engines.get(name);
-    if (!engine) return;
-
-    if (name === engines.CUSTOM_ENGINE) {
-      try {
-        engine.resources = engines.get(engines.FIXES_ENGINE).resources;
-      } catch (e) {
-        console.warn('Could not share resources with Custom Filters engine', e);
-      }
-    }
-
-    const { active, scripts } = engine.getCosmeticsFilters({
-      url: url,
-      hostname,
-      domain: domain || '',
-      getBaseRules: false,
-      getInjectionRules: true,
-      getExtendedRules: false,
-      getRulesFromDOM: false,
-      getRulesFromHostname: true,
-    });
-    if (active === false) {
-      return;
-    }
-    if (scripts.length > 0) {
-      scriptlets.push(...scripts);
-    }
+  const { active, scripts } = engine.getCosmeticsFilters({
+    url: url,
+    hostname,
+    domain: domain || '',
+    getBaseRules: false,
+    getInjectionRules: true,
+    getExtendedRules: false,
+    getRulesFromDOM: false,
+    getRulesFromHostname: true,
   });
+  if (active === false) {
+    return;
+  }
+  if (scripts.length > 0) {
+    scriptlets.push(...scripts);
+  }
 
   if (scriptlets.length > 0) {
     executeScriptlets(tabId, scriptlets);
@@ -408,16 +409,14 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-function resolveEngines(request, type) {
+function isTrusted(request, type) {
   // The request is from a tab that is paused
   if (isPaused(options, request.sourceHostname)) {
-    return [];
+    return true;
   }
 
-  // If the request is a main_frame, we need to return the main engines
-  // and not check the exceptions
   if (type === 'main_frame') {
-    return enabledEngines;
+    return false;
   }
 
   const metadata = getMetadata(request);
@@ -437,12 +436,11 @@ function resolveEngines(request, type) {
         ? exception.trustedDomains.includes(tabHostname)
         : !exception.blockedDomains.includes(tabHostname)
     ) {
-      return [];
+      return true;
     }
   }
 
-  // By default return the main enabled engines
-  return enabledEngines;
+  return false;
 }
 
 if (__PLATFORM__ === 'firefox') {
@@ -450,7 +448,7 @@ if (__PLATFORM__ === 'firefox') {
     (details) => {
       if (setup.pending) {
         console.error(
-          'Adblocker: Error while processing network request - adblocker not ready yet',
+          '[adblocker] Error while processing network request - adblocker not ready yet',
         );
         return;
       }
@@ -459,39 +457,34 @@ if (__PLATFORM__ === 'firefox') {
 
       const request = Request.fromRequestDetails(details);
 
-      if (request.sourceHostname) {
-        let result = undefined;
+      if (request.sourceHostname && !isTrusted(request, details.type)) {
+        const engine = engines.get(engines.MAIN_ENGINE);
 
-        for (const name of resolveEngines(request, details.type)) {
-          const engine = engines.get(name);
-          if (!engine) continue;
-
-          if (details.type === 'main_frame') {
-            const htmlFilters = engine.getHtmlFilters(request);
-            if (htmlFilters.length !== 0) {
-              filterRequestHTML(
-                chrome.webRequest.filterResponseData,
-                request,
-                htmlFilters,
-              );
-              return;
-            }
-          } else {
-            const { redirect, match } = engine.match(request);
-
-            if (redirect !== undefined) {
-              request.blocked = true;
-              result = { redirectUrl: redirect.dataUrl };
-              break;
-            } else if (match === true) {
-              request.blocked = true;
-              result = { cancel: true };
-            }
+        if (details.type === 'main_frame') {
+          const htmlFilters = engine.getHtmlFilters(request);
+          if (htmlFilters.length !== 0) {
+            filterRequestHTML(
+              chrome.webRequest.filterResponseData,
+              request,
+              htmlFilters,
+            );
+            return;
           }
-        }
+        } else {
+          const { redirect, match } = engine.match(request);
+          let result = undefined;
 
-        updateTabStats(details.tabId, [request]);
-        return result;
+          if (redirect !== undefined) {
+            request.blocked = true;
+            result = { redirectUrl: redirect.dataUrl };
+          } else if (match === true) {
+            request.blocked = true;
+            result = { cancel: true };
+          }
+
+          updateTabStats(details.tabId, [request]);
+          return result;
+        }
       }
     },
     { urls: ['<all_urls>'] },
@@ -502,26 +495,20 @@ if (__PLATFORM__ === 'firefox') {
     (details) => {
       if (setup.pending) {
         console.error(
-          'Adblocker: Error while processing headers - adblocker not ready yet',
+          '[adblocker] Error while processing headers - adblocker not ready yet',
         );
         return;
       }
 
       const request = Request.fromRequestDetails(details);
-      let policies;
 
-      for (const name of resolveEngines(request, details.type)) {
-        const engine = engines.get(name);
-        if (!engine) continue;
+      if (!isTrusted(request, details.type)) {
+        const engine = engines.get(engines.MAIN_ENGINE);
+        const policies = engine.getCSPDirectives(request);
 
-        policies = engine.getCSPDirectives(request);
         if (policies !== undefined) {
-          break;
+          return updateResponseHeadersWithCSP(details, policies);
         }
-      }
-
-      if (policies) {
-        return updateResponseHeadersWithCSP(details, policies);
       }
     },
     { urls: ['<all_urls>'], types: ['main_frame'] },

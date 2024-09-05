@@ -11,7 +11,8 @@
 
 import { parseFilter } from '@cliqz/adblocker';
 
-import * as trackerdb from '../utils/trackerdb.js';
+import * as trackerdb from '/utils/trackerdb.js';
+import * as engines from '/utils/engines.js';
 
 import {
   createDocumentConverter,
@@ -106,7 +107,7 @@ async function updateFilters() {
           })),
         );
       } catch (e) {
-        console.error('Error while converting filter:', e);
+        console.error('[exceptions] Error while converting filter:', e);
       }
     }
   }
@@ -125,10 +126,10 @@ async function updateFilters() {
     removeRuleIds,
   });
 
-  console.info('Exceptions: filters updated successfully');
+  console.info('[exceptions] DNR rules for filters updated successfully');
 }
 
 if (__PLATFORM__ !== 'firefox') {
   // Update exceptions filters every time TrackerDB updates
-  trackerdb.addUpdateListener(updateFilters);
+  engines.addChangeListener(engines.TRACKERDB_ENGINE, updateFilters);
 }
