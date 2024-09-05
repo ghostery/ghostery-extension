@@ -13,12 +13,11 @@ import { observe } from '/store/options.js';
 import { showOperaSerpNotification } from '/notifications/opera-serp.js';
 
 let done = false;
-let shownAt = 0;
 
-observe((options) => {
-  ({ done, shownAt } = options.onboarding);
+observe('onboarding', (onboarding) => {
+  done = onboarding.done;
 
-  if (!done && !shownAt) {
+  if (!done && !onboarding.shownAt) {
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });

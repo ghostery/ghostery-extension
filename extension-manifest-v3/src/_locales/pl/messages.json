@@ -369,9 +369,6 @@
     "message": "Różne",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Szukasz „Wstrzymaj Ghostery”? Możesz je znaleźć w ustawieniach ochrony prywatności."
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Zmodyfikuj zalecane ustawienia blokowania dla każdej strony internetowej."
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "Wł."
   },
-  "open_ghostery_settings": {
-    "message": "Otwórz Ustawienia Ghostery"
-  },
   "open_video": {
     "message": "Otwórz wideo"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "Wstrzymaj Ghostery"
+  },
+  "pause_on_this_site": {
+    "message": "Wstrzymaj na tej stronie"
+  },
+  "paused": {
+    "message": "Wstrzymane"
   },
   "permission_required": {
     "message": "Wymagane uprawnienia"
@@ -530,9 +530,6 @@
     "message": "Analiza statystyk strony",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "Strona jest zaufana"
-  },
   "social_media": {
     "message": "Media społecznościowe",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "Zaufaj na tej stronie"
-  },
-  "trust_this_site": {
-    "message": "Zaufaj tej stronie"
   },
   "trusted": {
     "message": "Zaufany"

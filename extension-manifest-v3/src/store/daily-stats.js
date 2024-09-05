@@ -61,7 +61,7 @@ async function getDb() {
     const tx = db.transaction('daily', 'readwrite');
     const daily = tx.objectStore('daily');
 
-    console.log(
+    console.info(
       `[daily-stats] Migrating ${oldStats.length} daily stats from MV2`,
     );
 
@@ -80,7 +80,7 @@ async function getDb() {
 
     await tx.done;
 
-    console.log(
+    console.info(
       `[daily-stats] Migration of daily stats from MV2 done successfully`,
     );
   }
@@ -103,7 +103,7 @@ async function flush(id) {
         const db = await getDb();
         await db.put('daily', values);
       } catch (e) {
-        console.error(`Error while flushing daily stats`, e);
+        console.error(`[daily-stats] Error while flushing daily stats`, e);
       }
 
       flushes.delete(id);

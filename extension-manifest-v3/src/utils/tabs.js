@@ -29,7 +29,7 @@ export async function openTabWithUrl(host, event) {
       return;
     }
   } catch (e) {
-    console.error('Error while try to find existing tab:', e);
+    console.error('[utils|tabs] Error while try to find existing tab:', e);
   }
 
   chrome.tabs.create({ url: href });

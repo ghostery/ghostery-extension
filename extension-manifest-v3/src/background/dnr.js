@@ -64,9 +64,9 @@ if (__PLATFORM__ !== 'firefox') {
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.info('DNR: lists updated with lists:', ids.join(', '));
+        console.info('[dnr] Updated with rulesets:', ids.join(', '));
       } catch (e) {
-        console.error(`DNR: error while updating lists:`, e);
+        console.error(`[dnr] Error while updating rulesets:`, e);
       }
     }
   });
