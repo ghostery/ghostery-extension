@@ -126,6 +126,7 @@ export const setup = asyncSetup([
           await engines.update(id).catch(() => null);
         }
 
+        // Trigger update of the main engine after all other engines are updated
         store.set(Options, { filtersUpdatedAt: Date.now() });
       })();
     }
