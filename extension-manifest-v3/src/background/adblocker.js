@@ -456,7 +456,7 @@ if (__PLATFORM__ === 'firefox') {
       if (details.tabId < 0) return;
 
       const request = Request.fromRequestDetails(details);
-      
+
       if (request.sourceHostname && !isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);
 
