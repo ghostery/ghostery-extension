@@ -369,9 +369,6 @@
     "message": "Разное",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Отсутствует \"Приостановить Ghostery\"? Вы можете найти его в настройках защиты конфиденциальности."
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Настраивайте рекомендуемые параметры блокировки для каждого сайта."
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "Вкл"
   },
-  "open_ghostery_settings": {
-    "message": "Откройте настройки Ghostery"
-  },
   "open_video": {
     "message": "Открытое видео"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "Приостановить Ghostery"
+  },
+  "pause_on_this_site": {
+    "message": "Пауза на этом сайте"
+  },
+  "paused": {
+    "message": "Приостановлено"
   },
   "permission_required": {
     "message": "Требуется разрешение"
@@ -530,9 +530,6 @@
     "message": "Аналитика сайта",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "Сайт доверенный"
-  },
   "social_media": {
     "message": "Социальные сети",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "Разрешить на этом сайте"
-  },
-  "trust_this_site": {
-    "message": "Разрешить этому сайту"
   },
   "trusted": {
     "message": "Доверенный"

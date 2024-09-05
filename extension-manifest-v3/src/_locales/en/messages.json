@@ -369,9 +369,6 @@
     "message": "Miscellaneous",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Missing “Pause Ghostery”? You can find it in your privacy protection settings."
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Modify the recommended blocking settings for every website."
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "On"
   },
-  "open_ghostery_settings": {
-    "message": "Open Ghostery settings"
-  },
   "open_video": {
     "message": "Open video"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "Pause Ghostery"
+  },
+  "pause_on_this_site": {
+    "message": "Pause on this site"
+  },
+  "paused": {
+    "message": "Paused"
   },
   "permission_required": {
     "message": "Permission required"
@@ -530,9 +530,6 @@
     "message": "Site Analytics",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "Site is trusted"
-  },
   "social_media": {
     "message": "Social Media",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "Trust on this website"
-  },
-  "trust_this_site": {
-    "message": "Trust this site"
   },
   "trusted": {
     "message": "Trusted"

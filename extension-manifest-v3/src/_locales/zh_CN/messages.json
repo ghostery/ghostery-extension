@@ -369,9 +369,6 @@
     "message": "其他",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "是否找不到“暂停Ghostery”？您可以在隐私保护设置中找到它。"
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "为每个网站调整推荐的阻止设定。"
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "开启"
   },
-  "open_ghostery_settings": {
-    "message": "打开Ghostery设置"
-  },
   "open_video": {
     "message": "打开视频"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "暂停 Ghostery"
+  },
+  "pause_on_this_site": {
+    "message": "在这个网站上暂停"
+  },
+  "paused": {
+    "message": "已暂停"
   },
   "permission_required": {
     "message": "需要权限"
@@ -530,9 +530,6 @@
     "message": "网站分析",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "该站点是可信的"
-  },
   "social_media": {
     "message": "社交媒体",
     "description": "Tracker category name"
@@ -596,9 +593,6 @@
     "message": "信任所有网站"
   },
   "trust_on_this_website": {
-    "message": "信任此网站"
-  },
-  "trust_this_site": {
     "message": "信任此网站"
   },
   "trusted": {
