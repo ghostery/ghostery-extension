@@ -369,9 +369,6 @@
     "message": "Divers",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Vous ne trouvez plus \"Pause Ghostery\" ? Consultez vos paramètres de protection de la vie privée."
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Modifiez les réglages de blocage recommandés pour chaque site web."
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "activé"
   },
-  "open_ghostery_settings": {
-    "message": "Ouvrez les Paramètres de Ghostery"
-  },
   "open_video": {
     "message": "Ouvrir la vidéo"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "Pause Ghostery"
+  },
+  "pause_on_this_site": {
+    "message": "Pause sur ce site"
+  },
+  "paused": {
+    "message": "En pause"
   },
   "permission_required": {
     "message": "Autorisation requise"
@@ -530,9 +530,6 @@
     "message": "Outils d'analyse de sites web",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "Site est de confiance."
-  },
   "social_media": {
     "message": "Réseaux sociaux",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "Autoriser sur ce site web"
-  },
-  "trust_this_site": {
-    "message": "Se fier à ce site"
   },
   "trusted": {
     "message": "Autorisé"

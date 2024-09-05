@@ -369,9 +369,6 @@
     "message": "さまざまな",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "「ゴーストリーを一時停止」が見つからない場合は、プライバシー保護設定で見つけることができますので、確認してください。"
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "それぞれのウェブサイトについて推奨されるブロック設定を変更します。"
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "オン"
   },
-  "open_ghostery_settings": {
-    "message": "Ghosteryの設定を開く"
-  },
   "open_video": {
     "message": "ビデオを開く"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "ゴーストリーを一時停止"
+  },
+  "pause_on_this_site": {
+    "message": "このサイトでのポーズ"
+  },
+  "paused": {
+    "message": "一時停止"
   },
   "permission_required": {
     "message": "許可が必要"
@@ -530,9 +530,6 @@
     "message": "サイト分析",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "サイトは信頼されています"
-  },
   "social_media": {
     "message": "ソーシャル・メディア",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "このウェブサイトで信頼"
-  },
-  "trust_this_site": {
-    "message": "このサイトを信頼"
   },
   "trusted": {
     "message": "信頼済み"

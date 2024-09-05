@@ -369,9 +369,6 @@
     "message": "Sonstiges",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Die Funktion „Ghostery pausieren“ finden Sie in den Einstellungen."
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Ändern Sie die empfohlenen Blockierungseinstellungen für jede Website."
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "An"
   },
-  "open_ghostery_settings": {
-    "message": "Ghostery Einstellungen öffnen"
-  },
   "open_video": {
     "message": "Video öffnen"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "Ghostery pausieren"
+  },
+  "pause_on_this_site": {
+    "message": "Auf dieser Seite pausieren"
+  },
+  "paused": {
+    "message": "Pausiert"
   },
   "permission_required": {
     "message": "Berechtigung erforderlich"
@@ -530,9 +530,6 @@
     "message": "Website-Analytics",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "Der Seite wird vertraut"
-  },
   "social_media": {
     "message": "Social Media",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "Auf dieser Website vertrauen"
-  },
-  "trust_this_site": {
-    "message": "Vertraue dieser Website"
   },
   "trusted": {
     "message": "Vertrauenswürdig"

@@ -369,9 +369,6 @@
     "message": "Miscelânea",
     "description": "Tracker category name"
   },
-  "missing__pause_ghostery___you_can_find_it_in_your_privacy_protection_settings_": {
-    "message": "Sentindo falta de “Pausar Ghostery”? Você pode encontrá-lo nas suas configurações de privacidade."
-  },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Modifique as configurações de bloqueio recomendadas para cada site."
   },
@@ -414,9 +411,6 @@
   "on": {
     "message": "Ligado"
   },
-  "open_ghostery_settings": {
-    "message": "Abrir configurações do Ghostery"
-  },
   "open_video": {
     "message": "Abrir vídeo"
   },
@@ -438,6 +432,12 @@
   },
   "pause_ghostery": {
     "message": "Pausar Ghostery"
+  },
+  "pause_on_this_site": {
+    "message": "Pause on this site"
+  },
+  "paused": {
+    "message": "Pausado"
   },
   "permission_required": {
     "message": "Permissão necessária"
@@ -530,9 +530,6 @@
     "message": "Analítica do site",
     "description": "Tracker category name"
   },
-  "site_is_trusted": {
-    "message": "Site é confiável"
-  },
   "social_media": {
     "message": "Mídia Social",
     "description": "Tracker category name"
@@ -597,9 +594,6 @@
   },
   "trust_on_this_website": {
     "message": "Confiar nesse site"
-  },
-  "trust_this_site": {
-    "message": "Confie neste site"
   },
   "trusted": {
     "message": "Confiável"
