@@ -39,15 +39,6 @@ mount(document.body, {
 });
 
 store.resolve(Options).then(({ installDate, onboarding }) => {
-  // Get install date from `onboarding.shownAt` or generate current date
-  if (!installDate) {
-    installDate = (
-      onboarding.shownAt ? new Date(onboarding.shownAt) : new Date()
-    )
-      .toISOString()
-      .split('T')[0];
-  }
-
   store.set(Options, {
     onboarding: {
       shownAt: Date.now(),

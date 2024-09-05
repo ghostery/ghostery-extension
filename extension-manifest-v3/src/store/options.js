@@ -83,6 +83,7 @@ const Options = {
     ...(__PLATFORM__ === 'opera' ? { serpShownAt: 0, serpShown: 0 } : {}),
   },
   installDate: '',
+  installRandomNumber: 0,
 
   // Panel
   panel: { statsType: 'graph' },
@@ -105,6 +106,14 @@ const Options = {
       // are not set (the initial get) for supported platforms
       if (!options) {
         options = __PLATFORM__ !== 'safari' ? await migrateFromV8() : {};
+      }
+
+      if (!options.installDate) {
+        options.installDate = new Date().toISOString().split('T')[0];
+      }
+
+      if (!options.installRandomNumber) {
+        options.installRandomNumber = Math.floor(Math.random() * 100) + 1;
       }
 
       // Set version to the latest one if it is not set

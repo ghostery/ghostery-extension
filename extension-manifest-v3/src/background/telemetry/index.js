@@ -60,6 +60,7 @@ const getConf = async () => {
     enable_smart_block: options.blockAnnoyances,
     enable_human_web: options.terms,
     install_date: options.installDate,
+    install_random_number: options.installRandomNumber,
     setup_complete: options.onboarding.done && options.terms,
     setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,

@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import getDefaultLanguage from './language.js';
 import getBrowserInfo from '/utils/browser-info.js';
 
 /**
@@ -260,7 +261,7 @@ class Metrics {
       // Operating system
       buildQueryPair('os', browserInfo.os) +
       // Browser language
-      buildQueryPair('l', conf.language) +
+      buildQueryPair('l', getDefaultLanguage()) +
       // Browser version
       buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
