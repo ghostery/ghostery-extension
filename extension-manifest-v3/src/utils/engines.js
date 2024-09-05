@@ -210,8 +210,8 @@ export async function update(name) {
   // If the IndexedDB is corrupted, and there is no way to load the engine
   // from the storage, we should skip the update.
   if ((await loadFromStorage(name)) === null) {
-    console.error(
-      `[engines] Skipping update for engine "${name} as the engine is not available`,
+    console.warn(
+      `[engines] Skipping update for engine "${name}" as the engine is not available`,
     );
 
     return;
@@ -281,7 +281,7 @@ export async function update(name) {
       saveToMemory(name, engine);
       saveToStorage(name);
 
-      console.log(`Engine "${name}" reloaded`);
+      console.info(`Engine "${name}" reloaded`);
 
       return engine;
     }
@@ -382,7 +382,7 @@ export async function update(name) {
     }
 
     if (updated) {
-      console.log(`[engines] Engine "${name}" updated`);
+      console.info(`[engines] Engine "${name}" updated`);
 
       // Notify listeners
       notifyListeners(name);
