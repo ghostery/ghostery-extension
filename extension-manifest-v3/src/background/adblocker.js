@@ -496,7 +496,6 @@ if (__PLATFORM__ === 'firefox') {
 
       if (!isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);
-        const policies = engine.getCSPDirectives(request);
 
         htmlFilters.push(...engine.getHtmlFilters(request));
 
