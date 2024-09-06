@@ -164,11 +164,7 @@ export default {
                   color="gh-panel-action"
                 ></ui-icon>
                 <div layout="column">
-                  <ui-text
-                    type="label-m"
-                    color="gh-panel-action"
-                    layout="block:center"
-                  >
+                  <ui-text type="label-m" color="gh-panel-action">
                     ${paused || globalPause
                       ? msg`Ghostery is paused`
                       : msg`Pause on this site`}

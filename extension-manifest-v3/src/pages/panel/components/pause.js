@@ -15,17 +15,17 @@ const PAUSE_TYPES = [
   {
     value: 1,
     label: msg`1 hour`,
-    description: msg`This site will be trusted for 1 hour`,
+    description: msg`This site will be paused for 1 hour`,
   },
   {
     value: 24,
     label: msg`1 day`,
-    description: msg`This site will be trusted for 1 day`,
+    description: msg`This site will be paused for 1 day`,
   },
   {
     value: 0,
     label: msg`Always`,
-    description: msg`This site will always be trusted. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web`,
+    description: msg`This site will always be paused. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web`,
   },
 ];
 
@@ -84,7 +84,7 @@ export default {
           id="type"
           role="button"
           tabindex="${paused ? '-1' : '0'}"
-          layout="row center self:stretch width:15"
+          layout="row center self:stretch width:14"
           onclick="${!paused && !pauseList && openPauseList}"
           onkeypress=${!paused && !pauseList && simulateClickOnEnter}
         >
@@ -164,6 +164,7 @@ export default {
       border-radius: 8px;
       box-sizing: border-box;
       padding: 4px;
+      white-space: nowrap;
     }
 
     #main, #label, #type { transition: all 0.2s; }
@@ -202,7 +203,6 @@ export default {
 
     #main.paused, #main.paused:hover, #main.paused:active {
       background: var(--gh-pause-active-color);
-      white-space: nowrap;
       --ui-color-gh-panel-action: var(--ui-color-warning-text);
     }
 
