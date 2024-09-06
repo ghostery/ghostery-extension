@@ -31,7 +31,9 @@ async function initialize(msg, tab, frameId) {
           action: 'autoconsent',
           type: 'initResp',
           rules,
-          config: {},
+          config: {
+            enableCosmeticRules: false,
+          },
         },
         {
           frameId,

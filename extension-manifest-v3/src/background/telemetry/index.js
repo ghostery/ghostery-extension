@@ -51,15 +51,28 @@ const loadStorage = async () => {
   return storage;
 };
 
-const getConf = async () => {
+const getConf = async (storage) => {
   const options = await store.resolve(Options);
+
+  // Historically install_data was stored in Options.
+  // As it is used by telemetry only, it is here migrated
+  // to telemetry storage.
+  // TODO: cleanup Options after September 2024
+  if (!storage.installDate) {
+    saveStorage(storage, {
+      installDate:
+        options.installDate || new Date().toISOString().split('T')[0],
+      installRandom: Math.floor(Math.random() * 100) + 1,
+    });
+  }
 
   return {
     enable_ad_block: options.blockAds,
     enable_anti_tracking: options.blockTrackers,
     enable_smart_block: options.blockAnnoyances,
     enable_human_web: options.terms,
-    install_date: options.installDate,
+    installDate: storage.installDate,
+    installRandom: storage.installRandom,
     setup_complete: options.onboarding.done && options.terms,
     setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,
@@ -84,7 +97,7 @@ chrome.runtime.onMessage.addListener((msg) => {
       ? 'https://staging-d.ghostery.com'
       : 'https://d.ghostery.com',
     EXTENSION_VERSION: version,
-    getConf,
+    getConf: () => getConf(storage),
     log,
     storage,
     saveStorage: (metrics) => {
