@@ -54,6 +54,10 @@ const loadStorage = async () => {
 const getConf = async (storage) => {
   const options = await store.resolve(Options);
 
+  // Historically install_data was stored in Options.
+  // As it is used by telemetry only, it is here migrated
+  // to telemetry storage.
+  // TODO: cleanup Options after September 2024
   if (!storage.installDate) {
     saveStorage(storage, {
       installDate:
