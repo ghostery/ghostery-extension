@@ -143,6 +143,11 @@ async function saveToStorage(name) {
       await table.delete(name);
     }
 
+    if (__PLATFORM__ === 'firefox') {
+      // Clear out the fallback local storage if the engine is saved to the IDB
+      chrome.storage.local.set({ [`engines:${name}`]: null });
+    }
+
     await tx.done;
   } catch (e) {
     if (__PLATFORM__ === 'firefox') {
