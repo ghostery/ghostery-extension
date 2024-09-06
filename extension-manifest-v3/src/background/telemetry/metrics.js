@@ -61,7 +61,6 @@ export const FREQUENCY_TYPES = ['all', ...Object.keys(FREQUENCIES)];
 export const CRITICAL_METRICS = [
   'install',
   'install_complete',
-  'upgrade',
   'active',
   'engaged',
   'uninstall',
@@ -150,9 +149,6 @@ class Metrics {
         break;
       case 'install_complete':
         this._recordInstallComplete();
-        break;
-      case 'upgrade':
-        this._recordUpgrade();
         break;
       case 'active':
         this._recordActive();
@@ -599,17 +595,6 @@ class Metrics {
       this.ping(type);
     });
     delete this.ping_set;
-  }
-
-  /**
-   * Record Upgrade event
-   * @private
-   */
-  _recordUpgrade() {
-    // set install_all on upgrade too
-    this.storage.install_all = Date.now();
-    this.saveStorage(this.storage);
-    this._sendReq('upgrade');
   }
 
   /**
