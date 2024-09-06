@@ -13,6 +13,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "license-report": "^6.5.0",
+    "patch-package": "^8.0.0",
     "prettier": "^2.6.2"
   },
   "workspaces": [
