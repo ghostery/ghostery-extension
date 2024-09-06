@@ -115,7 +115,7 @@
     "pages/onboarding/index.html",
     "pages/youtube/index.html"
   ],
-  "content_security_policy" : {},
+  "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {
     "safari": {
       "strict_min_version": "16.4"

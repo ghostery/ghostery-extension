@@ -79,6 +79,7 @@
     "pages/onboarding/index.html",
     "pages/youtube/index.html"
   ],
+  "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {
     "gecko_android": {},
     "gecko": {
