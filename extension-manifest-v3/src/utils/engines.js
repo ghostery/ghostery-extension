@@ -211,6 +211,7 @@ const CDN_HOSTNAME = chrome.runtime.getManifest().debug
 export async function update(name) {
   // If the IndexedDB is corrupted, and there is no way to load the engine
   // from the storage, we should skip the update.
+  // It can also happen if the engine has not finished init.
   if ((await loadFromStorage(name)) === null) {
     console.warn(
       `[engines] Skipping update for engine "${name}" as the engine is not available`,
@@ -252,11 +253,11 @@ export async function update(name) {
     // available diff. If not, the operation would be equivalent to first
     // deleting the list then adding the new version. Because of this, we also
     // reset the engine if that happens.
-    let foundListsToRemove = false;
+    let requiresFullReload = false;
     for (const [name, checksum] of engine.lists.entries()) {
       // If engine has a list which is not "enabled"
       if (!data.lists[name]) {
-        foundListsToRemove = true;
+        requiresFullReload = true;
         break;
       }
 
@@ -265,13 +266,16 @@ export async function update(name) {
         data.lists[name].checksum !== checksum &&
         data.lists[name].diffs[checksum] === undefined
       ) {
-        foundListsToRemove = true;
+        requiresFullReload = true;
         break;
       }
     }
 
     // Make a full update if we need to remove some lists
-    if (foundListsToRemove) {
+    // In case of trackerdb, incremental updates are not possible.
+    // Instead if we detect a change in subscription list, a complete
+    // `engine is donwloaded.
+    if (requiresFullReload) {
       const arrayBuffer = await fetch(data.engines[ENGINE_VERSION].url)
         .then(check)
         .then((res) => res.arrayBuffer());

@@ -161,9 +161,13 @@ const Options = {
       });
 
       // Send update message to another contexts (background page / panel / options)
-      chrome.runtime.sendMessage({
-        action: UPDATE_OPTIONS_ACTION_NAME,
-      });
+      chrome.runtime
+        .sendMessage({
+          action: UPDATE_OPTIONS_ACTION_NAME,
+        })
+        .catch(() => {
+          // sendMessage may fail without potential target
+        });
 
       sync(options, keys).catch(() => null);
 
