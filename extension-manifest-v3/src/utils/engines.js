@@ -94,7 +94,9 @@ async function loadFromStorage(name) {
       .then((db) => {
         const tx = db.transaction('engines');
         const table = tx.objectStore('engines');
-        return table.get(name);
+        return table.get(name).then((result) => {
+          return tx.done.then(() => result);
+        });
       })
       .catch((e) => {
         // Suppress the private browsing mode in Firefox
@@ -138,6 +140,8 @@ async function saveToStorage(name) {
     } else {
       await table.delete(name);
     }
+
+    await tx.done;
   } catch (e) {
     if (__PLATFORM__ === 'firefox') {
       const key = `engines:${name}`;
