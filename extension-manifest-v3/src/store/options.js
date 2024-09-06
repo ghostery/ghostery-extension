@@ -83,7 +83,6 @@ const Options = {
     ...(__PLATFORM__ === 'opera' ? { serpShownAt: 0, serpShown: 0 } : {}),
   },
   installDate: '',
-  installRandomNumber: 0,
 
   // Panel
   panel: { statsType: 'graph' },
