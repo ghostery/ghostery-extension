@@ -108,14 +108,6 @@ const Options = {
         options = __PLATFORM__ !== 'safari' ? await migrateFromV8() : {};
       }
 
-      if (!options.installDate) {
-        options.installDate = new Date().toISOString().split('T')[0];
-      }
-
-      if (!options.installRandomNumber) {
-        options.installRandomNumber = Math.floor(Math.random() * 100) + 1;
-      }
-
       // Set version to the latest one if it is not set
       // or trigger migration for older versions
       if (!optionsVersion) {

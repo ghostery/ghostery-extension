@@ -51,16 +51,23 @@ const loadStorage = async () => {
   return storage;
 };
 
-const getConf = async () => {
+const getConf = async (storage) => {
   const options = await store.resolve(Options);
+
+  if (!storage.installDate) {
+    storage.installDate =
+      options.installDate || new Date().toISOString().split('T')[0];
+    storage.installRandomNumber = Math.floor(Math.random() * 100) + 1;
+    await saveStorage(storage, {});
+  }
 
   return {
     enable_ad_block: options.blockAds,
     enable_anti_tracking: options.blockTrackers,
     enable_smart_block: options.blockAnnoyances,
     enable_human_web: options.terms,
-    install_date: options.installDate,
-    install_random_number: options.installRandomNumber,
+    install_date: storage.installDate,
+    install_random_number: storage.installRandomNumber,
     setup_complete: options.onboarding.done && options.terms,
     setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,
@@ -85,7 +92,7 @@ chrome.runtime.onMessage.addListener((msg) => {
       ? 'https://staging-d.ghostery.com'
       : 'https://d.ghostery.com',
     EXTENSION_VERSION: version,
-    getConf,
+    getConf: () => getConf(storage),
     log,
     storage,
     saveStorage: (metrics) => {
