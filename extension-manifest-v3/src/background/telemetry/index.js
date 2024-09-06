@@ -54,11 +54,15 @@ const loadStorage = async () => {
 const getConf = async (storage) => {
   const options = await store.resolve(Options);
 
-  if (!storage.installDate) {
-    storage.installDate =
-      options.installDate || new Date().toISOString().split('T')[0];
-    storage.installRandomNumber = Math.floor(Math.random() * 100) + 1;
-    await saveStorage(storage, {});
+  if (!storage.installDate || !storage.installRandom) {
+    saveStorage(storage, {
+      installDate:
+        storage.installDate ||
+        options.installDate ||
+        new Date().toISOString().split('T')[0],
+      installRandom:
+        storage.installRandom || Math.floor(Math.random() * 100) + 1,
+    });
   }
 
   return {
@@ -66,8 +70,8 @@ const getConf = async (storage) => {
     enable_anti_tracking: options.blockTrackers,
     enable_smart_block: options.blockAnnoyances,
     enable_human_web: options.terms,
-    install_date: storage.installDate,
-    install_random_number: storage.installRandomNumber,
+    installDate: storage.installDate,
+    installRandom: storage.installRandom,
     setup_complete: options.onboarding.done && options.terms,
     setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,

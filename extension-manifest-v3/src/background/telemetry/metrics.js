@@ -265,7 +265,7 @@ class Metrics {
       // Browser version
       buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
-      buildQueryPair('id', conf.install_date) +
+      buildQueryPair('id', conf.installDate) +
       // Showing campaign messages (former show_cmp)
       buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
       // Subscription Type
@@ -283,7 +283,7 @@ class Metrics {
         buildQueryPair('hw', conf.enable_human_web ? '1' : '0') +
         // Old parameters, new names
         // Random number, assigned at install (former install_rand)
-        buildQueryPair('ir', conf.install_random_number) +
+        buildQueryPair('ir', conf.installRandom) +
         // Login state (former signed_in)
         buildQueryPair('sn', conf.account ? '1' : '0') +
         // Noncritical ping (former noncritical)
