@@ -90,12 +90,25 @@ async function getDB() {
 
 async function loadFromStorage(name) {
   try {
-    const db = await getDB();
+    const engineBytes = await getDB()
+      .then((db) => {
+        const tx = db.transaction('engines');
+        const table = tx.objectStore('engines');
+        return table.get(name);
+      })
+      .catch((e) => {
+        // Suppress the private browsing mode in Firefox
+        if (!e.message?.includes('database that did not allow mutations')) {
+          captureException(e);
+        }
 
-    const tx = db.transaction('engines');
-    const table = tx.objectStore('engines');
-
-    const engineBytes = await table.get(name);
+        if (__PLATFORM__ === 'firefox') {
+          const key = `engines:${name}`;
+          return chrome.storage.local.get([key]).then((data) => data[key]);
+        } else {
+          throw e;
+        }
+      });
 
     if (engineBytes) {
       const engine = deserializeEngine(engineBytes);
@@ -104,17 +117,6 @@ async function loadFromStorage(name) {
       return engine;
     }
   } catch (e) {
-    const msg = e.message || '';
-
-    if (
-      // Adblocker core updates the engine version
-      !msg.includes('serialized engine version mismatch') &&
-      // Private Browsing mode in Firefox
-      !msg.includes('database that did not allow mutations')
-    ) {
-      captureException(e);
-    }
-
     console.error(`[engines] Failed to load engine "${name}" from storage`, e);
   }
 
@@ -123,15 +125,28 @@ async function loadFromStorage(name) {
 
 async function saveToStorage(name) {
   const engine = loadFromMemory(name);
-  const db = await getDB();
+  const serialized = engine?.serialize();
 
-  const tx = db.transaction('engines', 'readwrite');
-  const table = tx.objectStore('engines');
+  try {
+    const db = await getDB();
 
-  if (engine) {
-    await table.put(engine.serialize(), name);
-  } else {
-    await table.delete(name);
+    const tx = db.transaction('engines', 'readwrite');
+    const table = tx.objectStore('engines');
+
+    if (engine) {
+      await table.put(serialized, name);
+    } else {
+      await table.delete(name);
+    }
+  } catch (e) {
+    if (__PLATFORM__ === 'firefox') {
+      const key = `engines:${name}`;
+      const data = engine ? { [key]: serialized } : { [key]: null };
+
+      return chrome.storage.local.set(data);
+    }
+
+    throw e;
   }
 }
 
