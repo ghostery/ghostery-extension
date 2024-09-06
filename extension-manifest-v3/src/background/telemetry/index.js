@@ -54,14 +54,11 @@ const loadStorage = async () => {
 const getConf = async (storage) => {
   const options = await store.resolve(Options);
 
-  if (!storage.installDate || !storage.installRandom) {
+  if (!storage.installDate) {
     saveStorage(storage, {
       installDate:
-        storage.installDate ||
-        options.installDate ||
-        new Date().toISOString().split('T')[0],
-      installRandom:
-        storage.installRandom || Math.floor(Math.random() * 100) + 1,
+        options.installDate || new Date().toISOString().split('T')[0],
+      installRandom: Math.floor(Math.random() * 100) + 1,
     });
   }
 
