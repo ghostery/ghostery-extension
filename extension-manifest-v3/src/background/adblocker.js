@@ -460,17 +460,7 @@ if (__PLATFORM__ === 'firefox') {
       if (request.sourceHostname && !isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);
 
-        if (details.type === 'main_frame') {
-          const htmlFilters = engine.getHtmlFilters(request);
-          if (htmlFilters.length !== 0) {
-            filterRequestHTML(
-              chrome.webRequest.filterResponseData,
-              request,
-              htmlFilters,
-            );
-            return;
-          }
-        } else {
+        if (details.type !== 'main_frame') {
           const { redirect, match } = engine.match(request);
           let result = undefined;
 
@@ -501,17 +491,35 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       const request = Request.fromRequestDetails(details);
+      const cspPolicies = [];
+      const htmlFilters = [];
 
       if (!isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);
-        const policies = engine.getCSPDirectives(request);
 
-        if (policies !== undefined) {
-          return updateResponseHeadersWithCSP(details, policies);
+        htmlFilters.push(...engine.getHtmlFilters(request));
+
+        if (details.type === 'main_frame') {
+          const policies = engine.getCSPDirectives(request);
+          if (policies !== undefined) {
+            cspPolicies.push(...policies);
+          }
         }
       }
+
+      if (htmlFilters.length !== 0) {
+        filterRequestHTML(
+          chrome.webRequest.filterResponseData,
+          request,
+          htmlFilters,
+        );
+      }
+
+      if (cspPolicies.length !== 0) {
+        return updateResponseHeadersWithCSP(details, cspPolicies);
+      }
     },
-    { urls: ['<all_urls>'], types: ['main_frame'] },
+    { urls: ['http://*/*', 'https://*/*'] },
     ['blocking', 'responseHeaders'],
   );
 }
