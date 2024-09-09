@@ -96,41 +96,40 @@ export default {
               </div>
             </div>
             <ui-line></ui-line>
-            ${__PLATFORM__ === 'chromium' ||
-            (__PLATFORM__ === 'safari' &&
-              html`
-                <div layout="column gap items:start" translate="no">
-                  <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
-                  <ui-text type="body-xs" color="gray-400">
-                    The below list is not reactive to changes made in the
-                    extension - use refresh button
-                  </ui-text>
-                  <div layout="row gap">
-                    ${html.resolve(
-                      chrome.declarativeNetRequest
-                        .getEnabledRulesets()
-                        .then(
-                          (rules) => html`
-                            ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
-                            ${!rules.length &&
-                            html`<ui-text translate="no">
-                              No rulesets enabled...
-                            </ui-text>`}
-                          `,
-                        ),
-                    )}
-                  </div>
-                  <ui-button
-                    size="small"
-                    type="outline"
-                    onclick="${refresh}"
-                    layout="shrink:0"
-                  >
-                    <button>Refresh</button>
-                  </ui-button>
+            ${(__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
+            html`
+              <div layout="column gap items:start" translate="no">
+                <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+                <ui-text type="body-xs" color="gray-400">
+                  The below list is not reactive to changes made in the
+                  extension - use refresh button
+                </ui-text>
+                <div layout="row gap">
+                  ${html.resolve(
+                    chrome.declarativeNetRequest
+                      .getEnabledRulesets()
+                      .then(
+                        (rules) => html`
+                          ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
+                          ${!rules.length &&
+                          html`<ui-text translate="no">
+                            No rulesets enabled...
+                          </ui-text>`}
+                        `,
+                      ),
+                  )}
                 </div>
-                <ui-line></ui-line>
-              `)}
+                <ui-button
+                  size="small"
+                  type="outline"
+                  onclick="${refresh}"
+                  layout="shrink:0"
+                >
+                  <button>Refresh</button>
+                </ui-button>
+              </div>
+              <ui-line></ui-line>
+            `}
           </section>
         `
       }
