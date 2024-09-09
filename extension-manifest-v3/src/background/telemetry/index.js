@@ -113,6 +113,9 @@ chrome.runtime.onMessage.addListener((msg) => {
     log('Telemetry recordUTMs() error', error);
   }
 
-  telemetry.ping(JUST_INSTALLED ? 'install' : 'active');
+  if (JUST_INSTALLED) {
+    telemetry.ping('install');
+  }
+  telemetry.ping('active');
   telemetry.setUninstallUrl();
 })();
