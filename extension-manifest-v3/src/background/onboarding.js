@@ -11,6 +11,7 @@
 
 import { observe } from '/store/options.js';
 import { showOperaSerpNotification } from '/notifications/opera-serp.js';
+import { isOpera } from '/utils/browser-info.js';
 
 let done = false;
 
@@ -24,7 +25,7 @@ observe('onboarding', (onboarding) => {
   }
 });
 
-if (__PLATFORM__ === 'opera') {
+if (__PLATFORM__ === 'chromium' && isOpera()) {
   chrome.webNavigation.onCompleted.addListener((details) => {
     if (done && details.frameId === 0) {
       showOperaSerpNotification(details.tabId);

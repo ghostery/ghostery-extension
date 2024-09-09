@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import Session from '/store/session.js';
 import { MergedStats } from '/store/daily-stats.js';
 
-if (__PLATFORM__ !== 'safari') {
+if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   // Listen for messages from Ghostery Search extension
   // https://github.com/ghostery/ghostery-search-extension/blob/main/src/background.js#L40
 

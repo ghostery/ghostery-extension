@@ -96,7 +96,7 @@ export default {
               </div>
             </div>
             <ui-line></ui-line>
-            ${__PLATFORM__ !== 'firefox' &&
+            ${(__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
             html`
               <div layout="column gap items:start" translate="no">
                 <ui-text type="headline-s">Enabled DNR rulesets</ui-text>

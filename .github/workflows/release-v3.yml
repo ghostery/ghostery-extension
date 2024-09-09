@@ -45,32 +45,12 @@ jobs:
           asset_name: ghostery-firefox-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
 
-      - name: Upload Chrome build
+      - name: Upload Chromium build
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-chrome.zip
-          asset_name: ghostery-chrome-${{ env.VERSION }}.zip
-          asset_content_type: application/gzip
-
-      - name: Upload Opera build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-opera.zip
-          asset_name: ghostery-opera-${{ env.VERSION }}.zip
-          asset_content_type: application/gzip
-
-      - name: Upload Edge build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-edge.zip
-          asset_name: ghostery-edge-${{ env.VERSION }}.zip
+          asset_path: extension-manifest-v3/web-ext-artifacts/ghostery-chromium.zip
+          asset_name: ghostery-chromium-${{ env.VERSION }}.zip
           asset_content_type: application/gzip

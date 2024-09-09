@@ -28,7 +28,10 @@ chrome.storage.local.get(['exceptions']).then(({ exceptions: value }) => {
 chrome.storage.onChanged.addListener((records) => {
   if (records.exceptions) {
     exceptions = records.exceptions.newValue || {};
-    if (__PLATFORM__ !== 'firefox') updateFilters();
+
+    if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
+      updateFilters();
+    }
   }
 });
 
@@ -37,7 +40,7 @@ export function getException(id) {
 }
 
 const convert =
-  __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
+  __PLATFORM__ === 'chromium'
     ? createOffscreenConverter()
     : createDocumentConverter();
 
@@ -129,7 +132,7 @@ async function updateFilters() {
   console.info('[exceptions] DNR rules for filters updated successfully');
 }
 
-if (__PLATFORM__ !== 'firefox') {
+if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
   // Update exceptions filters every time TrackerDB updates
   engines.addChangeListener(engines.TRACKERDB_ENGINE, updateFilters);
 }

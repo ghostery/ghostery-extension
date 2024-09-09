@@ -15,6 +15,7 @@ import Options from '/store/options.js';
 import Session from '/store/session.js';
 
 import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
+import { isOpera } from '/utils/browser-info';
 
 const NOTIFICATIONS = {
   terms: {
@@ -53,7 +54,11 @@ export default {
   url: '',
   action: '',
   [store.connect]: async () => {
-    if (__PLATFORM__ === 'opera' && (await shouldShowOperaSerpAlert())) {
+    if (
+      __PLATFORM__ === 'chromium' &&
+      isOpera() &&
+      (await shouldShowOperaSerpAlert())
+    ) {
       return NOTIFICATIONS.opera;
     }
 

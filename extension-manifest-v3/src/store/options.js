@@ -12,8 +12,9 @@
 import { store } from 'hybrids';
 import { deleteDB } from 'idb';
 
-import { getUserOptions, setUserOptions } from '../utils/api.js';
-import { DEFAULT_REGIONS } from '../utils/regions.js';
+import { getUserOptions, setUserOptions } from '/utils/api.js';
+import { DEFAULT_REGIONS } from '/utils/regions.js';
+import { isOpera } from '/utils/browser-info.js';
 
 import Session from './session.js';
 import CustomFilters from './custom-filters.js';
@@ -80,7 +81,9 @@ const Options = {
     done: false,
     shownAt: 0,
     shown: 0,
-    ...(__PLATFORM__ === 'opera' ? { serpShownAt: 0, serpShown: 0 } : {}),
+    ...(__PLATFORM__ === 'chromium' && isOpera()
+      ? { serpShownAt: 0, serpShown: 0 }
+      : {}),
   },
   installDate: '',
 

@@ -22,6 +22,7 @@ import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
+import { isOpera } from '/utils/browser-info.js';
 
 import { getException } from './exceptions.js';
 
@@ -52,7 +53,7 @@ observe('terms', async (terms) => {
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
 
-  if (__PLATFORM__ === 'opera' && options.terms) {
+  if (__PLATFORM__ === 'chromium' && isOpera() && options.terms) {
     shouldSetDangerBadgeForTabId(tabId).then((danger) => {
       setBadgeColor(danger ? '#f13436' /* danger-500 */ : undefined);
     });
@@ -342,7 +343,7 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-if (__PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox') {
+if (__PLATFORM__ === 'chromium') {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {

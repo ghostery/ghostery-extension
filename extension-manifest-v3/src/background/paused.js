@@ -64,7 +64,10 @@ observe('paused', async (paused, prevPaused) => {
   // The background process starts and runs for each tab, so we can assume
   // that this function is called before the user can change the paused state
   // in the panel or the settings page.
-  if (__PLATFORM__ !== 'firefox' && prevPaused) {
+  if (
+    (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
+    prevPaused
+  ) {
     const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
       .filter(({ id }) => id <= 3)
       .map(({ id }) => id);

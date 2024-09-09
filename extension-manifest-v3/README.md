@@ -19,12 +19,16 @@ npm start
 To develop extension for different target, add target name after the command:
 
 * Safari - `npm start safari`
-* Opera - `npm start opera`
 * Firefox - `npm start firefox`
 
 > The build script assumes that you are using macOS, and browsers are installed in the default locations.
 
 However, to test it in Safari browser, you will have to use Xcode. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
+
+You can also specify the browser to use, for the `chromium` target:
+
+* Opera - `npm start -- --browser=opera`
+* Edge - `npm start -- --browser=edge`
 
 If you want to contribute, try to get it working in Chrome. Most of the time, your code will work in Safari, too.
 

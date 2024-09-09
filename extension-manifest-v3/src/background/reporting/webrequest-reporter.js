@@ -26,7 +26,7 @@ import urlReporter from './url-reporter.js';
 
 let webRequestReporter = null;
 
-if (__PLATFORM__ !== 'safari') {
+if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   const webRequestPipeline = new WebRequestPipeline();
 
   // Important to call it in a first tick as it assigns chrome. listeners

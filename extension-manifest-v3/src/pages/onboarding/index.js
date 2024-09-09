@@ -13,6 +13,7 @@ import { mount, html, store } from 'hybrids';
 import '@ghostery/ui/onboarding';
 
 import Options from '/store/options.js';
+import { getBrowserId } from '/utils/browser-info.js';
 
 async function updateOptions(host, event) {
   const success = event.type === 'success';
@@ -31,7 +32,7 @@ async function updateOptions(host, event) {
 mount(document.body, {
   render: () => html`
     <ui-onboarding
-      platform="${__PLATFORM__}"
+      platform="${getBrowserId()}"
       onsuccess="${updateOptions}"
       onskip="${updateOptions}"
     ></ui-onboarding>
