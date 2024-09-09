@@ -1,9 +1,7 @@
-import { test as base, chromium, firefox } from '@playwright/test';
+import { test as base, chromium } from '@playwright/test';
 import { downloadAddon } from '../src/helpers';
 
 const extensionUrls = {
-  firefox:
-    'https://github.com/ghostery/ghostery-extension/releases/download/v10.4.2/ghostery-firefox-10.4.2.zip',
   chromium:
     'https://github.com/ghostery/ghostery-extension/releases/download/v10.4.2/ghostery-chrome-10.4.2.zip',
 };
@@ -11,8 +9,7 @@ const extensionUrls = {
 const test = base.extend({
   context: async ({ browserName }, use) => {
     const extensionPath = await downloadAddon(extensionUrls[browserName]);
-    const browserType = browserName === 'firefox' ? firefox : chromium;
-    const context = await browserType.launchPersistentContext('', {
+    const context = await chromium.launchPersistentContext('', {
       headless: false,
       args: [
         `--disable-extensions-except=${extensionPath}`,
@@ -33,4 +30,4 @@ const test = base.extend({
 
 const { expect } = test;
 
-module.exports = { test, expect };
+export { test, expect };

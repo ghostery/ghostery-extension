@@ -1,76 +1,66 @@
 import { test, expect } from '../src/fixtures.js';
+import getExtensionUrl from '../src/helpers.js';
 
-let extensionUrl;
-let extensionPage;
+test.describe('Test', () => {
+  let extensionPage = null;
+  let extensionUrl = null;
 
-test.describe('After the installation ', () => {
   test.beforeEach(async ({ page, context }) => {
     await page.waitForTimeout(2000);
 
     let pages = context.pages();
     console.info('INFO: Ghostery onboarding opened.');
 
-    for (const p of pages) {
-      if (p.url().startsWith('chrome-extension://')) {
-        extensionPage = p;
-        await p.bringToFront();
-        console.info(`INFO: Focused on tab with URL: ${p.url()}`);
-        extensionUrl = p.url();
-        break;
-      }
-    }
+    extensionUrl = getExtensionUrl(pages, extensionPage, extensionUrl);
 
-    expect(
-      await extensionPage.isVisible('text="Enable Ghostery to get started"'),
-    ).toBe(true);
-
+    await expect(
+      extensionPage.getByText('Enable Ghostery to get started'),
+    ).toBeVisible();
     const button = await extensionPage.waitForSelector('ui-button');
     await button.click();
 
-    expect(await extensionPage.isVisible('text="Setup Successful"')).toBe(true);
+    await expect(extensionPage.getByText('Setup Successful')).toBeVisible();
     console.info('INFO: Onboarding done.');
   });
-  test('check Pause Ghostery', async ({ page }) => {
-    // 1. Open a TEST PAGE (TODO: add a test page) - all should be blocked
-    // 2. Open Ghostery Settings on Privacy Settings
-    // 3. Click on "Pause Ghostery" button
-    // 4. Open a TEST PAGE
-    // 5. Nothing should be blocked
-    const modifiedUrl =
-      extensionUrl.split('/').slice(0, 4).join('/') + '/settings/index.html';
-    console.info(modifiedUrl);
-    await page.goto(modifiedUrl);
-    expect(await extensionPage.isVisible('text="Ghostery settings"')).toBe(
-      true,
-    );
-    await page.waitForTimeout(12000);
-  });
-  test('check Ad-Blocking', () => {
-    // 1. Open a TEST PAGE (TODO: add a test page) - all should be blocked
-    // 2. Open Ghostery Settings on Privacy Settings
-    // 3. Click on "Ad-Blocking" button
-    // 4. Open a TEST PAGE
-    // 5. Ads should not be blocked
-  });
-  test('check Anti-Tracking', () => {
-    // 1. Open a TEST PAGE - all should be blocked
-    // 2. Open Ghostery Settings on Privacy Settings
-    // 3. Click on "Anti-Tracking" button
-    // 4. Open a TEST PAGE
-    // 5. Trackers should not be blocked
-  });
-  test('check Never-Consent', () => {
-    // 1. Open a TEST PAGE - all should be blocked
-    // 2. Open Ghostery Settings on Privacy Settings
-    // 3. Click on "Never-Consent" button
-    // 4. Open a TEST PAGE
-    // 5. Cookie pop-up should not be blocked
-  });
-  test('check Regional Filters', () => {
-    // 1. Open a TEST PAGE - all should be blocked
-    // 2. Open Ghostery Settings on Privacy Settings
-    // 3. Click on "Anti-Tracking" button
-    // 4. Open a TEST PAGE
-    // 5. Regional item/s should not be blocked
-  });
+  // test(
+  //   'checks Pause Ghostery module',
+  //   {
+  //     tag: '@pauseGhostery',
+  //   },
+  //   async ({ page }) => {
+  //     extensionUrl = getExtensionUrl + '/settings/index.html';
+  //     console.info(extensionUrl);
+  //     await page.goto(extensionUrl);
+  //     await expect(extensionPage.getByText('Ghostery settings')).toBeVisible();
+  //     await page.waitForTimeout(12000);
+  //   },
+  // );
+  // test(
+  //   'checks Ad-Blocking module',
+  //   {
+  //     tag: '@checksAdBlocking',
+  //   },
+  //   () => {},
+  // );
+  // test(
+  //   'checks Anti-Tracking module',
+  //   {
+  //     tag: '@checksAntiTracking',
+  //   },
+  //   () => {},
+  // );
+  // test(
+  //   'checks Never-Consent module',
+  //   {
+  //     tag: '@checksNeverConsent',
+  //   },
+  //   () => {},
+  // );
+  // test(
+  //   'checks Regional Filters module',
+  //   {
+  //     tag: '@checksRegionalFilters',
+  //   },
+  //   () => {},
+  // );
 });

@@ -2,9 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
-import decompress from 'decompress';
-
-export const sleep = (ms) => new Promise((r) => setTimeout(() => r(), ms));
+import zlib from 'node:zlib';
 
 export const switchToWindowWithUrl = async (context, url) => {
   const pages = context.pages();
@@ -48,14 +46,32 @@ export const downloadAddon = async (url) => {
     fs.writeFileSync(addonFilePath, buffer);
   }
 
-  if (
-    !fs.existsSync(addonPath) &&
-    (url.endsWith('zip') || url.endsWith('xpi'))
-  ) {
+  if (!fs.existsSync(addonPath) && url.endsWith('zip')) {
     console.log('LOG: Unpacking addon');
-    await decompress(addonFilePath, addonPath);
+    fs.mkdirSync(addonPath);
+    const unzip = zlib.createUnzip();
+    const source = fs.createReadStream(addonFilePath);
+    const destination = fs.createWriteStream(path.join(addonPath, 'addon'));
+
+    source.pipe(unzip).pipe(destination);
   }
 
   console.log('LOG: Addon path:', addonPath);
   return addonPath;
+};
+
+// '/settings/index.html';
+
+export const getExtensionUrl = async (pages, extensionPage, extensionUrl) => {
+  for (const p of pages) {
+    if (p.url().startsWith('chrome-extension://')) {
+      extensionPage = p;
+      await p.bringToFront();
+      console.info(`INFO: Focused on tab with URL: ${p.url()}`);
+      extensionUrl = p.url().split('/').slice(0, 4).join('/');
+      break;
+    }
+  }
+
+  return { extensionPage, extensionUrl };
 };
