@@ -108,7 +108,7 @@ async function onLocationChange(details) {
 
 chrome.webNavigation.onCommitted.addListener(onLocationChange);
 
-if (__PLATFORM__ !== 'safari') {
+if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   chrome.webNavigation.onHistoryStateUpdated.addListener(onLocationChange);
 }
 

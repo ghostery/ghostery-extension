@@ -13,13 +13,13 @@ import Bowser from 'bowser';
 
 // we cache the UA as it used by many modules that need it on file load
 let ua;
-const getUA = () => {
+function getUA() {
   if (ua) {
     return ua;
   }
   ua = Bowser.parse(navigator.userAgent);
   return ua;
-};
+}
 
 async function getExtendedBrowserInfo() {
   try {
@@ -44,7 +44,7 @@ function getPlatformInfo() {
   return Promise.resolve(null);
 }
 
-const getOS = () => {
+function getOS() {
   const ua = getUA();
   const platform = ua.os?.name?.toLowerCase() || ''; // Make sure that undefined operating systems don't mess with stuff like .includes()
   if (platform.includes('mac')) {
@@ -63,33 +63,41 @@ const getOS = () => {
     return 'linux';
   }
   return 'other';
-};
+}
 
-const getBrowser = () => {
+function isAndroid() {
+  return getOS() === 'android';
+}
+
+function getBrowser() {
   const ua = getUA();
   return ua.browser.name.toLowerCase();
-};
+}
 
-const isAndroid = () => {
-  return getOS() === 'android';
-};
-
-const isFirefox = () => {
+function isFirefox() {
   const browser = getBrowser();
   return browser.includes('firefox');
-};
+}
 
-const isEdge = () => {
+function isEdge() {
   const browser = getBrowser();
   return browser.includes('edge');
-};
+}
 
-const getVersion = () => {
-  const ua = getUA();
-  return parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
-};
+export function isOpera() {
+  const browser = getBrowser();
+  return browser.includes('opera');
+}
 
-const getBrowserInfo = async () => {
+export function getBrowserId() {
+  if (isFirefox()) return 'firefox';
+  if (isEdge()) return 'edge';
+  if (isOpera()) return 'opera';
+
+  return 'chrome';
+}
+
+async function getBrowserInfo() {
   const BROWSER_INFO = {
     displayName: '',
     name: '',
@@ -130,10 +138,11 @@ const getBrowserInfo = async () => {
   BROWSER_INFO.os = getOS();
 
   // Set version property
-  BROWSER_INFO.version = getVersion();
+  BROWSER_INFO.version = parseInt(getUA().browser.version.toString(), 10); // convert to string for Chrome
 
   // Check for Ghostery browsers
   const browserInfo = await getExtendedBrowserInfo();
+
   if (browserInfo && browserInfo.name === 'Ghostery') {
     if (BROWSER_INFO.os === 'android') {
       BROWSER_INFO.displayName = 'Ghostery Android Browser';
@@ -154,16 +163,16 @@ const getBrowserInfo = async () => {
   }
 
   return BROWSER_INFO;
-};
+}
 
 let browserInfo;
-const cachedGetBrowserInfo = async () => {
+async function cachedGetBrowserInfo() {
   if (browserInfo) {
     return browserInfo;
   }
   browserInfo = await getBrowserInfo();
   return browserInfo;
-};
+}
 
 cachedGetBrowserInfo.isAndroid = isAndroid;
 cachedGetBrowserInfo.isFirefox = isFirefox;

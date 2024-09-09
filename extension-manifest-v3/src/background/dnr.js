@@ -11,7 +11,7 @@
 
 import { observe, ENGINES, isPaused } from '/store/options.js';
 
-if (__PLATFORM__ !== 'firefox') {
+if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)

@@ -15,7 +15,7 @@ done
 
 VERSION=$(node -p "require('./package.json').version")
 
-for PLATFORM in firefox chrome edge opera; do
+for PLATFORM in firefox chromium; do
   echo
   echo "##################################"
   echo "  Generating package for $PLATFORM"

@@ -29,7 +29,7 @@ import CustomFilters from '/store/custom-filters.js';
 import { setup } from '/background/adblocker.js';
 
 const convert =
-  __PLATFORM__ !== 'safari' && __PLATFORM__ !== 'firefox'
+  __PLATFORM__ === 'chromium'
     ? createOffscreenConverter()
     : createDocumentConverter();
 
@@ -175,7 +175,7 @@ async function update(text, { trustedScriptlets }) {
 
   result.errors = errors;
 
-  if (__PLATFORM__ !== 'firefox') {
+  if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
     const dnrResult = await Promise.allSettled(
       [...networkFilters].map((filter) => convert(filter)),
     );
