@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Mantener deshabilitado"
   },
+  "last_update__@_0_": {
+    "message": "Última actualización: $${0}"
+  },
   "learn_how": {
     "message": "Aprende cómo"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Gracias por tu apoyo a Ghostery en su afán por lograr que la privacidad sea un derecho humano básico en Internet."
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Este sitio siempre será de confianza. Esto se puede cambiar en cualquier momento en la configuración de Ghostery para evitar que los rastreadores y los anuncios te rastreen en la web"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Este sitio siempre estará en pausa. Puedes cambiar esto en cualquier momento en la configuración de Ghostery para evitar que los rastreadores y los anuncios te rastreen en la web"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "Este sitio será confiable por 1 día"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "Este sitio estará en pausa por 1 día"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "Este sitio será confiable por 1 hora"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "Este sitio se pausará por 1 hora"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Para ajustar la protección de privacidad confíe en un sitio:"

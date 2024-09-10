@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "保持禁用"
   },
+  "last_update__@_0_": {
+    "message": "上次更新：$${0}"
+  },
   "learn_how": {
     "message": "如何学习"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "感谢支持 Ghostery，为建立一个隐私是基本人权的网络而奋斗。"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "此网站将始终被信任。您可以随时在 Ghostery 设置中更改此设置，以阻止跟踪器和广告在网络上跟踪您。请确保您定期检查和更新您的隐私设置，以确保您的在线活动始终受到保护。"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "此网站将始终暂停。您可以随时在 Ghostery 设置中更改此设置，以阻止跟踪器和广告在网络上跟踪您。"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "此站点将在1天内被信任"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "该网站将暂停一天"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "此网站将在1小时内被信任"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "此网站将暂停1小时"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "要调整隐私保护，请信任一个网站："

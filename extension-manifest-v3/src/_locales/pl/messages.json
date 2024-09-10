@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Pozostaw nieaktywne"
   },
+  "last_update__@_0_": {
+    "message": "Ostatnia aktualizacja: $${0}"
+  },
   "learn_how": {
     "message": "Dowiedz się jak"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Dziękujemy za Twoje wsparcie w walce Ghostery o sieć, w której prywatność jest podstawowym prawem człowieka!"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ta witryna będzie zaufana zawsze. Możesz dostosować ustawienia Ghostery w dowolnym momencie, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Ta witryna będzie zawsze wstrzymana. Możesz zmienić to w dowolnym momencie w ustawieniach Ghostery, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "Ta witryna będzie zaufana przez 1 dzień"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "Ta witryna będzie wstrzymana na 1 dzień"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "Ta witryna będzie zaufana przez 1 godzinę"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "Ta witryna będzie wstrzymana na 1 godzinę"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Aby dostosować ochronę prywatności, zaufaj stronie:"

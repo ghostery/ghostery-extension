@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Maintenir désactivé"
   },
+  "last_update__@_0_": {
+    "message": "Dernière mise à jour : $${0}"
+  },
   "learn_how": {
     "message": "Apprends comment"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Merci de soutenir la lutte de Ghostery pour un Web où la vie privée est un droit humain fondamental !"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Ce site sera toujours de confiance. Vous pouvez modifier cette option à tout moment dans les paramètres de Ghostery pour empêcher les trackers et les publicités de vous suivre sur le Web"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Ce site sera toujours en pause. Vous pouvez modifier cela à tout moment dans les paramètres de Ghostery pour empêcher les trackers et les publicités de vous suivre sur le Web"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "Ce site sera fiable pendant 1 jour"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "Ce site sera mis en pause pendant 1 jour"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "Ce site sera approuvé pendant 1 heure"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "Ce site sera mis en pause pendant 1 heure"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Pour ajuster la protection de la vie privée :"
