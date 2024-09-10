@@ -151,7 +151,7 @@ export default {
         </div>
         <ui-action>
           <ui-text type="label-xs" color="gray-300" onclick="${updateFilters}">
-            Last update: ${updatedAt || 'updating...'}
+            Last update: ${updatedAt || html`updating...`}
           </ui-text>
         <ui-action>
       </div>
