@@ -446,6 +446,8 @@ function isTrusted(request, type) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
+      if (details.tabId < 0 || details.type === 'main_frame') return;
+
       if (setup.pending) {
         console.error(
           '[adblocker] Error while processing network request - adblocker not ready yet',
@@ -453,29 +455,26 @@ if (__PLATFORM__ === 'firefox') {
         return;
       }
 
-      if (details.tabId < 0) return;
-
       const request = Request.fromRequestDetails(details);
 
+      let result = undefined;
       if (request.sourceHostname && !isTrusted(request, details.type)) {
         const engine = engines.get(engines.MAIN_ENGINE);
 
-        if (details.type !== 'main_frame') {
-          const { redirect, match } = engine.match(request);
-          let result = undefined;
+        const { redirect, match } = engine.match(request);
 
-          if (redirect !== undefined) {
-            request.blocked = true;
-            result = { redirectUrl: redirect.dataUrl };
-          } else if (match === true) {
-            request.blocked = true;
-            result = { cancel: true };
-          }
-
-          updateTabStats(details.tabId, [request]);
-          return result;
+        if (redirect !== undefined) {
+          request.blocked = true;
+          result = { redirectUrl: redirect.dataUrl };
+        } else if (match === true) {
+          request.blocked = true;
+          result = { cancel: true };
         }
       }
+
+      updateTabStats(details.tabId, [request]);
+
+      return result;
     },
     { urls: ['<all_urls>'] },
     ['blocking'],
