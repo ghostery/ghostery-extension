@@ -241,7 +241,7 @@ export async function update(name) {
       `[engines] Skipping update for engine "${name}" as the engine is not available`,
     );
 
-    return;
+    return false;
   }
 
   try {
@@ -313,7 +313,7 @@ export async function update(name) {
 
       console.info(`Engine "${name}" reloaded`);
 
-      return engine;
+      return true;
     }
 
     // At this point we know that no list needs to be removed anymore. What
@@ -419,9 +419,11 @@ export async function update(name) {
 
       // Save the new engine to storage
       saveToStorage(name);
+
+      return true;
     }
 
-    return engine;
+    return false;
   } catch (e) {
     console.error(`[engines] Failed to update engine "${name}"`, e);
     throw e;

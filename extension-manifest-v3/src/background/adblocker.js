@@ -19,6 +19,7 @@ import { parse } from 'tldts-experimental';
 import Options, { observe, ENGINES, isPaused } from '/store/options.js';
 
 import * as engines from '/utils/engines.js';
+import * as trackerdb from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 import { getMetadata } from '/utils/trackerdb.js';
@@ -52,8 +53,9 @@ function getEnabledEngines(config) {
   return [];
 }
 
-const HOUR_IN_MS = 60 * 60 * 1000;
-async function reloadEngine(enabledEngines) {
+async function reloadMainEngine() {
+  const enabledEngines = getEnabledEngines(options);
+
   if (enabledEngines.length) {
     engines.replace(
       engines.MAIN_ENGINE,
@@ -78,10 +80,45 @@ async function reloadEngine(enabledEngines) {
   }
 }
 
-engines.addChangeListener(engines.CUSTOM_ENGINE, async () => {
-  reloadEngine(getEnabledEngines(options));
+engines.addChangeListener(engines.CUSTOM_ENGINE, () => {
+  reloadMainEngine();
 });
 
+let updating = false;
+async function updateEngines() {
+  if (updating) return;
+
+  try {
+    updating = true;
+
+    const enabledEngines = getEnabledEngines(options);
+
+    if (enabledEngines.length) {
+      let updated = false;
+      // Update engines from the list of enabled engines
+      for (const id of enabledEngines) {
+        if (id === engines.CUSTOM_ENGINE) continue;
+
+        await engines.init(id);
+        updated = (await engines.update(id).catch(() => false)) || updated;
+      }
+
+      // Reload the main engine after all engines are updated
+      if (updated) await reloadMainEngine();
+
+      // Update TrackerDB engine
+      trackerdb.setup.pending && (await trackerdb.setup.pending);
+      await engines.update(engines.TRACKERDB_ENGINE).catch(() => null);
+    }
+  } finally {
+    // Update timestamp after the engines are updated
+    await store.set(Options, { filtersUpdatedAt: Date.now() });
+    // Reset the flag
+    updating = false;
+  }
+}
+
+const HOUR_IN_MS = 60 * 60 * 1000;
 export const setup = asyncSetup([
   observe(async (value, lastValue) => {
     options = value;
@@ -95,9 +132,7 @@ export const setup = asyncSetup([
       // Enabled engines changed
       (prevEnabledEngines &&
         (enabledEngines.length !== prevEnabledEngines.length ||
-          enabledEngines.some((id, i) => id !== prevEnabledEngines[i]))) ||
-      // Engine filters updatedAt changed after successful update
-      (lastValue && value.filtersUpdatedAt > lastValue.filtersUpdatedAt)
+          enabledEngines.some((id, i) => id !== prevEnabledEngines[i])))
     ) {
       // The regional filters engine is no longer used, so we must remove it
       // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
@@ -105,34 +140,17 @@ export const setup = asyncSetup([
       // the new version of the extension
       engines.remove('regional-filters');
 
-      await reloadEngine(enabledEngines);
-    }
-
-    if (
-      // Experimental filters enabled
-      (options.experimentalFilters &&
-        lastValue?.experimentalFilters === false) ||
-      // Filters outdated (1 hour)
-      options.filtersUpdatedAt < Date.now() - HOUR_IN_MS
-    ) {
-      const updateEngines = getEnabledEngines(options)
-        // Remove the custom engine, as it is created client-side only
-        .filter((name) => name !== engines.CUSTOM_ENGINE)
-        // Add engines outside of the main engine
-        .concat(engines.TRACKERDB_ENGINE);
-
-      (async () => {
-        for (const id of updateEngines) {
-          await engines.update(id).catch(() => null);
-        }
-
-        // Trigger update of the main engine after all other engines are updated
-        store.set(Options, { filtersUpdatedAt: Date.now() });
-      })();
+      reloadMainEngine();
     }
   }),
-  observe('experimentalFilters', async (value) => {
+  observe('filtersUpdatedAt', async (value) => {
+    if (value < Date.now() - HOUR_IN_MS) updateEngines();
+  }),
+  observe('experimentalFilters', async (value, lastValue) => {
     engines.setEnv('env_experimental', value);
+
+    // Experimental filters changed to enabled
+    if (lastValue !== undefined && value) updateEngines();
   }),
 ]);
 
