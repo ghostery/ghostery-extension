@@ -177,7 +177,11 @@ function pushTabStats(stats, requests) {
   return trackersUpdated;
 }
 
+const deferred = Promise.resolve();
 export async function updateTabStats(tabId, requests) {
+  // Avoid blocking requests by updating the tab stats asynchronously
+  await deferred;
+
   const stats = tabStats.get(tabId);
 
   // Stats might not be available on Firefox using webRequest.onBeforeRequest
@@ -347,12 +351,10 @@ if (__PLATFORM__ === 'chromium') {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (details.tabId < 0) return;
+      if (details.tabId < 0 || details.type === 'main_frame') return;
 
       const request = Request.fromRequestDetails(details);
-      if (details.type !== 'main_frame') {
-        updateTabStats(details.tabId, [request]);
-      }
+      updateTabStats(details.tabId, [request]);
     },
     {
       urls: ['<all_urls>'],
