@@ -618,6 +618,9 @@
     "message": "未知",
     "description": "Tracker category name"
   },
+  "updating___": {
+    "message": "更新中..."
+  },
   "urls_blocked": {
     "message": "ブロック済みURL"
   },

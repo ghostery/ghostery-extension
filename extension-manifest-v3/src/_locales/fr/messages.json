@@ -618,6 +618,9 @@
     "message": "Non identifié",
     "description": "Tracker category name"
   },
+  "updating___": {
+    "message": "mise à jour..."
+  },
   "urls_blocked": {
     "message": "URL bloquées"
   },

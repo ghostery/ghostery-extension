@@ -618,6 +618,9 @@
     "message": "不明",
     "description": "Tracker category name"
   },
+  "updating___": {
+    "message": "更新中..."
+  },
   "urls_blocked": {
     "message": "已封鎖的 URL"
   },

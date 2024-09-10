@@ -618,6 +618,9 @@
     "message": "확인되지 않음",
     "description": "Tracker category name"
   },
+  "updating___": {
+    "message": "업데이트 중..."
+  },
   "urls_blocked": {
     "message": "차단된 URL"
   },

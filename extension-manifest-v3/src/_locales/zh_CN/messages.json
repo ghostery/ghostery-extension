@@ -618,6 +618,9 @@
     "message": "未识别",
     "description": "Tracker category name"
   },
+  "updating___": {
+    "message": "更新中..."
+  },
   "urls_blocked": {
     "message": "已拦截 URL"
   },
