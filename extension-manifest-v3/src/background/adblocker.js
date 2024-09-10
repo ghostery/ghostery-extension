@@ -297,7 +297,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 
 const DEBUG_SCRIPLETS = false;
-async function executeScriptlets(tabId, scripts) {
+async function executeScriptlets(tabId, frameId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   let debugMarker;
@@ -339,7 +339,7 @@ ${scripts.join('\n\n')}}
       world: __PLATFORM__ === 'firefox' ? undefined : 'MAIN',
       target: {
         tabId,
-        allFrames: true,
+        frameIds: [frameId],
       },
       func: codeRunningInContentScript,
       args: [encodeURIComponent(codeRunningInPage)],
@@ -352,7 +352,7 @@ ${scripts.join('\n\n')}}
   );
 }
 
-async function injectScriptlets(tabId, url) {
+async function injectScriptlets(tabId, frameId, url) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
@@ -391,21 +391,21 @@ async function injectScriptlets(tabId, url) {
   }
 
   if (scriptlets.length > 0) {
-    executeScriptlets(tabId, scriptlets);
+    executeScriptlets(tabId, frameId, scriptlets);
   }
 }
 
 if (__PLATFORM__ === 'safari') {
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && msg.action === 'injectScriptlets') {
-      injectScriptlets(sender.tab.id, sender.url);
+      injectScriptlets(sender.tab.id, sender.frameId, sender.url);
     }
 
     return false;
   });
 } else {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.url);
+    injectScriptlets(details.tabId, details.frameId, details.url);
   });
 }
 
