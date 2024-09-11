@@ -372,6 +372,7 @@ if (argv.watch) {
           case 'firefox':
             settings = {
               target: 'firefox-desktop',
+              devtools: true,
               firefoxBinary:
                 '/Applications/Firefox Nightly.app/Contents/MacOS/firefox-bin',
             };
