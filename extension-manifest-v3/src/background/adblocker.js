@@ -72,11 +72,11 @@ async function reloadMainEngine() {
     );
 
     console.info(
-      `[adblocker] engine reloaded with: ${enabledEngines.join(', ')}`,
+      `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
     );
   } else {
     engines.create(engines.MAIN_ENGINE);
-    console.info('[adblocker] Engine reloaded with no filters');
+    console.info('[adblocker] Main engine reloaded with no filters');
   }
 }
 
@@ -90,7 +90,6 @@ async function updateEngines() {
 
   try {
     updating = true;
-
     const enabledEngines = getEnabledEngines(options);
 
     if (enabledEngines.length) {
@@ -109,11 +108,11 @@ async function updateEngines() {
       // Update TrackerDB engine
       trackerdb.setup.pending && (await trackerdb.setup.pending);
       await engines.update(engines.TRACKERDB_ENGINE).catch(() => null);
+
+      // Update timestamp after the engines are updated
+      await store.set(Options, { filtersUpdatedAt: Date.now() });
     }
   } finally {
-    // Update timestamp after the engines are updated
-    await store.set(Options, { filtersUpdatedAt: Date.now() });
-    // Reset the flag
     updating = false;
   }
 }
@@ -142,9 +141,10 @@ export const setup = asyncSetup([
 
       reloadMainEngine();
     }
-  }),
-  observe('filtersUpdatedAt', async (value) => {
-    if (value < Date.now() - HOUR_IN_MS) updateEngines();
+
+    if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
+      updateEngines();
+    }
   }),
   observe('experimentalFilters', async (value, lastValue) => {
     engines.setEnv('env_experimental', value);

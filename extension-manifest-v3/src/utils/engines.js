@@ -176,16 +176,9 @@ async function loadFromFile(name) {
 
     saveToMemory(name, engine);
 
-    await saveToStorage(name)
-      .then(() =>
-        // After initial load from disk, schedule an update
-        // as it is done only once on the first run.
-        // After loading from disk, it should be loaded from the storage
-        update(name).catch(() => null),
-      )
-      .catch(() => {
-        console.error(`[engines] Failed to save engine "${name}" to storage`);
-      });
+    await saveToStorage(name).catch(() => {
+      console.error(`[engines] Failed to save engine "${name}" to storage`);
+    });
 
     return engine;
   } catch (e) {
@@ -252,7 +245,7 @@ export async function update(name) {
 
     const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
 
-    console.info(`[engines] Updating engine "${name}" from ${listURL}`);
+    console.info(`[engines] Updating engine "${name}..."`);
 
     const data = await fetch(listURL)
       .then(check)
