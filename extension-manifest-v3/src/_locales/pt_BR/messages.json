@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Manter desabilitado"
   },
+  "last_update__@_0_": {
+    "message": "Última atualização: $${0}"
+  },
   "learn_how": {
     "message": "Saiba como"
   },
@@ -434,7 +437,7 @@
     "message": "Pausar Ghostery"
   },
   "pause_on_this_site": {
-    "message": "Pause on this site"
+    "message": "Pausar neste site"
   },
   "paused": {
     "message": "Pausado"
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Agradecemos seu apoio na luta do Ghostery por uma web onde a privacidade é um direito humano básico!"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Este site sempre será confiável. Você pode mudar isso a qualquer momento nas configurações do Ghostery para impedir que rastreadores e anúncios rastreiem você na web"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Este site sempre estará pausado. Você pode mudar isso a qualquer momento nas configurações do Ghostery para impedir que rastreadores e anúncios rastreiem você na web"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "Este site será confiável por 1 dia"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "Este site será pausado por 1 dia"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "Este site será confiável por 1 hora"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "Este site será pausado por 1 hora"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Para ajustar a proteção de privacidade, confie em um site:"
@@ -614,6 +617,9 @@
   "unidentified": {
     "message": "Não identificado",
     "description": "Tracker category name"
+  },
+  "updating___": {
+    "message": "atualizando..."
   },
   "urls_blocked": {
     "message": "URLs bloqueados"

@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Deaktiviert lassen"
   },
+  "last_update__@_0_": {
+    "message": "Letzte Aktualisierung: $${0}"
+  },
   "learn_how": {
     "message": "Lernen wie"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Vielen Dank für Ihre Unterstützung im Kampf von Ghostery für ein Internet, in dem Datenschutz ein grundlegendes Menschenrecht ist!"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Dieser Seite wird immer vertraut. Die Einstellung kann jederzeit in den Ghostery-Einstellungen widerrufen werden, um Tracking zu verhindern."
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Diese Seite wird immer pausiert. Sie können dies jederzeit in den Ghostery-Einstellungen ändern, damit Tracker und Werbung Ihnen nicht durchs Web folgen"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "Dieser Seite wird für 1 Tag vertraut"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "Diese Seite wird für 1 Tag pausiert"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "Dieser Seite wird für 1 Stunde vertraut"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "Diese Seite wird für 1 Stunde pausiert"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Zur Anpassung der Einstellungen, vertrauen Sie einer Webseite:"
@@ -614,6 +617,9 @@
   "unidentified": {
     "message": "Nicht identifiziert",
     "description": "Tracker category name"
+  },
+  "updating___": {
+    "message": "aktualisieren..."
   },
   "urls_blocked": {
     "message": "Blockierte URLs"

@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "保持關閉"
   },
+  "last_update__@_0_": {
+    "message": "最後更新：$${0}"
+  },
   "learn_how": {
     "message": "學習如何"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "感謝你支持 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "此網站將始終被信任。你可以隨時在 Ghostery 設定中更改此設定，制止追蹤器和廣告在網路中追蹤你。這樣可以確保你的隱私和數據安全，防止任何不必要的跟蹤和廣告干擾。"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "此網站將始終處於暫停狀態。你可以隨時在 Ghostery 設定中更改此設定，制止追蹤器和廣告在網路中追蹤你。"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "此網站將被信任一天的時間"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "此網站將暫停一天"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "此網站將被信任一小時的時間"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "此網站將暫停一小時"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "要調整隱私保護，請信任一個網站："
@@ -614,6 +617,9 @@
   "unidentified": {
     "message": "不明",
     "description": "Tracker category name"
+  },
+  "updating___": {
+    "message": "更新中..."
   },
   "urls_blocked": {
     "message": "已封鎖的 URL"
