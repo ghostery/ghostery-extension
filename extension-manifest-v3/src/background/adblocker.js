@@ -22,7 +22,6 @@ import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
-import { getMetadata } from '/utils/trackerdb.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
@@ -433,7 +432,7 @@ function isTrusted(request, type) {
     return false;
   }
 
-  const metadata = getMetadata(request);
+  const metadata = trackerdb.getMetadata(request);
 
   // Get exception for known tracker (metadata id) or
   // by the request hostname (unidentified tracker)
