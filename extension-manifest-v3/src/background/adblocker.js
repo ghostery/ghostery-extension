@@ -80,9 +80,7 @@ async function reloadMainEngine() {
   }
 }
 
-engines.addChangeListener(engines.CUSTOM_ENGINE, () => {
-  reloadMainEngine();
-});
+engines.addChangeListener(engines.CUSTOM_ENGINE, reloadMainEngine);
 
 let updating = false;
 async function updateEngines() {
@@ -97,8 +95,6 @@ async function updateEngines() {
       // Update engines from the list of enabled engines
       for (const id of enabledEngines) {
         if (id === engines.CUSTOM_ENGINE) continue;
-
-        await engines.init(id);
         updated = (await engines.update(id).catch(() => false)) || updated;
       }
 
@@ -139,7 +135,7 @@ export const setup = asyncSetup([
       // the new version of the extension
       engines.remove('regional-filters');
 
-      reloadMainEngine();
+      await reloadMainEngine();
     }
 
     if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
