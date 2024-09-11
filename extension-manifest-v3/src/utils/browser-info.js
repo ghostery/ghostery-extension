@@ -84,6 +84,11 @@ function isEdge() {
   return browser.includes('edge');
 }
 
+function isSafari() {
+  const browser = getBrowser();
+  return browser.includes('safari');
+}
+
 export function isOpera() {
   const browser = getBrowser();
   return browser.includes('opera');
@@ -93,6 +98,7 @@ export function getBrowserId() {
   if (isFirefox()) return 'firefox';
   if (isEdge()) return 'edge';
   if (isOpera()) return 'opera';
+  if (isSafari()) return 'safari';
 
   return 'chrome';
 }
