@@ -1,4 +1,7 @@
-TITLE
+---
+layout: post
+title:  "Release tests."
+---
 
 [TOC]
     ## Test 01 - Installation
