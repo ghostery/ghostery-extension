@@ -9,18 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, define, dispatch } from 'hybrids';
+import { html, dispatch } from 'hybrids';
 import { sortCategories } from '@ghostery/ui/categories';
 
-import DisablePreviewImg from './assets/disable-preview.svg';
-
-// Panel UI
-import '../panel/index.js';
+import DisablePreviewImg from '../assets/disable-preview.svg';
 
 const sort = sortCategories();
 
-export default define({
-  tag: 'ui-trackers-preview',
+export default {
   confirmDisabled: false,
   stats: undefined,
   domain: '',
@@ -77,18 +73,15 @@ export default define({
 
             <main layout="padding:1.5">
               ${stats &&
-              html.resolve(
-                stats.then(
-                  (data) => html`
-                    <ui-panel-stats
-                      domain="${domain}"
-                      categories="${data.stats.sort(sort)}"
-                      layout="relative layer:101"
-                    >
-                    </ui-panel-stats>
-                  `,
-                ),
-              )}
+              html`
+                <ui-panel-stats
+                  domain="${domain}"
+                  categories="${stats.sort(sort)}"
+                  layout="relative layer:101"
+                  wtm-link
+                >
+                </ui-panel-stats>
+              `}
             </main>
             <footer layout="row center padding:2">
               <ui-action>
@@ -128,4 +121,4 @@ export default define({
       --ui-button-color-hover: var(--ui-color-danger-700);
     }
   `,
-});
+};

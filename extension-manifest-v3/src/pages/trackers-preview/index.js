@@ -9,29 +9,52 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui/trackers-preview';
-import { mount, html } from 'hybrids';
-import {
-  getStats,
-  close,
-  disable,
-  updateIframeHeight,
-} from '@ghostery/trackers-preview/page_scripts';
+import { define, mount, html } from 'hybrids';
+import '@ghostery/ui/panel';
+
+import { getWTMStats } from '/utils/wtm-stats';
+
+function close() {
+  window.parent.postMessage('WTMReportClosePopups', '*');
+}
+
+function disable() {
+  window.parent.postMessage('WTMReportDisable', '*');
+}
 
 const domain = new URLSearchParams(window.location.search).get('domain');
-const stats = getStats(domain);
 
-updateIframeHeight();
+// The page attached in the iframe is a child of the parent window
+if (window.parent !== window) {
+  const resizeObserver = new ResizeObserver(() => {
+    const height = document.body.clientHeight;
+    window.parent.postMessage(`WTMReportResize:${height}`, '*');
+  });
+  resizeObserver.observe(document.body, {
+    box: 'border-box',
+  });
+}
+
+define.from(
+  import.meta.glob(['./components/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  {
+    root: ['components'],
+    prefix: 'gh-trackers-preview',
+  },
+);
 
 mount(document.body, {
   render: () => html`
     <template layout="block">
-      <ui-trackers-preview
-        stats="${stats}"
+      <gh-trackers-preview-layout
+        stats="${getWTMStats(domain)}"
         domain="${domain}"
         onclose="${close}"
         ondisable="${disable}"
-      ></ui-trackers-preview>
+      ></gh-trackers-preview-layout>
     </template>
   `,
 });

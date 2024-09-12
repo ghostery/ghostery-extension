@@ -12,6 +12,7 @@
 import { html, store, router, msg } from 'hybrids';
 
 import { openTabWithUrl } from '/utils/tabs.js';
+import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
@@ -208,6 +209,7 @@ export default {
                   ontypechange="${setStatsType}"
                   layout="margin:1:1.5"
                   layout@390px="margin:1.5:1.5:2"
+                  wtm-link="${hasWTMStats(stats.hostname)}"
                 >
                 </ui-panel-stats>
                 ${!paused &&

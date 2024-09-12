@@ -10,7 +10,6 @@
  */
 
 import { html, store, router, dispatch } from 'hybrids';
-import { getStats } from '@ghostery/trackers-preview/page_scripts';
 import { GHOSTERY_DOMAIN } from '../../../utils/urls.js';
 
 const WTM_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme/`;
@@ -54,8 +53,7 @@ export default {
     ),
   paused: false,
   domain: '',
-  wtmLink: ({ domain }) =>
-    domain && getStats(domain).then(({ stats }) => !!stats.length),
+  wtmLink: false,
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -84,26 +82,20 @@ export default {
           <slot name="header"></slot>
         </div>
         ${wtmLink &&
-        html.resolve(
-          wtmLink.then(
-            (link) =>
-              link &&
-              html`
-                <ui-tooltip position="bottom">
-                  <span slot="content">WhoTracks.Me Statistical Report</span>
-                  <ui-panel-action layout="size:4.5">
-                    <a
-                      href="${WTM_URL}websites/${domain}"
-                      onclick="${openTabWithUrl}"
-                      target="_blank"
-                    >
-                      <ui-icon name="whotracksme" color="gray-800"></ui-icon>
-                    </a>
-                  </ui-panel-action>
-                </ui-tooltip>
-              `,
-          ),
-        )}
+        html`
+          <ui-tooltip position="bottom">
+            <span slot="content">WhoTracks.Me Statistical Report</span>
+            <ui-panel-action layout="size:4.5">
+              <a
+                href="${WTM_URL}websites/${domain}"
+                onclick="${openTabWithUrl}"
+                target="_blank"
+              >
+                <ui-icon name="whotracksme" color="gray-800"></ui-icon>
+              </a>
+            </ui-panel-action>
+          </ui-tooltip>
+        `}
         ${trackers &&
         html`
           <ui-panel-action-group>

@@ -15,7 +15,7 @@ import { resolve } from 'path';
 import shelljs from 'shelljs';
 
 import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
-import REGIONS from '../../src/utils/regions.js';
+import REGIONS from '../src/utils/regions.js';
 
 function createChecksum(content) {
   return createHash('sha256').update(content).digest('hex');

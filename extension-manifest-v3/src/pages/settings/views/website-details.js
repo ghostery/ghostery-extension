@@ -11,13 +11,13 @@
 
 import { html, router, store } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
-import { getStats } from '@ghostery/trackers-preview/page_scripts';
 
 import Options from '/store/options.js';
 import TrackerException from '/store/tracker-exception.js';
 import Tracker from '/store/tracker.js';
 
 import { WTM_PAGE_URL } from '/utils/api.js';
+import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
 
@@ -197,26 +197,18 @@ export default {
             )}
           </gh-settings-table>
         </div>
-        ${html.resolve(
-          getStats(domain).then(
-            ({ stats }) =>
-              !!stats.length &&
-              html`
-                <div layout="margin:3:0">
-                  <ui-action>
-                    <a
-                      href="${`${WTM_PAGE_URL}websites/${domain}`}"
-                      target="_blank"
-                    >
-                      <gh-settings-wtm-link>
-                        WhoTracks.Me Statistical Report
-                      </gh-settings-wtm-link>
-                    </a>
-                  </ui-action>
-                </div>
-              `,
-          ),
-        )}
+        ${hasWTMStats(domain) &&
+        html`
+          <div layout="margin:3:0">
+            <ui-action>
+              <a href="${`${WTM_PAGE_URL}websites/${domain}`}" target="_blank">
+                <gh-settings-wtm-link>
+                  WhoTracks.Me Statistical Report
+                </gh-settings-wtm-link>
+              </a>
+            </ui-action>
+          </div>
+        `}
       </gh-settings-page-layout>
     </template>
   `,

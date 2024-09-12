@@ -10,13 +10,32 @@
  */
 
 import { store } from 'hybrids';
-import {
-  tryWTMReportOnMessageHandler,
-  isDisableWTMReportMessage,
-} from '@ghostery/trackers-preview/background';
-import css from '@ghostery/trackers-preview/content_scripts/styles.css?raw';
+import { parse } from 'tldts-experimental';
 
 import Options, { isPaused } from '/store/options.js';
+import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
+import { getWTMStats } from '/utils/wtm-stats';
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === 'getWTMReport') {
+    sendResponse({
+      wtmStats: msg.links.map((url) => {
+        const { domain } = parse(url);
+
+        return {
+          stats: getWTMStats(domain),
+          domain,
+        };
+      }),
+    });
+  }
+
+  if (msg.action === 'disableWTMReport') {
+    store.set(Options, { wtmSerpReport: false });
+  }
+
+  return false;
+});
 
 const SERP_URL_REGEXP =
   /^https:[/][/][^/]*[.]google[.][a-z]+([.][a-z]+)?[/]search/;
@@ -29,7 +48,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
           target: {
             tabId: details.tabId,
           },
-          css,
+          css: trackersPreviewCSS,
         });
       }
 
@@ -59,24 +78,4 @@ chrome.webNavigation.onCommitted.addListener((details) => {
       }
     });
   }
-});
-
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  const options = store.get(Options);
-
-  if (!store.ready(options)) {
-    return false;
-  }
-
-  if (options.wtmSerpReport) {
-    if (tryWTMReportOnMessageHandler(msg, sender, sendResponse)) {
-      return false;
-    }
-
-    if (isDisableWTMReportMessage(msg)) {
-      store.set(options, { wtmSerpReport: false });
-    }
-  }
-
-  return false;
 });
