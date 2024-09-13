@@ -14,5 +14,8 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
+  },
+  "globals": {
+    "__PLATFORM__": "readonly"
   }
 }

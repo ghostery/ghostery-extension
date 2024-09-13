@@ -56,9 +56,11 @@ export default define({
           </div>
           <ui-text type="body-s" underline>
             ${msg.html`
-              Information about web trackers will be shared in accordance with our <a href="${router.url(
-                Privacy,
-              )}">Privacy Policy</a>, advancing privacy protection for the Ghostery community.
+              Information about web trackers will be shared in accordance with our <a href="${
+                __PLATFORM__ === 'firefox'
+                  ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
+                  : router.url(Privacy)
+              }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community.
             `}
           </ui-text>
           <div layout="column gap:2">
