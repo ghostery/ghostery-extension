@@ -3,21 +3,20 @@ layout: post
 title:  "Release tests."
 ---
 
-[TOC]
-## Test 01 - Installation
-## Test 02 - Disabled extension on the Onboarding
-## Test 03 - Enabled extension on the Onboarding
-## Test 04 - Check if Ad-Blocking is working
-## Test 05 - Check if Anti-tracking is working
-## Test 06 - Check if Never-Consent is working
-## Test 07 - Check if Regional Filters are working
-## Test 08 - Check if Custom Filters are working
-## Test 09 - Check Protection Status / Exceptions
-## Test 10 - Check Website Pause
-## Test 11 - Check Global Pause
-## Test 12 - Check Trackers Preview on SERP
-## Test 13 - Check Ghostery Account synchronization
-## Test 14 - Check other language than ENG ??
+Test 01 - Installation
+Test 02 - Disabled extension on the Onboarding
+Test 03 - Enabled extension on the Onboarding
+Test 04 - Check if Ad-Blocking is working
+Test 05 - Check if Anti-tracking is working
+Test 06 - Check if Never-Consent is working
+Test 07 - Check if Regional Filters are working
+Test 08 - Check if Custom Filters are working
+Test 09 - Check Protection Status / Exceptions
+Test 10 - Check Website Pause
+Test 11 - Check Global Pause
+Test 12 - Check Trackers Preview on SERP
+Test 13 - Check Ghostery Account synchronization
+Test 14 - Check other language than ENG ??
 
 ---
 
