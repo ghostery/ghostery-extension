@@ -162,7 +162,7 @@
     "message": "클립보드에 복사됨"
   },
   "cosmetic_filters__@_0_": {
-    "message": "화장 필터: $${0}"
+    "message": "시각적 필터: $${0}"
   },
   "country": {
     "message": "국가"
@@ -178,7 +178,7 @@
     "message": "사용자 필터"
   },
   "custom_filters_has_been_updated": {
-    "message": "사용자 정의 필터가 업데이트되었습니다"
+    "message": "사용자 필터가 업데이트되었습니다"
   },
   "customer_interaction": {
     "message": "고객 상담",
@@ -200,7 +200,7 @@
     "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 갯수를 표시합니다."
   },
   "dnr_rules__@_0_": {
-    "message": "DNR 규칙: $${0}"
+    "message": "DNR 필터: $${0}"
   },
   "don_t_ask_again": {
     "message": "다시 묻지 않기"
@@ -337,6 +337,9 @@
   },
   "keep_disabled": {
     "message": "사용하지 않는 상태로 놔두기"
+  },
+  "last_update__@_0_": {
+    "message": "최종 업데이트: $${0}"
   },
   "learn_how": {
     "message": "방법 알아보기"
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주셔서 진심으로 감사드립니다!"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "이 웹 사이트는 항상 허용됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다."
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "이 웹 사이트는 항상 일시 중지됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "이 웹 사이트를 1 일 동안 허용합니다."
+  "this_site_will_be_paused_for_1_day": {
+    "message": "이 사이트는 하루 동안 중단됩니다"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "이 웹 사이트를 1 시간 동안 허용합니다."
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "이 사이트는 1시간 동안 일시 중지됩니다"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "웹 사이트에서 특정 시간동안 개인정보 보호를 중지합니다."
@@ -614,6 +617,9 @@
   "unidentified": {
     "message": "확인되지 않음",
     "description": "Tracker category name"
+  },
+  "updating___": {
+    "message": "업데이트 중..."
   },
   "urls_blocked": {
     "message": "차단된 URL"

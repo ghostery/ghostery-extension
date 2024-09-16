@@ -21,18 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: packages/trackers-preview
-        run: npm test
-        working-directory: packages/trackers-preview
-
-      - name: packages/ui
+      - name: UI
         run: npm test
         working-directory: packages/ui
 
-      - name: MV3 - Test
+      - name: Source
         working-directory: extension-manifest-v3
         run: npm test
 
-      - name: MV3 - Build
+      - name: Build
         working-directory: extension-manifest-v3
         run: npm run build

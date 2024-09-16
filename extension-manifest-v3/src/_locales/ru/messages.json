@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Не включать"
   },
+  "last_update__@_0_": {
+    "message": "Последнее обновление: $${0}"
+  },
   "learn_how": {
     "message": "Узнай, как"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "Этот сайт всегда будет доверенным. Вы можете изменить это в любое время в настройках Ghostery, чтобы остановить трекеры и рекламу, отслеживающую вас в Интернете"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "Этот сайт всегда будет приостановлен. Вы можете изменить это в любое время в настройках Ghostery, чтобы остановить трекеры и рекламу, отслеживающую вас в Интернете"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "Этот сайт будет доверенным в течение 1 дня"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "Этот сайт будет приостановлен на 1 день"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "Этот сайт будет доверенным в течение 1 часа"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "Этот сайт будет приостановлен на 1 час"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Чтобы настроить защиту конфиденциальности, доверьтесь сайту:"
@@ -614,6 +617,9 @@
   "unidentified": {
     "message": "Неизвестно",
     "description": "Tracker category name"
+  },
+  "updating___": {
+    "message": "обновление..."
   },
   "urls_blocked": {
     "message": "Заблокированные URL-адреса"

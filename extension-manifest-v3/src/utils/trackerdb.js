@@ -34,7 +34,7 @@ const categoryOrder = [
   'other',
 ];
 
-const setup = asyncSetup([engines.init(engines.TRACKERDB_ENGINE)]);
+export const setup = asyncSetup([engines.init(engines.TRACKERDB_ENGINE)]);
 
 export function getUnidentifiedTracker(hostname) {
   return {

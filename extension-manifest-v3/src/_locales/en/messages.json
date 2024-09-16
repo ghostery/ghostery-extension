@@ -338,6 +338,9 @@
   "keep_disabled": {
     "message": "Keep disabled"
   },
+  "last_update__@_0_": {
+    "message": "Last update: $${0}"
+  },
   "learn_how": {
     "message": "Learn how"
   },
@@ -553,14 +556,14 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Thank you for your support in Ghostery's fight for a web where privacy is a basic human right!"
   },
-  "this_site_will_always_be_trusted__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
-    "message": "This site will always be trusted. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
+  "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
+    "message": "This site will always be paused. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
   },
-  "this_site_will_be_trusted_for_1_day": {
-    "message": "This site will be trusted for 1 day"
+  "this_site_will_be_paused_for_1_day": {
+    "message": "This site will be paused for 1 day"
   },
-  "this_site_will_be_trusted_for_1_hour": {
-    "message": "This site will be trusted for 1 hour"
+  "this_site_will_be_paused_for_1_hour": {
+    "message": "This site will be paused for 1 hour"
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "To adjust privacy protection trust a site:"
@@ -614,6 +617,9 @@
   "unidentified": {
     "message": "Unidentified",
     "description": "Tracker category name"
+  },
+  "updating___": {
+    "message": "updating..."
   },
   "urls_blocked": {
     "message": "URLs blocked"
