@@ -14,8 +14,8 @@ import { store, msg } from 'hybrids';
 import Options from '/store/options.js';
 import Session from '/store/session.js';
 
-import { shouldShowOperaSerpAlert } from '/notifications/opera-serp.js';
-import { isOpera } from '/utils/browser-info';
+import { isSerpSupported } from '/utils/opera.js';
+import { isOpera } from '/utils/browser-info.js';
 
 const NOTIFICATIONS = {
   terms: {
@@ -57,7 +57,7 @@ export default {
     if (
       __PLATFORM__ === 'chromium' &&
       isOpera() &&
-      (await shouldShowOperaSerpAlert())
+      !(await isSerpSupported())
     ) {
       return NOTIFICATIONS.opera;
     }

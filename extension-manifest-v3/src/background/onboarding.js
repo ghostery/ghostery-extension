@@ -9,9 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { observe } from '/store/options.js';
-import { showOperaSerpNotification } from '/notifications/opera-serp.js';
+import { store } from 'hybrids';
+
+import Options, { observe } from '/store/options.js';
+
+import { isSerpSupported } from '/utils/opera.js';
 import { isOpera } from '/utils/browser-info.js';
+
+import { openNotification } from './notifications.js';
 
 let done = false;
 
@@ -26,9 +31,28 @@ observe('onboarding', (onboarding) => {
 });
 
 if (__PLATFORM__ === 'chromium' && isOpera()) {
-  chrome.webNavigation.onCompleted.addListener((details) => {
+  const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+  const NOTIFICATION_SHOW_LIMIT = 4;
+
+  chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (done && details.frameId === 0) {
-      showOperaSerpNotification(details.tabId);
+      if (await isSerpSupported()) return;
+
+      const { onboarding } = await store.resolve(Options);
+
+      if (
+        // Onboarding is not "done"
+        !onboarding.done ||
+        // The notification was already shown maximum times
+        onboarding.serpShown >= NOTIFICATION_SHOW_LIMIT ||
+        // The notification was already shown recently
+        (onboarding.serpShownAt &&
+          Date.now() - onboarding.serpShownAt < NOTIFICATION_DELAY)
+      ) {
+        return false;
+      }
+
+      openNotification(details.tabId, 'opera-serp');
     }
   });
 }

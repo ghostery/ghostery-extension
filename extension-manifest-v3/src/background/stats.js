@@ -17,7 +17,7 @@ import { order } from '@ghostery/ui/categories';
 import DailyStats from '/store/daily-stats.js';
 import Options, { isPaused, observe } from '/store/options.js';
 
-import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
+import { isSerpSupported } from '/utils/opera.js';
 
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
@@ -50,12 +50,27 @@ observe('terms', async (terms) => {
   }
 });
 
+async function hasAccessToPage(tabId) {
+  try {
+    await chrome.scripting.insertCSS({ target: { tabId }, css: '' });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
 
   if (__PLATFORM__ === 'chromium' && isOpera() && options.terms) {
-    shouldSetDangerBadgeForTabId(tabId).then((danger) => {
-      setBadgeColor(danger ? '#f13436' /* danger-500 */ : undefined);
+    isSerpSupported().then(async (supported) => {
+      if (!supported) {
+        setBadgeColor(
+          (await hasAccessToPage(tabId))
+            ? undefined
+            : '#f13436' /* danger-500 */,
+        );
+      }
     });
   }
 

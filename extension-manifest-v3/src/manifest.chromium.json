@@ -143,7 +143,7 @@
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "js": [
-        "content_scripts/iframe.js"
+        "content_scripts/notifications.js"
       ]
     },
     {
@@ -167,8 +167,8 @@
         "content_scripts/prevent-serp-tracking.js",
         "pages/trackers-preview/index.html",
         "pages/onboarding/index.html",
-        "pages/onboarding/opera-serp.html",
-        "pages/youtube/index.html"
+        "pages/notifications/opera-serp.html",
+        "pages/notifications/youtube.html"
       ],
       "all_frames": true,
       "matches": [

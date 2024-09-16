@@ -9,9 +9,36 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, dispatch } from 'hybrids';
+import { mount, html } from 'hybrids';
+import '@ghostery/ui/onboarding';
 
-export default {
+import * as notifications from '/utils/notifications.js';
+
+const close = notifications.setupNotificationPage(460);
+
+function dontAsk() {
+  chrome.storage.local.set({ youtubeDontAsk: true });
+  close();
+}
+
+function openBlog(slug) {
+  chrome.runtime.sendMessage({
+    action: 'openTabWithUrl',
+    url: `https://www.ghostery.com/blog/${slug}?utm_source=gbe&utm_campaign=youtube`,
+  });
+}
+
+function openPrivateWindow() {
+  chrome.runtime.sendMessage({
+    action: 'openPrivateWindowWithUrl',
+    url: new URLSearchParams(window.location.search).get('url'),
+  });
+
+  // Close the notification, but only from the current tab
+  close(false);
+}
+
+mount(document.body, {
   render: () => html`
     <template layout="block overflow">
       <ui-onboarding-card layout="padding:2">
@@ -32,7 +59,7 @@ export default {
               <ui-action>
                 <button
                   id="close"
-                  onclick="${(host) => dispatch(host, 'close')}"
+                  onclick="${() => close()}"
                   layout="margin:-1 self:start shrink:0 padding"
                 >
                   <div layout="row center size:3">
@@ -58,7 +85,10 @@ export default {
               </div>
               <div layout="row">
                 <ui-button type="outline" size="small">
-                  <button onclick="${(host) => dispatch(host, 'openblog1')}">
+                  <button
+                    onclick="${() =>
+                      openBlog('enable-extensions-in-incognito')}"
+                  >
                     Learn how
                   </button>
                 </ui-button>
@@ -73,11 +103,7 @@ export default {
               </div>
               <div layout="row">
                 <ui-button type="success" size="small">
-                  <button
-                    onclick="${(host) => dispatch(host, 'openprivatewindow')}"
-                  >
-                    Open video
-                  </button>
+                  <button onclick="${openPrivateWindow}">Open video</button>
                 </ui-button>
               </div>
             </div>
@@ -88,12 +114,15 @@ export default {
               </ui-text>
               <div layout="row:wrap gap">
                 <ui-button type="outline" size="small">
-                  <button onclick="${(host) => dispatch(host, 'openblog2')}">
+                  <button
+                    onclick="${() =>
+                      openBlog('whats-happening-with-youtube-ads')}"
+                  >
                     Visit our blog
                   </button>
                 </ui-button>
                 <ui-button type="transparent" size="small">
-                  <button onclick="${(host) => dispatch(host, 'dontask')}">
+                  <button onclick="${dontAsk}">
                     <ui-text>Don't ask again</ui-text>
                   </button>
                 </ui-button>
@@ -104,4 +133,4 @@ export default {
       </ui-onboarding-card>
     </template>
   `,
-};
+});
