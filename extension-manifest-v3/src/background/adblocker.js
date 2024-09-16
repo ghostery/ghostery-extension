@@ -349,7 +349,7 @@ ${scripts.join('\n\n')}}
   chrome.scripting.executeScript(
     {
       injectImmediately: true,
-      world: chrome.scripting.ExecutionWorld.MAIN,
+      world: chrome.scripting.ExecutionWorld?.MAIN || 'MAIN',
       target: {
         tabId,
         allFrames: true,
