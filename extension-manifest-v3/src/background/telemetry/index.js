@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import Options from '/store/options.js';
+import Options, { observe } from '/store/options.js';
 
 import Telemetry from './metrics.js';
 
@@ -81,9 +81,10 @@ const getConf = async (storage) => {
 };
 
 let telemetry;
+let telemetryEnabled = false;
 
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action === 'telemetry') {
+  if (telemetryEnabled && msg.action === 'telemetry') {
     telemetry.ping(msg.event);
   }
 });
@@ -113,9 +114,16 @@ chrome.runtime.onMessage.addListener((msg) => {
     log('Telemetry recordUTMs() error', error);
   }
 
-  if (JUST_INSTALLED) {
-    telemetry.ping('install');
-  }
-  telemetry.ping('active');
+  observe('terms', async (terms) => {
+    telemetryEnabled = terms;
+    if (!terms) {
+      return;
+    }
+    telemetry.ping('active');
+    if (JUST_INSTALLED) {
+      telemetry.ping('install');
+    }
+  });
+
   telemetry.setUninstallUrl();
 })();

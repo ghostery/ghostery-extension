@@ -22,11 +22,6 @@ async function updateOptions(host, event) {
     terms: success,
     onboarding: { done: true },
   });
-
-  chrome.runtime.sendMessage({
-    action: 'telemetry',
-    event: 'install_complete',
-  });
 }
 
 mount(document.body, {
