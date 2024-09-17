@@ -9,6 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export const GHOSTERY_DOMAIN = chrome.runtime.getManifest().debug
-  ? 'ghosterystage.com'
-  : 'ghostery.com';
+import { debugMode } from './debug.js';
+
+export const GHOSTERY_DOMAIN = debugMode ? 'ghosterystage.com' : 'ghostery.com';

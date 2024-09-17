@@ -22,6 +22,7 @@ import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
+import { debugMode } from '/utils/debug.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
@@ -309,12 +310,11 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   return false;
 });
 
-const DEBUG_SCRIPLETS = false;
 async function executeScriptlets(tabId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   let debugMarker;
-  if (DEBUG_SCRIPLETS) {
+  if (debugMode) {
     debugMarker = (text) =>
       `console.log('[ADBLOCKER-DEBUG]:', ${JSON.stringify(text)});`;
   } else {

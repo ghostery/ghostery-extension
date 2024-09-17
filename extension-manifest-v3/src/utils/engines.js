@@ -18,7 +18,7 @@ import {
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
-import debug from './debug.js';
+import debug, { stagingMode } from './debug.js';
 import { captureException } from './errors.js';
 
 export const MAIN_ENGINE = 'main';
@@ -221,7 +221,7 @@ function notifyListeners(name) {
   });
 }
 
-const CDN_HOSTNAME = chrome.runtime.getManifest().debug
+const CDN_HOSTNAME = stagingMode
   ? 'staging-cdn.ghostery.com'
   : 'cdn.ghostery.com';
 

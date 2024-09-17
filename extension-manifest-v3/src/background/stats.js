@@ -93,7 +93,7 @@ async function refreshIcon(tabId) {
   // Note: Even in MV3, this is not (yet) returning a promise.
   chromeAction.setIcon({ tabId, ...data }, () => {
     if (chrome.runtime.lastError) {
-      console.debug(
+      console.error(
         'setIcon failed for tabId',
         tabId,
         '(most likely the tab was closed)',
@@ -109,7 +109,7 @@ async function refreshIcon(tabId) {
         text: options.trackerCount ? String(stats.trackers.length) : '',
       });
     } catch (e) {
-      console.debug('Error while trying update the badge', e);
+      console.error('Error while trying update the badge', e);
     }
   }
 }

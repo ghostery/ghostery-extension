@@ -57,13 +57,14 @@ if (argv.target.startsWith('safari')) {
   argv.target = 'safari';
 }
 
+// Add flags to manifest
+if (argv.debug) manifest.debug = true;
+if (argv.staging) manifest.staging = true;
+
 // Download adblocker engines
-if (argv.staging) {
-  execSync('npm run download-engines -- --staging', { stdio: 'inherit' });
-  manifest.debug = true;
-} else {
-  execSync('npm run download-engines', { stdio: 'inherit' });
-}
+execSync('npm run download-engines' + (argv.staging ? '-- --staging' : ''), {
+  stdio: 'inherit',
+});
 
 execSync('npm run download-wtm-bloomfilter', { stdio: 'inherit' });
 execSync('npm run download-wtm-stats', { stdio: 'inherit' });
