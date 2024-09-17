@@ -349,7 +349,9 @@ ${scripts.join('\n\n')}}
   chrome.scripting.executeScript(
     {
       injectImmediately: true,
-      world: __PLATFORM__ === 'firefox' ? undefined : 'MAIN',
+      world:
+        chrome.scripting.ExecutionWorld?.MAIN ??
+        (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
       target: {
         tabId,
         allFrames: true,

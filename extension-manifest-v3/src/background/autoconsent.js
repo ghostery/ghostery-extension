@@ -52,7 +52,9 @@ async function evalCode(snippetId, id, tabId, frameId) {
       tabId,
       frameIds: [frameId],
     },
-    world: __PLATFORM__ === 'firefox' ? undefined : 'MAIN',
+    world:
+      chrome.scripting.ExecutionWorld?.MAIN ??
+      (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
     func: snippets[snippetId],
   });
 
