@@ -47,7 +47,7 @@ export default {
     }
 
     #dialog {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border-radius: 16px;
       box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.2);
     }
@@ -59,7 +59,7 @@ export default {
       position: absolute;
       inset: 0;
       border-radius: 16px;
-      background: linear-gradient(0deg, var(--ui-color-white) 0%, rgba(47, 49, 54, 0) 100%);
+      background: linear-gradient(0deg, var(--ui-color-layout) 0%, rgba(47, 49, 54, 0) 100%);
     }
   `,
 };

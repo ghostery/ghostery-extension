@@ -34,7 +34,7 @@ export default {
     ::slotted(input),
     ::slotted(textarea),
     ::slotted(select) {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border: 1px solid var(--ui-color-gray-200);
       border-radius: 8px;
       padding: 11px;

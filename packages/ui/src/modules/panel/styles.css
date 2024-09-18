@@ -15,13 +15,14 @@
 }
 
 html {
+  --ui-color-layout: white;
+
   --ui-color-gray-800: #202c44;
   --ui-color-gray-600: #49556e;
   --ui-color-gray-400: #9ba3b4;
   --ui-color-gray-300: #c3cad9;
   --ui-color-gray-200: #dfe3eb;
   --ui-color-gray-100: #f0f2f7;
-  --ui-color-white: white;
 
   --ui-color-primary-700: #0077cc;
   --ui-color-primary-500: #00aef0;
@@ -43,7 +44,7 @@ html {
   --ui-color-danger-500: #f13436;
   --ui-color-danger-100: #ffecec;
 
-  --ui-color-backdrop: var(--ui-color-gray-800);
+  --ui-color-backdrop: var(--ui-color-gray-600);
   --ui-color-warning-text: var(--ui-color-gray-800);
   --ui-color-scroll-shadow: rgba(0, 0, 0, 0.1);
 
@@ -71,10 +72,6 @@ html {
 
   --ui-font-button-m: var(--ui-font-label-m);
   --ui-font-button-s: 600 14px / 24px var(--ui-font-family);
-
-  /* UI components overwrites */
-  --ui-text-color-heading: var(--ui-color-gray-800);
-  --ui-text-color-anchor: var(--ui-color-primary-700);
 }
 
 html,
@@ -91,7 +88,7 @@ body {
   font-size: 13px;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  background: var(--ui-color-white);
+  background: var(--ui-color-layout);
   max-height: 100dvh;
 }
 

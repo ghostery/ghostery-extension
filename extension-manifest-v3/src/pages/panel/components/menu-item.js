@@ -25,7 +25,6 @@ export default {
     :host {
       text-decoration: none;
       color: var(--ui-color-gray-800);
-      --ui-text-color-heading: currentColor;
     }
 
     ui-icon {
@@ -38,8 +37,8 @@ export default {
       overflow: hidden;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-      :host(:hover) {
+    @media (hover: hover) {
+      :host(:hover) ui-text {
         color: var(--ui-color-primary-700);
       }
 

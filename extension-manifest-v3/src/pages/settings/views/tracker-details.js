@@ -18,8 +18,6 @@ import { toggleExceptionDomain } from '/store/tracker-exception.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 import { WTM_PAGE_URL } from '/utils/api.js';
 
-import assets from '../assets/index.js';
-
 import { toggleException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';
 import WebsiteDetails from './website-details.js';
@@ -91,16 +89,6 @@ export default {
                 </div>
               </div>
               <div layout="row gap:5 items:start">
-                <gh-settings-help-image
-                  static
-                  layout="hidden"
-                  layout@768px="row"
-                >
-                  <img
-                    src="${assets.selective_blocking}"
-                    alt="Selective blocking"
-                  />
-                </gh-settings-help-image>
                 <div layout="column items:start gap:2 grow">
                   <div layout="row gap:2 items:start self:stretch">
                     <div layout="column gap:0.5 grow">
@@ -249,7 +237,7 @@ export default {
                   <ui-text type="label-xs" uppercase>
                     Organization's website
                   </ui-text>
-                  <ui-text type="label-s" color="primary-700">
+                  <ui-text type="label-s" color="primary-700" underline>
                     <a
                       href="${tracker.organization.websiteUrl}"
                       onclick="${openTabWithUrl}"
@@ -264,7 +252,7 @@ export default {
                     <ui-text type="label-xs" uppercase>
                       Privacy policy
                     </ui-text>
-                    <ui-text type="label-s" color="primary-700">
+                    <ui-text type="label-s" color="primary-700" underline>
                       <a
                         href="${tracker.organization.privacyPolicyUrl}"
                         onclick="${openTabWithUrl}"

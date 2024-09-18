@@ -159,26 +159,8 @@ export default {
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
                 paused="${paused || globalPause}"
                 global="${globalPause}"
+                revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
               >
-                <ui-icon
-                  name="${globalPause ? 'pause' : 'circle'}"
-                  color="gh-panel-action"
-                ></ui-icon>
-                <div layout="column">
-                  <ui-text type="label-m" color="gh-panel-action">
-                    ${paused || globalPause
-                      ? msg`Ghostery is paused`
-                      : msg`Pause on this site`}
-                  </ui-text>
-                  ${((paused && !!paused.revokeAt) || globalPause) &&
-                  html`<ui-text type="body-xs" color="gh-panel-action">
-                    <ui-panel-revoke-at
-                      revokeAt="${globalPause
-                        ? globalPause.revokeAt
-                        : paused.revokeAt}"
-                    ></ui-panel-revoke-at>
-                  </ui-text>`}
-                </div>
               </gh-panel-pause>
             `
           : html`

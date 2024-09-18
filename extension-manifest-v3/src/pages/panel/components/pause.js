@@ -66,19 +66,30 @@ function simulateClickOnEnter(host, event) {
 export default {
   paused: { value: false, reflect: true },
   global: { value: false, reflect: true },
+  revokeAt: 0,
   pauseType: 1,
   pauseList: false,
-  render: ({ paused, pauseType, pauseList }) => html`
-    <template layout="grid">
+  render: ({ paused, pauseType, pauseList, revokeAt }) => html`
+    <template layout="grid relative">
       <button
         id="main"
-        class="${{ active: pauseList, paused }}"
+        class="${{ active: pauseList }}"
         layout="row center margin:1.5 height:6"
         layout@390px="height:7"
         onclick="${!pauseList && dispatchAction}"
       >
         <div id="label" layout="grow row center gap shrink overflow">
-          <slot></slot>
+          <ui-icon name="pause"></ui-icon>
+          <div layout="column">
+            <ui-text type="label-m" color="inherit">
+              ${paused ? msg`Ghostery is paused` : msg`Pause on this site`}
+            </ui-text>
+            ${!!revokeAt &&
+            html`<ui-text type="body-xs" color="inherit">
+              <ui-panel-revoke-at revokeAt="${revokeAt}"></ui-panel-revoke-at>
+            </ui-text>`}
+            <slot></slot>
+          </div>
         </div>
         <div
           id="type"
@@ -90,20 +101,20 @@ export default {
         >
           ${paused
             ? html`
-                <ui-icon name="refresh" color="gh-panel-action"></ui-icon>
+                <ui-icon name="refresh"></ui-icon>
                 <ui-text
                   type="label-m"
-                  color="gh-panel-action"
                   layout="margin:left:0.5"
+                  color="inherit"
                 >
                   Undo
                 </ui-text>
               `
             : html`
-                <ui-text type="label-m" color="gh-panel-action" layout="grow">
+                <ui-text type="label-m" layout="grow" color="inherit">
                   ${PAUSE_TYPES.find(({ value }) => value === pauseType).label}
                 </ui-text>
-                <ui-icon name="arrow-down" color="gh-panel-action"></ui-icon>
+                <ui-icon name="arrow-down"></ui-icon>
               `}
         </div>
       </button>
@@ -120,7 +131,7 @@ export default {
                 onclick="${dispatchTypeAction(value)}"
                 layout.active="grid:1|max:auto"
               >
-                <ui-text type="label-m" color="gray-800">${label}</ui-text>
+                <ui-text type="label-m">${label}</ui-text>
                 ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
                 <ui-text type="body-s" color="gray-600" layout="area:2">
                   ${description}
@@ -133,48 +144,29 @@ export default {
     </template>
   `.css`
     :host {
-      position: relative;
       background: var(--ui-color-primary-200);
-      --ui-color-gh-panel-action: var(--ui-color-primary-700);
-      --gh-pause-active-color: var(--ui-color-warning-500);
-      --gh-pause-active-background: var(--ui-color-warning-100);
-    }
-
-    :host([global]) {
-      --gh-pause-active-color: var(--ui-color-danger-500);
-      --gh-pause-active-background: var(--ui-color-danger-100);
-      --ui-color-gh-panel-action: var(--ui-color-white);
-    }
-
-    :host([paused]) {
-      background: var(--gh-pause-active-background);
     }
 
     button {
       cursor: pointer;
       appearance: none;
       border: none;
-      background: var(--ui-color-white);
       text-align: left;
+      color: var(--ui-color-gray-800);
+      background: var(--ui-color-layout);
     }
 
     #main {
-      background: var(--ui-color-white);
       box-shadow: 0px 2px 8px rgba(0, 105, 210, 0.2);
       border-radius: 8px;
       box-sizing: border-box;
       padding: 4px;
       white-space: nowrap;
+      color: var(--ui-color-primary-700);
+      transition: background 0.2s, opacity 0.2s;
     }
 
-    #main, #label, #type { transition: all 0.2s; }
-
-    #main.active {
-      background: var(--ui-color-primary-500);
-      --ui-color-gh-panel-action: var(--ui-color-white);
-    }
-
-    #main:active:not(:has(#type:hover)), #main:active.paused {
+    #main:active:not(:has(#type:hover)), :host([paused]) #main:active {
       opacity: 0.6;
     }
 
@@ -185,75 +177,19 @@ export default {
       border: 1px solid var(--ui-color-primary-300);
       padding: 8px 8px 8px 12px;
       white-space: nowrap;
+      transition: width 0.2s;
     }
 
     #type ui-icon {
       transition: transform 0.1s;
     }
 
-    #main.active #type {
-      --ui-color-gh-panel-action: var(--ui-color-white);
-      background: var(--ui-color-primary-700);
-      border-color: var(--ui-color-primary-700);
-    }
-
     #main.active #type ui-icon {
       transform: rotate(180deg);
     }
 
-    #main.paused, #main.paused:hover, #main.paused:active {
-      background: var(--gh-pause-active-color);
-      --ui-color-gh-panel-action: var(--ui-color-warning-text);
-    }
-
-    #main.paused #type {
-      --ui-color-gh-panel-action: var(--ui-color-gray-800);
-    }
-
-    :host([global]) #main.paused {
-      --ui-color-gh-panel-action: var(--ui-color-white);
-    }
-
-    :host([global]) #main.paused #type {
-      --ui-color-gh-panel-action: var(--ui-color-danger-500);
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      #main:hover {
-        background: var(--ui-color-primary-500);
-        --ui-color-gh-panel-action: var(--ui-color-white);
-      }
-
-      #main:hover:not(.active, .paused) #type {
-        --ui-color-gh-panel-action: var(--ui-color-primary-700);
-        border-color: var(--ui-color-primary-100);
-      }
-
-      #main:hover:not(.paused) #type:hover {
-        --ui-color-gh-panel-action: var(--ui-color-white);
-        background: var(--ui-color-primary-700);
-        border-color: var(--ui-color-primary-700);
-      }
-
-      #main.paused:hover:has(#type:hover) #label, #main.paused:focus-visible #label {
-        width: 0;
-      }
-
-      #main.paused #type:hover, #main.paused:focus-visible #type {
-        width: 100%;
-        transition: width 0.2s;
-      }
-    }
-
-    #main.paused #type {
-      pointer-events: all;
-      overflow: hidden;
-      border: none;
-      background: var(--ui-color-white);
-    }
-
     #type-list {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       box-shadow: 0px 4px 12px rgba(0, 105, 210, 0.4);
       border-radius: 12px;
     }
@@ -272,12 +208,110 @@ export default {
       border-bottom-right-radius: 12px;
     }
 
-    #type-list button:hover {
-      background: var(--ui-color-primary-100);
+    /* Website paused */
+
+    :host([paused]) {
+      background: var(--ui-color-warning-100);
     }
 
-    #type-list button:hover ui-text {
-      color: var(--ui-color-primary-700);
+    :host([paused]) #main {
+      box-shadow: none;
+      background: var(--ui-color-warning-500);
+      color: var(--ui-color-gray-800);
+    }
+
+    :host([paused]) #type {
+      background: var(--ui-color-layout);
+      border: none;
+      pointer-events: all;
+      overflow: hidden;
+    }
+
+    /* Global pause */
+
+    :host([global]) {
+      background: var(--ui-color-danger-100);
+    }
+
+    :host([global]) #main {
+      box-shadow: 0px 2px 8px rgba(210, 138, 0, 0.2);
+      background: var(--ui-color-danger-500);
+      color: white;
+    }
+
+    :host([global]) #type {
+      color: var(--ui-color-danger-500);
+    }
+
+    @media (hover: hover) {
+      :host(:not([paused])) #main:hover {
+        background: var(--ui-color-primary-500);
+      }
+
+      :host(:not([paused])) #main:hover #label {
+        color: white;
+      }
+
+      :host(:not([paused])) #main:hover #type {
+        border: none;
+      }
+
+      :host(:not([paused])) #type:hover {
+        background: var(--ui-color-primary-700);
+        color: white;
+      }
+
+      :host([paused]) #main:hover:has(#type:hover) #label, :host([paused]) #main:focus-visible #label {
+        width: 0;
+      }
+
+      :host([paused]) #main #type:hover, :host([paused]) #main:focus-visible #type {
+        width: 100%;
+        transition: width 0.2s;
+      }
+
+      #type-list button:hover {
+        background: var(--ui-color-primary-100);
+      }
+
+      #type-list button:hover ui-text,
+      #type-list button:hover ui-icon {
+        color: var(--ui-color-primary-700);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        background: var(--ui-color-gray-100);
+      }
+
+      #main {
+        background: var(--ui-color-primary-200);
+      }
+
+      #type {
+        border: none;
+        background: var(--ui-color-primary-100);
+      }
+
+      :host([paused]) #label {
+        color: var(--ui-color-gray-100);
+      }
+
+      :host([global]) #label,
+      :host([global]) #type {
+        color: var(--ui-color-gray-800);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) and (hover: hover) {
+      :host(:not([paused])) #main:hover {
+        background: var(--ui-color-primary-300);
+      }
+
+      :host(:not([paused])) #type:hover {
+        background: var(--ui-color-primary-200);
+      }
     }
   `,
 };

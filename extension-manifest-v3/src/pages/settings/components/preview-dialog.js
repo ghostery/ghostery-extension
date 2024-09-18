@@ -54,7 +54,7 @@ export default {
     }
 
     a {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border-radius: 50%;
       box-shadow: 0px 4px 16px rgba(32, 44, 68, 0.1);
     }
@@ -70,7 +70,7 @@ export default {
     }
 
     footer {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border-radius: 8px;
     }
   `,

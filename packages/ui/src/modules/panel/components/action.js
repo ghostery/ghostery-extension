@@ -28,7 +28,7 @@ export default {
       justify-content: center;
       appearance: none;
       border: none;
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border: 1px solid var(--ui-color-gray-200);
       box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
       border-radius: 8px;
@@ -49,7 +49,6 @@ export default {
       box-shadow: none;
       background: var(--ui-color-gray-100);
       color: var(--ui-color-gray-600);
-      --ui-text-color-heading: var(--ui-color-gray-600);
     }
 
     @media (hover: hover) and (pointer: fine) {

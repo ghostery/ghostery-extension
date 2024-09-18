@@ -37,7 +37,6 @@ export default {
 
     @media (hover: hover) {
       button:hover ui-text, button:hover ui-icon {
-        --ui-text-color: var(--ui-color-primary-700);
         color: var(--ui-color-primary-700);
       }
     }

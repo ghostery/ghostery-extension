@@ -53,7 +53,6 @@ export default {
       width: auto;
       height: 28px;
       color: var(--ui-color-gray-600);
-      --ui-text-color-heading: currentColor;
     }
 
     ui-panel-action[active] {
