@@ -62,7 +62,7 @@ if (argv.debug) manifest.debug = true;
 if (argv.staging) manifest.staging = true;
 
 // Download adblocker engines
-execSync('npm run download-engines' + (argv.staging ? '-- --staging' : ''), {
+execSync('npm run download-engines' + (argv.staging ? ' -- --staging' : ''), {
   stdio: 'inherit',
 });
 
