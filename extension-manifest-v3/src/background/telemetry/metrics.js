@@ -58,15 +58,9 @@ const FREQUENCIES = {
   monthly: 2419200000,
 };
 export const FREQUENCY_TYPES = ['all', ...Object.keys(FREQUENCIES)];
-export const CRITICAL_METRICS = [
-  'install',
-  'install_complete',
-  'active',
-  'engaged',
-  'uninstall',
-];
+export const CRITICAL_METRICS = ['install', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const MAX_DELAYED_PINGS = 100;
+
 // Set of conf keys used in constructing telemetry url
 const METRICS_URL_SET = new Set([
   'enable_human_web',
@@ -97,8 +91,6 @@ class Metrics {
 
     this.utm_source = '';
     this.utm_campaign = '';
-    // Store non-critical pings until install_complete
-    this.ping_set = new Set();
     this.saveStorage = saveStorage;
     this.storage = storage || {};
   }
@@ -146,9 +138,6 @@ class Metrics {
       // Key Performance Metrics
       case 'install':
         this._recordInstall();
-        break;
-      case 'install_complete':
-        this._recordInstallComplete();
         break;
       case 'active':
         this._recordActive();
@@ -390,7 +379,7 @@ class Metrics {
         this.storage[`${type}_${frequency}`] = timeNow;
         this.saveStorage(this.storage);
 
-        this.log(`sending ${type} ping with ${frequency} frequency`);
+        this.log(`ping: ${frequency} ${type}`);
 
         if (typeof fetch === 'function') {
           const request = new Request(metrics_url, options);
@@ -567,9 +556,6 @@ class Metrics {
     if (conf.enable_metrics) {
       return true;
     }
-    if (this.ping_set && this.ping_set.size < MAX_DELAYED_PINGS) {
-      this.ping_set.add(type);
-    }
     return false;
   }
 
@@ -583,18 +569,6 @@ class Metrics {
       return;
     }
     this._sendReq('install');
-  }
-
-  /**
-   * Record Install Complete event
-   * @private
-   */
-  _recordInstallComplete() {
-    this._sendReq('install_complete');
-    this.ping_set?.forEach((type) => {
-      this.ping(type);
-    });
-    delete this.ping_set;
   }
 
   /**
