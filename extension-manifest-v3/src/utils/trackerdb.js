@@ -58,7 +58,7 @@ export function getMetadata(request) {
 
   // No match for the pattern, try to get metadata from the domain
   if (matches.length === 0) {
-    matches = engine.metadata.fromDomain(request.domain);
+    matches = engine.metadata.fromDomain(request.hostname);
   }
 
   // No match for the domain, try to get metadata for blocked or modified requests
