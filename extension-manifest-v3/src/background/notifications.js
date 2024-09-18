@@ -17,7 +17,7 @@ export function openNotification(tabId, id, params) {
       (params
         ? `?${Object.entries(params)
             .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-            .join('')}`
+            .join('&')}`
         : ''),
   );
 
