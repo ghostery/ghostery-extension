@@ -19,6 +19,7 @@ import './exceptions.js';
 import './paused.js';
 import './session.js';
 import './stats.js';
+import './notifications.js';
 import './serp.js';
 
 import './helpers.js';

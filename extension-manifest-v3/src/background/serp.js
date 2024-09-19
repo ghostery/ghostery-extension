@@ -12,10 +12,43 @@
 import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
-import Options, { isPaused } from '/store/options.js';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
-import { getWTMStats } from '/utils/wtm-stats';
 
+import Options, { isPaused } from '/store/options.js';
+
+import { isSerpSupported } from '/utils/opera.js';
+import { getWTMStats } from '/utils/wtm-stats.js';
+import { isOpera } from '/utils/browser-info.js';
+
+import { openNotification } from './notifications.js';
+
+// Opera SERP notification
+if (__PLATFORM__ === 'chromium' && isOpera()) {
+  const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+  const NOTIFICATION_SHOW_LIMIT = 4;
+
+  chrome.webNavigation.onCompleted.addListener(async (details) => {
+    if (details.frameId !== 0 || (await isSerpSupported())) return;
+
+    const { onboarding } = await store.resolve(Options);
+
+    if (
+      // Onboarding is not "done"
+      !onboarding.done ||
+      // The notification was already shown maximum times
+      onboarding.serpShown >= NOTIFICATION_SHOW_LIMIT ||
+      // The notification was already shown recently
+      (onboarding.serpShownAt &&
+        Date.now() - onboarding.serpShownAt < NOTIFICATION_DELAY)
+    ) {
+      return false;
+    }
+
+    openNotification(details.tabId, 'opera-serp');
+  });
+}
+
+// Trackers preview messages
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'getWTMReport') {
     sendResponse({
@@ -40,6 +73,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 const SERP_URL_REGEXP =
   /^https:[/][/][^/]*[.]google[.][a-z]+([.][a-z]+)?[/]search/;
 
+// SERP tracking prevention and trackers preview content scripts
 chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.url.match(SERP_URL_REGEXP)) {
     store.resolve(Options).then((options) => {

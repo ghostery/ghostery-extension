@@ -8,8 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-const debug = {};
 
-globalThis.ghostery = debug;
+export default globalThis.ghostery = {};
 
-export default debug;
+const manifest = chrome.runtime.getManifest();
+
+export const debugMode = !!manifest.debug;
+export const stagingMode = !!manifest.staging;

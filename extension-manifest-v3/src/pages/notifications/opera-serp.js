@@ -12,12 +12,13 @@
 import { mount, html, store } from 'hybrids';
 
 import '@ghostery/ui/onboarding';
-import { setupIframe, closeIframe } from '@ghostery/ui/iframe';
 
+import * as notifications from '/utils/notifications.js';
 import { openTabWithUrl } from '/utils/tabs.js';
+
 import Options from '/store/options.js';
 
-setupIframe(360);
+const close = notifications.setupNotificationPage(360);
 
 async function updateOptions() {
   const options = await store.resolve(Options);
@@ -35,7 +36,7 @@ async function enable(host, event) {
     openTabWithUrl(host, event);
     await updateOptions();
 
-    closeIframe(false, true);
+    close();
   } catch (e) {
     document.body.outerHTML = '';
   }
@@ -45,7 +46,7 @@ async function ignore() {
   try {
     await updateOptions();
 
-    closeIframe(false, true);
+    close();
   } catch (e) {
     document.body.outerHTML = '';
   }

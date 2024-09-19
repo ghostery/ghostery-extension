@@ -12,6 +12,7 @@
 import { store } from 'hybrids';
 
 import Options, { observe } from '/store/options.js';
+import { debugMode } from '/utils/debug.js';
 
 import Telemetry from './metrics.js';
 
@@ -91,10 +92,10 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 (async () => {
   const storage = await loadStorage();
-  const { version, debug } = chrome.runtime.getManifest();
+  const { version } = chrome.runtime.getManifest();
 
   telemetry = new Telemetry({
-    METRICS_BASE_URL: debug
+    METRICS_BASE_URL: debugMode
       ? 'https://staging-d.ghostery.com'
       : 'https://d.ghostery.com',
     EXTENSION_VERSION: version,

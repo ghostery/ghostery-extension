@@ -17,7 +17,7 @@ import { order } from '@ghostery/ui/categories';
 import DailyStats from '/store/daily-stats.js';
 import Options, { isPaused, observe } from '/store/options.js';
 
-import { shouldSetDangerBadgeForTabId } from '/notifications/opera-serp.js';
+import { isSerpSupported } from '/utils/opera.js';
 
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
@@ -50,12 +50,27 @@ observe('terms', async (terms) => {
   }
 });
 
+async function hasAccessToPage(tabId) {
+  try {
+    await chrome.scripting.insertCSS({ target: { tabId }, css: '' });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
 
   if (__PLATFORM__ === 'chromium' && isOpera() && options.terms) {
-    shouldSetDangerBadgeForTabId(tabId).then((danger) => {
-      setBadgeColor(danger ? '#f13436' /* danger-500 */ : undefined);
+    isSerpSupported().then(async (supported) => {
+      if (!supported) {
+        setBadgeColor(
+          (await hasAccessToPage(tabId))
+            ? undefined
+            : '#f13436' /* danger-500 */,
+        );
+      }
     });
   }
 
@@ -78,7 +93,7 @@ async function refreshIcon(tabId) {
   // Note: Even in MV3, this is not (yet) returning a promise.
   chromeAction.setIcon({ tabId, ...data }, () => {
     if (chrome.runtime.lastError) {
-      console.debug(
+      console.error(
         'setIcon failed for tabId',
         tabId,
         '(most likely the tab was closed)',
@@ -94,7 +109,7 @@ async function refreshIcon(tabId) {
         text: options.trackerCount ? String(stats.trackers.length) : '',
       });
     } catch (e) {
-      console.debug('Error while trying update the badge', e);
+      console.error('Error while trying update the badge', e);
     }
   }
 }
