@@ -326,8 +326,8 @@
   "ignore": {
     "message": "Ignorar"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa <a href=\"$${0}\">Política de Privacidade</a>, avançando na proteção da privacidade para a comunidade Ghostery."
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "As informações sobre os rastreadores da Web serão compartilhadas de acordo com nossa <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidade</a>, avançando na proteção da privacidade para a comunidade Ghostery."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Ele existe graças às microcontribuições de cada usuário do Ghostery que opta por enviar informações não pessoais para o WhoTracks.Me. A entrada permite que o Ghostery forneça informações em tempo real sobre rastreadores que, por sua vez, trazem proteção para toda a comunidade Ghostery."
