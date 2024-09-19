@@ -294,6 +294,10 @@ export default {
         background: var(--ui-color-primary-100);
       }
 
+      #type-list {
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+      }
+
       :host([paused]) #label {
         color: var(--ui-color-gray-100);
       }
