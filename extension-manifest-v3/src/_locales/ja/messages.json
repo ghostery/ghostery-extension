@@ -326,8 +326,8 @@
   "ignore": {
     "message": "無視する"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "私たちの<a href=\"$${0}\">プライバシーポリシー</a>に従って、ウェブトラッカーに関する情報が共有され、Ghosteryコミュニティのプライバシー保護が進められます。"
+  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "ウェブトラッカーに関する情報は、私たちの<a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">プライバシーポリシー</a>に従って共有され、Ghosteryコミュニティのプライバシー保護が進められます。."
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "これは、WhoTracks.Meに個人情報以外の情報を送信することを選択したGhosteryユーザー全員による、小さな貢献のおかげで存在しています。 入力すると、Ghosteryは見返りとしてトラッカーと保護に関するリアルタイムの情報をGhosteryのコミュニティ全体に提供することができます。"
