@@ -19,6 +19,7 @@ export const categories = {
   site_analytics: msg`Site Analytics | Tracker category name`,
   consent: msg`Consent Management | Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity`,
   essential: msg`Essential | Tracker category name`,
+  utilities: msg`Utilities | Tracker category name`,
   hosting: msg`Hosting | Tracker category name`,
   customer_interaction: msg`Customer Interaction | Tracker category name`,
   unidentified: msg`Unidentified | Tracker category name`,
