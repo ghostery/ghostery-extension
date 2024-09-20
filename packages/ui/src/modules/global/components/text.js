@@ -12,6 +12,8 @@ export default {
       display: block;
       font: var(--ui-font-${mobileType || type});
       color: var(--ui-text-color, inherit);
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
     :host([hidden]) {
