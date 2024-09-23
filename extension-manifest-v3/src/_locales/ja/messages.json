@@ -630,6 +630,10 @@
   "urls_observed": {
     "message": "観察済みURL"
   },
+  "utilities": {
+    "message": "ユーティリティ",
+    "description": "Tracker category name"
+  },
   "view_activity_details": {
     "message": "アクティビティの詳細を表示"
   },

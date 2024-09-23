@@ -630,6 +630,10 @@
   "urls_observed": {
     "message": "Отслеживаемые URL-адреса"
   },
+  "utilities": {
+    "message": "Утилиты",
+    "description": "Tracker category name"
+  },
   "view_activity_details": {
     "message": "Просмотреть подробности действия"
   },

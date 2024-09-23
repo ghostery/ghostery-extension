@@ -630,6 +630,10 @@
   "urls_observed": {
     "message": "감지된 URL"
   },
+  "utilities": {
+    "message": "유틸리티",
+    "description": "Tracker category name"
+  },
   "view_activity_details": {
     "message": "활동 세부정보 보기"
   },

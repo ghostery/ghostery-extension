@@ -630,6 +630,10 @@
   "urls_observed": {
     "message": "已觀察到的 URL"
   },
+  "utilities": {
+    "message": "工具",
+    "description": "Tracker category name"
+  },
   "view_activity_details": {
     "message": "查看活動詳情"
   },

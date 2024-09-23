@@ -630,6 +630,10 @@
   "urls_observed": {
     "message": "Beobachtete URLs"
   },
+  "utilities": {
+    "message": "Dienstprogramme",
+    "description": "Tracker category name"
+  },
   "view_activity_details": {
     "message": "Details zur Aktivität anzeigen"
   },
