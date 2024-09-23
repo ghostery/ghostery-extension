@@ -73,15 +73,12 @@ export default {
     }
 
     #arrow {
+      transform: rotate(180deg);
       transition: transform 0.1s;
     }
 
     :host([closed]) #arrow {
-      transform: rotate(180deg);
-    }
-
-    #content ::slotted(*) {
-      --ui-text-color-anchor: var(--ui-color-gray-800);
+      transform: rotate(0deg);
     }
 
     :host([closed]) #content {

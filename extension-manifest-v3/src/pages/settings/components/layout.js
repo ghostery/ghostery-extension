@@ -41,11 +41,11 @@ export default {
       </template>
     `.css`
     :host {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
     }
 
     header, nav {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       box-shadow: 0px 0px 80px rgba(32, 44, 68, 0.1);
     }
 
@@ -77,7 +77,7 @@ export default {
       transition: color 0.2s, opacity 0.2s;
     }
 
-    @media (hover: hover) and (pointer: fine) {
+    @media (hover: hover) {
       nav ::slotted(a:hover) {
         color: var(--ui-color-primary-700);
         --ui-color-nav: currentColor;

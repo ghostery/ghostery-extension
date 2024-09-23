@@ -3,7 +3,7 @@ import { html } from 'hybrids';
 export default {
   type: { value: 'body-m', reflect: true },
   mobileType: { value: '', reflect: true },
-  color: { value: '', reflect: true },
+  color: 'gray-800',
   ellipsis: { value: false, reflect: true },
   underline: { value: false, reflect: true },
   uppercase: { value: false, reflect: true },
@@ -11,7 +11,7 @@ export default {
     :host {
       display: block;
       font: var(--ui-font-${mobileType || type});
-      color: var(--ui-text-color, inherit);
+      color: var(--ui-color-${color});
       word-break: keep-all;
       overflow-wrap: break-word;
     }
@@ -21,25 +21,12 @@ export default {
     }
 
     ${
-      mobileType
-        ? /*css*/ `
+      mobileType &&
+      /*css*/ `
           @media screen and (min-width: 768px) {
             :host { font: var(--ui-font-${type}); }
           }
         `
-        : ''
-    }
-
-    :host([type^="display"]),
-    :host([type^="headline"]),
-    :host([type^="label"]) {
-      color: var(--ui-text-color-heading, var(--ui-color-gray-800));
-    }
-
-    :host([color]) {
-      --ui-text-color: var(--ui-color-${color});
-      --ui-text-color-anchor: var(--ui-color-${color});
-      --ui-text-color-heading: var(--ui-color-${color});
     }
 
     :host([type^="display"]), :host([type^="button"]) {
@@ -60,6 +47,10 @@ export default {
       text-transform: uppercase;
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      :host([underline]) ::slotted(a:hover) { text-decoration: underline; }
+    }
+
     ::slotted(ui-text) {
       display: inline;
     }
@@ -69,13 +60,6 @@ export default {
     }
 
     ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-    ::slotted(a:hover, a:focus-visible) { color: var(--ui-text-color-anchor, inherit); }
-
-    @media (hover: hover) and (pointer: fine) {
-      ::slotted(a:hover) { color: var(--ui-text-color-anchor, inherit) }
-      :host([underline]) ::slotted(a:hover) { text-decoration: underline; }
-    }
-
     ::slotted(a:active) { opacity: 0.6; }
     ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
 

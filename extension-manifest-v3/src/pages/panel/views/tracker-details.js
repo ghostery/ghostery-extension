@@ -12,7 +12,7 @@
 import { html, msg, router, store } from 'hybrids';
 import * as labels from '@ghostery/ui/labels';
 
-import Options from '/store/options.js';
+import Options, { isPaused } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
@@ -54,7 +54,7 @@ export default {
     tracker.category !== 'unidentified' &&
     `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
   paused: ({ options, stats }) =>
-    store.ready(options, stats) && !!options.paused[stats.hostname],
+    store.ready(options, stats) && isPaused(options, stats.hostname),
   render: ({ tracker, status, wtmUrl, paused, options }) => html`
     <template layout="column">
       <gh-panel-dialog>

@@ -47,7 +47,7 @@ html {
   --ui-color-gray-300: #b9bbbe;
   --ui-color-gray-200: #d4d6d9;
   --ui-color-gray-100: #f2f4f7;
-  --ui-color-white: white;
+  --ui-color-layout: white;
 
   --ui-color-primary-700: #0077cc;
   --ui-color-primary-500: #00aef0;
@@ -63,7 +63,7 @@ html {
   --ui-color-error-400: #ff5d35;
 
   --ui-color-current: currentColor;
-  --ui-color-onboarding-card: var(--ui-color-white);
+  --ui-color-onboarding-card: var(--ui-color-layout);
 
   /* Fonts */
 
@@ -105,8 +105,6 @@ html {
   --ui-font-body-m: 14px / 20px var(--ui-font-family-body);
   --ui-font-body-s: 12px / 18px var(--ui-font-family-body);
   --ui-font-body-xs: 12px / 18px var(--ui-font-family-body);
-
-  --ui-text-color-anchor: var(--ui-color-primary-500);
 }
 
 @media screen and (min-width: 768px) {
@@ -163,11 +161,16 @@ body {
   font-size: 13px;
   -moz-osx-font-smoothing: grayscale;
   color: var(--ui-color-gray-600);
-  background: var(--ui-color-white);
+  background: var(--ui-color-layout);
 }
 
 button,
 label,
 input {
   font-family: inherit !important;
+  color: inherit;
+}
+
+a {
+  color: inherit;
 }

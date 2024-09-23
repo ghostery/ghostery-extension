@@ -13,8 +13,10 @@ import { dispatch, html } from 'hybrids';
 
 function updateValue(value) {
   return (host) => {
-    host.value = value;
-    dispatch(host, 'change', { detail: value });
+    if (host.value !== value) {
+      host.value = value;
+      dispatch(host, 'change', { detail: value });
+    }
   };
 }
 
@@ -34,7 +36,7 @@ export default {
             onclick="${updateValue(true)}"
           >
             <ui-icon name="block-s"></ui-icon>
-            <ui-text type="label-xs">Blocked</ui-text>
+            <ui-text type="label-xs" color="inherit">Blocked</ui-text>
           </button>
         </ui-panel-action>
         <ui-panel-action class="trusted" grouped active="${!value}">
@@ -43,7 +45,7 @@ export default {
             onclick="${updateValue(false)}"
           >
             <ui-icon name="trust-s"></ui-icon>
-            <ui-text type="label-xs">Trusted</ui-text>
+            <ui-text type="label-xs" color="inherit">Trusted</ui-text>
           </button>
         </ui-panel-action>
       </ui-panel-action-group>
@@ -53,7 +55,6 @@ export default {
       width: auto;
       height: 28px;
       color: var(--ui-color-gray-600);
-      --ui-text-color-heading: currentColor;
     }
 
     ui-panel-action[active] {

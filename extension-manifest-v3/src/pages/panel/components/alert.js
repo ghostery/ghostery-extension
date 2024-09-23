@@ -72,7 +72,7 @@ export default {
       layout[slide]="absolute inset bottom:auto"
     >
       <ui-icon name="${icon}"></ui-icon>
-      <ui-text type="label-s" underline layout="block:center">
+      <ui-text type="label-s" underline layout="block:center" color="inherit">
         <slot></slot>
       </ui-text>
       ${!!autoclose &&
@@ -86,8 +86,6 @@ export default {
       border: 1px solid var(--ui-color-gray-200);
       box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.15);
       border-radius: 30px;
-      --ui-text-color-heading: currentColor;
-      --ui-text-color-anchor: currentColor;
     }
 
     :host([type="success"]) {

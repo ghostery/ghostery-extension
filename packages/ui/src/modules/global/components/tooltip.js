@@ -119,7 +119,7 @@ export default {
     }
 
     #tooltip ui-text {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border: 0.5px solid var(--ui-color-gray-300);
       box-shadow: 0px 4px 12px rgba(32, 44, 68, 0.2);
       border-radius: 4px;

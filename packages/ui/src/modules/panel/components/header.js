@@ -27,7 +27,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       box-shadow: var(--ui-shadow-header);
     }
    `,

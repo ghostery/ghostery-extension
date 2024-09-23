@@ -78,7 +78,7 @@ export default {
     #dialog {
       border: none;
       border-radius: 12px 12px 0 0;
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       overscroll-behavior: contain;
       transform: translateY(100%);
       transition: transform 500ms cubic-bezier(0.4, 0.15, 0, 1);
@@ -87,7 +87,7 @@ export default {
     #backdrop {
       background: var(--ui-color-backdrop);
       opacity: 0;
-      transition: all 500ms ease-out;
+      transition: all 300ms;
     }
 
     :host([open]) #dialog {
@@ -95,7 +95,7 @@ export default {
     }
 
     :host([open]) #backdrop {
-      opacity: 0.7;
+      opacity: 0.9;
     }
 
     #header {

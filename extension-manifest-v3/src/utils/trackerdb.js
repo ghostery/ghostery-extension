@@ -8,31 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { sortCategories } from '@ghostery/ui/categories';
+
 import * as engines from './engines.js';
 import asyncSetup from './setup.js';
-
-// TODO: remove after sunsetting Ghostery 8
-// This code is a duplicate of '@ghostery/ui/categories'
-// It's a walkaround to deal with WebPack problems with import.meta in @ghostery/ui when using type=module
-const categoryOrder = [
-  'advertising',
-  'site_analytics',
-  'consent',
-  'essential',
-  'hosting',
-  'customer_interaction',
-  'audio_video_player',
-  'cdn',
-  'comments',
-  'email',
-  'extensions',
-  'misc',
-  'pornvertising',
-  'social_media',
-  'telemetry',
-  'unidentified',
-  'other',
-];
 
 export const setup = asyncSetup([engines.init(engines.TRACKERDB_ENGINE)]);
 
@@ -159,7 +138,5 @@ export async function getCategories() {
 
   return [...categories.values()]
     .filter((c) => c.trackers.length > 0)
-    .sort(
-      (a, b) => categoryOrder.indexOf(a.key) - categoryOrder.indexOf(b.key),
-    );
+    .sort(sortCategories((c) => c.key));
 }

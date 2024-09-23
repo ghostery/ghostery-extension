@@ -18,7 +18,7 @@ export default {
   render: ({ icon, enabled, terms }) => html`
     <template layout="row gap items:center padding:1:1.5">
       ${icon && html`<ui-icon name="${icon}" layout="margin:right"></ui-icon>`}
-      <ui-text type="body-s" color="gray-800" layout="grow">
+      <ui-text type="body-s" layout="grow">
         <slot></slot>
       </ui-text>
       <ui-text
@@ -36,7 +36,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       border: 1px solid var(--ui-color-gray-200);
     }
 
@@ -56,7 +56,7 @@ export default {
       color: var(--ui-color-gray-600);
     }
 
-    @media (hover: hover) and (pointer: fine) {
+    @media (hover: hover) {
       :host(:hover) {
         background: var(--ui-color-primary-100);
       }
@@ -66,7 +66,7 @@ export default {
       }
 
       :host(:hover) ui-text {
-        --ui-text-color: var(--ui-color-primary-700);
+        color: var(--ui-color-primary-700);
       }
     }
   `,
