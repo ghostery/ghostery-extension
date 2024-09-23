@@ -68,11 +68,11 @@ export default {
     #backdrop {
       background: var(--ui-color-backdrop);
       opacity: 0;
-      transition: all 500ms ease-out;
+      transition: all 300ms ease-out;
     }
 
     :host([open]) #backdrop {
-      opacity: 0.7;
+      opacity: 0.8;
     }
   `,
 };
