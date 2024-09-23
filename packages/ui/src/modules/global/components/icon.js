@@ -18,7 +18,7 @@ export default {
     <template layout="block">${icons[name] || ''}</template>
   `.css`
     :host {
-      ${color ? `color: var(--ui-color-${color});` : ''}
+      color: ${color ? `var(--ui-color-${color});` : 'inherit'};
     }
 
     svg {
@@ -252,18 +252,6 @@ const icons = {
   'chevron-left': html`
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9 12L5 8L9 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  `,
-  'circle': html`
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <g clip-path="url(#clip0_87_483)">
-        <path d="M14.6668 7.99948C14.6668 11.6813 11.682 14.6661 8.00016 14.6661C4.31826 14.6661 1.3335 11.6813 1.3335 7.99948C1.3335 4.31758 4.31826 1.33281 8.00016 1.33281C11.682 1.33281 14.6668 4.31758 14.6668 7.99948Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      <defs>
-        <clipPath id="clip0_87_483">
-          <rect width="16" height="16" fill="white"/>
-        </clipPath>
-      </defs>
     </svg>
   `,
   'close': html`

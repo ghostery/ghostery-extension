@@ -54,7 +54,7 @@ export default {
     #dialog {
       border: none;
       border-radius: 16px;
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       transform: translateY(100px);
       opacity: 0;
       transition: transform 250ms cubic-bezier(0.4, 0.15, 0, 1), opacity 250ms ease;
@@ -68,11 +68,11 @@ export default {
     #backdrop {
       background: var(--ui-color-backdrop);
       opacity: 0;
-      transition: all 500ms ease-out;
+      transition: all 300ms ease-out;
     }
 
     :host([open]) #backdrop {
-      opacity: 0.7;
+      opacity: 0.8;
     }
   `,
 };

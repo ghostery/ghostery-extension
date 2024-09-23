@@ -77,7 +77,7 @@ export default {
     :host {
       border-radius: 8px;
       border: 1px solid var(--ui-color-gray-200);
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
     }
 
     :host([open]) #arrow {

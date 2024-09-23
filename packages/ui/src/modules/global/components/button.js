@@ -62,20 +62,20 @@ export default {
 
       :host([type="outline"]) {
         color: var(--ui-color-gray-700);
-        background: var(--ui-color-white);
+        background: var(--ui-color-layout);
         border: 1px solid var(--ui-color-gray-200);
         --ui-button-hover-color: var(--ui-color-primary-500);
         --ui-button-hover-border: var(--ui-color-primary-500);
-        --ui-button-hover-background: var(--ui-color-white);
+        --ui-button-hover-background: var(--ui-color-layout);
       }
 
       :host([type="outline-error"]) {
         color: var(--ui-color-error-400);
-        background: var(--ui-color-white);
+        background: var(--ui-color-layout);
         border: 1px solid var(--ui-color-gray-200);
         --ui-button-hover-color: var(--ui-color-error-500);
         --ui-button-hover-border: var(--ui-color-error-500);
-        --ui-button-hover-background: var(--ui-color-white);
+        --ui-button-hover-background: var(--ui-color-layout);
       }
 
       @media (hover: hover) and (pointer: fine) {

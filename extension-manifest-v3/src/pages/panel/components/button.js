@@ -31,7 +31,7 @@ export default {
       transition: 0.2s all;
     }
 
-    @media (hover: hover) and (pointer: fine) {
+    @media (hover: hover) {
       ui-text:hover {
         background: var(--ui-color-primary-700);
       }

@@ -45,7 +45,7 @@ export default {
             <div id="toggle" layout="block relative size:36px:20px">
               <span layout="block size:2 absolute top left margin:2px"></span>
             </div>
-            <ui-text type="label-m" layout="width::36px">
+            <ui-text type="label-m" layout="width::36px" color="inherit">
               ${value ? msg`On` : msg`Off`}
             </ui-text>
           </div>
@@ -55,7 +55,6 @@ export default {
       :host([disabled]) {
         pointer-events: none;
       }
-
 
       button {
         cursor: pointer;
@@ -74,11 +73,7 @@ export default {
       }
 
       #button {
-        --ui-text-color-heading: var(--ui-color-gray-300);
-      }
-
-      :host([disabled]) #button {
-        --ui-text-color-heading: var(--ui-color-gray-300) !important;
+        color: var(--ui-color-gray-300);
       }
 
       #toggle {
@@ -88,13 +83,9 @@ export default {
       }
 
       #toggle span {
-        background: var(--ui-color-white);
+        background: var(--ui-color-layout);
         border-radius: 8px;
         transition: left 0.2s;
-      }
-
-      :host([disabled]) #toggle {
-        background: var(--ui-color-gray-200) !important;
       }
 
       :host([value]) #toggle {
@@ -102,7 +93,7 @@ export default {
       }
 
       :host([value]) #button {
-        --ui-text-color-heading: var(--ui-color-gray-600);
+        color: var(--ui-color-gray-600);
       }
 
       :host([value]) #toggle span {
@@ -113,9 +104,17 @@ export default {
         display: none;
       }
 
+      :host([disabled]) #toggle {
+        background: var(--ui-color-gray-200);
+      }
+
+      :host([disabled]) #button {
+        color: var(--ui-color-gray-300);
+      }
+
       @media (hover: hover) and (pointer: fine) {
         button:hover #button {
-          --ui-text-color-heading: var(--ui-color-gray-400);
+          color: var(--ui-color-gray-400);
         }
 
         button:hover #toggle {

@@ -1,18 +1,19 @@
 @media (prefers-color-scheme: dark) {
   html {
-    --ui-color-gray-100: #0e1218;
-    --ui-color-gray-200: #2b3444;
-    --ui-color-gray-300: #57616e;
-    --ui-color-gray-400: #7f8aa3;
-    --ui-color-gray-600: #b2b9cf;
-    --ui-color-gray-800: #eceff5;
-    --ui-color-white: #181d27;
+    --ui-color-layout: #1f2125;
+
+    --ui-color-gray-100: #13151a;
+    --ui-color-gray-200: #2f3136;
+    --ui-color-gray-300: #636468;
+    --ui-color-gray-400: #88898c;
+    --ui-color-gray-600: #b9bbbe;
+    --ui-color-gray-800: #f2f4f7;
 
     --ui-color-primary-100: #0a1e31;
-    --ui-color-primary-200: #1a4065;
-    --ui-color-primary-300: #144878;
-    --ui-color-primary-500: #4fa9e4;
-    --ui-color-primary-700: #7dc7f8;
+    --ui-color-primary-200: #00365c;
+    --ui-color-primary-300: #004f88;
+    --ui-color-primary-500: #00aef0;
+    --ui-color-primary-700: #33c7ff;
 
     --ui-color-success-100: #056605;
     --ui-color-success-500: #1b911b;

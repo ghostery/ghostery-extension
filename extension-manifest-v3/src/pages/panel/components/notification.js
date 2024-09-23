@@ -31,7 +31,9 @@ export default {
             </div>
           `}
           <div layout="column gap grow">
-            <ui-text type="body-s"><slot></slot></ui-text>
+            <ui-text id="desc" type="body-s" color="gray-600">
+              <slot></slot>
+            </ui-text>
             <ui-text id="action" type="label-s">
               <slot name="action"></slot>
             </ui-text>
@@ -45,10 +47,6 @@ export default {
       --ui-panel-notification-color: var(--ui-color-primary-700);
     }
 
-    #action {
-      color: var(--ui-panel-notification-color);
-    }
-
     :host([type="warning"]) {
       --ui-panel-notification-bg: var(--ui-color-danger-100);
       --ui-panel-notification-color: var(--ui-color-danger-700);
@@ -57,39 +55,27 @@ export default {
     a {
       background: var(--ui-panel-notification-bg);
       border-radius: 12px;
-      color: inherit;
       text-decoration: none;
+      color: inherit;
+    }
+
+    #action {
+      color: var(--ui-panel-notification-color);
     }
 
     #icon {
-      background: var(--ui-color-white);
+      background: var(--ui-color-layout);
       box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
       border-radius: 8px;
     }
 
-    #icon ui-icon {
+    ui-icon {
       color: var(--ui-panel-notification-color);
     }
 
-    #close > * {
-      color: var(--ui-color-gray-600);
-      background: var(--ui-color-white);
-      border-radius: 12px;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      a:hover:not(:has(#close:hover)) {
-        background: var(--ui-panel-notification-bg);
-        --ui-text-color: var(--ui-panel-notification-color);
-      }
-
-      a:hover:not(:has(#close:hover)) #action {
+    @media (hover: hover) {
+      a:hover ui-text {
         text-decoration: underline;
-      }
-
-      #close:hover > * {
-        color: var(--ui-color-white);
-        background: var(--ui-panel-notification-color);
       }
     }
   `,

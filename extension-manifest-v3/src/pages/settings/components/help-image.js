@@ -45,7 +45,7 @@ export default {
       #icon {
         border-radius:12px;
         border: 1px solid var(--ui-color-gray-300);
-        background: var(--ui-color-white);
+        background: var(--ui-color-layout);
       }
     `,
 };
