@@ -53,12 +53,12 @@ export default {
   session: store(Session),
   render: ({ options, session }) => html`
     <template layout="contents">
-      <gh-settings-page-layout>
+      <settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="column gap" layout@992px="margin:bottom">
             <ui-text type="headline-m">My Account</ui-text>
           </div>
-          <gh-settings-card>
+          <settings-card>
             <img
               src="${assets[
                 store.ready(session) && session.user ? 'shield' : 'contribution'
@@ -77,9 +77,9 @@ export default {
                     <div layout="row items:center gap:2">
                       <ui-text type="headline-s"> ${session.name} </ui-text>
                       ${session.contributor &&
-                      html`<gh-settings-badge type="primary" uppercase>
+                      html`<settings-badge type="primary" uppercase>
                         Contributor
-                      </gh-settings-badge>`}
+                      </settings-badge>`}
                     </div>
                     <ui-text type="body-m" color="gray-600"
                       >${session.email}</ui-text
@@ -110,7 +110,7 @@ export default {
                         Sign in <ui-icon name="arrow-right-s"></ui-icon>
                       </button>
                     </ui-button>
-                    <ui-button type="outline">
+                    <ui-button>
                       <button
                         onclick="${openGhosteryPage(CREATE_ACCOUNT_PAGE_URL)}"
                       >
@@ -119,7 +119,7 @@ export default {
                     </ui-button>
                   </div>
                 `)}
-          </gh-settings-card>
+          </settings-card>
           ${store.ready(session) &&
           html`
             <div
@@ -149,7 +149,7 @@ export default {
             </div>
           `}
         </section>
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

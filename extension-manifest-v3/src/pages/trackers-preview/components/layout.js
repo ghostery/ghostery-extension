@@ -10,7 +10,7 @@
  */
 
 import { html, dispatch } from 'hybrids';
-import { sortCategories } from '@ghostery/ui/categories';
+import { sortCategories } from '/ui/categories.js';
 
 import DisablePreviewImg from '../assets/disable-preview.svg';
 
@@ -40,12 +40,12 @@ export default {
                 </ui-text>
               </div>
               <div layout="grid:2 gap:2">
-                <ui-button type="outline" size="small">
+                <ui-button>
                   <button onclick="${html.set('confirmDisabled', false)}">
                     Cancel
                   </button>
                 </ui-button>
-                <ui-button id="disable" type="outline" size="small">
+                <ui-button id="disable">
                   <button onclick="${(host) => dispatch(host, 'disable')}">
                     Disable
                   </button>
@@ -54,7 +54,7 @@ export default {
             </main>
           `
         : html`
-            <ui-panel-header>
+            <ui-header>
               <ui-icon name="logo" slot="icon" layout="size:3"></ui-icon>
               <ui-text type="label-m">${domain}</ui-text>
               <ui-action slot="actions">
@@ -69,18 +69,18 @@ export default {
                   ></ui-icon>
                 </button>
               </ui-action>
-            </ui-panel-header>
+            </ui-header>
 
             <main layout="padding:1.5">
               ${stats &&
               html`
-                <ui-panel-stats
+                <ui-stats
                   domain="${domain}"
                   categories="${stats.sort(sort)}"
                   layout="relative layer:101"
                   wtm-link
                 >
-                </ui-panel-stats>
+                </ui-stats>
               `}
             </main>
             <footer layout="row center padding:2">

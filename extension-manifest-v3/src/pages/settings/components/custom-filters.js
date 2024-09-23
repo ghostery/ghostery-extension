@@ -38,7 +38,7 @@ export default {
   render: ({ input, result, disabled }) => html`
     <template layout="block">
       <div layout="column gap">
-        <gh-settings-input>
+        <settings-input>
           <textarea
             rows="10"
             autocomplete="off"
@@ -49,12 +49,10 @@ export default {
             disabled="${!store.ready(input) || disabled}"
             defaultValue="${store.ready(input) ? input.text : ''}"
           ></textarea>
-        </gh-settings-input>
+        </settings-input>
 
         <ui-button
           layout="self:start"
-          size="small"
-          type="outline"
           onclick="${update}"
           disabled="${disabled}"
         >

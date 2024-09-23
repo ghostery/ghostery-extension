@@ -17,16 +17,16 @@ export default {
     <template layout="block">
       ${blocked
         ? html`
-            <gh-settings-badge type="info">
+            <settings-badge type="info">
               <ui-icon name="block-s"></ui-icon>
               Blocked
-            </gh-settings-badge>
+            </settings-badge>
           `
         : html`
-            <gh-settings-badge type="info">
+            <settings-badge type="info">
               <ui-icon name="trust-s"></ui-icon>
               Trusted
-            </gh-settings-badge>
+            </settings-badge>
           `}
     </template>
   `,

@@ -34,10 +34,11 @@ export default {
     ::slotted(input),
     ::slotted(textarea),
     ::slotted(select) {
+      box-sizing: border-box;
       background: var(--ui-color-layout);
       border: 1px solid var(--ui-color-gray-200);
       border-radius: 8px;
-      padding: 11px;
+      padding: 0 11px;
       margin: 0;
       color: var(--ui-color-gray-800);
       box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
@@ -45,6 +46,7 @@ export default {
 
     ::slotted(input) {
       font: var(--ui-font-body-l);
+      height: 40px;
     }
 
     ::slotted(textarea) {
@@ -55,6 +57,7 @@ export default {
     }
 
     ::slotted(select) {
+      height: 40px;
       appearance: none;
       font: var(--ui-font-label-m);
       background: no-repeat right 7px center / 16px 16px;

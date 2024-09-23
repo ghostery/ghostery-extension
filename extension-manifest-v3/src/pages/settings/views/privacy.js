@@ -10,7 +10,7 @@
  */
 
 import { html, store } from 'hybrids';
-import * as labels from '@ghostery/ui/labels';
+import * as labels from '/ui/labels.js';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Session from '/store/session.js';
@@ -74,7 +74,7 @@ export default {
     globalPauseRevokeAt,
   }) => html`
     <template layout="contents">
-      <gh-settings-page-layout layout="column gap:4">
+      <settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
         html`
           <section layout="column gap:4">
@@ -101,9 +101,9 @@ export default {
                 ${globalPauseRevokeAt &&
                 html`
                   <ui-text type="body-s" color="gray-600">
-                    <ui-panel-revoke-at
+                    <ui-revoke-at
                       revokeAt="${globalPauseRevokeAt}"
-                    ></ui-panel-revoke-at>
+                    ></ui-revoke-at>
                   </ui-text>
                 `}
               </div>
@@ -203,7 +203,7 @@ export default {
                 >
                   ${REGIONS.map(
                     (id) => html`
-                      <gh-settings-checkbox
+                      <settings-checkbox
                         disabled="${globalPause ||
                         !options.regionalFilters.enabled}"
                         layout="grow"
@@ -219,7 +219,7 @@ export default {
                         <span slot="label">
                           ${labels.languages.of(id.toUpperCase())} (${id})
                         </span>
-                      </gh-settings-checkbox>
+                      </settings-checkbox>
                     `,
                   )}
                 </div>
@@ -328,7 +328,7 @@ export default {
                   html`
                     <div layout="column gap">
                       <div layout="self:start margin:bottom">
-                        <gh-settings-checkbox disabled="${globalPause}">
+                        <settings-checkbox disabled="${globalPause}">
                           <input
                             type="checkbox"
                             disabled="${globalPause}"
@@ -339,11 +339,11 @@ export default {
                             )}"
                           />
                           <span slot="label">Allow trusted scriptlets</span>
-                        </gh-settings-checkbox>
+                        </settings-checkbox>
                       </div>
-                      <gh-settings-custom-filters
+                      <settings-custom-filters
                         disabled="${globalPause}"
-                      ></gh-settings-custom-filters>
+                      ></settings-custom-filters>
                     </div>
                   `}
                 </div>
@@ -351,10 +351,10 @@ export default {
             </div>
           </section>
 
-          <gh-settings-devtools
+          <settings-devtools
             onshown="${html.set('devMode', true)}"
             visible="${devMode}"
-          ></gh-settings-devtools>
+          ></settings-devtools>
         `}
         ${store.ready(session) &&
         html`
@@ -362,7 +362,7 @@ export default {
             layout="grid:1/1 grow items:end:stretch padding:0"
             layout@992px="hidden"
           >
-            <gh-settings-card
+            <settings-card
               layout="column items:center gap"
               layout@768px="row gap:5"
             >
@@ -419,10 +419,10 @@ export default {
                       </ui-button>
                     </div>
                   `}
-            </gh-settings-card>
+            </settings-card>
           </section>
         `}
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

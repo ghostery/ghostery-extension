@@ -10,7 +10,8 @@
  */
 
 import { define, mount, html } from 'hybrids';
-import '@ghostery/ui/panel';
+
+import '/ui/index.js';
 
 import { getWTMStats } from '/utils/wtm-stats';
 

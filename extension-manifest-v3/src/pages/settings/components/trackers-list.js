@@ -10,7 +10,7 @@
  */
 
 import { html, dispatch, msg } from 'hybrids';
-import * as labels from '@ghostery/ui/labels';
+import * as labels from '/ui/labels.js';
 
 export default {
   name: '',
@@ -36,10 +36,10 @@ export default {
               layout="size:3"
               color="gray-600"
             ></ui-icon>
-            <ui-panel-category-icon
+            <ui-category-icon
               name="${name}"
               layout="size:5 padding"
-            ></ui-panel-category-icon>
+            ></ui-category-icon>
             <div layout="column gap:0.5">
               <ui-text type="label-l">${labels.categories[name]}</ui-text>
               <div layout="column" layout@768px="row gap">
@@ -63,11 +63,11 @@ export default {
               ? msg`Block all (recommended)`
               : msg`Trust all (recommended)`}
           </span>
-          <ui-panel-action layout="width:4.5">
+          <ui-action-button layout="width:4.5">
             <button onclick="${(host) => dispatch(host, 'clear')}">
               <ui-icon name="refresh"></ui-icon>
             </button>
-          </ui-panel-action>
+          </ui-action-button>
         </ui-tooltip>
       </header>
 

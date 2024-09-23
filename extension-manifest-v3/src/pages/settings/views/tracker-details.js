@@ -10,7 +10,7 @@
  */
 
 import { html, router, store, msg } from 'hybrids';
-import * as labels from '@ghostery/ui/labels';
+import * as labels from '/ui/labels.js';
 
 import Tracker from '/store/tracker.js';
 import { toggleExceptionDomain } from '/store/tracker-exception.js';
@@ -50,7 +50,7 @@ export default {
     [],
   render: ({ tracker, domains, otherTrackers }) => html`
     <template layout="contents">
-      <gh-settings-page-layout>
+      <settings-page-layout>
         <div layout="column gap">
           <ui-action>
             <a href="${router.backUrl()}" layout="self:start padding">
@@ -66,10 +66,10 @@ export default {
                 <ui-text type="headline-m">${tracker.name}</ui-text>
                 <div layout="row gap:3 items:center">
                   <div layout="row items:center gap">
-                    <ui-panel-category-icon
+                    <ui-category-icon
                       name="${tracker.category}"
                       layout="size:3 padding:0.5"
-                    ></ui-panel-category-icon>
+                    ></ui-category-icon>
                     <ui-text type="body-l" color="gray-600">
                       ${labels.categories[tracker.category]}
                     </ui-text>
@@ -77,10 +77,10 @@ export default {
                   ${tracker.organization &&
                   html`
                     <div layout="row items:center gap">
-                      <ui-panel-category-icon
+                      <ui-category-icon
                         name="organization"
                         layout="size:3 padding:0.5"
-                      ></ui-panel-category-icon>
+                      ></ui-category-icon>
                       <ui-text type="body-l" color="gray-600">
                         ${tracker.organization.name}
                       </ui-text>
@@ -99,35 +99,35 @@ export default {
                       </ui-text>
                     </div>
 
-                    <ui-panel-protection-status-toggle
+                    <ui-protection-status-toggle
                       value="${store.ready(tracker.exception)
                         ? tracker.exception.blocked
                         : tracker.blockedByDefault}"
                       responsive
                       onchange="${toggleException(tracker)}"
                       layout="shrink:0"
-                    ></ui-panel-protection-status-toggle>
+                    ></ui-protection-status-toggle>
                   </div>
-                  <gh-settings-badge
+                  <settings-badge
                     type="primary"
                     layout="row content:start padding"
                   >
                     <ui-icon name="info-filled"></ui-icon>
                     ${msg`Our recommendation for this activity`}:
                     ${tracker.blockedByDefault ? msg`Blocked` : msg`Trusted`}
-                  </gh-settings-badge>
+                  </settings-badge>
                 </div>
               </div>
               <div layout="column gap:2">
                 <div layout="row gap items:center content:space-between">
                   <ui-text type="label-l">Website exceptions</ui-text>
-                  <ui-button size="small">
+                  <ui-button>
                     <a href="${router.url(TrackerAddException, { tracker })}">
                       Add
                     </a>
                   </ui-button>
                 </div>
-                <gh-settings-table>
+                <settings-table>
                   <div slot="header" layout="grid:2 gap:4">
                     <ui-text type="label-m" mobile-type="label-s">
                       Website
@@ -162,11 +162,11 @@ export default {
                             ${domain}
                           </ui-text>
                           <div layout="row content:space-between gap">
-                            <gh-settings-protection-badge
+                            <settings-protection-badge
                               blocked="${tracker.exception.getDomainStatus(
                                 domain,
                               ).type === 'block'}"
-                            ></gh-settings-protection-badge>
+                            ></settings-protection-badge>
                             <ui-action>
                               <button
                                 layout@768px="order:1 padding:0.5"
@@ -184,7 +184,7 @@ export default {
                       </ui-action>
                     `,
                   )}
-                </gh-settings-table>
+                </settings-table>
               </div>
               <div layout="margin:3:0">
                 <ui-action>
@@ -192,9 +192,9 @@ export default {
                     href="${`${WTM_PAGE_URL}trackers/${tracker.id}`}"
                     target="_blank"
                   >
-                    <gh-settings-wtm-link>
+                    <settings-wtm-link>
                       WhoTracks.Me Statistical Report
-                    </gh-settings-wtm-link>
+                    </settings-wtm-link>
                   </a>
                 </ui-action>
               </div>
@@ -292,7 +292,7 @@ export default {
                     <div layout="row:wrap gap:0.5">
                       ${otherTrackers.map(
                         (t) => html`
-                          <ui-panel-action layout="block:start height:auto">
+                          <ui-action-button layout="block:start height:auto">
                             <a
                               href="${router.currentUrl({
                                 tracker: t,
@@ -305,7 +305,7 @@ export default {
                                 ${labels.categories[t.category]}
                               </ui-text>
                             </a>
-                          </ui-panel-action>
+                          </ui-action-button>
                         `,
                       )}
                     </div>
@@ -315,7 +315,7 @@ export default {
             </div>
           `}
         </div>
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

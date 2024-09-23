@@ -86,7 +86,7 @@ export default {
             </ui-text>
             ${!!revokeAt &&
             html`<ui-text type="body-xs" color="inherit">
-              <ui-panel-revoke-at revokeAt="${revokeAt}"></ui-panel-revoke-at>
+              <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
             </ui-text>`}
             <slot></slot>
           </div>

@@ -17,7 +17,6 @@
     "prettier": "^2.6.2"
   },
   "workspaces": [
-    "packages/*",
     "extension-manifest-v3"
   ],
   "overrides": {

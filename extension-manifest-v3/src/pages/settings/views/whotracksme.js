@@ -38,7 +38,7 @@ export default {
   options: store(Options),
   render: ({ options }) => html`
     <template layout="contents">
-      <gh-settings-page-layout layout="gap:4" layout@768px="gap:4">
+      <settings-page-layout layout="gap:4" layout@768px="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <ui-text type="headline-m" translate="no">WhoTracks.Me</ui-text>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
@@ -62,12 +62,12 @@ export default {
             >
               <div layout="row items:start gap:2" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
-                  <gh-settings-help-image>
+                  <settings-help-image>
                     <img
                       src="${assets.wtm_wheel_small}"
                       alt="WhoTracks.Me Wheel"
                     />
-                  </gh-settings-help-image>
+                  </settings-help-image>
                 </a>
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">WhoTracks.Me Wheel</ui-text>
@@ -86,12 +86,12 @@ export default {
               >
                 <div layout="row items:start gap:2" layout@768px="gap:3">
                   <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
-                    <gh-settings-help-image>
+                    <settings-help-image>
                       <img
                         src="${assets.trackers_count_small}"
                         alt="Trackers Count"
                       />
-                    </gh-settings-help-image>
+                    </settings-help-image>
                   </a>
                   <div layout="column grow gap:0.5">
                     <ui-text type="headline-xs">Trackers Count</ui-text>
@@ -113,12 +113,12 @@ export default {
             >
               <div layout="row gap:2" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
-                  <gh-settings-help-image>
+                  <settings-help-image>
                     <img
                       src="${assets.trackers_preview_small}"
                       alt="Trackers Preview"
                     />
-                  </gh-settings-help-image>
+                  </settings-help-image>
                 </a>
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">Trackers Preview</ui-text>
@@ -139,7 +139,7 @@ export default {
             </ui-toggle>
           </section>
         `}
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

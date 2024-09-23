@@ -10,8 +10,11 @@
  */
 import './safari-monkey-patch.js';
 
-import '@ghostery/ui/panel';
 import { define, mount, router, html } from 'hybrids';
+
+import '/ui/index.js';
+import './styles.css';
+
 import Home from './views/home.js';
 
 // Define components and views
@@ -22,7 +25,7 @@ define.from(
   }),
   {
     root: ['components', 'views'],
-    prefix: 'gh-panel',
+    prefix: 'panel',
   },
 );
 

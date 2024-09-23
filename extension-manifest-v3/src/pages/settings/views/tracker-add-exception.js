@@ -43,7 +43,7 @@ export default {
     <template layout>
       ${store.ready(tracker) &&
       html`
-        <gh-settings-dialog>
+        <settings-dialog>
           <form
             action="${router.backUrl()}"
             onsubmit="${add}"
@@ -55,13 +55,13 @@ export default {
             <ui-text layout="row:wrap gap:0.5 items:center">
               <!-- Current protection status for a tracker -->
               Current protection status for ${tracker.name}:
-              <gh-settings-protection-badge
+              <settings-protection-badge
                 blocked="${blocked}"
-              ></gh-settings-protection-badge>
+              ></settings-protection-badge>
             </ui-text>
             <div layout="column gap:0.5">
               <ui-text type="label-m">Website</ui-text>
-              <gh-settings-input error="${store.error(hostname) || ''}">
+              <settings-input error="${store.error(hostname) || ''}">
                 <input
                   type="text"
                   placeholder="${msg`Enter website URL`}"
@@ -69,7 +69,7 @@ export default {
                   oninput="${html.set(hostname, 'value')}"
                   tabindex="1"
                 />
-              </gh-settings-input>
+              </settings-input>
               <ui-text type="body-s" color="gray-600">
                 ${blocked
                   ? msg`${tracker.name} will be trusted on this website. | A tracker will be trusted on this website.`
@@ -77,15 +77,15 @@ export default {
               </ui-text>
             </div>
             <div layout="grid:1|1 gap margin:top:2">
-              <ui-button type="outline" size="small">
+              <ui-button>
                 <a href="${router.backUrl()}" tabindex="2">Cancel</a>
               </ui-button>
-              <ui-button size="small">
+              <ui-button type="primary">
                 <button type="submit" tabindex="1">Save</button>
               </ui-button>
             </div>
           </form>
-        </gh-settings-dialog>
+        </settings-dialog>
       `}
     </template>
   `,

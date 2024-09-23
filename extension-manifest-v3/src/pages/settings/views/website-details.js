@@ -10,7 +10,7 @@
  */
 
 import { html, router, store } from 'hybrids';
-import * as labels from '@ghostery/ui/labels';
+import * as labels from '/ui/labels.js';
 
 import Options from '/store/options.js';
 import TrackerException from '/store/tracker-exception.js';
@@ -69,7 +69,7 @@ export default {
     (store.ready(options) && options.paused[domain]) || {},
   render: ({ domain, trackers, paused }) => html`
     <template layout="contents">
-      <gh-settings-page-layout layout="gap:4">
+      <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
           <ui-action>
             <a href="${router.backUrl()}" layout="self:start padding">
@@ -83,9 +83,9 @@ export default {
           ${paused.revokeAt !== undefined &&
           html`
             <div layout="row items:center gap">
-              <gh-settings-protection-status
+              <settings-protection-status
                 revokeAt="${paused.revokeAt}"
-              ></gh-settings-protection-status>
+              ></settings-protection-status>
               <ui-action>
                 <button layout@768px="order:1">
                   <ui-icon
@@ -111,7 +111,7 @@ export default {
           <div layout="column gap:0.5 grow">
             <ui-text type="label-l">Protection exceptions</ui-text>
           </div>
-          <gh-settings-table>
+          <settings-table>
             <div
               slot="header"
               layout="grid:2 gap:2"
@@ -175,12 +175,12 @@ export default {
                     <div layout="row gap items:center content:space-between">
                       ${tracker.exception.getDomainStatus(domain).type ===
                       'block'
-                        ? html`<gh-settings-badge type="info">
+                        ? html`<settings-badge type="info">
                             <ui-icon name="block-s"></ui-icon> Blocked
-                          </gh-settings-badge>`
-                        : html`<gh-settings-badge type="info">
+                          </settings-badge>`
+                        : html`<settings-badge type="info">
                             <ui-icon name="trust-s"></ui-icon> Trusted
-                          </gh-settings-badge>`}
+                          </settings-badge>`}
                       <ui-action>
                         <button layout@768px="order:1">
                           <ui-icon
@@ -195,21 +195,21 @@ export default {
                   </div>
                 `,
             )}
-          </gh-settings-table>
+          </settings-table>
         </div>
         ${hasWTMStats(domain) &&
         html`
           <div layout="margin:3:0">
             <ui-action>
               <a href="${`${WTM_PAGE_URL}websites/${domain}`}" target="_blank">
-                <gh-settings-wtm-link>
+                <settings-wtm-link>
                   WhoTracks.Me Statistical Report
-                </gh-settings-wtm-link>
+                </settings-wtm-link>
               </a>
             </ui-action>
           </div>
         `}
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

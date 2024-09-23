@@ -30,7 +30,7 @@ export default {
   render: {
     value: ({ stack, session }) => html`
       <template layout="contents">
-        <gh-settings-layout>
+        <settings-layout>
           <a
             href="${router.url(Privacy)}"
             class="${{ active: router.active(Privacy) }}"
@@ -94,7 +94,7 @@ export default {
           </a>
           ${store.ready(session) &&
           html`
-            <gh-settings-card
+            <settings-card
               layout="hidden"
               layout@992px="
               area::6/7 self:end:stretch
@@ -154,10 +154,10 @@ export default {
                       </ui-button>
                     </div>
                   `}
-            </gh-settings-card>
+            </settings-card>
           `}
           ${stack}
-        </gh-settings-layout>
+        </settings-layout>
       </template>
     `.css`
       html, body { height: 100%; }
