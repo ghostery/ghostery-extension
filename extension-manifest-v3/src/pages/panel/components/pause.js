@@ -313,8 +313,13 @@ export default {
         background: var(--ui-color-primary-300);
       }
 
+      :host(:not([paused])) #main:hover #label {
+        color: var(--ui-color-primary-700);
+      }
+
       :host(:not([paused])) #type:hover {
         background: var(--ui-color-primary-200);
+        color: var(--ui-color-primary-700);
       }
     }
   `,
