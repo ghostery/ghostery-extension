@@ -48,7 +48,7 @@ html {
 
   --ui-color-danger-700: #c80f11;
   --ui-color-danger-500: #f13436;
-  --ui-color-danger-300: #f4a4a7;
+  --ui-color-danger-300: #efb1b3;
   --ui-color-danger-100: #ffebeb;
 
   --ui-color-backdrop: var(--ui-color-gray-600);
@@ -90,7 +90,7 @@ html {
     --ui-color-gray-600: #b9bbbe;
     --ui-color-gray-400: #88898c;
     --ui-color-gray-300: #636468;
-    --ui-color-gray-200: #2f3136;
+    --ui-color-gray-200: #36393f;
     --ui-color-gray-100: #13151a;
 
     --ui-color-primary-700: #33c7ff;
@@ -110,7 +110,7 @@ html {
     --ui-color-danger-700: #e05c5e;
     --ui-color-danger-500: #cd393c;
     --ui-color-danger-300: #7f3d3d;
-    --ui-color-danger-100: #341b1c;
+    --ui-color-danger-100: #251314;
 
     --ui-color-backdrop: var(--ui-color-gray-100);
     --ui-color-scroll-shadow: rgba(0, 0, 0, 0.4);

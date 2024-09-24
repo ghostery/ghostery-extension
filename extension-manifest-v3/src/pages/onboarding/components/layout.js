@@ -34,6 +34,7 @@ export default {
   `.css`
     @media (prefers-color-scheme: dark) {
       #bg { display: none; }
+      :host { background: var(--ui-color-gray-100); }
     }
 
     #bg { transform: translateX(-50%); }

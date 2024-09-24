@@ -54,14 +54,14 @@ export default {
 
     :host([type="outline"]) {
       color: var(--ui-color-gray-700);
-      background: transparent;
+      background: var(--ui-color-layout);
       border: 1px solid var(--ui-color-gray-200);
     }
 
     :host([type="outline-error"]) {
       color: var(--ui-color-danger-500);
-      background: transparent;
-      border: 1px solid var(--ui-color-gray-200);
+      background: var(--ui-color-danger-100);
+      border: 1px solid var(--ui-color-danger-300);
     }
 
     :host(:active) {
@@ -93,7 +93,7 @@ export default {
       }
 
       :host([type="outline-error"]:hover) {
-        border-color: var(--ui-color-danger-300);
+        border-color: var(--ui-color-danger-500);
       }
     }
 

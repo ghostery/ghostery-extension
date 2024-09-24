@@ -29,7 +29,7 @@ export default define({
           <ui-text type="display-m">Enable Ghostery to get started</ui-text>
         </section>
         <div layout="column gap:2">
-          <ui-text type="label-l" layout="block:center">
+          <ui-text type="body-l" layout="block:center">
             Your Privacy Features:
           </ui-text>
           <div layout="grid:3 gap">
