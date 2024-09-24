@@ -40,6 +40,7 @@ export default {
 
     :host([type^="display"]) {
       text-transform: uppercase;
+      text-wrap: balance;
     }
 
     :host([ellipsis]) {

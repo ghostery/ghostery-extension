@@ -1,3 +1,7 @@
+html {
+  height: auto;
+}
+
 html,
 body {
   overflow: hidden;

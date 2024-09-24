@@ -12,7 +12,6 @@
 import { define, mount, html, store, router } from 'hybrids';
 
 import '/ui/index.js';
-import './styles.css';
 
 import Options from '/store/options.js';
 import { getBrowserId } from '/utils/browser-info.js';

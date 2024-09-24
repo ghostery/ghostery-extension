@@ -26,7 +26,7 @@ import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
-  '/pages/settings/index.html#@gh-settings-privacy',
+  '/pages/settings/index.html#@settings-privacy',
 );
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
 
@@ -118,7 +118,7 @@ export default {
                   <ui-action>
                     <a
                       href="${chrome.runtime.getURL(
-                        '/pages/settings/index.html#@gh-settings-website-details?domain=' +
+                        '/pages/settings/index.html#@settings-website-details?domain=' +
                           stats.hostname,
                       )}"
                       onclick="${openTabWithUrl}"

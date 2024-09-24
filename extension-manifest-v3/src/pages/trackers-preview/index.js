@@ -43,19 +43,19 @@ define.from(
   }),
   {
     root: ['components'],
-    prefix: 'gh-trackers-preview',
+    prefix: 'trackers-preview',
   },
 );
 
 mount(document.body, {
   render: () => html`
     <template layout="block">
-      <gh-trackers-preview-layout
+      <trackers-preview-layout
         stats="${getWTMStats(domain)}"
         domain="${domain}"
         onclose="${close}"
         ondisable="${disable}"
-      ></gh-trackers-preview-layout>
+      ></trackers-preview-layout>
     </template>
   `,
 });

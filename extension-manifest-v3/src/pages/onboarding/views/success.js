@@ -28,7 +28,7 @@ export default define({
   platform: '',
   render: ({ platform }) => html`
     <template layout="column gap">
-      <onboarding-card>
+      <ui-card>
         <section layout="block:center column gap:2">
           <div layout="row center">${protection}</div>
           <ui-text type="display-s">Setup Successful</ui-text>
@@ -37,10 +37,10 @@ export default define({
             your privacy while browsing!
           </ui-text>
         </section>
-      </onboarding-card>
+      </ui-card>
       ${PIN_EXTENSION_IMAGES[platform] &&
       html`
-        <onboarding-card>
+        <ui-card>
           <section layout="column gap:2">
             <ui-text type="display-xs" layout="block:center">
               What’s next?
@@ -67,7 +67,7 @@ export default define({
               Clicking on the Ghostery icon reveals more detailed information.
             </ui-text>
           </section>
-        </onboarding-card>
+        </ui-card>
         <onboarding-pin-it platform="${platform}">
           Pin it here
         </onboarding-pin-it>

@@ -124,7 +124,7 @@ export default {
               <ui-action-button layout="width:4.5 height:auto:4.5">
                 <a
                   href="${chrome.runtime.getURL(
-                    `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
+                    `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
                   )}"
                   onclick="${openTabWithUrl}"
                 >

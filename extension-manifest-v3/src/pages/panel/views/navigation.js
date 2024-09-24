@@ -19,37 +19,33 @@ const MENU = [
   {
     icon: () => 'shield-menu',
     label: msg`Privacy protection`,
-    href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-privacy',
-    ),
+    href: chrome.runtime.getURL('/pages/settings/index.html#@settings-privacy'),
   },
   {
     icon: () => 'websites',
     label: msg`Websites`,
     href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-websites',
+      '/pages/settings/index.html#@settings-websites',
     ),
   },
   {
     icon: () => 'block-m',
     label: msg`Trackers`,
     href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-trackers',
+      '/pages/settings/index.html#@settings-trackers',
     ),
   },
   {
     icon: () => 'wtm',
     label: 'WhoTracks.Me',
     href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-whotracksme',
+      '/pages/settings/index.html#@settings-whotracksme',
     ),
   },
   {
     icon: (session) => (session.contributor ? 'contributor' : 'user'),
     label: msg`My Account`,
-    href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-account',
-    ),
+    href: chrome.runtime.getURL('/pages/settings/index.html#@settings-account'),
   },
   {},
   {

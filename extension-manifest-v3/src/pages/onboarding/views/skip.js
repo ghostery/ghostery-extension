@@ -20,10 +20,10 @@ export default define({
   tag: 'onboarding-outro-short-skip-view',
   render: () => html`
     <template layout="block">
-      <onboarding-card>
+      <ui-card>
         <section layout="block:center column gap:2">
           <div layout="row center">${disabled}</div>
-          <ui-text type="display-s" color="error-500">
+          <ui-text type="display-s" color="danger-500">
             Ghostery is installed with limited functionality
           </ui-text>
           <ui-text type="body-m">
@@ -31,7 +31,7 @@ export default define({
             websites you visit. You are browsing the web unprotected.
           </ui-text>
         </section>
-      </onboarding-card>
+      </ui-card>
       <ui-text layout="block:center margin:3:0" underline>
         <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
           Terms & Conditions

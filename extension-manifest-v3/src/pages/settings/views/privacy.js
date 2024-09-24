@@ -409,7 +409,7 @@ export default {
                           human right.
                         </ui-text>
                       </div>
-                      <ui-button layout="grow margin:top">
+                      <ui-button type="primary" layout="grow margin:top">
                         <a
                           href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
                           target="_blank"

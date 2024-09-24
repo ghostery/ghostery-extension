@@ -48,13 +48,13 @@ mount(document.body, {
             <ui-icon name="ghosty" color="gray-300" layout="size:4"></ui-icon>
             <ui-icon
               name="alert"
-              color="error-500"
+              color="danger-500"
               layout="absolute bottom:-1 right:-1"
             ></ui-icon>
           </div>
           <div layout="column gap:1.5">
             <div layout="margin:bottom:-1 row">
-              <ui-text type="label-m">
+              <ui-text type="label-l">
                 YouTube blocking you from watching ad-free videos?
               </ui-text>
               <ui-action>

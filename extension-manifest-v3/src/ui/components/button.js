@@ -54,13 +54,13 @@ export default {
 
     :host([type="outline"]) {
       color: var(--ui-color-gray-700);
-      background: var(--ui-color-layout);
+      background: transparent;
       border: 1px solid var(--ui-color-gray-200);
     }
 
     :host([type="outline-error"]) {
-      color: var(--ui-color-error-400);
-      background: var(--ui-color-layout);
+      color: var(--ui-color-danger-500);
+      background: transparent;
       border: 1px solid var(--ui-color-gray-200);
     }
 
@@ -89,11 +89,11 @@ export default {
       }
 
       :host([type="outline"]:hover) {
-        border-color: var(--ui-color-gray-400);
+        border-color: var(--ui-color-gray-300);
       }
 
       :host([type="outline-error"]:hover) {
-        border-color: var(--ui-color-error-400);
+        border-color: var(--ui-color-danger-300);
       }
     }
 
