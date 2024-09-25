@@ -11,6 +11,8 @@
 
 import * as Sentry from '@sentry/browser';
 
+import { observe } from '/store/options.js';
+
 import getBrowserInfo from './browser-info.js';
 import debug, { debugMode } from './debug.js';
 
@@ -42,8 +44,13 @@ getBrowserInfo().then(
   () => {},
 );
 
+let terms = false;
+observe('terms', (value) => {
+  terms = value;
+});
+
 export function captureException(error) {
-  if (!(error instanceof Error)) return;
+  if (!terms || !(error instanceof Error)) return;
 
   const newError = new Error(error.message);
   newError.name = error.name;
