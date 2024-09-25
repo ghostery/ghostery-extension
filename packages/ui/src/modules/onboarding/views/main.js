@@ -56,11 +56,11 @@ export default define({
           </div>
           <ui-text type="body-s" underline>
             ${msg.html`
-              Information about web trackers will be shared in accordance with our <a href="${
+              Information about web trackers, add-on health and performance telemetry will be shared in accordance with our <a href="${
                 __PLATFORM__ === 'firefox'
                   ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
                   : router.url(Privacy)
-              }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community.
+              }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community. | 'add-on' means 'browser extension'
             `}
           </ui-text>
           <div layout="column gap:2">

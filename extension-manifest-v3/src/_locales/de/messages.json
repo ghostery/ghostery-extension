@@ -326,8 +326,9 @@
   "ignore": {
     "message": "Ignorieren"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informationen über Web-Tracker werden gemäß unserer <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um den Schutz der Privatsphäre für die Ghostery-Community zu verbessern."
+  "information_about_web_trackers__add_on_health_and_performance_telemetry_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Informationen über Web-Tracker, sowie Funktions- und Leistungsanalyse der Erweiterung werden gemäß unserer <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> weitergegeben, um den Schutz der Privatsphäre in der gesamten Ghostery-Community zu verbessern.",
+    "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Es existiert dank der Beiträge jedes Ghostery-Nutzers, der sich dafür entscheidet, nicht-personenbezogene Informationen an WhoTracks.Me zu senden. Diese Informationen ermöglichen es Ghostery, Echtzeitinformationen über Tracker zu liefern, die wiederum die gesamte Ghostery-Gemeinschaft schützen."
@@ -619,7 +620,7 @@
     "description": "Tracker category name"
   },
   "updating___": {
-    "message": "aktualisieren..."
+    "message": "Wird aktualisiert..."
   },
   "urls_blocked": {
     "message": "Blockierte URLs"

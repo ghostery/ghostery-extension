@@ -326,8 +326,9 @@
   "ignore": {
     "message": "무시"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "웹 사이트 트래커 정보는 자사 <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 개인정보 보호 기능 품질 개선을 위해 공유됩니다."
+  "information_about_web_trackers__add_on_health_and_performance_telemetry_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "웹 추적기, 애드온 상태 및 성능 원격 측정에 대한 정보는 우리의 <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유되며, Ghostery 커뮤니티의 개인정보 보호를 강화합니다.",
+    "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "이는 모두 WhoTracks.Me에 익명으로 정보를 공유해주시는 모든 소규모 기여자분들 덕분입니다. 모든 정보는 Ghostery가 커뮤니티의 모두에게 실시간 트래커 정보를 기반으로 보호 기능을 제공하는데에 사용됩니다."
