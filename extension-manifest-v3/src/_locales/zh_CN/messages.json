@@ -326,8 +326,9 @@
   "ignore": {
     "message": "忽略"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "根据我们的<a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>，将共享有关网络追踪器的信息，以推进Ghostery社区的隐私保护。."
+  "information_about_web_trackers__add_on_health_and_performance_telemetry_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "有关网页追踪器、附加组件健康和性能遥测的信息将根据我们的<a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>进行共享，推进Ghostery社区的隐私保护。.",
+    "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "它的存在要归功于每个选择将非个人信息给 WhoTracks.Me 的 Ghostery 用户的微小贡献。 这些输入使 Ghostery 能够提供有关跟踪器的实时情报，从而为整个 Ghostery 社区提供保护。"
@@ -629,6 +630,10 @@
   },
   "urls_observed": {
     "message": "观察到的 URL"
+  },
+  "utilities": {
+    "message": "实用工具",
+    "description": "Tracker category name"
   },
   "view_activity_details": {
     "message": "查看活动详情"

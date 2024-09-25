@@ -326,8 +326,9 @@
   "ignore": {
     "message": "Ignore"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Information about web trackers will be shared in accordance with our <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
+  "information_about_web_trackers__add_on_health_and_performance_telemetry_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Information about web trackers, add-on health and performance telemetry will be shared in accordance with our <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community.",
+    "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "It exists thanks to micro-contributions of every Ghostery user who chooses to send non-personal information to WhoTracks.Me. The input enables Ghostery to provide real-time intel on trackers which in turn provides protection to the entire Ghostery community."
@@ -629,6 +630,10 @@
   },
   "urls_observed": {
     "message": "URLs observed"
+  },
+  "utilities": {
+    "message": "Utilities",
+    "description": "Tracker category name"
   },
   "view_activity_details": {
     "message": "View activity details"
