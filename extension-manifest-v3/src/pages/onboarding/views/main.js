@@ -29,7 +29,7 @@ export default define({
           <ui-text type="display-m">Enable Ghostery to get started</ui-text>
         </section>
         <div layout="column gap:2">
-          <ui-text type="body-l" layout="block:center">
+          <ui-text type="label-m" layout="block:center">
             Your Privacy Features:
           </ui-text>
           <div layout="grid:3 gap">
@@ -54,7 +54,7 @@ export default define({
             `}
         </ui-text>
         <div layout="column gap:2">
-          <ui-button type="success">
+          <ui-button type="success" layout="height:5.5">
             <a href="${router.url(Success)}">Enable Ghostery</a>
           </ui-button>
           <onboarding-error-card layout="margin:top">
