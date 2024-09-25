@@ -281,7 +281,7 @@
     "message": "Ghostery nic nie wykryło na tej stronie"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery jest już gotowy, aby blokować trackerów i chronić twoją prywatność podczas przeglądania."
+    "message": "Ghostery jest już gotowy, aby blokować trackery i chronić twoją prywatność podczas przeglądania."
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery jest zainstalowany z ograniczoną funkcjonalnością"
@@ -513,7 +513,7 @@
     "message": "Synchronizacja ustawień"
   },
   "setup_successful": {
-    "message": "Ustawienie zakończone sukcesem"
+    "message": "Skonfigurowano pomyślnie"
   },
   "show_all": {
     "message": "Pokaż wszystkie"
