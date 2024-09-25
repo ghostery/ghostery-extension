@@ -281,7 +281,7 @@
     "message": "Ghostery nic nie wykryło na tej stronie"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery jest już gotowy, aby blokować trackerów i chronić twoją prywatność podczas przeglądania."
+    "message": "Ghostery jest już gotowy, aby blokować trackery i chronić twoją prywatność podczas przeglądania."
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery jest zainstalowany z ograniczoną funkcjonalnością"
@@ -326,8 +326,9 @@
   "ignore": {
     "message": "Zignoruj"
   },
-  "information_about_web_trackers_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informacje o trackerach będą udostępniane zgodnie z naszą <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Polityką prywatności</a>, zwiększającą ochronę prywatności społeczności Ghostery."
+  "information_about_web_trackers__add_on_health_and_performance_telemetry_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Informacje o trackerach oraz telemetrii dotyczącej stanu i wydajności dodatku będą udostępniane zgodnie z naszą <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Polityką Prywatności</a>, zwiększającą ochronę prywatności społeczności Ghostery.",
+    "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
     "message": "Istnieje dzięki mikrowkładom każdego użytkownika Ghostery, który zdecyduje się wysłać nieosobiste informacje do WhoTracks.Me. Wkład ten umożliwia Ghostery dostarczanie w czasie rzeczywistym informacji o trackerach, co z kolei zapewnia ochronę całej społeczności Ghostery."
@@ -512,7 +513,7 @@
     "message": "Synchronizacja ustawień"
   },
   "setup_successful": {
-    "message": "Ustawienie zakończone sukcesem"
+    "message": "Skonfigurowano pomyślnie"
   },
   "show_all": {
     "message": "Pokaż wszystkie"
@@ -629,6 +630,10 @@
   },
   "urls_observed": {
     "message": "Zaobserwowane adresy URL"
+  },
+  "utilities": {
+    "message": "Narzędzia",
+    "description": "Tracker category name"
   },
   "view_activity_details": {
     "message": "Zobacz szczegóły aktywności"
