@@ -456,6 +456,8 @@ export function replace(name, engineOrEngines) {
   const engines = [].concat(engineOrEngines);
   const engine = engines.length > 1 ? FiltersEngine.merge(engines) : engines[0];
 
+  engine.updateEnv(ENV);
+
   saveToMemory(name, engine);
   saveToStorage(name).catch(() => {
     console.error(`[engines] Failed to save engine "${name}" to storage`);
