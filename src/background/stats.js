@@ -163,6 +163,8 @@ function pushTabStats(stats, requests) {
       if (savedRequest) {
         savedRequest.blocked = savedRequest.blocked || request.blocked;
         tracker.blocked = tracker.blocked || savedRequest.blocked;
+        savedRequest.modified = savedRequest.modified || request.modified;
+        tracker.modified = tracker.modified || savedRequest.modified;
       } else {
         tracker.requestsCount = (tracker.requestsCount || 0) + 1;
         tracker.blocked = tracker.blocked || request.blocked;
