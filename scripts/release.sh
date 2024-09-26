@@ -8,12 +8,8 @@ git pull
 git checkout -b release
 git checkout release
 
-# Remove local node_modules if exists
-rm -rf ./node_modules
-
 # Update npm dependencies
-cd .. && npm ci
-cd ./extension-manifest-v3
+npm ci
 
 # Update package version if it is not "build"
 if [ "$1" != "build" ]; then
@@ -34,7 +30,7 @@ version=$(node -p "require('./package.json').version")
 buildVersion=$(cat ./xcode/Ghostery.xcodeproj/project.pbxproj | sed -n -e 's/^.*CURRENT_PROJECT_VERSION = \([0-9][0-9]*\).*$/\1/p' | head -n 1)
 
 # Commit changes
-git add ../package-lock.json .
+git add package-lock.json .
 git commit -m "Release v$version-$buildVersion"
 
 # Open Xcode
