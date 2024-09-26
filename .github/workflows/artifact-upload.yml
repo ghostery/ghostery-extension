@@ -12,9 +12,6 @@ jobs:
   artifact-upload:
     if: contains(github.event.pull_request.labels.*.name, 'package')
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: extension-manifest-v3
     steps:
       - uses: actions/checkout@v2
       - name: Set version and SHA
@@ -47,11 +44,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ghostery-chromium-${{ env.VERSION }}-${{ env.SHA }}
-          path: extension-manifest-v3/web-ext-artifacts/ghostery-chromium/*
+          path: web-ext-artifacts/ghostery-chromium/*
           if-no-files-found: error
       - name: Upload Firefox build
         uses: actions/upload-artifact@v3
         with:
           name: ghostery-firefox-${{ env.VERSION }}-${{ env.SHA }}
-          path: extension-manifest-v3/web-ext-artifacts/ghostery-firefox/*
+          path: web-ext-artifacts/ghostery-firefox/*
           if-no-files-found: error
