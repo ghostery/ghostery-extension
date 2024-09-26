@@ -24,3 +24,16 @@ Thumbs.db
 # NPMs
 node_modules/
 npm-debug.log
+
+# Source
+src/rule_resources
+
+# Build
+dist/
+web-ext-artifacts/
+
+# xcode
+*.xcuserstate
+xcuserdata
+*.xcloc
+xcode/**/*/Package.resolved

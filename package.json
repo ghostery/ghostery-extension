@@ -1,12 +1,35 @@
 {
   "name": "ghostery-extension",
-  "version": "1.0.0",
   "private": true,
+  "version": "10.4.7",
   "type": "module",
   "scripts": {
     "glossary-converter": "node tools/glossary-converter.js",
-    "postinstall": "patch-package && npm run postinstall --workspaces --if-present"
+    "postinstall": "patch-package",
+    "download-engines": "node scripts/download-engines.js",
+    "download-wtm-bloomfilter": "node scripts/download-wtm-bloomfilter.js",
+    "download-wtm-stats": "node scripts/download-wtm-stats.js",
+    "build": "node scripts/build.js",
+    "start": "npm run build -- --watch",
+    "start:update": "./scripts/update.sh",
+    "debug": "npm run build -- --watch --debug",
+    "licenses": "license-report --config=../.license-report-config.json > dist/licenses.html",
+    "lint": "eslint src/",
+    "test": "node --test && npm run lint",
+    "locales:setup": "cp -f ./src/messages.json ./src/_locales/en/messages.json",
+    "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./src/_locales/en/messages.json",
+    "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
+    "locales": "npm run locales:setup && npm run locales.ui && npm run locales.src",
+    "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
+    "release": "./scripts/release.sh",
+    "package": "./scripts/package.sh"
   },
+  "author": {
+    "name": "Ghostery GmbH",
+    "email": "info@ghostery.com",
+    "url": "https://www.ghostery.com"
+  },
+  "license": "MPL-2.0",
   "devDependencies": {
     "csv": "^6.2.5",
     "eslint": "^8.36.0",
@@ -14,19 +37,32 @@
     "eslint-plugin-prettier": "^4.0.0",
     "license-report": "^6.5.0",
     "patch-package": "^6.5.1",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "shelljs": "^0.8.5",
+    "sinon-chrome": "^3.0.1",
+    "vite": "4.5.2",
+    "web-ext": "^8.2.0",
+    "webextension-polyfill": "^0.12.0"
   },
-  "workspaces": [
-    "extension-manifest-v3"
-  ],
-  "overrides": {
-    "ua-parser-js": "1.0.2"
+  "dependencies": {
+    "bowser": "^2.11.0",
+    "@cliqz/adblocker": "^1.33.2",
+    "@cliqz/adblocker-webextension": "^1.33.2",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
+    "@duckduckgo/autoconsent": "^10.15.0",
+    "@github/relative-time-element": "^4.3.0",
+    "@sentry/browser": "^8.26.0",
+    "@whotracksme/reporting": "^5.1.25",
+    "hybrids": "^9.1.1",
+    "idb": "^7.1.1",
+    "jwt-decode": "^4.0.0",
+    "tldts-experimental": "^6.0.19"
   },
   "engineStrict": true,
   "engines": {
     "npm": ">=9.6.7"
   },
-  "dependencies": {
-    "bowser": "^2.11.0"
+  "webExt": {
+    "sourceDir": "./dist/"
   }
 }
