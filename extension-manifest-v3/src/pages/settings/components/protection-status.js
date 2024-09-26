@@ -17,16 +17,12 @@ export default {
     <template layout="row items:center gap">
       ${revokeAt === undefined
         ? html`
-            <gh-settings-badge type="info" uppercase>
-              Active
-            </gh-settings-badge>
+            <settings-badge type="info" uppercase> Active </settings-badge>
           `
         : html`
-            <gh-settings-badge type="warning" uppercase>
-              Paused
-            </gh-settings-badge>
+            <settings-badge type="warning" uppercase> Paused </settings-badge>
             <ui-text color="gray-600" layout="grow">
-              <ui-panel-revoke-at revokeAt="${revokeAt}"></ui-panel-revoke-at>
+              <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
             </ui-text>
           `}
     </template>

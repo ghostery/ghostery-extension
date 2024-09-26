@@ -19,37 +19,33 @@ const MENU = [
   {
     icon: () => 'shield-menu',
     label: msg`Privacy protection`,
-    href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-privacy',
-    ),
+    href: chrome.runtime.getURL('/pages/settings/index.html#@settings-privacy'),
   },
   {
     icon: () => 'websites',
     label: msg`Websites`,
     href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-websites',
+      '/pages/settings/index.html#@settings-websites',
     ),
   },
   {
     icon: () => 'block-m',
     label: msg`Trackers`,
     href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-trackers',
+      '/pages/settings/index.html#@settings-trackers',
     ),
   },
   {
     icon: () => 'wtm',
     label: 'WhoTracks.Me',
     href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-whotracksme',
+      '/pages/settings/index.html#@settings-whotracksme',
     ),
   },
   {
     icon: (session) => (session.contributor ? 'contributor' : 'user'),
     label: msg`My Account`,
-    href: chrome.runtime.getURL(
-      '/pages/settings/index.html#@gh-settings-account',
-    ),
+    href: chrome.runtime.getURL('/pages/settings/index.html#@settings-account'),
   },
   {},
   {
@@ -92,15 +88,15 @@ export default {
   session: store(Session),
   render: ({ session }) => html`
     <template layout="grid grow">
-      <ui-panel-header>
+      <ui-header>
         Menu
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
             <ui-icon name="close" color="gray-800" layout="size:3"></ui-icon>
           </a>
         </ui-action>
-      </ui-panel-header>
-      <gh-panel-container>
+      </ui-header>
+      <panel-container>
         <div layout="column gap:0.5 padding:1:0">
           ${store.ready(session) &&
           html`
@@ -118,9 +114,9 @@ export default {
                         layout@390px="padding:1.5:1"
                         onclick="${openTabWithUrl}"
                       >
-                        <gh-panel-menu-item icon="${icon(session)}">
+                        <panel-menu-item icon="${icon(session)}">
                           ${label}
-                        </gh-panel-menu-item>
+                        </panel-menu-item>
                       </a>
                     </ui-text>
                   `
@@ -138,7 +134,7 @@ export default {
             )}
           `}
         </div>
-      </gh-panel-container>
+      </panel-container>
     </template>
   `,
 };

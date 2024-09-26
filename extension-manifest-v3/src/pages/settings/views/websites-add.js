@@ -40,7 +40,7 @@ export default {
   pauseType: 1,
   render: ({ hostname, pauseType }) => html`
     <template layout>
-      <gh-settings-dialog>
+      <settings-dialog>
         <form
           action="${router.backUrl()}"
           onsubmit="${add}"
@@ -54,7 +54,7 @@ export default {
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Website</ui-text>
-            <gh-settings-input error="${store.error(hostname) || ''}">
+            <settings-input error="${store.error(hostname) || ''}">
               <input
                 type="text"
                 placeholder="${msg`Enter website URL`}"
@@ -62,11 +62,11 @@ export default {
                 oninput="${html.set(hostname, 'value')}"
                 tabindex="1"
               />
-            </gh-settings-input>
+            </settings-input>
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Select time frame</ui-text>
-            <gh-settings-input>
+            <settings-input>
               <select
                 type="text"
                 placeholder="${msg`Enter website URL`}"
@@ -78,18 +78,18 @@ export default {
                 <option value="24">1 day</option>
                 <option value="0">Always</option>
               </select>
-            </gh-settings-input>
+            </settings-input>
           </div>
           <div layout="grid:1|1 gap margin:top:2">
-            <ui-button type="outline" size="small">
+            <ui-button>
               <a href="${router.backUrl()}" tabindex="2">Cancel</a>
             </ui-button>
-            <ui-button size="small">
+            <ui-button type="primary">
               <button type="submit" tabindex="1">Save</button>
             </ui-button>
           </div>
         </form>
-      </gh-settings-dialog>
+      </settings-dialog>
     </template>
   `,
 };

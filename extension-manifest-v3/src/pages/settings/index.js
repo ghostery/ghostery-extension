@@ -9,11 +9,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import '@ghostery/ui/panel';
 import { define, mount, store } from 'hybrids';
+
+import '/ui/index.js';
 
 import Options from '/store/options.js';
 import Settings from './settings.js';
+
+define.from(
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  { root: ['components', 'views'], prefix: 'settings' },
+);
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted
@@ -21,17 +30,6 @@ store
   .resolve(Options)
   .then(({ terms }) => {
     if (!terms) throw Error('Terms not accepted');
-
-    define.from(
-      import.meta.glob(['./components/*.js', './views/*.js'], {
-        eager: true,
-        import: 'default',
-      }),
-      {
-        root: ['components', 'views'],
-        prefix: 'gh-settings',
-      },
-    );
 
     // Safari has a bug where the back button doesn't work properly
     // when the page is loaded from a background page by the chrome.tabs.update API

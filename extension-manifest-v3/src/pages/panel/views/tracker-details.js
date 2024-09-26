@@ -10,7 +10,7 @@
  */
 
 import { html, msg, router, store } from 'hybrids';
-import * as labels from '@ghostery/ui/labels';
+import * as labels from '/ui/labels.js';
 
 import Options, { isPaused } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
@@ -27,16 +27,16 @@ function showCopyNotification(host) {
   const wrapper = document.createDocumentFragment();
 
   Array.from(
-    host.querySelectorAll('#gh-panel-company-alerts gh-panel-alert'),
+    host.querySelectorAll('#panel-company-alerts panel-alert'),
   ).forEach((el) => el.parentNode.removeChild(el));
 
   html`
-    <gh-panel-alert type="success" slide autoclose="2">
+    <panel-alert type="success" slide autoclose="2">
       Copied to clipboard
-    </gh-panel-alert>
+    </panel-alert>
   `(wrapper);
 
-  host.querySelector('#gh-panel-company-alerts').appendChild(wrapper);
+  host.querySelector('#panel-company-alerts').appendChild(wrapper);
 }
 
 export default {
@@ -57,9 +57,9 @@ export default {
     store.ready(options, stats) && isPaused(options, stats.hostname),
   render: ({ tracker, status, wtmUrl, paused, options }) => html`
     <template layout="column">
-      <gh-panel-dialog>
+      <panel-dialog>
         <div
-          id="gh-panel-company-alerts"
+          id="panel-company-alerts"
           layout="absolute inset:1 bottom:auto"
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
@@ -68,10 +68,10 @@ export default {
           slot="header"
           layout="center row items:center gap overflow margin:0.5:0:0:0"
         >
-          <ui-panel-category-icon
+          <ui-category-icon
             name="${tracker.category}"
             layout="size:2.5"
-          ></ui-panel-category-icon>
+          ></ui-category-icon>
           <ui-text slot="header" type="body-s" color="gray-600">
             ${tracker.company &&
             tracker.company !== tracker.name &&
@@ -84,14 +84,14 @@ export default {
           <div layout="grid:1|max gap">
             ${paused
               ? html`
-                  <ui-panel-action layout="width:full" disabled>
+                  <ui-action-button layout="width:full" disabled>
                     <div layout="row gap">
                       <ui-icon name="pause"></ui-icon>
                       <ui-text type="label-m">Ghostery paused</ui-text>
                     </div>
-                  </ui-panel-action>
+                  </ui-action-button>
                 `
-              : html`<ui-panel-action layout="width:full height:auto:4.5">
+              : html`<ui-action-button layout="width:full height:auto:4.5">
                   <a
                     href="${router.url(ProtectionStatus, {
                       trackerId: tracker.id,
@@ -118,19 +118,19 @@ export default {
                             msg`Blocked on all websites`)}
                     </ui-text>
                   </a>
-                </ui-panel-action>`}
+                </ui-action-button>`}
             ${tracker.category !== 'unidentified' &&
             html`
-              <ui-panel-action layout="width:4.5 height:auto:4.5">
+              <ui-action-button layout="width:4.5 height:auto:4.5">
                 <a
                   href="${chrome.runtime.getURL(
-                    `/pages/settings/index.html#@gh-settings-tracker-details?tracker=${tracker.id}`,
+                    `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
                   )}"
                   onclick="${openTabWithUrl}"
                 >
                   <ui-icon name="settings-m"></ui-icon>
                 </a>
-              </ui-panel-action>
+              </ui-action-button>
             `}
           </div>
         `}
@@ -170,9 +170,9 @@ export default {
                   ${tracker.requestsBlocked.map(
                     ({ url }) =>
                       html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
+                        <panel-copy oncopy="${showCopyNotification}">
                           ${url}
-                        </gh-panel-copy>
+                        </panel-copy>
                       `,
                   )}
                 </div>
@@ -189,9 +189,9 @@ export default {
                   ${tracker.requestsModified.map(
                     ({ url }) =>
                       html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
+                        <panel-copy oncopy="${showCopyNotification}">
                           ${url}
-                        </gh-panel-copy>
+                        </panel-copy>
                       `,
                   )}
                 </div>
@@ -208,9 +208,9 @@ export default {
                   ${tracker.requestsObserved.map(
                     ({ url }) =>
                       html`
-                        <gh-panel-copy oncopy="${showCopyNotification}">
+                        <panel-copy oncopy="${showCopyNotification}">
                           ${url}
-                        </gh-panel-copy>
+                        </panel-copy>
                       `,
                   )}
                 </div>
@@ -322,7 +322,7 @@ export default {
             `}
           `}
         </section>
-      </gh-panel-dialog>
+      </panel-dialog>
     </template>
   `,
 };

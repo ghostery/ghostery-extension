@@ -21,10 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: UI
-        run: npm test
-        working-directory: packages/ui
-
       - name: Source
         working-directory: extension-manifest-v3
         run: npm test

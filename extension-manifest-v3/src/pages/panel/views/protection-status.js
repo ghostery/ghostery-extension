@@ -1,6 +1,6 @@
 import { html, msg, router, store } from 'hybrids';
 
-import * as labels from '@ghostery/ui/labels';
+import * as labels from '/ui/labels.js';
 
 import TabStats from '/store/tab-stats.js';
 import {
@@ -36,9 +36,9 @@ export default {
       : { type: tracker.blockedByDefault ? 'block' : 'trust' },
   render: ({ stats, tracker, blocked, status }) => html`
     <template layout="column">
-      <gh-panel-dialog>
+      <panel-dialog>
         <div
-          id="gh-panel-company-alerts"
+          id="panel-company-alerts"
           layout="absolute inset:1 bottom:auto"
         ></div>
         <ui-text slot="header" type="label-l">${tracker.name}</ui-text>
@@ -47,10 +47,10 @@ export default {
           slot="header"
           layout="center row items:center gap overflow margin:0.5:0:0:0"
         >
-          <ui-panel-category-icon
+          <ui-category-icon
             name="${tracker.category}"
             layout="size:2.5"
-          ></ui-panel-category-icon>
+          ></ui-category-icon>
           <ui-text slot="header" type="body-s" color="gray-600">
             ${tracker.company &&
             tracker.company !== tracker.name &&
@@ -100,7 +100,7 @@ export default {
               </ui-toggle>
             </div>
             <ui-line></ui-line>
-            <gh-panel-card layout="column gap">
+            <panel-card layout="column gap">
               <ui-toggle
                 value="${status.website}"
                 onchange="${toggleDomain}"
@@ -118,10 +118,10 @@ export default {
                   </ui-text>
                 </div>
               </ui-toggle>
-            </gh-panel-card>
+            </panel-card>
           </div>
         `}
-      </gh-panel-dialog>
+      </panel-dialog>
     </template>
   `,
 };

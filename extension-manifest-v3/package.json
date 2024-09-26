@@ -40,7 +40,6 @@
     "@cliqz/adblocker-webextension": "^1.33.2",
     "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
     "@duckduckgo/autoconsent": "^10.15.0",
-    "@ghostery/ui": "^1.0.0",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.26.0",
     "@whotracksme/reporting": "^5.1.25",

@@ -9,30 +9,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html, store } from 'hybrids';
-import '@ghostery/ui/onboarding';
+import { define, mount, html, store, router } from 'hybrids';
+
+import '/ui/index.js';
 
 import Options from '/store/options.js';
 import { getBrowserId } from '/utils/browser-info.js';
 
-async function updateOptions(host, event) {
-  const success = event.type === 'success';
+import Main from './views/main.js';
+import Success from './views/success.js';
 
-  await store.set(Options, {
-    terms: success,
-    onboarding: { done: true },
-  });
-}
-
-mount(document.body, {
-  render: () => html`
-    <ui-onboarding
-      platform="${getBrowserId()}"
-      onsuccess="${updateOptions}"
-      onskip="${updateOptions}"
-    ></ui-onboarding>
-  `,
-});
+// Components
+define.from(
+  import.meta.glob('./components/*.js', { eager: true, import: 'default' }),
+  { prefix: 'onboarding', root: 'components' },
+);
 
 store.resolve(Options).then(({ installDate, onboarding }) => {
   store.set(Options, {
@@ -42,4 +33,26 @@ store.resolve(Options).then(({ installDate, onboarding }) => {
     },
     installDate,
   });
+});
+
+function updateOptions(host, event) {
+  store.set(Options, {
+    terms: event.detail.entry.id === Success.tag,
+    onboarding: { done: true },
+  });
+}
+
+mount(document.body, {
+  platform: getBrowserId,
+  stack: router([Main, Success], { params: ['platform'] }),
+  render: {
+    value: ({ stack }) => html`
+      <template layout="grid height::100%">
+        <onboarding-layout>${stack}</onboarding-layout>
+      </template>
+    `,
+    connect: (host) => {
+      host.addEventListener('navigate', updateOptions.bind(null, host));
+    },
+  },
 });

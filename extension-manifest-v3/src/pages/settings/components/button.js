@@ -15,13 +15,13 @@ export default {
   disabled: false,
   render: ({ disabled }) => html`
     <template layout="grid">
-      <ui-panel-action layout="height:5" disabled=${disabled}>
+      <ui-action-button layout="height:5" disabled=${disabled}>
         <button layout="padding:1:1.5">
           <ui-text type="label-m" layout="row gap:0.5">
             <slot></slot>
           </ui-text>
         </button>
-      </ui-panel-action>
+      </ui-action-button>
     </template>
   `,
 };

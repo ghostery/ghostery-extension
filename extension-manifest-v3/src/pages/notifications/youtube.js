@@ -10,7 +10,8 @@
  */
 
 import { mount, html } from 'hybrids';
-import '@ghostery/ui/onboarding';
+
+import '/ui/index.js';
 
 import * as notifications from '/utils/notifications.js';
 
@@ -41,19 +42,19 @@ function openPrivateWindow() {
 mount(document.body, {
   render: () => html`
     <template layout="block overflow">
-      <ui-onboarding-card layout="padding:2">
+      <ui-card layout="padding:2">
         <div layout="row items:start gap:2">
           <div layout="relative">
             <ui-icon name="ghosty" color="gray-300" layout="size:4"></ui-icon>
             <ui-icon
               name="alert"
-              color="error-500"
+              color="danger-500"
               layout="absolute bottom:-1 right:-1"
             ></ui-icon>
           </div>
           <div layout="column gap:1.5">
             <div layout="margin:bottom:-1 row">
-              <ui-text type="label-xl">
+              <ui-text type="label-l">
                 YouTube blocking you from watching ad-free videos?
               </ui-text>
               <ui-action>
@@ -72,19 +73,19 @@ mount(document.body, {
                 </button>
               </ui-action>
             </div>
-            <ui-text type="body-m">
+            <ui-text type="body-s">
               We know you rely on Ghostery for a smooth YouTube experience.
               Until a more refined solution emerges, here’s a temporary fix.
             </ui-text>
             <div layout="column gap">
               <div layout="row gap:0.5">
-                <ui-text type="label-s" translate="no">1.</ui-text>
-                <ui-text type="label-s">
-                  Allow Ghostery in private windows
+                <ui-text type="label-m">
+                  <span translate="no">1.</span> Allow Ghostery in private
+                  windows
                 </ui-text>
               </div>
               <div layout="row">
-                <ui-button type="outline" size="small">
+                <ui-button>
                   <button
                     onclick="${() =>
                       openBlog('enable-extensions-in-incognito')}"
@@ -96,24 +97,24 @@ mount(document.body, {
             </div>
             <div layout="column gap">
               <div layout="row gap:0.5">
-                <ui-text type="label-s" translate="no">2.</ui-text>
-                <ui-text type="label-s">
-                  Open YouTube in a private window
+                <ui-text type="label-m">
+                  <span translate="no">2.</span> Open YouTube in a private
+                  window
                 </ui-text>
               </div>
               <div layout="row">
-                <ui-button type="success" size="small">
+                <ui-button type="success">
                   <button onclick="${openPrivateWindow}">Open video</button>
                 </ui-button>
               </div>
             </div>
             <ui-line></ui-line>
-            <div layout="column gap:1">
-              <ui-text type="body-m">
+            <div layout="column gap:2">
+              <ui-text type="body-s">
                 Learn more about YouTube’s challenges to ad blockers
               </ui-text>
               <div layout="row:wrap gap">
-                <ui-button type="outline" size="small">
+                <ui-button>
                   <button
                     onclick="${() =>
                       openBlog('whats-happening-with-youtube-ads')}"
@@ -121,16 +122,14 @@ mount(document.body, {
                     Visit our blog
                   </button>
                 </ui-button>
-                <ui-button type="transparent" size="small">
-                  <button onclick="${dontAsk}">
-                    <ui-text>Don't ask again</ui-text>
-                  </button>
+                <ui-button type="transparent">
+                  <button onclick="${dontAsk}">Don't ask again</button>
                 </ui-button>
               </div>
             </div>
           </div>
         </div>
-      </ui-onboarding-card>
+      </ui-card>
     </template>
   `,
 });

@@ -26,24 +26,22 @@ import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
-  '/pages/settings/index.html#@gh-settings-privacy',
+  '/pages/settings/index.html#@settings-privacy',
 );
 const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
 
 function showAlert(host, message) {
-  Array.from(host.querySelectorAll('#gh-panel-alerts gh-panel-alert')).forEach(
-    (el) => el.parentNode.removeChild(el),
+  Array.from(host.querySelectorAll('#panel-alerts panel-alert')).forEach((el) =>
+    el.parentNode.removeChild(el),
   );
 
   const wrapper = document.createDocumentFragment();
 
   html`
-    <gh-panel-alert type="info" slide autoclose="5">
-      ${message}
-    </gh-panel-alert>
+    <panel-alert type="info" slide autoclose="5"> ${message} </panel-alert>
   `(wrapper);
 
-  host.querySelector('#gh-panel-alerts').appendChild(wrapper);
+  host.querySelector('#panel-alerts').appendChild(wrapper);
 }
 
 function reloadTab() {
@@ -113,14 +111,14 @@ export default {
       html`
         ${options.terms &&
         html`
-          <ui-panel-header>
+          <ui-header>
             ${stats.hostname &&
             (options.terms
               ? html`
                   <ui-action>
                     <a
                       href="${chrome.runtime.getURL(
-                        '/pages/settings/index.html#@gh-settings-website-details?domain=' +
+                        '/pages/settings/index.html#@settings-website-details?domain=' +
                           stats.hostname,
                       )}"
                       onclick="${openTabWithUrl}"
@@ -146,25 +144,25 @@ export default {
                 <ui-icon name="menu" color="gray-800"></ui-icon>
               </a>
             </ui-action>
-          </ui-panel-header>
+          </ui-header>
         `}
         <section
-          id="gh-panel-alerts"
+          id="panel-alerts"
           layout="fixed inset:1 bottom:auto layer:200"
         ></section>
         ${options.terms
           ? stats.hostname &&
             html`
-              <gh-panel-pause
+              <panel-pause
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
                 paused="${paused || globalPause}"
                 global="${globalPause}"
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
               >
-              </gh-panel-pause>
+              </panel-pause>
             `
           : html`
-              <gh-panel-button>
+              <panel-button>
                 <a
                   href="${chrome.runtime.getURL(
                     '/pages/onboarding/index.html',
@@ -175,12 +173,12 @@ export default {
                   <ui-icon name="play"></ui-icon>
                   Enable Ghostery
                 </a>
-              </gh-panel-button>
+              </panel-button>
             `}
-        <gh-panel-container>
+        <panel-container>
           ${stats.hostname
             ? html`
-                <ui-panel-stats
+                <ui-stats
                   domain="${stats.hostname}"
                   categories="${stats.topCategories}"
                   trackers="${stats.trackers}"
@@ -193,17 +191,17 @@ export default {
                   layout@390px="margin:1.5:1.5:2"
                   wtm-link="${hasWTMStats(stats.hostname)}"
                 >
-                </ui-panel-stats>
+                </ui-stats>
                 ${!paused &&
                 !globalPause &&
                 !!(stats.trackersModified || stats.trackersBlocked) &&
                 html`
-                  <gh-panel-feedback
+                  <panel-feedback
                     modified=${stats.trackersModified}
                     blocked=${stats.trackersBlocked}
                     layout="margin:bottom:1.5"
                     layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
-                  ></gh-panel-feedback>
+                  ></panel-feedback>
                 `}
               `
             : html`
@@ -236,33 +234,33 @@ export default {
               onclick="${openTabWithUrl}"
               layout="block margin:1.5:1.5:0"
             >
-              <gh-panel-options-item
+              <panel-options-item
                 icon="ads"
                 enabled="${options.blockAds}"
                 terms="${options.terms}"
               >
                 Ad-Blocking
-              </gh-panel-options-item>
-              <gh-panel-options-item
+              </panel-options-item>
+              <panel-options-item
                 icon="tracking"
                 enabled="${options.blockTrackers}"
                 terms="${options.terms}"
               >
                 Anti-Tracking
-              </gh-panel-options-item>
-              <gh-panel-options-item
+              </panel-options-item>
+              <panel-options-item
                 icon="autoconsent"
                 enabled="${options.blockAnnoyances}"
                 terms="${options.terms}"
               >
                 Never-Consent
-              </gh-panel-options-item>
+              </panel-options-item>
             </a>
           </ui-text>
-        </gh-panel-container>
+        </panel-container>
         ${store.ready(notification) &&
         html`
-          <gh-panel-notification
+          <panel-notification
             icon="${notification.icon}"
             href="${notification.url}"
             type="${notification.type}"
@@ -270,7 +268,7 @@ export default {
           >
             ${notification.text}
             <span slot="action">${notification.action}</span>
-          </gh-panel-notification>
+          </panel-notification>
         `}
       `}
     </template>

@@ -1,0 +1,22 @@
+html {
+  height: auto;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  max-height: 100dvh;
+}
+
+@media screen and (max-height: 600px) {
+  html {
+    overflow-y: auto;
+  }
+
+  body {
+    max-height: 600px;
+  }
+}

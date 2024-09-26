@@ -95,7 +95,7 @@ export default {
     filter,
   }) => html`
     <template layout="contents">
-      <gh-settings-page-layout layout="gap:4">
+      <settings-page-layout layout="gap:4">
         ${store.ready(options) &&
         html`
           <section layout="column gap:4" layout@768px="gap:5">
@@ -126,7 +126,7 @@ export default {
               </ui-text>
             </div>
             <div layout="row:wrap gap items:center">
-              <gh-settings-button
+              <settings-button
                 layout="width::12 grow"
                 layout@768px="grow:0"
                 onclick="${html.set(
@@ -135,8 +135,8 @@ export default {
                 )}"
               >
                 ${category !== '_all' ? msg`Expand` : msg`Collapse`}
-              </gh-settings-button>
-              <gh-settings-input layout="grow" layout@768px="grow:0">
+              </settings-button>
+              <settings-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
                   <option selected value="">Show all</option>
                   <option value="adjusted">
@@ -149,15 +149,15 @@ export default {
                     <!-- Plural form - list of trusted trackers | tracker-list -->Trusted
                   </option>
                 </select>
-              </gh-settings-input>
-              <gh-settings-input layout="grow:5 width::250px" icon="search">
+              </settings-input>
+              <settings-input layout="grow:5 width::250px" icon="search">
                 <input
                   type="search"
                   defaultValue="${query}"
                   oninput="${setLazyQuery}"
                   placeholder="${msg`Search for a tracker or organization...`}"
                 />
-              </gh-settings-input>
+              </settings-input>
             </div>
             <div layout="column gap:0.5">
               ${store.ready(categories) &&
@@ -171,7 +171,7 @@ export default {
                   blockedByDefault,
                 }) =>
                   html`
-                    <gh-settings-trackers-list
+                    <settings-trackers-list
                       name="${key}"
                       description="${description}"
                       open="${isActive(category, key)}"
@@ -222,14 +222,14 @@ export default {
                                         <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                       </ui-text>
                                     `}
-                                    <ui-panel-protection-status-toggle
+                                    <ui-protection-status-toggle
                                       value="${store.ready(tracker.exception)
                                         ? tracker.exception.blocked
                                         : tracker.blockedByDefault}"
                                       responsive
                                       onchange="${toggleException(tracker)}"
                                       layout="shrink:0"
-                                    ></ui-panel-protection-status-toggle>
+                                    ></ui-protection-status-toggle>
                                   </div>
                                 </div>
                               `.key(tracker.id),
@@ -238,19 +238,19 @@ export default {
                         ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
                         html`
                           <div layout="row center margin:bottom:2">
-                            <gh-settings-button onclick="${loadMore(key)}">
+                            <settings-button onclick="${loadMore(key)}">
                               Load more
-                            </gh-settings-button>
+                            </settings-button>
                           </div>
                         `}
                       `}
-                    </gh-settings-trackers-list>
+                    </settings-trackers-list>
                   `.key(key),
               )}
             </div>
           </section>
         `}
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

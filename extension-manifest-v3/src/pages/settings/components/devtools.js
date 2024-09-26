@@ -85,12 +85,7 @@ export default {
             <div layout="column gap">
               <ui-text type="headline-s">Storage actions</ui-text>
               <div layout="row gap items:start">
-                <ui-button
-                  size="small"
-                  type="outline"
-                  onclick="${clearStorage}"
-                  layout="shrink:0"
-                >
+                <ui-button onclick="${clearStorage}" layout="shrink:0">
                   <button>Clear local storage</button>
                 </ui-button>
               </div>
@@ -119,12 +114,7 @@ export default {
                       ),
                   )}
                 </div>
-                <ui-button
-                  size="small"
-                  type="outline"
-                  onclick="${refresh}"
-                  layout="shrink:0"
-                >
+                <ui-button onclick="${refresh}" layout="shrink:0">
                   <button>Refresh</button>
                 </ui-button>
               </div>

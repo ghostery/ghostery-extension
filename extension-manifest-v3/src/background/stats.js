@@ -11,8 +11,8 @@
 
 import { store } from 'hybrids';
 
-import { getOffscreenImageData } from '@ghostery/ui/wheel';
-import { order } from '@ghostery/ui/categories';
+import { getOffscreenImageData } from '/ui/wheel.js';
+import { order } from '/ui/categories.js';
 
 import DailyStats from '/store/daily-stats.js';
 import Options, { isPaused, observe } from '/store/options.js';

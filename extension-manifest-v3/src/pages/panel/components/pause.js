@@ -86,7 +86,7 @@ export default {
             </ui-text>
             ${!!revokeAt &&
             html`<ui-text type="body-xs" color="inherit">
-              <ui-panel-revoke-at revokeAt="${revokeAt}"></ui-panel-revoke-at>
+              <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
             </ui-text>`}
             <slot></slot>
           </div>
@@ -211,17 +211,18 @@ export default {
     /* Website paused */
 
     :host([paused]) {
-      background: var(--ui-color-warning-100);
+      background: var(--ui-color-warning-200);
     }
 
     :host([paused]) #main {
       box-shadow: none;
       background: var(--ui-color-warning-500);
-      color: var(--ui-color-gray-800);
+      color: var(--ui-color-warning-100);
     }
 
     :host([paused]) #type {
       background: var(--ui-color-layout);
+      color: var(--ui-color-gray-800);
       border: none;
       pointer-events: all;
       overflow: hidden;
@@ -296,10 +297,6 @@ export default {
 
       #type-list {
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-      }
-
-      :host([paused]) #label {
-        color: var(--ui-color-gray-100);
       }
 
       :host([global]) #label,

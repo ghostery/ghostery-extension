@@ -89,7 +89,7 @@ export default {
   },
   render: ({ websites, query }) => html`
     <template layout="contents">
-      <gh-settings-page-layout layout="gap:4">
+      <settings-page-layout layout="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <div layout="row items:center content:space-between">
             <ui-text type="headline-m">Websites</ui-text>
@@ -100,21 +100,21 @@ export default {
         </div>
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="row items:center gap:2">
-            <gh-settings-input icon="search" layout="grow:1">
+            <settings-input icon="search" layout="grow:1">
               <input
                 type="search"
                 value="${query}"
                 placeholder="${msg`Search website...`}"
                 oninput="${html.set('query')}"
               />
-            </gh-settings-input>
-            <ui-button size="small">
+            </settings-input>
+            <ui-button>
               <a href="${router.url(WebsitesAdd)}">Add</a>
             </ui-button>
           </div>
           ${websites.length
             ? html`
-                <gh-settings-table responsive>
+                <settings-table responsive>
                   <div
                     slot="header"
                     layout="column"
@@ -167,10 +167,10 @@ export default {
                             layout="area:2"
                             layout@768px="hidden"
                           ></ui-line>
-                          <gh-settings-protection-status
+                          <settings-protection-status
                             layout@768px="grow"
                             revokeAt="${item.revokeAt}"
-                          ></gh-settings-protection-status>
+                          ></settings-protection-status>
                           <div
                             layout="row items:center gap self:center"
                             layout@768px="grow self:auto"
@@ -183,7 +183,7 @@ export default {
                       </ui-action>
                     `,
                   )}
-                </gh-settings-table>
+                </settings-table>
               `
             : !query &&
               html`
@@ -199,7 +199,7 @@ export default {
                 </div>
               `}
         </section>
-      </gh-settings-page-layout>
+      </settings-page-layout>
     </template>
   `,
 };

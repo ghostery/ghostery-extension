@@ -1,0 +1,150 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/Inter-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/Inter-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/Inter-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  --ui-color-layout: white;
+
+  --ui-color-gray-800: #2b2f3b;
+  --ui-color-gray-600: #555962;
+  --ui-color-gray-400: #a7a7aa;
+  --ui-color-gray-300: #cdced0;
+  --ui-color-gray-200: #e3e5e8;
+  --ui-color-gray-100: #f3f4f7;
+
+  --ui-color-primary-700: #0077cc;
+  --ui-color-primary-500: #00aef0;
+  --ui-color-primary-300: #9adeff;
+  --ui-color-primary-200: #daf3ff;
+  --ui-color-primary-100: #ebf7fd;
+
+  --ui-color-success-700: #008d00;
+  --ui-color-success-500: #0ab00a;
+  --ui-color-success-100: #ebfaeb;
+
+  --ui-color-warning-500: #ffbb00;
+  --ui-color-warning-200: #fff7e6;
+  --ui-color-warning-100: #13151a;
+
+  --ui-color-danger-700: #c80f11;
+  --ui-color-danger-500: #f13436;
+  --ui-color-danger-300: #efb1b3;
+  --ui-color-danger-100: #ffebeb;
+
+  --ui-color-backdrop: var(--ui-color-gray-600);
+  --ui-color-warning-text: var(--ui-color-gray-800);
+  --ui-color-scroll-shadow: rgba(0, 0, 0, 0.1);
+
+  --ui-color-inherit: inherit;
+
+  --ui-shadow-header: 0px 4px 16px rgba(32, 44, 68, 0.1);
+
+  --ui-font-family: 'Inter', sans-serif;
+  --ui-font-family-label: var(--ui-font-family);
+
+  --ui-font-display-m: 700 28px / 30px var(--ui-font-family);
+  --ui-font-display-s: 700 22px / 24px var(--ui-font-family);
+  --ui-font-display-xs: 700 18px / 20px var(--ui-font-family);
+
+  --ui-font-headline-l: 600 30px / 40px var(--ui-font-family);
+  --ui-font-headline-m: 600 24px / 32px var(--ui-font-family);
+  --ui-font-headline-s: 600 18px / 22px var(--ui-font-family);
+  --ui-font-headline-xs: 600 16px / 20px var(--ui-font-family);
+
+  --ui-font-label-l: 600 16px / 20px var(--ui-font-family);
+  --ui-font-label-m: 600 14px / 18px var(--ui-font-family);
+  --ui-font-label-s: 600 12px / 16px var(--ui-font-family);
+  --ui-font-label-xs: 600 11px / 14px var(--ui-font-family);
+
+  --ui-font-body-l: 400 16px / 20px var(--ui-font-family);
+  --ui-font-body-m: 400 14px / 18px var(--ui-font-family);
+  --ui-font-body-s: 400 12px / 16px var(--ui-font-family);
+  --ui-font-body-xs: 400 11px / 14px var(--ui-font-family);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --ui-color-layout: #1f2125;
+
+    --ui-color-gray-800: #f2f4f7;
+    --ui-color-gray-600: #b9bbbe;
+    --ui-color-gray-400: #88898c;
+    --ui-color-gray-300: #636468;
+    --ui-color-gray-200: #36393f;
+    --ui-color-gray-100: #13151a;
+
+    --ui-color-primary-700: #33c7ff;
+    --ui-color-primary-500: #00aef0;
+    --ui-color-primary-300: #004f88;
+    --ui-color-primary-200: #00365c;
+    --ui-color-primary-100: #0a1e31;
+
+    --ui-color-success-700: #36b736;
+    --ui-color-success-500: #1b911b;
+    --ui-color-success-100: #056605;
+
+    --ui-color-warning-500: #ffbb00;
+    --ui-color-warning-200: #3c3523;
+    --ui-color-warning-100: #13151a;
+
+    --ui-color-danger-700: #e05c5e;
+    --ui-color-danger-500: #cd393c;
+    --ui-color-danger-300: #7f3d3d;
+    --ui-color-danger-100: #251314;
+
+    --ui-color-backdrop: var(--ui-color-gray-100);
+    --ui-color-scroll-shadow: rgba(0, 0, 0, 0.4);
+
+    --ui-shadow-header: 0px 1px 0px var(--ui-color-gray-200);
+  }
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  background: var(--ui-color-layout);
+  color: var(--ui-color-gray-800);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Open Sans', Arial,
+    Helvetica, sans-serif;
+  font-size: 13px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  margin: 0;
+  align-self: center;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 4L4 12M4 4L12 12' stroke='%2349556e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}

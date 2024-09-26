@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { drawWheel } from '@ghostery/ui/wheel';
+import { drawWheel } from '/ui/wheel.js';
 
 const WRAPPER_CLASS = 'wtm-popup-iframe-wrapper';
 

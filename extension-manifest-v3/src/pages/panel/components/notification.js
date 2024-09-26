@@ -43,24 +43,24 @@ export default {
     </template>
   `.css`
     :host {
-      --ui-panel-notification-bg: var(--ui-color-gray-100);
-      --ui-panel-notification-color: var(--ui-color-primary-700);
+      --ui-notification-bg: var(--ui-color-gray-100);
+      --ui-notification-color: var(--ui-color-primary-700);
     }
 
     :host([type="warning"]) {
-      --ui-panel-notification-bg: var(--ui-color-danger-100);
-      --ui-panel-notification-color: var(--ui-color-danger-700);
+      --ui-notification-bg: var(--ui-color-danger-100);
+      --ui-notification-color: var(--ui-color-danger-700);
     }
 
     a {
-      background: var(--ui-panel-notification-bg);
+      background: var(--ui-notification-bg);
       border-radius: 12px;
       text-decoration: none;
       color: inherit;
     }
 
     #action {
-      color: var(--ui-panel-notification-color);
+      color: var(--ui-notification-color);
     }
 
     #icon {
@@ -70,7 +70,7 @@ export default {
     }
 
     ui-icon {
-      color: var(--ui-panel-notification-color);
+      color: var(--ui-notification-color);
     }
 
     @media (hover: hover) {
