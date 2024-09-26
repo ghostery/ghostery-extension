@@ -162,7 +162,7 @@ export default {
               </panel-pause>
             `
           : html`
-              <panel-button>
+              <ui-button type="danger" layout="height:6 margin:1.5">
                 <a
                   href="${chrome.runtime.getURL(
                     '/pages/onboarding/index.html',
@@ -173,7 +173,7 @@ export default {
                   <ui-icon name="play"></ui-icon>
                   Enable Ghostery
                 </a>
-              </panel-button>
+              </ui-button>
             `}
         <panel-container>
           ${stats.hostname

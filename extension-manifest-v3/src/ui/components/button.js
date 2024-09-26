@@ -26,6 +26,7 @@ export default {
   },
   render: () => html`<slot></slot>`.css`
     :host {
+      display: block;
       box-sizing: border-box;
       height: 40px;
       font: var(--ui-font-label-m);
@@ -33,6 +34,10 @@ export default {
       white-space: nowrap;
       transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
       box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
+    }
+
+    :host([hidden]) {
+      display: none;
     }
 
     :host([type="primary"]) {
@@ -47,6 +52,12 @@ export default {
       border: 1px solid var(--ui-color-success-500);
     }
 
+    :host([type="danger"]) {
+      color: white;
+      background: var(--ui-color-danger-500);
+      border: 1px solid var(--ui-color-danger-500);
+    }
+
     :host([type="transparent"]) {
       border: 1px solid transparent;
       box-shadow: none;
@@ -58,7 +69,7 @@ export default {
       border: 1px solid var(--ui-color-gray-200);
     }
 
-    :host([type="outline-error"]) {
+    :host([type="outline-danger"]) {
       color: var(--ui-color-danger-500);
       background: var(--ui-color-danger-100);
       border: 1px solid var(--ui-color-danger-300);
@@ -84,6 +95,10 @@ export default {
         background: var(--ui-color-success-700);
       }
 
+      :host([type="danger"]:hover) {
+        background: var(--ui-color-danger-700);
+      }
+
       :host([type="transparent"]:hover) {
         text-decoration: underline;
       }
@@ -92,7 +107,7 @@ export default {
         border-color: var(--ui-color-gray-300);
       }
 
-      :host([type="outline-error"]:hover) {
+      :host([type="outline-danger"]:hover) {
         border-color: var(--ui-color-danger-500);
       }
     }

@@ -62,7 +62,7 @@ export default define({
               Without privacy features enabled, only basic functionality of
               naming trackers is available.
             </ui-text>
-            <ui-button type="outline-error">
+            <ui-button type="outline-danger">
               <a href="${router.url(Skip)}">Keep disabled</a>
             </ui-button>
           </onboarding-error-card>
