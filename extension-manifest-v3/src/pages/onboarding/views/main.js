@@ -44,7 +44,7 @@ export default define({
             </onboarding-feature>
           </div>
         </div>
-        <ui-text underline>
+        <ui-text type="body-s" underline>
           ${msg.html`
               Information about web trackers, add-on health and performance telemetry will be shared in accordance with our <a href="${
                 __PLATFORM__ === 'firefox'

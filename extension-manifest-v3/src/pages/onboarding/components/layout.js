@@ -32,11 +32,6 @@ export default {
       </div>
     </template>
   `.css`
-    @media (prefers-color-scheme: dark) {
-      #bg { display: none; }
-      :host { background: var(--ui-color-gray-100); }
-    }
-
     #bg { transform: translateX(-50%); }
 
     #c-1 {
@@ -51,6 +46,14 @@ export default {
 
     header {
       color: var(--ui-color-primary-500);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        background: var(--ui-color-gray-100);
+      }
+
+      #bg { display: none; }
     }
    `,
 };

@@ -10,6 +10,7 @@
  */
 import { localize } from 'hybrids';
 
+// Localize wrapper for chrome.i18n
 if (typeof chrome === 'object' && chrome.i18n) {
   localize(chrome.i18n.getMessage.bind(chrome.i18n), { format: 'chrome.i18n' });
 }
