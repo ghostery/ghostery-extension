@@ -4,8 +4,8 @@
   "version": "10.4.7",
   "type": "module",
   "scripts": {
-    "glossary-converter": "node tools/glossary-converter.js",
     "postinstall": "patch-package",
+    "glossary-converter": "node tools/glossary-converter.js",
     "download-engines": "node scripts/download-engines.js",
     "download-wtm-bloomfilter": "node scripts/download-wtm-bloomfilter.js",
     "download-wtm-stats": "node scripts/download-wtm-stats.js",
@@ -17,19 +17,12 @@
     "lint": "eslint src/",
     "test": "node --test && npm run lint",
     "locales:setup": "cp -f ./src/messages.json ./src/_locales/en/messages.json",
-    "locales.ui": "hybrids extract -c --format=chrome.i18n ../node_modules/@ghostery/ui ./src/_locales/en/messages.json",
     "locales.src": "hybrids extract -c --format=chrome.i18n ./src ./src/_locales/en/messages.json",
-    "locales": "npm run locales:setup && npm run locales.ui && npm run locales.src",
+    "locales": "npm run locales:setup && npm run locales.src",
     "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
     "release": "./scripts/release.sh",
     "package": "./scripts/package.sh"
   },
-  "author": {
-    "name": "Ghostery GmbH",
-    "email": "info@ghostery.com",
-    "url": "https://www.ghostery.com"
-  },
-  "license": "MPL-2.0",
   "devDependencies": {
     "csv": "^6.2.5",
     "eslint": "^8.36.0",
@@ -64,5 +57,11 @@
   },
   "webExt": {
     "sourceDir": "./dist/"
-  }
+  },
+  "author": {
+    "name": "Ghostery GmbH",
+    "email": "info@ghostery.com",
+    "url": "https://www.ghostery.com"
+  },
+  "license": "MPL-2.0"
 }
