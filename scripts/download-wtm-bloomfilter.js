@@ -9,15 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync } from 'fs';
-import { resolve } from 'path';
-import shelljs from 'shelljs';
+import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 const BASE_URL = 'https://cdn.ghostery.com/antitracking/whitelist/2';
 const TARGET_PATH = resolve('src/rule_resources/whotracksme');
 
-shelljs.rm('-rf', TARGET_PATH);
-shelljs.mkdir('-p', TARGET_PATH);
+rmSync(TARGET_PATH, { recursive: true, force: true });
+mkdirSync(TARGET_PATH, { recursive: true });
 
 const update = await fetch(`${BASE_URL}/update.json.gz`).then((res) => {
   if (!res.ok) {

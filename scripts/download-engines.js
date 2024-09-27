@@ -9,10 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { createHash } from 'crypto';
-import { resolve } from 'path';
-import shelljs from 'shelljs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
 
 import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
 import REGIONS from '../src/utils/regions.js';
@@ -64,7 +63,7 @@ const CDN_HOSTNAME = process.argv.includes('--staging')
 
 console.log(`Downloading engines from ${CDN_HOSTNAME}...`);
 
-shelljs.mkdir('-p', TARGET_PATH);
+mkdirSync(TARGET_PATH, { recursive: true });
 
 for (const [name, target] of Object.entries(ENGINES)) {
   process.stdout.write(`Downloading "${name}"...`);
@@ -164,7 +163,7 @@ for (const [name, target] of Object.entries(DNR)) {
 // Extract resources from ads engine
 console.log('Extracting resources...');
 
-shelljs.mkdir('-p', resolve(TARGET_PATH, 'redirects'));
+mkdirSync(resolve(TARGET_PATH, 'redirects'), { recursive: true });
 
 const seenResource = new Set();
 const allowedResourceExtensions = [
