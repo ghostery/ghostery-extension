@@ -38,7 +38,6 @@
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "bowser": "^2.11.0",
     "@cliqz/adblocker": "^1.33.2",
     "@cliqz/adblocker-webextension": "^1.33.2",
     "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
@@ -46,7 +45,8 @@
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.26.0",
     "@whotracksme/reporting": "^5.1.25",
-    "hybrids": "^9.1.1",
+    "bowser": "^2.11.0",
+    "hybrids": "^9.1.7",
     "idb": "^7.1.1",
     "jwt-decode": "^4.0.0",
     "tldts-experimental": "^6.0.19"
