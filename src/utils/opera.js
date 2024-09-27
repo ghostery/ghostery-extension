@@ -36,7 +36,7 @@ export async function isSerpSupported() {
       setCookie('opera_serp_notification', 'true', 60 * 60 * 24 * 365 * 10);
 
       isSupported = true;
-    } catch (e) {
+    } catch {
       // Clear out the cookie if it was set
       setCookie('opera_serp_notification', undefined);
 

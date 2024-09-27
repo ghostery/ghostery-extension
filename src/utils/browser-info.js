@@ -24,7 +24,7 @@ function getUA() {
 async function getExtendedBrowserInfo() {
   try {
     return chrome.runtime.getBrowserInfo();
-  } catch (e) {
+  } catch {
     return null;
   }
 }

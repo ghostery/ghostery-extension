@@ -33,7 +33,7 @@ function detectWall(cb) {
       if (document.querySelector(SELECTORS)?.clientHeight > 0) {
         try {
           cb();
-        } catch (e) {
+        } catch {
           /* ignore */
         }
       } else {
