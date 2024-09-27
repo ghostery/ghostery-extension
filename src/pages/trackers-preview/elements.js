@@ -9,7 +9,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import './styles.css';
+import { define } from 'hybrids';
 
-import './localize.js';
-import './elements.js';
+define.from(
+  import.meta.glob(['./components/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  {
+    root: ['components'],
+    prefix: 'trackers-preview',
+  },
+);

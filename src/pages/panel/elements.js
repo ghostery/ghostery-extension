@@ -8,8 +8,15 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { define } from 'hybrids';
 
-import './styles.css';
-
-import './localize.js';
-import './elements.js';
+define.from(
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  {
+    root: ['components', 'views'],
+    prefix: 'panel',
+  },
+);

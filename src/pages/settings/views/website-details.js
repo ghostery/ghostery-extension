@@ -50,7 +50,7 @@ function revokePaused({ options, domain }) {
 }
 
 export default {
-  [router.connect]: { stack: [TrackerDetails] },
+  [router.connect]: { stack: () => [TrackerDetails] },
   domain: '',
   trackers: ({ domain }) => {
     const exceptions = store.get([TrackerException]);
