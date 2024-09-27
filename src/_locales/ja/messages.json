@@ -227,9 +227,6 @@
   "enable_ghostery_to_get_started": {
     "message": "Ghosteryを有効にして開始する"
   },
-  "enable_new_setup": {
-    "message": "新規設定を有効にする"
-  },
   "enable_now": {
     "message": "今すぐ有効化"
   },
@@ -478,9 +475,6 @@
   },
   "regional_filters": {
     "message": "地域フィルター"
-  },
-  "renew_ghostery_for_full_protection": {
-    "message": "Ghosteryを更新して包括的な保護機能を利用する"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "ブラウザのツールバーのGhosteryのアイコンをトラッカーホイールに置き換えます。"

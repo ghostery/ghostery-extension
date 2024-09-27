@@ -227,9 +227,6 @@
   "enable_ghostery_to_get_started": {
     "message": "시작하려면 Ghostery를 사용 설정해주세요"
   },
-  "enable_new_setup": {
-    "message": "Enable New Setup"
-  },
   "enable_now": {
     "message": "지금 사용 시작"
   },
@@ -478,9 +475,6 @@
   },
   "regional_filters": {
     "message": "지역 필터"
-  },
-  "renew_ghostery_for_full_protection": {
-    "message": "모든 보호 기능을 사용하려면 Ghostery 구독을 다시 시작하세요"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "트래커 휠로 브라우저 툴바의 Ghostery 아이콘을 대체합니다."

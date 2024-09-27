@@ -227,9 +227,6 @@
   "enable_ghostery_to_get_started": {
     "message": "Włącz Ghostery, aby rozpocząć"
   },
-  "enable_new_setup": {
-    "message": "Aktywuj nową konfigurację"
-  },
   "enable_now": {
     "message": "Włącz teraz"
   },
@@ -478,9 +475,6 @@
   },
   "regional_filters": {
     "message": "Filtry regionalne"
-  },
-  "renew_ghostery_for_full_protection": {
-    "message": "wznów Ghostery, żeby uzyskać pełną ochronę"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Zastępuje ikonę Ghostery w pasku narzędzi przeglądarki ikoną koła."
