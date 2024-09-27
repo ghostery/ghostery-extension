@@ -321,7 +321,7 @@ const buildPromise = build({
             .replace('node_modules', 'npm')
             .replace('_virtual', 'virtual');
 
-          const path = name.replace(resolve(pwd, '..'), '');
+          const path = name.replace(pwd, '');
           if (path.length > 100 && !argv['no-filename-limit']) {
             throw new Error(
               `Filename too long: ${path} (${path.length}) (pass --no-filename-limit to disable; for instance, "npm run build firefox -- --no-filename-limit")`,
@@ -344,10 +344,7 @@ for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
       '-p',
       resolve(options.outDir, id.split('/').slice(0, -1).join('/')),
     );
-    shelljs.cp(
-      path.replace('node_modules', '../node_modules'),
-      resolve(options.outDir, id),
-    );
+    shelljs.cp(path, resolve(options.outDir, id));
   } else {
     // build content scripts
     build({

@@ -24,7 +24,7 @@ curl -L -o dist.zip "https://github.com/ghostery/ghostery-extension/releases/dow
 unzip dist.zip -d ./dist
 rm dist.zip
 
-../node_modules/.bin/web-ext run --target=$webExtTarget --no-reload --devtools >/dev/null &
+node_modules/.bin/web-ext run --target=$webExtTarget --no-reload --devtools >/dev/null &
 pid=$!
 
 read -p "Booting up the target browser. Press enter to rebuild from source.."
