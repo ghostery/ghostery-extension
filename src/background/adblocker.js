@@ -522,6 +522,8 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       if (htmlFilters.length !== 0) {
+        request.modified = true;
+        updateTabStats(details.tabId, [request]);
         filterRequestHTML(
           chrome.webRequest.filterResponseData,
           request,
