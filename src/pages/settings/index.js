@@ -9,20 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, mount, store } from 'hybrids';
+import { mount, store } from 'hybrids';
 
 import '/ui/index.js';
 
 import Options from '/store/options.js';
 import Settings from './settings.js';
 
-define.from(
-  import.meta.glob(['./components/*.js', './views/*.js'], {
-    eager: true,
-    import: 'default',
-  }),
-  { root: ['components', 'views'], prefix: 'settings' },
-);
+import './elements.js';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted

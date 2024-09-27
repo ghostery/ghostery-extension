@@ -8,26 +8,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import './safari-monkey-patch.js';
-
-import { define, mount, router, html } from 'hybrids';
+import { mount, router, html } from 'hybrids';
 
 import '/ui/index.js';
+
+import './elements.js';
 import './styles.css';
 
 import Home from './views/home.js';
-
-// Define components and views
-define.from(
-  import.meta.glob(['./components/*.js', './views/*.js'], {
-    eager: true,
-    import: 'default',
-  }),
-  {
-    root: ['components', 'views'],
-    prefix: 'panel',
-  },
-);
 
 // Mount the app
 mount(document.body, {

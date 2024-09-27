@@ -9,11 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, mount, html } from 'hybrids';
+import { mount, html } from 'hybrids';
+import { getWTMStats } from '/utils/wtm-stats.js';
 
 import '/ui/index.js';
-
-import { getWTMStats } from '/utils/wtm-stats';
+import './elements.js';
 
 function close() {
   window.parent.postMessage('WTMReportClosePopups', '*');
@@ -35,17 +35,6 @@ if (window.parent !== window) {
     box: 'border-box',
   });
 }
-
-define.from(
-  import.meta.glob(['./components/*.js'], {
-    eager: true,
-    import: 'default',
-  }),
-  {
-    root: ['components'],
-    prefix: 'trackers-preview',
-  },
-);
 
 mount(document.body, {
   render: () => html`
