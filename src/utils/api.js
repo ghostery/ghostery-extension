@@ -59,7 +59,7 @@ if (__PLATFORM__ === 'safari') {
           );
         }
       }
-    } catch (e) {
+    } catch {
       // Protect against throwing an error when trying to detect the offset
     }
   })();

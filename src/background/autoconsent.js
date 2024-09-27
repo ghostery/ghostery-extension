@@ -39,7 +39,7 @@ async function initialize(msg, tab, frameId) {
           frameId,
         },
       );
-    } catch (e) {
+    } catch {
       // The error is thrown when the tab is not ready to receive messages,
       // like it is closed before the message is sent
     }

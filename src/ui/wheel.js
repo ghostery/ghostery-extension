@@ -94,7 +94,7 @@ export function getOffscreenImageData(size, categories, options) {
   let canvas;
   try {
     canvas = new OffscreenCanvas(size, size);
-  } catch (e) {
+  } catch {
     canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;

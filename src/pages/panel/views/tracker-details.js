@@ -168,12 +168,11 @@ export default {
               <div layout="column gap:2">
                 <div layout="column gap">
                   ${tracker.requestsBlocked.map(
-                    ({ url }) =>
-                      html`
-                        <panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </panel-copy>
-                      `,
+                    ({ url }) => html`
+                      <panel-copy oncopy="${showCopyNotification}">
+                        ${url}
+                      </panel-copy>
+                    `,
                   )}
                 </div>
               </div>
@@ -187,12 +186,11 @@ export default {
               <div layout="column gap:2">
                 <div layout="column gap">
                   ${tracker.requestsModified.map(
-                    ({ url }) =>
-                      html`
-                        <panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </panel-copy>
-                      `,
+                    ({ url }) => html`
+                      <panel-copy oncopy="${showCopyNotification}">
+                        ${url}
+                      </panel-copy>
+                    `,
                   )}
                 </div>
               </div>
@@ -206,12 +204,11 @@ export default {
               <div layout="column gap:2">
                 <div layout="column gap">
                   ${tracker.requestsObserved.map(
-                    ({ url }) =>
-                      html`
-                        <panel-copy oncopy="${showCopyNotification}">
-                          ${url}
-                        </panel-copy>
-                      `,
+                    ({ url }) => html`
+                      <panel-copy oncopy="${showCopyNotification}">
+                        ${url}
+                      </panel-copy>
+                    `,
                   )}
                 </div>
               </div>

@@ -185,65 +185,62 @@ export default {
 
                   <section id="content" layout="column gap:0.5">
                     ${trackers.map(
-                      (tracker) =>
-                        html`
-                          <div
-                            layout="row gap content:space-between items:center"
-                          >
-                            <ui-text type="body-s">
+                      (tracker) => html`
+                        <div
+                          layout="row gap content:space-between items:center"
+                        >
+                          <ui-text type="body-s">
+                            <a
+                              href="${router.url(dialog, {
+                                trackerId: tracker.id,
+                              })}"
+                              layout="row items:center gap:0.5 padding:0.5:0"
+                            >
+                              <ui-tooltip>
+                                <span slot="content">
+                                  View activity details
+                                </span>
+                                <ui-tracker-name>
+                                  ${tracker.name}
+                                </ui-tracker-name>
+                              </ui-tooltip>
+                              <ui-badge> ${tracker.requestsCount} </ui-badge>
+                              ${tracker.blocked &&
+                              html`<ui-icon
+                                name="block-s"
+                                color="danger-700"
+                              ></ui-icon>`}
+                              ${tracker.modified &&
+                              html`<ui-icon
+                                name="eye"
+                                color="primary-700"
+                              ></ui-icon>`}
+                            </a>
+                          </ui-text>
+                          ${!paused &&
+                          html`
+                            <ui-action-button layout="shrink:0 width:4.5">
                               <a
-                                href="${router.url(dialog, {
+                                href="${router.url(exceptionDialog, {
                                   trackerId: tracker.id,
                                 })}"
-                                layout="row items:center gap:0.5 padding:0.5:0"
+                                layout="row center relative"
                               >
-                                <ui-tooltip>
-                                  <span slot="content">
-                                    View activity details
-                                  </span>
-                                  <ui-tracker-name>
-                                    ${tracker.name}
-                                  </ui-tracker-name>
-                                </ui-tooltip>
-                                <ui-badge> ${tracker.requestsCount} </ui-badge>
-                                ${tracker.blocked &&
-                                html`<ui-icon
-                                  name="block-s"
-                                  color="danger-700"
-                                ></ui-icon>`}
-                                ${tracker.modified &&
-                                html`<ui-icon
-                                  name="eye"
-                                  color="primary-700"
-                                ></ui-icon>`}
+                                <ui-protection-status-icon
+                                  blockByDefault="${tracker.blockedByDefault}"
+                                  status="${store.ready(tracker.exception)
+                                    ? tracker.exception.getDomainStatus(domain)
+                                    : {
+                                        type: tracker.blockedByDefault
+                                          ? 'block'
+                                          : 'trust',
+                                      }}"
+                                ></ui-protection-status-icon>
                               </a>
-                            </ui-text>
-                            ${!paused &&
-                            html`
-                              <ui-action-button layout="shrink:0 width:4.5">
-                                <a
-                                  href="${router.url(exceptionDialog, {
-                                    trackerId: tracker.id,
-                                  })}"
-                                  layout="row center relative"
-                                >
-                                  <ui-protection-status-icon
-                                    blockByDefault="${tracker.blockedByDefault}"
-                                    status="${store.ready(tracker.exception)
-                                      ? tracker.exception.getDomainStatus(
-                                          domain,
-                                        )
-                                      : {
-                                          type: tracker.blockedByDefault
-                                            ? 'block'
-                                            : 'trust',
-                                        }}"
-                                  ></ui-protection-status-icon>
-                                </a>
-                              </ui-action-button>
-                            `}
-                          </div>
-                        `,
+                            </ui-action-button>
+                          `}
+                        </div>
+                      `,
                     )}
                   </section>
                 </ui-list>

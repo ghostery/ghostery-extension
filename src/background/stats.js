@@ -54,7 +54,7 @@ async function hasAccessToPage(tabId) {
   try {
     await chrome.scripting.insertCSS({ target: { tabId }, css: '' });
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
