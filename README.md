@@ -1,7 +1,5 @@
 # Ghostery Browser Extension
 
-> A powerful privacy extension that blocks ads, prevents trackers, and accelerates website loading
-
 Ghostery is a powerful Tracker & Adblocker extension for Chrome with over 100 million downloads. Block ads, stop trackers, and speed up websites. Privacy at its best.
 
 * Block all ads on websites, including YouTube and Facebook, to focus on the information that matters.
@@ -27,13 +25,19 @@ Ghostery is a powerful Tracker & Adblocker extension for Chrome with over 100 mi
 
 ## Development
 
-To start the local version of the extension in Chrome, run the following commands:
+First, install dependencies and download additional resources (e.g. block lists):
 
 ```bash
-npm i && npm start
+npm ci
 ```
 
-Add the target after the command to run the extension in a different browser:
+Then, start the local version of the extension in Chrome:
+
+```bash
+npm start
+```
+
+You can add the target after the `start` command to run the extension in a different browser:
 
 * Firefox - `npm start firefox`
 * Opera - `npm start -- --browser=opera`
@@ -43,7 +47,7 @@ Add the target after the command to run the extension in a different browser:
 
 > The build script assumes that you are using macOS, and browsers are installed in the default locations
 
-To run it locally in Safari, you have to use Xcode as well. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
+To run local version in Safari, you have to use Xcode as well. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
 
 ## Ghostery Team
 
