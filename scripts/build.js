@@ -9,11 +9,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { resolve, dirname, join } from 'path';
-import { readFileSync, writeFileSync, readdirSync } from 'fs';
-import { exec, execSync } from 'child_process';
+import { resolve, dirname, join, basename } from 'node:path';
+import {
+  readFileSync,
+  writeFileSync,
+  readdirSync,
+  rmSync,
+  mkdirSync,
+  cpSync,
+} from 'node:fs';
+import { exec, execSync } from 'node:child_process';
 import { build } from 'vite';
-import shelljs from 'shelljs';
 import webExt from 'web-ext';
 
 import REGIONS from '../src/utils/regions.js';
@@ -92,21 +98,23 @@ const config = {
 // --- Generate dist structure ---
 
 // generate dist folder
-shelljs.rm('-rf', options.outDir);
-shelljs.mkdir('-p', options.outDir);
+rmSync(options.outDir, { recursive: true, force: true });
+mkdirSync(options.outDir, { recursive: true });
 
 // copy static assets
 options.assets.forEach((path) => {
-  shelljs.mkdir('-p', resolve(options.outDir, path));
-  shelljs.cp(
-    '-r',
-    resolve(options.srcDir, path, '*'),
-    resolve(options.outDir, path),
-  );
+  mkdirSync(resolve(options.outDir, path), { recursive: true });
+  for (const file of readdirSync(resolve(options.srcDir, path))) {
+    cpSync(
+      resolve(options.srcDir, path, file),
+      resolve(options.outDir, path, file),
+      { recursive: true },
+    );
+  }
 });
 
 // copy adblocker engines
-shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources'));
+mkdirSync(resolve(options.outDir, 'rule_resources'), { recursive: true });
 
 const engines = [
   'ads',
@@ -119,19 +127,17 @@ const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {
   const path = `engine-${engine}${engineType}.dat`;
-  const result = shelljs.cp(
+  cpSync(
     resolve(options.srcDir, 'rule_resources', path),
-    resolve(options.outDir, 'rule_resources'),
+    resolve(options.outDir, 'rule_resources', path),
   );
-  if (result.stderr) process.exit(1);
 });
 
 // copy trackerdb engine
-const trackerdbResult = shelljs.cp(
+cpSync(
   resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.dat'),
-  resolve(options.outDir, 'rule_resources'),
+  resolve(options.outDir, 'rule_resources', 'engine-trackerdb.dat'),
 );
-if (trackerdbResult.stderr) process.exit(1);
 
 // copy declarative net request lists
 if (manifest.declarative_net_request?.rule_resources) {
@@ -139,6 +145,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 
   manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
     const dir = dirname(path);
+    const file = basename(path);
     const sourcePath = resolve(options.srcDir, path);
     const destPath = resolve(options.outDir, dir);
 
@@ -148,9 +155,8 @@ if (manifest.declarative_net_request?.rule_resources) {
       rulesCount += list?.length;
     }
 
-    shelljs.mkdir('-p', destPath);
-    const result = shelljs.cp(sourcePath, destPath);
-    if (result.stderr) process.exit(1);
+    mkdirSync(destPath, { recursive: true });
+    cpSync(sourcePath, resolve(destPath, file));
   });
 
   if (argv.target === 'safari') {
@@ -165,12 +171,17 @@ if (manifest.declarative_net_request?.rule_resources) {
   }
 
   // copy redirect rule resources
-  shelljs.mkdir('-p', resolve(options.outDir, 'rule_resources/redirects'));
-  shelljs.cp(
-    '-r',
-    resolve(options.srcDir, 'rule_resources/redirects', '*'),
-    resolve(options.outDir, 'rule_resources/redirects'),
-  );
+  mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
+    recursive: true,
+  });
+  for (const file of readdirSync(
+    resolve(options.srcDir, 'rule_resources', 'redirects'),
+  )) {
+    cpSync(
+      resolve(options.srcDir, 'rule_resources', 'redirects', file),
+      resolve(options.outDir, 'rule_resources', 'redirects', file),
+    );
+  }
 
   // append web_accessible_resources
   const redirectResources = readdirSync(
@@ -264,8 +275,8 @@ manifest.web_accessible_resources?.forEach((entry) => {
     }
     if (!path.match(/\.(js|css|html)$/)) {
       const dir = dirname(path);
-      shelljs.mkdir('-p', resolve(options.outDir, dir));
-      shelljs.cp('', path, resolve(options.outDir, dir));
+      mkdirSync(resolve(options.outDir, dir), { recursive: true });
+      cpSync(path, resolve(options.outDir, dir));
     } else {
       if (path.match(/\.html$/)) {
         source.push(path);
@@ -340,11 +351,10 @@ const buildPromise = build({
 for (const [id, path] of Object.entries(mapPaths(content_scripts))) {
   // Copy assets
   if (!path.endsWith('.js')) {
-    shelljs.mkdir(
-      '-p',
-      resolve(options.outDir, id.split('/').slice(0, -1).join('/')),
-    );
-    shelljs.cp(path, resolve(options.outDir, id));
+    mkdirSync(resolve(options.outDir, id.split('/').slice(0, -1).join('/')), {
+      recursive: true,
+    });
+    cpSync(path, resolve(options.outDir, id));
   } else {
     // build content scripts
     build({
