@@ -227,9 +227,6 @@
   "enable_ghostery_to_get_started": {
     "message": "启用 Ghostery 以开始使用"
   },
-  "enable_new_setup": {
-    "message": "启用新设置"
-  },
   "enable_now": {
     "message": "立即启用"
   },
@@ -478,9 +475,6 @@
   },
   "regional_filters": {
     "message": "区域过滤器"
-  },
-  "renew_ghostery_for_full_protection": {
-    "message": "续订 GHOSTERY 以获得全面保护"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "将浏览器工具栏的 Ghostery 图标替换为跟踪器轮盘。"

@@ -227,9 +227,6 @@
   "enable_ghostery_to_get_started": {
     "message": "Aktivieren Sie Ghostery, um loszulegen"
   },
-  "enable_new_setup": {
-    "message": "Neue Einrichtung aktivieren"
-  },
   "enable_now": {
     "message": "Jetzt aktivieren"
   },
@@ -478,9 +475,6 @@
   },
   "regional_filters": {
     "message": "Regionale Filter"
-  },
-  "renew_ghostery_for_full_protection": {
-    "message": "erneuern Sie GHOSTERY für vollständigen Schutz"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Ersetzt das Ghostery-Symbol in der Werkzeugleiste des Browsers mit dem Tracker-Rad."

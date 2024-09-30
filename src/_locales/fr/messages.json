@@ -227,9 +227,6 @@
   "enable_ghostery_to_get_started": {
     "message": "Donnez le feu vert à Ghostery"
   },
-  "enable_new_setup": {
-    "message": "Activer la nouvelle configuration"
-  },
   "enable_now": {
     "message": "Activer maintenant"
   },
@@ -478,9 +475,6 @@
   },
   "regional_filters": {
     "message": "Filtres régionaux"
-  },
-  "renew_ghostery_for_full_protection": {
-    "message": "Renouvelez Ghostery pour bénéficier d'une protection complète"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Remplace l'icône Ghostery dans la barre d'outils du navigateur par l'anneau des trackers."
