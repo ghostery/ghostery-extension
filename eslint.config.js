@@ -29,6 +29,6 @@ export default [
     },
   },
   {
-    ignores: ['/src/rule_resources*'],
+    ignores: ['src/rule_resources*'],
   },
 ];
