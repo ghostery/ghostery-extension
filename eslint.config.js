@@ -22,7 +22,6 @@ export default [
         ...globals.serviceworker,
         ...globals.webextensions,
         __PLATFORM__: 'readonly',
-        Intl: true,
       },
 
       ecmaVersion: 'latest',
