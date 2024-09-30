@@ -47,7 +47,7 @@
     "@whotracksme/reporting": "^5.1.25",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.7",
-    "idb": "^7.1.1",
+    "idb": "^8.0.0",
     "jwt-decode": "^4.0.0",
     "tldts-experimental": "^6.1.48"
   },
