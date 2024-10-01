@@ -328,7 +328,7 @@ const buildPromise = build({
         assetFileNames: 'assets/[name].[ext]',
         sanitizeFileName: (name) => {
           name = name
-            .replace(/[\0?*]+/g, '_') // eslint-disable-line no-control-regex
+            .replace(/[\0?*]+/g, '_')
             .replace('node_modules', 'npm')
             .replace('_virtual', 'virtual');
 

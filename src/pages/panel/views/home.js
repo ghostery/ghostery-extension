@@ -162,7 +162,11 @@ export default {
               </panel-pause>
             `
           : html`
-              <ui-button type="danger" layout="height:6 margin:1.5">
+              <ui-button
+                type="danger"
+                layout="height:6 margin:1.5"
+                data-qa="enable"
+              >
                 <a
                   href="${chrome.runtime.getURL(
                     '/pages/onboarding/index.html',
