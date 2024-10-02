@@ -9,9 +9,9 @@ After passing all the following tests, it can be assumed with a high level of co
 
 Dictionary:
 
-- `TEST PAGE` - The test pages can be adjusted. The examples mentioned in the steps below are those on which the functionality you want to test can be quickly checked.
-- `REGIONAL TEST PAGE` - The regional test page can be changed to a different one. Likewise, the region itself can be changed to any other region.
-- `CUSTOM FILTER` - The custom filter can be changed in any way according to the instruction 'Learn more on supported syntax'.
+* `TEST PAGE` - The test pages can be adjusted. The examples mentioned in the steps below are those on which the functionality you want to test can be quickly checked.
+* `REGIONAL TEST PAGE` - The regional test page can be changed to a different one. Likewise, the region itself can be changed to any other region.
+* `CUSTOM FILTER` - The custom filter can be changed in any way according to the instruction 'Learn more on supported syntax'.
 
 ## Onboarding
 
@@ -152,7 +152,7 @@ On the test pages, trackers are not blocked or modified, ads are visible.
 4. Add CUSTOM FILTER `example.com##+js(rpnt, h1, Example Domain, "hello world")`
 5. Tick the checkbox for "Allow trusted scriplets" and Save it.
 6. Reload website `TEST PAGE` (https://example.com/).
-9. Text `Example Domain` is changed to `hello world`.
+7. Text `Example Domain` is changed to `hello world`.
 
 On the test page, the text has been modified.
 

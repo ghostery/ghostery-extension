@@ -118,6 +118,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
+                  data-qa="toggle:ad-blocking"
                 >
                   <div layout="column gap:0.5 grow">
                     <div layout="row gap items:center">
@@ -137,6 +138,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
+                  data-qa="toggle:anti-tracking"
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">

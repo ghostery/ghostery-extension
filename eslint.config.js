@@ -33,7 +33,7 @@ export default [
         ...globals.mocha,
       },
     },
-    files: ['tests/**/specs/**/*.js'],
+    files: ['tests/**/*.spec.js'],
   },
   {
     ignores: ['dist/*', 'xcode/*', 'src/rule_resources*'],

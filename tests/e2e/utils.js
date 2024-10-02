@@ -40,18 +40,23 @@ const SCHEME =
     ? 'chrome-extension'
     : 'moz-extension';
 
-export async function navigateToPage(page, file = 'index.html') {
+export async function navigateToExtensionPage(page, file = 'index.html') {
   await browser.url(
     `${SCHEME}://${await getExtensionId()}/pages/${page}/${file}`,
   );
 }
 
-export function getElement(id) {
+export function getExtensionElement(id) {
   return $(`[data-qa="${id}"]`);
 }
 
 export async function enableExtension() {
-  await navigateToPage('onboarding');
-  await getElement('button:enable').click();
-  await getElement('view:success');
+  await navigateToExtensionPage('onboarding');
+
+  const el = getExtensionElement('button:enable');
+
+  if (await el.isDisplayed()) {
+    await el.click();
+    await getExtensionElement('view:success');
+  }
 }
