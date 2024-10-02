@@ -157,6 +157,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
+                  data-qa="toggle:never-consent"
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">

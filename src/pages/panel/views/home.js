@@ -165,7 +165,7 @@ export default {
               <ui-button
                 type="danger"
                 layout="height:6 margin:1.5"
-                data-qa="enable"
+                data-qa="button:enable"
               >
                 <a
                   href="${chrome.runtime.getURL(

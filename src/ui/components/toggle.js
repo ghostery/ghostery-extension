@@ -32,7 +32,7 @@ export default {
   noLabel: { value: false, reflect: true },
   render: {
     value: ({ disabled, value }) => html`
-      <template layout="contents">
+      <template layout="grid">
         <button
           onclick="${toggle}"
           layout="row items:start gap:2 padding:0.5 margin:-0.5"
