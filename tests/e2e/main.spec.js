@@ -24,52 +24,53 @@ async function updatePrivacySettings(name, value) {
   }
 
   await expect(toggle).toHaveElementProperty('value', value);
+  await browser.pause(1000);
 }
 
 describe('Main features', () => {
   before(enableExtension);
 
-  describe('Never-consent', () => {
+  describe.only('Never-consent', () => {
     beforeEach(() => updatePrivacySettings('never-consent', false));
 
-    const ESPN_CONSENT_POPUP_SELECTOR = '#onetrust-banner-sdk';
+    const CONSENT_WEBSITE = 'https://www.onet.pl/';
+    const CONSENT_POPUP_SELECTOR = '.cmp-popup_popup';
 
     it('should display consent popup', async () => {
-      await browser.navigateTo('https://www.espn.com/');
-      await expect($(ESPN_CONSENT_POPUP_SELECTOR)).toBeDisplayed();
+      await browser.navigateTo(CONSENT_WEBSITE);
+      await expect($(CONSENT_POPUP_SELECTOR)).toBeDisplayed();
     });
 
     it('should close the consent popup', async () => {
       await updatePrivacySettings('never-consent', true);
 
-      await browser.navigateTo('https://www.espn.com/');
-      await expect($(ESPN_CONSENT_POPUP_SELECTOR)).not.toBeDisplayed();
+      await browser.navigateTo(CONSENT_WEBSITE);
+      await expect($(CONSENT_POPUP_SELECTOR)).not.toBeDisplayed();
     });
   });
 
-  describe.skip('Ad-Blocking', () => {
+  describe('Ad-Blocking', () => {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
+    const ADS_WEBSITE = 'https://www.onet.pl/';
+    const ADS_SELECTOR = '[class*="AdSlotPlaceholder_"]';
+
     it('should display ads on a page', async () => {
-      await browser.navigateTo('https://www.espn.com/');
-      await browser.pause(1000); // Wait for ads to load
+      await browser.navigateTo(ADS_WEBSITE);
 
       let displayed = false;
-      for (const ad of await $$('.ad-300')) {
+      for (const ad of await $$(ADS_SELECTOR)) {
         if (displayed) break;
         displayed = await ad.isDisplayed();
       }
-
-      await browser.debug();
     });
 
     it('should block ads on a page', async () => {
       await updatePrivacySettings('ad-blocking', true);
 
-      await browser.navigateTo('https://www.espn.com/');
-      await browser.pause(1000); // Wait for ads to load
+      await browser.navigateTo(ADS_WEBSITE);
 
-      for (const ad of await $$('.ad-300')) {
+      for (const ad of await $$(ADS_SELECTOR)) {
         await expect(ad).not.toBeDisplayed();
       }
     });
