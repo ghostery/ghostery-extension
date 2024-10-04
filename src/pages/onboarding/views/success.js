@@ -9,7 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
+
+import { getBrowserId } from '/utils/browser-info.js';
 
 import protection from '../illustrations/protection.js';
 
@@ -23,9 +25,8 @@ const PIN_EXTENSION_IMAGES = {
   opera: pinExtensionOpera,
 };
 
-export default define({
-  tag: 'onboarding-outro-success-view',
-  platform: '',
+export default {
+  platform: getBrowserId,
   render: ({ platform }) => html`
     <template layout="column gap">
       <ui-card data-qa="view:success">
@@ -74,4 +75,4 @@ export default define({
       `}
     </template>
   `,
-});
+};

@@ -9,21 +9,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, msg, router } from 'hybrids';
+import { html, msg, router } from 'hybrids';
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
+import AddonHealth from './addon-health.js';
+import WebTrackers from './web-trackers.js';
+import Performance from './performance.js';
 import Privacy from './privacy.js';
 import Skip from './skip.js';
 import Success from './success.js';
 
 const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 
-export default define({
-  [router.connect]: { stack: [Privacy, Skip] },
-  tag: 'onboarding-main-view',
+export default {
+  [router.connect]: {
+    stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
+  },
   render: () => html`
     <template layout="grow column gap">
-      <ui-card layout="gap:3">
+      <ui-card layout="gap:2">
         <section layout="block:center column gap margin:2:0:1">
           <ui-text type="body-l">Welcome to Ghostery</ui-text>
           <ui-text type="display-m">Enable Ghostery to get started</ui-text>
@@ -46,12 +50,22 @@ export default define({
         </div>
         <ui-text type="body-s" underline>
           ${msg.html`
-              Information about web trackers, add-on health and performance telemetry will be shared in accordance with our <a href="${
+              Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
+              <a href="${router.url(AddonHealth)}">add-on health</a> and
+              <a href="${router.url(Performance)}">performance telemetry</a>
+              will be shared in accordance with our <a href="${
                 __PLATFORM__ === 'firefox'
                   ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
                   : router.url(Privacy)
               }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community. | 'add-on' means 'browser extension'
             `}
+        </ui-text>
+        <ui-text type="body-s" color="gray-600">
+          Ghostery never collects nor sells any information connected to you
+          like passwords, browsing history, search queries, or the contents of
+          the pages you visit. Being an EU company, Ghostery strictly adheres to
+          the GDPR (General Data Protection Regulation), which regulates data
+          collection to ensure user's privacy.
         </ui-text>
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
@@ -77,4 +91,4 @@ export default define({
       </div>
     </template>
   `,
-});
+};

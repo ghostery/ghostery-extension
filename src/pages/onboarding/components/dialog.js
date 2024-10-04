@@ -22,8 +22,8 @@ export default {
         layout="column shrink:0 relative width:full::600px height:::full"
       >
         <div
-          layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:12"
-          layout@768px="padding:5 padding:bottom:15"
+          layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:10"
+          layout@768px="padding:4 padding:bottom:12"
         >
           <header><slot name="header"></slot></header>
           <slot></slot>
