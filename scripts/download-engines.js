@@ -13,7 +13,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 
-import { ENGINE_VERSION, FiltersEngine } from '@cliqz/adblocker';
+import { ENGINE_VERSION } from '@cliqz/adblocker';
 import REGIONS from '../src/utils/regions.js';
 
 function createChecksum(content) {
@@ -160,54 +160,47 @@ for (const [name, target] of Object.entries(DNR)) {
   }
 }
 
-// Extract resources from ads engine
-console.log('Extracting resources...');
+console.log('Downloading redirect resources...');
 
 mkdirSync(resolve(TARGET_PATH, 'redirects'), { recursive: true });
 
-const seenResource = new Set();
-const allowedResourceExtensions = [
-  'html',
-  'js',
-  'css',
-  'mp4',
-  'mp3',
-  'xml',
-  'txt',
-  'json',
-  'png',
-  'gif',
-  'empty',
-];
-
-FiltersEngine.deserialize(
-  readFileSync(`${TARGET_PATH}/engine-ads.dat`),
-).resources.resources.forEach((value, key) => {
-  // refs https://github.com/gorhill/uBlock/tree/master/src/web_accessible_resources
-  if (
-    value.contentType === 'application/javascript' &&
-    (value.body.includes('scriptletGlobals') || // Drop scriptlets
-      key.includes('/')) // Drop resources within a directory
-  ) {
-    return;
+const { revisions: resourcesRevisions } = await fetch(
+  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`
+).then((res) => {
+  if (!res.ok) {
+    throw new Error(
+      `Failed to download allowed list for "ublock-resources-json": ${res.status}: ${res.statusText}`,
+    );
   }
 
-  if (
-    !allowedResourceExtensions.includes(key.split('.').pop()) // Drop resources with an unknown file extension
-  ) {
-    return;
-  }
-
-  if (seenResource.has(value.body)) {
-    return;
-  }
-
-  seenResource.add(value.body);
-
-  // Decode base64
-  if (value.contentType.endsWith(';base64')) {
-    value.body = Buffer.from(value.body, 'base64').toString('binary');
-  }
-
-  writeFileSync(resolve(TARGET_PATH, 'redirects', key), value.body);
+  return res.json();
 });
+const latestResourceRevision = resourcesRevisions.at(-1);
+
+const resources = await fetch(
+  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${latestResourceRevision}/list.txt`
+).then((res) => {
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch resources: ${res.status}: ${res.statusText}`,
+    );
+  }
+
+  return res.json();
+});
+
+for (const redirect of resources.redirects) {
+  const outputPath = resolve(TARGET_PATH, 'redirects', redirect.names[0])
+
+  if (redirect.encoding === 'base64') {
+    writeFileSync(
+      outputPath,
+      Buffer.from(redirect.content, 'base64').toString('binary'),
+    );
+  } else {
+    writeFileSync(
+      outputPath,
+      redirect.content,
+    );
+  }
+}
