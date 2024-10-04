@@ -13,13 +13,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
     case 'getCurrentTab':
       chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
-        if (!tab || tab.id !== sender.tab.id) {
+        if (tab.url !== sender.url) {
           sendResponse(tab);
         } else {
           chrome.tabs
             .query({ active: true, currentWindow: false })
-            .then(([tab]) => {
-              sendResponse(tab);
+            .then(([otherTab]) => {
+              sendResponse(otherTab || tab);
             });
         }
       });

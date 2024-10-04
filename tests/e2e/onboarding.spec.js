@@ -20,6 +20,7 @@ describe('Onboarding', () => {
     await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
     await browser.url(await getExtensionPageURL('panel'));
+
     await expect(getExtensionElement('button:enable')).toBeDisplayed();
   });
 

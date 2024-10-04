@@ -35,7 +35,7 @@ if (process.env.DEBUG) {
   };
 } else {
   config = {
-    specs: ['*.spec.js'],
+    specs: [['*.spec.js']],
     capabilities: [
       {
         browserName: 'chrome',
