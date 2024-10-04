@@ -34,8 +34,7 @@ export default {
           Ghostery never collects nor sells any information connected to you
           like passwords, browsing history, search queries, or the contents of
           the pages you visit. Being an EU company, Ghostery strictly adheres to
-          the GDPR (General Data Protection Regulation), which regulates data
-          collection to ensure user's privacy.
+          the GDPR, which regulates data collection to ensure user's privacy.
         </ui-text>
         <ui-button slot="footer">
           <a href="${router.backUrl()}">Done</a>
