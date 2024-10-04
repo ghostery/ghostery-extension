@@ -48,6 +48,7 @@ export default {
             oninput="${html.set(input, 'text')}"
             disabled="${!store.ready(input) || disabled}"
             defaultValue="${store.ready(input) ? input.text : ''}"
+            data-qa="textarea:custom-filters"
           ></textarea>
         </settings-input>
 
@@ -55,6 +56,7 @@ export default {
           layout="self:start"
           onclick="${update}"
           disabled="${disabled}"
+          data-qa="button:custom-filters:save"
         >
           <button>Save</button>
         </ui-button>

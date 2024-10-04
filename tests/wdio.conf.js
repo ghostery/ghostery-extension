@@ -16,50 +16,52 @@ import { promises as fs } from 'node:fs';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const extPath = path.join(__dirname, '..', 'web-ext-artifacts');
 
-export const config = process.env.DEBUG
-  ? {
-      specs: [['*.spec.js']],
-      capabilities: [
-        {
-          browserName: 'chrome',
-          'goog:chromeOptions': {
-            args: [`--load-extension=${path.join(__dirname, '..', 'dist')}`],
-          },
+export let config = null;
+
+if (process.env.DEBUG) {
+  config = {
+    specs: [['*.spec.js']],
+    capabilities: [
+      {
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+          args: [`--load-extension=${path.join(__dirname, '..', 'dist')}`],
         },
-      ],
-      injectGlobals: false,
-      reporters: ['spec'],
-      logLevel: 'warn',
-      mochaOpts: { timeout: 24 * 60 * 60 * 1000 },
-    }
-  : {
-      specs: ['*.spec.js'],
-      capabilities: [
-        {
-          browserName: 'chrome',
-          'goog:chromeOptions': {
-            args: [
-              'headless',
-              'disable-gpu',
-              `--load-extension=${path.join(extPath, 'ghostery-chromium')}`,
-            ],
-          },
-        },
-        {
-          browserName: 'firefox',
-          'moz:firefoxOptions': { args: ['-headless'] },
-        },
-      ],
-      injectGlobals: false,
-      reporters: ['spec'],
-      logLevel: 'silent',
-      mochaOpts: { timeout: 24 * 60 * 60 * 1000 },
-      before: async (capabilities, specs, browser) => {
-        if (capabilities.browserName === 'firefox') {
-          const extension = await fs.readFile(
-            path.join(extPath, 'ghostery-firefox.zip'),
-          );
-          await browser.installAddOn(extension.toString('base64'), true);
-        }
       },
-    };
+    ],
+    reporters: ['spec'],
+    logLevel: 'error',
+    mochaOpts: { timeout: 24 * 60 * 60 * 1000 },
+  };
+} else {
+  config = {
+    specs: ['*.spec.js'],
+    capabilities: [
+      {
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+          args: [
+            'headless',
+            'disable-gpu',
+            `--load-extension=${path.join(extPath, 'ghostery-chromium')}`,
+          ],
+        },
+      },
+      {
+        browserName: 'firefox',
+        'moz:firefoxOptions': { args: ['-headless'] },
+      },
+    ],
+    reporters: ['spec'],
+    logLevel: 'silent',
+    injectGlobals: false,
+    before: async (capabilities, specs, browser) => {
+      if (capabilities.browserName === 'firefox') {
+        const extension = await fs.readFile(
+          path.join(extPath, 'ghostery-firefox.zip'),
+        );
+        await browser.installAddOn(extension.toString('base64'), true);
+      }
+    },
+  };
+}

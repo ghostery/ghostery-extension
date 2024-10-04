@@ -9,27 +9,27 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { expect } from '@wdio/globals';
-import { navigateToExtensionPage, getExtensionElement } from './utils.js';
+import { browser, expect } from '@wdio/globals';
+import { getExtensionElement, getExtensionPageURL } from './utils.js';
 
 describe('Onboarding', () => {
   it('should keep ghostery disabled', async () => {
-    await navigateToExtensionPage('onboarding');
+    await browser.url(await getExtensionPageURL('onboarding'));
 
     await getExtensionElement('button:skip').click();
     await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
-    await navigateToExtensionPage('panel');
+    await browser.url(await getExtensionPageURL('panel'));
     await expect(getExtensionElement('button:enable')).toBeDisplayed();
   });
 
   it('should enable ghostery', async () => {
-    await navigateToExtensionPage('onboarding');
+    await browser.url(await getExtensionPageURL('onboarding'));
 
     await getExtensionElement('button:enable').click();
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
-    await navigateToExtensionPage('panel');
+    await browser.url(await getExtensionPageURL('panel'));
     await expect(getExtensionElement('button:enable')).not.toBeDisplayed();
   });
 });

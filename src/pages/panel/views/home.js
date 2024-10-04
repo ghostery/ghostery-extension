@@ -205,6 +205,7 @@ export default {
                     blocked=${stats.trackersBlocked}
                     layout="margin:bottom:1.5"
                     layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
+                    data-qa="component:feedback"
                   ></panel-feedback>
                 `}
               `
