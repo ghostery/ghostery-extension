@@ -39,7 +39,7 @@
     "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
     "@duckduckgo/autoconsent": "^10.15.0",
     "@github/relative-time-element": "^4.3.0",
-    "@sentry/browser": "^8.33.0",
+    "@sentry/browser": "^8.33.1",
     "@whotracksme/reporting": "^5.1.25",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.7",
