@@ -51,6 +51,7 @@ const argv = process.argv.slice(2).reduce(
 );
 
 const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
+const silent = argv.silent;
 
 // Get manifest from source directory
 console.log(`Reading manifest.${argv.target}.json...`);
@@ -69,14 +70,16 @@ if (argv.staging) manifest.staging = true;
 
 // Download adblocker engines
 execSync('npm run download-engines' + (argv.staging ? ' -- --staging' : ''), {
-  stdio: 'inherit',
+  stdio: silent ? '' : 'inherit',
 });
 
-execSync('npm run download-wtm-bloomfilter', { stdio: 'inherit' });
-execSync('npm run download-wtm-stats', { stdio: 'inherit' });
+execSync('npm run download-wtm-bloomfilter', {
+  stdio: silent ? '' : 'inherit',
+});
+execSync('npm run download-wtm-stats', { stdio: silent ? '' : 'inherit' });
 
 const config = {
-  logLevel: argv.silent ? 'silent' : undefined,
+  logLevel: silent ? 'silent' : undefined,
   configFile: false,
   root: options.srcDir,
   resolve: {
@@ -206,7 +209,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 }
 
 // generate license file
-execSync('npm run licenses', { stdio: 'inherit' });
+execSync('npm run licenses', { stdio: silent ? '' : 'inherit' });
 
 // --- Save manifest ---
 

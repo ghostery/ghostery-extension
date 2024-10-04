@@ -10,9 +10,10 @@
  */
 import { browser, expect, $, $$ } from '@wdio/globals';
 import {
-  getExtensionElement,
   enableExtension,
+  getExtensionElement,
   getExtensionPageURL,
+  switchToPanel,
 } from './utils.js';
 
 async function updatePrivacySettings(name, value) {
@@ -23,8 +24,8 @@ async function updatePrivacySettings(name, value) {
     await toggle.click();
   }
 
-  await expect(toggle).toHaveElementProperty('value', value);
   await browser.pause(1000);
+  await expect(toggle).toHaveElementProperty('value', value);
 }
 
 describe('Main features', () => {
@@ -33,18 +34,26 @@ describe('Main features', () => {
   describe('Never-consent', () => {
     beforeEach(() => updatePrivacySettings('never-consent', false));
 
-    const WEBSITE_URL = 'https://www.onet.pl/';
-    const SELECTOR = '.cmp-popup_popup';
+    const WEBSITE_URL = 'https://stackoverflow.com/';
+    const SELECTOR = '#onetrust-consent-sdk';
 
-    it('should display consent popup', async () => {
+    it('displays consent popup', async () => {
       await browser.url(WEBSITE_URL);
+      await browser.pause(5000);
+
       await expect($(SELECTOR)).toBeDisplayed();
     });
 
-    it('should close the consent popup', async () => {
+    it('closes the consent popup', async () => {
       await updatePrivacySettings('never-consent', true);
 
       await browser.url(WEBSITE_URL);
+      // Let the never-consent take effect
+      await browser.pause(5000);
+
+      // Never-consent can left the cmp structure until next page load
+      await browser.url(WEBSITE_URL);
+
       await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
@@ -52,10 +61,10 @@ describe('Main features', () => {
   describe('Ad-Blocking', () => {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
-    const WEBSITE_URL = 'https://www.onet.pl/';
-    const SELECTOR = '[class*="AdSlotPlaceholder_"]';
+    const WEBSITE_URL = 'https://www.aarp.org/';
+    const SELECTOR = '.advertisement';
 
-    it('should display ads on a page', async () => {
+    it('displays ads on a page', async () => {
       await browser.url(WEBSITE_URL);
 
       let displayed = false;
@@ -67,7 +76,7 @@ describe('Main features', () => {
       expect(displayed).toBe(true);
     });
 
-    it('should block ads on a page', async () => {
+    it('blocks ads on a page', async () => {
       await updatePrivacySettings('ad-blocking', true);
 
       await browser.url(WEBSITE_URL);
@@ -79,17 +88,26 @@ describe('Main features', () => {
   });
 
   describe('Global pause', () => {
-    beforeEach(() => updatePrivacySettings('global-pause', false));
+    const WEBSITE_URL = 'https://www.onet.pl/';
 
-    const WEBSITE_URL = 'https://www.onet.pl';
+    it("shows blocked trackers in the panel when it's turned off", async () => {
+      await updatePrivacySettings('global-pause', false);
+      await browser.url(WEBSITE_URL);
 
-    it('should pause the extension', async () => {
+      await switchToPanel(async () => {
+        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
+      });
+    });
+
+    it("doesn't show blocked trackers in the panel when it's turned on", async () => {
       await updatePrivacySettings('global-pause', true);
+      await browser.url(WEBSITE_URL);
 
-      await browser.url(WEBSITE_URL, { wait: 'complete', timeout: 20000 });
-
-      await browser.newWindow(await getExtensionPageURL('panel'));
-      expect(getExtensionElement('component:feedback')).not.toBeDisplayed();
+      await switchToPanel(async () => {
+        await expect(
+          getExtensionElement('component:feedback'),
+        ).not.toBeDisplayed();
+      });
     });
   });
 });

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { browser, $ } from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 
 let extensionId = '';
 export async function getExtensionId() {
@@ -49,12 +49,27 @@ export function getExtensionElement(id) {
 }
 
 export async function enableExtension() {
-  await browser.url(await getExtensionPageURL('onboarding'));
+  const url = await getExtensionPageURL('onboarding');
+  await browser.switchWindow(url).catch(() => browser.url(url));
 
-  const el = getExtensionElement('button:enable');
+  await getExtensionElement('button:enable').click();
+  await expect(getExtensionElement('view:success')).toBeDisplayed();
+}
 
-  if (await el.isDisplayed()) {
-    await el.click();
-    await getExtensionElement('view:success');
+export async function switchToPanel(fn) {
+  const currentTitle = await browser.getTitle();
+  const url = await getExtensionPageURL('panel');
+
+  try {
+    await browser.pause(1000);
+    await browser.switchWindow(url).catch(() => browser.newWindow(url));
+    await browser.url(url);
+
+    await fn();
+
+    await browser.switchWindow(currentTitle);
+  } catch (e) {
+    await browser.switchWindow(currentTitle);
+    throw e;
   }
 }

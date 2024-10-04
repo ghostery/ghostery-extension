@@ -196,18 +196,16 @@ export default {
                   wtm-link="${hasWTMStats(stats.hostname)}"
                 >
                 </ui-stats>
-                ${!paused &&
-                !globalPause &&
-                !!(stats.trackersModified || stats.trackersBlocked) &&
-                html`
-                  <panel-feedback
-                    modified=${stats.trackersModified}
-                    blocked=${stats.trackersBlocked}
-                    layout="margin:bottom:1.5"
-                    layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
-                    data-qa="component:feedback"
-                  ></panel-feedback>
-                `}
+                <panel-feedback
+                  modified=${stats.trackersModified}
+                  blocked=${stats.trackersBlocked}
+                  layout="margin:bottom:1.5"
+                  layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
+                  data-qa="component:feedback"
+                  hidden="${globalPause ||
+                  paused ||
+                  (!stats.trackersBlocked && !stats.trackersModified)}"
+                ></panel-feedback>
               `
             : html`
                 <div layout="column items:center gap margin:1.5">

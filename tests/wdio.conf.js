@@ -16,11 +16,17 @@ import { promises as fs } from 'node:fs';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const extPath = path.join(__dirname, '..', 'web-ext-artifacts');
 
-export let config = null;
+export let config = {
+  specs: ['onboarding.spec.js', 'privacy.spec.js'],
+  reporters: ['spec'],
+  logLevel: 'silent',
+  mochaOpts: { timeout: 60 * 1000 },
+};
 
 if (process.env.DEBUG) {
   config = {
-    specs: [['*.spec.js']],
+    ...config,
+    specs: [config.specs],
     capabilities: [
       {
         browserName: 'chrome',
@@ -29,13 +35,14 @@ if (process.env.DEBUG) {
         },
       },
     ],
-    reporters: ['spec'],
     logLevel: 'error',
     mochaOpts: { timeout: 24 * 60 * 60 * 1000 },
   };
 } else {
   config = {
-    specs: [['*.spec.js']],
+    ...config,
+    specFileRetries: 1,
+    specFileRetriesDelay: 10,
     capabilities: [
       {
         browserName: 'chrome',
@@ -52,9 +59,6 @@ if (process.env.DEBUG) {
         'moz:firefoxOptions': { args: ['-headless'] },
       },
     ],
-    reporters: ['spec'],
-    logLevel: 'silent',
-    injectGlobals: false,
     before: async (capabilities, specs, browser) => {
       if (capabilities.browserName === 'firefox') {
         const extension = await fs.readFile(
