@@ -19,20 +19,6 @@ import './elements.js';
 import Main from './views/main.js';
 import Success from './views/success.js';
 
-mount(document.body, {
-  stack: router([Main, Success]),
-  render: {
-    value: ({ stack }) => html`
-      <template layout="grid height::100%">
-        <onboarding-layout>${stack}</onboarding-layout>
-      </template>
-    `,
-    connect: (host) => {
-      host.addEventListener('navigate', updateOptions.bind(null, host));
-    },
-  },
-});
-
 store.resolve(Options).then(({ onboarding }) => {
   store.set(Options, {
     onboarding: {
@@ -48,3 +34,17 @@ function updateOptions(host, event) {
     onboarding: { done: true },
   });
 }
+
+mount(document.body, {
+  stack: router([Main, Success]),
+  render: {
+    value: ({ stack }) => html`
+      <template layout="grid height::100%">
+        <onboarding-layout>${stack}</onboarding-layout>
+      </template>
+    `,
+    connect: (host) => {
+      host.addEventListener('navigate', updateOptions.bind(null, host));
+    },
+  },
+});

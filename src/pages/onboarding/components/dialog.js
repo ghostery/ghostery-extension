@@ -22,20 +22,20 @@ export default {
         layout="column shrink:0 relative width:full::600px height:::full"
       >
         <div
-          layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:10"
-          layout@768px="padding:4 padding:bottom:12"
+          layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:12"
+          layout@768px="padding:4:4:12"
         >
-          <header><slot name="header"></slot></header>
+          <header layout="column center"><slot name="header"></slot></header>
           <slot></slot>
         </div>
         <footer
           layout="row gap:2 absolute inset top:auto layer padding:0:2.5:2.5"
-          layout@768px="content:flex-end padding:0:5:5"
+          layout@390px="content:flex-end padding:0:5:5"
         >
           <slot
             name="footer"
             layout::slotted(*)="relative grow:1 layer:2"
-            layout::slotted(*)@768px="grow:0"
+            layout::slotted(*)@390px="grow:0"
           ></slot>
         </footer>
       </div>

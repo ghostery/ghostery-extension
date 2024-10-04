@@ -68,7 +68,7 @@ export default {
         )}
       </div>
       <ui-button slot="footer">
-        <a href="${router.backUrl()}">Done</a>
+        <a href="${router.backUrl()}">Close</a>
       </ui-button>
     </onboarding-dialog>
   `.css`

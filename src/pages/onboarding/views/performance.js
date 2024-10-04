@@ -16,7 +16,10 @@ export default {
   render: () => html`
     <template layout>
       <onboarding-dialog>
-        <ui-text slot="header" type="headline-m">Performance Telemetry</ui-text>
+        <ui-text slot="header" type="headline-m">
+          Data Collection Summary
+        </ui-text>
+        <ui-text slot="header" type="headline-s">Performance Telemetry</ui-text>
         <ui-text>
           To get insights on add-on usage, the following information about the
           browser and the extension is collected:
@@ -30,14 +33,14 @@ export default {
             </li>
           </ul>
         </ui-text>
-        <ui-text type="body-s" color="gray-600">
+        <ui-text type="body-s" color="gray-600 block:justify">
           Ghostery never collects nor sells any information connected to you
           like passwords, browsing history, search queries, or the contents of
           the pages you visit. Being an EU company, Ghostery strictly adheres to
           the GDPR, which regulates data collection to ensure user's privacy.
         </ui-text>
         <ui-button slot="footer">
-          <a href="${router.backUrl()}">Done</a>
+          <a href="${router.backUrl()}">Close</a>
         </ui-button>
       </onboarding-dialog>
     </template>

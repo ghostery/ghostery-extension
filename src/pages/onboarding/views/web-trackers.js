@@ -16,7 +16,10 @@ export default {
   render: () => html`
     <template layout>
       <onboarding-dialog>
-        <ui-text slot="header" type="headline-m">Web Trackers</ui-text>
+        <ui-text slot="header" type="headline-m">
+          Data Collection Summary
+        </ui-text>
+        <ui-text slot="header" type="headline-s"> Web Trackers </ui-text>
         <ui-text>
           To provide privacy protection features, the following information
           about web trackers is collected:
@@ -31,14 +34,18 @@ export default {
             <li>k-anonymity protected reports of page shows</li>
           </ul>
         </ui-text>
-        <ui-text type="body-s" color="gray-600" layout="margin:top">
+        <ui-text
+          type="body-s"
+          color="gray-600"
+          layout="block:justify margin:top"
+        >
           Ghostery never collects nor sells any information connected to you
           like passwords, browsing history, search queries, or the contents of
           the pages you visit. Being an EU company, Ghostery strictly adheres to
           the GDPR, which regulates data collection to ensure user's privacy.
         </ui-text>
         <ui-button slot="footer">
-          <a href="${router.backUrl()}">Done</a>
+          <a href="${router.backUrl()}">Close</a>
         </ui-button>
       </onboarding-dialog>
     </template>

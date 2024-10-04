@@ -27,8 +27,8 @@ export default {
   },
   render: () => html`
     <template layout="grow column gap">
-      <ui-card layout="gap:2">
-        <section layout="block:center column gap margin:2:0:1">
+      <ui-card layout="gap:2" layout@390px="gap:3">
+        <section layout="block:center column gap" layout@390px="margin:2:0:1">
           <ui-text type="body-l">Welcome to Ghostery</ui-text>
           <ui-text type="display-m">Enable Ghostery to get started</ui-text>
         </section>
@@ -48,8 +48,9 @@ export default {
             </onboarding-feature>
           </div>
         </div>
-        <ui-text type="body-s" underline>
-          ${msg.html`
+        <div layout="column gap:2">
+          <ui-text type="body-s" underline layout="block:justify">
+            ${msg.html`
               Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
               <a href="${router.url(AddonHealth)}">add-on health</a> and
               <a href="${router.url(Performance)}">performance telemetry</a>
@@ -59,13 +60,15 @@ export default {
                   : router.url(Privacy)
               }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community. | 'add-on' means 'browser extension'
             `}
-        </ui-text>
-        <ui-text type="body-s" color="gray-600">
-          Ghostery never collects nor sells any information connected to you
-          like passwords, browsing history, search queries, or the contents of
-          the pages you visit. Being an EU company, Ghostery strictly adheres to
-          the GDPR, which regulates data collection to ensure user's privacy.
-        </ui-text>
+          </ui-text>
+          <ui-text type="body-s" layout="block:justify">
+            Ghostery never collects nor sells any information connected to you
+            like passwords, browsing history, search queries, or the contents of
+            the pages you visit. Being an EU company, Ghostery strictly adheres
+            to the GDPR, which regulates data collection to ensure user's
+            privacy.
+          </ui-text>
+        </div>
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
             <a href="${router.url(Success)}">Enable Ghostery</a>
