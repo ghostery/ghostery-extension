@@ -27,7 +27,8 @@ const PIN_EXTENSION_IMAGES = {
 
 export default {
   platform: getBrowserId,
-  render: ({ platform }) => html`
+  pinIt: true,
+  render: ({ platform, pinIt }) => html`
     <template layout="column gap">
       <ui-card data-qa="view:success">
         <section layout="block:center column gap:2">
@@ -39,7 +40,8 @@ export default {
           </ui-text>
         </section>
       </ui-card>
-      ${PIN_EXTENSION_IMAGES[platform] &&
+      ${pinIt &&
+      PIN_EXTENSION_IMAGES[platform] &&
       html`
         <ui-card>
           <section layout="column gap:2">
@@ -69,9 +71,12 @@ export default {
             </ui-text>
           </section>
         </ui-card>
-        <onboarding-pin-it platform="${platform}">
-          Pin it here
-        </onboarding-pin-it>
+        ${pinIt &&
+        html`
+          <onboarding-pin-it platform="${platform}">
+            Pin it here
+          </onboarding-pin-it>
+        `}
       `}
     </template>
   `,

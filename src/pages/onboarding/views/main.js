@@ -9,8 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, router } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
+
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
+import Options from '/store/options.js';
 
 import AddonHealth from './addon-health.js';
 import WebTrackers from './web-trackers.js';
@@ -25,17 +27,29 @@ export default {
   [router.connect]: {
     stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
   },
-  render: () => html`
+  options: store(Options),
+  render: ({ options }) => html`
     <template layout="grow column gap">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
-          <ui-text type="body-l">Welcome to Ghostery</ui-text>
-          <ui-text type="display-m">Enable Ghostery to get started</ui-text>
+          ${options.terms
+            ? html`<ui-text type="display-m">
+                Your Ghostery privacy features
+              </ui-text>`
+            : html`
+                <ui-text type="body-l">Welcome to Ghostery</ui-text>
+                <ui-text type="display-m">
+                  Enable Ghostery to get started
+                </ui-text>
+              `}
         </section>
         <div layout="column gap:2">
-          <ui-text type="label-m" layout="block:center">
-            Your Privacy Features:
-          </ui-text>
+          ${!options.terms &&
+          html`
+            <ui-text type="label-m" layout="block:center">
+              Your Privacy Features:
+            </ui-text>
+          `}
           <div layout="grid:3 gap">
             <onboarding-feature icon="onboarding-adblocking">
               Ad-Blocking
@@ -71,7 +85,9 @@ export default {
         </div>
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
-            <a href="${router.url(Success)}">Enable Ghostery</a>
+            <a href="${router.url(Success, { pinIt: !options.terms })}">
+              ${options.terms ? msg`Keep enabled` : msg`Enable Ghostery`}
+            </a>
           </ui-button>
           <onboarding-error-card layout="margin:top">
             <ui-text type="label-s" color="danger-500" layout="block:center">
@@ -79,7 +95,9 @@ export default {
               naming trackers is available.
             </ui-text>
             <ui-button type="outline-danger" data-qa="button:skip">
-              <a href="${router.url(Skip)}">Keep disabled</a>
+              <a href="${router.url(Skip)}">
+                ${options.terms ? msg`Disable Ghostery` : msg`Keep disabled`}
+              </a>
             </ui-button>
           </onboarding-error-card>
         </div>
