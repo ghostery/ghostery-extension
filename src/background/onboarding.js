@@ -8,10 +8,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { observe } from '/store/options.js';
+import { store } from 'hybrids';
 
-observe('onboarding', ({ done, shownAt }) => {
-  if (!done && !shownAt) {
+import Options, { observe } from '/store/options.js';
+
+observe('onboarding', ({ version, shownAt }) => {
+  const currentVersion = Options.onboarding.version;
+
+  if (version !== currentVersion) {
+    store.set(Options, { onboarding: { version: currentVersion, shownAt: 0 } });
+  } else if (!shownAt) {
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });
