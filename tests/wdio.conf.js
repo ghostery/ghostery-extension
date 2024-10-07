@@ -41,8 +41,8 @@ if (process.env.DEBUG) {
 } else {
   config = {
     ...config,
-    specFileRetries: 1,
-    specFileRetriesDelay: 10,
+    specFileRetries: 5,
+    specFileRetriesDelay: 15,
     capabilities: [
       {
         browserName: 'chrome',

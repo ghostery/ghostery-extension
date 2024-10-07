@@ -39,7 +39,7 @@ describe('Main features', () => {
 
     it('displays consent popup', async () => {
       await browser.url(WEBSITE_URL);
-      await browser.pause(5000);
+      await browser.pause(2000);
 
       await expect($(SELECTOR)).toBeDisplayed();
     });
@@ -49,7 +49,7 @@ describe('Main features', () => {
 
       await browser.url(WEBSITE_URL);
       // Let the never-consent take effect
-      await browser.pause(5000);
+      await browser.pause(2000);
 
       // Never-consent can left the cmp structure until next page load
       await browser.url(WEBSITE_URL);
@@ -61,8 +61,8 @@ describe('Main features', () => {
   describe('Ad-Blocking', () => {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
-    const WEBSITE_URL = 'https://www.aarp.org/';
-    const SELECTOR = '.advertisement';
+    const WEBSITE_URL = 'https://www.onet.pl/';
+    const SELECTOR = 'div[class^="AdSlotPlaceholder_"]';
 
     it('displays ads on a page', async () => {
       await browser.url(WEBSITE_URL);
