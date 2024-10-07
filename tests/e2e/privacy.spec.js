@@ -59,8 +59,8 @@ describe('Privacy', () => {
   describe('Ad-Blocking', () => {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
-    const WEBSITE_URL = 'https://www.onet.pl/';
-    const SELECTOR = 'div[class^="AdSlotPlaceholder_"]';
+    const WEBSITE_URL = 'https://www.pcmag.com/';
+    const SELECTOR = '.zmgad-full-width';
 
     it('displays ads on a page', async () => {
       await browser.url(WEBSITE_URL);
@@ -168,37 +168,34 @@ describe('Privacy', () => {
   });
 
   describe('Pause Website', () => {
-    const WEBSITE_URL = 'https://www.onet.pl/';
-    const SELECTOR = 'div[class^="AdSlotPlaceholder_"]';
+    const WEBSITE_URL = 'https://www.pcmag.com/';
 
     it("pauses the website's privacy settings", async () => {
       await browser.url(WEBSITE_URL);
 
       await switchToPanel(async () => {
-        if (
-          !(await getExtensionElement('component:pause').getProperty('paused'))
-        ) {
-          await getExtensionElement('button:pause').click();
-          await browser.pause(1000); // Pausing triggers the page reload after 1s
-        }
-      });
-      await expect($(SELECTOR)).toBeDisplayed();
+        const pauseComponent = await getExtensionElement('component:pause');
+        const pauseButton = await getExtensionElement('button:pause');
 
-      await switchToPanel(async () => {
-        if (
-          await getExtensionElement('component:pause').getProperty('paused')
-        ) {
-          await getExtensionElement('button:pause').click();
-          await browser.pause(1000); // Pausing triggers the page reload after 1s
+        if (await pauseComponent.getProperty('paused')) {
+          await pauseButton.click();
         }
-      });
 
-      await expect($(SELECTOR)).not.toBeDisplayed();
+        await pauseButton.click();
+        await browser.pause(2000);
+        await expect(
+          getExtensionElement('component:feedback'),
+        ).not.toBeDisplayed();
+
+        await pauseButton.click();
+        await browser.pause(2000);
+        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
+      });
     });
   });
 
   describe('Global pause', () => {
-    const WEBSITE_URL = 'https://www.onet.pl/';
+    const WEBSITE_URL = 'https://www.pcmag.com/';
 
     it('shows blocked trackers in the panel', async () => {
       await updatePrivacySettings('global-pause', false);
