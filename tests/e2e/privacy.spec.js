@@ -24,7 +24,6 @@ async function updatePrivacySettings(name, value) {
     await toggle.click();
   }
 
-  await browser.pause(1000);
   await expect(toggle).toHaveElementProperty('value', value);
 }
 
@@ -39,7 +38,6 @@ describe('Privacy', () => {
 
     it('displays consent popup', async () => {
       await browser.url(WEBSITE_URL);
-      await browser.pause(2000);
 
       await expect($(SELECTOR)).toBeDisplayed();
     });
