@@ -28,7 +28,7 @@ async function updatePrivacySettings(name, value) {
   await expect(toggle).toHaveElementProperty('value', value);
 }
 
-describe('Main features', () => {
+describe('Privacy', () => {
   before(enableExtension);
 
   describe('Never-consent', () => {

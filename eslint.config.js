@@ -20,20 +20,20 @@ export default [
     },
   },
   {
+    files: ['scripts/**/*.js', 'tests/**/*.js'],
     languageOptions: {
       globals: {
         ...globals.node,
       },
     },
-    files: ['scripts/**/*.js', 'tests/**/*.js'],
   },
   {
+    files: ['tests/**/*.spec.js'],
     languageOptions: {
       globals: {
         ...globals.mocha,
       },
     },
-    files: ['tests/**/*.spec.js'],
   },
   {
     ignores: ['dist/*', 'xcode/*', 'src/rule_resources*'],
