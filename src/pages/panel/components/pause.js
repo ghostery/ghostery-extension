@@ -77,6 +77,7 @@ export default {
         layout="row center margin:1.5 height:6"
         layout@390px="height:7"
         onclick="${!pauseList && dispatchAction}"
+        data-qa="button:pause"
       >
         <div id="label" layout="grow row center gap shrink overflow">
           <ui-icon name="pause"></ui-icon>

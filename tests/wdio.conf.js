@@ -41,19 +41,19 @@ if (process.env.DEBUG) {
 } else {
   config = {
     ...config,
-    specFileRetries: 5,
+    specFileRetries: 2,
     specFileRetriesDelay: 15,
     capabilities: [
-      {
-        browserName: 'chrome',
-        'goog:chromeOptions': {
-          args: [
-            'headless',
-            'disable-gpu',
-            `--load-extension=${path.join(extPath, 'ghostery-chromium')}`,
-          ],
-        },
-      },
+      // {
+      //   browserName: 'chrome',
+      //   'goog:chromeOptions': {
+      //     args: [
+      //       'headless',
+      //       'disable-gpu',
+      //       `--load-extension=${path.join(extPath, 'ghostery-chromium')}`,
+      //     ],
+      //   },
+      // },
       {
         browserName: 'firefox',
         'moz:firefoxOptions': { args: ['-headless'] },

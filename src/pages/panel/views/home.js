@@ -46,10 +46,7 @@ function showAlert(host, message) {
 
 function reloadTab() {
   setTimeout(async () => {
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
+    const tab = await chrome.runtime.sendMessage({ action: 'getCurrentTab' });
     chrome.tabs.reload(tab.id);
   }, 1000);
 }
@@ -158,6 +155,7 @@ export default {
                 paused="${paused || globalPause}"
                 global="${globalPause}"
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
+                data-qa="component:pause"
               >
               </panel-pause>
             `

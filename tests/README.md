@@ -7,15 +7,16 @@ After passing all the following tests, it can be assumed with a high level of co
 * The tests must be performed in the order given below - some of the tests depend on the results of the previous ones
 * The browser must have cleared cookies and cache before starting the tests
 
-Dictionary:
+### Dictionary
 
 * `TEST PAGE` - The test pages can be adjusted. The examples mentioned in the steps below are those on which the functionality you want to test can be quickly checked.
 * `REGIONAL TEST PAGE` - The regional test page can be changed to a different one. Likewise, the region itself can be changed to any other region.
 * `CUSTOM FILTER` - The custom filter can be changed in any way according to the instruction 'Learn more on supported syntax'.
+* 🤖 - Tests added to end-to-end automation
 
 ## Onboarding
 
-### Disable extension
+### Disable extension 🤖
 
 > On the Onboarding tab, keep Ghostery disabled
 
@@ -27,7 +28,7 @@ Dictionary:
 
 Ghostery is installed but kept disabled.
 
-### Enable extension
+### Enable extension 🤖
 
 > On the Onboarding tab, enable Ghostery to give all necessary permissions
 
@@ -43,7 +44,7 @@ Ghostery is installed and enabled.
 
 ## Main features
 
-### Never-Consent
+### Never-Consent 🤖
 
 > When Never-Consent is run on a test page, cookie pop-ups should be blocked
 
@@ -57,7 +58,7 @@ Ghostery is installed and enabled.
 
 The cookie pop-up is hidden.
 
-### Ad-Blocking
+### Ad-Blocking 🤖
 
 > Ads on the test site must disappear when the Ad-Blocking module is activated
 
@@ -71,7 +72,7 @@ The cookie pop-up is hidden.
 
 Ads on the test site are not visible
 
-### Anti-tracking
+### Anti-tracking 🤖
 
 > When Anti-Tracking is enabled on a test site, URLs for the selected tracker should be blocked
 
@@ -91,7 +92,7 @@ On Safari all of the DNR rules are provided by one combined list (ads), so the t
 
 URLs for the selected tracker are blocked.
 
-### Regional Filters
+### Regional Filters 🤖
 
 > Regional filters should work on a selected region - the test uses Polish region and a Polish website to test this functionality
 
@@ -106,7 +107,7 @@ URLs for the selected tracker are blocked.
 
 Ad on the regional test site is blocked.
 
-### Pause Website
+### Pause Website 🤖
 
 > When Website Pause is enabled, the entire extension should turn off its activity only on the test page
 
@@ -122,7 +123,7 @@ On Safari reloading the DNR rules may take up to a few minutes, so after pausing
 
 On the test page, trackers are not blocked or modified, ads are visible.
 
-### Global Pause
+### Global Pause  🤖
 
 > When Global Pause is enabled, the entire extension should turn off its blocking activity on all pages
 

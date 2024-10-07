@@ -85,10 +85,122 @@ describe('Privacy', () => {
     });
   });
 
+  describe('Anti-Tracking', () => {
+    beforeEach(() => updatePrivacySettings('anti-tracking', false));
+
+    const WEBSITE_URL = 'https://www.aarp.org/';
+    const TRACKER_IDS = [
+      'ispot.tv',
+      'facebook_connect',
+      'pinterest_conversion_tracker',
+    ];
+
+    it('does not block tracker requests on the page', async () => {
+      await browser.url(WEBSITE_URL);
+
+      await switchToPanel(async () => {
+        await getExtensionElement('button:detailed-view').click();
+
+        for (const trackerId of TRACKER_IDS) {
+          const trackerEl = await getExtensionElement(
+            `button:tracker:${trackerId}`,
+          );
+
+          if (trackerEl.isDisplayed()) {
+            await expect(
+              getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+            ).not.toBeDisplayed();
+            await expect(
+              getExtensionElement(`icon:tracker:${trackerId}:modified`),
+            ).not.toBeDisplayed();
+          }
+        }
+      });
+    });
+
+    it('blocks tracker requests on the page', async () => {
+      await updatePrivacySettings('anti-tracking', true);
+      await browser.url(WEBSITE_URL);
+
+      await switchToPanel(async () => {
+        await getExtensionElement('button:detailed-view').click();
+
+        for (const trackerId of TRACKER_IDS) {
+          const trackerEl = await getExtensionElement(
+            `button:tracker:${trackerId}`,
+          );
+
+          if (trackerEl.isDisplayed()) {
+            await expect(
+              getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+            ).toBeDisplayed();
+          }
+        }
+      });
+    });
+  });
+
+  describe('Regional Filters', () => {
+    beforeEach(() => updatePrivacySettings('regional-filters', false));
+
+    const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
+    const SELECTOR = '.a-slider';
+
+    it('shows the ads on the page', async () => {
+      await browser.url(WEBSITE_URL);
+      await expect($(SELECTOR)).toBeDisplayed();
+    });
+
+    it('hides the ads on the page', async () => {
+      await updatePrivacySettings('regional-filters', true);
+      const checkbox = await getExtensionElement(
+        'checkbox:regional-filters:pl',
+      );
+
+      if (!(await checkbox.getProperty('checked'))) {
+        await checkbox.click();
+        await expect(checkbox).toBeChecked();
+      }
+
+      await browser.url(WEBSITE_URL);
+      await expect($(SELECTOR)).not.toBeDisplayed();
+    });
+  });
+
+  describe('Pause Website', () => {
+    const WEBSITE_URL = 'https://www.onet.pl/';
+    const SELECTOR = 'div[class^="AdSlotPlaceholder_"]';
+
+    it("pauses the website's privacy settings", async () => {
+      await browser.url(WEBSITE_URL);
+
+      await switchToPanel(async () => {
+        if (
+          !(await getExtensionElement('component:pause').getProperty('paused'))
+        ) {
+          await getExtensionElement('button:pause').click();
+          await browser.pause(1000); // Pausing triggers the page reload after 1s
+        }
+      });
+      await expect($(SELECTOR)).toBeDisplayed();
+
+      await switchToPanel(async () => {
+        if (
+          await getExtensionElement('component:pause').getProperty('paused')
+        ) {
+          await getExtensionElement('button:pause').click();
+          await browser.pause(1000); // Pausing triggers the page reload after 1s
+        }
+      });
+
+      await expect($(SELECTOR)).not.toBeDisplayed();
+    });
+  });
+
   describe('Global pause', () => {
     const WEBSITE_URL = 'https://www.onet.pl/';
 
-    it("shows blocked trackers in the panel when it's turned off", async () => {
+    it('shows blocked trackers in the panel', async () => {
       await updatePrivacySettings('global-pause', false);
       await browser.url(WEBSITE_URL);
 
@@ -97,7 +209,7 @@ describe('Privacy', () => {
       });
     });
 
-    it("doesn't show blocked trackers in the panel when it's turned on", async () => {
+    it("doesn't show blocked trackers in the panel", async () => {
       await updatePrivacySettings('global-pause', true);
       await browser.url(WEBSITE_URL);
 

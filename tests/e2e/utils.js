@@ -45,7 +45,7 @@ export async function getExtensionPageURL(page, file = 'index.html') {
 }
 
 export function getExtensionElement(id) {
-  return $(`[data-qa="${id}"]`);
+  return $(`>>>[data-qa="${id}"]`);
 }
 
 export async function enableExtension() {
@@ -64,8 +64,12 @@ export async function switchToPanel(fn) {
     await browser.pause(1000);
     // When the panel is not opened yet, the switchWindow will throw
     // so then (for the first time) we need to open the panel in a new window
-    await browser.switchWindow(url).catch(() => browser.newWindow(url));
-    await browser.url(url);
+    try {
+      await browser.switchWindow(url);
+      await browser.url(url);
+    } catch {
+      browser.newWindow(url);
+    }
 
     await fn();
 
