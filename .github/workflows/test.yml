@@ -10,9 +10,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.tool-versions'
           cache: 'npm'
@@ -26,6 +25,3 @@ jobs:
 
       - name: Test
         run: npm test
-
-      - name: Build
-        run: npm run build

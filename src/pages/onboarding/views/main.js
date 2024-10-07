@@ -54,7 +54,7 @@ export default define({
             `}
         </ui-text>
         <div layout="column gap:2">
-          <ui-button type="success" layout="height:5.5">
+          <ui-button type="success" layout="height:5.5" data-qa="button:enable">
             <a href="${router.url(Success)}">Enable Ghostery</a>
           </ui-button>
           <onboarding-error-card layout="margin:top">
@@ -62,7 +62,7 @@ export default define({
               Without privacy features enabled, only basic functionality of
               naming trackers is available.
             </ui-text>
-            <ui-button type="outline-danger">
+            <ui-button type="outline-danger" data-qa="button:skip">
               <a href="${router.url(Skip)}">Keep disabled</a>
             </ui-button>
           </onboarding-error-card>

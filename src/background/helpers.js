@@ -13,8 +13,17 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
     case 'getCurrentTab':
       chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
-        sendResponse(tab);
+        if (tab.url !== sender.url) {
+          sendResponse(tab);
+        } else {
+          chrome.tabs
+            .query({ active: true, currentWindow: false })
+            .then(([otherTab]) => {
+              sendResponse(otherTab || tab);
+            });
+        }
       });
+
       return true;
     case 'openTabWithUrl':
       chrome.tabs.create({ url: msg.url });

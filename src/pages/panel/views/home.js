@@ -162,7 +162,11 @@ export default {
               </panel-pause>
             `
           : html`
-              <ui-button type="danger" layout="height:6 margin:1.5">
+              <ui-button
+                type="danger"
+                layout="height:6 margin:1.5"
+                data-qa="button:enable"
+              >
                 <a
                   href="${chrome.runtime.getURL(
                     '/pages/onboarding/index.html',
@@ -192,17 +196,16 @@ export default {
                   wtm-link="${hasWTMStats(stats.hostname)}"
                 >
                 </ui-stats>
-                ${!paused &&
-                !globalPause &&
-                !!(stats.trackersModified || stats.trackersBlocked) &&
-                html`
-                  <panel-feedback
-                    modified=${stats.trackersModified}
-                    blocked=${stats.trackersBlocked}
-                    layout="margin:bottom:1.5"
-                    layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
-                  ></panel-feedback>
-                `}
+                <panel-feedback
+                  modified=${stats.trackersModified}
+                  blocked=${stats.trackersBlocked}
+                  layout="margin:bottom:1.5"
+                  layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
+                  data-qa="component:feedback"
+                  hidden="${globalPause ||
+                  paused ||
+                  (!stats.trackersBlocked && !stats.trackersModified)}"
+                ></panel-feedback>
               `
             : html`
                 <div layout="column items:center gap margin:1.5">

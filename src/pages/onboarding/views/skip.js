@@ -20,7 +20,7 @@ export default define({
   tag: 'onboarding-outro-short-skip-view',
   render: () => html`
     <template layout="block">
-      <ui-card>
+      <ui-card data-qa="view:skip">
         <section layout="block:center column gap:2">
           <div layout="row center">${disabled}</div>
           <ui-text type="display-s" color="danger-500">

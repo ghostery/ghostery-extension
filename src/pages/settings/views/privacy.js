@@ -89,6 +89,7 @@ export default {
             <ui-toggle
               value="${globalPause}"
               onchange="${html.set('globalPause')}"
+              data-qa="toggle:global-pause"
             >
               <div layout="column gap:0.5 grow">
                 <div layout="row gap items:center">
@@ -118,6 +119,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.blockAds}"
                   onchange="${html.set(options, 'blockAds')}"
+                  data-qa="toggle:ad-blocking"
                 >
                   <div layout="column gap:0.5 grow">
                     <div layout="row gap items:center">
@@ -137,6 +139,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.blockTrackers}"
                   onchange="${html.set(options, 'blockTrackers')}"
+                  data-qa="toggle:anti-tracking"
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
@@ -157,6 +160,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.blockAnnoyances}"
                   onchange="${toggleNeverConsent}"
+                  data-qa="toggle:never-consent"
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
@@ -179,6 +183,7 @@ export default {
                   disabled="${globalPause}"
                   value="${options.regionalFilters.enabled}"
                   onchange="${html.set(options, 'regionalFilters.enabled')}"
+                  data-qa="toggle:regional-filters"
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
@@ -215,6 +220,7 @@ export default {
                             id,
                           )}"
                           onchange="${setRegion(id)}"
+                          data-qa="checkbox:regional-filters:${id}"
                         />
                         <span slot="label">
                           ${labels.languages.of(id.toUpperCase())} (${id})
@@ -289,6 +295,7 @@ export default {
                     disabled="${globalPause}"
                     value="${options.customFilters.enabled}"
                     onchange="${html.set(options, 'customFilters.enabled')}"
+                    data-qa="toggle:custom-filters"
                   >
                     <div layout="column gap:0.5">
                       <div layout="row gap items:center">

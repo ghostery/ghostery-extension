@@ -1,0 +1,36 @@
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { browser, expect } from '@wdio/globals';
+import { getExtensionElement, getExtensionPageURL } from './utils.js';
+
+describe('Onboarding', () => {
+  it('keeps ghostery disabled', async () => {
+    await browser.url(await getExtensionPageURL('onboarding'));
+
+    await getExtensionElement('button:skip').click();
+    await expect(getExtensionElement('view:skip')).toBeDisplayed();
+
+    await browser.url(await getExtensionPageURL('panel'));
+
+    await expect(getExtensionElement('button:enable')).toBeDisplayed();
+  });
+
+  it('enables ghostery', async () => {
+    await browser.url(await getExtensionPageURL('onboarding'));
+
+    await getExtensionElement('button:enable').click();
+    await expect(getExtensionElement('view:success')).toBeDisplayed();
+
+    await browser.url(await getExtensionPageURL('panel'));
+    await expect(getExtensionElement('button:enable')).not.toBeDisplayed();
+  });
+});

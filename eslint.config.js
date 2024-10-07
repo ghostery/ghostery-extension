@@ -10,7 +10,6 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.node,
         ...globals.serviceworker,
         ...globals.webextensions,
         __PLATFORM__: 'readonly',
@@ -21,6 +20,22 @@ export default [
     },
   },
   {
-    ignores: ['src/rule_resources*'],
-  }
+    files: ['scripts/**/*.js', 'tests/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
+    files: ['tests/**/*.spec.js'],
+    languageOptions: {
+      globals: {
+        ...globals.mocha,
+      },
+    },
+  },
+  {
+    ignores: ['dist/*', 'xcode/*', 'src/rule_resources*'],
+  },
 ];
