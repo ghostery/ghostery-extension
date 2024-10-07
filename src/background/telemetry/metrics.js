@@ -290,10 +290,7 @@ class Metrics {
         // Antitracking state
         buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
         // Onboarding status
-        buildQueryPair(
-          'ss',
-          conf.setup_complete ? '1' : conf.setup_skip ? '-1' : '0',
-        ) +
+        buildQueryPair('ss', '1') +
         // Onboarding last shown at
         buildQueryPair(
           'sl',

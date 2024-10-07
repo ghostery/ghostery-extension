@@ -31,7 +31,6 @@ store.resolve(Options).then(({ onboarding }) => {
 function updateOptions(host, event) {
   store.set(Options, {
     terms: event.detail.entry.id === Success.tag,
-    onboarding: { done: true },
   });
 }
 

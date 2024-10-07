@@ -30,11 +30,11 @@ if (__PLATFORM__ === 'chromium' && isOpera()) {
   chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (details.frameId !== 0 || (await isSerpSupported())) return;
 
-    const { onboarding } = await store.resolve(Options);
+    const { onboarding, terms } = await store.resolve(Options);
 
     if (
-      // Onboarding is not "done"
-      !onboarding.done ||
+      // Terms not accepted
+      !terms ||
       // The notification was already shown maximum times
       onboarding.serpShown >= NOTIFICATION_SHOW_LIMIT ||
       // The notification was already shown recently

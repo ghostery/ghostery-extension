@@ -79,7 +79,6 @@ const Options = {
   terms: false,
   onboarding: {
     version: 2,
-    done: false,
     shownAt: 0,
     shown: 0,
     ...(__PLATFORM__ === 'chromium' && isOpera()
@@ -147,6 +146,8 @@ const Options = {
             ...options.onboarding,
             version: __PLATFORM__ === 'firefox' ? 1 : 2,
           };
+
+          delete options.onboarding.done;
         }
 
         // Flush updated options and version to the storage
@@ -286,7 +287,6 @@ async function migrateFromV8() {
       options.blockAnnoyances = storage.enable_autoconsent ?? true;
 
       options.onboarding = {
-        done: storage.setup_complete || storage.setup_skip || false,
         shownAt: storage.setup_timestamp || 0,
         shown: storage.setup_shown || 0,
       };

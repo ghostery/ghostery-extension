@@ -36,7 +36,7 @@ export default {
           <section layout="block:center column gap" layout@390px="margin:2:0:1">
             ${options.terms
               ? html`<ui-text type="display-m">
-                  Your Ghostery privacy features
+                  Privacy Policy has been updated
                 </ui-text>`
               : html`
                   <ui-text type="body-l">Welcome to Ghostery</ui-text>
@@ -45,25 +45,25 @@ export default {
                   </ui-text>
                 `}
           </section>
-          <div layout="column gap:2">
-            ${!options.terms &&
-            html`
+          ${!options.terms &&
+          html`
+            <div layout="column gap:2">
               <ui-text type="label-m" layout="block:center">
                 Your Privacy Features:
               </ui-text>
-            `}
-            <div layout="grid:3 gap">
-              <onboarding-feature icon="onboarding-adblocking">
-                Ad-Blocking
-              </onboarding-feature>
-              <onboarding-feature icon="onboarding-anti-tracking">
-                Anti-Tracking
-              </onboarding-feature>
-              <onboarding-feature icon="onboarding-never-consent">
-                Never-Consent
-              </onboarding-feature>
+              <div layout="grid:3 gap">
+                <onboarding-feature icon="onboarding-adblocking">
+                  Ad-Blocking
+                </onboarding-feature>
+                <onboarding-feature icon="onboarding-anti-tracking">
+                  Anti-Tracking
+                </onboarding-feature>
+                <onboarding-feature icon="onboarding-never-consent">
+                  Never-Consent
+                </onboarding-feature>
+              </div>
             </div>
-          </div>
+          `}
           <div layout="column gap:2">
             <ui-text type="body-s" underline layout="block:justify">
               ${msg.html`
@@ -97,8 +97,8 @@ export default {
             </ui-button>
             <onboarding-error-card layout="margin:top">
               <ui-text type="label-s" color="danger-500" layout="block:center">
-                Without privacy features enabled, only basic functionality of
-                naming trackers is available.
+                With Ghostery disabled, only the basic functionality of naming
+                trackers is available.
               </ui-text>
               <ui-button type="outline-danger" data-qa="button:skip">
                 <a href="${router.url(Skip)}">
