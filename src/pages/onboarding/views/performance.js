@@ -33,11 +33,18 @@ export default {
             </li>
           </ul>
         </ui-text>
-        <ui-text type="body-s" color="gray-600 block:justify">
-          Ghostery never collects nor sells any information connected to you
-          like passwords, browsing history, search queries, or the contents of
-          the pages you visit. Being an EU company, Ghostery strictly adheres to
-          the GDPR, which regulates data collection to ensure user's privacy.
+        <ui-text
+          type="body-s"
+          color="gray-600"
+          layout="margin:top block:justify"
+        >
+          Ghostery never collects personal information like passwords, browsing
+          history or the content of the pages you visit.
+        </ui-text>
+        <ui-text type="body-s" color="gray-600" layout="block:justify">
+          Being an EU company, Ghostery strictly adheres to the GDPR (The
+          General Data Protection Regulation), which regulates data collection
+          to ensure user's privacy.
         </ui-text>
         <ui-button slot="footer">
           <a href="${router.backUrl()}">Close</a>

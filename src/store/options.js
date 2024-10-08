@@ -44,7 +44,7 @@ export const ENGINES = [
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
 
-const OPTIONS_VERSION = 4;
+const OPTIONS_VERSION = 3;
 
 const Options = {
   // Main features
@@ -78,7 +78,6 @@ const Options = {
   // Onboarding
   terms: false,
   onboarding: {
-    version: 2,
     shownAt: 0,
     shown: 0,
     ...(__PLATFORM__ === 'chromium' && isOpera()
@@ -138,16 +137,6 @@ const Options = {
             };
             keys.push('customFilters');
           }
-        }
-
-        if (optionsVersion < 4) {
-          // Add correct version for onboarding
-          options.onboarding = {
-            ...options.onboarding,
-            version: __PLATFORM__ === 'firefox' ? 1 : 2,
-          };
-
-          delete options.onboarding.done;
         }
 
         // Flush updated options and version to the storage
