@@ -78,7 +78,6 @@ const Options = {
   // Onboarding
   terms: false,
   onboarding: {
-    done: false,
     shownAt: 0,
     shown: 0,
     ...(__PLATFORM__ === 'chromium' && isOpera()
@@ -277,7 +276,6 @@ async function migrateFromV8() {
       options.blockAnnoyances = storage.enable_autoconsent ?? true;
 
       options.onboarding = {
-        done: storage.setup_complete || storage.setup_skip || false,
         shownAt: storage.setup_timestamp || 0,
         shown: storage.setup_shown || 0,
       };

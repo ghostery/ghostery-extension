@@ -74,8 +74,6 @@ const getConf = async (storage) => {
     enable_human_web: options.terms,
     installDate: storage.installDate,
     installRandom: storage.installRandom,
-    setup_complete: options.onboarding.done && options.terms,
-    setup_skip: options.onboarding.done && !options.terms,
     setup_timestamp: options.onboarding.shownAt,
     setup_shown: options.onboarding.shown,
   };

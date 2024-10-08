@@ -12,6 +12,9 @@
 import { define } from 'hybrids';
 
 define.from(
-  import.meta.glob('./components/*.js', { eager: true, import: 'default' }),
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
   { prefix: 'onboarding', root: 'components' },
 );

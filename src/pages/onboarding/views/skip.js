@@ -9,15 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html } from 'hybrids';
+import { html } from 'hybrids';
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
 import disabled from '../illustrations/disabled.js';
 
 const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 
-export default define({
-  tag: 'onboarding-outro-short-skip-view',
+export default {
   render: () => html`
     <template layout="block">
       <ui-card data-qa="view:skip">
@@ -39,4 +38,4 @@ export default define({
       </ui-text>
     </template>
   `,
-});
+};
