@@ -11,7 +11,7 @@
 
 import path from 'node:path';
 import url from 'node:url';
-import { promises as fs, cpSync, existsSync, rmSync } from 'node:fs';
+import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
 
@@ -90,10 +90,7 @@ export const config = {
       process.exit(1);
     }
 
-    const file = await fs.readFile(
-      path.join(__dirname, 'e2e', 'page.html'),
-      'utf8',
-    );
+    const file = readFileSync(path.join(__dirname, 'e2e', 'page.html'), 'utf8');
     const server = createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/html' });
       res.end(file);
@@ -106,7 +103,7 @@ export const config = {
   },
   before: async (capabilities, specs, browser) => {
     if (capabilities.browserName === 'firefox') {
-      const extension = await fs.readFile(FIREFOX_PATH);
+      const extension = readFileSync(FIREFOX_PATH);
       await browser.installAddOn(extension.toString('base64'), true);
     }
   },

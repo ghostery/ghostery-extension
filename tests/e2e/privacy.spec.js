@@ -63,7 +63,7 @@ describe('Privacy', () => {
     });
   });
 
-  describe.only('Ad-Blocking', () => {
+  describe('Ad-Blocking', () => {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
     const SELECTOR = 'ad-slot';
@@ -171,17 +171,14 @@ describe('Privacy', () => {
 
         if (await pauseComponent.getProperty('paused')) {
           await pauseButton.click();
-          await browser.pause(1000);
         }
 
         await pauseButton.click();
-        await browser.pause(2000);
         await expect(
           getExtensionElement('component:feedback'),
         ).not.toBeDisplayed();
 
         await pauseButton.click();
-        await browser.pause(2000);
         await expect(getExtensionElement('component:feedback')).toBeDisplayed();
       });
     });

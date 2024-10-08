@@ -44,10 +44,14 @@ function showAlert(host, message) {
   host.querySelector('#panel-alerts').appendChild(wrapper);
 }
 
+let reloadTimeout;
 function reloadTab() {
-  setTimeout(async () => {
+  clearTimeout(reloadTimeout);
+
+  reloadTimeout = setTimeout(async () => {
     const tab = await chrome.runtime.sendMessage({ action: 'getCurrentTab' });
     chrome.tabs.reload(tab.id);
+    reloadTimeout = null;
   }, 1000);
 }
 
