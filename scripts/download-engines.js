@@ -37,23 +37,14 @@ const REGIONAL_ENGINES = REGIONS.reduce((acc, region) => {
   acc[`dnr-lang-${region}`] = `lang-${region}`;
   return acc;
 }, {});
-const REGIONAL_COSMETICS_ENGINES = REGIONS.reduce((acc, region) => {
-  acc[`dnr-cosmetics-lang-${region}`] = `lang-${region}-cosmetics`;
-  return acc;
-}, {});
 
 const ENGINES = {
   'dnr-ads': 'ads',
   'dnr-tracking': 'tracking',
   'dnr-annoyances': 'annoyances',
-  'dnr-cosmetics-ads': 'ads-cosmetics',
-  'dnr-cosmetics-tracking': 'tracking-cosmetics',
-  'dnr-cosmetics-annoyances': 'annoyances-cosmetics',
   'dnr-fixes': 'fixes',
-  'dnr-cosmetics-fixes': 'fixes-cosmetics',
   'trackerdbMv3': 'trackerdb',
   ...REGIONAL_ENGINES,
-  ...REGIONAL_COSMETICS_ENGINES,
 };
 
 const TARGET_PATH = resolve('src/rule_resources');

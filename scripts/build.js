@@ -126,10 +126,9 @@ const engines = [
   'fixes',
   ...REGIONS.map((region) => `lang-${region}`),
 ];
-const engineType = argv.target === 'firefox' ? '' : '-cosmetics';
 
 engines.forEach((engine) => {
-  const path = `engine-${engine}${engineType}.dat`;
+  const path = `engine-${engine}.dat`;
   cpSync(
     resolve(options.srcDir, 'rule_resources', path),
     resolve(options.outDir, 'rule_resources', path),
