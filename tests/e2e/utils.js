@@ -11,8 +11,16 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
+export async function disableCache() {
+  if (browser.isChromium) {
+    await browser.sendCommand('Network.setCacheDisabled', {
+      cacheDisabled: true,
+    });
+  }
+}
+
 let extensionId = '';
-export async function getExtensionId() {
+async function getExtensionId() {
   if (!extensionId) {
     switch (browser.capabilities.browserName) {
       case 'chrome': {
@@ -35,13 +43,8 @@ export async function getExtensionId() {
   return extensionId;
 }
 
-const SCHEME =
-  browser.capabilities.browserName === 'chrome'
-    ? 'chrome-extension'
-    : 'moz-extension';
-
 export async function getExtensionPageURL(page, file = 'index.html') {
-  return `${SCHEME}://${await getExtensionId()}/pages/${page}/${file}`;
+  return `${browser.isChromium ? 'chrome-extension' : 'moz-extension'}://${await getExtensionId()}/pages/${page}/${file}`;
 }
 
 export function getExtensionElement(id) {
@@ -54,6 +57,9 @@ export async function enableExtension() {
 
   await getExtensionElement('button:enable').click();
   await expect(getExtensionElement('view:success')).toBeDisplayed();
+
+  // Give the extension some time to initialize (updating the engines in the background)
+  await browser.pause(5000);
 }
 
 export async function switchToPanel(fn) {

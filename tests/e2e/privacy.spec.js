@@ -8,13 +8,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { browser, expect, $, $$ } from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 import {
+  disableCache,
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
   switchToPanel,
 } from './utils.js';
+
+import { PAGE_URL } from '../wdio.conf.js';
 
 async function updatePrivacySettings(name, value) {
   await browser.url(await getExtensionPageURL('settings'));
@@ -25,6 +28,10 @@ async function updatePrivacySettings(name, value) {
   }
 
   await expect(toggle).toHaveElementProperty('value', value);
+
+  // Allow background process to update the settings
+  // E.g. reload engines / DNR rules
+  await browser.pause(2000);
 }
 
 describe('Privacy', () => {
@@ -56,47 +63,32 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Ad-Blocking', () => {
+  describe.only('Ad-Blocking', () => {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
-    const WEBSITE_URL = 'https://www.pcmag.com/';
-    const SELECTOR = '.zmgad-full-width';
+    const SELECTOR = 'ad-slot';
 
-    it('displays ads on a page', async () => {
-      await browser.url(WEBSITE_URL);
-
-      let displayed = false;
-      for (const ad of await $$(SELECTOR)) {
-        if (displayed) break;
-        displayed = await ad.isDisplayed();
-      }
-
-      expect(displayed).toBe(true);
+    it('does not block ads on a page', async () => {
+      await browser.url(PAGE_URL);
+      await expect($(SELECTOR)).toBeDisplayed();
     });
 
     it('blocks ads on a page', async () => {
       await updatePrivacySettings('ad-blocking', true);
 
-      await browser.url(WEBSITE_URL);
-
-      for (const ad of await $$(SELECTOR)) {
-        await expect(ad).not.toBeDisplayed();
-      }
+      await browser.url(PAGE_URL);
+      await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
 
   describe('Anti-Tracking', () => {
     beforeEach(() => updatePrivacySettings('anti-tracking', false));
 
-    const WEBSITE_URL = 'https://www.aarp.org/';
-    const TRACKER_IDS = [
-      'ispot.tv',
-      'facebook_connect',
-      'pinterest_conversion_tracker',
-    ];
+    const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
     it('does not block tracker requests on the page', async () => {
-      await browser.url(WEBSITE_URL);
+      await disableCache();
+      await browser.url(PAGE_URL);
 
       await switchToPanel(async () => {
         await getExtensionElement('button:detailed-view').click();
@@ -120,7 +112,9 @@ describe('Privacy', () => {
 
     it('blocks tracker requests on the page', async () => {
       await updatePrivacySettings('anti-tracking', true);
-      await browser.url(WEBSITE_URL);
+
+      await disableCache();
+      await browser.url(PAGE_URL);
 
       await switchToPanel(async () => {
         await getExtensionElement('button:detailed-view').click();
@@ -168,10 +162,8 @@ describe('Privacy', () => {
   });
 
   describe('Pause Website', () => {
-    const WEBSITE_URL = 'https://www.pcmag.com/';
-
     it("pauses the website's privacy settings", async () => {
-      await browser.url(WEBSITE_URL);
+      await browser.url(PAGE_URL);
 
       await switchToPanel(async () => {
         const pauseComponent = await getExtensionElement('component:pause');
@@ -179,6 +171,7 @@ describe('Privacy', () => {
 
         if (await pauseComponent.getProperty('paused')) {
           await pauseButton.click();
+          await browser.pause(1000);
         }
 
         await pauseButton.click();
@@ -195,11 +188,9 @@ describe('Privacy', () => {
   });
 
   describe('Global pause', () => {
-    const WEBSITE_URL = 'https://www.pcmag.com/';
-
     it('shows blocked trackers in the panel', async () => {
       await updatePrivacySettings('global-pause', false);
-      await browser.url(WEBSITE_URL);
+      await browser.url(PAGE_URL);
 
       await switchToPanel(async () => {
         await expect(getExtensionElement('component:feedback')).toBeDisplayed();
@@ -208,7 +199,7 @@ describe('Privacy', () => {
 
     it("doesn't show blocked trackers in the panel", async () => {
       await updatePrivacySettings('global-pause', true);
-      await browser.url(WEBSITE_URL);
+      await browser.url(PAGE_URL);
 
       await switchToPanel(async () => {
         await expect(

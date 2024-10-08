@@ -165,7 +165,7 @@ console.log('Downloading redirect resources...');
 mkdirSync(resolve(TARGET_PATH, 'redirects'), { recursive: true });
 
 const { revisions: resourcesRevisions } = await fetch(
-  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`
+  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`,
 ).then((res) => {
   if (!res.ok) {
     throw new Error(
@@ -178,7 +178,7 @@ const { revisions: resourcesRevisions } = await fetch(
 const latestResourceRevision = resourcesRevisions.at(-1);
 
 const resources = await fetch(
-  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${latestResourceRevision}/list.txt`
+  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${latestResourceRevision}/list.txt`,
 ).then((res) => {
   if (!res.ok) {
     throw new Error(
@@ -190,7 +190,7 @@ const resources = await fetch(
 });
 
 for (const redirect of resources.redirects) {
-  const outputPath = resolve(TARGET_PATH, 'redirects', redirect.names[0])
+  const outputPath = resolve(TARGET_PATH, 'redirects', redirect.names[0]);
 
   if (redirect.encoding === 'base64') {
     writeFileSync(
@@ -198,9 +198,6 @@ for (const redirect of resources.redirects) {
       Buffer.from(redirect.content, 'base64').toString('binary'),
     );
   } else {
-    writeFileSync(
-      outputPath,
-      redirect.content,
-    );
+    writeFileSync(outputPath, redirect.content);
   }
 }
