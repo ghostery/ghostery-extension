@@ -165,9 +165,7 @@ async function loadFromFile(name) {
   try {
     const response = await fetch(
       chrome.runtime.getURL(
-        `rule_resources/engine-${name}${
-          __PLATFORM__ === 'firefox' || name === 'trackerdb' ? '' : '-cosmetics'
-        }.dat`,
+        `rule_resources/engine-${name}.dat`,
       ),
     );
 
@@ -241,7 +239,7 @@ export async function update(name) {
     const urlName =
       name === 'trackerdb'
         ? 'trackerdbMv3'
-        : `dnr${__PLATFORM__ === 'firefox' ? '' : '-cosmetics'}-${name}`;
+        : `dnr-${name}`;
 
     const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
 
