@@ -164,9 +164,7 @@ async function saveToStorage(name) {
 async function loadFromFile(name) {
   try {
     const response = await fetch(
-      chrome.runtime.getURL(
-        `rule_resources/engine-${name}.dat`,
-      ),
+      chrome.runtime.getURL(`rule_resources/engine-${name}.dat`),
     );
 
     const engineBytes = new Uint8Array(await response.arrayBuffer());
@@ -236,10 +234,7 @@ export async function update(name) {
   }
 
   try {
-    const urlName =
-      name === 'trackerdb'
-        ? 'trackerdbMv3'
-        : `dnr-${name}`;
+    const urlName = name === 'trackerdb' ? 'trackerdbMv3' : `dnr-${name}`;
 
     const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
 
