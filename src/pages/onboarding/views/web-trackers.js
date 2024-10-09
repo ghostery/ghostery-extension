@@ -16,10 +16,12 @@ export default {
   render: () => html`
     <template layout>
       <onboarding-dialog>
-        <ui-text slot="header" type="headline-m">
+        <ui-text slot="header" type="headline-m" mobile-type="headline-s">
           Data Collection Summary
         </ui-text>
-        <ui-text slot="header" type="headline-s"> Web Trackers </ui-text>
+        <ui-text slot="header" type="headline-s" mobile-type="headline-s">
+          Web Trackers
+        </ui-text>
         <ui-text>
           To provide privacy protection features, the following information
           about web trackers is collected:

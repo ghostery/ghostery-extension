@@ -16,10 +16,12 @@ export default {
   render: () => html`
     <template layout>
       <onboarding-dialog>
-        <ui-text slot="header" type="headline-m">
+        <ui-text slot="header" type="headline-m" mobile-type="headline-s">
           Data Collection Summary
         </ui-text>
-        <ui-text slot="header" type="headline-s">Performance Telemetry</ui-text>
+        <ui-text slot="header" type="headline-s" mobile-type="headline-s">
+          Performance Telemetry
+        </ui-text>
         <ui-text>
           To get insights on add-on usage, the following information about the
           browser and the extension is collected:
