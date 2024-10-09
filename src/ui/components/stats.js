@@ -117,6 +117,7 @@ export default {
                 grouped
                 active="${type === 'list'}"
                 layout="size:30px"
+                data-qa="button:detailed-view"
               >
                 <button onclick="${html.set('type', 'list')}">
                   <ui-icon name="list" color="gray-800"></ui-icon>
@@ -195,6 +196,7 @@ export default {
                                 trackerId: tracker.id,
                               })}"
                               layout="row items:center gap:0.5 padding:0.5:0"
+                              data-qa="button:tracker:${tracker.id}"
                             >
                               <ui-tooltip>
                                 <span slot="content">
@@ -209,11 +211,13 @@ export default {
                               html`<ui-icon
                                 name="block-s"
                                 color="danger-700"
+                                data-qa="icon:tracker:${tracker.id}:blocked"
                               ></ui-icon>`}
                               ${tracker.modified &&
                               html`<ui-icon
                                 name="eye"
                                 color="primary-700"
+                                data-qa="icon:tracker:${tracker.id}:modified"
                               ></ui-icon>`}
                             </a>
                           </ui-text>

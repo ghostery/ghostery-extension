@@ -12,8 +12,8 @@
 import { browser, expect } from '@wdio/globals';
 import { getExtensionElement, getExtensionPageURL } from './utils.js';
 
-describe('Onboarding', () => {
-  it('keeps ghostery disabled', async () => {
+describe('Onboarding', function () {
+  it('keeps ghostery disabled', async function () {
     await browser.url(await getExtensionPageURL('onboarding'));
 
     await getExtensionElement('button:skip').click();
@@ -24,7 +24,7 @@ describe('Onboarding', () => {
     await expect(getExtensionElement('button:enable')).toBeDisplayed();
   });
 
-  it('enables ghostery', async () => {
+  it('enables ghostery', async function () {
     await browser.url(await getExtensionPageURL('onboarding'));
 
     await getExtensionElement('button:enable').click();

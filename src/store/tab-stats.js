@@ -84,7 +84,7 @@ const Stats = {
         return tabStats;
       }
 
-      const { hostname } = parse(tab.url);
+      const hostname = parse(tab.url).hostname?.replace(/^www\./, '');
       return { hostname };
     },
     observe:

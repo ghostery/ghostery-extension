@@ -8,13 +8,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { browser, expect, $, $$ } from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 import {
+  disableCache,
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
   switchToPanel,
 } from './utils.js';
+
+import { PAGE_URL } from '../wdio.conf.js';
 
 async function updatePrivacySettings(name, value) {
   await browser.url(await getExtensionPageURL('settings'));
@@ -25,24 +28,28 @@ async function updatePrivacySettings(name, value) {
   }
 
   await expect(toggle).toHaveElementProperty('value', value);
+
+  // Allow background process to update the settings
+  // E.g. reload engines / DNR rules
+  await browser.pause(2000);
 }
 
-describe('Privacy', () => {
+describe('Privacy', function () {
   before(enableExtension);
 
-  describe('Never-consent', () => {
+  describe('Never-consent', function () {
     beforeEach(() => updatePrivacySettings('never-consent', false));
 
     const WEBSITE_URL = 'https://stackoverflow.com/';
     const SELECTOR = '#onetrust-consent-sdk';
 
-    it('displays consent popup', async () => {
+    it('displays consent popup', async function () {
       await browser.url(WEBSITE_URL);
 
       await expect($(SELECTOR)).toBeDisplayed();
     });
 
-    it('closes the consent popup', async () => {
+    it('closes the consent popup', async function () {
       await updatePrivacySettings('never-consent', true);
 
       await browser.url(WEBSITE_URL);
@@ -56,52 +63,142 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Ad-Blocking', () => {
+  describe('Ad-Blocking', function () {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
-    const WEBSITE_URL = 'https://www.onet.pl/';
-    const SELECTOR = 'div[class^="AdSlotPlaceholder_"]';
+    const SELECTOR = 'ad-slot';
 
-    it('displays ads on a page', async () => {
-      await browser.url(WEBSITE_URL);
-
-      let displayed = false;
-      for (const ad of await $$(SELECTOR)) {
-        if (displayed) break;
-        displayed = await ad.isDisplayed();
-      }
-
-      expect(displayed).toBe(true);
+    it('does not block ads on a page', async function () {
+      await browser.url(PAGE_URL);
+      await expect($(SELECTOR)).toBeDisplayed();
     });
 
-    it('blocks ads on a page', async () => {
+    it('blocks ads on a page', async function () {
       await updatePrivacySettings('ad-blocking', true);
 
-      await browser.url(WEBSITE_URL);
-
-      for (const ad of await $$(SELECTOR)) {
-        await expect(ad).not.toBeDisplayed();
-      }
+      await browser.url(PAGE_URL);
+      await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
 
-  describe('Global pause', () => {
-    const WEBSITE_URL = 'https://www.onet.pl/';
+  describe('Anti-Tracking', function () {
+    beforeEach(() => updatePrivacySettings('anti-tracking', false));
 
-    it("shows blocked trackers in the panel when it's turned off", async () => {
-      await updatePrivacySettings('global-pause', false);
+    const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
+
+    it('does not block tracker requests on the page', async function () {
+      await disableCache();
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async function () {
+        await getExtensionElement('button:detailed-view').click();
+
+        for (const trackerId of TRACKER_IDS) {
+          const trackerEl = await getExtensionElement(
+            `button:tracker:${trackerId}`,
+          );
+
+          if (trackerEl.isDisplayed()) {
+            await expect(
+              getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+            ).not.toBeDisplayed();
+            await expect(
+              getExtensionElement(`icon:tracker:${trackerId}:modified`),
+            ).not.toBeDisplayed();
+          }
+        }
+      });
+    });
+
+    it('blocks tracker requests on the page', async function () {
+      await updatePrivacySettings('anti-tracking', true);
+
+      await disableCache();
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async function () {
+        await getExtensionElement('button:detailed-view').click();
+
+        for (const trackerId of TRACKER_IDS) {
+          const trackerEl = await getExtensionElement(
+            `button:tracker:${trackerId}`,
+          );
+
+          if (trackerEl.isDisplayed()) {
+            await expect(
+              getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+            ).toBeDisplayed();
+          }
+        }
+      });
+    });
+  });
+
+  describe('Regional Filters', function () {
+    beforeEach(() => updatePrivacySettings('regional-filters', false));
+
+    const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
+    const SELECTOR = '.a-slider';
+
+    it('shows the ads on the page', async function () {
       await browser.url(WEBSITE_URL);
+      await expect($(SELECTOR)).toBeDisplayed();
+    });
 
-      await switchToPanel(async () => {
+    it('hides the ads on the page', async function () {
+      await updatePrivacySettings('regional-filters', true);
+      const checkbox = await getExtensionElement(
+        'checkbox:regional-filters:pl',
+      );
+
+      if (!(await checkbox.getProperty('checked'))) {
+        await checkbox.click();
+        await expect(checkbox).toBeChecked();
+      }
+
+      await browser.url(WEBSITE_URL);
+      await expect($(SELECTOR)).not.toBeDisplayed();
+    });
+  });
+
+  describe('Pause Website', function () {
+    it("pauses the website's privacy settings", async function () {
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async function () {
+        const pauseComponent = await getExtensionElement('component:pause');
+        const pauseButton = await getExtensionElement('button:pause');
+
+        if (await pauseComponent.getProperty('paused')) {
+          await pauseButton.click();
+        }
+
+        await pauseButton.click();
+        await expect(
+          getExtensionElement('component:feedback'),
+        ).not.toBeDisplayed();
+
+        await pauseButton.click();
+        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
+      });
+    });
+  });
+
+  describe('Global pause', function () {
+    it('shows blocked trackers in the panel', async function () {
+      await updatePrivacySettings('global-pause', false);
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async function () {
         await expect(getExtensionElement('component:feedback')).toBeDisplayed();
       });
     });
 
-    it("doesn't show blocked trackers in the panel when it's turned on", async () => {
+    it("doesn't show blocked trackers in the panel", async function () {
       await updatePrivacySettings('global-pause', true);
-      await browser.url(WEBSITE_URL);
+      await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
+      await switchToPanel(async function () {
         await expect(
           getExtensionElement('component:feedback'),
         ).not.toBeDisplayed();

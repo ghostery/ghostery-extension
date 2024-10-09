@@ -36,6 +36,11 @@ export default [
     },
   },
   {
-    ignores: ['dist/*', 'xcode/*', 'src/rule_resources*'],
+    ignores: [
+      'dist/*',
+      'xcode/*',
+      'src/rule_resources*',
+      'web-ext-artifacts/*',
+    ],
   },
 ];

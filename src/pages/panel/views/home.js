@@ -44,13 +44,14 @@ function showAlert(host, message) {
   host.querySelector('#panel-alerts').appendChild(wrapper);
 }
 
+let reloadTimeout;
 function reloadTab() {
-  setTimeout(async () => {
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
+  clearTimeout(reloadTimeout);
+
+  reloadTimeout = setTimeout(async () => {
+    const tab = await chrome.runtime.sendMessage({ action: 'getCurrentTab' });
     chrome.tabs.reload(tab.id);
+    reloadTimeout = null;
   }, 1000);
 }
 
@@ -158,6 +159,7 @@ export default {
                 paused="${paused || globalPause}"
                 global="${globalPause}"
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
+                data-qa="component:pause"
               >
               </panel-pause>
             `
