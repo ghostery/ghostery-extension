@@ -6,3 +6,10 @@ updates:
       interval: daily
       time: "04:00"
     open-pull-requests-limit: 99
+     groups:
+      wdio:
+        patterns:
+          - "@wdio/*"
+      adblocker:
+        patterns:
+          - "@cliqz/adblocker*"
