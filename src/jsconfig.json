@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
     "paths": {
       "/*": ["./*"]
     }
-  }
+  },
+  "include": [
+    "./**/*.js",
+    "./globals.d.ts"
+  ]
 }
