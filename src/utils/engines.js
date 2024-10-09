@@ -116,6 +116,14 @@ async function loadFromStorage(name) {
 
     if (engineBytes) {
       const engine = deserializeEngine(engineBytes);
+
+      if (!engine.config.loadNetworkFilters) {
+        // https://github.com/ghostery/ghostery-extension/pull/1928
+        // The above PR introduced full engines to all platforms,
+        // so the old engines are obsolete and should be reloaded
+        throw TypeError(`Engine "${name}" is obsolete and must be reloaded`);
+      }
+
       saveToMemory(name, engine);
 
       return engine;
@@ -164,9 +172,7 @@ async function saveToStorage(name) {
 async function loadFromFile(name) {
   try {
     const response = await fetch(
-      chrome.runtime.getURL(
-        `rule_resources/engine-${name}.dat`,
-      ),
+      chrome.runtime.getURL(`rule_resources/engine-${name}.dat`),
     );
 
     const engineBytes = new Uint8Array(await response.arrayBuffer());
@@ -236,10 +242,7 @@ export async function update(name) {
   }
 
   try {
-    const urlName =
-      name === 'trackerdb'
-        ? 'trackerdbMv3'
-        : `dnr-${name}`;
+    const urlName = name === 'trackerdb' ? 'trackerdbMv3' : `dnr-${name}`;
 
     const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
 
