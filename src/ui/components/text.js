@@ -75,9 +75,10 @@ export default {
       display: inline;
     }
 
-
     ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; -webkit-tap-highlight-color: transparent; }
     ::slotted(a:active) { opacity: 0.6; }
     ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
+
+    ::slotted(ul) { padding: 0; margin: 0 0 0 1.5em; }
   `,
 };

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { define, html, router } from 'hybrids';
+import { html, router } from 'hybrids';
 
 const PRIVACY_POLICY_URL = `https://www.${
   chrome.runtime.getManifest().debug ? 'ghosterystage' : 'ghostery'
@@ -30,9 +30,8 @@ function scrollToAnchor(host, event) {
   }
 }
 
-export default define({
+export default {
   [router.connect]: { dialog: true },
-  tag: 'onboarding-privacy-dialog',
   policy: () =>
     fetch(`${PRIVACY_POLICY_URL}?embed=true`).then((res) => {
       if (res.ok) {
@@ -69,12 +68,13 @@ export default define({
         )}
       </div>
       <ui-button slot="footer">
-        <a href="${router.backUrl()}">Done</a>
+        <a href="${router.backUrl()}">Close</a>
       </ui-button>
     </onboarding-dialog>
   `.css`
     #policy { min-height: 100vh; }
     #policy h1 { display: none }
+    #policy h1 + p { margin-top: 0; }
     #policy h3, #policy .side-menu .cap { font: var(--ui-font-headline-s); font-weight: 400; color: var(--ui-color-gray-800); margin: 16px 0; }
     #policy .side-menu .cap { font: var(--ui-font-headline-s); }
     #policy ul { list-style: none; padding: 0; margin: 16px 0; }
@@ -86,4 +86,4 @@ export default define({
 
     #policy .breadcrumb, #policy h2, #policy ul li.child { display: none }
   `,
-});
+};

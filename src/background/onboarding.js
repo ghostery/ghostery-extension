@@ -10,8 +10,8 @@
  */
 import { observe } from '/store/options.js';
 
-observe('onboarding', ({ done, shownAt }) => {
-  if (!done && !shownAt) {
+observe('onboarding', (onboarding) => {
+  if (!onboarding.shownAt) {
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });
