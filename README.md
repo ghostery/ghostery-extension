@@ -1,6 +1,6 @@
 # Ghostery Browser Extension
 
-Ghostery is a powerful Tracker & Adblocker extension for Chrome with over 100 million downloads. Block ads, stop trackers, and speed up websites. Privacy at its best.
+Ghostery is a powerful Tracker & Adblocker browser extension with over 100 million downloads. Block ads, stop trackers, and speed up websites. Privacy at its best.
 
 * Block all ads on websites, including YouTube and Facebook, to focus on the information that matters.
 * Stop trackers from collecting your personal data.
