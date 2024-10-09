@@ -20,6 +20,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const WEB_EXT_PATH = path.join(__dirname, '..', 'web-ext-artifacts');
 const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
+
 const PAGE_PORT = 6789;
 export const PAGE_URL = `http://page.localhost:${PAGE_PORT}/`;
 
@@ -51,7 +52,7 @@ export const config = {
     },
   ],
   onPrepare: async (config, capabilities) => {
-    if (!process.env.DEBUG) {
+    if (process.argv.includes('--clean')) {
       rmSync(WEB_EXT_PATH, { recursive: true, force: true });
     }
 

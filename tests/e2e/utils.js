@@ -59,7 +59,7 @@ export async function enableExtension() {
   await expect(getExtensionElement('view:success')).toBeDisplayed();
 
   // Give the extension some time to initialize (updating the engines in the background)
-  await browser.pause(5000);
+  await browser.pause(2000);
 }
 
 export async function switchToPanel(fn) {

@@ -34,22 +34,22 @@ async function updatePrivacySettings(name, value) {
   await browser.pause(2000);
 }
 
-describe('Privacy', () => {
+describe('Privacy', function () {
   before(enableExtension);
 
-  describe('Never-consent', () => {
+  describe('Never-consent', function () {
     beforeEach(() => updatePrivacySettings('never-consent', false));
 
     const WEBSITE_URL = 'https://stackoverflow.com/';
     const SELECTOR = '#onetrust-consent-sdk';
 
-    it('displays consent popup', async () => {
+    it('displays consent popup', async function () {
       await browser.url(WEBSITE_URL);
 
       await expect($(SELECTOR)).toBeDisplayed();
     });
 
-    it('closes the consent popup', async () => {
+    it('closes the consent popup', async function () {
       await updatePrivacySettings('never-consent', true);
 
       await browser.url(WEBSITE_URL);
@@ -63,17 +63,17 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Ad-Blocking', () => {
+  describe('Ad-Blocking', function () {
     beforeEach(() => updatePrivacySettings('ad-blocking', false));
 
     const SELECTOR = 'ad-slot';
 
-    it('does not block ads on a page', async () => {
+    it('does not block ads on a page', async function () {
       await browser.url(PAGE_URL);
       await expect($(SELECTOR)).toBeDisplayed();
     });
 
-    it('blocks ads on a page', async () => {
+    it('blocks ads on a page', async function () {
       await updatePrivacySettings('ad-blocking', true);
 
       await browser.url(PAGE_URL);
@@ -81,16 +81,16 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Anti-Tracking', () => {
+  describe('Anti-Tracking', function () {
     beforeEach(() => updatePrivacySettings('anti-tracking', false));
 
     const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
-    it('does not block tracker requests on the page', async () => {
+    it('does not block tracker requests on the page', async function () {
       await disableCache();
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
+      await switchToPanel(async function () {
         await getExtensionElement('button:detailed-view').click();
 
         for (const trackerId of TRACKER_IDS) {
@@ -110,13 +110,13 @@ describe('Privacy', () => {
       });
     });
 
-    it('blocks tracker requests on the page', async () => {
+    it('blocks tracker requests on the page', async function () {
       await updatePrivacySettings('anti-tracking', true);
 
       await disableCache();
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
+      await switchToPanel(async function () {
         await getExtensionElement('button:detailed-view').click();
 
         for (const trackerId of TRACKER_IDS) {
@@ -134,18 +134,18 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Regional Filters', () => {
+  describe('Regional Filters', function () {
     beforeEach(() => updatePrivacySettings('regional-filters', false));
 
     const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
     const SELECTOR = '.a-slider';
 
-    it('shows the ads on the page', async () => {
+    it('shows the ads on the page', async function () {
       await browser.url(WEBSITE_URL);
       await expect($(SELECTOR)).toBeDisplayed();
     });
 
-    it('hides the ads on the page', async () => {
+    it('hides the ads on the page', async function () {
       await updatePrivacySettings('regional-filters', true);
       const checkbox = await getExtensionElement(
         'checkbox:regional-filters:pl',
@@ -161,11 +161,11 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Pause Website', () => {
-    it("pauses the website's privacy settings", async () => {
+  describe('Pause Website', function () {
+    it("pauses the website's privacy settings", async function () {
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
+      await switchToPanel(async function () {
         const pauseComponent = await getExtensionElement('component:pause');
         const pauseButton = await getExtensionElement('button:pause');
 
@@ -184,21 +184,21 @@ describe('Privacy', () => {
     });
   });
 
-  describe('Global pause', () => {
-    it('shows blocked trackers in the panel', async () => {
+  describe('Global pause', function () {
+    it('shows blocked trackers in the panel', async function () {
       await updatePrivacySettings('global-pause', false);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
+      await switchToPanel(async function () {
         await expect(getExtensionElement('component:feedback')).toBeDisplayed();
       });
     });
 
-    it("doesn't show blocked trackers in the panel", async () => {
+    it("doesn't show blocked trackers in the panel", async function () {
       await updatePrivacySettings('global-pause', true);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async () => {
+      await switchToPanel(async function () {
         await expect(
           getExtensionElement('component:feedback'),
         ).not.toBeDisplayed();
