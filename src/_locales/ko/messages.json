@@ -41,8 +41,8 @@
   "add_exception": {
     "message": "예외 추가"
   },
-  "add_on_health": {
-    "message": "애드온 건강"
+  "add_on_s_health": {
+    "message": "애드온의 상태"
   },
   "add_website": {
     "message": "웹 사이트 추가"
@@ -353,8 +353,8 @@
   "ignore": {
     "message": "무시"
   },
-  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_health__a__and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "웹 추적기, 애드온 상태 및 성능 원격 측정에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 강화하기 위해 당사의 개인정보 보호정책에 따라 공유됩니다.",
+  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "웹 추적기, 애드온의 상태 및 성능 원격 측정에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 강화하기 위해 당사의 개인정보 보호정책에 따라 공유됩니다.",
     "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {

@@ -41,8 +41,8 @@
   "add_exception": {
     "message": "Ausnahme hinzufügen"
   },
-  "add_on_health": {
-    "message": "Add-on-Gesundheit"
+  "add_on_s_health": {
+    "message": "Gesundheit des Add-ons"
   },
   "add_website": {
     "message": "Webseite hinzufügen"
@@ -101,7 +101,7 @@
     "message": "Werde Ghostery-Förderer"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
-    "message": "Als EU-Unternehmen hält sich Ghostery strikt an die DSGVO (Datenschutz-Grundverordnung), die die Datenerhebung reguliert, um die Privatsphäre der Nutzer zu gewährleisten."
+    "message": "Als europäisches Unternehmen hält sich Ghostery streng an die Datenschutz-Grundverordnung (DSGVO) der EU. Diese Verordnung regelt die Datenerhebung und stellt sicher, dass die Privatsphäre der Nutzer im Internet geschützt wird."
   },
   "block_all__recommended_": {
     "message": "Alle blockieren (empfohlen)"
@@ -314,7 +314,7 @@
     "message": "Ghostery pausiert auf dieser Website."
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
-    "message": "Ghostery sammelt niemals persönliche Informationen wie Passwörter, Browserverlauf oder den Inhalt der von Ihnen besuchten Seiten."
+    "message": "Ghostery erfasst niemals persönliche Daten wie Passwörter, den Browserverlauf oder die Inhalte besuchter Seiten."
   },
   "ghostery_paused": {
     "message": "Ghostery pausiert"
@@ -353,7 +353,7 @@
   "ignore": {
     "message": "Ignorieren"
   },
-  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_health__a__and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Add-on-Gesundheit</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> geteilt, um den Datenschutz für die Ghostery-Community zu verbessern.",
     "description": "'add-on' means 'browser extension'"
   },

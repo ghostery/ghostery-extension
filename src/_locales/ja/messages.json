@@ -41,7 +41,7 @@
   "add_exception": {
     "message": "例外を追加"
   },
-  "add_on_health": {
+  "add_on_s_health": {
     "message": "アドオンの健康状態"
   },
   "add_website": {
@@ -353,8 +353,8 @@
   "ignore": {
     "message": "無視する"
   },
-  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_health__a__and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "インターネットユーザーのプライバシー、データ保護、オンライン追跡に関心のある方々に向けて、<a href=\"$${0}\">ウェブトラッカー</a>、<a href=\"$${1}\">アドオンの健康状態</a>、および<a href=\"$${2}\">パフォーマンステレメトリー</a>に関する情報は、<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">プライバシーポリシー</a>に従って共有され、Ghosteryコミュニティのプライバシー保護を推進します。.",
+  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "ウェブトラッカー、アドオンの健康状態、パフォーマンステレメトリーに関する情報は、Ghosteryコミュニティのプライバシー保護を進めるために、当社のプライバシーポリシーに従って共有されます。.",
     "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {

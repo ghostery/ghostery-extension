@@ -41,7 +41,7 @@
   "add_exception": {
     "message": "Agregar excepción"
   },
-  "add_on_health": {
+  "add_on_s_health": {
     "message": "Salud del Complemento"
   },
   "add_website": {
@@ -353,8 +353,8 @@
   "ignore": {
     "message": "Ignorar"
   },
-  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_health__a__and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Información sobre <a href=\"$${0}\">rastreadores web</a>, <a href=\"$${1}\">salud de complementos</a> y <a href=\"$${2}\">telemetría de rendimiento</a> se compartirá de acuerdo con nuestra <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidad</a>, avanzando en la protección de la privacidad para la comunidad de Ghostery.",
+  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Información sobre <a href=\"$${0}\">rastreadores web</a>, <a href=\"$${1}\">salud de los complementos</a> y <a href=\"$${2}\">telemetría de rendimiento</a> se compartirá de acuerdo con nuestra <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidad</a>, avanzando en la protección de la privacidad para la comunidad de Ghostery.",
     "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {

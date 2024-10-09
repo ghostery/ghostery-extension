@@ -20,7 +20,7 @@ export default {
           Data Collection Summary
         </ui-text>
         <ui-text slot="header" type="headline-s" mobile-type="headline-xs">
-          Add-on Health
+          Add-on's Health
         </ui-text>
         <ui-text>
           To monitor critical crash information of the extension, the following
