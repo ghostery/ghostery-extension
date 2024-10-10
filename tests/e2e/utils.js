@@ -24,18 +24,20 @@ async function getExtensionId() {
   if (!extensionId) {
     switch (browser.capabilities.browserName) {
       case 'chrome': {
-        await browser.url('chrome://extensions');
+        const url = 'chrome://extensions';
+        await browser.url(url);
 
-        const extension = await $('extensions-item:first-child');
-        extensionId = await extension.getAttribute('id');
+        extensionId = await $('extensions-item:first-child').getAttribute('id');
+
         break;
       }
       case 'firefox': {
         await browser.url('about:debugging#/runtime/this-firefox');
-        const extesionManifestAnchor = await $('a[href*="manifest.json"]');
-
-        const manifestUrl = await extesionManifestAnchor.getAttribute('href');
+        const manifestUrl = await $('a[href*="manifest.json"]').getAttribute(
+          'href',
+        );
         extensionId = manifestUrl.match(/([^/]+)\/manifest.json/)[1];
+        break;
       }
     }
   }
@@ -52,36 +54,45 @@ export function getExtensionElement(id) {
 }
 
 export async function enableExtension() {
-  const url = await getExtensionPageURL('onboarding');
-  await browser.switchWindow(url).catch(() => browser.url(url));
+  const isDisabled = await switchToPanel(async function () {
+    return await getExtensionElement('button:enable').isDisplayed();
+  });
 
-  await getExtensionElement('button:enable').click();
-  await expect(getExtensionElement('view:success')).toBeDisplayed();
+  if (isDisabled) {
+    await browser.url(await getExtensionPageURL('onboarding'));
 
-  // Give the extension some time to initialize (updating the engines in the background)
-  await browser.pause(2000);
+    await getExtensionElement('button:enable').click();
+    await expect(getExtensionElement('view:success')).toBeDisplayed();
+
+    // Give the extension some time to initialize (updating the engines in the background)
+    await browser.pause(2000);
+  }
 }
 
 export async function switchToPanel(fn) {
-  const currentTitle = await browser.getTitle();
+  const context = await browser.getTitle();
   const url = await getExtensionPageURL('panel');
 
   try {
-    await browser.pause(1000);
     // When the panel is not opened yet, the switchWindow will throw
     // so then (for the first time) we need to open the panel in a new window
     try {
       await browser.switchWindow(url);
-      await browser.url(url);
+      await browser.url(url); // Refresh the page to ensure the panel is in a clean state
     } catch {
-      browser.newWindow(url);
+      await browser.newWindow(url);
     }
 
-    await fn();
+    await browser.pause(1000);
 
-    await browser.switchWindow(currentTitle);
+    const result = await fn();
+
+    await browser.closeWindow();
+    await browser.switchWindow(context);
+
+    return result;
   } catch (e) {
-    await browser.switchWindow(currentTitle);
+    await browser.switchWindow(context);
     throw e;
   }
 }

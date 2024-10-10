@@ -10,7 +10,11 @@
  */
 
 import { browser, expect } from '@wdio/globals';
-import { getExtensionElement, getExtensionPageURL } from './utils.js';
+import {
+  getExtensionElement,
+  getExtensionPageURL,
+  switchToPanel,
+} from './utils.js';
 
 describe('Onboarding', function () {
   it('keeps ghostery disabled', async function () {
@@ -19,9 +23,11 @@ describe('Onboarding', function () {
     await getExtensionElement('button:skip').click();
     await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
-    await browser.url(await getExtensionPageURL('panel'));
+    await switchToPanel(async function () {
+      await expect(getExtensionElement('button:enable')).toBeDisplayed();
+    });
 
-    await expect(getExtensionElement('button:enable')).toBeDisplayed();
+    await browser.url('about:blank');
   });
 
   it('enables ghostery', async function () {
@@ -30,7 +36,10 @@ describe('Onboarding', function () {
     await getExtensionElement('button:enable').click();
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
-    await browser.url(await getExtensionPageURL('panel'));
-    await expect(getExtensionElement('button:enable')).not.toBeDisplayed();
+    await switchToPanel(async function () {
+      await expect(getExtensionElement('button:enable')).not.toBeDisplayed();
+    });
+
+    await browser.url('about:blank');
   });
 });
