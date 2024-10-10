@@ -116,6 +116,14 @@ async function loadFromStorage(name) {
 
     if (engineBytes) {
       const engine = deserializeEngine(engineBytes);
+
+      if (!engine.config.loadNetworkFilters) {
+        // https://github.com/ghostery/ghostery-extension/pull/1928
+        // The above PR introduced full engines to all platforms,
+        // so the old engines are obsolete and should be reloaded
+        throw TypeError(`Engine "${name}" is obsolete and must be reloaded`);
+      }
+
       saveToMemory(name, engine);
 
       return engine;

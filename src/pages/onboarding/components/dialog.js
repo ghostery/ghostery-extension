@@ -14,8 +14,8 @@ import { html } from 'hybrids';
 export default {
   render: () => html`
     <template
-      layout="column center fixed inset padding:2.5 layer:1000"
-      layout@768px="padding:5"
+      layout="column top items:center fixed inset padding:4:2.5:2.5 layer:1000"
+      layout@768px="padding:15vh:5:5"
     >
       <div
         id="dialog"
@@ -25,12 +25,13 @@ export default {
           layout="column gap:2 overflow:y:auto basis:full padding:2.5 padding:bottom:12"
           layout@768px="padding:4:4:12"
         >
-          <header layout="column center"><slot name="header"></slot></header>
+          <header layout="block:center"><slot name="header"></slot></header>
           <slot></slot>
         </div>
         <footer
           layout="row gap:2 absolute inset top:auto layer padding:0:2.5:2.5"
-          layout@390px="content:flex-end padding:0:5:5"
+          layout@390px="content:flex-end"
+          layout@768px="padding:0:4:4"
         >
           <slot
             name="footer"

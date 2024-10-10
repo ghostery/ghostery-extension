@@ -53,7 +53,7 @@ export default {
           <ui-text type="body-s" underline layout="block:justify">
             ${msg.html`
               Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
-              <a href="${router.url(AddonHealth)}">add-on health</a> and
+              <a href="${router.url(AddonHealth)}">add-on's health</a>, and
               <a href="${router.url(Performance)}">performance telemetry</a>
               will be shared in accordance with our <a href="${
                 __PLATFORM__ === 'firefox'

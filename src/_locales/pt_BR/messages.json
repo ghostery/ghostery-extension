@@ -41,6 +41,9 @@
   "add_exception": {
     "message": "Adicionar exceção"
   },
+  "add_on_s_health": {
+    "message": "Saúde do Complemento"
+  },
   "add_website": {
     "message": "Adicionar site"
   },
@@ -97,6 +100,9 @@
   "become_a_contributor": {
     "message": "Seja um colaborador"
   },
+  "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
+    "message": "Sendo uma empresa da UE, a Ghostery adere estritamente ao GDPR (Regulamento Geral sobre a Proteção de Dados), que regula a coleta de dados para garantir a privacidade do usuário."
+  },
   "block_all__recommended_": {
     "message": "Bloquear tudo (recomendado)"
   },
@@ -122,6 +128,12 @@
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Bloqueia anúncios adicionais, rastreadores e pop-ups específicos do idioma dos sites que você visita. Ative apenas os idiomas que você precisa para evitar a lentidão do seu navegador."
   },
+  "browser__vendor": {
+    "message": "navegador: fornecedor"
+  },
+  "browser__vendor__version__language__operating_system_vendor": {
+    "message": "navegador: fornecedor, versão, idioma, fornecedor do sistema operacional"
+  },
   "cancel": {
     "message": "Cancelar"
   },
@@ -134,6 +146,9 @@
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Clique no ícone do quebra-cabeça ao lado da barra de pesquisa e fixe o Ghostery na sua barra de ferramentas."
+  },
+  "close": {
+    "message": "Fechar"
   },
   "collapse": {
     "message": "Recolher"
@@ -184,6 +199,9 @@
     "message": "Interação com o cliente",
     "description": "Tracker category name"
   },
+  "data_collection_summary": {
+    "message": "Resumo da Coleta de Dados"
+  },
   "detailed_view": {
     "message": "Visão detalhada"
   },
@@ -204,9 +222,6 @@
   },
   "don_t_ask_again": {
     "message": "Não pergunte novamente"
-  },
-  "done": {
-    "message": "Pronto"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "Devido às restrições do navegador e à falta de permissões adicionais, o Ghostery não é capaz de proteger você."
@@ -236,6 +251,9 @@
   "enter_website_url": {
     "message": "Insira o URL do site"
   },
+  "error__type__message__stack_trace": {
+    "message": "erro: tipo, mensagem, rastreamento de pilha"
+  },
   "errors__@_0__": {
     "message": "Erros ($${0})"
   },
@@ -254,6 +272,12 @@
   },
   "experimental_filters": {
     "message": "Filtros Experimentais"
+  },
+  "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
+    "message": "extensão: versão, data de instalação, número de instalação aleatório (de 1 a 100), configurações básicas, status de contribuição"
+  },
+  "extension_id_is_removed_from_the_stack_traces_": {
+    "message": "O ID da extensão é removido dos rastreamentos de pilha."
   },
   "extensions": {
     "message": "Extensões",
@@ -289,6 +313,9 @@
   "ghostery_is_paused_on_this_site_": {
     "message": "O Ghostery está pausado neste site."
   },
+  "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
+    "message": "Ghostery nunca coleta informações pessoais como senhas, histórico de navegação ou o conteúdo das páginas que você visita."
+  },
   "ghostery_paused": {
     "message": "Ghostery pausado"
   },
@@ -307,6 +334,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "O Ghostery mostrará quantos rastreadores foram bloqueados em uma página. Clicar no ícone Ghostery revela informações mais detalhadas."
   },
+  "hashes_of_potentially_unique_identifier_in_requests_parameters": {
+    "message": "hashes de identificadores potencialmente únicos nos parâmetros de solicitações"
+  },
   "help_ghostery_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ajude o Ghostery a lutar por uma web onde a privacidade é um direito humano básico."
   },
@@ -323,8 +353,8 @@
   "ignore": {
     "message": "Ignorar"
   },
-  "information_about_web_trackers__add_on_health_and_performance_telemetry_will_be_shared_in_accordance_with_our__a_href__@_0___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informações sobre rastreadores da web, telemetria de desempenho e saúde de complementos serão compartilhadas de acordo com nossa <a href=\"$${0}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidade</a>, avançando a proteção de privacidade para a comunidade Ghostery.",
+  "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
+    "message": "Informações sobre <a href=\"$${0}\">rastreadores da web</a>, <a href=\"$${1}\">saúde dos complementos</a> e <a href=\"$${2}\">telemetria de desempenho</a> serão compartilhadas de acordo com nossa <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidade</a>, avançando na proteção de privacidade para a comunidade Ghostery.",
     "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
@@ -333,8 +363,11 @@
   "join_ghostery": {
     "message": "Junte-se ao Ghostery"
   },
+  "k_anonymity_protected_reports_of_page_shows": {
+    "message": "relatórios protegidos por k-anonimato de exibições de página"
+  },
   "keep_disabled": {
-    "message": "Manter desabilitado"
+    "message": "Mantenha Desativado"
   },
   "last_update__@_0_": {
     "message": "Última atualização: $${0}"
@@ -440,6 +473,9 @@
   "paused": {
     "message": "Pausado"
   },
+  "performance_telemetry": {
+    "message": "Telemetria de Desempenho"
+  },
   "permission_required": {
     "message": "Permissão necessária"
   },
@@ -482,6 +518,9 @@
   "report_a_broken_page": {
     "message": "Relatar uma página quebrada"
   },
+  "request_metadata_of_potential_web_trackers": {
+    "message": "solicitar metadados de potenciais rastreadores da web"
+  },
   "save": {
     "message": "Salvar"
   },
@@ -502,6 +541,9 @@
   },
   "send_feedback": {
     "message": "Enviar feedback"
+  },
+  "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
+    "message": "O SDK do Sentry está em uso para coletar e enviar os relatórios, mas o Sentry só recebe as informações acima - nenhum dos dois pedidos pode ser vinculado um ao outro e o IP do navegador nunca é compartilhado com o Sentry."
   },
   "settings_sync": {
     "message": "Configurações de sincronização"
@@ -535,6 +577,9 @@
   "software_licenses": {
     "message": "Licenças de software"
   },
+  "statistical_reports_on_navigational_routes": {
+    "message": "relatórios estatísticos sobre rotas de navegação"
+  },
   "submit_a_new_tracker": {
     "message": "Enviar um novo rastreador"
   },
@@ -562,6 +607,15 @@
   },
   "to_adjust_privacy_protection_trust_a_site_": {
     "message": "Para ajustar a proteção de privacidade, confie em um site:"
+  },
+  "to_get_insights_on_add_on_usage__the_following_information_about_the_browser_and_the_extension_is_collected_": {
+    "message": "Para obter insights sobre o uso de complementos, as seguintes informações sobre o navegador e a extensão são coletadas:"
+  },
+  "to_monitor_critical_crash_information_of_the_extension__the_following_information_about_errors_is_collected_": {
+    "message": "Para monitorar informações críticas de falhas da extensão, as seguintes informações sobre erros são coletadas:"
+  },
+  "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
+    "message": "Para fornecer recursos de proteção de privacidade, as seguintes informações sobre rastreadores da web são coletadas:"
   },
   "tracker_database": {
     "message": "Banco de dados do rastreador"
@@ -638,6 +692,9 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Sabemos que você confia no Ghostery para ter uma experiência tranquila no YouTube. Até que surja uma solução mais refinada, aqui está uma correção temporária."
   },
+  "web_trackers": {
+    "message": "Rastreadores da Web"
+  },
   "website": {
     "message": "Site"
   },
@@ -662,8 +719,8 @@
   "whotracks_me_wheel": {
     "message": "Roda do WhoTracks.Me"
   },
-  "without_privacy_features_enabled__only_basic_functionality_of_naming_trackers_is_available_": {
-    "message": "Sem os recursos de privacidade ativados, apenas a funcionalidade básica dos rastreadores de nomes está disponível."
+  "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
+    "message": "Com o Ghostery desativado, apenas a funcionalidade básica de nomear rastreadores está disponível."
   },
   "you_are_awesome_": {
     "message": "Você é demais!"
