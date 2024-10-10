@@ -136,12 +136,17 @@ function getCompatRule(rule) {
     supportedResourceTypes.includes(type),
   );
 
+  const excludedResourceTypes = rule.condition.excludedResourceTypes?.filter(
+    (type) => supportedResourceTypes.includes(type),
+  );
+
   if (
     // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
     rule.condition.regexFilter?.includes('\\d') ||
     rule.condition.regexFilter?.match(/(\{\d*,\d*\}|\{\d+\}|\|)/) ||
     !supportedActions.includes(rule.action.type) ||
-    (resourceTypes && resourceTypes.length === 0)
+    (resourceTypes && resourceTypes.length === 0) ||
+    (excludedResourceTypes && excludedResourceTypes.length === 0)
   ) {
     return null;
   }
@@ -154,6 +159,7 @@ function getCompatRule(rule) {
     condition: {
       domainType: rule.condition.domainType,
       resourceTypes,
+      excludedResourceTypes,
       domains: (
         rule.condition.initiatorDomains || rule.condition.requestDomains
       )?.map((d) => `*${d}`),
