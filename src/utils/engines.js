@@ -145,16 +145,18 @@ async function saveToStorage(name) {
 
     if (__PLATFORM__ === 'firefox') {
       // Clear out the fallback local storage if the engine is saved to the IDB
-      chrome.storage.local.set({ [`engines:${name}`]: null });
+      chrome.storage.local.remove([`engines:${name}`]);
     }
 
     await tx.done;
   } catch (e) {
     if (__PLATFORM__ === 'firefox') {
       const key = `engines:${name}`;
-      const data = engine ? { [key]: serialized } : { [key]: null };
-
-      return chrome.storage.local.set(data);
+      if (engine) {
+        return chrome.storage.local.set({ [key]: serialized });
+      } else {
+        return chrome.storage.local.remove([key]);
+      }
     }
 
     throw e;
