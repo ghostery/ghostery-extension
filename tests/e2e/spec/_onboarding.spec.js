@@ -14,7 +14,7 @@ import {
   getExtensionElement,
   getExtensionPageURL,
   switchToPanel,
-} from './utils.js';
+} from '../utils.js';
 
 describe('Onboarding', function () {
   it('keeps ghostery disabled', async function () {

@@ -25,17 +25,16 @@ import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
-const WEB_EXT_PATH = path.join(__dirname, '..', 'web-ext-artifacts');
-const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
-const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
+export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
+export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
 
 const PAGE_PORT = 6789;
 export const PAGE_URL = `http://page.localhost:${PAGE_PORT}/`;
 
 // Generate arguments from command line
-const argv = process.argv.slice(2).reduce(
+export const argv = process.argv.slice(2).reduce(
   (acc, arg) => {
     if (arg.startsWith('--')) {
       if (arg.includes('=')) {
@@ -50,9 +49,45 @@ const argv = process.argv.slice(2).reduce(
   { target: ['firefox', 'chrome'], debug: false, clean: false },
 );
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+export function setupTestPage() {
+  const file = readFileSync(path.join(__dirname, 'page.html'), 'utf8');
+  const server = createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(file);
+  });
+
+  // starts a simple http server locally on port 6789
+  server.listen(PAGE_PORT, '127.0.0.1', () => {
+    console.log(`Testing page server listening on ${PAGE_URL}\n`);
+  });
+}
+
+export function buildForFirefox() {
+  if (!existsSync(FIREFOX_PATH)) {
+    execSync('npm run build -- firefox --silent', {
+      stdio: 'inherit',
+    });
+    execSync('web-ext build --overwrite-dest -n ghostery-firefox.zip', {
+      stdio: 'inherit',
+    });
+  }
+}
+
+export function buildForChrome() {
+  if (!existsSync(CHROME_PATH)) {
+    execSync('npm run build -- --silent', { stdio: 'inherit' });
+    rmSync(CHROME_PATH, { recursive: true, force: true });
+    cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
+      recursive: true,
+    });
+  }
+}
+
 export const config = {
-  specs: ['onboarding.spec.js', 'privacy.spec.js'],
-  reporters: ['spec'],
+  specs: argv.debug ? [['**/*.spec.js']] : ['**/*.spec.js'],
+  specFileRetries: 2,
+  reporters: argv.debug ? ['spec'] : [],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     retries: 2,
@@ -68,6 +103,7 @@ export const config = {
           'browser.cache.memory.enable': false,
           'browser.cache.offline.enable': false,
           'network.http.use-cache': false,
+          'intl.accept_languages': 'en-GB',
         },
       },
     },
@@ -76,6 +112,7 @@ export const config = {
       'goog:chromeOptions': {
         args: (argv.debug ? [] : ['headless', 'disable-gpu']).concat([
           `--load-extension=${CHROME_PATH}`,
+          '--accept-lang=en-GB',
         ]),
       },
     },
@@ -89,47 +126,21 @@ export const config = {
       for (const capability of capabilities) {
         switch (capability.browserName) {
           case 'firefox': {
-            if (!existsSync(FIREFOX_PATH)) {
-              execSync('npm run build -- firefox --silent', {
-                stdio: 'inherit',
-              });
-              execSync(
-                'web-ext build --overwrite-dest -n ghostery-firefox.zip',
-                {
-                  stdio: 'inherit',
-                },
-              );
-            }
+            buildForFirefox();
             break;
           }
           case 'chrome': {
-            if (!existsSync(CHROME_PATH)) {
-              execSync('npm run build -- --silent', { stdio: 'inherit' });
-              cpSync(path.join(__dirname, '..', 'dist'), CHROME_PATH, {
-                recursive: true,
-              });
-            }
+            buildForChrome();
             break;
           }
         }
       }
-    } catch (e) {
-      console.error('Error while building the extension');
-      console.error(e);
 
+      setupTestPage();
+    } catch (e) {
+      console.error('Error while preparing test environment', e);
       process.exit(1);
     }
-
-    const file = readFileSync(path.join(__dirname, 'e2e', 'page.html'), 'utf8');
-    const server = createServer((req, res) => {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(file);
-    });
-
-    // starts a simple http server locally on port 6789
-    server.listen(PAGE_PORT, '127.0.0.1', () => {
-      console.log('Testing page server listening on', PAGE_URL);
-    });
   },
   before: async (capabilities, specs, browser) => {
     if (capabilities.browserName === 'firefox') {
@@ -156,7 +167,3 @@ export const config = {
     await browser.switchWindow(currentUrl);
   },
 };
-
-if (argv.debug) {
-  Object.assign(config, { specs: [config.specs] });
-}
