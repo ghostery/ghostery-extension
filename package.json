@@ -11,7 +11,7 @@
     "start": "npm run build -- --watch",
     "start:update": "./scripts/update.sh",
     "debug": "npm run build -- --watch --debug",
-    "licenses": "license-report --config=../.license-report-config.json > dist/licenses.html",
+    "licenses": "license-report --config=./.license-report-config.json > dist/licenses.html",
     "lint": "eslint",
     "test": "npm run wdio",
     "wdio": "wdio tests/wdio.conf.js",
