@@ -123,7 +123,7 @@
   "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {
     "safari": {
-      "strict_min_version": "16.4"
+      "strict_min_version": "17.0"
     }
   }
 }
