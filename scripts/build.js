@@ -23,6 +23,7 @@ import { build } from 'vite';
 import webExt from 'web-ext';
 
 import REGIONS from '../src/utils/regions.js';
+import { convert } from '../src/utils/dnr-converter-safari.js';
 
 const pwd = process.cwd();
 
@@ -150,15 +151,26 @@ if (manifest.declarative_net_request?.rule_resources) {
     const file = basename(path);
     const sourcePath = resolve(options.srcDir, path);
     const destPath = resolve(options.outDir, dir);
-
-    // open json file
-    if (argv.target === 'safari') {
-      const list = JSON.parse(readFileSync(sourcePath, 'utf8'));
-      rulesCount += list?.length;
-    }
+    const outputPath = resolve(destPath, file);
 
     mkdirSync(destPath, { recursive: true });
-    cpSync(sourcePath, resolve(destPath, file));
+
+    if (argv.target === 'safari') {
+      const list = JSON.parse(readFileSync(sourcePath, 'utf8'))
+        .map((rule) => {
+          try {
+            return convert(rule);
+          } catch {
+            // ignore incompatible rules
+          }
+        })
+        .filter(Boolean);
+      rulesCount += list?.length;
+      writeFileSync(outputPath, JSON.stringify(list));
+      return;
+    }
+
+    cpSync(sourcePath, outputPath);
   });
 
   if (argv.target === 'safari') {
