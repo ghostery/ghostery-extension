@@ -46,12 +46,17 @@
       {
         "id": "ads",
         "enabled": false,
-        "path": "rule_resources/dnr-safari.json"
+        "path": "rule_resources/dnr-ads.json"
+      },
+      {
+        "id": "annoyances",
+        "enabled": false,
+        "path": "rule_resources/dnr-annoyances.json"
       },
       {
         "id": "fixes",
         "enabled": false,
-        "path": "rule_resources/dnr-fixes-safari.json"
+        "path": "rule_resources/dnr-fixes.json"
       }
     ]
   },
@@ -118,7 +123,7 @@
   "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {
     "safari": {
-      "strict_min_version": "16.4"
+      "strict_min_version": "17.0"
     }
   }
 }

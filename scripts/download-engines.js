@@ -105,9 +105,7 @@ const DNR = {
   'dnr-ads': 'ads',
   'dnr-tracking': 'tracking',
   'dnr-annoyances': 'annoyances',
-  'dnr-ios': 'safari',
   'dnr-fixes': 'fixes',
-  'dnr-fixes-safari': 'fixes-safari',
   ...REGIONAL_ENGINES,
 };
 
