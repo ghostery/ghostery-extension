@@ -17,6 +17,18 @@ export function convert(r) {
     );
   }
 
+  // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
+  if (
+    rule.condition.regexFilter?.match(/(\{\d*,\d*\})/) ||
+    rule.condition.regexFilter?.match(/(\{\d+\})/)
+  ) {
+    throw new Error(`regexp not supported: {n,m} quantifier`);
+  }
+
+  if (rule.condition.regexFilter?.match(/\(([^()]*[|][^()]*)\)/)) {
+    throw new Error(`regexp not supported : | - capture group disjunction`);
+  }
+
   if (
     rule.action.type === 'allowAllRequests' &&
     (!rule.condition.resourceTypes ||
