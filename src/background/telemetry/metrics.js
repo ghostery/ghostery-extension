@@ -292,11 +292,7 @@ class Metrics {
         // Onboarding status
         buildQueryPair('ss', '1') +
         // Onboarding last shown at
-        buildQueryPair(
-          'sl',
-          conf.setup_timestamp &&
-            new Date(conf.setup_timestamp).toISOString().split('T')[0],
-        ) +
+        buildQueryPair('sl', 0) +
         // Onboarding shown counter
         buildQueryPair('sb', String(conf.setup_shown)) +
         // Recency, days since last active daily ping

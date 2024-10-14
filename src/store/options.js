@@ -78,7 +78,6 @@ const Options = {
   // Onboarding
   terms: false,
   onboarding: {
-    shownAt: 0,
     shown: 0,
     ...(__PLATFORM__ === 'chromium' && isOpera()
       ? { serpShownAt: 0, serpShown: 0 }
@@ -276,7 +275,6 @@ async function migrateFromV8() {
       options.blockAnnoyances = storage.enable_autoconsent ?? true;
 
       options.onboarding = {
-        shownAt: storage.setup_timestamp || 0,
         shown: storage.setup_shown || 0,
       };
 
