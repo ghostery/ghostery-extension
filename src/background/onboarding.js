@@ -11,7 +11,7 @@
 import { observe } from '/store/options.js';
 
 observe('onboarding', (onboarding) => {
-  if (!onboarding.shownAt) {
+  if (!onboarding.shown) {
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),
     });
