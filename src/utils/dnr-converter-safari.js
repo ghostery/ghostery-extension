@@ -11,8 +11,17 @@
 
 export function convert(r) {
   const rule = structuredClone(r);
+
+  // Based on https://github.com/w3c/webextensions/issues/344#issuecomment-1430358116
+  if (
+    rule.condition.regexFilter?.includes('\\d') ||
+    rule.condition.regexFilter?.match(/(\{\d*,\d*\}|\{\d+\}|\|)/)
+  ) {
+    throw TypeError("unsupported 'regexFilter' syntax");
+  }
+
   if (rule.action.type === 'modifyHeaders' || rule.action.type === 'redirect') {
-    throw new Error(
+    throw TypeError(
       'action types modifyHeaders and redirect require declarativeNetRequestWithHostAccess permission and <all_urls> host permission',
     );
   }
@@ -23,7 +32,7 @@ export function convert(r) {
       rule.condition.resourceTypes.length !== 1 ||
       rule.condition.resourceTypes[0] !== 'main_frame')
   ) {
-    throw new Error(
+    throw TypeError(
       'action type allowAllRequests is only allowed for resourceType main_frame',
     );
   }
