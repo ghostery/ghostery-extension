@@ -22,7 +22,6 @@ import Success from './views/success.js';
 store.resolve(Options).then(({ onboarding }) => {
   store.set(Options, {
     onboarding: {
-      shownAt: Date.now(),
       shown: onboarding.shown + 1,
     },
   });
