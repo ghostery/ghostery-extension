@@ -15,7 +15,7 @@ import {
   getExtensionElement,
   getExtensionPageURL,
   switchToPanel,
-} from './utils.js';
+} from '../utils.js';
 
 import { PAGE_URL } from '../wdio.conf.js';
 
@@ -34,7 +34,7 @@ async function updatePrivacySettings(name, value) {
   await browser.pause(2000);
 }
 
-describe('Privacy', function () {
+describe('Main Features', function () {
   before(enableExtension);
 
   describe('Never-consent', function () {
@@ -161,7 +161,29 @@ describe('Privacy', function () {
     });
   });
 
-  describe('Pause Website', function () {
+  describe('Global Pause', function () {
+    it('shows blocked trackers in the panel', async function () {
+      await updatePrivacySettings('global-pause', false);
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async function () {
+        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
+      });
+    });
+
+    it("doesn't show blocked trackers in the panel", async function () {
+      await updatePrivacySettings('global-pause', true);
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async function () {
+        await expect(
+          getExtensionElement('component:feedback'),
+        ).not.toBeDisplayed();
+      });
+    });
+  });
+
+  describe('Website Pause', function () {
     it("pauses the website's privacy settings", async function () {
       await browser.url(PAGE_URL);
 
@@ -180,28 +202,6 @@ describe('Privacy', function () {
 
         await pauseButton.click();
         await expect(getExtensionElement('component:feedback')).toBeDisplayed();
-      });
-    });
-  });
-
-  describe('Global pause', function () {
-    it('shows blocked trackers in the panel', async function () {
-      await updatePrivacySettings('global-pause', false);
-      await browser.url(PAGE_URL);
-
-      await switchToPanel(async function () {
-        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
-      });
-    });
-
-    it("doesn't show blocked trackers in the panel", async function () {
-      await updatePrivacySettings('global-pause', true);
-      await browser.url(PAGE_URL);
-
-      await switchToPanel(async function () {
-        await expect(
-          getExtensionElement('component:feedback'),
-        ).not.toBeDisplayed();
       });
     });
   });
