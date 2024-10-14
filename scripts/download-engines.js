@@ -179,14 +179,14 @@ const resources = await fetch(
 });
 
 for (const redirect of resources.redirects) {
-  const outputPath = resolve(TARGET_PATH, 'redirects', redirect.names[0]);
+  const outputPath = resolve(TARGET_PATH, 'redirects', redirect.name);
 
-  if (redirect.encoding === 'base64') {
+  if (redirect.contentType.includes('base64')) {
     writeFileSync(
       outputPath,
-      Buffer.from(redirect.content, 'base64').toString('binary'),
+      Buffer.from(redirect.body, 'base64').toString('binary'),
     );
   } else {
-    writeFileSync(outputPath, redirect.content);
+    writeFileSync(outputPath, redirect.body);
   }
 }
