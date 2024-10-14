@@ -28,22 +28,11 @@ store.resolve(Options).then(({ onboarding }) => {
   });
 });
 
-function updateOptions(host, event) {
-  store.set(Options, {
-    terms: event.detail.entry.id === Success.tag,
-  });
-}
-
 mount(document.body, {
   stack: router([Main, Success]),
-  render: {
-    value: ({ stack }) => html`
-      <template layout="grid height::100%">
-        <onboarding-layout>${stack}</onboarding-layout>
-      </template>
-    `,
-    connect: (host) => {
-      host.addEventListener('navigate', updateOptions.bind(null, host));
-    },
-  },
+  render: ({ stack }) => html`
+    <template layout="grid height::100%">
+      <onboarding-layout>${stack}</onboarding-layout>
+    </template>
+  `,
 });

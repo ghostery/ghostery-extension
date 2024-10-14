@@ -9,8 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, router } from 'hybrids';
+import { html, msg, router, store } from 'hybrids';
 
+import Options from '/store/options.js';
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
 import AddonHealth from './addon-health.js';
@@ -21,6 +22,10 @@ import Skip from './skip.js';
 import Success from './success.js';
 
 const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
+
+function acceptTerms(host, event) {
+  router.resolve(event, store.set(Options, { terms: true }));
+}
 
 export default {
   [router.connect]: {
@@ -69,7 +74,9 @@ export default {
         </div>
         <div layout="column gap:2">
           <ui-button type="success" layout="height:5.5" data-qa="button:enable">
-            <a href="${router.url(Success)}">Enable Ghostery</a>
+            <a href="${router.url(Success)}" onclick="${acceptTerms}">
+              Enable Ghostery
+            </a>
           </ui-button>
           <onboarding-error-card layout="margin:top">
             <ui-text type="label-s" color="danger-500" layout="block:center">
