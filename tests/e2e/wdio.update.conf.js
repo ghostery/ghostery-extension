@@ -21,9 +21,13 @@ import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
 import { getExtensionPageURL } from './utils.js';
-
 import * as wdio from './wdio.conf.js';
 
+/*
+ * This configuration file is used to update the extension in the browser
+ * before running the tests. It uses the original configuration file as a base,
+ * and it reuses the same setup and teardown functions.
+ */
 export const config = {
   ...wdio.config,
   specs: ['**/*.spec.js'],
