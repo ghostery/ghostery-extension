@@ -13,7 +13,7 @@
     "debug": "npm run build -- --watch --debug",
     "licenses": "license-report --config=../.license-report-config.json > dist/licenses.html",
     "lint": "eslint",
-    "test": "npm run wdio",
+    "test": "npm run wdio && npm run wdio:update",
     "wdio": "wdio tests/e2e/wdio.conf.js",
     "wdio:update": "wdio tests/e2e/wdio.update.conf.js",
     "locales:setup": "cp -f ./src/messages.json ./src/_locales/en/messages.json",

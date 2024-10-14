@@ -24,8 +24,7 @@ async function getExtensionId() {
   if (!extensionId) {
     switch (browser.capabilities.browserName) {
       case 'chrome': {
-        const url = 'chrome://extensions';
-        await browser.url(url);
+        await browser.url('chrome://extensions');
 
         extensionId = await $('extensions-item:first-child').getAttribute('id');
 
