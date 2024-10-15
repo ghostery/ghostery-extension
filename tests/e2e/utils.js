@@ -68,6 +68,19 @@ export async function enableExtension() {
   }
 }
 
+export async function setToggle(name, value) {
+  const toggle = await getExtensionElement(`toggle:${name}`);
+  if ((await toggle.getProperty('value')) !== value) {
+    await toggle.click();
+  }
+
+  await expect(toggle).toHaveElementProperty('value', value);
+
+  // Allow background process to update the settings
+  // E.g. reload engines / DNR rules
+  await browser.pause(2000);
+}
+
 export async function switchToPanel(fn) {
   const context = await browser.getTitle();
   const url = await getExtensionPageURL('panel');

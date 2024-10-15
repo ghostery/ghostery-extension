@@ -8,37 +8,29 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import { browser, expect, $ } from '@wdio/globals';
 import {
   disableCache,
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
+  setToggle,
   switchToPanel,
 } from '../utils.js';
 
 import { PAGE_URL } from '../wdio.conf.js';
 
-async function updatePrivacySettings(name, value) {
+async function setPrivacyToggle(name, value) {
   await browser.url(await getExtensionPageURL('settings'));
-
-  const toggle = await getExtensionElement(`toggle:${name}`);
-  if ((await toggle.getProperty('value')) !== value) {
-    await toggle.click();
-  }
-
-  await expect(toggle).toHaveElementProperty('value', value);
-
-  // Allow background process to update the settings
-  // E.g. reload engines / DNR rules
-  await browser.pause(2000);
+  await setToggle(name, value);
 }
 
 describe('Main Features', function () {
   before(enableExtension);
 
   describe('Never-consent', function () {
-    beforeEach(() => updatePrivacySettings('never-consent', false));
+    beforeEach(() => setPrivacyToggle('never-consent', false));
 
     const WEBSITE_URL = 'https://stackoverflow.com/';
     const SELECTOR = '#onetrust-consent-sdk';
@@ -50,7 +42,7 @@ describe('Main Features', function () {
     });
 
     it('closes the consent popup', async function () {
-      await updatePrivacySettings('never-consent', true);
+      await setPrivacyToggle('never-consent', true);
 
       await browser.url(WEBSITE_URL);
       // Let the never-consent take effect
@@ -64,7 +56,7 @@ describe('Main Features', function () {
   });
 
   describe('Ad-Blocking', function () {
-    beforeEach(() => updatePrivacySettings('ad-blocking', false));
+    beforeEach(() => setPrivacyToggle('ad-blocking', false));
 
     const SELECTOR = 'ad-slot';
 
@@ -74,7 +66,7 @@ describe('Main Features', function () {
     });
 
     it('blocks ads on a page', async function () {
-      await updatePrivacySettings('ad-blocking', true);
+      await setPrivacyToggle('ad-blocking', true);
 
       await browser.url(PAGE_URL);
       await expect($(SELECTOR)).not.toBeDisplayed();
@@ -82,7 +74,7 @@ describe('Main Features', function () {
   });
 
   describe('Anti-Tracking', function () {
-    beforeEach(() => updatePrivacySettings('anti-tracking', false));
+    beforeEach(() => setPrivacyToggle('anti-tracking', false));
 
     const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
@@ -94,24 +86,18 @@ describe('Main Features', function () {
         await getExtensionElement('button:detailed-view').click();
 
         for (const trackerId of TRACKER_IDS) {
-          const trackerEl = await getExtensionElement(
-            `button:tracker:${trackerId}`,
-          );
-
-          if (trackerEl.isDisplayed()) {
-            await expect(
-              getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-            ).not.toBeDisplayed();
-            await expect(
-              getExtensionElement(`icon:tracker:${trackerId}:modified`),
-            ).not.toBeDisplayed();
-          }
+          await expect(
+            getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+          ).not.toBeDisplayed();
+          await expect(
+            getExtensionElement(`icon:tracker:${trackerId}:modified`),
+          ).not.toBeDisplayed();
         }
       });
     });
 
     it('blocks tracker requests on the page', async function () {
-      await updatePrivacySettings('anti-tracking', true);
+      await setPrivacyToggle('anti-tracking', true);
 
       await disableCache();
       await browser.url(PAGE_URL);
@@ -120,22 +106,16 @@ describe('Main Features', function () {
         await getExtensionElement('button:detailed-view').click();
 
         for (const trackerId of TRACKER_IDS) {
-          const trackerEl = await getExtensionElement(
-            `button:tracker:${trackerId}`,
-          );
-
-          if (trackerEl.isDisplayed()) {
-            await expect(
-              getExtensionElement(`icon:tracker:${trackerId}:blocked`),
-            ).toBeDisplayed();
-          }
+          await expect(
+            getExtensionElement(`icon:tracker:${trackerId}:blocked`),
+          ).toBeDisplayed();
         }
       });
     });
   });
 
   describe('Regional Filters', function () {
-    beforeEach(() => updatePrivacySettings('regional-filters', false));
+    beforeEach(() => setPrivacyToggle('regional-filters', false));
 
     const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
     const SELECTOR = '.a-slider';
@@ -146,7 +126,7 @@ describe('Main Features', function () {
     });
 
     it('hides the ads on the page', async function () {
-      await updatePrivacySettings('regional-filters', true);
+      await setPrivacyToggle('regional-filters', true);
       const checkbox = await getExtensionElement(
         'checkbox:regional-filters:pl',
       );
@@ -163,7 +143,7 @@ describe('Main Features', function () {
 
   describe('Global Pause', function () {
     it('shows blocked trackers in the panel', async function () {
-      await updatePrivacySettings('global-pause', false);
+      await setPrivacyToggle('global-pause', false);
       await browser.url(PAGE_URL);
 
       await switchToPanel(async function () {
@@ -172,7 +152,7 @@ describe('Main Features', function () {
     });
 
     it("doesn't show blocked trackers in the panel", async function () {
-      await updatePrivacySettings('global-pause', true);
+      await setPrivacyToggle('global-pause', true);
       await browser.url(PAGE_URL);
 
       await switchToPanel(async function () {

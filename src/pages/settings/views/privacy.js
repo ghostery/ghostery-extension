@@ -344,6 +344,7 @@ export default {
                               options,
                               'customFilters.trustedScriptlets',
                             )}"
+                            data-qa="checkbox:custom-filters:trusted-scriptlets"
                           />
                           <span slot="label">Allow trusted scriptlets</span>
                         </settings-checkbox>

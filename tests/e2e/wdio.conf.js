@@ -31,7 +31,8 @@ export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
 
 const PAGE_PORT = 6789;
-export const PAGE_URL = `http://page.localhost:${PAGE_PORT}/`;
+export const PAGE_DOMAIN = `page.localhost`;
+export const PAGE_URL = `http://${PAGE_DOMAIN}:${PAGE_PORT}/`;
 
 // Generate arguments from command line
 export const argv = process.argv.slice(2).reduce(
@@ -85,9 +86,9 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: argv.debug ? [['**/*.spec.js']] : ['**/*.spec.js'],
+  specs: [['**/*.spec.js']],
   specFileRetries: 2,
-  reporters: argv.debug ? ['spec'] : [],
+  reporters: [['spec', { showPreface: false, onlyFailures: true }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     retries: 2,
