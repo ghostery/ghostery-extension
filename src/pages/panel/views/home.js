@@ -28,7 +28,9 @@ import ProtectionStatus from './protection-status.js';
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
 );
-const ONBOARDING_URL = chrome.runtime.getURL('/pages/onboarding/index.html');
+const ONBOARDING_URL = chrome.runtime.getURL(
+  '/pages/onboarding/index.html#@onboarding-views-main?scrollToTop=1',
+);
 
 function showAlert(host, message) {
   Array.from(host.querySelectorAll('#panel-alerts panel-alert')).forEach((el) =>
@@ -170,9 +172,7 @@ export default {
                 data-qa="button:enable"
               >
                 <a
-                  href="${chrome.runtime.getURL(
-                    '/pages/onboarding/index.html',
-                  )}"
+                  href="${ONBOARDING_URL}"
                   layout="row center gap:0.5"
                   onclick="${openTabWithUrl}"
                 >
