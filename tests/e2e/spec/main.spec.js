@@ -11,7 +11,6 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 import {
-  disableCache,
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
@@ -79,7 +78,6 @@ describe('Main Features', function () {
     const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
     it('does not block tracker requests on the page', async function () {
-      await disableCache();
       await browser.url(PAGE_URL);
 
       await switchToPanel(async function () {
@@ -99,7 +97,6 @@ describe('Main Features', function () {
     it('blocks tracker requests on the page', async function () {
       await setPrivacyToggle('anti-tracking', true);
 
-      await disableCache();
       await browser.url(PAGE_URL);
 
       await switchToPanel(async function () {

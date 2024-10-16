@@ -11,14 +11,6 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
-export async function disableCache() {
-  if (browser.isChromium) {
-    await browser.sendCommand('Network.setCacheDisabled', {
-      cacheDisabled: true,
-    });
-  }
-}
-
 let extensionId = '';
 async function getExtensionId() {
   if (!extensionId) {

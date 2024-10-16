@@ -10,7 +10,6 @@
  */
 import { browser, expect, $ } from '@wdio/globals';
 import {
-  disableCache,
   enableExtension,
   getExtensionElement,
   getExtensionPageURL,
@@ -56,13 +55,12 @@ describe('Advanced Features', function () {
         `${PAGE_DOMAIN}###custom-filter`,
         `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
       ]);
-
-      await disableCache();
-      await browser.url(PAGE_URL);
     });
 
     it('adds custom network filter', async function () {
-      await switchToPanel(async function () {
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async () => {
         await getExtensionElement('button:detailed-view').click();
 
         await expect(
@@ -75,10 +73,12 @@ describe('Advanced Features', function () {
     });
 
     it('adds custom cosmetic filter', async function () {
+      await browser.url(PAGE_URL);
       await expect($('#custom-filter')).not.toBeDisplayed();
     });
 
     it('adds custom scriptlet filter', async function () {
+      await browser.url(PAGE_URL);
       await expect($('h1')).toHaveText('Hello world');
     });
 
@@ -90,7 +90,7 @@ describe('Advanced Features', function () {
       await expect($('#custom-filter')).toBeDisplayed();
       await expect($('h1')).toHaveText('Test Page');
 
-      await switchToPanel(async function () {
+      await switchToPanel(async () => {
         await getExtensionElement('button:detailed-view').click();
 
         await expect(

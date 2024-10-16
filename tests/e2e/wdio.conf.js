@@ -87,11 +87,9 @@ export function buildForChrome() {
 
 export const config = {
   specs: [['**/*.spec.js']],
-  specFileRetries: 2,
   reporters: [['spec', { showPreface: false, onlyFailures: true }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
-    retries: 2,
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
   },
   capabilities: [
@@ -147,6 +145,17 @@ export const config = {
     if (capabilities.browserName === 'firefox') {
       const extension = readFileSync(FIREFOX_PATH);
       await browser.installAddOn(extension.toString('base64'), true);
+    }
+
+    // Disable cache for Chrome to avoid caching issues for browser.url()
+    if (capabilities.browserName === 'chrome') {
+      browser.overwriteCommand('url', async function (orig, url, options) {
+        await browser.sendCommand('Network.setCacheDisabled', {
+          cacheDisabled: true,
+        });
+
+        return orig(url, options);
+      });
     }
 
     // Waits and closes the onboarding page opened by the extension
