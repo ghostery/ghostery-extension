@@ -119,7 +119,6 @@ export const config = {
 
         await browser.switchWindow(currentUrl);
         await expect($('extensions-review-panel')).toBeDisplayed();
-
         break;
       }
       case 'firefox': {
@@ -137,10 +136,16 @@ export const config = {
             'extension-backgroundscript__status--running',
           ),
         );
-
         break;
       }
     }
+
+    // After reloading from the build version, its very likely that every engine updates.
+    // The process goes through all of the engines, and at the end it updated the options
+    // with timestamp of the update. If in that moment options are updated in other context,
+    // the message of that update is queued and will be processed after the engines update.
+    // In that case, the options might be overwritten with the old version from the background process.
+    await browser.pause(15000);
 
     console.log('Extension reloaded...');
   },

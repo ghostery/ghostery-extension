@@ -12,23 +12,14 @@ import { browser, expect, $ } from '@wdio/globals';
 import {
   enableExtension,
   getExtensionElement,
-  getExtensionPageURL,
-  setToggle,
+  setPrivacyToggle,
   switchToPanel,
 } from '../utils.js';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
-async function setPrivacyToggle(name, value) {
-  await browser.url(await getExtensionPageURL('settings'));
-  await setToggle(name, value);
-}
-
 async function setCustomFilters(filters) {
   await setPrivacyToggle('custom-filters', true);
-
-  const input = await getExtensionElement('input:custom-filters');
-  await input.setValue(filters.join('\n'));
 
   const checkbox = await getExtensionElement(
     'checkbox:custom-filters:trusted-scriptlets',
@@ -36,8 +27,11 @@ async function setCustomFilters(filters) {
 
   if (!(await checkbox.getProperty('checked'))) {
     await checkbox.click();
-    await expect(checkbox).toBeChecked();
+    await expect(checkbox).toHaveElementProperty('checked', true);
   }
+
+  const input = await getExtensionElement('input:custom-filters');
+  await input.setValue(filters.join('\n'));
 
   await getExtensionElement('button:custom-filters:save').click();
   await expect(
@@ -56,6 +50,8 @@ describe('Advanced Features', function () {
         `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
       ]);
     });
+
+    after(() => setPrivacyToggle('custom-filters', false));
 
     it('adds custom network filter', async function () {
       await browser.url(PAGE_URL);
@@ -83,7 +79,9 @@ describe('Advanced Features', function () {
     });
 
     it('disables custom filters', async function () {
-      await setPrivacyToggle('custom-filters', false);
+      // Switching off custom filters requires rebuilding main engine
+      // and it slows down the update of the DNR rules (it goes after the main engine)
+      await setPrivacyToggle('custom-filters', false, 5);
 
       await browser.url(PAGE_URL);
 
@@ -94,7 +92,7 @@ describe('Advanced Features', function () {
         await getExtensionElement('button:detailed-view').click();
 
         await expect(
-          getExtensionElement(`icon:tracker:facebook_connect:blocked`),
+          getExtensionElement('icon:tracker:facebook_connect:blocked'),
         ).toBeDisplayed();
       });
     });

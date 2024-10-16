@@ -56,21 +56,27 @@ export async function enableExtension() {
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
     // Give the extension some time to initialize (updating the engines in the background)
-    await browser.pause(2000);
+    await browser.pause(5000);
   }
 }
 
-export async function setToggle(name, value) {
+export async function setToggle(name, value, delayInSeconds) {
   const toggle = await getExtensionElement(`toggle:${name}`);
+
   if ((await toggle.getProperty('value')) !== value) {
     await toggle.click();
+
+    // Allow background process to update the settings
+    // E.g. reload engines / DNR rules
+    await browser.pause(delayInSeconds * 1000);
   }
 
   await expect(toggle).toHaveElementProperty('value', value);
+}
 
-  // Allow background process to update the settings
-  // E.g. reload engines / DNR rules
-  await browser.pause(2000);
+export async function setPrivacyToggle(name, value, delayInSeconds = 2) {
+  await browser.url(await getExtensionPageURL('settings'));
+  await setToggle(name, value, delayInSeconds);
 }
 
 export async function switchToPanel(fn) {

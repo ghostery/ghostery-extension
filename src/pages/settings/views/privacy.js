@@ -212,6 +212,7 @@ export default {
                         disabled="${globalPause ||
                         !options.regionalFilters.enabled}"
                         layout="grow"
+                        data-qa="checkbox:regional-filters:${id}"
                       >
                         <input
                           type="checkbox"
@@ -220,7 +221,6 @@ export default {
                             id,
                           )}"
                           onchange="${setRegion(id)}"
-                          data-qa="checkbox:regional-filters:${id}"
                         />
                         <span slot="label">
                           ${labels.languages.of(id.toUpperCase())} (${id})
@@ -335,7 +335,10 @@ export default {
                   html`
                     <div layout="column gap">
                       <div layout="self:start margin:bottom">
-                        <settings-checkbox disabled="${globalPause}">
+                        <settings-checkbox
+                          disabled="${globalPause}"
+                          data-qa="checkbox:custom-filters:trusted-scriptlets"
+                        >
                           <input
                             type="checkbox"
                             disabled="${globalPause}"
@@ -344,7 +347,6 @@ export default {
                               options,
                               'customFilters.trustedScriptlets',
                             )}"
-                            data-qa="checkbox:custom-filters:trusted-scriptlets"
                           />
                           <span slot="label">Allow trusted scriptlets</span>
                         </settings-checkbox>
