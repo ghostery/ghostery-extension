@@ -20,7 +20,7 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import { getExtensionPageURL, waitForBackgroundIdle } from './utils.js';
+import { getExtensionPageURL, waitForIdleBackgroundTasks } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -138,14 +138,14 @@ export const config = {
         );
 
         // Ensure extension reloaded the source, so we can open the settings page
-        await browser.pause(2000);
+        await browser.pause(5000);
 
         break;
       }
     }
 
     await browser.url(await getExtensionPageURL('settings'));
-    await waitForBackgroundIdle();
+    await waitForIdleBackgroundTasks();
 
     console.log('Extension reloaded...');
   },

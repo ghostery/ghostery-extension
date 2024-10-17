@@ -44,7 +44,7 @@ export function getExtensionElement(id) {
   return $(`>>>[data-qa="${id}"]`);
 }
 
-export async function waitForBackgroundIdle() {
+export async function waitForIdleBackgroundTasks() {
   const protocol = browser.isChromium ? 'chrome-extension' : 'moz-extension';
 
   if (!(await browser.getUrl()).startsWith(protocol)) {
@@ -53,14 +53,11 @@ export async function waitForBackgroundIdle() {
     );
   }
 
-  // Allow background process to start running the tasks
-  await browser.pause(1000);
-
-  // Wait for the 'idle' response
+  // Wait for the 'idleOptionsObservers' response
   await browser.execute(
     browser.isChromium
-      ? () => chrome.runtime.sendMessage({ action: 'idle' })
-      : () => browser.runtime.sendMessage({ action: 'idle' }),
+      ? () => chrome.runtime.sendMessage({ action: 'idleOptionsObservers' })
+      : () => browser.runtime.sendMessage({ action: 'idleOptionsObservers' }),
   );
 }
 
@@ -75,7 +72,7 @@ export async function enableExtension() {
     await getExtensionElement('button:enable').click();
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
-    await waitForBackgroundIdle();
+    await waitForIdleBackgroundTasks();
   }
 }
 
@@ -86,7 +83,7 @@ export async function setToggle(name, value) {
     await toggle.click();
 
     // Allow background process to update the settings
-    await waitForBackgroundIdle();
+    await waitForIdleBackgroundTasks();
   }
 
   await expect(toggle).toHaveElementProperty('value', value);

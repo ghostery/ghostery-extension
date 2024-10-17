@@ -34,6 +34,7 @@ async function setCustomFilters(filters) {
   await input.setValue(filters.join('\n'));
 
   await getExtensionElement('button:custom-filters:save').click();
+
   await expect(
     getExtensionElement('component:custom-filters:result'),
   ).toBeDisplayed();

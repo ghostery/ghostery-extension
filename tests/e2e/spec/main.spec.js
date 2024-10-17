@@ -15,7 +15,7 @@ import {
   getExtensionElement,
   setPrivacyToggle,
   switchToPanel,
-  waitForBackgroundIdle,
+  waitForIdleBackgroundTasks,
 } from '../utils.js';
 
 import { PAGE_URL } from '../wdio.conf.js';
@@ -133,7 +133,7 @@ describe('Main Features', function () {
       }
 
       // Allow engines to reload
-      await waitForBackgroundIdle();
+      await waitForIdleBackgroundTasks();
 
       await browser.url(WEBSITE_URL);
       await expect($(SELECTOR)).not.toBeDisplayed();

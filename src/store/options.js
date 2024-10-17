@@ -23,7 +23,11 @@ const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 const observers = new Set();
-let resolvedObservers = Promise.resolve();
+
+let idleOptionsObservers = Promise.resolve();
+export function getIdleOptionsObservers() {
+  return idleOptionsObservers;
+}
 
 export const SYNC_OPTIONS = [
   'blockAds',
@@ -179,7 +183,7 @@ const Options = {
       // Sync if the current memory context get options for the first time
       if (!prevOptions) sync(options);
 
-      resolvedObservers = (async () => {
+      idleOptionsObservers = (async () => {
         for (const fn of observers) {
           try {
             await fn(options, prevOptions);
@@ -393,10 +397,6 @@ export async function observe(...args) {
   return () => {
     observers.delete(wrapper);
   };
-}
-
-export function resolveObservers() {
-  return resolvedObservers;
 }
 
 export function isPaused(options, domain = '') {
