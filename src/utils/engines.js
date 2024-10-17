@@ -397,7 +397,7 @@ export async function update(name) {
     // done independently of filters as the data is stored in a separate object.
     if (
       data.resourcesJson &&
-      data.resourcesJson.checksum !== engine.resourcesJson.checksum
+      data.resourcesJson.checksum !== engine.resources.checksum
     ) {
       engine.updateResources(
         await fetch(data.resourcesJson.url)
