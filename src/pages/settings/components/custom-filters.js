@@ -48,7 +48,7 @@ export default {
             oninput="${html.set(input, 'text')}"
             disabled="${!store.ready(input) || disabled}"
             defaultValue="${store.ready(input) ? input.text : ''}"
-            data-qa="textarea:custom-filters"
+            data-qa="input:custom-filters"
           ></textarea>
         </settings-input>
 
@@ -62,7 +62,10 @@ export default {
         </ui-button>
         ${result &&
         html`
-          <div layout="column gap margin:top">
+          <div
+            layout="column gap margin:top"
+            data-qa="component:custom-filters:result"
+          >
             <div layout="column gap:0.5">
               <ui-text type="label-s" color="gray-600">
                 Custom filters has been updated

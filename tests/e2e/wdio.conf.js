@@ -31,7 +31,8 @@ export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
 
 const PAGE_PORT = 6789;
-export const PAGE_URL = `http://page.localhost:${PAGE_PORT}/`;
+export const PAGE_DOMAIN = `page.localhost`;
+export const PAGE_URL = `http://${PAGE_DOMAIN}:${PAGE_PORT}/`;
 
 // Generate arguments from command line
 export const argv = process.argv.slice(2).reduce(
@@ -85,13 +86,12 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: argv.debug ? [['**/*.spec.js']] : ['**/*.spec.js'],
-  specFileRetries: 2,
-  reporters: argv.debug ? ['spec'] : [],
+  specs: [['**/*.spec.js']],
+  reporters: [['spec', { showPreface: false, onlyFailures: true }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
-    retries: 2,
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
+    retries: 2,
   },
   capabilities: [
     {
@@ -146,6 +146,17 @@ export const config = {
     if (capabilities.browserName === 'firefox') {
       const extension = readFileSync(FIREFOX_PATH);
       await browser.installAddOn(extension.toString('base64'), true);
+    }
+
+    // Disable cache for Chrome to avoid caching issues for browser.url()
+    if (capabilities.browserName === 'chrome') {
+      browser.overwriteCommand('url', async function (orig, url, options) {
+        await browser.sendCommand('Network.setCacheDisabled', {
+          cacheDisabled: true,
+        });
+
+        return orig(url, options);
+      });
     }
 
     // Waits and closes the onboarding page opened by the extension

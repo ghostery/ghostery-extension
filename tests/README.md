@@ -123,7 +123,7 @@ On Safari reloading the DNR rules may take up to a few minutes, so after pausing
 
 On the test page, trackers are not blocked or modified, ads are visible.
 
-### Global Pause  🤖
+### Global Pause 🤖
 
 > When Global Pause is enabled, the entire extension should turn off its blocking activity on all pages
 
@@ -143,7 +143,7 @@ On the test pages, trackers are not blocked or modified, ads are visible.
 
 ## Advanced features
 
-### Custom Filters
+### Custom Filters 🤖
 
 > Check whether it is possible to add a simple custom filter
 

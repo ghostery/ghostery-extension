@@ -20,7 +20,7 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import { getExtensionPageURL } from './utils.js';
+import { getExtensionPageURL, waitForIdleBackgroundTasks } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -30,7 +30,7 @@ import * as wdio from './wdio.conf.js';
  */
 export const config = {
   ...wdio.config,
-  specs: ['**/*.spec.js'],
+  specs: [['**/*.spec.js']],
   exclude: ['spec/_onboarding.spec.js'],
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {
@@ -119,7 +119,6 @@ export const config = {
 
         await browser.switchWindow(currentUrl);
         await expect($('extensions-review-panel')).toBeDisplayed();
-
         break;
       }
       case 'firefox': {
@@ -138,9 +137,15 @@ export const config = {
           ),
         );
 
+        // Ensure extension reloaded the source, so we can open the settings page
+        await browser.pause(5000);
+
         break;
       }
     }
+
+    await browser.url(await getExtensionPageURL('settings'));
+    await waitForIdleBackgroundTasks();
 
     console.log('Extension reloaded...');
   },

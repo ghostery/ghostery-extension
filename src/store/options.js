@@ -24,6 +24,11 @@ export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 const observers = new Set();
 
+let idleOptionsObservers = Promise.resolve();
+export function getIdleOptionsObservers() {
+  return idleOptionsObservers;
+}
+
 export const SYNC_OPTIONS = [
   'blockAds',
   'blockTrackers',
@@ -178,13 +183,15 @@ const Options = {
       // Sync if the current memory context get options for the first time
       if (!prevOptions) sync(options);
 
-      observers.forEach(async (fn) => {
-        try {
-          await fn(options, prevOptions);
-        } catch (e) {
-          console.error(`[options] Error while observing options: `, e);
+      idleOptionsObservers = (async () => {
+        for (const fn of observers) {
+          try {
+            await fn(options, prevOptions);
+          } catch (e) {
+            console.error(`[options] Error while observing options: `, e);
+          }
         }
-      });
+      })();
     },
   },
 };
