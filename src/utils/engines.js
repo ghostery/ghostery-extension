@@ -15,6 +15,7 @@ import {
   ENGINE_VERSION,
   getLinesWithFilters,
   mergeDiffs,
+  Resources,
 } from '@cliqz/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
@@ -392,17 +393,17 @@ export async function update(name) {
     const cumulativeDiff = mergeDiffs(diffs);
     let updated = engine.updateFromDiff(cumulativeDiff, ENV);
 
-    // Last but not least, check if resources.txt should be updated. This can be
+    // Last but not least, check if resources.json should be updated. This can be
     // done independently of filters as the data is stored in a separate object.
     if (
-      data.resources &&
-      data.resources.checksum !== engine.resources.checksum
+      data.resourcesJson &&
+      data.resourcesJson.checksum !== engine.resourcesJson.checksum
     ) {
       engine.updateResources(
-        await fetch(data.resources.url)
+        await fetch(data.resourcesJson.url)
           .then(check)
           .then((res) => res.text()),
-        data.resources.checksum,
+        data.resourcesJson.checksum,
       );
       updated = true;
     }
@@ -457,9 +458,13 @@ export function create(name, options = null) {
 
 export function replace(name, engineOrEngines) {
   const engines = [].concat(engineOrEngines);
-  const engine = engines.length > 1 ? FiltersEngine.merge(engines) : engines[0];
+  const engine =
+    engines.length > 1
+      ? FiltersEngine.merge(engines, { skipResources: true })
+      : engines[0];
 
   engine.updateEnv(ENV);
+  engine.resources = Resources.copy(engines[0].resources);
 
   saveToMemory(name, engine);
   saveToStorage(name).catch(() => {
