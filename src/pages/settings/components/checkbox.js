@@ -22,7 +22,7 @@ export default {
   disabled: { value: false, reflect: true },
   input: (host) => host.querySelector('input'),
   checked: {
-    value: (host, value) => value ?? host.input?.checked,
+    value: (host) => host.input?.checked ?? false,
     connect: (host, key, invalidate) => {
       host.input?.addEventListener('change', invalidate);
       return () => {
