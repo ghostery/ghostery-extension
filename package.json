@@ -42,9 +42,9 @@
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.33.2",
-    "@cliqz/adblocker-webextension": "^1.33.2",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
+    "@cliqz/adblocker": "^1.34.0",
+    "@cliqz/adblocker-webextension": "^1.34.0",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.34.0",
     "@duckduckgo/autoconsent": "^10.15.0",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.34.0",
