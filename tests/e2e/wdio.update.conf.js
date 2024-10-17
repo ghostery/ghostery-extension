@@ -20,7 +20,7 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import { getExtensionPageURL } from './utils.js';
+import { getExtensionPageURL, waitForBackgroundIdle } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -136,16 +136,16 @@ export const config = {
             'extension-backgroundscript__status--running',
           ),
         );
+
+        // Ensure extension reloaded the source, so we can open the settings page
+        await browser.pause(2000);
+
         break;
       }
     }
 
-    // After reloading from the build version, its very likely that every engine updates.
-    // The process goes through all of the engines, and at the end it updated the options
-    // with timestamp of the update. If in that moment options are updated in other context,
-    // the message of that update is queued and will be processed after the engines update.
-    // In that case, the options might be overwritten with the old version from the background process.
-    await browser.pause(15000);
+    await browser.url(await getExtensionPageURL('settings'));
+    await waitForBackgroundIdle();
 
     console.log('Extension reloaded...');
   },

@@ -23,6 +23,7 @@ const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 const observers = new Set();
+let resolvedObservers = Promise.resolve();
 
 export const SYNC_OPTIONS = [
   'blockAds',
@@ -178,13 +179,15 @@ const Options = {
       // Sync if the current memory context get options for the first time
       if (!prevOptions) sync(options);
 
-      observers.forEach(async (fn) => {
-        try {
-          await fn(options, prevOptions);
-        } catch (e) {
-          console.error(`[options] Error while observing options: `, e);
+      resolvedObservers = (async () => {
+        for (const fn of observers) {
+          try {
+            await fn(options, prevOptions);
+          } catch (e) {
+            console.error(`[options] Error while observing options: `, e);
+          }
         }
-      });
+      })();
     },
   },
 };
@@ -390,6 +393,10 @@ export async function observe(...args) {
   return () => {
     observers.delete(wrapper);
   };
+}
+
+export function resolveObservers() {
+  return resolvedObservers;
 }
 
 export function isPaused(options, domain = '') {

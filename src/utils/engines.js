@@ -248,7 +248,7 @@ export async function update(name) {
 
     const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
 
-    console.info(`[engines] Updating engine "${name}...`);
+    console.info(`[engines] Updating engine "${name}"...`);
 
     const data = await fetch(listURL)
       .then(check)

@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { resolveObservers } from '/store/options.js';
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
     case 'getCurrentTab':
@@ -31,6 +33,22 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case 'openPrivateWindowWithUrl':
       chrome.windows.create({ url: msg.url, incognito: true });
       break;
+    case 'idle': {
+      // The idle detection is a two-step process:
+      // Schedule delayed check to ensure that the background process has started
+      // running the tasks. Then resolve all options observers and send the response
+      // in the next delayed timeout.
+      setTimeout(() =>
+        resolveObservers().then(() => {
+          setTimeout(() => {
+            sendResponse();
+            console.info('[helpers] idle response...');
+          });
+        }),
+      );
+
+      return true;
+    }
   }
 
   return false;

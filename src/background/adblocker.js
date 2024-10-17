@@ -92,21 +92,28 @@ async function updateEngines() {
 
     if (enabledEngines.length) {
       let updated = false;
+
       // Update engines from the list of enabled engines
-      for (const id of enabledEngines) {
-        if (id === engines.CUSTOM_ENGINE) continue;
-        updated = (await engines.update(id).catch(() => false)) || updated;
-      }
+      await Promise.all(
+        enabledEngines.map((id) =>
+          engines.update(id).then(
+            (v) => {
+              updated = updated || v;
+            },
+            () => {},
+          ),
+        ),
+      );
 
       // Reload the main engine after all engines are updated
       if (updated) await reloadMainEngine();
 
+      // Update timestamp after the engines are updated
+      await store.set(Options, { filtersUpdatedAt: Date.now() });
+
       // Update TrackerDB engine
       trackerdb.setup.pending && (await trackerdb.setup.pending);
       await engines.update(engines.TRACKERDB_ENGINE).catch(() => null);
-
-      // Update timestamp after the engines are updated
-      await store.set(Options, { filtersUpdatedAt: Date.now() });
     }
   } finally {
     updating = false;
@@ -139,7 +146,7 @@ export const setup = asyncSetup([
     }
 
     if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
-      updateEngines();
+      await updateEngines();
     }
   }),
   observe('experimentalFilters', async (value, lastValue) => {

@@ -14,6 +14,7 @@ import {
   getExtensionElement,
   getExtensionPageURL,
   switchToPanel,
+  waitForBackgroundIdle,
 } from '../utils.js';
 
 describe('Onboarding', function () {
@@ -40,6 +41,7 @@ describe('Onboarding', function () {
 
     await switchToPanel(async function () {
       await expect(getExtensionElement('button:enable')).not.toBeDisplayed();
+      await waitForBackgroundIdle();
     });
   });
 });
