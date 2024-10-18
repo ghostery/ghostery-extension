@@ -44,17 +44,12 @@ describe('Advanced Features', function () {
   before(enableExtension);
 
   describe('Custom Filters', function () {
-    before(async function () {
+    it('adds custom filters in settings page', async function () {
       await setCustomFilters([
         `@@connect.facebook.net^`,
         `${PAGE_DOMAIN}###custom-filter`,
         `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
       ]);
-    });
-
-    after(async function () {
-      await setCustomFilters([]);
-      await setPrivacyToggle('custom-filters', false);
     });
 
     it('adds custom network filter', async function () {
@@ -99,6 +94,11 @@ describe('Advanced Features', function () {
           getExtensionElement('icon:tracker:facebook_connect:blocked'),
         ).toBeDisplayed();
       });
+    });
+
+    it('removes custom filters in settings page', async function () {
+      await setCustomFilters([]);
+      await setPrivacyToggle('custom-filters', false);
     });
   });
 });
