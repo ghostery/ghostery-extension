@@ -20,11 +20,7 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import {
-  getExtensionElement,
-  getExtensionPageURL,
-  waitForIdleBackgroundTasks,
-} from './utils.js';
+import { getExtensionPageURL, waitForIdleBackgroundTasks } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -142,16 +138,18 @@ export const config = {
               'extension-backgroundscript__status--running',
             ),
           );
+
+          // Without the pase, Firefox throws sometimes web-driver exceptions
+          // It must be related to the extension reloading process.
+          // As there is no way to wait for the extension to be reloaded
+          // better than above check, we just wait for a few seconds.
+          browser.pause(5000);
+
           break;
         }
       }
 
-      const settingsUrl = await getExtensionPageURL('settings');
-      await browser.waitUntil(async () => {
-        await browser.url(settingsUrl);
-        return await getExtensionElement('page:settings').isDisplayed();
-      });
-
+      await browser.url(await getExtensionPageURL('settings'));
       await waitForIdleBackgroundTasks();
 
       console.log('Extension reloaded...');
