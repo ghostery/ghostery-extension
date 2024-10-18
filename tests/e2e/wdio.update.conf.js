@@ -36,6 +36,7 @@ export const config = {
   ...wdio.config,
   specs: [['**/*.spec.js']],
   exclude: ['spec/_onboarding.spec.js'],
+  maxInstances: 1,
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {
       rmSync(wdio.WEB_EXT_PATH, { recursive: true, force: true });
