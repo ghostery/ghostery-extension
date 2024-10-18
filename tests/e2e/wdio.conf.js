@@ -31,7 +31,8 @@ export const FIREFOX_PATH = path.join(WEB_EXT_PATH, 'ghostery-firefox.zip');
 export const CHROME_PATH = path.join(WEB_EXT_PATH, 'ghostery-chromium');
 
 const PAGE_PORT = 6789;
-export const PAGE_URL = `http://page.localhost:${PAGE_PORT}/`;
+export const PAGE_DOMAIN = `page.localhost`;
+export const PAGE_URL = `http://${PAGE_DOMAIN}:${PAGE_PORT}/`;
 
 // Generate arguments from command line
 export const argv = process.argv.slice(2).reduce(
@@ -85,14 +86,14 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: argv.debug ? [['**/*.spec.js']] : ['**/*.spec.js'],
-  specFileRetries: 2,
-  reporters: argv.debug ? ['spec'] : [],
+  specs: [['**/*.spec.js']],
+  reporters: [['spec', { showPreface: false, onlyFailures: true }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
-    retries: 2,
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
+    retries: 2,
   },
+  maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
   capabilities: [
     {
       browserName: 'firefox',
@@ -143,27 +144,39 @@ export const config = {
     }
   },
   before: async (capabilities, specs, browser) => {
-    if (capabilities.browserName === 'firefox') {
-      const extension = readFileSync(FIREFOX_PATH);
-      await browser.installAddOn(extension.toString('base64'), true);
-    }
-
-    // Waits and closes the onboarding page opened by the extension
-    // This is necessary to avoid the onboarding page opened in
-    // random moment from clashing with the tests
-
-    const currentUrl = await browser.getUrl();
-
-    await browser.waitUntil(async function () {
-      try {
-        await browser.switchWindow('Welcome to Ghostery');
-        return true;
-      } catch {
-        return false;
+    try {
+      if (capabilities.browserName === 'firefox') {
+        const extension = readFileSync(FIREFOX_PATH);
+        await browser.installAddOn(extension.toString('base64'), true);
       }
-    });
 
-    await browser.closeWindow();
-    await browser.switchWindow(currentUrl);
+      // Disable cache for Chrome to avoid caching issues
+      if (capabilities.browserName === 'chrome') {
+        await browser.sendCommand('Network.setCacheDisabled', {
+          cacheDisabled: true,
+        });
+      }
+
+      // Waits and closes the onboarding page opened by the extension
+      // This is necessary to avoid the onboarding page opened in
+      // random moment from clashing with the tests
+
+      const currentUrl = await browser.getUrl();
+
+      await browser.waitUntil(async function () {
+        try {
+          await browser.switchWindow('Welcome to Ghostery');
+          return true;
+        } catch {
+          return false;
+        }
+      });
+
+      await browser.closeWindow();
+      await browser.switchWindow(currentUrl);
+    } catch (e) {
+      console.error('Error while setting up test environment', e);
+      process.exit(1);
+    }
   },
 };
