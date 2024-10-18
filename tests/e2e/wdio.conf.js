@@ -93,6 +93,7 @@ export const config = {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,
     retries: 2,
   },
+  maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
   capabilities: [
     {
       browserName: 'firefox',
