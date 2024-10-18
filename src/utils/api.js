@@ -137,20 +137,6 @@ export async function session() {
 
   let accessToken = await getCookie('access_token');
 
-  // Fix for Safari wrong implementation of getCookie/setCookie
-  // (See above fix starting in line 29. In short we were setting a cookie with
-  // a far future expiration date, so the access_token expired, but it was still
-  // in user's browser).
-  // TODO: The below code can be removed after a reasonable amount of time
-  // where most of the users have updated to the fixed version
-  if (
-    __PLATFORM__ === 'safari' &&
-    accessToken &&
-    new Date(accessToken.expirationDate).getFullYear() > 2050
-  ) {
-    accessToken = undefined;
-  }
-
   try {
     if (!accessToken) {
       const refreshToken = await getCookie('refresh_token');

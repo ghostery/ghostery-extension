@@ -77,12 +77,6 @@ export default class AutoSyncingMap {
     // and log it. A potential improvement could be to treat the
     // in-memory map as the source of truth in that scenario.)
     this._pending = new Promise((resolve, reject) => {
-      // Migration to session storage
-      // TODO: Remove this code after a few releases
-      if (chrome.storage.session) {
-        chrome.storage.local.remove(this.storageKey);
-      }
-
       storage.get([this.storageKey], (result) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
