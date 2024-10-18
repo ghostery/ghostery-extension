@@ -24,8 +24,6 @@ describe('Main Features', function () {
   before(enableExtension);
 
   describe('Never-consent', function () {
-    after(() => setPrivacyToggle('never-consent', true));
-
     const WEBSITE_URL = 'https://stackoverflow.com/';
     const SELECTOR = '#onetrust-consent-sdk';
 
@@ -51,8 +49,6 @@ describe('Main Features', function () {
   });
 
   describe('Ad-Blocking', function () {
-    after(() => setPrivacyToggle('ad-blocking', true));
-
     const SELECTOR = 'ad-slot';
 
     it('does not block ads on a page', async function () {
@@ -70,8 +66,6 @@ describe('Main Features', function () {
   });
 
   describe('Anti-Tracking', function () {
-    after(() => setPrivacyToggle('anti-tracking', true));
-
     const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
     it('does not block tracker requests on the page', async function () {
@@ -110,8 +104,6 @@ describe('Main Features', function () {
   });
 
   describe('Regional Filters', function () {
-    after(() => setPrivacyToggle('regional-filters', false));
-
     const WEBSITE_URL = 'https://www.cowwilanowie.pl/';
     const SELECTOR = '.a-slider';
 
@@ -137,12 +129,11 @@ describe('Main Features', function () {
 
       await browser.url(WEBSITE_URL);
       await expect($(SELECTOR)).not.toBeDisplayed();
+      await setPrivacyToggle('regional-filters', false);
     });
   });
 
   describe('Global Pause', function () {
-    after(() => setPrivacyToggle('global-pause', false));
-
     it('shows blocked trackers in the panel', async function () {
       await setPrivacyToggle('global-pause', false);
       await browser.url(PAGE_URL);
@@ -161,6 +152,8 @@ describe('Main Features', function () {
           getExtensionElement('component:feedback'),
         ).not.toBeDisplayed();
       });
+
+      await setPrivacyToggle('global-pause', false);
     });
   });
 
