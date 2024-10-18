@@ -148,14 +148,10 @@ export const config = {
       await browser.installAddOn(extension.toString('base64'), true);
     }
 
-    // Disable cache for Chrome to avoid caching issues for browser.url()
+    // Disable cache for Chrome to avoid caching issues
     if (capabilities.browserName === 'chrome') {
-      browser.overwriteCommand('url', async function (orig, url, options) {
-        await browser.sendCommand('Network.setCacheDisabled', {
-          cacheDisabled: true,
-        });
-
-        return orig(url, options);
+      await browser.sendCommand('Network.setCacheDisabled', {
+        cacheDisabled: true,
       });
     }
 
