@@ -101,57 +101,62 @@ export const config = {
   before: async (capabilities, specs, browser) => {
     await wdio.config.before(capabilities, specs, browser);
 
-    const onboardingUrl = await getExtensionPageURL('onboarding');
-    const currentUrl = await browser.getUrl();
+    try {
+      const onboardingUrl = await getExtensionPageURL('onboarding');
+      const currentUrl = await browser.getUrl();
 
-    await browser.newWindow(onboardingUrl);
+      await browser.newWindow(onboardingUrl);
 
-    // Get element by common selector, as the `data-qa` attribute was introduced in v10.4.9
-    await $('ui-button[type=success]').click();
-    await expect($('ui-button[type=success]')).not.toBeDisplayed();
+      // Get element by common selector, as the `data-qa` attribute was introduced in v10.4.9
+      await $('>>>ui-button[type=success]').click();
+      await expect($('>>>ui-button[type=success]')).not.toBeDisplayed();
 
-    // Reload extension with the source
-    switch (capabilities.browserName) {
-      case 'chrome': {
-        renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
-        cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
-          recursive: true,
-        });
-        rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
+      // Reload extension with the source
+      switch (capabilities.browserName) {
+        case 'chrome': {
+          renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
+          cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
+            recursive: true,
+          });
+          rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
 
-        browser.execute('chrome.runtime.reload()');
+          browser.execute('chrome.runtime.reload()');
 
-        await browser.switchWindow(currentUrl);
-        await expect($('extensions-review-panel')).toBeDisplayed();
-        break;
+          await browser.switchWindow(currentUrl);
+          await expect($('extensions-review-panel')).toBeDisplayed();
+          break;
+        }
+        case 'firefox': {
+          const extension = readFileSync(
+            `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
+          );
+          browser.installAddOn(extension.toString('base64'), true);
+
+          await browser.switchWindow(currentUrl);
+
+          await expect(
+            $('.extension-backgroundscript__status'),
+          ).toHaveElementClass(
+            expect.stringContaining(
+              'extension-backgroundscript__status--running',
+            ),
+          );
+          break;
+        }
       }
-      case 'firefox': {
-        const extension = readFileSync(
-          `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
-        );
-        browser.installAddOn(extension.toString('base64'), true);
 
-        await browser.switchWindow(currentUrl);
+      const settingsUrl = await getExtensionPageURL('settings');
+      await browser.waitUntil(async () => {
+        await browser.url(settingsUrl);
+        return await getExtensionElement('page:settings').isDisplayed();
+      });
 
-        await expect(
-          $('.extension-backgroundscript__status'),
-        ).toHaveElementClass(
-          expect.stringContaining(
-            'extension-backgroundscript__status--running',
-          ),
-        );
-        break;
-      }
+      await waitForIdleBackgroundTasks();
+
+      console.log('Extension reloaded...');
+    } catch (e) {
+      console.error('Error while preparing test environment', e);
+      process.exit(1);
     }
-
-    const settingsUrl = await getExtensionPageURL('settings');
-    await browser.waitUntil(async () => {
-      await browser.url(settingsUrl);
-      return await getExtensionElement('page:settings').isDisplayed();
-    });
-
-    await waitForIdleBackgroundTasks();
-
-    console.log('Extension reloaded...');
   },
 };

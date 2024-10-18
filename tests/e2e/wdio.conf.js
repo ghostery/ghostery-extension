@@ -143,34 +143,39 @@ export const config = {
     }
   },
   before: async (capabilities, specs, browser) => {
-    if (capabilities.browserName === 'firefox') {
-      const extension = readFileSync(FIREFOX_PATH);
-      await browser.installAddOn(extension.toString('base64'), true);
-    }
-
-    // Disable cache for Chrome to avoid caching issues
-    if (capabilities.browserName === 'chrome') {
-      await browser.sendCommand('Network.setCacheDisabled', {
-        cacheDisabled: true,
-      });
-    }
-
-    // Waits and closes the onboarding page opened by the extension
-    // This is necessary to avoid the onboarding page opened in
-    // random moment from clashing with the tests
-
-    const currentUrl = await browser.getUrl();
-
-    await browser.waitUntil(async function () {
-      try {
-        await browser.switchWindow('Welcome to Ghostery');
-        return true;
-      } catch {
-        return false;
+    try {
+      if (capabilities.browserName === 'firefox') {
+        const extension = readFileSync(FIREFOX_PATH);
+        await browser.installAddOn(extension.toString('base64'), true);
       }
-    });
 
-    await browser.closeWindow();
-    await browser.switchWindow(currentUrl);
+      // Disable cache for Chrome to avoid caching issues
+      if (capabilities.browserName === 'chrome') {
+        await browser.sendCommand('Network.setCacheDisabled', {
+          cacheDisabled: true,
+        });
+      }
+
+      // Waits and closes the onboarding page opened by the extension
+      // This is necessary to avoid the onboarding page opened in
+      // random moment from clashing with the tests
+
+      const currentUrl = await browser.getUrl();
+
+      await browser.waitUntil(async function () {
+        try {
+          await browser.switchWindow('Welcome to Ghostery');
+          return true;
+        } catch {
+          return false;
+        }
+      });
+
+      await browser.closeWindow();
+      await browser.switchWindow(currentUrl);
+    } catch (e) {
+      console.error('Error while setting up test environment', e);
+      process.exit(1);
+    }
   },
 };
