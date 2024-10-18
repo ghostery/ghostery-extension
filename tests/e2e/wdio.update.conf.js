@@ -121,7 +121,7 @@ export const config = {
           });
           rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
 
-          browser.execute('chrome.runtime.reload()');
+          browser.execute(() => chrome.runtime.reload());
 
           await browser.switchWindow(currentUrl);
           await expect($('extensions-review-panel')).toBeDisplayed();
