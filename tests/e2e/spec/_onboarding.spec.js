@@ -18,24 +18,20 @@ import {
 } from '../utils.js';
 
 describe('Onboarding', function () {
-  beforeEach(async function () {
-    await browser.url(await getExtensionPageURL('onboarding'));
-  });
-
-  afterEach(async function () {
-    await browser.url('about:blank');
-  });
-
   it('keeps ghostery disabled', async function () {
+    await browser.url(await getExtensionPageURL('onboarding'));
     await getExtensionElement('button:skip').click();
     await expect(getExtensionElement('view:skip')).toBeDisplayed();
 
     await switchToPanel(async function () {
       await expect(getExtensionElement('button:enable')).toBeDisplayed();
     });
+
+    await browser.url('about:blank');
   });
 
   it('enables ghostery', async function () {
+    await browser.url(await getExtensionPageURL('onboarding'));
     await getExtensionElement('button:enable').click();
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
@@ -43,5 +39,7 @@ describe('Onboarding', function () {
       await expect(getExtensionElement('button:enable')).not.toBeDisplayed();
       await waitForIdleBackgroundTasks();
     });
+
+    await browser.url('about:blank');
   });
 });
