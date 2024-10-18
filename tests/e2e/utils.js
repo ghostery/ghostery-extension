@@ -114,7 +114,9 @@ export async function switchToPanel(fn) {
       await browser.newWindow(url);
     }
 
-    await browser.pause(1000);
+    await browser.waitUntil(
+      async () => (await browser.getTitle()) === 'Ghostery panel',
+    );
 
     const result = await fn();
 
