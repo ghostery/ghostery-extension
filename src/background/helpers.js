@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { getIdleOptionsObservers } from '/store/options.js';
+import { idleOptionsObservers } from '/store/options.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
@@ -33,8 +33,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case 'openPrivateWindowWithUrl':
       chrome.windows.create({ url: msg.url, incognito: true });
       break;
+    // This is used only by the e2e tests to detect idle state
     case 'idleOptionsObservers': {
-      getIdleOptionsObservers().then(() => {
+      idleOptionsObservers.then(() => {
         sendResponse('done');
         console.info('[helpers] "idleOptionsObservers" response...');
       });

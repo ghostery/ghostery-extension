@@ -24,10 +24,9 @@ export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 const observers = new Set();
 
-let idleOptionsObservers = Promise.resolve();
-export function getIdleOptionsObservers() {
-  return idleOptionsObservers;
-}
+// The promise is resolved when all observers executed.
+// This is used by the e2e tests to detect idle state.
+export let idleOptionsObservers = Promise.resolve();
 
 export const SYNC_OPTIONS = [
   'blockAds',
