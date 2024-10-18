@@ -265,7 +265,7 @@ async function injectCosmetics(msg, sender) {
   // ids and hrefs observed in the DOM. MutationObserver is also used to
   // make sure we can react to changes.
   {
-    const { active, styles } = engine.getCosmeticsFilters({
+    const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
@@ -283,10 +283,6 @@ async function injectCosmetics(msg, sender) {
       // This will be done every time we get information about DOM mutation
       getRulesFromDOM: msg.lifecycle === 'dom-update',
     });
-
-    if (active === false) {
-      return;
-    }
 
     specificStyles.push(styles);
     specificFrameId = frameId;
@@ -324,24 +320,19 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 async function executeScriptlets(tabId, frameId, scripts) {
   // Dynamically injected scripts can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
-  let debugMarker;
   if (debugMode) {
-    debugMarker = (text) =>
-      `console.log('[ADBLOCKER-DEBUG]:', ${JSON.stringify(text)});`;
-  } else {
-    debugMarker = () => '';
+    scripts = [
+      `console.log('[adblocker]', 'running scriptlets (${scripts.length})');`,
+      ...scripts,
+    ];
   }
 
   // the scriptlet code that contains patches for the website
-  const codeRunningInPage = `(function(){
-${debugMarker('run scriptlets (executing in "page world")')}
-${scripts.join('\n\n')}}
-)()`;
+  const codeRunningInPage = scripts.join('\n\n');
 
   // wrapper to break the "isolated world" so that the patching operates
   // on the website, not on the content script's isolated environment.
   function codeRunningInContentScript(code) {
-    let content = decodeURIComponent(code);
     const script = document.createElement('script');
     if (window.trustedTypes) {
       const trustedTypePolicy = window.trustedTypes.createPolicy(
@@ -350,9 +341,9 @@ ${scripts.join('\n\n')}}
           createScript: (s) => s,
         },
       );
-      content = trustedTypePolicy.createScript(content);
+      code = trustedTypePolicy.createScript(code);
     }
-    script.textContent = content;
+    script.textContent = code;
     (document.head || document.documentElement).appendChild(script);
     script.remove();
   }
@@ -368,7 +359,7 @@ ${scripts.join('\n\n')}}
         frameIds: [frameId],
       },
       func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage)],
+      args: [codeRunningInPage],
     },
     () => {
       if (chrome.runtime.lastError) {
@@ -399,7 +390,7 @@ async function injectScriptlets(tabId, frameId, url) {
   const scriptlets = [];
   const engine = engines.get(engines.MAIN_ENGINE);
 
-  const { active, scripts } = engine.getCosmeticsFilters({
+  const { scripts } = engine.getCosmeticsFilters({
     url: url,
     hostname,
     domain: domain || '',
@@ -409,9 +400,6 @@ async function injectScriptlets(tabId, frameId, url) {
     getRulesFromDOM: false,
     getRulesFromHostname: true,
   });
-  if (active === false) {
-    return;
-  }
   if (scripts.length > 0) {
     scriptlets.push(...scripts);
   }
@@ -430,7 +418,7 @@ if (__PLATFORM__ === 'safari') {
     return false;
   });
 } else {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
+  chrome.webNavigation.onCommitted.addListener((details) => {
     injectScriptlets(details.tabId, details.frameId, details.url);
   });
 }
