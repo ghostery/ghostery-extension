@@ -11,26 +11,36 @@
 
 import { html } from 'hybrids';
 
-function clickSlottedElement(host, event) {
-  const target = host.render().querySelector('slot').assignedElements()[0];
-  if (event.target !== target) {
-    target.click();
+function clickInput(host, event) {
+  if (host.input && event.target !== host.input) {
+    event.stopPropagation();
+    host.input.click();
   }
 }
 
 export default {
   disabled: { value: false, reflect: true },
+  input: (host) => host.querySelector('input'),
+  checked: {
+    value: (host) => host.input?.checked ?? false,
+    connect: (host, key, invalidate) => {
+      host.input?.addEventListener('change', invalidate);
+      return () => {
+        host.input?.removeEventListener('change', invalidate);
+      };
+    },
+  },
   render: () => html`
-    <template layout="contents">
-      <label layout="row gap:0.5 items:center" onclick="${clickSlottedElement}">
+    <template layout="column">
+      <div layout="row items:center" onclick="${clickInput}">
         <slot></slot>
-        <ui-text type="body-s" color="gray-600">
+        <ui-text type="body-s" color="gray-600" layout="padding:left:0.5">
           <slot name="label"></slot>
         </ui-text>
-      </label>
+      </div>
     </template>
   `.css`
-    :host {
+    :host, ::slotted(*) {
       cursor: pointer;
       user-select: none;
     }

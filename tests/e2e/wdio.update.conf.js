@@ -20,7 +20,7 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import { getExtensionPageURL } from './utils.js';
+import { getExtensionPageURL, waitForIdleBackgroundTasks } from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -30,7 +30,7 @@ import * as wdio from './wdio.conf.js';
  */
 export const config = {
   ...wdio.config,
-  specs: ['**/*.spec.js'],
+  specs: [['**/*.spec.js']],
   exclude: ['spec/_onboarding.spec.js'],
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {
@@ -97,51 +97,64 @@ export const config = {
   before: async (capabilities, specs, browser) => {
     await wdio.config.before(capabilities, specs, browser);
 
-    const onboardingUrl = await getExtensionPageURL('onboarding');
-    const currentUrl = await browser.getUrl();
+    try {
+      const onboardingUrl = await getExtensionPageURL('onboarding');
+      const currentUrl = await browser.getUrl();
 
-    await browser.newWindow(onboardingUrl);
+      await browser.newWindow(onboardingUrl);
 
-    // Get element by common selector, as the `data-qa` attribute was introduced in v10.4.9
-    await $('ui-button[type=success]').click();
-    await expect($('ui-button[type=success]')).not.toBeDisplayed();
+      // Get element by common selector, as the `data-qa` attribute was introduced in v10.4.9
+      await $('>>>ui-button[type=success]').click();
+      await expect($('>>>ui-button[type=success]')).not.toBeDisplayed();
 
-    // Reload extension with the source
-    switch (capabilities.browserName) {
-      case 'chrome': {
-        renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
-        cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
-          recursive: true,
-        });
-        rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
+      // Reload extension with the source
+      switch (capabilities.browserName) {
+        case 'chrome': {
+          renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
+          cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
+            recursive: true,
+          });
+          rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
 
-        browser.execute('chrome.runtime.reload()');
+          browser.execute(() => chrome.runtime.reload());
 
-        await browser.switchWindow(currentUrl);
-        await expect($('extensions-review-panel')).toBeDisplayed();
+          await browser.switchWindow(currentUrl);
+          await expect($('extensions-review-panel')).toBeDisplayed();
+          break;
+        }
+        case 'firefox': {
+          const extension = readFileSync(
+            `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
+          );
+          browser.installAddOn(extension.toString('base64'), true);
 
-        break;
+          await browser.switchWindow(currentUrl);
+
+          await expect(
+            $('.extension-backgroundscript__status'),
+          ).toHaveElementClass(
+            expect.stringContaining(
+              'extension-backgroundscript__status--running',
+            ),
+          );
+
+          // Without the pase, Firefox throws sometimes web-driver exceptions
+          // It must be related to the extension reloading process.
+          // As there is no way to wait for the extension to be reloaded
+          // better than above check, we just wait for a few seconds.
+          browser.pause(5000);
+
+          break;
+        }
       }
-      case 'firefox': {
-        const extension = readFileSync(
-          `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
-        );
-        browser.installAddOn(extension.toString('base64'), true);
 
-        await browser.switchWindow(currentUrl);
+      await browser.url(await getExtensionPageURL('settings'));
+      await waitForIdleBackgroundTasks();
 
-        await expect(
-          $('.extension-backgroundscript__status'),
-        ).toHaveElementClass(
-          expect.stringContaining(
-            'extension-backgroundscript__status--running',
-          ),
-        );
-
-        break;
-      }
+      console.log('Extension reloaded...');
+    } catch (e) {
+      console.error('Error while preparing test environment', e);
+      process.exit(1);
     }
-
-    console.log('Extension reloaded...');
   },
 };

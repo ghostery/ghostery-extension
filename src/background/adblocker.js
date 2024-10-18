@@ -92,11 +92,20 @@ async function updateEngines() {
 
     if (enabledEngines.length) {
       let updated = false;
+
       // Update engines from the list of enabled engines
-      for (const id of enabledEngines) {
-        if (id === engines.CUSTOM_ENGINE) continue;
-        updated = (await engines.update(id).catch(() => false)) || updated;
-      }
+      await Promise.all(
+        enabledEngines
+          .filter((id) => id !== engines.CUSTOM_ENGINE)
+          .map((id) =>
+            engines.update(id).then(
+              (v) => {
+                updated = updated || v;
+              },
+              () => {},
+            ),
+          ),
+      );
 
       // Reload the main engine after all engines are updated
       if (updated) await reloadMainEngine();
@@ -139,14 +148,16 @@ export const setup = asyncSetup([
     }
 
     if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
-      updateEngines();
+      await updateEngines();
     }
   }),
   observe('experimentalFilters', async (value, lastValue) => {
     engines.setEnv('env_experimental', value);
 
     // Experimental filters changed to enabled
-    if (lastValue !== undefined && value) updateEngines();
+    if (lastValue !== undefined && value) {
+      await updateEngines();
+    }
   }),
 ]);
 

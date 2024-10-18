@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.4.9",
+  "version": "10.4.10",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines.js",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
-    "@types/chrome": "^0.0.277",
+    "@types/chrome": "^0.0.278",
     "@wdio/browser-runner": "^9.2.1",
     "@wdio/cli": "^9.2.1",
     "@wdio/globals": "^9.1.2",
@@ -37,15 +37,15 @@
     "license-report": "^6.5.0",
     "prettier": "^3.3.3",
     "sinon-chrome": "^3.0.1",
-    "vite": "^5.4.8",
+    "vite": "^5.4.9",
     "web-ext": "^8.2.0",
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.33.2",
-    "@cliqz/adblocker-webextension": "^1.33.2",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.33.2",
-    "@duckduckgo/autoconsent": "^10.15.0",
+    "@cliqz/adblocker": "^1.34.0",
+    "@cliqz/adblocker-webextension": "^1.34.0",
+    "@cliqz/adblocker-webextension-cosmetics": "^1.34.0",
+    "@duckduckgo/autoconsent": "^10.16.0",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.34.0",
     "@whotracksme/reporting": "^5.1.26",
@@ -53,7 +53,7 @@
     "hybrids": "^9.1.7",
     "idb": "^8.0.0",
     "jwt-decode": "^4.0.0",
-    "tldts-experimental": "^6.1.51"
+    "tldts-experimental": "^6.1.52"
   },
   "engineStrict": true,
   "engines": {

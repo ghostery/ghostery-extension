@@ -11,12 +11,8 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
-export async function disableCache() {
-  if (browser.isChromium) {
-    await browser.sendCommand('Network.setCacheDisabled', {
-      cacheDisabled: true,
-    });
-  }
+function getProtocol() {
+  return browser.isChromium ? 'chrome-extension' : 'moz-extension';
 }
 
 let extensionId = '';
@@ -45,11 +41,30 @@ async function getExtensionId() {
 }
 
 export async function getExtensionPageURL(page, file = 'index.html') {
-  return `${browser.isChromium ? 'chrome-extension' : 'moz-extension'}://${await getExtensionId()}/pages/${page}/${file}`;
+  return `${getProtocol()}://${await getExtensionId()}/pages/${page}/${file}`;
 }
 
 export function getExtensionElement(id) {
   return $(`>>>[data-qa="${id}"]`);
+}
+
+export async function waitForIdleBackgroundTasks() {
+  if (!(await browser.getUrl()).startsWith(getProtocol())) {
+    throw new Error(
+      'Background idle state must be checked from the extension context',
+    );
+  }
+
+  // Wait for the 'idleOptionsObservers' response
+  const result = await browser.execute(
+    browser.isChromium
+      ? () => chrome.runtime.sendMessage({ action: 'idleOptionsObservers' })
+      : () => browser.runtime.sendMessage({ action: 'idleOptionsObservers' }),
+  );
+
+  if (result !== 'done') {
+    throw new Error(`Background tasks did not respond with "done": ${result}`);
+  }
 }
 
 export async function enableExtension() {
@@ -63,9 +78,26 @@ export async function enableExtension() {
     await getExtensionElement('button:enable').click();
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
-    // Give the extension some time to initialize (updating the engines in the background)
-    await browser.pause(2000);
+    await waitForIdleBackgroundTasks();
   }
+}
+
+export async function setToggle(name, value) {
+  const toggle = await getExtensionElement(`toggle:${name}`);
+
+  if ((await toggle.getProperty('value')) !== value) {
+    await toggle.click();
+
+    // Allow background process to update the settings
+    await waitForIdleBackgroundTasks();
+  }
+
+  await expect(toggle).toHaveElementProperty('value', value);
+}
+
+export async function setPrivacyToggle(name, value) {
+  await browser.url(await getExtensionPageURL('settings'));
+  await setToggle(name, value);
 }
 
 export async function switchToPanel(fn) {
@@ -82,7 +114,9 @@ export async function switchToPanel(fn) {
       await browser.newWindow(url);
     }
 
-    await browser.pause(1000);
+    await browser.waitUntil(
+      async () => (await browser.getTitle()) === 'Ghostery panel',
+    );
 
     const result = await fn();
 
