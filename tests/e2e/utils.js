@@ -11,6 +11,10 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
+function getProtocol() {
+  return browser.isChromium ? 'chrome-extension' : 'moz-extension';
+}
+
 let extensionId = '';
 async function getExtensionId() {
   if (!extensionId) {
@@ -37,7 +41,7 @@ async function getExtensionId() {
 }
 
 export async function getExtensionPageURL(page, file = 'index.html') {
-  return `${browser.isChromium ? 'chrome-extension' : 'moz-extension'}://${await getExtensionId()}/pages/${page}/${file}`;
+  return `${getProtocol()}://${await getExtensionId()}/pages/${page}/${file}`;
 }
 
 export function getExtensionElement(id) {
@@ -45,20 +49,22 @@ export function getExtensionElement(id) {
 }
 
 export async function waitForIdleBackgroundTasks() {
-  const protocol = browser.isChromium ? 'chrome-extension' : 'moz-extension';
-
-  if (!(await browser.getUrl()).startsWith(protocol)) {
+  if (!(await browser.getUrl()).startsWith(getProtocol())) {
     throw new Error(
       'Background idle state must be checked from the extension context',
     );
   }
 
   // Wait for the 'idleOptionsObservers' response
-  await browser.execute(
+  const result = await browser.execute(
     browser.isChromium
       ? () => chrome.runtime.sendMessage({ action: 'idleOptionsObservers' })
       : () => browser.runtime.sendMessage({ action: 'idleOptionsObservers' }),
   );
+
+  if (result !== 'done') {
+    throw new Error(`Background tasks did not respond with "done": ${result}`);
+  }
 }
 
 export async function enableExtension() {

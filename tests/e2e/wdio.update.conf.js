@@ -20,7 +20,11 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import { getExtensionPageURL, waitForIdleBackgroundTasks } from './utils.js';
+import {
+  getExtensionElement,
+  getExtensionPageURL,
+  waitForIdleBackgroundTasks,
+} from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -136,15 +140,16 @@ export const config = {
             'extension-backgroundscript__status--running',
           ),
         );
-
-        // Ensure extension reloaded the source, so we can open the settings page
-        await browser.pause(5000);
-
         break;
       }
     }
 
-    await browser.url(await getExtensionPageURL('settings'));
+    const settingsUrl = await getExtensionPageURL('settings');
+    await browser.waitUntil(async () => {
+      await browser.url(settingsUrl);
+      return await getExtensionElement('page:settings').isDisplayed();
+    });
+
     await waitForIdleBackgroundTasks();
 
     console.log('Extension reloaded...');

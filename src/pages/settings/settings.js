@@ -29,7 +29,7 @@ export default {
   session: store(Session),
   render: ({ stack, session }) => html`
     <template layout="contents">
-      <settings-layout>
+      <settings-layout data-qa="page:settings">
         <a
           href="${router.url(Privacy)}"
           class="${{ active: router.active(Privacy) }}"

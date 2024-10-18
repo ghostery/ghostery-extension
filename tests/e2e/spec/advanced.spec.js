@@ -52,7 +52,10 @@ describe('Advanced Features', function () {
       ]);
     });
 
-    after(() => setPrivacyToggle('custom-filters', false));
+    after(async function () {
+      await setCustomFilters([]);
+      await setPrivacyToggle('custom-filters', false);
+    });
 
     it('adds custom network filter', async function () {
       await browser.url(PAGE_URL);

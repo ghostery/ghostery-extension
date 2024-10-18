@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
     case 'idleOptionsObservers': {
       getIdleOptionsObservers().then(() => {
-        sendResponse();
+        sendResponse('done');
         console.info('[helpers] "idleOptionsObservers" response...');
       });
 
