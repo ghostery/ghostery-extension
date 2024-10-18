@@ -186,7 +186,21 @@ async function update(text, { trustedScriptlets }) {
         errors.push(...result.value.errors);
       }
 
-      dnrRules.push(...result.value.rules);
+      for (const rule of result.value.rules) {
+        if (rule.condition.regexFilter) {
+          const { isSupported, reason } =
+            await chrome.declarativeNetRequest.isRegexSupported({
+              regex: rule.condition.regexFilter,
+            });
+          if (!isSupported) {
+            errors.push(
+              `Could not apply a custom filter as "${rule.condition.regexFilter}" is a not supported regexp due to: ${reason}`,
+            );
+            continue;
+          }
+        }
+        dnrRules.push(rule);
+      }
     }
 
     result.dnrRules = await updateDNRRules(dnrRules);
