@@ -4,18 +4,15 @@ function updateShadow({ render }) {
   const root = render();
 
   const el = root.querySelector('#scroll');
-  const shadowTop = root.querySelector('.shadow.top');
-  const shadowBottom = root.querySelector('.shadow.bottom');
+  const shadow = root.querySelector('.shadow');
 
   if (el.scrollHeight > el.clientHeight) {
-    shadowTop.classList.toggle('show', el.scrollTop !== 0);
-    shadowBottom.classList.toggle(
+    shadow.classList.toggle(
       'show',
       el.scrollTop + el.clientHeight < el.scrollHeight,
     );
   } else {
-    shadowTop.classList.remove('show');
-    shadowBottom.classList.remove('show');
+    shadow.classList.remove('show');
   }
 }
 
@@ -38,8 +35,7 @@ export default {
         >
           <slot onslotchange="${updateShadow}"></slot>
         </div>
-        <div class="shadow top" layout="absolute width:full height:3"></div>
-        <div class="shadow bottom" layout="absolute width:full height:3"></div>
+        <div class="shadow" layout="absolute bottom left right height:5"></div>
       </template>
     `.css`
       /* set custom scrollbar */
@@ -57,21 +53,12 @@ export default {
         );
         visibility: hidden;
         opacity: 0;
-        transition: visibility 0.1s, opacity 0.1s;
+        transition: visibility 0.2s ease, opacity 0.2s ease;
       }
 
       .shadow.show {
         visibility: visible;
         opacity: 1;
-      }
-
-      .shadow.top {
-        top: 0;
-        transform: rotate(180deg);
-      }
-
-      .shadow.bottom {
-        bottom: 0;
       }
     `,
   },

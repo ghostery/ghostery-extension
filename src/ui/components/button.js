@@ -69,6 +69,12 @@ export default {
       border: 1px solid var(--ui-color-gray-200);
     }
 
+    :host([type="outline-primary"]) {
+      color: var(--ui-color-primary-700);
+      background: var(--ui-color-layout);
+      border: 1px solid var(--ui-color-primary-700);
+    }
+
     :host([type="outline-danger"]) {
       color: var(--ui-color-danger-500);
       background: var(--ui-color-danger-100);
@@ -105,6 +111,10 @@ export default {
 
       :host([type="outline"]:hover) {
         border-color: var(--ui-color-gray-300);
+      }
+
+      :host([type="outline-primary"]:hover) {
+        background: var(--ui-color-primary-100);
       }
 
       :host([type="outline-danger"]:hover) {

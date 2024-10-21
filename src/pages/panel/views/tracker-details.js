@@ -275,9 +275,7 @@ export default {
             html`
               <ui-icon name="privacy"></ui-icon>
               <div layout="column gap">
-                <ui-text type="label-s">
-                  <!-- | Panel Company -->Privacy policy
-                </ui-text>
+                <ui-text type="label-s">Privacy policy</ui-text>
                 <ui-text
                   type="body-s"
                   color="primary-700"

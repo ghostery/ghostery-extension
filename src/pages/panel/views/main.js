@@ -21,7 +21,7 @@ import Notification from '../store/notification.js';
 
 import sleep from '../assets/sleep.svg';
 
-import Navigation from './navigation.js';
+import Menu from './menu.js';
 import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
 
@@ -100,7 +100,7 @@ function tail(hostname) {
 }
 
 export default {
-  [router.connect]: { stack: [Navigation, TrackerDetails, ProtectionStatus] },
+  [router.connect]: { stack: [Menu, TrackerDetails, ProtectionStatus] },
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
@@ -143,7 +143,7 @@ export default {
               </a>
             </ui-action>
             <ui-action slot="actions">
-              <a href="${router.url(Navigation)}">
+              <a href="${router.url(Menu)}">
                 <ui-icon name="menu" color="gray-800"></ui-icon>
               </a>
             </ui-action>
