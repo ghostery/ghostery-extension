@@ -224,14 +224,16 @@ execSync('npm run licenses', { stdio: silent ? '' : 'inherit' });
 
 // Fetch Privacy Policy
 if (argv.target !== 'firefox') {
-  const policy = await fetch(
-    `https://www.${
-      argv.debug ? 'ghosterystage' : 'ghostery'
-    }.com/privacy-policy?embed=true`,
-  );
+  const url = `https://www.${argv.debug ? 'ghosterystage' : 'ghostery'}.com/privacy-policy?embed=true`;
+
+  const policy = await fetch(url);
   if (policy.ok) {
     const text = await policy.text();
     writeFileSync(resolve(options.outDir, 'privacy-policy.html'), text);
+  } else {
+    throw new Error(
+      `Failed to fetch Privacy Policy from '${url}': ${policy.status}`,
+    );
   }
 }
 
