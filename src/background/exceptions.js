@@ -75,8 +75,21 @@ async function updateFilters() {
       try {
         const result = (await convert(filter.toString())).rules;
 
-        rules.push(
-          ...result.map((rule) => ({
+        for (const rule of result) {
+          if (rule.condition.regexFilter) {
+            const { isSupported, reason } =
+              await chrome.declarativeNetRequest.isRegexSupported({
+                regex: rule.condition.regexFilter,
+              });
+            if (!isSupported) {
+              console.error(
+                `Could not add an exception for "${tracker.name}" as filter "${filter.toString()}" is a not supported regexp due to: ${reason}`,
+              );
+              continue;
+            }
+          }
+
+          rules.push({
             ...rule,
             condition: {
               ...rule.condition,
@@ -107,8 +120,8 @@ async function updateFilters() {
             },
             // Internal prefix + priority
             priority: 2000000 + rule.priority,
-          })),
-        );
+          });
+        }
       } catch (e) {
         console.error('[exceptions] Error while converting filter:', e);
       }
