@@ -205,11 +205,9 @@ function adblockerInjectStylesWebExtension(
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-async function injectCosmetics(msg, sender) {
-  try {
-    setup.pending && (await setup.pending);
-  } catch (e) {
-    console.error(`[adblocker] Error while setup cosmetic filters: ${e}`);
+function injectCosmetics(msg, sender) {
+  if (setup.pending) {
+    console.warn(`[adblocker] not ready for cosmetic injection`);
     return;
   }
 
@@ -385,6 +383,11 @@ async function executeScriptlets(tabId, frameId, scripts) {
 }
 
 function injectScriptlets(tabId, frameId, url) {
+  if (setup.pending) {
+    console.warn('[adblocker] not ready for scriptlet injection');
+    return;
+  }
+
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(options, hostname)) {
     return;
@@ -467,9 +470,7 @@ if (__PLATFORM__ === 'firefox') {
       if (details.tabId < 0 || details.type === 'main_frame') return;
 
       if (setup.pending) {
-        console.error(
-          '[adblocker] Error while processing network request - adblocker not ready yet',
-        );
+        console.warn('[adblocker] not ready for network blocking');
         return;
       }
 
@@ -501,9 +502,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       if (setup.pending) {
-        console.error(
-          '[adblocker] Error while processing headers - adblocker not ready yet',
-        );
+        console.warn('[adblocker] not ready for network modification');
         return;
       }
 
