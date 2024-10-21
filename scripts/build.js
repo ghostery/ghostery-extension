@@ -222,6 +222,19 @@ if (manifest.declarative_net_request?.rule_resources) {
 // generate license file
 execSync('npm run licenses', { stdio: silent ? '' : 'inherit' });
 
+// Fetch Privacy Policy
+if (argv.target !== 'firefox') {
+  const policy = await fetch(
+    `https://www.${
+      argv.debug ? 'ghosterystage' : 'ghostery'
+    }.com/privacy-policy?embed=true`,
+  );
+  if (policy.ok) {
+    const text = await policy.text();
+    writeFileSync(resolve(options.outDir, 'privacy-policy.html'), text);
+  }
+}
+
 // --- Save manifest ---
 
 // set manifest version from package.json
