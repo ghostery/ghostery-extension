@@ -321,26 +321,32 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
   return false;
 });
 
+const SCRIPTLETS_UUID = crypto.randomUUID();
+
 async function executeScriptlets(tabId, frameId, scripts) {
-  // Dynamically injected scripts can be difficult to find later in
+  // Dynamically injected scriptlets can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
-  let debugMarker;
   if (debugMode) {
-    debugMarker = (text) =>
-      `console.log('[ADBLOCKER-DEBUG]:', ${JSON.stringify(text)});`;
-  } else {
-    debugMarker = () => '';
+    scripts = [
+      `console.info('[adblocker]', 'running scriptlets (${scripts.length})');`,
+      ...scripts,
+    ];
   }
 
-  // the scriptlet code that contains patches for the website
-  const codeRunningInPage = `(function(){
-${debugMarker('run scriptlets (executing in "page world")')}
-${scripts.join('\n\n')}}
-)()`;
+  const scriptlets = `(function(){ ${scripts.join('\n\n')}} )();`;
 
-  // wrapper to break the "isolated world" so that the patching operates
-  // on the website, not on the content script's isolated environment.
-  function codeRunningInContentScript(code) {
+  function scriptletInjector(code, uuid) {
+    // ensure that scriptlets are injected only once
+    if (window[uuid]) {
+      return;
+    } else {
+      Object.defineProperty(window, uuid, {
+        value: true,
+        writable: false,
+        enumerable: false,
+        configurable: false,
+      });
+    }
     let content = decodeURIComponent(code);
     const script = document.createElement('script');
     if (window.trustedTypes) {
@@ -367,8 +373,8 @@ ${scripts.join('\n\n')}}
         tabId,
         frameIds: [frameId],
       },
-      func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage)],
+      func: scriptletInjector,
+      args: [encodeURIComponent(scriptlets), SCRIPTLETS_UUID],
     },
     () => {
       if (chrome.runtime.lastError) {
@@ -378,14 +384,7 @@ ${scripts.join('\n\n')}}
   );
 }
 
-async function injectScriptlets(tabId, frameId, url) {
-  try {
-    setup.pending && (await setup.pending);
-  } catch (e) {
-    console.error(`[adblocker] Error while setup adblocker filters: ${e}`);
-    return;
-  }
-
+function injectScriptlets(tabId, frameId, url) {
   const { hostname, domain } = parse(url);
   if (!hostname || isPaused(options, hostname)) {
     return;
@@ -396,10 +395,9 @@ async function injectScriptlets(tabId, frameId, url) {
     return;
   }
 
-  const scriptlets = [];
   const engine = engines.get(engines.MAIN_ENGINE);
 
-  const { active, scripts } = engine.getCosmeticsFilters({
+  const { scripts } = engine.getCosmeticsFilters({
     url: url,
     hostname,
     domain: domain || '',
@@ -409,15 +407,9 @@ async function injectScriptlets(tabId, frameId, url) {
     getRulesFromDOM: false,
     getRulesFromHostname: true,
   });
-  if (active === false) {
-    return;
-  }
-  if (scripts.length > 0) {
-    scriptlets.push(...scripts);
-  }
 
-  if (scriptlets.length > 0) {
-    executeScriptlets(tabId, frameId, scriptlets);
+  if (scripts.length > 0) {
+    executeScriptlets(tabId, frameId, scripts);
   }
 }
 
@@ -429,11 +421,11 @@ if (__PLATFORM__ === 'safari') {
 
     return false;
   });
-} else {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.frameId, details.url);
-  });
 }
+
+chrome.webNavigation.onCommitted.addListener((details) => {
+  injectScriptlets(details.tabId, details.frameId, details.url);
+});
 
 function isTrusted(request, type) {
   // The request is from a tab that is paused
