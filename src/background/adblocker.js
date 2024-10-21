@@ -205,9 +205,11 @@ function adblockerInjectStylesWebExtension(
 }
 
 // copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-function injectCosmetics(msg, sender) {
-  if (setup.pending) {
-    console.warn(`[adblocker] not ready for cosmetic injection`);
+async function injectCosmetics(msg, sender) {
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.error('[adblocker] not ready for cosmetic injection', e);
     return;
   }
 
@@ -301,11 +303,7 @@ function injectCosmetics(msg, sender) {
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
-    injectCosmetics(msg, sender).catch((e) =>
-      console.error(
-        `[adblocker] Error while processing cosmetics filters: ${e}`,
-      ),
-    );
+    injectCosmetics(msg, sender);
   }
 
   return false;
@@ -374,9 +372,11 @@ async function executeScriptlets(tabId, frameId, scripts) {
   );
 }
 
-function injectScriptlets(tabId, frameId, url) {
-  if (setup.pending) {
-    console.warn('[adblocker] not ready for scriptlet injection');
+async function injectScriptlets(tabId, frameId, url) {
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.error('[adblocker] not ready for scriptlet injection', e);
     return;
   }
 
@@ -458,11 +458,13 @@ function isTrusted(request, type) {
 
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
-    (details) => {
+    async (details) => {
       if (details.tabId < 0 || details.type === 'main_frame') return;
 
-      if (setup.pending) {
-        console.warn('[adblocker] not ready for network blocking');
+      try {
+        setup.pending && (await setup.pending);
+      } catch (e) {
+        console.error('[adblocker] not ready for network blocking', e);
         return;
       }
 
@@ -492,9 +494,11 @@ if (__PLATFORM__ === 'firefox') {
   );
 
   chrome.webRequest.onHeadersReceived.addListener(
-    (details) => {
-      if (setup.pending) {
-        console.warn('[adblocker] not ready for network modification');
+    async (details) => {
+      try {
+        setup.pending && (await setup.pending);
+      } catch (e) {
+        console.error('[adblocker] not ready for network modification', e);
         return;
       }
 
