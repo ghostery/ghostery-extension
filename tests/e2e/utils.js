@@ -44,8 +44,8 @@ export async function getExtensionPageURL(page, file = 'index.html') {
   return `${getProtocol()}://${await getExtensionId()}/pages/${page}/${file}`;
 }
 
-export function getExtensionElement(id) {
-  return $(`>>>[data-qa="${id}"]`);
+export function getExtensionElement(id, query) {
+  return $(`>>>[data-qa="${id}"]` + (query ? ` ${query}` : ''));
 }
 
 export async function waitForIdleBackgroundTasks() {

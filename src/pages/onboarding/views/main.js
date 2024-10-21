@@ -55,7 +55,12 @@ export default {
           </div>
         </div>
         <div layout="column gap:2">
-          <ui-text type="body-s" underline layout="block:justify">
+          <ui-text
+            type="body-s"
+            underline
+            layout="block:justify"
+            data-qa="text:description"
+          >
             ${msg.html`
               Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
               <a href="${router.url(AddonHealth)}">add-on's health</a>, and

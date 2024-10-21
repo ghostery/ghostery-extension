@@ -30,6 +30,15 @@ describe('Onboarding', function () {
     await browser.url('about:blank');
   });
 
+  if (browser.isChromium) {
+    it('shows the dialog with Privacy Policy', async function () {
+      await browser.url(await getExtensionPageURL('onboarding'));
+      await getExtensionElement('text:description', 'a:last-of-type').click();
+
+      await expect(getExtensionElement('text:privacy-policy')).toBeDisplayed();
+    });
+  }
+
   it('enables ghostery', async function () {
     await browser.url(await getExtensionPageURL('onboarding'));
     await getExtensionElement('button:enable').click();

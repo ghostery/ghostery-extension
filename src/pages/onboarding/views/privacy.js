@@ -11,10 +11,6 @@
 
 import { html, router } from 'hybrids';
 
-const PRIVACY_POLICY_URL = `https://www.${
-  chrome.runtime.getManifest().debug ? 'ghosterystage' : 'ghostery'
-}.com/privacy-policy`;
-
 function scrollToAnchor(host, event) {
   let anchor = event.target;
   while (anchor && !anchor.href) {
@@ -33,7 +29,7 @@ function scrollToAnchor(host, event) {
 export default {
   [router.connect]: { dialog: true },
   policy: () =>
-    fetch(`${PRIVACY_POLICY_URL}?embed=true`).then((res) => {
+    fetch(chrome.runtime.getURL('/privacy-policy.html')).then((res) => {
       if (res.ok) {
         return res.text();
       }
@@ -47,24 +43,15 @@ export default {
       </ui-text>
       <div>
         ${html.resolve(
-          policy
-            .then(
-              (policy) =>
-                html`<div
-                  id="policy"
-                  onclick="${scrollToAnchor}"
-                  innerHTML="${policy}"
-                ></div>`,
-            )
-            .catch(
-              () =>
-                html`<ui-text type="body-s">
-                  For more information read our full
-                  <a href="${PRIVACY_POLICY_URL}" target="_blank"
-                    >privacy policy</a
-                  >.
-                </ui-text>`,
-            ),
+          policy.then(
+            (policy) =>
+              html`<div
+                id="policy"
+                onclick="${scrollToAnchor}"
+                innerHTML="${policy}"
+                data-qa="text:privacy-policy"
+              ></div>`,
+          ),
         )}
       </div>
       <ui-button slot="footer">
