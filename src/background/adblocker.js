@@ -458,13 +458,11 @@ function isTrusted(request, type) {
 
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
-    async (details) => {
+    (details) => {
       if (details.tabId < 0 || details.type === 'main_frame') return;
 
-      try {
-        setup.pending && (await setup.pending);
-      } catch (e) {
-        console.error('[adblocker] not ready for network blocking', e);
+      if (setup.pending) {
+        console.error('[adblocker] not ready for network blocking');
         return;
       }
 
@@ -494,11 +492,9 @@ if (__PLATFORM__ === 'firefox') {
   );
 
   chrome.webRequest.onHeadersReceived.addListener(
-    async (details) => {
-      try {
-        setup.pending && (await setup.pending);
-      } catch (e) {
-        console.error('[adblocker] not ready for network modification', e);
+    (details) => {
+      if (setup.pending) {
+        console.error('[adblocker] not ready for network modification');
         return;
       }
 
