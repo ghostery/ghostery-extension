@@ -233,7 +233,7 @@ function injectCosmetics(msg, sender) {
   // Because of this, we specify `allFrames: true` when injecting them so
   // that we do not need to perform this operation for sub-frames.
   if (frameId === 0 && msg.lifecycle === 'start') {
-    const { active, styles } = engine.getCosmeticsFilters({
+    const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
@@ -250,10 +250,6 @@ function injectCosmetics(msg, sender) {
       getRulesFromHostname: false,
     });
 
-    if (active === false) {
-      return;
-    }
-
     genericStyles.push(styles);
   }
 
@@ -263,7 +259,7 @@ function injectCosmetics(msg, sender) {
   // ids and hrefs observed in the DOM. MutationObserver is also used to
   // make sure we can react to changes.
   {
-    const { active, styles } = engine.getCosmeticsFilters({
+    const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
@@ -281,10 +277,6 @@ function injectCosmetics(msg, sender) {
       // This will be done every time we get information about DOM mutation
       getRulesFromDOM: msg.lifecycle === 'dom-update',
     });
-
-    if (active === false) {
-      return;
-    }
 
     specificStyles.push(styles);
     specificFrameId = frameId;
