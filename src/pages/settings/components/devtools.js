@@ -22,20 +22,20 @@ export async function asyncAction(event, promise) {
   const origText = el.textContent;
 
   button.disabled = true;
-  el.innerHTML = '...';
+  el.textContent = '...';
 
   const response = await promise;
 
   if (response) {
-    el.innerHTML = response;
+    el.textContent = response;
 
     setTimeout(() => {
       button.disabled = false;
-      el.innerHTML = origText;
+      el.textContent = origText;
     }, 2000);
   } else {
     button.disabled = false;
-    el.innerHTML = origText;
+    el.textContent = origText;
   }
 }
 
