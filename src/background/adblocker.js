@@ -209,7 +209,7 @@ async function injectCosmetics(msg, sender) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
-    console.error(`[adblocker] Error while setup cosmetic filters: ${e}`);
+    console.error('[adblocker] not ready for cosmetic injection', e);
     return;
   }
 
@@ -235,7 +235,7 @@ async function injectCosmetics(msg, sender) {
   // Because of this, we specify `allFrames: true` when injecting them so
   // that we do not need to perform this operation for sub-frames.
   if (frameId === 0 && msg.lifecycle === 'start') {
-    const { active, styles } = engine.getCosmeticsFilters({
+    const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
@@ -252,10 +252,6 @@ async function injectCosmetics(msg, sender) {
       getRulesFromHostname: false,
     });
 
-    if (active === false) {
-      return;
-    }
-
     genericStyles.push(styles);
   }
 
@@ -265,7 +261,7 @@ async function injectCosmetics(msg, sender) {
   // ids and hrefs observed in the DOM. MutationObserver is also used to
   // make sure we can react to changes.
   {
-    const { active, styles } = engine.getCosmeticsFilters({
+    const { styles } = engine.getCosmeticsFilters({
       domain,
       hostname,
       url,
@@ -283,10 +279,6 @@ async function injectCosmetics(msg, sender) {
       // This will be done every time we get information about DOM mutation
       getRulesFromDOM: msg.lifecycle === 'dom-update',
     });
-
-    if (active === false) {
-      return;
-    }
 
     specificStyles.push(styles);
     specificFrameId = frameId;
@@ -311,36 +303,38 @@ async function injectCosmetics(msg, sender) {
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'getCosmeticsFilters') {
-    injectCosmetics(msg, sender).catch((e) =>
-      console.error(
-        `[adblocker] Error while processing cosmetics filters: ${e}`,
-      ),
-    );
+    injectCosmetics(msg, sender);
   }
 
   return false;
 });
 
+const SCRIPTLETS_UUID = crypto.randomUUID();
+
 async function executeScriptlets(tabId, frameId, scripts) {
-  // Dynamically injected scripts can be difficult to find later in
+  // Dynamically injected scriptlets can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
-  let debugMarker;
   if (debugMode) {
-    debugMarker = (text) =>
-      `console.log('[ADBLOCKER-DEBUG]:', ${JSON.stringify(text)});`;
-  } else {
-    debugMarker = () => '';
+    scripts = [
+      `console.info('[adblocker]', 'running scriptlets (${scripts.length})');`,
+      ...scripts,
+    ];
   }
 
-  // the scriptlet code that contains patches for the website
-  const codeRunningInPage = `(function(){
-${debugMarker('run scriptlets (executing in "page world")')}
-${scripts.join('\n\n')}}
-)()`;
+  const scriptlets = `(function(){ ${scripts.join('\n\n')}} )();`;
 
-  // wrapper to break the "isolated world" so that the patching operates
-  // on the website, not on the content script's isolated environment.
-  function codeRunningInContentScript(code) {
+  function scriptletInjector(code, uuid) {
+    // ensure that scriptlets are injected only once
+    if (window[uuid]) {
+      return;
+    } else {
+      Object.defineProperty(window, uuid, {
+        value: true,
+        writable: false,
+        enumerable: false,
+        configurable: false,
+      });
+    }
     let content = decodeURIComponent(code);
     const script = document.createElement('script');
     if (window.trustedTypes) {
@@ -367,8 +361,8 @@ ${scripts.join('\n\n')}}
         tabId,
         frameIds: [frameId],
       },
-      func: codeRunningInContentScript,
-      args: [encodeURIComponent(codeRunningInPage)],
+      func: scriptletInjector,
+      args: [encodeURIComponent(scriptlets), SCRIPTLETS_UUID],
     },
     () => {
       if (chrome.runtime.lastError) {
@@ -382,7 +376,7 @@ async function injectScriptlets(tabId, frameId, url) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
-    console.error(`[adblocker] Error while setup adblocker filters: ${e}`);
+    console.error('[adblocker] not ready for scriptlet injection', e);
     return;
   }
 
@@ -396,10 +390,9 @@ async function injectScriptlets(tabId, frameId, url) {
     return;
   }
 
-  const scriptlets = [];
   const engine = engines.get(engines.MAIN_ENGINE);
 
-  const { active, scripts } = engine.getCosmeticsFilters({
+  const { scripts } = engine.getCosmeticsFilters({
     url: url,
     hostname,
     domain: domain || '',
@@ -409,15 +402,9 @@ async function injectScriptlets(tabId, frameId, url) {
     getRulesFromDOM: false,
     getRulesFromHostname: true,
   });
-  if (active === false) {
-    return;
-  }
-  if (scripts.length > 0) {
-    scriptlets.push(...scripts);
-  }
 
-  if (scriptlets.length > 0) {
-    executeScriptlets(tabId, frameId, scriptlets);
+  if (scripts.length > 0) {
+    executeScriptlets(tabId, frameId, scripts);
   }
 }
 
@@ -429,11 +416,11 @@ if (__PLATFORM__ === 'safari') {
 
     return false;
   });
-} else {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
-    injectScriptlets(details.tabId, details.frameId, details.url);
-  });
 }
+
+chrome.webNavigation.onCommitted.addListener((details) => {
+  injectScriptlets(details.tabId, details.frameId, details.url);
+});
 
 function isTrusted(request, type) {
   // The request is from a tab that is paused
@@ -475,9 +462,7 @@ if (__PLATFORM__ === 'firefox') {
       if (details.tabId < 0 || details.type === 'main_frame') return;
 
       if (setup.pending) {
-        console.error(
-          '[adblocker] Error while processing network request - adblocker not ready yet',
-        );
+        console.error('[adblocker] not ready for network blocking');
         return;
       }
 
@@ -509,9 +494,7 @@ if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
       if (setup.pending) {
-        console.error(
-          '[adblocker] Error while processing headers - adblocker not ready yet',
-        );
+        console.error('[adblocker] not ready for network modification');
         return;
       }
 
