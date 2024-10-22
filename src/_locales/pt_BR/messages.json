@@ -286,9 +286,6 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Facilita a criação de suas próprias regras de bloqueio de anúncios para personalizar sua experiência com o Ghostery."
   },
-  "for_more_information_read_our_full": {
-    "message": "Para mais informações, leia a nossa versão completa"
-  },
   "get_help": {
     "message": "Obter ajuda"
   },
@@ -492,7 +489,7 @@
     "message": "Impede várias técnicas de rastreamento usando tecnologia orientada por IA."
   },
   "privacy_policy": {
-    "message": "política de privacidade"
+    "message": "Política de privacidade"
   },
   "privacy_policy___panel_company": {
     "message": "Política de privacidade"
