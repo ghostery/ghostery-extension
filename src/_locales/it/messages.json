@@ -286,9 +286,6 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Facilita la creazione delle tue regole di blocco degli annunci per personalizzare la tua esperienza con Ghostery."
   },
-  "for_more_information_read_our_full": {
-    "message": "Per maggiori informazioni, visita il nostro sito"
-  },
   "get_help": {
     "message": "Ricevi aiuto"
   },
@@ -492,7 +489,7 @@
     "message": "Impedisce varie tecniche di tracciamento tramite tecnologia Al-driven."
   },
   "privacy_policy": {
-    "message": "informativa sulla privacy"
+    "message": "Informativa sulla privacy"
   },
   "privacy_policy___panel_company": {
     "message": "Informativa sulla privacy"

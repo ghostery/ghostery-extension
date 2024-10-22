@@ -286,9 +286,6 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Обеспечивает создание собственных правил блокировки рекламы для настройки вашего опыта использования Ghostery."
   },
-  "for_more_information_read_our_full": {
-    "message": "Для получения дополнительной информации прочтите"
-  },
   "get_help": {
     "message": "Помощь"
   },
@@ -492,7 +489,7 @@
     "message": "Использует ИИ для блокировки различных способов сбора данных."
   },
   "privacy_policy": {
-    "message": "политика конфиденциальности"
+    "message": "Политика конфиденциальности"
   },
   "privacy_policy___panel_company": {
     "message": "Политика конфиденциальности"
