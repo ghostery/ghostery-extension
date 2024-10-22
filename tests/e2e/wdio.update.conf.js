@@ -20,7 +20,11 @@ import {
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
-import { getExtensionPageURL, waitForIdleBackgroundTasks } from './utils.js';
+import {
+  getExtensionElement,
+  getExtensionPageURL,
+  waitForIdleBackgroundTasks,
+} from './utils.js';
 import * as wdio from './wdio.conf.js';
 
 /*
@@ -123,6 +127,9 @@ export const config = {
           break;
         }
         case 'firefox': {
+          // Settle down the installed extension
+          await browser.pause(5000);
+
           const extension = readFileSync(
             `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
           );
@@ -149,6 +156,8 @@ export const config = {
       }
 
       await browser.url(await getExtensionPageURL('settings'));
+      await expect(getExtensionElement('page:settings')).toBeDisplayed();
+
       await waitForIdleBackgroundTasks();
 
       console.log('Extension reloaded...');
