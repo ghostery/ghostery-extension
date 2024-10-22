@@ -121,6 +121,7 @@ html {
 
 html {
   height: 100%;
+  background: var(--ui-color-layout);
 }
 
 html,
@@ -131,10 +132,15 @@ body {
 
 body {
   width: 100%;
-  background: var(--ui-color-layout);
   color: var(--ui-color-gray-800);
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Open Sans', Arial,
-    Helvetica, sans-serif;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Open Sans',
+    Arial,
+    Helvetica,
+    sans-serif;
   font-size: 13px;
   -moz-osx-font-smoothing: grayscale;
 }

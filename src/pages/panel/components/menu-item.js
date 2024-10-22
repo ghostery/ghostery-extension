@@ -11,38 +11,45 @@
 
 import { html } from 'hybrids';
 
+import { openTabWithUrl } from '/utils/tabs.js';
+
 export default {
+  href: '',
   icon: '',
-  render: ({ icon }) => html`
-    <template layout="grid:max|1|max items:center:start gap:1.5">
-      <ui-icon name="${icon}" layout="size:2.5"></ui-icon>
-      <ui-text type="label-m" ellipsis layout="column width::0:full">
-        <slot></slot>
-      </ui-text>
-      <ui-icon name="arrow-right"></ui-icon>
+  suffixIcon: 'arrow-right',
+  render: ({ href, icon, suffixIcon }) => html`
+    <template layout="contents">
+      <ui-action>
+        <a
+          href="${href}"
+          layout="grid:max|1|max items:center:start gap:1.5 padding margin:0:1"
+          layout@390px="padding:1.5:1"
+          onclick="${openTabWithUrl}"
+        >
+          <ui-icon name="${icon}" color="gray-600"></ui-icon>
+          <ui-text
+            type="label-m"
+            ellipsis
+            layout="column width::0:full"
+            color="inherit"
+          >
+            <slot></slot>
+          </ui-text>
+          <ui-icon name="${suffixIcon}" color="gray-400"></ui-icon>
+        </a>
+      </ui-action>
     </template>
   `.css`
-    :host {
-      text-decoration: none;
+    a {
       color: var(--ui-color-gray-800);
     }
 
     ui-icon {
-      color: var(--ui-color-gray-600);
-    }
-
-    ui-text ::slotted(*) {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      transition: color 0.2s;
     }
 
     @media (hover: hover) {
-      :host(:hover) ui-text {
-        color: var(--ui-color-primary-700);
-      }
-
-      :host(:hover) ui-icon {
+      a:hover, a:hover ui-icon {
         color: var(--ui-color-primary-700);
       }
     }

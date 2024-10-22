@@ -11,7 +11,6 @@
 
 import { html, store, dispatch } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
 import Options from '/store/options.js';
 
 const VERSION = chrome.runtime.getManifest().version;
@@ -132,11 +131,6 @@ export default {
             translate="no"
           >
             v${VERSION}
-          </ui-text>
-          <ui-text type="label-s" color="gray-300">
-            <a href="/licenses.html" onclick="${openTabWithUrl}">
-              Software Licenses
-            </a>
           </ui-text>
         </div>
         <ui-action>

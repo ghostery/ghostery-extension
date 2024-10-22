@@ -15,11 +15,11 @@ import '/ui/index.js';
 import './elements.js';
 import './styles.css';
 
-import Home from './views/home.js';
+import Main from './views/main.js';
 
 // Mount the app
 mount(document.body, {
-  stack: router([Home]),
+  stack: router([Main]),
   render: ({ stack }) => html`
     <template layout="row width:full:350px">${stack}</template>
   `,
