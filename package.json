@@ -48,7 +48,7 @@
     "@duckduckgo/autoconsent": "^10.16.0",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.35.0",
-    "@whotracksme/reporting": "^5.1.26",
+    "@whotracksme/reporting": "^5.1.27",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.7",
     "idb": "^8.0.0",
