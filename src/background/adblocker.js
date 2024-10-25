@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import {
   filterRequestHTML,
   updateResponseHeadersWithCSP,
-} from '@cliqz/adblocker-webextension';
+} from '@ghostery/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
 import Options, { observe, ENGINES, isPaused } from '/store/options.js';

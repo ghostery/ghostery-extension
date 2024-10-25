@@ -42,10 +42,10 @@
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "^1.34.0",
-    "@cliqz/adblocker-webextension": "^1.34.0",
-    "@cliqz/adblocker-webextension-cosmetics": "^1.34.0",
     "@duckduckgo/autoconsent": "^10.17.0",
+    "@ghostery/adblocker": "^2.0.2",
+    "@ghostery/adblocker-webextension": "^2.0.2",
+    "@ghostery/adblocker-webextension-cosmetics": "^2.0.2",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.35.0",
     "@whotracksme/reporting": "^5.1.27",

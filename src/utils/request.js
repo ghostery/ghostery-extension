@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { Request } from '@cliqz/adblocker';
+import { Request } from '@ghostery/adblocker';
 import { parse } from 'tldts-experimental';
 
 const PARSE_CACHE_LIMIT = 1000;
