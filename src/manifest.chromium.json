@@ -124,56 +124,56 @@
   },
   "content_scripts": [
     {
+      "js": ["content_scripts/adblocker.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
-      "js": [
-        "content_scripts/adblocker.js"
-      ],
       "all_frames": true
     },
     {
+      "js": ["content_scripts/autoconsent.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
-      "js": [
-        "content_scripts/autoconsent.js"
-      ],
       "all_frames": true
     },
     {
+      "js": ["content_scripts/notifications.js"],
       "matches": ["http://*/*", "https://*/*"],
-      "run_at": "document_start",
-      "js": [
-        "content_scripts/notifications.js"
-      ]
+      "run_at": "document_start"
     },
     {
+      "js": ["content_scripts/whotracksme/reporting.js"],
       "matches": ["http://*/*", "https://*/*"],
-      "run_at": "document_start",
-      "js": [
-        "content_scripts/whotracksme/reporting.js"
-      ]
+      "run_at": "document_start"
     },
     {
+			"js": ["content_scripts/youtube.js"],
       "matches": ["*://www.youtube.com/*"],
-      "run_at": "document_start",
-			"js": ["content_scripts/youtube.js"]
-		}
+      "run_at": "document_start"
+		},
+    {
+      "js": ["content_scripts/trackers-preview.js"],
+      "run_at": "background_execute_script"
+    },
+    {
+      "js": ["content_scripts/prevent-serp-tracking.js"],
+      "run_at": "background_execute_script"
+    }
   ],
   "web_accessible_resources": [
     {
       "resources": [
-        "content_scripts/whotracksme/ghostery-whotracksme.js",
-        "content_scripts/trackers-preview.js",
-        "content_scripts/prevent-serp-tracking.js",
         "pages/trackers-preview/index.html",
-        "pages/onboarding/index.html",
-        "pages/notifications/opera-serp.html",
+        "pages/notifications/opera-serp.html"
+      ],
+      "matches": ["<all_urls>"],
+      "use_dynamic_url": true
+    },
+    {
+      "resources": [
         "pages/notifications/youtube.html"
       ],
-      "all_frames": true,
-      "matches": [
-        "<all_urls>"
-      ]
+      "matches": ["*://www.youtube.com/*"],
+      "use_dynamic_url": true
     }
   ],
   "content_security_policy": {
