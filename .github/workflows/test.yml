@@ -23,6 +23,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Addons Linter
+        run: |
+          npm run build -- firefox
+          npm run addons-linter
+
       - name: Test - installated extension
         run: npm run wdio
 
