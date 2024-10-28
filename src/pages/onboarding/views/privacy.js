@@ -11,9 +11,17 @@
 
 import { define, html, router } from 'hybrids';
 
-const PRIVACY_POLICY_URL = `https://www.${
-  chrome.runtime.getManifest().debug ? 'ghosterystage' : 'ghostery'
-}.com/privacy-policy`;
+function getPrivacyPolicySource() {
+  if (__PLATFORM__ === 'firefox') {
+    return 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/';
+  }
+  if (chrome.runtime.getManifest().debug) {
+    return 'https://www.ghosterystage.com/privacy-policy';
+  }
+  return 'https://www.ghostery.com/privacy-policy';
+}
+
+export const PRIVACY_POLICY_URL = getPrivacyPolicySource();
 
 function scrollToAnchor(host, event) {
   let anchor = event.target;

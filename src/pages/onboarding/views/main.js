@@ -12,7 +12,7 @@
 import { define, html, msg, router } from 'hybrids';
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
-import Privacy from './privacy.js';
+import Privacy, { PRIVACY_POLICY_URL } from './privacy.js';
 import Skip from './skip.js';
 import Success from './success.js';
 
@@ -47,8 +47,8 @@ export default define({
         <ui-text type="body-s" underline>
           ${msg.html`
               Information about web trackers, add-on health and performance telemetry will be shared in accordance with our <a href="${
-                __PLATFORM__ === 'firefox'
-                  ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
+                __PLATFORM__ !== 'safari'
+                  ? PRIVACY_POLICY_URL
                   : router.url(Privacy)
               }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community. | 'add-on' means 'browser extension'
             `}
