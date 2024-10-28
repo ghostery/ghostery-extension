@@ -215,12 +215,7 @@ async function injectCosmetics(msg, sender) {
 
   // Extract hostname from sender's URL
   const { frameId } = sender;
-  let url = sender.url;
-
-  // Try `sender.tab.url` as a fallback when Safari preloads a website
-  if (!url || url === 'about:blank') {
-    url = sender.tab.url;
-  }
+  const { url } = sender.tab;
 
   const parsed = parse(url);
   const hostname = parsed.hostname || '';
