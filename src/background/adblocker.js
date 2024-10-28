@@ -214,7 +214,8 @@ async function injectCosmetics(msg, sender) {
   }
 
   // Extract hostname from sender's URL
-  const { url = '', frameId } = sender;
+  const { frameId } = sender;
+  const url = sender.tab?.url || sender.url;
   const parsed = parse(url);
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';
