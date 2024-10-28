@@ -12,14 +12,13 @@
 import * as notifications from '/utils/notifications.js';
 
 export function openNotification(tabId, id, params) {
-  const url = chrome.runtime.getURL(
-    `/pages/notifications/${id}.html` +
-      (params
-        ? `?${Object.entries(params)
-            .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-            .join('&')}`
-        : ''),
-  );
+  const url =
+    chrome.runtime.getURL(`/pages/notifications/${id}.html`) +
+    (params
+      ? `?${Object.entries(params)
+          .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+          .join('&')}`
+      : '');
 
   chrome.tabs.sendMessage(tabId, {
     action: notifications.MOUNT_ACTION,

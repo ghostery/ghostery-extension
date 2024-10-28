@@ -60,11 +60,6 @@ const manifest = JSON.parse(
   readFileSync(resolve(options.srcDir, `manifest.${argv.target}.json`), 'utf8'),
 );
 
-// Clear out Safari platform suffix
-if (argv.target.startsWith('safari')) {
-  argv.target = 'safari';
-}
-
 // Add flags to manifest
 if (argv.debug) manifest.debug = true;
 if (argv.staging) manifest.staging = true;
@@ -207,8 +202,8 @@ if (manifest.declarative_net_request?.rule_resources) {
       resources: redirectResources.map((filename) =>
         join('rule_resources/redirects', filename),
       ),
-      all_frames: true,
       matches: ['<all_urls>'],
+      use_dynamic_url: true,
     });
   } else {
     redirectResources.forEach((filename) =>
@@ -237,23 +232,9 @@ if (argv.target !== 'firefox') {
   }
 }
 
-// --- Save manifest ---
-
-// set manifest version from package.json
-manifest.version = pkg.version;
-
-if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
-  manifest.permissions.push('declarativeNetRequestFeedback');
-}
-
-writeFileSync(
-  resolve(options.outDir, 'manifest.json'),
-  JSON.stringify(manifest, null, 2),
-);
-
 // --- Generate entry points ---
 
-const source = [];
+const source = ['pages/onboarding/index.html'];
 const content_scripts = [];
 
 if (manifest.action?.default_popup) {
@@ -284,9 +265,12 @@ if (manifest.options_ui?.page) {
 }
 
 // content scripts
-manifest.content_scripts?.forEach(({ js = [], css = [] }) => {
-  [...js, ...css].forEach((src) => content_scripts.push(src));
-});
+manifest.content_scripts = manifest.content_scripts.filter(
+  ({ js = [], css = [], run_at }) => {
+    [...js, ...css].forEach((src) => content_scripts.push(src));
+    return run_at !== 'background_execute_script';
+  },
+);
 
 // web-accessible resources
 manifest.web_accessible_resources?.forEach((entry) => {
@@ -299,20 +283,13 @@ manifest.web_accessible_resources?.forEach((entry) => {
   }
 
   paths.forEach((path) => {
-    if (path.includes('/redirects/')) {
-      return;
+    if (path.includes('/redirects/')) return;
+
+    if (!path.match(/\.html$/)) {
+      throw new Error(`Unsupported web_accessible_resource: ${path}`);
     }
-    if (!path.match(/\.(js|css|html)$/)) {
-      const dir = dirname(path);
-      mkdirSync(resolve(options.outDir, dir), { recursive: true });
-      cpSync(path, resolve(options.outDir, dir));
-    } else {
-      if (path.match(/\.html$/)) {
-        source.push(path);
-      } else {
-        content_scripts.push(path);
-      }
-    }
+
+    source.push(path);
   });
 });
 
@@ -324,6 +301,20 @@ if (manifest.background) {
       manifest.background.scripts[0],
   );
 }
+
+// --- Save manifest ---
+
+// set manifest version from package.json
+manifest.version = pkg.version;
+
+if (manifest.permissions.includes('declarativeNetRequest') && argv.watch) {
+  manifest.permissions.push('declarativeNetRequestFeedback');
+}
+
+writeFileSync(
+  resolve(options.outDir, 'manifest.json'),
+  JSON.stringify(manifest, null, 2),
+);
 
 // --- Build  ---
 

@@ -31,23 +31,20 @@ First, install dependencies and download additional resources (e.g. block lists)
 npm ci
 ```
 
-Then, start the local version of the extension in Chrome:
+Then, start the local version of the extension in the supported browser:
 
 ```bash
-npm start
+npm start [chromium|firefox]
 ```
-
-You can add the target after the `start` command to run the extension in a different browser:
-
-* Firefox - `npm start firefox`
-* Opera - `npm start -- --browser=opera`
-* Edge - `npm start -- --browser=edge`
-* Safari (MacOS) - `npm start safari-macos`
-* Safari (iOS) - `npm start safari-ios`
 
 > The build script assumes that you are using macOS, and browsers are installed in the default locations
 
-To run local version in Safari, you have to use Xcode as well. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
+You can add the target after the `start` command to run the extension in a different Chromium-based browser:
+
+* Opera - `npm start -- --browser=opera`
+* Edge - `npm start -- --browser=edge`
+
+To run local version in Safari, you have to use Xcode. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
 
 ## Ghostery Team
 
