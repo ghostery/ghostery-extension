@@ -11,48 +11,35 @@
 
 import { store } from 'hybrids';
 
-import Options, { observe } from '/store/options.js';
+import Options from '/store/options.js';
 import { debugMode } from '/utils/debug.js';
+import asyncSetup from '/utils/setup.js';
+import * as observer from '/utils/observer.js';
 
-import Telemetry from './metrics.js';
+import Metrics from './metrics.js';
 
-const log = console.log.bind(console, '[telemetry]');
-
-async function recordUTMs(telemetry, JUST_INSTALLED) {
-  if (JUST_INSTALLED) {
-    const { utm_source, utm_campaign } = await telemetry.detectUTMs();
-    // persist campaign & source only
-    await chrome.storage.local.set({ utms: { utm_campaign, utm_source } });
-    return;
-  }
-
-  const { utms = {} } = await chrome.storage.local.get(['utms']);
-
-  telemetry.setUTMs(utms);
-}
-
-const saveStorage = async (storage, metrics) => {
-  Object.assign(storage, metrics);
-  await chrome.storage.local.set({ metrics: storage });
-};
-
-const loadStorage = async () => {
+async function loadStorage() {
   const storage = {
     active_daily_velocity: [],
     engaged_daily_velocity: [],
     engaged_daily_count: [],
   };
-  Telemetry.FREQUENCY_TYPES.forEach((frequency) => {
-    Telemetry.CRITICAL_TYPES.forEach((type) => {
+  Metrics.FREQUENCY_TYPES.forEach((frequency) => {
+    Metrics.CRITICAL_TYPES.forEach((type) => {
       storage[`${type}_${frequency}`] = 0;
     });
   });
   const { metrics = {} } = await chrome.storage.local.get(['metrics']);
   Object.assign(storage, metrics);
   return storage;
-};
+}
 
-const getConf = async (storage) => {
+async function saveStorage(storage, metrics) {
+  Object.assign(storage, metrics);
+  await chrome.storage.local.set({ metrics: storage });
+}
+
+async function getConf(storage) {
   const options = await store.resolve(Options);
 
   // Historically install_data was stored in Options.
@@ -76,52 +63,56 @@ const getConf = async (storage) => {
     installRandom: storage.installRandom,
     setup_shown: options.onboarding.shown,
   };
-};
+}
 
-let telemetry;
-let telemetryEnabled = false;
+let metrics;
+const setup = asyncSetup([
+  (async () => {
+    const storage = await loadStorage();
+    const { version } = chrome.runtime.getManifest();
 
-chrome.runtime.onMessage.addListener((msg) => {
-  if (telemetryEnabled && msg.action === 'telemetry') {
-    telemetry.ping(msg.event);
+    metrics = new Metrics({
+      METRICS_BASE_URL: debugMode
+        ? 'https://staging-d.ghostery.com'
+        : 'https://d.ghostery.com',
+      EXTENSION_VERSION: version,
+      getConf: () => getConf(storage),
+      log: console.log.bind(console, '[telemetry]'),
+      storage,
+      saveStorage: (metrics) => {
+        saveStorage(storage, metrics);
+      },
+    });
+
+    // Just installed condition
+    if (storage.install_all === 0) {
+      const utms = await metrics.detectUTMs();
+      await chrome.storage.local.set({ utms });
+    } else {
+      const { utms = {} } = await chrome.storage.local.get(['utms']);
+      metrics.setUTMs(utms);
+    }
+
+    metrics.setUninstallUrl();
+  })(),
+]);
+
+let enabled = false;
+observer.addListener('terms', async (terms) => {
+  enabled = terms;
+
+  if (terms) {
+    setup.pending && (await setup.pending);
+    metrics.ping('install');
+    metrics.ping('active');
   }
 });
 
-(async () => {
-  const storage = await loadStorage();
-  const { version } = chrome.runtime.getManifest();
-
-  telemetry = new Telemetry({
-    METRICS_BASE_URL: debugMode
-      ? 'https://staging-d.ghostery.com'
-      : 'https://d.ghostery.com',
-    EXTENSION_VERSION: version,
-    getConf: () => getConf(storage),
-    log,
-    storage,
-    saveStorage: (metrics) => {
-      saveStorage(storage, metrics);
-    },
-  });
-
-  const JUST_INSTALLED = storage.install_all === 0;
-
-  try {
-    await recordUTMs(telemetry, JUST_INSTALLED);
-  } catch (error) {
-    log('Telemetry recordUTMs() error', error);
+chrome.runtime.onMessage.addListener((msg) => {
+  if (enabled && msg.action === 'telemetry') {
+    (async () => {
+      setup.pending && (await setup.pending);
+      metrics.ping(msg.event);
+    })();
   }
-
-  observe('terms', async (terms) => {
-    telemetryEnabled = terms;
-    if (!terms) {
-      return;
-    }
-    telemetry.ping('active');
-    if (JUST_INSTALLED) {
-      telemetry.ping('install');
-    }
-  });
-
-  telemetry.setUninstallUrl();
-})();
+});

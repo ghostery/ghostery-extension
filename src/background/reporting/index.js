@@ -14,10 +14,10 @@ import './webrequest-monkey-patch.js';
 
 import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
-import { observe } from '/store/options.js';
-
 import asyncSetup from '/utils/setup.js';
 import debug from '/utils/debug.js';
+import * as observer from '/utils/observer.js';
+
 import config from './config.js';
 import communication from './communication.js';
 import urlReporter from './url-reporter.js';
@@ -40,7 +40,7 @@ import webRequestReporter from './webrequest-reporter.js';
 })();
 
 const setup = asyncSetup([
-  observe('terms', async (terms) => {
+  observer.addListener('terms', async (terms) => {
     if (terms) {
       await urlReporter.init().catch((e) => {
         console.warn(

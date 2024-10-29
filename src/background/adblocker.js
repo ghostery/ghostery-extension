@@ -16,10 +16,11 @@ import {
 } from '@cliqz/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
-import Options, { observe, ENGINES, isPaused } from '/store/options.js';
+import Options, { ENGINES, isPaused } from '/store/options.js';
 
 import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
+import * as observer from '/utils/observer.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 import { debugMode } from '/utils/debug.js';
@@ -124,7 +125,7 @@ async function updateEngines() {
 
 const HOUR_IN_MS = 60 * 60 * 1000;
 export const setup = asyncSetup([
-  observe(async (value, lastValue) => {
+  observer.addListener(async (value, lastValue) => {
     options = value;
 
     const enabledEngines = getEnabledEngines(value);
@@ -151,7 +152,7 @@ export const setup = asyncSetup([
       await updateEngines();
     }
   }),
-  observe('experimentalFilters', async (value, lastValue) => {
+  observer.addListener('experimentalFilters', async (value, lastValue) => {
     engines.setEnv('env_experimental', value);
 
     // Experimental filters changed to enabled

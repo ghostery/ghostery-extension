@@ -15,18 +15,13 @@ import { deleteDB } from 'idb';
 import { getUserOptions, setUserOptions } from '/utils/api.js';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
+import * as observer from '/utils/observer.js';
 
 import Session from './session.js';
 import CustomFilters from './custom-filters.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
-
-const observers = new Set();
-
-// The promise is resolved when all observers executed.
-// This is used by the e2e tests to detect idle state.
-export let idleOptionsObservers = Promise.resolve();
 
 export const SYNC_OPTIONS = [
   'blockAds',
@@ -174,26 +169,20 @@ const Options = {
           // sendMessage may fail without potential target
         });
 
-      sync(options, keys).catch(() => null);
+      sync(options, keys);
 
       return options;
     },
     observe: (_, options, prevOptions) => {
+      observer.run(options, prevOptions);
+
       // Sync if the current memory context get options for the first time
       if (!prevOptions) sync(options);
-
-      idleOptionsObservers = (async () => {
-        for (const fn of observers) {
-          try {
-            await fn(options, prevOptions);
-          } catch (e) {
-            console.error(`[options] Error while observing options: `, e);
-          }
-        }
-      })();
     },
   },
 };
+
+export default Options;
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.action === UPDATE_OPTIONS_ACTION_NAME) {
@@ -202,7 +191,12 @@ chrome.runtime.onMessage.addListener((msg) => {
   }
 });
 
-export default Options;
+export function isPaused(options, domain = '') {
+  return (
+    !!options.paused[GLOBAL_PAUSE_ID] ||
+    (domain && !!options.paused[domain.replace(/^www\./, '')])
+  );
+}
 
 export async function sync(options, keys) {
   try {
@@ -336,71 +330,4 @@ async function migrateFromV8() {
     console.error(`[options] Error while migrating options`, e);
     return {};
   }
-}
-
-function isOptionEqual(a, b) {
-  const aKeys = Object.keys(a);
-  const bKeys = Object.keys(b);
-
-  return (
-    aKeys.length === bKeys.length &&
-    aKeys.every((key) =>
-      typeof a[key] === 'object'
-        ? isOptionEqual(a[key], b[key])
-        : a[key] === b[key],
-    )
-  );
-}
-
-export async function observe(...args) {
-  let wrapper;
-
-  if (args.length === 2) {
-    const [property, fn] = args;
-    let value;
-
-    if (typeof Options[property] === 'object') {
-      wrapper = async (options) => {
-        if (value === undefined || !isOptionEqual(options[property], value)) {
-          const prevValue = value;
-          value = options[property];
-          return await fn(value, prevValue);
-        }
-      };
-    } else {
-      wrapper = async (options) => {
-        if (value === undefined || options[property] !== value) {
-          const prevValue = value;
-          value = options[property];
-          return await fn(value, prevValue);
-        }
-      };
-    }
-  } else {
-    wrapper = args[0];
-  }
-
-  try {
-    const options = await store.resolve(Options);
-    // let observer know of the option value
-    // in case when registered after the store.connect
-    // wait for the callback to be fired
-    await wrapper(options);
-  } catch (e) {
-    console.error(`[options] Error while observing options: `, e);
-  }
-
-  observers.add(wrapper);
-
-  // Return unobserve function
-  return () => {
-    observers.delete(wrapper);
-  };
-}
-
-export function isPaused(options, domain = '') {
-  return (
-    !!options.paused[GLOBAL_PAUSE_ID] ||
-    (domain && !!options.paused[domain.replace(/^www\./, '')])
-  );
 }
