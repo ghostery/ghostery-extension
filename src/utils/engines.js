@@ -16,7 +16,7 @@ import {
   getLinesWithFilters,
   mergeDiffs,
   Resources,
-} from '@cliqz/adblocker';
+} from '@ghostery/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
 import debug, { stagingMode } from './debug.js';

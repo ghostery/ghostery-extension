@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { parseFilter } from '@cliqz/adblocker';
+import { parseFilter } from '@ghostery/adblocker';
 
 import * as trackerdb from '/utils/trackerdb.js';
 import * as engines from '/utils/engines.js';
