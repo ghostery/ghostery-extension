@@ -70,7 +70,7 @@ export function run(options, prevOptions) {
   if (observers.size === 0) return;
 
   queue ||= (async () => {
-    console.groupCollapsed(`[observer] Run options observers...`);
+    console.group(`[observer] Run options observers...`);
 
     for (const fn of observers) {
       try {
