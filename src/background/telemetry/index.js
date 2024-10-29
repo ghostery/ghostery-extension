@@ -98,7 +98,7 @@ const setup = asyncSetup([
 ]);
 
 let enabled = false;
-observer.addListener('terms', async (terms) => {
+observer.addListener('terms', async function telemetry(terms) {
   enabled = terms;
 
   if (terms) {

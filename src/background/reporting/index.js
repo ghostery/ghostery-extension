@@ -40,7 +40,7 @@ import webRequestReporter from './webrequest-reporter.js';
 })();
 
 const setup = asyncSetup([
-  observer.addListener('terms', async (terms) => {
+  observer.addListener('terms', async function reporting(terms) {
     if (terms) {
       await urlReporter.init().catch((e) => {
         console.warn(

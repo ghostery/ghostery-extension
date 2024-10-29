@@ -125,7 +125,7 @@ async function updateEngines() {
 
 const HOUR_IN_MS = 60 * 60 * 1000;
 export const setup = asyncSetup([
-  observer.addListener(async (value, lastValue) => {
+  observer.addListener(async function adblockerEngines(value, lastValue) {
     options = value;
 
     const enabledEngines = getEnabledEngines(value);

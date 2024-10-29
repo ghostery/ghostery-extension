@@ -129,12 +129,12 @@ observer.addListener('paused', async (paused, prevPaused) => {
               ],
         removeRuleIds,
       });
-      console.log('DNR: pause rules updated');
+      console.log('[dnr] pause rules updated');
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
       });
-      console.log('DNR: pause rules updated');
+      console.log('[dnr] pause rules updated');
     }
   }
 });

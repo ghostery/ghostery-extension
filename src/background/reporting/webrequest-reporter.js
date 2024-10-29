@@ -34,7 +34,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   webRequestPipeline.init();
 
   let options = {};
-  observer.addListener((value) => {
+  observer.addListener(function webRequestReporting(value) {
     options = value;
   });
 

@@ -41,7 +41,7 @@ function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chromeAction.setBadgeBackgroundColor({ color });
 }
 
-observer.addListener('terms', async (terms) => {
+observer.addListener('terms', async function stats(terms) {
   if (!terms) {
     await chromeAction.setBadgeText({ text: '!' });
     setBadgeColor('#f13436' /* danger-500 */);
