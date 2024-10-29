@@ -13,3 +13,11 @@ updates:
       adblocker:
         patterns:
           - "@ghostery/adblocker*"
+      web-ext:
+        patterns:
+          - "web-ext"
+          - "addon-linter"
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@eslint/*"
