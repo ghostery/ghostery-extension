@@ -66,12 +66,16 @@ export function addListener(...args) {
   });
 }
 
-let queue = null;
-export function execute(options, prevOptions) {
+let queues = new Set();
+export async function waitForIdle() {
+  for (const queue of queues) await queue;
+}
+
+export async function execute(options, prevOptions) {
   if (observers.size === 0) return;
 
-  queue = Promise.resolve(queue).then(async () => {
-    console.debug(`[options] Run options observers...`);
+  const queue = Promise.allSettled([...queues]).then(async () => {
+    console.debug(`[options] Run observers... (start)`);
 
     for (const fn of observers) {
       try {
@@ -81,12 +85,9 @@ export function execute(options, prevOptions) {
       }
     }
 
-    console.debug(`[options] done...`);
-
-    queue = null;
+    console.debug(`[options] run observer... (done)`);
+    queues.delete(queue);
   });
-}
 
-export async function waitForIdle() {
-  queue && (await queue);
+  queues.add(queue);
 }
