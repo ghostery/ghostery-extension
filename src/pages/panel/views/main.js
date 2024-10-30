@@ -118,7 +118,7 @@ export default {
             ${stats.hostname &&
             (options.terms
               ? html`
-                  <panel-managed enabled="${!options.userSettings}">
+                  <panel-managed managed="${options.managed}">
                     <ui-action>
                       <a
                         href="${chrome.runtime.getURL(
@@ -131,7 +131,7 @@ export default {
                         <ui-text type="label-m"
                           >${tail(stats.hostname)}</ui-text
                         >
-                        ${options.userSettings &&
+                        ${!options.managed &&
                         html`<ui-icon
                           name="arrow-down"
                           layout="size:1.5"
@@ -160,7 +160,7 @@ export default {
         ></section>
         ${options.terms
           ? stats.hostname &&
-            options.userSettings &&
+            !options.managed &&
             html`
               <panel-pause
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
@@ -197,7 +197,7 @@ export default {
                   readonly="${paused ||
                   globalPause ||
                   !options.terms ||
-                  !options.userSettings}"
+                  options.managed}"
                   dialog="${TrackerDetails}"
                   exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
@@ -236,10 +236,10 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <panel-managed enabled="${!options.userSettings}">
+          <panel-managed managed="${options.managed}">
             <ui-text
               class="${{
-                last: !options.userSettings || store.error(notification),
+                last: options.managed || store.error(notification),
               }}"
               layout.last="padding:bottom:1.5"
               layout@390px="padding:bottom"
@@ -276,7 +276,7 @@ export default {
             </ui-text>
           </panel-managed>
         </panel-container>
-        ${options.userSettings &&
+        ${!options.managed &&
         store.ready(notification) &&
         html`
           <panel-notification

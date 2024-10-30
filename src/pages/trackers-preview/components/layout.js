@@ -86,7 +86,7 @@ export default {
               `}
             </main>
             ${store.ready(options) &&
-            options.userSettings &&
+            !options.managed &&
             html`<footer layout="row center padding:2">
               <ui-action>
                 <button

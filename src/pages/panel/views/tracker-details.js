@@ -80,7 +80,7 @@ export default {
           </ui-text>
         </div>
         ${options.terms &&
-        options.userSettings &&
+        !options.managed &&
         html`
           <div layout="grid:1|max gap">
             ${paused

@@ -20,8 +20,8 @@ import './elements.js';
 import Main from './views/main.js';
 import Success from './views/success.js';
 
-store.resolve(Options).then(({ onboarding, userSettings }) => {
-  if (!userSettings) {
+store.resolve(Options).then(({ onboarding, managed }) => {
+  if (managed) {
     return window.location.replace(`https://www.${GHOSTERY_DOMAIN}`);
   }
 

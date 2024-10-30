@@ -9,14 +9,34 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/*
+ *
+ * Managed options are set by the administrator of the browser and cannot be changed by the user.
+ *
+ * For example, for Firefox the following JSON structure must be saved in specific file according to the documentation
+ * (https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_manifests#manifest_location)
+
+{
+  "name": "firefox@ghostery.com",
+  "description": "",
+  "type": "storage",
+  "data": {
+    "enableTerms": false,
+    "disableUserSettings": false,
+    "whitelistDomains": ['example.com']
+  }
+}
+
+ */
+
 import { store } from 'hybrids';
 import { debugMode } from '/utils/debug';
 
 export default {
   supported: false,
 
-  allowTerms: false,
-  blockUserSettings: false,
+  enableTerms: false,
+  disableUserSettings: false,
   whitelistDomains: [String],
 
   [store.connect]: async () => {

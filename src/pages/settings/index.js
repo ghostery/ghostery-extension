@@ -22,8 +22,8 @@ import './elements.js';
 // we must redirect to onboarding if terms are not accepted
 store
   .resolve(Options)
-  .then(({ terms, userSettings }) => {
-    if (!terms || !userSettings) throw new Error('Access denied');
+  .then(({ terms, managed }) => {
+    if (!terms || managed) throw new Error('Access denied');
 
     // Safari has a bug where the back button doesn't work properly
     // when the page is loaded from a background page by the chrome.tabs.update API

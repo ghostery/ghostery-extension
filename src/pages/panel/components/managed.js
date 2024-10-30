@@ -19,24 +19,16 @@ function preventClick(host, event) {
 }
 
 export default {
-  enabled: {
+  managed: {
     value: false,
     reflect: true,
     observe(host, value) {
-      if (value) {
-        host.tabIndex = -1;
-      } else {
-        host.removeAttribute('tabindex');
-      }
+      host.inert = value;
     },
   },
   render: () => html`
     <template layout="grid" onclick="${preventClick}">
       <slot></slot>
     </template>
-  `.css`
-    :host([enabled]) ::slotted(*) {
-      pointer-events: none;
-    }
   `,
 };

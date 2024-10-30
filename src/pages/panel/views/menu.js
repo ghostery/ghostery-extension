@@ -32,7 +32,7 @@ export default {
         ${store.ready(options) &&
         html`
           <div layout="column gap:0.5 padding:1:0">
-            ${options.userSettings &&
+            ${!options.managed &&
             html`
               <ui-text
                 type="label-s"

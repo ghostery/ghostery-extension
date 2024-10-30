@@ -96,7 +96,7 @@ const Options = {
   revision: 0,
 
   // Managed
-  userSettings: true,
+  managed: false,
 
   [store.connect]: {
     async get() {
@@ -206,13 +206,13 @@ async function applyManagedOptions(options) {
 
     console.debug(`[options] Applying managed options...`, managed);
 
-    if (managed.allowTerms) {
+    if (managed.enableTerms) {
       options.terms = true;
       options.onboarding = { shown: 1 };
     }
 
-    if (managed.blockUserSettings) {
-      options.userSettings = false;
+    if (managed.disableUserSettings) {
+      options.managed = true;
       options.sync = false;
 
       // Clear out the paused state, to overwrite with the current managed state
