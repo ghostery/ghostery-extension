@@ -66,7 +66,7 @@ export function addListener(...args) {
 }
 
 let queue = null;
-export function run(options, prevOptions) {
+export function execute(options, prevOptions) {
   if (observers.size === 0) return;
 
   queue ||= (async () => {

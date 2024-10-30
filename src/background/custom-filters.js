@@ -22,7 +22,7 @@ import {
   createOffscreenConverter,
 } from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
@@ -210,7 +210,7 @@ async function update(text, { trustedScriptlets }) {
   return result;
 }
 
-observer.addListener(
+OptionsObserver.addListener(
   'customFilters',
   async ({ enabled, trustedScriptlets }, lastValue) => {
     // Background startup

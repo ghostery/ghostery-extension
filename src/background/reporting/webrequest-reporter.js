@@ -17,7 +17,7 @@ import {
 import getBrowserInfo from '/utils/browser-info.js';
 import { isPaused } from '/store/options.js';
 import Request from '/utils/request.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 import { updateTabStats } from '../stats.js';
 
@@ -34,7 +34,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   webRequestPipeline.init();
 
   let options = {};
-  observer.addListener(function webRequestReporting(value) {
+  OptionsObserver.addListener(function webRequestReporting(value) {
     options = value;
   });
 

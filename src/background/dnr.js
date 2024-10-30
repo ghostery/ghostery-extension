@@ -10,7 +10,7 @@
  */
 
 import { ENGINES, isPaused } from '/store/options.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
   const DNR_RESOURCES = chrome.runtime
@@ -21,7 +21,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
-  observer.addListener(async function dnr(options) {
+  OptionsObserver.addListener(async function dnr(options) {
     const globalPause = isPaused(options);
 
     const ids = ENGINES.map(({ name, key }) => {

@@ -12,7 +12,7 @@
 import { store } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
@@ -35,7 +35,7 @@ const ALL_RESOURCE_TYPES = [
   'other',
 ];
 
-observer.addListener('paused', async (paused, prevPaused) => {
+OptionsObserver.addListener('paused', async (paused, prevPaused) => {
   const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
     name.startsWith(PAUSED_ALARM_PREFIX),
   );

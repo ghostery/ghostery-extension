@@ -16,7 +16,7 @@ import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
 import asyncSetup from '/utils/setup.js';
 import debug from '/utils/debug.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 import config from './config.js';
 import communication from './communication.js';
@@ -40,7 +40,7 @@ import webRequestReporter from './webrequest-reporter.js';
 })();
 
 const setup = asyncSetup([
-  observer.addListener('terms', async function reporting(terms) {
+  OptionsObserver.addListener('terms', async function reporting(terms) {
     if (terms) {
       await urlReporter.init().catch((e) => {
         console.warn(

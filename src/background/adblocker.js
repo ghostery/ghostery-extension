@@ -20,7 +20,7 @@ import Options, { ENGINES, isPaused } from '/store/options.js';
 
 import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 import { debugMode } from '/utils/debug.js';
@@ -125,41 +125,46 @@ async function updateEngines() {
 
 const HOUR_IN_MS = 60 * 60 * 1000;
 export const setup = asyncSetup([
-  observer.addListener(async function adblockerEngines(value, lastValue) {
-    options = value;
+  OptionsObserver.addListener(
+    async function adblockerEngines(value, lastValue) {
+      options = value;
 
-    const enabledEngines = getEnabledEngines(value);
-    const prevEnabledEngines = lastValue && getEnabledEngines(lastValue);
+      const enabledEngines = getEnabledEngines(value);
+      const prevEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
-    if (
-      // Reload/mismatched main engine
-      !(await engines.init(engines.MAIN_ENGINE)) ||
-      // Enabled engines changed
-      (prevEnabledEngines &&
-        (enabledEngines.length !== prevEnabledEngines.length ||
-          enabledEngines.some((id, i) => id !== prevEnabledEngines[i])))
-    ) {
-      // The regional filters engine is no longer used, so we must remove it
-      // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
-      // TODO: this can be removed in the future release when most of the users will have
-      // the new version of the extension
-      engines.remove('regional-filters');
+      if (
+        // Reload/mismatched main engine
+        !(await engines.init(engines.MAIN_ENGINE)) ||
+        // Enabled engines changed
+        (prevEnabledEngines &&
+          (enabledEngines.length !== prevEnabledEngines.length ||
+            enabledEngines.some((id, i) => id !== prevEnabledEngines[i])))
+      ) {
+        // The regional filters engine is no longer used, so we must remove it
+        // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
+        // TODO: this can be removed in the future release when most of the users will have
+        // the new version of the extension
+        engines.remove('regional-filters');
 
-      await reloadMainEngine();
-    }
+        await reloadMainEngine();
+      }
 
-    if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
-      await updateEngines();
-    }
-  }),
-  observer.addListener('experimentalFilters', async (value, lastValue) => {
-    engines.setEnv('env_experimental', value);
+      if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
+        await updateEngines();
+      }
+    },
+  ),
+  OptionsObserver.addListener(
+    'experimentalFilters',
+    async (value, lastValue) => {
+      engines.setEnv('env_experimental', value);
 
-    // Experimental filters changed to enabled
-    if (lastValue !== undefined && value) {
-      await updateEngines();
-    }
-  }),
+      // Experimental filters changed to enabled
+      if (lastValue !== undefined && value) {
+        await updateEngines();
+      }
+    },
+  ),
 ]);
 
 function adblockerInjectStylesWebExtension(

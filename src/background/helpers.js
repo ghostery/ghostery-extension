@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
     // This is used only by the e2e tests to detect idle state
     case 'idleOptionsObservers': {
-      observer.waitForIdle().then(() => {
+      OptionsObserver.waitForIdle().then(() => {
         sendResponse('done');
         console.info('[helpers] "idleOptionsObservers" response...');
       });

@@ -14,7 +14,7 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 import Metrics from './metrics.js';
 
@@ -98,7 +98,7 @@ const setup = asyncSetup([
 ]);
 
 let enabled = false;
-observer.addListener('terms', async function telemetry(terms) {
+OptionsObserver.addListener('terms', async function telemetry(terms) {
   enabled = terms;
 
   if (terms) {

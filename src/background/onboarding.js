@@ -8,9 +8,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
-observer.addListener('onboarding', (onboarding) => {
+OptionsObserver.addListener('onboarding', (onboarding) => {
   if (!onboarding.shown) {
     chrome.tabs.create({
       url: chrome.runtime.getURL('/pages/onboarding/index.html'),

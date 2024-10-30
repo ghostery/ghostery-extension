@@ -15,7 +15,7 @@ import { deleteDB } from 'idb';
 import { getUserOptions, setUserOptions } from '/utils/api.js';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
-import * as observer from '/utils/observer.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 import Session from './session.js';
 import CustomFilters from './custom-filters.js';
@@ -174,7 +174,7 @@ const Options = {
       return options;
     },
     observe: (_, options, prevOptions) => {
-      observer.run(options, prevOptions);
+      OptionsObserver.execute(options, prevOptions);
 
       // Sync if the current memory context get options for the first time
       if (!prevOptions) sync(options);
