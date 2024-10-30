@@ -206,12 +206,12 @@ async function applyManagedOptions(options) {
 
     console.debug(`[options] Applying managed options...`, managed);
 
-    if (managed.enableTerms) {
+    if (managed.disableOnboarding) {
       options.terms = true;
       options.onboarding = { shown: 1 };
     }
 
-    if (managed.disableUserSettings) {
+    if (managed.disableSettings) {
       options.managed = true;
       options.sync = false;
 
@@ -219,7 +219,7 @@ async function applyManagedOptions(options) {
       options.paused = {};
     }
 
-    managed.whitelistDomains.forEach((domain) => {
+    managed.trustedDomains.forEach((domain) => {
       options.paused ||= {};
       options.paused[domain] = { revokeAt: 0 };
     });

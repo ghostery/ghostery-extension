@@ -21,9 +21,9 @@
   "description": "",
   "type": "storage",
   "data": {
-    "enableTerms": false,
-    "disableUserSettings": false,
-    "whitelistDomains": ['example.com']
+    "disableOnboarding": false,
+    "disableSettings": false,
+    "trustedDomains": ['example.com']
   }
 }
 
@@ -35,9 +35,9 @@ import { debugMode } from '/utils/debug';
 export default {
   supported: false,
 
-  enableTerms: false,
-  disableUserSettings: false,
-  whitelistDomains: [String],
+  disableOnboarding: false,
+  disableSettings: false,
+  trustedDomains: [String],
 
   [store.connect]: async () => {
     try {
