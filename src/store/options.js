@@ -17,8 +17,9 @@ import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
-import Session from './session.js';
 import CustomFilters from './custom-filters.js';
+import ManagedOptions from './managed-options.js';
+import Session from './session.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -94,6 +95,9 @@ const Options = {
   sync: true,
   revision: 0,
 
+  // Managed
+  userSettings: true,
+
   [store.connect]: {
     async get() {
       let { options, optionsVersion } = await chrome.storage.local.get([
@@ -147,7 +151,9 @@ const Options = {
         Promise.resolve().then(() => sync(options, keys));
       }
 
-      return options;
+      return __PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium'
+        ? applyManagedOptions(options)
+        : options;
     },
     async set(_, options, keys) {
       options = options || {};
@@ -190,6 +196,39 @@ chrome.runtime.onMessage.addListener((msg) => {
     store.get(Options);
   }
 });
+
+async function applyManagedOptions(options) {
+  if (__PLATFORM__ === 'chromium' && isOpera()) return options;
+
+  try {
+    const managed = await store.resolve(ManagedOptions);
+    if (!managed.supported) return options;
+
+    console.debug(`[options] Applying managed options...`, managed);
+
+    if (managed.allowTerms) {
+      options.terms = true;
+      options.onboarding = { shown: 1 };
+    }
+
+    if (managed.blockUserSettings) {
+      options.userSettings = false;
+      options.sync = false;
+
+      // Clear out the paused state, to overwrite with the current managed state
+      options.paused = {};
+    }
+
+    managed.whitelistDomains.forEach((domain) => {
+      options.paused ||= {};
+      options.paused[domain] = { revokeAt: 0 };
+    });
+  } catch (e) {
+    console.error(`[options] Error while applying managed options`, e);
+  }
+
+  return options;
+}
 
 export function isPaused(options, domain = '') {
   return (

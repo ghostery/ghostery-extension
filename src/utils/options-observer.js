@@ -52,9 +52,8 @@ export function addListener(...args) {
       if (isOptionEqual(value, prevValue)) return;
 
       try {
-        console.group(`[options] "${fn.name || property}" observer`);
+        console.debug(`[options] "${fn.name || property}" observer`);
         await fn(value, prevValue);
-        console.groupEnd();
         resolve();
       } catch (e) {
         reject(e);

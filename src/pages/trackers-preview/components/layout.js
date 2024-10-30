@@ -9,10 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, dispatch } from 'hybrids';
+import { html, dispatch, store } from 'hybrids';
 import { sortCategories } from '/ui/categories.js';
 
 import DisablePreviewImg from '../assets/disable-preview.svg';
+import Options from '/store/options';
 
 const sort = sortCategories();
 
@@ -20,7 +21,8 @@ export default {
   confirmDisabled: false,
   stats: undefined,
   domain: '',
-  render: ({ domain, confirmDisabled, stats }) => html`
+  options: store(Options),
+  render: ({ domain, confirmDisabled, stats, options }) => html`
     <template layout="block height:full">
       ${confirmDisabled
         ? html`
@@ -83,7 +85,9 @@ export default {
                 </ui-stats>
               `}
             </main>
-            <footer layout="row center padding:2">
+            ${store.ready(options) &&
+            options.userSettings &&
+            html`<footer layout="row center padding:2">
               <ui-action>
                 <button
                   onclick="${html.set('confirmDisabled', true)}"
@@ -95,7 +99,7 @@ export default {
                   </ui-text>
                 </button>
               </ui-action>
-            </footer>
+            </footer>`}
           `}
     </template>
   `.css`
