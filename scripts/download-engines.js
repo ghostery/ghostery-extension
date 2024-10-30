@@ -13,7 +13,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 
-import { ENGINE_VERSION } from '@cliqz/adblocker';
+import { ENGINE_VERSION } from '@ghostery/adblocker';
 import REGIONS from '../src/utils/regions.js';
 
 function createChecksum(content) {

@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { injectCosmetics } from '@cliqz/adblocker-webextension-cosmetics';
+import { injectCosmetics } from '@ghostery/adblocker-webextension-cosmetics';
 
 function getCosmeticsFilters(args) {
   chrome.runtime.sendMessage({

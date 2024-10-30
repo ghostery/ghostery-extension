@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 import {
   filterRequestHTML,
   updateResponseHeadersWithCSP,
-} from '@cliqz/adblocker-webextension';
+} from '@ghostery/adblocker-webextension';
 import { parse } from 'tldts-experimental';
 
 import Options, { ENGINES, isPaused } from '/store/options.js';
@@ -220,7 +220,8 @@ async function injectCosmetics(msg, sender) {
   }
 
   // Extract hostname from sender's URL
-  const { url = '', frameId } = sender;
+  const { frameId } = sender;
+  const url = sender.tab?.url || sender.url;
   const parsed = parse(url);
   const hostname = parsed.hostname || '';
   const domain = parsed.domain || '';

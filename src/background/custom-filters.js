@@ -15,7 +15,7 @@ import {
   detectFilterType,
   FilterType,
   CosmeticFilter,
-} from '@cliqz/adblocker';
+} from '@ghostery/adblocker';
 
 import {
   createDocumentConverter,

@@ -12,4 +12,12 @@ updates:
           - "@wdio/*"
       adblocker:
         patterns:
-          - "@cliqz/adblocker*"
+          - "@ghostery/adblocker*"
+      web-ext:
+        patterns:
+          - "web-ext"
+          - "addon-linter"
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@eslint/*"
