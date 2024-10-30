@@ -489,10 +489,7 @@
     "message": "阻止各种 AI 驱动的跟踪技术。"
   },
   "privacy_policy": {
-    "message": "隐私政策"
-  },
-  "privacy_policy___panel_company": {
-    "message": "隐私政策"
+    "message": "Privacy Policy"
   },
   "privacy_protection": {
     "message": "隐私保护"
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "提交新跟踪器"
+  },
+  "support": {
+    "message": "支持"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "暂停全球隐私保护的时间为1天。"

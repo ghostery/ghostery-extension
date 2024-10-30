@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "Datenschutzrichtlinie"
   },
-  "privacy_policy___panel_company": {
-    "message": "Datenschutzrichtlinie"
-  },
   "privacy_protection": {
     "message": "Datenschutz"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "Neuen Tracker senden"
+  },
+  "support": {
+    "message": "Support"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Deaktiviert den Ghostery-Schutz für 1 Tag."

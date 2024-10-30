@@ -489,10 +489,7 @@
     "message": "Impedisce varie tecniche di tracciamento tramite tecnologia Al-driven."
   },
   "privacy_policy": {
-    "message": "Informativa sulla privacy"
-  },
-  "privacy_policy___panel_company": {
-    "message": "Informativa sulla privacy"
+    "message": "Privacy Policy"
   },
   "privacy_protection": {
     "message": "Protezione della privacy"
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "Invia un nuovo tracker"
+  },
+  "support": {
+    "message": "Assistenza"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Sospende la protezione della privacy a livello globale per 1 giorno."

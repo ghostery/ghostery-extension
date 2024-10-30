@@ -66,6 +66,7 @@ export default {
               '/pages/settings/index.html#@settings-whotracksme',
             )}"
             icon="wtm"
+            translate="no"
           >
             WhoTracks.Me
           </panel-menu-item>
@@ -187,6 +188,7 @@ export default {
             href="https://www.ghostery.com/privacy/imprint?utm_source=gbe"
             icon="imprint-m"
             suffix-icon="link-external-m"
+            translate="no"
           >
             Imprint
           </panel-menu-item>
