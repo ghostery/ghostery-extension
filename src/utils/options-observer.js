@@ -52,8 +52,9 @@ export function addListener(...args) {
       if (isOptionEqual(value, prevValue)) return;
 
       try {
-        console.info(`Run "${fn.name || property}"`);
+        console.group(`[options] "${fn.name || property}" observer`);
         await fn(value, prevValue);
+        console.groupEnd();
         resolve();
       } catch (e) {
         reject(e);
@@ -69,8 +70,8 @@ let queue = null;
 export function execute(options, prevOptions) {
   if (observers.size === 0) return;
 
-  queue ||= (async () => {
-    console.group(`[observer] Run options observers...`);
+  queue = Promise.resolve(queue).then(async () => {
+    console.debug(`[options] Run options observers...`);
 
     for (const fn of observers) {
       try {
@@ -80,11 +81,10 @@ export function execute(options, prevOptions) {
       }
     }
 
-    console.info(`Done...`);
-    console.groupEnd();
+    console.debug(`[options] done...`);
 
     queue = null;
-  })();
+  });
 }
 
 export async function waitForIdle() {
