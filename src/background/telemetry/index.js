@@ -110,8 +110,6 @@ OptionsObserver.addListener('terms', async function telemetry(terms) {
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (enabled && msg.action === 'telemetry') {
-    Promise.resolve(setup.pending).then(
-      () => metrics.ping(msg.event),
-    );
+    Promise.resolve(setup.pending).then(() => metrics.ping(msg.event));
   }
 });
