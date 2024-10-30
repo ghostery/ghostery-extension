@@ -84,8 +84,7 @@ const setup = asyncSetup([
       },
     });
 
-    // Just installed condition
-    if (storage.install_all === 0) {
+    if (metrics.isJustInstalled()) {
       const utms = await metrics.detectUTMs();
       await chrome.storage.local.set({ utms });
     } else {
@@ -103,7 +102,10 @@ OptionsObserver.addListener('terms', async function telemetry(terms) {
 
   if (terms) {
     setup.pending && (await setup.pending);
-    metrics.ping('install');
+
+    if (metrics.isJustInstalled()) {
+      metrics.ping('install');
+    }
     metrics.ping('active');
   }
 });

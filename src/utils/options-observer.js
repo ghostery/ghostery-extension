@@ -75,7 +75,7 @@ export async function execute(options, prevOptions) {
   if (observers.size === 0) return;
 
   const queue = Promise.allSettled([...queues]).then(async () => {
-    console.debug(`[options] Run observers... (start)`);
+    console.debug(`[options] Run observers (start)`);
 
     for (const fn of observers) {
       try {
@@ -85,7 +85,7 @@ export async function execute(options, prevOptions) {
       }
     }
 
-    console.debug(`[options] run observer... (done)`);
+    console.debug(`[options] Run observers (end)`);
     queues.delete(queue);
   });
 
