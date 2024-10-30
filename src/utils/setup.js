@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export default function asyncSetup(promises, threshold = 5000) {
+export default function asyncSetup(promises, threshold = 10000) {
   let timeoutId;
 
   const result = {

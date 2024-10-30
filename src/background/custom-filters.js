@@ -22,8 +22,9 @@ import {
   createOffscreenConverter,
 } from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
-import Options, { observe } from '/store/options.js';
+import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup } from '/background/adblocker.js';
@@ -209,7 +210,9 @@ async function update(text, { trustedScriptlets }) {
   return result;
 }
 
-observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
+OptionsObserver.addListener('customFilters', async (value, lastValue) => {
+  const { enabled, trustedScriptlets } = value;
+
   // Background startup
   if (!lastValue) {
     // If custom filters are disabled, we don't care if engine was reloaded
@@ -218,7 +221,9 @@ observe('customFilters', async ({ enabled, trustedScriptlets }, lastValue) => {
 
     // If we cannot initialize engine, we need to update it
     if (!(await engines.init(engines.CUSTOM_ENGINE))) {
-      update((await store.resolve(CustomFilters)).text, { trustedScriptlets });
+      update((await store.resolve(CustomFilters)).text, {
+        trustedScriptlets,
+      });
     }
   } else {
     // If only trustedScriptlets has changed, we don't update automatically.

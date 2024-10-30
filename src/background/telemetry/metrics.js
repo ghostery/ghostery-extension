@@ -127,6 +127,13 @@ class Metrics {
     this.utm_source = utm_source;
     this.utm_campaign = utm_campaign;
   }
+  /**
+   * Check if the extension was just installed
+   * @returns {boolean} true if the extension was just installed
+   */
+  isJustInstalled() {
+    return !this.storage.install_all;
+  }
 
   /**
    * Prepare data and send telemetry pings.
@@ -556,11 +563,9 @@ class Metrics {
    * @private
    */
   _recordInstall() {
-    // We don't want to record 'install' twice
-    if (this.storage.install_all) {
-      return;
+    if (this.isJustInstalled()) {
+      this._sendReq('install');
     }
-    this._sendReq('install');
   }
 
   /**

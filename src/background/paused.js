@@ -10,7 +10,9 @@
  */
 
 import { store } from 'hybrids';
-import Options, { observe, GLOBAL_PAUSE_ID } from '/store/options.js';
+
+import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
@@ -33,7 +35,7 @@ const ALL_RESOURCE_TYPES = [
   'other',
 ];
 
-observe('paused', async (paused, prevPaused) => {
+OptionsObserver.addListener('paused', async (paused, prevPaused) => {
   const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
     name.startsWith(PAUSED_ALARM_PREFIX),
   );
@@ -127,12 +129,12 @@ observe('paused', async (paused, prevPaused) => {
               ],
         removeRuleIds,
       });
-      console.log('DNR: pause rules updated');
+      console.log('[dnr] pause rules updated');
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
       });
-      console.log('DNR: pause rules updated');
+      console.log('[dnr] pause rules updated');
     }
   }
 });

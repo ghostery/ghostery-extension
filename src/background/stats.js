@@ -15,9 +15,10 @@ import { getOffscreenImageData } from '/ui/wheel.js';
 import { order } from '/ui/categories.js';
 
 import DailyStats from '/store/daily-stats.js';
-import Options, { isPaused, observe } from '/store/options.js';
+import Options, { isPaused } from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
@@ -40,7 +41,7 @@ function setBadgeColor(color = '#3f4146' /* gray-600 */) {
   chromeAction.setBadgeBackgroundColor({ color });
 }
 
-observe('terms', async (terms) => {
+OptionsObserver.addListener('terms', async function stats(terms) {
   if (!terms) {
     await chromeAction.setBadgeText({ text: '!' });
     setBadgeColor('#f13436' /* danger-500 */);

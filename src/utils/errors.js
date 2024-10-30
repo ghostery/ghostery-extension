@@ -11,7 +11,8 @@
 
 import * as Sentry from '@sentry/browser';
 
-import { observe } from '/store/options.js';
+import { store } from 'hybrids';
+import Options from '/store/options.js';
 
 import getBrowserInfo from './browser-info.js';
 import debug, { debugMode } from './debug.js';
@@ -44,21 +45,20 @@ getBrowserInfo().then(
   () => {},
 );
 
-let terms = false;
-observe('terms', (value) => {
-  terms = value;
-});
+export async function captureException(error) {
+  const { terms } = await store.resolve(Options);
 
-export function captureException(error) {
-  if (!terms || !(error instanceof Error)) return;
+  if (__PLATFORM__ === 'tests' || !terms || !(error instanceof Error)) {
+    return;
+  }
 
   const newError = new Error(error.message);
+
   newError.name = error.name;
   newError.cause = error.cause;
   newError.stack = error.stack.replace(hostRegexp, 'filtered');
-  if (__PLATFORM__ !== 'tests') {
-    Sentry.captureException(newError);
-  }
+
+  Sentry.captureException(newError);
 }
 
 debug.errors = { captureException };
