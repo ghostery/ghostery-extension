@@ -18,7 +18,6 @@ import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 import CustomFilters from './custom-filters.js';
-import ManagedOptions from './managed-options.js';
 import Session from './session.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
@@ -197,21 +196,31 @@ chrome.runtime.onMessage.addListener((msg) => {
   }
 });
 
+let managed = __PLATFORM__ === 'chromium' && isOpera() ? false : null;
 async function applyManagedOptions(options) {
-  if (__PLATFORM__ === 'chromium' && isOpera()) return options;
+  if (managed === false) return options;
 
-  try {
-    const managed = await store.resolve(ManagedOptions);
-    if (!managed.supported) return options;
+  if (managed === null) {
+    try {
+      managed = await chrome.storage.managed.get(null);
+      // Some of the platforms returns an empty object if there are no managed options
+      // so we need to check property existence that the managed options are enabled
+      managed = Object.keys(managed).length > 0 ? managed : false;
+    } catch (e) {
+      console.error(`[options] Failed to get managed options`, e);
+      managed = false;
+    }
+  }
 
+  if (managed) {
     console.debug(`[options] Applying managed options...`, managed);
 
-    if (managed.disableOnboarding) {
+    if (managed.disableOnboarding === true) {
       options.terms = true;
       options.onboarding = { shown: 1 };
     }
 
-    if (managed.disableSettings) {
+    if (managed.disableSettings === true) {
       options.managed = true;
       options.sync = false;
 
@@ -219,12 +228,12 @@ async function applyManagedOptions(options) {
       options.paused = {};
     }
 
-    managed.trustedDomains.forEach((domain) => {
-      options.paused ||= {};
-      options.paused[domain] = { revokeAt: 0 };
-    });
-  } catch (e) {
-    console.error(`[options] Error while applying managed options`, e);
+    if (Array.isArray(managed.trustedDomains)) {
+      managed.trustedDomains.forEach((domain) => {
+        options.paused ||= {};
+        options.paused[domain] = { revokeAt: 0 };
+      });
+    }
   }
 
   return options;
