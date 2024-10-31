@@ -43,6 +43,9 @@
     "service_worker": "background/index.js",
     "type": "module"
   },
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  },
   "declarative_net_request": {
     "rule_resources": [
       {

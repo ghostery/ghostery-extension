@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "disableOnboarding": {
+      "title": "Disable onboarding process",
+      "description": "Automatically enable the extension without showing the onboarding process",
+      "type": "boolean"
+    },
+
+    "disableUserControl": {
+      "title": "Disable user control",
+      "description": "Prevents access to the settings page and hides UI elements that allow the user to interact with the extension",
+      "type": "boolean"
+    },
+
+    "trustedDomains": {
+      "title": "Trusted domains",
+      "description": "A list of domains that are trusted by default",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

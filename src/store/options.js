@@ -220,7 +220,7 @@ async function applyManagedOptions(options) {
       options.onboarding = { shown: 1 };
     }
 
-    if (managed.disableSettings === true) {
+    if (managed.disableUserControl === true) {
       options.managed = true;
       options.sync = false;
 
