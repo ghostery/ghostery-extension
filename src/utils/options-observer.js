@@ -23,7 +23,7 @@ function isOptionEqual(a, b) {
   );
 }
 
-const observers = new Set();
+const observers = [];
 let setup = null;
 
 export function addListener(...args) {
@@ -52,7 +52,7 @@ export function addListener(...args) {
       if (isOptionEqual(value, prevValue)) return;
 
       try {
-        console.debug(`[options] "${fn.name || property}" observer`);
+        console.debug(`[options] Executing "${fn.name || property}" observer`);
         await fn(value, prevValue);
         resolve();
       } catch (e) {
@@ -61,7 +61,7 @@ export function addListener(...args) {
       }
     };
 
-    observers.add(wrapper);
+    observers.push(wrapper);
   });
 }
 
@@ -71,20 +71,22 @@ export async function waitForIdle() {
 }
 
 export async function execute(options, prevOptions) {
-  if (observers.size === 0) return;
+  if (observers.length === 0) return;
 
   const queue = Promise.allSettled([...queues]).then(async () => {
-    console.debug(`[options] Run observers (start)`);
+    console.debug(`[options] Start observers...`);
 
-    for (const fn of observers) {
-      try {
-        await fn(options, prevOptions);
-      } catch (e) {
-        console.error(`Error while executing observer: `, e);
-      }
-    }
+    await Promise.all(
+      observers.map(async (fn) => {
+        try {
+          await fn(options, prevOptions);
+        } catch (e) {
+          console.error(`Error while executing observer: `, e);
+        }
+      }),
+    );
 
-    console.debug(`[options] Run observers (end)`);
+    console.debug(`[options] Observers finished...`);
     queues.delete(queue);
   });
 
