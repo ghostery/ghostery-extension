@@ -141,6 +141,17 @@ cpSync(
 if (manifest.declarative_net_request?.rule_resources) {
   let rulesCount = 0;
 
+  // Add regional DNR rules to Chromium
+  if (argv.target === 'chromium') {
+    REGIONS.forEach((region) => {
+      manifest.declarative_net_request.rule_resources.push({
+        id: `lang-${region}`,
+        enabled: false,
+        path: `rule_resources/dnr-lang-${region}.json`,
+      });
+    });
+  }
+
   manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
     const dir = dirname(path);
     const file = basename(path);
