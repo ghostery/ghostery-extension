@@ -469,7 +469,7 @@ if (__PLATFORM__ === 'firefox') {
       if (details.tabId < 0 || details.type === 'main_frame') return;
 
       if (setup.pending) {
-        console.error('[adblocker] not ready for network blocking');
+        console.error('[adblocker] not ready for network requests blocking');
         return;
       }
 
@@ -500,8 +500,10 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
+      if (details.tabId < 0 || details.type === 'main_frame') return;
+
       if (setup.pending) {
-        console.error('[adblocker] not ready for network modification');
+        console.error('[adblocker] not ready for network headers modification');
         return;
       }
 
