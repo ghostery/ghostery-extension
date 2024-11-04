@@ -67,61 +67,6 @@
         "id": "fixes",
         "enabled": false,
         "path": "rule_resources/dnr-fixes.json"
-      },
-      {
-        "id": "lang-ar",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-ar.json"
-      },
-      {
-        "id": "lang-de",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-de.json"
-      },
-      {
-        "id": "lang-el",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-el.json"
-      },
-      {
-        "id": "lang-fr",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-fr.json"
-      },
-      {
-        "id": "lang-hu",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-hu.json"
-      },
-      {
-        "id": "lang-it",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-it.json"
-      },
-      {
-        "id": "lang-ja",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-ja.json"
-      },
-      {
-        "id": "lang-ko",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-ko.json"
-      },
-      {
-        "id": "lang-pl",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-pl.json"
-      },
-      {
-        "id": "lang-ru",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-ru.json"
-      },
-      {
-        "id": "lang-tr",
-        "enabled": false,
-        "path": "rule_resources/dnr-lang-tr.json"
       }
     ]
   },
