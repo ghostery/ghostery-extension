@@ -200,6 +200,11 @@ let managed = __PLATFORM__ === 'chromium' && isOpera() ? false : null;
 async function applyManagedOptions(options) {
   if (managed === false) return options;
 
+  if (chrome.runtime.getManifest().short_name !== 'Ghostery Enterprise') {
+    managed = false;
+    return options;
+  }
+
   if (managed === null) {
     try {
       managed = await chrome.storage.managed.get(null);
