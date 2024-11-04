@@ -137,6 +137,12 @@ cpSync(
   resolve(options.outDir, 'rule_resources', 'engine-trackerdb.dat'),
 );
 
+// copy managed storage configuration
+if (manifest.storage?.managed_schema) {
+  const path = resolve(options.srcDir, manifest.storage.managed_schema);
+  cpSync(path, resolve(options.outDir, manifest.storage.managed_schema));
+}
+
 // copy declarative net request lists
 if (manifest.declarative_net_request?.rule_resources) {
   let rulesCount = 0;

@@ -118,23 +118,28 @@ export default {
             ${stats.hostname &&
             (options.terms
               ? html`
-                  <ui-action>
-                    <a
-                      href="${chrome.runtime.getURL(
-                        '/pages/settings/index.html#@settings-website-details?domain=' +
-                          stats.hostname,
-                      )}"
-                      onclick="${openTabWithUrl}"
-                      layout="row gap:2px items:center"
-                    >
-                      <ui-text type="label-m">${tail(stats.hostname)}</ui-text>
-                      <ui-icon
-                        name="arrow-down"
-                        layout="size:1.5"
-                        color="gray-600"
-                      ></ui-icon>
-                    </a>
-                  </ui-action>
+                  <panel-managed managed="${options.managed}">
+                    <ui-action>
+                      <a
+                        href="${chrome.runtime.getURL(
+                          '/pages/settings/index.html#@settings-website-details?domain=' +
+                            stats.hostname,
+                        )}"
+                        onclick="${openTabWithUrl}"
+                        layout="row gap:2px items:center"
+                      >
+                        <ui-text type="label-m"
+                          >${tail(stats.hostname)}</ui-text
+                        >
+                        ${!options.managed &&
+                        html`<ui-icon
+                          name="arrow-down"
+                          layout="size:1.5"
+                          color="gray-600"
+                        ></ui-icon>`}
+                      </a>
+                    </ui-action>
+                  </panel-managed>
                 `
               : tail(stats.hostname))}
             <ui-action slot="icon">
@@ -155,6 +160,7 @@ export default {
         ></section>
         ${options.terms
           ? stats.hostname &&
+            !options.managed &&
             html`
               <panel-pause
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
@@ -188,14 +194,17 @@ export default {
                   domain="${stats.hostname}"
                   categories="${stats.topCategories}"
                   trackers="${stats.trackers}"
-                  paused="${paused || globalPause || !options.terms}"
+                  readonly="${paused ||
+                  globalPause ||
+                  !options.terms ||
+                  options.managed}"
                   dialog="${TrackerDetails}"
                   exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
-                  ontypechange="${setStatsType}"
+                  wtm-link="${hasWTMStats(stats.hostname)}"
                   layout="margin:1:1.5"
                   layout@390px="margin:1.5:1.5:2"
-                  wtm-link="${hasWTMStats(stats.hostname)}"
+                  ontypechange="${setStatsType}"
                 >
                 </ui-stats>
                 <panel-feedback
@@ -227,43 +236,48 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <ui-text
-            class="${{ last: store.error(notification) }}"
-            layout.last="padding:bottom:1.5"
-            layout@390px="padding:bottom"
-            layout.last@390px="padding:bottom:2.5"
-            hidden="${globalPause}"
-          >
-            <a
-              href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-              onclick="${openTabWithUrl}"
-              layout="block margin:1.5:1.5:0"
+          <panel-managed managed="${options.managed}">
+            <ui-text
+              class="${{
+                last: options.managed || store.error(notification),
+              }}"
+              layout.last="padding:bottom:1.5"
+              layout@390px="padding:bottom"
+              layout.last@390px="padding:bottom:2.5"
+              hidden="${globalPause}"
             >
-              <panel-options-item
-                icon="ads"
-                enabled="${options.blockAds}"
-                terms="${options.terms}"
+              <a
+                href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
+                onclick="${openTabWithUrl}"
+                layout="block margin:1.5:1.5:0"
               >
-                Ad-Blocking
-              </panel-options-item>
-              <panel-options-item
-                icon="tracking"
-                enabled="${options.blockTrackers}"
-                terms="${options.terms}"
-              >
-                Anti-Tracking
-              </panel-options-item>
-              <panel-options-item
-                icon="autoconsent"
-                enabled="${options.blockAnnoyances}"
-                terms="${options.terms}"
-              >
-                Never-Consent
-              </panel-options-item>
-            </a>
-          </ui-text>
+                <panel-options-item
+                  icon="ads"
+                  enabled="${options.blockAds}"
+                  terms="${options.terms}"
+                >
+                  Ad-Blocking
+                </panel-options-item>
+                <panel-options-item
+                  icon="tracking"
+                  enabled="${options.blockTrackers}"
+                  terms="${options.terms}"
+                >
+                  Anti-Tracking
+                </panel-options-item>
+                <panel-options-item
+                  icon="autoconsent"
+                  enabled="${options.blockAnnoyances}"
+                  terms="${options.terms}"
+                >
+                  Never-Consent
+                </panel-options-item>
+              </a>
+            </ui-text>
+          </panel-managed>
         </panel-container>
-        ${store.ready(notification) &&
+        ${!options.managed &&
+        store.ready(notification) &&
         html`
           <panel-notification
             icon="${notification.icon}"

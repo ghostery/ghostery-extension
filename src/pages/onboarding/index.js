@@ -13,25 +13,33 @@ import { mount, html, store, router } from 'hybrids';
 
 import '/ui/index.js';
 import Options from '/store/options.js';
+import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
 import './elements.js';
 
 import Main from './views/main.js';
 import Success from './views/success.js';
 
-store.resolve(Options).then(({ onboarding }) => {
+store.resolve(Options).then(({ onboarding, terms, managed }) => {
+  // As the user can access settings page from browser native UI
+  // we must redirect to the Ghostery website if the user has already
+  // accepted the terms and conditions and the extension is managed
+  if (terms && managed) {
+    return window.location.replace(`https://www.${GHOSTERY_DOMAIN}`);
+  }
+
   store.set(Options, {
     onboarding: {
       shown: onboarding.shown + 1,
     },
   });
-});
 
-mount(document.body, {
-  stack: router([Main, Success]),
-  render: ({ stack }) => html`
-    <template layout="grid height::100%">
-      <onboarding-layout>${stack}</onboarding-layout>
-    </template>
-  `,
+  mount(document.body, {
+    stack: router([Main, Success]),
+    render: ({ stack }) => html`
+      <template layout="grid height::100%">
+        <onboarding-layout>${stack}</onboarding-layout>
+      </template>
+    `,
+  });
 });
