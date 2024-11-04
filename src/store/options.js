@@ -17,8 +17,8 @@ import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
-import Session from './session.js';
 import CustomFilters from './custom-filters.js';
+import Session from './session.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -94,6 +94,9 @@ const Options = {
   sync: true,
   revision: 0,
 
+  // Managed
+  managed: false,
+
   [store.connect]: {
     async get() {
       let { options, optionsVersion } = await chrome.storage.local.get([
@@ -147,7 +150,9 @@ const Options = {
         Promise.resolve().then(() => sync(options, keys));
       }
 
-      return options;
+      return __PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium'
+        ? applyManagedOptions(options)
+        : options;
     },
     async set(_, options, keys) {
       options = options || {};
@@ -190,6 +195,54 @@ chrome.runtime.onMessage.addListener((msg) => {
     store.get(Options);
   }
 });
+
+let managed = __PLATFORM__ === 'chromium' && isOpera() ? false : null;
+async function applyManagedOptions(options) {
+  if (managed === false) return options;
+
+  if (chrome.runtime.getManifest().short_name !== 'Ghostery Enterprise') {
+    managed = false;
+    return options;
+  }
+
+  if (managed === null) {
+    try {
+      managed = await chrome.storage.managed.get(null);
+      // Some of the platforms returns an empty object if there are no managed options
+      // so we need to check property existence that the managed options are enabled
+      managed = Object.keys(managed).length > 0 ? managed : false;
+    } catch (e) {
+      console.error(`[options] Failed to get managed options`, e);
+      managed = false;
+    }
+  }
+
+  if (managed) {
+    console.debug(`[options] Applying managed options...`, managed);
+
+    if (managed.disableOnboarding === true) {
+      options.terms = true;
+      options.onboarding = { shown: 1 };
+    }
+
+    if (managed.disableUserControl === true) {
+      options.managed = true;
+      options.sync = false;
+
+      // Clear out the paused state, to overwrite with the current managed state
+      options.paused = {};
+    }
+
+    if (Array.isArray(managed.trustedDomains)) {
+      managed.trustedDomains.forEach((domain) => {
+        options.paused ||= {};
+        options.paused[domain] = { revokeAt: 0 };
+      });
+    }
+  }
+
+  return options;
+}
 
 export function isPaused(options, domain = '') {
   return (

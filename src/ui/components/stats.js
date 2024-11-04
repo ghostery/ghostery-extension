@@ -51,7 +51,7 @@ export default {
         {},
       ),
     ),
-  paused: false,
+  readonly: false,
   domain: '',
   wtmLink: false,
   type: {
@@ -68,7 +68,7 @@ export default {
     categories,
     categoryList,
     trackers,
-    paused,
+    readonly,
     domain,
     wtmLink,
     type,
@@ -221,7 +221,7 @@ export default {
                               ></ui-icon>`}
                             </a>
                           </ui-text>
-                          ${!paused &&
+                          ${!readonly &&
                           html`
                             <ui-action-button layout="shrink:0 width:4.5">
                               <a
