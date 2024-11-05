@@ -190,10 +190,10 @@
     "description": "Current protection status for a tracker"
   },
   "custom_filters": {
-    "message": "Niestandardowe filtry"
+    "message": "Filtry niestandardowe"
   },
   "custom_filters_has_been_updated": {
-    "message": "Niestandardowe filtry zostały zaktualizowane"
+    "message": "Filtry niestandardowe zostały zaktualizowane"
   },
   "customer_interaction": {
     "message": "Interakcja z klientem",
@@ -271,7 +271,7 @@
     "message": "Rozszerz blokowanie reklam Ghostery na wyszukiwarki w kilku prostych krokach."
   },
   "experimental_filters": {
-    "message": "Eksperymentalne filtry"
+    "message": "Filtry eksperymentalne"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "rozszerzenie: wersja, data instalacji, losowy numer instalacji (od 1 do 100), podstawowe ustawienia, status kontrybucji"
@@ -338,7 +338,7 @@
     "message": "Pomóż Ghostery w walce o sieć, w której prywatność jest podstawowym prawem człowieka."
   },
   "helps_ghostery_fix_broken_pages_faster__by_activating_you_can_test_experimental_filters_and_support_us_with_feedback__please_send_a_message_to_support@ghostery_com_describing_how_your_experience_changed_after_enabling_": {
-    "message": "Pomaga Ghostery szybciej naprawiać uszkodzone strony. Aktywując, możesz testować eksperymentalne filtry i wspierać nas swoimi opiniami. Prosimy o przesłanie wiadomości na adres support@ghostery.com, opisując, jak zmieniło się Twoje doświadczenie po włączeniu."
+    "message": "Pomaga Ghostery szybciej naprawiać uszkodzone strony. Aktywując, możesz testować filtry eksperymentalne i wspierać nas swoimi opiniami. Prosimy o przesłanie wiadomości na adres support@ghostery.com, opisując, jak zmieniło się Twoje doświadczenie po włączeniu."
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Hej, lubisz Ghostery i chcesz wesprzeć naszą pracę?"
