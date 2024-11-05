@@ -206,8 +206,7 @@ async function applyManagedOptions(options) {
       // Some of the platforms returns an empty object if there are no managed options
       // so we need to check property existence that the managed options are enabled
       managed = Object.keys(managed).length > 0 ? managed : false;
-    } catch (e) {
-      console.error(`[options] Failed to get managed options`, e);
+    } catch {
       managed = false;
     }
   }

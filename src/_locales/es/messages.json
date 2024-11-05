@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "Política de privacidad"
   },
-  "privacy_policy___panel_company": {
-    "message": "Política de privacidad"
-  },
   "privacy_protection": {
     "message": "Protección de la privacidad"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "Enviar nuevo rastreador"
+  },
+  "support": {
+    "message": "Asistencia"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Suspende la protección de la privacidad a nivel mundial por 1 día."

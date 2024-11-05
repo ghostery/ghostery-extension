@@ -23,10 +23,9 @@ export default {
         <a
           href="${href}"
           layout="grid:max|1|max items:center:start gap:1.5 padding margin:0:1"
-          layout@390px="padding:1.5:1"
           onclick="${openTabWithUrl}"
         >
-          <ui-icon name="${icon}" color="gray-600"></ui-icon>
+          <ui-icon name="${icon}" color="gray-600" layout="size:2"></ui-icon>
           <ui-text
             type="label-m"
             ellipsis
@@ -35,7 +34,11 @@ export default {
           >
             <slot></slot>
           </ui-text>
-          <ui-icon name="${suffixIcon}" color="gray-400"></ui-icon>
+          <ui-icon
+            name="${suffixIcon}"
+            color="gray-400"
+            layout="size:2"
+          ></ui-icon>
         </a>
       </ui-action>
     </template>

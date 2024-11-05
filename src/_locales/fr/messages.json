@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "Politique de confidentialité"
   },
-  "privacy_policy___panel_company": {
-    "message": "Politique de confidentialité"
-  },
   "privacy_protection": {
     "message": "Protection de la vie privée"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "Soumettre un nouveau mouchard"
+  },
+  "support": {
+    "message": "Assistance"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Suspend la protection de la vie privée à l'échelle mondiale pendant 1 jour."

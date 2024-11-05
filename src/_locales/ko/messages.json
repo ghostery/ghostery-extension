@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "개인정보 보호정책"
   },
-  "privacy_policy___panel_company": {
-    "message": "개인정보 보호정책"
-  },
   "privacy_protection": {
     "message": "개인정보 보호"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "새 트래커 제보하기"
+  },
+  "support": {
+    "message": "지원 "
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "모든 웹 사이트에서 앞으로 하루 동안 개인정보 보호를 중지합니다."

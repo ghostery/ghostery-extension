@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "Политика конфиденциальности"
   },
-  "privacy_policy___panel_company": {
-    "message": "Политика конфиденциальности"
-  },
   "privacy_protection": {
     "message": "Защита конфиденциальности"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "Отправить новый трекер"
+  },
+  "support": {
+    "message": "Поддержка"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Приостанавливает защиту конфиденциальности по всему миру на 1 день."

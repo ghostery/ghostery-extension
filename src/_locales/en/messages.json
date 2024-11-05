@@ -489,10 +489,7 @@
     "message": "Prevents various tracking techniques using AI-driven technology."
   },
   "privacy_policy": {
-    "message": "Privacy policy"
-  },
-  "privacy_policy___panel_company": {
-    "message": "Privacy policy"
+    "message": "Privacy Policy"
   },
   "privacy_protection": {
     "message": "Privacy protection"
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "Submit a new tracker"
+  },
+  "support": {
+    "message": "Support"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Suspends privacy protection globally for 1 day."

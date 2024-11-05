@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "プライバシー・ポリシー"
   },
-  "privacy_policy___panel_company": {
-    "message": "プライバシー・ポリシー"
-  },
   "privacy_protection": {
     "message": "プライバシー保護"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "新しいトラッカーを提出"
+  },
+  "support": {
+    "message": "サポート"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "1日間、グローバルにプライバシー保護を一時停止します。"

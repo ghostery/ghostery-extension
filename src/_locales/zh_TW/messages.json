@@ -491,9 +491,6 @@
   "privacy_policy": {
     "message": "隐私政策"
   },
-  "privacy_policy___panel_company": {
-    "message": "隐私政策"
-  },
   "privacy_protection": {
     "message": "隱私權保護"
   },
@@ -579,6 +576,9 @@
   },
   "submit_a_new_tracker": {
     "message": "提交一個新的網頁跟蹤器"
+  },
+  "support": {
+    "message": "支援"
   },
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "全球暫停隱私保護一天。"
