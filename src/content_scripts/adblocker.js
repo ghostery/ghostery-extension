@@ -9,15 +9,124 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { injectCosmetics } from '@ghostery/adblocker-webextension-cosmetics';
+function debounce(fn, { waitFor, maxWait }) {
+  let delayedTimer;
+  let maxWaitTimer;
 
-function getCosmeticsFilters(args) {
-  chrome.runtime.sendMessage({
-    action: 'getCosmeticsFilters',
-    ...args,
-  });
+  const clear = () => {
+    clearTimeout(delayedTimer);
+    clearTimeout(maxWaitTimer);
+    delayedTimer = undefined;
+    maxWaitTimer = undefined;
+  };
 
-  return Promise.resolve({});
+  const run = () => {
+    clear();
+    fn();
+  };
+
+  return () => {
+    if (maxWaitTimer === undefined) {
+      maxWaitTimer = setTimeout(run, maxWait);
+    }
+    clearTimeout(delayedTimer);
+    delayedTimer = setTimeout(run, waitFor);
+  };
 }
 
-injectCosmetics(window, true, getCosmeticsFilters);
+const selectors = {
+  classes: new Set(),
+  ids: new Set(),
+  hrefs: new Set(),
+};
+
+const knownSelectors = {
+  classes: new Set(),
+  ids: new Set(),
+  hrefs: new Set(),
+};
+
+function addSelector(type, selector) {
+  if (
+    typeof selector === 'string' &&
+    selector.length &&
+    !knownSelectors[type].has(selector)
+  ) {
+    knownSelectors[type].add(selector);
+    selectors[type].add(selector);
+  }
+}
+
+const injectCosmetics = debounce(
+  () => {
+    if (selectors.classes.size || selectors.ids.size || selectors.hrefs.size) {
+      chrome.runtime.sendMessage({
+        action: 'injectCosmetics',
+        classes: Array.from(selectors.classes),
+        ids: Array.from(selectors.ids),
+        hrefs: Array.from(selectors.hrefs),
+      });
+
+      selectors.classes.clear();
+      selectors.ids.clear();
+      selectors.hrefs.clear();
+    }
+  },
+  { waitFor: 25, maxWait: 1000 },
+);
+
+const observer = new MutationObserver((mutations) => {
+  const visited = new Set();
+
+  for (const mutation of mutations) {
+    switch (mutation.type) {
+      case 'attributes': {
+        if (mutation.attributeName === 'class') {
+          mutation.target.classList.forEach((c) => addSelector('classes', c));
+        } else if (mutation.attributeName === 'id') {
+          addSelector('ids', mutation.target.id);
+        } else if (mutation.attributeName === 'href') {
+          addSelector('hrefs', mutation.target.href);
+        }
+        break;
+      }
+      case 'childList': {
+        for (const root of mutation.addedNodes) {
+          const treeWalker = document.createTreeWalker(
+            root,
+            NodeFilter.SHOW_ELEMENT,
+          );
+
+          let el = root;
+
+          while (el) {
+            if (!visited.has(el)) {
+              visited.add(el);
+
+              if (el.className) {
+                el.classList.forEach((c) => addSelector('classes', c));
+              }
+
+              addSelector('ids', el.id);
+              addSelector('hrefs', el.href);
+            }
+
+            el = treeWalker.nextNode();
+          }
+        }
+        break;
+      }
+    }
+  }
+
+  injectCosmetics();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class', 'id', 'href'],
+    childList: true,
+    subtree: true,
+  });
+});

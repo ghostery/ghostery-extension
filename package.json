@@ -49,7 +49,6 @@
     "@duckduckgo/autoconsent": "^10.17.0",
     "@ghostery/adblocker": "^2.0.3",
     "@ghostery/adblocker-webextension": "^2.0.3",
-    "@ghostery/adblocker-webextension-cosmetics": "^2.0.3",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.36.0",
     "@whotracksme/reporting": "^5.1.29",

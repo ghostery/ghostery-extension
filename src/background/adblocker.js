@@ -167,158 +167,11 @@ export const setup = asyncSetup([
   ),
 ]);
 
-function adblockerInjectStylesWebExtension(
-  styles,
-  { tabId, frameId, allFrames = false },
-) {
-  // Abort if stylesheet is empty.
-  if (styles.length === 0) {
-    return;
-  }
+/*
+ * Cosmetics injection
+ */
 
-  if (chrome.scripting && chrome.scripting.insertCSS) {
-    const target = {
-      tabId,
-    };
-
-    if (frameId) {
-      target.frameIds = [frameId];
-    } else {
-      target.allFrames = allFrames;
-    }
-    chrome.scripting
-      .insertCSS({
-        css: styles,
-        origin: 'USER',
-        target,
-      })
-      .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
-  } else {
-    const details = {
-      allFrames,
-      code: styles,
-      cssOrigin: 'user',
-      matchAboutBlank: true,
-      runAt: 'document_start',
-    };
-    if (frameId) {
-      details.frameId = frameId;
-    }
-    chrome.tabs
-      .insertCSS(tabId, details)
-      .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
-  }
-}
-
-// copied from https://github.com/cliqz-oss/adblocker/blob/0bdff8559f1c19effe278b8982fb8b6c33c9c0ab/packages/adblocker-webextension/adblocker.ts#L297
-async function injectCosmetics(msg, sender) {
-  try {
-    setup.pending && (await setup.pending);
-  } catch (e) {
-    console.error('[adblocker] not ready for cosmetic injection', e);
-    return;
-  }
-
-  // Extract hostname from sender's URL
-  const { frameId } = sender;
-  const url = sender.tab?.url || sender.url;
-  const parsed = parse(url);
-  const hostname = parsed.hostname || '';
-  const domain = parsed.domain || '';
-
-  if (!sender.tab || isPaused(options, hostname)) {
-    return;
-  }
-
-  const genericStyles = [];
-  const specificStyles = [];
-  let specificFrameId = null;
-
-  const engine = engines.get(engines.MAIN_ENGINE);
-
-  // Once per tab/page load we inject base stylesheets. These are always
-  // the same for all frames of a given page because they do not depend on
-  // a particular domain and cannot be cancelled using unhide rules.
-  // Because of this, we specify `allFrames: true` when injecting them so
-  // that we do not need to perform this operation for sub-frames.
-  if (frameId === 0 && msg.lifecycle === 'start') {
-    const { styles } = engine.getCosmeticsFilters({
-      domain,
-      hostname,
-      url,
-
-      classes: msg.classes,
-      hrefs: msg.hrefs,
-      ids: msg.ids,
-
-      // This needs to be done only once per tab
-      getBaseRules: true,
-      getInjectionRules: false,
-      getExtendedRules: false,
-      getRulesFromDOM: false,
-      getRulesFromHostname: false,
-    });
-
-    genericStyles.push(styles);
-  }
-
-  // Separately, requests cosmetics which depend on the page it self
-  // (either because of the hostname or content of the DOM). Content script
-  // logic is responsible for returning information about lists of classes,
-  // ids and hrefs observed in the DOM. MutationObserver is also used to
-  // make sure we can react to changes.
-  {
-    const { styles } = engine.getCosmeticsFilters({
-      domain,
-      hostname,
-      url,
-
-      classes: msg.classes,
-      hrefs: msg.hrefs,
-      ids: msg.ids,
-
-      // This needs to be done only once per frame
-      getBaseRules: false,
-      getInjectionRules: msg.lifecycle === 'start',
-      getExtendedRules: msg.lifecycle === 'start',
-      getRulesFromHostname: msg.lifecycle === 'start',
-
-      // This will be done every time we get information about DOM mutation
-      getRulesFromDOM: msg.lifecycle === 'dom-update',
-    });
-
-    specificStyles.push(styles);
-    specificFrameId = frameId;
-  }
-
-  const allGenericStyles = genericStyles.join('\n').trim();
-  if (allGenericStyles.length > 0) {
-    adblockerInjectStylesWebExtension(allGenericStyles, {
-      tabId: sender.tab.id,
-      allFrames: true,
-    });
-  }
-
-  const allSpecificStyles = specificStyles.join('\n').trim();
-  if (allSpecificStyles.length > 0) {
-    adblockerInjectStylesWebExtension(allSpecificStyles, {
-      tabId: sender.tab.id,
-      frameId: specificFrameId,
-    });
-  }
-}
-
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action === 'getCosmeticsFilters') {
-    injectCosmetics(msg, sender);
-  }
-
-  return false;
-});
-
-const SCRIPTLETS_UUID = crypto.randomUUID();
-
-async function executeScriptlets(tabId, frameId, scripts) {
+async function injectScriptlets(scripts, tabId, frameId) {
   // Dynamically injected scriptlets can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   if (debugMode) {
@@ -330,18 +183,7 @@ async function executeScriptlets(tabId, frameId, scripts) {
 
   const scriptlets = `(function(){ ${scripts.join('\n\n')}} )();`;
 
-  function scriptletInjector(code, uuid) {
-    // ensure that scriptlets are injected only once
-    if (window[uuid]) {
-      return;
-    } else {
-      Object.defineProperty(window, uuid, {
-        value: true,
-        writable: false,
-        enumerable: false,
-        configurable: false,
-      });
-    }
+  function scriptletInjector(code) {
     let content = decodeURIComponent(code);
     const script = document.createElement('script');
     if (window.trustedTypes) {
@@ -369,7 +211,7 @@ async function executeScriptlets(tabId, frameId, scripts) {
         frameIds: [frameId],
       },
       func: scriptletInjector,
-      args: [encodeURIComponent(scriptlets), SCRIPTLETS_UUID],
+      args: [encodeURIComponent(scriptlets)],
     },
     () => {
       if (chrome.runtime.lastError) {
@@ -379,18 +221,39 @@ async function executeScriptlets(tabId, frameId, scripts) {
   );
 }
 
-async function injectScriptlets(tabId, frameId, url) {
+function injectCSS(styles, tabId, frameId) {
+  const target = { tabId };
+
+  if (frameId !== undefined) {
+    target.frameIds = [frameId];
+  } else {
+    target.allFrames = true;
+  }
+
+  chrome.scripting
+    .insertCSS({
+      css: styles,
+      origin: 'USER',
+      target,
+    })
+    .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
+}
+
+async function injectCosmetics(details, config) {
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
-    console.error('[adblocker] not ready for scriptlet injection', e);
+    console.error('[adblocker] not ready for cosmetic injection', e);
     return;
   }
 
-  const { hostname, domain } = parse(url);
-  if (!hostname || isPaused(options, hostname)) {
-    return;
-  }
+  const { frameId, url, tabId } = details;
+
+  const parsed = parse(url);
+  const domain = parsed.domain || '';
+  const hostname = parsed.hostname || '';
+
+  if (isPaused(options, hostname)) return;
 
   const tabHostname = tabStats.get(tabId)?.hostname;
   if (tabHostname && isPaused(options, tabHostname)) {
@@ -398,36 +261,78 @@ async function injectScriptlets(tabId, frameId, url) {
   }
 
   const engine = engines.get(engines.MAIN_ENGINE);
+  const isBootstrap = config.bootstrap;
 
-  const { scripts } = engine.getCosmeticsFilters({
-    url: url,
-    hostname,
-    domain: domain || '',
-    getBaseRules: false,
-    getInjectionRules: true,
-    getExtendedRules: false,
-    getRulesFromDOM: false,
-    getRulesFromHostname: true,
-  });
+  {
+    const cosmetics = engine.getCosmeticsFilters({
+      domain,
+      hostname,
+      url,
 
-  if (scripts.length > 0) {
-    executeScriptlets(tabId, frameId, scripts);
+      classes: config.classes,
+      hrefs: config.hrefs,
+      ids: config.ids,
+
+      getBaseRules: false,
+      // This needs to be done only once per frame
+      getInjectionRules: isBootstrap,
+      getExtendedRules: isBootstrap,
+      getRulesFromHostname: isBootstrap,
+
+      // This will be done every time we get information about DOM mutation
+      getRulesFromDOM: !isBootstrap,
+    });
+
+    if (isBootstrap && cosmetics.scripts.length > 0) {
+      injectScriptlets(cosmetics.scripts, tabId, frameId);
+    }
+
+    if (cosmetics.styles) {
+      injectCSS(cosmetics.styles, tabId, frameId);
+    }
+  }
+
+  if (frameId === 0 && isBootstrap) {
+    const { styles } = engine.getCosmeticsFilters({
+      domain,
+      hostname,
+      url,
+
+      // This needs to be done only once per tab
+      getBaseRules: true,
+      getInjectionRules: false,
+      getExtendedRules: false,
+      getRulesFromDOM: false,
+      getRulesFromHostname: false,
+    });
+
+    injectCSS(styles, tabId);
   }
 }
 
-if (__PLATFORM__ === 'safari') {
-  chrome.runtime.onMessage.addListener((msg, sender) => {
-    if (sender.url && msg.action === 'injectScriptlets') {
-      injectScriptlets(sender.tab.id, sender.frameId, sender.url);
-    }
+chrome.webNavigation.onCommitted.addListener(
+  (details) => {
+    injectCosmetics(details, { bootstrap: true });
+  },
+  { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+);
 
-    return false;
-  });
-}
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  if (msg.action === 'injectCosmetics' && sender.tab) {
+    // Generate details object for the sender argument
+    const details = {
+      url: sender.url,
+      tabId: sender.tab.id,
+      frameId: sender.frameId,
+    };
 
-chrome.webNavigation.onCommitted.addListener((details) => {
-  injectScriptlets(details.tabId, details.frameId, details.url);
+    injectCosmetics(details, msg);
+  }
 });
+
+/*
+ * Network requests blocking
+ */
 
 function isTrusted(request, type) {
   // The request is from a tab that is paused
