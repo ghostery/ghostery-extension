@@ -98,14 +98,15 @@ async function updateEngines() {
       await Promise.all(
         enabledEngines
           .filter((id) => id !== engines.CUSTOM_ENGINE)
-          .map((id) =>
-            engines.update(id).then(
-              (v) => {
-                updated = updated || v;
-              },
-              () => {},
-            ),
-          ),
+          .map(async (id) => {
+            try {
+              await engines.init(id);
+              const updatedEngine = await engines.update(id);
+              updated ||= updatedEngine;
+            } catch {
+              // Ignore errors
+            }
+          }),
       );
 
       // Reload the main engine after all engines are updated
