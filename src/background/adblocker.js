@@ -54,45 +54,38 @@ function getEnabledEngines(config) {
   return [];
 }
 
-let reloading = false;
-function reloadMainEngine() {
-  if (reloading) return reloading;
+function pause(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-  return (reloading = new Promise((resolve) => {
-    setTimeout(
-      async () => {
-        const enabledEngines = getEnabledEngines(options);
+async function reloadMainEngine() {
+  // Delay the reload to avoid UI freezes in Firefox and Safari
+  if (__PLATFORM__ !== 'chromium') await pause(1000);
 
-        if (enabledEngines.length) {
-          engines.replace(
-            engines.MAIN_ENGINE,
-            (
-              await Promise.all(
-                enabledEngines.map((id) =>
-                  engines.init(id).catch(() => {
-                    console.error(`[adblocker] failed to load engine: ${id}`);
-                    return null;
-                  }),
-                ),
-              )
-            ).filter((engine) => engine),
-          );
+  const enabledEngines = getEnabledEngines(options);
 
-          console.info(
-            `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
-          );
-        } else {
-          engines.create(engines.MAIN_ENGINE);
-          console.info('[adblocker] Main engine reloaded with no filters');
-        }
-
-        reloading = null;
-        resolve();
-      },
-      // Delay the reload to avoid UI freezes in Firefox and Safari
-      __PLATFORM__ === 'chromium' ? 0 : 1000,
+  if (enabledEngines.length) {
+    engines.replace(
+      engines.MAIN_ENGINE,
+      (
+        await Promise.all(
+          enabledEngines.map((id) =>
+            engines.init(id).catch(() => {
+              console.error(`[adblocker] failed to load engine: ${id}`);
+              return null;
+            }),
+          ),
+        )
+      ).filter((engine) => engine),
     );
-  }));
+
+    console.info(
+      `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
+    );
+  } else {
+    engines.create(engines.MAIN_ENGINE);
+    console.info('[adblocker] Main engine reloaded with no filters');
+  }
 }
 
 engines.addChangeListener(engines.CUSTOM_ENGINE, reloadMainEngine);
