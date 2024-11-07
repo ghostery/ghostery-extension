@@ -54,31 +54,42 @@ function getEnabledEngines(config) {
   return [];
 }
 
-async function reloadMainEngine() {
-  const enabledEngines = getEnabledEngines(options);
+function reloadMainEngine() {
+  clearTimeout(reloadMainEngine.timeout);
 
-  if (enabledEngines.length) {
-    engines.replace(
-      engines.MAIN_ENGINE,
-      (
-        await Promise.all(
-          enabledEngines.map((id) =>
-            engines.init(id).catch(() => {
-              console.error(`[adblocker] failed to load engine: ${id}`);
-              return null;
-            }),
-          ),
-        )
-      ).filter((engine) => engine),
-    );
+  // Debounce the reloading of the main engine to avoid multiple reloads
+  // when the user changes multiple options in a short period of time
+  reloadMainEngine.timeout = setTimeout(
+    async () => {
+      const enabledEngines = getEnabledEngines(options);
 
-    console.info(
-      `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
-    );
-  } else {
-    engines.create(engines.MAIN_ENGINE);
-    console.info('[adblocker] Main engine reloaded with no filters');
-  }
+      if (enabledEngines.length) {
+        engines.replace(
+          engines.MAIN_ENGINE,
+          (
+            await Promise.all(
+              enabledEngines.map((id) =>
+                engines.init(id).catch(() => {
+                  console.error(`[adblocker] failed to load engine: ${id}`);
+                  return null;
+                }),
+              ),
+            )
+          ).filter((engine) => engine),
+        );
+
+        console.info(
+          `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
+        );
+      } else {
+        engines.create(engines.MAIN_ENGINE);
+        console.info('[adblocker] Main engine reloaded with no filters');
+      }
+    },
+    // Delay the reload to avoid multiple reloads when the user changes multiple options
+    // in a short period of time and to avoid UI freezes in Firefox and Safari
+    2000,
+  );
 }
 
 engines.addChangeListener(engines.CUSTOM_ENGINE, reloadMainEngine);
@@ -109,15 +120,15 @@ async function updateEngines() {
           }),
       );
 
-      // Reload the main engine after all engines are updated
-      if (updated) await reloadMainEngine();
-
       // Update TrackerDB engine
       trackerdb.setup.pending && (await trackerdb.setup.pending);
       await engines.update(engines.TRACKERDB_ENGINE).catch(() => null);
 
       // Update timestamp after the engines are updated
       await store.set(Options, { filtersUpdatedAt: Date.now() });
+
+      // Reload the main engine after all engines are updated
+      if (updated) reloadMainEngine();
     }
   } finally {
     updating = false;
@@ -147,7 +158,7 @@ export const setup = asyncSetup([
         // the new version of the extension
         engines.remove('regional-filters');
 
-        await reloadMainEngine();
+        reloadMainEngine();
       }
 
       if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
