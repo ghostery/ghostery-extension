@@ -54,42 +54,45 @@ function getEnabledEngines(config) {
   return [];
 }
 
+let reloading = false;
 function reloadMainEngine() {
-  clearTimeout(reloadMainEngine.timeout);
+  if (reloading) return reloading;
 
-  // Debounce the reloading of the main engine to avoid multiple reloads
-  // when the user changes multiple options in a short period of time
-  reloadMainEngine.timeout = setTimeout(
-    async () => {
-      const enabledEngines = getEnabledEngines(options);
+  return (reloading = new Promise((resolve) => {
+    setTimeout(
+      async () => {
+        const enabledEngines = getEnabledEngines(options);
 
-      if (enabledEngines.length) {
-        engines.replace(
-          engines.MAIN_ENGINE,
-          (
-            await Promise.all(
-              enabledEngines.map((id) =>
-                engines.init(id).catch(() => {
-                  console.error(`[adblocker] failed to load engine: ${id}`);
-                  return null;
-                }),
-              ),
-            )
-          ).filter((engine) => engine),
-        );
+        if (enabledEngines.length) {
+          engines.replace(
+            engines.MAIN_ENGINE,
+            (
+              await Promise.all(
+                enabledEngines.map((id) =>
+                  engines.init(id).catch(() => {
+                    console.error(`[adblocker] failed to load engine: ${id}`);
+                    return null;
+                  }),
+                ),
+              )
+            ).filter((engine) => engine),
+          );
 
-        console.info(
-          `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
-        );
-      } else {
-        engines.create(engines.MAIN_ENGINE);
-        console.info('[adblocker] Main engine reloaded with no filters');
-      }
-    },
-    // Delay the reload to avoid multiple reloads when the user changes multiple options
-    // in a short period of time and to avoid UI freezes in Firefox and Safari
-    2000,
-  );
+          console.info(
+            `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
+          );
+        } else {
+          engines.create(engines.MAIN_ENGINE);
+          console.info('[adblocker] Main engine reloaded with no filters');
+        }
+
+        reloading = null;
+        resolve();
+      },
+      // Delay the reload to avoid UI freezes in Firefox and Safari
+      __PLATFORM__ === 'chromium' ? 0 : 1000,
+    );
+  }));
 }
 
 engines.addChangeListener(engines.CUSTOM_ENGINE, reloadMainEngine);
@@ -128,7 +131,7 @@ async function updateEngines() {
       await store.set(Options, { filtersUpdatedAt: Date.now() });
 
       // Reload the main engine after all engines are updated
-      if (updated) reloadMainEngine();
+      if (updated) await reloadMainEngine();
     }
   } finally {
     updating = false;
@@ -158,7 +161,7 @@ export const setup = asyncSetup([
         // the new version of the extension
         engines.remove('regional-filters');
 
-        reloadMainEngine();
+        await reloadMainEngine();
       }
 
       if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
