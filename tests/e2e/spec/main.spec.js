@@ -48,8 +48,9 @@ describe('Main Features', function () {
     });
   });
 
-  describe('Ad-Blocking', function () {
+  describe.only('Ad-Blocking', function () {
     const SELECTOR = 'ad-slot';
+    const DYNAMIC_SELECTOR = '#player-ads';
 
     it('does not block ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', false);
@@ -62,6 +63,26 @@ describe('Main Features', function () {
 
       await browser.url(PAGE_URL);
       await expect($(SELECTOR)).not.toBeDisplayed();
+    });
+
+    it('blocks dynamic ads on a page', async function () {
+      await setPrivacyToggle('ad-blocking', true);
+
+      await browser.url(PAGE_URL);
+
+      await browser.execute(function (selector) {
+        const adSlot = document.createElement('div');
+
+        adSlot.id = selector.slice(1);
+        adSlot.style.width = '300px';
+        adSlot.style.height = '250px';
+        adSlot.style.backgroundColor = 'yellow';
+
+        document.body.appendChild(adSlot);
+      }, DYNAMIC_SELECTOR);
+
+      await expect($(DYNAMIC_SELECTOR)).toExist();
+      await expect($(DYNAMIC_SELECTOR)).not.toBeDisplayed();
     });
   });
 

@@ -221,7 +221,7 @@ async function injectScriptlets(scripts, tabId, frameId) {
   );
 }
 
-function injectCSS(styles, tabId, frameId) {
+function injectStyles(styles, tabId, frameId) {
   const target = { tabId };
 
   if (frameId !== undefined) {
@@ -288,7 +288,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (cosmetics.styles) {
-      injectCSS(cosmetics.styles, tabId, frameId);
+      injectStyles(cosmetics.styles, tabId, frameId);
     }
   }
 
@@ -306,7 +306,7 @@ async function injectCosmetics(details, config) {
       getRulesFromHostname: false,
     });
 
-    injectCSS(styles, tabId);
+    injectStyles(styles, tabId);
   }
 }
 
