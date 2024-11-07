@@ -48,7 +48,7 @@ describe('Main Features', function () {
     });
   });
 
-  describe.only('Ad-Blocking', function () {
+  describe('Ad-Blocking', function () {
     const SELECTOR = 'ad-slot';
     const DYNAMIC_SELECTOR = '#player-ads';
 
