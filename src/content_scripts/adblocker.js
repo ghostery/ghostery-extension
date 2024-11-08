@@ -26,7 +26,7 @@ function debounce(fn, { waitFor, maxWait }) {
   };
 
   return () => {
-    if (maxWaitTimer === undefined) {
+    if (maxWait > 0 && maxWaitTimer === undefined) {
       maxWaitTimer = setTimeout(run, maxWait);
     }
     clearTimeout(delayedTimer);
