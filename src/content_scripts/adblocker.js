@@ -84,7 +84,7 @@ const observer = new MutationObserver((mutations) => {
         if (mutation.attributeName === 'class') {
           mutation.target.classList.forEach((c) => addSelector('classes', c));
         } else if (mutation.attributeName === 'id') {
-          addSelector('ids', mutation.target.id);
+          addSelector('ids', mutation.target.getAttribute('id'));
         } else if (mutation.attributeName === 'href') {
           addSelector('hrefs', mutation.target.href);
         }
@@ -107,7 +107,7 @@ const observer = new MutationObserver((mutations) => {
                 el.classList.forEach((c) => addSelector('classes', c));
               }
 
-              addSelector('ids', el.id);
+              addSelector('ids', el.getAttribute('id'));
               addSelector('hrefs', el.href);
             }
 
