@@ -52,7 +52,7 @@
     "@ghostery/adblocker-webextension-cosmetics": "^2.0.3",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.37.1",
-    "@whotracksme/reporting": "^5.1.29",
+    "@whotracksme/reporting": "^5.1.30",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.8",
     "idb": "^8.0.0",
