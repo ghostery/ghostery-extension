@@ -86,7 +86,7 @@ const observer = new MutationObserver((mutations) => {
         } else if (mutation.attributeName === 'id') {
           addSelector('ids', mutation.target.getAttribute('id'));
         } else if (mutation.attributeName === 'href') {
-          addSelector('hrefs', mutation.target.href);
+          addSelector('hrefs', mutation.target.getAttribute('href'));
         }
         break;
       }
@@ -108,7 +108,7 @@ const observer = new MutationObserver((mutations) => {
               }
 
               addSelector('ids', el.getAttribute('id'));
-              addSelector('hrefs', el.href);
+              addSelector('hrefs', el.getAttribute('href'));
             }
 
             el = treeWalker.nextNode();
