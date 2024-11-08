@@ -74,12 +74,6 @@
       "all_frames": true
     },
     {
-      "js": ["content_scripts/adblocker-scriptlets.js"],
-      "matches": ["http://*/*", "https://*/*"],
-      "run_at": "document_start",
-      "all_frames": true
-    },
-    {
       "js": ["content_scripts/autoconsent.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
