@@ -423,7 +423,6 @@ export async function update(name) {
     return false;
   } catch (e) {
     console.error(`[engines] Failed to update engine "${name}"`, e);
-    throw e;
   }
 }
 

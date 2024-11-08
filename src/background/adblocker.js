@@ -106,25 +106,19 @@ async function updateEngines() {
         enabledEngines
           .filter((id) => id !== engines.CUSTOM_ENGINE)
           .map(async (id) => {
-            try {
-              await engines.init(id);
-              const updatedEngine = await engines.update(id);
-              updated ||= updatedEngine;
-            } catch {
-              // Ignore errors
-            }
+            await engines.init(id);
+            updated = (await engines.update(id)) || updated;
           }),
       );
 
       // Update TrackerDB engine
       trackerdb.setup.pending && (await trackerdb.setup.pending);
-      await engines.update(engines.TRACKERDB_ENGINE).catch(() => null);
+      await engines.update(engines.TRACKERDB_ENGINE);
 
       // Update timestamp after the engines are updated
       await store.set(Options, { filtersUpdatedAt: Date.now() });
 
-      // Reload the main engine after all engines are updated
-      if (updated) await reloadMainEngine();
+      return updated;
     }
   } finally {
     updating = false;
@@ -148,17 +142,13 @@ export const setup = asyncSetup([
           (enabledEngines.length !== prevEnabledEngines.length ||
             enabledEngines.some((id, i) => id !== prevEnabledEngines[i])))
       ) {
-        // The regional filters engine is no longer used, so we must remove it
-        // from the storage. We do it as rarely as possible, to avoid unnecessary loads.
-        // TODO: this can be removed in the future release when most of the users will have
-        // the new version of the extension
-        engines.remove('regional-filters');
-
         await reloadMainEngine();
       }
 
+      // Update engines if filters are outdated (older than 1 hour)
+      // and reload the engine if the update happened to at least one of them
       if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
-        await updateEngines();
+        if (await updateEngines()) await reloadMainEngine();
       }
     },
   ),
