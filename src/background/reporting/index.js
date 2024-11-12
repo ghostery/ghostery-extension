@@ -35,16 +35,21 @@ import webRequestReporter from './webrequest-reporter.js';
   }
 })();
 
-OptionsObserver.addListener('terms', async function reporting(terms) {
+OptionsObserver.addListener('terms', function reporting(terms) {
   if (terms) {
-    await urlReporter.init().catch((e) => {
+    urlReporter.init().catch((e) => {
       console.warn(
         'Failed to initialize reporting. Leaving the module disabled and continue.',
         e,
       );
     });
     if (webRequestReporter) {
-      await webRequestReporter.init();
+      webRequestReporter.init();
+    }
+  } else {
+    urlReporter.unload();
+    if (webRequestReporter) {
+      webRequestReporter.uninit();
     }
   }
 });
