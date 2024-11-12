@@ -9,10 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import {
-  WebRequestPipeline,
-  RequestReporter,
-} from '@whotracksme/reporting/reporting';
+import { RequestReporter } from '@whotracksme/reporting/reporting';
 
 import getBrowserInfo from '/utils/browser-info.js';
 import { isPaused } from '/store/options.js';
@@ -28,18 +25,12 @@ import urlReporter from './url-reporter.js';
 let webRequestReporter = null;
 
 if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
-  const webRequestPipeline = new WebRequestPipeline();
-
-  // Important to call it in a first tick as it assigns chrome. listeners
-  webRequestPipeline.init();
-
   let options = {};
   OptionsObserver.addListener(function webRequestReporting(value) {
     options = value;
   });
 
   webRequestReporter = new RequestReporter(config.request, {
-    webRequestPipeline,
     communication,
     countryProvider: urlReporter.countryProvider,
     trustedClock: communication.trustedClock,
