@@ -25,7 +25,7 @@ export default {
           layout="grid:max|1|max items:center:start gap:1.5 padding margin:0:1"
           onclick="${openTabWithUrl}"
         >
-          <ui-icon name="${icon}" color="gray-600" layout="size:2"></ui-icon>
+          <ui-icon name="${icon}" color="gray-600" layout="size:2.5"></ui-icon>
           <ui-text
             type="label-m"
             ellipsis

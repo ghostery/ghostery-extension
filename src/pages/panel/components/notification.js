@@ -52,6 +52,23 @@ export default {
       --ui-notification-color: var(--ui-color-danger-700);
     }
 
+    :host([type="review"]) #icon {
+      position: relative;
+      overflow: hidden;
+      background: #0D1850;
+    }
+
+
+    :host([type="review"]) ui-icon {
+      margin:0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+    }
+
     a {
       background: var(--ui-notification-bg);
       border-radius: 12px;
