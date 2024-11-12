@@ -161,21 +161,25 @@ export async function session() {
           setCookie('access_token', data.access_token, COOKIE_SHORT_DURATION),
           setCookie('csrf_token', data.csrf_token, COOKIE_SHORT_DURATION),
         ]);
+      } else if (res.status === 400) {
+        // If the response code is 400, it means the server processed
+        // the request correctly, but the refresh token must be corrupted
+        // and we should remove user session from the browser
+        await Promise.all([
+          setCookie('user_id', undefined),
+          setCookie('refresh_token', undefined),
+          setCookie('access_token', undefined),
+          setCookie('csrf_token', undefined),
+        ]);
+
+        throw new Error('Invalid refresh token');
       } else {
-        throw Error(`${res.status} ${res.statusText}`);
+        throw new Error(`${res.status}: ${res.statusText}`);
       }
     }
   } catch (e) {
     console.error('[api] Failed to refresh access token:', e);
-
     accessToken = undefined;
-
-    await Promise.all([
-      setCookie('user_id', undefined),
-      setCookie('refresh_token', undefined),
-      setCookie('access_token', undefined),
-      setCookie('csrf_token', undefined),
-    ]);
   }
 
   return accessToken ? jwtDecode(accessToken.value) : null;
