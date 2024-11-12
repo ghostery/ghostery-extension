@@ -54,8 +54,16 @@ const setup = asyncSetup([
         );
       });
     } else {
-      urlReporter.unload();
-      webRequestReporter?.unload();
+      try {
+        urlReporter.unload();
+      } catch (e) {
+        console.error(e);
+      }
+      try {
+        webRequestReporter?.unload();
+      } catch (e) {
+        console.error(e);
+      }
     }
   }),
 ]);
