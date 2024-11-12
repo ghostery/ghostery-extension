@@ -9,9 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// TODO: This is a temporary solution to avoid throwing errors in iOS Safari
-import './webrequest-monkey-patch.js';
-
 import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
 import asyncSetup from '/utils/setup.js';
@@ -42,19 +39,30 @@ import webRequestReporter from './webrequest-reporter.js';
 const setup = asyncSetup([
   OptionsObserver.addListener('terms', async function reporting(terms) {
     if (terms) {
+      if (webRequestReporter) {
+        webRequestReporter.init().catch((e) => {
+          console.warn(
+            'Failed to initialize request reporting. Leaving the module disabled and continue.',
+            e,
+          );
+        });
+      }
       await urlReporter.init().catch((e) => {
         console.warn(
           'Failed to initialize reporting. Leaving the module disabled and continue.',
           e,
         );
       });
-      if (webRequestReporter) {
-        await webRequestReporter.init();
-      }
     } else {
-      urlReporter.unload();
-      if (webRequestReporter) {
-        webRequestReporter.unload();
+      try {
+        urlReporter.unload();
+      } catch (e) {
+        console.error(e);
+      }
+      try {
+        webRequestReporter?.unload();
+      } catch (e) {
+        console.error(e);
       }
     }
   }),
