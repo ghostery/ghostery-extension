@@ -79,19 +79,19 @@ function isFirefox() {
   return browser.includes('firefox');
 }
 
-function isEdge() {
+export function isEdge() {
   const browser = getBrowser();
   return browser.includes('edge');
-}
-
-function isSafari() {
-  const browser = getBrowser();
-  return browser.includes('safari');
 }
 
 export function isOpera() {
   const browser = getBrowser();
   return browser.includes('opera');
+}
+
+function isSafari() {
+  const browser = getBrowser();
+  return browser.includes('safari');
 }
 
 export function getBrowserId() {
