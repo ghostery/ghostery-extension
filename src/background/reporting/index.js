@@ -11,6 +11,7 @@
 
 import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 
+import asyncSetup from '/utils/setup.js';
 import debug from '/utils/debug.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
@@ -35,26 +36,35 @@ import webRequestReporter from './webrequest-reporter.js';
   }
 })();
 
-OptionsObserver.addListener('terms', function reporting(terms) {
-  if (terms) {
-    urlReporter.init().catch((e) => {
-      console.warn(
-        'Failed to initialize reporting. Leaving the module disabled and continue.',
-        e,
-      );
-    });
-    if (webRequestReporter) {
-      webRequestReporter.init();
+const setup = asyncSetup([
+  OptionsObserver.addListener('terms', async function reporting(terms) {
+    if (terms) {
+      await urlReporter.init().catch((e) => {
+        console.warn(
+          'Failed to initialize reporting. Leaving the module disabled and continue.',
+          e,
+        );
+      });
+      if (webRequestReporter) {
+        await webRequestReporter.init();
+      }
+    } else {
+      urlReporter.unload();
+      if (webRequestReporter) {
+        webRequestReporter.unload();
+      }
     }
-  } else {
-    urlReporter.unload();
-    if (webRequestReporter) {
-      webRequestReporter.uninit();
-    }
-  }
-});
+  }),
+]);
 
 async function onLocationChange(details) {
+  try {
+    setup.pending && (await setup.pending);
+  } catch (e) {
+    console.warn('Reporting is unavailable:', e);
+    return;
+  }
+
   if (!urlReporter.isActive) return;
 
   const { url, frameId, tabId } = details;
