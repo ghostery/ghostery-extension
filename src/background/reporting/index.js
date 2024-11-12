@@ -39,20 +39,23 @@ import webRequestReporter from './webrequest-reporter.js';
 const setup = asyncSetup([
   OptionsObserver.addListener('terms', async function reporting(terms) {
     if (terms) {
+      if (webRequestReporter) {
+        webRequestReporter.init().catch((e) => {
+          console.warn(
+            'Failed to initialize request reporting. Leaving the module disabled and continue.',
+            e,
+          );
+        });
+      }
       await urlReporter.init().catch((e) => {
         console.warn(
           'Failed to initialize reporting. Leaving the module disabled and continue.',
           e,
         );
       });
-      if (webRequestReporter) {
-        await webRequestReporter.init();
-      }
     } else {
       urlReporter.unload();
-      if (webRequestReporter) {
-        webRequestReporter.unload();
-      }
+      webRequestReporter?.unload();
     }
   }),
 ]);
