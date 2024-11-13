@@ -381,6 +381,9 @@
   "learn_more_on_supported_syntax": {
     "message": "了解更多支持的語法"
   },
+  "leave_a_review_today": {
+    "message": "今天留下評論"
+  },
   "load_more": {
     "message": "載入更多"
   },
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "我們知道您依靠 Ghostery 來獲得流暢的 YouTube 體驗。 在出現更完善的解決方案之前，這裡有一個臨時解決方案。"
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "很高興你喜歡Ghostery！幫助其他人也找到我們吧——只需片刻時間。."
   },
   "web_trackers": {
     "message": "網路追蹤器"

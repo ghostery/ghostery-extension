@@ -42,7 +42,7 @@
     "message": "Ausnahme hinzufügen"
   },
   "add_on_s_health": {
-    "message": "Gesundheit des Add-ons"
+    "message": "Zustand des Add-ons"
   },
   "add_website": {
     "message": "Webseite hinzufügen"
@@ -200,7 +200,7 @@
     "description": "Tracker category name"
   },
   "data_collection_summary": {
-    "message": "Datenerfassung Zusammenfassung"
+    "message": "Zusammenfassung der erfassten Daten"
   },
   "detailed_view": {
     "message": "Detailansicht"
@@ -274,7 +274,7 @@
     "message": "Experimentelle Filter"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
-    "message": "Erweiterung: Version, Installationsdatum, zufällige Installationsnummer (von 1 bis 100), Grundeinstellungen, Unterstützungsstatus"
+    "message": "Erweiterung: Version, Installationsdatum, zufällige Installationsnummer (von 1 bis 100), Grundeinstellungen, Fördererstatus"
   },
   "extension_id_is_removed_from_the_stack_traces_": {
     "message": "Die Erweiterungs-ID wird aus den Stack-Traces entfernt."
@@ -351,7 +351,7 @@
     "message": "Ignorieren"
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Add-on-Gesundheit</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> geteilt, um den Datenschutz für die Ghostery-Community zu verbessern.",
+    "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Zustand des Add-ons</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um die Privatsphäre der ganzen Ghostery-Community zu verbessern.",
     "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
@@ -361,7 +361,7 @@
     "message": "Schließen Sie sich Ghostery an"
   },
   "k_anonymity_protected_reports_of_page_shows": {
-    "message": "k-Anonymität-geschützte Berichte von Seitenansichten"
+    "message": "Berichte von Seitenansichten geschützt mit k-Anonymität"
   },
   "keep_disabled": {
     "message": "Deaktiviert lassen"
@@ -380,6 +380,9 @@
   },
   "learn_more_on_supported_syntax": {
     "message": "Erfahre mehr über die unterstützte Syntax"
+  },
+  "leave_a_review_today": {
+    "message": "Hinterlass uns hier eine Bewertung!"
   },
   "load_more": {
     "message": "Mehr laden"
@@ -489,7 +492,7 @@
     "message": "Nutzt KI-basierte Technologie, um verschiedene Tracking-Techniken zu verhindern."
   },
   "privacy_policy": {
-    "message": "Datenschutzrichtlinie"
+    "message": "Datenschutzerklärung"
   },
   "privacy_protection": {
     "message": "Datenschutz"
@@ -572,7 +575,7 @@
     "message": "Software-Lizenzen"
   },
   "statistical_reports_on_navigational_routes": {
-    "message": "statistische Berichte über Navigationsrouten"
+    "message": "Statistische Berichte über Navigationsrouten"
   },
   "submit_a_new_tracker": {
     "message": "Neuen Tracker senden"
@@ -612,7 +615,7 @@
     "message": "Um kritische Absturzinformationen der Erweiterung zu überwachen, werden folgende Informationen über Fehler gesammelt:"
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
-    "message": "Um Datenschutzfunktionen bereitzustellen, werden die folgenden Informationen über Web-Tracker gesammelt:"
+    "message": "Um Datenschutzfunktionen bereitzustellen, werden folgende Informationen über Web-Tracker gesammelt:"
   },
   "tracker_database": {
     "message": "Tracker Datenbank"
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Wir wissen, dass du dich für ein reibungsloses YouTube-Erlebnis auf Ghostery verlässt. Bis eine bessere Lösung gefunden ist, haben wir hier eine vorübergehende Lösung."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "Wir freuen uns so sehr, dass Ghostery dein Herz erobert hat! Hilf anderen, uns auch zu finden – es dauert nur einen Moment."
   },
   "web_trackers": {
     "message": "Web-Tracker"

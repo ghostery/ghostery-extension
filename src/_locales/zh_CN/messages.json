@@ -381,6 +381,9 @@
   "learn_more_on_supported_syntax": {
     "message": "了解更多支持的语法"
   },
+  "leave_a_review_today": {
+    "message": "请留下评论"
+  },
   "load_more": {
     "message": "加载更多"
   },
@@ -489,7 +492,7 @@
     "message": "阻止各种 AI 驱动的跟踪技术。"
   },
   "privacy_policy": {
-    "message": "Privacy Policy"
+    "message": "隐私政策"
   },
   "privacy_protection": {
     "message": "隐私保护"
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "我们知道，您依赖 Ghostery 来获得流畅的 YouTube 体验。在更完善的解决方案出现之前，这里有一个临时解决方案。"
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "我们很高兴Ghostery赢得了你的喜爱！帮助其他人也找到我们——这只需片刻时间。."
   },
   "web_trackers": {
     "message": "网络追踪器"

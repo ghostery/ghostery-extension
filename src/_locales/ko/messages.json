@@ -381,6 +381,9 @@
   "learn_more_on_supported_syntax": {
     "message": "지원되는 문법에 대해 알아보기"
   },
+  "leave_a_review_today": {
+    "message": "오늘 리뷰를 남겨보세요"
+  },
   "load_more": {
     "message": "더 보기"
   },
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "더 나은 YouTube 사용 환경을 위해 Ghostery 사용하는 것을 알고 있습니다. 보다 나은 해결책이 출시되기 전까지 임시 조치를 취할 수 있습니다."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "고스트리가 마음에 드셨다니 정말 기쁩니다! 다른 사람들도 저희를 찾을 수 있도록 도와주세요 - 잠깐이면 됩니다."
   },
   "web_trackers": {
     "message": "웹 추적기"

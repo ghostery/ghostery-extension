@@ -381,6 +381,9 @@
   "learn_more_on_supported_syntax": {
     "message": "En savoir plus sur la syntaxe prise en charge"
   },
+  "leave_a_review_today": {
+    "message": "Laissez un avis aujourd'hui"
+  },
   "load_more": {
     "message": "Charger plus"
   },
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Nous savons que tu comptes sur Ghostery pour une expérience YouTube fluide. En attendant qu'une solution plus raffinée émerge, voici une solution temporaire."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "Nous sommes ravis que Ghostery ait conquis votre cœur ! Aidez les autres à nous trouver aussi - cela ne prend qu'un instant."
   },
   "web_trackers": {
     "message": "Trackers Web"

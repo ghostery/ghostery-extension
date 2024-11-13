@@ -381,6 +381,9 @@
   "learn_more_on_supported_syntax": {
     "message": "Узнайте больше о поддерживаемом синтаксисе"
   },
+  "leave_a_review_today": {
+    "message": "Оставьте отзыв сегодня"
+  },
   "load_more": {
     "message": "Показать еще"
   },
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Мы знаем, что ты полагаешься на Ghostery для бесперебойной работы с YouTube. Пока не появится более совершенное решение, вот временное исправление."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "Мы рады, что Ghostery вам по душе! Помогите другим найти нас — это займет всего минуту."
   },
   "web_trackers": {
     "message": "Веб-трекеры"
