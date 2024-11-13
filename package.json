@@ -50,7 +50,7 @@
     "@ghostery/adblocker": "^2.0.3",
     "@ghostery/adblocker-webextension": "^2.0.3",
     "@github/relative-time-element": "^4.3.0",
-    "@sentry/browser": "^8.37.1",
+    "@sentry/browser": "^8.38.0",
     "@whotracksme/reporting": "^5.1.33",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.8",
