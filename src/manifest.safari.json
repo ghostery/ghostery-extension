@@ -107,7 +107,6 @@
     {
       "resources": [
         "pages/trackers-preview/index.html",
-        "pages/notifications/opera-serp.html",
         "content_scripts/whotracksme/ghostery-whotracksme.js"
       ],
       "matches": ["<all_urls>"],
