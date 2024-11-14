@@ -1,23 +1,23 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: '/'
     schedule:
-      interval: daily
-      time: "04:00"
+      interval: weekly
+      time: '06:00'
     open-pull-requests-limit: 99
     groups:
       wdio:
         patterns:
-          - "@wdio/*"
+          - '@wdio/*'
       adblocker:
         patterns:
-          - "@ghostery/adblocker*"
+          - '@ghostery/adblocker*'
       web-ext:
         patterns:
-          - "web-ext"
-          - "addon-linter"
+          - 'web-ext'
+          - 'addon-linter'
       eslint:
         patterns:
-          - "eslint*"
-          - "@eslint/*"
+          - 'eslint*'
+          - '@eslint/*'
