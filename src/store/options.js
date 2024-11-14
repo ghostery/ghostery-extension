@@ -10,7 +10,6 @@
  */
 
 import { store } from 'hybrids';
-import { deleteDB } from 'idb';
 
 import { getUserOptions, setUserOptions } from '/utils/api.js';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
@@ -99,60 +98,25 @@ const Options = {
 
   [store.connect]: {
     async get() {
-      let { options, optionsVersion } = await chrome.storage.local.get([
+      let { options = {}, optionsVersion } = await chrome.storage.local.get([
         'options',
         'optionsVersion',
       ]);
-
-      // Try to migrate options from v8 if options
-      // are not set (the initial get) for supported platforms
-      if (!options) {
-        options = __PLATFORM__ !== 'safari' ? await migrateFromV8() : {};
-      }
 
       // Set version to the latest one if it is not set
       // or trigger migration for older versions
       if (!optionsVersion) {
         chrome.storage.local.set({ optionsVersion: OPTIONS_VERSION });
       } else if (optionsVersion < OPTIONS_VERSION) {
-        const keys = [];
-
-        if (optionsVersion < 2) {
-          // Migrate 'paused' array to record
-          if (options.paused) {
-            options.paused = options.paused.reduce((acc, { id, revokeAt }) => {
-              acc[id] = { revokeAt };
-              return acc;
-            }, {});
-          }
-        }
-
-        if (optionsVersion < 3) {
-          // Check if the user has custom filters, so we need to
-          // reflect the enabled state in the options
-          const { text } = await store.resolve(CustomFilters);
-          if (text) {
-            options.customFilters = {
-              ...options.customFilters,
-              enabled: true,
-            };
-            keys.push('customFilters');
-          }
-        }
-
-        // Flush updated options and version to the storage
-        await chrome.storage.local.set({
-          options,
-          optionsVersion: OPTIONS_VERSION,
-        });
-
-        // Send updated options to the server
-        Promise.resolve().then(() => sync(options, keys));
+        await migrate(options, optionsVersion);
       }
 
-      return __PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium'
-        ? applyManagedOptions(options)
-        : options;
+      // Apply managed options for supported platforms
+      if (__PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium') {
+        return manage(options);
+      }
+
+      return options;
     },
     async set(_, options, keys) {
       options = options || {};
@@ -196,8 +160,44 @@ chrome.runtime.onMessage.addListener((msg) => {
   }
 });
 
+async function migrate(options, optionsVersion) {
+  const keys = [];
+
+  if (optionsVersion < 2) {
+    // Migrate 'paused' array to record
+    if (options.paused) {
+      options.paused = options.paused.reduce((acc, { id, revokeAt }) => {
+        acc[id] = { revokeAt };
+        return acc;
+      }, {});
+    }
+  }
+
+  if (optionsVersion < 3) {
+    // Check if the user has custom filters, so we need to
+    // reflect the enabled state in the options
+    const { text } = await store.resolve(CustomFilters);
+    if (text) {
+      options.customFilters = {
+        ...options.customFilters,
+        enabled: true,
+      };
+      keys.push('customFilters');
+    }
+  }
+
+  // Flush updated options and version to the storage
+  await chrome.storage.local.set({
+    options,
+    optionsVersion: OPTIONS_VERSION,
+  });
+
+  // Send updated options to the server
+  Promise.resolve().then(() => sync(options, keys));
+}
+
 let managed = __PLATFORM__ === 'chromium' && isOpera() ? false : null;
-async function applyManagedOptions(options) {
+async function manage(options) {
   if (managed === false) return options;
 
   if (managed === null) {
@@ -307,74 +307,5 @@ export async function sync(options, keys) {
     }
   } catch (e) {
     console.error(`[options] Error while syncing options: `, e);
-  }
-}
-
-async function migrateFromV8() {
-  try {
-    const options = {};
-    const storage = await chrome.storage.local.get(null);
-
-    // Proceed if the storage contains data from v2
-    if ('version_history' in storage) {
-      options.blockAds = storage.enable_ad_block ?? true;
-      options.blockTrackers = storage.enable_anti_tracking ?? true;
-      options.blockAnnoyances = storage.enable_autoconsent ?? true;
-
-      options.onboarding = {
-        shown: storage.setup_shown || 0,
-      };
-
-      options.terms = storage.setup_complete || false;
-
-      options.wtmSerpReport = storage.enable_wtm_serp_report ?? true;
-
-      options.paused = storage.site_whitelist.reduce((acc, domain) => {
-        acc[domain] = { revokeAt: 0 };
-        return acc;
-      }, {});
-
-      options.installDate = storage.install_date || '';
-
-      // Clear the storage
-      await chrome.storage.local.clear();
-
-      // Delete indexedDBs
-      // Notice: Doesn't wait to avoid blocking the migrated options
-      [
-        '__dbnames',
-        'antitracking',
-        'cliqz-adb',
-        'cliqz-kv-store',
-        'hpnv2',
-      ].forEach((name) => deleteDB(name).catch(() => {}));
-
-      // Bring back metrics and UTMs
-      await chrome.storage.local.set({
-        metrics: storage.metrics,
-        utms: {
-          utm_campaign: storage.utm_campaign,
-          utm_source: storage.utm_source,
-        },
-      });
-
-      // Set options by hand to make sure, that
-      // paused side effects are triggered
-      await Options[store.connect].set(undefined, options, [
-        'engines',
-        'onboarding',
-        'terms',
-        'wtmSerpReport',
-        'paused',
-        'installDate',
-      ]);
-
-      console.info(`[options] Successfully migrated options from v8`, options);
-    }
-
-    return options;
-  } catch (e) {
-    console.error(`[options] Error while migrating options`, e);
-    return {};
   }
 }
