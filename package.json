@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.4.13",
+  "version": "10.4.14",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines.js",
@@ -51,7 +51,7 @@
     "@ghostery/adblocker-webextension": "^2.0.4",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.38.0",
-    "@whotracksme/reporting": "^5.1.33",
+    "@whotracksme/reporting": "^5.1.34",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.8",
     "idb": "^8.0.0",
