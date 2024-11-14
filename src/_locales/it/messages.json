@@ -381,6 +381,9 @@
   "learn_more_on_supported_syntax": {
     "message": "Scopri di più sulla sintassi supportata"
   },
+  "leave_a_review_today": {
+    "message": "Lascia una recensione oggi"
+  },
   "load_more": {
     "message": "Carica altro"
   },
@@ -489,7 +492,7 @@
     "message": "Impedisce varie tecniche di tracciamento tramite tecnologia Al-driven."
   },
   "privacy_policy": {
-    "message": "Privacy Policy"
+    "message": "Informativa sulla privacy"
   },
   "privacy_protection": {
     "message": "Protezione della privacy"
@@ -688,6 +691,9 @@
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Sappiamo che ti affidi a Ghostery per un'esperienza fluida su YouTube. In attesa di una soluzione più raffinata, ecco una soluzione temporanea."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
+    "message": "Siamo così felici che Ghostery abbia conquistato il tuo cuore! Aiuta anche gli altri a trovarci: ci vuole solo un momento."
   },
   "web_trackers": {
     "message": "Tracker Web"
