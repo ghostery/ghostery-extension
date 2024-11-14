@@ -302,11 +302,13 @@ manifest.web_accessible_resources?.forEach((entry) => {
   paths.forEach((path) => {
     if (path.includes('/redirects/')) return;
 
-    if (!path.match(/\.html$/)) {
+    if (path.match(/\.(html)$/)) {
+      source.push(path);
+    } else if (path.match(/\.(js)$/)) {
+      content_scripts.push(path);
+    } else {
       throw new Error(`Unsupported web_accessible_resource: ${path}`);
     }
-
-    source.push(path);
   });
 });
 
