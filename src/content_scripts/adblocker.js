@@ -92,6 +92,8 @@ const observer = new MutationObserver((mutations) => {
       }
       case 'childList': {
         for (const root of mutation.addedNodes) {
+          if (root.nodeType !== Node.ELEMENT_NODE) continue;
+
           const treeWalker = document.createTreeWalker(
             root,
             NodeFilter.SHOW_ELEMENT,
