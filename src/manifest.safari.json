@@ -95,10 +95,6 @@
       "run_at": "document_start"
 		},
     {
-      "js": ["content_scripts/whotracksme/ghostery-whotracksme.js"],
-      "run_at": "background_execute_script"
-    },
-    {
       "js": ["content_scripts/trackers-preview.js"],
       "run_at": "background_execute_script"
     },
@@ -111,7 +107,8 @@
     {
       "resources": [
         "pages/trackers-preview/index.html",
-        "pages/notifications/opera-serp.html"
+        "pages/notifications/opera-serp.html",
+        "content_scripts/whotracksme/ghostery-whotracksme.js"
       ],
       "matches": ["<all_urls>"],
       "all_frames": true,
