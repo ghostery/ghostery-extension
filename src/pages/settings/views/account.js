@@ -26,8 +26,8 @@ function openGhosteryPage(url) {
         details.tabId === tab.id &&
         details.url.startsWith(ACCOUNT_PAGE_URL)
       ) {
-        chrome.tabs.remove(tab.id);
         chrome.webNavigation.onCommitted.removeListener(onSuccess);
+        chrome.tabs.remove(tab.id);
       }
     };
 
@@ -36,7 +36,12 @@ function openGhosteryPage(url) {
         chrome.webNavigation.onCommitted.removeListener(onSuccess);
         chrome.tabs.onRemoved.removeListener(onRemove);
 
+        // The tab is closed before the background listeners can catch the event
+        // so we need to refresh session and trigger sync manually
         store.clear(Session);
+        chrome.runtime.sendMessage({ action: 'syncOptions' });
+
+        // Restore the original tab
         chrome.tabs.update(currentTab[0].id, { active: true });
       }
     };
@@ -120,34 +125,27 @@ export default {
                   </div>
                 `)}
           </settings-card>
-          ${store.ready(session) &&
-          html`
-            <div
-              layout="grid"
-              style="${{ opacity: !session.user ? 0.5 : undefined }}"
+          <div layout="grid">
+            <ui-toggle
+              value="${options.sync}"
+              onchange="${html.set(options, 'sync')}"
             >
-              <ui-toggle
-                disabled="${!session.user}"
-                value="${session.user && options.sync}"
-                onchange="${session.user && html.set(options, 'sync')}"
-              >
-                <div layout="column grow gap:0.5">
-                  <div layout="row gap items:center">
-                    <ui-icon
-                      name="websites"
-                      color="gray-600"
-                      layout="size:2"
-                    ></ui-icon>
-                    <ui-text type="headline-xs">Settings Sync</ui-text>
-                  </div>
-                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
-                    Saves and synchronizes your custom settings between browsers
-                    and devices.
-                  </ui-text>
+              <div layout="column grow gap:0.5">
+                <div layout="row gap items:center">
+                  <ui-icon
+                    name="websites"
+                    color="gray-600"
+                    layout="size:2"
+                  ></ui-icon>
+                  <ui-text type="headline-xs">Settings Sync</ui-text>
                 </div>
-              </ui-toggle>
-            </div>
-          `}
+                <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                  Saves and synchronizes your custom settings between browsers
+                  and devices.
+                </ui-text>
+              </div>
+            </ui-toggle>
+          </div>
         </section>
       </settings-page-layout>
     </template>

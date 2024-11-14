@@ -25,13 +25,14 @@ mount(document.body, {
   `,
 });
 
-/* Ping telemetry on panel open */
+// Ping telemetry on panel open
 chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });
 
-/*
-  Safari extension popup has a bug, which focuses visibly the first element on the page
-  when the popup is opened. This is a workaround to remove the focus.
-*/
+// Sync options with background
+chrome.runtime.sendMessage({ action: 'syncOptions' });
+
+// Safari extension popup has a bug, which focuses visibly the first element on the page
+// when the popup is opened. This is a workaround to remove the focus.
 if (__PLATFORM__ === 'safari') {
   window.addEventListener('load', () => {
     setTimeout(() => {

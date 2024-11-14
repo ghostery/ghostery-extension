@@ -24,6 +24,7 @@ import './serp.js';
 
 import './helpers.js';
 import './external.js';
+import './sync.js';
 
 import './reporting/index.js';
 import './telemetry/index.js';

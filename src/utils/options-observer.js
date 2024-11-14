@@ -11,7 +11,7 @@
 import { store } from 'hybrids';
 import Options from '/store/options.js';
 
-function isOptionEqual(a, b) {
+export function isOptionEqual(a, b) {
   if (typeof b !== 'object' || b === null) return a === b;
 
   const aKeys = Object.keys(a);
