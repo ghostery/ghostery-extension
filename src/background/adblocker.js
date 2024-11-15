@@ -172,9 +172,9 @@ export const setup = asyncSetup([
 async function injectScriptlets(scripts, tabId, frameId) {
   // Dynamically injected scriptlets can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
-  if (debugMode) {
+  if (true) {
     scripts = [
-      `console.info('[adblocker]', 'running scriptlets (${scripts.length})');`,
+      `console.info('[adblocker]', 'running scriptlets (${scripts.length})', performance.now(), document.title, ${tabId}, ${frameId});`,
       ...scripts,
     ];
   }
@@ -182,8 +182,10 @@ async function injectScriptlets(scripts, tabId, frameId) {
   const scriptlets = `(function(){ ${scripts.join('\n\n')}} )();`;
 
   function scriptletInjector(code) {
+    console.log('scripting')
     let content = decodeURIComponent(code);
     const script = document.createElement('script');
+    script.id = 'ghostery'
     if (window.trustedTypes) {
       const trustedTypePolicy = window.trustedTypes.createPolicy(
         `ghostery-${Math.round(Math.random() * 1000000)}`,
@@ -195,7 +197,7 @@ async function injectScriptlets(scripts, tabId, frameId) {
     }
     script.textContent = content;
     (document.head || document.documentElement).appendChild(script);
-    script.remove();
+    // script.remove();
   }
 
   chrome.scripting.executeScript(
@@ -217,6 +219,13 @@ async function injectScriptlets(scripts, tabId, frameId) {
       }
     },
   );
+
+  chrome.tabs.executeScript(tabId, {
+    frameId: frameId,
+    code: scriptlets+"; console.log('tabs');",
+    matchAboutBlank: true,
+    runAt: 'document_start',
+  });
 }
 
 function injectStyles(styles, tabId, frameId) {
@@ -308,6 +317,14 @@ async function injectCosmetics(details, config) {
   }
 }
 
+chrome.webNavigation.onBeforeNavigate.addListener(
+  (details) => {
+    injectCosmetics(details, { bootstrap: true });
+  },
+  { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+);
+
+
 chrome.webNavigation.onCommitted.addListener(
   (details) => {
     injectCosmetics(details, { bootstrap: true });
@@ -369,6 +386,10 @@ function isTrusted(request, type) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
+      if (details.type === 'main_frame') {
+        injectCosmetics(details, { bootstrap: true });
+      }
+
       if (details.tabId < 0 || details.type === 'main_frame') return;
 
       if (setup.pending) {
