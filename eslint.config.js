@@ -18,6 +18,15 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'Program > ExpressionStatement > AwaitExpression',
+          message: 'Global await in module body is not allowed.',
+        },
+      ],
+    },
   },
   {
     files: ['scripts/**/*.js', 'tests/**/*.js'],
