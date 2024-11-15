@@ -319,6 +319,7 @@ async function injectCosmetics(details, config) {
 
 chrome.webNavigation.onBeforeNavigate.addListener(
   (details) => {
+    console.warn("XXXX  onBeforeNavigate");
     injectCosmetics(details, { bootstrap: true });
   },
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
@@ -327,6 +328,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(
 
 chrome.webNavigation.onCommitted.addListener(
   (details) => {
+    console.warn("XXXX  onCommitted");
     injectCosmetics(details, { bootstrap: true });
   },
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
@@ -383,10 +385,23 @@ function isTrusted(request, type) {
   return false;
 }
 
+chrome.webRequest.onResponseStarted.addListener(
+  details => {
+    console.warn("XXXX  onResponseStarted");
+    if (details.tabId < 0) return;
+    injectCosmetics(details, { bootstrap: true });
+  },
+  {
+      types: [ 'main_frame', 'sub_frame' ],
+      urls: [ 'http://*/*', 'https://*/*' ]
+  }
+);
+
 if (__PLATFORM__ === 'firefox') {
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
       if (details.type === 'main_frame') {
+        console.warn("XXXX  onBeforeRequest");
         injectCosmetics(details, { bootstrap: true });
       }
 
