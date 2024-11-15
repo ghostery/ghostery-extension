@@ -367,9 +367,16 @@ function isTrusted(request, type) {
 }
 
 if (__PLATFORM__ === 'firefox') {
+  function isExtensionRequest(details) {
+    return (
+      (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
+      details.originUrl.startsWith('moz-extension://')
+    );
+  }
+
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-      if (details.tabId < 0 || details.type === 'main_frame') return;
+      if (details.type === 'main_frame' || isExtensionRequest(details)) return;
 
       if (setup.pending) {
         console.error('[adblocker] not ready for network requests blocking');
@@ -403,7 +410,7 @@ if (__PLATFORM__ === 'firefox') {
 
   chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-      if (details.tabId < 0 || details.type === 'main_frame') return;
+      if (isExtensionRequest(details)) return;
 
       if (setup.pending) {
         console.error('[adblocker] not ready for network headers modification');
@@ -411,22 +418,12 @@ if (__PLATFORM__ === 'firefox') {
       }
 
       const request = Request.fromRequestDetails(details);
-      const cspPolicies = [];
-      const htmlFilters = [];
 
-      if (!isTrusted(request, details.type)) {
-        const engine = engines.get(engines.MAIN_ENGINE);
+      if (isTrusted(request, details.type)) return;
 
-        htmlFilters.push(...engine.getHtmlFilters(request));
+      const engine = engines.get(engines.MAIN_ENGINE);
 
-        if (details.type === 'main_frame') {
-          const policies = engine.getCSPDirectives(request);
-          if (policies !== undefined) {
-            cspPolicies.push(...policies);
-          }
-        }
-      }
-
+      const htmlFilters = engine.getHtmlFilters(request);
       if (htmlFilters.length !== 0) {
         request.modified = true;
         updateTabStats(details.tabId, [request]);
@@ -437,9 +434,10 @@ if (__PLATFORM__ === 'firefox') {
         );
       }
 
-      if (cspPolicies.length !== 0) {
-        return updateResponseHeadersWithCSP(details, cspPolicies);
-      }
+      if (details.type !== 'main_frame') return;
+      const cspPolicies = engine.getCSPDirectives(request);
+      if (!cspPolicies || cspPolicies.length === 0) return;
+      return updateResponseHeadersWithCSP(details, cspPolicies);
     },
     { urls: ['http://*/*', 'https://*/*'] },
     ['blocking', 'responseHeaders'],
