@@ -96,6 +96,18 @@ describe('Advanced Features', function () {
       });
     });
 
+    // Scope for Firefox webRequest API tests
+    if (browser.isFirefox) {
+      it('adds $replace network filter', async function () {
+        await setCustomFilters([
+          `||${PAGE_DOMAIN}^$replace=/<title>.*<\\/title>/<title>hello world<\\/title>/`,
+        ]);
+
+        await browser.url(PAGE_URL, { wait: 'networkIdle' });
+        await expect(await browser.getTitle()).toBe('hello world');
+      });
+    }
+
     it('removes custom filters in settings page', async function () {
       await setCustomFilters([]);
       await setPrivacyToggle('custom-filters', false);

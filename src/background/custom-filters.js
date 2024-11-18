@@ -27,7 +27,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
-import { setup } from '/background/adblocker.js';
+import { setup, reloadMainEngine } from '/background/adblocker.js';
 
 const convert =
   __PLATFORM__ === 'chromium'
@@ -176,6 +176,10 @@ async function update(text, { trustedScriptlets }) {
 
   result.errors = errors;
 
+  // Update main engine with custom filters
+  await reloadMainEngine();
+
+  // Update DNR rules for Chromium and Safari
   if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
     const dnrResult = await Promise.allSettled(
       [...networkFilters].map((filter) => convert(filter)),
@@ -221,7 +225,7 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
 
     // If we cannot initialize engine, we need to update it
     if (!(await engines.init(engines.CUSTOM_ENGINE))) {
-      update((await store.resolve(CustomFilters)).text, {
+      await update((await store.resolve(CustomFilters)).text, {
         trustedScriptlets,
       });
     }
@@ -232,7 +236,7 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
       return;
     }
 
-    update(enabled ? (await store.resolve(CustomFilters)).text : '', {
+    await update(enabled ? (await store.resolve(CustomFilters)).text : '', {
       trustedScriptlets,
     });
   }
