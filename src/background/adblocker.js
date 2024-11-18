@@ -44,9 +44,9 @@ function getEnabledEngines(config) {
       list.push(engines.FIXES_ENGINE);
     }
 
-    if (config.customFilters.enabled) {
-      list.push(engines.CUSTOM_ENGINE);
-    }
+    // Custom filters should be always added as
+    // they have own settings which defines if they are enabled
+    list.push(engines.CUSTOM_ENGINE);
 
     return list;
   }
@@ -58,7 +58,7 @@ function pause(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function reloadMainEngine() {
+export async function reloadMainEngine() {
   // Delay the reload to avoid UI freezes in Firefox and Safari
   if (__PLATFORM__ !== 'chromium') await pause(1000);
 
@@ -83,12 +83,10 @@ async function reloadMainEngine() {
       `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
     );
   } else {
-    engines.create(engines.MAIN_ENGINE);
+    await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
 }
-
-engines.addChangeListener(engines.CUSTOM_ENGINE, reloadMainEngine);
 
 let updating = false;
 async function updateEngines() {
@@ -370,7 +368,7 @@ if (__PLATFORM__ === 'firefox') {
   function isExtensionRequest(details) {
     return (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
-      details.originUrl.startsWith('moz-extension://')
+      details.originUrl?.startsWith('moz-extension://')
     );
   }
 
