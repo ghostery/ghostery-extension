@@ -383,6 +383,31 @@ const buildPromise = build({
       },
     },
   },
+  plugins: [
+    // This custom plugin cleans ups chunks imports of the `.html` inputs
+    //  to only include CSS files. This is necessary because Vite generates
+    // every imported JS file as script tag in the resulting HTML file.
+    // It is related to our custom usage, where we don't bundle JS into single files.
+    {
+      name: 'clean-up-html-imports',
+      enforce: 'pre',
+      generateBundle(options, bundle) {
+        for (const chunk of Object.values(bundle)) {
+          if (chunk.fileName.endsWith('.html.js')) {
+            for (const name of chunk.imports) {
+              const importChunk = bundle[name];
+              if (importChunk.type === 'chunk') {
+                // Imports of the single chunk generated from HTML should only include CSS files
+                importChunk.imports = importChunk.imports.filter((name) =>
+                  name.endsWith('.css.js'),
+                );
+              }
+            }
+          }
+        }
+      },
+    },
+  ],
 });
 
 // --- Build content scripts ---
