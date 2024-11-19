@@ -226,7 +226,6 @@ async function injectScriptlets(scripts, tabId, frameId, hostname) {
       try {
         const contentScript = await browser.contentScripts.register({
           js: [
-            { code: 'console.log(1111)' },
             {
               code: `(${scriptletInjector.toString()})("${encodeURIComponent(scriptlets)}")`,
             },
@@ -309,7 +308,7 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
   const isBootstrap = config.bootstrap;
-  const scriptletsOnly = Boolean(options.scriptletsOnly);
+  const scriptletsOnly = Boolean(config.scriptletsOnly);
 
   {
     const cosmetics = engine.getCosmeticsFilters({
