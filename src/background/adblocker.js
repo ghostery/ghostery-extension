@@ -87,7 +87,7 @@ export async function reloadMainEngine() {
     console.info('[adblocker] Main engine reloaded with no filters');
   }
   if (__PLATFORM__ === 'firefox') {
-    contentScripts.clear();
+    contentScripts.unregisterAll();
   }
 }
 
@@ -173,23 +173,40 @@ export const setup = asyncSetup([
 const contentScripts = (() => {
   const map = new Map();
   return {
-    set(key, value) {
-      this.delete(key);
-      map.set(key, value);
-    },
-    has(key) {
-      return map.has(key);
-    },
-    delete(key) {
-      const contentScript = map.get(key);
-      if (contentScript) {
-        contentScript.unregister();
-        map.delete(key);
+    async register(hostname, code) {
+      this.unregister(hostname);
+      try {
+        const contentScript = await browser.contentScripts.register({
+          js: [
+            {
+              code,
+            },
+          ],
+          allFrames: true,
+          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+          matchAboutBlank: true,
+          matchOriginAsFallback: true,
+          runAt: 'document_start',
+        });
+        map.set(hostname, contentScript);
+      } catch (e) {
+        console.warn(e);
+        contentScripts.unregister(hostname);
       }
     },
-    clear() {
-      for (const key of map.keys()) {
-        this.delete(key);
+    isRegistered(hostname) {
+      return map.has(hostname);
+    },
+    unregister(hostname) {
+      const contentScript = map.get(hostname);
+      if (contentScript) {
+        contentScript.unregister();
+        map.delete(hostname);
+      }
+    },
+    unregisterAll() {
+      for (const hostname of map.keys()) {
+        this.unregister(hostname);
       }
     },
   };
@@ -226,27 +243,14 @@ async function injectScriptlets(scripts, tabId, frameId, hostname) {
 
   if (__PLATFORM__ === 'firefox') {
     if (scripts.length === 0) {
-      contentScripts.delete(hostname);
-    } else if (!contentScripts.has(hostname)) {
-      try {
-        const contentScript = await browser.contentScripts.register({
-          js: [
-            {
-              code: `(${scriptletInjector.toString()})("${encodeURIComponent(scriptlets)}")`,
-            },
-          ],
-          allFrames: true,
-          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
-          matchAboutBlank: true,
-          matchOriginAsFallback: true,
-          runAt: 'document_start',
-        });
-        contentScripts.set(hostname, contentScript);
-      } catch (e) {
-        console.warn(e);
-        contentScripts.delete(hostname);
-      }
+      contentScripts.unregister(hostname);
+    } else if (!contentScripts.isRegistered(hostname)) {
+      await contentScripts.register(
+        hostname,
+        `(${scriptletInjector.toString()})("${encodeURIComponent(scriptlets)}")`,
+      );
     }
+    // do nothing if already registered
   } else {
     if (scripts.length === 0) return;
 
