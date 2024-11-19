@@ -249,31 +249,32 @@ async function injectScriptlets(scripts, tabId, frameId, hostname) {
         hostname,
         `(${scriptletInjector.toString()})("${encodeURIComponent(scriptlets)}")`,
       );
+    } else {
+      // do nothing if already registered
     }
-    // do nothing if already registered
-  } else {
-    if (scripts.length === 0) return;
-
-    chrome.scripting.executeScript(
-      {
-        injectImmediately: true,
-        world:
-          chrome.scripting.ExecutionWorld?.MAIN ??
-          (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-        target: {
-          tabId,
-          frameIds: [frameId],
-        },
-        func: scriptletInjector,
-        args: [encodeURIComponent(scriptlets)],
-      },
-      () => {
-        if (chrome.runtime.lastError) {
-          console.warn(chrome.runtime.lastError);
-        }
-      },
-    );
+    return;
   }
+  if (scripts.length === 0) return;
+
+  chrome.scripting.executeScript(
+    {
+      injectImmediately: true,
+      world:
+        chrome.scripting.ExecutionWorld?.MAIN ??
+        (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+      target: {
+        tabId,
+        frameIds: [frameId],
+      },
+      func: scriptletInjector,
+      args: [encodeURIComponent(scriptlets)],
+    },
+    () => {
+      if (chrome.runtime.lastError) {
+        console.warn(chrome.runtime.lastError);
+      }
+    },
+  );
 }
 
 function injectStyles(styles, tabId, frameId) {
