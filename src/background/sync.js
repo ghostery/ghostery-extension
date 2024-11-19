@@ -112,7 +112,9 @@ const syncOptions = debounce(
 );
 
 // Sync options on startup and when options change
-OptionsObserver.addListener(syncOptions);
+OptionsObserver.addListener(function sync(options, prevOptions) {
+  syncOptions(options, prevOptions);
+});
 
 // Sync options when a user logs in/out directly
 // from the ghostery.com page (not from the settings page)

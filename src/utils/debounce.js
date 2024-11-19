@@ -23,9 +23,12 @@ export default function debounce(fn, { waitFor, maxWait }) {
   let args = [];
   const run = () => {
     clear();
-    fn(...args);
 
-    args = [];
+    try {
+      fn(...args);
+    } finally {
+      args = [];
+    }
   };
 
   return (...latestArgs) => {
