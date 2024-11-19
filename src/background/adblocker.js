@@ -191,7 +191,7 @@ const contentScripts = (() => {
         map.set(hostname, contentScript);
       } catch (e) {
         console.warn(e);
-        contentScripts.unregister(hostname);
+        this.unregister(hostname);
       }
     },
     isRegistered(hostname) {
