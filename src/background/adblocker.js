@@ -86,6 +86,7 @@ export async function reloadMainEngine() {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
+  contentScripts.clear();
 }
 
 let updating = false;
@@ -167,7 +168,29 @@ export const setup = asyncSetup([
  * Cosmetics injection
  */
 
-async function injectScriptlets(scripts, tabId, frameId) {
+const contentScripts = (() => {
+  const map = new Map();
+  return {
+    set(key, value) {
+      map.set(key, value);
+    },
+    has(key) {
+      return map.has(key);
+    },
+    delete(key) {
+      const contentScript = map.get(key);
+      contentScript.unregister();
+      map.delete(key);
+    },
+    clear() {
+      for (const key of map.keys()) {
+        this.delete(key);
+      }
+    },
+  };
+})();
+
+async function injectScriptlets(scripts, tabId, frameId, hostname) {
   // Dynamically injected scriptlets can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   if (debugMode) {
@@ -196,25 +219,53 @@ async function injectScriptlets(scripts, tabId, frameId) {
     script.remove();
   }
 
-  chrome.scripting.executeScript(
-    {
-      injectImmediately: true,
-      world:
-        chrome.scripting.ExecutionWorld?.MAIN ??
-        (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-      target: {
-        tabId,
-        frameIds: [frameId],
-      },
-      func: scriptletInjector,
-      args: [encodeURIComponent(scriptlets)],
-    },
-    () => {
-      if (chrome.runtime.lastError) {
-        console.warn(chrome.runtime.lastError);
+  if (__PLATFORM__ === 'firefox') {
+    if (scripts.length === 0) {
+      contentScripts.delete(hostname);
+    } else if (!contentScripts.has(hostname)) {
+      try {
+        const contentScript = await browser.contentScripts.register({
+          js: [
+            { code: 'console.log(1111)' },
+            {
+              code: `(${scriptletInjector.toString()})("${encodeURIComponent(scriptlets)}")`,
+            },
+          ],
+          allFrames: true,
+          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+          matchAboutBlank: true,
+          matchOriginAsFallback: true,
+          runAt: 'document_start',
+        });
+        contentScripts.set(hostname, contentScript);
+      } catch (e) {
+        console.warn(e);
+        contentScripts.delete(hostname);
       }
-    },
-  );
+    }
+  } else {
+    if (scripts.length === 0) return;
+
+    chrome.scripting.executeScript(
+      {
+        injectImmediately: true,
+        world:
+          chrome.scripting.ExecutionWorld?.MAIN ??
+          (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+        target: {
+          tabId,
+          frameIds: [frameId],
+        },
+        func: scriptletInjector,
+        args: [encodeURIComponent(scriptlets)],
+      },
+      () => {
+        if (chrome.runtime.lastError) {
+          console.warn(chrome.runtime.lastError);
+        }
+      },
+    );
+  }
 }
 
 function injectStyles(styles, tabId, frameId) {
@@ -258,6 +309,7 @@ async function injectCosmetics(details, config) {
 
   const engine = engines.get(engines.MAIN_ENGINE);
   const isBootstrap = config.bootstrap;
+  const scriptletsOnly = Boolean(options.scriptletsOnly);
 
   {
     const cosmetics = engine.getCosmeticsFilters({
@@ -279,8 +331,12 @@ async function injectCosmetics(details, config) {
       getRulesFromDOM: !isBootstrap,
     });
 
-    if (isBootstrap && cosmetics.scripts.length > 0) {
-      injectScriptlets(cosmetics.scripts, tabId, frameId);
+    if (isBootstrap) {
+      injectScriptlets(cosmetics.scripts, tabId, frameId, hostname);
+    }
+
+    if (scriptletsOnly) {
+      return;
     }
 
     if (cosmetics.styles) {
@@ -365,6 +421,13 @@ function isTrusted(request, type) {
 }
 
 if (__PLATFORM__ === 'firefox') {
+  chrome.webNavigation.onBeforeNavigate.addListener(
+    (details) => {
+      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
+    },
+    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+  );
+
   function isExtensionRequest(details) {
     return (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
