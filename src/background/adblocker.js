@@ -179,8 +179,10 @@ const contentScripts = (() => {
     },
     delete(key) {
       const contentScript = map.get(key);
-      contentScript.unregister();
-      map.delete(key);
+      if (contentScript) {
+        contentScript.unregister();
+        map.delete(key);
+      }
     },
     clear() {
       for (const key of map.keys()) {
