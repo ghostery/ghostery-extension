@@ -124,7 +124,7 @@ async function updateEngines() {
 }
 
 const HOUR_IN_MS = 60 * 60 * 1000;
-export const setup = asyncSetup([
+export const setup = asyncSetup('adblocker', [
   OptionsObserver.addListener(
     async function adblockerEngines(value, lastValue) {
       options = value;

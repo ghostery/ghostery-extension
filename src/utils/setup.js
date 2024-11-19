@@ -9,28 +9,26 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export default function asyncSetup(promises, threshold = 10000) {
-  let timeoutId;
+export default function asyncSetup(id, promises, threshold = 10000) {
+  const timeoutId = setTimeout(() => {
+    console.warn(
+      `[setup] Initial setup of '${id}' exceeded threshold of ${threshold / 1000}s`,
+    );
+  }, threshold);
 
   const result = {
-    pending: Promise.race([
-      Promise.all(promises),
-      new Promise((_, reject) => {
-        timeoutId = setTimeout(() => {
-          reject(Error('Initial setup threshold exceeded'));
-        }, threshold);
+    pending: Promise.all(promises)
+      .then((...args) => {
+        clearTimeout(timeoutId);
+        result.pending = false;
+
+        return args;
+      })
+      .catch((e) => {
+        clearTimeout(timeoutId);
+        throw e;
       }),
-    ]).then((...args) => {
-      result.pending = false;
-      clearTimeout(timeoutId);
-
-      return args;
-    }),
   };
-
-  result.pending.catch((e) => {
-    console.warn('Error during async setup:', e);
-  });
 
   return result;
 }
