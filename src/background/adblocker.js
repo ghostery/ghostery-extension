@@ -86,7 +86,9 @@ export async function reloadMainEngine() {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
-  contentScripts.clear();
+  if (__PLATFORM__ === 'firefox') {
+    contentScripts.clear();
+  }
 }
 
 let updating = false;
@@ -172,6 +174,7 @@ const contentScripts = (() => {
   const map = new Map();
   return {
     set(key, value) {
+      this.delete(key);
       map.set(key, value);
     },
     has(key) {
