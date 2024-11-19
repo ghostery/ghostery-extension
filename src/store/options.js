@@ -17,7 +17,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 
 import CustomFilters from './custom-filters.js';
 
-export const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
+const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
 
 export const SYNC_OPTIONS = [
@@ -116,7 +116,7 @@ const Options = {
 
       return options;
     },
-    async set(_, options, keys) {
+    async set(_, options) {
       options = options || {};
 
       await chrome.storage.local.set({
@@ -131,7 +131,6 @@ const Options = {
       chrome.runtime
         .sendMessage({
           action: UPDATE_OPTIONS_ACTION_NAME,
-          keys,
         })
         .catch(() => {
           // sendMessage may fail without potential target
