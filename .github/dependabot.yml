@@ -1,23 +1,46 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
+    allow:
+      - dependency-type: 'production'
+    ignore:
+      - dependency-name: 'tldts-experimental'
     schedule:
-      interval: daily
-      time: "04:00"
+      interval: 'daily'
+      time: '07:00'
+    reviewers:
+      - 'smalluban'
+      - 'chrmod'
     open-pull-requests-limit: 99
     groups:
-      wdio:
-        patterns:
-          - "@wdio/*"
       adblocker:
         patterns:
-          - "@ghostery/adblocker*"
-      web-ext:
-        patterns:
-          - "web-ext"
-          - "addon-linter"
+          - '@ghostery/adblocker*'
+  - package-ecosystem: npm
+    directory: '/'
+    allow:
+      - dependency-type: 'development'
+      # 'tldts-experimental' updates frequently, but we need to keep it up to date
+      # for each release to the production, which happens at most once a week.
+      - dependency-name: 'tldts-experimental'
+    schedule:
+      interval: 'weekly'
+      time: '07:00'
+    reviewers:
+      - 'smalluban'
+    groups:
       eslint:
         patterns:
-          - "eslint*"
-          - "@eslint/*"
+          - 'eslint*'
+          - '@eslint/*'
+      wdio:
+        patterns:
+          - '@wdio/*'
+      web-ext:
+        patterns:
+          - 'web-ext'
+          - 'addon-linter'
+    # Makes it possible to have another config. for the same dir.
+    # https://github.com/dependabot/dependabot-core/issues/1778#issuecomment-1988140219
+    target-branch: main
