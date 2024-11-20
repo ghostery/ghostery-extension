@@ -8,6 +8,9 @@ updates:
       - dependency-name: 'tldts-experimental'
     schedule:
       interval: 'daily'
+    reviewers:
+      - 'smalluban'
+      - 'chrmod'
     open-pull-requests-limit: 99
     groups:
       adblocker:
@@ -22,6 +25,8 @@ updates:
       - dependency-name: 'tldts-experimental'
     schedule:
       interval: 'weekly'
+    reviewers:
+      - 'smalluban'
     groups:
       eslint:
         patterns:
