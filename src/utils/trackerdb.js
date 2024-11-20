@@ -13,7 +13,9 @@ import { sortCategories } from '/ui/categories.js';
 import * as engines from './engines.js';
 import asyncSetup from './setup.js';
 
-export const setup = asyncSetup([engines.init(engines.TRACKERDB_ENGINE)]);
+export const setup = asyncSetup('trackerdb', [
+  engines.init(engines.TRACKERDB_ENGINE),
+]);
 
 export function getUnidentifiedTracker(hostname) {
   return {

@@ -66,7 +66,7 @@ async function getConf(storage) {
 }
 
 let metrics;
-const setup = asyncSetup([
+const setup = asyncSetup('telemetry', [
   (async () => {
     const storage = await loadStorage();
     const { version } = chrome.runtime.getManifest();

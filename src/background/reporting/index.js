@@ -36,7 +36,7 @@ import webRequestReporter from './webrequest-reporter.js';
   }
 })();
 
-const setup = asyncSetup([
+const setup = asyncSetup('reporting', [
   OptionsObserver.addListener('terms', async function reporting(terms) {
     if (terms) {
       if (webRequestReporter) {
