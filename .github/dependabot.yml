@@ -8,6 +8,7 @@ updates:
       - dependency-name: 'tldts-experimental'
     schedule:
       interval: 'daily'
+      time: '07:00'
     reviewers:
       - 'smalluban'
       - 'chrmod'
@@ -25,6 +26,7 @@ updates:
       - dependency-name: 'tldts-experimental'
     schedule:
       interval: 'weekly'
+      time: '07:00'
     reviewers:
       - 'smalluban'
     groups:
