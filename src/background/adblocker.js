@@ -296,6 +296,9 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
+  const isBootstrap = config.bootstrap;
+  const scriptletsOnly = Boolean(config.scriptletsOnly);
+
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
@@ -309,6 +312,8 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
+  if (scriptletsOnly && contentScripts.isRegistered(hostname)) return;
+
   if (isPaused(options, hostname)) return;
 
   const tabHostname = tabStats.get(tabId)?.hostname;
@@ -317,8 +322,6 @@ async function injectCosmetics(details, config) {
   }
 
   const engine = engines.get(engines.MAIN_ENGINE);
-  const isBootstrap = config.bootstrap;
-  const scriptletsOnly = Boolean(config.scriptletsOnly);
 
   {
     const cosmetics = engine.getCosmeticsFilters({
