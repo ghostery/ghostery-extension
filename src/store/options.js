@@ -11,13 +11,11 @@
 
 import { store } from 'hybrids';
 
-import { getUserOptions, setUserOptions } from '/utils/api.js';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 import CustomFilters from './custom-filters.js';
-import Session from './session.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -118,7 +116,7 @@ const Options = {
 
       return options;
     },
-    async set(_, options, keys) {
+    async set(_, options) {
       options = options || {};
 
       await chrome.storage.local.set({
@@ -138,15 +136,10 @@ const Options = {
           // sendMessage may fail without potential target
         });
 
-      sync(options, keys);
-
       return options;
     },
     observe: (_, options, prevOptions) => {
       OptionsObserver.execute(options, prevOptions);
-
-      // Sync if the current memory context get options for the first time
-      if (!prevOptions) sync(options);
     },
   },
 };
@@ -161,8 +154,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 
 async function migrate(options, optionsVersion) {
-  const keys = [];
-
+  // Pushed in v10.3.14
   if (optionsVersion < 2) {
     // Migrate 'paused' array to record
     if (options.paused) {
@@ -171,8 +163,11 @@ async function migrate(options, optionsVersion) {
         return acc;
       }, {});
     }
+
+    console.debug('[options] Migrated to version 2:', options);
   }
 
+  // Pushed in v10.4.3
   if (optionsVersion < 3) {
     // Check if the user has custom filters, so we need to
     // reflect the enabled state in the options
@@ -182,8 +177,9 @@ async function migrate(options, optionsVersion) {
         ...options.customFilters,
         enabled: true,
       };
-      keys.push('customFilters');
     }
+
+    console.debug('[options] Migrated to version 3:', options);
   }
 
   // Flush updated options and version to the storage
@@ -191,9 +187,6 @@ async function migrate(options, optionsVersion) {
     options,
     optionsVersion: OPTIONS_VERSION,
   });
-
-  // Send updated options to the server
-  Promise.resolve().then(() => sync(options, keys));
 }
 
 let managed = __PLATFORM__ === 'chromium' && isOpera() ? false : null;
@@ -243,69 +236,4 @@ export function isPaused(options, domain = '') {
     !!options.paused[GLOBAL_PAUSE_ID] ||
     (domain && !!options.paused[domain.replace(/^www\./, '')])
   );
-}
-
-export async function sync(options, keys) {
-  try {
-    // Do not sync if revision is set or terms and sync options are false
-    if (keys?.includes('revision') || !options.terms || !options.sync) {
-      return;
-    }
-
-    const { user } = await store.resolve(Session);
-
-    // If user is not logged in, clean up options revision and return
-    if (!user) {
-      if (options.revision !== 0) {
-        store.set(Options, { revision: 0 });
-      }
-      return;
-    }
-
-    // If options update, set revision to "dirty" state
-    if (keys && options.revision > 0) {
-      options = await store.set(Options, { revision: options.revision * -1 });
-    }
-
-    const serverOptions = await getUserOptions();
-
-    // Server has newer options - merge with local options
-    if (serverOptions.revision > Math.abs(options.revision)) {
-      const values = SYNC_OPTIONS.reduce(
-        (acc, key) => {
-          if (!keys?.includes(key) && hasOwnProperty.call(serverOptions, key)) {
-            acc[key] = serverOptions[key];
-          }
-
-          return acc;
-        },
-        { revision: serverOptions.revision },
-      );
-
-      options = await store.set(Options, values);
-    }
-
-    // Set options or update:
-    // * No revision on server - initial sync
-    // * Keys are passed - options update
-    // * Revision is negative - local options are dirty (not synced)
-    if (!serverOptions.revision || keys || options.revision < 0) {
-      const { revision } = await setUserOptions(
-        SYNC_OPTIONS.reduce(
-          (acc, key) => {
-            if (hasOwnProperty.call(options, key)) {
-              acc[key] = options[key];
-            }
-            return acc;
-          },
-          { revision: serverOptions.revision + 1 },
-        ),
-      );
-
-      // Update local revision
-      await store.set(Options, { revision });
-    }
-  } catch (e) {
-    console.error(`[options] Error while syncing options: `, e);
-  }
 }

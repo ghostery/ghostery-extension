@@ -36,6 +36,9 @@ store
       };
     }
 
+    // Sync options with background
+    chrome.runtime.sendMessage({ action: 'syncOptions' });
+
     mount(document.body, Settings);
   })
   .catch(() => {
