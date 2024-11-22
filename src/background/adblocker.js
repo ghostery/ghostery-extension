@@ -275,6 +275,8 @@ async function injectCosmetics(details, config) {
       getExtendedRules: isBootstrap,
       getRulesFromHostname: isBootstrap,
 
+      injectPureHasSafely: true,
+
       // This will be done every time we get information about DOM mutation
       getRulesFromDOM: !isBootstrap,
     });
