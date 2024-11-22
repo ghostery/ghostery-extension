@@ -34,3 +34,19 @@ export async function openTabWithUrl(host, event) {
 
   chrome.tabs.create({ url: href });
 }
+
+export async function getCurrentTab() {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab) return null;
+
+  if (tab.url !== window.location.href) {
+    return tab;
+  }
+
+  const [otherTab] = await chrome.tabs.query({
+    active: true,
+    currentWindow: false,
+  });
+
+  return otherTab || null;
+}
