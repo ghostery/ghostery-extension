@@ -42,7 +42,7 @@
     "message": "예외 추가"
   },
   "add_on_s_health": {
-    "message": "애드온의 상태"
+    "message": "애드온 상태"
   },
   "add_website": {
     "message": "웹 사이트 추가"
@@ -101,7 +101,7 @@
     "message": "기여자가 되어보세요"
   },
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
-    "message": "유럽 연합 회사인 Ghostery는 사용자의 프라이버시를 보장하기 위해 데이터 수집을 규제하는 GDPR(일반 데이터 보호 규정)을 엄격히 준수합니다."
+    "message": "Ghostery는 유럽 연합 기반의 회사로 사용자 개인정보 보호를 위해 데이터 수집을 규제하는 GDPR을 엄격하게 준수합니다."
   },
   "block_all__recommended_": {
     "message": "모두 차단 (권장됨)"
@@ -129,10 +129,10 @@
     "message": "방문하시는 웹 사이트 언어에 한하여 추가로 광고와 트래커, 팝업을 차단합니다. 필요한 언어만 활성화하면 웹 브라우저가 느려지는걸 방지할 수 있습니다."
   },
   "browser__vendor": {
-    "message": "브라우저: 공급업체"
+    "message": "브라우저 종류"
   },
   "browser__vendor__version__language__operating_system_vendor": {
-    "message": "브라우저: 공급업체, 버전, 언어, 운영 체제 공급업체"
+    "message": "브라우저: 종류, 버전, 언어, 운영 체제"
   },
   "cancel": {
     "message": "취소"
@@ -200,7 +200,7 @@
     "description": "Tracker category name"
   },
   "data_collection_summary": {
-    "message": "데이터 수집 요약"
+    "message": "데이터 수집 개요"
   },
   "detailed_view": {
     "message": "자세히 보기"
@@ -351,7 +351,7 @@
     "message": "무시"
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "웹 추적기, 애드온의 상태 및 성능 원격 측정에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 강화하기 위해 당사의 개인정보 보호정책에 따라 공유됩니다.",
+    "message": "<a href=\"$${0}\">웹 상 트래커</a>, <a href=\"$${1}\">애드온의 상태</a> 및 <a href=\"$${2}\">성능 측정</a>에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 향상하기 위해 당사의 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유됩니다.",
     "description": "'add-on' means 'browser extension'"
   },
   "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
@@ -364,7 +364,7 @@
     "message": "k-익명성 보호 페이지 보고서 표시"
   },
   "keep_disabled": {
-    "message": "비활성화 유지"
+    "message": "계속 꺼두기"
   },
   "last_update__@_0_": {
     "message": "최종 업데이트: $${0}"
@@ -382,7 +382,7 @@
     "message": "지원되는 문법에 대해 알아보기"
   },
   "leave_a_review_today": {
-    "message": "오늘 리뷰를 남겨보세요"
+    "message": "지금 리뷰를 남겨보세요"
   },
   "load_more": {
     "message": "더 보기"
@@ -391,7 +391,7 @@
     "message": "Ghostery 트래커 & 광고 차단기 - 개인정보 보호 광고 차단기"
   },
   "manifest_short_description": {
-    "message": "강력하고 사용하기 쉬운 개인정보 보호 확장 기능. 광고와 추적기를 차단하고 웹 속도를 높이세요."
+    "message": "강력하고 사용하기 쉬운 개인정보 보호 확장 프로그램. 광고와 트래커를 차단해 웹 서핑을 빠르게 해보세요."
   },
   "menu": {
     "message": "메뉴"
@@ -693,7 +693,7 @@
     "message": "더 나은 YouTube 사용 환경을 위해 Ghostery 사용하는 것을 알고 있습니다. 보다 나은 해결책이 출시되기 전까지 임시 조치를 취할 수 있습니다."
   },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
-    "message": "고스트리가 마음에 드셨다니 정말 기쁩니다! 다른 사람들도 저희를 찾을 수 있도록 도와주세요 - 잠깐이면 됩니다."
+    "message": "Ghostery를 마음에 들어해주셔서 감사합니다! 조금의 시간으로 다른 사람들이 저희를 찾게 해주세요."
   },
   "web_trackers": {
     "message": "웹 추적기"

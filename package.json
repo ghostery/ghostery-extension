@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.4.15",
+  "version": "10.4.16",
   "type": "module",
   "scripts": {
     "download-engines": "node scripts/download-engines.js",
