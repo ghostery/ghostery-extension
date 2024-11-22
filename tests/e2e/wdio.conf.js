@@ -24,6 +24,7 @@ import url from 'node:url';
 import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
+import { setExtensionBaseUrl } from './utils.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
 
@@ -172,11 +173,20 @@ export const config = {
         }
       });
 
+      setExtensionBaseUrl(
+        (await browser.getUrl()).replace('/onboarding/index.html', ''),
+      );
+
       await browser.closeWindow();
       await browser.switchWindow(currentUrl);
     } catch (e) {
       console.error('Error while setting up test environment', e);
-      process.exit(1);
+
+      // close the browser session
+      await browser.deleteSession();
+
+      // send a signal to the parent process to stop the tests
+      process.kill(process.pid, 'SIGTERM');
     }
   },
 };

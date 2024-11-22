@@ -17,10 +17,12 @@ import {
   renameSync,
   existsSync,
 } from 'node:fs';
+import { resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import { $, expect } from '@wdio/globals';
 
 import {
+  enableExtension,
   getExtensionElement,
   getExtensionPageURL,
   waitForIdleBackgroundTasks,
@@ -59,36 +61,42 @@ export const config = {
         const target =
           capability.browserName === 'chrome' ? 'chromium' : 'firefox';
 
-        const extUrl = `https://github.com/ghostery/ghostery-extension/releases/download/v${version}/ghostery-${target}-${version}.zip`;
+        const fileName = `ghostery-${target}-${version}.zip`;
+        const url = `https://github.com/ghostery/ghostery-extension/releases/download/v${version}/`;
 
-        if (target === 'firefox') {
-          const path = wdio.FIREFOX_PATH;
-          const sourcePath = `${path.replace('.zip', '')}-source.zip`;
+        const buildPath = resolve(wdio.WEB_EXT_PATH, fileName);
 
-          if (!existsSync(sourcePath)) {
-            wdio.buildForFirefox();
-            cpSync(wdio.FIREFOX_PATH, sourcePath);
-          }
-
-          console.log(`Downloading Ghostery extension from ${extUrl}`);
-          execSync(`curl -L -o ${path} "${extUrl}"`);
+        // Download build artifacts
+        if (!existsSync(resolve(buildPath))) {
+          console.log(`Downloading Ghostery extension from ${url}${fileName}`);
+          execSync(`curl -L -o ${buildPath} "${url}${fileName}"`);
         }
 
-        if (target === 'chromium') {
-          const path = wdio.CHROME_PATH;
-          const sourcePath = `${path}-source`;
+        switch (target) {
+          case 'firefox': {
+            wdio.buildForFirefox();
 
-          wdio.buildForChrome();
+            cpSync(
+              wdio.FIREFOX_PATH,
+              `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
+            );
 
-          rmSync(sourcePath, { recursive: true, force: true });
-          cpSync(path, sourcePath, { recursive: true });
-          rmSync(path, { recursive: true, force: true });
+            cpSync(buildPath, wdio.FIREFOX_PATH);
+            break;
+          }
+          case 'chromium': {
+            const sourcePath = `${wdio.CHROME_PATH}-source`;
 
-          console.log(`Downloading Ghostery extension from ${extUrl}`);
-          execSync(`curl -L -o ${path}.zip "${extUrl}"`);
+            wdio.buildForChrome();
 
-          console.log(`Unzipping Ghostery extension to ${path}`);
-          execSync(`unzip ${path}.zip -d ${path}`);
+            rmSync(sourcePath, { recursive: true, force: true });
+            cpSync(wdio.CHROME_PATH, sourcePath, { recursive: true });
+            rmSync(wdio.CHROME_PATH, { recursive: true, force: true });
+
+            console.log(`Unzipping Ghostery extension...`);
+            execSync(`unzip ${buildPath} -d ${wdio.CHROME_PATH}`);
+            break;
+          }
         }
       }
 
@@ -102,14 +110,12 @@ export const config = {
     await wdio.config.before(capabilities, specs, browser);
 
     try {
-      const onboardingUrl = await getExtensionPageURL('onboarding');
-      const currentUrl = await browser.getUrl();
+      const url = await browser.getUrl();
 
-      await browser.newWindow(onboardingUrl);
+      await enableExtension();
+      await browser.url(url);
 
-      // Get element by common selector, as the `data-qa` attribute was introduced in v10.4.9
-      await $('>>>ui-button[type=success]').click();
-      await expect($('>>>ui-button[type=success]')).not.toBeDisplayed();
+      await browser.newWindow(getExtensionPageURL('settings'));
 
       // Reload extension with the source
       switch (capabilities.browserName) {
@@ -120,22 +126,23 @@ export const config = {
           });
           rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
 
-          browser.execute(() => chrome.runtime.reload());
+          await browser.execute(() => chrome.runtime.reload());
 
-          await browser.switchWindow(currentUrl);
+          await browser.closeWindow();
+          await browser.switchWindow(url);
+
+          await browser.url('chrome://extensions');
           await expect($('extensions-review-panel')).toBeDisplayed();
+
           break;
         }
         case 'firefox': {
-          // Settle down the installed extension
-          await browser.pause(5000);
-
           const extension = readFileSync(
             `${wdio.FIREFOX_PATH.replace('.zip', '')}-source.zip`,
           );
           browser.installAddOn(extension.toString('base64'), true);
 
-          await browser.switchWindow(currentUrl);
+          await browser.url('about:debugging#/runtime/this-firefox');
 
           await expect(
             $('.extension-backgroundscript__status'),
@@ -145,7 +152,10 @@ export const config = {
             ),
           );
 
-          // Without the pase, Firefox throws sometimes web-driver exceptions
+          await browser.closeWindow();
+          await browser.switchWindow(url);
+
+          // Without the pause, Firefox throws sometimes web-driver exceptions
           // It must be related to the extension reloading process.
           // As there is no way to wait for the extension to be reloaded
           // better than above check, we just wait for a few seconds.
@@ -155,15 +165,19 @@ export const config = {
         }
       }
 
-      await browser.url(await getExtensionPageURL('settings'));
+      await browser.url(getExtensionPageURL('settings'));
       await expect(getExtensionElement('page:settings')).toBeDisplayed();
-
       await waitForIdleBackgroundTasks();
 
       console.log('Extension reloaded...');
     } catch (e) {
-      console.error('Error while preparing test environment', e);
-      process.exit(1);
+      console.error('Error while updating extension', e);
+
+      // close the browser session
+      await browser.deleteSession();
+
+      // send a signal to the parent process to stop the tests
+      process.kill(process.pid, 'SIGTERM');
     }
   },
 };

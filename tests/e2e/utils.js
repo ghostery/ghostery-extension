@@ -11,37 +11,17 @@
 
 import { browser, expect, $ } from '@wdio/globals';
 
-function getProtocol() {
-  return browser.isChromium ? 'chrome-extension' : 'moz-extension';
+let BASE_URL = '';
+export function setExtensionBaseUrl(url) {
+  BASE_URL = url;
 }
 
-let extensionId = '';
-async function getExtensionId() {
-  if (!extensionId) {
-    switch (browser.capabilities.browserName) {
-      case 'chrome': {
-        await browser.url('chrome://extensions');
-
-        extensionId = await $('extensions-item:first-child').getAttribute('id');
-
-        break;
-      }
-      case 'firefox': {
-        await browser.url('about:debugging#/runtime/this-firefox');
-        const manifestUrl = await $('a[href*="manifest.json"]').getAttribute(
-          'href',
-        );
-        extensionId = manifestUrl.match(/([^/]+)\/manifest.json/)[1];
-        break;
-      }
-    }
+export function getExtensionPageURL(page, file = 'index.html') {
+  if (!BASE_URL) {
+    throw new Error('Base URL is not set');
   }
 
-  return extensionId;
-}
-
-export async function getExtensionPageURL(page, file = 'index.html') {
-  return `${getProtocol()}://${await getExtensionId()}/pages/${page}/${file}`;
+  return `${BASE_URL}/${page}/${file}`;
 }
 
 export function getExtensionElement(id, query) {
@@ -49,7 +29,7 @@ export function getExtensionElement(id, query) {
 }
 
 export async function waitForIdleBackgroundTasks() {
-  if (!(await browser.getUrl()).startsWith(getProtocol())) {
+  if ((await browser.getUrl()).startsWith('http')) {
     throw new Error(
       'Background idle state must be checked from the extension context',
     );
@@ -68,18 +48,11 @@ export async function waitForIdleBackgroundTasks() {
 }
 
 export async function enableExtension() {
-  const isDisabled = await switchToPanel(async function () {
-    return await getExtensionElement('button:enable').isDisplayed();
-  });
+  await browser.url(getExtensionPageURL('onboarding'));
 
-  if (isDisabled) {
-    await browser.url(await getExtensionPageURL('onboarding'));
-
-    await getExtensionElement('button:enable').click();
-    await expect(getExtensionElement('view:success')).toBeDisplayed();
-
-    await waitForIdleBackgroundTasks();
-  }
+  await getExtensionElement('button:enable').click();
+  await expect(getExtensionElement('view:success')).toBeDisplayed();
+  await waitForIdleBackgroundTasks();
 }
 
 export async function setToggle(name, value) {
@@ -96,13 +69,13 @@ export async function setToggle(name, value) {
 }
 
 export async function setPrivacyToggle(name, value) {
-  await browser.url(await getExtensionPageURL('settings'));
+  await browser.url(getExtensionPageURL('settings'));
   await setToggle(name, value);
 }
 
 export async function switchToPanel(fn) {
   const context = await browser.getTitle();
-  const url = await getExtensionPageURL('panel');
+  const url = getExtensionPageURL('panel');
 
   try {
     // When the panel is not opened yet, the switchWindow will throw
