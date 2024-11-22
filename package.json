@@ -51,7 +51,7 @@
     "@ghostery/adblocker-webextension": "^2.1.1",
     "@github/relative-time-element": "^4.3.0",
     "@sentry/browser": "^8.39.0",
-    "@whotracksme/reporting": "^5.1.36",
+    "@whotracksme/reporting": "^5.1.38",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.8",
     "idb": "^8.0.0",
