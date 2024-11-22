@@ -1,6 +1,6 @@
 {
   "@_0__left": {
-    "message": "$${0} gauche"
+    "message": "$${0} restantes"
   },
   "@_0__will_be_blocked_on_this_website_": {
     "message": "$${0} sera bloqué sur ce site web.",
