@@ -11,7 +11,7 @@
 
 import { html, store, router, msg } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
+import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
@@ -51,8 +51,9 @@ function reloadTab() {
   clearTimeout(reloadTimeout);
 
   reloadTimeout = setTimeout(async () => {
-    const tab = await chrome.runtime.sendMessage({ action: 'getCurrentTab' });
-    chrome.tabs.reload(tab.id);
+    const tab = await getCurrentTab();
+    if (tab) chrome.tabs.reload(tab.id);
+
     reloadTimeout = null;
   }, 1000);
 }

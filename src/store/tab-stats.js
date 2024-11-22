@@ -16,6 +16,7 @@ import AutoSyncingMap from '/utils/map.js';
 
 import Tracker from './tracker.js';
 import TrackerException from './tracker-exception.js';
+import { getCurrentTab } from '/utils/tabs.js';
 
 const StatsTracker = {
   ...Tracker,
@@ -64,15 +65,9 @@ const Stats = {
 
   [store.connect]: {
     async get() {
-      if (!tab) {
-        tab = await chrome.runtime.sendMessage({
-          action: 'getCurrentTab',
-        });
-      }
-
-      if (!tab.url.startsWith('http')) {
-        return {};
-      }
+      // Resolve tab info
+      tab ||= await getCurrentTab();
+      if (!tab || !tab.url.startsWith('http')) return {};
 
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
 
