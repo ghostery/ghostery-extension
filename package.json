@@ -46,7 +46,7 @@
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^10.17.0",
+    "@duckduckgo/autoconsent": "^11.5.0",
     "@ghostery/adblocker": "^2.1.1",
     "@ghostery/adblocker-webextension": "^2.1.1",
     "@github/relative-time-element": "^4.3.0",
