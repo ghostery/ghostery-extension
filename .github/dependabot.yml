@@ -24,6 +24,9 @@ updates:
       # 'tldts-experimental' updates frequently, but we need to keep it up to date
       # for each release to the production, which happens at most once a week.
       - dependency-name: 'tldts-experimental'
+    ignore:
+      # Currently the wdio has a bug, which does not allow us to update it often
+      - dependency-name: '@wdio/*'
     schedule:
       interval: 'weekly'
       time: '07:00'
