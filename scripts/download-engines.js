@@ -9,29 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { createHash } from 'node:crypto';
+import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { ENGINE_VERSION } from '@ghostery/adblocker';
 import REGIONS from '../src/utils/regions.js';
-
-function createChecksum(content) {
-  return createHash('sha256').update(content).digest('hex');
-}
-
-function isChecksumMatched(path, checksum) {
-  if (existsSync(path) && createChecksum(readFileSync(path)) === checksum) {
-    if (process.stdout.isTTY) {
-      process.stdout.write('\r');
-      process.stdout.clearLine(1);
-    }
-
-    return true;
-  }
-
-  return false;
-}
 
 const REGIONAL_ENGINES = REGIONS.reduce((acc, region) => {
   acc[`dnr-lang-${region}`] = `lang-${region}`;
@@ -52,11 +34,17 @@ const CDN_HOSTNAME = process.argv.includes('--staging')
   ? 'staging-cdn.ghostery.com'
   : 'cdn.ghostery.com';
 
-console.log(`Downloading engines from ${CDN_HOSTNAME}...`);
-
-mkdirSync(TARGET_PATH, { recursive: true });
+if (!existsSync(TARGET_PATH)) {
+  mkdirSync(TARGET_PATH, { recursive: true });
+}
 
 for (const [name, target] of Object.entries(ENGINES)) {
+  const outputPath = `${TARGET_PATH}/engine-${target}.dat`;
+
+  if (existsSync(outputPath)) {
+    continue;
+  }
+
   process.stdout.write(`Downloading "${name}"...`);
 
   const list = await fetch(
@@ -79,12 +67,6 @@ for (const [name, target] of Object.entries(ENGINES)) {
     throw new Error(
       `Engine "${name}" for "${ENGINE_VERSION}" engine version not found`,
     );
-  }
-
-  const outputPath = `${TARGET_PATH}/engine-${target}.dat`;
-
-  if (isChecksumMatched(outputPath, engine.checksum)) {
-    continue;
   }
 
   const rules = await fetch(engine.url).then((res) => {
@@ -110,6 +92,12 @@ const DNR = {
 };
 
 for (const [name, target] of Object.entries(DNR)) {
+  const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
+
+  if (existsSync(outputPath)) {
+    continue;
+  }
+
   if (process.stdout.isTTY) process.stdout.clearLine(1);
   process.stdout.write(`Downloading DNR ruleset for "${name}"...`);
 
@@ -128,12 +116,6 @@ for (const [name, target] of Object.entries(DNR)) {
   /* DNR rules */
 
   if (list.dnr) {
-    const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
-
-    if (isChecksumMatched(outputPath, list.dnr.checksum)) {
-      continue;
-    }
-
     const dnr = await fetch(list.dnr.url || list.dnr.network).then((res) => {
       if (!res.ok) {
         throw new Error(
@@ -149,44 +131,47 @@ for (const [name, target] of Object.entries(DNR)) {
   }
 }
 
-console.log('Downloading redirect resources...');
+const redirectsPath = resolve(TARGET_PATH, 'redirects');
+if (!existsSync(redirectsPath)) {
+  console.log('Downloading redirect resources...');
 
-mkdirSync(resolve(TARGET_PATH, 'redirects'), { recursive: true });
+  mkdirSync(redirectsPath, { recursive: true });
 
-const { revisions: resourcesRevisions } = await fetch(
-  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`,
-).then((res) => {
-  if (!res.ok) {
-    throw new Error(
-      `Failed to download allowed list for "ublock-resources-json": ${res.status}: ${res.statusText}`,
-    );
-  }
+  const { revisions: resourcesRevisions } = await fetch(
+    `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`,
+  ).then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to download allowed list for "ublock-resources-json": ${res.status}: ${res.statusText}`,
+      );
+    }
 
-  return res.json();
-});
-const latestResourceRevision = resourcesRevisions.at(-1);
+    return res.json();
+  });
+  const latestResourceRevision = resourcesRevisions.at(-1);
 
-const resources = await fetch(
-  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${latestResourceRevision}/list.txt`,
-).then((res) => {
-  if (!res.ok) {
-    throw new Error(
-      `Failed to fetch resources: ${res.status}: ${res.statusText}`,
-    );
-  }
+  const resources = await fetch(
+    `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${latestResourceRevision}/list.txt`,
+  ).then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch resources: ${res.status}: ${res.statusText}`,
+      );
+    }
 
-  return res.json();
-});
+    return res.json();
+  });
 
-for (const redirect of resources.redirects) {
-  const outputPath = resolve(TARGET_PATH, 'redirects', redirect.name);
+  for (const redirect of resources.redirects) {
+    const outputPath = resolve(redirectsPath, redirect.name);
 
-  if (redirect.contentType.includes('base64')) {
-    writeFileSync(
-      outputPath,
-      Buffer.from(redirect.body, 'base64').toString('binary'),
-    );
-  } else {
-    writeFileSync(outputPath, redirect.body);
+    if (redirect.contentType.includes('base64')) {
+      writeFileSync(
+        outputPath,
+        Buffer.from(redirect.body, 'base64').toString('binary'),
+      );
+    } else {
+      writeFileSync(outputPath, redirect.body);
+    }
   }
 }

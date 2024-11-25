@@ -17,6 +17,7 @@ import {
   rmSync,
   mkdirSync,
   cpSync,
+  existsSync,
 } from 'node:fs';
 import { exec, execSync } from 'node:child_process';
 import { build } from 'vite';
@@ -30,7 +31,7 @@ const pwd = process.cwd();
 const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
-  assets: ['_locales', 'icons'],
+  assets: ['_locales', 'icons', 'static_pages'],
 };
 
 // Generate arguments from command line
@@ -55,7 +56,8 @@ const pkg = JSON.parse(readFileSync(resolve(pwd, 'package.json'), 'utf8'));
 const silent = argv.silent;
 
 // Get manifest from source directory
-console.log(`Reading manifest.${argv.target}.json...`);
+if (!silent) console.log(`Reading manifest.${argv.target}.json...`);
+
 const manifest = JSON.parse(
   readFileSync(resolve(options.srcDir, `manifest.${argv.target}.json`), 'utf8'),
 );
@@ -64,15 +66,68 @@ const manifest = JSON.parse(
 if (argv.debug) manifest.debug = true;
 if (argv.staging) manifest.staging = true;
 
-// Download adblocker engines
-execSync('npm run download-engines' + (argv.staging ? ' -- --staging' : ''), {
+// --- Download rule resources ---
+
+if (argv.clean) {
+  rmSync(resolve('src', 'rule_resources'), { recursive: true, force: true });
+}
+
+execSync(
+  'node scripts/download-engines.js' + (argv.staging ? ' --staging' : ''),
+  { stdio: silent ? '' : 'inherit' },
+);
+
+execSync('node scripts/download-wtm-bloomfilter.js', {
   stdio: silent ? '' : 'inherit',
 });
 
-execSync('npm run download-wtm-bloomfilter', {
+execSync('node scripts/download-wtm-stats.js', {
   stdio: silent ? '' : 'inherit',
 });
-execSync('npm run download-wtm-stats', { stdio: silent ? '' : 'inherit' });
+
+// --- Generate static pages ---
+
+const staticPath = resolve('src', 'static_pages');
+
+if (argv.clean) {
+  rmSync(staticPath, { recursive: true, force: true });
+}
+
+if (!existsSync(staticPath)) mkdirSync(staticPath, { recursive: true });
+
+// licenses.html...
+const licensesPath = resolve(staticPath, 'licenses.html');
+if (!existsSync(licensesPath)) {
+  writeFileSync(
+    licensesPath,
+    execSync(`npx license-report --config=scripts/license-report.json`)
+      .toString()
+      .replace(
+        '<html>',
+        '<html lang="en">\n<head>\n<meta charset="utf-8">\n</head>\n',
+      ),
+  );
+}
+
+// privacy-policy.html...
+if (argv.target !== 'firefox') {
+  const policyPath = resolve(staticPath, 'privacy-policy.html');
+  const url = `https://www.${argv.debug ? 'ghosterystage' : 'ghostery'}.com/privacy-policy?embed=true`;
+
+  if (!existsSync(policyPath)) {
+    const policy = await fetch(url);
+    if (policy.ok) {
+      const text = await policy.text();
+      writeFileSync(policyPath, text);
+    } else {
+      throw new Error(
+        `Failed to fetch Privacy Policy from '${url}': ${policy.status}`,
+      );
+    }
+  }
+}
+
+// --- Base Vite Config ---
 
 const config = {
   logLevel: silent ? 'silent' : undefined,
@@ -227,24 +282,6 @@ if (manifest.declarative_net_request?.rule_resources) {
       manifest.web_accessible_resources.push(
         join('rule_resources/redirects', filename),
       ),
-    );
-  }
-}
-
-// generate license file
-execSync('npm run licenses', { stdio: silent ? '' : 'inherit' });
-
-// Fetch Privacy Policy
-if (argv.target !== 'firefox') {
-  const url = `https://www.${argv.debug ? 'ghosterystage' : 'ghostery'}.com/privacy-policy?embed=true`;
-
-  const policy = await fetch(url);
-  if (policy.ok) {
-    const text = await policy.text();
-    writeFileSync(resolve(options.outDir, 'privacy-policy.html'), text);
-  } else {
-    throw new Error(
-      `Failed to fetch Privacy Policy from '${url}': ${policy.status}`,
     );
   }
 }

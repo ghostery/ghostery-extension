@@ -201,7 +201,7 @@ export default {
             </panel-menu-item>
 
             <panel-menu-item
-              href="${chrome.runtime.getURL('/licenses.html')}"
+              href="${chrome.runtime.getURL('/static_pages/licenses.html')}"
               icon="license-m"
               suffix-icon="link-external-m"
             >
