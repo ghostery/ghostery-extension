@@ -366,7 +366,8 @@ export default {
             visible="${devMode}"
           ></settings-devtools>
         `}
-        ${store.ready(session) &&
+        ${__PLATFORM__ !== 'safari' &&
+        store.ready(session) &&
         html`
           <section
             layout="grid:1/1 grow items:end:stretch padding:0"
