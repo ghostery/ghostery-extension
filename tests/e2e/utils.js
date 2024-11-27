@@ -53,6 +53,8 @@ export async function enableExtension() {
   await getExtensionElement('button:enable').click();
   await expect(getExtensionElement('view:success')).toBeDisplayed();
   await waitForIdleBackgroundTasks();
+
+  await browser.url('about:blank');
 }
 
 export async function setToggle(name, value) {
@@ -74,31 +76,68 @@ export async function setPrivacyToggle(name, value) {
 }
 
 export async function switchToPanel(fn) {
-  const context = await browser.getTitle();
-  const url = getExtensionPageURL('panel');
+  const current = await browser.getTitle();
+  const panelUrl = getExtensionPageURL('panel');
+
+  await browser
+    .switchWindow('Ghostery panel')
+    .catch(() => browser.newWindow(panelUrl));
+
+  await browser.url('about:blank');
+  await browser.url(panelUrl);
+
+  // The panel has a bugfix for closing the panel when links are clicked.
+  // Source: /pages/panel/index.js - L52
+  // In test environment it must be disabled to allow the test to switch back to the panel
+  await browser.execute(() => {
+    Object.defineProperty(window, 'close', { value: function () {} });
+  });
+
+  let error = null;
+  let result = null;
+  try {
+    result = await fn();
+  } catch (e) {
+    error = e;
+  }
+
+  await browser.waitUntil(() =>
+    browser.switchWindow(current).then(
+      () => true,
+      () => false,
+    ),
+  );
+
+  if (error) throw error;
+  return result;
+}
+
+export async function switchToNewTabContext(anchor, fn) {
+  const url = await browser.getUrl();
+  let error = null;
 
   try {
-    // When the panel is not opened yet, the switchWindow will throw
-    // so then (for the first time) we need to open the panel in a new window
-    try {
-      await browser.switchWindow(url);
-      await browser.url(url); // Refresh the page to ensure the panel is in a clean state
-    } catch {
-      await browser.newWindow(url);
-    }
+    const href = await anchor.getProperty('href');
+    if (!href) throw new Error('Anchor does not have an href');
 
-    await browser.waitUntil(
-      async () => (await browser.getTitle()) === 'Ghostery panel',
+    await anchor.click();
+
+    await browser.waitUntil(() =>
+      browser.switchWindow(href).then(
+        () => true,
+        () => false,
+      ),
     );
 
-    const result = await fn();
-
-    await browser.closeWindow();
-    await browser.switchWindow(context);
-
-    return result;
+    await fn();
   } catch (e) {
-    await browser.switchWindow(context);
-    throw e;
+    error = e;
   }
+
+  if ((await browser.getUrl()) !== url) {
+    await browser.closeWindow();
+  }
+  await browser.switchWindow(url);
+
+  if (error) throw error;
 }

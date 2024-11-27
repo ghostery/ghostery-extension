@@ -35,7 +35,9 @@ describe('Onboarding', function () {
       await browser.url(getExtensionPageURL('onboarding'));
       await getExtensionElement('text:description', 'a:last-of-type').click();
 
-      await expect(getExtensionElement('text:privacy-policy')).toBeDisplayed();
+      await expect(
+        getExtensionElement('text:privacy-policy', 'p'),
+      ).toBeDisplayed();
     });
   }
 

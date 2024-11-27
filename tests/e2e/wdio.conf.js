@@ -87,8 +87,18 @@ export function buildForChrome() {
 }
 
 export const config = {
-  specs: [['**/*.spec.js']],
-  reporters: [['spec', { showPreface: false, onlyFailures: true }]],
+  specs: [
+    [
+      // Must be the first to enable the extension
+      'spec/onboarding.spec.js',
+      // Opening the panel with other suits makes this spec fails
+      // TODO: If we update wdio group packages, it might not be necessary
+      'spec/panel.spec.js',
+      'spec/main.spec.js',
+      'spec/advanced.spec.js',
+    ],
+  ],
+  reporters: [['spec', { showPreface: false }]],
   logLevel: argv.debug ? 'error' : 'silent',
   mochaOpts: {
     timeout: argv.debug ? 24 * 60 * 60 * 1000 : 60 * 1000,

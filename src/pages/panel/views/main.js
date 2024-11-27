@@ -149,7 +149,7 @@ export default {
               </a>
             </ui-action>
             <ui-action slot="actions">
-              <a href="${router.url(Menu)}">
+              <a href="${router.url(Menu)}" data-qa="button:menu">
                 <ui-icon name="menu" color="gray-800"></ui-icon>
               </a>
             </ui-action>

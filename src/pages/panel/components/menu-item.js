@@ -18,7 +18,7 @@ export default {
   icon: '',
   suffixIcon: 'arrow-right',
   render: ({ href, icon, suffixIcon }) => html`
-    <template layout="contents">
+    <template layout>
       <ui-action>
         <a
           href="${href}"

@@ -204,6 +204,7 @@ export default {
               href="${chrome.runtime.getURL('/static_pages/licenses.html')}"
               icon="license-m"
               suffix-icon="link-external-m"
+              data-qa="button:licenses"
             >
               Software Licenses
             </panel-menu-item>
