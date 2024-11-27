@@ -8,6 +8,8 @@ body {
 }
 
 body {
+  min-width: 350px;
+  min-height: 48px;
   max-height: 100dvh;
 }
 
