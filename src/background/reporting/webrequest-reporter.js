@@ -37,6 +37,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
     getBrowserInfo,
     isRequestAllowed: (state) =>
       !options.blockTrackers || isPaused(options, state.tabUrlParts.hostname),
+    dryRunMode: true,
     onTrackerInteraction: (event, state) => {
       if (event === 'observed') {
         return;
