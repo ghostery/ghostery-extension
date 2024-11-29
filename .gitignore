@@ -27,6 +27,7 @@ npm-debug.log
 
 # Source
 src/rule_resources
+src/static_pages
 
 # Build
 dist/

@@ -9,24 +9,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync } from 'fs';
-import { URL, fileURLToPath } from 'url';
+import { writeFileSync, existsSync } from 'fs';
+import { resolve } from 'node:path';
 
+const TARGET_PATH = resolve('src', 'rule_resources', 'wtm-stats.js');
 const DATA_URL = 'https://whotracks.me/data/trackers-preview.json';
-const OUTPUT_FILE = fileURLToPath(
-  new URL('../src/rule_resources/wtm-stats.js', import.meta.url),
-);
+
+if (existsSync(TARGET_PATH)) process.exit(0);
 
 const data = await fetch(DATA_URL).then((res) => {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return res.text();
 });
 
-writeFileSync(OUTPUT_FILE, `export default ${data}`);
+writeFileSync(TARGET_PATH, `export default ${data}`);
 
-console.log(
-  `Trackers preview data downloaded and saved in "${OUTPUT_FILE.replace(
-    process.cwd(),
-    '.',
-  )}"`,
-);
+console.log('Trackers preview data downloaded');

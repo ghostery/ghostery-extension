@@ -94,8 +94,6 @@
 		B456D52327E094E40038964E /* Extensions.svg in Resources */ = {isa = PBXBuildFile; fileRef = B456D51B27E094E40038964E /* Extensions.svg */; };
 		B463BF722ADE91F00088B0F0 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B463BF712ADE91F00088B0F0 /* icons */; };
 		B463BF732ADE91F00088B0F0 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B463BF712ADE91F00088B0F0 /* icons */; };
-		B46514432987C3BD000E71F6 /* licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = B46514422987C3BD000E71F6 /* licenses.html */; };
-		B46514442987C3BD000E71F6 /* licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = B46514422987C3BD000E71F6 /* licenses.html */; };
 		B469CA8A27BE924D00408C43 /* npm in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* npm */; };
 		B469CA8B27BE924D00408C43 /* npm in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8227BE924D00408C43 /* npm */; };
 		B469CA8E27BE924D00408C43 /* background in Resources */ = {isa = PBXBuildFile; fileRef = B469CA8427BE924D00408C43 /* background */; };
@@ -120,6 +118,8 @@
 		B4FFD50327F73B830041049C /* rule_resources in Resources */ = {isa = PBXBuildFile; fileRef = B4FFD50127F73B820041049C /* rule_resources */; };
 		CEC6DBCA292BE699001E9642 /* virtual in Resources */ = {isa = PBXBuildFile; fileRef = CEC6DBC9292BE699001E9642 /* virtual */; };
 		CEC6DBCB292BE699001E9642 /* virtual in Resources */ = {isa = PBXBuildFile; fileRef = CEC6DBC9292BE699001E9642 /* virtual */; };
+		CEC6DBCC292BE699001E9642 /* static_pages in Resources */ = {isa = PBXBuildFile; fileRef = B475613F2CF47A6500807030 /* static_pages */; };
+		CEC6DBCD292BE699001E9642 /* static_pages in Resources */ = {isa = PBXBuildFile; fileRef = B475613F2CF47A6500807030 /* static_pages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,7 +220,6 @@
 		B456D51A27E094E30038964E /* Arrow.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Arrow.svg; sourceTree = "<group>"; };
 		B456D51B27E094E40038964E /* Extensions.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Extensions.svg; sourceTree = "<group>"; };
 		B463BF712ADE91F00088B0F0 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../dist/icons; sourceTree = "<group>"; };
-		B46514422987C3BD000E71F6 /* licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = licenses.html; path = ../../dist/licenses.html; sourceTree = "<group>"; };
 		B469CA8227BE924D00408C43 /* npm */ = {isa = PBXFileReference; lastKnownFileType = folder; name = npm; path = ../../dist/npm; sourceTree = "<group>"; };
 		B469CA8427BE924D00408C43 /* background */ = {isa = PBXFileReference; lastKnownFileType = folder; name = background; path = ../../dist/background; sourceTree = "<group>"; };
 		B469CA8527BE924D00408C43 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../dist/assets; sourceTree = "<group>"; };
@@ -228,12 +227,14 @@
 		B469CA8727BE924D00408C43 /* pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pages; path = ../../dist/pages; sourceTree = "<group>"; };
 		B469CA8827BE924D00408C43 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../dist/_locales; sourceTree = "<group>"; };
 		B469CA9A27BE949000408C43 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = ../../dist/manifest.json; sourceTree = "<group>"; };
+		B475613F2CF47A6500807030 /* static_pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = static_pages; path = ../../dist/static_pages; sourceTree = "<group>"; };
 		B479A073299266F300A25D8F /* utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = utils; path = ../../dist/utils; sourceTree = "<group>"; };
 		B4D49C6F28045EFC00277CCA /* store */ = {isa = PBXFileReference; lastKnownFileType = folder; name = store; path = ../../dist/store; sourceTree = "<group>"; };
 		B4DA09B5283CEBAE0052F343 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4EBAD7E2A1DFA6C006A7D73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B4FFD50127F73B820041049C /* rule_resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rule_resources; path = ../../dist/rule_resources; sourceTree = "<group>"; };
 		CEC6DBC9292BE699001E9642 /* virtual */ = {isa = PBXFileReference; lastKnownFileType = folder; name = virtual; path = ../../dist/virtual; sourceTree = "<group>"; };
+    B475613F2CF47A6500807030 /* static_pages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = static_pages; path = ../../dist/static_pages; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,7 +469,6 @@
 				B45217DF2CA4233E00712A66 /* ui */,
 				B463BF712ADE91F00088B0F0 /* icons */,
 				B479A073299266F300A25D8F /* utils */,
-				B46514422987C3BD000E71F6 /* licenses.html */,
 				CEC6DBC9292BE699001E9642 /* virtual */,
 				B4D49C6F28045EFC00277CCA /* store */,
 				B4FFD50127F73B820041049C /* rule_resources */,
@@ -479,6 +479,7 @@
 				B469CA8627BE924D00408C43 /* content_scripts */,
 				B469CA8227BE924D00408C43 /* npm */,
 				B469CA8727BE924D00408C43 /* pages */,
+				B475613F2CF47A6500807030 /* static_pages */,
 			);
 			name = common;
 			path = "Shared (Extension)";
@@ -670,7 +671,6 @@
 				B469CA9027BE924D00408C43 /* assets in Resources */,
 				B469CA9427BE924D00408C43 /* pages in Resources */,
 				B469CA9627BE924D00408C43 /* _locales in Resources */,
-				B46514432987C3BD000E71F6 /* licenses.html in Resources */,
 				B45217E02CA4233E00712A66 /* ui in Resources */,
 				B4FFD50227F73B830041049C /* rule_resources in Resources */,
 				CEC6DBCA292BE699001E9642 /* virtual in Resources */,
@@ -681,6 +681,7 @@
 				B4D49C7028045EFC00277CCA /* store in Resources */,
 				B469CA9227BE924D00408C43 /* content_scripts in Resources */,
 				B463BF722ADE91F00088B0F0 /* icons in Resources */,
+        CEC6DBCC292BE699001E9642 /* static_pages in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +692,6 @@
 				B469CA9127BE924D00408C43 /* assets in Resources */,
 				B469CA9527BE924D00408C43 /* pages in Resources */,
 				B469CA9727BE924D00408C43 /* _locales in Resources */,
-				B46514442987C3BD000E71F6 /* licenses.html in Resources */,
 				B45217E12CA4233E00712A66 /* ui in Resources */,
 				B4FFD50327F73B830041049C /* rule_resources in Resources */,
 				CEC6DBCB292BE699001E9642 /* virtual in Resources */,
@@ -702,6 +702,7 @@
 				B4D49C7128045EFC00277CCA /* store in Resources */,
 				B469CA9327BE924D00408C43 /* content_scripts in Resources */,
 				B463BF732ADE91F00088B0F0 /* icons in Resources */,
+        CEC6DBCD292BE699001E9642 /* static_pages in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,7 +726,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari\n";
+			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari -- --clean\n";
 		};
 		B48C697F2B4D84600005A820 /* Build Source */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -744,7 +745,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari\n";
+			shellScript = "# go to the root directory\ncd ..\n\n# setup tool-versions managers\ntest -f /opt/homebrew/bin/mise && export PATH=\"/opt/homebrew/bin:$HOME/.local/share/mise/shims:$PATH\"\ntest -f /usr/local/opt/asdf/libexec/asdf.sh && . /usr/local/opt/asdf/libexec/asdf.sh \n\n# run build script\nnpm run build safari -- --clean\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

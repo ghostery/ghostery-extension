@@ -36,7 +36,7 @@ import * as wdio from './wdio.conf.js';
  */
 export const config = {
   ...wdio.config,
-  specs: [['**/*.spec.js']],
+  specs: [wdio.config.specs[0].slice(1)],
   exclude: ['spec/_onboarding.spec.js'],
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {

@@ -10,20 +10,11 @@
  */
 
 import { html, store, router, dispatch } from 'hybrids';
+
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
+import { openTabWithUrl } from '/utils/tabs.js';
 
 const WTM_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme/`;
-
-function openTabWithUrl(host, event) {
-  if (chrome.tabs?.create) {
-    event.preventDefault();
-    Promise.resolve(chrome.tabs.create({ url: event.currentTarget.href })).then(
-      () => {
-        window.close();
-      },
-    );
-  }
-}
 
 export default {
   categories: undefined,
