@@ -50,6 +50,14 @@ You can add the target after the `start` command to run the extension in a diffe
 
 To run local version in Safari, you have to use Xcode. The project files are available in the `xcode` folder, but Apple's ecosystem is more complex. Fortunately, most changes can be tested reliably in Chrome.
 
+### External Resources
+
+The build script caches fetched resources in several directories to speed up the development process. If you need to download fresh resources, add the `--clean` flag to the build command:
+
+```bash
+npm start -- --clean
+```
+
 ## Ghostery Team
 
 Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people.
