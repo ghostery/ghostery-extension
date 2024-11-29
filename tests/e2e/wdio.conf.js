@@ -96,6 +96,7 @@ export const config = {
       'spec/panel.spec.js',
       'spec/main.spec.js',
       'spec/advanced.spec.js',
+      'spec/whotracksme.spec.js',
     ],
   ],
   reporters: [['spec', { showPreface: false }]],

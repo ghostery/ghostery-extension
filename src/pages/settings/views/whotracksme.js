@@ -59,6 +59,7 @@ export default {
             <ui-toggle
               value="${options.trackerWheel}"
               onchange="${html.set(options, 'trackerWheel')}"
+              data-qa="toggle:trackerWheel"
             >
               <div layout="row items:start gap:2" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
@@ -83,6 +84,7 @@ export default {
               <ui-toggle
                 value="${options.trackerCount}"
                 onchange="${html.set(options, 'trackerCount')}"
+                data-qa="toggle:trackerCount"
               >
                 <div layout="row items:start gap:2" layout@768px="gap:3">
                   <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
@@ -110,6 +112,7 @@ export default {
             <ui-toggle
               value="${options.wtmSerpReport}"
               onchange="${html.set(options, 'wtmSerpReport')}"
+              data-qa="toggle:wtmSerpReport"
             >
               <div layout="row gap:2" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">

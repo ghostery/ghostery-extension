@@ -75,6 +75,13 @@ export async function setPrivacyToggle(name, value) {
   await setToggle(name, value);
 }
 
+export async function setWhoTracksMeToggle(name, value) {
+  await browser.url(getExtensionPageURL('settings'));
+  await getExtensionElement('button:whotracksme').click();
+
+  await setToggle(name, value);
+}
+
 export async function switchToPanel(fn) {
   const current = await browser.getTitle();
   const panelUrl = getExtensionPageURL('panel');

@@ -65,6 +65,7 @@ export default {
           class="${{ active: router.active(Whotracksme), wrap: true }}"
           slot="nav"
           translate="no"
+          data-qa="button:whotracksme"
         >
           <ui-icon name="wtm" color="nav" layout="size:3"></ui-icon>
           WhoTracks.Me
