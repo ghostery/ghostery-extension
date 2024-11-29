@@ -11,8 +11,8 @@
 
 import { parseFilter } from '@ghostery/adblocker';
 
+import * as OptionsObserver from '/utils/options-observer.js';
 import * as trackerdb from '/utils/trackerdb.js';
-import * as engines from '/utils/engines.js';
 
 import {
   createDocumentConverter,
@@ -142,10 +142,20 @@ async function updateFilters() {
     removeRuleIds,
   });
 
-  console.info('[exceptions] DNR rules for filters updated successfully');
+  console.info('[exceptions] Updated DNR rules');
 }
 
 if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
   // Update exceptions filters every time TrackerDB updates
-  engines.addChangeListener(engines.TRACKERDB_ENGINE, updateFilters);
+  // It happens when all engines are updated
+  OptionsObserver.addListener(
+    'filtersUpdatedAt',
+    async function updateExceptions(value, lastValue) {
+      // Only update exceptions filters if the value has changed and is set to timestamp.
+      // It will happen only after successful update of the engines.
+      if (lastValue !== undefined && value !== 0) {
+        await updateFilters();
+      }
+    },
+  );
 }
