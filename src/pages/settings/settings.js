@@ -91,7 +91,8 @@ export default {
               `
             : html`<ui-icon name="user" color="nav"></ui-icon> My Account`}
         </a>
-        ${store.ready(session) &&
+        ${__PLATFORM__ !== 'safari' &&
+        store.ready(session) &&
         html`
           <settings-card
             layout="hidden"
