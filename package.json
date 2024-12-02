@@ -33,7 +33,7 @@
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.12.0",
+    "globals": "^15.13.0",
     "license-report": "^6.5.0",
     "prettier": "^3.4.1",
     "sinon-chrome": "^3.0.1",
