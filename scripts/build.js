@@ -62,9 +62,19 @@ const manifest = JSON.parse(
   readFileSync(resolve(options.srcDir, `manifest.${argv.target}.json`), 'utf8'),
 );
 
-// Add flags to manifest
-if (argv.debug) manifest.debug = true;
-if (argv.staging) manifest.staging = true;
+// --- Add flags ---
+
+if (argv.debug) {
+  manifest.debug = true;
+}
+
+if (argv.staging) {
+  // Force re-download of resources to be sure we have the latest version
+  // when building with staging CDN
+  argv.clean = true;
+
+  manifest.staging = true;
+}
 
 // --- Download rule resources ---
 
@@ -104,8 +114,17 @@ if (!existsSync(licensesPath)) {
       .toString()
       .replace(
         '<html>',
-        '<html lang="en">\n<head>\n<meta charset="utf-8">\n</head>\n',
-      ),
+        `
+<html lang="en">
+  <head>
+    <title>Software Licenses</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  </head>
+`,
+      )
+      .trim(),
   );
 }
 
