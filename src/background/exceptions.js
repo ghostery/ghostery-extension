@@ -137,12 +137,14 @@ async function updateFilters() {
     .filter(({ id }) => id >= 2000000)
     .map(({ id }) => id);
 
-  await chrome.declarativeNetRequest.updateDynamicRules({
-    addRules,
-    removeRuleIds,
-  });
+  if (addRules.length || removeRuleIds.length) {
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      addRules,
+      removeRuleIds,
+    });
 
-  console.info('[exceptions] Updated DNR rules');
+    console.info('[exceptions] Updated DNR rules');
+  }
 }
 
 if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
