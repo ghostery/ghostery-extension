@@ -21,12 +21,6 @@ Ghostery is a powerful Tracker & Adblocker browser extension with over 100 milli
 * [X, formerly Twitter (@ghostery)](https://twitter.com/ghostery)
 * [Privacy Policy](https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/)
 
-## Additional Open Source Ghostery Projects
-
-* [Ghostery Desktop Browser](https://github.com/ghostery/user-agent-desktop)
-* [Ghostery iOS Browser](https://github.com/ghostery/user-agent-ios)
-* [Ghostery Android Browser](https://github.com/ghostery/user-agent-android)
-
 ## Development
 
 First, install dependencies and download additional resources (e.g. block lists):
