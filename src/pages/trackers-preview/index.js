@@ -17,6 +17,8 @@ import Options from '/store/options.js';
 
 import DisablePreviewImg from './assets/disable-preview.svg';
 
+import './styles.css';
+
 // Ensure the UI components are loaded
 import '/ui/index.js';
 

@@ -32,7 +32,7 @@
 .wtm-popup-iframe-wrapper {
   position: absolute;
   width: 350px;
-  height: 338px;
+  height: 0px;
   z-index: 127;
   box-shadow: 30px 60px 160px rgba(32, 44, 68, 0.2);
   border-radius: 16px;
