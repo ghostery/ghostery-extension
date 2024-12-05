@@ -19,6 +19,7 @@
     "locales": "npm run locales:setup && npm run locales.src",
     "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
     "release": "./scripts/release.sh",
+    "update-scriptlets": "deno scripts/update-scriptlets.js --tagName 1.61.3b4 > ./src/scriptlets.js",
     "package": "./scripts/package.sh"
   },
   "devDependencies": {
@@ -66,5 +67,5 @@
     "email": "info@ghostery.com",
     "url": "https://www.ghostery.com"
   },
-  "license": "MPL-2.0"
+  "license": "GPL-3.0"
 }
