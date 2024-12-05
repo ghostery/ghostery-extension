@@ -10,8 +10,13 @@
  */
 
 export async function openTabWithUrl(host, event) {
-  const { href } = event.currentTarget;
+  // Firefox does not support Tabs API in iframes (Trackers Preview)
+  if (__PLATFORM__ === 'firefox' && !chrome.tabs) {
+    event.currentTarget.target = '_blank';
+    return;
+  }
 
+  const { href } = event.currentTarget;
   event.preventDefault();
 
   try {
