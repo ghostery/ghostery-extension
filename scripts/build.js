@@ -211,6 +211,13 @@ cpSync(
   resolve(options.outDir, 'rule_resources', 'engine-trackerdb.dat'),
 );
 
+// copy scriptlets
+cpSync(
+  resolve(options.srcDir, 'rule_resources', 'scriptlets.js'),
+  resolve(options.outDir, 'rule_resources', 'scriptlets.js'),
+);
+
+
 // copy managed storage configuration
 if (manifest.storage?.managed_schema) {
   const path = resolve(options.srcDir, manifest.storage.managed_schema);
