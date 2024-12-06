@@ -45,7 +45,7 @@
     "@duckduckgo/autoconsent": "^10.17.0",
     "@ghostery/adblocker": "^2.1.1",
     "@ghostery/adblocker-webextension": "^2.1.1",
-    "@github/relative-time-element": "^4.3.0",
+    "@github/relative-time-element": "^4.4.4",
     "@sentry/browser": "^8.42.0",
     "@whotracksme/reporting": "^5.2.0",
     "bowser": "^2.11.0",
