@@ -44,30 +44,31 @@ console.log(`
 */
 const scriptlets = {};
 
-${scriptlets.map(scriptlet => {
-  const allDependencies = new Set();
+${scriptlets
+  .map((scriptlet) => {
+    const allDependencies = new Set();
 
-  const addDeps = (aScriptlet) => {
-    for (const dep of aScriptlet.dependencies || []) {
-      allDependencies.add(dep);
-      const bScriptlet = index.get(dep);
-      addDeps(bScriptlet);
-    }
-  };
+    const addDeps = (aScriptlet) => {
+      for (const dep of aScriptlet.dependencies || []) {
+        allDependencies.add(dep);
+        const bScriptlet = index.get(dep);
+        addDeps(bScriptlet);
+      }
+    };
 
-  addDeps(scriptlet);
+    addDeps(scriptlet);
 
-  const deps = [...allDependencies].reverse().map((dep) => index.get(dep).fn);
+    const deps = [...allDependencies].reverse().map((dep) => index.get(dep).fn);
 
-  return `
+    return `
 scriptlets['${scriptlet.name.split('.')[0]}'] = function (...args) {
 const scriptletGlobals = {};
 ${deps.map((dep) => dep.toString()).join('; ')}
 ${scriptlet.fn.toString()};
 ${scriptlet.fn.name}(...args);
 };`;
-
-}).join('\n\n')}
+  })
+  .join('\n\n')}
 
 export default scriptlets;
 `);

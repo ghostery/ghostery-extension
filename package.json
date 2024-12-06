@@ -19,7 +19,7 @@
     "locales": "npm run locales:setup && npm run locales.src",
     "xcode-export-locales": "rm -rf ./xcode/en.xcloc && xcodebuild -exportLocalizations -project ./xcode/Ghostery.xcodeproj -localizationPath ./xcode",
     "release": "./scripts/release.sh",
-    "udpate-scriptlets": "deno scripts/update-scriptlets.js --tagName 1.61.3b4 > ./src/rule_resources/scriptlets.js",
+    "update-scriptlets": "deno scripts/update-scriptlets.js --tagName 1.61.3b4 > ./src/rule_resources/scriptlets.js",
     "package": "./scripts/package.sh"
   },
   "devDependencies": {
