@@ -16,83 +16,80 @@ import { debugMode } from '/utils/debug.js';
 import asyncSetup from '/utils/setup.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
-import Metrics from './metrics.js';
+import Metrics, { processUrlQuery } from './metrics.js';
 
-async function loadStorage() {
-  const storage = {
-    active_daily_velocity: [],
-    engaged_daily_velocity: [],
-    engaged_daily_count: [],
-  };
-  Metrics.FREQUENCY_TYPES.forEach((frequency) => {
-    Metrics.CRITICAL_TYPES.forEach((type) => {
-      storage[`${type}_${frequency}`] = 0;
-    });
+async function detectUTMs() {
+  const tabs = await chrome.tabs.query({
+    url: [
+      'https://www.ghostery.com/*',
+      'https://www.ghosterystage.com/*',
+      'https://chrome.google.com/webstore/detail/ghostery-*/mlomiejdfkolichcflejclcbmpeaniij*',
+      'https://microsoftedge.microsoft.com/addons/detail/ghostery-*/fclbdkbhjlgkbpfldjodgjncejkkjcme*',
+      'https://addons.mozilla.org/*/firefox/addon/ghostery/*',
+      'https://addons.opera.com/*/extensions/details/ghostery/*',
+      'https://apps.apple.com/app/apple-store/id1436953057/*',
+    ],
   });
-  const { metrics = {} } = await chrome.storage.local.get(['metrics']);
-  Object.assign(storage, metrics);
-  return storage;
+
+  // find first ghostery.com tab with utm_source and utm_campaign
+  for (const tab of tabs) {
+    const query = processUrlQuery(tab.url);
+
+    if (query.utm_source && query.utm_campaign) {
+      return query;
+    }
+  }
+
+  return {};
 }
 
-async function saveStorage(storage, metrics) {
-  Object.assign(storage, metrics);
+async function saveStorage(storage) {
   await chrome.storage.local.set({ metrics: storage });
 }
 
-async function getConf(storage) {
-  const options = await store.resolve(Options);
-
-  // Historically install_data was stored in Options.
-  // As it is used by telemetry only, it is here migrated
-  // to telemetry storage.
-  // TODO: cleanup Options after September 2024
-  if (!storage.installDate) {
-    saveStorage(storage, {
-      installDate:
-        options.installDate || new Date().toISOString().split('T')[0],
-      installRandom: Math.floor(Math.random() * 100) + 1,
-    });
-  }
-
-  return {
-    enable_ad_block: options.blockAds,
-    enable_anti_tracking: options.blockTrackers,
-    enable_smart_block: options.blockAnnoyances,
-    enable_human_web: options.terms,
-    installDate: storage.installDate,
-    installRandom: storage.installRandom,
-    setup_shown: options.onboarding.shown,
-  };
-}
-
-let metrics;
+let runner;
 const setup = asyncSetup('telemetry', [
   (async () => {
-    const storage = await loadStorage();
     const { version } = chrome.runtime.getManifest();
 
-    metrics = new Metrics({
+    const { metrics = {}, utms } = await chrome.storage.local.get([
+      'metrics',
+      'utms',
+    ]);
+
+    // TODO: remove this and 'utms' loading from storage after a few releases
+    // This code moves the utms from 'utms' to 'metrics' storage
+    if (utms) {
+      metrics.utm_source = utms.utm_source || '';
+      metrics.utm_campaign = utms.utm_campaign || '';
+      chrome.storage.local.remove('utms');
+
+      saveStorage(metrics);
+    }
+
+    if (!metrics.installDate) {
+      metrics.installDate = new Date().toISOString().split('T')[0];
+      metrics.installRandom = Math.floor(Math.random() * 100) + 1;
+
+      const utms = await detectUTMs();
+      metrics.utm_source = utms.utm_source || '';
+      metrics.utm_campaign = utms.utm_campaign || '';
+
+      saveStorage(metrics);
+    }
+
+    runner = new Metrics({
       METRICS_BASE_URL: debugMode
         ? 'https://staging-d.ghostery.com'
         : 'https://d.ghostery.com',
       EXTENSION_VERSION: version,
-      getConf: () => getConf(storage),
+      storage: metrics,
+      saveStorage,
+      getConf: () => store.resolve(Options),
       log: console.log.bind(console, '[telemetry]'),
-      storage,
-      saveStorage: (metrics) => {
-        saveStorage(storage, metrics);
-      },
     });
 
-    if (metrics.isJustInstalled()) {
-      const utms = await metrics.detectUTMs();
-      await chrome.storage.local.set({ utms });
-    } else {
-      const { utms = {} } = await chrome.storage.local.get(['utms']);
-      metrics.setUTMs(utms);
-    }
-
-    metrics.setUninstallUrl();
+    runner.setUninstallUrl();
   })(),
 ]);
 
@@ -103,15 +100,16 @@ OptionsObserver.addListener('terms', async function telemetry(terms) {
   if (terms) {
     setup.pending && (await setup.pending);
 
-    if (metrics.isJustInstalled()) {
-      metrics.ping('install');
+    if (runner.isJustInstalled()) {
+      runner.ping('install');
     }
-    metrics.ping('active');
+
+    runner.ping('active');
   }
 });
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (enabled && msg.action === 'telemetry') {
-    Promise.resolve(setup.pending).then(() => metrics.ping(msg.event));
+    Promise.resolve(setup.pending).then(() => runner.ping(msg.event));
   }
 });
