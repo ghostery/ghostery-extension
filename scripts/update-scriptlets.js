@@ -12,16 +12,7 @@ const { builtinScriptlets: scriptlets } = await import(
   `https://raw.githubusercontent.com/gorhill/uBlock/${tagName}/src/js/resources/scriptlets.js`
 );
 
-const index = new Map();
-for (const scriptlet of scriptlets) {
-  index.set(scriptlet.name, scriptlet);
-  for (const name of scriptlet.aliases || []) {
-    index.set(name, scriptlet);
-  }
-}
-
-console.log(`
-/*******************************************************************************
+console.log(`/*******************************************************************************
 
     uBlock Origin - a comprehensive, efficient content blocker
     Copyright (C) 2019-present Raymond Hill
@@ -43,32 +34,37 @@ console.log(`
 
 */
 const scriptlets = {};
-
 ${scriptlets
   .map((scriptlet) => {
-    const allDependencies = new Set();
+    // Make full function
+    const fnLiteral = scriptlet.fn.toString();
+    if (fnLiteral.startsWith('class ')) {
+      return fnLiteral;
+    }
 
-    const addDeps = (aScriptlet) => {
-      for (const dep of aScriptlet.dependencies || []) {
-        allDependencies.add(dep);
-        const bScriptlet = index.get(dep);
-        addDeps(bScriptlet);
+    // Extract function call name
+    const callNameEndsAt = fnLiteral.indexOf('(');
+    if (callNameEndsAt === -1) {
+      return '';
+    }
+    const callName = fnLiteral.slice('function '.length, callNameEndsAt);
+
+    // Handle aliases
+    const names = [scriptlet.name];
+    if (scriptlet.aliases !== undefined) {
+      for (const alias of scriptlet.aliases) {
+        names.push(alias);
       }
-    };
+    }
 
-    addDeps(scriptlet);
-
-    const deps = [...allDependencies].reverse().map((dep) => index.get(dep).fn);
-
-    return `
-scriptlets['${scriptlet.name.split('.')[0]}'] = function (...args) {
-const scriptletGlobals = {};
-${deps.map((dep) => dep.toString()).join('; ')}
-${scriptlet.fn.toString()};
-${scriptlet.fn.name}(...args);
-};`;
+    return `${fnLiteral}
+const __${callName} = {
+  callName: "${callName}",
+  dependencies: ${JSON.stringify(scriptlet.dependencies || [])},
+  fn: ${callName},
+};
+${names.map((name) => `scriptlets["${name}"] = __${callName};`).join('\n')}`;
   })
   .join('\n\n')}
 
-export default scriptlets;
-`);
+export default scriptlets;`);
