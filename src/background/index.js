@@ -30,3 +30,5 @@ import './reporting/index.js';
 import './telemetry/index.js';
 
 import './devtools.js';
+import scriptlets from '../rule_resources/scriptlets.js';
+globalThis.scriptlets = scriptlets;

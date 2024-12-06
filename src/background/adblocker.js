@@ -27,6 +27,7 @@ import { debugMode } from '/utils/debug.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
+import { default as scriptlets } from '../rule_resources/scriptlets.js';
 
 let options = Options;
 
@@ -260,7 +261,7 @@ async function injectCosmetics(details, config) {
   const isBootstrap = config.bootstrap;
 
   {
-    const cosmetics = engine.getCosmeticsFilters({
+    const { matches, allowGenericHides } = engine.matchCosmeticFilters({
       domain,
       hostname,
       url,
@@ -281,12 +282,72 @@ async function injectCosmetics(details, config) {
       getRulesFromDOM: !isBootstrap,
     });
 
-    if (isBootstrap && cosmetics.scripts.length > 0) {
-      injectScriptlets(cosmetics.scripts, tabId, frameId);
+    // Scriptlet sources including all dependencies
+    const includes = new Set();
+    // A list of call signatures extracted from filters
+    const signatures = [];
+    for (const match of matches) {
+      if (
+        match.exception !== undefined ||
+        match.filter.isScriptInject() === false
+      ) {
+        continue;
+      }
+
+      const parsed = match.filter.parseScript();
+      if (parsed === undefined) {
+        continue;
+      }
+
+      const scriptlet = scriptlets[parsed.name];
+      if (scriptlet === undefined) {
+        continue;
+      }
+
+      includes.add(scriptlet.fn.toString());
+
+      const resolves = [...scriptlet.dependencies];
+      while (resolves.length > 0) {
+        const dependency = scriptlets[resolves.shift()];
+        includes.add(dependency.fn.toString());
+
+        // Flatten dependencies of dependencies to resovles queue.
+        if (dependency !== undefined) {
+          resolves.push(...dependency.dependencies);
+        }
+      }
+
+      signatures.push(
+        `${scriptlet.callName}(${JSON.stringify(scriptlet.args)});`,
+      );
     }
 
-    if (cosmetics.styles) {
-      injectStyles(cosmetics.styles, tabId, frameId);
+    if (signatures.length !== 0) {
+      let script = '';
+      for (const include of includes) {
+        script += include + '\n';
+      }
+      for (const signature of signatures) {
+        script += signature + '\n';
+      }
+
+      injectScriptlets(script, tabId, frameId);
+    }
+
+    const { styles } = engine.injectCosmeticFilters({
+      url,
+
+      injectStyles: true,
+      injectScriptlets: false,
+      injectExtended: isBootstrap,
+      injectPureHasSafely: isBootstrap,
+
+      allowGenericHides,
+      getBaseRules: false,
+    });
+
+    if (styles) {
+      injectStyles(styles, tabId, frameId);
     }
   }
 
