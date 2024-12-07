@@ -86,6 +86,9 @@ export async function reloadMainEngine() {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
+  if (__PLATFORM__ === 'firefox') {
+    contentScripts.unregisterAll();
+  }
 }
 
 let updating = false;
@@ -167,7 +170,49 @@ export const setup = asyncSetup('adblocker', [
  * Cosmetics injection
  */
 
-async function injectScriptlets(scripts, tabId, frameId) {
+const contentScripts = (() => {
+  const map = new Map();
+  return {
+    async register(hostname, code) {
+      this.unregister(hostname);
+      try {
+        const contentScript = await browser.contentScripts.register({
+          js: [
+            {
+              code,
+            },
+          ],
+          allFrames: true,
+          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+          matchAboutBlank: true,
+          matchOriginAsFallback: true,
+          runAt: 'document_start',
+        });
+        map.set(hostname, contentScript);
+      } catch (e) {
+        console.warn(e);
+        this.unregister(hostname);
+      }
+    },
+    isRegistered(hostname) {
+      return map.has(hostname);
+    },
+    unregister(hostname) {
+      const contentScript = map.get(hostname);
+      if (contentScript) {
+        contentScript.unregister();
+        map.delete(hostname);
+      }
+    },
+    unregisterAll() {
+      for (const hostname of map.keys()) {
+        this.unregister(hostname);
+      }
+    },
+  };
+})();
+
+async function injectScriptlets(scripts, tabId, frameId, hostname) {
   // Dynamically injected scriptlets can be difficult to find later in
   // the debugger. Console logs simplifies setting up breakpoints if needed.
   if (debugMode) {
@@ -195,6 +240,21 @@ async function injectScriptlets(scripts, tabId, frameId) {
     (document.head || document.documentElement).appendChild(script);
     script.remove();
   }
+
+  if (__PLATFORM__ === 'firefox') {
+    if (scripts.length === 0) {
+      contentScripts.unregister(hostname);
+    } else if (!contentScripts.isRegistered(hostname)) {
+      await contentScripts.register(
+        hostname,
+        `(${scriptletInjector.toString()})("${encodeURIComponent(scriptlets)}")`,
+      );
+    } else {
+      // do nothing if already registered
+    }
+    return;
+  }
+  if (scripts.length === 0) return;
 
   chrome.scripting.executeScript(
     {
@@ -236,6 +296,9 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
+  const isBootstrap = config.bootstrap;
+  const scriptletsOnly = Boolean(config.scriptletsOnly);
+
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
@@ -249,6 +312,8 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
+  if (scriptletsOnly && contentScripts.isRegistered(hostname)) return;
+
   if (isPaused(options, hostname)) return;
 
   const tabHostname = tabStats.get(tabId)?.hostname;
@@ -257,7 +322,6 @@ async function injectCosmetics(details, config) {
   }
 
   const engine = engines.get(engines.MAIN_ENGINE);
-  const isBootstrap = config.bootstrap;
 
   {
     const cosmetics = engine.getCosmeticsFilters({
@@ -281,8 +345,12 @@ async function injectCosmetics(details, config) {
       getRulesFromDOM: !isBootstrap,
     });
 
-    if (isBootstrap && cosmetics.scripts.length > 0) {
-      injectScriptlets(cosmetics.scripts, tabId, frameId);
+    if (isBootstrap) {
+      injectScriptlets(cosmetics.scripts, tabId, frameId, hostname);
+    }
+
+    if (scriptletsOnly) {
+      return;
     }
 
     if (cosmetics.styles) {
@@ -367,6 +435,13 @@ function isTrusted(request, type) {
 }
 
 if (__PLATFORM__ === 'firefox') {
+  chrome.webNavigation.onBeforeNavigate.addListener(
+    (details) => {
+      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
+    },
+    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+  );
+
   function isExtensionRequest(details) {
     return (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
