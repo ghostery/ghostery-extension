@@ -204,30 +204,6 @@ function check(response) {
   return response;
 }
 
-const updateListeners = new Map();
-export function addChangeListener(name, fn) {
-  if (!updateListeners.has(name)) {
-    updateListeners.set(name, new Set());
-  }
-
-  updateListeners.get(name).add(fn);
-}
-
-function notifyListeners(name) {
-  const fns = updateListeners.get(name);
-
-  fns?.forEach((fn) => {
-    try {
-      fn();
-    } catch (e) {
-      console.error(
-        `[engines] Error while calling update listener for "${name}"`,
-        e,
-      );
-    }
-  });
-}
-
 const CDN_HOSTNAME = stagingMode
   ? 'staging-cdn.ghostery.com'
   : 'cdn.ghostery.com';
@@ -411,9 +387,6 @@ export async function update(name) {
     if (updated) {
       console.info(`[engines] Engine "${name}" updated`);
 
-      // Notify listeners
-      notifyListeners(name);
-
       // Save the new engine to storage
       saveToStorage(name);
 
@@ -450,8 +423,6 @@ export function create(name, options = null) {
     console.error(`[engines] Failed to save engine "${name}" to storage`);
   });
 
-  notifyListeners(name);
-
   return engine;
 }
 
@@ -469,8 +440,6 @@ export function replace(name, engineOrEngines) {
   saveToStorage(name).catch(() => {
     console.error(`[engines] Failed to save engine "${name}" to storage`);
   });
-
-  notifyListeners(name);
 
   return engine;
 }
