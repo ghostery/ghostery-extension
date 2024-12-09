@@ -23,10 +23,18 @@ import * as trackerdb from '/utils/trackerdb.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
-import scriptlets from '/scriptlets.js';
+import SCRIPTLETS from '/scriptlets.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
+
+const scriptlets = new Map();
+for (const [name, scriptlet] of Object.entries(SCRIPTLETS)) {
+  scriptlets.set(name, scriptlet.func);
+  for (const alias of scriptlet.aliases) {
+    scriptlets.set(alias, scriptlet.func);
+  }
+}
 
 let options = Options;
 
@@ -175,10 +183,8 @@ async function injectScriptlets(filters, tabId, frameId) {
     }
 
     const { name, args } = parsed;
-    const canonicalName = engines
-      .get(engines.MAIN_ENGINE)
-      .resources.getScriptletCanonicalName(name);
-    const func = scriptlets[canonicalName];
+    const canonicalName = name.endsWith('.js') ? name : `${name}.js`;
+    const func = scriptlets.get(canonicalName);
     const decodedeArgs = args.map((arg) => decodeURIComponent(arg));
 
     chrome.scripting.executeScript(

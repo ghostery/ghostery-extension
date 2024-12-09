@@ -21,9 +21,11 @@
 
 */
 const scriptlets = {};
+const aliases = {};
 
 
-scriptlets['set-attr.js'] = function (...args) {
+scriptlets['set-attr.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function runAt(fn, when) {
     const intFromReadyState = state => {
@@ -330,10 +332,15 @@ function setAttr(
     setAttrFn(false, logPrefix, selector, attr, value);
 };
 setAttr(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['trusted-set-attr.js'] = function (...args) {
+scriptlets['trusted-set-attr.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function runAt(fn, when) {
     const intFromReadyState = state => {
@@ -628,10 +635,15 @@ function trustedSetAttr(
     setAttrFn(true, logPrefix, selector, attr, value);
 };
 trustedSetAttr(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['remove-attr.js'] = function (...args) {
+scriptlets['remove-attr.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -919,10 +931,15 @@ function removeAttr(
     runAt(( ) => { start(); }, behavior.split(/\s+/));
 };
 removeAttr(...args);
+},
+aliases: ["ra.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['set-constant.js'] = function (...args) {
+scriptlets['set-constant.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function validateConstantFn(trusted, raw, extraArgs = {}) {
     const safe = safeSelf();
@@ -1344,10 +1361,15 @@ function setConstant(
     setConstantFn(false, ...args);
 };
 setConstant(...args);
+},
+aliases: ["set.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['trusted-set-constant.js'] = function (...args) {
+scriptlets['trusted-set-constant.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function validateConstantFn(trusted, raw, extraArgs = {}) {
     const safe = safeSelf();
@@ -1769,10 +1791,15 @@ function trustedSetConstant(
     setConstantFn(true, ...args);
 };
 trustedSetConstant(...args);
+},
+aliases: ["trusted-set.js"],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-replace-argument.js'] = function (...args) {
+scriptlets['trusted-replace-argument.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function validateConstantFn(trusted, raw, extraArgs = {}) {
     const safe = safeSelf();
@@ -2248,10 +2275,15 @@ function trustedReplaceArgument(
     });
 };
 trustedReplaceArgument(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['spoof-css.js'] = function (...args) {
+scriptlets['spoof-css.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -2557,10 +2589,15 @@ function spoofCSS(
     });
 };
 spoofCSS(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-setTimeout.js'] = function (...args) {
+scriptlets['prevent-setTimeout.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -2885,10 +2922,15 @@ function preventSetTimeout(
     });
 };
 preventSetTimeout(...args);
+},
+aliases: ["no-setTimeout-if.js","nostif.js","setTimeout-defuser.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-setInterval.js'] = function (...args) {
+scriptlets['prevent-setInterval.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -3213,10 +3255,15 @@ function preventSetInterval(
     });
 };
 preventSetInterval(...args);
+},
+aliases: ["no-setInterval-if.js","nosiif.js","setInterval-defuser.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-requestAnimationFrame.js'] = function (...args) {
+scriptlets['prevent-requestAnimationFrame.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -3506,10 +3553,15 @@ function preventRequestAnimationFrame(
     });
 };
 preventRequestAnimationFrame(...args);
+},
+aliases: ["no-requestAnimationFrame-if.js","norafif.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['set-cookie.js'] = function (...args) {
+scriptlets['set-cookie.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function getCookieFn(
     name = ''
@@ -3817,10 +3869,15 @@ function setCookie(
     }
 };
 setCookie(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['set-cookie-reload.js'] = function (...args) {
+scriptlets['set-cookie-reload.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function getCookieFn(
     name = ''
@@ -4131,10 +4188,15 @@ function setCookieReload(name, value, path, ...args) {
     setCookie(name, value, path, 'reload', '1', ...args);
 };
 setCookieReload(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['trusted-set-cookie.js'] = function (...args) {
+scriptlets['trusted-set-cookie.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function getCookieFn(
     name = ''
@@ -4438,10 +4500,15 @@ function trustedSetCookie(
     }
 };
 trustedSetCookie(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-set-cookie-reload.js'] = function (...args) {
+scriptlets['trusted-set-cookie-reload.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function getCookieFn(
     name = ''
@@ -4748,10 +4815,15 @@ function trustedSetCookieReload(name, value, offsetExpiresSec, path, ...args) {
     trustedSetCookie(name, value, offsetExpiresSec, path, 'reload', '1', ...args);
 };
 trustedSetCookieReload(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['remove-cookie.js'] = function (...args) {
+scriptlets['remove-cookie.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -5001,10 +5073,15 @@ function removeCookie(
     }
 };
 removeCookie(...args);
+},
+aliases: ["cookie-remover.js"],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['set-local-storage-item.js'] = function (...args) {
+scriptlets['set-local-storage-item.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -5280,10 +5357,15 @@ function setLocalStorageItem(key = '', value = '') {
     setLocalStorageItemFn('local', false, key, value);
 };
 setLocalStorageItem(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['set-session-storage-item.js'] = function (...args) {
+scriptlets['set-session-storage-item.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -5559,10 +5641,15 @@ function setSessionStorageItem(key = '', value = '') {
     setLocalStorageItemFn('session', false, key, value);
 };
 setSessionStorageItem(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['trusted-set-local-storage-item.js'] = function (...args) {
+scriptlets['trusted-set-local-storage-item.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -5838,10 +5925,15 @@ function trustedSetLocalStorageItem(key = '', value = '') {
     setLocalStorageItemFn('local', true, key, value);
 };
 trustedSetLocalStorageItem(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-set-session-storage-item.js'] = function (...args) {
+scriptlets['trusted-set-session-storage-item.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -6117,10 +6209,15 @@ function trustedSetSessionStorageItem(key = '', value = '') {
     setLocalStorageItemFn('session', true, key, value);
 };
 trustedSetSessionStorageItem(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['abort-current-script.js'] = function (...args) {
+scriptlets['abort-current-script.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function runAtHtmlElementFn(fn) {
     if ( document.documentElement ) {
@@ -6450,10 +6547,15 @@ function abortCurrentScript(...args) {
     });
 };
 abortCurrentScript(...args);
+},
+aliases: ["acs.js","abort-current-inline-script.js","acis.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['abort-on-property-read.js'] = function (...args) {
+scriptlets['abort-on-property-read.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -6704,10 +6806,15 @@ function abortOnPropertyRead(
     makeProxy(owner, chain);
 };
 abortOnPropertyRead(...args);
+},
+aliases: ["aopr.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['abort-on-property-write.js'] = function (...args) {
+scriptlets['abort-on-property-write.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -6936,10 +7043,15 @@ function abortOnPropertyWrite(
     });
 };
 abortOnPropertyWrite(...args);
+},
+aliases: ["aopw.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['abort-on-stack-trace.js'] = function (...args) {
+scriptlets['abort-on-stack-trace.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function matchesStackTrace(
     needleDetails,
@@ -7239,10 +7351,15 @@ function abortOnStackTrace(
     makeProxy(owner, chain);
 };
 abortOnStackTrace(...args);
+},
+aliases: ["aost.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['addEventListener-defuser.js'] = function (...args) {
+scriptlets['addEventListener-defuser.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function shouldDebug(details) {
     if ( details instanceof Object === false ) { return false; }
@@ -7619,10 +7736,15 @@ function addEventListenerDefuser(
     }, extraArgs.runAt);
 };
 addEventListenerDefuser(...args);
+},
+aliases: ["aeld.js","prevent-addEventListener.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['json-prune.js'] = function (...args) {
+scriptlets['json-prune.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function objectFindOwnerFn(
     root,
@@ -8005,10 +8127,15 @@ function jsonPrune(
     });
 };
 jsonPrune(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['json-prune-fetch-response.js'] = function (...args) {
+scriptlets['json-prune-fetch-response.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function parsePropertiesToMatch(propsToMatch, implicit = '') {
     const safe = safeSelf();
@@ -8484,10 +8611,15 @@ function jsonPruneFetchResponse(...args) {
     jsonPruneFetchResponseFn(...args);
 };
 jsonPruneFetchResponse(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['json-prune-xhr-response.js'] = function (...args) {
+scriptlets['json-prune-xhr-response.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function parsePropertiesToMatch(propsToMatch, implicit = '') {
     const safe = safeSelf();
@@ -8966,10 +9098,15 @@ function jsonPruneXhrResponse(
     };
 };
 jsonPruneXhrResponse(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['evaldata-prune.js'] = function (...args) {
+scriptlets['evaldata-prune.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function objectFindOwnerFn(
     root,
@@ -9336,10 +9473,15 @@ function evaldataPrune(
     });
 };
 evaldataPrune(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['adjust-setInterval.js'] = function (...args) {
+scriptlets['adjust-setInterval.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -9555,10 +9697,15 @@ function adjustSetInterval(
     });
 };
 adjustSetInterval(...args);
+},
+aliases: ["nano-setInterval-booster.js","nano-sib.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['adjust-setTimeout.js'] = function (...args) {
+scriptlets['adjust-setTimeout.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -9774,10 +9921,15 @@ function adjustSetTimeout(
     });
 };
 adjustSetTimeout(...args);
+},
+aliases: ["nano-setTimeout-booster.js","nano-stb.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['noeval-if.js'] = function (...args) {
+scriptlets['noeval-if.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -9987,10 +10139,15 @@ function noEvalIf(
     });
 };
 noEvalIf(...args);
+},
+aliases: ["prevent-eval-if.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-fetch.js'] = function (...args) {
+scriptlets['prevent-fetch.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function proxyApplyFn(
     target = '',
@@ -10414,10 +10571,15 @@ function noFetchIf(
     });
 };
 noFetchIf(...args);
+},
+aliases: ["no-fetch-if.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-refresh.js'] = function (...args) {
+scriptlets['prevent-refresh.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -10631,10 +10793,15 @@ function preventRefresh(
     self.addEventListener('load', defuse, { capture: true, once: true });
 };
 preventRefresh(...args);
+},
+aliases: ["refresh-defuser.js"],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['remove-class.js'] = function (...args) {
+scriptlets['remove-class.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -10913,10 +11080,15 @@ function removeClass(
     }, /\bcomplete\b/.test(behavior) ? 'idle' : 'loading');
 };
 removeClass(...args);
+},
+aliases: ["rc.js"],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['webrtc-if.js'] = function (...args) {
+scriptlets['webrtc-if.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -11163,10 +11335,15 @@ function webrtcIf(
         });
 };
 webrtcIf(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-xhr.js'] = function (...args) {
+scriptlets['prevent-xhr.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function parsePropertiesToMatch(propsToMatch, implicit = '') {
     const safe = safeSelf();
@@ -11637,10 +11814,15 @@ function preventXhr(...args) {
     return preventXhrFn(false, ...args);
 };
 preventXhr(...args);
+},
+aliases: ["no-xhr-if.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-window-open.js'] = function (...args) {
+scriptlets['prevent-window-open.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -11994,10 +12176,15 @@ function noWindowOpenIf(
     });
 };
 noWindowOpenIf(...args);
+},
+aliases: ["nowoif.js","no-window-open-if.js","window.open-defuser.js"],
+
+requiresTrust: false,
 };
 
 
-scriptlets['close-window.js'] = function (...args) {
+scriptlets['close-window.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -12206,10 +12393,15 @@ function closeWindow(
     }
 };
 closeWindow(...args);
+},
+aliases: ["window-close-if.js"],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['window.name-defuser.js'] = function (...args) {
+scriptlets['window.name-defuser.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function windowNameDefuser() {
@@ -12218,10 +12410,15 @@ function windowNameDefuser() {
     }
 };
 windowNameDefuser(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['overlay-buster.js'] = function (...args) {
+scriptlets['overlay-buster.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function overlayBuster() {
@@ -12275,10 +12472,15 @@ function overlayBuster() {
     }
 };
 overlayBuster(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['alert-buster.js'] = function (...args) {
+scriptlets['alert-buster.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function alertBuster() {
@@ -12295,10 +12497,15 @@ function alertBuster() {
     });
 };
 alertBuster(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['nowebrtc.js'] = function (...args) {
+scriptlets['nowebrtc.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function noWebrtc() {
@@ -12333,10 +12540,15 @@ function noWebrtc() {
     }
 };
 noWebrtc(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['disable-newtab-links.js'] = function (...args) {
+scriptlets['disable-newtab-links.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function disableNewtabLinks() {
@@ -12353,10 +12565,15 @@ function disableNewtabLinks() {
     });
 };
 disableNewtabLinks(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['xml-prune.js'] = function (...args) {
+scriptlets['xml-prune.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -12683,10 +12900,15 @@ function xmlPrune(
     });
 };
 xmlPrune(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['m3u-prune.js'] = function (...args) {
+scriptlets['m3u-prune.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -13031,10 +13253,15 @@ function m3uPrune(
     });
 };
 m3uPrune(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['href-sanitizer.js'] = function (...args) {
+scriptlets['href-sanitizer.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -13365,10 +13592,15 @@ function hrefSanitizer(
     runAt(( ) => { start(); }, 'interactive');
 };
 hrefSanitizer(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['call-nothrow.js'] = function (...args) {
+scriptlets['call-nothrow.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function callNothrow(
@@ -13399,10 +13631,15 @@ function callNothrow(
     });
 };
 callNothrow(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['remove-node-text.js'] = function (...args) {
+scriptlets['remove-node-text.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function runAt(fn, when) {
     const intFromReadyState = state => {
@@ -13732,10 +13969,15 @@ function removeNodeText(
     replaceNodeTextFn(nodeName, '', '', 'includes', includes || '', ...extraArgs);
 };
 removeNodeText(...args);
+},
+aliases: ["rmnt.js"],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['prevent-canvas.js'] = function (...args) {
+scriptlets['prevent-canvas.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -13937,10 +14179,15 @@ function preventCanvas(
     });
 };
 preventCanvas(...args);
+},
+aliases: [],
+
+requiresTrust: false,
 };
 
 
-scriptlets['multiup.js'] = function (...args) {
+scriptlets['multiup.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 
 function multiup() {
@@ -13959,10 +14206,15 @@ function multiup() {
     document.addEventListener('click', handler, { capture: true });
 };
 multiup(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: false,
 };
 
 
-scriptlets['trusted-replace-node-text.js'] = function (...args) {
+scriptlets['trusted-replace-node-text.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function runAt(fn, when) {
     const intFromReadyState = state => {
@@ -14293,10 +14545,15 @@ function replaceNodeText(
     replaceNodeTextFn(nodeName, pattern, replacement, ...extraArgs);
 };
 replaceNodeText(...args);
+},
+aliases: ["trusted-rpnt.js","replace-node-text.js","rpnt.js"],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-replace-fetch-response.js'] = function (...args) {
+scriptlets['trusted-replace-fetch-response.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function parsePropertiesToMatch(propsToMatch, implicit = '') {
     const safe = safeSelf();
@@ -14607,10 +14864,15 @@ function trustedReplaceFetchResponse(...args) {
     replaceFetchResponseFn(true, ...args);
 };
 trustedReplaceFetchResponse(...args);
+},
+aliases: ["trusted-rpfr.js"],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-replace-xhr-response.js'] = function (...args) {
+scriptlets['trusted-replace-xhr-response.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function parsePropertiesToMatch(propsToMatch, implicit = '') {
     const safe = safeSelf();
@@ -14914,10 +15176,15 @@ function trustedReplaceXhrResponse(
     };
 };
 trustedReplaceXhrResponse(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-click-element.js'] = function (...args) {
+scriptlets['trusted-click-element.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -15304,10 +15571,15 @@ function trustedClickElement(
     runAtHtmlElementFn(process);
 };
 trustedClickElement(...args);
+},
+aliases: [],
+world: 'ISOLATED',
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-prune-inbound-object.js'] = function (...args) {
+scriptlets['trusted-prune-inbound-object.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -15726,10 +15998,15 @@ function trustedPruneInboundObject(
     });
 };
 trustedPruneInboundObject(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-prune-outbound-object.js'] = function (...args) {
+scriptlets['trusted-prune-outbound-object.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function proxyApplyFn(
     target = '',
@@ -16182,10 +16459,15 @@ function trustedPruneOutboundObject(
     });
 };
 trustedPruneOutboundObject(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-replace-outbound-text.js'] = function (...args) {
+scriptlets['trusted-replace-outbound-text.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -16495,10 +16777,15 @@ function trustedReplaceOutboundText(
     });
 };
 trustedReplaceOutboundText(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-suppress-native-method.js'] = function (...args) {
+scriptlets['trusted-suppress-native-method.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -16825,10 +17112,15 @@ function trustedSuppressNativeMethod(
     });
 };
 trustedSuppressNativeMethod(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-prevent-xhr.js'] = function (...args) {
+scriptlets['trusted-prevent-xhr.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function parsePropertiesToMatch(propsToMatch, implicit = '') {
     const safe = safeSelf();
@@ -17299,10 +17591,15 @@ function trustedPreventXhr(...args) {
     return preventXhrFn(true, ...args);
 };
 trustedPreventXhr(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-prevent-dom-bypass.js'] = function (...args) {
+scriptlets['trusted-prevent-dom-bypass.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function safeSelf() {
     if ( scriptletGlobals.safeSelf ) {
@@ -17602,10 +17899,15 @@ function trustedPreventDomBypass(
     });
 };
 trustedPreventDomBypass(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
 
 
-scriptlets['trusted-override-element-method.js'] = function (...args) {
+scriptlets['trusted-override-element-method.js'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 function validateConstantFn(trusted, raw, extraArgs = {}) {
     const safe = safeSelf();
@@ -17956,7 +18258,12 @@ function trustedOverrideElementMethod(
     });
 };
 trustedOverrideElementMethod(...args);
+},
+aliases: [],
+
+requiresTrust: true,
 };
+
 
 export default scriptlets;
 
