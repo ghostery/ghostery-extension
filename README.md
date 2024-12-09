@@ -3,7 +3,6 @@
 [![Tests](https://github.com/ghostery/ghostery-extension/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ghostery/ghostery-extension/actions/workflows/test.yml)
 ![GitHub Release](https://img.shields.io/github/v/release/ghostery/ghostery-extension)
 
-
 Ghostery is a powerful Tracker & Adblocker browser extension with over 100 million downloads. Block ads, stop trackers, and speed up websites. Privacy at its best.
 
 * Block all ads on websites, including YouTube and Facebook, to focus on the information that matters.
