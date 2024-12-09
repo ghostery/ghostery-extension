@@ -15,6 +15,7 @@ import {
   updateResponseHeadersWithCSP,
 } from '@ghostery/adblocker-webextension';
 import { parse } from 'tldts-experimental';
+import SCRIPTLETS from '@ghostery/scriptlets';
 
 import Options, { ENGINES, isPaused } from '/store/options.js';
 
@@ -23,7 +24,6 @@ import * as trackerdb from '/utils/trackerdb.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
-import SCRIPTLETS from '/scriptlets.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
