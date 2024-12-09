@@ -62,14 +62,20 @@ ${scriptlets
     const deps = [...allDependencies].reverse().map((dep) => index.get(dep).fn);
 
     return `
-scriptlets['${scriptlet.name}'] = function (...args) {
+scriptlets['${scriptlet.name}'] = {
+func: function (...args) {
 const scriptletGlobals = {};
 ${deps.map((dep) => dep.toString()).join('\n')}
 ${scriptlet.fn.toString()};
 ${scriptlet.fn.name}(...args);
-};`;
+},
+aliases: ${JSON.stringify(scriptlet.aliases || [])},
+${scriptlet.world ? `world: '${scriptlet.world}',` : '' }
+requiresTrust: ${scriptlet.requiresTrust || false},
+};
+`;
   })
-  .join('\n\n')}
+  .join('\n')}
 
 export default scriptlets;
 `);
