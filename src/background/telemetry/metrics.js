@@ -160,17 +160,12 @@ export default class Metrics {
 
     if (type !== 'uninstall') {
       metrics_url +=
-        // Random number, assigned at install (former install_rand)
-        buildQueryPair('ir', this.storage.installRandom) +
         // Adblocking state
         buildQueryPair('ab', conf.blockAds ? '1' : '0') +
         // Smartblocking state
         buildQueryPair('sm', conf.blockAnnoyances ? '1' : '0') +
         // Antitracking state
         buildQueryPair('at', conf.blockTrackers ? '1' : '0') +
-        //
-        // -- generative parameters --
-        //
         // Recency, days since last active daily ping
         // prettier-ignore
         buildQueryPair('rc', this._getRecencyActive(type, frequency).toString()) +
@@ -357,20 +352,7 @@ export default class Metrics {
     this.storage.active_daily_velocity = active_daily_velocity;
     this.saveStorage(this.storage);
 
-    const daily = this._timeToExpired('active', 'daily');
-    if (daily <= 0) {
-      this._sendReq('active', ['daily']);
-    }
-
-    const weekly = this._timeToExpired('active', 'weekly');
-    if (weekly <= 0) {
-      this._sendReq('active', ['weekly']);
-    }
-
-    const monthly = this._timeToExpired('active', 'monthly');
-    if (monthly <= 0) {
-      this._sendReq('active', ['monthly']);
-    }
+    this._sendReq('active', ['daily', 'weekly', 'monthly']);
   }
 
   /**
@@ -400,18 +382,7 @@ export default class Metrics {
     this.storage.engaged_daily_count = engaged_daily_count;
     this.storage.engaged_daily_velocity = engaged_daily_velocity;
     this.saveStorage(this.storage);
-    this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
-  }
 
-  static async _getSearchExtensionMetrics() {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage(
-        'search@ghostery.com',
-        'getMetrics',
-        (response) => {
-          resolve(response || {});
-        },
-      );
-    });
+    this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
   }
 }
