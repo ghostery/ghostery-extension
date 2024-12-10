@@ -459,7 +459,12 @@ export function replace(name, engineOrEngines) {
   const engines = [].concat(engineOrEngines);
   const engine =
     engines.length > 1
-      ? FiltersEngine.merge(engines, { skipResources: true })
+      ? FiltersEngine.merge(engines, {
+          skipResources: true,
+          overrideConfig: {
+            enableCompression: false,
+          },
+        })
       : engines[0];
 
   engine.updateEnv(ENV);
