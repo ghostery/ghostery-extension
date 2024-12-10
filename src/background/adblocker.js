@@ -15,7 +15,7 @@ import {
   updateResponseHeadersWithCSP,
 } from '@ghostery/adblocker-webextension';
 import { parse } from 'tldts-experimental';
-import SCRIPTLETS from '@ghostery/scriptlets';
+import scriptlets from '@ghostery/scriptlets';
 
 import Options, { ENGINES, isPaused } from '/store/options.js';
 
@@ -176,7 +176,7 @@ function injectScriptlets(filters, tabId, frameId) {
     }
 
     const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
-    const scriptlet = SCRIPTLETS[scriptletName];
+    const scriptlet = scriptlets[scriptletName];
 
     if (!scriptlet) {
       console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
