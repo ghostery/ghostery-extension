@@ -10,7 +10,7 @@
  */
 
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
-import { snippets } from '@duckduckgo/autoconsent/lib/eval-snippets';
+
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
@@ -35,9 +35,7 @@ async function initialize(msg, tab, frameId) {
             enableCosmeticRules: false,
           },
         },
-        {
-          frameId,
-        },
+        { frameId },
       );
     } catch {
       // The error is thrown when the tab is not ready to receive messages,
@@ -46,44 +44,10 @@ async function initialize(msg, tab, frameId) {
   }
 }
 
-async function evalCode(snippetId, id, tabId, frameId) {
-  const [result] = await chrome.scripting.executeScript({
-    target: {
-      tabId,
-      frameIds: [frameId],
-    },
-    world:
-      chrome.scripting.ExecutionWorld?.MAIN ??
-      (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-    func: snippets[snippetId],
-  });
-
-  await chrome.tabs.sendMessage(
-    tabId,
-    {
-      action: 'autoconsent',
-      id,
-      type: 'evalResp',
-      result: result.result,
-    },
-    {
-      frameId,
-    },
-  );
-}
-
 chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action !== 'autoconsent') return;
-  if (!sender.tab) return;
+  if (msg.action !== 'autoconsent' || !sender.tab) return;
 
-  const frameId = sender.frameId;
-
-  switch (msg.type) {
-    case 'init':
-      return initialize(msg, sender.tab, frameId);
-    case 'eval':
-      return evalCode(msg.snippetId, msg.id, sender.tab.id, frameId);
-    default:
-      break;
+  if (msg.type === 'init') {
+    initialize(msg, sender.tab, sender.frameId);
   }
 });
