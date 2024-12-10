@@ -45,7 +45,7 @@
     "@duckduckgo/autoconsent": "^10.17.0",
     "@ghostery/adblocker": "^2.3.0",
     "@ghostery/adblocker-webextension": "^2.3.0",
-    "@ghostery/scriptlets": "github:ghostery/scriptlets#0cb4770",
+    "@ghostery/scriptlets": "github:ghostery/scriptlets#29c825e",
     "@github/relative-time-element": "^4.4.4",
     "@sentry/browser": "^8.42.0",
     "@whotracksme/reporting": "^5.2.0",

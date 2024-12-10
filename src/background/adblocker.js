@@ -28,14 +28,6 @@ import asyncSetup from '/utils/setup.js';
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
 
-const scriptlets = new Map();
-for (const [name, scriptlet] of Object.entries(SCRIPTLETS)) {
-  scriptlets.set(name, scriptlet.func);
-  for (const alias of scriptlet.aliases) {
-    scriptlets.set(alias, scriptlet.func);
-  }
-}
-
 let options = Options;
 
 function getEnabledEngines(config) {
@@ -171,21 +163,25 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-/*
- * Cosmetics injection
- */
-
-async function injectScriptlets(filters, tabId, frameId) {
+function injectScriptlets(filters, tabId, frameId) {
   for (const filter of filters) {
     const parsed = filter.parseScript();
-    if (parsed === undefined) {
+
+    if (!parsed) {
+      console.warn(
+        '[adblocker] could not inject script filter:',
+        filter.toString(),
+      );
       continue;
     }
 
-    const { name, args } = parsed;
-    const canonicalName = name.endsWith('.js') ? name : `${name}.js`;
-    const func = scriptlets.get(canonicalName);
-    const decodedeArgs = args.map((arg) => decodeURIComponent(arg));
+    const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
+    const scriptlet = SCRIPTLETS[scriptletName];
+
+    if (!scriptlet) {
+      console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
+      continue;
+    }
 
     chrome.scripting.executeScript(
       {
@@ -197,8 +193,8 @@ async function injectScriptlets(filters, tabId, frameId) {
           tabId,
           frameIds: [frameId],
         },
-        func,
-        args: decodedeArgs,
+        func: scriptlet.func,
+        args: parsed.args.map((arg) => decodeURIComponent(arg)),
       },
       () => {
         if (chrome.runtime.lastError) {
@@ -274,20 +270,20 @@ async function injectCosmetics(details, config) {
     });
 
     const styleFilters = [];
-    const scriptFitlers = [];
+    const scriptFilters = [];
 
     for (const { filter, exception } of matches) {
       if (exception === undefined) {
         if (filter.isScriptInject()) {
-          scriptFitlers.push(filter);
+          scriptFilters.push(filter);
         } else {
           styleFilters.push(filter);
         }
       }
     }
 
-    if (isBootstrap && scriptFitlers.length > 0) {
-      injectScriptlets(scriptFitlers, tabId, frameId);
+    if (isBootstrap && scriptFilters.length > 0) {
+      injectScriptlets(scriptFilters, tabId, frameId);
     }
 
     const { styles } = engine.injectCosmeticFilters(styleFilters, {
