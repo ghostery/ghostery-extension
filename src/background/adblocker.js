@@ -15,6 +15,7 @@ import {
   updateResponseHeadersWithCSP,
 } from '@ghostery/adblocker-webextension';
 import { parse } from 'tldts-experimental';
+import scriptlets from '@ghostery/scriptlets';
 
 import Options, { ENGINES, isPaused } from '/store/options.js';
 
@@ -23,7 +24,6 @@ import * as trackerdb from '/utils/trackerdb.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
-import { debugMode } from '/utils/debug.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
@@ -163,58 +163,46 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-/*
- * Cosmetics injection
- */
+function injectScriptlets(filters, tabId, frameId) {
+  for (const filter of filters) {
+    const parsed = filter.parseScript();
 
-async function injectScriptlets(scripts, tabId, frameId) {
-  // Dynamically injected scriptlets can be difficult to find later in
-  // the debugger. Console logs simplifies setting up breakpoints if needed.
-  if (debugMode) {
-    scripts = [
-      `console.info('[adblocker]', 'running scriptlets (${scripts.length})');`,
-      ...scripts,
-    ];
-  }
-
-  const scriptlets = `(function(){ ${scripts.join('\n\n')}} )();`;
-
-  function scriptletInjector(code) {
-    let content = decodeURIComponent(code);
-    const script = document.createElement('script');
-    if (window.trustedTypes) {
-      const trustedTypePolicy = window.trustedTypes.createPolicy(
-        `ghostery-${Math.round(Math.random() * 1000000)}`,
-        {
-          createScript: (s) => s,
-        },
+    if (!parsed) {
+      console.warn(
+        '[adblocker] could not inject script filter:',
+        filter.toString(),
       );
-      content = trustedTypePolicy.createScript(content);
+      continue;
     }
-    script.textContent = content;
-    (document.head || document.documentElement).appendChild(script);
-    script.remove();
-  }
 
-  chrome.scripting.executeScript(
-    {
-      injectImmediately: true,
-      world:
-        chrome.scripting.ExecutionWorld?.MAIN ??
-        (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-      target: {
-        tabId,
-        frameIds: [frameId],
+    const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
+    const scriptlet = scriptlets[scriptletName];
+
+    if (!scriptlet) {
+      console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
+      continue;
+    }
+
+    chrome.scripting.executeScript(
+      {
+        injectImmediately: true,
+        world:
+          chrome.scripting.ExecutionWorld?.MAIN ??
+          (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+        target: {
+          tabId,
+          frameIds: [frameId],
+        },
+        func: scriptlet.func,
+        args: parsed.args.map((arg) => decodeURIComponent(arg)),
       },
-      func: scriptletInjector,
-      args: [encodeURIComponent(scriptlets)],
-    },
-    () => {
-      if (chrome.runtime.lastError) {
-        console.warn(chrome.runtime.lastError);
-      }
-    },
-  );
+      () => {
+        if (chrome.runtime.lastError) {
+          console.warn(chrome.runtime.lastError);
+        }
+      },
+    );
+  }
 }
 
 function injectStyles(styles, tabId, frameId) {
@@ -260,7 +248,7 @@ async function injectCosmetics(details, config) {
   const isBootstrap = config.bootstrap;
 
   {
-    const cosmetics = engine.getCosmeticsFilters({
+    const { matches } = engine.matchCosmeticFilters({
       domain,
       hostname,
       url,
@@ -275,18 +263,40 @@ async function injectCosmetics(details, config) {
       getExtendedRules: isBootstrap,
       getRulesFromHostname: isBootstrap,
 
-      injectPureHasSafely: true,
+      getPureHasRules: true,
 
       // This will be done every time we get information about DOM mutation
       getRulesFromDOM: !isBootstrap,
     });
 
-    if (isBootstrap && cosmetics.scripts.length > 0) {
-      injectScriptlets(cosmetics.scripts, tabId, frameId);
+    const styleFilters = [];
+    const scriptFilters = [];
+
+    for (const { filter, exception } of matches) {
+      if (exception === undefined) {
+        if (filter.isScriptInject()) {
+          scriptFilters.push(filter);
+        } else {
+          styleFilters.push(filter);
+        }
+      }
     }
 
-    if (cosmetics.styles) {
-      injectStyles(cosmetics.styles, tabId, frameId);
+    if (isBootstrap && scriptFilters.length > 0) {
+      injectScriptlets(scriptFilters, tabId, frameId);
+    }
+
+    const { styles } = engine.injectCosmeticFilters(styleFilters, {
+      url,
+      injectScriptlets: isBootstrap,
+      injectExtended: isBootstrap,
+      injectPureHasSafely: true,
+      allowGenericHides: false,
+      getBaseRules: false,
+    });
+
+    if (styles) {
+      injectStyles(styles, tabId, frameId);
     }
   }
 

@@ -57,6 +57,6 @@ Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extensio
 
 ## License
 
-[MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Copyright 2017-present Ghostery GmbH. All rights reserved.
+[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html/) Copyright 2017-present Ghostery GmbH. All rights reserved.
 
 See [LICENSE](LICENSE)
