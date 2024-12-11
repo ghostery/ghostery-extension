@@ -183,6 +183,7 @@ const contentScripts = (() => {
           matchAboutBlank: true,
           matchOriginAsFallback: true,
           runAt: 'document_start',
+          world: 'MAIN',
         });
         map.set(hostname, contentScript);
       } catch (e) {
@@ -232,7 +233,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     }
 
     if (__PLATFORM__ === 'firefox') {
-      contentScript += `(function () { ${func.toString()} })(...${JSON.stringify(args)})`
+      contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`
       continue;
     }
 
