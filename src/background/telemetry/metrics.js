@@ -353,16 +353,17 @@ export default class Metrics {
     if (frequency === 'all') return 0;
 
     const key = `${type}_${frequency}`;
+    const now = Date.now();
 
     // Protect against calling events immediately after install for all frequencies
     // They should trigger on the trailing edge of the frequency
     if (!this.storage[key]) {
-      this.storage[key] = Date.now();
+      this.storage[key] = now;
       this.saveStorage(this.storage);
     }
 
     const last = this.storage[key];
-    const frequency_ago = Date.now() - FREQUENCIES[frequency];
+    const frequency_ago = now - FREQUENCIES[frequency];
 
     return last ? last - frequency_ago : 0;
   }
