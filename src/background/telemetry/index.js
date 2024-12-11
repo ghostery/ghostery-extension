@@ -69,7 +69,6 @@ const setup = asyncSetup('telemetry', [
 
     if (!metrics.installDate) {
       metrics.installDate = new Date().toISOString().split('T')[0];
-      metrics.installRandom = Math.floor(Math.random() * 100) + 1;
 
       const utms = await detectUTMs();
       metrics.utm_source = utms.utm_source || '';
