@@ -126,6 +126,8 @@ async function updateEngines() {
   }
 }
 
+let EXPERIMENTAL_SCRIPTLETS_INJECTION = false;
+
 const HOUR_IN_MS = 60 * 60 * 1000;
 export const setup = asyncSetup('adblocker', [
   OptionsObserver.addListener(
@@ -156,6 +158,12 @@ export const setup = asyncSetup('adblocker', [
   OptionsObserver.addListener(
     'experimentalFilters',
     async (value, lastValue) => {
+      if (__PLATFORM__ === 'firefox') {
+        EXPERIMENTAL_SCRIPTLETS_INJECTION = value;
+        if (!value) {
+          contentScripts.unregisterAll();
+        }
+      }
       engines.setEnv('env_experimental', value);
 
       // Experimental filters changed to enabled
@@ -232,8 +240,8 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
       continue;
     }
 
-    if (__PLATFORM__ === 'firefox') {
-      contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`
+    if (__PLATFORM__ === 'firefox' && EXPERIMENTAL_SCRIPTLETS_INJECTION) {
+      contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
 
@@ -258,14 +266,11 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     );
   }
 
-  if (__PLATFORM__ === 'firefox') {
+  if (__PLATFORM__ === 'firefox' && EXPERIMENTAL_SCRIPTLETS_INJECTION) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
-      contentScripts.register(
-        hostname,
-        contentScript,
-      );
+      contentScripts.register(hostname, contentScript);
     } else {
       // do nothing if already registered
     }
@@ -454,7 +459,9 @@ function isTrusted(request, type) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
-      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
+      if (EXPERIMENTAL_SCRIPTLETS_INJECTION) {
+        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
+      }
     },
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
