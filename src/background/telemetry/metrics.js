@@ -156,31 +156,16 @@ export default class Metrics {
       // Date of install (former install_date)
       buildQueryPair('id', this.storage.installDate) +
       // Product ID Parameter
-      buildQueryPair('pi', browserInfo.token === 'gd' ? 'gd' : 'gbe') +
-      //
-      // -- obsolete static parameters --
-      //
-      // Showing campaign messages (former show_cmp)
-      buildQueryPair('sc', '0') +
-      // Subscription Type
-      buildQueryPair('st', '-1') +
-      // New parameters for Ghostery 8.5.2
-      // Subscription Interval
-      buildQueryPair('si', '0');
+      buildQueryPair('pi', browserInfo.token === 'gd' ? 'gd' : 'gbe');
 
     if (type !== 'uninstall') {
       metrics_url +=
-        // Random number, assigned at install (former install_rand)
-        buildQueryPair('ir', this.storage.installRandom) +
         // Adblocking state
         buildQueryPair('ab', conf.blockAds ? '1' : '0') +
         // Smartblocking state
         buildQueryPair('sm', conf.blockAnnoyances ? '1' : '0') +
         // Antitracking state
         buildQueryPair('at', conf.blockTrackers ? '1' : '0') +
-        //
-        // -- generative parameters --
-        //
         // Recency, days since last active daily ping
         // prettier-ignore
         buildQueryPair('rc', this._getRecencyActive(type, frequency).toString()) +
@@ -190,32 +175,7 @@ export default class Metrics {
         // prettier-ignore
         buildQueryPair('re',this._getRecencyEngaged(type, frequency).toString()) +
         // Engaged Velocity
-        buildQueryPair('ve', this._getVelocityEngaged(type).toString()) +
-        //
-        // -- obsolete static parameters --
-        //
-        // Whether the computer ever had a Paid Subscription
-        buildQueryPair('ps', '0') +
-        // Human web
-        buildQueryPair('hw', '1') +
-        // Login state (former signed_in)
-        buildQueryPair('sn', '0') +
-        // Noncritical ping (former noncritical)
-        buildQueryPair('nc', '0') +
-        // Purplebox state (former purplebox)
-        buildQueryPair('pb', '0') +
-        // Extension_view - which view of the extension is the user in
-        buildQueryPair('ev', '1') +
-        // Onboarding status
-        buildQueryPair('ss', '1') +
-        // Onboarding last shown at
-        buildQueryPair('sl', 0) +
-        // Onboarding shown counter
-        buildQueryPair('sb', '1') +
-        // Theme
-        buildQueryPair('th', '0') +
-        // AB tests enabled?
-        buildQueryPair('ts', '0');
+        buildQueryPair('ve', this._getVelocityEngaged(type).toString());
     }
 
     if (CAMPAIGN_METRICS.includes(type)) {
@@ -225,14 +185,6 @@ export default class Metrics {
         buildQueryPair('us', this.storage.utm_source) +
         // Marketing campaign (Former utm_campaign)
         buildQueryPair('uc', this.storage.utm_campaign);
-    }
-
-    if (browserInfo.token === 'gd') {
-      // fetch metrics from the search extension and append them
-      const searchMetrics = await Metrics._getSearchExtensionMetrics();
-      Object.keys(searchMetrics).forEach((k) => {
-        metrics_url += buildQueryPair(k, searchMetrics[k]);
-      });
     }
 
     return metrics_url;
@@ -352,8 +304,18 @@ export default class Metrics {
   _timeToExpired(type, frequency) {
     if (frequency === 'all') return 0;
 
-    const last = this.storage[`${type}_${frequency}`] || 0;
-    const frequency_ago = Date.now() - FREQUENCIES[frequency];
+    const key = `${type}_${frequency}`;
+    const now = Date.now();
+
+    // Protect against calling events immediately after install for all frequencies
+    // They should trigger on the trailing edge of the frequency
+    if (!this.storage[key]) {
+      this.storage[key] = now;
+      this.saveStorage(this.storage);
+    }
+
+    const last = this.storage[key];
+    const frequency_ago = now - FREQUENCIES[frequency];
 
     return last ? last - frequency_ago : 0;
   }
@@ -400,20 +362,7 @@ export default class Metrics {
     this.storage.active_daily_velocity = active_daily_velocity;
     this.saveStorage(this.storage);
 
-    const daily = this._timeToExpired('active', 'daily');
-    if (daily <= 0) {
-      this._sendReq('active', ['daily']);
-    }
-
-    const weekly = this._timeToExpired('active', 'weekly');
-    if (weekly <= 0) {
-      this._sendReq('active', ['weekly']);
-    }
-
-    const monthly = this._timeToExpired('active', 'monthly');
-    if (monthly <= 0) {
-      this._sendReq('active', ['monthly']);
-    }
+    this._sendReq('active', ['daily', 'weekly', 'monthly']);
   }
 
   /**
@@ -443,18 +392,7 @@ export default class Metrics {
     this.storage.engaged_daily_count = engaged_daily_count;
     this.storage.engaged_daily_velocity = engaged_daily_velocity;
     this.saveStorage(this.storage);
-    this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
-  }
 
-  static async _getSearchExtensionMetrics() {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage(
-        'search@ghostery.com',
-        'getMetrics',
-        (response) => {
-          resolve(response || {});
-        },
-      );
-    });
+    this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
   }
 }
