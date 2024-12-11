@@ -146,7 +146,7 @@ function updateEngine(text) {
     cosmeticFilters,
     networkFilters,
     preprocessors,
-    config: engines.get(engines.FIXES_ENGINE).config,
+    config: engines.get(engines.MAIN_ENGINE).config,
   });
 
   console.info(
