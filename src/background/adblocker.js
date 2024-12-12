@@ -44,9 +44,9 @@ function getEnabledEngines(config) {
       list.push(engines.FIXES_ENGINE);
     }
 
-    // Custom filters should be always added as
-    // they have own settings which defines if they are enabled
-    list.push(engines.CUSTOM_ENGINE);
+    if (config.customFilters.enabled) {
+      list.push(engines.CUSTOM_ENGINE);
+    }
 
     return list;
   }
@@ -63,21 +63,19 @@ export async function reloadMainEngine() {
   if (__PLATFORM__ !== 'chromium') await pause(1000);
 
   const enabledEngines = getEnabledEngines(options);
+  const resolvedEngines = (
+    await Promise.all(
+      enabledEngines.map((id) =>
+        engines.init(id).catch(() => {
+          console.error(`[adblocker] failed to load engine: ${id}`);
+          return null;
+        }),
+      ),
+    )
+  ).filter((engine) => engine);
 
-  if (enabledEngines.length) {
-    engines.replace(
-      engines.MAIN_ENGINE,
-      (
-        await Promise.all(
-          enabledEngines.map((id) =>
-            engines.init(id).catch(() => {
-              console.error(`[adblocker] failed to load engine: ${id}`);
-              return null;
-            }),
-          ),
-        )
-      ).filter((engine) => engine),
-    );
+  if (resolvedEngines.length) {
+    engines.replace(engines.MAIN_ENGINE, resolvedEngines);
 
     console.info(
       `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,

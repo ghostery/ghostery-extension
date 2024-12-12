@@ -139,14 +139,14 @@ async function updateDNRRules(dnrRules) {
   return dnrRules;
 }
 
-function updateEngine(text) {
+async function updateEngine(text) {
   const { networkFilters, cosmeticFilters, preprocessors } = parseFilters(text);
 
   engines.create(engines.CUSTOM_ENGINE, {
     cosmeticFilters,
     networkFilters,
     preprocessors,
-    config: engines.get(engines.MAIN_ENGINE).config,
+    config: (await engines.init(engines.FIXES_ENGINE)).config,
   });
 
   console.info(
@@ -167,7 +167,7 @@ async function update(text, { trustedScriptlets }) {
     trustedScriptlets,
   });
 
-  const result = updateEngine(
+  const result = await updateEngine(
     [
       ...(__PLATFORM__ === 'firefox' ? networkFilters : []),
       ...cosmeticFilters,
