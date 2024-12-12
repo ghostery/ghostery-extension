@@ -86,7 +86,10 @@ export async function reloadMainEngine() {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
-  if (__PLATFORM__ === 'firefox') {
+  if (
+    __PLATFORM__ === 'firefox' &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+  ) {
     contentScripts.unregisterAll();
   }
 }
