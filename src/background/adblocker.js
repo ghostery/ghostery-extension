@@ -174,6 +174,13 @@ if (__PLATFORM__ === 'firefox') {
       contentScripts.unregisterAll();
     }
   });
+
+  OptionsObserver.addListener('paused', async (paused) => {
+    if (!ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION) return;
+    for (const hostname of Object.keys(paused)) {
+      contentScripts.unregister(hostname);
+    }
+  });
 }
 
 const contentScripts = (() => {
