@@ -126,8 +126,6 @@ async function updateEngines() {
   }
 }
 
-let EXPERIMENTAL_SCRIPTLETS_INJECTION = false;
-
 const HOUR_IN_MS = 60 * 60 * 1000;
 export const setup = asyncSetup('adblocker', [
   OptionsObserver.addListener(
@@ -158,12 +156,6 @@ export const setup = asyncSetup('adblocker', [
   OptionsObserver.addListener(
     'experimentalFilters',
     async (value, lastValue) => {
-      if (__PLATFORM__ === 'firefox') {
-        EXPERIMENTAL_SCRIPTLETS_INJECTION = value;
-        if (!value) {
-          contentScripts.unregisterAll();
-        }
-      }
       engines.setEnv('env_experimental', value);
 
       // Experimental filters changed to enabled
@@ -173,6 +165,16 @@ export const setup = asyncSetup('adblocker', [
     },
   ),
 ]);
+
+let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION = false;
+if (__PLATFORM__ === 'firefox') {
+  OptionsObserver.addListener('experimentalFilters', (value) => {
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION = value;
+    if (!value) {
+      contentScripts.unregisterAll();
+    }
+  });
+}
 
 const contentScripts = (() => {
   const map = new Map();
@@ -240,7 +242,10 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
       continue;
     }
 
-    if (__PLATFORM__ === 'firefox' && EXPERIMENTAL_SCRIPTLETS_INJECTION) {
+    if (
+      __PLATFORM__ === 'firefox' &&
+      ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+    ) {
       contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
@@ -266,7 +271,10 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     );
   }
 
-  if (__PLATFORM__ === 'firefox' && EXPERIMENTAL_SCRIPTLETS_INJECTION) {
+  if (
+    __PLATFORM__ === 'firefox' &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+  ) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
@@ -296,8 +304,7 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
-  const isBootstrap = config.bootstrap;
-  const scriptletsOnly = Boolean(config.scriptletsOnly);
+  const { bootstrap: isBootstrap, scriptletsOnly } = config;
 
   try {
     setup.pending && (await setup.pending);
@@ -312,7 +319,13 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
-  if (scriptletsOnly && contentScripts.isRegistered(hostname)) return;
+  if (
+    __PLATFORM__ === 'firefox' &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION &&
+    scriptletsOnly &&
+    contentScripts.isRegistered(hostname)
+  )
+    return;
 
   if (isPaused(options, hostname)) return;
 
@@ -459,7 +472,7 @@ function isTrusted(request, type) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
-      if (EXPERIMENTAL_SCRIPTLETS_INJECTION) {
+      if (ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION) {
         injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
       }
     },
