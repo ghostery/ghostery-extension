@@ -10,6 +10,7 @@
  */
 
 import './onboarding.js';
+import './config.js';
 
 import './autoconsent.js';
 import './adblocker.js';
