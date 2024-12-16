@@ -71,7 +71,7 @@ OptionsObserver.addListener('paused', async (paused, prevPaused) => {
     (prevPaused ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
-      (__PLATFORM__ === 'chromium' && (await store.resolve(Options).managed)))
+      (__PLATFORM__ === 'chromium' && (await store.resolve(Options)).managed))
   ) {
     const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
       .filter(({ id }) => id <= 3)
@@ -132,12 +132,12 @@ OptionsObserver.addListener('paused', async (paused, prevPaused) => {
               ],
         removeRuleIds,
       });
-      console.log('[dnr] pause rules updated');
+      console.log('[dnr] Pause rules updated');
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
       });
-      console.log('[dnr] pause rules updated');
+      console.log('[dnr] Pause rules cleared');
     }
   }
 });
