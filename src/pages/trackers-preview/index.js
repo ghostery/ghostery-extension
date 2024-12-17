@@ -47,7 +47,7 @@ define({
                 <img
                   src="${DisablePreviewImg}"
                   alt="Disable Preview Trackers"
-                  layout="self:center"
+                  layout="self:center size:161px:160px"
                 />
                 <div layout="block:center column gap">
                   <ui-text type="label-l">
