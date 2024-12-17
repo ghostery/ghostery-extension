@@ -84,21 +84,31 @@ export default {
           <section layout="column gap:3" translate="no">
             <ui-text type="headline-m">Developer tools</ui-text>
 
+            ${store.ready(config) &&
+            html`
+              <div layout="column gap items:start" translate="no">
+                <ui-text type="headline-xs">Remote Config</ui-text>
+                <ui-toggle
+                  value="${config.enabled}"
+                  onchange="${html.set(config, 'enabled')}"
+                >
+                  <ui-text layout="row items:center">
+                    Remote configuration global switch
+                  </ui-text>
+                </ui-toggle>
+
+                <ui-text>
+                  <details>
+                    <summary>Config</summary>
+                    <pre>${JSON.stringify(config, null, 2)}</pre>
+                  </details>
+                </ui-text>
+              </div>
+              <ui-line></ui-line>
+            `}
+
             <div layout="column gap">
-              <ui-text type="headline-s">Storage</ui-text>
-              ${store.ready(config) &&
-              html`
-                <div layout="column gap items:start" translate="no">
-                  <ui-toggle
-                    value="${config.enabled}"
-                    onchange="${html.set(config, 'enabled')}"
-                  >
-                    <ui-text layout="row items:center">
-                      Remote configuration
-                    </ui-text>
-                  </ui-toggle>
-                </div>
-              `}
+              <ui-text type="headline-xs">Local Storage</ui-text>
               <div layout="row gap items:start">
                 <ui-button onclick="${clearStorage}" layout="shrink:0">
                   <button>Clear local storage</button>
@@ -109,7 +119,7 @@ export default {
             ${(__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
             html`
               <div layout="column gap items:start" translate="no">
-                <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+                <ui-text type="headline-xs">Enabled DNR rulesets</ui-text>
                 <ui-text type="body-xs" color="gray-400">
                   The below list is not reactive to changes made in the
                   extension - use refresh button
@@ -133,7 +143,6 @@ export default {
                   <button>Refresh</button>
                 </ui-button>
               </div>
-              <ui-line></ui-line>
             `}
           </section>
         `
