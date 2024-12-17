@@ -428,18 +428,19 @@ export function create(name, options = null) {
 
 export function replace(name, engineOrEngines) {
   const engines = [].concat(engineOrEngines);
-  const engine =
-    engines.length > 1
-      ? FiltersEngine.merge(engines, {
-          skipResources: true,
-          overrideConfig: {
-            enableCompression: false,
-          },
-        })
-      : engines[0];
+  let engine;
+
+  if (engines.length > 1) {
+    engine = FiltersEngine.merge(engines, {
+      skipResources: true,
+      overrideConfig: { enableCompression: false },
+    });
+    engine.resources = Resources.copy(engines[0].resources);
+  } else {
+    engine = engines[0];
+  }
 
   engine.updateEnv(ENV);
-  engine.resources = Resources.copy(engines[0].resources);
 
   saveToMemory(name, engine);
   saveToStorage(name).catch(() => {
