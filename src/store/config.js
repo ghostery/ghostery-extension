@@ -18,7 +18,7 @@ export const FLAG_ASSIST = 'assist';
 export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
   'firefox-content-script-scriptlets';
 
-export default {
+const Config = {
   enabled: true,
   domains: store.record({
     actions: [String],
@@ -30,13 +30,13 @@ export default {
 
   // Helper methods
 
-  hasAction({ domains }) {
+  hasAction({ domains, enabled }) {
     return (domain, action) =>
-      !!(domain && domains[domain]?.actions.includes(action));
+      enabled && !!(domain && domains[domain]?.actions.includes(action));
   },
 
-  hasFlag({ flags }) {
-    return (flag) => !!(flag && flags[flag]?.enabled);
+  hasFlag({ flags, enabled }) {
+    return (flag) => enabled && !!(flag && flags[flag]?.enabled);
   },
 
   [store.connect]: {
@@ -55,3 +55,8 @@ export default {
     },
   },
 };
+export default Config;
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes['config']) store.clear(Config, false);
+});

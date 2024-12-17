@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import DailyStats from '/store/daily-stats';
 import Options from '/store/options.js';
+import Config from '/store/config.js';
 
 import { deleteDatabases } from '/utils/indexeddb.js';
 
@@ -33,6 +34,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           try {
             store.clear(Options);
             store.clear(DailyStats);
+            store.clear(Config);
           } catch (e) {
             console.error('[devtools] Error clearing store cache:', e);
           }

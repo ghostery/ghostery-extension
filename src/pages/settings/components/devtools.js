@@ -12,6 +12,7 @@
 import { html, store, dispatch } from 'hybrids';
 
 import Options from '/store/options.js';
+import Config from '/store/config.js';
 
 const VERSION = chrome.runtime.getManifest().version;
 
@@ -60,6 +61,7 @@ function refresh(host) {
 export default {
   counter: 0,
   options: store(Options),
+  config: store(Config),
   updatedAt: ({ options }) =>
     store.ready(options) &&
     options.filtersUpdatedAt &&
@@ -74,15 +76,29 @@ export default {
       },
     ),
   visible: false,
-  render: ({ visible, counter, updatedAt }) => html`
+  render: ({ visible, counter, updatedAt, config }) => html`
     <template layout="column gap:3">
       ${
         (visible || counter > 5) &&
         html`
           <section layout="column gap:3" translate="no">
             <ui-text type="headline-m">Developer tools</ui-text>
+
             <div layout="column gap">
-              <ui-text type="headline-s">Storage actions</ui-text>
+              <ui-text type="headline-s">Storage</ui-text>
+              ${store.ready(config) &&
+              html`
+                <div layout="column gap items:start" translate="no">
+                  <ui-toggle
+                    value="${config.enabled}"
+                    onchange="${html.set(config, 'enabled')}"
+                  >
+                    <ui-text layout="row items:center">
+                      Remote configuration
+                    </ui-text>
+                  </ui-toggle>
+                </div>
+              `}
               <div layout="row gap items:start">
                 <ui-button onclick="${clearStorage}" layout="shrink:0">
                   <button>Clear local storage</button>
