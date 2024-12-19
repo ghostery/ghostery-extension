@@ -12,9 +12,14 @@
 import { jwtDecode } from 'jwt-decode';
 
 import { GHOSTERY_DOMAIN } from '/utils/urls.js';
+import { stagingMode } from './debug.js';
 
 const AUTH_URL = `https://consumerapi.${GHOSTERY_DOMAIN}/api/v2`;
 const ACCOUNT_URL = `https://accountapi.${GHOSTERY_DOMAIN}/api/v2.1.0`;
+
+export const CDN_URL = stagingMode
+  ? 'https://staging-cdn.ghostery.com/'
+  : 'https://cdn.ghostery.com/';
 
 export const COOKIE_DOMAIN = `.${GHOSTERY_DOMAIN}`;
 const COOKIE_URL = `https://${GHOSTERY_DOMAIN}`;
