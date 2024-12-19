@@ -17,6 +17,8 @@ import Config from '/store/config.js';
 
 import { deleteDatabases } from '/utils/indexeddb.js';
 
+import syncConfig from './config.js';
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
     case 'clearStorage':
@@ -44,6 +46,19 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           sendResponse('Storage cleared');
         } catch (e) {
           sendResponse(`[devtools] Error clearing storage: ${e}`);
+        }
+      })();
+
+      return true;
+    case 'syncConfig':
+      (async () => {
+        try {
+          await store.set(Config, { updatedAt: 0 });
+          await syncConfig();
+
+          sendResponse('Config synced');
+        } catch (e) {
+          sendResponse(`[devtools] Error syncing config: ${e}`);
         }
       })();
 

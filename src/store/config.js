@@ -20,6 +20,7 @@ export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
 
 const Config = {
   enabled: true,
+  updatedAt: 0,
   domains: store.record({
     actions: [String],
   }),
@@ -45,6 +46,8 @@ const Config = {
       return config;
     },
     async set(_, values) {
+      values ||= {};
+
       await chrome.storage.local.set({
         config:
           __PLATFORM__ === 'firefox'

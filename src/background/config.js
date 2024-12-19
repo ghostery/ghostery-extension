@@ -32,9 +32,15 @@ function filter(item) {
   return true;
 }
 
-// Fetch the remote config, update the local config
-// with current domains and add new flags (not initialized yet)
-(async function syncRemoteConfig() {
+const HALF_HOUR_IN_MS = 1000 * 60 * 30;
+
+export default async function syncConfig() {
+  const config = await store.resolve(Config);
+
+  if (config.updatedAt > Date.now() - HALF_HOUR_IN_MS) {
+    return;
+  }
+
   // TODO: implement fetching remote config from the server
   // This is a mock of the fetched config
   try {
@@ -42,8 +48,6 @@ function filter(item) {
       if (!res.ok) throw new Error('Failed to fetch the remote config');
       return res.json();
     });
-
-    const config = await store.resolve(Config);
 
     // -- domains --
 
@@ -90,8 +94,14 @@ function filter(item) {
     }
 
     // Update the config
-    store.set(Config, { domains, flags });
+    store.set(Config, {
+      updatedAt: Date.now(),
+      domains,
+      flags,
+    });
   } catch (e) {
     console.error('[config] Failed to sync remote config:', e);
   }
-})();
+}
+
+syncConfig();

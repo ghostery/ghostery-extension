@@ -12,7 +12,10 @@
 import { html, store, dispatch } from 'hybrids';
 
 import Options from '/store/options.js';
-import Config from '/store/config.js';
+import Config, {
+  ACTION_ASSIST,
+  ACTION_DISABLE_AUTOCONSENT,
+} from '/store/config.js';
 
 const VERSION = chrome.runtime.getManifest().version;
 
@@ -43,6 +46,39 @@ function clearStorage(host, event) {
   asyncAction(event, chrome.runtime.sendMessage({ action: 'clearStorage' }));
 }
 
+async function syncConfig(host, event) {
+  asyncAction(event, chrome.runtime.sendMessage({ action: 'syncConfig' }));
+}
+
+async function testConfigDomain(host) {
+  const domain = window.prompt('Enter domain to test:', 'example.com');
+  if (!domain) return;
+
+  const actions = window.prompt(
+    'Enter actions to test:',
+    `${ACTION_ASSIST}, ${ACTION_DISABLE_AUTOCONSENT}`,
+  );
+
+  if (!actions) return;
+
+  await store.set(host.config, {
+    domains: {
+      [domain]: { actions: actions.split(',').map((a) => a.trim()) },
+    },
+  });
+}
+
+async function testConfigFlag(host) {
+  const flag = window.prompt('Enter flag to test:');
+  if (!flag) return;
+
+  await store.set(host.config, {
+    flags: {
+      [flag]: { enabled: true },
+    },
+  });
+}
+
 function updateFilters(host) {
   if (host.updatedAt) {
     store.set(host.options, { filtersUpdatedAt: 0 });
@@ -58,6 +94,16 @@ function refresh(host) {
   }
 }
 
+function formatDate(date) {
+  return new Date(date).toLocaleDateString(chrome.i18n.getUILanguage(), {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
 export default {
   counter: 0,
   options: store(Options),
@@ -65,16 +111,7 @@ export default {
   updatedAt: ({ options }) =>
     store.ready(options) &&
     options.filtersUpdatedAt &&
-    new Date(options.filtersUpdatedAt).toLocaleDateString(
-      chrome.i18n.getUILanguage(),
-      {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      },
-    ),
+    formatDate(options.filtersUpdatedAt),
   visible: false,
   render: ({ visible, counter, updatedAt, config }) => html`
     <template layout="column gap:3">
@@ -86,40 +123,70 @@ export default {
 
             ${store.ready(config) &&
             html`
-              <div layout="column gap items:start" translate="no">
-                <ui-text type="headline-xs">Remote Config</ui-text>
+              <div layout="column gap" translate="no">
                 <ui-toggle
                   value="${config.enabled}"
                   onchange="${html.set(config, 'enabled')}"
                 >
-                  <ui-text layout="row items:center">
-                    Remote configuration global switch
-                  </ui-text>
+                  <div layout="column">
+                    <ui-text type="headline-s">Remote Configuration</ui-text>
+                    <ui-text type="body-xs" color="gray-400">
+                      Updated at: ${formatDate(config.updatedAt)}
+                    </ui-text>
+                  </div>
                 </ui-toggle>
-
-                <ui-text>
-                  <details>
-                    <summary>Config</summary>
-                    <pre>${JSON.stringify(config, null, 2)}</pre>
-                  </details>
-                </ui-text>
+                <div>
+                  <ui-text type="label-m">Domains</ui-text>
+                  <div layout="row:wrap gap">
+                    ${Object.entries(config.domains)
+                      .filter(([, d]) => d.actions.length)
+                      .map(
+                        ([name, d]) =>
+                          html`<ui-text color="gray-600">
+                            ${name} (${d.actions.join(', ')})
+                          </ui-text>`,
+                      ) || 'none'}
+                  </div>
+                </div>
+                <div>
+                  <ui-text type="label-m">Flags</ui-text>
+                  <ui-text color="gray-600">
+                    ${Object.entries(config.flags)
+                      .filter(([, f]) => f.enabled)
+                      .map(([name]) => name)
+                      .join(' ') || 'none'}
+                  </ui-text>
+                </div>
+                <div layout="row gap">
+                  <ui-button
+                    layout="shrink:0 self:start"
+                    onclick="${testConfigDomain}"
+                  >
+                    <button>Test domain</button>
+                  </ui-button>
+                  <ui-button
+                    layout="shrink:0 self:start"
+                    onclick="${testConfigFlag}"
+                  >
+                    <button>Test flag</button>
+                  </ui-button>
+                  <ui-button
+                    onclick="${syncConfig}"
+                    layout="shrink:0 self:start"
+                  >
+                    <button>
+                      <ui-icon name="refresh" layout="size:2"></ui-icon>
+                      Force sync
+                    </button>
+                  </ui-button>
+                </div>
               </div>
               <ui-line></ui-line>
             `}
-
-            <div layout="column gap">
-              <ui-text type="headline-xs">Local Storage</ui-text>
-              <div layout="row gap items:start">
-                <ui-button onclick="${clearStorage}" layout="shrink:0">
-                  <button>Clear local storage</button>
-                </ui-button>
-              </div>
-            </div>
-            <ui-line></ui-line>
             ${(__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
             html`
               <div layout="column gap items:start" translate="no">
-                <ui-text type="headline-xs">Enabled DNR rulesets</ui-text>
+                <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
                 <ui-text type="body-xs" color="gray-400">
                   The below list is not reactive to changes made in the
                   extension - use refresh button
@@ -143,20 +210,35 @@ export default {
                   <button>Refresh</button>
                 </ui-button>
               </div>
+              <ui-line></ui-line>
             `}
+
+            <div layout="column gap">
+              <ui-text type="headline-s">Local Storage</ui-text>
+              <div layout="row gap items:start">
+                <ui-button onclick="${clearStorage}" layout="shrink:0">
+                  <button>
+                    <ui-icon name="trash" layout="size:2"></ui-icon>
+                    Clear storage
+                  </button>
+                </ui-button>
+              </div>
+            </div>
           </section>
         `
       }
       <div layout="column gap center">
         <div layout="row center gap:2">
-          <ui-text
-            type="label-s"
-            color="gray-300"
-            onclick="${refresh}"
-            translate="no"
-          >
-            v${VERSION}
-          </ui-text>
+          <div onclick="${refresh}">
+            <ui-text
+              type="label-s"
+              color="gray-300"
+              translate="no"
+              style="user-select: none;"
+            >
+              v${VERSION}
+            </ui-text>
+          </div>
         </div>
         <ui-action>
           <ui-text type="label-xs" color="gray-300" onclick="${updateFilters}">
