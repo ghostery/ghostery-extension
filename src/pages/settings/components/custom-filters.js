@@ -38,7 +38,7 @@ export default {
   render: ({ input, result, disabled }) => html`
     <template layout="block">
       <div layout="column gap">
-        <settings-input>
+        <ui-input>
           <textarea
             rows="10"
             autocomplete="off"
@@ -50,7 +50,7 @@ export default {
             defaultValue="${store.ready(input) ? input.text : ''}"
             data-qa="input:custom-filters"
           ></textarea>
-        </settings-input>
+        </ui-input>
 
         <ui-button
           layout="self:start"

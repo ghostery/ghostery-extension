@@ -89,7 +89,6 @@ export default {
             html`<ui-text type="body-xs" color="inherit">
               <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
             </ui-text>`}
-            <slot></slot>
           </div>
         </div>
         <div
@@ -119,6 +118,7 @@ export default {
               `}
         </div>
       </button>
+      <slot></slot>
       ${pauseList &&
       html`
         <section

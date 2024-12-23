@@ -14,6 +14,7 @@
     "storage",
     "scripting",
     "tabs",
+    "activeTab",
     "webRequest",
     "offscreen"
   ],
