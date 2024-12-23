@@ -16,7 +16,7 @@ import Options from '/store/options.js';
 import TrackerException from '/store/tracker-exception.js';
 import Tracker from '/store/tracker.js';
 
-import { WTM_PAGE_URL } from '/utils/api.js';
+import { WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
