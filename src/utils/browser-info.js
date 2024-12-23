@@ -65,6 +65,11 @@ function getOS() {
   return 'other';
 }
 
+function getOSVersion() {
+  const ua = getUA();
+  return ua.os.version;
+}
+
 function isAndroid() {
   return getOS() === 'android';
 }
@@ -109,6 +114,7 @@ async function getBrowserInfo() {
     name: '',
     token: '',
     os: '',
+    osVersion: '',
     version: '',
   };
 
@@ -142,6 +148,7 @@ async function getBrowserInfo() {
 
   // Set OS property
   BROWSER_INFO.os = getOS();
+  BROWSER_INFO.osVersion = getOSVersion();
 
   // Set version property
   BROWSER_INFO.version = parseInt(getUA().browser.version.toString(), 10); // convert to string for Chrome

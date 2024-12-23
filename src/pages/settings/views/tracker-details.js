@@ -16,7 +16,7 @@ import Tracker from '/store/tracker.js';
 import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
-import { WTM_PAGE_URL } from '/utils/api.js';
+import { WTM_PAGE_URL } from '/utils/urls.js';
 
 import { toggleException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';

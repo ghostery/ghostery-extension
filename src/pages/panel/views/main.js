@@ -24,6 +24,8 @@ import sleep from '../assets/sleep.svg';
 import Menu from './menu.js';
 import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
+import ReportForm from './report-form.js';
+import ReportConfirm from './report-confirm.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -97,7 +99,9 @@ function setStatsType(host, event) {
 }
 
 export default {
-  [router.connect]: { stack: [Menu, TrackerDetails, ProtectionStatus] },
+  [router.connect]: {
+    stack: [Menu, ReportForm, ReportConfirm, TrackerDetails, ProtectionStatus],
+  },
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
@@ -166,6 +170,29 @@ export default {
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
                 data-qa="component:pause"
               >
+                ${paused?.revokeAt &&
+                html`
+                  <div layout="row center">
+                    <ui-action>
+                      <a
+                        href="${router.url(ReportForm)}"
+                        layout="row center gap padding:0.5:1:1 margin:top:-1"
+                      >
+                        <ui-text type="body-s">Something wrong?</ui-text>
+                        <ui-text
+                          type="label-s"
+                          layout="row inline items:center gap:0.5"
+                        >
+                          Report a broken page
+                          <ui-icon
+                            name="arrow-right"
+                            layout="size:1.5"
+                          ></ui-icon>
+                        </ui-text>
+                      </a>
+                    </ui-action>
+                  </div>
+                `}
               </panel-pause>
             `
           : html`

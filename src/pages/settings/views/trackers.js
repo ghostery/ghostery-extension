@@ -136,7 +136,7 @@ export default {
               >
                 ${category !== '_all' ? msg`Expand` : msg`Collapse`}
               </settings-button>
-              <settings-input layout="grow" layout@768px="grow:0">
+              <ui-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
                   <option selected value="">Show all</option>
                   <option value="adjusted">
@@ -149,15 +149,15 @@ export default {
                     <!-- Plural form - list of trusted trackers | tracker-list -->Trusted
                   </option>
                 </select>
-              </settings-input>
-              <settings-input layout="grow:5 width::250px" icon="search">
+              </ui-input>
+              <ui-input layout="grow:5 width::250px" icon="search">
                 <input
                   type="search"
                   defaultValue="${query}"
                   oninput="${setLazyQuery}"
                   placeholder="${msg`Search for a tracker or organization...`}"
                 />
-              </settings-input>
+              </ui-input>
             </div>
             <div layout="column gap:0.5">
               ${store.ready(categories) &&

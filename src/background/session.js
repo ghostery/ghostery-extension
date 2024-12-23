@@ -10,7 +10,8 @@
  */
 import { store } from 'hybrids';
 import Session, { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
-import { HOME_PAGE_URL, ACCOUNT_PAGE_URL, COOKIE_DOMAIN } from '/utils/api.js';
+import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/urls.js';
+import { COOKIE_DOMAIN } from '/utils/api.js';
 
 function refreshSession() {
   chrome.runtime
