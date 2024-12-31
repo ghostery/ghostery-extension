@@ -23,7 +23,7 @@ export default {
       }
       return {
         ...model,
-        value: parsed.hostname.replace(/^www\./, ''),
+        value: parsed.hostname,
       };
     },
   },

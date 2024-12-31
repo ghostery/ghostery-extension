@@ -35,13 +35,16 @@ let tab = undefined;
 const Stats = {
   hostname: '',
   trackers: [StatsTracker],
+
+  displayHostname: ({ hostname }) => {
+    hostname = hostname.replace(/^www\./, '');
+    return hostname.length > 24 ? '...' + hostname.slice(-24) : hostname;
+  },
   trackersBlocked: ({ trackers }) =>
     trackers.reduce((acc, { blocked }) => acc + Number(blocked), 0),
   trackersModified: ({ trackers }) =>
     trackers.reduce((acc, { modified }) => acc + Number(modified), 0),
-
   categories: ({ trackers }) => trackers.map((t) => t.category),
-
   topCategories: ({ categories }) => {
     const counts = Object.entries(
       categories.reduce((acc, category) => {
@@ -79,8 +82,7 @@ const Stats = {
         return tabStats;
       }
 
-      const hostname = parse(tab.url).hostname?.replace(/^www\./, '');
-      return { hostname };
+      return { hostname: parse(tab.url).hostname };
     },
     observe:
       __PLATFORM__ === 'safari' &&

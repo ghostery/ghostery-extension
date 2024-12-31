@@ -96,10 +96,6 @@ function setStatsType(host, event) {
   store.set(host.options, { panel: { statsType: type } });
 }
 
-function tail(hostname) {
-  return hostname.length > 24 ? '...' + hostname.slice(-24) : hostname;
-}
-
 export default {
   [router.connect]: { stack: [Menu, TrackerDetails, ProtectionStatus] },
   options: store(Options),
@@ -130,7 +126,7 @@ export default {
                         layout="row gap:2px items:center"
                       >
                         <ui-text type="label-m"
-                          >${tail(stats.hostname)}</ui-text
+                          >${stats.displayHostname}</ui-text
                         >
                         ${!options.managed &&
                         html`<ui-icon
@@ -142,7 +138,7 @@ export default {
                     </ui-action>
                   </panel-managed>
                 `
-              : tail(stats.hostname))}
+              : stats.displayHostname)}
             <ui-action slot="icon">
               <a href="https://www.ghostery.com" onclick="${openTabWithUrl}">
                 <ui-icon name="logo"></ui-icon>
