@@ -15,15 +15,24 @@ import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
 import Options, { isPaused } from '/store/options.js';
+import Config, { ACTION_DISABLE_AUTOCONSENT } from '/store/config.js';
 
 async function initialize(msg, tab, frameId) {
-  const options = await store.resolve(Options);
+  const [options, config] = await Promise.all([
+    store.resolve(Options),
+    store.resolve(Config),
+  ]);
 
-  if (
-    options.terms &&
-    options.blockAnnoyances &&
-    !isPaused(options, tab.url ? parse(tab.url).hostname : '')
-  ) {
+  if (options.terms && options.blockAnnoyances) {
+    const domain = tab.url ? parse(tab.url).hostname.replace(/^www\./, '') : '';
+
+    if (
+      isPaused(options, domain) ||
+      config.hasAction(domain, ACTION_DISABLE_AUTOCONSENT)
+    ) {
+      return;
+    }
+
     try {
       chrome.tabs.sendMessage(
         tab.id,
