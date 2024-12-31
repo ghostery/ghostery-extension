@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import { UPDATE_SESSION_ACTION_NAME } from '/store/session.js';
-import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/api.js';
+import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/urls.js';
 
 // Observe cookie changes (login/logout actions)
 chrome.webNavigation.onDOMContentLoaded.addListener(async ({ url = '' }) => {
