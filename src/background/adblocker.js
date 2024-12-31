@@ -84,6 +84,12 @@ export async function reloadMainEngine() {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
+  if (
+    __PLATFORM__ === 'firefox' &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+  ) {
+    contentScripts.unregisterAll();
+  }
 }
 
 let updating = false;
@@ -161,7 +167,68 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-function injectScriptlets(filters, tabId, frameId) {
+let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION = false;
+if (__PLATFORM__ === 'firefox') {
+  OptionsObserver.addListener('experimentalFilters', (value) => {
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION = value;
+    if (!value) {
+      contentScripts.unregisterAll();
+    }
+  });
+
+  OptionsObserver.addListener('paused', async (paused) => {
+    if (!ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION) return;
+    for (const hostname of Object.keys(paused)) {
+      contentScripts.unregister(hostname);
+    }
+  });
+}
+
+const contentScripts = (() => {
+  const map = new Map();
+  return {
+    async register(hostname, code) {
+      this.unregister(hostname);
+      try {
+        const contentScript = await browser.contentScripts.register({
+          js: [
+            {
+              code,
+            },
+          ],
+          allFrames: true,
+          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+          matchAboutBlank: true,
+          matchOriginAsFallback: true,
+          runAt: 'document_start',
+          world: 'MAIN',
+        });
+        map.set(hostname, contentScript);
+      } catch (e) {
+        console.warn(e);
+        this.unregister(hostname);
+      }
+    },
+    isRegistered(hostname) {
+      return map.has(hostname);
+    },
+    unregister(hostname) {
+      const contentScript = map.get(hostname);
+      if (contentScript) {
+        contentScript.unregister();
+        map.delete(hostname);
+      }
+    },
+    unregisterAll() {
+      for (const hostname of map.keys()) {
+        this.unregister(hostname);
+      }
+    },
+  };
+})();
+
+function injectScriptlets(filters, tabId, frameId, hostname) {
+  let contentScript = '';
   for (const filter of filters) {
     const parsed = filter.parseScript();
 
@@ -175,9 +242,19 @@ function injectScriptlets(filters, tabId, frameId) {
 
     const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
     const scriptlet = scriptlets[scriptletName];
+    const func = scriptlet.func;
+    const args = parsed.args.map((arg) => decodeURIComponent(arg));
 
     if (!scriptlet) {
       console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
+      continue;
+    }
+
+    if (
+      __PLATFORM__ === 'firefox' &&
+      ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+    ) {
+      contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
 
@@ -191,8 +268,8 @@ function injectScriptlets(filters, tabId, frameId) {
           tabId,
           frameIds: [frameId],
         },
-        func: scriptlet.func,
-        args: parsed.args.map((arg) => decodeURIComponent(arg)),
+        func,
+        args,
       },
       () => {
         if (chrome.runtime.lastError) {
@@ -200,6 +277,19 @@ function injectScriptlets(filters, tabId, frameId) {
         }
       },
     );
+  }
+
+  if (
+    __PLATFORM__ === 'firefox' &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+  ) {
+    if (filters.length === 0) {
+      contentScripts.unregister(hostname);
+    } else if (!contentScripts.isRegistered(hostname)) {
+      contentScripts.register(hostname, contentScript);
+    } else {
+      // do nothing if already registered
+    }
   }
 }
 
@@ -222,6 +312,8 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
+  const { bootstrap: isBootstrap, scriptletsOnly } = config;
+
   try {
     setup.pending && (await setup.pending);
   } catch (e) {
@@ -235,6 +327,14 @@ async function injectCosmetics(details, config) {
   const domain = parsed.domain || '';
   const hostname = parsed.hostname || '';
 
+  if (
+    __PLATFORM__ === 'firefox' &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION &&
+    scriptletsOnly &&
+    contentScripts.isRegistered(hostname)
+  )
+    return;
+
   if (isPaused(options, hostname)) return;
 
   const tabHostname = tabStats.get(tabId)?.hostname;
@@ -243,7 +343,6 @@ async function injectCosmetics(details, config) {
   }
 
   const engine = engines.get(engines.MAIN_ENGINE);
-  const isBootstrap = config.bootstrap;
 
   {
     const { matches } = engine.matchCosmeticFilters({
@@ -280,8 +379,12 @@ async function injectCosmetics(details, config) {
       }
     }
 
-    if (isBootstrap && scriptFilters.length > 0) {
-      injectScriptlets(scriptFilters, tabId, frameId);
+    if (isBootstrap) {
+      injectScriptlets(scriptFilters, tabId, frameId, hostname);
+    }
+
+    if (scriptletsOnly) {
+      return;
     }
 
     const { styles } = engine.injectCosmeticFilters(styleFilters, {
@@ -375,6 +478,15 @@ function isTrusted(request, type) {
 }
 
 if (__PLATFORM__ === 'firefox') {
+  chrome.webNavigation.onBeforeNavigate.addListener(
+    (details) => {
+      if (ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION) {
+        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
+      }
+    },
+    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+  );
+
   function isExtensionRequest(details) {
     return (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
