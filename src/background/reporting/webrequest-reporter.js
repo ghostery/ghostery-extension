@@ -31,7 +31,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   });
 
   webRequestReporter = new RequestReporter(config.request, {
-    communication,
+    onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
     countryProvider: urlReporter.countryProvider,
     trustedClock: communication.trustedClock,
     getBrowserInfo,
