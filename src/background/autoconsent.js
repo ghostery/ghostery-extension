@@ -9,8 +9,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { evalSnippets } from '@duckduckgo/autoconsent';
 import rules from '@duckduckgo/autoconsent/rules/rules.json';
-import { snippets } from '@duckduckgo/autoconsent/lib/eval-snippets';
+
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
@@ -33,6 +34,7 @@ async function initialize(msg, tab, frameId) {
           rules,
           config: {
             enableCosmeticRules: false,
+            enableFilterList: false,
           },
         },
         {
@@ -55,7 +57,7 @@ async function evalCode(snippetId, id, tabId, frameId) {
     world:
       chrome.scripting.ExecutionWorld?.MAIN ??
       (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
-    func: snippets[snippetId],
+    func: evalSnippets[snippetId],
   });
 
   await chrome.tabs.sendMessage(
