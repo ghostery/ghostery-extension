@@ -192,7 +192,7 @@
   "custom_filters": {
     "message": "사용자 필터"
   },
-  "custom_filters_has_been_updated": {
+  "custom_filters_have_been_updated": {
     "message": "사용자 필터가 업데이트되었습니다"
   },
   "customer_interaction": {

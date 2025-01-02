@@ -192,7 +192,7 @@
   "custom_filters": {
     "message": "自訂過濾器"
   },
-  "custom_filters_has_been_updated": {
+  "custom_filters_have_been_updated": {
     "message": "自訂過濾器已更新"
   },
   "customer_interaction": {

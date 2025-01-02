@@ -192,7 +192,7 @@
   "custom_filters": {
     "message": "カスタムフィルター"
   },
-  "custom_filters_has_been_updated": {
+  "custom_filters_have_been_updated": {
     "message": "カスタムフィルターが更新されました"
   },
   "customer_interaction": {
