@@ -192,8 +192,8 @@
   "custom_filters": {
     "message": "Custom Filters"
   },
-  "custom_filters_has_been_updated": {
-    "message": "Custom filters has been updated"
+  "custom_filters_have_been_updated": {
+    "message": "Custom filters have been updated"
   },
   "customer_interaction": {
     "message": "Customer Interaction",

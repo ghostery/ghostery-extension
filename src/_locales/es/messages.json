@@ -192,7 +192,7 @@
   "custom_filters": {
     "message": "Filtros personalizados"
   },
-  "custom_filters_has_been_updated": {
+  "custom_filters_have_been_updated": {
     "message": "Los filtros personalizados se han actualizado"
   },
   "customer_interaction": {

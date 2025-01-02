@@ -192,7 +192,7 @@
   "custom_filters": {
     "message": "Пользовательские фильтры"
   },
-  "custom_filters_has_been_updated": {
+  "custom_filters_have_been_updated": {
     "message": "Фильтры обновлены"
   },
   "customer_interaction": {

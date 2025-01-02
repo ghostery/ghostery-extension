@@ -68,7 +68,7 @@ export default {
           >
             <div layout="column gap:0.5">
               <ui-text type="label-s" color="gray-600">
-                Custom filters has been updated
+                Custom filters have been updated
               </ui-text>
               <ui-text type="body-s" color="gray-600">
                 ${__PLATFORM__ === 'firefox'
