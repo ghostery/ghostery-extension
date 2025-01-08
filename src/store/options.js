@@ -231,9 +231,11 @@ async function manage(options) {
   return options;
 }
 
-export function isPaused(options, domain = '') {
+export function isPaused(options, hostname = '') {
+  if (options.paused[GLOBAL_PAUSE_ID]) return true;
+
   return (
-    !!options.paused[GLOBAL_PAUSE_ID] ||
-    (domain && !!options.paused[domain.replace(/^www\./, '')])
+    !!hostname &&
+    Object.keys(options.paused).some((id) => hostname.endsWith(id))
   );
 }

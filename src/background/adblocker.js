@@ -460,15 +460,17 @@ function isTrusted(request, type) {
   const exception = getException(metadata?.id || request.hostname);
 
   if (exception) {
-    const tabHostname = request.sourceHostname.replace(/^www\./, '');
-
     // The request is trusted if:
     // - tracker is blocked, but tab hostname is added to trusted domains
     // - tracker is not blocked and tab hostname is not found in the blocked domains
     if (
       exception.blocked
-        ? exception.trustedDomains.includes(tabHostname)
-        : !exception.blockedDomains.includes(tabHostname)
+        ? exception.trustedDomains.some((id) =>
+            request.sourceHostname.endsWith(id),
+          )
+        : !exception.blockedDomains.some((id) =>
+            request.sourceHostname.endsWith(id.sourceHostname),
+          )
     ) {
       return true;
     }

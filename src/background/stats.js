@@ -314,7 +314,7 @@ function setupTabStats(details) {
 
   if (request.isHttp || request.isHttps) {
     tabStats.set(details.tabId, {
-      hostname: request.hostname.replace('www.', ''),
+      hostname: request.hostname,
       url: request.url,
       trackers: [],
       timestamp: details.timeStamp,
@@ -327,7 +327,7 @@ function setupTabStats(details) {
 }
 
 // Setup stats for the tab when a user navigates to a new page
-chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.tabId > -1 && details.parentFrameId === -1) {
     setupTabStats(details);
   }
