@@ -19,8 +19,9 @@ import {
 } from '@ghostery/adblocker';
 
 import { registerDatabase } from './indexeddb.js';
-import debug, { stagingMode } from './debug.js';
+import debug from './debug.js';
 import { captureException } from './errors.js';
+import { CDN_URL } from './api.js';
 
 export const MAIN_ENGINE = 'main';
 export const CUSTOM_ENGINE = 'custom-filters';
@@ -204,10 +205,6 @@ function check(response) {
   return response;
 }
 
-const CDN_HOSTNAME = stagingMode
-  ? 'staging-cdn.ghostery.com'
-  : 'cdn.ghostery.com';
-
 export async function update(name) {
   // If the IndexedDB is corrupted, and there is no way to load the engine
   // from the storage, we should skip the update.
@@ -222,8 +219,7 @@ export async function update(name) {
 
   try {
     const urlName = name === 'trackerdb' ? 'trackerdbMv3' : `dnr-${name}`;
-
-    const listURL = `https://${CDN_HOSTNAME}/adblocker/configs/${urlName}/allowed-lists.json`;
+    const listURL = CDN_URL + `adblocker/configs/${urlName}/allowed-lists.json`;
 
     console.info(`[engines] Updating engine "${name}"...`);
 
