@@ -307,7 +307,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 
 // --- Generate entry points ---
 
-const source = ['pages/onboarding/index.html'];
+const source = ['pages/onboarding/index.html', 'pages/logger/index.html'];
 const content_scripts = [];
 
 if (manifest.action?.default_popup) {

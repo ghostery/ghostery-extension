@@ -26,6 +26,7 @@ import Request from '/utils/request.js';
 import { isOpera } from '/utils/browser-info.js';
 
 import { getException } from './exceptions.js';
+import * as logger from './logger.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 
@@ -142,6 +143,8 @@ const OBSERVED_REQUESTS_LIMIT = 25;
 
 function pushTabStats(stats, requests) {
   let trackersUpdated = false;
+
+  logger.send(requests);
 
   for (const request of requests) {
     const metadata =
@@ -403,8 +406,6 @@ if (__PLATFORM__ === 'chromium') {
             if (request.id === details.requestId) {
               request.blocked = true;
               tracker.blocked = true;
-
-              return;
             }
           }
         }

@@ -69,6 +69,8 @@ export default class ExtendedRequest extends Request {
       sourceDomain: parsedSourceUrl.domain || parsedSourceUrl.hostname || '',
       sourceHostname: parsedSourceUrl.hostname || '',
 
+      timestamp: details.timeStamp,
+
       type: details.type,
 
       _originalRequestDetails: details,
@@ -86,5 +88,7 @@ export default class ExtendedRequest extends Request {
     this.sourceUrl = data.sourceUrl;
     this.sourceDomain = data.sourceDomain;
     this.sourceHostname = data.sourceHostname;
+
+    this.timestamp = data.timestamp;
   }
 }
