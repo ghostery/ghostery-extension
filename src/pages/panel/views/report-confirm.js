@@ -36,10 +36,11 @@ export default {
             layout="size:20 margin:3"
           />
           <ui-text type="headline-s" layout="block:center width:::40">
-            Thank you for your report!
+            Many thanks for your report!
           </ui-text>
           <ui-text type="body-m" layout="block:center width:::36">
-            We appreciate your help in making the web a better place.
+            Your contribution helps build a more private and safe internet for
+            the entire Ghostery community.
           </ui-text>
         </div>
       </panel-container>

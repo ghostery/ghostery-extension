@@ -9,10 +9,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store } from 'hybrids';
+import { html, router, store, msg } from 'hybrids';
 
 import Session from '/store/session.js';
-import { getCurrentTab } from '/utils/tabs.js';
+import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
+import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 
 import ReportConfirm from './report-confirm.js';
 
@@ -38,6 +39,7 @@ const Form = {
     async set(_, values) {
       const error = await chrome.runtime.sendMessage({
         action: 'report-broken-page',
+        tab: await getCurrentTab(),
         ...values,
       });
 
@@ -85,19 +87,28 @@ export default {
             ${store.error(form) &&
             !store.pending(form) &&
             html`
-              <div layout="row gap items:center">
-                <ui-icon
-                  name="warning"
-                  layout="inline size:2"
-                  color="danger-700"
-                ></ui-icon>
-                <ui-text color="danger-700">
-                  ${store.error(form).message}
+              <div layout="column gap">
+                <div layout="row gap">
+                  <ui-icon
+                    name="warning"
+                    layout="inline size:2"
+                    color="danger-700"
+                  ></ui-icon>
+                  <ui-text type="body-s" color="danger-700">
+                    ${store.error(form)?.message}
+                  </ui-text>
+                </div>
+                <ui-text type="body-s" color="danger-700" underline>
+                  ${msg.html`If the issue persists, please use the
+                    <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}"
+                      >form on our website</a
+                    >.`}
                 </ui-text>
               </div>
             `}
             <ui-text layout="width:::40">
-              Inform us about a broken page so we can investigate and fix it.
+              Inform us about a broken page experience, we’re happy to
+              investigate and fix.
             </ui-text>
             <ui-line></ui-line>
             <ui-text
@@ -110,12 +121,12 @@ export default {
             </ui-text>
             <ui-input>
               <textarea
-                placeholder="Describe the issue"
+                placeholder="Please describe the issue"
                 rows="4"
                 autocomplete="off"
                 style="resize: vertical"
                 oninput="${html.set(form, 'description')}"
-                maxlength="5000"
+                maxlength="4000"
                 layout="::ui:font:body-s"
                 required
               ></textarea>
@@ -124,7 +135,7 @@ export default {
               <input
                 type="email"
                 name="email"
-                placeholder="Email address"
+                placeholder="Enter email address"
                 layout="::ui:font:body-s"
                 value="${form.email}"
                 oninput="${html.set(form, 'email')}"
@@ -137,7 +148,7 @@ export default {
                 onchange="${html.set(form, 'screenshot')}"
               />
               <ui-text type="body-s">
-                Include a screenshot of this page
+                Include a screenshot of the current page
               </ui-text>
             </label>
             <ui-line></ui-line>
