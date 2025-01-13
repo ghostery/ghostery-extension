@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.4.19",
+  "version": "10.4.20",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
