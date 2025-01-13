@@ -26,19 +26,18 @@ function openGhosteryPage(url) {
         details.tabId === tab.id &&
         details.url.startsWith(ACCOUNT_PAGE_URL)
       ) {
-        chrome.webNavigation.onCommitted.removeListener(onSuccess);
+        chrome.webNavigation.onDOMContentLoaded.removeListener(onSuccess);
         chrome.tabs.remove(tab.id);
       }
     };
 
     const onRemove = (tabId) => {
       if (tabId === tab.id) {
-        chrome.webNavigation.onCommitted.removeListener(onSuccess);
+        chrome.webNavigation.onDOMContentLoaded.removeListener(onSuccess);
         chrome.tabs.onRemoved.removeListener(onRemove);
 
         // The tab is closed before the background listeners can catch the event
         // so we need to refresh session and trigger sync manually
-        store.clear(Session);
         chrome.runtime.sendMessage({ action: 'syncOptions' });
 
         // Restore the original tab
@@ -46,8 +45,8 @@ function openGhosteryPage(url) {
       }
     };
 
+    chrome.webNavigation.onDOMContentLoaded.addListener(onSuccess);
     chrome.tabs.onRemoved.addListener(onRemove);
-    chrome.webNavigation.onCommitted.addListener(onSuccess);
 
     tab = await chrome.tabs.create({ url });
   };

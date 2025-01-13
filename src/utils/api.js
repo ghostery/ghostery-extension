@@ -100,13 +100,23 @@ async function getCookie(name) {
       : {}),
   });
 
-  if (
-    cookie &&
-    (cookie.session ||
-      cookie.expirationDate * (__PLATFORM__ !== 'safari' ? 1000 : 1) >
-        Date.now())
-  ) {
-    return cookie;
+  if (cookie) {
+    if (cookie.session) return cookie;
+
+    let expirationDate = cookie.expirationDate;
+
+    // By the specs, the `expirationDate` should be in seconds since the epoch
+    // and we need to convert it to milliseconds, but Safari returns it in milliseconds
+    if (
+      __PLATFORM__ !== 'safari' ||
+      new Date(expirationDate).getFullYear() === 1970
+    ) {
+      expirationDate = expirationDate * 1000;
+    }
+
+    if (expirationDate > Date.now()) {
+      return cookie;
+    }
   }
 
   return null;
