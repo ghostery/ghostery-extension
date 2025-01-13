@@ -24,11 +24,6 @@ async function getMetadata(tab) {
   const { version } = chrome.runtime.getManifest();
   result += `Extension version: ${version}`;
 
-  const trackers = tabStats.get(tab.id)?.trackers.map((t) => t.id);
-  if (trackers) {
-    result += `\nTrackers(${trackers.length}): ${trackers.join(', ')}`;
-  }
-
   // Send only not-private options
   const options = Object.fromEntries(
     Object.entries(await store.resolve(Options)).filter(([key]) =>
@@ -37,6 +32,11 @@ async function getMetadata(tab) {
   );
 
   result += `\nOptions: ${JSON.stringify(options)}`;
+
+  const trackers = tabStats.get(tab.id)?.trackers.map((t) => t.id);
+  if (trackers) {
+    result += `\nTrackers(${trackers.length}): ${trackers.join(', ')}`;
+  }
 
   return result;
 }
@@ -55,10 +55,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           `[GBE] Broken page report: ${msg.url}`,
         );
 
-        formData.append(
-          'support_ticket[message]',
-          msg.description + (await getMetadata(msg.tab)),
-        );
+        formData.append('support_ticket[message]', description);
 
         formData.append('support_ticket[selected_browser]', browserInfo.name);
         formData.append('support_ticket[browser_version]', browserInfo.version);
@@ -66,6 +63,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         if (browserInfo.osVersion !== 'other') {
           formData.append('support_ticket[selected_os]', browserInfo.osVersion);
           formData.append('support_ticket[os_version]', '');
+        }
+
+        let description = msg.description.trim() + (await getMetadata(msg.tab));
+
+        if (description.length > 5000) {
+          description = description.slice(0, 4997) + '...';
         }
 
         if (msg.screenshot) {

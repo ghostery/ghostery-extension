@@ -99,10 +99,8 @@ export default {
                   </ui-text>
                 </div>
                 <ui-text type="body-s" color="danger-700" underline>
-                  ${msg.html`If the issue persists, please use the
-                    <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}"
-                      >form on our website</a
-                    >.`}
+                  ${msg.html`If the issue persists, please use the report form on
+                    <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">ghostery.com</a>.`}
                 </ui-text>
               </div>
             `}
