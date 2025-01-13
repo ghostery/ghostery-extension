@@ -39,11 +39,19 @@ export default {
       storage.set(id, request);
       return request;
     },
-    list: ({ tabId, status }) =>
+    list: ({ tabId, query, status }) =>
       Array.from(storage.values()).filter((request) => {
         let match = true;
 
         if (tabId && request.tabId !== tabId) {
+          match = false;
+        }
+
+        if (
+          query &&
+          !request.url.includes(query) &&
+          !request.filter.includes(query)
+        ) {
           match = false;
         }
 
