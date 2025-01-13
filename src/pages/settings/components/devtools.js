@@ -106,9 +106,9 @@ function formatDate(date) {
 
 function openLogger() {
   const url = chrome.runtime.getURL('/pages/logger/index.html');
+  const features = 'toolbar=no,width=1000,height=500';
 
-  window.open(url, 'Ghostery Logger', 'toolbar=no');
-  window.close();
+  window.open(url, 'Ghostery Logger', features);
 }
 
 export default {
@@ -230,7 +230,10 @@ export default {
                   </button>
                 </ui-button>
                 <ui-button>
-                  <button onclick="${openLogger}">Open logger</button>
+                  <button onclick="${openLogger}">
+                    <ui-icon name="play" layout="size:2"></ui-icon>
+                    Logger
+                  </button>
                 </ui-button>
               </div>
             </div>

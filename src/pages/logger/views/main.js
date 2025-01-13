@@ -20,13 +20,14 @@ function refreshSelectedTab(host) {
 
 export default {
   logs: store([Log], {
-    id: ({ tabId, status }) => ({ tabId, status }),
+    id: ({ tabId, query, status }) => ({ tabId, query, status }),
   }),
   tabs: store([Tab]),
   tabId: ({ tabs }, value) => {
     if (value !== undefined) return value;
     return store.ready(tabs) ? tabs.find((tab) => tab.active).id : '';
   },
+  query: '',
   status: '',
   render: ({ logs, tabs, tabId, status }) => html`
     <template layout="height:full">
@@ -46,6 +47,13 @@ export default {
               )}
             </select>
           </ui-input>
+          <ui-input layout="grow">
+            <input
+              type="search"
+              placeholder="Search..."
+              oninput="${html.set('query')}"
+            />
+          </ui-input>
           <ui-input>
             <select onchange="${html.set('status')}" value="${status}">
               <option value="">All requests</option>
@@ -58,7 +66,15 @@ export default {
             layout="width:5"
             disabled="${!tabId}"
           >
-            <button><ui-icon name="refresh"></ui-icon></button>
+            <button title="Refresh current tab">
+              <ui-icon name="refresh" layout="size:2"></ui-icon>
+            </button>
+          </ui-button>
+
+          <ui-button onclick="${() => location.reload()}" layout="width:5">
+            <button title="Clear logs and reload">
+              <ui-icon name="trash" layout="size:2"></ui-icon>
+            </button>
           </ui-button>
         </div>
         <ui-line></ui-line>
