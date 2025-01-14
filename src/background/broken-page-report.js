@@ -19,7 +19,7 @@ import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 import { tabStats } from './stats.js';
 
 async function getMetadata(tab) {
-  let result = '\n\n------\n\n';
+  let result = '\n------';
 
   const { version } = chrome.runtime.getManifest();
   result += `Extension version: ${version}`;
@@ -55,8 +55,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           `[GBE] Broken page report: ${msg.url}`,
         );
 
-        formData.append('support_ticket[message]', description);
-
         formData.append('support_ticket[selected_browser]', browserInfo.name);
         formData.append('support_ticket[browser_version]', browserInfo.version);
 
@@ -70,6 +68,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         if (description.length > 5000) {
           description = description.slice(0, 4997) + '...';
         }
+
+        formData.append('support_ticket[message]', description);
 
         if (msg.screenshot) {
           const screenshot = await chrome.tabs.captureVisibleTab(null, {
