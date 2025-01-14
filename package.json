@@ -50,7 +50,7 @@
     "@sentry/browser": "^8.48.0",
     "@whotracksme/reporting": "^5.2.1",
     "bowser": "^2.11.0",
-    "hybrids": "^9.1.9",
+    "hybrids": "^9.1.10",
     "idb": "^8.0.1",
     "jwt-decode": "^4.0.0",
     "tldts-experimental": "^6.1.71"
