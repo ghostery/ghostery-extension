@@ -77,7 +77,7 @@ export default {
 
     :host([type="outline-danger"]) {
       color: var(--ui-color-danger-500);
-      background: var(--ui-color-danger-100);
+      background: var(--ui-color-layout);
       border: 1px solid var(--ui-color-danger-300);
     }
 

@@ -35,11 +35,11 @@ export default {
     <template layout="grow column gap">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
-          <ui-text type="body-l">Welcome to Ghostery</ui-text>
+          <ui-text type="body-m">Welcome to Ghostery</ui-text>
           <ui-text type="display-m"> Enable Ghostery to get started </ui-text>
         </section>
         <div layout="column gap:2">
-          <ui-text type="label-m" layout="block:center">
+          <ui-text type="display-2xs" layout="block:center">
             Your Privacy Features:
           </ui-text>
           <div layout="grid:3 gap">
@@ -84,7 +84,7 @@ export default {
             </a>
           </ui-button>
           <onboarding-error-card layout="margin:top">
-            <ui-text type="label-s" color="danger-500" layout="block:center">
+            <ui-text type="body-s" color="danger-500" layout="block:center">
               With Ghostery disabled, only the basic functionality of naming
               trackers is available.
             </ui-text>
