@@ -9,7 +9,7 @@ import {
   ACCOUNT_PAGE_URL,
   SIGNON_PAGE_URL,
   CREATE_ACCOUNT_PAGE_URL,
-} from '/utils/api.js';
+} from '/utils/urls.js';
 
 import assets from '../assets/index.js';
 

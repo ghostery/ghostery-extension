@@ -15,7 +15,7 @@ import Session from '/store/session.js';
 
 import { getUserOptions, setUserOptions } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/api.js';
+import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/urls.js';
 import debounce from '/utils/debounce.js';
 
 const syncOptions = debounce(

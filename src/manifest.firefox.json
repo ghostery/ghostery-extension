@@ -11,6 +11,7 @@
     "storage",
     "scripting",
     "tabs",
+    "activeTab",
     "webNavigation",
     "webRequest",
     "webRequestBlocking",
