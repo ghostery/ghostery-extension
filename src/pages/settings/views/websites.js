@@ -100,14 +100,14 @@ export default {
         </div>
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="row items:center gap:2">
-            <settings-input icon="search" layout="grow:1">
+            <ui-input icon="search" layout="grow:1">
               <input
                 type="search"
                 value="${query}"
                 placeholder="${msg`Search website...`}"
                 oninput="${html.set('query')}"
               />
-            </settings-input>
+            </ui-input>
             <ui-button>
               <a href="${router.url(WebsitesAdd)}">Add</a>
             </ui-button>
