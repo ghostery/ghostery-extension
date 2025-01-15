@@ -19,7 +19,7 @@ import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 import { tabStats } from './stats.js';
 
 async function getMetadata(tab) {
-  let result = '\n------';
+  let result = '\n------\n\n';
 
   const { version } = chrome.runtime.getManifest();
   result += `Extension version: ${version}`;
