@@ -48,7 +48,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         const formData = new FormData();
         const browserInfo = await getBrowserInfo();
 
-        formData.append('support_ticket[user_name]', '');
+        formData.append('support_ticket[user_name]', msg.email);
         formData.append('support_ticket[user_email]', msg.email);
         formData.append(
           'support_ticket[subject]',
