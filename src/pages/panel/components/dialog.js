@@ -45,7 +45,7 @@ export default {
         id="dialog"
         layout="
           grid::max|1
-          width:full::full height:auto::94vh
+          width:full::full height:auto::94dvh
           margin:0 padding:0
           fixed inset bottom top:auto
         "

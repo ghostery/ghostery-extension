@@ -11,7 +11,7 @@
 
 import { html } from 'hybrids';
 
-import { getBrowserId } from '/utils/browser-info.js';
+import { getBrowserName } from '/utils/browser-info.js';
 
 import protection from '../illustrations/protection.js';
 
@@ -21,13 +21,13 @@ import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
 
 const PIN_EXTENSION_IMAGES = {
   chrome: pinExtensionChrome,
-  edge: pinExtensionEdge,
+  'edge:desktop': pinExtensionEdge,
   opera: pinExtensionOpera,
 };
 
 export default {
-  platform: getBrowserId,
-  render: ({ platform }) => html`
+  browser: getBrowserName,
+  render: ({ browser }) => html`
     <template layout="column gap">
       <ui-card data-qa="view:success">
         <section layout="block:center column gap:2">
@@ -39,7 +39,7 @@ export default {
           </ui-text>
         </section>
       </ui-card>
-      ${PIN_EXTENSION_IMAGES[platform] &&
+      ${PIN_EXTENSION_IMAGES[browser] &&
       html`
         <ui-card>
           <section layout="column gap:2">
@@ -47,13 +47,13 @@ export default {
               What’s next?
             </ui-text>
             <img
-              src="${PIN_EXTENSION_IMAGES[platform]}"
+              src="${PIN_EXTENSION_IMAGES[browser]}"
               layout="width:::full"
               style="border-radius:8px; overflow:hidden;"
             />
             <div layout="row items:center gap">
               <ui-icon
-                name="extension-${platform}"
+                name="extension-${browser}"
                 layout="block inline size:3"
                 color="gray-400"
               ></ui-icon>
@@ -69,7 +69,7 @@ export default {
             </ui-text>
           </section>
         </ui-card>
-        <onboarding-pin-it platform="${platform}">
+        <onboarding-pin-it browser="${browser}">
           Pin it here
         </onboarding-pin-it>
       `}

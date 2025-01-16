@@ -12,15 +12,15 @@
 import { html } from 'hybrids';
 
 export default {
-  platform: { value: '', reflect: true },
-  render: ({ platform }) => html`
+  browser: { value: '', reflect: true },
+  render: ({ browser }) => html`
     <template
       layout="fixed top:3 right:3 layer:1000 row items:center gap:1.5 padding:2:3:2:2"
     >
       <div id="arrow" layout="absolute top right:150px size:2.5"></div>
       <div id="icon" layout="relative layer row center size:5">
         <ui-icon
-          name="extension-${platform}"
+          name="extension-${browser}"
           layout="size:3"
           color="success-500"
         ></ui-icon>
@@ -51,12 +51,12 @@ export default {
       transform: rotate(45deg) translateY(-50%);
     }
 
-    :host([platform='chrome']) #arrow { right: 85px; }
-    :host([platform='edge']) { min-width: 220px;  }
-    :host([platform='edge']) #arrow { right: 218px; }
+    :host([browser='chrome']) #arrow { right: 85px; }
+    :host([browser='edge:desktop']) { min-width: 220px;  }
+    :host([browser='edge:desktop']) #arrow { right: 218px; }
 
-    :host([platform='opera']) { top: 16px; right: 8px; }
-    :host([platform='opera']) #arrow { right: 22px; }
+    :host([browser='opera']) { top: 16px; right: 8px; }
+    :host([browser='opera']) #arrow { right: 22px; }
 
     #icon {
       background: white;

@@ -9,7 +9,7 @@ function updateShadow({ render }) {
   if (el.scrollHeight > el.clientHeight) {
     shadow.classList.toggle(
       'show',
-      el.scrollTop + el.clientHeight < el.scrollHeight,
+      Math.ceil(el.scrollTop + el.clientHeight) < el.scrollHeight,
     );
   } else {
     shadow.classList.remove('show');
