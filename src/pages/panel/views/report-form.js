@@ -87,20 +87,14 @@ export default {
             ${store.error(form) &&
             !store.pending(form) &&
             html`
-              <div layout="column gap">
-                <div layout="row gap">
-                  <ui-icon
-                    name="warning"
-                    layout="inline size:2"
-                    color="danger-700"
-                  ></ui-icon>
-                  <ui-text type="body-s" color="danger-700">
-                    ${store.error(form)?.message}
-                  </ui-text>
-                </div>
-                <ui-text type="body-s" color="danger-700" underline>
-                  ${msg.html`If the issue persists, please use the report form on
-                    <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">ghostery.com</a>.`}
+              <div layout="row gap">
+                <ui-icon
+                  name="warning"
+                  layout="inline size:2"
+                  color="danger-700"
+                ></ui-icon>
+                <ui-text type="body-s" color="danger-700">
+                  ${store.error(form)?.message}
                 </ui-text>
               </div>
             `}
@@ -149,6 +143,12 @@ export default {
                 Include a screenshot of the current page
               </ui-text>
             </label>
+            <ui-text type="body-s" color="gray-600" underline>
+              ${msg.html`
+                If the issue persists or you’d like to report a different page as broken,
+                please use the report form on <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">ghostery.com</a>.
+              `}
+            </ui-text>
             <ui-line></ui-line>
             <div layout="grid:2 gap:1">
               <ui-button type="transparent" disabled="${store.pending(form)}">
