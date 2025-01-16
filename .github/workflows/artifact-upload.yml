@@ -41,13 +41,13 @@ jobs:
             unzip "web-ext-artifacts/ghostery-$PLATFORM.zip" -d "web-ext-artifacts/ghostery-$PLATFORM"
           done
       - name: Upload Chromium build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ghostery-chromium-${{ env.VERSION }}-${{ env.SHA }}
           path: web-ext-artifacts/ghostery-chromium/*
           if-no-files-found: error
       - name: Upload Firefox build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ghostery-firefox-${{ env.VERSION }}-${{ env.SHA }}
           path: web-ext-artifacts/ghostery-firefox/*
