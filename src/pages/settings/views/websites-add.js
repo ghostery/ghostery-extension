@@ -54,7 +54,7 @@ export default {
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Website</ui-text>
-            <settings-input error="${store.error(hostname) || ''}">
+            <ui-input error="${store.error(hostname) || ''}">
               <input
                 type="text"
                 placeholder="${msg`Enter website URL`}"
@@ -62,11 +62,11 @@ export default {
                 oninput="${html.set(hostname, 'value')}"
                 tabindex="1"
               />
-            </settings-input>
+            </ui-input>
           </div>
           <div layout="column gap:0.5">
             <ui-text type="label-m">Select time frame</ui-text>
-            <settings-input>
+            <ui-input>
               <select
                 type="text"
                 placeholder="${msg`Enter website URL`}"
@@ -78,7 +78,7 @@ export default {
                 <option value="24">1 day</option>
                 <option value="0">Always</option>
               </select>
-            </settings-input>
+            </ui-input>
           </div>
           <div layout="grid:1|1 gap margin:top:2">
             <ui-button>

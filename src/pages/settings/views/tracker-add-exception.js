@@ -61,7 +61,7 @@ export default {
             </ui-text>
             <div layout="column gap:0.5">
               <ui-text type="label-m">Website</ui-text>
-              <settings-input error="${store.error(hostname) || ''}">
+              <ui-input error="${store.error(hostname) || ''}">
                 <input
                   type="text"
                   placeholder="${msg`Enter website URL`}"
@@ -69,7 +69,7 @@ export default {
                   oninput="${html.set(hostname, 'value')}"
                   tabindex="1"
                 />
-              </settings-input>
+              </ui-input>
               <ui-text type="body-s" color="gray-600">
                 ${blocked
                   ? msg`${tracker.name} will be trusted on this website. | A tracker will be trusted on this website.`

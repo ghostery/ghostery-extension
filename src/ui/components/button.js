@@ -92,6 +92,11 @@ export default {
       pointer-events: none;
     }
 
+    :host([disabled][type="transparent"]) {
+      background: none;
+      border-color: transparent;
+    }
+
     @media (hover: hover) {
       :host([type="primary"]:hover) {
         background: var(--ui-color-primary-700);
