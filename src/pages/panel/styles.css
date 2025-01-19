@@ -21,4 +21,8 @@ body {
   body {
     max-height: 600px;
   }
+
+  body[browser-name='edge:android'] {
+    max-height: 540px;
+  }
 }
