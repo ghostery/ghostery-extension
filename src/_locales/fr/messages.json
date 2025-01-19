@@ -347,8 +347,17 @@
     "message": "Hébergement",
     "description": "Tracker category name"
   },
+  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
+    "message": "If the issue persists or you’d like to report a different page as broken, please use the report form on <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
+  },
   "ignore": {
     "message": "Ignorer"
+  },
+  "include_a_screenshot_of_the_current_page": {
+    "message": "Include a screenshot of the current page"
+  },
+  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
+    "message": "Inform us about a broken page experience, we’re happy to investigate and fix."
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informations sur les <a href=\"$${0}\">trackers web</a>, la <a href=\"$${1}\">santé des extensions</a> et la <a href=\"$${2}\">télémétrie de performance</a> seront partagées conformément à notre <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Politique de Confidentialité</a>, renforçant la protection de la vie privée pour la communauté Ghostery.",
@@ -392,6 +401,9 @@
   },
   "manifest_short_description": {
     "message": "Extension de confidentialité puissante et facile à utiliser. Bloquez les publicités, les trackers et accélérez votre navigation."
+  },
+  "many_thanks_for_your_report_": {
+    "message": "Many thanks for your report!"
   },
   "menu": {
     "message": "Menu"
@@ -536,6 +548,9 @@
   "select_time_frame": {
     "message": "Sélectionnez la période de temps"
   },
+  "send": {
+    "message": "Envoyer"
+  },
   "send_feedback": {
     "message": "Envoyer des commentaires"
   },
@@ -573,6 +588,9 @@
   },
   "software_licenses": {
     "message": "Licences d'utilisation de logiciels"
+  },
+  "something_wrong_": {
+    "message": "Something wrong?"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "rapports statistiques sur les itinéraires de navigation"
@@ -733,6 +751,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Vous ne verrez plus de camembert des trackers à côté des résultats de recherche."
+  },
+  "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
+    "message": "Your contribution helps build a more private and safe internet for the entire Ghostery community."
   },
   "your_privacy_features_": {
     "message": "Vos fonctions de confidentialité :"

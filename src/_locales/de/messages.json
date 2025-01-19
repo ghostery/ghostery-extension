@@ -347,8 +347,17 @@
     "message": "Hosting",
     "description": "Tracker category name"
   },
+  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
+    "message": "If the issue persists or you’d like to report a different page as broken, please use the report form on <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
+  },
   "ignore": {
     "message": "Ignorieren"
+  },
+  "include_a_screenshot_of_the_current_page": {
+    "message": "Include a screenshot of the current page"
+  },
+  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
+    "message": "Inform us about a broken page experience, we’re happy to investigate and fix."
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Zustand des Add-ons</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um die Privatsphäre der ganzen Ghostery-Community zu verbessern.",
@@ -392,6 +401,9 @@
   },
   "manifest_short_description": {
     "message": "Leistungsstark und benutzerfreundlich: Blockiere Werbung, Tracker und beschleunige Seiten mit der Ghostery Datenschutz-Erweiterung."
+  },
+  "many_thanks_for_your_report_": {
+    "message": "Many thanks for your report!"
   },
   "menu": {
     "message": "Menü"
@@ -536,6 +548,9 @@
   "select_time_frame": {
     "message": "Zeitraum auswählen"
   },
+  "send": {
+    "message": "Senden"
+  },
   "send_feedback": {
     "message": "Feedback senden"
   },
@@ -573,6 +588,9 @@
   },
   "software_licenses": {
     "message": "Software-Lizenzen"
+  },
+  "something_wrong_": {
+    "message": "Something wrong?"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "Statistische Berichte über Navigationsrouten"
@@ -733,6 +751,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
+  },
+  "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
+    "message": "Your contribution helps build a more private and safe internet for the entire Ghostery community."
   },
   "your_privacy_features_": {
     "message": "Ihre Datenschutzfunktionen:"
