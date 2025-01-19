@@ -94,18 +94,19 @@ export function isOpera() {
   return browser.includes('opera');
 }
 
-function isSafari() {
-  const browser = getBrowser();
-  return browser.includes('safari');
-}
+export function getBrowserName() {
+  if (__PLATFORM__ === 'chromium') {
+    if (isOpera()) return 'opera';
 
-export function getBrowserId() {
-  if (isFirefox()) return 'firefox';
-  if (isEdge()) return 'edge';
-  if (isOpera()) return 'opera';
-  if (isSafari()) return 'safari';
+    if (isEdge()) {
+      return isAndroid() ? 'edge:android' : 'edge:desktop';
+    }
 
-  return 'chrome';
+    return 'chrome';
+  }
+
+  // "firefox" and "safari" are the only other supported platforms
+  return __PLATFORM__;
 }
 
 async function getBrowserInfo() {

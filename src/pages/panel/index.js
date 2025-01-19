@@ -16,10 +16,12 @@ import './elements.js';
 import './styles.css';
 
 import Main from './views/main.js';
+import { getBrowserName } from '/utils/browser-info.js';
 
 // Mount the app
 mount(document.body, {
   stack: router([Main]),
+  browserName: { value: getBrowserName, reflect: true },
   render: ({ stack }) => html`
     <template layout="row width:full:350px">${stack}</template>
   `,
