@@ -348,16 +348,16 @@
     "description": "Tracker category name"
   },
   "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "If the issue persists or you’d like to report a different page as broken, please use the report form on <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
+    "message": "如果問題持續存在或您想回報其他頁面有問題，請使用<a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>上的回報表單。"
   },
   "ignore": {
     "message": "忽略"
   },
   "include_a_screenshot_of_the_current_page": {
-    "message": "Include a screenshot of the current page"
+    "message": "包含當前頁面的截圖"
   },
   "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "Inform us about a broken page experience, we’re happy to investigate and fix."
+    "message": "請告訴我們有關網頁故障的經驗，我們很樂意調查並修復。"
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "有關<a href=\"$${0}\">網路追蹤器</a>、<a href=\"$${1}\">附加元件健康狀況</a>和<a href=\"$${2}\">效能遙測</a>的信息將根據我們的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隱私政策</a>分享，以促進Ghostery社群的隱私保護。.",
@@ -403,7 +403,7 @@
     "message": "功能強大且易於使用的隱私擴充套件。阻擋廣告、追蹤器並加速您的網頁。."
   },
   "many_thanks_for_your_report_": {
-    "message": "Many thanks for your report!"
+    "message": "非常感謝您的報告！"
   },
   "menu": {
     "message": "選單"
@@ -590,7 +590,7 @@
     "message": "軟體准許證"
   },
   "something_wrong_": {
-    "message": "Something wrong?"
+    "message": "有問題嗎？"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "航行路線的統計報告"
@@ -753,7 +753,7 @@
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
-    "message": "Your contribution helps build a more private and safe internet for the entire Ghostery community."
+    "message": "您的貢獻有助於為整個Ghostery社群建立一個更私密和安全的網路。"
   },
   "your_privacy_features_": {
     "message": "你的隱私功能："

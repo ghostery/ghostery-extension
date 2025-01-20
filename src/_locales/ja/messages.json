@@ -348,16 +348,16 @@
     "description": "Tracker category name"
   },
   "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "If the issue persists or you’d like to report a different page as broken, please use the report form on <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
+    "message": "問題が解決しない場合や、別のページを壊れていると報告したい場合は、<a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>の報告フォームをご利用ください。"
   },
   "ignore": {
     "message": "無視する"
   },
   "include_a_screenshot_of_the_current_page": {
-    "message": "Include a screenshot of the current page"
+    "message": "現在のページのスクリーンショットを含める"
   },
   "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "Inform us about a broken page experience, we’re happy to investigate and fix."
+    "message": "ページの不具合についてお知らせください。調査して修正いたします。"
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "ウェブトラッカー、アドオンの健康状態、パフォーマンステレメトリーに関する情報は、Ghosteryコミュニティのプライバシー保護を進めるために、当社のプライバシーポリシーに従って共有されます。.",
@@ -403,7 +403,7 @@
     "message": "強力で使いやすいプライバシー拡張機能。広告やトラッカーをブロックし、ウェブを高速化します。."
   },
   "many_thanks_for_your_report_": {
-    "message": "Many thanks for your report!"
+    "message": "ご報告ありがとうございます！"
   },
   "menu": {
     "message": "メニュー"
@@ -590,7 +590,7 @@
     "message": "ソフトウェア・ライセンス"
   },
   "something_wrong_": {
-    "message": "Something wrong?"
+    "message": "何か問題がありますか？"
   },
   "statistical_reports_on_navigational_routes": {
     "message": "航路に関する統計報告書"
@@ -753,7 +753,7 @@
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
   },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
-    "message": "Your contribution helps build a more private and safe internet for the entire Ghostery community."
+    "message": "あなたの貢献は、Ghosteryコミュニティ全体のために、よりプライベートで安全なインターネットを構築するのに役立ちます。"
   },
   "your_privacy_features_": {
     "message": "あなたのプライバシーを守る機能:"
