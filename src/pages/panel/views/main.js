@@ -170,7 +170,7 @@ export default {
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
                 data-qa="component:pause"
               >
-                ${paused?.revokeAt &&
+                ${!!paused?.revokeAt &&
                 html`
                   <div layout="row center">
                     <ui-action>
