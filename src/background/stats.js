@@ -144,7 +144,7 @@ const OBSERVED_REQUESTS_LIMIT = 25;
 function pushTabStats(stats, requests) {
   let trackersUpdated = false;
 
-  logger.send(requests);
+  logger.sendRequests(requests);
 
   for (const request of requests) {
     const metadata =

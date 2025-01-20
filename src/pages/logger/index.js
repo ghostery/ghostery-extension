@@ -10,16 +10,10 @@
  */
 
 import { mount, store } from 'hybrids';
-import { Request } from '@ghostery/adblocker';
-
-import * as engines from '/utils/engines.js';
 
 import '/ui/index.js';
 import Log from './store/log.js';
 import Main from './views/main.js';
-
-// This is a top level await, but it's fine as this is a page script
-const engine = await engines.init(engines.MAIN_ENGINE);
 
 // Register the logger tab
 const port = chrome.runtime.connect({ name: 'logger' });
@@ -27,15 +21,10 @@ const port = chrome.runtime.connect({ name: 'logger' });
 // Listen for requests from the background script
 port.onMessage.addListener((message) => {
   if (message.action === 'logger:requests') {
-    for (const data of message.requests) {
+    for (const data of message.logs) {
       const log = store.get(Log, data.id);
       delete data.id;
 
-      const { filter } = engine.match(
-        Request.fromRawDetails(data._originalRequestDetails),
-      );
-
-      data.filter = filter;
       store.set(log, data);
     }
   }

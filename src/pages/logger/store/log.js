@@ -10,7 +10,7 @@
  */
 import { store } from 'hybrids';
 
-const storage = new Map();
+const storage = [];
 
 export default {
   id: true,
@@ -36,11 +36,17 @@ export default {
         type: values.type === 'xmlhttprequest' ? 'xhr' : values.type,
       };
 
-      storage.set(id, request);
+      const log = storage.find((item) => item.id === id);
+      if (log) {
+        Object.assign(log, request);
+      } else {
+        storage.push(request);
+      }
+
       return request;
     },
     list: ({ tabId, query, status }) =>
-      Array.from(storage.values()).filter((request) => {
+      storage.filter((request) => {
         let match = true;
 
         if (tabId && request.tabId !== tabId) {
