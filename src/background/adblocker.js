@@ -27,8 +27,28 @@ import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import { getException } from './exceptions.js';
+import Config, {
+  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+} from '/store/config.js';
 
 let options = Options;
+
+let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = false;
+if (__PLATFORM__ === 'firefox') {
+  // FYI: Testing the flag by dev tools requires a reload of the background script
+  store.resolve(Config).then((config) => {
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = config.hasFlag(
+      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+    );
+  });
+
+  OptionsObserver.addListener('paused', async (paused) => {
+    if (!ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) return;
+    for (const hostname of Object.keys(paused)) {
+      contentScripts.unregister(hostname);
+    }
+  });
+}
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -84,10 +104,7 @@ export async function reloadMainEngine() {
     await engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
-  if (
-    __PLATFORM__ === 'firefox' &&
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
-  ) {
+  if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
     contentScripts.unregisterAll();
   }
 }
@@ -167,23 +184,6 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION = false;
-if (__PLATFORM__ === 'firefox') {
-  OptionsObserver.addListener('experimentalFilters', (value) => {
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION = value;
-    if (!value) {
-      contentScripts.unregisterAll();
-    }
-  });
-
-  OptionsObserver.addListener('paused', async (paused) => {
-    if (!ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION) return;
-    for (const hostname of Object.keys(paused)) {
-      contentScripts.unregister(hostname);
-    }
-  });
-}
-
 const contentScripts = (() => {
   const map = new Map();
   return {
@@ -252,7 +252,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
 
     if (
       __PLATFORM__ === 'firefox' &&
-      ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
+      ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS
     ) {
       contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
@@ -279,10 +279,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     );
   }
 
-  if (
-    __PLATFORM__ === 'firefox' &&
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION
-  ) {
+  if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
@@ -329,11 +326,12 @@ async function injectCosmetics(details, config) {
 
   if (
     __PLATFORM__ === 'firefox' &&
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION &&
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS &&
     scriptletsOnly &&
     contentScripts.isRegistered(hostname)
-  )
+  ) {
     return;
+  }
 
   if (isPaused(options, hostname)) return;
 
@@ -482,7 +480,7 @@ function isTrusted(request, type) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
-      if (ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPLET_INJECTION) {
+      if (ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
         injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
       }
     },
