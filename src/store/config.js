@@ -14,9 +14,9 @@ import { store } from 'hybrids';
 export const ACTION_DISABLE_AUTOCONSENT = 'disable-autoconsent';
 export const ACTION_DISABLE_ANTITRACKING_MODIFICATION =
   'disable-antitracking-modification';
-export const ACTION_ASSIST = 'assist';
+export const ACTION_PAUSE = 'pause';
 
-export const FLAG_ASSIST = 'assist';
+export const FLAG_PAUSE = 'pause';
 export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
   'firefox-content-script-scriptlets';
 
@@ -25,6 +25,7 @@ const Config = {
   updatedAt: 0,
   domains: store.record({
     actions: [String],
+    dismiss: [String],
   }),
   flags: store.record({
     percentage: 0,
@@ -47,7 +48,10 @@ const Config = {
 
       if (!actions.has(action)) {
         const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
-        const value = !!domain && domains[domain].actions.includes(action);
+        const value =
+          !!domain &&
+          domains[domain].actions.includes(action) &&
+          !domains[domain].dismiss.includes(action);
 
         actions.set(action, value);
         return value;
@@ -58,7 +62,13 @@ const Config = {
   },
 
   hasFlag({ flags, enabled }) {
-    return (flag) => enabled && !!(flag && flags[flag]?.enabled);
+    return (flag) => {
+      if (!enabled || !flag || !flags[flag]) {
+        return false;
+      }
+
+      return flags[flag].enabled;
+    };
   },
 
   [store.connect]: {

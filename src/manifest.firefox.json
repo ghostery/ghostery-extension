@@ -84,7 +84,9 @@
   ],
   "web_accessible_resources": [
     "pages/trackers-preview/index.html",
-    "pages/notifications/youtube.html"
+    "pages/notifications/youtube.html",
+    "pages/notifications/pause.html",
+    "pages/notifications/pause-feedback.html"
   ],
   "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {

@@ -10,10 +10,14 @@
  */
 
 import { store } from 'hybrids';
+import { parse } from 'tldts-experimental';
 
-import Config from '/store/config.js';
+import Config, { ACTION_PAUSE } from '/store/config.js';
+import Options from '/store/options.js';
 import { CDN_URL } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+
+import { openNotification } from './notifications.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
 
@@ -107,4 +111,52 @@ export default async function syncConfig() {
 
 OptionsObserver.addListener(function config({ terms }) {
   if (terms) syncConfig();
+});
+
+// Detect "pause" action and trigger pause assistant or feedback
+chrome.webNavigation.onCompleted.addListener(async (details) => {
+  if (details.frameId === 0) {
+    const hostname = parse(details.url).hostname;
+    if (hostname) {
+      const [config, options] = await Promise.all([
+        store.resolve(Config),
+        store.resolve(Options),
+      ]);
+
+      if (
+        config.hasAction(hostname, ACTION_PAUSE) &&
+        !options.paused[hostname]
+      ) {
+        openNotification(details.tabId, 'pause', { hostname });
+      }
+    }
+  }
+});
+
+const RELOAD_DELAY = 1 * 1000; // 1 second
+const FEEDBACK_DELAY = 5 * 1000; // 5 seconds
+
+// Listen to pause assistant messages
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  switch (msg.action) {
+    case 'config:pause:reload': {
+      setTimeout(() => chrome.tabs.reload(sender.tab.id), RELOAD_DELAY);
+
+      const cb = (details) => {
+        if (details.frameId === 0 && details.tabId === sender.tab.id) {
+          setTimeout(
+            () => openNotification(sender.tab.id, 'pause-feedback'),
+            FEEDBACK_DELAY,
+          );
+          chrome.webNavigation.onDOMContentLoaded.removeListener(cb);
+        }
+      };
+
+      chrome.webNavigation.onDOMContentLoaded.addListener(cb);
+      break;
+    }
+    case 'config:pause:feedback': {
+      // TODO: handle feedback
+    }
+  }
 });
