@@ -33,13 +33,57 @@ import Config, {
 
 let options = Options;
 
+const contentScripts = (() => {
+  const map = new Map();
+  return {
+    async register(hostname, code) {
+      this.unregister(hostname);
+      try {
+        const contentScript = await browser.contentScripts.register({
+          js: [
+            {
+              code,
+            },
+          ],
+          allFrames: true,
+          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
+          matchAboutBlank: true,
+          matchOriginAsFallback: true,
+          runAt: 'document_start',
+          world: 'MAIN',
+        });
+        map.set(hostname, contentScript);
+      } catch (e) {
+        console.warn(e);
+        this.unregister(hostname);
+      }
+    },
+    isRegistered(hostname) {
+      return map.has(hostname);
+    },
+    unregister(hostname) {
+      const contentScript = map.get(hostname);
+      if (contentScript) {
+        contentScript.unregister();
+        map.delete(hostname);
+      }
+    },
+    unregisterAll() {
+      for (const hostname of map.keys()) {
+        this.unregister(hostname);
+      }
+    },
+  };
+})();
+
 let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = false;
 if (__PLATFORM__ === 'firefox') {
   // FYI: Testing the flag by dev tools requires a reload of the background script
   store.resolve(Config).then((config) => {
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = config.hasFlag(
-      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-    );
+    const enabled = config.hasFlag(FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
+    if (!enabled) contentScripts.unregisterAll();
+
+    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = enabled;
   });
 
   OptionsObserver.addListener('paused', async (paused) => {
@@ -183,49 +227,6 @@ export const setup = asyncSetup('adblocker', [
     },
   ),
 ]);
-
-const contentScripts = (() => {
-  const map = new Map();
-  return {
-    async register(hostname, code) {
-      this.unregister(hostname);
-      try {
-        const contentScript = await browser.contentScripts.register({
-          js: [
-            {
-              code,
-            },
-          ],
-          allFrames: true,
-          matches: [`https://*.${hostname}/*`, `http://*.${hostname}/*`],
-          matchAboutBlank: true,
-          matchOriginAsFallback: true,
-          runAt: 'document_start',
-          world: 'MAIN',
-        });
-        map.set(hostname, contentScript);
-      } catch (e) {
-        console.warn(e);
-        this.unregister(hostname);
-      }
-    },
-    isRegistered(hostname) {
-      return map.has(hostname);
-    },
-    unregister(hostname) {
-      const contentScript = map.get(hostname);
-      if (contentScript) {
-        contentScript.unregister();
-        map.delete(hostname);
-      }
-    },
-    unregisterAll() {
-      for (const hostname of map.keys()) {
-        this.unregister(hostname);
-      }
-    },
-  };
-})();
 
 function injectScriptlets(filters, tabId, frameId, hostname) {
   let contentScript = '';
