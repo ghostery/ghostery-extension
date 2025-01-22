@@ -354,7 +354,6 @@ async function injectCosmetics(details, config) {
       hrefs: config.hrefs,
       ids: config.ids,
 
-      getBaseRules: false,
       // This needs to be done only once per frame
       getInjectionRules: isBootstrap,
       getExtendedRules: isBootstrap,
