@@ -421,7 +421,7 @@ async function injectCosmetics(details, config) {
 
 chrome.webNavigation.onCommitted.addListener(
   (details) => {
-    injectCosmetics(details, { bootstrap: true });
+    injectCosmetics(details, { isBootstrap: true });
   },
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
 );
