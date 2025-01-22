@@ -25,7 +25,7 @@ async function initialize(msg, tab, frameId) {
   ]);
 
   if (options.terms && options.blockAnnoyances) {
-    const domain = tab.url ? parse(tab.url).hostname.replace(/^www\./, '') : '';
+    const domain = tab.url ? parse(tab.url).hostname : '';
 
     if (
       isPaused(options, domain) ||
