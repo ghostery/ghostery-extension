@@ -143,7 +143,12 @@ export default {
                 Include a screenshot of the current page
               </ui-text>
             </label>
-            <ui-text type="body-s" color="gray-600" underline>
+            <ui-text
+              type="body-s"
+              color="gray-600"
+              underline
+              layout="width:::40"
+            >
               ${msg.html`
                 If the issue persists or you’d like to report a different page as broken,
                 please use the report form on <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">ghostery.com</a>.
