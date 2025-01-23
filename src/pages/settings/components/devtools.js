@@ -13,7 +13,7 @@ import { html, store, dispatch } from 'hybrids';
 
 import Options from '/store/options.js';
 import Config, {
-  ACTION_PAUSE,
+  ACTION_PAUSE_ASSISTANT,
   ACTION_DISABLE_AUTOCONSENT,
 } from '/store/config.js';
 
@@ -56,7 +56,7 @@ async function testConfigDomain(host) {
 
   const actions = window.prompt(
     'Enter actions to test:',
-    `${ACTION_PAUSE}, ${ACTION_DISABLE_AUTOCONSENT}`,
+    `${ACTION_PAUSE_ASSISTANT}, ${ACTION_DISABLE_AUTOCONSENT}`,
   );
 
   if (!actions) return;

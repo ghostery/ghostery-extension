@@ -12,7 +12,7 @@
 import { mount, html, store } from 'hybrids';
 import '/ui/index.js';
 
-import Config, { ACTION_PAUSE } from '/store/config.js';
+import Config, { ACTION_PAUSE_ASSISTANT } from '/store/config.js';
 import Options from '/store/options.js';
 
 import { setupNotificationPage } from '/utils/notifications.js';
@@ -41,7 +41,7 @@ async function pause(host) {
 async function dismiss() {
   await store.set(Config, {
     domains: {
-      [hostname]: { dismiss: [ACTION_PAUSE] },
+      [hostname]: { dismiss: [ACTION_PAUSE_ASSISTANT] },
     },
   });
 

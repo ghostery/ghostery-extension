@@ -113,7 +113,7 @@
       "resources": [
         "pages/trackers-preview/index.html",
         "pages/notifications/opera-serp.html",
-        "pages/notifications/pause.html",
+        "pages/notifications/pause-assistant.html",
         "pages/notifications/pause-feedback.html"
       ],
       "matches": ["<all_urls>"],

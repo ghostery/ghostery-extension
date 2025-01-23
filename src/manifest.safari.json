@@ -107,7 +107,7 @@
     {
       "resources": [
         "pages/trackers-preview/index.html",
-        "pages/notifications/pause.html",
+        "pages/notifications/pause-assistant.html",
         "pages/notifications/pause-feedback.html",
         "content_scripts/whotracksme/ghostery-whotracksme.js"
       ],

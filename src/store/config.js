@@ -14,9 +14,9 @@ import { store } from 'hybrids';
 export const ACTION_DISABLE_AUTOCONSENT = 'disable-autoconsent';
 export const ACTION_DISABLE_ANTITRACKING_MODIFICATION =
   'disable-antitracking-modification';
-export const ACTION_PAUSE = 'pause';
+export const ACTION_PAUSE_ASSISTANT = 'pause-assistant';
 
-export const FLAG_PAUSE = 'pause';
+export const FLAG_PAUSE = 'pause-assistant';
 export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
   'firefox-content-script-scriptlets';
 

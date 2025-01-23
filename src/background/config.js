@@ -12,7 +12,7 @@
 import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
-import Config, { ACTION_PAUSE } from '/store/config.js';
+import Config, { ACTION_PAUSE_ASSISTANT } from '/store/config.js';
 import Options from '/store/options.js';
 import { CDN_URL } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -124,7 +124,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
       ]);
 
       if (
-        config.hasAction(hostname, ACTION_PAUSE) &&
+        config.hasAction(hostname, ACTION_PAUSE_ASSISTANT) &&
         !options.paused[hostname]
       ) {
         openNotification(details.tabId, 'pause', { hostname });
