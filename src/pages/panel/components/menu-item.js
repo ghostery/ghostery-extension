@@ -17,13 +17,14 @@ export default {
   href: '',
   icon: '',
   suffixIcon: 'arrow-right',
-  render: ({ href, icon, suffixIcon }) => html`
-    <template layout>
+  internal: ({ href }) => href.startsWith(location.origin + location.pathname),
+  render: ({ href, icon, suffixIcon, internal }) => html`
+    <template layout="block">
       <ui-action>
         <a
           href="${href}"
           layout="grid:max|1|max items:center:start gap:1.5 padding margin:0:1"
-          onclick="${openTabWithUrl}"
+          onclick="${internal ? undefined : openTabWithUrl}"
         >
           <ui-icon name="${icon}" color="gray-600" layout="size:2.5"></ui-icon>
           <ui-text

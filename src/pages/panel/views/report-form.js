@@ -113,7 +113,7 @@ export default {
             </ui-text>
             <ui-input>
               <textarea
-                placeholder="Please describe the issue"
+                placeholder="${msg`Please describe the issue`}"
                 rows="4"
                 autocomplete="off"
                 style="resize: vertical"
@@ -127,7 +127,7 @@ export default {
               <input
                 type="email"
                 name="email"
-                placeholder="Enter email address"
+                placeholder="${msg`Enter email address`}"
                 layout="::ui:font:body-s"
                 value="${form.email}"
                 oninput="${html.set(form, 'email')}"

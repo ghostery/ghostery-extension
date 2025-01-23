@@ -53,12 +53,14 @@ if (__PLATFORM__ === 'safari') {
 // Close window when anchor is clicked
 document.addEventListener('click', (event) => {
   let el = event.target;
-  while (el && !el.href) el = el.parentElement;
 
+  while (el && !el.href) el = el.parentElement;
   if (!el) return;
 
+  const { hostname, pathname } = new URL(el.href);
+
   // Timeout is required to prevent from closing the window before the anchor is opened
-  if (el.origin !== location.origin || el.pathname !== location.pathname) {
+  if (hostname !== location.hostname || pathname !== location.pathname) {
     setTimeout(window.close, 50);
   }
 });

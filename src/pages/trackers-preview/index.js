@@ -13,6 +13,8 @@ import { define, html, store } from 'hybrids';
 
 import { sortCategories } from '/ui/categories.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
+import { WTM_PAGE_URL } from '/utils/urls.js';
+
 import Options from '/store/options.js';
 
 import DisablePreviewImg from './assets/disable-preview.svg';
@@ -90,7 +92,7 @@ define({
                   domain="${domain}"
                   categories="${stats}"
                   layout="relative layer:101"
-                  wtm-link
+                  wtmLink="${`${WTM_PAGE_URL}/websites/${domain}`}"
                   data-qa="component:stats"
                 >
                 </ui-stats>

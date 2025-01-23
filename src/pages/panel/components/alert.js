@@ -9,10 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { dispatch, html } from 'hybrids';
 
 function close(host) {
-  host.parentNode.removeChild(host);
+  dispatch(host, 'close');
 }
 
 const slide = {
@@ -68,7 +68,7 @@ export default {
   },
   render: ({ icon, autoclose }) => html`
     <template
-      layout="grid:max|1|max items:center gap:0.5 height:4 padding:0:1.5"
+      layout="grid:max|1|max items:center gap:0.5 height:5 padding:0:1.5"
       layout[slide]="absolute inset bottom:auto"
     >
       <ui-icon name="${icon}"></ui-icon>

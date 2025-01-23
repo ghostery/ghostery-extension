@@ -13,6 +13,7 @@ import { html, store, router, msg } from 'hybrids';
 
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
+import { WTM_PAGE_URL } from '/utils/urls.js';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
@@ -26,6 +27,7 @@ import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
+import { parse } from 'tldts-experimental';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -34,34 +36,27 @@ const ONBOARDING_URL = chrome.runtime.getURL(
   '/pages/onboarding/index.html#@onboarding-views-main?scrollToTop=1',
 );
 
-function showAlert(host, message) {
-  Array.from(host.querySelectorAll('#panel-alerts panel-alert')).forEach((el) =>
-    el.parentNode.removeChild(el),
-  );
-
-  const wrapper = document.createDocumentFragment();
-
-  html`
-    <panel-alert type="info" slide autoclose="5"> ${message} </panel-alert>
-  `(wrapper);
-
-  host.querySelector('#panel-alerts').appendChild(wrapper);
-}
-
 let reloadTimeout;
-function reloadTab() {
+function reloadTab(host, event) {
   clearTimeout(reloadTimeout);
 
+  event.preventDefault();
+  event.stopPropagation();
+
   reloadTimeout = setTimeout(async () => {
+    host.alert = '';
+
     const tab = await getCurrentTab();
     if (tab) chrome.tabs.reload(tab.id);
 
     reloadTimeout = null;
-  }, 1000);
+  }, 500);
 }
 
 async function togglePause(host, event) {
   const { paused, pauseType } = event.target;
+
+  host.alert = '';
 
   await store.set(host.options, {
     paused: {
@@ -71,26 +66,21 @@ async function togglePause(host, event) {
     },
   });
 
-  reloadTab();
-
-  showAlert(
-    host,
-    paused
-      ? msg`Ghostery has been resumed on this site.`
-      : msg`Ghostery is paused on this site.`,
-  );
+  host.alert = paused
+    ? msg`Ghostery has been resumed on this site.`
+    : msg`Ghostery is paused on this site.`;
 }
 
-function revokeGlobalPause(host) {
+async function revokeGlobalPause(host) {
   const { options } = host;
 
-  store.set(options, {
+  host.alert = '';
+
+  await store.set(options, {
     paused: { [GLOBAL_PAUSE_ID]: null },
   });
 
-  reloadTab();
-
-  showAlert(host, msg`Ghostery has been resumed.`);
+  host.alert = msg`Ghostery has been resumed.`;
 }
 
 function setStatsType(host, event) {
@@ -105,11 +95,26 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
+  alert: '',
   paused: ({ options, stats }) =>
     store.ready(options, stats) && options.paused[stats.hostname],
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
-  render: ({ options, stats, notification, paused, globalPause }) => html`
+  wtmLink: ({ stats }) => {
+    if (!store.ready(stats)) return '';
+
+    const { domain } = parse(stats.hostname);
+    return hasWTMStats(domain) ? `${WTM_PAGE_URL}/websites/${domain}` : '';
+  },
+  render: ({
+    options,
+    stats,
+    notification,
+    alert,
+    paused,
+    globalPause,
+    wtmLink,
+  }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&
       html`
@@ -157,8 +162,28 @@ export default {
         `}
         <section
           id="panel-alerts"
-          layout="fixed inset:1 bottom:auto layer:200"
-        ></section>
+          layout="fixed inset:1 top:0.5 bottom:auto layer:200"
+        >
+          ${alert &&
+          html`
+            <panel-alert
+              type="info"
+              slide
+              autoclose="10"
+              onclose="${html.set('alert', '')}"
+            >
+              ${alert}
+              <ui-text type="body-s" layout="block" underline>
+                <a
+                  href="#"
+                  onclick="${reloadTab}"
+                  layout="row inline gap:0.5 items:center"
+                  >Reload to see changes</a
+                >.
+              </ui-text>
+            </panel-alert>
+          `}
+        </section>
         ${options.terms
           ? stats.hostname &&
             !options.managed &&
@@ -215,7 +240,7 @@ export default {
           ${stats.hostname
             ? html`
                 <ui-stats
-                  domain="${stats.hostname}"
+                  domain="${stats.displayHostname}"
                   categories="${stats.topCategories}"
                   trackers="${stats.trackers}"
                   readonly="${paused ||
@@ -225,7 +250,7 @@ export default {
                   dialog="${TrackerDetails}"
                   exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
-                  wtm-link="${hasWTMStats(stats.hostname)}"
+                  wtm-link="${wtmLink}"
                   layout="margin:1:1.5"
                   layout@390px="margin:1.5:1.5:2"
                   ontypechange="${setStatsType}"

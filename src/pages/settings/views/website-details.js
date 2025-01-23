@@ -201,7 +201,7 @@ export default {
         html`
           <div layout="margin:3:0">
             <ui-action>
-              <a href="${`${WTM_PAGE_URL}websites/${domain}`}" target="_blank">
+              <a href="${`${WTM_PAGE_URL}/websites/${domain}`}" target="_blank">
                 <settings-wtm-link>
                   WhoTracks.Me Statistical Report
                 </settings-wtm-link>
