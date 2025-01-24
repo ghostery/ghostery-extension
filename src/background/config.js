@@ -130,7 +130,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
         config.hasAction(hostname, ACTION_PAUSE_ASSISTANT) &&
         !options.paused[hostname]
       ) {
-        openNotification(details.tabId, 'pause', { hostname });
+        openNotification(details.tabId, 'pause-assistant', { hostname });
       }
     }
   }
