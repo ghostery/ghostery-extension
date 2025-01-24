@@ -12,7 +12,10 @@
 import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
-import Config, { ACTION_PAUSE_ASSISTANT } from '/store/config.js';
+import Config, {
+  ACTION_PAUSE_ASSISTANT,
+  FLAG_PAUSE_ASSISTANT,
+} from '/store/config.js';
 import Options from '/store/options.js';
 import { CDN_URL } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -115,13 +118,13 @@ OptionsObserver.addListener(function config({ terms }) {
 
 // Detect "pause" action and trigger pause assistant or feedback
 chrome.webNavigation.onCompleted.addListener(async (details) => {
+  const config = await store.resolve(Config);
+  if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
+
   if (details.frameId === 0) {
     const hostname = parse(details.url).hostname;
     if (hostname) {
-      const [config, options] = await Promise.all([
-        store.resolve(Config),
-        store.resolve(Options),
-      ]);
+      const options = await store.resolve(Options);
 
       if (
         config.hasAction(hostname, ACTION_PAUSE_ASSISTANT) &&
