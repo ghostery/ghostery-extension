@@ -177,7 +177,7 @@ An exception is added to the tracker. URLs are not blocked or modified, only obs
 
 ## Additional features
 
-### Trackers Preview on SERP 🤖
+### Trackers Preview on SERP
 
 > Tracker preview on SERPs shows the information gathered for a specific website on the WTM
 
