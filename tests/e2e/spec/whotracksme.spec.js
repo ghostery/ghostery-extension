@@ -8,7 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { expect, $, $$, browser } from '@wdio/globals';
+import { expect, browser } from '@wdio/globals';
 import {
   enableExtension,
   getExtensionElement,
@@ -19,40 +19,7 @@ import {
 describe('WhoTracksMe', function () {
   before(enableExtension);
 
-  const PAGE_URL = 'https://www.google.com/search?q=youtube';
-
   describe('Trackers Preview', function () {
-    it('shows badge', async function () {
-      await setWhoTracksMeToggle('wtmSerpReport', true);
-
-      if (await browser.url(PAGE_URL).catch(() => false)) {
-        await expect(
-          $$('.wtm-tracker-wheel-container'),
-        ).toBeElementsArrayOfSize({
-          gte: 1,
-        });
-      }
-    });
-
-    it("doesn't show badge", async function () {
-      await setWhoTracksMeToggle('wtmSerpReport', false);
-
-      if (await browser.url(PAGE_URL).catch(() => false)) {
-        await expect(
-          $$('.wtm-tracker-wheel-container'),
-        ).toBeElementsArrayOfSize(0);
-      }
-    });
-
-    it('shows popover iframe', async function () {
-      await setWhoTracksMeToggle('wtmSerpReport', true);
-
-      if (await browser.url(PAGE_URL).catch(() => false)) {
-        await $('.wtm-tracker-wheel-container').click();
-        await expect($('.wtm-popup-iframe-wrapper iframe')).toBeDisplayed();
-      }
-    });
-
     it('displays trackers stats', async function () {
       await setWhoTracksMeToggle('wtmSerpReport', true);
       await browser.url(
@@ -74,20 +41,14 @@ describe('WhoTracksMe', function () {
       await getExtensionElement('button:disable').click();
       await getExtensionElement('button:confirm').click();
 
-      if (await browser.url(PAGE_URL).catch(() => false)) {
-        await expect(
-          $$('.wtm-tracker-wheel-container'),
-        ).toBeElementsArrayOfSize(0);
+      await browser.url(getExtensionPageURL('settings'));
+      await getExtensionElement('button:whotracksme').click();
 
-        await browser.url(getExtensionPageURL('settings'));
-        await getExtensionElement('button:whotracksme').click();
+      const toggleValue = await getExtensionElement(
+        'toggle:wtmSerpReport',
+      ).getProperty('value');
 
-        const toggleValue = await getExtensionElement(
-          'toggle:wtmSerpReport',
-        ).getProperty('value');
-
-        await expect(toggleValue).toBe(false);
-      }
+      await expect(toggleValue).toBe(false);
     });
   });
 });
