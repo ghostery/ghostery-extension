@@ -14,7 +14,7 @@ import '/ui/index.js';
 
 import { setupNotificationPage } from '/utils/notifications.js';
 
-const CLOSE_DELAY = 3 * 1000; // 3 seconds
+const CLOSE_DELAY = 5 * 1000; // 3 seconds
 const close = setupNotificationPage(340);
 
 mount(document.body, {
@@ -61,7 +61,7 @@ mount(document.body, {
           html`<ui-text type="label-m">Fantastic! Thanks!</ui-text>`}
           ${answer === 'no' &&
           html`<ui-text type="label-m">
-            Ok! We’ll continue working on it! Thanks!
+            We’ll continue working on it! Thanks!
           </ui-text>`}
         </ui-card>
       `}
