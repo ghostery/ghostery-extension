@@ -169,7 +169,7 @@ export default {
             <panel-alert
               type="info"
               slide
-              autoclose="10"
+              autoclose="6"
               onclose="${html.set('alert', '')}"
             >
               ${alert}
