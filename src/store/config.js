@@ -25,7 +25,7 @@ const Config = {
   updatedAt: 0,
   domains: store.record({
     actions: [String],
-    dismiss: [String],
+    dismiss: store.record(false),
   }),
   flags: store.record({
     percentage: 0,
@@ -90,6 +90,15 @@ const Config = {
   },
 };
 export default Config;
+
+export async function dismissAction(domain, action) {
+  const config = await store.resolve(Config);
+  const id = Object.keys(config.domains).find((d) => domain.endsWith(d));
+
+  await store.set(Config, {
+    domains: { [id]: { dismiss: { [action]: true } } },
+  });
+}
 
 chrome.storage.onChanged.addListener((changes) => {
   if (changes['config']) store.clear(Config, false);

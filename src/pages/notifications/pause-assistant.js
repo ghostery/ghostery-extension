@@ -12,12 +12,12 @@
 import { mount, html, store } from 'hybrids';
 import '/ui/index.js';
 
-import Config, { ACTION_PAUSE_ASSISTANT } from '/store/config.js';
+import { ACTION_PAUSE_ASSISTANT, dismissAction } from '/store/config.js';
 import Options from '/store/options.js';
 
 import { setupNotificationPage } from '/utils/notifications.js';
 
-const close = setupNotificationPage(340);
+const close = setupNotificationPage(350);
 const hostname = new URLSearchParams(window.location.search).get('hostname');
 
 const PAUSE_DELAY = 2000;
@@ -26,27 +26,17 @@ async function pause(host) {
   host.pausing = true;
 
   await store.set(Options, {
-    paused: {
-      [hostname]: { revokeAt: 0 },
-    },
+    paused: { [hostname]: { revokeAt: 0 } },
   });
 
   setTimeout(() => {
     close();
-
-    chrome.runtime.sendMessage({
-      action: 'config:pause:reload',
-    });
+    chrome.runtime.sendMessage({ action: 'config:pause:reload' });
   }, PAUSE_DELAY);
 }
 
 async function dismiss() {
-  await store.set(Config, {
-    domains: {
-      [hostname]: { dismiss: [ACTION_PAUSE_ASSISTANT] },
-    },
-  });
-
+  await dismissAction(hostname, ACTION_PAUSE_ASSISTANT);
   close();
 }
 
