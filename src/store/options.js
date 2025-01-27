@@ -73,6 +73,7 @@ const Options = {
 
   // Onboarding
   terms: false,
+  feedback: true,
   onboarding: {
     shown: 0,
     ...(__PLATFORM__ === 'chromium' && isOpera()

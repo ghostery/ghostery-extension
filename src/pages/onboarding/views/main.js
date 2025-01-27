@@ -24,23 +24,27 @@ import Success from './success.js';
 const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghostery-terms-and-conditions?utm_source=gbe&utm_campaign=onboarding`;
 
 function acceptTerms(host, event) {
-  router.resolve(event, store.set(Options, { terms: true }));
+  router.resolve(
+    event,
+    store.set(Options, { terms: true, feedback: host.feedback }),
+  );
 }
 
 export default {
   [router.connect]: {
     stack: () => [AddonHealth, WebTrackers, Performance, Privacy, Skip],
   },
-  render: () => html`
+  feedback: true,
+  render: ({ feedback }) => html`
     <template layout="grow column gap">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
           <ui-text type="body-m">Welcome to Ghostery</ui-text>
-          <ui-text type="display-m"> Enable Ghostery to get started </ui-text>
+          <ui-text type="display-m">Enable Ghostery to get started</ui-text>
         </section>
         <div layout="column gap:2">
           <ui-text type="display-2xs" layout="block:center">
-            Your Privacy Features:
+            Your Community-Powered Privacy Features:
           </ui-text>
           <div layout="grid:3 gap">
             <onboarding-feature icon="onboarding-adblocking">
@@ -55,26 +59,44 @@ export default {
           </div>
         </div>
         <div layout="column gap:2">
-          <ui-text
-            type="body-s"
-            underline
-            layout="block:justify"
-            data-qa="text:description"
-          >
-            ${msg.html`
+          ${__PLATFORM__ === 'firefox' &&
+          html`
+            <div layout="row gap items:start">
+              <ui-input>
+                <input
+                  type="checkbox"
+                  checked
+                  value="${feedback}"
+                  onchange="${html.set('feedback')}"
+                />
+              </ui-input>
+              <ui-text type="body-s" underline data-qa="text:description">
+                ${msg.html`
+                By sharing insights on <a href="${router.url(WebTrackers)}">web trackers</a>,
+                <a href="${router.url(AddonHealth)}">add-on's health</a>, and
+                <a href="${router.url(Performance)}">performance telemetry</a>
+                as outlined in our <a href="${'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'}" target="_blank" rel="noreferrer">Privacy Policy</a>,
+                you help advance privacy protections for the entire Ghostery community.
+            `}
+              </ui-text>
+            </div>
+          `}
+          ${__PLATFORM__ !== 'firefox' &&
+          html`
+            <ui-text type="body-s" underline data-qa="text:description">
+              ${msg.html`
               Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
               <a href="${router.url(AddonHealth)}">add-on's health</a>, and
               <a href="${router.url(Performance)}">performance telemetry</a>
-              will be shared in accordance with our <a href="${
-                __PLATFORM__ === 'firefox'
-                  ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
-                  : router.url(Privacy)
-              }" target="_blank" rel="noreferrer">Privacy Policy</a>, advancing privacy protection for the Ghostery community. | 'add-on' means 'browser extension'
+              will be shared in accordance with our <a href="${router.url(Privacy)}" target="_blank" rel="noreferrer">Privacy Policy</a>,
+              advancing privacy protection for the Ghostery community.
             `}
-          </ui-text>
-          <ui-text type="body-s" layout="block:justify">
-            Ghostery never collects personal information like passwords,
-            browsing history or the content of the pages you visit.
+            </ui-text>
+          `}
+          <ui-text type="body-s">
+            Ghostery uses this information to provide its community-powered
+            privacy features, ensuring that personal information—such as
+            passwords, browsing history, or page content—is never collected.
           </ui-text>
         </div>
         <div layout="column gap:2">

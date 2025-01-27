@@ -140,6 +140,31 @@ export default {
                 </div>
               </div>
             </ui-toggle>
+            ${__PLATFORM__ === 'firefox' &&
+            html`
+              <ui-toggle
+                value="${options.feedback}"
+                onchange="${html.set(options, 'feedback')}"
+              >
+                <div layout="row gap:2" layout@768px="gap:3">
+                  <settings-help-image static>
+                    <img src="${assets.feedback_small}" alt="Share Feedback" />
+                  </settings-help-image>
+                  <div layout="column grow gap:0.5">
+                    <ui-text type="headline-xs">Share Feedback</ui-text>
+                    <ui-text
+                      type="body-m"
+                      mobile-type="body-s"
+                      color="gray-600"
+                    >
+                      Contribute information about web trackers, add-on health,
+                      and performance telemetry to help advance privacy
+                      protections for the entire Ghostery community.
+                    </ui-text>
+                  </div>
+                </div>
+              </ui-toggle>
+            `}
           </section>
         `}
       </settings-page-layout>

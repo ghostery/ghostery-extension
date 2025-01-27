@@ -15,7 +15,7 @@ export default {
   icon: { value: '', reflect: true },
   error: { value: '', reflect: true },
   render: ({ icon, error }) => html`
-    <template layout="grid gap:0.5 relative">
+    <template layout="column gap:0.5 relative">
       ${icon &&
       html`
         <div layout="row center absolute inset left:12px right:auto">
@@ -47,6 +47,36 @@ export default {
     ::slotted(input) {
       font: var(--ui-font-body-l);
       height: 40px;
+    }
+
+    ::slotted(input[type="checkbox"]) {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--ui-color-gray-300);
+      background-color: var(--ui-color-gray-100);
+      background-repeat: no-repeat;
+      background-position: center;
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ::slotted(input[type="checkbox"]:checked) {
+      background-color: var(--ui-color-primary-500);
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3L4.5 8.5L2 6' stroke='white' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      border-color: var(--ui-color-primary-500);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      ::slotted(input[type="checkbox"]:checked) {
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3L4.5 8.5L2 6' stroke='%23202225' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      }
+    }
+
+    ::slotted(input[type="checkbox"]:active) {
+      opacity: 0.5;
     }
 
     ::slotted(textarea) {

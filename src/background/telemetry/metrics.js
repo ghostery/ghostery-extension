@@ -175,7 +175,9 @@ export default class Metrics {
         // prettier-ignore
         buildQueryPair('re',this._getRecencyEngaged(type, frequency).toString()) +
         // Engaged Velocity
-        buildQueryPair('ve', this._getVelocityEngaged(type).toString());
+        buildQueryPair('ve', this._getVelocityEngaged(type).toString()) +
+        // Feedback state
+        buildQueryPair('hw', conf.feedback ? '1' : '0');
     }
 
     if (CAMPAIGN_METRICS.includes(type)) {

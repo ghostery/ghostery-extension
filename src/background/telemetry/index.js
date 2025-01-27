@@ -93,8 +93,8 @@ const setup = asyncSetup('telemetry', [
 ]);
 
 let enabled = false;
-OptionsObserver.addListener('terms', async function telemetry(terms) {
-  enabled = terms;
+OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
+  enabled = terms && feedback;
 
   if (terms) {
     setup.pending && (await setup.pending);
@@ -103,7 +103,7 @@ OptionsObserver.addListener('terms', async function telemetry(terms) {
       runner.ping('install');
     }
 
-    runner.ping('active');
+    if (feedback) runner.ping('active');
   }
 });
 
