@@ -44,7 +44,7 @@ export default {
         </section>
         <div layout="column gap:2">
           <ui-text type="display-2xs" layout="block:center">
-            Your Community-Powered Privacy Features:
+            Your Community‑Powered Privacy Features:
           </ui-text>
           <div layout="grid:3 gap">
             <onboarding-feature icon="onboarding-adblocking">
