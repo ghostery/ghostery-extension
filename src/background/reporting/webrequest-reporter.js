@@ -10,11 +10,15 @@
  */
 
 import { RequestReporter } from '@whotracksme/reporting/reporting';
+import { store } from 'hybrids';
 
 import getBrowserInfo from '/utils/browser-info.js';
 import { isPaused } from '/store/options.js';
 import Request from '/utils/request.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import Config, {
+  ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+} from '/store/config.js';
 
 import { updateTabStats } from '../stats.js';
 
@@ -30,14 +34,27 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
     options = value;
   });
 
+  let remoteConfig;
+  store.resolve(Config).then((remote) => {
+    remoteConfig = remote;
+  });
+
   webRequestReporter = new RequestReporter(config.request, {
     onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
     countryProvider: urlReporter.countryProvider,
     trustedClock: communication.trustedClock,
     getBrowserInfo,
-    isRequestAllowed: (state) =>
-      !options.blockTrackers || isPaused(options, state.tabUrlParts.hostname),
-    dryRunMode: true,
+    isRequestAllowed: (state) => {
+      const hostname = state.tabUrlParts.hostname;
+      return (
+        !options.blockTrackers ||
+        isPaused(options, hostname) ||
+        remoteConfig?.hasAction(
+          hostname,
+          ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+        )
+      );
+    },
     onTrackerInteraction: (event, state) => {
       if (event === 'observed') {
         return;
