@@ -189,7 +189,7 @@ export default {
               <div layout="margin:3:0">
                 <ui-action>
                   <a
-                    href="${`${WTM_PAGE_URL}trackers/${tracker.id}`}"
+                    href="${`${WTM_PAGE_URL}/trackers/${tracker.id}`}"
                     target="_blank"
                   >
                     <settings-wtm-link>

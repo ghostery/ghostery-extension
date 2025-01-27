@@ -11,10 +11,7 @@
 
 import { html, store, router, dispatch } from 'hybrids';
 
-import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 import { openTabWithUrl } from '/utils/tabs.js';
-
-const WTM_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme/`;
 
 export default {
   categories: undefined,
@@ -44,7 +41,7 @@ export default {
     ),
   readonly: false,
   domain: '',
-  wtmLink: false,
+  wtmLink: '',
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -77,11 +74,7 @@ export default {
           <ui-tooltip position="bottom">
             <span slot="content">WhoTracks.Me Statistical Report</span>
             <ui-action-button layout="size:4.5">
-              <a
-                href="${WTM_URL}websites/${domain}"
-                onclick="${openTabWithUrl}"
-                target="_blank"
-              >
+              <a href="${wtmLink}" onclick="${openTabWithUrl}" target="_blank">
                 <ui-icon name="whotracksme" color="gray-800"></ui-icon>
               </a>
             </ui-action-button>

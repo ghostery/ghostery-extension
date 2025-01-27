@@ -15,6 +15,8 @@ import Options from '/store/options.js';
 import Session from '/store/session.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
+import ReportForm from './report-form.js';
+
 export default {
   options: store(Options),
   session: store(Session),
@@ -124,11 +126,7 @@ export default {
               Support
             </ui-text>
 
-            <panel-menu-item
-              href="https://www.ghostery.com/support?utm_source=gbe"
-              icon="report"
-              suffix-icon="link-external-m"
-            >
+            <panel-menu-item href="${router.url(ReportForm)}" icon="report">
               Report a broken page
             </panel-menu-item>
 
