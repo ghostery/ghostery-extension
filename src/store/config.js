@@ -34,8 +34,12 @@ const Config = {
   // Helper methods
 
   hasAction({ domains, enabled }) {
-    return (domain, action) =>
-      enabled && !!(domain && domains[domain]?.actions.includes(action));
+    return (hostname, action) => {
+      if (!enabled) return;
+
+      const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
+      return !!domain && domains[domain].actions.includes(action);
+    };
   },
 
   hasFlag({ flags, enabled }) {
