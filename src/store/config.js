@@ -34,11 +34,26 @@ const Config = {
   // Helper methods
 
   hasAction({ domains, enabled }) {
-    return (hostname, action) => {
-      if (!enabled) return;
+    const hostnames = new Map();
 
-      const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
-      return !!domain && domains[domain].actions.includes(action);
+    return (hostname, action) => {
+      if (!enabled || !hostname) return;
+
+      let actions = hostnames.get(hostname);
+      if (!actions) {
+        actions = new Map();
+        hostnames.set(hostname, actions);
+      }
+
+      if (!actions.has(action)) {
+        const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
+        actions.set(
+          action,
+          !!domain && domains[domain].actions.includes(action),
+        );
+      }
+
+      return actions.get(action);
     };
   },
 
