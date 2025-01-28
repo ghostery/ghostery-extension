@@ -135,7 +135,7 @@
     "message": "Browser: Anbieter, Version, Sprache, Betriebssystemanbieter"
   },
   "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Durch das Teilen von Einblicken zu <a href=\"$${0}\">Web-Trackern</a>, <a href=\"$${1}\">Add-on-Gesundheit</a> und <a href=\"$${2}\">Leistungstelemetrie</a>, wie in unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
+    "message": "Durch das Teilen von Insights zu <a href=\"$${0}\">Web-Trackern</a>, <a href=\"$${1}\">Add-on-Zustand</a> und <a href=\"$${2}\">Leistungstelemetrie</a>, wie in unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
   "cancel": {
     "message": "Abbrechen"
@@ -174,7 +174,7 @@
     "message": "Zur Ghostery Tracker-Datenbank auf Github beitragen"
   },
   "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Trägt mit nicht-personenbezogenen Informationen über Tracker, Add-On-Gesundheit und Leistungstelemetrie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
+    "message": "Trägt mit nicht-personenbezogenen Informationen über Tracker, Add-On-Zustand und Leistungstelemetrie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
   "contributor": {
     "message": "Unterstützer"
@@ -296,7 +296,7 @@
     "message": "Erstelle eigene Werbeblocker-Regeln, um deine Ghostery-Erfahrung anzupassen."
   },
   "feedback_sharing": {
-    "message": "Feedback-Weitergabe"
+    "message": "Feedback Teilen"
   },
   "get_help": {
     "message": "Hilfe erhalten"
@@ -341,7 +341,7 @@
     "message": "Der Ghostery Tracker- und Werbeblocker zeigt lediglich Tracker auf Webseiten an. Dies allein garantiert keinen umfassenden Datenschutz. "
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
-    "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen und sicherzustellen, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
+    "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen. Es stellt sicher, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery zeigt Ihnen, wie viele Tracker auf einer Seite blockiert wurden. Wenn Sie auf das Ghostery-Symbol klicken, erhalten Sie detailliertere Informationen."
@@ -706,7 +706,7 @@
     "description": "Tracker category name"
   },
   "uninstall": {
-    "message": "Deinstallieren"
+    "message": "Add-On Deinstallieren"
   },
   "updating___": {
     "message": "Wird aktualisiert..."
@@ -755,7 +755,7 @@
     "message": "Wie geht es weiter?"
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me, betrieben von Ghostery, ist ein wesentlicher Eckpfeiler der KI-Anti-Tracking-Technologie von Ghostery und spielt eine entscheidende Rolle bei der Bereitstellung von Echtzeit-Datenschutz für die Ghostery-Community. Es ist eine umfassende globale Ressource zu Trackern, die Transparenz im Web-Tracking schafft."
+    "message": "WhoTracks.Me, betrieben von Ghostery, ist eine wesentliche Komponente der KI-gestützten Anti-Tracking-Technologie von Ghostery und spielt eine entscheidende Rolle bei der Bereitstellung von Echtzeit-Datenschutz für die gesamte Ghostery-Community. Es ist eine umfassende globale Ressource zu Trackern und schafft Transparenz im Bereich des Web-Trackings."
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me-Statistiken"
