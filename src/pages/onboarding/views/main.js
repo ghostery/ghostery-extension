@@ -96,7 +96,7 @@ export default {
           <ui-text type="body-s">
             Ghostery uses this information to provide its community-powered
             privacy features, ensuring that personal information—such as
-            passwords, browsing history, or page content—is never collected.
+            passwords, browsing history, and page content—is never collected.
           </ui-text>
         </div>
         <div layout="column gap:2">

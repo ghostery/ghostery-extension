@@ -42,15 +42,18 @@ export default {
         <div layout="column gap" layout@992px="margin:bottom">
           <ui-text type="headline-m" translate="no">WhoTracks.Me</ui-text>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-            WhoTracks.Me, operated by Ghostery, is an integral part of
-            Ghostery’s AI anti-tracking technology. It is a comprehensive global
-            resource on trackers, bringing transparency to web tracking.
+            WhoTracks.Me, operated by Ghostery, is a vital cornerstone of
+            Ghostery’s AI anti-tracking technology, playing a crucial role in
+            providing real-time privacy protection for the Ghostery community.
+            It is a comprehensive global resource on trackers, bringing
+            transparency to web tracking.
           </ui-text>
           <ui-text type="body-l" mobile-type="body-m" color="gray-600">
-            It exists thanks to micro-contributions of every Ghostery user who
-            chooses to send non-personal information to WhoTracks.Me. The input
-            enables Ghostery to provide real-time intel on trackers which in
-            turn provides protection to the entire Ghostery community.
+            It exists thanks to the micro-contributions of every Ghostery user
+            who chooses to send non-personal information to WhoTracks.Me. This
+            input enables Ghostery to provide real-time intel on trackers,
+            which, in turn, delivers privacy protection to the entire Ghostery
+            community.
           </ui-text>
         </div>
         ${store.ready(options) &&
@@ -148,18 +151,21 @@ export default {
               >
                 <div layout="row gap:2" layout@768px="gap:3">
                   <settings-help-image static>
-                    <img src="${assets.feedback_small}" alt="Share Feedback" />
+                    <img
+                      src="${assets.feedback_small}"
+                      alt="Feedback Sharing"
+                    />
                   </settings-help-image>
                   <div layout="column grow gap:0.5">
-                    <ui-text type="headline-xs">Share Feedback</ui-text>
+                    <ui-text type="headline-xs">Feedback Sharing</ui-text>
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
                       color="gray-600"
                     >
-                      Contribute information about web trackers, add-on health,
-                      and performance telemetry to help advance privacy
-                      protections for the entire Ghostery community.
+                      Contributes non-personal information about web trackers,
+                      add-on health, and performance telemetry to help advance
+                      privacy protections for the entire Ghostery community.
                     </ui-text>
                   </div>
                 </div>
