@@ -87,14 +87,12 @@ const setup = asyncSetup('telemetry', [
       getConf: () => store.resolve(Options),
       log: console.log.bind(console, '[telemetry]'),
     });
-
-    runner.setUninstallUrl();
   })(),
 ]);
 
 let enabled = false;
-OptionsObserver.addListener('terms', async function telemetry(terms) {
-  enabled = terms;
+OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
+  enabled = terms && feedback;
 
   if (terms) {
     setup.pending && (await setup.pending);
@@ -103,7 +101,11 @@ OptionsObserver.addListener('terms', async function telemetry(terms) {
       runner.ping('install');
     }
 
-    runner.ping('active');
+    if (feedback) runner.ping('active');
+
+    runner.setUninstallUrl();
+  } else {
+    chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }
 });
 

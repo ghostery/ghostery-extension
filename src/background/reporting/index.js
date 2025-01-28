@@ -37,8 +37,8 @@ import webRequestReporter from './webrequest-reporter.js';
 })();
 
 const setup = asyncSetup('reporting', [
-  OptionsObserver.addListener('terms', async function reporting(terms) {
-    if (terms) {
+  OptionsObserver.addListener(async function reporting({ terms, feedback }) {
+    if (terms && feedback) {
       if (webRequestReporter) {
         webRequestReporter.init().catch((e) => {
           console.warn(

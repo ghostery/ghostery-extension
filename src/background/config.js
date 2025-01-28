@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import Config from '/store/config.js';
 import { CDN_URL } from '/utils/api.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
 
@@ -104,4 +105,6 @@ export default async function syncConfig() {
   }
 }
 
-syncConfig();
+OptionsObserver.addListener(function config({ terms, feedback }) {
+  if (terms && feedback) syncConfig();
+});

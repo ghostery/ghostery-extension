@@ -52,10 +52,6 @@ export default {
       text-transform: uppercase;
     }
 
-    :host([underline]) ::slotted(a) {
-      font-weight: 600;
-    }
-
     :host([type^="body"][underline]) ::slotted(a) {
       text-decoration: underline;
     }
