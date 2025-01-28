@@ -25,11 +25,11 @@ async function initialize(msg, tab, frameId) {
   ]);
 
   if (options.terms && options.blockAnnoyances) {
-    const domain = tab.url ? parse(tab.url).hostname : '';
+    const hostname = tab.url ? parse(tab.url).hostname : '';
 
     if (
-      isPaused(options, domain) ||
-      config.hasAction(domain, ACTION_DISABLE_AUTOCONSENT)
+      isPaused(options, hostname) ||
+      config.hasAction(hostname, ACTION_DISABLE_AUTOCONSENT)
     ) {
       return;
     }
