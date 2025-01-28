@@ -12,6 +12,8 @@
 import { store } from 'hybrids';
 
 export const ACTION_DISABLE_AUTOCONSENT = 'disable-autoconsent';
+export const ACTION_DISABLE_ANTITRACKING_MODIFICATION =
+  'disable-antitracking-modification';
 export const ACTION_ASSIST = 'assist';
 
 export const FLAG_ASSIST = 'assist';
