@@ -87,8 +87,6 @@ const setup = asyncSetup('telemetry', [
       getConf: () => store.resolve(Options),
       log: console.log.bind(console, '[telemetry]'),
     });
-
-    runner.setUninstallUrl();
   })(),
 ]);
 
@@ -104,6 +102,10 @@ OptionsObserver.addListener(async function telemetry({ terms, feedback }) {
     }
 
     if (feedback) runner.ping('active');
+
+    runner.setUninstallUrl();
+  } else {
+    chrome.runtime.setUninstallURL('https://mygho.st/fresh-uninstalls');
   }
 });
 
