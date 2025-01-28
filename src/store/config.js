@@ -47,10 +47,10 @@ const Config = {
 
       if (!actions.has(action)) {
         const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
-        actions.set(
-          action,
-          !!domain && domains[domain].actions.includes(action),
-        );
+        const value = !!domain && domains[domain].actions.includes(action);
+
+        actions.set(action, value);
+        return value;
       }
 
       return actions.get(action);
