@@ -134,6 +134,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "浏览器：供应商、版本、语言、操作系统供应商"
   },
+  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "通过分享关于<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件健康</a>和<a href=\"$${2}\">性能遥测</a>的见解，如我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>中所述，您帮助推进整个Ghostery社区的隐私保护。"
+  },
   "cancel": {
     "message": "取消"
   },
@@ -169,6 +172,9 @@
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "在 Github 上为 Ghostery Tracker Database 贡献"
+  },
+  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "为整个Ghostery社区提供有关网络追踪器、附加组件健康状况和性能遥测的非个人信息，以帮助推进隐私保护。"
   },
   "contributor": {
     "message": "贡献者"
@@ -248,6 +254,9 @@
   "enabled": {
     "message": "已启用"
   },
+  "enter_email_address": {
+    "message": "输入电子邮件地址"
+  },
   "enter_website_url": {
     "message": "输入网站 URL"
   },
@@ -285,6 +294,9 @@
   },
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "帮助您创建自己的广告拦截规则，以定制您的Ghostery体验。."
+  },
+  "feedback_sharing": {
+    "message": "反馈共享"
   },
   "get_help": {
     "message": "获取帮助"
@@ -328,6 +340,9 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
+  "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
+    "message": "Ghostery利用这些信息提供其社区驱动的隐私功能，确保不会收集个人信息，例如密码、浏览历史和页面内容。"
+  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 会显示页面上已阻止的跟踪器数量。点击 Ghostery 图标，获取更多详情。"
   },
@@ -360,10 +375,9 @@
     "message": "请告知我们页面出现的问题，我们会很乐意进行调查和修复。"
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "有关<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件的健康状况</a>和<a href=\"$${2}\">性能遥测</a>的信息将根据我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>进行共享，以提升Ghostery社区的隐私保护。.",
-    "description": "'add-on' means 'browser extension'"
+    "message": "有关<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件的健康状况</a>和<a href=\"$${2}\">性能遥测</a>的信息将根据我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>进行共享，以提升Ghostery社区的隐私保护。."
   },
-  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
+  "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "它的存在要归功于每个选择将非个人信息给 WhoTracks.Me 的 Ghostery 用户的微小贡献。 这些输入使 Ghostery 能够提供有关跟踪器的实时情报，从而为整个 Ghostery 社区提供保护。"
   },
   "join_ghostery": {
@@ -497,6 +511,9 @@
   "pin_it_here": {
     "message": "在此处锁定"
   },
+  "please_describe_the_issue": {
+    "message": "请描述问题"
+  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "防止 Google 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
   },
@@ -520,6 +537,9 @@
   },
   "regional_filters": {
     "message": "区域过滤器"
+  },
+  "reload_to_see_changes": {
+    "message": "重新加载以查看更改。"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "将浏览器工具栏的 Ghostery 图标替换为跟踪器轮盘。"
@@ -685,6 +705,9 @@
     "message": "未识别",
     "description": "Tracker category name"
   },
+  "uninstall": {
+    "message": "卸载"
+  },
   "updating___": {
     "message": "更新中..."
   },
@@ -731,8 +754,8 @@
   "what_s_next_": {
     "message": "下一步是？"
   },
-  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me 由 Ghostery 运营，是 Ghostery 人工智能反跟踪技术不可或缺的一部分。 WhoTracks.me 是全球最全面的跟踪器资源，为网络跟踪带来透明度。"
+  "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.Me由Ghostery运营，是Ghostery人工智能反追踪技术的重要基石，在为Ghostery社区提供实时隐私保护方面发挥着关键作用。它是一个关于追踪器的全面全球资源，为网络追踪带来透明度。"
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me 统计报告"
@@ -752,11 +775,11 @@
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "搜索结果旁将不再显示跟踪器轮。"
   },
+  "your_community_powered_privacy_features_": {
+    "message": "您的社区驱动隐私功能："
+  },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "您的贡献有助于为整个Ghostery社区构建一个更私密和安全的互联网。"
-  },
-  "your_privacy_features_": {
-    "message": "您的隐私功能："
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 禁止您观看无广告视频？"

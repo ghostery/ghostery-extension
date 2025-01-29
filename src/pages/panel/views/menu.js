@@ -13,6 +13,8 @@ import { html, router, store } from 'hybrids';
 
 import Options from '/store/options.js';
 import Session from '/store/session.js';
+import TabStats from '/store/tab-stats.js';
+
 import { openTabWithUrl } from '/utils/tabs.js';
 
 import ReportForm from './report-form.js';
@@ -20,7 +22,8 @@ import ReportForm from './report-form.js';
 export default {
   options: store(Options),
   session: store(Session),
-  render: ({ options, session }) => html`
+  stats: store(TabStats),
+  render: ({ options, session, stats }) => html`
     <template layout="grid grow">
       <ui-header>
         Menu
@@ -31,7 +34,7 @@ export default {
         </ui-action>
       </ui-header>
       <panel-container>
-        ${store.ready(options) &&
+        ${store.ready(options, stats) &&
         html`
           <div layout="column gap:0.5 padding:1:0">
             ${!options.managed &&
@@ -126,9 +129,16 @@ export default {
               Support
             </ui-text>
 
-            <panel-menu-item href="${router.url(ReportForm)}" icon="report">
-              Report a broken page
-            </panel-menu-item>
+            ${stats.hostname &&
+            html`
+              <panel-menu-item
+                href="${router.url(ReportForm)}"
+                icon="report"
+                internal
+              >
+                Report a broken page
+              </panel-menu-item>
+            `}
 
             <panel-menu-item
               href="https://www.ghostery.com/submit-a-tracker?utm_source=gbe"

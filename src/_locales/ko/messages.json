@@ -134,6 +134,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "브라우저: 종류, 버전, 언어, 운영 체제"
   },
+  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "<a href=\"$${0}\">웹 추적기</a>, <a href=\"$${1}\">애드온의 상태</a>, <a href=\"$${2}\">성능 원격 측정</a>에 대한 통찰을 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유함으로써, 귀하는 전체 Ghostery 커뮤니티의 개인정보 보호를 향상시키는 데 기여합니다."
+  },
   "cancel": {
     "message": "취소"
   },
@@ -169,6 +172,9 @@
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GitHub에서 Ghostery 트래커 데이터베이스에 기여하기"
+  },
+  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "웹 추적기, 애드온 상태 및 성능 원격 측정에 대한 비개인 정보를 제공하여 전체 Ghostery 커뮤니티의 프라이버시 보호를 향상시키는 데 기여합니다."
   },
   "contributor": {
     "message": "기여자"
@@ -248,6 +254,9 @@
   "enabled": {
     "message": "사용 중"
   },
+  "enter_email_address": {
+    "message": "이메일 주소 입력"
+  },
   "enter_website_url": {
     "message": "웹 사이트 URL 입력"
   },
@@ -285,6 +294,9 @@
   },
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "더 나은 Ghostery 경험을 위해 사용자 별 광고 차단 규칙을 생성할 수 있도록 지원합니다."
+  },
+  "feedback_sharing": {
+    "message": "피드백 공유"
   },
   "get_help": {
     "message": "도움받기"
@@ -328,6 +340,9 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "현재 보호없이 웹 브라우저 사용 중입니다. Ghostery 트래커 및 광고 차단기로 방문하는 웹 사이트의 추적기를 파악할 수 있습니다."
   },
+  "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
+    "message": "Ghostery는 이 정보를 사용하여 커뮤니티 기반의 개인정보 보호 기능을 제공하며, 비밀번호, 검색 기록, 페이지 내용과 같은 개인 정보가 수집되지 않도록 보장합니다."
+  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery가 이 페이지에서 얼마나 많은 트래커가 차단되었는지 보여줍니다. Ghostery 아이콘을 클릭하면 더 자세한 정보를 볼 수 있습니다."
   },
@@ -360,11 +375,10 @@
     "message": "페이지 오류 경험을 알려주시면, 저희가 조사하고 수정하겠습니다."
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "<a href=\"$${0}\">웹 상 트래커</a>, <a href=\"$${1}\">애드온의 상태</a> 및 <a href=\"$${2}\">성능 측정</a>에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 향상하기 위해 당사의 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유됩니다.",
-    "description": "'add-on' means 'browser extension'"
+    "message": "<a href=\"$${0}\">웹 상 트래커</a>, <a href=\"$${1}\">애드온의 상태</a> 및 <a href=\"$${2}\">성능 측정</a>에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 향상하기 위해 당사의 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유됩니다."
   },
-  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
-    "message": "이는 모두 WhoTracks.Me에 익명으로 정보를 공유해주시는 기여자분들 덕분입니다. 모든 정보는 Ghostery가 커뮤니티에 실시간 트래커 정보 기반의 보호 기능을 제공하는데에 사용됩니다."
+  "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
+    "message": "트래커 정보를 WhoTracks.Me로 전송을 허락해 준 모든 Ghostery 사용자의 이러한 작은 기여들이 모여 Ghostery는 운영됩니다. 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 이렇게 전체 Ghostery 사용자 커뮤니티가 보호받을 수 있습니다."
   },
   "join_ghostery": {
     "message": "Ghostery 가입하기"
@@ -497,6 +511,9 @@
   "pin_it_here": {
     "message": "여기에 고정하세요"
   },
+  "please_describe_the_issue": {
+    "message": "문제를 설명해 주세요"
+  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Google 검색 결과 링크의 Google 서버 경유를 막고 웹 페이지에 직접 연결합니다."
   },
@@ -520,6 +537,9 @@
   },
   "regional_filters": {
     "message": "지역 필터"
+  },
+  "reload_to_see_changes": {
+    "message": "변경 내용을 보려면 다시 로드하십시오."
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "트래커 휠로 브라우저 툴바의 Ghostery 아이콘을 대체합니다."
@@ -685,6 +705,9 @@
     "message": "확인되지 않음",
     "description": "Tracker category name"
   },
+  "uninstall": {
+    "message": "제거"
+  },
   "updating___": {
     "message": "업데이트 중..."
   },
@@ -731,8 +754,8 @@
   "what_s_next_": {
     "message": "또 무엇을 할 수 있을까요?"
   },
-  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "Ghostery가 운영하는 WhoTracks.Me는 Ghostery AI 추적 방지 기술에 필수적입니다. 넓은 범위의 트래커 정보를 기반으로 웹 사이트 추적 기술에 투명성을 제공합니다."
+  "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.Me는 Ghostery가 운영하는 서비스로, Ghostery의 AI 기반 추적 방지 기술의 중요한 초석이며, Ghostery 커뮤니티에 실시간 개인정보 보호를 제공하는 데 중요한 역할을 합니다. 이 서비스는 전 세계의 추적기에 대한 포괄적인 자료로, 웹 추적의 투명성을 제공합니다."
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me 통계 보고서"
@@ -752,11 +775,11 @@
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "이제 검색 결과 옆에 트래커 휠을 더 이상 표시하지 않습니다."
   },
+  "your_community_powered_privacy_features_": {
+    "message": "귀하의 커뮤니티 기반 개인정보 보호 기능:"
+  },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "당신의 기여는 전체 Ghostery 커뮤니티를 위한 더 사적이고 안전한 인터넷을 구축하는 데 도움이 됩니다."
-  },
-  "your_privacy_features_": {
-    "message": "현재 개인정보 보호 기능"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하나요?"

@@ -134,6 +134,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "Browser: Anbieter, Version, Sprache, Betriebssystemanbieter"
   },
+  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Durch das Teilen von Insights zu <a href=\"$${0}\">Web-Trackern</a>, <a href=\"$${1}\">Add-on-Zustand</a> und <a href=\"$${2}\">Leistungstelemetrie</a>, wie in unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
+  },
   "cancel": {
     "message": "Abbrechen"
   },
@@ -169,6 +172,9 @@
   },
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Zur Ghostery Tracker-Datenbank auf Github beitragen"
+  },
+  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Trägt mit nicht-personenbezogenen Informationen über Tracker, Add-On-Zustand und Leistungstelemetrie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
   "contributor": {
     "message": "Unterstützer"
@@ -248,6 +254,9 @@
   "enabled": {
     "message": "Aktiviert"
   },
+  "enter_email_address": {
+    "message": "E-Mail-Adresse eingeben"
+  },
   "enter_website_url": {
     "message": "URL der Website eingeben"
   },
@@ -285,6 +294,9 @@
   },
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Erstelle eigene Werbeblocker-Regeln, um deine Ghostery-Erfahrung anzupassen."
+  },
+  "feedback_sharing": {
+    "message": "Feedback Teilen"
   },
   "get_help": {
     "message": "Hilfe erhalten"
@@ -328,6 +340,9 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Der Ghostery Tracker- und Werbeblocker zeigt lediglich Tracker auf Webseiten an. Dies allein garantiert keinen umfassenden Datenschutz. "
   },
+  "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
+    "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen. Es stellt sicher, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
+  },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery zeigt Ihnen, wie viele Tracker auf einer Seite blockiert wurden. Wenn Sie auf das Ghostery-Symbol klicken, erhalten Sie detailliertere Informationen."
   },
@@ -360,10 +375,9 @@
     "message": "Melde uns eine kaputte Seite. Wir schauen es uns gerne an und beheben das Problem."
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
-    "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Zustand des Add-ons</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um die Privatsphäre der ganzen Ghostery-Community zu verbessern.",
-    "description": "'add-on' means 'browser extension'"
+    "message": "Informationen über <a href=\"$${0}\">Web-Tracker</a>, <a href=\"$${1}\">Zustand des Add-ons</a> und <a href=\"$${2}\">Leistungstelemetrie</a> werden gemäß unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzerklärung</a> geteilt, um die Privatsphäre der ganzen Ghostery-Community zu verbessern."
   },
-  "it_exists_thanks_to_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__the_input_enables_ghostery_to_provide_real_time_intel_on_trackers_which_in_turn_provides_protection_to_the_entire_ghostery_community_": {
+  "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Es existiert dank der Beiträge jedes Ghostery-Nutzers, der sich dafür entscheidet, nicht-personenbezogene Informationen an WhoTracks.Me zu senden. Diese Informationen ermöglichen es Ghostery, Echtzeitinformationen über Tracker zu liefern, die wiederum die gesamte Ghostery-Gemeinschaft schützen."
   },
   "join_ghostery": {
@@ -497,6 +511,9 @@
   "pin_it_here": {
     "message": "Hier anheften"
   },
+  "please_describe_the_issue": {
+    "message": "Bitte beschreiben Sie das Problem"
+  },
   "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Verhindern, dass Google die Links der Suchergebnisse über seine Server umleitet, anstatt sie direkt mit den Seiten zu verknüpfen."
   },
@@ -520,6 +537,9 @@
   },
   "regional_filters": {
     "message": "Regionale Filter"
+  },
+  "reload_to_see_changes": {
+    "message": "Neu laden, um Änderungen zu sehen"
   },
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Ersetzt das Ghostery-Symbol in der Werkzeugleiste des Browsers mit dem Tracker-Rad."
@@ -685,6 +705,9 @@
     "message": "Nicht identifiziert",
     "description": "Tracker category name"
   },
+  "uninstall": {
+    "message": "Add-On Deinstallieren"
+  },
   "updating___": {
     "message": "Wird aktualisiert..."
   },
@@ -731,8 +754,8 @@
   "what_s_next_": {
     "message": "Wie geht es weiter?"
   },
-  "whotracks_me__operated_by_ghostery__is_an_integral_part_of_ghostery_s_ai_anti_tracking_technology__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
-    "message": "WhoTracks.Me wird von Ghostery betrieben und ist ein Bestandteil der Ghostery KI-Anti-Tracking-Technologie. Es ist eine umfassende globale Quelle für Tracker und bringt Transparenz in das Web-Tracking."
+  "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
+    "message": "WhoTracks.Me, betrieben von Ghostery, ist eine wesentliche Komponente der KI-gestützten Anti-Tracking-Technologie von Ghostery und spielt eine entscheidende Rolle bei der Bereitstellung von Echtzeit-Datenschutz für die gesamte Ghostery-Community. Es ist eine umfassende globale Ressource zu Trackern und schafft Transparenz im Bereich des Web-Trackings."
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me-Statistiken"
@@ -752,11 +775,11 @@
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
   },
+  "your_community_powered_privacy_features_": {
+    "message": "Ihre Community-gestützten Datenschutzfunktionen:"
+  },
   "your_contribution_helps_build_a_more_private_and_safe_internet_for_the_entire_ghostery_community_": {
     "message": "Dein Beitrag hilft, ein privateres und sichereres Internet für die gesamte Ghostery-Community aufzubauen."
-  },
-  "your_privacy_features_": {
-    "message": "Ihre Datenschutzfunktionen:"
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube hindert dich daran, werbefreie Videos anzusehen?"

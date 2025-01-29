@@ -17,7 +17,7 @@ export default {
   href: '',
   icon: '',
   suffixIcon: 'arrow-right',
-  internal: ({ href }) => href.startsWith(location.origin + location.pathname),
+  internal: false,
   render: ({ href, icon, suffixIcon, internal }) => html`
     <template layout="block">
       <ui-action>
