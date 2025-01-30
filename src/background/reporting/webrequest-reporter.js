@@ -48,7 +48,7 @@ if (__PLATFORM__ !== 'safari') {
       const hostname = state.tabUrlParts.hostname;
       return (
         !options.blockTrackers ||
-        isPaused(options, hostname) ||
+        !!isPaused(options, hostname) ||
         remoteConfig?.hasAction(
           hostname,
           ACTION_DISABLE_ANTITRACKING_MODIFICATION,

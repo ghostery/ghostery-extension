@@ -54,7 +54,7 @@ export default {
     tracker.category !== 'unidentified' &&
     `https://www.ghostery.com/whotracksme/trackers/${tracker.id}`,
   paused: ({ options, stats }) =>
-    store.ready(options, stats) && isPaused(options, stats.hostname),
+    store.ready(options, stats) && !!isPaused(options, stats.hostname),
   render: ({ tracker, status, wtmUrl, paused, options }) => html`
     <template layout="column">
       <panel-dialog>

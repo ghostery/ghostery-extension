@@ -250,7 +250,9 @@ export function isPaused(options, hostname = '') {
   if (options.paused[GLOBAL_PAUSE_ID]) return true;
   if (!hostname) return false;
 
-  return (
-    Object.keys(options.paused).find((id) => hostname.endsWith(id)) || false
+  const id = Object.keys(options.paused).find((domain) =>
+    hostname.endsWith(domain),
   );
+
+  return id ? options.paused[id] : false;
 }

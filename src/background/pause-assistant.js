@@ -26,20 +26,21 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
 
   if (details.frameId === 0) {
-    const options = await store.resolve(Options);
     const hostname = parse(details.url).hostname;
+    if (!hostname) return;
 
-    const pausedDomain = isPaused(options, hostname);
+    const options = await store.resolve(Options);
+    const paused = isPaused(options, hostname);
     const hasAction = config.hasAction(hostname, ACTION_PAUSE_ASSISTANT);
 
-    if (pausedDomain) {
-      if (!hasAction && options.paused[pausedDomain].assist) {
-        // the site is paused with the assistant, but the domain is not in the config
-        openNotification(details.tabId, 'pause-resume', { hostname });
+    if (!paused) {
+      if (hasAction) {
+        // The site is not paused, but the domain with an action is in the config
+        openNotification(details.tabId, 'pause-assistant', { hostname });
       }
-    } else if (hasAction) {
-      // The site is not paused, but the domain with an action is in the config
-      openNotification(details.tabId, 'pause-assistant', { hostname });
+    } else if (!hasAction && paused !== true && paused.assist) {
+      // the site is paused with the assistant, but the domain is not in the config
+      openNotification(details.tabId, 'pause-resume', { hostname });
     }
   }
 });

@@ -79,7 +79,7 @@ async function refreshIcon(tabId) {
   const stats = tabStats.get(tabId);
   if (!stats) return;
 
-  const inactive = !options.terms || isPaused(options, stats.hostname);
+  const inactive = !options.terms || !!isPaused(options, stats.hostname);
 
   const data = {};
   if (options.trackerWheel && stats.trackers.length > 0) {
