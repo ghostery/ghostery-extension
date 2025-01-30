@@ -15,7 +15,8 @@ import Options from '/store/options.js';
 import Session from '/store/session.js';
 
 import { isSerpSupported } from '/utils/opera.js';
-import { isOpera, isEdge } from '/utils/browser-info.js';
+import { isOpera } from '/utils/browser-info.js';
+import { REVIEW_PAGE_URL } from '/utils/urls';
 
 const NOTIFICATIONS = {
   terms: {
@@ -39,28 +40,7 @@ const NOTIFICATIONS = {
     icon: 'call-for-review',
     type: 'review',
     text: msg`We're so glad Ghostery has your heart! Help others find us too - it only takes a moment.`,
-    url: (() => {
-      if (__PLATFORM__ === 'safari') {
-        return 'https://mygho.st/ReviewSafariPanel';
-      }
-
-      if (__PLATFORM__ === 'firefox') {
-        return 'https://mygho.st/ReviewFirefoxPanel';
-      }
-
-      // Chromium-based browsers
-
-      if (isOpera()) {
-        return 'https://mygho.st/ReviewOperaPanel';
-      }
-
-      if (isEdge()) {
-        return 'https://mygho.st/ReviewEdgePanel';
-      }
-
-      // Chrome
-      return 'https://mygho.st/ReviewChromePanel';
-    })(),
+    url: REVIEW_PAGE_URL,
     action: msg`Leave a review today`,
   },
 };

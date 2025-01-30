@@ -23,6 +23,7 @@ import './stats.js';
 import './notifications.js';
 import './serp.js';
 import './broken-page-report.js';
+import './pause-assistant.js';
 
 import './helpers.js';
 import './external.js';

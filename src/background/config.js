@@ -10,17 +10,12 @@
  */
 
 import { store } from 'hybrids';
-import { parse } from 'tldts-experimental';
 
-import Config, {
-  ACTION_PAUSE_ASSISTANT,
-  FLAG_PAUSE_ASSISTANT,
-} from '/store/config.js';
-import Options, { isPaused } from '/store/options.js';
+import Config from '/store/config.js';
+import Options from '/store/options.js';
+
 import { CDN_URL } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-
-import { openNotification } from './notifications.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';
 
@@ -102,11 +97,13 @@ export default async function syncConfig() {
     }
 
     // Update the config
-    store.set(Config, {
-      updatedAt: Date.now(),
-      domains,
-      flags,
-    });
+    await store.set(Config, { domains, flags, updatedAt: Date.now() });
+
+    // Managed options relays on the config, so we need to invalidate them
+    const options = await store.resolve(Options);
+    if (options.managed) store.clear(options);
+
+    console.log('[config] Remote config synced');
   } catch (e) {
     console.error('[config] Failed to sync remote config:', e);
   }
@@ -114,53 +111,4 @@ export default async function syncConfig() {
 
 OptionsObserver.addListener(function config({ terms }) {
   if (terms) syncConfig();
-});
-
-/*
- * Pause Assistant
- */
-
-// Detect "pause" action and trigger pause assistant or feedback
-chrome.webNavigation.onCompleted.addListener(async (details) => {
-  const config = await store.resolve(Config);
-  if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
-
-  if (details.frameId === 0) {
-    const options = await store.resolve(Options);
-    const hostname = parse(details.url).hostname;
-
-    if (isPaused(options, hostname)) return;
-
-    if (config.hasAction(hostname, ACTION_PAUSE_ASSISTANT)) {
-      openNotification(details.tabId, 'pause-assistant', { hostname });
-    }
-  }
-});
-
-const RELOAD_DELAY = 1 * 1000; // 1 second
-const FEEDBACK_DELAY = 5 * 1000; // 5 seconds
-
-// Listen to pause assistant messages
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  switch (msg.action) {
-    case 'config:pause:reload': {
-      setTimeout(() => chrome.tabs.reload(sender.tab.id), RELOAD_DELAY);
-
-      const cb = (details) => {
-        if (details.frameId === 0 && details.tabId === sender.tab.id) {
-          setTimeout(
-            () => openNotification(sender.tab.id, 'pause-feedback'),
-            FEEDBACK_DELAY,
-          );
-          chrome.webNavigation.onDOMContentLoaded.removeListener(cb);
-        }
-      };
-
-      chrome.webNavigation.onDOMContentLoaded.addListener(cb);
-      break;
-    }
-    case 'config:pause:feedback': {
-      // TODO: handle feedback
-    }
-  }
 });

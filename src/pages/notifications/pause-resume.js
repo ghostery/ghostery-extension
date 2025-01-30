@@ -12,7 +12,6 @@
 import { mount, html, store } from 'hybrids';
 import '/ui/index.js';
 
-import { ACTION_PAUSE_ASSISTANT, dismissAction } from '/store/config.js';
 import Options from '/store/options.js';
 
 import { setupNotificationPage } from '/utils/notifications.js';
@@ -21,67 +20,53 @@ const close = setupNotificationPage(360);
 const hostname = new URLSearchParams(window.location.search).get('hostname');
 
 const PAUSE_DELAY = 2000;
-const FEEDBACK_DELAY = 5000;
+const FEEDBACK_DELAY = 2000;
 
-async function pause(host) {
-  host.pausing = true;
+async function revoke(host) {
+  host.resuming = true;
 
-  await store.set(Options, {
-    paused: { [hostname]: { revokeAt: 0, assist: true } },
-  });
+  await store.set(Options, { paused: { [hostname]: null } });
 
   setTimeout(() => {
     close();
     chrome.runtime.sendMessage({
       action: 'config:pause:reload',
-      params: { type: 'pause' },
+      params: { type: 'resume' },
       delay: FEEDBACK_DELAY,
     });
   }, PAUSE_DELAY);
 }
 
 async function dismiss() {
-  await dismissAction(hostname, ACTION_PAUSE_ASSISTANT);
+  await store.set(Options, { paused: { [hostname]: { assist: false } } });
   close();
 }
 
 mount(document.body, {
-  pausing: false,
-  render: ({ pausing }) => html`
+  resuming: false,
+  render: ({ resuming }) => html`
     <template layout="block overflow relative">
       <ui-notification>
         <div layout="column gap">
           <ui-text type="label-m">
-            Our community reports that Ghostery breaks this site. We recommend
-            pausing it temporarily.
-          </ui-text>
-          <ui-text type="body-s">
-            Ads and trackers will not be blocked.
+            Our community reports that Ghostery no longer breaks this site.
+            Resume Ghostery.
           </ui-text>
         </div>
         <div layout="row gap">
-          <ui-button type="success" onclick="${pause}">
+          <ui-button type="success" onclick="${revoke}">
             <button>OK</button>
           </ui-button>
           <ui-button type="secondary" onclick="${dismiss}">
-            <button>
-              <div
-                layout="block:left column margin:left:-0.5 margin:right:-0.5"
-              >
-                <ui-text type="body-s" color="gray-600">
-                  Site works fine
-                </ui-text>
-                <ui-text type="label-m">Dismiss</ui-text>
-              </div>
-            </button>
+            <button>Dismiss</button>
           </ui-button>
         </div>
       </ui-notification>
-      ${pausing &&
+      ${resuming &&
       html`
         <ui-card narrow layout="fixed inset column gap center">
-          <ui-icon name="logo-pause"></ui-icon>
-          <ui-text type="label-m">Pausing...</ui-text>
+          <ui-icon name="logo"></ui-icon>
+          <ui-text type="label-m">Resuming...</ui-text>
         </ui-card>
       `}
     </template>

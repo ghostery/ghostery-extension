@@ -51,7 +51,7 @@ const Config = {
         const value =
           !!domain &&
           domains[domain].actions.includes(action) &&
-          !domains[domain].dismiss.includes(action);
+          !domains[domain].dismiss[action];
 
         actions.set(action, value);
         return value;

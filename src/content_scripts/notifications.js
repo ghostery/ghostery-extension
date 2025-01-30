@@ -12,7 +12,6 @@
 import * as notifications from '/utils/notifications.js';
 
 const WRAPPER_ELEMENT = 'ghostery-notification-wrapper';
-let iframe = null;
 
 function mount(url) {
   // Prevent multiple iframes be shown at the same time
@@ -43,6 +42,8 @@ function mount(url) {
       iframe {
         display: block;
         flex-grow: 1;
+        height: 0px;
+        width: 0px;
         max-width: 100%;
         max-height: 100%;
         pointer-events: auto;
@@ -50,7 +51,7 @@ function mount(url) {
         border-radius: 8px;
         opacity: 0;
         transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-        transform: translateY(20px);
+        transform: translateY(40px);
       }
 
       iframe.active {
@@ -66,7 +67,7 @@ function mount(url) {
 
         iframe {
           flex-grow: 0;
-          transform: translateY(-20px);
+          transform: translateY(-40px);
         }
       }
     </style>
@@ -75,7 +76,7 @@ function mount(url) {
   shadowRoot.appendChild(template.content);
   document.documentElement.appendChild(wrapper);
 
-  iframe = shadowRoot.querySelector('iframe');
+  const iframe = shadowRoot.querySelector('iframe');
 
   setTimeout(() => {
     iframe.classList.add('active');
@@ -101,7 +102,6 @@ function mount(url) {
       });
 
       iframe.classList.remove('active');
-      iframe = null;
     }
   });
 }
