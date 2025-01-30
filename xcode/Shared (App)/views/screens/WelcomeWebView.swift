@@ -51,7 +51,7 @@ class WebViewUserContentHelper: NSObject, WKScriptMessageHandler {
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.body as! String == "open-support") {
-            openInWebView(URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari")!)
+            openInWebView(URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari?embed=1")!)
         }
 
         if (message.body as! String == "open-subscriptions") {
@@ -94,7 +94,7 @@ class WebViewHelper: NSObject, WKNavigationDelegate {
                 'Here is a step-by-step tutorial': '\(String(localized: "Here is a step-by-step tutorial"))',
             })
         """)
-        
+
         #if os(iOS)
             webView.evaluateJavaScript("show('ios')")
         #elseif os(macOS)
