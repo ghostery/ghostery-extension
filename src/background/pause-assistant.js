@@ -29,13 +29,11 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
     const options = await store.resolve(Options);
     const hostname = parse(details.url).hostname;
 
-    const domain = isPaused(options, hostname);
-    const pausedWithAssistant = domain && options.paused[domain]?.assist;
-
+    const pausedDomain = isPaused(options, hostname);
     const hasAction = config.hasAction(hostname, ACTION_PAUSE_ASSISTANT);
 
-    if (pausedWithAssistant) {
-      if (!hasAction) {
+    if (pausedDomain) {
+      if (!hasAction && options.paused[pausedDomain].assist) {
         // the site is paused with the assistant, but the domain is not in the config
         openNotification(details.tabId, 'pause-resume', { hostname });
       }
