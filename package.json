@@ -53,7 +53,7 @@
     "hybrids": "^9.1.12",
     "idb": "^8.0.2",
     "jwt-decode": "^4.0.0",
-    "tldts-experimental": "^6.1.75"
+    "tldts-experimental": "^6.1.77"
   },
   "engineStrict": true,
   "engines": {
