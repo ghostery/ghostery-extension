@@ -52,8 +52,8 @@ mount(document.body, {
       <ui-notification>
         <div layout="column gap">
           <ui-text type="label-m">
-            Our community reports that Ghostery breaks this site. We recommend
-            pausing it temporarily.
+            Ghostery users report that ad blockers break this site. Try pausing
+            Ghostery.
           </ui-text>
           <ui-text type="body-s">
             Ads and trackers will not be blocked.
