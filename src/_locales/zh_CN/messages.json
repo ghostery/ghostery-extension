@@ -134,8 +134,8 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "浏览器：供应商、版本、语言、操作系统供应商"
   },
-  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "通过分享关于<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件健康</a>和<a href=\"$${2}\">性能遥测</a>的见解，如我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>中所述，您帮助推进整个Ghostery社区的隐私保护。"
+  "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "通过分享有关<a href=\"$${0}\">附加组件健康</a>和<a href=\"$${1}\">性能遥测</a>的见解，如我们的<a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>中所述，您帮助推进整个Ghostery社区的隐私保护。"
   },
   "cancel": {
     "message": "取消"
@@ -173,8 +173,8 @@
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "在 Github 上为 Ghostery Tracker Database 贡献"
   },
-  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "为整个Ghostery社区提供有关网络追踪器、附加组件健康状况和性能遥测的非个人信息，以帮助推进隐私保护。"
+  "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "提供有关附加组件健康和性能遥测的非个人信息，以帮助提升整个Ghostery社区的隐私保护。"
   },
   "contributor": {
     "message": "贡献者"

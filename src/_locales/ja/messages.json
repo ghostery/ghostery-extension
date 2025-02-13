@@ -134,8 +134,8 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "ブラウザ：ベンダー、バージョン、言語、オペレーティングシステムベンダー"
   },
-  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "<a href=\"$${0}\">ウェブトラッカー</a>、<a href=\"$${1}\">アドオンの健康状態</a>、および<a href=\"$${2}\">パフォーマンステレメトリ</a>に関する洞察を、<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">プライバシーポリシー</a>に基づいて共有することで、Ghosteryコミュニティ全体のプライバシー保護の向上に貢献できます。"
+  "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "アドオンの<a href=\"$${0}\">健全性</a>と<a href=\"$${1}\">パフォーマンステレメトリ</a>に関する洞察を、<a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">プライバシーポリシー</a>に基づいて共有することで、Ghosteryコミュニティ全体のプライバシー保護の向上に貢献できます。"
   },
   "cancel": {
     "message": "キャンセル"
@@ -173,8 +173,8 @@
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GithubでGhosteryトラッカーデータベースに寄付"
   },
-  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "ウェブトラッカー、アドオンの健康状態、パフォーマンステレメトリーに関する非個人情報を提供し、Ghosteryコミュニティ全体のプライバシー保護を進めるのに役立ちます。"
+  "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "アドオンの健康状態とパフォーマンスのテレメトリに関する非個人情報を提供し、Ghosteryコミュニティ全体のプライバシー保護を向上させます。"
   },
   "contributor": {
     "message": "Contributor"

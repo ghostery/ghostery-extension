@@ -134,8 +134,8 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "Browser: Anbieter, Version, Sprache, Betriebssystemanbieter"
   },
-  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Durch das Teilen von Insights zu <a href=\"$${0}\">Web-Trackern</a>, <a href=\"$${1}\">Add-on-Zustand</a> und <a href=\"$${2}\">Leistungstelemetrie</a>, wie in unserer <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
+  "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Durch das Teilen von Insights zu <a href=\"$${0}\">Add-on-Zustand</a> und <a href=\"$${1}\">Leistungstelemetrie</a>, wie in unserer <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
   "cancel": {
     "message": "Abbrechen"
@@ -173,8 +173,8 @@
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Zur Ghostery Tracker-Datenbank auf Github beitragen"
   },
-  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Trägt mit nicht-personenbezogenen Informationen über Tracker, Add-On-Zustand und Leistungstelemetrie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
+  "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Trägt mit nicht-personenbezogenen Informationen über den Add-On-Zustand und Leistungstelemetrie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
   "contributor": {
     "message": "Unterstützer"

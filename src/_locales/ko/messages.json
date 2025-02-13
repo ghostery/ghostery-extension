@@ -134,8 +134,8 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "브라우저: 종류, 버전, 언어, 운영 체제"
   },
-  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "<a href=\"$${0}\">웹 추적기</a>, <a href=\"$${1}\">애드온의 상태</a>, <a href=\"$${2}\">성능 원격 측정</a>에 대한 통찰을 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유함으로써, 귀하는 전체 Ghostery 커뮤니티의 개인정보 보호를 향상시키는 데 기여합니다."
+  "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "<a href=\"$${0}\">애드온의 상태</a> 및 <a href=\"$${1}\">성능 원격 측정</a>에 대한 통찰을 공유함으로써, <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 명시된 대로 Ghostery 커뮤니티 전체의 개인정보 보호를 강화하는 데 기여할 수 있습니다."
   },
   "cancel": {
     "message": "취소"
@@ -173,8 +173,8 @@
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "GitHub에서 Ghostery 트래커 데이터베이스에 기여하기"
   },
-  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "웹 추적기, 애드온 상태 및 성능 원격 측정에 대한 비개인 정보를 제공하여 전체 Ghostery 커뮤니티의 프라이버시 보호를 향상시키는 데 기여합니다."
+  "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Ghostery 커뮤니티 전체의 프라이버시 보호를 향상시키기 위해 애드온의 상태 및 성능 원격 측정에 대한 비개인 정보를 제공합니다."
   },
   "contributor": {
     "message": "기여자"
