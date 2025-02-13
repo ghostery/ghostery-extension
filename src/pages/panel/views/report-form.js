@@ -131,7 +131,6 @@ export default {
                 layout="::ui:font:body-s"
                 value="${form.email}"
                 oninput="${html.set(form, 'email')}"
-                required
               />
             </ui-input>
             <label layout="row gap items:center">
