@@ -79,7 +79,7 @@ function getBrowser() {
   return ua.browser.name.toLowerCase();
 }
 
-function isFirefox() {
+export function isFirefox() {
   const browser = getBrowser();
   return browser.includes('firefox');
 }
