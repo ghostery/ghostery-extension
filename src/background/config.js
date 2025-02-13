@@ -105,6 +105,6 @@ export default async function syncConfig() {
   }
 }
 
-OptionsObserver.addListener(function config({ terms, feedback }) {
-  if (terms && feedback) syncConfig();
+OptionsObserver.addListener(function config({ terms }) {
+  if (terms) syncConfig();
 });

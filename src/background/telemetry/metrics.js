@@ -311,7 +311,7 @@ export default class Metrics {
 
     // Protect against calling events immediately after install for all frequencies
     // They should trigger on the trailing edge of the frequency
-    if (!this.storage[key]) {
+    if (!this.storage[key] && type !== 'engaged') {
       this.storage[key] = now;
       this.saveStorage(this.storage);
     }
