@@ -163,9 +163,9 @@ export default {
                       mobile-type="body-s"
                       color="gray-600"
                     >
-                      Contributes non-personal information about web trackers,
-                      add-on health, and performance telemetry to help advance
-                      privacy protections for the entire Ghostery community.
+                      Contributes non-personal information about add-on health
+                      and performance telemetry to help advance privacy
+                      protections for the entire Ghostery community.
                     </ui-text>
                   </div>
                 </div>

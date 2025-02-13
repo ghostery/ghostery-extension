@@ -14,6 +14,7 @@ import { setLogLevel, describeLoggers } from '@whotracksme/reporting/reporting';
 import asyncSetup from '/utils/setup.js';
 import debug from '/utils/debug.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import { isFirefox } from '/utils/browser-info.js';
 
 import config from './config.js';
 import communication from './communication.js';
@@ -37,8 +38,8 @@ import webRequestReporter from './webrequest-reporter.js';
 })();
 
 const setup = asyncSetup('reporting', [
-  OptionsObserver.addListener(async function reporting({ terms, feedback }) {
-    if (terms && feedback) {
+  OptionsObserver.addListener(async function reporting({ terms }) {
+    if (terms && !isFirefox()) {
       if (webRequestReporter) {
         webRequestReporter.init().catch((e) => {
           console.warn(

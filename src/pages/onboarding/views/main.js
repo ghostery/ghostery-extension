@@ -72,12 +72,11 @@ export default {
               </ui-input>
               <ui-text type="body-s" underline data-qa="text:description">
                 ${msg.html`
-                By sharing insights on <a href="${router.url(WebTrackers)}">web trackers</a>,
-                <a href="${router.url(AddonHealth)}">add-on's health</a>, and
-                <a href="${router.url(Performance)}">performance telemetry</a>
-                as outlined in our <a href="${'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'}" target="_blank" rel="noreferrer">Privacy Policy</a>,
-                you help advance privacy protections for the entire Ghostery community.
-            `}
+                  By sharing insights on <a href="${router.url(AddonHealth)}">add-on's health</a> and
+                  <a href="${router.url(Performance)}">performance telemetry</a>
+                  as outlined in our <a href="${'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'}" target="_blank" rel="noreferrer">Privacy Policy</a>,
+                  you help advance privacy protections for the entire Ghostery community.
+                `}
               </ui-text>
             </div>
           `}
@@ -85,12 +84,12 @@ export default {
           html`
             <ui-text type="body-s" underline data-qa="text:description">
               ${msg.html`
-              Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
-              <a href="${router.url(AddonHealth)}">add-on's health</a>, and
-              <a href="${router.url(Performance)}">performance telemetry</a>
-              will be shared in accordance with our <a href="${router.url(Privacy)}" target="_blank" rel="noreferrer">Privacy Policy</a>,
-              advancing privacy protection for the Ghostery community.
-            `}
+                Information about <a href="${router.url(WebTrackers)}">web trackers</a>,
+                <a href="${router.url(AddonHealth)}">add-on's health</a>, and
+                <a href="${router.url(Performance)}">performance telemetry</a>
+                will be shared in accordance with our <a href="${router.url(Privacy)}" target="_blank" rel="noreferrer">Privacy Policy</a>,
+                advancing privacy protection for the Ghostery community.
+              `}
             </ui-text>
           `}
           <ui-text type="body-s">
