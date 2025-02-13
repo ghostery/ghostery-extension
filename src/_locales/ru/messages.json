@@ -134,8 +134,8 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "браузер: производитель, версия, язык, производитель операционной системы"
   },
-  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Делясь информацией о <a href=\"$${0}\">Трекерах</a>, <a href=\"$${1}\">состоянии дополнений</a> и <a href=\"$${2}\">телеметрии производительности</a>, как указано в нашей <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Политике конфиденциальности</a>, вы помогаете улучшать защиту конфиденциальности для всей сообщества Ghostery."
+  "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Предоставляя информацию о <a href=\"$${0}\">состоянии дополнения</a> и <a href=\"$${1}\">телеметрии производительности</a>, как указано в нашей <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Политике конфиденциальности</a>, вы помогаете улучшать защиту конфиденциальности для всей сообщества Ghostery."
   },
   "cancel": {
     "message": "Отмена"
@@ -173,8 +173,8 @@
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Поддержать базу данных трекеров от Ghostery на Github"
   },
-  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Вносит неперсональную информацию о веб-трекерах, состоянии дополнений и телеметрии производительности, чтобы помочь улучшить защиту конфиденциальности для всей сообщества Ghostery."
+  "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Предоставляет неперсональную информацию о состоянии и производительности дополнения, чтобы помочь улучшить защиту конфиденциальности для всей сообщества Ghostery."
   },
   "contributor": {
     "message": "Участник"

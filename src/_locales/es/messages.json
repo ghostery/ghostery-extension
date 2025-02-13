@@ -134,8 +134,8 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "navegador: proveedor, versión, idioma, proveedor del sistema operativo"
   },
-  "by_sharing_insights_on__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__as_outlined_in_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Al compartir información sobre <a href=\"$${0}\">Rastreadores web</a>, <a href=\"$${1}\">salud de los complementos</a> y <a href=\"$${2}\">telemetría de rendimiento</a> como se describe en nuestra <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidad</a>, ayudas a mejorar las protecciones de privacidad para toda la comunidad de Ghostery."
+  "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Al compartir información sobre la <a href=\"$${0}\">salud del complemento</a> y la <a href=\"$${1}\">telemetría de rendimiento</a> según lo descrito en nuestra <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidad</a>, ayudas a mejorar las protecciones de privacidad para toda la comunidad de Ghostery."
   },
   "cancel": {
     "message": "Cancelar"
@@ -173,8 +173,8 @@
   "contribute_to_ghostery_tracker_database_on_github": {
     "message": "Colabora con la base de datos de rastreadores de Ghostery en Github"
   },
-  "contributes_non_personal_information_about_web_trackers__add_on_health__and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Contribuye con información no personal sobre rastreadores web, el estado de los complementos y la telemetría de rendimiento para ayudar a mejorar las protecciones de privacidad para toda la comunidad de Ghostery."
+  "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
+    "message": "Contribuye con información no personal sobre la salud del complemento y la telemetría de rendimiento para ayudar a mejorar las protecciones de privacidad de toda la comunidad de Ghostery."
   },
   "contributor": {
     "message": "Colaborador"
