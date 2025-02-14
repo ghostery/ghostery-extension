@@ -24,6 +24,8 @@ import url from 'node:url';
 import { readFileSync, cpSync, existsSync, rmSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { execSync } from 'node:child_process';
+import { $ } from '@wdio/globals';
+
 import { setExtensionBaseUrl } from './utils.js';
 
 export const WEB_EXT_PATH = path.join(process.cwd(), 'web-ext-artifacts');
@@ -67,7 +69,7 @@ export function setupTestPage() {
 
 export function buildForFirefox() {
   if (!existsSync(FIREFOX_PATH)) {
-    execSync('npm run build -- firefox --silent', {
+    execSync('npm run build -- firefox --silent --debug', {
       stdio: 'inherit',
     });
     execSync('web-ext build --overwrite-dest -n ghostery-firefox.zip', {
@@ -78,7 +80,7 @@ export function buildForFirefox() {
 
 export function buildForChrome() {
   if (!existsSync(CHROME_PATH)) {
-    execSync('npm run build -- --silent', { stdio: 'inherit' });
+    execSync('npm run build -- --silent --debug', { stdio: 'inherit' });
     rmSync(CHROME_PATH, { recursive: true, force: true });
     cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
       recursive: true,
@@ -91,11 +93,9 @@ export const config = {
     [
       // Must be the first to enable the extension
       'spec/onboarding.spec.js',
-      // Opening the panel with other suits makes this spec fails
-      // TODO: If we update wdio group packages, it might not be necessary
-      'spec/panel.spec.js',
       'spec/main.spec.js',
       'spec/advanced.spec.js',
+      'spec/panel.spec.js',
       'spec/whotracksme.spec.js',
     ],
   ],
@@ -160,6 +160,15 @@ export const config = {
       if (capabilities.browserName === 'firefox') {
         const extension = readFileSync(FIREFOX_PATH);
         await browser.installAddOn(extension.toString('base64'), true);
+
+        // Get the extension ID from extensions settings page
+        await browser.url('about:debugging#/runtime/this-firefox');
+
+        const url = (
+          await $('>>>a.qa-manifest-url').getProperty('href')
+        ).replace('manifest.json', 'pages');
+
+        setExtensionBaseUrl(url);
       }
 
       // Disable cache for Chrome to avoid caching issues
@@ -167,29 +176,13 @@ export const config = {
         await browser.sendCommand('Network.setCacheDisabled', {
           cacheDisabled: true,
         });
+
+        // Get the extension ID from extensions settings page
+        await browser.url('chrome://extensions');
+
+        const extensionId = await $('>>>extensions-item').getAttribute('id');
+        setExtensionBaseUrl(`chrome-extension://${extensionId}/pages`);
       }
-
-      // Waits and closes the onboarding page opened by the extension
-      // This is necessary to avoid the onboarding page opened in
-      // random moment from clashing with the tests
-
-      const currentUrl = await browser.getUrl();
-
-      await browser.waitUntil(async function () {
-        try {
-          await browser.switchWindow('Welcome to Ghostery');
-          return true;
-        } catch {
-          return false;
-        }
-      });
-
-      setExtensionBaseUrl(
-        (await browser.getUrl()).replace('/onboarding/index.html', ''),
-      );
-
-      await browser.closeWindow();
-      await browser.switchWindow(currentUrl);
     } catch (e) {
       console.error('Error while setting up test environment', e);
 
