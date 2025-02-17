@@ -18,8 +18,8 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-gray-100);
-      border: 1px solid  var(--ui-color-gray-200);
+      background: var(--background-secondary);
+      border: 1px solid  var(--border-primary);
       border-radius: 8px;
     }
   `,

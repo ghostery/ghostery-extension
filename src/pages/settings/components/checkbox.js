@@ -34,7 +34,7 @@ export default {
     <template layout="column">
       <div layout="row items:center" onclick="${clickInput}">
         <slot></slot>
-        <ui-text type="body-s" color="gray-600" layout="padding:left:0.5">
+        <ui-text type="body-s" color="secondary" layout="padding:left:0.5">
           <slot name="label"></slot>
         </ui-text>
       </div>
@@ -51,7 +51,7 @@ export default {
 
     @media (hover: hover) {
       :host(:hover) ui-text {
-        color: var(--ui-color-gray-800);
+        color: var(--color-primary);
       }
     }
   `,

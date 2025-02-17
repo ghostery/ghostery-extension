@@ -31,7 +31,7 @@ export default {
             </div>
           `}
           <div layout="column gap grow">
-            <ui-text id="desc" type="body-s" color="gray-600">
+            <ui-text id="desc" type="body-s" color="secondary">
               <slot></slot>
             </ui-text>
             <ui-text id="action" type="label-s">
@@ -43,13 +43,13 @@ export default {
     </template>
   `.css`
     :host {
-      --ui-notification-bg: var(--ui-color-gray-100);
-      --ui-notification-color: var(--ui-color-primary-700);
+      --ui-notification-bg: var(--background-secondary);
+      --ui-notification-color: var(--color-brand-primary);
     }
 
     :host([type="warning"]) {
-      --ui-notification-bg: var(--ui-color-danger-100);
-      --ui-notification-color: var(--ui-color-danger-700);
+      --ui-notification-bg: var(--background-warning-primary);
+      --ui-notification-color: var(--color-warning-primary);
     }
 
     :host([type="review"]) #icon {
@@ -81,8 +81,8 @@ export default {
     }
 
     #icon {
-      background: var(--ui-color-layout);
-      box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
+      background: var(--background-primary);
+      box-shadow: 0px 2px 6px var(--shadow-button);
       border-radius: 8px;
     }
 

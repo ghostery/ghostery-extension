@@ -17,13 +17,13 @@ export default {
     <template layout="block">
       ${blocked
         ? html`
-            <settings-badge type="info">
+            <settings-badge>
               <ui-icon name="block-s"></ui-icon>
               Blocked
             </settings-badge>
           `
         : html`
-            <settings-badge type="info">
+            <settings-badge>
               <ui-icon name="trust-s"></ui-icon>
               Trusted
             </settings-badge>

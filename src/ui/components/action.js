@@ -21,6 +21,7 @@ export default {
       transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      outline-color: var(--border-brand-solid);
       text-decoration: none;
     }
 

@@ -118,7 +118,7 @@ export default {
                     </ui-text>
                     <ui-text
                       type="body-s"
-                      color="gray-600"
+                      color="secondary"
                       layout="block:center"
                     >
                       Thank you for your support in Ghostery's fight for a web
@@ -139,7 +139,7 @@ export default {
                     </ui-text>
                     <ui-text
                       type="body-s"
-                      color="gray-600"
+                      color="secondary"
                       layout="block:center"
                     >
                       Help Ghostery fight for a web where privacy is a basic

@@ -72,7 +72,7 @@ export default {
         </div>
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
-            <ui-icon name="close" color="gray-800" layout="size:3"></ui-icon>
+            <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
           </a>
         </ui-action>
       </ui-header>
@@ -91,9 +91,9 @@ export default {
                 <ui-icon
                   name="warning"
                   layout="inline size:2"
-                  color="danger-700"
+                  color="danger-primary"
                 ></ui-icon>
-                <ui-text type="body-s" color="danger-700">
+                <ui-text type="body-s" color="danger-primary">
                   ${store.error(form)?.message}
                 </ui-text>
               </div>
@@ -105,7 +105,7 @@ export default {
             <ui-line></ui-line>
             <ui-text
               type="label-s"
-              color="primary-700"
+              color="brand-primary"
               style="word-break: break-all"
               layout="width:::40"
             >
@@ -144,7 +144,7 @@ export default {
             </label>
             <ui-text
               type="body-s"
-              color="gray-600"
+              color="secondary"
               underline
               layout="width:::40"
             >

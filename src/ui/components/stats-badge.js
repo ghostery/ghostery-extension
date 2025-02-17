@@ -14,12 +14,12 @@ import { html } from 'hybrids';
 export default {
   render: () => html`
     <template layout="row center width::2 height:2 padding:0:0.25">
-      <ui-text type="label-xs" color="gray-600"><slot></slot></ui-text>
+      <ui-text type="label-xs" color="secondary"><slot></slot></ui-text>
     </template>
   `.css`
     :host {
       box-sizing: border-box;
-      border: 1px solid var(--ui-color-gray-200);
+      border: 1px solid var(--border-primary);
       border-radius: 4px;
     }
   `,

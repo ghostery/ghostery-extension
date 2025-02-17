@@ -24,8 +24,12 @@ export default {
           layout="row center gap padding:2 relative layer"
           layout@992px="padding:5:3 content:start"
         >
-          <ui-icon name="logo" color="primary-500" layout="size:3"></ui-icon>
-          <ui-text type="headline-s" color="primary-500">
+          <ui-icon
+            name="logo"
+            color="brand-secondary"
+            layout="size:3"
+          ></ui-icon>
+          <ui-text type="headline-s" color="brand-secondary">
             Ghostery settings
           </ui-text>
         </header>
@@ -41,20 +45,20 @@ export default {
       </template>
     `.css`
     :host {
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
     }
 
     header, nav {
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
       box-shadow: 0px 0px 80px rgba(32, 44, 68, 0.1);
     }
 
     header {
-      border-bottom: 1px solid var(--ui-color-gray-200);
+      border-bottom: 1px solid var(--border-primary);
     }
 
     nav {
-      border-top: 1px solid var(--ui-color-gray-200);
+      border-top: 1px solid var(--border-primary);
     }
 
     nav ::slotted(a) {
@@ -63,9 +67,9 @@ export default {
       flex-flow: column;
       align-items: center;
       gap: 4px;
-      color: var(--ui-color-gray-800);
+      color: var(--color-primary);
       text-decoration: none;
-      font: var(--ui-font-label-xs);
+      font: var(--font-label-xs);
       text-overflow: ellipsis;
       overflow: hidden;
       flex: 1 1 0;
@@ -73,14 +77,14 @@ export default {
       border-radius: 6px;
       padding: 6px 4px 4px;
       text-align: center;
-      --ui-color-nav: currentColor;
+      --color-nav: currentColor;
       transition: color 0.2s, opacity 0.2s;
     }
 
     @media (hover: hover) {
       nav ::slotted(a:hover) {
-        color: var(--ui-color-primary-700);
-        --ui-color-nav: currentColor;
+        color: var(--color-brand-primary);
+        --color-nav: currentColor;
       }
     }
 
@@ -89,8 +93,8 @@ export default {
     }
 
     nav ::slotted(a.active) {
-      color: var(--ui-color-primary-700);
-      background: var(--ui-color-primary-100);
+      color: var(--color-brand-primary);
+      background: var(--background-brand-primary);
     }
 
     nav ::slotted(a.wrap) {
@@ -101,22 +105,22 @@ export default {
       header, nav {
         box-shadow: none;
         border: none;
-        border-right: 1px solid var(--ui-color-gray-200);
+        border-right: 1px solid var(--border-primary);
       }
 
       nav ::slotted(a) {
-        font: var(--ui-font-label-l);
+        font: var(--font-label-l);
         gap: 8px;
         padding: 12px;
         flex: 0;
         flex-flow: row;
         max-width: none;
         text-align: left;
-        --ui-color-nav: var(--ui-color-gray-600);
+        --color-nav: var(--color-secondary);
       }
 
       nav ::slotted(a.active) {
-        --ui-color-nav: var(--ui-color-primary-700);
+        --color-nav: var(--color-brand-primary);
       }
 
       nav ::slotted(a.bottom) {
@@ -134,7 +138,7 @@ export default {
         right: 0;
         bottom: calc(100% + 17px);
         height: 1px;
-        background: var(--ui-color-gray-200);
+        background: var(--border-primary);
       }
     }
   `,

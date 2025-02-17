@@ -75,17 +75,17 @@ export default {
             (session.user
               ? html`
                   <div layout="column gap:0.5 margin:bottom:2">
-                    <ui-text type="label-m" color="gray-600"
+                    <ui-text type="label-m" color="secondary"
                       >You are signed in as:</ui-text
                     >
                     <div layout="row items:center gap:2">
                       <ui-text type="headline-s"> ${session.name} </ui-text>
                       ${session.contributor &&
-                      html`<settings-badge type="primary" uppercase>
+                      html`<settings-badge type="brand" uppercase>
                         Contributor
                       </settings-badge>`}
                     </div>
-                    <ui-text type="body-m" color="gray-600"
+                    <ui-text type="body-m" color="secondary"
                       >${session.email}</ui-text
                     >
                   </div>
@@ -101,7 +101,7 @@ export default {
                   <div>
                     <ui-text type="headline-s">Join Ghostery</ui-text>
                     <ui-text
-                      color="gray-600"
+                      color="secondary"
                       type="body-m"
                       mobile-type="body-s"
                     >
@@ -133,12 +133,12 @@ export default {
                 <div layout="row gap items:center">
                   <ui-icon
                     name="websites"
-                    color="gray-600"
+                    color="secondary"
                     layout="size:2"
                   ></ui-icon>
                   <ui-text type="headline-xs">Settings Sync</ui-text>
                 </div>
-                <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                <ui-text type="body-m" mobile-type="body-s" color="secondary">
                   Saves and synchronizes your custom settings between browsers
                   and devices.
                 </ui-text>

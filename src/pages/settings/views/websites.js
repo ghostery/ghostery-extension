@@ -94,7 +94,7 @@ export default {
           <div layout="row items:center content:space-between">
             <ui-text type="headline-m">Websites</ui-text>
           </div>
-          <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+          <ui-text type="body-l" mobile-type="body-m" color="secondary">
             All websites with adjusted protection status will be listed here.
           </ui-text>
         </div>
@@ -159,7 +159,7 @@ export default {
                               <ui-icon
                                 name="trash"
                                 layout="size:3"
-                                color="gray-400"
+                                color="tertiary"
                               ></ui-icon>
                             </button>
                           </ui-action>

@@ -19,9 +19,9 @@ export default {
     </template>
   `.css`
     :host {
-      border: 1px solid var(--ui-color-gray-200);
+      border: 1px solid var(--border-primary);
       border-radius: 8px;
-      box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
+      box-shadow: 0px 2px 6px var(--shadow-card);
     }
   `,
 };

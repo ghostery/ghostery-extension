@@ -41,14 +41,14 @@ export default {
       <settings-page-layout layout="gap:4" layout@768px="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
           <ui-text type="headline-m" translate="no">WhoTracks.Me</ui-text>
-          <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+          <ui-text type="body-l" mobile-type="body-m" color="secondary">
             WhoTracks.Me, operated by Ghostery, is a vital cornerstone of
             Ghostery’s AI anti-tracking technology, playing a crucial role in
             providing real-time privacy protection for the Ghostery community.
             It is a comprehensive global resource on trackers, bringing
             transparency to web tracking.
           </ui-text>
-          <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+          <ui-text type="body-l" mobile-type="body-m" color="secondary">
             It exists thanks to the micro-contributions of every Ghostery user
             who chooses to send non-personal information to WhoTracks.Me. This
             input enables Ghostery to provide real-time intel on trackers,
@@ -75,7 +75,7 @@ export default {
                 </a>
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">WhoTracks.Me Wheel</ui-text>
-                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
                     Replaces the Ghostery icon in the browser toolbar with the
                     tracker wheel.
                   </ui-text>
@@ -103,7 +103,7 @@ export default {
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Displays the tracker count on the Ghostery icon in the
                       browser toolbar.
@@ -128,10 +128,10 @@ export default {
                 </a>
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">Trackers Preview</ui-text>
-                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
                     Shows the tracker preview beside search results.
                   </ui-text>
-                  <ui-text type="label-s" color="gray-600" underline>
+                  <ui-text type="label-s" color="secondary" underline>
                     <a
                       href="https://www.ghostery.com/blog/introducing-wtm-serp-report"
                       target="_blank"
@@ -161,7 +161,7 @@ export default {
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Contributes non-personal information about add-on health
                       and performance telemetry to help advance privacy

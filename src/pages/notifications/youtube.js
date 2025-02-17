@@ -45,10 +45,10 @@ mount(document.body, {
       <ui-card layout="padding:2">
         <div layout="row items:start gap:2">
           <div layout="relative">
-            <ui-icon name="ghosty" color="gray-300" layout="size:4"></ui-icon>
+            <ui-icon name="ghosty" color="quaternary" layout="size:4"></ui-icon>
             <ui-icon
               name="alert"
-              color="danger-500"
+              color="danger-secondary"
               layout="absolute bottom:-1 right:-1"
             ></ui-icon>
           </div>
@@ -66,7 +66,7 @@ mount(document.body, {
                   <div layout="row center size:3">
                     <ui-icon
                       name="close"
-                      color="gray-400"
+                      color="tertiary"
                       layout="size:3"
                     ></ui-icon>
                   </div>

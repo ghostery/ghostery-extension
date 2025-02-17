@@ -91,7 +91,7 @@ export default {
                   <ui-icon
                     name="trash"
                     layout="size:2.5"
-                    color="gray-400"
+                    color="tertiary"
                     onclick="${revokePaused}"
                   ></ui-icon>
                 </button>
@@ -131,7 +131,7 @@ export default {
                 <ui-icon
                   name="block-m"
                   layout="size:4"
-                  color="gray-400"
+                  color="tertiary"
                 ></ui-icon>
                 <ui-text layout="block:center width:::180px">
                   No protection exceptions added yet
@@ -160,7 +160,7 @@ export default {
                       </ui-action>
                       ${tracker.organization &&
                       html`
-                        <ui-text type="body-s" color="gray-600">
+                        <ui-text type="body-s" color="secondary">
                           ${tracker.organization.name}
                         </ui-text>
                       `}
@@ -175,10 +175,10 @@ export default {
                     <div layout="row gap items:center content:space-between">
                       ${tracker.exception.getDomainStatus(domain).type ===
                       'block'
-                        ? html`<settings-badge type="info">
+                        ? html`<settings-badge>
                             <ui-icon name="block-s"></ui-icon> Blocked
                           </settings-badge>`
-                        : html`<settings-badge type="info">
+                        : html`<settings-badge>
                             <ui-icon name="trust-s"></ui-icon> Trusted
                           </settings-badge>`}
                       <ui-action>
@@ -186,7 +186,7 @@ export default {
                           <ui-icon
                             name="trash"
                             layout="size:3"
-                            color="gray-400"
+                            color="tertiary"
                             onclick="${removeDomain(tracker)}"
                           ></ui-icon>
                         </button>

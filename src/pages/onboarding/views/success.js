@@ -55,7 +55,7 @@ export default {
               <ui-icon
                 name="extension-${browser}"
                 layout="block inline size:3"
-                color="gray-400"
+                color="tertiary"
               ></ui-icon>
               <ui-text type="label-m">Pin Extension for easy access</ui-text>
             </div>

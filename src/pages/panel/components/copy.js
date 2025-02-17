@@ -13,7 +13,7 @@ export default {
         <button onclick="${copy}" layout="block padding margin:-1">
           <ui-tooltip position="bottom" delay="0.5" autohide="0">
             <div layout="row content:space-between items:center gap:0.5">
-              <ui-text id="full" type="body-s" color="gray-600" ellipsis>
+              <ui-text id="full" type="body-s" color="secondary" ellipsis>
                 <slot></slot>
               </ui-text>
               <ui-icon name="copy" layout="shrink:0"></ui-icon>
@@ -25,7 +25,7 @@ export default {
     </template>
   `.css`
     ui-icon {
-      color: var(--ui-color-gray-400);
+      color: var(--color-tertiary);
     }
 
     #tooltip {
@@ -37,7 +37,7 @@ export default {
 
     @media (hover: hover) {
       button:hover ui-text, button:hover ui-icon {
-        color: var(--ui-color-primary-700);
+        color: var(--color-brand-primary);
       }
     }
   `,

@@ -105,7 +105,11 @@ export default {
             </a>
           </ui-button>
           <onboarding-error-card layout="margin:top">
-            <ui-text type="body-s" color="danger-500" layout="block:center">
+            <ui-text
+              type="body-s"
+              color="danger-secondary"
+              layout="block:center"
+            >
               With Ghostery disabled, only the basic functionality of naming
               trackers is available.
             </ui-text>

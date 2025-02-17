@@ -28,9 +28,9 @@ export default {
       justify-content: center;
       appearance: none;
       border: none;
-      background: var(--ui-color-layout);
-      border: 1px solid var(--ui-color-gray-200);
-      box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
+      background: var(--background-primary);
+      border: 1px solid var(--border-primary);
+      box-shadow: 0px 2px 6px var(--shadow-button);
       border-radius: 8px;
       transition: all 0.2s;
       margin: 0;
@@ -47,12 +47,12 @@ export default {
       pointer-events: none;
       cursor: default;
       box-shadow: none;
-      background: var(--ui-color-gray-100);
-      color: var(--ui-color-gray-600);
+      background: var(--background-secondary);
+      color: var(--color-tertiary);
     }
 
     @media (hover: hover) {
-      ::slotted(*:hover) { border-color: var(--ui-color-gray-300);} }
+      ::slotted(*:hover) { border-color: var(--border-secondary); }
     }
   `,
 };

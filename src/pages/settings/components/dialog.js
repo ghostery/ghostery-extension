@@ -44,7 +44,7 @@ export default {
             layout="absolute top:2 right:2 padding:0.5"
             tabindex="100"
           >
-            <ui-icon name="close" color="gray-400" layout="size:3"></ui-icon>
+            <ui-icon name="close" color="tertiary" layout="size:3"></ui-icon>
           </a>
         </ui-action>
         <slot></slot>
@@ -54,7 +54,7 @@ export default {
     #dialog {
       border: none;
       border-radius: 16px;
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
       transform: translateY(100px);
       opacity: 0;
       transition: transform 250ms cubic-bezier(0.4, 0.15, 0, 1), opacity 250ms ease;
@@ -66,13 +66,14 @@ export default {
     }
 
     #backdrop {
-      background: var(--ui-color-backdrop);
+      background: var(--component-custom-token-bg-modal-overlay);
       opacity: 0;
       transition: all 300ms ease-out;
+      backdrop-filter: blur(4px);
     }
 
     :host([open]) #backdrop {
-      opacity: 0.8;
+      opacity: 1;
     }
   `,
 };

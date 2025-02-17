@@ -34,7 +34,7 @@ export default {
               id="arrow"
               name="arrow-down"
               layout="size:3"
-              color="gray-600"
+              color="secondary"
             ></ui-icon>
             <ui-category-icon
               name="${name}"
@@ -43,12 +43,12 @@ export default {
             <div layout="column gap:0.5">
               <ui-text type="label-l">${labels.categories[name]}</ui-text>
               <div layout="column" layout@768px="row gap">
-                <ui-text type="body-s" color="gray-600" layout="width::90px">
+                <ui-text type="body-s" color="secondary" layout="width::90px">
                   Activities<span>:</span> ${size}
                 </ui-text>
                 ${!!adjusted &&
                 html`
-                  <ui-text type="body-s" color="gray-600" layout="width::90px">
+                  <ui-text type="body-s" color="secondary" layout="width::90px">
                     <!-- | tracker-list -->Adjusted<span>:</span> ${adjusted}
                   </ui-text>
                 `}
@@ -76,8 +76,8 @@ export default {
   `.css`
     :host {
       border-radius: 8px;
-      border: 1px solid var(--ui-color-gray-200);
-      background: var(--ui-color-layout);
+      border: 1px solid var(--border-primary);
+      background: var(--background-primary);
     }
 
     :host([open]) #arrow {

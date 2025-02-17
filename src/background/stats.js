@@ -38,7 +38,7 @@ const inactiveIcons = Object.keys(icons).reduce((acc, key) => {
   return acc;
 }, {});
 
-function setBadgeColor(color = '#3f4146' /* gray-600 */) {
+function setBadgeColor(color = '#3f4146' /* secondary */) {
   chromeAction.setBadgeBackgroundColor({ color });
 }
 

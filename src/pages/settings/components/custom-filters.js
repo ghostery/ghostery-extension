@@ -67,10 +67,10 @@ export default {
             data-qa="component:custom-filters:result"
           >
             <div layout="column gap:0.5">
-              <ui-text type="label-s" color="gray-600">
+              <ui-text type="label-s" color="secondary">
                 Custom filters have been updated
               </ui-text>
-              <ui-text type="body-s" color="gray-600">
+              <ui-text type="body-s" color="secondary">
                 ${__PLATFORM__ === 'firefox'
                   ? html`Network filters: ${result.networkFilters || 0} `
                   : html`
@@ -79,12 +79,12 @@ export default {
                           <ui-text
                             type="body-s"
                             layout="inline"
-                            color="gray-600"
+                            color="secondary"
                           >
                             DNR rules: ${result.dnrRules.length}
                           </ui-text>
                         </summary>
-                        <ui-text type="body-s" color="gray-600">
+                        <ui-text type="body-s" color="secondary">
                           ${result.dnrRules.map(
                             (rule) =>
                               html`<pre>${JSON.stringify(rule, null, 2)}</pre>`,
@@ -93,7 +93,7 @@ export default {
                       </details>
                     `}
               </ui-text>
-              <ui-text type="body-s" color="gray-600">
+              <ui-text type="body-s" color="secondary">
                 Cosmetic filters: ${result.cosmeticFilters || 0}
               </ui-text>
             </div>
@@ -102,12 +102,12 @@ export default {
         ${!!result?.errors.length &&
         html`
           <div layout="column gap:0.5">
-            <ui-text type="label-s" color="gray-600">
+            <ui-text type="label-s" color="secondary">
               Errors (${result.errors.length})
             </ui-text>
             ${result?.errors.map(
               (error) =>
-                html`<ui-text type="body-s" color="danger-500">
+                html`<ui-text type="body-s" color="danger-secondary">
                   ${error}
                 </ui-text>`,
             )}

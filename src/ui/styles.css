@@ -23,106 +23,261 @@
 }
 
 html {
-  --ui-color-layout: white;
+  /* Primitives */
+  --color-alpha-black-10: #0000001a;
+  --color-alpha-black-20: #00000033;
+  --color-alpha-black-30: #0000004d;
+  --color-alpha-black-40: #00000066;
+  --color-alpha-black-50: #00000080;
+  --color-alpha-black-6: #0000000f;
+  --color-alpha-black-60: #00000099;
+  --color-alpha-black-70: #000000b2;
+  --color-alpha-black-80: #000000cc;
+  --color-alpha-black-90: #000000e5;
+  --color-base-black: #000000;
+  --color-base-white: #ffffff;
+  --color-brand-100: #ebf7fd;
+  --color-brand-200: #daf3ff;
+  --color-brand-300: #9adeff;
+  --color-brand-400: #4fc5ff;
+  --color-brand-500: #00aef0;
+  --color-brand-600: #0077cc;
+  --color-brand-700: #004f88;
+  --color-brand-800: #00365c;
+  --color-brand-900: #0a1e31;
+  --color-danger-100: #ffebeb;
+  --color-danger-200: #ffc6c7;
+  --color-danger-300: #ff9e9f;
+  --color-danger-400: #ff595b;
+  --color-danger-500: #fd3638;
+  --color-danger-600: #eb1719;
+  --color-danger-700: #c80f11;
+  --color-danger-800: #871516;
+  --color-danger-900: #4a0506;
+  --color-gray-100: #f2f4f7;
+  --color-gray-200: #e0e2e5;
+  --color-gray-300: #b9bbbe;
+  --color-gray-400: #88898c;
+  --color-gray-500: #636568;
+  --color-gray-600: #3f4146;
+  --color-gray-700: #2f3136;
+  --color-gray-800: #202225;
+  --color-gray-900: #17191c;
+  --color-success-100: #edfced;
+  --color-success-200: #abf0aa;
+  --color-success-300: #75e273;
+  --color-success-400: #3ecb3c;
+  --color-success-500: #19b316;
+  --color-success-600: #0b9209;
+  --color-success-700: #0a7408;
+  --color-success-800: #0a5c09;
+  --color-success-900: #062e05;
+  --color-wtm-100: #eeefff;
+  --color-wtm-200: #dcdefa;
+  --color-wtm-300: #a6a7fb;
+  --color-wtm-400: #9280ff;
+  --color-wtm-500: #715dee;
+  --color-wtm-600: #533ed6;
+  --color-wtm-700: #3c28a1;
+  --color-wtm-800: #291773;
+  --color-wtm-900: #160a40;
+  --color-warning-100: #fffaeb;
+  --color-warning-200: #fedf89;
+  --color-warning-300: #fec84b;
+  --color-warning-400: #fdb022;
+  --color-warning-500: #f79009;
+  --color-warning-600: #dc6803;
+  --color-warning-700: #b54708;
+  --color-warning-800: #93370d;
+  --color-warning-900: #4e1d09;
 
-  --ui-color-gray-800: #2f3136;
-  --ui-color-gray-600: #636568;
-  --ui-color-gray-400: #88898c;
-  --ui-color-gray-300: #b9bbbe;
-  --ui-color-gray-200: #e0e2e5;
-  --ui-color-gray-100: #f2f4f7;
+  --color-inherit: inherit;
 
-  --ui-color-primary-700: #0077cc;
-  --ui-color-primary-500: #00aef0;
-  --ui-color-primary-300: #9adeff;
-  --ui-color-primary-200: #daf3ff;
-  --ui-color-primary-100: #ebf7fd;
+  --font-family: 'Inter', sans-serif;
+  --font-family-label: var(--font-family);
 
-  --ui-color-success-700: #008d00;
-  --ui-color-success-500: #0ab00a;
-  --ui-color-success-100: #ebfaeb;
+  --font-display-3xl: 700 64px / 72px var(--font-family);
+  --font-display-2xl: 700 48px / 52px var(--font-family);
+  --font-display-xl: 700 40px / 44px var(--font-family);
+  --font-display-l: 700 32px / 34px var(--font-family);
+  --font-display-m: 700 28px / 30px var(--font-family);
+  --font-display-s: 700 22px / 24px var(--font-family);
+  --font-display-xs: 700 18px / 20px var(--font-family);
+  --font-display-2xs: 700 16px / 18px var(--font-family);
 
-  --ui-color-warning-500: #ffbb00;
-  --ui-color-warning-200: #fff7e6;
-  --ui-color-warning-100: #13151a;
+  --font-headline-l: 600 30px / 40px var(--font-family);
+  --font-headline-m: 600 24px / 32px var(--font-family);
+  --font-headline-s: 600 18px / 22px var(--font-family);
+  --font-headline-xs: 600 16px / 20px var(--font-family);
 
-  --ui-color-danger-700: #c80f11;
-  --ui-color-danger-500: #f13436;
-  --ui-color-danger-300: #efb1b3;
-  --ui-color-danger-100: #ffebeb;
+  --font-label-l: 600 16px / 20px var(--font-family);
+  --font-label-m: 600 14px / 18px var(--font-family);
+  --font-label-s: 600 12px / 16px var(--font-family);
+  --font-label-xs: 600 11px / 14px var(--font-family);
 
-  --ui-color-backdrop: var(--ui-color-gray-600);
-  --ui-color-warning-text: var(--ui-color-gray-800);
-  --ui-color-scroll-shadow: rgba(0, 0, 0, 0.1);
+  --font-body-l: 400 16px / 20px var(--font-family);
+  --font-body-m: 400 14px / 18px var(--font-family);
+  --font-body-s: 400 12px / 16px var(--font-family);
+  --font-body-xs: 400 11px / 13px var(--font-family);
 
-  --ui-color-inherit: inherit;
+  /* Light mode */
 
-  --ui-shadow-header: 0px 4px 16px rgba(32, 44, 68, 0.1);
-
-  --ui-font-family: 'Inter', sans-serif;
-  --ui-font-family-label: var(--ui-font-family);
-
-  --ui-font-display-m: 700 28px / 30px var(--ui-font-family);
-  --ui-font-display-s: 700 22px / 24px var(--ui-font-family);
-  --ui-font-display-xs: 700 18px / 20px var(--ui-font-family);
-  --ui-font-display-2xs: 700 16px / 18px var(--ui-font-family);
-
-  --ui-font-headline-l: 600 30px / 40px var(--ui-font-family);
-  --ui-font-headline-m: 600 24px / 32px var(--ui-font-family);
-  --ui-font-headline-s: 600 18px / 22px var(--ui-font-family);
-  --ui-font-headline-xs: 600 16px / 20px var(--ui-font-family);
-
-  --ui-font-label-l: 600 16px / 20px var(--ui-font-family);
-  --ui-font-label-m: 600 14px / 18px var(--ui-font-family);
-  --ui-font-label-s: 600 12px / 16px var(--ui-font-family);
-  --ui-font-label-xs: 600 11px / 14px var(--ui-font-family);
-
-  --ui-font-body-l: 400 16px / 20px var(--ui-font-family);
-  --ui-font-body-m: 400 14px / 18px var(--ui-font-family);
-  --ui-font-body-s: 400 12px / 16px var(--ui-font-family);
-  --ui-font-body-xs: 400 11px / 13px var(--ui-font-family);
+  --background-brand-primary: var(--color-brand-100);
+  --background-brand-secondary: var(--color-brand-200);
+  --background-brand-solid: var(--color-brand-500);
+  --background-brand-strong: var(--color-brand-600);
+  --background-danger-primary: var(--color-danger-100);
+  --background-danger-secondary: var(--color-danger-200);
+  --background-danger-solid: var(--color-danger-500);
+  --background-primary: var(--color-base-white);
+  --background-secondary: var(--color-gray-100);
+  --background-success-primary: var(--color-success-100);
+  --background-success-secondary: var(--color-success-200);
+  --background-success-solid: var(--color-success-600);
+  --background-tertiary: var(--color-gray-200);
+  --background-warning-primary: var(--color-warning-100);
+  --background-warning-secondary: var(--color-warning-200);
+  --background-warning-solid: var(--color-warning-500);
+  --background-wtm-primary: var(--color-wtm-100);
+  --background-wtm-secondary: var(--color-wtm-200);
+  --background-wtm-solid: var(--color-wtm-500);
+  --background-wtm-strong: var(--color-wtm-600);
+  --border-brand-primary: var(--color-brand-200);
+  --border-brand-secondary: var(--color-brand-300);
+  --border-brand-solid: var(--color-brand-500);
+  --border-danger-primary: var(--color-danger-200);
+  --border-danger-solid: var(--color-danger-500);
+  --border-primary: var(--color-gray-200);
+  --border-secondary: var(--color-gray-300);
+  --border-success-primary: var(--color-success-200);
+  --border-success-solid: var(--color-success-500);
+  --border-tertiary: var(--color-gray-400);
+  --border-warning-primary: var(--color-warning-200);
+  --border-warning-solid: var(--color-warning-500);
+  --border-wtm-primary: var(--color-wtm-200);
+  --border-wtm-secondary: var(--color-wtm-300);
+  --border-wtm-solid: var(--color-wtm-500);
+  --color-brand-primary: var(--color-brand-600);
+  --color-brand-secondary: var(--color-brand-500);
+  --color-danger-primary: var(--color-danger-600);
+  --color-danger-secondary: var(--color-danger-500);
+  --color-onbrand: var(--color-base-white);
+  --color-onwtm: var(--color-base-white);
+  --color-primary: var(--color-gray-800);
+  --color-quaternary: var(--color-gray-400);
+  --color-secondary: var(--color-gray-600);
+  --color-success-primary: var(--color-success-600);
+  --color-success-secondary: var(--color-success-500);
+  --color-tertiary: var(--color-gray-500);
+  --color-warning-primary: var(--color-warning-600);
+  --color-warning-secondary: var(--color-warning-500);
+  --color-wtm-primary: var(--color-wtm-600);
+  --color-wtm-secondary: var(--color-wtm-500);
+  --shadow-button: var(--color-alpha-black-6);
+  --shadow-card: var(--color-alpha-black-6);
+  --shadow-dialog: var(--color-alpha-black-30);
+  --shadow-dialog-mobile: var(--color-alpha-black-30);
+  --shadow-input: var(--color-alpha-black-6);
+  --component-chart-line-blocked: var(--color-danger-500);
+  --component-chart-line-modified: var(--color-brand-500);
+  --component-chart-line-observed: var(--color-wtm-500);
+  --component-custom-token-bg-backdrop: var(--color-gray-100);
+  --component-custom-token-bg-modal-overlay: var(--color-alpha-black-20);
+  --component-custom-token-bg-overlay: var(--color-alpha-black-80);
+  --component-custom-token-bg-scroll: var(--color-alpha-black-40);
+  --component-pause-button-bg: var(--color-base-white);
+  --component-pause-button-fg: var(--color-brand-600);
+  --component-pause-button-overlay: var(--color-brand-200);
+  --component-pause-button-resume-bg: var(--color-danger-700);
+  --component-pause-button-resume-fg: var(--color-danger-100);
+  --component-pause-button-resume-overlay: var(--color-danger-100);
+  --component-pause-button-shadow: #0069d233;
+  --component-pause-button-time-bg: var(--color-brand-200);
+  --component-pause-button-time-bg-hover: var(--color-brand-600);
+  --component-pause-button-time-border: var(--color-brand-300);
 }
 
 @media (prefers-color-scheme: dark) {
   html {
-    --ui-color-layout: #202225;
-
-    --ui-color-gray-800: #f2f4f7;
-    --ui-color-gray-600: #b9bbbe;
-    --ui-color-gray-400: #88898c;
-    --ui-color-gray-300: #636468;
-    --ui-color-gray-200: #3f4146;
-    --ui-color-gray-100: #17191c;
-
-    --ui-color-primary-700: #33c7ff;
-    --ui-color-primary-500: #00aef0;
-    --ui-color-primary-300: #004f88;
-    --ui-color-primary-200: #00365c;
-    --ui-color-primary-100: #0a1e31;
-
-    --ui-color-success-700: #36b736;
-    --ui-color-success-500: #1b911b;
-    --ui-color-success-100: #056605;
-
-    --ui-color-warning-500: #ffbb00;
-    --ui-color-warning-200: #3c3523;
-    --ui-color-warning-100: #13151a;
-
-    --ui-color-danger-700: #e05c5e;
-    --ui-color-danger-500: #cd393c;
-    --ui-color-danger-300: #7f3d3d;
-    --ui-color-danger-100: #251314;
-
-    --ui-color-backdrop: var(--ui-color-gray-100);
-    --ui-color-scroll-shadow: rgba(0, 0, 0, 0.4);
-
-    --ui-shadow-header: 0px 1px 0px var(--ui-color-gray-200);
+    --background-brand-primary: var(--color-gray-900);
+    --background-brand-secondary: var(--color-brand-700);
+    --background-brand-solid: var(--color-brand-500);
+    --background-brand-strong: var(--color-brand-500);
+    --background-danger-primary: var(--color-gray-900);
+    --background-danger-secondary: var(--color-danger-700);
+    --background-danger-solid: var(--color-danger-500);
+    --background-primary: var(--color-gray-800);
+    --background-secondary: var(--color-gray-900);
+    --background-success-primary: var(--color-gray-900);
+    --background-success-secondary: var(--color-success-700);
+    --background-success-solid: var(--color-success-600);
+    --background-tertiary: var(--color-gray-900);
+    --background-warning-primary: var(--color-gray-900);
+    --background-warning-secondary: var(--color-warning-600);
+    --background-warning-solid: var(--color-warning-500);
+    --background-wtm-primary: var(--color-gray-900);
+    --background-wtm-secondary: var(--color-gray-900);
+    --background-wtm-solid: var(--color-wtm-500);
+    --background-wtm-strong: var(--color-wtm-500);
+    --border-brand-primary: var(--color-brand-600);
+    --border-brand-secondary: var(--color-brand-500);
+    --border-brand-solid: var(--color-brand-400);
+    --border-danger-primary: var(--color-danger-600);
+    --border-danger-solid: var(--color-danger-400);
+    --border-primary: var(--color-gray-600);
+    --border-secondary: var(--color-gray-500);
+    --border-success-primary: var(--color-success-600);
+    --border-success-solid: var(--color-success-400);
+    --border-tertiary: var(--color-gray-500);
+    --border-warning-primary: var(--color-warning-600);
+    --border-warning-solid: var(--color-warning-400);
+    --border-wtm-primary: var(--color-wtm-600);
+    --border-wtm-secondary: var(--color-wtm-500);
+    --border-wtm-solid: var(--color-wtm-400);
+    --color-brand-primary: var(--color-brand-500);
+    --color-brand-secondary: var(--color-brand-500);
+    --color-danger-primary: var(--color-danger-500);
+    --color-danger-secondary: var(--color-danger-500);
+    --color-onbrand: var(--color-base-white);
+    --color-onwtm: var(--color-base-white);
+    --color-primary: var(--color-base-white);
+    --color-quaternary: var(--color-gray-500);
+    --color-secondary: var(--color-gray-300);
+    --color-success-primary: var(--color-success-500);
+    --color-success-secondary: var(--color-success-500);
+    --color-tertiary: var(--color-gray-400);
+    --color-warning-primary: var(--color-warning-500);
+    --color-warning-secondary: var(--color-warning-500);
+    --color-wtm-primary: var(--color-wtm-500);
+    --color-wtm-secondary: var(--color-wtm-500);
+    --shadow-button: var(--color-alpha-black-20);
+    --shadow-card: var(--color-alpha-black-20);
+    --shadow-dialog: var(--color-alpha-black-50);
+    --shadow-dialog-mobile: var(--color-alpha-black-50);
+    --shadow-input: var(--color-alpha-black-20);
+    --component-chart-line-blocked: var(--color-danger-500);
+    --component-chart-line-modified: var(--color-brand-500);
+    --component-chart-line-observed: var(--color-wtm-500);
+    --component-custom-token-bg-backdrop: var(--color-gray-600);
+    --component-custom-token-bg-modal-overlay: var(--color-alpha-black-40);
+    --component-custom-token-bg-overlay: var(--color-alpha-black-80);
+    --component-custom-token-bg-scroll: var(--color-alpha-black-10);
+    --component-pause-button-bg: var(--color-brand-800);
+    --component-pause-button-fg: var(--color-brand-400);
+    --component-pause-button-overlay: var(--color-gray-900);
+    --component-pause-button-resume-bg: var(--color-danger-700);
+    --component-pause-button-resume-fg: var(--color-danger-100);
+    --component-pause-button-resume-overlay: var(--color-gray-900);
+    --component-pause-button-shadow: var(--color-gray-900);
+    --component-pause-button-time-bg: var(--color-brand-900);
+    --component-pause-button-time-bg-hover: var(--color-brand-800);
+    --component-pause-button-time-border: var(--color-brand-900);
   }
 }
 
 html {
   height: 100%;
-  background: var(--ui-color-layout);
+  background: var(--background-primary);
 }
 
 html,
@@ -133,7 +288,7 @@ body {
 
 body {
   width: 100%;
-  color: var(--ui-color-gray-800);
+  color: var(--color-primary);
   font-family:
     Inter,
     -apple-system,
@@ -142,7 +297,7 @@ body {
     Arial,
     Helvetica,
     sans-serif;
-  font-size: 13px;
+  font: var(--font-body-m);
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -154,4 +309,8 @@ input::-webkit-search-cancel-button {
   margin: 0;
   align-self: center;
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 4L4 12M4 4L12 12' stroke='%2349556e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+a {
+  outline-color: var(--border-brand-solid);
 }

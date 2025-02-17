@@ -27,8 +27,8 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-layout);
-      box-shadow: var(--ui-shadow-header);
+      background: var(--background-primary);
+      box-shadow: 0px 4px 16px var(--shadow-card);
     }
    `,
 };

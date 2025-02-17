@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  type: { value: 'danger', reflect: true },
+  type: { value: '', reflect: true },
   uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">
@@ -23,35 +23,23 @@ export default {
   `.css`
     :host {
       border-radius: 8px;
+      background: var(--background-secondary);
     }
 
-    ui-text {
-      color: inherit;
-    }
-
-    :host([type="danger"]) {
-      color: var(--ui-color-danger-700);
-      background: var(--ui-color-danger-100);
-    }
-
-    :host([type="primary"]) {
-      color: var(--ui-color-primary-700);
-      background: var(--ui-color-primary-100);
-    }
-
-    :host([type="info"]) {
-      color: var(--ui-color-gray-800);
-      background: var(--ui-color-gray-100);
+    :host([type="brand"]) {
+      background: var(--background-brand-secondary);
     }
 
     :host([type="success"]) {
-      color: var(--ui-color-success-700);
-      background: var(--ui-color-success-100);
+      background: var(--background-success-secondary);
     }
 
     :host([type="warning"]) {
-      color: var(--ui-color-warning-100);
-      background: var(--ui-color-warning-500);
+      background: var(--background-warning-secondary);
+    }
+
+    :host([type="danger"]) {
+      background: var(--background-danger-secondary);
     }
 
     :host([uppercase]) ui-text {

@@ -70,7 +70,7 @@ export default {
                   tabindex="1"
                 />
               </ui-input>
-              <ui-text type="body-s" color="gray-600">
+              <ui-text type="body-s" color="secondary">
                 ${blocked
                   ? msg`${tracker.name} will be trusted on this website. | A tracker will be trusted on this website.`
                   : msg`${tracker.name} will be blocked on this website. | A tracker will be trusted on this website.`}

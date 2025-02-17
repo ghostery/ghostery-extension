@@ -65,6 +65,7 @@ export default {
         margin: 0;
         padding: 0;
         text-align: left;
+        outline-color: var(--border-brand-solid);
       }
 
       ui-text {
@@ -72,59 +73,29 @@ export default {
         transition: color 0.2s;
       }
 
-      #button {
-        color: var(--ui-color-gray-300);
-      }
+      #button { color: var(--color-primary); }
 
       #toggle {
-        background: var(--ui-color-gray-300);
+        background: var(--color-quaternary);
         border-radius: 12px;
         transition: color 0.2s, background 0.2s;
       }
 
       #toggle span {
-        background: var(--ui-color-layout);
+        background: var(--background-primary);
         border-radius: 8px;
         transition: left 0.2s;
       }
 
-      :host([value]) #toggle {
-        background: var(--ui-color-gray-600);
-      }
+      :host([value]) #toggle { background: var(--color-primary); }
+      :host([value]) #toggle span { left: calc(100% - 20px); }
 
-      :host([value]) #button {
-        color: var(--ui-color-gray-600);
-      }
 
-      :host([value]) #toggle span {
-        left: calc(100% - 20px);
-      }
+      :host([disabled]) #button { color: var(--color-secondary); }
+      :host([disabled]) #toggle { background: var(--background-tertiary); }
+      :host([disabled]) #toggle span { background: var(--background-secondary); }
 
-      :host([no-label]) ui-text {
-        display: none;
-      }
-
-      :host([disabled]) #toggle {
-        background: var(--ui-color-gray-200);
-      }
-
-      :host([disabled]) #button {
-        color: var(--ui-color-gray-300);
-      }
-
-      @media (hover: hover) {
-        button:hover #button {
-          color: var(--ui-color-gray-400);
-        }
-
-        button:hover #toggle {
-          background: var(--ui-color-gray-400);
-        }
-
-        :host([value]) button:hover #toggle {
-          background: var(--ui-color-gray-800);
-        }
-      }
+      :host([no-label]) ui-text { display: none; }
     `,
     shadow: { delegateFocus: true },
   },

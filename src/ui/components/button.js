@@ -29,102 +29,79 @@ export default {
       display: block;
       box-sizing: border-box;
       height: 40px;
-      font: var(--ui-font-label-m);
+      font: var(--font-label-m);
       border-radius: 8px;
       white-space: nowrap;
       transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
-      box-shadow: 0px 2px 6px 0px rgba(32, 44, 68, 0.08);
+      color: var(--button-color);
+      border: 1px solid var(--button-border-color);
+      background: var(--button-background);
+      box-shadow: 0px 3px 8px 0px var(--shadow-button);
+      --button-color: var(--color-onbrand);
+      --button-border-color: var(--button-background);
     }
 
-    :host([hidden]) {
-      display: none;
-    }
+    :host([hidden]) { display: none; }
+    :host(:active) { opacity: 0.6; }
 
     :host([type="primary"]) {
-      color: white;
-      background: var(--ui-color-primary-500);
-      border: 1px solid var(--ui-color-primary-500);
+      --button-background: var(--background-brand-solid);
     }
 
     :host([type="success"]) {
-      color: white;
-      background: var(--ui-color-success-500);
-      border: 1px solid var(--ui-color-success-500);
+      --button-background: var(--background-success-solid);
     }
 
     :host([type="danger"]) {
-      color: white;
-      background: var(--ui-color-danger-500);
-      border: 1px solid var(--ui-color-danger-500);
-    }
-
-    :host([type="transparent"]) {
-      border: 1px solid transparent;
-      box-shadow: none;
+      --button-background: var(--background-danger-solid);
     }
 
     :host([type="outline"]) {
-      color: var(--ui-color-gray-700);
-      background: var(--ui-color-layout);
-      border: 1px solid var(--ui-color-gray-200);
+      --button-color: var(--color-primary);
+      --button-border-color: var(--border-secondary);
+      --button-background: var(--background-primary);
     }
 
     :host([type="outline-primary"]) {
-      color: var(--ui-color-primary-700);
-      background: var(--ui-color-layout);
-      border: 1px solid var(--ui-color-primary-700);
+      --button-color: var(--color-brand-primary);
+      --button-border-color: var(--border-brand-secondary);
+      --button-background: var(--background-primary);
+    }
+
+    :host([type="outline-success"]) {
+      --button-color: var(--color-success-primary);
+      --button-border-color: var(--border-success-primary);
+      --button-background: var(--background-primary);
     }
 
     :host([type="outline-danger"]) {
-      color: var(--ui-color-danger-500);
-      background: var(--ui-color-layout);
-      border: 1px solid var(--ui-color-danger-300);
+      --button-color: var(--color-danger-primary);
+      --button-border-color: var(--border-danger-primary);
+      --button-background: var(--background-primary);
     }
 
-    :host(:active) {
-      opacity: 0.6;
+    :host([type="transparent"]),
+    :host([type="transparent"][disabled]) {
+      box-shadow: none;
+      --button-color: var(--color-primary);
+      --button-background: transparent;
+      --button-border-color: transparent;
     }
 
     :host([disabled]) {
-      background: var(--ui-color-gray-200);
-      color: var(--ui-color-gray-400);
-      border-color: var(--ui-color-gray-200);
+      --button-color: var(--color-quaternary);
+      --button-background: var(--background-tertiary);
       pointer-events: none;
     }
 
-    :host([disabled][type="transparent"]) {
-      background: none;
-      border-color: transparent;
-    }
-
     @media (hover: hover) {
-      :host([type="primary"]:hover) {
-        background: var(--ui-color-primary-700);
-      }
-
-      :host([type="success"]:hover) {
-        background: var(--ui-color-success-700);
-      }
-
-      :host([type="danger"]:hover) {
-        background: var(--ui-color-danger-700);
-      }
-
-      :host([type="transparent"]:hover) {
-        text-decoration: underline;
-      }
-
-      :host([type="outline"]:hover) {
-        border-color: var(--ui-color-gray-300);
-      }
-
-      :host([type="outline-primary"]:hover) {
-        background: var(--ui-color-primary-100);
-      }
-
-      :host([type="outline-danger"]:hover) {
-        border-color: var(--ui-color-danger-500);
-      }
+      :host([type="primary"]:active) { --button-background: var(--background-brand-strong); }
+      :host([type="outline"]:hover) { --button-background: var(--background-secondary); }
+      :host([type="outline"]:active) { --button-background: var(--background-tertiary); }
+      :host([type="outline-primary"]:hover) { --button-background: var(--background-brand-primary); }
+      :host([type="outline-primary"]:active) { --button-background: var(--background-brand-secondary); }
+      :host([type="outline-danger"]:hover) { --button-background: var(--background-danger-primary); }
+      :host([type="outline-danger"]:active) { --button-border: var(--border-danger-primary); --button-background: var(--background-primary); }
     }
 
     ::slotted(*) {
@@ -151,7 +128,8 @@ export default {
     }
 
     ::slotted(*:focus-visible) {
-      outline: 2px solid var(--ui-color-primary-700);
+      outline: 2px solid var(--border-brand-solid);
+      outline-offset: 3px;
     }
   `,
 };

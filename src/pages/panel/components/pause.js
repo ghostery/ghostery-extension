@@ -134,7 +134,7 @@ export default {
               >
                 <ui-text type="label-m">${label}</ui-text>
                 ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
-                <ui-text type="body-s" color="gray-600" layout="area:2">
+                <ui-text type="body-s" color="secondary" layout="area:2">
                   ${description}
                 </ui-text>
               </button>
@@ -145,7 +145,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-primary-200);
+      background: var(--component-pause-button-overlay);
     }
 
     button {
@@ -153,8 +153,7 @@ export default {
       appearance: none;
       border: none;
       text-align: left;
-      color: var(--ui-color-gray-800);
-      background: var(--ui-color-layout);
+      background: none;
     }
 
     #main {
@@ -163,7 +162,8 @@ export default {
       box-sizing: border-box;
       padding: 4px;
       white-space: nowrap;
-      color: var(--ui-color-primary-700);
+      color: var(--component-pause-button-fg);
+      background: var(--component-pause-button-bg);
       transition: background 0.2s, opacity 0.2s;
     }
 
@@ -173,9 +173,9 @@ export default {
 
     #type {
       box-sizing: border-box;
-      background: var(--ui-color-primary-100);
+      background: var(--component-pause-button-time-bg);
+      border: 1px solid var(--component-pause-button-time-border);
       border-radius: 8px;
-      border: 1px solid var(--ui-color-primary-300);
       padding: 8px 8px 8px 12px;
       white-space: nowrap;
       transition: width 0.2s;
@@ -190,8 +190,8 @@ export default {
     }
 
     #type-list {
-      background: var(--ui-color-layout);
-      box-shadow: 0px 4px 12px rgba(0, 105, 210, 0.4);
+      background: var(--background-primary);
+      box-shadow: 0px 4px 12px var(--component-pause-button-shadow);
       border-radius: 12px;
     }
 
@@ -212,18 +212,18 @@ export default {
     /* Website paused */
 
     :host([paused]) {
-      background: var(--ui-color-warning-200);
+      background: var(--component-pause-button-resume-overlay);
     }
 
     :host([paused]) #main {
       box-shadow: none;
-      background: var(--ui-color-warning-500);
-      color: var(--ui-color-warning-100);
+      background: var(--component-pause-button-resume-bg);
+      color: var(--component-pause-button-resume-fg);
     }
 
     :host([paused]) #type {
-      background: var(--ui-color-layout);
-      color: var(--ui-color-gray-800);
+      background: var(--background-primary);
+      color: var(--color-primary);
       border: none;
       pointer-events: all;
       overflow: hidden;
@@ -231,8 +231,9 @@ export default {
 
     /* Global pause */
 
+    /*
     :host([global]) {
-      background: var(--ui-color-danger-100);
+      background: var(--background-danger-primary);
     }
 
     :host([global]) #main {
@@ -244,22 +245,11 @@ export default {
     :host([global]) #type {
       color: var(--ui-color-danger-500);
     }
+    */
 
     @media (hover: hover) {
-      :host(:not([paused])) #main:hover {
-        background: var(--ui-color-primary-500);
-      }
-
-      :host(:not([paused])) #main:hover #label {
-        color: white;
-      }
-
-      :host(:not([paused])) #main:hover #type {
-        border: none;
-      }
-
       :host(:not([paused])) #type:hover {
-        background: var(--ui-color-primary-700);
+        background: var(--component-pause-button-time-bg-hover);
         color: white;
       }
 
@@ -273,51 +263,12 @@ export default {
       }
 
       #type-list button:hover {
-        background: var(--ui-color-primary-100);
+        background: var(--component-pause-button-overlay);
       }
 
       #type-list button:hover ui-text,
       #type-list button:hover ui-icon {
-        color: var(--ui-color-primary-700);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :host {
-        background: var(--ui-color-gray-100);
-      }
-
-      #main {
-        background: var(--ui-color-primary-200);
-      }
-
-      #type {
-        border: none;
-        background: var(--ui-color-primary-100);
-      }
-
-      #type-list {
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-      }
-
-      :host([global]) #label,
-      :host([global]) #type {
-        color: var(--ui-color-gray-800);
-      }
-    }
-
-    @media (prefers-color-scheme: dark) and (hover: hover) {
-      :host(:not([paused])) #main:hover {
-        background: var(--ui-color-primary-300);
-      }
-
-      :host(:not([paused])) #main:hover #label {
-        color: var(--ui-color-primary-700);
-      }
-
-      :host(:not([paused])) #type:hover {
-        background: var(--ui-color-primary-200);
-        color: var(--ui-color-primary-700);
+        color: var(--component-pause-button-fg);
       }
     }
   `,

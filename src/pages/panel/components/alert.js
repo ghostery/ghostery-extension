@@ -82,23 +82,23 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-gray-100);
-      border: 1px solid var(--ui-color-gray-200);
+      background: var(--background-primary);
+      border: 1px solid var(--border-primary);
       box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.15);
       border-radius: 30px;
     }
 
     :host([type="success"]) {
-      background: #E1F5E1;
-      border-color: #94DD94;
-      color: var(--ui-color-success-500);
+      background: var(--background-success-primary);
+      border-color: var(--border-success-primary);
+      color: var(--color-success-primary);
       box-shadow: 1px 2px 7px rgba(0, 121, 0, 0.15);
     }
 
     :host([type="info"]) {
-      background: var(--ui-color-primary-200);
-      border-color: var(--ui-color-primary-300);
-      color: var(--ui-color-primary-700);
+      background: var(--background-brand-primary);
+      border-color: var(--border-brand-primary);
+      color: var(--color-brand-primary);
       box-shadow: 1px 2px 7px rgba(0, 71, 121, 0.15);
     }
 

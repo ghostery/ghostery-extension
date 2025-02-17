@@ -101,14 +101,14 @@ export default {
           <section layout="column gap:4" layout@768px="gap:5">
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-m"> Tracker Database </ui-text>
-              <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+              <ui-text type="body-l" mobile-type="body-m" color="secondary">
                 Mind that not all listed activities are trackers, that is not
                 all of them collect personal data.
               </ui-text>
               <ui-text
                 type="label-m"
                 mobile-type="body-m"
-                color="primary-700"
+                color="brand-primary"
                 underline
               >
                 <a
@@ -126,7 +126,7 @@ export default {
               </ui-text>
             </div>
             <div layout="row:wrap gap items:center">
-              <settings-button
+              <ui-button
                 layout="width::12 grow"
                 layout@768px="grow:0"
                 onclick="${html.set(
@@ -134,8 +134,10 @@ export default {
                   category !== '_all' ? '_all' : '',
                 )}"
               >
-                ${category !== '_all' ? msg`Expand` : msg`Collapse`}
-              </settings-button>
+                <button>
+                  ${category !== '_all' ? msg`Expand` : msg`Collapse`}
+                </button>
+              </ui-button>
               <ui-input layout="grow" layout@768px="grow:0">
                 <select value="${filter}" onchange="${html.set('filter')}">
                   <option selected value="">Show all</option>
@@ -209,7 +211,7 @@ export default {
                                       </ui-text>
                                       ${tracker.organization &&
                                       html`
-                                        <ui-text color="gray-600">
+                                        <ui-text color="secondary">
                                           ${tracker.organization.name}
                                         </ui-text>
                                       `}
@@ -218,7 +220,7 @@ export default {
                                   <div layout="row items:center gap">
                                     ${tracker.adjusted &&
                                     html`
-                                      <ui-text type="label-s" color="gray-600">
+                                      <ui-text type="label-s" color="secondary">
                                         <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                       </ui-text>
                                     `}
@@ -238,9 +240,9 @@ export default {
                         ${(limits[key] || PATTERNS_LIMIT) < trackers.length &&
                         html`
                           <div layout="row center margin:bottom:2">
-                            <settings-button onclick="${loadMore(key)}">
-                              Load more
-                            </settings-button>
+                            <ui-button onclick="${loadMore(key)}">
+                              <button>Load more</button>
+                            </ui-button>
                           </div>
                         `}
                       `}

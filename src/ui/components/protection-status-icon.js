@@ -29,13 +29,13 @@ export default {
         <div layout="relative">
           <ui-icon
             name="${status.type}-m"
-            color="${adjusted ? 'gray-600' : 'gray-300'}"
+            color="${adjusted ? 'secondary' : 'quaternary'}"
           ></ui-icon>
           ${status.website &&
           html`
             <ui-icon
               name="error"
-              color="gray-600"
+              color="secondary"
               layout="absolute right:-4px bottom:-4px"
             ></ui-icon>
           `}

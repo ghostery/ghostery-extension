@@ -22,7 +22,7 @@ export default {
         <ui-icon
           name="extension-${browser}"
           layout="size:3"
-          color="success-500"
+          color="success-600"
         ></ui-icon>
       </div>
       <ui-text type="display-xs"><slot></slot></ui-text>
@@ -35,8 +35,8 @@ export default {
     }
 
     :host {
-      background: var(--ui-color-success-500);
-      box-shadow: 15px 30px 80px rgba(0, 0, 0, 0.15);
+      background: var(--color-success-600);
+      box-shadow: 15px 30px 80px var(--shadow-card);
       border-radius: 8px;
       animation: shake 1s ease-in-out infinite;
       color: white;
@@ -47,7 +47,7 @@ export default {
     }
 
     #arrow {
-      background: var(--ui-color-success-500);
+      background: var(--color-success-600);
       transform: rotate(45deg) translateY(-50%);
     }
 
