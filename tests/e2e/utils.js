@@ -118,33 +118,3 @@ export async function switchToPanel(fn) {
   if (error) throw error;
   return result;
 }
-
-export async function switchToNewTabContext(anchor, fn) {
-  const url = await browser.getUrl();
-  let error = null;
-
-  try {
-    const href = await anchor.getProperty('href');
-    if (!href) throw new Error('Anchor does not have an href');
-
-    await anchor.click();
-
-    await browser.waitUntil(() =>
-      browser.switchWindow(href).then(
-        () => true,
-        () => false,
-      ),
-    );
-
-    await fn();
-  } catch (e) {
-    error = e;
-  }
-
-  if ((await browser.getUrl()) !== url) {
-    await browser.closeWindow();
-  }
-  await browser.switchWindow(url);
-
-  if (error) throw error;
-}

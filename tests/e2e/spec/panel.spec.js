@@ -8,12 +8,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { expect, $ } from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 import {
   enableExtension,
   getExtensionElement,
   switchToPanel,
-  switchToNewTabContext,
 } from '../utils.js';
 
 describe('Panel', function () {
@@ -22,14 +21,16 @@ describe('Panel', function () {
   it('opens licenses page', async function () {
     await switchToPanel(async () => {
       await getExtensionElement('button:menu').click();
+      const url =
+        await getExtensionElement('button:licenses').getProperty('href');
 
-      await switchToNewTabContext(
-        await getExtensionElement('button:licenses'),
-        async function () {
-          const bodyText = await $('body').getText();
-          await expect(bodyText.includes('MIT')).toBe(true);
-        },
-      );
+      const currentUrl = await browser.getUrl();
+      await browser.url(url);
+
+      const bodyText = await $('body').getText();
+      await expect(bodyText.includes('MIT')).toBe(true);
+
+      await browser.url(currentUrl);
     });
   });
 });
