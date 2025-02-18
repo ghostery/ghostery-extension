@@ -145,7 +145,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--component-pause-button-overlay);
+      background: var(--color-brand-200);
     }
 
     button {
@@ -162,8 +162,8 @@ export default {
       box-sizing: border-box;
       padding: 4px;
       white-space: nowrap;
-      color: var(--component-pause-button-fg);
-      background: var(--component-pause-button-bg);
+      color: var(--color-brand-600);
+      background: var(--color-base-white);
       transition: background 0.2s, opacity 0.2s;
     }
 
@@ -173,8 +173,8 @@ export default {
 
     #type {
       box-sizing: border-box;
-      background: var(--component-pause-button-time-bg);
-      border: 1px solid var(--component-pause-button-time-border);
+      background: var(--color-brand-200);
+      border: 1px solid var(--color-brand-300);
       border-radius: 8px;
       padding: 8px 8px 8px 12px;
       white-space: nowrap;
@@ -191,7 +191,7 @@ export default {
 
     #type-list {
       background: var(--background-primary);
-      box-shadow: 0px 4px 12px var(--component-pause-button-shadow);
+      box-shadow: 0px 4px 12px var(--shadow-card);
       border-radius: 12px;
     }
 
@@ -212,17 +212,17 @@ export default {
     /* Website paused */
 
     :host([paused]) {
-      background: var(--component-pause-button-resume-overlay);
+      background: var(--color-warning-100);
     }
 
     :host([paused]) #main {
       box-shadow: none;
-      background: var(--component-pause-button-resume-bg);
-      color: var(--component-pause-button-resume-fg);
+      background: var(--color-warning-400);
+      color: var(--color-gray-800);
     }
 
     :host([paused]) #type {
-      background: var(--background-primary);
+      background: var(--color-base-white);
       color: var(--color-primary);
       border: none;
       pointer-events: all;
@@ -231,26 +231,21 @@ export default {
 
     /* Global pause */
 
-    /*
     :host([global]) {
-      background: var(--background-danger-primary);
+      background: var(--color-danger-100);
     }
 
     :host([global]) #main {
-      box-shadow: 0px 2px 8px rgba(210, 138, 0, 0.2);
-      background: var(--ui-color-danger-500);
-      color: white;
+      box-shadow: none;
+      background: var(--color-danger-700);
+      color: var(--color-base-white);
     }
-
-    :host([global]) #type {
-      color: var(--ui-color-danger-500);
-    }
-    */
 
     @media (hover: hover) {
       :host(:not([paused])) #type:hover {
-        background: var(--component-pause-button-time-bg-hover);
-        color: white;
+        border-color: var(--color-brand-600);
+        background: var(--color-brand-600);
+        color: var(--color-base-white);
       }
 
       :host([paused]) #main:hover:has(#type:hover) #label, :host([paused]) #main:focus-visible #label {
@@ -263,12 +258,50 @@ export default {
       }
 
       #type-list button:hover {
-        background: var(--component-pause-button-overlay);
+        background: var(--background-brand-primary);
       }
 
       #type-list button:hover ui-text,
       #type-list button:hover ui-icon {
-        color: var(--component-pause-button-fg);
+        color: var(--color-brand-primary);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host, :host([paused]) {
+        background: var(--color-gray-900);
+      }
+
+      #main {
+        background: var(--color-brand-800);
+        color: var(--color-brand-400);
+        shadow: 0px 2px 8px var(--color-gray-900);
+      }
+
+      #type {
+        background: var(--color-brand-900);
+        color: var(--color-brand-400);
+        border: none;
+      }
+
+      #type-list {
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      :host([paused]) #type {
+        background: var(--color-warning-500);
+        color: var(--color-gray-800);
+      }
+
+      :host([global]) #type {
+        background: var(--color-danger-800);
+        color: var(--color-base-white);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) and (hover: hover) {
+      :host(:not([paused])) #type:hover {
+        background: var(--color-brand-700);
       }
     }
   `,

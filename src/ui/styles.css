@@ -185,16 +185,6 @@ html {
   --component-custom-token-bg-modal-overlay: var(--color-alpha-black-20);
   --component-custom-token-bg-overlay: var(--color-alpha-black-80);
   --component-custom-token-bg-scroll: var(--color-alpha-black-40);
-  --component-pause-button-bg: var(--color-base-white);
-  --component-pause-button-fg: var(--color-brand-600);
-  --component-pause-button-overlay: var(--color-brand-200);
-  --component-pause-button-resume-bg: var(--color-danger-700);
-  --component-pause-button-resume-fg: var(--color-danger-100);
-  --component-pause-button-resume-overlay: var(--color-danger-100);
-  --component-pause-button-shadow: #0069d233;
-  --component-pause-button-time-bg: var(--color-brand-200);
-  --component-pause-button-time-bg-hover: var(--color-brand-600);
-  --component-pause-button-time-border: var(--color-brand-300);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -262,16 +252,6 @@ html {
     --component-custom-token-bg-modal-overlay: var(--color-alpha-black-40);
     --component-custom-token-bg-overlay: var(--color-alpha-black-80);
     --component-custom-token-bg-scroll: var(--color-alpha-black-10);
-    --component-pause-button-bg: var(--color-brand-800);
-    --component-pause-button-fg: var(--color-brand-400);
-    --component-pause-button-overlay: var(--color-gray-900);
-    --component-pause-button-resume-bg: var(--color-danger-700);
-    --component-pause-button-resume-fg: var(--color-danger-100);
-    --component-pause-button-resume-overlay: var(--color-gray-900);
-    --component-pause-button-shadow: var(--color-gray-900);
-    --component-pause-button-time-bg: var(--color-brand-900);
-    --component-pause-button-time-bg-hover: var(--color-brand-800);
-    --component-pause-button-time-border: var(--color-brand-900);
   }
 }
 
