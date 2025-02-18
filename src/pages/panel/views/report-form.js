@@ -119,7 +119,7 @@ export default {
                 style="resize: vertical"
                 oninput="${html.set(form, 'description')}"
                 maxlength="4000"
-                layout="::ui:font:body-s"
+                layout="::font:body-s"
                 required
               ></textarea>
             </ui-input>
@@ -128,7 +128,7 @@ export default {
                 type="email"
                 name="email"
                 placeholder="${msg`Enter email address`}"
-                layout="::ui:font:body-s"
+                layout="::font:body-s"
                 value="${form.email}"
                 oninput="${html.set(form, 'email')}"
               />
