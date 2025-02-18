@@ -217,7 +217,7 @@ export default {
 
     :host([paused]) #main {
       box-shadow: none;
-      background: var(--color-warning-400);
+      background: #ffbb00;
       color: var(--color-gray-800);
     }
 
@@ -289,8 +289,8 @@ export default {
       }
 
       :host([paused]) #type {
-        background: var(--color-warning-500);
-        color: var(--color-gray-800);
+        background: var(--background-primary);
+        color: var(--color-base-white);
       }
 
       :host([global]) #type {
