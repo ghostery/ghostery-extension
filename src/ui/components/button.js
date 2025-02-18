@@ -70,13 +70,13 @@ export default {
 
     :host([type="outline-success"]) {
       --button-color: var(--color-success-primary);
-      --button-border-color: var(--border-success-primary);
+      --button-border-color: var(--border-success-secondary);
       --button-background: var(--background-primary);
     }
 
     :host([type="outline-danger"]) {
       --button-color: var(--color-danger-primary);
-      --button-border-color: var(--border-danger-primary);
+      --button-border-color: var(--border-danger-secondary);
       --button-background: var(--background-primary);
     }
 
