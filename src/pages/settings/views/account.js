@@ -75,19 +75,19 @@ export default {
             (session.user
               ? html`
                   <div layout="column gap:0.5 margin:bottom:2">
-                    <ui-text type="label-m" color="secondary"
-                      >You are signed in as:</ui-text
-                    >
+                    <ui-text type="label-m" color="secondary">
+                      You are signed in as:
+                    </ui-text>
                     <div layout="row items:center gap:2">
-                      <ui-text type="headline-s"> ${session.name} </ui-text>
+                      <ui-text type="headline-s">${session.name}</ui-text>
                       ${session.contributor &&
                       html`<settings-badge type="brand" uppercase>
                         Contributor
                       </settings-badge>`}
                     </div>
-                    <ui-text type="body-m" color="secondary"
-                      >${session.email}</ui-text
-                    >
+                    <ui-text type="body-m" color="secondary">
+                      ${session.email}
+                    </ui-text>
                   </div>
                   <div layout="row gap">
                     <ui-button>
