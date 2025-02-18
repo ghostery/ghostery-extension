@@ -98,8 +98,7 @@ export default {
 
 
       :host([disabled]) #button { color: var(--color-secondary); }
-      :host([disabled]) #toggle { background: var(--background-tertiary); }
-      :host([disabled]) #toggle span { background: var(--background-secondary); }
+      :host([disabled]) #toggle { background: var(--color-quaternary); opacity: 0.5; }
 
       :host([no-label]) ui-text { display: none; }
     `,
