@@ -25,6 +25,12 @@ export default {
       text-decoration: none;
     }
 
+    ::slotted(*:focus-visible) {
+      outline: 2px solid var(--border-brand-solid);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
     ::slotted(*:focus:not(:focus-visible)) {
       outline: none;
     }

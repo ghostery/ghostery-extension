@@ -61,11 +61,16 @@ export default {
         background: none;
         appearance: none;
         border: none;
+        border-radius: 8px;
         -webkit-tap-highlight-color: transparent;
         margin: 0;
         padding: 0;
         text-align: left;
-        outline-color: var(--border-brand-solid);
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--border-brand-solid);
+        outline-offset: 2px;
       }
 
       ui-text {
@@ -85,6 +90,7 @@ export default {
         background: var(--background-primary);
         border-radius: 8px;
         transition: left 0.2s;
+        box-shadow: 0px 1px 3px 0px rgba(10, 13, 18, 0.10), 0px 1px 2px -1px rgba(10, 13, 18, 0.10);
       }
 
       :host([value]) #toggle { background: var(--color-primary); }
