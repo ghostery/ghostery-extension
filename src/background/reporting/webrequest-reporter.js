@@ -13,7 +13,7 @@ import { RequestReporter } from '@whotracksme/reporting/reporting';
 import { store } from 'hybrids';
 
 import getBrowserInfo from '/utils/browser-info.js';
-import { isPaused } from '/store/options.js';
+import { getPausedDetails } from '/store/options.js';
 import Request from '/utils/request.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import Config, {
@@ -48,7 +48,7 @@ if (__PLATFORM__ !== 'safari') {
       const hostname = state.tabUrlParts.hostname;
       return (
         !options.blockTrackers ||
-        !!isPaused(options, hostname) ||
+        !!getPausedDetails(options, hostname) ||
         remoteConfig?.hasAction(
           hostname,
           ACTION_DISABLE_ANTITRACKING_MODIFICATION,

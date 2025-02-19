@@ -16,7 +16,7 @@ import Config, {
   ACTION_PAUSE_ASSISTANT,
   FLAG_PAUSE_ASSISTANT,
 } from '/store/config.js';
-import Options, { isPaused } from '/store/options.js';
+import Options, { getPausedDetails } from '/store/options.js';
 
 import { openNotification } from './notifications.js';
 
@@ -30,7 +30,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (!hostname) return;
 
     const options = await store.resolve(Options);
-    const paused = isPaused(options, hostname);
+    const paused = getPausedDetails(options, hostname);
     const hasAction = config.hasAction(hostname, ACTION_PAUSE_ASSISTANT);
 
     if (!paused) {
@@ -38,7 +38,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
         // The site is not paused, but the domain with an action is in the config
         openNotification(details.tabId, 'pause-assistant', { hostname });
       }
-    } else if (!hasAction && paused !== true && paused.assist) {
+    } else if (!hasAction && paused.assist) {
       // the site is paused with the assistant, but the domain is not in the config
       openNotification(details.tabId, 'pause-resume', { hostname });
     }

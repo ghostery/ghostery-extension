@@ -15,7 +15,7 @@ import { getOffscreenImageData } from '/ui/wheel.js';
 import { order } from '/ui/categories.js';
 
 import DailyStats from '/store/daily-stats.js';
-import Options, { isPaused } from '/store/options.js';
+import Options, { getPausedDetails } from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -79,7 +79,8 @@ async function refreshIcon(tabId) {
   const stats = tabStats.get(tabId);
   if (!stats) return;
 
-  const inactive = !options.terms || !!isPaused(options, stats.hostname);
+  const inactive =
+    !options.terms || !!getPausedDetails(options, stats.hostname);
 
   const data = {};
   if (options.trackerWheel && stats.trackers.length > 0) {

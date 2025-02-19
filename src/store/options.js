@@ -246,13 +246,16 @@ async function manage(options) {
   return options;
 }
 
-export function isPaused(options, hostname = '') {
-  if (options.paused[GLOBAL_PAUSE_ID]) return true;
-  if (!hostname) return false;
+export function getPausedDetails(options, hostname = '') {
+  if (options.paused[GLOBAL_PAUSE_ID]) {
+    return options.paused[GLOBAL_PAUSE_ID];
+  }
 
-  const id = Object.keys(options.paused).find((domain) =>
+  if (!hostname) return null;
+
+  const pausedHostname = Object.keys(options.paused).find((domain) =>
     hostname.endsWith(domain),
   );
 
-  return id ? options.paused[id] : false;
+  return pausedHostname ? options.paused[pausedHostname] : null;
 }
