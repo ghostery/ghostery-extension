@@ -60,7 +60,7 @@ export default {
       <settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
           <div layout="column gap" layout@992px="margin:bottom">
-            <ui-text type="headline-m">My Account</ui-text>
+            <ui-text type="headline-m">My Ghostery</ui-text>
           </div>
           <settings-card>
             <img
@@ -79,7 +79,7 @@ export default {
                       You are signed in as:
                     </ui-text>
                     <div layout="row items:center gap:2">
-                      <ui-text type="headline-s">${session.name}</ui-text>
+                      <ui-text type="headline-m">${session.name}</ui-text>
                       ${session.contributor &&
                       html`<settings-badge type="brand" uppercase>
                         Contributor
@@ -90,9 +90,10 @@ export default {
                     </ui-text>
                   </div>
                   <div layout="row gap">
-                    <ui-button>
+                    <ui-button type="primary">
                       <a href="${ACCOUNT_PAGE_URL}" onclick="${openTabWithUrl}">
-                        Account details <ui-icon name="arrow-right-s"></ui-icon>
+                        Account details
+                        <ui-icon name="arrow-right-s"></ui-icon>
                       </a>
                     </ui-button>
                   </div>
@@ -118,32 +119,45 @@ export default {
                       <button
                         onclick="${openGhosteryPage(CREATE_ACCOUNT_PAGE_URL)}"
                       >
-                        Create Account <ui-icon name="arrow-right-s"></ui-icon>
+                        Create Account
+                        <ui-icon name="arrow-right-s"></ui-icon>
                       </button>
                     </ui-button>
                   </div>
                 `)}
           </settings-card>
-          <div layout="grid">
+          <div layout="column gap:4">
             <ui-toggle
               value="${options.sync}"
               onchange="${html.set(options, 'sync')}"
             >
               <div layout="column grow gap:0.5">
-                <div layout="row gap items:center">
-                  <ui-icon
-                    name="websites"
-                    color="secondary"
-                    layout="size:2"
-                  ></ui-icon>
-                  <ui-text type="headline-xs">Settings Sync</ui-text>
-                </div>
+                <ui-text type="headline-xs">Settings Sync</ui-text>
                 <ui-text type="body-m" mobile-type="body-s" color="secondary">
                   Saves and synchronizes your custom settings between browsers
                   and devices.
                 </ui-text>
               </div>
             </ui-toggle>
+
+            <div layout="row gap:2">
+              <div layout="column grow gap:0.5">
+                <ui-text type="headline-xs">Theme</ui-text>
+                <ui-text type="body-m" mobile-type="body-s" color="secondary">
+                  Changes application color theme.
+                </ui-text>
+              </div>
+              <ui-input>
+                <select
+                  value="${options.theme}"
+                  onchange="${html.set(options, 'theme')}"
+                >
+                  <option value="">Default</option>
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </ui-input>
+            </div>
           </div>
         </section>
       </settings-page-layout>

@@ -32,6 +32,7 @@ export const SYNC_OPTIONS = [
   'wtmSerpReport',
   'serpTrackingPrevention',
   'panel',
+  'theme',
 ];
 
 export const ENGINES = [
@@ -82,8 +83,9 @@ const Options = {
   },
   installDate: '',
 
-  // Panel
+  // UI
   panel: { statsType: 'graph' },
+  theme: '',
 
   // Pause
   paused: store.record({ revokeAt: 0 }),

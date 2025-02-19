@@ -10,6 +10,7 @@
  */
 
 import { dispatch, html, msg } from 'hybrids';
+import { themeToggle } from '/ui/theme.js';
 
 const PAUSE_TYPES = [
   {
@@ -69,81 +70,84 @@ export default {
   revokeAt: 0,
   pauseType: 1,
   pauseList: false,
-  render: ({ paused, pauseType, pauseList, revokeAt }) => html`
-    <template layout="grid relative">
-      <button
-        id="main"
-        class="${{ active: pauseList }}"
-        layout="row center margin:1.5 height:6"
-        layout@390px="height:7"
-        onclick="${!pauseList && dispatchAction}"
-        data-qa="button:pause"
-      >
-        <div id="label" layout="grow row center gap shrink overflow">
-          <ui-icon name="pause"></ui-icon>
-          <div layout="column">
-            <ui-text type="label-m" color="inherit">
-              ${paused ? msg`Ghostery is paused` : msg`Pause on this site`}
-            </ui-text>
-            ${!!revokeAt &&
-            html`<ui-text type="body-xs" color="inherit">
-              <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
-            </ui-text>`}
+  render: ({ paused, pauseType, pauseList, revokeAt }) =>
+    html`
+      <template layout="grid relative">
+        <button
+          id="main"
+          class="${{ active: pauseList }}"
+          layout="row center margin:1.5 height:6"
+          layout@390px="height:7"
+          onclick="${!pauseList && dispatchAction}"
+          data-qa="button:pause"
+        >
+          <div id="label" layout="grow row center gap shrink overflow">
+            <ui-icon name="pause"></ui-icon>
+            <div layout="column">
+              <ui-text type="label-m" color="inherit">
+                ${paused ? msg`Ghostery is paused` : msg`Pause on this site`}
+              </ui-text>
+              ${!!revokeAt &&
+              html`<ui-text type="body-xs" color="inherit">
+                <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
+              </ui-text>`}
+            </div>
           </div>
-        </div>
-        <div
-          id="type"
-          role="button"
-          tabindex="${paused ? '-1' : '0'}"
-          layout="row center self:stretch width:14"
-          onclick="${!paused && !pauseList && openPauseList}"
-          onkeypress=${!paused && !pauseList && simulateClickOnEnter}
-        >
-          ${paused
-            ? html`
-                <ui-icon name="refresh"></ui-icon>
-                <ui-text
-                  type="label-m"
-                  layout="margin:left:0.5"
-                  color="inherit"
+          <div
+            id="type"
+            role="button"
+            tabindex="${paused ? '-1' : '0'}"
+            layout="row center self:stretch width:14"
+            onclick="${!paused && !pauseList && openPauseList}"
+            onkeypress=${!paused && !pauseList && simulateClickOnEnter}
+          >
+            ${paused
+              ? html`
+                  <ui-icon name="refresh"></ui-icon>
+                  <ui-text
+                    type="label-m"
+                    layout="margin:left:0.5"
+                    color="inherit"
+                  >
+                    Undo
+                  </ui-text>
+                `
+              : html`
+                  <ui-text type="label-m" layout="grow" color="inherit">
+                    ${PAUSE_TYPES.find(({ value }) => value === pauseType)
+                      .label}
+                  </ui-text>
+                  <ui-icon name="arrow-down"></ui-icon>
+                `}
+          </div>
+        </button>
+        <slot></slot>
+        ${pauseList &&
+        html`
+          <section
+            id="type-list"
+            layout="column absolute layer:102 top:full left:2 right:2 margin:top:-20px"
+          >
+            ${PAUSE_TYPES.map(
+              ({ value, label, description }) => html`
+                <button
+                  class="${{ active: pauseType === value }}"
+                  onclick="${dispatchTypeAction(value)}"
+                  layout.active="grid:1|max:auto"
                 >
-                  Undo
-                </ui-text>
-              `
-            : html`
-                <ui-text type="label-m" layout="grow" color="inherit">
-                  ${PAUSE_TYPES.find(({ value }) => value === pauseType).label}
-                </ui-text>
-                <ui-icon name="arrow-down"></ui-icon>
-              `}
-        </div>
-      </button>
-      <slot></slot>
-      ${pauseList &&
-      html`
-        <section
-          id="type-list"
-          layout="column absolute layer:102 top:full left:2 right:2 margin:top:-20px"
-        >
-          ${PAUSE_TYPES.map(
-            ({ value, label, description }) => html`
-              <button
-                class="${{ active: pauseType === value }}"
-                onclick="${dispatchTypeAction(value)}"
-                layout.active="grid:1|max:auto"
-              >
-                <ui-text type="label-m">${label}</ui-text>
-                ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
-                <ui-text type="body-s" color="secondary" layout="area:2">
-                  ${description}
-                </ui-text>
-              </button>
-            `,
-          )}
-        </section>
-      `}
-    </template>
-  `.css`
+                  <ui-text type="label-m">${label}</ui-text>
+                  ${pauseType === value &&
+                  html`<ui-icon name="check"></ui-icon>`}
+                  <ui-text type="body-s" color="secondary" layout="area:2">
+                    ${description}
+                  </ui-text>
+                </button>
+              `,
+            )}
+          </section>
+        `}
+      </template>
+    `.css`
     :host {
       background: var(--color-brand-200);
     }
@@ -304,5 +308,5 @@ export default {
         background: var(--color-brand-700);
       }
     }
-  `,
+  `.use(themeToggle),
 };
