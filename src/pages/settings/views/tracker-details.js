@@ -70,7 +70,7 @@ export default {
                       name="${tracker.category}"
                       layout="size:3 padding:0.5"
                     ></ui-category-icon>
-                    <ui-text type="body-l" color="gray-600">
+                    <ui-text type="body-l" color="secondary">
                       ${labels.categories[tracker.category]}
                     </ui-text>
                   </div>
@@ -81,7 +81,7 @@ export default {
                         name="organization"
                         layout="size:3 padding:0.5"
                       ></ui-category-icon>
-                      <ui-text type="body-l" color="gray-600">
+                      <ui-text type="body-l" color="secondary">
                         ${tracker.organization.name}
                       </ui-text>
                     </div>
@@ -93,7 +93,7 @@ export default {
                   <div layout="row gap:2 items:start self:stretch">
                     <div layout="column gap:0.5 grow">
                       <ui-text type="label-l">Protection status</ui-text>
-                      <ui-text type="body-m" color="gray-600">
+                      <ui-text type="body-m" color="secondary">
                         Modify the recommended blocking settings for every
                         website.
                       </ui-text>
@@ -109,7 +109,7 @@ export default {
                     ></ui-protection-status-toggle>
                   </div>
                   <settings-badge
-                    type="primary"
+                    type="brand"
                     layout="row content:start padding"
                   >
                     <ui-icon name="info-filled"></ui-icon>
@@ -142,7 +142,7 @@ export default {
                       <ui-icon
                         name="no-websites"
                         layout="size:4"
-                        color="gray-400"
+                        color="tertiary"
                       ></ui-icon>
                       <ui-text layout="block:center width:::180px">
                         No websites exceptions added yet
@@ -175,7 +175,7 @@ export default {
                                 <ui-icon
                                   name="trash"
                                   layout="size:3"
-                                  color="gray-400"
+                                  color="tertiary"
                                 ></ui-icon>
                               </button>
                             </ui-action>
@@ -207,7 +207,7 @@ export default {
                       <ui-text type="label-l" mobile-type="label-m">
                         ${tracker.organization.name}
                       </ui-text>
-                      <ui-text color="gray-600">
+                      <ui-text color="secondary">
                         ${tracker.organization.description}
                       </ui-text>
                     </div>
@@ -217,7 +217,7 @@ export default {
                     <ui-text type="label-l" mobile-type="label-m">
                       ${labels.categories[tracker.category]}
                     </ui-text>
-                    <ui-text color="gray-600">
+                    <ui-text color="secondary">
                       ${tracker.categoryDescription}
                     </ui-text>
                   </div>
@@ -237,7 +237,7 @@ export default {
                   <ui-text type="label-xs" uppercase>
                     Organization's website
                   </ui-text>
-                  <ui-text type="label-s" color="primary-700" underline>
+                  <ui-text type="label-s" color="brand-primary" underline>
                     <a
                       href="${tracker.organization.websiteUrl}"
                       onclick="${openTabWithUrl}"
@@ -252,7 +252,7 @@ export default {
                     <ui-text type="label-xs" uppercase>
                       Privacy policy
                     </ui-text>
-                    <ui-text type="label-s" color="primary-700" underline>
+                    <ui-text type="label-s" color="brand-primary" underline>
                       <a
                         href="${tracker.organization.privacyPolicyUrl}"
                         onclick="${openTabWithUrl}"
@@ -268,7 +268,7 @@ export default {
                     <ui-text type="label-xs" uppercase>Contact</ui-text>
                     <ui-text
                       type="label-s"
-                      color="primary-700"
+                      color="brand-primary"
                       ellipsis
                       underline
                       layout="padding margin:-1"
@@ -301,7 +301,7 @@ export default {
                               layout="column items:start padding:1:1.5"
                             >
                               <ui-text type="label-m">${t.name}</ui-text>
-                              <ui-text type="label-xs" color="gray-600">
+                              <ui-text type="label-xs" color="secondary">
                                 ${labels.categories[t.category]}
                               </ui-text>
                             </a>

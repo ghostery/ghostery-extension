@@ -14,15 +14,15 @@ import { html } from 'hybrids';
 export default {
   type: { value: 'body-m', reflect: true },
   mobileType: { value: '', reflect: true },
-  color: 'gray-800',
+  color: 'primary',
   ellipsis: { value: false, reflect: true },
   underline: { value: false, reflect: true },
   uppercase: { value: false, reflect: true },
   render: ({ type, mobileType, color }) => html`<slot></slot>`.css`
     :host {
       display: block;
-      font: var(--ui-font-${mobileType || type});
-      color: var(--ui-color-${color});
+      font: var(--font-${mobileType || type});
+      color: var(--color-${color});
     }
 
     :host([hidden]) {
@@ -33,7 +33,7 @@ export default {
       mobileType &&
       /*css*/ `
           @media screen and (min-width: 768px) {
-            :host { font: var(--ui-font-${type}); }
+            :host { font: var(--font-${type}); }
           }
         `
     }
@@ -70,7 +70,7 @@ export default {
       display: inline;
     }
 
-    ::slotted(a) { transition: color 0.2s, opacity 0.2s; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    ::slotted(a) { outline-color: var(--border-brand-solid); transition: color 0.2s, opacity 0.2s; text-decoration: none; -webkit-tap-highlight-color: transparent; }
     ::slotted(a:active) { opacity: 0.6; }
     ::slotted(a:not([href])) { opacity: 0.6; pointer-events: none; }
 

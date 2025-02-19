@@ -20,7 +20,7 @@ export default {
       html`
         <section layout="column center grow">
           <div layout="row center gap:0.5">
-            <ui-icon name="block-s" color="danger-700"></ui-icon>
+            <ui-icon name="block-s" color="danger-primary"></ui-icon>
             <ui-text type="headline-s">${blocked}</ui-text>
           </div>
           <div layout="row center gap:0.5">
@@ -32,7 +32,7 @@ export default {
       html`
         <section layout="column center grow">
           <div layout="row center gap:0.5">
-            <ui-icon name="eye" color="primary-700"></ui-icon>
+            <ui-icon name="eye" color="brand-primary"></ui-icon>
             <ui-text type="headline-s">${modified}</ui-text>
           </div>
           <div layout="row center gap:0.5">
@@ -43,7 +43,7 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-gray-100);
+      background: var(--background-secondary);
     }
   `,
 };

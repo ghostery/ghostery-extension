@@ -72,7 +72,7 @@ export default {
             name="${tracker.category}"
             layout="size:2.5"
           ></ui-category-icon>
-          <ui-text slot="header" type="body-s" color="gray-600">
+          <ui-text slot="header" type="body-s" color="secondary">
             ${tracker.company &&
             tracker.company !== tracker.name &&
             tracker.company + ' •'}
@@ -101,7 +101,7 @@ export default {
                   >
                     <ui-icon
                       name="${status.type}-m"
-                      color="gray-600"
+                      color="secondary"
                       layout="size:2.5"
                     ></ui-icon>
                     <ui-text
@@ -146,7 +146,7 @@ export default {
             `}
             ${wtmUrl &&
             html`
-              <ui-text type="label-xs" color="primary-700" underline>
+              <ui-text type="label-xs" color="brand-primary" underline>
                 <a href="${wtmUrl}" onclick="${openTabWithUrl}">
                   Read more on WhoTracks.Me
                 </a>
@@ -163,7 +163,7 @@ export default {
         >
           ${tracker.requestsBlocked.length > 0 &&
           html`
-            <ui-icon name="block-s" color="danger-700"></ui-icon>
+            <ui-icon name="block-s" color="danger-primary"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">URLs blocked</ui-text>
               <div layout="column gap:2">
@@ -181,7 +181,7 @@ export default {
           `}
           ${tracker.requestsModified.length > 0 &&
           html`
-            <ui-icon name="eye" color="primary-700"></ui-icon>
+            <ui-icon name="eye" color="brand-primary"></ui-icon>
             <div layout="column gap">
               <ui-text type="label-s">URLs modified</ui-text>
               <div layout="column gap:2">
@@ -222,7 +222,7 @@ export default {
               <ui-text type="label-s">Country</ui-text>
               <ui-text
                 type="body-s"
-                color="gray-600"
+                color="secondary"
                 ellipsis
                 layout="padding margin:-1"
               >
@@ -238,7 +238,7 @@ export default {
               <ui-text type="label-s">Website</ui-text>
               <ui-text
                 type="body-s"
-                color="primary-700"
+                color="brand-primary"
                 ellipsis
                 underline
                 layout="padding margin:-1"
@@ -258,7 +258,7 @@ export default {
                 <ui-text type="label-s">Organization's website</ui-text>
                 <ui-text
                   type="body-s"
-                  color="primary-700"
+                  color="brand-primary"
                   ellipsis
                   underline
                   layout="padding margin:-1"
@@ -279,7 +279,7 @@ export default {
                 <ui-text type="label-s">Privacy policy</ui-text>
                 <ui-text
                   type="body-s"
-                  color="primary-700"
+                  color="brand-primary"
                   ellipsis
                   underline
                   layout="padding margin:-1"
@@ -300,7 +300,7 @@ export default {
                 <ui-text type="label-s">Contact</ui-text>
                 <ui-text
                   type="body-s"
-                  color="primary-700"
+                  color="brand-primary"
                   ellipsis
                   underline
                   layout="padding margin:-1"

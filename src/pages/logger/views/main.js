@@ -85,33 +85,33 @@ export default {
             logs.map((log) =>
               html`
                 <div layout="grid:60px|60px|240px|60px|1 gap">
-                  <ui-text type="body-s" color="gray-400">
+                  <ui-text type="body-s" color="tertiary">
                     ${log.time}
                   </ui-text>
                   <ui-text type="body-s" layout="self:center">
                     ${log.type}
                   </ui-text>
-                  <ui-text type="body-s" color="gray-400" ellipsis>
+                  <ui-text type="body-s" color="tertiary" ellipsis>
                     ${log.filter}
                   </ui-text>
                   <div layout="row gap:0.5 center">
                     ${log.blocked &&
                     html`<ui-icon
                       name="block-s"
-                      color="danger-700"
+                      color="danger-primary"
                       layout="size:2"
                     ></ui-icon>`}
                     ${log.modified &&
                     html`<ui-icon
                       name="eye"
-                      color="primary-700"
+                      color="brand-primary"
                       layout="size:2"
                     ></ui-icon>`}
                     ${((log.filter && !log.blocked && !log.modified) ||
                       (!log.filter && (log.blocked || log.modified))) &&
                     html`<ui-icon
                       name="warning"
-                      color="warning-500"
+                      color="warning-secondary"
                       layout="size:2"
                     ></ui-icon>`}
                   </div>
@@ -125,7 +125,7 @@ export default {
     </template>
   `.css`
     .blocked {
-      color: var(--ui-color-danger-400);
+      color: var(--color-danger-secondary);
     }
   `,
 };

@@ -51,7 +51,7 @@ export default {
             name="${tracker.category}"
             layout="size:2.5"
           ></ui-category-icon>
-          <ui-text slot="header" type="body-s" color="gray-600">
+          <ui-text slot="header" type="body-s" color="secondary">
             ${tracker.company &&
             tracker.company !== tracker.name &&
             tracker.company + ' •'}
@@ -66,7 +66,7 @@ export default {
               <div layout="row items:center gap:0.5">
                 <ui-icon
                   name="${status.type}-m"
-                  color="gray-600"
+                  color="secondary"
                   layout="size:2"
                 ></ui-icon>
                 <ui-text type="label-m">
@@ -93,7 +93,7 @@ export default {
                       ? msg`Trust on all websites`
                       : msg`Block on all websites`}
                   </ui-text>
-                  <ui-text type="body-s" color="gray-600">
+                  <ui-text type="body-s" color="secondary">
                     Add exception
                   </ui-text>
                 </div>
@@ -112,7 +112,7 @@ export default {
                       ? msg`Trust on this website`
                       : msg`Block on this website`}
                   </ui-text>
-                  <ui-text type="body-s" color="gray-600">
+                  <ui-text type="body-s" color="secondary">
                     <!-- Add domain as an exception -->
                     Add ${stats.hostname} as an exception
                   </ui-text>

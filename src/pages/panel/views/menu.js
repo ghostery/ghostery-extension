@@ -29,7 +29,7 @@ export default {
         Menu
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
-            <ui-icon name="close" color="gray-800" layout="size:3"></ui-icon>
+            <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
           </a>
         </ui-action>
       </ui-header>
@@ -41,7 +41,7 @@ export default {
             html`
               <ui-text
                 type="label-s"
-                color="gray-600"
+                color="secondary"
                 uppercase
                 layout="padding:1:1:0 margin:0:1"
               >
@@ -122,7 +122,7 @@ export default {
 
             <ui-text
               type="label-s"
-              color="gray-600"
+              color="secondary"
               uppercase
               layout="padding:1:1:0 margin:0:1"
             >
@@ -168,7 +168,7 @@ export default {
 
             <ui-text
               type="label-s"
-              color="gray-600"
+              color="secondary"
               uppercase
               layout="padding:1:1:0 margin:0:1"
             >

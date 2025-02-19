@@ -78,16 +78,16 @@ export default {
     #dialog {
       border: none;
       border-radius: 12px 12px 0 0;
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
       overscroll-behavior: contain;
       transform: translateY(100%);
       transition: transform 500ms cubic-bezier(0.4, 0.15, 0, 1);
     }
 
     #backdrop {
-      background: var(--ui-color-backdrop);
+      background: var(--component-custom-token-bg-overlay);
       opacity: 0;
-      transition: all 300ms;
+      transition: all 300ms ease-out;
     }
 
     :host([open]) #dialog {
@@ -95,16 +95,16 @@ export default {
     }
 
     :host([open]) #backdrop {
-      opacity: 0.9;
+      opacity: 1;
     }
 
     #header {
-      border-bottom: 1px solid var(--ui-color-gray-200);
+      border-bottom: 1px solid var(--border-primary);
     }
 
     a > div {
-      color: var(--ui-color-gray-600);
-      background: var(--ui-color-gray-200);
+      color: var(--color-secondary);
+      background: var(--border-primary);
       border-radius: 50%;
     }
   `,

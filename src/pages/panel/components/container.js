@@ -41,7 +41,7 @@ export default {
       /* set custom scrollbar */
       #scroll {
         scrollbar-width: thin;
-        scrollbar-color: var(--ui-color-gray-200) transparent;
+        scrollbar-color: var(--border-primary) transparent;
       }
 
       .shadow {
@@ -49,7 +49,7 @@ export default {
         background: linear-gradient(
           to bottom,
           rgba(0, 0, 0, 0) 0%,
-          var(--ui-color-scroll-shadow) 100%
+          var(--shadow-card) 100%
         );
         visibility: hidden;
         opacity: 0;

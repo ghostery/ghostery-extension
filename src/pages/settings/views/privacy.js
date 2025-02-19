@@ -80,7 +80,7 @@ export default {
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
               <ui-text type="headline-m"> Privacy protection </ui-text>
-              <ui-text type="body-l" mobile-type="body-m" color="gray-600">
+              <ui-text type="body-l" mobile-type="body-m" color="secondary">
                 Ghostery protects your privacy by detecting and neutralizing
                 different types of data collection including ads, trackers, and
                 cookie pop-ups.
@@ -93,15 +93,15 @@ export default {
             >
               <div layout="column gap:0.5 grow">
                 <div layout="row gap items:center">
-                  <ui-icon name="pause" color="gray-800"></ui-icon>
+                  <ui-icon name="pause" color="primary"></ui-icon>
                   <ui-text type="headline-xs">Pause Ghostery</ui-text>
                 </div>
-                <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                <ui-text type="body-m" mobile-type="body-s" color="secondary">
                   Suspends privacy protection globally for 1 day.
                 </ui-text>
                 ${globalPauseRevokeAt &&
                 html`
-                  <ui-text type="body-s" color="gray-600">
+                  <ui-text type="body-s" color="secondary">
                     <ui-revoke-at
                       revokeAt="${globalPauseRevokeAt}"
                     ></ui-revoke-at>
@@ -123,13 +123,13 @@ export default {
                 >
                   <div layout="column gap:0.5 grow">
                     <div layout="row gap items:center">
-                      <ui-icon name="ads" color="gray-800"></ui-icon>
+                      <ui-icon name="ads" color="primary"></ui-icon>
                       <ui-text type="headline-xs">Ad-Blocking</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Eliminates ads on websites for safe and fast browsing.
                     </ui-text>
@@ -143,13 +143,13 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="tracking" color="gray-800"></ui-icon>
+                      <ui-icon name="tracking" color="primary"></ui-icon>
                       <ui-text type="headline-xs">Anti-Tracking</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Prevents various tracking techniques using AI-driven
                       technology.
@@ -164,13 +164,13 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="autoconsent" color="gray-800"></ui-icon>
+                      <ui-icon name="autoconsent" color="primary"></ui-icon>
                       <ui-text type="headline-xs">Never-Consent</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Automatically rejects cookie consent notices.
                     </ui-text>
@@ -187,13 +187,13 @@ export default {
                 >
                   <div layout="column grow gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="pin" color="gray-800"></ui-icon>
+                      <ui-icon name="pin" color="primary"></ui-icon>
                       <ui-text type="headline-xs">Regional Filters</ui-text>
                     </div>
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Blocks additional ads, trackers, and pop-ups specific to
                       the language of websites you visit. Enable only the
@@ -239,14 +239,14 @@ export default {
                   <div layout="row gap items:center">
                     <ui-icon
                       name="search"
-                      color="gray-800"
+                      color="primary"
                       layout="size:2"
                     ></ui-icon>
                     <ui-text type="headline-xs">
                       Search Engine Redirect Protection
                     </ui-text>
                   </div>
-                  <ui-text type="body-m" mobile-type="body-s" color="gray-600">
+                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
                     Prevents Google from redirecting search result links through
                     their servers instead of linking directly to pages.
                   </ui-text>
@@ -254,7 +254,7 @@ export default {
               </ui-toggle>
               <ui-line></ui-line>
               <div layout="column gap:3">
-                <ui-text type="headline-xs" color="gray-600">Advanced</ui-text>
+                <ui-text type="headline-xs" color="secondary">Advanced</ui-text>
                 <ui-toggle
                   disabled="${globalPause}"
                   value="${options.experimentalFilters}"
@@ -262,7 +262,7 @@ export default {
                 >
                   <div layout="column grow items:start gap:0.5">
                     <div layout="row gap items:center">
-                      <ui-icon name="dots" color="gray-800"></ui-icon>
+                      <ui-icon name="dots" color="primary"></ui-icon>
                       <ui-text type="headline-xs">
                         Experimental Filters
                       </ui-text>
@@ -270,14 +270,14 @@ export default {
                     <ui-text
                       type="body-m"
                       mobile-type="body-s"
-                      color="gray-600"
+                      color="secondary"
                     >
                       Helps Ghostery fix broken pages faster. By activating you
                       can test experimental filters and support us with
                       feedback. Please send a message to support@ghostery.com
                       describing how your experience changed after enabling.
                     </ui-text>
-                    <ui-text type="label-s" color="gray-600" underline>
+                    <ui-text type="label-s" color="secondary" underline>
                       <a
                         href="https://github.com/ghostery/broken-page-reports/blob/main/filters/experimental.txt"
                         target="_blank"
@@ -299,23 +299,20 @@ export default {
                   >
                     <div layout="column gap:0.5">
                       <div layout="row gap items:center">
-                        <ui-icon
-                          name="detailed-view"
-                          color="gray-800"
-                        ></ui-icon>
+                        <ui-icon name="detailed-view" color="primary"></ui-icon>
                         <ui-text type="headline-xs">Custom Filters</ui-text>
                       </div>
                       <ui-text
                         type="body-m"
                         mobile-type="body-s"
-                        color="gray-600"
+                        color="secondary"
                       >
                         Facilitates the creation of your own ad-blocking rules
                         to customize your Ghostery experience.
                       </ui-text>
                       <ui-text
                         type="label-s"
-                        color="gray-600"
+                        color="secondary"
                         underline
                         layout="self:start"
                       >
@@ -393,7 +390,7 @@ export default {
                         <ui-text type="label-l" layout="">
                           You are awesome!
                         </ui-text>
-                        <ui-text type="body-s" color="gray-600">
+                        <ui-text type="body-s" color="secondary">
                           Thank you for your support in Ghostery's fight for a
                           web where privacy is a basic human right!
                         </ui-text>
@@ -415,7 +412,7 @@ export default {
                         <ui-text type="label-l" layout="">
                           Become a Contributor
                         </ui-text>
-                        <ui-text type="body-s" color="gray-600">
+                        <ui-text type="body-s" color="secondary">
                           Help Ghostery fight for a web where privacy is a basic
                           human right.
                         </ui-text>

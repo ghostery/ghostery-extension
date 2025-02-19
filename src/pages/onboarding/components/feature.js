@@ -15,14 +15,14 @@ export default {
   icon: '',
   render: ({ icon }) => html`
     <template layout="column items:center gap padding:2:0.5">
-      <ui-icon name="${icon}" layout="size:4" color="primary-500"></ui-icon>
+      <ui-icon name="${icon}" layout="size:4" color="brand-secondary"></ui-icon>
       <ui-text type="label-xs" layout="block:center">
         <slot></slot>
       </ui-text>
     </template>
   `.css`
     :host {
-      background: var(--ui-color-gray-100);
+      background: var(--background-secondary);
       border-radius: 16px;
     }
   `,

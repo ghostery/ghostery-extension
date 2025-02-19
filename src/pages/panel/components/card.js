@@ -8,12 +8,12 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-gray-100);
+      background: var(--background-secondary);
       border-radius: 8px;
     }
 
     :host([type="info"]) {
-      background: var(--ui-color-primary-100);
+      background: var(--background-brand-primary);
     }
   `,
 };

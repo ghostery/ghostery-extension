@@ -22,17 +22,17 @@ export default {
     </template>
   `.css`
     header {
-      background: var(--ui-color-gray-100);
+      background: var(--background-secondary);
       border-radius: 8px;
     }
 
     div ::slotted(*) {
       padding: 12px 14px;
-      border-bottom: 1px solid var(--ui-color-gray-200);
+      border-bottom: 1px solid var(--border-primary);
     }
 
     :host([responsive]) div ::slotted(*) {
-      border: 1px solid var(--ui-color-gray-200);
+      border: 1px solid var(--border-primary);
       border-radius: 8px;
     }
 
@@ -42,7 +42,7 @@ export default {
         padding: 24px 16px;
         border-radius: 0;
         border: none;
-        border-bottom: 1px solid var(--ui-color-gray-200);
+        border-bottom: 1px solid var(--border-primary);
       }
     }
   `,

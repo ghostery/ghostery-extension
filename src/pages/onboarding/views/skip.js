@@ -22,7 +22,7 @@ export default {
       <ui-card data-qa="view:skip">
         <section layout="block:center column gap:2">
           <div layout="row center">${disabled}</div>
-          <ui-text type="display-s" color="danger-500">
+          <ui-text type="display-s" color="danger-secondary">
             Ghostery is installed with limited functionality
           </ui-text>
           <ui-text type="body-m">

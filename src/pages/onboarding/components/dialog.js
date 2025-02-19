@@ -48,9 +48,9 @@ export default {
     }
 
     #dialog {
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
       border-radius: 16px;
-      box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.2);
+      box-shadow: 30px 60px 160px var(--shadow-dialog);
     }
 
     footer::before {
@@ -60,7 +60,7 @@ export default {
       position: absolute;
       inset: 0;
       border-radius: 16px;
-      background: linear-gradient(0deg, var(--ui-color-layout) 0%, rgba(47, 49, 54, 0) 100%);
+      background: linear-gradient(0deg, var(--background-primary) 0%, rgba(47, 49, 54, 0) 100%);
     }
   `,
 };

@@ -54,11 +54,11 @@ export default {
     ui-action-button {
       width: auto;
       height: 28px;
-      color: var(--ui-color-gray-600);
+      color: var(--color-tertiary);
     }
 
     ui-action-button[active] {
-      color: var(--ui-color-gray-800);
+      color: var(--color-primary);
     }
   `,
 };

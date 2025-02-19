@@ -75,7 +75,7 @@ export default {
             <span slot="content">WhoTracks.Me Statistical Report</span>
             <ui-action-button layout="size:4.5">
               <a href="${wtmLink}" onclick="${openTabWithUrl}" target="_blank">
-                <ui-icon name="whotracksme" color="gray-800"></ui-icon>
+                <ui-icon name="whotracksme" color="primary"></ui-icon>
               </a>
             </ui-action-button>
           </ui-tooltip>
@@ -91,7 +91,7 @@ export default {
                 layout="size:30px"
               >
                 <button onclick="${html.set('type', 'graph')}">
-                  <ui-icon name="chart" color="gray-800"></ui-icon>
+                  <ui-icon name="chart" color="primary"></ui-icon>
                 </button>
               </ui-action-button>
             </ui-tooltip>
@@ -104,7 +104,7 @@ export default {
                 data-qa="button:detailed-view"
               >
                 <button onclick="${html.set('type', 'list')}">
-                  <ui-icon name="list" color="gray-800"></ui-icon>
+                  <ui-icon name="list" color="primary"></ui-icon>
                 </button>
               </ui-action-button>
             </ui-tooltip>
@@ -123,7 +123,7 @@ export default {
           <div layout="column grow">
             ${!categoryList.length &&
             html`
-              <ui-text type="body-s" color="gray-600" layout="grow row center">
+              <ui-text type="body-s" color="secondary" layout="grow row center">
                 No activities detected
               </ui-text>
             `}
@@ -150,7 +150,7 @@ export default {
               <ui-list layout="grow margin:0.5:0">
                 <ui-text
                   type="body-s"
-                  color="gray-600"
+                  color="secondary"
                   layout="grow row center"
                 >
                   No activities detected
@@ -190,17 +190,19 @@ export default {
                                   ${tracker.name}
                                 </ui-tracker-name>
                               </ui-tooltip>
-                              <ui-badge> ${tracker.requestsCount} </ui-badge>
+                              <ui-stats-badge>
+                                ${tracker.requestsCount}
+                              </ui-stats-badge>
                               ${tracker.blocked &&
                               html`<ui-icon
                                 name="block-s"
-                                color="danger-700"
+                                color="danger-primary"
                                 data-qa="icon:tracker:${tracker.id}:blocked"
                               ></ui-icon>`}
                               ${tracker.modified &&
                               html`<ui-icon
                                 name="eye"
-                                color="primary-700"
+                                color="brand-primary"
                                 data-qa="icon:tracker:${tracker.id}:modified"
                               ></ui-icon>`}
                             </a>

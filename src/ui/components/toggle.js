@@ -61,10 +61,16 @@ export default {
         background: none;
         appearance: none;
         border: none;
+        border-radius: 8px;
         -webkit-tap-highlight-color: transparent;
         margin: 0;
         padding: 0;
         text-align: left;
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--border-brand-solid);
+        outline-offset: 2px;
       }
 
       ui-text {
@@ -72,59 +78,29 @@ export default {
         transition: color 0.2s;
       }
 
-      #button {
-        color: var(--ui-color-gray-300);
-      }
+      #button { color: var(--color-primary); }
 
       #toggle {
-        background: var(--ui-color-gray-300);
+        background: var(--color-quaternary);
         border-radius: 12px;
         transition: color 0.2s, background 0.2s;
       }
 
       #toggle span {
-        background: var(--ui-color-layout);
+        background: var(--background-primary);
         border-radius: 8px;
         transition: left 0.2s;
+        box-shadow: 0px 1px 3px 0px rgba(10, 13, 18, 0.10), 0px 1px 2px -1px rgba(10, 13, 18, 0.10);
       }
 
-      :host([value]) #toggle {
-        background: var(--ui-color-gray-600);
-      }
+      :host([value]) #toggle { background: var(--color-primary); }
+      :host([value]) #toggle span { left: calc(100% - 20px); }
 
-      :host([value]) #button {
-        color: var(--ui-color-gray-600);
-      }
 
-      :host([value]) #toggle span {
-        left: calc(100% - 20px);
-      }
+      :host([disabled]) #button { color: var(--color-secondary); }
+      :host([disabled]) #toggle { background: var(--color-quaternary); opacity: 0.5; }
 
-      :host([no-label]) ui-text {
-        display: none;
-      }
-
-      :host([disabled]) #toggle {
-        background: var(--ui-color-gray-200);
-      }
-
-      :host([disabled]) #button {
-        color: var(--ui-color-gray-300);
-      }
-
-      @media (hover: hover) {
-        button:hover #button {
-          color: var(--ui-color-gray-400);
-        }
-
-        button:hover #toggle {
-          background: var(--ui-color-gray-400);
-        }
-
-        :host([value]) button:hover #toggle {
-          background: var(--ui-color-gray-800);
-        }
-      }
+      :host([no-label]) ui-text { display: none; }
     `,
     shadow: { delegateFocus: true },
   },

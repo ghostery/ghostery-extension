@@ -12,12 +12,8 @@
 import { html } from 'hybrids';
 
 export default {
-  color: 'gray-200',
-  render: ({ color }) => html`
-    <template layout="block height:1px shrink:0"></template>
-  `.css`
-    :host {
-      background: var(--ui-color-${color});
-    }
-  `,
+  render: () => html`<template layout="block height:1px shrink:0"></template>`
+    .css`
+      :host { background: var(--border-primary); }
+    `,
 };

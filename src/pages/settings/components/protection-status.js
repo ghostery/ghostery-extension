@@ -16,12 +16,10 @@ export default {
   render: ({ revokeAt }) => html`
     <template layout="row items:center gap">
       ${revokeAt === undefined
-        ? html`
-            <settings-badge type="info" uppercase> Active </settings-badge>
-          `
+        ? html`<settings-badge uppercase>Active</settings-badge>`
         : html`
-            <settings-badge type="warning" uppercase> Paused </settings-badge>
-            <ui-text color="gray-600" layout="grow">
+            <settings-badge type="warning" uppercase>Paused</settings-badge>
+            <ui-text color="secondary" layout="grow">
               <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
             </ui-text>
           `}

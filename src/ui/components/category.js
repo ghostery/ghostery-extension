@@ -22,7 +22,7 @@ export default {
     <template layout="row gap items:center">
       <div id="pill" layout="size:12px:6px"></div>
       <div id="label" layout="row gap items:center grow padding:0.5:0">
-        <ui-text type="body-s" color="gray-600" layout="grow">
+        <ui-text type="body-s" color="secondary" layout="grow">
           ${labels.categories[getCategoryKey(name)]}
         </ui-text>
         <ui-text type="label-s" id="count">${count}</ui-text>
@@ -39,7 +39,7 @@ export default {
     }
 
     #label {
-      border-bottom: 1px solid var(--ui-color-gray-200);
+      border-bottom: 1px solid var(--border-primary);
     }
 
     :host(:last-child) #label {

@@ -118,8 +118,8 @@ export default {
     }
 
     text {
-      fill: var(--ui-color-gray-800);
-      font-family: var(--ui-font-family-label);
+      fill: var(--color-primary);
+      font-family: var(--font-family-label);
       font-size: 12px;
       font-weight: 600;
     }

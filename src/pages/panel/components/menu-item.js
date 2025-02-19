@@ -26,7 +26,7 @@ export default {
           layout="grid:max|1|max items:center:start gap:1.5 padding margin:0:1"
           onclick="${internal ? undefined : openTabWithUrl}"
         >
-          <ui-icon name="${icon}" color="gray-600" layout="size:2.5"></ui-icon>
+          <ui-icon name="${icon}" color="secondary" layout="size:2.5"></ui-icon>
           <ui-text
             type="label-m"
             ellipsis
@@ -37,7 +37,7 @@ export default {
           </ui-text>
           <ui-icon
             name="${suffixIcon}"
-            color="gray-400"
+            color="tertiary"
             layout="size:2"
           ></ui-icon>
         </a>
@@ -45,7 +45,7 @@ export default {
     </template>
   `.css`
     a {
-      color: var(--ui-color-gray-800);
+      color: var(--color-primary);
     }
 
     ui-icon {
@@ -54,7 +54,7 @@ export default {
 
     @media (hover: hover) {
       a:hover, a:hover ui-icon {
-        color: var(--ui-color-primary-700);
+        color: var(--color-brand-primary);
       }
     }
   `,

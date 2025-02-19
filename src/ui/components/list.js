@@ -29,7 +29,7 @@ export default {
           <ui-icon
             id="arrow"
             name="arrow-down"
-            color="gray-600"
+            color="secondary"
             layout="margin:right:-0.5"
           ></ui-icon>
           <div layout="grow"></div>
@@ -47,7 +47,7 @@ export default {
     </template>
   `.css`
     :host {
-      border: 1px solid var(--ui-color-gray-200);
+      border: 1px solid var(--border-primary);
       border-bottom: none;
     }
 
@@ -59,17 +59,17 @@ export default {
     :host(:last-of-type) {
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
-      border-bottom: 1px solid var(--ui-color-gray-200);
+      border-bottom: 1px solid var(--border-primary);
     }
 
     @media (hover: hover) {
       #header:hover ui-text {
-        color: var(--ui-color-primary-700);
+        color: var(--color-brand-primary);
       }
     }
 
     #header:focus-visible ui-text {
-      color: var(--ui-color-primary-700);
+      color: var(--color-brand-primary);
     }
 
     #arrow {

@@ -66,7 +66,11 @@ define({
                       Cancel
                     </button>
                   </ui-button>
-                  <ui-button id="disable" data-qa="button:confirm">
+                  <ui-button
+                    id="disable"
+                    type="outline-danger"
+                    data-qa="button:confirm"
+                  >
                     <button onclick="${disable}">Disable</button>
                   </ui-button>
                 </div>
@@ -80,7 +84,7 @@ define({
                   <button onclick="${close}" layout="row center size:3">
                     <ui-icon
                       name="close"
-                      color="gray-800"
+                      color="primary"
                       layout="size:2.5"
                     ></ui-icon>
                   </button>
@@ -106,8 +110,8 @@ define({
                     layout="row gap:0.5 padding"
                     data-qa="button:disable"
                   >
-                    <ui-icon name="block-s" color="gray-600"></ui-icon>
-                    <ui-text type="label-s" color="gray-600">
+                    <ui-icon name="block-s" color="secondary"></ui-icon>
+                    <ui-text type="label-s" color="secondary">
                       Disable Trackers Preview
                     </ui-text>
                   </button>
@@ -117,24 +121,12 @@ define({
       </template>
     `.css`
       :host {
-        border: 1px solid var(--ui-color-gray-300);
+        border: 1px solid var(--border-primary);
         border-radius: 16px;
       }
 
       footer {
-        background: var(--ui-color-gray-100);
-      }
-
-      ui-button {
-        text-transform: none;
-        border-radius: 8px;
-        box-shadow: 0px 2px 6px rgba(32, 44, 68, 0.08);
-        --ui-button-color-hover: var(--ui-color-primary-700);
-      }
-
-      ui-button#disable {
-        color: var(--ui-color-danger-500);
-        --ui-button-color-hover: var(--ui-color-danger-700);
+        background: var(--background-secondary);
       }
     `,
     observe: (host) => {

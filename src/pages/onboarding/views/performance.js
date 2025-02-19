@@ -37,13 +37,13 @@ export default {
         </ui-text>
         <ui-text
           type="body-s"
-          color="gray-600"
+          color="secondary"
           layout="margin:top block:justify"
         >
           Ghostery never collects personal information like passwords, browsing
           history or the content of the pages you visit.
         </ui-text>
-        <ui-text type="body-s" color="gray-600" layout="block:justify">
+        <ui-text type="body-s" color="secondary" layout="block:justify">
           Being an EU company, Ghostery strictly adheres to the GDPR (The
           General Data Protection Regulation), which regulates data collection
           to ensure user's privacy.

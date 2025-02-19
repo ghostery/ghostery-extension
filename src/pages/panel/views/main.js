@@ -141,7 +141,7 @@ export default {
                         html`<ui-icon
                           name="arrow-down"
                           layout="size:1.5"
-                          color="gray-600"
+                          color="secondary"
                         ></ui-icon>`}
                       </a>
                     </ui-action>
@@ -155,7 +155,7 @@ export default {
             </ui-action>
             <ui-action slot="actions">
               <a href="${router.url(Menu)}" data-qa="button:menu">
-                <ui-icon name="menu" color="gray-800"></ui-icon>
+                <ui-icon name="menu" color="primary"></ui-icon>
               </a>
             </ui-action>
           </ui-header>

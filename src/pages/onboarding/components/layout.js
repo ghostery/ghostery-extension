@@ -44,12 +44,12 @@ export default {
     }
 
     header {
-      color: var(--ui-color-primary-500);
+      color: var(--color-brand-secondary);
     }
 
     @media (prefers-color-scheme: dark) {
       :host {
-        background: var(--ui-color-gray-100);
+        background: var(--background-secondary);
       }
 
       #bg { display: none; }

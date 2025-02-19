@@ -137,7 +137,7 @@ export default {
                 >
                   <div layout="column">
                     <ui-text type="headline-s">Remote Configuration</ui-text>
-                    <ui-text type="body-xs" color="gray-400">
+                    <ui-text type="body-xs" color="tertiary">
                       Updated at: ${formatDate(config.updatedAt)}
                     </ui-text>
                   </div>
@@ -149,7 +149,7 @@ export default {
                       .filter(([, d]) => d.actions.length)
                       .map(
                         ([name, d]) =>
-                          html`<ui-text color="gray-600">
+                          html`<ui-text color="secondary">
                             ${name} (${d.actions.join(', ')})
                           </ui-text>`,
                       ) || 'none'}
@@ -157,7 +157,7 @@ export default {
                 </div>
                 <div>
                   <ui-text type="label-m">Flags</ui-text>
-                  <ui-text color="gray-600">
+                  <ui-text color="secondary">
                     ${Object.entries(config.flags)
                       .filter(([, f]) => f.enabled)
                       .map(([name]) => name)
@@ -194,7 +194,7 @@ export default {
             html`
               <div layout="column gap items:start" translate="no">
                 <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
-                <ui-text type="body-xs" color="gray-400">
+                <ui-text type="body-xs" color="tertiary">
                   The below list is not reactive to changes made in the
                   extension - use refresh button
                 </ui-text>
@@ -245,7 +245,7 @@ export default {
           <div onclick="${refresh}">
             <ui-text
               type="label-s"
-              color="gray-300"
+              color="quaternary"
               translate="no"
               style="user-select: none;"
             >
@@ -254,7 +254,7 @@ export default {
           </div>
         </div>
         <ui-action>
-          <ui-text type="label-xs" color="gray-300" onclick="${updateFilters}">
+          <ui-text type="label-xs" color="quaternary" onclick="${updateFilters}">
             Last update: ${updatedAt || html`updating...`}
           </ui-text>
         <ui-action>

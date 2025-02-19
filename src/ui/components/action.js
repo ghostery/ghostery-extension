@@ -21,7 +21,14 @@ export default {
       transition: opacity 0.2s, color 0.2s, background-color 0.2s, border-color 0.2s;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      outline-color: var(--border-brand-solid);
       text-decoration: none;
+    }
+
+    ::slotted(*:focus-visible) {
+      outline: 2px solid var(--border-brand-solid);
+      outline-offset: 2px;
+      border-radius: 8px;
     }
 
     ::slotted(*:focus:not(:focus-visible)) {

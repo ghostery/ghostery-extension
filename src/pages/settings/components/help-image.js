@@ -28,7 +28,7 @@ export default {
               >
                 <ui-icon
                   name="zoom-in"
-                  color="gray-800"
+                  color="primary"
                   layout="size:2"
                 ></ui-icon>
               </div>
@@ -37,15 +37,15 @@ export default {
       </template>
     `.css`
       :host {
-        background: var(--ui-color-gray-100);
-        border: 1px solid var(--ui-color-gray-300);
+        background: var(--background-secondary);
+        border: 1px solid var(--border-primary);
         border-radius: 4px;
       }
 
       #icon {
         border-radius:12px;
-        border: 1px solid var(--ui-color-gray-300);
-        background: var(--ui-color-layout);
+        border: 1px solid var(--border-primary);
+        background: var(--background-primary);
       }
     `,
 };

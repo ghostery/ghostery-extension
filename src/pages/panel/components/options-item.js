@@ -23,7 +23,7 @@ export default {
       </ui-text>
       <ui-text
         type="label-s"
-        color="${terms && enabled ? '' : 'danger-500'}"
+        color="${terms && enabled ? '' : 'danger-primary'}"
         ellipsis
         layout="shrink:0"
       >
@@ -36,8 +36,8 @@ export default {
     </template>
   `.css`
     :host {
-      background: var(--ui-color-layout);
-      border: 1px solid var(--ui-color-gray-200);
+      background: var(--background-primary);
+      border: 1px solid var(--border-primary);
     }
 
     :host(:first-of-type) {
@@ -53,20 +53,20 @@ export default {
     }
 
     ui-icon {
-      color: var(--ui-color-gray-600);
+      color: var(--color-secondary);
     }
 
     @media (hover: hover) {
       :host(:hover) {
-        background: var(--ui-color-primary-100);
+        background: var(--background-brand-primary);
       }
 
       :host(:hover) ui-icon {
-        color: var(--ui-color-primary-700);
+        color: var(--color-brand-primary);
       }
 
       :host(:hover) ui-text {
-        color: var(--ui-color-primary-700);
+        color: var(--color-brand-primary);
       }
     }
   `,

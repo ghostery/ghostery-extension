@@ -43,7 +43,7 @@ export default {
           href="${router.backUrl()}"
           layout="row center size:6 fixed top:2.5 right:2.5 layer:100"
         >
-          <ui-icon name="close" layout="size:3" color="gray-800"></ui-icon>
+          <ui-icon name="close" layout="size:3" color="primary"></ui-icon>
         </a>
       </ui-action>
     </template>
@@ -54,7 +54,7 @@ export default {
     }
 
     a {
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
       border-radius: 50%;
       box-shadow: 0px 4px 16px rgba(32, 44, 68, 0.1);
     }
@@ -70,7 +70,7 @@ export default {
     }
 
     footer {
-      background: var(--ui-color-layout);
+      background: var(--background-primary);
       border-radius: 8px;
     }
   `,
