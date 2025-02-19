@@ -20,7 +20,7 @@ import { isOpera, isEdge } from '/utils/browser-info.js';
 const NOTIFICATIONS = {
   terms: {
     icon: 'triangle',
-    type: 'warning',
+    type: 'danger',
     text: msg`Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.`,
     url:
       __PLATFORM__ === 'safari'
@@ -30,7 +30,7 @@ const NOTIFICATIONS = {
   },
   opera: {
     icon: 'logo-opera',
-    type: 'warning',
+    type: 'danger',
     text: msg`Expand Ghostery ad blocking to search engines in a few easy steps.`,
     url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera-guide?utm_source=gbe&utm_campaign=opera_serp',
     action: msg`Enable Ad Blocking Now`,

@@ -47,9 +47,9 @@ export default {
       --ui-notification-color: var(--color-brand-primary);
     }
 
-    :host([type="warning"]) {
-      --ui-notification-bg: var(--background-warning-primary);
-      --ui-notification-color: var(--color-warning-primary);
+    :host([type="danger"]) {
+      --ui-notification-bg: var(--background-danger-primary);
+      --ui-notification-color: var(--color-danger-primary);
     }
 
     :host([type="review"]) #icon {
