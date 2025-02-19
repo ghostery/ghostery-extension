@@ -191,7 +191,7 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
+  html:not([data-theme='light']) {
     --background-brand-primary: var(--color-gray-900);
     --background-brand-secondary: var(--color-brand-700);
     --background-brand-solid: var(--color-brand-500);
