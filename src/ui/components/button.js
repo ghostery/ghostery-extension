@@ -48,6 +48,11 @@ export default {
       --button-background: var(--background-brand-solid);
     }
 
+    :host([type="secondary"]) {
+      --button-color: var(--color-primary);
+      --button-background: var(--background-tertiary);
+    }
+
     :host([type="success"]) {
       --button-background: var(--background-success-solid);
     }

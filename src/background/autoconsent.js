@@ -15,7 +15,7 @@ import rules from '@duckduckgo/autoconsent/rules/rules.json';
 import { parse } from 'tldts-experimental';
 import { store } from 'hybrids';
 
-import Options, { isPaused } from '/store/options.js';
+import Options, { getPausedDetails } from '/store/options.js';
 import Config, { ACTION_DISABLE_AUTOCONSENT } from '/store/config.js';
 
 async function initialize(msg, tab, frameId) {
@@ -28,7 +28,7 @@ async function initialize(msg, tab, frameId) {
     const hostname = tab.url ? parse(tab.url).hostname : '';
 
     if (
-      isPaused(options, hostname) ||
+      getPausedDetails(options, hostname) ||
       config.hasAction(hostname, ACTION_DISABLE_AUTOCONSENT)
     ) {
       return;

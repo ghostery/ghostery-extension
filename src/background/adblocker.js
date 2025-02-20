@@ -17,7 +17,7 @@ import {
 import { parse } from 'tldts-experimental';
 import scriptlets from '@ghostery/scriptlets';
 
-import Options, { ENGINES, isPaused } from '/store/options.js';
+import Options, { ENGINES, getPausedDetails } from '/store/options.js';
 
 import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
@@ -334,10 +334,10 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  if (isPaused(options, hostname)) return;
+  if (getPausedDetails(options, hostname)) return;
 
   const tabHostname = tabStats.get(tabId)?.hostname;
-  if (tabHostname && isPaused(options, tabHostname)) {
+  if (tabHostname && getPausedDetails(options, tabHostname)) {
     return;
   }
 
@@ -443,7 +443,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
 function isTrusted(request, type) {
   // The request is from a tab that is paused
-  if (isPaused(options, request.sourceHostname)) {
+  if (getPausedDetails(options, request.sourceHostname)) {
     return true;
   }
 

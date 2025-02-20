@@ -12,6 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
+  narrow: { value: false, reflect: true },
   render: () => html`
     <template layout="column padding:3">
       <slot></slot>
@@ -21,6 +22,10 @@ export default {
       background: var(--background-primary);
       border-radius: 16px;
       box-shadow: 15px 30px 80px var(--shadow-card);
+    }
+
+    :host([narrow]) {
+      border-radius: 8px;
     }
   `,
 };

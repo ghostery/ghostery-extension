@@ -42,15 +42,16 @@ function mount(url) {
       iframe {
         display: block;
         flex-grow: 1;
+        height: 0px;
+        width: 0px;
         max-width: 100%;
         max-height: 100%;
         pointer-events: auto;
-        box-shadow: 30px 60px 160px rgba(0, 0, 0, 0.4);
-        border-radius: 16px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.27) 100%);
+        box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.10), 0px 40px 80px 0px rgba(0, 0, 0, 0.20);
+        border-radius: 8px;
         opacity: 0;
         transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-        transform: translateY(20px);
+        transform: translateY(40px);
       }
 
       iframe.active {
@@ -66,7 +67,7 @@ function mount(url) {
 
         iframe {
           flex-grow: 0;
-          transform: translateY(-20px);
+          transform: translateY(-40px);
         }
       }
     </style>
@@ -96,7 +97,11 @@ function mount(url) {
         chrome.runtime.sendMessage({ action: notifications.CLEAR_ACTION, url });
       }
 
-      setTimeout(() => wrapper.remove(), 0);
+      iframe.addEventListener('transitionend', () => {
+        wrapper.remove();
+      });
+
+      iframe.classList.remove('active');
     }
   });
 }

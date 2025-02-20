@@ -12,6 +12,8 @@
 import { store } from 'hybrids';
 
 import Config from '/store/config.js';
+import Options from '/store/options.js';
+
 import { CDN_URL } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
@@ -95,11 +97,13 @@ export default async function syncConfig() {
     }
 
     // Update the config
-    store.set(Config, {
-      updatedAt: Date.now(),
-      domains,
-      flags,
-    });
+    await store.set(Config, { domains, flags, updatedAt: Date.now() });
+
+    // Managed options relays on the config, so we need to invalidate them
+    const options = await store.resolve(Options);
+    if (options.managed) store.clear(options);
+
+    console.log('[config] Remote config synced');
   } catch (e) {
     console.error('[config] Failed to sync remote config:', e);
   }

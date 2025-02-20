@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { ENGINES, isPaused } from '/store/options.js';
+import { ENGINES, getPausedDetails } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
@@ -22,7 +22,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
   OptionsObserver.addListener(async function dnr(options) {
-    const globalPause = isPaused(options);
+    const globalPause = getPausedDetails(options);
 
     const ids = ENGINES.map(({ name, key }) => {
       return !globalPause && options.terms && options[key] ? name : '';

@@ -13,8 +13,11 @@ import { html, store, dispatch } from 'hybrids';
 
 import Options from '/store/options.js';
 import Config, {
-  ACTION_ASSIST,
   ACTION_DISABLE_AUTOCONSENT,
+  ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+  ACTION_PAUSE_ASSISTANT,
+  FLAG_PAUSE_ASSISTANT,
+  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
 } from '/store/config.js';
 
 const VERSION = chrome.runtime.getManifest().version;
@@ -56,7 +59,11 @@ async function testConfigDomain(host) {
 
   const actions = window.prompt(
     'Enter actions to test:',
-    `${ACTION_ASSIST}, ${ACTION_DISABLE_AUTOCONSENT}`,
+    [
+      ACTION_DISABLE_AUTOCONSENT,
+      ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+      ACTION_PAUSE_ASSISTANT,
+    ].join(', '),
   );
 
   if (!actions) return;
@@ -69,13 +76,17 @@ async function testConfigDomain(host) {
 }
 
 async function testConfigFlag(host) {
-  const flag = window.prompt('Enter flag to test:');
-  if (!flag) return;
+  const flags = window.prompt(
+    'Enter flags to test:',
+    [FLAG_PAUSE_ASSISTANT, FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS].join(', '),
+  );
+  if (!flags) return;
 
   await store.set(host.config, {
-    flags: {
-      [flag]: { enabled: true },
-    },
+    flags: flags.split(',').reduce((acc, flag) => {
+      acc[flag.trim()] = { enabled: true };
+      return acc;
+    }, {}),
   });
 }
 

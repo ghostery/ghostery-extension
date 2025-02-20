@@ -10,7 +10,6 @@
  */
 
 import { mount, html } from 'hybrids';
-
 import '/ui/index.js';
 
 import * as notifications from '/utils/notifications.js';

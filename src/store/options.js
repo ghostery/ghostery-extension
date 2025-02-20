@@ -15,6 +15,10 @@ import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
+import Config, {
+  ACTION_PAUSE_ASSISTANT,
+  FLAG_PAUSE_ASSISTANT,
+} from './config.js';
 import CustomFilters from './custom-filters.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
@@ -86,7 +90,7 @@ const Options = {
   panel: { statsType: 'graph' },
 
   // Pause
-  paused: store.record({ revokeAt: 0 }),
+  paused: store.record({ revokeAt: 0, assist: false }),
 
   // Sync
   sync: true,
@@ -219,6 +223,16 @@ async function manage(options) {
 
       // Clear out the paused state, to overwrite with the current managed state
       options.paused = {};
+
+      // Add paused domains from the config
+      const config = await store.resolve(Config);
+      if (config.hasFlag(FLAG_PAUSE_ASSISTANT)) {
+        for (const [domain, { actions }] of Object.entries(config.domains)) {
+          if (actions.includes(ACTION_PAUSE_ASSISTANT)) {
+            options.paused[domain] = { revokeAt: 0, assist: true };
+          }
+        }
+      }
     }
 
     if (Array.isArray(managed.trustedDomains)) {
@@ -232,11 +246,16 @@ async function manage(options) {
   return options;
 }
 
-export function isPaused(options, hostname = '') {
-  if (options.paused[GLOBAL_PAUSE_ID]) return true;
+export function getPausedDetails(options, hostname = '') {
+  if (options.paused[GLOBAL_PAUSE_ID]) {
+    return options.paused[GLOBAL_PAUSE_ID];
+  }
 
-  return (
-    !!hostname &&
-    Object.keys(options.paused).some((id) => hostname.endsWith(id))
+  if (!hostname) return null;
+
+  const pausedHostname = Object.keys(options.paused).find((domain) =>
+    hostname.endsWith(domain),
   );
+
+  return pausedHostname ? options.paused[pausedHostname] : null;
 }
