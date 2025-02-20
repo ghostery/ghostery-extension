@@ -10,27 +10,32 @@
  */
 
 import { html } from 'hybrids';
+import { themeToggle } from '/ui/theme.js';
 
 export default {
-  render: () => html`
-    <template layout="relative column height::100% width::359px overflow">
-      <div
-        id="bg"
-        layout="absolute top:-250px left:50% size:1648px:1525px layer:-1"
-      >
-        <div id="c-1" layout="absolute left:300px top:100px size:800px"></div>
-        <div id="c-2" layout="absolute left:420px top:320px size:1200px"></div>
-      </div>
-      <header layout="row center self:stretch gap:2 height:88px">
-        <ui-icon name="logo-with-slogan"></ui-icon>
-      </header>
-      <div layout="grow row content:center margin:0:1:4">
-        <div layout="column grow width:::375px">
-          <slot></slot>
+  render: () =>
+    html`
+      <template layout="relative column height::100% width::359px overflow">
+        <div
+          id="bg"
+          layout="absolute top:-250px left:50% size:1648px:1525px layer:-1"
+        >
+          <div id="c-1" layout="absolute left:300px top:100px size:800px"></div>
+          <div
+            id="c-2"
+            layout="absolute left:420px top:320px size:1200px"
+          ></div>
         </div>
-      </div>
-    </template>
-  `.css`
+        <header layout="row center self:stretch gap:2 height:88px">
+          <ui-icon name="logo-with-slogan"></ui-icon>
+        </header>
+        <div layout="grow row content:center margin:0:1:4">
+          <div layout="column grow width:::375px">
+            <slot></slot>
+          </div>
+        </div>
+      </template>
+    `.css`
     #bg { transform: translateX(-50%); }
 
     #c-1 {
@@ -54,5 +59,5 @@ export default {
 
       #bg { display: none; }
     }
-   `,
+   `.use(themeToggle),
 };

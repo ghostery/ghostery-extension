@@ -10,23 +10,27 @@
  */
 
 import { html } from 'hybrids';
+import { themeToggle } from '../theme.js';
 
 export default {
   icon: { value: '', reflect: true },
   error: { value: '', reflect: true },
-  render: ({ icon, error }) => html`
-    <template layout="column gap:0.5 relative">
-      ${icon &&
-      html`
-        <div layout="row center absolute inset left:12px right:auto">
-          <ui-icon name="${icon}" color="tertiary" layout="size:3"></ui-icon>
-        </div>
-      `}
-      <slot></slot>
-      ${error &&
-      html`<ui-text color="danger-secondary" type="body-s">${error}</ui-text>`}
-    </template>
-  `.css`
+  render: ({ icon, error }) =>
+    html`
+      <template layout="column gap:0.5 relative">
+        ${icon &&
+        html`
+          <div layout="row center absolute inset left:12px right:auto">
+            <ui-icon name="${icon}" color="tertiary" layout="size:3"></ui-icon>
+          </div>
+        `}
+        <slot></slot>
+        ${error &&
+        html`<ui-text color="danger-secondary" type="body-s"
+          >${error}</ui-text
+        >`}
+      </template>
+    `.css`
     :host {
       font: var(--font-body-l);
     }
@@ -122,5 +126,5 @@ export default {
         font: var(--font-body-m);
       }
     }
-  `,
+  `.use(themeToggle),
 };

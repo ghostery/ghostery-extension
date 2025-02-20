@@ -18,14 +18,21 @@ import Session from '/store/session.js';
 import Privacy from './views/privacy.js';
 import Websites from './views/websites.js';
 import Whotracksme from './views/whotracksme.js';
-import Account from './views/account.js';
+import MyGhostery from './views/my-ghostery.js';
 import Preview from './views/preview.js';
 import Trackers from './views/trackers.js';
 
 import assets from './assets/index.js';
 
 export default {
-  stack: router([Privacy, Websites, Whotracksme, Account, Preview, Trackers]),
+  stack: router([
+    Privacy,
+    Websites,
+    Whotracksme,
+    MyGhostery,
+    Preview,
+    Trackers,
+  ]),
   session: store(Session),
   render: ({ stack, session }) => html`
     <template layout="contents">
@@ -72,8 +79,8 @@ export default {
         </a>
 
         <a
-          href="${router.url(Account)}"
-          class="${{ active: router.active(Account), bottom: true }}"
+          href="${router.url(MyGhostery)}"
+          class="${{ active: router.active(MyGhostery), bottom: true }}"
           slot="nav"
         >
           ${store.ready(session) && session.user
@@ -81,16 +88,16 @@ export default {
                 ${session.contributor
                   ? html`<ui-icon name="contributor"></ui-icon>`
                   : html`<ui-icon name="user" color="nav"></ui-icon>`}
-                <span layout@992px="hidden">My Account</span>
+                <span layout@992px="hidden">My Ghostery</span>
                 <div
                   layout="hidden"
                   layout@992px="column margin:left:2px width::0"
                 >
-                  <div>My Account</div>
+                  <div>My Ghostery</div>
                   <ui-text type="body-m" ellipsis>${session.email}</ui-text>
                 </div>
               `
-            : html`<ui-icon name="user" color="nav"></ui-icon> My Account`}
+            : html`<ui-icon name="user" color="nav"></ui-icon> My Ghostery`}
         </a>
         ${__PLATFORM__ !== 'safari' &&
         store.ready(session) &&

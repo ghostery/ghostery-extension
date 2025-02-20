@@ -83,7 +83,7 @@ export default {
               </panel-menu-item>
               <panel-menu-item
                 href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@settings-account',
+                  '/pages/settings/index.html#@settings-my-ghostery',
                 )}"
                 icon="${(store.ready(session) &&
                   session.contributor &&
@@ -91,7 +91,7 @@ export default {
                 'user'}"
               >
                 <div layout="column">
-                  <span>My Account</span>
+                  <span>My Ghostery</span>
                   ${store.ready(session) &&
                   (session.name || session.email) &&
                   html`
