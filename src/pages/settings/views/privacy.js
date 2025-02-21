@@ -9,15 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store } from 'hybrids';
-import * as labels from '/ui/labels.js';
+import { html, router, store } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import Session from '/store/session.js';
 
-import REGIONS from '/utils/regions.js';
-
 import assets from '../assets/index.js';
+import RegionalFilters from './regional-filters.js';
+import ExperimentalFilters from './experimental-filters.js';
+import CustomFilters from './custom-filters.js';
+import Serp from './serp.js';
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
@@ -37,21 +38,10 @@ function updateGlobalPause({ options }, value, lastValue) {
   });
 }
 
-function setRegion(id) {
-  return ({ options }, event) => {
-    const set = new Set(options.regionalFilters.regions);
-
-    if (event.target.checked) {
-      set.add(id);
-    } else {
-      set.delete(id);
-    }
-
-    store.set(options, { regionalFilters: { regions: [...set].sort() } });
-  };
-}
-
 export default {
+  [router.connect]: {
+    stack: [RegionalFilters, ExperimentalFilters, CustomFilters, Serp],
+  },
   options: store(Options),
   session: store(Session),
   devMode: false,
@@ -79,7 +69,7 @@ export default {
         html`
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
-              <ui-text type="headline-m"> Privacy protection </ui-text>
+              <ui-text type="headline-m">Privacy protection</ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="secondary">
                 Ghostery protects your privacy by detecting and neutralizing
                 different types of data collection including ads, trackers, and
@@ -91,28 +81,33 @@ export default {
               onchange="${html.set('globalPause')}"
               data-qa="toggle:global-pause"
             >
-              <div layout="column gap:0.5 grow">
-                <div layout="row gap items:center">
-                  <ui-icon name="pause" color="primary"></ui-icon>
+              <div layout="row gap">
+                <ui-icon
+                  name="pause"
+                  color="quaternary"
+                  layout="size:3"
+                ></ui-icon>
+                <div layout="column gap:0.5 grow">
                   <ui-text type="headline-xs">Pause Ghostery</ui-text>
-                </div>
-                <ui-text type="body-m" mobile-type="body-s" color="secondary">
-                  Suspends privacy protection globally for 1 day.
-                </ui-text>
-                ${globalPauseRevokeAt &&
-                html`
-                  <ui-text type="body-s" color="secondary">
-                    <ui-revoke-at
-                      revokeAt="${globalPauseRevokeAt}"
-                    ></ui-revoke-at>
+                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
+                    Suspends privacy protection globally for 1 day.
                   </ui-text>
-                `}
+                  ${globalPauseRevokeAt &&
+                  html`
+                    <ui-text type="body-s" color="secondary">
+                      <ui-revoke-at
+                        revokeAt="${globalPauseRevokeAt}"
+                      ></ui-revoke-at>
+                    </ui-text>
+                  `}
+                </div>
               </div>
             </ui-toggle>
             <ui-line></ui-line>
             <div
               layout="column gap:4"
               style="${{ opacity: globalPause ? 0.5 : undefined }}"
+              inert="${globalPause}"
             >
               <div layout="column gap:3">
                 <ui-toggle
@@ -121,18 +116,22 @@ export default {
                   onchange="${html.set(options, 'blockAds')}"
                   data-qa="toggle:ad-blocking"
                 >
-                  <div layout="column gap:0.5 grow">
-                    <div layout="row gap items:center">
-                      <ui-icon name="ads" color="primary"></ui-icon>
+                  <div layout="row gap">
+                    <ui-icon
+                      name="ads"
+                      color="quaternary"
+                      layout="size:3"
+                    ></ui-icon>
+                    <div layout="column gap:0.5 grow">
                       <ui-text type="headline-xs">Ad-Blocking</ui-text>
+                      <ui-text
+                        type="body-m"
+                        mobile-type="body-s"
+                        color="secondary"
+                      >
+                        Eliminates ads on websites for safe and fast browsing.
+                      </ui-text>
                     </div>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
-                      Eliminates ads on websites for safe and fast browsing.
-                    </ui-text>
                   </div>
                 </ui-toggle>
                 <ui-toggle
@@ -141,19 +140,23 @@ export default {
                   onchange="${html.set(options, 'blockTrackers')}"
                   data-qa="toggle:anti-tracking"
                 >
-                  <div layout="column grow gap:0.5">
-                    <div layout="row gap items:center">
-                      <ui-icon name="tracking" color="primary"></ui-icon>
+                  <div layout="row gap">
+                    <ui-icon
+                      name="tracking"
+                      color="quaternary"
+                      layout="size:3"
+                    ></ui-icon>
+                    <div layout="column grow gap:0.5">
                       <ui-text type="headline-xs">Anti-Tracking</ui-text>
+                      <ui-text
+                        type="body-m"
+                        mobile-type="body-s"
+                        color="secondary"
+                      >
+                        Prevents various tracking techniques using AI-driven
+                        technology.
+                      </ui-text>
                     </div>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
-                      Prevents various tracking techniques using AI-driven
-                      technology.
-                    </ui-text>
                   </div>
                 </ui-toggle>
                 <ui-toggle
@@ -162,198 +165,155 @@ export default {
                   onchange="${toggleNeverConsent}"
                   data-qa="toggle:never-consent"
                 >
-                  <div layout="column grow gap:0.5">
-                    <div layout="row gap items:center">
-                      <ui-icon name="autoconsent" color="primary"></ui-icon>
-                      <ui-text type="headline-xs">Never-Consent</ui-text>
-                    </div>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
-                      Automatically rejects cookie consent notices.
-                    </ui-text>
-                  </div>
-                </ui-toggle>
-              </div>
-              <ui-line></ui-line>
-              <div layout="column gap">
-                <ui-toggle
-                  disabled="${globalPause}"
-                  value="${options.regionalFilters.enabled}"
-                  onchange="${html.set(options, 'regionalFilters.enabled')}"
-                  data-qa="toggle:regional-filters"
-                >
-                  <div layout="column grow gap:0.5">
-                    <div layout="row gap items:center">
-                      <ui-icon name="pin" color="primary"></ui-icon>
-                      <ui-text type="headline-xs">Regional Filters</ui-text>
-                    </div>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
-                      Blocks additional ads, trackers, and pop-ups specific to
-                      the language of websites you visit. Enable only the
-                      languages you need to avoid slowing down your browser.
-                    </ui-text>
-                  </div>
-                </ui-toggle>
-                <div
-                  hidden="${!options.regionalFilters.enabled}"
-                  layout="grid:repeat(auto-fill,minmax(120px,1fr)) gap:2:1 margin:top"
-                  layout[hidden]="hidden"
-                >
-                  ${REGIONS.map(
-                    (id) => html`
-                      <settings-checkbox
-                        disabled="${globalPause ||
-                        !options.regionalFilters.enabled}"
-                        layout="grow"
-                        data-qa="checkbox:regional-filters:${id}"
-                      >
-                        <input
-                          type="checkbox"
-                          disabled="${!options.regionalFilters.enabled}"
-                          checked="${options.regionalFilters.regions.includes(
-                            id,
-                          )}"
-                          onchange="${setRegion(id)}"
-                        />
-                        <span slot="label">
-                          ${labels.languages.of(id.toUpperCase())} (${id})
-                        </span>
-                      </settings-checkbox>
-                    `,
-                  )}
-                </div>
-              </div>
-              <ui-toggle
-                disabled="${globalPause}"
-                value="${options.serpTrackingPrevention}"
-                onchange="${html.set(options, 'serpTrackingPrevention')}"
-              >
-                <div layout="column grow gap:0.5">
-                  <div layout="row gap items:center">
+                  <div layout="row gap">
                     <ui-icon
-                      name="search"
-                      color="primary"
-                      layout="size:2"
+                      name="autoconsent"
+                      color="quaternary"
+                      layout="size:3"
                     ></ui-icon>
-                    <ui-text type="headline-xs">
-                      Search Engine Redirect Protection
-                    </ui-text>
-                  </div>
-                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
-                    Prevents Google from redirecting search result links through
-                    their servers instead of linking directly to pages.
-                  </ui-text>
-                </div>
-              </ui-toggle>
-              <ui-line></ui-line>
-              <div layout="column gap:3">
-                <ui-text type="headline-xs" color="secondary">Advanced</ui-text>
-                <ui-toggle
-                  disabled="${globalPause}"
-                  value="${options.experimentalFilters}"
-                  onchange="${html.set(options, 'experimentalFilters')}"
-                >
-                  <div layout="column grow items:start gap:0.5">
-                    <div layout="row gap items:center">
-                      <ui-icon name="dots" color="primary"></ui-icon>
-                      <ui-text type="headline-xs">
-                        Experimental Filters
-                      </ui-text>
-                    </div>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
-                      Helps Ghostery fix broken pages faster. By activating you
-                      can test experimental filters and support us with
-                      feedback. Please send a message to support@ghostery.com
-                      describing how your experience changed after enabling.
-                    </ui-text>
-                    <ui-text type="label-s" color="secondary" underline>
-                      <a
-                        href="https://github.com/ghostery/broken-page-reports/blob/main/filters/experimental.txt"
-                        target="_blank"
-                        rel="noreferrer"
-                        layout="row gap:0.5"
-                      >
-                        Learn more
-                        <ui-icon name="arrow-right-s"></ui-icon>
-                      </a>
-                    </ui-text>
-                  </div>
-                </ui-toggle>
-                <div layout="column gap">
-                  <ui-toggle
-                    disabled="${globalPause}"
-                    value="${options.customFilters.enabled}"
-                    onchange="${html.set(options, 'customFilters.enabled')}"
-                    data-qa="toggle:custom-filters"
-                  >
-                    <div layout="column gap:0.5">
-                      <div layout="row gap items:center">
-                        <ui-icon name="detailed-view" color="primary"></ui-icon>
-                        <ui-text type="headline-xs">Custom Filters</ui-text>
-                      </div>
+                    <div layout="column grow gap:0.5">
+                      <ui-text type="headline-xs">Never-Consent</ui-text>
                       <ui-text
                         type="body-m"
                         mobile-type="body-s"
                         color="secondary"
                       >
-                        Facilitates the creation of your own ad-blocking rules
-                        to customize your Ghostery experience.
+                        Automatically rejects cookie consent notices.
                       </ui-text>
+                    </div>
+                  </div>
+                </ui-toggle>
+              </div>
+              <ui-line></ui-line>
+              <ui-toggle
+                disabled="${globalPause}"
+                value="${options.regionalFilters.enabled}"
+                onchange="${html.set(options, 'regionalFilters.enabled')}"
+                data-qa="toggle:regional-filters"
+              >
+                <ui-action>
+                  <a
+                    href="${router.url(RegionalFilters)}"
+                    layout="row gap items:center ::color:primary"
+                    layout:hover@hover="::color:brand-primary"
+                    data-qa="button:regional-filters"
+                  >
+                    <ui-icon
+                      name="pin"
+                      color="quaternary"
+                      layout="size:3"
+                    ></ui-icon>
+                    <ui-text
+                      type="headline-xs"
+                      color="inherit"
+                      layout="row gap:0.5 items:center"
+                    >
+                      Regional Filters
+                      <ui-icon
+                        name="arrow-right"
+                        color="inherit"
+                        layout="size:2"
+                      ></ui-icon
+                    ></ui-text>
+                  </a>
+                </ui-action>
+              </ui-toggle>
+              <ui-toggle
+                disabled="${globalPause}"
+                value="${options.serpTrackingPrevention}"
+                onchange="${html.set(options, 'serpTrackingPrevention')}"
+              >
+                <ui-action>
+                  <a
+                    href="${router.url(Serp)}"
+                    layout="row gap items:center ::color:primary"
+                    layout:hover@hover="::color:brand-primary"
+                  >
+                    <ui-icon
+                      name="search"
+                      color="quaternary"
+                      layout="size:3"
+                    ></ui-icon>
+                    <ui-text
+                      type="headline-xs"
+                      color="inherit"
+                      layout="row gap:0.5 items:center"
+                    >
+                      Search Engine Redirect Protection
+                      <ui-icon
+                        name="arrow-right"
+                        color="inherit"
+                        layout="size:2"
+                      ></ui-icon
+                    ></ui-text>
+                  </a>
+                </ui-action>
+              </ui-toggle>
+              <ui-toggle
+                disabled="${globalPause}"
+                value="${options.experimentalFilters}"
+                onchange="${html.set(options, 'experimentalFilters')}"
+              >
+                <ui-action>
+                  <a
+                    href="${router.url(ExperimentalFilters)}"
+                    layout="row gap items:center ::color:primary"
+                    layout:hover@hover="::color:brand-primary"
+                  >
+                    <ui-icon
+                      name="flask"
+                      color="quaternary"
+                      layout="size:3"
+                    ></ui-icon>
+                    <ui-text
+                      type="headline-xs"
+                      color="inherit"
+                      layout="row gap:0.5 items:center"
+                    >
+                      Experimental Filters
+                      <ui-icon
+                        name="arrow-right"
+                        color="inherit"
+                        layout="size:2"
+                      ></ui-icon
+                    ></ui-text>
+                  </a>
+                </ui-action>
+              </ui-toggle>
+              <div layout="column gap">
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.customFilters.enabled}"
+                  onchange="${html.set(options, 'customFilters.enabled')}"
+                  data-qa="toggle:custom-filters"
+                >
+                  <ui-action>
+                    <a
+                      href="${router.url(CustomFilters)}"
+                      layout="row gap items:center ::color:primary"
+                      layout:hover@hover="::color:brand-primary"
+                      data-qa="button:custom-filters"
+                    >
+                      <ui-icon
+                        name="detailed-view"
+                        color="quaternary"
+                        layout="size:3"
+                      ></ui-icon>
                       <ui-text
-                        type="label-s"
-                        color="secondary"
-                        underline
-                        layout="self:start"
+                        type="headline-xs"
+                        color="inherit"
+                        layout="row gap:0.5 items:center"
                       >
-                        <a
-                          href="https://github.com/ghostery/adblocker/wiki/Compatibility-Matrix"
-                          target="_blank"
-                          rel="noreferrer"
-                          layout="row gap:0.5"
-                        >
-                          Learn more on supported syntax
-                          <ui-icon name="arrow-right-s"></ui-icon>
-                        </a>
-                      </ui-text>
-                    </div>
-                  </ui-toggle>
-                  ${options.customFilters.enabled &&
-                  html`
-                    <div layout="column gap">
-                      <div layout="self:start margin:bottom">
-                        <settings-checkbox
-                          disabled="${globalPause}"
-                          data-qa="checkbox:custom-filters:trusted-scriptlets"
-                        >
-                          <input
-                            type="checkbox"
-                            disabled="${globalPause}"
-                            checked="${options.customFilters.trustedScriptlets}"
-                            onchange="${html.set(
-                              options,
-                              'customFilters.trustedScriptlets',
-                            )}"
-                          />
-                          <span slot="label">Allow trusted scriptlets</span>
-                        </settings-checkbox>
-                      </div>
-                      <settings-custom-filters
-                        disabled="${globalPause}"
-                      ></settings-custom-filters>
-                    </div>
-                  `}
-                </div>
+                        Custom Filters
+                        <ui-icon
+                          name="arrow-right"
+                          color="inherit"
+                          layout="size:2"
+                        ></ui-icon
+                      ></ui-text>
+                    </a>
+                  </ui-action>
+                </ui-toggle>
               </div>
             </div>
           </section>

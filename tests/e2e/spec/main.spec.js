@@ -136,6 +136,8 @@ describe('Main Features', function () {
 
     it('hides the ads on the page', async function () {
       await setPrivacyToggle('regional-filters', true);
+      await getExtensionElement('button:regional-filters').click();
+
       const checkbox = await getExtensionElement(
         'checkbox:regional-filters:pl',
       );

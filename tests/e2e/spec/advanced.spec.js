@@ -20,6 +20,7 @@ import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
 async function setCustomFilters(filters) {
   await setPrivacyToggle('custom-filters', true);
+  await getExtensionElement('button:custom-filters').click();
 
   const checkbox = await getExtensionElement(
     'checkbox:custom-filters:trusted-scriptlets',
@@ -38,6 +39,8 @@ async function setCustomFilters(filters) {
   await expect(
     getExtensionElement('component:custom-filters:result'),
   ).toBeDisplayed();
+
+  await getExtensionElement('button:back').click();
 }
 
 describe('Advanced Features', function () {
@@ -80,7 +83,7 @@ describe('Advanced Features', function () {
     it('disables custom filters', async function () {
       // Switching off custom filters requires rebuilding main engine
       // and it slows down the update of the DNR rules (it goes after the main engine)
-      await setPrivacyToggle('custom-filters', false, 5);
+      await setPrivacyToggle('custom-filters', false);
 
       await browser.url(PAGE_URL);
 

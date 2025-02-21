@@ -38,7 +38,10 @@ export default {
           layout="row items:start gap:2 padding:0.5 margin:-0.5"
           tabindex="${disabled ? -1 : 0}"
         >
-          <div layout="self:stretch grow row" onclick="${stopForAnchors}">
+          <div
+            layout="self:stretch grow row items:center"
+            onclick="${stopForAnchors}"
+          >
             <slot></slot>
           </div>
           <div id="button" layout="row items:center gap padding:0.5 margin:0">

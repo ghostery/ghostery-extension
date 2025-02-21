@@ -39,7 +39,7 @@ export default {
       <settings-layout data-qa="page:settings">
         <a
           href="${router.url(Privacy)}"
-          class="${{ active: router.active(Privacy) }}"
+          class="${{ active: router.active(Privacy, { stack: true }) }}"
           slot="nav"
         >
           <ui-icon name="shield-menu" color="nav" layout="size:3"></ui-icon>
