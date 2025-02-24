@@ -58,12 +58,12 @@
     "message": "변경됨",
     "description": "Plural form - list of adjusted trackers"
   },
+  "ads_and_trackers_will_not_be_blocked_": {
+    "message": "광고와 추적기는 차단되지 않습니다."
+  },
   "adult_advertising": {
     "message": "성인 광고",
     "description": "Tracker category name"
-  },
-  "advanced": {
-    "message": "고급"
   },
   "advertising": {
     "message": "광고",
@@ -147,6 +147,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changes_application_color_theme_": {
+    "message": "애플리케이션 색상 테마를 변경합니다."
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "검색창 옆의 퍼즐 아이콘을 클릭하고 Ghostery를 툴바에 고정하세요."
   },
@@ -205,8 +208,14 @@
     "message": "고객 맞춤 경험 제공",
     "description": "Tracker category name"
   },
+  "dark": {
+    "message": "어두운 테마"
+  },
   "data_collection_summary": {
     "message": "데이터 수집 개요"
+  },
+  "default": {
+    "message": "기본"
   },
   "detailed_view": {
     "message": "자세히 보기"
@@ -219,6 +228,9 @@
   },
   "disabled": {
     "message": "사용 중지됨"
+  },
+  "dismiss": {
+    "message": "닫기"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 갯수를 표시합니다."
@@ -238,6 +250,10 @@
   "email": {
     "message": "이메일",
     "description": "Tracker category name"
+  },
+  "enable_@_0_": {
+    "message": "$${0} 활성화",
+    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "지금 광고 차단 사용"
@@ -295,6 +311,9 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "더 나은 Ghostery 경험을 위해 사용자 별 광고 차단 규칙을 생성할 수 있도록 지원합니다."
   },
+  "fantastic__thanks_": {
+    "message": "환상적이에요! 감사합니다!"
+  },
   "feedback_sharing": {
     "message": "피드백 공유"
   },
@@ -339,6 +358,12 @@
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "현재 보호없이 웹 브라우저 사용 중입니다. Ghostery 트래커 및 광고 차단기로 방문하는 웹 사이트의 추적기를 파악할 수 있습니다."
+  },
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
+    "message": "Ghostery 사용자는 광고 차단기가 더 이상 이 사이트를 방해하지 않는다고 보고합니다. Ghostery를 재개하십시오."
+  },
+  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
+    "message": "Ghostery 사용자는 광고 차단기가 이 사이트를 깨뜨린다고 보고합니다. Ghostery를 일시 중지해 보세요."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery는 이 정보를 사용하여 커뮤니티 기반의 개인정보 보호 기능을 제공하며, 비밀번호, 검색 기록, 페이지 내용과 같은 개인 정보가 수집되지 않도록 보장합니다."
@@ -407,6 +432,9 @@
   "leave_a_review_today": {
     "message": "지금 리뷰를 남겨보세요"
   },
+  "light": {
+    "message": "라이트"
+  },
   "load_more": {
     "message": "더 보기"
   },
@@ -438,8 +466,8 @@
   "more_in_this_organization": {
     "message": "이 단체의 항목 더 보기"
   },
-  "my_account": {
-    "message": "내 계정"
+  "my_ghostery": {
+    "message": "내 고스트리"
   },
   "name": {
     "message": "이름"
@@ -452,6 +480,9 @@
   },
   "never_consent": {
     "message": "Never-Consent"
+  },
+  "no": {
+    "message": "아니요"
   },
   "no_activities_detected": {
     "message": "아무 활동도 감지되지 않음"
@@ -467,6 +498,9 @@
   },
   "off": {
     "message": "끄기"
+  },
+  "ok": {
+    "message": "확인 "
   },
   "on": {
     "message": "켜기"
@@ -498,6 +532,9 @@
   },
   "paused": {
     "message": "일시 중지됨"
+  },
+  "pausing___": {
+    "message": "일시 중지 중..."
   },
   "performance_telemetry": {
     "message": "성능 측정"
@@ -549,6 +586,9 @@
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "잠재적인 웹 추적기의 메타데이터 요청"
+  },
+  "resuming___": {
+    "message": "재개 중..."
   },
   "save": {
     "message": "저장"
@@ -602,6 +642,15 @@
     "message": "웹 사이트 분석",
     "description": "Tracker category name"
   },
+  "site_works_fine": {
+    "message": "사이트가 잘 작동합니다"
+  },
+  "skip": {
+    "message": "건너뛰기"
+  },
+  "skip_this_time": {
+    "message": "이번에는 건너뛰기"
+  },
   "social_media": {
     "message": "소셜 미디어",
     "description": "Tracker category name"
@@ -634,6 +683,9 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주셔서 진심으로 감사드립니다!"
   },
+  "theme": {
+    "message": "테마"
+  },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "이 웹 사이트는 항상 일시 중지됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다"
   },
@@ -654,6 +706,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "개인정보 보호 기능을 제공하기 위해 웹 사이트 트래커 정보가 수집됩니다:"
+  },
+  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
+    "message": "Ghostery 커뮤니티에 도움이 되었다면 알려주세요!"
   },
   "tracker_database": {
     "message": "트래커 데이터베이스"
@@ -733,8 +788,14 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "더 나은 YouTube 사용 환경을 위해 Ghostery 사용하는 것을 알고 있습니다. 보다 나은 해결책이 출시되기 전까지 임시 조치를 취할 수 있습니다."
   },
+  "we_ll_continue_working_on_it__thanks_": {
+    "message": "계속 노력하겠습니다! 감사합니다!"
+  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Ghostery를 마음에 들어해주셔서 감사합니다! 조금의 시간으로 다른 사람들이 저희를 찾게 해주세요."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
+    "message": "고스트리가 마음에 드셨다니 정말 기쁩니다! 다른 사람들에게도 알려주세요—리뷰를 남겨주세요!"
   },
   "web_trackers": {
     "message": "웹 트래커"
@@ -765,6 +826,9 @@
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Ghostery가 사용 중지된 상태에서는 기본적인 트래커 정보 확인만 가능합니다."
+  },
+  "yes": {
+    "message": "예 "
   },
   "you_are_awesome_": {
     "message": "지원에 진심으로 감사드립니다!"

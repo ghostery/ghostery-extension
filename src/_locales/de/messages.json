@@ -58,12 +58,12 @@
     "message": "Angepasst",
     "description": "Plural form - list of adjusted trackers"
   },
+  "ads_and_trackers_will_not_be_blocked_": {
+    "message": "Werbung und Tracker werden nicht blockiert."
+  },
   "adult_advertising": {
     "message": "Erwachsenenwerbung",
     "description": "Tracker category name"
-  },
-  "advanced": {
-    "message": "Fortgeschritten"
   },
   "advertising": {
     "message": "Werbung",
@@ -135,7 +135,7 @@
     "message": "Browser: Anbieter, Version, Sprache, Betriebssystemanbieter"
   },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
-    "message": "Durch das Teilen von Insights zu <a href=\"$${0}\">Add-on-Zustand</a> und <a href=\"$${1}\">Leistungstelemetrie</a>, wie in unserer <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
+    "message": "Durch das Teilen von Informationen zum <a href=\"$${0}\">Add-on-Zustand</a> und <a href=\"$${1}\"> Leistungstelemetrie</a>, wie in unserer <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Datenschutzrichtlinie</a> beschrieben, tragen Sie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
   "cancel": {
     "message": "Abbrechen"
@@ -146,6 +146,9 @@
   "cdn": {
     "message": "CDN",
     "description": "Tracker category name"
+  },
+  "changes_application_color_theme_": {
+    "message": "Ändert das Farbschema der Anwendung."
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Klicken Sie auf das Puzzle-Symbol neben der Suchleiste, um Ghostery an die Werkzeugleiste anzuheften."
@@ -205,8 +208,14 @@
     "message": "Kundeninteraktion",
     "description": "Tracker category name"
   },
+  "dark": {
+    "message": "Dunkelmodus"
+  },
   "data_collection_summary": {
     "message": "Zusammenfassung der erfassten Daten"
+  },
+  "default": {
+    "message": "Standard"
   },
   "detailed_view": {
     "message": "Detailansicht"
@@ -219,6 +228,9 @@
   },
   "disabled": {
     "message": "Deaktiviert"
+  },
+  "dismiss": {
+    "message": "Verwerfen"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Zeigt den Tracker-Zähler auf dem Ghostery-Symbol in der Browser-Werkzeugleiste an"
@@ -238,6 +250,10 @@
   "email": {
     "message": "E-Mail-Adresse",
     "description": "Tracker category name"
+  },
+  "enable_@_0_": {
+    "message": "Aktivieren $${0}",
+    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "Werbeblocker jetzt aktivieren"
@@ -295,6 +311,9 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Erstelle eigene Werbeblocker-Regeln, um deine Ghostery-Erfahrung anzupassen."
   },
+  "fantastic__thanks_": {
+    "message": "Super! Danke!"
+  },
   "feedback_sharing": {
     "message": "Feedback Teilen"
   },
@@ -339,6 +358,12 @@
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Der Ghostery Tracker- und Werbeblocker zeigt lediglich Tracker auf Webseiten an. Dies allein garantiert keinen umfassenden Datenschutz. "
+  },
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
+    "message": "Ghostery-Nutzer berichten, dass Werbeblocker diese Seite nicht mehr beeinträchtigen. Ghostery fortsetzen."
+  },
+  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
+    "message": "Ghostery-Nutzer berichten, dass Werbeblocker diese Seite beeinträchtigen. Versuchen Sie, Ghostery zu pausieren."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery verwendet diese Informationen, um seine gemeinschaftsgestützten Datenschutzfunktionen bereitzustellen. Es stellt sicher, dass persönliche Informationen wie Passwörter, Browserverlauf und Seiteninhalte niemals gesammelt werden."
@@ -407,6 +432,9 @@
   "leave_a_review_today": {
     "message": "Hinterlass uns hier eine Bewertung!"
   },
+  "light": {
+    "message": "Hellmodus"
+  },
   "load_more": {
     "message": "Mehr laden"
   },
@@ -438,8 +466,8 @@
   "more_in_this_organization": {
     "message": "Mehr in dieser Organisation"
   },
-  "my_account": {
-    "message": "Mein Konto"
+  "my_ghostery": {
+    "message": "Mein Ghostery"
   },
   "name": {
     "message": "Name"
@@ -452,6 +480,9 @@
   },
   "never_consent": {
     "message": "Never-Consent"
+  },
+  "no": {
+    "message": "Nein"
   },
   "no_activities_detected": {
     "message": "Keine Aktivitäten erkannt"
@@ -467,6 +498,9 @@
   },
   "off": {
     "message": "Aus"
+  },
+  "ok": {
+    "message": "OK"
   },
   "on": {
     "message": "An"
@@ -498,6 +532,9 @@
   },
   "paused": {
     "message": "Pausiert"
+  },
+  "pausing___": {
+    "message": "Wird pausiert..."
   },
   "performance_telemetry": {
     "message": "Leistungstelemetrie"
@@ -549,6 +586,9 @@
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "Metadaten potenzieller Web-Tracker anfordern"
+  },
+  "resuming___": {
+    "message": "Wird fortgesetzt..."
   },
   "save": {
     "message": "Speichern"
@@ -602,6 +642,15 @@
     "message": "Website-Analytics",
     "description": "Tracker category name"
   },
+  "site_works_fine": {
+    "message": "Die Seite funktioniert einwandfrei"
+  },
+  "skip": {
+    "message": "Überspringen"
+  },
+  "skip_this_time": {
+    "message": "Dieses Mal überspringen "
+  },
   "social_media": {
     "message": "Social Media",
     "description": "Tracker category name"
@@ -634,6 +683,9 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Vielen Dank für Ihre Unterstützung im Kampf von Ghostery für ein Internet, in dem Datenschutz ein grundlegendes Menschenrecht ist!"
   },
+  "theme": {
+    "message": "Thema"
+  },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Diese Seite wird immer pausiert. Sie können dies jederzeit in den Ghostery-Einstellungen ändern, damit Tracker und Werbung Ihnen nicht durchs Web folgen"
   },
@@ -654,6 +706,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Um Datenschutzfunktionen bereitzustellen, werden folgende Informationen über Web-Tracker gesammelt:"
+  },
+  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
+    "message": "Dein Feedback unterstützt die gesamte Ghostery-Community – sag uns, ob das geholfen hat!"
   },
   "tracker_database": {
     "message": "Tracker Datenbank"
@@ -733,8 +788,14 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Wir wissen, dass du dich für ein reibungsloses YouTube-Erlebnis auf Ghostery verlässt. Bis eine bessere Lösung gefunden ist, haben wir hier eine vorübergehende Lösung."
   },
+  "we_ll_continue_working_on_it__thanks_": {
+    "message": "Danke! Wir arbeiten weiter daran!"
+  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Wir freuen uns so sehr, dass Ghostery dein Herz erobert hat! Hilf anderen, uns auch zu finden – es dauert nur einen Moment."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
+    "message": "Wir freuen uns sehr, dass Ghostery dein Herz erobert hat! Lass es andere wissen – hinterlasse eine Bewertung!"
   },
   "web_trackers": {
     "message": "Web-Tracker"
@@ -765,6 +826,9 @@
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Wenn Ghostery deaktiviert ist, steht nur die grundlegende Funktionalität zur Benennung von Trackern zur Verfügung."
+  },
+  "yes": {
+    "message": "Ja"
   },
   "you_are_awesome_": {
     "message": "Sie sind toll!"
