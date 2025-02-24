@@ -26,9 +26,9 @@ export default {
         `}
         <slot></slot>
         ${error &&
-        html`<ui-text color="danger-secondary" type="body-s"
-          >${error}</ui-text
-        >`}
+        html`
+          <ui-text color="danger-secondary" type="body-s">${error}</ui-text>
+        `}
       </template>
     `.css`
     :host {
@@ -66,9 +66,9 @@ export default {
     }
 
     ::slotted(input[type="checkbox"]:checked) {
-      background-color: var(--color-brand-secondary);
+      background-color: var(--background-brand-strong);
       background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3L4.5 8.5L2 6' stroke='white' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
-      border-color: var(--color-brand-secondary);
+      border-color: var(--background-brand-strong);
     }
 
     @media (prefers-color-scheme: dark) {

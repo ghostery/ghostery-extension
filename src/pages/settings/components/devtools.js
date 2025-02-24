@@ -251,21 +251,19 @@ export default {
           </section>
         `
       }
-      <div layout="column gap center">
-        <div layout="row center gap:2">
-          <div onclick="${refresh}">
-            <ui-text
-              type="label-s"
-              color="quaternary"
-              translate="no"
-              style="user-select: none;"
-            >
-              v${VERSION}
-            </ui-text>
-          </div>
+      <div layout="column gap:0.5">
+        <div onclick="${refresh}">
+          <ui-text
+            type="body-m"
+            color="quaternary"
+            translate="no"
+            style="user-select: none;"
+          >
+            v${VERSION}
+          </ui-text>
         </div>
         <ui-action>
-          <ui-text type="label-xs" color="quaternary" onclick="${updateFilters}">
+          <ui-text type="body-m" color="quaternary" onclick="${updateFilters}">
             Last update: ${updatedAt || html`updating...`}
           </ui-text>
         <ui-action>

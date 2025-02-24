@@ -13,15 +13,26 @@ import { html } from 'hybrids';
 export default {
   inContent: { value: false, reflect: true },
   render: () => html`
-    <template layout="column gap:3 padding:3" layout@768px="row items:center">
-      <div><slot name="picture"></slot></div>
+    <template
+      layout="column gap:3 padding:3"
+      layout[in-content]="padding:2"
+      layout@768px="row items:center"
+    >
+      <slot name="picture"></slot>
       <div layout="column gap:2 grow"><slot></slot></div>
     </template>
   `.css`
     :host {
+      background: var(--background-primary);
       border: 1px solid var(--border-primary);
       border-radius: 8px;
-      box-shadow: 0px 2px 6px var(--shadow-card);
+      box-shadow: 0px 4px 8px var(--shadow-card);
+    }
+
+    :host([in-content]) {
+      background: var(--background-secondary);
+      border: none;
+      box-shadow: none;
     }
   `,
 };

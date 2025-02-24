@@ -120,6 +120,8 @@ html {
   --font-body-s: 400 12px / 16px var(--font-family);
   --font-body-xs: 400 11px / 13px var(--font-family);
 
+  --user-select-none: none;
+
   /* Light mode */
 
   --background-brand-primary: var(--color-brand-100);

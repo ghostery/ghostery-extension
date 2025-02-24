@@ -22,7 +22,7 @@ export default {
       >
         <header
           layout="row center gap padding:2 relative layer"
-          layout@992px="padding:5:3 content:start"
+          layout@992px="padding:5:3:3 content:start"
         >
           <ui-icon
             name="logo"
@@ -35,11 +35,11 @@ export default {
         </header>
         <nav
           layout="order:1 row content:space-around padding gap:0.5"
-          layout@992px="grid:1:repeat(4,max-content)|max|1fr content:stretch padding:0:2:2 layer overflow:y:auto"
+          layout@992px="grid:1:repeat(4,max-content)|max|1fr content:stretch padding:2 layer overflow:y:auto"
         >
           <slot name="nav"></slot>
         </nav>
-        <main layout="column grow height::0" layout@992px="area::2">
+        <main layout="relative column grow height::0" layout@992px="area::2">
           <slot></slot>
         </main>
       </template>
@@ -105,6 +105,7 @@ export default {
       header, nav {
         box-shadow: none;
         border: none;
+        background: var(--background-primary);
         border-right: 1px solid var(--border-primary);
       }
 
@@ -117,6 +118,11 @@ export default {
         max-width: none;
         text-align: left;
         --color-nav: var(--color-secondary);
+      }
+
+      nav ::slotted(a:focus-visible) {
+        outline: 2px solid var(--color-brand-primary);
+        outline-offset: 2px;
       }
 
       nav ::slotted(a.active) {
@@ -139,6 +145,20 @@ export default {
         bottom: calc(100% + 17px);
         height: 1px;
         background: var(--border-primary);
+        pointer-events: none;
+      }
+
+      main::before {
+        z-index: 0;
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -80px;
+        bottom: 0;
+        width: 80px;
+        box-shadow: 0px 0px 80px var(--shadow-dialog);
+        pointer-events: none;
       }
     }
   `,
