@@ -58,12 +58,12 @@
     "message": "調整済み",
     "description": "Plural form - list of adjusted trackers"
   },
+  "ads_and_trackers_will_not_be_blocked_": {
+    "message": "広告とトラッカーはブロックされません。"
+  },
   "adult_advertising": {
     "message": "アダルト広告",
     "description": "Tracker category name"
-  },
-  "advanced": {
-    "message": "上級"
   },
   "advertising": {
     "message": "広告",
@@ -147,6 +147,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changes_application_color_theme_": {
+    "message": "アプリケーションのカラーテーマを変更します。"
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、Ghosteryをツールバーに固定します。"
   },
@@ -205,8 +208,14 @@
     "message": "顧客インタラクション",
     "description": "Tracker category name"
   },
+  "dark": {
+    "message": "ダーク"
+  },
   "data_collection_summary": {
     "message": "データ収集概要"
+  },
+  "default": {
+    "message": "初期設定"
   },
   "detailed_view": {
     "message": "詳細ビュー"
@@ -219,6 +228,9 @@
   },
   "disabled": {
     "message": "無効化済み"
+  },
+  "dismiss": {
+    "message": "閉じる"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "ブラウザのツールバーのGhosteryアイコンにトラッカー数を表示します。"
@@ -238,6 +250,10 @@
   "email": {
     "message": "メール",
     "description": "Tracker category name"
+  },
+  "enable_@_0_": {
+    "message": "有効にする $${0}",
+    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "広告ブロッキングを今すぐ有効化"
@@ -295,6 +311,9 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Ghosteryの体験をカスタマイズするために、自分自身の広告ブロックルールの作成を支援します。."
   },
+  "fantastic__thanks_": {
+    "message": "素晴らしい！ありがとう！"
+  },
   "feedback_sharing": {
     "message": "フィードバック共有"
   },
@@ -339,6 +358,12 @@
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blockerは、あなたが訪れるウェブサイトに存在するトラッカーの名前を表示します。ウェブを保護されていない状態でブラウジングしています。"
+  },
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
+    "message": "Ghosteryユーザーは、広告ブロッカーがこのサイトを壊さなくなったと報告しています。Ghosteryを再開してください。"
+  },
+  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
+    "message": "Ghosteryのユーザーは、広告ブロッカーがこのサイトを壊すと報告しています。Ghosteryを一時停止してみてください。"
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghosteryは、この情報を利用してコミュニティ主導のプライバシー機能を提供し、パスワード、閲覧履歴、ページ内容などの個人情報が収集されないようにしています。"
@@ -407,6 +432,9 @@
   "leave_a_review_today": {
     "message": "レビューを残してください"
   },
+  "light": {
+    "message": "軽量"
+  },
   "load_more": {
     "message": "さらに読み込む"
   },
@@ -438,8 +466,8 @@
   "more_in_this_organization": {
     "message": "この組織の詳細"
   },
-  "my_account": {
-    "message": "アカウント"
+  "my_ghostery": {
+    "message": "マイゴースタリー"
   },
   "name": {
     "message": "名前"
@@ -452,6 +480,9 @@
   },
   "never_consent": {
     "message": "決して同意しない"
+  },
+  "no": {
+    "message": "いいえ"
   },
   "no_activities_detected": {
     "message": "アクティビティは検出されませんでした"
@@ -467,6 +498,9 @@
   },
   "off": {
     "message": "オフ"
+  },
+  "ok": {
+    "message": "OK"
   },
   "on": {
     "message": "オン"
@@ -498,6 +532,9 @@
   },
   "paused": {
     "message": "一時停止"
+  },
+  "pausing___": {
+    "message": "一時停止中..."
   },
   "performance_telemetry": {
     "message": "パフォーマンステレメトリ"
@@ -549,6 +586,9 @@
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "潜在的なウェブトラッカーのメタデータを要求する"
+  },
+  "resuming___": {
+    "message": "再開中..."
   },
   "save": {
     "message": "保存"
@@ -602,6 +642,15 @@
     "message": "サイト分析",
     "description": "Tracker category name"
   },
+  "site_works_fine": {
+    "message": "サイトは正常に動作しています"
+  },
+  "skip": {
+    "message": "スキップ"
+  },
+  "skip_this_time": {
+    "message": "今回はスキップ"
+  },
   "social_media": {
     "message": "ソーシャル・メディア",
     "description": "Tracker category name"
@@ -634,6 +683,9 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
   },
+  "theme": {
+    "message": "テーマ"
+  },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "このサイトは常に一時停止されます。Ghosteryの設定でいつでもこれを変更して、トラッカーや広告がウェブ上であなたを追跡するのを防ぐことができます。"
   },
@@ -654,6 +706,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "プライバシー保護機能を提供するために、ウェブトラッカーに関する以下の情報が収集されます。"
+  },
+  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
+    "message": "Ghosteryコミュニティのために、これが役立ったかどうか教えてください！"
   },
   "tracker_database": {
     "message": "トラッカー・データベース"
@@ -733,8 +788,14 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "スムーズなYouTube体験のためにGhosteryに依存していることは承知しています。より洗練されたソリューションが登場するまでの一時的な解決策をご紹介します。"
   },
+  "we_ll_continue_working_on_it__thanks_": {
+    "message": "引き続き取り組んでいきます！ありがとうございます！"
+  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Ghosteryを気に入っていただきありがとうございます！他の人にも見つけてもらえるように手助けしてください。ほんの一瞬でできます。."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
+    "message": "Ghosteryを気に入っていただきありがとうございます！他の人にも知らせてください—レビューを残してください！"
   },
   "web_trackers": {
     "message": "ウェブトラッカー"
@@ -765,6 +826,9 @@
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Ghosteryを無効にすると、トラッカーの名前を付ける基本的な機能のみが利用可能です。."
+  },
+  "yes": {
+    "message": "はい"
   },
   "you_are_awesome_": {
     "message": "ありがとうございます！"

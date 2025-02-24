@@ -58,12 +58,12 @@
     "message": "Dostosowane",
     "description": "Plural form - list of adjusted trackers"
   },
+  "ads_and_trackers_will_not_be_blocked_": {
+    "message": "Reklamy i trackery nie będą blokowane."
+  },
   "adult_advertising": {
     "message": "Reklama dla dorosłych",
     "description": "Tracker category name"
-  },
-  "advanced": {
-    "message": "Zaawansowane"
   },
   "advertising": {
     "message": "Reklama",
@@ -147,6 +147,9 @@
     "message": "CDN",
     "description": "Tracker category name"
   },
+  "changes_application_color_theme_": {
+    "message": "Zmienia motyw kolorystyczny aplikacji."
+  },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Kliknij ikonę puzzla obok pola wyszukiwania i przypnij Ghostery do paska narzędzi."
   },
@@ -205,8 +208,14 @@
     "message": "Interakcja z klientem",
     "description": "Tracker category name"
   },
+  "dark": {
+    "message": "Ciemny"
+  },
   "data_collection_summary": {
     "message": "Podsumowanie zbierania danych"
+  },
+  "default": {
+    "message": "Domyślny"
   },
   "detailed_view": {
     "message": "Widok szczegółowy"
@@ -219,6 +228,9 @@
   },
   "disabled": {
     "message": "Wyłączone"
+  },
+  "dismiss": {
+    "message": "Zamknij"
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Wyświetla Licznik Trackerów na ikonie Ghostery w pasku narzędzi."
@@ -238,6 +250,10 @@
   "email": {
     "message": "E-mail",
     "description": "Tracker category name"
+  },
+  "enable_@_0_": {
+    "message": "Włącz $${0}",
+    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "Włącz teraz blokowanie reklam"
@@ -295,6 +311,9 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Umożliwia tworzenie własnych reguł blokowania reklam, aby dostosować działanie Ghostery do swoich potrzeb."
   },
+  "fantastic__thanks_": {
+    "message": "Fantastycznie! Dzięki!"
+  },
   "feedback_sharing": {
     "message": "Udostępnianie informacji"
   },
@@ -311,7 +330,7 @@
     "message": "Ghostery nic nie wykryło na tej stronie"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
-    "message": "Ghostery jest już gotowy, aby blokować trackery i chronić twoją prywatność podczas przeglądania."
+    "message": "Ghostery jest już gotowe, aby blokować trackery i chronić twoją prywatność podczas przeglądania."
   },
   "ghostery_is_installed_with_limited_functionality": {
     "message": "Ghostery jest zainstalowany z ograniczoną funkcjonalnością"
@@ -339,6 +358,12 @@
   },
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Bloker Trackerów i Reklam nazywa trackery obecne na odwiedzanych przez Ciebie stronach internetowych. Przeglądasz sieć bez ochrony."
+  },
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
+    "message": "Użytkownicy Ghostery zgłaszają, że blokery reklam nie powodują już problemów na tej stronie. Wznów Ghostery."
+  },
+  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
+    "message": "Użytkownicy Ghostery zgłaszają, że blokery reklam powodują problemy z tą stroną. Spróbuj wstrzymać działanie Ghostery."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery wykorzystuje te informacje, aby zapewnić funkcje prywatności oparte na społeczności, gwarantując, że dane osobowe—takie jak hasła, historia przeglądania i zawartość stron—nigdy nie są zbierane."
@@ -407,6 +432,9 @@
   "leave_a_review_today": {
     "message": "Napisz recenzję już dziś"
   },
+  "light": {
+    "message": "Jasny"
+  },
   "load_more": {
     "message": "Załaduj więcej"
   },
@@ -438,8 +466,8 @@
   "more_in_this_organization": {
     "message": "Więcej w tej organizacji"
   },
-  "my_account": {
-    "message": "Moje konto"
+  "my_ghostery": {
+    "message": "Moje Ghostery"
   },
   "name": {
     "message": "Nazwa"
@@ -452,6 +480,9 @@
   },
   "never_consent": {
     "message": "Never-Consent"
+  },
+  "no": {
+    "message": "Nie"
   },
   "no_activities_detected": {
     "message": "Nie wykryto aktywności"
@@ -467,6 +498,9 @@
   },
   "off": {
     "message": "Wył."
+  },
+  "ok": {
+    "message": "OK"
   },
   "on": {
     "message": "Wł."
@@ -498,6 +532,9 @@
   },
   "paused": {
     "message": "Wstrzymane"
+  },
+  "pausing___": {
+    "message": "Wstrzymywanie..."
   },
   "performance_telemetry": {
     "message": "Telemetria wydajności"
@@ -549,6 +586,9 @@
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "żądanie metadanych potencjalnych trackerów internetowych"
+  },
+  "resuming___": {
+    "message": "Wznawianie..."
   },
   "save": {
     "message": "Zapisz"
@@ -602,6 +642,15 @@
     "message": "Analiza statystyk strony",
     "description": "Tracker category name"
   },
+  "site_works_fine": {
+    "message": "Strona działa poprawnie"
+  },
+  "skip": {
+    "message": "Pomiń"
+  },
+  "skip_this_time": {
+    "message": "Pomiń tym razem"
+  },
   "social_media": {
     "message": "Media społecznościowe",
     "description": "Tracker category name"
@@ -634,6 +683,9 @@
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Dziękujemy za Twoje wsparcie w walce Ghostery o sieć, w której prywatność jest podstawowym prawem człowieka!"
   },
+  "theme": {
+    "message": "Motyw"
+  },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Ta witryna będzie zawsze wstrzymana. Możesz zmienić to w dowolnym momencie w ustawieniach Ghostery, aby uniemożliwić śledzenie Ciebie w sieci przez trackery i reklamy"
   },
@@ -654,6 +706,9 @@
   },
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Aby zapewnić funkcje ochrony prywatności, zbierane są następujące informacje o trackerach:"
+  },
+  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
+    "message": "Czy to pomogło? Daj nam znać, aby społeczność Ghostery mogła na tym skorzystać!"
   },
   "tracker_database": {
     "message": "Baza danych Trackerów"
@@ -733,8 +788,14 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Wiemy, że polegasz na Ghostery, aby płynnie korzystać z YouTube. Dopóki nie pojawi się bardziej wyrafinowane rozwiązanie, oto tymczasowa poprawka."
   },
+  "we_ll_continue_working_on_it__thanks_": {
+    "message": "Będziemy nad tym dalej pracować! Dziękujemy!"
+  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Cieszymy się, że Ghostery zdobyło Twoje serce! Pomóż innym nas znaleźć - to zajmie tylko chwilę."
+  },
+  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
+    "message": "Cieszymy się, że Ghostery zdobyło Twoje serce! Daj znać innym — zostaw recenzję!"
   },
   "web_trackers": {
     "message": "Trackery"
@@ -765,6 +826,9 @@
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Gdy Ghostery jest wyłączone, dostępna jest tylko podstawowa funkcjonalność śledzenia trackerów."
+  },
+  "yes": {
+    "message": "Tak"
   },
   "you_are_awesome_": {
     "message": "Jesteś super!"
