@@ -18,7 +18,7 @@ export default {
     <template layout="block">${html([icons[name]]) || ''}</template>
   `.css`
     :host {
-      color: ${color ? `var(--color-${color}, magenta);` : 'inherit'};
+      color: ${color ? `var(--color-${color});` : 'inherit'};
     }
 
     svg {
