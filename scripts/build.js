@@ -420,7 +420,7 @@ const buildPromise = build({
         preserveModulesRoot: 'src',
         minifyInternalExports: false,
         entryFileNames: '[name].js',
-        assetFileNames: 'assets/[name].[ext]',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
         sanitizeFileName: (name) => {
           name = name
             .replace(/[\0?*]+/g, '_')
