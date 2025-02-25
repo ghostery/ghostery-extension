@@ -301,9 +301,7 @@ export default {
         background: var(--color-danger-800);
         color: var(--color-base-white);
       }
-    }
 
-    @media (prefers-color-scheme: dark) and (hover: hover) {
       :host(:not([paused])) #type:hover {
         background: var(--color-brand-700);
       }
