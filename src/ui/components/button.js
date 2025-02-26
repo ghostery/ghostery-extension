@@ -130,6 +130,8 @@ export default {
       text-decoration: none;
       border-radius: 8px;
       padding: 0px 16px;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     ::slotted(*:focus-visible) {

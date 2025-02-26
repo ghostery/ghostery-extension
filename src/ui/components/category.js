@@ -18,14 +18,24 @@ export default {
   name: '',
   count: 0,
   actionable: { value: false, reflect: true },
-  render: ({ name, count }) => html`
+  large: { value: false, reflect: true },
+  render: ({ name, count, large }) => html`
     <template layout="row gap items:center">
       <div id="pill" layout="size:12px:6px"></div>
-      <div id="label" layout="row gap items:center grow padding:0.5:0">
-        <ui-text type="body-s" color="secondary" layout="grow">
+      <div
+        id="label"
+        class="${{ large }}"
+        layout="row gap items:center grow padding:0.5:0"
+        layout.large="padding:1:0"
+      >
+        <ui-text
+          type="body-${large ? 'l' : 's'}"
+          color="secondary"
+          layout="grow"
+        >
           ${labels.categories[getCategoryKey(name)]}
         </ui-text>
-        <ui-text type="label-s" id="count">${count}</ui-text>
+        <ui-text type="label-${large ? 'l' : 's'}" id="count">${count}</ui-text>
       </div>
     </template>
   `.css`

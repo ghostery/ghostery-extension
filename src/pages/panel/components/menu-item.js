@@ -16,7 +16,7 @@ import { openTabWithUrl } from '/utils/tabs.js';
 export default {
   href: '',
   icon: '',
-  suffixIcon: 'arrow-right',
+  suffixIcon: 'chevron-right',
   internal: false,
   render: ({ href, icon, suffixIcon, internal }) => html`
     <template layout="block">

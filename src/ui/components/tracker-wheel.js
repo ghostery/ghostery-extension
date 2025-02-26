@@ -100,7 +100,15 @@ export default {
               />
           `,
         )}
-        <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">
+        <text
+          x="50%"
+          y="50%"
+          dominant-baseline="central"
+          text-anchor="middle"
+          style="${{
+            fontSize: `${14 - String(categories.length).length}px`,
+          }}"
+        >
           ${categories && categories.length}
         </text>
       </svg>
@@ -120,7 +128,6 @@ export default {
     text {
       fill: var(--color-primary);
       font-family: var(--font-family-label);
-      font-size: 12px;
       font-weight: 600;
     }
    `,

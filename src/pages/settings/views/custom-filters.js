@@ -68,7 +68,7 @@ export default {
                     layout="row gap:0.5"
                   >
                     Learn more on supported syntax
-                    <ui-icon name="arrow-right-s"></ui-icon>
+                    <ui-icon name="chevron-right-s"></ui-icon>
                   </a>
                 </ui-text>
               </div>

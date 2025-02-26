@@ -154,11 +154,16 @@ export default {
         display: block;
         position: absolute;
         top: 0;
-        left: -80px;
+        left: -40px;
         bottom: 0;
-        width: 80px;
-        box-shadow: 0px 0px 80px var(--shadow-dialog);
+        width: 40px;
+        box-shadow: 0px 0px 60px var(--shadow-dialog);
         pointer-events: none;
+      }
+
+      main ::slotted(*) {
+        position: relative;
+        z-index: 1;
       }
     }
   `,

@@ -12,8 +12,12 @@
 import { store } from 'hybrids';
 import * as IDB from 'idb';
 
+import { order } from '/ui/categories.js';
+
 import { registerDatabase } from '/utils/indexeddb.js';
-import * as trackerDb from '../utils/trackerdb.js';
+import * as trackerDb from '/utils/trackerdb.js';
+
+import Tracker from './tracker.js';
 
 // Synchronously register name of the database
 // so if a user don't open any page, it is still possible
@@ -21,13 +25,9 @@ import * as trackerDb from '../utils/trackerdb.js';
 const DB_NAME = registerDatabase('insights');
 
 async function getDb() {
-  let upgradeFromMV2 = false;
-
   if (!getDb.current) {
     getDb.current = IDB.openDB(DB_NAME, 31, {
       async upgrade(db, oldVersion, newVersion, transaction) {
-        upgradeFromMV2 = oldVersion > 0 && oldVersion < 31;
-
         if (oldVersion >= 20) {
           db.deleteObjectStore('search');
         }
@@ -50,39 +50,8 @@ async function getDb() {
 
         db.close();
         getDb.current = null;
-        upgradeFromMV2 = false;
       },
     });
-  }
-
-  if (upgradeFromMV2) {
-    const db = await getDb.current;
-    const oldStats = await db.getAll('daily');
-    const tx = db.transaction('daily', 'readwrite');
-    const daily = tx.objectStore('daily');
-
-    console.info(
-      `[daily-stats] Migrating ${oldStats.length} daily stats from MV2`,
-    );
-
-    for (const stats of oldStats) {
-      await daily.delete(stats.day);
-      await daily.put({
-        id: stats.day,
-        day: stats.day,
-        trackersBlocked: stats.trackersBlocked || 0,
-        trackersModified:
-          (stats.cookiesBlocked || 0) + (stats.fingerprintsRemoved || 0),
-        pages: stats.pages || 0,
-        patterns: stats.trackers || [],
-      });
-    }
-
-    await tx.done;
-
-    console.info(
-      `[daily-stats] Migration of daily stats from MV2 done successfully`,
-    );
   }
 
   return await getDb.current;
@@ -128,9 +97,13 @@ const DailyStats = {
       flush(id);
       return values;
     },
-    async list() {
+    async list({ dateFrom, dateTo }) {
       const db = await getDb();
-      return db.getAllFromIndex('daily', 'day');
+      return db.getAllFromIndex(
+        'daily',
+        'day',
+        IDBKeyRange.bound(dateFrom, dateTo),
+      );
     },
   },
 };
@@ -138,46 +111,66 @@ const DailyStats = {
 export default DailyStats;
 
 export const MergedStats = {
+  id: true,
+  pages: 0,
   trackersBlocked: 0,
   trackersModified: 0,
-  trackersDetailed: [{ id: true, category: '' }],
+  trackers: [String],
+  groupedTrackers: [Tracker],
+  categories: [String],
+  groupedCategories: [{ id: true, count: 0 }],
   [store.connect]: {
     cache: false,
-    async get() {
-      const list = await store.resolve([DailyStats]);
-      const patterns = new Set();
+    async get({ dateFrom, dateTo }) {
+      const list = await store.resolve([DailyStats], { dateFrom, dateTo });
+      const patterns = [];
 
-      // Merge stats
-      const mergedStats = list.reduce(
+      const data = list.reduce(
         (acc, stats) => {
           for (const id of stats.patterns) {
-            patterns.add(id);
+            patterns.push(id);
           }
 
+          acc.pages += stats.pages;
           acc.trackersBlocked += stats.trackersBlocked;
           acc.trackersModified += stats.trackersModified;
 
           return acc;
         },
         {
+          pages: 0,
           trackersBlocked: 0,
           trackersModified: 0,
-          trackersDetailed: [],
+          categories: [],
         },
       );
 
-      // Add metadata
-      for (const id of patterns) {
-        const { category = 'unidentified' } =
-          (await trackerDb.getTracker(id)) || {};
+      data.trackers = Array.from(new Set(patterns));
 
-        mergedStats.trackersDetailed.push({
-          id,
-          category,
-        });
+      const groupedCategories = {};
+      const groupedTrackers = new Map();
+
+      for (const id of patterns) {
+        const tracker = await trackerDb.getTracker(id);
+
+        const category = tracker?.category || 'unidentified';
+        groupedCategories[category] = (groupedCategories[category] || 0) + 1;
+        data.categories.push(category);
+
+        if (tracker) {
+          groupedTrackers.set(tracker, (groupedTrackers.get(tracker) || 0) + 1);
+        }
       }
 
-      return mergedStats;
+      data.groupedTrackers = Array.from(groupedTrackers.entries())
+        .sort((a, b) => b[1] - a[1])
+        .map(([tracker]) => tracker);
+
+      data.groupedCategories = Object.entries(groupedCategories)
+        .map(([id, count]) => ({ id, count }))
+        .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+
+      return data;
     },
   },
 };

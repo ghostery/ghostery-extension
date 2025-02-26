@@ -34,12 +34,12 @@ export const categories = {
   other: msg`Other | Tracker category name`,
 };
 
-export const regions = new Intl.DisplayNames(
-  [chrome.i18n.getUILanguage().split('-')[0]],
-  { type: 'region' },
-);
+const lang = chrome.i18n.getUILanguage().split('-')[0];
 
-export const languages = new Intl.DisplayNames(
-  [chrome.i18n.getUILanguage().split('-')[0]],
-  { type: 'language' },
-);
+export const regions = new Intl.DisplayNames(lang, { type: 'region' });
+export const languages = new Intl.DisplayNames(lang, { type: 'language' });
+
+export const shortDateFormatter = new Intl.DateTimeFormat(lang, {
+  month: 'short',
+  day: 'numeric',
+});
