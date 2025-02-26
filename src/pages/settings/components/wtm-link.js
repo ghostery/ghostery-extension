@@ -16,7 +16,7 @@ export default {
     <template layout="row items:center gap:2 padding:1.5:2">
       <ui-icon name="wtm-logo" color=""></ui-icon>
       <ui-text type="label-m" layout="grow"><slot></slot></ui-text>
-      <ui-icon name="arrow-right" color="primary"></ui-icon>
+      <ui-icon name="chevron-right" color="primary"></ui-icon>
     </template>
   `.css`
     :host {
