@@ -32,7 +32,7 @@ export default {
           >
             <ui-icon
               id="arrow"
-              name="arrow-down"
+              name="chevron-down"
               layout="size:3"
               color="secondary"
             ></ui-icon>

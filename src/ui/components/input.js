@@ -71,6 +71,10 @@ export default {
       border-color: var(--background-brand-strong);
     }
 
+    ::slotted(input[type="date"]) {
+      font: var(--font-body-m);
+    }
+
     @media (prefers-color-scheme: dark) {
       ::slotted(input[type="checkbox"]:checked) {
         background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3L4.5 8.5L2 6' stroke='%23202225' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");

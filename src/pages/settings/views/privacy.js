@@ -210,7 +210,7 @@ export default {
                     >
                       Regional Filters
                       <ui-icon
-                        name="arrow-right"
+                        name="chevron-right"
                         color="inherit"
                         layout="size:2"
                       ></ui-icon
@@ -241,7 +241,7 @@ export default {
                     >
                       Search Engine Redirect Protection
                       <ui-icon
-                        name="arrow-right"
+                        name="chevron-right"
                         color="inherit"
                         layout="size:2"
                       ></ui-icon
@@ -272,7 +272,7 @@ export default {
                     >
                       Experimental Filters
                       <ui-icon
-                        name="arrow-right"
+                        name="chevron-right"
                         color="inherit"
                         layout="size:2"
                       ></ui-icon
@@ -306,7 +306,7 @@ export default {
                       >
                         Custom Filters
                         <ui-icon
-                          name="arrow-right"
+                          name="chevron-right"
                           color="inherit"
                           layout="size:2"
                         ></ui-icon
