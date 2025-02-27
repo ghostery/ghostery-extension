@@ -6,6 +6,7 @@ updates:
       - dependency-type: 'production'
     ignore:
       - dependency-name: 'tldts-experimental'
+      - dependency-name: '@sentry/browser'
     schedule:
       interval: 'daily'
       time: '07:00'
@@ -21,9 +22,10 @@ updates:
     directory: '/'
     allow:
       - dependency-type: 'development'
-      # 'tldts-experimental' updates frequently, but we need to keep it up to date
+      # 'tldts-experimental' and '@sentry/browser' update frequently, but we need to keep them up to date
       # for each release to the production, which happens at most once a week.
       - dependency-name: 'tldts-experimental'
+      - dependency-name: '@sentry/browser'
     ignore:
       # Currently the wdio has a bug, which does not allow us to update it often
       - dependency-name: '@wdio/*'
