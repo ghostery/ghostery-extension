@@ -10,6 +10,7 @@ import SwiftUI
 
 #if os(iOS)
 import UIKit
+
 #elseif os(macOS)
 import Cocoa
 #endif
@@ -51,7 +52,17 @@ class WebViewUserContentHelper: NSObject, WKScriptMessageHandler {
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.body as! String == "open-support") {
-            openInWebView(URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari?embed=1")!)
+          let baseURL = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari")!
+
+          #if os(iOS)
+              if UIDevice.current.userInterfaceIdiom == .pad {
+                openInWebView(URL(string: "\(baseURL)?embed=1#how-to-install-ghosterys-free-ad-blocker-extension-for-safari-on-your-ipad")!)
+              } else {
+                openInWebView(URL(string: "\(baseURL)?embed=1#how-to-install-the-ghostery-ad-blocker-extension-on-your-iphone")!)
+              }
+          #elseif os(macOS)
+              openInWebView(URL(string: "\(baseURL)?embed=1#how-to-install-the-ghostery-extension-for-safari-on-your-mac")!)
+          #endif
         }
 
         if (message.body as! String == "open-subscriptions") {
