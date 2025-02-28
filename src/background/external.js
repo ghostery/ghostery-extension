@@ -12,7 +12,6 @@
 import { store } from 'hybrids';
 
 import Session from '/store/session.js';
-import { MergedStats } from '/store/daily-stats.js';
 
 if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
   // Listen for messages from Ghostery Search extension
@@ -22,8 +21,6 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
     'nomidcdbhopffbhbpfnnlgnfimhgdman', // Chrome
     'search@ghostery.com', // Firefox
   ];
-
-  const GHOSTERY_NEW_TAB_EXTENSION_IDS = ['newtab@ghostery.com'];
 
   chrome.runtime.onMessageExternal.addListener(
     (message, sender, sendResponse) => {
@@ -35,37 +32,6 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'firefox') {
               .resolve(Session)
               .then(({ user }) => sendResponse({ success: !!user }));
             return true;
-          default:
-            console.error(
-              `[external] Unknown message type from "${sender.id}"`,
-              message,
-            );
-        }
-      }
-
-      // Send historical stats to Ghostery New Tab extension
-      if (GHOSTERY_NEW_TAB_EXTENSION_IDS.includes(sender.id)) {
-        switch (message?.name) {
-          case 'getDashboardStats': {
-            (async () => {
-              const stats = await store.resolve(MergedStats);
-
-              // Firefox does not serialize correctly objects with getters
-              sendResponse(JSON.parse(JSON.stringify(stats)));
-            })();
-
-            return true;
-          }
-          case 'getUser': {
-            (async () => {
-              const session = await store.resolve(Session);
-
-              // Firefox does not serialize correctly objects with getters
-              sendResponse(session.user && JSON.parse(JSON.stringify(session)));
-            })();
-
-            return true;
-          }
           default:
             console.error(
               `[external] Unknown message type from "${sender.id}"`,

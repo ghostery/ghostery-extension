@@ -117,7 +117,7 @@ export default {
                     ${PAUSE_TYPES.find(({ value }) => value === pauseType)
                       .label}
                   </ui-text>
-                  <ui-icon name="arrow-down"></ui-icon>
+                  <ui-icon name="chevron-down"></ui-icon>
                 `}
           </div>
         </button>
