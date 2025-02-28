@@ -163,8 +163,8 @@ function setupTrackersPreview(popupUrl) {
 
 window.addEventListener('message', (message) => {
   if (
-    message.origin + '/' !== chrome.runtime.getURL('/').toLowerCase() &&
-    typeof message.data == 'string'
+    message.origin + '/' !== chrome.runtime.getURL('/').toLowerCase() ||
+    typeof message.data !== 'string'
   ) {
     return;
   }
