@@ -13,6 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   narrow: { value: false, reflect: true },
+  flat: { value: false, reflect: true },
   render: () => html`
     <template layout="column padding:3">
       <slot></slot>
@@ -20,12 +21,17 @@ export default {
   `.css`
     :host {
       background: var(--background-primary);
-      border-radius: 16px;
-      box-shadow: 15px 30px 80px var(--shadow-card);
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px 0px var(--shadow-card);
     }
 
     :host([narrow]) {
       border-radius: 8px;
+    }
+
+    :host([flat]) {
+      box-shadow: none;
+      border: 1px solid var(--border-primary);
     }
   `,
 };

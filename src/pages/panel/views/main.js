@@ -139,7 +139,7 @@ export default {
                         >
                         ${!options.managed &&
                         html`<ui-icon
-                          name="arrow-down"
+                          name="chevron-down"
                           layout="size:1.5"
                           color="secondary"
                         ></ui-icon>`}
@@ -210,7 +210,7 @@ export default {
                         >
                           Report a broken page
                           <ui-icon
-                            name="arrow-right"
+                            name="chevron-right"
                             layout="size:1.5"
                           ></ui-icon>
                         </ui-text>
