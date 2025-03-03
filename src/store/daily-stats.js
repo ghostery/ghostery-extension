@@ -12,8 +12,6 @@
 import { store } from 'hybrids';
 import * as IDB from 'idb';
 
-import { order } from '/ui/categories.js';
-
 import { registerDatabase } from '/utils/indexeddb.js';
 import * as trackerDb from '/utils/trackerdb.js';
 
@@ -155,7 +153,6 @@ export const MergedStats = {
 
         const category = tracker?.category || 'unidentified';
         groupedCategories[category] = (groupedCategories[category] || 0) + 1;
-        data.categories.push(category);
 
         if (tracker) {
           groupedTrackers.set(tracker, (groupedTrackers.get(tracker) || 0) + 1);
@@ -167,8 +164,21 @@ export const MergedStats = {
         .map(([tracker]) => tracker);
 
       data.groupedCategories = Object.entries(groupedCategories)
-        .map(([id, count]) => ({ id, count }))
-        .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+        .sort((a, b) => b[1] - a[1])
+        .map(([id, count]) => ({ id, count }));
+
+      if (data.groupedCategories.length > 5) {
+        const other = data.groupedCategories.splice(5);
+        data.groupedCategories.push({
+          id: 'other',
+          count: other.reduce((acc, { count }) => acc + count, 0),
+        });
+      }
+
+      data.categories = data.groupedCategories.reduce((acc, { id, count }) => {
+        for (let i = 0; i < count; i++) acc.push(id);
+        return acc;
+      }, []);
 
       return data;
     },

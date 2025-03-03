@@ -9,11 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount } from 'hybrids';
+import { define } from 'hybrids';
 
-import '/ui/index.js';
-import './elements.js';
-
-import WhoTracksMe from './whotracksme.js';
-
-mount(document.body, WhoTracksMe);
+define.from(
+  import.meta.glob(['./components/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  { root: ['components'], prefix: 'whotracksme' },
+);

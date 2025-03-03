@@ -54,7 +54,6 @@ export default {
 
     :host(:last-child) #label {
       border-bottom: none;
-      padding-bottom: 0;
     }
 
     @media (hover: hover) {
