@@ -41,6 +41,10 @@ export default {
       --button-border-color: var(--button-background);
     }
 
+    @media print {
+      :host { box-shadow: none; }
+    }
+
     :host([hidden]) { display: none; }
     :host(:active) { opacity: 0.6; }
 
@@ -130,6 +134,8 @@ export default {
       text-decoration: none;
       border-radius: 8px;
       padding: 0px 16px;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     ::slotted(*:focus-visible) {

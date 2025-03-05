@@ -261,6 +261,30 @@ html {
     --component-custom-token-bg-overlay: var(--color-alpha-black-80);
     --component-custom-token-bg-scroll: var(--color-alpha-black-10);
   }
+
+  input {
+    color-scheme: dark;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin-left: 0.5cm;
+    margin-right: 0.5cm;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  html,
+  body {
+    width: 1120px;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 html {
