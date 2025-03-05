@@ -171,6 +171,24 @@ export default {
                 </div>
               </ui-toggle>
             `}
+
+            <ui-line></ui-line>
+            <div layout="row padding:left:15">
+              <ui-action>
+                <ui-text type="headline-xs">
+                  <a
+                    href="${chrome.runtime.getURL(
+                      '/pages/whotracksme/index.html',
+                    )}"
+                    target="_blank"
+                    layout="row items:center gap:0.5"
+                  >
+                    WhoTracks.Me Raport
+                    <ui-icon name="chevron-right" layout="size:2"></ui-icon>
+                  </a>
+                </ui-text>
+              </ui-action>
+            </div>
           </section>
         `}
       </settings-page-layout>

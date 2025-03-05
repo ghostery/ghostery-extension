@@ -111,8 +111,9 @@ export default {
       });
     },
   },
-  render: () =>
-    html`<template layout="grid">
+  render: () => html`
+    <template layout="grid">
       <div id="chart"></div>
-    </template>`,
+    </template>
+  `,
 };
