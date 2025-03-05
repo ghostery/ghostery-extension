@@ -27,20 +27,48 @@ export default {
     id: ({ dateFrom, dateTo }) => ({ dateFrom, dateTo }),
   }),
   trends: { value: [] },
+  aggregate: 0,
   data: {
-    value: ({ stats, trends }) => {
+    value: ({ stats, trends, aggregate }) => {
       if (!store.ready(stats) || store.pending(stats)) return undefined;
 
       return stats.length
-        ? trends.map((key) => ({
-            name: key,
-            x: stats.map(({ day }) => day),
-            y: stats.map(({ [key]: value }) => value),
-            type: 'scatter',
-            mode: 'lines',
-            text: stats.map(({ day, [key]: value }) => `${day} - ${value}`),
-            hoverinfo: 'text',
-          }))
+        ? trends.map((key) => {
+            let index = -1;
+            let lastDay = null;
+
+            const { x, y } = stats.reduce(
+              (acc, { day, [key]: value }) => {
+                if (
+                  acc.x.length === 0 ||
+                  !aggregate ||
+                  new Date(day) - lastDay >= aggregate * 24 * 60 * 60 * 1000
+                ) {
+                  acc.x.push(day);
+                  acc.y.push(value);
+
+                  index += 1;
+                  lastDay = new Date(day);
+
+                  return acc;
+                }
+
+                acc.y[index] = (acc.y[index] || 0) + value;
+                return acc;
+              },
+              { x: [], y: [] },
+            );
+
+            return {
+              name: key,
+              x,
+              y,
+              type: 'scatter',
+              mode: 'lines',
+              text: x.map((day, index) => `${day} - ${y[index]}`),
+              hoverinfo: 'text',
+            };
+          })
         : [];
     },
     connect(host, _, invalidate) {

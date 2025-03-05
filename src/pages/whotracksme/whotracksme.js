@@ -65,12 +65,14 @@ export default {
   }),
   session: store(Session),
   trends: { value: ['pages', 'trackersBlocked', 'trackersModified'] },
+  trendsAggregate: 0,
   render: ({
     duration,
     dateFrom,
     dateTo,
     mergedStats,
     trends,
+    trendsAggregate,
     session,
   }) => html`
     <template layout>
@@ -114,17 +116,17 @@ export default {
             >.
           </ui-text>
           <div
-            layout="row content:end gap"
+            layout="column items:end gap"
             layout@768px:print="absolute top right"
           >
-            <ui-button
-              onclick="${window.print}"
-              layout="hidden"
-              layout@1120px="block"
-            >
-              <button>Print to PDF</button>
-            </ui-button>
-            <div layout="relative column items:end gap">
+            <div layout="row content:end gap">
+              <ui-button
+                onclick="${window.print}"
+                layout="hidden"
+                layout@1120px="block"
+              >
+                <button>Print to PDF</button>
+              </ui-button>
               <div layout="column" layout@print="hidden">
                 ${duration !== 'custom' &&
                 html`<ui-input layout="width::16">
@@ -160,11 +162,11 @@ export default {
                   </div>
                 `}
               </div>
-              <ui-text type="label-xs" color="tertiary" layout="margin:right">
-                Date Range: ${shortDateFormatter.format(new Date(dateFrom))} -
-                ${shortDateFormatter.format(new Date(dateTo))}
-              </ui-text>
             </div>
+            <ui-text type="label-xs" color="tertiary" layout="margin:right">
+              Date Range: ${shortDateFormatter.format(new Date(dateFrom))} -
+              ${shortDateFormatter.format(new Date(dateTo))}
+            </ui-text>
           </div>
         </section>
         ${store.error(mergedStats)}
@@ -258,7 +260,7 @@ export default {
           </section>
           <section layout="column gap:2:5" layout@1120px:print="grid:2:1">
             <div layout="column gap:4" layout@1120px:print="padding">
-              <div layout="column gap">
+              <div layout="column gap:2">
                 <ui-text type="display-s">Observed activities</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="secondary">
                   Reveals what's hidden beneath the internet’s surface. With
@@ -317,15 +319,25 @@ export default {
               </ui-pagination>
             </div>
             <div layout="column gap:3" layout@1120px:print="padding">
-              <div layout="column gap">
+              <div layout="column gap:2 relative">
                 <ui-text type="display-s">Trends</ui-text>
                 <ui-text type="body-l" mobile-type="body-m" color="secondary">
                   Uncovers that no two days are alike. With Ghostery, you’re
                   protected each day.
                 </ui-text>
+                <ui-input layout="absolute top:-1 right" layout@print="hidden">
+                  <select
+                    value="${trendsAggregate}"
+                    onchange="${html.set('trendsAggregate')}"
+                  >
+                    <option value="0">Daily</option>
+                    <option value="7">Weekly</option>
+                    <option value="30">Monthly</option>
+                  </select>
+                </ui-input>
               </div>
               <div layout="grid:3">
-                <whotracksme-chart-button
+                <whotracksme-button
                   active="${trends.includes('pages')}"
                   onclick="${toggleTrend('pages')}"
                 >
@@ -340,8 +352,8 @@ export default {
                   <ui-text type="label-xs" color="secondary">
                     Pages visited
                   </ui-text>
-                </whotracksme-chart-button>
-                <whotracksme-chart-button
+                </whotracksme-button>
+                <whotracksme-button
                   active="${trends.includes('trackersBlocked')}"
                   onclick="${toggleTrend('trackersBlocked')}"
                 >
@@ -358,8 +370,8 @@ export default {
                   <ui-text type="label-xs" color="secondary">
                     Trackers blocked
                   </ui-text>
-                </whotracksme-chart-button>
-                <whotracksme-chart-button
+                </whotracksme-button>
+                <whotracksme-button
                   active="${trends.includes('trackersModified')}"
                   onclick="${toggleTrend('trackersModified')}"
                 >
@@ -376,14 +388,15 @@ export default {
                   <ui-text type="label-xs" color="secondary">
                     Trackers modified
                   </ui-text>
-                </whotracksme-chart-button>
+                </whotracksme-button>
               </div>
-              <whotracksme-chart-line
+              <whotracksme-trends-chart
                 dateFrom="${dateFrom}"
                 dateTo="${dateTo}"
                 trends="${trends}"
+                aggregate="${trendsAggregate}"
                 layout="grow"
-              ></whotracksme-chart-line>
+              ></whotracksme-trends-chart>
             </div>
           </section>
           ${store.ready(session) &&
