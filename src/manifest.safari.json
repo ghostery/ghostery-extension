@@ -23,13 +23,15 @@
     "wss://*/*"
   ],
   "icons": {
-    "64": "/icons/icon-64.png",
-    "128": "/icons/icon-128.png"
+    "32": "/icons/icon.svg",
+    "64": "/icons/icon.svg",
+    "128": "/icons/icon.svg"
   },
   "action": {
     "default_icon": {
-      "64": "/icons/icon-64.png",
-      "128": "/icons/icon-128.png"
+      "32": "/icons/icon.svg",
+      "64": "/icons/icon.svg",
+      "128": "/icons/icon.svg"
     },
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
