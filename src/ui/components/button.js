@@ -41,6 +41,10 @@ export default {
       --button-border-color: var(--button-background);
     }
 
+    @media print {
+      :host { box-shadow: none; }
+    }
+
     :host([hidden]) { display: none; }
     :host(:active) { opacity: 0.6; }
 

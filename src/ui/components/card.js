@@ -25,6 +25,13 @@ export default {
       box-shadow: 0px 4px 12px 0px var(--shadow-card);
     }
 
+    @media print {
+      :host {
+        box-shadow: none;
+        border: 1px solid var(--border-primary);
+      }
+    }
+
     :host([narrow]) {
       border-radius: 8px;
     }

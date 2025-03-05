@@ -25,6 +25,7 @@ export default {
       border-radius: 0px;
       height: 50px;
       background: var(--background-secondary);
+      border-color: var(--border-primary);
     }
 
     :host(:first-child) ui-button {
