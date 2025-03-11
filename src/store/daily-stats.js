@@ -121,12 +121,11 @@ export const MergedStats = {
     cache: false,
     async get({ dateFrom, dateTo }) {
       const list = await store.resolve([DailyStats], { dateFrom, dateTo });
-      const patterns = [];
 
       const data = list.reduce(
         (acc, stats) => {
           for (const id of stats.patterns) {
-            patterns.push(id);
+            acc.trackers.push(id);
           }
 
           acc.pages += stats.pages;
@@ -137,18 +136,17 @@ export const MergedStats = {
         },
         {
           pages: 0,
+          trackers: [],
           trackersBlocked: 0,
           trackersModified: 0,
           categories: [],
         },
       );
 
-      data.trackers = Array.from(new Set(patterns));
-
       const groupedCategories = {};
       const groupedTrackers = new Map();
 
-      for (const id of patterns) {
+      for (const id of data.trackers) {
         const tracker = await trackerDb.getTracker(id);
 
         const category = tracker?.category || 'unidentified';

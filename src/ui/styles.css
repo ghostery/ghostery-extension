@@ -267,26 +267,6 @@ html {
   }
 }
 
-@media print {
-  @page {
-    size: A4 portrait;
-    margin-left: 0.5cm;
-    margin-right: 0.5cm;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  html,
-  body {
-    width: 1120px;
-  }
-
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}
-
 html {
   height: 100%;
   background: var(--background-primary);

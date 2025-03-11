@@ -32,10 +32,7 @@ export default {
     value: 1,
     observe: (host, value, lastValue) => {
       updatePage(host);
-
-      if (lastValue) {
-        host.scrollIntoView({ block: 'start', behavior: 'smooth' });
-      }
+      if (lastValue) host.scrollIntoViewIfNeeded?.();
     },
   },
   pageCount: (host, value) =>

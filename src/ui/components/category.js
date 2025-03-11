@@ -29,13 +29,13 @@ export default {
         layout.large="padding:1:0"
       >
         <ui-text
-          type="body-${large ? 'l' : 's'}"
+          type="body-${large ? 'm' : 's'}"
           color="secondary"
           layout="grow"
         >
           ${labels.categories[getCategoryKey(name)]}
         </ui-text>
-        <ui-text type="label-${large ? 'l' : 's'}" id="count">${count}</ui-text>
+        <ui-text type="label-${large ? 'm' : 's'}" id="count">${count}</ui-text>
       </div>
     </template>
   `.css`

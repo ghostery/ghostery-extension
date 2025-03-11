@@ -49,6 +49,8 @@
     "@github/relative-time-element": "^4.4.5",
     "@sentry/browser": "^9.3.0",
     "@whotracksme/reporting": "^6.3.1",
+    "apexcharts": "^4.5.0",
+    "apexsankey": "github:apexcharts/apexsankey",
     "bowser": "^2.11.0",
     "hybrids": "^9.1.15",
     "idb": "^8.0.2",

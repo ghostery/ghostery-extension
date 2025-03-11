@@ -14,6 +14,8 @@ import { mount } from 'hybrids';
 import '/ui/index.js';
 import './elements.js';
 
+import './styles.css';
+
 import WhoTracksMe from './whotracksme.js';
 
 mount(document.body, WhoTracksMe);
