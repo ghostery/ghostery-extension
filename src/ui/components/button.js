@@ -13,6 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   type: { value: 'outline', reflect: true },
+  size: { value: 'm', reflect: true },
   disabled: {
     value: false,
     observe: (host, value) => {
@@ -101,6 +102,14 @@ export default {
       --button-color: var(--color-quaternary);
       --button-background: var(--background-tertiary);
       pointer-events: none;
+    }
+
+    :host([size="s"]) {
+      height: 32px;
+    }
+
+    :host([size="s"]) ::slotted(*) {
+      padding: 0px 12px;
     }
 
     @media (hover: hover) {

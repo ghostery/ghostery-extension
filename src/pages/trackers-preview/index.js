@@ -96,9 +96,20 @@ define({
                   domain="${domain}"
                   categories="${stats}"
                   layout="relative layer:101"
-                  wtmLink="${`${WTM_PAGE_URL}/websites/${domain}`}"
+                  wtmLink=""
                   data-qa="component:stats"
                 >
+                  <ui-tooltip position="bottom" slot="actions">
+                    <span slot="content">WhoTracks.Me Statistical Report</span>
+                    <ui-action-button layout="size:4.5">
+                      <a
+                        href="${`${WTM_PAGE_URL}/websites/${domain}`}"
+                        target="_blank"
+                      >
+                        <ui-icon name="whotracksme" color="primary"></ui-icon>
+                      </a>
+                    </ui-action-button>
+                  </ui-tooltip>
                 </ui-stats>
               </main>
               ${store.ready(options) &&

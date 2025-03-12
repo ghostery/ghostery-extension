@@ -12,8 +12,6 @@
 import { html, store, router, msg } from 'hybrids';
 
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
-import { hasWTMStats } from '/utils/wtm-stats.js';
-import { WTM_PAGE_URL } from '/utils/urls.js';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
@@ -27,7 +25,7 @@ import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
-import { parse } from 'tldts-experimental';
+import WhoTracksMe from './whotracksme.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -90,7 +88,14 @@ function setStatsType(host, event) {
 
 export default {
   [router.connect]: {
-    stack: [Menu, ReportForm, ReportConfirm, TrackerDetails, ProtectionStatus],
+    stack: [
+      Menu,
+      ReportForm,
+      ReportConfirm,
+      TrackerDetails,
+      ProtectionStatus,
+      WhoTracksMe,
+    ],
   },
   options: store(Options),
   stats: store(TabStats),
@@ -100,12 +105,6 @@ export default {
     store.ready(options, stats) && options.paused[stats.hostname],
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
-  wtmLink: ({ stats }) => {
-    if (!store.ready(stats)) return '';
-
-    const { domain } = parse(stats.hostname);
-    return hasWTMStats(domain) ? `${WTM_PAGE_URL}/websites/${domain}` : '';
-  },
   render: ({
     options,
     stats,
@@ -113,7 +112,6 @@ export default {
     alert,
     paused,
     globalPause,
-    wtmLink,
   }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats) &&
@@ -250,11 +248,18 @@ export default {
                   dialog="${TrackerDetails}"
                   exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
-                  wtm-link="${wtmLink}"
                   layout="margin:1:1.5"
                   layout@390px="margin:1.5:1.5:2"
                   ontypechange="${setStatsType}"
                 >
+                  <ui-tooltip position="bottom" slot="actions">
+                    <span slot="content">WhoTracks.Me Reports</span>
+                    <ui-action-button layout="size:4.5">
+                      <a href="${router.url(WhoTracksMe)}">
+                        <ui-icon name="whotracksme" color="primary"></ui-icon>
+                      </a>
+                    </ui-action-button>
+                  </ui-tooltip>
                 </ui-stats>
                 <panel-feedback
                   modified=${stats.trackersModified}
