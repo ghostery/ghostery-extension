@@ -210,6 +210,12 @@ export async function updateTabStats(tabId, requests) {
   // as some of the requests are fired before the tab is created, tabId -1
   if (!stats) return;
 
+  // If the tab is in incognito mode, we set the flag to avoid storing the stats
+  if (stats.incognito === undefined) {
+    const tab = await chrome.tabs.get(tabId).catch(() => null);
+    stats.incognito = tab?.incognito ?? false;
+  }
+
   // Filter out requests that are not related to the current page
   // (e.g. requests on trailing edge when navigation to a new page is in progress)
   requests = requests.filter(
@@ -286,7 +292,7 @@ export async function updateTabStats(tabId, requests) {
 
 async function flushTabStatsToDailyStats(tabId) {
   const stats = tabStats.get(tabId);
-  if (!stats || !stats.trackers.length) return;
+  if (!stats || !stats.trackers.length || stats.incognito) return;
 
   let trackersBlocked = 0;
   let trackersModified = 0;

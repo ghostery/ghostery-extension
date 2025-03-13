@@ -22,9 +22,7 @@ import { getBrowserName } from '/utils/browser-info.js';
 mount(document.body, {
   stack: router([Main]),
   browserName: { value: getBrowserName, reflect: true },
-  render: ({ stack }) => html`
-    <template layout="row width:full:350px">${stack}</template>
-  `,
+  render: ({ stack }) => html`<template layout="row">${stack}</template>`,
 });
 
 // Ping telemetry on panel open

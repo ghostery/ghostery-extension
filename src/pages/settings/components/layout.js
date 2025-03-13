@@ -148,17 +148,8 @@ export default {
         pointer-events: none;
       }
 
-      main::before {
-        z-index: 0;
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: -80px;
-        bottom: 0;
-        width: 80px;
-        box-shadow: 0px 0px 80px var(--shadow-dialog);
-        pointer-events: none;
+      main {
+        background: linear-gradient(90deg, var(--shadow-dialog) -120px, transparent 35px);
       }
     }
   `,

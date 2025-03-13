@@ -32,6 +32,7 @@ const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
   assets: ['_locales', 'icons', 'static_pages'],
+  pages: ['logger', 'onboarding', 'whotracksme'],
 };
 
 // Generate arguments from command line
@@ -307,7 +308,7 @@ if (manifest.declarative_net_request?.rule_resources) {
 
 // --- Generate entry points ---
 
-const source = ['pages/onboarding/index.html', 'pages/logger/index.html'];
+const source = options.pages.map((page) => `pages/${page}/index.html`);
 const content_scripts = [];
 
 if (manifest.action?.default_popup) {

@@ -261,6 +261,10 @@ html {
     --component-custom-token-bg-overlay: var(--color-alpha-black-80);
     --component-custom-token-bg-scroll: var(--color-alpha-black-10);
   }
+
+  input {
+    color-scheme: dark;
+  }
 }
 
 html {

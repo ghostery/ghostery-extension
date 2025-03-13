@@ -12,6 +12,7 @@
 import { html, router, store } from 'hybrids';
 
 import { openTabWithUrl } from '/utils/tabs.js';
+import { HOME_PAGE_URL } from '/utils/urls.js';
 
 import Session from '/store/session.js';
 
@@ -154,7 +155,7 @@ export default {
                     </ui-text>
                     <ui-button type="primary" layout="margin:top">
                       <a
-                        href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
+                        href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe"
                         onclick="${openTabWithUrl}"
                       >
                         Become a Contributor

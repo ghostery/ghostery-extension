@@ -14,6 +14,7 @@ import { getCategoryColor } from '../categories.js';
 
 export default {
   name: '',
+  size: { value: '', reflect: true },
   render: ({ name }) => html`
     <template layout="row relative size:3 padding:0.5">
       <ui-icon name="category-${name}" layout="grow size:full"></ui-icon>
@@ -31,6 +32,16 @@ export default {
       background: ${getCategoryColor(name)};
       opacity: 0.15;
       border-radius: 4px;
+    }
+
+    :host([size='large']) {
+      width: 48px;
+      height: 48px;
+      padding: 8px;
+    }
+
+    :host([size='large'])::before {
+      border-radius: 8px;
     }
   `,
 };

@@ -28,7 +28,7 @@ export default {
           <ui-text type="label-m">${labels.categories[name]}</ui-text>
           <ui-icon
             id="arrow"
-            name="arrow-down"
+            name="chevron-down"
             color="secondary"
             layout="margin:right:-0.5"
           ></ui-icon>

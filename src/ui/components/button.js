@@ -13,6 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   type: { value: 'outline', reflect: true },
+  size: { value: 'm', reflect: true },
   disabled: {
     value: false,
     observe: (host, value) => {
@@ -39,6 +40,10 @@ export default {
       box-shadow: 0px 3px 8px 0px var(--shadow-button);
       --button-color: var(--color-onbrand);
       --button-border-color: var(--button-background);
+    }
+
+    @media print {
+      :host { box-shadow: none; }
     }
 
     :host([hidden]) { display: none; }
@@ -99,6 +104,14 @@ export default {
       pointer-events: none;
     }
 
+    :host([size="s"]) {
+      height: 32px;
+    }
+
+    :host([size="s"]) ::slotted(*) {
+      padding: 0px 12px;
+    }
+
     @media (hover: hover) {
       :host([type="primary"]:active) { --button-background: var(--background-brand-strong); }
       :host([type="outline"]:hover) { --button-background: var(--background-secondary); }
@@ -130,6 +143,8 @@ export default {
       text-decoration: none;
       border-radius: 8px;
       padding: 0px 16px;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     ::slotted(*:focus-visible) {

@@ -16,6 +16,7 @@ import {
   cpSync,
   renameSync,
   existsSync,
+  writeFileSync,
 } from 'node:fs';
 import { resolve } from 'node:path';
 import { execSync } from 'node:child_process';
@@ -95,6 +96,12 @@ export const config = {
 
             console.log(`Unzipping Ghostery extension...`);
             execSync(`unzip ${buildPath} -d ${wdio.CHROME_PATH}`);
+
+            const manifestPath = `${wdio.CHROME_PATH}/manifest.json`;
+            const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+            manifest.debug = true;
+
+            writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
             break;
           }
         }
@@ -115,24 +122,19 @@ export const config = {
       await enableExtension();
       await browser.url(url);
 
-      await browser.newWindow(getExtensionPageURL('settings'));
-
       // Reload extension with the source
       switch (capabilities.browserName) {
         case 'chrome': {
+          await browser.url('chrome://extensions');
+          await $('>>>#devMode').click();
+
           renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
           cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
             recursive: true,
           });
           rmSync(`${wdio.CHROME_PATH}-old`, { recursive: true, force: true });
 
-          await browser.execute(() => chrome.runtime.reload());
-
-          await browser.closeWindow();
-          await browser.switchWindow(url);
-
-          await browser.url('chrome://extensions');
-          await expect($('extensions-review-panel')).toBeDisplayed();
+          await $('>>>#dev-reload-button').click();
 
           break;
         }
@@ -152,18 +154,12 @@ export const config = {
             ),
           );
 
-          await browser.closeWindow();
-          await browser.switchWindow(url);
-
-          // Without the pause, Firefox throws sometimes web-driver exceptions
-          // It must be related to the extension reloading process.
-          // As there is no way to wait for the extension to be reloaded
-          // better than above check, we just wait for a few seconds.
-          browser.pause(5000);
-
           break;
         }
       }
+
+      await browser.url(url);
+      await browser.pause(5000);
 
       await browser.url(getExtensionPageURL('settings'));
       await expect(getExtensionElement('page:settings')).toBeDisplayed();

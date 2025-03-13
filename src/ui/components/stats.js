@@ -11,8 +11,6 @@
 
 import { html, store, router, dispatch } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
-
 export default {
   categories: undefined,
   categoryList: ({ categories = [] }) =>
@@ -41,7 +39,6 @@ export default {
     ),
   readonly: false,
   domain: '',
-  wtmLink: '',
   type: {
     value: 'graph',
     observe(host, value, lastValue) {
@@ -58,7 +55,6 @@ export default {
     trackers,
     readonly,
     domain,
-    wtmLink,
     type,
     dialog,
     exceptionDialog,
@@ -69,17 +65,7 @@ export default {
           <ui-text type="label-m">Observed activities</ui-text>
           <slot name="header"></slot>
         </div>
-        ${wtmLink &&
-        html`
-          <ui-tooltip position="bottom">
-            <span slot="content">WhoTracks.Me Statistical Report</span>
-            <ui-action-button layout="size:4.5">
-              <a href="${wtmLink}" onclick="${openTabWithUrl}" target="_blank">
-                <ui-icon name="whotracksme" color="primary"></ui-icon>
-              </a>
-            </ui-action-button>
-          </ui-tooltip>
-        `}
+        <slot name="actions"></slot>
         ${trackers &&
         html`
           <ui-action-button-group>

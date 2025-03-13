@@ -1,0 +1,22 @@
+@media print {
+  @page {
+    size: A4 portrait;
+    margin-left: 0.5cm;
+    margin-right: 0.5cm;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  html,
+  body {
+    width: 1120px;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    transform: scale(0.8);
+    transform-origin: center 0;
+    contain: size;
+  }
+}
