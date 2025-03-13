@@ -134,10 +134,12 @@ export default {
               />
             </ui-input>
             <label layout="row gap items:center">
-              <input
-                type="checkbox"
-                onchange="${html.set(form, 'screenshot')}"
-              />
+              <ui-input>
+                <input
+                  type="checkbox"
+                  onchange="${html.set(form, 'screenshot')}"
+                />
+              </ui-input>
               <ui-text type="body-s">
                 Include a screenshot of the current page
               </ui-text>

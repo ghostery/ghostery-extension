@@ -165,7 +165,7 @@ export default {
           ${alert &&
           html`
             <panel-alert
-              type="info"
+              type="danger"
               slide
               autoclose="6"
               onclose="${html.set('alert', '')}"
@@ -175,7 +175,7 @@ export default {
                 <a
                   href="#"
                   onclick="${reloadTab}"
-                  layout="row inline gap:0.5 items:center"
+                  layout="row inline gap:0.5 items:center ::color:inherit"
                   >Reload to see changes</a
                 >.
               </ui-text>
@@ -219,20 +219,22 @@ export default {
               </panel-pause>
             `
           : html`
-              <ui-button
-                type="danger"
-                layout="height:6 margin:1.5"
-                data-qa="button:enable"
-              >
-                <a
-                  href="${ONBOARDING_URL}"
-                  layout="row center gap:0.5"
-                  onclick="${openTabWithUrl}"
+              <div layout="::background:danger-primary">
+                <ui-button
+                  type="danger"
+                  layout="height:6 margin:1.5"
+                  data-qa="button:enable"
                 >
-                  <ui-icon name="play"></ui-icon>
-                  Enable Ghostery
-                </a>
-              </ui-button>
+                  <a
+                    href="${ONBOARDING_URL}"
+                    layout="row center gap:0.5"
+                    onclick="${openTabWithUrl}"
+                  >
+                    <ui-icon name="play"></ui-icon>
+                    Enable Ghostery
+                  </a>
+                </ui-button>
+              </div>
             `}
         <panel-container>
           ${stats.hostname
