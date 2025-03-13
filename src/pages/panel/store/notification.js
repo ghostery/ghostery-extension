@@ -25,8 +25,8 @@ const NOTIFICATIONS = {
     text: msg`Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.`,
     url:
       __PLATFORM__ === 'safari'
-        ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe'
-        : 'https://www.ghostery.com/support?utm_source=gbe',
+        ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe&utm_campaign=safaripermissions'
+        : 'https://www.ghostery.com/support?utm_source=gbe&utm_campaign=permissions',
     action: msg`Get help`,
   },
   opera: {
@@ -49,7 +49,7 @@ const CONTRIBUTOR_NOTIFICATION = {
   icon: 'heart',
   type: '',
   text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
-  url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe',
+  url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=panel-becomeacontributor',
   action: msg`Become a Contributor`,
 };
 
