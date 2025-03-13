@@ -44,11 +44,6 @@ const icons = {
       </defs>
     </svg>
   `,
-  'alert-info': /* html */`
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8.00065 10.6667V8.00001M8.00065 5.33334H8.00732M14.6673 8.00001C14.6673 11.6819 11.6825 14.6667 8.00065 14.6667C4.31875 14.6667 1.33398 11.6819 1.33398 8.00001C1.33398 4.31811 4.31875 1.33334 8.00065 1.33334C11.6825 1.33334 14.6673 4.31811 14.6673 8.00001Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  `,
   'ghosty': /* html */`
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M13 7C13 9.76142 10.7614 12 8 12C5.23859 12 3 9.76142 3 7C3 4.23859 5.23859 2 8 2C10.7614 2 13 4.23859 13 7Z" fill="#FFFFFE"/>

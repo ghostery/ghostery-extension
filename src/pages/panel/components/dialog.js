@@ -85,7 +85,7 @@ export default {
     }
 
     #backdrop {
-      background: var(--component-custom-token-bg-overlay);
+      background: var(--component-custom-token-overlay);
       opacity: 0;
       transition: all 300ms ease-out;
     }

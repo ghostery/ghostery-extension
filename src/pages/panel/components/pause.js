@@ -10,7 +10,6 @@
  */
 
 import { dispatch, html, msg } from 'hybrids';
-import { themeToggle } from '/ui/theme.js';
 
 const PAUSE_TYPES = [
   {
@@ -69,87 +68,84 @@ export default {
   global: { value: false, reflect: true },
   revokeAt: 0,
   pauseType: 1,
-  pauseList: false,
-  render: ({ paused, pauseType, pauseList, revokeAt }) =>
-    html`
-      <template layout="grid relative">
-        <button
-          id="main"
-          class="${{ active: pauseList }}"
-          layout="row center margin:1.5 height:6"
-          layout@390px="height:7"
-          onclick="${!pauseList && dispatchAction}"
-          data-qa="button:pause"
+  pauseList: { value: false, reflect: true },
+  render: ({ paused, pauseType, pauseList, revokeAt }) => html`
+    <template layout="grid relative">
+      <button
+        id="main"
+        class="${{ active: pauseList }}"
+        layout="row center margin:1.5 height:6"
+        layout@390px="height:7"
+        onclick="${!pauseList && dispatchAction}"
+        data-qa="button:pause"
+      >
+        <div id="label" layout="grow row center gap shrink overflow">
+          <ui-icon name="pause"></ui-icon>
+          <div layout="column">
+            <ui-text type="label-m" color="inherit">
+              ${paused ? msg`Ghostery is paused` : msg`Pause on this site`}
+            </ui-text>
+            ${!!revokeAt &&
+            html`<ui-text type="body-xs" color="inherit">
+              <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
+            </ui-text>`}
+          </div>
+        </div>
+        <div
+          id="type"
+          role="button"
+          tabindex="${paused ? '-1' : '0'}"
+          layout="row center self:stretch width:14"
+          onclick="${!paused && !pauseList && openPauseList}"
+          onkeypress=${!paused && !pauseList && simulateClickOnEnter}
         >
-          <div id="label" layout="grow row center gap shrink overflow">
-            <ui-icon name="pause"></ui-icon>
-            <div layout="column">
-              <ui-text type="label-m" color="inherit">
-                ${paused ? msg`Ghostery is paused` : msg`Pause on this site`}
-              </ui-text>
-              ${!!revokeAt &&
-              html`<ui-text type="body-xs" color="inherit">
-                <ui-revoke-at revokeAt="${revokeAt}"></ui-revoke-at>
-              </ui-text>`}
-            </div>
-          </div>
-          <div
-            id="type"
-            role="button"
-            tabindex="${paused ? '-1' : '0'}"
-            layout="row center self:stretch width:14"
-            onclick="${!paused && !pauseList && openPauseList}"
-            onkeypress=${!paused && !pauseList && simulateClickOnEnter}
-          >
-            ${paused
-              ? html`
-                  <ui-icon name="refresh"></ui-icon>
-                  <ui-text
-                    type="label-m"
-                    layout="margin:left:0.5"
-                    color="inherit"
-                  >
-                    Undo
-                  </ui-text>
-                `
-              : html`
-                  <ui-text type="label-m" layout="grow" color="inherit">
-                    ${PAUSE_TYPES.find(({ value }) => value === pauseType)
-                      .label}
-                  </ui-text>
-                  <ui-icon name="chevron-down"></ui-icon>
-                `}
-          </div>
-        </button>
-        <slot></slot>
-        ${pauseList &&
-        html`
-          <section
-            id="type-list"
-            layout="column absolute layer:102 top:full left:2 right:2 margin:top:-20px"
-          >
-            ${PAUSE_TYPES.map(
-              ({ value, label, description }) => html`
-                <button
-                  class="${{ active: pauseType === value }}"
-                  onclick="${dispatchTypeAction(value)}"
-                  layout.active="grid:1|max:auto"
+          ${paused
+            ? html`
+                <ui-icon name="play"></ui-icon>
+                <ui-text
+                  type="label-m"
+                  layout="margin:left:0.5"
+                  color="inherit"
                 >
-                  <ui-text type="label-m">${label}</ui-text>
-                  ${pauseType === value &&
-                  html`<ui-icon name="check"></ui-icon>`}
-                  <ui-text type="body-s" color="secondary" layout="area:2">
-                    ${description}
-                  </ui-text>
-                </button>
-              `,
-            )}
-          </section>
-        `}
-      </template>
-    `.css`
+                  Resume
+                </ui-text>
+              `
+            : html`
+                <ui-text type="label-m" layout="grow" color="inherit">
+                  ${PAUSE_TYPES.find(({ value }) => value === pauseType).label}
+                </ui-text>
+                <ui-icon name="chevron-down"></ui-icon>
+              `}
+        </div>
+      </button>
+      <slot></slot>
+      ${pauseList &&
+      html`
+        <section
+          id="type-list"
+          layout="column absolute layer:102 top:full left:2 right:2 margin:top:-20px"
+        >
+          ${PAUSE_TYPES.map(
+            ({ value, label, description }) => html`
+              <button
+                class="${{ active: pauseType === value }}"
+                onclick="${dispatchTypeAction(value)}"
+                layout.active="grid:1|max:auto"
+              >
+                <ui-text type="label-m">${label}</ui-text>
+                ${pauseType === value && html`<ui-icon name="check"></ui-icon>`}
+                <ui-text type="body-s" color="secondary" layout="area:2">
+                  ${description}
+                </ui-text>
+              </button>
+            `,
+          )}
+        </section>
+      `}
+    </template>
+  `.css`
     :host {
-      background: var(--color-brand-200);
+      background: var(--background-brand-secondary);
     }
 
     button {
@@ -161,13 +157,13 @@ export default {
     }
 
     #main {
-      box-shadow: 0px 2px 8px rgba(0, 105, 210, 0.2);
+      box-shadow: 0px 2px 8px var(--component-pause-button-shadow);
       border-radius: 8px;
       box-sizing: border-box;
       padding: 4px;
       white-space: nowrap;
-      color: var(--color-brand-600);
-      background: var(--color-base-white);
+      color: var(--component-pause-button-fg);
+      background: var(--component-pause-button-bg);
       transition: background 0.2s, opacity 0.2s;
     }
 
@@ -177,8 +173,9 @@ export default {
 
     #type {
       box-sizing: border-box;
-      background: var(--color-brand-200);
-      border: 1px solid var(--color-brand-300);
+      border-radius: 6px;
+      background: var(--component-pause-button-time-bg);
+      border: 1px solid var(--component-pause-button-time-border);
       border-radius: 8px;
       padding: 8px 8px 8px 12px;
       white-space: nowrap;
@@ -195,7 +192,7 @@ export default {
 
     #type-list {
       background: var(--background-primary);
-      box-shadow: 0px 4px 12px var(--shadow-card);
+      box-shadow: 0px 20px 60px 0px var(--shadow-dialog);
       border-radius: 12px;
     }
 
@@ -216,17 +213,17 @@ export default {
     /* Website paused */
 
     :host([paused]) {
-      background: var(--color-warning-100);
+      background: var(--background-warning-primary);
     }
 
     :host([paused]) #main {
       box-shadow: none;
-      background: #ffbb00;
-      color: var(--color-gray-800);
+      background: var(--background-warning-solid);
+      color: var(--color-onwarning);
     }
 
     :host([paused]) #type {
-      background: var(--color-base-white);
+      background: var(--background-primary);
       color: var(--color-primary);
       border: none;
       pointer-events: all;
@@ -236,29 +233,28 @@ export default {
     /* Global pause */
 
     :host([global]) {
-      background: var(--color-danger-100);
+      background: var(--background-danger-primary);
     }
 
     :host([global]) #main {
       box-shadow: none;
-      background: var(--color-danger-700);
-      color: var(--color-base-white);
+      background: var(--background-danger-strong);
+      color: var(--color-ondanger);
     }
 
     @media (hover: hover) {
-      :host(:not([paused])) #type:hover {
+      :host(:not([paused])) #type:hover, :host([pause-list]) #type {
         border-color: var(--color-brand-600);
         background: var(--color-brand-600);
         color: var(--color-base-white);
       }
 
-      :host([paused]) #main:hover:has(#type:hover) #label, :host([paused]) #main:focus-visible #label {
-        width: 0;
+      :host(:not([paused])) #main:hover, :host([pause-list]) #main {
+        background: var(--component-pause-button-bg-hover);
       }
 
-      :host([paused]) #main #type:hover, :host([paused]) #main:focus-visible #type {
-        width: 100%;
-        transition: width 0.2s;
+      :host(:not([paused])) #main:hover #label, :host([pause-list]) #label {
+        color: var(--component-pause-button-fg-hover);
       }
 
       #type-list button:hover {
@@ -269,42 +265,17 @@ export default {
       #type-list button:hover ui-icon {
         color: var(--color-brand-primary);
       }
-    }
 
-    @media (prefers-color-scheme: dark) {
-      :host, :host([paused]) {
-        background: var(--color-gray-900);
+      /* website paused */
+
+      :host([paused]) #main:hover:has(#type:hover) #label, :host([paused]) #main:focus-visible #label {
+        width: 0;
       }
 
-      #main {
-        background: var(--color-brand-800);
-        color: var(--color-brand-400);
-        shadow: 0px 2px 8px var(--color-gray-900);
-      }
-
-      #type {
-        background: var(--color-brand-900);
-        color: var(--color-brand-400);
-        border: none;
-      }
-
-      #type-list {
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-      }
-
-      :host([paused]) #type {
-        background: var(--background-primary);
-        color: var(--color-base-white);
-      }
-
-      :host([global]) #type {
-        background: var(--color-danger-800);
-        color: var(--color-base-white);
-      }
-
-      :host(:not([paused])) #type:hover {
-        background: var(--color-brand-700);
+      :host([paused]) #main #type:hover, :host([paused]) #main:focus-visible #type {
+        width: 100%;
+        transition: width 0.2s;
       }
     }
-  `.use(themeToggle),
+  `,
 };

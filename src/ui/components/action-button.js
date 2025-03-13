@@ -27,14 +27,14 @@ export default {
       align-items: center;
       justify-content: center;
       appearance: none;
-      border: none;
       background: var(--background-primary);
-      border: 1px solid var(--border-primary);
-      box-shadow: 0px 2px 6px var(--shadow-button);
+      border: 1px solid var(--border-secondary);
+      box-shadow: 0px 3px 8px var(--shadow-button);
       border-radius: 8px;
       transition: all 0.2s;
       margin: 0;
       color: inherit;
+      user-select: none;
     }
 
     :host([grouped]:not([active])) ::slotted(*) {
@@ -47,12 +47,13 @@ export default {
       pointer-events: none;
       cursor: default;
       box-shadow: none;
-      background: var(--background-secondary);
-      color: var(--color-tertiary);
+      background: var(--background-tertiary);
+      border: none;
+      color: var(--color-quaternary);
     }
 
     @media (hover: hover) {
-      ::slotted(*:hover) { border-color: var(--border-secondary); }
+      ::slotted(*:hover) { border-color: var(--border-tertiary); }
     }
   `,
 };

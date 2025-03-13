@@ -82,17 +82,21 @@ export default {
         ${options.terms &&
         !options.managed &&
         html`
-          <div layout="grid:1|max gap">
+          <div
+            layout="grid:1|max gap:0.5 padding:1.5 margin:-2 ::background:secondary"
+          >
             ${paused
               ? html`
-                  <ui-action-button layout="width:full" disabled>
+                  <ui-action-button layout="width:full height:auto:6" disabled>
                     <div layout="row gap">
-                      <ui-icon name="pause"></ui-icon>
-                      <ui-text type="label-m">Ghostery paused</ui-text>
+                      <ui-icon name="pause" color="inherit"></ui-icon>
+                      <ui-text type="label-m" color="inherit">
+                        Ghostery paused
+                      </ui-text>
                     </div>
                   </ui-action-button>
                 `
-              : html`<ui-action-button layout="width:full height:auto:4.5">
+              : html`<ui-action-button layout="width:full height:auto:6">
                   <a
                     href="${router.url(ProtectionStatus, {
                       trackerId: tracker.id,
@@ -102,7 +106,7 @@ export default {
                     <ui-icon
                       name="${status.type}-m"
                       color="secondary"
-                      layout="size:2.5"
+                      layout="size:2"
                     ></ui-icon>
                     <ui-text
                       type="label-m"
@@ -122,18 +126,19 @@ export default {
                 </ui-action-button>`}
             ${tracker.category !== 'unidentified' &&
             html`
-              <ui-action-button layout="width:4.5 height:auto:4.5">
+              <ui-action-button layout="width:6 height:auto:6">
                 <a
                   href="${chrome.runtime.getURL(
                     `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
                   )}"
                   onclick="${openTabWithUrl}"
                 >
-                  <ui-icon name="settings-m"></ui-icon>
+                  <ui-icon name="settings-m" layout="size:2"></ui-icon>
                 </a>
               </ui-action-button>
             `}
           </div>
+          <ui-line layout="margin:0:-2"></ui-line>
         `}
         ${(tracker.organization?.description || wtmUrl) &&
         html`

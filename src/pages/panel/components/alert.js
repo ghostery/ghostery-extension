@@ -29,7 +29,7 @@ const slide = {
 
 export default {
   type: { value: '', reflect: true },
-  icon: 'alert-info',
+  icon: 'info-filled',
   autoclose: {
     value: 0,
     connect(host, key) {
@@ -84,7 +84,7 @@ export default {
     :host {
       background: var(--background-primary);
       border: 1px solid var(--border-primary);
-      box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 4px 12px 0px var(--shadow-card, rgba(0, 0, 0, 0.06));
       border-radius: 30px;
     }
 
@@ -92,14 +92,18 @@ export default {
       background: var(--background-success-primary);
       border-color: var(--border-success-primary);
       color: var(--color-success-primary);
-      box-shadow: 1px 2px 7px rgba(0, 121, 0, 0.15);
     }
 
     :host([type="info"]) {
       background: var(--background-brand-primary);
       border-color: var(--border-brand-primary);
       color: var(--color-brand-primary);
-      box-shadow: 1px 2px 7px rgba(0, 71, 121, 0.15);
+    }
+
+    :host([type="danger"]) {
+      background: var(--background-danger-primary);
+      border-color: var(--border-danger-primary);
+      color: var(--color-danger-primary);
     }
 
     button {
