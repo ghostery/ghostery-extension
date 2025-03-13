@@ -11,7 +11,7 @@
 
 import { html, store } from 'hybrids';
 
-import { WTM_PAGE_URL } from '/utils/urls.js';
+import { HOME_PAGE_URL, WTM_PAGE_URL } from '/utils/urls.js';
 import { shortDateFormatter, categories } from '/ui/labels.js';
 
 import assets from '/pages/settings/assets/index.js';
@@ -99,10 +99,7 @@ export default {
             browser protected by Ghostery. The statistics here provide
             transparency about web tracking. To learn more about how Ghostery
             keeps its community safe, visit
-            ${html`<a
-              href="https://www.ghostery.com/whotracksme"
-              translate="no"
-            >
+            ${html`<a href="${WTM_PAGE_URL}" translate="no">
               ghostery.com/whotracksme</a
             >`}.
           </ui-text>
@@ -444,7 +441,7 @@ export default {
                 </div>
                 <ui-button type="primary">
                   <a
-                    href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
+                    href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe"
                     target="_blank"
                   >
                     Become a Contributor
@@ -456,9 +453,7 @@ export default {
           <section layout="block:center margin:2:auto:0 width:::960px">
             <ui-text type="body-s" color="secondary">
               All information displayed on the WhoTracks.Me Tab or
-              <a href="${'https://www.ghostery.com/whotracksme'}"
-                >ghostery.com/whotracksme</a
-              >
+              <a href="${WTM_PAGE_URL}">ghostery.com/whotracksme</a>
               is an aggregate of facts about web trackers. These reports power
               Ghostery's anti-tracking technology, protecting the entire
               community.
