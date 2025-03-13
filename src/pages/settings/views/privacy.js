@@ -379,7 +379,7 @@ export default {
                       </div>
                       <ui-button type="primary" layout="grow margin:top">
                         <a
-                          href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
+                          href="https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
                           target="_blank"
                         >
                           Become a Contributor

@@ -441,7 +441,7 @@ export default {
                 </div>
                 <ui-button type="primary">
                   <a
-                    href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe"
+                    href="${HOME_PAGE_URL}/become-a-contributor?utm_source=wtmtab-becomeacontributor"
                     target="_blank"
                   >
                     Become a Contributor
