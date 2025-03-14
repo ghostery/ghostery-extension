@@ -50,7 +50,6 @@ export default {
   `.css`
     main {
       background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
     }
 
     a {
