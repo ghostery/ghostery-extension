@@ -87,16 +87,16 @@ export default {
           >
             ${paused
               ? html`
-                  <ui-action-button layout="width:full height:auto:6" disabled>
+                  <ui-button layout="width:full height:auto:6" disabled>
                     <div layout="row gap">
                       <ui-icon name="pause" color="inherit"></ui-icon>
                       <ui-text type="label-m" color="inherit">
                         Ghostery paused
                       </ui-text>
                     </div>
-                  </ui-action-button>
+                  </ui-button>
                 `
-              : html`<ui-action-button layout="width:full height:auto:6">
+              : html`<ui-button layout="width:full height:auto:6">
                   <a
                     href="${router.url(ProtectionStatus, {
                       trackerId: tracker.id,
@@ -123,10 +123,10 @@ export default {
                             msg`Blocked on all websites`)}
                     </ui-text>
                   </a>
-                </ui-action-button>`}
+                </ui-button>`}
             ${tracker.category !== 'unidentified' &&
             html`
-              <ui-action-button layout="width:6 height:auto:6">
+              <ui-button layout="width:6 height:auto:6">
                 <a
                   href="${chrome.runtime.getURL(
                     `/pages/settings/index.html#@settings-tracker-details?tracker=${tracker.id}`,
@@ -135,7 +135,7 @@ export default {
                 >
                   <ui-icon name="settings-m" layout="size:2"></ui-icon>
                 </a>
-              </ui-action-button>
+              </ui-button>
             `}
           </div>
           <ui-line layout="margin:0:-2"></ui-line>

@@ -28,7 +28,7 @@ export default {
       justify-content: center;
       appearance: none;
       background: var(--background-primary);
-      border: 1px solid var(--border-secondary);
+      border: 1px solid var(--border-primary);
       box-shadow: 0px 3px 8px var(--shadow-button);
       border-radius: 8px;
       transition: all 0.2s;
@@ -43,17 +43,8 @@ export default {
       box-shadow: none;
     }
 
-    :host([disabled]) ::slotted(*) {
-      pointer-events: none;
-      cursor: default;
-      box-shadow: none;
-      background: var(--background-tertiary);
-      border: none;
-      color: var(--color-quaternary);
-    }
-
     @media (hover: hover) {
-      ::slotted(*:hover) { border-color: var(--border-tertiary); }
+      ::slotted(*:hover) { border-color: var(--border-secondary); }
     }
   `,
 };
