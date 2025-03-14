@@ -52,13 +52,12 @@ export default {
     <template layout="contents">
       <settings-page-layout>
         <div layout="column gap">
-          <ui-action>
-            <a href="${router.backUrl()}" layout="self:start padding">
-              <ui-text type="label-s" layout="row gap items:center">
-                <ui-icon name="chevron-left"></ui-icon> Back
-              </ui-text>
-            </a>
-          </ui-action>
+          <settings-link href="${router.backUrl()}" data-qa="button:back">
+            <ui-icon name="chevron-left" color="primary"></ui-icon>
+            <ui-text type="headline-s" layout="row gap items:center">
+              Back
+            </ui-text>
+          </settings-link>
           ${store.ready(tracker) &&
           html`
             <div layout="column gap:5">
