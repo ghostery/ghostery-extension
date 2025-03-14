@@ -1,0 +1,65 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translateX(80px);
+  }
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translateX(-80px);
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    transform: translateX(-80px);
+  }
+}
+
+@keyframes slide-to-right {
+  to {
+    transform: translateX(80px);
+  }
+}
+
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 50ms;
+}
+
+[router-transition='forward']::view-transition-old(main) {
+  animation:
+    100ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    400ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+[router-transition='forward']::view-transition-new(main) {
+  animation:
+    210ms cubic-bezier(0, 0, 0.2, 1) 100ms both fade-in,
+    400ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+
+[router-transition='backward']::view-transition-old(main) {
+  animation:
+    100ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    400ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-right;
+}
+
+[router-transition='backward']::view-transition-new(main) {
+  animation:
+    210ms cubic-bezier(0, 0, 0.2, 1) 100ms both fade-in,
+    400ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-left;
+}

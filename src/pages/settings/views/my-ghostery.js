@@ -131,13 +131,13 @@ export default {
               value="${options.sync}"
               onchange="${html.set(options, 'sync')}"
             >
-              <div layout="column grow gap:0.5">
-                <ui-text type="headline-xs">Settings Sync</ui-text>
-                <ui-text type="body-m" mobile-type="body-s" color="secondary">
+              <settings-option>
+                Sync Settings
+                <span slot="description">
                   Saves and synchronizes your custom settings between browsers
                   and devices.
-                </ui-text>
-              </div>
+                </span>
+              </settings-option>
             </ui-toggle>
 
             <div layout="row gap:2">

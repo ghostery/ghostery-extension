@@ -21,7 +21,7 @@ export default {
         layout@1280px="grid:320px|1:min|1"
       >
         <header
-          layout="row center gap padding:2 relative layer"
+          layout="row center gap padding:2"
           layout@992px="padding:5:3:3 content:start"
         >
           <ui-icon
@@ -35,11 +35,11 @@ export default {
         </header>
         <nav
           layout="order:1 row content:space-around padding gap:0.5"
-          layout@992px="grid:1:repeat(4,max-content)|max|1fr content:stretch padding:2 layer overflow:y:auto"
+          layout@992px="grid:1:repeat(4,max-content)|max|1fr content:stretch padding:2 overflow:y:auto"
         >
           <slot name="nav"></slot>
         </nav>
-        <main layout="relative column grow height::0" layout@992px="area::2">
+        <main layout="column grow height::0" layout@992px="area::2">
           <slot></slot>
         </main>
       </template>

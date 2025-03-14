@@ -22,13 +22,16 @@ export default {
         html`
           <section layout="column gap:4">
             <div layout="column gap" layout@992px="margin:bottom">
-              <ui-action>
-                <a href="${router.backUrl()}" layout="self:start padding">
-                  <ui-text type="label-s" layout="row gap items:center">
-                    <ui-icon name="chevron-left"></ui-icon> Back
-                  </ui-text>
-                </a>
-              </ui-action>
+              <settings-link
+                href="${router.backUrl()}"
+                data-qa="button:back"
+                layout="self:start"
+              >
+                <ui-icon name="chevron-left" color="primary"></ui-icon>
+                <ui-text type="headline-s" layout="row gap items:center">
+                  Back
+                </ui-text>
+              </settings-link>
               <ui-text type="headline-m">Experimental Filters</ui-text>
               <div layout="column gap:0.5">
                 <ui-text type="body-l" mobile-type="body-m" color="secondary">

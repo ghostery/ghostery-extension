@@ -64,7 +64,7 @@ export default {
               onchange="${html.set(options, 'trackerWheel')}"
               data-qa="toggle:trackerWheel"
             >
-              <div layout="row items:start gap:2" layout@768px="gap:3">
+              <div layout="row items:start gap:2 grow" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
                   <settings-help-image>
                     <img
@@ -73,13 +73,13 @@ export default {
                     />
                   </settings-help-image>
                 </a>
-                <div layout="column grow gap:0.5">
-                  <ui-text type="headline-xs">WhoTracks.Me Wheel</ui-text>
-                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
+                <settings-option>
+                  WhoTracks.Me Wheel
+                  <span slot="description">
                     Replaces the Ghostery icon in the browser toolbar with the
                     tracker wheel.
-                  </ui-text>
-                </div>
+                  </span>
+                </settings-option>
               </div>
             </ui-toggle>
             ${Options.trackerCount &&
@@ -89,7 +89,7 @@ export default {
                 onchange="${html.set(options, 'trackerCount')}"
                 data-qa="toggle:trackerCount"
               >
-                <div layout="row items:start gap:2" layout@768px="gap:3">
+                <div layout="row items:start gap:2 grow" layout@768px="gap:3">
                   <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
                     <settings-help-image>
                       <img
@@ -98,17 +98,13 @@ export default {
                       />
                     </settings-help-image>
                   </a>
-                  <div layout="column grow gap:0.5">
-                    <ui-text type="headline-xs">Trackers Count</ui-text>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
+                  <settings-option>
+                    Trackers Count
+                    <span slot="description">
                       Displays the tracker count on the Ghostery icon in the
                       browser toolbar.
-                    </ui-text>
-                  </div>
+                    </span>
+                  </settings-option>
                 </div>
               </ui-toggle>
             `}
@@ -117,7 +113,7 @@ export default {
               onchange="${html.set(options, 'wtmSerpReport')}"
               data-qa="toggle:wtmSerpReport"
             >
-              <div layout="row gap:2" layout@768px="gap:3">
+              <div layout="row items:start gap:2 grow" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
                   <settings-help-image>
                     <img
@@ -126,12 +122,18 @@ export default {
                     />
                   </settings-help-image>
                 </a>
-                <div layout="column grow gap:0.5">
-                  <ui-text type="headline-xs">Trackers Preview</ui-text>
-                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
+                <settings-option>
+                  Trackers Preview
+                  <span slot="description">
                     Shows the tracker preview beside search results.
-                  </ui-text>
-                  <ui-text type="label-s" color="secondary" underline>
+                  </span>
+                  <ui-text
+                    type="label-s"
+                    color="secondary"
+                    underline
+                    slot="footer"
+                    layout="self:start"
+                  >
                     <a
                       href="https://www.ghostery.com/blog/introducing-wtm-serp-report"
                       target="_blank"
@@ -140,7 +142,7 @@ export default {
                       Learn more <ui-icon name="arrow-right-s"></ui-icon>
                     </a>
                   </ui-text>
-                </div>
+                </settings-option>
               </div>
             </ui-toggle>
             ${__PLATFORM__ === 'firefox' &&
@@ -149,30 +151,26 @@ export default {
                 value="${options.feedback}"
                 onchange="${html.set(options, 'feedback')}"
               >
-                <div layout="row gap:2" layout@768px="gap:3">
+                <div layout="row items:start gap:2 grow" layout@768px="gap:3">
                   <settings-help-image static>
                     <img
                       src="${assets.feedback_small}"
                       alt="Feedback Sharing"
                     />
                   </settings-help-image>
-                  <div layout="column grow gap:0.5">
-                    <ui-text type="headline-xs">Feedback Sharing</ui-text>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
+                  <settings-option>
+                    Feedback Sharing
+                    <span slot="description">
                       Contributes non-personal information about add-on health
                       and performance telemetry to help advance privacy
                       protections for the entire Ghostery community.
-                    </ui-text>
-                  </div>
+                    </span>
+                  </settings-option>
                 </div>
               </ui-toggle>
             `}
 
-            <div layout="row gap:2" layout@768px="gap:3">
+            <div layout="row items:start gap:2 grow" layout@768px="gap:3">
               <ui-action>
                 <a
                   href="${chrome.runtime.getURL(
@@ -188,19 +186,13 @@ export default {
                       alt="WTM Privacy Report"
                     />
                   </settings-help-image>
-                  <div layout="column grow gap:0.5">
-                    <ui-text type="headline-xs">
-                      WhoTracks.Me Privacy Report
-                    </ui-text>
-                    <ui-text
-                      type="body-m"
-                      mobile-type="body-s"
-                      color="secondary"
-                    >
+                  <settings-option>
+                    WhoTracks.Me Privacy Report
+                    <span slot="description">
                       Generates a global transparency report on web tracking in
                       your Ghostery-protected browser.
-                    </ui-text>
-                  </div>
+                    </span>
+                  </settings-option>
                 </a>
               </ui-action>
               <ui-button size="s">
