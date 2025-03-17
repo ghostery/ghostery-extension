@@ -12,30 +12,12 @@
 import { store } from 'hybrids';
 
 import Config from '/store/config.js';
-import Options from '/store/options.js';
 
-import { CDN_URL } from '/utils/api.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
-const CONFIG_URL = CDN_URL + 'configs/v1.json';
-
-function filter(item) {
-  if (item.filter) {
-    const { platform } = item.filter;
-    let check = true;
-
-    // Browser check
-    if (check && Array.isArray(platform)) {
-      check = platform.includes(__PLATFORM__);
-    }
-
-    return check;
-  }
-
-  return true;
-}
-
 const HALF_HOUR_IN_MS = 1000 * 60 * 30;
+
+const USER_TESTING_DOMAINS = ['bbc.com'];
 
 export default async function syncConfig() {
   const config = await store.resolve(Config);
@@ -44,69 +26,19 @@ export default async function syncConfig() {
     return;
   }
 
-  // TODO: implement fetching remote config from the server
-  // This is a mock of the fetched config
-  try {
-    const fetchedConfig = await fetch(CONFIG_URL).then((res) => {
-      if (!res.ok) throw new Error('Failed to fetch the remote config');
-      return res.json();
-    });
-
-    // -- domains --
-
-    const domains = { ...config.domains };
-
-    // Clear out domains removed from the config
-    for (const name of Object.keys(domains)) {
-      if (fetchedConfig.domains[name] === undefined) {
-        domains[name] = null;
-      }
-    }
-
-    // Update the config with new values
-    for (const [name, item] of Object.entries(fetchedConfig.domains)) {
-      domains[name] = filter(item) ? item : null;
-    }
-
-    // -- flags --
-
-    const flags = { ...config.flags };
-
-    // Clear out flags removed from the config
-    for (const name of Object.keys(flags)) {
-      if (fetchedConfig.flags[name] === undefined) {
-        flags[name] = null;
-      }
-    }
-
-    // Update the config with the new values
-    for (const [name, items] of Object.entries(fetchedConfig.flags)) {
-      const item = items.find((item) => filter(item));
-      if (!item) {
-        flags[name] = null;
-        continue;
-      }
-      // Generate local percentage only once for each flag
-      const percentage =
-        flags[name]?.percentage || Math.floor(Math.random() * 100) + 1;
-
-      flags[name] = {
-        percentage,
-        enabled: percentage <= item.percentage,
-      };
-    }
-
-    // Update the config
-    await store.set(Config, { domains, flags, updatedAt: Date.now() });
-
-    // Managed options relays on the config, so we need to invalidate them
-    const options = await store.resolve(Options);
-    if (options.managed) store.clear(options);
-
-    console.log('[config] Remote config synced');
-  } catch (e) {
-    console.error('[config] Failed to sync remote config:', e);
-  }
+  return store.set(Config, {
+    domains: USER_TESTING_DOMAINS.reduce((acc, domain) => {
+      acc[domain] = { actions: ['pause-assistant'] };
+      return acc;
+    }, {}),
+    flags: {
+      'pause-assistant': {
+        percentage: 100,
+        enabled: true,
+      },
+    },
+    updatedAt: Date.now(),
+  });
 }
 
 OptionsObserver.addListener(function config({ terms }) {

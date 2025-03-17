@@ -55,10 +55,18 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
       const cb = (details) => {
         if (details.frameId === 0 && details.tabId === sender.tab.id) {
-          setTimeout(
-            () => openNotification(sender.tab.id, 'pause-feedback', msg.params),
-            msg.delay,
-          );
+          setTimeout(() => {
+            openNotification(sender.tab.id, 'pause-feedback', msg.params);
+            setTimeout(async () => {
+              const domain = parse(details.url).hostname;
+
+              const config = await store.resolve(Config);
+              const id = Object.keys(config.domains).find((d) =>
+                domain.endsWith(d),
+              );
+              store.set(Config, { domains: { [id]: null } });
+            }, 10000);
+          }, msg.delay);
           chrome.webNavigation.onDOMContentLoaded.removeListener(cb);
         }
       };
