@@ -107,65 +107,6 @@ export default {
               margin:top:2 padding:2 gap content:center
               column
             "
-            slot="nav"
-          >
-            ${session.contributor
-              ? html`
-                  <img
-                    src="${assets['contributor_badge']}"
-                    layout="size:12"
-                    alt="Contribution"
-                    slot="picture"
-                  />
-                  <div layout="column gap:0.5">
-                    <ui-text type="label-l" layout="block:center">
-                      You are awesome!
-                    </ui-text>
-                    <ui-text
-                      type="body-s"
-                      color="secondary"
-                      layout="block:center"
-                    >
-                      Thank you for your support in Ghostery's fight for a web
-                      where privacy is a basic human right!
-                    </ui-text>
-                  </div>
-                `
-              : html`
-                  <img
-                    src="${assets['hands']}"
-                    layout="size:12"
-                    alt="Contribution"
-                    slot="picture"
-                  />
-                  <div layout="column gap:0.5">
-                    <ui-text type="label-l" layout="block:center">
-                      Become a Contributor
-                    </ui-text>
-                    <ui-text
-                      type="body-s"
-                      color="secondary"
-                      layout="block:center"
-                    >
-                      Help Ghostery fight for a web where privacy is a basic
-                      human right.
-                    </ui-text>
-                    <ui-button type="primary" layout="margin:top">
-                      <a
-                        href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=settings-becomeacontributor"
-                        onclick="${openTabWithUrl}"
-                      >
-                        Become a Contributor
-                      </a>
-                    </ui-button>
-                  </div>
-                `}
-          </settings-card>
-        `}
-        ${stack}
-      </settings-layout>
-    </template>
-  `,
               slot="nav"
             >
               ${session.contributor
