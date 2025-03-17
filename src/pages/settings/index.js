@@ -17,6 +17,7 @@ import Options from '/store/options.js';
 import Settings from './settings.js';
 
 import './elements.js';
+import './styles.css';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted

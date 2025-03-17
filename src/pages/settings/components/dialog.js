@@ -66,10 +66,9 @@ export default {
     }
 
     #backdrop {
-      background: var(--component-custom-token-bg-modal-overlay);
+      background: var(--component-custom-token-overlay);
       opacity: 0;
       transition: all 300ms ease-out;
-      backdrop-filter: blur(4px);
     }
 
     :host([open]) #backdrop {

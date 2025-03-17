@@ -44,7 +44,6 @@ export default {
   `.css`
     :host {
       background: rgba(18, 18, 28, 0.4);
-      backdrop-filter: blur(4px);
     }
 
     #dialog {

@@ -81,27 +81,20 @@ export default {
               onchange="${html.set('globalPause')}"
               data-qa="toggle:global-pause"
             >
-              <div layout="row gap">
-                <ui-icon
-                  name="pause"
-                  color="quaternary"
-                  layout="size:3"
-                ></ui-icon>
-                <div layout="column gap:0.5 grow">
-                  <ui-text type="headline-xs">Pause Ghostery</ui-text>
-                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
-                    Suspends privacy protection globally for 1 day.
+              <settings-option icon="pause">
+                Pause Ghostery
+                <span slot="description">
+                  Suspends privacy protection globally for 1 day.
+                </span>
+                ${globalPauseRevokeAt &&
+                html`
+                  <ui-text type="body-s" color="secondary" slot="footer">
+                    <ui-revoke-at
+                      revokeAt="${globalPauseRevokeAt}"
+                    ></ui-revoke-at>
                   </ui-text>
-                  ${globalPauseRevokeAt &&
-                  html`
-                    <ui-text type="body-s" color="secondary">
-                      <ui-revoke-at
-                        revokeAt="${globalPauseRevokeAt}"
-                      ></ui-revoke-at>
-                    </ui-text>
-                  `}
-                </div>
-              </div>
+                `}
+              </settings-option>
             </ui-toggle>
             <ui-line></ui-line>
             <div
@@ -116,23 +109,12 @@ export default {
                   onchange="${html.set(options, 'blockAds')}"
                   data-qa="toggle:ad-blocking"
                 >
-                  <div layout="row gap">
-                    <ui-icon
-                      name="ads"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <div layout="column gap:0.5 grow">
-                      <ui-text type="headline-xs">Ad-Blocking</ui-text>
-                      <ui-text
-                        type="body-m"
-                        mobile-type="body-s"
-                        color="secondary"
-                      >
-                        Eliminates ads on websites for safe and fast browsing.
-                      </ui-text>
-                    </div>
-                  </div>
+                  <settings-option icon="ads">
+                    Ad-Blocking
+                    <span slot="description">
+                      Eliminates ads on websites for safe and fast browsing.
+                    </span>
+                  </settings-option>
                 </ui-toggle>
                 <ui-toggle
                   disabled="${globalPause}"
@@ -140,24 +122,13 @@ export default {
                   onchange="${html.set(options, 'blockTrackers')}"
                   data-qa="toggle:anti-tracking"
                 >
-                  <div layout="row gap">
-                    <ui-icon
-                      name="tracking"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <div layout="column grow gap:0.5">
-                      <ui-text type="headline-xs">Anti-Tracking</ui-text>
-                      <ui-text
-                        type="body-m"
-                        mobile-type="body-s"
-                        color="secondary"
-                      >
-                        Prevents various tracking techniques using AI-driven
-                        technology.
-                      </ui-text>
-                    </div>
-                  </div>
+                  <settings-option icon="tracking">
+                    Anti-Tracking
+                    <span slot="description">
+                      Prevents various tracking techniques using AI-driven
+                      technology.
+                    </span>
+                  </settings-option>
                 </ui-toggle>
                 <ui-toggle
                   disabled="${globalPause}"
@@ -165,154 +136,112 @@ export default {
                   onchange="${toggleNeverConsent}"
                   data-qa="toggle:never-consent"
                 >
-                  <div layout="row gap">
-                    <ui-icon
-                      name="autoconsent"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <div layout="column grow gap:0.5">
-                      <ui-text type="headline-xs">Never-Consent</ui-text>
-                      <ui-text
-                        type="body-m"
-                        mobile-type="body-s"
-                        color="secondary"
-                      >
-                        Automatically rejects cookie consent notices.
-                      </ui-text>
-                    </div>
-                  </div>
+                  <settings-option icon="autoconsent">
+                    Never-Consent
+                    <span slot="description">
+                      Automatically rejects cookie consent notices.
+                    </span>
+                  </settings-option>
                 </ui-toggle>
               </div>
               <ui-line></ui-line>
-              <ui-toggle
-                disabled="${globalPause}"
-                value="${options.regionalFilters.enabled}"
-                onchange="${html.set(options, 'regionalFilters.enabled')}"
-                data-qa="toggle:regional-filters"
-              >
-                <ui-action>
-                  <a
-                    href="${router.url(RegionalFilters)}"
-                    layout="row gap items:center ::color:primary"
-                    layout:hover@hover="::color:brand-primary"
-                    data-qa="button:regional-filters"
-                  >
-                    <ui-icon
-                      name="pin"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      color="inherit"
-                      layout="row gap:0.5 items:center"
-                    >
-                      Regional Filters
-                      <ui-icon
-                        name="chevron-right"
-                        color="inherit"
-                        layout="size:2"
-                      ></ui-icon
-                    ></ui-text>
-                  </a>
-                </ui-action>
-              </ui-toggle>
-              <ui-toggle
-                disabled="${globalPause}"
-                value="${options.serpTrackingPrevention}"
-                onchange="${html.set(options, 'serpTrackingPrevention')}"
-              >
-                <ui-action>
-                  <a
-                    href="${router.url(Serp)}"
-                    layout="row gap items:center ::color:primary"
-                    layout:hover@hover="::color:brand-primary"
-                  >
-                    <ui-icon
-                      name="search"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      color="inherit"
-                      layout="row gap:0.5 items:center"
-                    >
-                      Search Engine Redirect Protection
-                      <ui-icon
-                        name="chevron-right"
-                        color="inherit"
-                        layout="size:2"
-                      ></ui-icon
-                    ></ui-text>
-                  </a>
-                </ui-action>
-              </ui-toggle>
-              <ui-toggle
-                disabled="${globalPause}"
-                value="${options.experimentalFilters}"
-                onchange="${html.set(options, 'experimentalFilters')}"
-              >
-                <ui-action>
-                  <a
-                    href="${router.url(ExperimentalFilters)}"
-                    layout="row gap items:center ::color:primary"
-                    layout:hover@hover="::color:brand-primary"
-                  >
-                    <ui-icon
-                      name="flask"
-                      color="quaternary"
-                      layout="size:3"
-                    ></ui-icon>
-                    <ui-text
-                      type="headline-xs"
-                      color="inherit"
-                      layout="row gap:0.5 items:center"
-                    >
-                      Experimental Filters
-                      <ui-icon
-                        name="chevron-right"
-                        color="inherit"
-                        layout="size:2"
-                      ></ui-icon
-                    ></ui-text>
-                  </a>
-                </ui-action>
-              </ui-toggle>
-              <div layout="column gap">
+              <div layout="grid:1|max content:center gap">
+                <settings-link
+                  href="${router.url(RegionalFilters)}"
+                  data-qa="button:regional-filters"
+                >
+                  <ui-icon
+                    name="pin"
+                    color="quaternary"
+                    layout="size:3 margin:right"
+                  ></ui-icon>
+                  <ui-text type="headline-xs" layout="row gap:0.5 items:center">
+                    Regional Filters
+                  </ui-text>
+                  <ui-icon
+                    name="chevron-right"
+                    color="primary"
+                    layout="size:2"
+                  ></ui-icon>
+                </settings-link>
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.regionalFilters.enabled}"
+                  onchange="${html.set(options, 'regionalFilters.enabled')}"
+                  data-qa="toggle:regional-filters"
+                >
+                </ui-toggle>
+              </div>
+              <div layout="grid:1|max content:center gap">
+                <settings-link href="${router.url(Serp)}">
+                  <ui-icon
+                    name="search"
+                    color="quaternary"
+                    layout="size:3 margin:right"
+                  ></ui-icon>
+                  <ui-text type="headline-xs" layout="row gap:0.5 items:center">
+                    Search Engine Redirect Protection </ui-text
+                  ><ui-icon
+                    name="chevron-right"
+                    color="primary"
+                    layout="size:2"
+                  ></ui-icon>
+                </settings-link>
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.serpTrackingPrevention}"
+                  onchange="${html.set(options, 'serpTrackingPrevention')}"
+                >
+                </ui-toggle>
+              </div>
+              <div layout="grid:1|max content:center gap">
+                <settings-link href="${router.url(ExperimentalFilters)}">
+                  <ui-icon
+                    name="flask"
+                    color="quaternary"
+                    layout="size:3 margin:right"
+                  ></ui-icon>
+                  <ui-text type="headline-xs" layout="row gap:0.5 items:center">
+                    Experimental Filters
+                  </ui-text>
+                  <ui-icon
+                    name="chevron-right"
+                    color="primary"
+                    layout="size:2"
+                  ></ui-icon>
+                </settings-link>
+                <ui-toggle
+                  disabled="${globalPause}"
+                  value="${options.experimentalFilters}"
+                  onchange="${html.set(options, 'experimentalFilters')}"
+                >
+                </ui-toggle>
+              </div>
+              <div layout="grid:1|max content:center gap">
+                <settings-link
+                  href="${router.url(CustomFilters)}"
+                  data-qa="button:custom-filters"
+                >
+                  <ui-icon
+                    name="detailed-view"
+                    color="quaternary"
+                    layout="size:3 margin:right"
+                  ></ui-icon>
+                  <ui-text type="headline-xs" layout="row gap:0.5 items:center">
+                    Custom Filters
+                  </ui-text>
+                  <ui-icon
+                    name="chevron-right"
+                    color="primary"
+                    layout="size:2"
+                  ></ui-icon>
+                </settings-link>
                 <ui-toggle
                   disabled="${globalPause}"
                   value="${options.customFilters.enabled}"
                   onchange="${html.set(options, 'customFilters.enabled')}"
                   data-qa="toggle:custom-filters"
                 >
-                  <ui-action>
-                    <a
-                      href="${router.url(CustomFilters)}"
-                      layout="row gap items:center ::color:primary"
-                      layout:hover@hover="::color:brand-primary"
-                      data-qa="button:custom-filters"
-                    >
-                      <ui-icon
-                        name="detailed-view"
-                        color="quaternary"
-                        layout="size:3"
-                      ></ui-icon>
-                      <ui-text
-                        type="headline-xs"
-                        color="inherit"
-                        layout="row gap:0.5 items:center"
-                      >
-                        Custom Filters
-                        <ui-icon
-                          name="chevron-right"
-                          color="inherit"
-                          layout="size:2"
-                        ></ui-icon
-                      ></ui-text>
-                    </a>
-                  </ui-action>
                 </ui-toggle>
               </div>
             </div>
