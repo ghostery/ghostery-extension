@@ -69,6 +69,9 @@
     "message": "广告",
     "description": "Tracker category name"
   },
+  "all_information_displayed_on_the_whotracks_me_tab_or": {
+    "message": "All information displayed on the WhoTracks.Me Tab or"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "所有具有调整保护状态的网站将在此处列出。"
   },
@@ -140,6 +143,9 @@
   "cancel": {
     "message": "取消"
   },
+  "categories": {
+    "message": "Categories"
+  },
   "category": {
     "message": "类别"
   },
@@ -198,6 +204,9 @@
     "message": "目前对于 $${0} 的保护功能状态：",
     "description": "Current protection status for a tracker"
   },
+  "custom": {
+    "message": "Custom"
+  },
   "custom_filters": {
     "message": "自定义过滤器"
   },
@@ -208,11 +217,17 @@
     "message": "客户互动",
     "description": "Tracker category name"
   },
+  "daily": {
+    "message": "每日"
+  },
   "dark": {
     "message": "深色模式"
   },
   "data_collection_summary": {
     "message": "数据收集摘要"
+  },
+  "date_range__@_0______1_": {
+    "message": "Date Range: $${0} - $${1}"
   },
   "default": {
     "message": "默认"
@@ -234,6 +249,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "在浏览器工具栏中的 Ghostery 图标上显示跟踪器计数。"
+  },
+  "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
+    "message": "Displays unique insights into observed activities on $${0}, revealing affiliation, categories, and presence across the site."
   },
   "dnr_rules__@_0_": {
     "message": "DNR规则：$${0}"
@@ -311,14 +329,23 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "帮助您创建自己的广告拦截规则，以定制您的Ghostery体验。."
   },
+  "facts": {
+    "message": "Facts"
+  },
   "fantastic__thanks_": {
     "message": "太好了！谢谢！"
   },
   "feedback_sharing": {
     "message": "反馈共享"
   },
+  "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
+    "message": "Generates a global transparency report on web tracking in your Ghostery-protected browser."
+  },
   "get_help": {
     "message": "获取帮助"
+  },
+  "ghostery_com_whotracksme": {
+    "message": "ghostery.com/whotracksme"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 已恢复。"
@@ -340,6 +367,9 @@
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery 已在此网站上暂停。"
+  },
+  "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
+    "message": "Ghostery maps the ownership structure linking activities to the organizations controlling them. This knowledge, hand-curated by experts, is publicly available on"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery从不收集个人信息，如密码、浏览历史或您访问页面的内容。."
@@ -370,6 +400,9 @@
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 会显示页面上已阻止的跟踪器数量。点击 Ghostery 图标，获取更多详情。"
+  },
+  "github": {
+    "message": "Github"
   },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "请求参数中可能唯一标识符的哈希值"
@@ -402,6 +435,9 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "有关<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件的健康状况</a>和<a href=\"$${2}\">性能遥测</a>的信息将根据我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>进行共享，以提升Ghostery社区的隐私保护。."
   },
+  "is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
+  },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "它的存在要归功于每个选择将非个人信息给 WhoTracks.Me 的 Ghostery 用户的微小贡献。 这些输入使 Ghostery 能够提供有关跟踪器的实时情报，从而为整个 Ghostery 社区提供保护。"
   },
@@ -413,6 +449,9 @@
   },
   "keep_disabled": {
     "message": "保持禁用"
+  },
+  "last_month": {
+    "message": "Last Month"
   },
   "last_update__@_0_": {
     "message": "上次更新：$${0}"
@@ -459,6 +498,9 @@
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "为每个网站调整推荐的阻止设定。"
+  },
+  "monthly": {
+    "message": "每月"
   },
   "more_ad_blocking_available": {
     "message": "更多广告拦截功能"
@@ -517,12 +559,18 @@
   "organization_s_website": {
     "message": "组织的网站"
   },
+  "organizations": {
+    "message": "组织机构"
+  },
   "other": {
     "message": "其他",
     "description": "Tracker category name"
   },
   "our_recommendation_for_this_activity": {
     "message": "对于此活动，我们的推荐"
+  },
+  "pages_visited": {
+    "message": "Pages visited"
   },
   "pause_ghostery": {
     "message": "暂停 Ghostery"
@@ -557,6 +605,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "阻止各种 AI 驱动的跟踪技术。"
   },
+  "print_to_pdf": {
+    "message": "Print to PDF"
+  },
   "privacy_policy": {
     "message": "隐私政策"
   },
@@ -568,6 +619,9 @@
   },
   "protection_status": {
     "message": "保护功能状态"
+  },
+  "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
+    "message": "Provides an overview of the essential aspects of privacy protection."
   },
   "read_more_on_whotracks_me": {
     "message": "在 WhoTracks.Me 上了解详情"
@@ -587,8 +641,14 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "请求潜在网络跟踪器的元数据"
   },
+  "resume": {
+    "message": "继续"
+  },
   "resuming___": {
     "message": "恢复中..."
+  },
+  "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
+    "message": "Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can uncover the identities behind every tracker."
   },
   "save": {
     "message": "保存"
@@ -616,9 +676,6 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK用于收集和发送报告，但Sentry只接收上述信息——没有两个请求可以相互关联，浏览器IP也不会与Sentry共享。."
-  },
-  "settings_sync": {
-    "message": "设置同步"
   },
   "setup_successful": {
     "message": "安装成功"
@@ -673,6 +730,9 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "暂停全球隐私保护的时间为1天。"
   },
+  "sync_settings": {
+    "message": "Sync Settings"
+  },
   "telemetry": {
     "message": "遥测",
     "description": "Tracker category name"
@@ -685,6 +745,9 @@
   },
   "theme": {
     "message": "主题"
+  },
+  "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
+    "message": "This privacy report was generated by tracking the trackers in a browser protected by Ghostery. The statistics here provide transparency about web tracking. To learn more about how Ghostery keeps its community safe, visit $${0}."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "此网站将始终暂停。您可以随时在 Ghostery 设置中更改此设置，以阻止跟踪器和广告在网络上跟踪您。"
@@ -710,6 +773,15 @@
   "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
     "message": "为了Ghostery社区的利益，请告诉我们这是否有帮助！"
   },
+  "top_100": {
+    "message": "Top 100"
+  },
+  "top_20": {
+    "message": "Top 20"
+  },
+  "top_50": {
+    "message": "Top 50"
+  },
   "tracker_database": {
     "message": "追踪器数据库"
   },
@@ -730,6 +802,9 @@
   },
   "trackers_wheel": {
     "message": "跟踪器轮"
+  },
+  "trends": {
+    "message": "Trends"
   },
   "trust_all__recommended_": {
     "message": "全部信任（推荐)"
@@ -753,8 +828,8 @@
   "trusted_on_this_website": {
     "message": "在此网站上受信任"
   },
-  "undo": {
-    "message": "撤消"
+  "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
+    "message": "Uncovers that no two days are alike. With Ghostery, you’re protected each day."
   },
   "unidentified": {
     "message": "未识别",
@@ -782,8 +857,14 @@
   "view_activity_details": {
     "message": "查看活动详情"
   },
+  "view_report": {
+    "message": "View Report"
+  },
   "visit_our_blog": {
     "message": "访问我们的博客"
+  },
+  "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
+    "message": "was the most frequently observed tracker across all web pages visited."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "我们知道，您依赖 Ghostery 来获得流畅的 YouTube 体验。在更完善的解决方案出现之前，这里有一个临时解决方案。"
@@ -809,6 +890,9 @@
   "websites": {
     "message": "网站"
   },
+  "weekly": {
+    "message": "Weekly"
+  },
   "welcome_to_ghostery": {
     "message": "欢迎使用 Ghostery"
   },
@@ -817,6 +901,12 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me由Ghostery运营，是Ghostery人工智能反追踪技术的重要基石，在为Ghostery社区提供实时隐私保护方面发挥着关键作用。它是一个关于追踪器的全面全球资源，为网络追踪带来透明度。"
+  },
+  "whotracks_me_privacy_report": {
+    "message": "WhoTracks.Me Privacy Report"
+  },
+  "whotracks_me_reports": {
+    "message": "WhoTracks.Me Reports"
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me 统计报告"
@@ -829,6 +919,9 @@
   },
   "yes": {
     "message": "是"
+  },
+  "yesterday": {
+    "message": "Yesterday"
   },
   "you_are_awesome_": {
     "message": "太棒啦！"

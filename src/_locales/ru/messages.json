@@ -69,6 +69,9 @@
     "message": "Реклама",
     "description": "Tracker category name"
   },
+  "all_information_displayed_on_the_whotracks_me_tab_or": {
+    "message": "All information displayed on the WhoTracks.Me Tab or"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "Все веб-сайты с измененным статусом защиты будут перечислены здесь."
   },
@@ -140,6 +143,9 @@
   "cancel": {
     "message": "Отмена"
   },
+  "categories": {
+    "message": "Categories"
+  },
   "category": {
     "message": "Категория"
   },
@@ -198,6 +204,9 @@
     "message": "Текущий статус $${0}: ",
     "description": "Current protection status for a tracker"
   },
+  "custom": {
+    "message": "Custom"
+  },
   "custom_filters": {
     "message": "Пользовательские фильтры"
   },
@@ -208,11 +217,17 @@
     "message": "Взаимодействие с клиентами",
     "description": "Tracker category name"
   },
+  "daily": {
+    "message": "Ежедневно"
+  },
   "dark": {
     "message": "Тёмная"
   },
   "data_collection_summary": {
     "message": "Сводка о сборе данных"
+  },
+  "date_range__@_0______1_": {
+    "message": "Date Range: $${0} - $${1}"
   },
   "default": {
     "message": "По умолчанию"
@@ -234,6 +249,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Показывает счетчик трекеров у значка Ghostery на панели инструментов в браузере."
+  },
+  "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
+    "message": "Displays unique insights into observed activities on $${0}, revealing affiliation, categories, and presence across the site."
   },
   "dnr_rules__@_0_": {
     "message": "Правила DNR: $${0}"
@@ -311,14 +329,23 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Обеспечивает создание собственных правил блокировки рекламы для настройки вашего опыта использования Ghostery."
   },
+  "facts": {
+    "message": "Facts"
+  },
   "fantastic__thanks_": {
     "message": "Фантастика! Спасибо!"
   },
   "feedback_sharing": {
     "message": "Обмен отзывами"
   },
+  "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
+    "message": "Generates a global transparency report on web tracking in your Ghostery-protected browser."
+  },
   "get_help": {
     "message": "Помощь"
+  },
+  "ghostery_com_whotracksme": {
+    "message": "ghostery.com/whotracksme"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery возобновлен."
@@ -340,6 +367,9 @@
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghostery приостановлен на этом сайте."
+  },
+  "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
+    "message": "Ghostery maps the ownership structure linking activities to the organizations controlling them. This knowledge, hand-curated by experts, is publicly available on"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery никогда не собирает личную информацию, такую как пароли, история браузера или содержимое посещаемых вами страниц."
@@ -370,6 +400,9 @@
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery будет показывать количество трекеров, заблокированных на странице. Чтобы посмотреть более подробную статистику, нажмите на значок расширения."
+  },
+  "github": {
+    "message": "Github"
   },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "хеши потенциально уникального идентификатора в параметрах запросов"
@@ -402,6 +435,9 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Информация о <a href=\"$${0}\">веб-трекерах</a>, <a href=\"$${1}\">состоянии дополнения</a> и <a href=\"$${2}\">телеметрии производительности</a> будет передаваться в соответствии с нашей <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Политикой конфиденциальности</a>, способствуя усилению защиты конфиденциальности для сообщества Ghostery."
   },
+  "is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
+  },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего неперсональную информацию на WhoTracks.Me. Данные позволяют Ghostery оперативно предоставлять информацию о трекерах, что взамен обеспечивает защиту всего сообщества Ghostery."
   },
@@ -413,6 +449,9 @@
   },
   "keep_disabled": {
     "message": "Оставить отключенным"
+  },
+  "last_month": {
+    "message": "Last Month"
   },
   "last_update__@_0_": {
     "message": "Последнее обновление: $${0}"
@@ -459,6 +498,9 @@
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "Настраивайте рекомендуемые параметры блокировки для каждого сайта."
+  },
+  "monthly": {
+    "message": "Месячный"
   },
   "more_ad_blocking_available": {
     "message": "Дополнительные настройки блокировки рекламы"
@@ -517,12 +559,18 @@
   "organization_s_website": {
     "message": "Сайт организации"
   },
+  "organizations": {
+    "message": "Организации"
+  },
   "other": {
     "message": "Другое",
     "description": "Tracker category name"
   },
   "our_recommendation_for_this_activity": {
     "message": "Рекомендации для этого действия"
+  },
+  "pages_visited": {
+    "message": "Pages visited"
   },
   "pause_ghostery": {
     "message": "Приостановить Ghostery"
@@ -557,6 +605,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Использует ИИ для блокировки различных способов сбора данных."
   },
+  "print_to_pdf": {
+    "message": "Print to PDF"
+  },
   "privacy_policy": {
     "message": "Политика конфиденциальности"
   },
@@ -568,6 +619,9 @@
   },
   "protection_status": {
     "message": "Статус защиты"
+  },
+  "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
+    "message": "Provides an overview of the essential aspects of privacy protection."
   },
   "read_more_on_whotracks_me": {
     "message": "Читайте больше на WhoTracks.Me"
@@ -587,8 +641,14 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "запросить метаданные потенциальных веб-трекеров"
   },
+  "resume": {
+    "message": "Возобновить"
+  },
   "resuming___": {
     "message": "Возобновление..."
+  },
+  "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
+    "message": "Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can uncover the identities behind every tracker."
   },
   "save": {
     "message": "Сохранить"
@@ -616,9 +676,6 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "SDK Sentry используется для сбора и отправки отчетов, но Sentry получает только вышеуказанную информацию - никакие два запроса не могут быть связаны друг с другом, и IP-адрес браузера никогда не передается в Sentry."
-  },
-  "settings_sync": {
-    "message": "Синхронизация настроек"
   },
   "setup_successful": {
     "message": "Настройка завершена"
@@ -673,6 +730,9 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Приостанавливает защиту конфиденциальности по всему миру на 1 день."
   },
+  "sync_settings": {
+    "message": "Sync Settings"
+  },
   "telemetry": {
     "message": "Телеметрия",
     "description": "Tracker category name"
@@ -685,6 +745,9 @@
   },
   "theme": {
     "message": "Тема"
+  },
+  "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
+    "message": "This privacy report was generated by tracking the trackers in a browser protected by Ghostery. The statistics here provide transparency about web tracking. To learn more about how Ghostery keeps its community safe, visit $${0}."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Этот сайт всегда будет приостановлен. Вы можете изменить это в любое время в настройках Ghostery, чтобы остановить трекеры и рекламу, отслеживающую вас в Интернете"
@@ -710,6 +773,15 @@
   "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
     "message": "Сообщите нам, помогло ли это, на благо сообщества Ghostery!"
   },
+  "top_100": {
+    "message": "Top 100"
+  },
+  "top_20": {
+    "message": "Top 20"
+  },
+  "top_50": {
+    "message": "Top 50"
+  },
   "tracker_database": {
     "message": "База данных трекера"
   },
@@ -730,6 +802,9 @@
   },
   "trackers_wheel": {
     "message": "Трекерская рулетка"
+  },
+  "trends": {
+    "message": "Trends"
   },
   "trust_all__recommended_": {
     "message": "Доверяйте всем (рекомендуется)"
@@ -753,8 +828,8 @@
   "trusted_on_this_website": {
     "message": "Разрешено на этом сайте"
   },
-  "undo": {
-    "message": "Вернуть"
+  "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
+    "message": "Uncovers that no two days are alike. With Ghostery, you’re protected each day."
   },
   "unidentified": {
     "message": "Неизвестно",
@@ -782,8 +857,14 @@
   "view_activity_details": {
     "message": "Просмотреть подробности действия"
   },
+  "view_report": {
+    "message": "View Report"
+  },
   "visit_our_blog": {
     "message": "Посетите наш блог"
+  },
+  "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
+    "message": "was the most frequently observed tracker across all web pages visited."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Мы знаем, что ты полагаешься на Ghostery для бесперебойной работы с YouTube. Пока не появится более совершенное решение, вот временное исправление."
@@ -809,6 +890,9 @@
   "websites": {
     "message": "Веб-сайты"
   },
+  "weekly": {
+    "message": "Weekly"
+  },
   "welcome_to_ghostery": {
     "message": "Добро пожаловать в Ghostery"
   },
@@ -817,6 +901,12 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, управляемый Ghostery, является важнейшим элементом технологии Ghostery по борьбе с отслеживанием на основе ИИ, играя ключевую роль в обеспечении защиты конфиденциальности в реальном времени для сообщества Ghostery. Это всеобъемлющий глобальный ресурс о трекерах, обеспечивающий прозрачность веб-отслеживания."
+  },
+  "whotracks_me_privacy_report": {
+    "message": "WhoTracks.Me Privacy Report"
+  },
+  "whotracks_me_reports": {
+    "message": "WhoTracks.Me Reports"
   },
   "whotracks_me_statistical_report": {
     "message": "Статистический отчет WhoTracks.Me"
@@ -829,6 +919,9 @@
   },
   "yes": {
     "message": "Да"
+  },
+  "yesterday": {
+    "message": "Yesterday"
   },
   "you_are_awesome_": {
     "message": "Отлично!"

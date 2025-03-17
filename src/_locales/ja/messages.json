@@ -69,6 +69,9 @@
     "message": "広告",
     "description": "Tracker category name"
   },
+  "all_information_displayed_on_the_whotracks_me_tab_or": {
+    "message": "All information displayed on the WhoTracks.Me Tab or"
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "すべての調整済み保護ステータスのウェブサイトがここにリストされます。"
   },
@@ -140,6 +143,9 @@
   "cancel": {
     "message": "キャンセル"
   },
+  "categories": {
+    "message": "Categories"
+  },
   "category": {
     "message": "カテゴリ"
   },
@@ -198,6 +204,9 @@
     "message": "$${0}の現在の保護ステータス: ",
     "description": "Current protection status for a tracker"
   },
+  "custom": {
+    "message": "Custom"
+  },
   "custom_filters": {
     "message": "カスタムフィルター"
   },
@@ -208,11 +217,17 @@
     "message": "顧客インタラクション",
     "description": "Tracker category name"
   },
+  "daily": {
+    "message": "毎日"
+  },
   "dark": {
     "message": "ダーク"
   },
   "data_collection_summary": {
     "message": "データ収集概要"
+  },
+  "date_range__@_0______1_": {
+    "message": "Date Range: $${0} - $${1}"
   },
   "default": {
     "message": "初期設定"
@@ -234,6 +249,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "ブラウザのツールバーのGhosteryアイコンにトラッカー数を表示します。"
+  },
+  "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
+    "message": "Displays unique insights into observed activities on $${0}, revealing affiliation, categories, and presence across the site."
   },
   "dnr_rules__@_0_": {
     "message": "DNRルール: $${0}"
@@ -311,14 +329,23 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "Ghosteryの体験をカスタマイズするために、自分自身の広告ブロックルールの作成を支援します。."
   },
+  "facts": {
+    "message": "Facts"
+  },
   "fantastic__thanks_": {
     "message": "素晴らしい！ありがとう！"
   },
   "feedback_sharing": {
     "message": "フィードバック共有"
   },
+  "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
+    "message": "Generates a global transparency report on web tracking in your Ghostery-protected browser."
+  },
   "get_help": {
     "message": "ヘルプ"
+  },
+  "ghostery_com_whotracksme": {
+    "message": "ghostery.com/whotracksme"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghosteryが再開されました。"
@@ -340,6 +367,9 @@
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "Ghosteryは、このサイトで一時停止しています。"
+  },
+  "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
+    "message": "Ghostery maps the ownership structure linking activities to the organizations controlling them. This knowledge, hand-curated by experts, is publicly available on"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghosteryは、パスワード、閲覧履歴、訪問したページの内容などの個人情報を収集することはありません。."
@@ -370,6 +400,9 @@
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghosteryは、あるページでブロックされたトラッカーの数を表示します。Ghosteryのアイコンをクリックすると、より詳細な情報が表示されます。"
+  },
+  "github": {
+    "message": "Github"
   },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "リクエストパラメータ内の潜在的にユニークな識別子のハッシュ"
@@ -402,6 +435,9 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "ウェブトラッカー、アドオンの健康状態、パフォーマンステレメトリーに関する情報は、Ghosteryコミュニティのプライバシー保護を進めるために、当社のプライバシーポリシーに従って共有されます。."
   },
+  "is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
+  },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "WhoTracks.Meに個人情報以外の情報を送信することを選択したGhosteryユーザー全員による、小さな貢献のおかげで存在しています。この入力により、Ghosteryはトラッカーに関するリアルタイムの情報を提供し、その結果、Ghosteryコミュニティ全体にプライバシー保護をもたらします。"
   },
@@ -413,6 +449,9 @@
   },
   "keep_disabled": {
     "message": "無効のままにする"
+  },
+  "last_month": {
+    "message": "Last Month"
   },
   "last_update__@_0_": {
     "message": "最終更新日: $${0}"
@@ -459,6 +498,9 @@
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "それぞれのウェブサイトについて推奨されるブロック設定を変更します。"
+  },
+  "monthly": {
+    "message": "毎月"
   },
   "more_ad_blocking_available": {
     "message": "利用できるその他の広告ブロッキング"
@@ -517,12 +559,18 @@
   "organization_s_website": {
     "message": "組織のウェブサイト"
   },
+  "organizations": {
+    "message": "組織"
+  },
   "other": {
     "message": "その他",
     "description": "Tracker category name"
   },
   "our_recommendation_for_this_activity": {
     "message": "このアクティビティのおすすめ"
+  },
+  "pages_visited": {
+    "message": "Pages visited"
   },
   "pause_ghostery": {
     "message": "ゴーストリーを一時停止"
@@ -557,6 +605,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AIを活用した技術で様々な追跡手法を防止します。"
   },
+  "print_to_pdf": {
+    "message": "Print to PDF"
+  },
   "privacy_policy": {
     "message": "プライバシー・ポリシー"
   },
@@ -568,6 +619,9 @@
   },
   "protection_status": {
     "message": "保護ステータス"
+  },
+  "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
+    "message": "Provides an overview of the essential aspects of privacy protection."
   },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Meで詳細を見る"
@@ -587,8 +641,14 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "潜在的なウェブトラッカーのメタデータを要求する"
   },
+  "resume": {
+    "message": "再開"
+  },
   "resuming___": {
     "message": "再開中..."
+  },
+  "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
+    "message": "Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can uncover the identities behind every tracker."
   },
   "save": {
     "message": "保存"
@@ -616,9 +676,6 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDKはレポートを収集して送信するために使用されていますが、Sentryが受け取る情報は上記のもののみであり、2つのリクエストが互いにリンクされることはなく、ブラウザのIPがSentryと共有されることはありません。."
-  },
-  "settings_sync": {
-    "message": "同期設定"
   },
   "setup_successful": {
     "message": "セットアップ成功"
@@ -673,6 +730,9 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "1日間、グローバルにプライバシー保護を一時停止します。"
   },
+  "sync_settings": {
+    "message": "Sync Settings"
+  },
   "telemetry": {
     "message": "テレメトリー",
     "description": "Tracker category name"
@@ -685,6 +745,9 @@
   },
   "theme": {
     "message": "テーマ"
+  },
+  "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
+    "message": "This privacy report was generated by tracking the trackers in a browser protected by Ghostery. The statistics here provide transparency about web tracking. To learn more about how Ghostery keeps its community safe, visit $${0}."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "このサイトは常に一時停止されます。Ghosteryの設定でいつでもこれを変更して、トラッカーや広告がウェブ上であなたを追跡するのを防ぐことができます。"
@@ -710,6 +773,15 @@
   "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
     "message": "Ghosteryコミュニティのために、これが役立ったかどうか教えてください！"
   },
+  "top_100": {
+    "message": "Top 100"
+  },
+  "top_20": {
+    "message": "Top 20"
+  },
+  "top_50": {
+    "message": "Top 50"
+  },
   "tracker_database": {
     "message": "トラッカー・データベース"
   },
@@ -730,6 +802,9 @@
   },
   "trackers_wheel": {
     "message": "トラッカーホイール"
+  },
+  "trends": {
+    "message": "Trends"
   },
   "trust_all__recommended_": {
     "message": "すべてを信頼する（推奨)"
@@ -753,8 +828,8 @@
   "trusted_on_this_website": {
     "message": "このウェブサイトで信頼済み"
   },
-  "undo": {
-    "message": "元に戻す"
+  "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
+    "message": "Uncovers that no two days are alike. With Ghostery, you’re protected each day."
   },
   "unidentified": {
     "message": "未知",
@@ -782,8 +857,14 @@
   "view_activity_details": {
     "message": "アクティビティの詳細を表示"
   },
+  "view_report": {
+    "message": "View Report"
+  },
   "visit_our_blog": {
     "message": "ブログを見る"
+  },
+  "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
+    "message": "was the most frequently observed tracker across all web pages visited."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "スムーズなYouTube体験のためにGhosteryに依存していることは承知しています。より洗練されたソリューションが登場するまでの一時的な解決策をご紹介します。"
@@ -809,6 +890,9 @@
   "websites": {
     "message": "ウェブサイト"
   },
+  "weekly": {
+    "message": "Weekly"
+  },
   "welcome_to_ghostery": {
     "message": "Ghosteryをご利用いただきありがとうございます"
   },
@@ -817,6 +901,12 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Meは、Ghosteryによって運営されており、GhosteryのAIアンチトラッキング技術の重要な基盤であり、Ghosteryコミュニティにリアルタイムのプライバシー保護を提供する上で重要な役割を果たしています。これは、トラッカーに関する包括的なグローバルリソースであり、ウェブトラッキングに透明性をもたらします。"
+  },
+  "whotracks_me_privacy_report": {
+    "message": "WhoTracks.Me Privacy Report"
+  },
+  "whotracks_me_reports": {
+    "message": "WhoTracks.Me Reports"
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me統計レポート"
@@ -829,6 +919,9 @@
   },
   "yes": {
     "message": "はい"
+  },
+  "yesterday": {
+    "message": "Yesterday"
   },
   "you_are_awesome_": {
     "message": "ありがとうございます！"
