@@ -69,8 +69,8 @@
     "message": "Quảng cáo",
     "description": "Tracker category name"
   },
-  "all_information_displayed_on_the_whotracks_me_tab_or": {
-    "message": "All information displayed on the WhoTracks.Me Tab or"
+  "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "Tất cả thông tin hiển thị trên thẻ WhoTracks.Me hoặc $${0} là tổng hợp các dữ kiện về trình theo dõi web. Những báo cáo này cung cấp sức mạnh cho công nghệ chống theo dõi của Ghostery, bảo vệ toàn bộ cộng đồng."
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "All websites with adjusted protection status will be listed here."
@@ -144,7 +144,7 @@
     "message": "Hủy bỏ"
   },
   "categories": {
-    "message": "Categories"
+    "message": "Danh mục"
   },
   "category": {
     "message": "Category"
@@ -205,7 +205,7 @@
     "description": "Current protection status for a tracker"
   },
   "custom": {
-    "message": "Custom"
+    "message": "Tùy chỉnh"
   },
   "custom_filters": {
     "message": "Custom Filters"
@@ -227,7 +227,7 @@
     "message": "Data Collection Summary"
   },
   "date_range__@_0______1_": {
-    "message": "Date Range: $${0} - $${1}"
+    "message": "Khoảng thời gian: $${0} - $${1}"
   },
   "default": {
     "message": "Mặc định"
@@ -251,7 +251,7 @@
     "message": "Displays the tracker count on the Ghostery icon in the browser toolbar."
   },
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
-    "message": "Displays unique insights into observed activities on $${0}, revealing affiliation, categories, and presence across the site."
+    "message": "Hiển thị những thông tin chi tiết độc đáo về các hoạt động quan sát được trên $${0}, tiết lộ mối liên kết, danh mục và sự hiện diện trên toàn trang web."
   },
   "dnr_rules__@_0_": {
     "message": "DNR rules: $${0}"
@@ -330,7 +330,7 @@
     "message": "Facilitates the creation of your own ad-blocking rules to customize your Ghostery experience."
   },
   "facts": {
-    "message": "Facts"
+    "message": "Sự thật"
   },
   "fantastic__thanks_": {
     "message": "Tuyệt vời! Cảm ơn!"
@@ -339,13 +339,10 @@
     "message": "Chia sẻ Phản hồi"
   },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
-    "message": "Generates a global transparency report on web tracking in your Ghostery-protected browser."
+    "message": "Tạo báo cáo minh bạch toàn cầu về theo dõi web trong trình duyệt được bảo vệ bởi Ghostery của bạn."
   },
   "get_help": {
     "message": "Trợ giúp"
-  },
-  "ghostery_com_whotracksme": {
-    "message": "ghostery.com/whotracksme"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery has been resumed."
@@ -369,7 +366,7 @@
     "message": "Ghostery bị tạm dừng trên trang web này."
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
-    "message": "Ghostery maps the ownership structure linking activities to the organizations controlling them. This knowledge, hand-curated by experts, is publicly available on"
+    "message": "Ghostery lập bản đồ cấu trúc sở hữu liên kết các hoạt động với các tổ chức kiểm soát chúng. Kiến thức này, được các chuyên gia tuyển chọn thủ công, có sẵn công khai trên"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery never collects personal information like passwords, browsing history or the content of the pages you visit."
@@ -400,9 +397,6 @@
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery sẽ hiển thị số lượng trình theo dõi đã bị chặn trên một trang. Nhấp vào biểu tượng Ghostery sẽ hiển thị thông tin chi tiết hơn."
-  },
-  "github": {
-    "message": "Github"
   },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "hashes of potentially unique identifier in requests parameters"
@@ -435,9 +429,6 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Information about <a href=\"$${0}\">web trackers</a>, <a href=\"$${1}\">add-on's health</a>, and <a href=\"$${2}\">performance telemetry</a> will be shared in accordance with our <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
   },
-  "is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
-    "message": "is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
-  },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Nó tồn tại nhờ các giao dịch vi mô của mỗi người dùng Ghostery chọn gửi thông tin phi cá nhân đến WhoTracks.Me. Đầu vào này cho phép Ghostery cung cấp thông tin thời gian thực về các trình theo dõi, từ đó mang lại sự bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
   },
@@ -451,7 +442,7 @@
     "message": "Giữ bị vô hiệu hóa"
   },
   "last_month": {
-    "message": "Last Month"
+    "message": "Tháng trước"
   },
   "last_update__@_0_": {
     "message": "Last update: $${0}"
@@ -570,7 +561,7 @@
     "message": "Our recommendation for this activity"
   },
   "pages_visited": {
-    "message": "Pages visited"
+    "message": "Các trang đã truy cập"
   },
   "pause_ghostery": {
     "message": "Pause Ghostery"
@@ -606,7 +597,7 @@
     "message": "Ngăn chặn các kỹ thuật theo dõi khác nhau bằng công nghệ điều khiển AI."
   },
   "print_to_pdf": {
-    "message": "Print to PDF"
+    "message": "In ra PDF"
   },
   "privacy_policy": {
     "message": "chính sách bảo mật"
@@ -621,7 +612,7 @@
     "message": "Protection status"
   },
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
-    "message": "Provides an overview of the essential aspects of privacy protection."
+    "message": "Cung cấp cái nhìn tổng quan về các khía cạnh thiết yếu của bảo vệ quyền riêng tư."
   },
   "read_more_on_whotracks_me": {
     "message": "Đọc thêm tại WhoTracks.Me"
@@ -648,7 +639,7 @@
     "message": "Tiếp tục..."
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
-    "message": "Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can uncover the identities behind every tracker."
+    "message": "Tiết lộ những gì ẩn dưới bề mặt internet. Với WhoTracks.Me, bạn có thể khám phá danh tính đằng sau mọi trình theo dõi."
   },
   "save": {
     "message": "Save"
@@ -731,7 +722,7 @@
     "message": "Suspends privacy protection globally for 1 day."
   },
   "sync_settings": {
-    "message": "Sync Settings"
+    "message": "Cài đặt đồng bộ hóa"
   },
   "telemetry": {
     "message": "Từ xa",
@@ -747,7 +738,7 @@
     "message": "Giao diện"
   },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
-    "message": "This privacy report was generated by tracking the trackers in a browser protected by Ghostery. The statistics here provide transparency about web tracking. To learn more about how Ghostery keeps its community safe, visit $${0}."
+    "message": "Báo cáo quyền riêng tư này được tạo ra bằng cách theo dõi các trình theo dõi trong trình duyệt được bảo vệ bởi Ghostery. Các thống kê ở đây cung cấp sự minh bạch về việc theo dõi web. Để tìm hiểu thêm về cách Ghostery bảo vệ cộng đồng của mình, hãy truy cập $${0}."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "This site will always be paused. You can change this at any time in Ghostery settings to stop trackers and ads from tracking you around the web"
@@ -804,7 +795,7 @@
     "message": "Bánh xe theo dõi"
   },
   "trends": {
-    "message": "Trends"
+    "message": "Xu hướng"
   },
   "trust_all__recommended_": {
     "message": "Trust all (recommended)"
@@ -829,7 +820,7 @@
     "message": "Trusted on this website"
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
-    "message": "Uncovers that no two days are alike. With Ghostery, you’re protected each day."
+    "message": "Khám phá rằng không có hai ngày nào giống nhau. Với Ghostery, bạn được bảo vệ mỗi ngày."
   },
   "unidentified": {
     "message": "Không xác định",
@@ -858,13 +849,13 @@
     "message": "View activity details"
   },
   "view_report": {
-    "message": "View Report"
+    "message": "Xem Báo Cáo"
   },
   "visit_our_blog": {
     "message": "Ghé thăm blog của chúng tôi"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
-    "message": "was the most frequently observed tracker across all web pages visited."
+    "message": "trình theo dõi được quan sát thường xuyên nhất trên tất cả các trang web đã truy cập."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Chúng tôi biết bạn tin tưởng vào Ghostery để có trải nghiệm YouTube mượt mà. Đây là giải pháp tạm thời cho đến khi xuất hiện một giải pháp tinh tế hơn."
@@ -891,7 +882,7 @@
     "message": "Các trang web"
   },
   "weekly": {
-    "message": "Weekly"
+    "message": "Hàng tuần"
   },
   "welcome_to_ghostery": {
     "message": "Chào mừng bạn đến với Ghostery"
@@ -903,10 +894,10 @@
     "message": "WhoTracks.Me, được điều hành bởi Ghostery, là một nền tảng quan trọng trong công nghệ chống theo dõi AI của Ghostery, đóng vai trò then chốt trong việc cung cấp bảo vệ quyền riêng tư theo thời gian thực cho cộng đồng Ghostery. Đây là một nguồn tài nguyên toàn cầu toàn diện về các trình theo dõi, mang lại sự minh bạch cho việc theo dõi web."
   },
   "whotracks_me_privacy_report": {
-    "message": "WhoTracks.Me Privacy Report"
+    "message": "Báo Cáo Quyền Riêng Tư WhoTracks.Me"
   },
   "whotracks_me_reports": {
-    "message": "WhoTracks.Me Reports"
+    "message": "Báo cáo WhoTracks.Me"
   },
   "whotracks_me_statistical_report": {
     "message": "Báo cáo thống kê WhoTracks.Me"
@@ -921,7 +912,7 @@
     "message": "Yes"
   },
   "yesterday": {
-    "message": "Yesterday"
+    "message": "Hôm qua"
   },
   "you_are_awesome_": {
     "message": "Bạn thật tuyệt vời!"

@@ -69,8 +69,8 @@
     "message": "Pubblicità",
     "description": "Tracker category name"
   },
-  "all_information_displayed_on_the_whotracks_me_tab_or": {
-    "message": "All information displayed on the WhoTracks.Me Tab or"
+  "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "Tutte le informazioni visualizzate nella scheda WhoTracks.Me o $${0} sono un insieme di dati sui Tracker web. Questi rapporti alimentano la tecnologia anti-tracciamento di Ghostery, proteggendo l'intera comunità."
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "Tutti i siti web con stato di protezione regolato saranno elencati qui."
@@ -144,7 +144,7 @@
     "message": "Annulla"
   },
   "categories": {
-    "message": "Categories"
+    "message": "Categorie"
   },
   "category": {
     "message": "Categoria"
@@ -205,7 +205,7 @@
     "description": "Current protection status for a tracker"
   },
   "custom": {
-    "message": "Custom"
+    "message": "Personalizzato"
   },
   "custom_filters": {
     "message": "Filtri Personalizzati"
@@ -227,7 +227,7 @@
     "message": "Riepilogo della Raccolta Dati"
   },
   "date_range__@_0______1_": {
-    "message": "Date Range: $${0} - $${1}"
+    "message": "Intervallo di date: $${0} - $${1}"
   },
   "default": {
     "message": "Predefinito"
@@ -251,7 +251,7 @@
     "message": "Mostra il conteggio dei tracker sull’icona di Ghostery nella barra degli strumenti del browser."
   },
   "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
-    "message": "Displays unique insights into observed activities on $${0}, revealing affiliation, categories, and presence across the site."
+    "message": "Mostra approfondimenti unici sulle attività osservate su $${0}, rivelando affiliazioni, categorie e presenza sul sito."
   },
   "dnr_rules__@_0_": {
     "message": "Le regole DNR: $${0}"
@@ -330,7 +330,7 @@
     "message": "Facilita la creazione delle tue regole di blocco degli annunci per personalizzare la tua esperienza con Ghostery."
   },
   "facts": {
-    "message": "Facts"
+    "message": "Fatti"
   },
   "fantastic__thanks_": {
     "message": "Fantastico! Grazie!"
@@ -339,13 +339,10 @@
     "message": "Condivisione dei feedback"
   },
   "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
-    "message": "Generates a global transparency report on web tracking in your Ghostery-protected browser."
+    "message": "Genera un rapporto globale di trasparenza sul tracciamento web nel tuo browser protetto da Ghostery."
   },
   "get_help": {
     "message": "Ricevi aiuto"
-  },
-  "ghostery_com_whotracksme": {
-    "message": "ghostery.com/whotracksme"
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery è stato ripreso."
@@ -369,7 +366,7 @@
     "message": "Ghostery è in pausa su questo sito."
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
-    "message": "Ghostery maps the ownership structure linking activities to the organizations controlling them. This knowledge, hand-curated by experts, is publicly available on"
+    "message": "Ghostery mappa la struttura di proprietà collegando le attività alle organizzazioni che le controllano. Questa conoscenza, curata manualmente da esperti, è pubblicamente disponibile su"
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery non raccoglie mai informazioni personali come password, cronologia di navigazione o il contenuto delle pagine che visiti."
@@ -400,9 +397,6 @@
   },
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery mostrerà quanti tracker sono stati bloccati in una pagina. Cliccare sull’icona di Ghostery per avere informazioni più dettagliate."
-  },
-  "github": {
-    "message": "Github"
   },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "hash di identificatori potenzialmente unici nei parametri delle richieste"
@@ -435,9 +429,6 @@
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informazioni sui <a href=\"$${0}\">tracker web</a>, sulla <a href=\"$${1}\">salute degli add-on</a> e sulla <a href=\"$${2}\">telemetria delle prestazioni</a> saranno condivise in conformità con la nostra <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Informativa sulla privacy</a>, migliorando la protezione della privacy per la comunità Ghostery."
   },
-  "is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
-    "message": "is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
-  },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Esiste grazie ai micro-contributi di ogni utente di Ghostery che sceglie di inviare informazioni non personali a WhoTracks.Me. Il contributo permette a Ghostery di fornire informazioni in tempo reale sui tracker, che a loro volta proteggono l'intera comunità di Ghostery."
   },
@@ -451,7 +442,7 @@
     "message": "Mantieni disabilitato"
   },
   "last_month": {
-    "message": "Last Month"
+    "message": "Il mese scorso"
   },
   "last_update__@_0_": {
     "message": "Ultimo aggiornamento: $${0}"
@@ -570,7 +561,7 @@
     "message": "Il nostro consiglio per questa attività"
   },
   "pages_visited": {
-    "message": "Pages visited"
+    "message": "Pagine visitate"
   },
   "pause_ghostery": {
     "message": "Metti in pausa Ghostery"
@@ -606,7 +597,7 @@
     "message": "Impedisce varie tecniche di tracciamento tramite tecnologia Al-driven."
   },
   "print_to_pdf": {
-    "message": "Print to PDF"
+    "message": "Stampa in PDF"
   },
   "privacy_policy": {
     "message": "Informativa sulla privacy"
@@ -621,7 +612,7 @@
     "message": "Stato di protezione"
   },
   "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
-    "message": "Provides an overview of the essential aspects of privacy protection."
+    "message": "Fornisce una panoramica degli aspetti essenziali della protezione della privacy."
   },
   "read_more_on_whotracks_me": {
     "message": "Scopri di più su WhoTracks.Me"
@@ -648,7 +639,7 @@
     "message": "Ripresa..."
   },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
-    "message": "Reveals what's hidden beneath the internet’s surface. With WhoTracks.Me, you can uncover the identities behind every tracker."
+    "message": "Rivela ciò che è nascosto sotto la superficie di internet. Con WhoTracks.Me, puoi scoprire le identità dietro ogni Tracker."
   },
   "save": {
     "message": "Salva"
@@ -731,7 +722,7 @@
     "message": "Sospende la protezione della privacy a livello globale per 1 giorno."
   },
   "sync_settings": {
-    "message": "Sync Settings"
+    "message": "Impostazioni di sincronizzazione"
   },
   "telemetry": {
     "message": "Telemetria",
@@ -747,7 +738,7 @@
     "message": "Tema"
   },
   "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
-    "message": "This privacy report was generated by tracking the trackers in a browser protected by Ghostery. The statistics here provide transparency about web tracking. To learn more about how Ghostery keeps its community safe, visit $${0}."
+    "message": "Questo rapporto sulla privacy è stato generato tracciando i Tracker in un browser protetto da Ghostery. Le statistiche qui fornite offrono trasparenza sul tracciamento web. Per saperne di più su come Ghostery mantiene sicura la sua comunità, visita $${0}."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "Questo sito sarà sempre in pausa. Puoi cambiare questa impostazione in qualsiasi momento nelle impostazioni di Ghostery per impedire ai tracker e agli annunci di tracciare la tua attività sul web"
@@ -774,13 +765,13 @@
     "message": "A beneficio della comunità di Ghostery, facci sapere se questo ti è stato utile!"
   },
   "top_100": {
-    "message": "Top 100"
+    "message": "Primi 100"
   },
   "top_20": {
-    "message": "Top 20"
+    "message": "I migliori 20"
   },
   "top_50": {
-    "message": "Top 50"
+    "message": "I migliori 50"
   },
   "tracker_database": {
     "message": "Database Tracker"
@@ -804,7 +795,7 @@
     "message": "Ruota tracker"
   },
   "trends": {
-    "message": "Trends"
+    "message": "Tendenze"
   },
   "trust_all__recommended_": {
     "message": "Fiducia in tutti (consigliato)"
@@ -829,7 +820,7 @@
     "message": "Considerati affidabili su questo sito"
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
-    "message": "Uncovers that no two days are alike. With Ghostery, you’re protected each day."
+    "message": "Scopre che non ci sono due giorni uguali. Con Ghostery, sei protetto ogni giorno."
   },
   "unidentified": {
     "message": "Non identificato",
@@ -858,13 +849,13 @@
     "message": "Visualizza i dettagli delle attività"
   },
   "view_report": {
-    "message": "View Report"
+    "message": "Visualizza rapporto"
   },
   "visit_our_blog": {
     "message": "Visita il nostro blog"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
-    "message": "was the most frequently observed tracker across all web pages visited."
+    "message": "è stato il Tracker più frequentemente osservato su tutte le pagine web visitate."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Sappiamo che ti affidi a Ghostery per un'esperienza fluida su YouTube. In attesa di una soluzione più raffinata, ecco una soluzione temporanea."
@@ -891,7 +882,7 @@
     "message": "Siti web"
   },
   "weekly": {
-    "message": "Weekly"
+    "message": "Settimanale"
   },
   "welcome_to_ghostery": {
     "message": "Benvenuto in Ghostery"
@@ -903,10 +894,10 @@
     "message": "WhoTracks.Me, gestito da Ghostery, è un pilastro fondamentale della tecnologia anti-tracking basata sull'IA di Ghostery, svolgendo un ruolo cruciale nel fornire protezione della privacy in tempo reale per la comunità Ghostery. È una risorsa globale completa sui tracker, portando trasparenza al tracciamento web."
   },
   "whotracks_me_privacy_report": {
-    "message": "WhoTracks.Me Privacy Report"
+    "message": "Rapporto sulla Privacy di WhoTracks.Me"
   },
   "whotracks_me_reports": {
-    "message": "WhoTracks.Me Reports"
+    "message": "Report di WhoTracks.Me"
   },
   "whotracks_me_statistical_report": {
     "message": "Rapporto statistico WhoTracks.Me"
@@ -921,7 +912,7 @@
     "message": "Sì"
   },
   "yesterday": {
-    "message": "Yesterday"
+    "message": "Ieri"
   },
   "you_are_awesome_": {
     "message": "Fantastico!"

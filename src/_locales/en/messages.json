@@ -69,8 +69,8 @@
     "message": "Advertising",
     "description": "Tracker category name"
   },
-  "all_information_displayed_on_the_whotracks_me_tab_or": {
-    "message": "All information displayed on the WhoTracks.Me Tab or"
+  "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "All information displayed on the WhoTracks.Me Tab or $${0} is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
   },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "All websites with adjusted protection status will be listed here."
@@ -344,9 +344,6 @@
   "get_help": {
     "message": "Get help"
   },
-  "ghostery_com_whotracksme": {
-    "message": "ghostery.com/whotracksme"
-  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery has been resumed."
   },
@@ -401,9 +398,6 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery will show how many trackers were blocked on a page. Clicking on the Ghostery icon reveals more detailed information."
   },
-  "github": {
-    "message": "Github"
-  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "hashes of potentially unique identifier in requests parameters"
   },
@@ -434,9 +428,6 @@
   },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Information about <a href=\"$${0}\">web trackers</a>, <a href=\"$${1}\">add-on's health</a>, and <a href=\"$${2}\">performance telemetry</a> will be shared in accordance with our <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
-  },
-  "is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
-    "message": "is an aggregate of facts about web trackers. These reports power Ghostery's anti-tracking technology, protecting the entire community."
   },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "It exists thanks to the micro-contributions of every Ghostery user who chooses to send non-personal information to WhoTracks.Me. This input enables Ghostery to provide real-time intel on trackers, which, in turn, delivers privacy protection to the entire Ghostery community."
