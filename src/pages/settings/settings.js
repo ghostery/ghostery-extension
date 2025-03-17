@@ -155,7 +155,7 @@ export default {
                     </ui-text>
                     <ui-button type="primary" layout="margin:top">
                       <a
-                        href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe"
+                        href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=settings-becomeacontributor"
                         onclick="${openTabWithUrl}"
                       >
                         Become a Contributor

@@ -108,7 +108,7 @@ export default {
               html`
                 <ui-button type="outline-primary" layout="margin:1:1.5">
                   <a
-                    href="https://www.ghostery.com/become-a-contributor?utm_source=gbe"
+                    href="https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=menu-becomeacontributor"
                     onclick="${openTabWithUrl}"
                   >
                     <ui-icon name="heart"></ui-icon>
@@ -141,7 +141,7 @@ export default {
             `}
 
             <panel-menu-item
-              href="https://www.ghostery.com/submit-a-tracker?utm_source=gbe"
+              href="https://www.ghostery.com/submit-a-tracker?utm_source=gbe&utm_campaign=menu-submittracker"
               icon="send"
               suffix-icon="link-external-m"
             >
@@ -149,7 +149,7 @@ export default {
             </panel-menu-item>
 
             <panel-menu-item
-              href="https://www.ghostery.com/feedback?utm_source=gbe"
+              href="https://www.ghostery.com/feedback?utm_source=gbe&utm_campaign=menu-feedback"
               icon="thumb-up"
               suffix-icon="link-external-m"
             >
@@ -157,7 +157,7 @@ export default {
             </panel-menu-item>
 
             <panel-menu-item
-              href="https://www.ghostery.com/support?utm_source=gbe"
+              href="https://www.ghostery.com/support?utm_source=gbe&utm_campaign=menu-contact"
               icon="help"
               suffix-icon="link-external-m"
             >
@@ -176,7 +176,7 @@ export default {
             </ui-text>
 
             <panel-menu-item
-              href="https://www.ghostery.com/?utm_source=gbe"
+              href="https://www.ghostery.com/?utm_source=gbe&utm_campaign=menu-website"
               icon="ghosty-m"
               suffix-icon="link-external-m"
             >
@@ -186,7 +186,7 @@ export default {
             <panel-menu-item
               href="${__PLATFORM__ === 'firefox'
                 ? 'https://addons.mozilla.org/firefox/addon/ghostery/privacy/'
-                : 'https://www.ghostery.com/privacy-policy?utm_source=gbe'}"
+                : 'https://www.ghostery.com/privacy-policy?utm_source=gbe&utm_campaign=menu-privacypolicy'}"
               icon="privacy-m"
               suffix-icon="link-external-m"
             >
@@ -194,7 +194,7 @@ export default {
             </panel-menu-item>
 
             <panel-menu-item
-              href="https://www.ghostery.com/privacy/ghostery-terms-and-conditions/?utm_source=gbe"
+              href="https://www.ghostery.com/privacy/ghostery-terms-and-conditions/?utm_source=gbe&utm_campaign=menu-terms"
               icon="doc-m"
               suffix-icon="link-external-m"
             >
@@ -202,7 +202,7 @@ export default {
             </panel-menu-item>
 
             <panel-menu-item
-              href="https://www.ghostery.com/privacy/imprint?utm_source=gbe"
+              href="https://www.ghostery.com/privacy/imprint?utm_source=gbe&utm_campaign=menu-imprint"
               icon="imprint-m"
               suffix-icon="link-external-m"
               translate="no"
