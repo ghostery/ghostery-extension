@@ -11,13 +11,12 @@
 
 import { store } from 'hybrids';
 
-import Config from '/store/config.js';
+import DOMAINS from '/DOMAIN_LIST.js';
 
+import Config from '/store/config.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 const HALF_HOUR_IN_MS = 1000 * 60 * 30;
-
-const USER_TESTING_DOMAINS = ['bbc.com'];
 
 export default async function syncConfig() {
   const config = await store.resolve(Config);
@@ -27,7 +26,7 @@ export default async function syncConfig() {
   }
 
   return store.set(Config, {
-    domains: USER_TESTING_DOMAINS.reduce((acc, domain) => {
+    domains: DOMAINS.reduce((acc, domain) => {
       acc[domain] = { actions: ['pause-assistant'] };
       return acc;
     }, {}),

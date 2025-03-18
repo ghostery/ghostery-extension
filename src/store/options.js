@@ -61,7 +61,7 @@ const Options = {
 
   // Advanced features
   customFilters: {
-    enabled: false,
+    enabled: true,
     trustedScriptlets: false,
   },
   experimentalFilters: false,
