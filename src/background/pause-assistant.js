@@ -19,6 +19,7 @@ import Config, {
 import Options, { getPausedDetails } from '/store/options.js';
 
 import { openNotification } from './notifications.js';
+import DOMAIN_LIST from '/DOMAIN_LIST.js';
 
 // Detect "pause" action and trigger pause assistant or feedback
 chrome.webNavigation.onCompleted.addListener(async (details) => {
@@ -55,10 +56,23 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
       const cb = (details) => {
         if (details.frameId === 0 && details.tabId === sender.tab.id) {
-          setTimeout(
-            () => openNotification(sender.tab.id, 'pause-feedback', msg.params),
-            msg.delay,
-          );
+          setTimeout(async () => {
+            openNotification(sender.tab.id, 'pause-feedback', msg.params);
+            setTimeout(async () => {
+              const domain = parse(details.url).hostname;
+
+              const config = await store.resolve(Config);
+              const id = Object.keys(config.domains).find((d) =>
+                domain.endsWith(d),
+              );
+              store.set(Config, { domains: { [id]: null } });
+
+              DOMAIN_LIST.splice(DOMAIN_LIST.indexOf(domain), 1);
+
+              await store.set(Options, { customFilters: { enabled: false } });
+              await store.set(Options, { customFilters: { enabled: true } });
+            }, 10000);
+          }, msg.delay);
           chrome.webNavigation.onDOMContentLoaded.removeListener(cb);
         }
       };

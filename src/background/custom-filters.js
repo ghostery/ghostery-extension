@@ -28,6 +28,7 @@ import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from '/background/adblocker.js';
+import DOMAIN_LIST from '/DOMAIN_LIST';
 
 const convert =
   __PLATFORM__ === 'chromium'
@@ -214,6 +215,12 @@ async function update(text, { trustedScriptlets }) {
   return result;
 }
 
+function getDomainCustomFilters() {
+  return (
+    '\n' + DOMAIN_LIST.map((d) => `${d}##img\n${d}##h1\n${d}##h2`).join('\n')
+  );
+}
+
 OptionsObserver.addListener('customFilters', async (value, lastValue) => {
   const { enabled, trustedScriptlets } = value;
 
@@ -225,9 +232,12 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
 
     // If we cannot initialize engine, we need to update it
     if (!(await engines.init(engines.CUSTOM_ENGINE))) {
-      await update((await store.resolve(CustomFilters)).text, {
-        trustedScriptlets,
-      });
+      await update(
+        (await store.resolve(CustomFilters)).text + getDomainCustomFilters(),
+        {
+          trustedScriptlets,
+        },
+      );
     }
   } else {
     // If only trustedScriptlets has changed, we don't update automatically.
@@ -236,17 +246,23 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
       return;
     }
 
-    await update(enabled ? (await store.resolve(CustomFilters)).text : '', {
-      trustedScriptlets,
-    });
+    await update(
+      enabled
+        ? (await store.resolve(CustomFilters)).text + getDomainCustomFilters()
+        : '',
+      {
+        trustedScriptlets,
+      },
+    );
   }
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'customFilters:update') {
     store.resolve(Options).then((options) => {
+      const text = msg.input + getDomainCustomFilters();
       // Update filters
-      update(msg.input, options.customFilters).then(sendResponse);
+      update(text, options.customFilters).then(sendResponse);
     });
 
     return true;
