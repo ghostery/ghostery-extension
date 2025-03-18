@@ -394,7 +394,11 @@ export default {
                 Ghostery maps the ownership structure linking activities to the
                 organizations controlling them. This knowledge, hand-curated by
                 experts, is publicly available on
-                <a href="${'https://github.com/ghostery/trackerdb'}">Github</a>.
+                <a
+                  href="${'https://github.com/ghostery/trackerdb'}"
+                  translate="no"
+                  >Github</a
+                >.
               </ui-text>
               ${mergedStats.groupedTrackers.length > 20 &&
               html`
@@ -453,7 +457,9 @@ export default {
           <section layout="block:center margin:2:auto:0 width:::960px">
             <ui-text type="body-s" color="secondary">
               All information displayed on the WhoTracks.Me Tab or
-              <a href="${WTM_PAGE_URL}">ghostery.com/whotracksme</a>
+              ${html`<a href="${WTM_PAGE_URL}" translate="no"
+                >ghostery.com/whotracksme</a
+              >`}
               is an aggregate of facts about web trackers. These reports power
               Ghostery's anti-tracking technology, protecting the entire
               community.

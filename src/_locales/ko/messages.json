@@ -69,6 +69,9 @@
     "message": "광고",
     "description": "Tracker category name"
   },
+  "all_information_displayed_on_the_whotracks_me_tab_or_@_0__is_an_aggregate_of_facts_about_web_trackers__these_reports_power_ghostery_s_anti_tracking_technology__protecting_the_entire_community_": {
+    "message": "WhoTracks.Me 탭 또는 $${0}에 표시된 모든 정보는 웹 추적기에 대한 사실을 집계한 것입니다. 이러한 보고서는 Ghostery의 추적 방지 기술을 지원하여 전체 커뮤니티를 보호합니다."
+  },
   "all_websites_with_adjusted_protection_status_will_be_listed_here_": {
     "message": "보호 상태를 변경한 모든 웹 사이트가 여기에 표시됩니다."
   },
@@ -140,6 +143,9 @@
   "cancel": {
     "message": "취소"
   },
+  "categories": {
+    "message": "카테고리"
+  },
   "category": {
     "message": "분류"
   },
@@ -198,6 +204,9 @@
     "message": "$${0}의 현재 보호 상태",
     "description": "Current protection status for a tracker"
   },
+  "custom": {
+    "message": "사용자 정의"
+  },
   "custom_filters": {
     "message": "사용자 필터"
   },
@@ -208,11 +217,17 @@
     "message": "고객 맞춤 경험 제공",
     "description": "Tracker category name"
   },
+  "daily": {
+    "message": "매일"
+  },
   "dark": {
     "message": "어두운 테마"
   },
   "data_collection_summary": {
     "message": "데이터 수집 개요"
+  },
+  "date_range__@_0______1_": {
+    "message": "날짜 범위: $${0} - $${1}"
   },
   "default": {
     "message": "기본"
@@ -234,6 +249,9 @@
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 갯수를 표시합니다."
+  },
+  "displays_unique_insights_into_observed_activities_on_@_0___revealing_affiliation__categories__and_presence_across_the_site_": {
+    "message": "$${0}에서 관찰된 활동에 대한 독특한 통찰력을 제공하여 소속, 카테고리 및 사이트 전반의 존재를 드러냅니다."
   },
   "dnr_rules__@_0_": {
     "message": "네트워크(DNR) 필터: $${0}"
@@ -311,11 +329,17 @@
   "facilitates_the_creation_of_your_own_ad_blocking_rules_to_customize_your_ghostery_experience_": {
     "message": "더 나은 Ghostery 경험을 위해 사용자 별 광고 차단 규칙을 생성할 수 있도록 지원합니다."
   },
+  "facts": {
+    "message": "사실"
+  },
   "fantastic__thanks_": {
     "message": "환상적이에요! 감사합니다!"
   },
   "feedback_sharing": {
     "message": "피드백 공유"
+  },
+  "generates_a_global_transparency_report_on_web_tracking_in_your_ghostery_protected_browser_": {
+    "message": "귀하의 Ghostery 보호 브라우저에서 웹 추적에 대한 글로벌 투명성 보고서를 생성합니다."
   },
   "get_help": {
     "message": "도움받기"
@@ -340,6 +364,9 @@
   },
   "ghostery_is_paused_on_this_site_": {
     "message": "이 웹 사이트에서 Ghostery 사용을 잠시 멈춥니다."
+  },
+  "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
+    "message": "Ghostery는 활동을 제어하는 조직과 연결된 소유 구조를 매핑합니다. 전문가들이 직접 선별한 이 지식은 공개적으로 이용 가능합니다."
   },
   "ghostery_never_collects_personal_information_like_passwords__browsing_history_or_the_content_of_the_pages_you_visit_": {
     "message": "Ghostery는 비밀번호, 검색 기록 또는 방문한 페이지의 내용을 수집하지 않습니다."
@@ -414,6 +441,9 @@
   "keep_disabled": {
     "message": "계속 꺼두기"
   },
+  "last_month": {
+    "message": "지난달"
+  },
   "last_update__@_0_": {
     "message": "최종 업데이트: $${0}"
   },
@@ -459,6 +489,9 @@
   },
   "modify_the_recommended_blocking_settings_for_every_website_": {
     "message": "모든 웹 사이트에 적용된 권장 설정 변경"
+  },
+  "monthly": {
+    "message": "매월"
   },
   "more_ad_blocking_available": {
     "message": "더 나은 광고 차단이 가능합니다"
@@ -517,12 +550,18 @@
   "organization_s_website": {
     "message": "단체 웹 사이트"
   },
+  "organizations": {
+    "message": "조직"
+  },
   "other": {
     "message": "분류되지 않음",
     "description": "Tracker category name"
   },
   "our_recommendation_for_this_activity": {
     "message": "이 활동에 제시된 권장 사항"
+  },
+  "pages_visited": {
+    "message": "방문한 페이지"
   },
   "pause_ghostery": {
     "message": "Ghostery 사용 잠시 멈추기"
@@ -557,6 +596,9 @@
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술을 사용하여 여러 추적 기술을 방지합니다."
   },
+  "print_to_pdf": {
+    "message": "PDF로 인쇄"
+  },
   "privacy_policy": {
     "message": "개인정보 보호정책"
   },
@@ -568,6 +610,9 @@
   },
   "protection_status": {
     "message": "보호 상태"
+  },
+  "provides_an_overview_of_the_essential_aspects_of_privacy_protection_": {
+    "message": "개인정보 보호의 필수적인 측면에 대한 개요를 제공합니다."
   },
   "read_more_on_whotracks_me": {
     "message": "WhoTracks.Me에서 더 보기"
@@ -587,8 +632,14 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "잠재적인 웹 추적기의 메타데이터 요청"
   },
+  "resume": {
+    "message": "다시 시작 "
+  },
   "resuming___": {
     "message": "재개 중..."
+  },
+  "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
+    "message": "인터넷의 표면 아래 숨겨진 것을 드러냅니다. WhoTracks.Me를 사용하면 모든 추적기 뒤에 숨겨진 신원을 밝혀낼 수 있습니다."
   },
   "save": {
     "message": "저장"
@@ -616,9 +667,6 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK는 위 정보만을 토대로 보고서를 전송하기 위해 사용됩니다. 요청이 여러 개 전송되더라도 각각은 연관성을 가지지 않으며 IP주소는 Sentry와 공유되지 않습니다."
-  },
-  "settings_sync": {
-    "message": "설정 동기화"
   },
   "setup_successful": {
     "message": "설정을 끝마쳤습니다"
@@ -673,6 +721,9 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "모든 웹 사이트에서 1 일 동안 개인정보 보호를 중지합니다."
   },
+  "sync_settings": {
+    "message": "동기화 설정"
+  },
   "telemetry": {
     "message": "측정 보고",
     "description": "Tracker category name"
@@ -685,6 +736,9 @@
   },
   "theme": {
     "message": "테마"
+  },
+  "this_privacy_report_was_generated_by_tracking_the_trackers_in_a_browser_protected_by_ghostery__the_statistics_here_provide_transparency_about_web_tracking__to_learn_more_about_how_ghostery_keeps_its_community_safe__visit_@_0__": {
+    "message": "이 개인정보 보고서는 Ghostery로 보호된 브라우저에서 추적기를 추적하여 생성되었습니다. 여기의 통계는 웹 추적에 대한 투명성을 제공합니다. Ghostery가 커뮤니티를 안전하게 보호하는 방법에 대해 더 알아보려면 $${0}을 방문하세요."
   },
   "this_site_will_always_be_paused__you_can_change_this_at_any_time_in_ghostery_settings_to_stop_trackers_and_ads_from_tracking_you_around_the_web": {
     "message": "이 웹 사이트는 항상 일시 중지됩니다. 웹에서 추적당하지 않기 위해 광고와 트래커를 막으려면 언제든지 Ghostery 설정에서 이를 변경할 수 있습니다"
@@ -710,6 +764,15 @@
   "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
     "message": "Ghostery 커뮤니티에 도움이 되었다면 알려주세요!"
   },
+  "top_100": {
+    "message": "상위 100개"
+  },
+  "top_20": {
+    "message": "상위 20개"
+  },
+  "top_50": {
+    "message": "톱 50"
+  },
   "tracker_database": {
     "message": "트래커 데이터베이스"
   },
@@ -730,6 +793,9 @@
   },
   "trackers_wheel": {
     "message": "트래커 휠"
+  },
+  "trends": {
+    "message": "동향"
   },
   "trust_all__recommended_": {
     "message": "모두 허용 (권장됨)"
@@ -753,8 +819,8 @@
   "trusted_on_this_website": {
     "message": "이 웹 사이트에서 허용됨"
   },
-  "undo": {
-    "message": "되돌리기"
+  "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
+    "message": "어떤 날도 똑같지 않다는 것을 발견하세요. Ghostery와 함께라면 매일 보호받을 수 있습니다."
   },
   "unidentified": {
     "message": "확인되지 않음",
@@ -782,8 +848,14 @@
   "view_activity_details": {
     "message": "활동 세부정보 보기"
   },
+  "view_report": {
+    "message": "보고서 보기"
+  },
   "visit_our_blog": {
     "message": "블로그를 방문해보세요"
+  },
+  "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
+    "message": "모든 방문한 웹 페이지에서 가장 자주 관찰된 추적기였습니다."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "더 나은 YouTube 사용 환경을 위해 Ghostery 사용하는 것을 알고 있습니다. 보다 나은 해결책이 출시되기 전까지 임시 조치를 취할 수 있습니다."
@@ -809,6 +881,9 @@
   "websites": {
     "message": "웹 사이트"
   },
+  "weekly": {
+    "message": "주간"
+  },
   "welcome_to_ghostery": {
     "message": "Ghostery를 시작합니다"
   },
@@ -817,6 +892,12 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me는 Ghostery가 운영하는 서비스로, Ghostery의 AI 기반 추적 방지 기술의 중요한 초석이며, Ghostery 커뮤니티에 실시간 개인정보 보호를 제공하는 데 중요한 역할을 합니다. 이 서비스는 전 세계의 추적기에 대한 포괄적인 자료로, 웹 추적의 투명성을 제공합니다."
+  },
+  "whotracks_me_privacy_report": {
+    "message": "후트랙스.미 개인정보 보호 보고서"
+  },
+  "whotracks_me_reports": {
+    "message": "WhoTracks.Me 보고서"
   },
   "whotracks_me_statistical_report": {
     "message": "WhoTracks.Me 통계 보고서"
@@ -829,6 +910,9 @@
   },
   "yes": {
     "message": "예 "
+  },
+  "yesterday": {
+    "message": "어제"
   },
   "you_are_awesome_": {
     "message": "지원에 진심으로 감사드립니다!"
