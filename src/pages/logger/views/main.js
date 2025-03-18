@@ -14,6 +14,8 @@ import { html, store } from 'hybrids';
 import Log from '../store/log.js';
 import Tab from '../store/tab.js';
 
+import refreshImage from '../assets/refresh.svg';
+
 function refreshSelectedTab(host) {
   chrome.tabs.reload(Number(host.tabId));
 }
@@ -58,7 +60,7 @@ export default {
             <select onchange="${html.set('status')}" value="${status}">
               <option value="">All requests</option>
               <option value="touched">Blocked / Modified</option>
-              <option value="warning">With warning</option>
+              <option value="warning">Warnings</option>
             </select>
           </ui-input>
           <ui-button
@@ -78,9 +80,25 @@ export default {
           </ui-button>
         </div>
         <ui-line></ui-line>
-        <div layout="overflow:scroll">
+        <div layout="column overflow:scroll grow">
+          ${store.ready(logs) &&
+          logs.length === 0 &&
+          html`
+            <div
+              layout="block:center column grow center self:center gap width:::350px"
+              translate="no"
+            >
+              <img src="${refreshImage}" layout="size:221px" />
+              <ui-text type="headline-s">
+                To view the request log, press refresh on the toolbar
+              </ui-text>
+              <ui-text type="body-s" color="secondary">
+                This is an experimental feature - if you encounter any issues,
+                please contact our support team.
+              </ui-text>
+            </div>
+          `}
           <div layout="column-reverse gap padding:0:2:2">
-            ${store.error(logs)}
             ${store.ready(logs) &&
             logs.map((log) =>
               html`

@@ -115,13 +115,6 @@ function formatDate(date) {
   });
 }
 
-function openLogger() {
-  const url = chrome.runtime.getURL('/pages/logger/index.html');
-  const features = 'toolbar=no,width=1000,height=500';
-
-  window.open(url, 'Ghostery Logger', features);
-}
-
 export default {
   counter: 0,
   options: store(Options),
@@ -238,12 +231,6 @@ export default {
                   <button>
                     <ui-icon name="trash" layout="size:2"></ui-icon>
                     Clear storage
-                  </button>
-                </ui-button>
-                <ui-button>
-                  <button onclick="${openLogger}">
-                    <ui-icon name="play" layout="size:2"></ui-icon>
-                    Logger
                   </button>
                 </ui-button>
               </div>

@@ -38,7 +38,7 @@ export default {
         `
     }
 
-    :host([type^="display"]) {
+    :host([type^="display"]), :host([type^="headline"]) {
       text-wrap: balance;
     }
 
