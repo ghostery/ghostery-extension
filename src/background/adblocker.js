@@ -243,13 +243,14 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
 
     const scriptletName = `${parsed.name}${parsed.name.endsWith('.js') ? '' : '.js'}`;
     const scriptlet = scriptlets[scriptletName];
-    const func = scriptlet.func;
-    const args = parsed.args.map((arg) => decodeURIComponent(arg));
 
     if (!scriptlet) {
       console.warn('[adblocker] unknown scriptlet with name:', scriptletName);
       continue;
     }
+
+    const func = scriptlet.func;
+    const args = parsed.args.map((arg) => decodeURIComponent(arg));
 
     if (
       __PLATFORM__ === 'firefox' &&
