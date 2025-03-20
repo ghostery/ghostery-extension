@@ -51,21 +51,7 @@ let runner;
 const setup = asyncSetup('telemetry', [
   (async () => {
     const { version } = chrome.runtime.getManifest();
-
-    const { metrics = {}, utms } = await chrome.storage.local.get([
-      'metrics',
-      'utms',
-    ]);
-
-    // TODO: remove this and 'utms' loading from storage after a few releases
-    // This code moves the utms from 'utms' to 'metrics' storage
-    if (utms) {
-      metrics.utm_source = utms.utm_source || '';
-      metrics.utm_campaign = utms.utm_campaign || '';
-      chrome.storage.local.remove('utms');
-
-      saveStorage(metrics);
-    }
+    const { metrics = {} } = await chrome.storage.local.get(['metrics']);
 
     if (!metrics.installDate) {
       metrics.installDate = new Date().toISOString().split('T')[0];
