@@ -99,14 +99,19 @@ function postMessage({ urls }) {
 
   // fetch, XMLHTTPRequest and others must be injected in main world
   function injectMonkeyPatches() {
-    const script = document.createElement('script');
-    script.src = chrome.runtime.getURL(
-      'content_scripts/whotracksme/ghostery-whotracksme.js',
-    );
-    script.onload = function () {
-      this.remove();
-    };
-    (document.head || document.documentElement).appendChild(script);
+    // Safari 17.x does not support "main" world in content scripts
+    // so we need to inject the script in the main world
+    // TODO: Remove script injection when we drop support for Safari 17.x
+    if (navigator.userAgent.includes('17_')) {
+      const script = document.createElement('script');
+      script.src = chrome.runtime.getURL(
+        'content_scripts/whotracksme/ghostery-whotracksme.js',
+      );
+      script.onload = function () {
+        this.remove();
+      };
+      (document.head || document.documentElement).appendChild(script);
+    }
 
     window.addEventListener('message', (message) => {
       if (
