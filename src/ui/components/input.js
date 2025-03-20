@@ -73,6 +73,12 @@ export default {
 
     ::slotted(input[type="date"]) {
       font: var(--font-body-m);
+      /* Safari has a bug, where input[type="date"] doesn't respect width */
+      box-sizing: content-box;
+      height: 38px;
+      padding-inline-start: 11px;
+      padding-inline-end: 11px;
+      min-width: calc(100% - 22px);
     }
 
     @media (prefers-color-scheme: dark) {
