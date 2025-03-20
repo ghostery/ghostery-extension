@@ -44,8 +44,6 @@ export default async function syncConfig() {
     return;
   }
 
-  // TODO: implement fetching remote config from the server
-  // This is a mock of the fetched config
   try {
     const fetchedConfig = await fetch(CONFIG_URL).then((res) => {
       if (!res.ok) throw new Error('Failed to fetch the remote config');
