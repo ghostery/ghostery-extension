@@ -86,6 +86,13 @@ function setStatsType(host, event) {
   store.set(host.options, { panel: { statsType: type } });
 }
 
+function openLogger() {
+  const url = chrome.runtime.getURL('/pages/logger/index.html');
+  const features = 'toolbar=no,width=1000,height=500';
+
+  window.open(url, 'Ghostery Logger', features);
+}
+
 export default {
   [router.connect]: {
     stack: [
@@ -254,14 +261,28 @@ export default {
                   layout@390px="margin:1.5:1.5:2"
                   ontypechange="${setStatsType}"
                 >
-                  <ui-tooltip position="bottom" slot="actions">
-                    <span slot="content">WhoTracks.Me Reports</span>
-                    <ui-action-button layout="size:4.5">
-                      <a href="${router.url(WhoTracksMe)}">
-                        <ui-icon name="whotracksme" color="primary"></ui-icon>
-                      </a>
-                    </ui-action-button>
-                  </ui-tooltip>
+                  ${options.panel.statsType === 'graph' &&
+                  html`
+                    <ui-tooltip position="bottom" slot="actions">
+                      <span slot="content">WhoTracks.Me Reports</span>
+                      <ui-action-button layout="size:4.5">
+                        <a href="${router.url(WhoTracksMe)}">
+                          <ui-icon name="whotracksme" color="primary"></ui-icon>
+                        </a>
+                      </ui-action-button>
+                    </ui-tooltip>
+                  `}
+                  ${options.panel.statsType === 'list' &&
+                  html`
+                    <ui-tooltip position="bottom" slot="actions">
+                      <span slot="content" translate="no">Logger</span>
+                      <ui-action-button layout="size:4.5">
+                        <button onclick="${openLogger}">
+                          <ui-icon name="open-book" color="primary"></ui-icon>
+                        </button>
+                      </ui-action-button>
+                    </ui-tooltip>
+                  `}
                 </ui-stats>
                 <panel-feedback
                   modified=${stats.trackersModified}
