@@ -79,6 +79,7 @@ export default {
       <main
         layout="column padding:2 gap:5 margin:0:auto width:::1120px"
         layout@768px:print="padding:4"
+        layout@print="gap:3"
       >
         <section layout="relative column gap:2 margin:2:0:0">
           <header layout="row items:center gap:1.5" translate="no">

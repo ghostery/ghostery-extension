@@ -38,7 +38,7 @@ export default {
       edgeGradientFill: false,
       edgeOpacity: 0.4,
       enableToolbar: false,
-      viewPortHeight: 350,
+      viewPortHeight: 280,
       viewPortWidth: 800,
       tooltipBorderColor: 'var(--border-primary)',
       tooltipBGColor: 'var(--background-primary)',
@@ -110,9 +110,9 @@ export default {
       host.chart.options.viewPortHeight = Math.min(
         Math.max(
           data.edges.reduce((acc, edge) => acc + edge.value, 0),
-          300,
+          280,
         ),
-        400,
+        360,
       );
 
       host.chart.render(data);
