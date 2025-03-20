@@ -18,12 +18,7 @@
     "webRequest",
     "offscreen"
   ],
-  "host_permissions": [
-    "http://*/*",
-    "https://*/*",
-    "ws://*/*",
-    "wss://*/*"
-  ],
+  "host_permissions": ["http://*/*", "https://*/*", "ws://*/*", "wss://*/*"],
   "icons": {
     "64": "/icons/icon-64.png",
     "128": "/icons/icon-128.png"
@@ -95,10 +90,10 @@
       "run_at": "document_start"
     },
     {
-			"js": ["content_scripts/youtube.js"],
+      "js": ["content_scripts/youtube.js"],
       "matches": ["*://www.youtube.com/*"],
       "run_at": "document_start"
-		},
+    },
     {
       "js": ["content_scripts/trackers-preview.js"],
       "run_at": "background_execute_script"
@@ -121,9 +116,7 @@
       "use_dynamic_url": true
     },
     {
-      "resources": [
-        "pages/notifications/youtube.html"
-      ],
+      "resources": ["pages/notifications/youtube.html"],
       "matches": ["*://www.youtube.com/*"],
       "use_dynamic_url": true
     }
