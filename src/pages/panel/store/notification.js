@@ -77,12 +77,13 @@ export default {
       return NOTIFICATIONS.review;
     }
 
-    // Show contributor notification if user is not a contributor
-    if (
-      __PLATFORM__ !== 'safari' &&
-      !(await store.resolve(Session)).contributor
-    ) {
-      return CONTRIBUTOR_NOTIFICATION;
+    if (__PLATFORM__ !== 'safari') {
+      const session = await store.resolve(Session);
+
+      // Show contributor notification if user is not a contributor
+      if (session.enabled && !session.contributor) {
+        return CONTRIBUTOR_NOTIFICATION;
+      }
     }
 
     // By default, show review notification

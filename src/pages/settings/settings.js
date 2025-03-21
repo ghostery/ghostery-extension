@@ -99,6 +99,7 @@ export default {
           </a>
           ${__PLATFORM__ !== 'safari' &&
           store.ready(session) &&
+          session.enabled &&
           html`
             <settings-card
               layout="hidden"

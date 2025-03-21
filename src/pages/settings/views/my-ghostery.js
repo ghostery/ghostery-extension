@@ -62,83 +62,95 @@ export default {
           <div layout="column gap" layout@992px="margin:bottom">
             <ui-text type="headline-m">My Ghostery</ui-text>
           </div>
-          <settings-card>
-            <img
-              src="${assets[
-                store.ready(session) && session.user ? 'shield' : 'contribution'
-              ]}"
-              layout="size:20"
-              alt="Contribution"
-              slot="picture"
-            />
-            ${store.ready(session) &&
-            (session.user
-              ? html`
-                  <div layout="column gap:0.5 margin:bottom:2">
-                    <ui-text type="label-m" color="secondary">
-                      You are signed in as:
-                    </ui-text>
-                    <div layout="row items:center gap:2">
-                      <ui-text type="headline-m">${session.name}</ui-text>
-                      ${session.contributor &&
-                      html`<settings-badge type="brand" uppercase>
-                        Contributor
-                      </settings-badge>`}
+          ${store.ready(session) &&
+          session.enabled &&
+          html`
+            <settings-card>
+              <img
+                src="${assets[
+                  store.ready(session) && session.user
+                    ? 'shield'
+                    : 'contribution'
+                ]}"
+                layout="size:20"
+                alt="Contribution"
+                slot="picture"
+              />
+              ${session.user
+                ? html`
+                    <div layout="column gap:0.5 margin:bottom:2">
+                      <ui-text type="label-m" color="secondary">
+                        You are signed in as:
+                      </ui-text>
+                      <div layout="row items:center gap:2">
+                        <ui-text type="headline-m">${session.name}</ui-text>
+                        ${session.contributor &&
+                        html`<settings-badge type="brand" uppercase>
+                          Contributor
+                        </settings-badge>`}
+                      </div>
+                      <ui-text type="body-m" color="secondary">
+                        ${session.email}
+                      </ui-text>
                     </div>
-                    <ui-text type="body-m" color="secondary">
-                      ${session.email}
-                    </ui-text>
-                  </div>
-                  <div layout="row gap">
-                    <ui-button type="primary">
-                      <a href="${ACCOUNT_PAGE_URL}" onclick="${openTabWithUrl}">
-                        Account details
-                        <ui-icon name="arrow-right-s"></ui-icon>
-                      </a>
-                    </ui-button>
-                  </div>
-                `
-              : html`
-                  <div>
-                    <ui-text type="headline-s">Join Ghostery</ui-text>
-                    <ui-text
-                      color="secondary"
-                      type="body-m"
-                      mobile-type="body-s"
-                    >
-                      Sign in or create account on ghostery.com
-                    </ui-text>
-                  </div>
-                  <div layout="row gap">
-                    <ui-button type="success">
-                      <button onclick="${openGhosteryPage(SIGNON_PAGE_URL)}">
-                        Sign in <ui-icon name="arrow-right-s"></ui-icon>
-                      </button>
-                    </ui-button>
-                    <ui-button>
-                      <button
-                        onclick="${openGhosteryPage(CREATE_ACCOUNT_PAGE_URL)}"
+                    <div layout="row gap">
+                      <ui-button type="primary">
+                        <a
+                          href="${ACCOUNT_PAGE_URL}"
+                          onclick="${openTabWithUrl}"
+                        >
+                          Account details
+                          <ui-icon name="arrow-right-s"></ui-icon>
+                        </a>
+                      </ui-button>
+                    </div>
+                  `
+                : html`
+                    <div>
+                      <ui-text type="headline-s">Join Ghostery</ui-text>
+                      <ui-text
+                        color="secondary"
+                        type="body-m"
+                        mobile-type="body-s"
                       >
-                        Create Account
-                        <ui-icon name="arrow-right-s"></ui-icon>
-                      </button>
-                    </ui-button>
-                  </div>
-                `)}
-          </settings-card>
+                        Sign in or create account on ghostery.com
+                      </ui-text>
+                    </div>
+                    <div layout="row gap">
+                      <ui-button type="success">
+                        <button onclick="${openGhosteryPage(SIGNON_PAGE_URL)}">
+                          Sign in <ui-icon name="arrow-right-s"></ui-icon>
+                        </button>
+                      </ui-button>
+                      <ui-button>
+                        <button
+                          onclick="${openGhosteryPage(CREATE_ACCOUNT_PAGE_URL)}"
+                        >
+                          Create Account
+                          <ui-icon name="arrow-right-s"></ui-icon>
+                        </button>
+                      </ui-button>
+                    </div>
+                  `}
+            </settings-card>
+          `}
           <div layout="column gap:4">
-            <ui-toggle
-              value="${options.sync}"
-              onchange="${html.set(options, 'sync')}"
-            >
-              <settings-option>
-                Sync Settings
-                <span slot="description">
-                  Saves and synchronizes your custom settings between browsers
-                  and devices.
-                </span>
-              </settings-option>
-            </ui-toggle>
+            ${store.ready(session) &&
+            session.enabled &&
+            html`
+              <ui-toggle
+                value="${options.sync}"
+                onchange="${html.set(options, 'sync')}"
+              >
+                <settings-option>
+                  Sync Settings
+                  <span slot="description">
+                    Saves and synchronizes your custom settings between browsers
+                    and devices.
+                  </span>
+                </settings-option>
+              </ui-toggle>
+            `}
 
             <div layout="row gap:2">
               <div layout="column grow gap:0.5">
