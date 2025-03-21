@@ -27,8 +27,11 @@ export default {
         text-decoration: underline;
       }
 
-      :host(:hover) ::slotted(*:last-child) {
+      ::slotted(*:last-child) {
         transition: margin-left 0.1s ease-out;
+      }
+
+      :host(:hover) ::slotted(*:last-child) {
         margin-left: 4px;
       }
     }
@@ -36,6 +39,5 @@ export default {
     ::slotted(ui-text) {
       color: var(--color-primary);
     }
-
   `,
 };
