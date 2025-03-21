@@ -12,25 +12,25 @@
 
 @keyframes slide-from-right {
   from {
-    transform: translateX(80px);
-  }
-}
-
-@keyframes slide-to-left {
-  to {
-    transform: translateX(-80px);
-  }
-}
-
-@keyframes slide-from-left {
-  from {
-    transform: translateX(-80px);
+    transform: translateX(75px);
   }
 }
 
 @keyframes slide-to-right {
   to {
-    transform: translateX(80px);
+    transform: translateX(75px);
+  }
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    transform: translateX(-20px);
   }
 }
 
