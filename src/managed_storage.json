@@ -13,6 +13,12 @@
       "type": "boolean"
     },
 
+    "disableUserAccount": {
+      "title": "Disable user account",
+      "description": "Prevents the user from creating an account or logging in",
+      "type": "boolean"
+    },
+
     "trustedDomains": {
       "title": "Trusted domains",
       "description": "A list of domains that are trusted by default",

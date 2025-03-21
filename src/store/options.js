@@ -14,6 +14,7 @@ import { store } from 'hybrids';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
+import { getManagedConfig } from '/utils/managed.js';
 
 import Config, {
   ACTION_PAUSE_ASSISTANT,
@@ -117,7 +118,10 @@ const Options = {
       }
 
       // Apply managed options for supported platforms
-      if (__PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium') {
+      if (
+        __PLATFORM__ === 'firefox' ||
+        (__PLATFORM__ === 'chromium' && !isOpera())
+      ) {
         return manage(options);
       }
 
@@ -196,24 +200,10 @@ async function migrate(options, optionsVersion) {
   });
 }
 
-let managed = __PLATFORM__ === 'chromium' && isOpera() ? false : null;
 async function manage(options) {
-  if (managed === false) return options;
-
-  if (managed === null) {
-    try {
-      managed = await chrome.storage.managed.get(null);
-      // Some of the platforms returns an empty object if there are no managed options
-      // so we need to check property existence that the managed options are enabled
-      managed = Object.keys(managed).length > 0 ? managed : false;
-    } catch {
-      managed = false;
-    }
-  }
+  const managed = await getManagedConfig();
 
   if (managed) {
-    console.debug(`[options] Applying managed options...`, managed);
-
     if (managed.disableOnboarding === true) {
       options.terms = true;
       options.onboarding = { shown: 1 };

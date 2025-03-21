@@ -424,6 +424,7 @@ export default {
             ></whotracksme-sankey-chart>
           </section>
           ${store.ready(session) &&
+          session.enabled &&
           !session.contributor &&
           html`
             <section

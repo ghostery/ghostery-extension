@@ -254,6 +254,7 @@ export default {
         `}
         ${__PLATFORM__ !== 'safari' &&
         store.ready(session) &&
+        session.enabled &&
         html`
           <section
             layout="grid:1/1 grow items:end:stretch padding:0"

@@ -104,6 +104,7 @@ export default {
 
               ${__PLATFORM__ !== 'safari' &&
               store.ready(session) &&
+              session.enabled &&
               !session.contributor &&
               html`
                 <ui-button type="outline-primary" layout="margin:1:1.5">
