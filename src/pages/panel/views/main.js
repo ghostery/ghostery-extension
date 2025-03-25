@@ -158,11 +158,14 @@ export default {
                 <ui-icon name="logo"></ui-icon>
               </a>
             </ui-action>
-            <ui-action slot="actions">
-              <a href="${router.url(Menu)}" data-qa="button:menu">
-                <ui-icon name="menu" color="primary"></ui-icon>
-              </a>
-            </ui-action>
+            ${!options.managed &&
+            html`
+              <ui-action slot="actions">
+                <a href="${router.url(Menu)}" data-qa="button:menu">
+                  <ui-icon name="menu" color="primary"></ui-icon>
+                </a>
+              </ui-action>
+            `}
           </ui-header>
         `}
         <section
