@@ -18,7 +18,7 @@ const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghoster
 
 export default {
   render: () => html`
-    <template layout="block">
+    <template layout="column gap:2">
       <ui-card data-qa="view:skip">
         <section layout="block:center column gap:2">
           <div layout="row center">${disabled}</div>
@@ -42,11 +42,11 @@ export default {
           `}
         </section>
       </ui-card>
-      <ui-text layout="block:center margin:3:0" underline>
+      <ui-button type="transparent" layout="self:center">
         <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
           Terms & Conditions
         </a>
-      </ui-text>
+      </ui-button>
     </template>
   `,
 };
