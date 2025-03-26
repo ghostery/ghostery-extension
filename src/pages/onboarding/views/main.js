@@ -36,7 +36,7 @@ export default {
   },
   feedback: true,
   render: ({ feedback }) => html`
-    <template layout="grow column gap">
+    <template layout="column gap:2">
       <ui-card layout="gap:2" layout@390px="gap:3">
         <section layout="block:center column gap" layout@390px="margin:2:0:1">
           <ui-text type="body-m">Welcome to Ghostery</ui-text>
@@ -119,13 +119,11 @@ export default {
           </onboarding-error-card>
         </div>
       </ui-card>
-      <div layout="column center">
-        <ui-button type="transparent">
-          <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
-            Terms & Conditions
-          </a>
-        </ui-button>
-      </div>
+      <ui-button type="transparent" layout="self:center">
+        <a href="${TERMS_AND_CONDITIONS_URL}" target="_blank">
+          Terms & Conditions
+        </a>
+      </ui-button>
     </template>
   `,
 };
