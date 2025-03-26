@@ -150,14 +150,6 @@ export default {
             </panel-menu-item>
 
             <panel-menu-item
-              href="https://www.ghostery.com/feedback?utm_source=gbe&utm_campaign=menu-feedback"
-              icon="thumb-up"
-              suffix-icon="link-external-m"
-            >
-              Send feedback
-            </panel-menu-item>
-
-            <panel-menu-item
               href="https://www.ghostery.com/support?utm_source=gbe&utm_campaign=menu-contact"
               icon="help"
               suffix-icon="link-external-m"
