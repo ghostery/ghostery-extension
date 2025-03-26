@@ -10,11 +10,15 @@
  */
 
 import { store } from 'hybrids';
-import { session } from '../utils/api.js';
+
+import { session } from '/utils/api.js';
+import { getManagedConfig } from '/utils/managed.js';
+import { isOpera } from '/utils/browser-info.js';
 
 export const UPDATE_SESSION_ACTION_NAME = 'updateSession';
 
 const Session = {
+  enabled: true,
   user: '',
   firstName: '',
   lastName: '',
@@ -26,7 +30,21 @@ const Session = {
   [store.connect]: {
     cache: false,
     async get() {
+      // If user control or account is disabled, return disabled session
+      const managed =
+        (__PLATFORM__ === 'firefox' ||
+          (__PLATFORM__ === 'chromium' && !isOpera())) &&
+        (await getManagedConfig());
+
+      if (
+        managed &&
+        (managed.disableUserControl || managed.disableUserAccount)
+      ) {
+        return { enabled: false };
+      }
+
       try {
+        // Fetch user's session
         const data = await session();
 
         return data
