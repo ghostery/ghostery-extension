@@ -31,23 +31,6 @@ chrome.runtime.sendMessage({ action: 'telemetry', event: 'engaged' });
 // Sync options with background
 chrome.runtime.sendMessage({ action: 'syncOptions' });
 
-// Safari extension popup has a bug, which focuses visibly the first element on the page
-// when the popup is opened. This is a workaround to remove the focus.
-if (__PLATFORM__ === 'safari') {
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.body.focus();
-      document.body.addEventListener(
-        'focus',
-        () => {
-          document.body.removeAttribute('tabIndex');
-        },
-        { once: true },
-      );
-    }, 100);
-  });
-}
-
 // Close window when anchor is clicked
 document.addEventListener('click', (event) => {
   let el = event.target;

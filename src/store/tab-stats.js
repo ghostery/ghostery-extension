@@ -84,20 +84,13 @@ const Stats = {
 
       return { hostname: parse(tab.url).hostname };
     },
-    observe:
-      __PLATFORM__ === 'safari' &&
-      (() => {
-        setTimeout(() => store.clear(Stats, false), 1000);
-      }),
   },
 };
 
 export default Stats;
 
-if (__PLATFORM__ !== 'safari') {
-  chrome.storage.onChanged.addListener((changes) => {
-    if (changes['tabStats:v1']) {
-      store.clear(Stats, false);
-    }
-  });
-}
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes['tabStats:v1']) {
+    store.clear(Stats, false);
+  }
+});
