@@ -662,9 +662,6 @@
   "send": {
     "message": "发送"
   },
-  "send_feedback": {
-    "message": "发送反馈"
-  },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK用于收集和发送报告，但Sentry只接收上述信息——没有两个请求可以相互关联，浏览器IP也不会与Sentry共享。."
   },
