@@ -662,9 +662,6 @@
   "send": {
     "message": "Отправить"
   },
-  "send_feedback": {
-    "message": "Отправить отзыв"
-  },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "SDK Sentry используется для сбора и отправки отчетов, но Sentry получает только вышеуказанную информацию - никакие два запроса не могут быть связаны друг с другом, и IP-адрес браузера никогда не передается в Sentry."
   },
