@@ -17,8 +17,27 @@ function safeLinkClick(event) {
 
   el.removeAttribute('ping');
 
-  const targetUrl =
-    el.pathname === '/url' && new URL(el.href).searchParams.get('url');
+  let targetUrl = null;
+  // Google Search: extract direct link from redirect URL
+  if (el.pathname === '/url') {
+    targetUrl = new URL(el.href).searchParams.get('q');
+  }
+  // Bing Search: extract and decode direct link from Bing's tracking URL
+  else if (el.hostname === 'www.bing.com' && el.pathname.startsWith('/ck/')) {
+    const uParam = new URL(el.href).searchParams.get('u');
+    if (uParam) {
+      // Bing prefixes the Base64 string with 'a1'
+      const base64Str = uParam.startsWith('a') ? uParam.slice(2) : uParam;
+      try {
+        const decoded = atob(base64Str);
+        if (decoded) {
+          targetUrl = decoded;
+        }
+      } catch (e) {
+        // If decoding fails, leave targetUrl null (no rewrite)
+      }
+    }
+  }
 
   if (targetUrl) {
     event.stopImmediatePropagation();
