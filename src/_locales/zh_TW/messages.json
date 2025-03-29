@@ -590,8 +590,8 @@
   "please_describe_the_issue": {
     "message": "請描述問題"
   },
-  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "防止 Google 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
+  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "防止 Google 和 Bing 透過其伺服器重新導向搜尋結果連結，而不是直接連結到網頁。"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "使用 AI 科技防止各種追蹤技術。"
