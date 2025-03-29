@@ -79,7 +79,6 @@ async function isFeatureDisabled() {
   return false;
 }
 
-// INFO: Safari always returns false for `inIncognitoContext`
 if (!chrome.extension.inIncognitoContext) {
   (async () => {
     if (await isFeatureDisabled()) return;

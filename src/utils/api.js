@@ -34,6 +34,9 @@ if (__PLATFORM__ === 'safari') {
   //
   // Below code tries to detect the offset between the two
   // and use it to convert the expirationDate to seconds
+
+  // TODO: Tested on Safari 18.3.1 - both issue are fixed.
+  // Remove this code when we drop support for older versions
   (async () => {
     try {
       const cookie = await chrome.cookies.set({
@@ -100,6 +103,10 @@ async function getCookie(name) {
 
     // By the specs, the `expirationDate` should be in seconds since the epoch
     // and we need to convert it to milliseconds, but Safari returns it in milliseconds
+
+    // TODO: Tested on Safari 18.3.1 - issue fixed
+    // Multiple date for all platforms when we drop support
+    // for older versions of Safari
     if (
       __PLATFORM__ !== 'safari' ||
       new Date(expirationDate).getFullYear() === 1970
