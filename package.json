@@ -32,7 +32,7 @@
     "addons-linter": "^7.9.0",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-prettier": "^5.2.4",
+    "eslint-plugin-prettier": "^5.2.5",
     "globals": "^16.0.0",
     "license-report": "^6.7.2",
     "prettier": "^3.5.3",
