@@ -11,10 +11,10 @@
 
 import { store } from 'hybrids';
 
-import TrackerException from '/store/tracker-exception.js';
-
 import { getCategories } from '/utils/trackerdb.js';
+
 import Tracker from './tracker.js';
+import Options from './options.js';
 
 const categories = getCategories();
 
@@ -29,14 +29,13 @@ export default {
     trackers.reduce((count, tracker) => count + Number(tracker.adjusted), 0),
   [store.connect]: {
     async list({ query, filter }) {
-      const exceptions = await store.resolve([TrackerException]);
-
       const result = (await categories).map((category) => ({
         id: { key: category.key, query, filter },
         ...category,
       }));
 
       if (query || filter) {
+        const options = await store.resolve(Options);
         query = query.trim().toLowerCase();
 
         return result
@@ -48,23 +47,17 @@ export default {
                 t.name.toLowerCase().includes(query) ||
                 t.organization?.name.toLowerCase().includes(query);
 
-              const exception = exceptions.find((e) => e.id === t.id);
-              const blocked = exception?.blocked ?? t.blockedByDefault;
-
               if (!match) return false;
+
+              const exception = options.exceptions[t.id];
 
               switch (filter) {
                 case 'blocked':
-                  return blocked;
+                  return !exception?.global;
                 case 'trusted':
-                  return !blocked;
+                  return exception?.global;
                 case 'adjusted':
-                  return (
-                    exception &&
-                    (exception.blocked !== t.blockedByDefault ||
-                      exception.blockedDomains.length > 0 ||
-                      exception.trustedDomains.length > 0)
-                  );
+                  return exception;
                 default:
                   return true;
               }

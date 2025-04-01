@@ -95,6 +95,9 @@ const Options = {
   // Pause
   paused: store.record({ revokeAt: 0, assist: false }),
 
+  // Exceptions
+  exceptions: store.record({ global: false, domains: [String] }),
+
   // Sync
   sync: true,
   revision: 0,

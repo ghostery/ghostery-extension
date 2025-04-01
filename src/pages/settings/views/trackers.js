@@ -13,7 +13,8 @@ import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 import TrackerCategory from '/store/tracker-category.js';
-import { toggleExceptionBlocked } from '/store/tracker-exception.js';
+
+import * as exceptions from '/utils/exceptions.js';
 
 import TrackerDetails from './tracker-details.js';
 
@@ -48,30 +49,27 @@ function isActive(category, key) {
   return category === key || category === '_all';
 }
 
+function isTrusted(options, tracker) {
+  const status = exceptions.getStatus(options, tracker.id);
+  return status.trusted && status.global;
+}
+
 export function toggleException(tracker) {
-  return async () => {
-    await toggleExceptionBlocked(tracker.exception, tracker.blockedByDefault);
-    store.clear([TrackerCategory], false);
-  };
+  return async ({ options }) => exceptions.toggleGlobal(options, tracker.id);
 }
 
 function clearCategory(id) {
-  return async () => {
+  return async ({ options }) => {
     const category = store.get(TrackerCategory, id);
 
-    await Promise.all(
-      category.trackers
-        .filter(
-          (t) =>
-            store.ready(t.exception) &&
-            t.exception.blocked !== category.blockedByDefault,
-        )
-        .map((tracker) =>
-          toggleExceptionBlocked(tracker.exception, tracker.blockedByDefault),
-        ),
-    );
+    const exceptions = category.trackers
+      .filter((t) => options.exceptions[t.id]?.global)
+      .reduce((acc, t) => {
+        acc[t.id] = null;
+        return acc;
+      }, {});
 
-    store.clear([TrackerCategory], false);
+    await store.set(options, { exceptions });
   };
 }
 
@@ -218,20 +216,18 @@ export default {
                                     </a>
                                   </ui-action>
                                   <div layout="row items:center gap">
-                                    ${tracker.adjusted &&
+                                    ${options.exceptions[tracker.id] &&
                                     html`
                                       <ui-text type="label-s" color="secondary">
                                         <!-- Singular form - tracker has been adjusted | tracker -->adjusted
                                       </ui-text>
                                     `}
-                                    <ui-protection-status-toggle
-                                      value="${store.ready(tracker.exception)
-                                        ? tracker.exception.blocked
-                                        : tracker.blockedByDefault}"
+                                    <settings-exception-toggle
+                                      value="${isTrusted(options, tracker)}"
                                       responsive
                                       onchange="${toggleException(tracker)}"
                                       layout="shrink:0"
-                                    ></ui-protection-status-toggle>
+                                    ></settings-exception-toggle>
                                   </div>
                                 </div>
                               `.key(tracker.id),
