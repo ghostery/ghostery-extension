@@ -356,7 +356,7 @@ if (__PLATFORM__ === 'safari') {
                 url,
                 originUrl: sender.url,
                 tabId: sender.tab.id,
-                requestId: `${Math.random().toString(36).substring(2, 9)}-${Math.random().toString(36).substring(2, 9)}`,
+                requestId: Math.random().toString(36).substring(2, 20),
               }),
             ),
           );
