@@ -349,22 +349,15 @@ if (__PLATFORM__ === 'safari') {
     if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
       switch (msg.action) {
         case 'updateTabStats':
-          // On Safari `onBeforeNavigate` event is not trigger correctly
-          // if a user navigates to the page by setting URL in the address bar.
-          // This condition ensures that we setup tabStats for the tab
-          // when `updateTabStats` message is received.
-          if (tabStats.get(sender.tab.id)?.url !== sender.url) {
-            setupTabStats({
-              tabId: sender.tab.id,
-              url: sender.url,
-              timeStamp: Date.now(),
-            });
-          }
-
           updateTabStats(
             sender.tab.id,
             msg.urls.map((url) =>
-              Request.fromRequestDetails({ url, originUrl: sender.url }),
+              Request.fromRequestDetails({
+                url,
+                originUrl: sender.url,
+                tabId: sender.tab.id,
+                requestId: `${Math.random().toString(36).substring(2, 9)}-${Math.random().toString(36).substring(2, 9)}`,
+              }),
             ),
           );
           break;
