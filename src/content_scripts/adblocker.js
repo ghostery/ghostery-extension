@@ -135,11 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     subtree: true,
   });
 
-  for (const el of new Set([
-    ...document.querySelectorAll('[id]'),
-    ...document.querySelectorAll('[class]'),
-    ...document.querySelectorAll('[href]'),
-  ])) {
+  for (const el of document.querySelectorAll('[id],[class],[href]')) {
     addFeatures(el);
   }
   injectCosmetics();
