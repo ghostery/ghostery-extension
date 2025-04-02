@@ -113,7 +113,7 @@ const observer = new MutationObserver((mutations) => {
           while (el) {
             if (!visited.has(el)) {
               visited.add(el);
-              addFeatures(el);
+              addSelectors(el);
             }
 
             el = treeWalker.nextNode();
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   for (const el of document.querySelectorAll('[id],[class],[href]')) {
-    addFeatures(el);
+    addSelectors(el);
   }
   injectCosmetics();
 });
