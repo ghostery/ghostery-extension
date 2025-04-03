@@ -590,8 +590,8 @@
   "please_describe_the_issue": {
     "message": "Vui lòng mô tả vấn đề"
   },
-  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Ngăn Google và Bing chuyển hướng các liên kết kết quả tìm kiếm thông qua máy chủ của họ thay vì liên kết trực tiếp đến các trang."
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevents Google from redirecting search result links through their servers instead of linking directly to pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Ngăn chặn các kỹ thuật theo dõi khác nhau bằng công nghệ điều khiển AI."

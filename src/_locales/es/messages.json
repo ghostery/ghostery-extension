@@ -590,8 +590,8 @@
   "please_describe_the_issue": {
     "message": "Describa el problema, por favor"
   },
-  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Evita que Google y Bing redirijan los enlaces de los resultados de búsqueda a través de sus servidores, en lugar de enlazar directamente a las páginas."
+  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Evita que Google redirija los enlaces de los resultados de búsqueda a través de sus servidores, en lugar de enlazar directamente a las páginas."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Previene diversas técnicas de rastreo con tecnología de inteligencia artificial."
