@@ -85,21 +85,6 @@ export default {
           </div>
           <div layout="column margin:2:1.5:0">
             <ui-toggle
-              value="${exceptionStatus.trusted && exceptionStatus.global}"
-              onchange="${toggleGlobal}"
-              no-label
-            >
-              <div layout="grow">
-                <ui-text type="label-m">Trust on all websites</ui-text>
-                <ui-text type="body-s" color="secondary">
-                  Add exception
-                </ui-text>
-              </div>
-            </ui-toggle>
-          </div>
-          <ui-line></ui-line>
-          <panel-card layout="column gap">
-            <ui-toggle
               value="${domainStatus}"
               disabled="${exceptionStatus.trusted && exceptionStatus.global}"
               onchange="${toggleDomain}"
@@ -110,6 +95,21 @@ export default {
                 <ui-text type="body-s" color="secondary">
                   <!-- Add domain as an exception -->
                   Add ${stats.hostname} as an exception
+                </ui-text>
+              </div>
+            </ui-toggle>
+          </div>
+          <ui-line></ui-line>
+          <panel-card layout="column gap">
+            <ui-toggle
+              value="${exceptionStatus.trusted && exceptionStatus.global}"
+              onchange="${toggleGlobal}"
+              no-label
+            >
+              <div layout="grow">
+                <ui-text type="label-m">Trust on all websites</ui-text>
+                <ui-text type="body-s" color="secondary">
+                  Add exception
                 </ui-text>
               </div>
             </ui-toggle>
