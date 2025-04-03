@@ -89,7 +89,7 @@ const Options = {
   installDate: '',
 
   // UI
-  panel: { statsType: 'graph' },
+  panel: { statsType: 'graph', notifications: true },
   theme: '',
 
   // Pause
