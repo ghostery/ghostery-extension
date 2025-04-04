@@ -156,16 +156,18 @@ export default class Metrics {
       // Date of install (former install_date)
       buildQueryPair('id', this.storage.installDate) +
       // Product ID Parameter
-      buildQueryPair('pi', browserInfo.token === 'gd' ? 'gd' : 'gbe');
+      buildQueryPair('pi', browserInfo.token === 'gd' ? 'gd' : 'gbe') +
+      // Toolbar pinned
+      buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1));
 
     if (type !== 'uninstall') {
       metrics_url +=
         // Adblocking state
-        buildQueryPair('ab', conf.blockAds ? '1' : '0') +
+        buildQueryPair('ab', conf.options.blockAds ? '1' : '0') +
         // Smartblocking state
-        buildQueryPair('sm', conf.blockAnnoyances ? '1' : '0') +
+        buildQueryPair('sm', conf.options.blockAnnoyances ? '1' : '0') +
         // Antitracking state
-        buildQueryPair('at', conf.blockTrackers ? '1' : '0') +
+        buildQueryPair('at', conf.options.blockTrackers ? '1' : '0') +
         // Recency, days since last active daily ping
         // prettier-ignore
         buildQueryPair('rc', this._getRecencyActive(type, frequency).toString()) +
@@ -177,7 +179,7 @@ export default class Metrics {
         // Engaged Velocity
         buildQueryPair('ve', this._getVelocityEngaged(type).toString()) +
         // Feedback state
-        buildQueryPair('hw', conf.feedback ? '1' : '0');
+        buildQueryPair('hw', conf.options.feedback ? '1' : '0');
     }
 
     if (CAMPAIGN_METRICS.includes(type)) {
