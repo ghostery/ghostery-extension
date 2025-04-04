@@ -20,7 +20,6 @@ import {
 
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
-import { captureException } from './errors.js';
 import { CDN_URL } from './api.js';
 
 export const MAIN_ENGINE = 'main';
@@ -103,11 +102,6 @@ async function loadFromStorage(name) {
         });
       })
       .catch((e) => {
-        // Suppress the private browsing mode in Firefox
-        if (!e.message?.includes('database that did not allow mutations')) {
-          captureException(e);
-        }
-
         if (__PLATFORM__ === 'firefox') {
           const key = `engines:${name}`;
           return chrome.storage.local.get([key]).then((data) => data[key]);
