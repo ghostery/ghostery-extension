@@ -70,7 +70,10 @@ const setup = asyncSetup('telemetry', [
       EXTENSION_VERSION: version,
       storage: metrics,
       saveStorage,
-      getConf: () => store.resolve(Options),
+      getConf: async () => ({
+        options: await store.resolve(Options),
+        userSettings: await chrome.action?.getUserSettings?.(),
+      }),
       log: console.log.bind(console, '[telemetry]'),
     });
   })(),
