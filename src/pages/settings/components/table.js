@@ -13,14 +13,31 @@ import { html } from 'hybrids';
 
 export default {
   responsive: { value: false, reflect: true },
-  render: () => html`
+  disabled: { value: false, reflect: true },
+  render: ({ disabled }) => html`
     <template layout="column gap">
       <header layout="padding:1.5" layout@768px="padding:1.5:2">
         <slot name="header"></slot>
       </header>
-      <div layout="column gap" layout@768px="gap:0"><slot></slot></div>
+      <div layout="column gap" layout@768px="gap:0" inert="${disabled}">
+        <slot></slot>
+      </div>
     </template>
   `.css`
+    :host {
+      transition: opacity 0.2s;
+    }
+
+    :host([disabled]) {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    :host([responsive]) div ::slotted(*) {
+      border: 1px solid var(--border-primary);
+      border-radius: 8px;
+    }
+
     header {
       background: var(--background-secondary);
       border-radius: 8px;
@@ -29,11 +46,6 @@ export default {
     div ::slotted(*) {
       padding: 12px 14px;
       border-bottom: 1px solid var(--border-primary);
-    }
-
-    :host([responsive]) div ::slotted(*) {
-      border: 1px solid var(--border-primary);
-      border-radius: 8px;
     }
 
     @media screen and (min-width: 768px) {

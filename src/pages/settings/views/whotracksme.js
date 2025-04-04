@@ -187,7 +187,7 @@ export default {
                     />
                   </settings-help-image>
                   <settings-option>
-                    WhoTracks.Me Privacy Report
+                    Your Browser Privacy Report
                     <span slot="description">
                       Generates a global transparency report on web tracking in
                       your Ghostery-protected browser.

@@ -10,36 +10,33 @@
  */
 
 import { html, router, store, msg } from 'hybrids';
+
+import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
 
-import { toggleExceptionDomain } from '/store/tracker-exception.js';
+import * as exceptions from '/utils/exceptions.js';
+
 import Hostname from '../store/hostname.js';
 
-async function add({ tracker, hostname }, event) {
+async function add({ options, tracker, hostname }, event) {
   event.preventDefault();
 
   router.resolve(
     event,
-    store.submit(hostname).then(({ value }) => {
-      return toggleExceptionDomain(
-        tracker.exception,
-        value,
-        tracker.blockedByDefault,
-        true,
-      );
-    }),
+    store
+      .submit(hostname)
+      .then(({ value }) =>
+        exceptions.toggleDomain(options, tracker.id, value, true),
+      ),
   );
 }
 
 export default {
   [router.connect]: { dialog: true },
+  options: store(Options),
   tracker: store(Tracker),
-  blocked: ({ tracker }) =>
-    store.ready(tracker.exception)
-      ? tracker.exception.blocked
-      : tracker.blockedByDefault,
   hostname: store(Hostname, { draft: true }),
-  render: ({ tracker, blocked, hostname }) => html`
+  render: ({ tracker, hostname }) => html`
     <template layout>
       ${store.ready(tracker) &&
       html`
@@ -52,28 +49,21 @@ export default {
             <ui-text type="label-l" layout="block:center margin:bottom">
               Add website exception
             </ui-text>
-            <ui-text layout="row:wrap gap:0.5 items:center">
-              <!-- Current protection status for a tracker -->
-              Current protection status for ${tracker.name}:
-              <settings-protection-badge
-                blocked="${blocked}"
-              ></settings-protection-badge>
-            </ui-text>
-            <div layout="column gap:0.5">
-              <ui-text type="label-m">Website</ui-text>
-              <ui-input error="${store.error(hostname) || ''}">
-                <input
-                  type="text"
-                  placeholder="${msg`Enter website URL`}"
-                  value="${hostname.value}"
-                  oninput="${html.set(hostname, 'value')}"
-                  tabindex="1"
-                />
-              </ui-input>
+            <div layout="column gap:2">
+              <div layout="column gap:0.5">
+                <ui-text type="label-m">Website</ui-text>
+                <ui-input error="${store.error(hostname) || ''}">
+                  <input
+                    type="text"
+                    placeholder="${msg`Enter website URL`}"
+                    value="${hostname.value}"
+                    oninput="${html.set(hostname, 'value')}"
+                    tabindex="1"
+                  />
+                </ui-input>
+              </div>
               <ui-text type="body-s" color="secondary">
-                ${blocked
-                  ? msg`${tracker.name} will be trusted on this website. | A tracker will be trusted on this website.`
-                  : msg`${tracker.name} will be blocked on this website. | A tracker will be trusted on this website.`}
+                ${tracker.name} will be trusted on this website.
               </ui-text>
             </div>
             <div layout="grid:1|1 gap margin:top:2">

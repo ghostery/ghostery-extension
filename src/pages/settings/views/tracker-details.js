@@ -9,46 +9,51 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, router, store, msg } from 'hybrids';
+import { html, router, store } from 'hybrids';
 import * as labels from '/ui/labels.js';
 
+import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
-import { toggleExceptionDomain } from '/store/tracker-exception.js';
 
+import * as exceptions from '/utils/exceptions.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
 
-import { toggleException } from './trackers.js';
 import TrackerAddException from './tracker-add-exception.js';
 import WebsiteDetails from './website-details.js';
 
-function removeDomain(domain) {
-  return ({ tracker }, event) => {
+function toggleDomain(domain) {
+  return ({ options, tracker }, event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    toggleExceptionDomain(
-      tracker.exception,
-      domain,
-      tracker.blockedByDefault,
-      false,
-    );
+    exceptions.toggleDomain(options, tracker.id, domain);
   };
+}
+
+function toggleGlobal({ options, tracker }) {
+  return exceptions.toggleGlobal(options, tracker.id);
 }
 
 export default {
   [router.connect]: { stack: () => [TrackerAddException] },
+  options: store(Options),
   tracker: store(Tracker),
   otherTrackers: ({ tracker }) =>
     store.ready(tracker) && store.get([Tracker], { tracker: tracker.id }),
-  domains: ({ tracker }) =>
-    (store.ready(tracker) &&
-      store.ready(tracker.exception) &&
-      tracker.exception[
-        tracker.exception.blocked ? 'trustedDomains' : 'blockedDomains'
-      ]) ||
+  domains: ({ options, tracker }) =>
+    (store.ready(options, tracker) &&
+      options.exceptions[tracker.id]?.domains) ||
     [],
-  render: ({ tracker, domains, otherTrackers }) => html`
+  exceptionStatus: ({ options, tracker }) =>
+    store.ready(options, tracker) && exceptions.getStatus(options, tracker.id),
+  render: ({
+    options,
+    tracker,
+    otherTrackers,
+    domains,
+    exceptionStatus,
+  }) => html`
     <template layout="contents">
       <settings-page-layout>
         <div layout="column gap">
@@ -58,7 +63,7 @@ export default {
               Back
             </ui-text>
           </settings-link>
-          ${store.ready(tracker) &&
+          ${store.ready(options, tracker) &&
           html`
             <div layout="column gap:5">
               <div layout="column gap">
@@ -98,35 +103,31 @@ export default {
                       </ui-text>
                     </div>
 
-                    <ui-protection-status-toggle
-                      value="${store.ready(tracker.exception)
-                        ? tracker.exception.blocked
-                        : tracker.blockedByDefault}"
+                    <settings-exception-toggle
+                      value="${exceptionStatus.trusted}"
                       responsive
-                      onchange="${toggleException(tracker)}"
+                      onchange="${toggleGlobal}"
                       layout="shrink:0"
-                    ></ui-protection-status-toggle>
+                    ></settings-exception-toggle>
                   </div>
-                  <settings-badge
-                    type="brand"
-                    layout="row content:start padding"
-                  >
-                    <ui-icon name="info-filled"></ui-icon>
-                    ${msg`Our recommendation for this activity`}:
-                    ${tracker.blockedByDefault ? msg`Blocked` : msg`Trusted`}
-                  </settings-badge>
                 </div>
               </div>
               <div layout="column gap:2">
                 <div layout="row gap items:center content:space-between">
                   <ui-text type="label-l">Website exceptions</ui-text>
-                  <ui-button>
+                  <ui-button
+                    disabled="${exceptionStatus.trusted &&
+                    exceptionStatus.global}"
+                  >
                     <a href="${router.url(TrackerAddException, { tracker })}">
                       Add
                     </a>
                   </ui-button>
                 </div>
-                <settings-table>
+                <settings-table
+                  disabled="${exceptionStatus.trusted &&
+                  exceptionStatus.global}"
+                >
                   <div slot="header" layout="grid:2 gap:4">
                     <ui-text type="label-m" mobile-type="label-s">
                       Website
@@ -161,15 +162,11 @@ export default {
                             ${domain}
                           </ui-text>
                           <div layout="row content:space-between gap">
-                            <settings-protection-badge
-                              blocked="${tracker.exception.getDomainStatus(
-                                domain,
-                              ).type === 'block'}"
-                            ></settings-protection-badge>
+                            <settings-protection-badge></settings-protection-badge>
                             <ui-action>
                               <button
                                 layout@768px="order:1 padding:0.5"
-                                onclick="${removeDomain(domain)}"
+                                onclick="${toggleDomain(domain)}"
                               >
                                 <ui-icon
                                   name="trash"

@@ -15,6 +15,7 @@ import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
+import * as exceptions from '/utils/exceptions.js';
 
 import Notification from '../store/notification.js';
 
@@ -250,19 +251,11 @@ export default {
           ${stats.hostname
             ? html`
                 <ui-stats
-                  domain="${stats.displayHostname}"
                   categories="${stats.topCategories}"
-                  trackers="${stats.trackers}"
-                  readonly="${paused ||
-                  globalPause ||
-                  !options.terms ||
-                  options.managed}"
-                  dialog="${TrackerDetails}"
-                  exceptionDialog="${ProtectionStatus}"
                   type="${options.panel.statsType}"
+                  ontypechange="${setStatsType}"
                   layout="margin:1:1.5"
                   layout@390px="margin:1.5:1.5:2"
-                  ontypechange="${setStatsType}"
                 >
                   ${options.panel.statsType === 'graph' &&
                   html`
@@ -286,6 +279,128 @@ export default {
                       </ui-action-button>
                     </ui-tooltip>
                   `}
+                  ${!stats.groupedTrackers.length &&
+                  html`
+                    <ui-list layout="grow margin:0.5:0" slot="list">
+                      <ui-text
+                        type="body-s"
+                        color="secondary"
+                        layout="grow row center"
+                      >
+                        No activities detected
+                      </ui-text>
+                    </ui-list>
+                  `}
+                  ${stats.groupedTrackers.map(
+                    ([name, trackers]) => html`
+                      <ui-list
+                        name="${name}"
+                        layout:last-of-type="margin:bottom:0.5"
+                        layout:first-of-type="margin:top:0.5"
+                        slot="list"
+                      >
+                        <div slot="header" layout="row items:center gap">
+                          <ui-text type="label-s">${trackers.length}</ui-text>
+                        </div>
+
+                        <section id="content" layout="column gap:0.5">
+                          ${trackers.map(
+                            (tracker) => html`
+                              <div
+                                layout="row gap content:space-between items:center"
+                              >
+                                <ui-text type="body-s">
+                                  <a
+                                    href="${router.url(TrackerDetails, {
+                                      trackerId: tracker.id,
+                                    })}"
+                                    layout="row items:center gap:0.5 padding:0.5:0"
+                                    data-qa="button:tracker:${tracker.id}"
+                                  >
+                                    <ui-tooltip>
+                                      <span slot="content">
+                                        View activity details
+                                      </span>
+                                      <ui-tracker-name>
+                                        ${tracker.name}
+                                      </ui-tracker-name>
+                                    </ui-tooltip>
+                                    <ui-stats-badge>
+                                      ${tracker.requestsCount}
+                                    </ui-stats-badge>
+                                    ${tracker.blocked &&
+                                    html`<ui-icon
+                                      name="block-s"
+                                      color="danger-primary"
+                                      data-qa="icon:tracker:${tracker.id}:blocked"
+                                    ></ui-icon>`}
+                                    ${tracker.modified &&
+                                    html`<ui-icon
+                                      name="eye"
+                                      color="brand-primary"
+                                      data-qa="icon:tracker:${tracker.id}:modified"
+                                    ></ui-icon>`}
+                                  </a>
+                                </ui-text>
+                                ${!paused &&
+                                !globalPause &&
+                                options.terms &&
+                                !options.managed &&
+                                html`
+                                  <ui-action-button layout="shrink:0 width:4.5">
+                                    <a
+                                      href="${router.url(ProtectionStatus, {
+                                        trackerId: tracker.id,
+                                      })}"
+                                      layout="row center relative"
+                                    >
+                                      <ui-tooltip>
+                                        <span slot="content">
+                                          ${exceptions.getLabel(
+                                            options,
+                                            tracker.id,
+                                            stats.hostname,
+                                          )}
+                                        </span>
+                                        <div layout="relative">
+                                          <ui-icon
+                                            name="${exceptions.getStatus(
+                                              options,
+                                              tracker.id,
+                                              stats.hostname,
+                                            ).trusted
+                                              ? 'trust'
+                                              : 'block'}-m"
+                                            color="${options.exceptions[
+                                              tracker.id
+                                            ]
+                                              ? 'secondary'
+                                              : 'quaternary'}"
+                                          ></ui-icon>
+                                          ${!exceptions.getStatus(
+                                            options,
+                                            tracker.id,
+                                            stats.hostname,
+                                          ).global &&
+                                          html`
+                                            <ui-icon
+                                              name="error"
+                                              color="secondary"
+                                              layout="absolute right:-4px bottom:-4px"
+                                            ></ui-icon>
+                                          `}
+                                        </div>
+                                      </ui-tooltip>
+                                    </a>
+                                  </ui-action-button>
+                                `}
+                              </div>
+                            `,
+                          )}
+                        </section>
+                      </ui-list>
+                    `,
+                  )}
                 </ui-stats>
                 <panel-feedback
                   modified=${stats.trackersModified}

@@ -13,60 +13,42 @@ import { html, router, store } from 'hybrids';
 import * as labels from '/ui/labels.js';
 
 import Options from '/store/options.js';
-import TrackerException from '/store/tracker-exception.js';
 import Tracker from '/store/tracker.js';
 
+import * as exceptions from '/utils/exceptions.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
 
 function removeDomain(tracker) {
-  return async ({ domain }) => {
-    const { exception } = tracker;
-    const status = exception.getDomainStatus(domain);
-
-    store.set(
-      exception,
-      status.type === 'block'
-        ? {
-            blockedDomains: exception.blockedDomains.filter(
-              (d) => d !== domain,
-            ),
-          }
-        : {
-            trustedDomains: exception.trustedDomains.filter(
-              (d) => d !== domain,
-            ),
-          },
-    );
-  };
+  return ({ options, domain }) =>
+    exceptions.toggleDomain(options, tracker.id, domain);
 }
 
 function revokePaused({ options, domain }) {
-  store.set(options, {
-    paused: { [domain]: null },
-  });
+  store.set(options, { paused: { [domain]: null } });
 }
 
 export default {
   [router.connect]: { stack: () => [TrackerDetails] },
-  domain: '',
-  trackers: ({ domain }) => {
-    const exceptions = store.get([TrackerException]);
-    if (!store.ready(exceptions)) return [];
-
-    return exceptions
-      .filter(
-        ({ blockedDomains, trustedDomains }) =>
-          blockedDomains.includes(domain) || trustedDomains.includes(domain),
-      )
-      .sort((a, b) => a.id.localeCompare(b.id))
-      .map(({ id }) => store.get(Tracker, id));
-  },
   options: store(Options),
+  domain: '',
   paused: ({ options, domain }) =>
     (store.ready(options) && options.paused[domain]) || {},
+  trackers: ({ options, domain }) =>
+    store.ready(options)
+      ? Object.entries(options.exceptions)
+          .filter(([, { domains }]) => domains.includes(domain))
+          .map(([id]) => id)
+          .sort((a, b) => a.localeCompare(b))
+          .map((id) => store.get(Tracker, id))
+          .map((tracker) =>
+            store.error(tracker)
+              ? { id: tracker.id, name: tracker.id }
+              : tracker,
+          )
+      : [],
   render: ({ domain, trackers, paused }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
@@ -143,31 +125,35 @@ export default {
             `}
             ${trackers.map(
               (tracker) =>
-                store.ready(tracker) &&
+                !store.pending(tracker) &&
                 html`
                   <div
                     layout="grid:2 gap:2"
                     layout@768px="grid:2fr|2fr|3fr gap:4"
                   >
-                    <div layout="column gap:0.5">
-                      <ui-action>
-                        <a
-                          href="${router.url(TrackerDetails, {
-                            tracker: tracker.id,
-                          })}"
-                        >
-                          <ui-text type="label-m" mobile-type="label-s">
-                            ${tracker.name}
-                          </ui-text>
-                        </a>
-                      </ui-action>
-                      ${tracker.organization &&
-                      html`
-                        <ui-text type="body-s" color="secondary">
-                          ${tracker.organization.name}
+                    ${store.ready(tracker) &&
+                    html`<ui-action>
+                      <a
+                        href="${router.url(TrackerDetails, {
+                          tracker: tracker.id,
+                        })}"
+                        layout="column gap:0.5"
+                      >
+                        <ui-text type="label-m" mobile-type="label-s">
+                          ${tracker.name}
                         </ui-text>
-                      `}
-                    </div>
+                        ${tracker.organization &&
+                        html`
+                          <ui-text type="body-s" color="secondary">
+                            ${tracker.organization.name}
+                          </ui-text>
+                        `}
+                      </a>
+                    </ui-action>`}
+                    ${!store.ready(tracker) &&
+                    html`<ui-text type="label-m" mobile-type="label-s">
+                      ${tracker.name}
+                    </ui-text>`}
                     <ui-text
                       type="label-m"
                       layout="hidden"
@@ -176,14 +162,9 @@ export default {
                       ${labels.categories[tracker.category]}
                     </ui-text>
                     <div layout="row gap items:center content:space-between">
-                      ${tracker.exception.getDomainStatus(domain).type ===
-                      'block'
-                        ? html`<settings-badge>
-                            <ui-icon name="block-s"></ui-icon> Blocked
-                          </settings-badge>`
-                        : html`<settings-badge>
-                            <ui-icon name="trust-s"></ui-icon> Trusted
-                          </settings-badge>`}
+                      <settings-badge>
+                        <ui-icon name="trust-s"></ui-icon> Trusted
+                      </settings-badge>
                       <ui-action>
                         <button layout@768px="order:1">
                           <ui-icon
