@@ -420,6 +420,9 @@
   "ignore": {
     "message": "Zignoruj"
   },
+  "in_panel_notifications": {
+    "message": "Powiadomienia w panelu"
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "Dołącz zrzut ekranu bieżącej strony"
   },
@@ -524,7 +527,7 @@
     "message": "Brak jeszcze dodanych wyjątków ochrony."
   },
   "no_websites_exceptions_added_yet": {
-    "message": "Nie dodano jeszcze żadnych wyjątków dla tej strony"
+    "message": "Nie dodano jeszcze wyjątków dla poszczególnych stron internetowych"
   },
   "observed_activities": {
     "message": "Obserwowane aktywności"
@@ -815,6 +818,9 @@
   },
   "trusted_on_this_website": {
     "message": "Zaufany na tej stronie"
+  },
+  "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
+    "message": "Włącza lub wyłącza powiadomienia Ghostery wyświetlane w panelu."
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
     "message": "Odkrywa, że żaden dzień nie jest taki sam. Dzięki Ghostery jesteś chroniony każdego dnia."

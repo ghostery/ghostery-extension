@@ -420,6 +420,9 @@
   "ignore": {
     "message": "Không chấp nhận"
   },
+  "in_panel_notifications": {
+    "message": "Thông báo trong bảng điều khiển"
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "Bao gồm ảnh chụp màn hình của trang hiện tại"
   },
@@ -815,6 +818,9 @@
   },
   "trusted_on_this_website": {
     "message": "Trusted on this website"
+  },
+  "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
+    "message": "Bật hoặc tắt thông báo Ghostery hiển thị trong bảng điều khiển."
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
     "message": "Khám phá rằng không có hai ngày nào giống nhau. Với Ghostery, bạn được bảo vệ mỗi ngày."
