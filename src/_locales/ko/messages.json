@@ -420,6 +420,9 @@
   "ignore": {
     "message": "무시"
   },
+  "in_panel_notifications": {
+    "message": "패널 내 알림"
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "현재 페이지의 스크린샷을 포함하세요"
   },
@@ -815,6 +818,9 @@
   },
   "trusted_on_this_website": {
     "message": "이 웹 사이트에서 허용됨"
+  },
+  "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
+    "message": "Ghostery 알림을 패널에 표시하거나 끕니다."
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
     "message": "어떤 날도 똑같지 않다는 것을 발견하세요. Ghostery와 함께라면 매일 보호받을 수 있습니다."

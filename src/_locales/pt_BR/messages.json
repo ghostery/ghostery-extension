@@ -420,6 +420,9 @@
   "ignore": {
     "message": "Ignorar"
   },
+  "in_panel_notifications": {
+    "message": "Notificações no Painel"
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "Inclua uma captura de tela da página atual"
   },
@@ -815,6 +818,9 @@
   },
   "trusted_on_this_website": {
     "message": "Confiável neste site"
+  },
+  "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
+    "message": "Ativa ou desativa as notificações do Ghostery exibidas no painel."
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
     "message": "Revela que nenhum dia é igual ao outro. Com o Ghostery, você está protegido todos os dias."

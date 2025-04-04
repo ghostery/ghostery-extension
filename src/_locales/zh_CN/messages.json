@@ -420,6 +420,9 @@
   "ignore": {
     "message": "忽略"
   },
+  "in_panel_notifications": {
+    "message": "面板内通知"
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "请包含当前页面的截图"
   },
@@ -815,6 +818,9 @@
   },
   "trusted_on_this_website": {
     "message": "在此网站上受信任"
+  },
+  "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
+    "message": "将面板中显示的Ghostery通知打开或关闭。"
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
     "message": "揭示了没有两天是相同的。有了Ghostery，您每天都受到保护。"
