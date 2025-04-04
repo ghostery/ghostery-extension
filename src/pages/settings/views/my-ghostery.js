@@ -152,6 +152,18 @@ export default {
               </ui-toggle>
             `}
 
+            <ui-toggle
+              value="${options.panel.notifications}"
+              onchange="${html.set(options, 'panel.notifications')}"
+            >
+              <settings-option>
+                In-Panel Notifications
+                <span slot="description">
+                  Turns Ghostery notifications displayed in the panel on or off.
+                </span>
+              </settings-option>
+            </ui-toggle>
+
             <div layout="row gap:2">
               <div layout="column grow gap:0.5">
                 <ui-text type="headline-xs">Theme</ui-text>

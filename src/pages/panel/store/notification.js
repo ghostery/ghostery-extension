@@ -60,10 +60,12 @@ export default {
   url: '',
   action: '',
   [store.connect]: async () => {
-    // Enable extension
-    if (!(await store.resolve(Options)).terms) return NOTIFICATIONS.terms;
+    const { terms, panel } = await store.resolve(Options);
 
-    // Opera SERP support
+    // Enable extension notification
+    if (!terms) return NOTIFICATIONS.terms;
+
+    // Opera SERP support notification
     if (
       __PLATFORM__ === 'chromium' &&
       isOpera() &&
@@ -71,6 +73,9 @@ export default {
     ) {
       return NOTIFICATIONS.opera;
     }
+
+    // Disabled in-panel notifications
+    if (!panel.notifications) return null;
 
     // Randomly show review notification (50% chance)
     if (Math.random() < 0.5) {
