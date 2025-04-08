@@ -95,8 +95,8 @@ define({
                 <ui-stats
                   domain="${domain}"
                   categories="${stats}"
+                  type=""
                   layout="relative layer:101"
-                  wtmLink=""
                   data-qa="component:stats"
                 >
                   <ui-tooltip position="bottom" slot="actions">
