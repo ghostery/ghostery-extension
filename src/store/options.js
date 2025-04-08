@@ -40,6 +40,8 @@ export const SYNC_OPTIONS = [
   'theme',
 ];
 
+export const SYNC_PROTECTED_OPTIONS = [...SYNC_OPTIONS, 'exceptions', 'paused'];
+
 export const ENGINES = [
   { name: 'ads', key: 'blockAds' },
   { name: 'tracking', key: 'blockTrackers' },
@@ -92,11 +94,11 @@ const Options = {
   panel: { statsType: 'graph', notifications: true },
   theme: '',
 
-  // Pause
-  paused: store.record({ revokeAt: 0, assist: false }),
-
-  // Exceptions
+  // Tracker exceptions
   exceptions: store.record({ global: false, domains: [String] }),
+
+  // Paused domains
+  paused: store.record({ revokeAt: 0, assist: false }),
 
   // Sync
   sync: true,
