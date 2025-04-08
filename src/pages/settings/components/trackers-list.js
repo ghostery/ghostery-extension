@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, dispatch, msg } from 'hybrids';
+import { html, dispatch } from 'hybrids';
 import * as labels from '/ui/labels.js';
 
 export default {
@@ -19,9 +19,8 @@ export default {
   adjusted: 0,
   blocked: 0,
   trusted: 0,
-  blockedByDefault: false,
   open: { value: false, reflect: true },
-  render: ({ name, size, adjusted, open, blockedByDefault }) => html`
+  render: ({ name, size, adjusted, open }) => html`
     <template layout="column gap:2 padding:1.5">
       <header layout="row items:center gap:1.5" layout@768px="gap:2">
         <ui-action>
@@ -58,11 +57,7 @@ export default {
         </ui-action>
 
         <ui-tooltip>
-          <span slot="content">
-            ${blockedByDefault
-              ? msg`Block all (recommended)`
-              : msg`Trust all (recommended)`}
-          </span>
+          <span slot="content">Block all</span>
           <ui-action-button layout="width:4.5">
             <button onclick="${(host) => dispatch(host, 'clear')}">
               <ui-icon name="refresh"></ui-icon>

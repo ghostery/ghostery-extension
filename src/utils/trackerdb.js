@@ -23,7 +23,6 @@ export function getUnidentifiedTracker(hostname) {
     name: hostname.length > 24 ? '...' + hostname.slice(-24) : hostname,
     category: 'unidentified',
     exception: hostname,
-    blockedByDefault: true,
   };
 }
 
@@ -86,7 +85,6 @@ function getTrackers() {
               privacyPolicyUrl: organization.privacy_policy_url,
             }
           : undefined,
-        blockedByDefault: true,
       });
     }
   }
@@ -128,7 +126,6 @@ export async function getCategories() {
       {
         key,
         description,
-        blockedByDefault: true,
         trackers: [],
       },
     ]),
