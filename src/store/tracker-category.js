@@ -24,9 +24,6 @@ export default {
   name: '',
   description: '',
   trackers: [Tracker],
-  blockedByDefault: false,
-  adjusted: ({ trackers }) =>
-    trackers.reduce((count, tracker) => count + Number(tracker.adjusted), 0),
   [store.connect]: {
     async list({ query, filter }) {
       const result = (await categories).map((category) => ({
@@ -34,39 +31,35 @@ export default {
         ...category,
       }));
 
-      if (query || filter) {
-        const options = await store.resolve(Options);
-        query = query.trim().toLowerCase();
+      const options = await store.resolve(Options);
+      query = query.trim().toLowerCase();
 
-        return result
-          .map((category) => ({
-            ...category,
-            trackers: category.trackers.filter((t) => {
-              const match =
-                !query ||
-                t.name.toLowerCase().includes(query) ||
-                t.organization?.name.toLowerCase().includes(query);
+      return result
+        .map((category) => ({
+          ...category,
+          trackers: category.trackers.filter((t) => {
+            const match =
+              !query ||
+              t.name.toLowerCase().includes(query) ||
+              t.organization?.name.toLowerCase().includes(query);
 
-              if (!match) return false;
+            if (!match) return false;
 
-              const exception = options.exceptions[t.id];
+            const exception = options.exceptions[t.id];
 
-              switch (filter) {
-                case 'blocked':
-                  return !exception?.global;
-                case 'trusted':
-                  return exception?.global;
-                case 'adjusted':
-                  return exception;
-                default:
-                  return true;
-              }
-            }),
-          }))
-          .filter((category) => category.trackers.length);
-      }
-
-      return result;
+            switch (filter) {
+              case 'blocked':
+                return !exception?.global;
+              case 'trusted':
+                return exception?.global;
+              case 'adjusted':
+                return exception;
+              default:
+                return true;
+            }
+          }),
+        }))
+        .filter((category) => category.trackers.length);
     },
   },
 };
