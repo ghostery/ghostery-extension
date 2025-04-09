@@ -141,9 +141,5 @@ export default {
         </div>
       </main>
     </template>
-  `.css`
-    .blocked {
-      color: var(--color-danger-secondary);
-    }
   `,
 };
