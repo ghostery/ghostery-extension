@@ -36,8 +36,8 @@ export default {
                 Search Engine Redirect Protection
               </ui-text>
               <ui-text type="body-l" mobile-type="body-m" color="secondary">
-                Prevents Google from redirecting search result links through
-                their servers instead of linking directly to pages.
+                Prevents Google and Bing from redirecting search result links
+                through their servers instead of linking directly to pages.
               </ui-text>
             </div>
             <settings-card in-content>
