@@ -23,7 +23,10 @@ function safeLinkClick(event) {
     targetUrl = new URL(el.href).searchParams.get('q');
   }
   // Bing Search: extract and decode direct link from Bing's tracking URL
-  else if (el.hostname.endsWith('.bing.com') && el.pathname.startsWith('/ck/')) {
+  else if (
+    el.hostname.endsWith('.bing.com') &&
+    el.pathname.startsWith('/ck/')
+  ) {
     const uParam = new URL(el.href).searchParams.get('u');
     if (uParam) {
       // Bing prefixes the Base64 string with 'a1'
@@ -33,7 +36,7 @@ function safeLinkClick(event) {
         if (decoded) {
           targetUrl = decoded;
         }
-      } catch (e) {
+      } catch {
         // If decoding fails, leave targetUrl null (no rewrite)
       }
     }
