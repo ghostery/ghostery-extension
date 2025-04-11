@@ -27,6 +27,7 @@ export default {
   },
   render: () => html`<slot></slot>`.css`
     :host {
+      position: relative;
       display: block;
       box-sizing: border-box;
       height: 40px;
@@ -150,6 +151,19 @@ export default {
     ::slotted(*:focus-visible) {
       outline: 2px solid var(--border-brand-solid);
       outline-offset: 3px;
+    }
+
+    ::slotted(input[type="file"]) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      color: transparent;
+      appearance: none;
+      background: transparent;
+      border: none;
     }
   `,
 };
