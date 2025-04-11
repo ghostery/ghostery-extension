@@ -171,7 +171,7 @@ export default {
                 onchange="${html.set(options, 'sync')}"
               >
                 <settings-option>
-                  Sync Settings
+                  Settings Sync
                   <span slot="description">
                     Saves and synchronizes your custom settings between browsers
                     and devices.
@@ -181,10 +181,20 @@ export default {
 
               <div layout="row gap:2">
                 <div layout="column grow gap:0.5">
-                  <ui-text type="headline-xs">Backup Settings</ui-text>
+                  <ui-text type="headline-xs">Settings Backup</ui-text>
                   <ui-text type="body-m" mobile-type="body-s" color="secondary">
                     Save your custom settings to a file, or restore them from a
                     file.
+                  </ui-text>
+
+                  <ui-text
+                    type="body-xs"
+                    color="tertiary"
+                    layout="row gap:0.5 items:center"
+                  >
+                    <ui-icon name="info" layout="size:1.5"></ui-icon>
+                    Importing supports uBlock Origin file format with selected
+                    features.
                   </ui-text>
                   ${importStatus &&
                   html`
