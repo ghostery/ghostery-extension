@@ -14,23 +14,18 @@ function safeLinkClick(event) {
   while (el && !el.href) el = el.parentElement;
 
   if (!el) return;
-
+  // Google Search Engine Redirect Protection
   el.removeAttribute('ping');
-
   let targetUrl = null;
-  // Google Search: extract direct link from redirect URL
   if (el.pathname === '/url') {
-    targetUrl = new URL(el.href).searchParams.get('q');
+    targetUrl = new URL(el.href).searchParams.get('url');
   }
-  // Bing Search: extract and decode direct link from Bing's tracking URL
-  else if (
-    el.hostname.endsWith('.bing.com') &&
-    el.pathname.startsWith('/ck/')
-  ) {
+  // Bing Search Engine Redirect Protection
+  else if (el.pathname == '/ck/a') {
     const uParam = new URL(el.href).searchParams.get('u');
     if (uParam) {
       // Bing prefixes the Base64 string with 'a1'
-      const base64Str = uParam.startsWith('a') ? uParam.slice(2) : uParam;
+      const base64Str = uParam.slice(2);
       try {
         const decoded = atob(base64Str);
         if (decoded) {
