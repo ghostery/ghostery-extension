@@ -10,9 +10,13 @@
  */
 
 import * as OptionsObserver from '/utils/options-observer.js';
+import { hasWTMStats } from '/utils/wtm-stats';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   switch (msg.action) {
+    case 'hasWTMStats':
+      sendResponse(hasWTMStats(msg.domain));
+      break;
     case 'openTabWithUrl':
       chrome.tabs.create({ url: msg.url });
       break;

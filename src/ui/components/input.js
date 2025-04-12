@@ -46,6 +46,7 @@ export default {
       margin: 0;
       color: var(--color-primary);
       box-shadow: 0px 3px 8px 0px var(--shadow-input);
+      transition: background-color 0.2s;
     }
 
     ::slotted(input) {
@@ -111,6 +112,12 @@ export default {
     @media (prefers-color-scheme: dark) {
       ::slotted(select) {
         background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23eceff5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      }
+    }
+
+    @media screen and (hover: hover) {
+      ::slotted(select:hover) {
+        background-color: var(--background-secondary);
       }
     }
 

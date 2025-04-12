@@ -20,7 +20,7 @@ function refreshSession() {
 }
 
 // Observe cookie changes (login/logout actions)
-chrome.cookies.onChanged.addListener(async ({ cookie }) => {
+chrome.cookies.onChanged.addListener(({ cookie }) => {
   if (cookie.domain === COOKIE_DOMAIN && cookie.name === 'access_token') {
     refreshSession();
   }

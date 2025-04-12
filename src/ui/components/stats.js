@@ -9,30 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store, router, dispatch } from 'hybrids';
+import { html, dispatch } from 'hybrids';
 
 export default {
   categories: undefined,
-  categoryList: ({ categories = [] }) =>
+  groupedCategories: ({ categories = [] }) =>
     Object.entries(
       categories.reduce(
         (all, current) => ({
           ...all,
           [current]: (all[current] || 0) + 1,
-        }),
-        {},
-      ),
-    ),
-  trackers: (host, trackers) =>
-    trackers &&
-    Object.entries(
-      trackers.reduce(
-        (categories, tracker) => ({
-          ...categories,
-          [tracker.category]: [
-            ...(categories[tracker.category] || []),
-            tracker,
-          ],
         }),
         {},
       ),
@@ -49,16 +35,7 @@ export default {
   },
   dialog: undefined,
   exceptionDialog: undefined,
-  render: ({
-    categories,
-    categoryList,
-    trackers,
-    readonly,
-    domain,
-    type,
-    dialog,
-    exceptionDialog,
-  }) => html`
+  render: ({ categories, groupedCategories, type }) => html`
     <template layout="column gap:0.5">
       <div layout="row items:center gap height::4.5">
         <div layout="row items:center gap grow">
@@ -66,7 +43,7 @@ export default {
           <slot name="header"></slot>
         </div>
         <slot name="actions"></slot>
-        ${trackers &&
+        ${type &&
         html`
           <ui-action-button-group>
             <ui-tooltip position="bottom">
@@ -99,7 +76,7 @@ export default {
       </div>
       <ui-switch>
         <ui-switch-item
-          active="${type === 'graph'}"
+          active="${!type || type === 'graph'}"
           layout="row gap:3 padding:0:1"
         >
           <ui-tracker-wheel
@@ -107,121 +84,31 @@ export default {
             layout="shrink:0 size:12 margin:top"
           ></ui-tracker-wheel>
           <div layout="column grow">
-            ${!categoryList.length &&
+            ${!groupedCategories.length &&
             html`
               <ui-text type="body-s" color="secondary" layout="grow row center">
                 No activities detected
               </ui-text>
             `}
-            ${categoryList.map(
+            ${groupedCategories.map(
               ([category, count]) => html`
                 <ui-category
                   name="${category}"
                   count="${count}"
-                  onclick="${trackers && html.set('type', 'list')}"
-                  actionable="${!!trackers}"
+                  onclick="${type && html.set('type', 'list')}"
+                  actionable="${!!type}"
                 ></ui-category>
               `,
             )}
           </div>
         </ui-switch-item>
-        ${trackers &&
+        ${type &&
         html`
           <ui-switch-item
             active="${type === 'list'}"
             layout="column grow height::104px"
           >
-            ${!trackers.length &&
-            html`
-              <ui-list layout="grow margin:0.5:0">
-                <ui-text
-                  type="body-s"
-                  color="secondary"
-                  layout="grow row center"
-                >
-                  No activities detected
-                </ui-text>
-              </ui-list>
-            `}
-            ${trackers.map(
-              ([name, trackers]) => html`
-                <ui-list
-                  name="${name}"
-                  layout:last-of-type="margin:bottom:0.5"
-                  layout:first-of-type="margin:top:0.5"
-                >
-                  <div slot="header" layout="row items:center gap">
-                    <ui-text type="label-s">${trackers.length}</ui-text>
-                  </div>
-
-                  <section id="content" layout="column gap:0.5">
-                    ${trackers.map(
-                      (tracker) => html`
-                        <div
-                          layout="row gap content:space-between items:center"
-                        >
-                          <ui-text type="body-s">
-                            <a
-                              href="${router.url(dialog, {
-                                trackerId: tracker.id,
-                              })}"
-                              layout="row items:center gap:0.5 padding:0.5:0"
-                              data-qa="button:tracker:${tracker.id}"
-                            >
-                              <ui-tooltip>
-                                <span slot="content">
-                                  View activity details
-                                </span>
-                                <ui-tracker-name>
-                                  ${tracker.name}
-                                </ui-tracker-name>
-                              </ui-tooltip>
-                              <ui-stats-badge>
-                                ${tracker.requestsCount}
-                              </ui-stats-badge>
-                              ${tracker.blocked &&
-                              html`<ui-icon
-                                name="block-s"
-                                color="danger-primary"
-                                data-qa="icon:tracker:${tracker.id}:blocked"
-                              ></ui-icon>`}
-                              ${tracker.modified &&
-                              html`<ui-icon
-                                name="eye"
-                                color="brand-primary"
-                                data-qa="icon:tracker:${tracker.id}:modified"
-                              ></ui-icon>`}
-                            </a>
-                          </ui-text>
-                          ${!readonly &&
-                          html`
-                            <ui-action-button layout="shrink:0 width:4.5">
-                              <a
-                                href="${router.url(exceptionDialog, {
-                                  trackerId: tracker.id,
-                                })}"
-                                layout="row center relative"
-                              >
-                                <ui-protection-status-icon
-                                  blockByDefault="${tracker.blockedByDefault}"
-                                  status="${store.ready(tracker.exception)
-                                    ? tracker.exception.getDomainStatus(domain)
-                                    : {
-                                        type: tracker.blockedByDefault
-                                          ? 'block'
-                                          : 'trust',
-                                      }}"
-                                ></ui-protection-status-icon>
-                              </a>
-                            </ui-action-button>
-                          `}
-                        </div>
-                      `,
-                    )}
-                  </section>
-                </ui-list>
-              `,
-            )}
+            <slot name="list"></slot>
           </ui-switch-item>
         `}
       </ui-switch>

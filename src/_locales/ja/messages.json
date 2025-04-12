@@ -420,6 +420,9 @@
   "ignore": {
     "message": "無視する"
   },
+  "in_panel_notifications": {
+    "message": "パネル内通知"
+  },
   "include_a_screenshot_of_the_current_page": {
     "message": "現在のページのスクリーンショットを含める"
   },
@@ -815,6 +818,9 @@
   },
   "trusted_on_this_website": {
     "message": "このウェブサイトで信頼済み"
+  },
+  "turns_ghostery_notifications_displayed_in_the_panel_on_or_off_": {
+    "message": "Ghosteryの通知をパネルに表示するかどうかを切り替えます。"
   },
   "uncovers_that_no_two_days_are_alike__with_ghostery__you_re_protected_each_day_": {
     "message": "どの日も同じではないことを明らかにします。Ghosteryを使えば、毎日保護されます。"

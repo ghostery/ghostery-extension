@@ -25,7 +25,6 @@ import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
 import { isOpera } from '/utils/browser-info.js';
 
-import { getException } from './exceptions.js';
 import * as logger from './logger.js';
 
 export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
@@ -142,7 +141,8 @@ function updateIcon(tabId, force) {
 const REQUESTS_LIMIT = 100;
 const OBSERVED_REQUESTS_LIMIT = 25;
 
-function pushTabStats(stats, requests) {
+async function pushTabStats(stats, requests) {
+  const options = await store.resolve(Options);
   let trackersUpdated = false;
 
   logger.sendRequests(requests);
@@ -150,9 +150,9 @@ function pushTabStats(stats, requests) {
   for (const request of requests) {
     const metadata =
       getMetadata(request) ||
-      // If exception (trusted) is added to the unidentified tracker
-      // we must generate metadata for the request on the fly
-      (getException(request.hostname) &&
+      ((request.blocked ||
+        request.modified ||
+        options.exceptions[request.hostname]) &&
         getUnidentifiedTracker(request.hostname));
 
     if (metadata) {
@@ -225,7 +225,7 @@ export async function updateTabStats(tabId, requests) {
       request.sourceHostname.endsWith(stats.hostname),
   );
 
-  let trackersUpdated = pushTabStats(stats, requests);
+  let trackersUpdated = await pushTabStats(stats, requests);
 
   if (
     __PLATFORM__ === 'safari' &&
@@ -268,7 +268,7 @@ export async function updateTabStats(tabId, requests) {
 
       if (notFoundRequests.length) {
         trackersUpdated =
-          pushTabStats(stats, notFoundRequests) || trackersUpdated;
+          (await pushTabStats(stats, notFoundRequests)) || trackersUpdated;
       }
     } catch (e) {
       console.error('[stats] Failed to get matched rules for stats', e);
@@ -349,22 +349,15 @@ if (__PLATFORM__ === 'safari') {
     if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
       switch (msg.action) {
         case 'updateTabStats':
-          // On Safari `onBeforeNavigate` event is not trigger correctly
-          // if a user navigates to the page by setting URL in the address bar.
-          // This condition ensures that we setup tabStats for the tab
-          // when `updateTabStats` message is received.
-          if (tabStats.get(sender.tab.id)?.url !== sender.url) {
-            setupTabStats({
-              tabId: sender.tab.id,
-              url: sender.url,
-              timeStamp: Date.now(),
-            });
-          }
-
           updateTabStats(
             sender.tab.id,
             msg.urls.map((url) =>
-              Request.fromRequestDetails({ url, originUrl: sender.url }),
+              Request.fromRequestDetails({
+                url,
+                originUrl: sender.url,
+                tabId: sender.tab.id,
+                requestId: Math.random().toString(36).substring(2, 20),
+              }),
             ),
           );
           break;

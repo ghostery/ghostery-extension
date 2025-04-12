@@ -16,29 +16,34 @@ export default {
   uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">
-      <ui-text type="label-s" layout="row items:center gap:0.5">
+      <ui-text type="label-s" color="inherit" layout="row items:center gap:0.5">
         <slot></slot>
       </ui-text>
     </template>
   `.css`
     :host {
       border-radius: 8px;
+      color: var(--color-primary);
       background: var(--background-secondary);
     }
 
     :host([type="brand"]) {
+      color: var(--color-brand-primary);
       background: var(--background-brand-secondary);
     }
 
     :host([type="success"]) {
+      color: var(--color-success-primary);
       background: var(--background-success-secondary);
     }
 
     :host([type="warning"]) {
+      color: var(--color-warning-primary);
       background: var(--background-warning-secondary);
     }
 
     :host([type="danger"]) {
+      color: var(--color-danger-primary);
       background: var(--background-danger-secondary);
     }
 

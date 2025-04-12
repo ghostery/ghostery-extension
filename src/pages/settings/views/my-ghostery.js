@@ -1,4 +1,15 @@
-import { html, store } from 'hybrids';
+/**
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2017-present Ghostery GmbH. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { html, msg, store } from 'hybrids';
 
 import { openTabWithUrl } from '/utils/tabs.js';
 
@@ -12,6 +23,7 @@ import {
 } from '/utils/urls.js';
 
 import assets from '../assets/index.js';
+import * as backup from '../utils/backup.js';
 
 function openGhosteryPage(url) {
   return async () => {
@@ -52,10 +64,26 @@ function openGhosteryPage(url) {
   };
 }
 
+async function importSettings(host, event) {
+  try {
+    host.importStatus = {
+      type: 'secondary',
+      msg: msg`Importing settings...`,
+    };
+    host.importStatus = {
+      type: 'success-secondary',
+      msg: await backup.importFromFile(event),
+    };
+  } catch (error) {
+    host.importStatus = { type: 'danger-secondary', msg: error.message };
+  }
+}
+
 export default {
   options: store(Options),
   session: store(Session),
-  render: ({ options, session }) => html`
+  importStatus: undefined,
+  render: ({ options, session, importStatus }) => html`
     <template layout="contents">
       <settings-page-layout>
         <section layout="column gap:4" layout@768px="gap:5">
@@ -143,14 +171,71 @@ export default {
                 onchange="${html.set(options, 'sync')}"
               >
                 <settings-option>
-                  Sync Settings
+                  Settings Sync
                   <span slot="description">
                     Saves and synchronizes your custom settings between browsers
                     and devices.
                   </span>
                 </settings-option>
               </ui-toggle>
+
+              <div layout="row gap:2">
+                <div layout="column grow gap:0.5">
+                  <ui-text type="headline-xs">Settings Backup</ui-text>
+                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
+                    Save your custom settings to a file, or restore them from a
+                    file.
+                  </ui-text>
+
+                  <ui-text
+                    type="body-xs"
+                    color="tertiary"
+                    layout="row gap:0.5 items:center"
+                  >
+                    <ui-icon name="info" layout="size:1.5"></ui-icon>
+                    Importing supports uBlock Origin file format with selected
+                    features.
+                  </ui-text>
+                  ${importStatus &&
+                  html`
+                    <ui-text type="body-s" color="${importStatus.type}">
+                      ${importStatus.msg}
+                    </ui-text>
+                  `}
+                </div>
+                <div layout="column gap" layout@768px="row">
+                  <ui-button size="s" onclick="${backup.exportToFile}">
+                    <button>
+                      <ui-icon name="arrow-square-up"></ui-icon> Export to file
+                    </button>
+                  </ui-button>
+                  <ui-button size="s">
+                    <label for="import-settings-input">
+                      <ui-icon name="arrow-square-down"></ui-icon> Import from
+                      file
+                    </label>
+                    <input
+                      id="import-settings-input"
+                      type="file"
+                      accept=".json,.txt"
+                      onchange="${importSettings}"
+                    />
+                  </ui-button>
+                </div>
+              </div>
             `}
+
+            <ui-toggle
+              value="${options.panel.notifications}"
+              onchange="${html.set(options, 'panel.notifications')}"
+            >
+              <settings-option>
+                In-Panel Notifications
+                <span slot="description">
+                  Turns Ghostery notifications displayed in the panel on or off.
+                </span>
+              </settings-option>
+            </ui-toggle>
 
             <div layout="row gap:2">
               <div layout="column grow gap:0.5">

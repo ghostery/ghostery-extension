@@ -12,32 +12,30 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
-import TrackerException from '/store/tracker-exception.js';
 
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
 import WebsitesAdd from './websites-add.js';
 
-function revoke(host, item) {
-  if (item.exceptions) {
-    for (const exception of item.exceptions) {
-      store.set(exception, {
-        blockedDomains: exception.blockedDomains.filter((d) => d !== item.id),
-        trustedDomains: exception.trustedDomains.filter((d) => d !== item.id),
-      });
-    }
-  }
-
-  store.set(host.options, { paused: { [item.id]: null } });
-}
-
 function revokeCallback(item) {
-  return (host, event) => {
+  return ({ options }, event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    revoke(host, item);
+    const exceptions = Array.from(item.exceptions).reduce((acc, id) => {
+      const exception = options.exceptions[id];
+      const domains = exception.domains.filter((d) => d !== item.id);
+
+      acc[id] =
+        exception.global || domains.length > 0
+          ? { ...exception, domains }
+          : null;
+
+      return acc;
+    }, {});
+
+    store.set(options, { paused: { [item.id]: null }, exceptions });
   };
 }
 
@@ -45,47 +43,34 @@ export default {
   [router.connect]: { stack: [WebsiteDetails, WebsitesAdd] },
   options: store(Options),
   query: '',
-  exceptions: () => {
-    const exceptions = store.get([TrackerException]);
-    if (!store.ready(exceptions)) return [];
-
-    const domains = new Map();
-
-    for (const exception of exceptions) {
-      for (const domain of exception.blockedDomains.concat(
-        exception.trustedDomains,
-      )) {
-        if (!domains.has(domain)) {
-          domains.set(domain, new Set([exception]));
-        } else {
-          const set = domains.get(domain);
-          set.add(exception);
-        }
-      }
-    }
-
-    return [...domains.entries()];
-  },
-  websites: ({ options, exceptions, query }) => {
-    const paused = store.ready(options)
-      ? Object.entries(options.paused).map(([id, { revokeAt }]) => ({
-          id,
-          revokeAt,
-        }))
-      : [];
+  websites: ({ options, query }) => {
+    if (!store.ready(options)) return [];
 
     query = query.toLowerCase().trim();
 
-    return [
-      ...paused
-        .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
-        .filter(({ id }) => !exceptions.some(([d]) => d === id)),
-      ...exceptions.map(([d, exceptions]) => ({
-        id: d,
-        revokeAt: paused.find((p) => p.id === d)?.revokeAt,
-        exceptions,
-      })),
-    ].filter((item) => item.id.includes(query));
+    const websites = Object.entries(options.paused)
+      .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
+      .map(([id, { revokeAt }]) => ({
+        id,
+        revokeAt,
+        exceptions: new Set(),
+      }));
+
+    Object.entries(options.exceptions).forEach(([id, { domains }]) => {
+      domains.forEach((domain) => {
+        const website = websites.find((e) => e.id === domain);
+        if (website) {
+          website.exceptions.add(id);
+        } else {
+          websites.push({
+            id: domain,
+            exceptions: new Set([id]),
+          });
+        }
+      });
+    });
+
+    return websites.filter(({ id }) => id.includes(query));
   },
   render: ({ websites, query }) => html`
     <template layout="contents">
@@ -176,7 +161,7 @@ export default {
                             layout@768px="grow self:auto"
                           >
                             <ui-text type="label-m">
-                              ${item.exceptions?.size}
+                              ${item.exceptions.size}
                             </ui-text>
                           </div>
                         </a>

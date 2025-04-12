@@ -13,13 +13,22 @@ import { store } from 'hybrids';
 import { parse } from 'tldts-experimental';
 
 import AutoSyncingMap from '/utils/map.js';
-
-import Tracker from './tracker.js';
-import TrackerException from './tracker-exception.js';
 import { getCurrentTab } from '/utils/tabs.js';
 
-const StatsTracker = {
-  ...Tracker,
+const Tracker = {
+  id: true,
+  name: '',
+  category: '',
+  categoryDescription: '',
+  organization: {
+    id: true,
+    name: '',
+    description: '',
+    country: '',
+    contact: '',
+    websiteUrl: '',
+    privacyPolicyUrl: '',
+  },
   blocked: false,
   modified: false,
   requests: [{ url: '', blocked: false, modified: false }],
@@ -34,16 +43,30 @@ let tab = undefined;
 
 const Stats = {
   hostname: '',
-  trackers: [StatsTracker],
+  trackers: [Tracker],
 
   displayHostname: ({ hostname }) => {
     hostname = hostname.replace(/^www\./, '');
     return hostname.length > 24 ? '...' + hostname.slice(-24) : hostname;
   },
+
   trackersBlocked: ({ trackers }) =>
     trackers.reduce((acc, { blocked }) => acc + Number(blocked), 0),
   trackersModified: ({ trackers }) =>
     trackers.reduce((acc, { modified }) => acc + Number(modified), 0),
+  groupedTrackers: ({ trackers }) =>
+    Object.entries(
+      trackers.reduce(
+        (categories, tracker) => ({
+          ...categories,
+          [tracker.category]: [
+            ...(categories[tracker.category] || []),
+            tracker,
+          ],
+        }),
+        {},
+      ),
+    ),
   categories: ({ trackers }) => trackers.map((t) => t.category),
   topCategories: ({ categories }) => {
     const counts = Object.entries(
@@ -75,29 +98,18 @@ const Stats = {
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
 
       if (tabStats && tab.url.includes(tabStats.hostname)) {
-        // Tracker has a reference to TrackerException,
-        //so we need to resolve exceptions
-        await store.resolve([TrackerException]);
-
         return tabStats;
       }
 
       return { hostname: parse(tab.url).hostname };
     },
-    observe:
-      __PLATFORM__ === 'safari' &&
-      (() => {
-        setTimeout(() => store.clear(Stats, false), 1000);
-      }),
   },
 };
 
 export default Stats;
 
-if (__PLATFORM__ !== 'safari') {
-  chrome.storage.onChanged.addListener((changes) => {
-    if (changes['tabStats:v1']) {
-      store.clear(Stats, false);
-    }
-  });
-}
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes['tabStats:v1']) {
+    store.clear(Stats, false);
+  }
+});

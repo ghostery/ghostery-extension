@@ -57,6 +57,15 @@ function addSelector(type, selector) {
   }
 }
 
+function addSelectors(el) {
+  if (el.className) {
+    el.classList.forEach((c) => addSelector('classes', c));
+  }
+
+  addSelector('ids', el.getAttribute('id'));
+  addSelector('hrefs', el.getAttribute('href'));
+}
+
 const injectCosmetics = debounce(
   () => {
     if (selectors.classes.size || selectors.ids.size || selectors.hrefs.size) {
@@ -104,13 +113,7 @@ const observer = new MutationObserver((mutations) => {
           while (el) {
             if (!visited.has(el)) {
               visited.add(el);
-
-              if (el.className) {
-                el.classList.forEach((c) => addSelector('classes', c));
-              }
-
-              addSelector('ids', el.getAttribute('id'));
-              addSelector('hrefs', el.getAttribute('href'));
+              addSelectors(el);
             }
 
             el = treeWalker.nextNode();
@@ -131,4 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
     childList: true,
     subtree: true,
   });
+
+  for (const el of document.querySelectorAll('[id],[class],[href]')) {
+    addSelectors(el);
+  }
+  injectCosmetics();
 });

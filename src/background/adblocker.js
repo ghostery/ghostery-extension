@@ -19,6 +19,7 @@ import scriptlets from '@ghostery/scriptlets';
 
 import Options, { ENGINES, getPausedDetails } from '/store/options.js';
 
+import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -26,7 +27,6 @@ import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
-import { getException } from './exceptions.js';
 import Config, {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
 } from '/store/config.js';
@@ -452,30 +452,12 @@ function isTrusted(request, type) {
     return false;
   }
 
-  const metadata = trackerdb.getMetadata(request);
-
-  // Get exception for known tracker (metadata id) or
-  // by the request hostname (unidentified tracker)
-  const exception = getException(metadata?.id || request.hostname);
-
-  if (exception) {
-    // The request is trusted if:
-    // - tracker is blocked, but tab hostname is added to trusted domains
-    // - tracker is not blocked and tab hostname is not found in the blocked domains
-    if (
-      exception.blocked
-        ? exception.trustedDomains.some((id) =>
-            request.sourceHostname.endsWith(id),
-          )
-        : !exception.blockedDomains.some((id) =>
-            request.sourceHostname.endsWith(id.sourceHostname),
-          )
-    ) {
-      return true;
-    }
-  }
-
-  return false;
+  return exceptions.getStatus(
+    options,
+    // Get exception for known tracker (metadata id) or by the request hostname (unidentified tracker)
+    trackerdb.getMetadata(request)?.id || request.hostname,
+    request.sourceHostname,
+  ).trusted;
 }
 
 if (__PLATFORM__ === 'firefox') {
