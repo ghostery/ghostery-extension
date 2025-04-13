@@ -71,7 +71,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 const SERP_URL_REGEXP =
-  /^https:[/][/][^/]*[.](google|bing)[.][a-z]+([.][a-z]+)?([/][a-z]+)*[/]search/;
+  /^https?:[/][/][^/]*[.](google|bing)[.][a-z]+([.][a-z]+)?([/][a-z]+)*[/]search/;
 
 // SERP tracking prevention and trackers preview content scripts
 chrome.webNavigation.onCommitted.addListener((details) => {
