@@ -2,13 +2,8 @@
   "@_0__left": {
     "message": "queda $${0}"
   },
-  "@_0__will_be_blocked_on_this_website_": {
-    "message": "Se bloqueará el rastreador $${0} en este sitio web.",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "Se considerará de confianza el rastreador $${0} en este sitio web.",
-    "description": "A tracker will be trusted on this website."
+    "message": "Se considerará de confianza el rastreador $${0} en este sitio web."
   },
   "1_day": {
     "message": "1 día"
@@ -106,14 +101,8 @@
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Siendo una empresa de la UE, Ghostery se adhiere estrictamente al RGPD (Reglamento General de Protección de Datos), que regula la recopilación de datos para garantizar la privacidad del usuario."
   },
-  "block_all__recommended_": {
-    "message": "Bloquear todo (recomendado)"
-  },
-  "block_on_all_websites": {
-    "message": "Bloquear en todos los sitios web"
-  },
-  "block_on_this_website": {
-    "message": "Bloquear en este sitio web"
+  "block_all": {
+    "message": "Bloquear todo"
   },
   "blocked": {
     "message": "Bloqueado"
@@ -199,10 +188,6 @@
   },
   "create_account": {
     "message": "Crear una cuenta"
-  },
-  "current_protection_status_for_@_0__": {
-    "message": "Estado de protección actual de $${0}:",
-    "description": "Current protection status for a tracker"
   },
   "custom": {
     "message": "Personalizado"
@@ -294,8 +279,14 @@
   "enter_website_url": {
     "message": "Introduce la URL del sitio web"
   },
+  "error__invalid_file_format_": {
+    "message": "Error: formato de archivo no válido."
+  },
   "error__type__message__stack_trace": {
     "message": "error: tipo, mensaje, traza de pila"
+  },
+  "error__unsupported_file_version_@_0____expected___1__": {
+    "message": "Error: versión de archivo no compatible $${0} - se esperaba $${1}."
   },
   "errors__@_0__": {
     "message": "Errores ($${0})"
@@ -315,6 +306,9 @@
   },
   "experimental_filters": {
     "message": "Filtros experimentales"
+  },
+  "export_to_file": {
+    "message": "Exportar a archivo"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "extensión: versión, fecha de instalación, número de instalación aleatorio (del 1 al 100), configuraciones básicas, estado de contribución"
@@ -419,6 +413,15 @@
   },
   "ignore": {
     "message": "Ignorar"
+  },
+  "import_from_file": {
+    "message": "Importar desde archivo"
+  },
+  "importing_settings___": {
+    "message": "Importando configuraciones..."
+  },
+  "importing_supports_ublock_origin_file_format_with_selected_features_": {
+    "message": "La importación es compatible con el formato de archivo de uBlock Origin con funciones seleccionadas."
   },
   "in_panel_notifications": {
     "message": "Notificaciones en el panel"
@@ -560,9 +563,6 @@
     "message": "Otros",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity": {
-    "message": "Lo que recomendamos para esta actividad"
-  },
   "pages_visited": {
     "message": "Páginas visitadas"
   },
@@ -647,6 +647,9 @@
   "save": {
     "message": "Guardar"
   },
+  "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
+    "message": "Guarde sus configuraciones personalizadas en un archivo o restáurelas desde un archivo."
+  },
   "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "Guarda y sincroniza tus ajustes personalizados en todos tus navegadores y dispositivos."
   },
@@ -667,6 +670,12 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "El SDK de Sentry se utiliza para recopilar y enviar los informes, pero Sentry solo recibe la información mencionada anteriormente: no se pueden vincular dos solicitudes entre sí y la IP del navegador nunca se comparte con Sentry."
+  },
+  "settings_backup": {
+    "message": "Copia de seguridad de la configuración"
+  },
+  "settings_sync": {
+    "message": "Sincronizar configuración"
   },
   "setup_successful": {
     "message": "La configuración ha terminado"
@@ -721,9 +730,6 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Suspende la protección de la privacidad a nivel mundial por 1 día."
   },
-  "sync_settings": {
-    "message": "Configuración de sincronización"
-  },
   "telemetry": {
     "message": "Telemetría",
     "description": "Tracker category name"
@@ -733,6 +739,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Gracias por tu apoyo a Ghostery en su afán por lograr que la privacidad sea un derecho humano básico en Internet."
+  },
+  "the_backup_from_@_0__imported_successfully_": {
+    "message": "La copia de seguridad de $${0} se importó correctamente."
   },
   "theme": {
     "message": "Tema"
@@ -796,9 +805,6 @@
   },
   "trends": {
     "message": "Tendencias"
-  },
-  "trust_all__recommended_": {
-    "message": "Confiar en todos (recomendado)"
   },
   "trust_on_all_websites": {
     "message": "Confianza en todos los sitios web"
@@ -881,6 +887,9 @@
   "website_exceptions": {
     "message": "Excepciones de sitios web"
   },
+  "website_statistical_report": {
+    "message": "Informe Estadístico del Sitio Web"
+  },
   "websites": {
     "message": "Sitios web"
   },
@@ -895,9 +904,6 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, operado por Ghostery, es un pilar vital de la tecnología anti-rastreo de inteligencia artificial de Ghostery, desempeñando un papel crucial en proporcionar protección de privacidad en tiempo real para la comunidad de Ghostery. Es un recurso global integral sobre rastreadores, aportando transparencia al seguimiento web."
-  },
-  "whotracks_me_privacy_report": {
-    "message": "Informe de Privacidad de WhoTracks.Me"
   },
   "whotracks_me_reports": {
     "message": "Informes de WhoTracks.Me"
@@ -925,6 +931,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Ya no verás las ruedas de los rastreadores junto a los resultados de búsqueda."
+  },
+  "your_browser_privacy_report": {
+    "message": "Tu Informe de Privacidad del Navegador"
   },
   "your_community_powered_privacy_features_": {
     "message": "Tus funciones de privacidad impulsadas por la comunidad:"
