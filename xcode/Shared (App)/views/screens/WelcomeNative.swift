@@ -111,19 +111,12 @@ fileprivate enum Icons {
     static let tap = "Tap"
 }
 
-struct WelcomView: View {
+struct WelcomeView: View {
     
     @State var theme = Theme.light
     
-    var donateButtonPressed: (() -> Void)?
-    
-    var stepByStepButtonPressed: () -> Void = {
-        guard let url = URL(string: "https://www.ghostery.com/blog"), UIApplication.shared.canOpenURL(url) else {
-            return
-        }
-        
-        UIApplication.shared.open(url)
-    }
+    var donateButtonPressed: () -> Void
+    var stepByStepButtonPressed: () -> Void
     
     var body: some View {
         ZStack(alignment: .center) {
@@ -252,7 +245,7 @@ struct WelcomView: View {
                 .multilineTextAlignment(.center)
                 .foregroundStyle(theme == .light ? Colors.lightTextColor : Colors.darkTextColor)
             Button {
-                donateButtonPressed?()
+                donateButtonPressed()
             } label: {
                 Text(Strings.donateButtonTitle)
                     .frame(height: Constants.donateButtonHeight)
@@ -264,7 +257,7 @@ struct WelcomView: View {
 }
 
 #Preview {
-  WelcomView()
+  WelcomeView(donateButtonPressed: {}, stepByStepButtonPressed: {})
 }
 
 fileprivate struct GhosteryButtonModifier: ViewModifier {
