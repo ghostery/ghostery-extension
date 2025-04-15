@@ -16,11 +16,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if !showSubscriptions {
-                WelcomeWebView(
-                    openInWebView: openInWebView,
-                    openSubscriptions: toggleSubscriptions
-                )
-                    .ignoresSafeArea()
+              WelcomView(stepByStepButtonPressed:  {
+                toggleSubscriptions()
+              })
             }
             if showSubscriptions {
                 Subscriptions(
