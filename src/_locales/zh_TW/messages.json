@@ -2,13 +2,8 @@
   "@_0__left": {
     "message": "還剩 $${0}"
   },
-  "@_0__will_be_blocked_on_this_website_": {
-    "message": "$${0} 將被此網站封鎖。",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} 將受此網站信任。",
-    "description": "A tracker will be trusted on this website."
+    "message": "$${0} 將受此網站信任。"
   },
   "1_day": {
     "message": "1 天"
@@ -106,14 +101,8 @@
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "作為一家歐盟公司，Ghostery 嚴格遵循 GDPR（通用數據保護條例），該條例規範數據收集以確保用戶隱私。."
   },
-  "block_all__recommended_": {
-    "message": "阻止所有（推薦）"
-  },
-  "block_on_all_websites": {
-    "message": "封鎖全部網站"
-  },
-  "block_on_this_website": {
-    "message": "在此網站封鎖"
+  "block_all": {
+    "message": "封鎖全部"
   },
   "blocked": {
     "message": "已封鎖"
@@ -199,10 +188,6 @@
   },
   "create_account": {
     "message": "創建帳戶"
-  },
-  "current_protection_status_for_@_0__": {
-    "message": "目前對 $${0} 的保護狀態：",
-    "description": "Current protection status for a tracker"
   },
   "custom": {
     "message": "自訂"
@@ -294,8 +279,14 @@
   "enter_website_url": {
     "message": "輸入網站網址"
   },
+  "error__invalid_file_format_": {
+    "message": "錯誤：無效的檔案格式。"
+  },
   "error__type__message__stack_trace": {
     "message": "錯誤：類型、訊息、堆疊追蹤"
+  },
+  "error__unsupported_file_version_@_0____expected___1__": {
+    "message": "錯誤：不支援的檔案版本 $${0} - 預期為 $${1}。"
   },
   "errors__@_0__": {
     "message": "錯誤 ($${0})"
@@ -315,6 +306,9 @@
   },
   "experimental_filters": {
     "message": "實驗性過濾器"
+  },
+  "export_to_file": {
+    "message": "匯出到檔案"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "擴充功能：版本、安裝日期、隨機安裝號碼（從1到100）、基本設定、貢獻狀態"
@@ -419,6 +413,15 @@
   },
   "ignore": {
     "message": "忽略"
+  },
+  "import_from_file": {
+    "message": "從檔案匯入"
+  },
+  "importing_settings___": {
+    "message": "匯入設定中..."
+  },
+  "importing_supports_ublock_origin_file_format_with_selected_features_": {
+    "message": "匯入支援 uBlock Origin 檔案格式的選定功能。"
   },
   "in_panel_notifications": {
     "message": "面板內通知"
@@ -560,9 +563,6 @@
     "message": "其他",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity": {
-    "message": "我們對此活動的推薦"
-  },
   "pages_visited": {
     "message": "瀏覽的頁面"
   },
@@ -647,6 +647,9 @@
   "save": {
     "message": "儲存"
   },
+  "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
+    "message": "將您的自訂設定儲存到檔案，或從檔案還原設定。"
+  },
   "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "保存您的自定义设置并在浏览器和设备之间同步。"
   },
@@ -667,6 +670,12 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK 用於收集和發送報告，但 Sentry 只接收上述信息——兩個請求之間無法互相關聯，且瀏覽器 IP 永遠不會與 Sentry 共享。."
+  },
+  "settings_backup": {
+    "message": "設定備份"
+  },
+  "settings_sync": {
+    "message": "設定同步"
   },
   "setup_successful": {
     "message": "設定成功"
@@ -721,9 +730,6 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "全球暫停隱私保護一天。"
   },
-  "sync_settings": {
-    "message": "同步設定"
-  },
   "telemetry": {
     "message": "遙測",
     "description": "Tracker category name"
@@ -733,6 +739,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "感謝你支持 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
+  },
+  "the_backup_from_@_0__imported_successfully_": {
+    "message": "來自 $${0} 的備份已成功匯入。"
   },
   "theme": {
     "message": "主題"
@@ -796,9 +805,6 @@
   },
   "trends": {
     "message": "趨勢"
-  },
-  "trust_all__recommended_": {
-    "message": "信任一切（推薦)"
   },
   "trust_on_all_websites": {
     "message": "信任所有網站"
@@ -881,6 +887,9 @@
   "website_exceptions": {
     "message": "網站例外"
   },
+  "website_statistical_report": {
+    "message": "網站統計報告"
+  },
   "websites": {
     "message": "網站"
   },
@@ -895,9 +904,6 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me由Ghostery運營，是Ghostery人工智慧反追蹤技術的重要基石，在為Ghostery社群提供即時隱私保護方面發揮了關鍵作用。它是一個關於追蹤器的全面全球資源，為網路追蹤帶來透明度。"
-  },
-  "whotracks_me_privacy_report": {
-    "message": "WhoTracks.Me 隱私報告"
   },
   "whotracks_me_reports": {
     "message": "WhoTracks.Me 報告"
@@ -925,6 +931,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"
+  },
+  "your_browser_privacy_report": {
+    "message": "您的瀏覽器隱私報告"
   },
   "your_community_powered_privacy_features_": {
     "message": "您的社群驅動隱私功能："

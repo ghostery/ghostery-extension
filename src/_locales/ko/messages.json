@@ -2,13 +2,8 @@
   "@_0__left": {
     "message": "$${0} 남음"
   },
-  "@_0__will_be_blocked_on_this_website_": {
-    "message": "이 웹 사이트에서 $${0} 항목이 차단됩니다.",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "이 웹 사이트에서 $${0} 항목이 허용됩니다.",
-    "description": "A tracker will be trusted on this website."
+    "message": "이 웹 사이트에서 $${0} 항목이 허용됩니다."
   },
   "1_day": {
     "message": "1 일"
@@ -106,14 +101,8 @@
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Ghostery는 유럽 연합 기반의 회사로 사용자 개인정보 보호를 위해 데이터 수집을 규제하는 GDPR을 엄격하게 준수합니다."
   },
-  "block_all__recommended_": {
-    "message": "모두 차단 (권장됨)"
-  },
-  "block_on_all_websites": {
-    "message": "모든 웹사이트에서 차단"
-  },
-  "block_on_this_website": {
-    "message": "이 웹 사이트에서 차단됩니다."
+  "block_all": {
+    "message": "모두 차단"
   },
   "blocked": {
     "message": "차단"
@@ -199,10 +188,6 @@
   },
   "create_account": {
     "message": "새 계정 만들기"
-  },
-  "current_protection_status_for_@_0__": {
-    "message": "$${0}의 현재 보호 상태",
-    "description": "Current protection status for a tracker"
   },
   "custom": {
     "message": "사용자 정의"
@@ -294,8 +279,14 @@
   "enter_website_url": {
     "message": "웹 사이트 URL 입력"
   },
+  "error__invalid_file_format_": {
+    "message": "오류: 잘못된 파일 형식."
+  },
   "error__type__message__stack_trace": {
     "message": "오류: 유형, 메시지, 스택 추적"
+  },
+  "error__unsupported_file_version_@_0____expected___1__": {
+    "message": "지원되지 않는 파일 버전 $${0} - 예상 $${1}."
   },
   "errors__@_0__": {
     "message": "오류 ($${0})"
@@ -315,6 +306,9 @@
   },
   "experimental_filters": {
     "message": "실험적 필터"
+  },
+  "export_to_file": {
+    "message": "파일로 내보내기"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "확장 프로그램: 버전, 설치 날짜, 무작위 설치 번호 (1에서 100까지), 기본 설정, 기여 상태"
@@ -419,6 +413,15 @@
   },
   "ignore": {
     "message": "무시"
+  },
+  "import_from_file": {
+    "message": "파일에서 가져오기"
+  },
+  "importing_settings___": {
+    "message": "설정을 가져오는 중..."
+  },
+  "importing_supports_ublock_origin_file_format_with_selected_features_": {
+    "message": "uBlock Origin 파일 형식의 선택된 기능을 지원하는 가져오기."
   },
   "in_panel_notifications": {
     "message": "패널 내 알림"
@@ -560,9 +563,6 @@
     "message": "분류되지 않음",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity": {
-    "message": "이 활동에 제시된 권장 사항"
-  },
   "pages_visited": {
     "message": "방문한 페이지"
   },
@@ -647,6 +647,9 @@
   "save": {
     "message": "저장"
   },
+  "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
+    "message": "사용자 설정을 파일에 저장하거나 파일에서 복원하세요."
+  },
   "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "여러 브라우저와 기기에서 설정을 동기화하고 저장합니다."
   },
@@ -667,6 +670,12 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK는 위 정보만을 토대로 보고서를 전송하기 위해 사용됩니다. 요청이 여러 개 전송되더라도 각각은 연관성을 가지지 않으며 IP주소는 Sentry와 공유되지 않습니다."
+  },
+  "settings_backup": {
+    "message": "설정 백업"
+  },
+  "settings_sync": {
+    "message": "설정 동기화"
   },
   "setup_successful": {
     "message": "설정을 끝마쳤습니다"
@@ -721,9 +730,6 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "모든 웹 사이트에서 1 일 동안 개인정보 보호를 중지합니다."
   },
-  "sync_settings": {
-    "message": "동기화 설정"
-  },
   "telemetry": {
     "message": "측정 보고",
     "description": "Tracker category name"
@@ -733,6 +739,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주셔서 진심으로 감사드립니다!"
+  },
+  "the_backup_from_@_0__imported_successfully_": {
+    "message": "$${0}에서 가져온 백업이 성공적으로 가져와졌습니다."
   },
   "theme": {
     "message": "테마"
@@ -796,9 +805,6 @@
   },
   "trends": {
     "message": "동향"
-  },
-  "trust_all__recommended_": {
-    "message": "모두 허용 (권장됨)"
   },
   "trust_on_all_websites": {
     "message": "모든 웹사이트에서 허용"
@@ -881,6 +887,9 @@
   "website_exceptions": {
     "message": "예외된 웹 사이트"
   },
+  "website_statistical_report": {
+    "message": "웹사이트 통계 보고서"
+  },
   "websites": {
     "message": "웹 사이트"
   },
@@ -895,9 +904,6 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me는 Ghostery가 운영하는 서비스로, Ghostery의 AI 기반 추적 방지 기술의 중요한 초석이며, Ghostery 커뮤니티에 실시간 개인정보 보호를 제공하는 데 중요한 역할을 합니다. 이 서비스는 전 세계의 추적기에 대한 포괄적인 자료로, 웹 추적의 투명성을 제공합니다."
-  },
-  "whotracks_me_privacy_report": {
-    "message": "후트랙스.미 개인정보 보호 보고서"
   },
   "whotracks_me_reports": {
     "message": "WhoTracks.Me 보고서"
@@ -925,6 +931,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "이제 검색 결과 옆에 트래커 휠을 더 이상 표시하지 않습니다."
+  },
+  "your_browser_privacy_report": {
+    "message": "브라우저 개인정보 보호 보고서"
   },
   "your_community_powered_privacy_features_": {
     "message": "귀하의 커뮤니티 기반 개인정보 보호 기능:"

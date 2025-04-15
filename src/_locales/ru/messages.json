@@ -2,13 +2,8 @@
   "@_0__left": {
     "message": "$${0} left"
   },
-  "@_0__will_be_blocked_on_this_website_": {
-    "message": "Трекер $${0} будет заблокирован на этом сайте.",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "Трекер $${0} будет разрешен на этом сайте.",
-    "description": "A tracker will be trusted on this website."
+    "message": "Трекер $${0} будет разрешен на этом сайте."
   },
   "1_day": {
     "message": "1 день"
@@ -106,14 +101,8 @@
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Будучи компанией из ЕС, Ghostery строго соблюдает GDPR (Общий регламент по защите данных), который регулирует сбор данных для обеспечения конфиденциальности пользователей."
   },
-  "block_all__recommended_": {
-    "message": "Заблокировать все (рекомендуется)"
-  },
-  "block_on_all_websites": {
-    "message": "Блокировать на всех сайтах"
-  },
-  "block_on_this_website": {
-    "message": "Заблокировать на этом сайте"
+  "block_all": {
+    "message": "Заблокировать все"
   },
   "blocked": {
     "message": "Заблокированные"
@@ -199,10 +188,6 @@
   },
   "create_account": {
     "message": "Создать учетную запись"
-  },
-  "current_protection_status_for_@_0__": {
-    "message": "Текущий статус $${0}: ",
-    "description": "Current protection status for a tracker"
   },
   "custom": {
     "message": "Пользовательский"
@@ -294,8 +279,14 @@
   "enter_website_url": {
     "message": "Enter website URL"
   },
+  "error__invalid_file_format_": {
+    "message": "Ошибка: недопустимый формат файла."
+  },
   "error__type__message__stack_trace": {
     "message": "ошибка: тип, сообщение, трассировка стека"
+  },
+  "error__unsupported_file_version_@_0____expected___1__": {
+    "message": "Ошибка: неподдерживаемая версия файла $${0} - ожидается $${1}."
   },
   "errors__@_0__": {
     "message": "Ошибки ($${0})"
@@ -315,6 +306,9 @@
   },
   "experimental_filters": {
     "message": "Экспериментальные фильтры"
+  },
+  "export_to_file": {
+    "message": "Экспорт в файл"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "расширение: версия, дата установки, случайный номер установки (от 1 до 100), основные настройки, статус вклада"
@@ -419,6 +413,15 @@
   },
   "ignore": {
     "message": "Игнорировать"
+  },
+  "import_from_file": {
+    "message": "Импорт из файла"
+  },
+  "importing_settings___": {
+    "message": "Импорт настроек..."
+  },
+  "importing_supports_ublock_origin_file_format_with_selected_features_": {
+    "message": "Импорт поддерживает формат файлов uBlock Origin с выбранными функциями."
   },
   "in_panel_notifications": {
     "message": "Уведомления в панели"
@@ -560,9 +563,6 @@
     "message": "Другое",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity": {
-    "message": "Рекомендации для этого действия"
-  },
   "pages_visited": {
     "message": "Посещенные страницы"
   },
@@ -647,6 +647,9 @@
   "save": {
     "message": "Сохранить"
   },
+  "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
+    "message": "Сохраните ваши настройки в файл или восстановите их из файла."
+  },
   "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "Сохраняйте свои настройки и синхронизируйте их между браузерами и устройствами."
   },
@@ -667,6 +670,12 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "SDK Sentry используется для сбора и отправки отчетов, но Sentry получает только вышеуказанную информацию - никакие два запроса не могут быть связаны друг с другом, и IP-адрес браузера никогда не передается в Sentry."
+  },
+  "settings_backup": {
+    "message": "Резервное копирование настроек"
+  },
+  "settings_sync": {
+    "message": "Синхронизация настроек"
   },
   "setup_successful": {
     "message": "Настройка завершена"
@@ -721,9 +730,6 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Приостанавливает защиту конфиденциальности по всему миру на 1 день."
   },
-  "sync_settings": {
-    "message": "Настройки синхронизации"
-  },
   "telemetry": {
     "message": "Телеметрия",
     "description": "Tracker category name"
@@ -733,6 +739,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
+  },
+  "the_backup_from_@_0__imported_successfully_": {
+    "message": "Резервная копия из $${0} успешно импортирована."
   },
   "theme": {
     "message": "Тема"
@@ -796,9 +805,6 @@
   },
   "trends": {
     "message": "Тренды"
-  },
-  "trust_all__recommended_": {
-    "message": "Доверяйте всем (рекомендуется)"
   },
   "trust_on_all_websites": {
     "message": "Доверие на всех сайтах"
@@ -881,6 +887,9 @@
   "website_exceptions": {
     "message": "Сайты-исключения"
   },
+  "website_statistical_report": {
+    "message": "Отчет о статистике веб-сайта"
+  },
   "websites": {
     "message": "Веб-сайты"
   },
@@ -895,9 +904,6 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, управляемый Ghostery, является важнейшим элементом технологии Ghostery по борьбе с отслеживанием на основе ИИ, играя ключевую роль в обеспечении защиты конфиденциальности в реальном времени для сообщества Ghostery. Это всеобъемлющий глобальный ресурс о трекерах, обеспечивающий прозрачность веб-отслеживания."
-  },
-  "whotracks_me_privacy_report": {
-    "message": "Отчет о конфиденциальности WhoTracks.Me"
   },
   "whotracks_me_reports": {
     "message": "КтоСледит.Меня Отчеты"
@@ -925,6 +931,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Вы больше не будете видеть статистику трекера рядом с результатами поиска."
+  },
+  "your_browser_privacy_report": {
+    "message": "Отчет о конфиденциальности вашего браузера"
   },
   "your_community_powered_privacy_features_": {
     "message": "Ваши функции конфиденциальности, поддерживаемые сообществом:"
