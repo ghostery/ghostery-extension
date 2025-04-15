@@ -16,9 +16,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if !showSubscriptions {
-              WelcomView(stepByStepButtonPressed:  {
-                toggleSubscriptions()
-              })
+              WelcomeView(
+                donateButtonPressed: {
+                  toggleSubscriptions()
+                }, stepByStepButtonPressed: {
+                  guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
+                  openInWebView(url)
+                })
             }
             if showSubscriptions {
                 Subscriptions(
