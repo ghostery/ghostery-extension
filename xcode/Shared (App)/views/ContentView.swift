@@ -20,7 +20,7 @@ struct ContentView: View {
                 donateButtonPressed: {
                   toggleSubscriptions()
                 }, stepByStepButtonPressed: {
-                  guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
+                  guard let url = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-the-ghostery-ad-blocker-extension-on-your-iphone") else { return }
                   openInWebView(url)
                 })
             }
