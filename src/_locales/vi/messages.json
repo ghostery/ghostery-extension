@@ -2,13 +2,8 @@
   "@_0__left": {
     "message": "$${0} trái"
   },
-  "@_0__will_be_blocked_on_this_website_": {
-    "message": "$${0} will be blocked on this website.",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0} will be trusted on this website.",
-    "description": "A tracker will be trusted on this website."
+    "message": "$${0} will be trusted on this website."
   },
   "1_day": {
     "message": "1 ngày"
@@ -106,14 +101,8 @@
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "Being an EU company, Ghostery strictly adheres to the GDPR (The General Data Protection Regulation), which regulates data collection to ensure user's privacy."
   },
-  "block_all__recommended_": {
-    "message": "Block all (recommended)"
-  },
-  "block_on_all_websites": {
-    "message": "Block on all websites"
-  },
-  "block_on_this_website": {
-    "message": "Block on this website"
+  "block_all": {
+    "message": "Chặn tất cả"
   },
   "blocked": {
     "message": "Blocked"
@@ -199,10 +188,6 @@
   },
   "create_account": {
     "message": "Tạo tài khoản"
-  },
-  "current_protection_status_for_@_0__": {
-    "message": "Current protection status for $${0}:",
-    "description": "Current protection status for a tracker"
   },
   "custom": {
     "message": "Tùy chỉnh"
@@ -294,8 +279,14 @@
   "enter_website_url": {
     "message": "Enter website URL"
   },
+  "error__invalid_file_format_": {
+    "message": "Lỗi: định dạng tệp không hợp lệ."
+  },
   "error__type__message__stack_trace": {
     "message": "error: type, message, stack trace"
+  },
+  "error__unsupported_file_version_@_0____expected___1__": {
+    "message": "Lỗi: phiên bản tệp không được hỗ trợ $${0} - mong đợi $${1}."
   },
   "errors__@_0__": {
     "message": "Errors ($${0})"
@@ -315,6 +306,9 @@
   },
   "experimental_filters": {
     "message": "Experimental Filters"
+  },
+  "export_to_file": {
+    "message": "Xuất ra tệp"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "extension: version, installation date, random install number (from 1 to 100), basic settings, contribution status"
@@ -419,6 +413,15 @@
   },
   "ignore": {
     "message": "Không chấp nhận"
+  },
+  "import_from_file": {
+    "message": "Nhập từ tệp"
+  },
+  "importing_settings___": {
+    "message": "Đang nhập cài đặt..."
+  },
+  "importing_supports_ublock_origin_file_format_with_selected_features_": {
+    "message": "Hỗ trợ nhập khẩu định dạng tệp uBlock Origin với các tính năng đã chọn."
   },
   "in_panel_notifications": {
     "message": "Thông báo trong bảng điều khiển"
@@ -560,9 +563,6 @@
     "message": "Khá",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity": {
-    "message": "Our recommendation for this activity"
-  },
   "pages_visited": {
     "message": "Các trang đã truy cập"
   },
@@ -647,6 +647,9 @@
   "save": {
     "message": "Save"
   },
+  "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
+    "message": "Lưu cài đặt tùy chỉnh của bạn vào một tệp, hoặc khôi phục chúng từ một tệp."
+  },
   "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "Saves and synchronizes your custom settings between browsers and devices."
   },
@@ -667,6 +670,12 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDK is in use to gather and send the reports, but Sentry does only receive information above - no two requests can be linked with one another and browser IP is never shared with Sentry."
+  },
+  "settings_backup": {
+    "message": "Sao lưu cài đặt"
+  },
+  "settings_sync": {
+    "message": "Đồng bộ cài đặt"
   },
   "setup_successful": {
     "message": "Thiết lập thành công"
@@ -721,9 +730,6 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "Suspends privacy protection globally for 1 day."
   },
-  "sync_settings": {
-    "message": "Cài đặt đồng bộ hóa"
-  },
   "telemetry": {
     "message": "Từ xa",
     "description": "Tracker category name"
@@ -733,6 +739,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Cảm ơn bạn đã hỗ trợ trong cuộc chiến của Ghostery vì một trang web nơi quyền riêng tư là quyền cơ bản của con người!"
+  },
+  "the_backup_from_@_0__imported_successfully_": {
+    "message": "Bản sao lưu từ $${0} đã được nhập thành công."
   },
   "theme": {
     "message": "Giao diện"
@@ -796,9 +805,6 @@
   },
   "trends": {
     "message": "Xu hướng"
-  },
-  "trust_all__recommended_": {
-    "message": "Trust all (recommended)"
   },
   "trust_on_all_websites": {
     "message": "Trust on all websites"
@@ -881,6 +887,9 @@
   "website_exceptions": {
     "message": "Website exceptions"
   },
+  "website_statistical_report": {
+    "message": "Báo Cáo Thống Kê Trang Web"
+  },
   "websites": {
     "message": "Các trang web"
   },
@@ -895,9 +904,6 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Me, được điều hành bởi Ghostery, là một nền tảng quan trọng trong công nghệ chống theo dõi AI của Ghostery, đóng vai trò then chốt trong việc cung cấp bảo vệ quyền riêng tư theo thời gian thực cho cộng đồng Ghostery. Đây là một nguồn tài nguyên toàn cầu toàn diện về các trình theo dõi, mang lại sự minh bạch cho việc theo dõi web."
-  },
-  "whotracks_me_privacy_report": {
-    "message": "Báo Cáo Quyền Riêng Tư WhoTracks.Me"
   },
   "whotracks_me_reports": {
     "message": "Báo cáo WhoTracks.Me"
@@ -925,6 +931,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."
+  },
+  "your_browser_privacy_report": {
+    "message": "Báo Cáo Quyền Riêng Tư Trình Duyệt Của Bạn"
   },
   "your_community_powered_privacy_features_": {
     "message": "Các tính năng bảo mật do cộng đồng cung cấp của bạn:"

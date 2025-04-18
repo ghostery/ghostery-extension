@@ -2,13 +2,8 @@
   "@_0__left": {
     "message": "$${0} 残"
   },
-  "@_0__will_be_blocked_on_this_website_": {
-    "message": "$${0}はこのウェブサイトでブロックされます。",
-    "description": "A tracker will be trusted on this website."
-  },
   "@_0__will_be_trusted_on_this_website_": {
-    "message": "$${0}はこのウェブサイトで信頼可能です。",
-    "description": "A tracker will be trusted on this website."
+    "message": "$${0}はこのウェブサイトで信頼可能です。"
   },
   "1_day": {
     "message": "1日"
@@ -106,14 +101,8 @@
   "being_an_eu_company__ghostery_strictly_adheres_to_the_gdpr__the_general_data_protection_regulation___which_regulates_data_collection_to_ensure_user_s_privacy_": {
     "message": "EU企業であるGhosteryは、ユーザーのプライバシーを確保するためにデータ収集を規制するGDPR（一般データ保護規則）を厳格に遵守しています。."
   },
-  "block_all__recommended_": {
-    "message": "すべてをブロック (推奨)"
-  },
-  "block_on_all_websites": {
-    "message": "すべてのウェブサイトでブロック"
-  },
-  "block_on_this_website": {
-    "message": "このウェブサイトでブロック"
+  "block_all": {
+    "message": "すべてをブロック"
   },
   "blocked": {
     "message": "ブロックされた対象"
@@ -199,10 +188,6 @@
   },
   "create_account": {
     "message": "アカウントを作成"
-  },
-  "current_protection_status_for_@_0__": {
-    "message": "$${0}の現在の保護ステータス: ",
-    "description": "Current protection status for a tracker"
   },
   "custom": {
     "message": "カスタム"
@@ -294,8 +279,14 @@
   "enter_website_url": {
     "message": "ウェブサイトのURLを入力"
   },
+  "error__invalid_file_format_": {
+    "message": "エラー: 無効なファイル形式。"
+  },
   "error__type__message__stack_trace": {
     "message": "エラー: タイプ、メッセージ、スタックトレース"
+  },
+  "error__unsupported_file_version_@_0____expected___1__": {
+    "message": "エラー: サポートされていないファイルバージョン $${0} - 期待されるバージョンは $${1} です。"
   },
   "errors__@_0__": {
     "message": "エラー ($${0})"
@@ -315,6 +306,9 @@
   },
   "experimental_filters": {
     "message": "実験的フィルター"
+  },
+  "export_to_file": {
+    "message": "ファイルにエクスポート"
   },
   "extension__version__installation_date__random_install_number__from_1_to_100___basic_settings__contribution_status": {
     "message": "拡張機能: バージョン、インストール日、ランダムインストール番号 (1から100まで)、基本設定、貢献状況"
@@ -419,6 +413,15 @@
   },
   "ignore": {
     "message": "無視する"
+  },
+  "import_from_file": {
+    "message": "ファイルからインポート"
+  },
+  "importing_settings___": {
+    "message": "設定をインポートしています..."
+  },
+  "importing_supports_ublock_origin_file_format_with_selected_features_": {
+    "message": "uBlock Originのファイル形式のインポートは、選択された機能に対応しています。"
   },
   "in_panel_notifications": {
     "message": "パネル内通知"
@@ -560,9 +563,6 @@
     "message": "その他",
     "description": "Tracker category name"
   },
-  "our_recommendation_for_this_activity": {
-    "message": "このアクティビティのおすすめ"
-  },
   "pages_visited": {
     "message": "訪問したページ"
   },
@@ -647,6 +647,9 @@
   "save": {
     "message": "保存"
   },
+  "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
+    "message": "カスタム設定をファイルに保存するか、ファイルから復元してください。"
+  },
   "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
     "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
   },
@@ -667,6 +670,12 @@
   },
   "sentry_sdk_is_in_use_to_gather_and_send_the_reports__but_sentry_does_only_receive_information_above___no_two_requests_can_be_linked_with_one_another_and_browser_ip_is_never_shared_with_sentry_": {
     "message": "Sentry SDKはレポートを収集して送信するために使用されていますが、Sentryが受け取る情報は上記のもののみであり、2つのリクエストが互いにリンクされることはなく、ブラウザのIPがSentryと共有されることはありません。."
+  },
+  "settings_backup": {
+    "message": "設定のバックアップ"
+  },
+  "settings_sync": {
+    "message": "同期設定"
   },
   "setup_successful": {
     "message": "セットアップ成功"
@@ -721,9 +730,6 @@
   "suspends_privacy_protection_globally_for_1_day_": {
     "message": "1日間、グローバルにプライバシー保護を一時停止します。"
   },
-  "sync_settings": {
-    "message": "同期設定"
-  },
   "telemetry": {
     "message": "テレメトリー",
     "description": "Tracker category name"
@@ -733,6 +739,9 @@
   },
   "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
     "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
+  },
+  "the_backup_from_@_0__imported_successfully_": {
+    "message": "$${0}からのバックアップが正常にインポートされました。"
   },
   "theme": {
     "message": "テーマ"
@@ -796,9 +805,6 @@
   },
   "trends": {
     "message": "トレンド"
-  },
-  "trust_all__recommended_": {
-    "message": "すべてを信頼する（推奨)"
   },
   "trust_on_all_websites": {
     "message": "すべてのウェブサイトで信頼済み"
@@ -881,6 +887,9 @@
   "website_exceptions": {
     "message": "ウェブサイトの例外"
   },
+  "website_statistical_report": {
+    "message": "ウェブサイト統計レポート"
+  },
   "websites": {
     "message": "ウェブサイト"
   },
@@ -895,9 +904,6 @@
   },
   "whotracks_me__operated_by_ghostery__is_a_vital_cornerstone_of_ghostery_s_ai_anti_tracking_technology__playing_a_crucial_role_in_providing_real_time_privacy_protection_for_the_ghostery_community__it_is_a_comprehensive_global_resource_on_trackers__bringing_transparency_to_web_tracking_": {
     "message": "WhoTracks.Meは、Ghosteryによって運営されており、GhosteryのAIアンチトラッキング技術の重要な基盤であり、Ghosteryコミュニティにリアルタイムのプライバシー保護を提供する上で重要な役割を果たしています。これは、トラッカーに関する包括的なグローバルリソースであり、ウェブトラッキングに透明性をもたらします。"
-  },
-  "whotracks_me_privacy_report": {
-    "message": "WhoTracks.Meプライバシーレポート"
   },
   "whotracks_me_reports": {
     "message": "WhoTracks.Meレポート"
@@ -925,6 +931,9 @@
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"
+  },
+  "your_browser_privacy_report": {
+    "message": "ブラウザのプライバシーレポート"
   },
   "your_community_powered_privacy_features_": {
     "message": "コミュニティ主導のプライバシー機能:"
