@@ -83,12 +83,18 @@ function getWheelElement(stats, popupUrl) {
   return container;
 }
 
+const SELECTORS = [
+  '[data-hveid] div.yuRUbf > div > span > a',
+  '[data-hveid] div.yuRUbf > div > a',
+  '[data-hveid] div.xpd a.cz3goc',
+  '[data-hveid] > .xpd > div.kCrYT:first-child > a',
+  '[data-hveid] div.OhZyZc > a',
+].join(', ');
+
 function setupTrackersPreview(popupUrl) {
-  const elements = [
-    ...window.document.querySelectorAll(
-      '[data-hveid] div.yuRUbf > div > span > a, [data-hveid] div.yuRUbf > div > a, [data-hveid] div.xpd a.cz3goc, [data-hveid] > .xpd > div.kCrYT:first-child > a',
-    ),
-  ].filter((el) => !el.dataset.wtm);
+  const elements = [...window.document.querySelectorAll(SELECTORS)].filter(
+    (el) => !el.dataset.wtm,
+  );
 
   if (elements.length) {
     const links = elements.map((el) => {
