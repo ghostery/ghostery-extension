@@ -16,11 +16,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if !showSubscriptions {
-                WelcomeWebView(
-                    openInWebView: openInWebView,
-                    openSubscriptions: toggleSubscriptions
-                )
-                    .ignoresSafeArea()
+              WelcomeView(
+                donateButtonPressed: {
+                  toggleSubscriptions()
+                }, stepByStepButtonPressed: {
+                  guard let url = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-the-ghostery-ad-blocker-extension-on-your-iphone") else { return }
+                  openInWebView(url)
+                })
             }
             if showSubscriptions {
                 Subscriptions(
