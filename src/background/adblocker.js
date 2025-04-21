@@ -246,7 +246,7 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-function injectScriptlets(filters, tabId, frameId, hostname) {
+function injectScriptlets(filters, tabId, frameId, hostname, debugMarker) {
   let contentScript = '';
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -297,6 +297,24 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
         }
       },
     );
+    if (debugMarker) {
+      chrome.scripting.executeScript({
+        injectImmediately: true,
+        world:
+          chrome.scripting.ExecutionWorld?.MAIN ??
+          (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+        target: {
+          tabId,
+          frameIds: [frameId],
+        },
+        func: function (debugMarker) {
+          console.debug(
+            `[ghostery-debug] marker=${debugMarker} readyState=${document.readyState}`,
+          );
+        },
+        args: [debugMarker],
+      });
+    }
   }
 
   if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
@@ -329,7 +347,7 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
-  const { bootstrap: isBootstrap, scriptletsOnly } = config;
+  const { bootstrap: isBootstrap, scriptletsOnly, debugMarker } = config;
 
   try {
     setup.pending && (await setup.pending);
@@ -339,6 +357,8 @@ async function injectCosmetics(details, config) {
   }
 
   const { frameId, url, tabId, documentId } = details;
+
+  console.log(debugMarker, documentId, executedDocumentIds.has(documentId));
 
   if (
     __PLATFORM__ === 'chromium' &&
@@ -409,7 +429,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptFilters, tabId, frameId, hostname);
+      injectScriptlets(scriptFilters, tabId, frameId, hostname, debugMarker);
     }
 
     if (scriptletsOnly) {
@@ -450,7 +470,10 @@ async function injectCosmetics(details, config) {
 
 chrome.webNavigation.onCommitted.addListener(
   (details) => {
-    injectCosmetics(details, { bootstrap: true });
+    injectCosmetics(details, {
+      bootstrap: true,
+      debugMarker: 'webNavigation.onCommitted',
+    });
   },
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
 );
@@ -463,7 +486,10 @@ if (__PLATFORM__ === 'chromium') {
       if (!ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED) {
         return;
       }
-      injectCosmetics(details, { bootstrap: true });
+      injectCosmetics(details, {
+        bootstrap: true,
+        debugMarker: 'webRequest.onResponseStarted',
+      });
     },
     { urls: ['http://*/*', 'https://*/*'] },
   );
