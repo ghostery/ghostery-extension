@@ -19,6 +19,8 @@ export const ACTION_PAUSE_ASSISTANT = 'pause-assistant';
 export const FLAG_PAUSE_ASSISTANT = 'pause-assistant';
 export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
   'firefox-content-script-scriptlets';
+export const FLAG_CHROMIUM_SCRIPTING_ONRESPONSESTARTED =
+  'chromium-scripting-onresponsestarted';
 
 const Config = {
   enabled: true,

@@ -28,6 +28,7 @@ import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import Config, {
+  FLAG_CHROMIUM_SCRIPTING_ONRESPONSESTARTED,
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
 } from '/store/config.js';
 
@@ -93,6 +94,23 @@ if (__PLATFORM__ === 'firefox') {
     }
   });
 }
+
+let ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED = false;
+if (__PLATFORM__ === 'chromium') {
+  store.resolve(Config).then((config) => {
+    const enabled = config.hasFlag(FLAG_CHROMIUM_SCRIPTING_ONRESPONSESTARTED);
+    if (!enabled) contentScripts.unregisterAll();
+
+    ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED = enabled;
+  });
+}
+
+// Use `documentId` field from Chromium `webRequest` and `webNavigation` events
+// to determine if cosmetic injection is already happened. Note that this is
+// not available on Firefox yet. If we need to listen from multiple events on
+// Firefox, we need to calculate a hash of tab and frame to generate `documentId`
+// on the fly.
+const executedDocumentIds = new Set();
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -320,7 +338,19 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  const { frameId, url, tabId } = details;
+  const { frameId, url, tabId, documentId } = details;
+
+  if (
+    __PLATFORM__ === 'chromium' &&
+    ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED &&
+    documentId !== undefined
+  ) {
+    if (executedDocumentIds.has(documentId)) {
+      executedDocumentIds.delete(documentId);
+      return;
+    }
+    executedDocumentIds.add(documentId);
+  }
 
   const parsed = parse(url);
   const domain = parsed.domain || '';
@@ -424,6 +454,20 @@ chrome.webNavigation.onCommitted.addListener(
   },
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
 );
+
+if (__PLATFORM__ === 'chromium') {
+  // `webNavigation.onCommitted` may be triggered too late on cached responses.
+  // TODO: This still doesn't catch navigations from Chrome address bar (Omnibox).
+  chrome.webRequest.onResponseStarted.addListener(
+    (details) => {
+      if (!ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED) {
+        return;
+      }
+      injectCosmetics(details, { bootstrap: true });
+    },
+    { urls: ['http://*/*', 'https://*/*'] },
+  );
+}
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'injectCosmetics' && sender.tab) {
