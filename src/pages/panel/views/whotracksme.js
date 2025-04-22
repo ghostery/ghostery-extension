@@ -68,7 +68,7 @@ export default {
                 html`
                   <ui-action>
                     <a
-                      href="${wtmLink}"
+                      href="${link}"
                       onclick="${openTabWithUrl}"
                       layout="row gap:2"
                     >
