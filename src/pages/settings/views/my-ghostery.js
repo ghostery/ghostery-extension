@@ -179,7 +179,7 @@ export default {
                 </settings-option>
               </ui-toggle>
 
-              <div layout="row gap:2">
+              <div layout="column gap:2" layout@768px="row">
                 <div layout="column grow gap:0.5">
                   <ui-text type="headline-xs">Settings Backup</ui-text>
                   <ui-text type="body-m" mobile-type="body-s" color="secondary">
@@ -187,12 +187,7 @@ export default {
                     file.
                   </ui-text>
 
-                  <ui-text
-                    type="body-xs"
-                    color="tertiary"
-                    layout="row gap:0.5 items:center"
-                  >
-                    <ui-icon name="info" layout="size:1.5"></ui-icon>
+                  <ui-text type="body-xs" color="tertiary">
                     Importing supports uBlock Origin file format with selected
                     features.
                   </ui-text>
@@ -203,7 +198,7 @@ export default {
                     </ui-text>
                   `}
                 </div>
-                <div layout="column gap" layout@768px="row">
+                <div layout="row:wrap gap">
                   <ui-button size="s" onclick="${backup.exportToFile}">
                     <button>
                       <ui-icon name="arrow-square-up"></ui-icon> Export to file
