@@ -112,6 +112,17 @@ if (__PLATFORM__ === 'chromium') {
 // on the fly.
 const executedDocumentIds = new Set();
 
+/**
+ * Computes a unique id corresponding to specific tab and frame.
+ * `documentId` may not available from `webRequest` event callbacks as the
+ * document may not present at the time of event occurrence.
+ * @param {number} tabId
+ * @param {number} frameId
+ */
+function computeDocumentId(tabId, frameId) {
+  return (tabId * 38) ^ (frameId * 483);
+}
+
 function getEnabledEngines(config) {
   if (config.terms) {
     const list = ENGINES.filter(({ key }) => config[key]).map(
@@ -356,15 +367,13 @@ async function injectCosmetics(details, config) {
     return;
   }
 
-  const { frameId, url, tabId, documentId } = details;
-
-  console.log(debugMarker, documentId, executedDocumentIds.has(documentId));
+  const { frameId, url, tabId } = details;
 
   if (
     __PLATFORM__ === 'chromium' &&
-    ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED &&
-    documentId !== undefined
+    ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED
   ) {
+    const documentId = computeDocumentId(tabId, frameId);
     if (executedDocumentIds.has(documentId)) {
       executedDocumentIds.delete(documentId);
       return;
