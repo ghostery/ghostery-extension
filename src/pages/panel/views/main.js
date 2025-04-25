@@ -106,6 +106,21 @@ function openLogger() {
   window.open(url, 'Ghostery Logger', features);
 }
 
+async function openElementPicker() {
+  const tab = await getCurrentTab();
+  if (tab) {
+    chrome.runtime.sendMessage({
+      action: 'openElementPicker',
+      tabId: tab.id,
+    });
+    chrome.tabs.update(tab.id, {
+      active: true,
+    });
+
+    window.close();
+  }
+}
+
 export default {
   [router.connect]: {
     stack: [
@@ -142,32 +157,8 @@ export default {
         html`
           <ui-header>
             ${stats.hostname &&
-            (options.terms
-              ? html`
-                  <panel-managed managed="${managedConfig.disableUserControl}">
-                    <ui-action>
-                      <a
-                        href="${chrome.runtime.getURL(
-                          '/pages/settings/index.html#@settings-website-details?domain=' +
-                            stats.hostname,
-                        )}"
-                        onclick="${openTabWithUrl}"
-                        layout="row gap:2px items:center"
-                      >
-                        <ui-text type="label-m"
-                          >${stats.displayHostname}</ui-text
-                        >
-                        ${!managedConfig.disableUserControl &&
-                        html`<ui-icon
-                          name="chevron-down"
-                          layout="size:1.5"
-                          color="secondary"
-                        ></ui-icon>`}
-                      </a>
-                    </ui-action>
-                  </panel-managed>
-                `
-              : stats.displayHostname)}
+            managedConfig.disableUserControl &&
+            html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
             <ui-action slot="icon">
               <a href="https://www.ghostery.com" onclick="${openTabWithUrl}">
                 <ui-icon name="logo"></ui-icon>
@@ -182,6 +173,45 @@ export default {
               </ui-action>
             `}
           </ui-header>
+          ${stats.hostname &&
+          !managedConfig.disableUserControl &&
+          html`
+            <panel-actions hostname="${stats.displayHostname}">
+              <panel-actions-button onclick="${openElementPicker}">
+                <button>
+                  <panel-actions-icon
+                    name="hide-element"
+                    color="success-primary"
+                  ></panel-actions-icon>
+                  Hide content block
+                </button>
+              </panel-actions-button>
+              <panel-actions-button>
+                <a href="${router.url(ReportForm)}">
+                  <panel-actions-icon
+                    name="report"
+                    color="danger-primary"
+                  ></panel-actions-icon>
+                  Report a broken page
+                </a>
+              </panel-actions-button>
+              <panel-actions-button>
+                <a
+                  onclick="${openTabWithUrl}"
+                  href="${chrome.runtime.getURL(
+                    '/pages/settings/index.html#@settings-website-details?domain=' +
+                      stats.hostname,
+                  )}"
+                >
+                  <panel-actions-icon
+                    name="settings"
+                    color="wtm-primary"
+                  ></panel-actions-icon>
+                  Access website settings
+                </a>
+              </panel-actions-button>
+            </panel-actions>
+          `}
         `}
         <section
           id="panel-alerts"

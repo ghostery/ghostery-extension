@@ -26,7 +26,7 @@ export default {
   render: ({ options, session, stats }) => html`
     <template layout="grid grow">
       <ui-header>
-        Menu
+        <ui-text type="label-m">Menu</ui-text>
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
             <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
