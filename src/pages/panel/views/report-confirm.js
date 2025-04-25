@@ -17,10 +17,10 @@ export default {
   render: () => html`
     <template layout="column grow">
       <ui-header>
-        <div layout="row gap items:center">
+        <ui-text type="label-m" layout="row gap items:center">
           <ui-icon name="report" layout="size:2"></ui-icon>
           Report a broken page
-        </div>
+        </ui-text>
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
             <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
