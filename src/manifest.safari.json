@@ -18,15 +18,15 @@
   ],
   "host_permissions": ["http://*/*", "https://*/*", "ws://*/*", "wss://*/*"],
   "icons": {
-    "32": "/icons/icon.svg",
-    "64": "/icons/icon.svg",
-    "128": "/icons/icon.svg"
+    "32": "icons/icon.svg",
+    "64": "icons/icon.svg",
+    "128": "icons/icon.svg"
   },
   "action": {
     "default_icon": {
-      "32": "/icons/icon.svg",
-      "64": "/icons/icon.svg",
-      "128": "/icons/icon.svg"
+      "32": "icons/icon.svg",
+      "64": "icons/icon.svg",
+      "128": "icons/icon.svg"
     },
     "default_title": "Ghostery",
     "default_popup": "pages/panel/index.html"
