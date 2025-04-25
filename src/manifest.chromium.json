@@ -101,12 +101,17 @@
     {
       "js": ["content_scripts/prevent-serp-tracking.js"],
       "run_at": "background_execute_script"
+    },
+    {
+      "js": ["content_scripts/element-picker.js"],
+      "run_at": "background_execute_script"
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
         "pages/trackers-preview/index.html",
+        "pages/element-picker/index.html",
         "pages/notifications/opera-serp.html",
         "pages/notifications/pause-assistant.html",
         "pages/notifications/pause-resume.html",

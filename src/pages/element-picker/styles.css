@@ -1,0 +1,12 @@
+input[type='range'] {
+  accent-color: var(--background-wtm-solid);
+  border-radius: 3px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+input[type='range']:focus-visible {
+  outline: 2px solid var(--border-brand-solid);
+  outline-offset: 3px;
+}
