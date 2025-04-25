@@ -12,19 +12,19 @@
 import { html } from 'hybrids';
 
 export default {
-  type: { value: '', reflect: true },
-  render: () => html`
-    <template layout="block padding:1.5">
-      <slot></slot>
-    </template>
-  `.css`
-    :host {
-      background: var(--background-secondary);
-      border-radius: 8px;
-    }
-
-    :host([type="info"]) {
-      background: var(--background-brand-primary);
-    }
-  `,
+  name: '',
+  color: '',
+  render: ({ name, color }) =>
+    html`
+      <template layout="block padding">
+        <ui-icon name="${name}" color="${color}" layout="size:3">
+          <slot></slot>
+        </ui-icon>
+      </template>
+    `.css`
+      :host {
+        background: var(--background-${color});
+        border-radius: 50%;
+      }
+    `,
 };

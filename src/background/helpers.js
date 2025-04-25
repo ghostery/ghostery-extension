@@ -23,6 +23,24 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case 'openPrivateWindowWithUrl':
       chrome.windows.create({ url: msg.url, incognito: true });
       break;
+    case 'openElementPicker':
+      chrome.scripting.executeScript(
+        {
+          injectImmediately: true,
+          world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
+          target: {
+            tabId: msg.tabId,
+          },
+          files: ['/content_scripts/element-picker.js'],
+        },
+        () => {
+          if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+          }
+        },
+      );
+      break;
+
     // This is used only by the e2e tests to detect idle state
     case 'idleOptionsObservers': {
       OptionsObserver.waitForIdle().then(() => {
