@@ -30,7 +30,9 @@ try {
       if (values) {
         const exceptions = {};
         Object.entries(values).forEach(([id, { blocked, trustedDomains }]) => {
-          exceptions[id] = { global: !blocked, domains: trustedDomains };
+          if (!blocked || trustedDomains.length > 0) {
+            exceptions[id] = { global: !blocked, domains: trustedDomains };
+          }
         });
 
         await store.set(Options, { exceptions });
@@ -89,26 +91,20 @@ async function updateFilters() {
             }
           }
 
+          if (domains && domains.length) {
+            if (__PLATFORM__ === 'safari') {
+              rule.condition.domains = domains
+                .map((d) => `*${d}`)
+                .concat(rule.condition.domains || []);
+            } else {
+              rule.condition.initiatorDomains = domains.concat(
+                rule.condition.initiatorDomains || [],
+              );
+            }
+          }
+
           rules.push({
             ...rule,
-            condition: {
-              ...rule.condition,
-              // Add domain condition to the rule
-              ...(__PLATFORM__ === 'safari'
-                ? {
-                    domains:
-                      domains &&
-                      domains
-                        .map((d) => `*${d}`)
-                        .concat(rule.condition.domains || []),
-                  }
-                : {
-                    initiatorDomains:
-                      domains &&
-                      domains.concat(rule.condition.initiatorDomains || []),
-                  }),
-            },
-            // Internal prefix + priority
             priority: 2000000 + rule.priority,
           });
         }
