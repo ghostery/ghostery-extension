@@ -47,7 +47,7 @@
     "@ghostery/adblocker-webextension": "^2.5.0",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@github/relative-time-element": "^4.4.5",
-    "@sentry/browser": "^9.13.0",
+    "@sentry/browser": "^9.14.0",
     "@whotracksme/reporting": "^6.3.1",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.11.0",
