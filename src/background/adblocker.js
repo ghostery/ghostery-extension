@@ -112,6 +112,10 @@ if (__PLATFORM__ === 'chromium') {
 // on the fly.
 const executedDocumentIds = new Set();
 
+// http://isthe.com/chongo/tech/comp/fnv/
+const FNV_1A_PRIME = 16777619;
+const FNV_1A_OFFSET_BASIS = 2166136261;
+
 /**
  * Computes a unique id corresponding to specific tab and frame.
  * `documentId` may not available from `webRequest` event callbacks as the
@@ -120,7 +124,26 @@ const executedDocumentIds = new Set();
  * @param {number} frameId
  */
 function computeDocumentId(tabId, frameId) {
-  return (tabId * 38) ^ (frameId * 483);
+  let hash = FNV_1A_OFFSET_BASIS;
+  let iter = 0;
+  while (tabId > 0) {
+    hash = hash ^ tabId % 10;
+    hash = hash * FNV_1A_PRIME;
+    tabId = (tabId / 10) >>> 0;
+    iter++;
+  }
+  hash = hash ^ iter;
+  hash = hash * FNV_1A_PRIME;
+  iter = 0;
+  while (frameId > 0) {
+    hash = hash ^ frameId % 10;
+    hash = hash * FNV_1A_PRIME;
+    frameId = (frameId / 10) >>> 0;
+    iter++;
+  }
+  hash = hash ^ iter;
+  hash = hash * FNV_1A_PRIME;
+  return hash;
 }
 
 function getEnabledEngines(config) {
