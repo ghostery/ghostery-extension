@@ -43,8 +43,8 @@
   },
   "dependencies": {
     "@duckduckgo/autoconsent": "^12.17.0",
-    "@ghostery/adblocker": "^2.5.0",
-    "@ghostery/adblocker-webextension": "^2.5.0",
+    "@ghostery/adblocker": "^2.5.2",
+    "@ghostery/adblocker-webextension": "^2.5.2",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@github/relative-time-element": "^4.4.5",
     "@sentry/browser": "^9.14.0",
