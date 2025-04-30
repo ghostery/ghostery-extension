@@ -55,7 +55,7 @@
     "idb": "^8.0.2",
     "jwt-decode": "^4.0.0",
     "plotly.js-basic-dist": "^3.0.1",
-    "tldts-experimental": "^7.0.1"
+    "tldts-experimental": "^7.0.4"
   },
   "engineStrict": true,
   "engines": {
