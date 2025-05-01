@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
-    "@types/chrome": "^0.0.315",
+    "@types/chrome": "^0.0.317",
     "@wdio/browser-runner": "9.2.1",
     "@wdio/cli": "9.2.1",
     "@wdio/globals": "9.2.1",
@@ -38,7 +38,7 @@
     "prettier": "^3.5.3",
     "sinon-chrome": "^3.0.1",
     "vite": "^6.3.2",
-    "web-ext": "^8.5.0",
+    "web-ext": "^8.6.0",
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
@@ -47,7 +47,7 @@
     "@ghostery/adblocker-webextension": "^2.5.0",
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@github/relative-time-element": "^4.4.5",
-    "@sentry/browser": "^9.13.0",
+    "@sentry/browser": "^9.14.0",
     "@whotracksme/reporting": "^6.3.1",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.11.0",
@@ -55,7 +55,7 @@
     "idb": "^8.0.2",
     "jwt-decode": "^4.0.0",
     "plotly.js-basic-dist": "^3.0.1",
-    "tldts-experimental": "^7.0.1"
+    "tldts-experimental": "^7.0.4"
   },
   "engineStrict": true,
   "engines": {
