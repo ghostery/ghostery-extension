@@ -156,7 +156,7 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
-  define: { __PLATFORM__: JSON.stringify(argv.target) },
+  define: { __PLATFORM__: JSON.stringify(argv.target), __RESOURCES__: [] },
   build: {
     outDir: options.outDir,
     assetsDir: '',
@@ -270,40 +270,41 @@ if (manifest.declarative_net_request?.rule_resources) {
       );
     }
   }
+}
 
-  // copy redirect rule resources
-  mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
-    recursive: true,
-  });
-  for (const file of readdirSync(
-    resolve(options.srcDir, 'rule_resources', 'redirects'),
-  )) {
-    cpSync(
-      resolve(options.srcDir, 'rule_resources', 'redirects', file),
-      resolve(options.outDir, 'rule_resources', 'redirects', file),
-    );
-  }
-
-  // append web_accessible_resources
-  const redirectResources = readdirSync(
-    resolve(options.srcDir, 'rule_resources/redirects'),
+// copy redirect rule resources
+mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
+  recursive: true,
+});
+for (const file of readdirSync(
+  resolve(options.srcDir, 'rule_resources', 'redirects'),
+)) {
+  cpSync(
+    resolve(options.srcDir, 'rule_resources', 'redirects', file),
+    resolve(options.outDir, 'rule_resources', 'redirects', file),
   );
+}
 
-  if (manifest.manifest_version === 3) {
-    manifest.web_accessible_resources.push({
-      resources: redirectResources.map((filename) =>
-        join('rule_resources/redirects', filename),
-      ),
-      matches: ['<all_urls>'],
-      use_dynamic_url: true,
-    });
-  } else {
-    redirectResources.forEach((filename) =>
-      manifest.web_accessible_resources.push(
-        join('rule_resources/redirects', filename),
-      ),
+// append web_accessible_resources
+const redirectResources = readdirSync(
+  resolve(options.srcDir, 'rule_resources/redirects'),
+);
+
+if (manifest.manifest_version === 3) {
+  manifest.web_accessible_resources.push({
+    resources: redirectResources.map((filename) =>
+      join('rule_resources/redirects', filename),
+    ),
+    matches: ['<all_urls>'],
+    use_dynamic_url: true,
+  });
+} else {
+  redirectResources.forEach((filename) => {
+    manifest.web_accessible_resources.push(
+      join('rule_resources/redirects', filename),
     );
-  }
+    config.define.__RESOURCES__.push(filename);
+  });
 }
 
 // --- Generate entry points ---

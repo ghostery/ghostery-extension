@@ -33,6 +33,8 @@ import Config, {
 
 let options = Options;
 
+const WEB_ACCESSIBLE_RESOURCES = new Set(__RESOURCES__);
+
 const contentScripts = (() => {
   const map = new Map();
   return {
@@ -495,8 +497,22 @@ if (__PLATFORM__ === 'firefox') {
         const { redirect, match } = engine.match(request);
 
         if (redirect !== undefined) {
-          request.blocked = true;
-          result = { redirectUrl: redirect.dataUrl };
+          // There's a possibility that redirecting to file URL can expose
+          // extension existence.
+          if (
+            details.type !== 'xmlhttprequest' &&
+            WEB_ACCESSIBLE_RESOURCES.has(redirect.name)
+          ) {
+            request.blocked = true;
+            result = {
+              redirectUrl: chrome.runtime.getURL(
+                'rule_resources/redirects/' + redirect.name,
+              ),
+            };
+          } else {
+            request.blocked = true;
+            result = { redirectUrl: redirect.dataUrl };
+          }
         } else if (match === true) {
           request.blocked = true;
           result = { cancel: true };
