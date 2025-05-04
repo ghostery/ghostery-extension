@@ -110,11 +110,10 @@ if (__PLATFORM__ === 'chromium') {
 // not available on Firefox yet. If we need to listen from multiple events on
 // Firefox, we need to calculate a hash of tab and frame to generate `documentId`
 // on the fly.
+/**
+ * @type {Set<string>}
+ */
 const executedDocumentIds = new Set();
-
-// http://isthe.com/chongo/tech/comp/fnv/
-const FNV_1A_PRIME = 16777619;
-const FNV_1A_OFFSET_BASIS = 2166136261;
 
 /**
  * Computes a unique id corresponding to specific tab and frame.
@@ -124,30 +123,7 @@ const FNV_1A_OFFSET_BASIS = 2166136261;
  * @param {number} frameId
  */
 function computeDocumentId(tabId, frameId) {
-  let hash = FNV_1A_OFFSET_BASIS;
-  let iter = 0;
-  while (tabId > 0) {
-    hash = hash ^ tabId % 10;
-    hash = hash * FNV_1A_PRIME;
-    tabId = (tabId / 10) >>> 0;
-    iter++;
-  }
-  hash = hash ^ iter;
-  hash = hash * FNV_1A_PRIME;
-  // The iteration is responsible for numeric sequence recognition.
-  // Setting any integer value higher than 16 is enough to distinguish,
-  // `tabId` and `frameId` in hash. Because the decimal representation of
-  // `Number.MAX_SAFE_INTEGER` is the length of 16.
-  iter = 128;
-  while (frameId > 0) {
-    hash = hash ^ frameId % 10;
-    hash = hash * FNV_1A_PRIME;
-    frameId = (frameId / 10) >>> 0;
-    iter++;
-  }
-  hash = hash ^ iter;
-  hash = hash * FNV_1A_PRIME;
-  return hash;
+  return `${tabId},${frameId}`;
 }
 
 function getEnabledEngines(config) {
