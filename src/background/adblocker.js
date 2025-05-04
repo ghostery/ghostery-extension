@@ -134,7 +134,11 @@ function computeDocumentId(tabId, frameId) {
   }
   hash = hash ^ iter;
   hash = hash * FNV_1A_PRIME;
-  iter = 0;
+  // The iteration is responsible for numeric sequence recognition.
+  // Setting any integer value higher than 16 is enough to distinguish,
+  // `tabId` and `frameId` in hash. Because the decimal representation of
+  // `Number.MAX_SAFE_INTEGER` is the length of 16.
+  iter = 128;
   while (frameId > 0) {
     hash = hash ^ frameId % 10;
     hash = hash * FNV_1A_PRIME;
