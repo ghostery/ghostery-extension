@@ -198,7 +198,7 @@ export default {
                     </ui-text>
                   `}
                 </div>
-                <div layout="row:wrap gap">
+                <div layout="row:wrap gap" layout@768px="content:end">
                   <ui-button size="s" onclick="${backup.exportToFile}">
                     <button>
                       <ui-icon name="arrow-square-up"></ui-icon> Export to file
