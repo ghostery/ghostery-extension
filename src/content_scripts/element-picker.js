@@ -56,13 +56,6 @@ const GLOBAL_STYLES = `
   }
 `;
 
-const LOGO_ICON = `
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; transition: opacity 0.2s">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 10.5C19.5 14.6421 16.1421 18 12 18C7.85788 18 4.5 14.6421 4.5 10.5C4.5 6.35788 7.85788 3 12 3C16.1421 3 19.5 6.35788 19.5 10.5Z" fill="#FFFFFE"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9062 19.9302C20.9109 17.6415 20.7395 15.7022 20.7128 14.9403V8.67118C20.7128 3.88205 16.8111 0 11.9985 0C7.18528 0 3.28347 3.88205 3.28347 8.67118V15.0309C3.24629 15.8507 3.05072 17.7306 2.09383 19.9302C0.807675 22.8858 1.87209 22.5335 2.82549 22.2904C3.77876 22.0482 5.90772 21.0989 6.57281 22.2683C7.23763 23.4372 7.79225 24.4523 9.3443 23.7904C10.8965 23.1288 11.6279 22.9083 11.8495 22.9083H12.151C12.3723 22.9083 13.104 23.1288 14.656 23.7904C16.2081 24.4523 16.7624 23.4372 17.4276 22.2683C18.0925 21.0989 20.2213 22.0482 21.1748 22.2904C22.1282 22.5335 23.1921 22.8858 21.9062 19.9302ZM9.30859 4.72821C10.2472 4.72821 11.0082 5.92624 11.0082 7.4046C11.0082 8.88282 10.2472 10.0813 9.30859 10.0813C8.36995 10.0813 7.60888 8.88282 7.60888 7.4046C7.60888 5.92624 8.36995 4.72821 9.30859 4.72821ZM11.9985 15.4259C9.93006 15.4259 8.18888 13.4004 7.66419 11.1466C8.6776 12.5328 10.2417 13.4237 11.9985 13.4237C13.7551 13.4237 15.3191 12.5328 16.3326 11.1466C15.8079 13.4004 14.0665 15.4259 11.9985 15.4259ZM14.6884 10.0813C13.749 10.0813 12.9884 8.88282 12.9884 7.4046C12.9884 5.92624 13.749 4.72821 14.6884 4.72821C15.6275 4.72821 16.3879 5.92624 16.3879 7.4046C16.3879 8.88282 15.6275 10.0813 14.6884 10.0813Z" fill="#00AEF0"/>
-  </svg>
-`;
-
 function getSelectorCount(selector, childSelector) {
   return document.querySelectorAll(
     childSelector ? `${selector} > ${childSelector}` : selector,
@@ -203,42 +196,37 @@ function setupElementPickerPopup() {
         border: 'none',
       });
 
-      await delay(100);
-
-      picker.innerHTML = LOGO_ICON;
-
-      const icon = picker.querySelector('svg');
-      const size =
-        Math.max(picker.clientWidth, picker.clientHeight) * 1.5 + 'px';
-
-      Object.assign(icon.style, {
-        width: size,
-        height: size,
-        opacity: 1,
-      });
-
-      await delay(200);
+      await delay(250);
 
       Object.assign(picker.style, {
-        background: 'transparent',
+        mask: `
+          url("data:image/svg+xml,%3Csvg width='21' height='21' viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.7552 17.1085C17.9258 15.2012 17.7829 13.5852 17.7607 12.9503V7.72599C17.7607 3.73504 14.5093 0.5 10.4987 0.5C6.48773 0.5 3.23622 3.73504 3.23622 7.72599V13.0258C3.20524 13.7089 3.04227 15.2755 2.24486 17.1085C1.17306 19.5715 2.06007 19.2779 2.85458 19.0753C3.64897 18.8735 5.4231 18.0824 5.97734 19.0569C6.53135 20.031 6.99354 20.8769 8.28692 20.3254C9.58041 19.774 10.1899 19.5902 10.3746 19.5902H10.6258C10.8102 19.5902 11.42 19.774 12.7133 20.3254C14.0067 20.8769 14.4687 20.031 15.023 19.0569C15.5771 18.0824 17.3511 18.8735 18.1457 19.0753C18.9402 19.2779 19.8268 19.5715 18.7552 17.1085Z' fill='white'/%3E%3C/svg%3E") center center no-repeat,
+          linear-gradient(#000 0 0)
+        `,
+        maskSize: `1px 1px`,
+        maskComposite: 'exclude',
         transition: 'none',
       });
 
-      Object.assign(icon.style, {
-        width: '24px',
-        height: '24px',
-        opacity: '0',
-        transition:
-          'width 1s ease-in-out, height 1s ease-in-out, opacity 1.5s ease-in-out',
+      await delay(0);
+
+      const size =
+        Math.max(picker.clientWidth, picker.clientHeight) * 1.5 + 'px';
+
+      Object.assign(picker.style, {
+        maskSize: `${size} ${size}`,
+        transition: 'all 0.75s 0.1s ease-in',
       });
     });
+
+    await delay(250);
 
     globalStyles.sheet.insertRule(
       `${selector} { visibility: hidden !important; opacity: 0 !important; }`,
       globalStyles.sheet.cssRules.length,
     );
 
-    await delay(1500);
+    await delay(1000);
 
     globalStyles.sheet.insertRule(
       `${selector} { display: none !important; }`,
