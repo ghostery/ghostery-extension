@@ -32,6 +32,14 @@ export const tabStats = new AutoSyncingMap({ storageKey: 'tabStats:v1' });
 const chromeAction = chrome.action || chrome.browserAction;
 
 const { icons } = chrome.runtime.getManifest();
+
+// We need to add a leading slash to the icon paths§
+if (__PLATFORM__ !== 'firefox') {
+  Object.keys(icons).forEach((key) => {
+    icons[key] = `/${icons[key]}`;
+  });
+}
+
 const inactiveIcons = Object.keys(icons).reduce((acc, key) => {
   acc[key] = icons[key].replace('.', '-inactive.');
   return acc;
