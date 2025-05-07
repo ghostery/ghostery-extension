@@ -13,7 +13,7 @@ import { html, store, router, msg } from 'hybrids';
 
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 import * as exceptions from '/utils/exceptions.js';
 
@@ -53,17 +53,29 @@ function reloadTab(host, event) {
 }
 
 async function togglePause(host, event) {
-  const { paused, pauseType } = event.target;
-
   host.alert = '';
 
-  await store.set(host.options, {
-    paused: {
-      [host.stats.hostname]: !paused
-        ? { revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType }
-        : null,
-    },
-  });
+  const { paused, pauseType } = event.target;
+  const { options, stats } = host;
+
+  if (paused) {
+    const pausedHostname = Object.keys(options.paused)
+      .sort()
+      .reverse()
+      .find((domain) => stats.hostname.endsWith(domain));
+
+    store.set(options, {
+      paused: { [pausedHostname]: null },
+    });
+  } else {
+    await store.set(options, {
+      paused: {
+        [stats.hostname]: {
+          revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
+        },
+      },
+    });
+  }
 
   host.alert = paused
     ? msg`Ghostery has been resumed on this site.`
@@ -110,7 +122,7 @@ export default {
   notification: store(Notification),
   alert: '',
   paused: ({ options, stats }) =>
-    store.ready(options, stats) && options.paused[stats.hostname],
+    store.ready(options, stats) && !!getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
   render: ({
