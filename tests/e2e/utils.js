@@ -83,14 +83,9 @@ export async function setWhoTracksMeToggle(name, value) {
 }
 
 export async function switchToPanel(fn) {
-  const current = await browser.getTitle();
+  const currentUrl = await browser.getUrl();
   const panelUrl = getExtensionPageURL('panel');
 
-  await browser
-    .switchWindow('Ghostery panel')
-    .catch(() => browser.newWindow(panelUrl));
-
-  await browser.url('about:blank');
   await browser.url(panelUrl);
 
   // The panel has a bugfix for closing the panel when links are clicked.
@@ -108,12 +103,7 @@ export async function switchToPanel(fn) {
     error = e;
   }
 
-  await browser.waitUntil(() =>
-    browser.switchWindow(current).then(
-      () => true,
-      () => false,
-    ),
-  );
+  await browser.url(currentUrl);
 
   if (error) throw error;
   return result;
