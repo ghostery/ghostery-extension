@@ -291,19 +291,10 @@ function setupElementPickerPopup() {
 
   const messageEventListener = (event) => {
     switch (event.data?.type) {
-      case 'gh:element-picker:reselect':
-        selector = '';
-        similar = false;
-
-        overlayEl?.remove();
-        overlayEl = null;
-        targetEl = null;
-        currentEl = null;
-
+      case 'gh:element-picker:selector':
+        selector = event.data.selector;
         renderPickers(selector);
-
-        document.documentElement.inert = false;
-        document.addEventListener('mousemove', mousemoveEventListener, true);
+        updatePopup();
         break;
 
       case 'gh:element-picker:slider': {
@@ -329,6 +320,21 @@ function setupElementPickerPopup() {
         renderPickers(selector);
         updatePopup();
 
+        break;
+
+      case 'gh:element-picker:reselect':
+        selector = '';
+        similar = false;
+
+        overlayEl?.remove();
+        overlayEl = null;
+        targetEl = null;
+        currentEl = null;
+
+        renderPickers(selector);
+
+        document.documentElement.inert = false;
+        document.addEventListener('mousemove', mousemoveEventListener, true);
         break;
 
       case 'gh:element-picker:hide':
@@ -357,19 +363,18 @@ function setupElementPickerPopup() {
     globalStyles.remove();
     overlayEl?.remove();
 
+    window.removeEventListener('resize', resizeEventListener);
+    window.removeEventListener('message', messageEventListener);
+
     document.removeEventListener('mousemove', mousemoveEventListener, true);
     document.removeEventListener('click', clickEventListener, true);
-    document.removeEventListener('keydown', keydownEventListener, true);
-    window.removeEventListener('resize', resizeEventListener, true);
-    window.removeEventListener('message', messageEventListener, true);
+    document.removeEventListener('keydown', keydownEventListener);
   };
+
+  window.addEventListener('resize', resizeEventListener);
+  window.addEventListener('message', messageEventListener);
 
   document.addEventListener('mousemove', mousemoveEventListener, true);
   document.addEventListener('click', clickEventListener, true);
-  document.addEventListener('keydown', keydownEventListener, true);
-
-  window.addEventListener('resize', resizeEventListener, true);
-  window.addEventListener('message', messageEventListener);
-
-  return closeElementPicker;
+  document.addEventListener('keydown', keydownEventListener);
 })();
