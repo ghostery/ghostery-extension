@@ -107,7 +107,7 @@ const pickersTargets = new WeakMap();
 const pickerTagName = `gh-element-picker-${Math.random().toString(36).slice(2)}`;
 const pickerOffset = { top: 0, left: 0 }; //document.body.getBoundingClientRect();
 
-function renderPickers(selector) {
+function renderPickers(selector, force = false) {
   const elements = selector
     ? Array.from(document.querySelectorAll(selector))
     : [];
@@ -123,7 +123,7 @@ function renderPickers(selector) {
       document.documentElement.appendChild(picker);
     }
 
-    if (pickersTargets.get(picker) === el) {
+    if (!force && pickersTargets.get(picker) === el) {
       return;
     }
 
@@ -280,7 +280,7 @@ function setupElementPickerPopup() {
   };
 
   const resizeEventListener = () => {
-    renderPickers(selector);
+    renderPickers(selector, true);
   };
 
   const keydownEventListener = (event) => {
