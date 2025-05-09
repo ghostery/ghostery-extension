@@ -37,89 +37,86 @@ export default {
         ${store.ready(options, stats) &&
         html`
           <div layout="column gap:0.5 padding:1:0">
-            ${!options.managed &&
+            <ui-text
+              type="label-s"
+              color="secondary"
+              uppercase
+              layout="padding:1:1:0 margin:0:1"
+            >
+              Ghostery settings
+            </ui-text>
+
+            <panel-menu-item
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@settings-privacy',
+              )}"
+              icon="shield-menu"
+            >
+              Privacy protection
+            </panel-menu-item>
+            <panel-menu-item
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@settings-websites',
+              )}"
+              icon="websites"
+            >
+              Websites
+            </panel-menu-item>
+            <panel-menu-item
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@settings-trackers',
+              )}"
+              icon="block-m"
+            >
+              Trackers
+            </panel-menu-item>
+            <panel-menu-item
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@settings-whotracksme',
+              )}"
+              icon="wtm"
+              translate="no"
+            >
+              WhoTracks.Me
+            </panel-menu-item>
+            <panel-menu-item
+              href="${chrome.runtime.getURL(
+                '/pages/settings/index.html#@settings-my-ghostery',
+              )}"
+              icon="${(store.ready(session) &&
+                session.contributor &&
+                'contributor') ||
+              'user'}"
+            >
+              <div layout="column">
+                <span>My Ghostery</span>
+                ${store.ready(session) &&
+                (session.name || session.email) &&
+                html`
+                  <ui-text type="body-xs" color="inherit">
+                    ${session.name || session.email}
+                  </ui-text>
+                `}
+              </div>
+            </panel-menu-item>
+
+            ${__PLATFORM__ !== 'safari' &&
+            store.ready(session) &&
+            session.enabled &&
+            !session.contributor &&
             html`
-              <ui-text
-                type="label-s"
-                color="secondary"
-                uppercase
-                layout="padding:1:1:0 margin:0:1"
-              >
-                Ghostery settings
-              </ui-text>
-
-              <panel-menu-item
-                href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@settings-privacy',
-                )}"
-                icon="shield-menu"
-              >
-                Privacy protection
-              </panel-menu-item>
-              <panel-menu-item
-                href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@settings-websites',
-                )}"
-                icon="websites"
-              >
-                Websites
-              </panel-menu-item>
-              <panel-menu-item
-                href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@settings-trackers',
-                )}"
-                icon="block-m"
-              >
-                Trackers
-              </panel-menu-item>
-              <panel-menu-item
-                href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@settings-whotracksme',
-                )}"
-                icon="wtm"
-                translate="no"
-              >
-                WhoTracks.Me
-              </panel-menu-item>
-              <panel-menu-item
-                href="${chrome.runtime.getURL(
-                  '/pages/settings/index.html#@settings-my-ghostery',
-                )}"
-                icon="${(store.ready(session) &&
-                  session.contributor &&
-                  'contributor') ||
-                'user'}"
-              >
-                <div layout="column">
-                  <span>My Ghostery</span>
-                  ${store.ready(session) &&
-                  (session.name || session.email) &&
-                  html`
-                    <ui-text type="body-xs" color="inherit">
-                      ${session.name || session.email}
-                    </ui-text>
-                  `}
-                </div>
-              </panel-menu-item>
-
-              ${__PLATFORM__ !== 'safari' &&
-              store.ready(session) &&
-              session.enabled &&
-              !session.contributor &&
-              html`
-                <ui-button type="outline-primary" layout="margin:1:1.5">
-                  <a
-                    href="https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=menu-becomeacontributor"
-                    onclick="${openTabWithUrl}"
-                  >
-                    <ui-icon name="heart"></ui-icon>
-                    Become a Contributor
-                  </a>
-                </ui-button>
-              `}
-
-              <ui-line></ui-line>
+              <ui-button type="outline-primary" layout="margin:1:1.5">
+                <a
+                  href="https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=menu-becomeacontributor"
+                  onclick="${openTabWithUrl}"
+                >
+                  <ui-icon name="heart"></ui-icon>
+                  Become a Contributor
+                </a>
+              </ui-button>
             `}
+
+            <ui-line></ui-line>
 
             <ui-text
               type="label-s"

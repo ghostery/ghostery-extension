@@ -27,6 +27,7 @@ import ProtectionStatus from './protection-status.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
+import ManagedConfig from '/store/managed-config.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -108,6 +109,7 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
+  managedConfig: store(ManagedConfig),
   alert: '',
   paused: ({ options, stats }) =>
     store.ready(options, stats) && options.paused[stats.hostname],
@@ -117,12 +119,13 @@ export default {
     options,
     stats,
     notification,
+    managedConfig,
     alert,
     paused,
     globalPause,
   }) => html`
     <template layout="column grow relative">
-      ${store.ready(options, stats) &&
+      ${store.ready(options, stats, managedConfig) &&
       html`
         ${options.terms &&
         html`
@@ -130,7 +133,7 @@ export default {
             ${stats.hostname &&
             (options.terms
               ? html`
-                  <panel-managed managed="${options.managed}">
+                  <panel-managed managed="${managedConfig.disableUserControl}">
                     <ui-action>
                       <a
                         href="${chrome.runtime.getURL(
@@ -143,7 +146,7 @@ export default {
                         <ui-text type="label-m"
                           >${stats.displayHostname}</ui-text
                         >
-                        ${!options.managed &&
+                        ${!managedConfig.disableUserControl &&
                         html`<ui-icon
                           name="chevron-down"
                           layout="size:1.5"
@@ -159,7 +162,7 @@ export default {
                 <ui-icon name="logo"></ui-icon>
               </a>
             </ui-action>
-            ${!options.managed &&
+            ${!managedConfig.disableUserControl &&
             html`
               <ui-action slot="actions">
                 <a href="${router.url(Menu)}" data-qa="button:menu">
@@ -195,7 +198,7 @@ export default {
         </section>
         ${options.terms
           ? stats.hostname &&
-            !options.managed &&
+            !managedConfig.disableUserControl &&
             html`
               <panel-pause
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
@@ -345,7 +348,7 @@ export default {
                                 ${!paused &&
                                 !globalPause &&
                                 options.terms &&
-                                !options.managed &&
+                                !managedConfig.disableUserControl &&
                                 html`
                                   <ui-action-button layout="shrink:0 width:4.5">
                                     <a
@@ -431,10 +434,11 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <panel-managed managed="${options.managed}">
+          <panel-managed managed="${managedConfig.disableUserControl}">
             <ui-text
               class="${{
-                last: options.managed || store.error(notification),
+                last:
+                  managedConfig.disableUserControl || store.error(notification),
               }}"
               layout.last="padding:bottom:1.5"
               layout@390px="padding:bottom"
@@ -471,7 +475,7 @@ export default {
             </ui-text>
           </panel-managed>
         </panel-container>
-        ${!options.managed &&
+        ${!managedConfig.disableUserControl &&
         store.ready(notification) &&
         html`
           <panel-notification

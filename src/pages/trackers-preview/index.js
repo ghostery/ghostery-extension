@@ -16,6 +16,7 @@ import { getWTMStats } from '/utils/wtm-stats.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
 
 import Options from '/store/options.js';
+import ManagedConfig from '/store/managed-config.js';
 
 import DisablePreviewImg from './assets/disable-preview.svg';
 
@@ -39,9 +40,10 @@ define({
   tag: 'trackers-preview',
   confirmDisabled: false,
   options: store(Options),
+  managedConfig: store(ManagedConfig),
   stats: () => getWTMStats(domain).sort(sortCategories()),
   render: {
-    value: ({ confirmDisabled, options, stats }) => html`
+    value: ({ confirmDisabled, options, stats, managedConfig }) => html`
       <template layout="block overflow">
         ${confirmDisabled
           ? html`
@@ -112,8 +114,8 @@ define({
                   </ui-tooltip>
                 </ui-stats>
               </main>
-              ${store.ready(options) &&
-              !options.managed &&
+              ${store.ready(options, managedConfig) &&
+              !managedConfig.disableUserControl &&
               html`<footer layout="row center padding:1:2">
                 <ui-action>
                   <button
