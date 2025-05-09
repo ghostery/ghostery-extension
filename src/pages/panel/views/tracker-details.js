@@ -14,6 +14,7 @@ import * as labels from '/ui/labels.js';
 
 import Options, { getPausedDetails } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
+import ManagedConfig from '/store/managed-config.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import { openTabWithUrl } from '/utils/tabs.js';
@@ -44,6 +45,7 @@ export default {
   [router.connect]: { dialog: true },
   options: store(Options),
   stats: store(TabStats),
+  managedConfig: store(ManagedConfig),
   trackerId: '',
   tracker: ({ stats, trackerId }) =>
     stats.trackers.find((t) => t.id === trackerId),
@@ -58,6 +60,7 @@ export default {
     store.ready(options, stats) && !!getPausedDetails(options, stats.hostname),
   render: ({
     options,
+    managedConfig,
     tracker,
     exceptionStatus,
     exceptionLabel,
@@ -88,7 +91,7 @@ export default {
           </ui-text>
         </div>
         ${options.terms &&
-        !options.managed &&
+        !managedConfig.disableUserControl &&
         html`
           <div
             layout="grid:1|max gap:0.5 padding:1.5 margin:-2 ::background:secondary"

@@ -14,6 +14,8 @@ import { mount, store } from 'hybrids';
 import '/ui/index.js';
 
 import Options from '/store/options.js';
+import ManagedConfig from '/store/managed-config.js';
+
 import Settings from './settings.js';
 
 import './elements.js';
@@ -21,10 +23,10 @@ import './styles.css';
 
 // As the user can access settings page from browser native UI
 // we must redirect to onboarding if terms are not accepted
-store
-  .resolve(Options)
-  .then(({ terms, managed }) => {
-    if (!terms || managed) throw new Error('Access denied');
+Promise.all([store.resolve(Options), store.resolve(ManagedConfig)])
+  .then(([{ terms }, managedConfig]) => {
+    if (!terms || managedConfig.disableUserControl)
+      throw new Error('Access denied');
 
     // Safari has a bug where the back button doesn't work properly
     // when the page is loaded from a background page by the chrome.tabs.update API

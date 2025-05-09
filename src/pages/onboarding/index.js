@@ -19,27 +19,30 @@ import './elements.js';
 
 import Main from './views/main.js';
 import Success from './views/success.js';
+import ManagedConfig from '/store/managed-config.js';
 
-store.resolve(Options).then(({ onboarding, terms, managed }) => {
-  // As the user can access settings page from browser native UI
-  // we must redirect to the Ghostery website if the user has already
-  // accepted the terms and conditions and the extension is managed
-  if (terms && managed) {
-    return window.location.replace(`https://www.${GHOSTERY_DOMAIN}`);
-  }
+Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
+  ([{ onboarding, terms }, managedConfig]) => {
+    // As the user can access settings page from browser native UI
+    // we must redirect to the Ghostery website if the user has already
+    // accepted the terms and conditions and the extension is managed
+    if (terms && managedConfig.disableUserControl) {
+      return window.location.replace(`https://www.${GHOSTERY_DOMAIN}`);
+    }
 
-  store.set(Options, {
-    onboarding: {
-      shown: onboarding.shown + 1,
-    },
-  });
+    store.set(Options, {
+      onboarding: {
+        shown: onboarding.shown + 1,
+      },
+    });
 
-  mount(document.body, {
-    stack: router([Main, Success]),
-    render: ({ stack }) => html`
-      <template layout="grid height::100%">
-        <onboarding-layout>${stack}</onboarding-layout>
-      </template>
-    `,
-  });
-});
+    mount(document.body, {
+      stack: router([Main, Success]),
+      render: ({ stack }) => html`
+        <template layout="grid height::100%">
+          <onboarding-layout>${stack}</onboarding-layout>
+        </template>
+      `,
+    });
+  },
+);
