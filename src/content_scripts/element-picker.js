@@ -190,7 +190,7 @@ function setupElementPickerPopup() {
   };
 
   const hideElements = async function () {
-    pickers.forEach(async (picker) => {
+    pickers.splice(0).forEach(async (picker) => {
       Object.assign(picker.style, {
         background: '#00aef0',
         border: 'none',
@@ -217,6 +217,10 @@ function setupElementPickerPopup() {
         maskSize: `${size} ${size}`,
         transition: 'all 0.75s 0.1s ease-in',
       });
+
+      await delay(750);
+
+      picker.remove();
     });
 
     await delay(250);
