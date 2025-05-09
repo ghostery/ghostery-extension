@@ -37,15 +37,21 @@ function hide(host) {
   sendMessage('gh:element-picker:hide');
 }
 
-function slide(host, event) {
-  sendMessage('gh:element-picker:slider', {
-    value: event.target.valueAsNumber,
+function updateSelector(host, event) {
+  sendMessage('gh:element-picker:selector', {
+    selector: event.target.value,
   });
 }
 
 function toggleSimilar(host, event) {
   sendMessage('gh:element-picker:similar', {
     value: event.target.checked,
+  });
+}
+
+function slide(host, event) {
+  sendMessage('gh:element-picker:slider', {
+    value: event.target.valueAsNumber,
   });
 }
 
@@ -58,7 +64,7 @@ mount(document.body, {
   state: 'select', // select, configure, hidden
   selector: '',
   slider: {
-    value: 10,
+    value: 1,
     observe(host, value, lastValue) {
       if (lastValue) host.slider = value;
     },
@@ -100,9 +106,9 @@ mount(document.body, {
               <ui-input>
                 <textarea
                   style="resize:none"
-                  readonly
                   rows="5"
                   value="${selector}"
+                  oninput="${updateSelector}"
                 ></textarea>
               </ui-input>
               <label layout="row items:center gap">
