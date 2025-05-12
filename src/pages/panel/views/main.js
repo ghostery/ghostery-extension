@@ -60,8 +60,7 @@ async function togglePause(host, event) {
 
   if (paused) {
     const pausedHostname = Object.keys(options.paused)
-      .sort()
-      .reverse()
+      .sort((a, b) => b.localeCompare(a))
       .find((domain) => stats.hostname.endsWith(domain));
 
     store.set(options, {
