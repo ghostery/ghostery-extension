@@ -123,7 +123,7 @@ export default {
   managedConfig: store(ManagedConfig),
   alert: '',
   paused: ({ options, stats }) =>
-    store.ready(options, stats) && !!getPausedDetails(options, stats.hostname),
+    store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
   render: ({
