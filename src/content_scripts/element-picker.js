@@ -39,6 +39,7 @@ const POPUP_STYLES = `
   border-radius: 8px;
   background: #FFF;
   box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.30);
+  pointer-events: all !important;
 `;
 
 const OVERLAY_STYLES = `
@@ -53,6 +54,9 @@ const GLOBAL_STYLES = `
   *, * > * {
     cursor: crosshair !important;
     user-select: none !important;
+  }
+  iframe, * > iframe, * > * > iframe {
+    pointer-events: none !important;
   }
 `;
 
@@ -105,7 +109,6 @@ function delay(ms) {
 const pickers = [];
 const pickersTargets = new WeakMap();
 const pickerTagName = `gh-element-picker-${Math.random().toString(36).slice(2)}`;
-const pickerOffset = { top: 0, left: 0 }; //document.body.getBoundingClientRect();
 
 function renderPickers(selector, force = false) {
   const elements = selector
@@ -133,8 +136,8 @@ function renderPickers(selector, force = false) {
     Object.assign(picker.style, {
       width: `${rect.width}px`,
       height: `${rect.height}px`,
-      top: `${rect.top - pickerOffset.top + window.scrollY}px`,
-      left: `${rect.left - pickerOffset.left + window.scrollX}px`,
+      top: `${rect.top + window.scrollY}px`,
+      left: `${rect.left + window.scrollX}px`,
     });
 
     delay(0).then(() => {
@@ -149,7 +152,10 @@ function renderPickers(selector, force = false) {
 }
 
 function setupElementPickerPopup() {
-  const src = chrome.runtime.getURL('pages/element-picker/index.html');
+  const src =
+    chrome.runtime.getURL('pages/element-picker/index.html') +
+    `?hostname=${encodeURIComponent(window.location.hostname)}`;
+
   const existingPopup = document.querySelector(`iframe[src="${src}"]`);
   if (existingPopup) return null;
 
@@ -210,8 +216,7 @@ function setupElementPickerPopup() {
 
       await delay(0);
 
-      const size =
-        Math.max(picker.clientWidth, picker.clientHeight) * 1.5 + 'px';
+      const size = Math.max(picker.clientWidth, picker.clientHeight) * 2 + 'px';
 
       Object.assign(picker.style, {
         maskSize: `${size} ${size}`,
@@ -241,6 +246,9 @@ function setupElementPickerPopup() {
   /* Event Listeners */
 
   const mousemoveEventListener = (event) => {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
     const el = event.target;
     targetEl = el.nearestViewportElement || el;
 
@@ -364,7 +372,6 @@ function setupElementPickerPopup() {
     renderPickers();
 
     popupEl.remove();
-    globalStyles.remove();
     overlayEl?.remove();
 
     window.removeEventListener('resize', resizeEventListener);

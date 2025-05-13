@@ -14,6 +14,7 @@ import * as labels from '/ui/labels.js';
 
 import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
+import CustomContentBlocks from '/store/custom-content-blocks.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
@@ -30,10 +31,39 @@ function revokePaused({ options, domain }) {
   store.set(options, { paused: { [domain]: null } });
 }
 
+function enableCustomContentBlocks(host) {
+  const saveButton = host.render().querySelector('#save-custom-content-blocks');
+  saveButton.disabled = false;
+}
+
+async function saveCustomContentBlocks(host, event) {
+  event.preventDefault();
+
+  const selectors = event.target.selectors.value
+    .split('\n')
+    .map((selector) => selector.trim())
+    .filter((selector) => selector);
+
+  await store.set(host.customContentBlocks, {
+    selectors: {
+      [host.domain]: selectors.length > 0 ? selectors : null,
+    },
+  });
+
+  host.render().querySelector('#save-custom-content-blocks').disabled = true;
+}
+
+async function clearCustomContentBlocks(host) {
+  const textarea = host.render().querySelector('textarea');
+  textarea.value = '';
+
+  enableCustomContentBlocks(host);
+}
+
 export default {
   [router.connect]: { stack: () => [TrackerDetails] },
-  options: store(Options),
   domain: '',
+  options: store(Options),
   paused: ({ options, domain }) =>
     (store.ready(options) && options.paused[domain]) || {},
   trackers: ({ options, domain }) =>
@@ -49,7 +79,12 @@ export default {
               : tracker,
           )
       : [],
-  render: ({ domain, trackers, paused }) => html`
+  customContentBlocks: store(CustomContentBlocks),
+  selectors: ({ customContentBlocks, domain }) =>
+    (store.ready(customContentBlocks) &&
+      customContentBlocks.selectors[domain]?.join('\n')) ||
+    '',
+  render: ({ domain, trackers, paused, selectors }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
@@ -181,6 +216,34 @@ export default {
             )}
           </settings-table>
         </div>
+        <form layout="column gap:2" onsubmit="${saveCustomContentBlocks}">
+          <div layout="column gap:0.5">
+            <ui-text type="label-l">Blocked elements on this site</ui-text>
+            <ui-text>
+              In ac felis quis tortor malesuada pretium. Morbi mollis tellus ac
+              sapien. Vestibulum facilisis, purus nec pulvinar iaculis.
+            </ui-text>
+          </div>
+          <ui-input>
+            <textarea
+              name="selectors"
+              rows="8"
+              value="${selectors}"
+              spellcheck="false"
+              autocorrect="off"
+              oninput="${enableCustomContentBlocks}"
+              style="white-space:nowrap"
+            ></textarea>
+          </ui-input>
+          <div layout="row gap:2">
+            <ui-button id="save-custom-content-blocks" disabled>
+              <button type="submit">Save</button>
+            </ui-button>
+            <ui-button onclick="${clearCustomContentBlocks}">
+              <button type="button">Clear</button>
+            </ui-button>
+          </div>
+        </form>
         ${hasWTMStats(domain) &&
         html`
           <div layout="margin:3:0">

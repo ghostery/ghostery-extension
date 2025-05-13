@@ -41,7 +41,7 @@ const Tracker = {
 
 let tab = undefined;
 
-const Stats = {
+const TabStats = {
   hostname: '',
   trackers: [Tracker],
 
@@ -105,10 +105,10 @@ const Stats = {
   },
 };
 
-export default Stats;
+export default TabStats;
 
 chrome.storage.onChanged.addListener((changes) => {
   if (changes['tabStats:v1']) {
-    store.clear(Stats, false);
+    store.clear(TabStats, false);
   }
 });
