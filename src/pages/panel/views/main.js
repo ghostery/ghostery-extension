@@ -14,11 +14,12 @@ import { html, store, router, msg } from 'hybrids';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
+import CustomContentBlocks from '/store/custom-content-blocks.js';
 import TabStats from '/store/tab-stats.js';
+
 import * as exceptions from '/utils/exceptions.js';
 
 import Notification from '../store/notification.js';
-
 import sleep from '../assets/sleep.svg';
 
 import Menu from './menu.js';
@@ -136,11 +137,16 @@ export default {
   stats: store(TabStats),
   notification: store(Notification),
   managedConfig: store(ManagedConfig),
+  customContentBlocks: store(CustomContentBlocks),
   alert: '',
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
+  contentBlocksSelectors: ({ customContentBlocks, stats }) =>
+    (store.ready(stats, customContentBlocks) &&
+      customContentBlocks.selectors[stats.hostname]?.length) ||
+    0,
   render: ({
     options,
     stats,
@@ -149,6 +155,7 @@ export default {
     alert,
     paused,
     globalPause,
+    contentBlocksSelectors,
   }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats, managedConfig) &&
@@ -177,7 +184,10 @@ export default {
           !managedConfig.disableUserControl &&
           html`
             <panel-actions hostname="${stats.displayHostname}">
-              <panel-actions-button onclick="${openElementPicker}">
+              <panel-actions-button
+                onclick="${openElementPicker}"
+                disabled="${paused}"
+              >
                 <button>
                   <panel-actions-icon
                     name="hide-element"
@@ -298,8 +308,7 @@ export default {
                   categories="${stats.topCategories}"
                   type="${options.panel.statsType}"
                   ontypechange="${setStatsType}"
-                  layout="margin:1:1.5"
-                  layout@390px="margin:1.5:1.5:2"
+                  layout="margin:1.5"
                 >
                   ${options.panel.statsType === 'graph' &&
                   html`
@@ -447,15 +456,70 @@ export default {
                   )}
                 </ui-stats>
                 <panel-feedback
-                  modified=${stats.trackersModified}
-                  blocked=${stats.trackersBlocked}
-                  layout="margin:bottom:1.5"
-                  layout@390px="padding:top padding:bottom:1.5 margin:bottom:2.5"
                   data-qa="component:feedback"
-                  hidden="${globalPause ||
-                  paused ||
-                  (!stats.trackersBlocked && !stats.trackersModified)}"
-                ></panel-feedback>
+                  hidden=${paused ||
+                  (!stats.trackersBlocked &&
+                    !stats.trackersModified &&
+                    !contentBlocksSelectors)}
+                >
+                  ${stats.trackersBlocked > 0 &&
+                  html`
+                    <section layout="column center grow padding:0.5:1">
+                      <div layout="row center gap:0.5">
+                        <ui-icon
+                          name="block-s"
+                          color="danger-primary"
+                        ></ui-icon>
+                        <ui-text type="headline-s">
+                          ${stats.trackersBlocked}
+                        </ui-text>
+                      </div>
+                      <ui-text type="label-xs" layout="block:center">
+                        Trackers blocked
+                      </ui-text>
+                    </section>
+                  `}
+                  ${stats.trackersModified > 0 &&
+                  html`
+                    <section layout="column center grow padding:0.5:1">
+                      <div layout="row center gap:0.5">
+                        <ui-icon name="eye" color="brand-primary"></ui-icon>
+                        <ui-text type="headline-s">
+                          ${stats.trackersModified}
+                        </ui-text>
+                      </div>
+                      <ui-text type="label-xs" layout="block:center">
+                        Trackers modified
+                      </ui-text>
+                    </section>
+                  `}
+                  ${contentBlocksSelectors > 0 &&
+                  html`
+                    <ui-action>
+                      <a
+                        layout="column center grow padding:0.5:1"
+                        href="${chrome.runtime.getURL(
+                          '/pages/settings/index.html#@settings-website-details?domain=' +
+                            stats.hostname,
+                        )}"
+                        onclick="${openTabWithUrl}"
+                      >
+                        <div layout="row center gap:0.5">
+                          <ui-icon
+                            name="hide-element"
+                            color="success-primary"
+                          ></ui-icon>
+                          <ui-text type="headline-s">
+                            ${contentBlocksSelectors}
+                          </ui-text>
+                        </div>
+                        <ui-text type="label-xs" layout="block:center">
+                          Blocked manually
+                        </ui-text>
+                      </a>
+                    </ui-action>
+                  `}
+                </panel-feedback>
               `
             : html`
                 <div layout="column items:center gap margin:1.5">
@@ -475,46 +539,44 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <panel-managed managed="${managedConfig.disableUserControl}">
-            <ui-text
+          <ui-action
+            hidden="${globalPause}"
+            inert="${managedConfig.disableUserControl}"
+          >
+            <a
+              href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
               class="${{
                 last:
-                  managedConfig.disableUserControl || store.error(notification),
+                  managedConfig.disableUserControl ||
+                  !store.ready(notification),
               }}"
-              layout.last="padding:bottom:1.5"
-              layout@390px="padding:bottom"
-              layout.last@390px="padding:bottom:2.5"
-              hidden="${globalPause}"
+              onclick="${openTabWithUrl}"
+              layout="block margin:1.5:1.5:0.5"
+              layout.last="margin:bottom:1.5"
             >
-              <a
-                href="${options.terms ? SETTINGS_URL : ONBOARDING_URL}"
-                onclick="${openTabWithUrl}"
-                layout="block margin:1.5:1.5:0"
+              <panel-options-item
+                icon="ads"
+                enabled="${options.blockAds}"
+                terms="${options.terms}"
               >
-                <panel-options-item
-                  icon="ads"
-                  enabled="${options.blockAds}"
-                  terms="${options.terms}"
-                >
-                  Ad-Blocking
-                </panel-options-item>
-                <panel-options-item
-                  icon="tracking"
-                  enabled="${options.blockTrackers}"
-                  terms="${options.terms}"
-                >
-                  Anti-Tracking
-                </panel-options-item>
-                <panel-options-item
-                  icon="autoconsent"
-                  enabled="${options.blockAnnoyances}"
-                  terms="${options.terms}"
-                >
-                  Never-Consent
-                </panel-options-item>
-              </a>
-            </ui-text>
-          </panel-managed>
+                Ad-Blocking
+              </panel-options-item>
+              <panel-options-item
+                icon="tracking"
+                enabled="${options.blockTrackers}"
+                terms="${options.terms}"
+              >
+                Anti-Tracking
+              </panel-options-item>
+              <panel-options-item
+                icon="autoconsent"
+                enabled="${options.blockAnnoyances}"
+                terms="${options.terms}"
+              >
+                Never-Consent
+              </panel-options-item>
+            </a>
+          </ui-action>
         </panel-container>
         ${!managedConfig.disableUserControl &&
         store.ready(notification) &&
@@ -523,7 +585,7 @@ export default {
             icon="${notification.icon}"
             href="${notification.url}"
             type="${notification.type}"
-            layout="width:min:full padding:1.5"
+            layout="width:min:full padding:1:1.5:1.5"
           >
             ${notification.text}
             <span slot="action">${notification.action}</span>

@@ -12,14 +12,19 @@
 import { html } from 'hybrids';
 
 export default {
-  render: () =>
+  disabled: { value: false, reflect: true },
+  render: ({ disabled }) =>
     html`
       <template layout="grid">
-        <ui-button>
+        <ui-button disabled="${disabled}">
           <slot></slot>
         </ui-button>
       </template>
     `.css`
+      :host([disabled]) {
+        pointer-events: none;
+      }
+
       ui-button {
         white-space: wrap;
         text-align: center;

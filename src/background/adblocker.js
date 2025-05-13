@@ -108,9 +108,7 @@ function getEnabledEngines(config) {
       list.push(engines.FIXES_ENGINE);
     }
 
-    if (config.customFilters.enabled) {
-      list.push(engines.CUSTOM_ENGINE);
-    }
+    list.push(engines.CUSTOM_ENGINE);
 
     return list;
   }
