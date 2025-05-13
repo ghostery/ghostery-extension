@@ -57,6 +57,9 @@
     "plotly.js-basic-dist": "^3.0.1",
     "tldts-experimental": "^7.0.7"
   },
+  "dataDependencies": {
+    "wtm-stats": "ded8cb4a9bad0fa1fb0b60996382ba6527127c33"
+  },
   "engineStrict": true,
   "engines": {
     "npm": ">=9.6.7"
