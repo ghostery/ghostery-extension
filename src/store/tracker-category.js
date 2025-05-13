@@ -18,7 +18,7 @@ import Options from './options.js';
 
 const categories = getCategories();
 
-export default {
+const TrackerCategory = {
   id: true,
   key: '',
   name: '',
@@ -63,3 +63,5 @@ export default {
     },
   },
 };
+
+export default TrackerCategory;

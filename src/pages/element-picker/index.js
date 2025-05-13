@@ -9,15 +9,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html } from 'hybrids';
+import { mount, html, store } from 'hybrids';
+
+import CustomContentBlocks from '/store/custom-content-blocks.js';
+import selectImage from './assets/select.svg';
+import hiddenImage from './assets/hidden.svg';
 
 import '/ui/index.js';
 
 import './elements.js';
 import './styles.css';
 
-import selectImage from './assets/select.svg';
-import hiddenImage from './assets/hidden.svg';
+const hostname = new URLSearchParams(window.location.search).get('hostname');
 
 function sendMessage(type, data) {
   window.parent.postMessage({ type, ...data }, '*');
@@ -30,11 +33,6 @@ function close() {
 function reselect(host) {
   host.state = 'select';
   sendMessage('gh:element-picker:reselect');
-}
-
-function hide(host) {
-  host.state = 'hidden';
-  sendMessage('gh:element-picker:hide');
 }
 
 function updateSelector(host, event) {
@@ -55,9 +53,34 @@ function slide(host, event) {
   });
 }
 
-function back(host) {
+async function hide(host) {
+  host.state = 'hidden';
+  sendMessage('gh:element-picker:hide');
+
+  const customContentBlocks = await store.resolve(CustomContentBlocks);
+  const list = customContentBlocks.selectors[hostname] || [];
+
+  if (!list.includes(host.selector)) {
+    await store.set(customContentBlocks, {
+      selectors: { [hostname]: list.concat(host.selector) },
+    });
+  }
+}
+
+async function back(host) {
   host.state = 'configure';
   sendMessage('gh:element-picker:back');
+
+  const customContentBlocks = await store.resolve(CustomContentBlocks);
+  let list = customContentBlocks.selectors[hostname] || [];
+  const index = list.indexOf(host.selector);
+
+  if (index > -1) {
+    list = list.filter((_, i) => i !== index);
+    await store.set(customContentBlocks, {
+      selectors: { [hostname]: list.length ? list : null },
+    });
+  }
 }
 
 mount(document.body, {
@@ -108,6 +131,8 @@ mount(document.body, {
                   style="resize:none"
                   rows="5"
                   value="${selector}"
+                  spellcheck="false"
+                  autocorrect="off"
                   oninput="${updateSelector}"
                 ></textarea>
               </ui-input>
@@ -137,8 +162,8 @@ mount(document.body, {
                   oninput="${slide}"
                 />
                 <div layout="row content:space-between items:center">
-                  <ui-text type="label-xs" color="tertiary">MIN</ui-text>
                   <ui-text type="label-xs" color="tertiary">MAX</ui-text>
+                  <ui-text type="label-xs" color="tertiary">MIN</ui-text>
                 </div>
               </div>
             </div>

@@ -28,6 +28,7 @@ import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from '/background/adblocker.js';
+import CustomContentBlocks from '/store/custom-content-blocks';
 
 const convert =
   __PLATFORM__ === 'chromium'
@@ -160,6 +161,21 @@ async function updateEngine(text) {
 }
 
 async function update(text, { trustedScriptlets }) {
+  // Add custom content block to the end of the list
+  const customContentBlocks = await store.resolve(CustomContentBlocks);
+  let customContentBlocksFilters = 0;
+
+  Object.entries(customContentBlocks.selectors).forEach(
+    ([hostname, selectors]) => {
+      if (selectors) {
+        selectors.forEach((selector) => {
+          text += `\n${hostname}##${selector}`;
+          customContentBlocksFilters++;
+        });
+      }
+    },
+  );
+
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
@@ -175,6 +191,7 @@ async function update(text, { trustedScriptlets }) {
   );
 
   result.errors = errors;
+  result.cosmeticFilters -= customContentBlocksFilters;
 
   // Update main engine with custom filters
   await reloadMainEngine();
@@ -238,6 +255,17 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
 
     await update(enabled ? (await store.resolve(CustomFilters)).text : '', {
       trustedScriptlets,
+    });
+  }
+});
+
+chrome.storage.local.onChanged.addListener(async (changes) => {
+  if (changes.customContentBlocks) {
+    const options = await store.resolve(Options);
+    const customFilters = await store.resolve(CustomFilters);
+
+    await update(options.customFilters.enabled ? customFilters.text : '', {
+      trustedScriptlets: options.customFilters.trustedScriptlets,
     });
   }
 });

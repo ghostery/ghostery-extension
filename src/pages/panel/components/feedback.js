@@ -12,38 +12,15 @@
 import { html } from 'hybrids';
 
 export default {
-  blocked: 0,
-  modified: 0,
-  render: ({ blocked, modified }) => html`
-    <template layout="row padding:1:0:1">
-      ${blocked > 0 &&
-      html`
-        <section layout="column center grow">
-          <div layout="row center gap:0.5">
-            <ui-icon name="block-s" color="danger-primary"></ui-icon>
-            <ui-text type="headline-s">${blocked}</ui-text>
-          </div>
-          <div layout="row center gap:0.5">
-            <ui-text type="label-xs">Trackers blocked</ui-text>
-          </div>
-        </section>
-      `}
-      ${modified > 0 &&
-      html`
-        <section layout="column center grow">
-          <div layout="row center gap:0.5">
-            <ui-icon name="eye" color="brand-primary"></ui-icon>
-            <ui-text type="headline-s">${modified}</ui-text>
-          </div>
-          <div layout="row center gap:0.5">
-            <ui-text type="label-xs">Trackers modified</ui-text>
-          </div>
-        </section>
-      `}
-    </template>
-  `.css`
+  render: () => html`<template layout="row padding:0.5 margin:1.5:0">
+    <slot></slot>
+  </template>`.css`
     :host {
       background: var(--background-secondary);
+    }
+
+    ::slotted(*:not(:last-child)) {
+      border-right: 1px solid var(--border-primary);
     }
   `,
 };

@@ -19,6 +19,7 @@ export default {
       <div
         id="button"
         layout="fixed layer:100 top:0 left:0 right:0 height:6 row center"
+        layout@390px="height:7"
       >
         <ui-button size="s" slot="button" onclick="${html.set('open', !open)}">
           <button>
