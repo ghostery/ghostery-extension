@@ -8,23 +8,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import { html } from 'hybrids';
 
 export default {
-  render: {
-    value: () => html`
-      <template layout="row items:center content:space-between height:6">
-        <ui-icon name="drag" color="tertiary" layout="padding:1.5"></ui-icon>
-        <slot></slot>
-      </template>
-    `.css`
-      :host {
-        cursor: move;
-        user-select: none;
-      }
-    `,
-    connect: () => {
-      // TODO: Add draggable popup messages to the parent window
-    },
-  },
+  render: () => html`
+    <template layout="row items:center content:space-between height:6">
+      <ui-icon name="drag" color="tertiary" layout="padding:1.5"></ui-icon>
+      <slot></slot>
+    </template>
+  `,
 };
