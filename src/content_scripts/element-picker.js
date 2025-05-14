@@ -39,6 +39,26 @@ const POPUP_STYLES = `
   border-radius: 8px;
   background: #FFF;
   box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.30);
+  contain: strict;
+  will-change: left, top;
+`;
+
+const POPUP_DRAGGABLE_STYLES = `
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 40px);
+  height: 48px;
+  cursor: move !important;
+`;
+
+const POPUP_IFRAME_STYLES = `
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
   pointer-events: all !important;
 `;
 
@@ -159,10 +179,56 @@ function setupElementPickerPopup() {
   const existingPopup = document.querySelector(`iframe[src="${src}"]`);
   if (existingPopup) return null;
 
-  const iframe = document.createElement('iframe');
-  Object.assign(iframe, { src, style: POPUP_STYLES });
+  const container = document.createElement(pickerTagName);
+  container.setAttribute('style', POPUP_STYLES);
 
-  document.body.appendChild(iframe);
+  const iframe = document.createElement('iframe');
+  Object.assign(iframe, { src, style: POPUP_IFRAME_STYLES });
+  container.appendChild(iframe);
+
+  const draggable = document.createElement(pickerTagName);
+  draggable.setAttribute('style', POPUP_DRAGGABLE_STYLES);
+  container.appendChild(draggable);
+
+  document.documentElement.appendChild(container);
+
+  // Dragging
+  let top, left, baseX, baseY, maxX, maxY;
+
+  const mousemoveEventListener = (e) => {
+    const deltaX = e.clientX - baseX;
+    const deltaY = e.clientY - baseY;
+
+    container.style.left = Math.max(Math.min(left + deltaX, maxX), 0) + 'px';
+    container.style.top = Math.max(Math.min(top + deltaY, maxY), 0) + 'px';
+  };
+
+  const mouseupEventListener = () => {
+    document.removeEventListener('mouseup', mouseupEventListener);
+    document.removeEventListener('mousemove', mousemoveEventListener, true);
+  };
+
+  draggable.addEventListener('mousedown', (e) => {
+    const rect = container.getBoundingClientRect();
+    top = rect.top;
+    left = rect.left;
+
+    maxX = window.innerWidth - container.clientWidth;
+    maxY = window.innerHeight - container.clientHeight;
+
+    baseX = e.clientX;
+    baseY = e.clientY;
+
+    Object.assign(container.style, {
+      top: top + 'px',
+      left: left + 'px',
+      right: '',
+      bottom: '',
+    });
+
+    document.addEventListener('mousemove', mousemoveEventListener, true);
+    document.addEventListener('mouseup', mouseupEventListener);
+  });
 
   return iframe;
 }
@@ -175,8 +241,8 @@ function setupElementPickerPopup() {
   let slider = 1;
   let similar = false;
 
-  const popupEl = setupElementPickerPopup();
-  if (!popupEl) {
+  const iframe = setupElementPickerPopup();
+  if (!iframe) {
     console.warn('Element picker popup already running.');
     return;
   }
@@ -186,12 +252,12 @@ function setupElementPickerPopup() {
   document.head.appendChild(globalStyles);
 
   const updatePopup = () => {
-    if (popupEl.contentWindow) {
-      popupEl.contentWindow.postMessage(
+    if (iframe.contentWindow) {
+      iframe.contentWindow.postMessage(
         { type: 'gh:element-picker:selector', selector, slider, similar },
         '*',
       );
-      popupEl.contentWindow.focus();
+      iframe.contentWindow.focus();
     }
   };
 
@@ -230,6 +296,8 @@ function setupElementPickerPopup() {
 
     await delay(250);
 
+    globalStyles.textContent = '';
+
     globalStyles.sheet.insertRule(
       `${selector} { visibility: hidden !important; opacity: 0 !important; }`,
       globalStyles.sheet.cssRules.length,
@@ -246,14 +314,14 @@ function setupElementPickerPopup() {
   /* Event Listeners */
 
   const mousemoveEventListener = (event) => {
-    event.stopImmediatePropagation();
-    event.preventDefault();
+    event.stopPropagation();
 
     const el = event.target;
     targetEl = el.nearestViewportElement || el;
 
     if (
-      el !== popupEl &&
+      el !== iframe &&
+      el.tagName.toLowerCase() !== pickerTagName &&
       el !== document.documentElement &&
       el !== document.body
     ) {
@@ -371,8 +439,12 @@ function setupElementPickerPopup() {
   const closeElementPicker = () => {
     renderPickers();
 
-    popupEl.remove();
+    iframe.parentElement.remove();
     overlayEl?.remove();
+
+    if (globalStyles.textContent === GLOBAL_STYLES) {
+      globalStyles.remove();
+    }
 
     window.removeEventListener('resize', resizeEventListener);
     window.removeEventListener('message', messageEventListener);
