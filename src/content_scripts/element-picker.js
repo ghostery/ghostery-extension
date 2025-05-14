@@ -41,6 +41,8 @@ const POPUP_STYLES = `
   box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.30);
   contain: strict;
   will-change: left, top;
+  user-select: none;
+  -webkit-user-select: none;
 `;
 
 const POPUP_DRAGGABLE_STYLES = `
@@ -50,6 +52,8 @@ const POPUP_DRAGGABLE_STYLES = `
   width: calc(100% - 40px);
   height: 48px;
   cursor: move !important;
+  user-select: none;
+  -webkit-user-select: none;
 `;
 
 const POPUP_IFRAME_STYLES = `
@@ -59,7 +63,9 @@ const POPUP_IFRAME_STYLES = `
   width: 100%;
   height: 100%;
   border: none;
-  pointer-events: all !important;
+  pointer-events: all;
+  user-select: none;
+  -webkit-user-select: none;
 `;
 
 const OVERLAY_STYLES = `
@@ -73,10 +79,11 @@ const OVERLAY_STYLES = `
 const GLOBAL_STYLES = `
   *, * > * {
     cursor: crosshair !important;
-    user-select: none !important;
+    user-select: none;
+    -webkit-user-select: none;
   }
-  iframe, * > iframe, * > * > iframe {
-    pointer-events: none !important;
+  iframe {
+    pointer-events: none;
   }
 `;
 
@@ -204,6 +211,8 @@ function setupElementPickerPopup() {
   };
 
   const mouseupEventListener = () => {
+    iframe.style.pointerEvents = 'all';
+
     document.removeEventListener('mouseup', mouseupEventListener);
     document.removeEventListener('mousemove', mousemoveEventListener, true);
   };
@@ -225,6 +234,8 @@ function setupElementPickerPopup() {
       right: '',
       bottom: '',
     });
+
+    iframe.style.pointerEvents = 'none';
 
     document.addEventListener('mousemove', mousemoveEventListener, true);
     document.addEventListener('mouseup', mouseupEventListener);
