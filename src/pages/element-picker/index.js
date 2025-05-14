@@ -96,7 +96,8 @@ mount(document.body, {
   render: {
     value: ({ state, selector, slider, similar }) => html`
       <template layout="column height:full">
-        <element-picker-header>
+        <div layout="row items:center content:space-between height:6">
+          <ui-icon name="drag" color="tertiary" layout="padding:1.5"></ui-icon>
           ${state === 'configure' &&
           html`<ui-text type="label-m" layout="row items:center gap">
             <ui-icon name="logo" layout="size:2.5"></ui-icon>
@@ -107,7 +108,8 @@ mount(document.body, {
               <ui-icon name="close" color="tertiary"></ui-icon>
             </button>
           </ui-button>
-        </element-picker-header>
+        </div>
+
         ${state === 'select' &&
         html`
           <div layout="grow column center gap:2 padding:0:1.5:1.5">
