@@ -26,9 +26,6 @@ updates:
       # for each release to the production, which happens at most once a week.
       - dependency-name: 'tldts-experimental'
       - dependency-name: '@sentry/browser'
-    ignore:
-      # Currently the wdio has a bug, which does not allow us to update it often
-      - dependency-name: '@wdio/*'
     schedule:
       interval: 'weekly'
       time: '07:00'

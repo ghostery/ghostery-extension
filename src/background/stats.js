@@ -325,7 +325,13 @@ async function flushTabStatsToDailyStats(tabId) {
   });
 }
 
+const PANEL_URL = chrome.runtime.getURL('pages/panel/index.html');
+
 function setupTabStats(details) {
+  // The panel can be opened in the same tab only by e2e tests
+  // and then we have to keep the stats
+  if (details.url === PANEL_URL) return;
+
   flushTabStatsToDailyStats(details.tabId);
 
   const request = Request.fromRequestDetails(details);

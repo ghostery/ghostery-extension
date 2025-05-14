@@ -14,13 +14,13 @@ import { store } from 'hybrids';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import { getManagedConfig } from '/utils/managed.js';
 
 import Config, {
   ACTION_PAUSE_ASSISTANT,
   FLAG_PAUSE_ASSISTANT,
 } from './config.js';
 import CustomFilters from './custom-filters.js';
+import ManagedConfig from './managed-config.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -104,9 +104,6 @@ const Options = {
   sync: true,
   revision: 0,
 
-  // Managed
-  managed: false,
-
   [store.connect]: {
     async get() {
       let { options = {}, optionsVersion } = await chrome.storage.local.get([
@@ -123,10 +120,7 @@ const Options = {
       }
 
       // Apply managed options for supported platforms
-      if (
-        __PLATFORM__ === 'firefox' ||
-        (__PLATFORM__ === 'chromium' && !isOpera())
-      ) {
+      if (__PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium') {
         return manage(options);
       }
 
@@ -206,39 +200,34 @@ async function migrate(options, optionsVersion) {
 }
 
 async function manage(options) {
-  const managed = await getManagedConfig();
+  const managed = await store.resolve(ManagedConfig);
 
-  if (managed) {
-    if (managed.disableOnboarding === true) {
-      options.terms = true;
-      options.onboarding = { shown: 1 };
-    }
+  if (managed.disableOnboarding === true) {
+    options.terms = true;
+    options.onboarding = { shown: 1 };
+  }
 
-    if (managed.disableUserControl === true) {
-      options.managed = true;
-      options.sync = false;
+  if (managed.disableUserControl === true) {
+    options.sync = false;
 
-      // Clear out the paused state, to overwrite with the current managed state
-      options.paused = {};
+    // Clear out the paused state, to overwrite with the current managed state
+    options.paused = {};
 
-      // Add paused domains from the config
-      const config = await store.resolve(Config);
-      if (config.hasFlag(FLAG_PAUSE_ASSISTANT)) {
-        for (const [domain, { actions }] of Object.entries(config.domains)) {
-          if (actions.includes(ACTION_PAUSE_ASSISTANT)) {
-            options.paused[domain] = { revokeAt: 0, assist: true };
-          }
+    // Add paused domains from the config
+    const config = await store.resolve(Config);
+    if (config.hasFlag(FLAG_PAUSE_ASSISTANT)) {
+      for (const [domain, { actions }] of Object.entries(config.domains)) {
+        if (actions.includes(ACTION_PAUSE_ASSISTANT)) {
+          options.paused[domain] = { revokeAt: 0, assist: true };
         }
       }
     }
-
-    if (Array.isArray(managed.trustedDomains)) {
-      managed.trustedDomains.forEach((domain) => {
-        options.paused ||= {};
-        options.paused[domain] = { revokeAt: 0 };
-      });
-    }
   }
+
+  managed.trustedDomains.forEach((domain) => {
+    options.paused ||= {};
+    options.paused[domain] = { revokeAt: 0 };
+  });
 
   return options;
 }

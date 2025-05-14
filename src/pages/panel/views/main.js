@@ -13,7 +13,7 @@ import { html, store, router, msg } from 'hybrids';
 
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
-import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 import * as exceptions from '/utils/exceptions.js';
 
@@ -27,6 +27,7 @@ import ProtectionStatus from './protection-status.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
+import ManagedConfig from '/store/managed-config.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -53,17 +54,28 @@ function reloadTab(host, event) {
 }
 
 async function togglePause(host, event) {
-  const { paused, pauseType } = event.target;
-
   host.alert = '';
 
-  await store.set(host.options, {
-    paused: {
-      [host.stats.hostname]: !paused
-        ? { revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType }
-        : null,
-    },
-  });
+  const { paused, pauseType } = event.target;
+  const { options, stats } = host;
+
+  if (paused) {
+    const pausedHostname = Object.keys(options.paused)
+      .sort((a, b) => b.localeCompare(a))
+      .find((domain) => stats.hostname.endsWith(domain));
+
+    store.set(options, {
+      paused: { [pausedHostname]: null },
+    });
+  } else {
+    await store.set(options, {
+      paused: {
+        [stats.hostname]: {
+          revokeAt: pauseType && Date.now() + 60 * 60 * 1000 * pauseType,
+        },
+      },
+    });
+  }
 
   host.alert = paused
     ? msg`Ghostery has been resumed on this site.`
@@ -108,21 +120,23 @@ export default {
   options: store(Options),
   stats: store(TabStats),
   notification: store(Notification),
+  managedConfig: store(ManagedConfig),
   alert: '',
   paused: ({ options, stats }) =>
-    store.ready(options, stats) && options.paused[stats.hostname],
+    store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
   render: ({
     options,
     stats,
     notification,
+    managedConfig,
     alert,
     paused,
     globalPause,
   }) => html`
     <template layout="column grow relative">
-      ${store.ready(options, stats) &&
+      ${store.ready(options, stats, managedConfig) &&
       html`
         ${options.terms &&
         html`
@@ -130,7 +144,7 @@ export default {
             ${stats.hostname &&
             (options.terms
               ? html`
-                  <panel-managed managed="${options.managed}">
+                  <panel-managed managed="${managedConfig.disableUserControl}">
                     <ui-action>
                       <a
                         href="${chrome.runtime.getURL(
@@ -143,7 +157,7 @@ export default {
                         <ui-text type="label-m"
                           >${stats.displayHostname}</ui-text
                         >
-                        ${!options.managed &&
+                        ${!managedConfig.disableUserControl &&
                         html`<ui-icon
                           name="chevron-down"
                           layout="size:1.5"
@@ -159,7 +173,7 @@ export default {
                 <ui-icon name="logo"></ui-icon>
               </a>
             </ui-action>
-            ${!options.managed &&
+            ${!managedConfig.disableUserControl &&
             html`
               <ui-action slot="actions">
                 <a href="${router.url(Menu)}" data-qa="button:menu">
@@ -195,7 +209,7 @@ export default {
         </section>
         ${options.terms
           ? stats.hostname &&
-            !options.managed &&
+            !managedConfig.disableUserControl &&
             html`
               <panel-pause
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
@@ -345,7 +359,7 @@ export default {
                                 ${!paused &&
                                 !globalPause &&
                                 options.terms &&
-                                !options.managed &&
+                                !managedConfig.disableUserControl &&
                                 html`
                                   <ui-action-button layout="shrink:0 width:4.5">
                                     <a
@@ -431,10 +445,11 @@ export default {
                   </ui-text>
                 </div>
               `}
-          <panel-managed managed="${options.managed}">
+          <panel-managed managed="${managedConfig.disableUserControl}">
             <ui-text
               class="${{
-                last: options.managed || store.error(notification),
+                last:
+                  managedConfig.disableUserControl || store.error(notification),
               }}"
               layout.last="padding:bottom:1.5"
               layout@390px="padding:bottom"
@@ -471,7 +486,7 @@ export default {
             </ui-text>
           </panel-managed>
         </panel-container>
-        ${!options.managed &&
+        ${!managedConfig.disableUserControl &&
         store.ready(notification) &&
         html`
           <panel-notification

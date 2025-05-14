@@ -106,7 +106,7 @@ describe('Advanced Features', function () {
           `||${PAGE_DOMAIN}^$replace=/<title>.*<\\/title>/<title>hello world<\\/title>/`,
         ]);
 
-        await browser.url(PAGE_URL, { wait: 'networkIdle' });
+        await browser.url(PAGE_URL);
         await expect(await browser.getTitle()).toBe('hello world');
       });
     }
