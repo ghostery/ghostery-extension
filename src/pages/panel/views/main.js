@@ -110,11 +110,11 @@ function openLogger() {
 async function openElementPicker() {
   const tab = await getCurrentTab();
   if (tab) {
-    chrome.runtime.sendMessage({
+    await chrome.runtime.sendMessage({
       action: 'openElementPicker',
       tabId: tab.id,
     });
-    chrome.tabs.update(tab.id, {
+    await chrome.tabs.update(tab.id, {
       active: true,
     });
 

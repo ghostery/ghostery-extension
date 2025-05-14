@@ -49,7 +49,7 @@ function toggleSimilar(host, event) {
 
 function slide(host, event) {
   sendMessage('gh:element-picker:slider', {
-    value: event.target.valueAsNumber,
+    value: event.target.value,
   });
 }
 
@@ -154,13 +154,11 @@ mount(document.body, {
                 <ui-text type="label-m" layout="block:center">
                   Move the slider to show or hide sections.
                 </ui-text>
-                <input
-                  type="range"
-                  min="1"
+                <element-picker-range
                   max="${slider}"
                   value="${slider}"
                   oninput="${slide}"
-                />
+                ></element-picker-range>
                 <div layout="row content:space-between items:center">
                   <ui-text type="label-xs" color="tertiary">MAX</ui-text>
                   <ui-text type="label-xs" color="tertiary">MIN</ui-text>
