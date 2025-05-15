@@ -30,11 +30,11 @@ const POPUP_STYLES = `
   z-index: 2147483647;
   display: block;
   padding: 0;
-  bottom: 24px;
-  right: 24px;
-  width: min(400px, 100%);
-  max-width: calc(100% - 48px);
-  height: 360px;
+  bottom: 16px;
+  right: 16px;
+  width: min(380px, 100%);
+  max-width: calc(100% - 32px);
+  height: 305px;
   border: none;
   border-radius: 8px;
   background: #FFF;
@@ -87,6 +87,8 @@ const GLOBAL_STYLES = `
   }
 `;
 
+/* Selector generator */
+
 function getSelectorCount(selector, childSelector) {
   return document.querySelectorAll(
     childSelector ? `${selector} > ${childSelector}` : selector,
@@ -128,6 +130,8 @@ function getSelector(element, similar = false, childSelector = '') {
 
   return selector;
 }
+
+/* Pickers rendering */
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -178,7 +182,7 @@ function renderPickers(selector, force = false) {
   });
 }
 
-function setupElementPickerPopup() {
+function setupPopup() {
   const src =
     chrome.runtime.getURL('pages/element-picker/index.html') +
     `?hostname=${encodeURIComponent(window.location.hostname)}`;
@@ -202,22 +206,25 @@ function setupElementPickerPopup() {
   // Dragging
   let top, left, baseX, baseY, maxX, maxY;
 
-  const mousemoveEventListener = (e) => {
-    const deltaX = e.clientX - baseX;
-    const deltaY = e.clientY - baseY;
+  const moveEventListener = (e) => {
+    e.preventDefault();
+
+    const deltaX = (e.clientX ?? e.touches[0].clientX) - baseX;
+    const deltaY = (e.clientY ?? e.touches[0].clientY) - baseY;
 
     container.style.left = Math.max(Math.min(left + deltaX, maxX), 0) + 'px';
     container.style.top = Math.max(Math.min(top + deltaY, maxY), 0) + 'px';
   };
 
-  const mouseupEventListener = () => {
+  const endEventListener = () => {
     iframe.style.pointerEvents = 'all';
 
-    document.removeEventListener('mouseup', mouseupEventListener);
-    document.removeEventListener('mousemove', mousemoveEventListener, true);
+    document.removeEventListener('mouseup', endEventListener);
+    document.removeEventListener('mousemove', moveEventListener);
+    document.removeEventListener('touchmove', moveEventListener);
   };
 
-  draggable.addEventListener('mousedown', (e) => {
+  const startEventListener = (e) => {
     const rect = container.getBoundingClientRect();
     top = rect.top;
     left = rect.left;
@@ -225,8 +232,8 @@ function setupElementPickerPopup() {
     maxX = window.innerWidth - container.clientWidth;
     maxY = window.innerHeight - container.clientHeight;
 
-    baseX = e.clientX;
-    baseY = e.clientY;
+    baseX = e.clientX ?? e.touches[0].clientX;
+    baseY = e.clientY ?? e.touches[0].clientY;
 
     Object.assign(container.style, {
       top: top + 'px',
@@ -237,11 +244,25 @@ function setupElementPickerPopup() {
 
     iframe.style.pointerEvents = 'none';
 
-    document.addEventListener('mousemove', mousemoveEventListener, true);
-    document.addEventListener('mouseup', mouseupEventListener);
-  });
+    document.addEventListener('mousemove', moveEventListener),
+      { passive: false };
+    document.addEventListener('mouseup', endEventListener);
+
+    document.addEventListener('touchmove', moveEventListener, {
+      passive: false,
+    });
+    document.addEventListener('touchend', endEventListener);
+  };
+
+  draggable.addEventListener('mousedown', startEventListener);
+  draggable.addEventListener('touchstart', startEventListener);
 
   return iframe;
+}
+
+function getElementArea(element) {
+  const rect = element.getBoundingClientRect();
+  return rect.width * rect.height;
 }
 
 (function () {
@@ -249,10 +270,11 @@ function setupElementPickerPopup() {
   let currentEl = null;
   let overlayEl = null;
   let selector = '';
-  let slider = 1;
+  let sliderMax = 1;
+  let sliderValue = 1;
   let similar = false;
 
-  const iframe = setupElementPickerPopup();
+  const iframe = setupPopup();
   if (!iframe) {
     console.warn('Element picker popup already running.');
     return;
@@ -265,7 +287,13 @@ function setupElementPickerPopup() {
   const updatePopup = () => {
     if (iframe.contentWindow) {
       iframe.contentWindow.postMessage(
-        { type: 'gh:element-picker:selector', selector, slider, similar },
+        {
+          type: 'gh:element-picker:selector',
+          selector,
+          sliderMax,
+          sliderValue,
+          similar,
+        },
         '*',
       );
       iframe.contentWindow.focus();
@@ -273,6 +301,8 @@ function setupElementPickerPopup() {
   };
 
   const hideElements = async function () {
+    document.removeEventListener('transitionend', transitionendEventListener);
+
     pickers.splice(0).forEach(async (picker) => {
       Object.assign(picker.style, {
         background: '#00aef0',
@@ -303,6 +333,7 @@ function setupElementPickerPopup() {
       await delay(750);
 
       picker.remove();
+      2;
     });
 
     await delay(250);
@@ -320,6 +351,8 @@ function setupElementPickerPopup() {
       `${selector} { display: none !important; }`,
       globalStyles.sheet.cssRules.length,
     );
+
+    document.addEventListener('transitionend', transitionendEventListener);
   };
 
   /* Event Listeners */
@@ -353,18 +386,30 @@ function setupElementPickerPopup() {
     if (overlayEl) return;
 
     if (selector) {
-      document.removeEventListener('mousemove', mousemoveEventListener, true);
+      document.removeEventListener('mousemove', mousemoveEventListener);
 
       overlayEl = document.createElement(pickerTagName);
       overlayEl.setAttribute('style', OVERLAY_STYLES);
       document.body.appendChild(overlayEl);
 
-      slider = 1;
+      const targetElArea = getElementArea(targetEl);
+
+      sliderMax = 1;
+      sliderValue = 0;
       let parentElement = targetEl.parentElement;
       while (parentElement && parentElement !== document.body) {
-        slider += 1;
+        const parentArea = getElementArea(parentElement);
+        if (targetElArea * 1.1 >= parentArea) {
+          sliderValue += 1;
+          currentEl = parentElement;
+          selector = getSelector(currentEl, similar);
+        }
+
+        sliderMax += 1;
         parentElement = parentElement.parentElement;
       }
+
+      sliderValue = sliderMax - sliderValue;
 
       updatePopup();
     }
@@ -372,6 +417,12 @@ function setupElementPickerPopup() {
 
   const resizeEventListener = () => {
     renderPickers(selector, true);
+  };
+
+  const transitionendEventListener = (event) => {
+    if (event.target.tagName.toLowerCase() !== pickerTagName) {
+      renderPickers(selector, true);
+    }
   };
 
   const keydownEventListener = (event) => {
@@ -389,7 +440,9 @@ function setupElementPickerPopup() {
         break;
 
       case 'gh:element-picker:slider': {
-        let value = slider - event.data.value;
+        sliderValue = event.data.value;
+
+        let value = sliderMax - sliderValue;
         currentEl = targetEl;
         while (value > 0) {
           currentEl = currentEl.parentElement;
@@ -425,7 +478,7 @@ function setupElementPickerPopup() {
         renderPickers(selector);
 
         document.documentElement.inert = false;
-        document.addEventListener('mousemove', mousemoveEventListener, true);
+        document.addEventListener('mousemove', mousemoveEventListener);
         break;
 
       case 'gh:element-picker:hide':
@@ -460,15 +513,17 @@ function setupElementPickerPopup() {
     window.removeEventListener('resize', resizeEventListener);
     window.removeEventListener('message', messageEventListener);
 
-    document.removeEventListener('mousemove', mousemoveEventListener, true);
+    document.removeEventListener('mousemove', mousemoveEventListener);
     document.removeEventListener('click', clickEventListener, true);
     document.removeEventListener('keydown', keydownEventListener);
+    document.removeEventListener('transitionend', transitionendEventListener);
   };
 
   window.addEventListener('resize', resizeEventListener);
   window.addEventListener('message', messageEventListener);
 
-  document.addEventListener('mousemove', mousemoveEventListener, true);
+  document.addEventListener('mousemove', mousemoveEventListener);
   document.addEventListener('click', clickEventListener, true);
   document.addEventListener('keydown', keydownEventListener);
+  document.addEventListener('transitionend', transitionendEventListener);
 })();
