@@ -86,15 +86,16 @@ async function back(host) {
 mount(document.body, {
   state: 'select', // select, configure, hidden
   selector: '',
-  slider: {
+  sliderValue: {
     value: 1,
     observe(host, value, lastValue) {
       if (lastValue) host.slider = value;
     },
   },
+  sliderMax: 1,
   similar: false,
   render: {
-    value: ({ state, selector, slider, similar }) => html`
+    value: ({ state, selector, sliderValue, sliderMax, similar }) => html`
       <template layout="column height:full">
         <div layout="row items:center content:space-between height:6">
           <ui-icon name="drag" color="tertiary" layout="padding:1.5"></ui-icon>
@@ -113,7 +114,7 @@ mount(document.body, {
         ${state === 'select' &&
         html`
           <div layout="grow column center gap:2 padding:0:1.5:1.5">
-            <img src="${selectImage}" width="300" height="144" />
+            <img src="${selectImage}" width="200" height="96" />
             <div layout="block:center">
               <ui-text type="label-l">Distraction Be Gone</ui-text>
               <ui-text color="tertiary">
@@ -125,13 +126,13 @@ mount(document.body, {
         ${state === 'configure' &&
         html`
           <element-picker-container
-            layout="overflow:scroll grow column gap:2 padding:1.5"
+            layout="overflow:scroll grow column gap:1.5 padding:1.5"
           >
             <div layout="column gap">
               <ui-input>
                 <textarea
                   style="resize:none"
-                  rows="5"
+                  rows="3"
                   value="${selector}"
                   spellcheck="false"
                   autocorrect="off"
@@ -151,19 +152,23 @@ mount(document.body, {
                 </ui-text>
               </label>
             </div>
-            <div layout="column gap:2">
-              <div layout="column gap">
-                <ui-text type="label-m" layout="block:center">
+            <div layout="column gap">
+              <div layout="column">
+                <ui-text type="label-s" layout="block:center">
                   Move the slider to show or hide sections.
                 </ui-text>
                 <element-picker-range
-                  max="${slider}"
-                  value="${slider}"
+                  max="${sliderMax}"
+                  value="${sliderValue}"
                   oninput="${slide}"
                 ></element-picker-range>
                 <div layout="row content:space-between items:center">
-                  <ui-text type="label-xs" color="tertiary">MAX</ui-text>
-                  <ui-text type="label-xs" color="tertiary">MIN</ui-text>
+                  <ui-text type="label-xs" color="tertiary" uppercase>
+                    Zoom out
+                  </ui-text>
+                  <ui-text type="label-xs" color="tertiary" uppercase>
+                    Zoom in
+                  </ui-text>
                 </div>
               </div>
             </div>
@@ -179,13 +184,11 @@ mount(document.body, {
         `}
         ${state === 'hidden' &&
         html`
-          <div
-            layout="overflow:scroll grow column items:center gap:2 padding:0:1.5:0"
-          >
-            <img src="${hiddenImage}" width="300" height="144" />
+          <div layout="overflow:scroll grow column center gap padding:0:1.5:0">
+            <img src="${hiddenImage}" width="200" height="96" />
             <div layout="block:center">
-              <ui-text type="label-l">Ta-da!</ui-text>
-              <ui-text color="tertiary">
+              <ui-text type="label-m">Ta-da!</ui-text>
+              <ui-text type="body-s" color="tertiary">
                 Ghostery added a rule to keep this content block hidden. You can
                 undo this anytime in website settings.
               </ui-text>
@@ -206,10 +209,7 @@ mount(document.body, {
       window.addEventListener('message', (event) => {
         if (event.data?.type === 'gh:element-picker:selector') {
           host.state = 'configure';
-
-          host.selector = event.data.selector;
-          host.slider = event.data.slider;
-          host.similar = event.data.similar;
+          Object.assign(host, event.data);
         }
       });
     },

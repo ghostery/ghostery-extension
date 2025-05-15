@@ -38,7 +38,7 @@ export default {
   },
   max: 10,
   render: ({ value, max }) => html`
-    <template layout="grid relative height:20px">
+    <template layout="grid relative">
       <input
         type="range"
         min="1"
@@ -51,6 +51,11 @@ export default {
       <div class="slide" id="right" layout="right:0"></div>
     </template>
   `.css`
+    :host {
+      height: 30px;
+      margin-bottom: -4px;
+    }
+
     input {
       -webkit-appearance: none;
       appearance: none;
@@ -58,7 +63,8 @@ export default {
       cursor: pointer;
       margin: 0;
       padding: 0;
-      height: 20px;
+      height: 30px;
+      -webkit-tap-highlight-color: transparent;
     }
 
     input:focus-visible {
@@ -67,17 +73,17 @@ export default {
     }
 
     input[type="range"]::-webkit-slider-runnable-track {
-      height: 20px;
+      height: 30px;
     }
 
     input[type="range"]::-moz-range-track {
-      height: 20px;
+      height: 30px;
     }
 
     input::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      margin-top: 0px;
+      margin-top: 5px;
       width: 6px;
       height: 20px;
       border-radius: 3px;
@@ -94,15 +100,11 @@ export default {
 
     .slide {
       position: absolute;
-      top: 7px;
+      top: 12px;
       height: 6px;
-      background: var(--background-wtm-solid);
+      background: var(--border-secondary);
       border-radius: 3px;
       pointer-events: none;
-    }
-
-    .slide#right {
-      background: var(--border-secondary);
     }
   `,
 };

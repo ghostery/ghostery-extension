@@ -10,6 +10,8 @@
  */
 
 import { html, router, store } from 'hybrids';
+import { parse } from 'tldts-experimental';
+
 import * as labels from '/ui/labels.js';
 
 import Options from '/store/options.js';
@@ -63,6 +65,7 @@ async function clearCustomContentBlocks(host) {
 export default {
   [router.connect]: { stack: () => [TrackerDetails] },
   domain: '',
+  topLevelDomain: ({ domain }) => parse(domain).domain,
   options: store(Options),
   paused: ({ options, domain }) =>
     (store.ready(options) && options.paused[domain]) || {},
@@ -84,7 +87,7 @@ export default {
     (store.ready(customContentBlocks) &&
       customContentBlocks.selectors[domain]?.join('\n')) ||
     '',
-  render: ({ domain, trackers, paused, selectors }) => html`
+  render: ({ domain, topLevelDomain, trackers, paused, selectors }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
@@ -244,11 +247,14 @@ export default {
             </ui-button>
           </div>
         </form>
-        ${hasWTMStats(domain) &&
+        ${hasWTMStats(topLevelDomain) &&
         html`
           <div layout="margin:3:0">
             <ui-action>
-              <a href="${`${WTM_PAGE_URL}/websites/${domain}`}" target="_blank">
+              <a
+                href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}"
+                target="_blank"
+              >
                 <settings-wtm-link>
                   WhoTracks.Me Statistical Report
                 </settings-wtm-link>
