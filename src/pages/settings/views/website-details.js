@@ -222,9 +222,9 @@ export default {
         <form layout="column gap:2" onsubmit="${saveCustomContentBlocks}">
           <div layout="column gap:0.5">
             <ui-text type="label-l">Blocked elements on this site</ui-text>
-            <ui-text>
-              In ac felis quis tortor malesuada pretium. Morbi mollis tellus ac
-              sapien. Vestibulum facilisis, purus nec pulvinar iaculis.
+            <ui-text layout="width:::540px">
+              Displays all content blocks manually hidden on this site. You can
+              remove them individually or clear the entire list.
             </ui-text>
           </div>
           <ui-input>

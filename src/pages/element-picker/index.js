@@ -102,7 +102,7 @@ mount(document.body, {
           ${state === 'configure' &&
           html`<ui-text type="label-m" layout="row items:center gap">
             <ui-icon name="logo" layout="size:2.5"></ui-icon>
-            Hide distracting content block
+            Hide content block
           </ui-text>`}
           <ui-button type="transparent" onclick="${close}">
             <button>
