@@ -116,10 +116,8 @@ mount(document.body, {
           <div layout="grow column center gap:2 padding:0:1.5:1.5">
             <img src="${selectImage}" width="200" height="96" />
             <div layout="block:center">
-              <ui-text type="label-l">Distraction Be Gone</ui-text>
-              <ui-text color="tertiary">
-                Click on distracting content block.
-              </ui-text>
+              <ui-text type="label-l">Hide distraction</ui-text>
+              <ui-text color="tertiary">Select distracting element</ui-text>
             </div>
           </div>
         `}
@@ -187,7 +185,7 @@ mount(document.body, {
           <div layout="overflow:scroll grow column center gap padding:0:1.5:0">
             <img src="${hiddenImage}" width="200" height="96" />
             <div layout="block:center">
-              <ui-text type="label-m">Ta-da!</ui-text>
+              <ui-text type="label-l">Gone!</ui-text>
               <ui-text type="body-s" color="tertiary">
                 Ghostery added a rule to keep this content block hidden. You can
                 undo this anytime in website settings.

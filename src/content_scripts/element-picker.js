@@ -32,9 +32,9 @@ const POPUP_STYLES = `
   padding: 0;
   bottom: 16px;
   right: 16px;
-  width: min(380px, 100%);
+  width: min(370px, 100%);
   max-width: calc(100% - 32px);
-  height: 305px;
+  height: 320px;
   border: none;
   border-radius: 8px;
   background: #FFF;
