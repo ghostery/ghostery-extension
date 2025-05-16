@@ -11,24 +11,15 @@
 
 import { html } from 'hybrids';
 
-function preventClick(host, event) {
-  if (host.value) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-}
-
 export default {
-  managed: {
-    value: false,
-    reflect: true,
-    observe(host, value) {
-      host.inert = value;
-    },
-  },
   render: () => html`
-    <template layout="grid" onclick="${preventClick}">
+    <template layout="block">
       <slot></slot>
     </template>
+  `.css`
+    :host {
+      background: var(--background-secondary);
+      border-top: 1px solid var(--border-primary);
+    }
   `,
 };
