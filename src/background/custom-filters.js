@@ -161,7 +161,7 @@ async function updateEngine(text) {
 }
 
 async function update(text, { trustedScriptlets }) {
-  // Add custom content block to the end of the list
+  // Add custom content blocks to the end of the list
   const customContentBlocks = await store.resolve(CustomContentBlocks);
   let customContentBlocksFilters = 0;
 
