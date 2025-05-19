@@ -441,6 +441,25 @@ const buildPromise = build({
     },
   },
   plugins: [
+    // Keep offscreen documents from @whotracksme/reporting
+    {
+      name: 'copy-reporting-assets',
+      buildStart() {
+        const srcDir = resolve(
+          process.cwd(),
+          'node_modules/@whotracksme/reporting/reporting/src/offscreen/doublefetch/',
+        );
+        const outDir = resolve(process.cwd(), 'dist/offscreen/doublefetch/');
+        if (!existsSync(outDir)) {
+          mkdirSync(outDir, { recursive: true });
+        }
+        const files = readdirSync(srcDir);
+        files.forEach((file) => {
+          cpSync(resolve(srcDir, file), resolve(outDir, file));
+        });
+      },
+    },
+
     // This custom plugin cleans ups chunks imports of the `.html` inputs
     //  to only include CSS files. This is necessary because Vite generates
     // every imported JS file as script tag in the resulting HTML file.
