@@ -33,7 +33,15 @@ import Config, {
 
 let options = Options;
 
-const WEB_ACCESSIBLE_RESOURCES = new Set(__RESOURCES__);
+const REDIRECT_RESOURCE_PATH_PREFIX = 'rule_resources/redirects/';
+const REDIRECT_RESOURCES =
+  __PLATFORM__ === 'firefox'
+    ? chrome.runtime
+        .getManifest()
+        .web_accessible_resources.filter((resource) =>
+          resource.startsWith(REDIRECT_RESOURCE_PATH_PREFIX),
+        )
+    : [];
 
 const contentScripts = (() => {
   const map = new Map();
@@ -502,11 +510,11 @@ if (__PLATFORM__ === 'firefox') {
           // extension existence.
           if (
             details.type !== 'xmlhttprequest' &&
-            WEB_ACCESSIBLE_RESOURCES.has(redirect.name)
+            REDIRECT_RESOURCES.has(redirect.name)
           ) {
             result = {
               redirectUrl: chrome.runtime.getURL(
-                'rule_resources/redirects/' + redirect.name,
+                REDIRECT_RESOURCE_PATH_PREFIX + redirect.name,
               ),
             };
           } else {

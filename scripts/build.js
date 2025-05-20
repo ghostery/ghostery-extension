@@ -156,7 +156,7 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
-  define: { __PLATFORM__: JSON.stringify(argv.target), __RESOURCES__: [] },
+  define: { __PLATFORM__: JSON.stringify(argv.target) },
   build: {
     outDir: options.outDir,
     assetsDir: '',
@@ -303,7 +303,6 @@ if (manifest.manifest_version === 3) {
     manifest.web_accessible_resources.push(
       join('rule_resources/redirects', filename),
     );
-    config.define.__RESOURCES__.push(filename);
   });
 }
 
