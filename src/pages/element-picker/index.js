@@ -11,7 +11,8 @@
 
 import { mount, html, store } from 'hybrids';
 
-import CustomContentBlocks from '/store/custom-content-blocks.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
+
 import selectImage from './assets/select.svg';
 import hiddenImage from './assets/hidden.svg';
 
@@ -57,12 +58,12 @@ async function hide(host) {
   host.state = 'hidden';
   sendMessage('gh:element-picker:hide');
 
-  const customContentBlocks = await store.resolve(CustomContentBlocks);
-  const list = customContentBlocks.selectors[hostname] || [];
+  const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
+  const list = elementPickerSelectors.hostnames[hostname] || [];
 
   if (!list.includes(host.selector)) {
-    await store.set(customContentBlocks, {
-      selectors: { [hostname]: list.concat(host.selector) },
+    await store.set(elementPickerSelectors, {
+      hostnames: { [hostname]: list.concat(host.selector) },
     });
   }
 }
@@ -71,14 +72,14 @@ async function back(host) {
   host.state = 'configure';
   sendMessage('gh:element-picker:back');
 
-  const customContentBlocks = await store.resolve(CustomContentBlocks);
-  let list = customContentBlocks.selectors[hostname] || [];
+  const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
+  let list = elementPickerSelectors.hostnames[hostname] || [];
   const index = list.indexOf(host.selector);
 
   if (index > -1) {
     list = list.filter((_, i) => i !== index);
-    await store.set(customContentBlocks, {
-      selectors: { [hostname]: list.length ? list : null },
+    await store.set(elementPickerSelectors, {
+      hostnames: { [hostname]: list.length ? list : null },
     });
   }
 }

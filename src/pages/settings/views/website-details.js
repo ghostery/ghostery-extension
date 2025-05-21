@@ -16,7 +16,7 @@ import * as labels from '/ui/labels.js';
 
 import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
-import CustomContentBlocks from '/store/custom-content-blocks.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
@@ -33,12 +33,12 @@ function revokePaused({ options, domain }) {
   store.set(options, { paused: { [domain]: null } });
 }
 
-function enableCustomContentBlocks(host) {
+function enableElementPickerSelectors(host) {
   const saveButton = host.render().querySelector('#save-custom-content-blocks');
   saveButton.disabled = false;
 }
 
-async function saveCustomContentBlocks(host, event) {
+async function saveElementPickerSelectors(host, event) {
   event.preventDefault();
 
   const selectors = event.target.selectors.value
@@ -46,8 +46,8 @@ async function saveCustomContentBlocks(host, event) {
     .map((selector) => selector.trim())
     .filter((selector) => selector);
 
-  await store.set(host.customContentBlocks, {
-    selectors: {
+  await store.set(host.elementPickerSelectors, {
+    hostnames: {
       [host.domain]: selectors.length > 0 ? selectors : null,
     },
   });
@@ -55,11 +55,11 @@ async function saveCustomContentBlocks(host, event) {
   host.render().querySelector('#save-custom-content-blocks').disabled = true;
 }
 
-async function clearCustomContentBlocks(host) {
+async function clearElementPickerSelectors(host) {
   const textarea = host.render().querySelector('textarea');
   textarea.value = '';
 
-  enableCustomContentBlocks(host);
+  enableElementPickerSelectors(host);
 }
 
 export default {
@@ -82,10 +82,10 @@ export default {
               : tracker,
           )
       : [],
-  customContentBlocks: store(CustomContentBlocks),
-  selectors: ({ customContentBlocks, domain }) =>
-    (store.ready(customContentBlocks) &&
-      customContentBlocks.selectors[domain]?.join('\n')) ||
+  elementPickerSelectors: store(ElementPickerSelectors),
+  selectors: ({ elementPickerSelectors, domain }) =>
+    (store.ready(elementPickerSelectors) &&
+      elementPickerSelectors.hostnames[domain]?.join('\n')) ||
     '',
   render: ({ domain, topLevelDomain, trackers, paused, selectors }) => html`
     <template layout="contents">
@@ -219,7 +219,7 @@ export default {
             )}
           </settings-table>
         </div>
-        <form layout="column gap:2" onsubmit="${saveCustomContentBlocks}">
+        <form layout="column gap:2" onsubmit="${saveElementPickerSelectors}">
           <div layout="column gap:0.5">
             <ui-text type="label-l">Blocked elements on this site</ui-text>
             <ui-text layout="width:::540px">
@@ -234,7 +234,7 @@ export default {
               value="${selectors}"
               spellcheck="false"
               autocorrect="off"
-              oninput="${enableCustomContentBlocks}"
+              oninput="${enableElementPickerSelectors}"
               style="white-space:nowrap"
             ></textarea>
           </ui-input>
@@ -242,7 +242,7 @@ export default {
             <ui-button id="save-custom-content-blocks" disabled>
               <button type="submit">Save</button>
             </ui-button>
-            <ui-button onclick="${clearCustomContentBlocks}">
+            <ui-button onclick="${clearElementPickerSelectors}">
               <button type="button">Clear</button>
             </ui-button>
           </div>
