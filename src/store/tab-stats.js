@@ -93,15 +93,14 @@ const Stats = {
     async get() {
       // Resolve tab info
       tab ||= await getCurrentTab();
-      if (!tab || !tab.url.startsWith('http')) return {};
 
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
 
-      if (tabStats && tab.url.includes(tabStats.hostname)) {
-        return tabStats;
-      }
-
-      return { hostname: parse(tab.url).hostname };
+      return (
+        tabStats || {
+          hostname: tab.url.startsWith('http') ? parse(tab.url).hostname : '',
+        }
+      );
     },
   },
 };

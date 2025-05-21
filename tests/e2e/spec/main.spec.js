@@ -44,7 +44,7 @@ describe('Main Features', function () {
       // Never-consent can left the cmp structure until next page load
       await browser.url(WEBSITE_URL);
 
-      await expect($(SELECTOR)).not.toBeDisplayed();
+      await expect($(SELECTOR)).toHaveText('');
     });
   });
 

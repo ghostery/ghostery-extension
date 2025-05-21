@@ -42,16 +42,5 @@ export async function openTabWithUrl(host, event) {
 
 export async function getCurrentTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab) return null;
-
-  if (tab.url !== window.location.href) {
-    return tab;
-  }
-
-  const [otherTab] = await chrome.tabs.query({
-    active: true,
-    currentWindow: false,
-  });
-
-  return otherTab || null;
+  return tab || null;
 }

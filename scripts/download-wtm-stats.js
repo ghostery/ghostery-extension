@@ -9,16 +9,21 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve } from 'node:path';
 
-const TARGET_PATH = resolve('src', 'rule_resources', 'wtm-stats.js');
-const DATA_URL =
-  'https://raw.githubusercontent.com/whotracksme/whotracks.me/ded8cb4a9bad0fa1fb0b60996382ba6527127c33/whotracksme/data/assets/trackers-preview.json';
+const { dataDependencies } = JSON.parse(
+  readFileSync(resolve('package.json'), 'utf-8'),
+);
 
+const TARGET_PATH = resolve('src', 'rule_resources', 'wtm-stats.js');
 if (existsSync(TARGET_PATH)) process.exit(0);
 
-const data = await fetch(DATA_URL).then((res) => {
+console.log(`Downloading wtm-stats (${dataDependencies['wtm-stats']})...`);
+
+const data = await fetch(
+  `https://raw.githubusercontent.com/whotracksme/whotracks.me/${dataDependencies['wtm-stats']}/whotracksme/data/assets/trackers-preview.json`,
+).then((res) => {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return res.text();
 });
@@ -26,7 +31,7 @@ const data = await fetch(DATA_URL).then((res) => {
 writeFileSync(
   TARGET_PATH,
   `/**
- * This file is an automatic conversion of a JSON to JavaScipt.
+ * This file is an automatic conversion of a JSON to JavaScript.
  * Source: https://github.com/whotracksme/whotracks.me/blob/master/whotracksme/data/assets/trackers-preview.json
  * Conversion script: scripts/download-wtm-stats.js
  *
@@ -44,5 +49,3 @@ writeFileSync(
 export default ${data};
 `,
 );
-
-console.log('Trackers preview data downloaded');
