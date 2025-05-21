@@ -48,6 +48,7 @@ export const ENGINES = [
 ];
 
 const OPTIONS_VERSION = 3;
+export const WHATS_NEW_VERSION = 1;
 
 const Options = {
   // Main features
@@ -102,6 +103,9 @@ const Options = {
   // Sync
   sync: true,
   revision: 0,
+
+  // What's new
+  whatsNewVersion: 0,
 
   [store.connect]: {
     async get() {
