@@ -14,7 +14,7 @@ import { html, store, router, msg } from 'hybrids';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 
 import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
-import CustomContentBlocks from '/store/custom-content-blocks.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
 
 import * as exceptions from '/utils/exceptions.js';
@@ -137,15 +137,15 @@ export default {
   stats: store(TabStats),
   notification: store(Notification),
   managedConfig: store(ManagedConfig),
-  customContentBlocks: store(CustomContentBlocks),
+  elementPickerSelectors: store(ElementPickerSelectors),
   alert: '',
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
   globalPause: ({ options }) =>
     store.ready(options) && options.paused[GLOBAL_PAUSE_ID],
-  contentBlocksSelectors: ({ customContentBlocks, stats }) =>
-    (store.ready(stats, customContentBlocks) &&
-      customContentBlocks.selectors[stats.hostname]?.length) ||
+  contentBlocksSelectors: ({ elementPickerSelectors, stats }) =>
+    (store.ready(stats, elementPickerSelectors) &&
+      elementPickerSelectors.hostnames[stats.hostname]?.length) ||
     0,
   render: ({
     options,
