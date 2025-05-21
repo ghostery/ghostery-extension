@@ -34,14 +34,6 @@ import Config, {
 let options = Options;
 
 const REDIRECT_RESOURCE_PATH_PREFIX = 'rule_resources/redirects/';
-const REDIRECT_RESOURCES =
-  __PLATFORM__ === 'firefox'
-    ? chrome.runtime
-        .getManifest()
-        .web_accessible_resources.filter((resource) =>
-          resource.startsWith(REDIRECT_RESOURCE_PATH_PREFIX),
-        )
-    : [];
 
 const contentScripts = (() => {
   const map = new Map();
@@ -508,13 +500,10 @@ if (__PLATFORM__ === 'firefox') {
           request.blocked = true;
           // There's a possibility that redirecting to file URL can expose
           // extension existence.
-          if (
-            details.type !== 'xmlhttprequest' &&
-            REDIRECT_RESOURCES.has(redirect.name)
-          ) {
+          if (details.type !== 'xmlhttprequest') {
             result = {
               redirectUrl: chrome.runtime.getURL(
-                REDIRECT_RESOURCE_PATH_PREFIX + redirect.name,
+                REDIRECT_RESOURCE_PATH_PREFIX + redirect.filename,
               ),
             };
           } else {
