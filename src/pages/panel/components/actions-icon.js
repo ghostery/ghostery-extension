@@ -12,15 +12,19 @@
 import { html } from 'hybrids';
 
 export default {
-  render: () => html`<template layout="row padding:0.5 margin:1.5:0">
-    <slot></slot>
-  </template>`.css`
-    :host {
-      background: var(--background-secondary);
-    }
-
-    ::slotted(*:not(:last-child)) {
-      border-right: 1px solid var(--border-primary);
-    }
-  `,
+  name: '',
+  color: '',
+  render: ({ name, color }) =>
+    html`
+      <template layout="block padding">
+        <ui-icon name="${name}" color="${color}" layout="size:3">
+          <slot></slot>
+        </ui-icon>
+      </template>
+    `.css`
+      :host {
+        background: var(--background-${color});
+        border-radius: 50%;
+      }
+    `,
 };

@@ -9,18 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { define } from 'hybrids';
 
-export default {
-  render: () => html`<template layout="row padding:0.5 margin:1.5:0">
-    <slot></slot>
-  </template>`.css`
-    :host {
-      background: var(--background-secondary);
-    }
-
-    ::slotted(*:not(:last-child)) {
-      border-right: 1px solid var(--border-primary);
-    }
-  `,
-};
+define.from(
+  import.meta.glob(['./components/*.js', './views/*.js'], {
+    eager: true,
+    import: 'default',
+  }),
+  { root: ['components', 'views'], prefix: 'element-picker' },
+);

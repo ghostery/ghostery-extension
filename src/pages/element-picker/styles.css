@@ -1,0 +1,8 @@
+html {
+  --background-brand-strong: var(--background-wtm-solid);
+  --border-brand-solid: var(--background-wtm-solid);
+}
+
+body {
+  height: auto;
+}

@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-export default {
+const CustomFilters = {
   text: '',
   [store.connect]: {
     cache: false,
@@ -27,3 +27,5 @@ export default {
     },
   },
 };
+
+export default CustomFilters;

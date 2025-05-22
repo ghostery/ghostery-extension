@@ -294,7 +294,7 @@ input {
     --shadow-panel: var(--color-alpha-black-50);
   }
 
-  input {
+  html:not([data-theme='light']) input {
     color-scheme: dark;
   }
 }
@@ -325,6 +325,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  outline-color: var(--border-brand-solid);
+}
+
 input::-webkit-search-cancel-button {
   -webkit-appearance: none;
   height: 16px;
@@ -349,8 +353,4 @@ input::file-selector-button {
 select option {
   background: var(--background-primary);
   color: var(--color-primary);
-}
-
-a {
-  outline-color: var(--border-brand-solid);
 }
