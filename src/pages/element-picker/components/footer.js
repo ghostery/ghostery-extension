@@ -13,12 +13,12 @@ import { html } from 'hybrids';
 
 export default {
   render: () => html`
-    <template layout="row items:center content:space-between padding:2 gap:2">
+    <template layout="row items:center content:space-between padding gap:2">
       <slot></slot>
     </template>
   `.css`
-      :host {
-        border-top: 1px solid var(--border-primary);
-      }
-    `,
+    :host {
+      border-top: 1px solid var(--border-primary);
+    }
+  `,
 };
