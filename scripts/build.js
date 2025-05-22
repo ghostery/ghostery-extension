@@ -32,7 +32,7 @@ const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
   assets: ['_locales', 'icons', 'static_pages'],
-  pages: ['logger', 'onboarding', 'whotracksme'],
+  pages: ['logger', 'onboarding', 'whotracksme', 'whats-new'],
 };
 
 // Generate arguments from command line
@@ -372,9 +372,7 @@ manifest.web_accessible_resources?.forEach((entry) => {
 // background
 if (manifest.background) {
   source.push(
-    manifest.background.service_worker ||
-      manifest.background.page ||
-      manifest.background.scripts[0],
+    manifest.background.service_worker || manifest.background.scripts[0],
   );
 }
 
