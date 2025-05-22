@@ -28,6 +28,7 @@ import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import Config, {
+  FLAG_CHROMIUM_SCRIPTING_ONRESPONSESTARTED,
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
 } from '/store/config.js';
 
@@ -92,6 +93,37 @@ if (__PLATFORM__ === 'firefox') {
       contentScripts.unregister(hostname);
     }
   });
+}
+
+let ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED = false;
+if (__PLATFORM__ === 'chromium') {
+  store.resolve(Config).then((config) => {
+    const enabled = config.hasFlag(FLAG_CHROMIUM_SCRIPTING_ONRESPONSESTARTED);
+    if (!enabled) contentScripts.unregisterAll();
+
+    ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED = enabled;
+  });
+}
+
+// Use `documentId` field from Chromium `webRequest` and `webNavigation` events
+// to determine if cosmetic injection is already happened. Note that this is
+// not available on Firefox yet. If we need to listen from multiple events on
+// Firefox, we need to calculate a hash of tab and frame to generate `documentId`
+// on the fly.
+/**
+ * @type {Set<string>}
+ */
+const executedDocumentIds = new Set();
+
+/**
+ * Computes a unique id corresponding to specific tab and frame.
+ * `documentId` may not available from `webRequest` event callbacks as the
+ * document may not present at the time of event occurrence.
+ * @param {number} tabId
+ * @param {number} frameId
+ */
+function computeDocumentId(tabId, frameId) {
+  return `${tabId},${frameId}`;
 }
 
 function getEnabledEngines(config) {
@@ -228,7 +260,7 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
-function injectScriptlets(filters, tabId, frameId, hostname) {
+function injectScriptlets(filters, tabId, frameId, hostname, debugMarker) {
   let contentScript = '';
   for (const filter of filters) {
     const parsed = filter.parseScript();
@@ -279,6 +311,24 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
         }
       },
     );
+    if (debugMarker) {
+      chrome.scripting.executeScript({
+        injectImmediately: true,
+        world:
+          chrome.scripting.ExecutionWorld?.MAIN ??
+          (__PLATFORM__ === 'firefox' ? undefined : 'MAIN'),
+        target: {
+          tabId,
+          frameIds: [frameId],
+        },
+        func: function (debugMarker) {
+          console.debug(
+            `[ghostery-debug] marker=${debugMarker} readyState=${document.readyState}`,
+          );
+        },
+        args: [debugMarker],
+      });
+    }
   }
 
   if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
@@ -311,7 +361,7 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
-  const { bootstrap: isBootstrap, scriptletsOnly } = config;
+  const { bootstrap: isBootstrap, scriptletsOnly, debugMarker } = config;
 
   try {
     setup.pending && (await setup.pending);
@@ -321,6 +371,18 @@ async function injectCosmetics(details, config) {
   }
 
   const { frameId, url, tabId } = details;
+
+  if (
+    __PLATFORM__ === 'chromium' &&
+    ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED
+  ) {
+    const documentId = computeDocumentId(tabId, frameId);
+    if (executedDocumentIds.has(documentId)) {
+      executedDocumentIds.delete(documentId);
+      return;
+    }
+    executedDocumentIds.add(documentId);
+  }
 
   const parsed = parse(url);
   const domain = parsed.domain || '';
@@ -379,7 +441,7 @@ async function injectCosmetics(details, config) {
     }
 
     if (isBootstrap) {
-      injectScriptlets(scriptFilters, tabId, frameId, hostname);
+      injectScriptlets(scriptFilters, tabId, frameId, hostname, debugMarker);
     }
 
     if (scriptletsOnly) {
@@ -420,10 +482,30 @@ async function injectCosmetics(details, config) {
 
 chrome.webNavigation.onCommitted.addListener(
   (details) => {
-    injectCosmetics(details, { bootstrap: true });
+    injectCosmetics(details, {
+      bootstrap: true,
+      debugMarker: 'webNavigation.onCommitted',
+    });
   },
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
 );
+
+if (__PLATFORM__ === 'chromium') {
+  // `webNavigation.onCommitted` may be triggered too late on cached responses.
+  // TODO: This still doesn't catch navigations from Chrome address bar (Omnibox).
+  chrome.webRequest.onResponseStarted.addListener(
+    (details) => {
+      if (!ENABLE_CHROMIUM_SCRIPTING_ONRESPONSESTARTED) {
+        return;
+      }
+      injectCosmetics(details, {
+        bootstrap: true,
+        debugMarker: 'webRequest.onResponseStarted',
+      });
+    },
+    { urls: ['http://*/*', 'https://*/*'] },
+  );
+}
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'injectCosmetics' && sender.tab) {
