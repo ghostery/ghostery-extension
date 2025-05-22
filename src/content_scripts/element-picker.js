@@ -35,7 +35,7 @@ const POPUP_STYLES = `
   width: min(370px, 100%);
   max-width: calc(100% - 32px);
   height: 214px;
-  border: none;
+  border: 1px solid #B9BBBE;
   border-radius: 8px;
   background: #FFF;
   box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.30);
