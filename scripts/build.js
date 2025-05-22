@@ -279,7 +279,7 @@ mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
 for (const file of readdirSync(
   resolve(options.srcDir, 'rule_resources', 'redirects'),
 )) {
-  if (__PLATFORM__ !== 'firefox' && file.includes('MIME_TYPE_STUB')) {
+  if (argv.target !== 'firefox' && file.includes('MIME_TYPE_STUB')) {
     continue;
   }
   cpSync(
