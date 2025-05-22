@@ -279,6 +279,9 @@ mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
 for (const file of readdirSync(
   resolve(options.srcDir, 'rule_resources', 'redirects'),
 )) {
+  if (__PLATFORM__ !== 'firefox' && file.includes('MIME_TYPE_STUB')) {
+    continue;
+  }
   cpSync(
     resolve(options.srcDir, 'rule_resources', 'redirects', file),
     resolve(options.outDir, 'rule_resources', 'redirects', file),
@@ -287,7 +290,7 @@ for (const file of readdirSync(
 
 // append web_accessible_resources
 const redirectResources = readdirSync(
-  resolve(options.srcDir, 'rule_resources/redirects'),
+  resolve(options.outDir, 'rule_resources/redirects'),
 );
 
 if (manifest.manifest_version === 3) {
