@@ -33,8 +33,6 @@ import Config, {
 
 let options = Options;
 
-const REDIRECT_RESOURCE_PATH_PREFIX = 'rule_resources/redirects/';
-
 const contentScripts = (() => {
   const map = new Map();
   return {
@@ -503,7 +501,7 @@ if (__PLATFORM__ === 'firefox') {
           if (details.type !== 'xmlhttprequest') {
             result = {
               redirectUrl: chrome.runtime.getURL(
-                REDIRECT_RESOURCE_PATH_PREFIX + redirect.filename,
+                'rule_resources/redirects/' + redirect.filename,
               ),
             };
           } else {
