@@ -496,7 +496,17 @@ if (__PLATFORM__ === 'firefox') {
 
         if (redirect !== undefined) {
           request.blocked = true;
-          result = { redirectUrl: redirect.dataUrl };
+          // There's a possibility that redirecting to file URL can expose
+          // extension existence.
+          if (details.type !== 'xmlhttprequest') {
+            result = {
+              redirectUrl: chrome.runtime.getURL(
+                'rule_resources/redirects/' + redirect.filename,
+              ),
+            };
+          } else {
+            result = { redirectUrl: redirect.dataUrl };
+          }
         } else if (match === true) {
           request.blocked = true;
           result = { cancel: true };
