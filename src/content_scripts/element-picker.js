@@ -34,7 +34,7 @@ const POPUP_STYLES = `
   right: 16px;
   width: min(370px, 100%);
   max-width: calc(100% - 32px);
-  height: 320px;
+  height: 214px;
   border: none;
   border-radius: 8px;
   background: #FFF;
@@ -280,6 +280,7 @@ function getElementArea(element) {
     return;
   }
 
+  const container = iframe.parentElement;
   const globalStyles = document.createElement('style');
   globalStyles.textContent = GLOBAL_STYLES;
   document.head.appendChild(globalStyles);
@@ -433,6 +434,9 @@ function getElementArea(element) {
 
   const messageEventListener = (event) => {
     switch (event.data?.type) {
+      case 'gh:element-picker:resize':
+        container.style.height = `${event.data.height}px`;
+        break;
       case 'gh:element-picker:selector':
         selector = event.data.selector;
         renderPickers(selector);

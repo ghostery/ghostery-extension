@@ -84,6 +84,12 @@ async function back(host) {
   }
 }
 
+new ResizeObserver(() => {
+  sendMessage('gh:element-picker:resize', {
+    height: document.body.clientHeight,
+  });
+}).observe(document.body, { box: 'border-box' });
+
 mount(document.body, {
   state: 'select', // select, configure, hidden
   selector: '',
@@ -98,15 +104,15 @@ mount(document.body, {
   render: {
     value: ({ state, selector, sliderValue, sliderMax, similar }) => html`
       <template layout="column height:full">
-        <div layout="row items:center content:space-between height:6">
-          <ui-icon name="drag" color="tertiary" layout="padding:1.5"></ui-icon>
+        <div layout="row items:center content:space-between height:4.5">
+          <ui-icon name="drag" color="tertiary" layout="padding:1"></ui-icon>
           ${state === 'configure' &&
           html`<ui-text type="label-m" layout="row items:center gap">
             <ui-icon name="logo" layout="size:2.5"></ui-icon>
             Hide content block
           </ui-text>`}
           <ui-button type="transparent" onclick="${close}">
-            <button>
+            <button layout="padding:0:1">
               <ui-icon name="close" color="tertiary"></ui-icon>
             </button>
           </ui-button>
@@ -116,7 +122,7 @@ mount(document.body, {
         html`
           <div layout="grow column center gap:2 padding:0:1.5:1.5">
             <img src="${selectImage}" width="200" height="96" />
-            <div layout="block:center">
+            <div layout="block:center padding:bottom:2">
               <ui-text type="label-l">Hide distraction</ui-text>
               <ui-text color="tertiary">Select distracting element</ui-text>
             </div>
@@ -124,9 +130,7 @@ mount(document.body, {
         `}
         ${state === 'configure' &&
         html`
-          <element-picker-container
-            layout="overflow:scroll grow column gap:1.5 padding:1.5"
-          >
+          <element-picker-container layout="column gap:1.5 padding:1.5">
             <div layout="column gap">
               <ui-input>
                 <textarea
@@ -151,26 +155,29 @@ mount(document.body, {
                 </ui-text>
               </label>
             </div>
-            <div layout="column gap">
-              <div layout="column">
-                <ui-text type="label-s" layout="block:center">
-                  Move the slider to show or hide sections.
-                </ui-text>
-                <element-picker-range
-                  max="${sliderMax}"
-                  value="${sliderValue}"
-                  oninput="${slide}"
-                ></element-picker-range>
-                <div layout="row content:space-between items:center">
-                  <ui-text type="label-xs" color="tertiary" uppercase>
-                    Zoom out
+            ${sliderMax > 1 &&
+            html`
+              <div layout="column gap">
+                <div layout="column">
+                  <ui-text type="label-s" layout="block:center">
+                    Move the slider to show or hide sections.
                   </ui-text>
-                  <ui-text type="label-xs" color="tertiary" uppercase>
-                    Zoom in
-                  </ui-text>
+                  <element-picker-range
+                    max="${sliderMax}"
+                    value="${sliderValue}"
+                    oninput="${slide}"
+                  ></element-picker-range>
+                  <div layout="row content:space-between items:center">
+                    <ui-text type="label-xs" color="tertiary" uppercase>
+                      Zoom out
+                    </ui-text>
+                    <ui-text type="label-xs" color="tertiary" uppercase>
+                      Zoom in
+                    </ui-text>
+                  </div>
                 </div>
               </div>
-            </div>
+            `}
           </element-picker-container>
           <element-picker-footer>
             <ui-button onclick="${reselect}">
@@ -183,9 +190,9 @@ mount(document.body, {
         `}
         ${state === 'hidden' &&
         html`
-          <div layout="overflow:scroll grow column center gap padding:0:1.5:0">
+          <div layout="column center gap padding:0:1.5:0">
             <img src="${hiddenImage}" width="200" height="96" />
-            <div layout="block:center">
+            <div layout="block:center padding:bottom:2">
               <ui-text type="label-l">Gone!</ui-text>
               <ui-text type="body-s" color="tertiary">
                 Ghostery added a rule to keep this content block hidden. You can
