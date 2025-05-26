@@ -3,7 +3,7 @@
   "properties": {
     "disableOnboarding": {
       "title": "Disable onboarding process",
-      "description": "Automatically enable the extension without showing the onboarding process",
+      "description": "Automatically enables the extension without showing the onboarding process",
       "type": "boolean"
     },
 
@@ -19,9 +19,15 @@
       "type": "boolean"
     },
 
+    "disableTrackersPreview": {
+      "title": "Disable trackers preview",
+      "description": "Prevents the user from viewing the trackers wheel on SERPs",
+      "type": "boolean"
+    },
+
     "trustedDomains": {
       "title": "Trusted domains",
-      "description": "A list of domains that are trusted by default",
+      "description": "Defines a list of domains that are trusted by default",
       "type": "array",
       "items": {
         "type": "string"

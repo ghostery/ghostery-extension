@@ -15,6 +15,7 @@ import { parse } from 'tldts-experimental';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { getPausedDetails } from '/store/options.js';
+import ManagedConfig from '/store/managed-config.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
@@ -74,42 +75,51 @@ const SERP_URL_REGEXP =
   /^https:[/][/][^/]*[.]google[.][a-z]+([.][a-z]+)?[/]search/;
 
 // SERP tracking prevention and trackers preview content scripts
-chrome.webNavigation.onCommitted.addListener((details) => {
+chrome.webNavigation.onCommitted.addListener(async (details) => {
   if (details.url.match(SERP_URL_REGEXP)) {
-    store.resolve(Options).then((options) => {
-      if (options.wtmSerpReport) {
-        chrome.scripting.insertCSS({
+    const options = await store.resolve(Options);
+    const managedConfig = await store.resolve(ManagedConfig);
+
+    const trackersPreview =
+      options.wtmSerpReport && !managedConfig.disableTrackersPreview;
+
+    if (trackersPreview) {
+      chrome.scripting.insertCSS({
+        target: {
+          tabId: details.tabId,
+        },
+        css: trackersPreviewCSS,
+      });
+    }
+
+    if (trackersPreview || options.serpTrackingPrevention) {
+      const files = [];
+
+      if (trackersPreview) {
+        files.push('/content_scripts/trackers-preview.js');
+      }
+
+      if (!getPausedDetails(options) && options.serpTrackingPrevention) {
+        files.push('/content_scripts/prevent-serp-tracking.js');
+      }
+
+      if (files.length === 0) return;
+
+      chrome.scripting.executeScript(
+        {
+          injectImmediately: true,
+          world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
           target: {
             tabId: details.tabId,
           },
-          css: trackersPreviewCSS,
-        });
-      }
-
-      if (options.wtmSerpReport || options.serpTrackingPrevention) {
-        const files = [];
-
-        if (options.wtmSerpReport)
-          files.push('/content_scripts/trackers-preview.js');
-        if (!getPausedDetails(options) && options.serpTrackingPrevention)
-          files.push('/content_scripts/prevent-serp-tracking.js');
-
-        chrome.scripting.executeScript(
-          {
-            injectImmediately: true,
-            world: chrome.scripting.ExecutionWorld?.ISOLATED ?? 'ISOLATED',
-            target: {
-              tabId: details.tabId,
-            },
-            files,
-          },
-          () => {
-            if (chrome.runtime.lastError) {
-              console.error(chrome.runtime.lastError);
-            }
-          },
-        );
-      }
-    });
+          files,
+        },
+        () => {
+          if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+          }
+        },
+      );
+    }
   }
 });
