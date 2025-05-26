@@ -163,18 +163,19 @@ async function updateEngine(text) {
 async function update(text, { trustedScriptlets }) {
   // Add custom content blocks to the end of the list
   const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
-  let elementPickerSelectorsFilters = 0;
+  let elementPickerEntries = Object.entries(elementPickerSelectors.hostnames);
 
-  Object.entries(elementPickerSelectors.hostnames).forEach(
-    ([hostname, selectors]) => {
-      if (selectors) {
-        selectors.forEach((selector) => {
-          text += `\n${hostname}##${selector}`;
-          elementPickerSelectorsFilters++;
-        });
+  const elementPickerFilters = elementPickerEntries.reduce(
+    (acc, [hostname, selectors]) => {
+      for (const selector of selectors) {
+        acc.push(`${hostname}##${selector}`);
       }
+      return acc;
     },
+    [],
   );
+
+  text += `\n${elementPickerFilters.join('\n')}`;
 
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
@@ -191,7 +192,7 @@ async function update(text, { trustedScriptlets }) {
   );
 
   result.errors = errors;
-  result.cosmeticFilters -= elementPickerSelectorsFilters;
+  result.cosmeticFilters -= elementPickerFilters.length;
 
   // Update main engine with custom filters
   await reloadMainEngine();
