@@ -425,6 +425,18 @@ chrome.webNavigation.onCommitted.addListener(
   { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
 );
 
+if (__PLATFORM__ === 'chromium') {
+  chrome.webRequest.onResponseStarted.addListener(
+    (details) => {
+      if (details.tabId === -1) return;
+      if (details.type !== 'main_frame' && details.type !== 'sub_frame') return;
+
+      injectCosmetics(details, { bootstrap: true });
+    },
+    { urls: ['http://*/*', 'https://*/*'] },
+  );
+}
+
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'injectCosmetics' && sender.tab) {
     // Generate details object for the sender argument
