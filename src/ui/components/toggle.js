@@ -36,7 +36,7 @@ export default {
         <button
           onclick="${toggle}"
           layout="row items:start gap:2 padding:0.5 margin:-0.5"
-          tabindex="${disabled ? -1 : 0}"
+          inert="${disabled}"
         >
           <div
             layout="self:stretch grow row items:center"

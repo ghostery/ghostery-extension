@@ -12,6 +12,8 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
+import ManagedConfig from '/store/managed-config.js';
+
 import assets from '../assets/index.js';
 
 import Preview from './preview.js';
@@ -36,7 +38,8 @@ const PREVIEWS = {
 
 export default {
   options: store(Options),
-  render: ({ options }) => html`
+  managedConfig: store(ManagedConfig),
+  render: ({ options, managedConfig }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4" layout@768px="gap:4">
         <div layout="column gap" layout@992px="margin:bottom">
@@ -56,7 +59,7 @@ export default {
             community.
           </ui-text>
         </div>
-        ${store.ready(options) &&
+        ${store.ready(options, managedConfig) &&
         html`
           <section layout="column gap:4">
             <ui-toggle
@@ -112,6 +115,7 @@ export default {
               value="${options.wtmSerpReport}"
               onchange="${html.set(options, 'wtmSerpReport')}"
               data-qa="toggle:wtmSerpReport"
+              disabled="${managedConfig.disableTrackersPreview}"
             >
               <div layout="row items:start gap:2 grow" layout@768px="gap:3">
                 <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">

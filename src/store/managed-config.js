@@ -17,6 +17,7 @@ const ManagedConfig = {
   disableOnboarding: false,
   disableUserControl: false,
   disableUserAccount: false,
+  disableTrackersPreview: false,
   trustedDomains: [String],
 
   [store.connect]: async () => {
