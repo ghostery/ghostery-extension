@@ -222,7 +222,7 @@ export default {
         <form layout="column gap:2" onsubmit="${saveElementPickerSelectors}">
           <div layout="column gap:0.5">
             <ui-text type="label-l">Blocked elements on this site</ui-text>
-            <ui-text layout="width:::540px">
+            <ui-text>
               Displays all content blocks manually hidden on this site. You can
               remove them individually or clear the entire list.
             </ui-text>
@@ -239,7 +239,7 @@ export default {
             ></textarea>
           </ui-input>
           <div layout="row gap:2">
-            <ui-button id="save-custom-content-blocks" disabled>
+            <ui-button id="save-custom-content-blocks" type="success" disabled>
               <button type="submit">Save</button>
             </ui-button>
             <ui-button onclick="${clearElementPickerSelectors}">
