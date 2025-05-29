@@ -12,15 +12,13 @@
 import { html } from 'hybrids';
 
 export default {
-  render: () => html`<template layout="row padding:0.5 margin:1.5:0">
-    <slot></slot>
-  </template>`.css`
+  render: () => html`
+    <template layout="row items:center content:space-between padding gap:2">
+      <slot></slot>
+    </template>
+  `.css`
     :host {
-      background: var(--background-secondary);
-    }
-
-    ::slotted(*:not(:last-child)) {
-      border-right: 1px solid var(--border-primary);
+      border-top: 1px solid var(--border-primary);
     }
   `,
 };

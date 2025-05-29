@@ -10,10 +10,13 @@
  */
 
 import { html, router, store } from 'hybrids';
+import { parse } from 'tldts-experimental';
+
 import * as labels from '/ui/labels.js';
 
 import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import * as exceptions from '/utils/exceptions.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
@@ -30,10 +33,40 @@ function revokePaused({ options, domain }) {
   store.set(options, { paused: { [domain]: null } });
 }
 
+function enableElementPickerSelectors(host) {
+  const saveButton = host.render().querySelector('#save-custom-content-blocks');
+  saveButton.disabled = false;
+}
+
+async function saveElementPickerSelectors(host, event) {
+  event.preventDefault();
+
+  const selectors = event.target.selectors.value
+    .split('\n')
+    .map((selector) => selector.trim())
+    .filter((selector) => selector);
+
+  await store.set(host.elementPickerSelectors, {
+    hostnames: {
+      [host.domain]: selectors.length > 0 ? selectors : null,
+    },
+  });
+
+  host.render().querySelector('#save-custom-content-blocks').disabled = true;
+}
+
+async function clearElementPickerSelectors(host) {
+  const textarea = host.render().querySelector('textarea');
+  textarea.value = '';
+
+  enableElementPickerSelectors(host);
+}
+
 export default {
   [router.connect]: { stack: () => [TrackerDetails] },
-  options: store(Options),
   domain: '',
+  topLevelDomain: ({ domain }) => parse(domain).domain,
+  options: store(Options),
   paused: ({ options, domain }) =>
     (store.ready(options) && options.paused[domain]) || {},
   trackers: ({ options, domain }) =>
@@ -49,7 +82,12 @@ export default {
               : tracker,
           )
       : [],
-  render: ({ domain, trackers, paused }) => html`
+  elementPickerSelectors: store(ElementPickerSelectors),
+  selectors: ({ elementPickerSelectors, domain }) =>
+    (store.ready(elementPickerSelectors) &&
+      elementPickerSelectors.hostnames[domain]?.join('\n')) ||
+    '',
+  render: ({ domain, topLevelDomain, trackers, paused, selectors }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
@@ -181,11 +219,42 @@ export default {
             )}
           </settings-table>
         </div>
-        ${hasWTMStats(domain) &&
+        <form layout="column gap:2" onsubmit="${saveElementPickerSelectors}">
+          <div layout="column gap:0.5">
+            <ui-text type="label-l">Blocked elements on this site</ui-text>
+            <ui-text>
+              Displays all content blocks manually hidden on this site. You can
+              remove them individually or clear the entire list.
+            </ui-text>
+          </div>
+          <ui-input>
+            <textarea
+              name="selectors"
+              rows="8"
+              value="${selectors}"
+              spellcheck="false"
+              autocorrect="off"
+              oninput="${enableElementPickerSelectors}"
+              style="white-space:nowrap"
+            ></textarea>
+          </ui-input>
+          <div layout="row gap:2">
+            <ui-button id="save-custom-content-blocks" type="success" disabled>
+              <button type="submit">Save</button>
+            </ui-button>
+            <ui-button onclick="${clearElementPickerSelectors}">
+              <button type="button">Clear</button>
+            </ui-button>
+          </div>
+        </form>
+        ${hasWTMStats(topLevelDomain) &&
         html`
           <div layout="margin:3:0">
             <ui-action>
-              <a href="${`${WTM_PAGE_URL}/websites/${domain}`}" target="_blank">
+              <a
+                href="${`${WTM_PAGE_URL}/websites/${topLevelDomain}`}"
+                target="_blank"
+              >
                 <settings-wtm-link>
                   WhoTracks.Me Statistical Report
                 </settings-wtm-link>

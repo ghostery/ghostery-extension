@@ -47,6 +47,7 @@ export default {
       color: var(--color-primary);
       box-shadow: 0px 3px 8px 0px var(--shadow-input);
       transition: background-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
 
     ::slotted(input) {

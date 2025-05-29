@@ -26,8 +26,9 @@ import * as OptionsObserver from '/utils/options-observer.js';
 
 import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
-import { setup, reloadMainEngine } from '/background/adblocker.js';
+import { setup, reloadMainEngine } from './adblocker.js';
 
 const convert =
   __PLATFORM__ === 'chromium'
@@ -160,6 +161,22 @@ async function updateEngine(text) {
 }
 
 async function update(text, { trustedScriptlets }) {
+  // Add custom content blocks to the end of the list
+  const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
+  let elementPickerEntries = Object.entries(elementPickerSelectors.hostnames);
+
+  const elementPickerFilters = elementPickerEntries.reduce(
+    (acc, [hostname, selectors]) => {
+      for (const selector of selectors) {
+        acc.push(`${hostname}##${selector}`);
+      }
+      return acc;
+    },
+    [],
+  );
+
+  text += `\n${elementPickerFilters.join('\n')}`;
+
   // Ensure update of the custom filters is done after the main engine is initialized
   setup.pending && (await setup.pending);
 
@@ -175,6 +192,7 @@ async function update(text, { trustedScriptlets }) {
   );
 
   result.errors = errors;
+  result.cosmeticFilters -= elementPickerFilters.length;
 
   // Update main engine with custom filters
   await reloadMainEngine();
@@ -238,6 +256,17 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
 
     await update(enabled ? (await store.resolve(CustomFilters)).text : '', {
       trustedScriptlets,
+    });
+  }
+});
+
+chrome.storage.local.onChanged.addListener(async (changes) => {
+  if (changes.elementPickerSelectors) {
+    const options = await store.resolve(Options);
+    const customFilters = await store.resolve(CustomFilters);
+
+    await update(options.customFilters.enabled ? customFilters.text : '', {
+      trustedScriptlets: options.customFilters.trustedScriptlets,
     });
   }
 });

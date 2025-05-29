@@ -53,7 +53,7 @@ const CONTRIBUTOR_NOTIFICATION = {
   action: msg`Become a Contributor`,
 };
 
-export default {
+const Notification = {
   icon: '',
   type: '',
   text: '',
@@ -95,3 +95,5 @@ export default {
     return NOTIFICATIONS.review;
   },
 };
+
+export default Notification;

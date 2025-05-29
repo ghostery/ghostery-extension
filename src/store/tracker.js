@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 
 import { getTracker, getSimilarTrackers } from '/utils/trackerdb.js';
 
-export default {
+const Tracker = {
   id: true,
   name: '',
   category: '',
@@ -34,3 +34,5 @@ export default {
     list: ({ tracker: id }) => getSimilarTrackers(id),
   },
 };
+
+export default Tracker;

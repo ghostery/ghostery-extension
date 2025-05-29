@@ -12,6 +12,7 @@
 import { html, msg, store, router } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import NoWebsitesSVG from '../assets/no_websites.svg';
 
@@ -42,9 +43,10 @@ function revokeCallback(item) {
 export default {
   [router.connect]: { stack: [WebsiteDetails, WebsitesAdd] },
   options: store(Options),
+  elementPickerSelectors: store(ElementPickerSelectors),
   query: '',
-  websites: ({ options, query }) => {
-    if (!store.ready(options)) return [];
+  websites: ({ options, elementPickerSelectors, query }) => {
+    if (!store.ready(options, elementPickerSelectors)) return [];
 
     query = query.toLowerCase().trim();
 
@@ -55,6 +57,23 @@ export default {
         revokeAt,
         exceptions: new Set(),
       }));
+
+    // Add custom content blocks
+    Object.entries(elementPickerSelectors.hostnames).forEach(
+      ([domain, list]) => {
+        const website = websites.find((e) => e.id === domain);
+        if (website) {
+          list.forEach((selector) => {
+            website.exceptions.add(selector);
+          });
+        } else {
+          websites.push({
+            id: domain,
+            exceptions: new Set(list),
+          });
+        }
+      },
+    );
 
     Object.entries(options.exceptions).forEach(([id, { domains }]) => {
       domains.forEach((domain) => {
@@ -161,7 +180,7 @@ export default {
                             layout@768px="grow self:auto"
                           >
                             <ui-text type="label-m">
-                              ${item.exceptions.size}
+                              ${item.exceptions.size || ''}
                             </ui-text>
                           </div>
                         </a>
