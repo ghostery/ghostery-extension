@@ -14,6 +14,9 @@
   "about": {
     "message": "有關"
   },
+  "access_website_settings": {
+    "message": "存取網站設定"
+  },
   "account_details": {
     "message": "帳戶詳細資料"
   },
@@ -104,12 +107,21 @@
   "block_all": {
     "message": "封鎖全部"
   },
+  "block_similar_elements": {
+    "message": "封鎖類似元素"
+  },
   "blocked": {
     "message": "已封鎖"
   },
   "blocked___tracker_list": {
     "message": "已封鎖",
     "description": "Plural form - list of blocked trackers"
+  },
+  "blocked_elements_on_this_site": {
+    "message": "此網站上的已封鎖元素"
+  },
+  "blocked_manually": {
+    "message": "手動封鎖"
   },
   "blocked_on_all_websites": {
     "message": "在所有網站都被封鎖"
@@ -144,6 +156,9 @@
   },
   "changes_application_color_theme_": {
     "message": "更改應用程式的顏色主題。"
+  },
+  "clear": {
+    "message": "清除"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "點擊搜尋欄位旁邊的拼圖圖示，將 Ghostery 釘選至工具列。"
@@ -232,6 +247,9 @@
   "dismiss": {
     "message": "忽略"
   },
+  "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
+    "message": "顯示在此網站上手動隱藏的所有內容區塊。您可以單獨移除它們或清除整個列表。"
+  },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "在瀏覽器工具列中的 Ghostery 圖示上顯示追蹤器記數。"
   },
@@ -243,6 +261,9 @@
   },
   "don_t_ask_again": {
     "message": "不要再問"
+  },
+  "done": {
+    "message": "完成"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "由於瀏覽器限制和缺少額外權限，Ghostery 無法為您提供保護。"
@@ -338,6 +359,9 @@
   "get_help": {
     "message": "取得幫助"
   },
+  "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
+    "message": "Ghostery 新增了一條規則以保持此內容區塊隱藏。您可以隨時在網站設定中取消此操作。"
+  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 已恢復。"
   },
@@ -392,6 +416,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 將顯示頁面中已經阻擋的追蹤器數量。點擊 Ghostery 圖示可以顯示更多資訊。"
   },
+  "gone_": {
+    "message": "不见了！"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "請求參數中潛在唯一識別碼的雜湊值"
   },
@@ -403,6 +430,15 @@
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜歡使用 Ghostery 並願意鼓勵我們的工作嗎？"
+  },
+  "hide": {
+    "message": "隱藏"
+  },
+  "hide_content_block": {
+    "message": "隱藏內容區塊"
+  },
+  "hide_distraction": {
+    "message": "隱藏干擾"
   },
   "hosting": {
     "message": "託管",
@@ -504,6 +540,9 @@
   },
   "more_in_this_organization": {
     "message": "有關此機構的更多內容"
+  },
+  "move_the_slider_to_show_or_hide_sections_": {
+    "message": "將滑桿移動以顯示或隱藏部分內容。"
   },
   "my_ghostery": {
     "message": "我的 Ghostery"
@@ -635,6 +674,9 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "請求潛在網路追蹤器的元數據"
   },
+  "reselect": {
+    "message": "重新選擇"
+  },
   "resume": {
     "message": "恢復"
   },
@@ -661,6 +703,9 @@
   },
   "search_website___": {
     "message": "搜尋網站......"
+  },
+  "select_distracting_element": {
+    "message": "選擇干擾元素"
   },
   "select_time_frame": {
     "message": "選擇時間範圍"
@@ -943,5 +988,11 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 阻止您觀看無廣告的影片？"
+  },
+  "zoom_in": {
+    "message": "放大"
+  },
+  "zoom_out": {
+    "message": "縮小"
   }
 }
