@@ -14,6 +14,9 @@
   "about": {
     "message": "О программе"
   },
+  "access_website_settings": {
+    "message": "Доступ к настройкам сайта"
+  },
   "account_details": {
     "message": "Данные аккаунта"
   },
@@ -104,12 +107,21 @@
   "block_all": {
     "message": "Заблокировать все"
   },
+  "block_similar_elements": {
+    "message": "Блокировать похожие элементы"
+  },
   "blocked": {
     "message": "Заблокированные"
   },
   "blocked___tracker_list": {
     "message": "Заблокированные",
     "description": "Plural form - list of blocked trackers"
+  },
+  "blocked_elements_on_this_site": {
+    "message": "Заблокированные элементы на этом сайте"
+  },
+  "blocked_manually": {
+    "message": "Заблокировано вручную"
   },
   "blocked_on_all_websites": {
     "message": "Заблокировано на всех сайтах"
@@ -144,6 +156,9 @@
   },
   "changes_application_color_theme_": {
     "message": "Изменяет цветовую тему приложения."
+  },
+  "clear": {
+    "message": "Очистить"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Нажмите на значок «Расширения» справа от строки поиска и закрепите Ghostery на панели инструментов."
@@ -232,6 +247,9 @@
   "dismiss": {
     "message": "Отклонить"
   },
+  "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
+    "message": "Отображает все блоки контента, скрытые вручную на этом сайте. Вы можете удалить их по отдельности или очистить весь список."
+  },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Показывает счетчик трекеров у значка Ghostery на панели инструментов в браузере."
   },
@@ -243,6 +261,9 @@
   },
   "don_t_ask_again": {
     "message": "Не спрашивай больше"
+  },
+  "done": {
+    "message": "Готово"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "Ghostery не работает из-за ограничений браузера и отсутствия дополнительных разрешений."
@@ -338,6 +359,9 @@
   "get_help": {
     "message": "Помощь"
   },
+  "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
+    "message": "Ghostery добавил правило, чтобы этот блок контента оставался скрытым. Вы можете отменить это в любое время в настройках сайта."
+  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery возобновлен."
   },
@@ -392,6 +416,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery будет показывать количество трекеров, заблокированных на странице. Чтобы посмотреть более подробную статистику, нажмите на значок расширения."
   },
+  "gone_": {
+    "message": "Пропало!"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "хеши потенциально уникального идентификатора в параметрах запросов"
   },
@@ -403,6 +430,15 @@
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Если вам нравится Ghostery, можете поддержать нашу работу."
+  },
+  "hide": {
+    "message": "Скрыть"
+  },
+  "hide_content_block": {
+    "message": "Скрыть блок контента"
+  },
+  "hide_distraction": {
+    "message": "Скрыть отвлекающие элементы"
   },
   "hosting": {
     "message": "Хостинг",
@@ -504,6 +540,9 @@
   },
   "more_in_this_organization": {
     "message": "Другие трекеры в организации"
+  },
+  "move_the_slider_to_show_or_hide_sections_": {
+    "message": "Переместите ползунок, чтобы показать или скрыть разделы."
   },
   "my_ghostery": {
     "message": "Мой Ghostery"
@@ -635,6 +674,9 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "запросить метаданные потенциальных веб-трекеров"
   },
+  "reselect": {
+    "message": "Выбрать заново"
+  },
   "resume": {
     "message": "Возобновить"
   },
@@ -661,6 +703,9 @@
   },
   "search_website___": {
     "message": "Поиск сайта..."
+  },
+  "select_distracting_element": {
+    "message": "Выберите отвлекающий элемент"
   },
   "select_time_frame": {
     "message": "Выберите временной интервал"
@@ -943,5 +988,11 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube блокирует тебе просмотр видео без рекламы?"
+  },
+  "zoom_in": {
+    "message": "Увеличить"
+  },
+  "zoom_out": {
+    "message": "Отдалить"
   }
 }

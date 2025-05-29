@@ -14,6 +14,9 @@
   "about": {
     "message": "バージョン情報"
   },
+  "access_website_settings": {
+    "message": "ウェブサイトの設定にアクセスする"
+  },
   "account_details": {
     "message": "アカウント詳細"
   },
@@ -104,12 +107,21 @@
   "block_all": {
     "message": "すべてをブロック"
   },
+  "block_similar_elements": {
+    "message": "類似の要素をブロックする"
+  },
   "blocked": {
     "message": "ブロックされた対象"
   },
   "blocked___tracker_list": {
     "message": "ブロックされた対象",
     "description": "Plural form - list of blocked trackers"
+  },
+  "blocked_elements_on_this_site": {
+    "message": "このサイトでブロックされた要素"
+  },
+  "blocked_manually": {
+    "message": "手動でブロック済み"
   },
   "blocked_on_all_websites": {
     "message": "すべてのウェブサイトでブロック済み"
@@ -144,6 +156,9 @@
   },
   "changes_application_color_theme_": {
     "message": "アプリケーションのカラーテーマを変更します。"
+  },
+  "clear": {
+    "message": "クリア"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "検索バーの横にあるパズルのアイコンをクリックし、Ghosteryをツールバーに固定します。"
@@ -232,6 +247,9 @@
   "dismiss": {
     "message": "閉じる"
   },
+  "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
+    "message": "このサイトで手動で非表示にしたすべてのコンテンツブロックを表示します。それらを個別に削除するか、リスト全体をクリアすることができます。"
+  },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "ブラウザのツールバーのGhosteryアイコンにトラッカー数を表示します。"
   },
@@ -243,6 +261,9 @@
   },
   "don_t_ask_again": {
     "message": "二度と聞くな"
+  },
+  "done": {
+    "message": "完了"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "ブラウザの制限および追加権限がないため、Ghosteryによる保護を開始できません。"
@@ -338,6 +359,9 @@
   "get_help": {
     "message": "ヘルプ"
   },
+  "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
+    "message": "Ghosteryは、このコンテンツブロックを非表示にするルールを追加しました。ウェブサイトの設定でいつでも元に戻すことができます。"
+  },
   "ghostery_has_been_resumed_": {
     "message": "Ghosteryが再開されました。"
   },
@@ -392,6 +416,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghosteryは、あるページでブロックされたトラッカーの数を表示します。Ghosteryのアイコンをクリックすると、より詳細な情報が表示されます。"
   },
+  "gone_": {
+    "message": "消えました！"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "リクエストパラメータ内の潜在的にユニークな識別子のハッシュ"
   },
@@ -403,6 +430,15 @@
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Ghosteryが好きで、私たちの仕事をサポートしていただける方を募集中です。"
+  },
+  "hide": {
+    "message": "非表示"
+  },
+  "hide_content_block": {
+    "message": "コンテンツブロックを非表示にする"
+  },
+  "hide_distraction": {
+    "message": "気を散らすものを隠す"
   },
   "hosting": {
     "message": "ホスティング",
@@ -504,6 +540,9 @@
   },
   "more_in_this_organization": {
     "message": "この組織の詳細"
+  },
+  "move_the_slider_to_show_or_hide_sections_": {
+    "message": "スライダーを動かしてセクションを表示または非表示にします。"
   },
   "my_ghostery": {
     "message": "マイゴースタリー"
@@ -635,6 +674,9 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "潜在的なウェブトラッカーのメタデータを要求する"
   },
+  "reselect": {
+    "message": "再選択"
+  },
   "resume": {
     "message": "再開"
   },
@@ -661,6 +703,9 @@
   },
   "search_website___": {
     "message": "サイトを検索..."
+  },
+  "select_distracting_element": {
+    "message": "気を散らす要素を選択"
   },
   "select_time_frame": {
     "message": "時間枠を選択"
@@ -943,5 +988,11 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTubeが広告なし動画の視聴をブロック？"
+  },
+  "zoom_in": {
+    "message": "拡大"
+  },
+  "zoom_out": {
+    "message": "ズームアウト"
   }
 }
