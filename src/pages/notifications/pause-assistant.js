@@ -9,36 +9,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html, store } from 'hybrids';
+import { mount, html } from 'hybrids';
 import '/ui/index.js';
 
-import { ACTION_PAUSE_ASSISTANT, dismissAction } from '/store/config.js';
-import Options from '/store/options.js';
-
+import { dismissAction, ACTION_PAUSE_ASSISTANT } from '/store/config.js';
 import { setupNotificationPage } from '/utils/notifications.js';
 
-const close = setupNotificationPage(360);
 const hostname = new URLSearchParams(window.location.search).get('hostname');
-
-const PAUSE_DELAY = 2000;
-const FEEDBACK_DELAY = 5000;
-
-async function pause(host) {
-  host.pausing = true;
-
-  await store.set(Options, {
-    paused: { [hostname]: { revokeAt: 0, assist: true } },
-  });
-
-  setTimeout(() => {
-    close();
-    chrome.runtime.sendMessage({
-      action: 'config:pause:reload',
-      params: { type: 'pause' },
-      delay: FEEDBACK_DELAY,
-    });
-  }, PAUSE_DELAY);
-}
+const close = setupNotificationPage(390);
 
 async function dismiss() {
   await dismissAction(hostname, ACTION_PAUSE_ASSISTANT);
@@ -46,44 +24,40 @@ async function dismiss() {
 }
 
 mount(document.body, {
-  pausing: false,
-  render: ({ pausing }) => html`
-    <template layout="block overflow relative">
-      <ui-notification>
+  render: () => html`
+    <template layout="block overflow">
+      <ui-notification icon="pause-l">
         <div layout="column gap">
           <ui-text type="label-m">
-            Ghostery users report that ad blockers break this site. Try pausing
-            Ghostery.
+            Ghostery users report that adblockers break this page. Ghostery has
+            been paused.
           </ui-text>
           <ui-text type="body-s">
-            Ads and trackers will not be blocked.
+            Blocking has been paused temporarily, and only on this page.
+            Consider pausing other adblockers for best results.
+          </ui-text>
+          <ui-text type="body-s">
+            <a
+              href="https://www.ghostery.com/blog"
+              target="_blank"
+              layout="row inline gap:0.5 items:center"
+            >
+              Learn more
+              <ui-icon name="chevron-right-s"></ui-icon>
+            </a>
           </ui-text>
         </div>
         <div layout="row gap">
-          <ui-button type="success" onclick="${pause}">
+          <ui-button
+            type="success"
+            size="s"
+            onclick="${dismiss}"
+            layout="width::10"
+          >
             <button>OK</button>
-          </ui-button>
-          <ui-button type="secondary" onclick="${dismiss}">
-            <button>
-              <div
-                layout="block:left column margin:left:-0.5 margin:right:-0.5"
-              >
-                <ui-text type="body-s" color="gray-600">
-                  Site works fine
-                </ui-text>
-                <ui-text type="label-m">Dismiss</ui-text>
-              </div>
-            </button>
           </ui-button>
         </div>
       </ui-notification>
-      ${pausing &&
-      html`
-        <ui-card narrow layout="fixed inset column gap center">
-          <ui-icon name="logo-pause"></ui-icon>
-          <ui-text type="label-m">Pausing...</ui-text>
-        </ui-card>
-      `}
     </template>
   `,
 });

@@ -48,11 +48,14 @@ export function setupNotificationPage(width = 440) {
     }
   });
 
-  return (clear = true) => {
+  return ({ clear = true, reload = false } = {}) => {
     // In some cases await for store.set() is not enough to propagate changes
     // so we need to wait a bit before sending the message
     setTimeout(() => {
-      window.parent.postMessage({ type: CLOSE_WINDOW_EVENT, clear }, '*');
+      window.parent.postMessage(
+        { type: CLOSE_WINDOW_EVENT, clear, reload },
+        '*',
+      );
     }, 100);
   };
 }

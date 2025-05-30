@@ -91,8 +91,7 @@
     "pages/element-picker/index.html",
     "pages/notifications/youtube.html",
     "pages/notifications/pause-assistant.html",
-    "pages/notifications/pause-resume.html",
-    "pages/notifications/pause-feedback.html"
+    "pages/notifications/pause-resume.html"
   ],
   "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {

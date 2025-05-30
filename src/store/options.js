@@ -13,7 +13,6 @@ import { store } from 'hybrids';
 
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
-import * as OptionsObserver from '/utils/options-observer.js';
 
 import Config, {
   ACTION_PAUSE_ASSISTANT,
@@ -147,9 +146,6 @@ const Options = {
         });
 
       return options;
-    },
-    observe: (_, options, prevOptions) => {
-      OptionsObserver.execute(options, prevOptions);
     },
   },
 };

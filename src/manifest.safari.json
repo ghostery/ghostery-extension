@@ -116,8 +116,7 @@
         "pages/trackers-preview/index.html",
         "pages/element-picker/index.html",
         "pages/notifications/pause-assistant.html",
-        "pages/notifications/pause-resume.html",
-        "pages/notifications/pause-feedback.html"
+        "pages/notifications/pause-resume.html"
       ],
       "matches": ["<all_urls>"],
       "all_frames": true,

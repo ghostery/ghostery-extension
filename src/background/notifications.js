@@ -11,7 +11,7 @@
 
 import * as notifications from '/utils/notifications.js';
 
-export function openNotification(tabId, id, params) {
+export function openNotification({ tabId, id, position, params }) {
   const url =
     chrome.runtime.getURL(`/pages/notifications/${id}.html`) +
     (params
@@ -23,6 +23,7 @@ export function openNotification(tabId, id, params) {
   chrome.tabs.sendMessage(tabId, {
     action: notifications.MOUNT_ACTION,
     url,
+    position,
   });
 }
 
@@ -38,7 +39,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 
   switch (msg.action) {
     case notifications.OPEN_ACTION: {
-      openNotification(tabId, msg.id, msg.params);
+      openNotification({ tabId, ...msg });
       break;
     }
     case notifications.CLOSE_ACTION: {

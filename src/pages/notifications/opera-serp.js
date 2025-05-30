@@ -52,34 +52,24 @@ async function ignore() {
 mount(document.body, {
   render: () => html`
     <template layout="block overflow">
-      <ui-card layout="padding:2">
-        <div layout="row items:start gap:2">
-          <div layout="relative">
-            <ui-icon name="ghosty" color="quaternary" layout="size:4"></ui-icon>
-            <ui-icon
-              name="alert"
-              color="danger-secondary"
-              layout="absolute bottom:-1 right:-1"
-            ></ui-icon>
-          </div>
-          <div layout="column gap:1.5">
-            <ui-text type="label-l" layout="margin:bottom:-1">
-              More ad blocking available
-            </ui-text>
-            <ui-text type="body-s" color="secondary">
-              Expand Ghostery ad blocking to search engines in a few easy steps.
-            </ui-text>
-            <div layout="row:wrap gap">
-              <ui-button type="success">
-                <button onclick="${enable}">Enable now</button>
-              </ui-button>
-              <ui-button type="transparent">
-                <button onclick="${ignore}">Ignore</button>
-              </ui-button>
-            </div>
+      <ui-notification icon="protection-l" alert>
+        <div layout="column gap:1.5">
+          <ui-text type="label-l" layout="margin:bottom:-1">
+            More ad blocking available
+          </ui-text>
+          <ui-text type="body-s" color="secondary">
+            Expand Ghostery ad blocking to search engines in a few easy steps.
+          </ui-text>
+          <div layout="row:wrap gap">
+            <ui-button type="success" size="s" onclick="${enable}">
+              <button>Enable now</button>
+            </ui-button>
+            <ui-button type="transparent" size="s" onclick="${ignore}">
+              <button>Ignore</button>
+            </ui-button>
           </div>
         </div>
-      </ui-card>
+      </ui-notification>
     </template>
   `,
 });

@@ -51,7 +51,7 @@
     "@whotracksme/reporting": "^7.3.0",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.11.0",
-    "hybrids": "^9.1.16",
+    "hybrids": "^9.1.17",
     "idb": "^8.0.2",
     "jwt-decode": "^4.0.0",
     "plotly.js-basic-dist": "^3.0.1",

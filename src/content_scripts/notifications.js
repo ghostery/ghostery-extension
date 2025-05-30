@@ -13,7 +13,7 @@ import * as notifications from '/utils/notifications.js';
 
 const WRAPPER_ELEMENT = 'ghostery-notification-wrapper';
 
-function mount(url) {
+function mount(url, position = 'right') {
   // Prevent multiple iframes be shown at the same time
   if (document.querySelector(WRAPPER_ELEMENT)) {
     return;
@@ -24,19 +24,48 @@ function mount(url) {
   const template = document.createElement('template');
 
   template.innerHTML = /*html*/ `
+    <div id="background"></div>
     <iframe src="${url}" frameborder="0"></iframe>
     <style>
       :host {
         all: initial;
         display: flex !important;
-        align-items: flex-end;
         position: fixed;
-        top: 10px;
+        overflow: hidden;
+        z-index: 2147483647;
         right: 10px;
         left: 10px;
+        bottom: -40px;
+        padding: 12px !important;
+        border-radius: 16px;opacity: 0;
+        transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out, bottom 0.2s ease-in-out;
+        will-change: opacity, top, bottom;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #background {
+        z-index: -1;
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        right: -100%;
+        bottom: -100%;
+        background: conic-gradient(from 90deg at 49.87% 50%, rgba(0, 72, 255, 0.90) 0deg, rgba(85, 0, 255, 0.90) 55.38461744785309deg, rgba(0, 72, 255, 0.90) 121.15384697914124deg, rgba(0, 217, 255, 0.90) 188.65383625030518deg, rgba(85, 0, 255, 0.90) 252.69230604171753deg, rgba(0, 217, 255, 0.90) 306.3461637496948deg, rgba(0, 72, 255, 0.90) 360deg);
+        will-change: transform;
+        animation: rotate 20s linear infinite;
+      }
+
+      :host(.active) {
+        opacity: 1;
         bottom: 10px;
-        z-index: 2147483647;
-        pointer-events: none;
       }
 
       iframe {
@@ -44,30 +73,25 @@ function mount(url) {
         flex-grow: 1;
         height: 0px;
         width: 0px;
-        max-width: 100%;
-        max-height: 100%;
-        pointer-events: auto;
-        box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.10), 0px 40px 80px 0px rgba(0, 0, 0, 0.20);
-        border-radius: 8px;
-        opacity: 0;
-        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-        transform: translateY(40px);
-      }
-
-      iframe.active {
-        opacity: 1;
-        transform: translateY(0);
+        border-radius: 12px;
+        box-shadow: 0px 3px 6px 0px rgba(2, 0, 51, 0.30);
       }
 
       @media screen and (min-width: 640px) {
         :host {
-          justify-content: flex-end;
-          align-items: start;
+          ${position === 'right' ? 'right: 10px; left: auto;' : ''}
+          ${position === 'center' ? 'left: 50%; right: auto; transform: translateX(-50%);' : ''}
+          bottom: auto;
+          top: -30px;
+        }
+
+        :host(.active) {
+          top: ${position === 'center' ? '4px' : '10px'};
+          bottom: auto;
         }
 
         iframe {
-          flex-grow: 0;
-          transform: translateY(-40px);
+          flex: 0 0 auto;
         }
       }
     </style>
@@ -78,16 +102,17 @@ function mount(url) {
 
   const iframe = shadowRoot.querySelector('iframe');
 
-  setTimeout(() => {
-    iframe.classList.add('active');
-  }, 100);
-
   window.addEventListener('message', (e) => {
     const type = e.data?.type;
 
     if (type === notifications.RESIZE_WINDOW_EVENT) {
       iframe.style.height = e.data.height + 'px';
       iframe.style.width = e.data.width + 'px';
+
+      if (!wrapper.classList.contains('active')) {
+        setTimeout(() => wrapper.classList.add('active'));
+      }
+
       return;
     }
 
@@ -97,11 +122,12 @@ function mount(url) {
         chrome.runtime.sendMessage({ action: notifications.CLEAR_ACTION, url });
       }
 
-      iframe.addEventListener('transitionend', () => {
+      wrapper.addEventListener('transitionend', () => {
         wrapper.remove();
+        if (e.data.reload) window.location.reload();
       });
 
-      iframe.classList.remove('active');
+      wrapper.classList.remove('active');
     }
   });
 }
@@ -109,7 +135,7 @@ function mount(url) {
 chrome.runtime.onMessage.addListener((msg) => {
   switch (msg.action) {
     case notifications.MOUNT_ACTION: {
-      mount(msg.url);
+      mount(msg.url, msg.position);
       break;
     }
     case notifications.UNMOUNT_ACTION: {

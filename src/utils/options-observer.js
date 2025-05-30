@@ -70,7 +70,7 @@ export async function waitForIdle() {
   for (const queue of queues) await queue;
 }
 
-export async function execute(options, prevOptions) {
+store.observe(Options, (_, options, prevOptions) => {
   if (observers.length === 0) return;
 
   const queue = Promise.allSettled([...queues]).then(async () => {
@@ -91,4 +91,4 @@ export async function execute(options, prevOptions) {
   });
 
   queues.add(queue);
-}
+});

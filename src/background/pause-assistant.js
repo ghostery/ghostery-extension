@@ -16,58 +16,55 @@ import Config, {
   ACTION_PAUSE_ASSISTANT,
   FLAG_PAUSE_ASSISTANT,
 } from '/store/config.js';
-import Options, { getPausedDetails } from '/store/options.js';
+import Options from '/store/options.js';
 
 import { openNotification } from './notifications.js';
 
-// Detect "pause" action and trigger pause assistant or feedback
-chrome.webNavigation.onCompleted.addListener(async (details) => {
-  const config = await store.resolve(Config);
+store.observe(Config, async (_, config) => {
   if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
 
+  const paused = {};
+  Object.entries(config.domains).forEach(([domain, { actions }]) => {
+    if (actions.includes(ACTION_PAUSE_ASSISTANT)) {
+      paused[domain] = { revokeAt: 0, assist: true };
+    }
+  });
+
+  store.set(Options, { paused });
+});
+
+chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (details.frameId === 0) {
+    const config = await store.resolve(Config);
+    if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
+
     const hostname = parse(details.url).hostname;
     if (!hostname) return;
 
-    const options = await store.resolve(Options);
-    const paused = getPausedDetails(options, hostname);
     const hasAction = config.hasAction(hostname, ACTION_PAUSE_ASSISTANT);
 
-    if (!paused) {
-      if (hasAction) {
-        // The site is not paused, but the domain with an action is in the config
-        openNotification(details.tabId, 'pause-assistant', { hostname });
+    if (hasAction && !config.isDismissed(hostname, ACTION_PAUSE_ASSISTANT)) {
+      // The page is loaded, show the pause assistant notification
+      openNotification({
+        id: 'pause-assistant',
+        tabId: details.tabId,
+        position: 'center',
+      });
+    } else {
+      const options = await store.resolve(Options);
+      const domain = Object.keys(options.paused).find((d) =>
+        hostname.endsWith(d),
+      );
+
+      if (!hasAction && options.paused[domain]?.assist) {
+        // The page is loaded, show the pause resume notification
+        openNotification({
+          id: 'pause-resume',
+          tabId: details.tabId,
+          params: { domain },
+          position: 'center',
+        });
       }
-    } else if (!hasAction && paused.assist) {
-      // the site is paused with the assistant, but the domain is not in the config
-      openNotification(details.tabId, 'pause-resume', { hostname });
-    }
-  }
-});
-
-const RELOAD_DELAY = 1 * 1000; // 1 second
-
-// Listen to pause assistant messages
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  switch (msg.action) {
-    case 'config:pause:reload': {
-      setTimeout(() => chrome.tabs.reload(sender.tab.id), RELOAD_DELAY);
-
-      const cb = (details) => {
-        if (details.frameId === 0 && details.tabId === sender.tab.id) {
-          setTimeout(
-            () => openNotification(sender.tab.id, 'pause-feedback', msg.params),
-            msg.delay,
-          );
-          chrome.webNavigation.onDOMContentLoaded.removeListener(cb);
-        }
-      };
-
-      chrome.webNavigation.onDOMContentLoaded.addListener(cb);
-      break;
-    }
-    case 'config:pause:feedback': {
-      // TODO: handle feedback
     }
   }
 });
