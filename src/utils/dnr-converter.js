@@ -100,6 +100,10 @@ async function setupOffscreenDocument() {
 }
 
 let offscreenDocument;
+
+let offscreenTimeout;
+const OFFSCREEN_DOCUMENT_TIMEOUT = 1000 * 5; // 5 seconds
+
 export function createOffscreenConverter() {
   return async function convert(filter) {
     try {
@@ -114,11 +118,22 @@ export function createOffscreenConverter() {
       return { errors: [e.message], rules: [] };
     }
 
+    const result = await chrome.runtime.sendMessage({
+      action: 'offscreen:urlfitler2dnr:convert',
+      filter,
+    });
+
+    if (offscreenTimeout) {
+      clearTimeout(offscreenTimeout);
+    }
+
+    offscreenTimeout = setTimeout(() => {
+      chrome.offscreen.closeDocument();
+      offscreenDocument = null;
+    }, OFFSCREEN_DOCUMENT_TIMEOUT);
+
     return (
-      (await chrome.runtime.sendMessage({
-        action: 'offscreen:urlfitler2dnr:convert',
-        filter,
-      })) || { errors: ['failed to initiate offscreen document'], rules: [] }
+      result || { errors: ['failed to initiate offscreen document'], rules: [] }
     );
   };
 }
