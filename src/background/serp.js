@@ -45,7 +45,7 @@ if (__PLATFORM__ === 'chromium' && isOpera()) {
       return false;
     }
 
-    openNotification(details.tabId, 'opera-serp');
+    openNotification({ tabId: details.tabId, id: 'opera-serp' });
   });
 }
 

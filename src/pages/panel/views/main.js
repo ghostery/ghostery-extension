@@ -259,6 +259,7 @@ export default {
                 data-qa="component:pause"
               >
                 ${!!paused?.revokeAt &&
+                !paused.assist &&
                 html`
                   <div layout="row center">
                     <ui-action>
@@ -272,6 +273,30 @@ export default {
                           layout="row inline items:center gap:0.5"
                         >
                           Report a broken page
+                          <ui-icon
+                            name="chevron-right"
+                            layout="size:1.5"
+                          ></ui-icon>
+                        </ui-text>
+                      </a>
+                    </ui-action>
+                  </div>
+                `}
+                ${!!paused?.assist &&
+                html`
+                  <div layout="row center">
+                    <ui-action>
+                      <a
+                        href="https://www.ghostery.com/blog/"
+                        onclick="${openTabWithUrl}"
+                        layout="row center gap padding:0.5:1:1 margin:top:-1"
+                      >
+                        <ui-text type="body-s">Why paused?</ui-text>
+                        <ui-text
+                          type="label-s"
+                          layout="row inline items:center gap:0.5"
+                        >
+                          Learn more
                           <ui-icon
                             name="chevron-right"
                             layout="size:1.5"

@@ -48,16 +48,24 @@ const Config = {
 
       if (!actions.has(action)) {
         const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
-        const value =
-          !!domain &&
-          domains[domain].actions.includes(action) &&
-          !domains[domain].dismiss[action];
+        const value = !!domain && domains[domain].actions.includes(action);
 
         actions.set(action, value);
         return value;
       }
 
       return actions.get(action);
+    };
+  },
+
+  isDismissed({ domains, enabled }) {
+    return (hostname, action) => {
+      if (!enabled || !hostname) return;
+
+      const domain = Object.keys(domains).find((d) => hostname.endsWith(d));
+      if (!domain) return false;
+
+      return !!domains[domain].dismiss[action];
     };
   },
 
