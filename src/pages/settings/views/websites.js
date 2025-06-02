@@ -36,6 +36,7 @@ function revokeCallback(item) {
       return acc;
     }, {});
 
+    store.set(ElementPickerSelectors, { hostnames: { [item.id]: null } });
     store.set(options, { paused: { [item.id]: null }, exceptions });
   };
 }
@@ -56,6 +57,7 @@ export default {
         id,
         revokeAt,
         exceptions: new Set(),
+        counter: 0,
       }));
 
     // Add custom content blocks
@@ -63,13 +65,12 @@ export default {
       ([domain, list]) => {
         const website = websites.find((e) => e.id === domain);
         if (website) {
-          list.forEach((selector) => {
-            website.exceptions.add(selector);
-          });
+          website.counter += list.length;
         } else {
           websites.push({
             id: domain,
-            exceptions: new Set(list),
+            exceptions: new Set(),
+            counter: list.length,
           });
         }
       },
@@ -80,10 +81,12 @@ export default {
         const website = websites.find((e) => e.id === domain);
         if (website) {
           website.exceptions.add(id);
+          website.counter += 1;
         } else {
           websites.push({
             id: domain,
             exceptions: new Set([id]),
+            counter: 1,
           });
         }
       });
@@ -180,7 +183,7 @@ export default {
                             layout@768px="grow self:auto"
                           >
                             <ui-text type="label-m">
-                              ${item.exceptions.size || ''}
+                              ${item.counter || ''}
                             </ui-text>
                           </div>
                         </a>
