@@ -29,7 +29,7 @@ import asyncSetup from '/utils/setup.js';
 import { tabStats, updateTabStats } from './stats.js';
 import Config, {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_CHROMEIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
 } from '/store/config.js';
 
 let options = Options;
@@ -559,20 +559,20 @@ if (__PLATFORM__ === 'firefox') {
 }
 
 if (__PLATFORM__ === 'chromium') {
-  let ENABLE_CHROMEIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = false;
+  let ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = false;
 
   store.resolve(Config).then((config) => {
     const enabled = config.hasFlag(
-      FLAG_CHROMEIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+      FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
     );
     if (!enabled) contentScripts.unregisterAll();
 
-    ENABLE_CHROMEIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = enabled;
+    ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = enabled;
   });
 
   chrome.webRequest.onResponseStarted.addListener(
     (details) => {
-      if (!ENABLE_CHROMEIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED) return;
+      if (!ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED) return;
       if (details.tabId === -1) return;
       if (details.type !== 'main_frame' && details.type !== 'sub_frame') return;
 
