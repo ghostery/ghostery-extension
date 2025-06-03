@@ -18,6 +18,7 @@ import Config, {
   ACTION_PAUSE_ASSISTANT,
   FLAG_PAUSE_ASSISTANT,
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
 } from '/store/config.js';
 
 const VERSION = chrome.runtime.getManifest().version;
@@ -78,7 +79,11 @@ async function testConfigDomain(host) {
 async function testConfigFlag(host) {
   const flags = window.prompt(
     'Enter flags to test:',
-    [FLAG_PAUSE_ASSISTANT, FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS].join(', '),
+    [
+      FLAG_PAUSE_ASSISTANT,
+      FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+      FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+    ].join(', '),
   );
   if (!flags) return;
 
