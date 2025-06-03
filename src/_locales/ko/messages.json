@@ -632,8 +632,8 @@
   "please_describe_the_issue": {
     "message": "문제를 설명해 주세요"
   },
-  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Google 검색 결과 링크의 Google 서버 경유를 막고 웹 페이지에 직접 연결합니다."
+  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Google과 Bing이 검색 결과 링크를 페이지로 직접 연결하지 않고, 자체 서버를 통해 리디렉션하지 못하도록 방지합니다."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "AI 기반 기술을 사용하여 여러 추적 기술을 방지합니다."

@@ -632,8 +632,8 @@
   "please_describe_the_issue": {
     "message": "Please describe the issue"
   },
-  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Prevents Google from redirecting search result links through their servers instead of linking directly to pages."
+  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Prevents Google and Bing from redirecting search result links through their servers instead of linking directly to pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Prevents various tracking techniques using AI-driven technology."
