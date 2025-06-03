@@ -14,6 +14,9 @@
   "about": {
     "message": "关于"
   },
+  "access_website_settings": {
+    "message": "访问网站设置"
+  },
   "account_details": {
     "message": "帐户详情"
   },
@@ -104,12 +107,21 @@
   "block_all": {
     "message": "全部拦截"
   },
+  "block_similar_elements": {
+    "message": "阻止类似元素"
+  },
   "blocked": {
     "message": "已拦截"
   },
   "blocked___tracker_list": {
     "message": "已拦截",
     "description": "Plural form - list of blocked trackers"
+  },
+  "blocked_elements_on_this_site": {
+    "message": "被阻止的元素"
+  },
+  "blocked_manually": {
+    "message": "手动屏蔽"
   },
   "blocked_on_all_websites": {
     "message": "在所有网站上被阻止"
@@ -144,6 +156,9 @@
   },
   "changes_application_color_theme_": {
     "message": "更改应用程序的颜色主题。"
+  },
+  "clear": {
+    "message": "清除"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "点击搜索栏旁边的拼图图标，将 Ghostery 固定在工具栏。"
@@ -232,6 +247,9 @@
   "dismiss": {
     "message": "忽略"
   },
+  "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
+    "message": "显示此网站上手动隐藏的所有内容块。您可以单独删除它们或清除整个列表。"
+  },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "在浏览器工具栏中的 Ghostery 图标上显示跟踪器计数。"
   },
@@ -243,6 +261,9 @@
   },
   "don_t_ask_again": {
     "message": "别再问了"
+  },
+  "done": {
+    "message": "完成"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "由于浏览器限制和附加权限缺失，Ghostery 无法为您提供保护。"
@@ -338,6 +359,9 @@
   "get_help": {
     "message": "获取帮助"
   },
+  "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
+    "message": "Ghostery添加了一条规则以保持此内容块隐藏。您可以随时在网站设置中撤销此操作。"
+  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 已恢复。"
   },
@@ -392,6 +416,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery 会显示页面上已阻止的跟踪器数量。点击 Ghostery 图标，获取更多详情。"
   },
+  "gone_": {
+    "message": "消失了！"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "请求参数中可能唯一标识符的哈希值"
   },
@@ -403,6 +430,15 @@
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "嗨，您喜欢 Ghostery 并愿意支持我们的工作吗？"
+  },
+  "hide": {
+    "message": "隐藏"
+  },
+  "hide_content_block": {
+    "message": "隐藏内容块"
+  },
+  "hide_distraction": {
+    "message": "隐藏干扰"
   },
   "hosting": {
     "message": "托管",
@@ -505,6 +541,9 @@
   "more_in_this_organization": {
     "message": "在此组织中的更多内容"
   },
+  "move_the_slider_to_show_or_hide_sections_": {
+    "message": "将滑块移动以显示或隐藏部分。"
+  },
   "my_ghostery": {
     "message": "我的Ghostery"
   },
@@ -593,8 +632,8 @@
   "please_describe_the_issue": {
     "message": "请描述问题"
   },
-  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "防止 Google 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
+  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "防止 Google 和 Bing 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "阻止各种 AI 驱动的跟踪技术。"
@@ -635,6 +674,9 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "请求潜在网络跟踪器的元数据"
   },
+  "reselect": {
+    "message": "重新选择"
+  },
   "resume": {
     "message": "继续"
   },
@@ -661,6 +703,9 @@
   },
   "search_website___": {
     "message": "搜索网站..."
+  },
+  "select_distracting_element": {
+    "message": "选择干扰元素"
   },
   "select_time_frame": {
     "message": "选择时间范围"
@@ -943,5 +988,11 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube 禁止您观看无广告视频？"
+  },
+  "zoom_in": {
+    "message": "放大"
+  },
+  "zoom_out": {
+    "message": "缩小"
   }
 }

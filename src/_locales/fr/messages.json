@@ -14,6 +14,9 @@
   "about": {
     "message": "À propos de Ghostery"
   },
+  "access_website_settings": {
+    "message": "Accéder aux paramètres du site web"
+  },
   "account_details": {
     "message": "Détails du compte"
   },
@@ -104,12 +107,21 @@
   "block_all": {
     "message": "Tout bloquer"
   },
+  "block_similar_elements": {
+    "message": "Bloquer des éléments similaires"
+  },
   "blocked": {
     "message": "Bloqué"
   },
   "blocked___tracker_list": {
     "message": "Bloqué",
     "description": "Plural form - list of blocked trackers"
+  },
+  "blocked_elements_on_this_site": {
+    "message": "Éléments bloqués sur ce site"
+  },
+  "blocked_manually": {
+    "message": "Bloqué manuellement"
   },
   "blocked_on_all_websites": {
     "message": "Bloqués sur tous les sites web"
@@ -144,6 +156,9 @@
   },
   "changes_application_color_theme_": {
     "message": "Modifie le thème de couleur de l'application."
+  },
+  "clear": {
+    "message": "Effacer"
   },
   "click_the_puzzle_icon_next_to_the_search_bar_and_pin_ghostery_to_your_toolbar_": {
     "message": "Cliquez sur l'icône de puzzle en regard de la barre de recherche et épinglez Ghostery à votre barre d'outils."
@@ -232,6 +247,9 @@
   "dismiss": {
     "message": "Ignorer"
   },
+  "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
+    "message": "Affiche tous les blocs de contenu masqués manuellement sur ce site. Vous pouvez les supprimer individuellement ou effacer la liste entière."
+  },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "Affiche le décompte des trackers sur l'icône Ghostery dans la barre d'outils du navigateur."
   },
@@ -243,6 +261,9 @@
   },
   "don_t_ask_again": {
     "message": "Ne demande plus rien"
+  },
+  "done": {
+    "message": "Terminé"
   },
   "due_to_browser_restrictions_and_additional_permissions_missing__ghostery_is_not_able_to_protect_you_": {
     "message": "En raison des restrictions du navigateur et d'autorisations supplémentaires manquantes, Ghostery n'est pas en mesure de vous protéger."
@@ -338,6 +359,9 @@
   "get_help": {
     "message": "Obtenir de l'aide"
   },
+  "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
+    "message": "Ghostery a ajouté une règle pour garder ce bloc de contenu masqué. Vous pouvez annuler cela à tout moment dans les paramètres du site."
+  },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery a été repris."
   },
@@ -392,6 +416,9 @@
   "ghostery_will_show_how_many_trackers_were_blocked_on_a_page__clicking_on_the_ghostery_icon_reveals_more_detailed_information_": {
     "message": "Ghostery affichera le nombre de trackers bloqués sur une page. Vous pouvez obtenir des informations détaillées en cliquant sur l'icône Ghostery."
   },
+  "gone_": {
+    "message": "Parti !"
+  },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "empreintes de hachage d'identifiants potentiellement uniques dans les paramètres de requêtes"
   },
@@ -403,6 +430,15 @@
   },
   "hey__do_you_enjoy_ghostery_and_want_to_support_our_work_": {
     "message": "Vous appréciez Ghostery et souhaitez soutenir notre travail ?"
+  },
+  "hide": {
+    "message": "Masquer"
+  },
+  "hide_content_block": {
+    "message": "Masquer le bloc de contenu"
+  },
+  "hide_distraction": {
+    "message": "Masquer la distraction"
   },
   "hosting": {
     "message": "Hébergement",
@@ -505,6 +541,9 @@
   "more_in_this_organization": {
     "message": "Plus dans cette organisation"
   },
+  "move_the_slider_to_show_or_hide_sections_": {
+    "message": "Déplacez le curseur pour afficher ou masquer les sections."
+  },
   "my_ghostery": {
     "message": "Mon Ghostery"
   },
@@ -593,8 +632,8 @@
   "please_describe_the_issue": {
     "message": "Veuillez décrire le problème"
   },
-  "prevents_google_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Empêcher Google de rediriger les liens des résultats de recherche via ses serveurs au lieu de renvoyer directement vers les pages."
+  "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
+    "message": "Empêcher Google et Bing de rediriger les liens des résultats de recherche via leurs serveurs au lieu de renvoyer directement vers les pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Empêche différentes techniques de suivi à l'aide d'une technologie basée sur l'IA."
@@ -635,6 +674,9 @@
   "request_metadata_of_potential_web_trackers": {
     "message": "demander les métadonnées des traqueurs web potentiels"
   },
+  "reselect": {
+    "message": "Resélectionner"
+  },
   "resume": {
     "message": "Reprendre"
   },
@@ -661,6 +703,9 @@
   },
   "search_website___": {
     "message": "Rechercher sur le site..."
+  },
+  "select_distracting_element": {
+    "message": "Sélectionner l'élément distrayant"
   },
   "select_time_frame": {
     "message": "Sélectionnez la période de temps"
@@ -943,5 +988,11 @@
   },
   "youtube_blocking_you_from_watching_ad_free_videos_": {
     "message": "YouTube t'empêche de regarder des vidéos sans publicité ?"
+  },
+  "zoom_in": {
+    "message": "Agrandir"
+  },
+  "zoom_out": {
+    "message": "Dézoomer"
   }
 }
