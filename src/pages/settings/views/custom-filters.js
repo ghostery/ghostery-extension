@@ -93,6 +93,7 @@ export default {
               </ui-toggle>
             </settings-card>
             ${options.customFilters.enabled &&
+            store.ready(input) &&
             html`
               <div layout="column gap:2">
                 <label layout="row gap items:center ::user-select:none">
@@ -117,8 +118,7 @@ export default {
                     autocapitalize="off"
                     spellcheck="false"
                     oninput="${html.set(input, 'text')}"
-                    disabled="${!store.ready(input)}"
-                    defaultValue="${store.ready(input) ? input.text : ''}"
+                    defaultValue="${input.text}"
                     data-qa="input:custom-filters"
                   ></textarea>
                 </ui-input>
