@@ -9,6 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { stagingMode } from '../../utils/debug.js';
+
+const URL_INFIX = stagingMode ? 'staging-patterns/' : '';
+
 function platformSpecificSettings() {
   if (
     /iPad|iPhone|iPod/.test(navigator.platform) ||
@@ -17,7 +21,7 @@ function platformSpecificSettings() {
     // Ghostery extension for Safari on iOS and other Apple mobile devices
     return {
       ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-safari-ios/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-safari-ios/patterns.json`,
       CHANNEL: 'safari-ios',
     };
   }
@@ -30,8 +34,7 @@ function platformSpecificSettings() {
     // Ghostery extension for Safari on MacOS (Desktop)
     return {
       ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-      PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-safari-desktop/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-safari-desktop/patterns.json`,
       CHANNEL: 'safari-desktop',
     };
   }
@@ -41,8 +44,7 @@ function platformSpecificSettings() {
       // Ghostery extension for Android Chromium forks (e.g. Edge, Kiwi)
       return {
         ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-        PATTERNS_URL:
-          'https://cdn2.ghostery.com/wtm-chrome-android/patterns.json',
+        PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-chrome-android/patterns.json`,
         CHANNEL: 'android',
       };
     }
@@ -70,8 +72,7 @@ function platformSpecificSettings() {
         'br',
         'mx',
       ],
-      PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-firefox-android/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-firefox-android/patterns.json`,
       CHANNEL: 'android',
     };
   }
@@ -95,7 +96,7 @@ function platformSpecificSettings() {
         'nl',
         'es',
       ],
-      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-opera-desktop/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-opera-desktop/patterns.json`,
       CHANNEL: 'opera',
     };
   }
@@ -121,7 +122,7 @@ function platformSpecificSettings() {
         'it',
         'hu',
       ],
-      PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-edge-desktop/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-edge-desktop/patterns.json`,
       CHANNEL: 'edge-desktop',
     };
   }
@@ -168,8 +169,7 @@ function platformSpecificSettings() {
         'sg',
         'nz',
       ],
-      PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-firefox-desktop/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-firefox-desktop/patterns.json`,
       CHANNEL: 'firefox-desktop',
     };
   }
@@ -216,8 +216,7 @@ function platformSpecificSettings() {
         'sg',
         'nz',
       ],
-      PATTERNS_URL:
-        'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
+      PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-chrome-desktop/patterns.json`,
       CHANNEL: 'chrome-desktop',
     };
   }
@@ -227,7 +226,7 @@ function platformSpecificSettings() {
   );
   return {
     ALLOWED_COUNTRY_CODES: ['us', 'de', 'fr'],
-    PATTERNS_URL: 'https://cdn2.ghostery.com/wtm-chrome-desktop/patterns.json',
+    PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-chrome-desktop/patterns.json`,
     CHANNEL: 'chrome-desktop',
   };
 }
