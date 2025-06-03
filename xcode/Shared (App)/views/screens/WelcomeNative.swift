@@ -112,21 +112,12 @@ fileprivate enum Icons {
 }
 
 struct WelcomeView: View {
-    
     @State var theme = Theme.light
     
     var donateButtonPressed: () -> Void
     var stepByStepButtonPressed: () -> Void
     
     var body: some View {
-        ZStack(alignment: .center) {
-            SoftGradientBackground()
-            content
-        }
-        .background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
-    }
-    
-    var content: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
             ghosteryLogoHeader
             instructionsCard
@@ -139,7 +130,7 @@ struct WelcomeView: View {
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
     }
-    
+  
     var ghosteryLogoHeader: some View {
         Image(Icons.privacyYouCanSee)
             .resizable()
@@ -276,7 +267,9 @@ fileprivate struct GhosteryButtonModifier: ViewModifier {
     }
 }
 
-fileprivate struct SoftGradientBackground: View {
+struct GhosteryGradientBackground: View {
+    @State var theme = Theme.light
+  
     var body: some View {
         ZStack {
             RadialGradient(
@@ -304,7 +297,7 @@ fileprivate struct SoftGradientBackground: View {
             .frame(width: 2000, height: 2000)
             .offset(.init(width: 150, height: 120))
             .ignoresSafeArea()
-        }
+        }.background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
     }
 }
 

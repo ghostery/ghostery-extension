@@ -68,6 +68,7 @@
 		468E42C62701F84A008B5792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468E42842701F84A008B5792 /* Assets.xcassets */; };
 		468E42C72701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
 		468E42C82701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
+		9C7722382DEC598E006CC2AF /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7722372DEC5985006CC2AF /* SplashScreen.swift */; };
 		9CECB2142DAEC1430054223E /* WelcomeNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECB2132DAEC13D0054223E /* WelcomeNative.swift */; };
 		9CECB2152DAEC1430054223E /* WelcomeNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECB2132DAEC13D0054223E /* WelcomeNative.swift */; };
 		B423DDAD29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B423DDAB29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf */; };
@@ -209,6 +210,7 @@
 		468E42B42701F84A008B5792 /* Ghostery Privacy Ad Blocker Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ghostery Privacy Ad Blocker Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		468E42B92701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E42BA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
+		9C7722372DEC5985006CC2AF /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		9CECB2132DAEC13D0054223E /* WelcomeNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNative.swift; sourceTree = "<group>"; };
 		B423DDAB29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		B423DDAC29DEDC1D0004B63E /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 		468E428D2701F84A008B5792 /* iOS (App) */ = {
 			isa = PBXGroup;
 			children = (
+				9C7722372DEC5985006CC2AF /* SplashScreen.swift */,
 				465E356127551D600032B8D2 /* GhosteryApp.swift */,
 				468E42982701F84A008B5792 /* Info.plist */,
 				468E42922701F84A008B5792 /* LaunchScreen.storyboard */,
@@ -765,6 +768,7 @@
 				465E357D27564D910032B8D2 /* StoreLog.swift in Sources */,
 				465E357527564ABB0032B8D2 /* Configuration.swift in Sources */,
 				465E358B275674290032B8D2 /* KeychainHelper.swift in Sources */,
+				9C7722382DEC598E006CC2AF /* SplashScreen.swift in Sources */,
 				465E3598275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
 				462266562756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
 				465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */,
