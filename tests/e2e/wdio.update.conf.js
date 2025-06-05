@@ -60,7 +60,7 @@ export const config = {
 
       for (const capability of capabilities) {
         const target =
-          capability.browserName === 'chromium' ? 'chromium' : 'firefox';
+          capability.browserName === 'chrome' ? 'chromium' : 'firefox';
 
         const fileName = `ghostery-${target}-${version}.zip`;
         const url = `https://github.com/ghostery/ghostery-extension/releases/download/v${version}/`;
@@ -124,7 +124,7 @@ export const config = {
 
       // Reload extension with the source
       switch (capabilities.browserName) {
-        case 'chromium': {
+        case 'chrome': {
           await browser.url('chrome://extensions');
           await $('>>>#devMode').click();
 
