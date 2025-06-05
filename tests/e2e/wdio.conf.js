@@ -119,10 +119,12 @@ export const config = {
     },
     {
       browserName: 'chrome',
+      browserVersion: 'stable',
       'goog:chromeOptions': {
         args: (argv.debug ? [] : ['headless', 'disable-gpu']).concat([
           `--load-extension=${CHROME_PATH}`,
           '--accept-lang=en-GB',
+          '--no-sandbox',
         ]),
       },
     },
