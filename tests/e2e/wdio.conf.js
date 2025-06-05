@@ -11,10 +11,10 @@
 
 /*
  * Usage:
- *   wdio tests/wdio.conf.js [--target=firefox,chrome] [--debug] [--clean]
+ *   wdio tests/wdio.conf.js [--target=firefox,chromium] [--debug] [--clean]
  *
  * Options:
- *   --target: comma separated list of browsers to run the tests on (default: firefox,chrome)
+ *   --target: comma separated list of browsers to run the tests on (default: firefox,chromium)
  *   --debug: run the tests in debug mode (default: false)
  *   --clean: clean the build artifacts before running the tests (default: false)
  */
@@ -50,7 +50,7 @@ export const argv = process.argv.slice(2).reduce(
     }
     return acc;
   },
-  { target: ['firefox', 'chrome'], debug: false, clean: false },
+  { target: ['firefox', 'chromium'], debug: false, clean: false },
 );
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -118,7 +118,7 @@ export const config = {
       },
     },
     {
-      browserName: 'chrome',
+      browserName: 'chromium',
       'goog:chromeOptions': {
         args: (argv.debug ? [] : ['headless', 'disable-gpu']).concat([
           `--load-extension=${CHROME_PATH}`,
@@ -139,7 +139,7 @@ export const config = {
             buildForFirefox();
             break;
           }
-          case 'chrome': {
+          case 'chromium': {
             buildForChrome();
             break;
           }
@@ -169,7 +169,7 @@ export const config = {
       }
 
       // Disable cache for Chrome to avoid caching issues
-      if (capabilities.browserName === 'chrome') {
+      if (capabilities.browserName === 'chromium') {
         await browser.sendCommand('Network.setCacheDisabled', {
           cacheDisabled: true,
         });
