@@ -12,7 +12,7 @@
 import { html } from 'hybrids';
 
 export default {
-  render: () => html`<template layout="row padding:0.5 margin:1.5:0">
+  render: () => html`<template layout="row padding:0.5">
     <slot></slot>
   </template>`.css`
     :host {
