@@ -10,6 +10,8 @@
  */
 
 .wtm-tracker-wheel-container {
+  position: relative;
+  z-index: 100000;
   display: inline-flex;
   visibility: visible;
   align-items: center;
@@ -20,8 +22,9 @@
   margin-top: -1px;
 }
 
-.wtm-tracker-wheel-container label {
-  margin-left: 3px;
+.wtm-tracker-wheel-container > div {
+  padding: 0;
+  margin: 0 0 0 3px;
   font-size: 11px;
   line-height: 11px;
   font-weight: 500;
@@ -31,15 +34,15 @@
 
 .wtm-popup-iframe-wrapper {
   position: absolute;
+  z-index: 200000;
   width: 350px;
   height: 0px;
-  z-index: 127;
   box-shadow: 30px 60px 160px rgba(32, 44, 68, 0.2);
   border-radius: 16px;
   overflow: hidden;
 }
 
-.wtm-popup-iframe-wrapper iframe {
+.wtm-popup-iframe-wrapper > iframe {
   border: 0px;
   height: 100%;
   width: 100%;
