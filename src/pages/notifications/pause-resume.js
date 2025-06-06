@@ -10,65 +10,41 @@
  */
 
 import { mount, html, store } from 'hybrids';
-import '/ui/index.js';
 
+import '/ui/index.js';
+import { setupNotificationPage } from '/utils/notifications.js';
 import Options from '/store/options.js';
 
-import { setupNotificationPage } from '/utils/notifications.js';
+const close = setupNotificationPage(390);
+const domain = new URLSearchParams(window.location.search).get('domain');
 
-const close = setupNotificationPage(360);
-const hostname = new URLSearchParams(window.location.search).get('hostname');
+async function resume() {
+  await store.set(Options, {
+    paused: { [domain]: null },
+  });
 
-const PAUSE_DELAY = 2000;
-const FEEDBACK_DELAY = 2000;
-
-async function revoke(host) {
-  host.resuming = true;
-
-  await store.set(Options, { paused: { [hostname]: null } });
-
-  setTimeout(() => {
-    close();
-    chrome.runtime.sendMessage({
-      action: 'config:pause:reload',
-      params: { type: 'resume' },
-      delay: FEEDBACK_DELAY,
-    });
-  }, PAUSE_DELAY);
-}
-
-async function dismiss() {
-  await store.set(Options, { paused: { [hostname]: { assist: false } } });
-  close();
+  close({ reload: true });
 }
 
 mount(document.body, {
-  resuming: false,
-  render: ({ resuming }) => html`
-    <template layout="block overflow relative">
-      <ui-notification>
+  render: () => html`
+    <template layout="block overflow">
+      <ui-notification icon="protection-l">
         <div layout="column gap">
           <ui-text type="label-m">
             Ghostery users report that ad blockers are no longer breaking this
-            site. Resume Ghostery.
+            site. Ghostery will be re-enabled.
+          </ui-text>
+          <ui-text type="body-s">
+            Tracker & ad blocking will be active on this page.
           </ui-text>
         </div>
-        <div layout="row gap">
-          <ui-button type="success" onclick="${revoke}">
+        <div layout="row gap" layout="width::10">
+          <ui-button type="success" onclick="${resume}">
             <button>OK</button>
-          </ui-button>
-          <ui-button type="secondary" onclick="${dismiss}">
-            <button>Dismiss</button>
           </ui-button>
         </div>
       </ui-notification>
-      ${resuming &&
-      html`
-        <ui-card narrow layout="fixed inset column gap center">
-          <ui-icon name="logo"></ui-icon>
-          <ui-text type="label-m">Resuming...</ui-text>
-        </ui-card>
-      `}
     </template>
   `,
 });
