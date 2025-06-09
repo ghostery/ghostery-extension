@@ -60,6 +60,7 @@ fileprivate enum Strings {
     static let eula = "EULA"
     static let terms = "Terms of Use"
     static let policy = "Privacy Policy"
+    static let restoreDonation = "Restore donation"
 }
 
 struct ContributeView: View {
@@ -93,6 +94,7 @@ struct ContributeView: View {
             donationBox
             divider
             legal
+            restoreDonation
         }
         .padding(Constants.instructionsCardPadding)
         .frame(height: Constants.containerHeight)
@@ -173,6 +175,13 @@ struct ContributeView: View {
               .modifier(LegalText(action: policyPressed))
             Spacer()
         }
+    }
+  
+    var restoreDonation: some View {
+        Text(Strings.restoreDonation)
+            .font(.footnote)
+            .foregroundStyle(Colors.foregroundBrandPrimary)
+            .padding(.top, 12)
     }
     
 //    var donateButton: some View {
