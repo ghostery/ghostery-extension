@@ -27,7 +27,8 @@ struct ContentView: View {
 
     var body: some View {
       VStack(alignment: .center, spacing: Constants.noSpacing) {
-          //ghosteryLogoHeader
+          Spacer()
+          ghosteryLogoHeader
             if showSubscriptions {
 //                Subscriptions(
 //                    openInWebView: openInWebView,
@@ -51,6 +52,7 @@ struct ContentView: View {
                 })
               .transition(AnyTransition.opacity.combined(with: .move(edge: .leading)))
             }
+          Spacer()
         }.environmentObject(storeHelper)
     }
   

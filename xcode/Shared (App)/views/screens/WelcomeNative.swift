@@ -34,7 +34,7 @@ fileprivate enum Constants {
     static let donateButtonHeight: CGFloat = 48
     
     static let containerWidth: CGFloat = 375
-    static let containerHeight: CGFloat = 732
+    static let containerHeight: CGFloat = 604
     static let containerBottomPadding: CGFloat = 12
     
     static let buttonCornerRadius: CGFloat = 8
@@ -82,7 +82,6 @@ struct WelcomeView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
-            ghosteryLogoHeader
             instructionsCard
             Spacer()
             donateButton
@@ -92,15 +91,6 @@ struct WelcomeView: View {
         .padding(.bottom, Constants.containerBottomPadding)
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
-    }
-  
-    var ghosteryLogoHeader: some View {
-        Image(Icons.privacyYouCanSee)
-            .resizable()
-            .scaledToFit()
-            .frame(width: Constants.headerWidth)
-            .frame(minHeight: Constants.headerHeight + Constants.headerMinPadding,
-                   maxHeight: Constants.headerHeight + Constants.headerMaxPadding)
     }
     
     var instructionsCard: some View {
