@@ -74,7 +74,7 @@ fileprivate enum Strings {
     static let stepByStepGuide = "Step by step guide"
 }
 
-struct WelcomeView: View {
+struct ContributeView: View {
     @State var theme = Theme.light
     
     var donateButtonPressed: () -> Void
@@ -211,92 +211,5 @@ struct WelcomeView: View {
 }
 
 #Preview {
-  WelcomeView(donateButtonPressed: {}, stepByStepButtonPressed: {})
-}
-
-struct GhosteryButtonModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(Fonts.buttonTitle)
-            .background(Colors.buttonBGColor)
-            .clipShape(
-                RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
-                    .stroke(Colors.ghosteryBlue, lineWidth: Constants.borderLineWidth)
-            )
-            .shadow(color: Colors.shadowColor, radius: Constants.buttonShadowRadius, x: Constants.buttonShadowX, y: Constants.buttonShadowY)
-    }
-}
-
-struct GhosteryGradientBackground: View {
-    @State var theme = Theme.light
-  
-    var body: some View {
-        ZStack {
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    Colors.lightBlue.opacity(Constants.gradientColorOpacity),
-                    Color.white.opacity(Constants.gradientWhiteOpacity)
-                ]),
-                center: .center,
-                startRadius: Constants.gradientStartRadius,
-                endRadius: Constants.smallGradientEndRadius
-            )
-            .frame(width: 2000, height: 2000)
-            .offset(.init(width: -120, height: -300))
-            .ignoresSafeArea()
-
-            RadialGradient(
-                gradient: Gradient(colors: [
-                    Colors.purple.opacity(Constants.gradientColorOpacity),
-                    Color.white.opacity(Constants.gradientWhiteOpacity)
-                ]),
-                center: .center,
-                startRadius: Constants.gradientStartRadius,
-                endRadius: Constants.bigGradientEndRadius
-            )
-            .frame(width: 2000, height: 2000)
-            .offset(.init(width: 150, height: 120))
-            .ignoresSafeArea()
-        }.background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
-    }
-}
-
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int = UInt64()
-        Scanner(string: hex).scanHexInt64(&int)
-
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255,
-                            (int >> 8) * 17,
-                            (int >> 4 & 0xF) * 17,
-                            (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255,
-                            int >> 16,
-                            int >> 8 & 0xFF,
-                            int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24,
-                            int >> 16 & 0xFF,
-                            int >> 8 & 0xFF,
-                            int & 0xFF)
-        default:
-            (a, r, g, b) = (255, 0, 0, 0)
-        }
-
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
-        )
-    }
+  ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {})
 }

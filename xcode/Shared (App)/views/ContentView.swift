@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-fileprivate enum Icons {
-    static let privacyYouCanSee = "GhosteryLogoHeader"
-}
 
 fileprivate enum Constants {
     static let noSpacing: CGFloat = .zero

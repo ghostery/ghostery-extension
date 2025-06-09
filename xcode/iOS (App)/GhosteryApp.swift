@@ -38,11 +38,6 @@ struct SafariView: UIViewControllerRepresentable {
     }
 }
 
-fileprivate enum Colors {
-    static let lightBGColor = Color.white
-    static let darkBGColor = Color.black
-}
-
 @main
 struct GhosteryApp: App {
 

@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-fileprivate enum Icons {
-    static let ghosteryText = "GhosteryText"
-    static let ghostery = "LargeIcon"
-}
-
-fileprivate enum Colors {
-    static let lightBGColor = Color.white
-    static let darkBGColor = Color.black
-}
 
 fileprivate enum Constants {
   static let ghosteryTextWidth: CGFloat = 131
@@ -36,7 +27,7 @@ struct SplashScreen: View {
   var body: some View {
     VStack(alignment: .center, spacing: Constants.noSpacing) {
       Spacer()
-      Image(Icons.ghostery)
+      Image(Icons.ghosteryLarge)
         .resizable()
         .scaledToFit()
         .frame(width: Constants.iconWidth, height: Constants.iconHeight)

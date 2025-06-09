@@ -69,6 +69,10 @@
 		468E42C72701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
 		468E42C82701F84A008B5792 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E42862701F84A008B5792 /* SafariWebExtensionHandler.swift */; };
 		9C7722382DEC598E006CC2AF /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7722372DEC5985006CC2AF /* SplashScreen.swift */; };
+		9C77223B2DEEEEA7006CC2AF /* Contribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77223A2DEEEEA3006CC2AF /* Contribute.swift */; };
+		9C77223C2DEEEEA7006CC2AF /* Contribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77223A2DEEEEA3006CC2AF /* Contribute.swift */; };
+		9C77223F2DEEEF20006CC2AF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77223E2DEEEF1D006CC2AF /* Common.swift */; };
+		9C7722402DEEEF20006CC2AF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77223E2DEEEF1D006CC2AF /* Common.swift */; };
 		9CECB2142DAEC1430054223E /* WelcomeNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECB2132DAEC13D0054223E /* WelcomeNative.swift */; };
 		9CECB2152DAEC1430054223E /* WelcomeNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECB2132DAEC13D0054223E /* WelcomeNative.swift */; };
 		B423DDAD29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B423DDAB29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf */; };
@@ -211,6 +215,8 @@
 		468E42B92701F84A008B5792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		468E42BA2701F84A008B5792 /* Ghostery – Privacy Ad Blocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Ghostery – Privacy Ad Blocker.entitlements"; sourceTree = "<group>"; };
 		9C7722372DEC5985006CC2AF /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		9C77223A2DEEEEA3006CC2AF /* Contribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribute.swift; sourceTree = "<group>"; };
+		9C77223E2DEEEF1D006CC2AF /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		9CECB2132DAEC13D0054223E /* WelcomeNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNative.swift; sourceTree = "<group>"; };
 		B423DDAB29DEDC1D0004B63E /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		B423DDAC29DEDC1D0004B63E /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
@@ -326,6 +332,8 @@
 		465E3594275679400032B8D2 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				9C77223D2DEEEF16006CC2AF /* Utils */,
+				9C77223A2DEEEEA3006CC2AF /* Contribute.swift */,
 				9CECB2132DAEC13D0054223E /* WelcomeNative.swift */,
 				465E3595275679500032B8D2 /* Subscriptions */,
 				465E35652755368B0032B8D2 /* Subscriptions.swift */,
@@ -490,6 +498,14 @@
 			name = common;
 			path = "Shared (Extension)";
 			sourceTree = SOURCE_ROOT;
+		};
+		9C77223D2DEEEF16006CC2AF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9C77223E2DEEEF1D006CC2AF /* Common.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -762,6 +778,7 @@
 			files = (
 				465E353F2754EB870032B8D2 /* ContentView.swift in Sources */,
 				462266442756DE6A00245D1E /* SubscriptionView.swift in Sources */,
+				9C7722402DEEEF20006CC2AF /* Common.swift in Sources */,
 				465E359C27567A000032B8D2 /* StoreConstants.swift in Sources */,
 				465E358E275674570032B8D2 /* SubscriptionInfo.swift in Sources */,
 				4622664F2756E06D00245D1E /* PriceView.swift in Sources */,
@@ -774,6 +791,7 @@
 				465E3564275520BC0032B8D2 /* GhosteryApp.swift in Sources */,
 				462266522756E09100245D1E /* PriveViewModel.swift in Sources */,
 				465E357827564AE80032B8D2 /* StoreHelper.swift in Sources */,
+				9C77223C2DEEEEA7006CC2AF /* Contribute.swift in Sources */,
 				465E35662755368B0032B8D2 /* Subscriptions.swift in Sources */,
 				465E3591275674830032B8D2 /* PurchaseInfo.swift in Sources */,
 				462266462756DF9000245D1E /* PurchaseButton.swift in Sources */,
@@ -801,8 +819,10 @@
 				465E357627564ABB0032B8D2 /* Configuration.swift in Sources */,
 				4622664D2756DFE800245D1E /* BadgeView.swift in Sources */,
 				462266572756E1FE00245D1E /* SubscriptionViewInfo.swift in Sources */,
+				9C77223B2DEEEEA7006CC2AF /* Contribute.swift in Sources */,
 				465E358C275674290032B8D2 /* KeychainHelper.swift in Sources */,
 				462266472756DF9000245D1E /* PurchaseButton.swift in Sources */,
+				9C77223F2DEEEF20006CC2AF /* Common.swift in Sources */,
 				465E3599275679900032B8D2 /* SubscriptionViewModel.swift in Sources */,
 				468E42A02701F84A008B5792 /* GhosteryApp.swift in Sources */,
 				465E357927564AE80032B8D2 /* StoreHelper.swift in Sources */,
