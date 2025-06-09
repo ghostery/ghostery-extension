@@ -58,6 +58,13 @@ struct ContentView: View {
                 policyPressed: {
                   guard let url = URL(string: "https://www.ghostery.com/privacy-policy") else { return }
                   openInWebView(url)
+                },
+                backPressed: {
+                  withAnimation {
+                      if showSubscriptions {
+                          showSubscriptions = false
+                      }
+                  }
                 })
               .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
             }

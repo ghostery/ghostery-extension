@@ -20,6 +20,7 @@ enum Fonts {
     static let buttonTitle: Font = .system(size: 14, weight: .bold)
     static let headline: Font = .system(size: 18, weight: .bold)
     static let subheadline: Font = .system(size: 16, weight: .bold)
+    static let title: Font = .system(size: 16, weight: .regular)
 }
 
 enum Colors {

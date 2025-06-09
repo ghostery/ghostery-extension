@@ -70,6 +70,7 @@ struct ContributeView: View {
     var eulaPressed: () -> Void
     var termsPressed: () -> Void
     var policyPressed: () -> Void
+    var backPressed: () -> Void
       
     var body: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
@@ -102,11 +103,27 @@ struct ContributeView: View {
     }
     
     var header: some View {
+      ZStack(alignment: .center) {
         Text(Strings.headerTitle)
             .font(Fonts.subheadline)
             .multilineTextAlignment(.center)
             .foregroundStyle(Colors.foregroundPrimary)
-            
+            .frame(maxWidth: .infinity)
+        HStack(alignment: .center, spacing: Constants.noSpacing) {
+          Image(systemName: "chevron.backward")
+              .font(.system(size: 16, weight: .semibold))
+              .foregroundStyle(Colors.foregroundBrandPrimary)
+          Text("Back")
+            .font(Fonts.title)
+            .foregroundStyle(Colors.foregroundBrandPrimary)
+            .padding(.leading, 2)
+            .onTapGesture {
+              backPressed()
+            }
+          Spacer()
+        }
+        
+      }
     }
   
     var headerImage: some View {
@@ -191,5 +208,5 @@ fileprivate struct LegalText: ViewModifier {
 }
 
 #Preview {
-  ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {})
+  ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {}, backPressed: {})
 }
