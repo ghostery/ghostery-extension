@@ -333,7 +333,7 @@ export default {
                   categories="${stats.topCategories}"
                   type="${options.panel.statsType}"
                   ontypechange="${setStatsType}"
-                  layout="margin:1.5"
+                  layout="margin:1.5:1.5:1"
                 >
                   ${options.panel.statsType === 'graph' &&
                   html`
@@ -486,6 +486,7 @@ export default {
                   (!stats.trackersBlocked &&
                     !stats.trackersModified &&
                     !contentBlocksSelectors)}
+                  layout="margin:1:0:1.5"
                 >
                   ${stats.trackersBlocked > 0 &&
                   html`

@@ -26,6 +26,7 @@ const PICKER_STYLES = `
 `;
 
 const POPUP_STYLES = `
+  box-sizing: content-box;
   position: fixed;
   z-index: 2147483647;
   display: block;
