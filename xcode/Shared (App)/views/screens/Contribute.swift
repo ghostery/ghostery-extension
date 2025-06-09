@@ -34,7 +34,7 @@ fileprivate enum Constants {
     static let donateButtonHeight: CGFloat = 48
     
     static let containerWidth: CGFloat = 375
-    static let containerHeight: CGFloat = 732
+    static let containerHeight: CGFloat = 640
     static let containerBottomPadding: CGFloat = 12
     
     static let buttonCornerRadius: CGFloat = 8
@@ -55,23 +55,11 @@ fileprivate enum Constants {
 
 fileprivate enum Strings {
     // You can translate your strings here
-    static let donateSectionDescription = "Enjoying our Community-Powered Privacy Features? Help support our mission with a donation."
-    static let donateButtonTitle = "Donate"
-    static let instructionsHeaderTitle = "Enable Ghostery Privacy Ad Block for Safari"
-    static let step = "Step"
-    static let openSafari = "Open Safari "
-    static let goToAnyWebsite = " and go to any website"
-    static let tap = "Tap "
-    static let inTheSearchBar = " in the search bar"
-    static let toManageExtensions = " to manage extensions"
-    static let toggleOnGhostery = "Toggle on Ghostery "
-    static let tapOnThe = "Tap on the "
-    static let tapAlwaysAllow = "Tap ‘Always Allow’ "
-    static let thenTap = " then tap"
-    static let alwaysAllowOnEveryWebsite = "‘Always Allow on Every Website’ "
-    static let tapEnableGhostery = "Tap ‘Enable Ghostery’ "
-    static let needMoreHelp = "Need more help?"
-    static let stepByStepGuide = "Step by step guide"
+    static let headerTitle = "Become a Contributor"
+    static let description = "Support our mission and help us develop even stronger protection against trackers and ads, making the web safer for everyone."
+    static let eula = "EULA"
+    static let terms = "Terms of Use"
+    static let policy = "Privacy Policy"
 }
 
 struct ContributeView: View {
@@ -82,132 +70,115 @@ struct ContributeView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
-            ghosteryLogoHeader
-            instructionsCard
-            Spacer()
-            donateButton
-            Spacer()
+            card
         }
         .padding(.horizontal, Constants.horizontalPadding)
         .padding(.bottom, Constants.containerBottomPadding)
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
     }
-  
-    var ghosteryLogoHeader: some View {
-        Image(Icons.privacyYouCanSee)
-            .resizable()
-            .scaledToFit()
-            .frame(width: Constants.headerWidth)
-            .frame(minHeight: Constants.headerHeight + Constants.headerMinPadding,
-                   maxHeight: Constants.headerHeight + Constants.headerMaxPadding)
-    }
     
-    var instructionsCard: some View {
+    var card: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
-            instructionsHeader
+            header
             Spacer(minLength: Constants.instructionsSpacerMinWidth)
-            steps
+            headerImage
             Spacer(minLength: Constants.instructionsSpacerMinWidth)
+            description
+            Spacer(minLength: Constants.instructionsSpacerMinWidth)
+            donationBox
             divider
-            Spacer(minLength: Constants.instructionsSpacerMinWidth)
-            stepByStepGuide
+            legal
         }
         .padding(Constants.instructionsCardPadding)
-        .frame(height: Constants.instructionsCardHeight)
+        .frame(height: Constants.containerHeight)
         .frame(maxWidth: Constants.instructionsCardWidth)
         .background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
         .shadow(color: Colors.shadowColor, radius: Constants.instructionsCardShadowRadius, x: Constants.instructionsCardShadowX, y: Constants.instructionsCardShadowY)
     }
     
-    var instructionsHeader: some View {
-        Text(Strings.instructionsHeaderTitle)
-            .font(Fonts.headline)
+    var header: some View {
+        Text(Strings.headerTitle)
+            .font(Fonts.subheadline)
             .multilineTextAlignment(.center)
-            .foregroundStyle(Colors.textGray)
-            .frame(width: Constants.instructionsHeaderWidth)
+            .foregroundStyle(Colors.foregroundPrimary)
+            
+    }
+  
+    var headerImage: some View {
+        Image(Icons.contributeIllustration)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 300, height: 144)
+    }
+  
+    var description: some View {
+        Text(Strings.description)
+            .font(Fonts.description)
+            .multilineTextAlignment(.center)
+            .foregroundStyle(Colors.foregroundPrimary)
+            .frame(maxWidth: .infinity)
+            .lineSpacing(4)
     }
     
-    var steps: some View {
-        VStack(alignment: .listRowSeparatorLeading, spacing: Constants.noSpacing) {
-            step(number: 1, textBeforeIcon: Strings.openSafari, iconName: Icons.safari, textAfterIcon: Strings.goToAnyWebsite)
-            Spacer()
-            step(number: 2, textBeforeIcon: Strings.tap, iconName: Icons.siteSettings, textAfterIcon: Strings.inTheSearchBar)
-            Spacer()
-            step(number: 3, textBeforeIcon: Strings.tap, iconName: Icons.plugins, textAfterIcon: Strings.toManageExtensions)
-            Spacer()
-            step(number: 4, textBeforeIcon: Strings.toggleOnGhostery, iconName: Icons.ghosterySmall, textAfterIcon: nil)
-            Spacer()
-            step(number: 5, textBeforeIcon: Strings.tapOnThe, iconName: Icons.warning, textAfterIcon: nil)
-            Spacer()
-            step(number: 6, textBeforeIcon: Strings.tapAlwaysAllow, iconName: Icons.tap, textAfterIcon: Strings.thenTap)
-            Spacer()
-            step(number: 7, textBeforeIcon: Strings.alwaysAllowOnEveryWebsite, iconName: Icons.tap, textAfterIcon: nil)
-            Spacer()
-            step(number: 8, textBeforeIcon: Strings.tapEnableGhostery, iconName: Icons.tap, textAfterIcon: nil)
+    var donationBox: some View {
+        VStack(alignment: .center, spacing: 16) {
+            Text("Todo")
         }
+        .padding(8)
+        .frame(width: 311, height: 240)
+        .background(Colors.bgBrandPrimary)
+        .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
     }
-
-    func step(number: Int, textBeforeIcon: String, iconName: String, textAfterIcon: String?) -> some View {
-        HStack(alignment: .center, spacing: Constants.noSpacing) {
-            Text(Strings.step + " \(number). ")
-                .font(Fonts.text)
-                .foregroundStyle(theme == .light ? Colors.lightTextColor: Colors.darkTextColor)
-            Text(textBeforeIcon)
-                .font(Fonts.text)
-                .foregroundStyle(theme == .light ? Colors.lightTextColor: Colors.darkTextColor)
-            Image(iconName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: Constants.instructionsIconWidth)
-            if let textAfterIcon = textAfterIcon {
-                Text(textAfterIcon)
-                    .font(Fonts.text)
-                    .foregroundStyle(theme == .light ? Colors.lightTextColor: Colors.darkTextColor)
-            }
-            Spacer()
-        }
-    }
+    
     
     var divider: some View {
         Rectangle()
             .fill(Colors.dividerGray)
             .frame(height: Constants.dividerHeight)
+            .padding(.vertical, 16)
     }
-    
-    var stepByStepGuide: some View {
-        VStack(alignment: .center, spacing: Constants.stepByStepSectionVerticalSpacing) {
-            Text(Strings.needMoreHelp)
-                .font(Fonts.footnote)
-                .foregroundStyle(Colors.textGray)
-            Button {
-                stepByStepButtonPressed()
-            } label: {
-                Text(Strings.stepByStepGuide)
-                    .frame(height: Constants.stepByStepButtonHeight)
-                    .frame(maxWidth: .infinity)
-                    .modifier(GhosteryButtonModifier())
-            }
+  
+    var legal: some View {
+        HStack(alignment: .center, spacing: Constants.noSpacing) {
+            Spacer()
+            Text(Strings.eula)
+              .modifier(LegalText())
+            Spacer()
+            Text(Strings.terms)
+              .modifier(LegalText())
+            Spacer()
+            Text(Strings.policy)
+              .modifier(LegalText())
+            Spacer()
         }
     }
     
-    var donateButton: some View {
-        VStack(alignment: .center, spacing: Constants.donateButtonVStackSpacing) {
-            Text(Strings.donateSectionDescription)
-                .font(Fonts.text)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(theme == .light ? Colors.lightTextColor : Colors.darkTextColor)
-            Button {
-                donateButtonPressed()
-            } label: {
-                Text(Strings.donateButtonTitle)
-                    .frame(height: Constants.donateButtonHeight)
-                    .frame(maxWidth: .infinity)
-                    .modifier(GhosteryButtonModifier())
-            }
-        }
-    }
+//    var donateButton: some View {
+//        VStack(alignment: .center, spacing: Constants.donateButtonVStackSpacing) {
+//            Text(Strings.donateSectionDescription)
+//                .font(Fonts.text)
+//                .multilineTextAlignment(.center)
+//                .foregroundStyle(theme == .light ? Colors.lightTextColor : Colors.darkTextColor)
+//            Button {
+//                donateButtonPressed()
+//            } label: {
+//                Text(Strings.donateButtonTitle)
+//                    .frame(height: Constants.donateButtonHeight)
+//                    .frame(maxWidth: .infinity)
+//                    .modifier(GhosteryButtonModifier())
+//            }
+//        }
+//    }
+}
+
+fileprivate struct LegalText: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.footnote)
+      .foregroundStyle(Colors.foregroundBrandPrimary)
+  }
 }
 
 #Preview {

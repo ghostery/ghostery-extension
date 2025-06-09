@@ -16,8 +16,10 @@ enum Fonts {
     // Change with Inter font here
     static let footnote: Font = .system(size: 12, weight: .regular)
     static let text: Font = .system(size: 12, weight: .bold)
+    static let description: Font = .system(size: 14, weight: .regular)
     static let buttonTitle: Font = .system(size: 14, weight: .bold)
     static let headline: Font = .system(size: 18, weight: .bold)
+    static let subheadline: Font = .system(size: 16, weight: .bold)
 }
 
 enum Colors {
@@ -32,6 +34,9 @@ enum Colors {
     static let purple = Color(hex: "#3751D4")
     static let textGray = Color(hex: "#3F4146")
     static let dividerGray = Color(hex: "#E0E2E5")
+    static let foregroundPrimary = Color(hex: "#202225")
+    static let bgBrandPrimary = Color(hex: "#EBF7FD")
+    static let foregroundBrandPrimary = Color(hex: "#0077CC")
 }
 
 enum Icons {
@@ -44,4 +49,5 @@ enum Icons {
     static let tap = "Tap"
     static let ghosteryText = "GhosteryText"
     static let ghosteryLarge = "LargeIcon"
+    static let contributeIllustration = "ContributeIllustration"
 }

@@ -29,7 +29,7 @@ struct ContentView: View {
       VStack(alignment: .center, spacing: Constants.noSpacing) {
           Spacer()
           ghosteryLogoHeader
-            if showSubscriptions {
+            if !showSubscriptions {
 //                Subscriptions(
 //                    openInWebView: openInWebView,
 //                    closeSubscriptions: toggleSubscriptions
@@ -41,16 +41,16 @@ struct ContentView: View {
                   guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
                   openInWebView(url)
                 })
-              .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
+              .transition(AnyTransition.opacity.combined(with: .move(edge: .leading)))
             } else {
-              WelcomeView(
+              ContributeView(
                 donateButtonPressed: {
                   toggleSubscriptions()
                 }, stepByStepButtonPressed: {
                   guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
                   openInWebView(url)
                 })
-              .transition(AnyTransition.opacity.combined(with: .move(edge: .leading)))
+              .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
             }
           Spacer()
         }.environmentObject(storeHelper)
