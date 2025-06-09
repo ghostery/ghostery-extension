@@ -67,7 +67,10 @@ struct ContributeView: View {
     
     var donateButtonPressed: () -> Void
     var stepByStepButtonPressed: () -> Void
-    
+    var eulaPressed: () -> Void
+    var termsPressed: () -> Void
+    var policyPressed: () -> Void
+      
     var body: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
             card
@@ -144,13 +147,13 @@ struct ContributeView: View {
         HStack(alignment: .center, spacing: Constants.noSpacing) {
             Spacer()
             Text(Strings.eula)
-              .modifier(LegalText())
+              .modifier(LegalText(action: eulaPressed))
             Spacer()
             Text(Strings.terms)
-              .modifier(LegalText())
+              .modifier(LegalText(action: termsPressed))
             Spacer()
             Text(Strings.policy)
-              .modifier(LegalText())
+              .modifier(LegalText(action: policyPressed))
             Spacer()
         }
     }
@@ -174,13 +177,19 @@ struct ContributeView: View {
 }
 
 fileprivate struct LegalText: ViewModifier {
+  
+  var action: () -> Void
+  
   func body(content: Content) -> some View {
     content
       .font(.footnote)
       .foregroundStyle(Colors.foregroundBrandPrimary)
+      .onTapGesture {
+          action()
+      }
   }
 }
 
 #Preview {
-  ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {})
+  ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {})
 }

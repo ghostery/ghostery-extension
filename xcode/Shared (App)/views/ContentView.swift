@@ -30,10 +30,6 @@ struct ContentView: View {
           Spacer()
           ghosteryLogoHeader
             if !showSubscriptions {
-//                Subscriptions(
-//                    openInWebView: openInWebView,
-//                    closeSubscriptions: toggleSubscriptions
-//                )
               WelcomeView(
                 donateButtonPressed: {
                   toggleSubscriptions()
@@ -46,8 +42,21 @@ struct ContentView: View {
               ContributeView(
                 donateButtonPressed: {
                   toggleSubscriptions()
-                }, stepByStepButtonPressed: {
+                },
+                stepByStepButtonPressed: {
                   guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
+                  openInWebView(url)
+                },
+                eulaPressed: {
+                  guard let url = URL(string: "https://www.ghostery.com/privacy/ghostery-subscription-plans-and-products-end-user-license-agreement") else { return }
+                  openInWebView(url)
+                },
+                termsPressed: {
+                  guard let url = URL(string: "https://www.ghostery.com/privacy/ghostery-terms-and-conditions") else { return }
+                  openInWebView(url)
+                },
+                policyPressed: {
+                  guard let url = URL(string: "https://www.ghostery.com/privacy-policy") else { return }
                   openInWebView(url)
                 })
               .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))

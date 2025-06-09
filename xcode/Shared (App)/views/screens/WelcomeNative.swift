@@ -85,7 +85,6 @@ struct WelcomeView: View {
             instructionsCard
             Spacer()
             donateButton
-            Spacer()
         }
         .padding(.horizontal, Constants.horizontalPadding)
         .padding(.bottom, Constants.containerBottomPadding)
