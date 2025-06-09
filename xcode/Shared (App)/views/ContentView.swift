@@ -53,7 +53,17 @@ struct ContentView: View {
               .transition(AnyTransition.opacity.combined(with: .move(edge: .trailing)))
             }
           Spacer()
-        }.environmentObject(storeHelper)
+        }
+        .environmentObject(storeHelper)
+        .gesture(
+            SwipeRecognizer(direction: .right) { _ in
+                withAnimation {
+                    if showSubscriptions {
+                        showSubscriptions = false
+                    }
+                }
+            }
+        )
     }
   
     var ghosteryLogoHeader: some View {
@@ -78,5 +88,34 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(openInWebView: {_ in })
+    }
+}
+
+struct SwipeRecognizer: UIGestureRecognizerRepresentable {
+    typealias Action = (UISwipeGestureRecognizer.Direction) -> Void
+    
+    let direction: UISwipeGestureRecognizer.Direction
+    let action: Action
+    
+    func makeUIGestureRecognizer(context: Context) -> UISwipeGestureRecognizer {
+        let recognizer = UISwipeGestureRecognizer(
+            target: context.coordinator,
+            action: #selector(Coordinator.handle(_:))
+        )
+        recognizer.direction = direction
+        return recognizer
+    }
+    
+    func updateGestureRecognizer(_ recognizer: UISwipeGestureRecognizer,
+                                 context: Context) { }
+    
+    func makeCoordinator(converter: CoordinateSpaceConverter) -> Coordinator { Coordinator(action: action) }
+    
+    final class Coordinator: NSObject {
+        let action: Action
+        init(action: @escaping Action) { self.action = action }
+        @objc func handle(_ recognizer: UISwipeGestureRecognizer) {
+            action(recognizer.direction)              // fire once per swipe
+        }
     }
 }
