@@ -14,6 +14,7 @@ enum Theme {
 
 enum Fonts {
     // Change with Inter font here
+    static let buttonFootnote: Font = .system(size: 11, weight: .bold)
     static let footnote: Font = .system(size: 12, weight: .regular)
     static let text: Font = .system(size: 12, weight: .bold)
     static let description: Font = .system(size: 14, weight: .regular)
@@ -38,6 +39,8 @@ enum Colors {
     static let foregroundPrimary = Color(hex: "#202225")
     static let bgBrandPrimary = Color(hex: "#EBF7FD")
     static let foregroundBrandPrimary = Color(hex: "#0077CC")
+    static let labelsTertiary = Color(hex: "#3C3C434D")
+    static let foregroungTertiary = Color(hex: "#636568")
 }
 
 enum Icons {

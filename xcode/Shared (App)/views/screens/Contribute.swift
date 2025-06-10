@@ -30,27 +30,17 @@ fileprivate enum Constants {
     
     static let dividerHeight: CGFloat = 1
     
-    static let donateButtonVStackSpacing: CGFloat = 8
     static let donateButtonHeight: CGFloat = 48
     
     static let containerWidth: CGFloat = 375
     static let containerHeight: CGFloat = 640
     static let containerBottomPadding: CGFloat = 12
-    
-    static let buttonCornerRadius: CGFloat = 8
-    static let borderLineWidth: CGFloat = 1
-    static let buttonShadowRadius: CGFloat = 2
-    static let buttonShadowX: CGFloat = 0
-    static let buttonShadowY: CGFloat = 0
-    
-    static let gradientStartRadius: CGFloat = 30
-    static let smallGradientEndRadius: CGFloat = 300
-    static let bigGradientEndRadius: CGFloat = 420
-    static let gradientColorOpacity: Double = 0.42
-    static let gradientWhiteOpacity: Double = 0
-    
-    static let stepByStepButtonHeight: CGFloat = 32
-    static let stepByStepSectionVerticalSpacing: CGFloat = 8
+  
+    static let donationOverlayVerticalSpacing: CGFloat = 24
+    static let donationOverlayTextVerticalSpacing: CGFloat = 4
+    static let donationOverlayDonationButtonsVerticalSpacing: CGFloat = 16
+  
+
 }
 
 fileprivate enum Strings {
@@ -65,10 +55,13 @@ fileprivate enum Strings {
     static let monthlyDonation = "Monthly Donation"
     static let yearlyDonation = "Yearly Donation"
     static let oneTimeDonation = "One-Time Donation"
+    static let donationOverlayTitle = "Choose your monthly donation amount"
+    static let donationOverlaySubtitle = "You can cancel anytime."
 }
 
 struct ContributeView: View {
     @State var theme = Theme.light
+    @State private var showOverlay = false
     
     var donateButtonPressed: () -> Void
     var stepByStepButtonPressed: () -> Void
@@ -78,6 +71,7 @@ struct ContributeView: View {
     var backPressed: () -> Void
       
     var body: some View {
+      ZStack(alignment: .bottom) {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
             card
         }
@@ -85,6 +79,11 @@ struct ContributeView: View {
         .padding(.bottom, Constants.containerBottomPadding)
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
+        .sheet(isPresented: $showOverlay) {
+          donationPlan()
+            .presentationDetents([.height(400)])
+        }
+      }
     }
     
     var card: some View {
@@ -158,9 +157,13 @@ struct ContributeView: View {
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity)
           
-          donateButton(title: Strings.monthlyDonation, action: {})
-          donateButton(title: Strings.yearlyDonation, action: {})
-          donateButton(title: Strings.oneTimeDonation, action: {})
+          donationPeriodButton(title: Strings.monthlyDonation, action: {
+            withAnimation {
+              showOverlay = true
+            }
+          })
+          donationPeriodButton(title: Strings.yearlyDonation, action: {})
+          donationPeriodButton(title: Strings.oneTimeDonation, action: {})
         }
         .padding(8)
         .frame(width: 311, height: 240)
@@ -198,7 +201,7 @@ struct ContributeView: View {
             .padding(.top, 12)
     }
     
-  func donateButton(title: String, action: @escaping () -> Void) -> some View {
+    func donationPeriodButton(title: String, action: @escaping () -> Void) -> some View {
         Button {
           action()
         } label: {
@@ -208,6 +211,58 @@ struct ContributeView: View {
                 .modifier(GhosteryButtonModifier())
         }
     }
+  
+    func donationPlan() -> some View {
+      VStack(alignment: .center, spacing: Constants.noSpacing) {
+        Capsule()
+          .frame(width: 48, height: 5)
+          .background(Colors.labelsTertiary)
+          .opacity(0.3)
+          .padding(.top, 8)
+        Spacer()
+        donationOverlayContents
+        Spacer()
+      }
+      .padding(.horizontal, Constants.horizontalPadding)
+    }
+  
+  var donationOverlayContents: some View {
+    VStack(alignment:.center, spacing: Constants.donationOverlayVerticalSpacing) {
+      donationOverlayHeader
+      donationOverlayPlanButtons
+    }
+  }
+  
+  var donationOverlayHeader: some View {
+    VStack(alignment:.center, spacing: Constants.donationOverlayTextVerticalSpacing) {
+      Text(Strings.donationOverlayTitle)
+      Text(Strings.donationOverlaySubtitle)
+    }
+  }
+  
+  var donationOverlayPlanButtons: some View {
+    VStack(alignment:.center, spacing: Constants.donationOverlayDonationButtonsVerticalSpacing) {
+      donationAmountButton(title: "$1.99", subtitle: "per month", action: {})
+      donationAmountButton(title: "$1.99", subtitle: "per month", action: {})
+      donationAmountButton(title: "$1.99", subtitle: "per month", action: {})
+    }
+  }
+  
+  func donationAmountButton(title: String, subtitle: String, action: @escaping () -> Void) -> some View {
+      Button {
+        action()
+      } label: {
+        VStack(alignment: .center, spacing: Constants.noSpacing) {
+          Text(title)
+          Text(subtitle)
+            .font(Fonts.buttonFootnote)
+            .foregroundStyle(Colors.foregroungTertiary)
+        }
+        .frame(height: Constants.donateButtonHeight)
+        .frame(maxWidth: .infinity)
+        .modifier(GhosteryButtonModifier())
+      }
+  }
 }
 
 fileprivate struct LegalText: ViewModifier {
