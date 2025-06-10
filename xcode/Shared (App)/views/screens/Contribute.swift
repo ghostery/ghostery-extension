@@ -72,6 +72,7 @@ struct DonationPlan {
 struct ContributeView: View {
     @State var theme = Theme.light
     @State private var showOverlay = false
+    @State private var showDonationOverlayHeaderSubtitle = true
   
     @State var donationPlans: [DonationPlan] = []
     
@@ -178,6 +179,7 @@ struct ContributeView: View {
                   .init(id: "3", price: "$11.99", recurrence: Strings.perMonth)
                 ]
               }
+              showDonationOverlayHeaderSubtitle = true
               showOverlay = true
             }
           })
@@ -190,6 +192,7 @@ struct ContributeView: View {
                   .init(id: "3", price: "$143.90", recurrence: Strings.perYear)
                 ]
               }
+              showDonationOverlayHeaderSubtitle = true
               showOverlay = true
             }
           })
@@ -202,6 +205,7 @@ struct ContributeView: View {
                   .init(id: "3", price: "$15", recurrence: Strings.singleDonation)
                 ]
               }
+              showDonationOverlayHeaderSubtitle = false
               showOverlay = true
             }
           })
@@ -280,9 +284,11 @@ struct ContributeView: View {
       Text(Strings.donationOverlayTitle)
         .font(Fonts.subheadline)
         .foregroundStyle(Colors.foregroundPrimary)
-      Text(Strings.donationOverlaySubtitle)
-        .font(Fonts.footnote)
-        .foregroundStyle(Colors.foregroundSecondary)
+      if showDonationOverlayHeaderSubtitle {
+        Text(Strings.donationOverlaySubtitle)
+          .font(Fonts.footnote)
+          .foregroundStyle(Colors.foregroundSecondary)
+      }
     }
   }
   
