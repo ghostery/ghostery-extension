@@ -176,7 +176,7 @@ struct WelcomeView: View {
                 Text(Strings.stepByStepGuide)
                     .frame(height: Constants.stepByStepButtonHeight)
                     .frame(maxWidth: .infinity)
-                    .modifier(GhosteryButtonModifier())
+                    .modifier(GhosteryOutlinedButtonModifier())
             }
         }
     }
@@ -193,7 +193,7 @@ struct WelcomeView: View {
                 Text(Strings.donateButtonTitle)
                     .frame(height: Constants.donateButtonHeight)
                     .frame(maxWidth: .infinity)
-                    .modifier(GhosteryButtonModifier())
+                    .modifier(GhosteryOutlinedButtonModifier())
             }
         }
     }
@@ -203,7 +203,7 @@ struct WelcomeView: View {
   WelcomeView(donateButtonPressed: {}, stepByStepButtonPressed: {})
 }
 
-struct GhosteryButtonModifier: ViewModifier {
+struct GhosteryOutlinedButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(Fonts.buttonTitle)
@@ -214,6 +214,18 @@ struct GhosteryButtonModifier: ViewModifier {
             .overlay(
                 RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
                     .stroke(Colors.ghosteryBlue, lineWidth: Constants.borderLineWidth)
+            )
+            .shadow(color: Colors.shadowColor, radius: Constants.buttonShadowRadius, x: Constants.buttonShadowX, y: Constants.buttonShadowY)
+    }
+}
+
+struct GhosteryFilledButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Fonts.buttonTitle)
+            .background(Colors.bgBrandSolid)
+            .clipShape(
+                RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
             )
             .shadow(color: Colors.shadowColor, radius: Constants.buttonShadowRadius, x: Constants.buttonShadowX, y: Constants.buttonShadowY)
     }

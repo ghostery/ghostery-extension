@@ -57,11 +57,23 @@ fileprivate enum Strings {
     static let oneTimeDonation = "One-Time Donation"
     static let donationOverlayTitle = "Choose your monthly donation amount"
     static let donationOverlaySubtitle = "You can cancel anytime."
+    static let donate = "Donate"
+    static let perMonth = "per month"
+    static let perYear = "per year"
+    static let singleDonation = "Single donation"
+}
+
+struct DonationPlan {
+  let id: String
+  let price: String
+  let recurrence: String
 }
 
 struct ContributeView: View {
     @State var theme = Theme.light
     @State private var showOverlay = false
+  
+    @State var donationPlans: [DonationPlan] = []
     
     var donateButtonPressed: () -> Void
     var stepByStepButtonPressed: () -> Void
@@ -80,8 +92,8 @@ struct ContributeView: View {
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
         .sheet(isPresented: $showOverlay) {
-          donationPlan()
-            .presentationDetents([.height(400)])
+          donationPlansOverlay
+            .presentationDetents([.height(381)])
         }
       }
     }
@@ -159,11 +171,40 @@ struct ContributeView: View {
           
           donationPeriodButton(title: Strings.monthlyDonation, action: {
             withAnimation {
+              Task { @MainActor in
+                donationPlans = [
+                  .init(id: "1", price: "$1.99", recurrence: Strings.perMonth),
+                  .init(id: "2", price: "$4.99", recurrence: Strings.perMonth),
+                  .init(id: "3", price: "$11.99", recurrence: Strings.perMonth)
+                ]
+              }
               showOverlay = true
             }
           })
-          donationPeriodButton(title: Strings.yearlyDonation, action: {})
-          donationPeriodButton(title: Strings.oneTimeDonation, action: {})
+          donationPeriodButton(title: Strings.yearlyDonation, action: {
+            withAnimation {
+              Task { @MainActor in
+                donationPlans = [
+                  .init(id: "1", price: "$23.90", recurrence: Strings.perYear),
+                  .init(id: "2", price: "$59.90", recurrence: Strings.perYear),
+                  .init(id: "3", price: "$143.90", recurrence: Strings.perYear)
+                ]
+              }
+              showOverlay = true
+            }
+          })
+          donationPeriodButton(title: Strings.oneTimeDonation, action: {
+            withAnimation {
+              Task { @MainActor in
+                donationPlans = [
+                  .init(id: "1", price: "$5", recurrence: Strings.singleDonation),
+                  .init(id: "2", price: "$10", recurrence: Strings.singleDonation),
+                  .init(id: "3", price: "$15", recurrence: Strings.singleDonation)
+                ]
+              }
+              showOverlay = true
+            }
+          })
         }
         .padding(8)
         .frame(width: 311, height: 240)
@@ -208,11 +249,11 @@ struct ContributeView: View {
             Text(title)
                 .frame(height: Constants.donateButtonHeight)
                 .frame(maxWidth: .infinity)
-                .modifier(GhosteryButtonModifier())
+                .modifier(GhosteryOutlinedButtonModifier())
         }
     }
   
-    func donationPlan() -> some View {
+  var donationPlansOverlay: some View {
       VStack(alignment: .center, spacing: Constants.noSpacing) {
         Capsule()
           .frame(width: 48, height: 5)
@@ -230,21 +271,26 @@ struct ContributeView: View {
     VStack(alignment:.center, spacing: Constants.donationOverlayVerticalSpacing) {
       donationOverlayHeader
       donationOverlayPlanButtons
+      donateSolidButton(title: Strings.donate, action: {})
     }
   }
   
   var donationOverlayHeader: some View {
     VStack(alignment:.center, spacing: Constants.donationOverlayTextVerticalSpacing) {
       Text(Strings.donationOverlayTitle)
+        .font(Fonts.subheadline)
+        .foregroundStyle(Colors.foregroundPrimary)
       Text(Strings.donationOverlaySubtitle)
+        .font(Fonts.footnote)
+        .foregroundStyle(Colors.foregroundSecondary)
     }
   }
   
   var donationOverlayPlanButtons: some View {
     VStack(alignment:.center, spacing: Constants.donationOverlayDonationButtonsVerticalSpacing) {
-      donationAmountButton(title: "$1.99", subtitle: "per month", action: {})
-      donationAmountButton(title: "$1.99", subtitle: "per month", action: {})
-      donationAmountButton(title: "$1.99", subtitle: "per month", action: {})
+      ForEach(donationPlans, id: \.id) { plan in
+        donationAmountButton(title: plan.price, subtitle: plan.recurrence, action: {})
+      }
     }
   }
   
@@ -260,7 +306,21 @@ struct ContributeView: View {
         }
         .frame(height: Constants.donateButtonHeight)
         .frame(maxWidth: .infinity)
-        .modifier(GhosteryButtonModifier())
+        .modifier(GhosteryOutlinedButtonModifier())
+      }
+  }
+  
+  func donateSolidButton(title: String, action: @escaping () -> Void) -> some View {
+      Button {
+        action()
+      } label: {
+        VStack(alignment: .center, spacing: Constants.noSpacing) {
+          Text(title)
+            .foregroundStyle(Color.white)
+        }
+        .frame(height: Constants.donateButtonHeight)
+        .frame(maxWidth: .infinity)
+        .modifier(GhosteryFilledButtonModifier())
       }
   }
 }
