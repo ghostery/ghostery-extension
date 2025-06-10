@@ -67,9 +67,10 @@ export default {
   paused: { value: false, reflect: true },
   global: { value: false, reflect: true },
   revokeAt: 0,
+  safeMode: false,
   pauseType: 1,
   pauseList: { value: false, reflect: true },
-  render: ({ paused, pauseType, pauseList, revokeAt }) => html`
+  render: ({ paused, pauseType, pauseList, revokeAt, safeMode }) => html`
     <template layout="grid relative">
       <button
         id="main"
@@ -83,7 +84,9 @@ export default {
           <ui-icon name="pause"></ui-icon>
           <div layout="column">
             <ui-text type="label-m" color="inherit">
-              ${paused ? msg`Ghostery is paused` : msg`Pause on this site`}
+              ${paused && !safeMode && msg`Ghostery is paused`}
+              ${paused && safeMode && msg`Ghostery is inactive`}
+              ${!paused && msg`Pause on this site`}
             </ui-text>
             ${!!revokeAt &&
             html`<ui-text type="body-xs" color="inherit">

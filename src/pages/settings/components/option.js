@@ -19,7 +19,7 @@ export default {
       html`<ui-icon
         name="${icon}"
         color="quaternary"
-        layout="size:3"
+        layout="size:2.5"
       ></ui-icon>`}
 
       <div layout="column gap:0.5 grow">

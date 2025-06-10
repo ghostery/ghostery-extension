@@ -153,7 +153,7 @@ export default {
                   <ui-icon
                     name="pin"
                     color="quaternary"
-                    layout="size:3 margin:right"
+                    layout="size:2.5 margin:right"
                   ></ui-icon>
                   <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                     Regional Filters
@@ -177,7 +177,7 @@ export default {
                   <ui-icon
                     name="search"
                     color="quaternary"
-                    layout="size:3 margin:right"
+                    layout="size:2.5 margin:right"
                   ></ui-icon>
                   <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                     Search Engine Redirect Protection </ui-text
@@ -199,7 +199,7 @@ export default {
                   <ui-icon
                     name="flask"
                     color="quaternary"
-                    layout="size:3 margin:right"
+                    layout="size:2.5 margin:right"
                   ></ui-icon>
                   <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                     Experimental Filters
@@ -225,7 +225,7 @@ export default {
                   <ui-icon
                     name="detailed-view"
                     color="quaternary"
-                    layout="size:3 margin:right"
+                    layout="size:2.5 margin:right"
                   ></ui-icon>
                   <ui-text type="headline-xs" layout="row gap:0.5 items:center">
                     Custom Filters

@@ -17,9 +17,9 @@ import ManagedConfig from '/store/managed-config';
 
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
-const PAUSED_RULE_PRIORITY = 10000000;
+export const PAUSED_RULE_PRIORITY = 10000000;
 
-const ALL_RESOURCE_TYPES = [
+export const ALL_RESOURCE_TYPES = [
   'main_frame',
   'sub_frame',
   'stylesheet',
