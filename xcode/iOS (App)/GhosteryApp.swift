@@ -82,6 +82,7 @@ struct GhosteryApp: App {
           }
         }
         .background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
+        .preferredColorScheme(theme == .light ? .light : .dark)
       }
     }
 
