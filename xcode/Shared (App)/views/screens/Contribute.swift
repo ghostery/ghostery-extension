@@ -55,7 +55,9 @@ fileprivate enum Strings {
     static let monthlyDonation = "Monthly Donation"
     static let yearlyDonation = "Yearly Donation"
     static let oneTimeDonation = "One-Time Donation"
-    static let donationOverlayTitle = "Choose your monthly donation amount"
+    static let donationOverlayMonthlyTitle = "Choose your monthly donation amount"
+    static let donationOverlayYearlyTitle = "Choose your yearly donation amount"
+    static let donationOverlayOneTimeTitle = "Choose your one-time donation amount"
     static let donationOverlaySubtitle = "You can cancel anytime."
     static let donate = "Donate"
     static let perMonth = "per month"
@@ -73,6 +75,7 @@ struct ContributeView: View {
     @State var theme = Theme.light
     @State private var showOverlay = false
     @State private var showDonationOverlayHeaderSubtitle = true
+    @State private var donationOverlayTitle: String = ""
   
     @State var donationPlans: [DonationPlan] = []
     
@@ -178,6 +181,8 @@ struct ContributeView: View {
                   .init(id: "2", price: "$4.99", recurrence: Strings.perMonth),
                   .init(id: "3", price: "$11.99", recurrence: Strings.perMonth)
                 ]
+                
+                donationOverlayTitle = Strings.donationOverlayMonthlyTitle
               }
               showDonationOverlayHeaderSubtitle = true
               showOverlay = true
@@ -191,6 +196,8 @@ struct ContributeView: View {
                   .init(id: "2", price: "$59.90", recurrence: Strings.perYear),
                   .init(id: "3", price: "$143.90", recurrence: Strings.perYear)
                 ]
+                
+                donationOverlayTitle = Strings.donationOverlayYearlyTitle
               }
               showDonationOverlayHeaderSubtitle = true
               showOverlay = true
@@ -204,6 +211,8 @@ struct ContributeView: View {
                   .init(id: "2", price: "$10", recurrence: Strings.singleDonation),
                   .init(id: "3", price: "$15", recurrence: Strings.singleDonation)
                 ]
+                
+                donationOverlayTitle = Strings.donationOverlayOneTimeTitle
               }
               showDonationOverlayHeaderSubtitle = false
               showOverlay = true
@@ -281,7 +290,7 @@ struct ContributeView: View {
   
   var donationOverlayHeader: some View {
     VStack(alignment:.center, spacing: Constants.donationOverlayTextVerticalSpacing) {
-      Text(Strings.donationOverlayTitle)
+      Text(donationOverlayTitle)
         .font(Fonts.subheadline)
         .foregroundStyle(Colors.foregroundPrimary)
       if showDonationOverlayHeaderSubtitle {
