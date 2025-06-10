@@ -235,7 +235,7 @@ export default {
               spellcheck="false"
               autocorrect="off"
               oninput="${enableElementPickerSelectors}"
-              style="white-space:nowrap"
+              style="white-space:pre"
             ></textarea>
           </ui-input>
           <div layout="row gap:2">
