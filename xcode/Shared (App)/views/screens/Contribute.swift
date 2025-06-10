@@ -61,6 +61,10 @@ fileprivate enum Strings {
     static let terms = "Terms of Use"
     static let policy = "Privacy Policy"
     static let restoreDonation = "Restore donation"
+    static let donationTilte = "Select the most convenient method for your support"
+    static let monthlyDonation = "Monthly Donation"
+    static let yearlyDonation = "Yearly Donation"
+    static let oneTimeDonation = "One-Time Donation"
 }
 
 struct ContributeView: View {
@@ -112,19 +116,21 @@ struct ContributeView: View {
             .foregroundStyle(Colors.foregroundPrimary)
             .frame(maxWidth: .infinity)
         HStack(alignment: .center, spacing: Constants.noSpacing) {
-          Image(systemName: "chevron.backward")
-              .font(.system(size: 16, weight: .semibold))
-              .foregroundStyle(Colors.foregroundBrandPrimary)
-          Text("Back")
-            .font(Fonts.title)
-            .foregroundStyle(Colors.foregroundBrandPrimary)
-            .padding(.leading, 2)
-            .onTapGesture {
+          Button {
               backPressed()
+          } label: {
+            HStack(alignment: .center, spacing: Constants.noSpacing) {
+              Image(systemName: "chevron.backward")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(Colors.foregroundBrandPrimary)
+              Text("Back")
+                .font(Fonts.title)
+                .foregroundStyle(Colors.foregroundBrandPrimary)
+                .padding(.leading, 2)
             }
+          }
           Spacer()
         }
-        
       }
     }
   
@@ -146,7 +152,15 @@ struct ContributeView: View {
     
     var donationBox: some View {
         VStack(alignment: .center, spacing: 16) {
-            Text("Todo")
+          Text(Strings.donationTilte)
+            .font(Fonts.text)
+            .foregroundStyle(Colors.foregroundPrimary)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity)
+          
+          donateButton(title: Strings.monthlyDonation, action: {})
+          donateButton(title: Strings.yearlyDonation, action: {})
+          donateButton(title: Strings.oneTimeDonation, action: {})
         }
         .padding(8)
         .frame(width: 311, height: 240)
@@ -184,22 +198,16 @@ struct ContributeView: View {
             .padding(.top, 12)
     }
     
-//    var donateButton: some View {
-//        VStack(alignment: .center, spacing: Constants.donateButtonVStackSpacing) {
-//            Text(Strings.donateSectionDescription)
-//                .font(Fonts.text)
-//                .multilineTextAlignment(.center)
-//                .foregroundStyle(theme == .light ? Colors.lightTextColor : Colors.darkTextColor)
-//            Button {
-//                donateButtonPressed()
-//            } label: {
-//                Text(Strings.donateButtonTitle)
-//                    .frame(height: Constants.donateButtonHeight)
-//                    .frame(maxWidth: .infinity)
-//                    .modifier(GhosteryButtonModifier())
-//            }
-//        }
-//    }
+  func donateButton(title: String, action: @escaping () -> Void) -> some View {
+        Button {
+          action()
+        } label: {
+            Text(title)
+                .frame(height: Constants.donateButtonHeight)
+                .frame(maxWidth: .infinity)
+                .modifier(GhosteryButtonModifier())
+        }
+    }
 }
 
 fileprivate struct LegalText: ViewModifier {
