@@ -56,9 +56,6 @@
     "message": "已调整",
     "description": "Plural form - list of adjusted trackers"
   },
-  "ads_and_trackers_will_not_be_blocked_": {
-    "message": "廣告和追蹤器將不會被阻擋。"
-  },
   "adult_advertising": {
     "message": "成人廣告",
     "description": "Tracker category name"
@@ -128,6 +125,9 @@
   },
   "blocked_on_this_website": {
     "message": "在這個網站被封鎖"
+  },
+  "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
+    "message": "暫時停止封鎖，僅限於此頁面。為獲得最佳效果，請考慮暫停其他廣告攔截器。"
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "阻擋您所訪問網站語言特定的額外廣告、追蹤器和彈出視窗。僅啟用您需要的語言，以避免減慢瀏覽器速度。."
@@ -244,9 +244,6 @@
   "disabled": {
     "message": "已停用"
   },
-  "dismiss": {
-    "message": "忽略"
-  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "顯示在此網站上手動隱藏的所有內容區塊。您可以單獨移除它們或清除整個列表。"
   },
@@ -347,9 +344,6 @@
   "facts": {
     "message": "事實"
   },
-  "fantastic__thanks_": {
-    "message": "太棒了！謝謝！"
-  },
   "feedback_sharing": {
     "message": "意見分享"
   },
@@ -404,11 +398,11 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker＆Ad Blocker正在命名您访问的网站上的跟踪器。您正在未受保护的情况下浏览网页。"
   },
-  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
-    "message": "Ghostery 使用者回報廣告攔截器不再影響此網站。重新啟用 Ghostery。"
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
+    "message": "Ghostery 使用者回報廣告攔截器不再影響此網站。Ghostery 將重新啟用。"
   },
-  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
-    "message": "Ghostery 使用者回報廣告攔截器會使此網站無法正常運作。試著暫停 Ghostery。"
+  "ghostery_users_report_that_adblockers_break_this_page__ghostery_has_been_paused_": {
+    "message": "Ghostery 使用者反映廣告攔截器會破壞此頁面。Ghostery 已暫停。"
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery 使用這些資訊來提供其社群驅動的隱私功能，確保不會收集個人資訊，例如密碼、瀏覽歷史和頁面內容。"
@@ -559,9 +553,6 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no": {
-    "message": "否"
-  },
   "no_activities_detected": {
     "message": "未偵測到任何活動"
   },
@@ -613,9 +604,6 @@
   },
   "paused": {
     "message": "暫停"
-  },
-  "pausing___": {
-    "message": "暫停中..."
   },
   "performance_telemetry": {
     "message": "效能遙測"
@@ -680,9 +668,6 @@
   "resume": {
     "message": "恢復"
   },
-  "resuming___": {
-    "message": "恢復中..."
-  },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "揭示網路表面下隱藏的真相。透過 WhoTracks.Me，您可以揭開每個追蹤者背後的身份。"
   },
@@ -743,15 +728,6 @@
   "site_analytics": {
     "message": "網站分析",
     "description": "Tracker category name"
-  },
-  "site_works_fine": {
-    "message": "網站運作正常"
-  },
-  "skip": {
-    "message": "跳過"
-  },
-  "skip_this_time": {
-    "message": "這次略過"
   },
   "social_media": {
     "message": "社交媒體",
@@ -815,9 +791,6 @@
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "為了提供隱私保護功能，會收集以下有關網路追蹤器的資訊："
   },
-  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
-    "message": "请告知我们这是否对Ghostery社区有帮助！"
-  },
   "top_100": {
     "message": "前100名"
   },
@@ -826,6 +799,9 @@
   },
   "top_50": {
     "message": "前 50 名"
+  },
+  "tracker___ad_blocking_will_be_active_on_this_page_": {
+    "message": "追踪器和广告拦截将在此页面上激活。"
   },
   "tracker_database": {
     "message": "追蹤程式資料庫"
@@ -914,14 +890,8 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "我們知道您依靠 Ghostery 來獲得流暢的 YouTube 體驗。 在出現更完善的解決方案之前，這裡有一個臨時解決方案。"
   },
-  "we_ll_continue_working_on_it__thanks_": {
-    "message": "我们会继续努力的！谢谢！"
-  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "很高興你喜歡Ghostery！幫助其他人也找到我們吧——只需片刻時間。."
-  },
-  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
-    "message": "我們很高興 Ghostery 贏得了你的喜愛！讓其他人知道——留下評論吧！"
   },
   "web_trackers": {
     "message": "網路追蹤器"
@@ -959,11 +929,11 @@
   "whotracks_me_wheel": {
     "message": "WhoTracks.Me 輪盤"
   },
+  "why_paused_": {
+    "message": "為什麼暫停？"
+  },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "禁用 Ghostery 時，只有命名追蹤器的基本功能可用。."
-  },
-  "yes": {
-    "message": "是"
   },
   "yesterday": {
     "message": "昨天"

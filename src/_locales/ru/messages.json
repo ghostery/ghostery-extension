@@ -56,9 +56,6 @@
     "message": "Изменено",
     "description": "Plural form - list of adjusted trackers"
   },
-  "ads_and_trackers_will_not_be_blocked_": {
-    "message": "Реклама и трекеры не будут блокироваться."
-  },
   "adult_advertising": {
     "message": "Реклама для взрослых",
     "description": "Tracker category name"
@@ -128,6 +125,9 @@
   },
   "blocked_on_this_website": {
     "message": "Заблокировано на этом сайте"
+  },
+  "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
+    "message": "Блокировка временно приостановлена, и только на этой странице. Для достижения наилучших результатов рассмотрите возможность приостановки других блокировщиков рекламы."
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Блокирует дополнительные объявления, трекеры и всплывающие окна, специфичные для языка посещаемых вами веб-сайтов. Включайте только те языки, которые вам нужны, чтобы избежать замедления работы браузера."
@@ -244,9 +244,6 @@
   "disabled": {
     "message": "Инвалид"
   },
-  "dismiss": {
-    "message": "Отклонить"
-  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Отображает все блоки контента, скрытые вручную на этом сайте. Вы можете удалить их по отдельности или очистить весь список."
   },
@@ -347,9 +344,6 @@
   "facts": {
     "message": "Факты"
   },
-  "fantastic__thanks_": {
-    "message": "Фантастика! Спасибо!"
-  },
   "feedback_sharing": {
     "message": "Обмен отзывами"
   },
@@ -404,11 +398,11 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Трекер & Ad Blocker называет трекеры, присутствующие на посещаемых вами веб-сайтах. Вы просматриваете веб-сайты без защиты."
   },
-  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
-    "message": "Пользователи Ghostery сообщают, что блокировщики рекламы больше не нарушают работу этого сайта. Возобновите Ghostery."
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
+    "message": "Пользователи Ghostery сообщают, что блокировщики рекламы больше не нарушают работу этого сайта. Ghostery будет снова включен."
   },
-  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
-    "message": "Пользователи Ghostery сообщают, что блокировщики рекламы мешают работе этого сайта. Попробуйте приостановить Ghostery."
+  "ghostery_users_report_that_adblockers_break_this_page__ghostery_has_been_paused_": {
+    "message": "Пользователи Ghostery сообщают, что блокировщики рекламы нарушают работу этой страницы. Ghostery приостановлен."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery использует эту информацию для предоставления функций конфиденциальности, основанных на сообществе, гарантируя, что личная информация, такая как пароли, история просмотров и содержимое страниц, никогда не собирается."
@@ -559,9 +553,6 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no": {
-    "message": "Нет"
-  },
   "no_activities_detected": {
     "message": "Действия не обнаружены"
   },
@@ -613,9 +604,6 @@
   },
   "paused": {
     "message": "Приостановлено"
-  },
-  "pausing___": {
-    "message": "Приостановка..."
   },
   "performance_telemetry": {
     "message": "Телеметрия производительности"
@@ -680,9 +668,6 @@
   "resume": {
     "message": "Возобновить"
   },
-  "resuming___": {
-    "message": "Возобновление..."
-  },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Раскрывает то, что скрыто под поверхностью интернета. С WhoTracks.Me вы можете узнать, кто стоит за каждым Трекером."
   },
@@ -743,15 +728,6 @@
   "site_analytics": {
     "message": "Аналитика сайта",
     "description": "Tracker category name"
-  },
-  "site_works_fine": {
-    "message": "Сайт работает нормально"
-  },
-  "skip": {
-    "message": "Пропустить"
-  },
-  "skip_this_time": {
-    "message": "Пропустить на этот раз"
   },
   "social_media": {
     "message": "Социальные сети",
@@ -815,9 +791,6 @@
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Для обеспечения функций защиты конфиденциальности собирается следующая информация о веб-трекерах:"
   },
-  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
-    "message": "Сообщите нам, помогло ли это, на благо сообщества Ghostery!"
-  },
   "top_100": {
     "message": "Топ 100"
   },
@@ -826,6 +799,9 @@
   },
   "top_50": {
     "message": "Топ 50"
+  },
+  "tracker___ad_blocking_will_be_active_on_this_page_": {
+    "message": "Блокировка трекеров и рекламы будет активна на этой странице."
   },
   "tracker_database": {
     "message": "База данных трекера"
@@ -914,14 +890,8 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Мы знаем, что ты полагаешься на Ghostery для бесперебойной работы с YouTube. Пока не появится более совершенное решение, вот временное исправление."
   },
-  "we_ll_continue_working_on_it__thanks_": {
-    "message": "Мы продолжим работать над этим! Спасибо!"
-  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Мы рады, что Ghostery вам по душе! Помогите другим найти нас — это займет всего минуту."
-  },
-  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
-    "message": "Мы рады, что Ghostery завоевал ваше сердце! Дайте знать другим — оставьте отзыв!"
   },
   "web_trackers": {
     "message": "Веб-трекеры"
@@ -959,11 +929,11 @@
   "whotracks_me_wheel": {
     "message": "Колесо WhoTracks.Me"
   },
+  "why_paused_": {
+    "message": "Почему приостановлено?"
+  },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "При отключенном Ghostery доступна только базовая функция именования трекеров."
-  },
-  "yes": {
-    "message": "Да"
   },
   "yesterday": {
     "message": "Вчера"
