@@ -242,10 +242,14 @@ struct ContributeView: View {
   }
   
   var restoreDonation: some View {
-    Text(Strings.restoreDonation)
-      .font(.footnote)
-      .foregroundStyle(Colors.foregroundBrandPrimary)
-      .padding(.top, 12)
+    Button {
+      restorePurchases()
+    } label: {
+      Text(Strings.restoreDonation)
+        .font(.footnote)
+        .foregroundStyle(Colors.foregroundBrandPrimary)
+        .padding(.top, 12)
+    }
   }
   
   func donationPeriodButton(title: String, action: @escaping () -> Void) -> some View {
@@ -384,6 +388,10 @@ struct ContributeView: View {
       print("Failed to purchase")
     }
     showOverlay = false
+  }
+  
+  private func restorePurchases() {
+      Task.init { try? await AppStore.sync() }
   }
 }
 
