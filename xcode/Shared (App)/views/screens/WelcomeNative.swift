@@ -204,10 +204,13 @@ struct WelcomeView: View {
 }
 
 struct GhosteryOutlinedButtonModifier: ViewModifier {
+    
+    var backgroundColor: Color?
+  
     func body(content: Content) -> some View {
         content
             .font(Fonts.buttonTitle)
-            .background(Colors.buttonBGColor)
+            .background(backgroundColor ?? Colors.buttonBGColor)
             .clipShape(
                 RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
             )

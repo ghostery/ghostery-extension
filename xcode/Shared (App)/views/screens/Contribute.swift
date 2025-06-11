@@ -78,6 +78,9 @@ struct ContributeView: View {
     @State private var donationOverlayTitle: String = ""
   
     @State var donationPlans: [DonationPlan] = []
+    @State var selectedDonationPlan: DonationPlan?
+  
+    @EnvironmentObject var storeHelper: StoreHelper
     
     var donateButtonPressed: () -> Void
     var stepByStepButtonPressed: () -> Void
@@ -95,7 +98,7 @@ struct ContributeView: View {
         .padding(.bottom, Constants.containerBottomPadding)
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
-        .sheet(isPresented: $showOverlay) {
+        .sheet(isPresented: $showOverlay, onDismiss: { selectedDonationPlan = nil }) {
           donationPlansOverlay
             .presentationDetents([.height(381)])
         }
@@ -304,12 +307,14 @@ struct ContributeView: View {
   var donationOverlayPlanButtons: some View {
     VStack(alignment:.center, spacing: Constants.donationOverlayDonationButtonsVerticalSpacing) {
       ForEach(donationPlans, id: \.id) { plan in
-        donationAmountButton(title: plan.price, subtitle: plan.recurrence, action: {})
+        donationAmountButton(id: plan.id, title: plan.price, subtitle: plan.recurrence, action: {
+          selectedDonationPlan = plan
+        })
       }
     }
   }
   
-  func donationAmountButton(title: String, subtitle: String, action: @escaping () -> Void) -> some View {
+  func donationAmountButton(id: String, title: String, subtitle: String, action: @escaping () -> Void) -> some View {
       Button {
         action()
       } label: {
@@ -321,7 +326,9 @@ struct ContributeView: View {
         }
         .frame(height: Constants.donateButtonHeight)
         .frame(maxWidth: .infinity)
-        .modifier(GhosteryOutlinedButtonModifier())
+        .modifier(GhosteryOutlinedButtonModifier(
+          backgroundColor: selectedDonationPlan?.id == id ? Colors.bgBrandSecondary : nil)
+        )
       }
   }
   
@@ -357,3 +364,16 @@ fileprivate struct LegalText: ViewModifier {
 #Preview {
   ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {}, backPressed: {})
 }
+
+
+/*
+ if storeHelper.hasProducts {
+     if let subscriptions = storeHelper.subscriptionProducts {
+         SubscriptionListViewRow(products: subscriptions)
+     }
+ } else {
+     Text("No donations available")
+         .font(.title)
+         .foregroundColor(.red)
+ }
+ */

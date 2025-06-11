@@ -43,6 +43,7 @@ enum Colors {
     static let foregroungTertiary = Color(hex: "#636568")
     static let foregroundSecondary = Color(hex: "#3F4146")
     static let bgBrandSolid = Color(hex: "#00AEF0")
+    static let bgBrandSecondary = Color(hex: "#DAF3FF")
 }
 
 enum Icons {
