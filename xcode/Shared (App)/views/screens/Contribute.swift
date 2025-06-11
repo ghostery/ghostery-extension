@@ -66,56 +66,18 @@ fileprivate enum Strings {
     static let singleDonation = "Single donation"
 }
 
-enum Recurrence: CustomStringConvertible {
-  case month
-  case year
-  case oneTime
-  
-  static func from(period: Product.SubscriptionPeriod?) -> Self? {
-    guard let period = period else {
-      return nil
-    }
-    switch period.unit {
-    case .month:
-      return .month
-    case .year:
-      return .year
-    default:
-      return nil
-    }
-  }
-  
-  var description: String {
-    switch self {
-    case .month:
-      Strings.perMonth
-    case .year:
-      Strings.perYear
-    case .oneTime:
-      Strings.singleDonation
-    }
-  }
-}
-
-struct DonationPlan {
-  let id: String
-  let price: Decimal
-  let displayPrice: String
-  let recurrence: Recurrence
-}
-
 struct ContributeView: View {
     @State var theme = Theme.light
     @State private var showOverlay = false
     @State private var showDonationOverlayHeaderSubtitle = true
     @State private var donationOverlayTitle: String = ""
   
-    @State var donationPlans: [DonationPlan] = []
-    @State var selectedDonationPlan: DonationPlan?
+    @State var donationPlans: [Product] = []
+    @State var selectedDonationPlan: Product?
   
-    @State var monthlyDonationPlans: [DonationPlan] = []
-    @State var yearlyDonationPlans: [DonationPlan] = []
-    @State var oneTimeDonationPlans: [DonationPlan] = []
+    @State var monthlyDonationPlans: [Product] = []
+    @State var yearlyDonationPlans: [Product] = []
+    @State var oneTimeDonationPlans: [Product] = []
   
     @EnvironmentObject var storeHelper: StoreHelper
     
@@ -141,46 +103,7 @@ struct ContributeView: View {
         }
       }
       .task {
-        guard storeHelper.hasProducts else {
-            return
-        }
-        
-        if let subscriptions = storeHelper.subscriptionProducts {
-          for subscription in subscriptions {
-            
-            guard let recurrence = Recurrence.from(period: subscription.subscription?.subscriptionPeriod) else {
-                continue
-            }
-            
-            let plan = DonationPlan(id: subscription.id,
-                                    price: subscription.price,
-                                    displayPrice: subscription.displayPrice,
-                                    recurrence: recurrence)
-            
-            switch plan.recurrence {
-            case .month:
-              monthlyDonationPlans.append(plan)
-            case .year:
-              yearlyDonationPlans.append(plan)
-            default:
-              continue
-            }
-          }
-        }
-        
-        if let oneTimeProducts = storeHelper.consumableProducts {
-          for product in oneTimeProducts {
-            let plan = DonationPlan(id: product.id,
-                                    price: product.price,
-                                    displayPrice: product.displayPrice,
-                                    recurrence: .oneTime)
-            oneTimeDonationPlans.append(plan)
-          }
-        }
-        
-        monthlyDonationPlans.sort { $0.price < $1.price }
-        yearlyDonationPlans.sort { $0.price < $1.price }
-        oneTimeDonationPlans.sort { $0.price < $1.price }
+        populateProducts()
       }
     }
     
@@ -354,7 +277,14 @@ struct ContributeView: View {
     VStack(alignment:.center, spacing: Constants.donationOverlayVerticalSpacing) {
       donationOverlayHeader
       donationOverlayPlanButtons
-      donateSolidButton(title: Strings.donate, action: {})
+      donateSolidButton(title: Strings.donate, action: {
+        guard let product = selectedDonationPlan else {
+          return
+        }
+        Task {
+          await purchase(product: product)
+        }
+      })
     }
   }
   
@@ -374,7 +304,10 @@ struct ContributeView: View {
   var donationOverlayPlanButtons: some View {
     VStack(alignment:.center, spacing: Constants.donationOverlayDonationButtonsVerticalSpacing) {
       ForEach(donationPlans, id: \.id) { plan in
-        donationAmountButton(id: plan.id, title: plan.displayPrice, subtitle: plan.recurrence.description, action: {
+        donationAmountButton(id: plan.id,
+                             title: plan.displayPrice,
+                             subtitle: plan.subscription?.subscriptionPeriod.displayName ?? Strings.singleDonation,
+                             action: {
           selectedDonationPlan = plan
         })
       }
@@ -412,6 +345,46 @@ struct ContributeView: View {
         .modifier(GhosteryFilledButtonModifier())
       }
   }
+      
+  private func populateProducts() {
+    guard storeHelper.hasProducts else {
+      return
+    }
+    
+    if let subscriptions = storeHelper.subscriptionProducts {
+      for subscription in subscriptions {
+        switch subscription.subscription?.subscriptionPeriod.unit {
+        case .month:
+          monthlyDonationPlans.append(subscription)
+        case .year:
+          yearlyDonationPlans.append(subscription)
+        default:
+          continue
+        }
+      }
+    }
+    
+    if let oneTimeProducts = storeHelper.consumableProducts {
+      for product in oneTimeProducts {
+        oneTimeDonationPlans.append(product)
+      }
+    }
+    
+    monthlyDonationPlans.sort { $0.price < $1.price }
+    yearlyDonationPlans.sort { $0.price < $1.price }
+    oneTimeDonationPlans.sort { $0.price < $1.price }
+  }
+  
+  /// Purchase a product using StoreHelper and StoreKit2.
+  /// - Parameter product: The `Product` to purchase
+  @MainActor func purchase(product: Product) async {
+      do {
+        let purchaseResult = try await storeHelper.purchase(product)
+      } catch {
+        print("Failed to purchase")
+      }
+      showOverlay = false
+  }
 }
 
 fileprivate struct LegalText: ViewModifier {
@@ -425,6 +398,19 @@ fileprivate struct LegalText: ViewModifier {
       .onTapGesture {
           action()
       }
+  }
+}
+
+extension Product.SubscriptionPeriod {
+  var displayName: String? {
+    switch self.unit {
+    case .month:
+      return Strings.perMonth
+    case .year:
+      return Strings.perYear
+    default:
+      return nil
+    }
   }
 }
 
