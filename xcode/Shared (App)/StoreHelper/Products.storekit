@@ -15,39 +15,9 @@
   ],
   "products" : [
     {
-      "displayPrice" : "5",
-      "familyShareable" : false,
-      "internalID" : "BB45336D",
-      "localizations" : [
-        {
-          "description" : "",
-          "displayName" : "",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "com.ghostery.subscription.plus.onetime.small",
-      "referenceName" : "One Time Small",
-      "type" : "NonConsumable"
-    },
-    {
-      "displayPrice" : "10",
-      "familyShareable" : false,
-      "internalID" : "166E12B1",
-      "localizations" : [
-        {
-          "description" : "",
-          "displayName" : "",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "com.ghostery.subscription.plus.onetime.medium",
-      "referenceName" : "One Time Medium",
-      "type" : "NonConsumable"
-    },
-    {
       "displayPrice" : "15",
       "familyShareable" : false,
-      "internalID" : "BBC535E4",
+      "internalID" : "1073B0FE",
       "localizations" : [
         {
           "description" : "",
@@ -57,7 +27,37 @@
       ],
       "productID" : "com.ghostery.subscription.plus.onetime.large",
       "referenceName" : "One Time Large",
-      "type" : "NonConsumable"
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "10",
+      "familyShareable" : false,
+      "internalID" : "97721157",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.ghostery.subscription.plus.onetime.medium",
+      "referenceName" : "One Time Medium",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "5",
+      "familyShareable" : false,
+      "internalID" : "D0ACF779",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.ghostery.subscription.plus.onetime.small",
+      "referenceName" : "One Time Small",
+      "type" : "Consumable"
     }
   ],
   "settings" : {

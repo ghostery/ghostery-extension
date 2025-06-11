@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 fileprivate enum Constants {
     static let horizontalPadding: CGFloat = 16
@@ -65,10 +66,42 @@ fileprivate enum Strings {
     static let singleDonation = "Single donation"
 }
 
+enum Recurrence: CustomStringConvertible {
+  case month
+  case year
+  case oneTime
+  
+  static func from(period: Product.SubscriptionPeriod?) -> Self? {
+    guard let period = period else {
+      return nil
+    }
+    switch period.unit {
+    case .month:
+      return .month
+    case .year:
+      return .year
+    default:
+      return nil
+    }
+  }
+  
+  var description: String {
+    switch self {
+    case .month:
+      Strings.perMonth
+    case .year:
+      Strings.perYear
+    case .oneTime:
+      Strings.singleDonation
+    }
+  }
+}
+
 struct DonationPlan {
   let id: String
-  let price: String
-  let recurrence: String
+  let price: Decimal
+  let displayPrice: String
+  let recurrence: Recurrence
 }
 
 struct ContributeView: View {
@@ -79,6 +112,10 @@ struct ContributeView: View {
   
     @State var donationPlans: [DonationPlan] = []
     @State var selectedDonationPlan: DonationPlan?
+  
+    @State var monthlyDonationPlans: [DonationPlan] = []
+    @State var yearlyDonationPlans: [DonationPlan] = []
+    @State var oneTimeDonationPlans: [DonationPlan] = []
   
     @EnvironmentObject var storeHelper: StoreHelper
     
@@ -102,6 +139,48 @@ struct ContributeView: View {
           donationPlansOverlay
             .presentationDetents([.height(381)])
         }
+      }
+      .task {
+        guard storeHelper.hasProducts else {
+            return
+        }
+        
+        if let subscriptions = storeHelper.subscriptionProducts {
+          for subscription in subscriptions {
+            
+            guard let recurrence = Recurrence.from(period: subscription.subscription?.subscriptionPeriod) else {
+                continue
+            }
+            
+            let plan = DonationPlan(id: subscription.id,
+                                    price: subscription.price,
+                                    displayPrice: subscription.displayPrice,
+                                    recurrence: recurrence)
+            
+            switch plan.recurrence {
+            case .month:
+              monthlyDonationPlans.append(plan)
+            case .year:
+              yearlyDonationPlans.append(plan)
+            default:
+              continue
+            }
+          }
+        }
+        
+        if let oneTimeProducts = storeHelper.consumableProducts {
+          for product in oneTimeProducts {
+            let plan = DonationPlan(id: product.id,
+                                    price: product.price,
+                                    displayPrice: product.displayPrice,
+                                    recurrence: .oneTime)
+            oneTimeDonationPlans.append(plan)
+          }
+        }
+        
+        monthlyDonationPlans.sort { $0.price < $1.price }
+        yearlyDonationPlans.sort { $0.price < $1.price }
+        oneTimeDonationPlans.sort { $0.price < $1.price }
       }
     }
     
@@ -179,14 +258,10 @@ struct ContributeView: View {
           donationPeriodButton(title: Strings.monthlyDonation, action: {
             withAnimation {
               Task { @MainActor in
-                donationPlans = [
-                  .init(id: "1", price: "$1.99", recurrence: Strings.perMonth),
-                  .init(id: "2", price: "$4.99", recurrence: Strings.perMonth),
-                  .init(id: "3", price: "$11.99", recurrence: Strings.perMonth)
-                ]
-                
+                donationPlans = monthlyDonationPlans
                 donationOverlayTitle = Strings.donationOverlayMonthlyTitle
               }
+              
               showDonationOverlayHeaderSubtitle = true
               showOverlay = true
             }
@@ -194,14 +269,10 @@ struct ContributeView: View {
           donationPeriodButton(title: Strings.yearlyDonation, action: {
             withAnimation {
               Task { @MainActor in
-                donationPlans = [
-                  .init(id: "1", price: "$23.90", recurrence: Strings.perYear),
-                  .init(id: "2", price: "$59.90", recurrence: Strings.perYear),
-                  .init(id: "3", price: "$143.90", recurrence: Strings.perYear)
-                ]
-                
+                donationPlans = yearlyDonationPlans
                 donationOverlayTitle = Strings.donationOverlayYearlyTitle
               }
+              
               showDonationOverlayHeaderSubtitle = true
               showOverlay = true
             }
@@ -209,14 +280,10 @@ struct ContributeView: View {
           donationPeriodButton(title: Strings.oneTimeDonation, action: {
             withAnimation {
               Task { @MainActor in
-                donationPlans = [
-                  .init(id: "1", price: "$5", recurrence: Strings.singleDonation),
-                  .init(id: "2", price: "$10", recurrence: Strings.singleDonation),
-                  .init(id: "3", price: "$15", recurrence: Strings.singleDonation)
-                ]
-                
+                donationPlans = oneTimeDonationPlans
                 donationOverlayTitle = Strings.donationOverlayOneTimeTitle
               }
+              
               showDonationOverlayHeaderSubtitle = false
               showOverlay = true
             }
@@ -307,7 +374,7 @@ struct ContributeView: View {
   var donationOverlayPlanButtons: some View {
     VStack(alignment:.center, spacing: Constants.donationOverlayDonationButtonsVerticalSpacing) {
       ForEach(donationPlans, id: \.id) { plan in
-        donationAmountButton(id: plan.id, title: plan.price, subtitle: plan.recurrence, action: {
+        donationAmountButton(id: plan.id, title: plan.displayPrice, subtitle: plan.recurrence.description, action: {
           selectedDonationPlan = plan
         })
       }
@@ -364,16 +431,3 @@ fileprivate struct LegalText: ViewModifier {
 #Preview {
   ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {}, backPressed: {})
 }
-
-
-/*
- if storeHelper.hasProducts {
-     if let subscriptions = storeHelper.subscriptionProducts {
-         SubscriptionListViewRow(products: subscriptions)
-     }
- } else {
-     Text("No donations available")
-         .font(.title)
-         .foregroundColor(.red)
- }
- */
