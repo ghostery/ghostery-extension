@@ -384,10 +384,17 @@ struct ContributeView: View {
   @MainActor func purchase(product: Product) async {
     do {
       let purchaseResult = try await storeHelper.purchase(product)
+      switch purchaseResult.purchaseState {
+      case .purchased:
+        showOverlay = false
+      default:
+        return
+      }
     } catch {
       print("Failed to purchase")
+      showOverlay = false
     }
-    showOverlay = false
+    
   }
   
   private func restorePurchases() {
