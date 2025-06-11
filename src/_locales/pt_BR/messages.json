@@ -56,9 +56,6 @@
     "message": "Ajustado",
     "description": "Plural form - list of adjusted trackers"
   },
-  "ads_and_trackers_will_not_be_blocked_": {
-    "message": "Anúncios e rastreadores não serão bloqueados."
-  },
   "adult_advertising": {
     "message": "Anúncios adultos",
     "description": "Tracker category name"
@@ -128,6 +125,9 @@
   },
   "blocked_on_this_website": {
     "message": "Bloqueado neste site"
+  },
+  "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
+    "message": "O bloqueio foi pausado temporariamente, e apenas nesta página. Considere pausar outros bloqueadores de anúncios para obter melhores resultados."
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Bloqueia anúncios adicionais, rastreadores e pop-ups específicos do idioma dos sites que você visita. Ative apenas os idiomas que você precisa para evitar a lentidão do seu navegador."
@@ -244,9 +244,6 @@
   "disabled": {
     "message": "Desativado"
   },
-  "dismiss": {
-    "message": "Dispensar"
-  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Exibe todos os blocos de conteúdo ocultados manualmente neste site. Você pode removê-los individualmente ou limpar a lista inteira."
   },
@@ -347,9 +344,6 @@
   "facts": {
     "message": "Fatos"
   },
-  "fantastic__thanks_": {
-    "message": "Fantástico! Obrigado!"
-  },
   "feedback_sharing": {
     "message": "Compartilhamento de Feedback"
   },
@@ -404,11 +398,11 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "O Ghostery Tracker &amp; Ad Blocker está nomeando os rastreadores presentes nos sites que você visita. Você está navegando na Web sem proteção."
   },
-  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
-    "message": "Usuários do Ghostery relatam que bloqueadores de anúncios não estão mais quebrando este site. Retome o Ghostery."
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
+    "message": "Usuários do Ghostery relatam que bloqueadores de anúncios não estão mais quebrando este site. O Ghostery será reativado."
   },
-  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
-    "message": "Usuários do Ghostery relatam que bloqueadores de anúncios quebram este site. Tente pausar o Ghostery."
+  "ghostery_users_report_that_adblockers_break_this_page__ghostery_has_been_paused_": {
+    "message": "Usuários do Ghostery relatam que bloqueadores de anúncios quebram esta página. O Ghostery foi pausado."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery usa essas informações para fornecer seus recursos de privacidade impulsionados pela comunidade, garantindo que informações pessoais—como senhas, histórico de navegação e conteúdo de páginas—nunca sejam coletadas."
@@ -559,9 +553,6 @@
   "never_consent": {
     "message": "Never-Consent"
   },
-  "no": {
-    "message": "Não"
-  },
   "no_activities_detected": {
     "message": "Nenhuma atividade detectada"
   },
@@ -613,9 +604,6 @@
   },
   "paused": {
     "message": "Pausado"
-  },
-  "pausing___": {
-    "message": "Pausando..."
   },
   "performance_telemetry": {
     "message": "Telemetria de Desempenho"
@@ -680,9 +668,6 @@
   "resume": {
     "message": "Retomar"
   },
-  "resuming___": {
-    "message": "Retomando..."
-  },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Revela o que está escondido sob a superfície da internet. Com o WhoTracks.Me, você pode descobrir as identidades por trás de cada rastreador."
   },
@@ -743,15 +728,6 @@
   "site_analytics": {
     "message": "Analítica do site",
     "description": "Tracker category name"
-  },
-  "site_works_fine": {
-    "message": "O site funciona bem"
-  },
-  "skip": {
-    "message": "Pular"
-  },
-  "skip_this_time": {
-    "message": "Pular desta vez"
   },
   "social_media": {
     "message": "Mídia Social",
@@ -815,9 +791,6 @@
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "Para fornecer recursos de proteção de privacidade, as seguintes informações sobre rastreadores da web são coletadas:"
   },
-  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
-    "message": "Para o benefício da comunidade Ghostery, deixe-nos saber se isso ajudou!"
-  },
   "top_100": {
     "message": "Os 100 melhores"
   },
@@ -826,6 +799,9 @@
   },
   "top_50": {
     "message": "50 principais"
+  },
+  "tracker___ad_blocking_will_be_active_on_this_page_": {
+    "message": "O bloqueio de rastreadores e anúncios estará ativo nesta página."
   },
   "tracker_database": {
     "message": "Banco de dados do rastreador"
@@ -914,14 +890,8 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Sabemos que você confia no Ghostery para ter uma experiência tranquila no YouTube. Até que surja uma solução mais refinada, aqui está uma correção temporária."
   },
-  "we_ll_continue_working_on_it__thanks_": {
-    "message": "Continuaremos trabalhando nisso! Obrigado!"
-  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Estamos tão felizes que o Ghostery conquistou seu coração! Ajude outros a nos encontrar também - leva apenas um momento."
-  },
-  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
-    "message": "Estamos tão felizes que o Ghostery conquistou seu coração! Deixe os outros saberem—deixe uma avaliação!"
   },
   "web_trackers": {
     "message": "Rastreadores da Web"
@@ -959,11 +929,11 @@
   "whotracks_me_wheel": {
     "message": "Roda do WhoTracks.Me"
   },
+  "why_paused_": {
+    "message": "Por que pausado?"
+  },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Com o Ghostery desativado, apenas a funcionalidade básica de nomear rastreadores está disponível."
-  },
-  "yes": {
-    "message": "Sim"
   },
   "yesterday": {
     "message": "Ontem"
