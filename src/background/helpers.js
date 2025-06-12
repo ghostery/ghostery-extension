@@ -20,9 +20,22 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     case 'openTabWithUrl':
       chrome.tabs.create({ url: msg.url });
       break;
-    case 'openPrivateWindowWithUrl':
-      chrome.windows.create({ url: msg.url, incognito: true });
+    case 'openPrivateWindowWithUrl': {
+      chrome.windows.getAll().then((windows) => {
+        const inIncognito = windows.find((w) => w.incognito);
+
+        if (inIncognito) {
+          chrome.tabs.create({
+            url: msg.url,
+            windowId: inIncognito.id,
+            active: true,
+          });
+        } else {
+          chrome.windows.create({ url: msg.url, incognito: true });
+        }
+      });
       break;
+    }
     case 'openElementPicker':
       chrome.scripting.executeScript(
         {
