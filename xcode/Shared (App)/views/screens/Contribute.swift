@@ -13,21 +13,17 @@ fileprivate enum Constants {
   static let cornerRadius: CGFloat = 16
   static let noSpacing: CGFloat = .zero
   
-  static let headerWidth: CGFloat = 215
-  static let headerHeight: CGFloat = 32
-  static let headerMaxPadding: CGFloat = 64
-  static let headerMinPadding: CGFloat = 12
-  static let headerVerticalPadding: CGFloat = 32
+  static let headerImageHeight: CGFloat = 144
+  static let headerImageWidth: CGFloat = 300
   
-  static let instructionsCardHeight: CGFloat = 484
-  static let instructionsCardWidth: CGFloat = 343
+  static let descriptionLineSpacing: CGFloat = 4
+  
+  static let instructionsSpacerMinWidth: CGFloat = 16
   static let instructionsCardShadowRadius: CGFloat = 24
   static let instructionsCardShadowX: CGFloat = 0
   static let instructionsCardShadowY: CGFloat = 0
+  static let instructionsCardWidth: CGFloat = 343
   static let instructionsCardPadding: CGFloat = 16
-  static let instructionsHeaderWidth: CGFloat = 220
-  static let instructionsIconWidth: CGFloat = 18
-  static let instructionsSpacerMinWidth: CGFloat = 16
   
   static let dividerHeight: CGFloat = 1
   
@@ -41,7 +37,20 @@ fileprivate enum Constants {
   static let donationOverlayTextVerticalSpacing: CGFloat = 4
   static let donationOverlayDonationButtonsVerticalSpacing: CGFloat = 16
   
+  static let donationBoxPadding: CGFloat = 8
+  static let donationBoxWidth: CGFloat = 311
+  static let donationBoxHeight: CGFloat = 240
+  static let donationBoxVerticalPadding: CGFloat = 16
   
+  static let restoreDonationTopPadding: CGFloat = 12
+  
+  static let donationOverlayCapsuleWidth: CGFloat = 48
+  static let donationOverlayCapsuleHeight: CGFloat = 5
+  static let donationOverlayCapsuleOpacity: CGFloat = 0.3
+  static let donationOverlayCapsuleTopPadding: CGFloat = 8
+  static let donationOverlayHeight: CGFloat = 381
+  
+  static let backButtonTextLeadingPadding: CGFloat = 2
 }
 
 fileprivate enum Strings {
@@ -98,7 +107,7 @@ struct ContributeView: View {
       .frame(maxHeight: Constants.containerHeight)
       .sheet(isPresented: $showOverlay, onDismiss: { selectedDonationPlan = nil }) {
         donationPlansOverlay
-          .presentationDetents([.height(381)])
+          .presentationDetents([.height(Constants.donationOverlayHeight)])
       }
     }
     .task {
@@ -145,7 +154,7 @@ struct ContributeView: View {
             Text("Back")
               .font(Fonts.title)
               .foregroundStyle(Colors.foregroundBrandPrimary)
-              .padding(.leading, 2)
+              .padding(.leading, Constants.backButtonTextLeadingPadding)
           }
         }
         Spacer()
@@ -157,7 +166,7 @@ struct ContributeView: View {
     Image(Icons.contributeIllustration)
       .resizable()
       .scaledToFit()
-      .frame(width: 300, height: 144)
+      .frame(width: Constants.headerImageWidth, height: Constants.headerImageHeight)
   }
   
   var description: some View {
@@ -166,11 +175,11 @@ struct ContributeView: View {
       .multilineTextAlignment(.center)
       .foregroundStyle(Colors.foregroundPrimary)
       .frame(maxWidth: .infinity)
-      .lineSpacing(4)
+      .lineSpacing(Constants.descriptionLineSpacing)
   }
   
   var donationBox: some View {
-    VStack(alignment: .center, spacing: 16) {
+    VStack(alignment: .center, spacing: Constants.donationBoxVerticalPadding) {
       Text(Strings.donationTilte)
         .font(Fonts.text)
         .foregroundStyle(Colors.foregroundPrimary)
@@ -211,8 +220,8 @@ struct ContributeView: View {
         }
       })
     }
-    .padding(8)
-    .frame(width: 311, height: 240)
+    .padding(Constants.donationBoxPadding)
+    .frame(width: Constants.donationBoxWidth, height: Constants.donationBoxHeight)
     .background(Colors.bgBrandPrimary)
     .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
   }
@@ -222,7 +231,7 @@ struct ContributeView: View {
     Rectangle()
       .fill(Colors.dividerGray)
       .frame(height: Constants.dividerHeight)
-      .padding(.vertical, 16)
+      .padding(.vertical, Constants.donationBoxVerticalPadding)
   }
   
   var legal: some View {
@@ -247,7 +256,7 @@ struct ContributeView: View {
       Text(Strings.restoreDonation)
         .font(.footnote)
         .foregroundStyle(Colors.foregroundBrandPrimary)
-        .padding(.top, 12)
+        .padding(.top, Constants.restoreDonationTopPadding)
     }
   }
   
@@ -265,10 +274,10 @@ struct ContributeView: View {
   var donationPlansOverlay: some View {
     VStack(alignment: .center, spacing: Constants.noSpacing) {
       Capsule()
-        .frame(width: 48, height: 5)
+        .frame(width: Constants.donationOverlayCapsuleWidth, height: Constants.donationOverlayCapsuleHeight)
         .background(Colors.labelsTertiary)
-        .opacity(0.3)
-        .padding(.top, 8)
+        .opacity(Constants.donationOverlayCapsuleOpacity)
+        .padding(.top, Constants.donationOverlayCapsuleTopPadding)
       Spacer()
       donationOverlayContents
       Spacer()
@@ -397,7 +406,7 @@ struct ContributeView: View {
   }
   
   private func restorePurchases() {
-      Task.init { try? await AppStore.sync() }
+    Task.init { try? await AppStore.sync() }
   }
 }
 
