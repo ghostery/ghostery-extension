@@ -34,7 +34,8 @@ struct ContentView: View {
                 donateButtonPressed: {
                   toggleSubscriptions()
                 }, stepByStepButtonPressed: {
-                  guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
+                  // TODO: Detect if we are on an iPad and redirect to the ipad specific link
+                  guard let url = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-the-ghostery-ad-blocker-extension-on-your-iphone") else { return }
                   openInWebView(url)
                 })
               .transition(AnyTransition.opacity.combined(with: .move(edge: .leading)))
@@ -42,10 +43,6 @@ struct ContentView: View {
               ContributeView(
                 donateButtonPressed: {
                   toggleSubscriptions()
-                },
-                stepByStepButtonPressed: {
-                  guard let url = URL(string: "https://www.ghostery.com/blog") else { return }
-                  openInWebView(url)
                 },
                 eulaPressed: {
                   guard let url = URL(string: "https://www.ghostery.com/privacy/ghostery-subscription-plans-and-products-end-user-license-agreement") else { return }

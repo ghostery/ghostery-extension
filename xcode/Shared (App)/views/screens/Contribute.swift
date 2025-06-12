@@ -82,7 +82,6 @@ struct ContributeView: View {
   @EnvironmentObject var storeHelper: StoreHelper
   
   var donateButtonPressed: () -> Void
-  var stepByStepButtonPressed: () -> Void
   var eulaPressed: () -> Void
   var termsPressed: () -> Void
   var policyPressed: () -> Void
@@ -430,5 +429,5 @@ extension Product.SubscriptionPeriod {
 }
 
 #Preview {
-  ContributeView(donateButtonPressed: {}, stepByStepButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {}, backPressed: {})
+  ContributeView(donateButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {}, backPressed: {})
 }
