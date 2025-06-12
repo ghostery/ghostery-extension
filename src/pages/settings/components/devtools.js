@@ -121,7 +121,6 @@ function formatDate(date) {
 }
 
 export default {
-  counter: 0,
   options: store(Options),
   config: store(Config),
   updatedAt: ({ options }) =>
@@ -129,115 +128,152 @@ export default {
     options.filtersUpdatedAt &&
     formatDate(options.filtersUpdatedAt),
   visible: false,
-  render: ({ visible, counter, updatedAt, config }) => html`
+  counter: 0,
+  render: ({ options, config, updatedAt, visible, counter }) => html`
     <template layout="column gap:3">
       ${
         (visible || counter > 5) &&
         html`
+          <ui-line></ui-line>
           <section layout="column gap:3" translate="no">
-            <ui-text type="headline-m">Developer tools</ui-text>
+            <ui-toggle
+              value="${options.safeMode.enabled}"
+              onchange="${html.set(options, 'safeMode.enabled')}"
+            >
+              <settings-option icon="shield">
+                Safe Mode
+                <span slot="description">
+                  Enables privacy protection on selected domains while keeping
+                  Ghostery inactive for other websites.
+                </span>
+              </settings-option>
+            </ui-toggle>
+            <ui-line></ui-line>
 
             ${store.ready(config) &&
             html`
-              <div layout="column gap" translate="no">
-                <ui-toggle
-                  value="${config.enabled}"
-                  onchange="${html.set(config, 'enabled')}"
-                >
-                  <div layout="column">
-                    <ui-text type="headline-s">Remote Configuration</ui-text>
-                    <ui-text type="body-xs" color="tertiary">
-                      Updated at: ${formatDate(config.updatedAt)}
+              <div layout="row gap items:start">
+                <ui-icon
+                  name="settings"
+                  color="quaternary"
+                  layout="size:2.5"
+                ></ui-icon>
+
+                <div layout="column gap:2" translate="no">
+                  <ui-toggle
+                    value="${config.enabled}"
+                    onchange="${html.set(config, 'enabled')}"
+                  >
+                    <div layout="column">
+                      <ui-text type="headline-s">Remote Configuration</ui-text>
+                      <ui-text type="body-xs" color="tertiary">
+                        Updated at: ${formatDate(config.updatedAt)}
+                      </ui-text>
+                    </div>
+                  </ui-toggle>
+                  <div>
+                    <ui-text type="label-m">Domains</ui-text>
+                    <div layout="row:wrap gap">
+                      ${Object.entries(config.domains)
+                        .filter(([, d]) => d.actions.length)
+                        .map(
+                          ([name, d]) =>
+                            html`<ui-text color="secondary">
+                              ${name} (${d.actions.join(', ')})
+                            </ui-text>`,
+                        ) || 'none'}
+                    </div>
+                  </div>
+                  <div>
+                    <ui-text type="label-m">Flags</ui-text>
+                    <ui-text color="secondary">
+                      ${Object.entries(config.flags)
+                        .filter(([, f]) => f.enabled)
+                        .map(([name]) => name)
+                        .join(' ') || 'none'}
                     </ui-text>
                   </div>
-                </ui-toggle>
-                <div>
-                  <ui-text type="label-m">Domains</ui-text>
-                  <div layout="row:wrap gap">
-                    ${Object.entries(config.domains)
-                      .filter(([, d]) => d.actions.length)
-                      .map(
-                        ([name, d]) =>
-                          html`<ui-text color="secondary">
-                            ${name} (${d.actions.join(', ')})
-                          </ui-text>`,
-                      ) || 'none'}
+                  <div layout="row gap">
+                    <ui-button
+                      layout="shrink:0 self:start"
+                      onclick="${testConfigDomain}"
+                    >
+                      <button>Test domain</button>
+                    </ui-button>
+                    <ui-button
+                      layout="shrink:0 self:start"
+                      onclick="${testConfigFlag}"
+                    >
+                      <button>Test flag</button>
+                    </ui-button>
+                    <ui-button
+                      onclick="${syncConfig}"
+                      layout="shrink:0 self:start"
+                    >
+                      <button>
+                        <ui-icon name="refresh" layout="size:2"></ui-icon>
+                        Force sync
+                      </button>
+                    </ui-button>
                   </div>
-                </div>
-                <div>
-                  <ui-text type="label-m">Flags</ui-text>
-                  <ui-text color="secondary">
-                    ${Object.entries(config.flags)
-                      .filter(([, f]) => f.enabled)
-                      .map(([name]) => name)
-                      .join(' ') || 'none'}
-                  </ui-text>
-                </div>
-                <div layout="row gap">
-                  <ui-button
-                    layout="shrink:0 self:start"
-                    onclick="${testConfigDomain}"
-                  >
-                    <button>Test domain</button>
-                  </ui-button>
-                  <ui-button
-                    layout="shrink:0 self:start"
-                    onclick="${testConfigFlag}"
-                  >
-                    <button>Test flag</button>
-                  </ui-button>
-                  <ui-button
-                    onclick="${syncConfig}"
-                    layout="shrink:0 self:start"
-                  >
-                    <button>
-                      <ui-icon name="refresh" layout="size:2"></ui-icon>
-                      Force sync
-                    </button>
-                  </ui-button>
                 </div>
               </div>
               <ui-line></ui-line>
             `}
             ${(__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
             html`
-              <div layout="column gap items:start" translate="no">
-                <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
-                <ui-text type="body-xs" color="tertiary">
-                  The below list is not reactive to changes made in the
-                  extension - use refresh button
-                </ui-text>
-                <div layout="row gap">
-                  ${html.resolve(
-                    chrome.declarativeNetRequest
-                      .getEnabledRulesets()
-                      .then(
-                        (rules) => html`
-                          ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
-                          ${!rules.length &&
-                          html`<ui-text translate="no">
-                            No rulesets enabled...
-                          </ui-text>`}
-                        `,
-                      ),
-                  )}
+              <div layout="row gap items:start">
+                <ui-icon
+                  name="block-m"
+                  color="quaternary"
+                  layout="size:2.5"
+                ></ui-icon>
+
+                <div layout="column gap items:start" translate="no">
+                  <ui-text type="headline-s">Enabled DNR rulesets</ui-text>
+                  <ui-text type="body-xs" color="tertiary">
+                    The below list is not reactive to changes made in the
+                    extension - use refresh button
+                  </ui-text>
+                  <div layout="row gap">
+                    ${html.resolve(
+                      chrome.declarativeNetRequest
+                        .getEnabledRulesets()
+                        .then(
+                          (rules) => html`
+                            ${rules.map((r) => html`<ui-text>${r}</ui-text>`)}
+                            ${!rules.length &&
+                            html`<ui-text translate="no">
+                              No rulesets enabled...
+                            </ui-text>`}
+                          `,
+                        ),
+                    )}
+                  </div>
+                  <ui-button onclick="${refresh}" layout="shrink:0">
+                    <button>Refresh</button>
+                  </ui-button>
                 </div>
-                <ui-button onclick="${refresh}" layout="shrink:0">
-                  <button>Refresh</button>
-                </ui-button>
               </div>
               <ui-line></ui-line>
             `}
 
-            <div layout="column gap">
-              <ui-text type="headline-s">Actions</ui-text>
-              <div layout="row gap items:start">
-                <ui-button onclick="${clearStorage}" layout="shrink:0">
-                  <button>
-                    <ui-icon name="trash" layout="size:2"></ui-icon>
-                    Clear storage
-                  </button>
-                </ui-button>
+            <div layout="row gap items:start">
+              <ui-icon
+                name="dots"
+                color="quaternary"
+                layout="size:2.5"
+              ></ui-icon>
+              <div layout="column gap">
+                <ui-text type="headline-s">Actions</ui-text>
+                <div layout="row gap items:start">
+                  <ui-button onclick="${clearStorage}" layout="shrink:0">
+                    <button>
+                      <ui-icon name="trash" layout="size:2"></ui-icon>
+                      Clear storage
+                    </button>
+                  </ui-button>
+                </div>
               </div>
             </div>
           </section>
