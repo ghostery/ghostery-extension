@@ -109,7 +109,11 @@ function getEnabledEngines(config) {
       list.push(engines.FIXES_ENGINE);
     }
 
-    list.push(engines.CUSTOM_ENGINE);
+    list.push(engines.ELEMENT_PICKER_ENGINE);
+
+    if (config.customFilters.enabled) {
+      list.push(engines.CUSTOM_ENGINE);
+    }
 
     return list;
   }
@@ -129,10 +133,18 @@ export async function reloadMainEngine() {
   const resolvedEngines = (
     await Promise.all(
       enabledEngines.map((id) =>
-        engines.init(id).catch(() => {
-          console.error(`[adblocker] failed to load engine: ${id}`);
-          return null;
-        }),
+        engines
+          .init(id)
+          .catch(() => {
+            console.error(`[adblocker] failed to load engine: ${id}`);
+            return null;
+          })
+          .then((engine) => {
+            if (!engine) {
+              enabledEngines.splice(enabledEngines.indexOf(id), 1);
+            }
+            return engine;
+          }),
       ),
     )
   ).filter((engine) => engine);
@@ -144,7 +156,7 @@ export async function reloadMainEngine() {
       `[adblocker] Main engine reloaded with: ${enabledEngines.join(', ')}`,
     );
   } else {
-    await engines.create(engines.MAIN_ENGINE);
+    engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
   if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
@@ -165,12 +177,10 @@ async function updateEngines() {
 
       // Update engines from the list of enabled engines
       await Promise.all(
-        enabledEngines
-          .filter((id) => id !== engines.CUSTOM_ENGINE)
-          .map(async (id) => {
-            await engines.init(id);
-            updated = (await engines.update(id)) || updated;
-          }),
+        enabledEngines.filter(engines.isPersistentEngine).map(async (id) => {
+          await engines.init(id);
+          updated = (await engines.update(id)) || updated;
+        }),
       );
 
       // Update TrackerDB engine
@@ -180,7 +190,7 @@ async function updateEngines() {
       // Update timestamp after the engines are updated
       await store.set(Options, { filtersUpdatedAt: Date.now() });
 
-      return updated;
+      if (updated) await reloadMainEngine();
     }
   } finally {
     updating = false;
@@ -194,15 +204,15 @@ export const setup = asyncSetup('adblocker', [
       options = value;
 
       const enabledEngines = getEnabledEngines(value);
-      const prevEnabledEngines = lastValue && getEnabledEngines(lastValue);
+      const lastEnabledEngines = lastValue && getEnabledEngines(lastValue);
 
       if (
         // Reload/mismatched main engine
         !(await engines.init(engines.MAIN_ENGINE)) ||
         // Enabled engines changed
-        (prevEnabledEngines &&
-          (enabledEngines.length !== prevEnabledEngines.length ||
-            enabledEngines.some((id, i) => id !== prevEnabledEngines[i])))
+        (lastEnabledEngines &&
+          (enabledEngines.length !== lastEnabledEngines.length ||
+            enabledEngines.some((id, i) => id !== lastEnabledEngines[i])))
       ) {
         await reloadMainEngine();
       }
@@ -210,7 +220,7 @@ export const setup = asyncSetup('adblocker', [
       // Update engines if filters are outdated (older than 1 hour)
       // and reload the engine if the update happened to at least one of them
       if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
-        if (await updateEngines()) await reloadMainEngine();
+        await updateEngines();
       }
     },
   ),
