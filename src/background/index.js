@@ -15,6 +15,7 @@ import './config.js';
 import './autoconsent.js';
 import './adblocker.js';
 import './custom-filters.js';
+import './element-picker.js';
 import './dnr.js';
 import './exceptions.js';
 import './paused.js';

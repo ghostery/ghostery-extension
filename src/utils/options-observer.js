@@ -43,17 +43,17 @@ export function addListener(...args) {
     const property = args.length === 2 ? args[0] : null;
 
     const getValue = property ? (v) => v[property] : (v) => v;
-    const getPrevValue = property ? (v) => v?.[property] : (v) => v;
+    const getLastValue = property ? (v) => v?.[property] : (v) => v;
 
-    const wrapper = async (options, prevOptions) => {
+    const wrapper = async (options, lastOptions) => {
       const value = getValue(options);
-      const prevValue = getPrevValue(prevOptions);
+      const lastValue = getLastValue(lastOptions);
 
-      if (isOptionEqual(value, prevValue)) return;
+      if (isOptionEqual(value, lastValue)) return;
 
       try {
         console.debug(`[options] Executing "${fn.name || property}" observer`);
-        await fn(value, prevValue);
+        await fn(value, lastValue);
         resolve();
       } catch (e) {
         reject(e);
@@ -70,7 +70,7 @@ export async function waitForIdle() {
   for (const queue of queues) await queue;
 }
 
-store.observe(Options, (_, options, prevOptions) => {
+store.observe(Options, (_, options, lastOptions) => {
   if (observers.length === 0) return;
 
   const queue = Promise.allSettled([...queues]).then(async () => {
@@ -79,7 +79,7 @@ store.observe(Options, (_, options, prevOptions) => {
     await Promise.all(
       observers.map(async (fn) => {
         try {
-          await fn(options, prevOptions);
+          await fn(options, lastOptions);
         } catch (e) {
           console.error(`Error while executing observer: `, e);
         }

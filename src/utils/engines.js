@@ -23,9 +23,11 @@ import debug from './debug.js';
 import { CDN_URL } from './api.js';
 
 export const MAIN_ENGINE = 'main';
-export const CUSTOM_ENGINE = 'custom-filters';
 
 export const FIXES_ENGINE = 'fixes';
+export const ELEMENT_PICKER_ENGINE = 'element-picker-selectors';
+export const CUSTOM_ENGINE = 'custom-filters';
+
 export const TRACKERDB_ENGINE = 'trackerdb';
 
 const engines = new Map();
@@ -41,6 +43,14 @@ const ENV = new Map([
   ['env_mobile', checkUserAgent('Mobile')],
   ['env_experimental', false],
 ]);
+
+export function isPersistentEngine(name) {
+  return (
+    name !== ELEMENT_PICKER_ENGINE &&
+    name !== CUSTOM_ENGINE &&
+    name !== MAIN_ENGINE
+  );
+}
 
 export function setEnv(key, value) {
   if (ENV.has(key)) {
@@ -397,9 +407,8 @@ export async function init(name) {
   return (
     get(name) ||
     (await loadFromStorage(name)) ||
-    (name !== MAIN_ENGINE &&
-      name !== CUSTOM_ENGINE &&
-      (await loadFromFile(name)))
+    (isPersistentEngine(name) && (await loadFromFile(name))) ||
+    null
   );
 }
 
