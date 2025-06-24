@@ -85,6 +85,7 @@ export function buildForChrome() {
     cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
       recursive: true,
     });
+    execSync('ls -la ' + CHROME_PATH, { stdio: 'inherit' });
   }
 }
 
@@ -105,19 +106,6 @@ export const config = {
   maxInstances: process.env.GITHUB_ACTIONS ? 1 : 2,
   capabilities: [
     {
-      browserName: 'firefox',
-      'moz:firefoxOptions': {
-        args: argv.debug ? [] : ['-headless'],
-        prefs: {
-          'browser.cache.disk.enable': false,
-          'browser.cache.memory.enable': false,
-          'browser.cache.offline.enable': false,
-          'network.http.use-cache': false,
-          'intl.accept_languages': 'en-GB',
-        },
-      },
-    },
-    {
       browserName: 'chrome',
       browserVersion: 'stable',
       'goog:chromeOptions': {
@@ -128,6 +116,19 @@ export const config = {
         ]),
       },
     },
+    // {
+    //   browserName: 'firefox',
+    //   'moz:firefoxOptions': {
+    //     args: argv.debug ? [] : ['-headless'],
+    //     prefs: {
+    //       'browser.cache.disk.enable': false,
+    //       'browser.cache.memory.enable': false,
+    //       'browser.cache.offline.enable': false,
+    //       'network.http.use-cache': false,
+    //       'intl.accept_languages': 'en-GB',
+    //     },
+    //   },
+    // },
   ].filter((capability) => argv.target.includes(capability.browserName)),
   onPrepare: async (config, capabilities) => {
     if (argv.clean) {
