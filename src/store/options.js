@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera } from '/utils/browser-info.js';
+import { SAFE_MODE_BLOCKED_DOMAINS } from '/utils/safe-mode.js';
 
 import Config, {
   ACTION_PAUSE_ASSISTANT,
@@ -98,6 +99,9 @@ const Options = {
 
   // Paused domains
   paused: store.record({ revokeAt: 0, assist: false }),
+
+  // Safe mode options
+  safeMode: { enabled: false, domains: [String] },
 
   // Sync
   sync: true,
@@ -234,6 +238,14 @@ export function getPausedDetails(options, hostname = '') {
   }
 
   if (!hostname) return null;
+
+  if (
+    options.safeMode.enabled &&
+    !SAFE_MODE_BLOCKED_DOMAINS.some((domain) => hostname.endsWith(domain)) &&
+    !options.safeMode.domains.some((domain) => hostname.endsWith(domain))
+  ) {
+    return { revokeAt: 0, assist: false, safeMode: true };
+  }
 
   const pausedHostname = Object.keys(options.paused).find((domain) =>
     hostname.endsWith(domain),

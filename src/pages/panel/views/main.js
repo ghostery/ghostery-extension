@@ -65,9 +65,17 @@ async function togglePause(host, event) {
       .sort((a, b) => b.localeCompare(a))
       .find((domain) => stats.hostname.endsWith(domain));
 
-    store.set(options, {
-      paused: { [pausedHostname]: null },
-    });
+    if (host.paused.safeMode) {
+      store.set(options, {
+        safeMode: {
+          domains: [...options.safeMode.domains, stats.hostname],
+        },
+      });
+    } else {
+      store.set(options, {
+        paused: { [pausedHostname]: null },
+      });
+    }
   } else {
     await store.set(options, {
       paused: {
@@ -256,6 +264,7 @@ export default {
                 paused="${paused || globalPause}"
                 global="${globalPause}"
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
+                safeMode="${paused?.safeMode}"
                 data-qa="component:pause"
               >
                 ${!!paused?.revokeAt &&
@@ -301,6 +310,23 @@ export default {
                             name="chevron-right"
                             layout="size:1.5"
                           ></ui-icon>
+                        </ui-text>
+                      </a>
+                    </ui-action>
+                  </div>
+                `}
+                ${!!paused?.safeMode &&
+                html`
+                  <div layout="row center">
+                    <ui-action>
+                      <a
+                        href="https://www.ghostery.com/blog/"
+                        onclick="${openTabWithUrl}"
+                        layout="row center gap padding:0.5:1:1 margin:top:-1"
+                      >
+                        <ui-text type="body-s">
+                          You're in safe mode - click resume to activate on this
+                          site
                         </ui-text>
                       </a>
                     </ui-action>
