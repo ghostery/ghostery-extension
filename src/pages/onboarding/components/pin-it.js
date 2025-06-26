@@ -52,8 +52,8 @@ export default {
     }
 
     :host([browser='chrome']) #arrow { right: 85px; }
-    :host([browser='edge:desktop']) { min-width: 220px;  }
-    :host([browser='edge:desktop']) #arrow { right: 218px; }
+    :host([browser='edge']) { min-width: 220px;  }
+    :host([browser='edge']) #arrow { right: 218px; }
 
     :host([browser='opera']) { top: 16px; right: 8px; }
     :host([browser='opera']) #arrow { right: 22px; }
