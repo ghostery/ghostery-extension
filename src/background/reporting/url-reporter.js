@@ -23,5 +23,5 @@ export default new UrlReporter({
   storage: new StorageLocal('reporting'),
   connectDatabase: prefixedIndexedDBKeyValueStore('reporting'),
   communication,
-  browserInfoProvider: getBrowserInfo.getRawBrowserInfo,
+  browserInfoProvider: getBrowserInfo,
 });

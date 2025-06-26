@@ -543,12 +543,19 @@ if (argv.watch) {
           case 'chromium': {
             settings = { target: 'chromium' };
 
-            if (argv.browser === 'opera') {
-              settings.chromiumBinary =
-                '/Applications/Opera.app/Contents/MacOS/Opera';
-            } else if (argv.browser === 'edge') {
-              settings.chromiumBinary =
-                '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge';
+            switch (argv.browser) {
+              case 'brave':
+                settings.chromiumBinary =
+                  '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser';
+                break;
+              case 'edge':
+                settings.chromiumBinary =
+                  '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge';
+                break;
+              case 'opera':
+                settings.chromiumBinary =
+                  '/Applications/Opera.app/Contents/MacOS/Opera';
+                break;
             }
 
             break;

@@ -11,7 +11,7 @@
 
 import { html } from 'hybrids';
 
-import { getBrowserName } from '/utils/browser-info.js';
+import { getBrowser, getOS } from '/utils/browser-info.js';
 
 import protection from '../illustrations/protection.js';
 
@@ -19,15 +19,26 @@ import pinExtensionChrome from '../assets/pin-extension-chrome.jpg';
 import pinExtensionEdge from '../assets/pin-extension-edge.jpg';
 import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
 
-const PIN_EXTENSION_IMAGES = {
-  chrome: pinExtensionChrome,
-  'edge:desktop': pinExtensionEdge,
-  opera: pinExtensionOpera,
-};
+let screenshotURL = '';
+let type = '';
+
+if (__PLATFORM__ === 'chromium') {
+  const { name } = getBrowser();
+
+  if (name === 'chrome' || name === 'brave' || name === 'yandex') {
+    screenshotURL = pinExtensionChrome;
+    type = 'chrome';
+  } else if (name === 'edge' && getOS() !== 'android') {
+    screenshotURL = pinExtensionEdge;
+    type = 'edge';
+  } else if (name === 'opera') {
+    screenshotURL = pinExtensionOpera;
+    type = 'opera';
+  }
+}
 
 export default {
-  browser: getBrowserName,
-  render: ({ browser }) => html`
+  render: () => html`
     <template layout="column gap">
       <ui-card data-qa="view:success">
         <section layout="block:center column gap:2">
@@ -39,7 +50,8 @@ export default {
           </ui-text>
         </section>
       </ui-card>
-      ${PIN_EXTENSION_IMAGES[browser] &&
+      ${__PLATFORM__ === 'chromium' &&
+      screenshotURL &&
       html`
         <ui-card>
           <section layout="column gap:2">
@@ -47,13 +59,13 @@ export default {
               What’s next?
             </ui-text>
             <img
-              src="${PIN_EXTENSION_IMAGES[browser]}"
+              src="${screenshotURL}"
               layout="width:::full"
               style="border-radius:8px; overflow:hidden;"
             />
             <div layout="row items:center gap">
               <ui-icon
-                name="extension-${browser}"
+                name="extension-${type}"
                 layout="block inline size:3"
                 color="tertiary"
               ></ui-icon>
@@ -69,9 +81,7 @@ export default {
             </ui-text>
           </section>
         </ui-card>
-        <onboarding-pin-it browser="${browser}">
-          Pin it here
-        </onboarding-pin-it>
+        <onboarding-pin-it browser="${type}"> Pin it here </onboarding-pin-it>
       `}
     </template>
   `,
