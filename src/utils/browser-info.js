@@ -30,7 +30,23 @@ export function getBrowser() {
   }
 
   if (__PLATFORM__ === 'chromium') {
+    // Brave's user agent detects as `Chrome`,
+    // so we need to check for Brave specifically
+    if (navigator.brave?.isBrave) {
+      return { browser: 'Brave', name: 'brave', token: 'br' };
+    }
+
+    // INFO: bowser detects Oculus as `Chrome`,
+    // so we need to check for OculusBrowser specifically before Chrome
+    if (navigator.userAgent.includes('OculusBrowser')) {
+      return { browser: 'Oculus', name: 'oculus', token: 'oc' };
+    }
+
     const browser = getUA().browser.name;
+
+    if (browser.includes('Chrome')) {
+      return { browser: 'Chrome', name: 'chrome', token: 'ch' };
+    }
 
     if (browser.includes('Edge')) {
       return { browser: 'Edge', name: 'edge', token: 'ed' };
@@ -44,24 +60,12 @@ export function getBrowser() {
       return { browser: 'Yandex', name: 'yandex', token: 'yx' };
     }
 
-    // INFO: bowser detects Oculus as `Chrome`,
-    // so we need to check for OculusBrowser specifically before Chrome
-    if (navigator.userAgent.includes('OculusBrowser')) {
-      return { browser: 'Oculus', name: 'oculus', token: 'oc' };
-    }
-
-    // Brave's user agent detects as `Chrome`,
-    // so we need to check for Brave specifically
-    if (navigator.brave?.isBrave) {
-      return { browser: 'Brave', name: 'brave', token: 'br' };
-    }
-
-    if (browser.includes('Chrome')) {
-      return { browser: 'Chrome', name: 'chrome', token: 'ch' };
-    }
+    return {
+      browser,
+      name: browser.toLowerCase().replace(/\s+/g, '_'),
+      token: '',
+    };
   }
-
-  return { browser: '', token: '' };
 }
 
 export function isFirefox() {
