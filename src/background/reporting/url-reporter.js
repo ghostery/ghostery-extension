@@ -11,8 +11,6 @@
 
 import { UrlReporter } from '@whotracksme/reporting/reporting';
 
-import getBrowserInfo from '/utils/browser-info.js';
-
 import config from './config.js';
 import communication from './communication.js';
 import prefixedIndexedDBKeyValueStore from './storage-indexeddb.js';
@@ -23,5 +21,4 @@ export default new UrlReporter({
   storage: new StorageLocal('reporting'),
   connectDatabase: prefixedIndexedDBKeyValueStore('reporting'),
   communication,
-  browserInfoProvider: getBrowserInfo,
 });
