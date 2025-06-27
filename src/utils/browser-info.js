@@ -22,46 +22,45 @@ function getUA() {
 
 export function getBrowser() {
   if (__PLATFORM__ === 'safari') {
-    return { browser: 'Safari', name: 'safari', token: 'sf' };
+    return { name: 'safari', token: 'sf' };
   }
 
   if (__PLATFORM__ === 'firefox') {
-    return { browser: 'Firefox', name: 'firefox', token: 'ff' };
+    return { name: 'firefox', token: 'ff' };
   }
 
   if (__PLATFORM__ === 'chromium') {
     // Brave's user agent detects as `Chrome`,
     // so we need to check for Brave specifically
     if (navigator.brave?.isBrave) {
-      return { browser: 'Brave', name: 'brave', token: 'br' };
+      return { name: 'brave', token: 'br' };
     }
 
     // INFO: bowser detects Oculus as `Chrome`,
     // so we need to check for OculusBrowser specifically before Chrome
     if (navigator.userAgent.includes('OculusBrowser')) {
-      return { browser: 'Oculus', name: 'oculus', token: 'oc' };
+      return { name: 'oculus', token: 'oc' };
     }
 
     const browser = getUA().browser.name;
 
     if (browser.includes('Chrome')) {
-      return { browser: 'Chrome', name: 'chrome', token: 'ch' };
+      return { name: 'chrome', token: 'ch' };
     }
 
     if (browser.includes('Edge')) {
-      return { browser: 'Edge', name: 'edge', token: 'ed' };
+      return { name: 'edge', token: 'ed' };
     }
 
     if (browser.includes('Opera')) {
-      return { browser: 'Opera', name: 'opera', token: 'op' };
+      return { name: 'opera', token: 'op' };
     }
 
     if (browser.includes('Yandex')) {
-      return { browser: 'Yandex', name: 'yandex', token: 'yx' };
+      return { name: 'yandex', token: 'yx' };
     }
 
     return {
-      browser,
       name: browser.toLowerCase().replace(/\s+/g, '_'),
       token: '',
     };
@@ -69,15 +68,15 @@ export function getBrowser() {
 }
 
 export function isFirefox() {
-  return getBrowser().browser === 'Firefox';
+  return getBrowser().name === 'firefox';
 }
 
 export function isEdge() {
-  return getBrowser().browser === 'Edge';
+  return getBrowser().name === 'edge';
 }
 
 export function isOpera() {
-  return getBrowser().browser === 'Opera';
+  return getBrowser().name === 'opera';
 }
 
 export function getOS() {
@@ -108,10 +107,9 @@ export default async function getBrowserInfo() {
   if (browserInfo) return browserInfo;
 
   const ua = getUA();
-  const { browser, name, token } = getBrowser();
+  const { name, token } = getBrowser();
 
   browserInfo = {
-    browser,
     name,
     token,
     version: parseInt(ua.browser.version, 10),
