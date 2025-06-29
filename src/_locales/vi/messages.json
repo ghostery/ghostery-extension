@@ -56,9 +56,6 @@
     "message": "Adjusted",
     "description": "Plural form - list of adjusted trackers"
   },
-  "ads_and_trackers_will_not_be_blocked_": {
-    "message": "Quảng cáo và trình theo dõi sẽ không bị chặn."
-  },
   "adult_advertising": {
     "message": "Quảng cáo dành cho người lớn",
     "description": "Tracker category name"
@@ -128,6 +125,9 @@
   },
   "blocked_on_this_website": {
     "message": "Blocked on this website"
+  },
+  "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
+    "message": "Việc chặn đã tạm thời bị dừng, và chỉ trên trang này. Hãy cân nhắc tạm dừng các trình chặn quảng cáo khác để có kết quả tốt nhất."
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blocks additional ads, trackers, and pop-ups specific to the language of websites you visit. Enable only the languages you need to avoid slowing down your browser."
@@ -244,9 +244,6 @@
   "disabled": {
     "message": "Đã vô hiệu"
   },
-  "dismiss": {
-    "message": "Bỏ qua"
-  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Hiển thị tất cả các khối nội dung đã được ẩn thủ công trên trang web này. Bạn có thể xóa từng khối riêng lẻ hoặc xóa toàn bộ danh sách."
   },
@@ -347,9 +344,6 @@
   "facts": {
     "message": "Sự thật"
   },
-  "fantastic__thanks_": {
-    "message": "Tuyệt vời! Cảm ơn!"
-  },
   "feedback_sharing": {
     "message": "Chia sẻ Phản hồi"
   },
@@ -404,11 +398,11 @@
   "ghostery_tracker___ad_blocker_is_naming_the_trackers_present_on_websites_you_visit__you_are_browsing_the_web_unprotected_": {
     "message": "Ghostery Tracker & Ad Blocker đang đặt tên cho các trình theo dõi có trên các trang web bạn truy cập. Bạn đang duyệt web không được bảo vệ."
   },
-  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__resume_ghostery_": {
-    "message": "Người dùng Ghostery báo cáo rằng các trình chặn quảng cáo không còn làm hỏng trang web này nữa. Tiếp tục sử dụng Ghostery."
+  "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
+    "message": "Người dùng Ghostery báo cáo rằng các trình chặn quảng cáo không còn gây lỗi cho trang web này nữa. Ghostery sẽ được kích hoạt lại."
   },
-  "ghostery_users_report_that_ad_blockers_break_this_site__try_pausing_ghostery_": {
-    "message": "Người dùng Ghostery báo cáo rằng trình chặn quảng cáo làm hỏng trang web này. Hãy thử tạm dừng Ghostery."
+  "ghostery_users_report_that_adblockers_break_this_page__ghostery_has_been_paused_": {
+    "message": "Người dùng Ghostery báo cáo rằng các trình chặn quảng cáo làm hỏng trang này. Ghostery đã bị tạm dừng."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery sử dụng thông tin này để cung cấp các tính năng bảo mật dựa trên cộng đồng của mình, đảm bảo rằng thông tin cá nhân—chẳng hạn như mật khẩu, lịch sử duyệt web và nội dung trang—không bao giờ bị thu thập."
@@ -559,9 +553,6 @@
   "never_consent": {
     "message": "Không bao giờ đồng ý"
   },
-  "no": {
-    "message": "No"
-  },
   "no_activities_detected": {
     "message": "No activities detected"
   },
@@ -613,9 +604,6 @@
   },
   "paused": {
     "message": "Đã tạm dừng"
-  },
-  "pausing___": {
-    "message": "Tạm dừng..."
   },
   "performance_telemetry": {
     "message": "Performance Telemetry"
@@ -680,9 +668,6 @@
   "resume": {
     "message": "Resume"
   },
-  "resuming___": {
-    "message": "Tiếp tục..."
-  },
   "reveals_what_s_hidden_beneath_the_internet_s_surface__with_whotracks_me__you_can_uncover_the_identities_behind_every_tracker_": {
     "message": "Tiết lộ những gì ẩn dưới bề mặt internet. Với WhoTracks.Me, bạn có thể khám phá danh tính đằng sau mọi trình theo dõi."
   },
@@ -743,15 +728,6 @@
   "site_analytics": {
     "message": "Phân tích trang web",
     "description": "Tracker category name"
-  },
-  "site_works_fine": {
-    "message": "Trang web hoạt động tốt"
-  },
-  "skip": {
-    "message": "Skip"
-  },
-  "skip_this_time": {
-    "message": "Bỏ qua lần này"
   },
   "social_media": {
     "message": "Truyền thông xã hội",
@@ -815,9 +791,6 @@
   "to_provide_privacy_protection_features__the_following_information_about_web_trackers_is_collected_": {
     "message": "To provide privacy protection features, the following information about web trackers is collected:"
   },
-  "to_the_benefit_of_the_ghostery_community__let_us_know_if_this_helped_": {
-    "message": "Vì lợi ích của cộng đồng Ghostery, hãy cho chúng tôi biết nếu điều này đã giúp ích!"
-  },
   "top_100": {
     "message": "Top 100"
   },
@@ -826,6 +799,9 @@
   },
   "top_50": {
     "message": "Top 50"
+  },
+  "tracker___ad_blocking_will_be_active_on_this_page_": {
+    "message": "Trình chặn theo dõi và quảng cáo sẽ được kích hoạt trên trang này."
   },
   "tracker_database": {
     "message": "Tracker Database"
@@ -914,14 +890,8 @@
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "Chúng tôi biết bạn tin tưởng vào Ghostery để có trải nghiệm YouTube mượt mà. Đây là giải pháp tạm thời cho đến khi xuất hiện một giải pháp tinh tế hơn."
   },
-  "we_ll_continue_working_on_it__thanks_": {
-    "message": "Chúng tôi sẽ tiếp tục làm việc trên đó! Cảm ơn!"
-  },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "We're so glad Ghostery has your heart! Help others find us too - it only takes a moment."
-  },
-  "we_re_so_glad_ghostery_has_your_heart__let_others_know_leave_a_review_": {
-    "message": "Chúng tôi rất vui vì Ghostery đã chiếm được trái tim của bạn! Hãy cho người khác biết—để lại đánh giá nhé!"
   },
   "web_trackers": {
     "message": "Web Trackers"
@@ -959,11 +929,11 @@
   "whotracks_me_wheel": {
     "message": "Bánh xe WhoTracks.Me"
   },
+  "why_paused_": {
+    "message": "Tại sao tạm dừng?"
+  },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "With Ghostery disabled, only the basic functionality of naming trackers is available."
-  },
-  "yes": {
-    "message": "Yes"
   },
   "yesterday": {
     "message": "Hôm qua"
