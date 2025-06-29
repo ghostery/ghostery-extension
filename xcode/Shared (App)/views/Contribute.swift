@@ -8,6 +8,8 @@
 import SwiftUI
 import StoreKit
 
+// TODO: Add a spinner after pressing on Donate. It can take a bit for the payment part to show.
+
 fileprivate enum Constants {
   static let horizontalPadding: CGFloat = 16
   static let cornerRadius: CGFloat = 16
@@ -88,6 +90,8 @@ struct ContributeView: View {
   @State var yearlyDonationPlans: [Product] = []
   @State var oneTimeDonationPlans: [Product] = []
   
+  @State var purchaseInProgress = false
+  
   @EnvironmentObject var storeHelper: StoreHelper
   
   var donateButtonPressed: () -> Void
@@ -130,7 +134,11 @@ struct ContributeView: View {
     }
     .padding(Constants.instructionsCardPadding)
     .frame(height: Constants.containerHeight)
+    #if os(iOS)
     .frame(maxWidth: Constants.instructionsCardWidth)
+    #else
+    .frame(width: Constants.containerWidth)
+    #endif
     .background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
     .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
     .shadow(color: Colors.shadowColor, radius: Constants.instructionsCardShadowRadius, x: Constants.instructionsCardShadowX, y: Constants.instructionsCardShadowY)
@@ -156,7 +164,12 @@ struct ContributeView: View {
               .foregroundStyle(Colors.foregroundBrandPrimary)
               .padding(.leading, Constants.backButtonTextLeadingPadding)
           }
+          
         }
+#if os(macOS)
+        .frame(height: 28)
+        .buttonStyle(.plain)
+#endif
         Spacer()
       }
     }
@@ -221,7 +234,7 @@ struct ContributeView: View {
       })
     }
     .padding(Constants.donationBoxPadding)
-    .frame(width: Constants.donationBoxWidth, height: Constants.donationBoxHeight)
+    .frame(height: Constants.donationBoxHeight)
     .background(Colors.bgBrandPrimary)
     .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
   }
@@ -258,6 +271,9 @@ struct ContributeView: View {
         .foregroundStyle(Colors.foregroundBrandPrimary)
         .padding(.top, Constants.restoreDonationTopPadding)
     }
+#if os(macOS)
+    .buttonStyle(.plain)
+#endif
   }
   
   func donationPeriodButton(title: String, action: @escaping () -> Void) -> some View {
@@ -269,10 +285,14 @@ struct ContributeView: View {
         .frame(maxWidth: .infinity)
         .modifier(GhosteryOutlinedButtonModifier())
     }
+#if os(macOS)
+    .buttonStyle(.plain)
+#endif
   }
   
   var donationPlansOverlay: some View {
     VStack(alignment: .center, spacing: Constants.noSpacing) {
+#if os(iOS)
       Capsule()
         .frame(width: Constants.donationOverlayCapsuleWidth, height: Constants.donationOverlayCapsuleHeight)
         .background(Colors.labelsTertiary)
@@ -281,8 +301,17 @@ struct ContributeView: View {
       Spacer()
       donationOverlayContents
       Spacer()
+#else
+      donationOverlayContents
+#endif
+      
     }
     .padding(.horizontal, Constants.horizontalPadding)
+#if os(macOS)
+    .padding(.vertical, Constants.horizontalPadding)
+#endif
+    .background(Color.white)
+    .frame(width: 375)
   }
   
   var donationOverlayContents: some View {
@@ -301,15 +330,38 @@ struct ContributeView: View {
   }
   
   var donationOverlayHeader: some View {
-    VStack(alignment:.center, spacing: Constants.donationOverlayTextVerticalSpacing) {
-      Text(donationOverlayTitle)
-        .font(Fonts.subheadline)
-        .foregroundStyle(Colors.foregroundPrimary)
-      if showDonationOverlayHeaderSubtitle {
-        Text(Strings.donationOverlaySubtitle)
-          .font(Fonts.footnote)
-          .foregroundStyle(Colors.foregroundSecondary)
+    ZStack(alignment: .top) {
+      VStack(alignment:.center, spacing: Constants.donationOverlayTextVerticalSpacing) {
+        Text(donationOverlayTitle)
+          .font(Fonts.subheadline)
+          .foregroundStyle(Colors.foregroundPrimary)
+          .multilineTextAlignment(.center)
+        if showDonationOverlayHeaderSubtitle {
+          Text(Strings.donationOverlaySubtitle)
+            .font(Fonts.footnote)
+            .foregroundStyle(Colors.foregroundSecondary)
+            .multilineTextAlignment(.center)
+        }
       }
+      #if os(macOS)
+      .frame(width: 250)
+      #endif
+      
+      #if os(macOS)
+      HStack {
+        Spacer()
+        Button {
+          showOverlay = false
+        } label: {
+          Image(systemName: "xmark")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 14, height: 14)
+            .foregroundStyle(Colors.foregroungTertiary)
+        }
+        .buttonStyle(.plain)
+      }
+      #endif
     }
   }
   
@@ -342,20 +394,32 @@ struct ContributeView: View {
         backgroundColor: selectedDonationPlan?.id == id ? Colors.bgBrandSecondary : nil)
       )
     }
+#if os(macOS)
+    .buttonStyle(.plain)
+#endif
   }
   
   func donateSolidButton(title: String, action: @escaping () -> Void) -> some View {
     Button {
-      action()
+      if !purchaseInProgress {
+        action()
+      }
     } label: {
       VStack(alignment: .center, spacing: Constants.noSpacing) {
-        Text(title)
-          .foregroundStyle(Color.white)
+        if purchaseInProgress {
+          CustomSpinner()
+        } else {
+          Text(title)
+            .foregroundStyle(Color.white)
+        }
       }
       .frame(height: Constants.donateButtonHeight)
       .frame(maxWidth: .infinity)
       .modifier(GhosteryFilledButtonModifier())
     }
+#if os(macOS)
+    .buttonStyle(.plain)
+#endif
   }
   
   private func populateProducts() {
@@ -390,8 +454,10 @@ struct ContributeView: View {
   /// Purchase a product using StoreHelper and StoreKit2.
   /// - Parameter product: The `Product` to purchase
   @MainActor func purchase(product: Product) async {
+    purchaseInProgress = true
     do {
       let purchaseResult = try await storeHelper.purchase(product)
+      purchaseInProgress = false
       switch purchaseResult.purchaseState {
       case .purchased:
         showOverlay = false
@@ -401,6 +467,7 @@ struct ContributeView: View {
     } catch {
       print("Failed to purchase")
       showOverlay = false
+      purchaseInProgress = false
     }
     
   }
@@ -439,4 +506,20 @@ extension Product.SubscriptionPeriod {
 
 #Preview {
   ContributeView(donateButtonPressed: {}, eulaPressed: {}, termsPressed: {}, policyPressed: {}, backPressed: {})
+}
+
+struct CustomSpinner: View {
+    @State private var isAnimating = false
+
+    var body: some View {
+        Circle()
+            .trim(from: 0.0, to: 0.6)
+            .stroke(Color.white, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+            .frame(width: 20, height: 20)
+            .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
+            .animation(.linear(duration: 0.8).repeatForever(autoreverses: false), value: isAnimating)
+            .onAppear {
+                isAnimating = true
+            }
+    }
 }

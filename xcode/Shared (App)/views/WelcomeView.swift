@@ -83,10 +83,13 @@ struct WelcomeView: View {
     var body: some View {
         VStack(alignment: .center, spacing: Constants.noSpacing) {
             instructionsCard
+              .padding(.horizontal, Constants.horizontalPadding)
             Spacer()
             donateButton
+          #if os(iOS)
+              .padding(.horizontal, Constants.horizontalPadding)
+          #endif
         }
-        .padding(.horizontal, Constants.horizontalPadding)
         .padding(.bottom, Constants.containerBottomPadding)
         .frame(maxWidth: Constants.containerWidth)
         .frame(maxHeight: Constants.containerHeight)
@@ -104,7 +107,11 @@ struct WelcomeView: View {
         }
         .padding(Constants.instructionsCardPadding)
         .frame(height: Constants.instructionsCardHeight)
+#if os(iOS)
         .frame(maxWidth: Constants.instructionsCardWidth)
+#else
+        .frame(width: Constants.containerWidth)
+#endif
         .background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
         .shadow(color: Colors.shadowColor, radius: Constants.instructionsCardShadowRadius, x: Constants.instructionsCardShadowX, y: Constants.instructionsCardShadowY)
@@ -178,6 +185,9 @@ struct WelcomeView: View {
                     .frame(maxWidth: .infinity)
                     .modifier(GhosteryOutlinedButtonModifier())
             }
+#if os(macOS)
+            .buttonStyle(.plain)
+#endif
         }
     }
     
@@ -195,6 +205,9 @@ struct WelcomeView: View {
                     .frame(maxWidth: .infinity)
                     .modifier(GhosteryOutlinedButtonModifier())
             }
+#if os(macOS)
+            .buttonStyle(.plain)
+#endif
         }
     }
 }
@@ -211,6 +224,7 @@ struct GhosteryOutlinedButtonModifier: ViewModifier {
         content
             .font(Fonts.buttonTitle)
             .background(backgroundColor ?? Colors.buttonBGColor)
+            .foregroundStyle(Colors.foregroundBrandPrimary)
             .clipShape(
                 RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
             )
@@ -223,10 +237,13 @@ struct GhosteryOutlinedButtonModifier: ViewModifier {
 }
 
 struct GhosteryFilledButtonModifier: ViewModifier {
+  
+    var bgColor: Color?
+  
     func body(content: Content) -> some View {
         content
             .font(Fonts.buttonTitle)
-            .background(Colors.bgBrandSolid)
+            .background(bgColor ?? Colors.bgBrandSolid)
             .clipShape(
                 RoundedRectangle(cornerRadius: Constants.buttonCornerRadius)
             )

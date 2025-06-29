@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 fileprivate enum Constants {
     static let noSpacing: CGFloat = .zero
     
@@ -16,6 +15,12 @@ fileprivate enum Constants {
     static let headerMaxPadding: CGFloat = 64
     static let headerMinPadding: CGFloat = 12
     static let headerVerticalPadding: CGFloat = 32
+}
+
+fileprivate enum URLs {
+  static let iphoneInstructions = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-the-ghostery-ad-blocker-extension-on-your-iphone")!
+  static let ipadInstructions = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-ghosterys-free-ad-blocker-extension-for-safari-on-your-ipad")!
+  static let macInstructions = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-the-ghostery-extension-for-safari-on-your-mac")!
 }
 
 struct ContentView: View {
@@ -35,7 +40,11 @@ struct ContentView: View {
                   toggleSubscriptions()
                 }, stepByStepButtonPressed: {
                   // TODO: Detect if we are on an iPad and redirect to the ipad specific link
-                  guard let url = URL(string: "https://www.ghostery.com/blog/how-to-install-extensions-in-safari#how-to-install-the-ghostery-ad-blocker-extension-on-your-iphone") else { return }
+#if os(iOS)
+                  let url = URLs.iphoneInstructions
+#else
+                  let url = URLs.macInstructions
+#endif
                   openInWebView(url)
                 })
               .transition(AnyTransition.opacity.combined(with: .move(edge: .leading)))
@@ -68,6 +77,7 @@ struct ContentView: View {
           Spacer()
         }
         .environmentObject(storeHelper)
+      #if os(iOS)
         .gesture(
             SwipeRecognizer(direction: .right) { _ in
                 withAnimation {
@@ -77,6 +87,7 @@ struct ContentView: View {
                 }
             }
         )
+      #endif
     }
   
     var ghosteryLogoHeader: some View {
@@ -88,14 +99,26 @@ struct ContentView: View {
                    maxHeight: Constants.headerHeight + Constants.headerMaxPadding)
     }
 
-    func toggleSubscriptions() {
-      guard animating == false else { return }
-      animating = true
+  func toggleSubscriptions() {
+    guard animating == false else { return }
+    animating = true
+    if #available(macOS 14.0, *) {
       withAnimation(.easeInOut(duration: 0.3),
                     completionCriteria: .removed,
                     { self.showSubscriptions.toggle() },
                     completion: { animating = false })
+    } else {
+      // Fallback on earlier versions
+      withAnimation {
+        self.showSubscriptions.toggle()
+        Task {
+          // wait 300 ms
+          try? await Task.sleep(nanoseconds: 300_000_000)
+          animating = false
+        }
+      }
     }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -104,6 +127,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+#if os(iOS)
 struct SwipeRecognizer: UIGestureRecognizerRepresentable {
     typealias Action = (UISwipeGestureRecognizer.Direction) -> Void
     
@@ -132,3 +156,4 @@ struct SwipeRecognizer: UIGestureRecognizerRepresentable {
         }
     }
 }
+#endif

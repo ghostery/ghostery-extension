@@ -45,44 +45,15 @@ struct GhosteryApp: App {
     @State private var showSheet = false
     @State private var url = URL(string: "")
 
-    @State private var showBackground = false
-    @State private var showContentView = false
-    @State private var animateContentView = false
-    @State private var scaleContentView = false
-
     var body: some Scene {
       WindowGroup {
         ZStack(alignment: .center) {
-          GhosteryGradientBackground()
-            .opacity(showBackground ? 1 : 0)
-            .animation(.easeInOut(duration: 0.3), value: showBackground)
-            .scrollContentBackground(.hidden)
-          if showContentView {
-            ContentView(openInWebView: openInWebView)
-              .preferredColorScheme(.dark)
-              .sheet(isPresented: $showSheet) {
-                SafariView(url: $url)
-              }
-              .opacity(animateContentView ? 1 : 0)
-              .animation(.easeInOut(duration: 0.2), value: animateContentView)
-              .scaleEffect(scaleContentView ? 1 : 0.2)
-              .animation(.easeInOut(duration: 0.15), value: scaleContentView)
-              .onAppear {
-                showBackground = true
-                animateContentView = true
-                scaleContentView = true
-              }
-          } else {
-            SplashScreen(onDoneAnimating: {
-              Task {
-                try? await Task.sleep(nanoseconds: 500_000_000)
-                showContentView = true
-              }
-            })
-          }
+          IntroView(openInWebView: openInWebView)
         }
-        .background(theme == .light ? Colors.lightBGColor : Colors.darkBGColor)
         .preferredColorScheme(theme == .light ? .light : .dark)
+        .sheet(isPresented: $showSheet) {
+          SafariView(url: $url)
+        }
       }
     }
 

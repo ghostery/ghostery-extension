@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 fileprivate enum Constants {
   static let ghosteryTextWidth: CGFloat = 131
   static let ghosteryTextHeight: CGFloat = 29
@@ -42,10 +41,22 @@ struct SplashScreen: View {
       Spacer()
     }
     .onAppear {
-      withAnimation(.easeInOut(duration: 0.15), completionCriteria: .logicallyComplete) {
+      if #available(macOS 14.0, *) {
+        withAnimation(.easeInOut(duration: 0.15), completionCriteria: .logicallyComplete) {
           scaled = true
-      } completion: {
-        onDoneAnimating()
+        } completion: {
+          onDoneAnimating()
+        }
+      } else {
+        // Fallback on earlier versions
+        withAnimation {
+          scaled = true
+          Task {
+            // wait 150 ms
+            try? await Task.sleep(nanoseconds: 150_000_000)
+            onDoneAnimating()
+          }
+        }
       }
       iconShown = true
     }
