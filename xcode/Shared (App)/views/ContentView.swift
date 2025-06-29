@@ -39,9 +39,9 @@ struct ContentView: View {
                 donateButtonPressed: {
                   toggleSubscriptions()
                 }, stepByStepButtonPressed: {
-                  // TODO: Detect if we are on an iPad and redirect to the ipad specific link
 #if os(iOS)
-                  let url = URLs.iphoneInstructions
+                  let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+                  let url = isIpad ? URLs.ipadInstructions : URLs.iphoneInstructions
 #else
                   let url = URLs.macInstructions
 #endif
