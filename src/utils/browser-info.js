@@ -125,28 +125,5 @@ export default async function getBrowserInfo() {
     browserInfo.os = 'ipados';
   }
 
-  // Check for Ghostery browsers
-  if (__PLATFORM__ === 'firefox') {
-    const extendedBrowserInfo = await chrome.runtime.getBrowserInfo();
-
-    if (extendedBrowserInfo.name === 'Ghostery') {
-      if (browserInfo.os === 'android') {
-        Object.assign(browserInfo, {
-          browser: 'Ghostery Android Browser',
-          name: 'ghostery_android',
-          token: 'ga',
-          version: extendedBrowserInfo.version,
-        });
-      } else {
-        Object.assign(browserInfo, {
-          browser: 'Ghostery Desktop Browser',
-          name: 'ghostery_desktop',
-          token: 'gd',
-          version: browserInfo.version.split('.').join(''),
-        });
-      }
-    }
-  }
-
   return browserInfo;
 }
