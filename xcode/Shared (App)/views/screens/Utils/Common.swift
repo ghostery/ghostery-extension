@@ -57,4 +57,8 @@ enum Icons {
     static let ghosteryText = "GhosteryText"
     static let ghosteryLarge = "LargeIcon"
     static let contributeIllustration = "ContributeIllustration"
+    static let attention = "Attention"
+    static let ghosterySmallGray = "GhosterySmallLogoGray"
+    static let click = "Click"
+    static let checkmark = "Checkmark"
 }
