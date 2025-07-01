@@ -12,7 +12,6 @@
 import { RequestReporter } from '@whotracksme/reporting/reporting';
 import { store } from 'hybrids';
 
-import getBrowserInfo from '/utils/browser-info.js';
 import { getPausedDetails } from '/store/options.js';
 import Request from '/utils/request.js';
 import * as OptionsObserver from '/utils/options-observer.js';
@@ -43,7 +42,6 @@ if (__PLATFORM__ !== 'safari') {
     onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
     countryProvider: urlReporter.countryProvider,
     trustedClock: communication.trustedClock,
-    getBrowserInfo,
     isRequestAllowed: (state) => {
       const hostname = state.tabUrlParts.hostname;
       return (
