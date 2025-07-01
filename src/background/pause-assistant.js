@@ -49,6 +49,7 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
         id: 'pause-assistant',
         tabId: details.tabId,
         position: 'center',
+        params: { hostname },
       });
     } else {
       const options = await store.resolve(Options);
