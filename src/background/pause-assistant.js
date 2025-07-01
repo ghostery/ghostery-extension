@@ -23,14 +23,23 @@ import { openNotification } from './notifications.js';
 store.observe(Config, async (_, config) => {
   if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
 
-  const paused = {};
-  Object.entries(config.domains).forEach(([domain, { actions }]) => {
-    if (actions.includes(ACTION_PAUSE_ASSISTANT)) {
-      paused[domain] = { revokeAt: 0, assist: true };
-    }
-  });
+  const paused = Object.entries(config.domains).reduce(
+    (acc, [domain, { actions, dismiss }]) => {
+      if (
+        actions.includes(ACTION_PAUSE_ASSISTANT) &&
+        !dismiss[ACTION_PAUSE_ASSISTANT]
+      ) {
+        acc = acc || {};
+        acc[domain] = { revokeAt: 0, assist: true };
+      }
+      return acc;
+    },
+    null,
+  );
 
-  store.set(Options, { paused });
+  if (paused) {
+    store.set(Options, { paused });
+  }
 });
 
 chrome.webNavigation.onCompleted.addListener(async (details) => {
