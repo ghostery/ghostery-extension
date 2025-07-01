@@ -19,10 +19,10 @@ import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/urls.js';
 import debounce from '/utils/debounce.js';
 
 const syncOptions = debounce(
-  async function (options, prevOptions) {
+  async function (options, lastOptions) {
     try {
       // Skip if revision has changed
-      if (prevOptions && options.revision !== prevOptions.revision) return;
+      if (lastOptions && options.revision !== lastOptions.revision) return;
 
       // Clean up if sync should be disabled
       if (
@@ -37,10 +37,10 @@ const syncOptions = debounce(
       }
 
       const keys =
-        prevOptions &&
+        lastOptions &&
         SYNC_OPTIONS.filter(
           (key) =>
-            !OptionsObserver.isOptionEqual(options[key], prevOptions[key]),
+            !OptionsObserver.isOptionEqual(options[key], lastOptions[key]),
         );
 
       // If options update, set revision to "dirty" state
@@ -112,8 +112,8 @@ const syncOptions = debounce(
 );
 
 // Sync options on startup and when options change
-OptionsObserver.addListener(function sync(options, prevOptions) {
-  syncOptions(options, prevOptions);
+OptionsObserver.addListener(function sync(options, lastOptions) {
+  syncOptions(options, lastOptions);
 });
 
 // Sync options when a user logs in/out directly

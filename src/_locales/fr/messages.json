@@ -15,7 +15,7 @@
     "message": "À propos de Ghostery"
   },
   "access_website_settings": {
-    "message": "Accéder aux paramètres du site web"
+    "message": "Paramètres du site"
   },
   "account_details": {
     "message": "Détails du compte"
@@ -127,7 +127,7 @@
     "message": "Bloqués sur ce site web"
   },
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
-    "message": "Le blocage a été temporairement suspendu, et uniquement sur cette page. Envisagez de suspendre d'autres bloqueurs de publicités pour de meilleurs résultats."
+    "message": "Blocage temporairement suspendu — uniquement sur cette page. Pensez à désactiver d’autres bloqueurs pour de meilleurs résultats."
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Bloque des publicités supplémentaires, des trackers et des pop-ups spécifiques à la langue des sites web que vous visitez. Activez uniquement les langues dont vous avez besoin pour éviter de ralentir votre navigateur."
@@ -399,10 +399,10 @@
     "message": "Ghostery bloqueur de traqueurs et publicités nomme uniquement les traqueurs présents sur les sites web que vous visitez. Vous naviguez sur le web sans protection."
   },
   "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
-    "message": "Les utilisateurs de Ghostery signalent que les bloqueurs de publicités ne perturbent plus ce site. Ghostery sera réactivé."
+    "message": "Des utilisateurs de Ghostery signalent que les bloqueurs de publicités ne perturbent plus ce site. Ghostery sera réactivé."
   },
   "ghostery_users_report_that_adblockers_break_this_page__ghostery_has_been_paused_": {
-    "message": "Les utilisateurs de Ghostery signalent que les bloqueurs de publicités perturbent cette page. Ghostery a été mis en pause."
+    "message": "Des utilisateurs de Ghostery signalent que les bloqueurs de publicités perturbent cette page. Ghostery a été mis en pause."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery utilise ces informations pour fournir ses fonctionnalités de confidentialité alimentées par la communauté, garantissant que les informations personnelles—telles que les mots de passe, l'historique de navigation et le contenu des pages—ne sont jamais collectées."
@@ -536,7 +536,7 @@
     "message": "Plus dans cette organisation"
   },
   "move_the_slider_to_show_or_hide_sections_": {
-    "message": "Déplacez le curseur pour afficher ou masquer les sections."
+    "message": "Faites glisser le curseur pour afficher ou masquer des sections."
   },
   "my_ghostery": {
     "message": "Mon Ghostery"
@@ -621,7 +621,7 @@
     "message": "Veuillez décrire le problème"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
-    "message": "Empêcher Google et Bing de rediriger les liens des résultats de recherche via leurs serveurs au lieu de renvoyer directement vers les pages."
+    "message": "Empêche Google et Bing de rediriger les liens des résultats via leurs serveurs au lieu de mener directement aux pages."
   },
   "prevents_various_tracking_techniques_using_ai_driven_technology_": {
     "message": "Empêche différentes techniques de suivi à l'aide d'une technologie basée sur l'IA."
@@ -801,7 +801,7 @@
     "message": "Top 50"
   },
   "tracker___ad_blocking_will_be_active_on_this_page_": {
-    "message": "Le blocage des trackers et des publicités sera actif sur cette page."
+    "message": "Le blocage des traqueurs et des publicités sera activé sur cette page."
   },
   "tracker_database": {
     "message": "Fichage de traqueurs"
@@ -960,9 +960,9 @@
     "message": "YouTube t'empêche de regarder des vidéos sans publicité ?"
   },
   "zoom_in": {
-    "message": "Agrandir"
+    "message": "Zoom avant"
   },
   "zoom_out": {
-    "message": "Dézoomer"
+    "message": " Zoom arrière"
   }
 }

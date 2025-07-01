@@ -57,8 +57,8 @@ reloadTheme();
 if (document.documentElement.dataset.theme) {
   mode = document.documentElement.dataset.theme;
 } else {
-  OptionsObserver.addListener('theme', (theme, prevTheme) => {
-    if (theme || prevTheme) {
+  OptionsObserver.addListener('theme', (theme, lastTheme) => {
+    if (theme || lastTheme) {
       localStorage.setItem('theme', theme);
       mode = theme;
 
