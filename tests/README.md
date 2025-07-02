@@ -175,6 +175,60 @@ On the test page, the text has been modified.
 
 An exception is added to the tracker. URLs are not blocked or modified, only observed.
 
+### Element Picker - Single element
+> Pick a piece of content, and observe on the lists of blocked items in settings. 
+
+1. Open any website
+2. Click Ghostery icon.
+3. Find „Hide content block”
+4. Click a single element.
+5. Click „HIDE”
+6. Open Ghostery Settings, go to Websites.
+7. Notice on the list a placeholder (name of your site) and „Active” and number of Exceptions — it should be 1.
+8. Click on placeholder on the list. Check the script list.
+9. Click „Clear”, „Save” and go back to the previous screen.
+10. List should be empty.
+
+### Element Picker - More than one element
+1. Open any website
+2. Click Ghostery icon.
+3. Find „Hide content block”
+4. Click 1 element and use slider to hide more elements.
+5. Click „HIDE”
+6. Open Ghostery Settings, go to Websites.
+7. Notice on the list a placeholder (name of your site) and „Active” and number of Exceptions — it should show the number of hidden elements.
+8. Click on placeholder on the list. Check the script list.
+9. Click „Clear”, „Save” and go back to the previous screen.
+10. List should be empty.
+
+#### Additional points to add while testing Element Picker
+1. Adding one of the points below creates a separate, full testing scenario.
+2. Use VPN and check abroad websites for Germany, UK and USA. Repeat both scenarios.
+3. Go with scenario 2. Change „Step 4” to: Check „Block similar Elements” instead of using a slider to get more elements picked.
+4. In both scenarios, test the „Trash Can” button on the list of websites to clear the list. Change step 8 into: „click trash can button to clear the list”.
+
+### BOB 
+> Confirm that system works and can be triggered manually. 
+
+1. Trigger Developer Tools Settings in Ghostery Settings / Privacy Protection by clicking 5 times on the version number.
+2. Click „Test Flag” — the default script is already available.
+3. Click „Test Domain” — pick up yours, or use the default one.
+ 3b. Add more than one website to the list if possible.
+4. Go to the domain you picked. Observe popup stating that Ghostery has been paused.
+5. Go to the „Websites” tab in „Ghostery settings” and confirm that the website you are testing is there. Do not clear the list.
+6. Now go back to the „Developer Tools” and click „Force sync”, then „Test Flag” to trigger popup stating that „users report that adblockers no longer breaking this site...” and click OK.
+7. Go to Websites to confirm that the list is empty.   
+
+#### Additional points to test in process
+Adding one of the points below creates a separate, full testing scenario.
+
+1. Add more than one website to the test domain list (see step 3b) and confirm correct behavior.
+2. Change step 5 to: Go to the „Websites” tab in „Ghostery settings” and confirm that the website you are testing is there. Clear the list manually. Start the testing process from STEP 1. Confirm that BOB triggers with popup stating that Ghostery is Paused.
+3. Repeat the testing process for Germany, UK and USA using VPN.
+4. Check if the link to the blog shown in the BOB popup is active.
+
+BOB is working and pop-ups are triggering. 
+
 ## Additional features
 
 ### Trackers Preview on SERP
