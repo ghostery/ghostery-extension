@@ -67,6 +67,10 @@ export default {
       --button-background: var(--background-danger-solid);
     }
 
+    :host([type="wtm"]) {
+      --button-background: var(--background-wtm-solid);
+    }
+
     :host([type="outline"]) {
       --button-color: var(--color-primary);
       --button-border-color: var(--border-secondary);

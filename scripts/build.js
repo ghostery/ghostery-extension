@@ -32,7 +32,7 @@ const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
   assets: ['_locales', 'icons', 'static_pages'],
-  pages: ['logger', 'onboarding', 'whotracksme', 'whats-new'],
+  pages: ['logger', 'onboarding', 'whotracksme'],
 };
 
 // Generate arguments from command line
