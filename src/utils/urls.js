@@ -34,3 +34,5 @@ export const REVIEW_PAGE_URL = (() => {
   // Chrome
   return 'https://mygho.st/ReviewChromePanel';
 })();
+
+export const WHATS_NEW_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/release-10.5`;

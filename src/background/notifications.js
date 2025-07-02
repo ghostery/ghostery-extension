@@ -20,7 +20,7 @@ export function openNotification({ tabId, id, position, params }) {
           .join('&')}`
       : '');
 
-  chrome.tabs.sendMessage(tabId, {
+  return chrome.tabs.sendMessage(tabId, {
     action: notifications.MOUNT_ACTION,
     url,
     position,
@@ -28,7 +28,7 @@ export function openNotification({ tabId, id, position, params }) {
 }
 
 export function closeNotification(tabId) {
-  chrome.tabs.sendMessage(tabId, {
+  return chrome.tabs.sendMessage(tabId, {
     action: notifications.UNMOUNT_ACTION,
   });
 }
