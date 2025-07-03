@@ -71,7 +71,7 @@
       "world": "MAIN"
     },
     {
-      "js": ["content_scripts/adblocker.js"],
+      "js": ["content_scripts/adblocker/index.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "all_frames": true
