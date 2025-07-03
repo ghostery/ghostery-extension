@@ -21,6 +21,7 @@ export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
   'firefox-content-script-scriptlets';
 export const FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED =
   'chromium-inject-cosmetics-on-response-started';
+export const FLAG_ENABLE_EXTENDED_SELECTORS = 'enable-extended-selectors';
 
 const Config = {
   enabled: true,

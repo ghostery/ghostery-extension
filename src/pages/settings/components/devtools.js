@@ -19,6 +19,7 @@ import Config, {
   FLAG_PAUSE_ASSISTANT,
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_ENABLE_EXTENDED_SELECTORS,
 } from '/store/config.js';
 
 const VERSION = chrome.runtime.getManifest().version;
@@ -83,6 +84,7 @@ async function testConfigFlag(host) {
       FLAG_PAUSE_ASSISTANT,
       FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+      FLAG_ENABLE_EXTENDED_SELECTORS,
     ].join(', '),
   );
   if (!flags) return;

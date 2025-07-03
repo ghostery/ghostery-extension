@@ -9,6 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { delayedUpdateExtended } from './extended-selectors.js';
+
 function debounce(fn, { waitFor, maxWait }) {
   let delayedTimer;
   let maxWaitTimer;
@@ -89,6 +91,12 @@ const observer = new MutationObserver((mutations) => {
 
   for (const mutation of mutations) {
     switch (mutation.type) {
+      case 'elements': {
+        if (mutation.elements.length !== 0) {
+          delayedUpdateExtended(mutation.elements);
+        }
+        break;
+      }
       case 'attributes': {
         if (mutation.attributeName === 'class') {
           mutation.target.classList.forEach((c) => addSelector('classes', c));
