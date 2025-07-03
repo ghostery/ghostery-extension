@@ -21,7 +21,7 @@ const Form = {
   url: '',
   email: '',
   description: '',
-  screenshot: false,
+  screenshot: true,
   [store.connect]: {
     async get() {
       const [currentTab, session] = await Promise.all([
@@ -137,6 +137,7 @@ export default {
               <ui-input>
                 <input
                   type="checkbox"
+                  checked="${form.screenshot}"
                   onchange="${html.set(form, 'screenshot')}"
                 />
               </ui-input>
