@@ -17,12 +17,10 @@ import getBrowserInfo from '/utils/browser-info.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 
 import { tabStats } from './stats.js';
+import { parse } from 'tldts-experimental';
 
 async function getMetadata(tab) {
   let result = '\n------\n';
-
-  const { version } = chrome.runtime.getManifest();
-  result += `v${version}\n`;
 
   // Send only not-private options
   const options = Object.fromEntries(
@@ -41,24 +39,34 @@ async function getMetadata(tab) {
   return result;
 }
 
+function sliceWithEllipsis(str, maxLength) {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength - 3) + '...';
+  }
+  return str;
+}
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'report-broken-page') {
     (async () => {
       try {
         const formData = new FormData();
         const browserInfo = await getBrowserInfo();
-
+        const { version } = chrome.runtime.getManifest();
         const email = msg.email || 'noreplay@ghostery.com';
+        const domain = parse(msg.url).domain || '';
 
         formData.append('support_ticket[user_name]', email);
         formData.append('support_ticket[user_email]', email);
         formData.append(
           'support_ticket[subject]',
-          `[GBE] Broken page report: ${msg.url}`,
+          `[GBE] ${sliceWithEllipsis(msg.url, 40)} - ${sliceWithEllipsis(msg.description.trim(), 30)}`,
         );
 
+        formData.append('support_ticket[version]', version);
         formData.append('support_ticket[selected_browser]', browserInfo.name);
         formData.append('support_ticket[browser_version]', browserInfo.version);
+        formData.append('support_ticket[domain]', domain);
 
         formData.append(
           'support_ticket[selected_os]',
@@ -66,13 +74,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         );
         formData.append('support_ticket[os_version]', browserInfo.osVersion);
 
-        let description = msg.description.trim() + (await getMetadata(msg.tab));
+        let description = `${msg.url}\n\n${msg.description.trim()}${await getMetadata(msg.tab)}`;
 
-        if (description.length > 5000) {
-          description = description.slice(0, 4997) + '...';
-        }
-
-        formData.append('support_ticket[message]', description);
+        formData.append(
+          'support_ticket[message]',
+          sliceWithEllipsis(description, 5000),
+        );
 
         if (msg.screenshot) {
           const screenshot = await chrome.tabs.captureVisibleTab(null, {
