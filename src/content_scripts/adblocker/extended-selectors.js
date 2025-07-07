@@ -13,7 +13,7 @@ import { querySelectorAll } from '@ghostery/adblocker-extended-selectors';
 
 let UPDATE_EXTENDED_TIMEOUT = null;
 const PENDING = new Set();
-const EXTENDED = [];
+const EXTENDED = new Map();
 const HIDDEN = new Map();
 
 function cachedQuerySelector(root, selector, cache) {
@@ -48,7 +48,7 @@ function cachedQuerySelector(root, selector, cache) {
 }
 
 function updateExtended() {
-  if (PENDING.size === 0 || EXTENDED.length === 0) {
+  if (PENDING.size === 0 || EXTENDED.size === 0) {
     return;
   }
 
@@ -63,7 +63,7 @@ function updateExtended() {
   PENDING.clear();
 
   for (const root of roots) {
-    for (const selector of EXTENDED) {
+    for (const selector of EXTENDED.values()) {
       for (const element of cachedQuerySelector(root, selector, cache)) {
         if (selector.remove === true) {
           element.textContent = '';
@@ -111,7 +111,7 @@ function updateExtended() {
 export function delayedUpdateExtended(elements) {
   // If we do not have any extended filters applied to this frame, then we do
   // not need to do anything. We just ignore.
-  if (EXTENDED.length === 0) {
+  if (EXTENDED.size === 0) {
     return;
   }
 
@@ -146,7 +146,9 @@ export function delayedUpdateExtended(elements) {
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.action === 'evaluateExtendedSelectors') {
     if (msg.extended && msg.extended.length > 0) {
-      EXTENDED.push(...msg.extended);
+      for (const selector of msg.extended) {
+        EXTENDED.set(selector.id || JSON.stringify(selector.ast), selector);
+      }
       delayedUpdateExtended([window.document.documentElement]);
     }
   }
