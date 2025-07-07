@@ -36,7 +36,7 @@ const ALL_RESOURCE_TYPES = [
   'other',
 ];
 
-OptionsObserver.addListener('paused', async (paused, prevPaused) => {
+OptionsObserver.addListener('paused', async (paused, lastPaused) => {
   const alarms = (await chrome.alarms.getAll()).filter(({ name }) =>
     name.startsWith(PAUSED_ALARM_PREFIX),
   );
@@ -69,7 +69,7 @@ OptionsObserver.addListener('paused', async (paused, prevPaused) => {
   // in the panel or the settings page.
   if (
     (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
-    (prevPaused ||
+    (lastPaused ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
       (__PLATFORM__ === 'chromium' &&
