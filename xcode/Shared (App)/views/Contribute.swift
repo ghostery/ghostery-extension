@@ -248,17 +248,24 @@ struct ContributeView: View {
   }
   
   var legal: some View {
-    HStack(alignment: .center, spacing: Constants.noSpacing) {
-      Spacer()
+#if os(iOS)
+    let width = Constants.instructionsCardWidth - Constants.instructionsCardPadding
+#else
+    let width = Constants.containerWidth - Constants.instructionsCardPadding
+#endif
+    return HStack(alignment: .center, spacing: Constants.noSpacing) {
       Text(Strings.eula)
         .modifier(LegalText(action: eulaPressed))
-      Spacer()
+        .frame(width: width/3)
+        .multilineTextAlignment(.center)
       Text(Strings.terms)
         .modifier(LegalText(action: termsPressed))
-      Spacer()
+        .frame(width: width/3)
+        .multilineTextAlignment(.center)
       Text(Strings.policy)
         .modifier(LegalText(action: policyPressed))
-      Spacer()
+        .frame(width: width/3)
+        .multilineTextAlignment(.center)
     }
   }
   
@@ -270,6 +277,7 @@ struct ContributeView: View {
         .font(.footnote)
         .foregroundStyle(Colors.foregroundBrandPrimary)
         .padding(.top, Constants.restoreDonationTopPadding)
+        .multilineTextAlignment(.center)
     }
 #if os(macOS)
     .buttonStyle(.plain)
