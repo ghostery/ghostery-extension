@@ -38,7 +38,7 @@ struct IntroView: View {
         } else {
           SplashScreen(onDoneAnimating: {
             Task {
-              try? await Task.sleep(nanoseconds: 500_000_000)
+              try? await Task.sleep(nanoseconds: 700_000_000)
               showContentView = true
             }
           })

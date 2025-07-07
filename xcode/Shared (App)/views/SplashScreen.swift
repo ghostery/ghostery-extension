@@ -42,7 +42,7 @@ struct SplashScreen: View {
     }
     .onAppear {
       if #available(macOS 14.0, *) {
-        withAnimation(.easeInOut(duration: 0.15), completionCriteria: .logicallyComplete) {
+        withAnimation(.easeInOut(duration: 0.25), completionCriteria: .logicallyComplete) {
           scaled = true
         } completion: {
           onDoneAnimating()
@@ -53,7 +53,7 @@ struct SplashScreen: View {
           scaled = true
           Task {
             // wait 150 ms
-            try? await Task.sleep(nanoseconds: 150_000_000)
+            try? await Task.sleep(nanoseconds: 250_000_000)
             onDoneAnimating()
           }
         }
