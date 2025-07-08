@@ -200,6 +200,7 @@ struct ContributeView: View {
         .frame(maxWidth: .infinity)
       
       donationPeriodButton(title: Strings.monthlyDonation, action: {
+        donationPlans = []
         withAnimation {
           Task { @MainActor in
             donationPlans = monthlyDonationPlans
@@ -211,6 +212,7 @@ struct ContributeView: View {
         }
       })
       donationPeriodButton(title: Strings.yearlyDonation, action: {
+        donationPlans = []
         withAnimation {
           Task { @MainActor in
             donationPlans = yearlyDonationPlans
@@ -222,6 +224,7 @@ struct ContributeView: View {
         }
       })
       donationPeriodButton(title: Strings.oneTimeDonation, action: {
+        donationPlans = []
         withAnimation {
           Task { @MainActor in
             donationPlans = oneTimeDonationPlans
