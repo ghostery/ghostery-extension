@@ -287,7 +287,7 @@ export default {
                   <div layout="row center">
                     <ui-action>
                       <a
-                        href="https://www.ghostery.com/blog/"
+                        href="https://www.ghostery.com/blog/browsing-assistant-user-agent"
                         onclick="${openTabWithUrl}"
                         layout="row center gap padding:0.5:1:1 margin:top:-1"
                       >
