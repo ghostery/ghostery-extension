@@ -205,6 +205,7 @@ struct ContributeView: View {
           Task { @MainActor in
             donationPlans = monthlyDonationPlans
             donationOverlayTitle = Strings.donationOverlayMonthlyTitle
+            selectedDonationPlan = donationPlans.middle
           }
           
           showDonationOverlayHeaderSubtitle = true
@@ -217,6 +218,7 @@ struct ContributeView: View {
           Task { @MainActor in
             donationPlans = yearlyDonationPlans
             donationOverlayTitle = Strings.donationOverlayYearlyTitle
+            selectedDonationPlan = donationPlans.middle
           }
           
           showDonationOverlayHeaderSubtitle = true
@@ -229,6 +231,7 @@ struct ContributeView: View {
           Task { @MainActor in
             donationPlans = oneTimeDonationPlans
             donationOverlayTitle = Strings.donationOverlayOneTimeTitle
+            selectedDonationPlan = donationPlans.middle
           }
           
           showDonationOverlayHeaderSubtitle = false
@@ -533,4 +536,16 @@ struct CustomSpinner: View {
                 isAnimating = true
             }
     }
+}
+
+extension Array {
+  var middle: Element? {
+    guard self.count > 0 else {
+      return nil
+    }
+    
+    let middle = self.count / 2
+    
+    return self[middle]
+  }
 }
