@@ -38,7 +38,7 @@ mount(document.body, {
           </ui-text>
           <ui-text type="body-s">
             <a
-              href="https://www.ghostery.com/blog"
+              href="https://www.ghostery.com/blog/browsing-assistant-user-agent"
               target="_blank"
               layout="row inline gap:0.5 items:center"
             >

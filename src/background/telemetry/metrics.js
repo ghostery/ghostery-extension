@@ -155,8 +155,6 @@ export default class Metrics {
       buildQueryPair('bv', browserInfo.version) +
       // Date of install (former install_date)
       buildQueryPair('id', this.storage.installDate) +
-      // Product ID Parameter
-      buildQueryPair('pi', browserInfo.token === 'gd' ? 'gd' : 'gbe') +
       // Toolbar pinned
       buildQueryPair('tp', Number(conf.userSettings?.isOnToolbar ?? -1));
 

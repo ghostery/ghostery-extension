@@ -22,7 +22,7 @@ body {
     max-height: 600px;
   }
 
-  body[browser-name='edge:android'] {
+  body[browser-name='edge'][platform-name='android'] {
     max-height: 540px;
   }
 }
