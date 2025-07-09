@@ -66,6 +66,10 @@ jobs:
           echo "max-cache-ttl 7200" >> ~/.gnupg/gpg-agent.conf
           echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --passphrase-fd 0 --sign --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E /dev/null
 
+      - name: Export GPG public key
+        run: |
+          gpg --export --armor 7541C764E251DA408BD645A2F8A0BDD7B2021F1E > ghostery-gpg-public-key.asc
+
       - name: Create PGP signatures
         run: |
           gpg --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.zip"
@@ -89,4 +93,14 @@ jobs:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ghostery-extension-${{ env.VERSION }}.tar.gz.asc
           asset_name: ghostery-extension-${{ env.VERSION }}.tar.gz.asc
+          asset_content_type: text/plain
+
+      - name: Upload GPG public key
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ghostery-gpg-public-key.asc
+          asset_name: ghostery-gpg-public-key.asc
           asset_content_type: text/plain
