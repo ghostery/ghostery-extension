@@ -104,7 +104,7 @@ const Options = {
   revision: 0,
 
   // What's new
-  whatsNewVersion: '',
+  whatsNewVersion: 0,
 
   [store.connect]: {
     async get() {

@@ -20,15 +20,16 @@ import { openNotification } from './notifications.js';
 const { version } = chrome.runtime.getManifest();
 
 chrome.runtime.onStartup.addListener(async () => {
-  console.log('[whats-new] Checking for new features...');
+  console.log('[whats-new] Checking for new minor version...');
 
   const options = await store.resolve(Options);
   const managedConfig = await store.resolve(ManagedConfig);
+  const whatsNewVersion = parseFloat(version); // e.g., 10.5.0 -> 10.5
 
   if (
     !options.terms ||
-    managedConfig.disableUserControl // ||
-    // parseFloat(options.whatsNewVersion) >= parseFloat(version)
+    managedConfig.disableUserControl ||
+    options.whatsNewVersion === whatsNewVersion
   ) {
     return;
   }
@@ -52,5 +53,5 @@ chrome.runtime.onStartup.addListener(async () => {
     shown = true;
   }
 
-  if (shown) store.set(options, { whatsNewVersion: version });
+  if (shown) store.set(options, { whatsNewVersion });
 });
