@@ -51,3 +51,56 @@ jobs:
           asset_path: web-ext-artifacts/ghostery-chromium.zip
           asset_name: ghostery-chromium-${{ env.VERSION }}.zip
           asset_content_type: application/gzip
+
+      - name: Download source code archives
+        run: |
+          curl -L -o "ghostery-extension-${{ env.VERSION }}.zip" "https://github.com/${{ github.repository }}/archive/refs/tags/v${{ env.VERSION }}.zip"
+          curl -L -o "ghostery-extension-${{ env.VERSION }}.tar.gz" "https://github.com/${{ github.repository }}/archive/refs/tags/v${{ env.VERSION }}.tar.gz"
+
+      - name: Setup GPG
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+          echo "trust-model always" >> ~/.gnupg/gpg.conf
+          echo "use-agent" >> ~/.gnupg/gpg.conf
+          echo "default-cache-ttl 3600" >> ~/.gnupg/gpg-agent.conf
+          echo "max-cache-ttl 7200" >> ~/.gnupg/gpg-agent.conf
+          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --passphrase-fd 0 --sign --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E /dev/null
+
+      - name: Export GPG public key
+        run: |
+          gpg --export --armor 7541C764E251DA408BD645A2F8A0BDD7B2021F1E > ghostery-gpg-public-key.asc
+
+      - name: Create PGP signatures
+        run: |
+          gpg --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.zip"
+          gpg --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.tar.gz"
+
+      - name: Upload PGP signature for zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ghostery-extension-${{ env.VERSION }}.zip.asc
+          asset_name: ghostery-extension-${{ env.VERSION }}.zip.asc
+          asset_content_type: text/plain
+
+      - name: Upload PGP signature for tar.gz
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ghostery-extension-${{ env.VERSION }}.tar.gz.asc
+          asset_name: ghostery-extension-${{ env.VERSION }}.tar.gz.asc
+          asset_content_type: text/plain
+
+      - name: Upload GPG public key
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ghostery-gpg-public-key.asc
+          asset_name: ghostery-gpg-public-key.asc
+          asset_content_type: text/plain
