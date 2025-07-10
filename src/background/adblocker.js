@@ -30,6 +30,7 @@ import { tabStats, updateTabStats } from './stats.js';
 import Config, {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_ENABLE_EXTENDED_SELECTORS,
 } from '/store/config.js';
 
 let options = Options;
@@ -395,7 +396,7 @@ async function injectCosmetics(details, config) {
       return;
     }
 
-    const { styles } = engine.injectCosmeticFilters(styleFilters, {
+    const { styles, extended } = engine.injectCosmeticFilters(styleFilters, {
       url,
       injectScriptlets: isBootstrap,
       injectExtended: isBootstrap,
@@ -406,6 +407,14 @@ async function injectCosmetics(details, config) {
 
     if (styles) {
       injectStyles(styles, tabId, frameId);
+    }
+
+    if (ENABLE_EXTENDED_SELECTORS && extended && extended.length > 0) {
+      chrome.tabs.sendMessage(
+        tabId,
+        { action: 'evaluateExtendedSelectors', extended },
+        { frameId },
+      );
     }
   }
 
@@ -589,3 +598,9 @@ if (__PLATFORM__ === 'chromium') {
     { urls: ['http://*/*', 'https://*/*'] },
   );
 }
+
+let ENABLE_EXTENDED_SELECTORS = false;
+store.resolve(Config).then((config) => {
+  const enabled = config.hasFlag(FLAG_ENABLE_EXTENDED_SELECTORS);
+  ENABLE_EXTENDED_SELECTORS = enabled;
+});
