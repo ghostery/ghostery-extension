@@ -10,15 +10,20 @@
  */
 
 import { store, msg } from 'hybrids';
+import { saveAs } from 'file-saver';
 
 import Options, { SYNC_PROTECTED_OPTIONS } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
+import ElementPickerSelectors from '/store/element-picker-selectors.js';
+
+import getBrowserInfo from '/utils/browser-info.js';
 
 const DATA_VERSION = 1;
 
 export async function exportToFile() {
   const options = await store.resolve(Options);
   const customFilters = await store.resolve(CustomFilters);
+  const elementPickerSelectors = await store.resolve(ElementPickerSelectors);
 
   const data = {
     timestamp: Date.now(),
@@ -26,23 +31,37 @@ export async function exportToFile() {
     options: Object.fromEntries(
       SYNC_PROTECTED_OPTIONS.map((key) => [key, options[key]]),
     ),
-    customFilters: customFilters.text,
   };
+
+  if (customFilters.text) {
+    data.customFilters = customFilters.text;
+  }
+
+  if (Object.keys(elementPickerSelectors.hostnames).length > 0) {
+    data.blockedElements = elementPickerSelectors.hostnames;
+  }
 
   const blob = new Blob([JSON.stringify(data, null, 2)], {
     type: 'application/json',
   });
-  const url = URL.createObjectURL(blob);
 
-  const link = Object.assign(document.createElement('a'), {
-    href: url,
-    download: `ghostery-settings-${new Date().toISOString()}.json`,
-    style: 'display: none',
-  });
+  if (__PLATFORM__ === 'safari') {
+    const browserInfo = await getBrowserInfo();
 
-  document.body.appendChild(link).click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+    if (browserInfo.os === 'ios' || browserInfo.os === 'ipados') {
+      const fileReader = new FileReader();
+
+      fileReader.onload = function (e) {
+        const url = e.target.result;
+        chrome.tabs.create({ url });
+      };
+      fileReader.readAsDataURL(blob);
+
+      return;
+    }
+  }
+
+  saveAs(blob, `ghostery-settings-${new Date().toISOString()}.json`);
 }
 
 function resolveBackupFormat(text) {
@@ -68,6 +87,7 @@ function resolveBackupFormat(text) {
         }, {}) || {},
     },
     customFilters: data.customFilters || data.userFilters || '',
+    blockedElements: data.blockedElements || null,
   };
 }
 
@@ -97,6 +117,11 @@ export function importFromFile(event) {
 
         // Set custom filters value
         await store.set(CustomFilters, { text: data.customFilters });
+
+        // Set element picker selectors
+        await store.set(ElementPickerSelectors, {
+          hostnames: data.blockedElements,
+        });
 
         // Clean up paused domains and exceptions
         await store.set(Options, { paused: null, exceptions: null });
