@@ -19,6 +19,7 @@ import './element-picker.js';
 import './dnr.js';
 import './exceptions.js';
 import './paused.js';
+import './safe-mode.js';
 import './session.js';
 import './stats.js';
 import './notifications.js';
