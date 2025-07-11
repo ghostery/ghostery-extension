@@ -115,6 +115,7 @@
         "pages/notifications/opera-serp.html",
         "pages/notifications/pause-assistant.html",
         "pages/notifications/pause-resume.html",
+        "pages/notifications/pin-it.html",
         "pages/notifications/whats-new.html"
       ],
       "matches": ["<all_urls>"],
