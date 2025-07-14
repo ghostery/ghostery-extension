@@ -12,9 +12,11 @@
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
+import { getBrowser } from '/utils/browser-info.js';
+
 import { openNotification } from './notifications.js';
 
-if (__PLATFORM__ === 'chromium') {
+if (__PLATFORM__ === 'chromium' && getBrowser() !== 'oculus') {
   const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
   const NOTIFICATION_SHOW_LIMIT = 4;
 
