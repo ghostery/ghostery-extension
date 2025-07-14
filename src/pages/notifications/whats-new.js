@@ -9,8 +9,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { mount, html } from 'hybrids';
+import { mount, html, store } from 'hybrids';
 import '/ui/index.js';
+
+import Options from '/store/options.js';
 
 import * as notifications from '/utils/notifications.js';
 import { WHATS_NEW_PAGE_URL } from '/utils/urls.js';
@@ -18,6 +20,10 @@ import { WHATS_NEW_PAGE_URL } from '/utils/urls.js';
 import whatsNewImage from './assets/whats-new.png';
 
 const close = notifications.setupNotificationPage(390);
+
+store.set(Options, {
+  whatsNewVersion: new URLSearchParams(location.search).get('whatsNewVersion'),
+});
 
 mount(document.body, {
   render: () => html`
