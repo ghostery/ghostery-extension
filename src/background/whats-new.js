@@ -37,21 +37,17 @@ chrome.runtime.onStartup.addListener(async () => {
   const tabs = await chrome.tabs.query({ currentWindow: true });
   const activeTab = tabs.find((tab) => tab.active);
 
-  let shown = false;
-
   if (tabs.length && activeTab?.url.startsWith('http')) {
     // There are tabs and the active tab is a web page, show the notification
     await openNotification({
       tabId: activeTab.id,
       id: 'whats-new',
       position: 'center',
+      params: { whatsNewVersion },
     });
-    shown = true;
   } else if (tabs.length <= 1 && !activeTab?.url.startsWith('http')) {
     // There are no tabs or the active tab is not a web page (blank, etc), open the what's new page
     await chrome.tabs.create({ url: WHATS_NEW_PAGE_URL, active: true });
-    shown = true;
+    store.set(options, { whatsNewVersion });
   }
-
-  if (shown) store.set(options, { whatsNewVersion });
 });

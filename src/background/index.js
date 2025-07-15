@@ -26,6 +26,7 @@ import './serp.js';
 import './broken-page-report.js';
 import './pause-assistant.js';
 import './whats-new.js';
+import './pin-it.js';
 
 import './helpers.js';
 import './external.js';
