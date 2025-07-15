@@ -30,7 +30,7 @@ import { tabStats, updateTabStats } from './stats.js';
 import Config, {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_ENABLE_EXTENDED_SELECTORS,
+  FLAG_EXTENDED_SELECTORS,
 } from '/store/config.js';
 
 let options = Options;
@@ -95,6 +95,12 @@ if (__PLATFORM__ === 'firefox') {
     }
   });
 }
+
+let ENABLE_EXTENDED_SELECTORS = false;
+store.resolve(Config).then((config) => {
+  const enabled = config.hasFlag(FLAG_EXTENDED_SELECTORS);
+  ENABLE_EXTENDED_SELECTORS = enabled;
+});
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -598,9 +604,3 @@ if (__PLATFORM__ === 'chromium') {
     { urls: ['http://*/*', 'https://*/*'] },
   );
 }
-
-let ENABLE_EXTENDED_SELECTORS = false;
-store.resolve(Config).then((config) => {
-  const enabled = config.hasFlag(FLAG_ENABLE_EXTENDED_SELECTORS);
-  ENABLE_EXTENDED_SELECTORS = enabled;
-});

@@ -32,16 +32,7 @@ function cachedQuerySelector(root, selector, cache) {
       cachedSelectors = new Map();
       cache.set(root, cachedSelectors);
     }
-
-    let cachedSelected = cachedSelectors.get(selector);
-    if (cachedSelected === undefined) {
-      cachedSelected = new Set();
-      cachedSelectors.set(selector, cachedSelected);
-    }
-
-    for (const element of selected) {
-      cachedSelected.add(element);
-    }
+    cachedSelectors.set(selector, selected);
   }
 
   return selected;
