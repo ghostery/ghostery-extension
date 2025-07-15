@@ -18,24 +18,24 @@ import * as notifications from '/utils/notifications.js';
 import { HOME_PAGE_URL } from '/utils/urls.js';
 import { getBrowser } from '/utils/browser-info.js';
 
-import pinExtensionChrome from './assets/pin-extension-chrome.png';
-import pinExtensionEdge from './assets/pin-extension-edge.png';
-import pinExtensionOpera from './assets/pin-extension-opera.png';
+import pinExtensionChromeUrl from './assets/pin-extension-chrome.png';
+import pinExtensionEdgeUrl from './assets/pin-extension-edge.png';
+import pinExtensionOperaUrl from './assets/pin-extension-opera.png';
 
 let imageUrl = '';
 let pathname = '';
 
 switch (getBrowser().name) {
   case 'opera':
-    imageUrl = pinExtensionOpera;
+    imageUrl = pinExtensionOperaUrl;
     pathname = `/ghostery-ad-blocker-opera#how-do-i-pin-ghostery-to-the-opera-toolbar`;
     break;
   case 'edge':
-    imageUrl = pinExtensionEdge;
+    imageUrl = pinExtensionEdgeUrl;
     pathname = `/ghostery-ad-blocker-edge#how-do-i-pin-ghostery-to-the-microsoft-edge-toolbar`;
     break;
   default:
-    imageUrl = pinExtensionChrome;
+    imageUrl = pinExtensionChromeUrl;
     pathname = `/ghostery-ad-blocker-chrome#how-do-i-pin-the-ghostery-extension-to-the-chrome-toolbar`;
 }
 
