@@ -33,7 +33,12 @@ function showCopyNotification(host) {
   ).forEach((el) => el.parentNode.removeChild(el));
 
   html`
-    <panel-alert type="success" slide autoclose="2">
+    <panel-alert
+      type="success"
+      slide
+      autoclose="2"
+      onclose="${(_, e) => e.target.remove()}"
+    >
       Copied to clipboard
     </panel-alert>
   `(wrapper);

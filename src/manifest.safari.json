@@ -36,8 +36,8 @@
     "open_in_tab": true
   },
   "background": {
-    "page": "background/index.html",
-    "persistent": false
+    "scripts": ["background/index.js"],
+    "type": "module"
   },
   "declarative_net_request": {
     "rule_resources": [
@@ -116,7 +116,8 @@
         "pages/trackers-preview/index.html",
         "pages/element-picker/index.html",
         "pages/notifications/pause-assistant.html",
-        "pages/notifications/pause-resume.html"
+        "pages/notifications/pause-resume.html",
+        "pages/notifications/whats-new.html"
       ],
       "matches": ["<all_urls>"],
       "all_frames": true,
@@ -131,7 +132,7 @@
   "content_security_policy": "script-src 'self'",
   "browser_specific_settings": {
     "safari": {
-      "strict_min_version": "17.0"
+      "strict_min_version": "18.0"
     }
   }
 }

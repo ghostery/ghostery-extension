@@ -22,6 +22,7 @@ export const ACCOUNT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/account`;
 
 export const WTM_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/whotracksme`;
 export const SUPPORT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/support`;
+export const WHATS_NEW_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/ghostery-extension-v10-5?embed=1`;
 
 export const REVIEW_PAGE_URL = (() => {
   if (__PLATFORM__ === 'safari') return 'https://mygho.st/ReviewSafariPanel';

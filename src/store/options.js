@@ -103,6 +103,9 @@ const Options = {
   sync: true,
   revision: 0,
 
+  // What's new
+  whatsNewVersion: 0,
+
   [store.connect]: {
     async get() {
       let { options = {}, optionsVersion } = await chrome.storage.local.get([
