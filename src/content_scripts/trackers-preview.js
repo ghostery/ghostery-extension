@@ -102,6 +102,8 @@ function setupTrackersPreview(popupUrl) {
 
   if (elements.length) {
     const links = elements.map((el) => {
+      el.dataset.wtm = 1;
+
       if (el.hostname === window.location.hostname) {
         const url = new URL(el.href);
 
@@ -156,14 +158,16 @@ function setupTrackersPreview(popupUrl) {
 
               if (!container) return;
 
+              if (container.classList.contains('b_tpcn')) {
+                container.style.display = 'flex';
+              }
+
               let tempEl = container.firstElementChild;
               if (tempEl && tempEl.textContent.includes(stats.domain)) {
                 container.insertBefore(wheelEl, tempEl.nextElementSibling);
               } else {
                 container.appendChild(wheelEl);
               }
-
-              anchor.dataset.wtm = 1;
             } catch (e) {
               console.warn(
                 'Unexpected error while rendering the Tracker Preview wheel',
