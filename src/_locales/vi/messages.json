@@ -244,6 +244,9 @@
   "disabled": {
     "message": "Đã vô hiệu"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "Khám phá các tính năng mới, cải tiến quan trọng và nâng cấp được thúc đẩy bởi sự đóng góp của cộng đồng - tất cả đều có ở một nơi."
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Hiển thị tất cả các khối nội dung đã được ẩn thủ công trên trang web này. Bạn có thể xóa từng khối riêng lẻ hoặc xóa toàn bộ danh sách."
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Điều hướng đến một trang web để xem Ghostery hoạt động."
   },
+  "need_more_help_": {
+    "message": "Need more help?"
+  },
   "network_filters__@_0_": {
     "message": "Network filters: $${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "Pin mở rộng để dễ dàng truy cập"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "Ghim Ghostery – Giành lại quyền kiểm soát"
   },
   "pin_it_here": {
     "message": "Pin tại đây"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "Tìm trang web..."
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "Xem mọi trình theo dõi mà Ghostery ngăn chặn theo thời gian thực."
+  },
+  "see_what_s_new": {
+    "message": "Xem Có Gì Mới"
   },
   "select_distracting_element": {
     "message": "Chọn yếu tố gây xao lãng"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "Chào mừng bạn đến với Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "Có gì mới trong Ghostery"
   },
   "what_s_next_": {
     "message": "Cái gì mới?"

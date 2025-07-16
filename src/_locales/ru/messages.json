@@ -244,6 +244,9 @@
   "disabled": {
     "message": "Инвалид"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "Откройте для себя новые функции, ключевые улучшения и обновления, созданные благодаря вкладу сообщества, — всё в одном месте."
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Отображает все блоки контента, скрытые вручную на этом сайте. Вы можете удалить их по отдельности или очистить весь список."
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Перейдите на любой сайт, чтобы увидеть, как работает Ghostery."
   },
+  "need_more_help_": {
+    "message": "Нужна дополнительная помощь?"
+  },
   "network_filters__@_0_": {
     "message": "Сетевые фильтры: $${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "Закрепите Ghostery для быстрого доступа"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "Закрепить Ghostery — Возьмите контроль в свои руки"
   },
   "pin_it_here": {
     "message": "Закрепите здесь"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "Поиск сайта..."
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "Увидьте каждый трекер, который Ghostery останавливает в реальном времени."
+  },
+  "see_what_s_new": {
+    "message": "Узнайте, что нового"
   },
   "select_distracting_element": {
     "message": "Выберите отвлекающий элемент"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "Добро пожаловать в Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "Что нового в Ghostery"
   },
   "what_s_next_": {
     "message": "Что дальше?"

@@ -244,6 +244,9 @@
   "disabled": {
     "message": "已停用"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "发现全新的功能、关键的改进和由社区贡献推动的升级——一切尽在此处。"
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "顯示在此網站上手動隱藏的所有內容區塊。您可以單獨移除它們或清除整個列表。"
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "導覽到一個網站，親眼查看 Ghostery 的實際運作。"
   },
+  "need_more_help_": {
+    "message": "需要更多幫助嗎？"
+  },
   "network_filters__@_0_": {
     "message": "網路過濾器：$${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "釘選擴充程式即可方便使用"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "將 Ghostery 釘選 – 重新掌控權限"
   },
   "pin_it_here": {
     "message": "於此處釘選"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "搜尋網站......"
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "查看 Ghostery 即時阻擋的每個追蹤器。"
+  },
+  "see_what_s_new": {
+    "message": "查看新功能"
   },
   "select_distracting_element": {
     "message": "選擇干擾元素"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "歡迎來到 Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "Ghostery 的最新動態"
   },
   "what_s_next_": {
     "message": "下一步是？"
