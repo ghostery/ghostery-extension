@@ -25,7 +25,7 @@ const ENGINES = {
   'dnr-tracking-v2': 'tracking',
   'dnr-annoyances-v2': 'annoyances',
   'dnr-fixes-v2': 'fixes',
-  'trackerdbMv3-v2': 'trackerdb',
+  'trackerdbMv3': 'trackerdb',
   ...REGIONAL_ENGINES,
 };
 
