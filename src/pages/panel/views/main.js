@@ -381,7 +381,7 @@ export default {
                           <ui-text type="label-s">${trackers.length}</ui-text>
                         </div>
 
-                        <section id="content" layout="column gap:0.5">
+                        <section layout="column gap:0.5">
                           ${trackers.map(
                             (tracker) => html`
                               <div

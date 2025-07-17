@@ -16,15 +16,15 @@ import { ENGINE_VERSION } from '@ghostery/adblocker';
 import REGIONS from '../src/utils/regions.js';
 
 const REGIONAL_ENGINES = REGIONS.reduce((acc, region) => {
-  acc[`dnr-lang-${region}`] = `lang-${region}`;
+  acc[`dnr-lang-${region}-v2`] = `lang-${region}`;
   return acc;
 }, {});
 
 const ENGINES = {
-  'dnr-ads': 'ads',
-  'dnr-tracking': 'tracking',
-  'dnr-annoyances': 'annoyances',
-  'dnr-fixes': 'fixes',
+  'dnr-ads-v2': 'ads',
+  'dnr-tracking-v2': 'tracking',
+  'dnr-annoyances-v2': 'annoyances',
+  'dnr-fixes-v2': 'fixes',
   'trackerdbMv3': 'trackerdb',
   ...REGIONAL_ENGINES,
 };
@@ -84,10 +84,10 @@ for (const [name, target] of Object.entries(ENGINES)) {
 }
 
 const DNR = {
-  'dnr-ads': 'ads',
-  'dnr-tracking': 'tracking',
-  'dnr-annoyances': 'annoyances',
-  'dnr-fixes': 'fixes',
+  'dnr-ads-v2': 'ads',
+  'dnr-tracking-v2': 'tracking',
+  'dnr-annoyances-v2': 'annoyances',
+  'dnr-fixes-v2': 'fixes',
   ...REGIONAL_ENGINES,
 };
 

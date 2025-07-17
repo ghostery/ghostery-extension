@@ -68,7 +68,7 @@
   },
   "content_scripts": [
     {
-      "js": ["content_scripts/adblocker.js"],
+      "js": ["content_scripts/adblocker/index.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "all_frames": true
@@ -114,7 +114,9 @@
         "pages/element-picker/index.html",
         "pages/notifications/opera-serp.html",
         "pages/notifications/pause-assistant.html",
-        "pages/notifications/pause-resume.html"
+        "pages/notifications/pause-resume.html",
+        "pages/notifications/pin-it.html",
+        "pages/notifications/whats-new.html"
       ],
       "matches": ["<all_urls>"],
       "use_dynamic_url": true

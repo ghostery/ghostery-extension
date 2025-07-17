@@ -245,8 +245,7 @@ function setupPopup() {
 
     iframe.style.pointerEvents = 'none';
 
-    document.addEventListener('mousemove', moveEventListener),
-      { passive: false };
+    document.addEventListener('mousemove', moveEventListener);
     document.addEventListener('mouseup', endEventListener);
 
     document.addEventListener('touchmove', moveEventListener, {

@@ -16,6 +16,9 @@ if [ "$1" != "build" ]; then
   npm version "${1:-patch}" --no-commit-hooks --no-git-tag-version
 fi
 
+# Update scriptlets
+npm i @ghostery/scriptlets
+
 # Update data dependencies
 node ./scripts/data-dependencies.js
 

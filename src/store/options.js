@@ -86,6 +86,7 @@ const Options = {
     ...(__PLATFORM__ === 'chromium' && isOpera()
       ? { serpShownAt: 0, serpShown: 0 }
       : {}),
+    ...(__PLATFORM__ === 'chromium' ? { pinIt: 0, pinItAt: 0 } : {}),
   },
   installDate: '',
 
@@ -102,6 +103,9 @@ const Options = {
   // Sync
   sync: true,
   revision: 0,
+
+  // What's new
+  whatsNewVersion: 0,
 
   [store.connect]: {
     async get() {
