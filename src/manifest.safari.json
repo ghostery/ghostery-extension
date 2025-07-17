@@ -37,7 +37,8 @@
   },
   "background": {
     "scripts": ["background/index.js"],
-    "type": "module"
+    "type": "module",
+    "persistent": false
   },
   "declarative_net_request": {
     "rule_resources": [
