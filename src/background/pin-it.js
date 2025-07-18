@@ -12,6 +12,8 @@
 import { store } from 'hybrids';
 
 import Options from '/store/options.js';
+import ManagedConfig from '/store/managed-config.js';
+
 import { getBrowser } from '/utils/browser-info.js';
 
 import { openNotification } from './notifications.js';
@@ -29,10 +31,12 @@ if (__PLATFORM__ === 'chromium' && getBrowser() !== 'oculus') {
     }
 
     const { onboarding, terms } = await store.resolve(Options);
+    const managedConfig = await store.resolve(ManagedConfig);
 
     if (
       // Terms not accepted
       !terms ||
+      managedConfig.disableUserControl ||
       // The notification was already shown maximum times
       onboarding.pinIt >= NOTIFICATION_SHOW_LIMIT ||
       // The notification was already shown recently
