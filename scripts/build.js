@@ -421,7 +421,9 @@ const buildPromise = build({
         preserveModules: true,
         preserveModulesRoot: 'src',
         minifyInternalExports: false,
-        entryFileNames: '[name].js',
+        entryFileNames: (chunk) =>
+          `${chunk.name.replace(/\.(png|jpg|jpeg|gif|svg|webp)$/, '')}.js`,
+
         assetFileNames: 'assets/[name]-[hash].[ext]',
         sanitizeFileName: (name) => {
           name = name
