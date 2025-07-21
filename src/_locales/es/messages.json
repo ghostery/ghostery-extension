@@ -244,6 +244,9 @@
   "disabled": {
     "message": "Deshabilitado"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "Descubre nuevas funciones, mejoras clave y actualizaciones impulsadas por las contribuciones de la comunidad, todo en un solo lugar."
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Muestra todos los bloques de contenido ocultos manualmente en este sitio. Puedes eliminarlos individualmente o borrar toda la lista."
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Navega a un sitio web para ver Ghostery en acción."
   },
+  "need_more_help_": {
+    "message": "¿Necesitas más ayuda?"
+  },
   "network_filters__@_0_": {
     "message": "Filtros de red: $${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "Ancla la extensión para acceder a ella fácilmente"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "Fija Ghostery – Recupera el control"
   },
   "pin_it_here": {
     "message": "Ánclala aquí"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "Buscar sitio web..."
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "Ve cada Rastreador que Ghostery detiene en tiempo real."
+  },
+  "see_what_s_new": {
+    "message": "Descubre las novedades"
   },
   "select_distracting_element": {
     "message": "Seleccionar elemento distractor"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "Bienvenido a Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "Novedades en Ghostery"
   },
   "what_s_next_": {
     "message": "¿Qué es lo siguiente?"

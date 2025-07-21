@@ -244,6 +244,9 @@
   "disabled": {
     "message": "Disabled"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "Discover fresh features, key improvements, and upgrades driven by community contributions - all in one place."
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Displays all content blocks manually hidden on this site. You can remove them individually or clear the entire list."
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Navigate to a website to see Ghostery in action."
   },
+  "need_more_help_": {
+    "message": "Need more help?"
+  },
   "network_filters__@_0_": {
     "message": "Network filters: $${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "Pin Extension for easy access"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "Pin Ghostery – Take back control"
   },
   "pin_it_here": {
     "message": "Pin it here"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "Search website..."
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "See every tracker Ghostery stops in real time."
+  },
+  "see_what_s_new": {
+    "message": "See What's New"
   },
   "select_distracting_element": {
     "message": "Select distracting element"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "Welcome to Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "What’s New in Ghostery"
   },
   "what_s_next_": {
     "message": "What’s next?"

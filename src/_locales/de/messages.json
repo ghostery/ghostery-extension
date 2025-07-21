@@ -244,6 +244,9 @@
   "disabled": {
     "message": "Deaktiviert"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "Entdecke neue Funktionen, wichtige Verbesserungen und Upgrades, die durch Beiträge der Community ermöglicht wurden – alles an einem Ort."
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Zeigt alle manuell auf dieser Seite versteckten Inhaltsblöcke an. Du kannst sie einzeln entfernen oder die gesamte Liste löschen."
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "Navigieren Sie zu einer Website, um Ghostery in Aktion zu sehen."
   },
+  "need_more_help_": {
+    "message": "Brauchst du Hilfe?"
+  },
   "network_filters__@_0_": {
     "message": "Netzwerkfilter: $${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "Erweiterung für leichteren Zugriff anheften"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "Ghostery anpinnen – Hol dir die Kontrolle zurück"
   },
   "pin_it_here": {
     "message": "Hier anheften"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "Website durchsuchen ..."
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "Erkenne live, welche Tracker Ghostery stoppt."
+  },
+  "see_what_s_new": {
+    "message": "Neuigkeiten ansehen"
   },
   "select_distracting_element": {
     "message": "Wähle ablenkendes Element aus"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "Willkommen bei Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "Neu bei Ghostery"
   },
   "what_s_next_": {
     "message": "Wie geht es weiter?"

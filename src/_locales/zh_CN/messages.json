@@ -244,6 +244,9 @@
   "disabled": {
     "message": "已禁用"
   },
+  "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
+    "message": "发现由社区贡献推动的新功能、关键改进和升级——一切尽在此处。"
+  },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "显示此网站上手动隐藏的所有内容块。您可以单独删除它们或清除整个列表。"
   },
@@ -547,6 +550,9 @@
   "navigate_to_a_website_to_see_ghostery_in_action_": {
     "message": "导航到一个网站，查看 Ghostery 的运行情况。"
   },
+  "need_more_help_": {
+    "message": "需要更多帮助？"
+  },
   "network_filters__@_0_": {
     "message": "网络过滤器：$${0}"
   },
@@ -613,6 +619,9 @@
   },
   "pin_extension_for_easy_access": {
     "message": "锁定扩展程序以便轻松访问"
+  },
+  "pin_ghostery___take_back_control": {
+    "message": "固定 Ghostery – 夺回控制权"
   },
   "pin_it_here": {
     "message": "在此处锁定"
@@ -688,6 +697,12 @@
   },
   "search_website___": {
     "message": "搜索网站..."
+  },
+  "see_every_tracker_ghostery_stops_in_real_time_": {
+    "message": "查看 Ghostery 实时阻止的每个追踪器。"
+  },
+  "see_what_s_new": {
+    "message": "看看新功能"
   },
   "select_distracting_element": {
     "message": "选择干扰元素"
@@ -913,6 +928,9 @@
   },
   "welcome_to_ghostery": {
     "message": "欢迎使用 Ghostery"
+  },
+  "what_s_new_in_ghostery": {
+    "message": "Ghostery 的新功能有哪些"
   },
   "what_s_next_": {
     "message": "下一步是？"
