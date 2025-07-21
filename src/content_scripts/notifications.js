@@ -119,7 +119,10 @@ function mount(url, position = 'right') {
     if (type === notifications.CLOSE_WINDOW_EVENT) {
       if (e.data.clear) {
         // Send clearIframe message to other pages
-        chrome.runtime.sendMessage({ action: notifications.CLEAR_ACTION, url });
+        chrome.runtime.sendMessage({
+          action: notifications.CLEAR_ACTION,
+          id: new URL(url).pathname.split('/').pop(),
+        });
       }
 
       wrapper.addEventListener('transitionend', () => {
