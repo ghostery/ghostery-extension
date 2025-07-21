@@ -43,7 +43,10 @@ export function setupNotificationPage(width = 440) {
   document.body.style.overflow = 'hidden';
 
   chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.action === CLEAR_ACTION && location.href === msg.url) {
+    if (
+      msg.action === CLEAR_ACTION &&
+      location.pathname.split('/').pop() === msg.id
+    ) {
       window.parent.postMessage({ type: CLOSE_WINDOW_EVENT }, '*');
     }
   });
