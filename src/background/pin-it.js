@@ -19,9 +19,6 @@ import { getBrowser } from '/utils/browser-info.js';
 import { openNotification } from './notifications.js';
 
 if (__PLATFORM__ === 'chromium' && getBrowser() !== 'oculus') {
-  const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-  const NOTIFICATION_SHOW_LIMIT = 4;
-
   chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (
       details.frameId !== 0 ||
@@ -38,10 +35,7 @@ if (__PLATFORM__ === 'chromium' && getBrowser() !== 'oculus') {
       !terms ||
       managedConfig.disableUserControl ||
       // The notification was already shown maximum times
-      onboarding.pinIt >= NOTIFICATION_SHOW_LIMIT ||
-      // The notification was already shown recently
-      (onboarding.pinItAt &&
-        Date.now() - onboarding.pinItAt < NOTIFICATION_DELAY)
+      onboarding.pinIt
     ) {
       return false;
     }

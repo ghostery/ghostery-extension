@@ -39,20 +39,8 @@ switch (getBrowser().name) {
     pathname = `/ghostery-ad-blocker-chrome#how-do-i-pin-the-ghostery-extension-to-the-chrome-toolbar`;
 }
 
-const closeDialog = notifications.setupNotificationPage(390);
-
-async function close() {
-  const options = await store.resolve(Options);
-
-  await store.set(options, {
-    onboarding: {
-      pinIt: options.onboarding.pinIt + 1,
-      pinItAt: Date.now(),
-    },
-  });
-
-  closeDialog();
-}
+const close = notifications.setupNotificationPage(390);
+store.set(Options, { onboarding: { pinIt: true } });
 
 mount(document.body, {
   render: () => html`
