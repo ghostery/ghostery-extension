@@ -220,7 +220,7 @@ An exception is added to the tracker. URLs are not blocked or modified, only obs
 7. Go to Websites to confirm that the list is empty.   
 
 #### Additional points to test in process
-Adding one of the points below creates a separate, full testing scenario.
+> Adding one of the points below creates a separate, full testing scenario.
 
 1. Add more than one website to the test domain list (see step 3b) and confirm correct behavior.
 2. Change step 5 to: Go to the „Websites” tab in „Ghostery settings” and confirm that the website you are testing is there. Clear the list manually. Start the testing process from STEP 1. Confirm that BOB triggers with popup stating that Ghostery is Paused.
@@ -230,6 +230,39 @@ Adding one of the points below creates a separate, full testing scenario.
 BOB is working and pop-ups are triggering. 
 
 ## Additional features
+
+### Pint It popup.
+> Testing (Only Chromium) Trigger the popup.
+
+1. Install and enable the extension, but do not pin it
+2. Open any page
+3. See the "Pin it" notification (shown only once per week for 4 times)
+4. Close the notification
+5. Open any page
+6. The "PIn it" notification should not be shown
+
+### Whats New Page
+> Trigger the page to test the view. 
+
+Full page What's new
+
+1. Install the extension and enable it
+2. Restart the browser
+3. The new tab with the "What's new" article should be visible
+4. Restartthe browser
+5. The browser should have only an empty tab
+
+In-page notification
+
+1. Install the extension and enable it
+2. Ensure the browser has selected the option to keep open tabs when restarting (IMPORTANT)
+3. Leave one or more open tabs, which start with https://...
+4. Restart the browser
+5. In the current tab you should see "What's new" notification
+6. Open article from the notification
+7. Repeat steps 3 to 5
+8. In the current tab should not be a "What's new" notification
+
 
 ### Trackers Preview on SERP
 
