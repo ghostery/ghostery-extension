@@ -34,6 +34,13 @@ chrome.runtime.onStartup.addListener(async () => {
     return;
   }
 
+  // After installing the extension version is 0,
+  // so we need to set it to the current version and return early
+  if (options.whatsNewVersion === 0) {
+    store.set(options, { whatsNewVersion });
+    return;
+  }
+
   const tabs = await chrome.tabs.query({ currentWindow: true });
   const activeTab = tabs.find((tab) => tab.active);
 
