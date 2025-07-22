@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-export function convert(r) {
+export function convertToSafariFormat(r) {
   const rule = structuredClone(r);
   if (rule.action.type === 'modifyHeaders' || rule.action.type === 'redirect') {
     throw new Error(

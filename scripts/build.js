@@ -24,7 +24,7 @@ import { build } from 'vite';
 import webExt from 'web-ext';
 
 import REGIONS from '../src/utils/regions.js';
-import { convert } from '../src/utils/dnr-converter-safari.js';
+import { convertToSafariFormat } from '../src/utils/dnr-converter-safari.js';
 
 const pwd = process.cwd();
 
@@ -32,7 +32,7 @@ const options = {
   srcDir: resolve(pwd, 'src'),
   outDir: resolve(pwd, 'dist'),
   assets: ['_locales', 'icons', 'static_pages'],
-  pages: ['logger', 'onboarding', 'whotracksme'],
+  pages: ['dnr-converter', 'logger', 'onboarding', 'whotracksme'],
 };
 
 // Generate arguments from command line
@@ -246,7 +246,7 @@ if (manifest.declarative_net_request?.rule_resources) {
       const list = JSON.parse(readFileSync(sourcePath, 'utf8'))
         .map((rule) => {
           try {
-            return convert(rule);
+            return convertToSafariFormat(rule);
           } catch {
             // ignore incompatible rules
           }
@@ -320,20 +320,6 @@ if (manifest.action?.default_popup) {
 
 if (manifest.browser_action?.default_popup) {
   source.push(manifest.browser_action.default_popup);
-}
-
-// offscreen documents
-if (
-  manifest.permissions.includes('offscreen') ||
-  manifest.optional_permissions?.includes('offscreen')
-) {
-  readdirSync(join(options.srcDir, 'pages', 'offscreen'), {
-    withFileTypes: true,
-  })
-    .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith('.'))
-    .forEach((dirent) =>
-      source.push(join('pages', 'offscreen', dirent.name, 'index.html')),
-    );
 }
 
 // options page
@@ -432,7 +418,7 @@ const buildPromise = build({
             .replace('_virtual', 'virtual');
 
           const path = name.replace(pwd, '');
-          if (path.length > 100 && !argv['no-filename-limit']) {
+          if (path.length > 110 && !argv['no-filename-limit']) {
             throw new Error(
               `Filename too long: ${path} (${path.length}) (pass --no-filename-limit to disable; for instance, "npm run build firefox -- --no-filename-limit")`,
             );

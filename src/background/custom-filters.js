@@ -17,10 +17,7 @@ import {
   CosmeticFilter,
 } from '@ghostery/adblocker';
 
-import {
-  createDocumentConverter,
-  createOffscreenConverter,
-} from '/utils/dnr-converter.js';
+import convert from '/utils/dnr-converter.js';
 import * as engines from '/utils/engines.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
@@ -28,11 +25,6 @@ import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from './adblocker.js';
-
-const convert =
-  __PLATFORM__ === 'chromium'
-    ? createOffscreenConverter()
-    : createDocumentConverter();
 
 class TrustedScriptletError extends Error {}
 
@@ -182,34 +174,15 @@ export async function updateCustomFilters(input, options) {
 
   // Update DNR rules for Chromium and Safari
   if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
-    const dnrResult = await Promise.allSettled(
-      [...networkFilters].map((filter) => convert(filter)),
+    const { rules, errors } = await convert(
+      [...networkFilters].map((f) => f.toString()),
     );
 
-    const dnrRules = [];
-    for (const result of dnrResult) {
-      if (result.value.errors?.length) {
-        errors.push(...result.value.errors);
-      }
-
-      for (const rule of result.value.rules) {
-        if (rule.condition.regexFilter) {
-          const { isSupported, reason } =
-            await chrome.declarativeNetRequest.isRegexSupported({
-              regex: rule.condition.regexFilter,
-            });
-          if (!isSupported) {
-            errors.push(
-              `Could not apply a custom filter as "${rule.condition.regexFilter}" is a not supported regexp due to: ${reason}`,
-            );
-            continue;
-          }
-        }
-        dnrRules.push(rule);
-      }
+    if (errors?.length) {
+      result.errors.push(...errors);
     }
 
-    result.dnrRules = await updateDNRRules(dnrRules);
+    result.dnrRules = await updateDNRRules(rules);
   }
 
   return result;
