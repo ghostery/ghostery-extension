@@ -28,7 +28,7 @@ store.set(Options, {
 mount(document.body, {
   render: () => html`
     <template layout="block overflow">
-      <ui-notification-dialog>
+      <ui-notification-dialog onclose="${close}">
         <span slot="title">What’s New in Ghostery</span>
         <img
           src="${whatsNewImage}"
