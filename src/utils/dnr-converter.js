@@ -14,30 +14,36 @@ import { convertToSafariFormat } from '/utils/dnr-converter-safari.js';
 const DOCUMENT_PATH = 'pages/dnr-converter/index.html';
 
 export default async function convert(filters) {
+  let result;
+
   try {
     if (__PLATFORM__ === 'chromium') {
       await setupOffscreenDocument();
+
+      result = await chrome.runtime.sendMessage({
+        action: 'dnr-converter:convert',
+        filters,
+      });
+
+      closeOffscreenDocument();
+    } else if (__PLATFORM__ === 'safari') {
+      const { convertWithAdguard } = await import('@ghostery/urlfilter2dnr');
+      result = await convertWithAdguard(filters);
+
+      result.rules = result.rules.reduce((acc, r) => {
+        try {
+          acc.push(convertToSafariFormat(r));
+        } catch (e) {
+          result.errors.push(e);
+        }
+        return acc;
+      }, []);
+      result.errors = result.errors.map((e) => `DNR: ${e.message}`);
     } else {
-      await setupIframeDocument();
+      throw new Error('Unsupported platform for DNR conversion');
     }
   } catch (e) {
     return { errors: [e.message], rules: [] };
-  }
-
-  const result = await chrome.runtime.sendMessage({
-    action: 'dnr-converter:convert',
-    filters,
-  });
-
-  if (__PLATFORM__ === 'safari') {
-    result.rules = result.rules.reduce((acc, r) => {
-      try {
-        acc.push(convertToSafariFormat(r));
-      } catch (e) {
-        result.errors.push(e);
-      }
-      return acc;
-    }, []);
   }
 
   for (const [index, rule] of result.rules.entries()) {
@@ -55,8 +61,6 @@ export default async function convert(filters) {
       }
     }
   }
-
-  if (__PLATFORM__ === 'chromium') closeOffscreenDocument();
 
   return result || { errors: ['Failed to initiate converter'], rules: [] };
 }
@@ -89,20 +93,4 @@ async function setupOffscreenDocument() {
       justification: 'Convert network filters to DeclarativeNetRequest format.',
     });
   }
-}
-
-let iframeReady = false;
-function setupIframeDocument() {
-  if (iframeReady) return;
-
-  const iframe = document.createElement('iframe');
-  iframe.src = chrome.runtime.getURL(DOCUMENT_PATH);
-  document.body.appendChild(iframe);
-
-  return new Promise((resolve) => {
-    iframe.onload = () => {
-      iframeReady = true;
-      resolve();
-    };
-  });
 }
