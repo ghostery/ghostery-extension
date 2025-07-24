@@ -17,10 +17,7 @@ import { convertWithAdguard } from '@ghostery/urlfilter2dnr';
 
 export async function convert(filters) {
   try {
-    const result = await convertWithAdguard(filters);
-    result.errors.map((e) => `DNR: ${e.message}`);
-
-    return result;
+    return await convertWithAdguard(filters);
   } catch (err) {
     console.error('Error converting filters:', err);
     return {
@@ -32,7 +29,11 @@ export async function convert(filters) {
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'dnr-converter:convert') {
-    convert(msg.filters).then((result) => sendResponse(result));
+    convert(msg.filters).then(
+      (result) => sendResponse(result),
+      (err) => sendResponse({ rules: [], errors: [err.message] }),
+    );
+
     return true;
   }
   return false;

@@ -24,8 +24,6 @@ export default async function convert(filters) {
         action: 'dnr-converter:convert',
         filters,
       });
-
-      closeOffscreenDocument();
     } else if (__PLATFORM__ === 'safari') {
       const { convertWithAdguard } = await import('@ghostery/urlfilter2dnr');
       result = await convertWithAdguard(filters);
@@ -44,6 +42,8 @@ export default async function convert(filters) {
     }
   } catch (e) {
     return { errors: [e.message], rules: [] };
+  } finally {
+    if (__PLATFORM__ === 'chromium') closeOffscreenDocument();
   }
 
   for (const [index, rule] of result.rules.entries()) {
@@ -62,7 +62,7 @@ export default async function convert(filters) {
     }
   }
 
-  return result || { errors: ['Failed to initiate converter'], rules: [] };
+  return result;
 }
 
 let offscreenTimeout = null;
