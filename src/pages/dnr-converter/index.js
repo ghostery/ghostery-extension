@@ -13,7 +13,7 @@
 // The check is redone in the background script
 import './monkey-patch.js';
 
-import { convertWithAdguard } from '@ghostery/urlfilter2dnr';
+import convertWithAdguard from '@ghostery/urlfilter2dnr/adguard';
 
 export async function convert(filters) {
   try {
