@@ -41,17 +41,20 @@ struct SafariView: UIViewControllerRepresentable {
 @main
 struct GhosteryApp: App {
 
+    @State private var theme = Theme.light
     @State private var showSheet = false
     @State private var url = URL(string: "")
 
     var body: some Scene {
-        WindowGroup {
-            ContentView(openInWebView: openInWebView)
-                    .preferredColorScheme(.dark)
-                    .sheet(isPresented: $showSheet) {
-                            SafariView(url: $url)
-                    }
+      WindowGroup {
+        ZStack(alignment: .center) {
+          IntroView(openInWebView: openInWebView)
         }
+        .preferredColorScheme(theme == .light ? .light : .dark)
+        .sheet(isPresented: $showSheet) {
+          SafariView(url: $url)
+        }
+      }
     }
 
     func openInWebView(url: URL) {

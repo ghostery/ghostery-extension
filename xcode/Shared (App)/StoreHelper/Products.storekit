@@ -1,13 +1,116 @@
 {
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
   "identifier" : "FB75CE85",
   "nonRenewingSubscriptions" : [
 
   ],
   "products" : [
-
+    {
+      "displayPrice" : "15",
+      "familyShareable" : false,
+      "internalID" : "1073B0FE",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.ghostery.subscription.plus.onetime.large",
+      "referenceName" : "One Time Large",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "10",
+      "familyShareable" : false,
+      "internalID" : "97721157",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.ghostery.subscription.plus.onetime.medium",
+      "referenceName" : "One Time Medium",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "5",
+      "familyShareable" : false,
+      "internalID" : "D0ACF779",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.ghostery.subscription.plus.onetime.small",
+      "referenceName" : "One Time Small",
+      "type" : "Consumable"
+    }
   ],
   "settings" : {
-
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
   },
   "subscriptionGroups" : [
     {
@@ -24,23 +127,26 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "47.99",
+          "displayPrice" : "1.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "7DEC3339",
+          "internalID" : "E54BAB33",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "$3.99/month - Cancel anytime",
-              "displayName" : "Yearly donation",
+              "description" : "",
+              "displayName" : "",
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.ghostery.subscription.plus.yearly",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : null,
+          "productID" : "com.ghostery.subscription.plus.month.small",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly Small",
           "subscriptionGroupID" : "FB0ADD53",
-          "type" : "RecurringSubscription"
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         },
         {
           "adHocOffers" : [
@@ -52,26 +158,141 @@
           "displayPrice" : "4.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "4D43C581",
+          "internalID" : "A4E79A2E",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "$4.99/month",
-              "displayName" : "Monthly donation",
+              "description" : "",
+              "displayName" : "",
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.ghostery.subscription.plus.monthly",
+          "productID" : "com.ghostery.subscription.plus.month.medium",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : null,
+          "referenceName" : "Monthly Medium",
           "subscriptionGroupID" : "FB0ADD53",
-          "type" : "RecurringSubscription"
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "11.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "70EB12E7",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.ghostery.subscription.plus.month.large",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly Large",
+          "subscriptionGroupID" : "FB0ADD53",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "23.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EB0D3E5D",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.ghostery.subscription.plus.year.small",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Yearly Small",
+          "subscriptionGroupID" : "FB0ADD53",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "59.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "B0E65A7C",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.ghostery.subscription.plus.year.medium",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Yearly Medium",
+          "subscriptionGroupID" : "FB0ADD53",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "143.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "5A175464",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.ghostery.subscription.plus.year.large",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Yearly Large",
+          "subscriptionGroupID" : "FB0ADD53",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         }
       ]
     }
   ],
   "version" : {
-    "major" : 2,
+    "major" : 4,
     "minor" : 0
   }
 }
