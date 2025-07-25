@@ -17,8 +17,6 @@ export const ACTION_DISABLE_ANTITRACKING_MODIFICATION =
 export const ACTION_PAUSE_ASSISTANT = 'pause-assistant';
 
 export const FLAG_PAUSE_ASSISTANT = 'pause-assistant';
-export const FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS =
-  'firefox-content-script-scriptlets';
 export const FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED =
   'chromium-inject-cosmetics-on-response-started';
 export const FLAG_EXTENDED_SELECTORS = 'extended-selectors';
