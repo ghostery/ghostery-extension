@@ -397,6 +397,9 @@ const buildPromise = build({
     target: 'esnext',
     rollupOptions: {
       input: mapPaths(source),
+      // Prevent from loading re2-wasm dependency of the @ghostery/urlfilter2dnr package
+      // as it is used only in node environment
+      external: ['@adguard/re2-wasm'],
       preserveEntrySignatures: 'exports-only',
       output: {
         banner:
