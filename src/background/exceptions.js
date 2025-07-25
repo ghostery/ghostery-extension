@@ -13,13 +13,10 @@ import { store } from 'hybrids';
 import { parseFilter } from '@ghostery/adblocker';
 
 import Options from '/store/options.js';
+
 import * as OptionsObserver from '/utils/options-observer.js';
 import * as trackerdb from '/utils/trackerdb.js';
-
-import {
-  createDocumentConverter,
-  createOffscreenConverter,
-} from '../utils/dnr-converter.js';
+import convert from '/utils/dnr-converter.js';
 
 // Migrate exceptions from old format
 // TODO: Remove this in the next version
@@ -50,11 +47,6 @@ try {
   );
 }
 
-const convert =
-  __PLATFORM__ === 'chromium'
-    ? createOffscreenConverter()
-    : createDocumentConverter();
-
 async function updateFilters() {
   const options = await store.resolve(Options);
   const rules = [];
@@ -73,44 +65,27 @@ async function updateFilters() {
       // Negate the filters to make them allow rules
       .map((filter) => `@@${filter.toString()}`);
 
-    for (const filter of filters) {
-      try {
-        const result = (await convert(filter.toString())).rules;
+    if (!filters.length) continue;
 
-        for (const rule of result) {
-          if (rule.condition.regexFilter) {
-            const { isSupported, reason } =
-              await chrome.declarativeNetRequest.isRegexSupported({
-                regex: rule.condition.regexFilter,
-              });
-            if (!isSupported) {
-              console.error(
-                `Could not add an exception for "${tracker.name}" as filter "${filter.toString()}" is a not supported regexp due to: ${reason}`,
-              );
-              continue;
-            }
-          }
+    const result = await convert(filters);
 
-          if (domains && domains.length) {
-            if (__PLATFORM__ === 'safari') {
-              rule.condition.domains = domains
-                .map((d) => `*${d}`)
-                .concat(rule.condition.domains || []);
-            } else {
-              rule.condition.initiatorDomains = domains.concat(
-                rule.condition.initiatorDomains || [],
-              );
-            }
-          }
-
-          rules.push({
-            ...rule,
-            priority: 2000000 + rule.priority,
-          });
+    for (const rule of result.rules) {
+      if (domains && domains.length) {
+        if (__PLATFORM__ === 'safari') {
+          rule.condition.domains = domains
+            .map((d) => `*${d}`)
+            .concat(rule.condition.domains || []);
+        } else {
+          rule.condition.initiatorDomains = domains.concat(
+            rule.condition.initiatorDomains || [],
+          );
         }
-      } catch (e) {
-        console.error('[exceptions] Error while converting filter:', e);
       }
+
+      rules.push({
+        ...rule,
+        priority: 2000000 + rule.priority,
+      });
     }
   }
 

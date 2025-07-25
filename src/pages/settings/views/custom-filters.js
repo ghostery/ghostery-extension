@@ -172,7 +172,10 @@ export default {
                 `}
                 ${!!result?.errors.length &&
                 html`
-                  <div layout="column gap:0.5">
+                  <div
+                    layout="column gap:0.5"
+                    data-qa="component:custom-filters:errors"
+                  >
                     <ui-text type="label-s" color="secondary">
                       Errors (${result.errors.length})
                     </ui-text>

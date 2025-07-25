@@ -18,7 +18,7 @@ import {
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 
-async function setCustomFilters(filters) {
+async function setCustomFilters(filters, callback) {
   await setPrivacyToggle('custom-filters', true);
   await getExtensionElement('button:custom-filters').click();
 
@@ -40,6 +40,10 @@ async function setCustomFilters(filters) {
     getExtensionElement('component:custom-filters:result'),
   ).toBeDisplayed();
 
+  if (callback) {
+    await callback();
+  }
+
   await getExtensionElement('button:back').click();
 }
 
@@ -47,15 +51,9 @@ describe('Advanced Features', function () {
   before(enableExtension);
 
   describe('Custom Filters', function () {
-    it('adds custom filters in settings page', async function () {
-      await setCustomFilters([
-        `@@connect.facebook.net^`,
-        `${PAGE_DOMAIN}###custom-filter`,
-        `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
-      ]);
-    });
-
     it('adds custom network filter', async function () {
+      await setCustomFilters([`@@connect.facebook.net^`]);
+
       await browser.url(PAGE_URL);
 
       await switchToPanel(async () => {
@@ -70,12 +68,45 @@ describe('Advanced Features', function () {
       });
     });
 
+    it('adds supported custom regex filter', async function () {
+      await setCustomFilters([`/.*example.com/`]);
+
+      await browser.url(PAGE_URL);
+
+      await switchToPanel(async () => {
+        await getExtensionElement('button:detailed-view').click();
+
+        await expect(
+          getExtensionElement(`icon:tracker:www.example.com:blocked`),
+        ).toBeDisplayed();
+      });
+    });
+
+    if (browser.isChromium) {
+      it('adds unsupported custom regex filter', async function () {
+        await setCustomFilters([`/(?>ab)c/`], async () => {
+          const errors = await getExtensionElement(
+            'component:custom-filters:errors',
+          );
+
+          const text = await errors.getText();
+          await expect(text).toContain('Could not apply a custom filter');
+        });
+      });
+    }
+
     it('adds custom cosmetic filter', async function () {
+      await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
+
       await browser.url(PAGE_URL);
       await expect($('#custom-filter')).not.toBeDisplayed();
     });
 
     it('adds custom scriptlet filter', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
+      ]);
+
       await browser.url(PAGE_URL);
       await expect($('h1')).toHaveText('Hello world');
     });
