@@ -69,6 +69,7 @@ const Options = {
   experimentalFilters: false,
 
   filtersUpdatedAt: 0,
+  filtersAutoUpdate: true,
 
   // Browser toolbar icon
   trackerWheel: false,

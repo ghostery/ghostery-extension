@@ -16,7 +16,7 @@ export default {
   render: ({ href }) => html`
     <template layout="block">
       <ui-action>
-        <a href="${href}" layout="row items:center padding:0.5">
+        <a href="${href}" layout="row items:center">
           <slot></slot>
         </a>
       </ui-action>
