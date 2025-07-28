@@ -224,9 +224,11 @@ export const setup = asyncSetup('adblocker', [
         await reloadMainEngine();
       }
 
-      // Update engines if filters are outdated (older than 1 hour)
-      // and reload the engine if the update happened to at least one of them
-      if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
+      if (
+        options.filtersUpdatedAt === 0 ||
+        (options.filtersAutoUpdate &&
+          options.filtersUpdatedAt < Date.now() - HOUR_IN_MS)
+      ) {
         await updateEngines();
       }
     },
