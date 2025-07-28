@@ -10,9 +10,6 @@ updates:
     schedule:
       interval: 'daily'
       time: '07:00'
-    reviewers:
-      - 'smalluban'
-      - 'chrmod'
     open-pull-requests-limit: 99
     groups:
       adblocker:
@@ -29,8 +26,6 @@ updates:
     schedule:
       interval: 'weekly'
       time: '07:00'
-    reviewers:
-      - 'smalluban'
     groups:
       eslint:
         patterns:
