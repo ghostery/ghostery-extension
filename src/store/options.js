@@ -88,7 +88,6 @@ const Options = {
       : {}),
     ...(__PLATFORM__ === 'chromium' ? { pinIt: false } : {}),
   },
-  installDate: '',
 
   // UI
   panel: { statsType: 'graph', notifications: true },
