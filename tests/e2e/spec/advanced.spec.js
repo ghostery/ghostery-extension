@@ -112,8 +112,10 @@ describe('Advanced Features', function () {
     });
 
     it('disables custom filters', async function () {
-      // Switching off custom filters requires rebuilding main engine
-      // and it slows down the update of the DNR rules (it goes after the main engine)
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
+      ]);
+
       await setPrivacyToggle('custom-filters', false);
 
       await browser.url(PAGE_URL);
