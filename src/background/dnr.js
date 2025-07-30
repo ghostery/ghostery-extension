@@ -21,15 +21,29 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)
     .map(({ id }) => id);
 
+  function getIds(options) {
+    if (!options.terms || getPausedDetails(options)) return [];
+
+    return ENGINES.reduce((acc, { name, key }) => {
+      if (options[key] && DNR_RESOURCES.includes(name)) acc.push(name);
+      return acc;
+    }, []);
+  }
+
   // Ensure that DNR rulesets are equal to those from options.
   // eg. when web extension updates, the rulesets are reset
   // to the value from the manifest.
   OptionsObserver.addListener(async function dnr(options, lastOptions) {
-    const globalPause = getPausedDetails(options);
+    const ids = getIds(options);
 
-    const ids = ENGINES.map(({ name, key }) => {
-      return !globalPause && options.terms && options[key] ? name : '';
-    }).filter((id) => id && DNR_RESOURCES.includes(id));
+    if (
+      lastOptions &&
+      lastOptions.filtersUpdatedAt === options.filtersUpdatedAt &&
+      String(ids) === String(getIds(lastOptions))
+    ) {
+      // No changes in options triggering an update , skip updating rules
+      return;
+    }
 
     const enabledRulesetIds =
       (await chrome.declarativeNetRequest.getEnabledRulesets()) || [];
@@ -62,9 +76,23 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
           let addRules = await fetch(
             `${ENGINE_CONFIGS_ROOT_URL}/dnr-fixes-v2/allowed-lists.json`,
           )
-            .then((res) => res.json())
+            .then((res) =>
+              res.ok
+                ? res.json()
+                : Promise.reject(
+                    new Error(
+                      `Failed to fetch allowed lists: ${res.statusText}`,
+                    ),
+                  ),
+            )
             .then((list) => fetch(list.dnr.url))
-            .then((res) => res.json());
+            .then((res) =>
+              res.ok
+                ? res.json()
+                : Promise.reject(
+                    new Error(`Failed to fetch DNR rules: ${res.statusText}`),
+                  ),
+            );
 
           if (__PLATFORM__ === 'safari') {
             addRules = addRules.reduce((acc, rule) => {
@@ -126,7 +154,10 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
           enableRulesetIds,
           disableRulesetIds,
         });
-        console.info('[dnr] Updated static rulesets:', ids.join(', '));
+        console.info(
+          '[dnr] Updated static rulesets:',
+          ids.length ? ids.join(', ') : 'none',
+        );
       } catch (e) {
         console.error(`[dnr] Error while updating static rulesets:`, e);
       }
