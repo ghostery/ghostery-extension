@@ -15,9 +15,14 @@ import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import ManagedConfig from '/store/managed-config';
 
+import {
+  getDynamicRulesIds,
+  PAUSED_ID_RANGE,
+  PAUSED_RULE_PRIORITY,
+} from '/utils/dnr.js';
+
 // Pause / unpause hostnames
 const PAUSED_ALARM_PREFIX = 'options:revoke';
-const PAUSED_RULE_PRIORITY = 10000000;
 
 const ALL_RESOURCE_TYPES = [
   'main_frame',
@@ -75,10 +80,7 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
       (__PLATFORM__ === 'chromium' &&
         (await store.resolve(ManagedConfig)).disableUserControl))
   ) {
-    const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
-      .filter(({ id }) => id <= 3)
-      .map(({ id }) => id);
-
+    const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
     const hostnames = Object.keys(paused);
 
     let globalPause = false;
