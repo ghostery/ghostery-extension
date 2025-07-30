@@ -136,7 +136,7 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
               ],
         removeRuleIds,
       });
-      console.log('[dnr] Pause rules updated');
+      console.log('[dnr] Pause rules updated:', hostnames.join(', '));
     } else if (removeRuleIds.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds,
