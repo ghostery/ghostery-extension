@@ -35,3 +35,5 @@ export const REVIEW_PAGE_URL = (() => {
   // Chrome
   return 'https://mygho.st/ReviewChromePanel';
 })();
+
+export const ENGINE_CONFIGS_ROOT_URL = `https://${debugMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;

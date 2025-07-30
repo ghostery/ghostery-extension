@@ -25,6 +25,7 @@ import Options from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from './adblocker.js';
+import { CUSTOM_FILTERS_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 
 class TrustedScriptletError extends Error {}
 
@@ -104,15 +105,10 @@ function normalizeFilters(text = '', { trustedScriptlets }) {
 }
 
 async function updateDNRRules(dnrRules) {
-  const dynamicRules = (await chrome.declarativeNetRequest.getDynamicRules())
-    .filter(({ id }) => id >= 1000000 && id < 2000000)
-    .map(({ id }) => id);
+  const removeRuleIds = await getDynamicRulesIds(CUSTOM_FILTERS_ID_RANGE);
 
-  if (dynamicRules.length) {
-    await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: dynamicRules,
-      // ids between 1 and 2 million are reserved for dynamic rules
-    });
+  if (removeRuleIds.length) {
+    await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds });
   }
 
   if (dnrRules.length) {
