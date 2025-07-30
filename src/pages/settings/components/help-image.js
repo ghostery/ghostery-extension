@@ -12,28 +12,13 @@
 import { html } from 'hybrids';
 
 export default {
-  static: false,
-  render: (host) =>
+  render: () =>
     html`
       <template
-        layout="row center relative overflow size:10:7 shrink:0"
-        layout@768px="size:12:8"
+        layout="column overflow size:96px:64px shrink:0"
+        layout@768px="size:120px:80px"
       >
-        ${host.static
-          ? html`<slot></slot>`
-          : html`
-              <div
-                id="icon"
-                layout="absolute top:2px right:2px row center size:3"
-              >
-                <ui-icon
-                  name="zoom-in"
-                  color="primary"
-                  layout="size:2"
-                ></ui-icon>
-              </div>
-              <ui-action><slot></slot></ui-action>
-            `}
+        <slot></slot>
       </template>
     `.css`
       :host {

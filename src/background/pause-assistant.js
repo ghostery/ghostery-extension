@@ -22,6 +22,7 @@ import { openNotification } from './notifications.js';
 
 store.observe(Config, async (_, config) => {
   if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
+  if (!(await store.resolve(Options)).pauseAssistant) return;
 
   const paused = Object.entries(config.domains).reduce(
     (acc, [domain, { actions, dismiss }]) => {
@@ -44,6 +45,8 @@ store.observe(Config, async (_, config) => {
 
 chrome.webNavigation.onCompleted.addListener(async (details) => {
   if (details.frameId === 0) {
+    if (!(await store.resolve(Options)).pauseAssistant) return;
+
     const config = await store.resolve(Config);
     if (!config.hasFlag(FLAG_PAUSE_ASSISTANT)) return;
 
