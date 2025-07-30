@@ -43,7 +43,7 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
       );
     }
 
-    // Add fixes rules
+    // Add latest fixes rules
     if (ids.length) {
       const fixesRulesIds = await getDynamicRulesIds(FIXES_ID_RANGE);
 
