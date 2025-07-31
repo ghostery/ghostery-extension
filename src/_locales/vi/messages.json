@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "browser: vendor, version, language, operating system vendor"
   },
+  "browsing_assistant": {
+    "message": "Trợ lý Duyệt web"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Bằng cách chia sẻ thông tin chi tiết về <a href=\"$${0}\">tình trạng của tiện ích bổ sung</a> và <a href=\"$${1}\">hiệu suất đo lường</a> như được nêu trong <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Chính sách Bảo mật</a> của chúng tôi, bạn giúp nâng cao bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
   },
@@ -234,6 +237,9 @@
   },
   "detailed_view": {
     "message": "Xem chi tiết"
+  },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "Phát hiện và ngăn chặn sự cố của trình chặn quảng cáo bằng cách tự động tạm dừng trên các trang bị ảnh hưởng."
   },
   "disable": {
     "message": "Vô hiệu hóa"
@@ -835,9 +841,6 @@
   },
   "trackers_preview": {
     "message": "Xem trước theo dõi"
-  },
-  "trackers_wheel": {
-    "message": "Bánh xe theo dõi"
   },
   "trends": {
     "message": "Xu hướng"

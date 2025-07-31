@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "browser: fornitore, versione, lingua, fornitore del sistema operativo"
   },
+  "browsing_assistant": {
+    "message": "Assistente di Navigazione"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Condividendo informazioni sulla <a href=\"$${0}\">salute dell'add-on</a> e sulla <a href=\"$${1}\">telemetria delle prestazioni</a> come descritto nella nostra <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Informativa sulla privacy</a>, aiuti a migliorare le protezioni della privacy per l'intera comunità Ghostery."
   },
@@ -234,6 +237,9 @@
   },
   "detailed_view": {
     "message": "Vista Dettagliata"
+  },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "Rileva e previene il malfunzionamento dei blocchi pubblicitari sospendendosi automaticamente sulle pagine interessate."
   },
   "disable": {
     "message": "Disattiva"
@@ -835,9 +841,6 @@
   },
   "trackers_preview": {
     "message": "Anteprima Tracker"
-  },
-  "trackers_wheel": {
-    "message": "Ruota tracker"
   },
   "trends": {
     "message": "Tendenze"
