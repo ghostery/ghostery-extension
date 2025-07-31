@@ -20,16 +20,14 @@ import Privacy from './views/privacy.js';
 import Websites from './views/websites.js';
 import Whotracksme from './views/whotracksme.js';
 import MyGhostery from './views/my-ghostery.js';
-import Preview from './views/preview.js';
 import Trackers from './views/trackers.js';
 
 import assets from './assets/index.js';
 
 export default {
-  stack: router(
-    [Privacy, Websites, Whotracksme, MyGhostery, Preview, Trackers],
-    { transition: true },
-  ),
+  stack: router([Privacy, Websites, Whotracksme, MyGhostery, Trackers], {
+    transition: true,
+  }),
   session: store(Session),
   render: ({ stack, session }) =>
     html`
@@ -113,7 +111,7 @@ export default {
               ${session.contributor
                 ? html`
                     <img
-                      src="${assets['contributor_badge']}"
+                      src="${assets.contributor_badge}"
                       layout="size:12"
                       alt="Contribution"
                       slot="picture"
@@ -134,7 +132,7 @@ export default {
                   `
                 : html`
                     <img
-                      src="${assets['hands']}"
+                      src="${assets.hands}"
                       layout="size:12"
                       alt="Contribution"
                       slot="picture"

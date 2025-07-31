@@ -9,32 +9,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, msg, store, router } from 'hybrids';
+import { html, store } from 'hybrids';
 
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
 import assets from '../assets/index.js';
-
-import Preview from './preview.js';
-
-const PREVIEWS = {
-  'wtm_wheel': {
-    src: assets['wtm_wheel'],
-    title: msg`Trackers Wheel`,
-    description: msg`Replaces the Ghostery icon in the browser toolbar with the tracker wheel.`,
-  },
-  'trackers_count': {
-    src: assets['trackers_count'],
-    title: msg`Trackers Count`,
-    description: msg`Displays the tracker count on the Ghostery icon in the browser toolbar.`,
-  },
-  'trackers_preview': {
-    src: assets['trackers_preview'],
-    title: msg`Trackers Preview`,
-    description: msg`Shows the tracker preview beside search results.`,
-  },
-};
 
 export default {
   options: store(Options),
@@ -63,19 +43,50 @@ export default {
         html`
           <section layout="column gap:4">
             <ui-toggle
+              value="${options.pauseAssistant}"
+              onchange="${html.set(options, 'pauseAssistant')}"
+              data-qa="toggle:pauseAssistant"
+            >
+              <div layout="row items:start gap:2 grow" layout@768px="gap:3">
+                <settings-help-image>
+                  <img
+                    src="${assets.pause_assistant}"
+                    alt="Browsing Assistant"
+                  />
+                </settings-help-image>
+                <settings-option>
+                  Browsing Assistant
+                  <span slot="description">
+                    Detects and prevents ad blocker breakage by automatically
+                    pausing on affected pages.
+                  </span>
+                  <ui-text
+                    type="label-s"
+                    color="secondary"
+                    underline
+                    slot="footer"
+                    layout="self:start"
+                  >
+                    <a
+                      href="https://www.ghostery.com/blog/browsing-assistant-user-agent"
+                      target="_blank"
+                      layout="row gap:0.5"
+                    >
+                      Learn more <ui-icon name="arrow-right-s"></ui-icon>
+                    </a>
+                  </ui-text>
+                </settings-option>
+              </div>
+            </ui-toggle>
+            <ui-toggle
               value="${options.trackerWheel}"
               onchange="${html.set(options, 'trackerWheel')}"
               data-qa="toggle:trackerWheel"
             >
               <div layout="row items:start gap:2 grow" layout@768px="gap:3">
-                <a href="${router.url(Preview, PREVIEWS['wtm_wheel'])}">
-                  <settings-help-image>
-                    <img
-                      src="${assets.wtm_wheel_small}"
-                      alt="WhoTracks.Me Wheel"
-                    />
-                  </settings-help-image>
-                </a>
+                <settings-help-image>
+                  <img src="${assets.wtm_wheel}" alt="WhoTracks.Me Wheel" />
+                </settings-help-image>
                 <settings-option>
                   WhoTracks.Me Wheel
                   <span slot="description">
@@ -93,14 +104,9 @@ export default {
                 data-qa="toggle:trackerCount"
               >
                 <div layout="row items:start gap:2 grow" layout@768px="gap:3">
-                  <a href="${router.url(Preview, PREVIEWS['trackers_count'])}">
-                    <settings-help-image>
-                      <img
-                        src="${assets.trackers_count_small}"
-                        alt="Trackers Count"
-                      />
-                    </settings-help-image>
-                  </a>
+                  <settings-help-image>
+                    <img src="${assets.trackers_count}" alt="Trackers Count" />
+                  </settings-help-image>
                   <settings-option>
                     Trackers Count
                     <span slot="description">
@@ -118,14 +124,12 @@ export default {
               disabled="${managedConfig.disableTrackersPreview}"
             >
               <div layout="row items:start gap:2 grow" layout@768px="gap:3">
-                <a href="${router.url(Preview, PREVIEWS['trackers_preview'])}">
-                  <settings-help-image>
-                    <img
-                      src="${assets.trackers_preview_small}"
-                      alt="Trackers Preview"
-                    />
-                  </settings-help-image>
-                </a>
+                <settings-help-image>
+                  <img
+                    src="${assets.trackers_preview}"
+                    alt="Trackers Preview"
+                  />
+                </settings-help-image>
                 <settings-option>
                   Trackers Preview
                   <span slot="description">
@@ -157,10 +161,7 @@ export default {
               >
                 <div layout="row items:start gap:2 grow" layout@768px="gap:3">
                   <settings-help-image static>
-                    <img
-                      src="${assets.feedback_small}"
-                      alt="Feedback Sharing"
-                    />
+                    <img src="${assets.feedback}" alt="Feedback Sharing" />
                   </settings-help-image>
                   <settings-option>
                     Feedback Sharing
@@ -186,7 +187,7 @@ export default {
                 >
                   <settings-help-image static>
                     <img
-                      src="${assets.wtm_privacy_report_small}"
+                      src="${assets.wtm_privacy_report}"
                       alt="WTM Privacy Report"
                     />
                   </settings-help-image>
