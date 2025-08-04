@@ -112,16 +112,11 @@ describe('Advanced Features', function () {
     });
 
     it('disables custom filters', async function () {
-      await setCustomFilters([
-        `${PAGE_DOMAIN}##+js(rpnt, h1, Test Page, "Hello world")`,
-      ]);
-
+      await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
       await setPrivacyToggle('custom-filters', false);
 
       await browser.url(PAGE_URL);
-
       await expect($('#custom-filter')).toBeDisplayed();
-      await expect($('h1')).toHaveText('Test Page');
 
       await switchToPanel(async () => {
         await getExtensionElement('button:detailed-view').click();
