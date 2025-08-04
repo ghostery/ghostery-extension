@@ -4,8 +4,15 @@
 <dict>
 	<key>Products</key>
 	<array>
-		<string>com.ghostery.subscription.plus.monthly</string>
-		<string>com.ghostery.subscription.plus.yearly</string>
+		<string>com.ghostery.subscription.plus.onetime.small</string>
+		<string>com.ghostery.subscription.plus.onetime.medium</string>
+		<string>com.ghostery.subscription.plus.onetime.large</string>
+		<string>com.ghostery.subscription.plus.month.small</string>
+		<string>com.ghostery.subscription.plus.month.medium</string>
+		<string>com.ghostery.subscription.plus.month.large</string>
+		<string>com.ghostery.subscription.plus.year.small</string>
+		<string>com.ghostery.subscription.plus.year.medium</string>
+		<string>com.ghostery.subscription.plus.year.large</string>
 	</array>
 </dict>
 </plist>
