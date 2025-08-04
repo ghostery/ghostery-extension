@@ -50,7 +50,7 @@
     "@ghostery/scriptlets": "github:ghostery/scriptlets",
     "@ghostery/urlfilter2dnr": "^1.6.3",
     "@github/relative-time-element": "^4.4.8",
-    "@sentry/browser": "^9.42.1",
+    "@sentry/browser": "^10.1.0",
     "@whotracksme/reporting": "^7.5.0",
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.11.0",
