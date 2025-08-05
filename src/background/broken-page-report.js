@@ -10,31 +10,65 @@
  */
 
 import { store } from 'hybrids';
+import { parse } from 'tldts-experimental';
 
-import Options, { SYNC_OPTIONS } from '/store/options.js';
+import Options, { REPORT_OPTIONS } from '/store/options.js';
+import Resources from '/store/resources.js';
 
 import getBrowserInfo from '/utils/browser-info.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
+import { isOptionEqual } from '/utils/options-observer.js';
 
 import { tabStats } from './stats.js';
-import { parse } from 'tldts-experimental';
+import Config from '/store/config.js';
 
 async function getMetadata(tab) {
   let result = '\n------\n';
 
-  // Send only not-private options
-  const options = Object.fromEntries(
-    Object.entries(await store.resolve(Options)).filter(([key]) =>
-      SYNC_OPTIONS.includes(key),
-    ),
-  );
+  // Add options
+  result +=
+    `Options:\n` +
+    Object.entries(await store.resolve(Options))
+      .filter(([key]) => REPORT_OPTIONS.includes(key))
+      .reduce((acc, [key, value]) => {
+        // Skip options that are equal to the default value
+        if (key !== 'regionalFilters' && isOptionEqual(Options[key], value)) {
+          return acc;
+        }
 
-  result += `${JSON.stringify(options, null, 2)}\n\n`;
+        acc += `* ${key}: `;
 
+        if (typeof value === 'object') {
+          acc += Object.entries(value)
+            .map(([k, v]) => `${k}: ${v}`)
+            .join(', ');
+        } else {
+          acc += value;
+        }
+
+        return `${acc}\n`;
+      }, '');
+
+  // Add checksums of resources
+  result +=
+    `\nChecksums:\n` +
+    Object.entries((await store.resolve(Resources)).checksums)
+      .map(([key, value]) => `* ${key}: ${value}`)
+      .join('\n') +
+    '\n';
+
+  // Add page trackers
   const trackers = tabStats.get(tab.id)?.trackers.map((t) => t.id);
   if (trackers) {
-    result += `Trackers(${trackers.length}): ${trackers.join(', ')}`;
+    result += `\nTrackers(${trackers.length}):\n* ${trackers.join('\n* ')}`;
   }
+
+  // Add enabled flags
+  const flags = Object.entries((await store.resolve(Config)).flags)
+    .filter(([, { enabled }]) => enabled)
+    .map(([key]) => `* ${key}`);
+
+  result += `\n\nFlags:\n` + (flags.length ? flags.join('\n') : '* None');
 
   return result;
 }

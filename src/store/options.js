@@ -40,6 +40,8 @@ export const SYNC_OPTIONS = [
   'theme',
 ];
 
+export const REPORT_OPTIONS = [...SYNC_OPTIONS, 'filtersUpdatedAt'];
+
 export const SYNC_PROTECTED_OPTIONS = [...SYNC_OPTIONS, 'exceptions', 'paused'];
 
 export const ENGINES = [

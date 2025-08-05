@@ -20,7 +20,9 @@ import Config, {
   FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_EXTENDED_SELECTORS,
+  FLAG_DYNAMIC_DNR_FIXES,
 } from '/store/config.js';
+import Resources from '/store/resources.js';
 
 const VERSION = chrome.runtime.getManifest().version;
 
@@ -85,6 +87,7 @@ async function testConfigFlag(host) {
       FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
       FLAG_EXTENDED_SELECTORS,
+      FLAG_DYNAMIC_DNR_FIXES,
     ].join(', '),
   );
   if (!flags) return;
@@ -126,12 +129,13 @@ export default {
   counter: 0,
   options: store(Options),
   config: store(Config),
+  resources: store(Resources),
   updatedAt: ({ options }) =>
     store.ready(options) &&
     options.filtersUpdatedAt &&
     formatDate(options.filtersUpdatedAt),
   visible: false,
-  render: ({ visible, counter, updatedAt, config }) => html`
+  render: ({ visible, counter, config, resources, updatedAt }) => html`
     <template layout="column gap:3">
       ${
         (visible || counter > 5) &&
@@ -227,6 +231,22 @@ export default {
                 <ui-button onclick="${refresh}" layout="shrink:0">
                   <button>Refresh</button>
                 </ui-button>
+              </div>
+              <ui-line></ui-line>
+            `}
+            ${store.ready(resources) &&
+            html`
+              <div layout="column gap">
+                <ui-text type="headline-s">Resource Checksums</ui-text>
+                <div>
+                  ${Object.entries(resources.checksums).map(
+                    ([key, value]) => html`
+                      <ui-text type="body-m" color="secondary">
+                        ${key}: ${value}
+                      </ui-text>
+                    `,
+                  )}
+                </div>
               </div>
               <ui-line></ui-line>
             `}
