@@ -8,6 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { getBrowser } from '/utils/browser-info.js';
 import { debugMode } from '/utils/debug';
 import * as OptionsObserver from '/utils/options-observer.js';
 
@@ -22,3 +23,18 @@ OptionsObserver.addListener('onboarding', (onboarding) => {
     });
   }
 });
+
+if (__PLATFORM__ === 'chromium' && getBrowser().name === 'brave') {
+  const BRAVE_SURVEY_URL =
+    'https://blocksurvey.io/brave-browser-after-onboarding-x0NXNfJwTQaebdo2tzAd_A?v=o';
+
+  OptionsObserver.addListener(
+    'terms',
+    async function braveSurvey(terms, lastTerms) {
+      // Trigger only when user just have accepted terms
+      if (lastTerms === false && terms === true) {
+        chrome.tabs.create({ url: BRAVE_SURVEY_URL, active: true });
+      }
+    },
+  );
+}
