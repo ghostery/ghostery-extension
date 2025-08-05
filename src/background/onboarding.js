@@ -33,18 +33,7 @@ if (__PLATFORM__ === 'chromium' && getBrowser().name === 'brave') {
     async function braveSurvey(terms, lastTerms) {
       // Trigger only when user just have accepted terms
       if (lastTerms === false && terms === true) {
-        const [tab] = await chrome.tabs.query({
-          url: chrome.runtime.getURL('/pages/onboarding/index.html'),
-        });
-
-        const callback = async (tabId) => {
-          if (tabId === tab?.id) {
-            chrome.tabs.create({ url: BRAVE_SURVEY_URL, active: true });
-            chrome.tabs.onRemoved.removeListener(callback);
-          }
-        };
-
-        chrome.tabs.onRemoved.addListener(callback);
+        chrome.tabs.create({ url: BRAVE_SURVEY_URL, active: true });
       }
     },
   );
