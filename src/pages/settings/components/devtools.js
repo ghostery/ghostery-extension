@@ -236,7 +236,7 @@ export default {
             `}
             ${store.ready(resources) &&
             html`
-              <div layout="column gap">
+              <div layout="column gap" translate="no">
                 <ui-text type="headline-s">Resource Checksums</ui-text>
                 <div>
                   ${Object.entries(resources.checksums).map(
