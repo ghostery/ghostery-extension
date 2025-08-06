@@ -25,7 +25,7 @@ export default async function convert(filters) {
         filters,
       });
     } else if (__PLATFORM__ === 'safari') {
-      const convertWithAdguard = await import(
+      const { default: convertWithAdguard } = await import(
         '@ghostery/urlfilter2dnr/adguard'
       );
       result = await convertWithAdguard(filters);
