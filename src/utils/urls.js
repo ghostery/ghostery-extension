@@ -36,4 +36,9 @@ export const REVIEW_PAGE_URL = (() => {
   return 'https://mygho.st/ReviewChromePanel';
 })();
 
+export const BECOME_A_CONTRIBUTOR_PAGE_URL =
+  __PLATFORM__ === 'safari'
+    ? 'ghosteryapp://'
+    : 'https://www.ghostery.com/become-a-contributor';
+
 export const ENGINE_CONFIGS_ROOT_URL = `https://${debugMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;

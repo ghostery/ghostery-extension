@@ -18,6 +18,7 @@ import TabStats from '/store/tab-stats.js';
 import { openTabWithUrl } from '/utils/tabs.js';
 
 import ReportForm from './report-form.js';
+import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 export default {
   options: store(Options),
@@ -100,14 +101,13 @@ export default {
               </div>
             </panel-menu-item>
 
-            ${__PLATFORM__ !== 'safari' &&
-            store.ready(session) &&
+            ${store.ready(session) &&
             session.enabled &&
             !session.contributor &&
             html`
               <ui-button type="outline-primary" layout="margin:1:1.5">
                 <a
-                  href="https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=menu-becomeacontributor"
+                  href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=menu-becomeacontributor"
                   onclick="${openTabWithUrl}"
                 >
                   <ui-icon name="heart"></ui-icon>
