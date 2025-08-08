@@ -72,7 +72,6 @@ const Options = {
   experimentalFilters: false,
 
   filtersUpdatedAt: 0,
-  filtersAutoUpdate: true,
 
   serpTrackingPrevention: true,
 

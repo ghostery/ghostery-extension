@@ -121,6 +121,7 @@ export default {
     <template layout="column gap:3">
       ${(visible || counter > 5) &&
       html`
+        <ui-line></ui-line>
         <section layout="column gap:3" translate="no">
           <ui-text type="headline-m">Developer tools</ui-text>
 
@@ -243,11 +244,11 @@ export default {
           </div>
         </section>
       `}
-      <div layout="column center">
+      <div layout="column">
         <div onclick="${refresh}">
           <ui-text
             type="body-m"
-            color="quaternary"
+            color="tertiary"
             translate="no"
             style="user-select: none;"
           >

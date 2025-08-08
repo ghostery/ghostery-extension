@@ -220,6 +220,8 @@ export default {
               </div>
             `}
 
+            <ui-line></ui-line>
+
             <ui-toggle
               value="${options.panel.notifications}"
               onchange="${html.set(options, 'panel.notifications')}"
