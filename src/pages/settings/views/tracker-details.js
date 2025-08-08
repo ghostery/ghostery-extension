@@ -16,7 +16,6 @@ import Options from '/store/options.js';
 import Tracker from '/store/tracker.js';
 
 import * as exceptions from '/utils/exceptions.js';
-import { openTabWithUrl } from '/utils/tabs.js';
 import { WTM_PAGE_URL } from '/utils/urls.js';
 
 import TrackerAddException from './tracker-add-exception.js';
@@ -236,7 +235,7 @@ export default {
                   <ui-text type="label-s" color="brand-primary" underline>
                     <a
                       href="${tracker.organization.websiteUrl}"
-                      onclick="${openTabWithUrl}"
+                      target="_blank"
                     >
                       ${tracker.organization.websiteUrl}
                     </a>
@@ -251,7 +250,7 @@ export default {
                     <ui-text type="label-s" color="brand-primary" underline>
                       <a
                         href="${tracker.organization.privacyPolicyUrl}"
-                        onclick="${openTabWithUrl}"
+                        target="_blank"
                       >
                         ${tracker.organization.privacyPolicyUrl}
                       </a>
@@ -273,7 +272,7 @@ export default {
                         href="${tracker.organization.contact.startsWith('http')
                           ? ''
                           : 'mailto:'}${tracker.organization.contact}"
-                        onclick="${openTabWithUrl}"
+                        target="_blank"
                       >
                         ${tracker.organization.contact}
                       </a>

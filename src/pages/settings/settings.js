@@ -11,7 +11,6 @@
 
 import { html, router, store } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
 import { HOME_PAGE_URL } from '/utils/urls.js';
 
 import Session from '/store/session.js';
@@ -152,7 +151,7 @@ export default {
                       <ui-button type="primary" layout="margin:top">
                         <a
                           href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=settings-becomeacontributor"
-                          onclick="${openTabWithUrl}"
+                          target="_blank"
                         >
                           Become a Contributor
                         </a>

@@ -11,8 +11,6 @@
 
 import { html, msg, store } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
-
 import Options from '/store/options.js';
 import Session from '/store/session.js';
 
@@ -123,10 +121,7 @@ export default {
                     </div>
                     <div layout="row gap">
                       <ui-button type="primary">
-                        <a
-                          href="${ACCOUNT_PAGE_URL}"
-                          onclick="${openTabWithUrl}"
-                        >
+                        <a href="${ACCOUNT_PAGE_URL}" target="_blank">
                           Account details
                           <ui-icon name="arrow-right-s"></ui-icon>
                         </a>
