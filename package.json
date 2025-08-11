@@ -59,7 +59,7 @@
     "idb": "^8.0.2",
     "jwt-decode": "^4.0.0",
     "plotly.js-basic-dist": "^3.0.3",
-    "tldts-experimental": "^7.0.10"
+    "tldts-experimental": "^7.0.11"
   },
   "dataDependencies": {
     "wtm-stats": "3046b77f6e4fa89cb050d1db9055880502365bd1"
