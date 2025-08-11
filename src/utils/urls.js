@@ -38,7 +38,7 @@ export const REVIEW_PAGE_URL = (() => {
 
 export const BECOME_A_CONTRIBUTOR_PAGE_URL =
   __PLATFORM__ === 'safari'
-    ? 'ghosteryapp://'
+    ? 'ghosteryapp://www.ghostery.com'
     : 'https://www.ghostery.com/become-a-contributor';
 
 export const ENGINE_CONFIGS_ROOT_URL = `https://${debugMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;

@@ -77,6 +77,10 @@ struct ContentView: View {
           Spacer()
         }
         .environmentObject(storeHelper)
+        .onOpenURL(perform: { url in
+          guard url.scheme == "ghosteryapp" else { return }
+          showSubscriptions = true
+        })
       #if os(iOS)
         .gesture(
             SwipeRecognizer(direction: .right) { _ in
