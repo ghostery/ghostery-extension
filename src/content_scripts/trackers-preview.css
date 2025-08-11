@@ -11,7 +11,7 @@
 
 .wtm-tracker-wheel-container {
   position: relative;
-  z-index: 100000;
+  z-index: 1;
   display: inline-flex;
   visibility: visible;
   align-items: center;
