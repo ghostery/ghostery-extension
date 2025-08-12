@@ -43,3 +43,11 @@ export const shortDateFormatter = new Intl.DateTimeFormat(lang, {
   month: 'short',
   day: 'numeric',
 });
+
+export const longDateFormatter = new Intl.DateTimeFormat(lang, {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+});
