@@ -163,44 +163,48 @@ describe('Main Features', function () {
   });
 
   describe('Global Pause', function () {
-    it('shows blocked trackers in the panel', async function () {
+    const SELECTOR = 'ad-slot';
+
+    it('blocks trackers when is disabled', async function () {
       await setPrivacyToggle('global-pause', false);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
-      });
+      await expect($(SELECTOR)).not.toBeDisplayed();
     });
 
-    it("doesn't show blocked trackers in the panel", async function () {
+    it("doesn't block trackers when is enabled", async function () {
       await setPrivacyToggle('global-pause', true);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        await expect(
-          getExtensionElement('component:feedback'),
-        ).not.toBeDisplayed();
-      });
+      await expect($(SELECTOR)).toBeDisplayed();
 
       await setPrivacyToggle('global-pause', false);
     });
   });
 
   describe('Website Pause', function () {
+    const SELECTOR = 'ad-slot';
+
     it("pauses the website's privacy settings", async function () {
       await browser.url(PAGE_URL);
 
       await switchToPanel(async function () {
         const pauseButton = await getExtensionElement('button:pause');
         await pauseButton.click();
-
-        await expect(
-          getExtensionElement('component:feedback'),
-        ).not.toBeDisplayed();
-
-        await pauseButton.click();
-        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
       });
+
+      await browser.url(PAGE_URL);
+
+      await expect($(SELECTOR)).toBeDisplayed();
+
+      await switchToPanel(async function () {
+        const pauseButton = await getExtensionElement('button:pause');
+        await pauseButton.click();
+      });
+
+      await browser.url(PAGE_URL);
+
+      await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
 });
