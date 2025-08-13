@@ -480,10 +480,7 @@ export default {
                     `,
                   )}
                 </ui-stats>
-                <panel-feedback
-                  data-qa="component:feedback"
-                  layout="margin:1:0:1.5"
-                >
+                <panel-feedback layout="margin:1:0:1.5">
                   ${stats.trackersBlocked > 0 &&
                   html`
                     <panel-feedback-button
