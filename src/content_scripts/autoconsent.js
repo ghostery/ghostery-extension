@@ -11,11 +11,38 @@
 
 import AutoConsent from '@duckduckgo/autoconsent';
 
+const FLAG_STORAGE_KEY = 'ghostery:autoconsent';
+
+function getResultFlag() {
+  try {
+    return localStorage.getItem(FLAG_STORAGE_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function setResultFlag() {
+  try {
+    localStorage.setItem(FLAG_STORAGE_KEY, 1);
+  } catch {
+    // Ignore errors
+  }
+}
+
 if (document.contentType === 'text/html') {
+  if (getResultFlag()) {
+    chrome.runtime.sendMessage({ action: 'stats:autoconsent' });
+  }
+
   const consent = new AutoConsent((msg) => {
-    return chrome.runtime.sendMessage(
-      Object.assign({}, msg, { action: 'autoconsent' }),
-    );
+    const data = Object.assign({}, msg, { action: 'autoconsent' });
+
+    if (data.type === 'optOutResult' && data.result === true) {
+      setResultFlag();
+      chrome.runtime.sendMessage({ action: 'stats:autoconsent' });
+    }
+
+    return chrome.runtime.sendMessage(data);
   });
 
   chrome.runtime.onMessage.addListener((msg) => {
