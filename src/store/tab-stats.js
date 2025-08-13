@@ -37,6 +37,7 @@ let tab = undefined;
 
 const TabStats = {
   hostname: '',
+  autoconsent: false,
   trackers: [Tracker],
 
   displayHostname: ({ hostname }) => {

@@ -340,6 +340,7 @@ function setupTabStats(details) {
     tabStats.set(details.tabId, {
       hostname: request.hostname,
       url: request.url,
+      autoconsent: false,
       trackers: [],
       timestamp: details.timeStamp,
     });
@@ -357,12 +358,27 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   }
 });
 
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
+    switch (msg.action) {
+      case 'stats:autoconsent': {
+        const stats = tabStats.get(sender.tab.id);
+        if (stats) {
+          stats.autoconsent = true;
+          tabStats.set(sender.tab.id, stats);
+        }
+        break;
+      }
+    }
+  }
+});
+
 if (__PLATFORM__ === 'safari') {
   // On Safari we have content script to sends back the list of urls
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
       switch (msg.action) {
-        case 'updateTabStats':
+        case 'stats:update':
           updateTabStats(
             sender.tab.id,
             msg.urls.map((url) =>
