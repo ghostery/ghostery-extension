@@ -58,12 +58,9 @@ const trackersMap = new Map();
 function getTrackers() {
   if (!trackersMap.size) {
     const engine = engines.get(engines.TRACKERDB_ENGINE);
-    const organizations = engine.metadata.organizations.getValues();
     const categories = engine.metadata.categories.getValues();
 
     for (const p of engine.metadata.getPatterns()) {
-      const organization = organizations.find((o) => o.key === p.organization);
-
       trackersMap.set(p.key, {
         id: p.key,
         name: p.name,
@@ -74,17 +71,7 @@ function getTrackers() {
         exception: p.key,
         filters: p.filters,
         domains: p.domains,
-        organization: organization
-          ? {
-              id: organization.key,
-              name: organization.name,
-              description: organization.description,
-              country: organization.country,
-              contact: organization.privacy_contact,
-              websiteUrl: organization.website_url,
-              privacyPolicyUrl: organization.privacy_policy_url,
-            }
-          : undefined,
+        organization: p.organization,
       });
     }
   }
@@ -108,7 +95,7 @@ export async function getSimilarTrackers(tracker) {
   if (!tracker.organization) return result;
 
   trackersMap.forEach((t) => {
-    if (t.organization?.id === tracker.organization.id && t.id !== tracker.id) {
+    if (t.organization === tracker.organization && t.id !== tracker.id) {
       result.push(t);
     }
   });
@@ -138,4 +125,28 @@ export async function getCategories() {
   return [...categories.values()]
     .filter((c) => c.trackers.length > 0)
     .sort(sortCategories((c) => c.key));
+}
+
+let organizations = null;
+export async function getOrganization(id) {
+  if (!organizations) {
+    setup.pending && (await setup.pending);
+    const engine = engines.get(engines.TRACKERDB_ENGINE);
+    organizations = new Map(
+      engine.metadata.organizations.getValues().map((org) => [
+        org.key,
+        {
+          id: org.key,
+          name: org.name,
+          description: org.description,
+          country: org.country,
+          contact: org.privacy_contact,
+          websiteUrl: org.website_url,
+          privacyPolicyUrl: org.privacy_policy_url,
+        },
+      ]),
+    );
+  }
+
+  return organizations.get(id);
 }

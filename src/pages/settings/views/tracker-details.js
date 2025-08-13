@@ -77,7 +77,7 @@ export default {
                       ${labels.categories[tracker.category]}
                     </ui-text>
                   </div>
-                  ${tracker.organization &&
+                  ${store.ready(tracker.organization) &&
                   html`
                     <div layout="row items:center gap">
                       <ui-category-icon
@@ -194,90 +194,97 @@ export default {
                 </ui-action>
               </div>
               <div layout="column gap:4">
-                <div layout="column gap:4" layout@768px="grid:2fr|1fr">
-                  ${tracker.organization?.name &&
-                  html`
+                ${store.ready(tracker.organization) &&
+                html`
+                  <div layout="column gap:4" layout@768px="grid:2fr|1fr">
+                    ${tracker.organization.name &&
+                    html`
+                      <div layout="column gap">
+                        <ui-text type="label-xs" uppercase
+                          >Organization</ui-text
+                        >
+                        <ui-text type="label-l" mobile-type="label-m">
+                          ${tracker.organization.name}
+                        </ui-text>
+                        <ui-text color="secondary">
+                          ${tracker.organization.description}
+                        </ui-text>
+                      </div>
+                    `}
                     <div layout="column gap">
-                      <ui-text type="label-xs" uppercase>Organization</ui-text>
+                      <ui-text type="label-xs" uppercase>Category</ui-text>
                       <ui-text type="label-l" mobile-type="label-m">
-                        ${tracker.organization.name}
+                        ${labels.categories[tracker.category]}
                       </ui-text>
                       <ui-text color="secondary">
-                        ${tracker.organization.description}
+                        ${tracker.categoryDescription}
+                      </ui-text>
+                    </div>
+                  </div>
+                  ${tracker.organization.country &&
+                  html`
+                    <div layout="column gap">
+                      <ui-text type="label-xs" uppercase>Country</ui-text>
+                      <ui-text type="label-s">
+                        ${labels.regions.of(tracker.organization.country) ||
+                        tracker.organization.country}
                       </ui-text>
                     </div>
                   `}
-                  <div layout="column gap">
-                    <ui-text type="label-xs" uppercase>Category</ui-text>
-                    <ui-text type="label-l" mobile-type="label-m">
-                      ${labels.categories[tracker.category]}
-                    </ui-text>
-                    <ui-text color="secondary">
-                      ${tracker.categoryDescription}
-                    </ui-text>
-                  </div>
-                </div>
-                ${tracker.organization?.country &&
-                html`
-                  <div layout="column gap">
-                    <ui-text type="label-xs" uppercase>Country</ui-text>
-                    <ui-text type="label-s">
-                      ${labels.regions.of(tracker.organization.country) ||
-                      tracker.organization.country}
-                    </ui-text>
-                  </div>
-                `}
-                ${tracker.organization?.websiteUrl &&
-                html` <div layout="column gap">
-                  <ui-text type="label-xs" uppercase>
-                    Organization's website
-                  </ui-text>
-                  <ui-text type="label-s" color="brand-primary" underline>
-                    <a
-                      href="${tracker.organization.websiteUrl}"
-                      target="_blank"
-                    >
-                      ${tracker.organization.websiteUrl}
-                    </a>
-                  </ui-text>
-                </div>`}
-                ${tracker.organization?.privacyPolicyUrl &&
-                html`
-                  <div layout="column gap">
+                  ${tracker.organization.websiteUrl &&
+                  html` <div layout="column gap">
                     <ui-text type="label-xs" uppercase>
-                      Privacy policy
+                      Organization's website
                     </ui-text>
                     <ui-text type="label-s" color="brand-primary" underline>
                       <a
-                        href="${tracker.organization.privacyPolicyUrl}"
+                        href="${tracker.organization.websiteUrl}"
                         target="_blank"
                       >
-                        ${tracker.organization.privacyPolicyUrl}
+                        ${tracker.organization.websiteUrl}
                       </a>
                     </ui-text>
-                  </div>
-                `}
-                ${tracker.organization?.contact &&
-                html`
-                  <div layout="column gap">
-                    <ui-text type="label-xs" uppercase>Contact</ui-text>
-                    <ui-text
-                      type="label-s"
-                      color="brand-primary"
-                      ellipsis
-                      underline
-                      layout="padding margin:-1"
-                    >
-                      <a
-                        href="${tracker.organization.contact.startsWith('http')
-                          ? ''
-                          : 'mailto:'}${tracker.organization.contact}"
-                        target="_blank"
+                  </div>`}
+                  ${tracker.organization.privacyPolicyUrl &&
+                  html`
+                    <div layout="column gap">
+                      <ui-text type="label-xs" uppercase>
+                        Privacy policy
+                      </ui-text>
+                      <ui-text type="label-s" color="brand-primary" underline>
+                        <a
+                          href="${tracker.organization.privacyPolicyUrl}"
+                          target="_blank"
+                        >
+                          ${tracker.organization.privacyPolicyUrl}
+                        </a>
+                      </ui-text>
+                    </div>
+                  `}
+                  ${tracker.organization.contact &&
+                  html`
+                    <div layout="column gap">
+                      <ui-text type="label-xs" uppercase>Contact</ui-text>
+                      <ui-text
+                        type="label-s"
+                        color="brand-primary"
+                        ellipsis
+                        underline
+                        layout="padding margin:-1"
                       >
-                        ${tracker.organization.contact}
-                      </a>
-                    </ui-text>
-                  </div>
+                        <a
+                          href="${tracker.organization.contact.startsWith(
+                            'http',
+                          )
+                            ? ''
+                            : 'mailto:'}${tracker.organization.contact}"
+                          target="_blank"
+                        >
+                          ${tracker.organization.contact}
+                        </a>
+                      </ui-text>
+                    </div>
+                  `}
                 `}
                 ${store.ready(otherTrackers) &&
                 !!otherTrackers.length &&
