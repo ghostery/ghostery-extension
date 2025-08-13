@@ -41,7 +41,7 @@ const TrackerCategory = {
             const match =
               !query ||
               t.name.toLowerCase().includes(query) ||
-              t.organization?.name.toLowerCase().includes(query);
+              t.organization?.toLowerCase().replace('_', ' ').includes(query);
 
             if (!match) return false;
 
