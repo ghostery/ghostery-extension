@@ -36,8 +36,8 @@ const Tracker = {
 let tab = undefined;
 
 const TabStats = {
+  domain: '',
   hostname: '',
-  autoconsent: false,
   trackers: [Tracker],
 
   displayHostname: ({ hostname }) => {

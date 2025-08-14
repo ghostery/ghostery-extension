@@ -339,8 +339,8 @@ function setupTabStats(details) {
   if (request.isHttp || request.isHttps) {
     tabStats.set(details.tabId, {
       hostname: request.hostname,
+      domain: request.domain,
       url: request.url,
-      autoconsent: false,
       trackers: [],
       timestamp: details.timeStamp,
     });
@@ -355,21 +355,6 @@ function setupTabStats(details) {
 chrome.webNavigation.onCommitted.addListener((details) => {
   if (details.tabId > -1 && details.parentFrameId === -1) {
     setupTabStats(details);
-  }
-});
-
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
-    switch (msg.action) {
-      case 'stats:autoconsent': {
-        const stats = tabStats.get(sender.tab.id);
-        if (stats) {
-          stats.autoconsent = true;
-          tabStats.set(sender.tab.id, stats);
-        }
-        break;
-      }
-    }
   }
 });
 

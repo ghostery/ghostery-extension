@@ -16,7 +16,7 @@ import { openTabWithUrl } from '/utils/tabs.js';
 export default {
   type: { value: '', reflect: true },
   icon: '',
-  value: 0,
+  value: '',
   href: '',
   render: ({ icon, value, href }) => html`
     <template layout="column grow">
