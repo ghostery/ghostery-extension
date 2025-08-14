@@ -339,6 +339,7 @@ function setupTabStats(details) {
   if (request.isHttp || request.isHttps) {
     tabStats.set(details.tabId, {
       hostname: request.hostname,
+      domain: request.domain,
       url: request.url,
       trackers: [],
       timestamp: details.timeStamp,
@@ -362,7 +363,7 @@ if (__PLATFORM__ === 'safari') {
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
       switch (msg.action) {
-        case 'updateTabStats':
+        case 'stats:update':
           updateTabStats(
             sender.tab.id,
             msg.urls.map((url) =>

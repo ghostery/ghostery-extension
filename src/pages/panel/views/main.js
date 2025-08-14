@@ -12,12 +12,13 @@
 import { html, store, router, msg } from 'hybrids';
 
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
+import * as exceptions from '/utils/exceptions.js';
 
 import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 import TabStats from '/store/tab-stats.js';
-
-import * as exceptions from '/utils/exceptions.js';
+import ManagedConfig from '/store/managed-config.js';
+import Resources from '/store/resources.js';
 
 import Notification from '../store/notification.js';
 import sleep from '../assets/sleep.svg';
@@ -28,7 +29,6 @@ import ProtectionStatus from './protection-status.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
-import ManagedConfig from '/store/managed-config.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -138,6 +138,7 @@ export default {
   notification: store(Notification),
   managedConfig: store(ManagedConfig),
   elementPickerSelectors: store(ElementPickerSelectors),
+  resources: store(Resources),
   alert: '',
   paused: ({ options, stats }) =>
     store.ready(options, stats) && getPausedDetails(options, stats.hostname),
@@ -147,6 +148,11 @@ export default {
     (store.ready(stats, elementPickerSelectors) &&
       elementPickerSelectors.hostnames[stats.hostname]?.length) ||
     0,
+  consentManaged: ({ resources, options, stats, paused }) =>
+    store.ready(resources, options, stats) &&
+    !paused &&
+    options.blockAnnoyances &&
+    resources.autoconsent[stats.domain],
   render: ({
     options,
     stats,
@@ -156,6 +162,7 @@ export default {
     paused,
     globalPause,
     contentBlocksSelectors,
+    consentManaged,
   }) => html`
     <template layout="column grow relative">
       ${store.ready(options, stats, managedConfig) &&
@@ -480,70 +487,49 @@ export default {
                     `,
                   )}
                 </ui-stats>
-                <panel-feedback
-                  data-qa="component:feedback"
-                  hidden=${paused ||
-                  (!stats.trackersBlocked &&
-                    !stats.trackersModified &&
-                    !contentBlocksSelectors)}
-                  layout="margin:1:0:1.5"
-                >
+                <panel-feedback layout="margin:1:0:1.5">
                   ${stats.trackersBlocked > 0 &&
                   html`
-                    <section layout="column center grow padding:0.5:1">
-                      <div layout="row center gap:0.5">
-                        <ui-icon
-                          name="block-s"
-                          color="danger-primary"
-                        ></ui-icon>
-                        <ui-text type="headline-s">
-                          ${stats.trackersBlocked}
-                        </ui-text>
-                      </div>
-                      <ui-text type="label-xs" layout="block:center">
-                        Trackers blocked
-                      </ui-text>
-                    </section>
+                    <panel-feedback-button
+                      type="blocked"
+                      icon="block-s"
+                      value="${stats.trackersBlocked}"
+                    >
+                      Trackers blocked
+                    </panel-feedback-button>
                   `}
                   ${stats.trackersModified > 0 &&
                   html`
-                    <section layout="column center grow padding:0.5:1">
-                      <div layout="row center gap:0.5">
-                        <ui-icon name="eye" color="brand-primary"></ui-icon>
-                        <ui-text type="headline-s">
-                          ${stats.trackersModified}
-                        </ui-text>
-                      </div>
-                      <ui-text type="label-xs" layout="block:center">
-                        Trackers modified
-                      </ui-text>
-                    </section>
+                    <panel-feedback-button
+                      type="modified"
+                      icon="eye"
+                      value="${stats.trackersModified}"
+                    >
+                      Trackers modified
+                    </panel-feedback-button>
+                  `}
+                  ${consentManaged &&
+                  html`
+                    <panel-feedback-button
+                      type="autoconsent"
+                      icon="autoconsent-managed"
+                    >
+                      Consent managed
+                    </panel-feedback-button>
                   `}
                   ${contentBlocksSelectors > 0 &&
                   html`
-                    <ui-action>
-                      <a
-                        layout="column center grow padding:0.5:1"
-                        href="${chrome.runtime.getURL(
-                          '/pages/settings/index.html#@settings-website-details?domain=' +
-                            stats.hostname,
-                        )}"
-                        onclick="${openTabWithUrl}"
-                      >
-                        <div layout="row center gap:0.5">
-                          <ui-icon
-                            name="hide-element"
-                            color="success-primary"
-                          ></ui-icon>
-                          <ui-text type="headline-s">
-                            ${contentBlocksSelectors}
-                          </ui-text>
-                        </div>
-                        <ui-text type="label-xs" layout="block:center">
-                          Blocked manually
-                        </ui-text>
-                      </a>
-                    </ui-action>
+                    <panel-feedback-button
+                      type="content"
+                      icon="hide-element"
+                      value="${contentBlocksSelectors}"
+                      href="${chrome.runtime.getURL(
+                        '/pages/settings/index.html#@settings-website-details?domain=' +
+                          stats.hostname,
+                      )}"
+                    >
+                      Blocked manually
+                    </panel-feedback-button>
                   `}
                 </panel-feedback>
               `

@@ -12,7 +12,8 @@
 import { store } from 'hybrids';
 
 const Resources = {
-  checksums: store.record(''),
+  checksums: store.record(''), // Engine and dynamic DNR lists file checksums
+  autoconsent: store.record(0), // Timestamps of Opt-out domains resolved by autoconsent
 
   [store.connect]: {
     get: async () =>
