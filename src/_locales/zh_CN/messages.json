@@ -281,10 +281,6 @@
     "message": "电子邮件地址",
     "description": "Tracker category name"
   },
-  "enable_@_0_": {
-    "message": "启用 $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
-  },
   "enable_ad_blocking_now": {
     "message": "立即启用广告拦截功能"
   },
@@ -876,6 +872,9 @@
   },
   "uninstall": {
     "message": "卸载"
+  },
+  "update_now": {
+    "message": "立即更新"
   },
   "updating___": {
     "message": "更新中..."
