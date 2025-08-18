@@ -97,10 +97,10 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       return evalCode(msg.snippetId, msg.id, sender.tab.id, frameId);
     case 'optOutResult': {
       if (msg.result === true) {
-        const { domain, hostname } = parse(sender.url);
-        store.set(Resources, {
-          autoconsent: { [domain || hostname]: Date.now() },
-        });
+        const { domain } = parse(sender.url);
+        if (domain) {
+          store.set(Resources, { autoconsent: { [domain]: Date.now() } });
+        }
       }
       break;
     }
