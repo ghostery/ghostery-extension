@@ -11,7 +11,7 @@
 
 import { html, router, store } from 'hybrids';
 
-import { HOME_PAGE_URL } from '/utils/urls.js';
+import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 import Session from '/store/session.js';
 
@@ -94,8 +94,7 @@ export default {
                 `
               : html`<ui-icon name="user" color="nav"></ui-icon> My Ghostery`}
           </a>
-          ${__PLATFORM__ !== 'safari' &&
-          store.ready(session) &&
+          ${store.ready(session) &&
           session.enabled &&
           html`
             <settings-card
@@ -150,7 +149,7 @@ export default {
                       </ui-text>
                       <ui-button type="primary" layout="margin:top">
                         <a
-                          href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=settings-becomeacontributor"
+                          href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=settings-becomeacontributor"
                           target="_blank"
                         >
                           Become a Contributor

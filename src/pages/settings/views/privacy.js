@@ -21,6 +21,7 @@ import RegionalFilters from './regional-filters.js';
 import ExperimentalFilters from './experimental-filters.js';
 import CustomFilters from './custom-filters.js';
 import Serp from './serp.js';
+import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 function toggleNeverConsent({ options }) {
   store.set(options, {
@@ -291,8 +292,7 @@ export default {
             </div>
           </div>
         `}
-        ${__PLATFORM__ !== 'safari' &&
-        store.ready(session) &&
+        ${store.ready(session) &&
         session.enabled &&
         html`
           <section
@@ -348,7 +348,7 @@ export default {
                       </div>
                       <ui-button type="primary" layout="grow margin:top">
                         <a
-                          href="https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
+                          href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
                           target="_blank"
                         >
                           Become a Contributor
