@@ -40,7 +40,7 @@ export default async function convert(filters) {
         }
         return acc;
       }, []);
-      result.errors = result.errors.map((e) => `DNR: ${e.message}`);
+      result.errors = result.errors.map((e) => `DNR - ${e.message || e}`);
     } else {
       throw new Error('Unsupported platform for DNR conversion');
     }
