@@ -281,10 +281,6 @@
     "message": "Correo electrónico",
     "description": "Tracker category name"
   },
-  "enable_@_0_": {
-    "message": "Habilitar $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
-  },
   "enable_ad_blocking_now": {
     "message": "Activar el bloqueo de anuncios"
   },
@@ -876,6 +872,9 @@
   },
   "uninstall": {
     "message": "Desinstalar"
+  },
+  "update_now": {
+    "message": "Actualizar ahora"
   },
   "updating___": {
     "message": "actualizando..."

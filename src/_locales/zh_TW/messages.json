@@ -281,10 +281,6 @@
     "message": "電郵",
     "description": "Tracker category name"
   },
-  "enable_@_0_": {
-    "message": "啟用 $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
-  },
   "enable_ad_blocking_now": {
     "message": "立即啟用廣告攔截功能"
   },
@@ -876,6 +872,9 @@
   },
   "uninstall": {
     "message": "解除安裝"
+  },
+  "update_now": {
+    "message": "現在更新"
   },
   "updating___": {
     "message": "更新中..."

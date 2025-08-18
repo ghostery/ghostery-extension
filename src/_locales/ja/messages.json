@@ -281,10 +281,6 @@
     "message": "メール",
     "description": "Tracker category name"
   },
-  "enable_@_0_": {
-    "message": "有効にする $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
-  },
   "enable_ad_blocking_now": {
     "message": "広告ブロッキングを今すぐ有効化"
   },
@@ -876,6 +872,9 @@
   },
   "uninstall": {
     "message": "アンインストール"
+  },
+  "update_now": {
+    "message": "今すぐ更新"
   },
   "updating___": {
     "message": "更新中..."
