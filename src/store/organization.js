@@ -11,20 +11,17 @@
 
 import { store } from 'hybrids';
 
-import { getTracker, getSimilarTrackers } from '/utils/trackerdb.js';
+import { getOrganization } from '/utils/trackerdb.js';
 
-import Organization from './organization.js';
-
-const Tracker = {
+const Organization = {
   id: true,
   name: '',
-  category: '',
-  categoryDescription: '',
-  organization: Organization,
-  [store.connect]: {
-    get: getTracker,
-    list: ({ tracker: id }) => getSimilarTrackers(id),
-  },
+  description: '',
+  country: '',
+  contact: '',
+  websiteUrl: '',
+  privacyPolicyUrl: '',
+  [store.connect]: getOrganization,
 };
 
-export default Tracker;
+export default Organization;

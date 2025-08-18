@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html, store, router, msg } from 'hybrids';
+import { html, store, router } from 'hybrids';
 
 import Options from '/store/options.js';
 
@@ -65,10 +65,7 @@ export default {
                       color="quaternary"
                       layout="size:3"
                     ></ui-icon>
-                    <ui-text type="headline-xs">
-                      <!-- Enable "feature name" -->
-                      Enable ${msg`Experimental Filters`}
-                    </ui-text>
+                    <ui-text type="headline-xs">Experimental Filters</ui-text>
                   </div>
                 </div>
               </ui-toggle>

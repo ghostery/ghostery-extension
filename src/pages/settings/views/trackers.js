@@ -199,7 +199,7 @@ export default {
                                     <ui-text type="label-m">
                                       ${tracker.name}
                                     </ui-text>
-                                    ${tracker.organization &&
+                                    ${store.ready(tracker.organization) &&
                                     html`
                                       <ui-text color="secondary">
                                         ${tracker.organization.name}
