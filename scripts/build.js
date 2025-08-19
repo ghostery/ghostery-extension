@@ -525,8 +525,10 @@ if (argv.watch) {
             settings = {
               target: 'firefox-desktop',
               devtools: true,
-              firefoxBinary:
-                '/Applications/Firefox Nightly.app/Contents/MacOS/firefox-bin',
+              pref: {
+                'intl.locale.requested': 'en-US',
+                'intl.accept_languages': 'en-US, en',
+              },
             };
             break;
           case 'chromium': {

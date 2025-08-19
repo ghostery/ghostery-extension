@@ -17,6 +17,7 @@ import { store } from 'hybrids';
 
 import Options, { getPausedDetails } from '/store/options.js';
 import Config, { ACTION_DISABLE_AUTOCONSENT } from '/store/config.js';
+import Resources from '/store/resources.js';
 
 async function initialize(msg, tab, frameId) {
   const [options, config] = await Promise.all([
@@ -94,6 +95,15 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
       return initialize(msg, sender.tab, frameId);
     case 'eval':
       return evalCode(msg.snippetId, msg.id, sender.tab.id, frameId);
+    case 'optOutResult': {
+      if (msg.result === true) {
+        const { domain } = parse(sender.url);
+        if (domain) {
+          store.set(Resources, { autoconsent: { [domain]: Date.now() } });
+        }
+      }
+      break;
+    }
     default:
       break;
   }
