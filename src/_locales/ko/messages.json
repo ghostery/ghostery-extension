@@ -176,6 +176,9 @@
     "message": "댓글",
     "description": "Tracker category name"
   },
+  "consent_managed": {
+    "message": "동의 관리됨"
+  },
   "consent_management": {
     "message": "약관 관리 프레임워크",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"

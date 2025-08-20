@@ -15,7 +15,7 @@
     "message": "O nas"
   },
   "access_website_settings": {
-    "message": "Otwórz ustawień witryny"
+    "message": "Otwórz ustawienia witryny"
   },
   "account_details": {
     "message": "Dane konta"
@@ -175,6 +175,9 @@
   "comments": {
     "message": "Komentarze",
     "description": "Tracker category name"
+  },
+  "consent_managed": {
+    "message": "Zarządzanie zgodami"
   },
   "consent_management": {
     "message": "Zarządzanie zgodami",
