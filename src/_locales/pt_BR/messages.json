@@ -176,6 +176,9 @@
     "message": "Comentários",
     "description": "Tracker category name"
   },
+  "consent_managed": {
+    "message": "Consentimento gerenciado"
+  },
   "consent_management": {
     "message": "Gerenciamento de consentimento",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"

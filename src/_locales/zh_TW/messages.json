@@ -176,6 +176,9 @@
     "message": "評論",
     "description": "Tracker category name"
   },
+  "consent_managed": {
+    "message": "同意管理"
+  },
   "consent_management": {
     "message": "同意管理",
     "description": "Tracker category name - includes trackers used for cookie consent management, allowing websites different levels of tracking user activity"

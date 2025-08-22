@@ -83,11 +83,14 @@ export default {
       border-top: 1px solid var(--border-primary);
       background: var(--background-primary);
       transform: translateY(-100%);
-      transition: transform 0.2s ease-out;
+      visibility: hidden;
+      transition: transform 0.2s ease-out, visibility 0s 0.2s;
     }
 
     #actions.open {
       transform: translateY(0);
+      transition: transform 0.2s ease-out, visibility 0s;
+      visibility: visible;
     }
   `,
 };
