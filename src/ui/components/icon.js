@@ -792,6 +792,11 @@ const icons = {
       <path d="M3.33317 8.66666C3.70136 8.66666 3.99984 8.36819 3.99984 7.99999C3.99984 7.63179 3.70136 7.33333 3.33317 7.33333C2.96498 7.33333 2.6665 7.63179 2.6665 7.99999C2.6665 8.36819 2.96498 8.66666 3.33317 8.66666Z" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `,
+  'download': /* html */`
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 10V2M8 10L4.66667 6.66667M8 10L11.3333 6.66667M14 10V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `,
   'drag': /* html */`
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.49999 10.833C7.96023 10.833 8.33332 10.4599 8.33332 9.99967C8.33332 9.53944 7.96023 9.16634 7.49999 9.16634C7.03975 9.16634 6.66666 9.53944 6.66666 9.99967C6.66666 10.4599 7.03975 10.833 7.49999 10.833Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>

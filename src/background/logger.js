@@ -8,8 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { setup } from './adblocker.js';
 import * as engines from '/utils/engines.js';
+import { getMetadata, getOrganizations } from '/utils/trackerdb.js';
+
+import { setup } from './adblocker.js';
 
 const ports = new Set();
 
@@ -33,9 +35,18 @@ export async function sendRequests(requests) {
   setup.pending && (await setup.pending);
 
   const engine = engines.get(engines.MAIN_ENGINE);
+  const organizations = await getOrganizations();
+
   const logs = requests.map((request) => {
     const { filter } = engine.match(request);
-    return { ...request, filter: filter ? String(filter) : '' };
+    const metadata = getMetadata(request);
+
+    return {
+      ...request,
+      filter: filter ? String(filter) : '',
+      tracker: metadata?.name,
+      organization: organizations.get(metadata?.organization)?.name,
+    };
   });
 
   for (const port of ports) {
