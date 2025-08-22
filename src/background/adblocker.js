@@ -28,7 +28,6 @@ import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
 import Config, {
-  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
   FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
   FLAG_EXTENDED_SELECTORS,
 } from '/store/config.js';
@@ -78,18 +77,8 @@ const contentScripts = (() => {
   };
 })();
 
-let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = false;
 if (__PLATFORM__ === 'firefox') {
-  // FYI: Testing the flag by dev tools requires a reload of the background script
-  store.resolve(Config).then((config) => {
-    const enabled = config.hasFlag(FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
-    if (!enabled) contentScripts.unregisterAll();
-
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = enabled;
-  });
-
   OptionsObserver.addListener('paused', async (paused) => {
-    if (!ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) return;
     for (const hostname of Object.keys(paused)) {
       contentScripts.unregister(hostname);
     }
@@ -166,7 +155,7 @@ export async function reloadMainEngine() {
     engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
-  if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
+  if (__PLATFORM__ === 'firefox') {
     contentScripts.unregisterAll();
   }
 }
@@ -268,10 +257,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     const func = scriptlet.func;
     const args = parsed.args.map((arg) => decodeURIComponent(arg));
 
-    if (
-      __PLATFORM__ === 'firefox' &&
-      ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS
-    ) {
+    if (__PLATFORM__ === 'firefox') {
       contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
     }
@@ -297,7 +283,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     );
   }
 
-  if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
+  if (__PLATFORM__ === 'firefox') {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
@@ -344,7 +330,6 @@ async function injectCosmetics(details, config) {
 
   if (
     __PLATFORM__ === 'firefox' &&
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS &&
     scriptletsOnly &&
     contentScripts.isRegistered(hostname)
   ) {
@@ -487,9 +472,7 @@ function isTrusted(request, type) {
 if (__PLATFORM__ === 'firefox') {
   chrome.webNavigation.onBeforeNavigate.addListener(
     (details) => {
-      if (ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
-        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-      }
+      injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
     },
     { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
   );
