@@ -26,10 +26,14 @@ export default {
   // From matched filter
   filter: '',
 
+  // From TrackerDB
+  tracker: '',
+  organization: '',
+
   time: ({ timestamp }) => new Date(timestamp).toLocaleTimeString(),
 
   [store.connect]: {
-    get: (id) => storage.get(id),
+    get: (id) => storage.find((item) => item.id === id),
     set: (id, values) => {
       const request = {
         ...values,
@@ -45,37 +49,40 @@ export default {
 
       return request;
     },
-    list: ({ tabId, query, status }) =>
-      storage.filter((request) => {
+    list: ({ tabId, query, status }) => {
+      query = query && new RegExp(query.trim(), 'i');
+
+      return storage.filter((log) => {
         let match = true;
 
-        if (tabId && request.tabId !== tabId) {
+        if (tabId && log.tabId !== tabId) {
           match = false;
         }
 
         if (
           query &&
-          !request.url.includes(query) &&
-          !request.filter.includes(query)
+          !query.test(log.url) &&
+          !query.test(log.filter) &&
+          !query.test(log.tracker) &&
+          !query.test(log.organization)
         ) {
           match = false;
         }
 
         switch (status) {
           case 'touched':
-            if (!request.blocked && !request.modified) match = false;
+            if (!log.blocked && !log.modified) match = false;
             break;
 
           case 'warning':
-            if (request.filter && (request.blocked || request.modified))
-              match = false;
-            if (!request.filter && !request.blocked && !request.modified)
-              match = false;
+            if (log.filter && (log.blocked || log.modified)) match = false;
+            if (!log.filter && !log.blocked && !log.modified) match = false;
             break;
         }
 
         return match;
-      }),
+      });
+    },
     loose: true,
   },
 };

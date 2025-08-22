@@ -128,25 +128,32 @@ export async function getCategories() {
 }
 
 let organizations = null;
-export async function getOrganization(id) {
+export async function getOrganizations() {
   if (!organizations) {
     setup.pending && (await setup.pending);
-    const engine = engines.get(engines.TRACKERDB_ENGINE);
+
     organizations = new Map(
-      engine.metadata.organizations.getValues().map((org) => [
-        org.key,
-        {
-          id: org.key,
-          name: org.name,
-          description: org.description,
-          country: org.country,
-          contact: org.privacy_contact,
-          websiteUrl: org.website_url,
-          privacyPolicyUrl: org.privacy_policy_url,
-        },
-      ]),
+      engines
+        .get(engines.TRACKERDB_ENGINE)
+        .metadata.organizations.getValues()
+        .map((org) => [
+          org.key,
+          {
+            id: org.key,
+            name: org.name,
+            description: org.description,
+            country: org.country,
+            contact: org.privacy_contact,
+            websiteUrl: org.website_url,
+            privacyPolicyUrl: org.privacy_policy_url,
+          },
+        ]),
     );
   }
 
-  return organizations.get(id);
+  return organizations;
+}
+
+export async function getOrganization(id) {
+  return (await getOrganizations()).get(id);
 }
