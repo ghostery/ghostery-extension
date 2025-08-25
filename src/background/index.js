@@ -29,7 +29,6 @@ import './whats-new.js';
 import './pin-it.js';
 
 import './helpers.js';
-import './external.js';
 import './sync.js';
 
 import './reporting/index.js';
