@@ -17,7 +17,6 @@ import { shortDateFormatter, categories } from '/ui/labels.js';
 import assets from '/pages/settings/assets/index.js';
 
 import { MergedStats } from '/store/daily-stats.js';
-import Session from '/store/session.js';
 
 const MONTH_IN_MS = 30 * 24 * 60 * 60 * 1000;
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
@@ -61,7 +60,6 @@ export default {
   mergedStats: store(MergedStats, {
     id: ({ dateFrom, dateTo }) => ({ dateFrom, dateTo }),
   }),
-  session: store(Session),
   trends: { value: ['pages', 'trackersBlocked', 'trackersModified'] },
   trendsAggregate: 0,
   sankeyChartSlice: 20,
@@ -70,7 +68,6 @@ export default {
     dateFrom,
     dateTo,
     mergedStats,
-    session,
     trends,
     trendsAggregate,
     sankeyChartSlice,
@@ -423,39 +420,34 @@ export default {
               slice="${sankeyChartSlice}"
             ></whotracksme-sankey-chart>
           </section>
-          ${store.ready(session) &&
-          session.enabled &&
-          !session.contributor &&
-          html`
-            <section
-              layout="column center gap:2 padding:top:2"
-              layout@print="hidden"
-            >
-              <img
-                src="${assets['hands']}"
-                layout="size:12"
-                alt="Contribution"
-                slot="picture"
-              />
-              <div layout="block:center column center gap:2 width:::400px">
-                <div layout="column gap:0.5">
-                  <ui-text type="headline-m">Become a Contributor</ui-text>
-                  <ui-text type="body-s" color="secondary">
-                    Help Ghostery fight for a web where privacy is a basic human
-                    right.
-                  </ui-text>
-                </div>
-                <ui-button type="primary">
-                  <a
-                    href="${HOME_PAGE_URL}/become-a-contributor?utm_source=wtmtab-becomeacontributor"
-                    target="_blank"
-                  >
-                    Become a Contributor
-                  </a>
-                </ui-button>
+          <section
+            layout="column center gap:2 padding:top:2"
+            layout@print="hidden"
+          >
+            <img
+              src="${assets['hands']}"
+              layout="size:12"
+              alt="Contribution"
+              slot="picture"
+            />
+            <div layout="block:center column center gap:2 width:::400px">
+              <div layout="column gap:0.5">
+                <ui-text type="headline-m">Become a Contributor</ui-text>
+                <ui-text type="body-s" color="secondary">
+                  Help Ghostery fight for a web where privacy is a basic human
+                  right.
+                </ui-text>
               </div>
-            </section>
-          `}
+              <ui-button type="primary">
+                <a
+                  href="${HOME_PAGE_URL}/become-a-contributor?utm_source=wtmtab-becomeacontributor"
+                  target="_blank"
+                >
+                  Become a Contributor
+                </a>
+              </ui-button>
+            </div>
+          </section>
           <section layout="block:center margin:2:auto:0 width:::960px">
             <ui-text type="body-s" color="secondary">
               All information displayed on the WhoTracks.Me Tab or

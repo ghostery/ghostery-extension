@@ -11,7 +11,6 @@
 
 import { html, router, store, msg } from 'hybrids';
 
-import Session from '/store/session.js';
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
 import { SUPPORT_PAGE_URL } from '/utils/urls.js';
 
@@ -24,16 +23,12 @@ const Form = {
   screenshot: true,
   [store.connect]: {
     async get() {
-      const [currentTab, session] = await Promise.all([
-        getCurrentTab(),
-        store.resolve(Session),
-      ]);
+      const currentTab = await getCurrentTab();
 
       const url = currentTab && new URL(currentTab.url);
 
       return {
         url: url ? `${url.origin}${url.pathname}` : '',
-        email: session.email,
       };
     },
     async set(_, values) {

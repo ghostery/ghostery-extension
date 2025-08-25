@@ -19,7 +19,6 @@ import './element-picker.js';
 import './dnr.js';
 import './exceptions.js';
 import './paused.js';
-import './session.js';
 import './stats.js';
 import './notifications.js';
 import './serp.js';
