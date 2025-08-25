@@ -23,7 +23,7 @@ import ResourcesModel from '/store/resources.js';
 
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
-import { CDN_URL } from './api.js';
+import { CDN_URL } from './urls.js';
 
 export const MAIN_ENGINE = 'main';
 
