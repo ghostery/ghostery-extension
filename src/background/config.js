@@ -15,7 +15,7 @@ import Config from '/store/config.js';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
-import { CDN_URL } from '/utils/api.js';
+import { CDN_URL } from '/utils/urls.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
 const CONFIG_URL = CDN_URL + 'configs/v1.json';

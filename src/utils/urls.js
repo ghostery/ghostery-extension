@@ -10,7 +10,7 @@
  */
 
 import { isOpera, isEdge } from './browser-info.js';
-import { debugMode } from './debug.js';
+import { debugMode, stagingMode } from './debug.js';
 
 export const GHOSTERY_DOMAIN = debugMode ? 'ghosterystage.com' : 'ghostery.com';
 
@@ -42,3 +42,7 @@ export const BECOME_A_CONTRIBUTOR_PAGE_URL =
     : 'https://www.ghostery.com/become-a-contributor';
 
 export const ENGINE_CONFIGS_ROOT_URL = `https://${debugMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;
+
+export const CDN_URL = stagingMode
+  ? 'https://staging-cdn.ghostery.com/'
+  : 'https://cdn.ghostery.com/';
