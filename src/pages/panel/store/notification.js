@@ -12,7 +12,6 @@
 import { store, msg } from 'hybrids';
 
 import Options from '/store/options.js';
-import Session from '/store/session.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { isOpera } from '/utils/browser-info.js';
@@ -82,15 +81,7 @@ const Notification = {
       return NOTIFICATIONS.review;
     }
 
-    const session = await store.resolve(Session);
-
-    // Show contributor notification if user is not a contributor
-    if (session.enabled && !session.contributor) {
-      return CONTRIBUTOR_NOTIFICATION;
-    }
-
-    // By default, show review notification
-    return NOTIFICATIONS.review;
+    return CONTRIBUTOR_NOTIFICATION;
   },
 };
 
