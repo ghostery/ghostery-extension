@@ -13,24 +13,16 @@ import { store } from 'hybrids';
 
 import { getTracker, getSimilarTrackers } from '/utils/trackerdb.js';
 
+import Organization from './organization.js';
+
 const Tracker = {
   id: true,
   name: '',
   category: '',
   categoryDescription: '',
-  organization: {
-    id: true,
-    name: '',
-    description: '',
-    country: '',
-    contact: '',
-    websiteUrl: '',
-    privacyPolicyUrl: '',
-  },
+  organization: Organization,
   [store.connect]: {
-    async get(id) {
-      return getTracker(id);
-    },
+    get: getTracker,
     list: ({ tracker: id }) => getSimilarTrackers(id),
   },
 };

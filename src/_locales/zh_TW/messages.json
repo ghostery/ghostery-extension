@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "瀏覽器：供應商、版本、語言、作業系統供應商"
   },
+  "browsing_assistant": {
+    "message": "瀏覽助理"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "透過分享<a href=\"$${0}\">附加元件的健康狀況</a>和<a href=\"$${1}\">效能遙測</a>的見解，如我們的<a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">隱私政策</a>中所述，您有助於提升整個Ghostery社群的隱私保護。"
   },
@@ -172,6 +175,9 @@
   "comments": {
     "message": "評論",
     "description": "Tracker category name"
+  },
+  "consent_managed": {
+    "message": "同意管理"
   },
   "consent_management": {
     "message": "同意管理",
@@ -235,6 +241,9 @@
   "detailed_view": {
     "message": "詳細圖示"
   },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "偵測並防止廣告攔截器失效，透過自動暫停受影響的頁面來實現。"
+  },
   "disable": {
     "message": "停用"
   },
@@ -274,10 +283,6 @@
   "email": {
     "message": "電郵",
     "description": "Tracker category name"
-  },
-  "enable_@_0_": {
-    "message": "啟用 $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "立即啟用廣告攔截功能"
@@ -836,9 +841,6 @@
   "trackers_preview": {
     "message": "追蹤器預覽"
   },
-  "trackers_wheel": {
-    "message": "追踪器輪盤"
-  },
   "trends": {
     "message": "趨勢"
   },
@@ -873,6 +875,9 @@
   },
   "uninstall": {
     "message": "解除安裝"
+  },
+  "update_now": {
+    "message": "現在更新"
   },
   "updating___": {
     "message": "更新中..."

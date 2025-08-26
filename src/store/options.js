@@ -31,13 +31,16 @@ export const SYNC_OPTIONS = [
   'regionalFilters',
   'customFilters',
   'experimentalFilters',
+  'serpTrackingPrevention',
+  'wtmSerpReport',
   'trackerWheel',
   'trackerCount',
-  'wtmSerpReport',
-  'serpTrackingPrevention',
+  'pauseAssistant',
   'panel',
   'theme',
 ];
+
+export const REPORT_OPTIONS = [...SYNC_OPTIONS, 'filtersUpdatedAt'];
 
 export const SYNC_PROTECTED_OPTIONS = [...SYNC_OPTIONS, 'exceptions', 'paused'];
 
@@ -70,13 +73,13 @@ const Options = {
 
   filtersUpdatedAt: 0,
 
-  // Browser toolbar icon
+  serpTrackingPrevention: true,
+
+  // WhoTracks.Me Section
+  wtmSerpReport: true,
   trackerWheel: false,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
-
-  // SERP
-  wtmSerpReport: true,
-  serpTrackingPrevention: true,
+  pauseAssistant: true,
 
   // Onboarding
   terms: false,
@@ -88,7 +91,6 @@ const Options = {
       : {}),
     ...(__PLATFORM__ === 'chromium' ? { pinIt: false } : {}),
   },
-  installDate: '',
 
   // UI
   panel: { statsType: 'graph', notifications: true },

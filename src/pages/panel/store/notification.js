@@ -16,7 +16,7 @@ import Session from '/store/session.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { isOpera } from '/utils/browser-info.js';
-import { REVIEW_PAGE_URL } from '/utils/urls';
+import { BECOME_A_CONTRIBUTOR_PAGE_URL, REVIEW_PAGE_URL } from '/utils/urls';
 
 const NOTIFICATIONS = {
   terms: {
@@ -49,7 +49,7 @@ const CONTRIBUTOR_NOTIFICATION = {
   icon: 'heart',
   type: '',
   text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
-  url: 'https://www.ghostery.com/become-a-contributor?utm_source=gbe&utm_campaign=panel-becomeacontributor',
+  url: `${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=panel-becomeacontributor`,
   action: msg`Become a Contributor`,
 };
 
@@ -82,13 +82,11 @@ const Notification = {
       return NOTIFICATIONS.review;
     }
 
-    if (__PLATFORM__ !== 'safari') {
-      const session = await store.resolve(Session);
+    const session = await store.resolve(Session);
 
-      // Show contributor notification if user is not a contributor
-      if (session.enabled && !session.contributor) {
-        return CONTRIBUTOR_NOTIFICATION;
-      }
+    // Show contributor notification if user is not a contributor
+    if (session.enabled && !session.contributor) {
+      return CONTRIBUTOR_NOTIFICATION;
     }
 
     // By default, show review notification

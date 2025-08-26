@@ -13,7 +13,7 @@
 const origin = new URL(window.location.href).origin;
 
 function postMessage({ urls }) {
-  chrome.runtime.sendMessage({ action: 'updateTabStats', urls });
+  chrome.runtime.sendMessage({ action: 'stats:update', urls });
 }
 
 // Based on https://github.com/mozilla-mobile/firefox-ios/blob/1f3fd1640214b2b442c573ea7d2882d480f4f24c/content-blocker-lib-ios/js/TrackingProtectionStats.js

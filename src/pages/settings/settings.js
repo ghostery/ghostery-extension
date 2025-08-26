@@ -11,8 +11,7 @@
 
 import { html, router, store } from 'hybrids';
 
-import { openTabWithUrl } from '/utils/tabs.js';
-import { HOME_PAGE_URL } from '/utils/urls.js';
+import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 import Session from '/store/session.js';
 
@@ -20,16 +19,14 @@ import Privacy from './views/privacy.js';
 import Websites from './views/websites.js';
 import Whotracksme from './views/whotracksme.js';
 import MyGhostery from './views/my-ghostery.js';
-import Preview from './views/preview.js';
 import Trackers from './views/trackers.js';
 
 import assets from './assets/index.js';
 
 export default {
-  stack: router(
-    [Privacy, Websites, Whotracksme, MyGhostery, Preview, Trackers],
-    { transition: true },
-  ),
+  stack: router([Privacy, Websites, Whotracksme, MyGhostery, Trackers], {
+    transition: true,
+  }),
   session: store(Session),
   render: ({ stack, session }) =>
     html`
@@ -97,8 +94,7 @@ export default {
                 `
               : html`<ui-icon name="user" color="nav"></ui-icon> My Ghostery`}
           </a>
-          ${__PLATFORM__ !== 'safari' &&
-          store.ready(session) &&
+          ${store.ready(session) &&
           session.enabled &&
           html`
             <settings-card
@@ -113,7 +109,7 @@ export default {
               ${session.contributor
                 ? html`
                     <img
-                      src="${assets['contributor_badge']}"
+                      src="${assets.contributor_badge}"
                       layout="size:12"
                       alt="Contribution"
                       slot="picture"
@@ -134,7 +130,7 @@ export default {
                   `
                 : html`
                     <img
-                      src="${assets['hands']}"
+                      src="${assets.hands}"
                       layout="size:12"
                       alt="Contribution"
                       slot="picture"
@@ -153,8 +149,8 @@ export default {
                       </ui-text>
                       <ui-button type="primary" layout="margin:top">
                         <a
-                          href="${HOME_PAGE_URL}/become-a-contributor?utm_source=gbe&utm_campaign=settings-becomeacontributor"
-                          onclick="${openTabWithUrl}"
+                          href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=settings-becomeacontributor"
+                          target="_blank"
                         >
                           Become a Contributor
                         </a>

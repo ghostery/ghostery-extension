@@ -9,6 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { store } from 'hybrids';
 import * as IDB from 'idb';
 import {
   FiltersEngine,
@@ -17,6 +18,8 @@ import {
   mergeDiffs,
   Resources,
 } from '@ghostery/adblocker';
+
+import ResourcesModel from '/store/resources.js';
 
 import { registerDatabase } from './indexeddb.js';
 import debug from './debug.js';
@@ -141,9 +144,13 @@ async function loadFromStorage(name) {
   return null;
 }
 
-async function saveToStorage(name) {
+async function saveToStorage(name, checksum) {
   const engine = loadFromMemory(name);
   const serialized = engine?.serialize();
+
+  store.set(ResourcesModel, {
+    checksums: { [name]: (engine && checksum) || null },
+  });
 
   try {
     const db = await getDB();
@@ -188,7 +195,7 @@ async function loadFromFile(name) {
 
     saveToMemory(name, engine);
 
-    await saveToStorage(name).catch(() => {
+    await saveToStorage(name, 'filesystem').catch(() => {
       console.error(`[engines] Failed to save engine "${name}" to storage`);
     });
 
@@ -271,7 +278,7 @@ export async function update(name) {
     // Make a full update if we need to remove some lists
     // In case of trackerdb, incremental updates are not possible.
     // Instead if we detect a change in subscription list, a complete
-    // `engine is donwloaded.
+    // `engine is downloaded.
     if (requiresFullReload) {
       const arrayBuffer = await fetch(data.engines[ENGINE_VERSION].url)
         .then(check)
@@ -282,9 +289,12 @@ export async function update(name) {
 
       // Save the new engine to memory and storage
       saveToMemory(name, engine);
-      saveToStorage(name);
+      saveToStorage(name, data.engines[ENGINE_VERSION].checksum);
 
-      console.info(`Engine "${name}" reloaded`);
+      console.info(
+        `Engine "${name}" reloaded:`,
+        data.engines[ENGINE_VERSION].checksum,
+      );
 
       return true;
     }
@@ -385,10 +395,13 @@ export async function update(name) {
     }
 
     if (updated) {
-      console.info(`[engines] Engine "${name}" updated`);
+      console.info(
+        `[engines] Engine "${name}" updated:`,
+        data.engines[ENGINE_VERSION].checksum,
+      );
 
       // Save the new engine to storage
-      saveToStorage(name);
+      saveToStorage(name, data.engines[ENGINE_VERSION].checksum);
 
       return true;
     }

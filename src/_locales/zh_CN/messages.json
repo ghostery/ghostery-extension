@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "浏览器：供应商、版本、语言、操作系统供应商"
   },
+  "browsing_assistant": {
+    "message": "浏览助手"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "通过分享有关<a href=\"$${0}\">附加组件健康</a>和<a href=\"$${1}\">性能遥测</a>的见解，如我们的<a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>中所述，您帮助推进整个Ghostery社区的隐私保护。"
   },
@@ -172,6 +175,9 @@
   "comments": {
     "message": "评论",
     "description": "Tracker category name"
+  },
+  "consent_managed": {
+    "message": "同意管理"
   },
   "consent_management": {
     "message": "意见征求管理",
@@ -235,6 +241,9 @@
   "detailed_view": {
     "message": "详细视图"
   },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "检测并防止广告拦截器失效，通过在受影响的页面上自动暂停来实现。"
+  },
   "disable": {
     "message": "禁用"
   },
@@ -274,10 +283,6 @@
   "email": {
     "message": "电子邮件地址",
     "description": "Tracker category name"
-  },
-  "enable_@_0_": {
-    "message": "启用 $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "立即启用广告拦截功能"
@@ -836,9 +841,6 @@
   "trackers_preview": {
     "message": "跟踪器预览"
   },
-  "trackers_wheel": {
-    "message": "跟踪器轮"
-  },
   "trends": {
     "message": "趋势"
   },
@@ -873,6 +875,9 @@
   },
   "uninstall": {
     "message": "卸载"
+  },
+  "update_now": {
+    "message": "立即更新"
   },
   "updating___": {
     "message": "更新中..."

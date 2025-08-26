@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "ブラウザ：ベンダー、バージョン、言語、オペレーティングシステムベンダー"
   },
+  "browsing_assistant": {
+    "message": "ブラウジングアシスタント"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "アドオンの<a href=\"$${0}\">健全性</a>と<a href=\"$${1}\">パフォーマンステレメトリ</a>に関する洞察を、<a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">プライバシーポリシー</a>に基づいて共有することで、Ghosteryコミュニティ全体のプライバシー保護の向上に貢献できます。"
   },
@@ -172,6 +175,9 @@
   "comments": {
     "message": "コメント",
     "description": "Tracker category name"
+  },
+  "consent_managed": {
+    "message": "同意管理"
   },
   "consent_management": {
     "message": "同意の管理",
@@ -235,6 +241,9 @@
   "detailed_view": {
     "message": "詳細ビュー"
   },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "影響を受けたページで自動的に一時停止することで、広告ブロッカーの破損を検出し防止します。"
+  },
   "disable": {
     "message": "無効化"
   },
@@ -274,10 +283,6 @@
   "email": {
     "message": "メール",
     "description": "Tracker category name"
-  },
-  "enable_@_0_": {
-    "message": "有効にする $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "広告ブロッキングを今すぐ有効化"
@@ -836,9 +841,6 @@
   "trackers_preview": {
     "message": "トラッカーのプレビュー"
   },
-  "trackers_wheel": {
-    "message": "トラッカーホイール"
-  },
   "trends": {
     "message": "トレンド"
   },
@@ -873,6 +875,9 @@
   },
   "uninstall": {
     "message": "アンインストール"
+  },
+  "update_now": {
+    "message": "今すぐ更新"
   },
   "updating___": {
     "message": "更新中..."

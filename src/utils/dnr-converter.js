@@ -25,8 +25,12 @@ export default async function convert(filters) {
         filters,
       });
     } else if (__PLATFORM__ === 'safari') {
-      const { convertWithAdguard } = await import('@ghostery/urlfilter2dnr');
-      result = await convertWithAdguard(filters);
+      const { default: convertWithAdguard } = await import(
+        '@ghostery/urlfilter2dnr/adguard'
+      );
+      result = await convertWithAdguard(filters, {
+        resourcesPath: '/rule_resources/redirects',
+      });
 
       result.rules = result.rules.reduce((acc, r) => {
         try {
@@ -36,7 +40,7 @@ export default async function convert(filters) {
         }
         return acc;
       }, []);
-      result.errors = result.errors.map((e) => `DNR: ${e.message}`);
+      result.errors = result.errors.map((e) => `DNR - ${e.message || e}`);
     } else {
       throw new Error('Unsupported platform for DNR conversion');
     }

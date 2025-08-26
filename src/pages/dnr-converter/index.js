@@ -13,11 +13,13 @@
 // The check is redone in the background script
 import './monkey-patch.js';
 
-import { convertWithAdguard } from '@ghostery/urlfilter2dnr';
+import convertWithAdguard from '@ghostery/urlfilter2dnr/adguard';
 
 export async function convert(filters) {
   try {
-    return await convertWithAdguard(filters);
+    return await convertWithAdguard(filters, {
+      resourcesPath: '/rule_resources/redirects',
+    });
   } catch (err) {
     console.error('Error converting filters:', err);
     return {

@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "브라우저: 종류, 버전, 언어, 운영 체제"
   },
+  "browsing_assistant": {
+    "message": "브라우징 도우미"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "<a href=\"$${0}\">애드온의 상태</a> 및 <a href=\"$${1}\">성능 원격 측정</a>에 대한 통찰을 공유함으로써, <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 명시된 대로 Ghostery 커뮤니티 전체의 개인정보 보호를 강화하는 데 기여할 수 있습니다."
   },
@@ -172,6 +175,9 @@
   "comments": {
     "message": "댓글",
     "description": "Tracker category name"
+  },
+  "consent_managed": {
+    "message": "동의 관리됨"
   },
   "consent_management": {
     "message": "약관 관리 프레임워크",
@@ -235,6 +241,9 @@
   "detailed_view": {
     "message": "자세히 보기"
   },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "광고 차단기 손상을 감지하고 영향을 받는 페이지에서 자동으로 일시 중지하여 방지합니다."
+  },
   "disable": {
     "message": "사용 중지"
   },
@@ -274,10 +283,6 @@
   "email": {
     "message": "이메일",
     "description": "Tracker category name"
-  },
-  "enable_@_0_": {
-    "message": "$${0} 활성화",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "지금 광고 차단 사용"
@@ -836,9 +841,6 @@
   "trackers_preview": {
     "message": "트래커 개요"
   },
-  "trackers_wheel": {
-    "message": "트래커 휠"
-  },
   "trends": {
     "message": "동향"
   },
@@ -873,6 +875,9 @@
   },
   "uninstall": {
     "message": "제거"
+  },
+  "update_now": {
+    "message": "지금 업데이트"
   },
   "updating___": {
     "message": "업데이트 중..."

@@ -17,6 +17,11 @@ import Options from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import * as trackerdb from '/utils/trackerdb.js';
 import convert from '/utils/dnr-converter.js';
+import {
+  EXCEPTIONS_ID_RANGE,
+  EXCEPTIONS_RULE_PRIORITY,
+  getDynamicRulesIds,
+} from '/utils/dnr.js';
 
 // Migrate exceptions from old format
 // TODO: Remove this in the next version
@@ -84,19 +89,17 @@ async function updateFilters() {
 
       rules.push({
         ...rule,
-        priority: 2000000 + rule.priority,
+        priority: EXCEPTIONS_RULE_PRIORITY + rule.priority,
       });
     }
   }
 
   const addRules = rules.map((rule, index) => ({
     ...rule,
-    id: 2000000 + index,
+    id: EXCEPTIONS_RULE_PRIORITY + index,
   }));
 
-  const removeRuleIds = (await chrome.declarativeNetRequest.getDynamicRules())
-    .filter(({ id }) => id >= 2000000)
-    .map(({ id }) => id);
+  const removeRuleIds = await getDynamicRulesIds(EXCEPTIONS_ID_RANGE);
 
   if (addRules.length || removeRuleIds.length) {
     await chrome.declarativeNetRequest.updateDynamicRules({

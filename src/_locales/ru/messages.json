@@ -138,6 +138,9 @@
   "browser__vendor__version__language__operating_system_vendor": {
     "message": "браузер: производитель, версия, язык, производитель операционной системы"
   },
+  "browsing_assistant": {
+    "message": "Помощник по просмотру"
+  },
   "by_sharing_insights_on__a_href__@_0___add_on_s_health__a__and__a_href____1___performance_telemetry__a__as_outlined_in_our__a_href____2___target___blank__rel__noreferrer__privacy_policy__a___you_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Предоставляя информацию о <a href=\"$${0}\">состоянии дополнения</a> и <a href=\"$${1}\">телеметрии производительности</a>, как указано в нашей <a href=\"$${2}\" target=\"_blank\" rel=\"noreferrer\">Политике конфиденциальности</a>, вы помогаете улучшать защиту конфиденциальности для всей сообщества Ghostery."
   },
@@ -172,6 +175,9 @@
   "comments": {
     "message": "Комментарии",
     "description": "Tracker category name"
+  },
+  "consent_managed": {
+    "message": "Управление согласием"
   },
   "consent_management": {
     "message": "Управление согласием",
@@ -235,6 +241,9 @@
   "detailed_view": {
     "message": "Детальный просмотр"
   },
+  "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
+    "message": "Обнаруживает и предотвращает сбои блокировщика рекламы, автоматически приостанавливая его работу на затронутых страницах."
+  },
   "disable": {
     "message": "Отключить"
   },
@@ -274,10 +283,6 @@
   "email": {
     "message": "Email",
     "description": "Tracker category name"
-  },
-  "enable_@_0_": {
-    "message": "Включить $${0}",
-    "description": "Enable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\"\nEnable \"feature name\""
   },
   "enable_ad_blocking_now": {
     "message": "Включить блокировку рекламы"
@@ -836,9 +841,6 @@
   "trackers_preview": {
     "message": "Предварительный просмотр трекеров"
   },
-  "trackers_wheel": {
-    "message": "Трекерская рулетка"
-  },
   "trends": {
     "message": "Тренды"
   },
@@ -873,6 +875,9 @@
   },
   "uninstall": {
     "message": "Удалить"
+  },
+  "update_now": {
+    "message": "Обновить сейчас"
   },
   "updating___": {
     "message": "обновление..."

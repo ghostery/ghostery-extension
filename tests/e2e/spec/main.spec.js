@@ -31,7 +31,10 @@ describe('Main Features', function () {
       await setPrivacyToggle('never-consent', false);
       await browser.url(WEBSITE_URL);
 
-      await expect($(SELECTOR)).toBeDisplayed();
+      // In some regions the cmp element might not be loaded at all
+      // so we only check if the CMP is visible if the element exists
+      const cmp = await $(SELECTOR);
+      if (await cmp.isExisting()) await expect(cmp).toBeDisplayed();
     });
 
     it('closes the consent popup', async function () {
@@ -44,7 +47,10 @@ describe('Main Features', function () {
       // Never-consent can left the cmp structure until next page load
       await browser.url(WEBSITE_URL);
 
-      await expect($(SELECTOR)).toHaveText('');
+      // In some regions the cmp element might not be loaded at all
+      // so we only check if the CMP is visible if the element exists
+      const cmp = await $(SELECTOR);
+      if (await cmp.isExisting()) await expect(cmp).toHaveText('');
     });
   });
 
@@ -157,44 +163,48 @@ describe('Main Features', function () {
   });
 
   describe('Global Pause', function () {
-    it('shows blocked trackers in the panel', async function () {
+    const SELECTOR = 'ad-slot';
+
+    it('blocks trackers when is disabled', async function () {
       await setPrivacyToggle('global-pause', false);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
-      });
+      await expect($(SELECTOR)).not.toBeDisplayed();
     });
 
-    it("doesn't show blocked trackers in the panel", async function () {
+    it("doesn't block trackers when is enabled", async function () {
       await setPrivacyToggle('global-pause', true);
       await browser.url(PAGE_URL);
 
-      await switchToPanel(async function () {
-        await expect(
-          getExtensionElement('component:feedback'),
-        ).not.toBeDisplayed();
-      });
+      await expect($(SELECTOR)).toBeDisplayed();
 
       await setPrivacyToggle('global-pause', false);
     });
   });
 
   describe('Website Pause', function () {
+    const SELECTOR = 'ad-slot';
+
     it("pauses the website's privacy settings", async function () {
       await browser.url(PAGE_URL);
 
       await switchToPanel(async function () {
         const pauseButton = await getExtensionElement('button:pause');
         await pauseButton.click();
-
-        await expect(
-          getExtensionElement('component:feedback'),
-        ).not.toBeDisplayed();
-
-        await pauseButton.click();
-        await expect(getExtensionElement('component:feedback')).toBeDisplayed();
       });
+
+      await browser.url(PAGE_URL);
+
+      await expect($(SELECTOR)).toBeDisplayed();
+
+      await switchToPanel(async function () {
+        const pauseButton = await getExtensionElement('button:pause');
+        await pauseButton.click();
+      });
+
+      await browser.url(PAGE_URL);
+
+      await expect($(SELECTOR)).not.toBeDisplayed();
     });
   });
 });

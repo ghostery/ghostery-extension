@@ -215,6 +215,7 @@ function platformSpecificSettings() {
         'pt',
         'sg',
         'nz',
+        'ng',
       ],
       PATTERNS_URL: `https://cdn2.ghostery.com/${URL_INFIX}wtm-chrome-desktop/patterns.json`,
       CHANNEL: 'chrome-desktop',

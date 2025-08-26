@@ -9,10 +9,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { getOS } from './browser-info.js';
+
 export async function openTabWithUrl(host, event) {
   // Firefox does not support Tabs API in iframes (Trackers Preview)
-  if (__PLATFORM__ === 'firefox' && !chrome.tabs) {
+  // Firefox Android does not allow using `window.close()` in async event listeners
+  if (__PLATFORM__ === 'firefox' && (!chrome.tabs || getOS() === 'android')) {
     event.currentTarget.target = '_blank';
+    // Timeout is required to prevent from closing the window before the anchor is opened
+    setTimeout(() => window.close(), 50);
+
     return;
   }
 
@@ -31,6 +37,7 @@ export async function openTabWithUrl(host, event) {
         url: href !== tabs[0].url ? href : undefined,
       });
 
+      window.close();
       return;
     }
   } catch (e) {
@@ -38,6 +45,7 @@ export async function openTabWithUrl(host, event) {
   }
 
   chrome.tabs.create({ url: href });
+  window.close();
 }
 
 export async function getCurrentTab() {

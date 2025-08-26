@@ -15,20 +15,14 @@ import { parse } from 'tldts-experimental';
 import AutoSyncingMap from '/utils/map.js';
 import { getCurrentTab } from '/utils/tabs.js';
 
+import Organization from './organization.js';
+
 const Tracker = {
   id: true,
   name: '',
   category: '',
   categoryDescription: '',
-  organization: {
-    id: true,
-    name: '',
-    description: '',
-    country: '',
-    contact: '',
-    websiteUrl: '',
-    privacyPolicyUrl: '',
-  },
+  organization: Organization,
   blocked: false,
   modified: false,
   requests: [{ url: '', blocked: false, modified: false }],
@@ -42,6 +36,7 @@ const Tracker = {
 let tab = undefined;
 
 const TabStats = {
+  domain: '',
   hostname: '',
   trackers: [Tracker],
 
