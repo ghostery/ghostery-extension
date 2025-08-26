@@ -105,6 +105,7 @@ function openLogger() {
   const features = 'toolbar=no,width=1000,height=500';
 
   window.open(url, 'Ghostery Logger', features);
+  window.close();
 }
 
 async function openElementPicker() {
@@ -342,28 +343,34 @@ export default {
                   ontypechange="${setStatsType}"
                   layout="margin:1.5:1.5:1"
                 >
-                  ${options.panel.statsType === 'graph' &&
-                  html`
-                    <ui-tooltip position="bottom" slot="actions">
-                      <span slot="content">WhoTracks.Me Reports</span>
-                      <ui-action-button layout="size:4.5">
-                        <a href="${router.url(WhoTracksMe)}">
-                          <ui-icon name="whotracksme" color="primary"></ui-icon>
-                        </a>
-                      </ui-action-button>
-                    </ui-tooltip>
-                  `}
-                  ${options.panel.statsType === 'list' &&
-                  html`
-                    <ui-tooltip position="bottom" slot="actions">
-                      <span slot="content" translate="no">Logger</span>
-                      <ui-action-button layout="size:4.5">
-                        <button onclick="${openLogger}">
-                          <ui-icon name="open-book" color="primary"></ui-icon>
-                        </button>
-                      </ui-action-button>
-                    </ui-tooltip>
-                  `}
+                  ${__PLATFORM__ === 'safari' ||
+                  options.panel.statsType === 'graph'
+                    ? html`
+                        <ui-tooltip position="bottom" slot="actions">
+                          <span slot="content">WhoTracks.Me Reports</span>
+                          <ui-action-button layout="size:4.5">
+                            <a href="${router.url(WhoTracksMe)}">
+                              <ui-icon
+                                name="whotracksme"
+                                color="primary"
+                              ></ui-icon>
+                            </a>
+                          </ui-action-button>
+                        </ui-tooltip>
+                      `
+                    : html`
+                        <ui-tooltip position="bottom" slot="actions">
+                          <span slot="content" translate="no">Logger</span>
+                          <ui-action-button layout="size:4.5">
+                            <button onclick="${openLogger}">
+                              <ui-icon
+                                name="open-book"
+                                color="primary"
+                              ></ui-icon>
+                            </button>
+                          </ui-action-button>
+                        </ui-tooltip>
+                      `}
                   ${!stats.groupedTrackers.length &&
                   html`
                     <ui-list layout="grow margin:0.5:0" slot="list">
