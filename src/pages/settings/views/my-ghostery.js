@@ -15,6 +15,7 @@ import Options from '/store/options.js';
 
 import * as backup from '../utils/backup.js';
 import ManagedConfig from '/store/managed-config.js';
+import { isOpera } from '/utils/browser-info.js';
 
 async function importSettings(host, event) {
   try {
@@ -46,18 +47,22 @@ export default {
             ${store.ready(managedConfig) &&
             !managedConfig.disableUserAccount &&
             html`
-              <ui-toggle
-                value="${options.sync}"
-                onchange="${html.set(options, 'sync')}"
-              >
-                <settings-option>
-                  Settings Sync
-                  <span slot="description">
-                    Saves and synchronizes your custom settings between browsers
-                    and devices.
-                  </span>
-                </settings-option>
-              </ui-toggle>
+              ${__PLATFORM__ !== 'safari' &&
+              !isOpera() &&
+              html`
+                <ui-toggle
+                  value="${options.sync}"
+                  onchange="${html.set(options, 'sync')}"
+                >
+                  <settings-option>
+                    Settings Sync
+                    <span slot="description">
+                      Saves and synchronizes your custom settings between
+                      different devices.
+                    </span>
+                  </settings-option>
+                </ui-toggle>
+              `}
 
               <div layout="column gap:2" layout@768px="row">
                 <div layout="column grow gap:0.5">

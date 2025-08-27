@@ -8,9 +8,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { setCookie } from '/utils/api.js';
+
+import { GHOSTERY_DOMAIN } from '/utils/urls.js';
 
 const TEST_COOKIE_NAME = `ghostery:opera:cookie:test:${Date.now()}`;
+export const COOKIE_DOMAIN = `.${GHOSTERY_DOMAIN}`;
+const COOKIE_URL = `https://${GHOSTERY_DOMAIN}`;
 
 let isSupported = undefined;
 export async function isSerpSupported() {
@@ -33,13 +36,18 @@ export async function isSerpSupported() {
 
       // Set `opera_serp_notification` on the `ghostery.com` domain
       // to make sure the top bar notification is not shown
-      setCookie('opera_serp_notification', 'true', 60 * 60 * 24 * 365 * 10);
+      chrome.cookies.set({
+        name: 'opera_serp_notification',
+        url: COOKIE_URL,
+        path: '/',
+        value: 'true',
+        domain: COOKIE_DOMAIN,
+        expirationDate: Date.now() / 1000 + 60 * 60 * 24 * 365 * 10,
+        httpOnly: true,
+      });
 
       isSupported = true;
     } catch {
-      // Clear out the cookie if it was set
-      setCookie('opera_serp_notification', undefined);
-
       isSupported = false;
     }
   }
