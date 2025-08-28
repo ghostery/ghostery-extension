@@ -14,39 +14,10 @@ import { parseFilters } from '@ghostery/adblocker';
 
 import * as engines from '/utils/engines.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
-import Options from '/store/options.js';
-import CustomFilters from '/store/custom-filters.js';
 
 import { setup, reloadMainEngine } from './adblocker.js';
-import { updateCustomFilters } from './custom-filters.js';
 
-// Initialize element picker selectors
-// to ensure that store.observe() is called
-store.resolve(ElementPickerSelectors).then(async ({ hostnames }) => {
-  // Migrate element picker selector from custom filters engine
-  // TODO: Remove this migration after a few releases
-  if (
-    Object.keys(hostnames).length &&
-    !(await engines.init(engines.ELEMENT_PICKER_ENGINE))
-  ) {
-    console.log(
-      '[element-picker] Migrating selectors from custom filters engine...',
-    );
-
-    // Force refresh the element picker engine
-    store.clear(ElementPickerSelectors, false);
-    store.get(ElementPickerSelectors);
-
-    // Refresh custom filters without element picker selectors
-    const [options, customFilters] = await Promise.all([
-      store.resolve(Options),
-      store.resolve(CustomFilters),
-    ]);
-
-    updateCustomFilters(customFilters.text, options.customFilters);
-  }
-});
-
+// Observe element picker selectors to update the adblocker engine
 store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   if (!lastModel) return;
 
@@ -76,3 +47,7 @@ store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
   setup.pending && (await setup.pending);
   await reloadMainEngine();
 });
+
+// Initialize element picker selectors
+// to ensure that store.observe() is called
+store.resolve(ElementPickerSelectors);
