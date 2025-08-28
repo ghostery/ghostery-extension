@@ -103,9 +103,8 @@ export default {
                   </ui-button>
                 </div>
               </div>
+              <ui-line></ui-line>
             `}
-
-            <ui-line></ui-line>
 
             <ui-toggle
               value="${options.panel.notifications}"
