@@ -11,6 +11,7 @@
 import { store } from 'hybrids';
 
 import Options, { SYNC_OPTIONS } from '/store/options.js';
+import ManagedConfig from '/store/managed-config.js';
 
 import { isOpera } from '/utils/browser-info.js';
 import debounce from '/utils/debounce.js';
@@ -19,8 +20,18 @@ import * as OptionsObserver from '/utils/options-observer.js';
 const syncOptions = debounce(
   async function (options, lastOptions) {
     try {
+      const { disableUserControl, disableUserAccount } =
+        await store.resolve(ManagedConfig);
+
       // Return if sync is disabled
-      if (!options.terms || !options.sync) return;
+      if (
+        !options.terms ||
+        !options.sync ||
+        disableUserAccount ||
+        disableUserControl
+      ) {
+        return;
+      }
 
       // Skip if revision has changed
       if (lastOptions && options.revision !== lastOptions.revision) return;
