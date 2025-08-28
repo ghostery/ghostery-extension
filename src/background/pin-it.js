@@ -20,13 +20,7 @@ import { openNotification } from './notifications.js';
 
 const browser = getBrowser();
 
-if (
-  __PLATFORM__ === 'chromium' &&
-  browser.name !== 'oculus' &&
-  // This is temporary check to avoid showing the notification in Brave browser
-  // TODO: Remove this check when Brave survey is no longer needed
-  browser.name !== 'brave'
-) {
+if (__PLATFORM__ === 'chromium' && browser.name !== 'oculus') {
   chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (
       details.frameId !== 0 ||
