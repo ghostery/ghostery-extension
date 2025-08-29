@@ -23,35 +23,6 @@ import {
   getDynamicRulesIds,
 } from '/utils/dnr.js';
 
-// Migrate exceptions from old format
-// TODO: Remove this in the next version
-try {
-  chrome.storage.local
-    .get(['exceptions'])
-    .then(async ({ exceptions: values }) => {
-      if (values) {
-        const exceptions = {};
-        Object.entries(values).forEach(([id, { blocked, trustedDomains }]) => {
-          if (!blocked || trustedDomains.length > 0) {
-            exceptions[id] = { global: !blocked, domains: trustedDomains };
-          }
-        });
-
-        await store.set(Options, { exceptions });
-        await chrome.storage.local.remove('exceptions');
-
-        updateFilters();
-
-        console.log('[exceptions] Migration completed successfully.');
-      }
-    });
-} catch (e) {
-  console.error(
-    '[exceptions] Error while migrating exceptions from old format:',
-    e,
-  );
-}
-
 async function updateFilters() {
   const options = await store.resolve(Options);
   const rules = [];
