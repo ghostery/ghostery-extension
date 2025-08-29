@@ -118,7 +118,9 @@ export default {
               </ui-toggle>
             `}
             <ui-toggle
-              value="${options.wtmSerpReport}"
+              value="${managedConfig.disableTrackersPreview
+                ? false
+                : options.wtmSerpReport}"
               onchange="${html.set(options, 'wtmSerpReport')}"
               data-qa="toggle:wtmSerpReport"
               disabled="${managedConfig.disableTrackersPreview}"

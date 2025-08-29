@@ -11,30 +11,30 @@
 import { store } from 'hybrids';
 
 import Options, { SYNC_OPTIONS } from '/store/options.js';
-import Session from '/store/session.js';
+import ManagedConfig from '/store/managed-config.js';
 
-import { getUserOptions, setUserOptions } from '/utils/api.js';
-import * as OptionsObserver from '/utils/options-observer.js';
-import { HOME_PAGE_URL, ACCOUNT_PAGE_URL } from '/utils/urls.js';
+import { isOpera } from '/utils/browser-info.js';
 import debounce from '/utils/debounce.js';
+import * as OptionsObserver from '/utils/options-observer.js';
 
 const syncOptions = debounce(
   async function (options, lastOptions) {
     try {
-      // Skip if revision has changed
-      if (lastOptions && options.revision !== lastOptions.revision) return;
+      const { disableUserControl, disableUserAccount } =
+        await store.resolve(ManagedConfig);
 
-      // Clean up if sync should be disabled
+      // Return if sync is disabled
       if (
         !options.terms ||
         !options.sync ||
-        !(await store.resolve(Session)).user
+        disableUserAccount ||
+        disableUserControl
       ) {
-        if (options.revision !== 0) {
-          store.set(Options, { revision: 0 });
-        }
         return;
       }
+
+      // Skip if revision has changed
+      if (lastOptions && options.revision !== lastOptions.revision) return;
 
       const keys =
         lastOptions &&
@@ -43,21 +43,15 @@ const syncOptions = debounce(
             !OptionsObserver.isOptionEqual(options[key], lastOptions[key]),
         );
 
-      // If options update, set revision to "dirty" state
-      if (keys && options.revision > 0) {
-        // Updated keys are not on the list of synced options
-        if (keys.length === 0) return;
-
-        options = await store.set(Options, { revision: options.revision * -1 });
-      }
-
-      const serverOptions = await getUserOptions();
+      const { options: serverOptions = {} } = await chrome.storage.sync.get([
+        'options',
+      ]);
 
       // Server has newer options - merge with local options
       // The try/catch block is used to prevent failure of updating local options
       // with server options with obsolete structure
       try {
-        if (serverOptions.revision > Math.abs(options.revision)) {
+        if (serverOptions.revision > options.revision) {
           console.info(
             '[sync] Merging server options with revision:',
             serverOptions.revision,
@@ -83,25 +77,24 @@ const syncOptions = debounce(
       }
 
       // Set options or update:
-      // * No revision on server - initial sync
       // * Keys are passed - options update
-      // * Revision is negative - local options are dirty (not synced)
-      if (!serverOptions.revision || keys?.length || options.revision < 0) {
-        const { revision } = await setUserOptions(
-          SYNC_OPTIONS.reduce(
+      // * No revision on server - initial sync
+      if (keys?.length || !serverOptions.revision) {
+        // Update local revision
+        options = await store.set(Options, { revision: options.revision + 1 });
+
+        // Update sync options
+        await chrome.storage.sync.set({
+          options: SYNC_OPTIONS.reduce(
             (acc, key) => {
-              if (hasOwnProperty.call(options, key)) {
-                acc[key] = options[key];
-              }
+              acc[key] = options[key];
               return acc;
             },
-            { revision: serverOptions.revision + 1 },
+            { revision: options.revision },
           ),
-        );
+        });
 
-        // Update local revision
-        await store.set(Options, { revision });
-        console.info('[sync] Options synced with revision:', revision);
+        console.info('[sync] Options synced with revision:', options.revision);
       }
     } catch (e) {
       console.error(`[sync] Error while syncing options: `, e);
@@ -111,23 +104,32 @@ const syncOptions = debounce(
   { waitFor: 200 },
 );
 
-// Sync options on startup and when options change
-OptionsObserver.addListener(function sync(options, lastOptions) {
-  syncOptions(options, lastOptions);
-});
+// Opera provides chrome.storage.sync API, but it does not sync data between browsers
+// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync#browser_compatibility
+if (__PLATFORM__ !== 'safari' && !isOpera()) {
+  // Sync options on startup and when options change
+  OptionsObserver.addListener(function sync(options, lastOptions) {
+    syncOptions(options, lastOptions);
+  });
 
-// Sync options when a user logs in/out directly
-// from the ghostery.com page (not from the settings page)
-chrome.webNavigation.onDOMContentLoaded.addListener(async ({ url = '' }) => {
-  if (url === HOME_PAGE_URL || url.includes(ACCOUNT_PAGE_URL)) {
-    store.resolve(Options).then((options) => syncOptions(options));
-  }
-});
+  // Sync options when sync storage changes
+  chrome.storage.sync.onChanged.addListener((changes) => {
+    if (changes.options) {
+      store.resolve(Options).then((options) => {
+        // Sync only if revision from sync is greater - the server updated sync.
+        if (changes.options.newValue?.revision > options.revision) {
+          console.log('[sync] Options changed:', changes.options);
+          syncOptions(options);
+        }
+      });
+    }
+  });
 
-// Sync options on demand - triggered by the options page and panel
-// to force sync options when opened
-chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action === 'syncOptions') {
-    store.resolve(Options).then((options) => syncOptions(options));
-  }
-});
+  // Sync options on demand - triggered by the options page and panel
+  // to force sync options when opened
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.action === 'syncOptions') {
+      store.resolve(Options).then((options) => syncOptions(options));
+    }
+  });
+}

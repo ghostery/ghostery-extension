@@ -12,7 +12,6 @@
 import { html, router, store } from 'hybrids';
 
 import Options from '/store/options.js';
-import Session from '/store/session.js';
 import TabStats from '/store/tab-stats.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
@@ -22,9 +21,8 @@ import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
 
 export default {
   options: store(Options),
-  session: store(Session),
   stats: store(TabStats),
-  render: ({ options, session, stats }) => html`
+  render: ({ options, stats }) => html`
     <template layout="grid grow">
       <ui-header>
         <ui-text type="label-m">Menu</ui-text>
@@ -84,37 +82,20 @@ export default {
               href="${chrome.runtime.getURL(
                 '/pages/settings/index.html#@settings-my-ghostery',
               )}"
-              icon="${(store.ready(session) &&
-                session.contributor &&
-                'contributor') ||
-              'user'}"
+              icon="user"
             >
-              <div layout="column">
-                <span>My Ghostery</span>
-                ${store.ready(session) &&
-                (session.name || session.email) &&
-                html`
-                  <ui-text type="body-xs" color="inherit">
-                    ${session.name || session.email}
-                  </ui-text>
-                `}
-              </div>
+              My Ghostery
             </panel-menu-item>
 
-            ${store.ready(session) &&
-            session.enabled &&
-            !session.contributor &&
-            html`
-              <ui-button type="outline-primary" layout="margin:1:1.5">
-                <a
-                  href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=menu-becomeacontributor"
-                  onclick="${openTabWithUrl}"
-                >
-                  <ui-icon name="heart"></ui-icon>
-                  Become a Contributor
-                </a>
-              </ui-button>
-            `}
+            <ui-button type="outline-primary" layout="margin:1:1.5">
+              <a
+                href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=menu-becomeacontributor"
+                onclick="${openTabWithUrl}"
+              >
+                <ui-icon name="heart"></ui-icon>
+                Become a Contributor
+              </a>
+            </ui-button>
 
             <ui-line></ui-line>
 

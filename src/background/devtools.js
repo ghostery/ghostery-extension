@@ -27,6 +27,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           console.info('[devtools] Clearing main local storage');
           chrome.storage.local.clear();
 
+          console.info('[devtools] Clearing sync storage');
+          chrome.storage.sync.clear();
+
           console.info('[devtools] Removing all indexedDBs...');
           await deleteDatabases().catch((e) => {
             console.error('[devtools] Error removing indexedDBs:', e);
