@@ -14,13 +14,18 @@ import { store } from 'hybrids';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
-import { getBrowser } from '/utils/browser-info.js';
+import { getBrowser, getOS } from '/utils/browser-info.js';
 
 import { openNotification } from './notifications.js';
 
 const browser = getBrowser();
+const os = getOS();
 
-if (__PLATFORM__ === 'chromium' && browser.name !== 'oculus') {
+if (
+  __PLATFORM__ === 'chromium' &&
+  browser.name !== 'oculus' &&
+  !(browser.name === 'edge' && (os === 'android' || os === 'ios'))
+) {
   chrome.webNavigation.onCompleted.addListener(async (details) => {
     if (
       details.frameId !== 0 ||
