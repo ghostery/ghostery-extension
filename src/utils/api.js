@@ -27,6 +27,45 @@ const COOKIE_DURATION = 60 * 60 * 24 * 90; // 90 days in seconds
 const COOKIE_SHORT_DURATION = 60 * 60; // 1 hour in seconds
 let COOKIE_EXPIRATION_DATE_OFFSET = 0;
 
+if (__PLATFORM__ === 'safari') {
+  // Safari has two major inconsistency with the specification:
+  // * for cookies.set() the `expirationDate` is in seconds since 2001-01-01T00:00:00Z (instead of beginning of epoch)
+  // * cookies.get() returns the cookie with `expirationDate` in in milliseconds (instead of seconds)
+  //
+  // Below code tries to detect the offset between the two
+  // and use it to convert the expirationDate to seconds
+
+  // TODO: Tested on Safari 18.3.1 - both issue are fixed.
+  // Remove this code when we drop support for older versions
+  (async () => {
+    try {
+      const cookie = await chrome.cookies.set({
+        url: COOKIE_URL,
+        domain: COOKIE_DOMAIN,
+        path: '/',
+        name: 'test',
+        value: '',
+        expirationDate: 1,
+      });
+
+      // Other browsers don't return a cookie with expirationDate is in the past
+      if (cookie) {
+        const date = new Date(cookie.expirationDate);
+
+        // If the year is not 1970, it means there is a bug
+        if (date.getFullYear() !== 1970) {
+          COOKIE_EXPIRATION_DATE_OFFSET = -Math.round(
+            // Clear "1" from setting the cookie and transform to seconds
+            (cookie.expirationDate - 1000) / 1000,
+          );
+        }
+      }
+    } catch {
+      // Protect against throwing an error when trying to detect the offset
+    }
+  })();
+}
+
 async function isFirstPartyIsolation() {
   // Safari has a bug with cookies.getAll(),
   // which shows a permission popup to the user about random domains.
