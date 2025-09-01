@@ -13,16 +13,13 @@ body {
   max-height: 100dvh;
 }
 
-@media screen and (max-height: 600px) {
-  html {
-    overflow-y: auto;
-  }
+body[platform-name='android'],
+body[platform-name='ios'] {
+  min-width: auto;
+}
 
+@media screen and (max-height: 600px) {
   body {
     max-height: 600px;
-  }
-
-  body[browser-name='edge'][platform-name='android'] {
-    max-height: 540px;
   }
 }
