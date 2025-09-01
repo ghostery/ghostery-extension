@@ -90,50 +90,35 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
 
     if (hostnames.length) {
       await chrome.declarativeNetRequest.updateDynamicRules({
-        addRules:
-          __PLATFORM__ === 'safari'
-            ? [
-                {
-                  id: 1,
-                  priority: PAUSED_RULE_PRIORITY,
-                  action: { type: 'allow' },
-                  condition: {
-                    domains: globalPause
-                      ? undefined
-                      : hostnames.map((d) => `*${d}`),
-                    urlFilter: '*',
-                  },
-                },
-              ]
-            : [
-                {
-                  id: 1,
-                  priority: PAUSED_RULE_PRIORITY,
-                  action: { type: 'allow' },
-                  condition: {
-                    initiatorDomains: globalPause ? undefined : hostnames,
-                    resourceTypes: ALL_RESOURCE_TYPES,
-                  },
-                },
-                {
-                  id: 2,
-                  priority: PAUSED_RULE_PRIORITY,
-                  action: { type: 'allow' },
-                  condition: {
-                    requestDomains: globalPause ? undefined : hostnames,
-                    resourceTypes: ALL_RESOURCE_TYPES,
-                  },
-                },
-                {
-                  id: 3,
-                  priority: PAUSED_RULE_PRIORITY,
-                  action: { type: 'allowAllRequests' },
-                  condition: {
-                    initiatorDomains: globalPause ? undefined : hostnames,
-                    resourceTypes: ['main_frame', 'sub_frame'],
-                  },
-                },
-              ],
+        addRules: [
+          {
+            id: 1,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allow' },
+            condition: {
+              initiatorDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ALL_RESOURCE_TYPES,
+            },
+          },
+          {
+            id: 2,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allow' },
+            condition: {
+              requestDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ALL_RESOURCE_TYPES,
+            },
+          },
+          {
+            id: 3,
+            priority: PAUSED_RULE_PRIORITY,
+            action: { type: 'allowAllRequests' },
+            condition: {
+              initiatorDomains: globalPause ? undefined : hostnames,
+              resourceTypes: ['main_frame', 'sub_frame'],
+            },
+          },
+        ],
         removeRuleIds,
       });
       console.log('[dnr] Pause rules updated:', hostnames.join(', '));

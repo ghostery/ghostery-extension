@@ -219,16 +219,13 @@ if (manifest.storage?.managed_schema) {
 
 // copy declarative net request lists
 if (manifest.declarative_net_request?.rule_resources) {
-  // Add regional DNR rules to Chromium
-  if (argv.target === 'chromium') {
-    REGIONS.forEach((region) => {
-      manifest.declarative_net_request.rule_resources.push({
-        id: `lang-${region}`,
-        enabled: false,
-        path: `rule_resources/dnr-lang-${region}.json`,
-      });
+  REGIONS.forEach((region) => {
+    manifest.declarative_net_request.rule_resources.push({
+      id: `lang-${region}`,
+      enabled: false,
+      path: `rule_resources/dnr-lang-${region}.json`,
     });
-  }
+  });
 
   manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
     const dir = dirname(path);
