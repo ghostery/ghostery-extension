@@ -149,9 +149,10 @@ export const SYNC_OPTIONS = Object.keys(Options).filter(
   (key) => !LOCAL_OPTIONS.includes(key),
 );
 
-export const REPORT_OPTIONS = SYNC_OPTIONS.filter(
-  (key) => !PROTECTED_OPTIONS.includes(key),
-).concat(['filtersUpdatedAt']);
+export const REPORT_OPTIONS = [
+  ...SYNC_OPTIONS.filter((key) => !PROTECTED_OPTIONS.includes(key)),
+  'filtersUpdatedAt',
+];
 
 export default Options;
 
