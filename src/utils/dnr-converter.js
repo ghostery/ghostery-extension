@@ -9,8 +9,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { convertToSafariFormat } from '/utils/dnr-converter-safari.js';
-
 const DOCUMENT_PATH = 'pages/dnr-converter/index.html';
 
 export default async function convert(filters) {
@@ -32,14 +30,6 @@ export default async function convert(filters) {
         resourcesPath: '/rule_resources/redirects',
       });
 
-      result.rules = result.rules.reduce((acc, r) => {
-        try {
-          acc.push(convertToSafariFormat(r));
-        } catch (e) {
-          result.errors.push(e);
-        }
-        return acc;
-      }, []);
       result.errors = result.errors.map((e) => `DNR - ${e.message || e}`);
     } else {
       throw new Error('Unsupported platform for DNR conversion');
