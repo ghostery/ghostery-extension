@@ -24,31 +24,20 @@ import ManagedConfig from './managed-config.js';
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
 
-export const SYNC_OPTIONS = [
-  'blockAds',
-  'blockTrackers',
-  'blockAnnoyances',
-  'regionalFilters',
-  'customFilters',
-  'experimentalFilters',
-  'serpTrackingPrevention',
-  'wtmSerpReport',
-  'trackerWheel',
-  'trackerCount',
-  'pauseAssistant',
-  'panel',
-  'theme',
-];
-
-export const REPORT_OPTIONS = [...SYNC_OPTIONS, 'filtersUpdatedAt'];
-
-export const SYNC_PROTECTED_OPTIONS = [...SYNC_OPTIONS, 'exceptions', 'paused'];
-
 export const ENGINES = [
   { name: 'ads', key: 'blockAds' },
   { name: 'tracking', key: 'blockTrackers' },
   { name: 'annoyances', key: 'blockAnnoyances' },
 ];
+
+const LOCAL_OPTIONS = [
+  'terms',
+  'feedback',
+  'filtersUpdatedAt',
+  'sync',
+  'revision',
+];
+const PROTECTED_OPTIONS = ['exceptions', 'paused'];
 
 const OPTIONS_VERSION = 3;
 
@@ -155,6 +144,15 @@ const Options = {
     },
   },
 };
+
+export const SYNC_OPTIONS = Object.keys(Options).filter(
+  (key) => !LOCAL_OPTIONS.includes(key),
+);
+
+export const REPORT_OPTIONS = [
+  ...SYNC_OPTIONS.filter((key) => !PROTECTED_OPTIONS.includes(key)),
+  'filtersUpdatedAt',
+];
 
 export default Options;
 
