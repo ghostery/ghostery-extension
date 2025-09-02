@@ -12,7 +12,6 @@
 import { html, router, store } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
-import Session from '/store/session.js';
 
 import { longDateFormatter } from '/ui/labels.js';
 
@@ -50,7 +49,6 @@ export default {
     stack: [RegionalFilters, ExperimentalFilters, CustomFilters, Serp],
   },
   options: store(Options),
-  session: store(Session),
   devMode: false,
   globalPause: {
     value: false,
@@ -63,13 +61,7 @@ export default {
       host.globalPause = value;
     },
   },
-  render: ({
-    options,
-    session,
-    devMode,
-    globalPause,
-    globalPauseRevokeAt,
-  }) => html`
+  render: ({ options, devMode, globalPause, globalPauseRevokeAt }) => html`
     <template layout="contents">
       <settings-page-layout layout="column gap:4">
         ${store.ready(options) &&
@@ -292,73 +284,44 @@ export default {
             </div>
           </div>
         `}
-        ${store.ready(session) &&
-        session.enabled &&
-        html`
-          <section
-            layout="grid:1/1 grow items:end:stretch padding:0"
-            layout@992px="hidden"
+        <section
+          layout="grid:1/1 grow items:end:stretch padding:0"
+          layout@992px="hidden"
+        >
+          <settings-card
+            layout="column items:center gap"
+            layout@768px="row gap:5"
           >
-            <settings-card
-              layout="column items:center gap"
-              layout@768px="row gap:5"
+            <img
+              src="${assets['hands']}"
+              layout="size:12"
+              alt="Contribution"
+              slot="picture"
+            />
+            <div
+              layout="block:center column gap:0.5"
+              layout@768px="block:left row grow gap:5 content:space-between"
             >
-              ${session.contributor
-                ? html`
-                    <img
-                      src="${assets['contributor_badge']}"
-                      layout="size:12"
-                      alt="Contribution"
-                      slot="picture"
-                    />
-                    <div
-                      layout="block:center column gap:0.5"
-                      layout@768px="block:left row grow gap:5 content:space-between"
-                    >
-                      <div layout="column gap:0.5">
-                        <ui-text type="label-l" layout="">
-                          You are awesome!
-                        </ui-text>
-                        <ui-text type="body-s" color="secondary">
-                          Thank you for your support in Ghostery's fight for a
-                          web where privacy is a basic human right!
-                        </ui-text>
-                      </div>
-                    </div>
-                  `
-                : html`
-                    <img
-                      src="${assets['hands']}"
-                      layout="size:12"
-                      alt="Contribution"
-                      slot="picture"
-                    />
-                    <div
-                      layout="block:center column gap:0.5"
-                      layout@768px="block:left row grow gap:5 content:space-between"
-                    >
-                      <div layout="column gap:0.5">
-                        <ui-text type="label-l" layout="">
-                          Become a Contributor
-                        </ui-text>
-                        <ui-text type="body-s" color="secondary">
-                          Help Ghostery fight for a web where privacy is a basic
-                          human right.
-                        </ui-text>
-                      </div>
-                      <ui-button type="primary" layout="grow margin:top">
-                        <a
-                          href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
-                          target="_blank"
-                        >
-                          Become a Contributor
-                        </a>
-                      </ui-button>
-                    </div>
-                  `}
-            </settings-card>
-          </section>
-        `}
+              <div layout="column gap:0.5">
+                <ui-text type="label-l" layout="">
+                  Become a Contributor
+                </ui-text>
+                <ui-text type="body-s" color="secondary">
+                  Help Ghostery fight for a web where privacy is a basic human
+                  right.
+                </ui-text>
+              </div>
+              <ui-button type="primary" layout="grow margin:top">
+                <a
+                  href="${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=privacy-becomeacontributor"
+                  target="_blank"
+                >
+                  Become a Contributor
+                </a>
+              </ui-button>
+            </div>
+          </settings-card>
+        </section>
       </settings-page-layout>
     </template>
   `,

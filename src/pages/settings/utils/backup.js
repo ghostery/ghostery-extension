@@ -12,7 +12,7 @@
 import { store, msg } from 'hybrids';
 import { saveAs } from 'file-saver';
 
-import Options, { SYNC_PROTECTED_OPTIONS } from '/store/options.js';
+import Options, { SYNC_OPTIONS } from '/store/options.js';
 import CustomFilters from '/store/custom-filters.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
@@ -28,9 +28,7 @@ export async function exportToFile() {
   const data = {
     timestamp: Date.now(),
     version: DATA_VERSION,
-    options: Object.fromEntries(
-      SYNC_PROTECTED_OPTIONS.map((key) => [key, options[key]]),
-    ),
+    options: Object.fromEntries(SYNC_OPTIONS.map((key) => [key, options[key]])),
   };
 
   if (customFilters.text) {
@@ -127,7 +125,7 @@ export function importFromFile(event) {
         await store.set(Options, { paused: null, exceptions: null });
 
         const options = Object.fromEntries(
-          SYNC_PROTECTED_OPTIONS.map((key) => [key, data.options[key]]).filter(
+          SYNC_OPTIONS.map((key) => [key, data.options[key]]).filter(
             ([, value]) => value !== undefined,
           ),
         );

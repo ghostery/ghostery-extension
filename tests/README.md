@@ -176,7 +176,7 @@ On the test page, the text has been modified.
 An exception is added to the tracker. URLs are not blocked or modified, only observed.
 
 ### Element Picker - Single element
-> Pick a piece of content, and observe on the lists of blocked items in settings. 
+> Pick a piece of content, and observe on the lists of blocked items in settings.
 
 1. Open any website
 2. Click Ghostery icon.
@@ -207,8 +207,8 @@ An exception is added to the tracker. URLs are not blocked or modified, only obs
 3. Go with scenario 2. Change „Step 4” to: Check „Block similar Elements” instead of using a slider to get more elements picked.
 4. In both scenarios, test the „Trash Can” button on the list of websites to clear the list. Change step 8 into: „click trash can button to clear the list”.
 
-### BOB 
-> Confirm that system works and can be triggered manually. 
+### BOB
+> Confirm that system works and can be triggered manually.
 
 1. Trigger Developer Tools Settings in Ghostery Settings / Privacy Protection by clicking 5 times on the version number.
 2. Click „Test Flag” — the default script is already available.
@@ -217,7 +217,7 @@ An exception is added to the tracker. URLs are not blocked or modified, only obs
 4. Go to the domain you picked. Observe popup stating that Ghostery has been paused.
 5. Go to the „Websites” tab in „Ghostery settings” and confirm that the website you are testing is there. Do not clear the list.
 6. Now go back to the „Developer Tools” and click „Force sync”, then „Test Flag” to trigger popup stating that „users report that adblockers no longer breaking this site...” and click OK.
-7. Go to Websites to confirm that the list is empty.   
+7. Go to Websites to confirm that the list is empty.
 
 #### Additional points to test in process
 Adding one of the points below creates a separate, full testing scenario.
@@ -227,7 +227,7 @@ Adding one of the points below creates a separate, full testing scenario.
 3. Repeat the testing process for Germany, UK and USA using VPN.
 4. Check if the link to the blog shown in the BOB popup is active.
 
-BOB is working and pop-ups are triggering. 
+BOB is working and pop-ups are triggering.
 
 ## Additional features
 
@@ -245,19 +245,20 @@ Tracker Preview is working. Gathered information for a specific website are visi
 
 ### Ghostery Account synchronization
 
-> Ghostery Account settings synchronization between browsers
+> Ghostery Account settings synchronization between browser instances. The feature works only on Firefox Desktop, Chrome and Edge Desktop.
 
-1. Open Firefox browser and Chrome browser.
-2. In both browsers, login into Ghostery Account.
+Warning: The sync process may take up to 10 minutes. You can try to force syncing by clicking the "Sync Now" button again.
+
+1. Open two Firefox instances - use different channels on one machine, or use two devices.
+2. In both browsers, login into your Firefox Account and ensure the "Add-ons" option is checked in the sync settings.
 3. In both browsers, open Ghostery Settings.
-4. In Firefox browser turn OFF Ad-Blocking. Reload Ghostery Settings.
-5. In Chrome browser reload Ghostery Settings.
-6. Ad-Blocking should be turned OFF.
-7. Turn ON Ad-Blocking and turn OFF Anti-tracking. Reload Ghostery Settings.
-8. In Firefox browser reload Ghostery Settings.
-9. Ad-Blocking should be turned ON. Anti-tracking should be OFF.
+4. In the first browser turn OFF Ad-Blocking.
+5. Click the "Sync Now" button in the account settings to manually trigger a sync.
+6. In the second browser click the "Sync Now" button in the account settings to manually trigger a sync.
+7. In the second browser reload Ghostery Settings.
+8. Ad-Blocking should be turned OFF.
 
-Synchronization between browsers is working. In Firefox Ad-Blocking is enabled and Anti-tracking disabled.
+Synchronization between browsers is working.
 
 ### Other language support
 
