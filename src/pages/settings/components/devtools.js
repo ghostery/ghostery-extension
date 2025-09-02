@@ -112,19 +112,44 @@ function refresh(host) {
 }
 
 export default {
+  visible: false,
   counter: 0,
   options: store(Options),
   config: store(Config),
   resources: store(Resources),
-  visible: false,
-  render: ({ visible, counter, config, resources }) => html`
+  render: ({ visible, counter, options, config, resources }) => html`
     <template layout="column gap:3">
       ${(visible || counter > 5) &&
       html`
         <ui-line></ui-line>
         <section layout="column gap:3" translate="no">
-          <ui-text type="headline-m">Developer tools</ui-text>
+          <ui-text type="headline-s">Experimental features</ui-text>
 
+          ${store.ready(options) &&
+          html`
+            <div layout="column gap:2" translate="no">
+              <div layout="grid:1fr|max gap">
+                <settings-option static>
+                  Never-Consent Automatic Action Type
+                  <span slot="description">
+                    Chooses the default behavior for cookie consent notices.
+                  </span>
+                </settings-option>
+                <ui-input>
+                  <select
+                    value="${options.autoconsent.autoAction}"
+                    onchange="${html.set(options, 'autoconsent.autoAction')}"
+                  >
+                    <option value="optOut">Opt out</option>
+                    <option value="optIn">Opt in</option>
+                    <option value="">None</option>
+                  </select>
+                </ui-input>
+              </div>
+            </div>
+            <ui-line></ui-line>
+          `}
+          <ui-text type="headline-s">Developer tools</ui-text>
           ${store.ready(config) &&
           html`
             <div layout="column gap" translate="no">
@@ -183,7 +208,6 @@ export default {
                 </ui-button>
               </div>
             </div>
-            <ui-line></ui-line>
           `}
           ${(__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
           html`
@@ -212,7 +236,6 @@ export default {
                 <button>Refresh</button>
               </ui-button>
             </div>
-            <ui-line></ui-line>
           `}
           ${store.ready(resources) &&
           html`
@@ -228,7 +251,6 @@ export default {
                 )}
               </div>
             </div>
-            <ui-line></ui-line>
           `}
 
           <div layout="column gap">
@@ -242,6 +264,7 @@ export default {
               </ui-button>
             </div>
           </div>
+          <ui-line></ui-line>
         </section>
       `}
       <div layout="column">

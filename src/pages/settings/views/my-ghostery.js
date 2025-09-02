@@ -65,24 +65,28 @@ export default {
               `}
 
               <div layout="column gap:2" layout@768px="row">
-                <div layout="column grow gap:0.5">
-                  <ui-text type="headline-xs">Settings Backup</ui-text>
-                  <ui-text type="body-m" mobile-type="body-s" color="secondary">
+                <settings-option static>
+                  Settings Backup
+                  <span slot="description">
                     Save your custom settings to a file, or restore them from a
                     file.
-                  </ui-text>
-
-                  <ui-text type="body-xs" color="tertiary">
+                  </span>
+                  <ui-text type="body-xs" color="tertiary" slot="footer">
                     Importing supports uBlock Origin file format with selected
                     features.
                   </ui-text>
+
                   ${importStatus &&
                   html`
-                    <ui-text type="body-s" color="${importStatus.type}">
+                    <ui-text
+                      type="body-s"
+                      color="${importStatus.type}"
+                      slot="footer"
+                    >
                       ${importStatus.msg}
                     </ui-text>
                   `}
-                </div>
+                </settings-option>
                 <div layout="row:wrap gap" layout@768px="content:end">
                   <ui-button size="s" onclick="${backup.exportToFile}">
                     <button>
@@ -119,12 +123,12 @@ export default {
             </ui-toggle>
 
             <div layout="row gap:2">
-              <div layout="column grow gap:0.5">
-                <ui-text type="headline-xs">Theme</ui-text>
-                <ui-text type="body-m" mobile-type="body-s" color="secondary">
+              <settings-option static>
+                Theme
+                <span slot="description">
                   Changes application color theme.
-                </ui-text>
-              </div>
+                </span>
+              </settings-option>
               <ui-input>
                 <select
                   value="${options.theme}"
