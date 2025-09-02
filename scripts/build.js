@@ -84,7 +84,7 @@ if (argv.clean) {
 }
 
 execSync(
-  'node scripts/download-engines.js' + (argv.staging ? ' --staging' : ''),
+  'node scripts/download-dnr-rulesets.js' + (argv.staging ? ' --staging' : ''),
   { stdio: silent ? '' : 'inherit' },
 );
 
@@ -187,31 +187,6 @@ options.assets.forEach((path) => {
   }
 });
 
-// copy adblocker engines
-mkdirSync(resolve(options.outDir, 'rule_resources'), { recursive: true });
-
-const engines = [
-  'ads',
-  'tracking',
-  'annoyances',
-  'fixes',
-  ...REGIONS.map((region) => `lang-${region}`),
-];
-
-engines.forEach((engine) => {
-  const path = `engine-${engine}.dat`;
-  cpSync(
-    resolve(options.srcDir, 'rule_resources', path),
-    resolve(options.outDir, 'rule_resources', path),
-  );
-});
-
-// copy trackerdb engine
-cpSync(
-  resolve(options.srcDir, 'rule_resources', 'engine-trackerdb.dat'),
-  resolve(options.outDir, 'rule_resources', 'engine-trackerdb.dat'),
-);
-
 // copy managed storage configuration
 if (manifest.storage?.managed_schema) {
   const path = resolve(options.srcDir, manifest.storage.managed_schema);
@@ -220,6 +195,8 @@ if (manifest.storage?.managed_schema) {
 
 // copy declarative net request lists
 if (manifest.declarative_net_request?.rule_resources) {
+  mkdirSync(resolve(options.outDir, 'rule_resources'), { recursive: true });
+
   let rulesCount = 0;
 
   // Add regional DNR rules to Chromium
