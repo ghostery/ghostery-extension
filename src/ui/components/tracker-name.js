@@ -10,6 +10,7 @@ export default {
       text-decoration: underline;
       text-decoration-thickness: 2px;
       text-decoration-color: var(--color-quaternary);
+      overflow-wrap: break-word;
     }
 
     @media (hover: hover) {
