@@ -31,11 +31,12 @@ export const ENGINES = [
 ];
 
 const LOCAL_OPTIONS = [
+  'autoconsent',
   'terms',
   'feedback',
-  'filtersUpdatedAt',
   'sync',
   'revision',
+  'filtersUpdatedAt',
 ];
 const PROTECTED_OPTIONS = ['exceptions', 'paused'];
 
@@ -58,13 +59,15 @@ const Options = {
     enabled: false,
     trustedScriptlets: false,
   },
+
+  // Experimental features
+  autoconsent: { autoAction: 'optOut' },
   experimentalFilters: false,
 
-  filtersUpdatedAt: 0,
-
+  // SERP protection
   serpTrackingPrevention: true,
 
-  // WhoTracks.Me Section
+  // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,
   ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
@@ -91,9 +94,10 @@ const Options = {
   // Paused domains
   paused: store.record({ revokeAt: 0, assist: false }),
 
-  // Sync
+  // Sync & Update
   sync: true,
   revision: 0,
+  filtersUpdatedAt: 0,
 
   // What's new
   whatsNewVersion: 0,

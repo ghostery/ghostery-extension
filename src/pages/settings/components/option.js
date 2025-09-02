@@ -13,6 +13,7 @@ import { html } from 'hybrids';
 
 export default {
   icon: '',
+  static: { value: false, reflect: true },
   render: ({ icon }) => html`
     <template layout="row gap grow">
       ${icon &&
@@ -32,7 +33,7 @@ export default {
     </template>
   `.css`
     @media (hover: hover) {
-      :host(:hover) #name {
+      :host(:hover:not([static])) #name {
         text-decoration: underline;
       }
     }
