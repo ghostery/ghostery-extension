@@ -15,10 +15,7 @@
     "message": "소개"
   },
   "access_website_settings": {
-    "message": "웹사이트 설정에 접근"
-  },
-  "account_details": {
-    "message": "계정 세부정보"
+    "message": "웹 사이트 설정 열기"
   },
   "active": {
     "message": "사용 중"
@@ -118,7 +115,7 @@
     "message": "이 사이트에서 차단된 요소"
   },
   "blocked_manually": {
-    "message": "수동으로 차단됨"
+    "message": "직접 차단됨"
   },
   "blocked_on_all_websites": {
     "message": "모든 웹 사이트에서 차단됨"
@@ -127,7 +124,7 @@
     "message": "이 웹 사이트에서 차단됨"
   },
   "blocking_has_been_paused_temporarily__and_only_on_this_page__consider_pausing_other_adblockers_for_best_results_": {
-    "message": "차단이 일시적으로 중지되었으며, 이 페이지에서만 적용됩니다. 최상의 결과를 위해 다른 광고 차단기도 일시 중지하는 것을 고려해 보세요."
+    "message": "이 페이지에서 차단이 일시중지되었습니다. 다른 광고 차단기도 비활성화하면 문제 해결에 도움이 될 수 있습니다."
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "사용하시는 언어의 웹 사이트들에 한해 추가로 광고와 트래커, 팝업을 차단합니다. 필요한 언어만 활성화하면 웹 브라우저가 느려지는걸 방지할 수 있습니다."
@@ -177,7 +174,7 @@
     "description": "Tracker category name"
   },
   "consent_managed": {
-    "message": "동의 관리됨"
+    "message": "선택적 약관 거부됨"
   },
   "consent_management": {
     "message": "약관 관리 프레임워크",
@@ -195,9 +192,6 @@
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Ghostery 커뮤니티 전체의 프라이버시 보호를 향상시키기 위해 애드온의 상태 및 성능 원격 측정에 대한 비개인 정보를 제공합니다."
   },
-  "contributor": {
-    "message": "기여자"
-  },
   "copied_to_clipboard": {
     "message": "클립보드에 복사됨"
   },
@@ -206,9 +200,6 @@
   },
   "country": {
     "message": "국가"
-  },
-  "create_account": {
-    "message": "새 계정 만들기"
   },
   "custom": {
     "message": "사용자 정의"
@@ -242,7 +233,7 @@
     "message": "자세히 보기"
   },
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
-    "message": "광고 차단기 손상을 감지하고 영향을 받는 페이지에서 자동으로 일시 중지하여 방지합니다."
+    "message": "광고 차단기 관련 문제가 발견된 페이지에서 자동으로 사용을 일시중지하여 문제를 방지합니다."
   },
   "disable": {
     "message": "사용 중지"
@@ -254,10 +245,10 @@
     "message": "사용 중지됨"
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
-    "message": "커뮤니티 기여로 이루어진 새로운 기능, 주요 개선 사항 및 업그레이드를 한 곳에서 모두 확인하세요."
+    "message": "한 곳에서 새 기능, 주요 개선사항, 그리고 커뮤니티 기반 개선사항까지 모두 확인하세요."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
-    "message": "이 사이트에서 수동으로 숨긴 모든 콘텐츠 블록을 표시합니다. 개별적으로 제거하거나 전체 목록을 지울 수 있습니다."
+    "message": "이 사이트에서 직접 숨긴 부분을 모두 표시합니다. 하나씩 제거하거나 모두 지울 수 있습니다."
   },
   "displays_the_tracker_count_on_the_ghostery_icon_in_the_browser_toolbar_": {
     "message": "브라우저 툴바의 Ghostery 아이콘에 트래커 갯수를 표시합니다."
@@ -312,7 +303,7 @@
     "message": "오류: 유형, 메시지, 스택 추적"
   },
   "error__unsupported_file_version_@_0____expected___1__": {
-    "message": "지원되지 않는 파일 버전 $${0} - 예상 $${1}."
+    "message": "$${0} 버전은 지원되지 않습니다. $${1} 버전이 필요합니다."
   },
   "errors__@_0__": {
     "message": "오류 ($${0})"
@@ -362,16 +353,16 @@
     "message": "도움받기"
   },
   "ghostery_added_a_rule_to_keep_this_content_block_hidden__you_can_undo_this_anytime_in_website_settings_": {
-    "message": "고스트리가 이 콘텐츠 블록을 숨기기 위한 규칙을 추가했습니다. 웹사이트 설정에서 언제든지 이를 취소할 수 있습니다."
+    "message": "Ghostery가 숨긴 부분을 규칙으로 저장했습니다. 웹 사이트 설정에서 언제나 취소할 수 있습니다."
   },
   "ghostery_has_been_resumed_": {
     "message": "Ghostery 사용을 다시 시작합니다."
   },
   "ghostery_has_been_resumed_on_this_site_": {
-    "message": "이 웹 사이트에서 Ghostery 사용을 다시 시작합니다."
+    "message": "여기에서 Ghostery 사용을 다시 시작합니다."
   },
   "ghostery_has_nothing_to_do_on_this_page": {
-    "message": "이 페이지에서는 Ghostery가 동작하지 않습니다"
+    "message": "여기에서는 Ghostery가 동작하지 않습니다"
   },
   "ghostery_is_all_set_to_stop_trackers_in_their_tracks_and_protect_your_privacy_while_browsing_": {
     "message": "Ghostery가 웹 브라우저 사용 중에 트래커의 추적과 개인정보 유출로부터 보호할 준비를 끝마쳤습니다!"
@@ -383,7 +374,7 @@
     "message": "Ghostery 잠시 사용 중지됨"
   },
   "ghostery_is_paused_on_this_site_": {
-    "message": "이 웹 사이트에서 Ghostery 사용을 잠시 멈춥니다."
+    "message": "여기에서 Ghostery 사용을 잠시 멈춥니다."
   },
   "ghostery_maps_the_ownership_structure_linking_activities_to_the_organizations_controlling_them__this_knowledge__hand_curated_by_experts__is_publicly_available_on": {
     "message": "Ghostery는 활동을 제어하는 조직과 연결된 소유 구조를 매핑합니다. 전문가들이 직접 선별한 이 지식은 공개적으로 이용 가능합니다."
@@ -407,10 +398,10 @@
     "message": "현재 보호없이 웹 브라우저 사용 중입니다. Ghostery 트래커 및 광고 차단기로 방문하는 웹 사이트의 추적기를 파악할 수 있습니다."
   },
   "ghostery_users_report_that_ad_blockers_are_no_longer_breaking_this_site__ghostery_will_be_re_enabled_": {
-    "message": "Ghostery 사용자는 광고 차단기가 더 이상 이 사이트를 방해하지 않는다고 보고합니다. Ghostery가 다시 활성화됩니다."
+    "message": "Ghostery 사용자들이 광고 차단기가 더 이상 이 웹 사이트에서 문제를 일으키지 않는다고 보고했습니다. Ghostery 사용을 다시 시작합니다."
   },
   "ghostery_users_report_that_adblockers_break_this_page__ghostery_has_been_paused_": {
-    "message": "고스트리 사용자들은 광고 차단기가 이 페이지를 깨뜨린다고 보고합니다. 고스트리가 일시 중지되었습니다."
+    "message": "Ghostery 사용자들이 광고 차단기가 이 웹 사이트에서 문제를 일으킨다고 보고했습니다. Ghostery 사용을 중단합니다."
   },
   "ghostery_uses_this_information_to_provide_its_community_powered_privacy_features__ensuring_that_personal_information_such_as_passwords__browsing_history__and_page_content_is_never_collected_": {
     "message": "Ghostery는 이 정보를 사용하여 커뮤니티 기반의 개인정보 보호 기능을 제공하며, 비밀번호, 검색 기록, 페이지 내용과 같은 개인 정보가 수집되지 않도록 보장합니다."
@@ -419,7 +410,7 @@
     "message": "Ghostery가 이 페이지에서 얼마나 많은 트래커가 차단되었는지 보여줍니다. Ghostery 아이콘을 클릭하면 더 자세한 정보를 볼 수 있습니다."
   },
   "gone_": {
-    "message": "사라졌습니다!"
+    "message": "제거되었습니다!"
   },
   "hashes_of_potentially_unique_identifier_in_requests_parameters": {
     "message": "요청 매개변수에 포함된 잠재적 고유 식별자의 해시"
@@ -437,10 +428,10 @@
     "message": "숨기기"
   },
   "hide_content_block": {
-    "message": "콘텐츠 블록 숨기기"
+    "message": "특정 부분 숨기기"
   },
   "hide_distraction": {
-    "message": "산만함 숨기기"
+    "message": "방해요소 차단하기"
   },
   "hosting": {
     "message": "호스팅",
@@ -475,9 +466,6 @@
   },
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "트래커 정보를 WhoTracks.Me로 전송을 허락해 준 모든 Ghostery 사용자의 이러한 작은 기여들이 모여 Ghostery는 운영됩니다. 트래커를 입력하면 Ghostery가 트래커에 대한 실시간 정보를 제공하고 이렇게 전체 Ghostery 사용자 커뮤니티가 보호받을 수 있습니다."
-  },
-  "join_ghostery": {
-    "message": "Ghostery 가입하기"
   },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity로 보호된 페이지 보고서 표시"
@@ -538,13 +526,13 @@
     "message": "매월"
   },
   "more_ad_blocking_available": {
-    "message": "더 나은 광고 차단이 가능합니다"
+    "message": "여기에서도 광고를 차단할 수 있습니다"
   },
   "more_in_this_organization": {
     "message": "이 단체의 항목 더 보기"
   },
   "move_the_slider_to_show_or_hide_sections_": {
-    "message": "슬라이더를 움직여 섹션을 표시하거나 숨기세요."
+    "message": "슬라이더로 숨길 부분을 조정하세요."
   },
   "my_ghostery": {
     "message": "내 고스트리"
@@ -626,7 +614,7 @@
     "message": "확장 프로그램을 고정하고 빠르게 접근해보세요"
   },
   "pin_ghostery___take_back_control": {
-    "message": "고스트리 고정 – 통제권 되찾기"
+    "message": "Ghostery 고정하고 권리를 되찾으세요"
   },
   "pin_it_here": {
     "message": "여기에 고정하세요"
@@ -691,8 +679,8 @@
   "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
     "message": "사용자 설정을 파일에 저장하거나 파일에서 복원하세요."
   },
-  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
-    "message": "여러 브라우저와 기기에서 설정을 동기화하고 저장합니다."
+  "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
+    "message": "Saves and synchronizes your custom settings between different devices."
   },
   "search_engine_redirect_protection": {
     "message": "검색엔진 경유 보호"
@@ -704,13 +692,13 @@
     "message": "웹 사이트 검색..."
   },
   "see_every_tracker_ghostery_stops_in_real_time_": {
-    "message": "고스트리가 실시간으로 차단하는 모든 추적기를 확인하세요."
+    "message": "Ghostery가 실시간으로 차단하는 모든 추적기를 확인하세요."
   },
   "see_what_s_new": {
     "message": "새로운 기능 보기"
   },
   "select_distracting_element": {
-    "message": "산만한 요소 선택"
+    "message": "방해요소 선택"
   },
   "select_time_frame": {
     "message": "시간 선택"
@@ -722,7 +710,7 @@
     "message": "Sentry SDK는 위 정보만을 토대로 보고서를 전송하기 위해 사용됩니다. 요청이 여러 개 전송되더라도 각각은 연관성을 가지지 않으며 IP주소는 Sentry와 공유되지 않습니다."
   },
   "settings_backup": {
-    "message": "설정 백업"
+    "message": "설정 내보내기"
   },
   "settings_sync": {
     "message": "설정 동기화"
@@ -735,12 +723,6 @@
   },
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "검색 결과 옆에 트래커 개요를 표시합니다."
-  },
-  "sign_in": {
-    "message": "로그인"
-  },
-  "sign_in_or_create_account_on_ghostery_com": {
-    "message": "ghostery.com에서 로그인하거나 가입하기"
   },
   "simple_view": {
     "message": "간단한 보기"
@@ -763,7 +745,7 @@
     "message": "페이지 이동 통계 보고서"
   },
   "submit_a_new_tracker": {
-    "message": "새 트래커 제보하기"
+    "message": "새 추적기 제보"
   },
   "support": {
     "message": "지원 "
@@ -778,11 +760,8 @@
   "terms___conditions": {
     "message": "이용약관"
   },
-  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Ghostery가 개인정보 보호가 곧 기본권인 웹 생태계를 위해 싸울 수 있도록 도와주셔서 진심으로 감사드립니다!"
-  },
   "the_backup_from_@_0__imported_successfully_": {
-    "message": "$${0}에서 가져온 백업이 성공적으로 가져와졌습니다."
+    "message": "$${0}에서 가져온 파일을 성공적으로 불러왔습니다."
   },
   "theme": {
     "message": "테마"
@@ -821,7 +800,7 @@
     "message": "톱 50"
   },
   "tracker___ad_blocking_will_be_active_on_this_page_": {
-    "message": "트래커 및 광고 차단이 이 페이지에서 활성화됩니다."
+    "message": "이 페이지에서 추적기와 광고가 차단됩니다."
   },
   "tracker_database": {
     "message": "트래커 데이터베이스"
@@ -839,7 +818,7 @@
     "message": "변경된 트래커"
   },
   "trackers_preview": {
-    "message": "트래커 개요"
+    "message": "추적기 개요"
   },
   "trends": {
     "message": "동향"
@@ -908,7 +887,7 @@
     "message": "모든 방문한 웹 페이지에서 가장 자주 관찰된 추적기였습니다."
   },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
-    "message": "더 나은 YouTube 사용 환경을 위해 Ghostery 사용하는 것을 알고 있습니다. 보다 나은 해결책이 출시되기 전까지 임시 조치를 취할 수 있습니다."
+    "message": "여러분이 Ghostery로 매끄럽게 YouTube를 사용하려는 것을 알고 있습니다. 더 나은 해결책이 출시되기 전까지는 임시로 고쳐볼 수 있습니다."
   },
   "we_re_so_glad_ghostery_has_your_heart__help_others_find_us_too___it_only_takes_a_moment_": {
     "message": "Ghostery를 마음에 들어해주셔서 감사합니다! 조금의 시간으로 다른 사람들이 저희를 찾게 해주세요."
@@ -935,7 +914,7 @@
     "message": "Ghostery를 시작합니다"
   },
   "what_s_new_in_ghostery": {
-    "message": "고스트리의 새로운 기능"
+    "message": "Ghostery의 새로운 기능"
   },
   "what_s_next_": {
     "message": "또 무엇을 할 수 있을까요?"
@@ -953,7 +932,7 @@
     "message": "WhoTracks.Me 휠"
   },
   "why_paused_": {
-    "message": "왜 일시 중지되었나요?"
+    "message": "사용 중지된 이유"
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Ghostery가 사용 중지된 상태에서는 기본적인 트래커 정보 확인만 가능합니다."
@@ -961,17 +940,11 @@
   "yesterday": {
     "message": "어제"
   },
-  "you_are_awesome_": {
-    "message": "지원에 진심으로 감사드립니다!"
-  },
-  "you_are_signed_in_as_": {
-    "message": "로그인됨 "
-  },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "이제 검색 결과 옆에 트래커 휠을 더 이상 표시하지 않습니다."
   },
   "your_browser_privacy_report": {
-    "message": "브라우저 개인정보 보호 보고서"
+    "message": "개인정보 보호 보고서"
   },
   "your_community_powered_privacy_features_": {
     "message": "귀하의 커뮤니티 기반 개인정보 보호 기능:"
@@ -983,9 +956,9 @@
     "message": "YouTube에서 광고없이 동영상을 보지 못하도록 하나요?"
   },
   "zoom_in": {
-    "message": "확대하기"
+    "message": "축소"
   },
   "zoom_out": {
-    "message": "축소"
+    "message": "확대"
   }
 }

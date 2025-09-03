@@ -17,9 +17,6 @@
   "access_website_settings": {
     "message": "Доступ к настройкам сайта"
   },
-  "account_details": {
-    "message": "Данные аккаунта"
-  },
   "active": {
     "message": "Активный"
   },
@@ -195,9 +192,6 @@
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Предоставляет неперсональную информацию о состоянии и производительности дополнения, чтобы помочь улучшить защиту конфиденциальности для всей сообщества Ghostery."
   },
-  "contributor": {
-    "message": "Участник"
-  },
   "copied_to_clipboard": {
     "message": "Скопировано в буфер обмена"
   },
@@ -206,9 +200,6 @@
   },
   "country": {
     "message": "Страна"
-  },
-  "create_account": {
-    "message": "Создать учетную запись"
   },
   "custom": {
     "message": "Пользовательский"
@@ -476,9 +467,6 @@
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Он существует благодаря микровкладам каждого пользователя Ghostery, отправляющего неперсональную информацию на WhoTracks.Me. Данные позволяют Ghostery оперативно предоставлять информацию о трекерах, что взамен обеспечивает защиту всего сообщества Ghostery."
   },
-  "join_ghostery": {
-    "message": "Присоединяйтесь к Ghostery"
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-анонимные защищенные отчеты о показах страниц"
   },
@@ -691,8 +679,8 @@
   "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
     "message": "Сохраните ваши настройки в файл или восстановите их из файла."
   },
-  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
-    "message": "Сохраняйте свои настройки и синхронизируйте их между браузерами и устройствами."
+  "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
+    "message": "Saves and synchronizes your custom settings between different devices."
   },
   "search_engine_redirect_protection": {
     "message": "Защита от перенаправления поисковых систем"
@@ -736,12 +724,6 @@
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Показывает количество трекеров рядом с результатами поиска."
   },
-  "sign_in": {
-    "message": "Вход"
-  },
-  "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Войдите или создайте учетную запись на ghostery.com"
-  },
   "simple_view": {
     "message": "Простой вид"
   },
@@ -777,9 +759,6 @@
   },
   "terms___conditions": {
     "message": "Условия и положения"
-  },
-  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Благодарим за помощь Ghostery в борьбе за конфиденциальность как за основное право человека."
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Резервная копия из $${0} успешно импортирована."
@@ -960,12 +939,6 @@
   },
   "yesterday": {
     "message": "Вчера"
-  },
-  "you_are_awesome_": {
-    "message": "Отлично!"
-  },
-  "you_are_signed_in_as_": {
-    "message": "Вы вошли как:"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Вы больше не будете видеть статистику трекера рядом с результатами поиска."

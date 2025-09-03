@@ -17,9 +17,6 @@
   "access_website_settings": {
     "message": "Truy cập cài đặt trang web"
   },
-  "account_details": {
-    "message": "Thông tin tài khoản"
-  },
   "active": {
     "message": "Active"
   },
@@ -195,9 +192,6 @@
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Đóng góp thông tin phi cá nhân về tình trạng và hiệu suất của tiện ích bổ sung để giúp nâng cao bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
   },
-  "contributor": {
-    "message": "Người cộng tác"
-  },
   "copied_to_clipboard": {
     "message": "Đã sao chép vào bảng nhớ tạm"
   },
@@ -206,9 +200,6 @@
   },
   "country": {
     "message": "Country"
-  },
-  "create_account": {
-    "message": "Tạo tài khoản"
   },
   "custom": {
     "message": "Tùy chỉnh"
@@ -476,9 +467,6 @@
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Nó tồn tại nhờ các giao dịch vi mô của mỗi người dùng Ghostery chọn gửi thông tin phi cá nhân đến WhoTracks.Me. Đầu vào này cho phép Ghostery cung cấp thông tin thời gian thực về các trình theo dõi, từ đó mang lại sự bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
   },
-  "join_ghostery": {
-    "message": "Tham gia Ghostery"
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-anonymity protected reports of page shows"
   },
@@ -691,8 +679,8 @@
   "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
     "message": "Lưu cài đặt tùy chỉnh của bạn vào một tệp, hoặc khôi phục chúng từ một tệp."
   },
-  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
-    "message": "Saves and synchronizes your custom settings between browsers and devices."
+  "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
+    "message": "Saves and synchronizes your custom settings between different devices."
   },
   "search_engine_redirect_protection": {
     "message": "Bảo vệ chuyển hướng công cụ tìm kiếm"
@@ -736,12 +724,6 @@
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Hiển thị bản xem trước của trình theo dõi bên cạnh kết quả tìm kiếm."
   },
-  "sign_in": {
-    "message": "Đăng nhập"
-  },
-  "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Sign in or create account on ghostery.com"
-  },
   "simple_view": {
     "message": "Xem đơn giản"
   },
@@ -777,9 +759,6 @@
   },
   "terms___conditions": {
     "message": "Điều khoản và điều kiện"
-  },
-  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Cảm ơn bạn đã hỗ trợ trong cuộc chiến của Ghostery vì một trang web nơi quyền riêng tư là quyền cơ bản của con người!"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Bản sao lưu từ $${0} đã được nhập thành công."
@@ -960,12 +939,6 @@
   },
   "yesterday": {
     "message": "Hôm qua"
-  },
-  "you_are_awesome_": {
-    "message": "Bạn thật tuyệt vời!"
-  },
-  "you_are_signed_in_as_": {
-    "message": "Bạn đã đăng nhập với tư cách:"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Bạn sẽ không còn thấy bánh xe theo dõi bên cạnh kết quả tìm kiếm nữa."

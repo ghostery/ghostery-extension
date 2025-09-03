@@ -17,9 +17,6 @@
   "access_website_settings": {
     "message": "存取網站設定"
   },
-  "account_details": {
-    "message": "帳戶詳細資料"
-  },
   "active": {
     "message": "使用中"
   },
@@ -195,9 +192,6 @@
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "提供有關附加元件健康狀況和效能遙測的非個人資訊，以幫助提升整個 Ghostery 社群的隱私保護。"
   },
-  "contributor": {
-    "message": "貢獻者"
-  },
   "copied_to_clipboard": {
     "message": "複製到剪貼簿"
   },
@@ -206,9 +200,6 @@
   },
   "country": {
     "message": "國家"
-  },
-  "create_account": {
-    "message": "創建帳戶"
   },
   "custom": {
     "message": "自訂"
@@ -476,9 +467,6 @@
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "它的存在要歸功於每位選擇將非個人資料傳送到 WhoTracks.Me 的 Ghostery 用戶的微小貢獻。這些資料的輸入使 Ghostery 能夠提供有關追蹤器的即時情報，進而為整個 Ghostery 社群提供保護。"
   },
-  "join_ghostery": {
-    "message": "加入 Ghostery"
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名性保護的頁面顯示報告"
   },
@@ -691,8 +679,8 @@
   "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
     "message": "將您的自訂設定儲存到檔案，或從檔案還原設定。"
   },
-  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
-    "message": "保存您的自定义设置并在浏览器和设备之间同步。"
+  "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
+    "message": "Saves and synchronizes your custom settings between different devices."
   },
   "search_engine_redirect_protection": {
     "message": "搜尋引擎重新導向保護"
@@ -736,12 +724,6 @@
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "在搜尋結果旁顯示追蹤器預覽。"
   },
-  "sign_in": {
-    "message": "登入"
-  },
-  "sign_in_or_create_account_on_ghostery_com": {
-    "message": "登入或在 ghostery.com 創建帳戶"
-  },
   "simple_view": {
     "message": "簡單圖示"
   },
@@ -777,9 +759,6 @@
   },
   "terms___conditions": {
     "message": "條款及條件"
-  },
-  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "感謝你支持 Ghostery 為建立以隱私為基本人權的網路而奮鬥。"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "來自 $${0} 的備份已成功匯入。"
@@ -960,12 +939,6 @@
   },
   "yesterday": {
     "message": "昨天"
-  },
-  "you_are_awesome_": {
-    "message": "太棒啦！"
-  },
-  "you_are_signed_in_as_": {
-    "message": "您登入為："
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "你將不會再在搜尋結果旁邊看到追蹤器輪盤。"
