@@ -90,7 +90,7 @@ export default {
   `.css`
     :host {
       background: var(--background-secondary);
-      width: 100vw;
+      max-width: 100cqw;
     }
 
     :host([empty]) {
