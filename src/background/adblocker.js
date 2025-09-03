@@ -166,6 +166,7 @@ export async function reloadMainEngine() {
     engines.create(engines.MAIN_ENGINE);
     console.info('[adblocker] Main engine reloaded with no filters');
   }
+
   if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
     contentScripts.unregisterAll();
   }
@@ -225,7 +226,6 @@ export const setup = asyncSetup('adblocker', [
       }
 
       // Update engines if filters are outdated (older than 1 hour)
-      // and reload the engine if the update happened to at least one of them
       if (options.filtersUpdatedAt < Date.now() - HOUR_IN_MS) {
         await updateEngines();
       }
