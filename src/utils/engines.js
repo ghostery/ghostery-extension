@@ -204,6 +204,8 @@ export async function update(name, { force = false } = {}) {
   // If the IndexedDB is corrupted, and there is no way to load the engine
   // from the storage, we should skip the update.
   // It can also happen if the engine has not finished init.
+  // The `force` option allows us to bypass this check, as when
+  // engine is being loaded from CDN for the first time the `loadFromStorage` returns null
   if (!force && (await loadFromStorage(name)) === null) {
     console.warn(
       `[engines] Skipping update for engine "${name}" as the engine is not available`,
