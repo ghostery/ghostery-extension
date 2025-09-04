@@ -1,7 +1,7 @@
 {
   "name": "ghostery-extension",
   "private": true,
-  "version": "10.5.7",
+  "version": "10.5.8",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
@@ -42,7 +42,7 @@
     "webextension-polyfill": "^0.12.0"
   },
   "dependencies": {
-    "@duckduckgo/autoconsent": "^14.18.0",
+    "@duckduckgo/autoconsent": "^14.19.0",
     "@ghostery/adblocker": "^2.11.6",
     "@ghostery/adblocker-content": "^2.11.5",
     "@ghostery/adblocker-extended-selectors": "^2.11.5",
@@ -55,13 +55,13 @@
     "apexsankey": "github:ghostery/apexsankey",
     "bowser": "^2.12.1",
     "file-saver": "^2.0.5",
-    "hybrids": "^9.1.18",
+    "hybrids": "^9.1.19",
     "idb": "^8.0.2",
     "plotly.js-basic-dist": "^3.1.0",
     "tldts-experimental": "^7.0.11"
   },
   "dataDependencies": {
-    "wtm-stats": "3046b77f6e4fa89cb050d1db9055880502365bd1"
+    "wtm-stats": "f71a3c95a3a16ee7ff7adf1c14bc02a7bc691612"
   },
   "engineStrict": true,
   "engines": {

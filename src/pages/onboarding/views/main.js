@@ -26,7 +26,13 @@ const TERMS_AND_CONDITIONS_URL = `https://www.${GHOSTERY_DOMAIN}/privacy/ghoster
 function acceptTerms(host, event) {
   router.resolve(
     event,
-    store.set(Options, { terms: true, feedback: host.feedback }),
+    store.set(Options, {
+      terms: true,
+      feedback: host.feedback,
+      // Engines are initialized for the first time from CDN after onboarding,
+      // so we need to update the timestamp to current time
+      filtersUpdatedAt: Date.now(),
+    }),
   );
 }
 

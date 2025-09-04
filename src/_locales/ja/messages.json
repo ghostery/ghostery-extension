@@ -17,9 +17,6 @@
   "access_website_settings": {
     "message": "ウェブサイトの設定にアクセスする"
   },
-  "account_details": {
-    "message": "アカウント詳細"
-  },
   "active": {
     "message": "アクティブ"
   },
@@ -195,9 +192,6 @@
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "アドオンの健康状態とパフォーマンスのテレメトリに関する非個人情報を提供し、Ghosteryコミュニティ全体のプライバシー保護を向上させます。"
   },
-  "contributor": {
-    "message": "Contributor"
-  },
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
   },
@@ -206,9 +200,6 @@
   },
   "country": {
     "message": "国"
-  },
-  "create_account": {
-    "message": "アカウントを作成"
   },
   "custom": {
     "message": "カスタム"
@@ -476,9 +467,6 @@
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "WhoTracks.Meに個人情報以外の情報を送信することを選択したGhosteryユーザー全員による、小さな貢献のおかげで存在しています。この入力により、Ghosteryはトラッカーに関するリアルタイムの情報を提供し、その結果、Ghosteryコミュニティ全体にプライバシー保護をもたらします。"
   },
-  "join_ghostery": {
-    "message": "Ghosteryに登録"
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "k-匿名性で保護されたページ表示のレポート"
   },
@@ -691,8 +679,8 @@
   "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
     "message": "カスタム設定をファイルに保存するか、ファイルから復元してください。"
   },
-  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
-    "message": "ブラウザとデバイス間でカスタム設定を保存・同期しましょう。"
+  "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
+    "message": "異なるデバイス間でカスタム設定を保存・同期します。"
   },
   "search_engine_redirect_protection": {
     "message": "検索エンジンのリダイレクト保護"
@@ -736,12 +724,6 @@
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "検索結果の横にトラッカープレビューを表示します。"
   },
-  "sign_in": {
-    "message": "サインイン"
-  },
-  "sign_in_or_create_account_on_ghostery_com": {
-    "message": "ghostery.com でログインまたはアカウントを作成してください。"
-  },
   "simple_view": {
     "message": "シンプル・ビュー"
   },
@@ -777,9 +759,6 @@
   },
   "terms___conditions": {
     "message": "利用規約"
-  },
-  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Ghosteryはウェブ上でのプライバシーを基本的人権だと考え、それに対する対策を講じています。いつもサポートいただき、ありがとうございます。"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "$${0}からのバックアップが正常にインポートされました。"
@@ -960,12 +939,6 @@
   },
   "yesterday": {
     "message": "昨日"
-  },
-  "you_are_awesome_": {
-    "message": "ありがとうございます！"
-  },
-  "you_are_signed_in_as_": {
-    "message": "次のユーザーでサインインしています:"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "検索結果の横にトラッカーホイールが表示されなくなります。"

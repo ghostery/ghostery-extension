@@ -99,6 +99,19 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
                     ),
               );
 
+              for (const [index, rule] of addRules.entries()) {
+                if (rule.condition.regexFilter) {
+                  const { isSupported } =
+                    await chrome.declarativeNetRequest.isRegexSupported({
+                      regex: rule.condition.regexFilter,
+                    });
+
+                  if (!isSupported) {
+                    addRules.splice(index, 1);
+                  }
+                }
+              }
+
               await chrome.declarativeNetRequest.updateDynamicRules({
                 removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
                 addRules: addRules.map((rule, index) => ({

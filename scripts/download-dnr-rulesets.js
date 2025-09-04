@@ -12,22 +12,7 @@
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-import { ENGINE_VERSION } from '@ghostery/adblocker';
 import REGIONS from '../src/utils/regions.js';
-
-const REGIONAL_ENGINES = REGIONS.reduce((acc, region) => {
-  acc[`dnr-lang-${region}-v2`] = `lang-${region}`;
-  return acc;
-}, {});
-
-const ENGINES = {
-  'dnr-ads-v2': 'ads',
-  'dnr-tracking-v2': 'tracking',
-  'dnr-annoyances-v2': 'annoyances',
-  'dnr-fixes-v2': 'fixes',
-  'trackerdbMv3': 'trackerdb',
-  ...REGIONAL_ENGINES,
-};
 
 const TARGET_PATH = resolve('src/rule_resources');
 const CDN_HOSTNAME = process.argv.includes('--staging')
@@ -38,60 +23,18 @@ if (!existsSync(TARGET_PATH)) {
   mkdirSync(TARGET_PATH, { recursive: true });
 }
 
-for (const [name, target] of Object.entries(ENGINES)) {
-  const outputPath = `${TARGET_PATH}/engine-${target}.dat`;
-
-  if (existsSync(outputPath)) {
-    continue;
-  }
-
-  process.stdout.write(`Downloading "${name}"...`);
-
-  const list = await fetch(
-    `https://${CDN_HOSTNAME}/adblocker/configs/${name}/allowed-lists.json`,
-  ).then((res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to download allowed list for "${name}": ${res.status}: ${res.statusText}`,
-      );
-    }
-
-    return res.json();
-  });
-
-  /* adblocker serialized engine */
-
-  const engine = list.engines[ENGINE_VERSION];
-
-  if (!engine) {
-    throw new Error(
-      `Engine "${name}" for "${ENGINE_VERSION}" engine version not found`,
-    );
-  }
-
-  const rules = await fetch(engine.url).then((res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to fetch engine "${name}": ${res.status}: ${res.statusText}`,
-      );
-    }
-
-    return res.arrayBuffer();
-  });
-
-  writeFileSync(outputPath, new Uint8Array(rules));
-  process.stdout.write(' done\n');
-}
-
-const DNR = {
+const RULESETS = {
   'dnr-ads-v2': 'ads',
   'dnr-tracking-v2': 'tracking',
   'dnr-annoyances-v2': 'annoyances',
   'dnr-fixes-v2': 'fixes',
-  ...REGIONAL_ENGINES,
+  ...REGIONS.reduce((acc, region) => {
+    acc[`dnr-lang-${region}-v2`] = `lang-${region}`;
+    return acc;
+  }, {}),
 };
 
-for (const [name, target] of Object.entries(DNR)) {
+for (const [name, target] of Object.entries(RULESETS)) {
   const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
 
   if (existsSync(outputPath)) {

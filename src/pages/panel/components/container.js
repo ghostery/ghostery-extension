@@ -53,6 +53,7 @@ export default {
       #scroll {
         scrollbar-width: thin;
         scrollbar-color: var(--border-primary) transparent;
+        container-type: inline-size;
       }
 
       .shadow {

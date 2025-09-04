@@ -17,9 +17,6 @@
   "access_website_settings": {
     "message": "Zugriff auf Website-Einstellungen"
   },
-  "account_details": {
-    "message": "Kontodetails"
-  },
   "active": {
     "message": "Aktiv"
   },
@@ -195,9 +192,6 @@
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Trägt mit nicht-personenbezogenen Informationen über den Add-On-Zustand und Leistungstelemetrie dazu bei, den Datenschutz für die gesamte Ghostery-Community zu verbessern."
   },
-  "contributor": {
-    "message": "Unterstützer"
-  },
   "copied_to_clipboard": {
     "message": "In die Zwischenablage kopiert"
   },
@@ -206,9 +200,6 @@
   },
   "country": {
     "message": "Land"
-  },
-  "create_account": {
-    "message": "Konto erstellen"
   },
   "custom": {
     "message": "Benutzerdefiniert"
@@ -476,9 +467,6 @@
   "it_exists_thanks_to_the_micro_contributions_of_every_ghostery_user_who_chooses_to_send_non_personal_information_to_whotracks_me__this_input_enables_ghostery_to_provide_real_time_intel_on_trackers__which__in_turn__delivers_privacy_protection_to_the_entire_ghostery_community_": {
     "message": "Es existiert dank der Beiträge jedes Ghostery-Nutzers, der sich dafür entscheidet, nicht-personenbezogene Informationen an WhoTracks.Me zu senden. Diese Informationen ermöglichen es Ghostery, Echtzeitinformationen über Tracker zu liefern, die wiederum die gesamte Ghostery-Gemeinschaft schützen."
   },
-  "join_ghostery": {
-    "message": "Schließen Sie sich Ghostery an"
-  },
   "k_anonymity_protected_reports_of_page_shows": {
     "message": "Berichte von Seitenansichten geschützt mit k-Anonymität"
   },
@@ -691,8 +679,8 @@
   "save_your_custom_settings_to_a_file__or_restore_them_from_a_file_": {
     "message": "Speichere deine benutzerdefinierten Einstellungen in einer Datei oder stelle sie aus einer Datei wieder her."
   },
-  "saves_and_synchronizes_your_custom_settings_between_browsers_and_devices_": {
-    "message": "Speichern und synchronisieren Sie Ihre benutzerdefinierten Einstellungen auf verschiedenen Browsern und Geräten."
+  "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
+    "message": "Speichert und synchronisiert Ihre benutzerdefinierten Einstellungen zwischen verschiedenen Geräten."
   },
   "search_engine_redirect_protection": {
     "message": "Schutz vor Suchmaschinenumleitungen"
@@ -736,12 +724,6 @@
   "shows_the_tracker_preview_beside_search_results_": {
     "message": "Zeigt die Tracker-Vorschau neben den Suchergebnissen."
   },
-  "sign_in": {
-    "message": "Anmelden"
-  },
-  "sign_in_or_create_account_on_ghostery_com": {
-    "message": "Melden Sie sich an oder erstellen Sie ein Konto auf Ghostery.com."
-  },
   "simple_view": {
     "message": "Einfache Ansicht"
   },
@@ -777,9 +759,6 @@
   },
   "terms___conditions": {
     "message": "Konditionen"
-  },
-  "thank_you_for_your_support_in_ghostery_s_fight_for_a_web_where_privacy_is_a_basic_human_right_": {
-    "message": "Vielen Dank für Ihre Unterstützung im Kampf von Ghostery für ein Internet, in dem Datenschutz ein grundlegendes Menschenrecht ist!"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Das Backup von $${0} wurde erfolgreich importiert."
@@ -960,12 +939,6 @@
   },
   "yesterday": {
     "message": "Gestern"
-  },
-  "you_are_awesome_": {
-    "message": "Sie sind toll!"
-  },
-  "you_are_signed_in_as_": {
-    "message": "Sie sind angemeldet als:"
   },
   "you_will_no_longer_see_tracker_wheels_next_to_the_search_results_": {
     "message": "Neben den Suchergebnissen werden keine Tracker-Räder mehr angezeigt."
