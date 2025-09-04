@@ -680,7 +680,7 @@
     "message": "カスタム設定をファイルに保存するか、ファイルから復元してください。"
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
-    "message": "Saves and synchronizes your custom settings between different devices."
+    "message": "異なるデバイス間でカスタム設定を保存・同期します。"
   },
   "search_engine_redirect_protection": {
     "message": "検索エンジンのリダイレクト保護"

@@ -680,7 +680,7 @@
     "message": "将您的自定义设置保存到文件中，或从文件中恢复它们。"
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
-    "message": "Saves and synchronizes your custom settings between different devices."
+    "message": "保存并在不同设备之间同步您的自定义设置。"
   },
   "search_engine_redirect_protection": {
     "message": "搜索引擎重定向保护"
