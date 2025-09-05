@@ -14,8 +14,6 @@ import { store } from 'hybrids';
 import { ENGINES, getPausedDetails } from '/store/options.js';
 import Config, { FLAG_DYNAMIC_DNR_FIXES } from '/store/config.js';
 import Resources from '/store/resources.js';
-
-import { convertToSafariFormat } from '/utils/dnr-converter-safari.js';
 import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
@@ -112,17 +110,6 @@ if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
                     addRules.splice(index, 1);
                   }
                 }
-              }
-
-              if (__PLATFORM__ === 'safari') {
-                addRules = addRules.reduce((acc, rule) => {
-                  try {
-                    acc.push(convertToSafariFormat(rule));
-                  } catch {
-                    // Ignore rules that cannot be converted
-                  }
-                  return acc;
-                }, []);
               }
 
               await chrome.declarativeNetRequest.updateDynamicRules({

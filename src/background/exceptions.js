@@ -47,15 +47,9 @@ async function updateFilters() {
 
     for (const rule of result.rules) {
       if (domains && domains.length) {
-        if (__PLATFORM__ === 'safari') {
-          rule.condition.domains = domains
-            .map((d) => `*${d}`)
-            .concat(rule.condition.domains || []);
-        } else {
-          rule.condition.initiatorDomains = domains.concat(
-            rule.condition.initiatorDomains || [],
-          );
-        }
+        rule.condition.initiatorDomains = domains.concat(
+          rule.condition.initiatorDomains || [],
+        );
       }
 
       rules.push({

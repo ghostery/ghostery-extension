@@ -603,7 +603,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					468E428A2701F84A008B5792 = {
 						CreatedOnToolsVersion = 13.0;
@@ -933,6 +933,7 @@
 				CURRENT_PROJECT_VERSION = 100;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -996,6 +997,7 @@
 				CURRENT_PROJECT_VERSION = 100;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1020,7 +1022,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker Extension";
@@ -1051,7 +1052,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ghostery Privacy Ad Blocker Extension";
@@ -1085,7 +1085,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Ghostery;
@@ -1094,7 +1093,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1122,7 +1121,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Ghostery;
@@ -1131,7 +1129,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1162,7 +1160,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -1197,7 +1194,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -1234,7 +1230,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
@@ -1272,7 +1267,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = T3NRR7XMGG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
