@@ -24,7 +24,6 @@ import { build } from 'vite';
 import webExt from 'web-ext';
 
 import REGIONS from '../src/utils/regions.js';
-import { convertToSafariFormat } from '../src/utils/dnr-converter-safari.js';
 
 const pwd = process.cwd();
 
@@ -197,18 +196,13 @@ if (manifest.storage?.managed_schema) {
 if (manifest.declarative_net_request?.rule_resources) {
   mkdirSync(resolve(options.outDir, 'rule_resources'), { recursive: true });
 
-  let rulesCount = 0;
-
-  // Add regional DNR rules to Chromium
-  if (argv.target === 'chromium') {
-    REGIONS.forEach((region) => {
-      manifest.declarative_net_request.rule_resources.push({
-        id: `lang-${region}`,
-        enabled: false,
-        path: `rule_resources/dnr-lang-${region}.json`,
-      });
+  REGIONS.forEach((region) => {
+    manifest.declarative_net_request.rule_resources.push({
+      id: `lang-${region}`,
+      enabled: false,
+      path: `rule_resources/dnr-lang-${region}.json`,
     });
-  }
+  });
 
   manifest.declarative_net_request.rule_resources.forEach(({ path }) => {
     const dir = dirname(path);
@@ -218,35 +212,8 @@ if (manifest.declarative_net_request?.rule_resources) {
     const outputPath = resolve(destPath, file);
 
     mkdirSync(destPath, { recursive: true });
-
-    if (argv.target === 'safari') {
-      const list = JSON.parse(readFileSync(sourcePath, 'utf8'))
-        .map((rule) => {
-          try {
-            return convertToSafariFormat(rule);
-          } catch {
-            // ignore incompatible rules
-          }
-        })
-        .filter(Boolean);
-      rulesCount += list?.length;
-      writeFileSync(outputPath, JSON.stringify(list));
-      return;
-    }
-
     cpSync(sourcePath, outputPath);
   });
-
-  if (argv.target === 'safari') {
-    console.log('Declarative Net Request rules:', rulesCount);
-
-    // https://github.com/WebKit/WebKit/blob/c85962a5c0e929991e5963811da957b75d1501db/Source/WebCore/contentextensions/ContentExtensionCompiler.cpp#L199
-    if (rulesCount > 75000) {
-      throw new Error(
-        `Warning: The number of rules exceeds the limit of 75k rules.`,
-      );
-    }
-  }
 }
 
 // copy redirect rule resources
