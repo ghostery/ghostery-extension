@@ -57,8 +57,12 @@ export function toggleDomain(options, trackerId, domain, force = false) {
 
   let domains = [domain];
   if (exception) {
-    domains = exception.domains.includes(domain)
-      ? exception.domains.filter((d) => d !== domain || force)
+    const targetDomain = exception.domains.includes(domain)
+      ? domain
+      : exception.domains.find((d) => domain.endsWith(d));
+
+    domains = targetDomain
+      ? exception.domains.filter((d) => d !== targetDomain || force)
       : exception.domains.concat(domain);
   }
 
