@@ -29,6 +29,7 @@ import ProtectionStatus from './protection-status.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
+import { isWebkit } from '/utils/browser-info.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -343,8 +344,7 @@ export default {
                   ontypechange="${setStatsType}"
                   layout="margin:1.5:1.5:1"
                 >
-                  ${__PLATFORM__ === 'safari' ||
-                  options.panel.statsType === 'graph'
+                  ${isWebkit() || options.panel.statsType === 'graph'
                     ? html`
                         <ui-tooltip position="bottom" slot="actions">
                           <span slot="content">WhoTracks.Me Reports</span>

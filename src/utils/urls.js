@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { isOpera, isEdge } from './browser-info.js';
+import { isOpera, isEdge, isSafari } from './browser-info.js';
 import { debugMode, stagingMode } from './debug.js';
 
 export const GHOSTERY_DOMAIN = debugMode ? 'ghosterystage.com' : 'ghostery.com';
@@ -25,10 +25,9 @@ export const SUPPORT_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/support`;
 export const WHATS_NEW_PAGE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/ghostery-extension-v10-5?embed=1&utm_campaign=whatsnew`;
 
 export const REVIEW_PAGE_URL = (() => {
-  if (__PLATFORM__ === 'safari') return 'https://mygho.st/ReviewSafariPanel';
   if (__PLATFORM__ === 'firefox') return 'https://mygho.st/ReviewFirefoxPanel';
 
-  // Chromium-based browsers
+  if (isSafari()) return 'https://mygho.st/ReviewSafariPanel';
   if (isOpera()) return 'https://mygho.st/ReviewOperaPanel';
   if (isEdge()) return 'https://mygho.st/ReviewEdgePanel';
 
@@ -36,10 +35,9 @@ export const REVIEW_PAGE_URL = (() => {
   return 'https://mygho.st/ReviewChromePanel';
 })();
 
-export const BECOME_A_CONTRIBUTOR_PAGE_URL =
-  __PLATFORM__ === 'safari'
-    ? 'ghosteryapp://www.ghostery.com'
-    : 'https://www.ghostery.com/become-a-contributor';
+export const BECOME_A_CONTRIBUTOR_PAGE_URL = isSafari()
+  ? 'ghosteryapp://www.ghostery.com'
+  : 'https://www.ghostery.com/become-a-contributor';
 
 export const ENGINE_CONFIGS_ROOT_URL = `https://${debugMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;
 

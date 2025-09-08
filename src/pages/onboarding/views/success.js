@@ -22,7 +22,7 @@ import pinExtensionOpera from '../assets/pin-extension-opera.jpg';
 let screenshotURL = '';
 let type = '';
 
-if (__PLATFORM__ === 'chromium') {
+if (__PLATFORM__ !== 'firefox') {
   const { name } = getBrowser();
 
   if (name === 'chrome' || name === 'brave' || name === 'yandex') {
@@ -50,7 +50,7 @@ export default {
           </ui-text>
         </section>
       </ui-card>
-      ${__PLATFORM__ === 'chromium' &&
+      ${__PLATFORM__ !== 'firefox' &&
       screenshotURL &&
       html`
         <ui-card>

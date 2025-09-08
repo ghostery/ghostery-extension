@@ -25,18 +25,8 @@ import './styles.css';
 // we must redirect to onboarding if terms are not accepted
 Promise.all([store.resolve(Options), store.resolve(ManagedConfig)])
   .then(([{ terms }, managedConfig]) => {
-    if (!terms || managedConfig.disableUserControl)
+    if (!terms || managedConfig.disableUserControl) {
       throw new Error('Access denied');
-
-    // Safari has a bug where the back button doesn't work properly
-    // when the page is loaded from a background page by the chrome.tabs.update API
-    // In the result the `popstate` event is not fired and the router cannot
-    // re-create the previous state correctly
-    if (__PLATFORM__ === 'safari') {
-      const backFn = history.back.bind(history);
-      history.back = () => {
-        setTimeout(backFn, 200);
-      };
     }
 
     // Sync options with background

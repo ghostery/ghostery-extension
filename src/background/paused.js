@@ -73,11 +73,11 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
   // that this function is called before the user can change the paused state
   // in the panel or the settings page.
   if (
-    (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
+    __PLATFORM__ !== 'firefox' &&
     (lastPaused ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
-      (__PLATFORM__ === 'chromium' &&
+      (__PLATFORM__ !== 'firefox' &&
         (await store.resolve(ManagedConfig)).disableUserControl))
   ) {
     const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);

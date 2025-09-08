@@ -76,7 +76,7 @@ async function updateFilters() {
   }
 }
 
-if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
+if (__PLATFORM__ !== 'firefox') {
   // Update exceptions filters every time TrackerDB updates
   // It happens when all engines are updated
   OptionsObserver.addListener(

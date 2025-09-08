@@ -15,14 +15,14 @@ export default async function convert(filters) {
   let result;
 
   try {
-    if (__PLATFORM__ === 'chromium') {
+    if (chrome.offscreen) {
       await setupOffscreenDocument();
 
       result = await chrome.runtime.sendMessage({
         action: 'dnr-converter:convert',
         filters,
       });
-    } else if (__PLATFORM__ === 'safari') {
+    } else {
       const { default: convertWithAdguard } = await import(
         '@ghostery/urlfilter2dnr/adguard'
       );
@@ -31,13 +31,11 @@ export default async function convert(filters) {
       });
 
       result.errors = result.errors.map((e) => `DNR - ${e.message || e}`);
-    } else {
-      throw new Error('Unsupported platform for DNR conversion');
     }
   } catch (e) {
     return { errors: [e.message], rules: [] };
   } finally {
-    if (__PLATFORM__ === 'chromium') closeOffscreenDocument();
+    if (chrome.offscreen) closeOffscreenDocument();
   }
 
   for (const [index, rule] of result.rules.entries()) {

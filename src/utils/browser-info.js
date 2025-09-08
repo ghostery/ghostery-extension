@@ -21,15 +21,11 @@ function getUA() {
 }
 
 export function getBrowser() {
-  if (__PLATFORM__ === 'safari') {
-    return { name: 'safari', token: 'sf' };
-  }
-
   if (__PLATFORM__ === 'firefox') {
     return { name: 'firefox', token: 'ff' };
   }
 
-  if (__PLATFORM__ === 'chromium') {
+  if (__PLATFORM__ !== 'firefox') {
     // Brave's user agent detects as `Chrome`,
     // so we need to check for Brave specifically
     if (navigator.brave?.isBrave) {
@@ -43,6 +39,10 @@ export function getBrowser() {
     }
 
     const browser = getUA().browser.name;
+
+    if (browser.includes('Safari')) {
+      return { name: 'safari', token: 'sf' };
+    }
 
     if (browser.includes('Chrome')) {
       return { name: 'chrome', token: 'ch' };
@@ -77,6 +77,19 @@ export function isEdge() {
 
 export function isOpera() {
   return getBrowser().name === 'opera';
+}
+
+export function isSafari() {
+  return getBrowser().name === 'safari';
+}
+
+export function isWebkit() {
+  if (__PLATFORM__ === 'firefox') return false;
+
+  // Edge on iPadOS has OS detected as `ios`
+  if (isSafari() || getOS() === 'ios') return true;
+
+  return false;
 }
 
 export function getOS() {
@@ -118,8 +131,9 @@ export default async function getBrowserInfo() {
   };
 
   if (
-    __PLATFORM__ === 'safari' &&
+    __PLATFORM__ !== 'firefox' &&
     browserInfo.os === 'mac' &&
+    chrome.runtime.getPlatformInfo &&
     (await chrome.runtime.getPlatformInfo()).os === 'ios'
   ) {
     browserInfo.os = 'ipados';

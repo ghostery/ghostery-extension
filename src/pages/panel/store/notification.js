@@ -14,7 +14,7 @@ import { store, msg } from 'hybrids';
 import Options from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
-import { isOpera } from '/utils/browser-info.js';
+import { isOpera, isSafari } from '/utils/browser-info.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL, REVIEW_PAGE_URL } from '/utils/urls';
 
 const NOTIFICATIONS = {
@@ -22,10 +22,9 @@ const NOTIFICATIONS = {
     icon: 'triangle',
     type: 'danger',
     text: msg`Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.`,
-    url:
-      __PLATFORM__ === 'safari'
-        ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe&utm_campaign=safaripermissions'
-        : 'https://www.ghostery.com/support?utm_source=gbe&utm_campaign=permissions',
+    url: isSafari()
+      ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe&utm_campaign=safaripermissions'
+      : 'https://www.ghostery.com/support?utm_source=gbe&utm_campaign=permissions',
     action: msg`Get help`,
   },
   opera: {
@@ -65,11 +64,7 @@ const Notification = {
     if (!terms) return NOTIFICATIONS.terms;
 
     // Opera SERP support notification
-    if (
-      __PLATFORM__ === 'chromium' &&
-      isOpera() &&
-      !(await isSerpSupported())
-    ) {
+    if (__PLATFORM__ !== 'firefox' && isOpera() && !(await isSerpSupported())) {
       return NOTIFICATIONS.opera;
     }
 
