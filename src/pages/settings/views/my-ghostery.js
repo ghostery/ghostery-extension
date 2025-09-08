@@ -15,7 +15,7 @@ import Options from '/store/options.js';
 
 import * as backup from '../utils/backup.js';
 import ManagedConfig from '/store/managed-config.js';
-import { isOpera } from '/utils/browser-info.js';
+import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 async function importSettings(host, event) {
   try {
@@ -47,8 +47,8 @@ export default {
             ${store.ready(managedConfig) &&
             !managedConfig.disableUserAccount &&
             html`
-              ${__PLATFORM__ !== 'safari' &&
-              !isOpera() &&
+              ${!isOpera() &&
+              !isWebkit() &&
               html`
                 <ui-toggle
                   value="${options.sync}"

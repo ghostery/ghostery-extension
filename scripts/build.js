@@ -155,7 +155,14 @@ const config = {
   resolve: {
     preserveSymlinks: true,
   },
-  define: { __PLATFORM__: JSON.stringify(argv.target) },
+  define: {
+    __PLATFORM__: JSON.stringify(
+      // Safari must use separate manifest (loaded from above), as it does not support
+      // the 'webRequest' API but the `__PLATFORM__` should return 'chromium' as
+      // the Edge on iOS/iPadOS uses the same build as for Edge Desktop
+      argv.target === 'safari' ? 'chromium' : argv.target,
+    ),
+  },
   build: {
     outDir: options.outDir,
     assetsDir: '',

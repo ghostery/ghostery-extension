@@ -43,7 +43,7 @@ export async function exportToFile() {
     type: 'application/json',
   });
 
-  if (__PLATFORM__ === 'safari') {
+  if (__PLATFORM__ !== 'firefox') {
     const browserInfo = await getBrowserInfo();
 
     if (browserInfo.os === 'ios' || browserInfo.os === 'ipados') {

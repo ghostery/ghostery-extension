@@ -23,7 +23,7 @@ import * as OptionsObserver from '/utils/options-observer.js';
 import AutoSyncingMap from '/utils/map.js';
 import { getMetadata, getUnidentifiedTracker } from '/utils/trackerdb.js';
 import Request from '/utils/request.js';
-import { isOpera } from '/utils/browser-info.js';
+import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 import * as logger from './logger.js';
 
@@ -33,7 +33,7 @@ const chromeAction = chrome.action || chrome.browserAction;
 
 const { icons } = chrome.runtime.getManifest();
 
-// We need to add a leading slash to the icon paths§
+// We need to add a leading slash to the icon paths
 if (__PLATFORM__ !== 'firefox') {
   Object.keys(icons).forEach((key) => {
     icons[key] = `/${icons[key]}`;
@@ -71,7 +71,7 @@ async function hasAccessToPage(tabId) {
 async function refreshIcon(tabId) {
   const options = await store.resolve(Options);
 
-  if (__PLATFORM__ === 'chromium' && isOpera() && options.terms) {
+  if (__PLATFORM__ !== 'firefox' && isOpera() && options.terms) {
     isSerpSupported().then(async (supported) => {
       if (!supported) {
         setBadgeColor(
@@ -235,10 +235,7 @@ export async function updateTabStats(tabId, requests) {
 
   let trackersUpdated = await pushTabStats(stats, requests);
 
-  if (
-    __PLATFORM__ === 'safari' &&
-    chrome.declarativeNetRequest.getMatchedRules
-  ) {
+  if (isWebkit() && chrome.declarativeNetRequest.getMatchedRules) {
     try {
       const { rulesMatchedInfo } =
         await chrome.declarativeNetRequest.getMatchedRules({
@@ -248,6 +245,9 @@ export async function updateTabStats(tabId, requests) {
 
       const notFoundRequests = [];
       for (const info of rulesMatchedInfo) {
+        // Only Safari returns the request details
+        if (!info.request || !info.request.url) break;
+
         let found = false;
         for (const tracker of stats.trackers) {
           for (const request of tracker.requests) {
@@ -358,7 +358,7 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   }
 });
 
-if (__PLATFORM__ === 'safari') {
+if (__PLATFORM__ !== 'firefox') {
   // On Safari we have content script to sends back the list of urls
   chrome.runtime.onMessage.addListener((msg, sender) => {
     if (sender.url && sender.frameId !== undefined && sender.tab?.id > -1) {
@@ -383,7 +383,7 @@ if (__PLATFORM__ === 'safari') {
   });
 }
 
-if (__PLATFORM__ === 'chromium') {
+if (__PLATFORM__ !== 'firefox') {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {

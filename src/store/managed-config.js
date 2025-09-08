@@ -11,7 +11,7 @@
 
 import { store } from 'hybrids';
 
-import { isOpera } from '/utils/browser-info.js';
+import { isOpera, isWebkit } from '/utils/browser-info.js';
 
 const ManagedConfig = {
   disableOnboarding: false,
@@ -21,7 +21,7 @@ const ManagedConfig = {
   trustedDomains: [String],
 
   [store.connect]: async () => {
-    if (__PLATFORM__ === 'safari' || isOpera()) return {};
+    if (isOpera() || isWebkit()) return {};
 
     try {
       return (await chrome.storage.managed.get()) || {};

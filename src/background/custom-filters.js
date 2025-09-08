@@ -169,7 +169,7 @@ export async function updateCustomFilters(input, options) {
   await reloadMainEngine();
 
   // Update DNR rules for Chromium and Safari
-  if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
+  if (__PLATFORM__ !== 'firefox') {
     const { rules, errors } = await convert(
       [...networkFilters].map((f) => f.toString()),
     );
@@ -197,7 +197,7 @@ OptionsObserver.addListener('customFilters', async (value, lastValue) => {
     const { text } = await store.resolve(CustomFilters);
     await updateCustomFilters(text, value);
   } else if (
-    (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') &&
+    __PLATFORM__ !== 'firefox' &&
     lastValue &&
     // Omit if `trustedScriptlets` is changed, as user then must click "save" button
     value.trustedScriptlets === lastValue.trustedScriptlets

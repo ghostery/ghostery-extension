@@ -18,7 +18,7 @@ import { FIXES_ID_RANGE, getDynamicRulesIds } from '/utils/dnr.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 import { ENGINE_CONFIGS_ROOT_URL } from '/utils/urls.js';
 
-if (__PLATFORM__ === 'chromium' || __PLATFORM__ === 'safari') {
+if (__PLATFORM__ !== 'firefox') {
   const DNR_RESOURCES = chrome.runtime
     .getManifest()
     .declarative_net_request.rule_resources.filter(({ enabled }) => !enabled)

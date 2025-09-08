@@ -12,7 +12,7 @@
 import { store } from 'hybrids';
 
 import { DEFAULT_REGIONS } from '/utils/regions.js';
-import { isOpera } from '/utils/browser-info.js';
+import { isOpera, isSafari } from '/utils/browser-info.js';
 
 import Config, {
   ACTION_PAUSE_ASSISTANT,
@@ -70,7 +70,7 @@ const Options = {
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,
-  ...(__PLATFORM__ !== 'safari' ? { trackerCount: true } : {}),
+  ...(!isSafari() ? { trackerCount: true } : {}),
   pauseAssistant: true,
 
   // Onboarding
@@ -78,10 +78,10 @@ const Options = {
   feedback: true,
   onboarding: {
     shown: 0,
-    ...(__PLATFORM__ === 'chromium' && isOpera()
+    ...(__PLATFORM__ !== 'firefox' && isOpera()
       ? { serpShownAt: 0, serpShown: 0 }
       : {}),
-    ...(__PLATFORM__ === 'chromium' ? { pinIt: false } : {}),
+    ...(__PLATFORM__ !== 'firefox' ? { pinIt: false } : {}),
   },
 
   // UI
@@ -118,7 +118,7 @@ const Options = {
       }
 
       // Apply managed options for supported platforms
-      if (__PLATFORM__ === 'firefox' || __PLATFORM__ === 'chromium') {
+      if (__PLATFORM__ === 'firefox' || __PLATFORM__ !== 'firefox') {
         return manage(options);
       }
 

@@ -24,7 +24,7 @@ import { isOpera } from '/utils/browser-info.js';
 import { openNotification } from './notifications.js';
 
 // Opera SERP notification
-if (__PLATFORM__ === 'chromium' && isOpera()) {
+if (__PLATFORM__ !== 'firefox' && isOpera()) {
   const NOTIFICATION_DELAY = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
   const NOTIFICATION_SHOW_LIMIT = 4;
 

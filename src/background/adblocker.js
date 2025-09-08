@@ -19,6 +19,7 @@ import scriptlets from '@ghostery/scriptlets';
 
 import Options, { ENGINES, getPausedDetails } from '/store/options.js';
 
+import { isWebkit } from '/utils/browser-info.js';
 import * as exceptions from '/utils/exceptions.js';
 import * as engines from '/utils/engines.js';
 import * as trackerdb from '/utils/trackerdb.js';
@@ -134,7 +135,7 @@ function pause(ms) {
 
 export async function reloadMainEngine() {
   // Delay the reload to avoid UI freezes in Firefox and Safari
-  if (__PLATFORM__ !== 'chromium') await pause(1000);
+  if (__PLATFORM__ === 'firefox' || isWebkit()) await pause(1000);
 
   const enabledEngines = getEnabledEngines(options);
   const resolvedEngines = (
@@ -581,7 +582,7 @@ if (__PLATFORM__ === 'firefox') {
   );
 }
 
-if (__PLATFORM__ === 'chromium') {
+if (__PLATFORM__ !== 'firefox') {
   let ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = false;
 
   store.resolve(Config).then((config) => {
