@@ -589,8 +589,6 @@ if (__PLATFORM__ !== 'firefox') {
     const enabled = config.hasFlag(
       FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
     );
-    if (!enabled) contentScripts.unregisterAll();
-
     ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = enabled;
   });
 
