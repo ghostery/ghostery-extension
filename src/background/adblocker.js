@@ -582,7 +582,7 @@ if (__PLATFORM__ === 'firefox') {
   );
 }
 
-if (__PLATFORM__ !== 'firefox') {
+if (__PLATFORM__ !== 'firefox' && chrome.webRequest?.onResponseStarted) {
   let ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = false;
 
   store.resolve(Config).then((config) => {

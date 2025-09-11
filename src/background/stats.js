@@ -383,7 +383,7 @@ if (__PLATFORM__ !== 'firefox') {
   });
 }
 
-if (__PLATFORM__ !== 'firefox') {
+if (__PLATFORM__ !== 'firefox' && chrome.webRequest) {
   // Gather stats for requests that are not main_frame
   chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
