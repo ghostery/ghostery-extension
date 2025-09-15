@@ -77,8 +77,7 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
     (lastPaused ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
-      (__PLATFORM__ !== 'firefox' &&
-        (await store.resolve(ManagedConfig)).disableUserControl))
+      (await store.resolve(ManagedConfig)).trustedDomains.length > 0)
   ) {
     const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
     const hostnames = Object.keys(paused);
