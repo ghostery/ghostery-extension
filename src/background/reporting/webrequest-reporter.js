@@ -27,50 +27,52 @@ import urlReporter from './url-reporter.js';
 
 let webRequestReporter = null;
 
-let options = {};
-OptionsObserver.addListener(function webRequestReporting(value) {
-  options = value;
-});
+if (chrome.webRequest) {
+  let options = {};
+  OptionsObserver.addListener(function webRequestReporting(value) {
+    options = value;
+  });
 
-let remoteConfig;
-store.resolve(Config).then((remote) => {
-  remoteConfig = remote;
-});
+  let remoteConfig;
+  store.resolve(Config).then((remote) => {
+    remoteConfig = remote;
+  });
 
-webRequestReporter = new RequestReporter(config.request, {
-  onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
-  countryProvider: urlReporter.countryProvider,
-  trustedClock: communication.trustedClock,
-  isRequestAllowed: (state) => {
-    const hostname = state.tabUrlParts.hostname;
-    return (
-      !options.blockTrackers ||
-      !!getPausedDetails(options, hostname) ||
-      remoteConfig?.hasAction(
-        hostname,
-        ACTION_DISABLE_ANTITRACKING_MODIFICATION,
-      )
-    );
-  },
-  onTrackerInteraction: (event, state) => {
-    if (event === 'observed') {
-      return;
+  webRequestReporter = new RequestReporter(config.request, {
+    onMessageReady: urlReporter.forwardRequestReporterMessage.bind(urlReporter),
+    countryProvider: urlReporter.countryProvider,
+    trustedClock: communication.trustedClock,
+    isRequestAllowed: (state) => {
+      const hostname = state.tabUrlParts.hostname;
+      return (
+        !options.blockTrackers ||
+        !!getPausedDetails(options, hostname) ||
+        remoteConfig?.hasAction(
+          hostname,
+          ACTION_DISABLE_ANTITRACKING_MODIFICATION,
+        )
+      );
+    },
+    onTrackerInteraction: (event, state) => {
+      if (event === 'observed') {
+        return;
+      }
+
+      const request = Request.fromRequestDetails({
+        url: state.url,
+        originUrl: state.tabUrl,
+      });
+      request.modified = true;
+
+      updateTabStats(state.tabId, [request]);
+    },
+  });
+
+  chrome.runtime.onMessage.addListener((msg, sender) => {
+    if (msg.action === 'mousedown') {
+      webRequestReporter.recordClick(msg.event, msg.context, msg.href, sender);
     }
-
-    const request = Request.fromRequestDetails({
-      url: state.url,
-      originUrl: state.tabUrl,
-    });
-    request.modified = true;
-
-    updateTabStats(state.tabId, [request]);
-  },
-});
-
-chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action === 'mousedown') {
-    webRequestReporter.recordClick(msg.event, msg.context, msg.href, sender);
-  }
-});
+  });
+}
 
 export default webRequestReporter;

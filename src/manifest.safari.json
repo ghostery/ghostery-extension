@@ -14,7 +14,8 @@
     "storage",
     "scripting",
     "tabs",
-    "activeTab"
+    "activeTab",
+    "webRequest"
   ],
   "host_permissions": ["http://*/*", "https://*/*", "ws://*/*", "wss://*/*"],
   "icons": {
