@@ -14,10 +14,6 @@ import { store } from 'hybrids';
 import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera, isSafari } from '/utils/browser-info.js';
 
-import Config, {
-  ACTION_PAUSE_ASSISTANT,
-  FLAG_PAUSE_ASSISTANT,
-} from './config.js';
 import CustomFilters from './custom-filters.js';
 import ManagedConfig from './managed-config.js';
 
@@ -216,16 +212,6 @@ async function manage(options) {
 
     // Clear out the paused state, to overwrite with the current managed state
     options.paused = {};
-
-    // Add paused domains from the config
-    const config = await store.resolve(Config);
-    if (config.hasFlag(FLAG_PAUSE_ASSISTANT)) {
-      for (const [domain, { actions }] of Object.entries(config.domains)) {
-        if (actions.includes(ACTION_PAUSE_ASSISTANT)) {
-          options.paused[domain] = { revokeAt: 0, assist: true };
-        }
-      }
-    }
   }
 
   managed.trustedDomains.forEach((domain) => {
