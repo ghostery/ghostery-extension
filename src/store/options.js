@@ -228,6 +228,14 @@ async function manage(options) {
     }
   }
 
+  if (managed.disableUserAccount === true) {
+    options.sync = false;
+  }
+
+  if (managed.disableTrackersPreview === true) {
+    options.wtmSerpReport = false;
+  }
+
   managed.trustedDomains.forEach((domain) => {
     options.paused ||= {};
     options.paused[domain] = { revokeAt: 0 };

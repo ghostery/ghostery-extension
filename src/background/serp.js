@@ -15,7 +15,6 @@ import { parse } from 'tldts-experimental';
 import trackersPreviewCSS from '/content_scripts/trackers-preview.css?raw';
 
 import Options, { getPausedDetails } from '/store/options.js';
-import ManagedConfig from '/store/managed-config.js';
 
 import { isSerpSupported } from '/utils/opera.js';
 import { getWTMStats } from '/utils/wtm-stats.js';
@@ -78,12 +77,8 @@ const SERP_URL_REGEXP =
 chrome.webNavigation.onCommitted.addListener(async (details) => {
   if (details.url.match(SERP_URL_REGEXP)) {
     const options = await store.resolve(Options);
-    const managedConfig = await store.resolve(ManagedConfig);
 
-    const trackersPreview =
-      options.wtmSerpReport && !managedConfig.disableTrackersPreview;
-
-    if (trackersPreview) {
+    if (options.wtmSerpReport) {
       chrome.scripting.insertCSS({
         target: {
           tabId: details.tabId,
@@ -92,10 +87,10 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
       });
     }
 
-    if (trackersPreview || options.serpTrackingPrevention) {
+    if (options.wtmSerpReport || options.serpTrackingPrevention) {
       const files = [];
 
-      if (trackersPreview) {
+      if (options.wtmSerpReport) {
         files.push('/content_scripts/trackers-preview.js');
       }
 
