@@ -63,6 +63,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
       return true;
     }
+
+    case 'reloadExtension': {
+      setTimeout(() => chrome.runtime.reload(), 2000);
+      sendResponse('done');
+
+      break;
+    }
   }
 
   return false;

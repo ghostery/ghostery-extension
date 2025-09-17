@@ -13,3 +13,4 @@ import './main.spec.js';
 import './advanced.spec.js';
 import './panel.spec.js';
 import './whotracksme.spec.js';
+import './managed.spec.js';

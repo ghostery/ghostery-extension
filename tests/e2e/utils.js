@@ -108,3 +108,27 @@ export async function switchToPanel(fn) {
   if (error) throw error;
   return result;
 }
+
+export async function reloadExtension() {
+  await browser.url('about:blank');
+
+  await browser[browser.isFirefox ? 'newWindow' : 'url'](
+    getExtensionPageURL('panel'),
+  );
+
+  const result = await browser.execute(
+    browser.isChromium
+      ? () => chrome.runtime.sendMessage({ action: 'reloadExtension' })
+      : () => browser.runtime.sendMessage({ action: 'reloadExtension' }),
+  );
+
+  if (result !== 'done') {
+    throw new Error(`Background tasks did not respond with "done": ${result}`);
+  }
+
+  if (browser.isFirefox) {
+    await browser.switchWindow('about:blank');
+  }
+
+  await browser.pause(5000);
+}

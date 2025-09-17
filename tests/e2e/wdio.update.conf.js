@@ -126,7 +126,6 @@ export const config = {
       switch (capabilities.browserName) {
         case 'chrome': {
           await browser.url('chrome://extensions');
-          await $('>>>#devMode').click();
 
           renameSync(wdio.CHROME_PATH, `${wdio.CHROME_PATH}-old`);
           cpSync(`${wdio.CHROME_PATH}-source`, wdio.CHROME_PATH, {
