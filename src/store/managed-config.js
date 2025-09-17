@@ -12,6 +12,7 @@
 import { store } from 'hybrids';
 
 import { isOpera, isWebkit } from '/utils/browser-info.js';
+import { debugMode } from '/utils/debug.js';
 
 const ManagedConfig = {
   disableOnboarding: false,
@@ -24,6 +25,12 @@ const ManagedConfig = {
     if (isOpera() || isWebkit()) return {};
 
     try {
+      if (debugMode) {
+        const { debugManagedConfig } =
+          await chrome.storage.local.get('debugManagedConfig');
+        if (debugManagedConfig) return debugManagedConfig;
+      }
+
       return (await chrome.storage.managed.get()) || {};
     } catch {
       return {};

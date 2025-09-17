@@ -39,7 +39,7 @@ export const BECOME_A_CONTRIBUTOR_PAGE_URL = isSafari()
   ? 'ghosteryapp://www.ghostery.com'
   : 'https://www.ghostery.com/become-a-contributor';
 
-export const ENGINE_CONFIGS_ROOT_URL = `https://${debugMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;
+export const ENGINE_CONFIGS_ROOT_URL = `https://${stagingMode ? 'staging-' : ''}cdn.ghostery.com/adblocker/configs`;
 
 export const CDN_URL = stagingMode
   ? 'https://staging-cdn.ghostery.com/'

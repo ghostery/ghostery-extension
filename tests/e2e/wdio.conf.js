@@ -179,6 +179,10 @@ export const config = {
         // Get the extension ID from extensions settings page
         await browser.url('chrome://extensions');
 
+        // Enable developer mode for reloading extension
+        await $('>>>#devMode').click();
+        await browser.pause(2000);
+
         const extensionId = await $('>>>extensions-item').getAttribute('id');
         setExtensionBaseUrl(`chrome-extension://${extensionId}/pages`);
       }
