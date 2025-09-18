@@ -267,7 +267,13 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     }
 
     const func = scriptlet.func;
-    const args = parsed.args.map((arg) => decodeURIComponent(arg));
+    const scriptletGlobals = {
+      warOrigin: chrome.runtime.getURL('/rule_resources/redirects'),
+    };
+    const args = [
+      scriptletGlobals,
+      ...parsed.args.map((arg) => decodeURIComponent(arg)),
+    ];
 
     if (
       __PLATFORM__ === 'firefox' &&
