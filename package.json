@@ -22,7 +22,7 @@
     "package": "./scripts/package.sh"
   },
   "devDependencies": {
-    "@eslint/js": "^9.35.0",
+    "@eslint/js": "^9.36.0",
     "@types/chrome": "^0.1.11",
     "@wdio/browser-runner": "^9.19.2",
     "@wdio/cli": "^9.19.2",
@@ -30,7 +30,7 @@
     "@wdio/mocha-framework": "^9.12.6",
     "@wdio/spec-reporter": "^9.19.2",
     "addons-linter": "^7.19.0",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.4.0",
