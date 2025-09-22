@@ -15,7 +15,7 @@ import { DEFAULT_REGIONS } from '/utils/regions.js';
 import { isOpera, isSafari } from '/utils/browser-info.js';
 
 import CustomFilters from './custom-filters.js';
-import ManagedConfig from './managed-config.js';
+import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from './managed-config.js';
 
 const UPDATE_OPTIONS_ACTION_NAME = 'updateOptions';
 export const GLOBAL_PAUSE_ID = '<all_urls>';
@@ -88,7 +88,7 @@ const Options = {
   exceptions: store.record({ global: false, domains: [String] }),
 
   // Paused domains
-  paused: store.record({ revokeAt: 0, assist: false }),
+  paused: store.record({ revokeAt: 0, assist: false, managed: false }),
 
   // Sync & Update
   sync: true,
@@ -114,7 +114,7 @@ const Options = {
       }
 
       // Apply managed options for supported platforms
-      if (__PLATFORM__ === 'firefox' || __PLATFORM__ !== 'firefox') {
+      if (__PLATFORM__ === 'firefox' || (!isSafari() && !isOpera())) {
         return manage(options);
       }
 
@@ -222,10 +222,22 @@ async function manage(options) {
     options.wtmSerpReport = false;
   }
 
-  managed.trustedDomains.forEach((domain) => {
+  // Clean previous managed paused domains
+  if (options.paused) {
+    for (const domain of Object.keys(options.paused)) {
+      if (options.paused[domain].managed === true) {
+        delete options.paused[domain];
+      }
+    }
+  }
+
+  // Apply trusted domains if they are configured (they are empty or contain real domains)
+  if (managed.trustedDomains[0] !== TRUSTED_DOMAINS_NONE_ID) {
     options.paused ||= {};
-    options.paused[domain] = { revokeAt: 0 };
-  });
+    managed.trustedDomains.forEach((domain) => {
+      options.paused[domain] = { revokeAt: 0, managed: true };
+    });
+  }
 
   return options;
 }
