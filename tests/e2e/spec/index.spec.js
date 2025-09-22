@@ -9,8 +9,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import './managed.spec.js';
 import './main.spec.js';
 import './advanced.spec.js';
 import './panel.spec.js';
 import './whotracksme.spec.js';
-import './managed.spec.js';

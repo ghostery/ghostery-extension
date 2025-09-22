@@ -13,7 +13,7 @@ import { store } from 'hybrids';
 
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import * as OptionsObserver from '/utils/options-observer.js';
-import ManagedConfig from '/store/managed-config';
+import ManagedConfig, { TRUSTED_DOMAINS_NONE_ID } from '/store/managed-config';
 
 import {
   getDynamicRulesIds,
@@ -77,7 +77,8 @@ OptionsObserver.addListener('paused', async (paused, lastPaused) => {
     (lastPaused ||
       // Managed mode can update the rules at any time - so we need to update
       // the rules even if the paused state hasn't changed
-      (await store.resolve(ManagedConfig)).trustedDomains.length > 0)
+      (await store.resolve(ManagedConfig)).trustedDomains[0] !==
+        TRUSTED_DOMAINS_NONE_ID)
   ) {
     const removeRuleIds = await getDynamicRulesIds(PAUSED_ID_RANGE);
     const hostnames = Object.keys(paused);

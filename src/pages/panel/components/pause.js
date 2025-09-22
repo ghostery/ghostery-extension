@@ -97,7 +97,8 @@ export default {
           tabindex="${paused ? '-1' : '0'}"
           layout="row center self:stretch width:14"
           onclick="${!paused && !pauseList && openPauseList}"
-          onkeypress=${!paused && !pauseList && simulateClickOnEnter}
+          onkeypress="${!paused && !pauseList && simulateClickOnEnter}"
+          data-qa="button:${paused ? 'resume' : 'pause-type'}"
         >
           ${paused
             ? html`

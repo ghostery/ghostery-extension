@@ -14,12 +14,14 @@ import { store } from 'hybrids';
 import { isOpera, isWebkit } from '/utils/browser-info.js';
 import { debugMode } from '/utils/debug.js';
 
+export const TRUSTED_DOMAINS_NONE_ID = '<none>';
+
 const ManagedConfig = {
   disableOnboarding: false,
   disableUserControl: false,
   disableUserAccount: false,
   disableTrackersPreview: false,
-  trustedDomains: [String],
+  trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
 
   [store.connect]: async () => {
     if (isOpera() || isWebkit()) return {};
