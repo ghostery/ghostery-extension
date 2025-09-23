@@ -13,7 +13,7 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'package')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Set version and SHA
         run: |
           VERSION=$(node -p "require('./package.json').version")
@@ -24,11 +24,9 @@ jobs:
 
           echo $VERSION
           echo $SHA
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v5
         with:
           node-version-file: '.tool-versions'
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
       - name: Install dependencies in repo root
         run: npm ci
         working-directory: .
