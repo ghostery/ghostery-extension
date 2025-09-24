@@ -42,6 +42,8 @@ export const config = {
     if (wdio.argv.clean) {
       rmSync(wdio.WEB_EXT_PATH, { recursive: true, force: true });
       mkdirSync(wdio.WEB_EXT_PATH, { recursive: true });
+    } else if (!existsSync(wdio.WEB_EXT_PATH)) {
+      mkdirSync(wdio.WEB_EXT_PATH, { recursive: true });
     }
 
     try {

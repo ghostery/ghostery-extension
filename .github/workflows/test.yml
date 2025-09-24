@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -20,9 +20,31 @@ jobs:
 
       - name: Lint
         run: npm run lint
+  e2e:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.tool-versions'
 
-      - name: Test - installated extension
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test - Installed Extension
         run: npm run wdio
+  e2e-update:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.tool-versions'
 
-      - name: Test - updated extension
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test - Updated Extension
         run: npm run wdio:update
