@@ -26,18 +26,16 @@ export default {
       }
 
       ui-button {
-        white-space: wrap;
-        text-align: center;
         height: auto;
         font: var(--font-label-s);
       }
 
       ui-button ::slotted(*) {
-        display: flex;
-        flex-flow: column nowrap;
+        display: grid;
+        justify-items: start;
         align-items: center;
-        justify-content: center;
-        padding: 12px 8px;
+        grid-template-columns: min-content 1fr min-content;
+        padding: 4px 8px;
       }
     `,
 };

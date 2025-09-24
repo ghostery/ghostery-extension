@@ -175,11 +175,7 @@ export default {
             ${stats.hostname &&
             managedConfig.disableUserControl &&
             html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
-            <ui-action slot="icon">
-              <a href="https://www.ghostery.com" onclick="${openTabWithUrl}">
-                <ui-icon name="logo"></ui-icon>
-              </a>
-            </ui-action>
+            <ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>
             ${!managedConfig.disableUserControl &&
             html`
               <ui-action slot="actions">
@@ -196,24 +192,41 @@ export default {
               <panel-actions-button
                 onclick="${openElementPicker}"
                 disabled="${paused}"
+                icon="hide-element"
               >
                 <button>
-                  <panel-actions-icon
-                    name="hide-element"
-                    color="success-primary"
-                  ></panel-actions-icon>
+                  <panel-actions-icon name="hide-element"></panel-actions-icon>
                   Hide content block
+                  <ui-icon
+                    name="chevron-right"
+                    color="tertiary"
+                    layout="size:2"
+                  ></ui-icon>
                 </button>
               </panel-actions-button>
               <panel-actions-button>
                 <a href="${router.url(ReportForm)}">
-                  <panel-actions-icon
-                    name="report"
-                    color="danger-primary"
-                  ></panel-actions-icon>
+                  <panel-actions-icon name="report"></panel-actions-icon>
                   Report a broken page
+                  <ui-icon
+                    name="chevron-right"
+                    color="tertiary"
+                    layout="size:2"
+                  ></ui-icon>
                 </a>
               </panel-actions-button>
+              ${!isWebkit() &&
+              html`<panel-actions-button>
+                <button onclick="${openLogger}">
+                  <panel-actions-icon name="open-book"></panel-actions-icon>
+                  View details logs
+                  <ui-icon
+                    name="chevron-right"
+                    color="tertiary"
+                    layout="size:2"
+                  ></ui-icon>
+                </button>
+              </panel-actions-button>`}
               <panel-actions-button>
                 <a
                   onclick="${openTabWithUrl}"
@@ -222,11 +235,13 @@ export default {
                       stats.hostname,
                   )}"
                 >
-                  <panel-actions-icon
-                    name="settings"
-                    color="wtm-primary"
-                  ></panel-actions-icon>
-                  Access website settings
+                  <panel-actions-icon name="settings"></panel-actions-icon>
+                  Open website settings
+                  <ui-icon
+                    name="link-external-m"
+                    color="tertiary"
+                    layout="size:2"
+                  ></ui-icon>
                 </a>
               </panel-actions-button>
             </panel-actions>
@@ -344,33 +359,14 @@ export default {
                   ontypechange="${setStatsType}"
                   layout="margin:1.5:1.5:1"
                 >
-                  ${isWebkit() || options.panel.statsType === 'graph'
-                    ? html`
-                        <ui-tooltip position="bottom" slot="actions">
-                          <span slot="content">WhoTracks.Me Reports</span>
-                          <ui-action-button layout="size:4.5">
-                            <a href="${router.url(WhoTracksMe)}">
-                              <ui-icon
-                                name="whotracksme"
-                                color="primary"
-                              ></ui-icon>
-                            </a>
-                          </ui-action-button>
-                        </ui-tooltip>
-                      `
-                    : html`
-                        <ui-tooltip position="bottom" slot="actions">
-                          <span slot="content" translate="no">Logger</span>
-                          <ui-action-button layout="size:4.5">
-                            <button onclick="${openLogger}">
-                              <ui-icon
-                                name="open-book"
-                                color="primary"
-                              ></ui-icon>
-                            </button>
-                          </ui-action-button>
-                        </ui-tooltip>
-                      `}
+                  <ui-tooltip position="bottom" slot="actions">
+                    <span slot="content">WhoTracks.Me Reports</span>
+                    <ui-action-button layout="size:4.5">
+                      <a href="${router.url(WhoTracksMe)}">
+                        <ui-icon name="whotracksme" color="primary"></ui-icon>
+                      </a>
+                    </ui-action-button>
+                  </ui-tooltip>
                   ${!stats.groupedTrackers.length &&
                   html`
                     <ui-list layout="grow margin:0.5:0" slot="list">

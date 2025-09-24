@@ -13,17 +13,15 @@ import { html } from 'hybrids';
 
 export default {
   name: '',
-  color: '',
-  render: ({ name, color }) =>
+  render: ({ name }) =>
     html`
-      <template layout="block padding">
-        <ui-icon name="${name}" color="${color}" layout="size:3">
+      <template layout="block padding:6px ::background:brand-primary">
+        <ui-icon name="${name}" color="brand-primary" layout="size:3">
           <slot></slot>
         </ui-icon>
       </template>
     `.css`
       :host {
-        background: var(--background-${color});
         border-radius: 50%;
       }
     `,
