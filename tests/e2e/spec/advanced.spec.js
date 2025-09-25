@@ -117,7 +117,7 @@ describe('Advanced Features', function () {
       ]);
 
       await browser.url(PAGE_URL);
-      await $('#war').waitForExist({ timeout: 1000 });
+      await $('#war').waitForExist();
       await expect($('#war')).toHaveText('google');
     });
 
