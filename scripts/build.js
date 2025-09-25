@@ -368,6 +368,7 @@ const buildPromise = build({
         sanitizeFileName: (name) => {
           name = name
             .replace(/[\0?*]+/g, '_')
+            .replace(/["<>:|]/g, '_')
             .replace('node_modules', 'npm')
             .replace('_virtual', 'virtual');
 
