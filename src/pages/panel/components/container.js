@@ -40,6 +40,7 @@ export default {
     value: () => html`
       <template layout="row height::0 relative">
         <div
+          part="scrollable"
           id="scroll"
           onscroll="${updateShadow}"
           layout="grow overflow:x:hidden overflow:y:auto"
