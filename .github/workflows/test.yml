@@ -7,24 +7,50 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version-file: '.tool-versions'
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
 
       - name: Install dependencies
         run: npm ci
 
       - name: Lint
         run: npm run lint
+  e2e:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.tool-versions'
 
-      - name: Test - installated extension
-        run: npm run wdio
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Test - updated extension
-        run: npm run wdio:update
+      - name: Test - Chrome
+        run: npm run wdio -- --target=chrome
+
+      - name: Test - Firefox
+        run: npm run wdio -- --target=firefox
+  e2e-update:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: '.tool-versions'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test - Chrome
+        run: npm run wdio:update -- --target=chrome
+
+      - name: Test - Firefox
+        run: npm run wdio:update -- --target=firefox

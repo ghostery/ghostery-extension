@@ -19,9 +19,15 @@ import { setup, reloadMainEngine } from './adblocker.js';
 
 // Observe element picker selectors to update the adblocker engine
 store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
-  if (!lastModel) return;
-
   let entries = Object.entries(model.hostnames);
+
+  // Skip update if there is no change in the model
+  if (!lastModel) {
+    // and there is no entries, so engine is not needed
+    if (!entries.length) return;
+    // or engine already exists and it initializes correctly
+    if (await engines.init(engines.ELEMENT_PICKER_ENGINE)) return;
+  }
 
   if (entries.length) {
     const elementPickerFilters = entries.reduce(
@@ -40,8 +46,15 @@ store.observe(ElementPickerSelectors, async (_, model, lastModel) => {
       cosmeticFilters,
       config: (await engines.init(engines.FIXES_ENGINE)).config,
     });
+
+    console.log(
+      `[element-picker] Engine updated with ${
+        elementPickerFilters.length
+      } selectors for ${entries.length} hostnames`,
+    );
   } else {
     engines.remove(engines.ELEMENT_PICKER_ENGINE);
+    console.log('[element-picker] No selectors - engine removed');
   }
 
   setup.pending && (await setup.pending);
