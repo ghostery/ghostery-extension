@@ -23,7 +23,7 @@
 
     <!-- Scriptlets with web accessible resources -->
     <script>
-      document.addEventListener('readystatechange', async function () {
+      document.addEventListener('DOMContentLoaded', async function () {
         const res = await fetch('ads.js');
         const div = document.createElement('div')
         div.id = 'war';
