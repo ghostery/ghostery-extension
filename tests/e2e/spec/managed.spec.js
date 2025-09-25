@@ -9,7 +9,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { browser, expect, $ } from '@wdio/globals';
+import { browser, expect } from '@wdio/globals';
 
 import { PAGE_DOMAIN, PAGE_URL } from '../wdio.conf.js';
 import {
@@ -18,6 +18,7 @@ import {
   getExtensionElement,
   getExtensionPageURL,
   reloadExtension,
+  waitForIdleBackgroundTasks,
 } from '../utils.js';
 
 async function setManagedOptions(options) {
@@ -31,6 +32,8 @@ async function setManagedOptions(options) {
     }
   }, options);
 
+  await waitForIdleBackgroundTasks();
+
   // Reload extension to pick up managed config changes
   await reloadExtension();
 }
@@ -41,28 +44,19 @@ async function cleanManagedOptions() {
 
 describe('Managed Configuration', function () {
   before(enableExtension);
-  afterEach(cleanManagedOptions);
+  after(cleanManagedOptions);
 
-  it('pauses domain when added to `trustedDomains`', async function () {
+  it('pauses domains added to `trustedDomains`', async function () {
     const TRACKER_IDS = ['facebook_connect', 'pinterest_conversion_tracker'];
 
     await setManagedOptions({ trustedDomains: [PAGE_DOMAIN] });
 
-    // Navigate to settings page to let managed config take effect
-    await browser.url(getExtensionPageURL('settings'));
-
-    // Navigate to websites link by clicking on it
-    const websitesLink = await $('a[href*="websites"]');
-    await websitesLink.click();
-
-    // Check if PAGE_URL appears in the websites table
-    // Look for text content containing PAGE_URL
-    const pageText = await $('body').getText();
-    await expect(pageText.includes(PAGE_DOMAIN)).toBe(true);
-
     await browser.url(PAGE_URL);
 
     await switchToPanel(async function () {
+      const resumeButton = await getExtensionElement('button:resume');
+      await expect(resumeButton).toBeDisplayed();
+
       await getExtensionElement('button:detailed-view').click();
 
       for (const trackerId of TRACKER_IDS) {
@@ -73,6 +67,15 @@ describe('Managed Configuration', function () {
           getExtensionElement(`icon:tracker:${trackerId}:modified`),
         ).not.toBeDisplayed();
       }
+    });
+
+    await setManagedOptions({ trustedDomains: [] });
+
+    await browser.url(PAGE_URL);
+
+    await switchToPanel(async function () {
+      const resumeButton = await getExtensionElement('button:resume');
+      await expect(resumeButton).not.toBeDisplayed();
     });
   });
 

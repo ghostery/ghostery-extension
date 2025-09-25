@@ -53,6 +53,13 @@ export const argv = process.argv.slice(2).reduce(
   { target: ['firefox', 'chrome'], debug: false, clean: false },
 );
 
+function execSyncNode(command) {
+  execSync(command, {
+    stdio: 'inherit',
+    env: { ...process.env, NODE_ENV: '' },
+  });
+}
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 export function setupTestPage() {
   const file = readFileSync(path.join(__dirname, 'page.html'), 'utf8');
@@ -69,18 +76,14 @@ export function setupTestPage() {
 
 export function buildForFirefox() {
   if (!existsSync(FIREFOX_PATH)) {
-    execSync('npm run build -- firefox --silent --debug', {
-      stdio: 'inherit',
-    });
-    execSync('web-ext build --overwrite-dest -n ghostery-firefox.zip', {
-      stdio: 'inherit',
-    });
+    execSyncNode('npm run build -- firefox --silent --debug');
+    execSyncNode('web-ext build --overwrite-dest -n ghostery-firefox.zip');
   }
 }
 
 export function buildForChrome() {
   if (!existsSync(CHROME_PATH)) {
-    execSync('npm run build -- --silent --debug', { stdio: 'inherit' });
+    execSyncNode('npm run build -- --silent --debug');
     rmSync(CHROME_PATH, { recursive: true, force: true });
     cpSync(path.join(process.cwd(), 'dist'), CHROME_PATH, {
       recursive: true,
@@ -179,12 +182,12 @@ export const config = {
         // Get the extension ID from extensions settings page
         await browser.url('chrome://extensions');
 
+        const extensionId = await $('>>>extensions-item').getAttribute('id');
+        setExtensionBaseUrl(`chrome-extension://${extensionId}/pages`);
+
         // Enable developer mode for reloading extension
         await $('>>>#devMode').click();
         await browser.pause(2000);
-
-        const extensionId = await $('>>>extensions-item').getAttribute('id');
-        setExtensionBaseUrl(`chrome-extension://${extensionId}/pages`);
       }
     } catch (e) {
       console.error('Error while setting up test environment', e);

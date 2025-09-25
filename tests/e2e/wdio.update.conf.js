@@ -38,10 +38,11 @@ import * as wdio from './wdio.conf.js';
 export const config = {
   ...wdio.config,
   specs: ['spec/index.spec.js'],
-  exclude: ['spec/_onboarding.spec.js'],
   onPrepare: async (config, capabilities) => {
     if (wdio.argv.clean) {
       rmSync(wdio.WEB_EXT_PATH, { recursive: true, force: true });
+      mkdirSync(wdio.WEB_EXT_PATH, { recursive: true });
+    } else if (!existsSync(wdio.WEB_EXT_PATH)) {
       mkdirSync(wdio.WEB_EXT_PATH, { recursive: true });
     }
 

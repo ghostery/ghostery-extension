@@ -130,5 +130,22 @@ export async function reloadExtension() {
     await browser.switchWindow('about:blank');
   }
 
-  await browser.pause(5000);
+  await browser.pause(3000);
+
+  await browser.waitUntil(
+    async () => {
+      const title = await browser.getTitle();
+      if (title !== 'Ghostery panel') {
+        await browser.url(getExtensionPageURL('panel'));
+        return false;
+      }
+
+      return true;
+    },
+    { timeout: 10000, timeoutMsg: 'Panel did not load' },
+  );
+
+  await waitForIdleBackgroundTasks();
+
+  await browser.url('about:blank');
 }
