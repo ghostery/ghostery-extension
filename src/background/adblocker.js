@@ -268,7 +268,12 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
 
     const func = scriptlet.func;
     const scriptletGlobals = {
-      warOrigin: chrome.runtime.getURL('/rule_resources/redirects'),
+      // Request a real extension resource to obtain a dynamic URL to the resource.
+      // Redirect resources are defined with `use_dynamic_url` restriction.
+      // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
+      warOrigin: chrome.runtime
+        .getURL('/rule_resources/redirects/empty')
+        .slice(0, -6),
     };
     const args = [
       scriptletGlobals,

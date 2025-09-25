@@ -20,5 +20,16 @@
       id="custom-filter"
       style="display: block; height: 100px; background: blue"
     ></div>
+
+    <!-- Scriptlets with web accessible resources -->
+    <script>
+      document.addEventListener('readystatechange', async function () {
+        const res = await fetch('ads.js');
+        const div = document.createElement('div')
+        div.id = 'war';
+        div.textContent = await res.text();
+        document.body.appendChild(div);
+      });
+    </script>
   </body>
 </html>

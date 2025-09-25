@@ -111,6 +111,16 @@ describe('Advanced Features', function () {
       await expect($('h1')).toHaveText('Hello world');
     });
 
+    it('adds custom scriptlet filter depending on `scriptletsGlobal.warOrigin`', async function () {
+      await setCustomFilters([
+        `${PAGE_DOMAIN}##+js(no-fetch-if, ads.js, war:googlesyndication_adsbygoogle.js)`,
+      ]);
+
+      await browser.url(PAGE_URL);
+      await $('#war').waitForExist({ timeout: 200 });
+      await expect($('#war')).toHaveText('google');
+    });
+
     it('disables custom filters', async function () {
       await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
       await setPrivacyToggle('custom-filters', false);
