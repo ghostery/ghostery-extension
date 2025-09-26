@@ -595,17 +595,7 @@ export default {
         </panel-container>
         ${!managedConfig.disableUserControl &&
         store.ready(notification) &&
-        html`
-          <panel-notification
-            icon="${notification.icon}"
-            href="${notification.url}"
-            type="${notification.type}"
-            layout="width:min:full padding:1:1.5:1.5"
-          >
-            ${notification.text}
-            <span slot="action">${notification.action}</span>
-          </panel-notification>
-        `}
+        html`<panel-notification></panel-notification>`}
       `}
     </template>
   `,
