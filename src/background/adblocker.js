@@ -36,7 +36,7 @@ import Config, {
 
 let options = Options;
 
-const scriptletsGlobal = {
+const scriptletGlobals = {
   // Request a real extension resource to obtain a dynamic ID to the resource.
   // Redirect resources are defined with `use_dynamic_url` restriction.
   // The dynamic ID is generated per session.
@@ -278,7 +278,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
 
     const func = scriptlet.func;
     const args = [
-      scriptletsGlobal,
+      scriptletGlobals,
       ...parsed.args.map((arg) => decodeURIComponent(arg)),
     ];
 
