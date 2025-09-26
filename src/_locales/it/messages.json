@@ -14,9 +14,6 @@
   "about": {
     "message": "A proposito di"
   },
-  "access_website_settings": {
-    "message": "Accedi alle impostazioni del sito web"
-  },
   "active": {
     "message": "Attivo"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "Sempre"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "Android e iPhone hanno appena ricevuto un nuovo Edge. Ghostery incluso."
   },
   "anti_tracking": {
     "message": "Anti-Tracking"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "Aprire il video"
   },
+  "open_website_settings": {
+    "message": "Apri le impostazioni del sito web"
+  },
   "open_youtube_in_a_private_window": {
     "message": "Aprire YouTube in una finestra privata"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "Salva e sincronizza le tue impostazioni personalizzate tra diversi dispositivi."
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "Scansiona e porta Ghostery dal desktop al mobile"
   },
   "search_engine_redirect_protection": {
     "message": "Protezione dal reindirizzamento dei motori di ricerca"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "Visualizza i dettagli delle attività"
+  },
+  "view_details_logs": {
+    "message": "Visualizza i registri dettagliati"
   },
   "view_report": {
     "message": "Visualizza rapporto"

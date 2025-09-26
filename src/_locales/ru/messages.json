@@ -14,9 +14,6 @@
   "about": {
     "message": "О программе"
   },
-  "access_website_settings": {
-    "message": "Доступ к настройкам сайта"
-  },
   "active": {
     "message": "Активный"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "Всегда"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "Android и iPhone только что получили новый Edge. Ghostery включен."
   },
   "anti_tracking": {
     "message": "Анти-трекинг"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "Открытое видео"
   },
+  "open_website_settings": {
+    "message": "Открыть настройки сайта"
+  },
   "open_youtube_in_a_private_window": {
     "message": "Открой YouTube в закрытом окне"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "Сохраняет и синхронизирует ваши настройки между различными устройствами."
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "Сканируйте и переносите Ghostery с компьютера на мобильное устройство"
   },
   "search_engine_redirect_protection": {
     "message": "Защита от перенаправления поисковых систем"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "Просмотреть подробности действия"
+  },
+  "view_details_logs": {
+    "message": "Просмотр журналов деталей"
   },
   "view_report": {
     "message": "Просмотреть отчет"
