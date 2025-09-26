@@ -14,9 +14,6 @@
   "about": {
     "message": "소개"
   },
-  "access_website_settings": {
-    "message": "웹 사이트 설정 열기"
-  },
   "active": {
     "message": "사용 중"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "항상"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "안드로이드와 아이폰에 새로운 엣지가 추가되었습니다. 고스트리가 포함되어 있습니다."
   },
   "anti_tracking": {
     "message": "추적 방지"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "동영상 보기"
   },
+  "open_website_settings": {
+    "message": "웹사이트 설정 열기"
+  },
   "open_youtube_in_a_private_window": {
     "message": "시크릿 탭에서 YouTube 열기"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "여러 기기에서 맞춤 설정을 저장하고 동기화합니다."
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "데스크톱에서 모바일로 Ghostery 가져오기"
   },
   "search_engine_redirect_protection": {
     "message": "검색엔진 경유 보호"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "활동 세부정보 보기"
+  },
+  "view_details_logs": {
+    "message": "세부 로그 보기"
   },
   "view_report": {
     "message": "보고서 보기"

@@ -14,9 +14,6 @@
   "about": {
     "message": "Giới thiệu"
   },
-  "access_website_settings": {
-    "message": "Truy cập cài đặt trang web"
-  },
   "active": {
     "message": "Active"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "Luôn luôn"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "Android và iPhone vừa có một phiên bản Edge mới. Ghostery đã được tích hợp."
   },
   "anti_tracking": {
     "message": "Chống theo dõi"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "Mở video"
   },
+  "open_website_settings": {
+    "message": "Mở cài đặt trang web"
+  },
   "open_youtube_in_a_private_window": {
     "message": "Mở YouTube trong cửa sổ riêng tư"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "Lưu và đồng bộ hóa cài đặt tùy chỉnh của bạn giữa các thiết bị khác nhau."
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "Quét và chuyển Ghostery từ máy tính sang di động"
   },
   "search_engine_redirect_protection": {
     "message": "Bảo vệ chuyển hướng công cụ tìm kiếm"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "View activity details"
+  },
+  "view_details_logs": {
+    "message": "Xem nhật ký chi tiết"
   },
   "view_report": {
     "message": "Xem Báo Cáo"

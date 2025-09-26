@@ -14,9 +14,6 @@
   "about": {
     "message": "バージョン情報"
   },
-  "access_website_settings": {
-    "message": "ウェブサイトの設定にアクセスする"
-  },
   "active": {
     "message": "アクティブ"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "常に"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "AndroidとiPhoneに新しいEdgeが登場しました。Ghosteryが含まれています。"
   },
   "anti_tracking": {
     "message": "追跡防止"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "ビデオを開く"
   },
+  "open_website_settings": {
+    "message": "ウェブサイト設定を開く"
+  },
   "open_youtube_in_a_private_window": {
     "message": "YouTubeをプライベートウィンドウで開く"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "異なるデバイス間でカスタム設定を保存・同期します。"
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "デスクトップからモバイルにGhosteryを移行"
   },
   "search_engine_redirect_protection": {
     "message": "検索エンジンのリダイレクト保護"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "アクティビティの詳細を表示"
+  },
+  "view_details_logs": {
+    "message": "詳細ログを表示"
   },
   "view_report": {
     "message": "レポートを見る"

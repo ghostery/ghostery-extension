@@ -14,9 +14,6 @@
   "about": {
     "message": "À propos de Ghostery"
   },
-  "access_website_settings": {
-    "message": "Paramètres du site"
-  },
   "active": {
     "message": "ACTIF"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "Toujours"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "La protection Ghostery est maintenant sur Edge Mobile."
   },
   "anti_tracking": {
     "message": "Anti-pistage"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "Ouvrir la vidéo"
   },
+  "open_website_settings": {
+    "message": "Ouvrir les paramètres du site web"
+  },
   "open_youtube_in_a_private_window": {
     "message": "Ouvre YouTube dans une fenêtre privée"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "Enregistre et synchronise vos paramètres personnalisés entre différents appareils."
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "Scannez le QR code et démarrez sur Android ou iPhone"
   },
   "search_engine_redirect_protection": {
     "message": "Protection contre les redirections dans les moteurs de recherche"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "Afficher les détails de l'activité"
+  },
+  "view_details_logs": {
+    "message": "Afficher les journaux détaillés"
   },
   "view_report": {
     "message": "Afficher le rapport"

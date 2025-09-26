@@ -14,9 +14,6 @@
   "about": {
     "message": "关于"
   },
-  "access_website_settings": {
-    "message": "访问网站设置"
-  },
   "active": {
     "message": "有效"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "始终"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "安卓和iPhone刚刚获得了新的Edge。包括Ghostery。"
   },
   "anti_tracking": {
     "message": "反跟踪功能"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "打开视频"
   },
+  "open_website_settings": {
+    "message": "打开网站设置"
+  },
   "open_youtube_in_a_private_window": {
     "message": "在私人窗口中打开 YouTube"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "保存并在不同设备之间同步您的自定义设置。"
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "扫描并将 Ghostery 从桌面转移到移动设备"
   },
   "search_engine_redirect_protection": {
     "message": "搜索引擎重定向保护"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "查看活动详情"
+  },
+  "view_details_logs": {
+    "message": "查看详细日志"
   },
   "view_report": {
     "message": "查看报告"
