@@ -115,6 +115,11 @@ export function getOS() {
   return 'other';
 }
 
+export function isMobile() {
+  const os = getOS();
+  return os === 'android' || os === 'ios';
+}
+
 let browserInfo = null;
 export default async function getBrowserInfo() {
   if (browserInfo) return browserInfo;

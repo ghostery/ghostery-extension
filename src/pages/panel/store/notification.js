@@ -14,8 +14,13 @@ import { store, msg } from 'hybrids';
 import Options from '/store/options.js';
 
 import { isSerpSupported } from '/utils/opera.js';
-import { isOpera, isSafari } from '/utils/browser-info.js';
+import { isEdge, isMobile, isOpera, isSafari } from '/utils/browser-info.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL, REVIEW_PAGE_URL } from '/utils/urls';
+
+import callForReviewImage from '../assets/call-for-review.svg';
+import edgeMobileQrCodeImage from '../assets/edge-mobile-qr-code.svg';
+
+export const images = [callForReviewImage, edgeMobileQrCodeImage];
 
 const NOTIFICATIONS = {
   terms: {
@@ -34,25 +39,32 @@ const NOTIFICATIONS = {
     url: 'https://www.ghostery.com/blog/block-search-engine-ads-on-opera-guide?utm_source=gbe&utm_campaign=opera_serp',
     action: msg`Enable Ad Blocking Now`,
   },
+  edgeMobile: {
+    img: edgeMobileQrCodeImage,
+    type: 'image',
+    text: msg`Android and iPhone just got a new Edge. Ghostery included.`,
+    url: 'https://edgemobileapp.microsoft.com/desktop/index.html?adjustId=1rdtsg4d_1rzcoul8',
+    action: msg`Scan and take Ghostery from desktop to mobile`,
+  },
   review: {
-    icon: 'call-for-review',
+    img: callForReviewImage,
     type: 'review',
     text: msg`We're so glad Ghostery has your heart! Help others find us too - it only takes a moment.`,
     url: REVIEW_PAGE_URL,
     action: msg`Leave a review today`,
   },
-};
-
-const CONTRIBUTOR_NOTIFICATION = {
-  icon: 'heart',
-  type: '',
-  text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
-  url: `${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=panel-becomeacontributor`,
-  action: msg`Become a Contributor`,
+  contribution: {
+    icon: 'heart',
+    type: '',
+    text: msg`Hey, do you enjoy Ghostery and want to support our work?`,
+    url: `${BECOME_A_CONTRIBUTOR_PAGE_URL}?utm_source=gbe&utm_campaign=panel-becomeacontributor`,
+    action: msg`Become a Contributor`,
+  },
 };
 
 const Notification = {
   icon: '',
+  img: '',
   type: '',
   text: '',
   url: '',
@@ -71,12 +83,17 @@ const Notification = {
     // Disabled in-panel notifications
     if (!panel.notifications) return null;
 
+    // Edge mobile notification for Edge desktop users
+    if (isEdge() && !isMobile()) {
+      return NOTIFICATIONS.edgeMobile;
+    }
+
     // Randomly show review notification (50% chance)
     if (Math.random() < 0.5) {
       return NOTIFICATIONS.review;
     }
 
-    return CONTRIBUTOR_NOTIFICATION;
+    return NOTIFICATIONS.contribution;
   },
 };
 

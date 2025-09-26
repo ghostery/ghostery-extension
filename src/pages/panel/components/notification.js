@@ -9,33 +9,44 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { html } from 'hybrids';
+import { html, store } from 'hybrids';
+
 import { openTabWithUrl } from '/utils/tabs.js';
 
+import Notification from '../store/notification.js';
+
 export default {
-  icon: '',
-  href: '',
-  type: { value: '', reflect: true }, // warning
-  render: ({ icon, href }) => html`
-    <template layout="block">
+  notification: store(Notification),
+  type: {
+    value: ({ notification }) => notification.type,
+    reflect: true,
+  },
+  render: ({ notification }) => html`
+    <template layout="block width:min:full padding:1:2:1.5:1.5">
       <ui-action>
         <a
-          href="${href}"
+          href="${notification.url}"
           onclick="${openTabWithUrl}"
           layout="row gap:2 items:stretch padding:1.5"
         >
-          ${icon &&
+          ${(notification.icon || notification.img) &&
           html`
-            <div id="icon" layout="row center shrink:0 width:5">
-              <ui-icon name="${icon}" layout="margin size:3"></ui-icon>
+            <div id="icon" layout="row center shrink:0">
+              ${notification.icon &&
+              html`<ui-icon
+                name="${notification.icon}"
+                layout="margin size:3"
+              ></ui-icon>`}
+              ${notification.img &&
+              html`<img src="${notification.img}" alt="" />`}
             </div>
           `}
           <div layout="column gap grow">
             <ui-text id="desc" type="body-s" color="secondary">
-              <slot></slot>
+              ${notification.text}
             </ui-text>
             <ui-text id="action" type="label-s">
-              <slot name="action"></slot>
+              ${notification.action}
             </ui-text>
           </div>
         </a>
@@ -53,13 +64,11 @@ export default {
     }
 
     :host([type="review"]) #icon {
-      position: relative;
-      overflow: hidden;
       background: #0D1850;
+      width: 40px;
     }
 
-
-    :host([type="review"]) ui-icon {
+    :host([type="review"]) img {
       margin:0;
       position: absolute;
       top: 50%;
@@ -81,6 +90,8 @@ export default {
     }
 
     #icon {
+      position: relative;
+      overflow: hidden;
       background: var(--background-primary);
       box-shadow: 0px 2px 6px var(--shadow-button);
       border-radius: 8px;
