@@ -36,6 +36,16 @@ import Config, {
 
 let options = Options;
 
+const scriptletsGlobal = {
+  // Request a real extension resource to obtain a dynamic ID to the resource.
+  // Redirect resources are defined with `use_dynamic_url` restriction.
+  // The dynamic ID is generated per session.
+  // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
+  warOrigin: chrome.runtime
+    .getURL('/rule_resources/redirects/empty')
+    .slice(0, -6),
+};
+
 const contentScripts = (() => {
   const map = new Map();
   return {
@@ -267,16 +277,8 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     }
 
     const func = scriptlet.func;
-    const scriptletGlobals = {
-      // Request a real extension resource to obtain a dynamic URL to the resource.
-      // Redirect resources are defined with `use_dynamic_url` restriction.
-      // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
-      warOrigin: chrome.runtime
-        .getURL('/rule_resources/redirects/empty')
-        .slice(0, -6),
-    };
     const args = [
-      scriptletGlobals,
+      scriptletsGlobal,
       ...parsed.args.map((arg) => decodeURIComponent(arg)),
     ];
 
