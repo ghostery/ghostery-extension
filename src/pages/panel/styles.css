@@ -23,3 +23,9 @@ body[platform-name='ios'] {
     max-height: 600px;
   }
 }
+
+@media screen and (max-height: 450px) {
+  body[platform-name='ios'] panel-container::part(scrollable) {
+    overflow-y: hidden;
+  }
+}
