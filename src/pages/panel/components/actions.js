@@ -15,10 +15,10 @@ export default {
   hostname: '',
   open: false,
   render: ({ hostname, open }) => html`
-    <template layout="block">
+    <template layout="contents">
       <div
         id="button"
-        layout="fixed layer:100 top:0 left:0 right:0 height:6 row center"
+        layout="absolute layer:100 top:0 left:0 right:0 height:6 row center"
         layout@390px="height:7"
       >
         <ui-button size="s" slot="button" onclick="${html.set('open', !open)}">
@@ -36,14 +36,14 @@ export default {
       <div
         id="overlay"
         class="${{ open }}"
-        layout="fixed layer:1 inset top:6"
+        layout="absolute layer:1 inset top:6"
         onclick="${html.set('open', false)}"
       ></div>
       <div
         id="actions"
         class="${{ open }}"
         inert="${!open}"
-        layout="fixed layer:1 top:6 left:0 right:0 grid:3 gap padding:1.5"
+        layout="absolute layer:1 top:6 left:0 right:0 column gap:0.5 padding:1.5"
         onclick="${html.set('open', false)}"
       >
         <slot></slot>
@@ -80,7 +80,6 @@ export default {
     }
 
     #actions {
-      border-top: 1px solid var(--border-primary);
       background: var(--background-primary);
       transform: translateY(-100%);
       visibility: hidden;
