@@ -14,9 +14,6 @@
   "about": {
     "message": "Über uns"
   },
-  "access_website_settings": {
-    "message": "Zugriff auf Website-Einstellungen"
-  },
   "active": {
     "message": "Aktiv"
   },
@@ -75,6 +72,9 @@
   },
   "always": {
     "message": "Immer"
+  },
+  "android_and_iphone_just_got_a_new_edge__ghostery_included_": {
+    "message": "Ghostery-Schutz jetzt auch auf Edge Mobile. "
   },
   "anti_tracking": {
     "message": "Anti-Tracking"
@@ -576,6 +576,9 @@
   "open_video": {
     "message": "Video öffnen"
   },
+  "open_website_settings": {
+    "message": "Website-Einstellungen öffnen"
+  },
   "open_youtube_in_a_private_window": {
     "message": "YouTube in einem privaten Fenster öffnen"
   },
@@ -681,6 +684,9 @@
   },
   "saves_and_synchronizes_your_custom_settings_between_different_devices_": {
     "message": "Speichert und synchronisiert Ihre benutzerdefinierten Einstellungen zwischen verschiedenen Geräten."
+  },
+  "scan_and_take_ghostery_from_desktop_to_mobile": {
+    "message": "QR-Code scannen und direkt auf Android oder iPhone starten"
   },
   "search_engine_redirect_protection": {
     "message": "Schutz vor Suchmaschinenumleitungen"
@@ -876,6 +882,9 @@
   },
   "view_activity_details": {
     "message": "Details zur Aktivität anzeigen"
+  },
+  "view_details_logs": {
+    "message": "Detaillierte Logs anzeigen"
   },
   "view_report": {
     "message": "Bericht anzeigen"
