@@ -57,12 +57,15 @@ jobs:
 
       - name: Setup GPG
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --yes --import
           echo "trust-model always" >> ~/.gnupg/gpg.conf
-          echo "use-agent" >> ~/.gnupg/gpg.conf
+          echo "no-tty" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
           echo "default-cache-ttl 3600" >> ~/.gnupg/gpg-agent.conf
           echo "max-cache-ttl 7200" >> ~/.gnupg/gpg-agent.conf
-          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --passphrase-fd 0 --sign --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E /dev/null
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          gpg-connect-agent reloadagent /bye
+          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 --sign --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E --output /dev/null /dev/null
 
       - name: Export GPG public key
         run: |
@@ -70,8 +73,8 @@ jobs:
 
       - name: Create PGP signatures
         run: |
-          gpg --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.zip"
-          gpg --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.tar.gz"
+          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.zip"
+          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 --detach-sign --armor --local-user 7541C764E251DA408BD645A2F8A0BDD7B2021F1E "ghostery-extension-${{ env.VERSION }}.tar.gz"
 
       - name: Upload PGP signature for zip
         uses: actions/upload-release-asset@v1
