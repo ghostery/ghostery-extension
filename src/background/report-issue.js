@@ -87,15 +87,25 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         const formData = new FormData();
         const browserInfo = await getBrowserInfo();
         const { version } = chrome.runtime.getManifest();
+
         const email = msg.email || 'noreplay@ghostery.com';
         const domain = parse(msg.url).domain || '';
 
         formData.append('support_ticket[user_name]', email);
         formData.append('support_ticket[user_email]', email);
-        formData.append(
-          'support_ticket[subject]',
-          `[GBE] ${sliceWithEllipsis(msg.url, 40)} - ${sliceWithEllipsis(msg.description.trim(), 30)}`,
-        );
+
+        let subject = `[GBE] ${sliceWithEllipsis(msg.url, 40)}`;
+
+        if (msg.category) {
+          formData.append('support_ticket[category]', msg.category);
+          subject += ` (${msg.category})`;
+        }
+
+        if (msg.description) {
+          subject += ` - ${sliceWithEllipsis(msg.description.trim(), 30)}`;
+        }
+
+        formData.append('support_ticket[subject]', subject);
 
         formData.append('support_ticket[version]', version);
         formData.append('support_ticket[selected_browser]', browserInfo.name);

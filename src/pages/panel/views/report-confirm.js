@@ -18,30 +18,31 @@ export default {
     <template layout="column grow">
       <ui-header>
         <ui-text type="label-m" layout="row gap items:center">
-          <ui-icon name="report" layout="size:2"></ui-icon>
-          Report a broken page
+          Report an issue
         </ui-text>
-        <ui-action slot="actions">
-          <a href="${router.backUrl()}">
-            <ui-icon name="close" color="primary" layout="size:3"></ui-icon>
-          </a>
-        </ui-action>
       </ui-header>
 
-      <panel-container>
-        <div layout="column items:center gap padding:2:2:4">
+      <panel-container layout="relative">
+        <div layout="column items:center gap:3 padding:2:2:4">
           <img
             src="${contributionImage}"
             alt="Contribution"
             layout="size:20 margin:3"
           />
-          <ui-text type="headline-s" layout="block:center width:::40">
-            Many thanks for your report!
-          </ui-text>
-          <ui-text type="body-m" layout="block:center width:::36">
-            Your contribution helps build a more private and safe internet for
-            the entire Ghostery community.
-          </ui-text>
+          <div layout="column gap:0.5">
+            <ui-text type="label-m" layout="block:center width:::40">
+              Thank you for your report!
+            </ui-text>
+            <ui-text type="body-s" layout="block:center width:::36">
+              Your contribution helps build a more private and safe internet for
+              the entire Ghostery community.
+            </ui-text>
+          </div>
+          <panel-delayed-action delay="8">
+            <ui-button type="outline">
+              <a href="${router.backUrl()}">Close</a>
+            </ui-button>
+          </panel-delayed-action>
         </div>
       </panel-container>
     </template>

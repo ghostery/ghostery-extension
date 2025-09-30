@@ -15,8 +15,8 @@ export default {
   name: '',
   render: ({ name }) =>
     html`
-      <template layout="block padding:6px ::background:brand-primary">
-        <ui-icon name="${name}" color="brand-primary" layout="size:3">
+      <template layout="block padding ::background:brand-primary">
+        <ui-icon name="${name}" color="brand-primary" layout="size:2.5">
           <slot></slot>
         </ui-icon>
       </template>
