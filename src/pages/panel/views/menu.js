@@ -15,9 +15,9 @@ import Options from '/store/options.js';
 import TabStats from '/store/tab-stats.js';
 
 import { openTabWithUrl } from '/utils/tabs.js';
-
-import ReportForm from './report-form.js';
 import { BECOME_A_CONTRIBUTOR_PAGE_URL } from '/utils/urls.js';
+
+import ReportCategory from './report-category.js';
 
 export default {
   options: store(Options),
@@ -111,11 +111,11 @@ export default {
             ${stats.hostname &&
             html`
               <panel-menu-item
-                href="${router.url(ReportForm)}"
+                href="${router.url(ReportCategory)}"
                 icon="report"
                 internal
               >
-                Report a broken page
+                Report an issue
               </panel-menu-item>
             `}
 

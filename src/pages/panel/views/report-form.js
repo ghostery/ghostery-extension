@@ -18,6 +18,7 @@ import ReportConfirm from './report-confirm.js';
 
 const Form = {
   url: '',
+  category: '',
   email: '',
   description: '',
   screenshot: true,
@@ -57,13 +58,17 @@ function submit(host, event) {
 }
 
 export default {
+  // Category passed from the previous view by URL
+  category: {
+    value: '',
+    observe: (host, category) => store.set(host.form, { category }),
+  },
   form: store(Form, { draft: true }),
   render: ({ form }) => html`
     <template layout="column grow shrink">
       <ui-header>
         <ui-text type="label-m" layout="row gap items:center">
-          <ui-icon name="report" layout="size:2"></ui-icon>
-          Report a broken page
+          Report an issue
         </ui-text>
         <ui-action slot="actions">
           <a href="${router.backUrl()}">
@@ -71,7 +76,7 @@ export default {
           </a>
         </ui-action>
       </ui-header>
-      <panel-container>
+      <panel-container layout="width:::100cqw">
         ${store.ready(form) &&
         html`
           <form
@@ -93,41 +98,56 @@ export default {
                 </ui-text>
               </div>
             `}
-            <ui-text layout="width:::40">
-              Inform us about a broken page experience, we’re happy to
-              investigate and fix.
+            <ui-text type="body-s">
+              Tell us what went wrong on this page and we’ll look into it.
             </ui-text>
-            <ui-line></ui-line>
             <ui-text
               type="label-s"
               color="brand-primary"
               style="word-break: break-all"
-              layout="width:::40"
+              layout="row gap:0.5 items:center"
             >
-              ${form.url}
+              <ui-icon name="globe"></ui-icon> ${form.url}
             </ui-text>
             <ui-input>
-              <textarea
-                placeholder="${msg`Please describe the issue`}"
-                rows="4"
-                autocomplete="off"
-                style="resize: vertical"
-                oninput="${html.set(form, 'description')}"
-                maxlength="4000"
-                layout="::font:body-s"
+              <select
+                value="${form.category}"
+                onchange="${html.set(form, 'category')}"
                 required
-              ></textarea>
+                layout="::font:body-s"
+              >
+                <option value="cookie-banner">Cookie banner visible</option>
+                <option value="ads-showing">Ads are showing</option>
+                <option value="page-frozen">Page frozen</option>
+                <option value="adblocker-detected">Ad blocker detected</option>
+                <option value="layout-broken">Layout broken</option>
+                <option value="">Other</option>
+              </select>
             </ui-input>
+
             <ui-input>
               <input
                 type="email"
                 name="email"
-                placeholder="${msg`Enter email address`}"
+                placeholder="${msg`Email address (optional)`}"
                 layout="::font:body-s"
                 value="${form.email}"
                 oninput="${html.set(form, 'email')}"
               />
             </ui-input>
+            ${!form.category &&
+            html` <ui-input>
+              <textarea
+                placeholder="${msg`Please describe the issue you’re experiencing`}"
+                rows="5"
+                autocomplete="off"
+                style="resize: vertical"
+                oninput="${html.set(form, 'description')}"
+                maxlength="4000"
+                layout="::font:body-s"
+                required="${!form.screenshot}"
+              ></textarea>
+            </ui-input>`}
             <label layout="row gap items:center">
               <ui-input>
                 <input
@@ -140,20 +160,18 @@ export default {
                 Include a screenshot of the current page
               </ui-text>
             </label>
-            <ui-text
-              type="body-s"
-              color="secondary"
-              underline
-              layout="width:::40"
-            >
-              ${msg.html`
-                If the issue persists or you’d like to report a different page as broken,
-                please use the report form on <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">ghostery.com</a>.
-              `}
-            </ui-text>
-            <ui-line></ui-line>
-            <div layout="grid:2 gap:1">
-              <ui-button type="transparent" disabled="${store.pending(form)}">
+            <panel-card layout="padding">
+              <ui-text type="body-s" color="secondary">
+                Want to report an issue on a different page?
+              </ui-text>
+              <ui-text type="body-s" color="secondary" underline>
+                ${msg.html`
+                  Please go to <a href="${SUPPORT_PAGE_URL}" onclick="${openTabWithUrl}">Ghostery Support</a>
+                `}
+              </ui-text>
+            </panel-card>
+            <div layout="grid:2 gap:1 margin:top">
+              <ui-button disabled="${store.pending(form)}">
                 <a href="${router.backUrl()}">Cancel</a>
               </ui-button>
               <ui-button type="primary" disabled="${store.pending(form)}">

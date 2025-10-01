@@ -50,7 +50,28 @@ async function setCustomFilters(filters, callback) {
 describe('Advanced Features', function () {
   before(enableExtension);
 
+  after(async () => {
+    await setCustomFilters([]);
+    await setPrivacyToggle('custom-filters', false);
+  });
+
   describe('Custom Filters', function () {
+    it('disables custom filters', async function () {
+      await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
+      await setPrivacyToggle('custom-filters', false);
+
+      await browser.url(PAGE_URL);
+      await expect($('#custom-filter')).toBeDisplayed();
+
+      await switchToPanel(async () => {
+        await getExtensionElement('button:detailed-view').click();
+
+        await expect(
+          getExtensionElement('icon:tracker:facebook_connect:blocked'),
+        ).toBeDisplayed();
+      });
+    });
+
     it('adds custom network filter', async function () {
       await setCustomFilters([`@@connect.facebook.net^`]);
 
@@ -121,22 +142,6 @@ describe('Advanced Features', function () {
       await expect($('#war')).toHaveText('(function(){"use strict"})();');
     });
 
-    it('disables custom filters', async function () {
-      await setCustomFilters([`${PAGE_DOMAIN}###custom-filter`]);
-      await setPrivacyToggle('custom-filters', false);
-
-      await browser.url(PAGE_URL);
-      await expect($('#custom-filter')).toBeDisplayed();
-
-      await switchToPanel(async () => {
-        await getExtensionElement('button:detailed-view').click();
-
-        await expect(
-          getExtensionElement('icon:tracker:facebook_connect:blocked'),
-        ).toBeDisplayed();
-      });
-    });
-
     // Scope for Firefox webRequest API tests
     if (browser.isFirefox) {
       it('adds $replace network filter', async function () {
@@ -148,10 +153,5 @@ describe('Advanced Features', function () {
         await expect(await browser.getTitle()).toBe('hello world');
       });
     }
-
-    it('removes custom filters in settings page', async function () {
-      await setCustomFilters([]);
-      await setPrivacyToggle('custom-filters', false);
-    });
   });
 });

@@ -26,6 +26,7 @@ import sleep from '../assets/sleep.svg';
 import Menu from './menu.js';
 import TrackerDetails from './tracker-details.js';
 import ProtectionStatus from './protection-status.js';
+import ReportCategory from './report-category.js';
 import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
@@ -128,6 +129,7 @@ export default {
   [router.connect]: {
     stack: [
       Menu,
+      ReportCategory,
       ReportForm,
       ReportConfirm,
       TrackerDetails,
@@ -205,9 +207,9 @@ export default {
                 </button>
               </panel-actions-button>
               <panel-actions-button>
-                <a href="${router.url(ReportForm)}">
+                <a href="${router.url(ReportCategory)}">
                   <panel-actions-icon name="report"></panel-actions-icon>
-                  Report a broken page
+                  Report an issue
                   <ui-icon
                     name="chevron-right"
                     color="tertiary"
@@ -288,7 +290,7 @@ export default {
                   <div layout="row center">
                     <ui-action>
                       <a
-                        href="${router.url(ReportForm)}"
+                        href="${router.url(ReportCategory)}"
                         layout="row center gap padding:0.5:1:1 margin:top:-1"
                       >
                         <ui-text type="body-s">Something wrong?</ui-text>
@@ -296,7 +298,7 @@ export default {
                           type="label-s"
                           layout="row inline items:center gap:0.5"
                         >
-                          Report a broken page
+                          Report an issue
                           <ui-icon
                             name="chevron-right"
                             layout="size:1.5"

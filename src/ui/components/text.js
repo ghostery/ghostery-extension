@@ -52,14 +52,8 @@ export default {
       text-transform: uppercase;
     }
 
-    :host([type^="body"][underline]) ::slotted(a) {
+    :host([underline]) ::slotted(a) {
       text-decoration: underline;
-    }
-
-    @media (hover: hover) {
-      :host([underline]) ::slotted(a:hover) {
-        text-decoration: underline;
-      }
     }
 
     ::slotted(*) { color: inherit; }
