@@ -12,7 +12,6 @@
 import { html, store, router, msg } from 'hybrids';
 
 import { getCurrentTab, openTabWithUrl } from '/utils/tabs.js';
-import * as exceptions from '/utils/exceptions.js';
 
 import Options, { getPausedDetails, GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
@@ -444,43 +443,11 @@ export default {
                                       })}"
                                       layout="row center relative"
                                     >
-                                      <ui-tooltip>
-                                        <span slot="content">
-                                          ${exceptions.getLabel(
-                                            options,
-                                            tracker.id,
-                                            stats.hostname,
-                                          )}
-                                        </span>
-                                        <div layout="relative">
-                                          <ui-icon
-                                            name="${exceptions.getStatus(
-                                              options,
-                                              tracker.id,
-                                              stats.hostname,
-                                            ).trusted
-                                              ? 'trust'
-                                              : 'block'}-m"
-                                            color="${options.exceptions[
-                                              tracker.id
-                                            ]
-                                              ? 'secondary'
-                                              : 'quaternary'}"
-                                          ></ui-icon>
-                                          ${!exceptions.getStatus(
-                                            options,
-                                            tracker.id,
-                                            stats.hostname,
-                                          ).global &&
-                                          html`
-                                            <ui-icon
-                                              name="error"
-                                              color="secondary"
-                                              layout="absolute right:-4px bottom:-4px"
-                                            ></ui-icon>
-                                          `}
-                                        </div>
-                                      </ui-tooltip>
+                                      <panel-protection-status-icon
+                                        options="${options}"
+                                        trackerId="${tracker.id}"
+                                        hostname="${stats.hostname}"
+                                      ></panel-protection-status-icon>
                                     </a>
                                   </ui-action-button>
                                 `}
