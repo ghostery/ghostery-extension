@@ -8,7 +8,8 @@ updates:
       - dependency-name: 'tldts-experimental'
       - dependency-name: '@sentry/browser'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'friday'
       time: '07:00'
     open-pull-requests-limit: 99
     groups:
