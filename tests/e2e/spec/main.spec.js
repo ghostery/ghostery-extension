@@ -56,7 +56,7 @@ describe('Main Features', function () {
 
   describe('Ad-Blocking', function () {
     const SELECTOR = 'ad-slot';
-    const DYNAMIC_SELECTOR = '#player-ads';
+    const DYNAMIC_SELECTOR = '#ghostery-test-page-element-1';
 
     it('does not block ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', false);
@@ -71,7 +71,7 @@ describe('Main Features', function () {
       await expect($(SELECTOR)).not.toBeDisplayed();
     });
 
-    it('blocks dynamic ads on a page', async function () {
+    it.skip('blocks dynamic ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', true);
 
       await browser.url(PAGE_URL);

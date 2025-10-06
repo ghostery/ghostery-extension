@@ -341,7 +341,7 @@ function injectStyles(styles, tabId, frameId) {
 }
 
 async function injectCosmetics(details, config) {
-  const { bootstrap: isBootstrap, scriptletsOnly } = config;
+  const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
 
   try {
     setup.pending && (await setup.pending);
