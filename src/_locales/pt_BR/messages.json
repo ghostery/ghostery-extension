@@ -20,6 +20,9 @@
   "activities": {
     "message": "Atividades"
   },
+  "ad_blocker_detected": {
+    "message": "Bloqueador de anúncios detectado"
+  },
   "ad_blocking": {
     "message": "Bloqueio de anúncios"
   },
@@ -49,6 +52,9 @@
   "adjusted___tracker_list": {
     "message": "Ajustado",
     "description": "Plural form - list of adjusted trackers"
+  },
+  "ads_are_showing": {
+    "message": "Os anúncios estão aparecendo"
   },
   "adult_advertising": {
     "message": "Anúncios adultos",
@@ -157,6 +163,9 @@
   "changes_application_color_theme_": {
     "message": "Altera o tema de cores do aplicativo."
   },
+  "choose_category": {
+    "message": "Escolher categoria"
+  },
   "clear": {
     "message": "Limpar"
   },
@@ -191,6 +200,9 @@
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Contribui com informações não pessoais sobre a saúde e o desempenho do complemento para ajudar a avançar as proteções de privacidade para toda a comunidade Ghostery."
+  },
+  "cookie_banner_visible": {
+    "message": "Banner de cookies visível"
   },
   "copied_to_clipboard": {
     "message": "Copiado para a área de transferência"
@@ -235,6 +247,9 @@
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "Detecta e previne falhas no bloqueador de anúncios pausando automaticamente nas páginas afetadas."
   },
+  "didn_t_find_a_match__select_@_0__to_describe_your_issue_": {
+    "message": "Não encontrou uma correspondência? Selecione $${0} para descrever seu problema."
+  },
   "disable": {
     "message": "Desativar"
   },
@@ -275,6 +290,9 @@
     "message": "Email",
     "description": "Tracker category name"
   },
+  "email_address__optional_": {
+    "message": "Endereço de e-mail (opcional)"
+  },
   "enable_ad_blocking_now": {
     "message": "Ative o bloqueio de anúncios agora"
   },
@@ -289,9 +307,6 @@
   },
   "enabled": {
     "message": "Ativado"
-  },
-  "enter_email_address": {
-    "message": "Insira o endereço de e-mail"
   },
   "enter_website_url": {
     "message": "Insira o URL do site"
@@ -437,9 +452,6 @@
     "message": "Hospedando",
     "description": "Tracker category name"
   },
-  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "Se o problema persistir ou se você quiser relatar uma página diferente como quebrada, use o formulário de relatório em <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
-  },
   "ignore": {
     "message": "Ignorar"
   },
@@ -458,9 +470,6 @@
   "include_a_screenshot_of_the_current_page": {
     "message": "Inclua uma captura de tela da página atual"
   },
-  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "Informe-nos sobre uma página com problemas, ficaremos felizes em investigar e corrigir."
-  },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Informações sobre <a href=\"$${0}\">rastreadores da web</a>, <a href=\"$${1}\">saúde dos complementos</a> e <a href=\"$${2}\">telemetria de desempenho</a> serão compartilhadas de acordo com nossa <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Política de Privacidade</a>, avançando na proteção de privacidade para a comunidade Ghostery."
   },
@@ -478,6 +487,9 @@
   },
   "last_update__@_0_": {
     "message": "Última atualização: $${0}"
+  },
+  "layout_broken": {
+    "message": "Layout quebrado"
   },
   "learn_how": {
     "message": "Saiba como"
@@ -505,9 +517,6 @@
   },
   "manifest_short_description": {
     "message": "Extensão de privacidade poderosa e fácil de usar. Bloqueie anúncios, rastreadores e acelere sua navegação na web."
-  },
-  "many_thanks_for_your_report_": {
-    "message": "Muito obrigado pelo seu relatório!"
   },
   "menu": {
     "message": "Menu"
@@ -595,6 +604,9 @@
     "message": "Outro",
     "description": "Tracker category name"
   },
+  "page_frozen": {
+    "message": "Página congelada"
+  },
   "pages_visited": {
     "message": "Páginas visitadas"
   },
@@ -622,8 +634,11 @@
   "pin_it_here": {
     "message": "Prenda-o aqui"
   },
-  "please_describe_the_issue": {
-    "message": "Descreva o problema, por favor"
+  "please_describe_the_issue_you_re_experiencing": {
+    "message": "Descreva o problema que você está enfrentando"
+  },
+  "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
+    "message": "Por favor, acesse o <a href=\"$${0}\" onclick=\"$${1}\">Suporte Ghostery</a>"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Evita que o Google e o Bing redirecionem links de resultados de pesquisa por meio de seus servidores, em vez de vincular diretamente às páginas."
@@ -661,8 +676,8 @@
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Substitui o ícone do Ghostery na barra de ferramentas do navegador pela roda do rastreador."
   },
-  "report_a_broken_page": {
-    "message": "Relatar uma página quebrada"
+  "report_an_issue": {
+    "message": "Relatar um problema"
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "solicitar metadados de potenciais rastreadores da web"
@@ -763,8 +778,14 @@
     "message": "Telemetria",
     "description": "Tracker category name"
   },
+  "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
+    "message": "Diga-nos o que deu errado nesta página e vamos investigar."
+  },
   "terms___conditions": {
     "message": "Termos e Condições"
+  },
+  "thank_you_for_your_report_": {
+    "message": "Obrigado pelo seu relatório!"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "O backup de $${0} foi importado com sucesso."
@@ -891,6 +912,9 @@
   },
   "visit_our_blog": {
     "message": "Visite nosso blog"
+  },
+  "want_to_report_an_issue_on_a_different_page_": {
+    "message": "Quer relatar um problema em uma página diferente?"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
     "message": "foi o rastreador mais frequentemente observado em todas as páginas da web visitadas."

@@ -20,6 +20,9 @@
   "activities": {
     "message": "Activities"
   },
+  "ad_blocker_detected": {
+    "message": "Trình chặn quảng cáo được phát hiện"
+  },
   "ad_blocking": {
     "message": "Chặn quảng cáo"
   },
@@ -49,6 +52,9 @@
   "adjusted___tracker_list": {
     "message": "Adjusted",
     "description": "Plural form - list of adjusted trackers"
+  },
+  "ads_are_showing": {
+    "message": "Quảng cáo đang hiển thị"
   },
   "adult_advertising": {
     "message": "Quảng cáo dành cho người lớn",
@@ -157,6 +163,9 @@
   "changes_application_color_theme_": {
     "message": "Thay đổi chủ đề màu của ứng dụng."
   },
+  "choose_category": {
+    "message": "Chọn danh mục"
+  },
   "clear": {
     "message": "Xóa"
   },
@@ -191,6 +200,9 @@
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Đóng góp thông tin phi cá nhân về tình trạng và hiệu suất của tiện ích bổ sung để giúp nâng cao bảo vệ quyền riêng tư cho toàn bộ cộng đồng Ghostery."
+  },
+  "cookie_banner_visible": {
+    "message": "Biểu ngữ cookie hiển thị"
   },
   "copied_to_clipboard": {
     "message": "Đã sao chép vào bảng nhớ tạm"
@@ -235,6 +247,9 @@
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "Phát hiện và ngăn chặn sự cố của trình chặn quảng cáo bằng cách tự động tạm dừng trên các trang bị ảnh hưởng."
   },
+  "didn_t_find_a_match__select_@_0__to_describe_your_issue_": {
+    "message": "Không tìm thấy kết quả phù hợp? Chọn $${0} để mô tả vấn đề của bạn."
+  },
   "disable": {
     "message": "Vô hiệu hóa"
   },
@@ -275,6 +290,9 @@
     "message": "Email",
     "description": "Tracker category name"
   },
+  "email_address__optional_": {
+    "message": "Địa chỉ email (không bắt buộc)"
+  },
   "enable_ad_blocking_now": {
     "message": "Enable Ad Blocking Now"
   },
@@ -289,9 +307,6 @@
   },
   "enabled": {
     "message": "Đã kích hoạt"
-  },
-  "enter_email_address": {
-    "message": "Nhập địa chỉ email"
   },
   "enter_website_url": {
     "message": "Enter website URL"
@@ -437,9 +452,6 @@
     "message": "Máy lưu trữ",
     "description": "Tracker category name"
   },
-  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "Nếu vấn đề vẫn tiếp diễn hoặc bạn muốn báo cáo một trang khác bị lỗi, vui lòng sử dụng biểu mẫu báo cáo trên <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
-  },
   "ignore": {
     "message": "Không chấp nhận"
   },
@@ -458,9 +470,6 @@
   "include_a_screenshot_of_the_current_page": {
     "message": "Bao gồm ảnh chụp màn hình của trang hiện tại"
   },
-  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "Hãy thông báo cho chúng tôi về trải nghiệm trang bị lỗi, chúng tôi sẵn sàng điều tra và khắc phục."
-  },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Information about <a href=\"$${0}\">web trackers</a>, <a href=\"$${1}\">add-on's health</a>, and <a href=\"$${2}\">performance telemetry</a> will be shared in accordance with our <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Privacy Policy</a>, advancing privacy protection for the Ghostery community."
   },
@@ -478,6 +487,9 @@
   },
   "last_update__@_0_": {
     "message": "Last update: $${0}"
+  },
+  "layout_broken": {
+    "message": "Bố cục bị lỗi"
   },
   "learn_how": {
     "message": "Học ngay"
@@ -505,9 +517,6 @@
   },
   "manifest_short_description": {
     "message": "Ghostery là một phần mở rộng quyền riêng tư mạnh mẽ. Chặn quảng cáo, dừng theo dõi và tăng tốc các trang web."
-  },
-  "many_thanks_for_your_report_": {
-    "message": "Cảm ơn bạn rất nhiều vì báo cáo của bạn!"
   },
   "menu": {
     "message": "Menu"
@@ -595,6 +604,9 @@
     "message": "Khá",
     "description": "Tracker category name"
   },
+  "page_frozen": {
+    "message": "Trang bị đóng băng"
+  },
   "pages_visited": {
     "message": "Các trang đã truy cập"
   },
@@ -622,8 +634,11 @@
   "pin_it_here": {
     "message": "Pin tại đây"
   },
-  "please_describe_the_issue": {
-    "message": "Vui lòng mô tả vấn đề"
+  "please_describe_the_issue_you_re_experiencing": {
+    "message": "Vui lòng mô tả vấn đề bạn đang gặp phải"
+  },
+  "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
+    "message": "Vui lòng truy cập <a href=\"$${0}\" onclick=\"$${1}\">Hỗ trợ Ghostery</a>"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Ngăn Google và Bing chuyển hướng các liên kết kết quả tìm kiếm qua máy chủ của họ thay vì liên kết trực tiếp đến các trang."
@@ -661,8 +676,8 @@
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Thay thế biểu tượng Ghostery trên thanh công cụ của trình duyệt bằng bánh xe theo dõi."
   },
-  "report_a_broken_page": {
-    "message": "Báo cáo trang web bị hỏng"
+  "report_an_issue": {
+    "message": "Báo cáo sự cố"
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "request metadata of potential web trackers"
@@ -763,8 +778,14 @@
     "message": "Từ xa",
     "description": "Tracker category name"
   },
+  "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
+    "message": "Hãy cho chúng tôi biết điều gì đã xảy ra sai trên trang này và chúng tôi sẽ xem xét."
+  },
   "terms___conditions": {
     "message": "Điều khoản và điều kiện"
+  },
+  "thank_you_for_your_report_": {
+    "message": "Cảm ơn bạn đã gửi báo cáo!"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Bản sao lưu từ $${0} đã được nhập thành công."
@@ -891,6 +912,9 @@
   },
   "visit_our_blog": {
     "message": "Ghé thăm blog của chúng tôi"
+  },
+  "want_to_report_an_issue_on_a_different_page_": {
+    "message": "Muốn báo cáo sự cố trên trang khác?"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
     "message": "trình theo dõi được quan sát thường xuyên nhất trên tất cả các trang web đã truy cập."

@@ -20,6 +20,9 @@
   "activities": {
     "message": "활동"
   },
+  "ad_blocker_detected": {
+    "message": "광고 차단기가 감지되었습니다"
+  },
   "ad_blocking": {
     "message": "광고 차단"
   },
@@ -49,6 +52,9 @@
   "adjusted___tracker_list": {
     "message": "변경됨",
     "description": "Plural form - list of adjusted trackers"
+  },
+  "ads_are_showing": {
+    "message": "광고가 표시되고 있습니다"
   },
   "adult_advertising": {
     "message": "성인 광고",
@@ -157,6 +163,9 @@
   "changes_application_color_theme_": {
     "message": "애플리케이션 색상 테마를 변경합니다."
   },
+  "choose_category": {
+    "message": "카테고리 선택"
+  },
   "clear": {
     "message": "지우기"
   },
@@ -191,6 +200,9 @@
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Ghostery 커뮤니티 전체의 프라이버시 보호를 향상시키기 위해 애드온의 상태 및 성능 원격 측정에 대한 비개인 정보를 제공합니다."
+  },
+  "cookie_banner_visible": {
+    "message": "쿠키 배너 표시됨"
   },
   "copied_to_clipboard": {
     "message": "클립보드에 복사됨"
@@ -235,6 +247,9 @@
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "광고 차단기 관련 문제가 발견된 페이지에서 자동으로 사용을 일시중지하여 문제를 방지합니다."
   },
+  "didn_t_find_a_match__select_@_0__to_describe_your_issue_": {
+    "message": "일치하는 항목을 찾지 못하셨나요? 문제를 설명하려면 $${0}을 선택하세요."
+  },
   "disable": {
     "message": "사용 중지"
   },
@@ -275,6 +290,9 @@
     "message": "이메일",
     "description": "Tracker category name"
   },
+  "email_address__optional_": {
+    "message": "이메일 주소 (선택 사항)"
+  },
   "enable_ad_blocking_now": {
     "message": "지금 광고 차단 사용"
   },
@@ -289,9 +307,6 @@
   },
   "enabled": {
     "message": "사용 중"
-  },
-  "enter_email_address": {
-    "message": "이메일 주소 입력"
   },
   "enter_website_url": {
     "message": "웹 사이트 URL 입력"
@@ -437,9 +452,6 @@
     "message": "호스팅",
     "description": "Tracker category name"
   },
-  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "문제가 계속되거나 다른 페이지가 깨진 것으로 보고하려면 <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>의 보고 양식을 사용하세요."
-  },
   "ignore": {
     "message": "무시"
   },
@@ -458,9 +470,6 @@
   "include_a_screenshot_of_the_current_page": {
     "message": "현재 페이지의 스크린샷을 포함하세요"
   },
-  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "페이지 오류 경험을 알려주시면, 저희가 조사하고 수정하겠습니다."
-  },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "<a href=\"$${0}\">웹 상 트래커</a>, <a href=\"$${1}\">애드온의 상태</a> 및 <a href=\"$${2}\">성능 측정</a>에 대한 정보는 Ghostery 커뮤니티의 개인정보 보호를 향상하기 위해 당사의 <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">개인정보 보호정책</a>에 따라 공유됩니다."
   },
@@ -478,6 +487,9 @@
   },
   "last_update__@_0_": {
     "message": "최종 업데이트: $${0}"
+  },
+  "layout_broken": {
+    "message": "레이아웃 깨짐"
   },
   "learn_how": {
     "message": "방법 알아보기"
@@ -505,9 +517,6 @@
   },
   "manifest_short_description": {
     "message": "강력하고 사용하기 쉬운 개인정보 보호 확장 프로그램. 광고와 트래커를 차단해 웹 서핑을 빠르게 해보세요."
-  },
-  "many_thanks_for_your_report_": {
-    "message": "보고해 주셔서 감사합니다!"
   },
   "menu": {
     "message": "메뉴"
@@ -595,6 +604,9 @@
     "message": "분류되지 않음",
     "description": "Tracker category name"
   },
+  "page_frozen": {
+    "message": "페이지 멈춤"
+  },
   "pages_visited": {
     "message": "방문한 페이지"
   },
@@ -622,8 +634,11 @@
   "pin_it_here": {
     "message": "여기에 고정하세요"
   },
-  "please_describe_the_issue": {
-    "message": "문제를 설명해 주세요"
+  "please_describe_the_issue_you_re_experiencing": {
+    "message": "문제가 무엇인지 설명해 주세요"
+  },
+  "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
+    "message": "<a href=\"$${0}\" onclick=\"$${1}\">Ghostery 지원</a>으로 이동하십시오"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Google과 Bing이 검색 결과 링크를 페이지로 직접 연결하지 않고, 자체 서버를 통해 리디렉션하지 못하도록 방지합니다."
@@ -661,8 +676,8 @@
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "트래커 휠로 브라우저 툴바의 Ghostery 아이콘을 대체합니다."
   },
-  "report_a_broken_page": {
-    "message": "망가진 페이지 제보"
+  "report_an_issue": {
+    "message": "문제 보고하기"
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "잠재적인 웹 추적기의 메타데이터 요청"
@@ -763,8 +778,14 @@
     "message": "측정 보고",
     "description": "Tracker category name"
   },
+  "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
+    "message": "문제가 발생한 내용을 알려주시면 확인하겠습니다."
+  },
   "terms___conditions": {
     "message": "이용약관"
+  },
+  "thank_you_for_your_report_": {
+    "message": "보고해 주셔서 감사합니다!"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "$${0}에서 가져온 파일을 성공적으로 불러왔습니다."
@@ -891,6 +912,9 @@
   },
   "visit_our_blog": {
     "message": "블로그를 방문해보세요"
+  },
+  "want_to_report_an_issue_on_a_different_page_": {
+    "message": "다른 페이지에서 문제를 보고하시겠습니까?"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
     "message": "모든 방문한 웹 페이지에서 가장 자주 관찰된 추적기였습니다."

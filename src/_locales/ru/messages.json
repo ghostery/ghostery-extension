@@ -20,6 +20,9 @@
   "activities": {
     "message": "Деятельность"
   },
+  "ad_blocker_detected": {
+    "message": "Обнаружен блокировщик рекламы"
+  },
   "ad_blocking": {
     "message": "Блокировка рекламы"
   },
@@ -49,6 +52,9 @@
   "adjusted___tracker_list": {
     "message": "Изменено",
     "description": "Plural form - list of adjusted trackers"
+  },
+  "ads_are_showing": {
+    "message": "Объявления отображаются"
   },
   "adult_advertising": {
     "message": "Реклама для взрослых",
@@ -157,6 +163,9 @@
   "changes_application_color_theme_": {
     "message": "Изменяет цветовую тему приложения."
   },
+  "choose_category": {
+    "message": "Выберите категорию"
+  },
   "clear": {
     "message": "Очистить"
   },
@@ -191,6 +200,9 @@
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "Предоставляет неперсональную информацию о состоянии и производительности дополнения, чтобы помочь улучшить защиту конфиденциальности для всей сообщества Ghostery."
+  },
+  "cookie_banner_visible": {
+    "message": "Баннер с уведомлением о куки виден"
   },
   "copied_to_clipboard": {
     "message": "Скопировано в буфер обмена"
@@ -235,6 +247,9 @@
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "Обнаруживает и предотвращает сбои блокировщика рекламы, автоматически приостанавливая его работу на затронутых страницах."
   },
+  "didn_t_find_a_match__select_@_0__to_describe_your_issue_": {
+    "message": "Не нашли подходящий вариант? Выберите $${0}, чтобы описать вашу проблему."
+  },
   "disable": {
     "message": "Отключить"
   },
@@ -275,6 +290,9 @@
     "message": "Email",
     "description": "Tracker category name"
   },
+  "email_address__optional_": {
+    "message": "Адрес электронной почты (необязательно)"
+  },
   "enable_ad_blocking_now": {
     "message": "Включить блокировку рекламы"
   },
@@ -289,9 +307,6 @@
   },
   "enabled": {
     "message": "Включено"
-  },
-  "enter_email_address": {
-    "message": "Введите адрес электронной почты"
   },
   "enter_website_url": {
     "message": "Enter website URL"
@@ -437,9 +452,6 @@
     "message": "Хостинг",
     "description": "Tracker category name"
   },
-  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "Если проблема сохраняется или вы хотите сообщить о другой неработающей странице, пожалуйста, используйте форму отчета на <a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>."
-  },
   "ignore": {
     "message": "Игнорировать"
   },
@@ -458,9 +470,6 @@
   "include_a_screenshot_of_the_current_page": {
     "message": "Включите снимок текущей страницы"
   },
-  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "Сообщите нам о проблемах с отображением страницы, мы с радостью разберемся и исправим."
-  },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "Информация о <a href=\"$${0}\">веб-трекерах</a>, <a href=\"$${1}\">состоянии дополнения</a> и <a href=\"$${2}\">телеметрии производительности</a> будет передаваться в соответствии с нашей <a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">Политикой конфиденциальности</a>, способствуя усилению защиты конфиденциальности для сообщества Ghostery."
   },
@@ -478,6 +487,9 @@
   },
   "last_update__@_0_": {
     "message": "Последнее обновление: $${0}"
+  },
+  "layout_broken": {
+    "message": "Макет сломан"
   },
   "learn_how": {
     "message": "Узнай, как"
@@ -505,9 +517,6 @@
   },
   "manifest_short_description": {
     "message": "Мощное расширение для защиты конфиденциальности, которое блокирует рекламу, предотвращает трекеры и ускоряет загрузку веб-сайтов"
-  },
-  "many_thanks_for_your_report_": {
-    "message": "Большое спасибо за ваш отчет!"
   },
   "menu": {
     "message": "Меню"
@@ -595,6 +604,9 @@
     "message": "Другое",
     "description": "Tracker category name"
   },
+  "page_frozen": {
+    "message": "Страница зависла"
+  },
   "pages_visited": {
     "message": "Посещенные страницы"
   },
@@ -622,8 +634,11 @@
   "pin_it_here": {
     "message": "Закрепите здесь"
   },
-  "please_describe_the_issue": {
-    "message": "Опишите проблему, пожалуйста"
+  "please_describe_the_issue_you_re_experiencing": {
+    "message": "Пожалуйста, опишите проблему, с которой вы столкнулись"
+  },
+  "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
+    "message": "Пожалуйста, перейдите на <a href=\"$${0}\" onclick=\"$${1}\">поддержку Ghostery</a>"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "Запрещает Google и Bing перенаправлять ссылки на результаты поиска через их серверы вместо прямой ссылки на страницы."
@@ -661,8 +676,8 @@
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "Заменяет значок Ghostery на панели инструментов статистикой трекеров."
   },
-  "report_a_broken_page": {
-    "message": "Сообщить о поврежденной странице"
+  "report_an_issue": {
+    "message": "Сообщить о проблеме"
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "запросить метаданные потенциальных веб-трекеров"
@@ -763,8 +778,14 @@
     "message": "Телеметрия",
     "description": "Tracker category name"
   },
+  "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
+    "message": "Сообщите нам, что пошло не так на этой странице, и мы разберемся."
+  },
   "terms___conditions": {
     "message": "Условия и положения"
+  },
+  "thank_you_for_your_report_": {
+    "message": "Благодарим за ваш отчет!"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "Резервная копия из $${0} успешно импортирована."
@@ -891,6 +912,9 @@
   },
   "visit_our_blog": {
     "message": "Посетите наш блог"
+  },
+  "want_to_report_an_issue_on_a_different_page_": {
+    "message": "Хотите сообщить о проблеме на другой странице?"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
     "message": "был наиболее часто встречающимся трекером на всех посещенных веб-страницах."
