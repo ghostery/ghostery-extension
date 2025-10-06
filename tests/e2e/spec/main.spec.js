@@ -71,7 +71,7 @@ describe('Main Features', function () {
       await expect($(SELECTOR)).not.toBeDisplayed();
     });
 
-    it.skip('blocks dynamic ads on a page', async function () {
+    it('blocks dynamic ads on a page', async function () {
       await setPrivacyToggle('ad-blocking', true);
 
       await browser.url(PAGE_URL);
