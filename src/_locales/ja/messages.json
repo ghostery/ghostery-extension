@@ -20,6 +20,9 @@
   "activities": {
     "message": "アクティビティ"
   },
+  "ad_blocker_detected": {
+    "message": "広告ブロッカーが検出されました"
+  },
   "ad_blocking": {
     "message": "広告ブロッキング"
   },
@@ -49,6 +52,9 @@
   "adjusted___tracker_list": {
     "message": "調整済み",
     "description": "Plural form - list of adjusted trackers"
+  },
+  "ads_are_showing": {
+    "message": "広告が表示されています"
   },
   "adult_advertising": {
     "message": "アダルト広告",
@@ -157,6 +163,9 @@
   "changes_application_color_theme_": {
     "message": "アプリケーションのカラーテーマを変更します。"
   },
+  "choose_category": {
+    "message": "カテゴリを選択"
+  },
   "clear": {
     "message": "クリア"
   },
@@ -191,6 +200,9 @@
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "アドオンの健康状態とパフォーマンスのテレメトリに関する非個人情報を提供し、Ghosteryコミュニティ全体のプライバシー保護を向上させます。"
+  },
+  "cookie_banner_visible": {
+    "message": "クッキーバナーが表示されています"
   },
   "copied_to_clipboard": {
     "message": "クリップボードにコピー済み"
@@ -235,6 +247,9 @@
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "影響を受けたページで自動的に一時停止することで、広告ブロッカーの破損を検出し防止します。"
   },
+  "didn_t_find_a_match__select_@_0__to_describe_your_issue_": {
+    "message": "一致するものが見つかりませんでしたか？問題を説明するには$${0}を選択してください。"
+  },
   "disable": {
     "message": "無効化"
   },
@@ -275,6 +290,9 @@
     "message": "メール",
     "description": "Tracker category name"
   },
+  "email_address__optional_": {
+    "message": "メールアドレス（任意）"
+  },
   "enable_ad_blocking_now": {
     "message": "広告ブロッキングを今すぐ有効化"
   },
@@ -289,9 +307,6 @@
   },
   "enabled": {
     "message": "有効になっています"
-  },
-  "enter_email_address": {
-    "message": "メールアドレスを入力"
   },
   "enter_website_url": {
     "message": "ウェブサイトのURLを入力"
@@ -437,9 +452,6 @@
     "message": "ホスティング",
     "description": "Tracker category name"
   },
-  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "問題が解決しない場合や、別のページを壊れていると報告したい場合は、<a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>の報告フォームをご利用ください。"
-  },
   "ignore": {
     "message": "無視する"
   },
@@ -458,9 +470,6 @@
   "include_a_screenshot_of_the_current_page": {
     "message": "現在のページのスクリーンショットを含める"
   },
-  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "ページの不具合についてお知らせください。調査して修正いたします。"
-  },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "ウェブトラッカー、アドオンの健康状態、パフォーマンステレメトリーに関する情報は、Ghosteryコミュニティのプライバシー保護を進めるために、当社のプライバシーポリシーに従って共有されます。."
   },
@@ -478,6 +487,9 @@
   },
   "last_update__@_0_": {
     "message": "最終更新日: $${0}"
+  },
+  "layout_broken": {
+    "message": "レイアウトが崩れている"
   },
   "learn_how": {
     "message": "どのように学ぶ"
@@ -505,9 +517,6 @@
   },
   "manifest_short_description": {
     "message": "強力で使いやすいプライバシー拡張機能。広告やトラッカーをブロックし、ウェブを高速化します。."
-  },
-  "many_thanks_for_your_report_": {
-    "message": "ご報告ありがとうございます！"
   },
   "menu": {
     "message": "メニュー"
@@ -595,6 +604,9 @@
     "message": "その他",
     "description": "Tracker category name"
   },
+  "page_frozen": {
+    "message": "ページがフリーズしました"
+  },
   "pages_visited": {
     "message": "訪問したページ"
   },
@@ -622,8 +634,11 @@
   "pin_it_here": {
     "message": "ここにピン留め"
   },
-  "please_describe_the_issue": {
-    "message": "問題を説明してください"
+  "please_describe_the_issue_you_re_experiencing": {
+    "message": "問題の詳細をお聞かせください。"
+  },
+  "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
+    "message": "<a href=\"$${0}\" onclick=\"$${1}\">Ghosteryサポート</a>にアクセスしてください"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "GoogleとBingが検索結果のリンクをページに直接リンクするのではなく、自社のサーバーを経由してリダイレクトするのを防ぎます。"
@@ -661,8 +676,8 @@
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "ブラウザのツールバーのGhosteryのアイコンをトラッカーホイールに置き換えます。"
   },
-  "report_a_broken_page": {
-    "message": "区切られたページを報告"
+  "report_an_issue": {
+    "message": "問題を報告する"
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "潜在的なウェブトラッカーのメタデータを要求する"
@@ -763,8 +778,14 @@
     "message": "テレメトリー",
     "description": "Tracker category name"
   },
+  "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
+    "message": "このページで何が問題だったのか教えてください。調査します。"
+  },
   "terms___conditions": {
     "message": "利用規約"
+  },
+  "thank_you_for_your_report_": {
+    "message": "ご報告ありがとうございます！"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "$${0}からのバックアップが正常にインポートされました。"
@@ -891,6 +912,9 @@
   },
   "visit_our_blog": {
     "message": "ブログを見る"
+  },
+  "want_to_report_an_issue_on_a_different_page_": {
+    "message": "別のページで問題を報告しますか？"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
     "message": "すべての訪問したウェブページで最も頻繁に観測されたトラッカーでした。"

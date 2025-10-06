@@ -20,6 +20,9 @@
   "activities": {
     "message": "活动"
   },
+  "ad_blocker_detected": {
+    "message": "检测到广告拦截器"
+  },
   "ad_blocking": {
     "message": "广告拦截"
   },
@@ -49,6 +52,9 @@
   "adjusted___tracker_list": {
     "message": "已调整",
     "description": "Plural form - list of adjusted trackers"
+  },
+  "ads_are_showing": {
+    "message": "广告正在显示"
   },
   "adult_advertising": {
     "message": "成人广告",
@@ -157,6 +163,9 @@
   "changes_application_color_theme_": {
     "message": "更改应用程序的颜色主题。"
   },
+  "choose_category": {
+    "message": "选择类别"
+  },
   "clear": {
     "message": "清除"
   },
@@ -191,6 +200,9 @@
   },
   "contributes_non_personal_information_about_add_on_health_and_performance_telemetry_to_help_advance_privacy_protections_for_the_entire_ghostery_community_": {
     "message": "提供有关附加组件健康和性能遥测的非个人信息，以帮助提升整个Ghostery社区的隐私保护。"
+  },
+  "cookie_banner_visible": {
+    "message": "Cookie横幅可见"
   },
   "copied_to_clipboard": {
     "message": "已复制到剪贴板"
@@ -235,6 +247,9 @@
   "detects_and_prevents_ad_blocker_breakage_by_automatically_pausing_on_affected_pages_": {
     "message": "检测并防止广告拦截器失效，通过在受影响的页面上自动暂停来实现。"
   },
+  "didn_t_find_a_match__select_@_0__to_describe_your_issue_": {
+    "message": "没有找到匹配项？选择$${0}来描述您的问题。"
+  },
   "disable": {
     "message": "禁用"
   },
@@ -275,6 +290,9 @@
     "message": "电子邮件地址",
     "description": "Tracker category name"
   },
+  "email_address__optional_": {
+    "message": "电子邮件地址（可选）"
+  },
   "enable_ad_blocking_now": {
     "message": "立即启用广告拦截功能"
   },
@@ -289,9 +307,6 @@
   },
   "enabled": {
     "message": "已启用"
-  },
-  "enter_email_address": {
-    "message": "输入电子邮件地址"
   },
   "enter_website_url": {
     "message": "输入网站 URL"
@@ -437,9 +452,6 @@
     "message": "托管",
     "description": "Tracker category name"
   },
-  "if_the_issue_persists_or_you_d_like_to_report_a_different_page_as_broken__please_use_the_report_form_on__a_href__@_0___onclick____1___ghostery_com__a__": {
-    "message": "如果问题仍然存在，或者您想报告其他页面损坏，请使用<a href=\"$${0}\" onclick=\"$${1}\">ghostery.com</a>上的报告表单。"
-  },
   "ignore": {
     "message": "忽略"
   },
@@ -458,9 +470,6 @@
   "include_a_screenshot_of_the_current_page": {
     "message": "请包含当前页面的截图"
   },
-  "inform_us_about_a_broken_page_experience__we_re_happy_to_investigate_and_fix_": {
-    "message": "请告知我们页面出现的问题，我们会很乐意进行调查和修复。"
-  },
   "information_about__a_href__@_0___web_trackers__a____a_href____1___add_on_s_health__a___and__a_href____2___performance_telemetry__a__will_be_shared_in_accordance_with_our__a_href____3___target___blank__rel__noreferrer__privacy_policy__a___advancing_privacy_protection_for_the_ghostery_community_": {
     "message": "有关<a href=\"$${0}\">网络追踪器</a>、<a href=\"$${1}\">附加组件的健康状况</a>和<a href=\"$${2}\">性能遥测</a>的信息将根据我们的<a href=\"$${3}\" target=\"_blank\" rel=\"noreferrer\">隐私政策</a>进行共享，以提升Ghostery社区的隐私保护。."
   },
@@ -478,6 +487,9 @@
   },
   "last_update__@_0_": {
     "message": "上次更新：$${0}"
+  },
+  "layout_broken": {
+    "message": "布局错乱"
   },
   "learn_how": {
     "message": "如何学习"
@@ -505,9 +517,6 @@
   },
   "manifest_short_description": {
     "message": "功能强大且易于使用的隐私扩展。阻止广告、跟踪器并加速您的网络。."
-  },
-  "many_thanks_for_your_report_": {
-    "message": "非常感谢您的报告！"
   },
   "menu": {
     "message": "菜单"
@@ -595,6 +604,9 @@
     "message": "其他",
     "description": "Tracker category name"
   },
+  "page_frozen": {
+    "message": "页面冻结"
+  },
   "pages_visited": {
     "message": "访问的页面"
   },
@@ -622,8 +634,11 @@
   "pin_it_here": {
     "message": "在此处锁定"
   },
-  "please_describe_the_issue": {
-    "message": "请描述问题"
+  "please_describe_the_issue_you_re_experiencing": {
+    "message": "请描述您遇到的问题"
+  },
+  "please_go_to__a_href__@_0___onclick____1___ghostery_support__a_": {
+    "message": "请访问<a href=\"$${0}\" onclick=\"$${1}\">Ghostery支持</a>"
   },
   "prevents_google_and_bing_from_redirecting_search_result_links_through_their_servers_instead_of_linking_directly_to_pages_": {
     "message": "防止 Google 和 Bing 通过其服务器重定向搜索结果链接，而不是直接链接到网页。"
@@ -661,8 +676,8 @@
   "replaces_the_ghostery_icon_in_the_browser_toolbar_with_the_tracker_wheel_": {
     "message": "将浏览器工具栏的 Ghostery 图标替换为跟踪器轮盘。"
   },
-  "report_a_broken_page": {
-    "message": "报告崩溃页面"
+  "report_an_issue": {
+    "message": "报告问题"
   },
   "request_metadata_of_potential_web_trackers": {
     "message": "请求潜在网络跟踪器的元数据"
@@ -763,8 +778,14 @@
     "message": "遥测",
     "description": "Tracker category name"
   },
+  "tell_us_what_went_wrong_on_this_page_and_we_ll_look_into_it_": {
+    "message": "请告诉我们此页面出现了什么问题，我们会进行调查。"
+  },
   "terms___conditions": {
     "message": "条款和条件"
+  },
+  "thank_you_for_your_report_": {
+    "message": "感谢您的报告！"
   },
   "the_backup_from_@_0__imported_successfully_": {
     "message": "来自 $${0} 的备份已成功导入。"
@@ -891,6 +912,9 @@
   },
   "visit_our_blog": {
     "message": "访问我们的博客"
+  },
+  "want_to_report_an_issue_on_a_different_page_": {
+    "message": "想在其他页面报告问题吗？"
   },
   "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
     "message": "是所有访问过的网页中最常见的跟踪器。"
