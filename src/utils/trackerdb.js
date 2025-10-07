@@ -28,11 +28,16 @@ export function getUnidentifiedTracker(hostname) {
 
 export function getMetadata(request) {
   if (setup.pending) {
-    console.warn('TrackerDB not ready yet');
+    console.warn('[trackerdb] TrackerDB not ready yet');
     return null;
   }
 
   const engine = engines.get(engines.TRACKERDB_ENGINE);
+
+  if (!engine) {
+    console.error('[trackerdb] TrackerDB engine not available');
+    return null;
+  }
 
   let matches = engine.getPatternMetadata(request);
 
