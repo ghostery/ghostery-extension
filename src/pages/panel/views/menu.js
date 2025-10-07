@@ -33,7 +33,7 @@ export default {
         </ui-action>
       </ui-header>
       <panel-container>
-        ${store.ready(options, stats) &&
+        ${store.ready(options) &&
         html`
           <div layout="column gap:0.5 padding:1:0">
             <ui-text
@@ -108,7 +108,7 @@ export default {
               Support
             </ui-text>
 
-            ${stats.hostname &&
+            ${store.ready(stats) &&
             html`
               <panel-menu-item
                 href="${router.url(ReportCategory)}"

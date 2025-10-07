@@ -10,7 +10,6 @@
  */
 
 import { store } from 'hybrids';
-import { parse } from 'tldts-experimental';
 
 import AutoSyncingMap from '/utils/map.js';
 import { getCurrentTab } from '/utils/tabs.js';
@@ -91,11 +90,11 @@ const TabStats = {
 
       const tabStats = await AutoSyncingMap.get('tabStats:v1', tab.id);
 
-      return (
-        tabStats || {
-          hostname: tab.url.startsWith('http') ? parse(tab.url).hostname : '',
-        }
-      );
+      if (!tabStats) {
+        throw new Error('No stats for current tab');
+      }
+
+      return tabStats;
     },
   },
 };

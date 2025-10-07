@@ -168,12 +168,12 @@ export default {
     consentManaged,
   }) => html`
     <template layout="column grow relative">
-      ${store.ready(options, stats, managedConfig) &&
+      ${store.ready(options, managedConfig) &&
       html`
         ${options.terms &&
         html`
           <ui-header>
-            ${stats.hostname &&
+            ${store.ready(stats) &&
             managedConfig.disableUserControl &&
             html`<ui-text type="label-m">${stats.displayHostname}</ui-text>`}
             <ui-icon name="logo" slot="icon" layout="size:2.5"></ui-icon>
@@ -186,7 +186,7 @@ export default {
               </ui-action>
             `}
           </ui-header>
-          ${stats.hostname &&
+          ${store.ready(stats) &&
           !managedConfig.disableUserControl &&
           html`
             <panel-actions hostname="${stats.displayHostname}">
@@ -273,7 +273,7 @@ export default {
           `}
         </section>
         ${options.terms
-          ? stats.hostname &&
+          ? store.ready(stats) &&
             !managedConfig.disableUserControl &&
             html`
               <panel-pause
@@ -352,7 +352,7 @@ export default {
               </div>
             `}
         <panel-container>
-          ${stats.hostname
+          ${store.ready(stats)
             ? html`
                 <ui-stats
                   categories="${stats.topCategories}"
