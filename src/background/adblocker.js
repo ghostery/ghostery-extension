@@ -393,6 +393,7 @@ async function injectCosmetics(details, config) {
 
       // This will be done every time we get information about DOM mutation
       getRulesFromDOM: !isBootstrap,
+      callerContext: { tabId },
     });
 
     const styleFilters = [];

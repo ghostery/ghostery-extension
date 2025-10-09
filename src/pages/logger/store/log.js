@@ -8,6 +8,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { FilterType } from '@ghostery/adblocker';
 import { store } from 'hybrids';
 
 const storage = [];
@@ -25,63 +26,64 @@ export default {
 
   // From matched filter
   filter: '',
+  filterType: FilterType.NETWORK, // FilterType enum from adblocker library
 
   // From TrackerDB
   tracker: '',
   organization: '',
 
   time: ({ timestamp }) => new Date(timestamp).toLocaleTimeString(),
+  typeLabel: ({ filterType, type }) =>
+    `${FilterType[filterType].toLowerCase()}${type ? ` (${type})` : ''}`,
 
   [store.connect]: {
     get: (id) => storage.find((item) => item.id === id),
     set: (id, values) => {
-      const request = {
+      values = {
         ...values,
         type: values.type === 'xmlhttprequest' ? 'xhr' : values.type,
       };
 
       const log = storage.find((item) => item.id === id);
       if (log) {
-        Object.assign(log, request);
+        Object.assign(log, values);
       } else {
-        storage.push(request);
+        storage.push(values);
       }
 
-      return request;
+      return values;
     },
-    list: ({ tabId, query, status }) => {
+    list: ({ tabId, query, filterType }) => {
       query = query && new RegExp(query.trim(), 'i');
 
-      return storage.filter((log) => {
-        let match = true;
+      if (!tabId && !query && !filterType)
+        return storage.slice().sort((a, b) => a.timestamp - b.timestamp);
 
-        if (tabId && log.tabId !== tabId) {
-          match = false;
-        }
+      return storage
+        .filter((log) => {
+          let match = true;
 
-        if (
-          query &&
-          !query.test(log.url) &&
-          !query.test(log.filter) &&
-          !query.test(log.tracker) &&
-          !query.test(log.organization)
-        ) {
-          match = false;
-        }
+          if (tabId && log.tabId !== tabId) {
+            match = false;
+          }
 
-        switch (status) {
-          case 'touched':
-            if (!log.blocked && !log.modified) match = false;
-            break;
+          if (filterType && log.filterType !== filterType) {
+            match = false;
+          }
 
-          case 'warning':
-            if (log.filter && (log.blocked || log.modified)) match = false;
-            if (!log.filter && !log.blocked && !log.modified) match = false;
-            break;
-        }
+          if (
+            query &&
+            !query.test(log.url) &&
+            !query.test(log.filter) &&
+            !query.test(log.tracker) &&
+            !query.test(log.organization)
+          ) {
+            match = false;
+          }
 
-        return match;
-      });
+          return match;
+        })
+        .sort((a, b) => a.timestamp - b.timestamp);
     },
     loose: true,
   },

@@ -153,7 +153,7 @@ async function pushTabStats(stats, requests) {
   const options = await store.resolve(Options);
   let trackersUpdated = false;
 
-  logger.sendRequests(requests);
+  logger.logRequests(requests);
 
   for (const request of requests) {
     const metadata =
