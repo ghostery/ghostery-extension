@@ -30,6 +30,7 @@ const LOCAL_OPTIONS = [
   'autoconsent',
   'terms',
   'feedback',
+  'panel',
   'sync',
   'revision',
   'filtersUpdatedAt',

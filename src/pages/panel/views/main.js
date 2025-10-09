@@ -564,6 +564,7 @@ export default {
         </panel-container>
         ${!managedConfig.disableUserControl &&
         store.ready(notification) &&
+        !store.error(notification) &&
         html`<panel-notification></panel-notification>`}
       `}
     </template>

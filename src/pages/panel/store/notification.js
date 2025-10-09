@@ -62,6 +62,8 @@ const NOTIFICATIONS = {
   },
 };
 
+const randomize = Math.random();
+
 const Notification = {
   icon: '',
   img: '',
@@ -89,7 +91,7 @@ const Notification = {
     }
 
     // Randomly show review notification (50% chance)
-    if (Math.random() < 0.5) {
+    if (randomize < 0.5) {
       return NOTIFICATIONS.review;
     }
 
