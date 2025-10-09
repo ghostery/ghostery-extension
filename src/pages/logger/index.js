@@ -19,14 +19,18 @@ import Main from './views/main.js';
 const port = chrome.runtime.connect({ name: 'logger' });
 
 // Listen for requests from the background script
-port.onMessage.addListener(async (message) => {
-  if (message.action === 'logger:requests') {
+port.onMessage.addListener(async (msg) => {
+  if (msg.action === 'logger:data') {
     try {
-      for (const data of message.logs) {
-        const log = store.get(Log, data.id);
-        delete data.id;
+      for (const log of msg.data) {
+        if (log.id) {
+          const model = store.get(Log, log.id);
 
-        await store.set(log, data);
+          delete log.id;
+          store.set(model, log);
+        } else {
+          store.set(Log, log);
+        }
       }
     } catch (error) {
       console.error('Error processing logs:', error);

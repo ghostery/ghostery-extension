@@ -16,6 +16,7 @@ import Log from '../store/log.js';
 import Tab from '../store/tab.js';
 
 import refreshImage from '../assets/refresh.svg';
+import { FilterType } from '@ghostery/adblocker';
 
 function refreshSelectedTab(host) {
   chrome.tabs.reload(Number(host.tabId));
@@ -23,18 +24,17 @@ function refreshSelectedTab(host) {
 
 function downloadReport(host) {
   const report =
-    `Date,URL,Type,Blocked,Modified,Filter,Tracker,Organization\n` +
+    `Date,Filter,Type,Blocked,Modified,URL,Tracker,Organization\n` +
     host.logs
       .map((log) =>
         [
           new Date(log.timestamp).toISOString(),
-          log.url,
-          log.type,
+          log.typeLabel,
+          log.filter,
           log.blocked,
           log.modified,
-          log.filter,
+          log.url,
           log.tracker,
-          log.organization,
         ].join(','),
       )
       .join('\n');
@@ -42,18 +42,26 @@ function downloadReport(host) {
   saveAs(new Blob([report], { type: 'text/csv' }), 'report.csv');
 }
 
+function disableEllipsis(host, event) {
+  const textElements = event.currentTarget.querySelectorAll('ui-text');
+  for (const el of textElements) {
+    el.ellipsis = false;
+  }
+}
+
 export default {
   logs: store([Log], {
-    id: ({ tabId, query, status }) => ({ tabId, query, status }),
+    id: ({ tabId, query, filterType }) => ({ tabId, query, filterType }),
   }),
   tabs: store([Tab]),
   tabId: ({ tabs }, value) => {
     if (value !== undefined) return value;
+    // Fallback to current active tab (default value)
     return store.ready(tabs) ? tabs.find((tab) => tab.active).id : '';
   },
   query: '',
-  status: '',
-  render: ({ logs, tabs, tabId, status }) => html`
+  filterType: 0,
+  render: ({ logs, tabs, tabId, filterType }) => html`
     <template layout="height:full width::960px">
       <main layout="column height:full" translate="no">
         <div layout="row items:center gap padding:2:2:1">
@@ -79,10 +87,10 @@ export default {
             />
           </ui-input>
           <ui-input>
-            <select onchange="${html.set('status')}" value="${status}">
-              <option value="">All requests</option>
-              <option value="touched">Blocked / Modified</option>
-              <option value="warning">Warnings</option>
+            <select onchange="${html.set('filterType')}" value="${filterType}">
+              <option value="0">All filters</option>
+              <option value="${FilterType.NETWORK}">Network</option>
+              <option value="${FilterType.COSMETIC}">Cosmetic</option>
             </select>
           </ui-input>
           <ui-button
@@ -111,14 +119,13 @@ export default {
           </ui-button>
         </div>
         <ui-line></ui-line>
-        <div layout="grid:80px|1fr|60px|60px|240px|140px|100px gap padding:1:2">
+        <div layout="grid:80px|120px|1fr|40px|240px|140px gap padding:1:2">
           <ui-text type="body-s" color="tertiary">Date</ui-text>
-          <ui-text type="body-s" color="tertiary">URL</ui-text>
           <ui-text type="body-s" color="tertiary">Type</ui-text>
-          <ui-text type="body-s" color="tertiary">Status</ui-text>
           <ui-text type="body-s" color="tertiary">Filter</ui-text>
+          <ui-text type="body-s" color="tertiary"></ui-text>
+          <ui-text type="body-s" color="tertiary">URL</ui-text>
           <ui-text type="body-s" color="tertiary">Tracker</ui-text>
-          <ui-text type="body-s" color="tertiary">Organization</ui-text>
         </div>
         <ui-line></ui-line>
         <div layout="column overflow:scroll grow">
@@ -139,16 +146,22 @@ export default {
               </ui-text>
             </div>
           `}
-          <div layout="column-reverse gap padding:2">
+          <div layout="column-reverse padding" style="word-break:break-all">
             ${store.ready(logs) &&
             logs.map((log) =>
               html`
-                <div layout="grid:80px|1fr|60px|60px|240px|140px|100px gap">
+                <div
+                  layout="grid:80px|120px|1fr|40px|240px|140px gap padding:0.5:1"
+                  layout:hover="::background:secondary"
+                  onclick="${disableEllipsis}"
+                >
                   <ui-text type="body-s" color="tertiary">
                     ${log.time}
                   </ui-text>
-                  <ui-text ellipsis>${log.url}</ui-text>
-                  <ui-text type="body-s" color="secondary">${log.type}</ui-text>
+                  <ui-text type="body-s" color="secondary">
+                    ${log.typeLabel}
+                  </ui-text>
+                  <ui-text ellipsis>${log.filter}</ui-text>
                   <div layout="row gap:0.5">
                     ${log.blocked &&
                     html`<ui-icon
@@ -162,22 +175,13 @@ export default {
                       color="brand-primary"
                       layout="size:2"
                     ></ui-icon>`}
-                    ${((log.filter && !log.blocked && !log.modified) ||
-                      (!log.filter && (log.blocked || log.modified))) &&
-                    html`<ui-icon
-                      name="warning"
-                      color="warning-secondary"
-                      layout="size:2"
-                    ></ui-icon>`}
                   </div>
                   <ui-text type="body-s" color="tertiary" ellipsis>
-                    ${log.filter}
+                    ${log.url}
                   </ui-text>
                   <ui-text type="body-s" color="tertiary" ellipsis>
                     ${log.tracker}
-                  </ui-text>
-                  <ui-text type="body-s" color="tertiary" ellipsis>
-                    ${log.organization}
+                    ${log.organization && html`(${log.organization})`}
                   </ui-text>
                 </div>
               `.key(log.id),

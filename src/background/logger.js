@@ -8,48 +8,105 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { FilterType } from '@ghostery/adblocker';
+
 import * as engines from '/utils/engines.js';
 import { getMetadata, getOrganizations } from '/utils/trackerdb.js';
 
 import { setup } from './adblocker.js';
+import debounce from '/utils/debounce.js';
 
 const ports = new Set();
 
-chrome.runtime.onConnect.addListener((port) => {
-  if (port.name === 'logger') {
-    ports.add(port);
+let logs = new Map();
+const sendData = debounce(
+  function () {
+    if (logs.size === 0 || ports.size === 0) return;
 
-    const id = port.sender.tab.id;
-    console.log('[logger] Connected logger with id', id);
+    for (const port of ports) {
+      port.postMessage({ action: 'logger:data', data: [...logs.values()] });
+    }
 
-    port.onDisconnect.addListener(() => {
-      ports.delete(port);
-      console.log('[logger] Disconnected logger with id', id);
-    });
-  }
-});
+    logs.clear();
+  },
+  { waitFor: 100, maxWait: 1000 },
+);
 
-export async function sendRequests(requests) {
+function add(data) {
+  logs.set(data.id, data);
+  sendData();
+}
+
+export async function logRequests(requests) {
   if (ports.size === 0) return;
 
   setup.pending && (await setup.pending);
-
   const engine = engines.get(engines.MAIN_ENGINE);
-  const organizations = await getOrganizations();
 
-  const logs = requests.map((request) => {
+  for (const request of requests) {
+    // Trigger filter matching to log the request
     const { filter } = engine.match(request);
-    const metadata = getMetadata(request);
+    if (!filter && request.blocked) {
+      const organizations = await getOrganizations();
+      const metadata = getMetadata(request);
 
-    return {
-      ...request,
-      filter: filter ? String(filter) : '',
-      tracker: metadata?.name,
-      organization: organizations.get(metadata?.organization)?.name,
-    };
-  });
-
-  for (const port of ports) {
-    port.postMessage({ action: 'logger:requests', logs });
+      add({
+        ...request,
+        tracker: metadata?.name,
+        organization: organizations.get(metadata?.organization)?.name,
+      });
+    }
   }
 }
+
+chrome.runtime.onConnect.addListener(async (port) => {
+  if (port.name === 'logger') {
+    if (ports.size === 0) {
+      setup.pending && (await setup.pending);
+
+      const organizations = await getOrganizations();
+      const engine = engines.get(engines.MAIN_ENGINE);
+
+      const logFilterMatched = function (
+        { filter },
+        { url, request, filterType, callerContext },
+      ) {
+        filter = String(filter);
+
+        let data = { filter, filterType, url, tabId: callerContext?.tabId };
+
+        if (filterType === FilterType.COSMETIC) {
+          Object.assign(data, {
+            id: `${url}-${filter}`,
+            timestamp: Date.now(),
+          });
+        } else if (request) {
+          const metadata = getMetadata(request);
+
+          data = {
+            ...data,
+            ...request,
+            tracker: metadata?.name,
+            organization: organizations.get(metadata?.organization)?.name,
+          };
+        }
+
+        add(data);
+      };
+
+      engine.on('filter-matched', logFilterMatched);
+
+      port.onDisconnect.addListener(() => {
+        ports.delete(port);
+        console.log('[logger] Disconnected logger with id', port.sender.tab.id);
+
+        if (ports.size === 0) {
+          engine.unsubscribe('filter-matched', logFilterMatched);
+        }
+      });
+    }
+
+    ports.add(port);
+    console.log('[logger] Connected logger with id', port.sender.tab.id);
+  }
+});
