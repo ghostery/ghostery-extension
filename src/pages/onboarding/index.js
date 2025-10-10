@@ -37,7 +37,7 @@ Promise.all([store.resolve(Options), store.resolve(ManagedConfig)]).then(
     });
 
     mount(document.body, {
-      stack: router([Main, Success]),
+      stack: router(terms ? [Success] : [Main, Success]),
       render: ({ stack }) => html`
         <template layout="grid height::100%">
           <onboarding-layout>${stack}</onboarding-layout>

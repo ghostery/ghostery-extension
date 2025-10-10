@@ -17,6 +17,12 @@ import {
 import { parse } from 'tldts-experimental';
 import scriptlets from '@ghostery/scriptlets';
 
+import {
+  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  FLAG_EXTENDED_SELECTORS,
+  resolveFlag,
+} from '/store/config.js';
 import Options, { ENGINES, getPausedDetails } from '/store/options.js';
 
 import { isWebkit } from '/utils/browser-info.js';
@@ -28,23 +34,8 @@ import Request from '/utils/request.js';
 import asyncSetup from '/utils/setup.js';
 
 import { tabStats, updateTabStats } from './stats.js';
-import Config, {
-  FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
-  FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-  FLAG_EXTENDED_SELECTORS,
-} from '/store/config.js';
 
 let options = Options;
-
-const scriptletGlobals = {
-  // Request a real extension resource to obtain a dynamic ID to the resource.
-  // Redirect resources are defined with `use_dynamic_url` restriction.
-  // The dynamic ID is generated per session.
-  // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
-  warOrigin: chrome.runtime
-    .getURL('/rule_resources/redirects/empty')
-    .slice(0, -6),
-};
 
 const contentScripts = (() => {
   const map = new Map();
@@ -89,29 +80,13 @@ const contentScripts = (() => {
   };
 })();
 
-let ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = false;
+let FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = { enabled: false };
+
 if (__PLATFORM__ === 'firefox') {
-  // FYI: Testing the flag by dev tools requires a reload of the background script
-  store.resolve(Config).then((config) => {
-    const enabled = config.hasFlag(FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS);
-    if (!enabled) contentScripts.unregisterAll();
-
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = enabled;
-  });
-
-  OptionsObserver.addListener('paused', async (paused) => {
-    if (!ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) return;
-    for (const hostname of Object.keys(paused)) {
-      contentScripts.unregister(hostname);
-    }
-  });
+  FIREFOX_CONTENT_SCRIPT_SCRIPTLETS = resolveFlag(
+    FLAG_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS,
+  );
 }
-
-let ENABLE_EXTENDED_SELECTORS = false;
-store.resolve(Config).then((config) => {
-  const enabled = config.hasFlag(FLAG_EXTENDED_SELECTORS);
-  ENABLE_EXTENDED_SELECTORS = enabled;
-});
 
 function getEnabledEngines(config) {
   if (config.terms) {
@@ -178,7 +153,7 @@ export async function reloadMainEngine() {
     console.info('[adblocker] Main engine reloaded with no filters');
   }
 
-  if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
+  if (__PLATFORM__ === 'firefox' && FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
     contentScripts.unregisterAll();
   }
 }
@@ -255,6 +230,16 @@ export const setup = asyncSetup('adblocker', [
   ),
 ]);
 
+const scriptletGlobals = {
+  // Request a real extension resource to obtain a dynamic ID to the resource.
+  // Redirect resources are defined with `use_dynamic_url` restriction.
+  // The dynamic ID is generated per session.
+  // refs https://developer.chrome.com/docs/extensions/reference/manifest/web-accessible-resources#manifest_declaration
+  warOrigin: chrome.runtime
+    .getURL('/rule_resources/redirects/empty')
+    .slice(0, -6),
+};
+
 function injectScriptlets(filters, tabId, frameId, hostname) {
   let contentScript = '';
   for (const filter of filters) {
@@ -284,7 +269,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
 
     if (
       __PLATFORM__ === 'firefox' &&
-      ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS
+      FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled
     ) {
       contentScript += `(${func.toString()})(...${JSON.stringify(args)});\n`;
       continue;
@@ -311,7 +296,7 @@ function injectScriptlets(filters, tabId, frameId, hostname) {
     );
   }
 
-  if (__PLATFORM__ === 'firefox' && ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
+  if (__PLATFORM__ === 'firefox' && FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
     if (filters.length === 0) {
       contentScripts.unregister(hostname);
     } else if (!contentScripts.isRegistered(hostname)) {
@@ -340,6 +325,8 @@ function injectStyles(styles, tabId, frameId) {
     .catch((e) => console.warn('[adblocker] failed to inject CSS', e));
 }
 
+let EXTENDED_SELECTORS = resolveFlag(FLAG_EXTENDED_SELECTORS);
+
 async function injectCosmetics(details, config) {
   const { bootstrap: isBootstrap = false, scriptletsOnly } = config;
 
@@ -358,7 +345,7 @@ async function injectCosmetics(details, config) {
 
   if (
     __PLATFORM__ === 'firefox' &&
-    ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS &&
+    FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled &&
     scriptletsOnly &&
     contentScripts.isRegistered(hostname)
   ) {
@@ -430,7 +417,7 @@ async function injectCosmetics(details, config) {
       injectStyles(styles, tabId, frameId);
     }
 
-    if (ENABLE_EXTENDED_SELECTORS && extended && extended.length > 0) {
+    if (EXTENDED_SELECTORS.enabled && extended && extended.length > 0) {
       chrome.tabs.sendMessage(
         tabId,
         { action: 'evaluateExtendedSelectors', extended },
@@ -457,12 +444,67 @@ async function injectCosmetics(details, config) {
   }
 }
 
-chrome.webNavigation.onCommitted.addListener(
-  (details) => {
-    injectCosmetics(details, { bootstrap: true });
-  },
-  { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-);
+/*
+ * Cosmetic filtering
+ */
+
+if (__PLATFORM__ === 'firefox') {
+  FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.then((enabled) => {
+    if (!enabled) contentScripts.unregisterAll();
+  });
+
+  OptionsObserver.addListener(
+    'paused',
+    function firefoxContentScriptScriptlets(paused) {
+      if (!FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) return;
+      for (const hostname of Object.keys(paused)) {
+        contentScripts.unregister(hostname);
+      }
+    },
+  );
+
+  chrome.webNavigation.onBeforeNavigate.addListener(
+    (details) => {
+      if (FIREFOX_CONTENT_SCRIPT_SCRIPTLETS.enabled) {
+        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
+      }
+    },
+    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+  );
+
+  chrome.webNavigation.onCommitted.addListener(
+    (details) => {
+      injectCosmetics(details, { bootstrap: true });
+    },
+    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+  );
+} else {
+  let INJECT_COSMETICS_ON_RESPONSE_STARTED = resolveFlag(
+    FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
+  );
+
+  chrome.webRequest?.onResponseStarted.addListener(
+    (details) => {
+      if (!INJECT_COSMETICS_ON_RESPONSE_STARTED.enabled) return;
+      if (details.tabId === -1) return;
+      if (details.type !== 'main_frame' && details.type !== 'sub_frame') return;
+
+      injectCosmetics(details, { bootstrap: true });
+    },
+    { urls: ['http://*/*', 'https://*/*'] },
+  );
+
+  chrome.webNavigation.onCommitted.addListener(
+    (details) => {
+      if (INJECT_COSMETICS_ON_RESPONSE_STARTED.enabled) return;
+      injectCosmetics(details, { bootstrap: true });
+    },
+    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
+  );
+}
+
+// Listen for requests from content scripts to inject
+// dynamic cosmetics (All platforms supported)
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.action === 'injectCosmetics' && sender.tab) {
@@ -478,7 +520,7 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
 });
 
 /*
- * Network requests blocking
+ * Network requests blocking - Firefox only
  */
 
 function isTrusted(request, type) {
@@ -500,15 +542,6 @@ function isTrusted(request, type) {
 }
 
 if (__PLATFORM__ === 'firefox') {
-  chrome.webNavigation.onBeforeNavigate.addListener(
-    (details) => {
-      if (ENABLE_FIREFOX_CONTENT_SCRIPT_SCRIPTLETS) {
-        injectCosmetics(details, { bootstrap: true, scriptletsOnly: true });
-      }
-    },
-    { url: [{ urlPrefix: 'http://' }, { urlPrefix: 'https://' }] },
-  );
-
   function isExtensionRequest(details) {
     return (
       (details.tabId === -1 && details.url.startsWith('moz-extension://')) ||
@@ -593,27 +626,5 @@ if (__PLATFORM__ === 'firefox') {
     },
     { urls: ['http://*/*', 'https://*/*'] },
     ['blocking', 'responseHeaders'],
-  );
-}
-
-if (__PLATFORM__ !== 'firefox' && chrome.webRequest?.onResponseStarted) {
-  let ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = false;
-
-  store.resolve(Config).then((config) => {
-    const enabled = config.hasFlag(
-      FLAG_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED,
-    );
-    ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED = enabled;
-  });
-
-  chrome.webRequest.onResponseStarted.addListener(
-    (details) => {
-      if (!ENABLE_CHROMIUM_INJECT_COSMETICS_ON_RESPONSE_STARTED) return;
-      if (details.tabId === -1) return;
-      if (details.type !== 'main_frame' && details.type !== 'sub_frame') return;
-
-      injectCosmetics(details, { bootstrap: true });
-    },
-    { urls: ['http://*/*', 'https://*/*'] },
   );
 }

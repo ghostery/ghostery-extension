@@ -51,7 +51,6 @@ describe('Advanced Features', function () {
   before(enableExtension);
 
   after(async () => {
-    await setCustomFilters([]);
     await setPrivacyToggle('custom-filters', false);
   });
 
