@@ -101,6 +101,11 @@ const Config = {
     },
   },
 };
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes['config']) store.clear(Config, false);
+});
+
 export default Config;
 
 export async function dismissAction(domain, action) {
@@ -112,6 +117,19 @@ export async function dismissAction(domain, action) {
   });
 }
 
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes['config']) store.clear(Config, false);
-});
+export function resolveFlag(id) {
+  const promise = new Promise((resolve) => {
+    store.resolve(Config).then(
+      (config) => {
+        const value = config.hasFlag(id);
+
+        promise.enabled = value;
+        resolve(value);
+      },
+      () => resolve(false),
+    );
+  });
+
+  promise.enabled = false;
+  return promise;
+}
