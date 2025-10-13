@@ -916,9 +916,6 @@
   "want_to_report_an_issue_on_a_different_page_": {
     "message": "다른 페이지에서 문제를 보고하시겠습니까?"
   },
-  "was_the_most_frequently_observed_tracker_across_all_web_pages_visited_": {
-    "message": "모든 방문한 웹 페이지에서 가장 자주 관찰된 추적기였습니다."
-  },
   "we_know_you_rely_on_ghostery_for_a_smooth_youtube_experience__until_a_more_refined_solution_emerges__here_s_a_temporary_fix_": {
     "message": "여러분이 Ghostery로 매끄럽게 YouTube를 사용하려는 것을 알고 있습니다. 더 나은 해결책이 출시되기 전까지는 임시로 고쳐볼 수 있습니다."
   },
