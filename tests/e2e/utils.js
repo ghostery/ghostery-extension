@@ -47,68 +47,6 @@ export async function waitForIdleBackgroundTasks() {
   }
 }
 
-export async function enableExtension() {
-  await browser.url(getExtensionPageURL('onboarding'));
-
-  await getExtensionElement('button:enable').click();
-  await expect(getExtensionElement('view:success')).toBeDisplayed();
-  await waitForIdleBackgroundTasks();
-
-  await browser.url('about:blank');
-}
-
-export async function setToggle(name, value) {
-  const toggle = await getExtensionElement(`toggle:${name}`);
-
-  if ((await toggle.getProperty('value')) !== value) {
-    await toggle.click();
-
-    // Allow background process to update the settings
-    await waitForIdleBackgroundTasks();
-  }
-
-  await expect(toggle).toHaveElementProperty('value', value);
-}
-
-export async function setPrivacyToggle(name, value) {
-  await browser.url(getExtensionPageURL('settings'));
-  await setToggle(name, value);
-}
-
-export async function setWhoTracksMeToggle(name, value) {
-  await browser.url(getExtensionPageURL('settings'));
-  await getExtensionElement('button:whotracksme').click();
-
-  await setToggle(name, value);
-}
-
-export async function switchToPanel(fn) {
-  const currentUrl = await browser.getUrl();
-  const panelUrl = getExtensionPageURL('panel');
-
-  await browser.url(panelUrl);
-
-  // The panel has a bugfix for closing the panel when links are clicked.
-  // Source: /pages/panel/index.js - L52
-  // In test environment it must be disabled to allow the test to switch back to the panel
-  await browser.execute(() => {
-    Object.defineProperty(window, 'close', { value: function () {} });
-  });
-
-  let error = null;
-  let result = null;
-  try {
-    result = await fn();
-  } catch (e) {
-    error = e;
-  }
-
-  await browser.url(currentUrl);
-
-  if (error) throw error;
-  return result;
-}
-
 export async function reloadExtension() {
   await browser.url('about:blank');
 
@@ -148,4 +86,72 @@ export async function reloadExtension() {
   await waitForIdleBackgroundTasks();
 
   await browser.url('about:blank');
+}
+
+export async function enableExtension() {
+  await browser.url(getExtensionPageURL('onboarding'));
+
+  if (!(await getExtensionElement('view:success').isDisplayed())) {
+    await getExtensionElement('button:enable').click();
+    await expect(getExtensionElement('view:success')).toBeDisplayed();
+
+    await waitForIdleBackgroundTasks();
+
+    // Ensure that SW is reloaded with synced remote configuration
+    await reloadExtension();
+  }
+}
+
+export async function setToggle(name, value) {
+  const toggle = await getExtensionElement(`toggle:${name}`);
+
+  if ((await toggle.getProperty('value')) !== value) {
+    await toggle.click();
+
+    // Allow background process to update the settings
+    await waitForIdleBackgroundTasks();
+  }
+
+  await expect(toggle).toHaveElementProperty('value', value);
+}
+
+export async function setPrivacyToggle(name, value) {
+  await browser.url('about:blank');
+  await browser.url(getExtensionPageURL('settings'));
+
+  await setToggle(name, value);
+}
+
+export async function setWhoTracksMeToggle(name, value) {
+  await browser.url(getExtensionPageURL('settings'));
+  await getExtensionElement('button:whotracksme').click();
+
+  await setToggle(name, value);
+}
+
+export async function switchToPanel(fn) {
+  const currentUrl = await browser.getUrl();
+  const panelUrl = getExtensionPageURL('panel');
+
+  await browser.url(panelUrl);
+
+  // The panel has a bugfix for closing the panel when links are clicked.
+  // Source: /pages/panel/index.js - L52
+  // In test environment it must be disabled to allow the test to switch back to the panel
+  await browser.execute(() => {
+    Object.defineProperty(window, 'close', { value: function () {} });
+  });
+
+  let error = null;
+  let result = null;
+  try {
+    result = await fn();
+  } catch (e) {
+    error = e;
+  }
+
+  await browser.url(currentUrl);
+
+  if (error) throw error;
+  return result;
 }
