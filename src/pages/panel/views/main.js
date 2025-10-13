@@ -280,6 +280,7 @@ export default {
                 onaction="${globalPause ? revokeGlobalPause : togglePause}"
                 paused="${paused || globalPause}"
                 global="${globalPause}"
+                managed="${paused?.managed}"
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
                 data-qa="component:pause"
               >

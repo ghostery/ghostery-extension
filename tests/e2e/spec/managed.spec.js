@@ -54,8 +54,11 @@ describe('Managed Configuration', function () {
     await browser.url(PAGE_URL);
 
     await switchToPanel(async function () {
+      const pauseButton = await getExtensionElement('button:pause');
+      await expect(pauseButton).toBeDisplayed();
+
       const resumeButton = await getExtensionElement('button:resume');
-      await expect(resumeButton).toBeDisplayed();
+      await expect(resumeButton).not.toBeDisplayed();
 
       await getExtensionElement('button:detailed-view').click();
 
@@ -74,8 +77,8 @@ describe('Managed Configuration', function () {
     await browser.url(PAGE_URL);
 
     await switchToPanel(async function () {
-      const resumeButton = await getExtensionElement('button:resume');
-      await expect(resumeButton).not.toBeDisplayed();
+      const resumeButton = await getExtensionElement('button:pause-type');
+      await expect(resumeButton).toBeDisplayed();
     });
   });
 

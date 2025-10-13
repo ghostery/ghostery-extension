@@ -53,9 +53,10 @@ export default {
 
     const websites = Object.entries(options.paused)
       .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
-      .map(([id, { revokeAt }]) => ({
+      .map(([id, { revokeAt, managed }]) => ({
         id,
         revokeAt,
+        managed,
         exceptions: new Set(),
         counter: 0,
       }));
@@ -158,18 +159,21 @@ export default {
                           <ui-text type="label-l" ellipsis>
                             ${item.id}
                           </ui-text>
-                          <ui-action>
-                            <button
-                              layout@768px="order:1"
-                              onclick="${revokeCallback(item)}"
-                            >
-                              <ui-icon
-                                name="trash"
-                                layout="size:3"
-                                color="tertiary"
-                              ></ui-icon>
-                            </button>
-                          </ui-action>
+                          ${!item.managed &&
+                          html`
+                            <ui-action>
+                              <button
+                                layout@768px="order:1"
+                                onclick="${revokeCallback(item)}"
+                              >
+                                <ui-icon
+                                  name="trash"
+                                  layout="size:3"
+                                  color="tertiary"
+                                ></ui-icon>
+                              </button>
+                            </ui-action>
+                          `}
                           <ui-line
                             layout="area:2"
                             layout@768px="hidden"
