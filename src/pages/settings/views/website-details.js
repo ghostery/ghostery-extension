@@ -109,16 +109,19 @@ export default {
               <settings-protection-status
                 revokeAt="${paused.revokeAt}"
               ></settings-protection-status>
-              <ui-action>
-                <button layout@768px="order:1">
-                  <ui-icon
-                    name="trash"
-                    layout="size:2.5"
-                    color="tertiary"
-                    onclick="${revokePaused}"
-                  ></ui-icon>
-                </button>
-              </ui-action>
+              ${!paused.managed &&
+              html`
+                <ui-action>
+                  <button layout@768px="order:1">
+                    <ui-icon
+                      name="trash"
+                      layout="size:2.5"
+                      color="tertiary"
+                      onclick="${revokePaused}"
+                    ></ui-icon>
+                  </button>
+                </ui-action>
+              `}
             </div>
           `}
         </div>

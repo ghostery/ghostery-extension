@@ -66,10 +66,11 @@ function simulateClickOnEnter(host, event) {
 export default {
   paused: { value: false, reflect: true },
   global: { value: false, reflect: true },
+  managed: false,
   revokeAt: 0,
   pauseType: 1,
   pauseList: { value: false, reflect: true },
-  render: ({ paused, pauseType, pauseList, revokeAt }) => html`
+  render: ({ paused, managed, revokeAt, pauseType, pauseList }) => html`
     <template layout="grid relative">
       <button
         id="main"
@@ -78,6 +79,7 @@ export default {
         layout@390px="height:7"
         onclick="${!pauseList && dispatchAction}"
         data-qa="button:pause"
+        inert="${managed}"
       >
         <div id="label" layout="grow row center gap shrink overflow">
           <ui-icon name="pause"></ui-icon>
@@ -91,33 +93,37 @@ export default {
             </ui-text>`}
           </div>
         </div>
-        <div
-          id="type"
-          role="button"
-          tabindex="${paused ? '-1' : '0'}"
-          layout="row center self:stretch width:14"
-          onclick="${!paused && !pauseList && openPauseList}"
-          onkeypress="${!paused && !pauseList && simulateClickOnEnter}"
-          data-qa="button:${paused ? 'resume' : 'pause-type'}"
-        >
-          ${paused
-            ? html`
-                <ui-icon name="play"></ui-icon>
-                <ui-text
-                  type="label-m"
-                  layout="margin:left:0.5"
-                  color="inherit"
-                >
-                  Resume
-                </ui-text>
-              `
-            : html`
-                <ui-text type="label-m" layout="grow" color="inherit">
-                  ${PAUSE_TYPES.find(({ value }) => value === pauseType).label}
-                </ui-text>
-                <ui-icon name="chevron-down"></ui-icon>
-              `}
-        </div>
+        ${!managed &&
+        html`
+          <div
+            id="type"
+            role="button"
+            tabindex="${paused ? '-1' : '0'}"
+            layout="row center self:stretch width:14"
+            onclick="${!paused && !pauseList && openPauseList}"
+            onkeypress="${!paused && !pauseList && simulateClickOnEnter}"
+            data-qa="button:${paused ? 'resume' : 'pause-type'}"
+          >
+            ${paused
+              ? html`
+                  <ui-icon name="play"></ui-icon>
+                  <ui-text
+                    type="label-m"
+                    layout="margin:left:0.5"
+                    color="inherit"
+                  >
+                    Resume
+                  </ui-text>
+                `
+              : html`
+                  <ui-text type="label-m" layout="grow" color="inherit">
+                    ${PAUSE_TYPES.find(({ value }) => value === pauseType)
+                      .label}
+                  </ui-text>
+                  <ui-icon name="chevron-down"></ui-icon>
+                `}
+          </div>
+        `}
       </button>
       <slot></slot>
       ${pauseList &&
