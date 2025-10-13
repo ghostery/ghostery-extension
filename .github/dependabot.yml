@@ -2,11 +2,6 @@ version: 2
 updates:
   - package-ecosystem: 'npm'
     directory: '/'
-    allow:
-      - dependency-type: 'production'
-    ignore:
-      - dependency-name: 'tldts-experimental'
-      - dependency-name: '@sentry/browser'
     schedule:
       interval: 'weekly'
       day: 'friday'
@@ -16,18 +11,6 @@ updates:
       adblocker:
         patterns:
           - '@ghostery/adblocker*'
-  - package-ecosystem: npm
-    directory: '/'
-    allow:
-      - dependency-type: 'development'
-      # 'tldts-experimental' and '@sentry/browser' update frequently, but we need to keep them up to date
-      # for each release to the production, which happens at most once a week.
-      - dependency-name: 'tldts-experimental'
-      - dependency-name: '@sentry/browser'
-    schedule:
-      interval: 'weekly'
-      time: '07:00'
-    groups:
       eslint:
         patterns:
           - 'eslint*'
@@ -39,6 +22,3 @@ updates:
         patterns:
           - 'web-ext'
           - 'addon-linter'
-    # Makes it possible to have another config. for the same dir.
-    # https://github.com/dependabot/dependabot-core/issues/1778#issuecomment-1988140219
-    target-branch: main
