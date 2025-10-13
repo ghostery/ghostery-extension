@@ -17,6 +17,7 @@ import { shortDateFormatter, categories } from '/ui/labels.js';
 import assets from '/pages/settings/assets/index.js';
 
 import { MergedStats } from '/store/daily-stats.js';
+import Resources from '/store/resources.js';
 
 const MONTH_IN_MS = 30 * 24 * 60 * 60 * 1000;
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
@@ -60,6 +61,17 @@ export default {
   mergedStats: store(MergedStats, {
     id: ({ dateFrom, dateTo }) => ({ dateFrom, dateTo }),
   }),
+  resources: store(Resources),
+  autoconsent: ({ resources, dateFrom, dateTo }) => {
+    if (!store.ready(resources)) return 0;
+
+    const fromTimestamp = new Date(dateFrom).getTime();
+    const toTimestamp = new Date(dateTo).getTime() + DAY_IN_MS;
+
+    return Object.values(resources.autoconsent).filter((timestamp) => {
+      return timestamp >= fromTimestamp && timestamp < toTimestamp;
+    }).length;
+  },
   trends: { value: ['pages', 'trackersBlocked', 'trackersModified'] },
   trendsAggregate: 0,
   sankeyChartSlice: 20,
@@ -68,6 +80,7 @@ export default {
     dateFrom,
     dateTo,
     mergedStats,
+    autoconsent,
     trends,
     trendsAggregate,
     sankeyChartSlice,
@@ -215,33 +228,19 @@ export default {
                   Trackers modified
                 </ui-text>
               </ui-card>
-              ${store.ready(mergedStats.groupedTrackers[0]) &&
-              html`
-                <ui-action>
-                  <a
-                    href="${WTM_PAGE_URL}/trackers/${mergedStats
-                      .groupedTrackers[0].id}"
-                    target="_blank"
-                  >
-                    <ui-card layout="column gap padding:2.5">
-                      <div layout="row items:end gap">
-                        <ui-category-icon
-                          name="${mergedStats.groupedTrackers[0].category}"
-                          size="large"
-                        ></ui-category-icon>
-                        <ui-text type="display-2xs" layout="row items:center">
-                          ${mergedStats.groupedTrackers[0].name}
-                          <ui-icon name="chevron-right-s"></ui-icon>
-                        </ui-text>
-                      </div>
-                      <ui-text type="body-m" color="secondary">
-                        was the most frequently observed tracker across all web
-                        pages visited.
-                      </ui-text>
-                    </ui-card>
-                  </a>
-                </ui-action>
-              `}
+              <ui-card layout="column gap padding:2.5">
+                <div layout="row items:center gap">
+                  <ui-icon
+                    name="autoconsent-managed"
+                    color="success-secondary"
+                    layout="size:6"
+                  ></ui-icon>
+                  <ui-text type="display-2xl">${autoconsent}</ui-text>
+                </div>
+                <ui-text type="label-l" color="secondary">
+                  Consent managed
+                </ui-text>
+              </ui-card>
             </div>
           </section>
           <section layout="column gap:2:5" layout@1120px:print="grid:2:1">
