@@ -91,15 +91,19 @@ if (__PLATFORM__ !== 'firefox') {
             );
 
             if (list.dnr.checksum !== resources.checksums['dnr-fixes']) {
-              let addRules = await fetch(list.dnr.url).then((res) =>
-                res.ok
-                  ? res.json()
-                  : Promise.reject(
-                      new Error(`Failed to fetch DNR rules: ${res.statusText}`),
-                    ),
+              const rules = new Set(
+                await fetch(list.dnr.url).then((res) =>
+                  res.ok
+                    ? res.json()
+                    : Promise.reject(
+                        new Error(
+                          `Failed to fetch DNR rules: ${res.statusText}`,
+                        ),
+                      ),
+                ),
               );
 
-              for (const [index, rule] of addRules.entries()) {
+              for (const rule of rules) {
                 if (rule.condition.regexFilter) {
                   const { isSupported } =
                     await chrome.declarativeNetRequest.isRegexSupported({
@@ -107,14 +111,14 @@ if (__PLATFORM__ !== 'firefox') {
                     });
 
                   if (!isSupported) {
-                    addRules.splice(index, 1);
+                    rules.delete(rule);
                   }
                 }
               }
 
               await chrome.declarativeNetRequest.updateDynamicRules({
                 removeRuleIds: await getDynamicRulesIds(FIXES_ID_RANGE),
-                addRules: addRules.map((rule, index) => ({
+                addRules: Array.from(rules).map((rule, index) => ({
                   ...rule,
                   id: FIXES_ID_RANGE.start + index,
                 })),
