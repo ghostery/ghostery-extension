@@ -40,7 +40,7 @@ export default {
                 through their servers instead of linking directly to pages.
               </ui-text>
             </div>
-            <settings-card in-content>
+            <settings-card type="content">
               <ui-toggle
                 value="${options.serpTrackingPrevention}"
                 onchange="${html.set(options, 'serpTrackingPrevention')}"

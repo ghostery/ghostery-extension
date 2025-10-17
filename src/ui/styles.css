@@ -93,6 +93,16 @@ html {
 
   --color-inherit: inherit;
 
+  --background-gradient-pause-assistant: conic-gradient(
+    from -145deg at 49.87% 50%,
+    #195aff 0deg,
+    #0f2199 55deg,
+    #009df2 132deg,
+    #0f2199 206deg,
+    #6d17e5 312deg,
+    #195aff 360deg
+  );
+
   --font-family: 'Inter', sans-serif;
   --font-family-label: var(--font-family);
 

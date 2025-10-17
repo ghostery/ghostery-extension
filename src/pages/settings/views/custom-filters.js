@@ -72,7 +72,7 @@ export default {
                 </ui-text>
               </div>
             </div>
-            <settings-card in-content>
+            <settings-card type="content">
               <ui-toggle
                 value="${options.customFilters.enabled}"
                 onchange="${html.set(options, 'customFilters.enabled')}"

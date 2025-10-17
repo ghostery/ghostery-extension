@@ -14,6 +14,7 @@ import '/ui/index.js';
 
 import { dismissAction, ACTION_PAUSE_ASSISTANT } from '/store/config.js';
 import { setupNotificationPage } from '/utils/notifications.js';
+import { PAUSE_ASSISTANT_LEARN_MORE_URL } from '/utils/urls.js';
 
 const hostname = new URLSearchParams(window.location.search).get('hostname');
 const close = setupNotificationPage(390);
@@ -38,7 +39,7 @@ mount(document.body, {
           </ui-text>
           <ui-text type="body-s">
             <a
-              href="https://www.ghostery.com/blog/browsing-assistant-user-agent"
+              href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
               target="_blank"
               layout="row inline gap:0.5 items:center"
             >

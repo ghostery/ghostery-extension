@@ -13,6 +13,7 @@ import { store } from 'hybrids';
 
 import Config from '/store/config.js';
 
+import { isWebkit } from '/utils/browser-info.js';
 import { CDN_URL } from '/utils/urls.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
@@ -24,8 +25,11 @@ function filter(item) {
     let check = true;
 
     // Browser check
+    // Possible values: 'chromium', 'firefox', 'webkit'
     if (check && Array.isArray(platform)) {
-      check = platform.includes(__PLATFORM__);
+      check = platform.includes(
+        __PLATFORM__ === 'chromium' && isWebkit() ? 'webkit' : __PLATFORM__,
+      );
     }
 
     return check;
@@ -102,6 +106,13 @@ export default async function syncConfig() {
   }
 }
 
-OptionsObserver.addListener(function config({ terms }) {
-  if (terms) syncConfig();
+OptionsObserver.addListener(function config(options, lastOptions) {
+  if (
+    // Background startup with terms already set
+    (!lastOptions && options.terms) ||
+    // User just accepted the terms
+    (lastOptions && !lastOptions.terms && options.terms)
+  ) {
+    syncConfig();
+  }
 });

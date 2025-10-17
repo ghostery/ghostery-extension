@@ -55,7 +55,7 @@ export default {
                 need to avoid slowing down your browser.
               </ui-text>
             </div>
-            <settings-card in-content>
+            <settings-card type="content">
               <ui-toggle
                 value="${options.regionalFilters.enabled}"
                 onchange="${html.set(options, 'regionalFilters.enabled')}"

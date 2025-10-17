@@ -16,7 +16,11 @@ export default {
   uppercase: false,
   render: () => html`
     <template layout="row center padding:0.5:1">
-      <ui-text type="label-s" color="inherit" layout="row items:center gap:0.5">
+      <ui-text
+        type="label-s"
+        color="inherit"
+        layout="row items:center gap:0.5 relative"
+      >
         <slot></slot>
       </ui-text>
     </template>
@@ -45,6 +49,21 @@ export default {
     :host([type="danger"]) {
       color: var(--color-danger-primary);
       background: var(--background-danger-secondary);
+    }
+
+    :host([type="pause-assistant"]) {
+      color: var(--color-onbrand);
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    :host([type="pause-assistant"])::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: var(--background-gradient-pause-assistant);
+      filter: blur(15px);
     }
 
     :host([uppercase]) ui-text {

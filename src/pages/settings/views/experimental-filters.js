@@ -53,7 +53,7 @@ export default {
                 </ui-text>
               </div>
             </div>
-            <settings-card in-content>
+            <settings-card type="content">
               <ui-toggle
                 value="${options.experimentalFilters}"
                 onchange="${html.set(options, 'experimentalFilters')}"

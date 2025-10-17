@@ -11,13 +11,9 @@
 import { html } from 'hybrids';
 
 export default {
-  inContent: { value: false, reflect: true },
+  type: { value: '', reflect: true },
   render: () => html`
-    <template
-      layout="column gap:3 padding:3"
-      layout[in-content]="padding:2"
-      layout@768px="row items:center"
-    >
+    <template layout="block padding:2 relative">
       <slot name="picture"></slot>
       <div layout="column gap:2 grow"><slot></slot></div>
     </template>
@@ -29,10 +25,39 @@ export default {
       box-shadow: 0px 4px 8px var(--shadow-card);
     }
 
-    :host([in-content]) {
+    :host([type="content"]) {
       background: var(--background-secondary);
       border: none;
       box-shadow: none;
+    }
+
+    @keyframes pause-assistant-rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    :host([type="pause-assistant"]) {
+      background: transparent;
+      border: none;
+      overflow: hidden;
+      box-shadow: none;
+      padding: 12px;
+    }
+
+    :host([type="pause-assistant"])::before {
+      content: '';
+      position: absolute;
+      top: -600px;
+      left: -100px;
+      right: -100px;
+      bottom: -600px;
+      background: var(--background-gradient-pause-assistant);
+      filter: blur(25px);
+      animation: pause-assistant-rotate 20s linear infinite;
+    }
+
+    :host([type="pause-assistant"]) div {
+      position: relative;
     }
   `,
 };

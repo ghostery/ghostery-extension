@@ -96,9 +96,6 @@ export async function enableExtension() {
     await expect(getExtensionElement('view:success')).toBeDisplayed();
 
     await waitForIdleBackgroundTasks();
-
-    // Ensure that SW is reloaded with synced remote configuration
-    await reloadExtension();
   }
 }
 

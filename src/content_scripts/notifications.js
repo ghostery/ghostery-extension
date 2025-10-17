@@ -58,7 +58,16 @@ function mount(url, position = 'right') {
         left: -100%;
         right: -100%;
         bottom: -100%;
-        background: conic-gradient(from 90deg at 49.87% 50%, rgba(0, 72, 255, 0.90) 0deg, rgba(85, 0, 255, 0.90) 55.38461744785309deg, rgba(0, 72, 255, 0.90) 121.15384697914124deg, rgba(0, 217, 255, 0.90) 188.65383625030518deg, rgba(85, 0, 255, 0.90) 252.69230604171753deg, rgba(0, 217, 255, 0.90) 306.3461637496948deg, rgba(0, 72, 255, 0.90) 360deg);
+        background: conic-gradient(
+          from 90deg at 49.87% 50%,
+          rgba(0, 72, 255, 0.90) 0deg,
+          rgba(85, 0, 255, 0.90) 55deg,
+          rgba(0, 72, 255, 0.90) 121deg,
+          rgba(0, 217, 255, 0.90) 188deg,
+          rgba(85, 0, 255, 0.90) 252deg,
+          rgba(0, 217, 255, 0.90) 306deg,
+          rgba(0, 72, 255, 0.90) 360deg
+        );
         will-change: transform;
         animation: rotate 20s linear infinite;
       }
