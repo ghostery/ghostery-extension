@@ -19,10 +19,11 @@ import Tracker from '/store/tracker.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
 import * as exceptions from '/utils/exceptions.js';
-import { WTM_PAGE_URL } from '/utils/urls.js';
+import { PAUSE_ASSISTANT_LEARN_MORE_URL, WTM_PAGE_URL } from '/utils/urls.js';
 import { hasWTMStats } from '/utils/wtm-stats.js';
 
 import TrackerDetails from './tracker-details.js';
+import Config from '/store/config.js';
 
 function removeDomain(tracker) {
   return ({ options, domain }) =>
@@ -67,8 +68,11 @@ export default {
   domain: '',
   topLevelDomain: ({ domain }) => parse(domain).domain,
   options: store(Options),
+  config: store(Config),
   paused: ({ options, domain }) =>
     (store.ready(options) && options.paused[domain]) || {},
+  issueUrl: ({ config, domain }) =>
+    store.ready(config) && config.domains[domain]?.issueUrl,
   trackers: ({ options, domain }) =>
     store.ready(options)
       ? Object.entries(options.exceptions)
@@ -87,7 +91,14 @@ export default {
     (store.ready(elementPickerSelectors) &&
       elementPickerSelectors.hostnames[domain]?.join('\n')) ||
     '',
-  render: ({ domain, topLevelDomain, trackers, paused, selectors }) => html`
+  render: ({
+    domain,
+    topLevelDomain,
+    paused,
+    issueUrl,
+    trackers,
+    selectors,
+  }) => html`
     <template layout="contents">
       <settings-page-layout layout="gap:4">
         <div layout="column items:start gap">
@@ -101,9 +112,12 @@ export default {
               Back
             </ui-text>
           </settings-link>
-          <ui-text type="headline-l">${domain}</ui-text>
+          <ui-text type="headline-l" style="word-break:break-word">
+            ${domain}
+          </ui-text>
 
           ${paused.revokeAt !== undefined &&
+          !paused.assist &&
           html`
             <div layout="row items:center gap">
               <settings-protection-status
@@ -123,6 +137,66 @@ export default {
                 </ui-action>
               `}
             </div>
+          `}
+          ${paused.revokeAt !== undefined &&
+          paused.assist &&
+          html`
+            <settings-card type="pause-assistant" layout="self:stretch">
+              <div layout="column gap:2" layout@768px="row gap:2 items:center">
+                <div layout="grow">
+                  <ui-text type="label-m" color="onbrand">
+                    Paused by Browsing Assistant
+                  </ui-text>
+                  <ui-text type="body-s" color="onbrand">
+                    Automatically paused to prevent adblocker breakage
+                  </ui-text>
+                  <div layout="row:wrap gap:4:2 margin:top">
+                    ${issueUrl &&
+                    html`
+                      <ui-button type="transparent" style="height:auto">
+                        <a
+                          href="${issueUrl}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          layout="padding:0"
+                        >
+                          <ui-icon
+                            name="doc-m"
+                            color="onbrand"
+                            layout="size:2"
+                          ></ui-icon>
+                          <ui-text type="label-s" color="onbrand">
+                            Broken page report
+                          </ui-text>
+                        </a>
+                      </ui-button>
+                    `}
+                    <ui-button type="transparent" style="height:auto">
+                      <a
+                        href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
+                        target="_blank"
+                        layout="padding:0"
+                      >
+                        <ui-icon
+                          name="info"
+                          color="onbrand"
+                          layout="size:2"
+                        ></ui-icon>
+                        <ui-text type="label-s" color="onbrand">
+                          Learn more
+                        </ui-text>
+                      </a>
+                    </ui-button>
+                  </div>
+                </div>
+                <ui-button>
+                  <button onclick="${revokePaused}">
+                    <ui-icon name="play"></ui-icon>
+                    Resume
+                  </button>
+                </ui-button>
+              </div>
+            </settings-card>
           `}
         </div>
         <div

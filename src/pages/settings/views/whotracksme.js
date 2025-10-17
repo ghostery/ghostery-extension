@@ -14,6 +14,11 @@ import { html, store } from 'hybrids';
 import Options from '/store/options.js';
 import ManagedConfig from '/store/managed-config.js';
 
+import {
+  PAUSE_ASSISTANT_LEARN_MORE_URL,
+  TRACKERS_PREVIEW_LEARN_MORE_URL,
+} from '/utils/urls.js';
+
 import assets from '../assets/index.js';
 
 export default {
@@ -68,7 +73,7 @@ export default {
                     layout="self:start"
                   >
                     <a
-                      href="https://www.ghostery.com/blog/browsing-assistant-user-agent"
+                      href="${PAUSE_ASSISTANT_LEARN_MORE_URL}"
                       target="_blank"
                       layout="row gap:0.5"
                     >
@@ -143,7 +148,7 @@ export default {
                     layout="self:start"
                   >
                     <a
-                      href="https://www.ghostery.com/blog/introducing-wtm-serp-report"
+                      href="${TRACKERS_PREVIEW_LEARN_MORE_URL}"
                       target="_blank"
                       layout="row gap:0.5"
                     >

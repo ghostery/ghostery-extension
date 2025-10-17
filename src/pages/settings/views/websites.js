@@ -18,6 +18,7 @@ import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
 import WebsitesAdd from './websites-add.js';
+import Config, { ACTION_PAUSE_ASSISTANT } from '/store/config.js';
 
 function revokeCallback(item) {
   return ({ options }, event) => {
@@ -43,19 +44,26 @@ function revokeCallback(item) {
 
 export default {
   [router.connect]: { stack: [WebsiteDetails, WebsitesAdd] },
+  config: store(Config),
   options: store(Options),
   elementPickerSelectors: store(ElementPickerSelectors),
   query: '',
-  websites: ({ options, elementPickerSelectors, query }) => {
-    if (!store.ready(options, elementPickerSelectors)) return [];
+  websites: ({ config, options, elementPickerSelectors, query }) => {
+    if (!store.ready(config, options, elementPickerSelectors)) return [];
 
     query = query.toLowerCase().trim();
 
     const websites = Object.entries(options.paused)
       .filter(({ id }) => id !== GLOBAL_PAUSE_ID)
-      .map(([id, { revokeAt, managed }]) => ({
+      .filter(
+        ([id, { assist }]) =>
+          // Only show assisted domains if the action is enabled
+          !assist || (assist && config.hasAction(id, ACTION_PAUSE_ASSISTANT)),
+      )
+      .map(([id, { revokeAt, assist, managed }]) => ({
         id,
         revokeAt,
+        assist,
         managed,
         exceptions: new Set(),
         counter: 0,
@@ -93,7 +101,17 @@ export default {
       });
     });
 
-    return websites.filter(({ id }) => id.includes(query));
+    return websites
+      .filter(({ id }) => id.includes(query))
+      .sort((a, b) => {
+        // Sort by assist flag first (without flag first)
+        if (a.assist !== b.assist) return Number(a.assist) - Number(b.assist);
+
+        // Then sort alphabetically by id
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+        return 0;
+      });
   },
   render: ({ websites, query }) => html`
     <template layout="contents">
@@ -181,6 +199,7 @@ export default {
                           <settings-protection-status
                             layout@768px="grow"
                             revokeAt="${item.revokeAt}"
+                            assist="${item.assist}"
                           ></settings-protection-status>
                           <div
                             layout="row items:center gap self:center"

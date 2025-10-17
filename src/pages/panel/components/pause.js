@@ -66,12 +66,13 @@ function simulateClickOnEnter(host, event) {
 export default {
   paused: { value: false, reflect: true },
   global: { value: false, reflect: true },
+  assist: { value: false, reflect: true },
   managed: false,
   revokeAt: 0,
   pauseType: 1,
   pauseList: { value: false, reflect: true },
   render: ({ paused, managed, revokeAt, pauseType, pauseList }) => html`
-    <template layout="grid relative">
+    <template layout="grid shrink:0 relative">
       <button
         id="main"
         class="${{ active: pauseList }}"
@@ -99,29 +100,31 @@ export default {
             id="type"
             role="button"
             tabindex="${paused ? '-1' : '0'}"
-            layout="row center self:stretch width:14"
+            layout="grid self:stretch width:14 relative layer:0"
             onclick="${!paused && !pauseList && openPauseList}"
             onkeypress="${!paused && !pauseList && simulateClickOnEnter}"
             data-qa="button:${paused ? 'resume' : 'pause-type'}"
           >
-            ${paused
-              ? html`
-                  <ui-icon name="play"></ui-icon>
-                  <ui-text
-                    type="label-m"
-                    layout="margin:left:0.5"
-                    color="inherit"
-                  >
-                    Resume
-                  </ui-text>
-                `
-              : html`
-                  <ui-text type="label-m" layout="grow" color="inherit">
-                    ${PAUSE_TYPES.find(({ value }) => value === pauseType)
-                      .label}
-                  </ui-text>
-                  <ui-icon name="chevron-down"></ui-icon>
-                `}
+            <div layout="row center relative">
+              ${paused
+                ? html`
+                    <ui-icon name="play"></ui-icon>
+                    <ui-text
+                      type="label-m"
+                      layout="margin:left:0.5"
+                      color="inherit"
+                    >
+                      Resume
+                    </ui-text>
+                  `
+                : html`
+                    <ui-text type="label-m" layout="grow" color="inherit">
+                      ${PAUSE_TYPES.find(({ value }) => value === pauseType)
+                        .label}
+                    </ui-text>
+                    <ui-icon name="chevron-down"></ui-icon>
+                  `}
+            </div>
           </div>
         `}
       </button>
@@ -249,6 +252,54 @@ export default {
       color: var(--color-ondanger);
     }
 
+    /* Assist mode */
+
+    :host([assist]) {
+      background: transparent;
+      overflow: hidden;
+    }
+
+    :host([assist])::before,
+    :host([assist]) #type::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: var(--background-gradient-pause-assistant);
+      filter: blur(15px);
+      transition: box-shadow 0.2s;
+    }
+
+    @keyframes pause-assistant-rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    :host([assist])::before {
+      top: -200px;
+      left: -40px;
+      right: -40px;
+      bottom: -200px;
+      will-change: transform;
+      animation: pause-assistant-rotate 20s linear infinite;
+      transition: box-shadow 0.3s;
+    }
+
+    :host([assist]) #main {
+      position: relative;
+      box-shadow: none;
+      background: var(--background-primary);
+      color: var(--color-primary);
+    }
+
+    :host([assist]) #type {
+      background: transparent;
+      color: var(--color-onbrand);
+    }
+
+    :host([assist]) slot::slotted(*) {
+      position: relative;
+    }
+
     @media (hover: hover) {
       :host(:not([paused])) #type:hover, :host([pause-list]) #type {
         border-color: var(--color-brand-600);
@@ -282,6 +333,12 @@ export default {
       :host([paused]) #main #type:hover, :host([paused]) #main:focus-visible #type {
         width: 100%;
         transition: width 0.2s;
+      }
+
+      /* Assist mode */
+
+      :host([assist]) #type:hover::before {
+        box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.2);
       }
     }
   `,

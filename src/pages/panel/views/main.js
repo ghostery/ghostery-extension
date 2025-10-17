@@ -30,6 +30,7 @@ import ReportForm from './report-form.js';
 import ReportConfirm from './report-confirm.js';
 import WhoTracksMe from './whotracksme.js';
 import { isWebkit } from '/utils/browser-info.js';
+import PauseAssistant from './pause-assistant.js';
 
 const SETTINGS_URL = chrome.runtime.getURL(
   '/pages/settings/index.html#@settings-privacy',
@@ -134,6 +135,7 @@ export default {
       TrackerDetails,
       ProtectionStatus,
       WhoTracksMe,
+      PauseAssistant,
     ],
   },
   options: store(Options),
@@ -281,6 +283,7 @@ export default {
                 paused="${paused || globalPause}"
                 global="${globalPause}"
                 managed="${paused?.managed}"
+                assist="${paused?.assist}"
                 revokeAt="${globalPause?.revokeAt || paused?.revokeAt}"
                 data-qa="component:pause"
               >
@@ -313,20 +316,16 @@ export default {
                   <div layout="row center">
                     <ui-action>
                       <a
-                        href="https://www.ghostery.com/blog/browsing-assistant-user-agent"
-                        onclick="${openTabWithUrl}"
-                        layout="row center gap padding:0.5:1:1 margin:top:-1"
+                        href="${router.url(PauseAssistant)}"
+                        layout="row center padding:0.5:1:1 margin:top:-1"
                       >
-                        <ui-text type="body-s">Why paused?</ui-text>
                         <ui-text
                           type="label-s"
-                          layout="row inline items:center gap:0.5"
+                          color="onbrand"
+                          layout="row items:center gap:0.5"
                         >
-                          Learn more
-                          <ui-icon
-                            name="chevron-right"
-                            layout="size:1.5"
-                          ></ui-icon>
+                          Paused by Browsing Assistant
+                          <ui-icon name="info" layout="size:1.5"></ui-icon>
                         </ui-text>
                       </a>
                     </ui-action>

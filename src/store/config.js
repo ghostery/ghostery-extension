@@ -29,6 +29,7 @@ const Config = {
   updatedAt: 0,
   domains: store.record({
     actions: [String],
+    issueUrl: '',
     dismiss: store.record(false),
   }),
   flags: store.record({

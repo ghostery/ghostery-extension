@@ -44,10 +44,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       })();
 
       return true;
-    case 'syncConfig':
+    case 'devtools:config':
       (async () => {
         try {
-          await store.set(Config, { updatedAt: 0 });
+          await store.set(Config, msg.values);
           await syncConfig();
 
           sendResponse('Config synced');
