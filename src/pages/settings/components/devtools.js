@@ -98,17 +98,16 @@ async function testConfigFlag(host) {
   );
 
   await setConfig({
-    flags: flags.split(',').reduce(
-      (acc, flag) => {
-        flag = flag.trim();
-        if (flag) acc[flag] = { enabled: true };
-        return acc;
-      },
-      Object.keys(host.config.flags).reduce((acc, flag) => {
-        acc[flag] = { enabled: false };
-        return acc;
-      }, {}),
-    ),
+    flags: flags
+      .split(',')
+      .map((f) => f.trim())
+      .filter(Boolean)
+      .reduce(
+        (acc, f) => ((acc[f] = { enabled: true }), acc),
+        Object.fromEntries(
+          Object.keys(host.config.flags).map((k) => [k, { enabled: false }]),
+        ),
+      ),
   });
 }
 
