@@ -92,6 +92,9 @@
     "message": "Lecteur audio/vidéo ",
     "description": "Tracker category name"
   },
+  "automatically_paused_to_prevent_adblocker_breakage": {
+    "message": "Suspendu automatiquement pour éviter la rupture du bloqueur de publicités"
+  },
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Refuse automatiquement les avis de consentement aux témoins."
   },
@@ -134,6 +137,9 @@
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Bloque des publicités supplémentaires, des trackers et des pop-ups spécifiques à la langue des sites web que vous visitez. Activez uniquement les langues dont vous avez besoin pour éviter de ralentir votre navigateur."
+  },
+  "broken_page_report": {
+    "message": "Rapport de page défectueuse"
   },
   "browser__vendor": {
     "message": "navigateur : fournisseur"
@@ -241,6 +247,9 @@
   "default": {
     "message": "Thème par défaut"
   },
+  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
+    "message": "Rapport d'analyse détaillé mettant en évidence les principaux indicateurs sur les trackers et la publicité associés au site web."
+  },
   "detailed_view": {
     "message": "Affichage détaillé"
   },
@@ -261,6 +270,9 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Découvrez de nouvelles fonctionnalités, des améliorations majeures et des mises à niveau issues des contributions de la communauté – réunies en un seul endroit."
+  },
+  "discover_more_insights_on_the_ghostery_blog_": {
+    "message": "Découvrez plus d'informations sur le blog de Ghostery."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Affiche tous les blocs de contenu masqués manuellement sur ce site. Vous pouvez les supprimer individuellement ou effacer la liste entière."
@@ -452,6 +464,9 @@
     "message": "Hébergement",
     "description": "Tracker category name"
   },
+  "how_browsing_assistant_works": {
+    "message": "Comment fonctionne l'assistant de navigation"
+  },
   "ignore": {
     "message": "Ignorer"
   },
@@ -618,6 +633,9 @@
   },
   "paused": {
     "message": "En pause"
+  },
+  "paused_by_browsing_assistant": {
+    "message": "Suspendu par l'assistant de navigation"
   },
   "performance_telemetry": {
     "message": "Télémétrie de performance"
@@ -960,9 +978,6 @@
   },
   "whotracks_me_wheel": {
     "message": "Roue whotracks.me"
-  },
-  "why_paused_": {
-    "message": "Pourquoi en pause ?"
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Lorsque Ghostery est désactivé, seule la fonctionnalité de base de nommer les trackers est disponible."

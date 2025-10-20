@@ -92,6 +92,9 @@
     "message": "Trình phát âm thanh/video",
     "description": "Tracker category name"
   },
+  "automatically_paused_to_prevent_adblocker_breakage": {
+    "message": "Tự động tạm dừng để ngăn chặn sự cố với trình chặn quảng cáo"
+  },
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Automatically rejects cookie consent notices."
   },
@@ -134,6 +137,9 @@
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blocks additional ads, trackers, and pop-ups specific to the language of websites you visit. Enable only the languages you need to avoid slowing down your browser."
+  },
+  "broken_page_report": {
+    "message": "Báo cáo trang bị lỗi"
   },
   "browser__vendor": {
     "message": "browser: vendor"
@@ -241,6 +247,9 @@
   "default": {
     "message": "Mặc định"
   },
+  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
+    "message": "Báo cáo phân tích chi tiết nêu bật các chỉ số chính về trình theo dõi và quảng cáo liên quan đến trang web."
+  },
   "detailed_view": {
     "message": "Xem chi tiết"
   },
@@ -261,6 +270,9 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Khám phá các tính năng mới, cải tiến quan trọng và nâng cấp được thúc đẩy bởi sự đóng góp của cộng đồng - tất cả đều có ở một nơi."
+  },
+  "discover_more_insights_on_the_ghostery_blog_": {
+    "message": "Khám phá thêm những thông tin chi tiết trên blog Ghostery."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Hiển thị tất cả các khối nội dung đã được ẩn thủ công trên trang web này. Bạn có thể xóa từng khối riêng lẻ hoặc xóa toàn bộ danh sách."
@@ -452,6 +464,9 @@
     "message": "Máy lưu trữ",
     "description": "Tracker category name"
   },
+  "how_browsing_assistant_works": {
+    "message": "Cách hoạt động của trợ lý duyệt web"
+  },
   "ignore": {
     "message": "Không chấp nhận"
   },
@@ -618,6 +633,9 @@
   },
   "paused": {
     "message": "Đã tạm dừng"
+  },
+  "paused_by_browsing_assistant": {
+    "message": "Tạm dừng bởi Trợ lý Duyệt web"
   },
   "performance_telemetry": {
     "message": "Performance Telemetry"
@@ -960,9 +978,6 @@
   },
   "whotracks_me_wheel": {
     "message": "Bánh xe WhoTracks.Me"
-  },
-  "why_paused_": {
-    "message": "Tại sao tạm dừng?"
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "With Ghostery disabled, only the basic functionality of naming trackers is available."
