@@ -11,6 +11,10 @@
 
 import { html, msg, store, router } from 'hybrids';
 
+import Config, {
+  ACTION_PAUSE_ASSISTANT,
+  dismissAction,
+} from '/store/config.js';
 import Options, { GLOBAL_PAUSE_ID } from '/store/options.js';
 import ElementPickerSelectors from '/store/element-picker-selectors.js';
 
@@ -18,7 +22,6 @@ import NoWebsitesSVG from '../assets/no_websites.svg';
 
 import WebsiteDetails from './website-details.js';
 import WebsitesAdd from './websites-add.js';
-import Config, { ACTION_PAUSE_ASSISTANT } from '/store/config.js';
 
 function revokeCallback(item) {
   return ({ options }, event) => {
@@ -36,6 +39,8 @@ function revokeCallback(item) {
 
       return acc;
     }, {});
+
+    if (item.assist) dismissAction(item.id, ACTION_PAUSE_ASSISTANT);
 
     store.set(ElementPickerSelectors, { hostnames: { [item.id]: null } });
     store.set(options, { paused: { [item.id]: null }, exceptions });
