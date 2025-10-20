@@ -55,11 +55,15 @@ function clearStorage(host, event) {
   asyncAction(event, chrome.runtime.sendMessage({ action: 'clearStorage' }));
 }
 
-async function syncConfig(host, event) {
-  asyncAction(event, chrome.runtime.sendMessage({ action: 'syncConfig' }));
+async function setConfig(values) {
+  await chrome.runtime.sendMessage({ action: 'devtools:config', values });
 }
 
-async function testConfigDomain(host) {
+async function forceConfigSync(host, event) {
+  await asyncAction(event, setConfig({ updatedAt: 0 }));
+}
+
+async function testConfigDomain() {
   const domain = window.prompt('Enter domain to test:', 'example.com');
   if (!domain) return;
 
@@ -74,7 +78,7 @@ async function testConfigDomain(host) {
 
   if (!actions) return;
 
-  await store.set(host.config, {
+  await setConfig({
     domains: {
       [domain]: { actions: actions.split(',').map((a) => a.trim()) },
     },
@@ -92,14 +96,25 @@ async function testConfigFlag(host) {
       FLAG_DYNAMIC_DNR_FIXES,
     ].join(', '),
   );
-  if (!flags) return;
 
-  await store.set(host.config, {
-    flags: flags.split(',').reduce((acc, flag) => {
-      acc[flag.trim()] = { enabled: true };
-      return acc;
-    }, {}),
+  await setConfig({
+    flags: flags
+      .split(',')
+      .map((f) => f.trim())
+      .filter(Boolean)
+      .reduce(
+        (acc, f) => ((acc[f] = { enabled: true }), acc),
+        Object.fromEntries(
+          Object.keys(host.config.flags).map((k) => [k, { enabled: false }]),
+        ),
+      ),
   });
+}
+
+function createClearConfigDomain(name) {
+  return async () => {
+    setConfig({ domains: { [name]: null } });
+  };
 }
 
 function refresh(host) {
@@ -172,7 +187,11 @@ export default {
                     .filter(([, d]) => d.actions.length)
                     .map(
                       ([name, d]) =>
-                        html`<ui-text color="secondary">
+                        html`<ui-text
+                          color="secondary"
+                          onclick="${createClearConfigDomain(name)}"
+                          style="cursor: pointer;"
+                        >
                           ${name} (${d.actions.join(', ')})
                         </ui-text>`,
                     ) || 'none'}
@@ -198,9 +217,12 @@ export default {
                   layout="shrink:0 self:start"
                   onclick="${testConfigFlag}"
                 >
-                  <button>Test flag</button>
+                  <button>Test flags</button>
                 </ui-button>
-                <ui-button onclick="${syncConfig}" layout="shrink:0 self:start">
+                <ui-button
+                  onclick="${forceConfigSync}"
+                  layout="shrink:0 self:start"
+                >
                   <button>
                     <ui-icon name="refresh" layout="size:2"></ui-icon>
                     Force sync

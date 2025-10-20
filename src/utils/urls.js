@@ -44,3 +44,6 @@ export const ENGINE_CONFIGS_ROOT_URL = `https://${stagingMode ? 'staging-' : ''}
 export const CDN_URL = stagingMode
   ? 'https://staging-cdn.ghostery.com/'
   : 'https://cdn.ghostery.com/';
+
+export const PAUSE_ASSISTANT_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/browsing-assistant-user-agent`;
+export const TRACKERS_PREVIEW_LEARN_MORE_URL = `https://www.${GHOSTERY_DOMAIN}/blog/introducing-wtm-serp-report`;
