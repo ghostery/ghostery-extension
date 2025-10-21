@@ -92,6 +92,9 @@
     "message": "Audio/Video Player",
     "description": "Tracker category name"
   },
+  "automatically_paused_to_prevent_adblocker_breakage": {
+    "message": "Automatically paused to prevent adblocker breakage"
+  },
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Automatically rejects cookie consent notices."
   },
@@ -134,6 +137,9 @@
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blocks additional ads, trackers, and pop-ups specific to the language of websites you visit. Enable only the languages you need to avoid slowing down your browser."
+  },
+  "broken_page_report": {
+    "message": "Broken page report"
   },
   "browser__vendor": {
     "message": "browser: vendor"
@@ -241,6 +247,9 @@
   "default": {
     "message": "Default"
   },
+  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
+    "message": "Detailed analysis report highlighting key metrics on trackers and advertisements associated with the website."
+  },
   "detailed_view": {
     "message": "Detailed View"
   },
@@ -261,6 +270,9 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Discover fresh features, key improvements, and upgrades driven by community contributions - all in one place."
+  },
+  "discover_more_insights_on_the_ghostery_blog_": {
+    "message": "Discover more insights on the Ghostery blog."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Displays all content blocks manually hidden on this site. You can remove them individually or clear the entire list."
@@ -452,6 +464,9 @@
     "message": "Hosting",
     "description": "Tracker category name"
   },
+  "how_browsing_assistant_works": {
+    "message": "How browsing assistant works"
+  },
   "ignore": {
     "message": "Ignore"
   },
@@ -618,6 +633,9 @@
   },
   "paused": {
     "message": "Paused"
+  },
+  "paused_by_browsing_assistant": {
+    "message": "Paused by Browsing Assistant"
   },
   "performance_telemetry": {
     "message": "Performance Telemetry"
@@ -960,9 +978,6 @@
   },
   "whotracks_me_wheel": {
     "message": "WhoTracks.Me Wheel"
-  },
-  "why_paused_": {
-    "message": "Why paused?"
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "With Ghostery disabled, only the basic functionality of naming trackers is available."

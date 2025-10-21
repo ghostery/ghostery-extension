@@ -92,6 +92,9 @@
     "message": "Odtwarzacz audio/wideo",
     "description": "Tracker category name"
   },
+  "automatically_paused_to_prevent_adblocker_breakage": {
+    "message": "Automatycznie wstrzymano, aby zapobiec awarii z powodu adblokera"
+  },
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Automatycznie odrzuca komunikaty dotyczące zgody na pliki cookie."
   },
@@ -134,6 +137,9 @@
   },
   "blocks_additional_ads__trackers__and_pop_ups_specific_to_the_language_of_websites_you_visit__enable_only_the_languages_you_need_to_avoid_slowing_down_your_browser_": {
     "message": "Blokuje dodatkowe reklamy, trackery i wyskakujące okienka specyficzne dla języka odwiedzanych stron internetowych. Włącz tylko te języki, które są Ci potrzebne, aby uniknąć spowolnienia przeglądarki."
+  },
+  "broken_page_report": {
+    "message": "Zgłoszenie uszkodzonej strony"
   },
   "browser__vendor": {
     "message": "przeglądarka: dostawca"
@@ -241,6 +247,9 @@
   "default": {
     "message": "Domyślny"
   },
+  "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
+    "message": "Szczegółowy raport analityczny podkreślający kluczowe metryki dotyczące trackerów i reklam związanych z witryną."
+  },
   "detailed_view": {
     "message": "Widok szczegółowy"
   },
@@ -261,6 +270,9 @@
   },
   "discover_fresh_features__key_improvements__and_upgrades_driven_by_community_contributions___all_in_one_place_": {
     "message": "Odkryj nowe funkcje, kluczowe usprawnienia i ulepszenia napędzane wkładem społeczności - wszystko w jednym miejscu."
+  },
+  "discover_more_insights_on_the_ghostery_blog_": {
+    "message": "Odkryj więcej informacji na blogu Ghostery."
   },
   "displays_all_content_blocks_manually_hidden_on_this_site__you_can_remove_them_individually_or_clear_the_entire_list_": {
     "message": "Wyświetla wszystkie bloki treści ręcznie ukryte na tej stronie. Możesz je usuwać pojedynczo lub wyczyścić całą listę."
@@ -452,6 +464,9 @@
     "message": "Hosting",
     "description": "Tracker category name"
   },
+  "how_browsing_assistant_works": {
+    "message": "Jak działa asystent przeglądania"
+  },
   "ignore": {
     "message": "Zignoruj"
   },
@@ -618,6 +633,9 @@
   },
   "paused": {
     "message": "Wstrzymane"
+  },
+  "paused_by_browsing_assistant": {
+    "message": "Wstrzymane przez asystenta przeglądarki"
   },
   "performance_telemetry": {
     "message": "Telemetria wydajności"
@@ -960,9 +978,6 @@
   },
   "whotracks_me_wheel": {
     "message": "Wykres kołowy WhoTracks.Me"
-  },
-  "why_paused_": {
-    "message": "Dlaczego wstrzymane?"
   },
   "with_ghostery_disabled__only_the_basic_functionality_of_naming_trackers_is_available_": {
     "message": "Gdy Ghostery jest wyłączone, dostępna jest tylko podstawowa funkcjonalność śledzenia trackerów."
