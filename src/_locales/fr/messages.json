@@ -93,7 +93,7 @@
     "description": "Tracker category name"
   },
   "automatically_paused_to_prevent_adblocker_breakage": {
-    "message": "Suspendu automatiquement pour éviter la rupture du bloqueur de publicités"
+    "message": "Mis en pause automatiquement pour éviter les dysfonctionnements liés au bloqueur de publicités."
   },
   "automatically_rejects_cookie_consent_notices_": {
     "message": "Refuse automatiquement les avis de consentement aux témoins."
@@ -139,7 +139,7 @@
     "message": "Bloque des publicités supplémentaires, des trackers et des pop-ups spécifiques à la langue des sites web que vous visitez. Activez uniquement les langues dont vous avez besoin pour éviter de ralentir votre navigateur."
   },
   "broken_page_report": {
-    "message": "Rapport de page défectueuse"
+    "message": "Rapport de problème"
   },
   "browser__vendor": {
     "message": "navigateur : fournisseur"
@@ -248,7 +248,7 @@
     "message": "Thème par défaut"
   },
   "detailed_analysis_report_highlighting_key_metrics_on_trackers_and_advertisements_associated_with_the_website_": {
-    "message": "Rapport d'analyse détaillé mettant en évidence les principaux indicateurs sur les trackers et la publicité associés au site web."
+    "message": "Consultez un rapport détaillé sur les causes possibles des problèmes de ce site."
   },
   "detailed_view": {
     "message": "Affichage détaillé"
