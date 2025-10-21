@@ -8,9 +8,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { resolve } from 'node:path';
 
-import './managed.spec.js';
-import './main.spec.js';
-import './panel.spec.js';
-import './whotracksme.spec.js';
-import './advanced.spec.js';
+export const CDN_HOSTNAME = process.argv.includes('--staging')
+  ? 'staging-cdn.ghostery.com'
+  : 'cdn.ghostery.com';
+
+export const RESOURCES_PATH = resolve('src/rule_resources');

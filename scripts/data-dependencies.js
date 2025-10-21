@@ -11,6 +11,8 @@
 
 import { readFileSync, writeFileSync } from 'fs';
 
+import { CDN_HOSTNAME } from './utils/urls.js';
+
 const packageJson = JSON.parse(readFileSync('package.json', 'utf-8'));
 
 console.log('Updating data dependencies...');
@@ -22,6 +24,27 @@ packageJson.dataDependencies['wtm-stats'] = await fetch(
 )
   .then((res) => res.json())
   .then((data) => data[0].sha);
+
+// Redirect resources
+const redirectResourcesRevision = await fetch(
+  `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`,
+)
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to download allowed list for "ublock-resources-json": ${res.status}: ${res.statusText}`,
+      );
+    }
+
+    return res.json();
+  })
+  .then((data) => data.revisions.at(-1));
+
+if (!redirectResourcesRevision) {
+  throw new Error('No revisions found for "ublock-resources-json"');
+}
+
+packageJson.dataDependencies['redirect-resources'] = redirectResourcesRevision;
 
 // Save the updated package.json
 writeFileSync(

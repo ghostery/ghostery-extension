@@ -87,6 +87,12 @@ execSync(
   { stdio: silent ? '' : 'inherit' },
 );
 
+execSync(
+  'node scripts/download-redirect-resources.js' +
+    (argv.staging ? ' --staging' : ''),
+  { stdio: silent ? '' : 'inherit' },
+);
+
 execSync('node scripts/download-wtm-bloomfilter.js', {
   stdio: silent ? '' : 'inherit',
 });

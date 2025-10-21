@@ -12,11 +12,13 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve } from 'node:path';
 
+import { RESOURCES_PATH } from './utils/urls.js';
+
 const { dataDependencies } = JSON.parse(
   readFileSync(resolve('package.json'), 'utf-8'),
 );
 
-const TARGET_PATH = resolve('src', 'rule_resources', 'wtm-stats.js');
+const TARGET_PATH = resolve(RESOURCES_PATH, 'wtm-stats.js');
 if (existsSync(TARGET_PATH)) process.exit(0);
 
 console.log(`Downloading wtm-stats (${dataDependencies['wtm-stats']})...`);

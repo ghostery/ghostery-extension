@@ -12,7 +12,9 @@
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const TARGET_PATH = resolve('src', 'rule_resources', 'whotracksme');
+import { RESOURCES_PATH } from './utils/urls.js';
+
+const TARGET_PATH = resolve(RESOURCES_PATH, 'whotracksme');
 const BASE_URL = 'https://cdn.ghostery.com/antitracking/whitelist/2';
 
 if (existsSync(TARGET_PATH)) process.exit(0);

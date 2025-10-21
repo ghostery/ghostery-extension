@@ -60,7 +60,8 @@
     "tldts-experimental": "^7.0.17"
   },
   "dataDependencies": {
-    "wtm-stats": "a8dd963cb6f854a67b04dd6d746b5416e7c537b9"
+    "wtm-stats": "a8dd963cb6f854a67b04dd6d746b5416e7c537b9",
+    "redirect-resources": "fab110d51fcd2e6c9291d6e38e5ad2519a8473e3c4b550291cb7f9a89bdab37d"
   },
   "engineStrict": true,
   "engines": {

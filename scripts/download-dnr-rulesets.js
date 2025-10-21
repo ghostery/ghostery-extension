@@ -10,17 +10,12 @@
  */
 
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { resolve } from 'node:path';
 
 import REGIONS from '../src/utils/regions.js';
+import { CDN_HOSTNAME, RESOURCES_PATH } from './utils/urls.js';
 
-const TARGET_PATH = resolve('src/rule_resources');
-const CDN_HOSTNAME = process.argv.includes('--staging')
-  ? 'staging-cdn.ghostery.com'
-  : 'cdn.ghostery.com';
-
-if (!existsSync(TARGET_PATH)) {
-  mkdirSync(TARGET_PATH, { recursive: true });
+if (!existsSync(RESOURCES_PATH)) {
+  mkdirSync(RESOURCES_PATH, { recursive: true });
 }
 
 const RULESETS = {
@@ -35,7 +30,7 @@ const RULESETS = {
 };
 
 for (const [name, target] of Object.entries(RULESETS)) {
-  const outputPath = `${TARGET_PATH}/dnr-${target}.json`;
+  const outputPath = `${RESOURCES_PATH}/dnr-${target}.json`;
 
   if (existsSync(outputPath)) {
     continue;
@@ -71,50 +66,5 @@ for (const [name, target] of Object.entries(RULESETS)) {
 
     writeFileSync(outputPath, dnr);
     process.stdout.write(' done\n');
-  }
-}
-
-const redirectsPath = resolve(TARGET_PATH, 'redirects');
-if (!existsSync(redirectsPath)) {
-  console.log('Downloading redirect resources...');
-
-  mkdirSync(redirectsPath, { recursive: true });
-
-  const { revisions: resourcesRevisions } = await fetch(
-    `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`,
-  ).then((res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to download allowed list for "ublock-resources-json": ${res.status}: ${res.statusText}`,
-      );
-    }
-
-    return res.json();
-  });
-  const latestResourceRevision = resourcesRevisions.at(-1);
-
-  const resources = await fetch(
-    `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/${latestResourceRevision}/list.txt`,
-  ).then((res) => {
-    if (!res.ok) {
-      throw new Error(
-        `Failed to fetch resources: ${res.status}: ${res.statusText}`,
-      );
-    }
-
-    return res.json();
-  });
-
-  for (const redirect of resources.redirects) {
-    const outputPath = resolve(redirectsPath, redirect.name);
-
-    if (redirect.contentType.includes('base64')) {
-      writeFileSync(
-        outputPath,
-        Buffer.from(redirect.body, 'base64').toString('binary'),
-      );
-    } else {
-      writeFileSync(outputPath, redirect.body);
-    }
   }
 }
