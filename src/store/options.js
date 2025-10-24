@@ -67,7 +67,7 @@ const Options = {
   // WhoTracks.Me
   wtmSerpReport: true,
   trackerWheel: false,
-  ...(!isSafari() ? { trackerCount: true } : {}),
+  ...(__PLATFORM__ === 'firefox' || !isSafari() ? { trackerCount: true } : {}),
   pauseAssistant: true,
 
   // Onboarding

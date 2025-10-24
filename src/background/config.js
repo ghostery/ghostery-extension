@@ -28,7 +28,7 @@ function filter(item) {
     // Possible values: 'chromium', 'firefox', 'webkit'
     if (check && Array.isArray(platform)) {
       check = platform.includes(
-        __PLATFORM__ === 'chromium' && isWebkit() ? 'webkit' : __PLATFORM__,
+        __PLATFORM__ !== 'firefox' && isWebkit() ? 'webkit' : __PLATFORM__,
       );
     }
 

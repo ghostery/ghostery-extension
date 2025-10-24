@@ -27,9 +27,10 @@ const NOTIFICATIONS = {
     icon: 'triangle',
     type: 'danger',
     text: msg`Due to browser restrictions and additional permissions missing, Ghostery is not able to protect you.`,
-    url: isSafari()
-      ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe&utm_campaign=safaripermissions'
-      : 'https://www.ghostery.com/support?utm_source=gbe&utm_campaign=permissions',
+    url:
+      __PLATFORM__ !== 'firefox' && isSafari()
+        ? 'https://www.ghostery.com/blog/how-to-install-extensions-in-safari?utm_source=gbe&utm_campaign=safaripermissions'
+        : 'https://www.ghostery.com/support?utm_source=gbe&utm_campaign=permissions',
     action: msg`Get help`,
   },
   opera: {
@@ -86,7 +87,7 @@ const Notification = {
     if (!panel.notifications) return null;
 
     // Edge mobile notification for Edge desktop users
-    if (isEdge() && !isMobile()) {
+    if (__PLATFORM__ !== 'firefox' && isEdge() && !isMobile()) {
       return NOTIFICATIONS.edgeMobile;
     }
 
