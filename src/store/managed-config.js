@@ -24,7 +24,7 @@ const ManagedConfig = {
   trustedDomains: [TRUSTED_DOMAINS_NONE_ID],
 
   [store.connect]: async () => {
-    if (isOpera() || isWebkit()) return {};
+    if (__PLATFORM__ !== 'firefox' && (isOpera() || isWebkit())) return {};
 
     try {
       if (debugMode) {
