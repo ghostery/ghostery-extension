@@ -205,7 +205,7 @@ async function manage(options) {
 
   if (managed.disableOnboarding === true) {
     options.terms = true;
-    options.onboarding = { shown: 1 };
+    options.onboarding = { shown: 1, pinIt: true };
   }
 
   if (managed.disableUserControl === true) {
