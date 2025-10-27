@@ -47,8 +47,7 @@ export default {
             ${store.ready(managedConfig) &&
             !managedConfig.disableUserAccount &&
             html`
-              ${!isOpera() &&
-              !isWebkit() &&
+              ${(__PLATFORM__ === 'firefox' || (!isOpera() && !isWebkit())) &&
               html`
                 <ui-toggle
                   value="${options.sync}"

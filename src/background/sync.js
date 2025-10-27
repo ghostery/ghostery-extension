@@ -12,7 +12,7 @@ import { store } from 'hybrids';
 
 import Options, { SYNC_OPTIONS } from '/store/options.js';
 
-import { isOpera, isSafari } from '/utils/browser-info.js';
+import { isOpera, isWebkit } from '/utils/browser-info.js';
 import debounce from '/utils/debounce.js';
 import * as OptionsObserver from '/utils/options-observer.js';
 
@@ -97,7 +97,7 @@ const syncOptions = debounce(
 
 // Opera provides chrome.storage.sync API, but it does not sync data between browsers
 // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync#browser_compatibility
-if (!isOpera() && !isSafari()) {
+if (__PLATFORM__ === 'firefox' || (!isOpera() && !isWebkit())) {
   // Sync options on startup and when options change
   OptionsObserver.addListener(function sync(options, lastOptions) {
     syncOptions(options, lastOptions);
