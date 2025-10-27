@@ -9,32 +9,23 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-import { RESOURCES_PATH } from './utils/urls.js';
+import { RESOURCES_PATH, WTM_BASE_URL } from './utils/urls.js';
 
 const TARGET_PATH = resolve(RESOURCES_PATH, 'whotracksme');
-const BASE_URL = 'https://cdn.ghostery.com/antitracking/whitelist/2';
-
 if (existsSync(TARGET_PATH)) process.exit(0);
+
+const packageJson = JSON.parse(readFileSync('package.json', 'utf-8'));
+const version = packageJson.dataDependencies['wtm-bloomfilter'];
+
+console.log(`Downloading wtm-bloomfilter (${version})...`);
 
 mkdirSync(TARGET_PATH, { recursive: true });
 
-const update = await fetch(`${BASE_URL}/update.json.gz`).then((res) => {
-  if (!res.ok) {
-    throw new Error(
-      `Failed to download update.json": ${res.status}: ${res.statusText}`,
-    );
-  }
-
-  return res.json();
-});
-
-writeFileSync(`${TARGET_PATH}/update.json`, JSON.stringify(update));
-
-const bloomfitler = await fetch(
-  `${BASE_URL}/${update.version}/bloom_filter.gz`,
+const bloomfilter = await fetch(
+  `${WTM_BASE_URL}/${version}/bloom_filter.gz`,
 ).then((res) => {
   if (!res.ok) {
     throw new Error(
@@ -45,4 +36,9 @@ const bloomfitler = await fetch(
   return res.arrayBuffer();
 });
 
-writeFileSync(`${TARGET_PATH}/bloom_filter.dat`, new Uint8Array(bloomfitler));
+writeFileSync(`${TARGET_PATH}/bloom_filter.dat`, new Uint8Array(bloomfilter));
+
+writeFileSync(
+  `${TARGET_PATH}/update.json`,
+  JSON.stringify({ version, useDiff: false }),
+);

@@ -11,7 +11,7 @@
 
 import { readFileSync, writeFileSync } from 'fs';
 
-import { CDN_HOSTNAME } from './utils/urls.js';
+import { CDN_HOSTNAME, WTM_BASE_URL } from './utils/urls.js';
 
 const packageJson = JSON.parse(readFileSync('package.json', 'utf-8'));
 
@@ -25,7 +25,22 @@ packageJson.dataDependencies['wtm-stats'] = await fetch(
   .then((res) => res.json())
   .then((data) => data[0].sha);
 
-// Redirect resources
+// wtm-bloomfilter
+const wtmUpdateConfig = await fetch(`${WTM_BASE_URL}/update.json.gz`).then(
+  (res) => {
+    if (!res.ok) {
+      throw new Error(
+        `Failed to download update.json": ${res.status}: ${res.statusText}`,
+      );
+    }
+
+    return res.json();
+  },
+);
+
+packageJson.dataDependencies['wtm-bloomfilter'] = wtmUpdateConfig.version;
+
+// redirect-resources
 const redirectResourcesRevision = await fetch(
   `https://${CDN_HOSTNAME}/adblocker/resources/ublock-resources-json/metadata.json`,
 )
@@ -46,7 +61,10 @@ if (!redirectResourcesRevision) {
 
 packageJson.dataDependencies['redirect-resources'] = redirectResourcesRevision;
 
+//
 // Save the updated package.json
+//
+
 writeFileSync(
   'package.json',
   JSON.stringify(packageJson, null, 2) + '\n',

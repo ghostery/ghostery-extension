@@ -229,6 +229,14 @@ if (manifest.declarative_net_request?.rule_resources) {
   });
 }
 
+// copy whotracksme configuration files
+mkdirSync(resolve(options.outDir, 'rule_resources'), { recursive: true });
+cpSync(
+  resolve(options.srcDir, 'rule_resources', 'whotracksme'),
+  resolve(options.outDir, 'rule_resources', 'whotracksme'),
+  { recursive: true },
+);
+
 // copy redirect rule resources
 mkdirSync(resolve(options.outDir, 'rule_resources/redirects'), {
   recursive: true,
