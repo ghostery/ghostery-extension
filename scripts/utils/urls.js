@@ -15,3 +15,5 @@ export const CDN_HOSTNAME = process.argv.includes('--staging')
   : 'cdn.ghostery.com';
 
 export const RESOURCES_PATH = resolve('src/rule_resources');
+
+export const WTM_BASE_URL = `https://${CDN_HOSTNAME}/antitracking/whitelist/2`;
