@@ -71,7 +71,17 @@ chrome.runtime.onConnect.addListener(async (port) => {
         { filter },
         { url, request, filterType, callerContext },
       ) {
-        filter = String(filter);
+        if (filter.isScriptInject()) {
+          filter = String(filter);
+          const scriptInjectArgumentIndex =
+            filter.indexOf('+js(') + 4; /* '+js('.length */
+          filter =
+            filter.slice(0, scriptInjectArgumentIndex) +
+            decodeURIComponent(filter.slice(scriptInjectArgumentIndex, -1)) +
+            ')';
+        } else {
+          filter = String(filter);
+        }
 
         let data = { filter, filterType, url, tabId: callerContext?.tabId };
 
