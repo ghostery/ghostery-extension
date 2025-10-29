@@ -30,7 +30,7 @@ export default {
     <template layout="column">
       <panel-dialog>
         <ui-text slot="header" type="label-m" layout="padding:1:0">
-          Paused by Browsing Assistant
+          Browsing Assistant
         </ui-text>
         <div layout="column gap:2 padding:1:0">
           ${issueUrl &&
@@ -49,8 +49,8 @@ export default {
                 <div layout="column grow gap:0.5">
                   <ui-text type="label-m">Broken page report</ui-text>
                   <ui-text type="body-s" color="tertiary">
-                    Detailed analysis report highlighting key metrics on
-                    trackers and advertisements associated with the website.
+                    View a detailed report showing which adblocker functionality
+                    may have caused the issue.
                   </ui-text>
                 </div>
                 <ui-icon
@@ -69,9 +69,9 @@ export default {
             >
               <ui-icon name="info" color="tertiary" layout="size:3"></ui-icon>
               <div layout="column grow gap:0.5">
-                <ui-text type="label-m">How browsing assistant works</ui-text>
+                <ui-text type="label-m">How Browsing Assistant works</ui-text>
                 <ui-text type="body-s" color="tertiary">
-                  Discover more insights on the Ghostery blog.
+                  Learn how Ghostery is automatically paused to avoid breakage.
                 </ui-text>
               </div>
               <ui-icon
