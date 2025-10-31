@@ -26,7 +26,8 @@ export default {
       return () => clearTimeout(timeout);
     },
   },
-  render: () => html`
+  closable: false,
+  render: ({ closable }) => html`
     <template layout="row center fixed inset padding layer:400">
       <div id="backdrop" layout="absolute inset:0" onclick="${close}"></div>
       <div
@@ -38,15 +39,18 @@ export default {
           overflow:y:auto
         "
       >
-        <ui-action>
-          <a
-            href="${router.backUrl()}"
-            layout="absolute top:2 right:2 padding:0.5"
-            tabindex="100"
-          >
-            <ui-icon name="close" color="tertiary" layout="size:3"></ui-icon>
-          </a>
-        </ui-action>
+        ${closable &&
+        html`
+          <ui-action>
+            <a
+              href="${router.backUrl()}"
+              layout="absolute top:2 right:2 padding:0.5"
+              tabindex="100"
+            >
+              <ui-icon name="close" color="tertiary" layout="size:3"></ui-icon>
+            </a>
+          </ui-action>
+        `}
         <slot></slot>
       </div>
     </template>
@@ -55,9 +59,10 @@ export default {
       border: none;
       border-radius: 16px;
       background: var(--background-primary);
-      transform: translateY(100px);
+      transform: translateY(-60px);
       opacity: 0;
-      transition: transform 250ms cubic-bezier(0.4, 0.15, 0, 1), opacity 250ms ease;
+      transition: transform 200ms cubic-bezier(0.4, 0.15, 0, 1), opacity 200ms ease;
+      will-change: transform, opacity;
     }
 
     :host([open]) #dialog {
@@ -66,9 +71,10 @@ export default {
     }
 
     #backdrop {
-      background: var(--component-custom-token-overlay);
+      background: var(--component-custom-token-modal-overlay);
       opacity: 0;
-      transition: all 300ms ease-out;
+      transition: all 200ms;
+      will-change: opacity;
     }
 
     :host([open]) #backdrop {

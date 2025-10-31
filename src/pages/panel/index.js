@@ -23,7 +23,15 @@ mount(document.body, {
   stack: router([Main]),
   browserName: { value: getBrowser().name, reflect: true },
   platformName: { value: getOS(), reflect: true },
-  render: ({ stack }) => html`<template layout="row">${stack}</template>`,
+  render: ({ stack }) => html`
+    <template layout="row">
+      <div
+        id="alert-container"
+        layout="fixed inset:1 top:0.5 bottom:auto layer:500"
+      ></div>
+      ${stack}
+    </template>
+  `,
 });
 
 // Ping telemetry on panel open

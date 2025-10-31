@@ -40,7 +40,7 @@ export default {
     <template layout>
       ${store.ready(tracker) &&
       html`
-        <settings-dialog>
+        <settings-dialog closable>
           <form
             action="${router.backUrl()}"
             onsubmit="${add}"
